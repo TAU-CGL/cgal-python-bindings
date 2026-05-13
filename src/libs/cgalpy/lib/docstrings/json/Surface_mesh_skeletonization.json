@@ -1,0 +1,1948 @@
+{
+  "CGAL::Mean_curvature_flow_skeletonization": {
+    "kind": "class",
+    "name": "CGAL::Mean_curvature_flow_skeletonization",
+    "brief": "Function object that enables to extract the mean curvature flow skeleton of a triangulated surface mesh.",
+    "detailed": "The algorithm used takes as input a triangulated surface mesh and iteratively contracts the surface mesh following the mean curvature flow [1] . The intermediate contracted surface mesh is called the meso-skeleton . After each iteration, the meso-skeleton is locally remeshed using angle split and edge contraction. The process ends when the modification of the meso-skeleton between two iterations is small. TriangleMesh a model of FaceListGraph Traits a model of MeanCurvatureSkeletonizationTraits Default: CGAL::Kernel_traits< boost::property_traits< boost::property_map<TriangleMesh, CGAL::vertex_point_t>::type >::value_type >::Kernel VertexPointMap a model of ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and Traits::Point_3 as value type. Default: boost::property_map<TriangleMesh, CGAL::vertex_point_t>::const_type. SolverTraits_ a model of NormalEquationSparseLinearAlgebraTraits_d . Default: If Eigen 3.2 (or greater) is available and CGAL_EIGEN3_ENABLED is defined, then an overload of Eigen_solver_traits is provided as default parameter: CGAL::Eigen_solver_traits< Eigen::SimplicialLDLT< Eigen::SparseMatrix<double> > >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Skeleton",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Skeleton",
+        "brief": "The graph type representing the skeleton. The vertex property Vmap is a struct with a member point of type Traits::Point_3 and a member vertices of type std::vector<boost::graph_traits<TriangleMesh>::vertex_descriptor> . See the boost documentation page for more details.",
+        "detailed": "",
+        "return_type": "boost::adjacency_list< boost::vecS, boost::vecS, boost::undirectedS, Vmap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "224",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Meso_skeleton",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Meso_skeleton",
+        "brief": "When using the low level API it is possible to access the intermediate results of the skeletonization process, called meso-skeleton. It is a triangulated surface mesh which is model of FaceListGraph and HalfedgeListGraph .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "844",
+        "section": "Access to the Meso-Skeleton"
+      },
+      {
+        "kind": "function",
+        "name": "meso_skeleton",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::meso_skeleton",
+        "brief": "Reference to the collapsed triangulated surface mesh.",
+        "detailed": "",
+        "return_type": "const Meso_skeleton &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "849",
+        "section": "Access to the Meso-Skeleton"
+      },
+      {
+        "kind": "function",
+        "name": "Mean_curvature_flow_skeletonization",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Mean_curvature_flow_skeletonization",
+        "brief": "The constructor of a skeletonization object.",
+        "detailed": "The algorithm parameters are initialized such that: max_triangle_angle() == 110 quality_speed_tradeoff() == 0.1 medially_centered_speed_tradeoff() == 0.2 area_variation_factor() == 0.0001 max_iterations() == 500 is_medially_centered() == true min_edge_length() == 0.002 * the length of the diagonal of the bounding box of tmesh tmesh is a triangulated surface mesh without borders and has exactly one connected component. tmesh input triangulated surface mesh. vertex_point_map property map which associates a point to each vertex of the graph. traits an instance of the traits class.",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, VertexPointMap vertex_point_map=get(CGAL::vertex_point, tmesh), Traits traits=Traits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vertex_point_map",
+            "default": "get(CGAL::vertex_point, tmesh)",
+            "brief": ""
+          },
+          {
+            "type": "Traits",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "381",
+        "section": "Constructor"
+      },
+      {
+        "kind": "function",
+        "name": "max_triangle_angle",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::max_triangle_angle",
+        "brief": "During the local remeshing step, a triangle will be split if it has an angle larger than max_triangle_angle() .",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "411",
+        "section": "Local Remeshing Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "min_edge_length",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::min_edge_length",
+        "brief": "During the local remeshing step, an edge will be collapse if it is length is less than min_edge_length() .",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "418",
+        "section": "Local Remeshing Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_max_triangle_angle",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_max_triangle_angle",
+        "brief": "set function for max_triangle_angle()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(double value)",
+        "params": [
+          {
+            "type": "double",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "424",
+        "section": "Local Remeshing Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_min_edge_length",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_min_edge_length",
+        "brief": "set function for min_edge_length()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(double value)",
+        "params": [
+          {
+            "type": "double",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "430",
+        "section": "Local Remeshing Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "max_iterations",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::max_iterations",
+        "brief": "Maximum number of iterations performed by contract_until_convergence() .",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "440",
+        "section": "Algorithm Termination Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "area_variation_factor",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::area_variation_factor",
+        "brief": "The convergence is considered to be reached if the variation of the area of the meso-skeleton after one iteration is smaller than area_variation_factor() *original_area where original_area is the area of the input triangle mesh.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "449",
+        "section": "Algorithm Termination Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_max_iterations",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_max_iterations",
+        "brief": "set function for max_iterations()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t value)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "455",
+        "section": "Algorithm Termination Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_area_variation_factor",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_area_variation_factor",
+        "brief": "set function for area_variation_factor()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(double value)",
+        "params": [
+          {
+            "type": "double",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "461",
+        "section": "Algorithm Termination Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "quality_speed_tradeoff",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::quality_speed_tradeoff",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Controls the velocity of movement and approximation quality: decreasing this value makes the mean curvature flow based contraction converge faster, but results in a skeleton of lower quality. This parameter corresponds to $ w_H $ in the original publication.",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "477",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "is_medially_centered",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::is_medially_centered",
+        "brief": "If true , the meso-skeleton placement will be attracted by an approximation of the medial axis of the mesh during the contraction steps, so will be the result skeleton.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "486",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "medially_centered_speed_tradeoff",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::medially_centered_speed_tradeoff",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Controls the smoothness of the medial approximation: increasing this value results in a (less smooth) skeleton closer to the medial axis, as well as a lower convergence speed. It is only used if is_medially_centered() ==true . This parameter corresponds to $ w_M $ in the original publication.",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "499",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_quality_speed_tradeoff",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_quality_speed_tradeoff",
+        "brief": "set function for quality_speed_tradeoff()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(double value)",
+        "params": [
+          {
+            "type": "double",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "505",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_is_medially_centered",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_is_medially_centered",
+        "brief": "set function for is_medially_centered()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool value)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "511",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_medially_centered_speed_tradeoff",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_medially_centered_speed_tradeoff",
+        "brief": "set function for medially_centered_speed_tradeoff()",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(double value)",
+        "params": [
+          {
+            "type": "double",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "517",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "set_fixed_vertices",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::set_fixed_vertices",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced sets the vertices in the range [begin, end) as fixed. Fixed vertices will not be moved during contraction and this will therefore prevent convergence towards the skeleton if contract_until_convergence() is used. It is useful only if the end goal is to retrieve the meso-skeleton after a number of contract_geometry() , keeping the specified vertices fixed in place. InputIterator a model of InputIterator with boost::graph_traits<TriangleMesh>::vertex_descriptor as value type.",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "534",
+        "section": "Vertex Motion Parameters"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::operator()",
+        "brief": "Creates the curve skeleton: the input surface mesh is iteratively contracted until convergence, and then turned into a curve skeleton.",
+        "detailed": "This is equivalent to calling contract_until_convergence() and convert_to_skeleton() . skeleton graph that will contain the skeleton of the input triangulated surface mesh. For each vertex descriptor vd of skeleton , the corresponding point and the set of input vertices that contracted to vd can be retrieved using skeleton[vd].point and skeleton[vd].vertices respectively.",
+        "return_type": "void",
+        "argsstring": "(Skeleton &skeleton)",
+        "params": [
+          {
+            "type": "Skeleton &",
+            "name": "skeleton",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "629",
+        "section": "High Level Function"
+      },
+      {
+        "kind": "function",
+        "name": "contract_geometry",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::contract_geometry",
+        "brief": "Runs one contraction step following the mean curvature flow.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "645",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "function",
+        "name": "collapse_edges",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::collapse_edges",
+        "brief": "Collapses edges of the meso-skeleton with length less than min_edge_length() and returns the number of edges collapsed.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "702",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "function",
+        "name": "split_faces",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::split_faces",
+        "brief": "Splits faces of the meso-skeleton having one angle greater than max_triangle_angle() and returns the number of faces split.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "710",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "function",
+        "name": "detect_degeneracies",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::detect_degeneracies",
+        "brief": "Prevents degenerate vertices to move during the following contraction steps and returns the number of newly fixed vertices.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "758",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "function",
+        "name": "contract",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::contract",
+        "brief": "Performs subsequent calls to contract_geometry() , collapse_edges() , split_faces() and detect_degeneracies() .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "764",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "function",
+        "name": "contract_until_convergence",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::contract_until_convergence",
+        "brief": "Iteratively calls contract() until the change of surface area of the meso-skeleton after one iteration is smaller than area_variation_factor() *original_area where original_area is the area of the input triangle mesh, or if the maximum number of iterations has been reached.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "784",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "function",
+        "name": "convert_to_skeleton",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::convert_to_skeleton",
+        "brief": "Converts the contracted surface mesh to a skeleton curve.",
+        "detailed": "Skeleton an instantiation of boost::adjacency_list as a data structure for the skeleton curve. skeleton graph that will contain the skeleton of tmesh . It should be empty before passed to the function.",
+        "return_type": "void",
+        "argsstring": "(Skeleton &skeleton)",
+        "params": [
+          {
+            "type": "Skeleton &",
+            "name": "skeleton",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "827",
+        "section": "Low Level Functions"
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< mTriangleMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "230",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< mTriangleMesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "231",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< mTriangleMesh >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "232",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_iterator",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::vertex_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< mTriangleMesh >::vertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "233",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "edge_descriptor",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::edge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< mTriangleMesh >::edge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "234",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "edge_iterator",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::edge_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< mTriangleMesh >::edge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "235",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Weight_calculator",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Weight_calculator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Weights::Cotangent_weight< mTriangleMesh, mVertexPointMap, Traits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "242",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Curve_skeleton",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Curve_skeleton",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Curve_skeleton< mTriangleMesh, VertexIndexMap, HalfedgeIndexMap, mVertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "247",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Exact_kernel",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Exact_kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Exact_predicates_exact_constructions_kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "250",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tds",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Tds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Triangulation_data_structure_3< Vb, Cb >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "254",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Delaunay",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Delaunay_triangulation_3< Exact_kernel, Tds >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "255",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Exact_point",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Exact_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay::Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "256",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Cell_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "257",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "TriVertex_handle",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::TriVertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "258",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_cells_iterator",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Finite_cells_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay::Finite_cells_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "259",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_tmesh",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_tmesh",
+        "brief": "The meso-skeleton.",
+        "detailed": "",
+        "return_type": "mTriangleMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "265",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertex_id_pmap",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_vertex_id_pmap",
+        "brief": "Storing indices of all vertices.",
+        "detailed": "",
+        "return_type": "VertexIndexMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "268",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_hedge_id_pmap",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_hedge_id_pmap",
+        "brief": "Storing indices of all edges.",
+        "detailed": "",
+        "return_type": "HalfedgeIndexMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "270",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_tmesh_point_pmap",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_tmesh_point_pmap",
+        "brief": "Storing the point for mTriangleMesh vertex_descriptor.",
+        "detailed": "",
+        "return_type": "mVertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "272",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_traits",
+        "brief": "Traits class.",
+        "detailed": "",
+        "return_type": "Traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "274",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_omega_H",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_omega_H",
+        "brief": "Controlling the velocity of movement and approximation quality.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "277",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_omega_P",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_omega_P",
+        "brief": "Controlling the smoothness of the medial approximation.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "279",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_min_edge_length",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_min_edge_length",
+        "brief": "Edges with length less than min_edge_length will be collapsed.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "281",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_alpha_TH",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_alpha_TH",
+        "brief": "Triangles with angle greater than alpha_TH will be split.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "283",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_zero_TH",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_zero_TH",
+        "brief": "Value very close to zero.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "285",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_delta_area",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_delta_area",
+        "brief": "contract_until_convergence will stop if the change of area in one iteration is less than delta_area .",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "288",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_original_area",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_original_area",
+        "brief": "Surface area of original surface mesh.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "290",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_iterations",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_max_iterations",
+        "brief": "Maximum number of iterations.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "292",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_medially_centered",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_is_medially_centered",
+        "brief": "Should the skeleton be medially centered?",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "294",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_are_poles_computed",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_are_poles_computed",
+        "brief": "Are poles computed?",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "296",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_weight_calculator",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_weight_calculator",
+        "brief": "Cotangent weight calculator.",
+        "detailed": "",
+        "return_type": "Weight_calculator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "299",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_edge_weight",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_edge_weight",
+        "brief": "Storing the weights for edges.",
+        "detailed": "",
+        "return_type": "std::vector< double >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "301",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_solver",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_solver",
+        "brief": "The sparse solver.",
+        "detailed": "",
+        "return_type": "SolverTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "303",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertex_id_count",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_vertex_id_count",
+        "brief": "Assign a unique id to a new vertex.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "306",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_id",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_max_id",
+        "brief": "The maximum id for original surface.",
+        "detailed": "vertices with ids greater than m_max_id are created during split, thus will not be considered in correspondence tracking.",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "310",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_new_id",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_new_id",
+        "brief": "Used when assembling the matrix.",
+        "detailed": "",
+        "return_type": "std::map< int, int >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "312",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_halfedge_angle",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_halfedge_angle",
+        "brief": "The incident angle for a halfedge.",
+        "detailed": "",
+        "return_type": "std::vector< double >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "315",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_normals",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::m_normals",
+        "brief": "The normal of surface points.",
+        "detailed": "",
+        "return_type": "std::vector< Vector >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "318",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "diagonal_length",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::diagonal_length",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Bbox_3 &bbox)",
+        "params": [
+          {
+            "type": "const Bbox_3 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "333",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_min_edge_length",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::init_min_edge_length",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "344",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "collapse_short_edges",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::collapse_short_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "354",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_args",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::init_args",
+        "brief": "Initialize the parameters for Mean_curvature_flow_skeletonization .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "863",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::init",
+        "brief": "Initialize some global data structures such as vertex id.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const TriangleMesh &tmesh, VertexPointMap vpm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "876",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_x",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::get_x",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Vector &v)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "915",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_y",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::get_y",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Vector &v)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "916",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_z",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::get_z",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Vector &v)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "917",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_x",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::get_x",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Point &v)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "918",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_y",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::get_y",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Point &v)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "919",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_z",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::get_z",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const Point &v)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "920",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_edge_weight",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::compute_edge_weight",
+        "brief": "Compute cotangent weights of all edges.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "926",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "assemble_LHS",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::assemble_LHS",
+        "brief": "Assemble the left hand side.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(typename SolverTraits::Matrix &A)",
+        "params": [
+          {
+            "type": "typename SolverTraits::Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "935",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "assemble_RHS",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::assemble_RHS",
+        "brief": "Assemble the right hand side.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(typename SolverTraits::Vector &Bx, typename SolverTraits::Vector &By, typename SolverTraits::Vector &Bz)",
+        "params": [
+          {
+            "type": "typename SolverTraits::Vector &",
+            "name": "Bx",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename SolverTraits::Vector &",
+            "name": "By",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename SolverTraits::Vector &",
+            "name": "Bz",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "996",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update_vertex_id",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::update_vertex_id",
+        "brief": "The order of vertex id is the same as the traverse order.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1055",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update_pole",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::update_pole",
+        "brief": "Track correspondent original surface points during collapse.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor v0, vertex_descriptor vkept)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "vkept",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1072",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "edge_should_be_collapsed",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::edge_should_be_collapsed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(edge_descriptor ed)",
+        "params": [
+          {
+            "type": "edge_descriptor",
+            "name": "ed",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1087",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_incident_angle",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::compute_incident_angle",
+        "brief": "Compute the incident angles for all the halfedges.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1108",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normalize",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::normalize",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vector &v)",
+        "params": [
+          {
+            "type": "Vector &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1159",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "project_vertex",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::project_vertex",
+        "brief": "Project the vertex vk to the line of vs and vt .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(const vertex_descriptor vs, const vertex_descriptor vt, const vertex_descriptor vk, const vertex_descriptor vnew)",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "vs",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vk",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vnew",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1165",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "split_flat_triangles",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::split_flat_triangles",
+        "brief": "Split triangles with an angle greater than alpha_TH .",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1197",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "detect_degeneracies_in_disk",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::detect_degeneracies_in_disk",
+        "brief": "Test degeneracy of a vertex by counting the euler characteristic of its local neighborhood disk.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1262",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_voronoi_pole",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::compute_voronoi_pole",
+        "brief": "Compute the Voronoi pole for surface vertices. The pole is the furthest vertex in the Voronoi cell containing the given vertex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1290",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_vertex_normal",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::compute_vertex_normal",
+        "brief": "Compute an approximate vertex normal for all vertices.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1379",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "print_edges",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::print_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "1404",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Mean_curvature_flow_skeletonization::Less_id": {
+    "kind": "struct",
+    "name": "CGAL::Mean_curvature_flow_skeletonization::Less_id",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Less_id::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const edge_descriptor &x, const edge_descriptor &y) const",
+        "params": [
+          {
+            "type": "const edge_descriptor &",
+            "name": "x",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const edge_descriptor &",
+            "name": "y",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "238",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Mean_curvature_flow_skeletonization::Vertex_to_point": {
+    "kind": "struct",
+    "name": "CGAL::Mean_curvature_flow_skeletonization::Vertex_to_point",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Vertex_to_point::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< mVertexPointMap >::reference",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "326",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "ppmap",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Vertex_to_point::ppmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "mVertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "324",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Vertex_to_point",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Vertex_to_point::Vertex_to_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(mVertexPointMap ppmap)",
+        "params": [
+          {
+            "type": "mVertexPointMap",
+            "name": "ppmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "325",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Mean_curvature_flow_skeletonization::Vertex_to_point::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(vertex_descriptor vd) const",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Mean_curvature_flow_skeletonization.h",
+        "line": "328",
+        "section": ""
+      }
+    ]
+  },
+  "MeanCurvatureSkeletonizationTraits": {
+    "kind": "class",
+    "name": "MeanCurvatureSkeletonizationTraits",
+    "brief": "Traits class concept defining the requirements of the class CGAL::Mean_curvature_flow_skeletonization .",
+    "detailed": "Has models Any CGAL Kernel with double as Kernel::FT",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Point_3",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "21",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::FT",
+        "brief": "The number type. It must be constructible from and convertible to double .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_point_3",
+        "brief": "Function object type that provides Point_3 operator()(FT x, FT y, FT z) const returning the point with x , y and z as Cartesian coordinates.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_vector_3",
+        "brief": "Function object type that provides Point_3 operator()(Point_3 p1, Point_3 p2) const returning the vector p1p2 , and Point_3 operator()(NULL_VECTOR) const returning the null vector.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_scaled_vector_3",
+        "brief": "Function object type that provides Vector_3 operator()(Vector_3 v, FT t) const returning the vector t * v .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_divided_vector_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_divided_vector_3",
+        "brief": "Function object type that provides Vector_3 operator()(Vector_3 v, FT t) const returning the vector v / t .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_cross_product_vector_3",
+        "brief": "Function object type that provides Vector_3 operator()(Vector_3 v1, Vector_3 v2) const returning the cross-product vector of v1 and v2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_sum_of_vectors_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_sum_of_vectors_3",
+        "brief": "Function object type that provides Vector_3 operator()(Vector_3 v1, Vector_3 v2) const returning the v1+v2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "69",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_midpoint_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Construct_midpoint_3",
+        "brief": "Function object type that provides Point_3 operator()(Point_3 p1, Point_3 p2) const returning the midpoint of p1 and p2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_squared_distance_3",
+        "brief": "Function object type that provides FT operator()(Point_3 p, Point_3 q) const returning the squared distance between p and q .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_squared_length_3",
+        "brief": "Function object type that provides FT operator()(Vector_3 v) const returning the squared length of v .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "90",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_area_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_area_3",
+        "brief": "Function object type that provides FT operator()(Point_3 p1,Point_3 p2,Point_3 p3) const returning the area of the triangle defined by p1 , p2 and p3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_scalar_product_3",
+        "brief": "Function object type that provides FT operator()(Vector_3 v1, Vector_3 v2) const returning the scalar product of v1 and v2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "104",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_x_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_x_3",
+        "brief": "Function object type that provides FT operator()(Point_3 p) and FT operator()(Vector_3 v) const returning the x coordinate of a point and a vector respectively.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_y_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_y_3",
+        "brief": "Function object type that provides FT operator()(Point_3 p) and FT operator()(Vector_3 v) const returning the y coordinate of a point and a vector respectively.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "118",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_z_3",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::Compute_z_3",
+        "brief": "Function object type that provides FT operator()(Point_3 p) and FT operator()(Vector_3 v) const returning the z coordinate of a point and a vector respectively.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "125",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_point_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "134",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_vector_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "138",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_scaled_vector_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "142",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_divided_vector_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_divided_vector_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_divided_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "146",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_cross_product_vector_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_cross_product_vector_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_cross_product_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "150",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_sum_of_vectors_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_sum_of_vectors_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_sum_of_vectors_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "154",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_midpoint_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::construct_midpoint_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Construct_midpoint_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "158",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_squared_distance_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "162",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_length_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_squared_length_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_squared_length_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "166",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_area_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_area_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_area_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "170",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_scalar_product_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_scalar_product_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "174",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_x_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_x_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_x_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "178",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_y_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_y_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_y_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "182",
+        "section": "Access to Function Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compute_z_3_object",
+        "qualified_name": "MeanCurvatureSkeletonizationTraits::compute_z_3_object",
+        "brief": "Function object creator.",
+        "detailed": "",
+        "return_type": "Compute_z_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MeanCurvatureSkeletonizationTraits.h",
+        "line": "186",
+        "section": "Access to Function Objects"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "SegmentationGeomTraits": {
+    "kind": "class",
+    "name": "SegmentationGeomTraits",
+    "brief": "The concept SegmentationGeomTraits describes the set of requirements of the geometric traits needed by the segmentation functions.",
+    "detailed": "Has models All models of the CGAL concept Kernel Refines AABBGeomTraits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "SegmentationGeomTraits::FT",
+        "brief": "A number type model of FieldNumberType for which an overload of the function to_double() is defined.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "24",
+        "section": "Number Type"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "SegmentationGeomTraits::Point_3",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "33",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "SegmentationGeomTraits::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "38",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "SegmentationGeomTraits::Segment_3",
+        "brief": "The segment type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "43",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "SegmentationGeomTraits::Plane_3",
+        "brief": "The plane type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "48",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ray_3",
+        "qualified_name": "SegmentationGeomTraits::Ray_3",
+        "brief": "The ray type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "53",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Angle_3",
+        "qualified_name": "SegmentationGeomTraits::Angle_3",
+        "brief": "Function object model of Kernel::Angle_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "63",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "SegmentationGeomTraits::Compute_scalar_product_3",
+        "brief": "Function object model of Kernel::ComputeScalarProduct_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "68",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "SegmentationGeomTraits::Compute_squared_distance_3",
+        "brief": "Function object model of Kernel::ComputeSquaredDistance_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "73",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "SegmentationGeomTraits::Construct_cross_product_vector_3",
+        "brief": "Function object model of Kernel::ConstructCrossProductVector_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "78",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_normal_3",
+        "qualified_name": "SegmentationGeomTraits::Construct_normal_3",
+        "brief": "Function object model of Kernel::ConstructNormal_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "83",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_centroid_3",
+        "qualified_name": "SegmentationGeomTraits::Construct_centroid_3",
+        "brief": "Function object model of Kernel::ConstructCentroid_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "88",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_translated_point_3",
+        "qualified_name": "SegmentationGeomTraits::Construct_translated_point_3",
+        "brief": "Function object model of Kernel::ConstructTranslatedPoint_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "93",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "SegmentationGeomTraits::Construct_scaled_vector_3",
+        "brief": "Function object model of Kernel::ConstructScaledVector_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "98",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_sum_of_vectors_3",
+        "qualified_name": "SegmentationGeomTraits::Construct_sum_of_vectors_3",
+        "brief": "Function object model of Kernel::ConstructSumOfVectors_3 for the aforementioned geometric types.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "103",
+        "section": "Function Object Types"
+      },
+      {
+        "kind": "function",
+        "name": "collinear_3_object",
+        "qualified_name": "SegmentationGeomTraits::collinear_3_object",
+        "brief": "For each of the above function and predicate object types, Func_obj_type , a function must exist with the name func_obj_type_object that creates an instance of the function or predicate object type.",
+        "detailed": "For example:",
+        "return_type": "Collinear_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "128",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SegmentationGeomTraits::Collinear_3": {
+    "kind": "class",
+    "name": "SegmentationGeomTraits::Collinear_3",
+    "brief": "Function object model of Kernel::Collinear_3 for the aforementioned geometric types.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SegmentationGeomTraits::Collinear_3::operator()",
+        "brief": "determines if points p , q and r are collinear.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &p, const Point_3 &q, const Point_3 &r)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SegmentationGeomTraits.h",
+        "line": "112",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

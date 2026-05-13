@@ -1,0 +1,905 @@
+{
+  "CGAL::Euler_integrator_2": {
+    "kind": "class",
+    "name": "CGAL::Euler_integrator_2",
+    "brief": "This class implements the first order Euler integrator.",
+    "detailed": "VectorField_2 has to be instantiated with a model of the concept VectorField_2 . Is model of Integrator_2 Runge_kutta_integrator_2 < VectorField_2 >",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Euler_integrator_2",
+        "qualified_name": "CGAL::Euler_integrator_2::Euler_integrator_2",
+        "brief": "Creates an Euler integrator with integration_step as integration step.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const FT &integration_step)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "integration_step",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Euler_integrator_2.h",
+        "line": "25",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Regular_grid_2": {
+    "kind": "class",
+    "name": "CGAL::Regular_grid_2",
+    "brief": "This class provides a 2D vector field specified by a set of sample points defined on a regular grid, with a bilinear interpolation scheme over its cells (i.e. for each point p in a cell c , the vector value is interpolated from the vertices of c ).",
+    "detailed": "StreamLinesTraits_2 has to instantiated with a model of the concept StreamLinesTraits_2 . Is model of VectorField_2 Triangular_field_2 < StreamLinesTraits_2 >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Regular_grid_2::FT",
+        "brief": "the scalar type.",
+        "detailed": "",
+        "return_type": "StreamLinesTraits_2::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Regular_grid_2::Point_2",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "StreamLinesTraits_2::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "CGAL::Regular_grid_2::Vector_2",
+        "brief": "the vector type.",
+        "detailed": "",
+        "return_type": "StreamLinesTraits_2::Vector_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Regular_grid_2",
+        "qualified_name": "CGAL::Regular_grid_2::Regular_grid_2",
+        "brief": "Generate a regular grid whose size is x_size by y_size , while x_samples and y_samples specify the number of samples on x and y .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int x_samples, int y_samples, FT x_size, FT y_size)",
+        "params": [
+          {
+            "type": "int",
+            "name": "x_samples",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "y_samples",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "x_size",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "y_size",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "50",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "set_xy",
+        "qualified_name": "CGAL::Regular_grid_2::set_xy",
+        "brief": "Attribute the vector v to the position (i,j) on the regular grid.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i, int j, Vector_2 v)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector_2",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "64",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "get_dimension",
+        "qualified_name": "CGAL::Regular_grid_2::get_dimension",
+        "brief": "returns the dimension of the grid.",
+        "detailed": "",
+        "return_type": "std::pair< int, int >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "74",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_size",
+        "qualified_name": "CGAL::Regular_grid_2::get_size",
+        "brief": "returns the size of the grid.",
+        "detailed": "",
+        "return_type": "std::pair< FT , FT >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Regular_grid_2.h",
+        "line": "79",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL::Runge_kutta_integrator_2": {
+    "kind": "class",
+    "name": "CGAL::Runge_kutta_integrator_2",
+    "brief": "This class implements the second order Runge-Kutta integrator.",
+    "detailed": "VectorField_2 has to be instantiated with a model of the concept VectorField_2 . Is model of Integrator_2 Euler_integrator_2 < VectorField_2 >",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Runge_kutta_integrator_2",
+        "qualified_name": "CGAL::Runge_kutta_integrator_2::Runge_kutta_integrator_2",
+        "brief": "Creates a Runge-Kutta second order integrator with integration_step as integration step.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const FT &integration_step)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "integration_step",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Runge_kutta_integrator_2.h",
+        "line": "25",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Stream_lines_2": {
+    "kind": "class",
+    "name": "CGAL::Stream_lines_2",
+    "brief": "The class Stream_lines_2 generates a placement of streamlines in a 2D domain according to a bidimensional vector field.",
+    "detailed": "The class places streamlines according to a specified density and gives access to the generated streamlines via two iterators over a container of iterators that provide access to the streamline points. VectorField_2 must be a model of the concept VectorField_2 . Integrator_2 is a function object and must be a model of the concept Integrator_2 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Stream_lines_2::Geom_traits",
+        "brief": "the traits class.",
+        "detailed": "",
+        "return_type": "VectorField_2::Geom_traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Stream_lines_2::FT",
+        "brief": "the scalar type.",
+        "detailed": "",
+        "return_type": "VectorField_2::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Stream_lines_2::Point_2",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "VectorField_2::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "CGAL::Stream_lines_2::Vector_2",
+        "brief": "the vector type.",
+        "detailed": "",
+        "return_type": "VectorField_2::Vector_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_iterator_2",
+        "qualified_name": "CGAL::Stream_lines_2::Point_iterator_2",
+        "brief": "iterator of points with value type Point_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "58",
+        "section": "Streamline Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Stream_line_iterator_2",
+        "qualified_name": "CGAL::Stream_lines_2::Stream_line_iterator_2",
+        "brief": "an iterator to visit the streamlines with value type std::pair< Point_iterator_2 , Point_iterator_2 > .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "63",
+        "section": "Streamline Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "begin",
+        "qualified_name": "CGAL::Stream_lines_2::begin",
+        "brief": "Starts at the first streamline.",
+        "detailed": "",
+        "return_type": "Stream_line_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "124",
+        "section": "Streamline Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "end",
+        "qualified_name": "CGAL::Stream_lines_2::end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Stream_line_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "129",
+        "section": "Streamline Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "set_separating_distance",
+        "qualified_name": "CGAL::Stream_lines_2::set_separating_distance",
+        "brief": "Modify the separating distance.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT new_value)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "new_value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "82",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_saturation_ratio",
+        "qualified_name": "CGAL::Stream_lines_2::set_saturation_ratio",
+        "brief": "Modify the saturation ratio.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT new_value)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "new_value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "88",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "update",
+        "qualified_name": "CGAL::Stream_lines_2::update",
+        "brief": "Update the placement after changing the separating distance or the saturation ratio.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "94",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "get_separating_distance",
+        "qualified_name": "CGAL::Stream_lines_2::get_separating_distance",
+        "brief": "returns the separating distance.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "104",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_saturation_ratio",
+        "qualified_name": "CGAL::Stream_lines_2::get_saturation_ratio",
+        "brief": "returns the saturation ratio.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "109",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "print_stream_lines",
+        "qualified_name": "CGAL::Stream_lines_2::print_stream_lines",
+        "brief": "prints the streamlines to an ASCII file: line by line, and point by point.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::ofstream &fw)",
+        "params": [
+          {
+            "type": "std::ofstream &",
+            "name": "fw",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "114",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "Stream_lines_2",
+        "qualified_name": "CGAL::Stream_lines_2::Stream_lines_2",
+        "brief": "Constructor which generates a streamline placement.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(VectorField_2 vector_field_2, Integrator_2 integrator_2, FT separating_distance, FT saturation_ratio)",
+        "params": [
+          {
+            "type": "VectorField_2",
+            "name": "vector_field_2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Integrator_2",
+            "name": "integrator_2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "separating_distance",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "saturation_ratio",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Stream_lines_2.h",
+        "line": "71",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Triangular_field_2": {
+    "kind": "class",
+    "name": "CGAL::Triangular_field_2",
+    "brief": "This class provides a vector field specified by a set of sample points defined on a triangulated domain.",
+    "detailed": "All sample points are inserted to a Delaunay triangulation, and for each point p in the domain located in a face f , its vector value is interpolated from the vertices of the face f . StreamLinesTraits_2 has to be instantiated with a model of the concept StreamLinesTraits_2 . Is model of VectorField_2 Regular_grid_2 < StreamLinesTraits_2 >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Triangular_field_2::FT",
+        "brief": "the scalar type.",
+        "detailed": "",
+        "return_type": "StreamLinesTraits_2::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangular_field_2.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Triangular_field_2::Point_2",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "StreamLinesTraits_2::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangular_field_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "CGAL::Triangular_field_2::Vector_2",
+        "brief": "the vector type.",
+        "detailed": "",
+        "return_type": "StreamLinesTraits_2::Vector_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangular_field_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Triangular_field_2",
+        "qualified_name": "CGAL::Triangular_field_2::Triangular_field_2",
+        "brief": "Defines the points in the range [first_point, last_point) as the sample points of the triangular field, with the corresponding number of vectors started at first_vector .",
+        "detailed": "PointInputIterator must be an input iterator with the value type Point_2 . VectorInputIterator must be an input iterator with the value type Vector_2 .",
+        "return_type": "mplate< class PointIterator1, class VectorInputIterator >",
+        "argsstring": "(PointInputIterator first_point, PointInputIterator last_point, VectorInputIterator first_vector)",
+        "params": [
+          {
+            "type": "PointInputIterator",
+            "name": "first_point",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointInputIterator",
+            "name": "last_point",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VectorInputIterator",
+            "name": "first_vector",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangular_field_2.h",
+        "line": "54",
+        "section": "Creation"
+      }
+    ]
+  },
+  "Integrator_2": {
+    "kind": "class",
+    "name": "Integrator_2",
+    "brief": "The concept Integrator_2 describes the set of requirements for the second template parameter of the class CGAL::Stream_lines_2 < VectorField_2 , Integrator_2 > . This concept provides the operation that integrates a new point from a given point with a predefined step, and according to a specified vector.",
+    "detailed": "Has models CGAL::Euler_integrator_2 < VectorField_2 > CGAL::Runge_kutta_integrator_2 < VectorField_2 >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "Integrator_2::FT",
+        "brief": "The scalar type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Integrator_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "Integrator_2::Point_2",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Integrator_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "Integrator_2::Vector_2",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Integrator_2.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_field_2",
+        "qualified_name": "Integrator_2::Vector_field_2",
+        "brief": "The vector field type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Integrator_2.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Integrator_2",
+        "qualified_name": "Integrator_2::Integrator_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Integrator_2.h",
+        "line": "53",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "Integrator_2::operator()",
+        "brief": "Returns the new position from the actual position defined by p , according to the vector given by vector_field_2 at p .",
+        "detailed": "vector_field_2.is_in_domain(p) must be true .",
+        "return_type": "Point_2",
+        "argsstring": "(Point_2 p, Vector_field_2 vector_field_2)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector_field_2",
+            "name": "vector_field_2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Integrator_2.h",
+        "line": "65",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "Integrator_2::operator()",
+        "brief": "As above. The integration step is defined by integration_step .",
+        "detailed": "vector_field_2.is_in_domain(p) must be true .",
+        "return_type": "Point_2",
+        "argsstring": "(Point_2 p, Vector_field_2 vector_field_2, FT integration_step)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector_field_2",
+            "name": "vector_field_2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "integration_step",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Integrator_2.h",
+        "line": "71",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "Integrator_2::operator()",
+        "brief": "As above. In addition, this function integrates forward if direction is true, and backward if it is false.",
+        "detailed": "vector_field_2.is_in_domain(p) must be true .",
+        "return_type": "Point_2",
+        "argsstring": "(Point_2 p, Vector_field_2 vector_field_2, FT integration_step, bool direction)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector_field_2",
+            "name": "vector_field_2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "integration_step",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "direction",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Integrator_2.h",
+        "line": "77",
+        "section": "Operations"
+      }
+    ]
+  },
+  "StreamLinesTraits_2": {
+    "kind": "class",
+    "name": "StreamLinesTraits_2",
+    "brief": "The concept StreamLinesTraits_2 describes the set of requirements for the template parameter of the class CGAL::Regular_grid_2 < StreamLinesTraits_2 > . This concept provides the types handled by the CGAL::Stream_lines_2 < VectorField_2 , Integrator_2 > class.",
+    "detailed": "Has models The kernels of CGAL are models for this traits class.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "StreamLinesTraits_2::FT",
+        "brief": "The scalar type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/StreamLinesTraits_2.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "StreamLinesTraits_2::Point_2",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/StreamLinesTraits_2.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "StreamLinesTraits_2::Vector_2",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/StreamLinesTraits_2.h",
+        "line": "36",
+        "section": "Types"
+      }
+    ]
+  },
+  "VectorField_2": {
+    "kind": "class",
+    "name": "VectorField_2",
+    "brief": "The concept VectorField_2 describes the set of requirements for the first template parameter of the class CGAL::Stream_lines_2 < VectorField_2 , Integrator_2 > . This concept provides the types of the geometric primitives used in the placement of streamlines and some functions for answering different queries.",
+    "detailed": "Has models CGAL::Regular_grid_2 < StreamLinesTraits_2 > CGAL::Triangular_field_2 < StreamLinesTraits_2 >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "VectorField_2::Geom_traits",
+        "brief": "The traits class.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/VectorField_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "VectorField_2::FT",
+        "brief": "The scalar type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/VectorField_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "VectorField_2::Point_2",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/VectorField_2.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "VectorField_2::Vector_2",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/VectorField_2.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "VectorField_2",
+        "qualified_name": "VectorField_2::VectorField_2",
+        "brief": "Any constructor has to allow the user to fill the vector values, i.e., assign a vector to each position within the domain.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/VectorField_2.h",
+        "line": "53",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "VectorField_2::bbox",
+        "brief": "returns the bounding box of the whole domain.",
+        "detailed": "",
+        "return_type": "Geom_traits::Iso_rectangle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/VectorField_2.h",
+        "line": "63",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_field",
+        "qualified_name": "VectorField_2::get_field",
+        "brief": "returns the vector field value and the local density.",
+        "detailed": "is_in_domain(p) must be true .",
+        "return_type": "std::pair< Vector_2 , FT >",
+        "argsstring": "(Point_2 p)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/VectorField_2.h",
+        "line": "69",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_in_domain",
+        "qualified_name": "VectorField_2::is_in_domain",
+        "brief": "returns true if the point p is inside the domain boundaries, false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Point_2 p)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/VectorField_2.h",
+        "line": "75",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_integration_step",
+        "qualified_name": "VectorField_2::get_integration_step",
+        "brief": "returns the integration step at the point p , i.e., the distance between p and the next point in the polyline.",
+        "detailed": "is_in_domain(p) must be true .",
+        "return_type": "FT",
+        "argsstring": "(Point_2 p)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/VectorField_2.h",
+        "line": "81",
+        "section": "Query Functions"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

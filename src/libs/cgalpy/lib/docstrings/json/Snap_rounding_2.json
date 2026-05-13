@@ -1,0 +1,545 @@
+{
+  "CGAL::Snap_rounding_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Snap_rounding_traits_2",
+    "brief": "The class Snap_rounding_traits_2 <Kernel> is a model of the SnapRoundingTraits_2 concept, and is the only traits class supplied with the package.",
+    "detailed": "This class should be instantiated with an exact geometric kernel that conforms to the CGAL kernel-concept, such as the Exact_predicates_exact_constructions_kernel , or Cartesian<Gmpq> . This geometric kernel must provide an (arbitrary-precision) rational number type ( FT ), Point_2 , Segment_2 and Iso_rectangle_2 . It should be possible to cast numbers of the number type FT to double-precision representation. That is, the function CGAL::to_double(FT) must be supported. The CGAL::to_double() function is used to implement the operation that rounds the coordinates of a point to a center of a pixel. This operation is one of the traits-concept requirement. The coordinates are converted to double, rounded down to the nearest grid point, and finally adjusted to lie on a center of a pixel. Notice that if CGAL::to_double() returns the closet value, then when it rounds up a given coordinate, the resulting ISR, may be imprecise, and the distance between some vertex and a non-incident edge can be slightly less than the guaranteed half-the width-of-a-pixel. Is model of SnapRoundingTraits_2",
+    "members": []
+  },
+  "SnapRoundingTraits_2": {
+    "kind": "class",
+    "name": "SnapRoundingTraits_2",
+    "brief": "The concept SnapRoundingTraits_2 lists the set of requirements that must be fulfilled by an instance of the Traits template-parameter of the free function CGAL::snap_rounding_2() CGAL::snap_rounding_2 <Traits,InputIterator,OutputContainer>() . The list includes the nested types of the geometric primitives used in this class and some function object types for the required predicates on those primitives.",
+    "detailed": "Refines AosTraits_2 Has models CGAL::Snap_rounding_traits_2 <Kernel>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "SnapRoundingTraits_2::FT",
+        "brief": "The number type.",
+        "detailed": "This type must fulfill the requirements on FieldNumberType",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "SnapRoundingTraits_2::Point_2",
+        "brief": "Models the concept ArrTraits::Point_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_2",
+        "qualified_name": "SnapRoundingTraits_2::Segment_2",
+        "brief": "Models the concept ArrTraits::XMonotoneCurve_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Iso_rectangle_2",
+        "qualified_name": "SnapRoundingTraits_2::Iso_rectangle_2",
+        "brief": "Models the concept SRTraits_2::IsoRectangle_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Cartesian_const_iterator_2",
+        "qualified_name": "SnapRoundingTraits_2::Cartesian_const_iterator_2",
+        "brief": "Models the concept SearchTraits::Cartesian_const_iterator_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vertex_2",
+        "qualified_name": "SnapRoundingTraits_2::Construct_vertex_2",
+        "brief": "Models the concept SRTraits_2::ConstructVertex_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "59",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_2",
+        "qualified_name": "SnapRoundingTraits_2::Construct_segment_2",
+        "brief": "Models the concept SRTraits_2::ConstructSegment_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "64",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_iso_rectangle_2",
+        "qualified_name": "SnapRoundingTraits_2::Construct_iso_rectangle_2",
+        "brief": "Models the concept SRTraits_2::ConstructIsoRectangle_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "69",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "To_double",
+        "qualified_name": "SnapRoundingTraits_2::To_double",
+        "brief": "Models the concept RealEmbeddableTraits::ToDouble .",
+        "detailed": "The precision of this operation is of not high significance, as it is only used in the implementation of the heuristic technique to exploit a cluster of kd-trees rather than just one.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "76",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_x_2",
+        "qualified_name": "SnapRoundingTraits_2::Compare_x_2",
+        "brief": "Models the concept SRTraits_2::CompareX_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "81",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_y_2",
+        "qualified_name": "SnapRoundingTraits_2::Compare_y_2",
+        "brief": "Models the concept SRTraits_2::CompareY_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "86",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Snap_2",
+        "qualified_name": "SnapRoundingTraits_2::Snap_2",
+        "brief": "Models the concept SRTraits_2::Snap_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "91",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Integer_grid_point_2",
+        "qualified_name": "SnapRoundingTraits_2::Integer_grid_point_2",
+        "brief": "Models the concept SRTraits_2::IntegerGridPoint_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "96",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Minkowski_sum_with_pixel_2",
+        "qualified_name": "SnapRoundingTraits_2::Minkowski_sum_with_pixel_2",
+        "brief": "Models the concept SRTraits_2::MinkowskiSumWithPixel_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "101",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_min_vertex_2",
+        "qualified_name": "SnapRoundingTraits_2::Construct_min_vertex_2",
+        "brief": "Models the concept ArrTraits::ConstructMinVertex_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "106",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_max_vertex_2",
+        "qualified_name": "SnapRoundingTraits_2::Construct_max_vertex_2",
+        "brief": "Models the concept ArrTraits::ConstructMaxVertex_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "111",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cartesian_const_iterator_2",
+        "qualified_name": "SnapRoundingTraits_2::Construct_cartesian_const_iterator_2",
+        "brief": "Models the concept SearchTraits::Construct_cartesian_const_iterator_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "116",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vertex_2_object",
+        "qualified_name": "SnapRoundingTraits_2::construct_vertex_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vertex_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "126",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_segment_2_object",
+        "qualified_name": "SnapRoundingTraits_2::construct_segment_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_segment_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "131",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_iso_rectangle_2_object",
+        "qualified_name": "SnapRoundingTraits_2::construct_iso_rectangle_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_iso_rectangle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "136",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compare_x_2_object",
+        "qualified_name": "SnapRoundingTraits_2::compare_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "141",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "compare_y_2_object",
+        "qualified_name": "SnapRoundingTraits_2::compare_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "146",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "snap_2_object",
+        "qualified_name": "SnapRoundingTraits_2::snap_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Snap_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "151",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "integer_grid_point_2_object",
+        "qualified_name": "SnapRoundingTraits_2::integer_grid_point_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Integer_grid_point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "156",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "minkowski_sum_with_pixel_2_object",
+        "qualified_name": "SnapRoundingTraits_2::minkowski_sum_with_pixel_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Minkowski_sum_with_pixel_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "161",
+        "section": "Accessing Functor Objects"
+      }
+    ]
+  },
+  "SRTraits_2::CompareX_2": {
+    "kind": "class",
+    "name": "SRTraits_2::CompareX_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models Snap_rounding_traits_2::Compare_x_2",
+    "members": []
+  },
+  "SRTraits_2::CompareY_2": {
+    "kind": "class",
+    "name": "SRTraits_2::CompareY_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models Snap_rounding_traits_2::Compare_y_2",
+    "members": []
+  },
+  "SRTraits_2::ConstructIsoRectangle_2": {
+    "kind": "class",
+    "name": "SRTraits_2::ConstructIsoRectangle_2",
+    "brief": "",
+    "detailed": "Refines AdaptableQuaternaryFunction Has models Snap_rounding_traits_2::Construct_iso_rectangle_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SRTraits_2::ConstructIsoRectangle_2::operator()",
+        "brief": "introduces an iso-oriented rectangle whose minimal x coordinate is the one of left , the maximal x coordinate is the one of right , the minimal y coordinate is the one of bottom , the maximal y coordinate is the one of top .",
+        "detailed": "}",
+        "return_type": "Iso_rectangle_2",
+        "argsstring": "(Point_2 left, Point_2 right, Point_2 bottom, Point_2 top)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "left",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_2",
+            "name": "right",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_2",
+            "name": "bottom",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_2",
+            "name": "top",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "239",
+        "section": ""
+      }
+    ]
+  },
+  "SRTraits_2::ConstructSegment_2": {
+    "kind": "class",
+    "name": "SRTraits_2::ConstructSegment_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models Snap_rounding_traits_2::Construct_segment_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SRTraits_2::ConstructSegment_2::operator()",
+        "brief": "introduces a segment with source p and target q .",
+        "detailed": "The segment is directed from the source towards the target.",
+        "return_type": "Segment_2",
+        "argsstring": "(Point_2 p, Point_2 q)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_2",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "217",
+        "section": ""
+      }
+    ]
+  },
+  "SRTraits_2::ConstructVertex_2": {
+    "kind": "class",
+    "name": "SRTraits_2::ConstructVertex_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models Snap_rounding_traits_2::Construct_vertex_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SRTraits_2::ConstructVertex_2::operator()",
+        "brief": "returns the source or target of seg .",
+        "detailed": "If i modulo 2 is 0, the source is returned, otherwise the target is returned.",
+        "return_type": "Point_2",
+        "argsstring": "(Segment_2 seg, int i)",
+        "params": [
+          {
+            "type": "Segment_2",
+            "name": "seg",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "198",
+        "section": ""
+      }
+    ]
+  },
+  "SRTraits_2::IntegerGridPoint_2": {
+    "kind": "class",
+    "name": "SRTraits_2::IntegerGridPoint_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models Snap_rounding_traits_2::Integer_grid_point_2",
+    "members": []
+  },
+  "SRTraits_2::IsoRectangle_2": {
+    "kind": "class",
+    "name": "SRTraits_2::IsoRectangle_2",
+    "brief": "Represents an iso rectangle.",
+    "detailed": "Refines DefaultConstructible CopyConstructible Assignable Has models Snap_rounding_traits_2::Iso_rectangle_2",
+    "members": []
+  },
+  "SRTraits_2::MinkowskiSumWithPixel_2": {
+    "kind": "class",
+    "name": "SRTraits_2::MinkowskiSumWithPixel_2",
+    "brief": "",
+    "detailed": "Refines AdaptableTernaryFunction Has models Snap_rounding_traits_2::Minkowski_sum_with_pixel_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SRTraits_2::MinkowskiSumWithPixel_2::operator()",
+        "brief": "returns the vertices of a polygon, which is the Minkowski sum of a segment and a square centered at the origin with edge size pixel edge .",
+        "detailed": "vertices_list is the list of the vertices of the Minkowski sum polygon, s is the input segment and unit_square is the edge size of the pixel.",
+        "return_type": "void",
+        "argsstring": "(std::list< Point_2 > &vertices_list, Segment_2 s, NT unit_square)",
+        "params": [
+          {
+            "type": "std::list< Point_2 > &",
+            "name": "vertices_list",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "unit_square",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SnapRoundingTraits_2.h",
+        "line": "343",
+        "section": ""
+      }
+    ]
+  },
+  "SRTraits_2::Snap_2": {
+    "kind": "class",
+    "name": "SRTraits_2::Snap_2",
+    "brief": "",
+    "detailed": "Refines AdaptableQuaternaryFunction Has models Snap_rounding_traits_2::Snap_2",
+    "members": []
+  },
+  "SRTraits_2": {
+    "kind": "namespace",
+    "name": "SRTraits_2",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

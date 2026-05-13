@@ -1,0 +1,551 @@
+{
+  "CGAL::Ridge_approximation": {
+    "kind": "class",
+    "name": "CGAL::Ridge_approximation",
+    "brief": "The class Ridge_approximation computes the approximation of ridges of a triangular polyhedral surface.",
+    "detailed": "TriangleMesh is the surface type. In the following let K be Kernel_traits<boost::property_traits<TriangleMesh,CGAL::vertex_point_t>::value_type>::Kernel VertexFTMap A property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and K::FT as value type. VertexVectorMap A property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and K::Vector_3 as value type. (checked at compile time) The types K::FT and boost::property_traits<VertexFTMap>::value_type must coincide. The types K::Vector_3 and boost::property_traits<VertexVectorMap>::value_type must coincide. The types boost::graph_traits<TriangleMesh>::vertex_descriptor , and boost::property_traits<VertexFTMap>::key_type , and boost::property_traits<VertexVectorMap>::key_type must coincide. Ridge_line",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Ridge_approximation",
+        "qualified_name": "CGAL::Ridge_approximation::Ridge_approximation",
+        "brief": "The two last property maps may not be used if computations are performed with the parameter Ridges_order_3 , in which case these property maps shall be initialized with their default constructors.",
+        "detailed": "tm the triangle mesh vertex_k1_pm maximal principal curvatures vertex_k2_pm minimal principal curvatures vertex_b0_pm third order extremalities vertex_b3_pm third order extremalities vertex_d1_pm maximal principal directions of curvature vertex_d2_pm minimal principal directions of curvature vertex_P1_pm fourth order quantities vertex_P2_pm fourth order quantities",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tm, VertexFTMap vertex_k1_pm, VertexFTMap vertex_k2_pm, VertexFTMap vertex_b0_pm, VertexFTMap vertex_b3_pm, VertexVectorMap vertex_d1_pm, VertexVectorMap vertex_d2_pm, VertexFTMap vertex_P1_pm, VertexFTMap vertex_P2_pm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_k1_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_k2_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_b0_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_b3_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexVectorMap",
+            "name": "vertex_d1_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexVectorMap",
+            "name": "vertex_d2_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_P1_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_P2_pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Ridges.h",
+        "line": "159",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compute_max_ridges",
+        "qualified_name": "CGAL::Ridge_approximation::compute_max_ridges",
+        "brief": "Outputs ridges of types MAX_ELLIPTIC_RIDGE and MAX_HYPERBOLIC_RIDGE .",
+        "detailed": "OutputIterator an output iterator wìth value type Ridge_line* .",
+        "return_type": "OutputIterator",
+        "argsstring": "(OutputIterator it, Ridge_order ord=Ridge_order_3)",
+        "params": [
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Ridge_order",
+            "name": "ord",
+            "default": "Ridge_order_3",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Ridges.h",
+        "line": "173",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compute_min_ridges",
+        "qualified_name": "CGAL::Ridge_approximation::compute_min_ridges",
+        "brief": "Outputs ridges of types MIN_ELLIPTIC_RIDGE and MIN_HYPERBOLIC_RIDGE .",
+        "detailed": "OutputIterator an output iterator with value type Ridge_line* .",
+        "return_type": "OutputIterator",
+        "argsstring": "(OutputIterator it, Ridge_order ord=Ridge_order_3)",
+        "params": [
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Ridge_order",
+            "name": "ord",
+            "default": "Ridge_order_3",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Ridges.h",
+        "line": "180",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compute_crest_ridges",
+        "qualified_name": "CGAL::Ridge_approximation::compute_crest_ridges",
+        "brief": "Outputs ridges of types MAX_CREST_RIDGE and MIN_CREST_RIDGE .",
+        "detailed": "OutputIterator is an output iterator with value type Ridge_line* .",
+        "return_type": "OutputIterator",
+        "argsstring": "(OutputIterator it, Ridge_order ord=Ridge_order_3)",
+        "params": [
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Ridge_order",
+            "name": "ord",
+            "default": "Ridge_order_3",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Ridges.h",
+        "line": "187",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Ridge_line": {
+    "kind": "class",
+    "name": "CGAL::Ridge_line",
+    "brief": "The class Ridge_line stores the description of a ridge line.",
+    "detailed": "The list of halfedges defines a connected sequence of edges (but not as oriented halfedges). The scalar $ b$ paired with a halfedge $ pq$ is the barycentric coordinate of the crossing point $ r$ with the ridge: $ r = b\\times p + (1-b)\\times q$ . Ridge_approximation",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Ridge_line::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "TriangleMesh::Traits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "218",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Ridge_line::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boot::graph_traits< TriangleMesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "223",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ridge_halfedge",
+        "qualified_name": "CGAL::Ridge_line::Ridge_halfedge",
+        "brief": "A halfedge crossed by a ridge is paired with the barycentric coordinate of the crossing point.",
+        "detailed": "",
+        "return_type": "std::pair< halfedge_descriptor , FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "229",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Ridge_line",
+        "qualified_name": "CGAL::Ridge_line::Ridge_line",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "239",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "line_type",
+        "qualified_name": "CGAL::Ridge_line::line_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Ridge_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "249",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "strength",
+        "qualified_name": "CGAL::Ridge_line::strength",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "254",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "sharpness",
+        "qualified_name": "CGAL::Ridge_line::sharpness",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "259",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "line",
+        "qualified_name": "CGAL::Ridge_line::line",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::list< Ridge_halfedge > *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Ridges.h",
+        "line": "264",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Ridge_line::operator<<",
+        "brief": "Writes the line type, strength, sharpness and coordinates of the points of the polyline to os .",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Ridge_line< TriangleMesh > &r)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Ridge_line < TriangleMesh > &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Ridges.h",
+        "line": "277",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Umbilic": {
+    "kind": "class",
+    "name": "CGAL::Umbilic",
+    "brief": "The class Umbilic stores the description of an umbilic.",
+    "detailed": "Umbilic_approximation",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Umbilic::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Umbilics.h",
+        "line": "129",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Umbilic::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "TriangleMesh::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Umbilics.h",
+        "line": "134",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "CGAL::Umbilic::vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "vertex_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Umbilics.h",
+        "line": "144",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "umbilic_type",
+        "qualified_name": "CGAL::Umbilic::umbilic_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Umbilic_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Umbilics.h",
+        "line": "149",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "contour_list",
+        "qualified_name": "CGAL::Umbilic::contour_list",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::list< halfedge_descriptor > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Umbilics.h",
+        "line": "154",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Umbilic::operator<<",
+        "brief": "Writes the location and the umbilic type to os .",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Umbilic< TriangleMesh > &u)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Umbilic < TriangleMesh > &",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Umbilics.h",
+        "line": "166",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Umbilic_approximation": {
+    "kind": "class",
+    "name": "CGAL::Umbilic_approximation",
+    "brief": "The class Umbilic_approximation computes the approximation of umbilics on a triangular polyhedral surface.",
+    "detailed": "TriangleMesh is the surface type. In the following let K be Kernel_traits<boost::property_traits<TriangleMesh,CGAL::vertex_point_t>::value_type>::Kernel VertexFTMap A property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and K::FT as value type. VertexVectorMap A property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and K::Vector_3 as value type. (checked at compile time) The types K::FT and boost::property_traits<VertexFTMap>::value_type must coincide. The types K::Vector_3 and boost::property_traits<VertexVectorMap>::value_type must coincide. The types boost::graph_traits<TriangleMesh>::vertex_descriptor , and boost::property_traits<VertexFTMap>::key_type , and boost::property_traits<VertexVectorMap>::key_type must coincide. Umbilic",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Umbilic_approximation::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "TriangleMesh::Traits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Umbilics.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Umbilic_approximation",
+        "qualified_name": "CGAL::Umbilic_approximation::Umbilic_approximation",
+        "brief": "Constructor.",
+        "detailed": "tm the triangle mesh vertex_k1_pm maximal principal curvatures vertex_k2_pm minimal principal curvatures vertex_d1_pm maximal principal directions of curvature vertex_d2_pm minimal principal directions of curvature",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tm, VertexFTMap vertex_k1_pm, VertexFTMap vertex_k2_pm, VertexVectorMap vertex_d1_pm, VertexVectorMap vertex_d2_pm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_k1_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexFTMap",
+            "name": "vertex_k2_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexVectorMap",
+            "name": "vertex_d1_pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexVectorMap",
+            "name": "vertex_d2_pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Umbilics.h",
+        "line": "84",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compute",
+        "qualified_name": "CGAL::Umbilic_approximation::compute",
+        "brief": "Performs the approximation.",
+        "detailed": "The value of size determines the size of the patches around vertices, taken as size times the size of the 1-ring. Umbilics are inserted into it . OutputIterator an output iterator with value type Umbilic* .",
+        "return_type": "OutputIterator",
+        "argsstring": "(OutputIterator it, FT size)",
+        "params": [
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "size",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Umbilics.h",
+        "line": "102",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Ridge_line::operator<<",
+        "brief": "Writes the line type, strength, sharpness and coordinates of the points of the polyline to os .",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Ridge_line< TriangleMesh > &r)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Ridge_line < TriangleMesh > &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Ridges.h",
+        "line": "277",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Umbilic::operator<<",
+        "brief": "Writes the location and the umbilic type to os .",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Umbilic< TriangleMesh > &u)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Umbilic < TriangleMesh > &",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Umbilics.h",
+        "line": "166",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

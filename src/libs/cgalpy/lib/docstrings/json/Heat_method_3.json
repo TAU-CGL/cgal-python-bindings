@@ -1,0 +1,478 @@
+{
+  "CGAL::Heat_method_3::Direct": {
+    "kind": "struct",
+    "name": "CGAL::Heat_method_3::Direct",
+    "brief": "A tag class used to specify that the heat method is applied to the input mesh.",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Heat_method_3::Intrinsic_Delaunay": {
+    "kind": "struct",
+    "name": "CGAL::Heat_method_3::Intrinsic_Delaunay",
+    "brief": "A tag class used to specify that the heat method applies the intrinsic Delaunay triangulation to the input mesh.",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3": {
+    "kind": "class",
+    "name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3",
+    "brief": "Class Surface_mesh_geodesic_distances_3 computes estimated geodesic distances for a set of source vertices where sources can be added and removed.",
+    "detailed": "The class performs a preprocessing step that only depends on the mesh, so that the distance computation takes less time after changes to the set of sources. TriangleMesh a triangulated surface mesh, model of FaceListGraph and HalfedgeListGraph Mode must be Intrinsic_Delaunay to indicate that an intrinsic Delaunay triangulation is internally constructed or Direct to indicate that the input mesh should be used as is. If Intrinsic_Delaunay , then the type TriangleMesh must have an internal property for vertex_point and its value type must be the same as the value type of VertexPointMap . If Direct , then the input mesh should not have any degenerate faces. VertexPointMap a model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and Traits::Point_3 as value type. The default is typename boost::property_map< TriangleMesh, vertex_point_t>::const_type . LA a model of SparseLinearAlgebraWithFactorTraits_d . If CGAL_EIGEN3_ENABLED is defined, then Eigen_solver_traits<Eigen::SimplicialLDLT<typename Eigen_sparse_matrix<double>::EigenType > > is used as default Traits a model of HeatMethodTraits_3 . The default is the Kernel of the value type of the vertex point map (extracted using Kernel_traits ).",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "LA_type",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::LA_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LA",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "767",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_point_map",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Vertex_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< VertexPointMap, typenameboost::property_map< TriangleMesh, vertex_point_t >::const_type >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "772",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Traits_type",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Traits_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< Traits, typenameKernel_traits< typenameboost::property_traits< Vertex_point_map >::value_type >::Kernel >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "779",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Base_helper",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Base_helper",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Base_helper< TriangleMesh, Traits_type, Mode, LA_type, Vertex_point_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "781",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::vertex_descriptor",
+        "brief": "Vertex descriptor type.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "795",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_range",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Vertex_const_range",
+        "brief": "a model of ConstRange with an iterator that is model of ForwardIterator with vertex_descriptor as value type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "801",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_point_map",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Vertex_point_map",
+        "brief": "Vertex point map type derived from VertexPointMap .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "803",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "base",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Base_helper::type &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "783",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "base",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base_helper::type &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "788",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Surface_mesh_geodesic_distances_3",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Surface_mesh_geodesic_distances_3",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "809",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Surface_mesh_geodesic_distances_3",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::Surface_mesh_geodesic_distances_3",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tm, Vertex_point_map vpm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_point_map",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "816",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "triangle_mesh",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::triangle_mesh",
+        "brief": "returns the triangle mesh the algorithm is running on.",
+        "detailed": "",
+        "return_type": "const TriangleMesh &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "823",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_source",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::add_source",
+        "brief": "adds vd to the source set, returning false if vd is already in the set.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(vertex_descriptor vd)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "832",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_sources",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::add_sources",
+        "brief": "adds the range of vertices to the source set.",
+        "detailed": "VertexConstRange a model of the concept ConstRange with value type boost::graph_traits<TriangleMesh>::vertex_descriptor",
+        "return_type": "void",
+        "argsstring": "(const VertexConstRange &vrange)",
+        "params": [
+          {
+            "type": "const VertexConstRange &",
+            "name": "vrange",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "843",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_source",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::remove_source",
+        "brief": "removes vd from the source set, returning true if vd was in the set.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(vertex_descriptor vd)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "852",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_sources",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::clear_sources",
+        "brief": "clears the current source set.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "861",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sources",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::sources",
+        "brief": "returns the source set.",
+        "detailed": "",
+        "return_type": "const Vertex_const_range &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "870",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_geodesic_distances",
+        "qualified_name": "CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3::estimate_geodesic_distances",
+        "brief": "fills the distance property map with the estimated geodesic distance of each vertex to the closest source vertex.",
+        "detailed": "VertexDistanceMap a property map model of WritablePropertyMap with vertex_descriptor as key type and double as value type. vdm the vertex distance map to be filled If Mode is Direct , the support triangle mesh does not have any degenerate faces The key type is double even when used with an exact kernel.",
+        "return_type": "void",
+        "argsstring": "(VertexDistanceMap vdm)",
+        "params": [
+          {
+            "type": "VertexDistanceMap",
+            "name": "vdm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Heat_method_3/Surface_mesh_geodesic_distances_3.h",
+        "line": "884",
+        "section": ""
+      }
+    ]
+  },
+  "HeatMethodTraits_3": {
+    "kind": "class",
+    "name": "HeatMethodTraits_3",
+    "brief": "The concept HeatMethodTraits_3 describes the types, predicates, and constructions required by the traits class parameter of CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3 .",
+    "detailed": "Has models All models of the CGAL concept Kernel",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "HeatMethodTraits_3::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "HeatMethodTraits_3::Point_3",
+        "brief": "The 3D point type.",
+        "detailed": "It must be CopyConstructible and DefaultConstructible , and have a constructor with three parameters of a type constructibe from double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "HeatMethodTraits_3::Vector_3",
+        "brief": "The 3D vector type.",
+        "detailed": "It must be CopyConstructible and DefaultConstructible , and have a constructor with three parameters of a type constructibe from double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "HeatMethodTraits_3::Construct_vector_3",
+        "brief": "Functor with operator: Vector_3 operator()(const Point_3 & from, const Point_3 & to) const , which constructs the vector from to - from .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_sum_of_vectors_3",
+        "qualified_name": "HeatMethodTraits_3::Construct_sum_of_vectors_3",
+        "brief": "Functor with operator: Vector_3 operator()(const Vector_3 & v, const Vector_3 & w) const , which constructs the vector v + w .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "HeatMethodTraits_3::Construct_scaled_vector_3",
+        "brief": "Functor with operator: Vector_3 operator()(const Vector_3 & v, double d) const , which constructs the vector d * v .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "HeatMethodTraits_3::Construct_cross_product_vector_3",
+        "brief": "Functor with operator: Vector_3 operator()(const Vector_3 & v, const Vector_3 & w) const , which constructs the cross product of v and w .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "HeatMethodTraits_3::Compute_scalar_product_3",
+        "brief": "Functor with operator: FT operator()(const Vector_3 & v, const Vector_3 & w) const , which constructs the scalar product of v and w .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "HeatMethodTraits_3::Compute_squared_distance_3",
+        "brief": "Functor with operator: FT operator()(const Point_3 & p, const Point_3 & q) const which computes the squared distance between p and q .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_3",
+        "qualified_name": "HeatMethodTraits_3::Compute_squared_length_3",
+        "brief": "Functor with operator: FT operator()(const Vector_3 & v) const which computes the squared length of v .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "HeatMethodTraits_3::construct_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HeatMethodTraits_3.h",
+        "line": "70",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Heat_method_3": {
+    "kind": "namespace",
+    "name": "CGAL::Heat_method_3",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

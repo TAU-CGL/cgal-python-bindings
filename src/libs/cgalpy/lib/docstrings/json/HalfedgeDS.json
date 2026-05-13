@@ -1,0 +1,4120 @@
+{
+  "CGAL::HalfedgeDS_const_decorator": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_const_decorator",
+    "brief": "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.",
+    "detailed": "The class CGAL::HalfedgeDS_decorator <HDS> stores a reference to the halfedge data structure and provides functions that modify the halfedge data structure, for example Euler-operators. The class CGAL::HalfedgeDS_const_decorator <HDS> stores a const reference to the halfedge data structure. It contains non-modifying functions, for example the test for validness of the data structure. All these additional functions take care of the different capabilities a halfedge data structure may have or may not have. The functions evaluate the type tags of the halfedge data structure to decide on the actions. If a particular feature is not supported nothing is done. Note that for example the creation of new halfedges is mandatory for all halfedge data structures and will not appear here again. HDS must be a model of HalfedgeDS Example The following program fragment illustrates the implementation of a is_valid() member function for a simplified polyhedron class. We assume here that the level three check is the appropriate default for polyhedral surfaces. namespace CGAL { template < class Traits> class Polyhedron { typedef HalfedgeDS_default<Traits> HDS; HDS hds; public : // ... bool is_valid( bool verb = false , int level = 0) const { Verbose_ostream verr(verb); verr << \"begin Polyhedron::is_valid( verb=true, level = \" << level << \"):\" << std::endl; HalfedgeDS_const_decorator<HDS> decorator(hds); bool valid = decorator.is_valid( verb, level + 3); // further checks ... } }; } CGAL::HalfedgeDS_items_decorator <HDS> CGAL::HalfedgeDS_decorator <HDS>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_const_decorator",
+        "qualified_name": "CGAL::HalfedgeDS_const_decorator::HalfedgeDS_const_decorator",
+        "brief": "keeps internally a const reference to hds .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const HDS &hds)",
+        "params": [
+          {
+            "type": "const HDS &",
+            "name": "hds",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_const_decorator.h",
+        "line": "71",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::HalfedgeDS_const_decorator::is_valid",
+        "brief": "returns true if the halfedge data structure hds is valid with respect to the level value as defined above.",
+        "detailed": "If verbose is true , statistics are written to cerr .",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_const_decorator.h",
+        "line": "119",
+        "section": "Validness Checks"
+      },
+      {
+        "kind": "function",
+        "name": "normalized_border_is_valid",
+        "qualified_name": "CGAL::HalfedgeDS_const_decorator::normalized_border_is_valid",
+        "brief": "returns true if the border halfedges are in normalized representation, which is when enumerating all halfedges with the halfedge iterator the following holds: The non-border edges precede the border edges.",
+        "detailed": "For border edges, the second halfedge is a border halfedge. (The first halfedge may or may not be a border halfedge.) The halfedge iterator HalfedgeDS::border_halfedges_begin() denotes the first border edge. If verbose is true , statistics are written to cerr .",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_const_decorator.h",
+        "line": "131",
+        "section": "Validness Checks"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_decorator": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_decorator",
+    "brief": "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.",
+    "detailed": "The class CGAL::HalfedgeDS_decorator <HDS> stores a reference to the halfedge data structure and provides functions that modify the halfedge data structure, for example Euler-operators. The class CGAL::HalfedgeDS_const_decorator <HDS> stores a const reference to the halfedge data structure. It contains non-modifying functions, for example the test for validness of the data structure. All these additional functions take care of the different capabilities a halfedge data structure may have or may not have. The functions evaluate the type tags of the halfedge data structure to decide on the actions. If a particular feature is not supported nothing is done. Note that for example the creation of new halfedges is mandatory for all halfedge data structures and will not appear here again. CGAL::HalfedgeDS_items_decorator <HDS> CGAL::HalfedgeDS_const_decorator <HDS> Example The following program fragment illustrates the implementation of the Euler operator split_vertex() for a simplified polyhedron class. template < class Traits> namespace CGAL { class Polyhedron { typedef HalfedgeDS_default<Traits> HDS; HDS hds; public : // ... Halfedge_handle split_vertex( Halfedge_handle h, Halfedge_handle g) { HalfedgeDS_decorator<HDS> D(hds); // Stricter preconditions than for HalfedgeDS only. CGAL_precondition( D.get_vertex(h) == D.get_vertex(g)); CGAL_precondition( h != g); return D.split_vertex( h, g); } }; }",
+    "members": [
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_decorator",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::HalfedgeDS_decorator",
+        "brief": "keeps internally a reference to hds .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(HDS &hds)",
+        "params": [
+          {
+            "type": "HDS &",
+            "name": "hds",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "63",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_push_back",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::vertices_push_back",
+        "brief": "appends a copy of v to hds if vertices are supported.",
+        "detailed": "Returns a handle of the new vertex, or Vertex_handle() otherwise.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Vertex &v)",
+        "params": [
+          {
+            "type": "const Vertex &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "75",
+        "section": "Creation of New Items"
+      },
+      {
+        "kind": "function",
+        "name": "faces_push_back",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::faces_push_back",
+        "brief": "appends a copy of f to hds if faces are supported.",
+        "detailed": "Returns a handle of the new face, or Face_handle() otherwise.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Face &f)",
+        "params": [
+          {
+            "type": "const Face &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "82",
+        "section": "Creation of New Items"
+      },
+      {
+        "kind": "function",
+        "name": "create_loop",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::create_loop",
+        "brief": "returns handle of a halfedge from a newly created loop in hds consisting of a single closed edge, one vertex and two faces (if supported respectively).",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "95",
+        "section": "Creation of New Composed Items"
+      },
+      {
+        "kind": "function",
+        "name": "create_segment",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::create_segment",
+        "brief": "returns a halfedge from a newly created segment in hds consisting of a single open edge, two vertices and one face (if supported respectively).",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "103",
+        "section": "Creation of New Composed Items"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_pop_front",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::vertices_pop_front",
+        "brief": "removes the first vertex if vertices are supported.",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "118",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_pop_back",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::vertices_pop_back",
+        "brief": "removes the last vertex if vertices are supported.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "124",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_erase",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::vertices_erase",
+        "brief": "removes the vertex v if vertices are supported.",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "132",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_erase",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::vertices_erase",
+        "brief": "removes the range [first,last) if vertices are supported.",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle first, Vertex_handle last)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "141",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "faces_pop_front",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::faces_pop_front",
+        "brief": "removes the first face if faces are supported.",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "149",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "faces_pop_back",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::faces_pop_back",
+        "brief": "removes the last face if faces are supported.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "155",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "faces_erase",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::faces_erase",
+        "brief": "removes the face f if faces are supported.",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "163",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "faces_erase",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::faces_erase",
+        "brief": "removes the range [first,last) if faces are supported.",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Face_handle first, Face_handle last)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "171",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "erase_face",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::erase_face",
+        "brief": "removes the face incident to h from hds and changes all halfedges incident to the face into border edges or removes them from the halfedge data structure if they were already border edges.",
+        "detailed": "If this creates isolated vertices they get removed as well. See make_hole() for a more specialized variant. h->is_border() == false . If faces are supported, Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "184",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "erase_connected_component",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::erase_connected_component",
+        "brief": "removes the vertices, halfedges, and faces that belong to the connected component of h .",
+        "detailed": "For all halfedges g in the connected component g.next() != Halfedge_handle() . Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "192",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "keep_largest_connected_components",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::keep_largest_connected_components",
+        "brief": "Erases the small connected components and the isolated vertices.",
+        "detailed": "Keep nb_components_to_keep largest connected components. Returns the number of connected components erased (ignoring isolated vertices). Supports_removal must be CGAL::Tag_true , Supports_vertex_halfedge must be CGAL::Tag_true and Supports_halfedge_vertex must be CGAL::Tag_true .",
+        "return_type": "unsigned int",
+        "argsstring": "(unsigned int nb_components_to_keep)",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "nb_components_to_keep",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "203",
+        "section": "Removal of Elements"
+      },
+      {
+        "kind": "function",
+        "name": "make_hole",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::make_hole",
+        "brief": "removes the face incident to h from hds and creates a hole.",
+        "detailed": "h != Halfedge_handle() and !(h->is_border()) . If faces are supported, Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "216",
+        "section": "Modifying Functions (For Border Halfedges)"
+      },
+      {
+        "kind": "function",
+        "name": "fill_hole",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::fill_hole",
+        "brief": "fills the hole incident to h with a new face from hds .",
+        "detailed": "Returns h . h != Halfedge_handle() and h->is_border() .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "223",
+        "section": "Modifying Functions (For Border Halfedges)"
+      },
+      {
+        "kind": "function",
+        "name": "fill_hole",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::fill_hole",
+        "brief": "fills the hole incident to h with a copy of face f .",
+        "detailed": "Returns h . h != Halfedge_handle() and h->is_border() .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, const Face &f)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Face &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "230",
+        "section": "Modifying Functions (For Border Halfedges)"
+      },
+      {
+        "kind": "function",
+        "name": "add_face_to_border",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::add_face_to_border",
+        "brief": "extends the surface with a new face from hds into the hole incident to h and g .",
+        "detailed": "It creates a new edge connecting the vertex denoted by g with the vertex denoted by h and fills this separated part of the hole with a new face, such that the new face is incident to g . Returns the new halfedge that is incident to the new face. h != Halfedge_handle() , g != Halfedge_handle() , h->is_border() , g->is_border() and g can be reached along the hole starting with h .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "240",
+        "section": "Modifying Functions (For Border Halfedges)"
+      },
+      {
+        "kind": "function",
+        "name": "add_face_to_border",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::add_face_to_border",
+        "brief": "extends the surface with a copy of face f into the hole incident to h and g .",
+        "detailed": "It creates a new edge connecting the tip of g with the tip of h and fills this separated part of the hole with a copy of face f , such that the new face is incident to g . Returns the new halfedge that is incident to the new face. h != Halfedge_handle() , g != Halfedge_handle() , h->is_border() , g->is_border() and g can be reached along the hole starting with h .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g, const Face &f)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Face &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "251",
+        "section": "Modifying Functions (For Border Halfedges)"
+      },
+      {
+        "kind": "function",
+        "name": "split_face",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::split_face",
+        "brief": "splits the face incident to h and g into two faces with a new diagonal between the two vertices denoted by h and g respectively.",
+        "detailed": "The second (new) face obtained from hds is a copy of the first face. Returns h->next() after the operation, i.e., the new diagonal. The new face is to the right of the new diagonal, the old face is to the left. The time is proportional to the distance from h to g around the face.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "288",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "join_face",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::join_face",
+        "brief": "joins the two faces incident to h .",
+        "detailed": "The face incident to h->opposite() gets removed from hds . Both faces might be holes. Returns the predecessor of h around the face. The invariant join_face( split_face( h, g)) returns h and keeps the data structure unchanged. The time is proportional to the size of the face removed and the time to compute h->prev() . Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "304",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "split_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::split_vertex",
+        "brief": "splits the vertex incident to h and g into two vertices and connects them with a new edge.",
+        "detailed": "The second (new) vertex obtained from hds is a copy of the first vertex. Returns h->next()->opposite() after the operation, i.e., the new edge in the orientation towards the new vertex. The time is proportional to the distance from h to g around the vertex.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "318",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "join_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::join_vertex",
+        "brief": "joins the two vertices incident to h .",
+        "detailed": "The vertex denoted by h->opposite() gets removed by hds . Returns the predecessor of h around the vertex, i.e., h->opposite()->prev() . The invariant join_vertex( split_vertex( h, g)) returns h and keeps the polyhedron unchanged. The time is proportional to the degree of the vertex removed and the time to compute h->prev() and h->opposite()->prev() . Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "335",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "create_center_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::create_center_vertex",
+        "brief": "barycentric triangulation of h->face() .",
+        "detailed": "Creates a new vertex, a copy of h->vertex() , and connects it to each vertex incident to h->face() splitting h->face() into triangles. h remains incident to the original face, all other triangles are copies of this face. Returns the halfedge h->next() after the operation, i.e., a halfedge pointing to the new vertex. The time is proportional to the size of the face. h is not a border halfedge.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "351",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "erase_center_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::erase_center_vertex",
+        "brief": "reverses create_center_vertex .",
+        "detailed": "Erases the vertex pointed to by g and all incident halfedges thereby merging all incident faces. Only g->face() remains. The neighborhood of g->vertex() may not be triangulated, it can have larger faces. Returns the halfedge g->prev() . Thus, the invariant h == erase_center_vertex(\ncreate_center_vertex(h)) holds if h is not a border halfedge. The time is proportional to the sum of the size of all incident faces. None of the incident faces of g->vertex() is a hole. There are at least two distinct faces incident to the faces that are incident to g->vertex() . (This prevents the operation from collapsing a volume into two faces glued together with opposite orientations, such as would happen with any vertex of a tetrahedron.) Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "369",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "split_loop",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::split_loop",
+        "brief": "cuts the halfedge data structure into two parts along the cycle (h,i,j) .",
+        "detailed": "Three new vertices (one copy for each vertex in the cycle) and three new halfedges (one copy for each halfedge in the cycle), and two new triangles are created. h,i,j will be incident to the first new triangle. The return value will be the halfedge incident to the second new triangle which is the copy of h-opposite() . h,i,j denote distinct, consecutive vertices of the halfedge data structure and form a cycle: i.e., h->vertex() == i->opposite()->vertex() , $\\ldots$ , j->vertex() == h->opposite()->vertex() .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle i, Halfedge_handle j)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "387",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "join_loop",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::join_loop",
+        "brief": "glues the boundary of the two faces denoted by h and g together and returns h .",
+        "detailed": "Both faces and the vertices along the face denoted by g gets removed. Both faces may be holes. The invariant join_loop( h, split_loop( h, i, j)) returns h and keeps the data structure unchanged. The faces denoted by h and g are different and have equal degree (i.e., number of edges). Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "404",
+        "section": "Modifying Functions (Euler Operators)"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::is_valid",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "415",
+        "section": "Validness Checks"
+      },
+      {
+        "kind": "function",
+        "name": "normalized_border_is_valid",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::normalized_border_is_valid",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "420",
+        "section": "Validness Checks"
+      },
+      {
+        "kind": "function",
+        "name": "inside_out",
+        "qualified_name": "CGAL::HalfedgeDS_decorator::inside_out",
+        "brief": "reverses face orientations.",
+        "detailed": "is_valid() of level three.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_decorator.h",
+        "line": "430",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_default": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_default",
+    "brief": "The class HalfedgeDS_default is a model for the HalfedgeDS concept.",
+    "detailed": "The second template parameter HalfedgeDSItems has a default argument CGAL::HalfedgeDS_items_2 . The third template parameter Alloc uses the CGAL default allocator as default setting. HalfedgeDS_default is a list-based representation with bidirectional iterators that supports removal. Is model of HalfedgeDS <Traits,Items,Alloc> CGAL::HalfedgeDS_list CGAL::HalfedgeDS_vector HalfedgeDSItems CGAL::HalfedgeDS_items_2 CGAL::Polyhedron_3<Traits> CGAL::HalfedgeDS_items_decorator <HDS> CGAL::HalfedgeDS_decorator <HDS> CGAL::HalfedgeDS_const_decorator <HDS> Implementation Currently, HalfedgeDS_default is derived from CGAL::HalfedgeDS_list <Traits> . The copy constructor and the assignment operator need $O(n)$ time with $ n$ the total number of vertices, halfedges, and faces.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::HalfedgeDS_default::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bidirectional_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_default.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_removal",
+        "qualified_name": "CGAL::HalfedgeDS_default::Supports_removal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_default.h",
+        "line": "50",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_face_base": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_face_base",
+    "brief": "The class HalfedgeDS_face_base is a model of the HalfedgeDSFace concept.",
+    "detailed": "Refs is an instantiation of a HalfedgeDS . The template declaration of HalfedgeDS_face_base has three parameters with some defaults that allow to select various flavors of faces. The declaration is best explained with the two following declarations, essentially hiding an implementation dependent default setting: template <class Refs, class T = CGAL::Tag_true> class HalfedgeDS_face_base ; template <class Refs, class T, class Plane > class HalfedgeDS_face_base ; HalfedgeDS_face_base defines a face including a reference to an incident halfedge. CGAL::HalfedgeDS_face_base <Refs,CGAL::Tag_false> is a face without a reference to an incident halfedge. It is empty besides the required type definitions. It can be used for deriving own faces. See also CGAL::HalfedgeDS_face_min_base <Refs> . CGAL::HalfedgeDS_face_base <Refs,CGAL::Tag_true, Plane > is a face with a reference to an incident halfedge and it stores a plane equation of type Plane . It can be used as a face for a model of the PolyhedronItems_3 concept. CGAL::HalfedgeDS_face_base <Refs,CGAL::Tag_false, Plane > is a face without a reference to an incident halfedge and it stores a plane equation of type Plane . It can be used as a face for a model of the PolyhedronItems_3 concept. Is model of HalfedgeDSFace HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems PolyhedronItems_3 CGAL::HalfedgeDS_items_2 CGAL::HalfedgeDS_vertex_base <Refs> CGAL::HalfedgeDS_halfedge_base <Refs> CGAL::HalfedgeDS_face_min_base <Refs>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Plane",
+        "qualified_name": "CGAL::HalfedgeDS_face_base::Plane",
+        "brief": "plane type for three argument version.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_face_base.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_face_base",
+        "qualified_name": "CGAL::HalfedgeDS_face_base::HalfedgeDS_face_base",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_face_base.h",
+        "line": "69",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_face_base",
+        "qualified_name": "CGAL::HalfedgeDS_face_base::HalfedgeDS_face_base",
+        "brief": "initialized with plane pln .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Plane &pln)",
+        "params": [
+          {
+            "type": "const Plane &",
+            "name": "pln",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_face_base.h",
+        "line": "74",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "plane",
+        "qualified_name": "CGAL::HalfedgeDS_face_base::plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Plane &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_face_base.h",
+        "line": "84",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "plane",
+        "qualified_name": "CGAL::HalfedgeDS_face_base::plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Plane &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_face_base.h",
+        "line": "89",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_face_min_base": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_face_min_base",
+    "brief": "The class HalfedgeDS_face_min_base is a model of the HalfedgeDSFace concept.",
+    "detailed": "Refs is an instantiation of a HalfedgeDS . It is equivalent to CGAL::HalfedgeDS_face_base < Refs, CGAL::Tag_false> . It is empty besides the required type definitions. It can be used for deriving own faces. Is model of HalfedgeDSFace HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems PolyhedronItems_3 CGAL::HalfedgeDS_min_items CGAL::HalfedgeDS_vertex_min_base <Refs> CGAL::HalfedgeDS_halfedge_min_base <Refs> CGAL::HalfedgeDS_face_base <Refs>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_face_min_base",
+        "qualified_name": "CGAL::HalfedgeDS_face_min_base::HalfedgeDS_face_min_base",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_face_min_base.h",
+        "line": "33",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_halfedge_base": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_halfedge_base",
+    "brief": "The class HalfedgeDS_halfedge_base is a model of the HalfedgeDSHalfedge concept.",
+    "detailed": "Refs is an instantiation of a HalfedgeDS . The full declaration states four template parameters: template < class Refs, class Tag_prev = CGAL::Tag_true, class Tag_vertex = CGAL::Tag_true, class Tag_face = CGAL::Tag_true> class HalfedgeDS_halfedge_base ; If Tag_prev $ \\equiv$ CGAL::Tag_true a reference to the previous halfedge is supported. If Tag_vertex $ \\equiv$ CGAL::Tag_true an incident vertex is supported. If Tag_face $ \\equiv$ CGAL::Tag_true an incident face is supported. In all cases, a reference to the next halfedge and to the opposite halfedge is supported. Is model of HalfedgeDSHalfedge HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems PolyhedronItems_3 CGAL::HalfedgeDS_items_2 CGAL::HalfedgeDS_vertex_base <Refs> CGAL::HalfedgeDS_face_base <Refs> CGAL::HalfedgeDS_halfedge_min_base <Refs>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_halfedge_base",
+        "qualified_name": "CGAL::HalfedgeDS_halfedge_base::HalfedgeDS_halfedge_base",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_halfedge_base.h",
+        "line": "81",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_halfedge_min_base": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_halfedge_min_base",
+    "brief": "The class HalfedgeDS_halfedge_min_base is a model of the HalfedgeDSHalfedge concept.",
+    "detailed": "Refs is an instantiation of a HalfedgeDS . It is equivalent to CGAL::HalfedgeDS_halfedge_base < Refs, CGAL::Tag_false, CGAL::Tag_false, CGAL::Tag_false> . The class contains support for the next and the opposite pointer and the required type definitions. It can be used for deriving own halfedges. Is model of HalfedgeDSHalfedge HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems PolyhedronItems_3 CGAL::HalfedgeDS_min_items CGAL::HalfedgeDS_vertex_min_base <Refs> CGAL::HalfedgeDS_face_min_base <Refs> CGAL::HalfedgeDS_halfedge_base <Refs>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_halfedge_min_base",
+        "qualified_name": "CGAL::HalfedgeDS_halfedge_min_base::HalfedgeDS_halfedge_min_base",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_halfedge_min_base.h",
+        "line": "34",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_items_2": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_items_2",
+    "brief": "The class HalfedgeDS_items_2 is a model of the HalfedgeDSItems concept.",
+    "detailed": "It uses the default types for vertices, halfedges, and faces that declare all incidences supported by a HalfedgeDS . The vertex also contains a point of type Traits::Point_2 , where Traits is the template argument of the corresponding HalfedgeDS . Is model of HalfedgeDSItems CGAL::HalfedgeDS_min_items CGAL::Polyhedron_items_3 HalfedgeDS <Traits,Items,Alloc> PolyhedronItems_3 CGAL::HalfedgeDS_vertex_base <Refs> CGAL::HalfedgeDS_halfedge_base <Refs> CGAL::HalfedgeDS_face_base <Refs> Example The following example shows the canonical implementation of the HalfedgeDS_items_2 class. It uses the base classes for the item types that are provided in the library. struct HalfedgeDS_items_2 { template < class Refs, class Traits> struct Vertex_wrapper { typedef typename Traits::Point_2 Point; typedef CGAL::HalfedgeDS_vertex_base< Refs, Tag_true, Point> Vertex; }; template < class Refs, class Traits> struct Halfedge_wrapper { typedef CGAL::HalfedgeDS_halfedge_base< Refs> Halfedge; }; template < class Refs, class Traits> struct Face_wrapper { typedef CGAL::HalfedgeDS_face_base< Refs> Face; }; }; The following example shows a class definition for a new items class derived from the HalfedgeDS_items_2 class. It replaces the Face_wrapper with a new definition of a face that contains a member variable for color. The new face makes use of the face base class provided in the library. // A face type with a color member variable. template < class Refs> struct My_face : public CGAL::HalfedgeDS_face_base<Refs> { CGAL::IO::Color color; My_face() {} My_face( CGAL::IO::Color c) : color(c) {} }; // An items type using my face. struct My_items : public CGAL::HalfedgeDS_items_2 { template < class Refs, class Traits> struct Face_wrapper { typedef My_face<Refs> Face; }; };",
+    "members": []
+  },
+  "CGAL::HalfedgeDS_items_decorator": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_items_decorator",
+    "brief": "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.",
+    "detailed": "The class CGAL::HalfedgeDS_decorator <HDS> stores a reference to the halfedge data structure and provides functions that modify the halfedge data structure, for example Euler-operators. The class CGAL::HalfedgeDS_const_decorator <HDS> stores a const reference to the halfedge data structure. It contains non-modifying functions, for example the test for validness of the data structure. All these additional functions take care of the different capabilities a halfedge data structure may have or may not have. The functions evaluate the type tags of the halfedge data structure to decide on the actions. If a particular feature is not supported nothing is done. Note that for example the creation of new halfedges is mandatory for all halfedge data structures and will not appear here again. CGAL::HalfedgeDS_decorator <HDS> CGAL::HalfedgeDS_const_decorator <HDS> Example The following program fragment illustrates how a refined halfedge class for a polyhedron can make use of the find_prev() member function to implement a prev() member function that works regardless of whether the halfedge data structure HDS provides a prev() member function for its halfedges or not. In the case that not, the implementation given here runs in time proportional to the size of the incident face. For const-correctness a second implementation with signature Halfedge_const_handle prev() const; is needed. Note also the use of the static member function HalfedgeDS::halfedge_handle() of the halfedge data structure. It converts a pointer to the halfedge into a halfedge handle. This conversion encapsulates possible adjustments for hidden data members in the true halfedge type, such as linked-list pointers. struct Polyhedron_halfedge { // ... Halfedge_handle prev() { CGAL::HalfedgeDS_items_decorator<HDS> decorator; return decorator. find_prev ( HDS::halfedge_handle( this )); } };",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "HalfedgeDS",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::HalfedgeDS",
+        "brief": "halfedge data structure.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Vertex",
+        "brief": "vertex type of HalfedgeDS .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Halfedge",
+        "brief": "halfedge type of HalfedgeDS .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Face",
+        "brief": "face type of HalfedgeDS .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "88",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "93",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Halfedge_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "98",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Face_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "103",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_iterator",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Vertex_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "108",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_iterator",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Halfedge_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "113",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_iterator",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Face_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "118",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::size_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "123",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "128",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "133",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Supports_vertex_halfedge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "138",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_prev",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Supports_halfedge_prev",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "143",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Supports_halfedge_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "148",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_face",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Supports_halfedge_face",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "153",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_face_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Supports_face_halfedge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "158",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_removal",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::Supports_removal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "163",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_items_decorator",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::HalfedgeDS_items_decorator",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "173",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_vertex_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::get_vertex_halfedge",
+        "brief": "returns the incident halfedge of v if supported, Halfedge_handle() otherwise.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "185",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::get_vertex",
+        "brief": "returns the incident vertex of h if supported, Vertex_handle() otherwise.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "191",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_prev",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::get_prev",
+        "brief": "returns the previous halfedge of h if supported, Halfedge_handle() otherwise.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "197",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "find_prev",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::find_prev",
+        "brief": "returns the previous halfedge of h .",
+        "detailed": "Uses the prev() method if supported or performs a search around the face using next() .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "203",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "find_prev_around_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::find_prev_around_vertex",
+        "brief": "returns the previous halfedge of h .",
+        "detailed": "Uses the prev() method if supported or performs a search around the vertex using next() .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "209",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_face",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::get_face",
+        "brief": "returns the incident face of h if supported, Face_handle() otherwise.",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "215",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_face_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::get_face_halfedge",
+        "brief": "returns the incident halfedge of f if supported, Halfedge_handle() otherwise.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "221",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "close_tip",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::close_tip",
+        "brief": "makes h->opposite() the successor of h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "231",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "close_tip",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::close_tip",
+        "brief": "makes h->opposite() the successor of h and sets the incident vertex of h to v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "237",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "insert_tip",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::insert_tip",
+        "brief": "inserts the tip of the edge h into the halfedges around the vertex pointed to by v .",
+        "detailed": "Halfedge h->opposite() is the new successor of v and h->next() will be set to v->next() . The vertex of h will be set to the vertex v refers to if vertices are supported.",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle v) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "245",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "remove_tip",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::remove_tip",
+        "brief": "removes the edge h->next()->opposite() from the halfedge circle around the vertex referred to by h .",
+        "detailed": "The new successor halfedge of h will be h->next()->opposite()->next() .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "252",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "insert_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::insert_halfedge",
+        "brief": "inserts the halfedge h between f and f->next() .",
+        "detailed": "The face of h will be the one f refers to if faces are supported.",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle f) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "259",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "remove_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::remove_halfedge",
+        "brief": "removes edge h->next() from the halfedge circle around the face referred to by h .",
+        "detailed": "The new successor of h will be h->next()->next() .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "266",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex_in_vertex_loop",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_vertex_in_vertex_loop",
+        "brief": "loops around the vertex incident to h and sets all vertex pointers to v .",
+        "detailed": "h != Halfedge_handle() .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "272",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "set_face_in_face_loop",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_face_in_face_loop",
+        "brief": "loops around the face incident to h and sets all face pointers to f .",
+        "detailed": "h != Halfedge_handle() .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Face_handle f) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "279",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "flip_edge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::flip_edge",
+        "brief": "performs an edge flip.",
+        "detailed": "It returns h after rotating the edge h one vertex in the direction of the face orientation. h != Halfedge_handle() and both incident faces of h are triangles.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "286",
+        "section": "Modifying Functions (Composed)"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_vertex_halfedge",
+        "brief": "sets the incident halfedge of v to g .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v, Halfedge_handle g) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "296",
+        "section": "Modifying Functions (Primitives)"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_vertex_halfedge",
+        "brief": "sets the incident halfedge of the vertex v to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "301",
+        "section": "Modifying Functions (Primitives)"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_vertex",
+        "brief": "sets the incident vertex of h to v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "306",
+        "section": "Modifying Functions (Primitives)"
+      },
+      {
+        "kind": "function",
+        "name": "set_prev",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_prev",
+        "brief": "sets the previous link of h to g .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "311",
+        "section": "Modifying Functions (Primitives)"
+      },
+      {
+        "kind": "function",
+        "name": "set_face",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_face",
+        "brief": "sets the incident face of h to f .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h, Face_handle f) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "316",
+        "section": "Modifying Functions (Primitives)"
+      },
+      {
+        "kind": "function",
+        "name": "set_face_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_face_halfedge",
+        "brief": "sets the incident halfedge of f to g .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_handle f, Halfedge_handle g) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "321",
+        "section": "Modifying Functions (Primitives)"
+      },
+      {
+        "kind": "function",
+        "name": "set_face_halfedge",
+        "qualified_name": "CGAL::HalfedgeDS_items_decorator::set_face_halfedge",
+        "brief": "sets the incident halfedge of the face f to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_items_decorator.h",
+        "line": "326",
+        "section": "Modifying Functions (Primitives)"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_list": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_list",
+    "brief": "The class HalfedgeDS_list is a model for the HalfedgeDS concept.",
+    "detailed": "HalfedgeDS_list is a list-based representation with bidirectional iterators that supports removal. Is model of HalfedgeDS <Traits,Items,Alloc> CGAL::HalfedgeDS_default CGAL::HalfedgeDS_vector HalfedgeDSItems CGAL::Polyhedron_3<Traits> CGAL::HalfedgeDS_items_decorator <HDS> CGAL::HalfedgeDS_decorator <HDS> CGAL::HalfedgeDS_const_decorator <HDS> Implementation HalfedgeDS_list uses internally the CGAL::In_place_list container class. The copy constructor and the assignment operator need $O(n)$ time with $ n$ the total number of vertices, halfedges, and faces. CGAL_ALLOCATOR(int) is used as default argument for the Alloc template parameter.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::HalfedgeDS_list::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bidirectional_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_list.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_removal",
+        "qualified_name": "CGAL::HalfedgeDS_list::Supports_removal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_list.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_splice",
+        "qualified_name": "CGAL::HalfedgeDS_list::vertices_splice",
+        "brief": "inserts elements in the range [ first, last ) before position target and removes the elements from source .",
+        "detailed": "It takes constant time if &source == &``hds ; otherwise, it takes linear time in the size of the range. [ first, last ) is a valid range in source . target is not in the range [ first, last ).",
+        "return_type": "void",
+        "argsstring": "(Vertex_iterator target, Self &source, Vertex_iterator first, Vertex_iterator last)",
+        "params": [
+          {
+            "type": "Vertex_iterator",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Self &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_iterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_list.h",
+        "line": "64",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_splice",
+        "qualified_name": "CGAL::HalfedgeDS_list::halfedges_splice",
+        "brief": "inserts elements in the range [ first, last ) before position target and removes the elements from source .",
+        "detailed": "It takes constant time if &source == &``hds ; otherwise, it takes linear time in the size of the range. [ first, last ) is a valid range in source . target is not in the range [ first, last ).",
+        "return_type": "void",
+        "argsstring": "(Halfedge_iterator target, Self &source, Halfedge_iterator first, Halfedge_iterator last)",
+        "params": [
+          {
+            "type": "Halfedge_iterator",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Self &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_iterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_list.h",
+        "line": "73",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "faces_splice",
+        "qualified_name": "CGAL::HalfedgeDS_list::faces_splice",
+        "brief": "inserts elements in the range [ first, last ) before position target and removes the elements from source .",
+        "detailed": "It takes constant time if &source == &``hds ; otherwise, it takes linear time in the size of the range. [ first, last ) is a valid range in source . target is not in the range [ first, last ).",
+        "return_type": "void",
+        "argsstring": "(Face_iterator target, Self &source, Face_iterator first, Face_iterator last)",
+        "params": [
+          {
+            "type": "Face_iterator",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Self &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_iterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_list.h",
+        "line": "82",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_min_items": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_min_items",
+    "brief": "The class HalfedgeDS_min_items is a model of the HalfedgeDSItems concept.",
+    "detailed": "It defines types for vertices, halfedges, and faces that declare the minimal required incidences for a HalfedgeDS , which are the next() and the opposite() member function for halfedges. Is model of HalfedgeDSItems CGAL::HalfedgeDS_items_2 CGAL::Polyhedron_items_3 HalfedgeDS <Traits,Items,Alloc> PolyhedronItems_3 CGAL::HalfedgeDS_vertex_min_base <Refs> CGAL::HalfedgeDS_halfedge_min_base <Refs> CGAL::HalfedgeDS_face_min_base <Refs> Example The following example shows the canonical implementation of the CGAL::HalfedgeDS_min_items class. It uses the base classes for the item types that are provided in the library. struct HalfedgeDS_min_items { template < class Refs, class Traits> struct Vertex_wrapper { typedef CGAL::HalfedgeDS_vertex_min_base< Refs> Vertex; }; template < class Refs, class Traits> struct Halfedge_wrapper { typedef CGAL::HalfedgeDS_halfedge_min_base< Refs> Halfedge; }; template < class Refs, class Traits> struct Face_wrapper { typedef CGAL::HalfedgeDS_face_min_base< Refs> Face; }; };",
+    "members": []
+  },
+  "CGAL::HalfedgeDS_vector": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_vector",
+    "brief": "The class HalfedgeDS_vector is a model for the HalfedgeDS concept.",
+    "detailed": "HalfedgeDS_vector is a vector-based representation with random access iterators that does not support removal. Is model of HalfedgeDS <Traits,Items,Alloc> CGAL::HalfedgeDS_default CGAL::HalfedgeDS_list HalfedgeDSItems CGAL::Polyhedron_3<Traits> CGAL::HalfedgeDS_items_decorator <HDS> CGAL::HalfedgeDS_decorator <HDS> CGAL::HalfedgeDS_const_decorator <HDS> Implementation HalfedgeDS_vector uses internally the STL std::vector container class. We require that we can create a std::vector::iterator from a pointer. If this will not be true any longer for any major STL distribution we might switch to an internal implementation of a vector. The capacity is restricted to the reserved size. Allocations are not possible beyond the capacity without calling reserve again. All handles and iterators are invalidated upon a reserve call that increases the capacity. CGAL_ALLOCATOR(int) is used as default argument for the Alloc template parameter.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::HalfedgeDS_vector::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "random_access_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vector.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_removal",
+        "qualified_name": "CGAL::HalfedgeDS_vector::Supports_removal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_false",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vector.h",
+        "line": "52",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_vertex_base": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_vertex_base",
+    "brief": "The class HalfedgeDS_vertex_base is a model of the HalfedgeDSVertex concept.",
+    "detailed": "Refs is an instantiation of a HalfedgeDS . The template declaration of HalfedgeDS_vertex_base has three parameters with some defaults that allow to select various flavors of vertices. The declaration is best explained with the two following declarations, essentially hiding an implementation dependent default setting: template <class Refs, class T = CGAL::Tag_true> class HalfedgeDS_vertex_base ; template <class Refs, class T, class Point > class HalfedgeDS_vertex_base ; Let us look at some instantiations HalfedgeDS_vertex_base defines a vertex including a reference to an incident halfedge. HalfedgeDS_vertex_base <Refs,CGAL::Tag_false> is a vertex without a reference to an incident halfedge. It is empty besides the required type definitions. It can be used for deriving own vertex implementations. See also CGAL::HalfedgeDS_vertex_min_base <Refs> . HalfedgeDS_vertex_base <Refs,CGAL::Tag_true, Point > is a vertex with a reference to an incident halfedge and it stores a point of type Point . It can be used as a vertex for a model of the PolyhedronItems_3 concept. HalfedgeDS_vertex_base <Refs,CGAL::Tag_false, Point > is a vertex without a reference to an incident halfedge and it stores a point of type Point . It can be used as a vertex for a model of the PolyhedronItems_3 concept. Is model of HalfedgeDSVertex HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems PolyhedronItems_3 CGAL::HalfedgeDS_items_2 CGAL::HalfedgeDS_halfedge_base <Refs> CGAL::HalfedgeDS_face_base <Refs> CGAL::HalfedgeDS_vertex_min_base <Refs>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::HalfedgeDS_vertex_base::Point",
+        "brief": "point type for three argument version.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vertex_base.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_vertex_base",
+        "qualified_name": "CGAL::HalfedgeDS_vertex_base::HalfedgeDS_vertex_base",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vertex_base.h",
+        "line": "67",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_vertex_base",
+        "qualified_name": "CGAL::HalfedgeDS_vertex_base::HalfedgeDS_vertex_base",
+        "brief": "initialized with point p .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/HalfedgeDS_vertex_base.h",
+        "line": "72",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::HalfedgeDS_vertex_base::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vertex_base.h",
+        "line": "82",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::HalfedgeDS_vertex_base::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vertex_base.h",
+        "line": "87",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::HalfedgeDS_vertex_min_base": {
+    "kind": "class",
+    "name": "CGAL::HalfedgeDS_vertex_min_base",
+    "brief": "The class HalfedgeDS_vertex_min_base is a model of the HalfedgeDSVertex concept.",
+    "detailed": "Refs is an instantiation of a HalfedgeDS . It is equivalent to HalfedgeDS_vertex_base < Refs, CGAL::Tag_false> . It is empty besides the required type definitions. It can be used for deriving own vertices. Is model of HalfedgeDSVertex HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems PolyhedronItems_3 CGAL::HalfedgeDS_min_items CGAL::HalfedgeDS_halfedge_min_base <Refs> CGAL::HalfedgeDS_face_min_base <Refs> CGAL::HalfedgeDS_vertex_base <Refs>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "HalfedgeDS_vertex_min_base",
+        "qualified_name": "CGAL::HalfedgeDS_vertex_min_base::HalfedgeDS_vertex_min_base",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/HalfedgeDS_vertex_min_base.h",
+        "line": "33",
+        "section": "Creation"
+      }
+    ]
+  },
+  "HalfedgeDS": {
+    "kind": "class",
+    "name": "HalfedgeDS",
+    "brief": "The concept of a halfedge data structure (abbreviated as HalfedgeDS , or HDS for template parameters) defines an edge-centered data structure capable of maintaining incidence information of vertices, edges, and faces, for example for planar maps or polyhedral surfaces. It is a combinatorial data structure, geometric interpretation is added by classes built on top of the halfedge data structure.",
+    "detailed": "The data structure defined here is known as the FE-structure [9] , as halfedges [6] , [2] or as the doubly connected edge list (DCEL) [3] , although the original reference for the DCEL [7] describes a different data structure. The halfedge data structure can also be seen as one of the variants of the quad-edge data structure [4] . In general, the quad-edge data can represent non-orientable 2-manifolds, but the variant here is restricted to orientable 2-manifolds only. An overview and comparison of these different data structures together with a thorough description of the design implemented here can be found in [5] . Each edge is represented by two halfedges with opposite orientations. Each halfedge can store a reference to an incident face and an incident vertex. For each face and each vertex an incident halfedge is stored. Reduced variants of the halfedge data structure can omit some of these incidences, for example the reference to halfedges in vertices or the storage of vertices at all. See Figure figureOptionalMethods for the incidences, the mandatory and optional member functions possible for vertices, halfedges, and faces. The three classes Vertex, Halfedge, and Face of the halfedge data structure. Member functions with shaded background are mandatory. The others are optionally supported. The three classes Vertex, Halfedge, and Face of the halfedge data structure. Member functions with shaded background are mandatory. The others are optionally supported. A HalfedgeDS organizes the internal storage of its items. Examples are a list-based or a vector-based storage. The HalfedgeDS exhibits most of the characteristics of the container class used internally, for example the iterator category. A vector resizes automatically when a new item exceeds the reserved space. Since resizing is an expensive operation for a HalfedgeDS in general and only possible in a well defined state of the data structure (no dangling handles), it must be called explicitly in advance for a HalfedgeDS before inserting new items beyond the current capacity. Classes built on top of a HalfedgeDS are advised to call the reserve() member function before creating new items. Parameters A HalfedgeDS is a class template and will be used as argument for other class templates, for example CGAL::Polyhedron_3 . The template parameters to instantiate the HalfedgeDS will be provided by this other class template. Therefore, the three template parameters and their meaning are mandatory. We distinguish between the template HalfedgeDS and an instantiation of it. Traits is a traits class that will be passed to the item types in Items . It will not be used in HalfedgeDS itself. Items is a model of the HalfedgeDSItems concept. Alloc is an allocator that fulfills all requirements of allocators for STL container classes. The rebind mechanism from Alloc will be used to create appropriate allocators internally. A default argument is mandatory for Alloc , for example, the macro CGAL_ALLOCATOR(int) from the <CGAL/memory.h> header file can be used as default allocator. Has models CGAL::HalfedgeDS_default CGAL::HalfedgeDS_list CGAL::HalfedgeDS_vector HalfedgeDSItems CGAL::Polyhedron_3<Traits> CGAL::HalfedgeDS_vertex_base <Refs> CGAL::HalfedgeDS_halfedge_base <Refs> CGAL::HalfedgeDS_face_base <Refs> CGAL::HalfedgeDS_items_decorator <HDS> CGAL::HalfedgeDS_decorator <HDS> CGAL::HalfedgeDS_const_decorator <HDS>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Items",
+        "qualified_name": "HalfedgeDS::Items",
+        "brief": "model of HalfedgeDSItems concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "101",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "HalfedgeDS::size_type",
+        "brief": "size type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "106",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "HalfedgeDS::difference_type",
+        "brief": "difference type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "HalfedgeDS::iterator_category",
+        "brief": "iterator category for all iterators.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "116",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "allocator_type",
+        "qualified_name": "HalfedgeDS::allocator_type",
+        "brief": "allocator type Alloc .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "121",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "HalfedgeDS::Vertex",
+        "brief": "model of HalfedgeDSVertex concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "126",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "HalfedgeDS::Halfedge",
+        "brief": "model of HalfedgeDSHalfedge concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "131",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "HalfedgeDS::Face",
+        "brief": "model of HalfedgeDSFace concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "136",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "HalfedgeDS::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "155",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "HalfedgeDS::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "160",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "HalfedgeDS::Face_handle",
+        "brief": "handle to face.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "165",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_iterator",
+        "qualified_name": "HalfedgeDS::Vertex_iterator",
+        "brief": "iterator over all vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "170",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_iterator",
+        "qualified_name": "HalfedgeDS::Halfedge_iterator",
+        "brief": "iterator over all halfedges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "175",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_iterator",
+        "qualified_name": "HalfedgeDS::Face_iterator",
+        "brief": "iterator over all faces.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "180",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handles",
+        "qualified_name": "HalfedgeDS::Vertex_handles",
+        "brief": "range type for iterating over the vertices, with a nested type iterator that has as value type Vertex_handle",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "186",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handles",
+        "qualified_name": "HalfedgeDS::Halfedge_handles",
+        "brief": "range type for iterating over the halfedges, with a nested type iterator that has as value type Halfedge_handle",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "192",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handles",
+        "qualified_name": "HalfedgeDS::Face_handles",
+        "brief": "range type for iterating over the faces, with a nested type iterator that has as value type Face_handle",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "198",
+        "section": "Handles and Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_halfedge",
+        "qualified_name": "HalfedgeDS::Supports_vertex_halfedge",
+        "brief": "Vertex::halfedge() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "231",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_prev",
+        "qualified_name": "HalfedgeDS::Supports_halfedge_prev",
+        "brief": "Halfedge::prev() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "236",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_vertex",
+        "qualified_name": "HalfedgeDS::Supports_halfedge_vertex",
+        "brief": "Halfedge::vertex() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "241",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_face",
+        "qualified_name": "HalfedgeDS::Supports_halfedge_face",
+        "brief": "Halfedge::face() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "246",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_face_halfedge",
+        "qualified_name": "HalfedgeDS::Supports_face_halfedge",
+        "brief": "Face::halfedge() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_removal",
+        "qualified_name": "HalfedgeDS::Supports_removal",
+        "brief": "removal of individual elements.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "256",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vertex_handle",
+        "qualified_name": "HalfedgeDS::vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Vertex_base *v)",
+        "params": [
+          {
+            "type": "Vertex_base *",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "297",
+        "section": "Static Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_handle",
+        "qualified_name": "HalfedgeDS::vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "(const Vertex_base *v)",
+        "params": [
+          {
+            "type": "const Vertex_base *",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "302",
+        "section": "Static Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge_handle",
+        "qualified_name": "HalfedgeDS::halfedge_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_base *h)",
+        "params": [
+          {
+            "type": "Halfedge_base *",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "307",
+        "section": "Static Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge_handle",
+        "qualified_name": "HalfedgeDS::halfedge_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(const Halfedge_base *h)",
+        "params": [
+          {
+            "type": "const Halfedge_base *",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "312",
+        "section": "Static Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "face_handle",
+        "qualified_name": "HalfedgeDS::face_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "(Face_base *f)",
+        "params": [
+          {
+            "type": "Face_base *",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "317",
+        "section": "Static Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "face_handle",
+        "qualified_name": "HalfedgeDS::face_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_const_handle",
+        "argsstring": "(const Face_items *f)",
+        "params": [
+          {
+            "type": "const Face_items *",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "322",
+        "section": "Static Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS",
+        "qualified_name": "HalfedgeDS::HalfedgeDS",
+        "brief": "empty halfedge data structure.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "332",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS",
+        "qualified_name": "HalfedgeDS::HalfedgeDS",
+        "brief": "storage reserved for v vertices, h halfedges, and f faces.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_type v, size_type h, size_type f)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "337",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "HalfedgeDS",
+        "qualified_name": "HalfedgeDS::HalfedgeDS",
+        "brief": "copy constructor.",
+        "detailed": "hds2 contains no dangling handles.",
+        "return_type": "",
+        "argsstring": "(const HalfedgeDS< Traits, Items, Alloc > &hds2)",
+        "params": [
+          {
+            "type": "const HalfedgeDS < Traits, Items , Alloc > &",
+            "name": "hds2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "342",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "HalfedgeDS::operator=",
+        "brief": "assignment operator.",
+        "detailed": "hds2 contains no dangling handles.",
+        "return_type": "HalfedgeDS < Traits, Items , Alloc > &",
+        "argsstring": "(const HalfedgeDS< Traits, Items, Alloc > &hds2)",
+        "params": [
+          {
+            "type": "const HalfedgeDS < Traits, Items , Alloc > &",
+            "name": "hds2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "348",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "reserve",
+        "qualified_name": "HalfedgeDS::reserve",
+        "brief": "reserves storage for v vertices, h halfedges, and f faces.",
+        "detailed": "If all capacities are already greater or equal than the requested sizes nothing happens. Otherwise, the halfedge data structure will be resized and all handles, iterators and circulators are invalid. If resizing is necessary the halfedge data structure contains no dangling handles.",
+        "return_type": "void",
+        "argsstring": "(size_type v, size_type h, size_type f)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "358",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_vertices",
+        "qualified_name": "HalfedgeDS::size_of_vertices",
+        "brief": "number of vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "368",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_halfedges",
+        "qualified_name": "HalfedgeDS::size_of_halfedges",
+        "brief": "number of halfedges.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "373",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_faces",
+        "qualified_name": "HalfedgeDS::size_of_faces",
+        "brief": "number of faces.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "378",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "capacity_of_vertices",
+        "qualified_name": "HalfedgeDS::capacity_of_vertices",
+        "brief": "space reserved for vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "383",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "capacity_of_halfedges",
+        "qualified_name": "HalfedgeDS::capacity_of_halfedges",
+        "brief": "space reserved for halfedges.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "388",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "capacity_of_faces",
+        "qualified_name": "HalfedgeDS::capacity_of_faces",
+        "brief": "space reserved for faces.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "393",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bytes",
+        "qualified_name": "HalfedgeDS::bytes",
+        "brief": "bytes used for the halfedge data structure.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "398",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bytes_reserved",
+        "qualified_name": "HalfedgeDS::bytes_reserved",
+        "brief": "bytes reserved for the halfedge data structure.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "403",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_allocator",
+        "qualified_name": "HalfedgeDS::get_allocator",
+        "brief": "allocator object.",
+        "detailed": "",
+        "return_type": "allocator_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "408",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "HalfedgeDS::vertices_begin",
+        "brief": "iterator over all vertices.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "413",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "HalfedgeDS::vertices_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "418",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_handles",
+        "qualified_name": "HalfedgeDS::vertex_handles",
+        "brief": "returns a range of handles over the vertices.",
+        "detailed": "The value type of Vertex_handles::iterator is Vertex_handle .",
+        "return_type": "Vertex_handles",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "424",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_begin",
+        "qualified_name": "HalfedgeDS::halfedges_begin",
+        "brief": "iterator over all halfedges",
+        "detailed": "",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "429",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_end",
+        "qualified_name": "HalfedgeDS::halfedges_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "434",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge_handles",
+        "qualified_name": "HalfedgeDS::halfedge_handles",
+        "brief": "returns a range of handles over the halfedges.",
+        "detailed": "The value type of Halfedge_handles::iterator is Halfedge_handle .",
+        "return_type": "Halfedge_handles",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "440",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "faces_begin",
+        "qualified_name": "HalfedgeDS::faces_begin",
+        "brief": "iterator over all faces.",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "445",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "faces_end",
+        "qualified_name": "HalfedgeDS::faces_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "450",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "face_handles",
+        "qualified_name": "HalfedgeDS::face_handles",
+        "brief": "returns a range of handles over the faces.",
+        "detailed": "The value type of Face_handles::iterator is Face_handle .",
+        "return_type": "Face_handles",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "456",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_push_back",
+        "qualified_name": "HalfedgeDS::vertices_push_back",
+        "brief": "appends a copy of v to the halfedge data structure.",
+        "detailed": "Returns a handle of the new vertex.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Vertex &v)",
+        "params": [
+          {
+            "type": "const Vertex &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "470",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "edges_push_back",
+        "qualified_name": "HalfedgeDS::edges_push_back",
+        "brief": "appends a copy of h and a copy of g to the halfedge data structure and makes them opposite to each other.",
+        "detailed": "Returns a handle of the copy of h .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(const Halfedge &h, const Halfedge &g)",
+        "params": [
+          {
+            "type": "const Halfedge &",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Halfedge &",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "476",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "edges_push_back",
+        "qualified_name": "HalfedgeDS::edges_push_back",
+        "brief": "appends a copy of h and a copy of h->opposite() to the halfedge data structure and makes them opposite to each other.",
+        "detailed": "Returns a handle of the copy of h . h->opposite() denotes a halfedge.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(const Halfedge &h)",
+        "params": [
+          {
+            "type": "const Halfedge &",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "484",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "faces_push_back",
+        "qualified_name": "HalfedgeDS::faces_push_back",
+        "brief": "appends a copy of f to the halfedge data structure.",
+        "detailed": "Returns a handle of the new face.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Face &f)",
+        "params": [
+          {
+            "type": "const Face &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "489",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_pop_front",
+        "qualified_name": "HalfedgeDS::vertices_pop_front",
+        "brief": "removes the first vertex if vertices are supported and Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "506",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_pop_back",
+        "qualified_name": "HalfedgeDS::vertices_pop_back",
+        "brief": "removes the last vertex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "511",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_erase",
+        "qualified_name": "HalfedgeDS::vertices_erase",
+        "brief": "removes the vertex v if vertices are supported and Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "517",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_erase",
+        "qualified_name": "HalfedgeDS::vertices_erase",
+        "brief": "removes the range of vertices [first,last) if vertices are supported and Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle first, Vertex_handle last)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "523",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "edges_pop_front",
+        "qualified_name": "HalfedgeDS::edges_pop_front",
+        "brief": "removes the first two halfedges if Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "529",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "edges_pop_back",
+        "qualified_name": "HalfedgeDS::edges_pop_back",
+        "brief": "removes the last two halfedges.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "534",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "edges_erase",
+        "qualified_name": "HalfedgeDS::edges_erase",
+        "brief": "removes the pair of halfedges h and h->opposite() if Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "540",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "edges_erase",
+        "qualified_name": "HalfedgeDS::edges_erase",
+        "brief": "removes the range of edges [first},last) if Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle first, Halfedge_handle last)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "546",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "faces_pop_front",
+        "qualified_name": "HalfedgeDS::faces_pop_front",
+        "brief": "removes the first face if faces are supported and Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "553",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "faces_pop_back",
+        "qualified_name": "HalfedgeDS::faces_pop_back",
+        "brief": "removes the last face.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "559",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "faces_erase",
+        "qualified_name": "HalfedgeDS::faces_erase",
+        "brief": "removes the face f if faces are supported and Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "566",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "faces_erase",
+        "qualified_name": "HalfedgeDS::faces_erase",
+        "brief": "removes the range of faces [first,last) if faces are supported and Supports_removal $ \\equiv$ CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_handle first, Face_handle last)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "573",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_clear",
+        "qualified_name": "HalfedgeDS::vertices_clear",
+        "brief": "removes all vertices.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "578",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "edges_clear",
+        "qualified_name": "HalfedgeDS::edges_clear",
+        "brief": "removes all halfedges.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "583",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "faces_clear",
+        "qualified_name": "HalfedgeDS::faces_clear",
+        "brief": "removes all faces.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "588",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "HalfedgeDS::clear",
+        "brief": "removes all elements.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "593",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "normalize_border",
+        "qualified_name": "HalfedgeDS::normalize_border",
+        "brief": "sorts halfedges such that the non-border edges precede the border edges.",
+        "detailed": "For each border edge that is incident to a face, the halfedge iterator will reference the halfedge incident to the face right before the halfedge incident to the open region.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "631",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_border_halfedges",
+        "qualified_name": "HalfedgeDS::size_of_border_halfedges",
+        "brief": "number of border halfedges.",
+        "detailed": "An edge with no incident face counts as two border halfedges. normalize_border() has been called and no halfedge insertion or removal and no change in border status of the halfedges have occurred since then.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "638",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_border_edges",
+        "qualified_name": "HalfedgeDS::size_of_border_edges",
+        "brief": "number of border edges.",
+        "detailed": "If size_of_border_edges() is equal to size_of_border_halfedges() all border edges are incident to a face on one side and to an open region on the other side. normalize_border() has been called and no halfedge insertion or removal and no change in border status of the halfedges have occurred since then.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "646",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "border_halfedges_begin",
+        "qualified_name": "HalfedgeDS::border_halfedges_begin",
+        "brief": "halfedge iterator starting with the border edges.",
+        "detailed": "The range [ halfedges_begin() , border_halfedges_begin() ) denotes all non-border edges. The range [ border_halfedges_begin() , halfedges_end() ) denotes all border edges. normalize_border() has been called and no halfedge insertion or removal and no change in border status of the halfedges have occurred since then.",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDS.h",
+        "line": "656",
+        "section": "Operations with Border Halfedges"
+      }
+    ]
+  },
+  "HalfedgeDSFace": {
+    "kind": "class",
+    "name": "HalfedgeDSFace",
+    "brief": "The concept HalfedgeDSFace defines the requirements for the local Face type in the HalfedgeDS concept. It is also required in the Face_wrapper<Refs,Traits> member class template of an items class, see the HalfedgeDSItems concept.",
+    "detailed": "A face optionally stores a reference to an incident halfedge that points to the face. A type tag indicates whether the related member functions are supported. Figure figureHalfedgeDSOptionalMethods depicts the relationship between a halfedge and its incident halfedges, vertices, and faces. For the protection of the integrity of the data structure classes such as CGAL::Polyhedron_3 are allowed to redefine the modifying member functions to be private. In order to make them accessible for the halfedge data structure they must be derived from a base class Base where the modifying member functions are still public. (The protection can be bypassed by the user, but not by accident.) Refines CopyConstructible DefaultConstructible Has models CGAL::HalfedgeDS_face_base <Refs> CGAL::HalfedgeDS_face_min_base <Refs> HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems HalfedgeDSVertex HalfedgeDSHalfedge",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "HalfedgeDS",
+        "qualified_name": "HalfedgeDSFace::HalfedgeDS",
+        "brief": "instantiated HalfedgeDS ( $ \\equiv$ Refs ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "HalfedgeDSFace::Base",
+        "brief": "base class that allows modifications.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "HalfedgeDSFace::Vertex",
+        "brief": "model of HalfedgeDSVertex .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "HalfedgeDSFace::Halfedge",
+        "brief": "model of HalfedgeDSHalfedge .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "HalfedgeDSFace::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "HalfedgeDSFace::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "HalfedgeDSFace::Face_handle",
+        "brief": "handle to face.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "HalfedgeDSFace::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "HalfedgeDSFace::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_const_handle",
+        "qualified_name": "HalfedgeDSFace::Face_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "92",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_face_halfedge",
+        "qualified_name": "HalfedgeDSFace::Supports_face_halfedge",
+        "brief": "CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "98",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Face",
+        "qualified_name": "HalfedgeDSFace::Face",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "108",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "HalfedgeDSFace::halfedge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "118",
+        "section": "Operations available if Supports_face_halfedge == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "HalfedgeDSFace::halfedge",
+        "brief": "incident halfedge that points to the face.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "124",
+        "section": "Operations available if Supports_face_halfedge == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_halfedge",
+        "qualified_name": "HalfedgeDSFace::set_halfedge",
+        "brief": "sets incident halfedge to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSFace.h",
+        "line": "130",
+        "section": "Operations available if Supports_face_halfedge == CGAL::Tag_true"
+      }
+    ]
+  },
+  "HalfedgeDSHalfedge": {
+    "kind": "class",
+    "name": "HalfedgeDSHalfedge",
+    "brief": "The concept HalfedgeDSHalfedge defines the requirements for the local Halfedge type in the HalfedgeDS concept. It is also required in the Halfedge_wrapper<Refs,Traits> member class template of an items class, see the HalfedgeDSItems concept.",
+    "detailed": "A halfedge is an oriented edge between two vertices. It is always paired with a halfedge pointing in the opposite direction. The opposite() member function returns this halfedge of opposite orientation. The next() member function points to the successor halfedge along the face - or if the halfedge is a border halfedge - along the open region. A halfedge optionally stores a reference to the previous halfedge along the face, a reference to an incident vertex, and a reference to an incident face. Type tags indicate whether the related member functions are supported. Figure figureHalfedgeDSOptionalMethods depicts the relationship between a halfedge and its incident halfedges, vertices, and faces. The three classes Vertex, Halfedge, and Face of the halfedge data structure. Member functions with shaded background are mandatory. The others are optionally supported. The three classes Vertex, Halfedge, and Face of the halfedge data structure. Member functions with shaded background are mandatory. The others are optionally supported. For the protection of the integrity of the data structure classes such as CGAL::Polyhedron_3 are allowed to redefine the modifying member functions to be private. In order to make them accessible for the halfedge data structure they must be derived from a base class Base where the modifying member functions are still public. Even more protection is provided for the set_opposite() member function. The base class Base_base provides access to it. (The protection could be bypassed also by an user, but not by accident.) Has models CGAL::HalfedgeDS_halfedge_base CGAL::HalfedgeDS_halfedge_min_base HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems HalfedgeDSVertex HalfedgeDSFace",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "HalfedgeDS",
+        "qualified_name": "HalfedgeDSHalfedge::HalfedgeDS",
+        "brief": "instantiated HalfedgeDS ( $ \\equiv$ Refs ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "HalfedgeDSHalfedge::Base",
+        "brief": "base class that allows modifications.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base_base",
+        "qualified_name": "HalfedgeDSHalfedge::Base_base",
+        "brief": "base class to access set_opposite() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "HalfedgeDSHalfedge::Vertex",
+        "brief": "model of HalfedgeDSVertex .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "HalfedgeDSHalfedge::Face",
+        "brief": "model of HalfedgeDSFace .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "HalfedgeDSHalfedge::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "HalfedgeDSHalfedge::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "HalfedgeDSHalfedge::Face_handle",
+        "brief": "handle to face.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "92",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "HalfedgeDSHalfedge::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "HalfedgeDSHalfedge::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "102",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_const_handle",
+        "qualified_name": "HalfedgeDSHalfedge::Face_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "107",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_prev",
+        "qualified_name": "HalfedgeDSHalfedge::Supports_halfedge_prev",
+        "brief": "CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "112",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_vertex",
+        "qualified_name": "HalfedgeDSHalfedge::Supports_halfedge_vertex",
+        "brief": "CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "117",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_face",
+        "qualified_name": "HalfedgeDSHalfedge::Supports_halfedge_face",
+        "brief": "CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "122",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Halfedge",
+        "qualified_name": "HalfedgeDSHalfedge::Halfedge",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "132",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "HalfedgeDSHalfedge::opposite",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "142",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "HalfedgeDSHalfedge::opposite",
+        "brief": "the opposite halfedge.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "147",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_opposite",
+        "qualified_name": "HalfedgeDSHalfedge::set_opposite",
+        "brief": "sets opposite halfedge to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "153",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "HalfedgeDSHalfedge::next",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "158",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "HalfedgeDSHalfedge::next",
+        "brief": "the next halfedge around the face.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "163",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_next",
+        "qualified_name": "HalfedgeDSHalfedge::set_next",
+        "brief": "sets next halfedge to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "169",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_border",
+        "qualified_name": "HalfedgeDSHalfedge::is_border",
+        "brief": "is true if the halfedge is a border halfedge.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "174",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "prev",
+        "qualified_name": "HalfedgeDSHalfedge::prev",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "184",
+        "section": "Operations available if Supports_halfedge_prev == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "prev",
+        "qualified_name": "HalfedgeDSHalfedge::prev",
+        "brief": "the previous halfedge around the face.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "189",
+        "section": "Operations available if Supports_halfedge_prev == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_prev",
+        "qualified_name": "HalfedgeDSHalfedge::set_prev",
+        "brief": "sets prev halfedge to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "194",
+        "section": "Operations available if Supports_halfedge_prev == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "HalfedgeDSHalfedge::vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "204",
+        "section": "Operations available if Supports_halfedge_vertex == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "HalfedgeDSHalfedge::vertex",
+        "brief": "the incident vertex of h .",
+        "detailed": "",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "209",
+        "section": "Operations available if Supports_halfedge_vertex == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex",
+        "qualified_name": "HalfedgeDSHalfedge::set_vertex",
+        "brief": "sets incident vertex to v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "214",
+        "section": "Operations available if Supports_halfedge_vertex == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "HalfedgeDSHalfedge::face",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "224",
+        "section": "Operations available if Supports_halfedge_face == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "HalfedgeDSHalfedge::face",
+        "brief": "the incident face of the halfedge.",
+        "detailed": "If the halfedge is a border halfedge the result is default construction of the handle.",
+        "return_type": "Face_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "230",
+        "section": "Operations available if Supports_halfedge_face == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_face",
+        "qualified_name": "HalfedgeDSHalfedge::set_face",
+        "brief": "sets incident face to f .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSHalfedge.h",
+        "line": "236",
+        "section": "Operations available if Supports_halfedge_face == CGAL::Tag_true"
+      }
+    ]
+  },
+  "HalfedgeDSItems": {
+    "kind": "class",
+    "name": "HalfedgeDSItems",
+    "brief": "The concept HalfedgeDSItems wraps the three item types - vertex, halfedge, and face - for a halfedge data structure. A HalfedgeDSItems contains three member class templates named Vertex_wrapper , Halfedge_wrapper , and Face_wrapper , each with two template parameters, Refs and Traits . Refs requires an instantiated halfedge data structure HalfedgeDS as argument, Traits is a geometric traits class supplied by the class that uses the halfedge data structure as internal representation. Traits is not used by the halfedge data structure itself. These three member class templates provide a local type named Vertex , Halfedge , and Face respectively. The requirements on these types are described on the manual pages of the concepts HalfedgeDSVertex , HalfedgeDSHalfedge , and HalfedgeDSFace respectively.",
+    "detailed": "Has models CGAL::HalfedgeDS_min_items CGAL::HalfedgeDS_items_2 CGAL::Polyhedron_items_3 HalfedgeDS <Traits,Items,Alloc> HalfedgeDSVertex HalfedgeDSHalfedge HalfedgeDSFace PolyhedronItems_3 CGAL::HalfedgeDS_vertex_base <Refs> CGAL::HalfedgeDS_halfedge_base <Refs> CGAL::HalfedgeDS_face_base <Refs> Example The following example shows the canonical implementation of the CGAL::HalfedgeDS_min_items class. It uses the base classes for the item types that are provided in the library. struct HalfedgeDS_min_items { template < class Refs, class Traits> struct Vertex_wrapper { typedef CGAL::HalfedgeDS_vertex_min_base< Refs> Vertex; }; template < class Refs, class Traits> struct Halfedge_wrapper { typedef CGAL::HalfedgeDS_halfedge_min_base< Refs> Halfedge; }; template < class Refs, class Traits> struct Face_wrapper { typedef CGAL::HalfedgeDS_face_min_base< Refs> Face; }; }; See CGAL::HalfedgeDS_items_2 for an example implementation.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "HalfedgeDSItems::Vertex",
+        "brief": "model of HalfedgeDSVertex .",
+        "detailed": "",
+        "return_type": "Vertex_wrapper< Refs, Traits >::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSItems.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "HalfedgeDSItems::Halfedge",
+        "brief": "model of HalfedgeDSHalfedge .",
+        "detailed": "",
+        "return_type": "Halfedge_wrapper< Refs, Traits >::Halfedge",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSItems.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "HalfedgeDSItems::Face",
+        "brief": "model of HalfedgeDSFace .",
+        "detailed": "",
+        "return_type": "Face_wrapper< Refs, Traits >::Face",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSItems.h",
+        "line": "82",
+        "section": "Types"
+      }
+    ]
+  },
+  "HalfedgeDSVertex": {
+    "kind": "class",
+    "name": "HalfedgeDSVertex",
+    "brief": "The concept HalfedgeDSVertex defines the requirements for the local Vertex type in the HalfedgeDS concept. It is also required in the Vertex_wrapper<Refs,Traits> member class template of an items class, see the HalfedgeDSItems concept.",
+    "detailed": "A vertex optionally stores a reference to an incident halfedge that points to the vertex. A type tag indicates whether the related member functions are supported. Figure figureHalfedgeDSOptionalMethods depicts the relationship between a halfedge and its incident halfedges, vertices, and faces. For the protection of the integrity of the data structure classes such as CGAL::Polyhedron_3 are allowed to redefine the modifying member functions to be private. In order to make them accessible for the halfedge data structure they must be derived from a base class Base where the modifying member functions are still public. (The protection could be bypassed by an user, but not by accident.) Refines CopyConstructible DefaultConstructible Has models CGAL::HalfedgeDS_vertex_base <Refs> CGAL::HalfedgeDS_vertex_min_base <Refs> HalfedgeDS <Traits,Items,Alloc> HalfedgeDSItems HalfedgeDSHalfedge HalfedgeDSFace",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "HalfedgeDS",
+        "qualified_name": "HalfedgeDSVertex::HalfedgeDS",
+        "brief": "instantiated HalfedgeDS ( $ \\equiv$ Refs ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "HalfedgeDSVertex::Base",
+        "brief": "base class that allows modifications.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "HalfedgeDSVertex::Halfedge",
+        "brief": "model of HalfedgeDSHalfedge .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "HalfedgeDSVertex::Face",
+        "brief": "model of HalfedgeDSFace .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "HalfedgeDSVertex::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "HalfedgeDSVertex::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "HalfedgeDSVertex::Face_handle",
+        "brief": "handle to face.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "HalfedgeDSVertex::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "HalfedgeDSVertex::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_const_handle",
+        "qualified_name": "HalfedgeDSVertex::Face_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "92",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_halfedge",
+        "qualified_name": "HalfedgeDSVertex::Supports_vertex_halfedge",
+        "brief": "CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "98",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Vertex",
+        "qualified_name": "HalfedgeDSVertex::Vertex",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "108",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "HalfedgeDSVertex::halfedge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "118",
+        "section": "Operations available if Supports_vertex_halfedge == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "HalfedgeDSVertex::halfedge",
+        "brief": "incident halfedge that points to the vertex.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "123",
+        "section": "Operations available if Supports_vertex_halfedge == CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_halfedge",
+        "qualified_name": "HalfedgeDSVertex::set_halfedge",
+        "brief": "sets incident halfedge to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HalfedgeDSVertex.h",
+        "line": "128",
+        "section": "Operations available if Supports_vertex_halfedge == CGAL::Tag_true"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,485 @@
+{
+  "CGAL::Polygon_mesh_processing::Default_orientation_visitor": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor",
+    "brief": "Default visitor model of PMPPolygonSoupOrientationVisitor .",
+    "detailed": "All of its functions have an empty body. This class can be used as a base class if only some of the functions of the concept will be overridden.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "non_manifold_edge",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::non_manifold_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t, std::size_t, std::size_t)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "non_manifold_vertex",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::non_manifold_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t, std::size_t)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "duplicated_vertex",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::duplicated_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t, std::size_t)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vertex_id_in_polygon_replaced",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::vertex_id_in_polygon_replaced",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t, std::size_t, std::size_t)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "polygon_orientation_reversed",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::polygon_orientation_reversed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "link_connected_polygons",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::link_connected_polygons",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t, const std::vector< std::size_t > &)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::size_t > &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+        "line": "56",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor",
+    "brief": "Default hole filling visitor model of PMPHolefillingVisitor .",
+    "detailed": "All of its functions have an empty body. This class can be used as a base class if only some of the functions of the concept require to be overridden.",
+    "members": []
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Polygon_mesh_processing": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "reverse_orientation",
+        "qualified_name": "CGAL::Polygon_mesh_processing::reverse_orientation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(typename boost::graph_traits< PolygonMesh >::halfedge_descriptor first, PolygonMesh &pmesh)",
+        "params": [
+          {
+            "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orientation.h",
+        "line": "238",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "reverse_face_orientations_of_mesh_with_polylines",
+        "qualified_name": "CGAL::Polygon_mesh_processing::reverse_face_orientations_of_mesh_with_polylines",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(PolygonMesh &pmesh)",
+        "params": [
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/orientation.h",
+        "line": "300",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_a_border_edge",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_a_border_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+        "argsstring": "(typename boost::graph_traits< TriangleMesh >::edge_descriptor ed, TriangleMesh &tm, EdgeSet &input_range, EdgeSet &edge_set, FaceSet &face_set)",
+        "params": [
+          {
+            "type": "typename boost::graph_traits< TriangleMesh >::edge_descriptor",
+            "name": "ed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeSet &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeSet &",
+            "name": "edge_set",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceSet &",
+            "name": "face_set",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "1169",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_a_border_edge",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_a_border_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+        "argsstring": "(typename boost::graph_traits< TriangleMesh >::edge_descriptor ed, TriangleMesh &tm)",
+        "params": [
+          {
+            "type": "typename boost::graph_traits< TriangleMesh >::edge_descriptor",
+            "name": "ed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "1409",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_degenerate_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const EdgeRange &edge_range, TriangleMesh &tmesh, FaceSet &face_set, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const EdgeRange &",
+            "name": "edge_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceSet &",
+            "name": "face_set",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "1459",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_degenerate_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const EdgeRange &edge_range, TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const EdgeRange &",
+            "name": "edge_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "1957",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_degenerate_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "1966",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_degenerate_faces",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const FaceRange &face_range, TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const FaceRange &",
+            "name": "face_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "2018",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_degenerate_faces",
+        "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+        "line": "2834",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Hole_filling": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing::Hole_filling",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Polygon_mesh_processing::IO": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing::IO",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

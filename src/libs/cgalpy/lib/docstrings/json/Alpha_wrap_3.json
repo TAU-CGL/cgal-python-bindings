@@ -1,0 +1,457 @@
+{
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, const double offset, OutputMesh &alpha_wrap, const NamedParameters &in_np)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "offset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "in_np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, const double offset, OutputMesh &alpha_wrap)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "offset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "132",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, OutputMesh &alpha_wrap, const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &in_np, const CGAL::Named_function_parameters< T_O, Tag_O, Base_O > &out_np, std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *=nullptr)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &",
+            "name": "in_np",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Named_function_parameters< T_O, Tag_O, Base_O > &",
+            "name": "out_np",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *",
+            "name": "",
+            "default": "nullptr",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "145",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, OutputMesh &alpha_wrap, const NamedParameters &in_np, std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *=nullptr)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "in_np",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *",
+            "name": "",
+            "default": "nullptr",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "158",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, OutputMesh &alpha_wrap, std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *=nullptr)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *",
+            "name": "",
+            "default": "nullptr",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "170",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, const double offset, OutputMesh &alpha_wrap, const NamedParameters &in_np)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "offset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "in_np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "366",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, const double offset, OutputMesh &alpha_wrap)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "offset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "376",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, OutputMesh &alpha_wrap, const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &in_np, const CGAL::Named_function_parameters< T_O, Tag_O, Base_O > &out_np)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &",
+            "name": "in_np",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Named_function_parameters< T_O, Tag_O, Base_O > &",
+            "name": "out_np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "388",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, OutputMesh &alpha_wrap, const NamedParameters &in_np)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "in_np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "398",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_3",
+        "qualified_name": "CGAL::alpha_wrap_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, OutputMesh &alpha_wrap)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputMesh &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_3.h",
+        "line": "407",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

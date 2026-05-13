@@ -1,0 +1,866 @@
+{
+  "CGAL::Point_set_with_structure": {
+    "kind": "class",
+    "name": "CGAL::Point_set_with_structure",
+    "brief": "A 3D point set with structure information based on a set of detected planes.",
+    "detailed": "Given a point set in 3D space along with a set of fitted planes, this class stores a simplified and structured version of the point set. Each output point is assigned to one, two or more primitives (depending whether it belongs to a planar section, an edge or a if it is a vertex). The implementation follow [6] . Kernel a model of EfficientRANSACTraits that must provide in addition a function Intersect_3 intersection_3_object() const and a functor Intersect_3 with: std::optional< std::variant< Traits::Plane_3, Traits::Line_3 > > operator()(typename Traits::Plane_3, typename Traits::Plane_3) std::optional< std::variant< Traits::Line_3, Traits::Point_3 > > operator()(typename Traits::Line_3, typename Traits::Plane_3)",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Point_status",
+        "qualified_name": "CGAL::Point_set_with_structure::Point_status",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "75",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::Point_set_with_structure::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_set_with_structure < Kernel >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Point_set_with_structure::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment",
+        "qualified_name": "CGAL::Point_set_with_structure::Segment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Line",
+        "qualified_name": "CGAL::Point_set_with_structure::Line",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Line_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "72",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Point_set_with_structure::Point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "73",
+        "section": ""
+      },
+      {
+        "kind": "enum",
+        "name": "Coherence_type",
+        "qualified_name": "CGAL::Point_set_with_structure::Coherence_type",
+        "brief": "Tag classifying the coherence of a triplet of points with respect to an inferred surface.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "86",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Point_set_with_structure::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Point_set_with_structure::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane",
+        "qualified_name": "CGAL::Point_set_with_structure::Plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "82",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_points",
+        "qualified_name": "CGAL::Point_set_with_structure::m_points",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Point >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "142",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_normals",
+        "qualified_name": "CGAL::Point_set_with_structure::m_normals",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "143",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_indices",
+        "qualified_name": "CGAL::Point_set_with_structure::m_indices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "144",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_status",
+        "qualified_name": "CGAL::Point_set_with_structure::m_status",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Point_status >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "145",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_planes",
+        "qualified_name": "CGAL::Point_set_with_structure::m_planes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Plane >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_indices_of_assigned_points",
+        "qualified_name": "CGAL::Point_set_with_structure::m_indices_of_assigned_points",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::vector< std::size_t > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "148",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_edges",
+        "qualified_name": "CGAL::Point_set_with_structure::m_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Edge >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "149",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_corners",
+        "qualified_name": "CGAL::Point_set_with_structure::m_corners",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Corner >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "150",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Point_set_with_structure",
+        "qualified_name": "CGAL::Point_set_with_structure::Point_set_with_structure",
+        "brief": "Constructs a structured point set based on the input points and the associated shape detection object.",
+        "detailed": "PointRange is a model of ConstRange . The value type of its iterator is the key type of the named parameter point_map . PlaneRange is a model of ConstRange . The value type of its iterator is the key type of the named parameter plane_map . points input point range planes input plane range. epsilon size parameter. np a sequence of Named Parameters among the ones listed below: Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the point set points Type: a model of ReadablePropertyMap whose key type is the value type of the iterator of PointRange and whose value type is geom_traits::Point_3 Default: CGAL::Identity_property_map<geom_traits::Point_3> <button class=\"collapsible\"> normal_map </button> a property map associating normals to the elements of the point set points Type: a model of ReadablePropertyMap whose key type is the value type of the iterator of PointRange and whose value type is geom_traits::Vector_3 <button class=\"collapsible\"> plane_index_map </button> a property map associating the index of a point in the input range to the index of plane ( -1 if the point is not assigned to a plane) Type: a class model of ReadablePropertyMap with std::size_t as key type and int as value type Default: There is no default, this parameters is mandatory. <button class=\"collapsible\"> plane_map </button> a property map containing the planes associated to the elements of the plane range planes Type: a class model of ReadablePropertyMap with PlaneRange::iterator::value_type as key type and geom_traits::Plane_3 as value type Default: CGAL::Identity_property_map<Kernel::Plane_3> <button class=\"collapsible\"> attraction_factor </button> multiple of a tolerance epsilon used to connect simplices Type: floating scalar value Default: 3",
+        "return_type": "",
+        "argsstring": "(const PointRange &points, const PlaneRange &planes, double epsilon, const NamedParameters &np)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PlaneRange &",
+            "name": "planes",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "epsilon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "207",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "CGAL::Point_set_with_structure::size",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "280",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Point_set_with_structure::operator[]",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Point , Vector >",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "281",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Point_set_with_structure::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "283",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normal",
+        "qualified_name": "CGAL::Point_set_with_structure::normal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Vector &",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "284",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "adjacency",
+        "qualified_name": "CGAL::Point_set_with_structure::adjacency",
+        "brief": "Returns all Plane_shape objects that are adjacent to the point with index i .",
+        "detailed": "Points not adjacent to any plane are free-form points, points adjacent to 1 plane are planar points, points adjacent to 2 planes are edge points and points adjacent to 3 or more planes are vertices.",
+        "return_type": "void",
+        "argsstring": "(std::size_t i, OutputIterator output) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "output",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "298",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "facet_coherence",
+        "qualified_name": "CGAL::Point_set_with_structure::facet_coherence",
+        "brief": "Computes the coherence of a facet between the 3 points indexed by f with respect to the underlying structure.",
+        "detailed": "",
+        "return_type": "Coherence_type",
+        "argsstring": "(const std::array< std::size_t, 3 > &f) const",
+        "params": [
+          {
+            "type": "const std::array< std::size_t, 3 > &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "320",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Point_set_with_structure::Corner": {
+    "kind": "struct",
+    "name": "CGAL::Point_set_with_structure::Corner",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "planes",
+        "qualified_name": "CGAL::Point_set_with_structure::Corner::planes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "126",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "edges",
+        "qualified_name": "CGAL::Point_set_with_structure::Corner::edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "127",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "directions",
+        "qualified_name": "CGAL::Point_set_with_structure::Corner::directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "128",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "support",
+        "qualified_name": "CGAL::Point_set_with_structure::Corner::support",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "129",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "active",
+        "qualified_name": "CGAL::Point_set_with_structure::Corner::active",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "130",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Corner",
+        "qualified_name": "CGAL::Point_set_with_structure::Corner::Corner",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(std::size_t p1, std::size_t p2, std::size_t p3, std::size_t e1, std::size_t e2, std::size_t e3)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "e3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "132",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Point_set_with_structure::Edge": {
+    "kind": "struct",
+    "name": "CGAL::Point_set_with_structure::Edge",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "planes",
+        "qualified_name": "CGAL::Point_set_with_structure::Edge::planes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< std::size_t, 2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "113",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "indices",
+        "qualified_name": "CGAL::Point_set_with_structure::Edge::indices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "114",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "support",
+        "qualified_name": "CGAL::Point_set_with_structure::Edge::support",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Line",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "115",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "active",
+        "qualified_name": "CGAL::Point_set_with_structure::Edge::active",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "116",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Edge",
+        "qualified_name": "CGAL::Point_set_with_structure::Edge::Edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(std::size_t a, std::size_t b)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "118",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Point_set_with_structure::My_point_property_map": {
+    "kind": "class",
+    "name": "CGAL::Point_set_with_structure::My_point_property_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "100",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "101",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "key_type",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::key_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "category",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::lvalue_property_map_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "103",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "points",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::points",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::vector< Point > &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/structure_point_set.h",
+        "line": "98",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "My_point_property_map",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::My_point_property_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const std::vector< Point > &pts)",
+        "params": [
+          {
+            "type": "const std::vector< Point > &",
+            "name": "pts",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::operator[]",
+        "brief": "",
+        "detailed": "",
+        "return_type": "reference",
+        "argsstring": "(key_type k) const",
+        "params": [
+          {
+            "type": "key_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "107",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "get",
+        "qualified_name": "CGAL::Point_set_with_structure::My_point_property_map::get",
+        "brief": "",
+        "detailed": "",
+        "return_type": "reference",
+        "argsstring": "(const My_point_property_map &ppmap, key_type i)",
+        "params": [
+          {
+            "type": "const My_point_property_map &",
+            "name": "ppmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "key_type",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/structure_point_set.h",
+        "line": "108",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::pointmatcher::ICP_config": {
+    "kind": "struct",
+    "name": "CGAL::pointmatcher::ICP_config",
+    "brief": "The class ICP_config is designed to handle preparing and passing configurations to the registration methods CGAL::pointmatcher::compute_registration_transformation() and CGAL::pointmatcher::register_point_sets() .",
+    "detailed": "A configuration corresponds to a component of a configuration module of thirdpartylibpointmatcher library. The name and the parameters of any configuration for the corresponding registration methods are directly passed to thirdpartylibpointmatcher library to be parsed and registered at the thirdpartylibpointmatcher side.",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "name",
+        "qualified_name": "CGAL::pointmatcher::ICP_config::name",
+        "brief": "The name of the configuration component.",
+        "detailed": "",
+        "return_type": "std::string",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/pointmatcher/compute_registration_transformation.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "params",
+        "qualified_name": "CGAL::pointmatcher::ICP_config::params",
+        "brief": "The set of (parameter name, parameter value) pairs as a map.",
+        "detailed": "",
+        "return_type": "std::map< std::string, std::string >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/pointmatcher/compute_registration_transformation.h",
+        "line": "58",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "vcm_is_on_feature_edge",
+        "qualified_name": "CGAL::vcm_is_on_feature_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::array< FT, 6 > &cov, double threshold)",
+        "params": [
+          {
+            "type": "std::array< FT, 6 > &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "threshold",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/vcm_estimate_edges.h",
+        "line": "70",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::OpenGR": {
+    "kind": "namespace",
+    "name": "CGAL::OpenGR",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Options",
+        "qualified_name": "CGAL::OpenGR::Options",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename gr::Match4pcsBase< gr::FunctorSuper4PCS, gr::Point3D< typename Kernel::FT >, gr::DummyTransformVisitor, gr::AdaptivePointFilter, gr::AdaptivePointFilter::Options >::OptionsType",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OpenGR/compute_registration_transformation.h",
+        "line": "39",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::pointmatcher": {
+    "kind": "namespace",
+    "name": "CGAL::pointmatcher",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "ICP",
+        "qualified_name": "CGAL::pointmatcher::ICP",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename PointMatcher< Scalar >::ICP",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/pointmatcher/compute_registration_transformation.h",
+        "line": "38",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

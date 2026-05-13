@@ -1,0 +1,5227 @@
+{
+  "CGAL::GetGeomTraits< NamedParameters, NP >": {
+    "kind": "class",
+    "name": "CGAL::GetGeomTraits< NamedParameters, NP >",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::GetGeomTraits< NamedParameters, NP >::type": {
+    "kind": "struct",
+    "name": "CGAL::GetGeomTraits< NamedParameters, NP >::type",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions",
+    "brief": "a struct for storing principal curvatures and directions.",
+    "detailed": "GT is the geometric traits class, model of Kernel .",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "min_curvature",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions::min_curvature",
+        "brief": "min curvature magnitude",
+        "detailed": "",
+        "return_type": "GT::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "max_curvature",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions::max_curvature",
+        "brief": "max curvature magnitude",
+        "detailed": "",
+        "return_type": "GT::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "min_direction",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions::min_direction",
+        "brief": "min curvature direction vector",
+        "detailed": "",
+        "return_type": "GT::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "max_direction",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions::max_direction",
+        "brief": "max curvature direction vector",
+        "detailed": "",
+        "return_type": "GT::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Principal_curvatures_and_directions",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions::Principal_curvatures_and_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Principal_curvatures_and_directions",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions::Principal_curvatures_and_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(typename GT::FT min_curvature, typename GT::FT max_curvature, typename GT::Vector_3 min_direction, typename GT::Vector_3 max_direction)",
+        "params": [
+          {
+            "type": "typename GT::FT",
+            "name": "min_curvature",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename GT::FT",
+            "name": "max_curvature",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename GT::Vector_3",
+            "name": "min_direction",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename GT::Vector_3",
+            "name": "max_direction",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h",
+        "line": "64",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope",
+    "brief": "This class can be used to check if a query point, segment, or triangle is inside or outside a polyhedral envelope of a set of triangles, constructed for a given $ \\epsilon $ distance tolerance.",
+    "detailed": "The polyhedral envelope is the union of prisms obtained. See Section Polyhedral Envelope Containment Check for more details. GeomTraits a geometric traits class, model of Kernel",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::Polyhedral_envelope",
+        "brief": "Default constructor, envelope is empty",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "306",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::Polyhedral_envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polyhedral_envelope< GeomTraits > &)=delete",
+        "params": [
+          {
+            "type": "const Polyhedral_envelope< GeomTraits > &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "310",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Polyhedral_envelope < GeomTraits > &",
+        "argsstring": "(const Polyhedral_envelope< GeomTraits > &)=delete",
+        "params": [
+          {
+            "type": "const Polyhedral_envelope < GeomTraits > &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "311",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Polyhedral_envelope < GeomTraits > &",
+        "argsstring": "(Polyhedral_envelope< GeomTraits > &&other) noexcept",
+        "params": [
+          {
+            "type": "Polyhedral_envelope < GeomTraits > &&",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "313",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::Polyhedral_envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Polyhedral_envelope< GeomTraits > &&other)",
+        "params": [
+          {
+            "type": "Polyhedral_envelope< GeomTraits > &&",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "329",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::Polyhedral_envelope",
+        "brief": "Constructor with a triangulated surface mesh.",
+        "detailed": "TriangleMesh a model of VertexListGraph and FaceListGraph NamedParameters a sequence of Named Parameters tmesh a triangle mesh epsilon the distance of the Minkowski sum hull np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tmesh Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in TriangleMesh . <button class=\"collapsible\"> face_epsilon_map </button> a property map associating to each face of tm an epsilon value Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and double as value type Default: Use epsilon for all faces The triangle mesh gets copied internally, that is it can be modified after having passed as argument, while the queries are performed",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, double epsilon, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "epsilon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "365",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::Polyhedral_envelope",
+        "brief": "Constructor using a subset of faces of a triangulated surface mesh.",
+        "detailed": "FaceRange a model of ConstRange with FaceRange::const_iterator being a model of InputIterator with boost::graph_traits<TriangleMesh>::face_descriptor as value type TriangleMesh a model of FaceListGraph NamedParameters a sequence of Named Parameters tmesh a triangle mesh face_range the subset of faces to be considered when computing the polyhedron envelope epsilon the distance of the Minkowski sum hull np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tmesh Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in TriangleMesh . <button class=\"collapsible\"> face_epsilon_map </button> a property map associating to each face of tm an epsilon value Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and double as value type Default: Use epsilon for all faces The triangle mesh gets copied internally, that is it can be modified after having passed as argument, while the queries are performed",
+        "return_type": "",
+        "argsstring": "(const FaceRange &face_range, const TriangleMesh &tmesh, double epsilon, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const FaceRange &",
+            "name": "face_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "epsilon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "465",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::Polyhedral_envelope",
+        "brief": "Constructor with a triangle soup.",
+        "detailed": "PointRange a model of the concept ConstRange with PointRange::const_iterator being a model of InputIterator with a point as value type TriangleRange a model of the concept ConstRange with TriangleRange::const_iterator being a model of InputIterator whose value type is model of the concept RandomAccessContainer whose value_type is convertible to std::size_t . NamedParameters a sequence of Named Parameters points points of the soup of triangles triangles each element in the range describes a triangle as a triple of indices of the points in points epsilon the distance of the Minkowski sum hull np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the range points Type: a model of ReadablePropertyMap whose value type is Point_3 and whose key is the value type of PointRange::const_iterator Default: CGAL::Identity_property_map <button class=\"collapsible\"> face_epsilon_map </button> a property map associating to each triangle an epsilon value Type: a class model of ReadablePropertyMap with std::size_t as key type and double as value type Default: Use epsilon for all triangles",
+        "return_type": "",
+        "argsstring": "(const PointRange &points, const TriangleRange &triangles, double epsilon, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleRange &",
+            "name": "triangles",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "epsilon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "570",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator()",
+        "brief": "returns true , iff the query point is inside the polyhedral envelope.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &query) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2141",
+        "section": "Query Operators"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator()",
+        "brief": "returns true , iff the query segment defined by the points source and target is inside the polyhedral envelope.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &source, const Point_3 &target) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2160",
+        "section": "Query Operators"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator()",
+        "brief": "returns true , iff the query triangle formed by the points t0 , t1 , and t2 is inside the polyhedral envelope.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &t0, const Point_3 &t1, const Point_3 &t2) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "t0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "t2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2180",
+        "section": "Query Operators"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator()",
+        "brief": "returns true , iff all the triangles of tmesh are inside the polyhedral envelope.",
+        "detailed": "TriangleMesh a model of FaceListGraph NamedParameters a sequence of Named Parameters tmesh a triangle mesh np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tmesh Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in TriangleMesh . Todo Add ConcurrencyTag as template parameter + use TBB parallel for Find a way to test the containment of the vertices first and then the triangles. It requires to have a map vertex->prism id so that we can test if the 3 vertices of a face are in the same face + have the initial list of prisms. apply that to the soup versions",
+        "return_type": "bool",
+        "argsstring": "(const TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values()) const",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2235",
+        "section": "Query Operators"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator()",
+        "brief": "returns true , iff all the triangles in triangles are inside the polyhedral envelope.",
+        "detailed": "PointRange a model of the concept ConstRange with PointRange::const_iterator being a model of InputIterator with a point as value type TriangleRange a model of the concept ConstRange with TriangleRange::const_iterator being a model of InputIterator whose value type is model of the concept RandomAccessContainer whose value_type is convertible to std::size_t . NamedParameters a sequence of Named Parameters points points of the soup of triangles triangles each element in the range describes a triangle as a triple of indices of the points in points np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the range points Type: a model of ReadablePropertyMap whose value type is Point_3 and whose key is the value type of PointRange::const_iterator Default: CGAL::Identity_property_map",
+        "return_type": "bool",
+        "argsstring": "(const PointRange &points, const TriangleRange &triangles, const NamedParameters &np=parameters::default_values()) const",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleRange &",
+            "name": "triangles",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2289",
+        "section": "Query Operators"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polyhedral_envelope::operator()",
+        "brief": "returns true , iff all the triangles in triangle_range are inside the polyhedral envelope.",
+        "detailed": "TriangleRange a model of ConstRange with TriangleRange::const_iterator being a model of InputIterator with a value type being itself a model of ConstRange whose const_iterator is a model of InputIterator with Point_3 as value type. triangle_range a range of triangles",
+        "return_type": "bool",
+        "argsstring": "(const TriangleRange &triangle_range) const",
+        "params": [
+          {
+            "type": "const TriangleRange &",
+            "name": "triangle_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2328",
+        "section": "Query Operators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "107",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::Vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "113",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::Segment_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "114",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "115",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "116",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Iso_cuboid_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::Iso_cuboid_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Iso_cuboid_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "117",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Bbox",
+        "qualified_name": "CGAL::Polyhedral_envelope::Bbox",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Bbox_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "EK",
+        "qualified_name": "CGAL::Polyhedral_envelope::EK",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Exact_predicates_exact_constructions_kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "ePoint_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::ePoint_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EK::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "122",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "eLine_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::eLine_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EK::Line_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "123",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "ePlane_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::ePlane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EK::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "124",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "eIntersect_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::eIntersect_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EK::Intersect_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "125",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "eOriented_side_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::eOriented_side_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EK::Oriented_side_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "126",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "eAre_parallel_3",
+        "qualified_name": "CGAL::Polyhedral_envelope::eAre_parallel_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EK::Are_parallel_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "127",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Primitive",
+        "qualified_name": "CGAL::Polyhedral_envelope::Primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive< unsigned int, Datum_map< GeomTraits >, Point_map< GeomTraits >, Tag_true, Tag_false >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "284",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tree_traits",
+        "qualified_name": "CGAL::Polyhedral_envelope::Tree_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_traits_3< GeomTraits, Primitive >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "285",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tree",
+        "qualified_name": "CGAL::Polyhedral_envelope::Tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_tree< Tree_traits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "286",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "OUT_PRISM",
+        "qualified_name": "CGAL::Polyhedral_envelope::OUT_PRISM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "235",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "IN_PRISM",
+        "qualified_name": "CGAL::Polyhedral_envelope::IN_PRISM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "236",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "CUT_COPLANAR",
+        "qualified_name": "CGAL::Polyhedral_envelope::CUT_COPLANAR",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "237",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "CUT_EMPTY",
+        "qualified_name": "CGAL::Polyhedral_envelope::CUT_EMPTY",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "238",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "CUT_FACE",
+        "qualified_name": "CGAL::Polyhedral_envelope::CUT_FACE",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "239",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "halfspace",
+        "qualified_name": "CGAL::Polyhedral_envelope::halfspace",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Prism >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "289",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "bounding_boxes",
+        "qualified_name": "CGAL::Polyhedral_envelope::bounding_boxes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Iso_cuboid_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "290",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "env_vertices",
+        "qualified_name": "CGAL::Polyhedral_envelope::env_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Point_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "291",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "env_faces",
+        "qualified_name": "CGAL::Polyhedral_envelope::env_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector3i >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "292",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "tree",
+        "qualified_name": "CGAL::Polyhedral_envelope::tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tree",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "294",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "oriented_side",
+        "qualified_name": "CGAL::Polyhedral_envelope::oriented_side",
+        "brief": "",
+        "detailed": "",
+        "return_type": "eOriented_side_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "296",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "obtuse_angle",
+        "qualified_name": "CGAL::Polyhedral_envelope::obtuse_angle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const CGAL::Point_3< K2 > &p, const CGAL::Point_3< K2 > &q, const CGAL::Point_3< K2 > &r)",
+        "params": [
+          {
+            "type": "const CGAL::Point_3< K2 > &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Point_3< K2 > &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Point_3< K2 > &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "131",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normalize",
+        "qualified_name": "CGAL::Polyhedral_envelope::normalize",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Vector_3< K2 >",
+        "argsstring": "(const CGAL::Vector_3< K2 > &v)",
+        "params": [
+          {
+            "type": "const CGAL::Vector_3< K2 > &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_empty",
+        "brief": "returns true if the polyhedral envelope is empty, and false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "2353",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "CGAL::Polyhedral_envelope::init",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Epsilons &epsilon_values)",
+        "params": [
+          {
+            "type": "const Epsilons &",
+            "name": "epsilon_values",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "629",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "box_box_intersection",
+        "qualified_name": "CGAL::Polyhedral_envelope::box_box_intersection",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Iso_cuboid_3 ic1, const Iso_cuboid_3 ic2) const",
+        "params": [
+          {
+            "type": "const Iso_cuboid_3",
+            "name": "ic1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Iso_cuboid_3",
+            "name": "ic2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "661",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "point_out_prism",
+        "qualified_name": "CGAL::Polyhedral_envelope::point_out_prism",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const ePoint_3 &point, const std::vector< unsigned int > &prismindex, unsigned int jump) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "point",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "unsigned int",
+            "name": "jump",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "679",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "point_out_prism_return_local_id",
+        "qualified_name": "CGAL::Polyhedral_envelope::point_out_prism_return_local_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &point, const ePoint_3 &epoint, const std::vector< unsigned int > &prismindex, const unsigned int jump, int &id) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "point",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "epoint",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int",
+            "name": "jump",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "713",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_seg_cut_polyhedra",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_seg_cut_polyhedra",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const int cindex, const ePoint_3 &source, const ePoint_3 &target, const eLine_3 &line, std::vector< int > &cid) const",
+        "params": [
+          {
+            "type": "const int",
+            "name": "cindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const eLine_3 &",
+            "name": "line",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< int > &",
+            "name": "cid",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "746",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Implicit_Seg_Facet_interpoint_Out_Prism_return_local_id",
+        "qualified_name": "CGAL::Polyhedral_envelope::Implicit_Seg_Facet_interpoint_Out_Prism_return_local_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &ip, const std::vector< unsigned int > &prismindex, const unsigned int &jump, int &id) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "862",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "segment_out_of_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::segment_out_of_envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &source, const Point_3 &target, const std::vector< unsigned int > &prismindex) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "895",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_3_triangle_cut_float_fast",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_3_triangle_cut_float_fast",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &tp, const ePoint_3 &tq, const ePoint_3 &tr, const ePoint_3 &n, const ePoint_3 &ip) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "tp",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "tq",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "977",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_3_triangle_cut",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_3_triangle_cut",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const ePoint_3 &tp, const ePoint_3 &tq, const ePoint_3 &tr, const ePoint_3 &n, const ePoint_3 &ip) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "tp",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "tq",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1005",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_two_facets_neighboring",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_two_facets_neighboring",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const unsigned int &pid, const unsigned int &i, const unsigned int &j) const",
+        "params": [
+          {
+            "type": "const unsigned int &",
+            "name": "pid",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1033",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_two_facets_neighbouring",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_two_facets_neighbouring",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const unsigned int &pid, const unsigned int &i, const unsigned int &j) const",
+        "params": [
+          {
+            "type": "const unsigned int &",
+            "name": "pid",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1048",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_triangle_cut_envelope_polyhedra",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_triangle_cut_envelope_polyhedra",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const int &cindex, const Triangle &query, std::vector< unsigned int > &cid) const",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "cindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Triangle &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< unsigned int > &",
+            "name": "cid",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1053",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "seg_cut_plane",
+        "qualified_name": "CGAL::Polyhedral_envelope::seg_cut_plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &seg0, const ePoint_3 &seg1, const ePoint_3 &t0, const ePoint_3 &t1, const ePoint_3 &t2) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "seg0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "seg1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "t0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "t2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1279",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_tpp_on_polyhedra",
+        "qualified_name": "CGAL::Polyhedral_envelope::is_tpp_on_polyhedra",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const ePoint_3 &ip, const int &prismid, const unsigned int &faceid) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "prismid",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "faceid",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1295",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Implicit_Seg_Facet_interpoint_Out_Prism_return_local_id_with_face_order",
+        "qualified_name": "CGAL::Polyhedral_envelope::Implicit_Seg_Facet_interpoint_Out_Prism_return_local_id_with_face_order",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &ip, const std::vector< unsigned int > &prismindex, const std::vector< std::vector< unsigned int > > &intersect_face, const unsigned int &jump, int &id) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::vector< unsigned int > > &",
+            "name": "intersect_face",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1312",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Implicit_Seg_Facet_interpoint_Out_Prism_return_local_id_with_face_order_jump_over",
+        "qualified_name": "CGAL::Polyhedral_envelope::Implicit_Seg_Facet_interpoint_Out_Prism_return_local_id_with_face_order_jump_over",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &ip, const std::vector< unsigned int > &prismindex, const std::vector< std::vector< unsigned int > > &intersect_face, const std::vector< int > &coverlist, const unsigned int &jump, int &id) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::vector< unsigned int > > &",
+            "name": "intersect_face",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< int > &",
+            "name": "coverlist",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1378",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Implicit_Tri_Facet_Facet_interpoint_Out_Prism_return_local_id_with_face_order",
+        "qualified_name": "CGAL::Polyhedral_envelope::Implicit_Tri_Facet_Facet_interpoint_Out_Prism_return_local_id_with_face_order",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &ip, const std::vector< unsigned int > &prismindex, const std::vector< std::vector< unsigned int > > &intersect_face, const unsigned int &jump1, const unsigned int &jump2, int &id) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::vector< unsigned int > > &",
+            "name": "intersect_face",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1449",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Implicit_Tri_Facet_Facet_interpoint_Out_Prism_return_local_id_with_face_order_jump_over",
+        "qualified_name": "CGAL::Polyhedral_envelope::Implicit_Tri_Facet_Facet_interpoint_Out_Prism_return_local_id_with_face_order_jump_over",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const ePoint_3 &ip, const std::vector< unsigned int > &prismindex, const std::vector< std::vector< unsigned int > * > &intersect_face, const std::vector< int > &coverlist, const unsigned int &jump1, const unsigned int &jump2, int &id) const",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ip",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::vector< unsigned int > * > &",
+            "name": "intersect_face",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< int > &",
+            "name": "coverlist",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const unsigned int &",
+            "name": "jump2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1521",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "triangle_out_of_envelope",
+        "qualified_name": "CGAL::Polyhedral_envelope::triangle_out_of_envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_3 &t0, const Point_3 &t1, const Point_3 &t2, const std::vector< unsigned int > &prismindex) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "t0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "t2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< unsigned int > &",
+            "name": "prismindex",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1596",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_corner_plane",
+        "qualified_name": "CGAL::Polyhedral_envelope::get_corner_plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Plane",
+        "argsstring": "(const Point_3 &p0, const Point_3 &midp, const Vector_3 &normal, const double distance, const bool) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "midp",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector_3 &",
+            "name": "normal",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "distance",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1891",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_epsilon",
+        "qualified_name": "CGAL::Polyhedral_envelope::get_epsilon",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(double epsilon, std::size_t)",
+        "params": [
+          {
+            "type": "double",
+            "name": "epsilon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1910",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_epsilon",
+        "qualified_name": "CGAL::Polyhedral_envelope::get_epsilon",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const std::vector< double > &epsilon_values, std::size_t i)",
+        "params": [
+          {
+            "type": "const std::vector< double > &",
+            "name": "epsilon_values",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1915",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "halfspace_generation",
+        "qualified_name": "CGAL::Polyhedral_envelope::halfspace_generation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::vector< Point_3 > &ver, const std::vector< Vector3i > &faces, std::vector< Prism > &halfspace, std::vector< Iso_cuboid_3 > &bounding_boxes, const Epsilons &epsilon_values)",
+        "params": [
+          {
+            "type": "const std::vector< Point_3 > &",
+            "name": "ver",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< Vector3i > &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Prism > &",
+            "name": "halfspace",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Iso_cuboid_3 > &",
+            "name": "bounding_boxes",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Epsilons &",
+            "name": "epsilon_values",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "1923",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope::Datum_map": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope::Datum_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "category",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::readable_property_map_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "247",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "key_type",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::key_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "248",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Iso_cuboid_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "250",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "boxes_ptr",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::boxes_ptr",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::vector< Iso_cuboid_3 > *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "252",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Datum_map",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::Datum_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "254",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Datum_map",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::Datum_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const std::vector< Iso_cuboid_3 > &boxes)",
+        "params": [
+          {
+            "type": "const std::vector< Iso_cuboid_3 > &",
+            "name": "boxes",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "255",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "get",
+        "qualified_name": "CGAL::Polyhedral_envelope::Datum_map::get",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "(const Datum_map &m, key_type k)",
+        "params": [
+          {
+            "type": "const Datum_map &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "key_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "257",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope::INDEX": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope::INDEX",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "Pi",
+        "qualified_name": "CGAL::Polyhedral_envelope::INDEX::Pi",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "655",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "FACES",
+        "qualified_name": "CGAL::Polyhedral_envelope::INDEX::FACES",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< int >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "656",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope::Plane": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope::Plane",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "ep",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::ep",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ePoint_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "199",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eq",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::eq",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ePoint_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "199",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "er",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::er",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ePoint_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "199",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eplane",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::eplane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ePlane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "200",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Plane",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::Plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "187",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Plane",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::Plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const ePoint_3 &ep, const ePoint_3 &eq, const ePoint_3 &er)",
+        "params": [
+          {
+            "type": "const ePoint_3 &",
+            "name": "ep",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "eq",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ePoint_3 &",
+            "name": "er",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "190",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Plane",
+        "qualified_name": "CGAL::Polyhedral_envelope::Plane::Plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point &p, const Point &q, const Point &r, std::enable_if_t<!std::is_same< Point, ePoint_3 >::value > *=0)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t<!std::is_same< Point, ePoint_3 >::value > *",
+            "name": "",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "195",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope::Point_map": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope::Point_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "category",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::readable_property_map_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "267",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "key_type",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::key_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "268",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "269",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "270",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "boxes_ptr",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::boxes_ptr",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::vector< Iso_cuboid_3 > *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "272",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Point_map",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::Point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "274",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Point_map",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::Point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const std::vector< Iso_cuboid_3 > &boxes)",
+        "params": [
+          {
+            "type": "const std::vector< Iso_cuboid_3 > &",
+            "name": "boxes",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "275",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "get",
+        "qualified_name": "CGAL::Polyhedral_envelope::Point_map::get",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "(const Point_map &m, key_type k)",
+        "params": [
+          {
+            "type": "const Point_map &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "key_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "277",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope::Prism": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope::Prism",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "planes",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::planes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Plane >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "231",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "obtuse",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::obtuse",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "232",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::size",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "205",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "reserve",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::reserve",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t n)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "210",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "emplace_back",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::emplace_back",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Plane &p)",
+        "params": [
+          {
+            "type": "const Plane &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "215",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::operator[]",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Plane &",
+        "argsstring": "(std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "221",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Polyhedral_envelope::Prism::operator[]",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Plane &",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "226",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polyhedral_envelope::Triangle": {
+    "kind": "struct",
+    "name": "CGAL::Polyhedral_envelope::Triangle",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "triangle",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< Point_3, 3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "175",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "etriangle",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::etriangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< ePoint_3, 3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "176",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eplane",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::eplane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ePlane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "177",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "elines",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::elines",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< eLine_3, 3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "178",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "n",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::n",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ePoint_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "179",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Triangle",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::Triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Triangle &)=delete",
+        "params": [
+          {
+            "type": "const Triangle &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "155",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Triangle",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::Triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point_3 &t0, const Point_3 &t1, const Point_3 &t2)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "t0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "t2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "157",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_elines",
+        "qualified_name": "CGAL::Polyhedral_envelope::Triangle::init_elines",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedral_envelope.h",
+        "line": "166",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Rigid_triangle_mesh_collision_detection": {
+    "kind": "class",
+    "name": "CGAL::Rigid_triangle_mesh_collision_detection",
+    "brief": "This class provides methods to perform some intersection tests between triangle meshes that undergo affine transformations (rotation, translation, and scaling).",
+    "detailed": "Meshes are added to an internal set and are referenced using an id assigned when added to the set. Note that the exact predicate framework applies on the meshes after having applied the transformation to the coordinates of the points of the vertices of each mesh. TriangleMesh a model of VertexListGraph , HalfedgeListGraph , and FaceListGraph VertexPointMap a model of ReadablePropertyMap with the vertex descriptor of TriangleMesh as key type, and a point from a CGAL kernel as value type. Default is the internal point property map of TriangleMesh , if it exists. Kernel a model of CGAL Kernel. Default is the kernel of the value type of VertexPointMap retrieved using Kernel_traits . AABBTree an AABB_tree that can containing faces of TriangleMesh . Default is using AABB_traits with AABB_face_graph_triangle_primitive as primitive type. Has_rotation tag indicating whether the transformations applied to meshes may contain rotations ( Tag_true ) or if only translations and scalings are applied ( Tag_false ). Some optimizations are switched on in case there are no rotations.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "reserve",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::reserve",
+        "brief": "increases the capacity of data structures used internally, size being the number of meshes expected to be added.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t size)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "size",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "465",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "remove_mesh",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::remove_mesh",
+        "brief": "removes the mesh with id mesh_id from the set, the indices of other meshes are kept unchanged.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t mesh_id)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "mesh_id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "480",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::size",
+        "brief": "returns the number of meshes in the set",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "497",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "typedef",
+        "name": "Default_vpm",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Default_vpm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "property_map_selector< TriangleMesh, boost::vertex_point_t >::const_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vpm",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Vpm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< VertexPointMap, Default_vpm >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Default_kernel",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Default_kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel_traits< typenameboost::property_traits< Vpm >::value_type >::Kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "74",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Default_primitive",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Default_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_face_graph_triangle_primitive< TriangleMesh, Vpm >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "79",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Default_tree_traits",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Default_tree_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_traits_3< K, Default_primitive >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Default_tree",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Default_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::AABB_tree< Default_tree_traits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tree",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< AABBTree, Default_tree >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "82",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tree_traits",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Tree_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tree::AABB_traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "83",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Traversal_traits",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Traversal_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Do_intersect_traversal_traits_with_transformation< Tree_traits, K, Has_rotation >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::AABB_tree",
+        "brief": "The AABB_tree type representing the triangles of each input mesh.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "166",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_point_map",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Vertex_point_map",
+        "brief": "The vertex point map type used with TriangleMesh .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "168",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Point_3",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< Vertex_point_map >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "174",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_own_aabb_trees",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_own_aabb_trees",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "92",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_aabb_trees",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_aabb_trees",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Tree * >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "93",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_closed",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_is_closed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_points_per_cc",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_points_per_cc",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::vector< typename K::Point_3 > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traversal_traits",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_traversal_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Traversal_traits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "96",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_free_id",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_free_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "97",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_id_pool",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::m_id_pool",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "98",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_id_for_new_mesh",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::get_id_for_new_mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_cc_points",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::add_cc_points",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const TriangleMesh &tm, std::size_t id, const NamedParameters &np)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "126",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "does_A_contains_a_CC_of_B",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::does_A_contains_a_CC_of_B",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::size_t id_A, std::size_t id_B) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "id_A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "id_B",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "132",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "does_A_intersect_B",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::does_A_intersect_B",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::size_t id_A, std::size_t id_B) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "id_A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "id_B",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "151",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Rigid_triangle_mesh_collision_detection",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Rigid_triangle_mesh_collision_detection",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "176",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Rigid_triangle_mesh_collision_detection",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Rigid_triangle_mesh_collision_detection",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Rigid_triangle_mesh_collision_detection &)=default",
+        "params": [
+          {
+            "type": "const Rigid_triangle_mesh_collision_detection &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "180",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Rigid_triangle_mesh_collision_detection",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::Rigid_triangle_mesh_collision_detection",
+        "brief": "move constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Rigid_triangle_mesh_collision_detection &&other)",
+        "params": [
+          {
+            "type": "Rigid_triangle_mesh_collision_detection &&",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "183",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "~Rigid_triangle_mesh_collision_detection",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::~Rigid_triangle_mesh_collision_detection",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "188",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Rigid_triangle_mesh_collision_detection &",
+        "argsstring": "(Rigid_triangle_mesh_collision_detection &other)=default",
+        "params": [
+          {
+            "type": "Rigid_triangle_mesh_collision_detection &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "197",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::operator=",
+        "brief": "move assignment operator",
+        "detailed": "",
+        "return_type": "Rigid_triangle_mesh_collision_detection &",
+        "argsstring": "(Rigid_triangle_mesh_collision_detection &&other)",
+        "params": [
+          {
+            "type": "Rigid_triangle_mesh_collision_detection &&",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "200",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_mesh",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::add_mesh",
+        "brief": "adds mesh tm to the set of meshes to be considered for intersection.",
+        "detailed": "NamedParameters a sequence of Named Parameters tm triangulated surface mesh to add np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t should be available for the vertices of tm . <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tm a unique index between 0 and num_faces(tm) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> apply_per_connected_component </button> If false , tm is assumed to have only one connected component, avoiding the extraction of connected components. Type: Boolean Default: true the id of tm used to refer to that mesh.",
+        "return_type": "std::size_t",
+        "argsstring": "(const TriangleMesh &tm, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_mesh",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::add_mesh",
+        "brief": "adds an instance of a triangulated surface mesh using an external tree of its faces.",
+        "detailed": "The tree is not copied and the lifetime of tree must be longer than that of this class. NamedParameters a sequence of Named Parameters tree an AABB-tree of faces of a mesh tm triangulated surface mesh np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t should be available for the vertices of tm . <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tm a unique index between 0 and num_faces(tm) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> apply_per_connected_component </button> If false , tm is assumed to have only one connected component, avoiding the extraction of connected components Type: Boolean Default: true the id of tm used to refer to that mesh.",
+        "return_type": "std::size_t",
+        "argsstring": "(const AABB_tree &tree, const TriangleMesh &tm, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const AABB_tree &",
+            "name": "tree",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "308",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_transformation",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::set_transformation",
+        "brief": "sets the transformation associated to a mesh identified by its id in the set.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t mesh_id, const Aff_transformation_3< K > &aff_trans)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "mesh_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Aff_transformation_3< K > &",
+            "name": "aff_trans",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "323",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_all_intersections",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::get_all_intersections",
+        "brief": "returns a vector of the ids of meshes within ids that have at least a face intersecting a face of the mesh with id mesh_id .",
+        "detailed": "If mesh_id is in ids , it is not reported. MeshIdRange a range of ids convertible to std::size_t .",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "(std::size_t mesh_id, const MeshIdRange &ids) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "mesh_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const MeshIdRange &",
+            "name": "ids",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "356",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_all_intersections",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::get_all_intersections",
+        "brief": "returns a vector of the ids of meshes in the set that have at least a face intersecting a face of the mesh with id mesh_id",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "(std::size_t mesh_id) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "mesh_id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "382",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_all_intersections_and_inclusions",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::get_all_intersections_and_inclusions",
+        "brief": "returns a vector of the ids of meshes within ids that are intersecting with the mesh with id mesh_id , considering volume inclusions for closed meshes.",
+        "detailed": "More precisely, if at least one face of a mesh with id i intersects a face of the mesh with id mesh_id , the pair (i, false) is put in the output vector. If there is no face intersection, but at least one of the meshes with ids i and mesh_id is closed, and at least one connected component is included in the bounded volume defined by a closed mesh then the pair (i, true) is put in the output vector (independently of mesh i or mesh_id being the one including the other). The inclusion test is done using Side_of_triangle_mesh , in particular surface orientation is ignored and only the nesting level of connected components defines a bounded volume. If a mesh has some self-intersection the inclusion test may return incorrect results. If mesh_id is in ids it is not reported. MeshIdRange a range of ids convertible to std::size_t . If a mesh is made of several connected components and at least one component is not closed, then no inclusion test will be made even if some components are closed.",
+        "return_type": "std::vector< std::pair< std::size_t, bool > >",
+        "argsstring": "(std::size_t mesh_id, const MeshIdRange &ids) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "mesh_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const MeshIdRange &",
+            "name": "ids",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "410",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_all_intersections_and_inclusions",
+        "qualified_name": "CGAL::Rigid_triangle_mesh_collision_detection::get_all_intersections_and_inclusions",
+        "brief": "returns a vector of the ids of meshes in the set that are intersecting with the mesh with id mesh_id , considering volume inclusions for closed meshes.",
+        "detailed": "See the previous overload for details.",
+        "return_type": "std::vector< std::pair< std::size_t, bool > >",
+        "argsstring": "(std::size_t mesh_id) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "mesh_id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Rigid_triangle_mesh_collision_detection.h",
+        "line": "455",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Side_of_triangle_mesh": {
+    "kind": "class",
+    "name": "CGAL::Side_of_triangle_mesh",
+    "brief": "This class provides an efficient point location functionality with respect to a domain bounded by one or several disjoint closed triangle meshes.",
+    "detailed": "A point is said to be on the bounded side of the domain if an odd number of surfaces is crossed when walking from the point to infinity. The input triangle mesh is expected to contain no self-intersections and to be free from self-inclusions. In case the triangle mesh has several connected components, the same test is performed and returns correct results. In case of self-inclusions, the user should be aware that the predicate called inside every other sub-volume bounded by a nested surface will return in turns CGAL::ON_BOUNDED_SIDE and CGAL::ON_UNBOUNDED_SIDE , following the aforementioned parity criterion. This class depends on the package PkgAABBTree. TriangleMesh a triangulated surface mesh, model of FaceListGraph GeomTraits a geometric traits class, model of Kernel VertexPointMap a model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and GeomTraits::Point_3 as value type. The default is typename boost::property_map<TriangleMesh,vertex_point_t>::type . Implementation Details The current implementation is based on the number of triangles intersected by a ray having the query point as source. The do-intersect predicate used to detect if a triangle is intersected is able to detect if a triangle is intersected in its interior or on its boundary. In case it is intersected on its boundary, another ray is picked. In order to speed queries, the first ray used is an axis-aligned one that depends on the extents of the bbox of the input mesh. In case other rays are needed to conclude, the rays are generated from a random uniform sampling of a sphere.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "AABB_tree_",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::AABB_tree_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Lazy_get< AABBTree, AABB_tree_default< TriangleMesh, GeomTraits, VertexPointMap_ > >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "92",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointMap",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::VertexPointMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< VertexPointMap_, typenameboost::property_map< TriangleMesh, vertex_point_t >::const_type >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "96",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "97",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::AABB_tree",
+        "brief": "AABB-tree accepting faces of TriangleMesh .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "ray_functor",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::ray_functor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Construct_ray_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "100",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vector_functor",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::vector_functor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Construct_vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "101",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "tm_ptr",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::tm_ptr",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const TriangleMesh *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "opt_vpm",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::opt_vpm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< VertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "103",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "own_tree",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::own_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "104",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "box",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::box",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Bbox_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "tree_ptr",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::tree_ptr",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const AABB_tree_ *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "110",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Side_of_triangle_mesh",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::Side_of_triangle_mesh",
+        "brief": "Constructor with one triangulated surface mesh.",
+        "detailed": "tmesh the triangulated surface mesh bounding the domain to be tested vpmap the property map with the points associated to the vertices of tmesh gt an instance of the geometric traits class CGAL::is_closed(tmesh) CGAL::is_triangle_mesh(tmesh)",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, VertexPointMap vpmap, const GeomTraits &gt=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits &",
+            "name": "gt",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "131",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Side_of_triangle_mesh",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::Side_of_triangle_mesh",
+        "brief": "Constructor with one surface triangle mesh, using get(boost::vertex_point, tmesh) as vertex point property map.",
+        "detailed": "tmesh the triangulated surface mesh bounding the domain to be tested gt an instance of the geometric traits class CGAL::is_closed(tmesh) CGAL::is_triangle_mesh(tmesh)",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const GeomTraits &gt=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits &",
+            "name": "gt",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "158",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Side_of_triangle_mesh",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::Side_of_triangle_mesh",
+        "brief": "Constructor that takes a pre-built CGAL AABB_tree of the triangulated surface mesh primitives.",
+        "detailed": "tree a CGAL AABB_tree with AABB_face_graph_triangle_primitive as Primitive type gt an instance of the geometric traits class tree contains a set of triangle faces representing a closed surface mesh",
+        "return_type": "",
+        "argsstring": "(const AABB_tree &tree, const GeomTraits &gt=GeomTraits())",
+        "params": [
+          {
+            "type": "const AABB_tree &",
+            "name": "tree",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits &",
+            "name": "gt",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "172",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Side_of_triangle_mesh",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::Side_of_triangle_mesh",
+        "brief": "Constructor that takes a pre-built CGAL AABB_tree of the triangulated surface mesh primitives, and moves it.",
+        "detailed": "tree a CGAL AABB_tree with AABB_face_graph_triangle_primitive as Primitive type gt an instance of the geometric traits class tree contains a set of triangle faces representing a closed surface mesh",
+        "return_type": "",
+        "argsstring": "(AABB_tree &&tree, const GeomTraits &gt=GeomTraits())",
+        "params": [
+          {
+            "type": "AABB_tree &&",
+            "name": "tree",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits &",
+            "name": "gt",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "196",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Side_of_triangle_mesh",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::Side_of_triangle_mesh",
+        "brief": "Constructor moving an instance of Side_of_triangle_mesh to a new memory location with minimal memory copy.",
+        "detailed": "other the instance to be moved",
+        "return_type": "",
+        "argsstring": "(Side_of_triangle_mesh &&other)",
+        "params": [
+          {
+            "type": "Side_of_triangle_mesh &&",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "220",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "~Side_of_triangle_mesh",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::~Side_of_triangle_mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "224",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::operator=",
+        "brief": "Assign operator moving an instance of Side_of_triangle_mesh to this location with minimal memory copy.",
+        "detailed": "other the instance to be moved a reference to this",
+        "return_type": "Side_of_triangle_mesh &",
+        "argsstring": "(Side_of_triangle_mesh &&other)",
+        "params": [
+          {
+            "type": "Side_of_triangle_mesh &&",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "241",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::operator()",
+        "brief": "returns the location of a query point",
+        "detailed": "point the query point to be located with respect to the input polyhedral surface CGAL::ON_BOUNDED_SIDE if the point is inside the volume bounded by the input triangle mesh CGAL::ON_BOUNDARY if the point is on triangle mesh CGAL::ON_UNBOUNDED_SIDE if the point is outside triangle mesh",
+        "return_type": "Bounded_side",
+        "argsstring": "(const Point &point) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "point",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "265",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Side_of_triangle_mesh::AABB_tree_default": {
+    "kind": "struct",
+    "name": "CGAL::Side_of_triangle_mesh::AABB_tree_default",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Primitive",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::AABB_tree_default::Primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::AABB_face_graph_triangle_primitive< TriangleMesh_, VertexPointMap__ >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "84",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "type",
+        "qualified_name": "CGAL::Side_of_triangle_mesh::AABB_tree_default::type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::AABB_tree< Traits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Side_of_triangle_mesh.h",
+        "line": "86",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Geom_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Geom_traits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Geom_traits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Envelope",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Polyhedral_envelope < GeomTraits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector3i",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Vector3i",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Envelope::Vector3i",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_dist",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::m_dist",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "155",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_envelope",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::m_envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Envelope *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "156",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertices",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::m_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Point_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "157",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_faces",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::m_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector3i >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "158",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_base_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::m_base_filter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const BaseFilter",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "160",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "initialize_envelope",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::initialize_envelope",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Profile &profile) const",
+        "params": [
+          {
+            "type": "const Profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Polyhedral_envelope_filter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const FT dist, const BaseFilter &filter=BaseFilter())",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "dist",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const BaseFilter &",
+            "name": "filter",
+            "default": "BaseFilter()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "~Polyhedral_envelope_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::~Polyhedral_envelope_filter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "103",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< typename Profile::Point >",
+        "argsstring": "(const Profile &profile, std::optional< typename Profile::Point > op) const",
+        "params": [
+          {
+            "type": "const Profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< typename Profile::Point >",
+            "name": "op",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "113",
+        "section": ""
+      }
+    ]
+  },
+  "PMPDistanceTraits": {
+    "kind": "class",
+    "name": "PMPDistanceTraits",
+    "brief": "The concept PMPDistanceTraits is a refinement of the concepts AABBGeomTraits_3 and SpatialSortingTraits_3 . In addition to the types required by those concepts, it also requires types and functors needed by the functions approximate_max_distance_to_point_set() , sample_triangle_mesh() , approximate_Hausdorff_distance() and max_distance_to_triangle_mesh() .",
+    "detailed": "Refines AABBGeomTraits_3 SpatialSortingTraits_3 Has models Any 3D Kernel is a model of this concept",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_area_3",
+        "qualified_name": "PMPDistanceTraits::Compute_squared_area_3",
+        "brief": "Functor for computing squared area of a triangle.",
+        "detailed": "It provides FT operator()(const Point_3 &, const Point_3 &, const Point_3 &) const and FT operator()(const Triangle_3&) const and has FT as result_type.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "41",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_3",
+        "qualified_name": "PMPDistanceTraits::Compute_squared_length_3",
+        "brief": "Functor for computing squared length of a segment.",
+        "detailed": "and FT operator()(const Segment_3&) const and has FT as result_type.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "44",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_translated_point_3",
+        "qualified_name": "PMPDistanceTraits::Construct_translated_point_3",
+        "brief": "Functor for constructing translated points.",
+        "detailed": "It provides Point_3 operator()(const Point_3 &, const Vector_3 &)",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "47",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "PMPDistanceTraits::Construct_vector_3",
+        "brief": "Functor for constructing vectors.",
+        "detailed": "It provides Vector_3 operator()(const Point_3 &, const Point_3 &)",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "50",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "PMPDistanceTraits::Construct_scaled_vector_3",
+        "brief": "Functor for constructing scaled vectors.",
+        "detailed": "It provides Vector_3 operator()(const Vector_3 &, const FT &)",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "53",
+        "section": "Functors"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_area_3_object",
+        "qualified_name": "PMPDistanceTraits::compute_squared_area_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_area_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "58",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_length_3_object",
+        "qualified_name": "PMPDistanceTraits::compute_squared_length_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_length_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "59",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_translated_point_3_object",
+        "qualified_name": "PMPDistanceTraits::construct_translated_point_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_translated_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "60",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "PMPDistanceTraits::construct_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "61",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_3_object",
+        "qualified_name": "PMPDistanceTraits::construct_scaled_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "62",
+        "section": "Functions"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "PMPDistanceTraits::FT",
+        "brief": "A number type model of Field and RealEmbeddable .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "19",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "PMPDistanceTraits::Point_3",
+        "brief": "3D point type It must be default constructible, and can be constructed from 3 objects of type FT .",
+        "detailed": "bool operator<( Point_3 , Point_3 ) to lexicographically compare two points must be available. Access to Cartesian coordinates must be possible using Point_3::x() , Point_3::y(), Point_3::z() and FT operator[](int i) with 0 <= i < 3 . There must be a specialization of CGAL::Kernel_traits such that CGAL::Kernel_traits< Point_3 >::Kernel is a model implementing this concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "PMPDistanceTraits::Vector_3",
+        "brief": "3D vector type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPDistanceTraits.h",
+        "line": "33",
+        "section": ""
+      }
+    ]
+  },
+  "PMPHolefillingVisitor": {
+    "kind": "class",
+    "name": "PMPHolefillingVisitor",
+    "brief": "The concept PMPHolefillingVisitor defines the requirements for the visitor used in hole-filling-related functions . The hole filling may use a 2D constrained triangulation for almost planar holes ( planar phase ). If that is not appropriate or fails it may use an algorithm with a quadratic running time relying on the 3D Delaunay triangulation ( quadratic phase ). If that fails, it uses an algorithm with cubic running time ( cubic phase ).",
+    "detailed": "Refines CopyConstructible Has models CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor",
+    "members": [
+      {
+        "kind": "function",
+        "name": "start_planar_phase",
+        "qualified_name": "PMPHolefillingVisitor::start_planar_phase",
+        "brief": "called when the planar hole filling algorithm starts.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "20",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "end_planar_phase",
+        "qualified_name": "PMPHolefillingVisitor::end_planar_phase",
+        "brief": "called when the planar hole filling algorithm stops.",
+        "detailed": "success true when the hole could be filled in this phase.",
+        "return_type": "void",
+        "argsstring": "(bool success) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "success",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "start_quadratic_phase",
+        "qualified_name": "PMPHolefillingVisitor::start_quadratic_phase",
+        "brief": "called when the algorithm with quadratic running time starts.",
+        "detailed": "n the upperbound on the number of steps",
+        "return_type": "void",
+        "argsstring": "(std::size_t n) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "28",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "quadratic_step",
+        "qualified_name": "PMPHolefillingVisitor::quadratic_step",
+        "brief": "called at each step.",
+        "detailed": "There may be less than n calls as this is an upperbound.",
+        "return_type": "void",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "end_quadratic_phase",
+        "qualified_name": "PMPHolefillingVisitor::end_quadratic_phase",
+        "brief": "called when the algorithm with quadratic running time ends.",
+        "detailed": "success true when the hole could be filled in this phase.",
+        "return_type": "void",
+        "argsstring": "(bool success) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "success",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "start_cubic_phase",
+        "qualified_name": "PMPHolefillingVisitor::start_cubic_phase",
+        "brief": "called when the algorithm with cubic running time starts.",
+        "detailed": "n the upperbound on the number of steps",
+        "return_type": "void",
+        "argsstring": "(std::size_t n) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "41",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "cubic_step",
+        "qualified_name": "PMPHolefillingVisitor::cubic_step",
+        "brief": "called at each step. This will be called n times.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "end_cubic_phase",
+        "qualified_name": "PMPHolefillingVisitor::end_cubic_phase",
+        "brief": "called when the algorithm with cubic running time ends.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "start_refine_phase",
+        "qualified_name": "PMPHolefillingVisitor::start_refine_phase",
+        "brief": "called before refining the triangulation of the hole ( triangulate_and_refine_hole() and triangulate_refine_and_fair_hole() only)",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "end_refine_phase",
+        "qualified_name": "PMPHolefillingVisitor::end_refine_phase",
+        "brief": "called after having refined the triangulation of the hole ( triangulate_and_refine_hole() and triangulate_refine_and_fair_hole() only)",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "start_fair_phase",
+        "qualified_name": "PMPHolefillingVisitor::start_fair_phase",
+        "brief": "called before fairing the triangulation of the hole ( triangulate_refine_and_fair_hole() only)",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "end_fair_phase",
+        "qualified_name": "PMPHolefillingVisitor::end_fair_phase",
+        "brief": "called after having faired the triangulation of the hole ( triangulate_refine_and_fair_hole() only)",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "accept_triangle",
+        "qualified_name": "PMPHolefillingVisitor::accept_triangle",
+        "brief": "called before considering a triangle made from the points with indices i0, i1, and i2 to triangulate a hole.",
+        "detailed": "The indices refers to the position of the points in the input point range if triangulating a polyline, or to the position of the vertices along the cycle of halfedges of the input border halfedge if triangulating a hole in a polygon mesh ( 0 being the target of the input border halfedge, 1 the target of the next border halfedge, ...). If false is returned, the triangle will not be used. If true is returned, the triangle will be added to the candidate triangles.",
+        "return_type": "bool",
+        "argsstring": "(int i0, int i1, int i2)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPHolefillingVisitor.h",
+        "line": "71",
+        "section": ""
+      }
+    ]
+  },
+  "PMPPolygonSoupOrientationVisitor": {
+    "kind": "class",
+    "name": "PMPPolygonSoupOrientationVisitor",
+    "brief": "The concept PMPPolygonSoupOrientationVisitor defines the requirements for the visitor used in CGAL::Polygon_mesh_processing::orient_polygon_soup() to track the detection of non-manifold simplices and the modifications performed to polygons during the orientation process.",
+    "detailed": "Refines CopyConstructible Has models CGAL::Polygon_mesh_processing::Default_orientation_visitor",
+    "members": [
+      {
+        "kind": "function",
+        "name": "non_manifold_edge",
+        "qualified_name": "PMPPolygonSoupOrientationVisitor::non_manifold_edge",
+        "brief": "called each time an edge appears in more than two polygons.",
+        "detailed": "id1 and id2 are the vertex ids of the endpoints of the edge. nb_polygons indicates the number of polygons containing that edge.",
+        "return_type": "void",
+        "argsstring": "(std::size_t id1, std::size_t id2, std::size_t nb_polygons)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "id1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "id2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "nb_polygons",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPPolygonSoupOrientationVisitor.h",
+        "line": "23",
+        "section": "Functions used to report non-manifold simplices."
+      },
+      {
+        "kind": "function",
+        "name": "non_manifold_vertex",
+        "qualified_name": "PMPPolygonSoupOrientationVisitor::non_manifold_vertex",
+        "brief": "called each time a non-manifold vertex is detected.",
+        "detailed": "vid is the id of the vertex that is non-manifold. nb_link_ccs is the number of edge connected components of vertices in the link of the corresponding vertex.",
+        "return_type": "void",
+        "argsstring": "(std::size_t vid, std::size_t nb_link_ccs)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "vid",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "nb_link_ccs",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPPolygonSoupOrientationVisitor.h",
+        "line": "29",
+        "section": "Functions used to report non-manifold simplices."
+      },
+      {
+        "kind": "function",
+        "name": "link_connected_polygons",
+        "qualified_name": "PMPPolygonSoupOrientationVisitor::link_connected_polygons",
+        "brief": "called during the detection of a non-manifold vertex, one time per incident edge connected component of vertices in the link of the vertex with id vid .",
+        "detailed": "id is the id of the vertex that is non-manifold. polygon_ids contains the ids of the polygon in such a connected component. This function is called a number of times exactly equal to the parameter nb_link_ccs for the same vertex in non_manifold_vertex() . Note that the aforementioned function is called after all the calls to this function are done.",
+        "return_type": "void",
+        "argsstring": "(std::size_t vid, const std::vector< std::size_t > &polygon_ids)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "vid",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::size_t > &",
+            "name": "polygon_ids",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPPolygonSoupOrientationVisitor.h",
+        "line": "38",
+        "section": "Functions used to report non-manifold simplices."
+      },
+      {
+        "kind": "function",
+        "name": "polygon_orientation_reversed",
+        "qualified_name": "PMPPolygonSoupOrientationVisitor::polygon_orientation_reversed",
+        "brief": "called when the orientation of a polygon is not compatible with its neighbors and the polygon is reversed.",
+        "detailed": "id is the index of the polygon in the input polygon range.",
+        "return_type": "void",
+        "argsstring": "(std::size_t id)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPPolygonSoupOrientationVisitor.h",
+        "line": "47",
+        "section": "Functions used to report modifications done to the polygons."
+      },
+      {
+        "kind": "function",
+        "name": "duplicated_vertex",
+        "qualified_name": "PMPPolygonSoupOrientationVisitor::duplicated_vertex",
+        "brief": "called for each non-manifold vertex (whether part of a non-manifold edge or not).",
+        "detailed": "Non-manifoldness is resolved in the algorithm by duplicating the vertex. input_id is the index of the input vertex, and new_id is the index of the new vertex. Note that a vertex might be duplicated several times.",
+        "return_type": "void",
+        "argsstring": "(std::size_t input_id, std::size_t new_id)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "input_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "new_id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPPolygonSoupOrientationVisitor.h",
+        "line": "53",
+        "section": "Functions used to report modifications done to the polygons."
+      },
+      {
+        "kind": "function",
+        "name": "vertex_id_in_polygon_replaced",
+        "qualified_name": "PMPPolygonSoupOrientationVisitor::vertex_id_in_polygon_replaced",
+        "brief": "called when the vertex with id input_id in polygon with id pid is replaced by the vertex with id new_id .",
+        "detailed": "This function is called after all calls to duplicated_vertex() .",
+        "return_type": "void",
+        "argsstring": "(std::size_t pid, std::size_t input_id, std::size_t new_id)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "pid",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "input_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "new_id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPPolygonSoupOrientationVisitor.h",
+        "line": "57",
+        "section": "Functions used to report modifications done to the polygons."
+      }
+    ]
+  },
+  "PMPSelfIntersectionTraits": {
+    "kind": "class",
+    "name": "PMPSelfIntersectionTraits",
+    "brief": "Geometric traits concept for the functions CGAL::self_intersections() and CGAL::does_self_intersect() .",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "PMPSelfIntersectionTraits::Point_3",
+        "brief": "3D point type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "11",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "PMPSelfIntersectionTraits::Triangle_3",
+        "brief": "3D triangle type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "13",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "PMPSelfIntersectionTraits::Segment_3",
+        "brief": "3D segment type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "15",
+        "section": "Geometric Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_3",
+        "qualified_name": "PMPSelfIntersectionTraits::Construct_triangle_3",
+        "brief": "Functor constructing triangles.",
+        "detailed": "It provides Triangle_3 operator() const(const Point_3 &, const Point_3 &, const Point_3 &)",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "23",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_3",
+        "qualified_name": "PMPSelfIntersectionTraits::Construct_segment_3",
+        "brief": "Functor constructing segments.",
+        "detailed": "It provides Segment_3 operator() const(const Point_3 &, const Point_3 &)",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "26",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Do_intersect_3",
+        "qualified_name": "PMPSelfIntersectionTraits::Do_intersect_3",
+        "brief": "Functor testing intersections between triangles and segments.",
+        "detailed": "It provides bool operator() const (const Triangle_3 &, const Segment_3 &) and bool operator() const (const Triangle_3 &, const Triangle_3 &)",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "30",
+        "section": "Functors"
+      },
+      {
+        "kind": "function",
+        "name": "construct_triangle_3_object",
+        "qualified_name": "PMPSelfIntersectionTraits::construct_triangle_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_triangle_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "35",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_segment_3_object",
+        "qualified_name": "PMPSelfIntersectionTraits::construct_segment_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_segment_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "36",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect_3_object",
+        "qualified_name": "PMPSelfIntersectionTraits::do_intersect_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Do_intersect_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PMPSelfIntersectionTraits.h",
+        "line": "37",
+        "section": "Functions"
+      }
+    ]
+  },
+  "PMPSizingField": {
+    "kind": "class",
+    "name": "PMPSizingField",
+    "brief": "The concept PMPSizingField defines the requirements for the sizing field used in CGAL::Polygon_mesh_processing::isotropic_remeshing() to define the target length for every individual edge during the remeshing process.",
+    "detailed": "Has models CGAL::Polygon_mesh_processing::Uniform_sizing_field CGAL::Polygon_mesh_processing::Adaptive_sizing_field",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "PMPSizingField::vertex_descriptor",
+        "brief": "Vertex descriptor type.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "23",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "PMPSizingField::halfedge_descriptor",
+        "brief": "Halfedge descriptor type.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "PMPSizingField::Point_3",
+        "brief": "3D point type matching the value type of the vertex property map passed to CGAL::Polygon_mesh_processing::isotropic_remeshing()",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "PolygonMesh",
+        "qualified_name": "PMPSizingField::PolygonMesh",
+        "brief": "Polygon mesh type matching the type passed to CGAL::Polygon_mesh_processing::isotropic_remeshing() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "PMPSizingField::FT",
+        "brief": "Number type matching the FT type of the geometric traits passed to CGAL::Polygon_mesh_processing::isotropic_remeshing() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "at",
+        "qualified_name": "PMPSizingField::at",
+        "brief": "returns the sizing value at v (used during tangential relaxation).",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const vertex_descriptor v, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "43",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_too_long",
+        "qualified_name": "PMPSizingField::is_too_long",
+        "brief": "returns the ratio of the current edge squared length and the local target edge squared length between the points of va and vb in case the current edge is too long, and std::nullopt otherwise (used for triggering edge splits and preventing some edge collapses).",
+        "detailed": "",
+        "return_type": "std::optional< FT >",
+        "argsstring": "(const vertex_descriptor va, const vertex_descriptor vb, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "48",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_too_short",
+        "qualified_name": "PMPSizingField::is_too_short",
+        "brief": "returns the ratio of the squared length of h and the local target edge squared length if it is too short, and std::nullopt otherwise (used for triggering edge collapses).",
+        "detailed": "",
+        "return_type": "std::optional< FT >",
+        "argsstring": "(const halfedge_descriptor h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "55",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "split_placement",
+        "qualified_name": "PMPSizingField::split_placement",
+        "brief": "returns the position of the new vertex created when splitting the edge of h .",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "(const halfedge_descriptor h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "59",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "register_split_vertex",
+        "qualified_name": "PMPSizingField::register_split_vertex",
+        "brief": "function called after the addition of the split vertex v in pmesh .",
+        "detailed": "This function can be used for example to update a pre-computed sizing field.",
+        "return_type": "void",
+        "argsstring": "(const vertex_descriptor v, const PolygonMesh &pmesh)",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPSizingField.h",
+        "line": "64",
+        "section": "Functions"
+      }
+    ]
+  },
+  "PMPTriangulateFaceVisitor": {
+    "kind": "class",
+    "name": "PMPTriangulateFaceVisitor",
+    "brief": "The concept PMPTriangulateFaceVisitor defines the requirements for the visitor used in triangulation-related functions to track the creation of new faces.",
+    "detailed": "Refines CopyConstructible Has models CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor,CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor",
+    "members": [
+      {
+        "kind": "function",
+        "name": "before_subface_creations",
+        "qualified_name": "PMPTriangulateFaceVisitor::before_subface_creations",
+        "brief": "called before the triangulation of f_split .",
+        "detailed": "Note that f_split will be one of the faces of the triangulation. Each subsequent call to after_subface_created() will correspond to the creation of a new face of the triangulation of f_split .",
+        "return_type": "void",
+        "argsstring": "(face_descriptor f_split)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "f_split",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPTriangulateFaceVisitor.h",
+        "line": "28",
+        "section": "Functions used by triangulate_face() and triangulate_faces()"
+      },
+      {
+        "kind": "function",
+        "name": "after_subface_creations",
+        "qualified_name": "PMPTriangulateFaceVisitor::after_subface_creations",
+        "brief": "called when the triangulation of a face in tm is finished.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PMPTriangulateFaceVisitor.h",
+        "line": "31",
+        "section": "Functions used by triangulate_face() and triangulate_faces()"
+      },
+      {
+        "kind": "function",
+        "name": "after_subface_created",
+        "qualified_name": "PMPTriangulateFaceVisitor::after_subface_created",
+        "brief": "called after creating a new triangle face f_new to triangulate the face passed to before_subface_creations() .",
+        "detailed": "Note that the call is placed just after a call to add_face() so the halfedge pointer is not set yet.",
+        "return_type": "void",
+        "argsstring": "(face_descriptor f_new)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "f_new",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPTriangulateFaceVisitor.h",
+        "line": "35",
+        "section": "Functions used by triangulate_face() and triangulate_faces()"
+      },
+      {
+        "kind": "function",
+        "name": "accept_face",
+        "qualified_name": "PMPTriangulateFaceVisitor::accept_face",
+        "brief": "called before considering a triangle made of vertices (v0,v1,v2) to triangulate f .",
+        "detailed": "If false is returned, the triangle will not be used. If true is returned, the triangle will be added to the candidate triangles.",
+        "return_type": "bool",
+        "argsstring": "(face_descriptor f, vertex_descriptor v0, vertex_descriptor v1, vertex_descriptor v2)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PMPTriangulateFaceVisitor.h",
+        "line": "40",
+        "section": "Functions used by triangulate_face() and triangulate_faces()"
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "PMPTriangulateFaceVisitor::face_descriptor",
+        "brief": "Face descriptor type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPTriangulateFaceVisitor.h",
+        "line": "18",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "PMPTriangulateFaceVisitor::vertex_descriptor",
+        "brief": "Vertex descriptor type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PMPTriangulateFaceVisitor.h",
+        "line": "20",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Polygon_mesh_processing": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "border_halfedges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::border_halfedges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "HalfedgeOutputIterator",
+        "argsstring": "(const PolygonMesh &pmesh, HalfedgeOutputIterator out)",
+        "params": [
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "HalfedgeOutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/border.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_borders",
+        "qualified_name": "CGAL::Polygon_mesh_processing::number_of_borders",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unsigned int",
+        "argsstring": "(const PolygonMesh &pmesh)",
+        "params": [
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/border.h",
+        "line": "91",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "keep_or_remove_connected_components",
+        "qualified_name": "CGAL::Polygon_mesh_processing::keep_or_remove_connected_components",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(PolygonMesh &pmesh, const ComponentRange &components_to_keep, const FaceComponentMap &fcm, bool keep, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ComponentRange &",
+            "name": "components_to_keep",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceComponentMap &",
+            "name": "fcm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "keep",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/connected_components.h",
+        "line": "611",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sample_triangles",
+        "qualified_name": "CGAL::Polygon_mesh_processing::sample_triangles",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PointOutputIterator",
+        "argsstring": "(const FaceRange &triangles, const TriangleMesh &tm, VertexPointMap vpm, double distance, PointOutputIterator out, bool sample_faces, bool sample_edges, bool add_vertices)",
+        "params": [
+          {
+            "type": "const FaceRange &",
+            "name": "triangles",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "distance",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointOutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "sample_faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "sample_edges",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "add_vertices",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/distance.h",
+        "line": "346",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "bounded_error_Hausdorff_distance_naive",
+        "qualified_name": "CGAL::Polygon_mesh_processing::bounded_error_Hausdorff_distance_naive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const TriangleMesh1 &tm1, const TriangleMesh2 &tm2, const double error_bound, const NamedParameters1 &np1=parameters::default_values(), const NamedParameters2 &np2=parameters::default_values())",
+        "params": [
+          {
+            "type": "const TriangleMesh1 &",
+            "name": "tm1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh2 &",
+            "name": "tm2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "error_bound",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters1 &",
+            "name": "np1",
+            "default": "parameters::default_values()",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters2 &",
+            "name": "np2",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/distance.h",
+        "line": "2700",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "intersecting_meshes",
+        "qualified_name": "CGAL::Polygon_mesh_processing::intersecting_meshes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const TriangleMeshRange &range, OutputIterator out, const NamedParameters &np)",
+        "params": [
+          {
+            "type": "const TriangleMeshRange &",
+            "name": "range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/intersection.h",
+        "line": "1676",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "intersecting_meshes",
+        "qualified_name": "CGAL::Polygon_mesh_processing::intersecting_meshes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const TriangleMeshRange &range, OutputIterator out)",
+        "params": [
+          {
+            "type": "const TriangleMeshRange &",
+            "name": "range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/intersection.h",
+        "line": "1686",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "barycentric_coordinates",
+        "qualified_name": "CGAL::Polygon_mesh_processing::barycentric_coordinates",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Barycentric_coordinates < typename CGAL::Kernel_traits< Point >::type::FT >",
+        "argsstring": "(const Point &p, const Point &q, const Point &r, const Point &query)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/locate.h",
+        "line": "374",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "edge_length",
+        "qualified_name": "CGAL::Polygon_mesh_processing::edge_length",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GetGeomTraits< PolygonMesh, NamedParameters >::type::FT",
+        "argsstring": "(typename boost::graph_traits< PolygonMesh >::edge_descriptor e, const PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "typename boost::graph_traits< PolygonMesh >::edge_descriptor",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/measure.h",
+        "line": "134",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "squared_edge_length",
+        "qualified_name": "CGAL::Polygon_mesh_processing::squared_edge_length",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GetGeomTraits< PolygonMesh, NamedParameters >::type::FT",
+        "argsstring": "(typename boost::graph_traits< PolygonMesh >::edge_descriptor e, const PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "typename boost::graph_traits< PolygonMesh >::edge_descriptor",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/measure.h",
+        "line": "212",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "average_edge_length",
+        "qualified_name": "CGAL::Polygon_mesh_processing::average_edge_length",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GetGeomTraits< PolygonMesh, NamedParameters >::type::FT",
+        "argsstring": "(const PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/measure.h",
+        "line": "224",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification": {
+    "kind": "namespace",
+    "name": "CGAL::Surface_mesh_simplification",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "Get_filtered_predicate_RT": {
+    "kind": "namespace",
+    "name": "Get_filtered_predicate_RT",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

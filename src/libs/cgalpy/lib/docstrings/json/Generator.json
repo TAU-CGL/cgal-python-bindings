@@ -1,0 +1,3935 @@
+{
+  "CGAL::Combination_enumerator": {
+    "kind": "class",
+    "name": "CGAL::Combination_enumerator",
+    "brief": "The class Combination_enumerator is used to enumerate all fixed-size combinations (subsets) of a source range of elements.",
+    "detailed": "For example, it can enumerate all the combinations of 2 elements from the source range [3,7) ( 7 excluded) which gives the enumeration {3,4}, {3,5}, {3,6}, {4,5}, {4,6}, {5,6} . The source range consists of elements of type CombinationElement and is specified by its first element and the element just beyond its last one. CombinationElement should be a model of the concept CombinationElement . Each combination is uniquely represented as an increasing sequence of elements. Thus, the combinations can be lexicographically ordered. They are enumerated in that order, so that we can talk about the first or last combination.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Combination_enumerator",
+        "qualified_name": "CGAL::Combination_enumerator::Combination_enumerator",
+        "brief": "This constructor initializes the object to enumerate the combinations of k elements from the source range [first, beyond) .",
+        "detailed": "The current combination is set to the first combination of the enumeration. 1 <= k <= beyond - first",
+        "return_type": "",
+        "argsstring": "(int k, const CombinationElement &first, const CombinationElement &beyond)",
+        "params": [
+          {
+            "type": "int",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CombinationElement &",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CombinationElement &",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "33",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Combination_enumerator",
+        "qualified_name": "CGAL::Combination_enumerator::Combination_enumerator",
+        "brief": "The copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Combination_enumerator &combi)",
+        "params": [
+          {
+            "type": "const Combination_enumerator &",
+            "name": "combi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "38",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Combination_enumerator::operator[]",
+        "brief": "Returns the i -th element of the current combination.",
+        "detailed": "0 <= i < number_of_elements()",
+        "return_type": "const CombinationElement &",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "49",
+        "section": "Access to the Current Combination"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_elements",
+        "qualified_name": "CGAL::Combination_enumerator::number_of_elements",
+        "brief": "Returns the size of the enumerated combinations (the parameter k from the class' constructor).",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "60",
+        "section": "Access to the Enumeration"
+      },
+      {
+        "kind": "function",
+        "name": "min_element",
+        "qualified_name": "CGAL::Combination_enumerator::min_element",
+        "brief": "Returns the smallest element of the source range.",
+        "detailed": "(the parameter first of the constructor of the class).",
+        "return_type": "const CombinationElement &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "66",
+        "section": "Access to the Enumeration"
+      },
+      {
+        "kind": "function",
+        "name": "beyond_element",
+        "qualified_name": "CGAL::Combination_enumerator::beyond_element",
+        "brief": "Returns the successor to the largest element of the source range (the parameter beyond of the constructor of the class).",
+        "detailed": "",
+        "return_type": "const CombinationElement &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "72",
+        "section": "Access to the Enumeration"
+      },
+      {
+        "kind": "function",
+        "name": "finished",
+        "qualified_name": "CGAL::Combination_enumerator::finished",
+        "brief": "Returns true if and only if all combinations have been enumerated.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "78",
+        "section": "Access to the Enumeration"
+      },
+      {
+        "kind": "function",
+        "name": "reset",
+        "qualified_name": "CGAL::Combination_enumerator::reset",
+        "brief": "Resets the enumerator.",
+        "detailed": "The current combination is set to the first one of the enumeration.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "90",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator++",
+        "qualified_name": "CGAL::Combination_enumerator::operator++",
+        "brief": "Moves *this to the next combination.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "95",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator++",
+        "qualified_name": "CGAL::Combination_enumerator::operator++",
+        "brief": "Post-incrementation.",
+        "detailed": "Same as the pre-incrementation above, but returns the original value of *this .",
+        "return_type": "Combination_enumerator",
+        "argsstring": "(int)",
+        "params": [
+          {
+            "type": "int",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Combination_enumerator.h",
+        "line": "101",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Points_on_segment_2": {
+    "kind": "class",
+    "name": "CGAL::Points_on_segment_2",
+    "brief": "The class Points_on_segment_2 is a generator for points on a segment whose endpoints are specified upon construction.",
+    "detailed": "The points are equally spaced. Is model of PointGenerator CGAL::points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::random_selection()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Points_on_segment_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "739",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Points_on_segment_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "744",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Points_on_segment_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "749",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Points_on_segment_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "754",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Points_on_segment_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "759",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Points_on_segment_2",
+        "qualified_name": "CGAL::Points_on_segment_2::Points_on_segment_2",
+        "brief": "creates an input iterator g generating points of type P equally spaced on the segment from $ p$ to $ q$ .",
+        "detailed": "$ n-i$ points are placed on the segment defined by $ p$ and $ q$ . Values of the index parameter $ i$ larger than 0 indicate starting points for the sequence further from $ p$ . Point $ p$ has index value 0 and $ q$ has index value $ n-1$ . The expressions to_double(p.x()) and to_double(p.y()) must result in the respective double representation of the coordinates of $ p$ , and similarly for $ q$ .",
+        "return_type": "",
+        "argsstring": "(const Point_2 &p, const Point_2 &q, std::size_t n, std::size_t i=0)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "774",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "range",
+        "qualified_name": "CGAL::Points_on_segment_2::range",
+        "brief": "returns the range in which the point coordinates lie, i.e. $ \\forall x: |x| \\leq$ range() and $ \\forall y: |y| \\leq$ range()",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "787",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "source",
+        "qualified_name": "CGAL::Points_on_segment_2::source",
+        "brief": "returns the source point of the segment.",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "792",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Points_on_segment_2::target",
+        "brief": "returns the target point of the segment.",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "797",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Random": {
+    "kind": "class",
+    "name": "CGAL::Random",
+    "brief": "The class Random is a random numbers generator.",
+    "detailed": "It generates uniformly distributed random bool , int and double . It can be used as the random number generating function object in the STL algorithm std::random_shuffle() . Instances of Random can be seen as input streams. Different streams are independent of each other, i.e. the sequence of numbers from one stream does not depend upon how many numbers were extracted from the other streams. At each time, an instance has a state that uniquely determines the subsequent numbers being produced. It can be very useful, e.g. for debugging, to reproduce a sequence of random numbers. This can be done by either initializing with a fixed seed, or by using the state functions as described below. A Random object is not deterministic when used by several threads at the same time, even if a fixed seed has been chosen. Implementation We use the boost random library function boost::rand48() to generate the random numbers. CGAL::get_default_random()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "State",
+        "qualified_name": "CGAL::Random::State",
+        "brief": "The State type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random",
+        "qualified_name": "CGAL::Random::Random",
+        "brief": "Default constructor.",
+        "detailed": "The seed is chosen based on the system time.",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Random.h",
+        "line": "54",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Random",
+        "qualified_name": "CGAL::Random::Random",
+        "brief": "Constructor initializing its internal state using seed .",
+        "detailed": "Equal values for seed result in equal sequences of random numbers.",
+        "return_type": "",
+        "argsstring": "(unsigned int seed)",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "seed",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "62",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_bool",
+        "qualified_name": "CGAL::Random::get_bool",
+        "brief": "returns a random bool .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Random.h",
+        "line": "73",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_bits",
+        "qualified_name": "CGAL::Random::get_bits",
+        "brief": "returns a random int value from the interval $[0,2^b)$ .",
+        "detailed": "This is supposed to be efficient.",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Random.h",
+        "line": "81",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_int",
+        "qualified_name": "CGAL::Random::get_int",
+        "brief": "returns a random int from the interval [lower,upper) .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(int lower, int upper)",
+        "params": [
+          {
+            "type": "int",
+            "name": "lower",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "upper",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "88",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_double",
+        "qualified_name": "CGAL::Random::get_double",
+        "brief": "returns a random double from the interval [lower,upper) .",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(double lower=0.0, double upper=1.0)",
+        "params": [
+          {
+            "type": "double",
+            "name": "lower",
+            "default": "0.0",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "upper",
+            "default": "1.0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "95",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "uniform_smallint",
+        "qualified_name": "CGAL::Random::uniform_smallint",
+        "brief": "returns a random IntType from the interval [lower,upper) .",
+        "detailed": "IntType can be an integral type as int , std::ptrdiff_t , std::size_t ,etc. In contrast to get_int this function may return upper .",
+        "return_type": "IntType",
+        "argsstring": "(IntType lower=0, IntType upper=9)",
+        "params": [
+          {
+            "type": "IntType",
+            "name": "lower",
+            "default": "0",
+            "brief": ""
+          },
+          {
+            "type": "IntType",
+            "name": "upper",
+            "default": "9",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "111",
+        "section": "Distributions"
+      },
+      {
+        "kind": "function",
+        "name": "uniform_int",
+        "qualified_name": "CGAL::Random::uniform_int",
+        "brief": "returns a random IntType from the interval [lower,upper) .",
+        "detailed": "IntType can be an integral type as int , std::ptrdiff_t , std::size_t ,etc. In contrast to get_int this function may return upper .",
+        "return_type": "IntType",
+        "argsstring": "(IntType lower=0, IntType upper=9)",
+        "params": [
+          {
+            "type": "IntType",
+            "name": "lower",
+            "default": "0",
+            "brief": ""
+          },
+          {
+            "type": "IntType",
+            "name": "upper",
+            "default": "9",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "120",
+        "section": "Distributions"
+      },
+      {
+        "kind": "function",
+        "name": "uniform_real",
+        "qualified_name": "CGAL::Random::uniform_real",
+        "brief": "returns a random RealType from the interval [lower,upper) .",
+        "detailed": "RealType can be float , double , etc.",
+        "return_type": "Realtype",
+        "argsstring": "(RealType lower=0.0, RealType upper=1.0)",
+        "params": [
+          {
+            "type": "RealType",
+            "name": "lower",
+            "default": "0.0",
+            "brief": ""
+          },
+          {
+            "type": "RealType",
+            "name": "upper",
+            "default": "1.0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "127",
+        "section": "Distributions"
+      },
+      {
+        "kind": "function",
+        "name": "uniform_01",
+        "qualified_name": "CGAL::Random::uniform_01",
+        "brief": "returns a random RealType from the interval [0,1) .",
+        "detailed": "RealType can be float , double , etc.",
+        "return_type": "RealType",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Random.h",
+        "line": "135",
+        "section": "Distributions"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Random::operator()",
+        "brief": "returns random``uniform_int<IntType>( 0, upper-1) .",
+        "detailed": "",
+        "return_type": "IntType",
+        "argsstring": "(IntType upper)",
+        "params": [
+          {
+            "type": "IntType",
+            "name": "upper",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "141",
+        "section": "Distributions"
+      },
+      {
+        "kind": "function",
+        "name": "get_seed",
+        "qualified_name": "CGAL::Random::get_seed",
+        "brief": "returns the seed used for initialization.",
+        "detailed": "",
+        "return_type": "unsigned int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Random.h",
+        "line": "152",
+        "section": "Seed and State Functions"
+      },
+      {
+        "kind": "function",
+        "name": "save_state",
+        "qualified_name": "CGAL::Random::save_state",
+        "brief": "saves the current internal state in state .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(State &state) const",
+        "params": [
+          {
+            "type": "State &",
+            "name": "state",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "158",
+        "section": "Seed and State Functions"
+      },
+      {
+        "kind": "function",
+        "name": "restore_state",
+        "qualified_name": "CGAL::Random::restore_state",
+        "brief": "restores the internal state from state .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(State const &state)",
+        "params": [
+          {
+            "type": "State const &",
+            "name": "state",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "164",
+        "section": "Seed and State Functions"
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "CGAL::Random::operator==",
+        "brief": "returns true , iff the random object and random2 have equal internal states.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Random const &random2) const",
+        "params": [
+          {
+            "type": "Random const &",
+            "name": "random2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Random.h",
+        "line": "176",
+        "section": "Equality Test"
+      }
+    ]
+  },
+  "CGAL::Random_convex_set_traits_2": {
+    "kind": "struct",
+    "name": "CGAL::Random_convex_set_traits_2",
+    "brief": "The class Random_convex_set_traits_2 serves as a traits class for the function random_convex_set_2() .",
+    "detailed": "Is model of RandomConvexSetTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::Point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "20",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sum",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::Sum",
+        "brief": "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , Point_2 >",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Scale",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::Scale",
+        "brief": "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , Point_2 >",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Max_coordinate",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::Max_coordinate",
+        "brief": "function object class derived from CGAL::cpp98::unary_function< Point_2 , FT >",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Angle_less",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::Angle_less",
+        "brief": "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , bool>",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_convex_set_traits_2",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::Random_convex_set_traits_2",
+        "brief": "default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "60",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "origin",
+        "qualified_name": "CGAL::Random_convex_set_traits_2::origin",
+        "brief": "returns CGAL::ORIGIN.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Random_convex_set_traits_2.h",
+        "line": "70",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_ball_d": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_ball_d",
+    "brief": "The class Random_points_in_ball_d is an input iterator creating points uniformly distributed in an open ball in any dimension.",
+    "detailed": "Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_sphere_3 <Point_3, Creator> CGAL::Random_points_in_cube_d <Point_d> CGAL::Random_points_on_sphere_d <Point_d>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_ball_d::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_ball_d::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_d",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_ball_d::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_ball_d::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_d *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_ball_d::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_d &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "80",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_ball_d",
+        "qualified_name": "CGAL::Random_points_in_ball_d::Random_points_in_ball_d",
+        "brief": "$ g$ is an input iterator creating points of type Point_d uniformly distributed in the open ball in dimension $ dim$ with radius $ r$ , i.e. $ |*g| < r$ .",
+        "detailed": "$ 2\\cdot dim+1$ random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(int dim, double r=1.0, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_d.h",
+        "line": "94",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_cube_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_cube_3",
+    "brief": "The class Random_points_in_cube_3 is an input iterator creating points uniformly distributed in a half-open cube.",
+    "detailed": "The default Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . Is model of InputIterator PointGenerator CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_sphere_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_cube_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_cube_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_cube_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_cube_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_cube_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_cube_3",
+        "qualified_name": "CGAL::Random_points_in_cube_3::Random_points_in_cube_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed in the half-open cube with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g: -a \\le p.x(),p.y(),p.z() < a$ .",
+        "detailed": "Three random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double a, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "95",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_cube_d": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_cube_d",
+    "brief": "The class Random_points_in_cube_d is an input iterator creating points uniformly distributed in a half-open cube.",
+    "detailed": "Is model of InputIterator PointGenerator CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_ball_d <Point_d> CGAL::Random_points_on_sphere_d <Point_d>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_cube_d::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "125",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_cube_d::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_d",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "130",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_cube_d::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "135",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_cube_d::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_d *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "140",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_cube_d::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_d &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "145",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_cube_d",
+        "qualified_name": "CGAL::Random_points_in_cube_d::Random_points_in_cube_d",
+        "brief": "$ g$ is an input iterator creating points of type Point_d uniformly distributed in the half-open cube of dimension $ dim$ with side length $ 2 a$ , centered at the origin.",
+        "detailed": "For every point $ p = *g$ and for all $ i<dim$ we have $ -a \\le p[i] < a$ . $ dim$ random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(int dim, double a, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_d.h",
+        "line": "160",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_disc_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_disc_2",
+    "brief": "The class Random_points_in_disc_2 is an input iterator creating points uniformly distributed in an open disc.",
+    "detailed": "The default Creator is Creator_uniform_2<Kernel_traits<Point_2>::Kernel::RT,Point_2> . Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_in_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_disc_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "165",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_disc_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "170",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_disc_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "175",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_disc_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "180",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_disc_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "185",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_disc_2",
+        "qualified_name": "CGAL::Random_points_in_disc_2::Random_points_in_disc_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed in the open disc with radius $ r$ , i.e. $ |*g| < r$ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double r=1.0, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "198",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_sphere_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_sphere_3",
+    "brief": "The class Random_points_in_sphere_3 is an input iterator creating points uniformly distributed strictly inside a sphere.",
+    "detailed": "The default Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_sphere_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "129",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_sphere_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "134",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_sphere_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "139",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_sphere_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "144",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_sphere_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "149",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_sphere_3",
+        "qualified_name": "CGAL::Random_points_in_sphere_3::Random_points_in_sphere_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed strictly inside the sphere with radius $ r$ , i.e. $ |*g| < r$ .",
+        "detailed": "Three random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double r=1.0, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "162",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_square_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_square_2",
+    "brief": "The class Random_points_in_square_2 is an input iterator creating points uniformly distributed in a half-open square.",
+    "detailed": "The default Creator is Creator_uniform_2<Kernel_traits<Point_2>::Kernel::RT,Point_2> . Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_square_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "230",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_square_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "235",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_square_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "240",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_square_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "245",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_square_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "250",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_square_2",
+        "qualified_name": "CGAL::Random_points_in_square_2::Random_points_in_square_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed in the half-open square with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g: -a \\le p.x() < a$ and $ -a \\le p.y() < a$ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double a, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "264",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_tetrahedral_mesh_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_tetrahedral_mesh_3",
+    "brief": "The class Random_points_in_tetrahedral_mesh_3 is an input iterator creating points uniformly distributed inside a tetrahedral mesh of type Mesh_complex_3_in_triangulation_3 .",
+    "detailed": "The tetrahedral mesh must be valid and unchanged while the generator is used. C3T3 must be a model of Mesh_complex_3_in_triangulation_3 Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator> CGAL::Random_points_in_triangle_mesh_3 <Point_3, TriangleMesh> CGAL::Random_points_in_triangle_mesh_2 <Point_2, Triangulation> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_triangles_2 <Point_2> CGAL::Random_points_in_triangles_3 <Point_3>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "732",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "C3T3::Triangulation::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "737",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "742",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "747",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "752",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_tetrahedral_mesh_3",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::Random_points_in_tetrahedral_mesh_3",
+        "brief": "creates an input iterator g generating points of type Weighted_point_3 uniformly distributed inside the tetrahedra of the mesh.",
+        "detailed": "Each tetrahedron has a probability to be chosen to hold the point depending on its volume.",
+        "return_type": "",
+        "argsstring": "(const C3T3 &c3t3, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const C3T3 &",
+            "name": "c3t3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "764",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_3::point_and_support",
+        "brief": "returns the last point generated and a handle to the cell used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_3, typename C3t3::Triangulation::Cell_handle >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "771",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_tetrahedral_mesh_boundary_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3",
+    "brief": "The class Random_points_in_tetrahedral_mesh_boundary_3 is an input iterator creating points uniformly distributed on the boundary of a tetrahedral mesh of type Mesh_complex_3_in_triangulation_3 .",
+    "detailed": "The tetrahedral mesh must be valid and unchanged while the generator is used. C3T3 must be a model of Mesh_complex_3_in_triangulation_3 Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator> CGAL::Random_points_in_triangle_mesh_3 <Point_3, TriangleMesh> CGAL::Random_points_in_triangle_mesh_2 <Point_2, Triangulation> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_2 <Point_2> CGAL::Random_points_in_triangles_3 <Point_3>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "650",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "C3T3::Triangulation::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "655",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "660",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "665",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "670",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_tetrahedral_mesh_boundary_3",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::Random_points_in_tetrahedral_mesh_boundary_3",
+        "brief": "creates an input iterator g generating points of type Weighted_point_3 uniformly distributed on the mesh.",
+        "detailed": "Each triangle has a probability to be chosen to hold the point depending on its area.",
+        "return_type": "",
+        "argsstring": "(const C3T3 &c3t3, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const C3T3 &",
+            "name": "c3t3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "682",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_tetrahedral_mesh_boundary_3::point_and_support",
+        "brief": "returns the last point generated and the facet used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_3, typename C3t3::Triangulation::Facet >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "688",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_tetrahedron_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_tetrahedron_3",
+    "brief": "The class Random_points_in_tetrahedron_3 is an input iterator creating points uniformly distributed inside a tetrahedron.",
+    "detailed": "The default Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . Is model of InputIterator PointGenerator CGAL::Random_points_on_segment_3 <Point_3, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "405",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "410",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "415",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "420",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "425",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_tetrahedron_3",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::Random_points_in_tetrahedron_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed inside the tetrahedron with vertices $ p, q, r $ and $ s $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r + \\delta s $ , for some $ \\alpha, \\beta, \\gamma, \\delta \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma + \\delta = 1 $ .",
+        "detailed": "Three random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(Point_3 &p, Point_3 &q, Point_3 &r, Point_3 &s, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "438",
+        "section": "Function"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_tetrahedron_3",
+        "qualified_name": "CGAL::Random_points_in_tetrahedron_3::Random_points_in_tetrahedron_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed inside a tetrahedron $t$ with vertices $ p, q, r $ and $ s $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r + \\delta s $ , for some $ \\alpha, \\beta, \\gamma, \\delta \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma + \\delta = 1 $ .",
+        "detailed": "Three random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(Tetrahedron_3 &t, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "Tetrahedron_3 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "448",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangle_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_triangle_2",
+    "brief": "The class Random_points_in_triangle_2 is an input iterator creating points uniformly distributed inside a triangle.",
+    "detailed": "The default Creator is Creator_uniform_2<Kernel_traits<Point_2>::Kernel::RT,Point_2> . Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_2, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_2, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "297",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "302",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "307",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "312",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "317",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_2",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::Random_points_in_triangle_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed inside the triangle with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(Point_2 &p, Point_2 &q, Point_2 &r, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_2 &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "330",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_2",
+        "qualified_name": "CGAL::Random_points_in_triangle_2::Random_points_in_triangle_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed inside a triangle $t$ with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(Triangle_2 &t, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "Triangle_2 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "340",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangle_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_triangle_3",
+    "brief": "The class Random_points_in_triangle_3 is an input iterator creating points uniformly distributed inside a 3D triangle.",
+    "detailed": "The default Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "195",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "200",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "205",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "210",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "215",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_3",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::Random_points_in_triangle_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed inside the 3D triangle with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(Point_3 &p, Point_3 &q, Point_3 &r, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "228",
+        "section": "Function"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_3",
+        "qualified_name": "CGAL::Random_points_in_triangle_3::Random_points_in_triangle_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed inside a 3D triangle $t$ with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(Triangle_3 &t, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "Triangle_3 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "238",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangle_mesh_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_in_triangle_mesh_2",
+    "brief": "The class Random_points_in_triangle_mesh_2 is an input iterator creating points uniformly distributed inside a 2D domain represented by a 2D triangulation.",
+    "detailed": "Triangulation must be a CGAL triangulation with a face model of DelaunayMeshFaceBase_2 . The sampled model is the union of the faces for which DelaunayMeshFaceBase_2::is_in_domain() returns true . The triangulation must be valid and unchanged while the iterator is used. Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_2, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_2, Creator> CGAL::Random_points_in_triangle_mesh_3 <Point_3, TriangleMesh> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_3 <Point_3> CGAL::Random_points_in_triangles_2 <Point_2>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "381",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "386",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "391",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "396",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "401",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_mesh_2",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::Random_points_in_triangle_mesh_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed between the triangles of the triangulation.",
+        "detailed": "Each triangle has a probability to be chosen to hold the point depending on its area.",
+        "return_type": "",
+        "argsstring": "(const Triangulation &triangulation, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const Triangulation &",
+            "name": "triangulation",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "413",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_2::point_and_support",
+        "brief": "returns the last point generated and a handle of the face used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_2, typename Triangulation::Face_handle >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "420",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangle_mesh_3": {
+    "kind": "struct",
+    "name": "CGAL::Random_points_in_triangle_mesh_3",
+    "brief": "The class Random_points_in_triangle_mesh_3 is an input iterator creating points uniformly distributed inside the faces of a triangle mesh model of FaceListGraph .",
+    "detailed": "The triangle mesh must be valid and unchanged while the generator is used. Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 < Point_3 , Creator> CGAL::Random_points_in_triangle_3 < Point_3 , Creator> CGAL::Random_points_on_sphere_3 < Point_3 , Creator> CGAL::Random_points_in_triangle_mesh_2 <Point_2, Triangulation> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_2 <Point_2> CGAL::Random_points_in_triangles_3 < Point_3 >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "568",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< VertexPointMap > ::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "569",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "574",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "579",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "584",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "589",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_mesh_3",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::Random_points_in_triangle_mesh_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed in the faces of mesh .",
+        "detailed": "Each triangle has a probability to be chosen to hold the point depending on its area.",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &mesh, VertexPointMap vpm=get(vertex_point, mesh), Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "mesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpm",
+            "default": "get(vertex_point, mesh)",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "600",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_triangle_mesh_3::point_and_support",
+        "brief": "returns the last point generated and a descriptor of the face used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_3 , typename boost::graph_traits< TriangleMesh >::face_descriptor >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "606",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangle_soup_3": {
+    "kind": "struct",
+    "name": "CGAL::Random_points_in_triangle_soup_3",
+    "brief": "The class Random_points_in_triangle_soup_3 is an input iterator creating points uniformly distributed inside a soup of triangles.",
+    "detailed": "The triangle range must be valid and unchanged while the generator is used. Triangles are triplets of indices referring to position of points in the input point range. PointRange a model of the concepts RandomAccessContainer with value type begin a point from a CGAL kernel TriangleRange a model of the concept RandomAccessContainer , with value_type being a model of RandomAccessContainer with std::size_t as value_type . Is model of InputIterator PointGenerator CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_in_triangle_mesh_3 <Point_3, TriangleMesh> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_2 <Point_2>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "881",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "886",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "891",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "896",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "901",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangle_soup_3",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::Random_points_in_triangle_soup_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed between the triangles of the range.",
+        "detailed": "Each triangle has a probability to be chosen to hold the point depending on its area.",
+        "return_type": "",
+        "argsstring": "(const PointRange &points, const TriangleRange &triangles, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleRange &",
+            "name": "triangles",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "912",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_triangle_soup_3::point_and_support",
+        "brief": "returns the last point generated and the id in the input range of the triangle used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_3, std::size_t >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "918",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangles_2": {
+    "kind": "struct",
+    "name": "CGAL::Random_points_in_triangles_2",
+    "brief": "The class Random_points_in_triangles_2 is an input iterator creating points uniformly distributed inside a range of Triangle_2 .",
+    "detailed": "The triangle range must be valid and unchanged while the iterator is used. Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_2, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_2, Creator> CGAL::Random_points_in_triangle_mesh_3 <Point_3, TriangleMesh> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_3 <Point_3>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "457",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "462",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "467",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "472",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "477",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangles_2",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::Random_points_in_triangles_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed between the triangles of the range.",
+        "detailed": "Each triangle has a probability to be chosen to hold the point depending on its area.",
+        "return_type": "",
+        "argsstring": "(const TriangleRange &triangles, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const TriangleRange &",
+            "name": "triangles",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "490",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_triangles_2::point_and_support",
+        "brief": "returns the last point generated and a pointer to the input triangle used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_2, const Triangle_2 * >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "497",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_in_triangles_3": {
+    "kind": "struct",
+    "name": "CGAL::Random_points_in_triangles_3",
+    "brief": "The class Random_points_in_triangles_3 is an input iterator creating points uniformly distributed inside a range of Triangle_3 .",
+    "detailed": "The triangle range must be valid and unchanged while the generator is used. Is model of InputIterator PointGenerator CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_in_triangle_mesh_3 <Point_3, TriangleMesh> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_2 <Point_2>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "487",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "492",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "497",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "502",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "507",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_in_triangles_3",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::Random_points_in_triangles_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed between the triangles of the range.",
+        "detailed": "Each triangle has a probability to be chosen to hold the point depending on its area.",
+        "return_type": "",
+        "argsstring": "(const TriangleRange &triangulation, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const TriangleRange &",
+            "name": "triangulation",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "519",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_in_triangles_3::point_and_support",
+        "brief": "returns the last point generated and a pointer to the input triangle used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_3, const Triangle_3 * >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "526",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_circle_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_on_circle_2",
+    "brief": "The class Random_points_on_circle_2 is an input iterator creating points uniformly distributed on a circle.",
+    "detailed": "The default Creator is Creator_uniform_2<Kernel_traits<Point_2>::Kernel::RT,Point_2> . The generated points are computed using floating point arithmetic, whatever the Kernel is, thus they are on the circle/sphere only up to rounding errors. Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_circle_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "532",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_circle_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "537",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_circle_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "542",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_circle_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "547",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_circle_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "552",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_circle_2",
+        "qualified_name": "CGAL::Random_points_on_circle_2::Random_points_on_circle_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed on the circle with radius $ r$ , i.e. $ |*g| == r$ .",
+        "detailed": "A single random number is needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double r=1.0, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "565",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_graph_edges_3": {
+    "kind": "struct",
+    "name": "CGAL::Random_points_on_graph_edges_3",
+    "brief": "The class Random_points_on_graph_edges_3 is an input iterator creating points uniformly distributed on the edges of a graph model of EdgeListGraph .",
+    "detailed": "The graph must be valid and unchanged while the generator is used. Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 < Point_3 , Creator> CGAL::Random_points_in_triangle_3 < Point_3 , Creator> CGAL::Random_points_on_sphere_3 < Point_3 , Creator> CGAL::Random_points_in_triangle_mesh_2 <Point_2, Triangulation> CGAL::Random_points_in_tetrahedral_mesh_boundary_3 <C3T3> CGAL::Random_points_in_tetrahedral_mesh_3 <C3T3> CGAL::Random_points_in_triangles_2 <Point_2> CGAL::Random_points_in_triangles_3 < Point_3 >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "960",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< VertexPointMap > ::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "961",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "966",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "971",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "976",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "981",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_graph_edges_3",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::Random_points_on_graph_edges_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed on the edges of the graph.",
+        "detailed": "Each edge has a probability to be chosen to hold the point depending on its length.",
+        "return_type": "",
+        "argsstring": "(const EdgeListGraph &mesh, VertexPointMap vpm=get(vertex_point, mesh), Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const EdgeListGraph &",
+            "name": "mesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpm",
+            "default": "get(vertex_point, mesh)",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "992",
+        "section": "Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point_and_support",
+        "qualified_name": "CGAL::Random_points_on_graph_edges_3::point_and_support",
+        "brief": "returns the last point generated and a descriptor of the edge used to generate that point.",
+        "detailed": "",
+        "return_type": "std::pair< Point_3 , typename boost::graph_traits< EdgeListGraph >::edge_descriptor >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "999",
+        "section": "Functions"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_segment_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_on_segment_2",
+    "brief": "The class Random_points_on_segment_2 is an input iterator creating points uniformly distributed on a segment.",
+    "detailed": "The default Creator is Creator_uniform_2<Kernel_traits<Point_2>::Kernel::RT,Point_2> . Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_segment_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "600",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_segment_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "605",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_segment_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "610",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_segment_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "615",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_segment_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "620",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_segment_2",
+        "qualified_name": "CGAL::Random_points_on_segment_2::Random_points_on_segment_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed on the segment from $ p$ to $ q$ (excluding $ q$ ), i.e. $ *g == (1-\\lambda)\\, p + \\lambda q$ where $ 0 \\le\\lambda< 1$ .",
+        "detailed": "A single random number is needed from rnd for each point. The expressions to_double(p.x()) and to_double(p.y()) must result in the respective double representation of the coordinates of $ p$ , and similarly for $ q$ .",
+        "return_type": "",
+        "argsstring": "(const Point_2 &p, const Point_2 &q, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "633",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_segment_3": {
+    "kind": "class",
+    "name": "CGAL::Random_points_on_segment_3",
+    "brief": "The class Random_points_on_segment_3 is an input iterator creating points uniformly distributed on a segment.",
+    "detailed": "The default for Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . Is model of InputIterator PointGenerator CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> The default Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . Is model of InputIterator PointGenerator CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_segment_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "272",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_segment_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "277",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_segment_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "282",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_segment_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "287",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_segment_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "292",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_segment_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "337",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_segment_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "342",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_segment_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "347",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_segment_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "352",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_segment_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "357",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_segment_3",
+        "qualified_name": "CGAL::Random_points_on_segment_3::Random_points_on_segment_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed on the segment from p to q (excluding q ).",
+        "detailed": "A single random number is needed from rnd for each point. The expressions to_double(p.x()) and to_double(p.y()) must result in the respective double representation of the coordinates of $ p$ , and similarly for $ q$ .",
+        "return_type": "",
+        "argsstring": "(const Point_3 &p, const Point_3 &q, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "304",
+        "section": "Function"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_segment_3",
+        "qualified_name": "CGAL::Random_points_on_segment_3::Random_points_on_segment_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed on the segment from $ p$ to $ q$ (excluding $ q$ ), i.e. $ *g == (1-\\lambda)\\, p + \\lambda q$ where $ 0 \\le\\lambda< 1$ .",
+        "detailed": "A single random number is needed from rnd for each point. The expressions to_double(p.x()) , to_double(p.y()) , and to_double(p.z()) must result in the respective double representation of the coordinates of $ p$ , and similarly for $ q$ .",
+        "return_type": "",
+        "argsstring": "(const Point_3 &p, const Point_3 &q, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "371",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_sphere_3": {
+    "kind": "struct",
+    "name": "CGAL::Random_points_on_sphere_3",
+    "brief": "The class Random_points_on_sphere_3 is an input iterator creating points uniformly distributed on a sphere.",
+    "detailed": "The default Creator is Creator_uniform_3<Kernel_traits<Point_3>::Kernel::RT,Point_3> . The generated points are computed using floating point arithmetic, whatever the Kernel is, thus they are on the circle/sphere only up to rounding errors. Is model of InputIterator PointGenerator CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_sphere_3 <Point_3, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_sphere_3::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "805",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_sphere_3::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "810",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_sphere_3::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "815",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_sphere_3::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "820",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_sphere_3::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_3.h",
+        "line": "825",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_sphere_3",
+        "qualified_name": "CGAL::Random_points_on_sphere_3::Random_points_on_sphere_3",
+        "brief": "creates an input iterator g generating points of type Point_3 uniformly distributed on the boundary of a sphere with radius $ r$ , i.e. $ |*g| == r$ .",
+        "detailed": "Two random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double r=1.0, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_3.h",
+        "line": "838",
+        "section": "Function"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_sphere_d": {
+    "kind": "class",
+    "name": "CGAL::Random_points_on_sphere_d",
+    "brief": "The class Random_points_on_sphere_d is an input iterator creating points uniformly distributed on a sphere.",
+    "detailed": "The generated points are computed using floating point arithmetic, whatever the Kernel is, thus they are on the sphere only up to rounding errors. Is model of InputIterator PointGenerator CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator> CGAL::Random_points_in_cube_d <Point_d> CGAL::Random_points_in_ball_d <Point_d>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_sphere_d::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "196",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_sphere_d::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_d",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "201",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_sphere_d::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "206",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_sphere_d::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_d *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "211",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_sphere_d::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_d &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_d.h",
+        "line": "216",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_sphere_d",
+        "qualified_name": "CGAL::Random_points_on_sphere_d::Random_points_on_sphere_d",
+        "brief": "$ g$ is an input iterator creating points of type Point_d uniformly distributed on a sphere in dimension $ dim$ with radius $ r$ , i.e. $ |*g| == r$ .",
+        "detailed": "$ 2\\cdot dim$ random numbers are needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(int dim, double r=1.0, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_d.h",
+        "line": "230",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Random_points_on_square_2": {
+    "kind": "class",
+    "name": "CGAL::Random_points_on_square_2",
+    "brief": "The class Random_points_on_square_2 is an input iterator creating points uniformly distributed on the boundary of a square.",
+    "detailed": "The default Creator is Creator_uniform_2<Kernel_traits<Point_2>::Kernel::RT,Point_2> . Is model of InputIterator PointGenerator CGAL::Points_on_segment_2 <Point_2> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Random_points_on_square_2::iterator_category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::input_iterator_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "668",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Random_points_on_square_2::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "673",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Random_points_on_square_2::difference_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "678",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "pointer",
+        "qualified_name": "CGAL::Random_points_on_square_2::pointer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "683",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Random_points_on_square_2::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/point_generators_2.h",
+        "line": "688",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Random_points_on_square_2",
+        "qualified_name": "CGAL::Random_points_on_square_2::Random_points_on_square_2",
+        "brief": "creates an input iterator g generating points of type Point_2 uniformly distributed on the boundary of the square with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g:$ one coordinate is either $ a$ or $ -a$ and for the other coordinate $ c$ holds $ -a \\le c < a$ .",
+        "detailed": "A single random number is needed from rnd for each point.",
+        "return_type": "",
+        "argsstring": "(double a, Random &rnd=get_default_random())",
+        "params": [
+          {
+            "type": "double",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "rnd",
+            "default": "get_default_random ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/point_generators_2.h",
+        "line": "703",
+        "section": "Function"
+      }
+    ]
+  },
+  "CombinationElement": {
+    "kind": "class",
+    "name": "CombinationElement",
+    "brief": "A CombinationElement can be used as template parameter for the class Combination_enumerator< CombinationElement > .",
+    "detailed": "Has models Any integer type ( char , short , int , long , etc.) Pointers Random access iterators CGAL::Combination_enumerator < CombinationElement >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CombinationElement::value_type",
+        "brief": "the type of point being generated.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CombinationElement.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "CombinationElement",
+        "qualified_name": "CombinationElement::CombinationElement",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const CombinationElement &e2)",
+        "params": [
+          {
+            "type": "const CombinationElement &",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinationElement.h",
+        "line": "27",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator++",
+        "qualified_name": "CombinationElement::operator++",
+        "brief": "Incrementation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/CombinationElement.h",
+        "line": "48",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator--",
+        "qualified_name": "CombinationElement::operator--",
+        "brief": "Decrementation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/CombinationElement.h",
+        "line": "53",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator<",
+        "qualified_name": "CombinationElement::operator<",
+        "brief": "Total order comparison.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const CombinationElement &e2)",
+        "params": [
+          {
+            "type": "const CombinationElement &",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinationElement.h",
+        "line": "58",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "CombinationElement::operator==",
+        "brief": "Equality test.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const CombinationElement &e2)",
+        "params": [
+          {
+            "type": "const CombinationElement &",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinationElement.h",
+        "line": "63",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator+",
+        "qualified_name": "CombinationElement::operator+",
+        "brief": "Equivalent to calling ++(*this) i times if i is positive.",
+        "detailed": "Equivalent to calling --(*this) -i times if i is negative.",
+        "return_type": "CombinationElement",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinationElement.h",
+        "line": "70",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-",
+        "qualified_name": "CombinationElement::operator-",
+        "brief": "Equivalent to calling ++(*this) i times if i is positive.",
+        "detailed": "Equivalent to calling (*this) -i times if i is negative.",
+        "return_type": "int",
+        "argsstring": "(const CombinationElement &e2)",
+        "params": [
+          {
+            "type": "const CombinationElement &",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinationElement.h",
+        "line": "76",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PointGenerator": {
+    "kind": "class",
+    "name": "PointGenerator",
+    "brief": "The concept PointGenerator defines the requirements for a point generator, which can be used in places where input iterators are called for.",
+    "detailed": "Has models CGAL::Random_points_in_ball_d <Point_d,> CGAL::Random_points_in_disc_2 <Point_2, Creator> CGAL::Random_points_in_square_2 <Point_2, Creator> CGAL::Random_points_in_triangle_2 <Point_2, Creator> CGAL::Random_points_on_circle_2 <Point_2, Creator> CGAL::Random_points_on_segment_2 <Point_2, Creator> CGAL::Random_points_on_square_2 <Point_2, Creator> CGAL::Random_points_in_cube_3 <Point_3, Creator> CGAL::Random_points_in_cube_d <Point_d> CGAL::Random_points_in_sphere_3 <Point_3, Creator> CGAL::Random_points_in_triangle_3 <Point_3, Creator> CGAL::Random_points_in_tetrahedron_3 <Point_3, Creator> CGAL::Random_points_on_sphere_3 <Point_3, Creator> CGAL::Random_points_on_sphere_d <Point_d>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "PointGenerator::value_type",
+        "brief": "the type of point being generated.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointGenerator.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "range",
+        "qualified_name": "PointGenerator::range",
+        "brief": "returns an absolute bound for the coordinates of all generated points.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PointGenerator.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "RandomConvexHullTraits_2": {
+    "kind": "class",
+    "name": "RandomConvexHullTraits_2",
+    "brief": "The concept RandomConvexHullTraits_2 describes the requirements for the traits class used by the function random_convex_hull_in_disc_2() .",
+    "detailed": "Has models All models of the concept Kernel Operations The following two member functions returning instances of the above predicate object types are required.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "RandomConvexHullTraits_2::FT",
+        "brief": "The coordinate type of the points of the polygon.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "RandomConvexHullTraits_2::Point_2",
+        "brief": "The point type of the polygon.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_2",
+        "qualified_name": "RandomConvexHullTraits_2::Segment_2",
+        "brief": "The segment type of the polygon.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "RandomConvexHullTraits_2::Orientation_2",
+        "brief": "Predicate object type that determines the orientation of three points.",
+        "detailed": "It must provide Orientation operator()(Point_2 p, Point_2 q,\nPoint_2 r) that returns LEFT_TURN , if $ r$ lies to the left of the oriented line $ l$ defined by $ p$ and $ q$ , returns RIGHT_TURN if $ r$ lies to the right of $ l$ , and returns COLLINEAR if $ r$ lies on $ l$ .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_x_2",
+        "qualified_name": "RandomConvexHullTraits_2::Compare_x_2",
+        "brief": "A function object to compare the x-coordinate of two points.",
+        "detailed": "Provides the operator: Comparison_result operator()(Point p, Point q) which returns SMALLER, EQUAL or LARGER according to the $ x$ -ordering of points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_y_2",
+        "qualified_name": "RandomConvexHullTraits_2::Compare_y_2",
+        "brief": "A function object to compare the y-coordinate of two points.",
+        "detailed": "Provides the operator: Comparison_result operator()(Point p, Point q) which returns ( SMALLER, EQUAL or LARGER ) according to the $ y$ -ordering of points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "compare_x_2_object",
+        "qualified_name": "RandomConvexHullTraits_2::compare_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "86",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_y_2_object",
+        "qualified_name": "RandomConvexHullTraits_2::compare_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "91",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "RandomConvexHullTraits_2::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RandomConvexHullTraits_2.h",
+        "line": "95",
+        "section": "Operations"
+      }
+    ]
+  },
+  "RandomConvexSetTraits_2": {
+    "kind": "class",
+    "name": "RandomConvexSetTraits_2",
+    "brief": "The concept RandomConvexSetTraits_2 describes the requirements of the traits class for the function random_convex_set_2() .",
+    "detailed": "Has models CGAL::Random_convex_set_traits_2 <Kernel>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "RandomConvexSetTraits_2::Point_2",
+        "brief": "point class.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "23",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "RandomConvexSetTraits_2::FT",
+        "brief": "class used for doing computations on point and vector coordinates (has to fulfill field type requirements).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sum",
+        "qualified_name": "RandomConvexSetTraits_2::Sum",
+        "brief": "AdaptableBinaryFunction class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ Point_2 .",
+        "detailed": "It returns the point that results from adding the vectors corresponding to both arguments.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Scale",
+        "qualified_name": "RandomConvexSetTraits_2::Scale",
+        "brief": "AdaptableBinaryFunction class: Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .",
+        "detailed": "Scale(p,k) returns the point that results from scaling the vector corresponding to p by a factor of k .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Max_coordinate",
+        "qualified_name": "RandomConvexSetTraits_2::Max_coordinate",
+        "brief": "AdaptableUnaryFunction class: Point_2 $ \\rightarrow$ FT .",
+        "detailed": "Max_coordinate(p) returns the coordinate of p with largest absolute value.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Angle_less",
+        "qualified_name": "RandomConvexSetTraits_2::Angle_less",
+        "brief": "AdaptableBinaryFunction class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ bool .",
+        "detailed": "It returns true , iff the angle of the direction corresponding to the first argument with respect to the positive $ x$ -axis is less than the angle of the direction corresponding to the second argument.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "63",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "origin",
+        "qualified_name": "RandomConvexSetTraits_2::origin",
+        "brief": "return origin (neutral element for the Sum operation).",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/RandomConvexSetTraits_2.h",
+        "line": "74",
+        "section": "Operations"
+      }
+    ]
+  },
+  "RandomPolygonTraits_2": {
+    "kind": "class",
+    "name": "RandomPolygonTraits_2",
+    "brief": "The concept RandomPolygonTraits_2 describes the requirements for the traits class used by the function random_polygon_2() .",
+    "detailed": "Has models All models of the concept Kernel Operations The following two member functions returning instances of the above predicate object types are required.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "RandomPolygonTraits_2::FT",
+        "brief": "The coordinate type of the points of the polygon.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomPolygonTraits_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "RandomPolygonTraits_2::Point_2",
+        "brief": "The point type of the polygon.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomPolygonTraits_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "RandomPolygonTraits_2::Orientation_2",
+        "brief": "Predicate object type that determines the orientation of three points.",
+        "detailed": "It must provide Orientation operator()(Point_2 p, Point_2 q,\nPoint_2 r) that returns LEFT_TURN , if $ r$ lies to the left of the oriented line $ l$ defined by $ p$ and $ q$ , returns RIGHT_TURN if $ r$ lies to the right of $ l$ , and returns COLLINEAR if $ r$ lies on $ l$ .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomPolygonTraits_2.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_xy_2",
+        "qualified_name": "RandomPolygonTraits_2::Less_xy_2",
+        "brief": "Binary predicate object type comparing Point_2 s lexicographically.",
+        "detailed": "It must provide bool operator()(Point_2 p, Point_2 q) that returns true iff $ p <_{xy} q$ . We have $ p<_{xy}q$ , iff $ p_x < q_x$ or $ p_x = q_x$ and $ p_y < q_y$ , where $ p_x$ and $ p_y$ denote the $ x$ and $ y$ coordinates of point $ p$ , resp.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RandomPolygonTraits_2.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "less_xy_2_object",
+        "qualified_name": "RandomPolygonTraits_2::less_xy_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_xy_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RandomPolygonTraits_2.h",
+        "line": "65",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "RandomPolygonTraits_2::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orienation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RandomPolygonTraits_2.h",
+        "line": "70",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

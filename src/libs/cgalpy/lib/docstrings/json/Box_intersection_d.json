@@ -1,0 +1,1185 @@
+{
+  "BoxIntersectionBox_d": {
+    "kind": "class",
+    "name": "BoxIntersectionBox_d",
+    "brief": "The BoxIntersectionBox_d concept is used in the context of the intersection algorithms for sequences of iso-oriented boxes. These algorithms come with a default traits class that assumes that the boxes are a model of this BoxIntersectionBox_d concept. This concept defines the access functions to the dimension, the id -number, and the boundaries of the box.",
+    "detailed": "Refines Assignable Has models CGAL::Box_intersection_d::Box_d CGAL::Box_intersection_d::Box_with_handle_d CGAL::box_intersection_d() CGAL::box_self_intersection_d() CGAL::box_intersection_all_pairs_d() CGAL::box_self_intersection_all_pairs_d() CGAL::Box_intersection_d::Box_traits_d <BoxHandle> BoxIntersectionTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "BoxIntersectionBox_d::NT",
+        "brief": "number type to represent the box boundaries.",
+        "detailed": "Allowed are the built-in types int , unsigned int , float , and double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BoxIntersectionBox_d.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ID",
+        "qualified_name": "BoxIntersectionBox_d::ID",
+        "brief": "type for the box id -number, must be a model of the LessThanComparable concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BoxIntersectionBox_d.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "BoxIntersectionBox_d::dimension",
+        "brief": "returns the dimension of the box.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BoxIntersectionBox_d.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "BoxIntersectionBox_d::id",
+        "brief": "returns the unique id -number for the box .",
+        "detailed": "",
+        "return_type": "ID",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/BoxIntersectionBox_d.h",
+        "line": "59",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "min_coord",
+        "qualified_name": "BoxIntersectionBox_d::min_coord",
+        "brief": "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < $ dimension() .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BoxIntersectionBox_d.h",
+        "line": "65",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "max_coord",
+        "qualified_name": "BoxIntersectionBox_d::max_coord",
+        "brief": "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < $ dimension() .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BoxIntersectionBox_d.h",
+        "line": "71",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "BoxIntersectionTraits_d": {
+    "kind": "class",
+    "name": "BoxIntersectionTraits_d",
+    "brief": "The BoxIntersectionTraits_d concept is used for the intersection algorithms for sequences of iso-oriented boxes. This concept defines the access functions to the dimension, the id -number, and the boundaries of the boxes manipulated in these algorithms.",
+    "detailed": "Refines Assignable DefaultConstructible Has models CGAL::Box_intersection_d::Box_traits_d CGAL::box_intersection_d() CGAL::box_self_intersection_d() CGAL::box_intersection_all_pairs_d() CGAL::box_self_intersection_all_pairs_d()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Box_parameter",
+        "qualified_name": "BoxIntersectionTraits_d::Box_parameter",
+        "brief": "type used for passing box parameters in the functions below.",
+        "detailed": "Since we support in our algorithms passing the boxes by value as well as passing them as pointers, this type can be either const B& , B* , or const B* respectively, where B is the actual box type. The difference to the box handle type lies in the first case where the box handle would be B where this type is const B& .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "BoxIntersectionTraits_d::NT",
+        "brief": "number type to represent the box boundaries.",
+        "detailed": "Allowed are the built-in types int , unsigned int , float , and double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ID",
+        "qualified_name": "BoxIntersectionTraits_d::ID",
+        "brief": "type for the id -number, model of the LessThanComparable concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "51",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "BoxIntersectionTraits_d::dimension",
+        "brief": "returns the dimension of the box.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "BoxIntersectionTraits_d::id",
+        "brief": "returns the unique id -number for the box .",
+        "detailed": "",
+        "return_type": "ID",
+        "argsstring": "(Box_parameter box)",
+        "params": [
+          {
+            "type": "Box_parameter",
+            "name": "box",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "61",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "min_coord",
+        "qualified_name": "BoxIntersectionTraits_d::min_coord",
+        "brief": "returns the lower boundary of the box in dimension d , $ 0 \\leq$ d $ < $ dimension() .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(Box_parameter box, int d)",
+        "params": [
+          {
+            "type": "Box_parameter",
+            "name": "box",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "max_coord",
+        "qualified_name": "BoxIntersectionTraits_d::max_coord",
+        "brief": "returns the upper boundary of the box in dimension d , $ 0 \\leq$ d $ < $ dimension() .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(Box_parameter box, int d)",
+        "params": [
+          {
+            "type": "Box_parameter",
+            "name": "box",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BoxIntersectionTraits_d.h",
+        "line": "73",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Box_intersection_d::Box_d": {
+    "kind": "class",
+    "name": "CGAL::Box_intersection_d::Box_d",
+    "brief": "Box_d is a generic iso-oriented bounding box in dimension $ D$ .",
+    "detailed": "It provides in each dimension an interval with lower and upper endpoints represented with the number type NT . This class is designed to work smoothly with the algorithms for intersecting sequences of iso-oriented boxes. For degeneracy handling, the boxes need to provide a unique id -number. The policy parameter IdPolicy offers several choices. The template parameters have to comply with the following requirements: NT is the number type for the box boundaries. It must meet the requirements of the concepts Assignable and LessThanComparable . D is an integer and the dimension of the box. IdPolicy specifies how the id -number will be provided and can be one of the following types, where ID_EXPLICIT is the default for this parameter: ID_NONE : no id -number is provided. This can be useful if Box_d is used as a base class for a different implementation of id -numbers than the ones provided here. ID_EXPLICIT : the id -number is stored explicitly in the box and automatically created and assigned at construction time of the box. Note that copying a box (copy-constructor and assignment) does not create a new id -number but keeps the old one, which is the behavior needed by the box_self_intersection_d() algorithm. This is therefore the safe default implementation. ID_FROM_BOX_ADDRESS : casts the address of the box into a std::ptrdiff_t to create the id -number. This works fine if the intersection algorithms work effectively with pointers to boxes, but not in the case where the algorithms work with box values, because the algorithms modify the order of the boxes, and the box_self_intersection_d() algorithm creates copies of the boxes that would not have identical id -numbers. Is model of BoxIntersectionBox_d CGAL::box_intersection_d() CGAL::box_self_intersection_d() CGAL::box_intersection_all_pairs_d() CGAL::box_self_intersection_all_pairs_d() CGAL::Box_intersection_d::Box_with_info_d < NT , int D, Info, IdPolicy> CGAL::Box_intersection_d::Box_with_handle_d < NT , int D, Handle, IdPolicy> CGAL::Box_intersection_d::Box_traits_d <BoxHandle> BoxIntersectionTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::NT",
+        "brief": "number type to represent the box boundaries.",
+        "detailed": "Allowed are the built-in types int , unsigned int , float , and double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ID",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::ID",
+        "brief": "type for the box id -number.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Box_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::Box_d",
+        "brief": "Default constructor.",
+        "detailed": "No particular initialization.",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "82",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::Box_d",
+        "brief": "Constructor initialized to the complete or the empty space.",
+        "detailed": "If empty, all interval starting(end) points will be set to positive(negative) infinity.",
+        "return_type": "",
+        "argsstring": "(bool complete)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "complete",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "89",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::Box_d",
+        "brief": "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ .",
+        "detailed": "lo[i] $ <$ hi[i] for $ 0 \\leq i < D$ .",
+        "return_type": "",
+        "argsstring": "(NT lo[D], NT hi[D])",
+        "params": [
+          {
+            "type": "NT",
+            "name": "lo",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "hi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "96",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::Box_d",
+        "brief": "constructs from bbox .",
+        "detailed": "Requirements: $ D=2$ and NT $ \\equiv$ double .",
+        "return_type": "",
+        "argsstring": "(const Bbox_2 &bbox)",
+        "params": [
+          {
+            "type": "const Bbox_2 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "102",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::Box_d",
+        "brief": "constructs from bbox .",
+        "detailed": "Requirements: $ D=3$ and NT $ \\equiv$ double .",
+        "return_type": "",
+        "argsstring": "(const Bbox_3 &bbox)",
+        "params": [
+          {
+            "type": "const Bbox_3 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "108",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::init",
+        "brief": "initializes to the complete or the empty space.",
+        "detailed": "If empty, all interval starting(end) points will be set to positive(negative) infinity.",
+        "return_type": "void",
+        "argsstring": "(bool complete=false)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "complete",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "120",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "extend",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::extend",
+        "brief": "extend box to contain the old box and point .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(NT point[D])",
+        "params": [
+          {
+            "type": "NT",
+            "name": "point",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "126",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::dimension",
+        "brief": "returns $ D$ , the dimension of the box.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "131",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::id",
+        "brief": "returns a unique box id, see the IdPolicy template parameter above for the different choices.",
+        "detailed": "IdPolicy $ \\neq$ ID_NONE",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "144",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "min_coord",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::min_coord",
+        "brief": "returns the lower boundary in dimension d",
+        "detailed": "$ 0 \\leq$ d $ < D$ .",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "150",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "max_coord",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::max_coord",
+        "brief": "returns the upper boundary in dimension d",
+        "detailed": "$ 0 \\leq$ d $ < D$ .",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "156",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::bbox",
+        "brief": "returns the bounding box Requirements: $ D=2$ and NT $ \\equiv$ double",
+        "detailed": "",
+        "return_type": "const Bbox_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "162",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::bbox",
+        "brief": "returns the bounding box Requirements: $ D=3$ and NT $ \\equiv$ double",
+        "detailed": "",
+        "return_type": "const Bbox_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "168",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "extend",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::extend",
+        "brief": "extends box to the smallest box that additionally contains the point represented by coordinates in p .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(NT p[N])",
+        "params": [
+          {
+            "type": "NT",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "174",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "extend",
+        "qualified_name": "CGAL::Box_intersection_d::Box_d::extend",
+        "brief": "extends box to the smallest box that additionally contains the point represented by coordinate intervals in p .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::pair< NT, NT > p[N])",
+        "params": [
+          {
+            "type": "std::pair< NT , NT >",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_d.h",
+        "line": "180",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL::Box_intersection_d::Box_traits_d": {
+    "kind": "struct",
+    "name": "CGAL::Box_intersection_d::Box_traits_d",
+    "brief": "This is the default traits class for the intersection algorithms for iso-oriented boxes.",
+    "detailed": "There are actually three versions depending on the type of BoxHandle ; there is one if BoxHandle is a class type and there are two if BoxHandle is a pointer type, one for a mutable and one for a const pointer, respectively. This class implements the mapping from its BoxHandle argument to the Box_parameter type required in the BoxIntersectionTraits_d concept. In particular in the case where BoxHandle is a class type B , it defines Box_parameter to be of type const B& , while for the other cases it just uses the pointer type. BoxHandle is either a class type B , a pointer B* , or a const-pointer const B* , where B is a model of the BoxIntersectionBox_d concept. Is model of BoxIntersectionTraits_d CGAL::box_intersection_d() CGAL::box_self_intersection_d() CGAL::box_intersection_all_pairs_d() CGAL::box_self_intersection_all_pairs_d() BoxIntersectionBox_d CGAL::Box_intersection_d::Box_d <NT,int D,IdPolicy>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Box_traits_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_traits_d::Box_traits_d",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_traits_d.h",
+        "line": "42",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Box_intersection_d::Box_with_handle_d": {
+    "kind": "class",
+    "name": "CGAL::Box_intersection_d::Box_with_handle_d",
+    "brief": "Box_with_handle_d is a generic iso-oriented bounding box in dimension $ D$ that stores additionally a handle to some underlying geometric object.",
+    "detailed": "It provides in each dimension an interval with lower and upper endpoints represented with the number type NT . This class is designed to work smoothly with the algorithms for intersecting sequences of iso-oriented boxes. For degeneracy handling, the boxes need to provide a unique id -number. The policy parameter IdPolicy offers several choices. NT number type for the box boundaries, needs to be a model of the Assignable and the LessThanComparable concept. D the dimension of the box. Handle Handle concept, e.g., a pointer, an iterator, or a circulator. IdPolicy specifies how the id -number will be provided and can be one of the following types, where ID_FROM_HANDLE is the default for this parameter: ID_NONE : no id -number is provided. This can be useful to have this class as a base class for different implementations of id -numbers than the ones provided here. ID_EXPLICIT : the id -number is stored explicitly in the box and automatically created and assigned at construction time of the box. Note that copying a box (copy-constructor and assignment) does not create a new id -number but keeps the old one, which is the behavior needed by the CGAL::box_self_intersection_d() algorithm. This is therefore the safe default implementation. ID_FROM_BOX_ADDRESS : casts the address of the box into a std::ptrdiff_t to create the id -number. This works fine if the intersection algorithms work effectively with pointers to boxes, but not in the case where the algorithms work with box values, because the algorithms modify the order of the boxes, and the CGAL::box_self_intersection_d() algorithm creates copies of the boxes that would not have identical id -numbers. ID_FROM_HANDLE : casts the address of the value of the handle into a std::ptrdiff_t to create the id -number. Works in many conceivable settings, e.g., it works with boxes copied by value or by pointer, and the self intersection test. It will not work if there is no one-to-one mapping between boxes and the geometry that is referred to with the handles, i.e., this id -number scheme fails if a geometric object creates several boxes with the same handle value. Note that this option is not available for the CGAL::Box_intersection_d::Box_d type that does not store a handle. Is model of BoxIntersectionBox_d CGAL::box_intersection_d() CGAL::box_self_intersection_d() CGAL::box_intersection_all_pairs_d() CGAL::box_self_intersection_all_pairs_d() CGAL::Box_intersection_d::Box_with_info_d < NT , int D, Info, IdPolicy> CGAL::Box_intersection_d::Box_traits_d <BoxHandle> BoxIntersectionTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::NT",
+        "brief": "number type to represent the box boundaries.",
+        "detailed": "Allowed are the built-in types int , unsigned int , float , and double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ID",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::ID",
+        "brief": "type for the box id -number.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_handle_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::Box_with_handle_d",
+        "brief": "Default constructor.",
+        "detailed": "No particular initialization.",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "94",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_handle_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::Box_with_handle_d",
+        "brief": "initializes to the complete or the empty space.",
+        "detailed": "If empty, all interval starting (end) points will be set to positive (negative) infinity, sets handle to $ h$ .",
+        "return_type": "",
+        "argsstring": "(bool complete, Handle h)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "complete",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "101",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_handle_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::Box_with_handle_d",
+        "brief": "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ and sets the handle to $ h$ .",
+        "detailed": "lo[i] $ <$ hi[i] for $ 0 \\leq i < D$ .",
+        "return_type": "",
+        "argsstring": "(NT lo[D], NT hi[D], Handle h)",
+        "params": [
+          {
+            "type": "NT",
+            "name": "lo",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "hi",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "109",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_handle_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::Box_with_handle_d",
+        "brief": "constructs from bbox and sets the handle to $ h$ , exists iff $ D=2$ and NT $\\equiv$ double .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Bbox_2 &bbox, Handle h)",
+        "params": [
+          {
+            "type": "const Bbox_2 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "116",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_handle_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::Box_with_handle_d",
+        "brief": "constructs from bbox and sets the handle to $ h$ , exists iff $ D=3$ and NT $\\equiv$ double .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Bbox_3 &bbox, Handle h)",
+        "params": [
+          {
+            "type": "const Bbox_3 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "123",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::init",
+        "brief": "initializes to the complete or the empty space.",
+        "detailed": "If empty, all interval starting(end) points will be set to positive(negative) infinity.",
+        "return_type": "void",
+        "argsstring": "(bool complete=false)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "complete",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "135",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "extend",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::extend",
+        "brief": "extend box to contain the old box and point .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(NT point[D])",
+        "params": [
+          {
+            "type": "NT",
+            "name": "point",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "141",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "handle",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::handle",
+        "brief": "returns the handle stored in box .",
+        "detailed": "",
+        "return_type": "Handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "151",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::id",
+        "brief": "returns a unique box id, see the IdPolicy template parameter above for the different choices.",
+        "detailed": "Does not exist if ID_NONE has been chosen for the IdPolicy .",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "164",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "min_coord",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::min_coord",
+        "brief": "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < D$ .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "169",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "max_coord",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::max_coord",
+        "brief": "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < D$ .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "174",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::bbox",
+        "brief": "returns the bounding box iff $ D=2$ and NT $ \\equiv$ double .",
+        "detailed": "",
+        "return_type": "const Bbox_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "180",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::bbox",
+        "brief": "returns the bounding box iff $ D=3$ and NT $ \\equiv$ double .",
+        "detailed": "",
+        "return_type": "const Bbox_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "186",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_handle_d::dimension",
+        "brief": "returns $ D$ , the dimension of the box.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_handle_d.h",
+        "line": "156",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL::Box_intersection_d::Box_with_info_d": {
+    "kind": "class",
+    "name": "CGAL::Box_intersection_d::Box_with_info_d",
+    "brief": "Box_with_info_d is a generic iso-oriented bounding box in dimension $ D$ that stores additionally a variable to some underlying geometric object.",
+    "detailed": "It provides in each dimension an interval with lower and upper endpoints represented with the number type NT . This class is designed to work smoothly with the algorithms for intersecting sequences of iso-oriented boxes. For degeneracy handling, the boxes need to provide a unique id -number. The policy parameter IdPolicy offers several choices. NT number type for the box boundaries, needs to be a model of the Assignable and the LessThanComparable concept. D the dimension of the box. Info arbitrary user-defined type. IdPolicy specifies how the id -number will be provided and can be one of the following types, where ID_EXPLICIT is the default for this parameter: ID_NONE : no id -number is provided. This can be useful to have this class as a base class for different implementations of id -numbers than the ones provided here. ID_EXPLICIT : the id -number is stored explicitly in the box and automatically created and assigned at construction time of the box. Note that copying a box (copy-constructor and assignment) does not create a new id -number but keeps the old one, which is the behavior needed by the CGAL::box_self_intersection_d() algorithm. This is therefore the safe default implementation. ID_FROM_BOX_ADDRESS : casts the address of the box into a std::ptrdiff_t to create the id -number. This works fine if the intersection algorithms work effectively with pointers to boxes, but not in the case where the algorithms work with box values, because the algorithms modify the order of the boxes, and the CGAL::box_self_intersection_d() algorithm creates copies of the boxes that would not have identical id -numbers. Is model of BoxIntersectionBox_d CGAL::box_intersection_d() CGAL::box_self_intersection_d() CGAL::box_intersection_all_pairs_d() CGAL::box_self_intersection_all_pairs_d() CGAL::Box_intersection_d::Box_with_handle_d < NT , int D, Handle, IdPolicy> CGAL::Box_intersection_d::Box_traits_d <BoxHandle> BoxIntersectionTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::NT",
+        "brief": "number type to represent the box boundaries.",
+        "detailed": "Allowed are the built-in types int , unsigned int , float , and double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ID",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::ID",
+        "brief": "type for the box id -number.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_info_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::Box_with_info_d",
+        "brief": "Default constructor.",
+        "detailed": "No particular initialization.",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "82",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_info_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::Box_with_info_d",
+        "brief": "initializes to the complete or the empty space.",
+        "detailed": "If empty, all interval starting (end) points will be set to positive (negative) infinity, sets info to $ info$ .",
+        "return_type": "",
+        "argsstring": "(bool complete, Info info)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "complete",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Info",
+            "name": "info",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "89",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_info_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::Box_with_info_d",
+        "brief": "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ and sets info to $ info$ .",
+        "detailed": "lo[i] $ <$ hi[i] for $ 0 \\leq i < D$ .",
+        "return_type": "",
+        "argsstring": "(NT lo[D], NT hi[D], Info info)",
+        "params": [
+          {
+            "type": "NT",
+            "name": "lo",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "hi",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Info",
+            "name": "info",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "97",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_info_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::Box_with_info_d",
+        "brief": "constructs from bbox and sets info to $ info$ , exists iff $ D=2$ and NT $\\equiv$ double .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Bbox_2 &bbox, Info info)",
+        "params": [
+          {
+            "type": "const Bbox_2 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Info",
+            "name": "info",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "104",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Box_with_info_d",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::Box_with_info_d",
+        "brief": "constructs from bbox and sets info to $ info$ , exists iff $ D=3$ and NT $\\equiv$ double .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Bbox_3 &bbox, Info info)",
+        "params": [
+          {
+            "type": "const Bbox_3 &",
+            "name": "bbox",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Info",
+            "name": "info",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "111",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::init",
+        "brief": "initializes to the complete or the empty space.",
+        "detailed": "If empty, all interval starting(end) points will be set to positive(negative) infinity.",
+        "return_type": "void",
+        "argsstring": "(bool complete=false)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "complete",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "123",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "extend",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::extend",
+        "brief": "extend box to contain the old box and point .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(NT point[D])",
+        "params": [
+          {
+            "type": "NT",
+            "name": "point",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "129",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::info",
+        "brief": "returns the info stored in box .",
+        "detailed": "",
+        "return_type": "Info",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "139",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::id",
+        "brief": "returns a unique box id, see the IdPolicy template parameter above for the different choices.",
+        "detailed": "Does not exist if ID_NONE has been chosen for the IdPolicy .",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "152",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "min_coord",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::min_coord",
+        "brief": "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < D$ .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "157",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "max_coord",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::max_coord",
+        "brief": "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < D$ .",
+        "detailed": "",
+        "return_type": "NT",
+        "argsstring": "(int d) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "162",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::bbox",
+        "brief": "returns the bounding box iff $ D=2$ and NT $ \\equiv$ double .",
+        "detailed": "",
+        "return_type": "const Bbox_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "168",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::bbox",
+        "brief": "returns the bounding box iff $ D=3$ and NT $ \\equiv$ double .",
+        "detailed": "",
+        "return_type": "const Bbox_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "174",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Box_intersection_d::Box_with_info_d::dimension",
+        "brief": "returns $ D$ , the dimension of the box.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Box_intersection_d/Box_with_info_d.h",
+        "line": "144",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Box_intersection_d": {
+    "kind": "namespace",
+    "name": "CGAL::Box_intersection_d",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

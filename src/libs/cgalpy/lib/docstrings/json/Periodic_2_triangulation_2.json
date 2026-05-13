@@ -1,0 +1,3934 @@
+{
+  "CGAL::Graphics_scene_options_periodic_2_triangulation_2": {
+    "kind": "struct",
+    "name": "CGAL::Graphics_scene_options_periodic_2_triangulation_2",
+    "brief": "The class Graphics_scene_options_periodic_2_triangulation_2 defines data and methods used to tune the way that the cells of a Periodic_2_triangulation_2 are considered for drawing or to be added into a graphics scene.",
+    "detailed": "This class is a model of GraphicsSceneOptionsPeriodic2Triangulation2 . DS a CGAL::Periodic_2_triangulation_2 . VertexDescriptor a descriptor of vertices of DS . EdgeDescriptor a descriptor of edges of DS . FaceDescriptor a descriptor of faces of DS . Is model of GraphicsSceneOptionsPeriodic2Triangulation2",
+    "members": []
+  },
+  "CGAL::Periodic_2_Delaunay_triangulation_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_Delaunay_triangulation_2",
+    "brief": "The class Periodic_2_Delaunay_triangulation_2 represents a Delaunay triangulation in two-dimensional periodic space.",
+    "detailed": "Parameters The class Periodic_2_Delaunay_triangulation_2 has two template parameters. The first one Traits is the geometric traits, it is to be instantiated with a model of the concept Periodic_2DelaunayTriangulationTraits_2 . Tds is the triangulation data structure and must be a model of TriangulationDataStructure_2 whose vertex and face are models of Periodic_2TriangulationVertexBase_2 and Periodic_2TriangulationFaceBase_2 . It defaults to: CGAL::Triangulation_data_structure_2< CGAL::Periodic_2_triangulation_vertex_base_2<Gt>, CGAL::Periodic_2_triangulation_face_base_2<Gt> > > Implementation Insertion is implemented by inserting in the triangulation, then performing a sequence of Delaunay flips. The number of flips is $O(d)$ if the new vertex is of degree $ d$ in the new triangulation. For points distributed uniformly at random, insertion takes time $O(1)$ on average. Removal calls the removal in the triangulation and then re-triangulates the hole in such a way that the Delaunay criterion is satisfied. Removal of a vertex of degree $ d$ takes time $O(d^2)$ . The expected degree $ d$ is $O(1)$ for a random vertex in the triangulation. After a point location step, the nearest neighbor is found in time $O(n)$ in the worst case, but in expected time $O(1)$ on average for vertices distributed uniformly at random and any query point. CGAL::Periodic_2_triangulation_2 <Traits,Tds> CGAL::Periodic_2_triangulation_hierarchy_2 <Tr> CGAL::Delaunay_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Periodic_2_Delaunay_triangulation_2",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::Periodic_2_Delaunay_triangulation_2",
+        "brief": "Creates an empty periodic Delaunay triangulation dt , with domain as original domain and possibly specifying a traits class traits .",
+        "detailed": "domain is a square.",
+        "return_type": "",
+        "argsstring": "(const Iso_rectangle &domain=Iso_rectangle(0, 0, 1, 1), const Geom_traits &traits=Geom_traits())",
+        "params": [
+          {
+            "type": "const Iso_rectangle &",
+            "name": "domain",
+            "default": "Iso_rectangle (0, 0, 1, 1)",
+            "brief": ""
+          },
+          {
+            "type": "const Geom_traits &",
+            "name": "traits",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "64",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Periodic_2_Delaunay_triangulation_2",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::Periodic_2_Delaunay_triangulation_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Periodic_2_Delaunay_triangulation_2 &dt1)",
+        "params": [
+          {
+            "type": "const Periodic_2_Delaunay_triangulation_2 &",
+            "name": "dt1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "71",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Periodic_2_Delaunay_triangulation_2",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::Periodic_2_Delaunay_triangulation_2",
+        "brief": "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .",
+        "detailed": "The value_type of first and last are Point s lying inside domain and domain is a square.",
+        "return_type": "",
+        "argsstring": "(InputIterator first, InputIterator last, const Iso_rectangle &domain=Iso_rectangle(0, 0, 1, 1), const Geom_traits &traits=Geom_traits())",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Iso_rectangle &",
+            "name": "domain",
+            "default": "Iso_rectangle (0, 0, 1, 1)",
+            "brief": ""
+          },
+          {
+            "type": "const Geom_traits &",
+            "name": "traits",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "80",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::insert",
+        "brief": "Inserts point p in the triangulation and returns the corresponding vertex.",
+        "detailed": "The optional argument start is used as a starting place for the point location. p lies in the original domain domain .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Face_handle start=Face_handle())",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "107",
+        "section": "Insertion and removal"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::insert",
+        "brief": "Inserts point p in the triangulation and returns the corresponding vertex.",
+        "detailed": "Similar to the above insert() function, but takes as additional parameter the return values of a previous location query. See description of Periodic_2_triangulation_2::locate() . p lies in the original domain domain .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Locate_type lt, Face_handle loc, int li, int lj)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "loc",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "lj",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "117",
+        "section": "Insertion and removal"
+      },
+      {
+        "kind": "function",
+        "name": "push_back",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::push_back",
+        "brief": "Equivalent to insert(p) .",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "123",
+        "section": "Insertion and removal"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::insert",
+        "brief": "Inserts the points in the iterator range [first, last) .",
+        "detailed": "Returns the number of inserted points. This function uses spatial sorting (cf. chapter secspatial_sorting) and therefore is not guaranteed to insert the points following the order of InputIterator . If the third argument is_large_point_set is set to true a heuristic for optimizing the insertion of large point sets is applied. The value_type of first and last are Point s and all points in the range lie inside domain .",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "(InputIterator first, InputIterator last, bool is_large_point_set=false)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "is_large_point_set",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "135",
+        "section": "Insertion and removal"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::remove",
+        "brief": "Removes the vertex from the triangulation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "141",
+        "section": "Insertion and removal"
+      },
+      {
+        "kind": "function",
+        "name": "move_if_no_collision",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::move_if_no_collision",
+        "brief": "if there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.",
+        "detailed": "Otherwise, the triangulation is not modified and the vertex at point p is returned. p lies in the original domain domain .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Vertex_handle v, const Point &p)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "155",
+        "section": "Point moving"
+      },
+      {
+        "kind": "function",
+        "name": "move_point",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::move_point",
+        "brief": "Moves the point stored in v to p , while preserving the Delaunay property.",
+        "detailed": "This performs an action semantically equivalent to remove(v) followed by insert(p) , but is supposedly faster to performing these two operations separately when the point has not moved much. Returns the handle to the new vertex. p lies in the original domain domain .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Vertex_handle v, const Point &p)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "166",
+        "section": "Point moving"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_vertex",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::nearest_vertex",
+        "brief": "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.",
+        "detailed": "The optional argument f is a hint specifying where to start the search. It always returns a vertex corresponding to a point inside domain even if computing in a multiply sheeted covering space. f is a face of dt and p lies in the original domain domain .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Point p, Face_handle f=Face_handle())",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "183",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_circle",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::side_of_oriented_circle",
+        "brief": "Returns on which side of the circumcircle of face f lies the point p .",
+        "detailed": "The circle is assumed to be counterclockwise oriented, so its positive side correspond to its bounded side. This predicate is available only if the corresponding predicates on points is provided in the geometric traits class.",
+        "return_type": "Oriented_side",
+        "argsstring": "(Face_handle f, const Point &p)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "195",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "get_conflicts_and_boundary",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::get_conflicts_and_boundary",
+        "brief": "OutputItFaces is an output iterator with Face_handle as value type.",
+        "detailed": "OutputItBoundaryEdges stands for an output iterator with Edge as value type. This members function outputs in the container pointed to by fit the faces which are in conflict with point p i. e. the faces whose circumcircle contains p . It outputs in the container pointed to by eit the boundary of the zone in conflict with p . The boundary edges of the conflict zone are output in counterclockwise order and each edge is described through its incident face which is not in conflict with p . The function returns in a std::pair the resulting output iterators. start is in conflict with p and p lies in the original domain domain .",
+        "return_type": "std::pair< OutputItFaces, OutputItBoundaryEdges >",
+        "argsstring": "(const Point &p, OutputItFaces fit, OutputItBoundaryEdges eit, Face_handle start) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItFaces",
+            "name": "fit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItBoundaryEdges",
+            "name": "eit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "222",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_conflicts",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::get_conflicts",
+        "brief": "same as above except that only the faces in conflict with p are output.",
+        "detailed": "The function returns the resulting output iterator. start is in conflict with p and p lies in the original domain domain .",
+        "return_type": "OutputItFaces",
+        "argsstring": "(const Point &p, OutputItFaces fit, Face_handle start) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItFaces",
+            "name": "fit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "230",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_boundary_of_conflicts",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::get_boundary_of_conflicts",
+        "brief": "OutputItBoundaryEdges stands for an output iterator with Edge as value type.",
+        "detailed": "This function outputs in the container pointed to by eit , the boundary of the zone in conflict with p . The boundary edges of the conflict zone are output in counterclockwise order and each edge is described through the incident face which is not in conflict with p . The function returns the resulting output iterator. start is in conflict with p and p lies in the original domain domain .",
+        "return_type": "OutputItBoundaryEdges",
+        "argsstring": "(const Point &p, OutputItBoundaryEdges eit, Face_handle start) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItBoundaryEdges",
+            "name": "eit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "243",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "circumcenter",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::circumcenter",
+        "brief": "Compute the circumcenter of the face pointed to by f.",
+        "detailed": "This function is available only if the corresponding function is provided in the geometric traits.",
+        "return_type": "Point",
+        "argsstring": "(Face_handle f) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "257",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::dual",
+        "brief": "Returns the center of the circle circumscribed to face f .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(const Face_handle &f) const",
+        "params": [
+          {
+            "type": "const Face_handle &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "262",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::dual",
+        "brief": "returns a segment whose endpoints are the duals of both incident faces.",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "268",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::dual",
+        "brief": "Idem.",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Edge_circulator &ec) const",
+        "params": [
+          {
+            "type": "const Edge_circulator &",
+            "name": "ec",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "273",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::dual",
+        "brief": "Idem.",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Edge_iterator &ei) const",
+        "params": [
+          {
+            "type": "const Edge_iterator &",
+            "name": "ei",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "278",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "draw_dual",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::draw_dual",
+        "brief": "output the dual Voronoi diagram to stream ps .",
+        "detailed": "",
+        "return_type": "Stream &",
+        "argsstring": "(Stream &ps)",
+        "params": [
+          {
+            "type": "Stream &",
+            "name": "ps",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "283",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_circle",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::side_of_oriented_circle",
+        "brief": "Returns the side of p with respect to the circle circumscribing the triangle associated with f .",
+        "detailed": "Periodic copies are checked if necessary.",
+        "return_type": "Oriented_side",
+        "argsstring": "(Face_handle f, const Point &p, bool perturb) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "perturb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "295",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::is_valid",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ). Also checks that all the circumscribing circles of faces are empty. When verbose is set to true, messages describing the first invalidity encountered are printed.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "319",
+        "section": "Checking"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Periodic_2_Delaunay_triangulation_2::is_valid",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Checks the combinatorial and geometric validity of the face (see Section Representation ). Also checks that the circumscribing circle of faces is empty. When verbose is set to true, messages are printed to give a precise indication of the kind of invalidity encountered.",
+        "return_type": "bool",
+        "argsstring": "(Face_handle f, bool verbose=false) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_Delaunay_triangulation_2.h",
+        "line": "333",
+        "section": "Checking"
+      }
+    ]
+  },
+  "CGAL::Periodic_2_Delaunay_triangulation_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_Delaunay_triangulation_traits_2",
+    "brief": "The class Periodic_2_Delaunay_triangulation_traits_2 is designed as a default traits class for the class Periodic_2_Delaunay_triangulation_2 <Traits, Tds> .",
+    "detailed": "The argument Traits must be a model of the DelaunayTriangulationTraits_2 concept. The argument Periodic_2Offset_2 must be a model of the concept Periodic_2Offset_2 and defaults to Periodic_2_offset_2 . Note that this template class is specialized for CGAL::Filtered_kernel , so that it automatically provides filtered predicates. This holds implicitly for CGAL::Exact_predicates_inexact_constructions_kernel , as it is an instantiation of CGAL::Filtered_kernel . Is model of Periodic_2DelaunayTriangulationTraits_2",
+    "members": []
+  },
+  "CGAL::Periodic_2_offset_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_offset_2",
+    "brief": "The class Periodic_2_offset_2 is a model of the concept Periodic_2Offset_2 .",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Periodic_2_triangulation_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_triangulation_2",
+    "brief": "The class Periodic_2_triangulation_2 represents a 2-dimensional triangulation of a point set in $ \\mathbb T_c^2$ .",
+    "detailed": "Traits is the geometric traits, it has to be instantiated with a model of the concept Periodic_2TriangulationTraits_2 . Tds is the triangulation data structure and must be a model of TriangulationDataStructure_2 whose vertex and face are models of Periodic_2TriangulationVertexBase_2 and Periodic_2TriangulationFaceBase_2 . It defaults to: CGAL::Triangulation_data_structure_2< CGAL::Periodic_2_triangulation_vertex_base_2<Gt>, CGAL::Periodic_2_triangulation_face_base_2<Gt> > > Traversal of the Triangulation The periodic triangulation class provides several iterators and circulators that allow one to traverse it. I/O The I/O operators are defined for iostream . The format for the iostream is an internal format. The information in the iostream is: the original domain the number of sheets of the covering space as in number_of_sheets() the number of vertices the non-combinatorial information of vertices (point resp. point-offset pairs, etc.) the number of faces the indices of the vertices of each face the indices of the neighbors of each face, where the index corresponds to the preceding list of faces the offsets corresponding to the vertices of the faces the non-combinatorial information of each face Implementation Locate is implemented by a randomized walk from a vertex of the face given as optional parameter (or from an arbitrary vertex of if no optional parameter is given). Insertion of a point is done by locating a face that contains the point, and then splitting this face. Apart from the location, insertion takes a time $O(1)$ . Removal of a vertex is more difficult than in the Euclidean space, since the star of a vertex may not be disjoint from the star of a virtual copy of that vertex. Therefore generic removal of vertices is not implemented. Several more constrained cases are implemented: the removal of the last vertex in the triangulation and the removal of a vertex of degree 3. The face, edge, and vertex iterators on features are derived from their counterparts visiting all (non-virtual and virtual) features which are themselves derived from the corresponding iterators of the triangulation data structure. CGAL::Periodic_2_triangulation_2 <Traits,Tds> CGAL::Periodic_2_triangulation_hierarchy_2 <Tr> CGAL::Triangulation_2<Traits, Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Geom_traits",
+        "brief": "the traits class.",
+        "detailed": "",
+        "return_type": "Traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "125",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Triangulation_data_structure",
+        "brief": "the triangulation data structure type.",
+        "detailed": "",
+        "return_type": "Tds",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "130",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Offset",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Offset",
+        "brief": "the offset type.",
+        "detailed": "",
+        "return_type": "Geom_traits::Periodic_2_offset_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "135",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Iso_rectangle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Iso_rectangle",
+        "brief": "the iso rectangle type.",
+        "detailed": "",
+        "return_type": "Geom_traits::Iso_rectangle_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "140",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Covering_sheets",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Covering_sheets",
+        "brief": "integer tuple to store the number of sheets in each direction of space.",
+        "detailed": "",
+        "return_type": "array< int, 2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "145",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Point",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "Geom_traits::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "150",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Segment",
+        "brief": "the segment type.",
+        "detailed": "",
+        "return_type": "Geom_traits::Segment_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "155",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Triangle",
+        "brief": "the triangle type.",
+        "detailed": "",
+        "return_type": "Geom_traits::Triangle_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "160",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Periodic_point",
+        "brief": "represents a point-offset pair.",
+        "detailed": "The point in the pair lies in the original domain.",
+        "return_type": "std::pair< Point , Offset >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "166",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Periodic_segment",
+        "brief": "a pair of periodic points representing a segment in the periodic domain.",
+        "detailed": "",
+        "return_type": "array< Periodic_point , 2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "172",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_triangle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Periodic_triangle",
+        "brief": "a triple of periodic points representing a triangle in the periodic domain.",
+        "detailed": "",
+        "return_type": "array< Periodic_point , 3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "179",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Vertex",
+        "brief": "the vertex type.",
+        "detailed": "",
+        "return_type": "Tds::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "184",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Face",
+        "brief": "the face type.",
+        "detailed": "",
+        "return_type": "Tds::Face",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "189",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Edge",
+        "brief": "the edge type.",
+        "detailed": "",
+        "return_type": "Tds::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "194",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::size_type",
+        "brief": "size type (an unsigned integral type).",
+        "detailed": "",
+        "return_type": "Tds::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "199",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::difference_type",
+        "brief": "difference type (a signed integral type).",
+        "detailed": "",
+        "return_type": "Tds::difference_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "204",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Vertex_handle",
+        "brief": "handle to a vertex.",
+        "detailed": "",
+        "return_type": "Tds::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "230",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Face_handle",
+        "brief": "handle to a face.",
+        "detailed": "",
+        "return_type": "Tds::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "235",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Face_iterator",
+        "brief": "iterator over all faces.",
+        "detailed": "",
+        "return_type": "Tds::Face_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "240",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Edge_iterator",
+        "brief": "iterator over all edges.",
+        "detailed": "",
+        "return_type": "Tds::Edge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "245",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Vertex_iterator",
+        "brief": "iterator over all vertices.",
+        "detailed": "",
+        "return_type": "Tds::Vertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "250",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Unique_vertex_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Unique_vertex_iterator",
+        "brief": "iterator over the vertices whose corresponding points lie in the original domain, i.e.",
+        "detailed": "for each set of periodic copies the Unique_vertex_iterator iterates over exactly one representative.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "258",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_faces_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Finite_faces_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "265",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_edges_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Finite_edges_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "272",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_vertices_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Finite_vertices_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "279",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_faces_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::All_faces_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "286",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_circulator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Face_circulator",
+        "brief": "circulator over all faces incident to a given vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "291",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_circulator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Edge_circulator",
+        "brief": "circulator over all edges incident to a given vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "296",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_circulator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Vertex_circulator",
+        "brief": "circulator over all vertices adjacent to a given vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "301",
+        "section": "Handles, Iterators and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_triangle_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Periodic_triangle_iterator",
+        "brief": "iterator over the triangles corresponding to faces of the triangulation.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "312",
+        "section": "Geometric iterators:"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_segment_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Periodic_segment_iterator",
+        "brief": "iterator over the segments corresponding to edges of the triangulation.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "318",
+        "section": "Geometric iterators:"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_point_iterator",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Periodic_point_iterator",
+        "brief": "iterator over the points corresponding to vertices of the triangulation.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "324",
+        "section": "Geometric iterators:"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_2",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Triangulation_2",
+        "brief": "Introduces an empty triangulation t with domain as original domain.",
+        "detailed": "domain is a square.",
+        "return_type": "",
+        "argsstring": "(const Iso_rectangle &domain=Iso_rectangle(0, 0, 1, 1), const Geom_traits &traits=Geom_traits())",
+        "params": [
+          {
+            "type": "const Iso_rectangle &",
+            "name": "domain",
+            "default": "Iso_rectangle (0, 0, 1, 1)",
+            "brief": ""
+          },
+          {
+            "type": "const Geom_traits &",
+            "name": "traits",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "335",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_2",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Triangulation_2",
+        "brief": "Copy constructor.",
+        "detailed": "All the vertices and faces are duplicated. After the copy, this and tr refer to different triangulations: if tr is modified, this is not.",
+        "return_type": "",
+        "argsstring": "(const Triangulation_2 &tr)",
+        "params": [
+          {
+            "type": "const Triangulation_2 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "345",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::operator=",
+        "brief": "Assignment.",
+        "detailed": "All the vertices and faces are duplicated. After the assignment, this and tr refer to different triangulations: if tr is modified, this is not.",
+        "return_type": "Triangulation_2",
+        "argsstring": "(const Triangulation_2< Traits, Tds > &tr)",
+        "params": [
+          {
+            "type": "const Triangulation_2 < Traits, Tds > &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "353",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::swap",
+        "brief": "The triangulations tr and this are swapped.",
+        "detailed": "t.swap(tr) should be preferred to this = tr or to t(tr) if tr is deleted after that.",
+        "return_type": "void",
+        "argsstring": "(Triangulation_2 &tr)",
+        "params": [
+          {
+            "type": "Triangulation_2 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "360",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::clear",
+        "brief": "Deletes all faces and vertices resulting in an empty triangulation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "366",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::geom_traits",
+        "brief": "Returns a const reference to the triangulation traits object.",
+        "detailed": "",
+        "return_type": "const Geom_traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "379",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::tds",
+        "brief": "Returns a const reference to the triangulation data structure.",
+        "detailed": "",
+        "return_type": "const Triangulation_data_structure_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "384",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "domain",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::domain",
+        "brief": "Returns the original domain.",
+        "detailed": "",
+        "return_type": "Iso_rectangle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "389",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_sheets",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_sheets",
+        "brief": "Returns the number of sheets of the covering space the triangulation is currently computed in.",
+        "detailed": "",
+        "return_type": "Covering_sheets",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "395",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::dimension",
+        "brief": "Returns the dimension of the convex hull.",
+        "detailed": "The dimension is zero if the triangulation is empty and two otherwise.",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "401",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_vertices",
+        "brief": "Returns the number of vertices.",
+        "detailed": "Counts all vertices that are representatives of the same point in $ \\mathbb T_c^2$ as one vertex.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "407",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_faces",
+        "brief": "Returns the number of faces.",
+        "detailed": "Counts all faces that are representatives of the same triangle in $ \\mathbb T_c^2$ as one face.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "413",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_stored_vertices",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_stored_vertices",
+        "brief": "Returns the number of vertices in the data structure.",
+        "detailed": "This is the same as the number of sheets times number_of_vertices() .",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "419",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_stored_faces",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_stored_faces",
+        "brief": "Returns the number of faces in the data structure.",
+        "detailed": "This is the same as the number of sheets times number_of_faces() .",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "425",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::tds",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Returns a reference to the triangulation data structure.",
+        "return_type": "Triangulation_data_structure_2 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "442",
+        "section": "Non const access"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_edges",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_edges",
+        "brief": "Returns the number of edges.",
+        "detailed": "Counts all edges that are representatives of the same segment in $ \\mathbb T_c^2$ as one edge.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "453",
+        "section": "Non-constant-time access functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_stored_edges",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::number_of_stored_edges",
+        "brief": "Returns the number of edges in the data structure.",
+        "detailed": "This is the same as the number of sheets times number_of_edges() .",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "459",
+        "section": "Non-constant-time access functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_extensible_triangulation_in_1_sheet_h1",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_extensible_triangulation_in_1_sheet_h1",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced The current triangulation remains a triangulation in the 1-sheeted covering space even after adding points if this method returns true . This test relies on a heuristic, i.e. if it answers false nothing is known. This test runs in constant-time when not computing in the 1-sheeted covering space. (This test uses the length of the longest edge in the triangulation as a criterion [1] .)",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "484",
+        "section": "Non-constant-time queries and conversions"
+      },
+      {
+        "kind": "function",
+        "name": "is_extensible_triangulation_in_1_sheet_h2",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_extensible_triangulation_in_1_sheet_h2",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced The same as is_extensible_triangulation_in_1_sheet_h1() but with a more precise heuristic, i.e. it might answer true in cases in which is_extensible_triangulation_in_1_sheet_h1() would not. However, it is much less time efficient when not computing in the 1-sheeted covering space. (This test uses the diameter of the largest empty circle in the input point set as a criterion [1] .)",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "497",
+        "section": "Non-constant-time queries and conversions"
+      },
+      {
+        "kind": "function",
+        "name": "is_triangulation_in_1_sheet",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_triangulation_in_1_sheet",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Returns true if the current triangulation would still be a triangulation in the 1-sheeted covering space, returns false otherwise.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "506",
+        "section": "Non-constant-time queries and conversions"
+      },
+      {
+        "kind": "function",
+        "name": "convert_to_1_sheeted_covering",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::convert_to_1_sheeted_covering",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Converts the current triangulation into the same periodic triangulation in the 1-sheeted covering space. is_triangulation_in_1_sheet()",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "517",
+        "section": "Non-constant-time queries and conversions"
+      },
+      {
+        "kind": "function",
+        "name": "convert_to_9_sheeted_covering",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::convert_to_9_sheeted_covering",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Converts the current triangulation into the same periodic triangulation in the 9-sheeted covering space.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "526",
+        "section": "Non-constant-time queries and conversions"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_point",
+        "brief": "Returns the periodic point given by vertex v .",
+        "detailed": "If this is represented in the 1-sheeted covering space, the offset is always zero. Otherwise v can correspond to a periodic copy outside the domain of an input point.",
+        "return_type": "Periodic_point",
+        "argsstring": "(const Vertex_handle v) const",
+        "params": [
+          {
+            "type": "const Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "539",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_point",
+        "brief": "If this is represented in the 1-sheeted covering space, this function returns the periodic point given by the $ i$ -th vertex of face f , that is the point in the original domain and the offset of the vertex in f .",
+        "detailed": "If this is represented in the 9-sheeted covering space, this offset is possibly added to another offset determining the periodic copy. $ i \\in\\{0,1,2\\}$",
+        "return_type": "Periodic_point",
+        "argsstring": "(const Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "549",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_segment",
+        "brief": "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (f,i) .",
+        "detailed": "$ i \\in\\{0,1,2\\}$",
+        "return_type": "Periodic_segment",
+        "argsstring": "(const Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "557",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_segment",
+        "brief": "Same as the previous method for edge e .",
+        "detailed": "",
+        "return_type": "Periodic_segment",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "563",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_triangle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_triangle",
+        "brief": "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet f .",
+        "detailed": "",
+        "return_type": "Periodic_triangle",
+        "argsstring": "(const Face_handle f) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "569",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::point",
+        "brief": "Converts the Periodic_point pp (point-offset pair) to the corresponding Point in $ \\mathbb R^2$ .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(const Periodic_point &pp) const",
+        "params": [
+          {
+            "type": "const Periodic_point &",
+            "name": "pp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "584",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::segment",
+        "brief": "Converts the Periodic_segment s to a Segment .",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Periodic_segment &s) const",
+        "params": [
+          {
+            "type": "const Periodic_segment &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "589",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "triangle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::triangle",
+        "brief": "Converts the Periodic_triangle this to a Triangle .",
+        "detailed": "",
+        "return_type": "Triangle",
+        "argsstring": "(const Periodic_triangle &t) const",
+        "params": [
+          {
+            "type": "const Periodic_triangle &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "594",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::point",
+        "brief": "Equivalent to the call t.point(t.periodic_point(fh,i)); .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(Face_handle fh, int i) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "fh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "600",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::point",
+        "brief": "Equivalent to the call t.point(t.periodic_point(v)); .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "606",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::segment",
+        "brief": "Equivalent to the call t.segment(t.periodic_segment(f,i)); .",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "612",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::segment",
+        "brief": "Equivalent to the call t.segment(t.periodic_segment(e)); .",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "618",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::segment",
+        "brief": "Equivalent to the call t.segment(t.periodic_segment(ec->first, ec->second)); .",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Edge_circulator &ec) const",
+        "params": [
+          {
+            "type": "const Edge_circulator &",
+            "name": "ec",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "623",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::segment",
+        "brief": "Equivalent to the call t.segment(t.periodic_segment(ei->first, ei->second)); .",
+        "detailed": "",
+        "return_type": "Segment",
+        "argsstring": "(const Edge_iterator &ei) const",
+        "params": [
+          {
+            "type": "const Edge_iterator &",
+            "name": "ei",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "629",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "triangle",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::triangle",
+        "brief": "Equivalent to the call t.triangle(t.periodic_triangle(f)); .",
+        "detailed": "",
+        "return_type": "Triangle",
+        "argsstring": "(Face_handle f) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "634",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_edge",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_edge",
+        "brief": "true if there is an edge having va and vb as vertices.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle va, Vertex_handle vb)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "648",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_edge",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_edge",
+        "brief": "as above.",
+        "detailed": "In addition, if true is returned, the edge with vertices va and vb is the edge e=(fr,i) where fr is a handle to the face incident to e and on the right side of e oriented from va to vb .",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle va, Vertex_handle vb, Face_handle &fr, int &i)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle &",
+            "name": "fr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "656",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_face",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_face",
+        "brief": "true if there is a face having v1 , v2 and v3 as vertices.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "663",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_face",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_face",
+        "brief": "as above.",
+        "detailed": "In addition, if true is returned, fr is a handle to the face with v1 , v2 and v3 as vertices.",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Face_handle &fr)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle &",
+            "name": "fr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "671",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::locate",
+        "brief": "If the triangulation is not empty, a face that contains the query in its interior or on its boundary is returned.",
+        "detailed": "If the triangulation is empty, the default constructed Face_handle is returned.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Point &query, Face_handle f=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "692",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::locate",
+        "brief": "Same as above.",
+        "detailed": "Additionally, the parameters lt and li describe where the query point is located. The variable lt is set to the locate type of the query. If lt== VERTEX the variable li is set to the index of the vertex, and if lt== EDGE li is set to the index of the vertex opposite to the edge. Be careful that li has no meaning when the query type is FACE or when the triangulation is $ 0$ -dimensional.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Point &query, Locate_type &lt, int &li, Face_handle h=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type &",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "h",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "712",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "oriented_side",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::oriented_side",
+        "brief": "Returns on which side of the oriented boundary of f the point p lies.",
+        "detailed": "",
+        "return_type": "Oriented_side",
+        "argsstring": "(Face_handle f, const Point &p) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "722",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::vertices_begin",
+        "brief": "Starts at an arbitrary vertex.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "740",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "745",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "edges_begin",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::edges_begin",
+        "brief": "Starts at an arbitrary edge.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "750",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "edges_end",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "755",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "faces_begin",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::faces_begin",
+        "brief": "Starts at an arbitrary face.",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "760",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "faces_end",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "765",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_points_begin",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_points_begin",
+        "brief": "Iterates over the points of the triangulation.",
+        "detailed": "Its behavior is defined by the Iterator_type it as described on CGAL::Periodic_2_triangulation_2::Iterator_type .",
+        "return_type": "Periodic_point_iterator",
+        "argsstring": "(Iterator_type it=STORED) const",
+        "params": [
+          {
+            "type": "Iterator_type",
+            "name": "it",
+            "default": "STORED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "799",
+        "section": "Geometric iterators"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_points_end",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_points_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "Note that to match another Periodic_point_iterator both must have the same Iterator_type it .",
+        "return_type": "Periodic_point_iterator",
+        "argsstring": "(Iterator_type it=STORED) const",
+        "params": [
+          {
+            "type": "Iterator_type",
+            "name": "it",
+            "default": "STORED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "807",
+        "section": "Geometric iterators"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_segments_begin",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_segments_begin",
+        "brief": "Iterates over the segments of the triangulation.",
+        "detailed": "Its behavior is defined by the Iterator_type it as described on CGAL::Periodic_2_triangulation_2::Iterator_type .",
+        "return_type": "Periodic_segment_iterator",
+        "argsstring": "(Iterator_type it=STORED) const",
+        "params": [
+          {
+            "type": "Iterator_type",
+            "name": "it",
+            "default": "STORED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "815",
+        "section": "Geometric iterators"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_segments_end",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_segments_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "Note that to match another Periodic_segment_iterator both must have the same Iterator_type it .",
+        "return_type": "Periodic_segment_iterator",
+        "argsstring": "(Iterator_type it=STORED) const",
+        "params": [
+          {
+            "type": "Iterator_type",
+            "name": "it",
+            "default": "STORED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "823",
+        "section": "Geometric iterators"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_triangles_begin",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_triangles_begin",
+        "brief": "Iterates over the triangles of the triangulation.",
+        "detailed": "Its behavior is defined by the Iterator_type it as described on CGAL::Periodic_2_triangulation_2::Iterator_type .",
+        "return_type": "Periodic_triangle_iterator",
+        "argsstring": "(Iterator_type it=STORED) const",
+        "params": [
+          {
+            "type": "Iterator_type",
+            "name": "it",
+            "default": "STORED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "831",
+        "section": "Geometric iterators"
+      },
+      {
+        "kind": "function",
+        "name": "periodic_triangles_end",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::periodic_triangles_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "Note that to match another Periodic_triangle_iterator both must have the same Iterator_type it .",
+        "return_type": "Periodic_triangle_iterator",
+        "argsstring": "(Iterator_type it=STORED) const",
+        "params": [
+          {
+            "type": "Iterator_type",
+            "name": "it",
+            "default": "STORED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "839",
+        "section": "Geometric iterators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::incident_faces",
+        "brief": "Starts at an arbitrary face incident to v .",
+        "detailed": "",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "860",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::incident_faces",
+        "brief": "Starts at face f .",
+        "detailed": "Face f is incident to vertex v .",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "866",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::incident_edges",
+        "brief": "Starts at an arbitrary edge incident to v .",
+        "detailed": "",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "872",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::incident_edges",
+        "brief": "Starts at the first edge of f incident to v , in counterclockwise order around v .",
+        "detailed": "Face f is incident to vertex v .",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "879",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "adjacent_vertices",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::adjacent_vertices",
+        "brief": "Starts at an arbitrary vertex adjacent to v .",
+        "detailed": "",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "884",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "adjacent_vertices",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::adjacent_vertices",
+        "brief": "Starts at the first vertex of f adjacent to v in counterclockwise order around v .",
+        "detailed": "Face f is incident to vertex v .",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "891",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "mirror_vertex",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::mirror_vertex",
+        "brief": "returns the vertex of the $ i^{th}$ neighbor of f that is opposite to f .",
+        "detailed": "$ 0 \\leq i \\leq 2$ .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "903",
+        "section": "Traversal between adjacent faces"
+      },
+      {
+        "kind": "function",
+        "name": "mirror_index",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::mirror_index",
+        "brief": "returns the index of f in its $ i^{th}$ neighbor.",
+        "detailed": "$0 \\leq i \\leq 2$ .",
+        "return_type": "int",
+        "argsstring": "(Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "909",
+        "section": "Traversal between adjacent faces"
+      },
+      {
+        "kind": "function",
+        "name": "insert_first",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::insert_first",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Inserts the first vertex.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "989",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "insert_in_face",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::insert_in_face",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Inserts vertex v in face f . Face f is modified, two new faces are created. If the triangulation contains periodic copies, a point is inserted in all periodic copies. The point in vertex v lies inside face f .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Face_handle f)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1001",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_degree_3",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::remove_degree_3",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Removes a vertex of degree three. Two of the incident faces are destroyed, the third one is modified. Vertex v is a vertex with degree three.",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1012",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_first",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::remove_first",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Removes the unique vertex in the triangulation.",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1022",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "star_hole",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::star_hole",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced creates a new vertex v and use it to star the hole whose boundary is described by the sequence of edges [edge_begin, edge_end] . Returns a handle to the new vertex. The triangulation is a triangulation of 1 sheet",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Point p, EdgeIt edge_begin, EdgeIt edge_end)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIt",
+            "name": "edge_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIt",
+            "name": "edge_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1036",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "star_hole",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::star_hole",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced same as above, except that the algorithm first recycles faces in the sequence [face_begin, face_end] and create new ones only when the sequence is exhausted. The triangulation is a triangulation of 1 sheet",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Point p, EdgeIt edge_begin, EdgeIt edge_end, FaceIt face_begin, FaceIt face_end)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIt",
+            "name": "edge_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIt",
+            "name": "edge_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceIt",
+            "name": "face_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceIt",
+            "name": "face_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1051",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_domain",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::set_domain",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Changes the domain. Note that this function calls clear() , i.e., it erases the existing triangulation.",
+        "return_type": "void",
+        "argsstring": "(const Iso_rectangle dom)",
+        "params": [
+          {
+            "type": "const Iso_rectangle",
+            "name": "dom",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1064",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ccw",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::ccw",
+        "brief": "Returns $ i+1$ modulo 3.",
+        "detailed": "$0 \\leq i \\leq 2$ .",
+        "return_type": "int",
+        "argsstring": "(int i) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1074",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "cw",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::cw",
+        "brief": "Returns $ i+2$ modulo 3.",
+        "detailed": "$0 \\leq i \\leq 2$ .",
+        "return_type": "int",
+        "argsstring": "(int i) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1079",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "flippable",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::flippable",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_handle f, int i)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1086",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "degree",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::degree",
+        "brief": "Returns the degree of the vertex v .",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1092",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::is_valid",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced Checks the combinatorial validity of the triangulation and also the validity of its geometric embedding. This method is mainly a debugging help for the users of advanced features.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1116",
+        "section": "Checking"
+      },
+      {
+        "kind": "enum",
+        "name": "Iterator_type",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Iterator_type",
+        "brief": "The enum Iterator_type is defined by Periodic_2_triangulation_2 to specify the behavior of geometric iterators.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "83",
+        "section": ""
+      },
+      {
+        "kind": "enum",
+        "name": "Locate_type",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::Locate_type",
+        "brief": "The enum Locate_type is defined by Periodic_2_triangulation_2 to specify which case occurs when locating a point in the triangulation.",
+        "detailed": "If the triangulation does not contain any points EMPTY is returned.",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "107",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::insert",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Face_handle f=Face_handle())",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "937",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::insert",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Locate_type lt, Face_handle loc, int li)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "loc",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "946",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "push_back",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::push_back",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "953",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::insert",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(InputIterator first, InputIterator last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "962",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::operator<<",
+        "brief": "Writes the triangulation t into the stream os .",
+        "detailed": "The output operator must be defined for Point .",
+        "return_type": "ostream &",
+        "argsstring": "(ostream &os, const Periodic_2_triangulation_2< Traits, Tds > &t)",
+        "params": [
+          {
+            "type": "ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Periodic_2_triangulation_2 < Traits, Tds > &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1128",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::operator>>",
+        "brief": "Reads a triangulation from stream is and assigns it to t .",
+        "detailed": "The input operator must be defined for Point .",
+        "return_type": "istream &",
+        "argsstring": "(istream &is, Triangulation_2< Traits, Tds > &t)",
+        "params": [
+          {
+            "type": "istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Triangulation_2 < Traits, Tds > &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1136",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Periodic_2_triangulation_face_base_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_triangulation_face_base_2",
+    "brief": "The class Periodic_2_triangulation_face_base_2 is a model of the concept Periodic_2TriangulationFaceBase_2 to be used by Triangulation_data_structure_2 to represent faces of a periodic triangulation.",
+    "detailed": "The first one Traits is the geometric traits, it is to be instantiated with a model of the concept Periodic_2TriangulationTraits_2 . The second argument is the base class to which the additional information for the periodic vertex is added and should be a model of TriangulationDSFaceBase_2 As faces cannot span more than one domain per direction of space in a periodic Delaunay triangulation, it is enough to store offsets in the range $ \\{0,1\\}^2$ . For optimization purposes we encode all three offsets in one integer. Each offset needs two bits (for the offset in the $ x$ - and $ y$ -direction). If we number the bits from least significant to most significant then bits $ 2*i$ and $ 2*i+1$ contain the offset corresponding to vertex $ i$ . The implementation of has_zero_offsets() results in checking whether all offsets are zero. Is model of Periodic_2TriangulationFaceBase_2 CGAL::Triangulation_face_base_2 CGAL::Triangulation_face_base_with_info_2",
+    "members": []
+  },
+  "CGAL::Periodic_2_triangulation_hierarchy_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_triangulation_hierarchy_2",
+    "brief": "The class Periodic_2_triangulation_hierarchy_2 implements a triangulation augmented with a data structure which allows fast point location queries.",
+    "detailed": "Parameters It is templated by a parameter which must be instantiated with one of the CGAL periodic triangulation classes. In the current implementation, only Periodic_2_Delaunay_triangulation_2 is supported for PTr . PTr::Vertex has to be a model of the concepts TriangulationHierarchyVertexBase_2 and Periodic_2TriangulationVertexBase_2 . This can be achieved for example by using CGAL::Triangulation_hierarchy_vertex_base_2 templated by CGAL::Periodic_2_triangulation_vertex_base_2 . PTr::Geom_traits has to be a model of the concept Periodic_2DelaunayTriangulationTraits_2 . Inheritance Periodic_2_triangulation_hierarchy_2 offers exactly the same functionalities as PTr . Most of them (point location, insertion, removal $ \\ldots$ ) are overloaded to improve their efficiency by using the hierarchical structure. Note that, since the algorithms that are provided are randomized, the running time of constructing a triangulation with a hierarchy may be improved when shuffling the data points. However, the I/O operations are not overloaded. So, writing a hierarchy into a file will lose the hierarchical structure and reading it from the file will result in an ordinary triangulation whose efficiency will be the same as PTr . Implementation The data structure is a hierarchy of triangulations. The triangulation at the lowest level is the original triangulation where operations and point location are to be performed. Then at each succeeding level, the data structure stores a triangulation of a small random sample of the vertices of the triangulation at the preceding level. Point location is done through a top-down nearest neighbor query. The nearest neighbor query is first performed naively in the top level triangulation. Then, at each following level, the nearest neighbor at that level is found through a randomized walk performed from the nearest neighbor found at the preceding level. Because the number of vertices in each triangulation is only a small fraction of the number of vertices of the preceding triangulation the data structure remains small and achieves fast point location queries on real data. CGAL::Triangulation_hierarchy_vertex_base_2 CGAL::Periodic_2_Delaunay_triangulation_2",
+    "members": []
+  },
+  "CGAL::Periodic_2_triangulation_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_triangulation_traits_2",
+    "brief": "The class Periodic_2_triangulation_traits_2 is designed as a default traits class for the class CGAL::Periodic_2_triangulation_2 < Periodic_2TriangulationTraits_2 ,TriangulationDataStructure_2> .",
+    "detailed": "Traits must be a model of the TriangulationTraits_2 concept. Periodic_2Offset_2 must be a model of the concept Periodic_2Offset_2 and defaults to CGAL::Periodic_2_offset_2 . If Traits is a CGAL::Filtered_kernel (detected when Traits::Has_filtered_predicates exists and is true ), this class automatically provides filtered predicates. Similarly, statically filtered predicates will be used if the flag Traits::Has_static_filters exists and is true . By default, this holds for CGAL::Exact_predicates_inexact_constructions_kernel and CGAL::Exact_predicates_exact_constructions_kernel . Is model of Periodic_2TriangulationTraits_2",
+    "members": []
+  },
+  "CGAL::Periodic_2_triangulation_vertex_base_2": {
+    "kind": "class",
+    "name": "CGAL::Periodic_2_triangulation_vertex_base_2",
+    "brief": "The class Periodic_2_triangulation_vertex_base_2 is a model of the concept Periodic_2TriangulationVertexBase_2 to be used by Triangulation_data_structure_2 to represent vertices of a periodic triangulation.",
+    "detailed": "The first one Traits is the geometric traits, it is to be instantiated with a model of the concept Periodic_2TriangulationTraits_2 . The second argument is the base class to which the additional information for the periodic vertex is added and should be a model of TriangulationDSVertexBase_2 Is model of Periodic_2TriangulationVertexBase_2 CGAL::Periodic_2_triangulation_face_base_2 CGAL::Triangulation_vertex_base_2 CGAL::Triangulation_vertex_base_with_info_2",
+    "members": []
+  },
+  "GraphicsSceneOptionsPeriodic2Triangulation2": {
+    "kind": "class",
+    "name": "GraphicsSceneOptionsPeriodic2Triangulation2",
+    "brief": "The concept GraphicsSceneOptionsPeriodic2Triangulation2 defines data and methods used to tune the way that the cells of a Periodic_2_triangulation_2 are considered for drawing or to be added into a graphics scene.",
+    "detailed": "Refines GraphicsSceneOptions Has models CGAL::Graphics_scene_options_periodic_2_triangulation_2<DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "draw_domain",
+        "qualified_name": "GraphicsSceneOptionsPeriodic2Triangulation2::draw_domain",
+        "brief": "returns true if the domain of the Periodic_2_triangulation_2 must be drawn, false otherwise.",
+        "detailed": "Returns false by default.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPeriodic2Triangulation2.h",
+        "line": "18",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_domain",
+        "qualified_name": "GraphicsSceneOptionsPeriodic2Triangulation2::draw_domain",
+        "brief": "sets the draw domain value to b .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool b)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsPeriodic2Triangulation2.h",
+        "line": "21",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "toggle_draw_domain",
+        "qualified_name": "GraphicsSceneOptionsPeriodic2Triangulation2::toggle_draw_domain",
+        "brief": "toggles the draw domain value.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPeriodic2Triangulation2.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "display_type",
+        "qualified_name": "GraphicsSceneOptionsPeriodic2Triangulation2::display_type",
+        "brief": "returns the type of the display (STORED, UNIQUE, STORED_COVER_DOMAIN or UNIQUE_COVER_DOMAIN).",
+        "detailed": "",
+        "return_type": "DS::Iterator_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPeriodic2Triangulation2.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "increase_display_type",
+        "qualified_name": "GraphicsSceneOptionsPeriodic2Triangulation2::increase_display_type",
+        "brief": "set the display type to the next type (in the ordered circular list STORED, UNIQUE, STORED_COVER_DOMAIN, UNIQUE_COVER_DOMAIN).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPeriodic2Triangulation2.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "domain_color",
+        "qualified_name": "GraphicsSceneOptionsPeriodic2Triangulation2::domain_color",
+        "brief": "returns the color used to draw the domain.",
+        "detailed": "",
+        "return_type": "const CGAL::IO::Color &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPeriodic2Triangulation2.h",
+        "line": "33",
+        "section": ""
+      }
+    ]
+  },
+  "Periodic_2DelaunayTriangulationTraits_2": {
+    "kind": "class",
+    "name": "Periodic_2DelaunayTriangulationTraits_2",
+    "brief": "The concept Periodic_2DelaunayTriangulationTraits_2 is the first template parameter of the class CGAL::Periodic_2_Delaunay_triangulation_2 . It refines the concepts Periodic_2TriangulationTraits_2 and DelaunayTriangulationTraits_2 . It redefines the geometric objects, predicates and constructions to work with point-offset pairs. In most cases the offsets will be (0,0) and the predicates from DelaunayTriangulationTraits_2 can be used directly. For efficiency reasons we maintain for each functor the version without offsets.",
+    "detailed": "Refines DelaunayTriangulationTraits_2 Periodic_2TriangulationTraits_2 In addition to the requirements of the concepts Periodic_2TriangulationTraits_2 and DelaunayTriangulationTraits_2 , the concept Periodic_2DelaunayTriangulationTraits_2 provides a predicate to check the empty circle property. The corresponding predicate type is called type Periodic_2DelaunayTriangulationTraits_2::Side_of_oriented_circle_2 . The additional constructor object Periodic_2DelaunayTriangulationTraits_2::Construct_circumcenter_2 is used to build the dual Voronoi diagram and are required only if the dual functions are called. The additional predicate type Periodic_2DelaunayTriangulationTraits_2::Compare_distance_2 is required if calls to nearest_vertex(..) are issued. Has models CGAL::Periodic_2_Delaunay_triangulation_traits_2 <Traits, Offset> DelaunayTriangulationTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Side_of_oriented_circle_2",
+        "qualified_name": "Periodic_2DelaunayTriangulationTraits_2::Side_of_oriented_circle_2",
+        "brief": "Predicate object.",
+        "detailed": "Must provide the operators Oriented_side operator()(Point p, Point q, Point r, Point s) which takes four points $ p, q, r, s$ as arguments and returns ON_POSITIVE_SIDE , ON_NEGATIVE_SIDE or, ON_ORIENTED_BOUNDARY according to the position of points s with respect to the oriented circle through $ p,q$ and $ r$ and Oriented_side operator()( Point p, Point q, Point r, Point s, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q Periodic_2_offset_2 o_r, Periodic_2_offset_2 o_s) which takes four points $ (p, o_p), (q, o_q), (r, o_r), (s, o_s)$ as arguments and returns ON_POSITIVE_SIDE , ON_NEGATIVE_SIDE or, ON_ORIENTED_BOUNDARY according to the position of points (s, o_s) with respect to the oriented circle through (p, o_p), (q, o_q) and (r, o_r) . This type is required only if the function side_of_oriented_circle(Face_handle f, Point p) is called.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2DelaunayTriangulationTraits_2.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circumcenter_2",
+        "qualified_name": "Periodic_2DelaunayTriangulationTraits_2::Construct_circumcenter_2",
+        "brief": "Constructor object.",
+        "detailed": "Provides the operators: Point operator()(Point p, Point q, Point r) which returns the circumcenter of the three points p, q and r . Point operator()(Point p, Point q, Point r, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q Periodic_2_offset_2 o_r) which returns the circumcenter of the three points (p, o_p), (q, o_q) and (r, o_r) . This type is required only if the function Point circumcenter(Face_handle f) is called.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2DelaunayTriangulationTraits_2.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_distance_2",
+        "qualified_name": "Periodic_2DelaunayTriangulationTraits_2::Compare_distance_2",
+        "brief": "Predicate type.",
+        "detailed": "Provides the operators: Comparison_result operator()(Point_2 p, Point_2 q, Point_2 r) which returns SMALLER , EQUAL or LARGER according to the distance between p and q being smaller, equal or larger than the distance between p and r. Comparison_result operator()(Point_2 p, Point_2 q, Point_2 r, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q Periodic_2_offset_2 o_r) which returns SMALLER , EQUAL or LARGER according to the distance between (p, o_p) , and (q, o_q) being smaller, equal or larger than the distance between (p, o_p) and (r, o_r) . This type is only require if nearest_vertex queries are issued.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2DelaunayTriangulationTraits_2.h",
+        "line": "100",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_circle_2_object",
+        "qualified_name": "Periodic_2DelaunayTriangulationTraits_2::side_of_oriented_circle_2_object",
+        "brief": "Required only if side_of_oriented_circle is called called.",
+        "detailed": "",
+        "return_type": "Side_of_oriented_circle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2DelaunayTriangulationTraits_2.h",
+        "line": "113",
+        "section": "Predicate Functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_circumcenter_2_object",
+        "qualified_name": "Periodic_2DelaunayTriangulationTraits_2::construct_circumcenter_2_object",
+        "brief": "Required only if circumcenter is called.",
+        "detailed": "",
+        "return_type": "Construct_circumcenter_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2DelaunayTriangulationTraits_2.h",
+        "line": "118",
+        "section": "Predicate Functions"
+      },
+      {
+        "kind": "function",
+        "name": "compare_distance_2_object",
+        "qualified_name": "Periodic_2DelaunayTriangulationTraits_2::compare_distance_2_object",
+        "brief": "Required only if compare_distance is called.",
+        "detailed": "",
+        "return_type": "Compare_distance_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2DelaunayTriangulationTraits_2.h",
+        "line": "123",
+        "section": "Predicate Functions"
+      }
+    ]
+  },
+  "Periodic_2Offset_2": {
+    "kind": "class",
+    "name": "Periodic_2Offset_2",
+    "brief": "The concept Periodic_2Offset_2 describes a two-/dimensional integer vector with some specialized access functions and operations.",
+    "detailed": "Has models CGAL::Periodic_2_offset_2 Periodic_2TriangulationTraits_2 Periodic_2DelaunayTriangulationTraits_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Periodic_2Offset_2",
+        "qualified_name": "Periodic_2Offset_2::Periodic_2Offset_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "29",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Periodic_2Offset_2",
+        "qualified_name": "Periodic_2Offset_2::Periodic_2Offset_2",
+        "brief": "Constructs the offset (x,y).",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int x, int y)",
+        "params": [
+          {
+            "type": "int",
+            "name": "x",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "y",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "34",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator+",
+        "qualified_name": "Periodic_2Offset_2::operator+",
+        "brief": "Return the vector sum of this and o .",
+        "detailed": "",
+        "return_type": "Periodic_2Offset_2",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "44",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-",
+        "qualified_name": "Periodic_2Offset_2::operator-",
+        "brief": "Return the vector difference of this and o .",
+        "detailed": "",
+        "return_type": "Periodic_2Offset_2",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "50",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-",
+        "qualified_name": "Periodic_2Offset_2::operator-",
+        "brief": "Return the negative vector of this .",
+        "detailed": "",
+        "return_type": "Periodic_2Offset_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "56",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator+=",
+        "qualified_name": "Periodic_2Offset_2::operator+=",
+        "brief": "Add o to this using vector addition.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "61",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-=",
+        "qualified_name": "Periodic_2Offset_2::operator-=",
+        "brief": "Subtract o from this using vector subtraction.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "67",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "Periodic_2Offset_2::operator==",
+        "brief": "Return true if o and this represent the same vector.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "73",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator!=",
+        "qualified_name": "Periodic_2Offset_2::operator!=",
+        "brief": "Return true if o and this do not represent the same vector.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "79",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator<",
+        "qualified_name": "Periodic_2Offset_2::operator<",
+        "brief": "Compare this and o lexicographically.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Periodic_2Offset_2 &o) const",
+        "params": [
+          {
+            "type": "const Periodic_2Offset_2 &",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "84",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "Periodic_2Offset_2::operator[]",
+        "brief": "Return the $ i$ -th entry of this .",
+        "detailed": "$ i\\in\\{0,1\\}$",
+        "return_type": "int",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "95",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "x",
+        "qualified_name": "Periodic_2Offset_2::x",
+        "brief": "Return the $ x$ -entry of this .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "100",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "y",
+        "qualified_name": "Periodic_2Offset_2::y",
+        "brief": "Return the $ y$ -entry of this .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "105",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_null",
+        "qualified_name": "Periodic_2Offset_2::is_null",
+        "brief": "Returns true if this is equal to (0,0).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "110",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_zero",
+        "qualified_name": "Periodic_2Offset_2::is_zero",
+        "brief": "Returns true if this is equal to (0,0).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "115",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "Periodic_2Offset_2::operator>>",
+        "brief": "Inputs an offset from is .",
+        "detailed": "",
+        "return_type": "istream &",
+        "argsstring": "(istream &is, Periodic_2Offset_2 &off)",
+        "params": [
+          {
+            "type": "istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Periodic_2Offset_2 &",
+            "name": "off",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "126",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "Periodic_2Offset_2::operator<<",
+        "brief": "Outputs an offset from os .",
+        "detailed": "",
+        "return_type": "ostream &",
+        "argsstring": "(ostream &os, Periodic_2Offset_2 &off) const",
+        "params": [
+          {
+            "type": "ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Periodic_2Offset_2 &",
+            "name": "off",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2Offset_2.h",
+        "line": "132",
+        "section": ""
+      }
+    ]
+  },
+  "Periodic_2TriangulationFaceBase_2": {
+    "kind": "class",
+    "name": "Periodic_2TriangulationFaceBase_2",
+    "brief": "At the base level (see Section Section_2D_Triangulations_Software_Design), a face stores handles to its four vertices and to its four neighbor faces. The vertices and neighbors are indexed 0, 1 and 2. Neighbor $ i$ lies opposite to vertex $ i$ .",
+    "detailed": "Refines TriangulationFaceBase_2 Has models CGAL::Periodic_2_triangulation_face_base_2 TriangulationDataStructure_2 TriangulationFaceBase_2 Periodic_2TriangulationVertexBase_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "offset",
+        "qualified_name": "Periodic_2TriangulationFaceBase_2::offset",
+        "brief": "Returns the offset of vertex i .",
+        "detailed": "$ i \\in\\{0, 1, 2\\}$ .",
+        "return_type": "int",
+        "argsstring": "(int i) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2TriangulationFaceBase_2.h",
+        "line": "37",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "has_zero_offsets",
+        "qualified_name": "Periodic_2TriangulationFaceBase_2::has_zero_offsets",
+        "brief": "Returns true if the offset of vertex i is zero for $ i \\in\\{0, 1, 2\\}$ .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationFaceBase_2.h",
+        "line": "42",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_offsets",
+        "qualified_name": "Periodic_2TriangulationFaceBase_2::set_offsets",
+        "brief": "Sets the vertex offsets according to off0 to off2 .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int off0, int off1, int off2)",
+        "params": [
+          {
+            "type": "int",
+            "name": "off0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "off1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "off2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2TriangulationFaceBase_2.h",
+        "line": "52",
+        "section": "Setting"
+      }
+    ]
+  },
+  "Periodic_2TriangulationTraits_2": {
+    "kind": "class",
+    "name": "Periodic_2TriangulationTraits_2",
+    "brief": "The concept Periodic_2TriangulationTraits_2 is the first template parameter of the classes CGAL::Periodic_2_triangulation_2 <Traits, Tds> . This concept provides the types of the geometric primitives used in the triangulation and some function object types for the required predicates on those primitives.",
+    "detailed": "It refines the concept TriangulationTraits_2 from the CGAL PkgTriangulation2 package. It redefines the geometric objects, predicates and constructions to work with point-offset pairs. In most cases the offsets will be (0,0) and the predicates from TriangulationTraits_2 can be used directly. For efficiency reasons we maintain for each functor the version without offsets. Refines TriangulationTraits_2 In addition to the requirements described for the traits class TriangulationTraits_2 , the geometric traits class of a Periodic triangulation must fulfill the following requirements: Has models CGAL::Periodic_2_triangulation_traits_2 TriangulationTraits_2 CGAL::Periodic_2_triangulation_2 <Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Point_2",
+        "brief": "The point type.",
+        "detailed": "It must be a model of Kernel::Point_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Segment_2",
+        "brief": "The segment type.",
+        "detailed": "It must be a model of Kernel::Segment_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Vector_2",
+        "brief": "The vector type.",
+        "detailed": "It must be a model of Kernel::Vector_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Triangle_2",
+        "brief": "The triangle type.",
+        "detailed": "It must be a model of Kernel::Triangle_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Iso_rectangle_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Iso_rectangle_2",
+        "brief": "A type representing an axis-aligned rectangle.",
+        "detailed": "It must be a model of Kernel::IsoRectangle_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Periodic_2_offset_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Periodic_2_offset_2",
+        "brief": "The offset type.",
+        "detailed": "It must be a model of the concept Periodic_2Offset_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_x_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Compare_x_2",
+        "brief": "A predicate object that must provide the function operators.",
+        "detailed": "Comparison_result operator()(Point_2 p, Point_2 q) , which returns EQUAL if the $ x$ -coordinates of the two points are equal and Comparison_result operator()(Point_2 p, Point_2 q, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q) , which returns EQUAL if the $ x$ -coordinates and $ x$ -offsets of the two point-offset pairs are equal. Otherwise it must return a consistent order for any two points. p , q lie inside the domain.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "99",
+        "section": "Predicate types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_y_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Compare_y_2",
+        "brief": "A predicate object that must provide the function operators.",
+        "detailed": "Comparison_result operator()(Point_2 p, Point_2 q) , which returns EQUAL if the $ y$ -coordinates of the two points are equal and Comparison_result operator()(Point_2 p, Point_2 q, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q) , which returns EQUAL if the $ y$ -coordinates and $ y$ -offsets of the two point-offset pairs are equal. Otherwise it must return a consistent order for any two points. p , q lie inside the domain.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "115",
+        "section": "Predicate types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_x_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Less_x_2",
+        "brief": "Predicate object.",
+        "detailed": "Provides the operators: bool operator()(Point p, Point q) and bool operator()(Point p, Point q, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q) which returns true if p is before q according to the $ x$ -ordering of points. This predicate is only necessary if the insert function with a range of points (using Hilbert sorting) is used.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "131",
+        "section": "Predicate types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_y_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Less_y_2",
+        "brief": "Predicate object.",
+        "detailed": "Provides the operators: bool operator()(Point p, Point q) and bool operator()(Point p, Point q, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q) which returns true if p is before q according to the $ y$ -ordering of points. This predicate is only necessary if the insert function with a range of points (using Hilbert sorting) is used.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "148",
+        "section": "Predicate types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Orientation_2",
+        "brief": "A predicate object that must provide the function operators.",
+        "detailed": "Orientation operator()(Point_2 p, Point_2 q, Point_2 r) , which returns LEFT_TURN , RIGHT_TURN or COLLINEAR depending on $ r$ being, with respect to the oriented line pq , on the left side, on the right side or on the line. and Orientation operator()(Point_2 p, Point_2 q, Point_2 r, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q, Periodic_2_offset_2 o_r) , which returns LEFT_TURN , RIGHT_TURN or COLLINEAR depending on (r,o_r) being, with respect to the oriented line defined by (p,o_p)(q,o_q) on the left side, on the right side or on the line.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "167",
+        "section": "Predicate types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Construct_point_2",
+        "brief": "A constructor object for Point_2 .",
+        "detailed": "Provides: Point_2 operator()(Point_2 p,Periodic_2_offset_2 p_o) , which constructs a point from a point-offset pair. p lies inside the domain.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "186",
+        "section": "Constructor types:"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Construct_segment_2",
+        "brief": "A constructor object for Segment_2 .",
+        "detailed": "Provides: Segment_2 operator()(Point_2 p,Point_2 q) , which constructs a segment from two points and Segment_2 operator()(Point_2 p,Point_2 q, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q) , which constructs a segment from the points (p,o_p) and (q,o_q) .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "201",
+        "section": "Constructor types:"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Construct_triangle_2",
+        "brief": "A constructor object for Triangle_2 .",
+        "detailed": "Provides: Triangle_2 operator()(Point_2 p,Point_2 q,Point_2 r ) , which constructs a triangle from three points and Triangle_2 operator()(Point_2 p,Point_2 q,Point_2 r, Periodic_2_offset_2 o_p, Periodic_2_offset_2 o_q, Periodic_2_offset_2 o_r) , which constructs a triangle from the three points (p,o_p) , (q,o_q) and (r,o_r) .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "216",
+        "section": "Constructor types:"
+      },
+      {
+        "kind": "function",
+        "name": "Periodic_2_triangulation_traits_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Periodic_2_triangulation_traits_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "226",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Periodic_2_triangulation_traits_2",
+        "qualified_name": "Periodic_2TriangulationTraits_2::Periodic_2_triangulation_traits_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Periodic_2_triangulation_traits_2 &tr)",
+        "params": [
+          {
+            "type": "const Periodic_2_triangulation_traits_2 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "231",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compare_x_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::compare_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "242",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "compare_y_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::compare_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "247",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "less_x_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::less_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "252",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "less_y_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::less_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "257",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "262",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::construct_point_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "267",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_segment_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::construct_segment_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_segment_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "272",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_triangle_2_object",
+        "qualified_name": "Periodic_2TriangulationTraits_2::construct_triangle_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_triangle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "277",
+        "section": "Predicate functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_domain",
+        "qualified_name": "Periodic_2TriangulationTraits_2::set_domain",
+        "brief": "Sets the fundamental domain.",
+        "detailed": "This is necessary to evaluate predicates correctly. domain represents a square.",
+        "return_type": "void",
+        "argsstring": "(Iso_rectangle_2 domain)",
+        "params": [
+          {
+            "type": "Iso_rectangle_2",
+            "name": "domain",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "289",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_domain",
+        "qualified_name": "Periodic_2TriangulationTraits_2::get_domain",
+        "brief": "Returns the fundamental domain.",
+        "detailed": "",
+        "return_type": "Iso_rectangle_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationTraits_2.h",
+        "line": "294",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "Periodic_2TriangulationVertexBase_2": {
+    "kind": "class",
+    "name": "Periodic_2TriangulationVertexBase_2",
+    "brief": "A refinement of the concept TriangulationVertexBase_2 which adds an API for offset.",
+    "detailed": "At the base level of 2D-triangulations (see Section Section_2D_Triangulations_Software_Design), a vertex provides access to one of its incident faces through a handle. The storage of the offset is only needed when a triangulation is copied. Refines TriangulationVertexBase_2 Has models CGAL::Periodic_2_triangulation_vertex_base_2 TriangulationDataStructure_2 TriangulationVertexBase_2 Periodic_2TriangulationFaceBase_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Periodic_2_offset_2",
+        "qualified_name": "Periodic_2TriangulationVertexBase_2::Periodic_2_offset_2",
+        "brief": "A model of the concept Periodic_2Offset_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationVertexBase_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "offset",
+        "qualified_name": "Periodic_2TriangulationVertexBase_2::offset",
+        "brief": "Returns the offset stored in the vertex.",
+        "detailed": "",
+        "return_type": "Periodic_2_offset_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationVertexBase_2.h",
+        "line": "50",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_offset_flag",
+        "qualified_name": "Periodic_2TriangulationVertexBase_2::get_offset_flag",
+        "brief": "Returns true if the offset has been set, false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationVertexBase_2.h",
+        "line": "55",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_offset",
+        "qualified_name": "Periodic_2TriangulationVertexBase_2::set_offset",
+        "brief": "Sets the offset and sets the offset flag to true .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Periodic_2_offset_2 o)",
+        "params": [
+          {
+            "type": "Periodic_2_offset_2",
+            "name": "o",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Periodic_2TriangulationVertexBase_2.h",
+        "line": "60",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "clear_offset",
+        "qualified_name": "Periodic_2TriangulationVertexBase_2::clear_offset",
+        "brief": "Sets the offset flag to false and clears the offset.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/Periodic_2TriangulationVertexBase_2.h",
+        "line": "65",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::operator<<",
+        "brief": "Writes the triangulation t into the stream os .",
+        "detailed": "The output operator must be defined for Point .",
+        "return_type": "ostream &",
+        "argsstring": "(ostream &os, const Periodic_2_triangulation_2< Traits, Tds > &t)",
+        "params": [
+          {
+            "type": "ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Periodic_2_triangulation_2 < Traits, Tds > &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1128",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Periodic_2_triangulation_2::operator>>",
+        "brief": "Reads a triangulation from stream is and assigns it to t .",
+        "detailed": "The input operator must be defined for Point .",
+        "return_type": "istream &",
+        "argsstring": "(istream &is, Triangulation_2< Traits, Tds > &t)",
+        "params": [
+          {
+            "type": "istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Triangulation_2< Traits, Tds > &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Periodic_2_triangulation_2.h",
+        "line": "1136",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

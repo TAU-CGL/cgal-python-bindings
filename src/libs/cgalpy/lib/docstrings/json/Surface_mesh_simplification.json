@@ -1,0 +1,2219 @@
+{
+  "CGAL::Surface_mesh_simplification::Bounded_distance_placement": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Bounded_distance_placement",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_distance_placement::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_distance_placement.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Bounded_distance_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_distance_placement::Bounded_distance_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const FT d, const BasePlacement &base_placement=BasePlacement())",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const BasePlacement &",
+            "name": "base_placement",
+            "default": "BasePlacement()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_distance_placement.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_distance_placement::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_distance_placement.h",
+        "line": "49",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Bounded_normal_change_filter": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_filter",
+    "brief": "The class Bounded_normal_change_filter is a model for the PlacementFilter concept.",
+    "detailed": "It rejects a placement if the nested filter rejects it, or if any triangle in the profile changes the normal by more than 90 degree, in this order. Filter must be a model of the concept PlacementFilter . It defaults to a class that does not filter any placement. Is model of PlacementFilter",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Bounded_normal_change_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_filter::Bounded_normal_change_filter",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_filter.h",
+        "line": "29",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Bounded_normal_change_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_filter::Bounded_normal_change_filter",
+        "brief": "Constructor.",
+        "detailed": "filter is the filter that will be filtered.",
+        "return_type": "",
+        "argsstring": "(const Filter &filter)",
+        "params": [
+          {
+            "type": "const Filter &",
+            "name": "filter",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_filter.h",
+        "line": "36",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_filter::operator()",
+        "brief": "returns the placement, if it does not get filtered by the wrapped filter and if no triangle in the profile has its normal changed by more than 90 degrees.",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile, std::optional< typename Profile::Point > op) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< typename Profile::Point >",
+            "name": "op",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_filter.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Bounded_normal_change_placement": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_placement",
+    "brief": "",
+    "detailed": "Deprecated This class is deprecated since CGAL 5.3 and the use of Bounded_normal_change_filter should be preferred. The class Bounded_normal_change_placement is a model for the GetPlacement concept which serves as a filter for another placement. It rejects the placement if any triangle in the profile changes the normal by more than 90 degree. Get_placement_ must be a model of the concept GetPlacement . Is model of GetPlacement",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Bounded_normal_change_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_placement::Bounded_normal_change_placement",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h",
+        "line": "30",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Bounded_normal_change_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_placement::Bounded_normal_change_placement",
+        "brief": "Constructor.",
+        "detailed": "get_placement is the placement that will be filtered.",
+        "return_type": "",
+        "argsstring": "(const Get_placement_ &get_placement)",
+        "params": [
+          {
+            "type": "const Get_placement_ &",
+            "name": "get_placement",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h",
+        "line": "37",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Bounded_normal_change_placement::operator()",
+        "brief": "Returns the placement computed by get_placement , if no triangle in the profile has its normal changed by more than 90 degree.",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h",
+        "line": "48",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Constrained_placement": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Constrained_placement",
+    "brief": "The class Constrained_placement is a model for the concept GetPlacement .",
+    "detailed": "The placement of the vertex resulting from a contraction of an edge adjacent to a constrained edge is the point of the common vertex. Otherwise the placement is the one computed by Get_placement_ . Get_placement_ must be a model of GetPlacement . Edge_is_constrained_map_ must be a model of ReadablePropertyMap with Edge_profile::edge_descriptor as key type and bool as value type indicating if an edge is constrained. Is model of GetPlacement",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Constrained_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Constrained_placement::Constrained_placement",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Edge_is_constrained_map_ map=Edge_is_constrained_map_(), const Get_placement_ &get_placement=Get_placement_())",
+        "params": [
+          {
+            "type": "Edge_is_constrained_map_",
+            "name": "map",
+            "default": "Edge_is_constrained_map_()",
+            "brief": ""
+          },
+          {
+            "type": "const Get_placement_ &",
+            "name": "get_placement",
+            "default": "Get_placement_()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Constrained_placement.h",
+        "line": "31",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Count_ratio_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Count_ratio_stop_predicate",
+    "brief": "",
+    "detailed": "Deprecated This class is deprecated since CGAL 5.6, the class Edge_count_ratio_stop_predicate should be used instead. The class Count_ratio_stop_predicate is a model for the StopPredicate concept which returns true when the relation between the initial and current number of edges drops below a certain ratio. TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of StopPredicate CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Count_ratio_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Count_ratio_stop_predicate::Count_ratio_stop_predicate",
+        "brief": "Initializes the predicate establishing the ratio .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const double ratio)",
+        "params": [
+          {
+            "type": "const double",
+            "name": "ratio",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Count_ratio_stop_predicate.h",
+        "line": "31",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Count_ratio_stop_predicate::operator()",
+        "brief": "Returns (double(current_edge_count) / double(initial_edge_count)) < ratio .",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT current_cost, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Count_ratio_stop_predicate.h",
+        "line": "42",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Count_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Count_stop_predicate",
+    "brief": "",
+    "detailed": "Deprecated This class is deprecated since CGAL 5.6, the class Edge_count_stop_predicate should be used instead. The class Count_stop_predicate is a model for the StopPredicate concept, which returns true when the number of current edges drops below a certain threshold. TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of StopPredicate CGAL::Surface_mesh_simplification::Edge_count_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_stop_predicate <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Count_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Count_stop_predicate::Count_stop_predicate",
+        "brief": "Initializes the predicate establishing the threshold value.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Edge_profile::edges_size_type threshold)",
+        "params": [
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "threshold",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Count_stop_predicate.h",
+        "line": "30",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Count_stop_predicate::operator()",
+        "brief": "Returns (current_edge_count < threshold) .",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT &current_cost, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT &",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Count_stop_predicate.h",
+        "line": "40",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Edge_collapse_visitor_base": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh_simplification::Edge_collapse_visitor_base",
+    "brief": "The class Surface_mesh_simplification::Edge_collapse_visitor_base provides a base class for models of the EdgeCollapseSimplificationVisitor concept.",
+    "detailed": "This base class implements all of the visitor's callbacks. This way, users need only override the callbacks they are interested in. The callbacks are not virtual because this is not a dynamically polymorphic base class and the derived visitor will never be used polymorphically at runtime (is perfectly fine to override and hide a non-virtual method in the context of the static polymorphism used in the simplification algorithm). TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of EdgeCollapseSimplificationVisitor",
+    "members": []
+  },
+  "CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate",
+    "brief": "",
+    "detailed": "Is model of StopPredicate The class Edge_count_ratio_stop_predicate is a model for the StopPredicate concept which returns true when the relation between the initial and current number of edges drops below a certain ratio. TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. CGAL::Surface_mesh_simplification::Edge_count_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Edge_count_ratio_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate::Edge_count_ratio_stop_predicate",
+        "brief": "Initializes the predicate establishing the ratio .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const double ratio)",
+        "params": [
+          {
+            "type": "const double",
+            "name": "ratio",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_ratio_stop_predicate.h",
+        "line": "29",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate::operator()",
+        "brief": "Returns (double(current_edge_count) / double(initial_edge_count)) < ratio .",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT current_cost, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_ratio_stop_predicate.h",
+        "line": "40",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Edge_count_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Edge_count_stop_predicate",
+    "brief": "",
+    "detailed": "Is model of StopPredicate The class Edge_count_stop_predicate is a model for the StopPredicate concept, which returns true when the number of current edges drops below a certain threshold. TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. CGAL::Surface_mesh_simplification::Face_count_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Edge_ratio_count_stop_predicate<TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Edge_count_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_count_stop_predicate::Edge_count_stop_predicate",
+        "brief": "Initializes the predicate establishing the threshold value.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Edge_profile::edges_size_type threshold)",
+        "params": [
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "threshold",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_stop_predicate.h",
+        "line": "28",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_count_stop_predicate::operator()",
+        "brief": "Returns (current_edge_count < threshold) .",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT &current_cost, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT &",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_count_stop_predicate.h",
+        "line": "38",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Edge_length_cost": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Edge_length_cost",
+    "brief": "The class Edge_length_cost is a model for the GetCost concept, which computes the collapse cost as the squared length of the edge.",
+    "detailed": "TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of GetCost",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Edge_length_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_length_cost::Edge_length_cost",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_cost.h",
+        "line": "26",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_length_cost::operator()",
+        "brief": "Returns the collapse cost as the squared distance between the points of the source and target vertices (that is, profile.p0() and profile.p1() .",
+        "detailed": "The argument placement is unused.",
+        "return_type": "std::optional< typename Edge_profile::FT >",
+        "argsstring": "(const Edge_profile &profile, const std::optional< typename Edge_profile::Point > &placement) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::optional< typename Edge_profile::Point > &",
+            "name": "placement",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_cost.h",
+        "line": "39",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Edge_length_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Edge_length_stop_predicate",
+    "brief": "The class Edge_length_stop_predicate is a model for the StopPredicate concept, which returns true when the top edge in the priority queue is larger than a certain threshold.",
+    "detailed": "This predicate is meant to be used with Edge_length_cost . FT is the number type of the point coordinates, and must be equal to Edge_profile::FT . Is model of StopPredicate",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Edge_length_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_length_stop_predicate::Edge_length_stop_predicate",
+        "brief": "Initializes the predicate establishing the threshold value.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Edge_profile::FT threshold)",
+        "params": [
+          {
+            "type": "const Edge_profile::FT",
+            "name": "threshold",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_stop_predicate.h",
+        "line": "1",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_length_stop_predicate::operator()",
+        "brief": "Returns (CGAL::squared_distance(edge_profile.p0(),edge_profile.p1()) > threshold*threshold) .",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT &, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_length_stop_predicate.h",
+        "line": "39",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Edge_profile": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Edge_profile",
+    "brief": "The class Edge_profile regroups useful information about an edge, such as its incident vertices and faces.",
+    "detailed": "Its purpose is to pass this information onto the chosen models of GetCost and GetPlacement , and as such an object of this type appears as a parameter in the operator() of both concepts. The template parameters of this class must be consistent with the types used in the main call to edge_collapse() : if you have specified a vertex point map or a geometric traits (via CGAL::parameters::vertex_point_map() and CGAL::parameters::geom_traits() respectively), then the template parameters must be identical. Note however that if you wish to define your own models of the GetCost or GetPlacement concepts, you can simply template the call to operator() by an \"EdgeProfile\" template parameter, which will avoid having to explicit the template parameters of the Edge_profile class: indeed, the profile appears as an argument of the operator() functions of these two concepts and automatic template deduction can therefore be used. TriangleMesh is the type of surface mesh being simplified VertexPointMap is the type of the map that associates geometric positions to vertices of the mesh. If you have specified a vertex point map in the named parameters in the call to edge_collapse() , it must the same map type. Otherwise, you need not specify this template parameter and it will be automatically deduced. GeomTraits is the type of the kernel that is used to perform predicates and constructions on geometric objects. If you have specified a traits class in the named parameters in the call to edge_collapse() , it must be the same traits class type. Otherwise, you need not specify this template parameter and it will be automatically deduced. GetCost GetPlacement",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Triangle_mesh",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::Triangle_mesh",
+        "brief": "The type of the surface mesh to simplify.",
+        "detailed": "",
+        "return_type": "TriangleMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_point_map",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::Vertex_point_map",
+        "brief": "The type of a property map that maps vertices on points.",
+        "detailed": "",
+        "return_type": "VertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::Geom_traits",
+        "brief": "The type of a kernel-like objects used for predicates and constructions.",
+        "detailed": "",
+        "return_type": "GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::vertex_descriptor",
+        "brief": "A BGL vertex descriptor representing a vertex of the surface mesh.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::halfedge_descriptor",
+        "brief": "A BGL halfedge descriptor representing a halfedge of the surface mesh.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "edge_descriptor",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::edge_descriptor",
+        "brief": "A BGL edge descriptor representing an edge of the surface mesh.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::edge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "edges_size_type",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::edges_size_type",
+        "brief": "The unsigned integer type used for representing the number of edges in the graph.",
+        "detailed": "",
+        "return_type": "boost::graph_traits< TriangleMesh >::edges_size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::Point",
+        "brief": "The point type for the surface mesh vertex.",
+        "detailed": "",
+        "return_type": "boost::property_traits< VertexPointMap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::FT",
+        "brief": "The coordinate type of points.",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "v0",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::v0",
+        "brief": "One of vertices of the edge to be collapsed.",
+        "detailed": "",
+        "return_type": "vertex_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "96",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "v1",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::v1",
+        "brief": "The other vertex of the edge to be collapsed.",
+        "detailed": "",
+        "return_type": "vertex_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "101",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "v0_v1",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::v0_v1",
+        "brief": "One of the directed edges corresponding to the halfedge being collapsed.",
+        "detailed": "",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "106",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "v1_v0",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::v1_v0",
+        "brief": "The other directed edge corresponding to the halfedge being collapsed.",
+        "detailed": "",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "111",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "p0",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::p0",
+        "brief": "The point of vertex v0 .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "116",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "p1",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::p1",
+        "brief": "The point of vertex v1 .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "121",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vL",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::vL",
+        "brief": "If v0v1 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.",
+        "detailed": "",
+        "return_type": "vertex_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "127",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "v1_vL",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::v1_vL",
+        "brief": "If v0v1 belongs to a finite face (is not a border edge) the directed edge from v1 to vL , a null descriptor otherwise.",
+        "detailed": "",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "133",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vL_v0",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::vL_v0",
+        "brief": "If v0v1 belongs to a finite face (is not a border edge) the directed edge from vL to v0 , a null descriptor otherwise.",
+        "detailed": "",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "139",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vR",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::vR",
+        "brief": "If v1v0 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.",
+        "detailed": "",
+        "return_type": "vertex_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "145",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "v0_vR",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::v0_vR",
+        "brief": "If v1v0 belongs to a finite face (is not a border edge) the directed edge from v0 to vR , a null descriptor otherwise.",
+        "detailed": "",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "151",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vR_v1",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::vR_v1",
+        "brief": "If v1v0 belongs to a finite face (is not a border edge) the directed edge from vR to v1 , a null descriptor otherwise.",
+        "detailed": "",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "157",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "link",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::link",
+        "brief": "The unique sequence of the vertices around v0v1 in topological order ( ccw or cw depending on the relative ordering of v0 and v1 in the profile).",
+        "detailed": "The sequence may have duplicates, but when this happens the edge is not collapsible.",
+        "return_type": "std::vector< vertex_descriptor >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "164",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "border_edges",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::border_edges",
+        "brief": "The unique collection of the border directed edges incident upon v0 and v1 .",
+        "detailed": "",
+        "return_type": "std::vector< halfedge_descriptor >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "169",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "left_face_exists",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::left_face_exists",
+        "brief": "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v0v1 is not a border edge).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "174",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "right_face_exists",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::right_face_exists",
+        "brief": "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v1v0 is not a border edge).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "179",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "surface_mesh",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::surface_mesh",
+        "brief": "Returns the surface mesh the edge belongs to.",
+        "detailed": "",
+        "return_type": "const Triangle_mesh &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "184",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_point_map",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::vertex_point_map",
+        "brief": "Returns the vertex point property map.",
+        "detailed": "",
+        "return_type": "const Vertex_point_map &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "189",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Edge_profile::geom_traits",
+        "brief": "Returns the geometric traits class.",
+        "detailed": "",
+        "return_type": "const Geom_traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Edge_profile.h",
+        "line": "194",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate",
+    "brief": "",
+    "detailed": "Is model of StopPredicate The class Face_count_ratio_stop_predicate is a model for the StopPredicate concept which returns true when the relation between the initial and current number of faces drops below a certain ratio. TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_stop_predicate <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Face_count_ratio_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate::Face_count_ratio_stop_predicate",
+        "brief": "Initializes the predicate establishing the ratio .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const double ratio, const TriangleMesh &tmesh)",
+        "params": [
+          {
+            "type": "const double",
+            "name": "ratio",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_ratio_stop_predicate.h",
+        "line": "29",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate::operator()",
+        "brief": "Returns true if the ratio of current face count over initial face count is strictly smaller than ratio , and false otherwise.",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT current_cost, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_ratio_stop_predicate.h",
+        "line": "41",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Face_count_stop_predicate": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Face_count_stop_predicate",
+    "brief": "",
+    "detailed": "Is model of StopPredicate The class Face_count_stop_predicate is a model for the StopPredicate concept, which returns true when the number of current faces drops below a certain threshold. TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. CGAL::Surface_mesh_simplification::Edge_count_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Face_count_stop_predicate",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Face_count_stop_predicate::Face_count_stop_predicate",
+        "brief": "Initializes the predicate establishing the threshold value.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Edge_profile::edges_size_type threshold)",
+        "params": [
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "threshold",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_stop_predicate.h",
+        "line": "28",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Face_count_stop_predicate::operator()",
+        "brief": "Returns true if the current face count is strictly smaller than threshold , and false otherwise.",
+        "detailed": "All other parameters are ignored (but exist since this is a generic policy).",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT &current_cost, const Edge_profile &edge_profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT &",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Face_count_stop_predicate.h",
+        "line": "39",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies",
+    "brief": "The class GarlandHeckbert_plane_and_line_policies regroups the cost and placement policies based on the Garland-Heckbert \"Plane and line\" strategy of Liu and colleagues [6] .",
+    "detailed": "This policy enhances the original Garland-Heckbert quadric error metrics by adding to the cost the distance to the line passing through the input vertices and aligned with their normals. Compared to the \"classic\" plane strategy, this strategy improves the speed and the quality of the result (see Section Garland-Heckbert Cost and Placement Strategy ). Both the cost and the placement policies must be used together as they internally use and share information associating quadrics to vertices. Note however, that they may still be wrapped with behavior-modifying classes such as Constrained_placement or Bounded_normal_change_filter . TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. GeomTraits must be a model of Kernel . If you have passed a traits class in the optional named parameters in the call to edge_collapse() , the types must be identical. These policies depend on the third party thirdpartyEigen library. GarlandHeckbert_policies GarlandHeckbert_plane_policies GarlandHeckbert_probabilistic_plane_policies GarlandHeckbert_triangle_policies GarlandHeckbert_probabilistic_triangle_policies",
+    "members": [
+      {
+        "kind": "function",
+        "name": "GarlandHeckbert_plane_and_line_policies",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies::GarlandHeckbert_plane_and_line_policies",
+        "brief": "initializes the Garland-Heckbert plane and line policies.",
+        "detailed": "NamedParameters a sequence of Named Parameters tmesh the triangle mesh np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_normal_map </button> a property map associating to each vertex of tmesh a normal direction for that vertex Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Vector_3 as value type Default: an internal map filled using CGAL::Polygon_mesh_processing::compute_vertex_normals <button class=\"collapsible\"> discontinuity_multiplier </button> a multiplier of the error value for boundary edges to preserve the boundaries Type: double Default: 100 <button class=\"collapsible\"> line_policies_weight </button> a value that defines the weight of the line policies compared to the plane policies Type: double Default: 0.01",
+        "return_type": "",
+        "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_and_line_policies.h",
+        "line": "74",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies::get_cost",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_cost &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_and_line_policies.h",
+        "line": "81",
+        "section": "Accessors"
+      },
+      {
+        "kind": "function",
+        "name": "get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies::get_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_placement &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_and_line_policies.h",
+        "line": "82",
+        "section": "Accessors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies::Get_cost",
+        "brief": "The type of the Garland-Heckbert cost functor, a model of the concept GetCost .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_and_line_policies.h",
+        "line": "38",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies::Get_placement",
+        "brief": "The type of the Garland-Heckbert placement functor, a model of the concept GetPlacement .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_and_line_policies.h",
+        "line": "41",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies",
+    "brief": "The class GarlandHeckbert_plane_policies regroups the cost and placement policies based on the Garland-Heckbert \"Classic Plane\" strategy (Section Garland-Heckbert Cost and Placement Strategy ).",
+    "detailed": "This class implements the original Garland-Heckbert quadric error metric strategy, as described in their seminal paper [2] . Both the cost and the placement policies must be used together as they internally use and share information associating quadrics to vertices. Note however, that they may still be wrapped with behavior modifying classes such as Constrained_placement or Bounded_normal_change_filter . TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. GeomTraits must be a model of Kernel . If you have passed a traits class in the optional named parameters in the call to edge_collapse() , the types must be identical. These policies depend on the third party thirdpartyEigen library. GarlandHeckbert_probabilistic_plane_policies GarlandHeckbert_triangle_policies GarlandHeckbert_probabilistic_triangle_policies GarlandHeckbert_plane_and_line_policies",
+    "members": [
+      {
+        "kind": "function",
+        "name": "GarlandHeckbert_plane_policies",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies::GarlandHeckbert_plane_policies",
+        "brief": "initializes the Garland-Heckbert Plane policies.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(TriangleMesh &tmesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h",
+        "line": "46",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies::get_cost",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_cost &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h",
+        "line": "53",
+        "section": "Accessors"
+      },
+      {
+        "kind": "function",
+        "name": "get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies::get_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_placement &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h",
+        "line": "54",
+        "section": "Accessors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies::Get_cost",
+        "brief": "The type of the Garland Heckbert cost functor, a model of the concept GetCost .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h",
+        "line": "35",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies::Get_placement",
+        "brief": "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h",
+        "line": "38",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies",
+    "brief": "The class GarlandHeckbert_probabilistic_plane_policies regroups the cost and placement policies based on the \"Probabilistic Plane\" strategy of Trettner and Kobbelt [8] .",
+    "detailed": "This policy enhances the original Garland-Heckbert quadric error metrics, by adding notions of variance (i.e., noise) to the positions of the vertices and the normals of faces. Compared to the \"classic\" plane strategy, this strategy sacrifices tightness to the input for speed and quality of the result (Section Garland-Heckbert Cost and Placement Strategy ). Both the cost and the placement policies must be used together as they internally use and share information associating quadrics to vertices. Note however, that they may still be wrapped with behavior modifying classes such as Constrained_placement or Bounded_normal_change_filter . TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. GeomTraits must be a model of Kernel . If you have passed a traits class in the optional named parameters in the call to edge_collapse() , the types must be identical. These policies depend on the third party thirdpartyEigen library. GarlandHeckbert_plane_policies GarlandHeckbert_triangle_policies GarlandHeckbert_probabilistic_triangle_policies GarlandHeckbert_plane_and_line_policies",
+    "members": [
+      {
+        "kind": "function",
+        "name": "GarlandHeckbert_probabilistic_plane_policies",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies::GarlandHeckbert_probabilistic_plane_policies",
+        "brief": "initializes the Garland-Heckbert Probabilistic Plane policies.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(TriangleMesh &tmesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h",
+        "line": "47",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies::get_cost",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_cost &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h",
+        "line": "54",
+        "section": "Accessors"
+      },
+      {
+        "kind": "function",
+        "name": "get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies::get_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_placement &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h",
+        "line": "55",
+        "section": "Accessors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies::Get_cost",
+        "brief": "The type of the Garland Heckbert cost functor, a model of the concept GetCost .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies::Get_placement",
+        "brief": "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_plane_policies.h",
+        "line": "39",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies",
+    "brief": "The class GarlandHeckbert_probabilistic_triangle_policies regroups the cost and placement policies based on the \"Probabilistic Triangle\" strategy of Trettner and Kobbelt [8] .",
+    "detailed": "This policy enhances the original Garland-Heckbert quadric error metrics, by adding notions of variance (i.e., noise) to the positions of the vertices and the normals of faces. Compared to the \"classic\" triangle strategy, this strategy sacrifices tightness to the input for speed and quality of the result (Section Garland-Heckbert Cost and Placement Strategy ). Both the cost and the placement policies must be used together as they internally use and share information associating quadrics to vertices. Note however, that they may still be wrapped with behavior modifying classes such as Constrained_placement or Bounded_normal_change_filter . TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. GeomTraits must be a model of Kernel . If you have passed a traits class in the optional named parameters in the call to edge_collapse() , the types must be identical. These policies depend on the third party thirdpartyEigen library. GarlandHeckbert_plane_policies GarlandHeckbert_probabilistic_plane_policies GarlandHeckbert_triangle_policies GarlandHeckbert_plane_and_line_policies",
+    "members": [
+      {
+        "kind": "function",
+        "name": "GarlandHeckbert_probabilistic_triangle_policies",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies::GarlandHeckbert_probabilistic_triangle_policies",
+        "brief": "initializes the Garland-Heckbert \"Probabilistic Triangle\" policies.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(TriangleMesh &tmesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h",
+        "line": "47",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies::get_cost",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_cost &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h",
+        "line": "54",
+        "section": "Accessors"
+      },
+      {
+        "kind": "function",
+        "name": "get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies::get_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_placement &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h",
+        "line": "55",
+        "section": "Accessors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies::Get_cost",
+        "brief": "The type of the Garland Heckbert cost functor, a model of the concept GetCost .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies::Get_placement",
+        "brief": "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h",
+        "line": "39",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies",
+    "brief": "The class GarlandHeckbert_triangle_policies regroups the cost and placement policies using the triangle-based Garland-Heckbert strategy (Section Garland-Heckbert Cost and Placement Strategy ).",
+    "detailed": "This strategy considers distances to triangular faces, rather than the supporting planes of the faces as in GarlandHeckbert_plane_policies . Both the cost and the placement policies must be used together as they internally use and share information associating quadrics to vertices. Note however, that they may still be wrapped with behavior modifying classes such as Constrained_placement or Bounded_normal_change_filter . TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. GeomTraits must be a model of Kernel . If you have passed a traits class in the optional named parameters in the call to edge_collapse() , the types must be identical. These policies depend on the third party thirdpartyEigen library. GarlandHeckbert_probabilistic_plane_policies GarlandHeckbert_probabilistic_triangle_policies",
+    "members": [
+      {
+        "kind": "function",
+        "name": "GarlandHeckbert_triangle_policies",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies::GarlandHeckbert_triangle_policies",
+        "brief": "initializes the Garland-Heckbert Triangle policies.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(TriangleMesh &tmesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h",
+        "line": "43",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies::get_cost",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_cost &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h",
+        "line": "50",
+        "section": "Accessors"
+      },
+      {
+        "kind": "function",
+        "name": "get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies::get_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Get_placement &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h",
+        "line": "51",
+        "section": "Accessors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies::Get_cost",
+        "brief": "The type of the Garland Heckbert cost functor, a model of the concept GetCost .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies::Get_placement",
+        "brief": "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_triangle_policies.h",
+        "line": "35",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::LindstromTurk_cost": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::LindstromTurk_cost",
+    "brief": "The class LindstromTurk_cost provides a model for the GetCost concept.",
+    "detailed": "It computes the collapse cost following the Lindstrom-Turk strategy (Section Lindstrom-Turk Cost and Placement Strategy ) TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of GetCost CGAL::Surface_mesh_simplification::LindstromTurk_placement <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "LindstromTurk_cost",
+        "qualified_name": "CGAL::Surface_mesh_simplification::LindstromTurk_cost::LindstromTurk_cost",
+        "brief": "Initializes the policy with the given weighting unit factor .",
+        "detailed": "See Lindstrom-Turk Cost and Placement Strategy for details on the meaning of this factor.",
+        "return_type": "",
+        "argsstring": "(const FT factor=FT(0.5))",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "factor",
+            "default": "FT(0.5)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_cost.h",
+        "line": "1",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::LindstromTurk_cost::operator()",
+        "brief": "Returns the cost of collapsing the edge (represented by its profile) considering the new placement computed for it.",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::FT >",
+        "argsstring": "(const Edge_profile &edge_profile, const std::optional< typename Edge_profile::Point > &placement) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::optional< typename Edge_profile::Point > &",
+            "name": "placement",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_cost.h",
+        "line": "40",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::LindstromTurk_placement": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::LindstromTurk_placement",
+    "brief": "The class LindstromTurk_placement provides a model for the GetPlacement concept.",
+    "detailed": "It computes the placement, that is, the new position for the remaining vertex after a halfedge collapse, following the Lindstrom-Turk strategy (Section Lindstrom-Turk Cost and Placement Strategy ). TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of GetPlacement CGAL::Surface_mesh_simplification::LindstromTurk_cost <TriangleMesh>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "LindstromTurk_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::LindstromTurk_placement::LindstromTurk_placement",
+        "brief": "Initializes the policy with the given weighting unit factor .",
+        "detailed": "See Lindstrom-Turk Cost and Placement Strategy for details on the meaning of this factor.",
+        "return_type": "",
+        "argsstring": "(const Edge_profile::FT &factor=FT(0.5))",
+        "params": [
+          {
+            "type": "const Edge_profile::FT &",
+            "name": "factor",
+            "default": "FT(0.5)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_placement.h",
+        "line": "30",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::LindstromTurk_placement::operator()",
+        "brief": "Returns the new position for the remaining vertex after collapsing the edge (represented by its profile).",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/LindstromTurk_placement.h",
+        "line": "42",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Midpoint_placement": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Midpoint_placement",
+    "brief": "The class Midpoint_placement is a model for the GetPlacement concept which computes the placement as the midpoint position along the edge.",
+    "detailed": "TriangleMesh is the type of surface mesh being simplified, and must be a model of the MutableFaceGraph and HalfedgeListGraph concepts. Is model of GetPlacement",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Midpoint_placement",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Midpoint_placement::Midpoint_placement",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Midpoint_placement.h",
+        "line": "27",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Midpoint_placement::operator()",
+        "brief": "Returns the placement (vertex position) as the midpoint between the points of the source and target vertices ( profile.p0() and profile.p1() ).",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Midpoint_placement.h",
+        "line": "39",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter",
+    "brief": "The class Polyhedral_envelope_filter is a model for the PlacementFilter concept.",
+    "detailed": "It rejects the placement if the nested filter rejects it, or if any triangle in the profile is not inside the polyhedral envelope, in this order. Filter must be a model of the concept PlacementFilter . It defaults to a class that does not filter any placement. Is model of PlacementFilter Polyhedral_envelope",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Polyhedral_envelope_filter",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "34",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedral_envelope_filter",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::Polyhedral_envelope_filter",
+        "brief": "Constructor.",
+        "detailed": "dist is the parameter given to the polyhedral envelope filter is the filter that will be filtered.",
+        "return_type": "",
+        "argsstring": "(const FT &dist, const Filter &filter)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "dist",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Filter &",
+            "name": "filter",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "42",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::operator()",
+        "brief": "returns the placement, if it does not get filtered by the wrapped filter, and if all triangles in the profile are inside the polyhedral envelope.",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile, std::optional< typename Profile::Point > op) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< typename Profile::Point >",
+            "name": "op",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "53",
+        "section": "Operations"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter::FT",
+        "brief": "The number type.",
+        "detailed": "",
+        "return_type": "Geom_traits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h",
+        "line": "26",
+        "section": ""
+      }
+    ]
+  },
+  "EdgeCollapseSimplificationVisitor": {
+    "kind": "class",
+    "name": "EdgeCollapseSimplificationVisitor",
+    "brief": "The concept EdgeCollapseSimplificationVisitor describes the requirements for the visitor object which is used to track the edge collapse simplification algorithm.",
+    "detailed": "The several callbacks given as member functions in the visitor are called from certain places in the algorithm implementation.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Edge_profile",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::Edge_profile",
+        "brief": "Convenience typedef to the Edge_profile class.",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh_simplification::Edge_profile",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "17",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "TriangleMesh",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::TriangleMesh",
+        "brief": "The type of the surface mesh to simplify.",
+        "detailed": "Must be a model of the MutableFaceGraph and HalfedgeListGraph concepts.",
+        "return_type": "Edge_profile::Triangle_mesh",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "22",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "OnStarted",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnStarted",
+        "brief": "Called before the algorithm starts.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(TriangleMesh &surface_mesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "surface_mesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "32",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnFinished",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnFinished",
+        "brief": "Called after the algorithm finishes.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(TriangleMesh &surface_mesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "surface_mesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "37",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnStopConditionReached",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnStopConditionReached",
+        "brief": "Called when the StopPredicate returned true (but not if the algorithm terminates because the surface mesh could not be simplified any further).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(TriangleMesh &surface_mesh)",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "surface_mesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "44",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnCollected",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnCollected",
+        "brief": "Called during the collecting phase (when a cost is assigned to the edges), for each edge collected.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_profile &profile, std::optional< Edge_profile::FT > cost)",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< Edge_profile::FT >",
+            "name": "cost",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "51",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnSelected",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnSelected",
+        "brief": "Called during the processing phase (when edges are collapsed), for each edge that is selected.",
+        "detailed": "This method is called before the algorithm checks if the edge is collapsible. cost indicates the current collapse cost for the edge. If absent (meaning that it could not be computed) the edge will not be collapsed. initial_edge_count and current_edge_count refer to the number of edges.",
+        "return_type": "void",
+        "argsstring": "(const Edge_profile &profile, std::optional< Edge_profile::FT > cost, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count)",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< Edge_profile::FT >",
+            "name": "cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "67",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnCollapsing",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnCollapsing",
+        "brief": "Called when an edge is about to be collapsed and replaced by a vertex whose position is *placement .",
+        "detailed": "If placement is absent (meaning that it could not be computed) the edge will not be collapsed.",
+        "return_type": "void",
+        "argsstring": "(const Edge_profile &profile, std::optional< Edge_profile::Point > placement)",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< Edge_profile::Point >",
+            "name": "placement",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "80",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnCollapsed",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnCollapsed",
+        "brief": "Called when an edge has been collapsed and replaced by the vertex vd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_profile &profile, const Edge_profile::vertex_descriptor vd)",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "86",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "OnNonCollapsable",
+        "qualified_name": "EdgeCollapseSimplificationVisitor::OnNonCollapsable",
+        "brief": "Called for each selected edge which cannot be collapsed because doing so would change the topological type of the surface mesh (turn it into a non-manifold for instance).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_profile &profile)",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EdgeCollapseSimplificationVisitor.h",
+        "line": "96",
+        "section": "Operations"
+      }
+    ]
+  },
+  "GetCost": {
+    "kind": "class",
+    "name": "GetCost",
+    "brief": "The concept GetCost describes the requirements for the policy function object which gets the collapse cost of an edge.",
+    "detailed": "The cost returned is a std::optional value (i.e. it can be absent). An absent cost indicates that the edge should not be collapsed. This could be the result of a computational limitation (such as an overflow), or can be intentionally returned to prevent the edge from being collapsed. Refines DefaultConstructible CopyConstructible Has models CGAL::Surface_mesh_simplification::Edge_length_cost <TriangleMesh> CGAL::Surface_mesh_simplification::LindstromTurk_cost <TriangleMesh> CGAL::Surface_mesh_simplification::GarlandHeckbert_policies <TriangleMesh, GeomTraits>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "GetCost::operator()",
+        "brief": "Computes and returns the cost of collapsing the edge (represented by its profile), using the calculated placement.",
+        "detailed": "",
+        "return_type": "std::optional< typename Edge_profile::FT >",
+        "argsstring": "(const Edge_profile &edge_profile, const std::optional< typename Edge_profile::Point > &placement) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "edge_profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::optional< typename Edge_profile::Point > &",
+            "name": "placement",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GetCost.h",
+        "line": "36",
+        "section": "Operations"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_profile",
+        "qualified_name": "GetCost::Edge_profile",
+        "brief": "The class Edge_profile regroups useful information about an edge, such as its incident vertices and faces.",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh_simplification::Edge_profile",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GetCost.h",
+        "line": "27",
+        "section": ""
+      }
+    ]
+  },
+  "GetPlacement": {
+    "kind": "class",
+    "name": "GetPlacement",
+    "brief": "The concept GetPlacement describes the requirements for the policy function object which gets the collapse placement of an edge, that is, the new position of the vertex that remains after a halfedge-collapse operation.",
+    "detailed": "The placement returned is a std::optional value (i.e., it can be absent). An absent result indicates that the edge should not be collapsed. This could be the result of a computational limitation (such as an overflow), or can be intentionally returned to prevent the edge from being collapsed. Refines DefaultConstructible CopyConstructible Has models CGAL::Surface_mesh_simplification::Midpoint_placement <TriangleMesh> CGAL::Surface_mesh_simplification::LindstromTurk_placement <TriangleMesh> CGAL::Surface_mesh_simplification::GarlandHeckbert_policies <TriangleMesh, GeomTraits> CGAL::Surface_mesh_simplification::Bounded_normal_change_filter <Placement> CGAL::Surface_mesh_simplification::Constrained_placement <Placement>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "GetPlacement::operator()",
+        "brief": "Computes and returns the placement, that is, the position of the vertex which replaces the collapsing edge (represented by its profile).",
+        "detailed": "",
+        "return_type": "std::optional< Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GetPlacement.h",
+        "line": "41",
+        "section": "Operations"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_profile",
+        "qualified_name": "GetPlacement::Edge_profile",
+        "brief": "The class Edge_profile regroups useful information about an edge, such as its incident vertices and faces.",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh_simplification::Edge_profile",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GetPlacement.h",
+        "line": "32",
+        "section": ""
+      }
+    ]
+  },
+  "PlacementFilter": {
+    "kind": "class",
+    "name": "PlacementFilter",
+    "brief": "The concept PlacementFilter describes the requirements for the policy function object which gets the profile and placement of an edge and which can filter the placement. The filtering is only done when an edge is taken from the priority queue in order to get collapsed, and neither when the edge is inserted nor when it is updated in the priority queue.",
+    "detailed": "The placement returned is a std::optional value (i.e., it can be absent). The value std::nullopt indicates that the edge should not be collapsed. Refines DefaultConstructible CopyConstructible Has models CGAL::Surface_mesh_simplification::Bounded_normal_change_filter <BasePlacementFilter> CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter <GeomTraits, BasePlacementFilter>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PlacementFilter::operator()",
+        "brief": "filters the placement.",
+        "detailed": "",
+        "return_type": "std::optional< Edge_profile::Point >",
+        "argsstring": "(const Edge_profile &profile, std::optional< Edge_profile::Point > placement) const",
+        "params": [
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::optional< Edge_profile::Point >",
+            "name": "placement",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PlacementFilter.h",
+        "line": "38",
+        "section": "Operations"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_profile",
+        "qualified_name": "PlacementFilter::Edge_profile",
+        "brief": "The class Edge_profile regroups useful information about an edge, such as its incident vertices and faces.",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh_simplification::Edge_profile",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PlacementFilter.h",
+        "line": "29",
+        "section": ""
+      }
+    ]
+  },
+  "StopPredicate": {
+    "kind": "class",
+    "name": "StopPredicate",
+    "brief": "The concept StopPredicate describes the requirements for the predicate which indicates if the simplification process must finish.",
+    "detailed": "Has models CGAL::Surface_mesh_simplification::Edge_count_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Edge_count_ratio_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Face_count_ratio_stop_predicate <TriangleMesh> CGAL::Surface_mesh_simplification::Edge_length_stop_predicate <FT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "StopPredicate::operator()",
+        "brief": "This predicate is called each time an edge is selected for processing, before it is collapsed.",
+        "detailed": "current_edge_cost is the cost of the selected edge. initial_edge_count and current_edge_count are the number of initial and current edges. If the return value is true the simplification terminates before processing the edge, otherwise it continues normally.",
+        "return_type": "bool",
+        "argsstring": "(const Edge_profile::FT &current_cost, const Edge_profile &profile, const Edge_profile::edges_size_type initial_edge_count, const Edge_profile::edges_size_type current_edge_count) const",
+        "params": [
+          {
+            "type": "const Edge_profile::FT &",
+            "name": "current_cost",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile &",
+            "name": "profile",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "initial_edge_count",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_profile::edges_size_type",
+            "name": "current_edge_count",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/StopPredicate.h",
+        "line": "31",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Surface_mesh_simplification": {
+    "kind": "namespace",
+    "name": "CGAL::Surface_mesh_simplification",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "make_GarlandHeckbert_plane_and_line_policies",
+        "qualified_name": "CGAL::Surface_mesh_simplification::make_GarlandHeckbert_plane_and_line_policies",
+        "brief": "creates a Garland-Heckbert plane and line policies object.",
+        "detailed": "",
+        "return_type": "GarlandHeckbert_plane_and_line_policies",
+        "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_and_line_policies.h",
+        "line": "92",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

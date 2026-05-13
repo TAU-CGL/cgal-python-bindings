@@ -1,0 +1,578 @@
+{
+  "BasicMatrix": {
+    "kind": "class",
+    "name": "BasicMatrix",
+    "brief": "A class BasicMatrix has to provide the following types and operations in order to be a model for BasicMatrix .",
+    "detailed": "Has models CGAL::Dynamic_matrix <M> MonotoneMatrixSearchTraits SortedMatrixSearchTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Value",
+        "qualified_name": "BasicMatrix::Value",
+        "brief": "The type of a matrix entry.",
+        "detailed": "It has to define a copy constructor.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BasicMatrix.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_columns",
+        "qualified_name": "BasicMatrix::number_of_columns",
+        "brief": "returns the number of columns.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/BasicMatrix.h",
+        "line": "41",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_rows",
+        "qualified_name": "BasicMatrix::number_of_rows",
+        "brief": "returns the number of rows.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/BasicMatrix.h",
+        "line": "47",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "BasicMatrix::operator()",
+        "brief": "returns the entry at position ( row , column ).",
+        "detailed": "$ 0 \\le$ row $ <$ number_of_rows() , and $ 0 \\le$ column $ <$ number_of_columns() .",
+        "return_type": "Entry",
+        "argsstring": "(int row, int column) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "column",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BasicMatrix.h",
+        "line": "53",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Dynamic_matrix": {
+    "kind": "class",
+    "name": "CGAL::Dynamic_matrix",
+    "brief": "The class Dynamic_matrix is an adaptor for an arbitrary matrix class M to provide the dynamic operations needed for monotone matrix search.",
+    "detailed": "M is a model of BasicMatrix . Is model of MonotoneMatrixSearchTraits BasicMatrix CGAL::monotone_matrix_search() MonotoneMatrixSearchTraits BasicMatrix Implementation All operations take constant time except for extract_all_even_rows() which needs time linear in the number of rows.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Dynamic_matrix",
+        "qualified_name": "CGAL::Dynamic_matrix::Dynamic_matrix",
+        "brief": "initializes the dynamic matrix to m .",
+        "detailed": "m is not copied, we only store a reference.",
+        "return_type": "",
+        "argsstring": "(const M &m)",
+        "params": [
+          {
+            "type": "const M &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "38",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_columns",
+        "qualified_name": "CGAL::Dynamic_matrix::number_of_columns",
+        "brief": "returns the number of columns.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "49",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_rows",
+        "qualified_name": "CGAL::Dynamic_matrix::number_of_rows",
+        "brief": "returns the number of rows.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "55",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Dynamic_matrix::operator()",
+        "brief": "returns the entry at position ( row , column ).",
+        "detailed": "$ 0 \\le$ row $ <$ number_of_rows() , and $ 0 \\le$ column $ <$ number_of_columns() .",
+        "return_type": "Entry",
+        "argsstring": "(int row, int column) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "column",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "61",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "replace_column",
+        "qualified_name": "CGAL::Dynamic_matrix::replace_column",
+        "brief": "replace column old with column number new .",
+        "detailed": "$ 0 \\le$ old , new $ <$ number_of_columns() .",
+        "return_type": "void",
+        "argsstring": "(int old, int new)",
+        "params": [
+          {
+            "type": "int",
+            "name": "old",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "new",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "67",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "extract_all_even_rows",
+        "qualified_name": "CGAL::Dynamic_matrix::extract_all_even_rows",
+        "brief": "returns a new matrix consisting of all rows of the dynamic matrix with even index, (i.e. first row is row $ 0$ of the dynamic matrix, second row is row $ 2$ of the dynamic matrix, etc.).",
+        "detailed": "number_of_rows() $ > 0$ .",
+        "return_type": "Matrix *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "75",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "shrink_to_quadratic_size",
+        "qualified_name": "CGAL::Dynamic_matrix::shrink_to_quadratic_size",
+        "brief": "deletes the rightmost columns, such that the dynamic matrix becomes quadratic.",
+        "detailed": "number_of_columns() $ \\ge$ number_of_rows() . number_of_rows() $ ==$ number_of_columns() .",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Dynamic_matrix.h",
+        "line": "82",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Sorted_matrix_search_traits_adaptor": {
+    "kind": "class",
+    "name": "CGAL::Sorted_matrix_search_traits_adaptor",
+    "brief": "The class Sorted_matrix_search_traits_adaptor can be used as an adaptor to create sorted matrix search traits classes for arbitrary feasibility test and matrix classes F resp. M .",
+    "detailed": "Is model of SortedMatrixSearchTraits M must be a model for BasicMatrix F must define a copy constructor and a monotone bool operator()( const Value &) .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::Matrix",
+        "brief": "typedef to M .",
+        "detailed": "",
+        "return_type": "M",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Value",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::Value",
+        "brief": "typedef to Matrix::Value .",
+        "detailed": "",
+        "return_type": "Matrix::Value",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_strictly",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::Compare_strictly",
+        "brief": "typedef to std::less< Value > .",
+        "detailed": "",
+        "return_type": "std::less< Value >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_non_strictly",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::Compare_non_strictly",
+        "brief": "typedef to std::less_equal< Value > .",
+        "detailed": "",
+        "return_type": "std::less_equal< Value >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Sorted_matrix_search_traits_adaptor",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::Sorted_matrix_search_traits_adaptor",
+        "brief": "initializes t to use m for feasibility testing.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const F &m)",
+        "params": [
+          {
+            "type": "const F &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "1",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compare_strictly",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::compare_strictly",
+        "brief": "returns the Compare_strictly object to be used for the search.",
+        "detailed": "",
+        "return_type": "Compare_strictly",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "67",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_non_strictly",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::compare_non_strictly",
+        "brief": "returns the Compare_non_strictly object to be used for the search.",
+        "detailed": "",
+        "return_type": "Compare_non_strictly",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "74",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_feasible",
+        "qualified_name": "CGAL::Sorted_matrix_search_traits_adaptor::is_feasible",
+        "brief": "uses the feasibility test given during creation.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Value &a)",
+        "params": [
+          {
+            "type": "const Value &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Sorted_matrix_search_traits_adaptor.h",
+        "line": "81",
+        "section": "Operations"
+      }
+    ]
+  },
+  "MonotoneMatrixSearchTraits": {
+    "kind": "class",
+    "name": "MonotoneMatrixSearchTraits",
+    "brief": "The concept MonotoneMatrixSearchTraits is a refinement of BasicMatrix and defines types and operations needed to compute the maxima for all rows of a totally monotone matrix using the function CGAL::monotone_matrix_search .",
+    "detailed": "Notes For the sake of efficiency (and in order to achieve the time bounds claimed for monotone_matrix_search ), all these operations have to be realized in constant time - except for extract_all_even_rows which may take linear time. There is an adaptor Dynamic_matrix that can be used to add most of the functionality described above to arbitrary matrix classes. Has models CGAL::Dynamic_matrix <M> CGAL::monotone_matrix_search()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Value",
+        "qualified_name": "MonotoneMatrixSearchTraits::Value",
+        "brief": "The type of a matrix entry.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_columns",
+        "qualified_name": "MonotoneMatrixSearchTraits::number_of_columns",
+        "brief": "returns the number of columns.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "52",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_rows",
+        "qualified_name": "MonotoneMatrixSearchTraits::number_of_rows",
+        "brief": "returns the number of rows.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "58",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "MonotoneMatrixSearchTraits::operator()",
+        "brief": "returns the entry at position ( row , column ).",
+        "detailed": "$ 0 \\le$ row $ <$ number_of_rows() , and $ 0 \\le$ column $ <$ number_of_columns() .",
+        "return_type": "Entry",
+        "argsstring": "(int row, int column) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "column",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "64",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "replace_column",
+        "qualified_name": "MonotoneMatrixSearchTraits::replace_column",
+        "brief": "replace column old with column number new .",
+        "detailed": "$ 0 \\le$ old , new $ <$ number_of_columns() .",
+        "return_type": "void",
+        "argsstring": "(int old, int new)",
+        "params": [
+          {
+            "type": "int",
+            "name": "old",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "new",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "70",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "extract_all_even_rows",
+        "qualified_name": "MonotoneMatrixSearchTraits::extract_all_even_rows",
+        "brief": "returns a new Matrix consisting of all rows of m with even index, (i.e. first row is row $ 0$ of m , second row is row $ 2$ of m etc.).",
+        "detailed": "number_of_rows() $ > 0$ .",
+        "return_type": "Matrix *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "78",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "shrink_to_quadratic_size",
+        "qualified_name": "MonotoneMatrixSearchTraits::shrink_to_quadratic_size",
+        "brief": "deletes the rightmost columns, such that m becomes quadratic.",
+        "detailed": "number_of_columns() $ \\ge$ number_of_rows() . number_of_rows() $ ==$ number_of_columns() .",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MonotoneMatrixSearchTraits.h",
+        "line": "85",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SortedMatrixSearchTraits": {
+    "kind": "class",
+    "name": "SortedMatrixSearchTraits",
+    "brief": "The concept SortedMatrixSearchTraits defines types and operations needed to compute the smallest entry in a set of sorted matrices that fulfills a certain feasibility criterion using the function CGAL::sorted_matrix_search .",
+    "detailed": "Has models CGAL::Sorted_matrix_search_traits_adaptor <F,M> CGAL::sorted_matrix_search() BasicMatrix",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "SortedMatrixSearchTraits::Matrix",
+        "brief": "The class used for representing matrices.",
+        "detailed": "It has to be a model for BasicMatrix .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Value",
+        "qualified_name": "SortedMatrixSearchTraits::Value",
+        "brief": "The class used for representing the matrix elements.",
+        "detailed": "",
+        "return_type": "Matrix::Value",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_strictly",
+        "qualified_name": "SortedMatrixSearchTraits::Compare_strictly",
+        "brief": "An adaptable binary function class: Value $ \\times$ Value $ \\rightarrow$ bool defining a non-reflexive total order on Value .",
+        "detailed": "This determines the direction of the search.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_non_strictly",
+        "qualified_name": "SortedMatrixSearchTraits::Compare_non_strictly",
+        "brief": "An adaptable binary function class: Value $ \\times$ Value $ \\rightarrow$ bool defining the reflexive total order on Value corresponding to Compare_strictly .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "compare_strictly",
+        "qualified_name": "SortedMatrixSearchTraits::compare_strictly",
+        "brief": "returns the Compare_strictly object to be used for the search.",
+        "detailed": "",
+        "return_type": "Compare_strictly",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "63",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_non_strictly",
+        "qualified_name": "SortedMatrixSearchTraits::compare_non_strictly",
+        "brief": "returns the Compare_non_strictly object to be used for the search.",
+        "detailed": "",
+        "return_type": "Compare_non_strictly",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "70",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_feasible",
+        "qualified_name": "SortedMatrixSearchTraits::is_feasible",
+        "brief": "The predicate to determine whether an element a is feasible.",
+        "detailed": "It has to be monotone in the sense that compare(a, b) and is_feasible(a) imply is_feasible(b) .",
+        "return_type": "bool",
+        "argsstring": "(const Value &a)",
+        "params": [
+          {
+            "type": "const Value &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SortedMatrixSearchTraits.h",
+        "line": "79",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

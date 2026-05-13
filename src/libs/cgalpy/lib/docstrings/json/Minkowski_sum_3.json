@@ -1,0 +1,3574 @@
+{
+  "CGAL::Gaussian_map": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::Gaussian_map::Kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_kernel",
+        "qualified_name": "CGAL::Gaussian_map::Sphere_kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Sphere_geometry< K >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "41",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Gaussian_map::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Gaussian_map::Vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Mark",
+        "qualified_name": "CGAL::Gaussian_map::Mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Mark_",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_map",
+        "qualified_name": "CGAL::Gaussian_map::Sphere_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Sphere_map< Sphere_kernel, CGAL::SM_items, Mark >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SM_decorator",
+        "qualified_name": "CGAL::Gaussian_map::SM_decorator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::SM_decorator< Sphere_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Gaussian_map::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "48",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SM_overlayer",
+        "qualified_name": "CGAL::Gaussian_map::SM_overlayer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::SM_overlayer< SM_decorator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_circle",
+        "qualified_name": "CGAL::Gaussian_map::Sphere_circle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_kernel::Sphere_circle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SVertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_handle",
+        "qualified_name": "CGAL::Gaussian_map::SHalfedge_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SHalfedge_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_handle",
+        "qualified_name": "CGAL::Gaussian_map::SHalfloop_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SHalfloop_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SFace_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SFace_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SFace_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SHalfedge_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SHalfedge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SVertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "58",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SVertex_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SVertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_cycle_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SFace_cycle_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SFace_cycle_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_svertex_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SHalfedge_around_svertex_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SHalfedge_around_svertex_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_sface_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SHalfedge_around_sface_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SHalfedge_around_sface_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_sface_const_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SHalfedge_around_sface_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::SHalfedge_around_sface_const_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Object_handle",
+        "qualified_name": "CGAL::Gaussian_map::Object_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sphere_map::Object_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "top",
+        "qualified_name": "CGAL::Gaussian_map::top",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Object_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "568",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "bottom",
+        "qualified_name": "CGAL::Gaussian_map::bottom",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Object_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "569",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "locate_top_and_bottom",
+        "qualified_name": "CGAL::Gaussian_map::locate_top_and_bottom",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "571",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "erase_redundant_vertices",
+        "qualified_name": "CGAL::Gaussian_map::erase_redundant_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "645",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "772",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const CGAL::Nef_polyhedron_3< NK, Items > &N3, typename CGAL::Nef_polyhedron_3< NK, Items >::Volume_const_iterator c)",
+        "params": [
+          {
+            "type": "const CGAL::Nef_polyhedron_3< NK, Items > &",
+            "name": "N3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename CGAL::Nef_polyhedron_3< NK, Items >::Volume_const_iterator",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "775",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const CGAL::Nef_polyhedron_3< NK > &N3)",
+        "params": [
+          {
+            "type": "const CGAL::Nef_polyhedron_3< NK > &",
+            "name": "N3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "811",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const CGAL::Polyhedron_3< PK > &P, bool closed=true)",
+        "params": [
+          {
+            "type": "const CGAL::Polyhedron_3< PK > &",
+            "name": "P",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "closed",
+            "default": "true",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "878",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(typename Nef::Halffacet_const_handle f)",
+        "params": [
+          {
+            "type": "typename Nef::Halffacet_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "931",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(typename Nef::Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "typename Nef::Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "982",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(typename Nef::Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "typename Nef::Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1003",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "simplify",
+        "qualified_name": "CGAL::Gaussian_map::simplify",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1011",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "minkowski_sum",
+        "qualified_name": "CGAL::Gaussian_map::minkowski_sum",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Gaussian_map &G1, const Gaussian_map &G2)",
+        "params": [
+          {
+            "type": "const Gaussian_map &",
+            "name": "G1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Gaussian_map &",
+            "name": "G2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1083",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_top",
+        "qualified_name": "CGAL::Gaussian_map::get_top",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Object_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1099",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_bottom",
+        "qualified_name": "CGAL::Gaussian_map::get_bottom",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Object_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1102",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "locate_top",
+        "qualified_name": "CGAL::Gaussian_map::locate_top",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Object_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1106",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "locate_bottom",
+        "qualified_name": "CGAL::Gaussian_map::locate_bottom",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Object_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1149",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::SEdge_creator": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map::SEdge_creator",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Vertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "314",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Halffacet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "315",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "316",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "317",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "318",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "319",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_svertex_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SHalfedge_around_svertex_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator::SHalfedge_around_svertex_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "322",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_cycle_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Halffacet_cycle_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_cycle_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "325",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_facet_const_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SHalfedge_around_facet_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_around_facet_const_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "327",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_point",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Sphere_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Sphere_point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "329",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge2SEdge_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Edge2SEdge_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halfedge_const_handle, SHalfedge_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "331",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet2SVertex_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Facet2SVertex_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halffacet_const_handle, SVertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "332",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Facet2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halffacet_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "333",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Edge2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halfedge_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "334",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SEdge2SEdge_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SEdge2SEdge_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< SHalfedge_const_handle, SHalfedge_const_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "335",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "SM",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "337",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Edge2SEdge",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Edge2SEdge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge2SEdge_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "338",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Facet2SVertex",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::Facet2SVertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet2SVertex_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "339",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "next",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::next",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SEdge2SEdge_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "340",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "omit_facet",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::omit_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "341",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "omit_edge",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::omit_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "342",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "SEdge_creator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::SEdge_creator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Sphere_map *smap, Edge2SEdge_hash &E2SE, Facet2SVertex_hash &F2SV, SEdge2SEdge_hash &SE2SE, Facet2bool_hash &F2b, Edge2bool_hash &E2b)",
+        "params": [
+          {
+            "type": "Sphere_map *",
+            "name": "smap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Edge2SEdge_hash &",
+            "name": "E2SE",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet2SVertex_hash &",
+            "name": "F2SV",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "SEdge2SEdge_hash &",
+            "name": "SE2SE",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet2bool_hash &",
+            "name": "F2b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Edge2bool_hash &",
+            "name": "E2b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "345",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "349",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_const_handle)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "350",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfedge_const_handle)",
+        "params": [
+          {
+            "type": "SHalfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "351",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfloop_const_handle)",
+        "params": [
+          {
+            "type": "SHalfloop_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "352",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SFace_const_handle)",
+        "params": [
+          {
+            "type": "SFace_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "353",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halffacet_const_handle f)",
+        "params": [
+          {
+            "type": "Halffacet_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "355",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::SEdge_creator2": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map::SEdge_creator2",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Vertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "246",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Halffacet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "247",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "248",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "250",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_svertex_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SHalfedge_around_svertex_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator::SHalfedge_around_svertex_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "254",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_cycle_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Halffacet_cycle_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_cycle_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "257",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_facet_const_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SHalfedge_around_facet_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_around_facet_const_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "259",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge2SEdge_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Edge2SEdge_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halfedge_const_handle, SHalfedge_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "261",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet2SVertex_hash",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Facet2SVertex_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halffacet_const_handle, SVertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "262",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "SM",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "264",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Edge2SEdge",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Edge2SEdge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge2SEdge_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "265",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Facet2SVertex",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::Facet2SVertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet2SVertex_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "266",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "SEdge_creator2",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::SEdge_creator2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Sphere_map *smap, Edge2SEdge_hash &E2SE, Facet2SVertex_hash &F2SV)",
+        "params": [
+          {
+            "type": "Sphere_map *",
+            "name": "smap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Edge2SEdge_hash &",
+            "name": "E2SE",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet2SVertex_hash &",
+            "name": "F2SV",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "269",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "273",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_const_handle)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "274",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfedge_const_handle)",
+        "params": [
+          {
+            "type": "SHalfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "275",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfloop_const_handle)",
+        "params": [
+          {
+            "type": "SHalfloop_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "276",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SFace_const_handle)",
+        "params": [
+          {
+            "type": "SFace_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "277",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SEdge_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halffacet_const_handle f)",
+        "params": [
+          {
+            "type": "Halffacet_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "279",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::SFace_creator": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map::SFace_creator",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Vertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "503",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::Halffacet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "504",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "505",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "506",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "507",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "508",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge2SEdge_hash",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::Edge2SEdge_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halfedge_const_handle, SHalfedge_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "510",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::Vertex2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Vertex_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "511",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::SFace2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< SFace_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "512",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "N3",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::N3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Nef_polyhedron_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "514",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "SM",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::SM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "515",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Edge2SEdge",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::Edge2SEdge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge2SEdge_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "516",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "omit_vertex",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::omit_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "517",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "SFace_creator",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::SFace_creator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Nef_polyhedron_3 &N, Sphere_map *smap, Edge2SEdge_hash &E2SE, Vertex2bool_hash &V2b)",
+        "params": [
+          {
+            "type": "const Nef_polyhedron_3 &",
+            "name": "N",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Sphere_map *",
+            "name": "smap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Edge2SEdge_hash &",
+            "name": "E2SE",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex2bool_hash &",
+            "name": "V2b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "521",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_const_handle)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "524",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfedge_const_handle)",
+        "params": [
+          {
+            "type": "SHalfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "525",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfloop_const_handle)",
+        "params": [
+          {
+            "type": "SHalfloop_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "526",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SFace_const_handle)",
+        "params": [
+          {
+            "type": "SFace_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "527",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halffacet_const_handle)",
+        "params": [
+          {
+            "type": "Halffacet_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "528",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "530",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::SFace_creator2": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map::SFace_creator2",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Vertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "456",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::Halffacet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "457",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "458",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "459",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "460",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "461",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_cycle_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::SFace_cycle_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_cycle_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "463",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge2SEdge_hash",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::Edge2SEdge_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halfedge_const_handle, SHalfedge_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "465",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "SM",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::SM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "467",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Edge2SEdge",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::Edge2SEdge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge2SEdge_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "468",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "SFace_creator2",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::SFace_creator2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Sphere_map *smap, Edge2SEdge_hash &E2SE)",
+        "params": [
+          {
+            "type": "Sphere_map *",
+            "name": "smap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Edge2SEdge_hash &",
+            "name": "E2SE",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "471",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_const_handle)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "474",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfedge_const_handle)",
+        "params": [
+          {
+            "type": "SHalfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "475",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfloop_const_handle)",
+        "params": [
+          {
+            "type": "SHalfloop_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "476",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halffacet_const_handle)",
+        "params": [
+          {
+            "type": "Halffacet_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "477",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "478",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SFace_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SFace_const_handle sf)",
+        "params": [
+          {
+            "type": "SFace_const_handle",
+            "name": "sf",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "480",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::SVertex_creator": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map::SVertex_creator",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Vertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Halffacet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "122",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "123",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "124",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "125",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "126",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_cycle_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Halffacet_cycle_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_cycle_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "129",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_facet_const_circulator",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SHalfedge_around_facet_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_around_facet_const_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "131",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "133",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_point",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Sphere_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Sphere_point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "134",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet2SVertex_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Facet2SVertex_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halffacet_const_handle, SVertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "136",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Facet2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halffacet_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "137",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Vertex2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Vertex_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "138",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Edge2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halfedge_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "139",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SEdge2SEdge_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SEdge2SEdge_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< SHalfedge_const_handle, SHalfedge_const_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "140",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace2bool_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SFace2bool_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< SFace_const_handle, bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "141",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "SM",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "143",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Facet2SVertex",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Facet2SVertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet2SVertex_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "144",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "omit_facet",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::omit_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "145",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "next",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::next",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SEdge2SEdge_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "146",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "omit_vertex",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::omit_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "omit_edge",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::omit_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "148",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Shell",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::Shell",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SFace2bool_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "149",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "SVertex_creator",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::SVertex_creator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Sphere_map *smap, Facet2SVertex_hash &F2SV, Facet2bool_hash &F2b, SEdge2SEdge_hash &SE2SE, Vertex2bool_hash &V2b, Edge2bool_hash &E2b, SFace2bool_hash &SHELL)",
+        "params": [
+          {
+            "type": "Sphere_map *",
+            "name": "smap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet2SVertex_hash &",
+            "name": "F2SV",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet2bool_hash &",
+            "name": "F2b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "SEdge2SEdge_hash &",
+            "name": "SE2SE",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex2bool_hash &",
+            "name": "V2b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Edge2bool_hash &",
+            "name": "E2b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "SFace2bool_hash &",
+            "name": "SHELL",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "152",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "169",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_const_handle)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "170",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfedge_const_handle)",
+        "params": [
+          {
+            "type": "SHalfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "171",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfloop_const_handle)",
+        "params": [
+          {
+            "type": "SHalfloop_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "172",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SFace_const_handle sf)",
+        "params": [
+          {
+            "type": "SFace_const_handle",
+            "name": "sf",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "173",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halffacet_const_handle f)",
+        "params": [
+          {
+            "type": "Halffacet_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "198",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "svertex_exists",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator::svertex_exists",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Sphere_point sp, SVertex_handle &sv)",
+        "params": [
+          {
+            "type": "Sphere_point",
+            "name": "sp",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "SVertex_handle &",
+            "name": "sv",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "156",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::SVertex_creator2": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map::SVertex_creator2",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Vertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "86",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halffacet_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::Halffacet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halffacet_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "87",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::Halfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "88",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_3::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "91",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet2SVertex_hash",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::Facet2SVertex_hash",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Unique_hash_map< Halffacet_const_handle, SVertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "93",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "SM",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::SM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SM_decorator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "Facet2SVertex",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::Facet2SVertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet2SVertex_hash &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "96",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "SVertex_creator2",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::SVertex_creator2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Sphere_map *smap, Facet2SVertex_hash &F2SV)",
+        "params": [
+          {
+            "type": "Sphere_map *",
+            "name": "smap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet2SVertex_hash &",
+            "name": "F2SV",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "99",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_const_handle)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "103",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfedge_const_handle)",
+        "params": [
+          {
+            "type": "SHalfedge_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "104",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SHalfloop_const_handle)",
+        "params": [
+          {
+            "type": "SHalfloop_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SFace_const_handle)",
+        "params": [
+          {
+            "type": "SFace_const_handle",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "106",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visit",
+        "qualified_name": "CGAL::Gaussian_map::SVertex_creator2::visit",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halffacet_const_handle f)",
+        "params": [
+          {
+            "type": "Halffacet_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "107",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map::VECTOR_ADDITION": {
+    "kind": "struct",
+    "name": "CGAL::Gaussian_map::VECTOR_ADDITION",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Gaussian_map::VECTOR_ADDITION::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Mark",
+        "argsstring": "(const Mark &b1, const Mark &b2) const",
+        "params": [
+          {
+            "type": "const Mark &",
+            "name": "b1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Mark &",
+            "name": "b2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "563",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Gaussian_map_to_nef_3": {
+    "kind": "class",
+    "name": "CGAL::Gaussian_map_to_nef_3",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef3::Kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SNC_structure",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SNC_structure",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef3::SNC_structure",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "28",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_map",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Sphere_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::Sphere_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "29",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SM_decorator",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SM_decorator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::SM_decorator< Sphere_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Gaussian_map",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Gaussian_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Gaussian_map< Kernel, Nef3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SFace_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SFace_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_const_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SFace_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SFace_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "34",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SHalfedge_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SHalfedge_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "35",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_const_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SHalfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SHalfedge_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfloop_const_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SHalfloop_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SHalfloop_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_const_iterator",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SVertex_const_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SVertex_const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "38",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_const_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SVertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SVertex_const_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "39",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_around_sface_const_circulator",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SHalfedge_around_sface_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gaussian_map::SHalfedge_around_sface_const_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "41",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SVertex_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SVertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::SVertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SHalfedge_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SHalfedge_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::SHalfedge_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "SFace_handle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::SFace_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::SFace_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_circle",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Sphere_circle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::Sphere_circle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "48",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_point",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Sphere_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SNC_structure::Sphere_point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "G",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::G",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Gaussian_map &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Gaussian_map_to_nef_3",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::Gaussian_map_to_nef_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Gaussian_map &Gin)",
+        "params": [
+          {
+            "type": "const Gaussian_map &",
+            "name": "Gin",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_solid",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::create_solid",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SNC_structure &snc)",
+        "params": [
+          {
+            "type": "SNC_structure &",
+            "name": "snc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_single_vertex",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::create_single_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SNC_structure &snc)",
+        "params": [
+          {
+            "type": "SNC_structure &",
+            "name": "snc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "145",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_single_edge",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::create_single_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SNC_structure &snc)",
+        "params": [
+          {
+            "type": "SNC_structure &",
+            "name": "snc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "154",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_single_facet",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::create_single_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SNC_structure &snc)",
+        "params": [
+          {
+            "type": "SNC_structure &",
+            "name": "snc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "179",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Gaussian_map_to_nef_3::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(SNC_structure &snc)",
+        "params": [
+          {
+            "type": "SNC_structure &",
+            "name": "snc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map_to_nef_3.h",
+        "line": "233",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::PointMark": {
+    "kind": "class",
+    "name": "CGAL::PointMark",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::PointMark::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "23",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::PointMark::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PointMark< K >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "p",
+        "qualified_name": "CGAL::PointMark::p",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "26",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "b",
+        "qualified_name": "CGAL::PointMark::b",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "PointMark",
+        "qualified_name": "CGAL::PointMark::PointMark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "PointMark",
+        "qualified_name": "CGAL::PointMark::PointMark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Self &pm)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "PointMark",
+        "qualified_name": "CGAL::PointMark::PointMark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point_3 &p_, bool b_)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "b_",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::PointMark::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Self &",
+        "argsstring": "(const Self &pm)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "34",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator+=",
+        "qualified_name": "CGAL::PointMark::operator+=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Self &",
+        "argsstring": "(const Self &pm)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::PointMark::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "boolean",
+        "qualified_name": "CGAL::PointMark::boolean",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_boolean",
+        "qualified_name": "CGAL::PointMark::set_boolean",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool b_)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "b_",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "54",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "bipartite_nary_union_sorted_combined",
+        "qualified_name": "CGAL::bipartite_nary_union_sorted_combined",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Nef_polyhedron",
+        "argsstring": "(Nef_polyhedron &N0, Nef_polyhedron &N1)",
+        "params": [
+          {
+            "type": "Nef_polyhedron &",
+            "name": "N0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Nef_polyhedron &",
+            "name": "N1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/bipartite_nary_union_sorted_combined.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::operator<<",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &out, const CGAL::Gaussian_map< Kernel, Nef, Mark > &G)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Gaussian_map< Kernel, Nef, Mark > &",
+            "name": "G",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/Gaussian_map.h",
+        "line": "1195",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::operator<<",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &out, const PointMark< Kernel > &pm)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PointMark< Kernel > &",
+            "name": "pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "CGAL::operator==",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const PointMark< Kernel > &pm1, const PointMark< Kernel > &pm2)",
+        "params": [
+          {
+            "type": "const PointMark< Kernel > &",
+            "name": "pm1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PointMark< Kernel > &",
+            "name": "pm2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator+",
+        "qualified_name": "CGAL::operator+",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const PointMark< Kernel >",
+        "argsstring": "(const PointMark< Kernel > &pm1, const PointMark< Kernel > &pm2)",
+        "params": [
+          {
+            "type": "const PointMark< Kernel > &",
+            "name": "pm1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PointMark< Kernel > &",
+            "name": "pm2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Minkowski_sum_3/PointMark.h",
+        "line": "75",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

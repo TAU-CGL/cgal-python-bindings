@@ -1,0 +1,1700 @@
+{
+  "CGAL::Hyperbolic_Delaunay_triangulation_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_Delaunay_triangulation_2",
+    "brief": "The class Hyperbolic_Delaunay_triangulation_2 is the main class of the 2D Hyperbolic Delaunay Triangulations package.",
+    "detailed": "It is designed to represent Delaunay triangulations of sets of points in the hyperbolic plane. The hyperbolic plane is represented in the Poincaré disk model. Gt is the geometric traits class and must be a model of HyperbolicDelaunayTriangulationTraits_2 . Tds is the triangulation graph data structure and must be a model of TriangulationDataStructure_2 whose vertex and face are models of TriangulationVertexBase_2 and HyperbolicTriangulationFaceBase_2 , respectively. It defaults to: CGAL::Triangulation_data_structure_2< CGAL::Triangulation_vertex_base_2<Gt>, CGAL::Hyperbolic_triangulation_face_base_2<Gt> > Delaunay_triangulation_2",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Locate_type",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Locate_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "79",
+        "section": "Enums"
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Geom_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Triangulation_data_structure",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tds",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::size_type",
+        "brief": "Size type (integral unsigned).",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Geom_traits::Hyperbolic_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_triangle",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Hyperbolic_triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Geom_traits::Hyperbolic_triangle_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Face_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_Voronoi_point",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Hyperbolic_Voronoi_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Geom_traits::Hyperbolic_Voronoi_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_segment",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Hyperbolic_segment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Geom_traits::Hyperbolic_segment_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_faces_iterator",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::All_faces_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Face_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_edges_iterator",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::All_edges_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Edge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_vertices_iterator",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::All_vertices_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Vertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_circulator",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Vertex_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::Vertex_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "72",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Hyperbolic_Delaunay_triangulation_2",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Geom_traits &gt=Geom_traits())",
+        "params": [
+          {
+            "type": "const Geom_traits &",
+            "name": "gt",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "93",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Hyperbolic_Delaunay_triangulation_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &tr)",
+        "params": [
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "98",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::Hyperbolic_Delaunay_triangulation_2",
+        "brief": "Equivalent to creating an empty triangulation and calling insert(first, last) .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(InputIterator first, InputIterator last, const Geom_traits &gt=Geom_traits())",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Geom_traits &",
+            "name": "gt",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "104",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::operator=",
+        "brief": "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.",
+        "detailed": "",
+        "return_type": "Hyperbolic_Delaunay_triangulation_2 &",
+        "argsstring": "(Hyperbolic_Delaunay_triangulation_2 tr)",
+        "params": [
+          {
+            "type": "Hyperbolic_Delaunay_triangulation_2",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "114",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::swap",
+        "brief": "The triangulation is swapped with tr .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Hyperbolic_Delaunay_triangulation_2 &tr)",
+        "params": [
+          {
+            "type": "Hyperbolic_Delaunay_triangulation_2 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "119",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::clear",
+        "brief": "Deletes all vertices and faces of the triangulation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "124",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::operator==",
+        "brief": "Equality operator.",
+        "detailed": "Todo implement!",
+        "return_type": "bool",
+        "argsstring": "(const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &t1, const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &t2)",
+        "params": [
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &",
+            "name": "t2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "130",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "operator!=",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::operator!=",
+        "brief": "Inequality operator.",
+        "detailed": "Todo implement!",
+        "return_type": "bool",
+        "argsstring": "(const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &t1, const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &t2)",
+        "params": [
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &",
+            "name": "t2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "137",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::geom_traits",
+        "brief": "Returns a const reference to the geometric traits object.",
+        "detailed": "",
+        "return_type": "const Geom_traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "147",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::tds",
+        "brief": "Returns a const reference to the triangulation data structure.",
+        "detailed": "",
+        "return_type": "const Triangulation_data_structure &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "152",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::tds",
+        "brief": "Returns a reference to the triangulation data structure.",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "157",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::is_valid",
+        "brief": "Checks the combinatorial validity of the triangulation, the validity of its geometric embedding, and also that all edges and faces are Delaunay hyperbolic.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "164",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::dimension",
+        "brief": "Returns the dimension of the affine hull.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "169",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::number_of_vertices",
+        "brief": "Returns the number of vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "174",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_hyperbolic_edges",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::number_of_hyperbolic_edges",
+        "brief": "Returns the number of hyperbolic edges.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "179",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_hyperbolic_faces",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::number_of_hyperbolic_faces",
+        "brief": "Returns the number of hyperbolic faces.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "184",
+        "section": "Access functions"
+      },
+      {
+        "kind": "function",
+        "name": "hyperbolic_triangle",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::hyperbolic_triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Hyperbolic_triangle",
+        "argsstring": "(const Face_handle f) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "193",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "hyperbolic_segment",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::hyperbolic_segment",
+        "brief": "Returns the hyperbolic segment formed by the vertices of the edge (f, i) .",
+        "detailed": "",
+        "return_type": "Hyperbolic_segment",
+        "argsstring": "(const Face_handle f, const int i) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "198",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "hyperbolic_segment",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::hyperbolic_segment",
+        "brief": "Returns the hyperbolic segment formed by the vertices of edge e .",
+        "detailed": "",
+        "return_type": "Hyperbolic_segment",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "203",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::point",
+        "brief": "Returns the hyperbolic point given by the finite vertex vh .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(const Vertex_handle vh) const",
+        "params": [
+          {
+            "type": "const Vertex_handle",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "208",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::point",
+        "brief": "Returns the point given by vertex i of face fh .",
+        "detailed": "t.dimension() $ \\geq0$ and $ i \\in\\{0,1,2\\}$ in dimension 2, $ i \\in\\{0,1\\}$ in dimension 1, $ i = 0$ in dimension 0, and the vertex is finite.",
+        "return_type": "Point",
+        "argsstring": "(const Face_handle fh, const int i) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "fh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "214",
+        "section": "Geometric access functions"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::insert",
+        "brief": "Inserts the point p in the triangulation.",
+        "detailed": "If the point p coincides with an existing vertex, then the vertex is returned and the triangulation is not modified. The optional parameter start is used to initialize the location of p .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Face_handle start=Face_handle())",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "227",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::insert",
+        "brief": "Inserts the points in the range [first,last) into the triangulation.",
+        "detailed": "Returns the number of inserted points. Note that this function is not guaranteed to insert the points following the order of InputIterator , as spatial_sort() is used to improve efficiency. InputIterator must be an input iterator with the value type Point .",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "(InputIterator first, InputIterator last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "239",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::remove",
+        "brief": "Removes the vertex v from the triangulation.",
+        "detailed": "v is a vertex of the triangulation.",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "248",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::remove",
+        "brief": "Removes the vertices in the iterator range [first, last) from the triangulation.",
+        "detailed": "all vertices in [first, last) are vertices of the triangulation.",
+        "return_type": "void",
+        "argsstring": "(VertexRemoveIterator first, VertexRemoveIterator last)",
+        "params": [
+          {
+            "type": "VertexRemoveIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexRemoveIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "255",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::locate",
+        "brief": "Locates the point query in the triangulation.",
+        "detailed": "If the point query lies inside the hyperbolic convex hull of the points of the triangulation, then the hyperbolic face that contains the query in its interior is returned. If query lies on a vertex or on an edge, then one of the faces having query on its boundary is returned. Todo verify case when query lies on dangling edge! If query lies outside of the convex hull of the points of the triangulation, then a default-constructed Face_handle() is returned. The optional argument hint is used as a starting place for the search.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Point &query, const Face_handle hint=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Face_handle",
+            "name": "hint",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "275",
+        "section": "Point Location"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::locate",
+        "brief": "Same as above.",
+        "detailed": "The variable lt contains information about the element in which query has been located. See the enumeration Locate_type for details. If lt is Locate_type::VERTEX , then the variable li contains the index of the vertex in the returned face. If lt is Locate_type::EDGE , then li is the index of the edge in the returned face.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Point &query, Locate_type &lt, int &li, Face_handle hint=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type &",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "hint",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "290",
+        "section": "Point Location"
+      },
+      {
+        "kind": "function",
+        "name": "find_conflicts",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::find_conflicts",
+        "brief": "Computes the conflict zone induced by p .",
+        "detailed": "If the optional parameter start is given, then it must be a face in conflict with p . Returns an iterator on the faces of the triangulation in conflict with p .",
+        "return_type": "OutputItFaces",
+        "argsstring": "(const Point &p, OutputItFaces fit, Face_handle start=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItFaces",
+            "name": "fit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "304",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "all_vertices_begin",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::all_vertices_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "All_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "313",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "all_vertices_end",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::all_vertices_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "All_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "314",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_begin",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::all_edges_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "316",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_end",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::all_edges_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "317",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_begin",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::all_faces_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "319",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_end",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::all_faces_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "320",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "adjacent_vertices",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::adjacent_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "322",
+        "section": "Vertex, Face and Edge iterators and circulators"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::dual",
+        "brief": "Returns the hyperbolic center of the circumdisk of f .",
+        "detailed": "f is hyperbolic",
+        "return_type": "Hyperbolic_Voronoi_point",
+        "argsstring": "(Face_handle f) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "336",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::dual",
+        "brief": "Returns the hyperbolic segment that is dual to e .",
+        "detailed": "",
+        "return_type": "Hyperbolic_segment",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "341",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_2::dual",
+        "brief": "Returns the hyperbolic segment that is dual to the edge (f,i) .",
+        "detailed": "f is hyperbolic",
+        "return_type": "Hyperbolic_segment",
+        "argsstring": "(Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_2.h",
+        "line": "347",
+        "section": "Voronoi Diagram"
+      }
+    ]
+  },
+  "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2",
+    "brief": "The class Hyperbolic_Delaunay_triangulation_CK_traits_2 is designed as one of the default models for the traits concept HyperbolicDelaunayTriangulationTraits_2 offered by CGAL.",
+    "detailed": "K must be a model of CircularKernel . This class provides exact constructions and predicates. The default value for K is CGAL::Circular_kernel_2< CGAL::Exact_predicates_inexact_constructions_kernel, CGAL::Algebraic_kernel_for_circles_2_2< CGAL::Exact_predicates_inexact_constructions_kernel::RT > > , which guarantees exact constructions of Delaunay triangulations and dual objects when the input points have rational coordinates. Hyperbolic_Delaunay_triangulation_traits_2 Is model of HyperbolicDelaunayTriangulationTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_point_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Hyperbolic_point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_Voronoi_point_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Hyperbolic_Voronoi_point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Circular_arc_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Circular_arc_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Circular_arc_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Circular_arc_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Line_arc_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Line_arc_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Line_arc_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_segment_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Hyperbolic_segment_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::variant< Circular_arc_2 , Line_arc_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_triangle_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Hyperbolic_triangle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Triangle_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_CK_traits_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Hyperbolic_Delaunay_triangulation_CK_traits_2",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "49",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_CK_traits_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2::Hyperbolic_Delaunay_triangulation_CK_traits_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Hyperbolic_Delaunay_triangulation_CK_traits_2 &other)",
+        "params": [
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_CK_traits_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h",
+        "line": "54",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Hyperbolic_Delaunay_triangulation_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2",
+    "brief": "The class Hyperbolic_Delaunay_triangulation_traits_2 is designed as one of the default models for the traits concept HyperbolicDelaunayTriangulationTraits_2 offered by CGAL.",
+    "detailed": "K must be a model of Kernel . If K provides exact computations with square roots, then this class automatically provides exact constructions and predicates. The default value for K is Exact_predicates_exact_constructions_kernel_with_sqrt , which guarantees exact constructions of Delaunay triangulations and dual objects for input points with algebraic coordinates. Hyperbolic_Delaunay_triangulation_CK_traits_2 Is model of HyperbolicDelaunayTriangulationTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_point_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_Voronoi_point_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_Voronoi_point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Hyperbolic_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Circular_arc_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Circular_arc_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Euclidean_segment_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Euclidean_segment_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Segment_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_segment_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_segment_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::variant< Circular_arc_2 , Euclidean_segment_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_triangle_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_triangle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Triangle_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_traits_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_Delaunay_triangulation_traits_2",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "49",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_Delaunay_triangulation_traits_2",
+        "qualified_name": "CGAL::Hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_Delaunay_triangulation_traits_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Hyperbolic_Delaunay_triangulation_traits_2 &other)",
+        "params": [
+          {
+            "type": "const Hyperbolic_Delaunay_triangulation_traits_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_Delaunay_triangulation_traits_2.h",
+        "line": "54",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Hyperbolic_triangulation_face_base_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_triangulation_face_base_2",
+    "brief": "The class Hyperbolic_triangulation_face_base_2 is designed as the default model for the face concept HyperbolicTriangulationFaceBase_2 offered by CGAL.",
+    "detailed": "Gt must be a model of HyperbolicDelaunayTriangulationTraits_2 . Fb must be a model of TriangulationFaceBase_2 . Defaults to Triangulation_face_base_2<Gt> . Is model of HyperbolicTriangulationFaceBase_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Hyperbolic_triangulation_face_base_2",
+        "qualified_name": "CGAL::Hyperbolic_triangulation_face_base_2::Hyperbolic_triangulation_face_base_2",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_triangulation_face_base_2.h",
+        "line": "31",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_triangulation_face_base_2",
+        "qualified_name": "CGAL::Hyperbolic_triangulation_face_base_2::Hyperbolic_triangulation_face_base_2",
+        "brief": "Creates a face to which the vertices v0, v1, v2 are incident.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_triangulation_face_base_2.h",
+        "line": "36",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_triangulation_face_base_2",
+        "qualified_name": "CGAL::Hyperbolic_triangulation_face_base_2::Hyperbolic_triangulation_face_base_2",
+        "brief": "Creates a face to which the vertices v0, v1, v2 are incident, and the faces n0, n1, n2 are neighbors.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Face_handle n0, Face_handle n1, Face_handle n2)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "n0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "n1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "n2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_triangulation_face_base_2.h",
+        "line": "43",
+        "section": "Creation"
+      }
+    ]
+  },
+  "HyperbolicDelaunayTriangulationTraits_2": {
+    "kind": "class",
+    "name": "HyperbolicDelaunayTriangulationTraits_2",
+    "brief": "",
+    "detailed": "Refines DelaunayTriangulationTraits_2 The concept HyperbolicDelaunayTriangulationTraits_2 describes the set of requirements to be fulfilled by any class used to instantiate the first template parameter of the class CGAL::Hyperbolic_Delaunay_triangulation_2 <Traits, Tds> . It defines the geometric objects (points, segments...) forming the triangulation together with geometric predicates and constructions on these objects. This concept refines DelaunayTriangulationTraits_2 because the class CGAL::Hyperbolic_Delaunay_triangulation_2 internally relies on the class CGAL::Delaunay_triangulation_2 . Has models CGAL::Hyperbolic_Delaunay_triangulation_traits_2 CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::FT",
+        "brief": "Field number type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_point_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Hyperbolic_point_2",
+        "brief": "Represents a point in the Poincaré disk or on the (unit) circle at infinity.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_Voronoi_point_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Hyperbolic_Voronoi_point_2",
+        "brief": "Represents the dual object of a triangle in the hyperbolic Delaunay triangulation.",
+        "detailed": "The dual of a Delaunay triangle is the hyperbolic center of the circle circumscribing it.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_segment_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Hyperbolic_segment_2",
+        "brief": "Represents a hyperbolic segment defined by two points.",
+        "detailed": "In the Poincaré disk model, a hyperbolic segment is supported either by the Euclidean circle that passes through the two points and is perpendicular to the circle at infinity, or by the Euclidean line that passes through the two points and the origin. Abusively, we allow one or both endpoints of the segment to lie on the circle at infinity, so a hyperbolic segment can actually represent a hyperbolic ray or a hyperbolic line.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hyperbolic_triangle_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Hyperbolic_triangle_2",
+        "brief": "Represents a triangle in the hyperbolic plane defined by three hyperbolic points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "63",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Side_of_oriented_circle_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Side_of_oriented_circle_2",
+        "brief": "A predicate object.",
+        "detailed": "Must provide the function operator Oriented_side operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q, Hyperbolic_point_2 r, Hyperbolic_point_2 t), which returns the position of the point t relative to the oriented circle defined by the points p, q , and r .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "76",
+        "section": "Predicate Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Side_of_oriented_hyperbolic_segment_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Side_of_oriented_hyperbolic_segment_2",
+        "brief": "A predicate object.",
+        "detailed": "Must provide the function operator Oriented_side operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q, Hyperbolic_point_2 query), which returns the position of the point query relative to the oriented hyperbolic segment with vertices p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "86",
+        "section": "Predicate Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_Delaunay_hyperbolic",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Is_Delaunay_hyperbolic",
+        "brief": "A predicate object.",
+        "detailed": "Must provide the function operator bool operator()(Hyperbolic_point_2 p0, Hyperbolic_point_2 p1, Hyperbolic_point_2 p2), which returns a boolean indicating whether the triangle defined by the points p0, p1, and p2 is hyperbolic (i.e., if its circumscribing disk is contained in the unit disk). It must also provide the function operator bool operator() ( Hyperbolic_point_2 p0, Hyperbolic_point_2 p1, Hyperbolic_point_2 p2, int& ind), which returns whether the triangle is hyperbolic, and if not stores in ind the index of the non-hyperbolic edge of the triangle, as defined in [1] . The edge of the triangle opposite to pj for j = 0,1,2 is considered to have index j .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "106",
+        "section": "Predicate Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_hyperbolic_segment_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Construct_hyperbolic_segment_2",
+        "brief": "A constructor object.",
+        "detailed": "Must provide the function operator Hyperbolic_segment_2 operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q), which constructs a hyperbolic segment from two points p and q . Note that p and q may also lie on the circle at infinity.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "124",
+        "section": "Construction Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_hyperbolic_circumcenter_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Construct_hyperbolic_circumcenter_2",
+        "brief": "A constructor object.",
+        "detailed": "Must provide the function operator Hyperbolic_Voronoi_point_2 operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q, Hyperbolic_point_2 r), which constructs the hyperbolic circumcenter of the triangle with vertices p, q , and r .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "134",
+        "section": "Construction Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_hyperbolic_bisector_2",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::Construct_hyperbolic_bisector_2",
+        "brief": "A constructor object.",
+        "detailed": "Must provide the function operator Hyperbolic_segment_2 operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q), which constructs the hyperbolic bisector of two points p and q lying in the Poincaré disk. The endpoints of the resulting hyperbolic segment lie on the circle at infinity. It must also provide the function operator Hyperbolic_segment_2 operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q, Hyperbolic_point_2 r), where the points p, q , and r lie in the Poincaré disk. This overloaded version constructs the hyperbolic bisector of the segment [p,q] limited by the hyperbolic circumcenter of p, q, r on one side and the circle at infinity on the other. Moreover, it must provide the function operator Hyperbolic_segment_2 operator()(Hyperbolic_point_2 p, Hyperbolic_point_2 q, Hyperbolic_point_2 r, Hyperbolic_point_2 s), where the points p, q, r , and s lie in the Poincaré disk. This overloaded version constructs the hyperbolic bisector of the segment [p,q] limited by the hyperbolic circumcenter of p, q, r on one side, and the hyperbolic circumcenter of p, s, q on the other side.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "159",
+        "section": "Construction Types"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "166",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_circle_2_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::side_of_oriented_circle_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Side_of_oriented_circle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "167",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_hyperbolic_segment_2_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::side_of_oriented_hyperbolic_segment_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Side_of_oriented_hyperbolic_segment_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "168",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_Delaunay_hyperbolic_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::is_Delaunay_hyperbolic_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Is_Delaunay_hyperbolic",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "169",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_hyperbolic_segment_2_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::construct_hyperbolic_segment_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_hyperbolic_segment_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "176",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_hyperbolic_circumcenter_2_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::construct_hyperbolic_circumcenter_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_hyperbolic_circumcenter_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "177",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_hyperbolic_bisector_2_object",
+        "qualified_name": "HyperbolicDelaunayTriangulationTraits_2::construct_hyperbolic_bisector_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_hyperbolic_bisector_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicDelaunayTriangulationTraits_2.h",
+        "line": "178",
+        "section": ""
+      }
+    ]
+  },
+  "HyperbolicFaceData": {
+    "kind": "class",
+    "name": "HyperbolicFaceData",
+    "brief": "The concept HyperbolicTriangulationFaceBase_2 describes the requirements for an internal data class that must be provided by the model of the HyperbolicTriangulationFaceBase_2 .",
+    "detailed": "HyperbolicTriangulationFaceBase_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "set_infinite",
+        "qualified_name": "HyperbolicFaceData::set_infinite",
+        "brief": "sets the face as infinite and non-Delaunay hyperbolic",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "16",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_Delaunay_hyperbolic",
+        "qualified_name": "HyperbolicFaceData::set_Delaunay_hyperbolic",
+        "brief": "sets the face as Delaunay hyperbolic",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "19",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_Delaunay_hyperbolic",
+        "qualified_name": "HyperbolicFaceData::is_Delaunay_hyperbolic",
+        "brief": "returns whether the face is Delaunay hyperbolic, or not.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "22",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_Delaunay_non_hyperbolic",
+        "qualified_name": "HyperbolicFaceData::set_Delaunay_non_hyperbolic",
+        "brief": "sets the i -th edge of the face as non-hyperbolic",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "25",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_Delaunay_non_hyperbolic",
+        "qualified_name": "HyperbolicFaceData::is_Delaunay_non_hyperbolic",
+        "brief": "returns whether the i -th edge of the face is non-hyperbolic",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "28",
+        "section": ""
+      }
+    ]
+  },
+  "HyperbolicTriangulationFaceBase_2": {
+    "kind": "class",
+    "name": "HyperbolicTriangulationFaceBase_2",
+    "brief": "",
+    "detailed": "Refines TriangulationFaceBase_2 The concept HyperbolicTriangulationFaceBase_2 describes the requirements for the base face class of a hyperbolic triangulation data structure. This concept provides an interface for the functionality needed in faces to compute Delaunay triangulations in the hyperbolic plane. The function tds_data() is used internally by the triangulation class during the insertion of points in the triangulation. Has models CGAL::Hyperbolic_triangulation_face_base_2 TriangulationDataStructure_2 HyperbolicFaceData",
+    "members": [
+      {
+        "kind": "function",
+        "name": "hyperbolic_data",
+        "qualified_name": "HyperbolicTriangulationFaceBase_2::hyperbolic_data",
+        "brief": "This function gives non- const access to a variable that is a model of HyperbolicFaceData .",
+        "detailed": "This is an advanced function.",
+        "return_type": "HyperbolicFaceData &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "65",
+        "section": "Internal Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "hyperbolic_data",
+        "qualified_name": "HyperbolicTriangulationFaceBase_2::hyperbolic_data",
+        "brief": "This function gives const access to a variable of that is a model of HyperbolicFaceData .",
+        "detailed": "This is an advanced function.",
+        "return_type": "const HyperbolicFaceData &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/HyperbolicTriangulationFaceBase_2.h",
+        "line": "71",
+        "section": "Internal Access Functions"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

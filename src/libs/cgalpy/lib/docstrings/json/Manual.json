@@ -1,0 +1,749 @@
+{
+  "AdaptableBinaryFunction": {
+    "kind": "class",
+    "name": "AdaptableBinaryFunction",
+    "brief": "Adaptable functor with two arguments.",
+    "detailed": "Refines AdaptableFunctor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "AdaptableBinaryFunction::result_type",
+        "brief": "result_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "AdaptableBinaryFunction::first_argument_type",
+        "brief": "first argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "AdaptableBinaryFunction::second_argument_type",
+        "brief": "second argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "AdaptableBinaryFunction::operator()",
+        "brief": "operator type",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type, second_argument_type)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "General.txt",
+        "line": "67",
+        "section": ""
+      }
+    ]
+  },
+  "AdaptableFunctor": {
+    "kind": "class",
+    "name": "AdaptableFunctor",
+    "brief": "The concept AdaptableFunctor defines an adaptable functor, that is, a functor that can be used with function object adaptors such as binders and composers.",
+    "detailed": "",
+    "members": []
+  },
+  "AdaptableQuaternaryFunction": {
+    "kind": "class",
+    "name": "AdaptableQuaternaryFunction",
+    "brief": "Adaptable functor with four arguments.",
+    "detailed": "Refines AdaptableFunctor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "AdaptableQuaternaryFunction::result_type",
+        "brief": "result_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "AdaptableQuaternaryFunction::first_argument_type",
+        "brief": "first argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "97",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "AdaptableQuaternaryFunction::second_argument_type",
+        "brief": "second argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "99",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "third_argument_type",
+        "qualified_name": "AdaptableQuaternaryFunction::third_argument_type",
+        "brief": "third argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "101",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "fourth_argument_type",
+        "qualified_name": "AdaptableQuaternaryFunction::fourth_argument_type",
+        "brief": "fourth argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "103",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "AdaptableQuaternaryFunction::operator()",
+        "brief": "operator type",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type, second_argument_type, third_argument_type, fourth_argument_type)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "third_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "fourth_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "General.txt",
+        "line": "105",
+        "section": ""
+      }
+    ]
+  },
+  "AdaptableQuinaryFunction": {
+    "kind": "class",
+    "name": "AdaptableQuinaryFunction",
+    "brief": "Adaptable functor with five arguments.",
+    "detailed": "Refines AdaptableFunctor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "AdaptableQuinaryFunction::result_type",
+        "brief": "result_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "115",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "AdaptableQuinaryFunction::first_argument_type",
+        "brief": "first argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "117",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "AdaptableQuinaryFunction::second_argument_type",
+        "brief": "second argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "third_argument_type",
+        "qualified_name": "AdaptableQuinaryFunction::third_argument_type",
+        "brief": "third argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "fourth_argument_type",
+        "qualified_name": "AdaptableQuinaryFunction::fourth_argument_type",
+        "brief": "fourth argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "123",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "fifth_argument_type",
+        "qualified_name": "AdaptableQuinaryFunction::fifth_argument_type",
+        "brief": "fifth argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "125",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "AdaptableQuinaryFunction::operator()",
+        "brief": "operator type",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type, second_argument_type, third_argument_type, fourth_argument_type, fifth_argument_type)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "third_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "fourth_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "fifth_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "General.txt",
+        "line": "127",
+        "section": ""
+      }
+    ]
+  },
+  "AdaptableTernaryFunction": {
+    "kind": "class",
+    "name": "AdaptableTernaryFunction",
+    "brief": "Adaptable functor with three arguments.",
+    "detailed": "Refines AdaptableFunctor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "AdaptableTernaryFunction::result_type",
+        "brief": "result_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "AdaptableTernaryFunction::first_argument_type",
+        "brief": "first argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "79",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "AdaptableTernaryFunction::second_argument_type",
+        "brief": "second argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "third_argument_type",
+        "qualified_name": "AdaptableTernaryFunction::third_argument_type",
+        "brief": "third argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "83",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "AdaptableTernaryFunction::operator()",
+        "brief": "operator type",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type, second_argument_type, third_argument_type)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "third_argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "General.txt",
+        "line": "85",
+        "section": ""
+      }
+    ]
+  },
+  "AdaptableUnaryFunction": {
+    "kind": "class",
+    "name": "AdaptableUnaryFunction",
+    "brief": "Adaptable functor with one argument.",
+    "detailed": "Refines AdaptableFunctor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "AdaptableUnaryFunction::result_type",
+        "brief": "result_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "AdaptableUnaryFunction::argument_type",
+        "brief": "argument_type",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "General.txt",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "AdaptableUnaryFunction::operator()",
+        "brief": "operator type",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "General.txt",
+        "line": "51",
+        "section": ""
+      }
+    ]
+  },
+  "AdjacencyGraph": {
+    "kind": "class",
+    "name": "AdjacencyGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/AdjacencyGraph.html",
+    "members": []
+  },
+  "AdjacencyMatrix": {
+    "kind": "class",
+    "name": "AdjacencyMatrix",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/AdjacencyMatrix.html",
+    "members": []
+  },
+  "Assignable": {
+    "kind": "class",
+    "name": "Assignable",
+    "brief": "This concept refines both CopyAssignable and CopyConstructible .",
+    "detailed": "",
+    "members": []
+  },
+  "AssociativeContainer": {
+    "kind": "class",
+    "name": "AssociativeContainer",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/AssociativeContainer .",
+    "detailed": "",
+    "members": []
+  },
+  "BackInsertionSequence": {
+    "kind": "class",
+    "name": "BackInsertionSequence",
+    "brief": "This container concepts refines SequenceContainer and has the ability to append elements at the end of the sequence and to access the last element, both in amortized constant time.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "back",
+        "qualified_name": "BackInsertionSequence::back",
+        "brief": "returns the last inserted element.",
+        "detailed": "",
+        "return_type": "const value_type &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "General.txt",
+        "line": "205",
+        "section": ""
+      }
+    ]
+  },
+  "BidirectionalGraph": {
+    "kind": "class",
+    "name": "BidirectionalGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/BidirectionalGraph.html",
+    "members": []
+  },
+  "BidirectionalIterator": {
+    "kind": "class",
+    "name": "BidirectionalIterator",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/BidirectionalIterator .",
+    "detailed": "",
+    "members": []
+  },
+  "Callable": {
+    "kind": "class",
+    "name": "Callable",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/Callable .",
+    "detailed": "",
+    "members": []
+  },
+  "Container": {
+    "kind": "class",
+    "name": "Container",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/Container .",
+    "detailed": "",
+    "members": []
+  },
+  "CopyAssignable": {
+    "kind": "class",
+    "name": "CopyAssignable",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/CopyAssignable .",
+    "detailed": "",
+    "members": []
+  },
+  "CopyConstructible": {
+    "kind": "class",
+    "name": "CopyConstructible",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/CopyConstructible .",
+    "detailed": "",
+    "members": []
+  },
+  "DefaultConstructible": {
+    "kind": "class",
+    "name": "DefaultConstructible",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/DefaultConstructible .",
+    "detailed": "",
+    "members": []
+  },
+  "EqualityComparable": {
+    "kind": "class",
+    "name": "EqualityComparable",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/EqualityComparable .",
+    "detailed": "",
+    "members": []
+  },
+  "ForwardIterator": {
+    "kind": "class",
+    "name": "ForwardIterator",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/ForwardIterator .",
+    "detailed": "",
+    "members": []
+  },
+  "ForwardRange": {
+    "kind": "class",
+    "name": "ForwardRange",
+    "brief": "See https://www.boost.org/libs/range/doc/html/range/concepts/forward_range.html .",
+    "detailed": "",
+    "members": []
+  },
+  "IncidenceGraph": {
+    "kind": "class",
+    "name": "IncidenceGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/IncidenceGraph.html",
+    "members": []
+  },
+  "InputIterator": {
+    "kind": "class",
+    "name": "InputIterator",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/InputIterator .",
+    "detailed": "",
+    "members": []
+  },
+  "Iterator": {
+    "kind": "class",
+    "name": "Iterator",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/Iterator .",
+    "detailed": "",
+    "members": []
+  },
+  "LessThanComparable": {
+    "kind": "class",
+    "name": "LessThanComparable",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/LessThanComparable .",
+    "detailed": "",
+    "members": []
+  },
+  "LvaluePropertyMap": {
+    "kind": "class",
+    "name": "LvaluePropertyMap",
+    "brief": "See https://www.boost.org/libs/property_map/doc/LvaluePropertyMap.html .",
+    "detailed": "",
+    "members": []
+  },
+  "MutableGraph": {
+    "kind": "class",
+    "name": "MutableGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/MutableGraph.html",
+    "members": []
+  },
+  "MutablePropertyGraph": {
+    "kind": "class",
+    "name": "MutablePropertyGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/MutablePropertyGraph.html",
+    "members": []
+  },
+  "OutputIterator": {
+    "kind": "class",
+    "name": "OutputIterator",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/OutputIterator .",
+    "detailed": "",
+    "members": []
+  },
+  "PropertyGraph": {
+    "kind": "class",
+    "name": "PropertyGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/PropertyGraph.html",
+    "members": []
+  },
+  "RandomAccessContainer": {
+    "kind": "class",
+    "name": "RandomAccessContainer",
+    "brief": "This container concept refines ReversibleContainer and its iterator type is a model of RandomAccessIterator .",
+    "detailed": "",
+    "members": []
+  },
+  "RandomAccessIterator": {
+    "kind": "class",
+    "name": "RandomAccessIterator",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator .",
+    "detailed": "",
+    "members": []
+  },
+  "RandomAccessRange": {
+    "kind": "class",
+    "name": "RandomAccessRange",
+    "brief": "See https://www.boost.org/libs/range/doc/html/range/concepts/random_access_range.html .",
+    "detailed": "",
+    "members": []
+  },
+  "ReadablePropertyMap": {
+    "kind": "class",
+    "name": "ReadablePropertyMap",
+    "brief": "See https://www.boost.org/libs/property_map/doc/ReadablePropertyMap.html .",
+    "detailed": "",
+    "members": []
+  },
+  "ReadWritePropertyMap": {
+    "kind": "class",
+    "name": "ReadWritePropertyMap",
+    "brief": "See https://www.boost.org/libs/property_map/doc/ReadWritePropertyMap.html .",
+    "detailed": "",
+    "members": []
+  },
+  "Regular": {
+    "kind": "class",
+    "name": "Regular",
+    "brief": "A regular type is a type similar to int : it is copyable, assignable, and equality comparable.",
+    "detailed": "Refines DefaultConstructible CopyConstructible CopyAssignable EqualityComparable See also the C++ concept std::regular at https://en.cppreference.com/w/cpp/concepts/regular",
+    "members": []
+  },
+  "ReversibleContainer": {
+    "kind": "class",
+    "name": "ReversibleContainer",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/ReversibleContainer .",
+    "detailed": "",
+    "members": []
+  },
+  "SequenceContainer": {
+    "kind": "class",
+    "name": "SequenceContainer",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/SequenceContainer .",
+    "detailed": "",
+    "members": []
+  },
+  "SinglePassRange": {
+    "kind": "class",
+    "name": "SinglePassRange",
+    "brief": "See https://www.boost.org/libs/range/doc/html/range/concepts/single_pass_range.html .",
+    "detailed": "",
+    "members": []
+  },
+  "Swappable": {
+    "kind": "class",
+    "name": "Swappable",
+    "brief": "Concept from the C++ standard. See https://en.cppreference.com/w/cpp/named_req/Swappable .",
+    "detailed": "",
+    "members": []
+  },
+  "unspecified_type": {
+    "kind": "class",
+    "name": "unspecified_type",
+    "brief": "This indicates that the definition of a type nested in a class is not documented.",
+    "detailed": "",
+    "members": []
+  },
+  "VertexAndEdgeListGraph": {
+    "kind": "class",
+    "name": "VertexAndEdgeListGraph",
+    "brief": "Concept from the Boost Graph Library.",
+    "detailed": "See https://www.boost.org/libs/graph/doc/VertexAndEdgeListGraph.html",
+    "members": []
+  },
+  "WritablePropertyMap": {
+    "kind": "class",
+    "name": "WritablePropertyMap",
+    "brief": "See https://www.boost.org/libs/property_map/doc/WritablePropertyMap.html .",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

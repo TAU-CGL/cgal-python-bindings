@@ -1,0 +1,4743 @@
+{
+  "AABBGeomTraits_2": {
+    "kind": "class",
+    "name": "AABBGeomTraits_2",
+    "brief": "The concept AABBGeomTraits_2 defines the requirements for the first template parameter of the class CGAL::AABB_traits_2 < AABBGeomTraits_2 , AABBPrimitive > . It provides predicates and constructors to detect and compute intersections between query objects and the primitives stored in the AABB tree. In addition, it contains predicates and constructors to compute distances between a point query and the primitives stored in the AABB tree.",
+    "detailed": "Refines SearchGeomTraits_2 Has models All models of the concept Kernel CGAL::AABB_traits_2 < AABBGeomTraits_2 , AABBPrimitive > CGAL::AABB_tree < AABBTraits > AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Do_intersect_2",
+        "qualified_name": "AABBGeomTraits_2::Do_intersect_2",
+        "brief": "A functor object to detect intersections between two geometric objects.",
+        "detailed": "Provides the following operators: bool operator()(const Query& q, const Bbox_2& b) , bool operator()(const Query& q, const Primitive::Datum& d) , bool operator()(const Circle_2& c, const Bbox_2& b) . The operator returns true iff there is an intersection.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersect_2",
+        "qualified_name": "AABBGeomTraits_2::Intersect_2",
+        "brief": "A functor object to construct the intersection between two geometric objects.",
+        "detailed": "Provides the operator: return_type operator()(const Query& q, const Primitive::Datum& d) , which computes the intersection between q and d . The type of the returned object must be a std::optional of a std::variant of the possible intersection types.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "54",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circle_2",
+        "qualified_name": "AABBGeomTraits_2::Construct_circle_2",
+        "brief": "A functor object to construct the circle specified by its center and squared radius.",
+        "detailed": "Provides the operator: Circle_2 operator()(const Point_2& p, const FT & sr) , which returns the circle centered at p with sr as squared radius.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_projected_point_2",
+        "qualified_name": "AABBGeomTraits_2::Construct_projected_point_2",
+        "brief": "A functor object to compute the point on a geometric primitive which is closest from a query point.",
+        "detailed": "Provides the operator: Point_2 operator()(const Primitive::Datum& d, const Point_2& p) , which returns the point on d that is closest to p .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_distance_2",
+        "qualified_name": "AABBGeomTraits_2::Compare_distance_2",
+        "brief": "A functor object to compare the distance of two points wrt a third one.",
+        "detailed": "Provides the operator: CGAL::Comparison_result operator()(const Point_2& p1, const Point_2& p2, const Point_2& p3) , which compares the distance between p1 and p2 , to the distance between p1 and p3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_2",
+        "qualified_name": "AABBGeomTraits_2::Compute_squared_distance_2",
+        "brief": "A functor object to compute the squared distance between two points.",
+        "detailed": "Provides the operator: FT operator()(const Point_2& p, const Point_2& q), which returns the squared distance between p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "93",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_x_2",
+        "qualified_name": "AABBGeomTraits_2::Less_x_2",
+        "brief": "A functor object to compare the x-coordinates of two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_2& p, const Point_2& q) , which returns true iff the x-coordinate of p is smaller than the x-coordinate of q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "102",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_y_2",
+        "qualified_name": "AABBGeomTraits_2::Less_y_2",
+        "brief": "A functor object to compare the y-coordinates of two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_2& p, const Point_2& q) , which returns true iff the y-coordinate of p is smaller than the y-coordinate of q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_2",
+        "qualified_name": "AABBGeomTraits_2::Equal_2",
+        "brief": "A functor object to compare two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_2& p, const Point_2& q) , which returns true iff p is equal to q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "121",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect_2_object",
+        "qualified_name": "AABBGeomTraits_2::do_intersect_2_object",
+        "brief": "returns the intersection detection predicate.",
+        "detailed": "",
+        "return_type": "Do_intersect_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "131",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersect_2_object",
+        "qualified_name": "AABBGeomTraits_2::intersect_2_object",
+        "brief": "returns the intersection constructor.",
+        "detailed": "",
+        "return_type": "Intersect_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "136",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_circle_2_object",
+        "qualified_name": "AABBGeomTraits_2::construct_circle_2_object",
+        "brief": "returns the circle constructor.",
+        "detailed": "",
+        "return_type": "Construct_circle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "141",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_projected_point_2_object",
+        "qualified_name": "AABBGeomTraits_2::construct_projected_point_2_object",
+        "brief": "returns the closest point constructor.",
+        "detailed": "",
+        "return_type": "Construct_projected_point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "146",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_distance_2_object",
+        "qualified_name": "AABBGeomTraits_2::compare_distance_2_object",
+        "brief": "returns the compare distance predicate.",
+        "detailed": "",
+        "return_type": "Compare_distance_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "151",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_2_object",
+        "qualified_name": "AABBGeomTraits_2::compute_squared_distance_2_object",
+        "brief": "returns the squared distance functor.",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "157",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_x_2_object",
+        "qualified_name": "AABBGeomTraits_2::less_x_2_object",
+        "brief": "returns the Less_x_2 predicate.",
+        "detailed": "",
+        "return_type": "Less_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "162",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_y_2_object",
+        "qualified_name": "AABBGeomTraits_2::less_y_2_object",
+        "brief": "returns the Less_y_2 predicate.",
+        "detailed": "",
+        "return_type": "Less_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "167",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "equal_2_object",
+        "qualified_name": "AABBGeomTraits_2::equal_2_object",
+        "brief": "returns the equal predicate.",
+        "detailed": "",
+        "return_type": "Equal_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_2.h",
+        "line": "173",
+        "section": "Operations"
+      }
+    ]
+  },
+  "AABBGeomTraits_3": {
+    "kind": "class",
+    "name": "AABBGeomTraits_3",
+    "brief": "The concept AABBGeomTraits_3 defines the requirements for the first template parameter of the class CGAL::AABB_traits_3 < AABBGeomTraits_3 , AABBPrimitive > . It provides predicates and constructors to detect and compute intersections between query objects and the primitives stored in the AABB tree. In addition, it contains predicates and constructors to compute distances between a point query and the primitives stored in the AABB tree.",
+    "detailed": "Refines SearchGeomTraits_3 Has models All models of the concept Kernel CGAL::AABB_traits_3 < AABBGeomTraits_3 , AABBPrimitive > CGAL::AABB_tree < AABBTraits > AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Do_intersect_3",
+        "qualified_name": "AABBGeomTraits_3::Do_intersect_3",
+        "brief": "A functor object to detect intersections between two geometric objects.",
+        "detailed": "Provides the following operators: bool operator()(const Query& q, const Bbox_3& b) , bool operator()(const Query& q, const Primitive::Datum& d) , bool operator()(const Sphere_3& s, const Bbox_3& b) . The operator returns true iff there is an intersection.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersect_3",
+        "qualified_name": "AABBGeomTraits_3::Intersect_3",
+        "brief": "A functor object to construct the intersection between two geometric objects.",
+        "detailed": "Provides the operator: return_type operator()(const Query& q, const Primitive::Datum& d) , which computes the intersection between q and d . The type of the returned object must be a std::optional of a std::variant of the possible intersection types.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "54",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_sphere_3",
+        "qualified_name": "AABBGeomTraits_3::Construct_sphere_3",
+        "brief": "A functor object to construct the sphere specified by its center and squared radius.",
+        "detailed": "Provides the operator: Sphere_3 operator()(const Point_3& p, const FT & sr) , which returns the sphere centered at p with sr as squared radius.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_projected_point_3",
+        "qualified_name": "AABBGeomTraits_3::Construct_projected_point_3",
+        "brief": "A functor object to compute the point on a geometric primitive which is closest from a query point.",
+        "detailed": "Provides the operator: Point_3 operator()(const Primitive::Datum& d, const Point_3& p) , which returns the point on d that is closest to p .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_distance_3",
+        "qualified_name": "AABBGeomTraits_3::Compare_distance_3",
+        "brief": "A functor object to compare the distance of two points wrt a third one.",
+        "detailed": "Provides the operator: CGAL::Comparison_result operator()(const Point_3& p1, const Point_3& p2, const Point_3& p3) , which compares the distance between p1 and p2 , to the distance between p1 and p3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "AABBGeomTraits_3::Compute_squared_distance_3",
+        "brief": "A functor object to compute the squared distance between two points.",
+        "detailed": "Provides the operator: FT operator()(const Point_3& p, const Point_3& q), which returns the squared distance between p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "93",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_x_3",
+        "qualified_name": "AABBGeomTraits_3::Less_x_3",
+        "brief": "A functor object to compare the x-coordinates of two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_3& p, const Point_3& q) , which returns true iff the x-coordinate of p is smaller than the x-coordinate of q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "102",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_y_3",
+        "qualified_name": "AABBGeomTraits_3::Less_y_3",
+        "brief": "A functor object to compare the y-coordinates of two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_3& p, const Point_3& q) , which returns true iff the y-coordinate of p is smaller than the y-coordinate of q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_z_3",
+        "qualified_name": "AABBGeomTraits_3::Less_z_3",
+        "brief": "A functor object to compare the z-coordinates of two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_3& p, const Point_3& q) , which returns true iff the z-coordinate of p is smaller than the z-coordinate of q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "120",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_3",
+        "qualified_name": "AABBGeomTraits_3::Equal_3",
+        "brief": "A functor object to compare two points.",
+        "detailed": "Provides the operator: bool operator()(const Point_3& p, const Point_3& q) , which returns true iff p is equal to q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "129",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect_3_object",
+        "qualified_name": "AABBGeomTraits_3::do_intersect_3_object",
+        "brief": "returns the intersection detection predicate.",
+        "detailed": "",
+        "return_type": "Do_intersect_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "139",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersect_3_object",
+        "qualified_name": "AABBGeomTraits_3::intersect_3_object",
+        "brief": "returns the intersection constructor.",
+        "detailed": "",
+        "return_type": "Intersect_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "144",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_sphere_3_object",
+        "qualified_name": "AABBGeomTraits_3::construct_sphere_3_object",
+        "brief": "returns the sphere constructor.",
+        "detailed": "",
+        "return_type": "Construct_sphere_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "149",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_projected_point_3_object",
+        "qualified_name": "AABBGeomTraits_3::construct_projected_point_3_object",
+        "brief": "returns the closest point constructor.",
+        "detailed": "",
+        "return_type": "Construct_projected_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "154",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_distance_3_object",
+        "qualified_name": "AABBGeomTraits_3::compare_distance_3_object",
+        "brief": "returns the compare distance predicate.",
+        "detailed": "",
+        "return_type": "Compare_distance_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "159",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_3_object",
+        "qualified_name": "AABBGeomTraits_3::compute_squared_distance_3_object",
+        "brief": "returns the squared distance functor.",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "165",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_x_3_object",
+        "qualified_name": "AABBGeomTraits_3::less_x_3_object",
+        "brief": "returns the Less_x_3 predicate.",
+        "detailed": "",
+        "return_type": "Less_x_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "170",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_y_3_object",
+        "qualified_name": "AABBGeomTraits_3::less_y_3_object",
+        "brief": "returns the Less_y_3 predicate.",
+        "detailed": "",
+        "return_type": "Less_y_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "175",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_z_3_object",
+        "qualified_name": "AABBGeomTraits_3::less_z_3_object",
+        "brief": "returns the Less_z_3 predicate.",
+        "detailed": "",
+        "return_type": "Less_z_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "180",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "equal_3_object",
+        "qualified_name": "AABBGeomTraits_3::equal_3_object",
+        "brief": "returns the equal predicate.",
+        "detailed": "",
+        "return_type": "Equal_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBGeomTraits_3.h",
+        "line": "185",
+        "section": "Operations"
+      }
+    ]
+  },
+  "AABBPrimitive": {
+    "kind": "class",
+    "name": "AABBPrimitive",
+    "brief": "The concept AABBPrimitive describes the requirements for the primitives stored in the AABB tree data structure. The concept encapsulates a type for the input datum (a geometric object) and an identifier (id) type through which those primitives are referred to. The concept AABBPrimitive also refines the concepts DefaultConstructible and Assignable.",
+    "detailed": "CGAL::AABB_tree < AABBTraits > AABBPrimitiveWithSharedData Example The Primitive type can be, e.g., a wrapper around a Handle . Assume for instance that the input objects are the triangle faces of a mesh stored as a CGAL::Polyhedron_3 . The Datum would be a Triangle_3 and the Id would be a polyhedron Face_handle . Method datum() can return either a Triangle_3 constructed on the fly from the face handle or a Triangle_3 stored internally. This provides a way for the user to trade memory for efficiency. Has models CGAL::AABB_primitive < Id ,ObjectPropertyMap,PointPropertyMap,Tag_false,CacheDatum> CGAL::AABB_segment_primitive_2 <Iterator,CacheDatum> CGAL::AABB_segment_primitive_3 <Iterator,CacheDatum> CGAL::AABB_triangle_primitive_2 <Iterator,CacheDatum> CGAL::AABB_triangle_primitive_3 <Iterator,CacheDatum> CGAL::AABB_halfedge_graph_segment_primitive <HalfedgeGraph,VertexPointPMap,Tag_false,CacheDatum> CGAL::AABB_face_graph_triangle_primitive <FaceGraph,VertexPointPMap,Tag_false,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "AABBPrimitive::Point",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "AABBPrimitive::Datum",
+        "brief": "Type of input datum.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_reference",
+        "qualified_name": "AABBPrimitive::Point_reference",
+        "brief": "Point reference type returned by the function point() .",
+        "detailed": "It is convertible to the type Point .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum_reference",
+        "qualified_name": "AABBPrimitive::Datum_reference",
+        "brief": "Datum reference type returned by the function datum() .",
+        "detailed": "It is convertible to the type Datum .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Id",
+        "qualified_name": "AABBPrimitive::Id",
+        "brief": "Type of identifiers through which the input objects are referred to.",
+        "detailed": "It must be a model of the concepts DefaultConstructible and Assignable.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "datum",
+        "qualified_name": "AABBPrimitive::datum",
+        "brief": "returns the datum (geometric object) represented by the primitive.",
+        "detailed": "",
+        "return_type": "Datum_reference",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "65",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "AABBPrimitive::id",
+        "brief": "returns the corresponding identifier.",
+        "detailed": "This identifier is only used as a reference for the objects in the output of the AABB_tree methods.",
+        "return_type": "Id",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "70",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "reference_point",
+        "qualified_name": "AABBPrimitive::reference_point",
+        "brief": "returns a point located on the geometric object represented by the primitive.",
+        "detailed": "This function is used to sort the primitives during the AABB tree construction as well as to construct the search KD-tree internal to the AABB tree used to accelerate distance queries.",
+        "return_type": "Point_reference",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBPrimitive.h",
+        "line": "75",
+        "section": "Operations"
+      }
+    ]
+  },
+  "AABBPrimitiveWithSharedData": {
+    "kind": "class",
+    "name": "AABBPrimitiveWithSharedData",
+    "brief": "The concept AABBPrimitiveWithSharedData describes the requirements for the primitives stored in the AABB tree data structure. The concept encapsulates a type for the input datum (a geometric object) and an identifier (id) type through which those primitives are referred to. The concept AABBPrimitiveWithSharedData also refines the concepts DefaultConstructible and Assignable . The concept is similar to AABBPrimitive except that some data stored outside of the primitives are required to access the datum and the reference point.",
+    "detailed": "CGAL::AABB_tree < AABBTraits > AABBPrimitive Example The Primitive type can be a wrapper around an integer that refers to the position of an object in a vector. Assume for instance that the input objects are some triangles. The Datum would be a Triangle_3 and the Id a std::size_t . The shared data here is a std::vector<Triangle_3> . The method datum (const Shared_data &) then returns a triangle from the vector. Has models CGAL::AABB_primitive < Id ,ObjectPropertyMap,PointPropertyMap,Tag_true,CacheDatum> CGAL::AABB_halfedge_graph_segment_primitive <HalfedgeGraph,VertexPointPMap,Tag_true,CacheDatum> CGAL::AABB_face_graph_triangle_primitive <FaceGraph,VertexPointPMap,Tag_true,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "AABBPrimitiveWithSharedData::Point",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "AABBPrimitiveWithSharedData::Datum",
+        "brief": "Type of input datum.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_reference",
+        "qualified_name": "AABBPrimitiveWithSharedData::Point_reference",
+        "brief": "Point reference type returned by the function reference_point(const Shared_data&) .",
+        "detailed": "It is convertible to the type Point .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum_reference",
+        "qualified_name": "AABBPrimitiveWithSharedData::Datum_reference",
+        "brief": "Datum reference type returned by the function datum(const Shared_data&) .",
+        "detailed": "It is convertible to the type Datum .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Id",
+        "qualified_name": "AABBPrimitiveWithSharedData::Id",
+        "brief": "Type of identifiers through which the input objects are referred to.",
+        "detailed": "It must be a model of the concepts DefaultConstructible and Assignable.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "61",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Shared_data",
+        "qualified_name": "AABBPrimitiveWithSharedData::Shared_data",
+        "brief": "Type of the data shared amongst primitives.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "datum",
+        "qualified_name": "AABBPrimitiveWithSharedData::datum",
+        "brief": "returns the datum (geometric object) represented by the primitive.",
+        "detailed": "",
+        "return_type": "Datum_reference",
+        "argsstring": "(const Shared_data &data)",
+        "params": [
+          {
+            "type": "const Shared_data &",
+            "name": "data",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "75",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "AABBPrimitiveWithSharedData::id",
+        "brief": "returns the corresponding identifier.",
+        "detailed": "This identifier is only used as a reference for the objects in the output of the AABB_tree methods.",
+        "return_type": "Id",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "80",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "reference_point",
+        "qualified_name": "AABBPrimitiveWithSharedData::reference_point",
+        "brief": "returns a point located on the geometric object represented by the primitive.",
+        "detailed": "This function is used to sort the primitives during the AABB tree construction as well as to construct the search KD-tree internal to the AABB tree used to accelerate distance queries.",
+        "return_type": "Point_reference",
+        "argsstring": "(const Shared_data &data)",
+        "params": [
+          {
+            "type": "const Shared_data &",
+            "name": "data",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "85",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "AABBPrimitiveWithSharedData::construct_shared_data",
+        "brief": "constructs the shared data of a primitive.",
+        "detailed": "The parameter pack is such that there exists a constructor template <class T1, class ... T> AABBPrimitiveWithSharedData (T1,T...) .",
+        "return_type": "Shared_data",
+        "argsstring": "(T ... t)",
+        "params": [
+          {
+            "type": "T ...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AABBPrimitiveWithSharedData.h",
+        "line": "92",
+        "section": "Operations"
+      }
+    ]
+  },
+  "AABBRayIntersectionGeomTraits_2": {
+    "kind": "class",
+    "name": "AABBRayIntersectionGeomTraits_2",
+    "brief": "The concept AABBRayIntersectionGeomTraits_2 is a refinement of the concept AABBGeomTraits_2 . In addition to the types and functors required by AABBGeomTraits_2 it also requires types and functors necessary to define the Intersection_distance functor (see AABBRayIntersectionTraits ).",
+    "detailed": "Refines AABBGeomTraits_2 Has models All models of the concept Kernel CGAL::AABB_traits_2 < AABBGeomTraits_2 , AABBPrimitive > CGAL::AABB_tree < AABBTraits > AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Ray_2",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::Ray_2",
+        "brief": "Type of a 2D ray.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "26",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::Vector_2",
+        "brief": "Type of a 2D vector.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_source_2",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::Construct_source_2",
+        "brief": "A functor object to construct the source point of a ray.",
+        "detailed": "Provides the operator: Point_2 operator()(const Ray_2 &);",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cartesian_const_iterator_2",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::Cartesian_const_iterator_2",
+        "brief": "A model of CartesianConstIterator_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cartesian_const_iterator_2",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::Construct_cartesian_const_iterator_2",
+        "brief": "A model of ConstructCartesianConstIterator_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_2",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::Construct_vector_2",
+        "brief": "A functor object to construct a vector having the same direction as a ray.",
+        "detailed": "Provides the operator: Vector_2 operator()(const Ray_2 &);",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_source_2_object",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::construct_source_2_object",
+        "brief": "returns the Construct_source_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_source_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_cartesian_const_iterator_2_object",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::construct_cartesian_const_iterator_2_object",
+        "brief": "returns the Construct_cartesian_const_iterator_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_cartesian_const_iterator_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_2_object",
+        "qualified_name": "AABBRayIntersectionGeomTraits_2::construct_vector_2_object",
+        "brief": "returns the Construct_vector_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_vector_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_2.h",
+        "line": "68",
+        "section": ""
+      }
+    ]
+  },
+  "AABBRayIntersectionGeomTraits_3": {
+    "kind": "class",
+    "name": "AABBRayIntersectionGeomTraits_3",
+    "brief": "The concept AABBRayIntersectionGeomTraits_3 is a refinement of the concept AABBGeomTraits_3 . In addition to the types required by AABBGeomTraits_3 it also requires types and functors necessary to define the Intersection_distance functor.",
+    "detailed": "Refines AABBGeomTraits_3 Has models All models of the concept Kernel CGAL::AABB_traits_3 < AABBGeomTraits_3 , AABBPrimitive > CGAL::AABB_tree < AABBTraits > AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Ray_3",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::Ray_3",
+        "brief": "Type of a 3D ray.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "26",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::Vector_3",
+        "brief": "Type of a 3D vector.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_source_3",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::Construct_source_3",
+        "brief": "A functor object to construct the source point of a ray.",
+        "detailed": "Provides the operator: Point_3 operator()(const Ray_3 &);",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cartesian_const_iterator_3",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::Cartesian_const_iterator_3",
+        "brief": "A model of CartesianConstIterator_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cartesian_const_iterator_3",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::Construct_cartesian_const_iterator_3",
+        "brief": "A model of ConstructCartesianConstIterator_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::Construct_vector_3",
+        "brief": "A functor object to construct a vector having the same direction as a ray.",
+        "detailed": "Provides the operator: Vector_3 operator()(const Ray_3 &);",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_source_3_object",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::construct_source_3_object",
+        "brief": "returns the Construct_source_3 functor.",
+        "detailed": "",
+        "return_type": "Construct_source_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_cartesian_const_iterator_3_object",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::construct_cartesian_const_iterator_3_object",
+        "brief": "returns the Construct_cartesian_const_iterator_3 functor.",
+        "detailed": "",
+        "return_type": "Construct_cartesian_const_iterator_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "AABBRayIntersectionGeomTraits_3::construct_vector_3_object",
+        "brief": "returns the Construct_vector_3 functor.",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionGeomTraits_3.h",
+        "line": "68",
+        "section": ""
+      }
+    ]
+  },
+  "AABBRayIntersectionTraits": {
+    "kind": "class",
+    "name": "AABBRayIntersectionTraits",
+    "brief": "The concept AABBRayIntersectionTraits is a refinement of the concept AABBTraits . In addition to the types and functions required by AABBTraits it also requires function objects to calculate the distance of an intersection along a ray.",
+    "detailed": "Refines AABBTraits Has models CGAL::AABB_traits_2 < AABBGeomTraits_2 , AABBPrimitive > CGAL::AABB_traits_3 < AABBGeomTraits_3 , AABBPrimitive > CGAL::AABB_tree < AABBTraits > AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Ray",
+        "qualified_name": "AABBRayIntersectionTraits::Ray",
+        "brief": "Type of a ray.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "26",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "AABBRayIntersectionTraits::Vector",
+        "brief": "Type of a vector.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Bounding_box",
+        "qualified_name": "AABBRayIntersectionTraits::Bounding_box",
+        "brief": "Type of bounding box.",
+        "detailed": "",
+        "return_type": "AABBTraits::Bounding_box",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_source",
+        "qualified_name": "AABBRayIntersectionTraits::Construct_source",
+        "brief": "A functor object to construct the source point of a ray.",
+        "detailed": "Provides the operator: Point operator()(const Ray &);",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cartesian_const_iterator",
+        "qualified_name": "AABBRayIntersectionTraits::Cartesian_const_iterator",
+        "brief": "A model of CartesianConstIterator_2 or CartesianConstIterator_3 , depending on the dimension of Vector .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cartesian_const_iterator",
+        "qualified_name": "AABBRayIntersectionTraits::Construct_cartesian_const_iterator",
+        "brief": "A model of ConstructCartesianConstIterator_2 or ConstructCartesianConstIterator_3 , depending on the dimension of Vector .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector",
+        "qualified_name": "AABBRayIntersectionTraits::Construct_vector",
+        "brief": "A functor object to construct a vector having the same direction as a ray.",
+        "detailed": "Provides the operator: Vector operator()(const Ray &);",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersection_distance",
+        "qualified_name": "AABBRayIntersectionTraits::Intersection_distance",
+        "brief": "A functor object to compute the distance between the source of a ray and its closest intersection point between the ray and a primitive or a bounding box.",
+        "detailed": "An empty std::optional is returned, if there is no intersection. When there is an intersection, an object of type FT is returned such that if i1 and i2 are two intersection points, then i1 is closer to the source of the ray than i2 iff n1 < n2 , n1 and n2 being the numbers returned for i1 and i2 respectively. Provides the operators: std::optional<FT> operator()(const Ray & r, const Bounding_box & bbox) . std::optional<std::pair<FT, Intersection_and_primitive_id< Ray >::Type > > operator()(const Ray & r, const Primitive& primitive) . A common algorithm to compute the intersection between a bounding box and a ray is the slab method .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_source_object",
+        "qualified_name": "AABBRayIntersectionTraits::construct_source_object",
+        "brief": "returns the Construct_source functor.",
+        "detailed": "",
+        "return_type": "Construct_source",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_cartesian_const_iterator_object",
+        "qualified_name": "AABBRayIntersectionTraits::construct_cartesian_const_iterator_object",
+        "brief": "returns the Construct_cartesian_const_iterator functor.",
+        "detailed": "",
+        "return_type": "Construct_cartesian_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_object",
+        "qualified_name": "AABBRayIntersectionTraits::construct_vector_object",
+        "brief": "returns the Construct_vector functor.",
+        "detailed": "",
+        "return_type": "Construct_vector",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "73",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "intersection_distance_object",
+        "qualified_name": "AABBRayIntersectionTraits::intersection_distance_object",
+        "brief": "returns the intersection distance functor.",
+        "detailed": "",
+        "return_type": "Intersection_distance",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/AABBRayIntersectionTraits.h",
+        "line": "99",
+        "section": ""
+      }
+    ]
+  },
+  "AABBTraits": {
+    "kind": "class",
+    "name": "AABBTraits",
+    "brief": "The concept AABBTraits provides the geometric primitive types and methods for the class CGAL::AABB_tree < AABBTraits > .",
+    "detailed": "Has models CGAL::AABB_traits_2 < AABBGeomTraits_2 , AABBPrimitive > CGAL::AABB_traits_3 < AABBGeomTraits_3 , AABBPrimitive > Refines SearchTraits CGAL::AABB_tree < AABBTraits > AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "AABBTraits::FT",
+        "brief": "Value type of the Squared_distance functor.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "AABBTraits::Point",
+        "brief": "Type of a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Primitive",
+        "qualified_name": "AABBTraits::Primitive",
+        "brief": "Type of primitive.",
+        "detailed": "Must be a model of the concepts AABBPrimitive or AABBPrimitiveWithSharedData .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Bounding_box",
+        "qualified_name": "AABBTraits::Bounding_box",
+        "brief": "Bounding box type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_and_primitive_id",
+        "qualified_name": "AABBTraits::Point_and_primitive_id",
+        "brief": "Point and Primitive Id type.",
+        "detailed": "",
+        "return_type": "std::pair< Point , Primitive::Id >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Object_and_primitive_id",
+        "qualified_name": "AABBTraits::Object_and_primitive_id",
+        "brief": "",
+        "detailed": "Deprecated This requirement is deprecated and is no longer needed.",
+        "return_type": "std::pair< Object, Primitive::Id >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersection_and_primitive_id",
+        "qualified_name": "AABBTraits::Intersection_and_primitive_id",
+        "brief": "A nested class template providing as a pair the intersection result of a Query object and a Primitive::Datum , together with the Primitive::Id of the primitive intersected.",
+        "detailed": "The type of the pair is Intersection_and_primitive_id<Query>::Type .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Split_primitives",
+        "qualified_name": "AABBTraits::Split_primitives",
+        "brief": "A functor object to split a range of primitives into two sub-ranges along the longest axis.",
+        "detailed": "Provides the operator: void operator()(InputIterator first, InputIterator beyond); Iterator type InputIterator must be a model of RandomAccessIterator and have Primitive as value type. The operator is used for determining the primitives assigned to the two children nodes of a given node, assuming that the goal is to split the chosen axis dimension of the bounding box of the node. The primitives assigned to this node are passed as argument to the operator. It should modify the iterator range in such a way that its first half and its second half correspond to the two children nodes.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "81",
+        "section": "Splitting"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_bbox",
+        "qualified_name": "AABBTraits::Compute_bbox",
+        "brief": "A functor object to compute the bounding box of a set of primitives.",
+        "detailed": "Provides the operator: Bounding_box operator()(Input_iterator begin, Input_iterator beyond); Iterator type InputIterator must have Primitive as value type.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "87",
+        "section": "Splitting"
+      },
+      {
+        "kind": "typedef",
+        "name": "Do_intersect",
+        "qualified_name": "AABBTraits::Do_intersect",
+        "brief": "A functor object to compute intersection predicates between the query and the nodes of the tree.",
+        "detailed": "Provides the operators: bool operator()(const Query & q, const Bounding_box & box); which returns true iff the query intersects the bounding box bool operator()(const Query & q, const Primitive & primitive); which returns true iff the query intersects the primitive",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "111",
+        "section": "Intersections"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersection",
+        "qualified_name": "AABBTraits::Intersection",
+        "brief": "A functor object to compute the intersection of a query and a primitive.",
+        "detailed": "Provides the operator: std::optional< Intersection_and_primitive_id <Query>::Type > operator()(const Query & q, const Primitive & primitive); which returns the intersection as a pair composed of an object and a primitive id, iff the query intersects the primitive. Note on Backward Compatibility Before the release 4.3 of CGAL, the return type of this function used to be std::optional< Object_and_primitive_id > .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "120",
+        "section": "Intersections"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_distance",
+        "qualified_name": "AABBTraits::Compare_distance",
+        "brief": "A functor object to compute distance comparisons between the query and the nodes of the tree.",
+        "detailed": "Provides the operators: bool operator()(const Query & query, const Bounding_box & box, const Point & closest); which returns true iff the bounding box is closer to query than closest is bool operator()(const Query & query, const Primitive & primitive, const Point & closest); which returns true iff primitive is closer to the query than closest is",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "135",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "typedef",
+        "name": "Closest_point",
+        "qualified_name": "AABBTraits::Closest_point",
+        "brief": "A functor object to compute the closest point from the query on a primitive.",
+        "detailed": "Provides the operator: Point operator()(const Query& query, const Primitive & primitive, const Point & closest); which returns the closest point to query , among closest and all points of the primitive.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "141",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "typedef",
+        "name": "Squared_distance",
+        "qualified_name": "AABBTraits::Squared_distance",
+        "brief": "A functor object to compute the squared distance between two points.",
+        "detailed": "Provides the operator: FT operator()(const Point & query, const Point & p); which returns the squared distance between p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "147",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal",
+        "qualified_name": "AABBTraits::Equal",
+        "brief": "A functor object to compare two points.",
+        "detailed": "Provides the operator: bool operator()(const Point & p, const Point & q);} which returns true if p is equal to q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "153",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "split_primitives_object",
+        "qualified_name": "AABBTraits::split_primitives_object",
+        "brief": "returns the primitive splitting functor.",
+        "detailed": "",
+        "return_type": "Split_primitives",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "162",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_bbox_object",
+        "qualified_name": "AABBTraits::compute_bbox_object",
+        "brief": "returns the bounding box constructor.",
+        "detailed": "",
+        "return_type": "Compute_bbox",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "167",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect_object",
+        "qualified_name": "AABBTraits::do_intersect_object",
+        "brief": "returns the intersection detection functor.",
+        "detailed": "",
+        "return_type": "Do_intersect",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "172",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection_object",
+        "qualified_name": "AABBTraits::intersection_object",
+        "brief": "returns the intersection constructor.",
+        "detailed": "",
+        "return_type": "Intersection",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "177",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_distance_object",
+        "qualified_name": "AABBTraits::compare_distance_object",
+        "brief": "returns the distance comparison functor.",
+        "detailed": "",
+        "return_type": "Compare_distance",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "182",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "closest_point_object",
+        "qualified_name": "AABBTraits::closest_point_object",
+        "brief": "returns the closest point constructor.",
+        "detailed": "",
+        "return_type": "Closest_point",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "187",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "squared_distance_object",
+        "qualified_name": "AABBTraits::squared_distance_object",
+        "brief": "returns the squared distance functor.",
+        "detailed": "",
+        "return_type": "Squared_distance",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "192",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "equal_object",
+        "qualified_name": "AABBTraits::equal_object",
+        "brief": "returns the equal functor.",
+        "detailed": "",
+        "return_type": "Equal",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AABBTraits.h",
+        "line": "197",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_shared_data",
+        "qualified_name": "AABBTraits::set_shared_data",
+        "brief": "the signature of that function must be the same as the static function Primitive::construct_shared_data .",
+        "detailed": "The type Primitive expects that the data constructed by a call to Primitive::construct_shared_data(t...) is the one given back when accessing the reference point and the datum of a primitive.",
+        "return_type": "void",
+        "argsstring": "(T ... t)",
+        "params": [
+          {
+            "type": "T ...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AABBTraits.h",
+        "line": "212",
+        "section": "Primitive with Shared Data"
+      }
+    ]
+  },
+  "CGAL::AABB_face_graph_triangle_primitive": {
+    "kind": "class",
+    "name": "CGAL::AABB_face_graph_triangle_primitive",
+    "brief": "Primitive type for a facet of a polyhedral surface.",
+    "detailed": "It wraps a handle to a facet of a polyhedron to a 3D triangle. The polyhedron from which the primitive is built should not be deleted while the AABB tree holding the primitive is in use. The triangle type of the primitive ( Datum ) is CGAL::Kernel_traits< boost::property_traits< VertexPointPMap >::value_type >::Kernel::Triangle_3 . Is model of AABBPrimitiveWithSharedData FaceGraph is a model of the face graph concept. VertexPointPMap is a property map with boost::graph_traits<FaceGraph>::vertex_descriptor as key type and a CGAL Kernel Point_3 as value type. The default is typename boost::property_map< FaceGraph,vertex_point_t>::const_type . OneFaceGraphPerTree is either CGAL::Tag_true or CGAL::Tag_false . In the former case, we guarantee that all the primitives will be from a common FaceGraph and some data will be factorized so that the size of the primitive is reduced. In the latter case, the primitives can be from different graphs and extra storage is required in the primitives. The default is CGAL::Tag_true . CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABBPrimitive AABB_primitive < Id ,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_halfedge_graph_segment_primitive <HalfedgeGraph,VertexPointPMap,OneHalfedgeGraphPerTree,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Point",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< VertexPointPMap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "106",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Datum",
+        "brief": "Geometric data type.",
+        "detailed": "",
+        "return_type": "Kernel_traits< Point >::Kernel::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "110",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Id",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Id",
+        "brief": "Id type:",
+        "detailed": "boost::graph_traits<FaceGraph>::face_descriptor if OneFaceGraphPerTree is CGAL::Tag_true std::pair<boost::graph_traits<FaceGraph>::face_descriptor, const FaceGraph*> if OneFaceGraphPerTree is CGAL::Tag_false",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "116",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointPMap_",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::VertexPointPMap_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< VertexPointPMap, typenameboost::property_map< FaceGraph, vertex_point_t >::const_type >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "76",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FD",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::FD",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< FaceGraph >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Id_",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Id_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::conditional_t< OneFaceGraphPerTree::value, FD, std::pair< FD, const FaceGraph * > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "78",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_property_map",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Triangle_property_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangle_from_face_descriptor_map< FaceGraph, VertexPointPMap_ >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_property_map",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Point_property_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "One_point_from_face_descriptor_map< FaceGraph, VertexPointPMap_ >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Id_, Triangle_property_map, Point_property_map, OneFaceGraphPerTree, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "87",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< FaceGraph >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "127",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cstr_shared_data",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::Cstr_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Cstr_shared_data< FaceGraph, Base, Triangle_property_map, Point_property_map, OneFaceGraphPerTree >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "178",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "make_id",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::make_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FD",
+        "argsstring": "(FD fd, const FaceGraph &, Tag_true)",
+        "params": [
+          {
+            "type": "FD",
+            "name": "fd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceGraph &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Tag_true",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "make_id",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::make_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< FD, const FaceGraph * >",
+        "argsstring": "(FD fd, const FaceGraph &fg, Tag_false)",
+        "params": [
+          {
+            "type": "FD",
+            "name": "fd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceGraph &",
+            "name": "fg",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Tag_false",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::construct_shared_data",
+        "brief": "If OneFaceGraphPerTree is CGAL::Tag_true, constructs a Shared_data object from a reference to the polyhedon graph .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "(FaceGraph &graph)",
+        "params": [
+          {
+            "type": "FaceGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "123",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::construct_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cstr_shared_data::Shared_data",
+        "argsstring": "(const FaceGraph &graph)",
+        "params": [
+          {
+            "type": "const FaceGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "182",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::construct_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cstr_shared_data::Shared_data",
+        "argsstring": "(const FaceGraph &graph, const VertexPointPMap_ &vpm)",
+        "params": [
+          {
+            "type": "const FaceGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointPMap_ &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "189",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_face_graph_triangle_primitive",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::AABB_face_graph_triangle_primitive",
+        "brief": "constructs a primitive.",
+        "detailed": "Iterator an input iterator with Id as value type. If VertexPointPMap is the default of the class, an additional constructor is available with vppm set to get(vertex_point, graph) .",
+        "return_type": "",
+        "argsstring": "(Iterator it, const FaceGraph &graph, VertexPointPMap vppm)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointPMap",
+            "name": "vppm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "141",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_face_graph_triangle_primitive",
+        "qualified_name": "CGAL::AABB_face_graph_triangle_primitive::AABB_face_graph_triangle_primitive",
+        "brief": "constructs a primitive.",
+        "detailed": "If VertexPointPMap is the default of the class, an additional constructor is available with vppm set to get(vertex_point, graph) .",
+        "return_type": "",
+        "argsstring": "(face_descriptor fd, const FaceGraph &graph, VertexPointPMap vppm)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "fd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointPMap",
+            "name": "vppm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_face_graph_triangle_primitive.h",
+        "line": "148",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_halfedge_graph_segment_primitive": {
+    "kind": "class",
+    "name": "CGAL::AABB_halfedge_graph_segment_primitive",
+    "brief": "Primitive type for an edge of a polyhedral surface.",
+    "detailed": "It wraps an edge_descriptor into a 3D segment. The class model of HalfedgeGraph from which the primitive is built should not be deleted while the AABB tree holding the primitive is in use. The type of the 3D segment is taken from the kernel of the point type which is the value type of VertexPointPMap (using the Kernel_traits mechanism). The segment type of the primitive ( Datum ) is CGAL::Kernel_traits< boost::property_traits< VertexPointPMap >::value_type >::Kernel::Segment_3 . Is model of AABBPrimitive if OneHalfedgeGraphPerTree is CGAL::Tag_false AABBPrimitiveWithSharedData if OneHalfedgeGraphPerTree is CGAL::Tag_true HalfedgeGraph is a model of the halfedge graph concept. as key type and a CGAL Kernel Point_3 as value type. VertexPointPMap is a property map with boost::graph_traits<HalfedgeGraph>::vertex_descriptor . The default is typename boost::property_map< HalfedgeGraph,vertex_point_t>::const_type . OneHalfedgeGraphPerTree is either CGAL::Tag_true or CGAL::Tag_false . In the former case, we guarantee that all the primitives will be from a common HalfedgeGraph and some data will be factorized so that the size of the primitive is reduced. In the latter case, the primitives can be from different graphs and extra storage is required in the primitives. The default is CGAL::Tag_true . CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABBPrimitive AABB_primitive < Id ,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_face_graph_triangle_primitive <FaceGraph,VertexPointPMap,OneFaceGraphPerTree,CacheDatum> AABB_segment_primitive_3 <Iterator,CacheDatum> boost::graph_traits<Polyhedron>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Point",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< boost::property_map< HalfedgeGraph, vertex_point_t >::const_type >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "121",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Datum",
+        "brief": "Geometric data type.",
+        "detailed": "",
+        "return_type": "Kernel_traits< Point >::Kernel::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "125",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Id",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Id",
+        "brief": "Id type:",
+        "detailed": "boost::graph_traits<HalfedgeGraph>::edge_descriptor if OneHalfedgeGraphPerTree is Tag_true std::pair<boost::graph_traits<HalfedgeGraph>::edge_descriptor, const HalfedgeGraph*> if OneHalfedgeGraphPerTree is Tag_false",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "131",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointPMap_",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::VertexPointPMap_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< VertexPointPMap, typenameboost::property_map< HalfedgeGraph, vertex_point_t >::const_type >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "ED",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::ED",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< HalfedgeGraph >::edge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "91",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Id_",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Id_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::conditional_t< OneHalfedgeGraphPerTree::value, ED, std::pair< ED, const HalfedgeGraph * > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "92",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_property_map",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Segment_property_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Segment_from_edge_descriptor_map< HalfedgeGraph, VertexPointPMap_ >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_property_map",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Point_property_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Source_point_from_edge_descriptor_map< HalfedgeGraph, VertexPointPMap_ >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Id_, Segment_property_map, Point_property_map, OneHalfedgeGraphPerTree, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "101",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "edge_descriptor",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::edge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< HalfedgeGraph >::edge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "141",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cstr_shared_data",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::Cstr_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Cstr_shared_data< HalfedgeGraph, Base, Segment_property_map, Point_property_map, OneHalfedgeGraphPerTree >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "190",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "make_id",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::make_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "ED",
+        "argsstring": "(ED ed, const HalfedgeGraph &, Tag_true)",
+        "params": [
+          {
+            "type": "ED",
+            "name": "ed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const HalfedgeGraph &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Tag_true",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "103",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "make_id",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::make_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< ED, const HalfedgeGraph * >",
+        "argsstring": "(ED ed, const HalfedgeGraph &fg, Tag_false)",
+        "params": [
+          {
+            "type": "ED",
+            "name": "ed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const HalfedgeGraph &",
+            "name": "fg",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Tag_false",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "108",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::construct_shared_data",
+        "brief": "If OneHalfedgeGraphPerTree is CGAL::Tag_true, constructs a Shared_data object from a reference to the halfedge graph.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "(HalfedgeGraph &graph)",
+        "params": [
+          {
+            "type": "HalfedgeGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "137",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::construct_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cstr_shared_data::Shared_data",
+        "argsstring": "(const HalfedgeGraph &graph)",
+        "params": [
+          {
+            "type": "const HalfedgeGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "194",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::construct_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cstr_shared_data::Shared_data",
+        "argsstring": "(const HalfedgeGraph &graph, const VertexPointPMap_ &vpm)",
+        "params": [
+          {
+            "type": "const HalfedgeGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointPMap_ &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "201",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_halfedge_graph_segment_primitive",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::AABB_halfedge_graph_segment_primitive",
+        "brief": "constructs a primitive.",
+        "detailed": "Iterator is an input iterator with Id as value type. This example gives a way to call this constructor using the insert-by-range method of the class AABB_tree <Traits> . If VertexPointPMap is the default of the class, an additional constructor is available with vppm set to boost::get(vertex_point, graph) .",
+        "return_type": "",
+        "argsstring": "(Iterator it, const HalfedgeGraph &graph, VertexPointPMap vppm)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const HalfedgeGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointPMap",
+            "name": "vppm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "155",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_halfedge_graph_segment_primitive",
+        "qualified_name": "CGAL::AABB_halfedge_graph_segment_primitive::AABB_halfedge_graph_segment_primitive",
+        "brief": "constructs a primitive.",
+        "detailed": "If VertexPointPMap is the default of the class, an additional constructor is available with vppm set to boost::get(vertex_point, graph) .",
+        "return_type": "",
+        "argsstring": "(edge_descriptor ed, const HalfedgeGraph &graph, VertexPointPMap vppm)",
+        "params": [
+          {
+            "type": "edge_descriptor",
+            "name": "ed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const HalfedgeGraph &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointPMap",
+            "name": "vppm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_halfedge_graph_segment_primitive.h",
+        "line": "162",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_indexed_triangle_primitive_2": {
+    "kind": "class",
+    "name": "CGAL::AABB_indexed_triangle_primitive_2",
+    "brief": "Primitive type that uses as identifier an iterator with a range of three indices as value_type .",
+    "detailed": "The iterator from which the primitive is built should not be invalided while the AABB tree holding the primitive is in use. Is model of AABBPrimitive GeomTraits is a traits class providing the nested type Point_2 and Triangle_2 . It also provides the functor Construct_triangle_2 that has an operator taking three Point_2 as parameters and returns a Triangle_2 IndexIterator is a model of ForwardIterator with its value type being a RandomAccessRange of size 3 with an index type as value_type , e.g., uint8_t , uint16_t or int. PointRange is a model of RandomAccessRange . Its value type needs to be compatible to PointMap or Point_2 in the default case. CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). PointMap is a model of ReadablePropertyMap with its key type being the value type of PointRange and the value type being a Point_2 . The default is CGAL::Identity_property_map <PointRange::value_type>. AABBPrimitive AABB_primitive <Id,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_segment_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_3 <GeomTraits,Iterator,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_indexed_triangle_primitive_2::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < IndexIterator, internal::Triangle_2_from_index_range_iterator_property_map< GeomTraits, IndexIterator, typename PointRange::iterator, PointMap >, internal::Point_from_indexed_triangle_2_iterator_property_map< GeomTraits, IndexIterator, typename PointRange::iterator, PointMap >, Tag_true, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_indexed_triangle_primitive_2.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_indexed_triangle_primitive_2",
+        "qualified_name": "CGAL::AABB_indexed_triangle_primitive_2::AABB_indexed_triangle_primitive_2",
+        "brief": "constructor from an iterator",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(IndexIterator it, PointRange &)",
+        "params": [
+          {
+            "type": "IndexIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointRange &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_indexed_triangle_primitive_2.h",
+        "line": "122",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_indexed_triangle_primitive_2::construct_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::Shared_data",
+        "argsstring": "(PointRange &range, PointMap pmap=PointMap())",
+        "params": [
+          {
+            "type": "PointRange &",
+            "name": "range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointMap",
+            "name": "pmap",
+            "default": "PointMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_indexed_triangle_primitive_2.h",
+        "line": "125",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_polyline_segment_primitive_2": {
+    "kind": "class",
+    "name": "CGAL::AABB_polyline_segment_primitive_2",
+    "brief": "Primitive type that uses as identifier an iterator with a 2D point as value_type .",
+    "detailed": "The iterator from which the primitive is built should not be invalided while the AABB tree holding the primitive is in use. The Segment_2 is constructed on the fly using the Point_2 the identifier is pointing to as source and the Point_2 the next identifier is pointing to as target. Is model of AABBPrimitive GeomTraits is a traits class providing the nested type Point_2 and Segment_2 . It also provides the functor Construct_segment_2 that has an operator taking two Point_2 and returning a Segment_2 . Iterator is a model of ForwardIterator whose value type is convertible to GeomTraits::Point_2 PointRange is a model of ConstRange whose iterator is a model of ForwardIterator . Its value type needs to be the key type of PointMap . CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). PointMap is a model of ReadablePropertyMap whose key type is the value type of PointRange and whose value type is Point_2 . The default is CGAL::Identity_property_map <PointRange::value_type>. AABBPrimitive AABB_primitive <Id,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_segment_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_segment_primitive_3 <GeomTraits,Iterator,CacheDatum> AABB_halfedge_graph_segment_primitive <HalfedgeGraph,VertexPointPMap,OneHalfedgeGraphPerTree,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Segment_map",
+        "qualified_name": "CGAL::AABB_polyline_segment_primitive_2::Segment_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Segment_2_from_point_iterator_property_map< GeomTraits, Iterator, PointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_polyline_segment_primitive_2.h",
+        "line": "118",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_primitive_map",
+        "qualified_name": "CGAL::AABB_polyline_segment_primitive_2::Point_primitive_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Point_from_iterator_property_map< GeomTraits, Iterator, PointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_polyline_segment_primitive_2.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_polyline_segment_primitive_2::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Iterator, Segment_map, Point_primitive_map, Tag_true, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_polyline_segment_primitive_2.h",
+        "line": "124",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_polyline_segment_primitive_2",
+        "qualified_name": "CGAL::AABB_polyline_segment_primitive_2::AABB_polyline_segment_primitive_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it, PointRange &poly, PointMap pmap=PointMap())",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointRange &",
+            "name": "poly",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointMap",
+            "name": "pmap",
+            "default": "PointMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_polyline_segment_primitive_2.h",
+        "line": "127",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_shared_data",
+        "qualified_name": "CGAL::AABB_polyline_segment_primitive_2::construct_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::Shared_data",
+        "argsstring": "(PointRange &range, PointMap pmap=PointMap())",
+        "params": [
+          {
+            "type": "PointRange &",
+            "name": "range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointMap",
+            "name": "pmap",
+            "default": "PointMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_polyline_segment_primitive_2.h",
+        "line": "132",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_primitive": {
+    "kind": "struct",
+    "name": "CGAL::AABB_primitive",
+    "brief": "Generic primitive type.",
+    "detailed": "The two property maps which are template parameters of the class enable to get the datum and the reference point of the primitive from the identifier. The last template parameter controls whether the primitive class holds a copy of the datum. Is model of AABBPrimitive if ExternalPropertyMaps is CGAL::Tag_false AABBPrimitiveWithSharedData if ExternalPropertyMaps is CGAL::Tag_true ObjectPropertyMap is a model of ReadablePropertyMap with Id as key_type . It must be a model of CopyConstructible , DefaultConstructible , and CopyAssignable . PointPropertyMap is a model of ReadablePropertyMap with Id as key_type . It must be a model of CopyConstructible , DefaultConstructible , and CopyAssignable . ExternalPropertyMaps either CGAL::Tag_true or CGAL::Tag_false . In the former case, the property maps will be stored in the traits class, while in the latter they will be stored in the primitive (which increases the size of each primitive). CacheDatum either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABB_segment_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_segment_primitive_3 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_3 <GeomTraits,Iterator,CacheDatum> AABB_halfedge_graph_segment_primitive <HalfedgeGraph,VertexPointPMap,OneHalfedgeGraphPerTree,CacheDatum> AABB_face_graph_triangle_primitive <FaceGraph,VertexPointPMap,OneFaceGraphPerTree,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "CGAL::AABB_primitive::Datum",
+        "brief": "The datum type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< ObjectPropertyMap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "93",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::AABB_primitive::Point",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "98",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum_reference",
+        "qualified_name": "CGAL::AABB_primitive::Datum_reference",
+        "brief": "The reference datum type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< ObjectPropertyMap >::reference",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "103",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_reference",
+        "qualified_name": "CGAL::AABB_primitive::Point_reference",
+        "brief": "The reference point type.",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::reference",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "108",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Id",
+        "qualified_name": "CGAL::AABB_primitive::Id",
+        "brief": "Id type.",
+        "detailed": "",
+        "return_type": "Id",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "113",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "AABB_primitive",
+        "qualified_name": "CGAL::AABB_primitive::AABB_primitive",
+        "brief": "constructs a primitive and initializes the property maps.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Id id, ObjectPropertyMap o_pmap=ObjectPropertyMap(), PointPropertyMap p_pmap=PointPropertyMap())",
+        "params": [
+          {
+            "type": "Id",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ObjectPropertyMap",
+            "name": "o_pmap",
+            "default": "ObjectPropertyMap()",
+            "brief": ""
+          },
+          {
+            "type": "PointPropertyMap",
+            "name": "p_pmap",
+            "default": "PointPropertyMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_primitive",
+        "qualified_name": "CGAL::AABB_primitive::AABB_primitive",
+        "brief": "constructs a primitive from an iterator with Id as value type and initializes the property maps.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it, ObjectPropertyMap o_pmap=ObjectPropertyMap(), PointPropertyMap p_pmap=PointPropertyMap())",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ObjectPropertyMap",
+            "name": "o_pmap",
+            "default": "ObjectPropertyMap()",
+            "brief": ""
+          },
+          {
+            "type": "PointPropertyMap",
+            "name": "p_pmap",
+            "default": "PointPropertyMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "128",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_primitive_base": {
+    "kind": "struct",
+    "name": "CGAL::AABB_primitive_base",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "CGAL::AABB_primitive_base::Datum",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< ObjectPropertyMap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::AABB_primitive_base::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "34",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum_reference",
+        "qualified_name": "CGAL::AABB_primitive_base::Datum_reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< ObjectPropertyMap >::reference",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "35",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_reference",
+        "qualified_name": "CGAL::AABB_primitive_base::Point_reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::reference",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Id",
+        "qualified_name": "CGAL::AABB_primitive_base::Id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Id_",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_id",
+        "qualified_name": "CGAL::AABB_primitive_base::m_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Id",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_primitive_base",
+        "qualified_name": "CGAL::AABB_primitive_base::AABB_primitive_base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Id id)",
+        "params": [
+          {
+            "type": "Id",
+            "name": "id",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::AABB_primitive_base::id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Id",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_primitive.h",
+        "line": "46",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_segment_primitive_2": {
+    "kind": "class",
+    "name": "CGAL::AABB_segment_primitive_2",
+    "brief": "Primitive type that uses as identifier an iterator with a 2D segment as value_type .",
+    "detailed": "The iterator from which the primitive is built should not be invalided while the AABB tree holding the primitive is in use. Is model of AABBPrimitive GeomTraits is a traits class providing the nested type Point_2 and Segment_2 . It also provides the functor Construct_source_2 that has an operator taking a Segment_2 and returning its source as a type convertible to Point_2 . Iterator is a model of ForwardIterator with its value type convertible to GeomTraits::Segment_2 CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABBPrimitive AABB_primitive <Id,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_segment_primitive_3 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_2 <GeomTraits,Iterator,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_segment_primitive_2::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Iterator, Input_iterator_property_map< Iterator >, internal::Source_of_segment_2_iterator_property_map< GeomTraits, Iterator >, Tag_false, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_segment_primitive_2.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_segment_primitive_2",
+        "qualified_name": "CGAL::AABB_segment_primitive_2::AABB_segment_primitive_2",
+        "brief": "constructor from an iterator",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_segment_primitive_2.h",
+        "line": "92",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_segment_primitive_3": {
+    "kind": "class",
+    "name": "CGAL::AABB_segment_primitive_3",
+    "brief": "Primitive type that uses as identifier an iterator with a 3D segment as value_type .",
+    "detailed": "The iterator from which the primitive is built should not be invalided while the AABB tree holding the primitive is in use. Is model of AABBPrimitive GeomTraits is a traits class providing the nested type Point_3 and Segment_3 . It also provides the functor Construct_source_3 that has an operator taking a Segment_3 and returning its source as a type convertible to Point_3 . Iterator is a model of ForwardIterator with its value type convertible to GeomTraits::Segment_3 CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABBPrimitive AABB_primitive <Id,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_segment_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_3 <GeomTraits,Iterator,CacheDatum> AABB_halfedge_graph_segment_primitive <HalfedgeGraph,VertexPointPMap,OneHalfedgeGraphPerTree,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_segment_primitive_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Iterator, Input_iterator_property_map< Iterator >, internal::Source_of_segment_3_iterator_property_map< GeomTraits, Iterator >, Tag_false, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_segment_primitive_3.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_segment_primitive_3",
+        "qualified_name": "CGAL::AABB_segment_primitive_3::AABB_segment_primitive_3",
+        "brief": "constructor from an iterator",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_segment_primitive_3.h",
+        "line": "93",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_traits_2": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_2",
+    "brief": "This traits class handles any type of 2D geometric primitives provided that the proper intersection tests and constructions are implemented.",
+    "detailed": "It handles points, rays, lines and segments as query types for intersection detection and computations, and it handles points as query type for distance queries. Is model of AABBTraits AABBRayIntersectionTraits GeomTraits must be a model of the concept AABBGeomTraits_2 , and provide the geometric types as well as the intersection tests and computations. AABBPrimitive provide the type of primitives stored in the AABB_tree . It is a model of the concept AABBPrimitive or AABBPrimitiveWithSharedData . BboxMap must be a model of ReadablePropertyMap that has as key type a primitive id, and as value type a Bounding_box . If the type is Default the Datum must have the member function bbox() that returns the bounding box of the primitive. If the argument GeomTraits is a model of the concept AABBRayIntersectionGeomTraits_2 , this class is also a model of AABBRayIntersectionTraits . AABBTraits AABB_tree AABBPrimitive AABBPrimitiveWithSharedData",
+    "members": []
+  },
+  "CGAL::AABB_traits_2::Closest_point": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_2::Closest_point",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_2::Compute_bbox": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_2::Compute_bbox",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_2::Do_intersect": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_2::Do_intersect",
+    "brief": "Function object using GeomTraits::Do_intersect .",
+    "detailed": "In the case the query is a CGAL::AABB_tree , the do_intersect() function of this tree is used.",
+    "members": []
+  },
+  "CGAL::AABB_traits_2::Intersection": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_2::Intersection",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_2::Intersection_and_primitive_id": {
+    "kind": "struct",
+    "name": "CGAL::AABB_traits_2::Intersection_and_primitive_id",
+    "brief": "Intersection_and_primitive_id <Query>::Type::first_type is found according to the result type of GeomTraits::Intersect_2::operator() .",
+    "detailed": "If it is std::optional<T> then it is T , and the result type otherwise.",
+    "members": []
+  },
+  "CGAL::AABB_traits_2::Split_primitives": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_2::Split_primitives",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_3": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_3",
+    "brief": "This traits class handles any type of 3D geometric primitives provided that the proper intersection tests and constructions are implemented.",
+    "detailed": "It handles points, rays, lines and segments as query types for intersection detection and computations, and it handles points as query type for distance queries. Is model of AABBTraits AABBRayIntersectionTraits GeomTraits must be a model of the concept AABBGeomTraits_3 , and provide the geometric types as well as the intersection tests and computations. AABBPrimitive provide the type of primitives stored in the AABB_tree . It is a model of the concept AABBPrimitive or AABBPrimitiveWithSharedData . BboxMap must be a model of ReadablePropertyMap that has as key type a primitive id, and as value type a Bounding_box . If the type is Default the Datum must have the member function bbox() that returns the bounding box of the primitive. If the argument GeomTraits is a model of the concept AABBRayIntersectionGeomTraits_3 , this class is also a model of AABBRayIntersectionTraits . AABBTraits AABB_tree AABBPrimitive AABBPrimitiveWithSharedData",
+    "members": []
+  },
+  "CGAL::AABB_traits_3::Closest_point": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_3::Closest_point",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_3::Compute_bbox": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_3::Compute_bbox",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_3::Do_intersect": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_3::Do_intersect",
+    "brief": "Function object using GeomTraits::Do_intersect .",
+    "detailed": "In the case the query is a CGAL::AABB_tree , the do_intersect() function of this tree is used.",
+    "members": []
+  },
+  "CGAL::AABB_traits_3::Intersection": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_3::Intersection",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_traits_3::Intersection_and_primitive_id": {
+    "kind": "struct",
+    "name": "CGAL::AABB_traits_3::Intersection_and_primitive_id",
+    "brief": "Intersection_and_primitive_id <Query>::Type::first_type is found according to the result type of GeomTraits::Intersect_3::operator() .",
+    "detailed": "If it is std::optional<T> then it is T , and the result type otherwise.",
+    "members": []
+  },
+  "CGAL::AABB_traits_3::Split_primitives": {
+    "kind": "class",
+    "name": "CGAL::AABB_traits_3::Split_primitives",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::AABB_tree": {
+    "kind": "class",
+    "name": "CGAL::AABB_tree",
+    "brief": "Static data structure for efficient intersection and distance computations in 2D and 3D.",
+    "detailed": "It builds a hierarchy of axis-aligned bounding boxes (an AABB tree) from a set of geometric objects, and can receive intersection and distance queries, provided that the corresponding predicates are implemented in the traits class AABBTraits . An instance of the class AABBTraits is internally stored. AABBTraits AABBPrimitive",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::AABB_tree::FT",
+        "brief": "Number type returned by the distance queries.",
+        "detailed": "",
+        "return_type": "AABBTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::AABB_tree::Point",
+        "brief": "Type of point.",
+        "detailed": "",
+        "return_type": "AABBTraits::Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Primitive",
+        "qualified_name": "CGAL::AABB_tree::Primitive",
+        "brief": "Type of input primitive.",
+        "detailed": "",
+        "return_type": "AABBTraits::Primitive",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Primitive_id",
+        "qualified_name": "CGAL::AABB_tree::Primitive_id",
+        "brief": "Identifier for a primitive in the tree.",
+        "detailed": "",
+        "return_type": "Primitive::Id",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::AABB_tree::size_type",
+        "brief": "Unsigned integral size type.",
+        "detailed": "",
+        "return_type": "Primitives::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "85",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Bounding_box",
+        "qualified_name": "CGAL::AABB_tree::Bounding_box",
+        "brief": "Type of bounding box.",
+        "detailed": "",
+        "return_type": "AABBTraits::Bounding_box",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_and_primitive_id",
+        "qualified_name": "CGAL::AABB_tree::Point_and_primitive_id",
+        "brief": "Point and Primitive Id type.",
+        "detailed": "",
+        "return_type": "AABBTraits::Point_and_primitive_id",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "89",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Object_and_primitive_id",
+        "qualified_name": "CGAL::AABB_tree::Object_and_primitive_id",
+        "brief": "",
+        "detailed": "Deprecated",
+        "return_type": "AABBTraits::Object_and_primitive_id",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "91",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersection_and_primitive_id",
+        "qualified_name": "CGAL::AABB_tree::Intersection_and_primitive_id",
+        "brief": "An alias to AABBTraits::Intersection_and_primitive_id <Query> .",
+        "detailed": "",
+        "return_type": "AABBTraits::Intersection_and_primitive_id < Query >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "98",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::AABB_tree",
+        "brief": "constructs an empty tree, and initializes the internally stored traits class using traits .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const AABBTraits &traits=AABBTraits())",
+        "params": [
+          {
+            "type": "const AABBTraits &",
+            "name": "traits",
+            "default": "AABBTraits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "115",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::AABB_tree",
+        "brief": "move constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Self &&) noexcept",
+        "params": [
+          {
+            "type": "Self &&",
+            "name": "tree",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "118",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::AABB_tree::operator=",
+        "brief": "assignment operator",
+        "detailed": "",
+        "return_type": "Self &",
+        "argsstring": "(Self &&) noexcept",
+        "params": [
+          {
+            "type": "Self &&",
+            "name": "tree",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "120",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::AABB_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Self &)=delete",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "123",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::AABB_tree::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Self &",
+        "argsstring": "(const Self &)=delete",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "124",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::AABB_tree",
+        "brief": "builds the data structure from a sequence of primitives.",
+        "detailed": "first iterator over first primitive to insert beyond past-the-end iterator constructs an empty tree followed by a call to insert(first,last,t...) . The tree stays empty if the memory allocation is not successful.",
+        "return_type": "",
+        "argsstring": "(InputIterator first, InputIterator beyond, T &&...)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&",
+            "name": "...",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "135",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "build",
+        "qualified_name": "CGAL::AABB_tree::build",
+        "brief": "triggers the (re)construction of the internal tree structure.",
+        "detailed": "The internal tree structure is automatically invalidated by the insertion of any primitives after one or more calls to insert() . This procedure is called implicitly at the first call to a query member function. An explicit call to build() must be made to ensure that the next call to a query function will not trigger the construction of the data structure. A call to AABBTraits::set_shared_data(t...) This procedure has a complexity of $O(n log(n))$ , where $n$ is the number of primitives of the tree.",
+        "return_type": "void",
+        "argsstring": "(T &&...)",
+        "params": [
+          {
+            "type": "T &&",
+            "name": "...",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "148",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "rebuild",
+        "qualified_name": "CGAL::AABB_tree::rebuild",
+        "brief": "is equivalent to calling clear() , insert(first,last,t...) ,",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(ConstPrimitiveIterator first, ConstPrimitiveIterator beyond, T &&...)",
+        "params": [
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&",
+            "name": "...",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "167",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::AABB_tree::insert",
+        "brief": "adds a sequence of primitives to the set of primitives of the AABB tree.",
+        "detailed": "InputIterator is any iterator and the parameter pack T contains any types such that Primitive has a constructor with the following signature: Primitive (InputIterator, T...) . If Primitive is a model of the concept AABBPrimitiveWithSharedData , a call to AABBTraits::set_shared_data(t...) is made using the internally stored traits.",
+        "return_type": "void",
+        "argsstring": "(InputIterator first, InputIterator beyond, T &&...)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&",
+            "name": "...",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "177",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::AABB_tree::insert",
+        "brief": "adds a primitive to the set of primitives of the tree.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Primitive &p)",
+        "params": [
+          {
+            "type": "const Primitive &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "180",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "~AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::~AABB_tree",
+        "brief": "clears and destroys the tree.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "183",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "traits",
+        "qualified_name": "CGAL::AABB_tree::traits",
+        "brief": "returns a const reference to the internally stored traits class.",
+        "detailed": "",
+        "return_type": "const AABBTraits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "188",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::AABB_tree::clear",
+        "brief": "clears the tree and the search tree if it was constructed, and switches on the usage of the search tree to find the hint for the distance queries",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "194",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "bbox",
+        "qualified_name": "CGAL::AABB_tree::bbox",
+        "brief": "returns the axis-aligned bounding box of the whole tree.",
+        "detailed": "",
+        "return_type": "const Bounding_box",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "204",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "CGAL::AABB_tree::size",
+        "brief": "returns the number of primitives in the tree.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "213",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "empty",
+        "qualified_name": "CGAL::AABB_tree::empty",
+        "brief": "returns true , iff the tree contains no primitive.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "216",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect",
+        "qualified_name": "CGAL::AABB_tree::do_intersect",
+        "brief": "returns true , iff the query intersects at least one of the input primitives.",
+        "detailed": "Query must be a type for which Do_intersect operators are defined in the traits class AABBTraits .",
+        "return_type": "bool",
+        "argsstring": "(const Query &query) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "244",
+        "section": "Intersection Tests"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_intersected_primitives",
+        "qualified_name": "CGAL::AABB_tree::number_of_intersected_primitives",
+        "brief": "returns the number of primitives intersected by the query.",
+        "detailed": "Query must be a type for which Do_intersect operators are defined in the traits class AABBTraits .",
+        "return_type": "size_type",
+        "argsstring": "(const Query &query) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "251",
+        "section": "Intersection Tests"
+      },
+      {
+        "kind": "function",
+        "name": "all_intersected_primitives",
+        "qualified_name": "CGAL::AABB_tree::all_intersected_primitives",
+        "brief": "puts in out the ids of all intersected primitives.",
+        "detailed": "This function does not compute the intersection points and is hence faster than the function all_intersections() function below. Query must be a type for which Do_intersect operators are defined in the traits class AABBTraits .",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Query &query, OutputIterator out) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "260",
+        "section": "Intersection Tests"
+      },
+      {
+        "kind": "function",
+        "name": "any_intersected_primitive",
+        "qualified_name": "CGAL::AABB_tree::any_intersected_primitive",
+        "brief": "returns the id of the intersected primitive that is encountered first in the tree traversal, iff the query intersects at least one of the input primitives.",
+        "detailed": "No particular order is guaranteed over the tree traversal, such that, e.g, the primitive returned is not necessarily the closest from the source point of a ray query. Query must be a type for which Do_intersect operators are defined in the traits class AABBTraits .",
+        "return_type": "std::optional< Primitive_id >",
+        "argsstring": "(const Query &query) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "272",
+        "section": "Intersection Tests"
+      },
+      {
+        "kind": "function",
+        "name": "all_intersections",
+        "qualified_name": "CGAL::AABB_tree::all_intersections",
+        "brief": "puts in out all intersections, as objects of Intersection_and_primitive_id <Query>::Type , between the query and the input data to the iterator.",
+        "detailed": "Query must be a type for which Do_intersect and Intersection operators are defined in the traits class AABBTraits .",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Query &query, OutputIterator out) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "285",
+        "section": "Intersections"
+      },
+      {
+        "kind": "function",
+        "name": "any_intersection",
+        "qualified_name": "CGAL::AABB_tree::any_intersection",
+        "brief": "returns if any the intersection that is encountered first in the tree traversal.",
+        "detailed": "No particular order is guaranteed over the tree traversal, e.g, the primitive returned is not necessarily the closest from the query. Query must be a type for which Do_intersect and Intersection operators are defined in the traits class AABBTraits .",
+        "return_type": "std::optional< typename Intersection_and_primitive_id < Query >::Type >",
+        "argsstring": "(const Query &query) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "296",
+        "section": "Intersections"
+      },
+      {
+        "kind": "function",
+        "name": "first_intersection",
+        "qualified_name": "CGAL::AABB_tree::first_intersection",
+        "brief": "returns the intersection and primitive id closest to the source point of the ray query.",
+        "detailed": "Ray must be the same as AABBTraits::Ray and do_intersect predicates and intersections for it must be defined. Skip a functor with an operator bool operator()(const Primitive_id & id) const that returns true in order to skip the primitive. Defaults to a functor that always returns false . skip might be given some primitives that are not intersected by query because the intersection test is done after the skip test. Also note that the order the primitives are given to skip is not necessarily the intersection order with query . AABBTraits must be a model of AABBRayIntersectionTraits to call this member function.",
+        "return_type": "std::optional< typename Intersection_and_primitive_id < Ray >::Type >",
+        "argsstring": "(const Ray &query, const SkipFunctor &skip) const",
+        "params": [
+          {
+            "type": "const Ray &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const SkipFunctor &",
+            "name": "skip",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "320",
+        "section": "Intersections"
+      },
+      {
+        "kind": "function",
+        "name": "first_intersected_primitive",
+        "qualified_name": "CGAL::AABB_tree::first_intersected_primitive",
+        "brief": "returns the primitive id closest to the source point of the ray query.",
+        "detailed": "Ray must be the same as AABBTraits::Ray and do_intersect predicates and intersections for it must be defined. Skip a functor with an operator bool operator()(const Primitive_id & id) const that returns true in order to skip the primitive. Defaults to a functor that always returns false . AABBTraits must be a model of AABBRayIntersectionTraits to call this member function.",
+        "return_type": "std::optional< Primitive_id >",
+        "argsstring": "(const Ray &query, const SkipFunctor &skip) const",
+        "params": [
+          {
+            "type": "const Ray &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const SkipFunctor &",
+            "name": "skip",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "345",
+        "section": "Intersections"
+      },
+      {
+        "kind": "function",
+        "name": "squared_distance",
+        "qualified_name": "CGAL::AABB_tree::squared_distance",
+        "brief": "returns the minimum squared distance between the query point and all input primitives.",
+        "detailed": "!empty()",
+        "return_type": "FT",
+        "argsstring": "(const Point &query) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "363",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "closest_point",
+        "qualified_name": "CGAL::AABB_tree::closest_point",
+        "brief": "returns the point in the union of all input primitives which is closest to the query.",
+        "detailed": "In case there are several closest points, one arbitrarily chosen closest point is returned. !empty()",
+        "return_type": "Point",
+        "argsstring": "(const Point &query) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "370",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "closest_point_and_primitive",
+        "qualified_name": "CGAL::AABB_tree::closest_point_and_primitive",
+        "brief": "returns a Point_and_primitive_id which realizes the smallest distance between the query point and all input primitives.",
+        "detailed": "!empty()",
+        "return_type": "Point_and_primitive_id",
+        "argsstring": "(const Point &query) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "377",
+        "section": "Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "accelerate_distance_queries",
+        "qualified_name": "CGAL::AABB_tree::accelerate_distance_queries",
+        "brief": "constructs the internal search tree from a point set taken on the internal primitives returns true iff successful memory allocation",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "442",
+        "section": "Accelerating the Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "do_not_accelerate_distance_queries",
+        "qualified_name": "CGAL::AABB_tree::do_not_accelerate_distance_queries",
+        "brief": "turns off the usage of the internal search tree and clears it if it was already constructed.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "444",
+        "section": "Accelerating the Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "accelerate_distance_queries",
+        "qualified_name": "CGAL::AABB_tree::accelerate_distance_queries",
+        "brief": "constructs an internal KD-tree containing the specified point set, to be used as the set of potential hints for accelerating the distance queries.",
+        "detailed": "Note that the search tree built in this function will not be invalidated by the insertion of a new primitive, and an explicit call to accelerate_distance_queries() is needed to update the search tree. ConstPointIterator is an iterator with value type Point_and_primitive_id .",
+        "return_type": "bool",
+        "argsstring": "(ConstPointIterator first, ConstPointIterator beyond)",
+        "params": [
+          {
+            "type": "ConstPointIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPointIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "455",
+        "section": "Accelerating the Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "squared_distance",
+        "qualified_name": "CGAL::AABB_tree::squared_distance",
+        "brief": "returns the minimum squared distance between the query point and all input primitives.",
+        "detailed": "The internal KD-tree is not used. !empty()",
+        "return_type": "FT",
+        "argsstring": "(const Point &query, const Point &hint) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "hint",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "464",
+        "section": "Accelerating the Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "closest_point",
+        "qualified_name": "CGAL::AABB_tree::closest_point",
+        "brief": "returns the point in the union of all input primitives which is closest to the query.",
+        "detailed": "In case there are several closest points, one arbitrarily chosen closest point is returned. The internal KD-tree is not used. !empty()",
+        "return_type": "Point",
+        "argsstring": "(const Point &query, const Point &hint) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "hint",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "471",
+        "section": "Accelerating the Distance Queries"
+      },
+      {
+        "kind": "function",
+        "name": "closest_point_and_primitive",
+        "qualified_name": "CGAL::AABB_tree::closest_point_and_primitive",
+        "brief": "returns a Point_and_primitive_id which realizes the smallest distance between the query point and all input primitives.",
+        "detailed": "The internal KD-tree is not used. !empty()",
+        "return_type": "Point_and_primitive_id",
+        "argsstring": "(const Point &query, const Point_and_primitive_id &hint) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_and_primitive_id &",
+            "name": "hint",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "477",
+        "section": "Accelerating the Distance Queries"
+      },
+      {
+        "kind": "typedef",
+        "name": "Search_tree",
+        "qualified_name": "CGAL::AABB_tree::Search_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_search_tree< AABBTraits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Primitives",
+        "qualified_name": "CGAL::AABB_tree::Primitives",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< typename AABBTraits::Primitive >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Helper",
+        "qualified_name": "CGAL::AABB_tree::Helper",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Primitive_helper< AABBTraits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::AABB_tree::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_tree < AABBTraits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Node",
+        "qualified_name": "CGAL::AABB_tree::Node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_node< AABBTraits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "559",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "AABB_traits",
+        "qualified_name": "CGAL::AABB_tree::AABB_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABBTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "AABB_ray_intersection",
+        "qualified_name": "CGAL::AABB_tree::AABB_ray_intersection",
+        "brief": "",
+        "detailed": "",
+        "return_type": "class",
+        "argsstring": "",
+        "params": [
+          {
+            "type": "AABB_ray_intersection",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "483",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::AABB_tree::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABBTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "627",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_primitives",
+        "qualified_name": "CGAL::AABB_tree::m_primitives",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Primitives",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "629",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_nodes",
+        "qualified_name": "CGAL::AABB_tree::m_nodes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Node >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "631",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_p_search_tree",
+        "qualified_name": "CGAL::AABB_tree::m_p_search_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::unique_ptr< const Search_tree >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "666",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_use_default_search_tree",
+        "qualified_name": "CGAL::AABB_tree::m_use_default_search_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "667",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_need_build",
+        "qualified_name": "CGAL::AABB_tree::m_need_build",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "672",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_search_tree_constructed",
+        "qualified_name": "CGAL::AABB_tree::m_search_tree_constructed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "673",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "traversal",
+        "qualified_name": "CGAL::AABB_tree::traversal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Query &query, Traversal_traits &traits) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Traversal_traits &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "514",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "traversal_with_priority",
+        "qualified_name": "CGAL::AABB_tree::traversal_with_priority",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Query &query, Traversal_traits &traits) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Traversal_traits &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "529",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "traversal_with_priority_and_group_traversal",
+        "qualified_name": "CGAL::AABB_tree::traversal_with_priority_and_group_traversal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Query &query, Traversal_traits &traits, const std::size_t group_traversal_bound) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Traversal_traits &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "group_traversal_bound",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "544",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "any_reference_point_and_id",
+        "qualified_name": "CGAL::AABB_tree::any_reference_point_and_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_and_primitive_id",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "582",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "best_hint",
+        "qualified_name": "CGAL::AABB_tree::best_hint",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_and_primitive_id",
+        "argsstring": "(const Point &query) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "591",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "datum",
+        "qualified_name": "CGAL::AABB_tree::datum",
+        "brief": "Returns the datum (geometric object) represented p .",
+        "detailed": "",
+        "return_type": "AABBTraits::Primitive::Datum_reference",
+        "argsstring": "(Primitive &p) const",
+        "params": [
+          {
+            "type": "Primitive &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "620",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "root_node",
+        "qualified_name": "CGAL::AABB_tree::root_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Node *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "636",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "new_node",
+        "qualified_name": "CGAL::AABB_tree::new_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Node &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "654",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::AABB_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Tr &traits)",
+        "params": [
+          {
+            "type": "const Tr &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "682",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_tree",
+        "qualified_name": "CGAL::AABB_tree::AABB_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(ConstPrimitiveIterator first, ConstPrimitiveIterator beyond, T &&... t)",
+        "params": [
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "716",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::AABB_tree::insert",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(ConstPrimitiveIterator first, ConstPrimitiveIterator beyond, T &&... t)",
+        "params": [
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "730",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "rebuild",
+        "qualified_name": "CGAL::AABB_tree::rebuild",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(ConstPrimitiveIterator first, ConstPrimitiveIterator beyond, T &&... t)",
+        "params": [
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "752",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build",
+        "qualified_name": "CGAL::AABB_tree::build",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(T &&... t)",
+        "params": [
+          {
+            "type": "T &&...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "767",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build",
+        "qualified_name": "CGAL::AABB_tree::build",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "821",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "any_intersection",
+        "qualified_name": "CGAL::AABB_tree::any_intersection",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< typename AABB_tree < Tr >::template Intersection_and_primitive_id < Query >::Type >",
+        "argsstring": "(const Query &query) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "966",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "any_intersected_primitive",
+        "qualified_name": "CGAL::AABB_tree::any_intersected_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< typename AABB_tree < Tr > ::Primitive_id >",
+        "argsstring": "(const Query &query) const",
+        "params": [
+          {
+            "type": "const Query &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "978",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_primitive_data_impl",
+        "qualified_name": "CGAL::AABB_tree::set_primitive_data_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CGAL::Boolean_tag< false >, const T &...)",
+        "params": [
+          {
+            "type": "CGAL::Boolean_tag< false >",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const T &",
+            "name": "...",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "221",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_primitive_data_impl",
+        "qualified_name": "CGAL::AABB_tree::set_primitive_data_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CGAL::Boolean_tag< true >, T &&... t)",
+        "params": [
+          {
+            "type": "CGAL::Boolean_tag< true >",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T &&...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "223",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_shared_data",
+        "qualified_name": "CGAL::AABB_tree::set_shared_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(T &&...t)",
+        "params": [
+          {
+            "type": "T &&...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "227",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build_kd_tree",
+        "qualified_name": "CGAL::AABB_tree::build_kd_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "231",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build_kd_tree",
+        "qualified_name": "CGAL::AABB_tree::build_kd_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(ConstPointIterator first, ConstPointIterator beyond)",
+        "params": [
+          {
+            "type": "ConstPointIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPointIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "233",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_nodes",
+        "qualified_name": "CGAL::AABB_tree::clear_nodes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "486",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_search_tree",
+        "qualified_name": "CGAL::AABB_tree::clear_search_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "492",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "expand",
+        "qualified_name": "CGAL::AABB_tree::expand",
+        "brief": "Builds the tree by recursive expansion.",
+        "detailed": "node the root node of the subtree to generate first the first primitive to insert beyond the last primitive to insert range the number of primitive of the range compute_bbox a functor split_primitives a functor [first,beyond[ is the range of primitives to be added to the tree.",
+        "return_type": "void",
+        "argsstring": "(Node &node, ConstPrimitiveIterator first, ConstPrimitiveIterator beyond, const std::size_t range, const ComputeBbox &compute_bbox, const SplitPrimitives &split_primitives)",
+        "params": [
+          {
+            "type": "Node &",
+            "name": "node",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ConstPrimitiveIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ComputeBbox &",
+            "name": "compute_bbox",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const SplitPrimitives &",
+            "name": "split_primitives",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_tree.h",
+        "line": "573",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "singleton_data",
+        "qualified_name": "CGAL::AABB_tree::singleton_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Primitive &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_tree.h",
+        "line": "660",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_triangle_primitive_2": {
+    "kind": "class",
+    "name": "CGAL::AABB_triangle_primitive_2",
+    "brief": "Primitive type that uses as identifier an iterator with a 2D triangle as value_type .",
+    "detailed": "The iterator from which the primitive is built should not be invalided while the AABB tree holding the primitive is in use. Is model of AABBPrimitive GeomTraits is a traits class providing the nested type Point_2 and Triangle_2 . It also provides the functor Construct_vertex_2 that has an operator taking a Triangle_2 and an integer as parameters and returning a triangle point as a type convertible to Point_2 . Iterator is a model of ForwardIterator with its value type convertible to GeomTraits::Triangle_2 CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABBPrimitive AABB_primitive <Id,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_segment_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_3 <GeomTraits,Iterator,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_triangle_primitive_2::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Iterator, Input_iterator_property_map< Iterator >, internal::Point_from_triangle_2_iterator_property_map< GeomTraits, Iterator >, Tag_false, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangle_primitive_2.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangle_primitive_2",
+        "qualified_name": "CGAL::AABB_triangle_primitive_2::AABB_triangle_primitive_2",
+        "brief": "constructor from an iterator",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangle_primitive_2.h",
+        "line": "93",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_triangle_primitive_3": {
+    "kind": "class",
+    "name": "CGAL::AABB_triangle_primitive_3",
+    "brief": "Primitive type that uses as identifier an iterator with a 3D triangle as value_type .",
+    "detailed": "The iterator from which the primitive is built should not be invalided while the AABB tree holding the primitive is in use. Is model of AABBPrimitive GeomTraits is a traits class providing the nested type Point_3 and Triangle_3 . It also provides the functor Construct_vertex_3 that has an operator taking a Triangle_3 and an integer as parameters and returning a triangle point as a type convertible to Point_3 . Iterator is a model of ForwardIterator with its value type convertible to GeomTraits::Triangle_3 CacheDatum is either CGAL::Tag_true or CGAL::Tag_false . In the former case, the datum is stored in the primitive, while in the latter it is constructed on the fly to reduce the memory footprint. The default is CGAL::Tag_false (datum is not stored). AABBPrimitive AABB_primitive <Id,ObjectPropertyMap,PointPropertyMapPolyhedron,ExternalPropertyMaps,CacheDatum> AABB_segment_primitive_3 <GeomTraits,Iterator,CacheDatum> AABB_triangle_primitive_2 <GeomTraits,Iterator,CacheDatum> AABB_face_graph_triangle_primitive <FaceGraph,VertexPointPMap,OneFaceGraphPerTree,CacheDatum>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_triangle_primitive_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Iterator, Input_iterator_property_map< Iterator >, internal::Point_from_triangle_3_iterator_property_map< GeomTraits, Iterator >, Tag_false, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangle_primitive_3.h",
+        "line": "91",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangle_primitive_3",
+        "qualified_name": "CGAL::AABB_triangle_primitive_3::AABB_triangle_primitive_3",
+        "brief": "constructor from an iterator",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangle_primitive_3.h",
+        "line": "94",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_triangulation_3_cell_primitive": {
+    "kind": "class",
+    "name": "CGAL::AABB_triangulation_3_cell_primitive",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::AABB_triangulation_3_cell_primitive::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_primitive < Handle, internal::Tet_from_cell_iterator_property_map< GeomTraits, Handle >, internal::Point_from_cell_iterator_property_map< GeomTraits, Handle >, Tag_false, CacheDatum >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_cell_primitive.h",
+        "line": "92",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangulation_3_cell_primitive",
+        "qualified_name": "CGAL::AABB_triangulation_3_cell_primitive::AABB_triangulation_3_cell_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Handle h)",
+        "params": [
+          {
+            "type": "Handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangulation_3_cell_primitive.h",
+        "line": "94",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AABB_triangulation_3_triangle_primitive": {
+    "kind": "class",
+    "name": "CGAL::AABB_triangulation_3_triangle_primitive",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Id",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::Id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Facet",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Datum",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::Datum",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "AABB_triangulation_3_triangle_primitive< GeomTraits, Tr >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_facet",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::m_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Id",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "106",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangulation_3_triangle_primitive",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::AABB_triangulation_3_triangle_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangulation_3_triangle_primitive",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::AABB_triangulation_3_triangle_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const AABB_triangulation_3_triangle_primitive &primitive)",
+        "params": [
+          {
+            "type": "const AABB_triangulation_3_triangle_primitive &",
+            "name": "primitive",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangulation_3_triangle_primitive",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::AABB_triangulation_3_triangle_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Id &handle)",
+        "params": [
+          {
+            "type": "const Id &",
+            "name": "handle",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangulation_3_triangle_primitive",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::AABB_triangulation_3_triangle_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Id *ptr)",
+        "params": [
+          {
+            "type": "const Id *",
+            "name": "ptr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "AABB_triangulation_3_triangle_primitive",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::AABB_triangulation_3_triangle_primitive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Iterator it, std::enable_if_t< std::is_same< Id, typename Iterator::value_type >::value > *=0)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t< std::is_same< Id, typename Iterator::value_type >::value > *",
+            "name": "",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "datum",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::datum",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Datum",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "79",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "reference_point",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::reference_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "93",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Id &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "101",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::AABB_triangulation_3_triangle_primitive::id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Id &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/AABB_triangulation_3_triangle_primitive.h",
+        "line": "102",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

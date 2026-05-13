@@ -1,0 +1,3451 @@
+{
+  "ApolloniusGraphDataStructure_2": {
+    "kind": "class",
+    "name": "ApolloniusGraphDataStructure_2",
+    "brief": "The concept ApolloniusGraphDataStructure_2 refines the concept TriangulationDataStructure_2 . In addition it provides two methods for the insertion and removal of a degree 2 vertex in the data structure. The insertion method adds a new vertex to the specified edge, thus creating two new edges. Moreover, it creates two new faces that have the two newly created edges in common (see figure below). The removal method performs the reverse operation.",
+    "detailed": "Insertion and removal of degree 2 vertices. Left to right: The edge (f,i) is replaced by two edges by means of inserting a vertex v on the edge. The faces $ f_1$ and $ f_2$ are created. Right to left: the faces $ f_1$ and $ f_2$ are destroyed. The vertex v is deleted and its two adjacent edges are merged. We only describe the additional requirements with respect to the TriangulationDataStructure_2 concept. Refines TriangulationDataStructure_2 Has models CGAL::Triangulation_data_structure_2<Vb,Fb> TriangulationDataStructure_2 ApolloniusGraphVertexBase_2 TriangulationFaceBase_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "insert_degree_2",
+        "qualified_name": "ApolloniusGraphDataStructure_2::insert_degree_2",
+        "brief": "inserts a degree two vertex and two faces adjacent to it that have two common edges.",
+        "detailed": "The edge defined by the face handle f and the integer i is duplicated. It returns a handle to the vertex created.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Face_handle f, int i)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphDataStructure_2.h",
+        "line": "52",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "remove_degree_2",
+        "qualified_name": "ApolloniusGraphDataStructure_2::remove_degree_2",
+        "brief": "Removes a degree 2 vertex and the two faces adjacent to it.",
+        "detailed": "The two edges of the star of v that are not incident to it are collapsed. The degree of v must be equal to 2.",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphDataStructure_2.h",
+        "line": "65",
+        "section": "Removal"
+      }
+    ]
+  },
+  "ApolloniusGraphHierarchyVertexBase_2": {
+    "kind": "class",
+    "name": "ApolloniusGraphHierarchyVertexBase_2",
+    "brief": "The vertex of an Apollonius graph included in an Apollonius graph hierarchy has to provide some pointers to the corresponding vertices in the graphs of the next and preceding levels. Therefore, the concept ApolloniusGraphHierarchyVertexBase_2 refines the concept ApolloniusGraphVertexBase_2 , by adding two vertex handles to the corresponding vertices for the next and previous level graphs.",
+    "detailed": "Refines ApolloniusGraphVertexBase_2 Types ApolloniusGraphHierarchyVertexBase_2 does not introduce any types in addition to those of ApolloniusGraphVertexBase_2 . Has models CGAL::Apollonius_graph_hierarchy_vertex_base_2 < CGAL::Apollonius_graph_vertex_base_2 <Gt,StoreHidden> > ApolloniusGraphDataStructure_2 CGAL::Apollonius_graph_hierarchy_2 <Gt,Agds> CGAL::Triangulation_data_structure_2<Vb,Fb>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphHierarchyVertexBase_2",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::ApolloniusGraphHierarchyVertexBase_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "39",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphHierarchyVertexBase_2",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::ApolloniusGraphHierarchyVertexBase_2",
+        "brief": "Constructs a vertex associated with the site s and embedded at the center of s .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Site_2 s).",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "45",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphHierarchyVertexBase_2",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::ApolloniusGraphHierarchyVertexBase_2",
+        "brief": "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to face f .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Site_2 s, Face_handle f).",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "52",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "up",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::up",
+        "brief": "Returns a handle to the corresponding vertex of the next level Apollonius graph.",
+        "detailed": "If such a vertex does not exist Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "64",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "down",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::down",
+        "brief": "Returns a handle to the corresponding vertex of the previous level Apollonius graph.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "70",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_up",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::set_up",
+        "brief": "Sets the handle for the vertex of the next level Apollonius graph.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle u)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "76",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_down",
+        "qualified_name": "ApolloniusGraphHierarchyVertexBase_2::set_down",
+        "brief": "Sets the handle for the vertex of the previous level Apollonius graph;.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle d)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphHierarchyVertexBase_2.h",
+        "line": "82",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ApolloniusGraphTraits_2": {
+    "kind": "class",
+    "name": "ApolloniusGraphTraits_2",
+    "brief": "",
+    "detailed": "Refines TriangulationTraits_2 The concept ApolloniusGraphTraits_2 provides the traits requirements for the Apollonius_graph_2 class. In particular, it provides a type Site_2 , which must be a model of the concept ApolloniusSite_2 . It also provides constructions for sites and several function object types for the predicates. Has models CGAL::Apollonius_graph_traits_2 <K,Method_tag> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM> CGAL::Apollonius_graph_2 <Gt,Agds> CGAL::Apollonius_graph_traits_2 <K,Method_tag> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Point_2",
+        "brief": "A type for a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Site_2",
+        "brief": "A type for an Apollonius site.",
+        "detailed": "Must be a model of the concept ApolloniusSite_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Line_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Line_2",
+        "brief": "A type for a line.",
+        "detailed": "Only required if access to the dual of the Apollonius graph is required or if the primal or dual diagram are inserted in a stream.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ray_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Ray_2",
+        "brief": "A type for a ray.",
+        "detailed": "Only required if access to the dual of the Apollonius graph is required or if the primal or dual diagram are inserted in a stream.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Segment_2",
+        "brief": "A type for a segment.",
+        "detailed": "Only required if access to the dual of the Apollonius graph is required or if the primal or dual diagram are inserted in a stream.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Object_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Object_2",
+        "brief": "A type representing different types of objects in two dimensions, namely: Point_2 , Site_2 , Line_2 , Ray_2 and Segment_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "69",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "ApolloniusGraphTraits_2::FT",
+        "brief": "A type for the field number type of sites.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "ApolloniusGraphTraits_2::RT",
+        "brief": "A type for the ring number type of sites.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "79",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Assign_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Assign_2",
+        "brief": "Must provide template <class T> bool operator() ( T& t, Object_2 o) which assigns o to t if o was constructed from an object of type T .",
+        "detailed": "Returns true , if the assignment was possible.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_object_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Construct_object_2",
+        "brief": "Must provide template <class T> Object_2 operator()( T t) that constructs an object of type Object_2 that contains t and returns it.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "94",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_Apollonius_vertex_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Construct_Apollonius_vertex_2",
+        "brief": "A constructor for a point of the Apollonius diagram equidistant from three sites.",
+        "detailed": "Must provide Point_2 operator()(Site_2 s1, Site_2 s2, Site_2 s3) , which constructs a point equidistant from the sites s1 , s2 and s3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "105",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_Apollonius_site_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Construct_Apollonius_site_2",
+        "brief": "A constructor for a dual Apollonius site (a site whose center is a vertex of the Apollonius diagram and its weight is the common distance of its center from the three defining sites).",
+        "detailed": "Must provide Site_2 operator()(Site_2 s1,\nSite_2 s2, Site_2 s3) , which constructs a dual site whose center $ c$ is equidistant from s1 , s2 and s3 , and its weight is equal to the (signed) distance of $ c$ from s1 (or s2 or s3 ). Must also provide Line_2 operator()(Site_2 s1, Site_2 s2) , which constructs a line bitangent to s1 and s2 . This line is the dual site of s1 , s2 and the site at infinity; it can be viewed as a dual Apollonius site whose center is at infinity and its weight is infinite.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "125",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_x_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Compare_x_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide Comparison_result operator()(Site_2 s1,\nSite_2 s2) , which compares the $ x$ -coordinates of the centers of s1 and s2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "133",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_y_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Compare_y_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide Comparison_result operator()(Site_2 s1,\nSite_2 s2) , which compares the $ y$ -coordinates of the centers of s1 and s2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "141",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_weight_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Compare_weight_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide Comparison_result operator()(Site_2 s1,\nSite_2 s2) , which compares the weights of s1 and s2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "149",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Orientation_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide Orientation operator()(Site_2 s1,\nSite_2 s2, Site_2 s3) , which performs the usual orientation test for the centers of the three sites s1 , s2 and s3 . Must also provide Orientation operator()(Site_2 s1, Site_2 s2,\nSite_2 s3, Site_2 p1, Site_2 p2) , which performs the usual orientation test for the Apollonius vertex of s1 , s2 , s3 and the centers of p1 and p2 . the Apollonius vertex of s1 , s2 and s3 must exist.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "165",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_hidden_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Is_hidden_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide bool operator()(Site_2 s1,\nSite_2 s2) , which returns true if the circle corresponding to s2 is contained in the closure of the disk corresponding to s1 , false otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "174",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Oriented_side_of_bisector_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Oriented_side_of_bisector_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide Oriented_side operator()(Site_2 s1,\nSite_2 s2, Point_2 p) , which returns the oriented side of the bisector of s1 and s2 that contains p . Returns ON_POSITIVE_SIDE if p lies in the halfspace of s1 (i.e., p is closer to s1 than s2 ); returns ON_NEGATIVE_SIDE if p lies in the halfspace of s2 ; returns ON_ORIENTED_BOUNDARY if p lies on the bisector of s1 and s2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "187",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_conflict_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Vertex_conflict_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide Sign operator()(Site_2 s1, Site_2\ns2, Site_2 s3, Site_2 q) , which returns the sign of the distance of q from the dual Apollonius site of s1 , s2 , s3 . the dual Apollonius site of s1 , s2 , s3 must exist. Must also provide Sign operator()(Site_2 s1,\nSite_2 s2, Site_2 q) , which returns the sign of the distance of q from the bitangent line of s1 , s2 (a degenerate dual Apollonius site, with its center at infinity).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "202",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_edge_interior_conflict_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Finite_edge_interior_conflict_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide bool operator()(Site_2 s1, Site_2 s2, Site_2 s3, Site_2 s4, Site_2 q, bool b) . The sites s1 , s2 , s3 and s4 define an Apollonius edge that lies on the bisector of s1 and s2 and has as endpoints the Apollonius vertices defined by the triplets s1 , s2 , s3 and s1 , s4 and s2 . The Boolean b denotes if the two Apollonius vertices are in conflict with the site q (in which case b should be true , otherwise false ). In case that b is true , the predicate returns true if and only if the entire Apollonius edge is in conflict with q . If b is false , the predicate returns false if and only if q is not in conflict with the Apollonius edge. the Apollonius vertices of s1 , s2 , s3 , and s1 , s4 , s2 must exist. Must also provide bool operator()(Site_2 s1,\nSite_2 s2, Site_2 s3, Site_2 q, bool b) . The sites s1 , s2 , s3 and the site at infinity $ s_\\infty$ define an Apollonius edge that lies on the bisector of s1 and s2 and has as endpoints the Apollonius vertices defined by the triplets s1 , s2 , s3 and s1 , $ s_\\infty$ and s2 (the second Apollonius vertex is actually at infinity). The Boolean b denotes if the two Apollonius vertices are in conflict with the site q (in which case b should be true , otherwise false ). In case that b is true , the predicate returns true if and only if the entire Apollonius edge is in conflict with q . If b is false , the predicate returns false if and only if q is not in conflict with the Apollonius edge. the Apollonius vertex of s1 , s2 , s3 must exist. Must finally provide bool operator()(Site_2 s1,\nSite_2 s2, Site_2 q, bool b) . The sites s1 , s2 and the site at infinity $ s_\\infty$ define an Apollonius edge that lies on the bisector of s1 and s2 and has as endpoints the Apollonius vertices defined by the triplets s1 , s2 , $ s_\\infty$ and s1 , $ s_\\infty$ and s2 (both Apollonius vertices are actually at infinity). The Boolean b denotes if the two Apollonius vertices are in conflict with the site q (in which case b should be true , otherwise false ). In case that b is true , the predicate returns true if and only if the entire Apollonius edge is in conflict with q . If b is false , the predicate returns false if and only if q is not in conflict with the Apollonius edge.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "253",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Infinite_edge_interior_conflict_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Infinite_edge_interior_conflict_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide bool operator()(Site_2 s1,\nSite_2 s2, Site_2 s3, Site_2 q, bool b) . The sites $ s_\\infty$ , s1 , s2 and s3 define an Apollonius edge that lies on the bisector of $ s_\\infty$ and s1 and has as endpoints the Apollonius vertices defined by the triplets $ s_\\infty$ , s1 , s2 and $ s_\\infty$ , s3 and s1 . The Boolean b denotes if the two Apollonius vertices are in conflict with the site q (in which case b should be true , otherwise false . In case that b is true , the predicate returns true if and only if the entire Apollonius edge is in conflict with q . If b is false , the predicate returns false if and only if q is not in conflict with the Apollonius edge.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "272",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_degenerate_edge_2",
+        "qualified_name": "ApolloniusGraphTraits_2::Is_degenerate_edge_2",
+        "brief": "A predicate object type.",
+        "detailed": "Must provide bool operator()(Site_2 s1, Site_2\ns2, Site_2 s3, Site_2 s4) . It returns true if the Apollonius edge defined by s1 , s2 , s3 and s4 is degenerate, false otherwise. An Apollonius edge is called degenerate if its two endpoints coincide. the Apollonius vertices of s1 , s2 , s3 , and s1 , s4 , s2 must exist.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "283",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphTraits_2",
+        "qualified_name": "ApolloniusGraphTraits_2::ApolloniusGraphTraits_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "293",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphTraits_2",
+        "qualified_name": "ApolloniusGraphTraits_2::ApolloniusGraphTraits_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(ApolloniusGraphTraits_2 other)",
+        "params": [
+          {
+            "type": "ApolloniusGraphTraits_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "298",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "ApolloniusGraphTraits_2::operator=",
+        "brief": "Assignment operator.",
+        "detailed": "",
+        "return_type": "ApolloniusGraphTraits_2",
+        "argsstring": "(ApolloniusGraphTraits_2 other)",
+        "params": [
+          {
+            "type": "ApolloniusGraphTraits_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "303",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compare_x_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::compare_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "313",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "compare_y_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::compare_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "318",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "compare_weight_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::compare_weight_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_weight_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "323",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "328",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "is_hidden_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::is_hidden_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Is_hidden_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "333",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "oriented_side_of_bisector_test_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::oriented_side_of_bisector_test_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Oriented_side_of_bisector_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "339",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_conflict_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::vertex_conflict_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_conflict_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "344",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "finite_edge_interior_conflict_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::finite_edge_interior_conflict_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Finite_edge_interior_conflict_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "350",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "infinite_edge_interior_conflict_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::infinite_edge_interior_conflict_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Infinite_edge_interior_conflict_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "356",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "is_degenerate_edge_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::is_degenerate_edge_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Is_degenerate_edge_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "361",
+        "section": "Access to predicate objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_object_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::construct_object_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_object_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "372",
+        "section": "Access to constructor objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_Apollonius_vertex_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::construct_Apollonius_vertex_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_Apollonius_vertex_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "378",
+        "section": "Access to constructor objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_Apollonius_site_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::construct_Apollonius_site_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_Apollonius_site_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "384",
+        "section": "Access to constructor objects"
+      },
+      {
+        "kind": "function",
+        "name": "assign_2_object",
+        "qualified_name": "ApolloniusGraphTraits_2::assign_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Assign_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphTraits_2.h",
+        "line": "394",
+        "section": "Access to other objects"
+      }
+    ]
+  },
+  "ApolloniusGraphVertexBase_2": {
+    "kind": "class",
+    "name": "ApolloniusGraphVertexBase_2",
+    "brief": "The concept ApolloniusGraphVertexBase_2 describes the requirements for the vertex base class of the ApolloniusGraphDataStructure_2 concept. A vertex stores an Apollonius site and provides access to one of its incident faces through a Face_handle . In addition, it maintains a container of sites. The container stores the hidden sites related to the vertex.",
+    "detailed": "Refines TriangulationVertexBase_2 Has models CGAL::Apollonius_graph_vertex_base_2 <Gt,StoreHidden> ApolloniusGraphDataStructure_2 CGAL::Apollonius_graph_2 <Gt,Agds> CGAL::Triangulation_data_structure_2<Vb,Fb>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Geom_traits",
+        "brief": "A type for the geometric traits that defines the site stored.",
+        "detailed": "The type Geom_traits must define the type Site_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Store_hidden",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Store_hidden",
+        "brief": "A Boolean that indicates if hidden sites are actually stored or not.",
+        "detailed": "Its value is true if hidden sites are stored, false otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_2",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Site_2",
+        "brief": "A type for the site stored.",
+        "detailed": "This type must coincide with the type Geom_traits::Site_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Apollonius_graph_data_structure_2",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Apollonius_graph_data_structure_2",
+        "brief": "A type for the Apollonius graph data structure, to which the vertex belongs to.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Vertex_handle",
+        "brief": "A type for the vertex handle of the Apollonius graph data structure.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Face_handle",
+        "brief": "A type for the face handle of the Apollonius graph data structure.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hidden_sites_iterator",
+        "qualified_name": "ApolloniusGraphVertexBase_2::Hidden_sites_iterator",
+        "brief": "An iterator that iterates over the hidden sites in the hidden sites container of the vertex.",
+        "detailed": "Must be a model of Iterator .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphVertexBase_2",
+        "qualified_name": "ApolloniusGraphVertexBase_2::ApolloniusGraphVertexBase_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "82",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphVertexBase_2",
+        "qualified_name": "ApolloniusGraphVertexBase_2::ApolloniusGraphVertexBase_2",
+        "brief": "Constructs a vertex associated with the Apollonius site s and embedded at the center of s .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Site_2 s)",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "88",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusGraphVertexBase_2",
+        "qualified_name": "ApolloniusGraphVertexBase_2::ApolloniusGraphVertexBase_2",
+        "brief": "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Site_2 s, Face_handle f)",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "95",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "site",
+        "qualified_name": "ApolloniusGraphVertexBase_2::site",
+        "brief": "Returns the Apollonius site.",
+        "detailed": "",
+        "return_type": "Site_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "106",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "ApolloniusGraphVertexBase_2::face",
+        "brief": "Returns a handle to an incident face.",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "111",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_hidden_sites",
+        "qualified_name": "ApolloniusGraphVertexBase_2::number_of_hidden_sites",
+        "brief": "Returns the number of hidden sites in the hidden sites container.",
+        "detailed": "",
+        "return_type": "unsigned int",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "117",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "hidden_sites_begin",
+        "qualified_name": "ApolloniusGraphVertexBase_2::hidden_sites_begin",
+        "brief": "Starts at an arbitrary hidden site.",
+        "detailed": "",
+        "return_type": "Hidden_sites_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "123",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "hidden_sites_end",
+        "qualified_name": "ApolloniusGraphVertexBase_2::hidden_sites_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Hidden_sites_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "128",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_site",
+        "qualified_name": "ApolloniusGraphVertexBase_2::set_site",
+        "brief": "Sets the Apollonius site.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Site_2 s)",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "138",
+        "section": "Setting and unsetting"
+      },
+      {
+        "kind": "function",
+        "name": "set_face",
+        "qualified_name": "ApolloniusGraphVertexBase_2::set_face",
+        "brief": "Sets the incident face.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "143",
+        "section": "Setting and unsetting"
+      },
+      {
+        "kind": "function",
+        "name": "add_hidden_site",
+        "qualified_name": "ApolloniusGraphVertexBase_2::add_hidden_site",
+        "brief": "Adds a hidden site to the container of hidden sites.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Site_2 s)",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "148",
+        "section": "Setting and unsetting"
+      },
+      {
+        "kind": "function",
+        "name": "clear_hidden_sites_container",
+        "qualified_name": "ApolloniusGraphVertexBase_2::clear_hidden_sites_container",
+        "brief": "Clears the container of hidden sites.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "153",
+        "section": "Setting and unsetting"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "ApolloniusGraphVertexBase_2::is_valid",
+        "brief": "Performs any required tests on a vertex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(bool verbose, int level) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusGraphVertexBase_2.h",
+        "line": "163",
+        "section": "Checking"
+      }
+    ]
+  },
+  "ApolloniusSite_2": {
+    "kind": "class",
+    "name": "ApolloniusSite_2",
+    "brief": "The concept ApolloniusSite_2 provides the requirements for an Apollonius site class.",
+    "detailed": "ApolloniusGraphTraits_2 CGAL::Apollonius_site_2 <K> CGAL::Apollonius_graph_traits_2 <K,Method_tag> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "ApolloniusSite_2::Point_2",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "ApolloniusSite_2::FT",
+        "brief": "The field number type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "ApolloniusSite_2::RT",
+        "brief": "The ring number type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Weight",
+        "qualified_name": "ApolloniusSite_2::Weight",
+        "brief": "The weight type.",
+        "detailed": "It must be the same as FT .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusSite2",
+        "qualified_name": "ApolloniusSite_2::ApolloniusSite2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Point_2 p=Point_2(), Weight w=Weight(0))",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "Point_2 ()",
+            "brief": ""
+          },
+          {
+            "type": "Weight",
+            "name": "w",
+            "default": "Weight (0)",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "51",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ApolloniusSite_2",
+        "qualified_name": "ApolloniusSite_2::ApolloniusSite_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(ApolloniusSite_2 other)",
+        "params": [
+          {
+            "type": "ApolloniusSite_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "56",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "ApolloniusSite_2::point",
+        "brief": "Returns the center of the Apollonius site.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "67",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "weight",
+        "qualified_name": "ApolloniusSite_2::weight",
+        "brief": "Returns the weight of the Apollonius site.",
+        "detailed": "",
+        "return_type": "Weight",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/ApolloniusSite_2.h",
+        "line": "73",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_graph_2",
+    "brief": "The class Apollonius_graph_2 represents the Apollonius graph.",
+    "detailed": "It supports insertions and deletions of sites. Gt is the geometric traits class and must be a model of ApolloniusGraphTraits_2 . Agds is the Apollonius graph data structure and must be a model of ApolloniusGraphDataStructure_2 whose vertex and face must be models of ApolloniusGraphVertexBase_2 and TriangulationFaceBase_2 , respectively. It defaults to: CGAL::Triangulation_data_structure_2< CGAL::Apollonius_graph_vertex_base_2<Gt,true>, CGAL::Triangulation_face_base_2<Gt> > Traversal of the Apollonius Graph An Apollonius graph can be seen as a container of faces and vertices. Therefore the Apollonius graph provides several iterators and circulators that allow to traverse it (completely or partially). Traversal of the Convex Hull Applied on the infinite_vertex the incident_* functions allow to visit the vertices on the convex hull and the infinite edges and faces. Note that a counterclockwise traversal of the vertices adjacent to the infinite_vertex is a clockwise traversal of the convex hull. CGAL::Apollonius_graph_2<Gt, Agds> ag; CGAL::Apollonius_graph_2<Gt, Agds>::Face f; ag. incident_vertices (ag. infinite_vertex ()); ag. incident_vertices (ag. infinite_vertex (), f); ag. incident_faces (ag. infinite_vertex ()); ag. incident_faces (ag. infinite_vertex (), f); ag. incident_edges (ag. infinite_vertex ()); ag. incident_edges (ag. infinite_vertex (), f); Is model of DelaunayGraph_2 CGAL::Apollonius_graph_traits_2 <K,Method_tag> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM> CGAL::Apollonius_graph_hierarchy_2 <Gt,Agds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Data_structure",
+        "qualified_name": "CGAL::Apollonius_graph_2::Data_structure",
+        "brief": "A type for the underlying data structure.",
+        "detailed": "",
+        "return_type": "Agds",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure",
+        "qualified_name": "CGAL::Apollonius_graph_2::Triangulation_data_structure",
+        "brief": "Same as the Data_structure type.",
+        "detailed": "This type has been introduced in order for the Apollonius_graph_2 class to be a model of the DelaunayGraph_2 concept.",
+        "return_type": "Data_structure",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "73",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Apollonius_graph_2::Geom_traits",
+        "brief": "A type for the geometric traits.",
+        "detailed": "",
+        "return_type": "Gt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Apollonius_graph_2::Point_2",
+        "brief": "A type for the point defined in the geometric traits.",
+        "detailed": "",
+        "return_type": "Gt::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "84",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_2",
+        "qualified_name": "CGAL::Apollonius_graph_2::Site_2",
+        "brief": "A type for the Apollonius site, defined in the geometric traits.",
+        "detailed": "",
+        "return_type": "Gt::Site_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "89",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Apollonius_graph_2::Edge",
+        "brief": "the edge type.",
+        "detailed": "The Edge(f,i) is the edge common to faces f and f.neighbor(i) . It is also the edge joining the vertices f->vertex(cw(i)) and f->vertex(ccw(i)) of f . i must be 0 , 1 or 2 .",
+        "return_type": "Data_structure::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "118",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Apollonius_graph_2::Vertex",
+        "brief": "A type for a vertex.",
+        "detailed": "",
+        "return_type": "Data_structure::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "123",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "CGAL::Apollonius_graph_2::Face",
+        "brief": "A type for a face.",
+        "detailed": "",
+        "return_type": "Data_structure::Face",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "128",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Apollonius_graph_2::Vertex_handle",
+        "brief": "A type for a handle to a vertex.",
+        "detailed": "",
+        "return_type": "Data_structure::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "133",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Apollonius_graph_2::Face_handle",
+        "brief": "A type for a handle to a face.",
+        "detailed": "",
+        "return_type": "Data_structure::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "138",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_circulator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Vertex_circulator",
+        "brief": "A type for a circulator over vertices incident to a given vertex.",
+        "detailed": "",
+        "return_type": "Data_structure::Vertex_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "143",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_circulator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Face_circulator",
+        "brief": "A type for a circulator over faces incident to a given vertex.",
+        "detailed": "",
+        "return_type": "Data_structure::Face_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "148",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_circulator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Edge_circulator",
+        "brief": "A type for a circulator over edges incident to a given vertex.",
+        "detailed": "",
+        "return_type": "Data_structure::Edge_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "153",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_vertices_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::All_vertices_iterator",
+        "brief": "A type for an iterator over all vertices.",
+        "detailed": "",
+        "return_type": "Data_structure::Vertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "159",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_faces_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::All_faces_iterator",
+        "brief": "A type for an iterator over all faces.",
+        "detailed": "",
+        "return_type": "Data_structure::Face_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "165",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_edges_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::All_edges_iterator",
+        "brief": "A type for an iterator over all edges.",
+        "detailed": "",
+        "return_type": "Data_structure::Edge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "171",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Apollonius_graph_2::size_type",
+        "brief": "An unsigned integral type.",
+        "detailed": "",
+        "return_type": "Data_structure::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "176",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_vertices_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Finite_vertices_iterator",
+        "brief": "A type for an iterator over finite vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "181",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_faces_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Finite_faces_iterator",
+        "brief": "A type for an iterator over finite faces.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "186",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_edges_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Finite_edges_iterator",
+        "brief": "A type for an iterator over finite edges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "191",
+        "section": "Handles And Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sites_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Sites_iterator",
+        "brief": "A type for an iterator over all sites.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "205",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Visible_sites_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Visible_sites_iterator",
+        "brief": "A type for an iterator over all visible sites.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "210",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hidden_sites_iterator",
+        "qualified_name": "CGAL::Apollonius_graph_2::Hidden_sites_iterator",
+        "brief": "A type for an iterator over all hidden sites.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "215",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "sites_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::sites_begin",
+        "brief": "Starts at an arbitrary site.",
+        "detailed": "",
+        "return_type": "Sites_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "408",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "sites_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::sites_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Sites_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "413",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "visible_sites_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::visible_sites_begin",
+        "brief": "Starts at an arbitrary visible site.",
+        "detailed": "",
+        "return_type": "Visible_sites_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "418",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "visible_sites_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::visible_sites_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Visible_sites_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "423",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "hidden_sites_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::hidden_sites_begin",
+        "brief": "Starts at an arbitrary hidden site.",
+        "detailed": "",
+        "return_type": "Hidden_sites_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "428",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "hidden_sites_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::hidden_sites_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Hidden_sites_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "433",
+        "section": "Site Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_2",
+        "qualified_name": "CGAL::Apollonius_graph_2::Apollonius_graph_2",
+        "brief": "Creates an Apollonius graph ag using gt as geometric traits.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Gt gt=Gt())",
+        "params": [
+          {
+            "type": "Gt",
+            "name": "gt",
+            "default": "Gt()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "226",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_2",
+        "qualified_name": "CGAL::Apollonius_graph_2::Apollonius_graph_2",
+        "brief": "Creates an Apollonius graph ag using gt as geometric traits and inserts all sites in the range [ first , beyond ).",
+        "detailed": "Input_iterator must be a model of InputIterator . The value type of Input_iterator must be Site_2 .",
+        "return_type": "",
+        "argsstring": "(Input_iterator first, Input_iterator beyond, Gt gt=Gt())",
+        "params": [
+          {
+            "type": "Input_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Gt",
+            "name": "gt",
+            "default": "Gt()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "235",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_2",
+        "qualified_name": "CGAL::Apollonius_graph_2::Apollonius_graph_2",
+        "brief": "Copy constructor.",
+        "detailed": "All faces and vertices are duplicated. After the construction, ag and other refer to two different Apollonius graphs : if other is modified, ag is not.",
+        "return_type": "",
+        "argsstring": "(const Apollonius_graph_2< Gt, Agds > &other)",
+        "params": [
+          {
+            "type": "const Apollonius_graph_2< Gt, Agds > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "244",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Apollonius_graph_2::operator=",
+        "brief": "Assignment.",
+        "detailed": "If ag and other are the same object nothing is done. Otherwise, all the vertices and faces are duplicated. After the assignment, ag and other refer to different Apollonius graphs : if other is modified, ag is not.",
+        "return_type": "Apollonius_graph_2 < Gt, Agds >",
+        "argsstring": "(const Apollonius_graph_2< Gt, Agds > &other)",
+        "params": [
+          {
+            "type": "const Apollonius_graph_2 < Gt, Agds > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "254",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "CGAL::Apollonius_graph_2::geom_traits",
+        "brief": "Returns a reference to the Apollonius graph traits object.",
+        "detailed": "",
+        "return_type": "const Geom_traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "264",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "data_structure",
+        "qualified_name": "CGAL::Apollonius_graph_2::data_structure",
+        "brief": "Returns a reference to the underlying data structure.",
+        "detailed": "",
+        "return_type": "const Data_structure &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "270",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "CGAL::Apollonius_graph_2::tds",
+        "brief": "Same as data_structure() .",
+        "detailed": "This method has been added in compliance with the DelaunayGraph_2 concept.",
+        "return_type": "const Data_structure &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "277",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Apollonius_graph_2::dimension",
+        "brief": "Returns the dimension of the Apollonius graph.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "282",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Apollonius_graph_2::number_of_vertices",
+        "brief": "Returns the number of finite vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "287",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_visible_sites",
+        "qualified_name": "CGAL::Apollonius_graph_2::number_of_visible_sites",
+        "brief": "Returns the number of visible sites.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "292",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_hidden_sites",
+        "qualified_name": "CGAL::Apollonius_graph_2::number_of_hidden_sites",
+        "brief": "Returns the number of hidden sites.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "297",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "CGAL::Apollonius_graph_2::number_of_faces",
+        "brief": "Returns the number of faces (both finite and infinite) of the Apollonius graph.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "303",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "infinite_face",
+        "qualified_name": "CGAL::Apollonius_graph_2::infinite_face",
+        "brief": "Returns a face incident to the infinite_vertex .",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "308",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "infinite_vertex",
+        "qualified_name": "CGAL::Apollonius_graph_2::infinite_vertex",
+        "brief": "Returns the infinite_vertex .",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "313",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertex",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_vertex",
+        "brief": "Returns a vertex distinct from the infinite_vertex .",
+        "detailed": "The number of (visible) vertices in the Apollonius graph must be at least one.",
+        "return_type": "Vertex_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "319",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertices_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_vertices_begin",
+        "brief": "Starts at an arbitrary finite vertex.",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "339",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertices_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "344",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_edges_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_edges_begin",
+        "brief": "Starts at an arbitrary finite edge.",
+        "detailed": "",
+        "return_type": "Finite_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "349",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_edges_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "354",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_faces_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_faces_begin",
+        "brief": "Starts at an arbitrary finite face.",
+        "detailed": "",
+        "return_type": "Finite_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "359",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_faces_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::finite_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "364",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_vertices_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::all_vertices_begin",
+        "brief": "Starts at an arbitrary vertex.",
+        "detailed": "",
+        "return_type": "All_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "369",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_vertices_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::all_vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "374",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::all_edges_begin",
+        "brief": "Starts at an arbitrary edge.",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "379",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::all_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "384",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_begin",
+        "qualified_name": "CGAL::Apollonius_graph_2::all_faces_begin",
+        "brief": "Starts at an arbitrary face.",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "389",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_end",
+        "qualified_name": "CGAL::Apollonius_graph_2::all_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "394",
+        "section": "Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "CGAL::Apollonius_graph_2::incident_faces",
+        "brief": "Starts at an arbitrary face incident to v .",
+        "detailed": "",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "455",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "CGAL::Apollonius_graph_2::incident_faces",
+        "brief": "Starts at face f .",
+        "detailed": "Face f is incident to vertex v .",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "461",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "CGAL::Apollonius_graph_2::incident_edges",
+        "brief": "Starts at an arbitrary edge incident to v .",
+        "detailed": "",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "467",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "CGAL::Apollonius_graph_2::incident_edges",
+        "brief": "Starts at the first edge of f incident to v , in counterclockwise order around v .",
+        "detailed": "Face f is incident to vertex v .",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "474",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_vertices",
+        "qualified_name": "CGAL::Apollonius_graph_2::incident_vertices",
+        "brief": "Starts at an arbitrary vertex incident to v .",
+        "detailed": "",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "480",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_vertices",
+        "qualified_name": "CGAL::Apollonius_graph_2::incident_vertices",
+        "brief": "Starts at the first vertex of f adjacent to v in counterclockwise order around v .",
+        "detailed": "Face f is incident to vertex v .",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "487",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "CGAL::Apollonius_graph_2::is_infinite",
+        "brief": "true , iff v is the infinite_vertex .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "500",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "CGAL::Apollonius_graph_2::is_infinite",
+        "brief": "true , iff face f is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Face_handle f) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "506",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "CGAL::Apollonius_graph_2::is_infinite",
+        "brief": "true , iff edge (f,i) is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "511",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "CGAL::Apollonius_graph_2::is_infinite",
+        "brief": "true , iff edge e is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "517",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "CGAL::Apollonius_graph_2::is_infinite",
+        "brief": "true , iff edge *ec is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge_circulator ec) const",
+        "params": [
+          {
+            "type": "Edge_circulator",
+            "name": "ec",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "523",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Apollonius_graph_2::insert",
+        "brief": "Inserts the sites in the range [ first , beyond ).",
+        "detailed": "The number of sites in the range [ first , beyond ) is returned. Input_iterator must be a model of InputIterator and its value type must be Site_2 .",
+        "return_type": "unsigned int",
+        "argsstring": "(Input_iterator first, Input_iterator beyond)",
+        "params": [
+          {
+            "type": "Input_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "537",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Apollonius_graph_2::insert",
+        "brief": "Inserts the site s in the Apollonius graph.",
+        "detailed": "If s is visible then the vertex handle of s is returned, otherwise Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Site_2 &s)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "545",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Apollonius_graph_2::insert",
+        "brief": "Inserts s in the Apollonius graph using the site associated with vnear as an estimate for the nearest neighbor of the center of s .",
+        "detailed": "If s is visible then the vertex handle of s is returned, otherwise Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Site_2 &s, Vertex_handle vnear)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vnear",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "554",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Apollonius_graph_2::remove",
+        "brief": "Removes the site associated to the vertex handle v from the Apollonius graph.",
+        "detailed": "v must correspond to a valid finite vertex of the Apollonius graph.",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "567",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbor",
+        "qualified_name": "CGAL::Apollonius_graph_2::nearest_neighbor",
+        "brief": "Finds the nearest neighbor of the point p .",
+        "detailed": "In other words it finds the site whose Apollonius cell contains p . Ties are broken arbitrarily and one of the nearest neighbors of p is returned. If there are no visible sites in the Apollonius diagram Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point_2 &p) const",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "581",
+        "section": "Nearest Neighbor Location"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbor",
+        "qualified_name": "CGAL::Apollonius_graph_2::nearest_neighbor",
+        "brief": "Finds the nearest neighbor of the point p using the site associated with vnear as an estimate for the nearest neighbor of p .",
+        "detailed": "Ties are broken arbitrarily and one of the nearest neighbors of p is returned. If there are no visible sites in the Apollonius diagram Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point_2 &p, Vertex_handle vnear) const",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vnear",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "591",
+        "section": "Nearest Neighbor Location"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Apollonius_graph_2::dual",
+        "brief": "Returns the dual corresponding to the face handle f .",
+        "detailed": "The returned object can be assigned to one of the following: Site_2 , Gt::Line_2 .",
+        "return_type": "Gt::Object_2",
+        "argsstring": "(Face_handle f) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "613",
+        "section": "Access to the Dual"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Apollonius_graph_2::dual",
+        "brief": "Returns the dual of the face to which it points to.",
+        "detailed": "The returned object can be assigned to one of the following: Site_2 , Gt::Line_2 .",
+        "return_type": "Gt::Object_2",
+        "argsstring": "(All_faces_iterator it) const",
+        "params": [
+          {
+            "type": "All_faces_iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "620",
+        "section": "Access to the Dual"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Apollonius_graph_2::dual",
+        "brief": "Returns the dual of the face to which it points to.",
+        "detailed": "",
+        "return_type": "Site",
+        "argsstring": "(Finite_faces_iterator it) const",
+        "params": [
+          {
+            "type": "Finite_faces_iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "626",
+        "section": "Access to the Dual"
+      },
+      {
+        "kind": "function",
+        "name": "draw_primal",
+        "qualified_name": "CGAL::Apollonius_graph_2::draw_primal",
+        "brief": "Draws the Apollonius graph to the stream str .",
+        "detailed": "The following operators must be defined: Stream& operator<<(Stream&, Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) .",
+        "return_type": "Stream &",
+        "argsstring": "(Stream &str) const",
+        "params": [
+          {
+            "type": "Stream &",
+            "name": "str",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "642",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "draw_dual",
+        "qualified_name": "CGAL::Apollonius_graph_2::draw_dual",
+        "brief": "Draws the dual of the Apollonius graph, i.e., the Apollonius diagram, to the stream str .",
+        "detailed": "The following operators must be defined: Stream& operator<<(Stream&, Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) , Stream& operator<<(Stream&, Gt::Line_2) .",
+        "return_type": "Stream &",
+        "argsstring": "(Stream &str) const",
+        "params": [
+          {
+            "type": "Stream &",
+            "name": "str",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "655",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "draw_primal_edge",
+        "qualified_name": "CGAL::Apollonius_graph_2::draw_primal_edge",
+        "brief": "Draws the edge e of the Apollonius graph to the stream str .",
+        "detailed": "The following operators must be defined: Stream& operator<<(Stream&, Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) .",
+        "return_type": "Stream &",
+        "argsstring": "(const Edge &e, Stream &str) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Stream &",
+            "name": "str",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "666",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "draw_dual_edge",
+        "qualified_name": "CGAL::Apollonius_graph_2::draw_dual_edge",
+        "brief": "Draws the dual of the edge e to the stream str .",
+        "detailed": "The dual of e is an edge of the Apollonius diagram. The following operators must be defined: Stream& operator<<(Stream&, Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) , Stream& operator<<(Stream&, Gt::Line_2) .",
+        "return_type": "Stream &",
+        "argsstring": "(const Edge &e, Stream &str) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Stream &",
+            "name": "str",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "679",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "file_output",
+        "qualified_name": "CGAL::Apollonius_graph_2::file_output",
+        "brief": "Writes the current state of the Apollonius graph to an output stream.",
+        "detailed": "In particular, all visible and hidden sites are written as well as the underlying combinatorial data structure.",
+        "return_type": "void",
+        "argsstring": "(std::ostream &os) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "687",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "file_input",
+        "qualified_name": "CGAL::Apollonius_graph_2::file_input",
+        "brief": "Reads the state of the Apollonius graph from an input stream.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::istream &is)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "693",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Apollonius_graph_2::operator<<",
+        "brief": "Writes the current state of the Apollonius graph to an output stream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Apollonius_graph_2< Gt, Agds > &ag) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Apollonius_graph_2 < Gt, Agds > &",
+            "name": "ag",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "698",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Apollonius_graph_2::operator>>",
+        "brief": "Reads the state of the Apollonius graph from an input stream.",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, const Apollonius_graph_2< Gt, Agds > &ag)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Apollonius_graph_2 < Gt, Agds > &",
+            "name": "ag",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "703",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Apollonius_graph_2::is_valid",
+        "brief": "Checks the validity of the Apollonius graph.",
+        "detailed": "If verbose is true a short message is sent to std::cerr . If level is 0, only the data structure is validated. If level is 1, then both the data structure and the Apollonius graph are validated. Negative values of level always return true, and values greater than 1 are equivalent to level being 1.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=1) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "1",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "718",
+        "section": "Validity Check"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Apollonius_graph_2::clear",
+        "brief": "Clears all contents of the Apollonius graph.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "728",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Apollonius_graph_2::swap",
+        "brief": "The Apollonius graphs other and ag are swapped.",
+        "detailed": "ag.swap(other) should be preferred to ag = other or to ag(other) if other is deleted afterwards.",
+        "return_type": "void",
+        "argsstring": "(Apollonius_graph_2< Gt, Agds > &other)",
+        "params": [
+          {
+            "type": "Apollonius_graph_2 < Gt, Agds > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_2.h",
+        "line": "736",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_filtered_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_graph_filtered_traits_2",
+    "brief": "The class Apollonius_graph_filtered_traits_2 provides a model for the ApolloniusGraphTraits_2 concept.",
+    "detailed": "The class Apollonius_graph_filtered_traits_2 uses the filtering technique [1] to achieve traits for the Apollonius_graph_2 <Gt,Agds> class with efficient and exact predicates given an exact kernel EK and a filtering kernel FK . The geometric constructions associated provided by this class are equivalent to those provided by the traits class Apollonius_graph_traits_2 <CK,CM> , which means that they may be inexact. This class has six template parameters. The first, third and fifth template parameters must be a models of the Kernel concept. The second, fourth and sixth template parameters correspond to how predicates are evaluated. There are two predefined possible values for Method_tag , namely CGAL::Field_with_sqrt_tag and CGAL::Integral_domain_without_division_tag . The first one must be used when the number type used in the representation supports the exact evaluation of signs of expressions involving all four basic operations and square roots, whereas the second one requires the exact evaluation of signs of ring-type expressions, i.e., expressions involving only additions, subtractions and multiplications. The way the predicates are evaluated is discussed in [3] , [4] . The default values for the template parameters are as follows: CM = CGAL::Integral_domain_without_division_tag , EK = CGAL::Simple_cartesian<CGAL::MP_Float> , EM = CM , FK = CGAL::Simple_cartesian<CGAL::Interval_nt<false> > , FM = CM . Is model of ApolloniusGraphTraits_2 Kernel ApolloniusGraphTraits_2 CGAL::Integral_domain_without_division_tag CGAL::Field_with_sqrt_tag CGAL::Apollonius_graph_2 <Gt,Agds> CGAL::Apollonius_graph_traits_2 <K,Method_tag>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_filtered_traits_2",
+        "qualified_name": "CGAL::Apollonius_graph_filtered_traits_2::Apollonius_graph_filtered_traits_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_filtered_traits_2.h",
+        "line": "1",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_filtered_traits_2",
+        "qualified_name": "CGAL::Apollonius_graph_filtered_traits_2::Apollonius_graph_filtered_traits_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Apollonius_graph_filtered_traits_2< CK, CM, EK, EM, FK, FM > other)",
+        "params": [
+          {
+            "type": "Apollonius_graph_filtered_traits_2< CK, CM, EK, EM, FK, FM >",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_filtered_traits_2.h",
+        "line": "66",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Apollonius_graph_filtered_traits_2::operator=",
+        "brief": "Assignment operator.",
+        "detailed": "",
+        "return_type": "Apollonius_graph_filtered_traits_2 < CK, CM, EK, EM, FK, FM >",
+        "argsstring": "(other)",
+        "params": [
+          {
+            "type": "other",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_filtered_traits_2.h",
+        "line": "73",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_hierarchy_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_graph_hierarchy_2",
+    "brief": "We provide an alternative to the class Apollonius_graph_2 <Gt,Agds> for the dynamic construction of the Apollonius graph.",
+    "detailed": "The Apollonius_graph_hierarchy_2 class maintains a hierarchy of Apollonius graphs. The bottom-most level of the hierarchy contains the full Apollonius diagram. A site that is in level $ i$ , is in level $ i+1$ with probability $ 1/\\alpha$ where $ \\alpha > 1$ is some constant. The difference between the Apollonius_graph_2 <Gt,Agds> class and the Apollonius_graph_hierarchy_2 is on how the nearest neighbor location is done. Given a point $ p$ the location is done as follows: at the top most level we find the nearest neighbor of $ p$ as in the Apollonius_graph_2 <Gt,Agds> class. At every subsequent level $ i$ we use the nearest neighbor found at level $ i+1$ to find the nearest neighbor at level $ i$ . This is a variant of the corresponding hierarchy for points found in [2] . The class has two template parameters which have essentially the same meaning as in the Apollonius_graph_2 <Gt,Agds> class. Gt is the geometric traits class and must be a model of ApolloniusGraphTraits_2 . Agds is the Apollonius graph data structure and must be a model of ApolloniusGraphDataStructure_2 whose vertex and face must be models of ApolloniusGraphHierarchyVertexBase_2 and TriangulationFaceBase_2 , respectively. It defaults to: CGAL::Triangulation_data_structure_2< CGAL::Apollonius_graph_hierarchy_vertex_base_2<CGAL::Apollonius_graph_vertex_base_2<Gt,true> >, CGAL::Triangulation_face_base_2<Gt> > Heritage The Apollonius_graph_hierarchy_2 class derives publicly from the Apollonius_graph_2 <Gt,Agds> class. The interface is the same with its base class. In the sequel only the methods overridden are documented. Apollonius_graph_hierarchy_2 does not introduce other types than those introduced by its base class Apollonius_graph_2 <Gt,Agds> . CGAL::Apollonius_graph_2 <Gt,Agds> CGAL::Apollonius_graph_traits_2 <K,Method_tag> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_hierarchy_2",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::Apollonius_graph_hierarchy_2",
+        "brief": "Creates a hierarchy of Apollonius graphs using gt as geometric traits.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Gt gt=Gt())",
+        "params": [
+          {
+            "type": "Gt",
+            "name": "gt",
+            "default": "Gt()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "62",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_hierarchy_2",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::Apollonius_graph_hierarchy_2",
+        "brief": "Creates an Apollonius graph hierarchy using gt as geometric traits and inserts all sites in the range [ first , beyond ).",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Input_iterator first, Input_iterator beyond, Gt gt=Gt())",
+        "params": [
+          {
+            "type": "Input_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Gt",
+            "name": "gt",
+            "default": "Gt()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "70",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_hierarchy_2",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::Apollonius_graph_hierarchy_2",
+        "brief": "Copy constructor.",
+        "detailed": "All faces, vertices, and inter-level pointers are duplicated. After the construction, agh and other refer to two different Apollonius graph hierarchies: if other is modified, agh is not.",
+        "return_type": "",
+        "argsstring": "(const Apollonius_graph_hierarchy_2< Gt, Agds > &other)",
+        "params": [
+          {
+            "type": "const Apollonius_graph_hierarchy_2< Gt, Agds > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "78",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::operator=",
+        "brief": "Assignment.",
+        "detailed": "All faces, vertices and inter-level pointers are duplicated. After the construction, agh and other refer to two different Apollonius graph hierarchies: if other is modified, agh is not.",
+        "return_type": "Apollonius_graph_hierarchy_2 < Gt, Agds >",
+        "argsstring": "(Apollonius_graph_hierarchy_2< Gt, Agds > other)",
+        "params": [
+          {
+            "type": "Apollonius_graph_hierarchy_2 < Gt, Agds >",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::insert",
+        "brief": "Inserts the sites in the range [ first , beyond ).",
+        "detailed": "The number of sites in the range [ first , beyond ) is returned. Input_iterator must be a model of InputIterator and its value type must be Site_2 .",
+        "return_type": "unsigned int",
+        "argsstring": "(Input_iterator first, Input_iterator beyond)",
+        "params": [
+          {
+            "type": "Input_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "102",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::insert",
+        "brief": "Inserts the site s in the Apollonius graph hierarchy.",
+        "detailed": "If s is visible then the vertex handle of s is returned, otherwise Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Site_2 &s)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "110",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::insert",
+        "brief": "Inserts s in the Apollonius graph hierarchy using the site associated with vnear as an estimate for the nearest neighbor of the center of s .",
+        "detailed": "If s is visible then the vertex handle of s is returned, otherwise Vertex_handle(nullptr) is returned. A call to this method is equivalent to agh.insert(s); and it has been added for the sake of conformity with the interface of the Apollonius_graph_2 <Gt,Agds> class.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Site_2 &s, Vertex_handle vnear)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vnear",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "122",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::remove",
+        "brief": "Removes the site associated to the vertex handle v from the Apollonius graph hierarchy.",
+        "detailed": "v must correspond to a valid finite vertex of the Apollonius graph hierarchy.",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "135",
+        "section": "Removal"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbor",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::nearest_neighbor",
+        "brief": "Finds the nearest neighbor of the point p .",
+        "detailed": "In other words it finds the site whose Apollonius cell contains p . Ties are broken arbitrarily and one of the nearest neighbors of p is returned. If there are no visible sites in the Apollonius diagram Vertex_handle(nullptr) is returned.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point_2 &p) const",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "149",
+        "section": "Nearest Neighbor Location"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbor",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::nearest_neighbor",
+        "brief": "Finds the nearest neighbor of the point p .",
+        "detailed": "If there are no visible sites in the Apollonius diagram Vertex_handle(nullptr) is returned. A call to this method is equivalent to agh.nearest_neighbor(p); and it has been added for the sake of conformity with the interface of the Apollonius_graph_2 <Gt,Agds> class.",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point_2 &p, Vertex_handle vnear) const",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vnear",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "160",
+        "section": "Nearest Neighbor Location"
+      },
+      {
+        "kind": "function",
+        "name": "file_output",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::file_output",
+        "brief": "Writes the current state of the Apollonius graph hierarchy to an output stream.",
+        "detailed": "In particular, all visible and hidden sites are written as well as the underlying combinatorial hierarchical data structure.",
+        "return_type": "void",
+        "argsstring": "(std::ostream &os) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "173",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "file_input",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::file_input",
+        "brief": "Reads the state of the Apollonius graph hierarchy from an input stream.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::istream &is)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "179",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::operator<<",
+        "brief": "Writes the current state of the Apollonius graph hierarchy to an output stream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, Apollonius_graph_hierarchy_2< Gt, Agds > agh) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Apollonius_graph_hierarchy_2 < Gt, Agds >",
+            "name": "agh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "185",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::operator>>",
+        "brief": "Reads the state of the Apollonius graph hierarchy from an input stream.",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, Apollonius_graph_hierarchy_2< Gt, Agds > agh)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Apollonius_graph_hierarchy_2 < Gt, Agds >",
+            "name": "agh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "190",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::is_valid",
+        "brief": "Checks the validity of the Apollonius graph hierarchy.",
+        "detailed": "If verbose is true a short message is sent to std::cerr . If level is 0, the data structure at all levels is validated, as well as the inter-level pointers. If level is 1, then the data structure at all levels is validated, the inter-level pointers are validated and all levels of the Apollonius graph hierarchy are also validated. Negative values of level always return true , and values greater than 1 are equivalent to level being 1.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=1) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "1",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "208",
+        "section": "Validity Check"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::clear",
+        "brief": "Clears all contents of the Apollonius graph hierarchy.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "219",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_2::swap",
+        "brief": "The Apollonius graph hierarchies other and agh are swapped.",
+        "detailed": "agh.swap(other) should be preferred to agh = other or to agh(other) if other is deleted afterwards.",
+        "return_type": "void",
+        "argsstring": "(Apollonius_graph_hierarchy_2< Gt, Agds > &other)",
+        "params": [
+          {
+            "type": "Apollonius_graph_hierarchy_2 < Gt, Agds > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_2.h",
+        "line": "226",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_hierarchy_vertex_base_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_graph_hierarchy_vertex_base_2",
+    "brief": "The class Apollonius_graph_hierarchy_vertex_base_2 provides a model for the ApolloniusGraphHierarchyVertexBase_2 concept, which is the vertex base required by the Apollonius_graph_hierarchy_2 <Gt,Agds> class.",
+    "detailed": "The class Apollonius_graph_hierarchy_vertex_base_2 is templated by a class Agvb which must be a model of the ApolloniusGraphVertexBase_2 concept. Is model of ApolloniusGraphHierarchyVertexBase_2 CGAL::Apollonius_graph_vertex_base_2 <Gt,StoreHidden> CGAL::Triangulation_data_structure_2<Vb,Fb> CGAL::Apollonius_graph_hierarchy_2 <Gt,Agds>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_hierarchy_vertex_base_2",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_vertex_base_2::Apollonius_graph_hierarchy_vertex_base_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_hierarchy_vertex_base_2.h",
+        "line": "30",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_hierarchy_vertex_base_2",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_vertex_base_2::Apollonius_graph_hierarchy_vertex_base_2",
+        "brief": "Constructs a vertex associated with the site s and embedded at the center of s .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Site_2 &s)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_vertex_base_2.h",
+        "line": "36",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_hierarchy_vertex_base_2",
+        "qualified_name": "CGAL::Apollonius_graph_hierarchy_vertex_base_2::Apollonius_graph_hierarchy_vertex_base_2",
+        "brief": "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Site_2 &s, Face_handle f)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_hierarchy_vertex_base_2.h",
+        "line": "44",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_graph_traits_2",
+    "brief": "The class Apollonius_graph_traits_2 provides a model for the ApolloniusGraphTraits_2 concept.",
+    "detailed": "This class has two template parameters. The first template parameter must be a model of the Kernel concept. The second template parameter corresponds to how predicates are evaluated. There are two predefined possible values for Method_tag , namely CGAL::Field_with_sqrt_tag and CGAL::Integral_domain_without_division_tag . The first one must be used when the number type used in the representation supports the exact evaluation of signs of expressions involving all four basic operations and square roots, whereas the second one requires the exact evaluation of signs of ring-type expressions, i.e., expressions involving only additions, subtractions and multiplications. The default value for Method_tag is CGAL::Integral_domain_without_division_tag . The way the predicates are evaluated is discussed in [3] , [4] . Is model of ApolloniusGraphTraits_2 CGAL::Apollonius_graph_2 <Gt,Agds> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_traits_2",
+        "qualified_name": "CGAL::Apollonius_graph_traits_2::Apollonius_graph_traits_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_traits_2.h",
+        "line": "1",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_traits_2",
+        "qualified_name": "CGAL::Apollonius_graph_traits_2::Apollonius_graph_traits_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Apollonius_graph_traits_2< K, Method_tag > &other)",
+        "params": [
+          {
+            "type": "const Apollonius_graph_traits_2< K, Method_tag > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_traits_2.h",
+        "line": "1",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Apollonius_graph_traits_2::operator=",
+        "brief": "Assignment operator.",
+        "detailed": "",
+        "return_type": "Apollonius_graph_traits_2 < K, Method_tag >",
+        "argsstring": "(const Apollonius_graph_traits_2< K, Method_tag > &other)",
+        "params": [
+          {
+            "type": "const Apollonius_graph_traits_2 < K, Method_tag > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_traits_2.h",
+        "line": "49",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_vertex_base_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_graph_vertex_base_2",
+    "brief": "The class Apollonius_graph_vertex_base_2 provides a model for the ApolloniusGraphVertexBase_2 concept which is the vertex base required by the ApolloniusGraphDataStructure_2 concept.",
+    "detailed": "The class Apollonius_graph_vertex_base_2 has three template arguments. Gt is the geometric traits of the Apollonius graph and must be a model of the concept ApolloniusGraphTraits_2 . StoreHidden is a Boolean which controls whether hidden sites are actually stored. Such a control is important if the user is not interested in hidden sites and/or if only insertions are made, in which case no hidden site can become visible. If StoreHidden is set to true , hidden sites are stored, otherwise they are discarded. By default StoreHidden is set to true . Vb must be a model of the concept TriangulationDSVertexBase_2 By default this parameter is instantiated with Triangulation_ds_vertex_base_2<> . Is model of ApolloniusGraphVertexBase_2 CGAL::Triangulation_data_structure_2<Vb,Fb> CGAL::Apollonius_graph_hierarchy_vertex_base_2 <Gt>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_vertex_base_2",
+        "qualified_name": "CGAL::Apollonius_graph_vertex_base_2::Apollonius_graph_vertex_base_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_vertex_base_2.h",
+        "line": "42",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_vertex_base_2",
+        "qualified_name": "CGAL::Apollonius_graph_vertex_base_2::Apollonius_graph_vertex_base_2",
+        "brief": "Constructs a vertex associated with the site s and embedded at the center of s .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Site_2 &s)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_vertex_base_2.h",
+        "line": "48",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_graph_vertex_base_2",
+        "qualified_name": "CGAL::Apollonius_graph_vertex_base_2::Apollonius_graph_vertex_base_2",
+        "brief": "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Site_2 &s, Face_handle f)",
+        "params": [
+          {
+            "type": "const Site_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_graph_vertex_base_2.h",
+        "line": "56",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Apollonius_site_2": {
+    "kind": "class",
+    "name": "CGAL::Apollonius_site_2",
+    "brief": "The class Apollonius_site_2 is a model for the concept ApolloniusSite_2 .",
+    "detailed": "It is parametrized by a template parameter K which must be a model of the Kernel concept. Is model of ApolloniusSite_2 Types The class Apollonius_site_2 does not introduce any types in addition to the concept ApolloniusSite_2 . I/O The I/O operators are defined for std::iostream . The information output in the std::iostream is: the point of the Apollonius site and its weight. CGAL::Apollonius_graph_traits_2 <K,Method_tag> CGAL::Apollonius_graph_filtered_traits_2 <CK,CM,EK,EM,FK,FM>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Apollonius_site_2",
+        "qualified_name": "CGAL::Apollonius_site_2::Apollonius_site_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Point_2 p=Point_2(), Weight w=Weight(0))",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "Point_2()",
+            "brief": ""
+          },
+          {
+            "type": "Weight",
+            "name": "w",
+            "default": "Weight(0)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_site_2.h",
+        "line": "38",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Apollonius_site_2",
+        "qualified_name": "CGAL::Apollonius_site_2::Apollonius_site_2",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Apollonius_site_2< K > &other)",
+        "params": [
+          {
+            "type": "const Apollonius_site_2< K > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_site_2.h",
+        "line": "43",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Apollonius_site_2::operator<<",
+        "brief": "Inserts the Apollonius site s into the stream os .",
+        "detailed": "The insert operator must be defined for Point_2 and Weight .",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Apollonius_site_2< K > &s) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Apollonius_site_2 < K > &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_site_2.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Apollonius_site_2::operator>>",
+        "brief": "Reads an Apollonius site from the stream is and assigns it to s .",
+        "detailed": "The extract operator must be defined for Point_2 and Weight .",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, const Apollonius_site_2< K > &s)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Apollonius_site_2 < K > &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_site_2.h",
+        "line": "63",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Apollonius_site_2::operator<<",
+        "brief": "Inserts the Apollonius site s into the stream os .",
+        "detailed": "The insert operator must be defined for Point_2 and Weight .",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Apollonius_site_2< K > &s) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Apollonius_site_2 < K > &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_site_2.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Apollonius_site_2::operator>>",
+        "brief": "Reads an Apollonius site from the stream is and assigns it to s .",
+        "detailed": "The extract operator must be defined for Point_2 and Weight .",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, const Apollonius_site_2< K > &s)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Apollonius_site_2 < K > &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Apollonius_site_2.h",
+        "line": "63",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

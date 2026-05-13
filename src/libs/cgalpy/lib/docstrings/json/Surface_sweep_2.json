@@ -1,0 +1,16 @@
+{
+  "CGAL::Surface_sweep_2": {
+    "kind": "namespace",
+    "name": "CGAL::Surface_sweep_2",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

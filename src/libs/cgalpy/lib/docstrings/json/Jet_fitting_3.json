@@ -1,0 +1,459 @@
+{
+  "CGAL::Monge_via_jet_fitting": {
+    "kind": "class",
+    "name": "CGAL::Monge_via_jet_fitting",
+    "brief": "The class Monge_via_jet_fitting is designed to perform the estimation of the local differential quantities at a given point.",
+    "detailed": "The point range is given by a pair of input iterators, and it is assumed that the point where the calculation is carried out is the point that the begin iterator refers to. The results are stored in an instance of the nested class Monge_form , the particular information returned depending on the degrees specified for the polynomial fitting and for the Monge form. If CGAL_EIGEN3_ENABLED is defined, LocalKernel and SvdTraits template parameters have defaults, Simple_cartesian<double> and Eigen_svd respectively. DataKernel provides the geometric classes and tools corresponding to the input points, and also members of the Monge_form class. LocalKernel provides the geometric classes and tools required by local computations. SvdTraits features the linear algebra algorithm required by the fitting method. The scalar type, SvdTraits::FT , must be the same as that of the LocalKernel concept : LocalKernel::FT . Eigen_svd Monge_form This class requires the thirdpartyEigen library.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Data_kernel",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Data_kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "DataKernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "161",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Local_kernel",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Local_kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LocalKernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "166",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Local_kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "171",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Local_kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "176",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Monge_form",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form",
+        "brief": "see the page Monge_via_jet_fitting::Monge_form .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "181",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Monge_via_jet_fitting",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_via_jet_fitting",
+        "brief": "default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "191",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::operator()",
+        "brief": "This operator performs all the computations.",
+        "detailed": "The $ N$ input points are given by the InputIterator parameters which value-type are Data_kernel::Point_3 , d is the degree of the fitted polynomial, d' is the degree of the expected Monge coefficients. $ N \\geq N_{d}:=(d+1)(d+2)/2$ , $ 1 \\leq d' \\leq\\min(d,4) $ .",
+        "return_type": "Monge_form",
+        "argsstring": "(InputIterator begin, InputIterator end, size_t d, size_t d')",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_t",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_t d'",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "206",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "condition_number",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::condition_number",
+        "brief": "condition number of the linear fitting system.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "212",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "pca_basis",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::pca_basis",
+        "brief": "pca eigenvalues and eigenvectors, the pca_basis has always 3 such pairs.",
+        "detailed": "$ i$ ranges from 0 to 2.",
+        "return_type": "std::pair< FT , Vector_3 >",
+        "argsstring": "(size_t i)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "218",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Monge_via_jet_fitting::Monge_form": {
+    "kind": "class",
+    "name": "CGAL::Monge_via_jet_fitting::Monge_form",
+    "brief": "The class Monge_form stores the Monge representation, i.e., the Monge coordinate system and the coefficients of the Monge form in this system.",
+    "detailed": "The usual insert operator ( operator<< ) is overloaded for Monge_form , it gives the Monge coordinate system (the origin and an orthonormal basis) and the coefficients of the Monge form in this system. Monge_via_jet_fitting",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "DataKernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "DataKernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::Vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "DataKernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Monge_form",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::Monge_form",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "86",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "origin",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::origin",
+        "brief": "Point on the fitted surface where differential quantities are computed.",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "97",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "maximal_principal_direction",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::maximal_principal_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vector_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "107",
+        "section": "Monge Basis"
+      },
+      {
+        "kind": "function",
+        "name": "minimal_principal_direction",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::minimal_principal_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vector_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "112",
+        "section": "Monge Basis"
+      },
+      {
+        "kind": "function",
+        "name": "normal_direction",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::normal_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vector_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "117",
+        "section": "Monge Basis"
+      },
+      {
+        "kind": "function",
+        "name": "principal_curvatures",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::principal_curvatures",
+        "brief": "$ i=0$ for the maximum and $ i=1$ for the minimum.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(size_t i) const",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "127",
+        "section": "Monge Coefficients"
+      },
+      {
+        "kind": "function",
+        "name": "third_order_coefficients",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::third_order_coefficients",
+        "brief": "$ 0 \\leq i \\leq3$",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(size_t i) const",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "132",
+        "section": "Monge Coefficients"
+      },
+      {
+        "kind": "function",
+        "name": "fourth_order_coefficients",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::fourth_order_coefficients",
+        "brief": "$ 0 \\leq i \\leq4$",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(size_t i) const",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "137",
+        "section": "Monge Coefficients"
+      },
+      {
+        "kind": "function",
+        "name": "comply_wrt_given_normal",
+        "qualified_name": "CGAL::Monge_via_jet_fitting::Monge_form::comply_wrt_given_normal",
+        "brief": "change principal basis and Monge coefficients so that the given_normal and the Monge normal make an acute angle.",
+        "detailed": "If given_normal * normal_direction() < 0 then change the orientation: if $ z=g(x,y)$ in the basis (d1,d2,n) then in the basis (d2,d1,-n) $ z=h(x,y)=-g(y,x)$ .",
+        "return_type": "void",
+        "argsstring": "(const Vector_3 &given_normal)",
+        "params": [
+          {
+            "type": "const Vector_3 &",
+            "name": "given_normal",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Monge_via_jet_fitting.h",
+        "line": "152",
+        "section": "Operations"
+      }
+    ]
+  },
+  "DataKernel": {
+    "kind": "class",
+    "name": "DataKernel",
+    "brief": "The concept DataKernel describes the set of requirements to be fulfilled by any class used to instantiate first template parameter of the class CGAL::Monge_via_jet_fitting < DataKernel , LocalKernel ,SvdTraits> .",
+    "detailed": "Operations Only constructors (from 3 scalars and copy constructors) and access methods to coordinates x() , y() , z() are needed. Has models CGAL::Cartesian<FieldNumberType> CGAL::Simple_cartesian<FieldNumberType> LocalKernel",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "DataKernel::FT",
+        "brief": "The scalar type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DataKernel.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "DataKernel::Point_3",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DataKernel.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "DataKernel::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DataKernel.h",
+        "line": "44",
+        "section": "Types"
+      }
+    ]
+  },
+  "LocalKernel": {
+    "kind": "class",
+    "name": "LocalKernel",
+    "brief": "The concept LocalKernel describes the set of requirements to be fulfilled by any class used to instantiate the second template parameter of the class CGAL::Monge_via_jet_fitting < DataKernel , LocalKernel ,SvdTraits> .",
+    "detailed": "This concept provides the geometric primitives used for the computations in the class CGAL::Monge_via_jet_fitting . Requirements In the class CGAL::Monge_via_jet_fitting the scalar type, LocalKernel::FT , must be the same as that of the SvdTraits concept : SvdTraits::FT . The type LocalKernel::FT is a model of the FieldWithSqrt concept. Operations The scalar type LocalKernel::FT must be a field type with a square root. Only constructors (from 3 scalars and copy constructors) and access methods to coordinates x() , y() , z() are needed for the point and vector types. Has models CGAL::Cartesian<FieldNumberType> CGAL::Simple_cartesian<FieldNumberType> DataKernel SvdTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "LocalKernel::FT",
+        "brief": "The scalar type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LocalKernel.h",
+        "line": "51",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "LocalKernel::Point_3",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LocalKernel.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "LocalKernel::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LocalKernel.h",
+        "line": "61",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

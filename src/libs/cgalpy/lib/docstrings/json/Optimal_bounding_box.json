@@ -1,0 +1,196 @@
+{
+  "CGAL::Oriented_bounding_box_traits_3": {
+    "kind": "class",
+    "name": "CGAL::Oriented_bounding_box_traits_3",
+    "brief": "The class CGAL::Oriented_bounding_box_traits_3 is a traits type to be used with the overloads of the function CGAL::oriented_bounding_box() .",
+    "detailed": "This class requires the Eigen library. K must be a model of Kernel Is model of OrientedBoundingBoxTraits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Oriented_bounding_box_traits_3::FT",
+        "brief": "The field number type.",
+        "detailed": "",
+        "return_type": "K::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Aff_transformation_3",
+        "qualified_name": "CGAL::Oriented_bounding_box_traits_3::Aff_transformation_3",
+        "brief": "The affine transformation type.",
+        "detailed": "",
+        "return_type": "CGAL::Aff_transformation_3< K >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "CGAL::Oriented_bounding_box_traits_3::Matrix",
+        "brief": "The matrix type.",
+        "detailed": "",
+        "return_type": "CGAL::Eigen_matrix< FT , 3, 3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Oriented_bounding_box_traits_3::Vector",
+        "brief": "The matrix type.",
+        "detailed": "",
+        "return_type": "CGAL::Eigen_vector< FT , 3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "EigenType",
+        "qualified_name": "CGAL::Oriented_bounding_box_traits_3::EigenType",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Matrix::EigenType",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_Q",
+        "qualified_name": "CGAL::Oriented_bounding_box_traits_3::get_Q",
+        "brief": "Performs the QR-decomposition of the matrix m to a unitary matrix and an upper triagonal and returns the unitary matrix.",
+        "detailed": "",
+        "return_type": "Matrix",
+        "argsstring": "(const Matrix &m)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+        "line": "64",
+        "section": ""
+      }
+    ]
+  },
+  "OrientedBoundingBoxTraits_3": {
+    "kind": "class",
+    "name": "OrientedBoundingBoxTraits_3",
+    "brief": "The concept OrientedBoundingBoxTraits_3 describes the requirements of the traits class used in the function CGAL::oriented_bounding_box() , and in particular the need for a 3x3 matrix type.",
+    "detailed": "Refines Kernel Has models CGAL::Oriented_bounding_box_traits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "OrientedBoundingBoxTraits_3::FT",
+        "brief": "The field number type; must be a model of the concept FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/OrientedBoundingBoxTraits.h",
+        "line": "20",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Aff_transformation_3",
+        "qualified_name": "OrientedBoundingBoxTraits_3::Aff_transformation_3",
+        "brief": "The 3D affine transformation type; the template parameter K must be a model of Kernel and be compatible with the type Point_3 .",
+        "detailed": "",
+        "return_type": "CGAL::Aff_transformation_3< K >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/OrientedBoundingBoxTraits.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "OrientedBoundingBoxTraits_3::Matrix",
+        "brief": "A 3x3 matrix type; model of the concept SvdTraits::Matrix and which supports matrix-matrix and scalar-matrix multiplication, as well as matrix-matrix addition.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/OrientedBoundingBoxTraits.h",
+        "line": "28",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "OrientedBoundingBoxTraits_3::Vector",
+        "brief": "A 3 dimensional vector type; model of the concept SvdTraits::Vector and which supports matrix-vector and multiplication.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/OrientedBoundingBoxTraits.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_Q",
+        "qualified_name": "OrientedBoundingBoxTraits_3::get_Q",
+        "brief": "Returns the unitary matrix Q obtained in the QR-decomposition of the matrix m .",
+        "detailed": "",
+        "return_type": "Matrix",
+        "argsstring": "(const Matrix &m) const",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/OrientedBoundingBoxTraits.h",
+        "line": "35",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Optimal_bounding_box": {
+    "kind": "namespace",
+    "name": "CGAL::Optimal_bounding_box",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

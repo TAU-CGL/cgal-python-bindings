@@ -1,0 +1,1062 @@
+{
+  "CGAL::Surface_mesh_topology::Curves_on_surface_topology": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology",
+    "brief": "The class Curves_on_surface_topology provides methods to compute shortest non contractible cycles and to test homotopy on paths.",
+    "detailed": "Each object of this class is constructed from an external mesh, either a 2D combinatorial map or a model of a FaceGraph. It maintains a correspondence between this mesh and an internal representation, computed the first time a homotopy test is called. The user must not modify the input surface as long as homotopy tests are performed with this Curves_on_surface_topology . Mesh a model of CombinatorialMap or of FaceGraph",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::halfedge_descriptor",
+        "brief": "A descriptor to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "19",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Curves_on_surface_topology",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::Curves_on_surface_topology",
+        "brief": "creates a Curves_on_surface_topology object using amesh as input.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Mesh &amesh)",
+        "params": [
+          {
+            "type": "const Mesh &",
+            "name": "amesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "23",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "are_freely_homotopic",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::are_freely_homotopic",
+        "brief": "returns true if the closed paths p1 and p2 are freely homotopic.",
+        "detailed": "p1 and p2 must be two paths on amesh .",
+        "return_type": "bool",
+        "argsstring": "(const Path_on_surface< Mesh > &p1, const Path_on_surface< Mesh > &p2) const",
+        "params": [
+          {
+            "type": "const Path_on_surface < Mesh > &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Path_on_surface < Mesh > &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "28",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "are_homotopic_with_fixed_endpoints",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::are_homotopic_with_fixed_endpoints",
+        "brief": "returns true if the paths p1 and p2 are homotopic with fixed endpoints.",
+        "detailed": "The paths p1 and p2 must have the same endpoints but must not be closed. Equivalent to is_contractible(q) where q is the concatenation of p1 and the reverse of p2 . p1 and p2 must be two paths on amesh .",
+        "return_type": "bool",
+        "argsstring": "(const Path_on_surface< Mesh > &p1, const Path_on_surface< Mesh > &p2) const",
+        "params": [
+          {
+            "type": "const Path_on_surface < Mesh > &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Path_on_surface < Mesh > &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "34",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_contractible",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::is_contractible",
+        "brief": "returns true if the closed path p is contractible.",
+        "detailed": "p must be a closed path on amesh .",
+        "return_type": "bool",
+        "argsstring": "(const Path_on_surface< Mesh > &p) const",
+        "params": [
+          {
+            "type": "const Path_on_surface < Mesh > &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_homotopic_to_simple_cycle",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::is_homotopic_to_simple_cycle",
+        "brief": "returns true if the closed path p is homotopic to some simple cycle.",
+        "detailed": "p must be a closed path on amesh .",
+        "return_type": "bool",
+        "argsstring": "(const Path_on_surface< Mesh > &p) const",
+        "params": [
+          {
+            "type": "const Path_on_surface < Mesh > &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_edge_width",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::compute_edge_width",
+        "brief": "returns a non-contractible cycle of type Path_on_surface with minimal number of edges.",
+        "detailed": "This number of edges is the edge width of the mesh.",
+        "return_type": "Path_on_surface < Mesh >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_shortest_non_contractible_cycle",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::compute_shortest_non_contractible_cycle",
+        "brief": "returns a non-contractible cycle of type Path_on_surface with minimal length, where the length of a cycle is the sum of the weights of its edges computed thanks to the WeightFunctor wf .",
+        "detailed": "By default, all the edge weights are set to 1 (thanks to the Unit_weight_functor functor).",
+        "return_type": "Path_on_surface < Mesh >",
+        "argsstring": "(const WeightFunctor &wf=WeightFunctor()) const",
+        "params": [
+          {
+            "type": "const WeightFunctor &",
+            "name": "wf",
+            "default": "WeightFunctor ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_shortest_non_contractible_cycle_with_base_point",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::compute_shortest_non_contractible_cycle_with_base_point",
+        "brief": "returns a non-contractible cycle of type Path_on_surface with minimal length going through the source vertex of d , where the length of a cycle is the sum of the weights of its edges computed thanks to the WeightFunctor wf .",
+        "detailed": "By default, all the edge weights are set to 1 (thanks to the Unit_weight_functor functor).",
+        "return_type": "Path_on_surface < Mesh >",
+        "argsstring": "(halfedge_descriptor d, const WeightFunctor &wf=WeightFunctor()) const",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const WeightFunctor &",
+            "name": "wf",
+            "default": "WeightFunctor ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_face_width",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::compute_face_width",
+        "brief": "returns a vector of darts representing a non-contractible curve with a minimal number of intersection with the graph of the mesh.",
+        "detailed": "This curve can be described by the alternating sequence of faces and vertices it goes through, so that each dart in the returned vector belongs to both a face and the next vertex in the alternating sequence. (Here, faces and vertices are viewed as subsets of darts.) The size of the returned vector is the face width of the mesh.",
+        "return_type": "std::vector< halfedge_descriptor >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_verbose",
+        "qualified_name": "CGAL::Surface_mesh_topology::Curves_on_surface_topology::set_verbose",
+        "brief": "set whether the function should output error message to std::cerr when the prerequisite of the argument(s) is not met.",
+        "detailed": "Affects are_freely_homotopic(p1, p2) , are_homotopic_with_fixed_endpoints(p1, p2) , is_contractible(p) , and is_homotopic_to_simple_cycle(p)",
+        "return_type": "void",
+        "argsstring": "(bool is_verbose)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "is_verbose",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "68",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_topology::Euclidean_length_weight_functor": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh_topology::Euclidean_length_weight_functor",
+    "brief": "A model of WeightFunctor assigning its Euclidean length to every edge.",
+    "detailed": "amesh should have points associated with their vertices.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Weight_t",
+        "qualified_name": "CGAL::Surface_mesh_topology::Euclidean_length_weight_functor::Weight_t",
+        "brief": "Number type of the weights.",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "92",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Euclidean_length_weight_functor",
+        "qualified_name": "CGAL::Surface_mesh_topology::Euclidean_length_weight_functor::Euclidean_length_weight_functor",
+        "brief": "creates a Euclidean_length_weight_functor given a mesh.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Mesh &m)",
+        "params": [
+          {
+            "type": "const Mesh &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "95",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_topology::Path_on_surface": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_topology::Path_on_surface",
+    "brief": "The class Path_on_surface represents a walk in a mesh which is either a model of CombinatorialMap , a model of GeneralizedMap or a model of a FaceGraph .",
+    "detailed": "Each object of this class is constructed from an external mesh on which the path should lie. A path is represented as a sequence of darts or halfedges, each one representing an oriented edge in the path. The class Path_on_surface behaves as a container for this sequence of darts/halfedges. Elements are added in the path one at a time to the path thanks to the push_back() method. Mesh a model of CombinatorialMap , GeneralizedMap or of FaceGraph",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::halfedge_descriptor",
+        "brief": "A handle to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "18",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Path_on_surface",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::Path_on_surface",
+        "brief": "creates an empty path object which lies on amesh .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Mesh &amesh)",
+        "params": [
+          {
+            "type": "const Mesh &",
+            "name": "amesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "21",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::is_empty",
+        "brief": "returns true iff this path is empty",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_closed",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::is_closed",
+        "brief": "returns true iff this path is closed.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_simple",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::is_simple",
+        "brief": "returns true iff this path does not pass twice through a same edge or a same vertex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "length",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::length",
+        "brief": "returns the length of the path, i.e. its number of edges.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::operator[]",
+        "brief": "returns the ith dart of the path.",
+        "detailed": "i< length() .",
+        "return_type": "halfedge_descriptor",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::clear",
+        "brief": "clears this path.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "can_be_pushed",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::can_be_pushed",
+        "brief": "returns true iff hd can be added at the end of this path. If flip is true, the direction of hd is reversed before checking",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(halfedge_descriptor hd, bool flip=false) const",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "flip",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "push_back",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::push_back",
+        "brief": "adds hd at the end of this path.",
+        "detailed": "If flip is true, the opposite of hd is considered. can_be_pushed(hd)",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, bool flip=false)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "flip",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "can_be_pushed_by_index",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::can_be_pushed_by_index",
+        "brief": "returns true iff the dart/halfedge with index i can be added at the end of this path.",
+        "detailed": "If Mesh is a Polyhedron_3 , takes time proportional to the number of darts/halfedges.",
+        "return_type": "bool",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "push_back_by_index",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::push_back_by_index",
+        "brief": "adds the dart/halfedge with index i at the end of this path.",
+        "detailed": "If Mesh is a Polyhedron_3 , takes time proportional to the number of halfedges. can_be_pushed_by_index(i)",
+        "return_type": "void",
+        "argsstring": "(std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "push_back_by_index",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::push_back_by_index",
+        "brief": "adds successively all dart/halfedges in l (a sequence of indices), at the end of the path.",
+        "detailed": "If Mesh is a Polyhedron_3 , takes time proportional to the number of halfedges. For each index i , can_be_pushed_by_index(i) should be true.",
+        "return_type": "void",
+        "argsstring": "(std::initializer_list< std::size_t > l)",
+        "params": [
+          {
+            "type": "std::initializer_list< std::size_t >",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extend_positive_turn",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::extend_positive_turn",
+        "brief": "adds the dart/halfedge obtained by turning nb times around the target vertex of the last dart/halfedge in this path, in the positive circular order.",
+        "detailed": "To extend with a positive 1 turn thus amounts to extend with the next() pointer. (A zero turn corresponds to the opposite() pointer.) ! is_empty()",
+        "return_type": "void",
+        "argsstring": "(std::size_t nb)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "nb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extend_negative_turn",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::extend_negative_turn",
+        "brief": "adds the dart/halfedge obtained by turning nb times around the target vertex of the last dart/halfedge in this path, in the negative circular order.",
+        "detailed": "To extend with a negative 1 turn thus amounts to extend with the composite pointer: opposite(prev(opposite())) . ! is_empty()",
+        "return_type": "void",
+        "argsstring": "(std::size_t nb)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "nb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "can_be_pushed_by_label",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::can_be_pushed_by_label",
+        "brief": "returns true iff the dart/halfedge with label l can be added at the end of this path.",
+        "detailed": "Mesh must be a model of PolygonalSchema concept.",
+        "return_type": "bool",
+        "argsstring": "(const std::string &l) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "73",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "push_back_by_label",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::push_back_by_label",
+        "brief": "adds successively all darts/halfedges in s (a sequence of labels separated by spaces) at the end of this path.",
+        "detailed": "For each label, l, can_be_pushed_by_label(l) should be true. Mesh must be a model of PolygonalSchema concept.",
+        "return_type": "void",
+        "argsstring": "(const std::string &s)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator+=",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::operator+=",
+        "brief": "concatenates other to this path.",
+        "detailed": "the last vertex of this path should coincide with the first vertex of other .",
+        "return_type": "Self &",
+        "argsstring": "(const Self &other)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "reverse",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::reverse",
+        "brief": "reverses this path (i.e. negates its orientation).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "84",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "generate_random_path",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::generate_random_path",
+        "brief": "creates a random open path with length darts/halfedges.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t length, Random &random=get_default_random())",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "length",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "random",
+            "default": "get_default_random()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "87",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "generate_random_closed_path",
+        "qualified_name": "CGAL::Surface_mesh_topology::Path_on_surface::generate_random_closed_path",
+        "brief": "creates a random closed path with at least length darts/halfedges.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t length, Random &random=get_default_random())",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "length",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Random &",
+            "name": "random",
+            "default": "get_default_random()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Path_on_surface.h",
+        "line": "90",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_topology::Polygonal_schema_min_items": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh_topology::Polygonal_schema_min_items",
+    "brief": "The class Polygonal_schema_min_items defines a struct with a std::string as the information associated with darts, and no attribute is enabled.",
+    "detailed": "Is model of PolygonalSchemaItems Example The following example shows one implementation of the Polygonal_schema_min_items class. struct Polygonal_schema_min_items { template < class PS> struct Dart_wrapper { struct Info_for_darts { std::string m_label; }; typedef Info_for_darts Dart_info; }; }; CGAL::Surface_mesh_topology::Polygonal_schema_with_combinatorial_map <Items,Alloc> CGAL::Surface_mesh_topology::Polygonal_schema_with_generalized_map <Items,Alloc>",
+    "members": []
+  },
+  "CGAL::Surface_mesh_topology::Polygonal_schema_with_combinatorial_map": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_topology::Polygonal_schema_with_combinatorial_map",
+    "brief": "The class Polygonal_schema_with_combinatorial_map is a model of PolygonalSchema using Combinatorial_map as underlying model.",
+    "detailed": "Items a model of the PolygonalSchemaItems concept. Equal to Polygonal_schema_min_items by default. Alloc has to match the standard allocator requirements. The rebind mechanism Alloc will be used to create appropriate allocators internally with value type Dart . Equal to CGAL_ALLOCATOR(int) from <CGAL/memory.h> by default.",
+    "members": []
+  },
+  "CGAL::Surface_mesh_topology::Polygonal_schema_with_generalized_map": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_topology::Polygonal_schema_with_generalized_map",
+    "brief": "The class Polygonal_schema_with_generalized_map is a model of PolygonalSchema using Generalized_map as underlying model.",
+    "detailed": "Items a model of the PolygonalSchemaItems concept. Equal to Polygonal_schema_min_items by default. Alloc has to match the standard allocator requirements. The rebind mechanism Alloc will be used to create appropriate allocators internally with value type Dart . Equal to CGAL_ALLOCATOR(int) from <CGAL/memory.h> by default.",
+    "members": []
+  },
+  "CGAL::Surface_mesh_topology::Unit_weight_functor": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh_topology::Unit_weight_functor",
+    "brief": "A model of WeightFunctor assigning unit weight to every edge.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Weight_t",
+        "qualified_name": "CGAL::Surface_mesh_topology::Unit_weight_functor::Weight_t",
+        "brief": "Number type of the weights.",
+        "detailed": "",
+        "return_type": "unsigned int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Curves_on_surface_topology.h",
+        "line": "79",
+        "section": ""
+      }
+    ]
+  },
+  "PolygonalSchema": {
+    "kind": "class",
+    "name": "PolygonalSchema",
+    "brief": "The concept PolygonalSchema defines a 2D polygonal schema, i.e. a combinatorial surface with labeled edges. A PolygonalSchema is created incrementally by adding facets one at a time. A label is any word, that does not contain a space.",
+    "detailed": "PolygonalSchema::Dart_info should be a class having a public data member std::string m_label. PolygonalSchema::dimension should be equal to 2. Refines GenericMap Has models CGAL::Surface_mesh_topology::Polygonal_schema_with_combinatorial_map<Items,Alloc> CGAL::Surface_mesh_topology::Polygonal_schema_with_generalized_map<Items,Alloc>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "PolygonalSchema",
+        "qualified_name": "PolygonalSchema::PolygonalSchema",
+        "brief": "creates an empty PolygonalSchema object.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "22",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_facet",
+        "qualified_name": "PolygonalSchema::init_facet",
+        "brief": "starts a new facet.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "25",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finish_facet",
+        "qualified_name": "PolygonalSchema::finish_facet",
+        "brief": "finishes the current facet.",
+        "detailed": "Returns the first dart of this facet. A facet is under creation.",
+        "return_type": "Dart_descriptor",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "29",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_edge_to_facet",
+        "qualified_name": "PolygonalSchema::add_edge_to_facet",
+        "brief": "adds one edge to the current facet, given by its label l (any string containing no space, using minus sign for orientation).",
+        "detailed": "Since the surface is oriented, each label can be used only twice with opposite signs. If this method is called with a label already used, with same sign, an error message is given and this label is ignored. A facet is under creation.",
+        "return_type": "void",
+        "argsstring": "(const std::string &l)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "34",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_edges_to_facet",
+        "qualified_name": "PolygonalSchema::add_edges_to_facet",
+        "brief": "adds the given edges to the current facet.",
+        "detailed": "s is a sequence of labels, separated by spaces. All the corresponding edges are added into the current facet. A facet is under creation.",
+        "return_type": "void",
+        "argsstring": "(const std::string &s)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "39",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_facet",
+        "qualified_name": "PolygonalSchema::add_facet",
+        "brief": "adds directly one facet giving the sequence of labels s of all its edges (labels are separated by spaces).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::string &s)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_label",
+        "qualified_name": "PolygonalSchema::get_label",
+        "brief": "returns the label of dart d .",
+        "detailed": "",
+        "return_type": "std::string",
+        "argsstring": "(Dart_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_dart_labeled",
+        "qualified_name": "PolygonalSchema::get_dart_labeled",
+        "brief": "returns dart with label s , NULL if this label is not used.",
+        "detailed": "",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(const std::string &s) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "48",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_perforated",
+        "qualified_name": "PolygonalSchema::is_perforated",
+        "brief": "returns true iff the facet containing d is perforated.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_perforated",
+        "qualified_name": "PolygonalSchema::is_perforated",
+        "brief": "Shortcut for is_perforated(get_dart_labeled(s)) .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const std::string &s) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "perforate_facet",
+        "qualified_name": "PolygonalSchema::perforate_facet",
+        "brief": "perforates the facet containing d . Returns the number of darts of the face; 0 if the facet was already perforated.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "perforate_facet",
+        "qualified_name": "PolygonalSchema::perforate_facet",
+        "brief": "Shortcut for perforate_facet(get_dart_labeled(s)).",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "(const std::string &s)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "fill_facet",
+        "qualified_name": "PolygonalSchema::fill_facet",
+        "brief": "fills the facet containing d . Returns the number of darts of the face; 0 if the facet was already filled.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "fill_facet",
+        "qualified_name": "PolygonalSchema::fill_facet",
+        "brief": "Shortcut for fill_facet(get_dart_labeled(s)) .",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "(const std::string &s)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolygonalSchema.h",
+        "line": "66",
+        "section": ""
+      }
+    ]
+  },
+  "PolygonalSchemaItems": {
+    "kind": "class",
+    "name": "PolygonalSchemaItems",
+    "brief": "The concept PolygonalSchemaItems allows to customize a PolygonalSchema by choosing the information associated with darts, and by enabling and disabling some attributes. Dart_wrapper<Map>::Dart_info , should be a class having a public data member std::string m_label.",
+    "detailed": "Refines GenericMapItems Has models CGAL::Surface_mesh_topology::Polygonal_schema_min_items",
+    "members": []
+  },
+  "WeightFunctor": {
+    "kind": "class",
+    "name": "WeightFunctor",
+    "brief": "The concept WeightFunctor defines a functor to calculate the weight of an edge.",
+    "detailed": "Has models CGAL::Surface_mesh_topology::Unit_weight_functor CGAL::Surface_mesh_topology::Euclidean_length_weight_functor<Mesh>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "WeightFunctor::halfedge_descriptor",
+        "brief": "A descriptor to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WeightFunctor.h",
+        "line": "21",
+        "section": "Public types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Weight_t",
+        "qualified_name": "WeightFunctor::Weight_t",
+        "brief": "Number type of the weights.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WeightFunctor.h",
+        "line": "24",
+        "section": "Public types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "WeightFunctor::operator()",
+        "brief": "Returns the weight of the edge containing hd .",
+        "detailed": "",
+        "return_type": "Weight_t",
+        "argsstring": "(halfedge_descriptor hd) const",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WeightFunctor.h",
+        "line": "31",
+        "section": "Public member functions"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Surface_mesh_topology": {
+    "kind": "namespace",
+    "name": "CGAL::Surface_mesh_topology",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,2651 @@
+{
+  "AosDirectionalXMonotoneTraits_2": {
+    "kind": "class",
+    "name": "AosDirectionalXMonotoneTraits_2",
+    "brief": "This concept refines the basic arrangement $ x$ -monotone traits concept. A model of this concept is able to handle directed $ x$ -monotone curves that intersect in their interior. Namely, an instance of the X_monotone_curve_2 type defined by a model of the concept AosXMonotoneTraits_2 is only required to have a left (lexicographically smaller) endpoint and a right endpoint. If the traits class is also a model of AosDirectionalXMonotoneTraits_2 , the $ x$ -monotone curve is also required to have a direction, namely one of these two endpoint serves as its source and the other as its target .",
+    "detailed": "Refines AosXMonotoneTraits_2 Has models CGAL::Arr_segment_traits_2 <Kernel> CGAL::Arr_non_caching_segment_traits_2 <Kernel> CGAL::Arr_circle_segment_traits_2 <Kernel> CGAL::Arr_conic_traits_2 <RatKernel,AlgKernel,NtTraits> CGAL::Arr_rational_function_traits_2 <AlgKernel,NtTraits> CGAL::Arr_Bezier_curve_traits_2 <RatKernel,AlgKernel,NtTraits> CGAL::Arr_algebraic_segment_traits_2 <Coefficient> AosXMonotoneTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Compare_endpoints_xy_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::Compare_endpoints_xy_2",
+        "brief": "models the concept ArrDirectionalTraits::CompareEndpointsXy_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "42",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_opposite_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::Construct_opposite_2",
+        "brief": "models the concept ArrDirectionalTraits::ConstructOpposite_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "47",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersect_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::Intersect_2",
+        "brief": "models the concept ArrDirectionalTraits::Intersect_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "52",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Split_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::Split_2",
+        "brief": "models the concept ArrDirectionalTraits::Split_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "57",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Are_mergeable_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::Are_mergeable_2",
+        "brief": "models the concept ArrDirectionalTraits::AreMergeable_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "62",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Merge_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::Merge_2",
+        "brief": "models the concept ArrDirectionalTraits::Merge_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "67",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "function",
+        "name": "AosDirectionalXMonotoneTraits_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::AosDirectionalXMonotoneTraits_2",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "77",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "AosDirectionalXMonotoneTraits_2",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::AosDirectionalXMonotoneTraits_2",
+        "brief": "copy constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(AosDirectionalXMonotoneTraits_2 other)",
+        "params": [
+          {
+            "type": "AosDirectionalXMonotoneTraits_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "82",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::operator=",
+        "brief": "assignment operator.",
+        "detailed": "",
+        "return_type": "AosDirectionalXMonotoneTraits_2",
+        "argsstring": "(other)",
+        "params": [
+          {
+            "type": "other",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compare_endpoints_xy_2_object",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::compare_endpoints_xy_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_endpoints_xy_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "97",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_opposite_2_object",
+        "qualified_name": "AosDirectionalXMonotoneTraits_2::construct_opposite_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_opposite_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AosDirectionalXMonotoneTraits_2.h",
+        "line": "102",
+        "section": "Accessing Functor Objects"
+      }
+    ]
+  },
+  "ArrDirectionalTraits::AreMergeable_2": {
+    "kind": "class",
+    "name": "ArrDirectionalTraits::AreMergeable_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models AosDirectionalXMonotoneTraits_2::Are_mergeable_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ArrDirectionalTraits::AreMergeable_2::operator()",
+        "brief": "accepts two $ x$ -monotone curves xc1 and xc2 and determines whether they can be merged to form a single $ x$ -monotone curve.",
+        "detailed": "xc1 and xc2 are mergeable if their underlying curves are identical, they share a common endpoint, and they do not bend to form a non- $ x$ -monotone curve. The target point of xc1 and the source point xc2 coincide or the source point of xc2 and the target point xc2 coincide.",
+        "return_type": "bool",
+        "argsstring": "(ArrDirectionalTraits::X_monotone_curve_2 xc1, ArrDirectionalTraits::X_monotone_curve_2 xc2)",
+        "params": [
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ArrDirectionalTraits--AreMergeable_2.h",
+        "line": "29",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ArrDirectionalTraits::CompareEndpointsXy_2": {
+    "kind": "class",
+    "name": "ArrDirectionalTraits::CompareEndpointsXy_2",
+    "brief": "",
+    "detailed": "Refines AdaptableUnaryFunction Has models AosDirectionalXMonotoneTraits_2::Compare_endpoints_xy_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ArrDirectionalTraits::CompareEndpointsXy_2::operator()",
+        "brief": "accepts an input curve xc and compares its source and target points.",
+        "detailed": "It returns SMALLER if the curve is directed from lexicographically left to right, and LARGER if it is directed from lexicographically right to left.",
+        "return_type": "Comparison_result",
+        "argsstring": "(ArrDirectionalTraits::X_monotone_curve_2 xc)",
+        "params": [
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ArrDirectionalTraits--CompareEndpointsXy_2.h",
+        "line": "28",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ArrDirectionalTraits::ConstructOpposite_2": {
+    "kind": "class",
+    "name": "ArrDirectionalTraits::ConstructOpposite_2",
+    "brief": "",
+    "detailed": "Refines AdaptableUnaryFunction Has models AosDirectionalXMonotoneTraits_2::Construct_opposite_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ArrDirectionalTraits::ConstructOpposite_2::operator()",
+        "brief": "accepts an $ x$ -monotone curve xc and returns its opposite curve, namely a curve whose graph is the same as xc 's, and whose source and target are swapped with respect to xc 's source and target.",
+        "detailed": "",
+        "return_type": "ArrDirectionalTraits::X_monotone_curve_2",
+        "argsstring": "(ArrDirectionalTraits::X_monotone_curve_2 xc)",
+        "params": [
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ArrDirectionalTraits--ConstructOpposite_2.h",
+        "line": "27",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ArrDirectionalTraits::Intersect_2": {
+    "kind": "class",
+    "name": "ArrDirectionalTraits::Intersect_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models AosDirectionalXMonotoneTraits_2::Intersect_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ArrDirectionalTraits::Intersect_2::operator()",
+        "brief": "computes the intersections of xc1 and xc2 and inserts them in an ascending lexicographic $ xy$ -order into a range beginning at oi .",
+        "detailed": "The type OutputIterator dereferences a std::variant of either the type pair<ArrDirectionalTraits::Point_2, ArrDirectionalTraits::Multiplicity> or the type ArrDirectionalTraits::X_monotone_curve_2 . An object of the former type represents an intersection point with its multiplicity (in case the multiplicity is undefined or unknown, it is set to $ 0$ ). An object of the latter type representing an overlapping subcurve of xc1 and xc2 . The overlapping subcurves are given the direction of xc1 and xc2 if their directions are identical. Otherwise, the overlapping subcurves are given an arbitrary direction. The operator returns a past-the-end iterator of the destination range.",
+        "return_type": "OutputIterator",
+        "argsstring": "(ArrDirectionalTraits::X_monotone_curve_2 xc1, ArrDirectionalTraits::X_monotone_curve_2 xc2, Output_iterator &oi)",
+        "params": [
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Output_iterator &",
+            "name": "oi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ArrDirectionalTraits--Intersect_2.h",
+        "line": "35",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ArrDirectionalTraits::Merge_2": {
+    "kind": "class",
+    "name": "ArrDirectionalTraits::Merge_2",
+    "brief": "",
+    "detailed": "Refines AdaptableBinaryFunction Has models AosDirectionalXMonotoneTraits_2::Merge_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ArrDirectionalTraits::Merge_2::operator()",
+        "brief": "accepts two mergeable $ x$ -monotone curves xc1 and xc2 and assigns xc with the merged curve.",
+        "detailed": "If the target point of xc1 and the source point of xc2 coincide; then the source point of xc1 and the target point of xc2 become the source and target points of xc , respectively. If the target point of xc2 and the source point of xc1 coincide; then the source point of xc2 and the target point of xc1 become the source and target points of xc , respectively. are_mergeable_2 ( xc1 , xc2 ) is true .",
+        "return_type": "void",
+        "argsstring": "(ArrDirectionalTraits::X_monotone_curve_2 xc1, ArrDirectionalTraits::X_monotone_curve_2 xc2, ArrDirectionalTraits::X_monotone_curve_2 &xc)",
+        "params": [
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2 &",
+            "name": "xc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ArrDirectionalTraits--Merge_2.h",
+        "line": "32",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ArrDirectionalTraits::Split_2": {
+    "kind": "class",
+    "name": "ArrDirectionalTraits::Split_2",
+    "brief": "",
+    "detailed": "Refines AdaptableUnaryFunction Has models AosDirectionalXMonotoneTraits_2::Split_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ArrDirectionalTraits::Split_2::operator()",
+        "brief": "accepts an input curve xc and a split point p in its interior.",
+        "detailed": "It splits xc at the split point into two subcurves xc1 and xc2 , such that p is xc1 's right endpoint and xc2 's left endpoint. The direction of xc is preserved. That is, in case xc is directed from left to right, p becomes xc1 's target and c2 's source; otherwise, p becomes xc2 's target and xc1 's source.",
+        "return_type": "void",
+        "argsstring": "(ArrDirectionalTraits::X_monotone_curve_2 xc, ArrDirectionalTraits::Point_2 p, ArrDirectionalTraits::X_monotone_curve_2 &xc1, ArrDirectionalTraits::X_monotone_curve_2 &xc2)",
+        "params": [
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2",
+            "name": "xc",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2 &",
+            "name": "xc1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ArrDirectionalTraits::X_monotone_curve_2 &",
+            "name": "xc2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ArrDirectionalTraits--Split_2.h",
+        "line": "30",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::General_polygon_2": {
+    "kind": "class",
+    "name": "CGAL::General_polygon_2",
+    "brief": "The class General_polygon_2 models the concept GeneralPolygon_2 .",
+    "detailed": "It represents a simple general-polygon. It is parameterized with the type ArrTraits that models the concept AosDirectionalXMonotoneTraits_2 . The latter is a refinement of the concept AosXMonotoneTraits_2 . In addition to the requirements of the concept AosXMonotoneTraits_2 , a model of the concept AosDirectionalXMonotoneTraits_2 must support the following functions: Given an $ x$ -monotone curve, construct its opposite curve. Given an $ x$ -monotone curve, compare its two endpoints lexicographically. This class supports a few convenient operations in addition to the requirements that the concept GeneralPolygon_2 lists. Is model of GeneralPolygon_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Size",
+        "qualified_name": "CGAL::General_polygon_2::Size",
+        "brief": "number of edges size type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Curve_2",
+        "qualified_name": "CGAL::General_polygon_2::Curve_2",
+        "brief": "a general planar curve.",
+        "detailed": "",
+        "return_type": "ArrTraits::Curve_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_2",
+        "qualified_name": "CGAL::General_polygon_2::General_polygon_2",
+        "brief": "constructs a General_polygon_2 from a $X$ -monotone curves.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(CurveIterator begin, CurveIterator end)",
+        "params": [
+          {
+            "type": "CurveIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CurveIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "51",
+        "section": "Construction"
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "CGAL::General_polygon_2::size",
+        "brief": "returns the number of edges of the general polygon.",
+        "detailed": "",
+        "return_type": "Size",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "61",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::General_polygon_2::clear",
+        "brief": "clears the polygon.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "71",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "reverse_orientation",
+        "qualified_name": "CGAL::General_polygon_2::reverse_orientation",
+        "brief": "reverses the orientation of the polygon.",
+        "detailed": "is_simple() .",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "77",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::General_polygon_2::is_empty",
+        "brief": "returns true if the polygon is empty, and false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "87",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "orientation",
+        "qualified_name": "CGAL::General_polygon_2::orientation",
+        "brief": "returns the orientation of the polygon.",
+        "detailed": "is_simple() .",
+        "return_type": "Orientation",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "93",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::General_polygon_2::operator>>",
+        "brief": "This operator imports a general polygon from the input stream in .",
+        "detailed": "Both ASCII and binary formats are supported, and the format is automatically detected. The format consists of the number of points of the outer boundary followed by the points themselves in counterclockwise order, followed by the number of holes, and for each hole, the number of points of the outer boundary is followed by the points themselves in clockwise order.",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &in, CGAL::General_polygon_2< ArrTraits > &P)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "in",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CGAL::General_polygon_2 < ArrTraits > &",
+            "name": "P",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "112",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::General_polygon_2::operator<<",
+        "brief": "This operator exports a general polygon to the output stream out .",
+        "detailed": "An ASCII and a binary format exist. The format can be selected with the CGAL modifiers for streams, set_ascii_mode and set_binary_mode respectively. The modifier set_pretty_mode can be used to allow for (a few) structuring comments in the output. Otherwise, the output would be free of comments. The default for writing is ASCII without comments. The number of curves of the outer boundary is exported followed by the curves themselves in counterclockwise order.",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &out, CGAL::General_polygon_2< ArrTraits > &P)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CGAL::General_polygon_2 < ArrTraits > &",
+            "name": "P",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_2.h",
+        "line": "131",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::General_polygon_set_2": {
+    "kind": "class",
+    "name": "CGAL::General_polygon_set_2",
+    "brief": "An object of the General_polygon_set_2 class-template represents a point set in the plane bounded by $ x$ monotone curves.",
+    "detailed": "Points in the set lie on the boundary or on the positive side of the curves. This class template provides methods to apply regularized Boolean set-operations and few other utility methods. An Arrangement_2 data structure is internally used to represent the point set. The arrangement is represented as a doubly-connected edge-list (DCEL). The Traits template-parameter should be instantiated with a model of the concept GeneralPolygonSetTraits_2 . The traits class defines the types of points, $ x$ -monotone curves, general polygons, and general polygons with holes, that is Traits::Point_2 , Traits::X_monotone_curve_2 , Traits::Polygon_2 , and Traits::Polygon_with_holes_2 , respectively. Traits::Point_2 must be the type of the endpoints of Traits::X_monotone_curve_2 , and Traits::X_monotone_curve_2 must be the type of the curves that comprise the boundaries of the general polygons. The traits class supports geometric operations on the types above. We sometimes use the term polygon instead of general polygon for simplicity hereafter. The template parameter Dcel should be instantiated with a model of the concept GeneralPolygonSetDcel . It is instantiated by default with the type Gps_default_dcel <Traits> . You can override this default, with a different DCEL class, typically an extension of the Gps_default_dcel class template. Overriding the default is necessary only if you intend to obtain the underlying internal arrangement and process it further. The input and output of the Boolean set-operations methods consist of one or more general polygons, some of which may have holes. In particular, these methods operate on pairs of objects of type General_polygon_set_2 , or directly on objects of type Traits::Polygon_2 or Traits::Polygon_with_holes_2 . An object of type Traits::Polygon_2 is a valid operand, only if it is simple and its boundary is oriented counterclockwise. An object of type Traits::Polygon_with_holes_2 is valid, only if its outer boundary bounds a relatively simple general polygon oriented counterclockwise, and each one of its holes is a simple polygon oriented clockwise. The holes are pairwise disjoint, except perhaps at the vertices, and are contained in the polygon bounded by the outer boundary. The outer boundary and the holes are also pairwise disjoint, except perhaps at the vertices. Arrangement_2 AosXMonotoneTraits_2 Nef_polyhedron_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Traits_2",
+        "qualified_name": "CGAL::General_polygon_set_2::Traits_2",
+        "brief": "the traits class in use.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polygon_2",
+        "qualified_name": "CGAL::General_polygon_set_2::Polygon_2",
+        "brief": "the general polygon type.",
+        "detailed": "Must model the GpsTraitsGeneralPolygon_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polygon_with_holes_2",
+        "qualified_name": "CGAL::General_polygon_set_2::Polygon_with_holes_2",
+        "brief": "the general polygon with holes type.",
+        "detailed": "Must model the GpsTraitsGeneralPolygonWithHoles_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Size",
+        "qualified_name": "CGAL::General_polygon_set_2::Size",
+        "brief": "number of polygons with holes size type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Arrangement_2",
+        "qualified_name": "CGAL::General_polygon_set_2::Arrangement_2",
+        "brief": "the arrangement type used internally.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "default constructor; constructs an empty set of polygons gps represented by an empty arrangement.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Self &other)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "constructs an empty set of polygons that uses the given traits object for performing the geometric operations.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Traits &traits)",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "constructs a set of polygons that consists of the single polygon pgn .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "constructs a set of polygons that consists of the single polygon with holes pgn_with_holes .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polygon_with_holes_2 &pgn_with_holes)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn_with_holes",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "constructs a set of polygons that uses the given traits object and consists of the single polygon pgn .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polygon_2 &pgn, const Traits &traits)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "General_polygon_set_2",
+        "qualified_name": "CGAL::General_polygon_set_2::General_polygon_set_2",
+        "brief": "constructs a set of polygons that uses the given traits object and consists of the single polygon with holes pgn_with_holes .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polygon_with_holes_2 &pgn_with_holes, const Traits &traits)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn_with_holes",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "polygons_with_holes",
+        "qualified_name": "CGAL::General_polygon_set_2::polygons_with_holes",
+        "brief": "obtains the polygons with holes represented by gps .",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(OutputIterator out)",
+        "params": [
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "137",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_polygons_with_holes",
+        "qualified_name": "CGAL::General_polygon_set_2::number_of_polygons_with_holes",
+        "brief": "returns the total number of general polygons represented by gps .",
+        "detailed": "",
+        "return_type": "Size",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "142",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::General_polygon_set_2::is_empty",
+        "brief": "returns true if gps represents an empty set.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "147",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_plane",
+        "qualified_name": "CGAL::General_polygon_set_2::is_plane",
+        "brief": "returns true if gps represents the entire plane.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "152",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "traits",
+        "qualified_name": "CGAL::General_polygon_set_2::traits",
+        "brief": "obtains an instance of the traits.",
+        "detailed": "If the traits was passed as a parameter to the constructor of gps , it is returned. Otherwise, a newly created instance is returned.",
+        "return_type": "Traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "159",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "arrangement",
+        "qualified_name": "CGAL::General_polygon_set_2::arrangement",
+        "brief": "obtains the arrangement data structure that internally represents the general-polygon set.",
+        "detailed": "",
+        "return_type": "const Arrangement_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "165",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::General_polygon_set_2::clear",
+        "brief": "clears gps .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "175",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::General_polygon_set_2::insert",
+        "brief": "inserts pgn into gps .",
+        "detailed": "pgn and the point set represented by gps are disjoint. This precondition enables the use of very efficient insertion methods. Use the respective overloaded method that inserts a polygon of type Polygon_with_holes_2 , if only a relaxed precondition can be guaranteed. If even the relaxed precondition cannot be guaranteed, use the join method.",
+        "return_type": "void",
+        "argsstring": "(Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "186",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::General_polygon_set_2::insert",
+        "brief": "inserts pgn_with_holes into gps .",
+        "detailed": "pgn_with_holes does not intersect with the point set represented by gps , except maybe at the vertices. If this relaxed precondition cannot be guaranteed, use the join method.",
+        "return_type": "void",
+        "argsstring": "(Polygon_with_holes_2 &pgn_with_holes)",
+        "params": [
+          {
+            "type": "Polygon_with_holes_2 &",
+            "name": "pgn_with_holes",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "194",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::General_polygon_set_2::insert",
+        "brief": "inserts the range of polygons (or polygons with holes) into gps .",
+        "detailed": "(The value type of the input iterator is used to distinguish between the two.) If the given range contains objects of type Polygon_with_holes_2 , then these polygons and the point set represented by gps are pairwise disjoint, except maybe at the vertices. If the given range contains objects of type Polygon_2 , then these polygons and the point set represented by gps are pairwise disjoint without any exceptions.",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "202",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::General_polygon_set_2::insert",
+        "brief": "inserts the two ranges of polygons and polygons with holes into gps .",
+        "detailed": "All polygons in the first range, all polygon with holes in the second range, and the point set represented by gps are pairwise disjoint, except maybe at the vertices",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 pgn_begin, InputIterator1 pgn_end, InputIterator2 pgn_with_holes_begin, InputIterator2 pgn_with_holes_end)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "pgn_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "pgn_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "209",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "complement",
+        "qualified_name": "CGAL::General_polygon_set_2::complement",
+        "brief": "computes the complement of gps .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "216",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "complement",
+        "qualified_name": "CGAL::General_polygon_set_2::complement",
+        "brief": "computes the complement of other .",
+        "detailed": "gps is overridden by the result.",
+        "return_type": "void",
+        "argsstring": "(const Polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const Polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "222",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::General_polygon_set_2::intersection",
+        "brief": "computes the intersection of gps and other .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "233",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::General_polygon_set_2::intersection",
+        "brief": "computes the intersection of gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "238",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::General_polygon_set_2::intersection",
+        "brief": "computes the intersection of gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "243",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::General_polygon_set_2::intersection",
+        "brief": "computes the intersection of a collection of point sets.",
+        "detailed": "The collection consists of the polygons (or polygons with holes) in the given range and the point set represented by gps . (The value type of the input iterator is used to distinguish between the two options.)",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "252",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::General_polygon_set_2::intersection",
+        "brief": "computes the intersection of a collection of point sets.",
+        "detailed": "The collection consists of the polygons and polygons with holes in the given two ranges and the point set represented by gps .",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 pgn_begin, InputIterator1 pgn_end, InputIterator2 pgn_with_holes_begin, InputIterator2 pgn_with_holes_end)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "pgn_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "pgn_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "260",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::General_polygon_set_2::join",
+        "brief": "computes the union of gps and other .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "267",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::General_polygon_set_2::join",
+        "brief": "computes the union of gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "272",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::General_polygon_set_2::join",
+        "brief": "computes the union of gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "277",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::General_polygon_set_2::join",
+        "brief": "computes the union of the polygons (or polygons with holes) in the given range and the point set represented by gps .",
+        "detailed": "(The value type of the input iterator is used to distinguish between the two options.)",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "285",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::General_polygon_set_2::join",
+        "brief": "computes the union of the polygons and polygons with holes in the given two ranges and the point set represented by gps .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 pgn_begin, InputIterator1 pgn_end, InputIterator2 pgn_with_holes_begin, InputIterator2 pgn_with_holes_end)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "pgn_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "pgn_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "292",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "difference",
+        "qualified_name": "CGAL::General_polygon_set_2::difference",
+        "brief": "computes the difference between gps and other .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "299",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "difference",
+        "qualified_name": "CGAL::General_polygon_set_2::difference",
+        "brief": "computes the difference between gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "304",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "difference",
+        "qualified_name": "CGAL::General_polygon_set_2::difference",
+        "brief": "computes the difference between gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "309",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::General_polygon_set_2::symmetric_difference",
+        "brief": "computes the symmetric difference between gps and other .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "314",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::General_polygon_set_2::symmetric_difference",
+        "brief": "computes the symmetric difference between gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "319",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::General_polygon_set_2::symmetric_difference",
+        "brief": "computes the symmetric difference between gps and pgn .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "324",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::General_polygon_set_2::symmetric_difference",
+        "brief": "computes the symmetric difference (xor) of a collection of point sets.",
+        "detailed": "The collection consists of the polygons (or polygons with holes) in the given range and the point set represented by gps . (The value type of the input iterator is used to distinguish between the two options.)",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "333",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::General_polygon_set_2::symmetric_difference",
+        "brief": "computes the symmetric difference (xor) of a collection of point sets.",
+        "detailed": "The collection consists of the polygons and polygons with holes in the given two ranges and the point set represented by gps .",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 pgn_begin, InputIterator1 pgn_end, InputIterator2 pgn_with_holes_begin, InputIterator2 pgn_with_holes_end)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "pgn_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "pgn_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "341",
+        "section": "Univariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::General_polygon_set_2::intersection",
+        "brief": "computes the intersection of gps1 and gps2 .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &gps1, const General_polygon_set_2 &gps2)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "354",
+        "section": "Bivariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::General_polygon_set_2::join",
+        "brief": "computes the union of gps1 and gps2 .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &gps1, const General_polygon_set_2 &gps2)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "360",
+        "section": "Bivariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "difference",
+        "qualified_name": "CGAL::General_polygon_set_2::difference",
+        "brief": "computes the difference between gps1 and gps2 .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &gps1, const General_polygon_set_2 &gps2)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "366",
+        "section": "Bivariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::General_polygon_set_2::symmetric_difference",
+        "brief": "computes the symmetric difference between gps1 and gps2 .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const General_polygon_set_2 &gps1, const General_polygon_set_2 &gps2)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "gps2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "372",
+        "section": "Bivariate Operations"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect",
+        "qualified_name": "CGAL::General_polygon_set_2::do_intersect",
+        "brief": "returns true if gps and other intersect in their interior, and false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const General_polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "384",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect",
+        "qualified_name": "CGAL::General_polygon_set_2::do_intersect",
+        "brief": "returns true if gps and pgn intersect in their interior, and false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "390",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect",
+        "qualified_name": "CGAL::General_polygon_set_2::do_intersect",
+        "brief": "returns true if gps and pgn intersect in their interior, and false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "396",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect",
+        "qualified_name": "CGAL::General_polygon_set_2::do_intersect",
+        "brief": "returns true if the interior of the point sets in a collection intersect, and false otherwise.",
+        "detailed": "The collection consists of the polygons (or polygons with holes) in the given range and the point set represented by gps . (The value type of the input iterator is used to distinguish between the two options.)",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "406",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "do_intersect",
+        "qualified_name": "CGAL::General_polygon_set_2::do_intersect",
+        "brief": "returns true if the interior of the point sets in a collection intersect, and false otherwise.",
+        "detailed": "The collection consists of the polygons and polygons with holes in the given two ranges and the point set represented by gps .",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 pgn_begin, InputIterator1 pgn_end, InputIterator2 pgn_with_holes_begin, InputIterator2 pgn_with_holes_end)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "pgn_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "pgn_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "pgn_with_holes_end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "415",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::General_polygon_set_2::locate",
+        "brief": "obtains a polygon with holes that contains the query point p , if exists, through pgn , and returns true .",
+        "detailed": "Otherwise, returns false .",
+        "return_type": "bool",
+        "argsstring": "(const Point_2 &p, Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "424",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "oriented_side",
+        "qualified_name": "CGAL::General_polygon_set_2::oriented_side",
+        "brief": "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of gps respectively.",
+        "detailed": "",
+        "return_type": "Oriented_side",
+        "argsstring": "(const Point_2 &q)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "432",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "oriented_side",
+        "qualified_name": "CGAL::General_polygon_set_2::oriented_side",
+        "brief": "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff other and gps are completely disjoint, in contact, or intersect in their interior, respectively.",
+        "detailed": "",
+        "return_type": "Oriented_side",
+        "argsstring": "(const General_polygon_set_2 &other)",
+        "params": [
+          {
+            "type": "const General_polygon_set_2 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "440",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "oriented_side",
+        "qualified_name": "CGAL::General_polygon_set_2::oriented_side",
+        "brief": "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff pgn and gps are completely disjoint, in contact, or intersect in their interior, respectively.",
+        "detailed": "",
+        "return_type": "Oriented_side",
+        "argsstring": "(const Polygon_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "448",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "oriented_side",
+        "qualified_name": "CGAL::General_polygon_set_2::oriented_side",
+        "brief": "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff pgn and gps are completely disjoint, in contact, or intersect in their interior, respectively.",
+        "detailed": "",
+        "return_type": "Oriented_side",
+        "argsstring": "(const Polygon_with_holes_2 &pgn)",
+        "params": [
+          {
+            "type": "const Polygon_with_holes_2 &",
+            "name": "pgn",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "456",
+        "section": "Query Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::General_polygon_set_2::is_valid",
+        "brief": "returns true if gps represents a valid point set.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/General_polygon_set_2.h",
+        "line": "466",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Gps_circle_segment_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Gps_circle_segment_traits_2",
+    "brief": "The traits class Gps_circle_segment_traits_2 models the GeneralPolygonSetTraits_2 concept.",
+    "detailed": "It enables Boolean set-operations on general polygons bounded by linear segments or circular arcs. It should be parameterized with a kernel. Is model of GeneralPolygonSetTraits_2 CGAL::Arr_circle_segment_traits_2 <Kernel>",
+    "members": []
+  },
+  "CGAL::Gps_default_dcel": {
+    "kind": "class",
+    "name": "CGAL::Gps_default_dcel",
+    "brief": "The default DCEL class template used by the General_polygon_set_2 and General_polygon_with_holes_2 class templates.",
+    "detailed": "This template is parameterized by a traits class, which is a model of the GeneralPolygonSetTraits_2 concept. It uses the types Traits::Point_2 and Traits::X_monotone_curve_2 nested in the traits class to instantiate the base vertex, halfedge, and face types, respectively. Recall, that the DCEL stores the incidence relations between the arrangement calls and the geometric data attached to vertices and edges. This DCEL also stores data used to determine whether a face is interior and exterior of the general polygon set, and additional data used for optimizations. You need to override this default and use a different DCEL only if you intend to obtain the underlying arrangement of the general polygon set and process it further. Is model of GeneralPolygonSetDcel Arr_dcel_base <V,H,F> Gps_halfedge_base < X_monotone_curve_2 > Gps_face_base < Point_2 , X_monotone_curve_2 >",
+    "members": []
+  },
+  "CGAL::Gps_face_base": {
+    "kind": "class",
+    "name": "CGAL::Gps_face_base",
+    "brief": "An instance of this template serves as a basis type for any face record of the DCEL class used by instances of the General_polygon_set_2 and General_polygon_with_holes_2 class templates.",
+    "detailed": "The Point_2 and the X_monotone_curve_2 template parameters are the types of points and $ x$ -monotone curves associated with the vertices and the halfedges, respectively. You need to extend this template with auxiliary data only if you intend to obtain the underlying arrangement of the general polygon set and process it further. Is model of GeneralPolygonSetDcelFace Arr_face_base",
+    "members": []
+  },
+  "CGAL::Gps_halfedge_base": {
+    "kind": "class",
+    "name": "CGAL::Gps_halfedge_base",
+    "brief": "An instance of this template serves as a basis type for any halfedge record of the DCEL class used by instances of the General_polygon_set_2 and General_polygon_with_holes_2 class templates.",
+    "detailed": "The X_monotone_curve_2 template parameter is the type of $ x$ -monotone curves associated with the halfedges. You need to extend this template with auxiliary data only if you intend to obtain the underlying arrangement of the general polygon set and process it further. Is model of GeneralPolygonSetDcelHalfedge Arr_halfedge_base< X_monotone_curve_2 >",
+    "members": []
+  },
+  "CGAL::Gps_segment_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Gps_segment_traits_2",
+    "brief": "",
+    "detailed": "Is model of GeneralPolygonSetTraits_2 CGAL::Arr_segment_traits_2 <Kernel>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Polygon_2",
+        "qualified_name": "CGAL::Gps_segment_traits_2::Polygon_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Polygon_2< Kernel, Container >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Gps_segment_traits_2.h",
+        "line": "30",
+        "section": "Definition"
+      }
+    ]
+  },
+  "CGAL::Gps_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Gps_traits_2",
+    "brief": "The traits class Gps_traits_2 models the concept GeneralPolygonSetTraits_2 .",
+    "detailed": "It inherits from the instantiated type of the template parameter ArrTraits , which must model the concept AosDirectionalXMonotoneTraits_2 , (which in turn refines the concept AosXMonotoneTraits_2 ). The template parameter GeneralPolygon_t must be instantiated with a model of the concept of GpsTraitsGeneralPolygon_2 . By default, the latter is instantiated with CGAL::General_polygon_2 <ArrTraits> . Is model of GeneralPolygonSetTraits_2",
+    "members": []
+  },
+  "CGAL::Graphics_scene_options_polygon_set_2": {
+    "kind": "struct",
+    "name": "CGAL::Graphics_scene_options_polygon_set_2",
+    "brief": "The class Graphics_scene_options_polygon_set_2 defines data and methods used to tune the way that the cells of a Polygon_set_2 are considered for drawing or to be added into a graphics scene.",
+    "detailed": "This class is a model of GraphicsSceneOptionsPolygonSet2 . DS a CGAL::Polygon_set_2 . VertexDescriptor a descriptor of vertices of DS . EdgeDescriptor a descriptor of edges of DS . FaceDescriptor a descriptor of faces of DS . Is model of GraphicsSceneOptionsPolygonSet2",
+    "members": []
+  },
+  "CGAL::Polygon_set_2": {
+    "kind": "class",
+    "name": "CGAL::Polygon_set_2",
+    "brief": "The class Polygon_set_2 represents sets of linear polygons with holes.",
+    "detailed": "The first two template parameters ( Kernel and Container ) are used to instantiate the type Polygon_2 <Kernel,Container> . This type is used to represent the outer boundary of every set member and the boundaries of all holes of every set member. The third template parameter Dcel must be instantiated with a model of the concept GeneralPolygonSetDcel . It is instantiated by default with the type Gps_default_dcel <Traits> . You can override this default, with a different DCEL class, typically an extension of the Gps_default_dcel class template. Overriding the default is necessary only if you intend to obtain the underlying internal arrangement and process it further. General_polygon_set_2 Gps_segment_traits_2",
+    "members": []
+  },
+  "GeneralPolygon_2": {
+    "kind": "class",
+    "name": "GeneralPolygon_2",
+    "brief": "",
+    "detailed": "Refines GpsTraitsGeneralPolygon_2 A model of this concept represents a simple general-polygon. The geometric mapping of the edges of the polygon must be $ x$ -monotone curves. The concept requires the ability to access these curves. The general polygon represented must be simple. That is, the only points of the plane belonging to two curves are the geometric mapping of the polygon vertices. In addition, the vertices of the represented polygon must be ordered consistently, and the curved must be directed accordingly. Only counterclockwise oriented polygons are valid operands of Boolean set-operations. General polygon that represent holes must be clockwise oriented. Has models CGAL::General_polygon_2 <ArrTraits>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "X_monotone_curve_2",
+        "qualified_name": "GeneralPolygon_2::X_monotone_curve_2",
+        "brief": "represents a planar (weakly) $ x$ -monotone curve.",
+        "detailed": "The type of the geometric mapping of the polygonal edges. It must model the concept ArrTraits::XMonotoneCurve_2.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Curve_iterator",
+        "qualified_name": "GeneralPolygon_2::Curve_iterator",
+        "brief": "an iterator over the geometric mapping of the polygon edges.",
+        "detailed": "Its value type is X_monotone_curve_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Curve_const_iterator",
+        "qualified_name": "GeneralPolygon_2::Curve_const_iterator",
+        "brief": "a const iterator over the geometric mapping of the polygon edges.",
+        "detailed": "Its value type is X_monotone_curve_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "GeneralPolygon_2",
+        "qualified_name": "GeneralPolygon_2::GeneralPolygon_2",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "57",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "GeneralPolygon_2",
+        "qualified_name": "GeneralPolygon_2::GeneralPolygon_2",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(GeneralPolygon_2 other)",
+        "params": [
+          {
+            "type": "GeneralPolygon_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "62",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "GeneralPolygon_2::operator=",
+        "brief": "assignment operator.",
+        "detailed": "",
+        "return_type": "GeneralPolygon_2",
+        "argsstring": "(other)",
+        "params": [
+          {
+            "type": "other",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "67",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "GeneralPolygon_2",
+        "qualified_name": "GeneralPolygon_2::GeneralPolygon_2",
+        "brief": "constructs a general polygon from a given range of curves.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "73",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "curves_begin",
+        "qualified_name": "GeneralPolygon_2::curves_begin",
+        "brief": "returns the begin iterator of the curves.",
+        "detailed": "",
+        "return_type": "Curve_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "83",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_end",
+        "qualified_name": "GeneralPolygon_2::curves_end",
+        "brief": "returns the past-the-end iterator of the curves.",
+        "detailed": "",
+        "return_type": "Curve_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "88",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_begin",
+        "qualified_name": "GeneralPolygon_2::curves_begin",
+        "brief": "returns the begin const iterator of the curves.",
+        "detailed": "",
+        "return_type": "Curve_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "93",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_end",
+        "qualified_name": "GeneralPolygon_2::curves_end",
+        "brief": "returns the past-the-end const iterator of the curves.",
+        "detailed": "",
+        "return_type": "Curve_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "98",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "GeneralPolygon_2::init",
+        "brief": "initializes the polygon with the polygonal chain given by the range.",
+        "detailed": "The value type of Iterator must be X_monotone_curve_2 . The curves in the range must define a simple polygon.",
+        "return_type": "void",
+        "argsstring": "(Iterator begin, Iterator end)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygon_2.h",
+        "line": "111",
+        "section": "Modifiers"
+      }
+    ]
+  },
+  "GeneralPolygonSetDcel": {
+    "kind": "class",
+    "name": "GeneralPolygonSetDcel",
+    "brief": "A doubly-connected edge-list ( Dcel for short) data-structure. It consists of three containers of records: vertices $ V$ , halfedges $ E$ , and faces $ F$ . It maintains the incidence relation among them. The halfedges are ordered in pairs sometimes referred to as twins, such that each halfedge pair represent an edge.",
+    "detailed": "A model of the GeneralPolygonSetDcel simply refines AosDcel , the Halfedge and Face types being models of the concepts GeneralPolygonSetDcelHalfedge and GeneralPolygonSetDcelFace respectively Refines AosDcel Has models CGAL::Gps_default_dcel <Traits> GeneralPolygonSetDcelFace GeneralPolygonSetDcelHalfedge",
+    "members": []
+  },
+  "GeneralPolygonSetDcelFace": {
+    "kind": "class",
+    "name": "GeneralPolygonSetDcelFace",
+    "brief": "A face record in a Dcel data structure used by the General_polygon_set_2 and Polygon_set_2 template classes to represent the underlying internal Arrangement_2 data structure.",
+    "detailed": "Refines AosDcelFace Has models CGAL::Gps_face_base AosDcel AosDcelVertex GeneralPolygonSetDcelHalfedge",
+    "members": [
+      {
+        "kind": "function",
+        "name": "contained",
+        "qualified_name": "GeneralPolygonSetDcelFace::contained",
+        "brief": "returns true if the face is contained in the general-polygon set, and false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "32",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "visited",
+        "qualified_name": "GeneralPolygonSetDcelFace::visited",
+        "brief": "returns true if the face has been visited, and false otherwise.",
+        "detailed": "This is used internally by the some of the operations of the General_polygon_set_2 class that traverse the arrangement faces.",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "39",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "GeneralPolygonSetDcelFace::id",
+        "brief": "returns an id associated to the face using set_id() ; If no call to set_id() was done or if reset_id() was called, the returned value is not specified and id_not_set() must return true .",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "46",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "id_not_set",
+        "qualified_name": "GeneralPolygonSetDcelFace::id_not_set",
+        "brief": "returns true if set_id() was not called or if reset_id() was called, amd false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "52",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_contained",
+        "qualified_name": "GeneralPolygonSetDcelFace::set_contained",
+        "brief": "marks the face as contained (if flag is true ), or as a hole (if it is false ).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool flag)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "flag",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "63",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "reset_id",
+        "qualified_name": "GeneralPolygonSetDcelFace::reset_id",
+        "brief": "marks the face as visited (if flag is true ), or as not visited (if it is false ).",
+        "detailed": "This is used internally by the some of the operations of the General_polygon_set_2 class that traverse the arrangement faces. resets the id associated to the face.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "75",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_id",
+        "qualified_name": "GeneralPolygonSetDcelFace::set_id",
+        "brief": "sets the id associated to the face.",
+        "detailed": "i should be different from the largest possible value that std::size_t can store.",
+        "return_type": "void",
+        "argsstring": "(std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygonSetDcelFace.h",
+        "line": "82",
+        "section": "Modifiers"
+      }
+    ]
+  },
+  "GeneralPolygonSetDcelHalfedge": {
+    "kind": "class",
+    "name": "GeneralPolygonSetDcelHalfedge",
+    "brief": "A halfedge record in a Dcel data structure used by the General_polygon_set_2 and Polygon_set_2 template classes to represent the underlying internal Arrangement_2 data structure.",
+    "detailed": "Refines AosDcelHalfedge Has models CGAL::Gps_face_halfedge AosDcel AosDcelVertex GeneralPolygonSetDcelFace",
+    "members": [
+      {
+        "kind": "function",
+        "name": "flag",
+        "qualified_name": "GeneralPolygonSetDcelHalfedge::flag",
+        "brief": "returns an integer passed to set_flag() , if the latter function was not called the output is not specified.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetDcelHalfedge.h",
+        "line": "31",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_flag",
+        "qualified_name": "GeneralPolygonSetDcelHalfedge::set_flag",
+        "brief": "set an integer flag for this halfedge.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygonSetDcelHalfedge.h",
+        "line": "41",
+        "section": "Modifiers"
+      }
+    ]
+  },
+  "GeneralPolygonSetTraits_2": {
+    "kind": "class",
+    "name": "GeneralPolygonSetTraits_2",
+    "brief": "This concept defines the minimal set of geometric predicates needed to perform the Boolean-set operations. It refines the directional $ x$ -monotone arrangement-traits concept. In addition to the Point_2 and X_monotone_curve_2 types defined in the generalized concept, it defines a type that represents a general polygon and another one that represents general polygon with holes. It also requires operations that operate on these types.",
+    "detailed": "Refines AosDirectionalXMonotoneTraits_2 Has models CGAL::Gps_segment_traits_2 <Kernel,Container,ArrSegmentTraits> CGAL::Gps_circle_segment_traits_2 <Kernel> CGAL::Gps_traits_2 <ArrTraits,GeneralPolygon> AosDirectionalXMonotoneTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Polygon_2",
+        "qualified_name": "GeneralPolygonSetTraits_2::Polygon_2",
+        "brief": "represents a general polygon.",
+        "detailed": "Must be a model of the GpsTraitsGeneralPolygon_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polygon_with_holes_2",
+        "qualified_name": "GeneralPolygonSetTraits_2::Polygon_with_holes_2",
+        "brief": "represents a general polygon with holes.",
+        "detailed": "Must be a model of the GpsTraitsGeneralPolygonWithHoles_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Curve_const_iterator",
+        "qualified_name": "GeneralPolygonSetTraits_2::Curve_const_iterator",
+        "brief": "A const iterator of curves.",
+        "detailed": "Its value type is const X_monotone_curve_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_polygon_2",
+        "qualified_name": "GeneralPolygonSetTraits_2::Construct_polygon_2",
+        "brief": "a functor that constructs a general polygon from a range of $ x$ -monotone curves.",
+        "detailed": "It uses the operator void operator() (InputIterator begin, Input iterator end, Polygon_2 & pgn) , parameterized by the InputIterator type.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "61",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_polygon_with_holes_2",
+        "qualified_name": "GeneralPolygonSetTraits_2::Construct_polygon_with_holes_2",
+        "brief": "a functor that constructs a general polygon with holes from a general polygon and, optionally, a range of holes.",
+        "detailed": "It uses the operator void operator() (const Polygon_2 & pgn_boundary) or void operator() (const Polygon_2 & pgn_boundary, HolesInputIterator h_begin, HolesInputIterator h_end) parameterized by the HolesInputIterator type.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "70",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_outer_boundary",
+        "qualified_name": "GeneralPolygonSetTraits_2::Construct_outer_boundary",
+        "brief": "A functor for constructing the outer boundary of a polygon with holes.",
+        "detailed": "It uses the operator Polygon_2 operator()(const Polygon_with_holes_2 & pol_wh) .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "77",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_holes",
+        "qualified_name": "GeneralPolygonSetTraits_2::Construct_holes",
+        "brief": "A functor for constructing the container of holes of a polygon with holes.",
+        "detailed": "It returns the begin/end iterators for the holes It uses the operator std::pair<Hole_const_iterator, Hole_const_iterator> operator()(const Polygon_with_holes_2 & pol_wh) .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "84",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_unbounded",
+        "qualified_name": "GeneralPolygonSetTraits_2::Is_unbounded",
+        "brief": "A functor for checking if polygon with holes has no outer boundary.",
+        "detailed": "It uses the operator bool operator()(const Polygon_with_holes_2 & pol_wh) .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "91",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "function",
+        "name": "GeneralPolygonSetTraits_2",
+        "qualified_name": "GeneralPolygonSetTraits_2::GeneralPolygonSetTraits_2",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "101",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "GeneralPolygonSetTraits_2",
+        "qualified_name": "GeneralPolygonSetTraits_2::GeneralPolygonSetTraits_2",
+        "brief": "copy constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(GeneralPolygonSetTraits_2 other)",
+        "params": [
+          {
+            "type": "GeneralPolygonSetTraits_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "106",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "GeneralPolygonSetTraits_2::operator=",
+        "brief": "assignment operator.",
+        "detailed": "",
+        "return_type": "GeneralPolygonSetTraits_2",
+        "argsstring": "(other)",
+        "params": [
+          {
+            "type": "other",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "111",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "construct_polygon_2_object",
+        "qualified_name": "GeneralPolygonSetTraits_2::construct_polygon_2_object",
+        "brief": "returns a functor that constructs a polygon.",
+        "detailed": "",
+        "return_type": "Construct_polygon_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "121",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_curves_2_object",
+        "qualified_name": "GeneralPolygonSetTraits_2::construct_curves_2_object",
+        "brief": "returns a functor that obtains the curves of a polygon.",
+        "detailed": "",
+        "return_type": "Construct_curves_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "126",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_polygon_with_holes_2_object",
+        "qualified_name": "GeneralPolygonSetTraits_2::construct_polygon_with_holes_2_object",
+        "brief": "returns a functor that constructs a polygon with holes.",
+        "detailed": "",
+        "return_type": "Construct_polygon_with_holes_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "131",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_outer_boundary_object",
+        "qualified_name": "GeneralPolygonSetTraits_2::construct_outer_boundary_object",
+        "brief": "returns a functor that obtains the outer boundary of a polygon with holes.",
+        "detailed": "",
+        "return_type": "Construct_outer_boundary",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "136",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_holes_object",
+        "qualified_name": "GeneralPolygonSetTraits_2::construct_holes_object",
+        "brief": "returns a functor that obtains begin/end iterators over a container of holes.",
+        "detailed": "",
+        "return_type": "Construct_holes",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "141",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "is_unbounded_object",
+        "qualified_name": "GeneralPolygonSetTraits_2::is_unbounded_object",
+        "brief": "returns a functor that determines if the polygon with holes is unbounded",
+        "detailed": "",
+        "return_type": "Is_unbounded",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GeneralPolygonSetTraits_2.h",
+        "line": "146",
+        "section": "Accessing Functor Objects"
+      }
+    ]
+  },
+  "GpsTraitsGeneralPolygon_2": {
+    "kind": "class",
+    "name": "GpsTraitsGeneralPolygon_2",
+    "brief": "A model of this concept represents a simple general polygon.",
+    "detailed": "Refines CopyConstructible Assignable DefaultConstructible Generalizes GeneralPolygon_2 Has models GeneralPolygonSetTraits_2::Polygon_2 CGAL::Polygon_2<PolygonTraits_2, Container> GeneralPolygon_2",
+    "members": []
+  },
+  "GpsTraitsGeneralPolygonWithHoles_2": {
+    "kind": "class",
+    "name": "GpsTraitsGeneralPolygonWithHoles_2",
+    "brief": "A model of this concept represents a general polygon with holes.",
+    "detailed": "Refines CopyConstructible Assignable DefaultConstructible Generalizes GeneralPolygonWithHoles_2 Has models GeneralPolygonSetTraits_2::Polygon_with_holes2 GeneralPolygonWithHoles_2",
+    "members": []
+  },
+  "GraphicsSceneOptionsPolygonSet2": {
+    "kind": "class",
+    "name": "GraphicsSceneOptionsPolygonSet2",
+    "brief": "The concept GraphicsSceneOptionsPolygonSet2 defines data and methods used to tune the way that the cells of a Polygon_set_2 are considered for drawing or to be added into a graphics scene.",
+    "detailed": "Refines GraphicsSceneOptions Has models CGAL::Graphics_scene_options_polygon_set_2<DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "unbounded_face_color",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::unbounded_face_color",
+        "brief": "returns the color of the unbounded face.",
+        "detailed": "",
+        "return_type": "const CGAL::IO::Color &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "17",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_face_color",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::unbounded_face_color",
+        "brief": "sets the color of the unbounded face to c .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const CGAL::IO::Color &c)",
+        "params": [
+          {
+            "type": "const CGAL::IO::Color &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "19",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_unbounded",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::draw_unbounded",
+        "brief": "returns true if the unbounded face must be drawn, false otherwise.",
+        "detailed": "Returns false by default.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "23",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_unbounded",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::draw_unbounded",
+        "brief": "sets the draw of unbounded face to b .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool b)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "25",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "toggle_draw_unbounded",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::toggle_draw_unbounded",
+        "brief": "toggles the draw unbounded face value.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "height",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::height",
+        "brief": "returns the height of the box used to draw the unbounded face.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "width",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::width",
+        "brief": "returns the width of the box used to draw the unbounded face.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "height",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::height",
+        "brief": "sets the height of the box used to draw the unbounded face to i .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "35",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "width",
+        "qualified_name": "GraphicsSceneOptionsPolygonSet2::width",
+        "brief": "sets the width of the box used to draw the unbounded face to i .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsPolygonSet2.h",
+        "line": "37",
+        "section": ""
+      }
+    ]
+  },
+  "ArrDirectionalTraits": {
+    "kind": "namespace",
+    "name": "ArrDirectionalTraits",
+    "brief": "The namespace containing concepts specific to 2D Boolean Set Operations.",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "CastingTraits_2": {
+    "kind": "class",
+    "name": "CastingTraits_2",
+    "brief": "This concept generalizes the concept of a 2D Kernel.",
+    "detailed": "Refines DefaultConstructible PolygonTraits_2 Has models Any CGAL kernel, e.g., CGAL::Exact_predicates_exact_constructions_kernel.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Direction_2",
+        "qualified_name": "CastingTraits_2::Direction_2",
+        "brief": "The direction type. Models the concept Kernel::Direction_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CastingTraits_2.h",
+        "line": "23",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Counterclockwise_in_between_2",
+        "qualified_name": "CastingTraits_2::Counterclockwise_in_between_2",
+        "brief": "Models the concept Kernel::Counterclockwise_in_between_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CastingTraits_2.h",
+        "line": "31",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Collinear_2",
+        "qualified_name": "CastingTraits_2::Collinear_2",
+        "brief": "Models the concept Kernel::Collinear_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CastingTraits_2.h",
+        "line": "34",
+        "section": "Functor Types"
+      },
+      {
+        "kind": "function",
+        "name": "counterclockwise_in_between_2_object",
+        "qualified_name": "CastingTraits_2::counterclockwise_in_between_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Counterclockwise_in_between_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/CastingTraits_2.h",
+        "line": "41",
+        "section": "Accessing Functor Objects"
+      },
+      {
+        "kind": "function",
+        "name": "collinear_2_object",
+        "qualified_name": "CastingTraits_2::collinear_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Collinear_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/CastingTraits_2.h",
+        "line": "42",
+        "section": "Accessing Functor Objects"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Set_movable_separability_2": {
+    "kind": "namespace",
+    "name": "CGAL::Set_movable_separability_2",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Set_movable_separability_2::Single_mold_translational_casting": {
+    "kind": "namespace",
+    "name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

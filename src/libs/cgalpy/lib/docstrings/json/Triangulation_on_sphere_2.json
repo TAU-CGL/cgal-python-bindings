@@ -1,0 +1,3219 @@
+{
+  "CGAL::Delaunay_triangulation_on_sphere_2": {
+    "kind": "class",
+    "name": "CGAL::Delaunay_triangulation_on_sphere_2",
+    "brief": "The class Delaunay_triangulation_on_sphere_2 is designed to represent the Delaunay triangulation of a set of points on the 2-sphere.",
+    "detailed": "A Delaunay triangulation of a set of points is a triangulation of the set of points that fulfills the following empty circle property (also called Delaunay property ): the circumscribing sphere of any simplex of the triangulation contains no point of the set in its interior. For a point set with no case of co-circularity of more than three points, the Delaunay triangulation is unique, and defined as the dual of the Voronoi diagram of the points. The setting of 3D points on the 2-sphere is particular in that the empty circle property can be reduced to a single 3D orientation test [1] . Traits is the geometric traits; it must be a model of DelaunayTriangulationOnSphereTraits_2 . TDS is the triangulation data structure, which must be a model of TriangulationDataStructure_2 whose vertex base must be a model of TriangulationOnSphereVertexBase_2 and whose face base must be a model of TriangulationOnSphereFaceBase_2 . CGAL provides a default instantiation for this parameter, which is the class CGAL::Triangulation_data_structure_2 < CGAL::Triangulation_on_sphere_vertex_base_2 <Traits>, CGAL::Triangulation_on_sphere_face_base_2 <Traits> > . CGAL::Triangulation_on_sphere_2 <Traits, TDS>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Geom_traits",
+        "brief": "The traits class.",
+        "detailed": "",
+        "return_type": "Traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Point",
+        "brief": "The point type representing a point on the sphere.",
+        "detailed": "",
+        "return_type": "Traits::Point_on_sphere_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Delaunay_triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Delaunay_triangulation_on_sphere_2",
+        "brief": "introduces an empty triangulation and sets the center and radius of the sphere to c and r respectively.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point_3 &c, const FT r)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "55",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Delaunay_triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Delaunay_triangulation_on_sphere_2",
+        "brief": "introduces an empty triangulation.",
+        "detailed": "The values for the center and radius must be either already set in the traits (if gt is provided) or must be set after the construction, using the function set_center_and_radius() .",
+        "return_type": "",
+        "argsstring": "(const Geom_traits &gt=Geom_traits())",
+        "params": [
+          {
+            "type": "const Geom_traits &",
+            "name": "gt",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "63",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Delaunay_triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Delaunay_triangulation_on_sphere_2",
+        "brief": "introduces an empty triangulation, sets the center and radius of the sphere to c and r respectively, and inserts the point range [first; beyond[ .",
+        "detailed": "PointOnSphereIterator must be a model of InputIterator with value type Point_on_sphere_2 or Point_3 .",
+        "return_type": "",
+        "argsstring": "(PointOnSphereIterator first, PointOnSphereIterator beyond, const Point_3 &center, const FT radius)",
+        "params": [
+          {
+            "type": "PointOnSphereIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointOnSphereIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "center",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "radius",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "72",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Delaunay_triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Delaunay_triangulation_on_sphere_2",
+        "brief": "introduces an empty triangulation whose center and radius are set according to values within the traits and inserts the point range [first;beyond[ .",
+        "detailed": "It is the user's responsibility to ensure that the center and radius are set as intended in gt . PointOnSphereIterator must be a model of InputIterator with value type Point_on_sphere_2 or Point_3 .",
+        "return_type": "",
+        "argsstring": "(PointOnSphereIterator first, PointOnSphereIterator beyond, const Geom_traits &gt=Geom_traits())",
+        "params": [
+          {
+            "type": "PointOnSphereIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointOnSphereIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Geom_traits &",
+            "name": "gt",
+            "default": "Geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "84",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Delaunay_triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::Delaunay_triangulation_on_sphere_2",
+        "brief": "Copy constructor.",
+        "detailed": "All the vertices and faces are duplicated.",
+        "return_type": "",
+        "argsstring": "(const Delaunay_triangulation_on_sphere_2< Traits, TDS > &tr)",
+        "params": [
+          {
+            "type": "const Delaunay_triangulation_on_sphere_2< Traits, TDS > &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "90",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_circle",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::side_of_oriented_circle",
+        "brief": "returns the side of p with respect to the circle circumscribing the triangle associated with f .",
+        "detailed": "",
+        "return_type": "Oriented_side",
+        "argsstring": "(Face_handle f, const Point &p) const",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "102",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::insert",
+        "brief": "inserts the point p .",
+        "detailed": "If the point p coincides with an already existing vertex, this vertex is returned and the triangulation remains unchanged. The optional parameter f is used to give a hint about the location of p .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Face_handle f=Face_handle())",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "122",
+        "section": "Insertion and Removal"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::insert",
+        "brief": "inserts the point p at the location given by (lt, loc, li) .",
+        "detailed": "Triangulation_on_sphere_2::locate()",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p, Locate_type &lt, Face_handle loc, int li)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type &",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "loc",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "129",
+        "section": "Insertion and Removal"
+      },
+      {
+        "kind": "function",
+        "name": "push_back",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::push_back",
+        "brief": "Equivalent to insert(p) .",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "134",
+        "section": "Insertion and Removal"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::insert",
+        "brief": "inserts the points in the range [first, beyond) and returns the number of inserted points.",
+        "detailed": "PointOnSphereIterator must be a model of InputIterator with value type Point .",
+        "return_type": "size_type",
+        "argsstring": "(PointOnSphereIterator first, PointOnSphereIterator beyond)",
+        "params": [
+          {
+            "type": "PointOnSphereIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointOnSphereIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "142",
+        "section": "Insertion and Removal"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::remove",
+        "brief": "removes the vertex v from the triangulation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "147",
+        "section": "Insertion and Removal"
+      },
+      {
+        "kind": "function",
+        "name": "get_conflicts_and_boundary",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::get_conflicts_and_boundary",
+        "brief": "outputs the faces and boundary edges of the conflict zone of point p into output iterators.",
+        "detailed": "This function outputs in the container pointed to by fit the faces which are in conflict with point p , i. e., the faces whose circumcircle contains p . It outputs in the container pointed to by eit the boundary of the zone in conflict with p . The boundary edges of the conflict zone are output in counterclockwise order and each edge is described through its incident face which is not in conflict with p . The function returns in a std::pair the resulting output iterators. OutItFaces is an output iterator with Face_handle as value type. OutItBoundaryEdges is an output iterator with Edge as value type. This function makes uses of the member tds_data (see the concept TriangulationDSFaceBase_2 ) of the face to mark faces in conflict. It is the responsibility of the user to make sure the flags are cleared. dimension() == 2 .",
+        "return_type": "std::pair< OutputItFaces, OutputItBoundaryEdges >",
+        "argsstring": "(const Point &p, OutputItFaces fit, OutputItBoundaryEdges eit, Face_handle start) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItFaces",
+            "name": "fit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputItBoundaryEdges",
+            "name": "eit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "start",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "173",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual",
+        "brief": "returns the center of the circle circumscribed to face f",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "(const Face_handle f) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "196",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual",
+        "brief": "returns the line segment with endpoints the circumcenters of the faces incident to the edge e .",
+        "detailed": "",
+        "return_type": "Segment_3",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "201",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual",
+        "brief": "returns the line segment with endpoints the circumcenters of the faces incident to the edge *ec .",
+        "detailed": "",
+        "return_type": "Segment_3",
+        "argsstring": "(const Edge_circulator ec) const",
+        "params": [
+          {
+            "type": "const Edge_circulator",
+            "name": "ec",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "206",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual",
+        "brief": "returns the line segment with endpoints the circumcenters of the faces incident to the edge *ei .",
+        "detailed": "",
+        "return_type": "Segment_3",
+        "argsstring": "(const All_edges_iterator ei) const",
+        "params": [
+          {
+            "type": "const All_edges_iterator",
+            "name": "ei",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "211",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual_on_sphere",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual_on_sphere",
+        "brief": "returns the intersection of the dual of the face f and the sphere.",
+        "detailed": "dimension() == 2 and f is a solid face.",
+        "return_type": "Point",
+        "argsstring": "(const Face_handle f) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "220",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual_on_sphere",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual_on_sphere",
+        "brief": "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge e .",
+        "detailed": "dimension() == 2 and e is not a ghost edge.",
+        "return_type": "Arc_on_sphere_2",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "227",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual_on_sphere",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual_on_sphere",
+        "brief": "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge *ec .",
+        "detailed": "dimension() == 2 and *ec is not a ghost edge.",
+        "return_type": "Arc_on_sphere_2",
+        "argsstring": "(const Edge_circulator ec) const",
+        "params": [
+          {
+            "type": "const Edge_circulator",
+            "name": "ec",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "234",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "dual_on_sphere",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::dual_on_sphere",
+        "brief": "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge *ei .",
+        "detailed": "dimension() == 2 and *ei is not a ghost edge.",
+        "return_type": "Arc_on_sphere_2",
+        "argsstring": "(const All_edges_iterator ei) const",
+        "params": [
+          {
+            "type": "const All_edges_iterator",
+            "name": "ei",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "241",
+        "section": "Voronoi Diagram"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_2::is_valid",
+        "brief": "tests the validity of the triangulation as a Triangulation_on_sphere_2 and additionally tests the Delaunay property.",
+        "detailed": "This method is mainly useful for debugging Delaunay triangulation algorithms.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_2.h",
+        "line": "254",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Delaunay_triangulation_on_sphere_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Delaunay_triangulation_on_sphere_traits_2",
+    "brief": "The class Delaunay_triangulation_on_sphere_traits_2 is a model of the concept DelaunayTriangulationOnSphereTraits_2 .",
+    "detailed": "The Point_on_sphere_2 type is implemented as a kernel Point_3 type. If the kernel template parameter LK does not enable exact representation of points on sphere (i.e., at least a mean to represent algebraic coordinates), then it cannot be guaranteed that all points on the sphere are in a convex position and thus some points might be hidden upon insertion. It is possible to ensure that no point can be hidden by enforcing a tiny gap between points [1] . In Lemma 4.1 of this publication, it is in particular proven that if points lie within a distance $ \\delta $ of the sphere, no point is hidden as long as points are separated by at least $ 2 \\sqrt{R\\delta} $ with $ R $ the radius of the sphere. Thus, if LK offers exact representation, then $ \\delta $ is set to $ 0 $ . Otherwise, $ \\delta $ is set to the maximal distance between two consecutive LK::FT for the coordinates of a point that is (theoretically) on the sphere. This bound $ \\delta $ is then used in the functions is_on_sphere() and are_points_too_close() using the relation above to ensure that a point being inserted is either marked as \"too close\" (see CGAL::Triangulation_on_sphere_2<Traits,TDS>::Locate_type ) and thus not inserted, or guaranteed to not be hidden upon insertion. LK a linear kernel type; it must be a model of Kernel . SK a spherical kernel type; it must be a model of SphericalKernel refining LK . Is model of DelaunayTriangulationOnSphereTraits_2 CGAL::Projection_on_sphere_traits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Collinear_are_strictly_ordered_on_great_circle_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Collinear_are_strictly_ordered_on_great_circle_2",
+        "brief": "Internally uses LK::Coplanar_orientation_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "63",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Compare_on_sphere_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Compare_xyz_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "66",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Equal_on_sphere_2",
+        "brief": "If the kernel cannot represent algebraic coordinates exactly, there is a tolerance around the sphere, and thus different points of $ \\mathbb{R}^3$ can actually correspond to the same point on the sphere.",
+        "detailed": "This functor checks if two points project onto the same point on the sphere.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "72",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Side_of_oriented_circle_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Side_of_oriented_circle_on_sphere_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Orientation_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "75",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Orientation_on_sphere_2",
+        "brief": "Internally uses LK::Orientation_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "78",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_arc_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Construct_arc_on_sphere_2",
+        "brief": "Internally uses SK::Construct_circular_arc_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "87",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circumcenter_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Construct_circumcenter_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Construct_circumcenter_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "90",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Construct_point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Construct_point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "93",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Construct_segment_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Construct_segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "96",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Construct_triangle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Construct_triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "99",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "is_on_sphere",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::is_on_sphere",
+        "brief": "returns whether p is exactly on the sphere if LK can represent algebraic coordinates, or whether p is within an automatically computed small distance otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_on_sphere_2 &p) const",
+        "params": [
+          {
+            "type": "const Point_on_sphere_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "110",
+        "section": "Precision predicates"
+      },
+      {
+        "kind": "function",
+        "name": "are_points_too_close",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::are_points_too_close",
+        "brief": "returns false if LK can represent algebraic coordinates, or whether the distance between p and q is lower than $ 2 \\sqrt{R\\delta} $ otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_on_sphere_2 &p, const Point_on_sphere_2 &q) const",
+        "params": [
+          {
+            "type": "const Point_on_sphere_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_on_sphere_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "114",
+        "section": "Precision predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::FT",
+        "brief": "The field number type.",
+        "detailed": "",
+        "return_type": "LK::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "41",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Point_on_sphere_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Arc_on_sphere_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Arc_on_sphere_2",
+        "brief": "An arc of a great circle, used to represent a curved segment on the sphere (Voronoi or Delaunay edge).",
+        "detailed": "",
+        "return_type": "SK::Circular_arc_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Segment_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "CGAL::Delaunay_triangulation_on_sphere_traits_2::Triangle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_on_sphere_traits_2.h",
+        "line": "56",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Projection_on_sphere_traits_3": {
+    "kind": "class",
+    "name": "CGAL::Projection_on_sphere_traits_3",
+    "brief": "The class Projection_on_sphere_traits_3 is a model of the concept DelaunayTriangulationOnSphereTraits_2 .",
+    "detailed": "It implements the Point_on_sphere_2 type as a custom point type which represents the projection of a point living in the 3D Euclidean space onto the sphere along the segment between said point and the center of the sphere. LK a linear kernel type; must be a model of Kernel . SK a spherical kernel type; must be a model of SphericalKernel . Is model of DelaunayTriangulationOnSphereTraits_2 CGAL::Delaunay_triangulation_on_sphere_traits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Equal_on_sphere_2",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::Equal_on_sphere_2",
+        "brief": "Points are equal if they have the same projection onto the sphere.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "48",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_on_sphere",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::is_on_sphere",
+        "brief": "Due to the chosen point representation, any point is theoretically on the sphere, and this function always returns true .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_on_sphere_2 &p) const",
+        "params": [
+          {
+            "type": "const Point_on_sphere_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "59",
+        "section": "Precision predicates"
+      },
+      {
+        "kind": "function",
+        "name": "are_points_too_close",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::are_points_too_close",
+        "brief": "returns false if LK can represent algebraic coordinates, or whether the distance between p and q is lower than $ 2 \\sqrt{R\\delta} $ otherwise (see the traits class CGAL::Delaunay_triangulation_on_sphere_traits_2 ).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_on_sphere_2 &p, const Point_on_sphere_2 &q) const",
+        "params": [
+          {
+            "type": "const Point_on_sphere_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_on_sphere_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "64",
+        "section": "Precision predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::FT",
+        "brief": "The field number type.",
+        "detailed": "",
+        "return_type": "LK::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "26",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_on_sphere_2",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::Point_on_sphere_2",
+        "brief": "The point on the sphere type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "29",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Arc_on_sphere_2",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::Arc_on_sphere_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "SK::Circular_arc_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "35",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::Segment_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "38",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "CGAL::Projection_on_sphere_traits_3::Triangle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "LK::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Projection_on_sphere_traits_3.h",
+        "line": "41",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Triangulation_on_sphere_2": {
+    "kind": "class",
+    "name": "CGAL::Triangulation_on_sphere_2",
+    "brief": "The class Triangulation_on_sphere_2 is the basic class designed to represent a triangulation of a point set on a sphere: its vertices coincide with the points of the set.",
+    "detailed": "This triangulation supports neither the insertion nor the removal of vertices, see CGAL::Delaunay_triangulation_on_sphere_2 for such purposes. This triangulation class is very similar to CGAL::Triangulation_2 as both classes represent triangulations of a 2-manifold domain without boundary. A significant difference is that in the case of Euclidean 2D triangulation, it is necessary to introduce so-called infinite faces to complete the convex hull into an actual 2-manifold without boundary that the triangulation data structure can represent. This is not necessary for triangulations on the sphere, which are already perfectly adapted to the triangulation data structure. There is an exception to the previous statement: in the degenerate configuration where all points lie on the same hemisphere, the triangulation has a border. Internally, the triangulation data structure must however remain a 2-manifold at all time, and to ensure this property, fictitious faces called ghost faces are added. We call faces that are not ghost faces solid faces , and edges of such faces solid edges . Traits is the geometric traits; it must be a model of the concept TriangulationOnSphereTraits_2 . TDS is the triangulation data structure; it must be a model of the concept TriangulationDataStructure_2 , whose vertex base must be a model of TriangulationOnSphereVertexBase_2 and whose face base must be a model of TriangulationOnSphereFaceBase_2 . By default, the triangulation data structure is instantiated with Triangulation_data_structure_2< Triangulation_on_sphere_vertex_base_2 <Gt>, Triangulation_on_sphere_face_base_2 <Gt> > . CGAL::Delaunay_triangulation_on_sphere_2 <Traits, TDS>",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Locate_type",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Locate_type",
+        "brief": "specifies which case occurs when locating a query point in the triangulation.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "580",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::locate",
+        "brief": "locates the point query in the triangulation, and returns information on this location.",
+        "detailed": "If the point is (according to the traits) not on the sphere or is too close to an existing vertex, or if the dimension of the triangulation is not 2, or if the point is outside the affine hull, then the returned Face_handle is nullptr . Otherwise, a face intersected by the ray spawned from the center of the sphere and passing through the point is returned. The optional Face_handle argument, if provided, is used as a hint of where the locate process should start its search.",
+        "return_type": "Face_handle",
+        "argsstring": "(const Point &query, Face_handle f=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "602",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::locate",
+        "brief": "Same as above.",
+        "detailed": "Additionally, the parameters lt and li describe where the query point is located. The variable lt is set to the locate type of the query. If lt== VERTEX , the variable li is set to the index of the vertex, and if lt== EDGE li is set to the index of the vertex opposite to the edge. Note that li has no meaning when the query type is FACE , OUTSIDE_CONVEX_HULL , or OUTSIDE_AFFINE_HULL .",
+        "return_type": "Face_handle",
+        "argsstring": "(const Point &query, Locate_type &lt, int &li, Face_handle h=Face_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type &",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "h",
+            "default": "Face_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "612",
+        "section": "Queries"
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Geom_traits",
+        "brief": "The traits class.",
+        "detailed": "",
+        "return_type": "Traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Triangulation_data_structure",
+        "brief": "The triangulation data structure type.",
+        "detailed": "",
+        "return_type": "TDS",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "51",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::size_type",
+        "brief": "Size type (an unsigned integral type).",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::FT",
+        "brief": "The number type.",
+        "detailed": "",
+        "return_type": "Traits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "61",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Point",
+        "brief": "The point type representing a point on the sphere.",
+        "detailed": "",
+        "return_type": "Traits::Point_on_sphere_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Point_3",
+        "brief": "The 3D point type.",
+        "detailed": "",
+        "return_type": "Traits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Segment_3",
+        "brief": "The 3D segment type.",
+        "detailed": "",
+        "return_type": "Traits::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Triangle_3",
+        "brief": "The 3D triangle type.",
+        "detailed": "",
+        "return_type": "Traits::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Arc_on_sphere_2",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Arc_on_sphere_2",
+        "brief": "An arc of a great circle, used to represent a curved segment (Voronoi or Delaunay edge).",
+        "detailed": "",
+        "return_type": "Traits::Arc_on_sphere_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "86",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Vertex",
+        "brief": "The vertex type.",
+        "detailed": "",
+        "return_type": "TDS::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "92",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Edge",
+        "brief": "The edge type.",
+        "detailed": "",
+        "return_type": "TDS::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Face",
+        "brief": "The face type.",
+        "detailed": "",
+        "return_type": "TDS::Face",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "102",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Vertex_handle",
+        "brief": "Handle to a vertex.",
+        "detailed": "",
+        "return_type": "TDS::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "126",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Face_handle",
+        "brief": "Handle to a face.",
+        "detailed": "",
+        "return_type": "TDS::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "131",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertices_iterator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Vertices_iterator",
+        "brief": "Iterator over all vertices.",
+        "detailed": "",
+        "return_type": "TDS::Vertex_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "136",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handles",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Vertex_handles",
+        "brief": "Range type for iterating over all vertices, with a nested type iterator that has as value type Vertex_handle .",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "142",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_edges_iterator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::All_edges_iterator",
+        "brief": "Iterator over all edges.",
+        "detailed": "",
+        "return_type": "TDS::Edge_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "147",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_edges",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::All_edges",
+        "brief": "Range type for iterating over all edges (including non-solid ones).",
+        "detailed": "",
+        "return_type": "Iterator_range< All_edges_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "152",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_faces_iterator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::All_faces_iterator",
+        "brief": "Iterator over all faces.",
+        "detailed": "",
+        "return_type": "TDS::Face_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "157",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_face_handles",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::All_face_handles",
+        "brief": "Range type for iterating over all faces (including ghost faces), with a nested type iterator that has as value type Face_handle .",
+        "detailed": "",
+        "return_type": "Iterator_range< All_faces_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "163",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Solid_edges_iterator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Solid_edges_iterator",
+        "brief": "Iterator over all solid edges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "168",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Solid_edges",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Solid_edges",
+        "brief": "Range type for iterating over all solid edges.",
+        "detailed": "",
+        "return_type": "Iterator_range< Solid_edges_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "173",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Solid_faces_iterator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Solid_faces_iterator",
+        "brief": "Iterator over all solid faces.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "178",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Solid_face_handles",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Solid_face_handles",
+        "brief": "Range type for iterating over solid faces, with a nested type iterator that has as value type Face_handle .",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "184",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_circulator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Vertex_circulator",
+        "brief": "Circulator over all vertices incident to a given vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "189",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_circulator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Edge_circulator",
+        "brief": "Circulator over all edges incident to a given vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "194",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_circulator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Face_circulator",
+        "brief": "Circulator over all faces incident to a given vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "199",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_iterator",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Point_iterator",
+        "brief": "Iterator over the points corresponding the vertices of the triangulation.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "204",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Points",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Points",
+        "brief": "Range type for iterating over the points of the finite vertices.",
+        "detailed": "",
+        "return_type": "Iterator_range< Point_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "209",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Triangulation_on_sphere_2",
+        "brief": "constructs an empty triangulation.",
+        "detailed": "The values for the center and radius must be either already set in the traits (if gt is passed) or must be set after the construction, using the function set_center_and_radius() .",
+        "return_type": "",
+        "argsstring": "(const Traits &gt=Traits())",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "gt",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "224",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Triangulation_on_sphere_2",
+        "brief": "constructs an empty triangulation and sets the center and radius to c and r respectively.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point_3 &c, const FT r)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "229",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_on_sphere_2",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::Triangulation_on_sphere_2",
+        "brief": "Copy constructor.",
+        "detailed": "All the vertices and faces are duplicated. After the copy, *this and tr refer to different triangulations: if tr is modified, *this is not.",
+        "return_type": "",
+        "argsstring": "(const Triangulation_on_sphere_2 &tr)",
+        "params": [
+          {
+            "type": "const Triangulation_on_sphere_2 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "236",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::operator=",
+        "brief": "Assignment operator.",
+        "detailed": "This performs a deep copy of the triangulation, duplicating both vertices and faces.",
+        "return_type": "Triangulation_on_sphere_2 &",
+        "argsstring": "(Triangulation_on_sphere_2< Traits, TDS > tr)",
+        "params": [
+          {
+            "type": "Triangulation_on_sphere_2 < Traits, TDS >",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "241",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::swap",
+        "brief": "The triangulations tr and *this are swapped.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Triangulation_on_sphere_2 &tr)",
+        "params": [
+          {
+            "type": "Triangulation_on_sphere_2 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "246",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::clear",
+        "brief": "deletes all faces and vertices, resulting in an empty triangulation.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "251",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "is_ghost",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_ghost",
+        "brief": "returns true if f is a ghost face, and false otherwise.",
+        "detailed": "dimension() == 2",
+        "return_type": "bool",
+        "argsstring": "(const Face_handle f) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "264",
+        "section": "Ghost Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_ghost",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_ghost",
+        "brief": "returns true if e is a ghost edge, that is if both its incident faces are ghost faces, and false otherwise.",
+        "detailed": "dimension() == 2",
+        "return_type": "bool",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "272",
+        "section": "Ghost Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "set_center",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::set_center",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_3 &c)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "286",
+        "section": "Modifying the domain"
+      },
+      {
+        "kind": "function",
+        "name": "set_radius",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::set_radius",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FT radius)",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "radius",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "289",
+        "section": "Modifying the domain"
+      },
+      {
+        "kind": "function",
+        "name": "set_center_and_radius",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::set_center_and_radius",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_3 &c, const FT radius)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "radius",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "292",
+        "section": "Modifying the domain"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::dimension",
+        "brief": "returns:",
+        "detailed": "-2 if the triangulation is empty -1 if the triangulation contains a single vertex 0 if the triangulation contains exactly two vertices 1 if the triangulation contains three (or more) coplanar vertices 2 if the triangulation contains at least four non-coplanar vertices Note that a triangulation of dimension 1 is just a polygon drawn on a circle. The polygon is not triangulated itself. Thus the triangulation of dimension one consists of one polygon and has no faces.",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "312",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::geom_traits",
+        "brief": "returns a const reference to the triangulation traits object.",
+        "detailed": "",
+        "return_type": "const Geom_traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "317",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::tds",
+        "brief": "returns a const reference to the triangulation data structure.",
+        "detailed": "",
+        "return_type": "const Triangulation_data_structure &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "322",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::number_of_vertices",
+        "brief": "returns the number of vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "327",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::number_of_faces",
+        "brief": "returns the number of faces.",
+        "detailed": "Note that this includes ghost faces.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "332",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_ghost_faces",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::number_of_ghost_faces",
+        "brief": "returns the number of ghost faces.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "337",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_solid_faces",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::number_of_solid_faces",
+        "brief": "returns the number of solid faces.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "342",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::point",
+        "brief": "returns the geometric position of the vertex v .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(const Vertex_handle v)",
+        "params": [
+          {
+            "type": "const Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "352",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::point",
+        "brief": "returns the geometric position of the i -th vertex of the face f .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(const Face_handle f, const int i)",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "357",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::segment",
+        "brief": "returns the 3D line segment formed by the vertices of the edge e .",
+        "detailed": "t.dimension() $ \\geq1$ .",
+        "return_type": "Segment_3",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "363",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "segment",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::segment",
+        "brief": "returns the 3D line segment formed by the vertices of the edge (f, i) .",
+        "detailed": "t.dimension() $ \\geq1$ .",
+        "return_type": "Segment_3",
+        "argsstring": "(const Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "369",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "segment_on_sphere",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::segment_on_sphere",
+        "brief": "returns the great circle arc formed by the vertices of the edge e .",
+        "detailed": "t.dimension() $ \\geq1$ .",
+        "return_type": "Arc_on_sphere_2",
+        "argsstring": "(const Edge &e) const",
+        "params": [
+          {
+            "type": "const Edge &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "375",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "segment_on_sphere",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::segment_on_sphere",
+        "brief": "returns the great circle arc formed by the vertices of the edge (f, i) .",
+        "detailed": "t.dimension() $ \\geq1$ .",
+        "return_type": "Arc_on_sphere_2",
+        "argsstring": "(const Face_handle f, int i) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "381",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "triangle",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::triangle",
+        "brief": "returns the 3D triangle formed by the three vertices of the face f .",
+        "detailed": "t.dimension() $ \\geq2$ .",
+        "return_type": "Triangle_3",
+        "argsstring": "(const Face_handle f) const",
+        "params": [
+          {
+            "type": "const Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "387",
+        "section": "Geometric Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::vertices_begin",
+        "brief": "Starts at an arbitrary vertex.",
+        "detailed": "",
+        "return_type": "Vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "403",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "408",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_handles",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::vertex_handles",
+        "brief": "returns a range of iterators over all vertices.",
+        "detailed": "While the value type of Vertices_iterator is Vertex , the value type of Vertex_handles::iterator is Vertex_handle .",
+        "return_type": "Vertex_handles",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "415",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_begin",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::all_edges_begin",
+        "brief": "Starts at an arbitrary edge.",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "420",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_end",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::all_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "425",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::all_edges",
+        "brief": "returns a range of iterators over all edges.",
+        "detailed": "",
+        "return_type": "All_edges",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "430",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_begin",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::all_faces_begin",
+        "brief": "Starts at an arbitrary face.",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "435",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_end",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::all_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "440",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_face_handles",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::all_face_handles",
+        "brief": "returns a range of iterators over all faces.",
+        "detailed": "While the value type of All_faces_iterator is Face , the value type of All_face_handles::iterator is Face_handle .",
+        "return_type": "All_face_handles",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "447",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "solid_faces_begin",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::solid_faces_begin",
+        "brief": "Starts at an arbitrary face.",
+        "detailed": "",
+        "return_type": "Solid_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "452",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "solid_faces_end",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::solid_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Solid_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "457",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "solid_face_handles",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::solid_face_handles",
+        "brief": "returns a range of iterators over all solid faces.",
+        "detailed": "While the value type of Solid_faces_iterator is Face , the value type of Solid_face_handles::iterator is Face_handle .",
+        "return_type": "Solid_face_handles",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "464",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "solid_edges_begin",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::solid_edges_begin",
+        "brief": "Starts at an arbitrary face.",
+        "detailed": "",
+        "return_type": "Solid_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "469",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "solid_edges_end",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::solid_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Solid_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "474",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "solid_edges",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::solid_edges",
+        "brief": "returns a range of iterators over all solid edges.",
+        "detailed": "",
+        "return_type": "Solid_edges",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "479",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "points",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::points",
+        "brief": "returns a range of iterators over all the points of the triangulations.",
+        "detailed": "",
+        "return_type": "Points",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "484",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "adjacent_vertices",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::adjacent_vertices",
+        "brief": "Starts at an arbitrary vertex adjacent to the vertex v .",
+        "detailed": "",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "503",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "adjacent_vertices",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::adjacent_vertices",
+        "brief": "Starts at the first vertex of f adjacent to v in counterclockwise order around v .",
+        "detailed": "The face f is incident to the vertex v .",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "509",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::incident_edges",
+        "brief": "Starts at an arbitrary edge incident to the vertex v .",
+        "detailed": "",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "514",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::incident_edges",
+        "brief": "Starts at the first edge of f incident to v , in counterclockwise order around v .",
+        "detailed": "The face f is incident to the vertex v .",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "520",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::incident_faces",
+        "brief": "Starts at an arbitrary face incident to the vertex v .",
+        "detailed": "Note that this may contain ghost faces.",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "527",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::incident_faces",
+        "brief": "Starts at face f .",
+        "detailed": "The face f is incident to the vertex v .",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "533",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "is_edge",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_edge",
+        "brief": "returns true if there exists an edge (ghost or solid) having va and vb as vertices.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle va, Vertex_handle vb)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "547",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_edge",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_edge",
+        "brief": "returns true if there exists an edge (ghost or solid) having va and vb as vertices.",
+        "detailed": "If true is returned, the edge with vertices va and vb is the edge e=(fr,i) where fr is a handle to the face incident to e and on the right side of e oriented from va to vb .",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle va, Vertex_handle vb, Face_handle &fr, int &i)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle &",
+            "name": "fr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "554",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_face",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_face",
+        "brief": "returns true if there exists a face (ghost or solid) having v1 , v2 and v3 as vertices.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "559",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_face",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_face",
+        "brief": "returns true if there exists a face (ghost or solid) having v1 , v2 and v3 as vertices.",
+        "detailed": "If true is returned, fr is a handle to the face with v1 , v2 and v3 as vertices.",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Face_handle &fr)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle &",
+            "name": "fr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "565",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Triangulation_on_sphere_2::is_valid",
+        "brief": "tests the validity of the triangulation as a Triangulation_on_sphere_2 .",
+        "detailed": "This function tests the validity of the underlying data structure (using the function TriangulationDataStructure_2::is_valid() ), and the validity of the triangulation itself (consistency between the dimension and the number of simplices, face orientation checks, etc.). This method is mainly useful for debugging Delaunay triangulation algorithms.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_sphere_2.h",
+        "line": "629",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Triangulation_on_sphere_face_base_2": {
+    "kind": "class",
+    "name": "CGAL::Triangulation_on_sphere_face_base_2",
+    "brief": "",
+    "detailed": "Is model of TriangulationOnSphereFaceBase_2 The class Triangulation_on_sphere_face_base_2 is a model for the concept TriangulationOnSphereFaceBase_2 . It is the default face base class for triangulations on the sphere. Triangulation_on_sphere_face_base_2 can be simply plugged into the triangulation data structure of a triangulation, or used as a base class to derive other base face classes tuned for specific applications. Traits must be a geometric traits class. The geometric traits is actually not used by the class. Fb has to be a model of the concept TriangulationDSFaceBase_2 and will serve as a base class for Triangulation_on_sphere_face_base_2 . By default this parameter is instantiated with Triangulation_ds_face_base_2<> . CGAL::Triangulation_ds_face_base_2<Tds> CGAL::Triangulation_face_base_with_info_2<Traits,Tds> CGAL::Triangulation_on_sphere_vertex_base_2 <Traits,Vb> CGAL::Triangulation_on_sphere_2 <Traits,Tds>",
+    "members": []
+  },
+  "CGAL::Triangulation_on_sphere_vertex_base_2": {
+    "kind": "class",
+    "name": "CGAL::Triangulation_on_sphere_vertex_base_2",
+    "brief": "",
+    "detailed": "Is model of TriangulationOnSphereVertexBase_2 The class Triangulation_on_sphere_vertex_base_2 is the default model for the concept TriangulationOnSphereVertexBase_2 and the default vertex base class for triangulations on the sphere. Triangulation_on_sphere_vertex_base_2 can be simply plugged into the triangulation data structure of a triangulation, or used as a base class to derive other base vertex classes tuned for specific applications. Traits must be a geometric traits class which provides the type Point_on_sphere_2 . It is strongly recommended to instantiate this traits class with the model used for the triangulation traits class. This ensures that the point type defined by Triangulation_on_sphere_vertex_base_2 is the same as the point type defined by the triangulation. Vb must be a model of the concept TriangulationDSVertexBase_2 . By default this parameter is instantiated with Triangulation_ds_vertex_base_2<> . CGAL::Triangulation_ds_vertex_base_2<Tds> CGAL::Triangulation_on_sphere_face_base_2 <Traits,Fb> CGAL::Triangulation_vertex_base_with_info_2<Info,Traits,Vb> CGAL::Triangulation_on_sphere_2 <Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Triangulation_on_sphere_vertex_base_2::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Traits::Point_on_sphere_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_sphere_vertex_base_2.h",
+        "line": "42",
+        "section": "Types"
+      }
+    ]
+  },
+  "DelaunayTriangulationOnSphereTraits_2": {
+    "kind": "class",
+    "name": "DelaunayTriangulationOnSphereTraits_2",
+    "brief": "",
+    "detailed": "Refines TriangulationOnSphereTraits_2 The concept DelaunayTriangulationOnSphereTraits_2 describes the set of requirements to be fulfilled by any class used to instantiate the first template parameter of the class CGAL::Delaunay_triangulation_on_sphere_2 <Traits, Tds> . To the requirements listed within the concept TriangulationOnSphereTraits_2 , this concept adds types and functors requirements related to build the dual on the sphere. Has models CGAL::Delaunay_triangulation_on_sphere_traits_2 CGAL::Projection_on_sphere_traits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Construct_circumcenter_on_sphere_2",
+        "qualified_name": "DelaunayTriangulationOnSphereTraits_2::Construct_circumcenter_on_sphere_2",
+        "brief": "Construction object type.",
+        "detailed": "Must provide the operator: Point_on_sphere_2 operator()(Point_on_sphere_2 p, Point_on_sphere_2 q, Point_on_sphere_2 r) which returns the intersection of the dual of the face defined by the three points p , q , and r , and the sphere, on the positive side of the plane defined by p , q , and r . The dual of the face is the line orthogonal to the face, passing through the center of the smallest circumscribing sphere of the face. the center of the sphere is on the negative side of the plane defined by p , q , and r . This type is only required for the computation of dual objects (Voronoi vertices and edges) and a dummy type can be used otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayTriangulationOnSphereTraits_2.h",
+        "line": "39",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circumcenter_3",
+        "qualified_name": "DelaunayTriangulationOnSphereTraits_2::Construct_circumcenter_3",
+        "brief": "Construction object type.",
+        "detailed": "Must provide the operator: Point_3 operator()(Point_3 p, Point_3 q, Point_3 r) which returns the center of the circle circumscribed to the face with vertices p , q , and r . This type is only required for the computation of dual objects (Voronoi vertices and edges) and a dummy type can be used otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayTriangulationOnSphereTraits_2.h",
+        "line": "49",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "construct_circumcenter_on_sphere_2_object",
+        "qualified_name": "DelaunayTriangulationOnSphereTraits_2::construct_circumcenter_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_circumcenter_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayTriangulationOnSphereTraits_2.h",
+        "line": "61",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_circumcenter_3_object",
+        "qualified_name": "DelaunayTriangulationOnSphereTraits_2::construct_circumcenter_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_circumcenter_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayTriangulationOnSphereTraits_2.h",
+        "line": "64",
+        "section": "Operations"
+      }
+    ]
+  },
+  "TriangulationOnSphereFaceBase_2": {
+    "kind": "class",
+    "name": "TriangulationOnSphereFaceBase_2",
+    "brief": "",
+    "detailed": "Refines TriangulationDSFaceBase_2 The concept TriangulationOnSphereFaceBase_2 describes the requirements for a face class of a triangulation data structure that is itself plugged into a triangulation on the sphere. The data structure concept TriangulationDataStructure_2 was primarily designed to serve as a data structure for the 2D triangulation classes of CGAL, which are triangulations embedded in the 2D Euclidean plane. However, its genericity makes it usable for any orientable triangulated surface without boundary regardless of the dimensionality of the space the triangulation is embedded in, and thus it is a valid data structure for the triangulations on the sphere of this package. A departing feature is that if the vertices of the triangulation are all lying on one hemisphere, then the triangulation is not an orientable triangulated surface without boundary. In this case, fictitious faces are added to the triangulation, called ghost faces , such that the triangulation is a topological sphere. Has models CGAL::Triangulation_on_sphere_face_base_2 <Traits, Fb> TriangulationDataStructure_2 TriangulationOnSphereVertexBase_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "is_ghost",
+        "qualified_name": "TriangulationOnSphereFaceBase_2::is_ghost",
+        "brief": "provides read access to a Boolean used to indicate if the face is a ghost face.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereFaceBase_2.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_ghost",
+        "qualified_name": "TriangulationOnSphereFaceBase_2::set_ghost",
+        "brief": "provides write access to a Boolean used to indicate if the face is a ghost face.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const bool b)",
+        "params": [
+          {
+            "type": "const bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereFaceBase_2.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "TriangulationOnSphereFaceBase_2::operator>>",
+        "brief": "inputs the non-combinatorial information given by the face: its ghost status and other possible information.",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, TriangulationOnSphereFaceBase_2 &v)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangulationOnSphereFaceBase_2 &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereFaceBase_2.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "TriangulationOnSphereFaceBase_2::operator<<",
+        "brief": "outputs the non combinatorial operation given by the face: its ghost status and other possible information.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const TriangulationOnSphereFaceBase_2 &v)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangulationOnSphereFaceBase_2 &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereFaceBase_2.h",
+        "line": "48",
+        "section": ""
+      }
+    ]
+  },
+  "TriangulationOnSphereTraits_2": {
+    "kind": "class",
+    "name": "TriangulationOnSphereTraits_2",
+    "brief": "",
+    "detailed": "Refines SpatialSortingTraits_3 The concept TriangulationOnSphereTraits_2 describes the set of requirements to be fulfilled by any class used to instantiate the first template parameter of the class CGAL::Triangulation_on_sphere_2 <Traits, Tds> . This concept provides the types of the geometric primitives used in the triangulation and the function object types for the required predicates on those primitives. In particular, the traits class is expected to contain information about the sphere (center and radius) on which the points of the triangulation lie, as well as to provide means to change this information. Has models CGAL::Delaunay_triangulation_on_sphere_traits_2 CGAL::Projection_on_sphere_traits_3 DelaunayTriangulationOnSphereTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "TriangulationOnSphereTraits_2::FT",
+        "brief": "The number type; must be a model of FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Point_on_sphere_2",
+        "brief": "The point type of the triangulation, representing a point on the sphere.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Arc_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Arc_on_sphere_2",
+        "brief": "An arc of a great circle, used to represent a curved segment (a Voronoi or a Delaunay edge).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "TriangulationOnSphereTraits_2::Point_3",
+        "brief": "The 3D point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "TriangulationOnSphereTraits_2::Segment_3",
+        "brief": "The 3D segment type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "TriangulationOnSphereTraits_2::Triangle_3",
+        "brief": "The 3D triangle type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Collinear_are_strictly_ordered_on_great_circle_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Collinear_are_strictly_ordered_on_great_circle_2",
+        "brief": "Predicate object type.",
+        "detailed": "Must provide the operator: bool operator()(Point_on_sphere_2 p, Point_on_sphere_2 q, Point_on_sphere_2 r) which returns true if r strictly lies on the shortest path between p and q on the great circle passing through p and q . If p and q are diametrically opposed, true is returned.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "73",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Compare_on_sphere_2",
+        "brief": "Predicate object type.",
+        "detailed": "Must provide the operator: bool operator()(Point_on_sphere_2 p, Point_on_sphere_2 q) which returns true or false based on a consistent, user-defined strict total order of points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "80",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Equal_on_sphere_2",
+        "brief": "Predicate object type.",
+        "detailed": "Must provide the operator: bool operator()(Point_on_sphere_2 p, Point_on_sphere_2 q) which returns true if, and only if, p and q are equal.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "87",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Orientation_on_sphere_2",
+        "brief": "Predicate object type.",
+        "detailed": "Must provide the operator: Orientation operator()(Point_on_sphere_2 p, Point_on_sphere_2 q, Point_on_sphere_2 r) which returns CGAL::POSITIVE , if r lies on the left hemisphere while walking the shortest path between p and q on the great circle defined by p and q ; returns CGAL::NEGATIVE if r lies on the right hemisphere; and returns CGAL::COPLANAR if r lies on the great circle. If p and q are diametrically opposed, CGAL::COPLANAR is returned.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "99",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Side_of_oriented_circle_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Side_of_oriented_circle_on_sphere_2",
+        "brief": "Predicate object type.",
+        "detailed": "Must provide the operator: bool operator()(Point_on_sphere_2 p, Point_on_sphere_2 q, Point_on_sphere_2 r, Point_on_sphere_2 s) which returns CGAL::POSITIVE , if s lies on the positive side of the oriented plane h defined by p , q , and r ; returns CGAL::NEGATIVE if s lies on the negative side of h ; and returns CGAL::COPLANAR if s lies on h .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "108",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_arc_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Construct_arc_on_sphere_2",
+        "brief": "Construction object.",
+        "detailed": "Must provide the operator: Arc_on_sphere_2 operator()(Point_on_sphere_2 p, Point_on_sphere_2 q) which introduces an arc of great circle, with source p and target q . The circular arc constructed from a source, and a target, is defined as the set of points of the great circle that lie between the source p and the target q , when traversing the great circle counterclockwise seen from the side of the plane of the great circle pointed by its positive normal vectors. In this definition, we say that a normal vector $ (a,b,c)$ is positive if $ (a,b,c)>(0,0,0)$ (i.e. $ (a>0) || (a==0) \\&\\& (b>0) || (a==0)\\&\\&(b==0)\\&\\&(c>0)$ ). p and q are not diametrically opposed.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "131",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_on_sphere_2",
+        "qualified_name": "TriangulationOnSphereTraits_2::Construct_point_on_sphere_2",
+        "brief": "Construction object.",
+        "detailed": "Must provide the operator: Point_on_sphere_2 operator()(Point_3 p) , which expresses the point p , a 3D point living on the sphere, using the (user-defined) point-on-sphere representation.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "139",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_3",
+        "qualified_name": "TriangulationOnSphereTraits_2::Construct_point_3",
+        "brief": "Construction object.",
+        "detailed": "Must provide the operator: Point_3 operator()(Point_on_sphere_2 p) , which expresses the point p on the sphere as a point in the embedding 3D space.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "146",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_3",
+        "qualified_name": "TriangulationOnSphereTraits_2::Construct_segment_3",
+        "brief": "Construction object.",
+        "detailed": "Must provide the operator: Segment_3 operator()(Point_3 p, Point_3 q) , which constructs a segment from two 3D points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "153",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_3",
+        "qualified_name": "TriangulationOnSphereTraits_2::Construct_triangle_3",
+        "brief": "Construction object.",
+        "detailed": "Must provide the operator: Triangle_3 operator()(Point_3 p, Point_3 q, Point_3 r) , which constructs a triangle from three 3D points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "160",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "compare_on_sphere_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::compare_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "174",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "equal_on_sphere_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::equal_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Equal_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "177",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_on_sphere_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::orientation_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "180",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "side_of_oriented_circle_on_sphere_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::side_of_oriented_circle_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Side_of_oriented_circle_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "183",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "collinear_are_strictly_ordered_on_great_circle_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::collinear_are_strictly_ordered_on_great_circle_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Collinear_are_strictly_ordered_on_great_circle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "186",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_arc_on_sphere_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::construct_arc_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_arc_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "191",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_on_sphere_2_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::construct_point_on_sphere_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_on_sphere_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "194",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_3_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::construct_point_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "197",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_segment_3_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::construct_segment_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_segment_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "200",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_triangle_3_object",
+        "qualified_name": "TriangulationOnSphereTraits_2::construct_triangle_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_triangle_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "203",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_center",
+        "qualified_name": "TriangulationOnSphereTraits_2::set_center",
+        "brief": "sets the center of the sphere.",
+        "detailed": "This function is meant to be used only by the triangulation class as modifying the domain requires clearing the triangulation. Users can change the domain using CGAL::Triangulation_on_sphere_2::set_center_and_radius() .",
+        "return_type": "void",
+        "argsstring": "(Point_3 center)",
+        "params": [
+          {
+            "type": "Point_3",
+            "name": "center",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "217",
+        "section": "Configuration of the spherical domain"
+      },
+      {
+        "kind": "function",
+        "name": "center",
+        "qualified_name": "TriangulationOnSphereTraits_2::center",
+        "brief": "returns the center of the sphere.",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "220",
+        "section": "Configuration of the spherical domain"
+      },
+      {
+        "kind": "function",
+        "name": "set_radius",
+        "qualified_name": "TriangulationOnSphereTraits_2::set_radius",
+        "brief": "sets the radius of the sphere.",
+        "detailed": "This function is meant to be used only by the triangulation class as modifying the domain requires clearing the triangulation. Users can change the domain using CGAL::Triangulation_on_sphere_2::set_center_and_radius() .",
+        "return_type": "void",
+        "argsstring": "(FT radius)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "radius",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "227",
+        "section": "Configuration of the spherical domain"
+      },
+      {
+        "kind": "function",
+        "name": "radius",
+        "qualified_name": "TriangulationOnSphereTraits_2::radius",
+        "brief": "returns the radius of the sphere.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "230",
+        "section": "Configuration of the spherical domain"
+      },
+      {
+        "kind": "function",
+        "name": "is_on_sphere",
+        "qualified_name": "TriangulationOnSphereTraits_2::is_on_sphere",
+        "brief": "returns whether the point p is on the sphere or not.",
+        "detailed": "A point that is not on the sphere will not be inserted in the triangulation.",
+        "return_type": "bool",
+        "argsstring": "(Point_on_sphere_2 p)",
+        "params": [
+          {
+            "type": "Point_on_sphere_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "261",
+        "section": "Precision predicates"
+      },
+      {
+        "kind": "function",
+        "name": "are_points_too_close",
+        "qualified_name": "TriangulationOnSphereTraits_2::are_points_too_close",
+        "brief": "returns whether the points p and q are too close (see Precision predicates ).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Point_on_sphere_2 p, Point_on_sphere_2 q)",
+        "params": [
+          {
+            "type": "Point_on_sphere_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_on_sphere_2",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereTraits_2.h",
+        "line": "266",
+        "section": "Precision predicates"
+      }
+    ]
+  },
+  "TriangulationOnSphereVertexBase_2": {
+    "kind": "class",
+    "name": "TriangulationOnSphereVertexBase_2",
+    "brief": "",
+    "detailed": "Refines TriangulationDSVertexBase_2 The concept TriangulationOnSphereVertexBase_2 describes the requirements for the vertex base class of a triangulation data structure to be plugged in a triangulation on the sphere. It refines the concept TriangulationDSVertexBase_2 , adding geometric information: the vertex base of a triangulation stores a point. Has models CGAL::Triangulation_on_sphere_vertex_base_2 <Traits,Vb> TriangulationDataStructure_2 TriangulationOnSphereFaceBase_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::Point",
+        "brief": "Must be the equivalent to the point type Point_on_sphere_2 of the concept TriangulationOnSphereTraits_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::Face_handle",
+        "brief": "Must be the equivalent to the point type Face_handle of the triangulation.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "TriangulationOnSphereVertexBase_2",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::TriangulationOnSphereVertexBase_2",
+        "brief": "constructs a vertex whose geometric embedding is the point p .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Point p)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "43",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "TriangulationOnSphereVertexBase_2",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::TriangulationOnSphereVertexBase_2",
+        "brief": "constructs a vertex whose geometric embedding is the point p and pointing to face f .",
+        "detailed": "Face_handle is the type defined the triangulation data structure used in the Delaunay triangulation on the sphere.",
+        "return_type": "",
+        "argsstring": "(Point p, Face_handle f)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "50",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::point",
+        "brief": "returns the point.",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "60",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_point",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::set_point",
+        "brief": "sets the point.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Point p)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "70",
+        "section": "Setting"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::operator>>",
+        "brief": "inputs the non-combinatorial information given by the vertex: the point and other possible information.",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, TriangulationOnSphereVertexBase_2 &v)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangulationOnSphereVertexBase_2 &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "76",
+        "section": "Setting"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "TriangulationOnSphereVertexBase_2::operator<<",
+        "brief": "outputs the non combinatorial operation given by the vertex: the point and other possible information.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const TriangulationOnSphereVertexBase_2 &v)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangulationOnSphereVertexBase_2 &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/TriangulationOnSphereVertexBase_2.h",
+        "line": "82",
+        "section": "Setting"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

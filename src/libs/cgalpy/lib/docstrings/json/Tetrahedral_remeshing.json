@@ -1,0 +1,1664 @@
+{
+  "CGAL::Adaptive_remeshing_sizing_field": {
+    "kind": "class",
+    "name": "CGAL::Adaptive_remeshing_sizing_field",
+    "brief": "",
+    "detailed": "Tr underlying triangulation type A sizing field for tetrahedral remeshing, that keeps the same mesh density throughout the remeshing process. Is model of RemeshingSizingField_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "GT",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::GT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Geom_traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GT::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Geom_traits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Index",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Vertex::Index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tr_point",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Tr_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Cell_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tr::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "72",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Kd_traits",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Kd_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Search_traits_adapter< Point_with_info, Point_property_map, CGAL::Search_traits_3< GT > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Neighbor_search",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Neighbor_search",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Orthogonal_k_neighbor_search< Kd_traits >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "98",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Kd_tree",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Kd_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Neighbor_search::Tree",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "99",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Distance",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Distance",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Neighbor_search::Distance",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "100",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Splitter",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Splitter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Neighbor_search::Splitter",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "101",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_kd_tree_3",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::m_kd_tree_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kd_tree",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "276",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_kd_tree_2",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::m_kd_tree_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kd_tree",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "277",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "points_with_info",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::points_with_info",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Point_with_info >",
+        "argsstring": "(const Tr &tr, const int dim, const ECMap &ecmap, const FCMap &fcmap, const CellSelector &cell_selector) const",
+        "params": [
+          {
+            "type": "const Tr &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ECMap &",
+            "name": "ecmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FCMap &",
+            "name": "fcmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CellSelector &",
+            "name": "cell_selector",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "129",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "kd_tree",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::kd_tree",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Kd_tree &",
+        "argsstring": "(const int dim) const",
+        "params": [
+          {
+            "type": "const int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "202",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "nb_neighbors",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::nb_neighbors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const int dim) const",
+        "params": [
+          {
+            "type": "const int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "210",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "interpolate_on_n_vertices",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::interpolate_on_n_vertices",
+        "brief": "Returns size at point p , by interpolation among neighbors.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &p, const std::vector< Point_with_info > &vertices) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< Point_with_info > &",
+            "name": "vertices",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "264",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "average_edge_length_around",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::average_edge_length_around",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Vertex_handle v, const Tr &tr, const ECMap &ecmap, const FCMap &fcmap, const CellSelector &cell_selector) const",
+        "params": [
+          {
+            "type": "const Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Tr &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ECMap &",
+            "name": "ecmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FCMap &",
+            "name": "fcmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CellSelector &",
+            "name": "cell_selector",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "269",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "average_edge_length_3",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::average_edge_length_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Cell_handle c, const Tr &tr) const",
+        "params": [
+          {
+            "type": "const Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Tr &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "272",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "average_edge_length_2",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::average_edge_length_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Cell_handle c, const int i, const Tr &tr) const",
+        "params": [
+          {
+            "type": "const Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Tr &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "273",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::operator()",
+        "brief": "Returns size at point p , assumed to be included in the input subcomplex with dimension dim and index index .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &p, const int &dim, const Index &index) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "222",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Adaptive_remeshing_sizing_field::Point_property_map": {
+    "kind": "struct",
+    "name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_property_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "84",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "85",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "86",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "key_type",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::key_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_with_info",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "87",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "category",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::readable_property_map_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "88",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::operator[]",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type",
+        "argsstring": "(const key_type &pwi) const",
+        "params": [
+          {
+            "type": "const key_type &",
+            "name": "pwi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "get",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_property_map::get",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const value_type",
+        "argsstring": "(const Self &, const key_type &pwi)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const key_type &",
+            "name": "pwi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "91",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Adaptive_remeshing_sizing_field::Point_with_info": {
+    "kind": "struct",
+    "name": "CGAL::Adaptive_remeshing_sizing_field::Point_with_info",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "p",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_with_info::p",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "76",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "size",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_with_info::size",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "dimension",
+        "qualified_name": "CGAL::Adaptive_remeshing_sizing_field::Point_with_info::dimension",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Adaptive_remeshing_sizing_field.h",
+        "line": "78",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3": {
+    "kind": "class",
+    "name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3",
+    "brief": "The class Remeshing_cell_base_3 is a model of the concept RemeshingCellBase_3 .",
+    "detailed": "It is designed to serve as cell base class for the 3D triangulation used in the tetrahedral remeshing process. Gt is the geometric traits class. It has to be a model of the concept RemeshingTriangulationTraits_3 . Cb is a cell base class from which Remeshing_cell_base_3 derives. It must be a model of the SimplicialMeshCellBase_3 concept. Is model of RemeshingCellBase_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Gt::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Cb::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Cell_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Cb::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Geom_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Gt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "sliver_value_",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::sliver_value_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "84",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "sliver_cache_validity_",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::sliver_cache_validity_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "85",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_sliver_value",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::set_sliver_value",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FT value)",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sliver_value",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::sliver_value",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "74",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_cache_valid",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::is_cache_valid",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "reset_cache_validity",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::reset_cache_validity",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "81",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Cb2",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Rebind_TDS::Cb2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Cb::template Rebind_TDS< TDS2 >::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Remeshing_cell_base_3 < Gt, Cb2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_cell_base_3.h",
+        "line": "61",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3": {
+    "kind": "class",
+    "name": "CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3",
+    "brief": "The class Remeshing_triangulation_3 is a class template which provides a valid triangulation type that can be used as the 3D triangulation input for the tetrahedral remeshing process.",
+    "detailed": "Gt is the geometric traits class. It has to be a model of the concept RemeshingTriangulationTraits_3 . Concurrency_tag enables sequential versus parallel implementation of the triangulation data structure. Possible values are Sequential_tag (the default), Parallel_tag , and Parallel_if_available_tag . Vb must be a model of RemeshingVertexBase_3 . Cb must be model of RemeshingCellBase_3 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Remeshing_Vb",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3::Remeshing_Vb",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vb",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_triangulation_3.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Remeshing_Cb",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3::Remeshing_Cb",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cb",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_triangulation_3.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Tds",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3::Tds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Triangulation_data_structure_3< Remeshing_Vb, Remeshing_Cb, Concurrency_tag >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_triangulation_3.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Triangulation_3< Gt, Tds >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_triangulation_3.h",
+        "line": "66",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3": {
+    "kind": "class",
+    "name": "CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3",
+    "brief": "The class Remeshing_vertex_base_3 is a model of the concept RemeshingVertexBase_3 .",
+    "detailed": "It is designed to serve as vertex base class for the 3D triangulation used in the tetrahedral remeshing process. Gt is the geometric traits class. It must be a model of the concept RemeshingTriangulationTraits_3 . Vb is a vertex base class from which Remeshing_vertex_base_3 derives. It must be a model of the concept SimplicialMeshVertexBase_3 . Is model of RemeshingVertexBase_3 SimplicialMeshVertexBase_3",
+    "members": []
+  },
+  "CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vb2",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3::Rebind_TDS::Vb2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Vb::template Rebind_TDS< TDS2 >::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_vertex_base_3.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Remeshing_vertex_base_3 < Gt, Vb2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing/Remeshing_vertex_base_3.h",
+        "line": "52",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Tetrahedral_remeshing_sizing_field": {
+    "kind": "class",
+    "name": "CGAL::Tetrahedral_remeshing_sizing_field",
+    "brief": "Sizing field virtual class, designed for tetrahedral remeshing.",
+    "detailed": "GT the geometric traits class",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Tetrahedral_remeshing_sizing_field::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GT::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing_sizing_field.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Tetrahedral_remeshing_sizing_field::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GT::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Tetrahedral_remeshing_sizing_field.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Tetrahedral_remeshing_sizing_field::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &p, const int dim, const Index &i) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Index &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Tetrahedral_remeshing_sizing_field.h",
+        "line": "37",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Uniform_sizing_field": {
+    "kind": "class",
+    "name": "CGAL::Uniform_sizing_field",
+    "brief": "",
+    "detailed": "GT the geometric traits class The uniform (i.e. constant) sizing field for tetrahedral remeshing Is model of RemeshingSizingField_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Uniform_sizing_field::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GT::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Uniform_sizing_field.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Uniform_sizing_field::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GT::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Uniform_sizing_field.h",
+        "line": "38",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_size",
+        "qualified_name": "CGAL::Uniform_sizing_field::m_size",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Uniform_sizing_field.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Uniform_sizing_field",
+        "qualified_name": "CGAL::Uniform_sizing_field::Uniform_sizing_field",
+        "brief": "Constructor.",
+        "detailed": "size the target edge length for remeshing",
+        "return_type": "",
+        "argsstring": "(const FT &size)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "size",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Uniform_sizing_field.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Uniform_sizing_field::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &, const int, const Index &) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Index &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Uniform_sizing_field.h",
+        "line": "48",
+        "section": ""
+      }
+    ]
+  },
+  "RemeshingCellBase_3": {
+    "kind": "class",
+    "name": "RemeshingCellBase_3",
+    "brief": "",
+    "detailed": "Refines SimplicialMeshCellBase_3 Cell base concept to be used in the triangulation type given to the function CGAL::tetrahedral_isotropic_remeshing() . Has models CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "set_sliver_value",
+        "qualified_name": "RemeshingCellBase_3::set_sliver_value",
+        "brief": "These functions are used internally by tetrahedral remeshing.",
+        "detailed": "The class should provide storage, accessors and modificators for a cache value for sliverity.",
+        "return_type": "void",
+        "argsstring": "(double value)",
+        "params": [
+          {
+            "type": "double",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/RemeshingCellBase_3.h",
+        "line": "23",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sliver_value",
+        "qualified_name": "RemeshingCellBase_3::sliver_value",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/RemeshingCellBase_3.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_cache_valid",
+        "qualified_name": "RemeshingCellBase_3::is_cache_valid",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/RemeshingCellBase_3.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "reset_cache_validity",
+        "qualified_name": "RemeshingCellBase_3::reset_cache_validity",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/RemeshingCellBase_3.h",
+        "line": "35",
+        "section": ""
+      }
+    ]
+  },
+  "RemeshingSizingField_3": {
+    "kind": "class",
+    "name": "RemeshingSizingField_3",
+    "brief": "Sizing field functional, to be used as second parameter of the function CGAL::tetrahedral_isotropic_remeshing() , used to control the size of the mesh elements.",
+    "detailed": "This concept is equivalent to MeshDomainField_3 , used in CGAL PkgMesh3 package, so they can be used interchangeably. Has models CGAL::Uniform_sizing_field CGAL::Adaptive_remeshing_sizing_field",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "RemeshingSizingField_3::FT",
+        "brief": "Numerical type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingSizingField_3.h",
+        "line": "27",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "RemeshingSizingField_3::Point_3",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingSizingField_3.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Index",
+        "qualified_name": "RemeshingSizingField_3::Index",
+        "brief": "Index type for points.",
+        "detailed": "Must match the type RemeshingVertexBase_3::Index .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingSizingField_3.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "RemeshingSizingField_3::operator()",
+        "brief": "returns the value of the sizing field at the point p , assumed to be included in the input subcomplex with dimension dim and mesh subcomplex index index .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &p, const int dim, const Index &index) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "dim",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/RemeshingSizingField_3.h",
+        "line": "53",
+        "section": "Operations"
+      }
+    ]
+  },
+  "RemeshingTriangulationTraits_3": {
+    "kind": "class",
+    "name": "RemeshingTriangulationTraits_3",
+    "brief": "",
+    "detailed": "Refines TriangulationTraits_3 The concept RemeshingTriangulationTraits_3 is the first template parameter of the class Remeshing_triangulation_3 . It defines the geometric objects (points, segments, triangles, and tetrahedra) forming the triangulation together with a few geometric predicates and constructions on these objects. Has models All models of the CGAL concept Kernel CGAL::Triangulation_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_cross_product_vector_3",
+        "brief": "A constructor object model of ConstructCrossProductVector_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_vector_3",
+        "brief": "A constructor object model of ConstructVector_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_scaled_vector_3",
+        "brief": "A constructor object model of ConstructScaledVector_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_sum_of_vectors_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_sum_of_vectors_3",
+        "brief": "A constructor object model of ConstructSumOfVectors_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_opposite_vector_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_opposite_vector_3",
+        "brief": "A constructor object model of ConstructOppositeVector_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Compute_squared_length_3",
+        "brief": "A constructor object model of ComputeSquaredLength_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "54",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_divided_vector_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_divided_vector_3",
+        "brief": "A constructor object model of ConstructDividedVector_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_translated_point_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_translated_point_3",
+        "brief": "A constructor object model of ConstructTranslatedPoint_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_midpoint_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Construct_midpoint_3",
+        "brief": "A constructor object model of ConstructMidpoint_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "69",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_approximate_dihedral_angle_3",
+        "qualified_name": "RemeshingTriangulationTraits_3::Compute_approximate_dihedral_angle_3",
+        "brief": "A constructor object model of ComputeApproximateDihedralAngle_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_cross_product_vector_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_cross_product_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_cross_product_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "96",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "100",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_scaled_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "104",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_sum_of_vectors_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_sum_of_vectors_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_sum_of_vectors_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "108",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_opposite_vector_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_opposite_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_opposite_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "112",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_length_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::compute_squared_length_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_length_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "116",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_divided_vector_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_divided_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_divided_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "120",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_translated_point_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_translated_point_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_translated_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "124",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_midpoint_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::construct_midpoint_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_midpoint_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "128",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_approximate_dihedral_angle_3_object",
+        "qualified_name": "RemeshingTriangulationTraits_3::compute_approximate_dihedral_angle_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_approximate_dihedral_angle_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/RemeshingTriangulationTraits_3.h",
+        "line": "132",
+        "section": "Operations"
+      }
+    ]
+  },
+  "RemeshingVertexBase_3": {
+    "kind": "class",
+    "name": "RemeshingVertexBase_3",
+    "brief": "",
+    "detailed": "Refines SimplicialMeshVertexBase_3 Vertex base concept to be used in the triangulation type given to the function CGAL::tetrahedral_isotropic_remeshing() . Has models Tetrahedral_remeshing::Remeshing_vertex_base_3",
+    "members": []
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "tetrahedral_isotropic_remeshing",
+        "qualified_name": "CGAL::tetrahedral_isotropic_remeshing",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CGAL::Triangulation_3< Traits, TDS, SLDS > &tr, const FT target_edge_length, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "CGAL::Triangulation_3< Traits, TDS, SLDS > &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "target_edge_length",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/tetrahedral_remeshing.h",
+        "line": "282",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "tetrahedral_isotropic_remeshing",
+        "qualified_name": "CGAL::tetrahedral_isotropic_remeshing",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CGAL::Mesh_complex_3_in_triangulation_3< Tr, CornerIndex, CurveIndex > &c3t3, const FT target_edge_length, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "CGAL::Mesh_complex_3_in_triangulation_3< Tr, CornerIndex, CurveIndex > &",
+            "name": "c3t3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "target_edge_length",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/tetrahedral_remeshing.h",
+        "line": "420",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "tetrahedral_isotropic_remeshing",
+        "qualified_name": "CGAL::tetrahedral_isotropic_remeshing",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CGAL::Mesh_complex_3_in_triangulation_3< Tr, CornerIndex, CurveIndex > &c3t3, const SizingFunction &sizing, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "CGAL::Mesh_complex_3_in_triangulation_3< Tr, CornerIndex, CurveIndex > &",
+            "name": "c3t3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const SizingFunction &",
+            "name": "sizing",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/tetrahedral_remeshing.h",
+        "line": "449",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "load_triangulation",
+        "qualified_name": "CGAL::load_triangulation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::istream &is, T3 &t3)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T3 &",
+            "name": "t3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Tetrahedral_remeshing/tetrahedral_remeshing_io.h",
+        "line": "26",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "save_binary_triangulation",
+        "qualified_name": "CGAL::save_binary_triangulation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &os, const T3 &t3)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const T3 &",
+            "name": "t3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Tetrahedral_remeshing/tetrahedral_remeshing_io.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "save_ascii_triangulation",
+        "qualified_name": "CGAL::save_ascii_triangulation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &os, const T3 &t3)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const T3 &",
+            "name": "t3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Tetrahedral_remeshing/tetrahedral_remeshing_io.h",
+        "line": "53",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Tetrahedral_remeshing": {
+    "kind": "namespace",
+    "name": "CGAL::Tetrahedral_remeshing",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

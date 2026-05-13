@@ -1,0 +1,2935 @@
+{
+  "CGAL::Shape_regularization::ContourDirections": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::ContourDirections",
+    "brief": "We assume that each contour has one or several principal directions. By implementing a model of this concept, the user sets such directions and provides a way to orient contour edges towards these directions. All contour regularization functions in this package are parameterized by this concept.",
+    "detailed": "Has models Contours::Longest_direction_2 Contours::Multiple_directions_2 Contours::User_defined_directions_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "orient",
+        "qualified_name": "CGAL::Shape_regularization::ContourDirections::orient",
+        "brief": "orients a given segment with the index query_index towards the best-fit direction of the contour.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t query_index, Segment_2 &segment)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ContourDirections.h",
+        "line": "27",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::Contours::Longest_direction_2": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::Contours::Longest_direction_2",
+    "brief": "Estimates the longest principal direction of the contour.",
+    "detailed": "This algorithm finds the longest contour edge and sets its direction as the principal direction of the contour. GeomTraits a model of Kernel InputRange a model of ConstRange whose iterator type is RandomAccessIterator PointMap a model of ReadablePropertyMap whose key type is the value type of the input range and value type is GeomTraits::Point_2 . The default is CGAL::Identity_property_map<typename GeomTraits::Point_2> . Is model of ContourDirections",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Longest_direction_2",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::Longest_direction_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "NamedParameters a sequence of Named Parameters input_range a const range of ordered 2D points, which form a contour is_closed indicates whether the contour is closed or open np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> point_map </button> an instance of PointMap that maps an item from input_range to GeomTraits::Point_2 Default: PointMap() input_range.size() >= 3 for closed contours input_range.size() >= 2 for open contours",
+        "return_type": "",
+        "argsstring": "(const InputRange &input_range, const bool is_closed, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "is_closed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "99",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "orient",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::orient",
+        "brief": "orients a given segment with the index query_index towards the longest principal direction.",
+        "detailed": "query_index an index of the contour vertex that emits the contour edge being segment segment a segment to be rotated query_index >= 0 && query_index < input_range.size() for closed contours query_index >= 0 && query_index < input_range.size() - 1 for open contours",
+        "return_type": "void",
+        "argsstring": "(const std::size_t query_index, Segment_2 &segment) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "142",
+        "section": "Directions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::number_of_directions",
+        "brief": "returns the number of principal directions of the contour.",
+        "detailed": "The returned number is always one.",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "161",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "175",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_point_map",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::m_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "176",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_base",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::m_base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Base",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "177",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_bounds",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::m_bounds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT_pair >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "179",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::m_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Direction_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "180",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_assigned",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::m_assigned",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "181",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "verbose",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::verbose",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "183",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_closed",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::estimate_closed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "187",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_longest_direction_closed",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::compute_longest_direction_closed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Direction_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "203",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_open",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::estimate_open",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "232",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_longest_direction_open",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Longest_direction_2::compute_longest_direction_open",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Direction_2",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Longest_direction_2.h",
+        "line": "248",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::Contours::Multiple_directions_2": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::Contours::Multiple_directions_2",
+    "brief": "Estimates possibly multiple principal directions of the contour based on the user-specified minimum length and maximum angle bounds.",
+    "detailed": "This algorithm finds the best-fit edges of the contour with respect to the user-specified parameters and sets their directions as the principal directions of the contour. GeomTraits a model of Kernel InputRange a model of ConstRange whose iterator type is RandomAccessIterator PointMap a model of ReadablePropertyMap whose key type is the value type of the input range and value type is GeomTraits::Point_2 . The default is CGAL::Identity_property_map<typename GeomTraits::Point_2> . Is model of ContourDirections",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Multiple_directions_2",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::Multiple_directions_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "NamedParameters a sequence of Named Parameters input_range a const range of ordered 2D points, which form a contour is_closed indicates whether the contour is closed or open np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> maximum_angle </button> maximum allowed angle deviation in degrees between a contour edge and a principal direction such that they are considered to be parallel or orthogonal Type: GeomTraits::FT Default: 10 degrees <button class=\"collapsible\"> minimum_length </button> minimum acceptable length of a contour edge whose direction can be taken as a principal direction Type: GeomTraits::FT Default: 3 unit lengths <button class=\"collapsible\"> adjust_directions </button> indicates whether the found directions should be better adjusted to the original shape or not Type: boolean Default: true <button class=\"collapsible\"> point_map </button> an instance of PointMap that maps an item from input_range to GeomTraits::Point_2 Default: PointMap() input_range.size() >= 3 for closed contours input_range.size() >= 2 for open contours",
+        "return_type": "",
+        "argsstring": "(const InputRange &input_range, const bool is_closed, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "is_closed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "124",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "orient",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::orient",
+        "brief": "orients a given segment with the index query_index towards the best-fit found principal direction.",
+        "detailed": "query_index an index of the contour vertex that emits the contour edge being segment segment a segment to be rotated query_index >= 0 && query_index < input_range.size() for closed contours query_index >= 0 && query_index < input_range.size() - 1 for open contours",
+        "return_type": "void",
+        "argsstring": "(const std::size_t query_index, Segment_2 &segment) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "179",
+        "section": "Directions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::number_of_directions",
+        "brief": "returns the number of principal directions of the contour.",
+        "detailed": "The returned number is always greater or equal than one.",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "198",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "212",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_point_map",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "213",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_base",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Base",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "214",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_angle_2",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_max_angle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "216",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_min_length_2",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_min_length_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "217",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_adjust_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_adjust_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "218",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_bounds",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_bounds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT_pair >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "220",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Direction_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "221",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_assigned",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::m_assigned",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "222",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "verbose",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::verbose",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "224",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_closed",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::estimate_closed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "228",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_open",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::estimate_open",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "259",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_valid_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::set_valid_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< Segment_wrapper_2 > &wraps) const",
+        "params": [
+          {
+            "type": "std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "290",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_valid_principal_direction",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::is_valid_principal_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Segment_2 &segment) const",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "299",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_initial_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::estimate_initial_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< Segment_wrapper_2 > &wraps, std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "308",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "find_next_longest_segment",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::find_next_longest_segment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "(const std::vector< Segment_wrapper_2 > &wraps, const std::vector< std::size_t > &longest_to_short) const",
+        "params": [
+          {
+            "type": "const std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::size_t > &",
+            "name": "longest_to_short",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "335",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_valid_wrap",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::is_valid_wrap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Segment_wrapper_2 &wrap) const",
+        "params": [
+          {
+            "type": "const Segment_wrapper_2 &",
+            "name": "wrap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "350",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_next_longest_direction",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::set_next_longest_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< Segment_wrapper_2 > &wraps, const std::size_t query_index, const std::size_t group_index, std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "group_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "355",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "does_satisify_angle_conditions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::does_satisify_angle_conditions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Segment_2 &longest, const Segment_2 &segment) const",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "longest",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Segment_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "392",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_longest_direction",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::set_longest_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::vector< Segment_wrapper_2 > &wraps, std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "const std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "405",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_longest_direction",
+        "qualified_name": "CGAL::Shape_regularization::Contours::Multiple_directions_2::compute_longest_direction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Direction_2",
+        "argsstring": "(const std::vector< Segment_wrapper_2 > &wraps) const",
+        "params": [
+          {
+            "type": "const std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/Multiple_directions_2.h",
+        "line": "422",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::Contours::User_defined_directions_2": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::Contours::User_defined_directions_2",
+    "brief": "Sets multiple user-specified principal directions of the contour.",
+    "detailed": "This algorithm finds the best-fit edges of the contour with respect to the user-specified principal directions and sets all other necessary data. GeomTraits a model of Kernel InputRange a model of ConstRange whose iterator type is RandomAccessIterator PointMap a model of ReadablePropertyMap whose key type is the value type of the input range and value type is GeomTraits::Point_2 . The default is CGAL::Identity_property_map<typename GeomTraits::Point_2> . Is model of ContourDirections",
+    "members": [
+      {
+        "kind": "function",
+        "name": "User_defined_directions_2",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::User_defined_directions_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "DirectionRange a model of ConstRange whose value type is GeomTraits::Direction_2 NamedParameters a sequence of Named Parameters input_range a const range of ordered 2D points, which form a contour is_closed indicates whether the contour is closed or open direction_range a const range with user-specified principal directions np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> point_map </button> an instance of PointMap that maps an item from input_range to GeomTraits::Point_2 Default: PointMap() direction_range.size() >= 1 direction_range.size() == input_range.size() for closed contours direction_range.size() == input_range.size() - 1 for open contours input_range.size() >= 3 for closed contours input_range.size() >= 2 for open contours",
+        "return_type": "",
+        "argsstring": "(const InputRange &input_range, const bool is_closed, const DirectionRange &direction_range, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "is_closed",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const DirectionRange &",
+            "name": "direction_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "112",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "orient",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::orient",
+        "brief": "orients a given segment with the index query_index towards the best-fit user-specified principal direction.",
+        "detailed": "query_index an index of the contour vertex that emits the contour edge being segment segment a segment to be rotated query_index >= 0 && query_index < input_range.size() for closed contours query_index >= 0 && query_index < input_range.size() - 1 for open contours",
+        "return_type": "void",
+        "argsstring": "(const std::size_t query_index, Segment_2 &segment) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "160",
+        "section": "Directions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::number_of_directions",
+        "brief": "returns the number of principal directions of the contour.",
+        "detailed": "The returned number equals to the number of the user-specified directions.",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "179",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "193",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_point_map",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "194",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_base",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Base",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "195",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_angle_2",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_max_angle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "197",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_bounds",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_bounds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT_pair >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "199",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Direction_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "200",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_assigned",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::m_assigned",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "201",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "verbose",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::verbose",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "203",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_closed",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::estimate_closed",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const DirectionRange &direction_range, std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "const DirectionRange &",
+            "name": "direction_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "208",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "estimate_open",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::estimate_open",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const DirectionRange &direction_range, std::vector< FT_pair > &bounds, std::vector< Direction_2 > &directions, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "const DirectionRange &",
+            "name": "direction_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< FT_pair > &",
+            "name": "bounds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "235",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "initialize_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::initialize_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const DirectionRange &direction_range, std::vector< Direction_2 > &directions) const",
+        "params": [
+          {
+            "type": "const DirectionRange &",
+            "name": "direction_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "262",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_directions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::set_directions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::vector< Direction_2 > &directions, std::vector< Segment_wrapper_2 > &wraps, std::vector< std::size_t > &assigned) const",
+        "params": [
+          {
+            "type": "const std::vector< Direction_2 > &",
+            "name": "directions",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< Segment_wrapper_2 > &",
+            "name": "wraps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "assigned",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "277",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "does_satisify_angle_conditions",
+        "qualified_name": "CGAL::Shape_regularization::Contours::User_defined_directions_2::does_satisify_angle_conditions",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Direction_2 &longest, const Direction_2 &segment) const",
+        "params": [
+          {
+            "type": "const Direction_2 &",
+            "name": "longest",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Direction_2 &",
+            "name": "segment",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Contours/User_defined_directions_2.h",
+        "line": "293",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::NeighborQuery": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::NeighborQuery",
+    "brief": "A concept that describes the set of methods used by the class QP_regularization to access neighbors of a geometric object being regularized.",
+    "detailed": "Has models Segments::Delaunay_neighbor_query_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Shape_regularization::NeighborQuery::operator()",
+        "brief": "fills in neighbors with indices of all geometric objects, which are direct neighbors of the object with the index query_index .",
+        "detailed": "QP_regularization calls this method once for each object from the input range.",
+        "return_type": "void",
+        "argsstring": "(const std::size_t query_index, std::vector< std::size_t > &neighbors)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "neighbors",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/NeighborQuery.h",
+        "line": "27",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::QP_regularization": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::QP_regularization",
+    "brief": "Shape regularization algorithm based on the quadratic programming global optimization.",
+    "detailed": "Given a quadratic programming solver via the class QuadraticProgramTraits , this version of the shape regularization algorithm enables to regularize a set of user-specified geometric objects provided a way to access neighbors of each object via the NeighborQuery class; to obtain a maximum bound on a regularization characteristic (angle-orientation/ distance-offset/etc.) with respect to which an object is being regularized via the RegularizationType class; to obtain a target value for each pair of neighbor objects via the RegularizationType class. This class is generic and forms a framework for different types of user-specified regularizations. Please refer to the user manual in order to learn how to use it. In particular, section Regularizing 2D Segments shows an example. GeomTraits a model of Kernel InputRange a model of ConstRange NeighQuery a model of NeighborQuery RegType a model of RegularizationType QPSolver a model of QuadraticProgramTraits",
+    "members": [
+      {
+        "kind": "function",
+        "name": "QP_regularization",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::QP_regularization",
+        "brief": "initializes all internal data structures.",
+        "detailed": "NamedParameters a sequence of Named Parameters input_range a const range of input objects for shape regularization neighbor_query an instance of NeighQuery that is used internally to access object neighbors regularization_type an instance of RegType that is used internally to obtain object bounds and target values quadratic_program an instance of QPSolver to solve the quadratic programming problem np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> geom_traits </button> an instance of geometric traits class Type: a model of Kernel Default: GeomTraits() input_range.size() >= 2",
+        "return_type": "",
+        "argsstring": "(const InputRange &input_range, NeighQuery &neighbor_query, RegType &regularization_type, QPSolver &quadratic_program, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NeighQuery &",
+            "name": "neighbor_query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RegType &",
+            "name": "regularization_type",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "QPSolver &",
+            "name": "quadratic_program",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "143",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "regularize",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::regularize",
+        "brief": "runs the shape regularization algorithm.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "168",
+        "section": "Regularization"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::clear",
+        "brief": "clears all internal data structures.",
+        "detailed": "This method does not release the allocated memory but only removes the class internal data.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "227",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "release_memory",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::release_memory",
+        "brief": "releases all memory that is used internally.",
+        "detailed": "This method first calls the clear() method and then releases the allocated memory.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "240",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "248",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_neighbor_query",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_neighbor_query",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Neighbor_query &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_regularization_type",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_regularization_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Regularization_type &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "250",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_quadratic_program",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_quadratic_program",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Quadratic_program &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "255",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_parameters",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_parameters",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Parameters",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "256",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_bound",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_max_bound",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "258",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_graph",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_graph",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::set< Size_pair >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "259",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_bounds",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_bounds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "260",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_targets",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::m_targets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::map< Size_pair, FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "261",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build_graph_of_neighbors",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::build_graph_of_neighbors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "263",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "obtain_bounds",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::obtain_bounds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "281",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "obtain_targets",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::obtain_targets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "298",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_qp_data",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::set_qp_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Quadratic_program &qp) const",
+        "params": [
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "314",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_quadratic_term",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::set_quadratic_term",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t n, const std::size_t k, Quadratic_program &qp) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "329",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_linear_term",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::set_linear_term",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t n, const std::size_t k, Quadratic_program &qp) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "345",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_constant_term",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::set_constant_term",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Quadratic_program &qp) const",
+        "params": [
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "361",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_constraint_matrix",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::set_constraint_matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t n, const std::size_t k, Quadratic_program &qp) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "368",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_constraint_bounds",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::set_constraint_bounds",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t m, const std::size_t k, const std::size_t e, Quadratic_program &qp) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "402",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "solve_quadratic_program",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::solve_quadratic_program",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Quadratic_program &qp, std::vector< FT > &solution)",
+        "params": [
+          {
+            "type": "Quadratic_program &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< FT > &",
+            "name": "solution",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "432",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::QP_regularization::Parameters": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::QP_regularization::Parameters",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "75",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "weight",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::weight",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "lambda",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::lambda",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "neg_inf",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::neg_inf",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "78",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "pos_inf",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::pos_inf",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "78",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "val_neg",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::val_neg",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "79",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "val_pos",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::val_pos",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "79",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Parameters",
+        "qualified_name": "CGAL::Shape_regularization::QP_regularization::Parameters::Parameters",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/QP_regularization.h",
+        "line": "81",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::RegularizationType": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::RegularizationType",
+    "brief": "A concept that describes the set of methods used by the class QP_regularization to access various data required for setting up the global regularization problem.",
+    "detailed": "Has models Segments::Angle_regularization_2 Segments::Offset_regularization_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "bound",
+        "qualified_name": "CGAL::Shape_regularization::RegularizationType::bound",
+        "brief": "returns the maximum bound on a regularization characteristic (angle-orientation/ distance-offset/etc.) with respect to which a geometric object with the index query_index is being regularized.",
+        "detailed": "QP_regularization calls this method once for each object from the input range.",
+        "return_type": "FieldNumberType",
+        "argsstring": "(const std::size_t query_index) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/RegularizationType.h",
+        "line": "29",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Shape_regularization::RegularizationType::target",
+        "brief": "returns an objective function value between two geometric objects, which are direct neighbors, that is they form a neighbor pair i <-> j .",
+        "detailed": "Neighbors are provided by the concept NeighborQuery . QP_regularization calls this method once for each neighbor pair being regularized.",
+        "return_type": "FieldNumberType",
+        "argsstring": "(const std::size_t i, const std::size_t j)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/RegularizationType.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update",
+        "qualified_name": "CGAL::Shape_regularization::RegularizationType::update",
+        "brief": "updates regularization characteristics (angle-orientation/distance-offset/etc.) of the geometric objects being regularized using values from solution , one value per one regularized object.",
+        "detailed": "These values depend on what is being regularized, they could be angle or offset differences for example. The solution vector is computed by the QuadraticProgramTraits . Number of values in solution equals to the number n of geometric objects being regularized + the number m of neighbor pairs between these objects. The first n values are the values that should be used. QP_regularization calls this method once after the global regularization QP problem has been solved.",
+        "return_type": "void",
+        "argsstring": "(const std::vector< FieldNumberType > &solution)",
+        "params": [
+          {
+            "type": "const std::vector< FieldNumberType > &",
+            "name": "solution",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/RegularizationType.h",
+        "line": "61",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::Segments::Angle_regularization_2": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::Segments::Angle_regularization_2",
+    "brief": "An angle-based regularization type for 2D segments that reinforces parallelism and orthogonality relationships.",
+    "detailed": "GeomTraits a model of Kernel InputRange a model of Range whose iterator type is RandomAccessIterator SegmentMap a model of ReadWritePropertyMap whose key type is the value type of the input range and value type is GeomTraits::Segment_2 . The default is CGAL::Identity_property_map<typename GeomTraits::Segment_2> . Is model of RegularizationType",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Angle_regularization_2",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::Angle_regularization_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "NamedParameters a sequence of Named Parameters input_range a range of 2D segments to be regularized np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> maximum_angle </button> maximum allowed angle deviation in degrees of a segment from its initial orientation Type: GeomTraits::FT Default: 25 degrees <button class=\"collapsible\"> segment_map </button> an instance of SegmentMap that maps an item from input_range to GeomTraits::Segment_2 Default: SegmentMap() input_range.size() >= 2 maximum_angle >= 0 && maximum_angle <= 90",
+        "return_type": "",
+        "argsstring": "(InputRange &input_range, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "119",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "add_group",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::add_group",
+        "brief": "inserts a group of segments from input_range .",
+        "detailed": "Each group of segments is provided as a collection of their indices and only segments within the group are being regularized that is no relationships between segments from different groups are taken into account. The user must not use this method until he has meaningful groups of segments (see more in the user manual). By default, all segments are inserted as a group. IndexRange a model of ConstRange whose value type is std::size_t index_range a const range of segment indices index_range.size() >= 2",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "160",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::target",
+        "brief": "calculates the target value between 2 segments, which are direct neighbors to each other.",
+        "detailed": "The target value is the angle difference between initial orientations of two segments i and j . i index of the first segment j index of the second segment i >= 0 && i < input_range.size() j >= 0 && j < input_range.size()",
+        "return_type": "FT",
+        "argsstring": "(const std::size_t i, const std::size_t j) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "194",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "bound",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::bound",
+        "brief": "returns maximum_angle .",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "(const std::size_t) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "216",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "update",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::update",
+        "brief": "applies new orientations computed by the QuadraticProgramTraits to the initial segments.",
+        "detailed": "Number of values in solution equals to the number n of segments being regularized + the number m of neighbor pairs between these segments. Each of n values is an angle that is added to the initial segment orientation. solution a vector with angles in degrees solution.size() >= 1",
+        "return_type": "void",
+        "argsstring": "(const std::vector< FT > &solution)",
+        "params": [
+          {
+            "type": "const std::vector< FT > &",
+            "name": "solution",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "233",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "parallel_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::parallel_groups",
+        "brief": "creates groups of indices, where each group represents parallel segments.",
+        "detailed": "This method calls Segments::parallel_groups() . OutIterator a model of OutputIterator that accepts elements of type std::vector<std::size_t> groups an output iterator with groups of segment indices",
+        "return_type": "OutIterator",
+        "argsstring": "(OutIterator groups) const",
+        "params": [
+          {
+            "type": "OutIterator",
+            "name": "groups",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "286",
+        "section": "Groups"
+      },
+      {
+        "kind": "function",
+        "name": "orthogonal_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::orthogonal_groups",
+        "brief": "creates groups of indices, where each group represents orthogonal segments.",
+        "detailed": "This method calls Segments::orthogonal_groups() . OutIterator a model of OutputIterator that accepts elements of type std::vector<std::size_t> groups an output iterator with groups of segment indices",
+        "return_type": "OutIterator",
+        "argsstring": "(OutIterator groups) const",
+        "params": [
+          {
+            "type": "OutIterator",
+            "name": "groups",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "307",
+        "section": "Groups"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_modified_segments",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::number_of_modified_segments",
+        "brief": "returns the number of modified segments.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "324",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::clear",
+        "brief": "clears all internal data structures.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "336",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "355",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_segment_map",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_segment_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Segment_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "356",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_angle",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_max_angle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "358",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_wraps",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_wraps",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Segment_wrapper_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "359",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_num_modified_segments",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_num_modified_segments",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "361",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_num_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_num_groups",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "362",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_first_call",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::m_is_first_call",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "363",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_unique_group",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::create_unique_group",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "365",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update_segment_data",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::update_segment_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "380",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update_wrappers",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::update_wrappers",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "394",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "orient_segment",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Angle_regularization_2::orient_segment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Direction_2 &direction, const FT a, const FT b, const FT c, const Segment_wrapper_2 &wrap, Segment_2 &modified) const",
+        "params": [
+          {
+            "type": "const Direction_2 &",
+            "name": "direction",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Segment_wrapper_2 &",
+            "name": "wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2 &",
+            "name": "modified",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Angle_regularization_2.h",
+        "line": "404",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2",
+    "brief": "A neighbor query based on a Delaunay triangulation, which enables to find the nearest neighbors in a set of GeomTraits::Segment_2 .",
+    "detailed": "This class finds indices of the nearest neighbors of a query segment in a set of 2D segments. The class first creates a Delaunay triangulation whose vertices are center points of the input segments and then enables to return for each query segment indices of the segments whose center points form the one-ring neighborhood of the corresponding query vertex in the triangulation. GeomTraits a model of Kernel InputRange a model of ConstRange whose iterator type is RandomAccessIterator SegmentMap a model of ReadablePropertyMap whose key type is the value type of the InputRange and value type is GeomTraits::Segment_2 . The default is CGAL::Identity_property_map<typename GeomTraits::Segment_2> . Is model of NeighborQuery",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Delaunay_neighbor_query_2",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::Delaunay_neighbor_query_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "NamedParameters a sequence of Named Parameters input_range a const range of 2D segments np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> segment_map </button> an instance of SegmentMap that maps an item from input_range to GeomTraits::Segment_2 Default: SegmentMap() input_range.size() >= 2",
+        "return_type": "",
+        "argsstring": "(const InputRange &input_range, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "109",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "add_group",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::add_group",
+        "brief": "inserts a group of segments from input_range and finds their neighbors within the group.",
+        "detailed": "Each group of segments is provided as a collection of their indices and only neighbors of segments within the group are computed that is no relationships between segments from different groups are taken into account. The user must not use this method until he has meaningful groups of segments (see more in the user manual). By default, all segments are inserted as a group. IndexRange a model of ConstRange whose value type is std::size_t index_range a const range of segment indices index_range.size() >= 2",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "140",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::operator()",
+        "brief": "fills in a vector with indices of segments, which are direct neighbors of the query segment.",
+        "detailed": "query_index an index of the query segment neighbors indices of segments, which are direct neighbors of the query segment query_index >= 0 && query_index < input_range.size()",
+        "return_type": "void",
+        "argsstring": "(const std::size_t query_index, std::vector< std::size_t > &neighbors) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "query_index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::size_t > &",
+            "name": "neighbors",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "173",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::clear",
+        "brief": "clears all internal data structures.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "192",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "235",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_segment_map",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::m_segment_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Segment_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "236",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_delaunay",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::m_delaunay",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_triangulation",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "238",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::m_groups",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Indices >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "239",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_num_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::m_num_groups",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "240",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_first_call",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::m_is_first_call",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "241",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_unique_group",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::create_unique_group",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "243",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build_delaunay_triangulation",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::build_delaunay_triangulation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "259",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_neighbors",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::add_neighbors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "276",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "build_graph_of_neighbors",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::build_graph_of_neighbors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::set< Size_pair > &graph) const",
+        "params": [
+          {
+            "type": "std::set< Size_pair > &",
+            "name": "graph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "304",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_midpoint",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2::get_midpoint",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point_2",
+        "argsstring": "(const std::size_t seg_index) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "seg_index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Delaunay_neighbor_query_2.h",
+        "line": "324",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Shape_regularization::Segments::Offset_regularization_2": {
+    "kind": "class",
+    "name": "CGAL::Shape_regularization::Segments::Offset_regularization_2",
+    "brief": "An offset-based regularization type for 2D segments that reinforces collinearity relationships.",
+    "detailed": "The input groups of segments should each contain (near) parallel segments. In order to achieve that, one may use the class Segments::Angle_regularization_2 or the function Segments::parallel_groups() . Each group of parallel segments may be inserted using the method add_group() . GeomTraits a model of Kernel InputRange a model of Range whose iterator type is RandomAccessIterator SegmentMap a model of ReadWritePropertyMap whose key type is the value type of the InputRange and value type is GeomTraits::Segment_2 . The default is CGAL::Identity_property_map<typename GeomTraits::Segment_2> . Is model of RegularizationType",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "73",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Offset_regularization_2",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::Offset_regularization_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "NamedParameters a sequence of Named Parameters input_range a range of 2D segments to be regularized np an optional sequence of Named Parameters among the ones listed below; this parameter can be omitted, the default values are then used Optional Named Parameters <button class=\"collapsible\"> maximum_offset </button> maximum allowed orthogonal distance between two parallel segments such that they are considered to be collinear Type: GeomTraits::FT Default: 0.5 unit length <button class=\"collapsible\"> segment_map </button> an instance of SegmentMap that maps an item from input_range to GeomTraits::Segment_2 Default: SegmentMap() input_range.size() >= 2 maximum_offset >= 0",
+        "return_type": "",
+        "argsstring": "(InputRange &input_range, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "InputRange &",
+            "name": "input_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "123",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "add_group",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::add_group",
+        "brief": "inserts a group of segments from input_range .",
+        "detailed": "Each group of segments is provided as a collection of their indices and only segments within the group are being regularized that is no relationships between segments from different groups are taken into account. The user must not use this method until he has meaningful groups of segments (see more in the user manual). By default, all segments are inserted as a group. IndexRange a model of ConstRange whose value type is std::size_t index_range a const range of segment indices index_range.size() >= 2",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "164",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::target",
+        "brief": "calculates the target value between 2 parallel segments, which are direct neighbors to each other.",
+        "detailed": "The target value is the distance between two parallel segments i and j , where the distance is defined as the distance between the midpoint of the ith segment and the projection of this point onto the supporting line of the jth segment. i index of the first segment j index of the second segment i >= 0 && i < input_range.size() j >= 0 && j < input_range.size()",
+        "return_type": "FT",
+        "argsstring": "(const std::size_t i, const std::size_t j) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "200",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "bound",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::bound",
+        "brief": "returns maximum_offset .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const std::size_t) const",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "222",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "update",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::update",
+        "brief": "applies new positions computed by the QuadraticProgramTraits to the initial segments.",
+        "detailed": "Number of values in solution equals to the number n of segments being regularized + the number m of neighbor pairs between these segments. Each of n values is an offset that is added to the initial segment position. solution a vector with offsets in unit lengths solution.size() >= 1",
+        "return_type": "void",
+        "argsstring": "(const std::vector< FT > &solution)",
+        "params": [
+          {
+            "type": "const std::vector< FT > &",
+            "name": "solution",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "239",
+        "section": "Access"
+      },
+      {
+        "kind": "function",
+        "name": "collinear_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::collinear_groups",
+        "brief": "creates groups of indices, where each group represents collinear segments.",
+        "detailed": "This method calls Segments::collinear_groups() . OutIterator a model of OutputIterator that accepts elements of type std::vector<std::size_t> groups an output iterator with groups of segment indices",
+        "return_type": "OutIterator",
+        "argsstring": "(OutIterator groups) const",
+        "params": [
+          {
+            "type": "OutIterator",
+            "name": "groups",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "287",
+        "section": "Groups"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_modified_segments",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::number_of_modified_segments",
+        "brief": "returns the number of modified segments.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "304",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "unique_segments",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::unique_segments",
+        "brief": "returns segments, which best-fit collinear groups.",
+        "detailed": "This method first calls Segments::collinear_groups() and then substitutes each group of collinear segments by an average segment. The number of returned segments is the number of detected collinear groups. OutIterator a model of OutputIterator that accepts segments of type GeomTraits::Segment_2 segments an output iterator with the simplified segments",
+        "return_type": "OutIterator",
+        "argsstring": "(OutIterator segments) const",
+        "params": [
+          {
+            "type": "OutIterator",
+            "name": "segments",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "322",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::clear",
+        "brief": "clears all internal data structures.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "339",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "variable",
+        "name": "m_input_range",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_input_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Input_range &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "358",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_segment_map",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_segment_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Segment_map",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "359",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_max_offset",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_max_offset",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "361",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_wraps",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_wraps",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Segment_wrapper_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "362",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_num_modified_segments",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_num_modified_segments",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "364",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_num_groups",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_num_groups",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "365",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_first_call",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::m_is_first_call",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "366",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_unique_group",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::create_unique_group",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "368",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update_segment_data",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::update_segment_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "383",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "update_wrappers",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::update_wrappers",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const IndexRange &index_range)",
+        "params": [
+          {
+            "type": "const IndexRange &",
+            "name": "index_range",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "402",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "align_segment",
+        "qualified_name": "CGAL::Shape_regularization::Segments::Offset_regularization_2::align_segment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_2 &source, const Point_2 &target, const FT difference, const Vector_2 &normal, Segment_2 &modified) const",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "difference",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector_2 &",
+            "name": "normal",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Segment_2 &",
+            "name": "modified",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Shape_regularization/Segments/Offset_regularization_2.h",
+        "line": "417",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Shape_regularization": {
+    "kind": "namespace",
+    "name": "CGAL::Shape_regularization",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Shape_regularization::Contours": {
+    "kind": "namespace",
+    "name": "CGAL::Shape_regularization::Contours",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Shape_regularization::Planes": {
+    "kind": "namespace",
+    "name": "CGAL::Shape_regularization::Planes",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Shape_regularization::Segments": {
+    "kind": "namespace",
+    "name": "CGAL::Shape_regularization::Segments",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

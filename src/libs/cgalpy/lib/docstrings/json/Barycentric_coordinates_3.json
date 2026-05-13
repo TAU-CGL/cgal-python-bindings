@@ -1,0 +1,2058 @@
+{
+  "CGAL::Barycentric_coordinates::BarycentricTraits_3": {
+    "kind": "class",
+    "name": "CGAL::Barycentric_coordinates::BarycentricTraits_3",
+    "brief": "A concept that describes the set of requirements of the template parameter GeomTraits used to parameterize all classes and functions with 3D barycentric coordinates from the namespace CGAL::Barycentric_coordinates . The concept BarycentricTraits_3 extends the concept BarycentricTraits_2 and adds the requirements for 3D objects.",
+    "detailed": "Generalizes BarycentricTraits_2 Has models All models of the CGAL concept Kernel",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::FT",
+        "brief": "A model of FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Point_3",
+        "brief": "A model of Kernel::Point_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "39",
+        "section": "3D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Vector_3",
+        "brief": "A model of Kernel::Vector_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "44",
+        "section": "3D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Plane_3",
+        "brief": "A model of Kernel::Plane_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "49",
+        "section": "3D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Point_2",
+        "brief": "A model of Kernel::Point_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "59",
+        "section": "2D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Vector_2",
+        "brief": "A model of Kernel::Vector_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "64",
+        "section": "2D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Triangle_2",
+        "brief": "A model of Kernel::Triangle_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "69",
+        "section": "2D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Iso_rectangle_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Iso_rectangle_2",
+        "brief": "A model of Kernel::Iso_rectangle_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "74",
+        "section": "2D Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_approximate_angle_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_approximate_angle_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator(Vector_3 u, Vector_3 v) that returns an approximation of the angle between u and v . The angle is given in degrees.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "89",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_determinant_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_determinant_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator(Vector_3 u, Vector_3 v, Vector_3 w) that returns the determinant of the three vectors u , v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "98",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_scalar_product_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator(Vector_3 v, Vector_3 w) that returns the scalar (inner) product of the two vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "107",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_squared_length_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Vector_3 & v) that returns the squared length of the vector v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "116",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_volume_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_volume_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator(Point_3 p0, Point_3 p1, Point_3 p2, Point_3 p3) that returns the signed volume of the tetrahedron defined by the four points p0 , p1 , p2 , and p3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "125",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Cartesian_const_iterator_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Cartesian_const_iterator_3",
+        "brief": "A model of CartesianConstIterator_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "130",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cartesian_const_iterator_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_cartesian_const_iterator_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Cartesian_const_iterator_3 operator() ( Point_3 p) returns an iterator on the zeroth Cartesian coordinate of p.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "139",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_cross_product_vector_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_3 operator(Vector_3 u, Vector_3 v) that returns the cross product between u and v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "148",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_projected_xy_point_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_projected_xy_point_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_2 operator()(Plane_3 h, Point_3 p) , which returns image point of the projection of p under an affine transformation, which maps h onto the xy -plane, with the z -coordinate removed.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "158",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_plane_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_plane_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Plane_3 operator()(Point_3 p, Point_3 q, Point_3 r) , which constructs a plane passing through p , q , and r and oriented in a positive sense when seen from the positive side of the plane.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "168",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_divided_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_divided_vector_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_3 operator()(Vector_3 v, FT t) returning the vector v / t .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "177",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_point_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_3 operator(FT x, FT y, FT z) that returns the point with coordinates x , y and z .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "186",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_scaled_vector_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_3 operator()(Vector_3 v, FT t) returning the vector v * t .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "195",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_vector_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_3 operator(Point_3 p, Point_3 q) that returns the vector q - p .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "204",
+        "section": "3D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_area_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_area_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator(Point_2 p0, Point_2 p1, Point_3 p2) that returns the signed area of the triangle defined by the three points p0 , p1 , and p2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "217",
+        "section": "2D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_squared_distance_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(Point_2 p, Point_2 q), which returns the squared distance between p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "226",
+        "section": "2D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compute_scalar_product_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(Vector_2 v, Vector_2 w) that returns the scalar product of the vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "235",
+        "section": "2D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Construct_vector_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_2 operator()(Point_2 a, Point_2 b) that computes the vector b-a .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "244",
+        "section": "2D Generalized Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Collinear_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Collinear_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(Point_2 p, Point_2 q, Point_2 r) that returns true if the points p , q , and r are collinear and false otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "257",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Collinear_are_ordered_along_line_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Collinear_are_ordered_along_line_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(Point_2 p, Point_2 q, Point_2 r) that returns true , iff q lies between p and r and p , q , and r satisfy the precondition that they are collinear.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "267",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_x_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compare_x_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "Comparison_result operator()(Point_2 p, Point_2 q) that returns SMALLER, EQUAL or LARGER according to the $ x$ -ordering of points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "277",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_y_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Compare_y_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "Comparison_result operator()(Point_2 p, Point_2 q) that returns SMALLER, EQUAL or LARGER according to the $ y$ -ordering of points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "287",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Equal_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(Point_2 p, Point_2 q) , which returns true iff p is equal to q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "296",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_xy_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Less_xy_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p <_{xy} q$ . We have $ p<_{xy}q$ , iff $ p_x < q_x$ or $ p_x = q_x$ and $ p_y < q_y$ , where $ p_x$ and $ p_y$ denote $ x$ and $ y$ coordinate of point $ p$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "308",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::Orientation_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "Orientation operator()(Point_2 p, Point_2 q, Point_2 r) that returns CGAL::LEFT_TURN if r lies to the left of the oriented line l defined by p and q , returns CGAL::RIGHT_TURN if r lies to the right of l , and returns CGAL::COLLINEAR if r lies on l .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "318",
+        "section": "2D Generalized Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "collinear_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::collinear_2_object",
+        "brief": "The following functions give access to the predicate and constructor objects.",
+        "detailed": "",
+        "return_type": "Collinear_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "327",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "collinear_are_ordered_along_line_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::collinear_are_ordered_along_line_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Collinear_are_ordered_along_line_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "332",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_approximate_angle_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_approximate_angle_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_approximate_angle_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "337",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_area_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_area_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_area_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "342",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_determinant_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_determinant_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_determinant_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "347",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_scalar_product_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_scalar_product_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "352",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_scalar_product_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_scalar_product_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "357",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_squared_distance_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "362",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_volume_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compute_volume_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_volume_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "367",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compare_x_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compare_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "372",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compare_y_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::compare_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compare_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "377",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_cartesian_const_iterator_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_cartesian_const_iterator_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_cartesian_const_iterator_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "382",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_cross_product_vector_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_cross_product_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_cross_product_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "387",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_divided_vector_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_divided_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_divided_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "392",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_point_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "397",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_plane_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_plane_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_plane_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "402",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_projected_xy_point_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_projected_xy_point_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_projected_xy_point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "407",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_scaled_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "412",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_vector_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vector_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "417",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::construct_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "422",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "equal_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::equal_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Equal_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "427",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "less_xy_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::less_xy_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_xy_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "432",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "CGAL::Barycentric_coordinates::BarycentricTraits_3::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/BarycentricTraits_3.h",
+        "line": "437",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3": {
+    "kind": "class",
+    "name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3",
+    "brief": "computes 3D discrete harmonic coordinates with respect to a closed convex triangle mesh.",
+    "detailed": "This class implements 3D discrete harmonic coordinates [2] , which can be computed at any point inside a convex polyhedron with triangular faces. Discrete harmonic coordinates are well-defined in the closure of a convex polyhedron with triangular faces but they are not necessarily positive. The coordinates are computed analytically. TriangleMesh must be a model of the concept FaceListGraph . VertexPointMap a property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and GeomTraits::Point_3 as value type. GeomTraits a model of BarycentricTraits_3 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::Point_3",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::Vector_3",
+        "brief": "Vector type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Discrete_harmonic_coordinates_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::Discrete_harmonic_coordinates_3",
+        "brief": "initializes all internal data structures.",
+        "detailed": "This class implements the behavior of discrete harmonic coordinates for 3D query points. tmesh an instance of TriangleMesh policy one of the CGAL::Barycentric_coordinates::Computation_policy_3 ; the default is Computation_policy_3::FAST_WITH_EDGE_CASES traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided vertex_point_map an instance of VertexPointMap that maps a vertex from tmesh to Point_3 ; the default initialization is provided num_vertices( tmesh ) >= 4. CGAL::is_triangle_mesh( tmesh ). CGAL::is_closed( tmesh ). CGAL::is_strongly_convex_3( tmesh ).",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const Computation_policy_3 policy, const VertexPointMap vertex_point_map, const GeomTraits traits=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Computation_policy_3",
+            "name": "policy",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap",
+            "name": "vertex_point_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "114",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::operator()",
+        "brief": "computes 3D discrete harmonic coordinates with respect to a closed convex triangle mesh.",
+        "detailed": "This function fills oi with 3D discrete harmonic coordinates computed at the query point with respect to the vertices of the input polyhedron. The number of returned coordinates equals the number of vertices of tmesh . After the coordinates $b_i$ with $i = 0\\dots n-1$ are computed, where $n$ is the number of vertices, the query point $q$ can be obtained as $q = \\sum_{i = 0}^{n-1}b_ip_i$ , where $p_i$ are the polyhedron vertices. OutputIterator a model of OutputIterator that accepts values of type FT query a query point oi the beginning of the destination range with the computed coordinates an output iterator to the element in the destination range, one past the last coordinate stored",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator oi)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "oi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "178",
+        "section": "Access"
+      },
+      {
+        "kind": "variable",
+        "name": "m_tmesh",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_tmesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const TriangleMesh &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "186",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_computation_policy",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_computation_policy",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Computation_policy_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "187",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertex_point_map",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_vertex_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "188",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "189",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_compute_squared_length_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_compute_squared_length_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_length_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "191",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_construct_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_construct_vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vec_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "192",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_construct_scaled_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_construct_scaled_vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "193",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_cross_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_cross_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cross_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "194",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_dot_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_dot_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Dot_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "195",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "sqrt",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::sqrt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sqrt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "196",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_weights",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::m_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "198",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Discrete_harmonic_coordinates_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::Discrete_harmonic_coordinates_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const Computation_policy_3 policy=Computation_policy_3::FAST_WITH_EDGE_CASES, const GeomTraits traits=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Computation_policy_3",
+            "name": "policy",
+            "default": "Computation_policy_3::FAST_WITH_EDGE_CASES",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "138",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::compute",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator coordinates)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "coordinates",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "202",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_coords",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::compute_coords",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator coordinates)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "coordinates",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "245",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_weights",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::compute_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "265",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_dh_vertex_query",
+        "qualified_name": "CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_3::compute_dh_vertex_query",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Vertex &vertex, const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Vertex &",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Discrete_harmonic_coordinates_3.h",
+        "line": "291",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Barycentric_coordinates::Mean_value_coordinates_3": {
+    "kind": "class",
+    "name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3",
+    "brief": "computes 3D mean value barycentric coordinates with respect to a closed triangle mesh.",
+    "detailed": "This class implements 3D mean value coordinates ( [1] , [2] ), which can be computed at any point in the space. Mean value coordinates are well-defined everywhere in the space and are non-negative in the kernel of a star-shaped polyhedron. The coordinates are computed analytically. TriangleMesh must be a model of the concept FaceListGraph . VertexPointMap a property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and GeomTraits::Point_3 as value type. GeomTraits a model of BarycentricTraits_3 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::Point_3",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "79",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::Vector_3",
+        "brief": "Vector type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Mean_value_coordinates_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::Mean_value_coordinates_3",
+        "brief": "initializes all internal data structures.",
+        "detailed": "This class implements the behavior of mean value coordinates for 3D query points. tmesh an instance of TriangleMesh policy one of the CGAL::Barycentric_coordinates::Computation_policy_3 ; the default is Computation_policy_3::FAST_WITH_EDGE_CASES traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided vertex_point_map an instance of VertexPointMap that maps a vertex from tmesh to Point_3 ; the default initialization is provided num_vertices( tmesh ) >= 4. CGAL::is_triangle_mesh( tmesh ). CGAL::is_closed( tmesh ).",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const Computation_policy_3 policy, const VertexPointMap vertex_point_map, const GeomTraits traits=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Computation_policy_3",
+            "name": "policy",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap",
+            "name": "vertex_point_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "114",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::operator()",
+        "brief": "computes 3D mean value barycentric coordinates with respect to a closed triangle mesh.",
+        "detailed": "This function fills oi with 3D mean value coordinates computed at the query point with respect to the vertices of the input polyhedron. The number of returned coordinates equals the number of vertices of tmesh . After the coordinates $b_i$ with $i = 0\\dots n-1$ are computed, where $n$ is the number of vertices, the query point $q$ can be obtained as $q = \\sum_{i = 0}^{n-1}b_ip_i$ , where $p_i$ are the polyhedron vertices. OutputIterator a model of OutputIterator that accepts values of type FT query a query point oi the beginning of the destination range with the computed coordinates an output iterator to the element in the destination range, one past the last coordinate stored",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator oi)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "oi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "177",
+        "section": "Access"
+      },
+      {
+        "kind": "variable",
+        "name": "m_tmesh",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_tmesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const TriangleMesh &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "185",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_computation_policy",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_computation_policy",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Computation_policy_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "186",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertex_point_map",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_vertex_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "187",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "188",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_compute_squared_length_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_compute_squared_length_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_length_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "190",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_construct_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_construct_vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vec_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "191",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_cross_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_cross_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cross_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "192",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_dot_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_dot_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Dot_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "193",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "sqrt",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::sqrt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Sqrt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "194",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_approximate_angle_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_approximate_angle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Approximate_angle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "195",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_weights",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "198",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "query_vertex_vectors",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::query_vertex_vectors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "199",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "unit_vectors",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::unit_vectors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "200",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vectors",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::m_vectors",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "201",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "angles",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::angles",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "202",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Mean_value_coordinates_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::Mean_value_coordinates_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const Computation_policy_3 policy=Computation_policy_3::FAST_WITH_EDGE_CASES, const GeomTraits traits=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Computation_policy_3",
+            "name": "policy",
+            "default": "Computation_policy_3::FAST_WITH_EDGE_CASES",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "139",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::compute",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator coordinates)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "coordinates",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "206",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_coords",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::compute_coords",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator coordinates)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "coordinates",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_weights",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::compute_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "269",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_mv_vertex_query",
+        "qualified_name": "CGAL::Barycentric_coordinates::Mean_value_coordinates_3::compute_mv_vertex_query",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Vertex &vertex, const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Vertex &",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Mean_value_coordinates_3.h",
+        "line": "295",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Barycentric_coordinates::Wachspress_coordinates_3": {
+    "kind": "class",
+    "name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3",
+    "brief": "computes 3D Wachspress coordinates with respect to a closed convex triangle mesh.",
+    "detailed": "This class implements 3D Wachspress coordinates ( [1] , [2] ), which can be computed at any point inside a convex polyhedron with triangular faces. Wachspress coordinates are well-defined and non-negative in the closure of a convex polyhedron with triangular faces. The coordinates are computed analytically. TriangleMesh must be a model of the concept FaceListGraph . VertexPointMap a property map with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and GeomTraits::Point_3 as value type. GeomTraits a model of BarycentricTraits_3 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::Point_3",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::Vector_3",
+        "brief": "Vector type.",
+        "detailed": "",
+        "return_type": "typename GeomTraits::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Wachspress_coordinates_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::Wachspress_coordinates_3",
+        "brief": "initializes all internal data structures.",
+        "detailed": "This class implements the behavior of Wachspress coordinates for 3D query points. tmesh an instance of TriangleMesh policy one of the CGAL::Barycentric_coordinates::Computation_policy_3 ; the default is Computation_policy_3::FAST_WITH_EDGE_CASES traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided vertex_point_map an instance of VertexPointMap that maps a vertex from tmesh to Point_3 ; the default initialization is provided num_vertices( tmesh ) >= 4. CGAL::is_triangle_mesh( tmesh ). CGAL::is_closed( tmesh ). CGAL::is_strongly_convex_3( tmesh ).",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const Computation_policy_3 policy, const VertexPointMap vertex_point_map, const GeomTraits traits=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Computation_policy_3",
+            "name": "policy",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap",
+            "name": "vertex_point_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "114",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::operator()",
+        "brief": "computes 3D Wachspress coordinates with respect to a closed convex triangle mesh.",
+        "detailed": "This function fills oi with 3D Wachspress coordinates computed at the query point with respect to the vertices of the input polyhedron. The number of returned coordinates equals the number of vertices of tmesh . After the coordinates $b_i$ with $i = 0\\dots n-1$ are computed, where $n$ is the number of vertices, the query point $q$ can be obtained as $q = \\sum_{i = 0}^{n-1}b_ip_i$ , where $p_i$ are the polyhedron vertices. OutputIterator a model of OutputIterator that accepts values of type FT query a query point oi the beginning of the destination range with the computed coordinates an output iterator to the element in the destination range, one past the last coordinate stored",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator oi)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "oi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "175",
+        "section": "Access"
+      },
+      {
+        "kind": "variable",
+        "name": "m_tmesh",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_tmesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const TriangleMesh &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "183",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_computation_policy",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_computation_policy",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Computation_policy_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "184",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertex_point_map",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_vertex_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "185",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "186",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_dot_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_dot_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Dot_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "188",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_det_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_det_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Det_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "189",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_cross_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_cross_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cross_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "190",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_compute_squared_length_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_compute_squared_length_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_length_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "191",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_construct_vector_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_construct_vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vec_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "192",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_weights",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::m_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "194",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Wachspress_coordinates_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::Wachspress_coordinates_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const TriangleMesh &tmesh, const Computation_policy_3 policy=Computation_policy_3::FAST_WITH_EDGE_CASES, const GeomTraits traits=GeomTraits())",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Computation_policy_3",
+            "name": "policy",
+            "default": "Computation_policy_3::FAST_WITH_EDGE_CASES",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "137",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::compute",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator coordinates)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "coordinates",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "197",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_coords",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::compute_coords",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &query, OutputIterator coordinates)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "coordinates",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "239",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_weights",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::compute_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "260",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_wp_vertex_query",
+        "qualified_name": "CGAL::Barycentric_coordinates::Wachspress_coordinates_3::compute_wp_vertex_query",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Vertex &vertex, const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Vertex &",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/Wachspress_coordinates_3.h",
+        "line": "285",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Barycentric_coordinates": {
+    "kind": "namespace",
+    "name": "CGAL::Barycentric_coordinates",
+    "brief": "The namespace Barycentric_coordinates contains implementations of all generalized barycentric coordinates: 2D, 3D, related enumerations, etc.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Computation_policy_3",
+        "qualified_name": "CGAL::Barycentric_coordinates::Computation_policy_3",
+        "brief": "Computation_policy_3 provides a way to choose an asymptotic time complexity of the algorithm and its precision for computing 3D barycentric weights and coordinates.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Barycentric_coordinates_3/barycentric_enum_3.h",
+        "line": "36",
+        "section": "Computation Policies"
+      },
+      {
+        "kind": "function",
+        "name": "tetrahedron_coordinates",
+        "qualified_name": "CGAL::Barycentric_coordinates::tetrahedron_coordinates",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_3 &p0, const Point_3 &p1, const Point_3 &p2, const Point_3 &p3, const Point_3 &query, OutputIterator oi)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "oi",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/tetrahedron_coordinates.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "tetrahedron_coordinates",
+        "qualified_name": "CGAL::Barycentric_coordinates::tetrahedron_coordinates",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< typename Kernel_traits< Point_3 >::Kernel::FT, 4 >",
+        "argsstring": "(const Point_3 &p0, const Point_3 &p1, const Point_3 &p2, const Point_3 &p3, const Point_3 &query)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_3 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Barycentric_coordinates_3/tetrahedron_coordinates.h",
+        "line": "165",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

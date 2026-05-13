@@ -1,0 +1,3028 @@
+{
+  "AllFurthestNeighborsTraits_2": {
+    "kind": "class",
+    "name": "AllFurthestNeighborsTraits_2",
+    "brief": "The concept AllFurthestNeighborsTraits_2 defines types and operations needed to compute all furthest neighbors for the vertices of a convex polygon using the function all_furthest_neighbors_2() .",
+    "detailed": "Has models CGAL::Cartesian<FieldNumberType> CGAL::Homogeneous<RingNumberType> CGAL::Simple_cartesian<FieldNumberType> CGAL::Simple_homogeneous<RingNumberType> CGAL::all_furthest_neighbors_2() AllFurthestNeighborsTraits_2::Less_xy_2 and AllFurthestNeighborsTraits_2::Orientation_2 are used for (expensive) precondition checking only. Therefore, they need not to be specified, in case that precondition checking is disabled.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "AllFurthestNeighborsTraits_2::FT",
+        "brief": "model for FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "AllFurthestNeighborsTraits_2::Point_2",
+        "brief": "model for Kernel::Point_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_2",
+        "qualified_name": "AllFurthestNeighborsTraits_2::Compute_squared_distance_2",
+        "brief": "model for Kernel::ComputeSquaredDistance_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_xy_2",
+        "qualified_name": "AllFurthestNeighborsTraits_2::Less_xy_2",
+        "brief": "model for Kernel::LessXY_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "AllFurthestNeighborsTraits_2::Orientation_2",
+        "brief": "model for Kernel::Orientation_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_2_object",
+        "qualified_name": "AllFurthestNeighborsTraits_2::compute_squared_distance_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "71",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_xy_2_object",
+        "qualified_name": "AllFurthestNeighborsTraits_2::less_xy_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_xy_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "76",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "orientation_2_object",
+        "qualified_name": "AllFurthestNeighborsTraits_2::orientation_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Orientation_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AllFurthestNeighborsTraits_2.h",
+        "line": "81",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Polytope_distance_d": {
+    "kind": "class",
+    "name": "CGAL::Polytope_distance_d",
+    "brief": "An object of the class Polytope_distance_d represents the (squared) distance between two convex polytopes, given as the convex hulls of two finite point sets in $ d$ -dimensional Euclidean space $ \\E^d$ .",
+    "detailed": "For point sets $ P$ and $ Q$ we denote by $ pd(P,Q)$ the distance between the convex hulls of $ P$ and $ Q$ . Note that $ pd(P,Q)$ can be degenerate, i.e. $ pd(P,Q)=\\infty$ if $ P$ or $ Q$ is empty. Two inclusion-minimal subsets $ S_P$ of $ P$ and $ S_Q$ of $ Q$ with $ pd(S_P,S_Q)=pd(P,Q)$ are called pair of support sets , the points in $ S_P$ and $ S_Q$ are the support points . A pair of support sets has size at most $ d+2$ (by size we mean $ |S_P|+|S_Q|$ ). The distance between the two polytopes is realized by a pair of points $ p$ and $ q$ lying in the convex hull of $ S_P$ and $ S_Q$ , respectively, i.e. $ \\sqrt{||p-q||}=pd(P,Q)$ . In general, neither the support sets nor the realizing points are necessarily unique. The underlying algorithm can cope with all kinds of input, e.g. $ P$ and $ Q$ may be in non-convex position or points may occur more than once. The algorithm computes a pair of support sets $ S_P$ and $ S_Q$ with realizing points $ p$ and $ q$ which remain fixed until the next set, insert, or clear operation. Traits must be a model for PolytopeDistanceDTraits . We provide the models Polytope_distance_d_traits_2 , Polytope_distance_d_traits_3 , and Polytope_distance_d_traits_d using the two-, three-, and $ d$ -dimensional CGAL kernel, respectively. CGAL::Polytope_distance_d_traits_2 <K, ET ,NT> CGAL::Polytope_distance_d_traits_3 <K, ET ,NT> CGAL::Polytope_distance_d_traits_d <K, ET ,NT> PolytopeDistanceDTraits Implementation The problem of finding the distance between two convex polytopes given as the convex hulls of two finite point sets can be formulated as an optimization problem with linear constraints and a convex quadratic objective function. The solution is obtained using our exact solver for quadratic programs [2] . The creation time is almost always linear in the number of points. Access functions and predicates take constant time, inserting a point might take up to linear time. The clear operation and the check for validity each take linear time.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Polytope_distance_d::Point",
+        "brief": "typedef to Traits::Point_d .",
+        "detailed": "Point type used to represent the input points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Polytope_distance_d::FT",
+        "brief": "typedef to Traits::FT .",
+        "detailed": "Number type used to return the squared distance between the two polytopes.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ET",
+        "qualified_name": "CGAL::Polytope_distance_d::ET",
+        "brief": "typedef to Traits::ET .",
+        "detailed": "Number type used to do the exact computations in the underlying solver for quadratic programs (cf. Implementation ).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_iterator",
+        "qualified_name": "CGAL::Polytope_distance_d::Point_iterator",
+        "brief": "non-mutable model of the STL concept RandomAccessIterator with value type Point .",
+        "detailed": "Used to access the points of the two polytopes.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "90",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Support_point_iterator",
+        "qualified_name": "CGAL::Polytope_distance_d::Support_point_iterator",
+        "brief": "non-mutable model of the STL concept RandomAccessIterator with value type Point .",
+        "detailed": "Used to access the support points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Support_point_index_iterator",
+        "qualified_name": "CGAL::Polytope_distance_d::Support_point_index_iterator",
+        "brief": "non-mutable model of the STL concept RandomAccessIterator with value type int .",
+        "detailed": "Used to access the indices of the support points in the provided input order (starting from 0 in both point sets).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "106",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Coordinate_iterator",
+        "qualified_name": "CGAL::Polytope_distance_d::Coordinate_iterator",
+        "brief": "non-mutable model of the STL concept RandomAccessIterator with value type ET .",
+        "detailed": "Used to access the coordinates of the realizing points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "114",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d",
+        "qualified_name": "CGAL::Polytope_distance_d::Polytope_distance_d",
+        "brief": "initializes poly_dist to $ pd(\\emptyset, \\emptyset)$ .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Traits &traits=Traits(), int verbose=0, std::ostream &stream=std::cout)",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "verbose",
+            "default": "0",
+            "brief": ""
+          },
+          {
+            "type": "std::ostream &",
+            "name": "stream",
+            "default": "std::cout",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "125",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d",
+        "qualified_name": "CGAL::Polytope_distance_d::Polytope_distance_d",
+        "brief": "initializes poly_dist to $ pd(P,Q)$ with $ P$ and $ Q$ being the sets of points in the range [ p_first , p_last ) and [ q_first , q_last ), respectively.",
+        "detailed": "InputIterator1 has Point as value type. InputIterator2 has Point as value type. All points have the same dimension. If verbose is set to $ 1$ , $ 2$ , or $ 3$ then some, more, or full verbose output of the underlying solver for quadratic programs is written to stream , resp.",
+        "return_type": "",
+        "argsstring": "(InputIterator1 p_first, InputIterator1 p_last, InputIterator2 q_first, InputIterator2 q_last, const Traits &traits=Traits(), int verbose=0, std::ostream &stream=std::cout)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "p_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "p_last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "q_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "q_last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "verbose",
+            "default": "0",
+            "brief": ""
+          },
+          {
+            "type": "std::ostream &",
+            "name": "stream",
+            "default": "std::cout",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "143",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ambient_dimension",
+        "qualified_name": "CGAL::Polytope_distance_d::ambient_dimension",
+        "brief": "returns the dimension of the points in $ P$ and $ Q$ .",
+        "detailed": "If poly_dist is $ pd(\\emptyset, \\emptyset)$ , the ambient dimension is $ -1$ .",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "161",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_points",
+        "qualified_name": "CGAL::Polytope_distance_d::number_of_points",
+        "brief": "returns the number of all points of poly_dist , i.e. $ |P|+|Q|$ .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "167",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_points_p",
+        "qualified_name": "CGAL::Polytope_distance_d::number_of_points_p",
+        "brief": "returns the number of points in $ P$ .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "173",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_points_q",
+        "qualified_name": "CGAL::Polytope_distance_d::number_of_points_q",
+        "brief": "returns the number of points in $ Q$ .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "179",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_support_points",
+        "qualified_name": "CGAL::Polytope_distance_d::number_of_support_points",
+        "brief": "returns the number of support points of poly_dist , i.e. $ |S_P|+|S_Q|$ .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "185",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_support_points_p",
+        "qualified_name": "CGAL::Polytope_distance_d::number_of_support_points_p",
+        "brief": "returns the number of support points in $ S_P$ .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "191",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_support_points_q",
+        "qualified_name": "CGAL::Polytope_distance_d::number_of_support_points_q",
+        "brief": "returns the number of support points in $ S_Q$ .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "197",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points_p_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::points_p_begin",
+        "brief": "returns an iterator referring to the first point in $ P$ .",
+        "detailed": "",
+        "return_type": "Point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "203",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points_p_end",
+        "qualified_name": "CGAL::Polytope_distance_d::points_p_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "209",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points_q_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::points_q_begin",
+        "brief": "returns an iterator referring to the first point in $ Q$ .",
+        "detailed": "",
+        "return_type": "Point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "215",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points_q_end",
+        "qualified_name": "CGAL::Polytope_distance_d::points_q_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "221",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_p_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_p_begin",
+        "brief": "returns an iterator referring to the first support point in $ S_P$ .",
+        "detailed": "",
+        "return_type": "Support_point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "227",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_p_end",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_p_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Support_point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "233",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_q_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_q_begin",
+        "brief": "returns an iterator referring to the first support point in $ S_Q$ .",
+        "detailed": "",
+        "return_type": "Support_point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "239",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_q_end",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_q_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Support_point_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "245",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_p_indices_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_p_indices_begin",
+        "brief": "returns an iterator referring to the index of the first support point in $ P$ .",
+        "detailed": "",
+        "return_type": "Support_point_index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "251",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_p_indices_end",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_p_indices_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Support_point_index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "257",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_q_indices_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_q_indices_begin",
+        "brief": "returns an iterator referring to the index of the first support point in $ Q$ .",
+        "detailed": "",
+        "return_type": "Support_point_index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "263",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "support_points_q_indices_end",
+        "qualified_name": "CGAL::Polytope_distance_d::support_points_q_indices_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Support_point_index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "269",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "realizing_point_p",
+        "qualified_name": "CGAL::Polytope_distance_d::realizing_point_p",
+        "brief": "returns the realizing point of $ P$ .",
+        "detailed": "An implicit conversion from ET to RT must be available. $ pd(P,Q)$ is finite.",
+        "return_type": "Point",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "277",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "realizing_point_q",
+        "qualified_name": "CGAL::Polytope_distance_d::realizing_point_q",
+        "brief": "returns the realizing point of $ Q$ .",
+        "detailed": "An implicit conversion from ET to RT must be available. $ pd(P,Q)$ is finite.",
+        "return_type": "Point",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "285",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "squared_distance",
+        "qualified_name": "CGAL::Polytope_distance_d::squared_distance",
+        "brief": "returns the squared distance of poly_dist , i.e. $ (pd(P,Q))^2$ .",
+        "detailed": "An implicit conversion from ET to RT must be available. $ pd(P,Q)$ is finite.",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "293",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "realizing_point_p_coordinates_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::realizing_point_p_coordinates_begin",
+        "brief": "returns an iterator referring to the first coordinate of the realizing point of $ P$ .",
+        "detailed": "The coordinates have a rational representation, i.e. the first $ d$ elements of the iterator range are the numerators and the $ (d\\!+\\!1)$ -st element is the common denominator.",
+        "return_type": "Coordinate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "307",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "realizing_point_p_coordinates_end",
+        "qualified_name": "CGAL::Polytope_distance_d::realizing_point_p_coordinates_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Coordinate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "314",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "realizing_point_q_coordinates_begin",
+        "qualified_name": "CGAL::Polytope_distance_d::realizing_point_q_coordinates_begin",
+        "brief": "returns an iterator referring to the first coordinate of the realizing point of $ Q$ .",
+        "detailed": "The coordinates have a rational representation, i.e. the first $ d$ elements of the iterator range are the numerators and the $ (d\\!+\\!1)$ -st element is the common denominator.",
+        "return_type": "Coordinate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "328",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "realizing_point_q_coordinates_end",
+        "qualified_name": "CGAL::Polytope_distance_d::realizing_point_q_coordinates_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Coordinate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "335",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "squared_distance_numerator",
+        "qualified_name": "CGAL::Polytope_distance_d::squared_distance_numerator",
+        "brief": "returns the numerator of the squared distance of poly_dist .",
+        "detailed": "",
+        "return_type": "ET",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "341",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "squared_distance_denominator",
+        "qualified_name": "CGAL::Polytope_distance_d::squared_distance_denominator",
+        "brief": "returns the denominator of the squared distance of poly_dist .",
+        "detailed": "",
+        "return_type": "ET",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "347",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_finite",
+        "qualified_name": "CGAL::Polytope_distance_d::is_finite",
+        "brief": "returns true , if $ pd(P,Q)$ is finite, i.e. none of the two polytopes is empty.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "359",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_zero",
+        "qualified_name": "CGAL::Polytope_distance_d::is_zero",
+        "brief": "returns true , if $ pd(P,Q)$ is zero, i.e. the two polytopes intersect (this implies degeneracy).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "366",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_degenerate",
+        "qualified_name": "CGAL::Polytope_distance_d::is_degenerate",
+        "brief": "returns true , iff $ pd(P,Q)$ is degenerate, i.e. $ pd(P,Q)$ is not finite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "373",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Polytope_distance_d::clear",
+        "brief": "resets poly_dist to $ pd(\\emptyset, \\emptyset)$ .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "384",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set",
+        "qualified_name": "CGAL::Polytope_distance_d::set",
+        "brief": "sets poly_dist to $ pd(P,Q)$ with $ P$ and $ Q$ being the sets of points in the ranges [ p_first , p_last ) and [ q_first , q_last ), respectively.",
+        "detailed": "InputIterator1 has Point as value type. InputIterator2 has Point as value type. All points have the same dimension.",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 p_first, InputIterator1 p_last, InputIterator2 q_first, InputIterator2 q_last)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "p_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "p_last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "q_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "q_last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "396",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_p",
+        "qualified_name": "CGAL::Polytope_distance_d::set_p",
+        "brief": "sets poly_dist to $ pd(P,Q)$ with $ P$ being the set of points in the range [ p_first , p_last ) ( $ Q$ remains unchanged).",
+        "detailed": "InputIterator has Point as value type. All points in $ P$ have dimension poly_dist``. ambient_dimension() if $ Q$ is not empty.",
+        "return_type": "void",
+        "argsstring": "(InputIterator p_first, InputIterator p_last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "p_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "p_last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "409",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_q",
+        "qualified_name": "CGAL::Polytope_distance_d::set_q",
+        "brief": "sets poly_dist to $ pd(P,Q)$ with $ Q$ being the set of points in the range [ q_first , q_last ) ( $ P$ remains unchanged).",
+        "detailed": "InputIterator has Point as value type. All points in $ Q$ have dimension poly_dist``. ambient_dimension() if $ P$ is not empty.",
+        "return_type": "void",
+        "argsstring": "(InputIterator q_first, InputIterator q_last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "q_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "q_last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "420",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert_p",
+        "qualified_name": "CGAL::Polytope_distance_d::insert_p",
+        "brief": "inserts p into $ P$ .",
+        "detailed": "The dimension of p equals poly_dist``. ambient_dimension() if poly_dist is not $ pd(\\emptyset, \\emptyset)$ .",
+        "return_type": "void",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "428",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert_q",
+        "qualified_name": "CGAL::Polytope_distance_d::insert_q",
+        "brief": "inserts q into $ Q$ .",
+        "detailed": "The dimension of q equals poly_dist``. ambient_dimension() if poly_dist is not $ pd(\\emptyset, \\emptyset)$ .",
+        "return_type": "void",
+        "argsstring": "(const Point &q)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "435",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Polytope_distance_d::insert",
+        "brief": "inserts the points in the range [ p_first , p_last ) and [ q_first , q_last ) into $ P$ and $ Q$ , respectively, and recomputes the (squared) distance.",
+        "detailed": "InputIterator1 has Point as value type. InputIterator2 has Point as value type. All points have the same dimension. If poly_dist is not $ pd(\\emptyset, \\emptyset)$ , this dimension must be equal to poly_dist``. ambient_dimension() .",
+        "return_type": "void",
+        "argsstring": "(InputIterator1 p_first, InputIterator1 p_last, InputIterator2 q_first, InputIterator2 q_last)",
+        "params": [
+          {
+            "type": "InputIterator1",
+            "name": "p_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator1",
+            "name": "p_last",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "q_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator2",
+            "name": "q_last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "447",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert_p",
+        "qualified_name": "CGAL::Polytope_distance_d::insert_p",
+        "brief": "inserts the points in the range [ p_first , p_last ) into $ P$ and recomputes the (squared) distance ( $ Q$ remains unchanged).",
+        "detailed": "InputIterator has Point as value type. All points have the same dimension. If poly_dist is not empty, this dimension must be equal to poly_dist``. ambient_dimension() .",
+        "return_type": "void",
+        "argsstring": "(InputIterator p_first, InputIterator p_last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "p_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "p_last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "460",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "insert_q",
+        "qualified_name": "CGAL::Polytope_distance_d::insert_q",
+        "brief": "inserts the points in the range [ q_first , q_last ) into $ Q$ and recomputes the (squared) distance ( $ P$ remains unchanged).",
+        "detailed": "InputIterator has Point as value type. All points have the same dimension. If poly_dist is not empty, this dimension must be equal to poly_dist``. ambient_dimension() .",
+        "return_type": "void",
+        "argsstring": "(InputIterator q_first, InputIterator q_last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "q_first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "q_last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "471",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Polytope_distance_d::is_valid",
+        "brief": "returns true , iff poly_dist is valid.",
+        "detailed": "If verbose is true , some messages concerning the performed checks are written to standard error stream. The second parameter level is not used, we provide it only for consistency with interfaces of other classes. An object poly_dist is valid, iff $ ldots$ poly_dist contains all points of its defining set $ P$ , poly_dist is the smallest sphere containing its support set $ S$ , and $ S$ is minimal, i.e. no support point is redundant.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "493",
+        "section": "Validity Check"
+      },
+      {
+        "kind": "function",
+        "name": "traits",
+        "qualified_name": "CGAL::Polytope_distance_d::traits",
+        "brief": "returns a const reference to the traits class object.",
+        "detailed": "",
+        "return_type": "const Traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "505",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Polytope_distance_d::operator<<",
+        "brief": "writes poly_dist to output stream os .",
+        "detailed": "An overload of operator<< must be defined for Point_d .",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Polytope_distance_d< Traits > &poly_dist)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Polytope_distance_d < Traits > &",
+            "name": "poly_dist",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "518",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Polytope_distance_d::operator>>",
+        "brief": "reads poly_dist from input stream is .",
+        "detailed": "An overload of operator>> must be defined for Point_d .",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, Polytope_distance_d< Traits > poly_dist &)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polytope_distance_d < Traits > poly_dist &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "528",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polytope_distance_d_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Polytope_distance_d_traits_2",
+    "brief": "The class Polytope_distance_d_traits_2 is a traits class for the $ d$ -dimensional optimization algorithms using the two-dimensional CGAL kernel.",
+    "detailed": "K must be a model for Kernel . ET must be models for RingNumberType . The default is K::RT . NT must be models for RingNumberType . The default is K::RT . Is model of PolytopeDistanceDTraits CGAL::Polytope_distance_d <Traits> CGAL::Polytope_distance_d_traits_3 <K, ET , NT > CGAL::Polytope_distance_d_traits_d <K, ET , NT > PolytopeDistanceDTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Point_d",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "K::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Rep_tag",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Rep_tag",
+        "brief": "typedef to K::Rep_tag .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::RT",
+        "brief": "the ring type.",
+        "detailed": "",
+        "return_type": "K::RT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::FT",
+        "brief": "the field type.",
+        "detailed": "",
+        "return_type": "K::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_dimension_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Access_dimension_d",
+        "brief": "functor returning 2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "54",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_coordinates_begin_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Access_coordinates_begin_d",
+        "brief": "functor constructing the begin iterator of the homogeneous coordinates of a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Construct_point_d",
+        "brief": "functor constructing a point from a coordinate range.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ET",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::ET",
+        "brief": "second template parameter (default is K::RT ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "69",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::NT",
+        "brief": "third template parameter (default is K::RT ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d_traits_2",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Polytope_distance_d_traits_2",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "84",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d_traits_2",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::Polytope_distance_d_traits_2",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polytope_distance_d_traits_2< K, ET, NT > &)",
+        "params": [
+          {
+            "type": "const Polytope_distance_d_traits_2< K, ET , NT > &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "89",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "access_dimension_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::access_dimension_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_dimension_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "102",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "access_coordinates_begin_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::access_coordinates_begin_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_coordinates_begin_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "108",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_2::construct_point_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_2.h",
+        "line": "114",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Polytope_distance_d_traits_3": {
+    "kind": "class",
+    "name": "CGAL::Polytope_distance_d_traits_3",
+    "brief": "The class Polytope_distance_d_traits_3 is a traits class for the $ d$ -dimensional optimization algorithms using the three-dimensional CGAL kernel.",
+    "detailed": "K must be a model for Kernel . ET must be models for RingNumberType . The default is K::RT . NT must be models for RingNumberType . The default is K::RT . Is model of PolytopeDistanceDTraits CGAL::Polytope_distance_d <Traits> CGAL::Polytope_distance_d_traits_2 <K, ET , NT > CGAL::Polytope_distance_d_traits_d <K, ET , NT > PolytopeDistanceDTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Point_d",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "K::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Rep_tag",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Rep_tag",
+        "brief": "typedef to K::Rep_tag .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::RT",
+        "brief": "the ring number type.",
+        "detailed": "",
+        "return_type": "K::RT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::FT",
+        "brief": "the field number type.",
+        "detailed": "",
+        "return_type": "K::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "51",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_dimension_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Access_dimension_d",
+        "brief": "functor returning 3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_coordinates_begin_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Access_coordinates_begin_d",
+        "brief": "functor constructing the begin iterator of the homogeneous coordinates of a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "61",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Construct_point_d",
+        "brief": "functor constructing a point from a coordinate range.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ET",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::ET",
+        "brief": "second template parameter (default is K::RT ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::NT",
+        "brief": "third template parameter (default is K::RT ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d_traits_3",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Polytope_distance_d_traits_3",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "86",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d_traits_3",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::Polytope_distance_d_traits_3",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polytope_distance_d_traits_3< K, ET, NT > &)",
+        "params": [
+          {
+            "type": "const Polytope_distance_d_traits_3< K, ET , NT > &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "91",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "access_dimension_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::access_dimension_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_dimension_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "104",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "access_coordinates_begin_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::access_coordinates_begin_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_coordinates_begin_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "110",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_3::construct_point_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_3.h",
+        "line": "116",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Polytope_distance_d_traits_d": {
+    "kind": "class",
+    "name": "CGAL::Polytope_distance_d_traits_d",
+    "brief": "The class Polytope_distance_d_traits_d is a traits class for the $ d$ -dimensional optimization algorithms using the $ d$ -dimensional CGAL kernel.",
+    "detailed": "K must be a model for Kernel . ET must be models for RingNumberType . The default is K::RT . NT must be models for RingNumberType . The default is K::RT . Is model of PolytopeDistanceDTraits CGAL::Polytope_distance_d <Traits> CGAL::Polytope_distance_d_traits_2 <K, ET , NT > CGAL::Polytope_distance_d_traits_3 <K, ET , NT > PolytopeDistanceDTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Point_d",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "K::Point_d",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Rep_tag",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Rep_tag",
+        "brief": "typedef to K::Rep_tag .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::RT",
+        "brief": "the ring type.",
+        "detailed": "",
+        "return_type": "K::RT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::FT",
+        "brief": "the field type.",
+        "detailed": "",
+        "return_type": "K::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_dimension_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Access_dimension_d",
+        "brief": "functor returning the dimension of a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_coordinates_begin_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Access_coordinates_begin_d",
+        "brief": "functor constructing the begin iterator of the homogeneous coordinates of a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Construct_point_d",
+        "brief": "functor constructing a point from a coordinate range.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ET",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::ET",
+        "brief": "second template parameter (default is K::RT ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::NT",
+        "brief": "third template parameter (default is K::RT ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d_traits_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Polytope_distance_d_traits_d",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polytope_distance_d_traits_d",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::Polytope_distance_d_traits_d",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polytope_distance_d_traits_d< K, ET, NT > &)",
+        "params": [
+          {
+            "type": "const Polytope_distance_d_traits_d< K, ET , NT > &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "92",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "access_dimension_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::access_dimension_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_dimension_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "105",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "access_coordinates_begin_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::access_coordinates_begin_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_coordinates_begin_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "111",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_d_object",
+        "qualified_name": "CGAL::Polytope_distance_d_traits_d::construct_point_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polytope_distance_d_traits_d.h",
+        "line": "117",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Width_3": {
+    "kind": "class",
+    "name": "CGAL::Width_3",
+    "brief": "Given a set of points $ \\mathcal{S}=\\left\\{p_1,\\ldots , p_n\\right\\}$ in $ \\mathbb{R}^3$ .",
+    "detailed": "The width of $ \\mathcal{S}$ , denoted as $ \\mathcal{W(S)}$ , is defined as the minimum distance between two parallel planes of support of $ \\mathit{conv(\\mathcal{S})}$ ; where $ \\mathit{conv(\\mathcal{S})}$ denotes the convex hull of $ \\mathcal{S}$ . The width in direction $ \\mathbf{d}$ , denoted as $ \\mathcal{W}_d\\mathcal{(S)}$ , is the distance between two parallel planes of support of $ \\mathit{conv(\\mathcal{S})}$ , which are orthogonal to $ \\mathbf{d}$ . Subject to the applications of the width algorithm, several objects might be interesting: The two parallel planes of support such that the distance between them is as small as possible. These planes are called width-planes in further considerations. The width $ \\mathcal{W(S)}$ , i.e., the distance between the width-planes. The direction $ \\mathbf{d}_{opt}$ such that $ \\mathcal{W(S)}=\\mathcal{W}_{d_{opt}}\\mathcal{(S)}$ There might be several optimal build directions. Hence neither the width-planes nor the direction $ \\mathbf{d}_{opt}$ are unique - only the width is. There may also be duplicates reported, different vectors having the same or the opposite directions. Traits must be a model for WidthTraits_3 . We provide the model Width_default_traits_3 <Kernel> based on a three-dimensional CGAL kernel. CGAL::Width_default_traits_3 <K> WidthTraits_3 Implementation Since the width of the point set $ \\mathcal{S}$ and the width of the convex hull of $ \\mathcal{S}$ ( $ \\mathit{conv(\\mathcal{S})}$ ) is the same, the algorithm uses the 3D convex hull algorithm CGAL provides. The width-algorithm is not incremental and therefore inserting and erasing points cause not an 'automatic' update of the width. Instead you have to run the width-algorithm again even if the point set is extended by only one new point. Large Numbers. Because there is no need for dividing values during the algorithm, the numbers can get really huge (all the computations are made using a lot of multiplications). Therefore it is strongly recommended to use a number type that can handle numbers of arbitrary length (e.g., Exact_integer in combination with the homogeneous representation of the points). But these large numbers have a disadvantage: Operations on them are slower as greater the number gets. Therefore it is possible to shorten the numbers by using the compiler flag -Dsimplify. For using this option it is required that the underlying number type provides the 'modulo' operation. Information Output during the Computations. If during the algorithm the program should output some information (e.g., during the debugging phase) you can turn on the output information by giving the compiler flag debug. In the file width_assertions.h you can turn on/off the output of some functions and additional information by changing the defined values from 0 (no output) to 1 (output available). But then it is required that the operator<<() has to been overloaded for Point_3 , Plane_3 , Vector_3 and RT . Example Example: Polytope_distance_d/width_simplex.cpp Show / Hide #include <CGAL/Homogeneous.h> #include <CGAL/Width_default_traits_3.h> #include <CGAL/Width_3.h> #include <CGAL/Exact_integer.h> #include <iostream> #include <vector> typedef CGAL::Exact_integer RT; typedef CGAL::Homogeneous<RT> Kernel; typedef Kernel::Point_3 Point_3; typedef Kernel::Plane_3 Plane_3; typedef CGAL::Width_default_traits_3<Kernel> Width_traits; typedef CGAL::Width_3<Width_traits> Width; int main() { // Create a simplex using homogeneous integer coordinates std::vector<Point_3> points; points.push_back( Point_3(2,0,0,1)); points.push_back( Point_3(0,1,0,1)); points.push_back( Point_3(0,0,1,1)); points.push_back( Point_3(0,0,0,1)); // Compute width of simplex Width simplex( points.begin(), points.end()); // Output of squared width, width-planes, and optimal direction RT wnum, wdenom; simplex.get_squared_width( wnum, wdenom); std::cout << \"Squared Width: \" << wnum << \"/\" << wdenom << std::endl; std::cout << \"Direction: \" << simplex.get_build_direction() << std::endl; Plane_3 e1, e2; simplex.get_width_planes (e1, e2); std::cout << \"Planes: E1: \" << e1 << \". E2: \" << e2 <<std::endl; std::cout << \"Number of optimal solutions: \" << simplex.get_number_of_optimal_solutions() << std::endl; return (0); }",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Width_3::Point_3",
+        "brief": "point type.",
+        "detailed": "",
+        "return_type": "Traits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "96",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Width_3::Plane_3",
+        "brief": "plane type.",
+        "detailed": "",
+        "return_type": "Traits::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "101",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Width_3::Vector_3",
+        "brief": "vector type.",
+        "detailed": "",
+        "return_type": "Traits::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "106",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "CGAL::Width_3::RT",
+        "brief": "algebraic ring type.",
+        "detailed": "",
+        "return_type": "Traits::RT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ChullTraits",
+        "qualified_name": "CGAL::Width_3::ChullTraits",
+        "brief": "traits class for the 3D convex hull algorithm.",
+        "detailed": "",
+        "return_type": "Traits::ChullTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "117",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Width_3",
+        "qualified_name": "CGAL::Width_3::Width_3",
+        "brief": "creates a variable width initialized to the width of $ \\mathcal{S}$ - with $ \\mathcal{S}$ being the set of points in the range [ first , beyond ).",
+        "detailed": "InputIterator has Point_3 as value type.",
+        "return_type": "",
+        "argsstring": "(InputIterator first, InputIterator beyond)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_3.h",
+        "line": "133",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Width_3",
+        "qualified_name": "CGAL::Width_3::Width_3",
+        "brief": "creates a variable width initialized to the width of the polyhedron $ P$ .",
+        "detailed": "Note that the vertex point coordinates are altered! $ P$ is a convex polyhedron. Polyhedron is a CGAL::Polyhedron_3 with facets supporting plane equations where Polyhedron::Point_3 $ \\equiv$ Point_3 and Polyhedron::Plane_3 $ \\equiv$ Plane_3 .",
+        "return_type": "",
+        "argsstring": "(Polyhedron &P)",
+        "params": [
+          {
+            "type": "Polyhedron &",
+            "name": "P",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_3.h",
+        "line": "147",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_squared_width",
+        "qualified_name": "CGAL::Width_3::get_squared_width",
+        "brief": "returns the squared width.",
+        "detailed": "For the reason of exact computation not the width itself is stored, but the squared width as a fraction: The numerator in width_num and the denominator in width_denom . The width of the point set $ \\mathcal{S}$ is $ \\sqrt{\\frac{width\\_num}{width\\_denom}}$ .",
+        "return_type": "void",
+        "argsstring": "(RT &width_num, RT &width_denom)",
+        "params": [
+          {
+            "type": "RT &",
+            "name": "width_num",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "width_denom",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_3.h",
+        "line": "162",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_width_planes",
+        "qualified_name": "CGAL::Width_3::get_width_planes",
+        "brief": "The planes e1 and e2 are the two parallel supporting planes, which distance is minimal (among all such planes).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Plane_3 &e1, Plane_3 &e2)",
+        "params": [
+          {
+            "type": "Plane_3 &",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Plane_3 &",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_3.h",
+        "line": "170",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_width_coefficients",
+        "qualified_name": "CGAL::Width_3::get_width_coefficients",
+        "brief": "The returned coefficients A,B,C,D,K have the property that width-plane e1 is given by the equation $ Ax+By+Cz+D=0$ and width-plane e2 by $ Ax+By+Cz+K=0$ .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(RT &A, RT &B, RT &C, RT &D, RT &K)",
+        "params": [
+          {
+            "type": "RT &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "C",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "K",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_3.h",
+        "line": "177",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_build_direction",
+        "qualified_name": "CGAL::Width_3::get_build_direction",
+        "brief": "returns a direction $ \\mathbf{d}_{opt}$ such that the width-planes e1 and e2 are perpendicular to $ \\mathbf{d}_{opt}$ .",
+        "detailed": "The width of the point set is minimal in this direction.",
+        "return_type": "Vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "186",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_all_build_directions",
+        "qualified_name": "CGAL::Width_3::get_all_build_directions",
+        "brief": "All the build directions are stored in the vector dir .",
+        "detailed": "It might happen that a certain body has several different build directions, but it is also possible to have only one build direction.",
+        "return_type": "void",
+        "argsstring": "(std::vector< Vector_3 > &dir)",
+        "params": [
+          {
+            "type": "std::vector< Vector_3 > &",
+            "name": "dir",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_3.h",
+        "line": "194",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_number_of_optimal_solutions",
+        "qualified_name": "CGAL::Width_3::get_number_of_optimal_solutions",
+        "brief": "returns the number of optimal solutions, i.e., the number of optimal build directions.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Width_3.h",
+        "line": "202",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL::Width_default_traits_3": {
+    "kind": "class",
+    "name": "CGAL::Width_default_traits_3",
+    "brief": "The class Width_default_traits_3 is a traits class for Width_3 <Traits> using the three-dimensional CGAL kernel.",
+    "detailed": "K must be a model for Kernel . Is model of WidthTraits_3 CGAL::Width_3 <Traits> WidthTraits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Width_default_traits_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Width_default_traits_3::Plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Width_default_traits_3::Vector_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "CGAL::Width_default_traits_3::RT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "K::RT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ChullTraits",
+        "qualified_name": "CGAL::Width_default_traits_3::ChullTraits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Convex_hull_traits_3< K >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Width_default_traits_3",
+        "qualified_name": "CGAL::Width_default_traits_3::Width_default_traits_3",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "58",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_hx",
+        "qualified_name": "CGAL::Width_default_traits_3::get_hx",
+        "brief": "returns the homogeneous $ x$ -coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "69",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_hy",
+        "qualified_name": "CGAL::Width_default_traits_3::get_hy",
+        "brief": "returns the homogeneous $ y$ -coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "75",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_hz",
+        "qualified_name": "CGAL::Width_default_traits_3::get_hz",
+        "brief": "returns the homogeneous $ z$ -coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "81",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_hw",
+        "qualified_name": "CGAL::Width_default_traits_3::get_hw",
+        "brief": "returns the homogenizing coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "87",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_point_coordinates",
+        "qualified_name": "CGAL::Width_default_traits_3::get_point_coordinates",
+        "brief": "returns all homogeneous coordinates of point $ p$ at once.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_3 &p, RT &px, RT &py, RT &pz, RT &ph) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "px",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "py",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "pz",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "ph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "93",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_a",
+        "qualified_name": "CGAL::Width_default_traits_3::get_a",
+        "brief": "returns the first coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "100",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_b",
+        "qualified_name": "CGAL::Width_default_traits_3::get_b",
+        "brief": "returns the second coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "106",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c",
+        "qualified_name": "CGAL::Width_default_traits_3::get_c",
+        "brief": "returns the third coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "112",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_d",
+        "qualified_name": "CGAL::Width_default_traits_3::get_d",
+        "brief": "returns the fourth coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "118",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_plane_coefficients",
+        "qualified_name": "CGAL::Width_default_traits_3::get_plane_coefficients",
+        "brief": "returns all four plane coefficients of $ f$ at once.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Plane_3 &f, RT &a, RT &b, RT &c, RT &d) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "123",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "make_point",
+        "qualified_name": "CGAL::Width_default_traits_3::make_point",
+        "brief": "returns a point of type Point_3 with homogeneous coordinates $ hx$ , $ hy$ , $ hz$ and $ hw$ .",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "(const RT &hx, const RT &hy, const RT &hz, const RT &hw) const",
+        "params": [
+          {
+            "type": "const RT &",
+            "name": "hx",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "hy",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "hz",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "hw",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "131",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "make_plane",
+        "qualified_name": "CGAL::Width_default_traits_3::make_plane",
+        "brief": "returns a plane of type Plane_3 whose coefficients are $ a$ , $ b$ , $ c$ and $ d$ .",
+        "detailed": "",
+        "return_type": "Plane_3",
+        "argsstring": "(const RT &a, const RT &b, const RT &c, const RT &d) const",
+        "params": [
+          {
+            "type": "const RT &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "138",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "make_vector",
+        "qualified_name": "CGAL::Width_default_traits_3::make_vector",
+        "brief": "returns a vector of type Vector_3 with the four coefficients $ a$ , $ b$ , $ c$ and 1.",
+        "detailed": "",
+        "return_type": "Vector",
+        "argsstring": "(const RT &a, const RT &b, const RT &c) const",
+        "params": [
+          {
+            "type": "const RT &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Width_default_traits_3.h",
+        "line": "145",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolytopeDistanceDTraits": {
+    "kind": "class",
+    "name": "PolytopeDistanceDTraits",
+    "brief": "This concept defines the requirements for traits classes of $ d$ -dimensional optimization algorithms.",
+    "detailed": "Has models CGAL::Polytope_distance_d_traits_2 <K, ET , NT > CGAL::Polytope_distance_d_traits_3 <K, ET , NT > CGAL::Polytope_distance_d_traits_d <K, ET , NT > CGAL::Polytope_distance_d <Traits>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_d",
+        "qualified_name": "PolytopeDistanceDTraits::Point_d",
+        "brief": "point type used to represent the input points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Rep_tag",
+        "qualified_name": "PolytopeDistanceDTraits::Rep_tag",
+        "brief": "compile time tag to distinguish between Cartesian and homogeneous representation of the input points.",
+        "detailed": "Rep_tag has to be either CGAL ::``Cartesian_tag or CGAL ::``Homogeneous_tag .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "PolytopeDistanceDTraits::RT",
+        "brief": "number type used to represent the coordinates of the input points.",
+        "detailed": "It has to be a model for RingNumberType .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "PolytopeDistanceDTraits::FT",
+        "brief": "number type used to return either the squared radius of the smallest enclosing sphere or annulus, or the squared distance of the polytopes.",
+        "detailed": "FT has to be either RT or CGAL ::``Quotient< RT > if the input points have Cartesian or homogeneous representation, respectively (cf. Rep_tag ).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "51",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_dimension_d",
+        "qualified_name": "PolytopeDistanceDTraits::Access_dimension_d",
+        "brief": "data accessor object used to access the dimension of the input points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_coordinates_begin_d",
+        "qualified_name": "PolytopeDistanceDTraits::Access_coordinates_begin_d",
+        "brief": "data accessor object used to access the coordinates of the input points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "61",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_d",
+        "qualified_name": "PolytopeDistanceDTraits::Construct_point_d",
+        "brief": "constructor object used to construct either the center of the smallest enclosing sphere or annulus, or the points realizing the distance between the two polytopes.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ET",
+        "qualified_name": "PolytopeDistanceDTraits::ET",
+        "brief": "exact number type used to do the exact computations in the underlying solver for linear programs.",
+        "detailed": "It has to be a model for RingNumberType . There must be an implicit conversion from RT to ET available.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "84",
+        "section": "Special types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "PolytopeDistanceDTraits::NT",
+        "brief": "fast (possibly inexact) number type used to speed up the pricing step in the underlying solver for linear programs.",
+        "detailed": "It has to be a model for RingNumberType . There must be implicit conversions from RT to NT and from NT to ET available.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "92",
+        "section": "Special types"
+      },
+      {
+        "kind": "function",
+        "name": "PolytopeDistanceDTraits",
+        "qualified_name": "PolytopeDistanceDTraits::PolytopeDistanceDTraits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "103",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "PolytopeDistanceDTraits",
+        "qualified_name": "PolytopeDistanceDTraits::PolytopeDistanceDTraits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PolytopeDistanceDTraits &)",
+        "params": [
+          {
+            "type": "const PolytopeDistanceDTraits &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "108",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "access_dimension_d_object",
+        "qualified_name": "PolytopeDistanceDTraits::access_dimension_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_dimension_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "120",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "access_coordinates_begin_d_object",
+        "qualified_name": "PolytopeDistanceDTraits::access_coordinates_begin_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_coordinates_begin_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "126",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_d_object",
+        "qualified_name": "PolytopeDistanceDTraits::construct_point_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_d",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PolytopeDistanceDTraits.h",
+        "line": "132",
+        "section": "Operations"
+      }
+    ]
+  },
+  "WidthTraits_3": {
+    "kind": "class",
+    "name": "WidthTraits_3",
+    "brief": "This concept defines the requirements for traits classes of CGAL::Width_3 <Traits> .",
+    "detailed": "Operations Whatever the coordinates of the points are, it is required for the width-algorithm to have access to the homogeneous representation of points. Has models CGAL::Width_default_traits_3 CGAL::Width_3 <Traits>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "WidthTraits_3::Point_3",
+        "brief": "The point type.",
+        "detailed": "The (in)equality tests must be available. Access to the point coordinates is done via the get_...() functions. Constructing a point is done with the make_point( ) operation.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "WidthTraits_3::Plane_3",
+        "brief": "The plane type.",
+        "detailed": "Access to the coefficients of the plane is made via the get_...() functions. Constructing a plane is done with the make_plane() operation.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "WidthTraits_3::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "There is no need to access the coefficients of a vector; only constructing is required and is done with the make_vector operation.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "ChullTraits",
+        "qualified_name": "WidthTraits_3::ChullTraits",
+        "brief": "The traits class for using the convex hull algorithm.",
+        "detailed": "It must be a model of the concept ConvexHullTraits_3. This class is used only if the width is computed from a set of points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "WidthTraits_3::RT",
+        "brief": "Ring type numbers.",
+        "detailed": "Internally all numbers are treated as ring type numbers, i.e., neither $ /$ -operator nor $ \\sqrt{.}$ nor other inexact operations are used. But because the algorithm does not use any divisions, but multiplication instead, the numbers can get really big. Therefore it is recommended to use a ring type number, that provides values of arbitrary length. Furthermore it is assumed that the underlying number type of Point_3 , Plane_3 and Vector_3 equals RT .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "WidthTraits_3",
+        "qualified_name": "WidthTraits_3::WidthTraits_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "81",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_hx",
+        "qualified_name": "WidthTraits_3::get_hx",
+        "brief": "returns the homogeneous $ x$ -coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_hy",
+        "qualified_name": "WidthTraits_3::get_hy",
+        "brief": "returns the homogeneous $ y$ -coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "93",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_hz",
+        "qualified_name": "WidthTraits_3::get_hz",
+        "brief": "returns the homogeneous $ z$ -coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "99",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_hw",
+        "qualified_name": "WidthTraits_3::get_hw",
+        "brief": "returns the homogenizing coordinate of point $ p$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Point_3 &p) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "105",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_point_coordinates",
+        "qualified_name": "WidthTraits_3::get_point_coordinates",
+        "brief": "returns all homogeneous coordinates of point $ p$ at once.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_3 &p, RT &px, RT &py, RT &pz, RT &ph) const",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "px",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "py",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "pz",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "ph",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "111",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_a",
+        "qualified_name": "WidthTraits_3::get_a",
+        "brief": "returns the first coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "118",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_b",
+        "qualified_name": "WidthTraits_3::get_b",
+        "brief": "returns the second coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "124",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_c",
+        "qualified_name": "WidthTraits_3::get_c",
+        "brief": "returns the third coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "130",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_d",
+        "qualified_name": "WidthTraits_3::get_d",
+        "brief": "returns the fourth coefficient of plane $ f$ .",
+        "detailed": "",
+        "return_type": "RT",
+        "argsstring": "(const Plane_3 &f) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "136",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_plane_coefficients",
+        "qualified_name": "WidthTraits_3::get_plane_coefficients",
+        "brief": "returns all four plane coefficients of $ f$ at once.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Plane_3 &f, RT &a, RT &b, RT &c, RT &d) const",
+        "params": [
+          {
+            "type": "const Plane_3 &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "RT &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "141",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "make_point",
+        "qualified_name": "WidthTraits_3::make_point",
+        "brief": "returns a point of type Point_3 with homogeneous coordinates $ hx$ , $ hy$ , $ hz$ and $ hw$ .",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "(const RT &hx, const RT &hy, const RT &hz, const RT &hw) const",
+        "params": [
+          {
+            "type": "const RT &",
+            "name": "hx",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "hy",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "hz",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "hw",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "154",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "make_plane",
+        "qualified_name": "WidthTraits_3::make_plane",
+        "brief": "returns a plane of type Plane_3 with coefficients $ a$ , $ b$ , $ c$ and $ d$ .",
+        "detailed": "",
+        "return_type": "Plane_3",
+        "argsstring": "(const RT &a, const RT &b, const RT &c, const RT &d) const",
+        "params": [
+          {
+            "type": "const RT &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "162",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "make_vector",
+        "qualified_name": "WidthTraits_3::make_vector",
+        "brief": "returns a vector of type Vector_3 with the four homogeneous coefficients $ a$ , $ b$ , $ c$ and 1.",
+        "detailed": "",
+        "return_type": "Vector_3",
+        "argsstring": "(const RT &a, const RT &b, const RT &c) const",
+        "params": [
+          {
+            "type": "const RT &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const RT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/WidthTraits_3.h",
+        "line": "170",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Polytope_distance_d::operator<<",
+        "brief": "writes poly_dist to output stream os .",
+        "detailed": "An overload of operator<< must be defined for Point_d .",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Polytope_distance_d< Traits > &poly_dist)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Polytope_distance_d < Traits > &",
+            "name": "poly_dist",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "518",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Polytope_distance_d::operator>>",
+        "brief": "reads poly_dist from input stream is .",
+        "detailed": "An overload of operator>> must be defined for Point_d .",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, Polytope_distance_d< Traits > poly_dist &)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polytope_distance_d < Traits > poly_dist &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polytope_distance_d.h",
+        "line": "528",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

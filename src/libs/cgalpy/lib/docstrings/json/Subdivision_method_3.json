@@ -1,0 +1,2011 @@
+{
+  "CGAL::CatmullClark_mask_3": {
+    "kind": "class",
+    "name": "CGAL::CatmullClark_mask_3",
+    "brief": "The geometry mask of Catmull-Clark subdivision.",
+    "detailed": "A stencil determines a source neighborhood whose points contribute to the position of a refined point. The geometry mask of a stencil specifies the computation on the nodes of the stencil. CatmullClark_mask_3 implements the geometry masks of Catmull-Clark subdivision on models of MutableFaceGraph , such as Polyhedron_3 and Surface_mesh . PolygonMesh must be a model of the concept MutableFaceGraph . VertexPointMap must be a model of WritablePropertyMap with value type Point_3 Is model of PQQMask_3 CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "CatmullClark_mask_3",
+        "qualified_name": "CGAL::CatmullClark_mask_3::CatmullClark_mask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map, get(vertex_point, pmesh) , is used.",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "178",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "CatmullClark_mask_3",
+        "qualified_name": "CGAL::CatmullClark_mask_3::CatmullClark_mask_3",
+        "brief": "Constructor with a custom vertex point property map.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "183",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "edge_node",
+        "qualified_name": "CGAL::CatmullClark_mask_3::edge_node",
+        "brief": "computes the Catmull-Clark edge-point pt of the edge edge .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor edge, Point &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "edge",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "193",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "CGAL::CatmullClark_mask_3::vertex_node",
+        "brief": "computes the Catmull-Clark vertex-point pt of the vertex vertex .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vertex, Point &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "205",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "CGAL::CatmullClark_mask_3::border_node",
+        "brief": "computes the Catmull-Clark edge-point ept and the Catmull-Clark vertex-point vpt of the border edge edge .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor edge, Point &ept, Point &vpt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "edge",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "vpt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "233",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::CatmullClark_mask_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Linear_mask_3< PolygonMesh, VertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "154",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::CatmullClark_mask_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "156",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::DooSabin_mask_3": {
+    "kind": "class",
+    "name": "CGAL::DooSabin_mask_3",
+    "brief": "The geometry mask of Doo-Sabin subdivision.",
+    "detailed": "A stencil determines a source neighborhood whose points contribute to the position of a refined point. The geometry mask of a stencil specifies the computation on the nodes of the stencil. DooSabin_mask_3 implements the geometry masks of Doo-Sabin subdivision on models of MutableFaceGraph , such as Polyhedron_3 and Surface_mesh . PolygonMesh must be a model of the concept MutableFaceGraph . VertexPointMap must be a model of WritablePropertyMap with value type Point_3 Is model of DQQMask_3 CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "DooSabin_mask_3",
+        "qualified_name": "CGAL::DooSabin_mask_3::DooSabin_mask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map, get(vertex_point, pmesh) , is used.",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "464",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "DooSabin_mask_3",
+        "qualified_name": "CGAL::DooSabin_mask_3::DooSabin_mask_3",
+        "brief": "Constructor with a custom vertex point property map.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "469",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "corner_node",
+        "qualified_name": "CGAL::DooSabin_mask_3::corner_node",
+        "brief": "computes the Doo-Sabin point pt of the vertex pointed by the halfedge he .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor he, Point &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "he",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "479",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::DooSabin_mask_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "DQQ_stencil_3< PolygonMesh, VertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "441",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::DooSabin_mask_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "443",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::DQQ_stencil_3": {
+    "kind": "class",
+    "name": "CGAL::DQQ_stencil_3",
+    "brief": "The stencil of the Dual-Quadrilateral-Quadrisection.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::DQQ_stencil_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "384",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_pmap",
+        "qualified_name": "CGAL::DQQ_stencil_3::Vertex_pmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_map< Mesh, vertex_point_t >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "386",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::DQQ_stencil_3::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< Mesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "388",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::DQQ_stencil_3::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< Mesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "389",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::DQQ_stencil_3::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< Mesh >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "390",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::DQQ_stencil_3::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< Vertex_pmap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "392",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::DQQ_stencil_3::Kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel_traits< Point >::Kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "394",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::DQQ_stencil_3::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "395",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::DQQ_stencil_3::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "396",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "pmesh",
+        "qualified_name": "CGAL::DQQ_stencil_3::pmesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Mesh *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "398",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vpm",
+        "qualified_name": "CGAL::DQQ_stencil_3::vpm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_pmap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "399",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "DQQ_stencil_3",
+        "qualified_name": "CGAL::DQQ_stencil_3::DQQ_stencil_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "402",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "DQQ_stencil_3",
+        "qualified_name": "CGAL::DQQ_stencil_3::DQQ_stencil_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "406",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Linear_mask_3": {
+    "kind": "class",
+    "name": "CGAL::Linear_mask_3",
+    "brief": "Bi-linear geometry mask for PQQ, PTQ, and Sqrt(3) schemes.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Linear_mask_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PQQ_stencil_3< PolygonMesh, VertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::Linear_mask_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "73",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Linear_mask_3",
+        "qualified_name": "CGAL::Linear_mask_3::Linear_mask_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "90",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Linear_mask_3",
+        "qualified_name": "CGAL::Linear_mask_3::Linear_mask_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "face_node",
+        "qualified_name": "CGAL::Linear_mask_3::face_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor facet, Point &pt)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "facet",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "98",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "edge_node",
+        "qualified_name": "CGAL::Linear_mask_3::edge_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor edge, Point &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "edge",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "110",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "CGAL::Linear_mask_3::vertex_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vertex, Point &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "116",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "CGAL::Linear_mask_3::border_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor edge, Point &ept, Point &vtp)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "edge",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "vtp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "120",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Loop_mask_3": {
+    "kind": "class",
+    "name": "CGAL::Loop_mask_3",
+    "brief": "The geometry mask of Loop subdivision.",
+    "detailed": "A stencil determines a source neighborhood whose points contribute to the position of a refined point. The geometry mask of a stencil specifies the computation on the nodes of the stencil. Loop_mask_3 implements the geometry masks of Loop subdivision on a triangulated model of MutableFaceGraph , such as Polyhedron_3 and Surface_mesh . PolygonMesh must be a model of the concept MutableFaceGraph . Additionally all faces must be triangles. VertexPointMap must be a model of WritablePropertyMap with value type Point_3 Is model of PTQMask_3 CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Loop_mask_3",
+        "qualified_name": "CGAL::Loop_mask_3::Loop_mask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map, get(vertex_point, pmesh) , is used.",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "305",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Loop_mask_3",
+        "qualified_name": "CGAL::Loop_mask_3::Loop_mask_3",
+        "brief": "Constructor with a custom vertex point property map.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "310",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "edge_node",
+        "qualified_name": "CGAL::Loop_mask_3::edge_node",
+        "brief": "computes the Loop edge-point pt of the edge edge .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor edge, Point &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "edge",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "320",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "CGAL::Loop_mask_3::vertex_node",
+        "brief": "computes the Loop vertex-point pt of the vertex vertex .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vertex, Point &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "332",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "CGAL::Loop_mask_3::border_node",
+        "brief": "computes the Loop edge-point ept and the Loop vertex-point vpt of the border edge edge .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor edge, Point &ept, Point &vpt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "edge",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "vpt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "359",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Loop_mask_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PQQ_stencil_3< PolygonMesh, VertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "279",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::Loop_mask_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "281",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_facet_circulator",
+        "qualified_name": "CGAL::Loop_mask_3::Halfedge_around_facet_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_around_face_circulator< Mesh >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "296",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_circulator",
+        "qualified_name": "CGAL::Loop_mask_3::Halfedge_around_vertex_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_around_target_circulator< Mesh >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "297",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::PQQ_stencil_3": {
+    "kind": "class",
+    "name": "CGAL::PQQ_stencil_3",
+    "brief": "The stencil of the Primal-Quadrilateral-Quadrisection.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::PQQ_stencil_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_pmap",
+        "qualified_name": "CGAL::PQQ_stencil_3::Vertex_pmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_map< Mesh, vertex_point_t >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "34",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::PQQ_stencil_3::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< Mesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::PQQ_stencil_3::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< Mesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::PQQ_stencil_3::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< Mesh >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "38",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::PQQ_stencil_3::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< Vertex_pmap >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "40",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::PQQ_stencil_3::Kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel_traits< Point >::Kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::PQQ_stencil_3::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::PQQ_stencil_3::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "pmesh",
+        "qualified_name": "CGAL::PQQ_stencil_3::pmesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Mesh *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vpmap",
+        "qualified_name": "CGAL::PQQ_stencil_3::vpmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "VertexPointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "PQQ_stencil_3",
+        "qualified_name": "CGAL::PQQ_stencil_3::PQQ_stencil_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "PQQ_stencil_3",
+        "qualified_name": "CGAL::PQQ_stencil_3::PQQ_stencil_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "face_node",
+        "qualified_name": "CGAL::PQQ_stencil_3::face_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor, Point &)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "58",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "edge_node",
+        "qualified_name": "CGAL::PQQ_stencil_3::edge_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor, Point &)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "CGAL::PQQ_stencil_3::vertex_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor, Point &)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "CGAL::PQQ_stencil_3::border_node",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor, Point &, Point &)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "62",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Sqrt3_mask_3": {
+    "kind": "class",
+    "name": "CGAL::Sqrt3_mask_3",
+    "brief": "The geometry mask of Sqrt(3) subdivision.",
+    "detailed": "A stencil determines a source neighborhood whose points contribute to the position of a refined point. The geometry mask of a stencil specifies the computation on the nodes of the stencil. Sqrt3_mask_3 implements the geometry masks of $ \\sqrt{3}$ subdivision on a triangulated model of MutableFaceGraph , such as Polyhedron_3 and Surface_mesh . PolygonMesh must be a model of the concept MutableFaceGraph . Additionally all faces must be triangles. VertexPointMap must be a model of WritablePropertyMap with value type Point_3 Is model of Sqrt3Mask_3 CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Sqrt3_mask_3",
+        "qualified_name": "CGAL::Sqrt3_mask_3::Sqrt3_mask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map, get(vertex_point, pmesh) , is used.",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "557",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Sqrt3_mask_3",
+        "qualified_name": "CGAL::Sqrt3_mask_3::Sqrt3_mask_3",
+        "brief": "Constructor with a custom vertex point property map.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Mesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "Mesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "562",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "CGAL::Sqrt3_mask_3::vertex_node",
+        "brief": "computes the $ \\sqrt{3}$ vertex-point pt of the vertex vd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vertex, Point &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vertex",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "572",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "CGAL::Sqrt3_mask_3::border_node",
+        "brief": "computes the $ \\sqrt{3}$ edge-points ept1 and ept2 of the halfedge hd .",
+        "detailed": "The updated point coordinates for the target vertex of hd is also computed and put in vpt . Border subdivision only happens every second step of a single successive $ \\sqrt{3}$ subdivision (thus requiring a depth larger than 1).",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point &ept1, Point &ept2, Point &vpt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "vpt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "590",
+        "section": "Stencil functions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Sqrt3_mask_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Linear_mask_3< PolygonMesh, VertexPointMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "535",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Mesh",
+        "qualified_name": "CGAL::Sqrt3_mask_3::Mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Subdivision_method_3/subdivision_masks_3.h",
+        "line": "537",
+        "section": ""
+      }
+    ]
+  },
+  "DQQMask_3": {
+    "kind": "class",
+    "name": "DQQMask_3",
+    "brief": "Required member functions for the DQQMask_3 concept. This policy concept of geometric computations is used in CGAL::Subdivision_method_3::DQQ < PolygonMesh , Mask, NamedParameters> .",
+    "detailed": "Refines SubdivisionMask_3 Has models CGAL::DooSabin_mask_3 < PolygonMesh , VertexPointMap> CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "PolygonMesh",
+        "qualified_name": "DQQMask_3::PolygonMesh",
+        "brief": "The polygon mesh must be triangulated.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DQQMask_3.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointMap",
+        "qualified_name": "DQQMask_3::VertexPointMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DQQMask_3.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "DQQMask_3",
+        "qualified_name": "DQQMask_3::DQQMask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map is used.",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DQQMask_3.h",
+        "line": "41",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "DQQMask_3",
+        "qualified_name": "DQQMask_3::DQQMask_3",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DQQMask_3.h",
+        "line": "45",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "corner_node",
+        "qualified_name": "DQQMask_3::corner_node",
+        "brief": "computes the subdivided point pt based on the neighborhood of the vertex pointed by the halfedge hd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DQQMask_3.h",
+        "line": "51",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PQQMask_3": {
+    "kind": "class",
+    "name": "PQQMask_3",
+    "brief": "Required member functions for the PQQMask_3 concept. This policy concept of geometric computations is used in CGAL::Subdivision_method_3::PQQ < PolygonMesh , Mask, NamedParameters> .",
+    "detailed": "Refines SubdivisionMask_3 Has models CGAL::CatmullClark_mask_3 < PolygonMesh , VertexPointMap> CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "PolygonMesh",
+        "qualified_name": "PQQMask_3::PolygonMesh",
+        "brief": "The polygon mesh must be triangulated.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointMap",
+        "qualified_name": "PQQMask_3::VertexPointMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "PQQMask_3",
+        "qualified_name": "PQQMask_3::PQQMask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map is used.",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "42",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "PQQMask_3",
+        "qualified_name": "PQQMask_3::PQQMask_3",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "46",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "face_node",
+        "qualified_name": "PQQMask_3::face_node",
+        "brief": "computes the face-point pt based on the neighborhood of the face fd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor fd, Point_3 &pt)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "fd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "52",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "edge_node",
+        "qualified_name": "PQQMask_3::edge_node",
+        "brief": "computes the edge-point pt based on the neighborhood of the edge hd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point_3 &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "59",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "PQQMask_3::vertex_node",
+        "brief": "computes the vertex-point pt based on the neighborhood of the vertex vd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vd, Point_3 &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "66",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "PQQMask_3::border_node",
+        "brief": "computes the edge-point ept and the vertex-point vpt based on the neighborhood of the border edge of hd .",
+        "detailed": "hd is not a border halfedge (its opposite is) and vpt corresponds to the target vertex of hd .",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point_3 &ept, Point_3 &vpt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "ept",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "vpt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PQQMask_3.h",
+        "line": "75",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PTQMask_3": {
+    "kind": "class",
+    "name": "PTQMask_3",
+    "brief": "Required member functions for the PTQMask_3 concept. This policy concept of geometric computations is used in CGAL::Subdivision_method_3::PTQ < PolygonMesh , Mask, NamedParameters> .",
+    "detailed": "Refines SubdivisionMask_3 Has models CGAL::Loop_mask_3 < PolygonMesh , VertexPointMap> CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "PolygonMesh",
+        "qualified_name": "PTQMask_3::PolygonMesh",
+        "brief": "The polygon mesh must be triangulated.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointMap",
+        "qualified_name": "PTQMask_3::VertexPointMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "PTQMask_3",
+        "qualified_name": "PTQMask_3::PTQMask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map is used.",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "40",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "PTQMask_3",
+        "qualified_name": "PTQMask_3::PTQMask_3",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "44",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "edge_node",
+        "qualified_name": "PTQMask_3::edge_node",
+        "brief": "computes the edge-point pt based on the neighborhood of the edge hd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point_3 &pt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "50",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "PTQMask_3::vertex_node",
+        "brief": "computes the vertex-point pt based on the neighborhood of the vertex vd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vd, Point_3 &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "57",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "PTQMask_3::border_node",
+        "brief": "computes the edge-point ept and the vertex-point vpt based on the neighborhood of the border edge of hd .",
+        "detailed": "hd is not a border halfedge (its opposite is) and vpt corresponds to the target vertex of hd .",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point_3 &ept, Point_3 &vpt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "ept",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "vpt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PTQMask_3.h",
+        "line": "65",
+        "section": "Operations"
+      }
+    ]
+  },
+  "Sqrt3Mask_3": {
+    "kind": "class",
+    "name": "Sqrt3Mask_3",
+    "brief": "Required member functions for the Sqrt3Mask_3 concept. This policy concept of geometric computations is used in CGAL::Subdivision_method_3::Sqrt3 < PolygonMesh , Mask, NamedParameters> .",
+    "detailed": "Refines SubdivisionMask_3 Has models CGAL::Sqrt3_mask_3 < PolygonMesh , VertexPointMap> CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "PolygonMesh",
+        "qualified_name": "Sqrt3Mask_3::PolygonMesh",
+        "brief": "The polygon mesh must be triangulated.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexPointMap",
+        "qualified_name": "Sqrt3Mask_3::VertexPointMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Sqrt3Mask_3",
+        "qualified_name": "Sqrt3Mask_3::Sqrt3Mask_3",
+        "brief": "Constructor.",
+        "detailed": "The default vertex point property map is used.",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "41",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "Sqrt3Mask_3",
+        "qualified_name": "Sqrt3Mask_3::Sqrt3Mask_3",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PolygonMesh *pmesh, VertexPointMap vpmap)",
+        "params": [
+          {
+            "type": "PolygonMesh *",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexPointMap",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "45",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "face_node",
+        "qualified_name": "Sqrt3Mask_3::face_node",
+        "brief": "computes the subdivided point pt based on the neighborhood of the face fd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor fd, Point_3 &pt)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "fd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "51",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_node",
+        "qualified_name": "Sqrt3Mask_3::vertex_node",
+        "brief": "computes the subdivided point pt based on the neighborhood of the vertex vd .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(vertex_descriptor vd, Point &pt)",
+        "params": [
+          {
+            "type": "vertex_descriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "57",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "border_node",
+        "qualified_name": "Sqrt3Mask_3::border_node",
+        "brief": "computes the subdivided points ept1 and ept2 based on the neighborhood of the halfedge hd (whose opposite is on the border).",
+        "detailed": "Along hd , ept1 comes before ept2 . vpt is the updated point for the target vertex of hd .",
+        "return_type": "void",
+        "argsstring": "(halfedge_descriptor hd, Point &ept1, Point &ept2, Point &vpt)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "hd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "ept2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point &",
+            "name": "vpt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/Sqrt3Mask_3.h",
+        "line": "65",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SubdivisionMask_3": {
+    "kind": "class",
+    "name": "SubdivisionMask_3",
+    "brief": "This concept defines types used by the mask concepts.",
+    "detailed": "CGAL::Subdivision_method_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "PolygonMesh",
+        "qualified_name": "SubdivisionMask_3::PolygonMesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SubdivisionMask_3.h",
+        "line": "21",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "SubdivisionMask_3::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SubdivisionMask_3.h",
+        "line": "23",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "SubdivisionMask_3::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SubdivisionMask_3.h",
+        "line": "24",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "SubdivisionMask_3::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SubdivisionMask_3.h",
+        "line": "25",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Subdivision_method_3": {
+    "kind": "namespace",
+    "name": "CGAL::Subdivision_method_3",
+    "brief": "The namespace containing the subdivision methods.",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

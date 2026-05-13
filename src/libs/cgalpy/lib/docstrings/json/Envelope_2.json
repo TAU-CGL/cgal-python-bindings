@@ -1,0 +1,919 @@
+{
+  "CGAL::Envelope_diagram_1": {
+    "kind": "class",
+    "name": "CGAL::Envelope_diagram_1",
+    "brief": "This class is the default envelope-diagram class used by envelope functions to represent the minimization or the maximization diagram of a set of curves.",
+    "detailed": "It represents the diagram as a doubly-linked list of interleaved vertices and edges. Thus, all operations provided by the envelope diagram take constant time, and the space needed to store the diagram class is linear in the complexity of the envelope. The envelope-diagram class is parameterized by a traits class, which is a model of the AosXMonotoneTraits_2 concept, in case we handle only envelopes of $ x$ -monotone curves, or of the refined AosTraits_2 concept in case we handle arbitrary planar curves. Is model of EnvelopeDiagram_1",
+    "members": []
+  },
+  "EnvelopeDiagram_1": {
+    "kind": "class",
+    "name": "EnvelopeDiagram_1",
+    "brief": "This concept defines the representation of an envelope diagram of a set of planar curve. The envelope diagram is a subdivision of the $ x$ -axis into 0-dimensional cells ( vertices ) and 1-dimensional cells ( edges ), such that the identity of the curves that induce the lower envelope (or the upper envelope) over each cell is fixed.",
+    "detailed": "A vertex in an envelope diagram is therefore associated with a point on the envelope, and corresponds to either a curve endpoint or to an intersection point of two (or more) curves. Therefore each vertex is associated with a set of $ x$ -monotone curves that induce the envelope over this point. Each vertex is incident to two edges, one lying to its left and the other to its right. An edge in the envelope diagram represents a continuous portion of the $ x$ -axis, and is associated with a (possibly empty) set of curves that induce the envelope over this portion of the $ x$ -axis. An edge may be bounded by two vertices, one to its left and the other to its right. However, the diagram contains two unbounded edges, its leftmost edge, representing the interval $ (-\\infty, x_l)$ , and its rightmost edge, representing the interval $ (x_r, \\infty)$ , where $ x_l$ and $ x_r$ are the $ x$ -coordinates of the leftmost and the rightmost vertices in the diagram, respectively. Note that a diagram may contain no vertices at all, in which case it comprises a single edge. Note that any model of the EnvelopeDiagram_1 concept must define a geometric traits class, which in turn defines the Point_2 and X_monotone_curve_2 types defined with the diagram features. EnvelopeDiagramVertex EnvelopeDiagramEdge",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Traits_2",
+        "qualified_name": "EnvelopeDiagram_1::Traits_2",
+        "brief": "the geometric traits class.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "EnvelopeDiagram_1::Point_2",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "Traits_2::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "X_monotone_curve_2",
+        "qualified_name": "EnvelopeDiagram_1::X_monotone_curve_2",
+        "brief": "the $ x$ -monotone curve type.",
+        "detailed": "",
+        "return_type": "Traits_2::X_monotone_curve_2",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Size",
+        "qualified_name": "EnvelopeDiagram_1::Size",
+        "brief": "the size type (convertible to size_t ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Curve_const_iterator",
+        "qualified_name": "EnvelopeDiagram_1::Curve_const_iterator",
+        "brief": "an iterator for the $ x$ -monotone curves that induce a diagram feature, with value type X_monotone_curve_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "EnvelopeDiagram_1::Vertex",
+        "brief": "the vertex type, a model of the concept EnvelopeDiagramVertex .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "EnvelopeDiagram_1::Edge",
+        "brief": "the edge type, a model of the concept EnvelopeDiagramEdge .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "EnvelopeDiagram_1::Vertex_handle",
+        "brief": "a handle to a diagram vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "82",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "EnvelopeDiagram_1::Vertex_const_handle",
+        "brief": "a non-mutable handle to a diagram vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_handle",
+        "qualified_name": "EnvelopeDiagram_1::Edge_handle",
+        "brief": "a handle to a diagram edge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "92",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_const_handle",
+        "qualified_name": "EnvelopeDiagram_1::Edge_const_handle",
+        "brief": "a non-mutable handle to a diagram edge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "EnvelopeDiagram_1",
+        "qualified_name": "EnvelopeDiagram_1::EnvelopeDiagram_1",
+        "brief": "constructs an empty diagram containing one unbounded edge, which corresponds to the entire plane and has no $ x$ -monotone curves that are associated with it.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "109",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Envelope_diagram_1",
+        "qualified_name": "EnvelopeDiagram_1::Envelope_diagram_1",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Self &other)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "114",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "leftmost",
+        "qualified_name": "EnvelopeDiagram_1::leftmost",
+        "brief": "returns the leftmost edge of the diagram (a non-const version is also available).",
+        "detailed": "",
+        "return_type": "Edge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "124",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "rightmost",
+        "qualified_name": "EnvelopeDiagram_1::rightmost",
+        "brief": "returns the rightmost edge of the diagram (a non-const version is also available).",
+        "detailed": "",
+        "return_type": "Edge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "129",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_leftmost",
+        "qualified_name": "EnvelopeDiagram_1::set_leftmost",
+        "brief": "sets the leftmost edge of the diagram to be e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Edge_const_handle e)",
+        "params": [
+          {
+            "type": "Edge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "139",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_rightmost",
+        "qualified_name": "EnvelopeDiagram_1::set_rightmost",
+        "brief": "sets the rightmost edge of the diagram to be e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Edge_const_handle e)",
+        "params": [
+          {
+            "type": "Edge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "144",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "new_vertex",
+        "qualified_name": "EnvelopeDiagram_1::new_vertex",
+        "brief": "creates a new diagram vertex, associated with the point p .",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "149",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "new_edge",
+        "qualified_name": "EnvelopeDiagram_1::new_edge",
+        "brief": "creates a new diagram edge.",
+        "detailed": "",
+        "return_type": "Edge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "154",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "delete_vertex",
+        "qualified_name": "EnvelopeDiagram_1::delete_vertex",
+        "brief": "deletes the given vertex v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "159",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "delete_edge",
+        "qualified_name": "EnvelopeDiagram_1::delete_edge",
+        "brief": "deletes the given edge e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Edge_handle e)",
+        "params": [
+          {
+            "type": "Edge_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagram_1.h",
+        "line": "164",
+        "section": "Modifiers"
+      }
+    ]
+  },
+  "EnvelopeDiagramEdge": {
+    "kind": "class",
+    "name": "EnvelopeDiagramEdge",
+    "brief": "An edge record in an envelope diagram, which represents a continuous portion of the $ x$ -axis. It is associated with a (possibly empty) set of curves that induce the envelope over this portion of the $ x$ -axis. Note that all curves in this set overlap over the interval represented by the edge.",
+    "detailed": "EnvelopeDiagram_1 EnvelopeDiagramVertex",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Size",
+        "qualified_name": "EnvelopeDiagramEdge::Size",
+        "brief": "the size type (convertible to size_t ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "24",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "EnvelopeDiagramEdge::Vertex",
+        "brief": "the corresponding diagram-vertex type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "X_monotone_curve_2",
+        "qualified_name": "EnvelopeDiagramEdge::X_monotone_curve_2",
+        "brief": "the $ x$ -monotone curve type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "EnvelopeDiagramEdge",
+        "qualified_name": "EnvelopeDiagramEdge::EnvelopeDiagramEdge",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "44",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "EnvelopeDiagramEdge",
+        "qualified_name": "EnvelopeDiagramEdge::EnvelopeDiagramEdge",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const EnvelopeDiagramEdge &other)",
+        "params": [
+          {
+            "type": "const EnvelopeDiagramEdge &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "49",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_curves",
+        "qualified_name": "EnvelopeDiagramEdge::number_of_curves",
+        "brief": "returns the number of $ x$ -monotone curves associated with e .",
+        "detailed": "",
+        "return_type": "Size",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "59",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "EnvelopeDiagramEdge::is_empty",
+        "brief": "returns whether e represents an empty interval - namely, whether the set of $ x$ -monotone curves associated with it is empty.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "64",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curve",
+        "qualified_name": "EnvelopeDiagramEdge::curve",
+        "brief": "returns a representative $ x$ -monotone curve associated with e .",
+        "detailed": "e does not represent an empty interval.",
+        "return_type": "const X_monotone_curve_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "70",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_begin",
+        "qualified_name": "EnvelopeDiagramEdge::curves_begin",
+        "brief": "returns an iterator for the first $ x$ -monotone curve associated with e .",
+        "detailed": "",
+        "return_type": "Curve_const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "75",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_end",
+        "qualified_name": "EnvelopeDiagramEdge::curves_end",
+        "brief": "returns a past-the-end iterator for the $ x$ -monotone curves associated with e .",
+        "detailed": "",
+        "return_type": "Curve_const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "80",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "left",
+        "qualified_name": "EnvelopeDiagramEdge::left",
+        "brief": "returns the vertex lying to e 's left.",
+        "detailed": "e is not the leftmost edge in the diagram.",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "86",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "right",
+        "qualified_name": "EnvelopeDiagramEdge::right",
+        "brief": "returns the vertex lying to e 's right.",
+        "detailed": "e is not the rightmost edge in the diagram.",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "92",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "clear_curves",
+        "qualified_name": "EnvelopeDiagramEdge::clear_curves",
+        "brief": "clears the set of curves associated with e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "102",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "add_curve",
+        "qualified_name": "EnvelopeDiagramEdge::add_curve",
+        "brief": "adds the $ x$ -monotone curve cv to the set of curves associated with e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const X_monotone_curve_2 &cv)",
+        "params": [
+          {
+            "type": "const X_monotone_curve_2 &",
+            "name": "cv",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "107",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "add_curves",
+        "qualified_name": "EnvelopeDiagramEdge::add_curves",
+        "brief": "adds the given range of $ x$ -monotone curves to the set of curves associated with e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Curve_const_iterator begin, Curve_const_iterator end)",
+        "params": [
+          {
+            "type": "Curve_const_iterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Curve_const_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "112",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_left",
+        "qualified_name": "EnvelopeDiagramEdge::set_left",
+        "brief": "sets the vertex lying to the left of e to be v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "118",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_right",
+        "qualified_name": "EnvelopeDiagramEdge::set_right",
+        "brief": "sets the vertex lying to the right of e to be v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramEdge.h",
+        "line": "123",
+        "section": "Modifiers"
+      }
+    ]
+  },
+  "EnvelopeDiagramVertex": {
+    "kind": "class",
+    "name": "EnvelopeDiagramVertex",
+    "brief": "A vertex record in an envelope diagram. It is always associated with a point on the lower (upper) envelope of a non-empty set of curves. A vertex is also associated with a set of $ x$ -monotone curves that induce the envelope over this point. It is incident to two edges, one lying to its left and the other to its right.",
+    "detailed": "EnvelopeDiagram_1 EnvelopeDiagramEdge",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Size",
+        "qualified_name": "EnvelopeDiagramVertex::Size",
+        "brief": "the size type (convertible to size_t ).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "EnvelopeDiagramVertex::Edge",
+        "brief": "the corresponding diagram-edge type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "EnvelopeDiagramVertex::Point_2",
+        "brief": "the point type associated with the vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "X_monotone_curve_2",
+        "qualified_name": "EnvelopeDiagramVertex::X_monotone_curve_2",
+        "brief": "the $ x$ -monotone curve type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "EnvelopeDiagramVertex",
+        "qualified_name": "EnvelopeDiagramVertex::EnvelopeDiagramVertex",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "50",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "EnvelopeDiagramVertex",
+        "qualified_name": "EnvelopeDiagramVertex::EnvelopeDiagramVertex",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const EnvelopeDiagramVertex &other)",
+        "params": [
+          {
+            "type": "const EnvelopeDiagramVertex &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "55",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "EnvelopeDiagramVertex",
+        "qualified_name": "EnvelopeDiagramVertex::EnvelopeDiagramVertex",
+        "brief": "constructs a vertex associated with the given point p .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "60",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "EnvelopeDiagramVertex::point",
+        "brief": "returns the point associated with v .",
+        "detailed": "",
+        "return_type": "const Point_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "70",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_curves",
+        "qualified_name": "EnvelopeDiagramVertex::number_of_curves",
+        "brief": "returns the number of $ x$ -monotone curves associated with v .",
+        "detailed": "",
+        "return_type": "Size",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "75",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_begin",
+        "qualified_name": "EnvelopeDiagramVertex::curves_begin",
+        "brief": "returns an iterator for the first $ x$ -monotone curve associated with v .",
+        "detailed": "",
+        "return_type": "Curve_const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "80",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "curves_end",
+        "qualified_name": "EnvelopeDiagramVertex::curves_end",
+        "brief": "returns a past-the-end iterator for the $ x$ -monotone curves associated with v .",
+        "detailed": "",
+        "return_type": "Curve_const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "85",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "left",
+        "qualified_name": "EnvelopeDiagramVertex::left",
+        "brief": "returns the edge lying to v 's left.",
+        "detailed": "",
+        "return_type": "Edge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "90",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "right",
+        "qualified_name": "EnvelopeDiagramVertex::right",
+        "brief": "returns the edge lying to v 's right.",
+        "detailed": "",
+        "return_type": "Edge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "95",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_point",
+        "qualified_name": "EnvelopeDiagramVertex::set_point",
+        "brief": "associates the point p with v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "105",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "clear_curves",
+        "qualified_name": "EnvelopeDiagramVertex::clear_curves",
+        "brief": "clears the set of curves associated with v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "110",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "add_curve",
+        "qualified_name": "EnvelopeDiagramVertex::add_curve",
+        "brief": "adds the $ x$ -monotone curve cv to the set of curves associated with v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const X_monotone_curve_2 &cv)",
+        "params": [
+          {
+            "type": "const X_monotone_curve_2 &",
+            "name": "cv",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "115",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "add_curves",
+        "qualified_name": "EnvelopeDiagramVertex::add_curves",
+        "brief": "adds the given range of $ x$ -monotone curves to the set of curves associated with v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Curve_const_iterator begin, Curve_const_iterator end)",
+        "params": [
+          {
+            "type": "Curve_const_iterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Curve_const_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "120",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_left",
+        "qualified_name": "EnvelopeDiagramVertex::set_left",
+        "brief": "sets the edge lying to the left of v to be e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Edge_const_handle e)",
+        "params": [
+          {
+            "type": "Edge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "126",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_right",
+        "qualified_name": "EnvelopeDiagramVertex::set_right",
+        "brief": "sets the edge lying to the right of v to be e .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Edge_const_handle e)",
+        "params": [
+          {
+            "type": "Edge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/EnvelopeDiagramVertex.h",
+        "line": "131",
+        "section": "Modifiers"
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

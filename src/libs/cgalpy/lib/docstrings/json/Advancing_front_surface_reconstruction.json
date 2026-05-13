@@ -1,0 +1,5144 @@
+{
+  "AdvancingFrontSurfaceReconstructionTraits_3": {
+    "kind": "class",
+    "name": "AdvancingFrontSurfaceReconstructionTraits_3",
+    "brief": "The concept AdvancingFrontSurfaceReconstructionTraits_3 describes the requirements for the geometric traits of the class CGAL::Delaunay_triangulation_3 used in the class CGAL::Advancing_front_surface_reconstruction . It defines the geometric objects (points, segments...) forming the triangulation together with a few geometric predicates and constructions on these objects.",
+    "detailed": "Refines DelaunayTriangulationTraits_3 Has models All models of the concept Kernel",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::FT",
+        "brief": "The coordinate type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Sphere_3",
+        "brief": "The sphere type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Construct_vector_3",
+        "brief": "A constructor object that must provide the function operator.",
+        "detailed": "Vector_3 operator()(Point_3 p, Point_3 q) , which constructs the vector q-p .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Construct_cross_product_vector_3",
+        "brief": "A constructor object that must provide the function operator.",
+        "detailed": "Vector_3 operator()(Vector_3 v, Vector_3 w) , which returns the cross product of v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "56",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Compute_scalar_product_3",
+        "brief": "A constructor object that must provide the function operator.",
+        "detailed": "FT operator()(Vector_3 v, Vector_3 w) , which returns the scalar (inner) product of v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_sphere_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Construct_sphere_3",
+        "brief": "A constructor object that must provide the function operator.",
+        "detailed": "Sphere_3 operator()(Point_3 p, Point_3 q, Point_3 r) , which constructs a sphere initialized to the smallest sphere which passes through the points p , q , and r .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_center_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Construct_center_3",
+        "brief": "A constructor object that must provide the function operator.",
+        "detailed": "Point_3 operator()(Sphere_3 s) , which returns the center of the sphere s .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "84",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_radius_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Compute_squared_radius_3",
+        "brief": "A constructor object that must provide the function operators.",
+        "detailed": "FT operator()(Point_3 p, Point_3 q, Point_3 r, Point_3 s) , which returns the squared radius of the sphere passing through p , q and r , and whose center is in the plane defined by these three points. and FT operator()(Point_3 p, Point_3 q, Point_3 r, Point_3 s) , which returns the squared radius of the sphere passing through p , q , r , and s . and FT operator()(Sphere_3 s) , which returns the squared radius of the sphere s .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "106",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::Compute_squared_distance_3",
+        "brief": "A constructor object that must provide the function operator.",
+        "detailed": "FT operator()(Point_3 p, Point_3 q) , which returns the squared distance between the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "115",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::construct_vector_3_object",
+        "brief": "gives access to the Construct_vector_3 construction.",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "126",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_cross_product_vector_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::construct_cross_product_vector_3_object",
+        "brief": "gives access to the Construct_cross_product_vector_3 construction.",
+        "detailed": "",
+        "return_type": "Construct_cross_product_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "131",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::compute_scalar_product_3_object",
+        "brief": "gives access to the Compute_scalar_product_3 construction.",
+        "detailed": "",
+        "return_type": "Compute_scalar_product_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "136",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_sphere_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::construct_sphere_3_object",
+        "brief": "gives access to the Construct_sphere_3 construction.",
+        "detailed": "",
+        "return_type": "Construct_sphere_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "141",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_center_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::construct_center_3_object",
+        "brief": "gives access to the Construct_center_3 construction.",
+        "detailed": "",
+        "return_type": "Construct_center_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "146",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_radius_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::compute_squared_radius_3_object",
+        "brief": "gives access to the Compute_squared_radius_3 construction.",
+        "detailed": "",
+        "return_type": "Compute_squared_radius_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "151",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_3_object",
+        "qualified_name": "AdvancingFrontSurfaceReconstructionTraits_3::compute_squared_distance_3_object",
+        "brief": "gives access to the Compute_squared_distance_3 construction.",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdvancingFrontSurfaceReconstructionTraits_3.h",
+        "line": "156",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction": {
+    "kind": "class",
+    "name": "CGAL::Advancing_front_surface_reconstruction",
+    "brief": "The class Advancing_front_surface_reconstruction enables advanced users to provide the unstructured point cloud in a 3D Delaunay triangulation.",
+    "detailed": "The reconstruction algorithm then marks vertices and faces in the triangulation as being on the 2D surface embedded in 3D space, and constructs a 2D triangulation data structure that describes the surface. The vertices and facets of the 2D triangulation data structure store handles to the vertices and faces of the 3D triangulation, which enables the user to explore the 2D as well as 3D neighborhood of vertices and facets of the surface. Dt must be a Delaunay_triangulation_3 whose Traits template parameter must be a model of AdvancingFrontSurfaceReconstructionTraits_3 and whose Tds template parameter must be a model of TriangulationDataStructure_3 with Advancing_front_surface_reconstruction_vertex_base_3 and Advancing_front_surface_reconstruction_cell_base_3 blended into the vertex and cell type, respectively. The default value is: CGAL::Delaunay_triangulation_3<CGAL::Exact_predicates_inexact_constructions_kernel, CGAL::Triangulation_data_structure_3< CGAL::Advancing_front_surface_reconstruction_vertex_base_3< CGAL::Exact_predicates_inexact_constructions_kernel>, CGAL::Advancing_front_surface_reconstruction_cell_base_3< CGAL::Exact_predicates_inexact_constructions_kernel> > > P must be a functor offering FT operator()( Advancing_front_surface_reconstruction::Cell_handle , int ) returning the priority of the facet ( Cell_handle ,int) . This functor enables the user to choose how candidate triangles are prioritized. If a facet should not appear in the output, infinity() must be returned. It defaults to a functor that returns the smallest_radius_delaunay_sphere() .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure_2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Triangulation_data_structure_2",
+        "brief": "The type of the 2D triangulation data structure describing the reconstructed surface, being a model of TriangulationDataStructure_2 .",
+        "detailed": "The type Triangulation_data_structure_2::Vertex is model of the concept TriangulationDataStructure_2::Vertex and has additionally the method vertex_3() that returns a Vertex_handle to the associated 3D vertex. The type Triangulation_data_structure_2::Face is model of the concept TriangulationDataStructure_2::Face and has additionally the method facet() that returns the associated Facet , and a method bool is_on_surface() for testing if a face is part of the reconstructed surface or a face incident to a boundary edge. In case the surface has boundaries, the 2D surface has one vertex which is associated to the infinite vertex of the 3D triangulation.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "232",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Triangulation_3",
+        "brief": "The type of the 3D Delaunay triangulation (the first template parameter).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "237",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Priority",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Priority",
+        "brief": "The type of the facet priority functor (the second template parameter).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "242",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::FT",
+        "brief": "The number type.",
+        "detailed": "",
+        "return_type": "Triangulation_3::Geom_traits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "247",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Point",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "Triangulation_3::Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "252",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Vertex_handle",
+        "brief": "The vertex handle type of the 3D triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "257",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Cell_handle",
+        "brief": "The cell handle type of the 3D triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation_3::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "262",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Facet",
+        "brief": "The facet type of the 3D triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation_3::Facet",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "267",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Outlier_range",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Outlier_range",
+        "brief": "A bidirectional iterator range which enables to enumerate all points that were removed from the 3D Delaunay triangulation during the surface reconstruction.",
+        "detailed": "The value type of the iterator is Point .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "274",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_on_boundary_range",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Vertex_on_boundary_range",
+        "brief": "A bidirectional iterator range which enables to visit all vertices on a boundary.",
+        "detailed": "The value type of the iterator is Vertex_handle .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "280",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Boundary_range",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Boundary_range",
+        "brief": "A bidirectional iterator range which enables to visit all boundaries.",
+        "detailed": "The value type of the iterator is Vertex_on_boundary_range .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "286",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Advancing_front_surface_reconstruction",
+        "brief": "Constructor for the unstructured point cloud given as 3D Delaunay triangulation.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Triangulation_3 &dt, Priority priority=Priority())",
+        "params": [
+          {
+            "type": "Triangulation_3 &",
+            "name": "dt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Priority",
+            "name": "priority",
+            "default": "Priority()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "700",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "run",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::run",
+        "brief": "runs the surface reconstruction function.",
+        "detailed": "radius_ratio_bound candidates incident to surface triangles which are not in the beta-wedge are discarded, if the ratio of their radius and the radius of the surface triangle is larger than radius_ratio_bound . Described in Section Dealing with Multiple Components, Boundaries and Sharp Edges . beta half the angle of the wedge in which only the radius of triangles counts for the plausibility of candidates. Described in Section Plausibility of a Candidate Triangle .",
+        "return_type": "void",
+        "argsstring": "(double radius_ratio_bound=5, double beta=0.52)",
+        "params": [
+          {
+            "type": "double",
+            "name": "radius_ratio_bound",
+            "default": "5",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "beta",
+            "default": "0.52",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "786",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "triangulation_data_structure_2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::triangulation_data_structure_2",
+        "brief": "returns the reconstructed surface.",
+        "detailed": "",
+        "return_type": "const Triangulation_data_structure_2 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "831",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "triangulation_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::triangulation_3",
+        "brief": "returns the underlying 3D Delaunay triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "840",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "outliers",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::outliers",
+        "brief": "returns an iterator range over the outliers.",
+        "detailed": "",
+        "return_type": "const Outlier_range &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "848",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "boundaries",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::boundaries",
+        "brief": "returns an iterator range over the boundaries.",
+        "detailed": "",
+        "return_type": "const Boundary_range &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "856",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "has_boundaries",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::has_boundaries",
+        "brief": "returns true if the reconstructed surface has boundaries.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "883",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "has_on_surface",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::has_on_surface",
+        "brief": "returns true if the facet is on the surface.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Facet f) const",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "892",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "has_on_surface",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::has_on_surface",
+        "brief": "returns true if the facet f2 is on the surface.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(typename Triangulation_data_structure_2::Face_handle f2) const",
+        "params": [
+          {
+            "type": "typename Triangulation_data_structure_2::Face_handle",
+            "name": "f2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "901",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "has_on_surface",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::has_on_surface",
+        "brief": "returns true if the vertex v2 is on the surface.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(typename Triangulation_data_structure_2::Vertex_handle v2) const",
+        "params": [
+          {
+            "type": "typename Triangulation_data_structure_2::Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "910",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "smallest_radius_delaunay_sphere",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::smallest_radius_delaunay_sphere",
+        "brief": "computes the priority of the facet (c,index) such that the facet with the smallest radius of Delaunay sphere has the highest priority.",
+        "detailed": "c handle to the cell containing the facet index index of the facet in c",
+        "return_type": "FT",
+        "argsstring": "(const Cell_handle &c, const int &index) const",
+        "params": [
+          {
+            "type": "const Cell_handle &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1231",
+        "section": "Priority values"
+      },
+      {
+        "kind": "function",
+        "name": "infinity",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::infinity",
+        "brief": "returns the infinite floating value that prevents a facet to be used.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1360",
+        "section": "Priority values"
+      },
+      {
+        "kind": "enum",
+        "name": "Validation_case",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Validation_case",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "345",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Triangulation_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "290",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Kernel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Geom_traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "291",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Extract",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Extract",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Advancing_front_surface_reconstruction < Dt, P >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "292",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Geom_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Geom_traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "293",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "295",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "coord_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::coord_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "296",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "298",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "299",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Segment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "300",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "301",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Sphere",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Sphere_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "302",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Cell",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Cell",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "304",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "305",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "306",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Facet",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "307",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Cell_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "308",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "309",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_circulator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Cell_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Cell_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "311",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_circulator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Facet_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Facet_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "312",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Locate_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Locate_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Locate_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "314",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_cells_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Finite_cells_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Finite_cells_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "316",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_facets_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Finite_facets_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Finite_facets_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "317",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_vertices_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Finite_vertices_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Finite_vertices_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "318",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_edges_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Finite_edges_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Finite_edges_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "319",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_cells_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::All_cells_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::All_cells_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "321",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_facets_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::All_facets_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::All_facets_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "322",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_vertices_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::All_vertices_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::All_vertices_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "323",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_edges_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::All_edges_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::All_edges_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "324",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_incident_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Edge_incident_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Edge_incident_facet",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "326",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "IO_edge_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::IO_edge_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::IO_edge_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "327",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "criteria",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::criteria",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::criteria",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "328",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Radius_edge_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Radius_edge_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Radius_edge_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "329",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Border_elt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "330",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Next_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Next_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Next_border_elt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "331",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Intern_successors_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Intern_successors_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Intern_successors_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "332",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Radius_ptr_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Radius_ptr_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Radius_ptr_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "333",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Incidence_request_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Incidence_request_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Incidence_request_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "335",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Incidence_request_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Incidence_request_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3::Vertex::Incidence_request_elt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "336",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_like",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Edge_like",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Vertex_handle , Vertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "338",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_like",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Facet_like",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Triple< Vertex_handle , Vertex_handle , Vertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "339",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Ordered_border_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Ordered_border_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::set< Radius_ptr_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "341",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Ordered_border_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Ordered_border_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Ordered_border_type::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "343",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Boundary_range",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Boundary_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::list< std::list< Vertex_handle > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "352",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_on_boundary_range",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Vertex_on_boundary_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::list< Vertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "353",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Boundary_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Boundary_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Advancing_front_surface_reconstruction_boundary_iterator< Extract >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "749",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Outlier_range",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Outlier_range",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Point >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "762",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "TDS_2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::TDS_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Triangulation_data_structure_2< AFSR::Surface_vertex_base_2< Kernel, Vertex_handle >, AFSR::Surface_face_base_2< Kernel, typename Triangulation_3::Facet > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "765",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure_2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Triangulation_data_structure_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "TDS_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "767",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Outlier_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Outlier_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Point >::const_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "938",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Triangulation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< Dt, Delaunay_triangulation_3< Exact_predicates_inexact_constructions_kernel, Triangulation_data_structure_3< Advancing_front_surface_reconstruction_vertex_base_3 < Exact_predicates_inexact_constructions_kernel >, Advancing_front_surface_reconstruction_cell_base_3 < Exact_predicates_inexact_constructions_kernel > > > >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "213",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Priority",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Priority",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Default::Get< P, AFSR::Default_priority >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "214",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_boundaries",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::m_boundaries",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< std::list< Vertex_handle > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "357",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "postprocess_timer",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::postprocess_timer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Timer",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "359",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "extend_timer",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::extend_timer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Timer",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "359",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "extend2_timer",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::extend2_timer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Timer",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "359",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "init_timer",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::init_timer",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Timer",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "359",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "T",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::T",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "361",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_ordered_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_ordered_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Ordered_border_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "363",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_number_of_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_number_of_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "364",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "COS_ALPHA_SLIVER",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::COS_ALPHA_SLIVER",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "366",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "COS_BETA",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::COS_BETA",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "367",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "NB_BORDER_MAX",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::NB_BORDER_MAX",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "368",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "DELTA",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::DELTA",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "369",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "min_K",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::min_K",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "370",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eps",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::eps",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "371",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "inv_eps_2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::inv_eps_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "372",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eps_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::eps_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "373",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "STANDBY_CANDIDATE",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::STANDBY_CANDIDATE",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const criteria",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "374",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "STANDBY_CANDIDATE_BIS",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::STANDBY_CANDIDATE_BIS",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const criteria",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "375",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "NOT_VALID_CANDIDATE",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::NOT_VALID_CANDIDATE",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const criteria",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "376",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_vh_number",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_vh_number",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "381",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_facet_number",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_facet_number",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "382",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_postprocessing_counter",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_postprocessing_counter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "386",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_size_before_postprocessing",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_size_before_postprocessing",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "387",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_outliers",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::m_outliers",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Point >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "389",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_number_of_connected_components",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_number_of_connected_components",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "391",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "added_vertex",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::added_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "393",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "deal_with_2d",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::deal_with_2d",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "394",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "priority",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::priority",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Priority",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "395",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "max_connected_component",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::max_connected_component",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "396",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "K_init",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::K_init",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "397",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "K_step",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::K_step",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "397",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "interior_edges",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::interior_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Vertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "398",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "incidence_requests",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::incidence_requests",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Incidence_request_elt >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "399",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "sentinel",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::sentinel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Incidence_request_elt >::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "400",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "ie_sentinel",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::ie_sentinel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Vertex_handle >::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "401",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "nbe_pool",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::nbe_pool",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Next_border_elt >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "402",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "ist_pool",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::ist_pool",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Intern_successors_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "403",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_tds_2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_tds_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "TDS_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "769",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_tds_2_inf",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::_tds_2_inf",
+        "brief": "",
+        "detailed": "",
+        "return_type": "TDS_2::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "771",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::construct_vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vector",
+        "argsstring": "(const Point &p, const Point &q) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "406",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_cross_product",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::construct_cross_product",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vector",
+        "argsstring": "(const Vector &v, const Vector &w) const",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "411",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::compute_scalar_product",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Vector &v, const Vector &w) const",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "416",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "boundaries_begin",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::boundaries_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Boundary_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "751",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "boundaries_end",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::boundaries_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Boundary_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "757",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_connected_components",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::number_of_connected_components",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "916",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_facets",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::number_of_facets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "921",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::number_of_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "927",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_outliers",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::number_of_outliers",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "933",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "outliers_begin",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::outliers_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Outlier_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "941",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "m_outliers_end",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::m_outliers_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Outlier_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "947",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "next_mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::next_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "952",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Next_border_elt *",
+        "argsstring": "(const Vertex_handle &v1, const Vertex_handle &v2) const",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "959",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "border_IO_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::border_IO_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "IO_edge_type *",
+        "argsstring": "(const Vertex_handle &v1, const Vertex_handle &v2)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "967",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::set_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "IO_edge_type *",
+        "argsstring": "(const Vertex_handle &v1, const Vertex_handle &v2, const Border_elt &e)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Border_elt &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "973",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_again_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::set_again_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "IO_edge_type *",
+        "argsstring": "(const Vertex_handle &v1, const Vertex_handle &v2, const Border_elt &e)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Border_elt &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "981",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge_like &key, Border_elt &result) const",
+        "params": [
+          {
+            "type": "Edge_like &",
+            "name": "key",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Border_elt &",
+            "name": "result",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "989",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge_like &key) const",
+        "params": [
+          {
+            "type": "Edge_like &",
+            "name": "key",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1009",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_ordered_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_ordered_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Edge_like &key, Border_elt &result) const",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "key",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Border_elt &",
+            "name": "result",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1026",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::remove_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_like &ordered_key)",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "ordered_key",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1039",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_ordered_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_ordered_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Edge_like &e, IO_edge_type *&ptr) const",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "IO_edge_type *&",
+            "name": "ptr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1045",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_incidence_request",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::set_incidence_request",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Vertex_handle &v, const criteria &value, const Edge_like &e)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const criteria &",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_like &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1060",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_interior_edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_interior_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Edge_like &key) const",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "key",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1069",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::next",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge_incident_facet",
+        "argsstring": "(const Edge_incident_facet &e) const",
+        "params": [
+          {
+            "type": "const Edge_incident_facet &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1109",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "previous",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::previous",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge_incident_facet",
+        "argsstring": "(const Edge_incident_facet &e) const",
+        "params": [
+          {
+            "type": "const Edge_incident_facet &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1123",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "my_coplanar",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::my_coplanar",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point &p, const Point &q, const Point &r, const Point &s) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1138",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "my_collinear",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::my_collinear",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point &p, const Point &q, const Point &s) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1159",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "select_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::select_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Cell_handle &c, const int &i)",
+        "params": [
+          {
+            "type": "const Cell_handle &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1180",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "unselect_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::unselect_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Cell_handle &c, const int &i)",
+        "params": [
+          {
+            "type": "const Cell_handle &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1189",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_border_edges",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::number_of_border_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1196",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "compute_value",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::compute_value",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Radius_edge_type",
+        "argsstring": "(const Edge_incident_facet &e)",
+        "params": [
+          {
+            "type": "const Edge_incident_facet &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1368",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::init",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const bool &re_init)",
+        "params": [
+          {
+            "type": "const bool &",
+            "name": "re_init",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1508",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "test_merge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::test_merge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const Edge_like &ordered_key, const Border_elt &result, const Vertex_handle &v, const coord_type &ear_alpha)",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "ordered_key",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Border_elt &",
+            "name": "result",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const coord_type &",
+            "name": "ear_alpha",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1597",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ordered_map_erase",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::ordered_map_erase",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const criteria &value, const IO_edge_type *pkey)",
+        "params": [
+          {
+            "type": "const criteria &",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const IO_edge_type *",
+            "name": "pkey",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1631",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "force_merge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::force_merge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_like &ordered_key, const Border_elt &result)",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "ordered_key",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Border_elt &",
+            "name": "result",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1638",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "dequeue_incidence_request",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::dequeue_incidence_request",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Vertex_handle &v)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1650",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "merge_ear",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::merge_ear",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_like &ordered_el1, const Border_elt &result1, const Edge_like &ordered_key, const Vertex_handle &v1, const Vertex_handle &v2, const Edge_incident_facet &edge_Ifacet_2)",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "ordered_el1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Border_elt &",
+            "name": "result1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_like &",
+            "name": "ordered_key",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Edge_incident_facet &",
+            "name": "edge_Ifacet_2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1670",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "border_extend",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::border_extend",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Edge_like &ordered_key, const Border_elt &result12, const Vertex_handle &v1, const Vertex_handle &v2, const Vertex_handle &v3, const Radius_edge_type &e1, const Radius_edge_type &e2, IO_edge_type *&p1, IO_edge_type *&p2)",
+        "params": [
+          {
+            "type": "const Edge_like &",
+            "name": "ordered_key",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Border_elt &",
+            "name": "result12",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vertex_handle &",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Radius_edge_type &",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Radius_edge_type &",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "IO_edge_type *&",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "IO_edge_type *&",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1700",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "validate",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::validate",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Validation_case",
+        "argsstring": "(const Edge_incident_facet &edge_Efacet, const criteria &value)",
+        "params": [
+          {
+            "type": "const Edge_incident_facet &",
+            "name": "edge_Efacet",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const criteria &",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1733",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "re_compute_values",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::re_compute_values",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "1994",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extend",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::extend",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2033",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "re_init_for_free_cells_cache",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::re_init_for_free_cells_cache",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Vertex_handle &vh)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2120",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "swap_selected_facets_on_conflict_boundary",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::swap_selected_facets_on_conflict_boundary",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Vertex_handle &vh)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2132",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "next_surface_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::next_surface_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet",
+        "argsstring": "(const Edge_incident_facet &start)",
+        "params": [
+          {
+            "type": "const Edge_incident_facet &",
+            "name": "start",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2185",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "retract_border_for_incident_facets",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::retract_border_for_incident_facets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Vertex_handle &vh)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2211",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "create_singularity",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::create_singularity",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Vertex_handle &vh)",
+        "params": [
+          {
+            "type": "const Vertex_handle &",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2292",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "store_outlier",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::store_outlier",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2332",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "dec_vh_number",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::dec_vh_number",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2337",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "postprocessing",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::postprocessing",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2384",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "new_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::new_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Intern_successors_type *",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "422",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_on_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_on_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle vh, const int &i) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "441",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_border_edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::remove_border_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w, Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "455",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_interior_edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_interior_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle w, Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "487",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_interior_edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::set_interior_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w, Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "507",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "remove_interior_edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::remove_interior_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w, Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "525",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_incidence_request",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::set_incidence_request",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w, const Incidence_request_elt &ir)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Incidence_request_elt &",
+            "name": "ir",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "554",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_incidence_requested",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::is_incidence_requested",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle w) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "567",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "incidence_request_begin",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::incidence_request_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Incidence_request_iterator",
+        "argsstring": "(Vertex_handle w)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "575",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "incidence_request_end",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::incidence_request_end",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Incidence_request_iterator",
+        "argsstring": "(Vertex_handle w)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "580",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "erase_incidence_request",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::erase_incidence_request",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "591",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "re_init",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::re_init",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "603",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "dec_mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::dec_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "626",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "initialize_vertices_and_cells",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::initialize_vertices_and_cells",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "638",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_vertex",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::clear_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_handle w)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "w",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "661",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_vertices",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::clear_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "683",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction::Remove": {
+    "kind": "struct",
+    "name": "CGAL::Advancing_front_surface_reconstruction::Remove",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "E",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Remove::E",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Extract &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2346",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "T",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Remove::T",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_3 &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2347",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Remove",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Remove::Remove",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Extract &E_, Triangulation_3 &T_)",
+        "params": [
+          {
+            "type": "Extract &",
+            "name": "E_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Triangulation_3 &",
+            "name": "T_",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2349",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction::Remove::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle vh)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "vh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2351",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction_boundary_iterator": {
+    "kind": "class",
+    "name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Finite_vertices_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Finite_vertices_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Surface::Finite_vertices_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Advancing_front_surface_reconstruction_boundary_iterator< Surface >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Surface::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Surface::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "S",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::S",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Surface &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "first_vertex",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::first_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "pos",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::pos",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "first",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::first",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "last",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::last",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_boundary_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Advancing_front_surface_reconstruction_boundary_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_boundary_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Advancing_front_surface_reconstruction_boundary_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Surface &S_, int m)",
+        "params": [
+          {
+            "type": "const Surface &",
+            "name": "S_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_boundary_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Advancing_front_surface_reconstruction_boundary_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Surface &S_)",
+        "params": [
+          {
+            "type": "const Surface &",
+            "name": "S_",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_boundary_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::Advancing_front_surface_reconstruction_boundary_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Self &s)",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "85",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::operator==",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Self &s) const",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator!=",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::operator!=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Self &s) const",
+        "params": [
+          {
+            "type": "const Self &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator++",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::operator++",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Self",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "100",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator*",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::operator*",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "advance_on_boundary",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::advance_on_boundary",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "126",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "advance_to_next_boundary",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_boundary_iterator::advance_to_next_boundary",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "135",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction_cell_base_3": {
+    "kind": "class",
+    "name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3",
+    "brief": "The class Advancing_front_surface_reconstruction_cell_base_3 is the default cell type for the class Advancing_front_surface_reconstruction .",
+    "detailed": "Traits has to be a model of DelaunayTriangulationTraits_3 . Cb has to be a model of DelaunayTriangulationCellBase_3 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cb::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "42",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Cell_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cb::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "coord_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::coord_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "_smallest_radius_facet_tab",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::_smallest_radius_facet_tab",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "selected_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::selected_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unsigned char",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_cell_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Advancing_front_surface_reconstruction_cell_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_cell_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Advancing_front_surface_reconstruction_cell_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_cell_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Advancing_front_surface_reconstruction_cell_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Cell_handle n0, Cell_handle n1, Cell_handle n2, Cell_handle n3)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "n0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "n1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "n2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "n3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "~Advancing_front_surface_reconstruction_cell_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::~Advancing_front_surface_reconstruction_cell_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "113",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::clear",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "128",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "smallest_radius",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::smallest_radius",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "145",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_smallest_radius",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::set_smallest_radius",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const int &i, const coord_type &c)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const coord_type &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "152",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alloc_smallest_radius_tab",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::alloc_smallest_radius_tab",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(coord_type *ptr)",
+        "params": [
+          {
+            "type": "coord_type *",
+            "name": "ptr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "164",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_facet_number",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::set_facet_number",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int, int)",
+        "params": [
+          {
+            "type": "int",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "188",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "facet_number",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::facet_number",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(int)",
+        "params": [
+          {
+            "type": "int",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "189",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "select_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::select_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "195",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "unselect_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::unselect_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "200",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_selected_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::is_selected_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "205",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "has_facet_on_surface",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::has_facet_on_surface",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "210",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Cb2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Rebind_TDS::Cb2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cb::template Rebind_TDS< TDS2 >::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "38",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_cell_base_3::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Advancing_front_surface_reconstruction_cell_base_3< Traits, Cb2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_cell_base_3.h",
+        "line": "39",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction_vertex_base_3": {
+    "kind": "class",
+    "name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3",
+    "brief": "The class Advancing_front_surface_reconstruction_vertex_base_3 is the default vertex type for the class Advancing_front_surface_reconstruction .",
+    "detailed": "Traits has to be a model of DelaunayTriangulationTraits_3 . Vb has to be a model of TriangulationVertexBase_3 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vb",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Cell_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "58",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vb::Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "coord_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::coord_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triple< Cell_handle, int, int >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_incident_facet",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Edge_incident_facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Edge, int >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "IO_edge_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::IO_edge_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Edge_incident_facet, Edge_incident_facet >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "criteria",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::criteria",
+        "brief": "",
+        "detailed": "",
+        "return_type": "coord_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Radius_edge_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Radius_edge_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< criteria, IO_edge_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Radius_edge_type, int >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Next_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Next_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Vertex_handle, Border_elt >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Intern_successors_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Intern_successors_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Next_border_elt *, Next_border_elt * >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "74",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Radius_ptr_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Radius_ptr_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< criteria, IO_edge_type * >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_like",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Edge_like",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< Vertex_handle, Vertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Incidence_request_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Incidence_request_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< criteria, Edge_like >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "82",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Incidence_request_type",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Incidence_request_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Incidence_request_elt >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "83",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Incidence_request_iterator",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Incidence_request_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Incidence_request_type::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "84",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Info",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Info",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "Advancing_front_surface_reconstruction",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Advancing_front_surface_reconstruction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "class",
+        "argsstring": "",
+        "params": [
+          {
+            "type": "Advancing_front_surface_reconstruction",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_id",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "92",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "93",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_post_mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_post_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_incident_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_incident_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Intern_successors_type *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_ie_first",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_ie_first",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Vertex_handle >::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_ie_last",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_ie_last",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Vertex_handle >::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_ir_first",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_ir_first",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Incidence_request_elt >::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "106",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_ir_last",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::m_ir_last",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::list< Incidence_request_elt >::iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "106",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_vertex_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Advancing_front_surface_reconstruction_vertex_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "113",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_vertex_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Advancing_front_surface_reconstruction_vertex_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "118",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_vertex_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Advancing_front_surface_reconstruction_vertex_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point &p, Cell_handle f)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "123",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_vertex_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Advancing_front_surface_reconstruction_vertex_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Cell_handle f)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "128",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Advancing_front_surface_reconstruction_vertex_base_3",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Advancing_front_surface_reconstruction_vertex_base_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Advancing_front_surface_reconstruction_vertex_base_3 &other)",
+        "params": [
+          {
+            "type": "const Advancing_front_surface_reconstruction_vertex_base_3 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "133",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "142",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::size_t &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::info",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "152",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::info",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::size_t &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "157",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "first_incident",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::first_incident",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Next_border_elt *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "203",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_on_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::is_on_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "234",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "not_interior",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::not_interior",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "239",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_incident_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::number_of_incident_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "244",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_exterior",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::is_exterior",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_post_mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::set_post_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "267",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_post_marked",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::is_post_marked",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "272",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "delete_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::delete_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "166",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "next_on_border",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::next_on_border",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Next_border_elt *",
+        "argsstring": "(const int &i) const",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "172",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_border_edge",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::is_border_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "187",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Next_border_elt *",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "194",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "second_incident",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::second_incident",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Next_border_elt *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "209",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_next_border_elt",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::set_next_border_elt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Next_border_elt &elt)",
+        "params": [
+          {
+            "type": "const Next_border_elt &",
+            "name": "elt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "216",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "inc_mark",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::inc_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "257",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vb2",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Rebind_TDS::Vb2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vb::template Rebind_TDS< TDS2 >::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "48",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Advancing_front_surface_reconstruction_vertex_base_3::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Advancing_front_surface_reconstruction_vertex_base_3< Traits, Vb2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h",
+        "line": "49",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AFSR::Auto_count": {
+    "kind": "struct",
+    "name": "CGAL::AFSR::Auto_count",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "i",
+        "qualified_name": "CGAL::AFSR::Auto_count::i",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2481",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Auto_count",
+        "qualified_name": "CGAL::AFSR::Auto_count::Auto_count",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2483",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::AFSR::Auto_count::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< T, std::size_t >",
+        "argsstring": "(const T &p) const",
+        "params": [
+          {
+            "type": "const T &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2487",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AFSR::Auto_count_cc": {
+    "kind": "struct",
+    "name": "CGAL::AFSR::Auto_count_cc",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "i",
+        "qualified_name": "CGAL::AFSR::Auto_count_cc::i",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2494",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "cc",
+        "qualified_name": "CGAL::AFSR::Auto_count_cc::cc",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CC",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2495",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Auto_count_cc",
+        "qualified_name": "CGAL::AFSR::Auto_count_cc::Auto_count_cc",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(CC cc)",
+        "params": [
+          {
+            "type": "CC",
+            "name": "cc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2497",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::AFSR::Auto_count_cc::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< T, std::size_t >",
+        "argsstring": "(const T2 &p) const",
+        "params": [
+          {
+            "type": "const T2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2502",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AFSR::Default_priority": {
+    "kind": "struct",
+    "name": "CGAL::AFSR::Default_priority",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::AFSR::Default_priority::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "(const AdvancingFront &adv, Cell_handle &c, const int &index) const",
+        "params": [
+          {
+            "type": "const AdvancingFront &",
+            "name": "adv",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "159",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "advancing_front_surface_reconstruction",
+        "qualified_name": "CGAL::advancing_front_surface_reconstruction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(PointInputIterator b, PointInputIterator e, Polyhedron_3< Kernel, Items, HDS, Alloc > &polyhedron, Priority priority, double radius_ratio_bound=5, double beta=0.52)",
+        "params": [
+          {
+            "type": "PointInputIterator",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointInputIterator",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polyhedron_3< Kernel, Items, HDS, Alloc > &",
+            "name": "polyhedron",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Priority",
+            "name": "priority",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "radius_ratio_bound",
+            "default": "5",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "beta",
+            "default": "0.52",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2620",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "advancing_front_surface_reconstruction",
+        "qualified_name": "CGAL::advancing_front_surface_reconstruction",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(PointInputIterator b, PointInputIterator e, Polyhedron_3< Kernel, Items, HDS, Alloc > &polyhedron, double radius_ratio_bound=5, double beta=0.52)",
+        "params": [
+          {
+            "type": "PointInputIterator",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointInputIterator",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polyhedron_3< Kernel, Items, HDS, Alloc > &",
+            "name": "polyhedron",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "radius_ratio_bound",
+            "default": "5",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "beta",
+            "default": "0.52",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Advancing_front_surface_reconstruction.h",
+        "line": "2651",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::AFSR": {
+    "kind": "namespace",
+    "name": "CGAL::AFSR",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::cpp98": {
+    "kind": "namespace",
+    "name": "CGAL::cpp98",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,2660 @@
+{
+  "CGAL::Linear_program_from_iterators": {
+    "kind": "class",
+    "name": "CGAL::Linear_program_from_iterators",
+    "brief": "An object of class Linear_program_from_iterators describes a linear program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpl$ is an $ n$ -dimensional vector of lower bounds for $ \\qpx$ , where $ l_j\\in\\mathbb{R}\\cup\\{-\\infty\\}$ for all $ j$ $ \\qpu$ is an $ n$ -dimensional vector of upper bounds for $ \\qpx$ , where $ u_j\\in\\mathbb{R}\\cup\\{\\infty\\}$ for all $ j$ $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. This class is simply a wrapper for existing iterators, and it does not copy the program data. It frequently happens that all values in one of the vectors from above are the same, for example if the system $ Ax\\qprel b$ is actually a system of equations $ Ax=b$ . To get an iterator over such a vector, it is not necessary to store multiple copies of the value in some container; an instance of the class Const_oneset_iterator<T> , constructed from the value in question, does the job more efficiently. Is model of QuadraticProgram LinearProgram Example QP_solver/first_lp_from_iterators.cpp The following example for the simpler model Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it> should give you a flavor of the use of this model in practice. QP_solver/solve_convex_hull_containment_lp.h QP_solver/convex_hull_containment.cpp LinearProgram Quadratic_program <NT> Quadratic_program_from_mps <NT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Linear_program_from_iterators",
+        "qualified_name": "CGAL::Linear_program_from_iterators::Linear_program_from_iterators",
+        "brief": "constructs lp from given random-access iterators and the constant c0 .",
+        "detailed": "The passed iterators are merely stored, no copying of the program data takes place. How these iterators are supposed to encode the linear program is described in LinearProgram .",
+        "return_type": "",
+        "argsstring": "(int n, int m, const A_it &a, const B_it &b, const R_it &r, const FL_it &fl, const L_it &l, const FU_it &fu, const U_it &u, const C_it &c, const std::iterator_traits< C_it >value_type &c0=0)",
+        "params": [
+          {
+            "type": "int",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const A_it &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const B_it &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const R_it &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FL_it &",
+            "name": "fl",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const L_it &",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FU_it &",
+            "name": "fu",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const U_it &",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const C_it &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::iterator_traits< C_it >value_type &",
+            "name": "c0",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "76",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Nonnegative_linear_program_from_iterators": {
+    "kind": "class",
+    "name": "CGAL::Nonnegative_linear_program_from_iterators",
+    "brief": "An object of class Nonnegative_linear_program_from_iterators describes a linear program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n&\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpx \\geq 0\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. This class is simply a wrapper for existing iterators, and it does not copy the program data. It frequently happens that all values in one of the vectors from above are the same, for example if the system $ Ax\\qprel b$ is actually a system of equations $ Ax=b$ . To get an iterator over such a vector, it is not necessary to store multiple copies of the value in some container; an instance of the class Const_oneset_iterator<T> , constructed from the value in question, does the job more efficiently. Is model of QuadraticProgram LinearProgram NonnegativeQuadraticProgram NonnegativeLinearProgram Example QP_solver/first_nonnegative_lp_from_iterators.cpp QP_solver/solve_convex_hull_containment_lp.h QP_solver/convex_hull_containment.cpp NonnegativeLinearProgram Quadratic_program <NT> Quadratic_program_from_mps <NT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Nonnegative_linear_program_from_iterators",
+        "qualified_name": "CGAL::Nonnegative_linear_program_from_iterators::Nonnegative_linear_program_from_iterators",
+        "brief": "constructs lp from given random-access iterators and the constant c0 .",
+        "detailed": "The passed iterators are merely stored, no copying of the program data takes place. How these iterators are supposed to encode the nonnegative linear program is described in NonnegativeLinearProgram .",
+        "return_type": "",
+        "argsstring": "(int n, int m, const A_it &a, const B_it &b, const R_it &r, const C_it &c, const std::iterator_traits< C_it >value_type &c0=0)",
+        "params": [
+          {
+            "type": "int",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const A_it &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const B_it &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const R_it &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const C_it &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::iterator_traits< C_it >value_type &",
+            "name": "c0",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "326",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Nonnegative_quadratic_program_from_iterators": {
+    "kind": "class",
+    "name": "CGAL::Nonnegative_quadratic_program_from_iterators",
+    "brief": "An object of class Nonnegative_quadratic_program_from_iterators describes a convex quadratic program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpx \\geq 0\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ D$ is a symmetric positive-semidefinite $ n\\times n$ matrix (the quadratic objective function), $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. This class is simply a wrapper for existing iterators, and it does not copy the program data. It frequently happens that all values in one of the vectors from above are the same, for example if the system $ Ax\\qprel b$ is actually a system of equations $ Ax=b$ . To get an iterator over such a vector, it is not necessary to store multiple copies of the value in some container; an instance of the class Const_oneset_iterator<T> , constructed from the value in question, does the job more efficiently. Is model of QuadraticProgram NonnegativeQuadraticProgram Example QP_solver/first_nonnegative_qp_from_iterators.cpp The following example for the simpler model Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it> should give you a flavor of the use of this model in practice. QP_solver/solve_convex_hull_containment_lp.h QP_solver/convex_hull_containment.cpp NonnegativeQuadraticProgram Quadratic_program <NT> Quadratic_program_from_mps <NT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Nonnegative_quadratic_program_from_iterators",
+        "qualified_name": "CGAL::Nonnegative_quadratic_program_from_iterators::Nonnegative_quadratic_program_from_iterators",
+        "brief": "constructs qp from given random-access iterators and the constant c0 .",
+        "detailed": "The passed iterators are merely stored, no copying of the program data takes place. How these iterators are supposed to encode the nonnegative quadratic program is described in NonnegativeQuadraticProgram .",
+        "return_type": "",
+        "argsstring": "(int n, int m, const A_it &a, const B_it &b, const R_it &r, const D_it &d, const C_it &c, const std::iterator_traits< C_it >value_type &c0=0)",
+        "params": [
+          {
+            "type": "int",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const A_it &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const B_it &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const R_it &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const D_it &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const C_it &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::iterator_traits< C_it >value_type &",
+            "name": "c0",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "408",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Quadratic_program": {
+    "kind": "class",
+    "name": "CGAL::Quadratic_program",
+    "brief": "An object of class Quadratic_program describes a convex quadratic program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpl$ is an $ n$ -dimensional vector of lower bounds for $ \\qpx$ , where $ l_j\\in\\mathbb{R}\\cup\\{-\\infty\\}$ for all $ j$ $ \\qpu$ is an $ n$ -dimensional vector of upper bounds for $ \\qpx$ , where $ u_j\\in\\mathbb{R}\\cup\\{\\infty\\}$ for all $ j$ $ D$ is a symmetric positive-semidefinite $ n\\times n$ matrix (the quadratic objective function), $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. If $ D=0$ , the program is a linear program; if the variable bounds are $ x\\geq 0$ , we have a nonnegative program. This class allows you to build your program entry by entry, using the set-methods below. If you only need to wrap existing (random-access) iterators over your own data, then you may use any of the four models Quadratic_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> , Linear_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, C_it> , Nonnegative_quadratic_program_from_iterators <A_it, B_it, R_it, D_it, C_it> , and Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it> . If you want to read a quadratic program in MPSFormat from a stream, please use the model Quadratic_program_from_mps < NT > . Is model of QuadraticProgram LinearProgram NonnegativeQuadraticProgram NonnegativeLinearProgram Example QP_solver/first_qp.cpp QP_solver/first_lp.cpp QP_solver/first_nonnegative_qp.cpp QP_solver/first_nonnegative_lp.cpp QP_solver/invert_matrix.cpp Quadratic_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> Linear_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, C_it> Nonnegative_quadratic_program_from_iterators <A_it, B_it, R_it, D_it, C_it> Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it> Quadratic_program_from_mps < NT >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Quadratic_program::NT",
+        "brief": "The number type of the program entries.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "797",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Quadratic_program",
+        "qualified_name": "CGAL::Quadratic_program::Quadratic_program",
+        "brief": "constructs a quadratic program with no variables and no constraints, ready for data to be added.",
+        "detailed": "Unless relations are explicitly set, they will be of type default_r . Unless bounds are explicitly set, they will be as specified by default_fl (finite lower bound?), default_l (lower bound value if lower bound is finite), default_fu (finite upper bound?), and default_l (upper bound value if upper bound is finite). If all parameters take their default values, we thus get equality constraints and bounds $ x\\geq0$ by default. Numerical entries that are not explicitly set will default to $ 0$ . if default_fl == default_fu == true , then default_l <= default_u .",
+        "return_type": "",
+        "argsstring": "(CGAL::Comparison_result default_r=CGAL::EQUAL, bool default_fl=true, const NT &default_l=0, bool default_fu=false, const NT &default_u=0)",
+        "params": [
+          {
+            "type": "CGAL::Comparison_result",
+            "name": "default_r",
+            "default": "CGAL::EQUAL",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "default_fl",
+            "default": "true",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "default_l",
+            "default": "0",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "default_fu",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "default_u",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "816",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "is_linear",
+        "qualified_name": "CGAL::Quadratic_program::is_linear",
+        "brief": "returns true if and only if qp is a linear program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "832",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_nonnegative",
+        "qualified_name": "CGAL::Quadratic_program::is_nonnegative",
+        "brief": "returns true if and only if qp is a nonnegative program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "838",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_a",
+        "qualified_name": "CGAL::Quadratic_program::set_a",
+        "brief": "sets the entry $ A_{ij}$ in column $ j$ and row $ i$ of the constraint matrix $ A$ of qp to val .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, int i, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "846",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_b",
+        "qualified_name": "CGAL::Quadratic_program::set_b",
+        "brief": "sets the entry $ b_i$ of qp to val .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int i, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "853",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_r",
+        "qualified_name": "CGAL::Quadratic_program::set_r",
+        "brief": "sets the entry $ \\qprel_i$ of qp to rel .",
+        "detailed": "CGAL::SMALLER means that the $ i$ -th constraint is of type \"\\f$ \\leq\\f$\", CGAL::EQUAL means \"\\f$ =\\f$\", and CGAL::LARGER encodes \"\\f$ \\geq\\f$\". An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int i, CGAL::Comparison_result rel)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CGAL::Comparison_result",
+            "name": "rel",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "861",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_l",
+        "qualified_name": "CGAL::Quadratic_program::set_l",
+        "brief": "if is_finite , this sets the entry $ l_j$ of qp to val , otherwise it sets $ l_j$ to $ -\\infty$ .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, bool is_finite, const NT &val=NT(0))",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "is_finite",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "NT (0)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "868",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_u",
+        "qualified_name": "CGAL::Quadratic_program::set_u",
+        "brief": "if is_finite , this sets the entry $ u_j$ of qp to val , otherwise it sets $ u_j$ to $ \\infty$ .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, bool is_finite, const NT &val=NT(0))",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "is_finite",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "NT (0)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "875",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_c",
+        "qualified_name": "CGAL::Quadratic_program::set_c",
+        "brief": "sets the entry $ c_j$ of qp to val .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "882",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_c0",
+        "qualified_name": "CGAL::Quadratic_program::set_c0",
+        "brief": "sets the entry $ c_0$ of qp to val .",
+        "detailed": "An existing entry is overwritten.",
+        "return_type": "void",
+        "argsstring": "(const NT &val)",
+        "params": [
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "888",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_d",
+        "qualified_name": "CGAL::Quadratic_program::set_d",
+        "brief": "sets the entries $ 2D_{ij}$ and $ 2D_{ji}$ of qp to val .",
+        "detailed": "Existing entries are overwritten. qp is enlarged if necessary to accommodate these entries. j <= i",
+        "return_type": "void",
+        "argsstring": "(int i, int j, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "896",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Quadratic_program_from_iterators": {
+    "kind": "class",
+    "name": "CGAL::Quadratic_program_from_iterators",
+    "brief": "An object of class Quadratic_program_from_iterators describes a convex quadratic program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpl$ is an $ n$ -dimensional vector of lower bounds for $ \\qpx$ , where $ l_j\\in\\mathbb{R}\\cup\\{-\\infty\\}$ for all $ j$ $ \\qpu$ is an $ n$ -dimensional vector of upper bounds for $ \\qpx$ , where $ u_j\\in\\mathbb{R}\\cup\\{\\infty\\}$ for all $ j$ $ D$ is a symmetric positive-semidefinite $ n\\times n$ matrix (the quadratic objective function), $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. This class is simply a wrapper for existing iterators, and it does not copy the program data. It frequently happens that all values in one of the vectors from above are the same, for example if the system $ Ax\\qprel b$ is actually a system of equations $ Ax=b$ . To get an iterator over such a vector, it is not necessary to store multiple copies of the value in some container; an instance of the class Const_oneset_iterator<T> , constructed from the value in question, does the job more efficiently. Is model of QuadraticProgram Example QP_solver/first_qp_from_iterators.cpp The following example for the simpler model Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it> should give you a flavor of the use of this model in practice. QP_solver/solve_convex_hull_containment_lp.h QP_solver/convex_hull_containment.cpp QuadraticProgram Quadratic_program <NT> Quadratic_program_from_mps <NT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Quadratic_program_from_iterators",
+        "qualified_name": "CGAL::Quadratic_program_from_iterators::Quadratic_program_from_iterators",
+        "brief": "constructs qp from given random-access iterators and the constant c0 .",
+        "detailed": "The passed iterators are merely stored, no copying of the program data takes place. How these iterators are supposed to encode the quadratic program is described in QuadraticProgram .",
+        "return_type": "",
+        "argsstring": "(int n, int m, const A_it &a, const B_it &b, const R_it &r, const FL_it &fl, const L_it &l, const FU_it &fu, const U_it &u, const D_it &d, const C_it &c, const std::iterator_traits< C_it >value_type &c0=0)",
+        "params": [
+          {
+            "type": "int",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const A_it &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const B_it &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const R_it &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FL_it &",
+            "name": "fl",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const L_it &",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FU_it &",
+            "name": "fu",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const U_it &",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const D_it &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const C_it &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::iterator_traits< C_it >value_type &",
+            "name": "c0",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "496",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Quadratic_program_from_mps": {
+    "kind": "class",
+    "name": "CGAL::Quadratic_program_from_mps",
+    "brief": "An object of class Quadratic_program_from_mps describes a convex quadratic program of the general form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpl$ is an $ n$ -dimensional vector of lower bounds for $ \\qpx$ , where $ l_j\\in\\mathbb{R}\\cup\\{-\\infty\\}$ for all $ j$ $ \\qpu$ is an $ n$ -dimensional vector of upper bounds for $ \\qpx$ , where $ u_j\\in\\mathbb{R}\\cup\\{\\infty\\}$ for all $ j$ $ D$ is a symmetric positive-semidefinite $ n\\times n$ matrix (the quadratic objective function), $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. If $ D=0$ , the program is a linear program; if the variable bounds are $ x\\geq 0$ , we have a nonnegative program. The program data are read from an input stream in MPSFormat . This is a commonly used format for encoding linear and quadratic programs that is understood by many solvers. All values are expected to be readable into type NT . The constructed program can be further manipulated by using the set-methods below. Is model of QuadraticProgram LinearProgram NonnegativeQuadraticProgram NonnegativeLinearProgram Example QP_solver/first_qp_from_mps.cpp QP_solver/first_lp_from_mps.cpp QP_solver/first_nonnegative_qp_from_mps.cpp QP_solver/first_nonnegative_lp_from_mps.cpp Quadratic_program < NT > Quadratic_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> Linear_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, C_it> Nonnegative_quadratic_program_from_iterators <A_it, B_it, R_it, D_it, C_it> Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::NT",
+        "brief": "The number type of the program entries.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "587",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Quadratic_program_from_mps",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::Quadratic_program_from_mps",
+        "brief": "reads qp from the input stream in .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(std::istream &in)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "in",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "597",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::is_valid",
+        "brief": "returns true if and only if an MPS-encoded quadratic program could be extracted from the input stream.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "608",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_error",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::get_error",
+        "brief": "if ! qp``. is_valid() , this method returns an error message explaining why the input does not conform to the MPSFormat .",
+        "detailed": "",
+        "return_type": "const std::string &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "615",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "variable_name_by_index",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::variable_name_by_index",
+        "brief": "returns the name of the $ j$ -th variable.",
+        "detailed": "$ j$ must not refer to a variable that has been added later, using one of the set methods below.",
+        "return_type": "const std::string &",
+        "argsstring": "(int j) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "620",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "variable_index_by_name",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::variable_index_by_name",
+        "brief": "returns the index of the variable with name name .",
+        "detailed": "If there is no variable with this name, the result is $ -1$ .",
+        "return_type": "int",
+        "argsstring": "(const std::string &name) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "626",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "constraint_name_by_index",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::constraint_name_by_index",
+        "brief": "returns the name of the $ i$ -th constraint.",
+        "detailed": "$ i$ must not refer to a constraint that has been added later, using one of the set methods below.",
+        "return_type": "const std::string &",
+        "argsstring": "(int i) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "631",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "constraint_index_by_name",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::constraint_index_by_name",
+        "brief": "returns the index of the constraint with name name .",
+        "detailed": "If there is no constraint with this name, the result is $ -1$ .",
+        "return_type": "int",
+        "argsstring": "(const std::string &name) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "637",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_linear",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::is_linear",
+        "brief": "returns true if and only if qp is a linear program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "643",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_nonnegative",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::is_nonnegative",
+        "brief": "returns true if and only if qp is a nonnegative program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_models.h",
+        "line": "649",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_a",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_a",
+        "brief": "sets the entry $ A_{ij}$ in column $ j$ and row $ i$ of the constraint matrix $ A$ of qp to val .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, int i, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "657",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_b",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_b",
+        "brief": "sets the entry $ b_i$ of qp to val .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int i, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "664",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_r",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_r",
+        "brief": "sets the entry $ \\qprel_i$ of qp to rel .",
+        "detailed": "CGAL::SMALLER means that the $ i$ -th constraint is of type \"\\f$ \\leq\\f$\", CGAL::EQUAL means \"\\f$ =\\f$\", and CGAL::LARGER encodes \"\\f$ \\geq\\f$\". An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int i, CGAL::Comparison_result rel)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CGAL::Comparison_result",
+            "name": "rel",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "672",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_l",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_l",
+        "brief": "if is_finite , this sets the entry $ l_j$ of qp to val , otherwise it sets $ l_j$ to $ -\\infty$ .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, bool is_finite, const NT &val=NT(0))",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "is_finite",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "NT (0)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "679",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_u",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_u",
+        "brief": "if is_finite , this sets the entry $ u_j$ of qp to val , otherwise it sets $ u_j$ to $ \\infty$ .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, bool is_finite, const NT &val=NT(0))",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "is_finite",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "NT (0)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "686",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_c",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_c",
+        "brief": "sets the entry $ c_j$ of qp to val .",
+        "detailed": "An existing entry is overwritten. qp is enlarged if necessary to accommodate this entry.",
+        "return_type": "void",
+        "argsstring": "(int j, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "693",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_c0",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_c0",
+        "brief": "sets the entry $ c_0$ of qp to val .",
+        "detailed": "An existing entry is overwritten.",
+        "return_type": "void",
+        "argsstring": "(const NT &val)",
+        "params": [
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "699",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_d",
+        "qualified_name": "CGAL::Quadratic_program_from_mps::set_d",
+        "brief": "sets the entries $ 2D_{ij}$ and $ 2D_{ji}$ of qp to val .",
+        "detailed": "Existing entries are overwritten. qp is enlarged if necessary to accommodate these entries. j <= i",
+        "return_type": "void",
+        "argsstring": "(int i, int j, const NT &val)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NT &",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_models.h",
+        "line": "707",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Quadratic_program_options": {
+    "kind": "class",
+    "name": "CGAL::Quadratic_program_options",
+    "brief": "This is a class used for passing options to the linear and quadratic programming solvers.",
+    "detailed": "Currently, we support only options referring to the verbosity, the pricing strategy (see Quadratic_program_pricing_strategy ), the validation mode (see the Validity section of Quadratic_program_solution ) The idea is that this list grows in the future. Operations Here we just have set/get pairs for any option type. Quadratic_program_solution solve_quadratic_program solve_linear_program solve_nonnegative_quadratic_program solve_nonnegative_linear_program",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Quadratic_program_options",
+        "qualified_name": "CGAL::Quadratic_program_options::Quadratic_program_options",
+        "brief": "constructs an instance of Quadratic_program_options where all available options are at their defaults.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/QP_options.h",
+        "line": "40",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "set_verbosity",
+        "qualified_name": "CGAL::Quadratic_program_options::set_verbosity",
+        "brief": "sets the verbosity of the solver to the value verbosity when options is passed to any of the four solution functions.",
+        "detailed": "The provided value must be a number between $ 0$ and $ 5$ . Verbosity $ 0$ is the default and results in the solver running silently. Verbosity $ 1$ prints a short summary of every iteration. Higher verbosity values print more information about the solution process, but these are mainly for debugging purposes and have no effect if you compile with CGAL_QP_NO_ASSERTIONS or NDEBUG .",
+        "return_type": "void",
+        "argsstring": "(int verbosity)",
+        "params": [
+          {
+            "type": "int",
+            "name": "verbosity",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_options.h",
+        "line": "57",
+        "section": "Verbosity"
+      },
+      {
+        "kind": "function",
+        "name": "get_verbosity",
+        "qualified_name": "CGAL::Quadratic_program_options::get_verbosity",
+        "brief": "returns the verbosity level of options .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_options.h",
+        "line": "62",
+        "section": "Verbosity"
+      },
+      {
+        "kind": "function",
+        "name": "set_pricing_strategy",
+        "qualified_name": "CGAL::Quadratic_program_options::set_pricing_strategy",
+        "brief": "sets the pricing strategy of the solver to the value pricing_strategy when options is passed to any of the four solution functions.",
+        "detailed": "The pricing strategy controls how the solver proceeds from any intermediate solution. For the available strategies and their behavior, see the documentation of the class Quadratic_program_pricing_strategy .",
+        "return_type": "void",
+        "argsstring": "(Quadratic_program_pricing_strategy pricing_strategy)",
+        "params": [
+          {
+            "type": "Quadratic_program_pricing_strategy",
+            "name": "pricing_strategy",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_options.h",
+        "line": "76",
+        "section": "Pricing strategy"
+      },
+      {
+        "kind": "function",
+        "name": "get_pricing_strategy",
+        "qualified_name": "CGAL::Quadratic_program_options::get_pricing_strategy",
+        "brief": "returns the pricing strategy of options .",
+        "detailed": "",
+        "return_type": "Quadratic_program_pricing_strategy",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_options.h",
+        "line": "82",
+        "section": "Pricing strategy"
+      },
+      {
+        "kind": "function",
+        "name": "set_auto_validation",
+        "qualified_name": "CGAL::Quadratic_program_options::set_auto_validation",
+        "brief": "sets the automatic validation mode of the solver to the value validate .",
+        "detailed": "The default is false . By providing value true you can tell the solver to automatically check whether the program has correctly been solved, see the Validity section of the class Quadratic_program_solution .",
+        "return_type": "void",
+        "argsstring": "(bool validate)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "validate",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_options.h",
+        "line": "96",
+        "section": "Validation mode"
+      },
+      {
+        "kind": "function",
+        "name": "get_auto_validation",
+        "qualified_name": "CGAL::Quadratic_program_options::get_auto_validation",
+        "brief": "returns the validation mode of options .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_options.h",
+        "line": "101",
+        "section": "Validation mode"
+      }
+    ]
+  },
+  "CGAL::Quadratic_program_solution": {
+    "kind": "class",
+    "name": "CGAL::Quadratic_program_solution",
+    "brief": "An object of class Quadratic_program_solution represents the solution of a linear or convex quadratic program of the general form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . If $ D=0$ , the program is a linear program; if the variable bounds are $ \\qpx\\geq 0$ , we have a nonnegative program. Objects of type Quadratic_program_solution are returned by any of the four functions solve_quadratic_program , solve_linear_program , solve_nonnegative_quadratic_program , and solve_nonnegative_linear_program . Example QP_solver/first_qp.cpp Terminology If there is no $ \\qpx$ that satisfies all the (in)equalities, the program is called infeasible , otherwise, it is feasible , and any $ \\qpx$ that satisfies all (in)equalities is called a feasible solution . If the objective function value becomes arbitrarily small over the feasible region (the set of feasible solutions), the program is called unbounded , and bounded otherwise. Any program that is both feasible and bounded has at least one feasible solution $ \\qpx^*$ whose objective function value is not larger than that of any other feasible solution. This is called an optimal solution . Every convex quadratic program (even if it is infeasible or unbounded) has a 'solution' in form of an object of the class Quadratic_program_solution . The program concepts QuadraticProgram LinearProgram NonnegativeQuadraticProgram NonnegativeLinearProgram and the functions that compute objects of class Quadratic_program_solution from models of these concepts: solve_quadratic_program solve_linear_program solve_nonnegative_quadratic_program solve_nonnegative_linear_program",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "ET",
+        "qualified_name": "CGAL::Quadratic_program_solution::ET",
+        "brief": "The exact number type that was used to solve the program.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Variable_value_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Variable_value_iterator",
+        "brief": "An iterator type with value type Quotient< ET > to go over the values of the variables in the solution.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Variable_numerator_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Variable_numerator_iterator",
+        "brief": "An iterator type with value type ET to go over the numerators of the variable values with respect to a common denominator.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "88",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Index_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Index_iterator",
+        "brief": "An iterator type with value type int to go over the indices of the basic variables and the basic constraints.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "94",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Optimality_certificate_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Optimality_certificate_iterator",
+        "brief": "An iterator type with value type Quotient< ET > to go over an $ m$ -vector $ \\qplambda$ that proves optimality of the solution.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "101",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Optimality_certificate_numerator_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Optimality_certificate_numerator_iterator",
+        "brief": "An iterator type with value type ET to go over the numerators of the vector $ \\qplambda$ with respect to a common denominator.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "108",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Infeasibility_certificate_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Infeasibility_certificate_iterator",
+        "brief": "An iterator type with value type ET to go over an $ m$ -vector $ \\qplambda$ that proves infeasibility of the solution.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "115",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Unboundedness_certificate_iterator",
+        "qualified_name": "CGAL::Quadratic_program_solution::Unboundedness_certificate_iterator",
+        "brief": "An iterator type with value type ET to go over an $ n$ -vector $ \\qpw$ that proves unboundedness of the solution.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "122",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Quadratic_program_solution",
+        "qualified_name": "CGAL::Quadratic_program_solution::Quadratic_program_solution",
+        "brief": "constructs a void instance of Quadratic_program_solution that is associated to no program.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "140",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "is_void",
+        "qualified_name": "CGAL::Quadratic_program_solution::is_void",
+        "brief": "returns true iff sol is not associated to a program.",
+        "detailed": "The condition ! sol.is_void() is a precondition for all access methods below.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "152",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_optimal",
+        "qualified_name": "CGAL::Quadratic_program_solution::is_optimal",
+        "brief": "returns true iff sol is an optimal solution of the associated program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "163",
+        "section": "Solution status"
+      },
+      {
+        "kind": "function",
+        "name": "is_infeasible",
+        "qualified_name": "CGAL::Quadratic_program_solution::is_infeasible",
+        "brief": "returns true iff the associated program is infeasible.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "169",
+        "section": "Solution status"
+      },
+      {
+        "kind": "function",
+        "name": "is_unbounded",
+        "qualified_name": "CGAL::Quadratic_program_solution::is_unbounded",
+        "brief": "returns true iff the associated program is unbounded.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "175",
+        "section": "Solution status"
+      },
+      {
+        "kind": "function",
+        "name": "status",
+        "qualified_name": "CGAL::Quadratic_program_solution::status",
+        "brief": "returns the status of the solution; this is one of the values QP_OPTIMAL , QP_INFEASIBLE , and QP_UNBOUNDED , depending on whether the program associated to sol has an optimal solution, is infeasible, or is unbounded.",
+        "detailed": "",
+        "return_type": "Quadratic_program_status",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "183",
+        "section": "Solution status"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_iterations",
+        "qualified_name": "CGAL::Quadratic_program_solution::number_of_iterations",
+        "brief": "returns the number of iterations that it took to solve the program associated to sol .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "189",
+        "section": "Solution status"
+      },
+      {
+        "kind": "function",
+        "name": "objective_value",
+        "qualified_name": "CGAL::Quadratic_program_solution::objective_value",
+        "brief": "returns the objective function value of sol .",
+        "detailed": "",
+        "return_type": "Quotient< ET >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "201",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "objective_value_numerator",
+        "qualified_name": "CGAL::Quadratic_program_solution::objective_value_numerator",
+        "brief": "returns the numerator of the objective function value of sol .",
+        "detailed": "",
+        "return_type": "ET",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "207",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "objective_value_denominator",
+        "qualified_name": "CGAL::Quadratic_program_solution::objective_value_denominator",
+        "brief": "returns the denominator of the objective function value of sol .",
+        "detailed": "",
+        "return_type": "ET",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "213",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "variable_values_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::variable_values_begin",
+        "brief": "returns a random-access iterator over the values of the variables in sol .",
+        "detailed": "The value type is Quotient< ET > , and the valid iterator range has length $ n$ .",
+        "return_type": "Variable_value_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "221",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "variable_values_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::variable_values_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Variable_value_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "227",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "variable_numerators_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::variable_numerators_begin",
+        "brief": "returns a random-access iterator it over the values of the variables in sol , with respect to a common denominator of all variables.",
+        "detailed": "The value type is ET , and the valid iterator range has length $ n$ .",
+        "return_type": "Variable_numerator_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "235",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "variable_numerators_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::variable_numerators_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Variable_numerator_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "240",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "variables_common_denominator",
+        "qualified_name": "CGAL::Quadratic_program_solution::variables_common_denominator",
+        "brief": "returns the common denominator of the variable values as referred to by the previous two methods.",
+        "detailed": "",
+        "return_type": "const ET &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "246",
+        "section": "Solution values"
+      },
+      {
+        "kind": "function",
+        "name": "basic_variable_indices_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::basic_variable_indices_begin",
+        "brief": "returns a random access iterator over the indices of the basic variables.",
+        "detailed": "The value type is int . It is guaranteed that any variable that is not basic in sol attains one of its bounds. In particular, if the bounds are of type $ \\qpx\\geq0$ , all non-basic variables have value $ 0$ .",
+        "return_type": "Index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "265",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "basic_variable_indices_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::basic_variable_indices_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "270",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_basic_variables",
+        "qualified_name": "CGAL::Quadratic_program_solution::number_of_basic_variables",
+        "brief": "returns the number of basic variables, equivalently the length of the range determined by the previous two iterators.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "276",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "basic_constraint_indices_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::basic_constraint_indices_begin",
+        "brief": "returns a random access iterator over the indices of the basic constraints in the system $ A\\qpx\\qprel\\qpb$ .",
+        "detailed": "The value type is int . It is guaranteed that any basic constraint is satisfied with equality. In particular, if the system is of type $ A\\qpx=\\qpb$ , all constraints are basic.",
+        "return_type": "Index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "285",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "basic_constraint_indices_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::basic_constraint_indices_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Index_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "290",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_basic_constraints",
+        "qualified_name": "CGAL::Quadratic_program_solution::number_of_basic_constraints",
+        "brief": "returns the number of basic constraint, equivalently the length of the range determined by the previous two iterators.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "296",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Quadratic_program_solution::operator<<",
+        "brief": "writes the status of sol to the stream out .",
+        "detailed": "In case the status is QP_OPTIMAL , the optimal objective value and the values of the variables at the optimal solution are output as well. For more detailed information about the solution (like basic variables/constraints) please use the dedicated methods of Quadratic_program_solution < ET > .",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &out, const Quadratic_program_solution< ET > &sol)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Quadratic_program_solution < ET > &",
+            "name": "sol",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_solution.h",
+        "line": "307",
+        "section": "Basic variables and constraints"
+      },
+      {
+        "kind": "function",
+        "name": "solves_quadratic_program",
+        "qualified_name": "CGAL::Quadratic_program_solution::solves_quadratic_program",
+        "brief": "returns true iff sol solves the quadratic program qp .",
+        "detailed": "If the result is false , you can get a message that describes the problem, through the method get_error() .",
+        "return_type": "bool",
+        "argsstring": "(const QuadraticProgram &qp)",
+        "params": [
+          {
+            "type": "const QuadraticProgram &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_solution.h",
+        "line": "333",
+        "section": "Validity"
+      },
+      {
+        "kind": "function",
+        "name": "solves_linear_program",
+        "qualified_name": "CGAL::Quadratic_program_solution::solves_linear_program",
+        "brief": "returns true iff sol solves the linear program lp .",
+        "detailed": "If the result is false , you can get a message that describes the problem, through the method get_error() .",
+        "return_type": "bool",
+        "argsstring": "(const LinearProgram &lp)",
+        "params": [
+          {
+            "type": "const LinearProgram &",
+            "name": "lp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_solution.h",
+        "line": "342",
+        "section": "Validity"
+      },
+      {
+        "kind": "function",
+        "name": "solves_nonnegative_quadratic_program",
+        "qualified_name": "CGAL::Quadratic_program_solution::solves_nonnegative_quadratic_program",
+        "brief": "returns true iff sol solves the nonnegative quadratic program qp .",
+        "detailed": "If the result is false , you can get a message that describes the problem, through the method get_error() .",
+        "return_type": "bool",
+        "argsstring": "(const NonnegativeQuadraticProgram &qp)",
+        "params": [
+          {
+            "type": "const NonnegativeQuadraticProgram &",
+            "name": "qp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_solution.h",
+        "line": "352",
+        "section": "Validity"
+      },
+      {
+        "kind": "function",
+        "name": "solves_nonnegative_linear_program",
+        "qualified_name": "CGAL::Quadratic_program_solution::solves_nonnegative_linear_program",
+        "brief": "returns true iff sol solves the nonnegative linear program lp .",
+        "detailed": "If the result is false , you can get a message that describes the problem, through the method get_error() .",
+        "return_type": "bool",
+        "argsstring": "(const NonnegativeLinearProgram &lp)",
+        "params": [
+          {
+            "type": "const NonnegativeLinearProgram &",
+            "name": "lp",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/QP_solution.h",
+        "line": "361",
+        "section": "Validity"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Quadratic_program_solution::is_valid",
+        "brief": "returns false iff the validation through one of the previous four functions has failed.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "368",
+        "section": "Validity"
+      },
+      {
+        "kind": "function",
+        "name": "get_error",
+        "qualified_name": "CGAL::Quadratic_program_solution::get_error",
+        "brief": "returns an error message in case any of the previous four validation functions has returned false .",
+        "detailed": "",
+        "return_type": "const std::string &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "374",
+        "section": "Validity"
+      },
+      {
+        "kind": "function",
+        "name": "optimality_certifcate_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::optimality_certifcate_begin",
+        "brief": "returns a random access iterator over the optimality certificate $ \\qplambda$ as given in Lemma 1, with respect to the solution $ \\qpx^*$ obtained from sol.variable_values_begin() .",
+        "detailed": "The value type is Quotient< ET > , and the valid iterator range has length $ m$ . sol.is_optimal() . Lemma 1(optimality certificate): A feasible $ n$ -vector $\\qpx^*$ is an optimal solution of (QP) if an $ m$ -vector $ \\qplambda$ with the following properties exist. if the $ i$ -th constraint is of type $ \\leq$ ( $ \\geq$ , respectively), then $\\lambda_i\\geq 0$ ( $\\lambda_i\\leq 0$ , respectively). $\\qplambda^T(A\\qpx^*-\\qpb) = 0$ \\[  \\begin{array}{llll}\n  &&\\geq 0, & \\mbox{if $x^*_j = l_j < u_j$} \\\\\n  (\\qpc^T + \\qplambda^T A + 2{\\qpx^*}^TD)_j& \\quad  &= 0, & \\mbox{if $l_j < x^*_j < u_j$} \\\\\n  &&\\leq 0, & \\mbox{if $l_j < u_j = x^*_j$.}\n  \\end{array}\n\\] Proof: Let $\\qpx$ be any feasible solution. We need to prove that \\[\\qpc^T\\qpx + \\qpx^TD\\qpx \\geq \\qpc^T\\qpx^* + {\\qpx^*}^TD\\qpx^*.\\] For this, we argue as follows. \\[\\begin{array}{lcll}\n\\qpc^T\\qpx + 2{\\qpx^*}^TD\\qpx &\\geq& \\qpc^T\\qpx + 2{\\qpx^*}^TD\\qpx + \\qplambda^T(A\\qpx-\\qpb) &\n\\mbox{(by $A\\qpx\\qprel \\qpb$ and 1.)} \\\\\n                  &=& (\\qpc^T + \\qplambda^T A + 2{\\qpx^*}^TD)\\qpx - \\qplambda^Tb \\\\\n                  &\\geq& (\\qpc^T + \\qplambda^T A + 2{\\qpx^*}^TD)\\qpx^* - \\qplambda^Tb &\n\\mbox{(by $\\qpl\\leq \\qpx \\leq \\qpu$ and 3.)} \\\\\n                  &=& \\qpc^T\\qpx^* + 2{\\qpx^*}^TD\\qpx^* &\n\\mbox{(by 2.)}\n\\end{array}\n\\] After adding $\\qpx^TD\\qpx - \\qpx^TD\\qpx - {\\qpx^*}^TD\\qpx^* = -{\\qpx^*}^TD\\qpx^*$ to both sides of this inequality, we get \\[\\qpc^T\\qpx + \\qpx^TD\\qpx - (\\qpx-\\qpx^*)^TD(\\qpx-\\qpx^*) \\geq \\qpc^T\\qpx^* + {\\qpx^*}^TD\\qpx^*,\n\\] and since $D$ is positive semidefinite, we have $(\\qpx-\\qpx^*)^TD(\\qpx-\\qpx^*)\\geq 0$ and the lemma follows. QP_solver/optimality_certificate.cpp",
+        "return_type": "Optimality_certificate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "437",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "optimality_certificate_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::optimality_certificate_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "optimality_certifcate_begin()",
+        "return_type": "Optimality_certificate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "445",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "optimality_certifcate_numerators_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::optimality_certifcate_numerators_begin",
+        "brief": "returns a random access iterator over the numerator values of the optimality certificate $ \\qplambda$ , with respect to the common denominator returned by sol .",
+        "detailed": "variables_common_denominator() . The value type is ET , and the valid iterator range has length $ m$ . optimality_certifcate_begin()",
+        "return_type": "Optimality_certificate_numerator_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "456",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "optimality_certificate_numerators_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::optimality_certificate_numerators_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "optimality_certifcate_begin()",
+        "return_type": "Optimality_certificate_numerator_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "464",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "infeasibility_certificate_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::infeasibility_certificate_begin",
+        "brief": "returns a random access iterator over the infeasibility certificate $ \\qplambda$ as given in Lemma 2.",
+        "detailed": "The value type is ET , and the valid iterator range has length $ m$ . sol.is_infeasible() . Lemma 2 (infeasibility certificate): The program (QP) is infeasible if an $m$ -vector $\\qplambda$ with the following properties exist. if the $i$ -th constraint is of type $\\leq$ ( $\\geq$ , respectively), then $\\lambda_i\\geq 0$ ( $\\lambda_i\\leq 0$ , respectively). \\[\\begin{array}{llll}\n&&\\geq 0 & \\mbox{if $u_j=\\infty$} \\\\\n\\qplambda^T A_j &\\quad  \\\\\n&&\\leq 0 & \\mbox{if $l_j=-\\infty$}.\n\\end{array}\n\\] \\[\\qplambda^T\\qpb \\quad<\\quad \\ccSum{j: \\qplambda^TA_j <0}{}{ \\qplambda^TA_j u_j }\n\\quad+\\quad  \\ccSum{j: \\qplambda^TA_j >0}{}{ \\qplambda^TA_j l_j}.\\] Proof: Let us assume for the purpose of obtaining a contradiction that there is a feasible solution $\\qpx$ . Then we get \\[\\begin{array}{lcll}\n0 &\\geq& \\qplambda^T(A\\qpx -\\qpb) &  \\mbox{(by $A\\qpx\\qprel \\qpb$ and 1.)} \\\\\n  &=& \\ccSum{j: \\qplambda^TA_j <0}{}{ \\qplambda^TA_j x_j }\n\\quad+\\quad  \\ccSum{j: \\qplambda^TA_j >0}{}{ \\qplambda^TA_j x_j} - \\qplambda^T \\qpb \\\\\n  &\\geq& \\ccSum{j: \\qplambda^TA_j <0}{}{ \\qplambda^TA_j u_j }\n\\quad+\\quad  \\ccSum{j: \\qplambda^TA_j >0}{}{ \\qplambda^TA_j l_j} - \\qplambda^T \\qpb &\n\\mbox{(by $\\qpl\\leq \\qpx \\leq \\qpu$ and 2.)} \\\\\n  &>& 0 & \\mbox{(by 3.)},\n\\end{array}\n\\] and this is the desired contradiction $0>0$ . QP_solver/infeasibility_certificate.cpp",
+        "return_type": "Infeasibility_certificate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "510",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "infeasibility_certificate_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::infeasibility_certificate_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "infeasibility_certificate_begin()",
+        "return_type": "Infeasibility_certificate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "518",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "unboundedness_certificate_begin",
+        "qualified_name": "CGAL::Quadratic_program_solution::unboundedness_certificate_begin",
+        "brief": "returns a random access iterator over the unbounded direction $ \\qpw$ as given in Lemma 3,with respect to the solution $ \\qpx^*$ obtained from sol.variable_values_begin() .",
+        "detailed": "The value type is ET , and the valid iterator range has length $ n$ . sol.is_unbounded() . Lemma 3 (unboundedness certificate:) Let $\\qpx^*$ be a feasible solution of (QP). The program (QP) is unbounded if an $n$ -vector $\\qpw$ with the following properties exist. if the $i$ -th constraint is of type $\\leq$ ( $\\geq, =$ , respectively), then $(A\\qpw)_i\\leq 0$ ( $(A\\qpw)_i\\geq 0, (A\\qpw)_i=0$ , respectively). \\[\\begin{array}{llll}\n&&\\geq 0 & \\mbox{if $l_j$ is finite} \\\\\nw_j &\\quad  \\\\\n&&\\leq 0 & \\mbox{if $u_j$ is finite.}\n\\end{array}\n\\] $\\qpw^TD\\qpw=0$ and $(\\qpc^T+2{\\qpx^*}^TD)\\qpw<0$ . The vector $\\qpw$ is called an unbounded direction . Proof: For a real number $t$ , consider the vector $\\qpx(t):=\\qpx^*+t\\qpw$ . By 1. and 2., $\\qpx(t)$ is feasible for all $t\\geq 0$ . The objective function value of $\\qpx(t)$ is \\begin{eqnarray*}\\qpc^T \\qpx(t) + \\qpx(t)^TD \\qpx(t) &=&\n\\qpc^T\\qpx^* + t\\qpc^T\\qpw + {\\qpx^*}^TD\\qpx^* +  2t{\\qpx^*}^TD\\qpw + t^2 \\qpw^TD\\qpw  \\\\\n&=& \\qpc^T\\qpx^* + {\\qpx^*}^TD\\qpx^* + t(\\qpc^T + 2{\\qpx^*}^TD)\\qpw + t^2\\qpw^TD\\qpw.\n\\end{eqnarray*} By condition 3., this tends to $-\\infty$ for $t\\rightarrow\\infty$ , so the problem is indeed unbounded.",
+        "return_type": "Unboundedness_certificate_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "557",
+        "section": "Certificates"
+      },
+      {
+        "kind": "function",
+        "name": "unboundedness_certificate_end",
+        "qualified_name": "CGAL::Quadratic_program_solution::unboundedness_certificate_end",
+        "brief": "returns the corresponding past-the-end iterator.",
+        "detailed": "unboundedness_certificate_begin()",
+        "return_type": "Unboundedness_certificate_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/QP_solution.h",
+        "line": "565",
+        "section": "Certificates"
+      }
+    ]
+  },
+  "LinearProgram": {
+    "kind": "class",
+    "name": "LinearProgram",
+    "brief": "A model of LinearProgram describes a linear program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpl$ is an $ n$ -dimensional vector of lower bounds for $ \\qpx$ , where $ l_j\\in\\mathbb{R}\\cup\\{-\\infty\\}$ for all $ j$ $ \\qpu$ is an $ n$ -dimensional vector of upper bounds for $ \\qpx$ , where $ u_j\\in\\mathbb{R}\\cup\\{\\infty\\}$ for all $ j$ $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. The description is given by appropriate random-access iterators over the program data, see below. The program therefore comes in dense representation which includes zero entries. Has models CGAL::Quadratic_program <NT> CGAL::Quadratic_program_from_mps <NT> CGAL::Linear_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> and the other concepts QuadraticProgram NonnegativeQuadraticProgram NonnegativeLinearProgram",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "A_iterator",
+        "qualified_name": "LinearProgram::A_iterator",
+        "brief": "A random access iterator type to go columnwise over the constraint matrix $ A$ .",
+        "detailed": "The value type is a random access iterator type for an individual column that goes over the entries in that column.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "B_iterator",
+        "qualified_name": "LinearProgram::B_iterator",
+        "brief": "A random access iterator type to go over the entries of the right-hand side $ \\qpb$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "R_iterator",
+        "qualified_name": "LinearProgram::R_iterator",
+        "brief": "A random access iterator type to go over the relations $ \\qprel$ .",
+        "detailed": "The value type of R_iterator is CGAL::Comparison_result .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FL_iterator",
+        "qualified_name": "LinearProgram::FL_iterator",
+        "brief": "A random access iterator type to go over the existence (finiteness) of the lower bounds $ l_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The value type of FL_iterator is bool .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "84",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "L_iterator",
+        "qualified_name": "LinearProgram::L_iterator",
+        "brief": "A random access iterator type to go over the entries of the lower bound vector $ \\qpl$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "90",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "UL_iterator",
+        "qualified_name": "LinearProgram::UL_iterator",
+        "brief": "A random access iterator type to go over the existence (finiteness) of the upper bounds $ u_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The value type of UL_iterator is bool .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "U_iterator",
+        "qualified_name": "LinearProgram::U_iterator",
+        "brief": "A random access iterator type to go over the entries of the upper bound vector $ \\qpu$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "103",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "C_iterator",
+        "qualified_name": "LinearProgram::C_iterator",
+        "brief": "A random access iterator type to go over the entries of the linear objective function vector $ c$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "109",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "get_n",
+        "qualified_name": "LinearProgram::get_n",
+        "brief": "returns the number $ n$ of variables (number of columns of $ A$ ) in lp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "120",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_m",
+        "qualified_name": "LinearProgram::get_m",
+        "brief": "returns the number $ m$ of constraints (number of rows of $ A$ ) in lp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "126",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_a",
+        "qualified_name": "LinearProgram::get_a",
+        "brief": "returns an iterator over the columns of $ A$ .",
+        "detailed": "The corresponding past-the-end iterator is get_a() + get_n() . For $ j=0,\\ldots,n-1$ , *( get_a() +j) is a random access iterator for column $ j$ .",
+        "return_type": "A_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "134",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_b",
+        "qualified_name": "LinearProgram::get_b",
+        "brief": "returns an iterator over the entries of $ \\qpb$ .",
+        "detailed": "The corresponding past-the-end iterator is get_b() + get_m() .",
+        "return_type": "B_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "141",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_r",
+        "qualified_name": "LinearProgram::get_r",
+        "brief": "returns an iterator over the entries of $ \\qprel$ .",
+        "detailed": "The corresponding past-the-end iterator is get_r() + get_m() . The value CGAL::SMALLER stands for $ \\leq$ , CGAL::EQUAL stands for $ =$ , and CGAL::LARGER stands for $ \\geq$ .",
+        "return_type": "R_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "151",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_fl",
+        "qualified_name": "LinearProgram::get_fl",
+        "brief": "returns an iterator over the existence of the lower bounds $ l_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The corresponding past-the-end iterator is get_fl() + get_n() . If *( get_fl() +j) has value $ true$ , the variable $ x_j$ has a lower bound given by *( get_l() +j) , otherwise it has no lower bound.",
+        "return_type": "FL_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "160",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_l",
+        "qualified_name": "LinearProgram::get_l",
+        "brief": "returns an iterator over the entries of $ \\qpl$ .",
+        "detailed": "The corresponding past-the-end iterator is get_l() + get_n() . If *( get_fl() +j) has value $ false$ , the value *( get_l() +j) is not accessed. if both *( get_fl() +j) and *( get_fu() +j) have value $ true$ , then *( get_l() +j) <= *( get_u() +j) .",
+        "return_type": "L_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "169",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_fu",
+        "qualified_name": "LinearProgram::get_fu",
+        "brief": "returns an iterator over the existence of the upper bounds $ u_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The corresponding past-the-end iterator is get_fu() + get_n() . If *( get_fu() +j) has value $ true$ , the variable $ x_j$ has an upper bound given by *( get_u() +j) , otherwise it has no upper bound.",
+        "return_type": "FU_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "178",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_u",
+        "qualified_name": "LinearProgram::get_u",
+        "brief": "returns an iterator over the entries of $ \\qpu$ .",
+        "detailed": "The corresponding past-the-end iterator is get_u() + get_n() . If *( get_fu() +j) has value $ false$ , the value *( get_u() +j) is not accessed. if both *( get_fl() +j) and *( get_fu() +j) have value $ true$ , then *( get_l() +j) <= *( get_u() +j) .",
+        "return_type": "L_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "187",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c",
+        "qualified_name": "LinearProgram::get_c",
+        "brief": "returns an iterator over the entries of $ \\qpc$ .",
+        "detailed": "The corresponding past-the-end iterator is get_c() + get_n() .",
+        "return_type": "C_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "194",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c0",
+        "qualified_name": "LinearProgram::get_c0",
+        "brief": "returns the constant term $ c_0$ of the objective function.",
+        "detailed": "",
+        "return_type": "std::iterator_traits< C_iterator >::value_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/LinearProgram.h",
+        "line": "199",
+        "section": "Operations"
+      }
+    ]
+  },
+  "MPSFormat": {
+    "kind": "class",
+    "name": "MPSFormat",
+    "brief": "MPS is a commonly used file format for storing linear and quadratic programs according to the concepts QuadraticProgram , LinearProgram , NonnegativeQuadraticProgram , and NonnegativeLinearProgram , see also https://en.wikipedia.org/wiki/MPS_(format) .",
+    "detailed": "CGAL supports a large subset of this format, but there are MPS files around that we cannot read (for example, files that encode integrality constraints on the variables). Also, there might be some other MPS-based solvers that will not be able to read the MPS files written by CGAL, since we do not strictly adhere to the very rigid layout requirements of the original MPS format. Let's look at an example first. The quadratic program \\[\\begin{array}{lrcl}\n\\mbox{minimize} & x^2 + 4(y-4)^2 &(=& x^2 + 4y^2 - 32y + 64) \\\\\n\\mbox{subject to} & x + y &\\leq& 7 \\\\\n& -x + 2y &\\leq& 4 \\\\\n& x &\\geq& 0 \\\\\n& y &\\geq& 0 \\\\\n& y &\\leq& 4\n\\end{array}\n\\] has the following description in MPS format. NAME first_qp\nROWS\nN obj\nL c0\nL c1\nCOLUMNS\nx0 c0 1\nx0 c1 -1\nx1 obj -32\nx1 c0 1\nx1 c1 2\nRHS\nrhs obj -64\nrhs c0 7\nrhs c1 4\nBOUNDS\nUP BND x1 4\nQMATRIX\nx0 x0 2\nx1 x1 8 Here comes a semiformal description of the format in general. NAME Section This (mandatory) section consists of a single line starting with NAME . Everything starting from the first non-whitespace after that until the end of the line constitutes the name of the problem. ROWS Section In the (mandatory) ROW section, you find one line for every constraint, where the letter L indicates relation $ \\leq$ , letter G stands for $ \\geq$ , and E for $ =$ . In addition, there is a row for the linear objective function (indicated by letter N ). In that section, names are assigned to the constraints (here: c0, c1 ) and the objective function (here: obj ). An MPS file may encode several linear objective functions by using several rows starting with N , but we ignore all but the first. COLUMNS Section The (mandatory) COLUMNS section encodes the constraint matrix $ A$ and the linear objective function vector $ c$ . Every line consists of one or two sequences of three tokens $ j i val$ , where $ j$ is the name of a variable (here, we have variables x0,x1 ), $ i$ is the name of a constraint or the objective function, and $ val$ is the value $ A_{ij}$ (if $ i$ names a constraint), or $ c_j$ (if $ i$ names the linear objective function). Values for pairs $ (i,j)$ that are not specified in this section default to $ 0$ . Otherwise, for every pair $ (i,j)$ , the last specified value determines $ A_{ij}$ or $ c_j$ . RHS Section This (mandatory) section encodes the right-hand side vector $ b$ and the constant term $ c_0$ in the objective function. The first token in every line is an identifier (here: rhs ). An MPS file may encode several right-hand sides $ b$ by using several such identifiers, but we ignore all lines having an identifier different from that of the first line. The right-hand side identifier is succeeded by one or two sequences of tokens $ i val$ , where $ i$ names a constraint or the linear objective function, and $ val$ specifies the value $ b_i$ (if $ i$ names a constraint), or $ -c_0$ (if $ i$ names the linear objective function). Values that are not specified in this section default to $ 0$ . Otherwise, for every $ i$ , the last specified value determines $ b_{i}$ or $ -c_0$ . BOUNDS Section This (optional) section encodes the lower and upper bound vectors $ l$ and $ u$ for the variables. The default bounds for any variable $ x_j$ are $ 0\\leq x_j\\leq \\infty$ ; the BOUNDS section is used to override these defaults. In particular, if there is no BOUNDS section, the program is nonnegative and actually a model of the concept NonnegativeQuadraticProgram or NonnegativeLinearProgram . The first token in every line is succeeded by an (optional) identifier (here: BND ). An MPS file may encode several bound vectors $ l$ and $ u$ by using several such identifiers, but we ignore all lines having an identifier different from that of the first line. The first token $ t$ itself determines the type of the bound, and the token $ j$ after the bound identifier names the variable to which the bound applies In case of bound types FX , LO , and UP , there is another token $ val$ that specifies the bound value. Here is how bound type and value determine a bound for variable $ x_j$ . There may be several bound specifications for a single variable, and they are processed in order of appearance. bound type resulting bound FX $x_j = val$ ( $x_j$ becomes a fixed variable) LO $x_j \\geq val$ (upper bound remains unchanged) UP $x_j \\leq val$ (lower bound remains unchanged, except if $val<0$ ; then, a zero lower bound is reset to $-\\infty$ ) FR $-\\infty \\leq x_j\\leq\\infty$ (previous bounds are discarded) MI $x_j\\geq -\\infty$ (upper bound remains unchanged) PL $x_j\\leq \\infty$ (lower bound remains unchanged) QMATRIX / QUADOBJ / DMATRIX Section This (optional) section encodes the quadratic objective function matrix $ D$ . Every line is a sequence $ i j val$ of three tokens, where both $ i$ and $ j$ name variables, and $ val$ is the value $ 2D_{i,j}$ (in case of QMATRIX or QUADOBJ ), or $ D_{ij}$ (in case of DMATRIX ). In case of QMATRIX and DMATRIX , all nonzero entries must be specified: if there is a line $ i j val$ , then there must also be a line $ j i val$ , since $ D$ is required to be symmetric. In case of QUADOBJ , only the entries of $ 2D$ on or below the diagonal must be specified, entries above the diagonal are deduced from symmetry. It is not allowed to specify two or more different nonzero values for an unordered pair $ \\{i,j\\}$ . If this section is missing or does not contain nonzero values, the program is a model of the concept LinearProgram . Miscellaneous Our MPS format also supports an (optional) RANGES section, but we don't explain this here. CGAL::Quadratic_program_from_mps <NT>",
+    "members": []
+  },
+  "NonnegativeLinearProgram": {
+    "kind": "class",
+    "name": "NonnegativeLinearProgram",
+    "brief": "A model of NonnegativeLinearProgram describes a linear program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n&\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpx \\geq 0\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. The description is given by appropriate random-access iterators over the program data, see below. The program therefore comes in dense representation which includes zero entries. Has models CGAL::Quadratic_program <NT> CGAL::Quadratic_program_from_mps <NT> CGAL::Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> The value types of all iterator types (nested iterator types, respectively, for A_iterator ) must be convertible to some common IntegralDomain ET . Has models CGAL::Quadratic_program <NT> CGAL::Quadratic_program_from_mps <NT> CGAL::Nonnegative_linear_program_from_iterators <A_it, B_it, R_it, C_it> QuadraticProgram LinearProgram NonnegativeQuadraticProgram",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "A_iterator",
+        "qualified_name": "NonnegativeLinearProgram::A_iterator",
+        "brief": "A random access iterator type to go columnwise over the constraint matrix $ A$ .",
+        "detailed": "The value type is a random access iterator type for an individual column that goes over the entries in that column.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "B_iterator",
+        "qualified_name": "NonnegativeLinearProgram::B_iterator",
+        "brief": "A random access iterator type to go over the entries of the right-hand side $ \\qpb$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "R_iterator",
+        "qualified_name": "NonnegativeLinearProgram::R_iterator",
+        "brief": "A random access iterator type to go over the relations $ \\qprel$ .",
+        "detailed": "The value type of R_iterator is CGAL::Comparison_result .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "79",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "C_iterator",
+        "qualified_name": "NonnegativeLinearProgram::C_iterator",
+        "brief": "A random access iterator type to go over the entries of the linear objective function vector $ c$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "85",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "get_n",
+        "qualified_name": "NonnegativeLinearProgram::get_n",
+        "brief": "returns the number $ n$ of variables (number of columns of $ A$ ) in lp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "96",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_m",
+        "qualified_name": "NonnegativeLinearProgram::get_m",
+        "brief": "returns the number $ m$ of constraints (number of rows of $ A$ ) in lp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "102",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_a",
+        "qualified_name": "NonnegativeLinearProgram::get_a",
+        "brief": "returns an iterator over the columns of $ A$ .",
+        "detailed": "The corresponding past-the-end iterator is get_a() + get_n() . For $ j=0,\\ldots,n-1$ , *( get_a() +j) a random access iterator for column $ j$ .",
+        "return_type": "A_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "110",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_b",
+        "qualified_name": "NonnegativeLinearProgram::get_b",
+        "brief": "returns an iterator over the entries of $ \\qpb$ .",
+        "detailed": "The corresponding past-the-end iterator is get_b() + get_m() .",
+        "return_type": "B_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "117",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_r",
+        "qualified_name": "NonnegativeLinearProgram::get_r",
+        "brief": "returns an iterator over the entries of $ \\qprel$ .",
+        "detailed": "The corresponding past-the-end iterator is get_r() + get_m() . The value CGAL::SMALLER stands for $ \\leq$ , CGAL::EQUAL stands for $ =$ , and CGAL::LARGER stands for $ \\geq$ .",
+        "return_type": "R_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "127",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c",
+        "qualified_name": "NonnegativeLinearProgram::get_c",
+        "brief": "returns an iterator over the entries of $ \\qpc$ .",
+        "detailed": "The corresponding past-the-end iterator is get_c() + get_n() .",
+        "return_type": "C_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "134",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c0",
+        "qualified_name": "NonnegativeLinearProgram::get_c0",
+        "brief": "returns the constant term $ c_0$ of the objective function.",
+        "detailed": "",
+        "return_type": "std::iterator_traits< C_iterator >::value_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeLinearProgram.h",
+        "line": "139",
+        "section": "Operations"
+      }
+    ]
+  },
+  "NonnegativeQuadraticProgram": {
+    "kind": "class",
+    "name": "NonnegativeQuadraticProgram",
+    "brief": "A model of NonnegativeQuadraticProgram describes a convex quadratic program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpx \\geq 0\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ D$ is a symmetric positive-semidefinite $ n\\times n$ matrix (the quadratic objective function), $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. The description is given by appropriate random-access iterators over the program data, see below. The program therefore comes in dense representation which includes zero entries. Has models CGAL::Quadratic_program <NT> CGAL::Quadratic_program_from_mps <NT> CGAL::Nonnegative_quadratic_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> The value types of all iterator types (nested iterator types, respectively, for A_iterator and D_iterator ) must be convertible to some common IntegralDomain ET . QuadraticProgram LinearProgram NonnegativeLinearProgram",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "A_iterator",
+        "qualified_name": "NonnegativeQuadraticProgram::A_iterator",
+        "brief": "A random access iterator type to go columnwise over the constraint matrix $ A$ .",
+        "detailed": "The value type is a random access iterator type for an individual column that goes over the entries in that column.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "B_iterator",
+        "qualified_name": "NonnegativeQuadraticProgram::B_iterator",
+        "brief": "A random access iterator type to go over the entries of the right-hand side $ \\qpb$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "R_iterator",
+        "qualified_name": "NonnegativeQuadraticProgram::R_iterator",
+        "brief": "A random access iterator type to go over the relations $ \\qprel$ .",
+        "detailed": "The value type of R_iterator is CGAL::Comparison_result .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "D_iterator",
+        "qualified_name": "NonnegativeQuadraticProgram::D_iterator",
+        "brief": "A random access iterator type to go rowwise over the matrix $ 2D$ .",
+        "detailed": "The value type is a random access iterator type for an individual row that goes over the entries in that row, up to (and including) the entry on the main diagonal.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "87",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "C_iterator",
+        "qualified_name": "NonnegativeQuadraticProgram::C_iterator",
+        "brief": "A random access iterator type to go over the entries of the linear objective function vector $ c$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "93",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "get_n",
+        "qualified_name": "NonnegativeQuadraticProgram::get_n",
+        "brief": "returns the number $ n$ of variables (number of columns of $ A$ ) in qp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "104",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_m",
+        "qualified_name": "NonnegativeQuadraticProgram::get_m",
+        "brief": "returns the number $ m$ of constraints (number of rows of $ A$ ) in qp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "110",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_a",
+        "qualified_name": "NonnegativeQuadraticProgram::get_a",
+        "brief": "returns an iterator over the columns of $ A$ .",
+        "detailed": "The corresponding past-the-end iterator is get_a() + get_n() . For $ j=0,\\ldots,n-1$ , *( get_a() +j) is a random access iterator for column $ j$ .",
+        "return_type": "A_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "118",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_b",
+        "qualified_name": "NonnegativeQuadraticProgram::get_b",
+        "brief": "returns an iterator over the entries of $ \\qpb$ .",
+        "detailed": "The corresponding past-the-end iterator is get_b() + get_m() .",
+        "return_type": "B_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "125",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_r",
+        "qualified_name": "NonnegativeQuadraticProgram::get_r",
+        "brief": "returns an iterator over the entries of $ \\qprel$ .",
+        "detailed": "The corresponding past-the-end iterator is get_r() + get_m() . The value CGAL::SMALLER stands for $ \\leq$ , CGAL::EQUAL stands for $ =$ , and CGAL::LARGER stands for $ \\geq$ .",
+        "return_type": "R_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "135",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_d",
+        "qualified_name": "NonnegativeQuadraticProgram::get_d",
+        "brief": "returns an iterator over the rows of $ 2D$ .",
+        "detailed": "The corresponding past-the-end iterator is get_d() + get_n() . For $ i=0,\\ldots,n-1$ , *( get_d() +i) is a random access iterator for the entries in row $ i$ below or on the diagonal . The valid range of this iterator is guaranteed to have length $ i+1$ but not more. Values to the right of the diagonal are deduced from the symmetry requirement on $ D$ .",
+        "return_type": "D_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "146",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c",
+        "qualified_name": "NonnegativeQuadraticProgram::get_c",
+        "brief": "returns an iterator over the entries of $ \\qpc$ .",
+        "detailed": "The corresponding past-the-end iterator is get_c() + get_n() .",
+        "return_type": "C_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "153",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c0",
+        "qualified_name": "NonnegativeQuadraticProgram::get_c0",
+        "brief": "returns the constant term $ c_0$ of the objective function.",
+        "detailed": "",
+        "return_type": "std::iterator_traits< C_iterator >::value_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/NonnegativeQuadraticProgram.h",
+        "line": "158",
+        "section": "Operations"
+      }
+    ]
+  },
+  "QuadraticProgram": {
+    "kind": "class",
+    "name": "QuadraticProgram",
+    "brief": "A model of QuadraticProgram describes a convex quadratic program of the form.",
+    "detailed": "\\begin{eqnarray*}\\mbox{(QP)}& \\mbox{minimize}\n& \\qpx^{T}D\\qpx+\\qpc^{T}\\qpx+c_0 \\\\\n&\\mbox{subject to} & A\\qpx\\qprel \\qpb, \\\\\n& & \\qpl \\leq \\qpx \\leq \\qpu\n\\end{eqnarray*} in $ n$ real variables $ \\qpx=(x_0,\\ldots,x_{n-1})$ . Here, $ A$ is an $ m\\times n$ matrix (the constraint matrix), $ \\qpb$ is an $ m$ -dimensional vector (the right-hand side), $ \\qprel$ is an $ m$ -dimensional vector of relations from $ \\{\\leq, =, \\geq\\}$ , $ \\qpl$ is an $ n$ -dimensional vector of lower bounds for $ \\qpx$ , where $ l_j\\in\\mathbb{R}\\cup\\{-\\infty\\}$ for all $ j$ $ \\qpu$ is an $ n$ -dimensional vector of upper bounds for $ \\qpx$ , where $ u_j\\in\\mathbb{R}\\cup\\{\\infty\\}$ for all $ j$ $ D$ is a symmetric positive-semidefinite $ n\\times n$ matrix (the quadratic objective function), $ \\qpc$ is an $ n$ -dimensional vector (the linear objective function), and $ c_0$ is a constant. The description is given by appropriate random-access iterators over the program data, see below. The program therefore comes in dense representation which includes zero entries. Has models CGAL::Quadratic_program <NT> CGAL::Quadratic_program_from_mps <NT> CGAL::Quadratic_program_from_iterators <A_it, B_it, R_it, FL_it, L_it, FU_it, U_it, D_it, C_it> The value types of all iterator types (nested iterator types, respectively, for A_iterator and D_iterator ) must be convertible to some common IntegralDomain ET . NonnegativeQuadraticProgram LinearProgram NonnegativeLinearProgram",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "A_iterator",
+        "qualified_name": "QuadraticProgram::A_iterator",
+        "brief": "A random access iterator type to go columnwise over the constraint matrix $ A$ .",
+        "detailed": "The value type is a random access iterator type for an individual column that goes over the entries in that column.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "B_iterator",
+        "qualified_name": "QuadraticProgram::B_iterator",
+        "brief": "A random access iterator type to go over the entries of the right-hand side $ \\qpb$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "R_iterator",
+        "qualified_name": "QuadraticProgram::R_iterator",
+        "brief": "A random access iterator type to go over the relations $ \\qprel$ .",
+        "detailed": "The value type of R_iterator is CGAL::Comparison_result .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FL_iterator",
+        "qualified_name": "QuadraticProgram::FL_iterator",
+        "brief": "A random access iterator type to go over the existence (finiteness) of the lower bounds $ l_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The value type of FL_iterator is bool .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "84",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "L_iterator",
+        "qualified_name": "QuadraticProgram::L_iterator",
+        "brief": "A random access iterator type to go over the entries of the lower bound vector $ \\qpl$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "90",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "UL_iterator",
+        "qualified_name": "QuadraticProgram::UL_iterator",
+        "brief": "A random access iterator type to go over the existence (finiteness) of the upper bounds $ u_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The value type of UL_iterator is bool .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "97",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "U_iterator",
+        "qualified_name": "QuadraticProgram::U_iterator",
+        "brief": "A random access iterator type to go over the entries of the upper bound vector $ \\qpu$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "103",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "D_iterator",
+        "qualified_name": "QuadraticProgram::D_iterator",
+        "brief": "A random access iterator type to go rowwise over the matrix $ 2D$ .",
+        "detailed": "The value type is a random access iterator type for an individual row that goes over the entries in that row, up to (and including) the entry on the main diagonal.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "112",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "C_iterator",
+        "qualified_name": "QuadraticProgram::C_iterator",
+        "brief": "A random access iterator type to go over the entries of the linear objective function vector $ c$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "118",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "get_n",
+        "qualified_name": "QuadraticProgram::get_n",
+        "brief": "returns the number $ n$ of variables (number of columns of $ A$ ) in qp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "129",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_m",
+        "qualified_name": "QuadraticProgram::get_m",
+        "brief": "returns the number $ m$ of constraints (number of rows of $ A$ ) in qp .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "135",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_a",
+        "qualified_name": "QuadraticProgram::get_a",
+        "brief": "returns an iterator over the columns of $ A$ .",
+        "detailed": "The corresponding past-the-end iterator is get_a() + get_n() . For $ j=0,\\ldots,n-1$ , *( get_a() +j) is a random access iterator for column $ j$ .",
+        "return_type": "A_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "143",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_b",
+        "qualified_name": "QuadraticProgram::get_b",
+        "brief": "returns an iterator over the entries of $ \\qpb$ .",
+        "detailed": "The corresponding past-the-end iterator is get_b() + get_m() .",
+        "return_type": "B_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "150",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_r",
+        "qualified_name": "QuadraticProgram::get_r",
+        "brief": "returns an iterator over the entries of $ \\qprel$ .",
+        "detailed": "The corresponding past-the-end iterator is get_r() + get_m() . The value CGAL::SMALLER stands for $ \\leq$ , CGAL::EQUAL stands for $ =$ , and CGAL::LARGER stands for $ \\geq$ .",
+        "return_type": "R_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "160",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_fl",
+        "qualified_name": "QuadraticProgram::get_fl",
+        "brief": "returns an iterator over the existence of the lower bounds $ l_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The corresponding past-the-end iterator is get_fl() + get_n() . If *( get_fl() +j) has value $ true$ , the variable $ x_j$ has a lower bound given by *( get_l() +j) , otherwise it has no lower bound.",
+        "return_type": "FL_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "169",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_l",
+        "qualified_name": "QuadraticProgram::get_l",
+        "brief": "returns an iterator over the entries of $ \\qpl$ .",
+        "detailed": "The corresponding past-the-end iterator is get_l() + get_n() . If *( get_fl() +j) has value $ false$ , the value *( get_l() +j) is not accessed. if both *( get_fl() +j) and *( get_fu() +j) have value $ true$ , then *( get_l() +j) <= *( get_u() +j) .",
+        "return_type": "L_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "178",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_fu",
+        "qualified_name": "QuadraticProgram::get_fu",
+        "brief": "returns an iterator over the existence of the upper bounds $ u_j, j=0,\\ldots,n-1$ .",
+        "detailed": "The corresponding past-the-end iterator is get_fu() + get_n() . If *( get_fu() +j) has value $ true$ , the variable $ x_j$ has an upper bound given by *( get_u() +j) , otherwise it has no upper bound.",
+        "return_type": "FU_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "187",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_u",
+        "qualified_name": "QuadraticProgram::get_u",
+        "brief": "returns an iterator over the entries of $ \\qpu$ .",
+        "detailed": "The corresponding past-the-end iterator is get_u() + get_n() . If *( get_fu() +j) has value $ false$ , the value *( get_u() +j) is not accessed. if both *( get_fl() +j) and *( get_fu() +j) have value $ true$ , then *( get_l() +j) <= *( get_u() +j) .",
+        "return_type": "L_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "196",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_d",
+        "qualified_name": "QuadraticProgram::get_d",
+        "brief": "returns an iterator over the rows of $ 2D$ .",
+        "detailed": "The corresponding past-the-end iterator is get_d() + get_n() . For $ i=0,\\ldots,n-1$ , *( get_d() +i) is a random access iterator for the entries in row $ i$ below or on the diagonal . The valid range of this iterator is guaranteed to have length $ i+1$ but not more. Values to the right of the diagonal are deduced from the symmetry requirement on $ D$ .",
+        "return_type": "D_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "207",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c",
+        "qualified_name": "QuadraticProgram::get_c",
+        "brief": "returns an iterator over the entries of $ \\qpc$ .",
+        "detailed": "The corresponding past-the-end iterator is get_c() + get_n() .",
+        "return_type": "C_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "214",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_c0",
+        "qualified_name": "QuadraticProgram::get_c0",
+        "brief": "returns the constant term $ c_0$ of the objective function.",
+        "detailed": "",
+        "return_type": "std::iterator_traits< C_iterator >::value_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/QuadraticProgram.h",
+        "line": "219",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

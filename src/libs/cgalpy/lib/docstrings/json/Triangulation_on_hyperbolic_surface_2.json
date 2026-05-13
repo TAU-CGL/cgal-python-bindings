@@ -1,0 +1,1291 @@
+{
+  "CGAL::Combinatorial_map_with_cross_ratios_item": {
+    "kind": "struct",
+    "name": "CGAL::Combinatorial_map_with_cross_ratios_item",
+    "brief": "This item defines attributes of edges that are of type Complex_number reprensenting cross-ratios.",
+    "detailed": "Traits must be a model of HyperbolicSurfaceTraits_2 . Is model of GenericMapItems",
+    "members": []
+  },
+  "CGAL::Combinatorial_map_with_cross_ratios_item::Dart_wrapper": {
+    "kind": "struct",
+    "name": "CGAL::Combinatorial_map_with_cross_ratios_item::Dart_wrapper",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Edge_attrib",
+        "qualified_name": "CGAL::Combinatorial_map_with_cross_ratios_item::Dart_wrapper::Edge_attrib",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Cell_attribute< CMap, Complex_number < typename Traits::FT > >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "18",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Attributes",
+        "qualified_name": "CGAL::Combinatorial_map_with_cross_ratios_item::Dart_wrapper::Attributes",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::tuple< void, Edge_attrib , void >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "19",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Complex_number": {
+    "kind": "class",
+    "name": "CGAL::Complex_number",
+    "brief": "",
+    "detailed": "Is model of ComplexNumber FT is the field type and must be a model of FieldNumberType .",
+    "members": []
+  },
+  "CGAL::Hyperbolic_fundamental_domain_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_fundamental_domain_2",
+    "brief": "represents a fundamental domain of a closed orientable hyperbolic surface.",
+    "detailed": "The domain is given as a polygon $ P  $ represented by the list of its vertices in the Poincaré disk model, together with a pairing of the sides of $ P $ . The $ n $ -th side of $ P $ is the side between the $ n $ -th and the $ (n+1) $ -th vertex, where indices are modulo the number of vertices of $ P $ . The side pairings are represented by a list of integers, such that if the $ n $ -th integer of the list is $ m $ , then the $ n $ -th side is paired to the $ m $ -th side. Traits must be a model of HyperbolicSurfaceTraits_2 . Hyperbolic_fundamental_domain_factory_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::Point",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "Traits::Hyperbolic_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_fundamental_domain_2",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::Hyperbolic_fundamental_domain_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "35",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_fundamental_domain_2",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::Hyperbolic_fundamental_domain_2",
+        "brief": "Constructor from vertices and pairings ranges.",
+        "detailed": "PointRange a model of the concepts RandomAccessContainer whose value_type is Point . PairingRange a model of the concepts RandomAccessContainer whose value_type is std::size_t .",
+        "return_type": "",
+        "argsstring": "(PointRange &vertices, PairingRange &pairings)",
+        "params": [
+          {
+            "type": "PointRange &",
+            "name": "vertices",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PairingRange &",
+            "name": "pairings",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "44",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::size",
+        "brief": "returns the number of vertices (equivalently, the number of sides) of the domain.",
+        "detailed": "Hyperbolic_fundamental_domain_2< Traits >::is_valid()",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "55",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::vertex",
+        "brief": "returns the i-th vertex.",
+        "detailed": "is_valid()",
+        "return_type": "const Point &",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "62",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "paired_side",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::paired_side",
+        "brief": "returns the index of the side paired to the i-th side.",
+        "detailed": "is_valid()",
+        "return_type": "std::size_t",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "69",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "side_pairing",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::side_pairing",
+        "brief": "returns the isometry that maps the side paired to side $ i $ to side $ i $ .",
+        "detailed": "is_valid()",
+        "return_type": "Hyperbolic_isometry_2 < Traits >",
+        "argsstring": "(std::size_t i) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "76",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_2::is_valid",
+        "brief": "checks that the number of vertices is even, that there are as many side pairings as vertices, and that the vertices all lie within the open unit disk.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Hyperbolic_fundamental_domain_2.h",
+        "line": "87",
+        "section": "Validity"
+      }
+    ]
+  },
+  "CGAL::Hyperbolic_fundamental_domain_factory_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_fundamental_domain_factory_2",
+    "brief": "Factory class, whose only purpose is to construct random fundamental domains of closed orientable hyperbolic surfaces.",
+    "detailed": "The function make_hyperbolic_fundamental_domain_g2() constructs such a domain for a surface of genus two. Traits must be a model of HyperbolicSurfaceTraits_2 .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Hyperbolic_fundamental_domain_factory_2",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_factory_2::Hyperbolic_fundamental_domain_factory_2",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_fundamental_domain_factory_2.h",
+        "line": "24",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "make_hyperbolic_fundamental_domain_g2",
+        "qualified_name": "CGAL::Hyperbolic_fundamental_domain_factory_2::make_hyperbolic_fundamental_domain_g2",
+        "brief": "randomly generates a convex domain of a closed orientable hyperbolic surface of genus two from a seed.",
+        "detailed": "",
+        "return_type": "Hyperbolic_fundamental_domain_2 < Traits >",
+        "argsstring": "(unsigned int seed)",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "seed",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_fundamental_domain_factory_2.h",
+        "line": "33",
+        "section": "Generation of a domain in genus two."
+      }
+    ]
+  },
+  "CGAL::Hyperbolic_isometry_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_isometry_2",
+    "brief": "represents an isometry in the Poincaré disk model.",
+    "detailed": "The isometry $ f $ is represented by a list $ (c_0, c_1, c_2, c_3) $ of complex numbers, so that $ f(z) = (c_0 z + c_1) / (c_2 z + c_3) $ holds on every complex $ z $ in the open unit disk. Functionalities are offered to compose isometries, and apply an isometry to a point. Traits must be a model of HyperbolicSurfaceTraits_2 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Complex_number",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::Complex_number",
+        "brief": "Complex number type.",
+        "detailed": "",
+        "return_type": "Traits::Complex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "24",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::Point",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "Traits::Hyperbolic_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_isometry_2",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::Hyperbolic_isometry_2",
+        "brief": "Default constructor to the identity.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "39",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Hyperbolic_isometry_2",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::Hyperbolic_isometry_2",
+        "brief": "Constructor from coefficients.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Complex_number &c0, const Complex_number &c1, const Complex_number &c2, const Complex_number &c3)",
+        "params": [
+          {
+            "type": "const Complex_number &",
+            "name": "c0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "c1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "c2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "c3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "44",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "get_coefficient",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::get_coefficient",
+        "brief": "returns the index-th coefficient.",
+        "detailed": "",
+        "return_type": "const Complex_number &",
+        "argsstring": "(int index) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "78",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "evaluate",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::evaluate",
+        "brief": "evaluates the isometry at point $ p $ .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(const Point &p) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "88",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::operator()",
+        "brief": "evaluates the isometry at point $ p $ .",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "(const Point &p) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "93",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator*",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::operator*",
+        "brief": "returns the composition of two isometries.",
+        "detailed": "",
+        "return_type": "Hyperbolic_isometry_2 < Traits >",
+        "argsstring": "(const Hyperbolic_isometry_2< Traits > &iso1, const Hyperbolic_isometry_2< Traits > &iso2)",
+        "params": [
+          {
+            "type": "const Hyperbolic_isometry_2 < Traits > &",
+            "name": "iso1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Hyperbolic_isometry_2 < Traits > &",
+            "name": "iso2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "99",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_to_identity",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::set_to_identity",
+        "brief": "sets the isometry to the identity.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_coefficients",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::set_coefficients",
+        "brief": "sets the coefficients of the isometry.",
+        "detailed": "The implementation does not check that the resulting transformation is an isometry.",
+        "return_type": "void",
+        "argsstring": "(const Complex_number &c0, const Complex_number &c1, const Complex_number &c2, const Complex_number &c3)",
+        "params": [
+          {
+            "type": "const Complex_number &",
+            "name": "c0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "c1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "c2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "c3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_coefficient",
+        "qualified_name": "CGAL::Hyperbolic_isometry_2::set_coefficient",
+        "brief": "sets a particular coefficient of the isometry.",
+        "detailed": "The implementation does not check that the resulting transformation is an isometry.",
+        "return_type": "void",
+        "argsstring": "(int index, const Complex_number &coefficient)",
+        "params": [
+          {
+            "type": "int",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Complex_number &",
+            "name": "coefficient",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hyperbolic_isometry_2.h",
+        "line": "70",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Hyperbolic_surface_traits_2": {
+    "kind": "class",
+    "name": "CGAL::Hyperbolic_surface_traits_2",
+    "brief": "",
+    "detailed": "HyperbolicTraits must be a model of HyperbolicDelaunayTriangulationTraits_2 . Is model of HyperbolicSurfaceTraits_2",
+    "members": []
+  },
+  "CGAL::Triangulation_on_hyperbolic_surface_2": {
+    "kind": "class",
+    "name": "CGAL::Triangulation_on_hyperbolic_surface_2",
+    "brief": "represents a triangulation of a closed orientable hyperbolic surface.",
+    "detailed": "The class provides functions such as the generation of the triangulation from a convex fundamental domain, the Delaunay flip algorithm, and the construction of a portion of the lift of the triangulation in the hyperbolic plane. Traits must be a model of HyperbolicSurfaceTraits_2 . Attributes must be a model of GenericMapItems whose edges are decorated with complex numbers to represent cross ratios.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Combinatorial_map_with_cross_ratios",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Combinatorial_map_with_cross_ratios",
+        "brief": "Type of combinatorial map whose edges are decorated with complex numbers.",
+        "detailed": "",
+        "return_type": "Combinatorial_map< 2, Attributes >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_descriptor",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Dart_descriptor",
+        "brief": "Combinatorial map dart descriptor type.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::Dart_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_const_descriptor",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Dart_const_descriptor",
+        "brief": "Combinatorial map dart const descriptor type.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::Dart_const_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Vertex_range",
+        "brief": "Range of one dart for each vertex (that is 0-cell) of the combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::template One_dart_per_cell_range< 0 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Edge_range",
+        "brief": "Range of one dart for each edge (that is 1-cell) of the combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::template One_dart_per_cell_range< 1 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Face_range",
+        "brief": "Range of one dart for each face (that is 2-cell) of the combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::template One_dart_per_cell_range< 2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Vertex_const_range",
+        "brief": "Range of one dart for each vertex (that is 0-cell) of the combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::template One_dart_per_cell_const_range< 0 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_const_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Edge_const_range",
+        "brief": "Range of one dart for each edge (that is 1-cell) of the combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::template One_dart_per_cell_const_range< 1 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_const_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Face_const_range",
+        "brief": "Range of one dart for each face (that is 2-cell) of the combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::template One_dart_per_cell_const_range< 2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "86",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Point",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "Traits::Hyperbolic_point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "91",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_on_hyperbolic_surface_2",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Triangulation_on_hyperbolic_surface_2",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "111",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_on_hyperbolic_surface_2",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Triangulation_on_hyperbolic_surface_2",
+        "brief": "Constructor from a convex fundamental domain: triangulates the polygon of the domain.",
+        "detailed": "(The triangulation is defined by adding an internal edge between domain.vertex(size-1) and the other vertices. The anchor has the three vertices of indices size-1, 0 and 1 and the dart is the one between the vertices of indices size-1 and 0.)",
+        "return_type": "",
+        "argsstring": "(const Hyperbolic_fundamental_domain_2< Traits > &domain)",
+        "params": [
+          {
+            "type": "const Hyperbolic_fundamental_domain_2 < Traits > &",
+            "name": "domain",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "120",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_on_hyperbolic_surface_2",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Triangulation_on_hyperbolic_surface_2",
+        "brief": "Constructor from a decorated combinatorial map and an anchor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Combinatorial_map_with_cross_ratios &cmap, Anchor &an_anchor)",
+        "params": [
+          {
+            "type": "Combinatorial_map_with_cross_ratios &",
+            "name": "cmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Anchor &",
+            "name": "an_anchor",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "125",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::operator=",
+        "brief": "",
+        "detailed": "other.is_valid()",
+        "return_type": "Triangulation_on_hyperbolic_surface_2 &",
+        "argsstring": "(Triangulation_on_hyperbolic_surface_2 other)",
+        "params": [
+          {
+            "type": "Triangulation_on_hyperbolic_surface_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "135",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "combinatorial_map",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::combinatorial_map",
+        "brief": "returns the decorated combinatorial map.",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "145",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "has_anchor",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::has_anchor",
+        "brief": "returns whether the triangulation has an anchor or not.",
+        "detailed": "is_valid()",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "151",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "anchor",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::anchor",
+        "brief": "returns the anchor.",
+        "detailed": "is_valid() && has_anchor()",
+        "return_type": "Anchor &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "157",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "anchor",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::anchor",
+        "brief": "returns the anchor.",
+        "detailed": "is_valid() && has_anchor()",
+        "return_type": "const Anchor &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "163",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::vertices_range",
+        "brief": "returns the range of vertices.",
+        "detailed": "",
+        "return_type": "Vertex_range",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "168",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "edges_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::edges_range",
+        "brief": "returns the range of edges.",
+        "detailed": "",
+        "return_type": "Edge_range",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "173",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "faces_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::faces_range",
+        "brief": "returns the range of faces.",
+        "detailed": "",
+        "return_type": "Face_range",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "178",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_const_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::vertices_const_range",
+        "brief": "returns the range of vertices.",
+        "detailed": "",
+        "return_type": "Vertex_const_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "183",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "edges_const_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::edges_const_range",
+        "brief": "returns the range of edges.",
+        "detailed": "",
+        "return_type": "Edge_const_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "188",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "faces_const_range",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::faces_const_range",
+        "brief": "returns the range of faces.",
+        "detailed": "",
+        "return_type": "Face_const_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "193",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_Delaunay_flippable",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::is_Delaunay_flippable",
+        "brief": "returns whether the edge supported by the dart is Delaunay flippable or not.",
+        "detailed": "An edge $ e $ is Delaunay flippable if the imaginary part of its cross ratio is positive. is_valid()",
+        "return_type": "bool",
+        "argsstring": "(Dart_descriptor dart) const",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "dart",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "206",
+        "section": "Delaunay Flip Algorithm"
+      },
+      {
+        "kind": "function",
+        "name": "flip",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::flip",
+        "brief": "flips the edge supported by the dart.",
+        "detailed": "is_valid()",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor dart)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "dart",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "213",
+        "section": "Delaunay Flip Algorithm"
+      },
+      {
+        "kind": "function",
+        "name": "is_Delaunay",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::is_Delaunay",
+        "brief": "determines if the triangulation is a valid Delaunay triangulation.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "218",
+        "section": "Delaunay Flip Algorithm"
+      },
+      {
+        "kind": "function",
+        "name": "make_Delaunay",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::make_Delaunay",
+        "brief": "applies the Delaunay flip algorithm: flips Delaunay-flippable edges until there is no such edge anymore.",
+        "detailed": "is_valid()",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "224",
+        "section": "Delaunay Flip Algorithm"
+      },
+      {
+        "kind": "function",
+        "name": "lift",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::lift",
+        "brief": "lifts the triangulation in the hyperbolic plane.",
+        "detailed": "Returns, for every triangle $ t $ of the triangulation, one of the darts of $ t $ in the combinatorial map of the triangulation, together with a triple $ p,q,r $ of points in the hyperbolic plane. The points $ p,q,r $ are the vertices of a lift of $ t $ in the hyperbolic plane. If the center parameter is set to true, then one of the vertices of the anchor is translated to the origin $ 0 $ . is_valid() && has_anchor()",
+        "return_type": "std::vector< std::tuple< Dart_const_descriptor , Point , Point , Point > >",
+        "argsstring": "(bool center=true) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "center",
+            "default": "true",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "240",
+        "section": "Lifting"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::is_valid",
+        "brief": "checks that the underlying combinatorial map $ M $ has no boundary and calls the is_valid method of $ M $ .",
+        "detailed": "If there is an anchor, then checks that the dart descriptor of the anchor does indeed point to a dart of $ M $ , and checks that the three vertices of the anchor lie within the open unit disk.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "253",
+        "section": "Validity"
+      }
+    ]
+  },
+  "CGAL::Triangulation_on_hyperbolic_surface_2::Anchor": {
+    "kind": "struct",
+    "name": "CGAL::Triangulation_on_hyperbolic_surface_2::Anchor",
+    "brief": "stores a dart $ d $ of the combinatorial map, belonging to a triangle $ t $ , and stores the three vertices of a lift of $ t $ in the hyperbolic plane.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "dart",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Anchor::dart",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Combinatorial_map_with_cross_ratios::Dart_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "99",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vertices",
+        "qualified_name": "CGAL::Triangulation_on_hyperbolic_surface_2::Anchor::vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Traits::Hyperbolic_point_2",
+        "argsstring": "[3]",
+        "params": [],
+        "file": "CGAL/Triangulation_on_hyperbolic_surface_2.h",
+        "line": "100",
+        "section": ""
+      }
+    ]
+  },
+  "ComplexNumber": {
+    "kind": "class",
+    "name": "ComplexNumber",
+    "brief": "Describes a complex number type over a FieldNumberType for its real and imaginary parts.",
+    "detailed": "Refines Field Has models CGAL::Complex_number",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "ComplexNumber::FT",
+        "brief": "Number type for real and imaginary parts: must be a model of FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "22",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "ComplexNumber",
+        "qualified_name": "ComplexNumber::ComplexNumber",
+        "brief": "Default constructor, sets the both the real part and the imaginary part to $ 0 $ .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "32",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ComplexNumber",
+        "qualified_name": "ComplexNumber::ComplexNumber",
+        "brief": "Constructor, sets the real part to real_part and the imaginary part to $ 0 $ .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const FT &real_part)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "real_part",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "37",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ComplexNumber",
+        "qualified_name": "ComplexNumber::ComplexNumber",
+        "brief": "Constructor, sets the real part to real_part and the imaginary part to imaginary_part .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const FT &real_part, const FT &imaginary_part)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "real_part",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT &",
+            "name": "imaginary_part",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "42",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "ComplexNumber",
+        "qualified_name": "ComplexNumber::ComplexNumber",
+        "brief": "Constructor, sets the real part to real_part and the imaginary part to imaginary_part .",
+        "detailed": "FT must be constructible from U and V.",
+        "return_type": "",
+        "argsstring": "(U &&real_part, V &&imaginary_part)",
+        "params": [
+          {
+            "type": "U &&",
+            "name": "real_part",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "V &&",
+            "name": "imaginary_part",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "50",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "real",
+        "qualified_name": "ComplexNumber::real",
+        "brief": "sets the real part to real_part .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FT &real_part)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "real_part",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "60",
+        "section": "Getter and Setter"
+      },
+      {
+        "kind": "function",
+        "name": "imag",
+        "qualified_name": "ComplexNumber::imag",
+        "brief": "sets the imaginary part to imaginary_part .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FT &imaginary_part)",
+        "params": [
+          {
+            "type": "const FT &",
+            "name": "imaginary_part",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "65",
+        "section": "Getter and Setter"
+      },
+      {
+        "kind": "function",
+        "name": "real",
+        "qualified_name": "ComplexNumber::real",
+        "brief": "returns the real part.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "70",
+        "section": "Getter and Setter"
+      },
+      {
+        "kind": "function",
+        "name": "imag",
+        "qualified_name": "ComplexNumber::imag",
+        "brief": "returns the imaginary part.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "75",
+        "section": "Getter and Setter"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "ComplexNumber::operator=",
+        "brief": "Copy operator.",
+        "detailed": "",
+        "return_type": "ComplexNumber",
+        "argsstring": "(const ComplexNumber &other) const",
+        "params": [
+          {
+            "type": "const ComplexNumber &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "85",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "ComplexNumber::operator<<",
+        "brief": "writes the complex in a stream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &s, const ComplexNumber &z)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const ComplexNumber &",
+            "name": "z",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "90",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "ComplexNumber::operator>>",
+        "brief": "reads the complex from a stream.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::istream &s, ComplexNumber &z)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "ComplexNumber &",
+            "name": "z",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "95",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "norm",
+        "qualified_name": "ComplexNumber::norm",
+        "brief": "returns the square of the modulus.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(ComplexNumber z) const",
+        "params": [
+          {
+            "type": "ComplexNumber",
+            "name": "z",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "conj",
+        "qualified_name": "ComplexNumber::conj",
+        "brief": "returns the conjugate.",
+        "detailed": "",
+        "return_type": "ComplexNumber",
+        "argsstring": "(ComplexNumber z) const",
+        "params": [
+          {
+            "type": "ComplexNumber",
+            "name": "z",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ComplexNumber.h",
+        "line": "110",
+        "section": ""
+      }
+    ]
+  },
+  "HyperbolicSurfaceTraits_2": {
+    "kind": "class",
+    "name": "HyperbolicSurfaceTraits_2",
+    "brief": "This traits class must have a type for complex numbers.",
+    "detailed": "Refines HyperbolicDelaunayTriangulationTraits_2 Has models CGAL::Hyperbolic_surface_traits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Complex",
+        "qualified_name": "HyperbolicSurfaceTraits_2::Complex",
+        "brief": "represents a complex number, model of ComplexNumber , over the field HyperbolicSurfaceTraits_2::FT for its real and imaginary parts.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/HyperbolicSurfaceTraits_2.h",
+        "line": "23",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

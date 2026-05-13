@@ -1,0 +1,2781 @@
+{
+  "CellAttribute": {
+    "kind": "class",
+    "name": "CellAttribute",
+    "brief": "The concept CellAttribute represents a non void attribute associated with a cell of a generic map. It can keep a descriptor to one dart of its associated cell, and can contain any information.",
+    "detailed": "Has models CGAL::Cell_attribute<Map,Info_,Tag,OnMerge,OnSplit> GenericMap GenericMapItems",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Dart_descriptor",
+        "qualified_name": "CellAttribute::Dart_descriptor",
+        "brief": "Dart descriptor type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_const_descriptor",
+        "qualified_name": "CellAttribute::Dart_const_descriptor",
+        "brief": "Dart const descriptor type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Info",
+        "qualified_name": "CellAttribute::Info",
+        "brief": "Type of the information contained in the attribute.",
+        "detailed": "If void , the cell attribute does not have any information.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_cell_dart",
+        "qualified_name": "CellAttribute::Supports_cell_dart",
+        "brief": "Equals to Tag_true to enable the storage of a Dart_descriptor of the associated cell, Tag_false otherwise.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "On_merge",
+        "qualified_name": "CellAttribute::On_merge",
+        "brief": "Functor called before merging two attributes.",
+        "detailed": "It must be a binary functor taking as argument two references to a model of CellAttribute .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "On_split",
+        "qualified_name": "CellAttribute::On_split",
+        "brief": "Functor called after an attribute was split in two.",
+        "detailed": "It must be a binary functor taking as argument two references to a model of CellAttribute .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "51",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "CellAttribute",
+        "qualified_name": "CellAttribute::CellAttribute",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "61",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Cell_attribute",
+        "qualified_name": "CellAttribute::Cell_attribute",
+        "brief": "Constructor initializing the information of this attribute by the copy constructor Info(info) .",
+        "detailed": "Defined only if Info is different from void .",
+        "return_type": "",
+        "argsstring": "(const Info &info)",
+        "params": [
+          {
+            "type": "const Info &",
+            "name": "info",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CellAttribute.h",
+        "line": "66",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "dart",
+        "qualified_name": "CellAttribute::dart",
+        "brief": "Returns one dart of the cell associated to this attribute, if Supports_cell_dart is equal to Tag_true .",
+        "detailed": "",
+        "return_type": "Dart_descriptor",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "76",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dart",
+        "qualified_name": "CellAttribute::dart",
+        "brief": "Returns one dart of the cell associated to this attribute, when it is const, if Supports_cell_dart is equal to Tag_true .",
+        "detailed": "",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "81",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "set_dart",
+        "qualified_name": "CellAttribute::set_dart",
+        "brief": "Sets the dart of the cell associated to this attribute to ah , if Supports_cell_dart is equal to Tag_true .",
+        "detailed": "Otherwise, this method does nothing. d belongs to the cell associated to this attribute.",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CellAttribute.h",
+        "line": "86",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "CellAttribute::info",
+        "brief": "Returns the information of this attribute.",
+        "detailed": "Defined only if Info is different from void .",
+        "return_type": "Info &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "91",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "CellAttribute::info",
+        "brief": "Returns the information of this attribute, when it is const.",
+        "detailed": "Defined only if Info is different from void .",
+        "return_type": "const Info &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/CellAttribute.h",
+        "line": "96",
+        "section": "Access Member Functions"
+      }
+    ]
+  },
+  "CGAL::Cell_attribute": {
+    "kind": "class",
+    "name": "CGAL::Cell_attribute",
+    "brief": "The class Cell_attribute represents an attribute containing (or not) an information.",
+    "detailed": "Is model of CellAttribute Map a model of the GenericMap concept. Info_ the type of the information contained in the attribute. Equal to void by default. Tag is ::Tag_true to enable the storage of a Dart_descriptor of the associated cell, ::Tag_false otherwise. Equal to ::Tag_true by default. OnMerge the type of the functor called before two attributes are merged. Equal to Null_functor by default. OnSplit the type of the functor called after one attribute is split in two. Equal to Null_functor by default. CGAL::Combinatorial_map <d,Items,Alloc> CGAL::Generalized_map<d,Items,Alloc>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Info",
+        "qualified_name": "CGAL::Cell_attribute::Info",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Info_",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Cell_attribute.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_cell_dart",
+        "qualified_name": "CGAL::Cell_attribute::Supports_cell_dart",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Cell_attribute.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "On_merge",
+        "qualified_name": "CGAL::Cell_attribute::On_merge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OnMerge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Cell_attribute.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "On_split",
+        "qualified_name": "CGAL::Cell_attribute::On_split",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OnSplit",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Cell_attribute.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_descriptor",
+        "qualified_name": "CGAL::Cell_attribute::Dart_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CMap::Dart_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Cell_attribute.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_const_descriptor",
+        "qualified_name": "CGAL::Cell_attribute::Dart_const_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CMap::Dart_const_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Cell_attribute.h",
+        "line": "60",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Cell_attribute_with_id": {
+    "kind": "class",
+    "name": "CGAL::Cell_attribute_with_id",
+    "brief": "The class Cell_attribute_with_id represents an attribute containing (or not) an information, and having an id.",
+    "detailed": "Is model of CellAttribute Map a model of the GenericMap concept. Info_ the type of the information contained in the attribute. Equal to void by default. Tag is ::Tag_true to enable the storage of a Dart_descriptor of the associated cell, ::Tag_false otherwise. Equal to ::Tag_true by default. OnMerge the type of the functor called before two attributes are merged. Equal to Null_functor by default. OnSplit the type of the functor called after one attribute is split in two. Equal to Null_functor by default. CGAL::Combinatorial_map <d,Items,Alloc> CGAL::Generalized_map<d,Items,Alloc>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Cell_attribute_with_id::id",
+        "brief": "Returns the index.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Cell_attribute_with_id.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "id",
+        "qualified_name": "CGAL::Cell_attribute_with_id::id",
+        "brief": "Returns the index by reference.",
+        "detailed": "",
+        "return_type": "int &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Cell_attribute_with_id.h",
+        "line": "33",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Combinatorial_map": {
+    "kind": "class",
+    "name": "CGAL::Combinatorial_map",
+    "brief": "The class Combinatorial_map represents a d D combinatorial map.",
+    "detailed": "Two versions exist: one where Darts and non void attributes are stored in memory using Compact_container , using Alloc as allocator, and use handles as descriptors; a second one where Darts and non void attributes are stored in an internal std::vector like data-structure, and use indices as descriptors. The choice between the two versions is done through the item class. Is model of CombinatorialMap d the dimension of the map. Items a model of the GenericMapItems concept. Equal to Generic_map_min_items by default. Alloc has to match the standard allocator requirements. The rebind mechanism Alloc will be used to create appropriate allocators internally with value type Dart . Equal to CGAL_ALLOCATOR(int) from <CGAL/memory.h> by default. Complexity The complexity of sew and unsew is in O ( $ | $ S $ | $ $ \\times$ $ | $ c $ | $ ), S being the set of darts of the orbit $ \\langle{}$ $ \\beta_1$ , $ \\ldots$ , $ \\beta_{i-2}$ , $ \\beta_{i+2}$ , $ \\ldots$ , $ \\beta_d$ $ \\rangle{}$ for the considered dart, and c the biggest j -cell merged or split during the sew such that j -attributes are non void. The complexity of is_sewable is in O ( $ | $ S $ | $ ). The complexity of set_attribute is in O ( $ | $ c $ | $ ), c being the i -cell containing the considered dart. The complexity of is_without_boundary(i) is in O ( $ | $ D $ | $ ), D being the set of darts of the combinatorial map, and the complexity of is_without_boundary() is in O ( $ | $ D $ | $ $ \\times$ d ). The complexity of unmark_all and free_mark is in O ( 1 ) if all the darts of the combinatorial map have the same mark, and in O ( $ | $ D $ | $ ) otherwise. The complexity of is_valid is in O ( $ | $ D $ | $ $ \\times$ d $ ^2$ ). The complexity of clear is in O ( $ | $ D $ | $ $ \\times$ d ). Other methods have all a constant time complexity. GenericMapItems",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::Combinatorial_map::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Combinatorial_map < d, Items, Alloc >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Combinatorial_map.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_info",
+        "qualified_name": "CGAL::Combinatorial_map::Dart_info",
+        "brief": "Information associated with darts.",
+        "detailed": "Equal to void if Dart_info is not defined in the items class.",
+        "return_type": "Items::Dart_wrapper< Self >::Dart_info",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Combinatorial_map.h",
+        "line": "63",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attributes",
+        "qualified_name": "CGAL::Combinatorial_map::Attributes",
+        "brief": "The tuple of cell attributes.",
+        "detailed": "Equal to std::tuple<> if Attributes is not defined in the items class.",
+        "return_type": "Items::Dart_wrapper< Self >::Attributes",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Combinatorial_map.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "dimension",
+        "qualified_name": "CGAL::Combinatorial_map::dimension",
+        "brief": "The dimension of the combinatorial map.",
+        "detailed": "",
+        "return_type": "const unsigned int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Combinatorial_map.h",
+        "line": "48",
+        "section": "Constants"
+      }
+    ]
+  },
+  "CGAL::Generic_map_min_items": {
+    "kind": "struct",
+    "name": "CGAL::Generic_map_min_items",
+    "brief": "The class Generic_map_min_items defines void as the information associated with darts, and no attribute is enabled.",
+    "detailed": "Is model of GenericMapItems Example The following example shows the implementation of the Generic_map_min_items class. struct Generic_map_min_items { template < class CMap> struct Dart_wrapper {}; }; Combinatorial_map <d,Items,Alloc> Generalized_map<d,Items,Alloc>",
+    "members": []
+  },
+  "CombinatorialMap": {
+    "kind": "class",
+    "name": "CombinatorialMap",
+    "brief": "The concept CombinatorialMap defines a d -dimensional combinatorial map.",
+    "detailed": "Refines GenericMap Has models CGAL::Combinatorial_map<d,Items,Alloc> For a combinatorial map, the function next is equal to $ \\beta_1$ , previous is equal to $ \\beta_0$ and the function opposite<i> is equal to $ \\beta_i$ .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "beta",
+        "qualified_name": "CombinatorialMap::beta",
+        "brief": "Returns $ \\beta_j$ ( $ \\beta_i$ ( d )).",
+        "detailed": "Overloads of this member function are defined that take from one to nine integer as arguments. For each function, betas are applied in the same order as their indices are given as parameters. For example beta(d,1) = $ \\beta_1$ ( d ), and beta(d,1,2,3,0) = $ \\beta_0$ ( $ \\beta_3$ ( $ \\beta_2$ ( $ \\beta_1$ ( d )))). 0 $ \\leq$ i $ \\leq$ dimension , 0 $ \\leq$ j $ \\leq$ dimension and d $ \\in$ darts() .",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d, int i, int j)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "40",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "beta",
+        "qualified_name": "CombinatorialMap::beta",
+        "brief": "Returns $ \\beta_j$ ( $ \\beta_i$ ( d )).",
+        "detailed": "Overloads of this member function are defined that take from one to nine integer as arguments. 0 $ \\leq$ i $ \\leq$ dimension , 0 $ \\leq$ j $ \\leq$ dimension and d $ \\in$ darts() .",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d, int i, int j) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "50",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "beta",
+        "qualified_name": "CombinatorialMap::beta",
+        "brief": "Returns $ \\beta_j$ ( $ \\beta_i$ ( d )).",
+        "detailed": "Overloads of this member function are defined that take from one to nine integer as template arguments. For each function, betas are applied in the same order as their indices are given as template arguments. For example beta <1>(d) = $ \\beta_1$ ( d ), and beta <1,2,3,0>(d) = $ \\beta_0$ ( $ \\beta_3$ ( $ \\beta_2$ ( $ \\beta_1$ ( d )))). 0 $ \\leq$ i $ \\leq$ dimension , 0 $ \\leq$ j $ \\leq$ dimension and d $ \\in$ darts() .",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "64",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "beta",
+        "qualified_name": "CombinatorialMap::beta",
+        "brief": "Returns $ \\beta_j$ ( $ \\beta_i$ ( d )).",
+        "detailed": "Overloads of this member function are defined that take from one to nine integer as template arguments. 0 $ \\leq$ i $ \\leq$ dimension , 0 $ \\leq$ j $ \\leq$ dimension and d $ \\in$ darts() .",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "75",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "CombinatorialMap::opposite",
+        "brief": "Returns a descriptor to a dart belonging to the same edge than dart d , and not to the same vertex.",
+        "detailed": "null_descriptor if such a dart does not exist.",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "80",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "CombinatorialMap::opposite",
+        "brief": "Returns a const descriptor to a dart belonging to the same edge than dart d , and not to the same vertex, when the dart is const.",
+        "detailed": "null_descriptor if such a dart does not exist.",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "85",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CombinatorialMap::is_valid",
+        "brief": "Returns true iff the combinatorial map is valid.",
+        "detailed": "A combinatorial map is valid (see Sections Mathematical Definitions and Combinatorial Map Properties ) if for all its darts d $ \\in$ darts() : d is 0-free, or $ \\beta_1(\\beta_0(d))=d$ ; d is 1-free, or $ \\beta_0(\\beta_1(d))=d$ ; $ \\forall$ i , 2 $ \\leq $ i $ \\leq $ dimension : d is i -free, or $ \\beta_i(\\beta_i(d))=d$ ; $ \\forall$ i , $ \\forall$ j , such that 0 $ \\leq$ i $ \\leq$ dimension -2 and i +2 $ \\leq$ j $ \\leq$ dimension : $ \\beta_j(\\beta_i(d))=\\varnothing$ or ; $ \\beta_j(\\beta_i(\\beta_j(\\beta_i(d))))=d$ ; $ \\forall$ i , 0 $ \\leq$ i $ \\leq$ dimension such that i -attributes are non void: $ \\forall$ d2 in the same i -cell than d : d and d2 have the same i -attribute; $ \\forall$ d2 in a different i -cell than d : d and d2 have different i -attributes.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "105",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "link_beta",
+        "qualified_name": "CombinatorialMap::link_beta",
+        "brief": "Links d1 and d2 by $ \\beta_i$ .",
+        "detailed": "The combinatorial map can be no longer valid after this operation. If are_attributes_automatically_managed() ==true , non void attributes of d1 and d2 are updated: if one dart has an attribute and the second dart not, the non null attribute is associated to the dart having a null attribute. If both darts have an attribute, the attribute of d1 is associated to d2 . 0 $ \\leq$ i $ \\leq$ dimension , d1 $ \\in$ darts() , d2 $ \\in$ darts() and ( i $ <$ 2 or d1 $ \\neq$ d2 ).",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "119",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "unlink_beta",
+        "qualified_name": "CombinatorialMap::unlink_beta",
+        "brief": "Unlinks d and $ \\beta_i$ ( d ) by $ \\beta_i$ .",
+        "detailed": "The combinatorial map can be no longer valid after this operation. Attributes of d and $ \\beta_i$ ( d ) are not modified. 0 $ \\leq$ i $ \\leq$ dimension , d $ \\in$ darts() , and d is not i -free.",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "128",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "is_sewable",
+        "qualified_name": "CombinatorialMap::is_sewable",
+        "brief": "Returns true iff d1 can be i -sewn with d2 by keeping the generic map valid.",
+        "detailed": "This is true if there is a bijection f between all the darts of the orbit D1 = $ \\langle{}$ $ \\beta_1$ , $ \\ldots$ , $ \\beta_{i-2}$ , $ \\beta_{i+2}$ , $ \\ldots$ , $ \\beta_d$ $ \\rangle{}$ ( d1 ) and D2 = $ \\langle{}$ $ \\beta_1$ , $ \\ldots$ , $ \\beta_{i-2}$ , $ \\beta_{i+2}$ , $ \\ldots$ , $ \\beta_d$ $ \\rangle{}$ ( d2 ) satisfying: f ( d1 )= d2 , $ \\forall $ e $ \\in$ D1 , $ \\forall $ j $ \\in$ {1, $ \\ldots$ , i -2, i +2, $ \\ldots$ , d }, f ( $ \\beta_j$ ( e ))= $ \\beta_j^{-1}$ ( f ( e )). 0 $ \\leq $ i $ \\leq $ dimension , d1 $ \\in $ darts() , and d2 $ \\in $ darts() .",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d1, Dart_const_descriptor d2) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "144",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "sew",
+        "qualified_name": "CombinatorialMap::sew",
+        "brief": "i -sew darts d1 and d2 , by keeping the generic map valid.",
+        "detailed": "Links by $ \\beta_i $ two by two all the darts of the orbit D1 = $ \\langle{}$ $ \\beta_1$ , $ \\ldots$ , $ \\beta_{i-2}$ , $ \\beta_{i+2}$ , $ \\ldots$ , $ \\beta_d$ $ \\rangle{}$ ( d1 ) and D2 = $ \\langle{}$ $ \\beta_0$ , $ \\beta_2$ , $ \\ldots$ , $ \\beta_{i-2}$ , $ \\beta_{i+2}$ , $ \\ldots$ , $ \\beta_d$ $ \\rangle{}$ ( d2 ) such that d2 = f ( d1 ), where f is the bijection between D1 and D2 satisfying: f ( d1 )= d2 , and for all e $ \\in $ D1 , for all j $ \\in $ {1, $ \\ldots$ , i -2, i +2, $ \\ldots$ , d }, f ( $ \\beta_j$ ( e ))= $ \\beta_j^{-1}$ ( f ( e )). If are_attributes_automatically_managed() ==true , when necessary, non void attributes are updated to ensure the validity of the generic map: for each j -cells c1 and c2 which are merged into one j -cell during the sew, the two associated attributes attr1 and attr2 are considered. If one attribute is null_descriptor and the other not, the non null_descriptor attribute is associated to all the darts of the resulting cell. When the two attributes are non null_descriptor , functor Attribute_type<i>::type::On_merge is called on the two attributes attr1 and attr2 . If set, the dynamic onmerge function of i -attributes is also called on attr1 and attr2 . Then, the attribute attr1 is associated to all darts of the resulting j -cell. Finally, attribute attr2 is removed from the generic map. is_sewable<i> ( d1 , d2 ). Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation.",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "159",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "unsew",
+        "qualified_name": "CombinatorialMap::unsew",
+        "brief": "i -unsew darts d and opposite <i>(d) , by keeping the generic map valid.",
+        "detailed": "Unlinks by $ \\beta_i$ all the darts in the orbit $ \\langle{}$ $ \\beta_1$ , $ \\ldots$ , $ \\beta_{i-2}$ , $ \\beta_{i+2}$ , $ \\ldots$ , $ \\beta_d$ $ \\rangle{}$ ( d ). If are_attributes_automatically_managed() ==true , when necessary, non void attributes are updated to ensure the validity of the generic map: for each j -cell c split in two j -cells c1 and c2 by the operation, if c is associated to a j -attribute attr1 , then this attribute is duplicated into attr2 , and all the darts belonging to c2 are associated with this new attribute. Finally, the functor Attribute_type<i>::type::On_split is called on the two attributes attr1 and attr2 . If set, the dynamic onsplit function of i -attributes is also called on attr1 and attr2 . 0 $ \\leq $ i $ \\leq $ dimension , d $ \\in $ darts() and d is not i -free. Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated thus the generic map can be no more valid after this operation.",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "173",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "reverse_orientation",
+        "qualified_name": "CombinatorialMap::reverse_orientation",
+        "brief": "Reverse the orientation (swap $ \\beta_0$ and $ \\beta_1$ links) of the entire map.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "178",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "reverse_orientation_connected_component",
+        "qualified_name": "CombinatorialMap::reverse_orientation_connected_component",
+        "brief": "Reverse the orientation (swap $ \\beta_0$ and $ \\beta_1$ links) of the connected component containing the given dart.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "183",
+        "section": "Operations"
+      },
+      {
+        "kind": "variable",
+        "name": "null_dart_descriptor",
+        "qualified_name": "CombinatorialMap::null_dart_descriptor",
+        "brief": "The null dart descriptor constant.",
+        "detailed": "A dart d is i -free if beta(d, i)== null_dart_descriptor . Note that *null_dart_descriptor $ \\notin$ darts() .",
+        "return_type": "Dart_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/CombinatorialMap.h",
+        "line": "24",
+        "section": ""
+      }
+    ]
+  },
+  "GenericMap": {
+    "kind": "class",
+    "name": "GenericMap",
+    "brief": "The concept GenericMap defines a d -dimensional generic map. This concept is defined only to factorize the common notions between CombinatorialMap and GeneralizedMap concepts.",
+    "detailed": "Refines DefaultConstructible A generic map has a set of darts D , and functions $ f_0$ , $ \\ldots$ , $ f_{d}$ that link these darts between them. Has models CGAL::Combinatorial_map<d,Items,Alloc> CGAL::Generalized_map<d,Items,Alloc> CombinatorialMap GeneralizedMap",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Dart",
+        "qualified_name": "GenericMap::Dart",
+        "brief": "Dart type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_descriptor",
+        "qualified_name": "GenericMap::Dart_descriptor",
+        "brief": "Dart descriptor type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_const_descriptor",
+        "qualified_name": "GenericMap::Dart_const_descriptor",
+        "brief": "Dart const descriptor type.",
+        "detailed": "When using indices, Dart_const_descriptor is equal to Dart_descriptor .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_info",
+        "qualified_name": "GenericMap::Dart_info",
+        "brief": "Information associated to each dart.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "GenericMap::size_type",
+        "brief": "Size type (an unsigned integral type).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attributes",
+        "qualified_name": "GenericMap::Attributes",
+        "brief": "The tuple of cell attributes.",
+        "detailed": "It contains at most dimension +1 types (one for each possible cell of the generic map). Each type of the tuple must be either a model of the CellAttribute concept or void . The first type corresponds to 0-attributes, the second to 1-attributes and so on. If the i th type in the tuple is void , (i-1) -attributes are disabled. Otherwise, (i-1) -attributes are enabled and have the given type. If the size of the tuple is k , with k $< $ dimension +1 , $ \\forall $ i : k $\\leq $ i $ \\leq $ dimension , i -attributes are disabled.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "103",
+        "section": "Types for Attributes"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attribute_type",
+        "qualified_name": "GenericMap::Attribute_type",
+        "brief": "Attribute_type <i>::type is the type of i -attributes, a model of CellAttribute concept.",
+        "detailed": "Attribute_type<i>::type::Dart_descriptor is equal to Dart_descriptor , and Attribute_type<i>::type::Dart_const_descriptor is equal to Dart_const_descriptor . 0 $ \\leq $ i $ \\leq $ dimension and i -attributes are non void . It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "116",
+        "section": "Types for Attributes"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attribute_descriptor",
+        "qualified_name": "GenericMap::Attribute_descriptor",
+        "brief": "Attribute_descriptor <i>::type is a descriptor to i -attributes.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension and i -attributes are non void. It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "125",
+        "section": "Types for Attributes"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attribute_const_descriptor",
+        "qualified_name": "GenericMap::Attribute_const_descriptor",
+        "brief": "Attribute_descriptor <i>::type is a const descriptor to i -attributes.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension and i -attributes are non void. It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "134",
+        "section": "Types for Attributes"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_range",
+        "qualified_name": "GenericMap::Dart_range",
+        "brief": "Range of all the darts of the generic map.",
+        "detailed": "This type is a model of Range concept, its iterator type is bidirectional and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "146",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_const_range",
+        "qualified_name": "GenericMap::Dart_const_range",
+        "brief": "Const range of all the darts of the generic map.",
+        "detailed": "This type is a model of ConstRange concept, its iterator type is bidirectional and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "153",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attribute_range",
+        "qualified_name": "GenericMap::Attribute_range",
+        "brief": "Attribute_range <i>::type is the range of all the i -attributes.",
+        "detailed": "Attribute_range <i>::type is a model of Range concept, its iterator type is bidirectional and its value type is Attribute_type<i>::type . 0 $ \\leq $ i $ \\leq $ dimension and i -attributes are non void. It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "165",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Attribute_const_range",
+        "qualified_name": "GenericMap::Attribute_const_range",
+        "brief": "Attribute_const_range <i>::type is the const range of all the i -attributes.",
+        "detailed": "Attribute_const_range <i>::type is a model of ConstRange concept, its iterator type is bidirectional and its value type is Attribute_type<i>::type . 0 $ \\leq $ i $ \\leq $ dimension and i -attributes are non void. It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "176",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_of_orbit_range",
+        "qualified_name": "GenericMap::Dart_of_orbit_range",
+        "brief": "Range of all the darts of the <I...> orbit.",
+        "detailed": "This type is a model of Range concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "184",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_of_orbit_const_range",
+        "qualified_name": "GenericMap::Dart_of_orbit_const_range",
+        "brief": "Const range of all the darts of the <I...> orbit.",
+        "detailed": "This type is a model of ConstRange concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "192",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_of_cell_range",
+        "qualified_name": "GenericMap::Dart_of_cell_range",
+        "brief": "Range of all the darts of an i -cell.",
+        "detailed": "Cells are considered in dim dimension, with 0 $ \\leq $ i $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension . If i==dim+1 , range of all the darts of a connected component. This type is a model of Range concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "203",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_of_cell_const_range",
+        "qualified_name": "GenericMap::Dart_of_cell_const_range",
+        "brief": "Const range of all the darts of the i -cell.",
+        "detailed": "Cells are considered in dim dimension, with 0 $ \\leq $ i $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension . If i==dim+1 , range of all the darts of a connected component. This type is a model of ConstRange concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "214",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "One_dart_per_incident_cell_range",
+        "qualified_name": "GenericMap::One_dart_per_incident_cell_range",
+        "brief": "Range of one dart of each i -cell incident to one j -cell.",
+        "detailed": "Cells are considered in dim dimension, with 0 $ \\leq $ i $ \\leq $ dim+1 , 0 $ \\leq $ j $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension . If i == dim+1 , consider each connected component instead of each i -cell. If j == dim+1 , consider one connected component instead of one j -cell. This type is a model of Range concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "227",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "One_dart_per_incident_cell_const_range",
+        "qualified_name": "GenericMap::One_dart_per_incident_cell_const_range",
+        "brief": "Const range of one dart of each i -cell incident to one j -cell.",
+        "detailed": "Cells are considered in dim dimension, with 0 $ \\leq $ i $ \\leq $ dim+1 , 0 $ \\leq $ j $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension . If i==dim+1 , consider each connected component instead of each i -cell. If j==dim+1 , consider one connected component instead of one j -cell. This type is a model of ConstRange concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "240",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "One_dart_per_cell_range",
+        "qualified_name": "GenericMap::One_dart_per_cell_range",
+        "brief": "Range of one dart of each i -cell of the generic map.",
+        "detailed": "Cells are considered in dim dimension, with 0 $ \\leq $ i $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension . If i==dim+1 , consider each connected component instead of each i -cell. This type is a model of Range concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "252",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "One_dart_per_cell_const_range",
+        "qualified_name": "GenericMap::One_dart_per_cell_const_range",
+        "brief": "Const range of one dart of each i -cell of the generic map.",
+        "detailed": "Cells are considered in dim dimension, with 0 $ \\leq $ i $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension . If i==dim+1 , consider each connected component instead of each i -cell. This type is a model of ConstRange concept, its iterator type is forward and its value type is Dart .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "264",
+        "section": "Range Types"
+      },
+      {
+        "kind": "variable",
+        "name": "dimension",
+        "qualified_name": "GenericMap::dimension",
+        "brief": "The dimension d of the generic map.",
+        "detailed": "",
+        "return_type": "const unsigned int",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "72",
+        "section": "Constants"
+      },
+      {
+        "kind": "variable",
+        "name": "NB_MARKS",
+        "qualified_name": "GenericMap::NB_MARKS",
+        "brief": "The number of available Boolean marks of the generic map.",
+        "detailed": "",
+        "return_type": "const size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "77",
+        "section": "Constants"
+      },
+      {
+        "kind": "variable",
+        "name": "null_descriptor",
+        "qualified_name": "GenericMap::null_descriptor",
+        "brief": "A null descriptor.",
+        "detailed": "This descriptor is not valid and should not be used to access a dart or an attribute.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "82",
+        "section": "Constants"
+      },
+      {
+        "kind": "function",
+        "name": "GenericMap",
+        "qualified_name": "GenericMap::GenericMap",
+        "brief": "Construct a new generic map from another one.",
+        "detailed": "The new generic map is created by copying the darts and the non void attributes of bmap. Map must be a model of GenericMap concept, which can be defined with a different dimension and/or different attributes than *this . In this case, only dimensions that are common to bmap and *this , and only non void i-attributes of bmap whose info type is the same to the info of non void i-attributes of *this , are copied.",
+        "return_type": "",
+        "argsstring": "(const Map &bmap)",
+        "params": [
+          {
+            "type": "const Map &",
+            "name": "bmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "32",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "GenericMap::is_empty",
+        "brief": "Returns true iff the generic map is empty, i.e. it contains no dart.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "274",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_without_boundary",
+        "qualified_name": "GenericMap::is_without_boundary",
+        "brief": "Returns true iff the generic map is without i -boundary.",
+        "detailed": "The map is without i -boundary if there is no i -free dart. 1 $ \\leq $ i $ \\leq $ dimension .",
+        "return_type": "bool",
+        "argsstring": "(unsigned int i) const",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "282",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_without_boundary",
+        "qualified_name": "GenericMap::is_without_boundary",
+        "brief": "Returns true iff the generic map is without boundary in all dimensions.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "287",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_darts",
+        "qualified_name": "GenericMap::number_of_darts",
+        "brief": "Returns the number of darts in the generic map.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "292",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_attributes",
+        "qualified_name": "GenericMap::number_of_attributes",
+        "brief": "Returns the number of i -attributes in the generic map.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "300",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "upper_bound_on_dart_ids",
+        "qualified_name": "GenericMap::upper_bound_on_dart_ids",
+        "brief": "Returns an upper bound of the id of dart descriptors if indices are used or 0 otherwise.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "305",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "upper_bound_on_attribute_ids",
+        "qualified_name": "GenericMap::upper_bound_on_attribute_ids",
+        "brief": "Returns an upper bound of the id of i -attributes descriptors if indices are used or 0 otherwise.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "311",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_dart_used",
+        "qualified_name": "GenericMap::is_dart_used",
+        "brief": "Returns true if d is a descriptor of a used dart (i.e. valid).",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "315",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_free",
+        "qualified_name": "GenericMap::is_free",
+        "brief": "Returns true iff dart d is i -free.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension .",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d, unsigned int i) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "unsigned int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "321",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_free",
+        "qualified_name": "GenericMap::is_free",
+        "brief": "Returns true iff dart d is i -free.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension .",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "328",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "highest_nonfree_dimension",
+        "qualified_name": "GenericMap::highest_nonfree_dimension",
+        "brief": "Returns the highest dimension i such that dart d is not i -free.",
+        "detailed": "-1 if d is free for any dimension.",
+        "return_type": "int",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "333",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "other_extremity",
+        "qualified_name": "GenericMap::other_extremity",
+        "brief": "Returns a descriptor to a dart belonging to the other vertex of the edge containing dart d (but not necessarily to the same edge).",
+        "detailed": "null_descriptor if such a dart does not exist.",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "338",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "other_extremity",
+        "qualified_name": "GenericMap::other_extremity",
+        "brief": "Returns a const descriptor to a dart belonging to the other vertex of the edge containing dart d , when the dart is const (but not necessarily to the same edge).",
+        "detailed": "null_descriptor if such a dart does not exist.",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "343",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "GenericMap::next",
+        "brief": "Returns a descriptor to a dart belonging to the next edge after d , that does not belong to the same 0 -cell than d and that belongs to the same i -cell than d for each i , 2 $ \\leq $ i $ \\leq $ dimension .",
+        "detailed": "",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "348",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "GenericMap::next",
+        "brief": "Returns a const descriptor to a dart belonging to the next edge after d , that does not belong to the same 0 -cell than d and that belongs to the same i -cell than d for each i , 2 $ \\leq $ i $ \\leq $ dimension .",
+        "detailed": "",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "353",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "previous",
+        "qualified_name": "GenericMap::previous",
+        "brief": "Returns a descriptor to a dart belonging to the previous edge before d , that does not belong to the same 0 -cell than d and that belongs to the same i -cell than d for each i , 2 $ \\leq $ i $ \\leq $ dimension .",
+        "detailed": "",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "358",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "previous",
+        "qualified_name": "GenericMap::previous",
+        "brief": "Returns a const descriptor to a dart belonging to the previous edge before d , that does not belong to the same 0 -cell than d and that belongs to the same i -cell than d for each i , 2 $ \\leq $ i $ \\leq $ dimension .",
+        "detailed": "",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "363",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "GenericMap::opposite",
+        "brief": "Returns a descriptor to a dart belonging to the opposite i -cell than d .",
+        "detailed": "This dart does not belong to the same 0 -cell than d , nor to the same i -cell, but belongs to the same i -cell than d for each j , 2 $ \\leq $ j $ \\leq $ dimension , j $ \\neq $ i . 2 $ \\leq $ i $ \\leq $ dimension .",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "370",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "GenericMap::opposite",
+        "brief": "Returns a const descriptor to a dart belonging to the opposite i -cell than d .",
+        "detailed": "This dart does not belong to the same 0 -cell than d , nor to the same i -cell, but belongs to the same i -cell than d for each j , 2 $ \\leq $ j $ \\leq $ dimension , j $ \\neq $ i . 2 $ \\leq $ i $ \\leq $ dimension .",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "377",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "display_characteristics",
+        "qualified_name": "GenericMap::display_characteristics",
+        "brief": "Displays on os the number of elements of the generic map.",
+        "detailed": "Its number of darts, its number of i -cells, for each i , 0 $ \\leq $ i $ \\leq $ dimension , and its number of connected components. Example of output for a 3D combinatorial map containing two disjoint combinatorial tetrahedra: #Darts=24, #0-cells=8, #1-cells=12, #2-cells=8, #3-cells=2, #ccs=2",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "390",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "GenericMap::info",
+        "brief": "Returns the information associated to dart d .",
+        "detailed": "Dart_info is not void .",
+        "return_type": "Dart_info &",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "402",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "GenericMap::info",
+        "brief": "Returns the information associated to dart d , when the dart is const.",
+        "detailed": "Dart_info is not void .",
+        "return_type": "const Dart_info &",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "407",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "attribute",
+        "qualified_name": "GenericMap::attribute",
+        "brief": "Returns a descriptor to the i -attribute associated to dart d .",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void .",
+        "return_type": "Attribute_descriptor < i >::type",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "413",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "attribute",
+        "qualified_name": "GenericMap::attribute",
+        "brief": "Returns a const descriptor to the i -attribute associated to dart d , when the dart is const.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void .",
+        "return_type": "Attribute_const_descriptor < i >::type",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "420",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dart_of_attribute",
+        "qualified_name": "GenericMap::dart_of_attribute",
+        "brief": "Returns one dart of the cell associated to the i -attribute *ah .",
+        "detailed": "nullptr if Supports_cell_dart of i -attributes is equal to Tag_false . 0 $ \\leq $ i $ \\leq $ dimension , i -attributes are non void and ah !=nullptr.",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(typename Attribute_descriptor< i >::type ah)",
+        "params": [
+          {
+            "type": "typename Attribute_descriptor < i >::type",
+            "name": "ah",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "428",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dart_of_attribute",
+        "qualified_name": "GenericMap::dart_of_attribute",
+        "brief": "Returns one dart of the cell associated to the const i -attribute *ah .",
+        "detailed": "nullptr if Supports_cell_dart of i -attributes is equal to Tag_false . 0 $ \\leq $ i $ \\leq $ dimension , i -attributes are non void and ah !=nullptr.",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(typename Attribute_const_descriptor< i >::type ah) const",
+        "params": [
+          {
+            "type": "typename Attribute_const_descriptor < i >::type",
+            "name": "ah",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "436",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info_of_attribute",
+        "qualified_name": "GenericMap::info_of_attribute",
+        "brief": "Returns the information of the i -attribute *ah .",
+        "detailed": "Defined only if Info of i -attributes is not void . 0 $ \\leq $ i $ \\leq $ dimension , i -attributes are non void and ah !=nullptr.",
+        "return_type": "Attribute_type < i >::type::Info &",
+        "argsstring": "(typename Attribute_descriptor< i >::type ah)",
+        "params": [
+          {
+            "type": "typename Attribute_descriptor < i >::type",
+            "name": "ah",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "444",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info_of_attribute",
+        "qualified_name": "GenericMap::info_of_attribute",
+        "brief": "Returns the information of the const i -attribute *ah .",
+        "detailed": "Defined only if Info of i -attributes is not void . 0 $ \\leq $ i $ \\leq $ dimension , i -attributes are non void and ah !=nullptr.",
+        "return_type": "const Attribute_type < i >::type::Info &",
+        "argsstring": "(typename Attribute_const_descriptor< i >::type ah) const",
+        "params": [
+          {
+            "type": "typename Attribute_const_descriptor < i >::type",
+            "name": "ah",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "452",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "GenericMap::info",
+        "brief": "A shortcut for info_of_attribute<i> ( attribute<i> (adart)) .",
+        "detailed": "attribute<i> (adart)!=nullptr .",
+        "return_type": "Attribute_type < i >::type::Info &",
+        "argsstring": "(Dart_descriptor adart)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "adart",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "459",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "info",
+        "qualified_name": "GenericMap::info",
+        "brief": "A shortcut for info_of_attribute<i> ( attribute<i> (adart)) for const descriptor.",
+        "detailed": "attribute<i> (adart)!=nullptr .",
+        "return_type": "const Attribute_type < i >::type::Info &",
+        "argsstring": "(Dart_const_descriptor adart) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "adart",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "466",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dart",
+        "qualified_name": "GenericMap::dart",
+        "brief": "A shortcut for dart_of_attribute<i> ( attribute<i> (adart)) .",
+        "detailed": "attribute<i> (adart)!=nullptr .",
+        "return_type": "Dart_descriptor &",
+        "argsstring": "(Dart_descriptor adart)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "adart",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "473",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dart",
+        "qualified_name": "GenericMap::dart",
+        "brief": "A shortcut for dart_of_attribute<i> ( attribute<i> (adart)) for const descriptor.",
+        "detailed": "attribute<i> (adart)!=nullptr .",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(Dart_const_descriptor adart) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "adart",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "480",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_attribute_used",
+        "qualified_name": "GenericMap::is_attribute_used",
+        "brief": "Returns true if ah points to a used i-attribute (i.e. valid).",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void .",
+        "return_type": "bool",
+        "argsstring": "(typename Attribute_const_descriptor< i >::type ah) const",
+        "params": [
+          {
+            "type": "typename Attribute_const_descriptor < i >::type",
+            "name": "ah",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "486",
+        "section": "Attributes Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dart_descriptor",
+        "qualified_name": "GenericMap::dart_descriptor",
+        "brief": "Returns the dart descriptors of d .",
+        "detailed": "d $ \\in $ darts() .",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart &d)",
+        "params": [
+          {
+            "type": "Dart &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "497",
+        "section": "Transformations Between Descriptors and Instances"
+      },
+      {
+        "kind": "function",
+        "name": "dart_descriptor",
+        "qualified_name": "GenericMap::dart_descriptor",
+        "brief": "Returns the dart const descriptors of d .",
+        "detailed": "d $ \\in $ darts() .",
+        "return_type": "Dart_const_descriptor",
+        "argsstring": "(const Dart &d) const",
+        "params": [
+          {
+            "type": "const Dart &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "503",
+        "section": "Transformations Between Descriptors and Instances"
+      },
+      {
+        "kind": "function",
+        "name": "darts",
+        "qualified_name": "GenericMap::darts",
+        "brief": "Returns a range of all the darts in the generic map.",
+        "detailed": "",
+        "return_type": "Dart_range &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "513",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "darts",
+        "qualified_name": "GenericMap::darts",
+        "brief": "Returns a const range of all the darts in the generic map.",
+        "detailed": "",
+        "return_type": "Dart_const_range &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "518",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "attributes",
+        "qualified_name": "GenericMap::attributes",
+        "brief": "Returns a range of all the i -attributes in the generic map.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void.",
+        "return_type": "Attribute_range < i >::type &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "525",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "attributes",
+        "qualified_name": "GenericMap::attributes",
+        "brief": "Returns a const range of all the i -attributes in the generic map.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void.",
+        "return_type": "Attribute_const_range < i >::type &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "532",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "darts_of_orbit",
+        "qualified_name": "GenericMap::darts_of_orbit",
+        "brief": "Returns a range of all the darts of the orbit <I...>(d) .",
+        "detailed": "The first element in the range points onto d . d $ \\in $ darts() and I... is a sequence of integers $ i_1$ , $ \\ldots$ , $ i_k$ , such that 0 $ \\leq $ $ i_1$ $ < $ $ i_2$ $ < $ $ \\ldots$ $ < $ $ i_k$ $ \\leq $ dimension .",
+        "return_type": "Dart_of_orbit_range",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "540",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "darts_of_orbit",
+        "qualified_name": "GenericMap::darts_of_orbit",
+        "brief": "Returns a const range of all the darts of the orbit <I...>(d) .",
+        "detailed": "The first element in the range points onto d . Same as for the non const version.",
+        "return_type": "Dart_of_orbit_const_range",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "547",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "darts_of_cell",
+        "qualified_name": "GenericMap::darts_of_cell",
+        "brief": "Returns a range of all the darts of the i -cell containing d .",
+        "detailed": "The first element in the range points onto d . i -cells are considered in dim dimension. If i==dim+1 , range of all the darts of the connected component containing d . d $ \\in $ darts() , 0 $ \\leq $ i $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension .",
+        "return_type": "Dart_of_cell_range",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "557",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "darts_of_cell",
+        "qualified_name": "GenericMap::darts_of_cell",
+        "brief": "Returns a const range of all the darts of the i -cell containing d .",
+        "detailed": "The first element in the range points onto d . i -cells are considered in dim dimension. If i==dim+1 , const range of all the darts of the connected component containing d . Same as for the non const version.",
+        "return_type": "Dart_of_cell_const_range",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "566",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "one_dart_per_incident_cell",
+        "qualified_name": "GenericMap::one_dart_per_incident_cell",
+        "brief": "Returns a range of one dart of each i -cell incident to the j -cell containing d .",
+        "detailed": "The first element in the range points onto d . Cells are considered in dim dimension. If i==dim+1 , consider each connected component instead of each i -cell. If j==dim+1 , consider the connected component containing d instead of the j -cell. d $ \\in $ darts() , 0 $ \\leq $ i $ \\leq $ dim+1 , 0 $ \\leq $ j $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension .",
+        "return_type": "One_dart_per_incident_cell_range",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "578",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "one_dart_per_incident_cell",
+        "qualified_name": "GenericMap::one_dart_per_incident_cell",
+        "brief": "Returns a const range of one dart of each i -cell incident to the j -cell containing d .",
+        "detailed": "The first element in the range points onto d . Cells are considered in dim dimension. If i==dim+1 , consider each connected component instead of each i -cell. If j==dim+1 , consider the connected component containing d instead of the j -cell. Same as for the non const version.",
+        "return_type": "One_dart_per_incident_cell_const_range",
+        "argsstring": "(Dart_const_descriptor d) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "588",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "one_dart_per_cell",
+        "qualified_name": "GenericMap::one_dart_per_cell",
+        "brief": "Returns a range of one dart of each i -cell in the generic map.",
+        "detailed": "Cells are considered in dim dimension. If i==dim+1 , range of one dart of each connected component in the generic map. 0 $ \\leq $ i $ \\leq $ dim+1 and 0 $ \\leq $ dim $ \\leq $ dimension .",
+        "return_type": "One_dart_per_cell_range",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "597",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "one_dart_per_cell",
+        "qualified_name": "GenericMap::one_dart_per_cell",
+        "brief": "Returns a const range of one dart of each i -cell in the generic map.",
+        "detailed": "Cells are considered in dim dimension. If i==dim+1 , const range of one dart of each connected component in the generic map. Same as for the non const version.",
+        "return_type": "One_dart_per_cell_const_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "605",
+        "section": "Range Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "create_dart",
+        "qualified_name": "GenericMap::create_dart",
+        "brief": "Creates a new dart in the generic map, and returns the corresponding descriptor.",
+        "detailed": "Calls the constructor of dart having T1 as parameter. A new dart is initialized to be i -free, $ \\forall $ i : 0 $ \\leq $ i $ \\leq $ dimension , and to have no associated attribute for each non void attribute. Overloads of this member function are defined that take from zero to nine arguments. With zero argument, create_dart() creates a new dart by using the default constructor.",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(T1 t1)",
+        "params": [
+          {
+            "type": "T1",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "622",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "erase_dart",
+        "qualified_name": "GenericMap::erase_dart",
+        "brief": "Removes d from the generic map.",
+        "detailed": "d $ \\in $ darts() .",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "629",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "create_attribute",
+        "qualified_name": "GenericMap::create_attribute",
+        "brief": "Creates a new i -attribute in the generic map, and returns the corresponding descriptor.",
+        "detailed": "Calls the constructor of i -attribute having T1 as parameter. Overloads of this member function are defined that take from zero to nine arguments. With zero argument, create_attribute <i>() creates a new i -attribute by using the default constructor. 0 $ \\leq $ i $ \\leq $ dimension , and i -attributes are non void.",
+        "return_type": "Attribute_descriptor < i >::type",
+        "argsstring": "(T1 t1)",
+        "params": [
+          {
+            "type": "T1",
+            "name": "t1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "639",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "erase_attribute",
+        "qualified_name": "GenericMap::erase_attribute",
+        "brief": "Removes the i -attribute *ah from the generic map.",
+        "detailed": "0 $ \\leq $ i $ \\leq $ dimension , i -attributes are non void, and *ah $ \\in $ attributes<i>() .",
+        "return_type": "void",
+        "argsstring": "(Attribute_descriptor< i >::type ah)",
+        "params": [
+          {
+            "type": "Attribute_descriptor < i >::type",
+            "name": "ah",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "647",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "set_attribute",
+        "qualified_name": "GenericMap::set_attribute",
+        "brief": "Associates the i -attribute of all the darts of the i -cell containing d to a .",
+        "detailed": "d $ \\in $ darts() , 0 $ \\leq $ i $ \\leq $ dimension , i -attributes are non void, and *ah $ \\in $ attributes<i>() .",
+        "return_type": "void",
+        "argsstring": "(Dart_descriptor d, Attribute_descriptor< i >::type a)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Attribute_descriptor < i >::type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "654",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "GenericMap::clear",
+        "brief": "Deletes all the darts and all the attributes of the generic map.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "659",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "GenericMap::operator=",
+        "brief": "Assignment operator.",
+        "detailed": "All darts and attributes are duplicated, and the former generic map is deleted.",
+        "return_type": "GenericMap &",
+        "argsstring": "(const GenericMap &bmap)",
+        "params": [
+          {
+            "type": "const GenericMap &",
+            "name": "bmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "665",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "GenericMap::swap",
+        "brief": "Swap the current generic map with bmap .",
+        "detailed": "There is no copy of darts and attributes thus this method runs in constant time.",
+        "return_type": "void",
+        "argsstring": "(GenericMap &bmap)",
+        "params": [
+          {
+            "type": "GenericMap &",
+            "name": "bmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "671",
+        "section": "Modifiers"
+      },
+      {
+        "kind": "function",
+        "name": "are_attributes_automatically_managed",
+        "qualified_name": "GenericMap::are_attributes_automatically_managed",
+        "brief": "Returns the status of the management of the attributes of the generic map.",
+        "detailed": "true if the high level operations update the non void attributes (default value); false otherwise.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "681",
+        "section": "Attributes management"
+      },
+      {
+        "kind": "function",
+        "name": "set_automatic_attributes_management",
+        "qualified_name": "GenericMap::set_automatic_attributes_management",
+        "brief": "Set the status of the management of the attributes of the generic map.",
+        "detailed": "Advanced After calling set_automatic_attributes_management(false) , all high level operations will not update non void attributes, until the call of set_automatic_attributes_management(true) . The call of set_automatic_attributes_management(true) call the correct_invalid_attributes() function.",
+        "return_type": "void",
+        "argsstring": "(bool update_attributes)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "update_attributes",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "691",
+        "section": "Attributes management"
+      },
+      {
+        "kind": "function",
+        "name": "correct_invalid_attributes",
+        "qualified_name": "GenericMap::correct_invalid_attributes",
+        "brief": "Correct the invalid attributes of the generic map.",
+        "detailed": "We can have invalid attribute either if we have called set_automatic_attributes_management(false) before to use some modification operations or if we have modified the generic map by using low level operations. $ \\forall i $ , 0 $ \\leq $ i $ \\leq $ dimension such that the i-attributes are non void, $ \\forall $ d $ \\in $ darts() : if there exists a dart d2 in the same i-cell than d with a different i-attribute, then the i-attribute of d2 is set to the i-attribute of d ; if there exists a dart d2 in a different i-cell than d with the same i-attribute, then the i-attribute of all the darts in i-cell( d ) is set to a new i-attribute (copy of the original attribute); ensures that dart_of_attribute(d) $ \\in $ i-cell( d ).",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "702",
+        "section": "Attributes management"
+      },
+      {
+        "kind": "function",
+        "name": "onsplit_function",
+        "qualified_name": "GenericMap::onsplit_function",
+        "brief": "Return the current dynamic on-split function associated with i-attributes.",
+        "detailed": "This is a boost::function returning void and having two references to Attribute_type<i>::type as parameters. The on-split function is returned by reference so that we can modify it.",
+        "return_type": "boost::function< void(typename Attribute_type < i >::type &, typename Attribute_type < i >::type &)> &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "719",
+        "section": "Dynamic On-Merge/On-Split functors"
+      },
+      {
+        "kind": "function",
+        "name": "onsplit_function",
+        "qualified_name": "GenericMap::onsplit_function",
+        "brief": "Return the current dynamic on-split function associated with i-attributes, when *this is const.",
+        "detailed": "This is a boost::function returning void and having two references to Attribute_type<i>::type as parameters.",
+        "return_type": "const boost::function< void(typename Attribute_type < i >::type &, typename Attribute_type < i >::type &)> &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "728",
+        "section": "Dynamic On-Merge/On-Split functors"
+      },
+      {
+        "kind": "function",
+        "name": "onmerge_function",
+        "qualified_name": "GenericMap::onmerge_function",
+        "brief": "Return the current dynamic on-merge function associated with i-attributes.",
+        "detailed": "This is a boost::function returning void and having two references to Attribute_type<i>::type as parameters. The on-merge function is returned by reference so that we can modify it.",
+        "return_type": "boost::function< void(typename Attribute_type < i >::type &, typename Attribute_type < i >::type &)> &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "738",
+        "section": "Dynamic On-Merge/On-Split functors"
+      },
+      {
+        "kind": "function",
+        "name": "onmerge_function",
+        "qualified_name": "GenericMap::onmerge_function",
+        "brief": "Return the current dynamic on-merge function associated with i-attributes, when *this is const.",
+        "detailed": "This is a boost::function returning void and having two references to Attribute_type<i>::type as parameters.",
+        "return_type": "const boost::function< void(typename Attribute_type < i >::type &, typename Attribute_type < i >::type &)> &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "747",
+        "section": "Dynamic On-Merge/On-Split functors"
+      },
+      {
+        "kind": "function",
+        "name": "get_new_mark",
+        "qualified_name": "GenericMap::get_new_mark",
+        "brief": "Reserves a new mark.",
+        "detailed": "Returns its index. If there is no more available free mark, throw the exception Exception_no_more_available_mark.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "758",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "is_reserved",
+        "qualified_name": "GenericMap::is_reserved",
+        "brief": "Returns true iff m is a reserved mark of the generic map.",
+        "detailed": "0 $ \\leq $ m $ < $ NB_MARKS .",
+        "return_type": "bool",
+        "argsstring": "(size_type m) const",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "764",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "is_marked",
+        "qualified_name": "GenericMap::is_marked",
+        "brief": "Returns true iff dart d is marked for m .",
+        "detailed": "is_reserved(m) and d $ \\in $ darts() .",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d, size_type m) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "770",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "mark",
+        "qualified_name": "GenericMap::mark",
+        "brief": "Marks dart d for m .",
+        "detailed": "is_reserved ( m ) and d $ \\in $ darts() .",
+        "return_type": "void",
+        "argsstring": "(Dart_const_descriptor d, size_type m) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "776",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "unmark",
+        "qualified_name": "GenericMap::unmark",
+        "brief": "Unmarks dart d for the mark m .",
+        "detailed": "is_reserved ( m ) and d $ \\in $ darts() .",
+        "return_type": "void",
+        "argsstring": "(Dart_const_descriptor d, size_type m) const",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "782",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "negate_mark",
+        "qualified_name": "GenericMap::negate_mark",
+        "brief": "Inverse the mark m for all the darts of the generic map.",
+        "detailed": "All the marked darts become unmarked and all the unmarked darts become marked. is_reserved ( m ).",
+        "return_type": "void",
+        "argsstring": "(size_type m) const",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "790",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "unmark_all",
+        "qualified_name": "GenericMap::unmark_all",
+        "brief": "Unmarks all the darts of the generic map for m .",
+        "detailed": "is_reserved ( m ).",
+        "return_type": "void",
+        "argsstring": "(size_type m) const",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "796",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_marked_darts",
+        "qualified_name": "GenericMap::number_of_marked_darts",
+        "brief": "Returns the number of marked darts for m .",
+        "detailed": "is_reserved ( m ).",
+        "return_type": "size_type",
+        "argsstring": "(size_type m) const",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "802",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_unmarked_darts",
+        "qualified_name": "GenericMap::number_of_unmarked_darts",
+        "brief": "Return the number of unmarked darts for m .",
+        "detailed": "is_reserved ( m ).",
+        "return_type": "size_type",
+        "argsstring": "(size_type m) const",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "808",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "free_mark",
+        "qualified_name": "GenericMap::free_mark",
+        "brief": "Frees mark m .",
+        "detailed": "is_reserved ( m ).",
+        "return_type": "void",
+        "argsstring": "(size_type m) const",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "814",
+        "section": "Boolean Marks"
+      },
+      {
+        "kind": "function",
+        "name": "make_combinatorial_hexahedron",
+        "qualified_name": "GenericMap::make_combinatorial_hexahedron",
+        "brief": "Creates a combinatorial hexahedron (six combinatorial quadrangles 2-sewn together), and adds it in the generic map.",
+        "detailed": "Returns a descriptor on one dart of this combinatorial hexahedron. dimension $\\geq$ 2. make_edge() make_combinatorial_polygon() make_combinatorial_tetrahedron()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "830",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "make_combinatorial_polygon",
+        "qualified_name": "GenericMap::make_combinatorial_polygon",
+        "brief": "Creates a combinatorial polygon of length lg (a cycle of lg edges), and adds it in the generic map.",
+        "detailed": "Returns a descriptor on one dart of this combinatorial polygon. dimension $ \\geq$ 1 and lg $ >$ 0. make_edge() make_combinatorial_tetrahedron() make_combinatorial_hexahedron()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(unsigned int lg)",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "lg",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "840",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "make_combinatorial_tetrahedron",
+        "qualified_name": "GenericMap::make_combinatorial_tetrahedron",
+        "brief": "Creates a combinatorial tetrahedron (four combinatorial triangles 2-sewn together), and adds it in the generic map.",
+        "detailed": "Returns a descriptor on one dart of this combinatorial tetrahedron. dimension $ \\geq$ 2. make_edge() make_combinatorial_polygon() make_combinatorial_hexahedron()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "850",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "make_edge",
+        "qualified_name": "GenericMap::make_edge",
+        "brief": "Creates an isolated edge (two darts sewn to represent one edge and two vertices) and adds it in the generic map.",
+        "detailed": "Returns a descriptor on one dart of this edge. dimension $ \\geq$ 2. make_combinatorial_polygon() make_combinatorial_tetrahedron() make_combinatorial_hexahedron()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GenericMap.h",
+        "line": "860",
+        "section": "Constructions"
+      },
+      {
+        "kind": "function",
+        "name": "insert_cell_0_in_cell_1",
+        "qualified_name": "GenericMap::insert_cell_0_in_cell_1",
+        "brief": "Inserts a 0-cell in the 1-cell containing d .",
+        "detailed": "Returns next(d) , a descriptor on one dart belonging to the new 0-cell. dimension $ \\geq$ 1 and d $ \\in $ darts() . See examples for combinatorial map in fig__fig_cmap_insert_vertex and for generalized map in fig__fig_gmap_insert_vertex. If are_attributes_automatically_managed() ==true , if 1-attributes are non void , Attribute_type<1>::type::On_split ( a , a' ) is called, with a the original 1-attribute associated with d and a' the new 1-attribute created during the operation. If set, the dynamic on-split function of 1-attributes is also called on a and a' . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. insert_cell_0_in_cell_2() insert_cell_1_in_cell_2() insert_cell_1_between_two_cells_2() insert_dangling_cell_1_in_cell_2() insert_cell_2_in_cell_3 <InputIterator>() remove_cell <i>()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "886",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert_cell_0_in_cell_2",
+        "qualified_name": "GenericMap::insert_cell_0_in_cell_2",
+        "brief": "Inserts a 0-cell in the 2-cell containing d .",
+        "detailed": "The 2-cell is split in triangles, one for each initial edge of the facet. Returns a descriptor on one dart belonging to the new 0-cell. dimension $ \\geq$ 2 and d $ \\in $ darts() . See examples for combinatorial map in fig__fig_cmap_triangulation and for generalized map in fig__fig_gmap_triangulation. If are_attributes_automatically_managed() ==true , if 2-attributes are non void , Attribute_type<2>::type::On_split ( a , a' ) is called, with a the original 2-attribute associated with d and a' each new 2-attribute created during the operation. If set, the dynamic on-split function of 2-attributes is also called on a and a' . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. insert_cell_0_in_cell_2() insert_cell_1_in_cell_2() insert_cell_1_between_two_cells_2() insert_dangling_cell_1_in_cell_2() insert_cell_2_in_cell_3 <InputIterator>() remove_cell <i>()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "907",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert_cell_1_in_cell_2",
+        "qualified_name": "GenericMap::insert_cell_1_in_cell_2",
+        "brief": "Inserts a 1-cell in the 2-cell containing d1 and d2 .",
+        "detailed": "Returns previous(d1) , a descriptor on one dart belonging to the new 1-cell. is_insertable_cell_1_in_cell_2 ( d1 , d2 ). See examples for combinatorial map in fig__fig_cmap_insert_edge and for generalized map in fig__fig_gmap_insert_edge. If are_attributes_automatically_managed() ==true , if 2-attributes are non void , Attribute_type<2>::type::On_split ( a , a' ) is called, with a the original 2-attribute associated with d1 and a' the new 2-attribute created during the operation. If set, the dynamic on-split function of 2-attributes is also called on a and a' . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. is_insertable_cell_1_in_cell_2() insert_cell_0_in_cell_1() insert_cell_0_in_cell_2() insert_cell_1_between_two_cells_2() insert_dangling_cell_1_in_cell_2() insert_cell_2_in_cell_3 <InputIterator>() remove_cell <i>()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "929",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert_cell_1_between_two_cells_2",
+        "qualified_name": "GenericMap::insert_cell_1_between_two_cells_2",
+        "brief": "Inserts a 1-cell between the 2-cell containing d1 and the one containing d2 .",
+        "detailed": "Returns previous(d1) , a descriptor on one dart belonging to the new 1-cell. is_insertable_cell_1_between_two_cells_2 ( d1 , d2 ). If are_attributes_automatically_managed() ==true , call Attribute_type<i>::type::On_merge ( a , a' ) is called for all enabled i-attributes, for i>=2, with a the original 2-attribute associated with d1 and a' the original 2-attribute associated with d2 . If set, the dynamic on-merge function of i-attributes is also called on a and a' . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. is_insertable_cell_1_between_two_cells_2() insert_cell_0_in_cell_1() insert_cell_0_in_cell_2() insert_cell_1_in_cell_2() insert_dangling_cell_1_in_cell_2() insert_cell_2_in_cell_3 <InputIterator>() remove_cell <i>()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "949",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert_cell_1",
+        "qualified_name": "GenericMap::insert_cell_1",
+        "brief": "Call insert_cell_1_in_cell_2() if is_insertable_cell_1_in_cell_2(d1, d2) , otherwise call insert_cell_1_between_two_cells_2() .",
+        "detailed": "insert_cell_1_in_cell_2() insert_cell_1_between_two_cells_2() is_insertable_cell_1_in_cell_2()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "956",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert_cell_2_in_cell_3",
+        "qualified_name": "GenericMap::insert_cell_2_in_cell_3",
+        "brief": "Inserts a 2-cell along the path of 1-cells containing darts given by the range [afirst,alast) .",
+        "detailed": "Returns opposite <2>(*afirst) , a descriptor on one dart belonging to the new 2-cell. is_insertable_cell_2_in_cell_3 ( afirst , alast ). See examples for combinatorial map in fig__fig_cmap_insert_facet and for generalized map in fig__fig_gmap_insert_facet. If are_attributes_automatically_managed() ==true , if 3-attributes are non void , Attribute_type<3>::type::On_split ( a , a' ) is called, with a the original 3-attribute associated with d and a' the new 3-attribute created during the operation. If set, the dynamic on-split function of 3-attributes is also called on a and a' . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. is_insertable_cell_2_in_cell_3 <InputIterator>() insert_cell_0_in_cell_1() insert_cell_0_in_cell_2() insert_cell_1_in_cell_2() insert_cell_1_between_two_cells_2() insert_dangling_cell_1_in_cell_2() remove_cell <i>()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(InputIterator afirst, InputIterator alast)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "afirst",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "alast",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "979",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "insert_dangling_cell_1_in_cell_2",
+        "qualified_name": "GenericMap::insert_dangling_cell_1_in_cell_2",
+        "brief": "Inserts a 1-cell in a the 2-cell containing d , the 1-cell being attached only by one of its extremity to the 0-cell containing d .",
+        "detailed": "Returns previous(d) , a descriptor on the dart belonging to the new 1-cell and to the new 0-cell. dimension $ \\geq$ 2 and d $ \\in $ darts() . See examples for combinatorial map in fig__fig_cmap_insert_edge and for generalized map in fig__fig_gmap_insert_edge. Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. insert_cell_0_in_cell_1() insert_cell_0_in_cell_2() insert_cell_1_in_cell_2() insert_cell_1_between_two_cells_2() insert_cell_2_in_cell_3 <InputIterator>() remove_cell <i>()",
+        "return_type": "Dart_descriptor",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "999",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_insertable_cell_1_in_cell_2",
+        "qualified_name": "GenericMap::is_insertable_cell_1_in_cell_2",
+        "brief": "Returns true iff it is possible to insert a 1-cell in the generic map between d1 and d2 .",
+        "detailed": "This is possible if d1 $ \\neq $ d2 and d1 can be reached from d2 by using some previous and next calls. dimension $ \\geq$ 2, d1 $ \\in $ darts() , and d2 $ \\in $ darts() . insert_cell_1_in_cell_2() is_insertable_cell_2_in_cell_3 <InputIterator>()",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d1, Dart_const_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "1011",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_insertable_cell_1_between_two_cells_2",
+        "qualified_name": "GenericMap::is_insertable_cell_1_between_two_cells_2",
+        "brief": "Returns true iff it is possible to insert a 1-cell in the generic map between d1 and d2 .",
+        "detailed": "This is possible if d1 $ \\neq $ d2 and d1 can not be reached from d2 by using some previous and next calls. dimension $ \\geq$ 2, d1 $ \\in $ darts() , and d2 $ \\in $ darts() . insert_cell_1_between_two_cells_2()",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d1, Dart_const_descriptor d2)",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "1022",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_insertable_cell_2_in_cell_3",
+        "qualified_name": "GenericMap::is_insertable_cell_2_in_cell_3",
+        "brief": "Returns true iff it is possible to insert a 2-cell in the generic map along the path of darts given by the range [afirst,alast) .",
+        "detailed": "The 2-cell can be inserted iff the ordered list of darts form a closed path of edges inside a same volume. dimension $ \\geq$ 3. insert_cell_2_in_cell_3 <InputIterator>() is_insertable_cell_1_in_cell_2()",
+        "return_type": "bool",
+        "argsstring": "(InputIterator afirst, InputIterator alast)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "afirst",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "alast",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "1033",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_removable",
+        "qualified_name": "GenericMap::is_removable",
+        "brief": "Returns true iff the i -cell containing d can be removed.",
+        "detailed": "An i -cell can be removed if i == dimension or if i == dimension -1 or if i $ < $ dimension -1 and the i -cell containing d is incident to at most two ( i+1 )-cells. 0 $ \\leq $ i $ \\leq $ dimension and d $ \\in $ darts() . remove_cell <i>()",
+        "return_type": "bool",
+        "argsstring": "(Dart_const_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_const_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "1044",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "remove_cell",
+        "qualified_name": "GenericMap::remove_cell",
+        "brief": "Removes the i -cell containing d .",
+        "detailed": "Returns the number of darts removed from the generic map. is_removable<i> ( d ). See examples in fig__fig_cmap_insert_vertex , fig__fig_cmap_insert_edge and fig__fig_cmap_insert_facet . If are_attributes_automatically_managed() ==true , if i $ < $ dimension , and i+1 -attributes are non void , and if there are two distinct ( i+1 )-cells around dart d , Attribute_type<i+1>::type::On_merge ( a1 , a2 ) is called, with a1 the ( i+1 )-attribute associated to d , and a2 the ( i+1 )-attribute associated to $ \\beta_{i+1}$ ( d ). If set, the dynamic on-merge function of i+1 -attributes is also called on a1 and a2 . If are_attributes_automatically_managed() ==true , if a j -cell is disconnected in two j -cells during the operation, and if j -attributes are non void, Attribute_type<j>::type::On_split ( a , a' ) is called with a the original j -attribute and a' the new j -attribute created due to the disconnection. If set, the dynamic on-split function of j -attributes is also called on a and a' . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation. is_removable <i>() insert_cell_0_in_cell_1() insert_cell_0_in_cell_2() insert_cell_1_in_cell_2() insert_cell_1_between_two_cells_2() insert_dangling_cell_1_in_cell_2() insert_cell_2_in_cell_3 <InputIterator>()",
+        "return_type": "size_type",
+        "argsstring": "(Dart_descriptor d)",
+        "params": [
+          {
+            "type": "Dart_descriptor",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GenericMap.h",
+        "line": "1069",
+        "section": "Operations"
+      }
+    ]
+  },
+  "GenericMapItems": {
+    "kind": "class",
+    "name": "GenericMapItems",
+    "brief": "The concept GenericMapItems allows to customize a d D generic map by choosing the information associated with darts, by enabling and disabling some attributes, and by choosing to use indices or handles. For that, it defines an inner class template named Dart_wrapper , with one template parameter, Map , a model of the GenericMap concept. This inner class can define the two types Dart_info and Attributes .",
+    "detailed": "Has models CGAL::Generic_map_min_items GenericMap Example The following examples show two possible models of the GenericMapItems concept: the first one for a generic map without dart information, nor enabled attributes, the second one for a generic map that uses std::uint16_t as indices, with a double associated with each dart, and edge attributes enabled, and associated with a Cell_attribute containing an int . struct Example_Item_1 { template < class CMap > struct Dart_wrapper {}; }; struct Example_Item_2 { typedef CGAL::Tag_true Use_index; // CGAL::Tag_false by default typedef std::uint16_t Index_type; // std::uint32_t by default template < class GMap > struct Dart_wrapper { typedef double Dart_info; typedef CGAL::Cell_attribute<GMap, int> Edge_attrib; typedef std::tuple<void,Edge_attrib> Attributes; }; };",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Use_index",
+        "qualified_name": "GenericMapItems::Use_index",
+        "brief": "If Use_index is CGAL::Tag_true , uses indices as descriptors.",
+        "detailed": "Otherwise (if this type is not defined or different from CGAL::Tag_true ), use handles.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMapItems.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Index_type",
+        "qualified_name": "GenericMapItems::Index_type",
+        "brief": "Number type used for indices when Use_index is CGAL::Tag_true.",
+        "detailed": "By default, use std::uint32_t.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMapItems.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Dart_wrapper",
+        "qualified_name": "GenericMapItems::Dart_wrapper",
+        "brief": "Wrapper class defining type of information associated with darts and types of attributes.",
+        "detailed": "The class Dart_wrapper<Map> must provide: Dart_wrapper<Map>::Dart_info , the type of information associated with darts. Not defined or equal to void to have no information. Dart_wrapper<Map>::Attributes The tuple of attributes, containing at most Map::dimension+1 types (one for each possible cell of the generic map). Each type of the tuple must be either a model of the CellAttribute concept or void . The first type corresponds to 0-attributes, the second to 1-attributes and so on. If the $ i^{\\mbox{th}}$ type in the tuple is void , ( i -1)-attributes are disabled. Otherwise, ( i -1)-attributes are enabled and have the given type. If the size of the tuple is k , with k < Map::dimension +1, $ \\forall$ i : k $ \\leq$ i $ \\leq$ Map::dimension , i -attributes are disabled. If this type is not defined, all attributes are disabled. It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/GenericMapItems.h",
+        "line": "60",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,1277 @@
+{
+  "AnalyticWeightTraits_2": {
+    "kind": "class",
+    "name": "AnalyticWeightTraits_2",
+    "brief": "A concept that describes the set of requirements of classes used in the computation of analytic weights in 2D.",
+    "detailed": "Has models All models of the CGAL concept Kernel sCGAL:Projection_traits_xy_3<K> CGAL::Projection_traits_yz_3<K> CGAL::Projection_traits_xz_3<K>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "AnalyticWeightTraits_2::FT",
+        "brief": "A model of FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Comparison_result",
+        "qualified_name": "AnalyticWeightTraits_2::Comparison_result",
+        "brief": "CGAL::Comparison_result or Uncertain<CGAL::Comparison_result> .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation",
+        "qualified_name": "AnalyticWeightTraits_2::Orientation",
+        "brief": "CGAL::Orientation or Uncertain<CGAL::Orientation> .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "AnalyticWeightTraits_2::Point_2",
+        "brief": "2D point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "45",
+        "section": "Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_2",
+        "qualified_name": "AnalyticWeightTraits_2::Vector_2",
+        "brief": "2D vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "50",
+        "section": "Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_area_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compute_area_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns the signed area of the triangle defined by the points p , q , and r .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "64",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compute_squared_distance_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Point_2 & p, const Point_2 & q) that returns the squared Euclidean distance between the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "73",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compute_squared_length_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Vector_2 & v) that returns the squared length of the vector v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "82",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compute_scalar_product_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Vector_2 & v, const Vector_2 & w) that returns the scalar product of the vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "91",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_determinant_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compute_determinant_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Vector_2 & v, const Vector_2 & w) that returns the determinant of the vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "100",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circumcenter_2",
+        "qualified_name": "AnalyticWeightTraits_2::Construct_circumcenter_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_2 operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns the center of the circle passing through the points p , q , and r . The points p , q , and r are not collinear.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "111",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_2",
+        "qualified_name": "AnalyticWeightTraits_2::Construct_vector_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_2 operator()(const Point_2 & p, const Point_2 & q) that returns the vector through the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "120",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_midpoint_2",
+        "qualified_name": "AnalyticWeightTraits_2::Construct_midpoint_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_2 operator()(const Point_2 & p, const Point_2 & q) that returns the midpoint between the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "129",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_centroid_2",
+        "qualified_name": "AnalyticWeightTraits_2::Construct_centroid_2",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_2 operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns the centroid of the points p , q , and r .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "138",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_2",
+        "qualified_name": "AnalyticWeightTraits_2::Equal_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(const Point_2 & p, const Point_2 & q) that returns true if p = q and false otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "152",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Collinear_2",
+        "qualified_name": "AnalyticWeightTraits_2::Collinear_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns true if the points p , q , and r are collinear and false otherwise.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "161",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_xy_2",
+        "qualified_name": "AnalyticWeightTraits_2::Less_xy_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "bool operator()(const Point_2 & p, const Point_2 & q) that returns true iff the x-coordinate of p is smaller than the x-coordinate of q or if they are the same and the y-coordinate of p is smaller than the y-coordinate of q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "171",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_x_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compare_x_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "Comparison_result operator()(const Point_2 & p, const Point_2 & q) that compares the Cartesian x-coordinates of the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "180",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_y_2",
+        "qualified_name": "AnalyticWeightTraits_2::Compare_y_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "Comparison_result operator()(const Point_2 & p, const Point_2 & q) that compares the Cartesian y-coordinates of the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "189",
+        "section": "Predicates"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "AnalyticWeightTraits_2::Orientation_2",
+        "brief": "A predicate object that must provide the function operator:",
+        "detailed": "Orientation operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns CGAL::LEFT_TURN if r lies to the left of the oriented line l defined by p and q , returns CGAL::RIGHT_TURN if r lies to the right of l , and returns CGAL::COLLINEAR if r lies on l .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_2.h",
+        "line": "199",
+        "section": "Predicates"
+      }
+    ]
+  },
+  "AnalyticWeightTraits_3": {
+    "kind": "class",
+    "name": "AnalyticWeightTraits_3",
+    "brief": "A concept that describes the set of requirements of classes used in the computation of analytic weights in 3D.",
+    "detailed": "Has models All models of the CGAL concept Kernel",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "AnalyticWeightTraits_3::FT",
+        "brief": "A model of FieldNumberType .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "22",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "AnalyticWeightTraits_3::Point_3",
+        "brief": "3D point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "32",
+        "section": "Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "AnalyticWeightTraits_3::Vector_3",
+        "brief": "3D vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "37",
+        "section": "Geometric Objects"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "AnalyticWeightTraits_3::Compute_squared_distance_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Point_3 & p, const Point_3 & q) that returns the squared Euclidean distance between the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "51",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_length_3",
+        "qualified_name": "AnalyticWeightTraits_3::Compute_squared_length_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Vector_3 & v) that returns the squared length of the vector v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "60",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "AnalyticWeightTraits_3::Compute_scalar_product_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "FT operator()(const Vector_3 & v, const Vector_3 & w) that returns the scalar product of the vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "69",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_cross_product_vector_3",
+        "qualified_name": "AnalyticWeightTraits_3::Construct_cross_product_vector_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_3 operator()(const Vector_3 & v, const Vector_3 & w) that returns the cross product of the vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "78",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circumcenter_3",
+        "qualified_name": "AnalyticWeightTraits_3::Construct_circumcenter_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q, const Point_3 & r) that returns the center of the circle passing through the points p , q , and r . The points p , q , and r are not collinear.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "89",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "AnalyticWeightTraits_3::Construct_vector_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Vector_3 operator()(const Point_3 & p, const Point_3 & q) that returns the vector through the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "98",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_midpoint_3",
+        "qualified_name": "AnalyticWeightTraits_3::Construct_midpoint_3",
+        "brief": "A construction object that must provide the function operator:",
+        "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q) that returns the midpoint between the points p and q .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "107",
+        "section": "Constructions"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_centroid_3",
+        "qualified_name": "AnalyticWeightTraits_3::Construct_centroid_3",
+        "brief": "A construction object that must provide two function operators:",
+        "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q, const Point_3 & r) that returns the centroid of the points p , q , and r and Point_3 operator()(const Point_3 & p, const Point_3 & q, const Point_3 & r, const Point_3 & s) that returns the centroid of the points p , q , r and s .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AnalyticWeightTraits_3.h",
+        "line": "120",
+        "section": "Constructions"
+      }
+    ]
+  },
+  "BarycentricWeights_2": {
+    "kind": "class",
+    "name": "BarycentricWeights_2",
+    "brief": "A concept that describes the set of methods required in all classes used in the computation of 2D generalized barycentric weights.",
+    "detailed": "Has models CGAL::Weights::Wachspress_weights_2 CGAL::Weights::Mean_value_weights_2 CGAL::Weights::Discrete_harmonic_weights_2",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "BarycentricWeights_2::operator()",
+        "brief": "fills a destination range with 2D generalized barycentric weights computed at the query point with respect to the vertices of the input polygon.",
+        "detailed": "OutIterator a model of OutputIterator whose value type is FieldNumberType The number of computed weights is equal to the number of polygon vertices.",
+        "return_type": "OutIterator",
+        "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutIterator",
+            "name": "w_begin",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/BarycentricWeights_2.h",
+        "line": "28",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Weights::Discrete_harmonic_weights_2": {
+    "kind": "class",
+    "name": "CGAL::Weights::Discrete_harmonic_weights_2",
+    "brief": "2D discrete harmonic weights for polygons.",
+    "detailed": "This class implements 2D discrete harmonic weights ( [1] , [2] , [6] ) which can be computed at any point inside a strictly convex polygon. Discrete harmonic weights are well-defined inside a strictly convex polygon but they are not necessarily positive. These weights are computed analytically using the formulation from the discrete_harmonic_weight() . VertexRange a model of ConstRange whose iterator type is RandomAccessIterator GeomTraits a model of AnalyticWeightTraits_2 PointMap a model of ReadablePropertyMap whose key type is VertexRange::value_type and value type is Point_2 . The default is CGAL::Identity_property_map . Is model of BarycentricWeights_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "166",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::Point_2",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "GeomTraits::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "169",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Discrete_harmonic_weights_2",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::Discrete_harmonic_weights_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "This class implements the behavior of discrete harmonic weights for 2D query points inside strictly convex polygons. polygon an instance of VertexRange with the vertices of a strictly convex polygon traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided point_map an instance of PointMap that maps a vertex from polygon to Point_2 ; the default initialization is provided polygon.size() >= 3 polygon is simple polygon is strictly convex",
+        "return_type": "",
+        "argsstring": "(const VertexRange &polygon, const GeomTraits traits=GeomTraits(), const PointMap point_map=PointMap())",
+        "params": [
+          {
+            "type": "const VertexRange &",
+            "name": "polygon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          },
+          {
+            "type": "const PointMap",
+            "name": "point_map",
+            "default": "PointMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "192",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::operator()",
+        "brief": "computes 2D discrete harmonic weights.",
+        "detailed": "This function fills a destination range with 2D discrete harmonic weights computed at the query point with respect to the vertices of the input polygon. The number of computed weights is equal to the number of polygon vertices. OutIterator a model of OutputIterator whose value type is FT query a query point w_begin the beginning of the destination range with the computed weights an output iterator to the element in the destination range, one past the last weight stored",
+        "return_type": "OutIterator",
+        "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutIterator",
+            "name": "w_begin",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "229",
+        "section": "Access"
+      },
+      {
+        "kind": "variable",
+        "name": "m_polygon",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_polygon",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VertexRange &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "250",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_point_map",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const PointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "252",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_area_2",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_area_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Area_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "254",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_squared_distance_2",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_squared_distance_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Squared_distance_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "255",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "r",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::r",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "257",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "A",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::A",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "258",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "B",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::B",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "259",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "w",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::w",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "260",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::resize",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "262",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "optimal_weights",
+        "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::optimal_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_2 &query, OutputIterator weights, const bool normalize)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "weights",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "normalize",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/discrete_harmonic_weights.h",
+        "line": "271",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Weights::Mean_value_weights_2": {
+    "kind": "class",
+    "name": "CGAL::Weights::Mean_value_weights_2",
+    "brief": "2D mean value weights for polygons.",
+    "detailed": "This class implements 2D mean value weights ( [2] , [3] , [4] ) which can be computed at any point inside and outside a simple polygon. Mean value weights are well-defined inside and outside a simple polygon and are non-negative in the kernel of a star-shaped polygon. These weights are computed analytically using the formulation from tangent_weight() . VertexRange a model of ConstRange whose iterator type is RandomAccessIterator GeomTraits a model of AnalyticWeightTraits_2 PointMap a model of ReadablePropertyMap whose key type is VertexRange::value_type and value type is Point_2 . The default is CGAL::Identity_property_map . Is model of BarycentricWeights_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "221",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::Point_2",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "GeomTraits::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "224",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Mean_value_weights_2",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::Mean_value_weights_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "This class implements the behavior of mean value weights for 2D query points inside simple polygons. polygon an instance of VertexRange with the vertices of a simple polygon traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided point_map an instance of PointMap that maps a vertex from polygon to Point_2 ; the default initialization is provided polygon.size() >= 3 polygon is simple",
+        "return_type": "",
+        "argsstring": "(const VertexRange &polygon, const GeomTraits traits=GeomTraits(), const PointMap point_map=PointMap())",
+        "params": [
+          {
+            "type": "const VertexRange &",
+            "name": "polygon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          },
+          {
+            "type": "const PointMap",
+            "name": "point_map",
+            "default": "PointMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "246",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::operator()",
+        "brief": "computes 2D mean value weights.",
+        "detailed": "This function fills a destination range with 2D mean value weights computed at the query point with respect to the vertices of the input polygon. The number of computed weights is equal to the number of polygon vertices. OutIterator a model of OutputIterator whose value type is FT query a query point w_begin the beginning of the destination range with the computed weights an output iterator to the element in the destination range, one past the last weight stored",
+        "return_type": "OutIterator",
+        "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutIterator",
+            "name": "w_begin",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "284",
+        "section": "Access"
+      },
+      {
+        "kind": "variable",
+        "name": "m_polygon",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_polygon",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VertexRange &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "305",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "306",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_point_map",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const PointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "307",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_area_2",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_area_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Area_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "309",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_construct_vector_2",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_construct_vector_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Construct_vector_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "310",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_squared_length_2",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_squared_length_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Squared_length_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "311",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_scalar_product_2",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_scalar_product_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Scalar_product_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "312",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_sqrt",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_sqrt",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Sqrt",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "313",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "s",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::s",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Vector_2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "315",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "r",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::r",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "316",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "A",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::A",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "317",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "D",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::D",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "318",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "t",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::t",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "319",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "w",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::w",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "320",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::resize",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "322",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "optimal_weights",
+        "qualified_name": "CGAL::Weights::Mean_value_weights_2::optimal_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_2 &query, OutputIterator weights, const bool normalize)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "weights",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "normalize",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/mean_value_weights.h",
+        "line": "333",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Weights::Wachspress_weights_2": {
+    "kind": "class",
+    "name": "CGAL::Weights::Wachspress_weights_2",
+    "brief": "2D Wachspress weights for polygons.",
+    "detailed": "This class implements 2D Wachspress weights ( [2] , [5] , [7] ) which can be computed at any point inside a strictly convex polygon. Wachspress weights are well-defined and non-negative inside a strictly convex polygon. The weights are computed analytically using the formulation from the wachspress_weight() . VertexRange a model of ConstRange whose iterator type is RandomAccessIterator GeomTraits a model of AnalyticWeightTraits_2 PointMap a model of ReadablePropertyMap whose key type is VertexRange::value_type and value type is Point_2 . The default is CGAL::Identity_property_map . Is model of BarycentricWeights_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "GeomTraits::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "162",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::Point_2",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "GeomTraits::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "165",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Wachspress_weights_2",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::Wachspress_weights_2",
+        "brief": "initializes all internal data structures.",
+        "detailed": "This class implements the behavior of Wachspress weights for 2D query points inside strictly convex polygons. polygon an instance of VertexRange with the vertices of a strictly convex polygon traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided point_map an instance of PointMap that maps a vertex from polygon to Point_2 ; the default initialization is provided polygon.size() >= 3 polygon is simple polygon is strictly convex",
+        "return_type": "",
+        "argsstring": "(const VertexRange &polygon, GeomTraits traits=GeomTraits(), const PointMap point_map=PointMap())",
+        "params": [
+          {
+            "type": "const VertexRange &",
+            "name": "polygon",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "GeomTraits",
+            "name": "traits",
+            "default": "GeomTraits()",
+            "brief": ""
+          },
+          {
+            "type": "const PointMap",
+            "name": "point_map",
+            "default": "PointMap()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "188",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::operator()",
+        "brief": "computes 2D Wachspress weights.",
+        "detailed": "This function fills a destination range with 2D Wachspress weights computed at the query point with respect to the vertices of the input polygon. The number of computed weights is equal to the number of polygon vertices. OutIterator a model of OutputIterator whose value type is FT query a query point w_begin the beginning of the destination range with the computed weights an output iterator to the element in the destination range, one past the last weight stored",
+        "return_type": "OutIterator",
+        "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutIterator",
+            "name": "w_begin",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "225",
+        "section": "Access"
+      },
+      {
+        "kind": "variable",
+        "name": "m_polygon",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_polygon",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VertexRange &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "247",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_traits",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_traits",
+        "brief": "",
+        "detailed": "",
+        "return_type": "GeomTraits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "248",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_point_map",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_point_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const PointMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "249",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_area_2",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_area_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Area_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "A",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::A",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "253",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "C",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::C",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "254",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "w",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::w",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "255",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::resize",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "257",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "optimal_weights",
+        "qualified_name": "CGAL::Weights::Wachspress_weights_2::optimal_weights",
+        "brief": "",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point_2 &query, OutputIterator weights, const bool normalize)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "weights",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const bool",
+            "name": "normalize",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Weights/wachspress_weights.h",
+        "line": "265",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Weights": {
+    "kind": "namespace",
+    "name": "CGAL::Weights",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

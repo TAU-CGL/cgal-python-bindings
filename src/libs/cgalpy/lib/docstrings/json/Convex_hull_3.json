@@ -1,0 +1,1152 @@
+{
+  "CGAL::Convex_hull_3::Do_intersect_traits": {
+    "kind": "struct",
+    "name": "CGAL::Convex_hull_3::Do_intersect_traits",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Convex_hull_hierarchy_3": {
+    "kind": "struct",
+    "name": "CGAL::Convex_hull_hierarchy_3",
+    "brief": "This class stores a convex hull in a data structure optimized for fast intersection tests.",
+    "detailed": "More specifically, the structure is optimized for CGAL::extreme_vertex_3() , which is used by CGAL::Convex_hull_3::do_intersect() . The computational complexities of CGAL::extreme_point_3() and consequently CGAL::Convex_hull_3::do_intersect() is $O(n)$ for a range of points, $O(\\sqrt{n})$ on average for a graph, but only $O(\\log{n})$ on average for a Convex_hull_hierarchy_3 , where $n$ is the number of points of the object. Building this structure has linear complexity and is faster than computing a convex hull, but more costly than a single call to CGAL::Convex_hull_3::do_intersect() . It is therefore relevant when many intersection queries are performed, particularly when a convex hull has a large number of vertices. To evaluate this class, we generated convex hulls by sampling $n$ random points on the unit sphere, computing their convex hulls, and performing intersection tests between them. Average performance measurements (times in milliseconds). Sphere size Hull build Hierarchy build do_intersect (Range) do_intersect (Graph) do_intersect (Hull Hierarchy) 40 0.06431 0.006908 0.00260 0.00174 0.00170 100 0.18069 0.016147 0.00594 0.00260 0.00272 350 0.68038 0.076661 0.01976 0.00735 0.00697 1,000 2.14852 0.207484 0.05664 0.02079 0.01292 3,500 7.49052 0.740683 0.19527 0.04876 0.01842 10,000 22.7057 2.22908 0.54977 0.07595 0.02789 35,000 93.7957 8.512 2.00917 0.13722 0.03730 100,000 399.377 32.0424 5.50728 0.39127 0.05841 PolygonMesh The polygon mesh used to construct each level of the hierarchy. Must be a model of VertexListGraph and MutableFaceGraph . An internal property map for CGAL::vertex_point_t must be available, with a value type that is a Point_3 typedef of a CGAL kernel.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "VPM",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::VPM",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename boost::property_map< PolygonMesh, CGAL::vertex_point_t >::const_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename boost::property_traits< VPM >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "74",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "GT",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::GT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Kernel_traits< Point_3 >::Kernel",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename boost::graph_traits< PolygonMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "V2VMap",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::V2VMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename boost::property_map< PolygonMesh, dynamic_vertex_property_t< vertex_descriptor > >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "83",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "RATIO",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::RATIO",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "MAXSIZE_FOR_NAIVE_SEARCH",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::MAXSIZE_FOR_NAIVE_SEARCH",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "hierarchy_sm",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::hierarchy_sm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< PolygonMesh >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "310",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "next_in_hierarchy_maps",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::next_in_hierarchy_maps",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< V2VMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "312",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "to_base_maps",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::to_base_maps",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< V2VMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "314",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Convex_hull_hierarchy_3",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::Convex_hull_hierarchy_3",
+        "brief": "Constructor taking a graph g .",
+        "detailed": "If compute_convex_hull is set to true , compute and use the convex hull of g instead. Graph a model of VertexListGraph NamedParameters a sequence of named parameters g the graph np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of g Type: a model of ReadablePropertyMap whose value type is a point type Default: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in VertexListGraph <button class=\"collapsible\"> compute_convex_hull </button> If set to true , the convex hull of g is computed. Otherwise, g must be convex. Type: Boolean Default: true <button class=\"collapsible\"> random_seed </button> Define the seed used by the hierarchy. Type: unsigned int Default: The seed used by CGAL::get_default_random() .",
+        "return_type": "",
+        "argsstring": "(const Graph &g, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const Graph &",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "114",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Convex_hull_hierarchy_3",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::Convex_hull_hierarchy_3",
+        "brief": "Constructor taking the points in the range [first, last) .",
+        "detailed": "PointIterator is an input iterator with a value type equivalent to Traits::Point_3 Traits is a model of the concept ConvexHullTraits_3 . For the purposes of checking the postcondition that the convex hull is valid, Traits must also be a model of the concept IsStronglyConvexTraits_3 .",
+        "return_type": "",
+        "argsstring": "(PointIterator begin, PointIterator end, const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "PointIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PointIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "140",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mesh",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::mesh",
+        "brief": "returns a const reference to the mesh stored by the class.",
+        "detailed": "",
+        "return_type": "const PolygonMesh &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "162",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extreme_vertex_3",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::extreme_vertex_3",
+        "brief": "returns the vertex of the convex hull whose geometric position projected onto that direction is maximal.",
+        "detailed": "If not unique, a single vertex is returned. Direction must be a Direction_3 typedef of a CGAL kernel dir the direction",
+        "return_type": "vertex_descriptor",
+        "argsstring": "(const Direction &dir) const",
+        "params": [
+          {
+            "type": "const Direction &",
+            "name": "dir",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "185",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "maxlevel",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::maxlevel",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "151",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mesh",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const PolygonMesh &",
+        "argsstring": "(std::size_t level) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "level",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "157",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extreme_point_3",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::extreme_point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel_traits< Direction >::Kernel::Point_3",
+        "argsstring": "(const Direction &dir) const",
+        "params": [
+          {
+            "type": "const Direction &",
+            "name": "dir",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "168",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_hierarchy",
+        "qualified_name": "CGAL::Convex_hull_hierarchy_3::init_hierarchy",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Random &rng=get_default_random(), const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "Random &",
+            "name": "rng",
+            "default": "get_default_random()",
+            "brief": ""
+          },
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_hierarchy_3.h",
+        "line": "253",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Convex_hull_traits_3": {
+    "kind": "class",
+    "name": "CGAL::Convex_hull_traits_3",
+    "brief": "The class Convex_hull_traits_3 serves as a traits class for the function convex_hull_3() .",
+    "detailed": "This is the default traits class for this function when R is a kernel with exact predicates but inexact constructions (note that the type Plane_3 is a triple of Point_3 and not R::Plane_3 ). PolygonMesh must be a model of the concept MutableFaceGraph . Is model of ConvexHullTraits_3 IsStronglyConvexTraits_3 The user must include the header file of the polygon mesh type, even for the default type. Advanced This class has a fourth undocumented template argument. Passing CGAL::Tag_false switches off a caching of a plane with coordinates with interval arithmetic. Instead an orientation test of four points is performed.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Segment_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Triangle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Plane_3",
+        "brief": "A triple of points, in order to avoid the need for exact constructions.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polygon_mesh",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Polygon_mesh",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolygonMesh",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Construct_segment_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Construct_segment_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_ray_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Construct_ray_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Construct_ray_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "63",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_plane_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Construct_plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Construct_triangle_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Construct_triangle_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "73",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_centroid_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Construct_centroid_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Construct_centroid_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "78",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Equal_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Equal_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Equal_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Collinear_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Collinear_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Collinear_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "88",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Coplanar_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Coplanar_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Coplanar_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "93",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Less_distance_to_point_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Less_distance_to_point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Less_distance_to_point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "98",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Has_on_positive_side_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Has_on_positive_side_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "103",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Less_signed_distance_to_plane_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Less_signed_distance_to_plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "108",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Traits_xy_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Traits_xy_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Projection_traits_xy_3< R >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "113",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Traits_xz_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Traits_xz_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Projection_traits_xz_3< R >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "118",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Traits_yz_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Traits_yz_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Projection_traits_yz_3< R >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "123",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Ray_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Ray_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Ray_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "128",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Has_on_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Has_on_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Has_on_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "133",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Oriented_side_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Oriented_side_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Oriented_side_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "138",
+        "section": "Types"
+      },
+      {
+        "kind": "variable",
+        "name": "Do_intersect_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Do_intersect_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "R::Do_intersect_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "143",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Convex_hull_traits_3",
+        "qualified_name": "CGAL::Convex_hull_traits_3::Convex_hull_traits_3",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Convex_hull_traits_3 &t)",
+        "params": [
+          {
+            "type": "Convex_hull_traits_3 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Convex_hull_traits_3.h",
+        "line": "153",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Extreme_points_traits_adapter_3": {
+    "kind": "class",
+    "name": "CGAL::Extreme_points_traits_adapter_3",
+    "brief": "The class Extreme_points_traits_adapter_3 serves as a traits class for the function extreme_points_3() .",
+    "detailed": "It permits the use of this function for accessing vertices, indices, or anything that can be used as key_type for PointPropertyMap . PointPropertyMap a model of ReadablePropertyMap with CGAL::Point_3 as value_type. Base_traits a model of ConvexHullTraits_3 and IsStronglyConvexTraits_3 . If the kernel R of the points from PointPropertyMap is a kernel with exact predicates but inexact constructions (in practice we check R::Has_filtered_predicates_tag is Tag_true and R::FT is a floating point type), then the default traits class used is Convex_hull_traits_3 <R> , and R otherwise. Is model of ConvexHullTraits_3 IsStronglyConvexTraits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Extreme_points_traits_adapter_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::key_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Extreme_points_traits_adapter_3.h",
+        "line": "36",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Extreme_points_traits_adapter_3",
+        "qualified_name": "CGAL::Extreme_points_traits_adapter_3::Extreme_points_traits_adapter_3",
+        "brief": "Constructor for the adapter.",
+        "detailed": "It uses the functors from Base_traits with a call to get() for each argument. pmap the propertymap used for retrieving the data. base the base ConvexHullTraits_3 used for extreme_points_3() .",
+        "return_type": "",
+        "argsstring": "(const PointPropertyMap &pmap, Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "const PointPropertyMap &",
+            "name": "pmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Extreme_points_traits_adapter_3.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_point",
+        "qualified_name": "CGAL::Extreme_points_traits_adapter_3::get_point",
+        "brief": "",
+        "detailed": "the CGAL::Point_3 associated with k",
+        "return_type": "boost::property_traits< PointPropertyMap >::reference",
+        "argsstring": "(const typename boost::property_traits< PointPropertyMap >::key_type &k) const",
+        "params": [
+          {
+            "type": "const typename boost::property_traits< PointPropertyMap >::key_type &",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Extreme_points_traits_adapter_3.h",
+        "line": "42",
+        "section": ""
+      }
+    ]
+  },
+  "ConvexHullTraits_3": {
+    "kind": "class",
+    "name": "ConvexHullTraits_3",
+    "brief": "Requirements of the traits class of the function CGAL::convex_hull_3() .",
+    "detailed": "Has models CGAL::Convex_hull_traits_3 <K> CGAL::Extreme_points_traits_adapter_3 <PPM, GT>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "ConvexHullTraits_3::Point_3",
+        "brief": "The point type on which the convex hull algorithm operates.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "22",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "ConvexHullTraits_3::Plane_3",
+        "brief": "a 3D plane",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "27",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "ConvexHullTraits_3::Segment_3",
+        "brief": "a 3D segment",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "ConvexHullTraits_3::Triangle_3",
+        "brief": "a 3D triangle",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_plane_3",
+        "qualified_name": "ConvexHullTraits_3::Construct_plane_3",
+        "brief": "Function object type that provides Plane_3 operator()(Point_3 p, Point_3 q, Point_3 r) , which constructs and returns a plane passing through p , q , and r and oriented in a positive sense when seen from the positive side of the plane.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_3",
+        "qualified_name": "ConvexHullTraits_3::Construct_segment_3",
+        "brief": "Function object type that provides Segment_3 operator()(Point_3 p, Point_3 q) , which constructs and returns the segment with source p and target q .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_3",
+        "qualified_name": "ConvexHullTraits_3::Construct_triangle_3",
+        "brief": "Function object type that provides Triangle_3 operator()(Point_3 p, Point_3 q, Point_3 r) , which constructs and returns the triangle with vertices p , q , and r .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Equal_3",
+        "qualified_name": "ConvexHullTraits_3::Equal_3",
+        "brief": "Predicate object type that provides bool operator()(Point_3 p, Point_3 q) , which determines if points p and q are equal.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Collinear_3",
+        "qualified_name": "ConvexHullTraits_3::Collinear_3",
+        "brief": "Predicate object type that provides bool operator()(Point_3 p, Point_3 q, Point_3 r) , which determines if points p , q and r are collinear.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Coplanar_3",
+        "qualified_name": "ConvexHullTraits_3::Coplanar_3",
+        "brief": "Predicate object type that provides bool operator()(Point_3 p, Point_3 q, Point_3 r, Point_3 s) , which determines if points p , q , r , and s are coplanar.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_on_positive_side_3",
+        "qualified_name": "ConvexHullTraits_3::Has_on_positive_side_3",
+        "brief": "Predicate object type that provides bool operator()(Plane_3 h, Point_3 q) , which determines if the point q is on the positive side of the halfspace h .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "88",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_distance_to_point_3",
+        "qualified_name": "ConvexHullTraits_3::Less_distance_to_point_3",
+        "brief": "Predicate object type that provides bool operator()(Point_3 p, Point_3 q, Point_3 r) , which returns true iff the distance from q to p is smaller than the distance from r to p .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "96",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_signed_distance_to_plane_3",
+        "qualified_name": "ConvexHullTraits_3::Less_signed_distance_to_plane_3",
+        "brief": "Predicate object type that provides bool operator()(Plane_3 p, Point_3 q, Point_3 r) , which returns true iff the signed distance from q to p is smaller than the signed distance from r to p .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "104",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Traits_xy_3",
+        "qualified_name": "ConvexHullTraits_3::Traits_xy_3",
+        "brief": "A traits class providing the requirements of the template parameter Traits of the 2D convex hull function CGAL::ch_akl_toussaint() such that Traits::Point_2 is Point_3 , and the 2D points considered in the algorithm are the projections of the 3D points in the xy -plane.",
+        "detailed": "If this type is not available, the function CGAL::convex_hull_3() will automatically use CGAL::Projection_traits_xy< CGAL::Kernel_traits< Point_3 >::Kernel >. Otherwise, a function must exist with the name construct_traits_xy_3_object() that creates an instance of Traits_xy_3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "116",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Traits_yz_3",
+        "qualified_name": "ConvexHullTraits_3::Traits_yz_3",
+        "brief": "Same as above but in the yz -plane.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "121",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Traits_xz_3",
+        "qualified_name": "ConvexHullTraits_3::Traits_xz_3",
+        "brief": "Same as above but in the xz -plane.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "126",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "ConvexHullTraits_3",
+        "qualified_name": "ConvexHullTraits_3::ConvexHullTraits_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(ConvexHullTraits_3 &ch)",
+        "params": [
+          {
+            "type": "ConvexHullTraits_3 &",
+            "name": "ch",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "137",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "construct_plane_3_object",
+        "qualified_name": "ConvexHullTraits_3::construct_plane_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_plane_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConvexHullTraits_3.h",
+        "line": "152",
+        "section": "Operations"
+      }
+    ]
+  },
+  "IsStronglyConvexTraits_3": {
+    "kind": "class",
+    "name": "IsStronglyConvexTraits_3",
+    "brief": "Requirements of the traits class used by the function CGAL::is_strongly_convex_3() , which is used for postcondition checking by CGAL::convex_hull_3() .",
+    "detailed": "Has models All models of Kernel CGAL::Convex_hull_traits_3 <R> ConvexHullTraits_3 CGAL::is_strongly_convex_3()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Plane_3",
+        "brief": "a 3D plane",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Point_3",
+        "brief": "a 3D point",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ray_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Ray_3",
+        "brief": "a 3D ray",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangle_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Triangle_3",
+        "brief": "a 3D triangle",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_ray_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Construct_ray_3",
+        "brief": "Function object type that provides Ray_3 operator()(Point_3 p, Point_3 q) , which constructs and returns the ray based at point p and passing though q .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_triangle_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Construct_triangle_3",
+        "brief": "Function object type that provides Triangle_3 operator()(Point_3 p, Point_3 q, Point_3 r) , which constructs and returns the triangle with vertices p , q , and r .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Coplanar_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Coplanar_3",
+        "brief": "Predicate object type that provides bool operator()(Point_3 p, Point_3 q, Point_3 r, Point_3 s) , which determines if points p , q , r , and s are coplanar.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Do_intersect_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Do_intersect_3",
+        "brief": "Function object type that provides CGAL::Object operator()(Triangle_3 t, Ray_3 r) , which returns true iff t and r intersect.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "72",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_on_positive_side_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Has_on_positive_side_3",
+        "brief": "Predicate object type that provides bool operator()(Plane_3 h, Point_3 q) , which determines of the point q is on the positive side of the halfspace h .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "79",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Oriented_side_3",
+        "qualified_name": "IsStronglyConvexTraits_3::Oriented_side_3",
+        "brief": "Predicate object type that provides Oriented_side operator()(Plane_3 p, Point_3 q) , which determines the position of point q relative to plane p .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "86",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "IsStronglyConvexTraits_3",
+        "qualified_name": "IsStronglyConvexTraits_3::IsStronglyConvexTraits_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(IsStronglyConvexTraits_3 &t)",
+        "params": [
+          {
+            "type": "IsStronglyConvexTraits_3 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "97",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "construct_ray_3_object",
+        "qualified_name": "IsStronglyConvexTraits_3::construct_ray_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_ray_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/IsStronglyConvexTraits_3.h",
+        "line": "112",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Convex_hull_3": {
+    "kind": "namespace",
+    "name": "CGAL::Convex_hull_3",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

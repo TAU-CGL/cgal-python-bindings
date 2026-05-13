@@ -1,0 +1,1462 @@
+{
+  "CGAL::Conforming_constrained_Delaunay_triangulation_3": {
+    "kind": "class",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_3",
+    "brief": "This class template represents a 3D conforming constrained Delaunay triangulation.",
+    "detailed": "It contains a data member of type Tr and provides additional functionality for handling polygonal constraints during the triangulation process. Traits is the geometric traits class and must be a model of ConformingConstrainedDelaunayTriangulationTraits_3 . Tr is the underlying triangulation class. It must be CGAL::Default or an instance of the CGAL::Triangulation_3 class template with the same Traits template parameter. Its Vertex type must be a model of ConformingConstrainedDelaunayTriangulationVertexBase_3 , and its Cell type must be a model of ConformingConstrainedDelaunayTriangulationCellBase_3 . The default value is Triangulation_3<Traits, TDS> where TDS is Triangulation_data_structure_3< Conforming_constrained_Delaunay_triangulation_vertex_base_3 <Traits>, Conforming_constrained_Delaunay_triangulation_cell_base_3 <Traits>> .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Conforming_constrained_Delaunay_triangulation_3",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Conforming_constrained_Delaunay_triangulation_3",
+        "brief": "Default constructor.",
+        "detailed": "This constructor initializes an empty Conforming_constrained_Delaunay_triangulation_3 object.",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "682",
+        "section": "Constructors"
+      },
+      {
+        "kind": "function",
+        "name": "Conforming_constrained_Delaunay_triangulation_3",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Conforming_constrained_Delaunay_triangulation_3",
+        "brief": "creates a 3D constrained Delaunay triangulation conforming to the faces of a polygon mesh, following the same API and requirements as the function template make_conforming_constrained_Delaunay_triangulation_3() .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PolygonMesh &mesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const PolygonMesh &",
+            "name": "mesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "715",
+        "section": "Constructors"
+      },
+      {
+        "kind": "function",
+        "name": "Conforming_constrained_Delaunay_triangulation_3",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Conforming_constrained_Delaunay_triangulation_3",
+        "brief": "creates a 3D constrained Delaunay triangulation conforming to the faces of a polygon soup, following the same API and requirements as the function template make_conforming_constrained_Delaunay_triangulation_3() .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PointRange &points, const PolygonRange &polygons, const NamedParams &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonRange &",
+            "name": "polygons",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParams &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "927",
+        "section": "Constructors"
+      },
+      {
+        "kind": "function",
+        "name": "triangulation",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::triangulation",
+        "brief": "returns a const reference to the underlying triangulation.",
+        "detailed": "This allows the use of all non-modifying functions of the base triangulation. See the other overload for a way to move the triangulation out of this object and then modify it. Example usage: std::cout << \"Number of vertices in the CDT: \" << ccdt.triangulation().number_of_vertices() << '\\n' ;",
+        "return_type": "const Triangulation &",
+        "argsstring": "() const &",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1038",
+        "section": "Accessors for the Underlying Triangulation"
+      },
+      {
+        "kind": "function",
+        "name": "triangulation",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::triangulation",
+        "brief": "moves and returns the underlying triangulation, then clears the object.",
+        "detailed": "This function allows the underlying triangulation to be moved out of this object. Example usage: auto tr = std::move(ccdt).triangulation(); // Now `tr` is a valid `CGAL::Triangulation_3` object that can be used for further processing. // and the triangulation of `ccdt` is empty. std::cout << \"Number of vertices in the triangulation `tr`: \" << tr.number_of_vertices() << '\\n' ; std::cout << \"Number of vertices in `ccdt`: \" << ccdt.triangulation().number_of_vertices() << '\\n' ; assert(ccdt.triangulation().number_of_vertices() == 0); After calling this function, ccdt will be empty and tr will be move-constructed from the underlying triangulation, avoiding any copy. This function is available only when the object is an rvalue. After this function is called, the object is in a state equivalent to that of a default-constructed object.",
+        "return_type": "Triangulation",
+        "argsstring": "() &&",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1055",
+        "section": "Accessors for the Underlying Triangulation"
+      },
+      {
+        "kind": "function",
+        "name": "is_facet_constrained",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::is_facet_constrained",
+        "brief": "returns whether a facet is constrained or not.",
+        "detailed": "f is a facet of the triangulation, of type Triangulation::Facet , as defined by its triangulation data structure.",
+        "return_type": "bool",
+        "argsstring": "(const typename Triangulation::Facet &f) const",
+        "params": [
+          {
+            "type": "const typename Triangulation::Facet &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1088",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "is_facet_constrained",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::is_facet_constrained",
+        "brief": "same as is_facet_constrained(f) with f being Triangulation::Facet(ch, index) .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(typename Triangulation::Cell_handle ch, int index) const",
+        "params": [
+          {
+            "type": "typename Triangulation::Cell_handle",
+            "name": "ch",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1095",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "face_constraint_index",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::face_constraint_index",
+        "brief": "same as face_constraint_index(f) with f being Triangulation::Facet(ch, index) .",
+        "detailed": "is_facet_constrained ( f )",
+        "return_type": "CDT_3_signed_index",
+        "argsstring": "(typename Triangulation::Cell_handle ch, int i) const",
+        "params": [
+          {
+            "type": "typename Triangulation::Cell_handle",
+            "name": "ch",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1103",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "face_constraint_index",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::face_constraint_index",
+        "brief": "returns the index of the constraint that constrains the facet f",
+        "detailed": "is_facet_constrained ( f )",
+        "return_type": "CDT_3_signed_index",
+        "argsstring": "(const typename Triangulation::Facet &f) const",
+        "params": [
+          {
+            "type": "const typename Triangulation::Facet &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1113",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_constrained_facets",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::number_of_constrained_facets",
+        "brief": "returns the number of constrained facets in the triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation::size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1122",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "constrained_facets_begin",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::constrained_facets_begin",
+        "brief": "returns an iterator to the start of the sequence of constrained facets.",
+        "detailed": "This function provides an iterator to the first facet that is constrained within the triangulation. The sequence of constrained facets is in an arbitrary order.",
+        "return_type": "Constrained_facets_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1134",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "constrained_facets_end",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::constrained_facets_end",
+        "brief": "returns the past-the-end iterator of the sequence of constrained facets.",
+        "detailed": "",
+        "return_type": "Constrained_facets_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1141",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "function",
+        "name": "constrained_facets",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::constrained_facets",
+        "brief": "returns a range of the constrained facets.",
+        "detailed": "Its iterator type is Constrained_facets_iterator",
+        "return_type": "Constrained_facets_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1150",
+        "section": "Accessors for Constrained Facets"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Triangulation",
+        "brief": "The internal triangulation type.",
+        "detailed": "",
+        "return_type": "typename CGAL::Default::Get< Tr, Triangulation_3< Traits, Triangulation_data_structure_3< Conforming_constrained_Delaunay_triangulation_vertex_base_3 < Traits >, Conforming_constrained_Delaunay_triangulation_cell_base_3 < Traits > > > >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "630",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Triangulation::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "648",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::size_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename Triangulation::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "653",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Constrained_facets_iterator",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Constrained_facets_iterator",
+        "brief": "A bidirectional iterator for visiting all constrained facets of the triangulation.",
+        "detailed": "The value type of this iterator is Triangulation::Facet .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1069",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Constrained_facets_range",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Constrained_facets_range",
+        "brief": "defines a range type for iterating over the constrained facets.",
+        "detailed": "This type is used to iterate through all facets that are constrained. Its iterator type is Constrained_facets_iterator .",
+        "return_type": "CGAL::Iterator_range< Constrained_facets_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1078",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "DT_3",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::DT_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_triangulation_3< Traits, typename Triangulation::Triangulation_data_structure >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "637",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "CDT_3_impl",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::CDT_3_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_3_impl< DT_3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "640",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_constrained",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::Is_constrained",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename CDT_3_impl::Is_constrained",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "645",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "cdt_impl",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::cdt_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CDT_3_impl",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "643",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "debug",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::debug",
+        "brief": "Access debug options.",
+        "detailed": "Returns a reference to the debug options object that controls various debugging and algorithmic behaviors. Use this to configure debug flags: ccdt.debug().Steiner_points( true ); ccdt.debug().input_faces( true );",
+        "return_type": "CDT_3::Debug_options &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1175",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "debug",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::debug",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const CDT_3::Debug_options &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1176",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "use_finite_edges_map",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::use_finite_edges_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool b)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1179",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_segment_vertex_epsilon",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::set_segment_vertex_epsilon",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(double eps)",
+        "params": [
+          {
+            "type": "double",
+            "name": "eps",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1180",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_conforming",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::is_conforming",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1183",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::is_valid",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1184",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_missing_segments_file",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::write_missing_segments_file",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &out)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1187",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_all_segments_file",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::write_all_segments_file",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::ostream &out)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1188",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::number_of_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1191",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_cells",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::number_of_cells",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1192",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertex_handles",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::finite_vertex_handles",
+        "brief": "",
+        "detailed": "",
+        "return_type": "auto",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1195",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_cell_handles",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::finite_cell_handles",
+        "brief": "",
+        "detailed": "",
+        "return_type": "auto",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1196",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "all_cell_handles",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::all_cell_handles",
+        "brief": "",
+        "detailed": "",
+        "return_type": "auto",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1197",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_facets",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::finite_facets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "auto",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1198",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "infinite_cell",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::infinite_cell",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation::Cell_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1199",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ancestors_of_Steiner_vertex_on_edge",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::ancestors_of_Steiner_vertex_on_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "auto",
+        "argsstring": "(Vertex_handle v) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1201",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_facets",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_3::write_facets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::ostream &out, const CDT &cdt, FacetRange &&facets) const",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CDT &",
+            "name": "cdt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FacetRange &&",
+            "name": "facets",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_3.h",
+        "line": "1206",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3": {
+    "kind": "class",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3",
+    "brief": "Cell base class for the 3D conforming constrained Delaunay triangulation.",
+    "detailed": "This class is derived from its template parameter CellBase and provides additional functionality required by Conforming_constrained_Delaunay_triangulation_3 . Traits The geometric traits class, which must be a model of ConformingConstrainedDelaunayTriangulationTraits_3 . It should be the same as the geometric traits class of the triangulation. CellBase The base class for the cell, which must be a model of TriangulationCellBase_3 . Is model of ConformingConstrainedDelaunayTriangulationCellBase_3 CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_simplex_base_with_time_stamp< CellBase >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "ccdt_3_data_",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::ccdt_3_data_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_cell_data_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_cell_data_3 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Conforming_constrained_Delaunay_triangulation_cell_data_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "io_signature",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::io_signature",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::string",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "72",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::operator<<",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Conforming_constrained_Delaunay_triangulation_cell_base_3 &c)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Conforming_constrained_Delaunay_triangulation_cell_base_3 &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::operator>>",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, Conforming_constrained_Delaunay_triangulation_cell_base_3 &c)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Conforming_constrained_Delaunay_triangulation_cell_base_3 &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "95",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Cb3",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::Rebind_TDS::Cb3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CellBase::template Rebind_TDS < TDS3 > ::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_cell_base_3 < Traits, Cb3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_base_3.h",
+        "line": "58",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3": {
+    "kind": "class",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3",
+    "brief": "Internal per-cell data for CGAL 3D conforming constrained Delaunay triangulations.",
+    "detailed": "This class is an internal detail of the implementation of CGAL 3D conforming constrained Delaunay triangulations. Any model of the ConformingConstrainedDelaunayTriangulationCellBase_3 concept must include one object of this type as a non-static data member.",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "face_id",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::face_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< CDT_3_signed_index , 4 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "facet_2d",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::facet_2d",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< void *, 4 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "markers",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::markers",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::bitset< static_cast< unsigned >( CDT_3_cell_marker::nb_of_markers )>",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "47",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_marked",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::is_marked",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_marked",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::is_marked",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(CDT_3_cell_marker m) const",
+        "params": [
+          {
+            "type": "CDT_3_cell_marker",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_mark",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::set_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CDT_3_cell_marker m)",
+        "params": [
+          {
+            "type": "CDT_3_cell_marker",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_mark",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::clear_mark",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CDT_3_cell_marker m)",
+        "params": [
+          {
+            "type": "CDT_3_cell_marker",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear_marks",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::clear_marks",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_facet_constraint",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::set_facet_constraint",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i, CDT_3_signed_index face_id, Facet_handle facet_2d)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CDT_3_signed_index",
+            "name": "face_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Facet_handle",
+            "name": "facet_2d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "58",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "face_2",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::face_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "auto",
+        "argsstring": "(const CDT_2 &cdt, int i) const",
+        "params": [
+          {
+            "type": "const CDT_2 &",
+            "name": "cdt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "uint",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3::uint",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unsigned int",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "55",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3": {
+    "kind": "class",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3",
+    "brief": "Vertex base class for the 3D conforming constrained Delaunay triangulation.",
+    "detailed": "This class is derived from its parameter template VertexBase and provides additional functionality required by Conforming_constrained_Delaunay_triangulation_3 . Traits The geometric traits class, model of ConformingConstrainedDelaunayTriangulationTraits_3 . It must be the same as the geometric traits class of the triangulation. VertexBase The base class for the vertex. It must be a model of TriangulationVertexBase_3 . Is model of ConformingConstrainedDelaunayTriangulationVertexBase_3 CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_simplex_base_with_time_stamp< VertexBase >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "ccdt_3_data_",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::ccdt_3_data_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_vertex_data_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_vertex_data_3 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Conforming_constrained_Delaunay_triangulation_vertex_data_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "io_signature",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::io_signature",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::string",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "62",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vb3",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::Rebind_TDS::Vb3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename VertexBase::template Rebind_TDS < TDS3 > ::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Conforming_constrained_Delaunay_triangulation_vertex_base_3 < Traits, Vb3 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_vertex_base_3.h",
+        "line": "51",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_data_3": {
+    "kind": "struct",
+    "name": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_data_3",
+    "brief": "Internal per-vertex data for CGAL 3D conforming constrained Delaunay triangulations.",
+    "detailed": "This class is an internal detail of the implementation of CGAL 3D conforming constrained Delaunay triangulations. Any model of the ConformingConstrainedDelaunayTriangulationVertexBase_3 concept must include one object of this type as a non-static data member.",
+    "members": []
+  },
+  "CGAL::Constrained_triangulation_insertion_exception": {
+    "kind": "class",
+    "name": "CGAL::Constrained_triangulation_insertion_exception",
+    "brief": "Exception type thrown when a constrained Delaunay triangulation cannot be restored after the insertion of constraints.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "m_failed_faces",
+        "qualified_name": "CGAL::Constrained_triangulation_insertion_exception::m_failed_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< CDT_3_signed_index >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Constrained_triangulation_3_types.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Constrained_triangulation_insertion_exception",
+        "qualified_name": "CGAL::Constrained_triangulation_insertion_exception::Constrained_triangulation_insertion_exception",
+        "brief": "Constructor.",
+        "detailed": "failed_faces a vector of indices of the faces that could not be processed.",
+        "return_type": "",
+        "argsstring": "(std::vector< CDT_3_signed_index > failed_faces)",
+        "params": [
+          {
+            "type": "std::vector< CDT_3_signed_index >",
+            "name": "failed_faces",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Constrained_triangulation_3_types.h",
+        "line": "45",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "failed_faces",
+        "qualified_name": "CGAL::Constrained_triangulation_insertion_exception::failed_faces",
+        "brief": "Returns the vector of indices of the faces that could not be processed.",
+        "detailed": "",
+        "return_type": "const std::vector< CDT_3_signed_index > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Constrained_triangulation_3_types.h",
+        "line": "59",
+        "section": ""
+      }
+    ]
+  },
+  "ConformingConstrainedDelaunayTriangulationCellBase_3": {
+    "kind": "class",
+    "name": "ConformingConstrainedDelaunayTriangulationCellBase_3",
+    "brief": "The concept ConformingConstrainedDelaunayTriangulationCellBase_3 refines the concept TriangulationCellBase_3 and describes the requirements for a base cell class of the CGAL::Conforming_constrained_Delaunay_triangulation_3 class.",
+    "detailed": "Refines TriangulationCellBase_3 BaseWithTimeStamp Has models CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3 ConformingConstrainedDelaunayTriangulationVertexBase_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationCellBase_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationCellBase_3.h",
+        "line": "27",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationCellBase_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationCellBase_3.h",
+        "line": "28",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "ConformingConstrainedDelaunayTriangulationTraits_3": {
+    "kind": "class",
+    "name": "ConformingConstrainedDelaunayTriangulationTraits_3",
+    "brief": "The concept ConformingConstrainedDelaunayTriangulationTraits_3 specifies the requirements for the geometric traits class of the triangulation used as the first template parameter Triangulation in the function template CGAL::make_conforming_constrained_Delaunay_triangulation_3() .",
+    "detailed": "Refines DelaunayTriangulationTraits_3 ProjectionTraitsGeometricTraits_3 Has models CGAL::Exact_predicates_inexact_constructions_kernel (recommended) All models of the concept Kernel",
+    "members": [
+      {
+        "kind": "function",
+        "name": "angle_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::angle_3_object",
+        "brief": "returns a function object model of Kernel::Angle_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "28",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compare_angle_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::compare_angle_3_object",
+        "brief": "returns a function object model of Kernel::CompareAngle_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "33",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::compute_scalar_product_3_object",
+        "brief": "returns a function object model of Kernel::ComputeScalarProduct_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "38",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_length_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::compute_squared_length_3_object",
+        "brief": "returns a function object model of Kernel::ComputeSquaredLength_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "43",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_cross_product_vector_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_cross_product_vector_3_object",
+        "brief": "returns a function object model of Kernel::ConstructCrossProductVector_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "48",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_midpoint_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_midpoint_3_object",
+        "brief": "returns a function object model of Kernel::ConstructMidpoint_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "53",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_vector_3_object",
+        "brief": "returns a function object model of Kernel::ConstructVector_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "58",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_scaled_vector_3_object",
+        "brief": "returns a function object model of Kernel::ConstructScaledVector_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "63",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_sum_of_vectors_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_sum_of_vectors_3_object",
+        "brief": "returns a function object model of Kernel::ConstructSumOfVectors_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "68",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_translated_point_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_translated_point_3_object",
+        "brief": "returns a function object model of Kernel::ConstructTranslatedPoint_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "73",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vertex_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::construct_vertex_3_object",
+        "brief": "returns a function object model of Kernel::ConstructVertex_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "78",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_degenerate_3_object",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationTraits_3::is_degenerate_3_object",
+        "brief": "returns a predicate object model of Kernel::IsDegenerate_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationTraits_3.h",
+        "line": "83",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ConformingConstrainedDelaunayTriangulationVertexBase_3": {
+    "kind": "class",
+    "name": "ConformingConstrainedDelaunayTriangulationVertexBase_3",
+    "brief": "The concept ConformingConstrainedDelaunayTriangulationVertexBase_3 refines the concept TriangulationVertexBase_3 and describes the requirements for a base vertex class of the CGAL::Conforming_constrained_Delaunay_triangulation_3 class.",
+    "detailed": "Refines TriangulationVertexBase_3 BaseWithTimeStamp Has models CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3 ConformingConstrainedDelaunayTriangulationCellBase_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationVertexBase_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Conforming_constrained_Delaunay_triangulation_vertex_data_3 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationVertexBase_3.h",
+        "line": "28",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "ccdt_3_data",
+        "qualified_name": "ConformingConstrainedDelaunayTriangulationVertexBase_3::ccdt_3_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const CGAL::Conforming_constrained_Delaunay_triangulation_vertex_data_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/ConformingConstrainedDelaunayTriangulationVertexBase_3.h",
+        "line": "29",
+        "section": "Access Functions"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "CDT_3_cell_marker",
+        "qualified_name": "CGAL::CDT_3_cell_marker",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Conforming_constrained_Delaunay_triangulation_cell_data_3.h",
+        "line": "23",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::IO": {
+    "kind": "namespace",
+    "name": "CGAL::IO",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Tetrahedral_remeshing": {
+    "kind": "namespace",
+    "name": "CGAL::Tetrahedral_remeshing",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

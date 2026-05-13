@@ -1,0 +1,3849 @@
+{
+  "AdaptationPolicy_2": {
+    "kind": "class",
+    "name": "AdaptationPolicy_2",
+    "brief": "The concept AdaptationPolicy_2 defines the requirements on the predicate functors that determine whether a feature of the triangulated Delaunay graph should be rejected or not. It also provides a functor for inserting sites in the Delaunay graph. The last functor is optional and a tag determines whether it is provided or not. Note that while the first two functors do not modify the Delaunay graph they take as an argument, the last ones does.",
+    "detailed": "Refines CopyConstructible Assignable DefaultConstructible Has models CGAL::Identity_policy_2 <DG,AT> CGAL::Apollonius_graph_degeneracy_removal_policy_2 <AG2> CGAL::Apollonius_graph_caching_degeneracy_removal_policy_2 <AG2> CGAL::Delaunay_triangulation_degeneracy_removal_policy_2 <DT2> CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2 <DT2> CGAL::Regular_triangulation_degeneracy_removal_policy_2 <RT2> CGAL::Regular_triangulation_caching_degeneracy_removal_policy_2 <RT2> CGAL::Segment_Delaunay_graph_degeneracy_removal_policy_2 <SDG2> CGAL::Segment_Delaunay_graph_caching_degeneracy_removal_policy_2 <SDG2> DelaunayGraph_2 AdaptationTraits_2 CGAL::Voronoi_diagram_2 <DG,AT,AP>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Site_2",
+        "qualified_name": "AdaptationPolicy_2::Site_2",
+        "brief": "A type for the sites of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_graph",
+        "qualified_name": "AdaptationPolicy_2::Delaunay_graph",
+        "brief": "A type for the triangulated Delaunay graph.",
+        "detailed": "The type Delaunay_graph must be a model of the DelaunayGraph_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_vertex_handle",
+        "qualified_name": "AdaptationPolicy_2::Delaunay_vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_face_handle",
+        "qualified_name": "AdaptationPolicy_2::Delaunay_face_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_edge",
+        "qualified_name": "AdaptationPolicy_2::Delaunay_edge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_Delaunay_edges_iterator",
+        "qualified_name": "AdaptationPolicy_2::All_Delaunay_edges_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_graph::All_edges_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_Delaunay_edges_iterator",
+        "qualified_name": "AdaptationPolicy_2::Finite_Delaunay_edges_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Finite_edges_iterator",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_edge_circulator",
+        "qualified_name": "AdaptationPolicy_2::Delaunay_edge_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Edge_circulator",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "80",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_rejector",
+        "qualified_name": "AdaptationPolicy_2::Edge_rejector",
+        "brief": "A type for the predicate functor that is responsible for rejecting an edge of the Delaunay graph (or equivalently rejecting its dual edge in the Voronoi diagram).",
+        "detailed": "It must be model of the concepts DefaultConstructible , CopyConstructible , Assignable , and AdaptableBinaryFunction . It must provide the following operators: bool operator()(Delaunay_graph dg, Delaunay_edge e) bool operator()(Delaunay_graph dg, Delaunay_face_handle f, int i) bool operator()(Delaunay_graph dg, Delaunay_edge_circulator ec) bool operator()(Delaunay_graph dg, All_Delaunay_edges_iterator eit) bool operator()(Delaunay_graph dg, Finite_Delaunay_edges_iterator eit) The functor returns true iff the edge is rejected.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "102",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_rejector",
+        "qualified_name": "AdaptationPolicy_2::Face_rejector",
+        "brief": "A type for the predicate functor that is responsible for rejecting a vertex of the Delaunay graph (or equivalently its dual face in the Voronoi diagram - hence the name of the functor).",
+        "detailed": "It must be model of the concepts DefaultConstructible , CopyConstructible , Assignable , AdaptableBinaryFunction . It must provide the following operator: bool operator()(Delaunay graph dg, Delaunay_vertex_handle v) The functor returns true iff the face is rejected.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "116",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "AdaptationPolicy_2::Has_inserter",
+        "brief": "A tag for determining if the adaptation policy class provides a functor for inserting sites in the Delaunay graph.",
+        "detailed": "This tag is equal to either CGAL::Tag_true (a site inserter functor is available) or CGAL::Tag_false (a site inserter functor is not available).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "125",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_inserter",
+        "qualified_name": "AdaptationPolicy_2::Site_inserter",
+        "brief": "A type for a functor that inserts sites in the Delaunay graph.",
+        "detailed": "It must be model of the concepts DefaultConstructible , CopyConstructible , Assignable , AdaptableBinaryFunction following operator Delaunay_vertex_handle operator()( Delaunay_graph & dg, Site_2 t) The vertex handle returned either points to the vertex of the Delaunay graph corresponding to the site just inserted or is the default constructed vertex handle. The latter case can happen if the site inserted is hidden , i.e., it has an empty Voronoi cell. This type is required only if the Has_inserter tag is equal to CGAL::Tag_true .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "144",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "edge_rejector_object",
+        "qualified_name": "AdaptationPolicy_2::edge_rejector_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Edge_rejector",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "154",
+        "section": "Access to objects"
+      },
+      {
+        "kind": "function",
+        "name": "face_rejector_object",
+        "qualified_name": "AdaptationPolicy_2::face_rejector_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_rejector",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "159",
+        "section": "Access to objects"
+      },
+      {
+        "kind": "function",
+        "name": "site_inserter_object",
+        "qualified_name": "AdaptationPolicy_2::site_inserter_object",
+        "brief": "This method is required only if Has_inserter is equal to CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "Site_inserter",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "165",
+        "section": "Access to objects"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "AdaptationPolicy_2::clear",
+        "brief": "Clears the state of the adaptation policy.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "179",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "AdaptationPolicy_2::swap",
+        "brief": "The adaptation policies ap and other are swapped.",
+        "detailed": "This method should be preferred to ap=other or ap(other) if other is deleted afterwards.",
+        "return_type": "void",
+        "argsstring": "(AdaptationPolicy_2 other)",
+        "params": [
+          {
+            "type": "AdaptationPolicy_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "187",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "AdaptationPolicy_2::is_valid",
+        "brief": "Tests the validity of the adaptation policy.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "192",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "AdaptationPolicy_2::is_valid",
+        "brief": "Tests the validity of the adaptation policy using extra information from the Delaunay graph dg .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Delaunay_graph dg)",
+        "params": [
+          {
+            "type": "Delaunay_graph",
+            "name": "dg",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/AdaptationPolicy_2.h",
+        "line": "199",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "AdaptationTraits_2": {
+    "kind": "class",
+    "name": "AdaptationTraits_2",
+    "brief": "The concept AdaptationTraits_2 defines the functors required for accessing geometric information in the Delaunay graph that is needed by the CGAL::Voronoi_diagram_2 <DG,AT,AP> class. It optionally defines a functor for performing nearest site queries. A tag is provided for determining whether this functor is defined or not.",
+    "detailed": "Refines CopyConstructible Assignable DefaultConstructible Has models CGAL::Apollonius_graph_adaptation_traits_2 <AG2> CGAL::Delaunay_triangulation_adaptation_traits_2 <DT2> CGAL::Regular_triangulation_adaptation_traits_2 <RT2> CGAL::Segment_Delaunay_graph_adaptation_traits_2 <SDG2> DelaunayGraph_2 CGAL::Voronoi_diagram_2 <DG,AT,AP>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "AdaptationTraits_2::Point_2",
+        "brief": "A type for a point.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_2",
+        "qualified_name": "AdaptationTraits_2::Site_2",
+        "brief": "A type for the sites of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_graph",
+        "qualified_name": "AdaptationTraits_2::Delaunay_graph",
+        "brief": "A type for the triangulated Delaunay graph.",
+        "detailed": "The type Delaunay_graph must be a model of the DelaunayGraph_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_edge",
+        "qualified_name": "AdaptationTraits_2::Delaunay_edge",
+        "brief": "The type of the edges of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_face_handle",
+        "qualified_name": "AdaptationTraits_2::Delaunay_face_handle",
+        "brief": "The type of the face handles of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "57",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_vertex_handle",
+        "qualified_name": "AdaptationTraits_2::Delaunay_vertex_handle",
+        "brief": "The type of the vertex handles of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "62",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Access_site_2",
+        "qualified_name": "AdaptationTraits_2::Access_site_2",
+        "brief": "A type for a functor that accesses the site associated with a vertex.",
+        "detailed": "The functor should be a model of the concepts DefaultConstructible , CopyConstructible , Assignable and AdaptableUnaryFunction . The functor must provide the following operator: result_type operator()(Delaunay_vertex_handle v) where the result type result_type must be either Site_2 or const Site_2 & .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_Voronoi_point_2",
+        "qualified_name": "AdaptationTraits_2::Construct_Voronoi_point_2",
+        "brief": "A type for a functor that constructs the dual point of a (triangular) face in the Delaunay graph.",
+        "detailed": "This point is the Voronoi vertex of the three sites defining the face in the Delaunay graph. The functor must be a model of the concepts DefaultConstructible , CopyConstructible , Assignable , AdaptableUnaryFunction . It must provide the following operator: Point_2 operator()(Delaunay_face_handle f) . The face handle f must not correspond to an infinite face.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "90",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_nearest_site_2",
+        "qualified_name": "AdaptationTraits_2::Has_nearest_site_2",
+        "brief": "A tag for determining if the adaptation traits class provides a functor for performing nearest site queries.",
+        "detailed": "This tag is equal to either CGAL::Tag_true (a nearest site query functor is available) or CGAL::Tag_false (a nearest site query functor is not available).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "99",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Nearest_site_2",
+        "qualified_name": "AdaptationTraits_2::Nearest_site_2",
+        "brief": "A type for a functor that performs nearest site queries.",
+        "detailed": "Semantically, the result of the query is either a face, edge or vertex of the Delaunay graph. It is a face if the query point has at least three closest sites; the returned face has closest sites as vertices. It is an edge if the query point is equidistant to exactly two vertices of the Delaunay graph, which are the source and target vertices of the edge. In all other cases, the search result is a vertex, namely, the unique vertex of the Delaunay graph closest to the query point. The functor must be a model of the concepts DefaultConstructible , CopyConstructible , Assignable , AdaptableBinaryFunction . It must provide the following operator: result_type operator()(Delaunay_graph dg, Point_2 p) where the result type result_type is std::variant< Delaunay_vertex_handle , Delaunay_edge , Delaunay_face_handle > . This type is required only if Has_nearest_site_2 is equal to CGAL::Tag_true .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "123",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "access_site_2_object",
+        "qualified_name": "AdaptationTraits_2::access_site_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Access_site_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "133",
+        "section": "Access to objects"
+      },
+      {
+        "kind": "function",
+        "name": "construct_Voronoi_point_2_object",
+        "qualified_name": "AdaptationTraits_2::construct_Voronoi_point_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_Voronoi_point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "138",
+        "section": "Access to objects"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_site_2_object",
+        "qualified_name": "AdaptationTraits_2::nearest_site_2_object",
+        "brief": "This method is required only if Has_nearest_site_2 is equal to CGAL::Tag_true .",
+        "detailed": "",
+        "return_type": "Nearest_site_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AdaptationTraits_2.h",
+        "line": "144",
+        "section": "Access to objects"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_adaptation_traits_2": {
+    "kind": "struct",
+    "name": "CGAL::Apollonius_graph_adaptation_traits_2",
+    "brief": "The class Apollonius_graph_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.",
+    "detailed": "The template parameter of the Apollonius_graph_adaptation_traits_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D Apollonius graph. Is model of AdaptationTraits_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Apollonius_graph_2<Gt,Agds> CGAL::Apollonius_graph_hierarchy_2<Gt,Agds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_nearest_site_2",
+        "qualified_name": "CGAL::Apollonius_graph_adaptation_traits_2::Has_nearest_site_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_adaptation_traits_2.h",
+        "line": "30",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_caching_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Apollonius_graph_caching_degeneracy_removal_policy_2",
+    "brief": "The class Apollonius_graph_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Apollonius_graph_caching_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D Apollonius graph. This policy caches the results of the edge and face rejectors and results in a Voronoi diagram that has no degenerate features, i.e., no Voronoi edges of zero length and no Voronoi faces of zero area. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Apollonius_graph_degeneracy_removal_policy_2 <AG2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Apollonius_graph_2<Gt,Agds> CGAL::Apollonius_graph_hierarchy_2<Gt,Agds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Apollonius_graph_caching_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_adaptation_policies_2.h",
+        "line": "34",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Apollonius_graph_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Apollonius_graph_degeneracy_removal_policy_2",
+    "brief": "The class Apollonius_graph_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Apollonius_graph_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D Apollonius graph. This policy results in a Voronoi diagram that has no degenerate features, i.e., it has no Voronoi edges of zero length and no Voronoi faces of zero area. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Apollonius_graph_caching_degeneracy_removal_policy_2 <AG2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Apollonius_graph_2<Gt,Agds> CGAL::Apollonius_graph_hierarchy_2<Gt,Agds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Apollonius_graph_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Apollonius_graph_adaptation_policies_2.h",
+        "line": "74",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Delaunay_triangulation_adaptation_traits_2": {
+    "kind": "struct",
+    "name": "CGAL::Delaunay_triangulation_adaptation_traits_2",
+    "brief": "The class Delaunay_triangulation_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.",
+    "detailed": "The template parameter of the Delaunay_triangulation_adaptation_traits_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a 2D Delaunay triangulation. Is model of AdaptationTraits_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Delaunay_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_nearest_site_2",
+        "qualified_name": "CGAL::Delaunay_triangulation_adaptation_traits_2::Has_nearest_site_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_adaptation_traits_2.h",
+        "line": "29",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2",
+    "brief": "The class Delaunay_triangulation_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Delaunay_triangulation_caching_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D Delaunay triangulation. This policy caches the results of the edge and face rejectors and results in a Voronoi diagram that has no degenerate features, i.e., no Voronoi edges of zero length. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Delaunay_triangulation_degeneracy_removal_policy_2 <DT2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Delaunay_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_adaptation_policies_2.h",
+        "line": "33",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Delaunay_triangulation_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Delaunay_triangulation_degeneracy_removal_policy_2",
+    "brief": "The class Delaunay_triangulation_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Delaunay_triangulation_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D Delaunay triangulation. This policy results in a Voronoi diagram that has no degenerate features, i.e., it has no Voronoi edges of zero length. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2 <DT2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Delaunay_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Delaunay_triangulation_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Delaunay_triangulation_adaptation_policies_2.h",
+        "line": "70",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Graphics_scene_options_voronoi_diagram_2": {
+    "kind": "struct",
+    "name": "CGAL::Graphics_scene_options_voronoi_diagram_2",
+    "brief": "The class Graphics_scene_options_voronoi_diagram_2 defines data and methods used to tune the way that the cells of a Voronoi_diagram_2 are considered for drawing or to be added into a graphics scene.",
+    "detailed": "This class is a model of GraphicsSceneOptionsVoronoiDiagram2 . DS a CGAL::Voronoi_diagram_2 . VertexDescriptor a descriptor of vertices of DS . EdgeDescriptor a descriptor of edges of DS . FaceDescriptor a descriptor of faces of DS . Is model of GraphicsSceneOptionsVoronoiDiagram2",
+    "members": []
+  },
+  "CGAL::Identity_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Identity_policy_2",
+    "brief": "The class Identity_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The first template parameter of the Identity_policy_2 class must be a model of the DelaunayGraph_2 concept, whereas as the second template parameter must be a model of the AdaptationTraits_2 concept. This policy rejects no edge and no face of the Delaunay graph, thus giving a Voronoi diagram which is the true dual of the triangulation Delaunay graph. The Voronoi diagram created with this adaptation policy may have degenerate features, such as Voronoi edges of zero length, or Voronoi faces of zero area. This policy assumes that the Delaunay graph, that is adapted, allows for site insertions through an insert method that takes as argument an object of type AT::Site_2 . The site inserter functor provided by this policy uses the aforementioned insert method. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Voronoi_diagram_2 <DG,AT,AP>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Identity_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Identity_policy_2.h",
+        "line": "37",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Regular_triangulation_adaptation_traits_2": {
+    "kind": "struct",
+    "name": "CGAL::Regular_triangulation_adaptation_traits_2",
+    "brief": "The class Regular_triangulation_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.",
+    "detailed": "The template parameter of the Regular_triangulation_adaptation_traits_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a 2D regular triangulation. Is model of AdaptationTraits_2 AdaptationTraits_2 DelaunayGraph_2 Voronoi_diagram_2 <DG,AT,AP> CGAL::Regular_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_nearest_site_2",
+        "qualified_name": "CGAL::Regular_triangulation_adaptation_traits_2::Has_nearest_site_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Regular_triangulation_adaptation_traits_2.h",
+        "line": "29",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Regular_triangulation_caching_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Regular_triangulation_caching_degeneracy_removal_policy_2",
+    "brief": "The class Regular_triangulation_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Regular_triangulation_caching_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D regular triangulation. This policy caches the results of the edge and face rejectors and results in a Voronoi diagram that has no degenerate features, i.e., no Voronoi edges of zero length. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Regular_triangulation_degeneracy_removal_policy_2 <RT2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Regular_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Regular_triangulation_caching_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Regular_triangulation_adaptation_policies_2.h",
+        "line": "33",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Regular_triangulation_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Regular_triangulation_degeneracy_removal_policy_2",
+    "brief": "The class Regular_triangulation_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Regular_triangulation_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D regular triangulation. This policy results in a power diagram that has no degenerate features, i.e., it has no Voronoi edges of zero length. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Regular_triangulation_caching_degeneracy_removal_policy_2 <RT2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Regular_triangulation_2<Traits,Tds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Regular_triangulation_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Regular_triangulation_adaptation_policies_2.h",
+        "line": "70",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Segment_Delaunay_graph_adaptation_traits_2": {
+    "kind": "struct",
+    "name": "CGAL::Segment_Delaunay_graph_adaptation_traits_2",
+    "brief": "The class Segment_Delaunay_graph_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.",
+    "detailed": "The template parameter of the Segment_Delaunay_graph_adaptation_traits_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of the 2D (triangulated) segment Delaunay graph. Is model of AdaptationTraits_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Segment_Delaunay_graph_2<Gt,DS> CGAL::Segment_Delaunay_graph_hierarchy_2<Gt,STag,DS>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_nearest_site_2",
+        "qualified_name": "CGAL::Segment_Delaunay_graph_adaptation_traits_2::Has_nearest_site_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Segment_Delaunay_graph_adaptation_traits_2.h",
+        "line": "30",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Segment_Delaunay_graph_caching_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Segment_Delaunay_graph_caching_degeneracy_removal_policy_2",
+    "brief": "The class Segment_Delaunay_graph_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Segment_Delaunay_graph_caching_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D segment Delaunay graph. This policy caches the results of the edge and face rejectors and results in a Voronoi diagram that has no degenerate features, i.e., no Voronoi edges of zero length and no Voronoi faces of zero area. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Segment_Delaunay_graph_degeneracy_removal_policy_2 <SDG2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Segment_Delaunay_graph_2<Gt,DS> CGAL::Segment_Delaunay_graph_hierarchy_2<Gt,STag,DS>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Segment_Delaunay_graph_caching_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_false",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Segment_Delaunay_graph_adaptation_policies_2.h",
+        "line": "34",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Segment_Delaunay_graph_degeneracy_removal_policy_2": {
+    "kind": "struct",
+    "name": "CGAL::Segment_Delaunay_graph_degeneracy_removal_policy_2",
+    "brief": "The class Segment_Delaunay_graph_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.",
+    "detailed": "The template parameter of the Segment_Delaunay_graph_degeneracy_removal_policy_2 class must be a model of the DelaunayGraph_2 concept, and in particular it has the semantics of a (triangulated) 2D segment Delaunay graphs. This policy results in a Voronoi diagram that has no degenerate features, i.e., it has no Voronoi edges of zero length and no Voronoi faces of zero area. Is model of AdaptationPolicy_2 AdaptationTraits_2 DelaunayGraph_2 CGAL::Segment_Delaunay_graph_caching_degeneracy_removal_policy_2 <SDG2> CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Segment_Delaunay_graph_2<Gt,DS> CGAL::Segment_Delaunay_graph_hierarchy_2<Gt,STag,DS>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Has_inserter",
+        "qualified_name": "CGAL::Segment_Delaunay_graph_degeneracy_removal_policy_2::Has_inserter",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Segment_Delaunay_graph_adaptation_policies_2.h",
+        "line": "73",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL::Voronoi_diagram_2": {
+    "kind": "class",
+    "name": "CGAL::Voronoi_diagram_2",
+    "brief": "The class Voronoi_diagram_2 provides an adaptor that enables us to view a triangulated Delaunay graph as their dual subdivision, the Voronoi diagram.",
+    "detailed": "The class Voronoi_diagram_2 is designed to provide an API that is similar to that of CGAL's arrangements. DG corresponds to the triangulated Delaunay graph and must be a model of the DelaunayGraph_2 concept. AT must be a model of the AdaptationTraits_2 concept. AP must be a model of the AdaptationPolicy_2 concept. The third template parameter defaults to CGAL::Identity_policy_2 <DG,AT> . Refines CopyConstructible Assignable DefaultConstructible CGAL::Delaunay_triangulation_2<Traits,Tds> CGAL::Regular_triangulation_2<Traits,Tds> CGAL::Triangulation_hierarchy_2<Tr> provided that Tr is a model of DelaunayGraph_2 CGAL::Segment_Delaunay_graph_2<Gt,DS> CGAL::Segment_Delaunay_graph_hierarchy_2<Gt,STag,DS> CGAL::Apollonius_graph_2<Gt,Agds> CGAL::Apollonius_graph_hierarchy_2<Gt,Agds>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Delaunay_graph",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Delaunay_graph",
+        "brief": "A type for the dual Delaunay graph.",
+        "detailed": "",
+        "return_type": "DG",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "558",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Adaptation_traits",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Adaptation_traits",
+        "brief": "A type for the adaptation traits needed by the Voronoi diagram adaptor.",
+        "detailed": "",
+        "return_type": "AT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "564",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Adaptation_policy",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Adaptation_policy",
+        "brief": "A type for the adaptation policy used.",
+        "detailed": "",
+        "return_type": "AP",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "570",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Point_2",
+        "brief": "A type a point.",
+        "detailed": "",
+        "return_type": "Adaptation_traits::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "575",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_2",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Site_2",
+        "brief": "A type for the sites of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "Adaptation_traits::Site_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "581",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Voronoi_diagram_2::size_type",
+        "brief": "A type for sizes.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "586",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_geom_traits",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Delaunay_geom_traits",
+        "brief": "A type for the geometric traits of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Geom_traits",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "591",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Delaunay_vertex_handle",
+        "brief": "A type for the vertex handles of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "596",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_face_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Delaunay_face_handle",
+        "brief": "A type for the face handles of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "601",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_edge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Delaunay_edge",
+        "brief": "A type for the edges of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "606",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge_handle",
+        "brief": "Handle for halfedges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "622",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex_handle",
+        "brief": "Handle for vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "627",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face_handle",
+        "brief": "Handle for faces.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "632",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Edge_iterator",
+        "brief": "A type for an iterator over Voronoi edges.",
+        "detailed": "Edges are considered non-oriented. Its value type is Halfedge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "639",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge_iterator",
+        "brief": "A type for an iterator over Voronoi halfedges.",
+        "detailed": "Halfedges are oriented and come in pairs. Its value type is Halfedge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "646",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face_iterator",
+        "brief": "A type for an iterator over Voronoi faces.",
+        "detailed": "Its value type is Face .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "652",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex_iterator",
+        "brief": "A type for an iterator over Voronoi vertices.",
+        "detailed": "Its value type is Vertex .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "658",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_circulator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge_around_vertex_circulator",
+        "brief": "A type for a circulator over the halfedges that have a common vertex as their target.",
+        "detailed": "Its value type is Halfedge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "665",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Ccb_halfedge_circulator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Ccb_halfedge_circulator",
+        "brief": "A type for a circulator over the halfedges on the boundary of a Voronoi face.",
+        "detailed": "Its value type of is Halfedge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "672",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Unbounded_faces_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Unbounded_faces_iterator",
+        "brief": "A type for an iterator over the unbounded faces of the Voronoi diagram.",
+        "detailed": "Its value type is Face .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "679",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Bounded_faces_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Bounded_faces_iterator",
+        "brief": "A type for an iterator over the bounded faces of the Voronoi diagram.",
+        "detailed": "Its value type is Face .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "686",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Unbounded_halfedges_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Unbounded_halfedges_iterator",
+        "brief": "A type for an iterator over the unbounded halfedges of the Voronoi diagram.",
+        "detailed": "Its value type is Halfedge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "693",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Bounded_halfedges_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Bounded_halfedges_iterator",
+        "brief": "A type for an iterator over the bounded halfedges of the Voronoi diagram.",
+        "detailed": "Its value type is Halfedge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "700",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Site_iterator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Site_iterator",
+        "brief": "A type for an iterator over the sites of the Voronoi diagram.",
+        "detailed": "Its value type is Site_2 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "706",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Locate_result",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Locate_result",
+        "brief": "The result type of the point location queries.",
+        "detailed": "",
+        "return_type": "std::variant< Face_handle , Halfedge_handle , Vertex_handle >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "712",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Voronoi_diagram_2",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Voronoi_diagram_2",
+        "brief": "Creates a Voronoi diagram using at as adaptation traits and ap as adaptation policy; the underlying Delaunay graph is created using gt as geometric traits.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Adaptation_traits at=Adaptation_traits(), Adaptation_policy ap=Adaptation_policy(), Delaunay_geom_traits gt=Delaunay_geom_traits())",
+        "params": [
+          {
+            "type": "Adaptation_traits",
+            "name": "at",
+            "default": "Adaptation_traits ()",
+            "brief": ""
+          },
+          {
+            "type": "Adaptation_policy",
+            "name": "ap",
+            "default": "Adaptation_policy ()",
+            "brief": ""
+          },
+          {
+            "type": "Delaunay_geom_traits",
+            "name": "gt",
+            "default": "Delaunay_geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "724",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Voronoi_diagram_2",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Voronoi_diagram_2",
+        "brief": "Creates a Voronoi diagram from the Delaunay graph dg and using at as adaptation traits and ap as adaptation policy.",
+        "detailed": "The Delaunay graph dg is fully copied if swap_dg is set to false , or swapped with the one stored internally if swap_dg is set to true .",
+        "return_type": "",
+        "argsstring": "(Delaunay_graph dg, bool swap_dg=false, Adaptation_traits at=Adaptation_traits(), Adaptation_policy ap=Adaptation_policy())",
+        "params": [
+          {
+            "type": "Delaunay_graph",
+            "name": "dg",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "swap_dg",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "Adaptation_traits",
+            "name": "at",
+            "default": "Adaptation_traits ()",
+            "brief": ""
+          },
+          {
+            "type": "Adaptation_policy",
+            "name": "ap",
+            "default": "Adaptation_policy ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "735",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Voronoi_diagram_2",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Voronoi_diagram_2",
+        "brief": "Creates a Voronoi diagram using as sites the sites in the iterator range [first, beyond) , at as adaptation traits and ap as adaptation policy; the underlying Delaunay graph is created using gt as geometric traits.",
+        "detailed": "Iterator must be a model of the InputIterator concept and its value type must be Site_2 .",
+        "return_type": "",
+        "argsstring": "(Iterator first, Iterator beyond, Adaptation_traits at=Adaptation_traits(), Adaptation_policy ap=Adaptation_policy(), Delaunay_geom_traits gt=Delaunay_geom_traits())",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Iterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Adaptation_traits",
+            "name": "at",
+            "default": "Adaptation_traits ()",
+            "brief": ""
+          },
+          {
+            "type": "Adaptation_policy",
+            "name": "ap",
+            "default": "Adaptation_policy ()",
+            "brief": ""
+          },
+          {
+            "type": "Delaunay_geom_traits",
+            "name": "gt",
+            "default": "Delaunay_geom_traits ()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "748",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::dual",
+        "brief": "Returns a const reference to the dual graph, i.e., the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "760",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::dual",
+        "brief": "Returns a handle to the halfedge in the Voronoi diagram that is dual to the edge e in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Delaunay_edge e)",
+        "params": [
+          {
+            "type": "Delaunay_edge",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "766",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::dual",
+        "brief": "Returns a handle to the face in the Voronoi diagram that is dual to the vertex corresponding to the vertex handle v in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "(Delaunay_vertex_handle v)",
+        "params": [
+          {
+            "type": "Delaunay_vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "773",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::dual",
+        "brief": "Returns a handle to the vertex in the Voronoi diagram that is dual to the face corresponding to the face handle f in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Delaunay_face_handle f)",
+        "params": [
+          {
+            "type": "Delaunay_face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "779",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "adaptation_traits",
+        "qualified_name": "CGAL::Voronoi_diagram_2::adaptation_traits",
+        "brief": "Returns a reference to the Voronoi traits.",
+        "detailed": "",
+        "return_type": "Adaptation_traits",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "784",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "adaptation_policy",
+        "qualified_name": "CGAL::Voronoi_diagram_2::adaptation_policy",
+        "brief": "Returns a reference to the adaptation policy.",
+        "detailed": "",
+        "return_type": "Adaptation_policy",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "789",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Voronoi_diagram_2::number_of_vertices",
+        "brief": "Returns the number of Voronoi vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "794",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "CGAL::Voronoi_diagram_2::number_of_faces",
+        "brief": "Returns the number of Voronoi faces (bounded and unbounded).",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "799",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_halfedges",
+        "qualified_name": "CGAL::Voronoi_diagram_2::number_of_halfedges",
+        "brief": "Returns the number of halfedges (bounded and unbounded) in the Voronoi diagram.",
+        "detailed": "This is always an even number.",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "805",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_connected_components",
+        "qualified_name": "CGAL::Voronoi_diagram_2::number_of_connected_components",
+        "brief": "Returns the number of connected components of the Voronoi skeleton.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "810",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_face",
+        "qualified_name": "CGAL::Voronoi_diagram_2::unbounded_face",
+        "brief": "Returns one of the unbounded faces of the Voronoi diagram.",
+        "detailed": "If no unbounded faces exist (this can happen if the number of sites is zero) the default constructed face handle is returned.",
+        "return_type": "Face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "818",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "bounded_face",
+        "qualified_name": "CGAL::Voronoi_diagram_2::bounded_face",
+        "brief": "Returns one of the bounded faces of the Voronoi diagram.",
+        "detailed": "If no bounded faces exist the default constructed face handle is returned.",
+        "return_type": "Face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "825",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_halfedge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::unbounded_halfedge",
+        "brief": "Returns one of the unbounded halfedges of the Voronoi diagram.",
+        "detailed": "If no unbounded halfedges exist the default constructed halfedge handle is returned.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "832",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "bounded_halfedge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::bounded_halfedge",
+        "brief": "Returns one of the bounded halfedges of the Voronoi diagram.",
+        "detailed": "If no bounded halfedges exist the default constructed halfedge handle is returned.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "839",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "faces_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::faces_begin",
+        "brief": "Starts at an arbitrary Voronoi face.",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "865",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "faces_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Face_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "870",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_faces_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::unbounded_faces_begin",
+        "brief": "Starts at an arbitrary unbounded Voronoi face.",
+        "detailed": "",
+        "return_type": "Unbounded_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "875",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_faces_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::unbounded_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Unbounded_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "880",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "bounded_faces_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::bounded_faces_begin",
+        "brief": "Starts at an arbitrary bounded Voronoi face.",
+        "detailed": "",
+        "return_type": "Bounded_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "885",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "bounded_faces_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::bounded_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Bounded_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "890",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "edges_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::edges_begin",
+        "brief": "Starts at an arbitrary Voronoi edge.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "895",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "edges_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "900",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::halfedges_begin",
+        "brief": "Starts at an arbitrary Voronoi halfedge.",
+        "detailed": "",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "905",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::halfedges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "910",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_halfedges_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::unbounded_halfedges_begin",
+        "brief": "Starts at an arbitrary unbounded Voronoi edge.",
+        "detailed": "",
+        "return_type": "Unbounded_halfedges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "915",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "unbounded_halfedges_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::unbounded_halfedges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Unbounded_halfedges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "920",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "bounded_halfedges_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::bounded_halfedges_begin",
+        "brief": "Starts at an arbitrary bounded Voronoi edge.",
+        "detailed": "",
+        "return_type": "Bounded_halfedges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "925",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "bounded_halfedges_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::bounded_halfedges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Bounded_halfedges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "930",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::vertices_begin",
+        "brief": "Starts at an arbitrary Voronoi vertex.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "935",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "940",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "sites_begin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::sites_begin",
+        "brief": "Starts at an arbitrary site.",
+        "detailed": "",
+        "return_type": "Site_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "945",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "sites_end",
+        "qualified_name": "CGAL::Voronoi_diagram_2::sites_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Site_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "950",
+        "section": "Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "ccb_halfedges",
+        "qualified_name": "CGAL::Voronoi_diagram_2::ccb_halfedges",
+        "brief": "Returns a circulator over the halfedges on the boundary of f .",
+        "detailed": "The circulator is initialized to an arbitrary halfedge on the boundary of the Voronoi face f .",
+        "return_type": "Ccb_halfedge_circulator",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "984",
+        "section": "Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "ccb_halfedges",
+        "qualified_name": "CGAL::Voronoi_diagram_2::ccb_halfedges",
+        "brief": "Returns a circulator over the halfedges on the boundary of f .",
+        "detailed": "The circulator is initialized with the halfedge h . The halfedge h must lie on the boundary of f .",
+        "return_type": "Ccb_halfedge_circulator",
+        "argsstring": "(Face_handle f, Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "991",
+        "section": "Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_halfedges",
+        "qualified_name": "CGAL::Voronoi_diagram_2::incident_halfedges",
+        "brief": "Returns a circulator over the halfedges whose target is the Voronoi vertex v .",
+        "detailed": "The circulator is initialized to an arbitrary halfedge incident to v .",
+        "return_type": "Halfedge_around_vertex_circulator",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1000",
+        "section": "Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_halfedges",
+        "qualified_name": "CGAL::Voronoi_diagram_2::incident_halfedges",
+        "brief": "Returns a circulator over the halfedges whose target is the Voronoi vertex v .",
+        "detailed": "The circulator is initialized with the halfedge h . The vertex v must be the target vertex of the halfedge h .",
+        "return_type": "Halfedge_around_vertex_circulator",
+        "argsstring": "(Vertex_handle v, Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1009",
+        "section": "Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Voronoi_diagram_2::insert",
+        "brief": "Inserts the site t in the Voronoi diagram.",
+        "detailed": "A handle to the face corresponding to the Voronoi face of t in the Voronoi diagram is returned. If t has an empty Voronoi cell, the default constructed face handle is returned. This method is supported only if Voronoi_traits::Has_inserter is set to CGAL::Tag_true .",
+        "return_type": "Face_handle",
+        "argsstring": "(Site_2 t)",
+        "params": [
+          {
+            "type": "Site_2",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1025",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Voronoi_diagram_2::insert",
+        "brief": "Inserts, in the Voronoi diagram, the sites in the iterator range [first, beyond) .",
+        "detailed": "The value type of Iterator must be Site_2 . The number of sites in the iterator range is returned. This method is supported only if Voronoi_traits::Has_inserter is set to CGAL::Tag_true .",
+        "return_type": "size_type",
+        "argsstring": "(Iterator first, Iterator beyond)",
+        "params": [
+          {
+            "type": "Iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Iterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1035",
+        "section": "Insertion"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Voronoi_diagram_2::locate",
+        "brief": "Performs point location for the query point p .",
+        "detailed": "In other words, the face, halfedge or vertex of the Voronoi diagram is found on which the point p lies. This method is supported only if Voronoi_traits::Has_nearest_site_2 is set to CGAL::Tag_true . The Voronoi diagram must contain at least one face.",
+        "return_type": "Locate_result",
+        "argsstring": "(Point_2 p)",
+        "params": [
+          {
+            "type": "Point_2",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1051",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "file_output",
+        "qualified_name": "CGAL::Voronoi_diagram_2::file_output",
+        "brief": "Writes the current state of the Voronoi diagram to the output stream os .",
+        "detailed": "The following operator must be defined: std::ostream& operator<<(std::ostream&, Delaunay_graph )",
+        "return_type": "void",
+        "argsstring": "(std::ostream &os)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1067",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "file_input",
+        "qualified_name": "CGAL::Voronoi_diagram_2::file_input",
+        "brief": "Reads the current state of the Voronoi diagram from the input stream is .",
+        "detailed": "The following operator must be defined: std::istream& operator>>(std::istream&, Delaunay_graph )",
+        "return_type": "void",
+        "argsstring": "(std::istream &is)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1078",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Voronoi_diagram_2::operator<<",
+        "brief": "Writes the current state of the Voronoi diagram to the output stream os .",
+        "detailed": "The following operator must be defined: std::ostream& operator<<(std::ostream&, Delaunay_graph )",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, Voronoi_diagram_2< DG, AT, AP > vd)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Voronoi_diagram_2 < DG, AT, AP >",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1088",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Voronoi_diagram_2::operator>>",
+        "brief": "Reads the current state of the Voronoi diagram from the input stream is .",
+        "detailed": "The following operator must be defined: std::istream& operator>>(std::istream&, Delaunay_graph )",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, Voronoi_diagram_2< DG, AT, AP > vd)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Voronoi_diagram_2 < DG, AT, AP >",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1097",
+        "section": "I/O"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Voronoi_diagram_2::is_valid",
+        "brief": "Checks the validity of the dual Delaunay graph and the Voronoi diagram adaptor.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1108",
+        "section": "Validity Check"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Voronoi_diagram_2::clear",
+        "brief": "Clears all contents of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1118",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Voronoi_diagram_2::swap",
+        "brief": "The Voronoi diagrams other and vd are swapped.",
+        "detailed": "vd . swap(other) should be preferred to vd``= other or to vd``(other) if other is deleted afterwards.",
+        "return_type": "void",
+        "argsstring": "(Voronoi_diagram_2< DG, AT, AP > other)",
+        "params": [
+          {
+            "type": "Voronoi_diagram_2 < DG, AT, AP >",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "1127",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Voronoi_diagram_2::Face": {
+    "kind": "class",
+    "name": "CGAL::Voronoi_diagram_2::Face",
+    "brief": "The class Face is the class provided by the Voronoi_diagram_2 <DG,AT,AP> class for Voronoi faces.",
+    "detailed": "Below we present its interface. Is model of DefaultConstructible CopyConstructible Assignable EqualityComparable LessThanComparable CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Voronoi_diagram_2<DG,AT,AP>::Vertex CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge DelaunayGraph_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Vertex",
+        "brief": "A type for the vertices of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Halfedge",
+        "brief": "A type for the halfedges of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Vertex_handle",
+        "brief": "Handle for the vertices of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Face_handle",
+        "brief": "Handle for the faces of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Halfedge_handle",
+        "brief": "Handle for the halfedges of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ccb_halfedge_circulator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Ccb_halfedge_circulator",
+        "brief": "A type for a bidirectional circulator over the halfedges on the boundary of the face.",
+        "detailed": "The value type of the circulator is CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge , and is convertible to Halfedge_handle .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "90",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_graph",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Delaunay_graph",
+        "brief": "A type for the Delaunay graph.",
+        "detailed": "It is a model of the DelaunayGraph_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "96",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::Delaunay_vertex_handle",
+        "brief": "A type for the handle of the dual vertex.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "102",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::halfedge",
+        "brief": "Returns an incident halfedge on the boundary of f .",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "113",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "ccb",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::ccb",
+        "brief": "Returns a bidirectional circulator for traversing the halfedges on the boundary of f .",
+        "detailed": "The halfedges are traversed in counterclockwise order.",
+        "return_type": "Ccb_halfedge_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "120",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::dual",
+        "brief": "Returns a handle to the corresponding dual vertex in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "125",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_unbounded",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::is_unbounded",
+        "brief": "Returns true iff the face is an unbounded face in the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "136",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_halfedge_on_ccb",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::is_halfedge_on_ccb",
+        "brief": "Returns true iff e is a halfedge of the boundary of f .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge e)",
+        "params": [
+          {
+            "type": "Halfedge",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "143",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Face::is_valid",
+        "brief": "Returns true iff the following conditions are met: the face is not rejected by the chosen adaptation policy; all its adjacent halfedges do not have zero length; all its adjacent halfedges return the face as their adjacent face.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "152",
+        "section": "Predicate Methods"
+      }
+    ]
+  },
+  "CGAL::Voronoi_diagram_2::Halfedge": {
+    "kind": "class",
+    "name": "CGAL::Voronoi_diagram_2::Halfedge",
+    "brief": "The class Halfedge is the class provided by the Voronoi_diagram_2 <DG,AT,AP> class for Voronoi halfedges.",
+    "detailed": "Below we present its interface. Is model of DefaultConstructible CopyConstructible Assignable EqualityComparable LessThanComparable CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Voronoi_diagram_2<DG,AT,AP>::Vertex CGAL::Voronoi_diagram_2<DG,AT,AP>::Face DelaunayGraph_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Vertex",
+        "brief": "A type for the vertices of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "184",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Face",
+        "brief": "A type for the faces of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "189",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Vertex_handle",
+        "brief": "Handle for the vertices of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "194",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Face_handle",
+        "brief": "Handle for the faces of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "199",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Halfedge_handle",
+        "brief": "Handle for the halfedges of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "205",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ccb_halfedge_circulator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Ccb_halfedge_circulator",
+        "brief": "A type for a bidirectional circulator over the halfedges of the boundary of a Voronoi face.",
+        "detailed": "The value type of the circulator is CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge and is convertible to Halfedge_handle .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "214",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_graph",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Delaunay_graph",
+        "brief": "A type for the Delaunay graph.",
+        "detailed": "It is a model of the DelaunayGraph_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "220",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_edge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Delaunay_edge",
+        "brief": "A type for the dual edge in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "226",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::Delaunay_vertex_handle",
+        "brief": "A type for vertex handles in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "231",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "twin",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::twin",
+        "brief": "Returns the twin halfedge.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "241",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::opposite",
+        "brief": "Same as e.twin() .",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "246",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::next",
+        "brief": "Returns the next halfedge in the counterclockwise sense around the boundary of the face that e is incident to.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "253",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "previous",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::previous",
+        "brief": "Returns the previous halfedge in the counterclockwise sense around the boundary of the adjacent face.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "259",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::face",
+        "brief": "Returns the face that e is incident to.",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "265",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "source",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::source",
+        "brief": "Returns the source vertex of e .",
+        "detailed": "The source vertex must exist, i.e., has_source() must return true .",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "272",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::target",
+        "brief": "Returns the target vertex of e .",
+        "detailed": "The target vertex must exist, i.e., has_target() must return true .",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "279",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "ccb",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::ccb",
+        "brief": "Returns a bidirectional circulator to traverse the halfedges on the boundary of the Voronoi face containing e .",
+        "detailed": "The circulator is initialized to e . Applying operator++ (resp. operator- ) to this circulator returns the next halfedge on the boundary of the face containing e in the counterclockwise (resp. clockwise) sense.",
+        "return_type": "Ccb_halfedge_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "289",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::dual",
+        "brief": "Returns the corresponding dual edge in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_edge",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "295",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "up",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::up",
+        "brief": "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site above the Voronoi edge.",
+        "detailed": "",
+        "return_type": "Delaunay_vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "309",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "down",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::down",
+        "brief": "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site below the Voronoi edge.",
+        "detailed": "",
+        "return_type": "Delaunay_vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "316",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "left",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::left",
+        "brief": "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site to the left of the Voronoi edge.",
+        "detailed": "has_source() must be true .",
+        "return_type": "Delaunay_vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "324",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "right",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::right",
+        "brief": "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site to the right of the Voronoi edge.",
+        "detailed": "has_target() must be true .",
+        "return_type": "Delaunay_vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "332",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "has_source",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::has_source",
+        "brief": "Returns true iff the halfedge corresponds to a bisecting segment or a bisecting ray oriented appropriately so that its apex is its source.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "344",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "has_target",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::has_target",
+        "brief": "Returns true iff the halfedge corresponds to a bisecting segment or a bisecting ray oriented appropriately so that its apex is its target.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "351",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_unbounded",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::is_unbounded",
+        "brief": "Returns true iff the source or the target of the halfedge does not exist, i.e., if either of has_source() or has_target() return false .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "358",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_bisector",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::is_bisector",
+        "brief": "Returns true iff the Voronoi edge is an entire bisector.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "364",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_segment",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::is_segment",
+        "brief": "Returns true iff the Voronoi edge has both a source and a target Voronoi vertex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "370",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_ray",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::is_ray",
+        "brief": "Returns true iff the Voronoi edge has either a source or a target Voronoi vertex, but not both; in other words it is a bisecting ray.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "377",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Halfedge::is_valid",
+        "brief": "Returns true if the following conditions are met: the halfedge is not a rejected edge with respect to the chosen adaptation policy; the twin edge of its twin edge is itself; its adjacent face is not a rejected face with respect to the chosen adaptation policy; its source and target vertices are valid (provided they exist, of course); the previous of its next halfedge is itself and the next of its previous halfedge is itself.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "389",
+        "section": "Predicate Methods"
+      }
+    ]
+  },
+  "CGAL::Voronoi_diagram_2::Vertex": {
+    "kind": "class",
+    "name": "CGAL::Voronoi_diagram_2::Vertex",
+    "brief": "The class Vertex is the Voronoi vertex class provided by the class Voronoi_diagram_2 <DG,AT,AP> class.",
+    "detailed": "Below we present its interface. Is model of DefaultConstructible CopyConstructible Assignable EqualityComparable LessThanComparable CGAL::Voronoi_diagram_2 <DG,AT,AP> CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge CGAL::Voronoi_diagram_2<DG,AT,AP>::Face DelaunayGraph_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Halfedge",
+        "brief": "A type for the halfedges of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "420",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Face",
+        "brief": "A type for the faces of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "425",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Vertex_handle",
+        "brief": "Handle for the vertices of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "430",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Face_handle",
+        "brief": "Handle for the faces of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "435",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Halfedge_handle",
+        "brief": "Handle for the halfedges of the Voronoi diagram.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "441",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Point_2",
+        "brief": "A type for the point represented by the vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "447",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::size_type",
+        "brief": "A type for sizes.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "452",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_circulator",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Halfedge_around_vertex_circulator",
+        "brief": "A type for a bidirectional circulator that allows to traverse all incident halfedges, i.e., all halfedges that have the vertex as their target.",
+        "detailed": "The value type of the circulator is CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge and is convertible to Halfedge_handle .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "462",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_graph",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Delaunay_graph",
+        "brief": "A type for the Delaunay graph.",
+        "detailed": "It is a model of the DelaunayGraph_2 concept.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "468",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_face_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Delaunay_face_handle",
+        "brief": "A type for the handle of the dual face.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "473",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Delaunay_vertex_handle",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::Delaunay_vertex_handle",
+        "brief": "A type for the vertex handles in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_graph::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "478",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::halfedge",
+        "brief": "Returns an incident halfedge that has v as its target.",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "489",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "degree",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::degree",
+        "brief": "Returns the in-degree of the vertex, i.e. the number of halfedges that have v as their target.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "495",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::point",
+        "brief": "Returns the point represented by the vertex.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "500",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::dual",
+        "brief": "Returns a handle to the corresponding dual face in the Delaunay graph.",
+        "detailed": "",
+        "return_type": "Delaunay_face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "506",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "site",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::site",
+        "brief": "Returns a handle to the vertex in the Delaunay graph corresponding to the $ (i+1)$ -th generating site of the Voronoi vertex.",
+        "detailed": "i must be smaller or equal to 2.",
+        "return_type": "Delaunay_vertex_handle",
+        "argsstring": "(unsigned int i)",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "513",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "incident_halfedges",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::incident_halfedges",
+        "brief": "Returns a bidirectional circulator that allows the traversal of the halfedges that have v as their target.",
+        "detailed": "Applying operator++ (resp. operator- ) to this circulator returns the next incident halfedge in the counterclockwise (resp. clockwise) sense.",
+        "return_type": "Halfedge_around_vertex_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "521",
+        "section": "Access Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_incident_edge",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::is_incident_edge",
+        "brief": "Returns true if the halfedge e is incident to v .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "532",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_incident_face",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::is_incident_face",
+        "brief": "Returns true if the face f is incident to v .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Face_handle e)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "538",
+        "section": "Predicate Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Voronoi_diagram_2::Vertex::is_valid",
+        "brief": "Returns true if the following conditions are met: the dual face is not an infinite face; all incident halfedges have the vertex as their target.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Voronoi_diagram_2.h",
+        "line": "545",
+        "section": "Predicate Methods"
+      }
+    ]
+  },
+  "DelaunayGraph_2": {
+    "kind": "class",
+    "name": "DelaunayGraph_2",
+    "brief": "The concept DelaunayGraph_2 defines the requirements for the first template parameter of the Voronoi_diagram_2<DG,AT,AP> class. The DelaunayGraph_2 concept essentially defines the requirements that a class representing a Delaunay graph must obey so that the Voronoi diagram adaptor can adapt it.",
+    "detailed": "Refines CopyConstructible Assignable DefaultConstructible Traversal of the Delaunay graph A model of the DelaunayGraph_2 concept must provide several iterators and circulators that allow to traverse it (completely or partially). All iterators and circulators must be convertible to the corresponding handles. Has models CGAL::Triangulation_hierarchy_2<Tr> provided that Tr is a model of DelaunayGraph_2 CGAL::Delaunay_triangulation_2<Traits,Tds> CGAL::Regular_triangulation_2<Traits,Tds> CGAL::Segment_Delaunay_graph_2<Gt,DS> CGAL::Segment_Delaunay_graph_hierarchy_2<Gt,STag,DS> CGAL::Apollonius_graph_2<Gt,Agds> CGAL::Apollonius_graph_hierarchy_2<Gt,Agds> AdaptationTraits_2 AdaptationPolicy_2 CGAL::Voronoi_diagram_2 <DG,AT,AP>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "DelaunayGraph_2::size_type",
+        "brief": "A type for sizes.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "DelaunayGraph_2::Geom_traits",
+        "brief": "A type for the geometric traits associated with the Delaunay graph.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation_data_structure",
+        "qualified_name": "DelaunayGraph_2::Triangulation_data_structure",
+        "brief": "A type for the underlying triangulation data structure.",
+        "detailed": "It must be a model of the concept TriangulationDataStructure_2.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "DelaunayGraph_2::Vertex",
+        "brief": "A type for the vertices of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face",
+        "qualified_name": "DelaunayGraph_2::Face",
+        "brief": "A type for the faces of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "69",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "DelaunayGraph_2::Edge",
+        "brief": "The type of the edges of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "std::pair< Face_handle , int >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "DelaunayGraph_2::Vertex_handle",
+        "brief": "Handle to the vertices of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "80",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_handle",
+        "qualified_name": "DelaunayGraph_2::Face_handle",
+        "brief": "Handle to the faces of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "85",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "All_edges_iterator",
+        "qualified_name": "DelaunayGraph_2::All_edges_iterator",
+        "brief": "A type for an iterator over all edges of the Delaunay graph.",
+        "detailed": "Its value type must be Edge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "99",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_edges_iterator",
+        "qualified_name": "DelaunayGraph_2::Finite_edges_iterator",
+        "brief": "A type for an iterator over the finite edges of the Delaunay graph.",
+        "detailed": "Its value type must be Edge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_faces_iterator",
+        "qualified_name": "DelaunayGraph_2::All_faces_iterator",
+        "brief": "A type for an iterator over all faces of the Delaunay graph.",
+        "detailed": "Its value type must be Face .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "111",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_faces_iterator",
+        "qualified_name": "DelaunayGraph_2::Finite_faces_iterator",
+        "brief": "A type for an iterator over the finite faces of the Delaunay graph.",
+        "detailed": "Its value type must be Face .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "117",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "All_vertices_iterator",
+        "qualified_name": "DelaunayGraph_2::All_vertices_iterator",
+        "brief": "A type for an iterator over all vertices of the Delaunay graph.",
+        "detailed": "Its value type must be Vertex .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "123",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_vertices_iterator",
+        "qualified_name": "DelaunayGraph_2::Finite_vertices_iterator",
+        "brief": "A type for an iterator over the finite vertices of the Delaunay graph.",
+        "detailed": "Its value type must be Vertex .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "130",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_circulator",
+        "qualified_name": "DelaunayGraph_2::Face_circulator",
+        "brief": "A type for a circulator over the adjacent faces of a vertex of the Delaunay graph.",
+        "detailed": "Its value type must be Face .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "137",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_circulator",
+        "qualified_name": "DelaunayGraph_2::Vertex_circulator",
+        "brief": "A type for a circulator over the adjacent vertices of a vertex of the Delaunay graph.",
+        "detailed": "Its value type must be Vertex .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "144",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_circulator",
+        "qualified_name": "DelaunayGraph_2::Edge_circulator",
+        "brief": "A type for a circulator over the adjacent edges of a vertex of the Delaunay graph.",
+        "detailed": "Its value type must be Edge .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "151",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "DelaunayGraph_2",
+        "qualified_name": "DelaunayGraph_2::DelaunayGraph_2",
+        "brief": "Constructor that takes an instance of the geometric traits.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Geom_traits gt)",
+        "params": [
+          {
+            "type": "Geom_traits",
+            "name": "gt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "163",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "DelaunayGraph_2",
+        "qualified_name": "DelaunayGraph_2::DelaunayGraph_2",
+        "brief": "Constructor that takes an iterator range.",
+        "detailed": "The value type of the iterator must be the type of the sites of the Delaunay graph.",
+        "return_type": "",
+        "argsstring": "(It first, It beyond)",
+        "params": [
+          {
+            "type": "It",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "It",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "169",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "DelaunayGraph_2",
+        "qualified_name": "DelaunayGraph_2::DelaunayGraph_2",
+        "brief": "Constructor that takes an iterator range and an instance of the geometric traits.",
+        "detailed": "The value type of the iterator must be the type of the sites of the Delaunay graph.",
+        "return_type": "",
+        "argsstring": "(It first, It beyond, Geom_traits gt)",
+        "params": [
+          {
+            "type": "It",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "It",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Geom_traits",
+            "name": "gt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "176",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "tds",
+        "qualified_name": "DelaunayGraph_2::tds",
+        "brief": "Returns a reference to the underlying triangulation data structure.",
+        "detailed": "",
+        "return_type": "Triangulation_data_structure",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "187",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "DelaunayGraph_2::geom_traits",
+        "brief": "Returns a reference to the geometric traits object.",
+        "detailed": "",
+        "return_type": "Geom_traits",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "192",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "infinite_vertex",
+        "qualified_name": "DelaunayGraph_2::infinite_vertex",
+        "brief": "Returns a handle to the infinite vertex.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "197",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertex",
+        "qualified_name": "DelaunayGraph_2::finite_vertex",
+        "brief": "Returns a handle to a finite vertex, provided there exists one.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "202",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "infinite_face",
+        "qualified_name": "DelaunayGraph_2::infinite_face",
+        "brief": "Returns a handle to a face incident to the infinite vertex.",
+        "detailed": "",
+        "return_type": "Face_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "207",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "DelaunayGraph_2::dimension",
+        "brief": "Returns the dimension of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "212",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "DelaunayGraph_2::number_of_vertices",
+        "brief": "Returns the number of finite vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "217",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "DelaunayGraph_2::number_of_faces",
+        "brief": "Returns the number of faces (both finite and infinite).",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "222",
+        "section": "Access methods"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertices_begin",
+        "qualified_name": "DelaunayGraph_2::finite_vertices_begin",
+        "brief": "Starts at an arbitrary finite vertex.",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "236",
+        "section": "Finite Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertices_end",
+        "qualified_name": "DelaunayGraph_2::finite_vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "241",
+        "section": "Finite Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_edges_begin",
+        "qualified_name": "DelaunayGraph_2::finite_edges_begin",
+        "brief": "Starts at an arbitrary finite edge.",
+        "detailed": "",
+        "return_type": "Finite_edges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "246",
+        "section": "Finite Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_edges_end",
+        "qualified_name": "DelaunayGraph_2::finite_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_edges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "251",
+        "section": "Finite Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_faces_begin",
+        "qualified_name": "DelaunayGraph_2::finite_faces_begin",
+        "brief": "Starts at an arbitrary finite face.",
+        "detailed": "",
+        "return_type": "Finite_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "256",
+        "section": "Finite Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "finite_faces_end",
+        "qualified_name": "DelaunayGraph_2::finite_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_faces_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "261",
+        "section": "Finite Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_vertices_begin",
+        "qualified_name": "DelaunayGraph_2::all_vertices_begin",
+        "brief": "Starts at an arbitrary vertex.",
+        "detailed": "",
+        "return_type": "All_vertices_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "276",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_vertices_end",
+        "qualified_name": "DelaunayGraph_2::all_vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_vertices_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "281",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_begin",
+        "qualified_name": "DelaunayGraph_2::all_edges_begin",
+        "brief": "Starts at an arbitrary edge.",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "286",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_edges_end",
+        "qualified_name": "DelaunayGraph_2::all_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_edges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "291",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_begin",
+        "qualified_name": "DelaunayGraph_2::all_faces_begin",
+        "brief": "Starts at an arbitrary face.",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "296",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "all_faces_end",
+        "qualified_name": "DelaunayGraph_2::all_faces_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "All_faces_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "301",
+        "section": "All Face, Edge and Vertex Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "DelaunayGraph_2::incident_faces",
+        "brief": "Starts at an arbitrary face incident to v .",
+        "detailed": "",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "318",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_faces",
+        "qualified_name": "DelaunayGraph_2::incident_faces",
+        "brief": "Starts at face f .",
+        "detailed": "Face f must be incident to vertex v .",
+        "return_type": "Face_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "324",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "DelaunayGraph_2::incident_edges",
+        "brief": "Starts at an arbitrary edge incident to v .",
+        "detailed": "",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "329",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_edges",
+        "qualified_name": "DelaunayGraph_2::incident_edges",
+        "brief": "Starts at the first edge of f incident to v , in counterclockwise order around v .",
+        "detailed": "Face f must be incident to vertex v .",
+        "return_type": "Edge_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "336",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_vertices",
+        "qualified_name": "DelaunayGraph_2::incident_vertices",
+        "brief": "Starts at an arbitrary vertex incident to v .",
+        "detailed": "",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "341",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "incident_vertices",
+        "qualified_name": "DelaunayGraph_2::incident_vertices",
+        "brief": "Starts at the first vertex of f adjacent to v in counterclockwise order around v .",
+        "detailed": "Face f must be incident to vertex v .",
+        "return_type": "Vertex_circulator",
+        "argsstring": "(Vertex_handle v, Face_handle f)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "348",
+        "section": "Face, Edge and Vertex Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "DelaunayGraph_2::is_infinite",
+        "brief": "true , iff v is the infinite_vertex .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "360",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "DelaunayGraph_2::is_infinite",
+        "brief": "true , iff face f is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Face_handle f)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "365",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "DelaunayGraph_2::is_infinite",
+        "brief": "true , iff edge (f,i) is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Face_handle f, int i)",
+        "params": [
+          {
+            "type": "Face_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "370",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "DelaunayGraph_2::is_infinite",
+        "brief": "true , iff edge e is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge e)",
+        "params": [
+          {
+            "type": "Edge",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "375",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "DelaunayGraph_2::is_infinite",
+        "brief": "true , iff edge *ec is infinite.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge_circulator ec)",
+        "params": [
+          {
+            "type": "Edge_circulator",
+            "name": "ec",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "380",
+        "section": "Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "DelaunayGraph_2::is_valid",
+        "brief": "Checks the validity of the Delaunay graph.",
+        "detailed": "If verbose is true a short message is sent to std::cerr .",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "391",
+        "section": "Validity check"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "DelaunayGraph_2::clear",
+        "brief": "Clears all contents of the Delaunay graph.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "401",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "DelaunayGraph_2::swap",
+        "brief": "The Delaunay graphs other and dg are swapped.",
+        "detailed": "dg . swap(other) should be preferred to dg``= other or to dg``(other) if other is deleted afterwards.",
+        "return_type": "void",
+        "argsstring": "(DelaunayGraph_2 other)",
+        "params": [
+          {
+            "type": "DelaunayGraph_2",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DelaunayGraph_2.h",
+        "line": "409",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "GraphicsSceneOptionsVoronoiDiagram2": {
+    "kind": "class",
+    "name": "GraphicsSceneOptionsVoronoiDiagram2",
+    "brief": "The concept GraphicsSceneOptionsVoronoiDiagram2 defines data and methods used to tune the way that the cells of a Voronoi_diagram_2 are considered for drawing or to be added into a graphics scene.",
+    "detailed": "Refines GraphicsSceneOptions Has models CGAL::Graphics_scene_options_voronoi_diagram_2<DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "dual_vertex_color",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::dual_vertex_color",
+        "brief": "returns the color of the dual vertices.",
+        "detailed": "",
+        "return_type": "const CGAL::IO::Color &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "17",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "dual_vertex_color",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::dual_vertex_color",
+        "brief": "sets the color of dual vertices to c .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const CGAL::IO::Color &c)",
+        "params": [
+          {
+            "type": "const CGAL::IO::Color &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "19",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ray_color",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::ray_color",
+        "brief": "returns the color of rays.",
+        "detailed": "",
+        "return_type": "const CGAL::IO::Color &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "22",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "ray_color",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::ray_color",
+        "brief": "sets the color of rays to c .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const CGAL::IO::Color &c)",
+        "params": [
+          {
+            "type": "const CGAL::IO::Color &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "bisector_color",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::bisector_color",
+        "brief": "returns the color of the bisectors.",
+        "detailed": "",
+        "return_type": "const CGAL::IO::Color &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "27",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "bisector_color",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::bisector_color",
+        "brief": "sets the color of bisectors to c .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const CGAL::IO::Color &c)",
+        "params": [
+          {
+            "type": "const CGAL::IO::Color &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "29",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_voronoi_vertices",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::draw_voronoi_vertices",
+        "brief": "returns true if the voronoi vertices must be drawn, false otherwise.",
+        "detailed": "Returns false by default.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "33",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_voronoi_vertices",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::draw_voronoi_vertices",
+        "brief": "sets the draw of voronoi vertices to b .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool b)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "35",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "toggle_draw_voronoi_vertices",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::toggle_draw_voronoi_vertices",
+        "brief": "toggles the draw voronoi vertices value.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_dual_vertices",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::draw_dual_vertices",
+        "brief": "returns true if the dual vertices must be drawn, false otherwise.",
+        "detailed": "Returns false by default.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "41",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw_dual_vertices",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::draw_dual_vertices",
+        "brief": "sets the draw of dual vertices to b .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "toggle_draw_dual_vertices",
+        "qualified_name": "GraphicsSceneOptionsVoronoiDiagram2::toggle_draw_dual_vertices",
+        "brief": "toggles the draw dual vertices value.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/GraphicsSceneOptionsVoronoiDiagram2.h",
+        "line": "45",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

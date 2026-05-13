@@ -1,0 +1,1649 @@
+{
+  "CGAL::Point_set_3": {
+    "kind": "class",
+    "name": "CGAL::Point_set_3",
+    "brief": "A collection of points with dynamically associated properties.",
+    "detailed": "An instance of this class stores a set of indices of type Index , each representing a point. Properties can be associated to each point and can be retrieved using the index of the point. There are two particular properties that are hard coded by this class: the coordinates of the points and the normal vectors. The coordinates of a point can be accessed using the index of the point and the member function point() . This property is always present. The normal vector of a point can be accessed using the index of the point and the normal() method. This property must be explicitly created. All properties can be accessed as a range using the methods points() , normals() , and range() for point coordinates, normal vectors, and other properties respectively. Removing a point with properties is achieved by moving its index at the end of the container and keeping track of the number of removed elements. A garbage collection method must be called to really remove it from memory. For convenience, all functions of the package PkgPointSetProcessing3 automatically create the right named parameters if called with a CGAL::Point_set_3 object as argument. Point Point type Vector Normal vector type Is model of Range",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Property_map",
+        "qualified_name": "CGAL::Point_set_3::Property_map",
+        "brief": "Model of LvaluePropertyMap with Index as a key type and Type as value type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "773",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "has_property_map",
+        "qualified_name": "CGAL::Point_set_3::has_property_map",
+        "brief": "tests whether property name of type T already exists.",
+        "detailed": "T type of the property. name Name of the property.",
+        "return_type": "bool",
+        "argsstring": "(const std::string &name) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "785",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "add_property_map",
+        "qualified_name": "CGAL::Point_set_3::add_property_map",
+        "brief": "adds a new property name of type T with given default value.",
+        "detailed": "T type of the property. name Name of the property. t Value taken by the property on already created elements. Returns a pair containing the property map and a Boolean that is true if the property was added and false if it already exists (and was therefore not added but only returned).",
+        "return_type": "std::pair< Property_map < T >, bool >",
+        "argsstring": "(const std::string &name, const T t=T())",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const T",
+            "name": "t",
+            "default": "T()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "807",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "property_map",
+        "qualified_name": "CGAL::Point_set_3::property_map",
+        "brief": "returns the property name of type T .",
+        "detailed": "T type of the property. name Name of the property. Returns an optional property map (empty if the property was not found).",
+        "return_type": "std::optional< Property_map < T > >",
+        "argsstring": "(const std::string &name) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "823",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "remove_property_map",
+        "qualified_name": "CGAL::Point_set_3::remove_property_map",
+        "brief": "removes the specified property.",
+        "detailed": "T type of the property. prop The property. Returns true if the property was removed and false if the property was not found.",
+        "return_type": "bool",
+        "argsstring": "(Property_map< T > &prop)",
+        "params": [
+          {
+            "type": "Property_map < T > &",
+            "name": "prop",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "839",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "has_normal_map",
+        "qualified_name": "CGAL::Point_set_3::has_normal_map",
+        "brief": "Convenience method that tests whether the point set has normals.",
+        "detailed": "This method tests whether a property of type Vector and named normal exists.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "850",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "add_normal_map",
+        "qualified_name": "CGAL::Point_set_3::add_normal_map",
+        "brief": "Convenience method that adds a normal property.",
+        "detailed": "This method adds a property of type Vector and named normal . Returns a pair containing the normal map and a Boolean that is true if the property was added and false if it already exists (and was therefore not added but only returned).",
+        "return_type": "std::pair< Vector_map , bool >",
+        "argsstring": "(const Vector &default_value=CGAL::NULL_VECTOR)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "default_value",
+            "default": "CGAL::NULL_VECTOR",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "865",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "normal_map",
+        "qualified_name": "CGAL::Point_set_3::normal_map",
+        "brief": "returns the property map of the normal property.",
+        "detailed": "If the normal property has not been added yet to the point set before calling this method, the property map is automatically added with add_normal_map() .",
+        "return_type": "Vector_map",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "878",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "normal_map",
+        "qualified_name": "CGAL::Point_set_3::normal_map",
+        "brief": "returns the property map of the normal property (constant version).",
+        "detailed": "The normal property must have been added to the point set before calling this method (see add_normal_map() ).",
+        "return_type": "const Vector_map",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "890",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "remove_normal_map",
+        "qualified_name": "CGAL::Point_set_3::remove_normal_map",
+        "brief": "Convenience method that removes the normal property.",
+        "detailed": "Returns true if the property was removed and false if the property was not found.",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "900",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "point_map",
+        "qualified_name": "CGAL::Point_set_3::point_map",
+        "brief": "returns the property map of the point property.",
+        "detailed": "",
+        "return_type": "Point_map",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "907",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "point_map",
+        "qualified_name": "CGAL::Point_set_3::point_map",
+        "brief": "returns the property map of the point property (constant version).",
+        "detailed": "",
+        "return_type": "const Point_map",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "915",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "copy_properties",
+        "qualified_name": "CGAL::Point_set_3::copy_properties",
+        "brief": "Copies the properties from another point set.",
+        "detailed": "All properties from other that do not already exist in this point set are added and filled to their default values. Properties that exist in both point sets are left unchanged.",
+        "return_type": "void",
+        "argsstring": "(const Point_set_3 &other)",
+        "params": [
+          {
+            "type": "const Point_set_3 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "927",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "properties",
+        "qualified_name": "CGAL::Point_set_3::properties",
+        "brief": "returns a vector with all strings that describe properties.",
+        "detailed": "",
+        "return_type": "std::vector< std::string >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "940",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "properties_and_types",
+        "qualified_name": "CGAL::Point_set_3::properties_and_types",
+        "brief": "returns a vector of pairs that describe properties and associated types.",
+        "detailed": "",
+        "return_type": "std::vector< std::pair< std::string, std::type_index > >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "951",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "parameters",
+        "qualified_name": "CGAL::Point_set_3::parameters",
+        "brief": "returns a sequence of Named Parameters to be used in Point Set Processing algorithms.",
+        "detailed": "The following named parameters are used: point_map : contains the point property map (see point_map() ) normal_map : contains the normal map (see normal_map() ) geom_traits : contains the kernel typename Kernel_traits<Point> :: Kernel this method does not check if the normal map was instantiated or not. The normal map named parameter should not be used if this property was not instantiated first.",
+        "return_type": "unspecified_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "989",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "typedef",
+        "name": "Property_range",
+        "qualified_name": "CGAL::Point_set_3::Property_range",
+        "brief": "Model of ConstRange that handles constant ranges for property maps with value type Type .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1021",
+        "section": "Ranges"
+      },
+      {
+        "kind": "function",
+        "name": "range",
+        "qualified_name": "CGAL::Point_set_3::range",
+        "brief": "returns a property as a range.",
+        "detailed": "",
+        "return_type": "Property_range < T >",
+        "argsstring": "(const Property_map< T > &pmap) const",
+        "params": [
+          {
+            "type": "const Property_map < T > &",
+            "name": "pmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1028",
+        "section": "Ranges"
+      },
+      {
+        "kind": "function",
+        "name": "points",
+        "qualified_name": "CGAL::Point_set_3::points",
+        "brief": "returns a constant range of points.",
+        "detailed": "",
+        "return_type": "Point_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1036",
+        "section": "Ranges"
+      },
+      {
+        "kind": "function",
+        "name": "normals",
+        "qualified_name": "CGAL::Point_set_3::normals",
+        "brief": "returns a constant range of normals.",
+        "detailed": "",
+        "return_type": "Vector_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1044",
+        "section": "Ranges"
+      },
+      {
+        "kind": "typedef",
+        "name": "Property_back_inserter",
+        "qualified_name": "CGAL::Point_set_3::Property_back_inserter",
+        "brief": "This is an advanced type.",
+        "detailed": "Advanced Model of OutputIterator used to insert elements by defining the value of the property Property .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1070",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "typedef",
+        "name": "Push_property_map",
+        "qualified_name": "CGAL::Point_set_3::Push_property_map",
+        "brief": "This is an advanced type.",
+        "detailed": "Advanced Model of WritablePropertyMap based on Property and that is allowed to push new items to the point set if needed.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1078",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "typedef",
+        "name": "Index_back_inserter",
+        "qualified_name": "CGAL::Point_set_3::Index_back_inserter",
+        "brief": "This is an advanced type.",
+        "detailed": "Advanced Back inserter on indices",
+        "return_type": "Property_back_inserter < Index_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1156",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_back_inserter",
+        "qualified_name": "CGAL::Point_set_3::Point_back_inserter",
+        "brief": "This is an advanced type.",
+        "detailed": "Advanced Back inserter on points",
+        "return_type": "Property_back_inserter < Point_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1161",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_push_map",
+        "qualified_name": "CGAL::Point_set_3::Point_push_map",
+        "brief": "This is an advanced type.",
+        "detailed": "Advanced Property map for pushing new points",
+        "return_type": "Push_property_map < Point_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1166",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_push_map",
+        "qualified_name": "CGAL::Point_set_3::Vector_push_map",
+        "brief": "This is an advanced type.",
+        "detailed": "Advanced Property map for pushing new vectors",
+        "return_type": "Push_property_map < Vector_map >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1171",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "function",
+        "name": "push_property_map",
+        "qualified_name": "CGAL::Point_set_3::push_property_map",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced returns the push property map of the given property. T type of the property. prop The property map. Returns a pair containing: the specified property map and a Boolean set to true or an empty property map and a Boolean set to false (if the property was not found).",
+        "return_type": "Push_property_map < Property_map < T > >",
+        "argsstring": "(Property_map< T > &prop)",
+        "params": [
+          {
+            "type": "Property_map < T > &",
+            "name": "prop",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1190",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "function",
+        "name": "point_push_map",
+        "qualified_name": "CGAL::Point_set_3::point_push_map",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced returns the push property map of the point property.",
+        "return_type": "Point_push_map",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1200",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "function",
+        "name": "normal_push_map",
+        "qualified_name": "CGAL::Point_set_3::normal_push_map",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced returns the push property map of the normal property. The normal property must have been added to the point set before calling this method (see add_normal_map() ).",
+        "return_type": "Vector_push_map",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1214",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "function",
+        "name": "index_back_inserter",
+        "qualified_name": "CGAL::Point_set_3::index_back_inserter",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced returns the back inserter on the index property.",
+        "return_type": "Index_back_inserter",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1224",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "function",
+        "name": "point_back_inserter",
+        "qualified_name": "CGAL::Point_set_3::point_back_inserter",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced returns the back inserter on the point property.",
+        "return_type": "Point_back_inserter",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1234",
+        "section": "Push Property Maps and Inserters (Advanced)"
+      },
+      {
+        "kind": "function",
+        "name": "Point_set_3",
+        "qualified_name": "CGAL::Point_set_3::Point_set_3",
+        "brief": "creates an empty point set with no additional property.",
+        "detailed": "with_normal_map true if the normal map should be added. If false (default value), the normal map can still be added later on (see add_normal_map() ).",
+        "return_type": "",
+        "argsstring": "(bool with_normal_map=false)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "with_normal_map",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "233",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Point_set_3::operator=",
+        "brief": "Assignment operator, all properties with their content are copied.",
+        "detailed": "",
+        "return_type": "Point_set_3 &",
+        "argsstring": "(const Point_set_3 &ps)",
+        "params": [
+          {
+            "type": "const Point_set_3 &",
+            "name": "ps",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "243",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::Point_set_3::is_empty",
+        "brief": "returns true if the number of elements not marked as removed is 0, false otherwise.",
+        "detailed": "This does not count the removed elements. The method empty() is also available (see Range ) and does the same thing.",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "286",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_points",
+        "qualified_name": "CGAL::Point_set_3::number_of_points",
+        "brief": "returns the number of elements (not counting elements marked as removed).",
+        "detailed": "See number_of_removed_points() for getting the number of elements marked as removed. The method size() is also available (see Range ) and does the same thing.",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "298",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::Point_set_3::join",
+        "brief": "merges other in the point set.",
+        "detailed": "Shifts the indices of points of other by number_of_points() + other.number_of_points() . Copies entries of all property maps which have the same name in the point set and other . Property maps which are only in other are ignored. If copy_properties() with other as argument is called before calling this method, then all the content of other will be copied and no property will be lost in the process. Garbage is collected in both point sets when calling this method.",
+        "return_type": "bool",
+        "argsstring": "(Point_set_3 &other)",
+        "params": [
+          {
+            "type": "Point_set_3 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "319",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Point_set_3::clear",
+        "brief": "Clears the point set properties and content.",
+        "detailed": "After calling this method, the object is the same as a newly constructed object. The additional properties (such as normal vectors) are also removed and must thus be re-added if needed.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "340",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "clear_properties",
+        "qualified_name": "CGAL::Point_set_3::clear_properties",
+        "brief": "Clears all properties created.",
+        "detailed": "After calling this method, all properties are removed. The points are left unchanged.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "354",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "reserve",
+        "qualified_name": "CGAL::Point_set_3::reserve",
+        "brief": "increases the capacity of internal containers to be able to efficiently accommodate at least s elements",
+        "detailed": "s Expected final number of elements. This method does not change the content of the point set and is only used for optimization.",
+        "return_type": "void",
+        "argsstring": "(std::size_t s)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "375",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "CGAL::Point_set_3::resize",
+        "brief": "changes size of the point set.",
+        "detailed": "s Target size of the point set If the given size is larger than the current size, the capacity of the internal container is extended. If there are element marked as removed, they may be overwritten. If the given size is smaller than the current size, garbage is collected and the container is resized.",
+        "return_type": "void",
+        "argsstring": "(std::size_t s)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "388",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Point_set_3::insert",
+        "brief": "inserts a new element with default property values.",
+        "detailed": "The iterator on the newly added element. If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call.",
+        "return_type": "iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "428",
+        "section": "Adding Points and Normals"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Point_set_3::insert",
+        "brief": "inserts new point with default property values.",
+        "detailed": "p Point to insert Properties of the added point are initialized to their default value. If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call. The iterator on the newly added element.",
+        "return_type": "iterator",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "463",
+        "section": "Adding Points and Normals"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Point_set_3::insert",
+        "brief": "Convenience method to add a point with a normal vector.",
+        "detailed": "p Point to insert n Associated normal vector Properties of the added point other than its normal vector are initialized to their default value. If not already added, a normal property is automatically added to the point set when using this method. The default value for normal vectors is CGAL::NULL_VECTOR . If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call. The iterator on the newly added element.",
+        "return_type": "iterator",
+        "argsstring": "(const Point &p, const Vector &n)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "491",
+        "section": "Adding Points and Normals"
+      },
+      {
+        "kind": "function",
+        "name": "insert",
+        "qualified_name": "CGAL::Point_set_3::insert",
+        "brief": "Convenience method to copy a point with all its properties from another point set.",
+        "detailed": "In the case where two point sets have the same properties, this method allows the user to easily copy one point (along with the values of all its properties) from one point set to another. other Point set to which the point to copy belongs idx Index of the point to copy in other This point set and other must have the exact same properties, with the exact same names and types in the exact same order. If a reallocation happens, all iterators, pointers and references related to the container are invalidated. Otherwise, only the end iterator is invalidated, and all iterators, pointers and references to elements are guaranteed to keep referring to the same elements they were referring to before the call. The iterator on the newly added element.",
+        "return_type": "iterator",
+        "argsstring": "(const Point_set_3 &other, const Index &idx)",
+        "params": [
+          {
+            "type": "const Point_set_3 &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Index &",
+            "name": "idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "521",
+        "section": "Adding Points and Normals"
+      },
+      {
+        "kind": "function",
+        "name": "begin",
+        "qualified_name": "CGAL::Point_set_3::begin",
+        "brief": "returns the begin iterator.",
+        "detailed": "",
+        "return_type": "iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "538",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "end",
+        "qualified_name": "CGAL::Point_set_3::end",
+        "brief": "returns the past-the-end iterator.",
+        "detailed": "The returned value is the same as garbage_begin() .",
+        "return_type": "iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "543",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "begin",
+        "qualified_name": "CGAL::Point_set_3::begin",
+        "brief": "returns the begin constant iterator.",
+        "detailed": "",
+        "return_type": "const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "547",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "end",
+        "qualified_name": "CGAL::Point_set_3::end",
+        "brief": "returns the past-the-end constant iterator.",
+        "detailed": "The returned value is the same as garbage_begin() .",
+        "return_type": "const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "552",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Point_set_3::point",
+        "brief": "returns a reference to the point corresponding to index .",
+        "detailed": "",
+        "return_type": "Point &",
+        "argsstring": "(const Index &index)",
+        "params": [
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "556",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Point_set_3::point",
+        "brief": "returns a constant reference to the point corresponding to index .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(const Index &index) const",
+        "params": [
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "560",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "normal",
+        "qualified_name": "CGAL::Point_set_3::normal",
+        "brief": "returns a reference to the normal corresponding to index .",
+        "detailed": "If not already added, a normal property is automatically added to the point set (see add_normal_map() ).",
+        "return_type": "Vector &",
+        "argsstring": "(const Index &index)",
+        "params": [
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "567",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "normal",
+        "qualified_name": "CGAL::Point_set_3::normal",
+        "brief": "returns a constant reference to the normal corresponding to index .",
+        "detailed": "If not already added, a normal property is automatically added to the point set (see add_normal_map() ).",
+        "return_type": "const Vector &",
+        "argsstring": "(const Index &index) const",
+        "params": [
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "574",
+        "section": "Accessors and Iterators"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Point_set_3::remove",
+        "brief": "marks all elements between first and last as removed.",
+        "detailed": "The elements are just marked as removed and are not erased from the memory. collect_garbage() should be called if the memory needs to be disallocated. Elements can be recovered with cancel_removals() . All iterators, pointers and references related to the container are invalidated.",
+        "return_type": "void",
+        "argsstring": "(iterator first, iterator last)",
+        "params": [
+          {
+            "type": "iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "iterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "592",
+        "section": "Removal Methods"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Point_set_3::remove",
+        "brief": "marks element specified by iterator as removed.",
+        "detailed": "The element is just marked as removed and is not erased from the memory. collect_garbage() should be called if the memory needs to be freed. The element can be recovered with cancel_removals() . The end() iterator is invalidated, it dereferences to a different element.",
+        "return_type": "void",
+        "argsstring": "(iterator it)",
+        "params": [
+          {
+            "type": "iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "631",
+        "section": "Removal Methods"
+      },
+      {
+        "kind": "function",
+        "name": "remove",
+        "qualified_name": "CGAL::Point_set_3::remove",
+        "brief": "marks element specified by Index as removed.",
+        "detailed": "The element is just marked as removed and is not erased from the memory. collect_garbage() should be called if the memory needs to be freed. The element can be recovered with cancel_removals() . The end() iterator is invalidated, it dereferences to a different element.",
+        "return_type": "void",
+        "argsstring": "(const Index &index)",
+        "params": [
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "648",
+        "section": "Removal Methods"
+      },
+      {
+        "kind": "function",
+        "name": "is_removed",
+        "qualified_name": "CGAL::Point_set_3::is_removed",
+        "brief": "returns true if the element is marked as removed, false otherwise.",
+        "detailed": "When iterating between begin() and end() , no element marked as removed can be found.",
+        "return_type": "bool",
+        "argsstring": "(const_iterator it) const",
+        "params": [
+          {
+            "type": "const_iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "669",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "is_removed",
+        "qualified_name": "CGAL::Point_set_3::is_removed",
+        "brief": "returns true if the element is marked as removed, false otherwise.",
+        "detailed": "When iterating between begin() and end() , no element marked as removed can be found.",
+        "return_type": "bool",
+        "argsstring": "(const Index &index) const",
+        "params": [
+          {
+            "type": "const Index &",
+            "name": "index",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "681",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "garbage_begin",
+        "qualified_name": "CGAL::Point_set_3::garbage_begin",
+        "brief": "returns the constant iterator to the first element marked as removed (equal to garbage_end() if no elements are marked as removed.",
+        "detailed": "",
+        "return_type": "const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "693",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "garbage_end",
+        "qualified_name": "CGAL::Point_set_3::garbage_end",
+        "brief": "returns the past-the-end constant iterator of the elements marked as removed.",
+        "detailed": "",
+        "return_type": "const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "697",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_removed_points",
+        "qualified_name": "CGAL::Point_set_3::number_of_removed_points",
+        "brief": "Number of removed points.",
+        "detailed": "garbage_size()",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "702",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "garbage_size",
+        "qualified_name": "CGAL::Point_set_3::garbage_size",
+        "brief": "Number of removed points.",
+        "detailed": "number_of_removed_points()",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "707",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "has_garbage",
+        "qualified_name": "CGAL::Point_set_3::has_garbage",
+        "brief": "returns true if there are elements marked as removed, false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "712",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "collect_garbage",
+        "qualified_name": "CGAL::Point_set_3::collect_garbage",
+        "brief": "erases from memory the elements marked as removed.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "717",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "function",
+        "name": "cancel_removals",
+        "qualified_name": "CGAL::Point_set_3::cancel_removals",
+        "brief": "restores all removed points.",
+        "detailed": "After removing one or several points, calling this method restores the point set to its initial state: points that were removed (and their associated properties) are restored. This method is only guaranteed to work if no point was inserted after the removal: otherwise, some points might not be restored. If collect_garbage() was called after removal, the points are irremediably lost and nothing will be restored.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "750",
+        "section": "Garbage Management"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Point_set_3::Point_3",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "Point",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "159",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "CGAL::Point_set_3::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "Vector",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "160",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "iterator",
+        "qualified_name": "CGAL::Point_set_3::iterator",
+        "brief": "Iterator type of the point set with value type Index is model of RandomAccessIterator .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "163",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "const_iterator",
+        "qualified_name": "CGAL::Point_set_3::const_iterator",
+        "brief": "Constant iterator type of the point set with value type Index is model of RandomAccessIterator .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "164",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_map",
+        "qualified_name": "CGAL::Point_set_3::Point_map",
+        "brief": "Property map of points.",
+        "detailed": "",
+        "return_type": "Property_map < Point >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "170",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_map",
+        "qualified_name": "CGAL::Point_set_3::Vector_map",
+        "brief": "Property map of vectors.",
+        "detailed": "",
+        "return_type": "Property_map < Vector >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "171",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_range",
+        "qualified_name": "CGAL::Point_set_3::Point_range",
+        "brief": "Constant range of points.",
+        "detailed": "",
+        "return_type": "Property_range < Point >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "207",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_range",
+        "qualified_name": "CGAL::Point_set_3::Vector_range",
+        "brief": "Constant range of vectors.",
+        "detailed": "",
+        "return_type": "Property_range < Vector >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_3.h",
+        "line": "208",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator+=",
+        "qualified_name": "CGAL::Point_set_3::operator+=",
+        "brief": "Append other at the end of ps .",
+        "detailed": "Shifts the indices of points of other by ps.number_of_points() + other.number_of_points() . Copies entries of all property maps which have the same name in ps and other . Property maps which are only in other are ignored. Garbage is collected in both point sets when calling this method.",
+        "return_type": "Point_set_3 < Point, Vector > &",
+        "argsstring": "(Point_set_3< Point, Vector > &ps, Point_set_3< Point, Vector > &other)",
+        "params": [
+          {
+            "type": "Point_set_3 < Point, Vector > &",
+            "name": "ps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_set_3 < Point, Vector > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1300",
+        "section": ""
+      }
+    ]
+  },
+  "boost": {
+    "kind": "namespace",
+    "name": "boost",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "hash_value",
+        "qualified_name": "boost::hash_value",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "(const typename CGAL::internal::Point_set_3_index< Point, Vector > &i)",
+        "params": [
+          {
+            "type": "const typename CGAL::internal::Point_set_3_index< Point, Vector > &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1382",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "add_to_graphics_scene",
+        "qualified_name": "CGAL::add_to_graphics_scene",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_set_3< P, V > &apointset, Graphics_scene &graphics_scene, const GSOptions &gs_options)",
+        "params": [
+          {
+            "type": "const Point_set_3 < P, V > &",
+            "name": "apointset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Graphics_scene &",
+            "name": "graphics_scene",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GSOptions &",
+            "name": "gs_options",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/draw_point_set_3.h",
+        "line": "131",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_to_graphics_scene",
+        "qualified_name": "CGAL::add_to_graphics_scene",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_set_3< P, V > &apointset, Graphics_scene &graphics_scene)",
+        "params": [
+          {
+            "type": "const Point_set_3 < P, V > &",
+            "name": "apointset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Graphics_scene &",
+            "name": "graphics_scene",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/draw_point_set_3.h",
+        "line": "141",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw",
+        "qualified_name": "CGAL::draw",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_set_3< P, V > &apointset, const GSOptions &gs_options, const char *title=\"Point_set_3 Basic Viewer\")",
+        "params": [
+          {
+            "type": "const Point_set_3 < P, V > &",
+            "name": "apointset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GSOptions &",
+            "name": "gs_options",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const char *",
+            "name": "title",
+            "default": "\"Point_set_3 Basic Viewer\"",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/draw_point_set_3.h",
+        "line": "152",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "draw",
+        "qualified_name": "CGAL::draw",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_set_3< P, V > &apointset, const char *title=\"Point_set_3 Basic Viewer\")",
+        "params": [
+          {
+            "type": "const Point_set_3 < P, V > &",
+            "name": "apointset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const char *",
+            "name": "title",
+            "default": "\"Point_set_3 Basic Viewer\"",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/draw_point_set_3.h",
+        "line": "162",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "read_las_point_set",
+        "qualified_name": "CGAL::read_las_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::istream &is, CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": "input stream."
+          },
+          {
+            "type": "CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": "point set"
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/LAS.h",
+        "line": "170",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_las_point_set",
+        "qualified_name": "CGAL::write_las_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &os, CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": "output stream."
+          },
+          {
+            "type": "CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": "point set"
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/LAS.h",
+        "line": "400",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "read_off_point_set",
+        "qualified_name": "CGAL::read_off_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::istream &is, CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": "input stream."
+          },
+          {
+            "type": "CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": "point set."
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/OFF.h",
+        "line": "98",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_off_point_set",
+        "qualified_name": "CGAL::write_off_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &os, const CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": "output stream."
+          },
+          {
+            "type": "const CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": "point set"
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/OFF.h",
+        "line": "188",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "read_ply_point_set",
+        "qualified_name": "CGAL::read_ply_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::istream &is, CGAL::Point_set_3< Point, Vector > &point_set, std::string &comments)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": "input stream."
+          },
+          {
+            "type": "CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": "point set"
+          },
+          {
+            "type": "std::string &",
+            "name": "comments",
+            "default": "",
+            "brief": "PLY comments."
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/PLY.h",
+        "line": "371",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "read_ply_point_set",
+        "qualified_name": "CGAL::read_ply_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::istream &is, CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": "input stream."
+          },
+          {
+            "type": "CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": "point set"
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/PLY.h",
+        "line": "379",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_ply_point_set",
+        "qualified_name": "CGAL::write_ply_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &os, const CGAL::Point_set_3< Point, Vector > &point_set, const std::string &comments=std::string())",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::string &",
+            "name": "comments",
+            "default": "std::string()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/PLY.h",
+        "line": "718",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "read_xyz_point_set",
+        "qualified_name": "CGAL::read_xyz_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::istream &is, CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/XYZ.h",
+        "line": "97",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "write_xyz_point_set",
+        "qualified_name": "CGAL::write_xyz_point_set",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::ostream &os, const CGAL::Point_set_3< Point, Vector > &point_set)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Point_set_3 < Point, Vector > &",
+            "name": "point_set",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3/IO/XYZ.h",
+        "line": "185",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator+=",
+        "qualified_name": "CGAL::Point_set_3::operator+=",
+        "brief": "Append other at the end of ps .",
+        "detailed": "Shifts the indices of points of other by ps.number_of_points() + other.number_of_points() . Copies entries of all property maps which have the same name in ps and other . Property maps which are only in other are ignored. Garbage is collected in both point sets when calling this method.",
+        "return_type": "Point_set_3 < Point, Vector > &",
+        "argsstring": "(Point_set_3< Point, Vector > &ps, Point_set_3< Point, Vector > &other)",
+        "params": [
+          {
+            "type": "Point_set_3 < Point, Vector > &",
+            "name": "ps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point_set_3 < Point, Vector > &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_3.h",
+        "line": "1300",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::draw_function_for_PointSet": {
+    "kind": "namespace",
+    "name": "CGAL::draw_function_for_PointSet",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "compute_elements",
+        "qualified_name": "CGAL::draw_function_for_PointSet::compute_elements",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointSet &pointset, Graphics_scene &graphics_scene, const GSOptions &gs_options)",
+        "params": [
+          {
+            "type": "const PointSet &",
+            "name": "pointset",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Graphics_scene &",
+            "name": "graphics_scene",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const GSOptions &",
+            "name": "gs_options",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/draw_point_set_3.h",
+        "line": "105",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::IO": {
+    "kind": "namespace",
+    "name": "CGAL::IO",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

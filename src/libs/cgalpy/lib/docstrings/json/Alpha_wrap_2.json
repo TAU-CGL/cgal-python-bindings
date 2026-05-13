@@ -1,0 +1,443 @@
+{
+  "AlphaWrapTraits_2": {
+    "kind": "class",
+    "name": "AlphaWrapTraits_2",
+    "brief": "The concept AlphaWrapTraits_2 defines the requirements for the geometric traits class of an alpha wrap oracle.",
+    "detailed": "Refines AABBRayIntersectionGeomTraits_2 DelaunayTriangulationTraits_2 PolygonTraits_2 Has models Any CGAL kernel is a model of this traits concept",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "AlphaWrapTraits_2::FT",
+        "brief": "The field type, must be a model of FieldNumberType and FromDoubleConstructible .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "21",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_degenerate_2",
+        "qualified_name": "AlphaWrapTraits_2::Is_degenerate_2",
+        "brief": "A predicate object that must provide the following function operator:",
+        "detailed": "bool operator()(Segment_2 s) , which returns true iff the segment is degenerate.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Angle_2",
+        "qualified_name": "AlphaWrapTraits_2::Angle_2",
+        "brief": "A predicate object that must provide the following function operator:",
+        "detailed": "Angle operator()(Point_2 p, Point_2 q, Point_2 r) , which returns the angle at point q formed by the points p , q , and r .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "39",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_bbox_2",
+        "qualified_name": "AlphaWrapTraits_2::Construct_bbox_2",
+        "brief": "A construction object that must provide the following function operators:",
+        "detailed": "CGAL::Bbox_2 operator()(Point_2 p) , CGAL::Bbox_2 operator()(Segment_2 s) , CGAL::Bbox_2 operator()(Triangle_2 tr) , that constructs the bounding box of these 2D objects.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_2",
+        "qualified_name": "AlphaWrapTraits_2::Construct_scaled_vector_2",
+        "brief": "A construction object that must provide the following function operator:",
+        "detailed": "Vector_2 operator()(Vector_2 v, FT l) , that constructs the scaled vector l * v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_translated_point_2",
+        "qualified_name": "AlphaWrapTraits_2::Construct_translated_point_2",
+        "brief": "A construction object that must provide the following function operator:",
+        "detailed": "Point_2 operator()(Point_2 p, Vector_2 v) , that returns the point obtained by translating p by the vector v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vertex_2",
+        "qualified_name": "AlphaWrapTraits_2::Construct_vertex_2",
+        "brief": "A construction object that must be a model of Kernel::ConstructVertex_2 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "75",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_on_bounded_side_2",
+        "qualified_name": "AlphaWrapTraits_2::Has_on_bounded_side_2",
+        "brief": "A predicate object that must provide the following function operator:",
+        "detailed": "bool operator()(Triangle_2 tr, Point_2 p) , which returns whether p is on the bounded side of the triangle tr or not.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "84",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_on_unbounded_side_2",
+        "qualified_name": "AlphaWrapTraits_2::Has_on_unbounded_side_2",
+        "brief": "A predicate object that must provide the following function operator:",
+        "detailed": "bool operator()(Circle_2 c, Point_2 p) , which returns whether p is on the unbounded side of the circle c or not.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "93",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Side_of_bounded_circle_2",
+        "qualified_name": "AlphaWrapTraits_2::Side_of_bounded_circle_2",
+        "brief": "A predicate object that must provide the following function operator:",
+        "detailed": "Bounded_side operator()(Point_2 p, Point_2 q, Point_2 t) , which returns the position of the point t relative to the circle that has the line segment pq as its diameter.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_degenerate_2_object",
+        "qualified_name": "AlphaWrapTraits_2::is_degenerate_2_object",
+        "brief": "returns the Is_degenerate_2 predicate.",
+        "detailed": "",
+        "return_type": "Is_degenerate_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "109",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "angle_2_object",
+        "qualified_name": "AlphaWrapTraits_2::angle_2_object",
+        "brief": "returns the Angle_2 functor.",
+        "detailed": "",
+        "return_type": "Angle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "114",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_bbox_2_object",
+        "qualified_name": "AlphaWrapTraits_2::construct_bbox_2_object",
+        "brief": "returns the Construct_bbox_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_bbox_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_2_object",
+        "qualified_name": "AlphaWrapTraits_2::construct_scaled_vector_2_object",
+        "brief": "returns the Construct_scaled_vector_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "124",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_translated_point_2_object",
+        "qualified_name": "AlphaWrapTraits_2::construct_translated_point_2_object",
+        "brief": "returns the Construct_translated_point_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_translated_point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "129",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_vertex_2_object",
+        "qualified_name": "AlphaWrapTraits_2::construct_vertex_2_object",
+        "brief": "returns the Construct_vertex_2 functor.",
+        "detailed": "",
+        "return_type": "Construct_vertex_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "134",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "has_on_bounded_side_2_object",
+        "qualified_name": "AlphaWrapTraits_2::has_on_bounded_side_2_object",
+        "brief": "returns the Has_on_bounded_side_2 predicate.",
+        "detailed": "",
+        "return_type": "Has_on_bounded_side_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "139",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "has_on_unbounded_side_2_object",
+        "qualified_name": "AlphaWrapTraits_2::has_on_unbounded_side_2_object",
+        "brief": "returns the Has_on_unbounded_side_2 predicate.",
+        "detailed": "",
+        "return_type": "Has_on_unbounded_side_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "144",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "side_of_bounded_circle_2_object",
+        "qualified_name": "AlphaWrapTraits_2::side_of_bounded_circle_2_object",
+        "brief": "returns the Side_of_bounded_circle_2 predicate.",
+        "detailed": "",
+        "return_type": "Side_of_bounded_circle_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/AlphaWrapTraits_2.h",
+        "line": "149",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "alpha_wrap_2",
+        "qualified_name": "CGAL::alpha_wrap_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, MultipolygonWithHoles &alpha_wrap, const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &np, std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *=nullptr)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "MultipolygonWithHoles &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &",
+            "name": "np",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *",
+            "name": "",
+            "default": "nullptr",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_2.h",
+        "line": "195",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_2",
+        "qualified_name": "CGAL::alpha_wrap_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const PointRange &points, const FaceRange &faces, const double alpha, MultipolygonWithHoles &alpha_wrap, std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *=nullptr)",
+        "params": [
+          {
+            "type": "const PointRange &",
+            "name": "points",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "MultipolygonWithHoles &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::enable_if_t< boost::has_range_const_iterator< FaceRange >::value > *",
+            "name": "",
+            "default": "nullptr",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_2.h",
+        "line": "206",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_2",
+        "qualified_name": "CGAL::alpha_wrap_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, MultipolygonWithHoles &alpha_wrap, const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &np)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "MultipolygonWithHoles &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const CGAL::Named_function_parameters< T_I, Tag_I, Base_I > &",
+            "name": "np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_2.h",
+        "line": "773",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "alpha_wrap_2",
+        "qualified_name": "CGAL::alpha_wrap_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Input &input, const double alpha, MultipolygonWithHoles &alpha_wrap)",
+        "params": [
+          {
+            "type": "const Input &",
+            "name": "input",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const double",
+            "name": "alpha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "MultipolygonWithHoles &",
+            "name": "alpha_wrap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/alpha_wrap_2.h",
+        "line": "782",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Alpha_wraps_2": {
+    "kind": "namespace",
+    "name": "CGAL::Alpha_wraps_2",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

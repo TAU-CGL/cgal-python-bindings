@@ -1,0 +1,3186 @@
+{
+  "CGAL::Polygon_mesh_processing::Adaptive_sizing_field": {
+    "kind": "class",
+    "name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field",
+    "brief": "A sizing field describing variable target mesh edge lengths for CGAL::Polygon_mesh_processing::isotropic_remeshing() .",
+    "detailed": "This adaptive sizing field is a function of local discrete curvatures, computed using the CGAL::Polygon_mesh_processing::interpolated_corrected_curvatures() function. Edges too long with respect to the local target edge length are split in two, while edges that are too short are collapsed. This class depends on the Eigen library. Is model of PMPSizingField isotropic_remeshing() Uniform_sizing_field PolygonMesh model of MutableFaceGraph that has an internal property map for CGAL::vertex_point_t .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Adaptive_sizing_field",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::Adaptive_sizing_field",
+        "brief": "Constructor.",
+        "detailed": "FaceRange range of boost::graph_traits<PolygonMesh>::face_descriptor , model of Range . Its iterator type is ForwardIterator . NamedParameters a sequence of Named Parameters tol the error tolerance, used together with curvature to derive target edge length. Lower tolerance values will result in shorter mesh edges. edge_len_min_max contains the bounds for minimum and maximum edge lengths face_range the range of triangular faces defining one or several surface patches to be remeshed. It should be the same as the range of faces passed to isotropic_remeshing() . pmesh a polygon mesh with triangulated surface patches to be remeshed. It should be the same mesh as the one passed to isotropic_remeshing() . np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> ball_radius </button> ball_radius parameter passed to interpolated_corrected_curvatures()",
+        "return_type": "",
+        "argsstring": "(const FT tol, const std::pair< FT, FT > &edge_len_min_max, const FaceRange &face_range, PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "tol",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::pair< FT, FT > &",
+            "name": "edge_len_min_max",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FaceRange &",
+            "name": "face_range",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "110",
+        "section": "Creation"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Sizing_field_base< PolygonMesh, VPMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_property_tag",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::Vertex_property_tag",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::dynamic_vertex_property_t< typename Base::FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "61",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "VertexSizingMap",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::VertexSizingMap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_map< PolygonMesh, Vertex_property_tag >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "tol",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::tol",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "273",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_short",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::m_short",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "274",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_long",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::m_long",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "275",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vpmap",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::m_vpmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VPMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "276",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vertex_sizing_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::m_vertex_sizing_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "VertexSizingMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "277",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "at",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::at",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const vertex_descriptor v, const PolygonMesh &) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "219",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_too_long",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::is_too_long",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< FT >",
+        "argsstring": "(const vertex_descriptor va, const vertex_descriptor vb, const PolygonMesh &) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "225",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_too_short",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::is_too_short",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< FT >",
+        "argsstring": "(const halfedge_descriptor h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "238",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "split_placement",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::split_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "(const halfedge_descriptor h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "register_split_vertex",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::register_split_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const vertex_descriptor v, const PolygonMesh &pmesh)",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "257",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "calc_sizing_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::calc_sizing_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FaceGraph &face_graph, const NamedParameters &np)",
+        "params": [
+          {
+            "type": "FaceGraph &",
+            "name": "face_graph",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "148",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sqlength",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::sqlength",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const vertex_descriptor va, const vertex_descriptor vb) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "207",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sqlength",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Adaptive_sizing_field::sqlength",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const halfedge_descriptor &h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor &",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Adaptive_sizing_field.h",
+        "line": "213",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::extrude_impl::Const_dist_translation": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::extrude_impl::Const_dist_translation",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::extrude_impl::Const_dist_translation::map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PMAP",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/extrude.h",
+        "line": "88",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "dir",
+        "qualified_name": "CGAL::Polygon_mesh_processing::extrude_impl::Const_dist_translation::dir",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vector",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/extrude.h",
+        "line": "89",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Const_dist_translation",
+        "qualified_name": "CGAL::Polygon_mesh_processing::extrude_impl::Const_dist_translation::Const_dist_translation",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PMAP map, const Vector &dir)",
+        "params": [
+          {
+            "type": "PMAP",
+            "name": "map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "dir",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/extrude.h",
+        "line": "78",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polygon_mesh_processing::extrude_impl::Const_dist_translation::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const VertexDescriptor vd, const U &) const",
+        "params": [
+          {
+            "type": "const VertexDescriptor",
+            "name": "vd",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const U &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/extrude.h",
+        "line": "82",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::extrude_impl::Identity_functor": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::extrude_impl::Identity_functor",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polygon_mesh_processing::extrude_impl::Identity_functor::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const T &, const U &) const",
+        "params": [
+          {
+            "type": "const T &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const U &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/extrude.h",
+        "line": "95",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Default_visitor": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Default_visitor",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Default_visitor::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(TriangleMesh &) const",
+        "params": [
+          {
+            "type": "TriangleMesh &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "92",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "GT",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker::GT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMeshOut >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "127",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "face_ids",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker::face_ids",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "134",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_f2f_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker::m_f2f_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_map< FacePatchMapOut >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Face_index_tracker",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker::Face_index_tracker",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(VertexCornerMapOut vertex_corner_map, FacePatchMapOut face_patch_map)",
+        "params": [
+          {
+            "type": "VertexCornerMapOut",
+            "name": "vertex_corner_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FacePatchMapOut",
+            "name": "face_patch_map",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "129",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "register_faces_of_cc",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker::register_faces_of_cc",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t nb_faces, std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "nb_faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "136",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "f2f_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker::f2f_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_map< FacePatchMapOut >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "142",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Fmap",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::Fmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Constant_property_map< std::size_t, typename boost::graph_traits< PolygonMeshOut >::face_descriptor >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "155",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "GT",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::GT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMeshOut >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "127",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Face_index_tracker",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::Face_index_tracker",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(VertexCornerMapOut vertex_corner_map, internal_np::Param_not_found)",
+        "params": [
+          {
+            "type": "VertexCornerMapOut",
+            "name": "vertex_corner_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "internal_np::Param_not_found",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "158",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "register_faces_of_cc",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::register_faces_of_cc",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t, std::size_t)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "162",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "f2f_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::f2f_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Fmap",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "164",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "face_ids",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::face_ids",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< std::size_t >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "134",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_f2f_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker< PolygonMeshOut, VertexCornerMapOut, internal_np::Param_not_found >::m_f2f_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Face_map< internal_np::Param_not_found >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "147",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "GT",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base::GT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMeshOut >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "98",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_v2v2_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base::m_v2v2_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_map< VertexCornerMapOut >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "109",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Face_index_tracker_base",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base::Face_index_tracker_base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(VertexCornerMapOut vertex_corner_map)",
+        "params": [
+          {
+            "type": "VertexCornerMapOut",
+            "name": "vertex_corner_map",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "100",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "v2v_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base::v2v_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_map< VertexCornerMapOut >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "104",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "GT",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >::GT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMeshOut >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "115",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vmap",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >::Vmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Constant_property_map< std::size_t, typename boost::graph_traits< PolygonMeshOut >::vertex_descriptor >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "116",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Face_index_tracker_base",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >::Face_index_tracker_base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(internal_np::Param_not_found)",
+        "params": [
+          {
+            "type": "internal_np::Param_not_found",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "v2v_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >::v2v_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vmap",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "120",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_v2v2_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_index_tracker_base< PolygonMeshOut, internal_np::Param_not_found >::m_v2v2_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_map< internal_np::Param_not_found >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "109",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "key_type",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::key_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PM >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "50",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PM >::key_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "52",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "category",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::writable_property_map_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "pm",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::pm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PM",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "face_ids",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::face_ids",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::vector< std::size_t > &",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Face_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::Face_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PM pm, const std::vector< std::size_t > &face_ids)",
+        "params": [
+          {
+            "type": "PM",
+            "name": "pm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< std::size_t > &",
+            "name": "face_ids",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "put",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Face_map::put",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_map m, key_type k, value_type v)",
+        "params": [
+          {
+            "type": "Face_map",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "key_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "value_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "61",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "m_in_domain",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2::m_in_domain",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "222",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "FaceInfo2",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2::FaceInfo2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "221",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_in_domain",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2::set_in_domain",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "224",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_out_domain",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2::set_out_domain",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "225",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "visited",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2::visited",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "226",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "in_domain",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::FaceInfo2::in_domain",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "227",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2": {
+    "kind": "class",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "422",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Triangulation_vertex_with_corner_id_2",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::Triangulation_vertex_with_corner_id_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const T &... t)",
+        "params": [
+          {
+            "type": "const T &...",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "431",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "corner_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::corner_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const std::size_t &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "435",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "corner_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::corner_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "436",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::Rebind_TDS": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::Rebind_TDS",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vb2",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::Rebind_TDS::Vb2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vb::template Rebind_TDS< TDS2 >::Other",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "426",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Other",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Triangulation_vertex_with_corner_id_2::Rebind_TDS::Other",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Triangulation_vertex_with_corner_id_2< GT, Vb2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "427",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "key_type",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::key_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PM >::value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "73",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "value_type",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::value_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PM >::key_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "74",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "reference",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::reference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "value_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "75",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "category",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::category",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::writable_property_map_tag",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "76",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "pm",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::pm",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PM",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "86",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Vertex_map",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::Vertex_map",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PM pm)",
+        "params": [
+          {
+            "type": "PM",
+            "name": "pm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "78",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "put",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::Vertex_map::put",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_map m, key_type k, value_type v)",
+        "params": [
+          {
+            "type": "Vertex_map",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "key_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "value_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "81",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor",
+    "brief": "Default visitor model for the functions triangulate_face() and triangulate_faces() , model of PMPTriangulateFaceVisitor .",
+    "detailed": "PolygonMesh a model of FaceListGraph and MutableFaceGraph All its functions have an empty body. This class can be used as a base class if only some of the functions of the concept require to be overridden.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor::face_descriptor",
+        "brief": "face descriptor type",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor::vertex_descriptor",
+        "brief": "vertex descriptor type",
+        "detailed": "",
+        "return_type": "boost::graph_traits< PolygonMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "53",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "before_subface_creations",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor::before_subface_creations",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "after_subface_creations",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor::after_subface_creations",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "after_subface_created",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor::after_subface_created",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "accept_face",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor::accept_face",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(face_descriptor, vertex_descriptor, vertex_descriptor, vertex_descriptor) const",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "59",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename boost::graph_traits< PolygonMesh >::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "69",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper::face_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "typename boost::graph_traits< PolygonMesh >::face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "70",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "f",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper::f",
+        "brief": "",
+        "detailed": "",
+        "return_type": "face_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "72",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "verts",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper::verts",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< vertex_descriptor >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "73",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "accept_triangle",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper::accept_triangle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(int i0, int i1, int i2) const",
+        "params": [
+          {
+            "type": "int",
+            "name": "i0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "75",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Visitor_wrapper",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_faces::Visitor_wrapper::Visitor_wrapper",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(PolygonMesh &pmesh, face_descriptor f, Triangulation_visitor &tvisitor)",
+        "params": [
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "face_descriptor",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Triangulation_visitor &",
+            "name": "tvisitor",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "82",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor": {
+    "kind": "struct",
+    "name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor",
+    "brief": "Default visitor for the function triangulate_polygons() , model of PMPTriangulateFaceVisitor .",
+    "detailed": "All its functions have an empty body. This class can be used as a base class if only some of the functions of the concept require to be overridden.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "face_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor::face_descriptor",
+        "brief": "face id type, referring to the position of the polygon in the input range",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "543",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor::vertex_descriptor",
+        "brief": "vertex id type",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "545",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "before_subface_creations",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor::before_subface_creations",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "547",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "after_subface_created",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor::after_subface_created",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(face_descriptor)",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "549",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "after_subface_creations",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor::after_subface_creations",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "551",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "accept_face",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor::accept_face",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(face_descriptor, vertex_descriptor, vertex_descriptor, vertex_descriptor) const",
+        "params": [
+          {
+            "type": "face_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/triangulate_faces.h",
+        "line": "554",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Uniform_sizing_field": {
+    "kind": "class",
+    "name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field",
+    "brief": "A sizing field describing a uniform target edge length for CGAL::Polygon_mesh_processing::isotropic_remeshing() .",
+    "detailed": "Edges longer than 4/3 of the target edge length will be split in half, while edges shorter than 4/5 of the target edge length will be collapsed. Is model of PMPSizingField isotropic_remeshing() Adaptive_sizing_field PolygonMesh model of MutableFaceGraph that has an internal property map for CGAL::vertex_point_t . VPMap property map associating points to the vertices of pmesh , model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type. Default is boost::get(CGAL::vertex_point, pmesh) .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Uniform_sizing_field",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::Uniform_sizing_field",
+        "brief": "Constructor.",
+        "detailed": "size the target edge length for isotropic remeshing. If set to 0, the criterion for edge length is ignored and edges are neither split nor collapsed. vpmap is the input vertex point map that associates points to the vertices of the input mesh.",
+        "return_type": "",
+        "argsstring": "(const FT size, const VPMap &vpmap)",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "size",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VPMap &",
+            "name": "vpmap",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "72",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Uniform_sizing_field",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::Uniform_sizing_field",
+        "brief": "Constructor using internal vertex point map of the input polygon mesh.",
+        "detailed": "size the target edge length for isotropic remeshing. If set to 0, the criterion for edge length is ignored and edges are neither split nor collapsed. pmesh a polygon mesh with triangulated surface patches to be remeshed. The default vertex point map of pmesh is used to construct the class.",
+        "return_type": "",
+        "argsstring": "(const FT size, const PolygonMesh &pmesh)",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "size",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "87",
+        "section": "Creation"
+      },
+      {
+        "kind": "typedef",
+        "name": "Base",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::Base",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Sizing_field_base< PolygonMesh, VPMap >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "58",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "halfedge_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::halfedge_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::halfedge_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "vertex_descriptor",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::vertex_descriptor",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Base::vertex_descriptor",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_size",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::m_size",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "141",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_sq_short",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::m_sq_short",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "142",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_sq_long",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::m_sq_long",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "143",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_vpmap",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::m_vpmap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const VPMap",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "144",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "at",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::at",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const vertex_descriptor, const PolygonMesh &) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "106",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_too_long",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::is_too_long",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< FT >",
+        "argsstring": "(const vertex_descriptor va, const vertex_descriptor vb, const PolygonMesh &) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "111",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_too_short",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::is_too_short",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::optional< FT >",
+        "argsstring": "(const halfedge_descriptor h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "split_placement",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::split_placement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3",
+        "argsstring": "(const halfedge_descriptor h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "131",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "register_split_vertex",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::register_split_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const vertex_descriptor, const PolygonMesh &)",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "137",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sqlength",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::sqlength",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const vertex_descriptor va, const vertex_descriptor vb) const",
+        "params": [
+          {
+            "type": "const vertex_descriptor",
+            "name": "va",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const vertex_descriptor",
+            "name": "vb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "94",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "sqlength",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Uniform_sizing_field::sqlength",
+        "brief": "",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const halfedge_descriptor &h, const PolygonMesh &pmesh) const",
+        "params": [
+          {
+            "type": "const halfedge_descriptor &",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/Uniform_sizing_field.h",
+        "line": "100",
+        "section": ""
+      }
+    ]
+  },
+  "Projection_traits": {
+    "kind": "class",
+    "name": "Projection_traits",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Mesh_facet_topology",
+        "qualified_name": "CGAL::Mesh_facet_topology",
+        "brief": "The enum Mesh_facet_topology is designed to tell which constraints have to be checked on each surface facet during the mesh refinement process.",
+        "detailed": "CGAL::Mesh_criteria_3<Tr> , CGAL::Mesh_facet_criteria_3<Tr> .",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Mesh_facet_topology.h",
+        "line": "34",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "isotropic_remeshing",
+        "qualified_name": "CGAL::Polygon_mesh_processing::isotropic_remeshing",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FaceRange &faces, const SizingValue target_edge_length, PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const SizingValue",
+            "name": "target_edge_length",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh.h",
+        "line": "366",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "split_long_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::split_long_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const EdgeRange &edges, const SizingValue max_length, PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const EdgeRange &",
+            "name": "edges",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const SizingValue",
+            "name": "max_length",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolygonMesh &",
+            "name": "pmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh.h",
+        "line": "517",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "smooth_mesh",
+        "qualified_name": "CGAL::Polygon_mesh_processing::smooth_mesh",
+        "brief": "",
+        "detailed": "Deprecated This function is deprecated since CGAL 5.5, CGAL::Polygon_mesh_processing::angle_and_area_smoothing() should be used instead.",
+        "return_type": "void",
+        "argsstring": "(const FaceRange &faces, TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const FaceRange &",
+            "name": "faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "TriangleMesh &",
+            "name": "tmesh",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/smooth_mesh.h",
+        "line": "37",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::extrude_impl": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing::extrude_impl",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "create_strip",
+        "qualified_name": "CGAL::Polygon_mesh_processing::extrude_impl::create_strip",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const BorderHalfedgesRange &input_halfedges, const BorderHalfedgesRange &output_halfedges, PolygonMesh &mesh)",
+        "params": [
+          {
+            "type": "const BorderHalfedgesRange &",
+            "name": "input_halfedges",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const BorderHalfedgesRange &",
+            "name": "output_halfedges",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolygonMesh &",
+            "name": "mesh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/extrude.h",
+        "line": "33",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Planar_segmentation": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing::Planar_segmentation",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "init_face_normals",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::init_face_normals",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< Vector_3 > &face_normals, std::size_t nb_patches, PatchNormalMap patch_normal_map)",
+        "params": [
+          {
+            "type": "std::vector< Vector_3 > &",
+            "name": "face_normals",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "nb_patches",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PatchNormalMap",
+            "name": "patch_normal_map",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "168",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_face_normals",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::init_face_normals",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< Vector_3 > &face_normals, std::size_t nb_patches, ::CGAL::internal_np::Param_not_found)",
+        "params": [
+          {
+            "type": "std::vector< Vector_3 > &",
+            "name": "face_normals",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "nb_patches",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "::CGAL::internal_np::Param_not_found",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "178",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "init_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::init_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "185",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "default_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::default_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "190",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_init_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::is_init_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "195",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_corner_id",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::is_corner_id",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "200",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_vector_positive",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::is_vector_positive",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Vector_3 &normal)",
+        "params": [
+          {
+            "type": "const Vector_3 &",
+            "name": "normal",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "206",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_edge_between_coplanar_faces",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::is_edge_between_coplanar_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(edge_descriptor e, const TriangleMesh &tm, double coplanar_cos_threshold, const VertexPointMap &vpm)",
+        "params": [
+          {
+            "type": "edge_descriptor",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "coplanar_cos_threshold",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "234",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_target_vertex_a_corner",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::is_target_vertex_a_corner",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(halfedge_descriptor h, EdgeIsConstrainedMap edge_is_constrained, const TriangleMesh &tm, double coplanar_cos_threshold, const VertexPointMap &vpm)",
+        "params": [
+          {
+            "type": "halfedge_descriptor",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIsConstrainedMap",
+            "name": "edge_is_constrained",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "coplanar_cos_threshold",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "262",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mark_constrained_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::mark_constrained_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const TriangleMesh &tm, EdgeIsConstrainedMap edge_is_constrained, double coplanar_cos_threshold, const VertexPointMap &vpm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIsConstrainedMap",
+            "name": "edge_is_constrained",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "coplanar_cos_threshold",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "304",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mark_corner_vertices",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::mark_corner_vertices",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "(const TriangleMesh &tm, EdgeIsConstrainedMap &edge_is_constrained, VertexCornerIdMap &vertex_corner_id, double coplanar_cos_threshold, const VertexPointMap &vpm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIsConstrainedMap &",
+            "name": "edge_is_constrained",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexCornerIdMap &",
+            "name": "vertex_corner_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "coplanar_cos_threshold",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "324",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mark_face_triangles",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::mark_face_triangles",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(CDT &cdt)",
+        "params": [
+          {
+            "type": "CDT &",
+            "name": "cdt",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "366",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_triangle_faces",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::add_triangle_faces",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const std::vector< std::pair< std::size_t, std::size_t > > &csts, typename Kernel::Vector_3 normal, const std::vector< typename Kernel::Point_3 > &corners, std::vector< boost::container::small_vector< std::size_t, 3 > > &out_faces)",
+        "params": [
+          {
+            "type": "const std::vector< std::pair< std::size_t, std::size_t > > &",
+            "name": "csts",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename Kernel::Vector_3",
+            "name": "normal",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< typename Kernel::Point_3 > &",
+            "name": "corners",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< boost::container::small_vector< std::size_t, 3 > > &",
+            "name": "out_faces",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "441",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "tag_corners_and_constrained_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::tag_corners_and_constrained_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< std::size_t, std::size_t >",
+        "argsstring": "(const TriangleMesh &tm, double coplanar_cos_threshold, VertexCornerIdMap &vertex_corner_id, EdgeIsConstrainedMap &edge_is_constrained, FaceCCIdMap &face_cc_ids, const VertexPointMap &vpm)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "coplanar_cos_threshold",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexCornerIdMap &",
+            "name": "vertex_corner_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIsConstrainedMap &",
+            "name": "edge_is_constrained",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceCCIdMap &",
+            "name": "face_cc_ids",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "552",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "decimate_impl",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::decimate_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const TriangleMesh &tm, std::pair< std::size_t, std::size_t > &nb_corners_and_nb_cc, VertexCornerIdMap &vertex_corner_id, EdgeIsConstrainedMap &edge_is_constrained, FaceCCIdMap &face_cc_ids, const VertexPointMap &vpm, bool do_not_triangulate_faces, std::vector< typename Kernel::Point_3 > &corners, std::vector< boost::container::small_vector< std::size_t, 3 > > &out_faces, IndexTracking &f_id_tracker, std::vector< typename Kernel::Vector_3 > &face_normals)",
+        "params": [
+          {
+            "type": "const TriangleMesh &",
+            "name": "tm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::pair< std::size_t, std::size_t > &",
+            "name": "nb_corners_and_nb_cc",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexCornerIdMap &",
+            "name": "vertex_corner_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIsConstrainedMap &",
+            "name": "edge_is_constrained",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceCCIdMap &",
+            "name": "face_cc_ids",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMap &",
+            "name": "vpm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "do_not_triangulate_faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< typename Kernel::Point_3 > &",
+            "name": "corners",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< boost::container::small_vector< std::size_t, 3 > > &",
+            "name": "out_faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "IndexTracking &",
+            "name": "f_id_tracker",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< typename Kernel::Vector_3 > &",
+            "name": "face_normals",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "593",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "decimate_impl",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::decimate_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const TriangleMeshIn &tm_in, PolygonMeshOut &pm_out, std::pair< std::size_t, std::size_t > nb_corners_and_nb_cc, VertexCornerIdMap &vertex_corner_id, EdgeIsConstrainedMap &edge_is_constrained, FaceCCIdMap &face_cc_ids, const VertexPointMapIn &vpm_in, const VertexPointMapOut &vpm_out, bool do_not_triangulate_faces, VertexCornerMapOut vcorner_map_out, FacePatchMapOut fpatch_map_out, Visitor &visitor, std::vector< typename Kernel::Vector_3 > &face_normals)",
+        "params": [
+          {
+            "type": "const TriangleMeshIn &",
+            "name": "tm_in",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolygonMeshOut &",
+            "name": "pm_out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::pair< std::size_t, std::size_t >",
+            "name": "nb_corners_and_nb_cc",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexCornerIdMap &",
+            "name": "vertex_corner_id",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EdgeIsConstrainedMap &",
+            "name": "edge_is_constrained",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FaceCCIdMap &",
+            "name": "face_cc_ids",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMapIn &",
+            "name": "vpm_in",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const VertexPointMapOut &",
+            "name": "vpm_out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "do_not_triangulate_faces",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "VertexCornerMapOut",
+            "name": "vcorner_map_out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FacePatchMapOut",
+            "name": "fpatch_map_out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Visitor &",
+            "name": "visitor",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< typename Kernel::Vector_3 > &",
+            "name": "face_normals",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "807",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extract_meshes_containing_a_point",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::extract_meshes_containing_a_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const Point_3 &pt, const std::map< Point_3, std::multimap< std::size_t, vertex_descriptor > > &point_to_vertex_maps, OutputIterator out)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "pt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::map< Point_3, std::multimap< std::size_t, vertex_descriptor > > &",
+            "name": "point_to_vertex_maps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "872",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mark_boundary_of_shared_patches_as_constrained_edges",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::mark_boundary_of_shared_patches_as_constrained_edges",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< TriangleMesh * > &mesh_ptrs, std::map< Point_3, std::multimap< std::size_t, vertex_descriptor > > &point_to_vertex_maps, std::vector< EdgeIsConstrainedMap > &edge_is_constrained_maps, std::vector< VertexIsSharedMap > &vertex_shared_maps, const std::vector< VertexPointMap > &vpms)",
+        "params": [
+          {
+            "type": "std::vector< TriangleMesh * > &",
+            "name": "mesh_ptrs",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::map< Point_3, std::multimap< std::size_t, vertex_descriptor > > &",
+            "name": "point_to_vertex_maps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< EdgeIsConstrainedMap > &",
+            "name": "edge_is_constrained_maps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< VertexIsSharedMap > &",
+            "name": "vertex_shared_maps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< VertexPointMap > &",
+            "name": "vpms",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "888",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "propagate_corner_status",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::propagate_corner_status",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::vector< VertexIsSharedMap > &vertex_corner_id_maps, std::map< Point_3, std::multimap< std::size_t, vertex_descriptor > > &point_to_vertex_maps, std::vector< std::pair< std::size_t, std::size_t > > &nb_corners_and_nb_cc_all)",
+        "params": [
+          {
+            "type": "std::vector< VertexIsSharedMap > &",
+            "name": "vertex_corner_id_maps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::map< Point_3, std::multimap< std::size_t, vertex_descriptor > > &",
+            "name": "point_to_vertex_maps",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::vector< std::pair< std::size_t, std::size_t > > &",
+            "name": "nb_corners_and_nb_cc_all",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "991",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "decimate_meshes_with_common_interfaces_impl",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::decimate_meshes_with_common_interfaces_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(TriangleMeshRange &meshes, MeshMap mesh_map, const TagFunction &tag_function, const std::vector< VertexPointMap > &vpms, bool shared_on_boundary_only, bool do_not_triangulate_faces)",
+        "params": [
+          {
+            "type": "TriangleMeshRange &",
+            "name": "meshes",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "MeshMap",
+            "name": "mesh_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const TagFunction &",
+            "name": "tag_function",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< VertexPointMap > &",
+            "name": "vpms",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "shared_on_boundary_only",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "do_not_triangulate_faces",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "1031",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "decimate_meshes_with_common_interfaces_impl",
+        "qualified_name": "CGAL::Polygon_mesh_processing::Planar_segmentation::decimate_meshes_with_common_interfaces_impl",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(TriangleMeshRange &meshes, MeshMap mesh_map, double coplanar_cos_threshold, const std::vector< VertexPointMap > &vpms, bool shared_on_boundary_only, bool do_not_triangulate_faces)",
+        "params": [
+          {
+            "type": "TriangleMeshRange &",
+            "name": "meshes",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "MeshMap",
+            "name": "mesh_map",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "coplanar_cos_threshold",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< VertexPointMap > &",
+            "name": "vpms",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "shared_on_boundary_only",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "do_not_triangulate_faces",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polygon_mesh_processing/remesh_planar_patches.h",
+        "line": "1288",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polygon_mesh_processing::Triangulate_faces": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing::Triangulate_faces",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Polygon_mesh_processing::Triangulate_polygons": {
+    "kind": "namespace",
+    "name": "CGAL::Polygon_mesh_processing::Triangulate_polygons",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "Hole_filling": {
+    "kind": "namespace",
+    "name": "Hole_filling",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

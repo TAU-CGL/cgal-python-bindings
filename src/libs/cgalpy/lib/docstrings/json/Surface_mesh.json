@@ -1,0 +1,3132 @@
+{
+  "CGAL::Surface_mesh": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh",
+    "brief": "This class is a data structure that can be used as halfedge data structure or polyhedral surface.",
+    "detailed": "It is an alternative to the classes HalfedgeDS and Polyhedron_3 defined in the packages PkgHalfedgeDS and PkgPolyhedron. The main difference is that it is indexed based and not pointer based, and that the mechanism for adding information to vertices, halfedges, edges, and faces is much simpler and done at runtime and not at compile time. When elements are removed, they are only marked as removed, and a garbage collection function must be called to really remove them. P The type of the point property of a vertex. There is no requirement on P , besides being default constructible and assignable. In typical use cases it will be a 2D or 3D point type. Is model of MutableFaceGraph FaceListGraph Graph Concepts",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Surface_mesh::Point",
+        "brief": "The point type.",
+        "detailed": "",
+        "return_type": "P",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "358",
+        "section": "Basic Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Surface_mesh::size_type",
+        "brief": "The type used to represent an index.",
+        "detailed": "",
+        "return_type": "std::uint32_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "361",
+        "section": "Basic Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_range",
+        "qualified_name": "CGAL::Surface_mesh::Vertex_range",
+        "brief": "The range over all vertex indices.",
+        "detailed": "A model of BidirectionalRange with value type Vertex_index . vertices() Halfedge_range , Edge_range , Face_range",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "610",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_range",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_range",
+        "brief": "The range over all halfedge indices.",
+        "detailed": "A model of BidirectionalRange with value type Halfedge_index . halfedges() Vertex_range , Edge_range , Face_range",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "625",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_range",
+        "qualified_name": "CGAL::Surface_mesh::Edge_range",
+        "brief": "The range over all edge indices.",
+        "detailed": "A model of BidirectionalRange with value type Edge_index . edges() Halfedge_range , Vertex_range , Face_range",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "640",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Face_range",
+        "qualified_name": "CGAL::Surface_mesh::Face_range",
+        "brief": "The range over all face indices.",
+        "detailed": "A model of BidirectionalRange with value type Face_index . faces() Vertex_range , Halfedge_range , Edge_range",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "655",
+        "section": "Range Types"
+      },
+      {
+        "kind": "function",
+        "name": "vertices",
+        "qualified_name": "CGAL::Surface_mesh::vertices",
+        "brief": "returns the iterator range of the vertices of the mesh.",
+        "detailed": "",
+        "return_type": "Vertex_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "697",
+        "section": "Range Types"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges",
+        "qualified_name": "CGAL::Surface_mesh::halfedges",
+        "brief": "returns the iterator range of the halfedges of the mesh.",
+        "detailed": "",
+        "return_type": "Halfedge_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "718",
+        "section": "Range Types"
+      },
+      {
+        "kind": "function",
+        "name": "edges",
+        "qualified_name": "CGAL::Surface_mesh::edges",
+        "brief": "returns the iterator range of the edges of the mesh.",
+        "detailed": "",
+        "return_type": "Edge_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "739",
+        "section": "Range Types"
+      },
+      {
+        "kind": "function",
+        "name": "faces",
+        "qualified_name": "CGAL::Surface_mesh::faces",
+        "brief": "returns the iterator range of the faces of the mesh.",
+        "detailed": "",
+        "return_type": "Face_range",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "760",
+        "section": "Range Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Property_map",
+        "qualified_name": "CGAL::Surface_mesh::Property_map",
+        "brief": "Model of LvaluePropertyMap with I as key type and T as value type, where I is either a vertex, halfedge, edge, or face index type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2046",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "add_property_map",
+        "qualified_name": "CGAL::Surface_mesh::add_property_map",
+        "brief": "adds a property map named name with value type T and default t for index type I .",
+        "detailed": "Returns the property map together with a Boolean that is true if a new map was created. In case it already exists the existing map together with false is returned.",
+        "return_type": "std::pair< Property_map < I, T >, bool >",
+        "argsstring": "(std::string name=std::string(), const T t=T())",
+        "params": [
+          {
+            "type": "std::string",
+            "name": "name",
+            "default": "std::string()",
+            "brief": ""
+          },
+          {
+            "type": "const T",
+            "name": "t",
+            "default": "T()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2061",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "property_map",
+        "qualified_name": "CGAL::Surface_mesh::property_map",
+        "brief": "returns an optional property map named name with key type I and value type T .",
+        "detailed": "",
+        "return_type": "std::optional< Property_map < I, T > >",
+        "argsstring": "(const std::string &name) const",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2072",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "remove_property_map",
+        "qualified_name": "CGAL::Surface_mesh::remove_property_map",
+        "brief": "removes property map p .",
+        "detailed": "The memory allocated for that property map is freed.",
+        "return_type": "void",
+        "argsstring": "(Property_map< I, T > &p)",
+        "params": [
+          {
+            "type": "Property_map < I, T > &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2081",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "remove_property_maps",
+        "qualified_name": "CGAL::Surface_mesh::remove_property_maps",
+        "brief": "removes all property maps for index type I added by a call to add_property_map <I>() .",
+        "detailed": "The memory allocated for those property maps is freed.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2090",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "remove_all_property_maps",
+        "qualified_name": "CGAL::Surface_mesh::remove_all_property_maps",
+        "brief": "removes all property maps for all index types added by a call to add_property_map() .",
+        "detailed": "The memory allocated for those property maps is freed.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2097",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "properties",
+        "qualified_name": "CGAL::Surface_mesh::properties",
+        "brief": "returns a vector with all strings that describe properties with the key type I .",
+        "detailed": "I The key type of the properties.",
+        "return_type": "std::vector< std::string >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2122",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "points",
+        "qualified_name": "CGAL::Surface_mesh::points",
+        "brief": "returns the property for the string \"v:point\".",
+        "detailed": "",
+        "return_type": "Property_map < Vertex_index , Point >",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2129",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "points",
+        "qualified_name": "CGAL::Surface_mesh::points",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Vertex_index , Point > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2132",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Surface_mesh::point",
+        "brief": "returns the point associated to vertex v .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(Vertex_index v) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2136",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Surface_mesh::point",
+        "brief": "returns the point associated to vertex v .",
+        "detailed": "",
+        "return_type": "Point &",
+        "argsstring": "(Vertex_index v)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2140",
+        "section": "Property Handling"
+      },
+      {
+        "kind": "function",
+        "name": "Surface_mesh",
+        "qualified_name": "CGAL::Surface_mesh::Surface_mesh",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "904",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "Surface_mesh",
+        "qualified_name": "CGAL::Surface_mesh::Surface_mesh",
+        "brief": "Copy constructor: copies rhs to *this . Performs a deep copy of all properties.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Surface_mesh &rhs)",
+        "params": [
+          {
+            "type": "const Surface_mesh &",
+            "name": "rhs",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "907",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "Surface_mesh",
+        "qualified_name": "CGAL::Surface_mesh::Surface_mesh",
+        "brief": "Move constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Surface_mesh &&sm)",
+        "params": [
+          {
+            "type": "Surface_mesh &&",
+            "name": "sm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "910",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Surface_mesh::operator=",
+        "brief": "assigns rhs to *this . Performs a deep copy of all properties.",
+        "detailed": "",
+        "return_type": "Surface_mesh &",
+        "argsstring": "(const Surface_mesh &rhs)",
+        "params": [
+          {
+            "type": "const Surface_mesh &",
+            "name": "rhs",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "934",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Surface_mesh::operator=",
+        "brief": "move assignment",
+        "detailed": "",
+        "return_type": "Surface_mesh &",
+        "argsstring": "(Surface_mesh &&sm)",
+        "params": [
+          {
+            "type": "Surface_mesh &&",
+            "name": "sm",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "937",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "assign",
+        "qualified_name": "CGAL::Surface_mesh::assign",
+        "brief": "assigns rhs to *this . Does not copy custom properties.",
+        "detailed": "",
+        "return_type": "Surface_mesh &",
+        "argsstring": "(const Surface_mesh &rhs)",
+        "params": [
+          {
+            "type": "const Surface_mesh &",
+            "name": "rhs",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "963",
+        "section": "Construction, Destruction, Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "add_vertex",
+        "qualified_name": "CGAL::Surface_mesh::add_vertex",
+        "brief": "adds a new vertex, and resizes vertex properties if necessary.",
+        "detailed": "",
+        "return_type": "Vertex_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "973",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_vertex",
+        "qualified_name": "CGAL::Surface_mesh::add_vertex",
+        "brief": "adds a new vertex, resizes vertex properties if necessary, and sets the point property to p .",
+        "detailed": "Several vertices may have the same point property.",
+        "return_type": "Vertex_index",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "992",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_edge",
+        "qualified_name": "CGAL::Surface_mesh::add_edge",
+        "brief": "adds a new edge, and resizes edge and halfedge properties if necessary.",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1004",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_edge",
+        "qualified_name": "CGAL::Surface_mesh::add_edge",
+        "brief": "adds two opposite halfedges, and resizes edge and halfedge properties if necessary.",
+        "detailed": "Sets the targets of the halfedge to the given vertices, but does not modify the halfedge associated to the vertices. The function does not check whether there is already an edge between the vertices. the halfedge with v1 as target",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Vertex_index v0, Vertex_index v1)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1031",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_face",
+        "qualified_name": "CGAL::Surface_mesh::add_face",
+        "brief": "adds a new face, and resizes face properties if necessary.",
+        "detailed": "",
+        "return_type": "Face_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1043",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_face",
+        "qualified_name": "CGAL::Surface_mesh::add_face",
+        "brief": "if possible, adds a new face with vertices from a range with value type Vertex_index .",
+        "detailed": "The function adds halfedges between successive vertices if they are not yet indicent to halfedges, or updates the connectivity of halfedges already in place. Resizes halfedge, edge, and face properties if necessary. the face index of the added face, or Surface_mesh::null_face() if the face could not be added.",
+        "return_type": "Face_index",
+        "argsstring": "(const Range &vertices)",
+        "params": [
+          {
+            "type": "const Range &",
+            "name": "vertices",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1065",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_face",
+        "qualified_name": "CGAL::Surface_mesh::add_face",
+        "brief": "adds a new triangle connecting vertices v0 , v1 , v2 .",
+        "detailed": "the face index of the added face, or Surface_mesh::null_face() if the face could not be added.",
+        "return_type": "Face_index",
+        "argsstring": "(Vertex_index v0, Vertex_index v1, Vertex_index v2)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1070",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "add_face",
+        "qualified_name": "CGAL::Surface_mesh::add_face",
+        "brief": "adds a new quad connecting vertices v0 , v1 , v2 , v3 .",
+        "detailed": "the face index of the added face, or Surface_mesh::null_face() if the face could not be added.",
+        "return_type": "Face_index",
+        "argsstring": "(Vertex_index v0, Vertex_index v1, Vertex_index v2, Vertex_index v3)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1079",
+        "section": "Adding Vertices, Edges, and Faces"
+      },
+      {
+        "kind": "function",
+        "name": "remove_vertex",
+        "qualified_name": "CGAL::Surface_mesh::remove_vertex",
+        "brief": "removes vertex v from the halfedge data structure without adjusting anything.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_index v)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1104",
+        "section": "Low-Level Removal Functions"
+      },
+      {
+        "kind": "function",
+        "name": "remove_edge",
+        "qualified_name": "CGAL::Surface_mesh::remove_edge",
+        "brief": "removes the two halfedges corresponding to e from the halfedge data structure without adjusting anything.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Edge_index e)",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1113",
+        "section": "Low-Level Removal Functions"
+      },
+      {
+        "kind": "function",
+        "name": "remove_face",
+        "qualified_name": "CGAL::Surface_mesh::remove_face",
+        "brief": "removes face f from the halfedge data structure without adjusting anything.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_index f)",
+        "params": [
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1123",
+        "section": "Low-Level Removal Functions"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Surface_mesh::number_of_vertices",
+        "brief": "returns the number of vertices in the mesh.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1141",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_halfedges",
+        "qualified_name": "CGAL::Surface_mesh::number_of_halfedges",
+        "brief": "returns the number of halfedges in the mesh.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1147",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_edges",
+        "qualified_name": "CGAL::Surface_mesh::number_of_edges",
+        "brief": "returns the number of edges in the mesh.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1153",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "CGAL::Surface_mesh::number_of_faces",
+        "brief": "returns the number of faces in the mesh.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1159",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::Surface_mesh::is_empty",
+        "brief": "returns true iff the mesh is empty, i.e., has no vertices, halfedges and faces.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1165",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "clear_without_removing_property_maps",
+        "qualified_name": "CGAL::Surface_mesh::clear_without_removing_property_maps",
+        "brief": "removes all vertices, halfedge, edges and faces. Collects garbage but keeps all property maps.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1173",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Surface_mesh::clear",
+        "brief": "removes all vertices, halfedge, edges and faces.",
+        "detailed": "Collects garbage and removes all property maps added by a call to add_property_map() for all simplex types. After calling this method, the object is the same as a newly constructed object. The additional property maps are also removed and must thus be re-added if needed.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1178",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "reserve",
+        "qualified_name": "CGAL::Surface_mesh::reserve",
+        "brief": "reserves space for vertices, halfedges, edges, faces, and their currently associated properties.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(size_type nvertices, size_type nedges, size_type nfaces)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "nvertices",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "nedges",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "nfaces",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1183",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "CGAL::Surface_mesh::resize",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(size_type nvertices, size_type nedges, size_type nfaces)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "nvertices",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "nedges",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "nfaces",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1193",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::Surface_mesh::join",
+        "brief": "copies the simplices from other , and copies values of properties that already exist under the same name in *this .",
+        "detailed": "In case *this has a property that does not exist in other the copied simplices get the default value of the property.",
+        "return_type": "bool",
+        "argsstring": "(const Surface_mesh &other)",
+        "params": [
+          {
+            "type": "const Surface_mesh &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1207",
+        "section": "Memory Management"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_removed_vertices",
+        "qualified_name": "CGAL::Surface_mesh::number_of_removed_vertices",
+        "brief": "returns the number of vertices in the mesh which are marked removed.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1341",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_removed_halfedges",
+        "qualified_name": "CGAL::Surface_mesh::number_of_removed_halfedges",
+        "brief": "returns the number of halfedges in the mesh which are marked removed.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1344",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_removed_edges",
+        "qualified_name": "CGAL::Surface_mesh::number_of_removed_edges",
+        "brief": "returns the number of edges in the mesh which are marked removed.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1347",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_removed_faces",
+        "qualified_name": "CGAL::Surface_mesh::number_of_removed_faces",
+        "brief": "returns the number offaces in the mesh which are marked removed.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1350",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "is_removed",
+        "qualified_name": "CGAL::Surface_mesh::is_removed",
+        "brief": "returns whether vertex v is marked removed.",
+        "detailed": "collect_garbage()",
+        "return_type": "bool",
+        "argsstring": "(Vertex_index v) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1356",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "is_removed",
+        "qualified_name": "CGAL::Surface_mesh::is_removed",
+        "brief": "returns whether halfedge h is marked removed.",
+        "detailed": "collect_garbage()",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1362",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "is_removed",
+        "qualified_name": "CGAL::Surface_mesh::is_removed",
+        "brief": "returns whether edge e is marked removed.",
+        "detailed": "collect_garbage()",
+        "return_type": "bool",
+        "argsstring": "(Edge_index e) const",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1368",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "is_removed",
+        "qualified_name": "CGAL::Surface_mesh::is_removed",
+        "brief": "returns whether face f is marked removed.",
+        "detailed": "collect_garbage()",
+        "return_type": "bool",
+        "argsstring": "(Face_index f) const",
+        "params": [
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1374",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "has_garbage",
+        "qualified_name": "CGAL::Surface_mesh::has_garbage",
+        "brief": "checks if any vertices, halfedges, edges, or faces are marked as removed.",
+        "detailed": "collect_garbage",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1381",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "collect_garbage",
+        "qualified_name": "CGAL::Surface_mesh::collect_garbage",
+        "brief": "really removes vertices, halfedges, edges, and faces which are marked removed.",
+        "detailed": "has_garbage() By garbage collecting elements get new indices. In case you store indices in an auxiliary data structure or in a property these indices are potentially no longer referring to the right elements.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1389",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "collect_garbage",
+        "qualified_name": "CGAL::Surface_mesh::collect_garbage",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Visitor &visitor)",
+        "params": [
+          {
+            "type": "Visitor &",
+            "name": "visitor",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1393",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "set_recycle_garbage",
+        "qualified_name": "CGAL::Surface_mesh::set_recycle_garbage",
+        "brief": "controls the recycling or not of simplices previously marked as removed upon addition of new elements.",
+        "detailed": "When set to true (default value), new elements are first picked in the garbage (if any) while if set to false only new elements are created.",
+        "return_type": "void",
+        "argsstring": "(bool b)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1399",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "does_recycle_garbage",
+        "qualified_name": "CGAL::Surface_mesh::does_recycle_garbage",
+        "brief": "Getter.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1402",
+        "section": "Garbage Collection"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Surface_mesh::is_valid",
+        "brief": "perform an expensive validity check on the data structure and print found errors to std::cerr when verbose == true .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1464",
+        "section": "Validity Checks"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Surface_mesh::is_valid",
+        "brief": "performs a validity check on a single vertex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_index v, bool verbose=false) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1576",
+        "section": "Validity Checks"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Surface_mesh::is_valid",
+        "brief": "performs a validity check on a single halfedge.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_index h, bool verbose=false) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1597",
+        "section": "Validity Checks"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Surface_mesh::is_valid",
+        "brief": "performs a validity check on a single edge.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge_index e, bool verbose=false) const",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1648",
+        "section": "Validity Checks"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Surface_mesh::is_valid",
+        "brief": "performs a validity check on a single face.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Face_index f, bool verbose=false) const",
+        "params": [
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1665",
+        "section": "Validity Checks"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Surface_mesh::target",
+        "brief": "returns the vertex where the halfedge h points to.",
+        "detailed": "",
+        "return_type": "Vertex_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1693",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "set_target",
+        "qualified_name": "CGAL::Surface_mesh::set_target",
+        "brief": "sets the vertex where the halfedge h points to v .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_index h, Vertex_index v)",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1699",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "CGAL::Surface_mesh::face",
+        "brief": "returns the face incident to halfedge h .",
+        "detailed": "",
+        "return_type": "Face_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1705",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "set_face",
+        "qualified_name": "CGAL::Surface_mesh::set_face",
+        "brief": "sets the incident face to halfedge h to f .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_index h, Face_index f)",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1711",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "CGAL::Surface_mesh::next",
+        "brief": "returns the next halfedge within the incident face.",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1717",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "prev",
+        "qualified_name": "CGAL::Surface_mesh::prev",
+        "brief": "returns the previous halfedge within the incident face.",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1723",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "set_next",
+        "qualified_name": "CGAL::Surface_mesh::set_next",
+        "brief": "sets the next halfedge of h within the face to nh and the previous halfedge of nh to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_index h, Halfedge_index nh)",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_index",
+            "name": "nh",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1746",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Surface_mesh::halfedge",
+        "brief": "returns an incoming halfedge of vertex v .",
+        "detailed": "If v is a border vertex this will be a border halfedge. target(halfedge(v)) == v",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Vertex_index v) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1755",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "set_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::set_halfedge",
+        "brief": "sets the incoming halfedge of vertex v to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_index v, Halfedge_index h)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1761",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Surface_mesh::halfedge",
+        "brief": "returns a halfedge of face f .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Face_index f) const",
+        "params": [
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1768",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "set_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::set_halfedge",
+        "brief": "sets the halfedge of face f to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Face_index f, Halfedge_index h)",
+        "params": [
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1774",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "CGAL::Surface_mesh::opposite",
+        "brief": "returns the opposite halfedge of h . Note that there is no function set_opposite() .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1780",
+        "section": "Low-Level Connectivity"
+      },
+      {
+        "kind": "function",
+        "name": "source",
+        "qualified_name": "CGAL::Surface_mesh::source",
+        "brief": "returns the vertex the halfedge h emanates from.",
+        "detailed": "",
+        "return_type": "Vertex_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1791",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "next_around_target",
+        "qualified_name": "CGAL::Surface_mesh::next_around_target",
+        "brief": "returns opposite(next(h)) , that is the next halfedge clockwise around the target vertex of h .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1798",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "prev_around_target",
+        "qualified_name": "CGAL::Surface_mesh::prev_around_target",
+        "brief": "returns prev(opposite(h)) , that is the previous halfedge clockwise around the target vertex of h .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1805",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "next_around_source",
+        "qualified_name": "CGAL::Surface_mesh::next_around_source",
+        "brief": "returns next(opposite(h)) , that is the next halfedge clockwise around the source vertex of h .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1812",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "prev_around_source",
+        "qualified_name": "CGAL::Surface_mesh::prev_around_source",
+        "brief": "returns opposite(prev(h)) , that is the previous halfedge clockwise around the source vertex of h .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1819",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "CGAL::Surface_mesh::vertex",
+        "brief": "returns the i-th vertex of edge e , for i=0 or 1 .",
+        "detailed": "",
+        "return_type": "Vertex_index",
+        "argsstring": "(Edge_index e, unsigned int i) const",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "unsigned int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1825",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Surface_mesh::halfedge",
+        "brief": "finds a halfedge between two vertices.",
+        "detailed": "Returns a default constructed Halfedge_index , if source and target are not connected.",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Vertex_index source, Vertex_index target) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "source",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_index",
+            "name": "target",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1833",
+        "section": "Low-Level Connectivity Convenience Functions"
+      },
+      {
+        "kind": "function",
+        "name": "edge",
+        "qualified_name": "CGAL::Surface_mesh::edge",
+        "brief": "returns the edge that contains halfedge h as one of its two halfedges.",
+        "detailed": "",
+        "return_type": "Edge_index",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1842",
+        "section": "Switching between Halfedges and Edges"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Surface_mesh::halfedge",
+        "brief": "returns the halfedge corresponding to the edge e .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Edge_index e) const",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1848",
+        "section": "Switching between Halfedges and Edges"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Surface_mesh::halfedge",
+        "brief": "returns the i-th halfedge of edge e , for i=0 or 1 .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "(Edge_index e, unsigned int i) const",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "unsigned int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1854",
+        "section": "Switching between Halfedges and Edges"
+      },
+      {
+        "kind": "function",
+        "name": "degree",
+        "qualified_name": "CGAL::Surface_mesh::degree",
+        "brief": "returns the number of incident halfedges of vertex v .",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "(Vertex_index v) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1867",
+        "section": "Degree Functions"
+      },
+      {
+        "kind": "function",
+        "name": "degree",
+        "qualified_name": "CGAL::Surface_mesh::degree",
+        "brief": "returns the number of incident halfedges of face f .",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "(Face_index f) const",
+        "params": [
+          {
+            "type": "Face_index",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1870",
+        "section": "Degree Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_border",
+        "qualified_name": "CGAL::Surface_mesh::is_border",
+        "brief": "returns whether v is a border vertex.",
+        "detailed": "Advanced With the default value for check_all_incident_halfedges the function iteratates over the incident halfedges. With check_all_incident_halfedges == false the function returns true , if the incident halfedge associated to vertex v is a border halfedge, or if the vertex is isolated. If the data contained in the Surface_mesh is not a 2-manifold, then this operation is not guaranteed to return the right result.",
+        "return_type": "bool",
+        "argsstring": "(Vertex_index v, bool check_all_incident_halfedges=true) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "check_all_incident_halfedges",
+            "default": "true",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1898",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "is_border",
+        "qualified_name": "CGAL::Surface_mesh::is_border",
+        "brief": "returns whether h is a border halfege, that is if its incident face is sm.null_face() .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_index h) const",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1917",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "is_border",
+        "qualified_name": "CGAL::Surface_mesh::is_border",
+        "brief": "returns whether e is a border edge, i.e., if any of its two halfedges is a border halfedge.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge_index e) const",
+        "params": [
+          {
+            "type": "Edge_index",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1925",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex_halfedge_to_border_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::set_vertex_halfedge_to_border_halfedge",
+        "brief": "iterates over the incident halfedges and sets the incident halfedge associated to vertex v to a border halfedge and returns true if it exists.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_index v)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1932",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex_halfedge_to_border_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::set_vertex_halfedge_to_border_halfedge",
+        "brief": "applies set_vertex_halfedge_to_border_halfedge(Vertex_index) on all vertices around the face associated to h .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Halfedge_index h)",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1949",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "set_vertex_halfedge_to_border_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::set_vertex_halfedge_to_border_halfedge",
+        "brief": "applies set_vertex_halfedge_to_border_halfedge(Vertex_index) on all vertices of the surface mesh.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1966",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "is_isolated",
+        "qualified_name": "CGAL::Surface_mesh::is_isolated",
+        "brief": "returns whether v is isolated, i.e., incident to Surface_mesh::null_halfedge() .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_index v) const",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1977",
+        "section": "Borders"
+      },
+      {
+        "kind": "function",
+        "name": "null_vertex",
+        "qualified_name": "CGAL::Surface_mesh::null_vertex",
+        "brief": "returns Vertex_index (std::numeric_limits< size_type >::max()) .",
+        "detailed": "",
+        "return_type": "Vertex_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2155",
+        "section": "Null Elements"
+      },
+      {
+        "kind": "function",
+        "name": "null_edge",
+        "qualified_name": "CGAL::Surface_mesh::null_edge",
+        "brief": "returns Edge_index (std::numeric_limits< size_type >::max()) .",
+        "detailed": "",
+        "return_type": "Edge_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2161",
+        "section": "Null Elements"
+      },
+      {
+        "kind": "function",
+        "name": "null_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::null_halfedge",
+        "brief": "returns Halfedge_index (std::numeric_limits< size_type >::max()) .",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2166",
+        "section": "Null Elements"
+      },
+      {
+        "kind": "function",
+        "name": "null_face",
+        "qualified_name": "CGAL::Surface_mesh::null_face",
+        "brief": "returns Face_index (std::numeric_limits< size_type >::max()) .",
+        "detailed": "",
+        "return_type": "Face_index",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2171",
+        "section": "Null Elements"
+      },
+      {
+        "kind": "typedef",
+        "name": "Self",
+        "qualified_name": "CGAL::Surface_mesh::Self",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Surface_mesh < P >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "331",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vprops_",
+        "qualified_name": "CGAL::Surface_mesh::vprops_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, Vertex_index >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2202",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "hprops_",
+        "qualified_name": "CGAL::Surface_mesh::hprops_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, Halfedge_index >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2203",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eprops_",
+        "qualified_name": "CGAL::Surface_mesh::eprops_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, Edge_index >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2204",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "fprops_",
+        "qualified_name": "CGAL::Surface_mesh::fprops_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, Face_index >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2205",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vconn_",
+        "qualified_name": "CGAL::Surface_mesh::vconn_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Vertex_index , Vertex_connectivity >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2207",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "hconn_",
+        "qualified_name": "CGAL::Surface_mesh::hconn_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Halfedge_index , Halfedge_connectivity >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2208",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "fconn_",
+        "qualified_name": "CGAL::Surface_mesh::fconn_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Face_index , Face_connectivity >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2209",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vremoved_",
+        "qualified_name": "CGAL::Surface_mesh::vremoved_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Vertex_index , bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2211",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "eremoved_",
+        "qualified_name": "CGAL::Surface_mesh::eremoved_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Edge_index , bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2212",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "fremoved_",
+        "qualified_name": "CGAL::Surface_mesh::fremoved_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Face_index , bool >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2213",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vpoint_",
+        "qualified_name": "CGAL::Surface_mesh::vpoint_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Property_map < Vertex_index , Point >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2215",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "removed_vertices_",
+        "qualified_name": "CGAL::Surface_mesh::removed_vertices_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2217",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "removed_edges_",
+        "qualified_name": "CGAL::Surface_mesh::removed_edges_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2218",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "removed_faces_",
+        "qualified_name": "CGAL::Surface_mesh::removed_faces_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2219",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vertices_freelist_",
+        "qualified_name": "CGAL::Surface_mesh::vertices_freelist_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2221",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "edges_freelist_",
+        "qualified_name": "CGAL::Surface_mesh::edges_freelist_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2222",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "faces_freelist_",
+        "qualified_name": "CGAL::Surface_mesh::faces_freelist_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2223",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "garbage_",
+        "qualified_name": "CGAL::Surface_mesh::garbage_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2224",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "recycle_",
+        "qualified_name": "CGAL::Surface_mesh::recycle_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2225",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "anonymous_property_",
+        "qualified_name": "CGAL::Surface_mesh::anonymous_property_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2227",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "adjust_incoming_halfedge",
+        "qualified_name": "CGAL::Surface_mesh::adjust_incoming_halfedge",
+        "brief": "make sure that the incoming halfedge of vertex v is a border halfedge if v is a border vertex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Vertex_index v)",
+        "params": [
+          {
+            "type": "Vertex_index",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2199",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Edge_index": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh::Edge_index",
+    "brief": "This class represents an edge.",
+    "detailed": "Is model of Index LessThanComparable Hashable Vertex_index , Halfedge_index , Face_index",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Edge_index",
+        "qualified_name": "CGAL::Surface_mesh::Edge_index::Edge_index",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "442",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Edge_index",
+        "qualified_name": "CGAL::Surface_mesh::Edge_index::Edge_index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_type idx)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "444",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Edge_index",
+        "qualified_name": "CGAL::Surface_mesh::Edge_index::Edge_index",
+        "brief": "constructs an Edge_index from a halfedge.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Halfedge_index he)",
+        "params": [
+          {
+            "type": "Halfedge_index",
+            "name": "he",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "447",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Surface_mesh::Edge_index::operator<<",
+        "brief": "prints the index and a short identification string to an ostream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, typename Surface_mesh::Edge_index const &e)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename Surface_mesh::Edge_index const &",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "450",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Face_connectivity": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Face_connectivity",
+    "brief": "This type stores the face connectivity.",
+    "detailed": "Vertex_connectivity , Halfedge_connectivity",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "halfedge_",
+        "qualified_name": "CGAL::Surface_mesh::Face_connectivity::halfedge_",
+        "brief": "a halfedge that is part of the face",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "492",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Face_index": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh::Face_index",
+    "brief": "This class represents a face.",
+    "detailed": "Is model of Index LessThanComparable Hashable Vertex_index , Halfedge_index , Edge_index",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Face_index",
+        "qualified_name": "CGAL::Surface_mesh::Face_index::Face_index",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "422",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Face_index",
+        "qualified_name": "CGAL::Surface_mesh::Face_index::Face_index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_type _idx)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "_idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "424",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Surface_mesh::Face_index::operator<<",
+        "brief": "prints the index and a short identification string to an ostream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, typename Surface_mesh::Face_index const &f)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename Surface_mesh::Face_index const &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "427",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Halfedge_connectivity": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Halfedge_connectivity",
+    "brief": "This type stores the halfedge connectivity.",
+    "detailed": "Vertex_connectivity , Face_connectivity",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "face_",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_connectivity::face_",
+        "brief": "face incident to halfedge",
+        "detailed": "",
+        "return_type": "Face_index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "477",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "vertex_",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_connectivity::vertex_",
+        "brief": "vertex the halfedge points to",
+        "detailed": "",
+        "return_type": "Vertex_index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "479",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "next_halfedge_",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_connectivity::next_halfedge_",
+        "brief": "next halfedge within a face (or along a border)",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "481",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "prev_halfedge_",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_connectivity::prev_halfedge_",
+        "brief": "previous halfedge within a face (or along a border)",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "483",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Halfedge_index": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh::Halfedge_index",
+    "brief": "This class represents a halfedge.",
+    "detailed": "Is model of Index LessThanComparable Hashable Vertex_index , Edge_index , Face_index",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Halfedge_index",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_index::Halfedge_index",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "400",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Halfedge_index",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_index::Halfedge_index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_type _idx)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "_idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "402",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Surface_mesh::Halfedge_index::operator<<",
+        "brief": "prints the index and a short identification string to an ostream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, typename Surface_mesh::Halfedge_index const &h)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename Surface_mesh::Halfedge_index const &",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "405",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Handle_iterator": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh::Handle_iterator",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Surface_mesh::Index_iterator": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh::Index_iterator",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Facade",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::Facade",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::iterator_facade< Index_iterator< Index_ >, Index_, std::random_access_iterator_tag, Index_ >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "507",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "boost::iterator_core_access",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::iterator_core_access",
+        "brief": "",
+        "detailed": "",
+        "return_type": "class",
+        "argsstring": "",
+        "params": [
+          {
+            "type": "boost::iterator_core_access",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "517",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "hnd_",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::hnd_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Index_",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "587",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "mesh_",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::mesh_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Surface_mesh *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "588",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Index_iterator",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::Index_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "509",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Index_iterator",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::Index_iterator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Index_ &h, const Surface_mesh *m)",
+        "params": [
+          {
+            "type": "const Index_ &",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Surface_mesh *",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "510",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "increment",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::increment",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "518",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "decrement",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::decrement",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "527",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "advance",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::advance",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::ptrdiff_t n)",
+        "params": [
+          {
+            "type": "std::ptrdiff_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "535",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "distance_to",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::distance_to",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::ptrdiff_t",
+        "argsstring": "(const Index_iterator &other) const",
+        "params": [
+          {
+            "type": "const Index_iterator &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "552",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "equal",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::equal",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Index_iterator &other) const",
+        "params": [
+          {
+            "type": "const Index_iterator &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "580",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "dereference",
+        "qualified_name": "CGAL::Surface_mesh::Index_iterator::dereference",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Index_",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "585",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Property_selector": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Property_selector",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Edge_index, dummy >": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Edge_index, dummy >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "m_",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Edge_index, dummy >::m_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh < P > *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2013",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Property_selector",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Edge_index, dummy >::Property_selector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(CGAL::Surface_mesh< P > *m)",
+        "params": [
+          {
+            "type": "CGAL::Surface_mesh < P > *",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2014",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Edge_index, dummy >::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, typename CGAL::Surface_mesh < P > ::Edge_index > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2017",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize_property_array",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Edge_index, dummy >::resize_property_array",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2018",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Face_index, dummy >": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Face_index, dummy >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "m_",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Face_index, dummy >::m_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh < P > *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2022",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Property_selector",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Face_index, dummy >::Property_selector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(CGAL::Surface_mesh< P > *m)",
+        "params": [
+          {
+            "type": "CGAL::Surface_mesh < P > *",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2023",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Face_index, dummy >::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, typename CGAL::Surface_mesh < P > ::Face_index > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2026",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize_property_array",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Face_index, dummy >::resize_property_array",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2027",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Halfedge_index, dummy >": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Halfedge_index, dummy >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "m_",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Halfedge_index, dummy >::m_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh < P > *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2004",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Property_selector",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Halfedge_index, dummy >::Property_selector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(CGAL::Surface_mesh< P > *m)",
+        "params": [
+          {
+            "type": "CGAL::Surface_mesh < P > *",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2005",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Halfedge_index, dummy >::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, typename CGAL::Surface_mesh < P > ::Halfedge_index > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2008",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize_property_array",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Halfedge_index, dummy >::resize_property_array",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2009",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Vertex_index, dummy >": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Vertex_index, dummy >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "m_",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Vertex_index, dummy >::m_",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Surface_mesh < P > *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1995",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Property_selector",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Vertex_index, dummy >::Property_selector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(CGAL::Surface_mesh< P > *m)",
+        "params": [
+          {
+            "type": "CGAL::Surface_mesh < P > *",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1996",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Vertex_index, dummy >::operator()",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Properties::Property_container< Self, typename CGAL::Surface_mesh < P > ::Vertex_index > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "1999",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize_property_array",
+        "qualified_name": "CGAL::Surface_mesh::Property_selector< typename CGAL::Surface_mesh< P >::Vertex_index, dummy >::resize_property_array",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "2000",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Vertex_connectivity": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh::Vertex_connectivity",
+    "brief": "This type stores the vertex connectivity.",
+    "detailed": "Halfedge_connectivity , Face_connectivity",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "halfedge_",
+        "qualified_name": "CGAL::Surface_mesh::Vertex_connectivity::halfedge_",
+        "brief": "an incoming halfedge per vertex (it will be a border halfedge for border vertices)",
+        "detailed": "",
+        "return_type": "Halfedge_index",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "468",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh::Vertex_index": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh::Vertex_index",
+    "brief": "This class represents a vertex.",
+    "detailed": "Is model of Index LessThanComparable Hashable Halfedge_index , Edge_index , Face_index",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Vertex_index",
+        "qualified_name": "CGAL::Surface_mesh::Vertex_index::Vertex_index",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "379",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Vertex_index",
+        "qualified_name": "CGAL::Surface_mesh::Vertex_index::Vertex_index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_type _idx)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "_idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "381",
+        "section": ""
+      },
+      {
+        "kind": "friend",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Surface_mesh::Vertex_index::operator<<",
+        "brief": "prints the index and a short identification string to an ostream.",
+        "detailed": "",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, typename Surface_mesh::Vertex_index const &v)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "typename Surface_mesh::Vertex_index const &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/Surface_mesh.h",
+        "line": "384",
+        "section": ""
+      }
+    ]
+  },
+  "boost": {
+    "kind": "namespace",
+    "name": "boost",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::IO": {
+    "kind": "namespace",
+    "name": "CGAL::IO",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "read_OFF",
+        "qualified_name": "CGAL::IO::read_OFF",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const std::string &fname, Surface_mesh< Point > &sm, const NamedParameters &np=parameters::default_values())",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "fname",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Surface_mesh < Point > &",
+            "name": "sm",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const NamedParameters &",
+            "name": "np",
+            "default": "parameters::default_values()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh/IO/OFF.h",
+        "line": "340",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

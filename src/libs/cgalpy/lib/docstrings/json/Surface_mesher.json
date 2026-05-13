@@ -1,0 +1,2551 @@
+{
+  "CGAL::Gray_level_image_3": {
+    "kind": "class",
+    "name": "CGAL::Gray_level_image_3",
+    "brief": "A 3D gray image is a tri-dimensional array that associates a scalar value to each triple of integer $ (x, y, z)$ in the range of the image.",
+    "detailed": "A trilinear interpolation algorithm provides a map $ f : \\mathbb{R}^3 \\longrightarrow \\mathbb{R}$ . The class Gray_level_image_3 is a 3D gray image loader and a model of the concept ImplicitFunction . An object of the class Gray_level_image_3 is created with a parameter iso_value and then its operator() implements the function sign of (f(p) - iso) , for $ p \\in \\mathbb{R}^3$ . Plugging such a function in the creation of the Implicit_surface_3 object given as parameter to make_surface_mesh() yields a mesh approximating the level with value iso in the input 3D gray image. Gray_level_image_3 provides an interface with an auxiliary library called CGAL_ImageIO . An executable that uses Gray_level_image_3 must be linked with the CGAL_ImageIO library. The library CGAL_ImageIO and therefore Gray_level_image_3 support several types of 3D images: INRIMAGE (extension .inr[.gz]), GIS (extension .dim, of .ima[.gz]), and ANALYZE (extension .hdr, or .img[.gz]). Is model of ImplicitFunction ImplicitFunction Implicit_surface_3 <Traits, Function> make_surface_mesh",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Gray_level_image_3::FT",
+        "brief": "the numerical type FT .",
+        "detailed": "",
+        "return_type": "FT_",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Gray_level_image_3.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Gray_level_image_3::Point",
+        "brief": "the point type.",
+        "detailed": "",
+        "return_type": "Point_",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Gray_level_image_3.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Gray_level_image_3",
+        "qualified_name": "CGAL::Gray_level_image_3::Gray_level_image_3",
+        "brief": "filename is the path to a file of a type supported by ImageIO .",
+        "detailed": "iso_value is an isovalue of the interpolation function $ f$ .",
+        "return_type": "",
+        "argsstring": "(const char *filename, FT iso_value)",
+        "params": [
+          {
+            "type": "const char *",
+            "name": "filename",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "iso_value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Gray_level_image_3.h",
+        "line": "66",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator",
+        "qualified_name": "CGAL::Gray_level_image_3::operator",
+        "brief": "Returns the sign of $ f(p)$ - iso_value .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const Point &p) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Gray_level_image_3.h",
+        "line": "76",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Implicit_surface_3": {
+    "kind": "class",
+    "name": "CGAL::Implicit_surface_3",
+    "brief": "The class Implicit_surface_3 implements a surface described as the zero level set of a function $ f : \\mathbb{R}^3 \\longrightarrow \\mathbb{R}$ .",
+    "detailed": "For this type of surface, the library provides a partial specialization of the surface mesher traits generator: Surface_mesh_traits_generator_3 < Implicit_surface_3 <Traits, Function> > , that provides a traits class, model of the concept SurfaceMeshTraits_3 , to be used by the surface mesher. Traits must be a geometric traits class that must be a model of ImplicitSurfaceTraits_3 . That concept defines all the types, predicates and constructors that the Traits has to provide to implement the surface mesh traits Surface_mesh_traits_generator_3 < Implicit_surface_3 <Traits, Function> > . Function must be a of the concept ImplicitFunction . The number type Function::FT has to match the type Traits::FT . Is model of Surface_3 make_surface_mesh Surface_mesh_traits_generator_3 <Surface> ImplicitSurfaceTraits_3 ImplicitFunction",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Implicit_surface_3",
+        "qualified_name": "CGAL::Implicit_surface_3::Implicit_surface_3",
+        "brief": "f is the object of type Function that represents the implicit surface.",
+        "detailed": "bounding_sphere is a bounding sphere of the implicit surface. The evaluation of f at the center c of this sphere must be negative: $ f(c)<0$ . error_bound is a relative error bound used to compute intersection points between the implicit surface and query segments. This bound is used in the default generated traits class. In this traits class, the intersection points between the surface and segments/rays/line are constructed by dichotomy. The dichotomy is stopped when the size of the intersected segment is less than the product of error_bound by the radius of bounding_sphere .",
+        "return_type": "",
+        "argsstring": "(Function f, Sphere_3 bounding_sphere, FT error_bound=FT(1e-3))",
+        "params": [
+          {
+            "type": "Function",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Sphere_3",
+            "name": "bounding_sphere",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "error_bound",
+            "default": "FT(1e-3)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Implicit_surface_3.h",
+        "line": "62",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_cell_base_3": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_cell_base_3",
+    "brief": "The class Surface_mesh_cell_base_3 is a model of the concept SurfaceMeshCellBase_3 .",
+    "detailed": "It is designed to serve as cell base class in a triangulation class Tr plugged in a Surface_mesh_complex_2_in_triangulation_3 <Tr> class. Gt is the geometric traits class. Cb must be a model of the concept DelaunayTriangulationCellBase_3 and defaults to Delaunay_triangulation_cell_base_3<GT> . Is model of SurfaceMeshCellBase_3 SurfaceMeshComplex_2InTriangulation_3 Surface_mesh_complex_2_in_triangulation_3 <Tr> SurfaceMeshTriangulation_3 make_surface_mesh",
+    "members": []
+  },
+  "CGAL::Surface_mesh_complex_2_in_triangulation_3": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_complex_2_in_triangulation_3",
+    "brief": "The class Surface_mesh_complex_2_in_triangulation_3 implements a data structure to store the restricted Delaunay triangulation used by the surface mesh generator.",
+    "detailed": "The restricted Delaunay triangulation is stored as a two dimensional complex embedded in a three dimensional triangulation. The class Surface_mesh_complex_2_in_triangulation_3 is a model of the concept SurfaceMeshComplex_2InTriangulation_3 and can be plugged as the template parameter C2T3 in the function template make_surface_mesh() . Tr has to be instantiated with a model of the concept SurfaceMeshTriangulation_3 . (Any three dimensional triangulation of CGAL is a model of Tr provided that its vertex and cell base class be models of the concept SurfaceMeshVertexBase_3 and SurfaceMeshCellBase_3 respectively.) Is model of SurfaceMeshComplex_2InTriangulation_3 make_surface_mesh SurfaceMeshTriangulation_3 CGAL::output_surface_facets_to_off() CGAL::output_surface_facets_to_polyhedron()",
+    "members": []
+  },
+  "CGAL::Surface_mesh_default_criteria_3": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_default_criteria_3",
+    "brief": "The class Surface_mesh_default_criteria_3 implements the most commonly used combination of meshing criteria.",
+    "detailed": "It involves mainly three criteria which are in order: a lower bound on the minimum angle in degrees of the surface mesh facets. an upper bound on the radius of surface Delaunay balls. A surface Delaunay ball is a ball circumscribing a facet, centered on the surface and empty of vertices. Such a ball exists for each facet of the current surface mesh. Indeed the current surface mesh is the Delaunay triangulation of the current sampling restricted to the surface which is just the set of facets in the three dimensional Delaunay triangulation of the sampling that have a Delaunay surface ball. an upper bound on the center-center distances of the surface mesh facets. The center-center distance of a surface mesh facet is the distance between the facet circumcenter and the center of its surface Delaunay ball. Is model of SurfaceMeshFacetsCriteria_3 make_surface_mesh",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Surface_mesh_default_criteria_3::FT",
+        "brief": "The numerical type.",
+        "detailed": "",
+        "return_type": "Tr::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_default_criteria_3.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Surface_mesh_default_criteria_3",
+        "qualified_name": "CGAL::Surface_mesh_default_criteria_3::Surface_mesh_default_criteria_3",
+        "brief": "Returns a Surface_mesh_default_criteria_3 with angle_bound , radius_bound , distance_bound as bounds for the minimum facet angle in degrees, the radius of the surface Delaunay balls and the center-center distances respectively.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(FT angle_bound, FT radius_bound, FT distance_bound)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "angle_bound",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "radius_bound",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "distance_bound",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Surface_mesh_default_criteria_3.h",
+        "line": "58",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_default_triangulation_3": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_default_triangulation_3",
+    "brief": "The class Surface_mesh_default_triangulation_3 is a model of the concept SurfaceMeshTriangulation_3 , whose vertex base and cell base classes are models of the concepts SurfaceMeshVertexBase_3 and SurfaceMeshCellBase_3 respectively.",
+    "detailed": "Is model of SurfaceMeshTriangulation_3 Surface_mesh_complex_2_in_triangulation_3 <Tr> make_surface_mesh",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Surface_mesh_default_triangulation_3::Vertex",
+        "brief": "the vertex type which is model of SurfaceMeshVertexBase_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_default_triangulation_3.h",
+        "line": "24",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell",
+        "qualified_name": "CGAL::Surface_mesh_default_triangulation_3::Cell",
+        "brief": "the cell type which is model of SurfaceMeshCellBase_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_default_triangulation_3.h",
+        "line": "28",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_traits_generator_3": {
+    "kind": "struct",
+    "name": "CGAL::Surface_mesh_traits_generator_3",
+    "brief": "The class Surface_mesh_traits_generator_3 provides a type type , that is a model of the concept SurfaceMeshTraits_3 for the surface type Surface .",
+    "detailed": "Surface must be a model of the concept Surface_3 , which means that it is copy constructible and assignable. In addition, a Surface type is required either to provide a nested type Surface::Surface_mesher_traits_3 that is a model of SurfaceMeshTraits_3 or to be a surface type for which a specialization of the traits generator Surface_mesh_traits_generator_3 exists. Currently, the library provides partial specializations of the traits generator for implicit surfaces ( Implicit_surface_3 <Traits, Function> ) and gray level images ( Gray_level_image_3 <FT, Point> ). SurfaceMeshTraits_3 make_surface_mesh",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "type",
+        "qualified_name": "CGAL::Surface_mesh_traits_generator_3::type",
+        "brief": "A model of the concept SurfaceMeshTraits_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Surface_mesh_traits_generator_3.h",
+        "line": "37",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesh_vertex_base_3": {
+    "kind": "class",
+    "name": "CGAL::Surface_mesh_vertex_base_3",
+    "brief": "The class Surface_mesh_vertex_base_3 is a model of the concept SurfaceMeshVertexBase_3 .",
+    "detailed": "It is designed to serve as vertex base class in a triangulation class Tr plugged in a Surface_mesh_complex_2_in_triangulation_3 <Tr> class. Gt is the geometric traits class. Vb must be a model of the concept TriangulationVertexBase_3 and defaults to Triangulation_vertex_base_3 <Gt> . Is model of SurfaceMeshVertexBase_3 SurfaceMeshComplex_2InTriangulation_3 Surface_mesh_complex_2_in_triangulation_3 <Tr> SurfaceMeshTriangulation_3 make_surface_mesh",
+    "members": []
+  },
+  "ImplicitFunction": {
+    "kind": "class",
+    "name": "ImplicitFunction",
+    "brief": "The concept ImplicitFunction describes a function object whose operator() computes the values of a function $ f : \\mathbb{R}^3 \\longrightarrow \\mathbb{R}$ .",
+    "detailed": "Has models any pointer to a function of type FT (*)( Point ) CGAL::Gray_level_image_3 CGAL::Implicit_surface_3 <Traits, Function> CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "ImplicitFunction::FT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitFunction.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "ImplicitFunction::Point",
+        "brief": "Point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitFunction.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "ImplicitFunction::operator()",
+        "brief": "Returns the value $ f(p)$ , where $ p \\in\\mathbb{R}^3$ .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(Point p)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ImplicitFunction.h",
+        "line": "44",
+        "section": "Operations"
+      }
+    ]
+  },
+  "ImplicitSurfaceTraits_3": {
+    "kind": "class",
+    "name": "ImplicitSurfaceTraits_3",
+    "brief": "The concept ImplicitSurfaceTraits_3 describes the requirements of the traits class to be plugged as Traits in CGAL::Implicit_surface_3 <Traits, Function> .",
+    "detailed": "When make_surface_mesh is called with a surface of type CGAL::Implicit_surface_3 <Traits,Function> , the surface mesher traits generator generates automatically a traits class that is a model of SurfaceMeshTraits_3 . Actually, the concept ImplicitSurfaceTraits_3 provides the types, predicates and constructors that are passed to the generated model of SurfaceMeshTraits_3 . Has models All models of the CGAL concept Kernel CGAL::Implicit_surface_3 <Traits, Function> CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "ImplicitSurfaceTraits_3::FT",
+        "brief": "The numerical type.",
+        "detailed": "It must be model of FieldWithSqrt and constructible from a double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Point_3",
+        "brief": "The point type.",
+        "detailed": "This point type must have a constructor Point_3(FT, FT, FT) .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Line_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Line_3",
+        "brief": "The line type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ray_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Ray_3",
+        "brief": "The ray type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Segment_3",
+        "brief": "The segment type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Vector_3",
+        "brief": "The vector type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "63",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sphere_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Sphere_3",
+        "brief": "The sphere type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_scalar_product_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Compute_scalar_product_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "FT operator()(Vector_3 v, Vector_3 w) which returns the scalar (inner) product of the two vectors v and w .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Compute_squared_distance_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "FT operator()(Point_3, Point_3) which returns the squared distance between two points.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "84",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_radius_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Compute_squared_radius_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "FT operator()(const Sphere_3 & s) which returns the squared radius of s .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "92",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_center_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_center_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "Point_3 operator()(const Sphere_3 & s) which computes the center of the sphere s .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "100",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_midpoint_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_midpoint_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q) which computes the midpoint of the segment pq .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "108",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_point_on_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_point_on_3",
+        "brief": "A function object providing the following operators:",
+        "detailed": "Point_3 operator()(const Line_3 & l,int i) which returns an arbitrary point on l . It holds point(i) == point(j) , iff i==j . Furthermore, is directed from point(i) to point(j) , for all i $ <$ j . Point_3 operator()(const Ray_3 & r,int i) which returns a point on r . point(0) is the source, point(i) , with $ i>0$ , is different from the source. $ i \\geq0$ . Point_3 operator()(const Segment_3 & s,int i) which returns source or target of s : point(0) returns the source of s , point(1) returns the target of s . The parameter i is taken modulo 2, which gives easy access to the other end point.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "129",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_segment_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_segment_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "Segment_3 operator()(const Point_3 &p, const Point_3 &q) which returns a segment with source p and target q . It is directed from the source towards the target.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "138",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_scaled_vector_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_scaled_vector_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "Vector_3 operator()(const Vector_3 &v, const FT & scale) which returns the vector v scaled by a factor scale .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "146",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_translated_point_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_translated_point_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "Point_3 operator()(const Point_3 & p, const Vector_3 & v) which returns the point obtained by translating p by the vector v .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "154",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_vector_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Construct_vector_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "Vector_3 operator()(const Point_3 &a, const Point_3 &b) which returns the vector b-a .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "162",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Has_on_bounded_side_3",
+        "qualified_name": "ImplicitSurfaceTraits_3::Has_on_bounded_side_3",
+        "brief": "A function object providing the operator.",
+        "detailed": "bool operator()(const Sphere_3 &s, const Point_3 &p) which returns true iff p lies on the bounded side of s .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "170",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "compute_scalar_product_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::compute_scalar_product_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_scalar_product_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "182",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_distance_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::compute_squared_distance_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_distance_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "187",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_squared_radius_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::compute_squared_radius_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_squared_radius_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "192",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_center_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_center_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_center_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "197",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_midpoint_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_midpoint_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_midpoint_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "202",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point_on_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_point_on_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_point_on_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "207",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_scaled_vector_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_scaled_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_scaled_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "212",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_segment_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_segment_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_segment_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "217",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_translated_point_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_translated_point_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_translated_point_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "222",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_vector_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::construct_vector_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_vector_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "227",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "has_on_bounded_side_3_object",
+        "qualified_name": "ImplicitSurfaceTraits_3::has_on_bounded_side_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Has_on_bounded_side_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ImplicitSurfaceTraits_3.h",
+        "line": "232",
+        "section": "Operations"
+      }
+    ]
+  },
+  "Surface_3": {
+    "kind": "class",
+    "name": "Surface_3",
+    "brief": "The concept Surface_3 describes the types of surfaces to be meshed. The surface types are required to be copy constructible and assignable.",
+    "detailed": "Has models CGAL::Implicit_surface_3 <Traits, Function> CGAL::make_surface_mesh() SurfaceMeshTraits_3 CGAL::Surface_mesh_traits_generator_3 <Surface>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Surface_mesher_traits_3",
+        "qualified_name": "Surface_3::Surface_mesher_traits_3",
+        "brief": "a model of SurfaceMesherTraits_3",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/Surface_3.h",
+        "line": "34",
+        "section": "Types"
+      }
+    ]
+  },
+  "SurfaceMeshCellBase_3": {
+    "kind": "class",
+    "name": "SurfaceMeshCellBase_3",
+    "brief": "The concept SurfaceMeshCellBase_3 describes the cell base type of the three dimensional triangulation used to embed the surface mesh.",
+    "detailed": "More precisely, the first template parameter SurfaceMeshC2T3 of the function template CGAL::make_surface_mesh() is a model of the concept SurfaceMeshComplex_2InTriangulation_3 which describes a data structure to store a pure two dimensional complex embedded in a three dimensional triangulation. In particular, the type SurfaceMeshC2T3 is required to provide a three dimensional triangulation type SurfaceMeshC2T3::Triangulation_3 . The concept SurfaceMeshCellBase_3 describes the cell base type required in this triangulation type. Refines DelaunayTriangulationCellBase_3 The concept SurfaceMeshCellBase_3 adds four markers to mark the facets of the triangulation that belong to the two dimensional complex, and four markers that are helpers used in some operations to mark for instance the facets that have been visited. This concept also provides storage for the center of a Delaunay surface ball. Given a surface and a 3D Delaunay triangulation, a Delaunay surface ball is a ball circumscribed to a facet of the triangulation and centered on the surface and empty of triangulation vertices. Such a ball does exist when the facet is part of the restriction to the surface of a three dimensional triangulation. In the following we call surface center of a facet, the center of its biggest Delaunay surface ball. Has models CGAL::Surface_mesh_cell_base_3 <Gt,Vb> CGAL::Surface_mesh_default_triangulation_3::Cell SurfaceMeshTriangulation_3 SurfaceMeshComplex_2InTriangulation_3 CGAL::Surface_mesh_complex_2_in_triangulation_3 <Tr> CGAL::Surface_mesh_default_triangulation_3 CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "SurfaceMeshCellBase_3::Point",
+        "brief": "The point type, required to match the point type of the three dimensional triangulation in which the surface mesh is embedded.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "is_facet_on_surface",
+        "qualified_name": "SurfaceMeshCellBase_3::is_facet_on_surface",
+        "brief": "returns true , if facet(i) is in the 2D complex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "74",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_facet_on_surface",
+        "qualified_name": "SurfaceMeshCellBase_3::set_facet_on_surface",
+        "brief": "Sets facet(i) as part of the 2D complex, if b is true , and NOT_IN_COMPLEX , otherwise.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i, bool b)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "80",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_facet_visited",
+        "qualified_name": "SurfaceMeshCellBase_3::is_facet_visited",
+        "brief": "Returns true , if facet(i) has been visited, false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "86",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_facet_visited",
+        "qualified_name": "SurfaceMeshCellBase_3::set_facet_visited",
+        "brief": "Marks facet(i) as visited, if b is true , and non visited otherwise.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i, bool b)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "92",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_facet_surface_center",
+        "qualified_name": "SurfaceMeshCellBase_3::get_facet_surface_center",
+        "brief": "Returns a const reference to the surface center of facet(i) .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "97",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_facet_surface_center",
+        "qualified_name": "SurfaceMeshCellBase_3::set_facet_surface_center",
+        "brief": "Sets point p as the surface center of facet(i) .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int i, Point p)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshCellBase_3.h",
+        "line": "102",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SurfaceMeshComplex_2InTriangulation_3": {
+    "kind": "class",
+    "name": "SurfaceMeshComplex_2InTriangulation_3",
+    "brief": "The concept SurfaceMeshComplex_2InTriangulation_3 describes a data structure designed to represent a two dimensional pure complex embedded in a three dimensional triangulation.",
+    "detailed": "A complex is a set $ C$ of faces such that: any subface of a face in $ C$ is a face of $ C$ two faces of $ C$ are disjoint or share a common subface The complex is two dimensional , if its faces have dimension at most two. It is pure if any face in the complex is a subface of some face of maximal dimension. Thus, a two dimensional pure complex is a set of facets together with their edges and vertices. A two dimensional pure complex embedded in a three dimensional triangulation is a subset of the facets of this triangulation, together with their edges and vertices. The concept SurfaceMeshComplex_2InTriangulation_3 is particularly suited to handle surface meshes obtained as the restriction to a surface of a three dimensional Delaunay triangulation. A model of this concept is a type to be plugged as first template parameter in the function template CGAL::make_surface_mesh() . Has models CGAL::Surface_mesh_complex_2_in_triangulation_3 <Tr> CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Face_status",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Face_status",
+        "brief": "A type to describe the status of a face (facet, edge, or vertex) with respect to the 2D pure complex.",
+        "detailed": "A NOT_IN_COMPLEX face does not belong to the 2D complex. Facets can only be NOT_IN_COMPLEX or REGULAR depending on whether they belong to the 2D complex on not. Edges and vertices can be NOT_IN_COMPLEX , BOUNDARY , REGULAR or SINGULAR . An edge in the complex is BOUNDARY , REGULAR , or SINGULAR , if it is incident to respectively 1, 2, or 3 or more facets in the complex. The status of a vertex is determined by the adjacency graph of the facets of the 2D complex incident to that vertex. The vertex of the 2D complex is BOUNDARY , if this adjacency graph is a simple path, it is REGULAR , if the adjacency graph is cyclic, and SINGULAR in any other case.",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "105",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Triangulation",
+        "brief": "The type of the embedding 3D triangulation.",
+        "detailed": "Must be a model of SurfaceMeshTriangulation_3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Vertex_handle",
+        "brief": "The type of the embedding triangulation vertex handles.",
+        "detailed": "",
+        "return_type": "Triangulation::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Cell_handle",
+        "brief": "The type of the embedding triangulation cell handles.",
+        "detailed": "",
+        "return_type": "Triangulation::Cell_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Facet",
+        "brief": "The type of the embedding triangulation facets.",
+        "detailed": "",
+        "return_type": "Triangulation::Facet",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Edge",
+        "brief": "The type of the embedding triangulation edges.",
+        "detailed": "",
+        "return_type": "Triangulation::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "77",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::size_type",
+        "brief": "Size type (an unsigned integral type).",
+        "detailed": "",
+        "return_type": "Triangulation::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_iterator",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Facet_iterator",
+        "brief": "An iterator type to visit the facets of the 2D complex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "112",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_iterator",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Edge_iterator",
+        "brief": "An iterator type to visit the edges of the 2D complex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "118",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_iterator",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Vertex_iterator",
+        "brief": "An iterator type to visit vertices of the 2D complex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "124",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Boundary_edges_iterator",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::Boundary_edges_iterator",
+        "brief": "An iterator type to visit the boundary edges of the 2D complex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "130",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "SurfaceMeshComplex_2InTriangulation_3",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::SurfaceMeshComplex_2InTriangulation_3",
+        "brief": "Builds an empty 2D complex embedded in the triangulation t3 .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Triangulation &t3)",
+        "params": [
+          {
+            "type": "Triangulation &",
+            "name": "t3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "140",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "triangulation",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::triangulation",
+        "brief": "Returns the reference to the triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "163",
+        "section": "Member access"
+      },
+      {
+        "kind": "function",
+        "name": "add_to_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::add_to_complex",
+        "brief": "Adds facet f to the 2D complex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Facet f)",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "173",
+        "section": "Modifications"
+      },
+      {
+        "kind": "function",
+        "name": "add_to_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::add_to_complex",
+        "brief": "Adds facet (c,i) to the 2D complex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Cell_handle c, int i)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "178",
+        "section": "Modifications"
+      },
+      {
+        "kind": "function",
+        "name": "remove_from_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::remove_from_complex",
+        "brief": "Removes facet f from the 2D complex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Facet f)",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "183",
+        "section": "Modifications"
+      },
+      {
+        "kind": "function",
+        "name": "remove_from_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::remove_from_complex",
+        "brief": "Removes facet (c,i) from the 2D complex.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Cell_handle c, int i)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "188",
+        "section": "Modifications"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_facets",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::number_of_facets",
+        "brief": "Returns the number of facets that belong to the 2D complex.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "199",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "face_status",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::face_status",
+        "brief": "Returns the status of the facet f with respect to the 2D complex.",
+        "detailed": "",
+        "return_type": "Face_status",
+        "argsstring": "(Facet f)",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "204",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "face_status",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::face_status",
+        "brief": "Returns the status of the facet (c,i) with respect to the 2D complex.",
+        "detailed": "",
+        "return_type": "Face_status",
+        "argsstring": "(Cell_handle c, int i)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "209",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "face_status",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::face_status",
+        "brief": "Returns the status of edge e in the 2D complex.",
+        "detailed": "",
+        "return_type": "Face_status",
+        "argsstring": "(Edge e)",
+        "params": [
+          {
+            "type": "Edge",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "214",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "face_status",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::face_status",
+        "brief": "Returns the status of edge (c,i,j) in the 2D complex.",
+        "detailed": "",
+        "return_type": "Face_status",
+        "argsstring": "(Cell_handle c, int i, int j)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "219",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "face_status",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::face_status",
+        "brief": "Returns the status of vertex v in the 2D complex.",
+        "detailed": "",
+        "return_type": "Face_status",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "225",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "is_in_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::is_in_complex",
+        "brief": "Returns true , if the facet f belongs to the 2D complex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Facet f)",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "230",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "is_in_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::is_in_complex",
+        "brief": "Returns true , if the facet (c,i) belongs to the 2D complex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Cell_handle c, int i)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "235",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "is_in_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::is_in_complex",
+        "brief": "Returns true , if the edge e belongs to the 2D complex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Edge e)",
+        "params": [
+          {
+            "type": "Edge",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "240",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "is_in_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::is_in_complex",
+        "brief": "Returns true , if the edge (c,i,j) belongs to the 2D complex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Cell_handle c, int i, int j)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "245",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "is_in_complex",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::is_in_complex",
+        "brief": "Returns true , if the vertex v belongs to the 2D complex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "250",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "is_regular_or_boundary_for_vertices",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::is_regular_or_boundary_for_vertices",
+        "brief": "Returns true if the status of vertex v is REGULAR or BOUNDARY .",
+        "detailed": "All the edges of the complex incident to v are REGULAR or BOUNDARY .",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "256",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "facets_begin",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::facets_begin",
+        "brief": "Returns an iterator with value type Facet to visit the facets of the 2D complex.",
+        "detailed": "",
+        "return_type": "Facet_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "270",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "facets_end",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::facets_end",
+        "brief": "Returns the past the end iterator for the above iterator.",
+        "detailed": "",
+        "return_type": "Facet_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "275",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "edges_begin",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::edges_begin",
+        "brief": "Returns an iterator with value type Edge to visit the edges of the 2D complex which are not isolated.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "281",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "edges_end",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::edges_end",
+        "brief": "Returns the past the end iterator for the above iterator.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "286",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "boundary_edges_begin",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::boundary_edges_begin",
+        "brief": "Returns an iterator with value type Edge to visit the boundary edges of the complex.",
+        "detailed": "",
+        "return_type": "Boundary_edges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "292",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "boundary_edges_end",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::boundary_edges_end",
+        "brief": "Returns the past the end iterator for the above iterator.",
+        "detailed": "",
+        "return_type": "Boundary_edges_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "297",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::vertices_begin",
+        "brief": "Returns an iterator with value type Vertex_handle to visit the vertices of the 2D complex.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "303",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::vertices_end",
+        "brief": "Returns the past the end iterator for the above iterator.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "308",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "incident_facets",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::incident_facets",
+        "brief": "Copies the facets of the complex incident to v to the output iterator facets .",
+        "detailed": "Returns the resulting output iterator. c2t3.triangulation().dimension() == 3 , v != Vertex_handle() , c2t3.triangulation().is_vertex(v) .",
+        "return_type": "OutputIterator",
+        "argsstring": "(Vertex_handle v, OutputIterator facets)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "facets",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "318",
+        "section": "Traversal of the complex"
+      },
+      {
+        "kind": "function",
+        "name": "neighbor",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::neighbor",
+        "brief": "Returns the facet of the complex which is the neighbor of the facet f opposite to the vertex with index j of f .",
+        "detailed": "The vertices of the facet f = (cell c, i) are numbered (0,1,2) (according to the vertex_triple_index(i,j) member function of Triangulation_3 ) in such a way that facet f is oriented by the outward normal of tetraedra c . If there is no such neighbor, or if the edge is singular the functions returns Facet() .",
+        "return_type": "Facet",
+        "argsstring": "(Facet f, int j)",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "337",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "neighbor",
+        "qualified_name": "SurfaceMeshComplex_2InTriangulation_3::neighbor",
+        "brief": "Returns the facet of the complex which is the neighbor of the facet f opposite to the vertex with index j of f .",
+        "detailed": "See above.",
+        "return_type": "Facet",
+        "argsstring": "(Cell_handle c, int i, int j)",
+        "params": [
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshComplex_2InTriangulation_3.h",
+        "line": "344",
+        "section": ""
+      }
+    ]
+  },
+  "SurfaceMeshFacetsCriteria_3": {
+    "kind": "class",
+    "name": "SurfaceMeshFacetsCriteria_3",
+    "brief": "The Delaunay refinement process involved in the function template CGAL::make_surface_mesh() is guided by a set of refinement criteria. The concept SurfaceMeshFacetsCriteria_3 describes the type which handles those criteria. It corresponds to the requirements for the template parameter FacetsCriteria of the surface mesher function CGAL::make_surface_mesh <SurfaceMeshC2T3,Surface,FacetsCriteria,Tag>() .",
+    "detailed": "Typically the meshing criteria are a set of elementary criteria, each of which has to be met by the facets of the final mesh. The meshing algorithm eliminates in turn bad facets, i.e., facets that do not meet all the criteria. The size and quality of the final mesh depends on the order according to which bad facets are handled. Therefore, the meshing algorithm needs to be able to quantify the facet qualities and to compare the qualities of different faces. The type SurfaceMeshFacetsCriteria_3::Quality measures the quality of a mesh facet. Typically this quality is a multicomponent variable. Each component corresponds to one criterion and measures how much the facet deviates from meeting this criterion. Then, the comparison operator on qualities is just a lexicographical comparison. The meshing algorithm handles facets with lowest quality first. The qualities are computed by a function is_bad (const Facet & f, const Quality & q) . Has models CGAL::Surface_mesh_default_criteria_3 <Tr> CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "SurfaceMeshFacetsCriteria_3::Facet",
+        "brief": "The type of facets.",
+        "detailed": "This type has to match the Facet type in the triangulation type used by the mesher function. (This triangulation type is the type SurfaceMeshC2T3::Triangulation provided by the model of SurfaceMeshComplex_2InTriangulation_3 plugged as first template parameter of CGAL::make_surface_mesh() ).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshFacetsCriteria_3.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Quality",
+        "qualified_name": "SurfaceMeshFacetsCriteria_3::Quality",
+        "brief": "Default constructible, copy constructible, assignable, and less-than comparable type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshFacetsCriteria_3.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "is_bad",
+        "qualified_name": "SurfaceMeshFacetsCriteria_3::is_bad",
+        "brief": "Assigns the quality of the facet f to q , and returns true is f does not meet the criteria.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Facet &f, const Quality &q)",
+        "params": [
+          {
+            "type": "const Facet &",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Quality &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshFacetsCriteria_3.h",
+        "line": "78",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SurfaceMeshTraits_3": {
+    "kind": "class",
+    "name": "SurfaceMeshTraits_3",
+    "brief": "The concept SurfaceMeshTraits_3 describes the knowledge that is required on the surface to be meshed. A model of this concept implements an oracle that is able to tell whether a segment (or a ray, or a line) intersects the surface or not, and to compute some intersection points if any exists. The concept SurfaceMeshTraits_3 also includes a funcctor able to provide a small set of initial points on the surface.",
+    "detailed": "Has models CGAL::Surface_mesh_traits_generator_3::type CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "SurfaceMeshTraits_3::Point_3",
+        "brief": "The type of points.",
+        "detailed": "This type is required to match the point type of the three dimensional embedding triangulation C2T3::Triangulation_3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_3",
+        "qualified_name": "SurfaceMeshTraits_3::Segment_3",
+        "brief": "The type of segments.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ray_3",
+        "qualified_name": "SurfaceMeshTraits_3::Ray_3",
+        "brief": "The type of rays.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Line_3",
+        "qualified_name": "SurfaceMeshTraits_3::Line_3",
+        "brief": "The type of lines.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Surface_3",
+        "qualified_name": "SurfaceMeshTraits_3::Surface_3",
+        "brief": "The surface type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Intersect_3",
+        "qualified_name": "SurfaceMeshTraits_3::Intersect_3",
+        "brief": "A model of this type provides the operator.",
+        "detailed": "CGAL::Object operator()(Surface_3 surface, Type1 type1) to compute the intersection of the surface with an object of type Type1 which may be Segment_3 , Ray_3 or Line_3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "66",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_initial_points",
+        "qualified_name": "SurfaceMeshTraits_3::Construct_initial_points",
+        "brief": "A model of this type provides the following operators to construct initial points on the surface:",
+        "detailed": "template <class OutputIteratorPoints> OutputIteratorPoints operator()(OutputIteratorPoints pts) which outputs a set of points on the surface, template <class OutputIteratorPoints> OutputIteratorPoints operator() (OutputIteratorPoints pts, int n) which outputs a set of n points on the surface.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "84",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "intersect_3_object",
+        "qualified_name": "SurfaceMeshTraits_3::intersect_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Intersect_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "95",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "construct_initial_points_object",
+        "qualified_name": "SurfaceMeshTraits_3::construct_initial_points_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Construct_initial_points",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTraits_3.h",
+        "line": "100",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SurfaceMeshTriangulation_3": {
+    "kind": "class",
+    "name": "SurfaceMeshTriangulation_3",
+    "brief": "The concept SurfaceMeshTriangulation_3 describes the triangulation type used by the surface mesher CGAL::make_surface_mesh() to represent the three dimensional triangulation embedding the surface mesh. Thus, this concept describes the requirements for the triangulation type SurfaceMeshC2T3::Triangulation nested in the model of SurfaceMeshComplex_2InTriangulation_3 plugged as the template parameter SurfaceMeshC2T3 of CGAL::make_surface_mesh() . It also describes the requirements for the triangulation type plugged in the class CGAL::Surface_mesh_complex_2_in_triangulation_3 <Tr> .",
+    "detailed": "Has models Any 3D Delaunay triangulation class of CGAL CGAL::Triangulation_3<TriangulationTraits_3,TriangulationDataStructure_3> CGAL::Delaunay_triangulation_3<DelaunayTriangulationTraits_3,TriangulationDataStructure_3> SurfaceMeshComplex_2InTriangulation_3 CGAL::Surface_mesh_complex_2_in_triangulation_3 <Tr> CGAL::make_surface_mesh()",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "SurfaceMeshTriangulation_3::Point",
+        "brief": "The point type.",
+        "detailed": "It must be DefaultConstructible, CopyConstructible and Assignable.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "SurfaceMeshTriangulation_3::Vertex_handle",
+        "brief": "Handle to a data representing a vertex .",
+        "detailed": "Vertex_handle must be a model of Handle and its value type must be model of TriangulationDataStructure_3::Vertex .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Cell_handle",
+        "qualified_name": "SurfaceMeshTriangulation_3::Cell_handle",
+        "brief": "Handle to a data representing a cell .",
+        "detailed": "Cell_handle must be a model of Handle and its value type must be model of TriangulationDataStructure_3::Cell .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "SurfaceMeshTriangulation_3::Edge",
+        "brief": "The edge type.",
+        "detailed": "",
+        "return_type": "CGAL::Triple< Cell_handle , int, int >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "SurfaceMeshTriangulation_3::Facet",
+        "brief": "The facet type.",
+        "detailed": "",
+        "return_type": "std::pair< Cell_handle , int >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_vertices_iterator",
+        "qualified_name": "SurfaceMeshTriangulation_3::Finite_vertices_iterator",
+        "brief": "Iterator over finite vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "75",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_edges_iterator",
+        "qualified_name": "SurfaceMeshTriangulation_3::Finite_edges_iterator",
+        "brief": "Iterator over finite edges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "80",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Finite_facets_iterator",
+        "qualified_name": "SurfaceMeshTriangulation_3::Finite_facets_iterator",
+        "brief": "Iterator over finite facets.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "85",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Geom_traits",
+        "qualified_name": "SurfaceMeshTriangulation_3::Geom_traits",
+        "brief": "The geometric traits class.",
+        "detailed": "Must be a model of DelaunayTriangulationTraits_3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "91",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "SurfaceMeshTriangulation_3",
+        "qualified_name": "SurfaceMeshTriangulation_3::SurfaceMeshTriangulation_3",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "101",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "SurfaceMeshTriangulation_3",
+        "qualified_name": "SurfaceMeshTriangulation_3::SurfaceMeshTriangulation_3",
+        "brief": "Copy constructor.",
+        "detailed": "All vertices and faces are duplicated.",
+        "return_type": "",
+        "argsstring": "(SurfaceMeshTriangulation_3 tr)",
+        "params": [
+          {
+            "type": "SurfaceMeshTriangulation_3",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "106",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "SurfaceMeshTriangulation_3::operator=",
+        "brief": "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.",
+        "detailed": "The previous triangulation held by t is deleted.",
+        "return_type": "SurfaceMeshTriangulation_3 &",
+        "argsstring": "(const SurfaceMeshTriangulation_3 &tr)",
+        "params": [
+          {
+            "type": "const SurfaceMeshTriangulation_3 &",
+            "name": "tr",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "119",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "SurfaceMeshTriangulation_3::clear",
+        "brief": "Deletes all finite vertices and all cells of t .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "124",
+        "section": "Assignment"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "SurfaceMeshTriangulation_3::dimension",
+        "brief": "Returns the dimension of the affine hull.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "134",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "geom_traits",
+        "qualified_name": "SurfaceMeshTriangulation_3::geom_traits",
+        "brief": "Returns a const reference to a model of DelaunayTriangulationTraits_3 .",
+        "detailed": "",
+        "return_type": "const DelaunayTriangulationTraits_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "140",
+        "section": "Access Functions"
+      },
+      {
+        "kind": "function",
+        "name": "dual",
+        "qualified_name": "SurfaceMeshTriangulation_3::dual",
+        "brief": "Returns the dual of facet f .",
+        "detailed": "In dimension 3: either a segment, if the two cells incident to f are finite, or a ray, if one of them is infinite; In dimension 2: a point.",
+        "return_type": "Object",
+        "argsstring": "(Facet f) const",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "155",
+        "section": "Voronoi diagram"
+      },
+      {
+        "kind": "function",
+        "name": "find_conflicts",
+        "qualified_name": "SurfaceMeshTriangulation_3::find_conflicts",
+        "brief": "Computes the conflict hole induced by p .",
+        "detailed": "The starting cell (resp. facet) c must be in conflict. Then this function returns respectively in the output iterators: cit : the cells (resp. facets) in conflict. bfit : the facets (resp. edges) on the boundary, that is, the facets (resp. edges) (t, i) where the cell (resp. facet) t is in conflict, but t->neighbor(i) is not. ifit : the facets (resp. edges) inside the hole, that is, delimiting two cells (resp. facets) in conflict. Returns the Triple composed of the resulting output iterators.",
+        "return_type": "Triple< OutputIteratorBoundaryFacets, OutputIteratorCells, OutputIteratorInternalFacets >",
+        "argsstring": "(Point p, Cell_handle c, OutputIteratorBoundaryFacets bfit, OutputIteratorCells cit, OutputIteratorInternalFacets ifit)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIteratorBoundaryFacets",
+            "name": "bfit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIteratorCells",
+            "name": "cit",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIteratorInternalFacets",
+            "name": "ifit",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "191",
+        "section": "Queries"
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertices_begin",
+        "qualified_name": "SurfaceMeshTriangulation_3::finite_vertices_begin",
+        "brief": "Starts at an arbitrary finite vertex.",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "206",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_vertices_end",
+        "qualified_name": "SurfaceMeshTriangulation_3::finite_vertices_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_vertices_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "211",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_edges_begin",
+        "qualified_name": "SurfaceMeshTriangulation_3::finite_edges_begin",
+        "brief": "Starts at an arbitrary finite edge.",
+        "detailed": "",
+        "return_type": "Finite_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "216",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_edges_end",
+        "qualified_name": "SurfaceMeshTriangulation_3::finite_edges_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_edges_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "221",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_facets_begin",
+        "qualified_name": "SurfaceMeshTriangulation_3::finite_facets_begin",
+        "brief": "Starts at an arbitrary finite facet.",
+        "detailed": "",
+        "return_type": "Finite_facets_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "226",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "finite_facets_end",
+        "qualified_name": "SurfaceMeshTriangulation_3::finite_facets_end",
+        "brief": "Past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Finite_facets_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "231",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "incident_cells",
+        "qualified_name": "SurfaceMeshTriangulation_3::incident_cells",
+        "brief": "Copies the Cell_handle s of all cells incident to v to the output iterator cells .",
+        "detailed": "If t.dimension() < 3 , then do nothing. Returns the resulting output iterator. v != Vertex_handle() and is_vertex(v->point()) .",
+        "return_type": "OutputIterator",
+        "argsstring": "(Vertex_handle v, OutputIterator cells) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "cells",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "241",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_vertex",
+        "qualified_name": "SurfaceMeshTriangulation_3::is_vertex",
+        "brief": "Tests whether p is a vertex of t by locating p in the triangulation.",
+        "detailed": "If p is found, the associated vertex v is given.",
+        "return_type": "bool",
+        "argsstring": "(const Point &p, Vertex_handle &v) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle &",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "248",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_edge",
+        "qualified_name": "SurfaceMeshTriangulation_3::is_edge",
+        "brief": "Tests whether (u,v) is an edge of t .",
+        "detailed": "If the edge is found, it gives a cell c having this edge and the indices i and j of the vertices u and v in c , in this order. u and v are vertices of t .",
+        "return_type": "bool",
+        "argsstring": "(Vertex_handle u, Vertex_handle v, Cell_handle &c, int &i, int &j) const",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "256",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "SurfaceMeshTriangulation_3::is_infinite",
+        "brief": "Returns true , iff vertex v is the infinite vertex.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Vertex_handle v) const",
+        "params": [
+          {
+            "type": "const Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "262",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "is_infinite",
+        "qualified_name": "SurfaceMeshTriangulation_3::is_infinite",
+        "brief": "Returns true , iff c is incident to the infinite vertex.",
+        "detailed": "t.dimension() == 3 .",
+        "return_type": "bool",
+        "argsstring": "(const Cell_handle c) const",
+        "params": [
+          {
+            "type": "const Cell_handle",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "268",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "mirror_facet",
+        "qualified_name": "SurfaceMeshTriangulation_3::mirror_facet",
+        "brief": "Returns the same facet seen from the other adjacent cell.",
+        "detailed": "",
+        "return_type": "Facet",
+        "argsstring": "(Facet f) const",
+        "params": [
+          {
+            "type": "Facet",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "273",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vertex_triple_index",
+        "qualified_name": "SurfaceMeshTriangulation_3::vertex_triple_index",
+        "brief": "Return the indexes of the j -th vertex of the facet of a cell opposite to vertex i .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const int i, const int j)",
+        "params": [
+          {
+            "type": "const int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "279",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "SurfaceMeshTriangulation_3::locate",
+        "brief": "If the point query lies inside the convex hull of the points, the cell that contains the query in its interior is returned.",
+        "detailed": "If query lies on a facet, an edge or on a vertex, one of the cells having query on its boundary is returned. If the point query lies outside the convex hull of the points, an infinite cell with vertices $ \\{ p, q, r, \\infty\\}$ is returned such that the tetrahedron $ ( p, q, r, query )$ is positively oriented (the rest of the triangulation lies on the other side of facet $ ( p, q, r )$ ). Note that locate works even in degenerate dimensions: in dimension 2 (resp. 1, 0) the Cell_handle returned is the one that represents the facet (resp. edge, vertex) containing the query point. The optional argument start is used as a starting place for the search.",
+        "return_type": "Cell_handle",
+        "argsstring": "(const Point &query, Cell_handle start=Cell_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "start",
+            "default": "Cell_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "307",
+        "section": "Point location"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "SurfaceMeshTriangulation_3::locate",
+        "brief": "If query lies inside the affine hull of the points, the k -face (finite or infinite) that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX, EDGE, FACET, CELL , or OUTSIDE_CONVEX_HULL if the cell is infinite and query lies strictly in it) and two indices li and lj that specify the k -face of the cell containing query .",
+        "detailed": "If the k -face is a cell, li and lj have no meaning; if it is a facet (resp. vertex), li gives the index of the facet (resp. vertex) and lj has no meaning; if it is and edge, li and lj give the indices of its vertices. If the point query lies outside the affine hull of the points, which can happen in case of degenerate dimensions, lt is set to OUTSIDE_AFFINE_HULL , and the cell returned has no meaning. As a particular case, if there is no finite vertex yet in the triangulation, lt is set to OUTSIDE_AFFINE_HULL and locate returns the default constructed handle. The optional argument start is used as a starting place for the search.",
+        "return_type": "Cell_handle",
+        "argsstring": "(const Point &query, Locate_type &lt, int &li, int &lj, Cell_handle start=Cell_handle()) const",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "query",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Locate_type &",
+            "name": "lt",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "li",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int &",
+            "name": "lj",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "start",
+            "default": "Cell_handle ()",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "333",
+        "section": "Point location"
+      },
+      {
+        "kind": "function",
+        "name": "insert_in_hole",
+        "qualified_name": "SurfaceMeshTriangulation_3::insert_in_hole",
+        "brief": "Creates a new vertex by starring a hole.",
+        "detailed": "It takes an iterator range [cell_begin, cell_end) of Cell_handle s which specifies a hole: a set of connected cells (resp. facets in dimension 2) which is star-shaped wrt p . ( begin , i ) is a facet (resp. an edge) on the boundary of the hole, that is, begin belongs to the set of cells (resp. facets) previously described, and begin->neighbor(i) does not. Then this function deletes all the cells (resp. facets) describing the hole, creates a new vertex v , and for each facet (resp. edge) on the boundary of the hole, creates a new cell (resp. facet) with v as vertex. Then v->set_point(p) is called and v is returned. dimension() >= 2 , the set of cells (resp. facets in dimension 2) is connected, its boundary is connected, and p lies inside the hole, which is star-shaped wrt p .",
+        "return_type": "Vertex_handle",
+        "argsstring": "(Point p, CellIt cell_begin, CellIt cell_end, Cell_handle begin, int i)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CellIt",
+            "name": "cell_begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "CellIt",
+            "name": "cell_end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Cell_handle",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SurfaceMeshTriangulation_3.h",
+        "line": "352",
+        "section": "Point location"
+      }
+    ]
+  },
+  "SurfaceMeshVertexBase_3": {
+    "kind": "class",
+    "name": "SurfaceMeshVertexBase_3",
+    "brief": "The concept SurfaceMeshVertexBase_3 describes the vertex base type of the three dimensional triangulation used to embed the surface mesh.",
+    "detailed": "More precisely, the first template parameter SurfaceMeshC2T3 of the function template CGAL::make_surface_mesh() is a model of the concept SurfaceMeshComplex_2InTriangulation_3 which describes a data structure to store a pure two dimensional complex embedded in a three dimensional triangulation. In particular, the type SurfaceMeshC2T3 is required to provide a three dimensional triangulation type SurfaceMeshC2T3::Triangulation_3 The concept SurfaceMeshVertexBase_3 describes the vertex base type required in this triangulation type. Refines TriangulationVertexBase_3 The surface mesher algorithm issues frequent queries about the status of the vertices with respect to the two dimensional complex that represents the current surface approximation. The class SurfaceMeshVertexBase_3 offers a caching mechanism to answer more efficiently these queries. The caching mechanism includes two cached integers, which, when they are valid, store respectively the number of complex facets incident to the vertex and the number of connected components of the adjacency graph of those facets. Has models CGAL::Surface_mesh_vertex_base_3 <Gt,Vb> CGAL::Surface_mesh_default_triangulation_3::Vertex SurfaceMeshComplex_2InTriangulation_3 CGAL::Surface_mesh_complex_2_in_triangulation_3 <Tr> CGAL::Surface_mesh_default_triangulation_3",
+    "members": [
+      {
+        "kind": "function",
+        "name": "is_c2t3_cache_valid",
+        "qualified_name": "SurfaceMeshVertexBase_3::is_c2t3_cache_valid",
+        "brief": "Returns true if the cache is valid.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshVertexBase_3.h",
+        "line": "54",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "invalidate_c2t3_cache",
+        "qualified_name": "SurfaceMeshVertexBase_3::invalidate_c2t3_cache",
+        "brief": "Invalidates the cache.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshVertexBase_3.h",
+        "line": "59",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "cached_number_of_incident_facets",
+        "qualified_name": "SurfaceMeshVertexBase_3::cached_number_of_incident_facets",
+        "brief": "Returns the cached number of facets of the complex incident to the vertex.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshVertexBase_3.h",
+        "line": "64",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "cached_number_of_components",
+        "qualified_name": "SurfaceMeshVertexBase_3::cached_number_of_components",
+        "brief": "This method concerns the adjacency graph of the facets of the complex incident to the vertex and returns a cached value for the number of connected components this graph.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SurfaceMeshVertexBase_3.h",
+        "line": "71",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "output_surface_facets_to_polyhedron",
+        "qualified_name": "CGAL::output_surface_facets_to_polyhedron",
+        "brief": "",
+        "detailed": "Deprecated Gets reconstructed surface out of a SurfaceMeshComplex_2InTriangulation_3 object. This variant exports the surface as a polyhedron. It requires the surface to be manifold. For this purpose, you may call make_surface_mesh() with Manifold_tag or Manifold_with_boundary_tag parameter. SurfaceMeshComplex_2InTriangulation_3 model of the SurfaceMeshComplex_2InTriangulation_3 concept. Polyhedron an instance of CGAL::Polyhedron_3<Traits>. c2t3 the input. output_polyhedron the output. true if the surface is manifold and orientable.",
+        "return_type": "bool",
+        "argsstring": "(const SurfaceMeshComplex_2InTriangulation_3 &c2t3, Polyhedron &output_polyhedron)",
+        "params": [
+          {
+            "type": "const SurfaceMeshComplex_2InTriangulation_3 &",
+            "name": "c2t3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polyhedron &",
+            "name": "output_polyhedron",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/IO/output_surface_facets_to_polyhedron.h",
+        "line": "18",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Surface_mesher": {
+    "kind": "namespace",
+    "name": "CGAL::Surface_mesher",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

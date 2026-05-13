@@ -1,0 +1,4948 @@
+{
+  "CGAL::Exponent_vector": {
+    "kind": "class",
+    "name": "CGAL::Exponent_vector",
+    "brief": "For a given (multivariate) monomial the vector of its exponents is called the exponent vector.",
+    "detailed": "The class Exponent_vector is meant to represent such a vector. A vector is considered as valid, in case it represents a valid monomial. that is, it should not contain negative exponents. We decided to use int as the value type, since negative exponents may appear in intermediate results. The set of exponent vectors with elementwise addition forms an Abelian Group . Beside the constructors Exponent_vector has almost the same interface as an std::vector<int> . Moreover the comparison is changed such that the lexicographic order starts the comparison at the last entry. This reflects the fact that the last entry corresponds to the outermost variable of a multivariate polynomial. Is model of RandomAccessContainer DefaultConstructible Assignable CopyConstructible EqualityComparable LessThanComparable Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "40",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "The copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Exponent_vector &ev_)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev_",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "46",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "Creates a vector containing the given element.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int e1)",
+        "params": [
+          {
+            "type": "int",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "52",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "Creates a vector containing the given elements.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int e1, int e2)",
+        "params": [
+          {
+            "type": "int",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "58",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "Creates a vector containing the given elements.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int e1, int e2, int e3)",
+        "params": [
+          {
+            "type": "int",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "e3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "64",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "Creates a vector containing the given elements.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int e1, int e2, int e3, int e4)",
+        "params": [
+          {
+            "type": "int",
+            "name": "e1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "e2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "e3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "e4",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "70",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Exponent_vector",
+        "qualified_name": "CGAL::Exponent_vector::Exponent_vector",
+        "brief": "Creates a vector with a copy of the given range.",
+        "detailed": "InputIterator must allow the value type int .",
+        "return_type": "",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "79",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator+",
+        "qualified_name": "CGAL::Exponent_vector::operator+",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Exponent_vector",
+        "argsstring": "(const Exponent_vector &ev1)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "89",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-",
+        "qualified_name": "CGAL::Exponent_vector::operator-",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Exponent_vector",
+        "argsstring": "(const Exponent_vector &ev1)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "94",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator+",
+        "qualified_name": "CGAL::Exponent_vector::operator+",
+        "brief": "",
+        "detailed": "ev1.size() == ev2.size().",
+        "return_type": "Exponent_vector",
+        "argsstring": "(const Exponent_vector &ev1, const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "101",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-",
+        "qualified_name": "CGAL::Exponent_vector::operator-",
+        "brief": "",
+        "detailed": "ev1.size() == ev2.size()",
+        "return_type": "Exponent_vector",
+        "argsstring": "(const Exponent_vector &ev1, const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "109",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator+=",
+        "qualified_name": "CGAL::Exponent_vector::operator+=",
+        "brief": "",
+        "detailed": "fo .size() == ev2.size()",
+        "return_type": "Exponent_vector",
+        "argsstring": "(const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "117",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator-=",
+        "qualified_name": "CGAL::Exponent_vector::operator-=",
+        "brief": "",
+        "detailed": "fo .size() == ev2.size()",
+        "return_type": "Exponent_vector",
+        "argsstring": "(const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "125",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator==",
+        "qualified_name": "CGAL::Exponent_vector::operator==",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Exponent_vector &ev1, const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "131",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator!=",
+        "qualified_name": "CGAL::Exponent_vector::operator!=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Exponent_vector &ev1, const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "137",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator<",
+        "qualified_name": "CGAL::Exponent_vector::operator<",
+        "brief": "Lexicographic compare, starting with the last variable.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Exponent_vector &ev1, const Exponent_vector &ev2)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "143",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Exponent_vector::is_valid",
+        "brief": "Returns true if all entries of exponent vector ev are not negative.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Exponent_vector &ev)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "154",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polynomial": {
+    "kind": "class",
+    "name": "CGAL::Polynomial",
+    "brief": "An instance of the data type Polynomial represents a polynomial $ p = a_0 + a_1*x + ...a_i*x^i$ from the ring $ \\mathrm{Coeff}[x]$ .",
+    "detailed": "Coeff can itself be an instance of Polynomial , yielding a form of multivariate polynomials. The template argument Coeff must be at least a model of IntegralDomainWithoutDivision . For all operations naturally involving division, an IntegralDomain is required. Polynomial offers a full set of algebraic operators, i.e. binary + , - , * , / as well as += , -= , *= , /= ; not only for polynomials but also for a polynomial and a number of the coefficient type. (The / operator must only be used for integral divisions, i.e. those with remainder zero.) The operations are implemented naively: + and - need a number of Coeff operations which is linear in the degree while * is quadratic. Unary + and - and (in)equality == , != are provided as well. Polynomial is a model of LessThanComparable if Coeff is a model of LessThanComparable . In this case Polynomial provides comparison operators < , > , <= , >= , where the comparison amounts to lexicographic comparison of the coefficient sequence, with the coefficient of the highest power taking precedence over those of lower powers. Polynomial is a model of Fraction if Coeff is a model of Fraction . In this case Polynomial may be decomposed into a (scalar) denominator and a compound numerator with a simpler coefficient type. Often operations can be performed faster on these denominator-free multiples. Polynomial is a model of Modularizable if Coeff is a model of Modularizable , where the homomorphic map on the polynomials is simply defined as the canonical extension of the homomorphic map which is defined on the coefficient type. Implementation Inexact and limited-precision types can be used as coefficients, but at the user's risk. The algorithms implemented were written with exact number types in mind. This data type is implemented as a handle type with value semantics using CGAL::Handle_with_policy , where HandlePolicy is Handle_policy_no_union . An important invariant to be preserved by all methods is that the coefficient sequence does not contain leading zero coefficients (where leading means at the high-degree end), with the exception that the zero polynomial is represented by a single zero coefficient. Is model of Polynomial_d Assignable CopyConstructible DefaultConstructible EqualityComparable ImplicitInteroperable with int ImplicitInteroperable with Coeff Fraction if Coeff is model of Fraction LessThanComparable if Coeff is model of LessThanComparable Modularizable if Coeff is model of Modularizable",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Polynomial",
+        "qualified_name": "CGAL::Polynomial::Polynomial",
+        "brief": "Introduces an variable initialized with 0.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polynomial.h",
+        "line": "79",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polynomial",
+        "qualified_name": "CGAL::Polynomial::Polynomial",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Polynomial &x)",
+        "params": [
+          {
+            "type": "const Polynomial &",
+            "name": "x",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "84",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polynomial",
+        "qualified_name": "CGAL::Polynomial::Polynomial",
+        "brief": "Constructor from int.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const int &i)",
+        "params": [
+          {
+            "type": "const int &",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "89",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polynomial",
+        "qualified_name": "CGAL::Polynomial::Polynomial",
+        "brief": "Constructor from type Coeff.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Coeff &x)",
+        "params": [
+          {
+            "type": "const Coeff &",
+            "name": "x",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "94",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polynomial",
+        "qualified_name": "CGAL::Polynomial::Polynomial",
+        "brief": "Constructor from iterator range with value type Coeff.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Forward_iterator first, Forward_iterator last)",
+        "params": [
+          {
+            "type": "Forward_iterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Forward_iterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "100",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "begin",
+        "qualified_name": "CGAL::Polynomial::begin",
+        "brief": "A const random access iterator pointing to the constant coefficient.",
+        "detailed": "",
+        "return_type": "const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polynomial.h",
+        "line": "110",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "end",
+        "qualified_name": "CGAL::Polynomial::end",
+        "brief": "A const random access iterator pointing beyond the leading coefficient.",
+        "detailed": "",
+        "return_type": "const_iterator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polynomial.h",
+        "line": "115",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "degree",
+        "qualified_name": "CGAL::Polynomial::degree",
+        "brief": "The degree of the polynomial in $ x$ .",
+        "detailed": "The degree of the zero polynomial is 0.",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polynomial.h",
+        "line": "120",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "CGAL::Polynomial::operator[]",
+        "brief": "Const access to the coefficient of $ x^i$ .",
+        "detailed": "",
+        "return_type": "const NT &",
+        "argsstring": "(unsigned int i) const",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "125",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "lcoeff",
+        "qualified_name": "CGAL::Polynomial::lcoeff",
+        "brief": "Const access to the leading coefficient.",
+        "detailed": "",
+        "return_type": "const NT &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polynomial.h",
+        "line": "130",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Polynomial::operator<<",
+        "brief": "Writes poly to ostream os .",
+        "detailed": "The format depends on the CGAL::IO::MODE of os . In case the mode is CGAL::IO::ASCII the format is $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , where $ d$ is the degree of the polynomial. The format is output sensitive, that is, coefficients that are zero are not reported. In case the mode is CGAL::IO::PRETTY the format is human readable.",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Polynomial< Coeff > &poly)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Polynomial < Coeff > &",
+            "name": "poly",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Polynomial::operator>>",
+        "brief": "Reads poly from istream is in format $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , the output format in mode CGAL::IO::ASCII .",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, const Polynomial< Coeff > &poly)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Polynomial < Coeff > &",
+            "name": "poly",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "155",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Polynomial_traits_d": {
+    "kind": "class",
+    "name": "CGAL::Polynomial_traits_d",
+    "brief": "A model of concept PolynomialTraits_d .",
+    "detailed": "Is model of PolynomialTraits_d",
+    "members": []
+  },
+  "CGAL::Polynomial_type_generator": {
+    "kind": "struct",
+    "name": "CGAL::Polynomial_type_generator",
+    "brief": "This class template provides a convenient way to obtain the type representing a multivariate polynomial with d variables, where T is the innermost coefficient type.",
+    "detailed": "In case T happens to be a CGAL::Polynomial the generator will add d variables to T . T must be a model of IntegralDomainWithoutDivision . d must be of type int. CGAL::Polynomial <Coeff>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Type",
+        "qualified_name": "CGAL::Polynomial_type_generator::Type",
+        "brief": "The generated type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polynomial_type_generator.h",
+        "line": "25",
+        "section": "Types"
+      }
+    ]
+  },
+  "Polynomial_d": {
+    "kind": "class",
+    "name": "Polynomial_d",
+    "brief": "A model of Polynomial_d is representing a multivariate polynomial in $ d \\geq 1$ variables over some basic ring $ R$ . This type is denoted as the innermost coefficient. A model of Polynomial_d must be accompanied by a traits class CGAL::Polynomial_traits_d < Polynomial_d > , which is a model of PolynomialTraits_d . Please have a look at the concept PolynomialTraits_d , since nearly all functionality related to polynomials is provided by the traits.",
+    "detailed": "Refines IntegralDomainWithoutDivision The algebraic structure of Polynomial_d depends on the algebraic structure of PolynomialTraits_d::Innermost_coefficient_type : Innermost_coefficient_type Polynomial_d ::IntegralDomainWithoutDivision ::IntegralDomainWithoutDivision ::IntegralDomain ::IntegralDomain ::UniqueFactorizationDomain ::UniqueFactorizationDomain ::EuclideanRing ::UniqueFactorizationDomain ::Field ::UniqueFactorizationDomain In case the polynomial is univariate and the innermost coefficient is a Field the polynomial is model of EuclideanRing . AlgebraicStructureTraits PolynomialTraits_d Has models CGAL::Polynomial <Coeff>",
+    "members": []
+  },
+  "PolynomialTraits_d": {
+    "kind": "class",
+    "name": "PolynomialTraits_d",
+    "brief": "A model of PolynomialTraits_d is associated with a type Polynomial_d . The type Polynomial_d represents a multivariate polynomial. The number of variables is denoted as the dimension $ d$ of the polynomial, it is arbitrary but fixed for a certain model of this concept. Note that univariate polynomials are not excluded by this concept. In this case $ d$ is just set to one.",
+    "detailed": "PolynomialTraits_d provides two different views on the multivariate polynomial. The recursive view: In this view, the polynomial is considered as an element of $ R[x_0,\\dots,x_{d-2}][x_{d-1}]$ . That is, the polynomial is treated as a univariate polynomial over the ring $ R[x_0,\\dots,x_{d-2}]$ . The symmetric or multivariate view: This view is symmetric with respect to all variables, considering the polynomial as an element of $ R [x_0,\\dots,x_{d-1}]$ . Many functors consider the polynomial as a univariate polynomial in one variable. By default this is the outermost variable $ x_{d-1}$ . However, in general it is possible to select a certain variable. Refines AlgebraicStructureTraits Polynomial_d Has models CGAL::Polynomial_traits_d < Polynomial_d >",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Polynomial_d",
+        "qualified_name": "PolynomialTraits_d::Polynomial_d",
+        "brief": "Type representing $ R[x_0,\\dots,x_{d-1}]$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Coefficient_type",
+        "qualified_name": "PolynomialTraits_d::Coefficient_type",
+        "brief": "Type representing $ R[x_0,\\dots,x_{d-2}]$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "64",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Innermost_coefficient_type",
+        "qualified_name": "PolynomialTraits_d::Innermost_coefficient_type",
+        "brief": "Type representing the base ring $ R$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "69",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Coefficient_const_iterator",
+        "qualified_name": "PolynomialTraits_d::Coefficient_const_iterator",
+        "brief": "Const iterator used to iterate through all coefficients of the polynomial.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "74",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Innermost_coefficient_const_iterator",
+        "qualified_name": "PolynomialTraits_d::Innermost_coefficient_const_iterator",
+        "brief": "Const iterator used to iterate through all innermost coefficients of the polynomial.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "79",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Rebind",
+        "qualified_name": "PolynomialTraits_d::Rebind",
+        "brief": "This template class has to define a type Rebind <T, d >::Other which is a model of the concept PolynomialTraits_d , where d is the number of variables and T the Innermost_coefficient_type .",
+        "detailed": "It can be implemented using a nested template class.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "88",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_polynomial",
+        "qualified_name": "PolynomialTraits_d::Construct_polynomial",
+        "brief": "A model of PolynomialTraits_d::ConstructPolynomial .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "99",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_coefficient",
+        "qualified_name": "PolynomialTraits_d::Get_coefficient",
+        "brief": "A model of PolynomialTraits_d::GetCoefficient .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "104",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Get_innermost_coefficient",
+        "qualified_name": "PolynomialTraits_d::Get_innermost_coefficient",
+        "brief": "A model of PolynomialTraits_d::GetInnermostCoefficient .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "109",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_coefficient_const_iterator_range",
+        "qualified_name": "PolynomialTraits_d::Construct_coefficient_const_iterator_range",
+        "brief": "A model of PolynomialTraits_d::ConstructCoefficientConstIteratorRange .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "115",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_innermost_coefficient_const_iterator_range",
+        "qualified_name": "PolynomialTraits_d::Construct_innermost_coefficient_const_iterator_range",
+        "brief": "A model of PolynomialTraits_d::ConstructInnermostCoefficientConstIteratorRange .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "121",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Swap",
+        "qualified_name": "PolynomialTraits_d::Swap",
+        "brief": "A model of PolynomialTraits_d::Swap .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "126",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Move",
+        "qualified_name": "PolynomialTraits_d::Move",
+        "brief": "A model of PolynomialTraits_d::Move .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "131",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Degree",
+        "qualified_name": "PolynomialTraits_d::Degree",
+        "brief": "A model of PolynomialTraits_d::Degree .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "136",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Total_degree",
+        "qualified_name": "PolynomialTraits_d::Total_degree",
+        "brief": "A model of PolynomialTraits_d::TotalDegree .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "141",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Degree_vector",
+        "qualified_name": "PolynomialTraits_d::Degree_vector",
+        "brief": "A model of PolynomialTraits_d::DegreeVector .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "146",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Leading_coefficient",
+        "qualified_name": "PolynomialTraits_d::Leading_coefficient",
+        "brief": "A model of PolynomialTraits_d::LeadingCoefficient .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "151",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Innermost_leading_coefficient",
+        "qualified_name": "PolynomialTraits_d::Innermost_leading_coefficient",
+        "brief": "A model of PolynomialTraits_d::InnermostLeadingCoefficient .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "156",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Canonicalize",
+        "qualified_name": "PolynomialTraits_d::Canonicalize",
+        "brief": "A model of PolynomialTraits_d::Canonicalize .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "161",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Differentiate",
+        "qualified_name": "PolynomialTraits_d::Differentiate",
+        "brief": "A model of PolynomialTraits_d::Differentiate .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "166",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Evaluate",
+        "qualified_name": "PolynomialTraits_d::Evaluate",
+        "brief": "A model of PolynomialTraits_d::Evaluate .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "171",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Evaluate_homogeneous",
+        "qualified_name": "PolynomialTraits_d::Evaluate_homogeneous",
+        "brief": "A model of PolynomialTraits_d::EvaluateHomogeneous .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "176",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Substitute",
+        "qualified_name": "PolynomialTraits_d::Substitute",
+        "brief": "A model of PolynomialTraits_d::Substitute .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "181",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Substitute_homogeneous",
+        "qualified_name": "PolynomialTraits_d::Substitute_homogeneous",
+        "brief": "A model of PolynomialTraits_d::SubstituteHomogeneous .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "186",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_zero_at",
+        "qualified_name": "PolynomialTraits_d::Is_zero_at",
+        "brief": "A model of PolynomialTraits_d::IsZeroAt .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "191",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Is_zero_at_homogeneous",
+        "qualified_name": "PolynomialTraits_d::Is_zero_at_homogeneous",
+        "brief": "A model of PolynomialTraits_d::IsZeroAtHomogeneous .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "196",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sign_at",
+        "qualified_name": "PolynomialTraits_d::Sign_at",
+        "brief": "A model of PolynomialTraits_d::SignAt .",
+        "detailed": "In case Innermost_coefficient_type is not RealEmbeddable this is CGAL::Null_functor .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "205",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sign_at_homogeneous",
+        "qualified_name": "PolynomialTraits_d::Sign_at_homogeneous",
+        "brief": "A model of PolynomialTraits_d::SignAtHomogeneous .",
+        "detailed": "In case Innermost_coefficient_type is not RealEmbeddable this is CGAL::Null_functor .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "214",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare",
+        "qualified_name": "PolynomialTraits_d::Compare",
+        "brief": "A model of PolynomialTraits_d::Compare .",
+        "detailed": "In case Innermost_coefficient_type is not RealEmbeddable this is CGAL::Null_functor .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "223",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Univariate_content",
+        "qualified_name": "PolynomialTraits_d::Univariate_content",
+        "brief": "In case PolynomialTraits_d::Coefficient_type is not a model of UniqueFactorizationDomain , this is CGAL::Null_functor , otherwise this is a model of PolynomialTraits_d::UnivariateContent .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "231",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Multivariate_content",
+        "qualified_name": "PolynomialTraits_d::Multivariate_content",
+        "brief": "In case PolynomialTraits_d::Innermost_coefficient_type is not a model of UniqueFactorizationDomain , this is CGAL::Null_functor , otherwise this is a model of PolynomialTraits_d::MultivariateContent .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "240",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Shift",
+        "qualified_name": "PolynomialTraits_d::Shift",
+        "brief": "A model of PolynomialTraits_d::Shift .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "245",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Negate",
+        "qualified_name": "PolynomialTraits_d::Negate",
+        "brief": "A model of PolynomialTraits_d::Negate .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "250",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Invert",
+        "qualified_name": "PolynomialTraits_d::Invert",
+        "brief": "A model of PolynomialTraits_d::Invert .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "255",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Translate",
+        "qualified_name": "PolynomialTraits_d::Translate",
+        "brief": "A model of PolynomialTraits_d::Translate .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "260",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Translate_homogeneous",
+        "qualified_name": "PolynomialTraits_d::Translate_homogeneous",
+        "brief": "A model of PolynomialTraits_d::TranslateHomogeneous .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "265",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Scale",
+        "qualified_name": "PolynomialTraits_d::Scale",
+        "brief": "A model of PolynomialTraits_d::Scale .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "270",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Scale_homogeneous",
+        "qualified_name": "PolynomialTraits_d::Scale_homogeneous",
+        "brief": "A model of PolynomialTraits_d::ScaleHomogeneous .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "275",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Make_square_free",
+        "qualified_name": "PolynomialTraits_d::Make_square_free",
+        "brief": "A model of PolynomialTraits_d::MakeSquareFree .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "280",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Square_free_factorize",
+        "qualified_name": "PolynomialTraits_d::Square_free_factorize",
+        "brief": "In case PolynomialTraits::Polynomial_d is not a model of UniqueFactorizationDomain , this is of type CGAL::Null_functor , otherwise this is a model of PolynomialTraits_d::SquareFreeFactorize .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "287",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Pseudo_division",
+        "qualified_name": "PolynomialTraits_d::Pseudo_division",
+        "brief": "A model of PolynomialTraits_d::PseudoDivision .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "292",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Pseudo_division_remainder",
+        "qualified_name": "PolynomialTraits_d::Pseudo_division_remainder",
+        "brief": "A model of PolynomialTraits_d::PseudoDivisionRemainder .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "297",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Pseudo_division_quotient",
+        "qualified_name": "PolynomialTraits_d::Pseudo_division_quotient",
+        "brief": "A model of PolynomialTraits_d::PseudoDivisionQuotient .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "302",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Gcd_up_to_constant_factor",
+        "qualified_name": "PolynomialTraits_d::Gcd_up_to_constant_factor",
+        "brief": "A model of PolynomialTraits_d::GcdUpToConstantFactor .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "307",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Integral_division_up_to_constant_factor",
+        "qualified_name": "PolynomialTraits_d::Integral_division_up_to_constant_factor",
+        "brief": "A model of PolynomialTraits_d::IntegralDivisionUpToConstantFactor .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "312",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Content_up_to_constant_factor",
+        "qualified_name": "PolynomialTraits_d::Content_up_to_constant_factor",
+        "brief": "A model of PolynomialTraits_d::UnivariateContentUpToConstantFactor .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "317",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Square_free_factorize_up_to_constant_factor",
+        "qualified_name": "PolynomialTraits_d::Square_free_factorize_up_to_constant_factor",
+        "brief": "A model of PolynomialTraits_d::SquareFreeFactorizeUpToConstantFactor .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "322",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Resultant",
+        "qualified_name": "PolynomialTraits_d::Resultant",
+        "brief": "A model of PolynomialTraits_d::Resultant .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "327",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polynomial_subresultants",
+        "qualified_name": "PolynomialTraits_d::Polynomial_subresultants",
+        "brief": "Either CGAL::Null_functor or a model of PolynomialTraits_d::PolynomialSubresultants .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "332",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polynomial_subresultants_with_cofactors",
+        "qualified_name": "PolynomialTraits_d::Polynomial_subresultants_with_cofactors",
+        "brief": "Either CGAL::Null_functor or a model of PolynomialTraits_d::PolynomialSubresultants_with_cofactors .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "337",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Principal_subresultants",
+        "qualified_name": "PolynomialTraits_d::Principal_subresultants",
+        "brief": "Either CGAL::Null_functor or a model of PolynomialTraits_d::PrincipalSubresultants .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "342",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sturm_habicht_sequence",
+        "qualified_name": "PolynomialTraits_d::Sturm_habicht_sequence",
+        "brief": "Either CGAL::Null_functor or a model of PolynomialTraits_d::SturmHabichtSequence .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "347",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Sturm_habicht_sequence_with_cofactors",
+        "qualified_name": "PolynomialTraits_d::Sturm_habicht_sequence_with_cofactors",
+        "brief": "Either CGAL::Null_functor or a model of PolynomialTraits_d::SturmHabichtSequenceWithCofactors .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "352",
+        "section": "Functors"
+      },
+      {
+        "kind": "typedef",
+        "name": "Principal_sturm_habicht_sequence",
+        "qualified_name": "PolynomialTraits_d::Principal_sturm_habicht_sequence",
+        "brief": "Either CGAL::Null_functor or a model of PolynomialTraits_d::PrincipalSturmHabichtSequence .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "357",
+        "section": "Functors"
+      },
+      {
+        "kind": "variable",
+        "name": "d",
+        "qualified_name": "PolynomialTraits_d::d",
+        "brief": "The dimension and the number of variables respectively.",
+        "detailed": "",
+        "return_type": "const int",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d.h",
+        "line": "49",
+        "section": "Constants"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Canonicalize": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Canonicalize",
+    "brief": "For a given polynomial $ p$ this AdaptableUnaryFunction computes the unique representative of the set.",
+    "detailed": "\\[ {\\cal P} := \\{ q\\ |\\ \\lambda * q = p\\ for\\ some\\ \\lambda \\in R \\}, \\] where $ R$ is the base of the polynomial ring. In case PolynomialTraits::Innermost_coefficient_type is a model of Field , the computed polynomial is the monic polynomial in $ \\cal P$ , that is, the innermost leading coefficient equals one. In case PolynomialTraits::Innermost_coefficient_type is a model of UniqueFactorizationDomain , the computed polynomial is the one with a multivariate content of one. For all other cases the notion of uniqueness is up to the concrete model. Note that the computed polynomial has the same zero set as the given one. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Canonicalize::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Canonicalize.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::Canonicalize::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Canonicalize.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Canonicalize::operator()",
+        "brief": "Returns the canonical representative of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Canonicalize.h",
+        "line": "55",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Compare": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Compare",
+    "brief": "This AdaptableBinaryFunction compares two polynomials, with respect to the lexicographic order with preference to the outermost variable.",
+    "detailed": "This functor is well defined if PolynomialTraits_d::Innermost_coefficient_type is RealEmbeddable . Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Compare::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Comparison_result",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Compare.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::Compare::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Compare.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::Compare::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Compare.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Compare::operator()",
+        "brief": "Compares two polynomials.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type f, second_argument_type g)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Compare.h",
+        "line": "48",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::ConstructCoefficientConstIteratorRange": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::ConstructCoefficientConstIteratorRange",
+    "brief": "This AdaptableUnaryFunction returns a const iterator range over the coefficients of the given polynomial, with respect to the outermost variable, $ x_{d-1}$ . The range starts with the coefficient for $ x_{d-1}^0$ .",
+    "detailed": "Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::ConstructCoefficientConstIteratorRange::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< PolynomialTraits_d::Coefficient_const_iterator , PolynomialTraits_d::Coefficient_const_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ConstructCoefficientConstIteratorRange.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::ConstructCoefficientConstIteratorRange::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ConstructCoefficientConstIteratorRange.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructCoefficientConstIteratorRange::operator()",
+        "brief": "Returns a const iterator range over the coefficients of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructCoefficientConstIteratorRange.h",
+        "line": "43",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::ConstructInnermostCoefficientConstIteratorRange": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::ConstructInnermostCoefficientConstIteratorRange",
+    "brief": "This AdaptableUnaryFunction returns a const iterator range over all innermost coefficients of the given polynomial.",
+    "detailed": "Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::ConstructInnermostCoefficientConstIteratorRange::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::pair< PolynomialTraits_d::Innermost_coefficient_const_iterator , PolynomialTraits_d::Innermost_coefficient_const_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ConstructInnermostCoefficientConstIteratorRange.h",
+        "line": "27",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::ConstructInnermostCoefficientConstIteratorRange::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ConstructInnermostCoefficientConstIteratorRange.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructInnermostCoefficientConstIteratorRange::operator()",
+        "brief": "Returns a const iterator range over all innermost coefficients of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructInnermostCoefficientConstIteratorRange.h",
+        "line": "42",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::ConstructPolynomial": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::ConstructPolynomial",
+    "brief": "This AdaptableFunctor provides several operators to construct objects of type PolynomialTraits_d::Polynomial_d .",
+    "detailed": "Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::operator()",
+        "brief": "Construct the zero polynomial.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "35",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::operator()",
+        "brief": "Construct the constant polynomial equal to $ i$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(int i)",
+        "params": [
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "40",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::operator()",
+        "brief": "Construct the constant polynomial equal to $ a$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Innermost_coefficient_type a)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "45",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::operator()",
+        "brief": "Construct the polynomial equal to $ a$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Coefficient_type a)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Coefficient_type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "51",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::operator()",
+        "brief": "",
+        "detailed": "The value type of InputIterator is PolynomialTraits_d::Coefficient_type . The operator constructs the a polynomial from the iterator range, with respect to the outermost variable, $ x_{d-1}$ . The range starts with the coefficient for $ x_{d-1}^0$ . In case the range is empty, the zero polynomial is constructed.",
+        "return_type": "result_type",
+        "argsstring": "(InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "66",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ConstructPolynomial::operator()",
+        "brief": "Constructs a Polynomial_d from a given iterator range of std::pair< CGAL::Exponent_vector , PolynomialTraits_d::Innermost_coefficient_type > .",
+        "detailed": "The optional parameter is_sorted indicates whether the given iterator range is already sorted. The value type of InputIterator is std::pair< CGAL::Exponent_vector , PolynomialTraits_d::Innermost_coefficient_type > . Each CGAL::Exponent_vector must have size $ d$ . All appearing CGAL::Exponent_vector s are different.",
+        "return_type": "result_type",
+        "argsstring": "(InputIterator begin, InputIterator end, bool is_sorted=false)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "is_sorted",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ConstructPolynomial.h",
+        "line": "82",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Degree": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Degree",
+    "brief": "This AdaptableUnaryFunction computes the degree of a PolynomialTraits_d::Polynomial_d with respect to a certain variable.",
+    "detailed": "The degree of $ p$ with respect to a certain variable $ x_i$ , is the highest power $ e$ of $ x_i$ such that the coefficient of $ x_i^{e}$ in $ p$ is not zero. For instance the degree of $ p = x_0^2x_1^3+x_1^4$ with respect to $ x_1$ is $ 4$ . The degree of the zero polynomial is set to $ 0$ . From the mathematical point of view this should be $ -infinity$ , but this would imply an inconvenient return type. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::TotalDegree PolynomialTraits_d::DegreeVector",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Degree::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Degree.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::Degree::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Degree.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Degree::operator()",
+        "brief": "Computes the degree of $ p$ with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Degree.h",
+        "line": "52",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Degree::operator()",
+        "brief": "Computes the degree of $ p$ with respect to variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p, int i)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Degree.h",
+        "line": "59",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::DegreeVector": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::DegreeVector",
+    "brief": "For a given PolynomialTraits_d::Polynomial_d $ p$ this AdaptableUnaryFunction returns the degree vector, that is, it returns the exponent vector of the monomial of highest order in $ p$ , where the monomial order is the lexicographic order giving outer variables a higher priority. In particular, this is the monomial that belongs to the innermost leading coefficient of $ p$ .",
+    "detailed": "Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Degree PolynomialTraits_d::TotalDegree PolynomialTraits_d::InnermostLeadingCoefficient",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::DegreeVector::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Exponent_vector",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--DegreeVector.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::DegreeVector::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--DegreeVector.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::DegreeVector::operator()",
+        "brief": "Returns the degree vector.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--DegreeVector.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Differentiate": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Differentiate",
+    "brief": "This AdaptableUnaryFunction computes the derivative of a PolynomialTraits_d::Polynomial_d with respect to one variable.",
+    "detailed": "Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Differentiate::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Differentiate.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::Differentiate::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Differentiate.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Differentiate::operator()",
+        "brief": "Returns $ p'$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Differentiate.h",
+        "line": "40",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Differentiate::operator()",
+        "brief": "Returns $ p'$ , with respect to variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p, int i)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Differentiate.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Evaluate": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Evaluate",
+    "brief": "This AdaptableBinaryFunction evaluates PolynomialTraits_d::Polynomial_d with respect to one variable.",
+    "detailed": "Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Evaluate::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Evaluate.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::Evaluate::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Evaluate.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::Evaluate::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Evaluate.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Evaluate::operator()",
+        "brief": "Returns $ p(x)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type x)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "x",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Evaluate.h",
+        "line": "45",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::EvaluateHomogeneous": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::EvaluateHomogeneous",
+    "brief": "This AdaptableFunctor provides evaluation of a PolynomialTraits_d::Polynomial_d interpreted as a homogeneous polynomial in one variable .",
+    "detailed": "For instance the polynomial $ p = 5x^2y^3 + y$ is interpreted as the homogeneous polynomial $ p[x](u,v) = 5x^2u^3 + uv^2$ and evaluated as such. Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::EvaluateHomogeneous::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--EvaluateHomogeneous.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::EvaluateHomogeneous::operator()",
+        "brief": "Returns $ p(u,v)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, PolynomialTraits_d::Coefficient_type u, PolynomialTraits_d::Coefficient_type v)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Coefficient_type",
+            "name": "u",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Coefficient_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--EvaluateHomogeneous.h",
+        "line": "41",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::GcdUpToConstantFactor": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::GcdUpToConstantFactor",
+    "brief": "This AdaptableBinaryFunction computes the $ gcd$ up to a constant factor (utcf) of two polynomials of type PolynomialTraits_d::Polynomial_d .",
+    "detailed": "In case the base ring $ R$ ( PolynomialTraits_d::Innermost_coefficient_type ) is not a UniqueFactorizationDomain or not a Field the polynomial ring $ R[x_0,\\dots,x_{d-1}]$ ( PolynomialTraits_d::Polynomial_d ) may not possesses greatest common divisors. However, since $ R$ is an integral domain one can consider its quotient field $ Q(R)$ for which $ gcd$ s of polynomials exist. This functor computes $ gcd\\_utcf(f,g) = D * gcd(f,g)$ , for some $ D \\in R$ such that $ gcd\\_utcf(f,g) \\in R[x_0,\\dots,x_{d-1}]$ . Hence, $ gcd\\_utcf(f,g)$ may not be a divisor of $ f$ and $ g$ in $ R[x_0,\\dots,x_{d-1}]$ . Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::IntegralDivisionUpToConstantFactor PolynomialTraits_d::UnivariateContentUpToConstantFactor PolynomialTraits_d::SquareFreeFactorizeUpToConstantFactor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::GcdUpToConstantFactor::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GcdUpToConstantFactor.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::GcdUpToConstantFactor::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GcdUpToConstantFactor.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::GcdUpToConstantFactor::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GcdUpToConstantFactor.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::GcdUpToConstantFactor::operator()",
+        "brief": "Computes $ gcd(f,g)$ up to a constant factor.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type f, second_argument_type g)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--GcdUpToConstantFactor.h",
+        "line": "60",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::GetCoefficient": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::GetCoefficient",
+    "brief": "This AdaptableBinaryFunction provides access to coefficients of a PolynomialTraits_d::Polynomial_d .",
+    "detailed": "Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::GetCoefficient::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GetCoefficient.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::GetCoefficient::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GetCoefficient.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::GetCoefficient::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GetCoefficient.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::GetCoefficient::operator()",
+        "brief": "For given polynomial $ p$ this operator returns the coefficient of $ x_{d-1}^e$ , where $ x_{d-1}$ is the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type e)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--GetCoefficient.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::GetInnermostCoefficient": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::GetInnermostCoefficient",
+    "brief": "For the given PolynomialTraits_d::Polynomial_d this AdaptableBinaryFunction returns the coefficient of the (multivariate) monomial specified by the given CGAL::Exponent_vector .",
+    "detailed": "Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::GetInnermostCoefficient::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Innermost_coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GetInnermostCoefficient.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::GetInnermostCoefficient::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GetInnermostCoefficient.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::GetInnermostCoefficient::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Exponent_vector",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--GetInnermostCoefficient.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::GetInnermostCoefficient::operator()",
+        "brief": "For given polynomial $ p$ this operator returns the innermost coefficient of the monomial corresponding to the given CGAL::Exponent_vector $ v$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type v)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--GetInnermostCoefficient.h",
+        "line": "48",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::InnermostLeadingCoefficient": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::InnermostLeadingCoefficient",
+    "brief": "This AdaptableUnaryFunction computes the innermost leading coefficient of a PolynomialTraits_d::Polynomial_d $ p$ . The innermost leading coefficient is recursively defined as the innermost leading coefficient of the leading coefficient of $ p$ . In case $ p$ is univariate it coincides with the leading coefficient.",
+    "detailed": "Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::InnermostLeadingCoefficient::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Innermost_coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--InnermostLeadingCoefficient.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::InnermostLeadingCoefficient::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--InnermostLeadingCoefficient.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::InnermostLeadingCoefficient::operator()",
+        "brief": "Computes the innermost leading coefficient of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--InnermostLeadingCoefficient.h",
+        "line": "40",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::IntegralDivisionUpToConstantFactor": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::IntegralDivisionUpToConstantFactor",
+    "brief": "This AdaptableBinaryFunction computes the integral division of two polynomials of type PolynomialTraits_d::Polynomial_d up to a constant factor (utcf) .",
+    "detailed": "$ g$ divides $ f$ in $ Q(R)[x_0,\\dots,x_{d-1}]$ , where $ Q(R)$ is the quotient field of the base ring $ R$ , PolynomialTraits_d::Innermost_coefficient_type . Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::GcdUpToConstantFactor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::IntegralDivisionUpToConstantFactor::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IntegralDivisionUpToConstantFactor.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::IntegralDivisionUpToConstantFactor::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IntegralDivisionUpToConstantFactor.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::IntegralDivisionUpToConstantFactor::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IntegralDivisionUpToConstantFactor.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::IntegralDivisionUpToConstantFactor::operator()",
+        "brief": "Computes $ f/g$ up to a constant factor.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type f, second_argument_type g)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--IntegralDivisionUpToConstantFactor.h",
+        "line": "49",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Invert": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Invert",
+    "brief": "This AdaptableUnaryFunction inverts one variable in a given PolynomialTraits_d::Polynomial_d , that is, for a given polynomial $ p$ it computes $ x^{degree(p)}p(1/x)$ .",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate polynomial in one specific variable. This functor is provided for efficiency reasons, since this operation just inverts the order of the coefficients with respect to the specified variable. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Invert::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Invert.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::Invert::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Invert.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Invert::operator()",
+        "brief": "Returns $ x^{degree(p)}p(1/x)$ , where x refers to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Invert.h",
+        "line": "50",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Invert::operator()",
+        "brief": "Return $ x^{degree(p,i)}p(1/x)$ , where x refers to the variable $ x_{i}$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p, int i)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Invert.h",
+        "line": "58",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::IsSquareFree": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::IsSquareFree",
+    "brief": "This AdaptableUnaryFunction computes whether the given a polynomial of type PolynomialTraits_d::Polynomial_d is square free.",
+    "detailed": "Note that this statement does cover constant factors, i.e., whether the multivariate content contains a square. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::SquareFreeFactorize PolynomialTraits_d::MakeSquareFree PolynomialTraits_d::MultivariateContent",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::IsSquareFree::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IsSquareFree.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::IsSquareFree::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IsSquareFree.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::IsSquareFree::operator()",
+        "brief": "Returns whether the $ p$ is square free.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--IsSquareFree.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::IsZeroAt": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::IsZeroAt",
+    "brief": "This AdaptableFunctor returns whether a PolynomialTraits_d::Polynomial_d $ p$ is zero at a given Cartesian point, which is represented as an iterator range.",
+    "detailed": "Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::IsZeroAt::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IsZeroAt.h",
+        "line": "26",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::IsZeroAt::operator()",
+        "brief": "Computes whether $ p$ is zero at the Cartesian point given by the iterator range, where begin is referring to the innermost variable.",
+        "detailed": "(end-begin == PolynomialTraits_d::d ) std::iterator_traits< InputIterator >::value_type is ExplicitInteroperable with PolynomialTraits_d::Innermost_coefficient_type .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--IsZeroAt.h",
+        "line": "43",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::IsZeroAtHomogeneous": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::IsZeroAtHomogeneous",
+    "brief": "This AdaptableFunctor returns whether a PolynomialTraits_d::Polynomial_d $ p$ is zero at a given homogeneous point, which is given by an iterator range.",
+    "detailed": "The polynomial is interpreted as a homogeneous polynomial in all variables. For instance the polynomial $ p(x_0,x_1) = x_0^2x_1^3+x_1^4$ is interpreted as the homogeneous polynomial $ p(x_0,x_1,w) = x_0^2x_1^3+x_1^4w^1$ . Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::IsZeroAtHomogeneous::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--IsZeroAtHomogeneous.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::IsZeroAtHomogeneous::operator()",
+        "brief": "Computes whether $ p$ is zero at the homogeneous point given by the iterator range, where begin is referring to the innermost variable.",
+        "detailed": "(end-begin== PolynomialTraits_d::d +1) std::iterator_traits< InputIterator >::value_type is ExplicitInteroperable with PolynomialTraits_d::Innermost_coefficient_type .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--IsZeroAtHomogeneous.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::LeadingCoefficient": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::LeadingCoefficient",
+    "brief": "This AdaptableUnaryFunction computes the leading coefficient of a PolynomialTraits_d::Polynomial_d .",
+    "detailed": "Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::LeadingCoefficient::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--LeadingCoefficient.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::LeadingCoefficient::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--LeadingCoefficient.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::LeadingCoefficient::operator()",
+        "brief": "Computes the leading coefficient of $ p$ with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--LeadingCoefficient.h",
+        "line": "42",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::MakeSquareFree": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::MakeSquareFree",
+    "brief": "This AdaptableUnaryFunction computes the square-free part of a polynomial of type PolynomialTraits_d::Polynomial_d up to a constant factor .",
+    "detailed": "A polynomial $ p$ can be factored into square-free and pairwise coprime non-constant factors $ g_i$ with multiplicities $ m_i$ and a constant factor $ a$ , such that $ p = a \\cdot g_1^{m_1} \\cdot ... \\cdot g_n^{m_n}$ , where all $ g_i$ are canonicalized. Given this decomposition, the square free part is defined as the product $ g_1 \\cdot ... \\cdot g_n$ , which is computed by this functor. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Canonicalize PolynomialTraits_d::SquareFreeFactorize PolynomialTraits_d::IsSquareFree",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::MakeSquareFree::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--MakeSquareFree.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::MakeSquareFree::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--MakeSquareFree.h",
+        "line": "41",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::MakeSquareFree::operator()",
+        "brief": "Returns the square-free part of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--MakeSquareFree.h",
+        "line": "51",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::MonomialRepresentation": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::MonomialRepresentation",
+    "brief": "This Functor outputs the monomial representation of the given polynomial, that is, it writes all non zero terms of the polynomial as std::pair< CGAL::Exponent_vector , PolynomialTraits_d::Innermost_coefficient_type > into the given output iterator.",
+    "detailed": "Refines Assignable CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::ConstructPolynomial",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::MonomialRepresentation::operator()",
+        "brief": "Writes the monom representation of $ p$ into the given output iterator $ it$ .",
+        "detailed": "std::iterator_traits< OutputIterator >::value_type must be constructible from std::pair< CGAL::Exponent_vector , PolynomialTraits_d::Innermost_coefficient_type > .",
+        "return_type": "OutputIterator",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, OutputIterator it)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--MonomialRepresentation.h",
+        "line": "31",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Move": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Move",
+    "brief": "This AdaptableFunctor moves a variable at position $ i$ to a new position $ j$ . The relative order of the other variables is preserved, that is, the variables between $ x_i$ and $ x_j$ (including $ x_j$ ) are moved by one position while $ x_i$ is moved to the former position of $ x_j$ .",
+    "detailed": "This function may be used to make a certain variable the outer most variable. Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Move::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Move.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Move::operator()",
+        "brief": "This function moves the variable at position $ i$ to its new position $ j$ and returns the new polynomial.",
+        "detailed": "The relative order of the other variables is preserved. $ 0 \\leq i < d$ . $ 0 \\leq j < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d, int i, int j)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Move.h",
+        "line": "44",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::MultivariateContent": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::MultivariateContent",
+    "brief": "This AdaptableUnaryFunction computes the content of a PolynomialTraits_d::Polynomial_d with respect to the symmetric view on the polynomial, that is, it computes the gcd of all innermost coefficients.",
+    "detailed": "This functor is well defined if PolynomialTraits_d::Innermost_coefficient_type is a Field or a UniqueFactorizationDomain . Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::MultivariateContent::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Innermost_coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--MultivariateContent.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::MultivariateContent::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--MultivariateContent.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::MultivariateContent::operator()",
+        "brief": "Computes the $ gcd$ of all innermost coefficients of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--MultivariateContent.h",
+        "line": "44",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Negate": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Negate",
+    "brief": "This AdaptableUnaryFunction computes $ p(-x)$ for a given polynomial $ p$ .",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate polynomial in one specific variable. This functor is provided for efficiency reasons, since this operation just flips the sign of all odd coefficients with respect to the specified variable. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Negate::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Negate.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::Negate::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Negate.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Negate::operator()",
+        "brief": "Returns $ p(-x)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Negate.h",
+        "line": "45",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Negate::operator()",
+        "brief": "Returns $ p(-x)$ , with respect to variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p, int i)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Negate.h",
+        "line": "52",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Permute": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Permute",
+    "brief": "This AdaptableFunctor permutes the variables of the given polynomial with respect to a permutation $ \\sigma$ , that is, each monomial $ \\prod x_i^{e_i}$ will be mapped to the monomial $ \\prod x_{\\sigma(i)}^{e_i}$ . The permutation $ \\sigma$ is given by the iterator range of length PolynomialTraits_d::d , which is supposed to contain the second row of the permutation.",
+    "detailed": "For instance, let $ p$ be a polynomial in 4 variables and it is intended to change the order of the variables such that $ x_0 \\mapsto x_2$ , $ x_1 \\mapsto x_0$ , $ x_2 \\mapsto x_1$ and $ x_3 \\mapsto x_3$ . In this case the iterator range should contain the sequence $ [2,0,1,3]$ . Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Permute::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Permute.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Permute::operator()",
+        "brief": "Returns $ p$ with interchanged variables as defined by the iterator range.",
+        "detailed": "(end-begin == PolynomialTraits_d::d ) std::iterator_traits< InputIterator >::value_type is convertible to int. The iterator range contains each value in $ \\{0,\\dots,d-1\\}$ exactly once.",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, Input_iterator begin, Input_iterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Permute.h",
+        "line": "50",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PolynomialSubresultants": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PolynomialSubresultants",
+    "brief": "Computes the polynomial subresultant of two polynomials $ p$ and $ q$ of type PolynomialTraits_d::Polynomial_d with respect to outermost variable. Let $ p=\\ccSum{i=0,\\ldots,n}{} p_i x^i$ and $ q=\\ccSum{i=0,\\ldots,m}{} q_i x^i$ , where $ x$ is the outermost variable. The $ i$ -th subresultant (with $ i=0,\\ldots,\\min\\{n,m\\}$ ) is defined by.",
+    "detailed": "\\[\\mathrm{Sres}_{i}(p,q) = \\det\n\\begin{pmatrix}\n    p_{n} & \\dots & & \\dots & p_{2i-m+2} & x^{m-i-1}p  \\\\\n    & \\ddots & & & \\vdots & \\vdots\\\\\n    & & p_{n} & \\dots & p_{i+1} & p \\\\\n    q_{m} & \\dots & & \\dots & q_{2i-n+2} & x^{n-i-1}q  \\\\\n    & \\ddots & & & \\vdots & \\vdots\\\\\n    & & q_{m} & \\dots & q_{i+1} & q\n\\end{pmatrix}\n\\] where $ p_i$ and $ q_i$ are set to zero if $ i<0$ . In the case that $ n=m$ , $ \\mathrm{Sres_n}$ is set to $ q$ . The result is written in an output range, starting with the $ 0$ -th subresultant $ \\mathrm{Sres}_0(p,q)$ (aka as the resultant of $ p$ and $ q$ ). This functor is optional. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Resultant PolynomialTraits_d::PrincipalSubresultants PolynomialTraits_d::PolynomialSubresultantsWithCofactors PolynomialTraits_d::SturmHabichtSequence",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PolynomialSubresultants::operator()",
+        "brief": "computes the polynomial subresultants of $ p$ and $ q$ , with respect to the outermost variable.",
+        "detailed": "Each element is of type PolynomialTraits_d::Polynomial_d .",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d p, Polynomial_d q, OutputIterator out)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polynomial_d",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PolynomialSubresultants.h",
+        "line": "58",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PolynomialSubresultants::operator()",
+        "brief": "computes the polynomial subresultants of $ p$ and $ q$ , with respect to the variable $ x_i$ .",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d p, Polynomial_d q, OutputIterator out, int i)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polynomial_d",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PolynomialSubresultants.h",
+        "line": "67",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PolynomialSubresultantsWithCofactors": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PolynomialSubresultantsWithCofactors",
+    "brief": "Computes the polynomial subresultant of two polynomials $ p$ and $ q$ of degree $ n$ and $ m$ , respectively, as defined in the documentation of PolynomialTraits_d::PolynomialSubresultants . Moreover, for $ \\mathrm{Sres}_i(p,q)$ , polynomials $ u_i$ and $ v_i$ with $ \\deg u_i\\leq m-i-1$ and $ \\deg v_i\\leq n-i-1$ are computed such that $ \\mathrm{Sres}_i(p,q)=u_i p + v_i q$ . $ u_i$ and $ v_i$ are called the cofactors of $ \\mathrm{Sres}_i(p,q)$ .",
+    "detailed": "The result is written in three output ranges, each of length $ \\min\\{n,m\\}+1$ , starting with the $ 0$ -th subresultant and the corresponding cofactors. This functor is optional. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Resultant PolynomialTraits_d::PolynomialSubresultants PolynomialTraits_d::PrincipalSubresultants PolynomialTraits_d::SturmHabichtSequenceWithCofactors",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PolynomialSubresultantsWithCofactors::operator()",
+        "brief": "computes the subresultants of $ p$ and $ q$ , and the cofactors, with respect to the outermost variable.",
+        "detailed": "Each element is of type PolynomialTraits_d::Polynomial_d .",
+        "return_type": "OutputIterator1",
+        "argsstring": "(Polynomial_d p, Polynomial_d q, OutputIterator1 sres, OutputIterator2 co_p, OutputIterator3 co_q)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polynomial_d",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator1",
+            "name": "sres",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator2",
+            "name": "co_p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator3",
+            "name": "co_q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PolynomialSubresultantsWithCofactors.h",
+        "line": "44",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PolynomialSubresultantsWithCofactors::operator()",
+        "brief": "computes the subresultants of $ p$ and $ q$ , and the cofactors, with respect to $ x_i$ .",
+        "detailed": "Each element is of type PolynomialTraits_d::Polynomial_d .",
+        "return_type": "OutputIterator1",
+        "argsstring": "(Polynomial_d p, Polynomial_d q, OutputIterator1 sres, OutputIterator2 co_p, OutputIterator3 co_q, int i)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polynomial_d",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator1",
+            "name": "sres",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator2",
+            "name": "co_p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator3",
+            "name": "co_q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PolynomialSubresultantsWithCofactors.h",
+        "line": "58",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PrincipalSturmHabichtSequence": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PrincipalSturmHabichtSequence",
+    "brief": "Computes the principal leading coefficients of the Sturm-Habicht sequence of a polynomials $ f$ of type PolynomialTraits_d::Polynomial_d with respect a certain variable $ x_i$ . This means that for the $ j$ -th Sturm-Habicht polynomial, this methods returns the coefficient of $ x_i^j$ .",
+    "detailed": "Note that the degree of the $ j$ -th Sturm-Habicht polynomial is at most $ j$ , but the principal coefficient might be zero, thus, this functor does not necessarily give the leading coefficient of the Sturm-Habicht polynomials. In case that PolynomialTraits_d::Coefficient_type is RealEmbeddable , the function CGAL::number_of_real_roots can be used on the resulting sequence to count the number of distinct real roots of the polynomial $ f$ . This functor is optional. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d CGAL::number_of_real_roots() PolynomialTraits_d::Resultant PolynomialTraits_d::SturmHabichtSequence PolynomialTraits_d::PrincipalSubresultants",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PrincipalSturmHabichtSequence::operator()",
+        "brief": "computes the principal coefficients of the Sturm-Habicht sequence of $ f$ , with respect to the outermost variable.",
+        "detailed": "Each element is of type PolynomialTraits_d::Coefficient_type .",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d f, OutputIterator out)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PrincipalSturmHabichtSequence.h",
+        "line": "46",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PrincipalSturmHabichtSequence::operator()",
+        "brief": "computes the principal coefficients of the Sturm-Habicht sequence of $ f$ with respect to the variable $ x_i$ .",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d f, OutputIterator out, int i)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PrincipalSturmHabichtSequence.h",
+        "line": "55",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PrincipalSubresultants": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PrincipalSubresultants",
+    "brief": "Computes the principal subresultant of two polynomials $ p$ and $ q$ of type PolynomialTraits_d::Coefficient_type with respect to the outermost variable. The $ i$ -th principal subresultant, $ \\mathrm{sres}_i(p,q)$ , is defined as the coefficient at $ t^i$ of the $ i$ -th polynomial subresultant $ \\mathrm{Sres}_i(p,q)$ . Thus, it is either the leading coefficient of $ \\mathrm{Sres}_i$ , or zero in the case where its degree is below $ i$ .",
+    "detailed": "The result is written in an output range, starting with the $ 0$ -th principal subresultant $ \\mathrm{sres}_0(p,q)$ ,aka as the resultant of $ p$ and $ q$ . (Note that $ \\mathrm{sres}_0(p,q)=\\mathrm{Sres}_0(p,q)$ by definition) This functor is optional. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Resultant PolynomialTraits_d::PolynomialSubresultants PolynomialTraits_d::PrincipalSturmHabichtSequence",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PrincipalSubresultants::operator()",
+        "brief": "computes the principal subresultants of $ p$ and $ q$ , with respect to the outermost variable.",
+        "detailed": "Each element is of type PolynomialTraits_d::Coefficient_type .",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d p, Polynomial_d q, OutputIterator out)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polynomial_d",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PrincipalSubresultants.h",
+        "line": "44",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PrincipalSubresultants::operator()",
+        "brief": "computes the principal subresultants of $ p$ and $ q$ , with respect to the variable $ x_i$ .",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d p, Polynomial_d q, OutputIterator out, int i)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polynomial_d",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PrincipalSubresultants.h",
+        "line": "53",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PseudoDivision": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PseudoDivision",
+    "brief": "This AdaptableFunctor computes the pseudo division of two polynomials $ f$ and $ g$ .",
+    "detailed": "Given $ f$ and $ g \\neq 0$ this functor computes quotient $ q$ and remainder $ r$ such that $ D \\cdot f = g \\cdot q + r$ and $ degree(r) < degree(g)$ , where $ D = leading\\_coefficient(g)^{max(0, degree(f)-degree(g)+1)}$ This functor is useful if the regular division is not available, which is the case if PolynomialTraits_d::Coefficient_type is not a Field . Hence in general it is not possible to invert the leading coefficient of $ g$ . Instead $ f$ is extended by $ D$ allowing integral divisions in the internal computation. Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::PseudoDivision PolynomialTraits_d::PseudoDivisionRemainder PolynomialTraits_d::PseudoDivisionQuotient",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivision::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivision.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PseudoDivision::operator()",
+        "brief": "Computes the pseudo division with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d f, PolynomialTraits_d::Polynomial_d g, PolynomialTraits_d::Polynomial_d &q, PolynomialTraits_d::Polynomial_d &r, PolynomialTraits_d::Coefficient_type &D)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Polynomial_d &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Polynomial_d &",
+            "name": "r",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Coefficient_type &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivision.h",
+        "line": "51",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PseudoDivisionQuotient": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PseudoDivisionQuotient",
+    "brief": "This AdaptableBinaryFunction computes the quotient of the pseudo division of two polynomials $ f$ and $ g$ .",
+    "detailed": "Given $ f$ and $ g \\neq 0$ one can compute quotient $ q$ and remainder $ r$ such that $ D \\cdot f = g \\cdot q + r$ and $ degree(r) < degree(g)$ , where $ D = leading\\_coefficient(g)^{max(0, degree(f)-degree(g)+1)}$ This functor computes $ q$ . Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::PseudoDivision PolynomialTraits_d::PseudoDivisionRemainder PolynomialTraits_d::PseudoDivisionQuotient",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionQuotient::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionQuotient.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionQuotient::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionQuotient.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionQuotient::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionQuotient.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionQuotient::operator()",
+        "brief": "Returns the quotient $ q$ of the pseudo division of $ f$ and $ g$ with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type f, second_argument_type g)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionQuotient.h",
+        "line": "56",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::PseudoDivisionRemainder": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::PseudoDivisionRemainder",
+    "brief": "This AdaptableBinaryFunction computes the remainder of the pseudo division of two polynomials $ f$ and $ g$ .",
+    "detailed": "Given $ f$ and $ g \\neq 0$ one can compute quotient $ q$ and remainder $ r$ such that $ D \\cdot f = g \\cdot q + r$ and $ degree(r) < degree(g)$ , where $ D = leading\\_coefficient(g)^{max(0, degree(f)-degree(g)+1)}$ This functor computes $ r$ . Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::PseudoDivision PolynomialTraits_d::PseudoDivisionRemainder PolynomialTraits_d::PseudoDivisionQuotient",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionRemainder::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionRemainder.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionRemainder::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionRemainder.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionRemainder::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionRemainder.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::PseudoDivisionRemainder::operator()",
+        "brief": "Returns the remainder $ r$ of the pseudo division of $ f$ and $ g$ with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type f, second_argument_type g)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--PseudoDivisionRemainder.h",
+        "line": "56",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Resultant": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Resultant",
+    "brief": "This AdaptableBinaryFunction computes the resultant of two polynomials $ f$ and $ g$ of type PolynomialTraits_d::Polynomial_d with respect to a certain variable.",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate polynomial in one specific variable. Let $ f$ and $ g$ be two univariate polynomials over some commutative ring $ A$ , where \\[ f = f_mx^m + \\dots + f_0 \\] and \\[ g = g_nx^n + \\dots + g_0. \\] The resultant of $ f$ and $ g$ is defined as the determinant of the Sylvester matrix : \\[\\begin{pmatrix}\n    f_{m} & \\dots & f_{0}  \\\\\n    & f_{m} & \\dots & f_{0}  \\\\\n    & & \\ddots & & \\ddots  \\\\\n    & & & f_{m} & \\dots & f_{0}  \\\\\n    g_{n} & \\dots & g_{0}  \\\\\n    & g_{n} & \\dots & g_{0}  \\\\\n    & & \\ddots & & \\ddots  \\\\\n    & & & g_{n} & \\dots & g_{0}\n\\end{pmatrix}\n\\] Note that this is a $ (n+m)\\times(n+m)$ matrix as there are $ n$ rows for $ f$ and $ m$ rows that are used for $ g$ . The blank spaces are supposed to be filled with zeros. Advanced Let $ L$ be the algebraic closure of $ A$ , and write $ f$ and $ g$ as \\[ f := f_m \\ccProd{i=1}{m}{(x-\\alpha_i)},\\ \\alpha_i \\in L \\] and \\[ g := g_n \\ccProd{j=1}{n}{(x-\\beta_j)},\\ \\beta_i \\in L, \\] then the resultant of $ f$ and $ g$ is (up to leading coefficients) the product of all pairwise differences of the roots of $ f$ and $ g$ , namely \\[ res(f,g) = f_m^n g_n^m \\ccProd{i=1}{m}{\\ccProd{j=1}{n}{(\\alpha_i-\\beta_j)}}. \\] In particular, $ res(f,g) \\neq 0$ iff $ f$ and $ g$ have a common factor with a positive degree in $ X$ . There are various ways to compute the resultant. Naive options are the computation of the resultant as the determinant of the Sylvester Matrix or the Bezout Matrix as well as the so called subresultant algorithm, which is a variant of the Euclidean Algorithm. More sophisticated methods may use modular arithmetic and interpolation. For more information we refer to, e.g., [2] . Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::UnivariateContent PolynomialTraits_d::PolynomialSubresultants PolynomialTraits_d::PrincipalSubresultants",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Resultant::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Resultant.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::Resultant::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Resultant.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::Resultant::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Resultant.h",
+        "line": "86",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Resultant::operator()",
+        "brief": "Computes the resultant of $ f$ and $ g$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type f, second_argument_type g)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Resultant.h",
+        "line": "97",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Scale": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Scale",
+    "brief": "Given a constant $ c$ this AdaptableBinaryFunction scales a PolynomialTraits_d::Polynomial_d $ p$ with respect to one variable, that is, it computes $ p(c\\cdot x)$ .",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate polynomial in one specific variable. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Scale::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Scale.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::Scale::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Scale.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::Scale::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Innermost_coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Scale.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Scale::operator()",
+        "brief": "Returns $ p(c\\cdot x)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type c)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Scale.h",
+        "line": "49",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Scale::operator()",
+        "brief": "Same as first operator but for variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type c, int i)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Scale.h",
+        "line": "57",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::ScaleHomogeneous": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::ScaleHomogeneous",
+    "brief": "Given a numerator $ a$ and a denominator $ b$ this AdaptableFunctor scales a PolynomialTraits_d::Polynomial_d $ p$ with respect to one variable, that is, it computes $ b^{degree(p)}\\cdot p(a/b\\cdot x)$ .",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate homogeneous polynomial in one specific variable. Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::ScaleHomogeneous::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--ScaleHomogeneous.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ScaleHomogeneous::operator()",
+        "brief": "Returns $ b^{degree}\\cdot p(a/b\\cdot x)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, PolynomialTraits_d::Innermost_coefficient_type a, PolynomialTraits_d::Innermost_coefficient_type b)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ScaleHomogeneous.h",
+        "line": "40",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::ScaleHomogeneous::operator()",
+        "brief": "Same as first operator but for variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, PolynomialTraits_d::Innermost_coefficient_type a, PolynomialTraits_d::Innermost_coefficient_type b, int i)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--ScaleHomogeneous.h",
+        "line": "49",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Shift": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Shift",
+    "brief": "This AdaptableBinaryFunction multiplies a PolynomialTraits_d::Polynomial_d by the given power of the specified variable.",
+    "detailed": "This functor is provided for efficiency reasons, since multiplication by some variable will in general correspond to a shift of coefficients in the internal representation. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Shift::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Shift.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::Shift::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Shift.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::Shift::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Shift.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Shift::operator()",
+        "brief": "Returns $ p * x_{d-1}^e$ .",
+        "detailed": "$ 0 \\leq e$ .",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type e)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Shift.h",
+        "line": "49",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Shift::operator()",
+        "brief": "Returns $ p * x_{i}^e$ .",
+        "detailed": "$ 0 \\leq e$ . $ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type e, int i)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Shift.h",
+        "line": "58",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SignAt": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SignAt",
+    "brief": "This AdaptableFunctor returns the sign of a PolynomialTraits_d::Polynomial_d $ p$ at given Cartesian point represented as an iterator range.",
+    "detailed": "This functor is well defined if PolynomialTraits_d::Innermost_coefficient_type is RealEmbeddable . Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::SignAt::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Sign",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--SignAt.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SignAt::operator()",
+        "brief": "Returns the sign of $ p$ at the given Cartesian point, where begin is referring to the innermost variable.",
+        "detailed": "( end-begin == PolynomialTraits_d::d ) std::iterator_traits< InputIterator >::value_type is ExplicitInteroperable with PolynomialTraits_d::Innermost_coefficient_type .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SignAt.h",
+        "line": "45",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SignAtHomogeneous": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SignAtHomogeneous",
+    "brief": "This AdaptableFunctor returns the sign of a PolynomialTraits_d::Polynomial_d $ p$ at a given homogeneous point, which is given by an iterator range.",
+    "detailed": "The polynomial is interpreted as a homogeneous polynomial in all variables. For instance the polynomial $ p(x_0,x_1) = x_0^2x_1^3+x_1^4$ is interpreted as the homogeneous polynomial $ p(x_0,x_1,w) = x_0^2x_1^3+x_1^4w^1$ . This functor is well defined if PolynomialTraits_d::Innermost_coefficient_type is RealEmbeddable . Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::SignAtHomogeneous::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Sign",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--SignAtHomogeneous.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SignAtHomogeneous::operator()",
+        "brief": "Returns the sign of $ p$ at the given homogeneous point, where begin is referring to the innermost variable.",
+        "detailed": "( end-begin == PolynomialTraits_d::d +1) std::iterator_traits< InputIterator >::value_type is ExplicitInteroperable with PolynomialTraits_d::Innermost_coefficient_type .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, InputIterator begin, InputIterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SignAtHomogeneous.h",
+        "line": "50",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SquareFreeFactorize": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SquareFreeFactorize",
+    "brief": "This Functor computes a square-free factorization of a PolynomialTraits_d::Polynomial_d .",
+    "detailed": "A polynomial $ p$ is factored into square-free and pairwise coprime non-constant factors $ g_i$ with multiplicities $ m_i$ and a constant factor $ a$ , such that $ p = a \\cdot g_1^{m_1} \\cdot ... \\cdot g_n^{m_n}$ . The pairs $ (g_i,m_i)$ are written into the given output iterator. This functor is well defined if PolynomialTraits_d::Polynomial_d is a UniqueFactorizationDomain . Refines Assignable CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::SquareFreeFactorizeUpToConstantFactor PolynomialTraits_d::MakeSquareFree PolynomialTraits_d::IsSquareFree",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SquareFreeFactorize::operator()",
+        "brief": "Computes the square-free factorization of $ p$ and returns the past-the-end iterator of the written range.",
+        "detailed": "std::iterator_traits< OutputIterator >::value_type must be constructible from std::pair< PolynomialTraits_d::Polynomial_d ,int> .",
+        "return_type": "OutputIterator",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, OutputIterator it, PolynomialTraits_d::Innermost_coefficient_type &a)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SquareFreeFactorize.h",
+        "line": "41",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SquareFreeFactorize::operator()",
+        "brief": "As the first operator, just not computing the factor $ a$ .",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, OutputIterator it)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SquareFreeFactorize.h",
+        "line": "49",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SquareFreeFactorizeUpToConstantFactor": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SquareFreeFactorizeUpToConstantFactor",
+    "brief": "This AdaptableFunctor computes a square-free factorization up to a constant factor (utcf) of a PolynomialTraits_d::Polynomial_d .",
+    "detailed": "A polynomial $ p$ is factored into square-free and pairwise coprime non-constant factors $ g_i$ with multiplicities $ m_i$ , such that $ a \\cdot p = g_1^{m_1} \\cdot ... \\cdot g_n^{m_n}$ , where $ a$ is some constant factor. The pairs $ (g_i,m_i)$ are written into the given output iterator. The constant factor $ a$ is not computed. This functor is well defined even though PolynomialTraits_d::Innermost_coefficient_type may not be a UniqueFactorizationDomain . Refines Assignable CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::SquareFreeFactorize",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SquareFreeFactorizeUpToConstantFactor::operator()",
+        "brief": "Computes the square-free factorization of $ p$ and returns the past-the-end iterator of the written range.",
+        "detailed": "std::iterator_traits< OutputIterator >::value_type must be constructible from std::pair< PolynomialTraits_d::Polynomial_d ,int> .",
+        "return_type": "OutputIterator",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, OutputIterator it)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SquareFreeFactorizeUpToConstantFactor.h",
+        "line": "43",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SturmHabichtSequence": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SturmHabichtSequence",
+    "brief": "Computes the Sturm-Habicht sequence (aka the signed subresultant sequence) of a polynomial $ f$ of type PolynomialTraits_d::Polynomial_d with respect to a certain variable $ x_i$ . The Sturm-Habicht sequence is similar to the polynomial subresultant sequence of $ f$ and its derivative $ f':=\\frac{\\partial f}{\\partial x_i}$ with respect to $ x_i$ . The implementation is based on the following definition:",
+    "detailed": "Let $ n:=\\deg f$ and $ \\delta_k:=(-1)^{k(k+1)/2}$ . For $ k\\in\\{0,\\ldots,n\\}$ , the $ k$ -th Sturm-Habicht polynomial of $ f$ is defined as: \\[\\mathrm{Stha}_{k}(f) = \\left \\{\n\\begin{array}{cll}\nf & \\text{if} & k = n \\\\\nf' & \\text{if} & k = n - 1 \\\\\n\\delta_{n - k - 1}\\mathrm{Sres}_{k}(f,f') & \\text{if} & 0 \\leq k \\leq n - 2\n\\end{array}\n\\right .\n\\] where $ \\mathrm{Sres}_k(f,f')$ is defined as in the concept PolynomialTraits_d::PolynomialSubresultants . The result is written in an output range, starting with the $ 0$ -th Sturm-Habicht polynomial (which is equal to the discriminant of $ f$ up to a multiple of the leading coefficient). This functor is optional. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Resultant PolynomialTraits_d::PrincipalSturmHabichtSequence PolynomialTraits_d::SturmHabichtSequenceWithCofactors PolynomialTraits_d::PolynomialSubresultants",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SturmHabichtSequence::operator()",
+        "brief": "computes the Sturm-Habicht sequence of $ f$ , with respect to the outermost variable.",
+        "detailed": "Each element is of type PolynomialTraits_d::Polynomial_d .",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d f, OutputIterator out)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SturmHabichtSequence.h",
+        "line": "60",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SturmHabichtSequence::operator()",
+        "brief": "computes the Sturm-Habicht sequence of $ f$ with respect to the variable $ x_i$ .",
+        "detailed": "",
+        "return_type": "OutputIterator",
+        "argsstring": "(Polynomial_d f, OutputIterator out, int i)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "out",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SturmHabichtSequence.h",
+        "line": "68",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SturmHabichtSequenceWithCofactors": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SturmHabichtSequenceWithCofactors",
+    "brief": "Computes the Sturm-Habicht polynomials of a polynomial $ f$ of degree $ n$ , as defined in the documentation of PolynomialTraits_d::SturmHabichtSequence . Moreover, for $ \\mathrm{Stha}_i(f)$ , polynomials $ u_i$ and $ v_i$ with $ \\deg u_i\\leq n-i-2$ and $ \\deg v_i\\leq n-i-1$ are computed such that $ \\mathrm{Sres}_i(p,q)=u_i f + v_i f'$ . $ u_i$ and $ v_i$ are called the cofactors of $ \\mathrm{Stha}_i(f)$ .",
+    "detailed": "The result is written in three output ranges, each of length $ \\min\\{n,m\\}+1$ , starting with the $ 0$ -th Sturm-Habicht polynomial $ \\mathrm{Stha_0(f)}$ and the corresponding cofactors. This functor is optional. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Resultant PolynomialTraits_d::SturmHabichtSequence PolynomialTraits_d::PrincipalSturmHabichtSequence PolynomialTraits_d::PolynomialSubresultantsWithCofactors",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SturmHabichtSequenceWithCofactors::operator()",
+        "brief": "computes the Sturm-Habicht sequence of $ f$ , and the cofactors, with respect to the outermost variable.",
+        "detailed": "Each element is of type PolynomialTraits_d::Polynomial_d .",
+        "return_type": "OutputIterator1",
+        "argsstring": "(Polynomial_d f, OutputIterator1 stha, OutputIterator2 co_f, OutputIterator3 co_fx)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator1",
+            "name": "stha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator2",
+            "name": "co_f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator3",
+            "name": "co_fx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SturmHabichtSequenceWithCofactors.h",
+        "line": "44",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SturmHabichtSequenceWithCofactors::operator()",
+        "brief": "computes the Sturm-Habicht sequence of $ f$ , and the cofactors, with respect to $ x_i$ .",
+        "detailed": "Each element is of type PolynomialTraits_d::Polynomial_d .",
+        "return_type": "OutputIterator1",
+        "argsstring": "(Polynomial_d f, OutputIterator1 stha, OutputIterator2 co_f, OutputIterator3 co_fx, int i)",
+        "params": [
+          {
+            "type": "Polynomial_d",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator1",
+            "name": "stha",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator2",
+            "name": "co_f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator3",
+            "name": "co_fx",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SturmHabichtSequenceWithCofactors.h",
+        "line": "57",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Substitute": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Substitute",
+    "brief": "This Functor substitutes all variables of a given multivariate PolynomialTraits_d::Polynomial_d by the values given in the iterator range, where begin refers the value for the innermost variable.",
+    "detailed": "Refines Assignable CopyConstructible DefaultConstructible Types Note that the result_type is the coercion type of the value type of the given iterator range and PolynomialTraits_d::Innermost_coefficient_type . In particular std::iterator_traits<Input_iterator>::value_type must be ExplicitInteroperable with PolynomialTraits_d::Innermost_coefficient_type . Hence, it can not be provided as a public type in advance. Polynomial_d PolynomialTraits_d PolynomialTraits_d::SubstituteHomogeneous CGAL::Coercion_traits",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Substitute::operator()",
+        "brief": "Substitutes each variable of $ p$ by the values given in the iterator range, where begin refers to the innermost variable $ x_0$ .",
+        "detailed": "( end-begin == PolynomialTraits_d::d )",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, Input_iterator begin, Input_iterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Substitute.h",
+        "line": "41",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::SubstituteHomogeneous": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::SubstituteHomogeneous",
+    "brief": "This Functor substitutes all variables of a given multivariate PolynomialTraits_d::Polynomial_d $ p$ by the values given in the iterator range, where begin refers the value for the innermost variable. In contrast to PolynomialTraits_d::Substitute the given polynomial $ p$ is interpreted as a homogeneous polynomial. Hence the iterator range is required to be of length PolynomialTraits_d::d +1 .",
+    "detailed": "For instance the polynomial $ p(x_0,x_1) = x_0^2x_1^3+x_1^4$ is interpreted as the homogeneous polynomial $ p(x_0,x_1,w) = x_0^2x_1^3+x_1^4w^1$ . Refines CopyConstructible Assignable DefaultConstructible Types Note that the result_type is the coercion type of the value type of the given iterator range and PolynomialTraits_d::Innermost_coefficient_type . In particular std::iterator_traits<Input_iterator>::value_type must be ExplicitInteroperable with PolynomialTraits_d::Innermost_coefficient_type . Hence, it can not be provided as a public type in advance. Polynomial_d PolynomialTraits_d PolynomialTraits_d::Substitute CGAL::Coercion_traits",
+    "members": [
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::SubstituteHomogeneous::operator()",
+        "brief": "Substitutes each variable of $ p$ by the values given in the iterator range, where $ p$ is interpreted as a homogeneous polynomial in all variables.",
+        "detailed": "The begin iterator refers to the innermost variable $ x_0$ . ( end-begin == PolynomialTraits_d::d )+1",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, Input_iterator begin, Input_iterator end)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Input_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--SubstituteHomogeneous.h",
+        "line": "48",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Swap": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Swap",
+    "brief": "This AdaptableFunctor swaps two variables of a multivariate polynomial.",
+    "detailed": "Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Swap::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Swap.h",
+        "line": "24",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Swap::operator()",
+        "brief": "Returns polynomial $ p$ with interchanged variables $ x_i$ , $ x_j$ .",
+        "detailed": "$ 0 \\leq i < d$ . $ 0 \\leq j < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, int i, int j)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Swap.h",
+        "line": "37",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::TotalDegree": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::TotalDegree",
+    "brief": "This AdaptableUnaryFunction computes the total degree of a PolynomialTraits_d::Polynomial_d .",
+    "detailed": "Given a (multivariate) monomial the sum of all appearing exponents is the total degree of this monomial. The total degree of a polynomial $ p$ is the maximum of the total degrees of all appearing (multivariate) monomials in $ p$ . For instance the total degree of $ p = x_0^2x_1^3+x_1^4$ is $ 5$ . The total degree of the zero polynomial is set to $ 0$ . From the mathematical point of view this should be $ -\\infty$ , but this would imply an inconvenient return type. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::Degree PolynomialTraits_d::DegreeVector",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::TotalDegree::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--TotalDegree.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::TotalDegree::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--TotalDegree.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::TotalDegree::operator()",
+        "brief": "Computes the total degree of $ p$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--TotalDegree.h",
+        "line": "53",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::Translate": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::Translate",
+    "brief": "This AdaptableBinaryFunction translates a PolynomialTraits_d::Polynomial_d with respect to one variable, that is, for a given polynomial $ p$ and constant $ c$ it computes $ p(x+c)$ .",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate polynomial in one specific variable. Refines AdaptableBinaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::Translate::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Translate.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "first_argument_type",
+        "qualified_name": "PolynomialTraits_d::Translate::first_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Translate.h",
+        "line": "34",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "second_argument_type",
+        "qualified_name": "PolynomialTraits_d::Translate::second_argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Innermost_coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--Translate.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Translate::operator()",
+        "brief": "Returns $ p(x+c)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type c)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Translate.h",
+        "line": "49",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::Translate::operator()",
+        "brief": "Same as first operator but for variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p, second_argument_type c, int i)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "second_argument_type",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--Translate.h",
+        "line": "57",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::TranslateHomogeneous": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::TranslateHomogeneous",
+    "brief": "Given numerator $ a$ and denominator $ b$ this AdaptableFunctor translates a PolynomialTraits_d::Polynomial_d $ p$ with respect to one variable by $ a/b$ , that is, it computes $ b^{degree(p)}\\cdot p(x+a/b)$ .",
+    "detailed": "Note that this functor operates on the polynomial in the univariate view, that is, the polynomial is considered as a univariate homogeneous polynomial in one specific variable. Refines AdaptableFunctor CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::TranslateHomogeneous::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--TranslateHomogeneous.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::TranslateHomogeneous::operator()",
+        "brief": "Returns $ b^{degree(p)}\\cdot p(x+a/b)$ , with respect to the outermost variable.",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, PolynomialTraits_d::Innermost_coefficient_type a, PolynomialTraits_d::Innermost_coefficient_type b)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--TranslateHomogeneous.h",
+        "line": "40",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::TranslateHomogeneous::operator()",
+        "brief": "Same as first operator but for variable $ x_i$ .",
+        "detailed": "$ 0 \\leq i < d$ .",
+        "return_type": "result_type",
+        "argsstring": "(PolynomialTraits_d::Polynomial_d p, PolynomialTraits_d::Innermost_coefficient_type a, PolynomialTraits_d::Innermost_coefficient_type b, int i)",
+        "params": [
+          {
+            "type": "PolynomialTraits_d::Polynomial_d",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "PolynomialTraits_d::Innermost_coefficient_type",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--TranslateHomogeneous.h",
+        "line": "49",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::UnivariateContent": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::UnivariateContent",
+    "brief": "This AdaptableUnaryFunction computes the content of a PolynomialTraits_d::Polynomial_d with respect to the univariate (recursive) view on the polynomial, that is, it computes the gcd of all coefficients with respect to one variable.",
+    "detailed": "This functor is well defined if PolynomialTraits_d::Coefficient_type is a Field or a UniqueFactorizationDomain . Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::UnivariateContent::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--UnivariateContent.h",
+        "line": "31",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::UnivariateContent::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--UnivariateContent.h",
+        "line": "36",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::UnivariateContent::operator()",
+        "brief": "Computes the content of $ p$ with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(argument_type p)",
+        "params": [
+          {
+            "type": "argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--UnivariateContent.h",
+        "line": "46",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolynomialTraits_d::UnivariateContentUpToConstantFactor": {
+    "kind": "class",
+    "name": "PolynomialTraits_d::UnivariateContentUpToConstantFactor",
+    "brief": "This AdaptableUnaryFunction computes the content of a PolynomialTraits_d::Polynomial_d with respect to the univariate (recursive) view on the polynomial up to a constant factor (utcf) , that is, it computes the $ \\mathrm{gcd\\_utcf}$ of all coefficients with respect to one variable.",
+    "detailed": "Remark: This is called UnivariateContentUpToConstantFactor for symmetric reasons with respect to PolynomialTraits_d::UnivariateContent and PolynomialTraits_d::MultivariateContent . However, a concept PolynomialTraits_d::MultivariateContentUpToConstantFactor does not exist since the result is trivial. Refines AdaptableUnaryFunction CopyConstructible DefaultConstructible Polynomial_d PolynomialTraits_d PolynomialTraits_d::GcdUpToConstantFactor",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "result_type",
+        "qualified_name": "PolynomialTraits_d::UnivariateContentUpToConstantFactor::result_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Coefficient_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--UnivariateContentUpToConstantFactor.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "argument_type",
+        "qualified_name": "PolynomialTraits_d::UnivariateContentUpToConstantFactor::argument_type",
+        "brief": "",
+        "detailed": "",
+        "return_type": "PolynomialTraits_d::Polynomial_d",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolynomialTraits_d--UnivariateContentUpToConstantFactor.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "PolynomialTraits_d::UnivariateContentUpToConstantFactor::operator()",
+        "brief": "Computes the content up to a constant factor of $ p$ with respect to the outermost variable $ x_{d-1}$ .",
+        "detailed": "",
+        "return_type": "result_type",
+        "argsstring": "(first_argument_type p)",
+        "params": [
+          {
+            "type": "first_argument_type",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolynomialTraits_d--UnivariateContentUpToConstantFactor.h",
+        "line": "51",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Exponent_vector::is_valid",
+        "brief": "Returns true if all entries of exponent vector ev are not negative.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Exponent_vector &ev)",
+        "params": [
+          {
+            "type": "const Exponent_vector &",
+            "name": "ev",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Exponent_vector.h",
+        "line": "154",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator<<",
+        "qualified_name": "CGAL::Polynomial::operator<<",
+        "brief": "Writes poly to ostream os .",
+        "detailed": "The format depends on the CGAL::IO::MODE of os . In case the mode is CGAL::IO::ASCII the format is $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , where $ d$ is the degree of the polynomial. The format is output sensitive, that is, coefficients that are zero are not reported. In case the mode is CGAL::IO::PRETTY the format is human readable.",
+        "return_type": "std::ostream &",
+        "argsstring": "(std::ostream &os, const Polynomial< Coeff > &poly)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Polynomial < Coeff > &",
+            "name": "poly",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "147",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator>>",
+        "qualified_name": "CGAL::Polynomial::operator>>",
+        "brief": "Reads poly from istream is in format $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , the output format in mode CGAL::IO::ASCII .",
+        "detailed": "",
+        "return_type": "std::istream &",
+        "argsstring": "(std::istream &is, const Polynomial< Coeff > &poly)",
+        "params": [
+          {
+            "type": "std::istream &",
+            "name": "is",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Polynomial < Coeff > &",
+            "name": "poly",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polynomial.h",
+        "line": "155",
+        "section": ""
+      }
+    ]
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

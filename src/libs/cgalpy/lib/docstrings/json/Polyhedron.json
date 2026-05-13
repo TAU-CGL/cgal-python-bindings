@@ -1,0 +1,3879 @@
+{
+  "CGAL::Polyhedron_3": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_3",
+    "brief": "A polyhedral surface Polyhedron_3 consists of vertices V , edges E , facets F and an incidence relation on them.",
+    "detailed": "Each edge is represented by two halfedges with opposite orientations. Vertices represent points in 3d-space. Edges are straight line segments between two endpoints. Facets are planar, possibly non-convex, polygons without holes defined by the circular sequence of halfedges along their boundary. The polyhedral surface itself can have holes. The halfedges along the boundary of a hole are called border halfedges and have no incident facet. An edge is a border edge if one of its halfedges is a border halfedge. A surface is closed if it contains no border halfedges. A closed surface is a boundary representation for a polyhedron in three dimensions. The convention is that the halfedges are oriented counterclockwise around facets as seen from the outside of the polyhedron. An implication is that the halfedges are oriented clockwise around the vertices. The notion of the solid side of a facet as defined by the halfedge orientation extends to polyhedral surfaces with border edges although they do not define a closed object. If normal vectors are considered for the facets, normals point outwards (following the right hand rule). The strict definition can be found in [3] . One implication of this definition is that the polyhedral surface is always an orientable and oriented 2-manifold with border edges, i.e., the neighborhood of each point on the polyhedral surface is either homeomorphic to a disc or to a half disc, except for vertices where multiple holes join. Another implication is that the smallest representable surface is a triangle (for polyhedral surfaces with border edges) or a tetrahedron (for polyhedra). Boundary representations of orientable 2-manifolds are closed under Euler operations. They are extended with operations that create or close holes in the surface. Other intersections besides the incidence relation are not allowed, although they are not automatically handled, since self intersections are not easy to check efficiently. Polyhedron_3 does only maintain the combinatorial integrity of the polyhedral surface (using Euler operations) and does not consider the coordinates of the points or any geometric information. The class Polyhedron_3 can represent polyhedral surfaces as well as polyhedra. The interface is designed in such a way that it is easy to ignore border edges and work only with polyhedra. The sequence of edges can be ordered in the data structure on request such that the sequence starts with the non-border edges and ends with the border edges. Border edges are then itself ordered such that the halfedge which is incident to the facet comes first and the halfedge incident to the hole comes thereafter. This normalization step counts simultaneously the number of border edges. This number is zero if and only if the surface is a closed polyhedron. Note that this class does not maintain this counter nor the halfedge order during further modifications. There is no automatic caching done for auxiliary information. Parameters The full template declaration of Polyhedron_3 states four template parameters: template < class PolyhedronTraits_3, class PolyhedronItems_3 = CGAL::Polyhedron_items_3, template < class T, class I> class HalfedgeDS = CGAL::HalfedgeDS_default, class Alloc = CGAL_ALLOCATOR( int ) > class Polyhedron_3 ; The first parameter requires a model of the PolyhedronTraits_3 concept as argument, for example CGAL::Polyhedron_traits_3 . The second parameter expects a model of the PolyhedronItems_3 concept. By default, the class CGAL::Polyhedron_items_3 is preselected. The third parameter is a class template. A model of the HalfedgeDS concept is expected. By default, the class CGAL::HalfedgeDS_default is preselected, which is a list based implementation of the halfedge data structure. The fourth parameter Alloc requires a standard allocator for STL container classes. The rebind mechanism from Alloc will be used to create appropriate allocators internally. A default is provided with the macro CGAL_ALLOCATOR(int) from the <CGAL/memory.h> header file. CGAL::Polyhedron_3::Vertex CGAL::Polyhedron_3::Halfedge CGAL::Polyhedron_3::Facet PolyhedronTraits_3 CGAL::Polyhedron_traits_3 <Kernel> PolyhedronItems_3 CGAL::Polyhedron_items_3 HalfedgeDS CGAL::HalfedgeDS_default CGAL::Polyhedron_incremental_builder_3 <HDS> CGAL::Modifier_base . Example This example program instantiates a polyhedron using the default traits class and creates a tetrahedron. Example: Polyhedron/polyhedron_prog_simple.cpp Show / Hide #include <CGAL/Simple_cartesian.h> #include <CGAL/Polyhedron_3.h> typedef CGAL::Simple_cartesian<double> Kernel; typedef CGAL::Polyhedron_3<Kernel> Polyhedron; typedef Polyhedron::Halfedge_handle Halfedge_handle; int main() { Polyhedron P; Halfedge_handle h = P. make_tetrahedron (); if ( P.is_tetrahedron(h)) return 0; return 1; }",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Items",
+        "qualified_name": "CGAL::Polyhedron_3::Items",
+        "brief": "items class selected for PolyhedronItems_3 .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "790",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "HalfedgeDS",
+        "qualified_name": "CGAL::Polyhedron_3::HalfedgeDS",
+        "brief": "instantiated halfedge data structure.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "795",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Polyhedron_3::size_type",
+        "brief": "size type of HalfedgeDS .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "800",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "difference_type",
+        "qualified_name": "CGAL::Polyhedron_3::difference_type",
+        "brief": "difference type of HalfedgeDS .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "805",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "iterator_category",
+        "qualified_name": "CGAL::Polyhedron_3::iterator_category",
+        "brief": "iterator category of HalfedgeDS for all iterators.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "811",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "circulator_category",
+        "qualified_name": "CGAL::Polyhedron_3::circulator_category",
+        "brief": "circulator category of all circulators; bidirectional category if the Items::Halfedge provides a Halfedge::prev() member function, otherwise forward category.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "818",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "allocator_type",
+        "qualified_name": "CGAL::Polyhedron_3::allocator_type",
+        "brief": "allocator type Alloc .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "823",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polyhedron_3::Point_3",
+        "brief": "point stored in vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "853",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Polyhedron_3::Plane_3",
+        "brief": "plane equation stored in facets (if supported).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "858",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "863",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handles",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex_handles",
+        "brief": "range type for iterating over the vertices, with a nested type iterator that has as value type Vertex_handle",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "869",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "874",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handles",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge_handles",
+        "brief": "range type for iterating over the halfedges, with a nested type iterator that has as value type Halfedge_handle",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "880",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet_handle",
+        "brief": "handle to facet.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "885",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_handles",
+        "qualified_name": "CGAL::Polyhedron_3::Facet_handles",
+        "brief": "range type for iterating over the facets, with a nested type iterator that has as value type Facet_handle",
+        "detailed": "",
+        "return_type": "Iterator_range< unspecified_type >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "891",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_iterator",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex_iterator",
+        "brief": "iterator over all vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "896",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_iterator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge_iterator",
+        "brief": "iterator over all halfedges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "901",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_iterator",
+        "qualified_name": "CGAL::Polyhedron_3::Facet_iterator",
+        "brief": "iterator over all facets.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "906",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge_around_vertex_circulator",
+        "brief": "circulator of halfedges around a vertex (cw).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "912",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_facet_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge_around_facet_circulator",
+        "brief": "circulator of halfedges around a facet (ccw).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "918",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge_iterator",
+        "qualified_name": "CGAL::Polyhedron_3::Edge_iterator",
+        "brief": "iterator over all edges (every other halfedge).",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "923",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edges",
+        "qualified_name": "CGAL::Polyhedron_3::Edges",
+        "brief": "range type for iterating over the edges.",
+        "detailed": "",
+        "return_type": "Iterator_range< Edge_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "928",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_iterator",
+        "qualified_name": "CGAL::Polyhedron_3::Point_iterator",
+        "brief": "iterator over all points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "933",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Points",
+        "qualified_name": "CGAL::Polyhedron_3::Points",
+        "brief": "range type for iterating over the points of the vertices.",
+        "detailed": "",
+        "return_type": "Iterator_range< Point_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "938",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_iterator",
+        "qualified_name": "CGAL::Polyhedron_3::Plane_iterator",
+        "brief": "iterator over all plane equations.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "943",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Planes",
+        "qualified_name": "CGAL::Polyhedron_3::Planes",
+        "brief": "range type for iterating over the planes of the facets.",
+        "detailed": "",
+        "return_type": "Iterator_range< Plane_iterator >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "948",
+        "section": "Handles, Iterators, and Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_vertex_halfedge",
+        "brief": "Vertex::halfedge() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "961",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_point",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_vertex_point",
+        "brief": "Vertex::point() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "966",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_prev",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_halfedge_prev",
+        "brief": "Halfedge::prev() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "971",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_halfedge_vertex",
+        "brief": "Halfedge::vertex() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "976",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_facet",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_halfedge_facet",
+        "brief": "Halfedge::facet() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "981",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_facet_halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_facet_halfedge",
+        "brief": "Facet::halfedge() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "986",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_facet_plane",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_facet_plane",
+        "brief": "Facet::plane() .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "991",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_removal",
+        "qualified_name": "CGAL::Polyhedron_3::Supports_removal",
+        "brief": "supports removal of individual elements.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "996",
+        "section": "Types for Tagging Optional Features"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_3",
+        "qualified_name": "CGAL::Polyhedron_3::Polyhedron_3",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1006",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_3",
+        "qualified_name": "CGAL::Polyhedron_3::Polyhedron_3",
+        "brief": "Constructor of a polyhedron with storage reserved for v vertices, h halfedges, and f facets.",
+        "detailed": "The reservation sizes are a hint for optimizing storage allocation.",
+        "return_type": "",
+        "argsstring": "(size_type v, size_type h, size_type f, const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1014",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "reserve",
+        "qualified_name": "CGAL::Polyhedron_3::reserve",
+        "brief": "reserve storage for v vertices, h halfedges, and f facets.",
+        "detailed": "The reservation sizes are a hint for optimizing storage allocation. If the capacity is already greater than the requested size nothing happens. If the capacity changes all iterators and circulators might invalidate.",
+        "return_type": "void",
+        "argsstring": "(size_type v, size_type h, size_type f)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1026",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "make_tetrahedron",
+        "qualified_name": "CGAL::Polyhedron_3::make_tetrahedron",
+        "brief": "a tetrahedron is added to the polyhedral surface.",
+        "detailed": "Returns a halfedge of the tetrahedron.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1032",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "make_tetrahedron",
+        "qualified_name": "CGAL::Polyhedron_3::make_tetrahedron",
+        "brief": "a tetrahedron is added to the polyhedral surface with its vertices initialized to p1 , p2 , p3 , and p4 .",
+        "detailed": "Returns that halfedge of the tetrahedron which incident vertex is initialized to p1 . The incident vertex of the next halfedge is p2 , and the vertex thereafter is p3 . The remaining fourth vertex is initialized to p4 .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(const Point &p1, const Point &p2, const Point &p3, const Point &p4)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p4",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1043",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "make_triangle",
+        "qualified_name": "CGAL::Polyhedron_3::make_triangle",
+        "brief": "a triangle with border edges is added to the polyhedral surface.",
+        "detailed": "Returns a non-border halfedge of the triangle.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1053",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "make_triangle",
+        "qualified_name": "CGAL::Polyhedron_3::make_triangle",
+        "brief": "a triangle with border edges is added to the polyhedral surface with its vertices initialized to p1 , p2 , and p3 .",
+        "detailed": "Returns that non-border halfedge of the triangle which incident vertex is initialized to p1 . The incident vertex of the next halfedge is p2 , and the vertex thereafter is p3 .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(const Point &p1, const Point &p2, const Point &p3)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1063",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "empty",
+        "qualified_name": "CGAL::Polyhedron_3::empty",
+        "brief": "returns true if the polyhedron is empty.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1075",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_vertices",
+        "qualified_name": "CGAL::Polyhedron_3::size_of_vertices",
+        "brief": "number of vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1080",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_halfedges",
+        "qualified_name": "CGAL::Polyhedron_3::size_of_halfedges",
+        "brief": "number of halfedges (incl. border halfedges).",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1085",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_facets",
+        "qualified_name": "CGAL::Polyhedron_3::size_of_facets",
+        "brief": "number of facets.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1090",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "capacity_of_vertices",
+        "qualified_name": "CGAL::Polyhedron_3::capacity_of_vertices",
+        "brief": "space reserved for vertices.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1095",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "capacity_of_halfedges",
+        "qualified_name": "CGAL::Polyhedron_3::capacity_of_halfedges",
+        "brief": "space reserved for halfedges.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1100",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "capacity_of_facets",
+        "qualified_name": "CGAL::Polyhedron_3::capacity_of_facets",
+        "brief": "space reserved for facets.",
+        "detailed": "",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1105",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bytes",
+        "qualified_name": "CGAL::Polyhedron_3::bytes",
+        "brief": "bytes used for the polyhedron.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1110",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "bytes_reserved",
+        "qualified_name": "CGAL::Polyhedron_3::bytes_reserved",
+        "brief": "bytes reserved for the polyhedron.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1115",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "get_allocator",
+        "qualified_name": "CGAL::Polyhedron_3::get_allocator",
+        "brief": "allocator object.",
+        "detailed": "",
+        "return_type": "allocator_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1120",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "CGAL::Polyhedron_3::vertices_begin",
+        "brief": "iterator over all vertices.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1125",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "CGAL::Polyhedron_3::vertices_end",
+        "brief": "past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Vertex_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1130",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_handles",
+        "qualified_name": "CGAL::Polyhedron_3::vertex_handles",
+        "brief": "returns a range of handles over the vertices.",
+        "detailed": "The value type of Vertex_handles::iterator is Vertex_handle .",
+        "return_type": "Vertex_handles",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1136",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_begin",
+        "qualified_name": "CGAL::Polyhedron_3::halfedges_begin",
+        "brief": "iterator over all halfedges.",
+        "detailed": "",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1142",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_end",
+        "qualified_name": "CGAL::Polyhedron_3::halfedges_end",
+        "brief": "past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1147",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge_handles",
+        "qualified_name": "CGAL::Polyhedron_3::halfedge_handles",
+        "brief": "returns a range of handles over the halfedges.",
+        "detailed": "The value type of Halfedge_handles::iterator is Halfedge_handle .",
+        "return_type": "Halfedge_handles",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1153",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "facets_begin",
+        "qualified_name": "CGAL::Polyhedron_3::facets_begin",
+        "brief": "iterator over all facets (excluding holes).",
+        "detailed": "",
+        "return_type": "Facet_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1159",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "facets_end",
+        "qualified_name": "CGAL::Polyhedron_3::facets_end",
+        "brief": "past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Facet_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1164",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "facet_handles",
+        "qualified_name": "CGAL::Polyhedron_3::facet_handles",
+        "brief": "returns a range of handles over the facets.",
+        "detailed": "The value type of Facet_handles::iterator is Facet_handle .",
+        "return_type": "Facet_handles",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1170",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "edges_begin",
+        "qualified_name": "CGAL::Polyhedron_3::edges_begin",
+        "brief": "iterator over all edges.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1175",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "edges_end",
+        "qualified_name": "CGAL::Polyhedron_3::edges_end",
+        "brief": "past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1180",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "edges",
+        "qualified_name": "CGAL::Polyhedron_3::edges",
+        "brief": "returns a range of iterators over the edges.",
+        "detailed": "",
+        "return_type": "Edges",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1185",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points_begin",
+        "qualified_name": "CGAL::Polyhedron_3::points_begin",
+        "brief": "iterator over all points.",
+        "detailed": "",
+        "return_type": "Point_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1190",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points_end",
+        "qualified_name": "CGAL::Polyhedron_3::points_end",
+        "brief": "past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Point_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1195",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "points",
+        "qualified_name": "CGAL::Polyhedron_3::points",
+        "brief": "returns a range of iterators over the points.",
+        "detailed": "",
+        "return_type": "Points",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1200",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "planes_begin",
+        "qualified_name": "CGAL::Polyhedron_3::planes_begin",
+        "brief": "iterator over all plane equations.",
+        "detailed": "",
+        "return_type": "Plane_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1205",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "planes_end",
+        "qualified_name": "CGAL::Polyhedron_3::planes_end",
+        "brief": "past-the-end iterator.",
+        "detailed": "",
+        "return_type": "Plane_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1210",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "planes",
+        "qualified_name": "CGAL::Polyhedron_3::planes",
+        "brief": "returns a range of iterators over the planes.",
+        "detailed": "",
+        "return_type": "Planes",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1215",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "traits",
+        "qualified_name": "CGAL::Polyhedron_3::traits",
+        "brief": "returns the traits class.",
+        "detailed": "",
+        "return_type": "const Traits &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1220",
+        "section": "Access Member Functions"
+      },
+      {
+        "kind": "function",
+        "name": "is_closed",
+        "qualified_name": "CGAL::Polyhedron_3::is_closed",
+        "brief": "returns true if there are no border edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1231",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_pure_bivalent",
+        "qualified_name": "CGAL::Polyhedron_3::is_pure_bivalent",
+        "brief": "returns true if all vertices have exactly two incident edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1237",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_pure_trivalent",
+        "qualified_name": "CGAL::Polyhedron_3::is_pure_trivalent",
+        "brief": "returns true if all vertices have exactly three incident edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1243",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_pure_triangle",
+        "qualified_name": "CGAL::Polyhedron_3::is_pure_triangle",
+        "brief": "returns true if all facets are triangles.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1249",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_pure_quad",
+        "qualified_name": "CGAL::Polyhedron_3::is_pure_quad",
+        "brief": "returns true if all facets are quadrilaterals.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1255",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_triangle",
+        "qualified_name": "CGAL::Polyhedron_3::is_triangle",
+        "brief": "true iff the connected component denoted by h is a triangle.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_const_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1261",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "is_tetrahedron",
+        "qualified_name": "CGAL::Polyhedron_3::is_tetrahedron",
+        "brief": "true iff the connected component denoted by h is a tetrahedron.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_const_handle h) const",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1267",
+        "section": "Combinatorial Predicates"
+      },
+      {
+        "kind": "function",
+        "name": "split_facet",
+        "qualified_name": "CGAL::Polyhedron_3::split_facet",
+        "brief": "splits the facet incident to h and g into two facets with a new diagonal between the two vertices denoted by h and g respectively.",
+        "detailed": "The second (new) facet is a copy of the first facet. Returns h->next() after the operation, i.e., the new diagonal. The new face is to the right of the new diagonal, the old face is to the left. The time is proportional to the distance from h to g around the facet. h and g are incident to the same facet. h != g (no loops). h->next() != g and g->next() != h (no multi-edges).",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1295",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "join_facet",
+        "qualified_name": "CGAL::Polyhedron_3::join_facet",
+        "brief": "joins the two facets incident to h .",
+        "detailed": "The facet incident to h->opposite() gets removed. Both facets might be holes. Returns the predecessor of h around the facet. The invariant join_facet( split_facet( h, g)) returns h and keeps the polyhedron unchanged. The time is proportional to the size of the facet removed and the time to compute h->prev() . The degree of both vertices incident to h is at least three (no antennas). Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1313",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "split_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::split_vertex",
+        "brief": "splits the vertex incident to h and g into two vertices, the old vertex remains and a new copy is created, and connects them with a new edge.",
+        "detailed": "Let hnew be h->next()->opposite() after the split, i.e., a halfedge of the new edge. The split regroups the halfedges around the two vertices. The halfedge sequence hnew , g->next()->opposite() , $ \\ldots$ , h remains around the old vertex, while the halfedge sequence hnew->opposite() , h->next()->opposite() (before the split), $ \\ldots$ , g is regrouped around the new vertex. The split returns hnew , i.e., the new halfedge incident to the old vertex. The time is proportional to the distance from h to g around the vertex. h and g are incident to the same vertex. h != g (antennas are not allowed). A special application of the split is split_vertex (h,h->next()->opposite()) which is equivalent to an edge split of the halfedge h->next() that creates a new vertex on the halfedge h->next() . See also split_edge(h) below.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1340",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "join_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::join_vertex",
+        "brief": "joins the two vertices incident to h .",
+        "detailed": "The vertex denoted by h->opposite() gets removed. Returns the predecessor of h around the vertex, i.e., h->opposite()->prev() . The invariant join_vertex( split_vertex( h, g)) returns h and keeps the polyhedron unchanged. The time is proportional to the degree of the vertex removed and the time to compute h->prev() and h->opposite()->prev() . The size of both facets incident to h is at least four (no multi-edges). Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1358",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "split_edge",
+        "qualified_name": "CGAL::Polyhedron_3::split_edge",
+        "brief": "splits the halfedge h into two halfedges inserting a new vertex that is a copy of h->opposite()->vertex() .",
+        "detailed": "Is equivalent to split_vertex ( h->prev(), h->opposite())->opposite() . The call of prev() can make this method slower than a direct call of split_vertex() if the previous halfedge is already known and computing it would be costly when the halfedge data structure does not support the prev() member function. Returns the new halfedge hnew pointing to the inserted vertex. The new halfedge is followed by the old halfedge, i.e., hnew->next() == h .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1372",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "flip_edge",
+        "qualified_name": "CGAL::Polyhedron_3::flip_edge",
+        "brief": "performs an edge flip.",
+        "detailed": "It returns h after rotating the edge h one vertex in the direction of the face orientation. h != Halfedge_handle() and both facets incident to h are triangles.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1379",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "create_center_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::create_center_vertex",
+        "brief": "barycentric triangulation of h->facet() .",
+        "detailed": "Creates a new vertex, a copy of h->vertex() , and connects it to each vertex incident to h->facet() splitting h->facet() into triangles. h remains incident to the original facet, all other triangles are copies of this facet. Returns the halfedge h->next() after the operation, i.e., a halfedge pointing to the new vertex. The time is proportional to the size of the facet. h is not a border halfedge.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1395",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "erase_center_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::erase_center_vertex",
+        "brief": "reverses create_center_vertex() .",
+        "detailed": "Erases the vertex pointed to by g and all incident halfedges thereby merging all incident facets. Only g->facet() remains. The neighborhood of g->vertex() may not be triangulated, it can have larger facets. Returns the halfedge g->prev() . Thus, the invariant h == erase_center_vertex( create_center_vertex(h)) holds if h is not a border halfedge. The time is proportional to the sum of the size of all incident facets. None of the incident facets of g->vertex() is a hole. There are at least two distinct facets incident to the facets that are incident to g->vertex() . (This prevents the operation from collapsing a volume into two facets glued together with opposite orientations, such as would happen with any vertex of a tetrahedron.) Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1412",
+        "section": "Euler Operators (Combinatorial Modifications)"
+      },
+      {
+        "kind": "function",
+        "name": "split_loop",
+        "qualified_name": "CGAL::Polyhedron_3::split_loop",
+        "brief": "cuts the polyhedron into two parts along the cycle (h,i,j) (edge j runs on the backside of the three dimensional figure above).",
+        "detailed": "Three new vertices (one copy for each vertex in the cycle) and three new halfedges (one copy for each halfedge in the cycle), and two new triangles are created. h,i,j will be incident to the first new triangle. The return value will be the halfedge incident to the second new triangle which is the copy of h-opposite() . h , i , j denote distinct, consecutive vertices of the polyhedron and form a cycle: i.e., h->vertex() == i->opposite()->vertex() , $ \\ldots$ , j->vertex() == h->opposite()->vertex() . The six facets incident to (h,i,j) are all distinct.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle i, Halfedge_handle j)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1432",
+        "section": "Euler Operators Modifying Genus"
+      },
+      {
+        "kind": "function",
+        "name": "join_loop",
+        "qualified_name": "CGAL::Polyhedron_3::join_loop",
+        "brief": "glues the boundary of the two facets denoted by h and g together and returns h .",
+        "detailed": "Both facets and the vertices along the facet denoted by g gets removed. Both facets may be holes. The invariant join_loop( h, split_loop( h, i, j)) returns h and keeps the polyhedron unchanged. The facets denoted by h and g are different and have equal degree (i.e., number of edges). Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1449",
+        "section": "Euler Operators Modifying Genus"
+      },
+      {
+        "kind": "function",
+        "name": "make_hole",
+        "qualified_name": "CGAL::Polyhedron_3::make_hole",
+        "brief": "removes the incident facet of h and changes all halfedges incident to the facet into border edges.",
+        "detailed": "Returns h . See erase_facet(h) for a more generalized variant. None of the incident halfedges of the facet is a border edge. Supports_removal must be CGAL::Tag_true .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1465",
+        "section": "Modifying Facets and Holes"
+      },
+      {
+        "kind": "function",
+        "name": "fill_hole",
+        "qualified_name": "CGAL::Polyhedron_3::fill_hole",
+        "brief": "fills a hole with a newly created facet.",
+        "detailed": "Makes all border halfedges of the hole denoted by h incident to the new facet. Returns h . h.is_border() .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1473",
+        "section": "Modifying Facets and Holes"
+      },
+      {
+        "kind": "function",
+        "name": "add_vertex_and_facet_to_border",
+        "qualified_name": "CGAL::Polyhedron_3::add_vertex_and_facet_to_border",
+        "brief": "creates a new facet within the hole incident to h and g by connecting the tip of g with the tip of h with two new halfedges and a new vertex and filling this separated part of the hole with a new facet, such that the new facet is incident to g .",
+        "detailed": "Returns the halfedge of the new edge that is incident to the new facet and the new vertex. h->is_border() , g->is_border() , h != g , and g can be reached along the same hole starting with h .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1487",
+        "section": "Modifying Facets and Holes"
+      },
+      {
+        "kind": "function",
+        "name": "add_facet_to_border",
+        "qualified_name": "CGAL::Polyhedron_3::add_facet_to_border",
+        "brief": "creates a new facet within the hole incident to h and g by connecting the vertex denoted by g with the vertex denoted by h with a new halfedge and filling this separated part of the hole with a new facet, such that the new facet is incident to g .",
+        "detailed": "Returns the halfedge of the new edge that is incident to the new facet. h->is_border() , g->is_border() , h != g , h->next() != g , and g can be reached along the same hole starting with h .",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(Halfedge_handle h, Halfedge_handle g)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Halfedge_handle",
+            "name": "g",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1502",
+        "section": "Modifying Facets and Holes"
+      },
+      {
+        "kind": "function",
+        "name": "erase_facet",
+        "qualified_name": "CGAL::Polyhedron_3::erase_facet",
+        "brief": "removes the incident facet of h and changes all halfedges incident to the facet into border edges or removes them from the polyhedral surface if they were already border edges.",
+        "detailed": "If this creates isolated vertices they get removed as well. See make_hole(h) for a more specialized variant. h->is_border() == false . Supports_removal must be CGAL::Tag_true",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1526",
+        "section": "Erasing"
+      },
+      {
+        "kind": "function",
+        "name": "erase_connected_component",
+        "qualified_name": "CGAL::Polyhedron_3::erase_connected_component",
+        "brief": "removes the vertices, halfedges, and facets that belong to the connected component of h .",
+        "detailed": "Supports_removal must be CGAL::Tag_true .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1534",
+        "section": "Erasing"
+      },
+      {
+        "kind": "function",
+        "name": "keep_largest_connected_components",
+        "qualified_name": "CGAL::Polyhedron_3::keep_largest_connected_components",
+        "brief": "Erases the small connected components and the isolated vertices.",
+        "detailed": "Keep nb_components_to_keep largest connected components. Returns the number of connected components erased (ignoring isolated vertices). The polyhedron type must support vertices, halfedges, and removal operations. Note that a stronger version of this function is offered by the package PkgPolygonMeshProcessing : CGAL::Polygon_mesh_processing::keep_largest_connected_components() , which can be called since the class Polyhedron_3 is a model of the required concepts FaceListGraph and MutableFaceGraph (see BGLPolyhedral for more information).",
+        "return_type": "unsigned int",
+        "argsstring": "(unsigned int nb_components_to_keep)",
+        "params": [
+          {
+            "type": "unsigned int",
+            "name": "nb_components_to_keep",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1548",
+        "section": "Erasing"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Polyhedron_3::clear",
+        "brief": "removes all vertices, halfedges, and facets.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1553",
+        "section": "Erasing"
+      },
+      {
+        "kind": "function",
+        "name": "normalize_border",
+        "qualified_name": "CGAL::Polyhedron_3::normalize_border",
+        "brief": "sorts halfedges such that the non-border edges precede the border edges.",
+        "detailed": "For each border edge the halfedge iterator will reference the halfedge incident to the facet right before the halfedge incident to the hole.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1589",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_border_halfedges",
+        "qualified_name": "CGAL::Polyhedron_3::size_of_border_halfedges",
+        "brief": "number of border halfedges.",
+        "detailed": "last normalize_border() call still valid, see above.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1595",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "size_of_border_edges",
+        "qualified_name": "CGAL::Polyhedron_3::size_of_border_edges",
+        "brief": "number of border edges.",
+        "detailed": "Since each border edge of a polyhedral surface has exactly one border halfedge, this number is equal to size_of_border_halfedges() . last normalize_border() call still valid, see above.",
+        "return_type": "size_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1603",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "border_halfedges_begin",
+        "qualified_name": "CGAL::Polyhedron_3::border_halfedges_begin",
+        "brief": "halfedge iterator starting with the border edges.",
+        "detailed": "The range [ halfedges_begin() , border_halfedges_begin() ) denotes all non-border halfedges. The range [ border_halfedges_begin() , halfedges_end() ) denotes all border edges. last normalize_border() call still valid, see above.",
+        "return_type": "Halfedge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1613",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "border_edges_begin",
+        "qualified_name": "CGAL::Polyhedron_3::border_edges_begin",
+        "brief": "edge iterator starting with the border edges.",
+        "detailed": "The range [ edges_begin() , border_edges_begin() ) denotes all non-border edges. The range [ border_edges_begin() , edges_end() ) denotes all border edges. last normalize_border() call still valid, see above.",
+        "return_type": "Edge_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1623",
+        "section": "Operations with Border Halfedges"
+      },
+      {
+        "kind": "function",
+        "name": "inside_out",
+        "qualified_name": "CGAL::Polyhedron_3::inside_out",
+        "brief": "reverses facet orientations (incl. plane equations if supported).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1633",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "is_valid",
+        "qualified_name": "CGAL::Polyhedron_3::is_valid",
+        "brief": "returns true if the polyhedral surface is combinatorially consistent.",
+        "detailed": "If verbose is true , statistics are printed to cerr . For level == 1 the normalization of the border edges is checked too. This method checks in particular level 3 of CGAL::Halfedge_data_structure_decorator::is_valid() from CGAL::HalfedgeDS_const_decorator and that each facet is at least a triangle and that the two incident facets of a non-border edge are distinct.",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false, int level=0) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "level",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1645",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "normalized_border_is_valid",
+        "qualified_name": "CGAL::Polyhedron_3::normalized_border_is_valid",
+        "brief": "returns true if the border halfedges are in normalized representation, which is when enumerating all halfedges with the iterator: The non-border edges precede the border edges and for border edges, the second halfedge is the border halfedge.",
+        "detailed": "The halfedge iterator border_halfedges_begin() denotes the first border edge. If verbose is true , statistics are printed to cerr .",
+        "return_type": "bool",
+        "argsstring": "(bool verbose=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1657",
+        "section": "Miscellaneous"
+      },
+      {
+        "kind": "function",
+        "name": "delegate",
+        "qualified_name": "CGAL::Polyhedron_3::delegate",
+        "brief": "This is an advanced function.",
+        "detailed": "Advanced calls the Modifier_base::operator()() of the modifier m . The polyhedral surface must be valid when the modifier returns from execution.",
+        "return_type": "void",
+        "argsstring": "(CGAL::Modifier_base< HDS > &m)",
+        "params": [
+          {
+            "type": "CGAL::Modifier_base< HDS > &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "1666",
+        "section": "Miscellaneous"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_3::Facet": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_3::Facet",
+    "brief": "A facet optionally stores a plane equation, and a reference to an incident halfedge that points to the facet.",
+    "detailed": "Type tags indicate whether these member functions are supported. Note that the plane equation is not automatically computed nor maintained and should handled by the user (see Polyhedron/polyhedron_prog_planes.cpp for an example). Figure figurePolyOptionalMethods depicts the relationship between a halfedge and its incident halfedges, vertices, and facets. The circulator is assignable to the Halfedge_handle . The circulator is bidirectional if the halfedge provided to the polyhedron with the Items template argument provides a member function Halfedge::prev() , otherwise it is of the forward category. CGAL::Polyhedron_3::Vertex CGAL::Polyhedron_3::Halfedge CGAL::Polyhedron_3 <Traits>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Vertex",
+        "brief": "type of incident vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "457",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Halfedge",
+        "brief": "type of incident halfedges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "462",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Plane_3",
+        "brief": "plane equation type stored in facets.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "467",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "472",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "477",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Facet_handle",
+        "brief": "handle to facet.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "482",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_facet_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Halfedge_around_facet_circulator",
+        "brief": "circulator of halfedges around a facet.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "488",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "493",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "498",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Facet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "503",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_facet_const_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Halfedge_around_facet_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "508",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_facet_halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Supports_facet_halfedge",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "514",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_facet_plane",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Supports_facet_plane",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "520",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Facet",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::Facet",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "530",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "plane",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Plane_3 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "540",
+        "section": "Operations available if Supports_facet_plane is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "plane",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::plane",
+        "brief": "plane equation.",
+        "detailed": "",
+        "return_type": "const Plane_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "545",
+        "section": "Operations available if Supports_facet_plane is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::halfedge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "556",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::halfedge",
+        "brief": "an incident halfedge that points to the facet.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "562",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "facet_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::facet_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_around_facet_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "567",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "facet_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::facet_begin",
+        "brief": "circulator of halfedges around the facet (counterclockwise).",
+        "detailed": "",
+        "return_type": "Halfedge_around_facet_const_circulator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "572",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::set_halfedge",
+        "brief": "sets incident halfedge to h .",
+        "detailed": "h is incident, i.e., h->facet() == *this .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "578",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "facet_degree",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::facet_degree",
+        "brief": "the degree of the facet, i.e., number of edges on the boundary of this facet.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "584",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "is_triangle",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::is_triangle",
+        "brief": "returns true if the facet is a triangle.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "590",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "is_quad",
+        "qualified_name": "CGAL::Polyhedron_3::Facet::is_quad",
+        "brief": "returns true if the facet is a quadrilateral.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "596",
+        "section": "Operations available if Supports_facet_halfedge is CGAL::Tag_true"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_3::Halfedge": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_3::Halfedge",
+    "brief": "A halfedge is an oriented edge between two vertices.",
+    "detailed": "It is always paired with a halfedge pointing in the opposite direction. The Halfedge::opposite() member function returns this halfedge of opposite orientation. If a halfedge is incident to a facet the Halfedge::next() member function points to the successor halfedge around this facet. For border edges the Halfedge::next() member function points to the successor halfedge along the hole. For more than two border edges at a vertex, the next halfedge along a hole is not uniquely defined, but a consistent assignment of the next halfedge will be maintained in the data structure. An invariant is that successive assignments of the form h = h->next() cycle counterclockwise around the facet (or hole) and traverse all halfedges incident to this facet (or hole). A similar invariant is that successive assignments of the form h = h->next()->opposite() cycle clockwise around the vertex and traverse all halfedges incident to this vertex. Two circulators are provided for these circular orders. The three classes Vertex , Halfedge , and Facet of the polyhedral surface. Member functions with shaded background are mandatory. The others are optionally supported. The incidences encoded in Halfedge::opposite() and Halfedge::next() are available for each instantiation of polyhedral surfaces. The other incidences are optionally available as indicated with type tags. The Halfedge::prev() member function points to the preceding halfedge around the same facet. It is always available, though it might perform a search around the facet using the Halfedge::next() member function to find the previous halfedge if the underlying halfedge data structure does not provide an efficient Halfedge::prev() member function for halfedges. Handles to the incident vertex and facet are optionally stored. The circulators are assignable to the Halfedge_handle . The circulators are bidirectional if the halfedge provided to the polyhedron with the Items template argument provides a member function Halfedge::prev() , otherwise they are of the forward category. CGAL::Polyhedron_3::Vertex CGAL::Polyhedron_3::Facet CGAL::Polyhedron_3 <Traits> Implementation The member functions Halfedge::prev() and Halfedge::prev_on_vertex() work in constant time if Supports_halfedge_prev $ \\equiv$ CGAL::Tag_true . Otherwise both methods search for the previous halfedge around the incident facet.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Vertex",
+        "brief": "type of incident vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "178",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Facet",
+        "brief": "type of incident facets.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "183",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "188",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "193",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Facet_handle",
+        "brief": "handle to facet.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "198",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge_around_vertex_circulator",
+        "brief": "circulator of halfedges around a vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "204",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_facet_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge_around_facet_circulator",
+        "brief": "circulator of halfedges around a facet.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "210",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "215",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "220",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Facet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "225",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_const_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge_around_vertex_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "230",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_facet_const_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge_around_facet_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "235",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_prev",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Supports_halfedge_prev",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "241",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Supports_halfedge_vertex",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "247",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_halfedge_face",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Supports_halfedge_face",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "253",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::Halfedge",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "263",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::opposite",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "273",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "opposite",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::opposite",
+        "brief": "the opposite halfedge.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "278",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::next",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "283",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::next",
+        "brief": "the next halfedge around the facet.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "288",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "prev",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::prev",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "293",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "prev",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::prev",
+        "brief": "the previous halfedge around the facet.",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "298",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next_on_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::next_on_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "303",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next_on_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::next_on_vertex",
+        "brief": "the next halfedge around the vertex (clockwise).",
+        "detailed": "Is equal to h.next()-> opposite() .",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "310",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "prev_on_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::prev_on_vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "315",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "prev_on_vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::prev_on_vertex",
+        "brief": "the previous halfedge around the vertex (counterclockwise).",
+        "detailed": "Is equal to h.opposite()->prev() .",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "322",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_border",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::is_border",
+        "brief": "is true if h is a border halfedge.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "327",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_border_edge",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::is_border_edge",
+        "brief": "is true if this or the opposite halfedge is a border halfedge.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "332",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::vertex_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_around_vertex_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "337",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::vertex_begin",
+        "brief": "circulator of halfedges around the vertex (clockwise), the vertex of the halfedges being *this .",
+        "detailed": "",
+        "return_type": "Halfedge_around_vertex_const_circulator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "342",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "facet_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::facet_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_around_facet_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "347",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "facet_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::facet_begin",
+        "brief": "circulator of halfedges around the facet (counterclockwise).",
+        "detailed": "",
+        "return_type": "Halfedge_around_facet_const_circulator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "352",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_degree",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::vertex_degree",
+        "brief": "the degree of the incident vertex, i.e., number of edges emanating from this vertex.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "358",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_bivalent",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::is_bivalent",
+        "brief": "returns true if the incident vertex has exactly two incident edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "364",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_trivalent",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::is_trivalent",
+        "brief": "returns true if the incident vertex has exactly three incident edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "370",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "facet_degree",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::facet_degree",
+        "brief": "the degree of the incident facet, i.e., number of edges on the boundary of this facet.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "376",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_triangle",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::is_triangle",
+        "brief": "returns true if the incident facet is a triangle.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "382",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_quad",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::is_quad",
+        "brief": "returns true if the incident facet is a quadrilateral.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "388",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::vertex",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "398",
+        "section": "Operations available if Supports_halfedge_vertex is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::vertex",
+        "brief": "the incident vertex of the halfedge.",
+        "detailed": "",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "403",
+        "section": "Operations available if Supports_halfedge_vertex is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "facet",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::facet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Facet_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "413",
+        "section": "Operations available if Supports_halfedge_facet is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "facet",
+        "qualified_name": "CGAL::Polyhedron_3::Halfedge::facet",
+        "brief": "the incident facet of the halfedge.",
+        "detailed": "If the hafedge is a border halfedge the result is default construction of the handle.",
+        "return_type": "Facet_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "419",
+        "section": "Operations available if Supports_halfedge_facet is CGAL::Tag_true"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_3::Vertex": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_3::Vertex",
+    "brief": "A vertex optionally stores a point and a reference to an incident halfedge that points to the vertex.",
+    "detailed": "Type tags indicate whether these member functions are supported. Figure figurePolyOptionalMethods depicts the relationship between a halfedge and its incident halfedges, vertices, and facets. The circulator is assignable to the Halfedge_handle . The circulator is bidirectional if the halfedge provided to the polyhedron with the Items template argument provides a member function Halfedge::prev() , otherwise it is of the forward category. CGAL::Polyhedron_3::Halfedge CGAL::Polyhedron_3::Facet CGAL::Polyhedron_3 <Traits>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Halfedge",
+        "brief": "type of incident halfedges.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "630",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Facet",
+        "brief": "type of incident facets.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "635",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Point_3",
+        "brief": "point type stored in vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "640",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Vertex_handle",
+        "brief": "handle to vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "645",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Halfedge_handle",
+        "brief": "handle to halfedge.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "650",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Facet_handle",
+        "brief": "handle to facet.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "655",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Halfedge_around_vertex_circulator",
+        "brief": "circulator of halfedges around a vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "661",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Vertex_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "666",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Halfedge_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "671",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_const_handle",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Facet_const_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "676",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_const_circulator",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Halfedge_around_vertex_const_circulator",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "681",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Supports_vertex_halfedge",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "687",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_point",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Supports_vertex_point",
+        "brief": "$ \\equiv$ CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "693",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Vertex",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "703",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::Vertex",
+        "brief": "vertex initialized with a point.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Point &p)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "708",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_3 &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "718",
+        "section": "Operations available if Supports_vertex_point is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::point",
+        "brief": "the point.",
+        "detailed": "",
+        "return_type": "const Point_3 &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "723",
+        "section": "Operations available if Supports_vertex_point is CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::halfedge",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "733",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::halfedge",
+        "brief": "an incident halfedge that points to v .",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "739",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::vertex_begin",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Halfedge_around_vertex_circulator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "744",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_begin",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::vertex_begin",
+        "brief": "circulator of halfedges around the vertex (clockwise).",
+        "detailed": "",
+        "return_type": "Halfedge_around_vertex_const_circulator",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "749",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "set_halfedge",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::set_halfedge",
+        "brief": "sets incident halfedge to h .",
+        "detailed": "h is incident, i.e., h->vertex() == v .",
+        "return_type": "void",
+        "argsstring": "(Halfedge_handle h)",
+        "params": [
+          {
+            "type": "Halfedge_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "755",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "vertex_degree",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::vertex_degree",
+        "brief": "the degree of the vertex, i.e., number of edges emanating from this vertex.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "761",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "is_bivalent",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::is_bivalent",
+        "brief": "returns true if the vertex has exactly two incident edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "767",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "is_trivalent",
+        "qualified_name": "CGAL::Polyhedron_3::Vertex::is_trivalent",
+        "brief": "returns true if the vertex has exactly three incident edges.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_3.h",
+        "line": "773",
+        "section": "Operations available if Supports_vertex_halfedge is  CGAL::Tag_true"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_incremental_builder_3": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_incremental_builder_3",
+    "brief": "The auxiliary class Polyhedron_incremental_builder_3 supports the incremental construction of polyhedral surfaces, which is for example convenient when constructing polyhedral surfaces from file formats, such as the Object File Format (OFF) [5] , OpenInventor [7] or VRML [1] , [6] .",
+    "detailed": "Polyhedron_incremental_builder_3 needs access to the internal halfedge data structure of type HDS of the polyhedral surface. It is intended to be used within a modifier, see Modifier_base . The incremental builder might be of broader interest for other uses of the halfedge data structures, but it is specifically bound to the definition of polyhedral surfaces given here. During construction all conditions of polyhedral surfaces are checked and in case of violation an error status is set. A diagnostic message will be issued to std::cerr if the verbose flag has been set at construction time. The incremental construction starts with a list of all point coordinates and concludes with a list of all facet polygons. Edges are not explicitly specified. They are derived from the vertex incidence information provided from the facet polygons. The polygons are given as a sequence of vertex indices. The halfedge data structure HDS must support vertices (i.e., Supports_halfedge_vertex $ \\equiv$ Tag_true ). Vertices and facets can be added in arbitrary order as long as a call to add_vertex_to_facet() refers only to a vertex index that is already known. Some methods return already handles to vertices, facets, and halfedges newly constructed. They can be used to initialize additional fields, however, the incidences in the halfedge-data structure are not stable and are not allowed to be changed. The incremental builder can work in two modes: RELATIVE_INDEXING (the default), in which a polyhedral surface already contained in the halfedge data structure is ignored and all indices are relative to the newly added surface, or ABSOLUTE_INDEXING , in which all indices are absolute indices including an already existing polyhedral surface. The former mode allows to create easily independent connected components, while the latter mode allows to continue the construction of an existing surface, the absolute indexing allows to address existing vertices when creating new facets. CGAL::Polyhedron_3 <Traits> HalfedgeDS CGAL::Modifier_base Example A modifier class creates a new triangle in the halfedge data structure using the incremental builder. Example: Polyhedron/polyhedron_prog_incr_builder.cpp Show / Hide #include <CGAL/Simple_cartesian.h> #include <CGAL/Polyhedron_incremental_builder_3.h> #include <CGAL/Polyhedron_3.h> #include <cassert> // A modifier creating a triangle with the incremental builder. template < class HDS> class Build_triangle : public CGAL::Modifier_base<HDS> { public : Build_triangle() {} void operator()( HDS& hds) { // Postcondition: hds is a valid polyhedral surface. CGAL::Polyhedron_incremental_builder_3<HDS> B( hds, true ); B.begin_surface( 3, 1, 6); typedef typename HDS::Vertex Vertex; typedef typename Vertex::Point Point; B.add_vertex( Point( 0, 0, 0)); B.add_vertex( Point( 1, 0, 0)); B.add_vertex( Point( 0, 1, 0)); B.begin_facet(); B.add_vertex_to_facet( 0); B.add_vertex_to_facet( 1); B.add_vertex_to_facet( 2); B.end_facet(); B.end_surface(); } }; typedef CGAL::Simple_cartesian<double> Kernel; typedef CGAL::Polyhedron_3<Kernel> Polyhedron; typedef Polyhedron::HalfedgeDS HalfedgeDS; int main() { Polyhedron P; Build_triangle<HalfedgeDS> triangle; P. delegate ( triangle); assert( P.is_triangle( P.halfedges_begin())); return 0; }",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "@004132221152244065073077063315115223207211121350",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::@004132221152244065073077063315115223207211121350",
+        "brief": "two different indexing modes.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "106",
+        "section": "Constants"
+      },
+      {
+        "kind": "typedef",
+        "name": "HalfedgeDS",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::HalfedgeDS",
+        "brief": "halfedge data structure HDS .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "71",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::Point_3",
+        "brief": "point type of the vertex.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "76",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::size_type",
+        "brief": "size type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "81",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::Vertex_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "HalfedgeDS::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "86",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_handle",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::Halfedge_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "HalfedgeDS::Halfedge_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "91",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Facet_handle",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::Facet_handle",
+        "brief": "",
+        "detailed": "",
+        "return_type": "HalfedgeDS::Face_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "96",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_incremental_builder_3",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::Polyhedron_incremental_builder_3",
+        "brief": "stores a reference to the halfedge data structure hds of a polyhedral surface in its internal state.",
+        "detailed": "An existing polyhedral surface in hds remains unchanged. The incremental builder appends the new polyhedral surface. If verbose is true , diagnostic messages will be printed to cerr in case of malformed input data.",
+        "return_type": "",
+        "argsstring": "(HDS &hds, bool verbose=false)",
+        "params": [
+          {
+            "type": "HDS &",
+            "name": "hds",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "verbose",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "121",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "begin_surface",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::begin_surface",
+        "brief": "starts the construction.",
+        "detailed": "v is the number of new vertices to expect, f the number of new facets, and h the number of new halfedges. If h is unspecified ( == 0 ) it is estimated using Euler's equation (plus 5% for the so far unknown holes and genus of the object). These values are used to reserve space in the halfedge data structure hds . If the representation supports insertion these values do not restrict the class of constructible polyhedra. If the representation does not support insertion the object must fit into the reserved sizes. If mode is set to ABSOLUTE_INDEXING the incremental builder uses absolute indexing and the vertices of the old polyhedral surface can be used in new facets (needs preprocessing time linear in the size of the old surface). Otherwise relative indexing is used starting with new indices for the new construction.",
+        "return_type": "void",
+        "argsstring": "(size_type v, size_type f, size_type h=0, int mode=RELATIVE_INDEXING)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "h",
+            "default": "0",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "mode",
+            "default": "RELATIVE_INDEXING",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "156",
+        "section": "Surface Creation"
+      },
+      {
+        "kind": "function",
+        "name": "add_vertex",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::add_vertex",
+        "brief": "adds a new vertex for p and returns its handle.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(const Point_3 &p)",
+        "params": [
+          {
+            "type": "const Point_3 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "163",
+        "section": "Surface Creation"
+      },
+      {
+        "kind": "function",
+        "name": "begin_facet",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::begin_facet",
+        "brief": "starts a new facet and returns its handle.",
+        "detailed": "",
+        "return_type": "Facet_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "169",
+        "section": "Surface Creation"
+      },
+      {
+        "kind": "function",
+        "name": "add_vertex_to_facet",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::add_vertex_to_facet",
+        "brief": "adds a vertex with index i to the current facet.",
+        "detailed": "The first point added with add_vertex() has the index 0 if mode was set to RELATIVE_INDEXING , otherwise the first vertex in the referenced hds has the index 0.",
+        "return_type": "void",
+        "argsstring": "(size_type i)",
+        "params": [
+          {
+            "type": "size_type",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "178",
+        "section": "Surface Creation"
+      },
+      {
+        "kind": "function",
+        "name": "end_facet",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::end_facet",
+        "brief": "ends a newly constructed facet.",
+        "detailed": "Returns the handle to the halfedge incident to the new facet that points to the vertex added first. The halfedge can be safely used to traverse the halfedge cycle around the new facet.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "186",
+        "section": "Surface Creation"
+      },
+      {
+        "kind": "function",
+        "name": "end_surface",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::end_surface",
+        "brief": "ends the construction.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "191",
+        "section": "Surface Creation"
+      },
+      {
+        "kind": "function",
+        "name": "add_facet",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::add_facet",
+        "brief": "is a synonym for begin_facet() , a call to add_vertex_to_facet() for each value in the range [first,beyond) , and a call to end_facet() .",
+        "detailed": "Returns the return value of end_facet() . The value type of InputIterator is std::size_t . All indices must refer to vertices already added.",
+        "return_type": "Halfedge_handle",
+        "argsstring": "(InputIterator first, InputIterator beyond)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "206",
+        "section": "Additional Operations"
+      },
+      {
+        "kind": "function",
+        "name": "test_facet",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::test_facet",
+        "brief": "returns true if a facet described by the vertex indices in the range [first,beyond) can be successfully inserted, e.g., with add_facet(first,beyond) .",
+        "detailed": "The value type of InputIterator is std::size_t . All indices must refer to vertices already added.",
+        "return_type": "bool",
+        "argsstring": "(InputIterator first, InputIterator beyond)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "beyond",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "216",
+        "section": "Additional Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertex",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::vertex",
+        "brief": "returns handle for the vertex of index i , or Vertex_handle if there is no i -th vertex.",
+        "detailed": "",
+        "return_type": "Vertex_handle",
+        "argsstring": "(std::size_t i)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "223",
+        "section": "Additional Operations"
+      },
+      {
+        "kind": "function",
+        "name": "error",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::error",
+        "brief": "returns error status of the builder.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "228",
+        "section": "Additional Operations"
+      },
+      {
+        "kind": "function",
+        "name": "rollback",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::rollback",
+        "brief": "undoes all changes made to the halfedge data structure since the last begin_surface() in relative indexing, and deletes the whole surface in absolute indexing.",
+        "detailed": "It needs a new call to begin_surface() to start inserting again.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "236",
+        "section": "Additional Operations"
+      },
+      {
+        "kind": "function",
+        "name": "check_unconnected_vertices",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::check_unconnected_vertices",
+        "brief": "returns true if unconnected vertices are detected.",
+        "detailed": "If verbose was set to true (see the constructor above) debug information about the unconnected vertices is printed.",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "244",
+        "section": "Additional Operations"
+      },
+      {
+        "kind": "function",
+        "name": "remove_unconnected_vertices",
+        "qualified_name": "CGAL::Polyhedron_incremental_builder_3::remove_unconnected_vertices",
+        "brief": "returns true if all unconnected vertices could be removed successfully.",
+        "detailed": "This happens either if no unconnected vertices had appeared or if the halfedge data structure supports the removal of individual elements.",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_incremental_builder_3.h",
+        "line": "252",
+        "section": "Additional Operations"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_items_3": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_items_3",
+    "brief": "The class Polyhedron_items_3 is a model of the PolyhedronItems_3 concept.",
+    "detailed": "It provides definitions for vertices with points, halfedges, and faces with plane equations. The polyhedron traits class must provide the respective types for the point and the plane equation. Vertices and facets both contain a halfedge handle to an incident halfedge. Is model of PolyhedronItems_3 CGAL::Polyhedron_3 <Traits> CGAL::Polyhedron_min_items_3 CGAL::HalfedgeDS_min_items CGAL::HalfedgeDS_items_2 Example The following example program defines a new face class based on the CGAL::HalfedgeDS_face_base and adds a new color member variable. The new face class is used to replace the face definition in the CGAL::Polyhedron_items_3 class. The main function illustrates the access to the new member variable. See also the PolyhedronItems_3 concept for another illustrative example. Example: Polyhedron/polyhedron_prog_color.cpp Show / Hide #include <CGAL/Simple_cartesian.h> #include <CGAL/IO/Color.h> #include <CGAL/Polyhedron_3.h> // A face type with a color member variable. template < class Refs> struct My_face : public CGAL::HalfedgeDS_face_base<Refs> { CGAL::IO::Color color; }; // An items type using my face. struct My_items : public CGAL::Polyhedron_items_3 { template < class Refs, class Traits> struct Face_wrapper { typedef My_face<Refs> Face; }; }; typedef CGAL::Simple_cartesian<double> Kernel; typedef CGAL::Polyhedron_3<Kernel, My_items> Polyhedron; typedef Polyhedron::Halfedge_handle Halfedge_handle; int main() { Polyhedron P; Halfedge_handle h = P. make_tetrahedron (); h->facet()->color = CGAL::IO::red(); return 0; }",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "Point",
+        "qualified_name": "CGAL::Polyhedron_items_3::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Polyhedron_items_3::Vertex_wrapper< Refs, Traits >::Vertex typedef Traits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_items_3.h",
+        "line": "45",
+        "section": "Types in Polyhedron_items_3::Face_wrapper<Refs,Traits>::Vertex"
+      },
+      {
+        "kind": "variable",
+        "name": "Supports_vertex_point",
+        "qualified_name": "CGAL::Polyhedron_items_3::Supports_vertex_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Polyhedron_items_3::Vertex_wrapper< Refs, Traits >::Vertex typedef CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_items_3.h",
+        "line": "51",
+        "section": "Types in Polyhedron_items_3::Face_wrapper<Refs,Traits>::Vertex"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane",
+        "qualified_name": "CGAL::Polyhedron_items_3::Plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Traits::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_items_3.h",
+        "line": "61",
+        "section": "Types in Polyhedron_items_3::Face_wrapper<Refs,Traits>::Face"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_face_plane",
+        "qualified_name": "CGAL::Polyhedron_items_3::Supports_face_plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_items_3.h",
+        "line": "66",
+        "section": "Types in Polyhedron_items_3::Face_wrapper<Refs,Traits>::Face"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_items_3",
+        "qualified_name": "CGAL::Polyhedron_items_3::Polyhedron_items_3",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_items_3.h",
+        "line": "76",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_min_items_3": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_min_items_3",
+    "brief": "The class Polyhedron_min_items_3 is a minimal model of the PolyhedronItems_3 concept.",
+    "detailed": "It provides definitions for vertices containing points, halfedges, and faces. The polyhedron traits class must provide the respective type for the point. Vertices and facets both do not contain a halfedge handle to an incident halfedge. Is model of PolyhedronItems_3 CGAL::Polyhedron_3 <Traits> CGAL::Polyhedron_items_3 CGAL::HalfedgeDS_min_items CGAL::HalfedgeDS_items_2",
+    "members": [
+      {
+        "kind": "variable",
+        "name": "Point",
+        "qualified_name": "CGAL::Polyhedron_min_items_3::Point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Polyhedron_min_items_3::Vertex_wrapper< Refs, Traits >::Vertex typedef Traits::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_min_items_3.h",
+        "line": "33",
+        "section": "Types in Polyhedron_min_items_3::Face_wrapper<Refs,Traits>::Vertex"
+      },
+      {
+        "kind": "variable",
+        "name": "Supports_vertex_point",
+        "qualified_name": "CGAL::Polyhedron_min_items_3::Supports_vertex_point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Polyhedron_min_items_3::Vertex_wrapper< Refs, Traits >::Vertex typedef CGAL::Tag_true",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_min_items_3.h",
+        "line": "39",
+        "section": "Types in Polyhedron_min_items_3::Face_wrapper<Refs,Traits>::Vertex"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_face_plane",
+        "qualified_name": "CGAL::Polyhedron_min_items_3::Supports_face_plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Tag_false",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_min_items_3.h",
+        "line": "49",
+        "section": "Types in Polyhedron_min_items_3::Face_wrapper<Refs,Traits>::Face"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_min_items_3",
+        "qualified_name": "CGAL::Polyhedron_min_items_3::Polyhedron_min_items_3",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_min_items_3.h",
+        "line": "59",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_traits_3": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_traits_3",
+    "brief": "The class Polyhedron_traits_3 is a model of the PolyhedronTraits_3 concept.",
+    "detailed": "It defines the geometric types and primitive operations used in the polyhedral surface data structure Polyhedron_3 < PolyhedronTraits_3 > in terms of the CGAL Kernel . It keeps a local copy of the kernel which makes it suitable for kernels with local state. Is model of PolyhedronTraits_3 CGAL::Polyhedron_traits_with_normals_3 < Kernel > Implementation Since the PolyhedronTraits_3 concept is a subset of the concept Kernel , this class just forwards the relevant types and access member functions from its template argument. However, it is useful for testing sufficiency of requirements. Example Instantiation of a polyhedral surface with the Cartesian kernel based on double coordinates. Example: Polyhedron/polyhedron_prog_simple.cpp Show / Hide #include <CGAL/Simple_cartesian.h> #include <CGAL/Polyhedron_3.h> typedef CGAL::Simple_cartesian<double> Kernel; typedef CGAL::Polyhedron_3<Kernel> Polyhedron; typedef Polyhedron::Halfedge_handle Halfedge_handle; int main() { Polyhedron P; Halfedge_handle h = P. make_tetrahedron (); if ( P.is_tetrahedron(h)) return 0; return 1; }",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::Polyhedron_traits_3::Kernel",
+        "brief": "the Kernel model.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "42",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polyhedron_traits_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Polyhedron_traits_3::Plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "52",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_opposite_plane_3",
+        "qualified_name": "CGAL::Polyhedron_traits_3::Construct_opposite_plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Construct_opposite_plane_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_traits_3",
+        "qualified_name": "CGAL::Polyhedron_traits_3::Polyhedron_traits_3",
+        "brief": "default constructor, uses Kernel() as local reference to the kernel.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "69",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_traits_3",
+        "qualified_name": "CGAL::Polyhedron_traits_3::Polyhedron_traits_3",
+        "brief": "stores kernel as local reference.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Kernel &kernel)",
+        "params": [
+          {
+            "type": "const Kernel &",
+            "name": "kernel",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "75",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "construct_opposite_plane_3_object",
+        "qualified_name": "CGAL::Polyhedron_traits_3::construct_opposite_plane_3_object",
+        "brief": "forwarded to kernel .",
+        "detailed": "",
+        "return_type": "Construct_opposite_plane_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_3.h",
+        "line": "86",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Polyhedron_traits_with_normals_3": {
+    "kind": "class",
+    "name": "CGAL::Polyhedron_traits_with_normals_3",
+    "brief": "The class Polyhedron_traits_with_normals_3 is a model of the PolyhedronTraits_3 concept.",
+    "detailed": "It defines the geometric types and primitive operations used in the polyhedral surface data structure Polyhedron_3 < PolyhedronTraits_3 > . Polyhedron_traits_with_normals_3 uses the normal vector from Kernel for the plane equation in facets. It keeps a local copy of the kernel which makes it suitable for kernels with local state. Is model of PolyhedronTraits_3 CGAL::Polyhedron_traits_3 < Kernel > Example We use this traits class to instantiate a polyhedral surface with a normal vector and no plane equation for each facet. We compute the normal vector assuming exact arithmetic (integers in this example) and convex planar facets. Example: Polyhedron/polyhedron_prog_normals.cpp Show / Hide #include <CGAL/Homogeneous.h> #include <CGAL/Polyhedron_traits_with_normals_3.h> #include <CGAL/Polyhedron_3.h> #include <iostream> #include <algorithm> struct Normal_vector { template < class Facet> typename Facet::Plane_3 operator()( Facet& f) { typename Facet::Halfedge_handle h = f.halfedge(); // Facet::Plane_3 is the normal vector type. We assume the // CGAL Kernel here and use its global functions. return CGAL::cross_product( h->next()->vertex()->point() - h->vertex()->point(), h->next()->next()->vertex()->point() - h->next()->vertex()->point()); } }; typedef CGAL::Homogeneous<int> Kernel; typedef Kernel::Point_3 Point_3; typedef Kernel::Vector_3 Vector_3; typedef CGAL::Polyhedron_traits_with_normals_3<Kernel> Traits; typedef CGAL::Polyhedron_3<Traits> Polyhedron; int main() { Point_3 p( 1, 0, 0); Point_3 q( 0, 1, 0); Point_3 r( 0, 0, 1); Point_3 s( 0, 0, 0); Polyhedron P; P.make_tetrahedron( p, q, r, s); std::transform( P.facets_begin(), P.facets_end(), P.planes_begin(), Normal_vector()); CGAL::IO::set_pretty_mode( std::cout); std::copy( P.planes_begin(), P.planes_end(), std::ostream_iterator<Vector_3>( std::cout, \"\\n\" )); return 0; }",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Kernel",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::Kernel",
+        "brief": "the Kernel model.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Point_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::Plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "49",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_opposite_plane_3",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::Construct_opposite_plane_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Kernel::Construct_opposite_vector_3",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_traits_with_normals_3",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::Polyhedron_traits_with_normals_3",
+        "brief": "default constructor, uses Kernel() as local reference to the kernel.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "66",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Polyhedron_traits_with_normals_3",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::Polyhedron_traits_with_normals_3",
+        "brief": "stores kernel as local reference.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Kernel &kernel)",
+        "params": [
+          {
+            "type": "const Kernel &",
+            "name": "kernel",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "71",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "construct_opposite_plane_3_object",
+        "qualified_name": "CGAL::Polyhedron_traits_with_normals_3::construct_opposite_plane_3_object",
+        "brief": "forwarded to kernel .",
+        "detailed": "",
+        "return_type": "Construct_opposite_plane_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Polyhedron_traits_with_normals_3.h",
+        "line": "82",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolyhedronItems_3": {
+    "kind": "class",
+    "name": "PolyhedronItems_3",
+    "brief": "The PolyhedronItems_3 concept refines the HalfedgeDSItems concept. In addition to the requirements stated there, a model for this concept must fulfill the following requirements for the local PolyhedronItems_3::Vertex_wrapper<Refs,Traits>::Vertex type and PolyhedronItems_3::Face_wrapper<Refs,Traits>::Face type in order to support the point for vertices and the optional plane equation for facets. Note that the items class uses face instead of facet. Only the polyhedral surface renames faces to facets.",
+    "detailed": "Refines HalfedgeDSItems Has models CGAL::Polyhedron_items_3 CGAL::Polyhedron_min_items_3 CGAL::Polyhedron_items_with_id_3 CGAL::Polyhedron_3 <Traits> HalfedgeDSItems CGAL::HalfedgeDS_items_2 CGAL::HalfedgeDS_vertex_base<Refs> CGAL::HalfedgeDS_halfedge_base<Refs> CGAL::HalfedgeDS_face_base<Refs> Example We define our own items class based on the available CGAL::HalfedgeDS_face_base base class for faces. We derive the the Halfedge_wrapper without further modifications from the CGAL::HalfedgeDS_items_2 , replace the Face_wrapper definition with our new definition, and also replace the Vertex_wrapper with a definition that uses Point_3 instead of Point_2 as point type. The result is a model for the PolyhedronItems_3 concept similar to the available CGAL::Polyhedron_items_3 class. See also there for another illustrative example. #include <CGAL/HalfedgeDS_bases.h> struct My_items : public CGAL::HalfedgeDS_items_2 { template < class Refs, class Traits> struct Vertex_wrapper { typedef typename Traits::Point_3 Point; typedef CGAL::HalfedgeDS_vertex_base< Refs, CGAL::Tag_true, Point> Vertex; }; template < class Refs, class Traits> struct Face_wrapper { typedef typename Traits::Plane_3 Plane; typedef CGAL::HalfedgeDS_face_base< Refs, CGAL::Tag_true, Plane> Face; }; };",
+    "members": []
+  },
+  "PolyhedronItems_3::Face": {
+    "kind": "class",
+    "name": "PolyhedronItems_3::Face",
+    "brief": "The PolyhedronItems_3::Face concept refines the HalfedgeDSItems::Face concept. This concept adds the requirement for the support of the geometry.",
+    "detailed": "Refines HalfedgeDSItems::Face",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Plane",
+        "qualified_name": "PolyhedronItems_3::Face::Plane",
+        "brief": "plane type stored in faces.",
+        "detailed": "A HalfedgeDS has no dimension, so this type is named Plane and not Plane_3 .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "122",
+        "section": "Types in PolyhedronItems_3::Vertex_wrapper<Refs,Traits>::Face"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_face_plane",
+        "qualified_name": "PolyhedronItems_3::Face::Supports_face_plane",
+        "brief": "either CGAL::Tag_true or CGAL::Tag_false .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "126",
+        "section": "Types in PolyhedronItems_3::Vertex_wrapper<Refs,Traits>::Face"
+      },
+      {
+        "kind": "function",
+        "name": "plane",
+        "qualified_name": "PolyhedronItems_3::Face::plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Plane &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "131",
+        "section": "Only required when Supports_face_plane == Tag_true"
+      },
+      {
+        "kind": "function",
+        "name": "plane",
+        "qualified_name": "PolyhedronItems_3::Face::plane",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Plane &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "132",
+        "section": "Only required when Supports_face_plane == Tag_true"
+      }
+    ]
+  },
+  "PolyhedronItems_3::Vertex": {
+    "kind": "class",
+    "name": "PolyhedronItems_3::Vertex",
+    "brief": "The PolyhedronItems_3::Vertex concept refines the HalfedgeDSItems::Vertex concept. This concept adds the requirement for the support of the geometry.",
+    "detailed": "Refines HalfedgeDSItems::Vertex",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "PolyhedronItems_3::Vertex::Point",
+        "brief": "point type stored in vertices.",
+        "detailed": "A HalfedgeDS has no dimension, so this type is named Point and not Point_3",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "79",
+        "section": "Types in PolyhedronItems_3::Vertex_wrapper<Refs,Traits>::Vertex"
+      },
+      {
+        "kind": "typedef",
+        "name": "Supports_vertex_point",
+        "qualified_name": "PolyhedronItems_3::Vertex::Supports_vertex_point",
+        "brief": "$\\equiv$ CGAL::Tag_true . A point is always required.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "82",
+        "section": "Types in PolyhedronItems_3::Vertex_wrapper<Refs,Traits>::Vertex"
+      },
+      {
+        "kind": "function",
+        "name": "Vertex",
+        "qualified_name": "PolyhedronItems_3::Vertex::Vertex",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "89",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Vertex",
+        "qualified_name": "PolyhedronItems_3::Vertex::Vertex",
+        "brief": "Constructor from a point.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Point)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "92",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "PolyhedronItems_3::Vertex::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "97",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "PolyhedronItems_3::Vertex::point",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/PolyhedronItems_3.h",
+        "line": "98",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PolyhedronTraits_3": {
+    "kind": "class",
+    "name": "PolyhedronTraits_3",
+    "brief": "Required types and member functions for the PolyhedronTraits_3 concept. This geometric traits concept is used in the polyhedral surface data structure CGAL::Polyhedron_3 <Traits> . Any CGAL kernel is a model of this concept and can be used directly as template argument.",
+    "detailed": "Refines CopyConstructible Assignable Has models All models of the Kernel concept, e.g. CGAL::Simple_cartesian<FieldNumberType> CGAL::Polyhedron_traits_3 <Kernel> CGAL::Polyhedron_traits_with_normals_3 <Kernel> CGAL::Polyhedron_3 <Traits>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "PolyhedronTraits_3::Point_3",
+        "brief": "point type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronTraits_3.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Plane_3",
+        "qualified_name": "PolyhedronTraits_3::Plane_3",
+        "brief": "plane equation.",
+        "detailed": "Even if plane equations are not supported with a particular polyhedral surface this type has to be defined (some dummy type).",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronTraits_3.h",
+        "line": "39",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_opposite_plane_3",
+        "qualified_name": "PolyhedronTraits_3::Construct_opposite_plane_3",
+        "brief": "is an unary function object that reverses the plane orientation.",
+        "detailed": "Must provide Plane_3 operator()(Plane_3 plane) that returns the reversed plane. Required only if plane equations are supported and the inside_out() method is used to reverse the polyhedral surface orientation.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PolyhedronTraits_3.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "PolyhedronTraits_3",
+        "qualified_name": "PolyhedronTraits_3::PolyhedronTraits_3",
+        "brief": "copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PolyhedronTraits_3 &traits2)",
+        "params": [
+          {
+            "type": "const PolyhedronTraits_3 &",
+            "name": "traits2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolyhedronTraits_3.h",
+        "line": "58",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "PolyhedronTraits_3::operator=",
+        "brief": "assignment.",
+        "detailed": "",
+        "return_type": "PolyhedronTraits_3 &",
+        "argsstring": "(const PolyhedronTraits_3 &traits2)",
+        "params": [
+          {
+            "type": "const PolyhedronTraits_3 &",
+            "name": "traits2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/PolyhedronTraits_3.h",
+        "line": "64",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "construct_opposite_plane_3_object",
+        "qualified_name": "PolyhedronTraits_3::construct_opposite_plane_3_object",
+        "brief": "returns an instance of this function object.",
+        "detailed": "",
+        "return_type": "Construct_opposite_plane_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/PolyhedronTraits_3.h",
+        "line": "75",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "CGAL::IO": {
+    "kind": "namespace",
+    "name": "CGAL::IO",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

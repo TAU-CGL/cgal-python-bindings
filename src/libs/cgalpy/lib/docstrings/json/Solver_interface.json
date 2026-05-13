@@ -1,0 +1,5058 @@
+{
+  "CGAL::Eigen_diagonalize_traits": {
+    "kind": "class",
+    "name": "CGAL::Eigen_diagonalize_traits",
+    "brief": "The class Eigen_diagonalize_traits provides an interface to the diagonalization of covariance matrices of Eigen.",
+    "detailed": "Eigen version 3.1 (or later) must be available on the system. FT Number type dim Dimension of the matrices and vectors Is model of DiagonalizeTraits https://eigen.tuxfamily.org/index.php?title=Main_Page",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "RFT",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::RFT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "internal::Restricted_FT< FT >::type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "EigenMatrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::EigenMatrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen::Matrix< RFT, dim, dim >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "EigenVector",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::EigenVector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen::Matrix< RFT, dim, 1 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "68",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< FT, dim >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::Matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< FT, dim *dim >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Covariance_matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::Covariance_matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< FT,(dim *(dim+1)/2)>",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "64",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "construct_covariance_matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::construct_covariance_matrix",
+        "brief": "Construct the covariance matrix.",
+        "detailed": "",
+        "return_type": "EigenMatrix",
+        "argsstring": "(const Covariance_matrix &cov)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "diagonalize_selfadjoint_matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::diagonalize_selfadjoint_matrix",
+        "brief": "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the selfadjoint matrix represented by m .",
+        "detailed": "Eigenvalues are sorted by increasing order. true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(EigenMatrix &m, EigenMatrix &eigenvectors, EigenVector &eigenvalues)",
+        "params": [
+          {
+            "type": "EigenMatrix &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EigenMatrix &",
+            "name": "eigenvectors",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "EigenVector &",
+            "name": "eigenvalues",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "93",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "diagonalize_selfadjoint_covariance_matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::diagonalize_selfadjoint_covariance_matrix",
+        "brief": "Fill eigenvalues with the eigenvalues of the covariance matrix represented by cov .",
+        "detailed": "Eigenvalues are sorted by increasing order. true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Covariance_matrix &cov, Vector &eigenvalues)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "eigenvalues",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "119",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "diagonalize_selfadjoint_covariance_matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::diagonalize_selfadjoint_covariance_matrix",
+        "brief": "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the covariance matrix represented by cov .",
+        "detailed": "Eigenvalues are sorted by increasing order. true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Covariance_matrix &cov, Vector &eigenvalues, Matrix &eigenvectors)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "eigenvalues",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Matrix &",
+            "name": "eigenvectors",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "142",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extract_largest_eigenvector_of_covariance_matrix",
+        "qualified_name": "CGAL::Eigen_diagonalize_traits::extract_largest_eigenvector_of_covariance_matrix",
+        "brief": "Extract the eigenvector associated to the largest eigenvalue of the covariance matrix represented by cov .",
+        "detailed": "true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Covariance_matrix &cov, Vector &normal)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "normal",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_diagonalize_traits.h",
+        "line": "179",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_matrix": {
+    "kind": "struct",
+    "name": "CGAL::Eigen_matrix",
+    "brief": "The class Eigen_matrix is a wrapper around Eigen matrix type Eigen::Matrix .",
+    "detailed": "Is model of SvdTraits::Matrix T Number type. D1 Number of rows, or Dynamic D2 Number of columns, or Dynamic CGAL::Eigen_vector <T> CGAL::Eigen_sparse_matrix <T> CGAL::Eigen_sparse_symmetric_matrix <T>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "EigenType",
+        "qualified_name": "CGAL::Eigen_matrix::EigenType",
+        "brief": "The internal matrix type from Eigen.",
+        "detailed": "",
+        "return_type": "::Eigen::Matrix< FT, D1, D2 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "43",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_matrix",
+        "qualified_name": "CGAL::Eigen_matrix::Eigen_matrix",
+        "brief": "Constructs a null matrix.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "46",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_matrix",
+        "qualified_name": "CGAL::Eigen_matrix::Eigen_matrix",
+        "brief": "Constructs an uninitialized matrix with nr rows and nc columns.",
+        "detailed": "This is useful for dynamic-size matrices. For fixed-size matrices, it is redundant to pass these parameters.",
+        "return_type": "",
+        "argsstring": "(std::size_t nr, std::size_t nc)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "nr",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "nc",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_matrix",
+        "qualified_name": "CGAL::Eigen_matrix::Eigen_matrix",
+        "brief": "Constructs a matrix from an Eigen matrix.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const EigenType &b)",
+        "params": [
+          {
+            "type": "const EigenType &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "54",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_rows",
+        "qualified_name": "CGAL::Eigen_matrix::number_of_rows",
+        "brief": "Returns the matrix number of rows.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "57",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_columns",
+        "qualified_name": "CGAL::Eigen_matrix::number_of_columns",
+        "brief": "Returns the matrix number of columns.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Eigen_matrix::operator()",
+        "brief": "Returns the value of the matrix at position (i,j).",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(std::size_t i, std::size_t j) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set",
+        "qualified_name": "CGAL::Eigen_matrix::set",
+        "brief": "Writes access to a matrix coefficient: a_ij <- val .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t i, std::size_t j, FT value)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "eigen_object",
+        "qualified_name": "CGAL::Eigen_matrix::eigen_object",
+        "brief": "Returns the internal matrix, with type EigenType .",
+        "detailed": "",
+        "return_type": "const EigenType &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_matrix.h",
+        "line": "68",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_solver_traits": {
+    "kind": "class",
+    "name": "CGAL::Eigen_solver_traits",
+    "brief": "The class Eigen_solver_traits provides an interface to the sparse solvers of Eigen.",
+    "detailed": "Eigen version 3.1 (or later) must be available on the system. Is model of SparseLinearAlgebraWithFactorTraits_d NormalEquationSparseLinearAlgebraTraits_d EigenSolverT A sparse solver of Eigen. The default solver is the iterative bi-conjugate gradient stabilized solver Eigen::BiCGSTAB for double . CGAL::Eigen_sparse_matrix <T> CGAL::Eigen_sparse_symmetric_matrix <T> CGAL::Eigen_vector <T> https://eigen.tuxfamily.org/index.php?title=Main_Page Instantiation Example The instantiation of this class assumes an Eigen sparse solver is provided. Here are few examples: typedef CGAL::Eigen_sparse_matrix<double>::EigenType EigenMatrix; //iterative general solver typedef CGAL::Eigen_solver_traits< Eigen::BiCGSTAB<EigenMatrix> > Iterative_general_solver; //iterative symmetric solver typedef CGAL::Eigen_solver_traits< Eigen::ConjugateGradient<EigenMatrix> > Iterative_symmetric_solver; //direct symmetric solver typedef CGAL::Eigen_solver_traits< Eigen::SimplicialCholesky<EigenMatrix> > Direct_symmetric_solver;",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::Solver",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EigenSolverT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "109",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Eigen_solver_traits::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Scalar",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "110",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Eigen_solver_traits::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "CGAL::Eigen_vector < NT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Index",
+        "qualified_name": "CGAL::Eigen_solver_traits::Index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen::DenseIndex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "115",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "CGAL::Eigen_solver_traits::Matrix",
+        "brief": "If T is Eigen::ConjugateGradient<M> or Eigen::SimplicialCholesky<M> , Matrix is CGAL::Eigen_sparse_symmetric_matrix <T> , and CGAL::Eigen_sparse_matrix <T> otherwise.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "120",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::solver",
+        "brief": "Returns a reference to the internal Eigen solver.",
+        "detailed": "This function can be used for example to set specific parameters of the solver.",
+        "return_type": "EigenSolverT &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "136",
+        "section": "Operations"
+      },
+      {
+        "kind": "typedef",
+        "name": "Scalar",
+        "qualified_name": "CGAL::Eigen_solver_traits::Scalar",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EigenSolverT::Scalar",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "102",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_mat",
+        "qualified_name": "CGAL::Eigen_solver_traits::m_mat",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Matrix::EigenType *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "228",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_solver_sptr",
+        "qualified_name": "CGAL::Eigen_solver_traits::m_solver_sptr",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::shared_ptr< EigenSolverT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "229",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_solver_traits",
+        "qualified_name": "CGAL::Eigen_solver_traits::Eigen_solver_traits",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "129",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::linear_solver",
+        "brief": "Solve the sparse linear system $ A \\times X = B $ .",
+        "detailed": "Return true on success. The solution is then $ (1/D) \\times X $ . A.row_dimension() == B.dimension(). A.column_dimension() == X.dimension().",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, const Vector &B, Vector &X, NT &D)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "145",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "factor",
+        "qualified_name": "CGAL::Eigen_solver_traits::factor",
+        "brief": "Factorize the sparse matrix $ A $ .",
+        "detailed": "This factorization is used in linear_solver() to solve the system for different right-hand side vectors. See linear_solver() for the description of $ D $ . true if the factorization is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, NT &D)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "164",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::linear_solver",
+        "brief": "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in factor() .",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "176",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::linear_solver",
+        "brief": "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in factor() .",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "186",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_factor",
+        "qualified_name": "CGAL::Eigen_solver_traits::normal_equation_factor",
+        "brief": "Factorize the sparse matrix $ A^t \\times A$ , where $ A^t $ is the transpose matrix of $ A $ .",
+        "detailed": "This factorization is used in normal_equation_solver() to solve the system for different right-hand side vectors. true if the factorization is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "198",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::normal_equation_solver",
+        "brief": "Solve the sparse linear system $ A^t \\times A \\times X = A^t \\times B $ , with $ A $ being the matrix provided in # normal_equation_factor() , and $ A^t $ its transpose matrix.",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "210",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits::normal_equation_solver",
+        "brief": "Equivalent to a call to normal_equation_factor(A) followed by a call to normal_equation_solver(B, X) .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "220",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >": {
+    "kind": "class",
+    "name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >",
+    "brief": "",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Index",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::Index",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen::DenseIndex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "115",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "EigenSolverT",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::EigenSolverT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen::BiCGSTAB< Eigen_sparse_matrix < double >::EigenType >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "238",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Scalar",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::Scalar",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EigenSolverT::Scalar",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "239",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Solver",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::Solver",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EigenSolverT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "243",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Scalar",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "244",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::Matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "246",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen_vector < Scalar >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "251",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_solver_sptr",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::m_solver_sptr",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::shared_ptr< EigenSolverT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "283",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_mat",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::m_mat",
+        "brief": "",
+        "detailed": "",
+        "return_type": "const Matrix::EigenType *",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "228",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_solver_traits",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::Eigen_solver_traits",
+        "brief": "Constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "256",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "solver",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::solver",
+        "brief": "Returns a reference to the internal Eigen solver.",
+        "detailed": "This function can be used for example to set specific parameters of the solver.",
+        "return_type": "EigenSolverT &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "260",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::linear_solver",
+        "brief": "Solve the sparse linear system $ A \\times X = B $ .",
+        "detailed": "Return true on success. The solution is then $ (1/D) \\times X $ . A.row_dimension() == B.dimension(). A.column_dimension() == X.dimension().",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, const Vector &B, Vector &X, NT &D)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "267",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "factor",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::factor",
+        "brief": "Factorize the sparse matrix $ A $ .",
+        "detailed": "This factorization is used in linear_solver() to solve the system for different right-hand side vectors. See linear_solver() for the description of $ D $ . true if the factorization is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, NT &D)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "164",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_factor",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::normal_equation_factor",
+        "brief": "Factorize the sparse matrix $ A^t \\times A$ , where $ A^t $ is the transpose matrix of $ A $ .",
+        "detailed": "This factorization is used in normal_equation_solver() to solve the system for different right-hand side vectors. true if the factorization is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "198",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_solver",
+        "qualified_name": "CGAL::Eigen_solver_traits< Eigen::BiCGSTAB< Eigen_sparse_matrix< double >::EigenType > >::normal_equation_solver",
+        "brief": "Solve the sparse linear system $ A^t \\times A \\times X = A^t \\times B $ , with $ A $ being the matrix provided in # normal_equation_factor() , and $ A^t $ its transpose matrix.",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_solver_traits.h",
+        "line": "210",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_sparse_matrix": {
+    "kind": "struct",
+    "name": "CGAL::Eigen_sparse_matrix",
+    "brief": "The class Eigen_sparse_matrix is a wrapper around Eigen matrix type Eigen::SparseMatrix that represents general matrices, be they symmetric or not.",
+    "detailed": "Is model of SparseLinearAlgebraTraits_d::Matrix T Number type. CGAL::Eigen_vector <T> CGAL::Eigen_matrix <T> CGAL::Eigen_sparse_symmetric_matrix <T>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "EigenType",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::EigenType",
+        "brief": "The internal matrix type from Eigen.",
+        "detailed": "",
+        "return_type": "Eigen::SparseMatrix< T >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "T",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triplet",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Triplet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen::Triplet< T, int >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "290",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_already_built",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::m_is_already_built",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "288",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_triplets",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::m_triplets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Triplet >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "291",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::m_matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "EigenType",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "293",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m_is_symmetric",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::m_is_symmetric",
+        "brief": "",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "296",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Eigen_sparse_matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const EigenType &et)",
+        "params": [
+          {
+            "type": "const EigenType &",
+            "name": "et",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "49",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Eigen_sparse_matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "55",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Eigen_sparse_matrix",
+        "brief": "Create a square matrix initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(std::size_t dim, bool is_symmetric=false)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "dim",
+            "default": "",
+            "brief": "Matrix dimension."
+          },
+          {
+            "type": "bool",
+            "name": "is_symmetric",
+            "default": "false",
+            "brief": "Symmetric/hermitian?"
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "58",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Eigen_sparse_matrix",
+        "brief": "Create a square matrix initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int dim, bool is_symmetric=false)",
+        "params": [
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "brief": "Matrix dimension."
+          },
+          {
+            "type": "bool",
+            "name": "is_symmetric",
+            "default": "false",
+            "brief": "Symmetric/hermitian?"
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Eigen_sparse_matrix",
+        "brief": "Create a rectangular matrix initialized with zeros.",
+        "detailed": "rows == columns if is_symmetric is true.",
+        "return_type": "",
+        "argsstring": "(std::size_t rows, std::size_t columns, bool is_symmetric=false)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "rows",
+            "default": "",
+            "brief": "Number of rows."
+          },
+          {
+            "type": "std::size_t",
+            "name": "columns",
+            "default": "",
+            "brief": "Number of columns."
+          },
+          {
+            "type": "bool",
+            "name": "is_symmetric",
+            "default": "false",
+            "brief": "Symmetric/hermitian?"
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "86",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::swap",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Eigen_sparse_matrix &other)",
+        "params": [
+          {
+            "type": "Eigen_sparse_matrix &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "104",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "~Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::~Eigen_sparse_matrix",
+        "brief": "Delete this object and the wrapped matrix.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "113",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::Eigen_sparse_matrix",
+        "brief": "Create a rectangular matrix initialized with zeros.",
+        "detailed": "rows == columns if is_symmetric is true.",
+        "return_type": "",
+        "argsstring": "(int rows, int columns, bool is_symmetric=false)",
+        "params": [
+          {
+            "type": "int",
+            "name": "rows",
+            "default": "",
+            "brief": "Number of rows."
+          },
+          {
+            "type": "int",
+            "name": "columns",
+            "default": "",
+            "brief": "Number of columns."
+          },
+          {
+            "type": "bool",
+            "name": "is_symmetric",
+            "default": "false",
+            "brief": "Symmetric/hermitian?"
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "118",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "row_dimension",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::row_dimension",
+        "brief": "Return the matrix number of rows.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "137",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "column_dimension",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::column_dimension",
+        "brief": "Return the matrix number of columns.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "139",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_coef",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::set_coef",
+        "brief": "Write access to a matrix coefficient: a_ij <- val.",
+        "detailed": "Users can optimize calls to this function by setting 'new_coef' to true if the coefficient does not already exist in the matrix. For symmetric matrices, Eigen_sparse_matrix only stores the lower triangle and set_coef() does nothing if (i, j) belongs to the upper triangle. 0 <= i < row_dimension() . 0 <= j < column_dimension() .",
+        "return_type": "void",
+        "argsstring": "(std::size_t i_, std::size_t j_, T val, bool new_coef=false)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "j_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "new_coef",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "151",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "add_coef",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::add_coef",
+        "brief": "Write access to a matrix coefficient: a_ij <- a_ij + val.",
+        "detailed": "For symmetric matrices, Eigen_sparse_matrix only stores the lower triangle add_coef() does nothing if (i, j) belongs to the upper triangle. 0 <= i < row_dimension() . 0 <= j < column_dimension() .",
+        "return_type": "void",
+        "argsstring": "(std::size_t i_, std::size_t j_, T val)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "j_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "T",
+            "name": "val",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "186",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "get_coef",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::get_coef",
+        "brief": "Read access to a matrix coefficient.",
+        "detailed": "Complexity: $O(log(n))$ if the matrix is already built. $O(n)$ if the matrix is not built. n being the number of entries in the matrix. 0 <= i < row_dimension() . 0 <= j < column_dimension() .",
+        "return_type": "NT",
+        "argsstring": "(std::size_t i_, std::size_t j_) const",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i_",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "std::size_t",
+            "name": "j_",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "211",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "eigen_object",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::eigen_object",
+        "brief": "Return the internal matrix, with type EigenType .",
+        "detailed": "",
+        "return_type": "const EigenType &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "246",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "eigen_object",
+        "qualified_name": "CGAL::Eigen_sparse_matrix::eigen_object",
+        "brief": "Return the internal matrix, with type EigenType .",
+        "detailed": "",
+        "return_type": "EigenType &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "259",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_sparse_symmetric_matrix": {
+    "kind": "struct",
+    "name": "CGAL::Eigen_sparse_symmetric_matrix",
+    "brief": "The class Eigen_sparse_symmetric_matrix is a wrapper around Eigen matrix type Eigen::SparseMatrix .",
+    "detailed": "Since the matrix is symmetric, only the lower triangle part is stored. Is model of SparseLinearAlgebraTraits_d::Matrix T Number type. CGAL::Eigen_vector <T> CGAL::Eigen_sparse_matrix <T>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_symmetric_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_symmetric_matrix::Eigen_sparse_symmetric_matrix",
+        "brief": "Create a square symmetric matrix initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(int dim)",
+        "params": [
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "brief": "Matrix dimension."
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "320",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_sparse_symmetric_matrix",
+        "qualified_name": "CGAL::Eigen_sparse_symmetric_matrix::Eigen_sparse_symmetric_matrix",
+        "brief": "Create a square symmetric matrix initialized with zeros.",
+        "detailed": "rows == columns.",
+        "return_type": "",
+        "argsstring": "(int rows, int columns)",
+        "params": [
+          {
+            "type": "int",
+            "name": "rows",
+            "default": "",
+            "brief": "Number of rows."
+          },
+          {
+            "type": "int",
+            "name": "columns",
+            "default": "",
+            "brief": "Number of columns."
+          }
+        ],
+        "file": "CGAL/Eigen_sparse_matrix.h",
+        "line": "327",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_svd": {
+    "kind": "class",
+    "name": "CGAL::Eigen_svd",
+    "brief": "The class Eigen_svd provides an algorithm to solve in the least square sense a linear system with a singular value decomposition using thirdpartyEigen.",
+    "detailed": "Is model of SvdTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "CGAL::Eigen_svd::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "double",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_svd.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "CGAL::Eigen_svd::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen_vector < FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_svd.h",
+        "line": "44",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "CGAL::Eigen_svd::Matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen_matrix < FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_svd.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "solve",
+        "qualified_name": "CGAL::Eigen_svd::solve",
+        "brief": "Solves the system $ MX=B$ (in the least square sense if $ M$ is not square) using a singular value decomposition.The solution is stored in $ B$ .",
+        "detailed": "the condition number of $ M$",
+        "return_type": "FT",
+        "argsstring": "(const Matrix &M, Vector &B)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "M",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_svd.h",
+        "line": "52",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::Eigen_vector": {
+    "kind": "class",
+    "name": "CGAL::Eigen_vector",
+    "brief": "The class Eigen_vector is a wrapper around Eigen vector type , which is a simple array of numbers.",
+    "detailed": "Is model of SvdTraits::Vector SparseLinearAlgebraTraits_d::Vector T Number type. CGAL::Eigen_solver_traits <T> CGAL::Eigen_sparse_matrix <T> CGAL::Eigen_sparse_symmetric_matrix <T>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "CGAL::Eigen_vector::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "T",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "EigenType",
+        "qualified_name": "CGAL::Eigen_vector::EigenType",
+        "brief": "The internal vector type from Eigen.",
+        "detailed": "",
+        "return_type": "::Eigen::Matrix< T, D, 1 >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Eigen_vector::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen_vector &",
+        "argsstring": "(const Eigen_vector &other)",
+        "params": [
+          {
+            "type": "const Eigen_vector &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "51",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator=",
+        "qualified_name": "CGAL::Eigen_vector::operator=",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Eigen_vector &",
+        "argsstring": "(const EigenType &other)",
+        "params": [
+          {
+            "type": "const EigenType &",
+            "name": "other",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_vector",
+        "qualified_name": "CGAL::Eigen_vector::Eigen_vector",
+        "brief": "Constructs a null vector.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_vector",
+        "qualified_name": "CGAL::Eigen_vector::Eigen_vector",
+        "brief": "Create a vector initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(std::size_t dimension)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "dimension",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "65",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "Eigen_vector",
+        "qualified_name": "CGAL::Eigen_vector::Eigen_vector",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Eigen_vector &toCopy)",
+        "params": [
+          {
+            "type": "const Eigen_vector &",
+            "name": "toCopy",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "72",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "~Eigen_vector",
+        "qualified_name": "CGAL::Eigen_vector::~Eigen_vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "74",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "CGAL::Eigen_vector::dimension",
+        "brief": "Return the vector's number of coefficients.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "77",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "eigen_object",
+        "qualified_name": "CGAL::Eigen_vector::eigen_object",
+        "brief": "Return the internal vector wrapped by this object.",
+        "detailed": "",
+        "return_type": "const EigenType &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "80",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "eigen_object",
+        "qualified_name": "CGAL::Eigen_vector::eigen_object",
+        "brief": "Return the internal vector wrapped by this object.",
+        "detailed": "",
+        "return_type": "EigenType &",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "83",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set",
+        "qualified_name": "CGAL::Eigen_vector::set",
+        "brief": "Write access to a vector coefficient: a_i <- value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::size_t i, NT value)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "86",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vector",
+        "qualified_name": "CGAL::Eigen_vector::vector",
+        "brief": "Return a pointer to the data array of this vector.",
+        "detailed": "",
+        "return_type": "NT *",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Eigen_vector.h",
+        "line": "92",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::GLPK_mixed_integer_program_traits": {
+    "kind": "class",
+    "name": "CGAL::GLPK_mixed_integer_program_traits",
+    "brief": "This class provides an interface for formulating and solving constrained or unconstrained mixed integer programs using thirdpartyGLPK, which must be available on the system.",
+    "detailed": "For better performance, please consider using CGAL::SCIP_mixed_integer_program_traits , or derive a new model from CGAL::Mixed_integer_program_traits . Is model of MixedIntegerProgramTraits SCIP_mixed_integer_program_traits",
+    "members": []
+  },
+  "CGAL::Linear_constraint": {
+    "kind": "class",
+    "name": "CGAL::Linear_constraint",
+    "brief": "The linear constraint of a mixed integer program.",
+    "detailed": "Is model of MixedIntegerProgramLinearConstraint",
+    "members": []
+  },
+  "CGAL::Linear_objective": {
+    "kind": "class",
+    "name": "CGAL::Linear_objective",
+    "brief": "The linear objective of a mixed integer program.",
+    "detailed": "Is model of MixedIntegerProgramLinearObjective",
+    "members": []
+  },
+  "CGAL::Mixed_integer_program_traits": {
+    "kind": "class",
+    "name": "CGAL::Mixed_integer_program_traits",
+    "brief": "The class CGAL::Mixed_integer_program_traits provides an interface for formulating and solving (constrained or unconstrained) mixed integer programs.",
+    "detailed": "It can also be used for general linear programs. The solve() function is virtual and thus this class cannot be instantiated directly. Client code should use the inherited classes, i.e., CGAL::GLPK_mixed_integer_program_traits or CGAL::SCIP_mixed_integer_program_traits . Alternatively, use CGAL::Mixed_integer_program_traits as a base to derive a new model (using e.g., CBC , Gurobi for better performance). Is model of MixedIntegerProgramTraits",
+    "members": []
+  },
+  "CGAL::OSQP_quadratic_program_traits": {
+    "kind": "class",
+    "name": "CGAL::OSQP_quadratic_program_traits",
+    "brief": "wraps the external OSQP solver.",
+    "detailed": "This class provides an interface for formulating and solving constrained or unconstrained quadratic programs using the OSQP library, which must be available on the system. FT number type that FieldNumberType The FT type is provided for convenience. Internally, this FT type is converted to OSQPFloat type that can be set either to float or double . By default, the double type is used. After the optimization is complete, the OSQPFloat type is converted back to FT . See more about OSQPFloat here . Is model of QuadraticProgramTraits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Triplet",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::Triplet",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::tuple< std::size_t, std::size_t, FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "56",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "n",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::n",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "59",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "m",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::m",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "60",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "P_vec",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::P_vec",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Triplet >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "A_vec",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::A_vec",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< Triplet >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "62",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "q_vec",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::q_vec",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "l_vec",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::l_vec",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "variable",
+        "name": "u_vec",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::u_vec",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< FT >",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "63",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "OSQP_quadratic_program_traits",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::OSQP_quadratic_program_traits",
+        "brief": "Default constructor",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "67",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "OSQP_quadratic_program_traits",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::OSQP_quadratic_program_traits",
+        "brief": "Constructor.",
+        "detailed": "n the number of variables",
+        "return_type": "",
+        "argsstring": "(const std::size_t n)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "OSQP_quadratic_program_traits",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::OSQP_quadratic_program_traits",
+        "brief": "Constructor.",
+        "detailed": "n the number of variables m the number of constraints",
+        "return_type": "",
+        "argsstring": "(const std::size_t n, const std::size_t m)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "82",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::clear",
+        "brief": "Resets the problem, removing all existing entries and setting sizes to 0 .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "95",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::resize",
+        "brief": "Changes the number of variables and the number of constraints of the problem.",
+        "detailed": "Calling this function also clears all previous entries.",
+        "return_type": "void",
+        "argsstring": "(const std::size_t new_n, const std::size_t new_m=0)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "new_n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "new_m",
+            "default": "0",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "108",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_matrix_from_triplets",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::set_matrix_from_triplets",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::string, const std::vector< Triplet > &triplets, OSQPFloat *M_x, OSQPInt *M_i, OSQPInt *M_p) const",
+        "params": [
+          {
+            "type": "const std::string",
+            "name": "",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::vector< Triplet > &",
+            "name": "triplets",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OSQPFloat *",
+            "name": "M_x",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OSQPInt *",
+            "name": "M_i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OSQPInt *",
+            "name": "M_p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "264",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set_qlu_data",
+        "qualified_name": "CGAL::OSQP_quadratic_program_traits::set_qlu_data",
+        "brief": "",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(OSQPFloat *q_x, OSQPFloat *l_x, OSQPFloat *u_x) const",
+        "params": [
+          {
+            "type": "OSQPFloat *",
+            "name": "q_x",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OSQPFloat *",
+            "name": "l_x",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OSQPFloat *",
+            "name": "u_x",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/OSQP_quadratic_program_traits.h",
+        "line": "325",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL::SCIP_mixed_integer_program_traits": {
+    "kind": "class",
+    "name": "CGAL::SCIP_mixed_integer_program_traits",
+    "brief": "This class provides an interface for formulating and solving constrained or unconstrained mixed integer programs using thirdpartySCIP (which must be available on the system).",
+    "detailed": "Is model of MixedIntegerProgramTraits GLPK_mixed_integer_program_traits",
+    "members": []
+  },
+  "CGAL::Variable": {
+    "kind": "class",
+    "name": "CGAL::Variable",
+    "brief": "The variable of a mixed integer program.",
+    "detailed": "Is model of MixedIntegerProgramVariable",
+    "members": []
+  },
+  "DiagonalizeTraits": {
+    "kind": "class",
+    "name": "DiagonalizeTraits",
+    "brief": "Concept providing functions to extract eigenvectors and eigenvalues from covariance matrices represented by an array a , using symmetric diagonalization.",
+    "detailed": "For example, a matrix of dimension 3 is defined as follows: $ \\begin{bmatrix}\n  a[0] & a[1] & a[2] \\\\\n  a[1] & a[3] & a[4] \\\\\n  a[2] & a[4] & a[5] \\\\\n \\end{bmatrix}$ FT Number type dim Dimension of the matrices and vectors Has models CGAL::Eigen_diagonalize_traits",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "DiagonalizeTraits::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< FT, dim >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DiagonalizeTraits.h",
+        "line": "30",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "DiagonalizeTraits::Matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< FT, dim *dim >",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DiagonalizeTraits.h",
+        "line": "31",
+        "section": ""
+      },
+      {
+        "kind": "typedef",
+        "name": "Covariance_matrix",
+        "qualified_name": "DiagonalizeTraits::Covariance_matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::array< FT,(dim *(dim+1)/2)>",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/DiagonalizeTraits.h",
+        "line": "32",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "diagonalize_selfadjoint_covariance_matrix",
+        "qualified_name": "DiagonalizeTraits::diagonalize_selfadjoint_covariance_matrix",
+        "brief": "Fill eigenvalues with the eigenvalues of the covariance matrix represented by cov .",
+        "detailed": "Eigenvalues are sorted by increasing order. true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Covariance_matrix &cov, Vector &eigenvalues)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "eigenvalues",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DiagonalizeTraits.h",
+        "line": "37",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "diagonalize_selfadjoint_covariance_matrix",
+        "qualified_name": "DiagonalizeTraits::diagonalize_selfadjoint_covariance_matrix",
+        "brief": "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the covariance matrix represented by cov .",
+        "detailed": "Eigenvalues are sorted by increasing order. true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Covariance_matrix &cov, Vector &eigenvalues, Matrix &eigenvectors)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "eigenvalues",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Matrix &",
+            "name": "eigenvectors",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DiagonalizeTraits.h",
+        "line": "44",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "extract_largest_eigenvector_of_covariance_matrix",
+        "qualified_name": "DiagonalizeTraits::extract_largest_eigenvector_of_covariance_matrix",
+        "brief": "Extract the eigenvector associated to the largest eigenvalue of the covariance matrix represented by cov .",
+        "detailed": "true if the operation was successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Covariance_matrix &cov, Vector &normal)",
+        "params": [
+          {
+            "type": "const Covariance_matrix &",
+            "name": "cov",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "normal",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/DiagonalizeTraits.h",
+        "line": "51",
+        "section": ""
+      }
+    ]
+  },
+  "LinearProgramTraits": {
+    "kind": "class",
+    "name": "LinearProgramTraits",
+    "brief": "A concept that describes the set of methods used to define and solve a linear programming ( lp ) problem of the general form:",
+    "detailed": "\\begin{eqnarray*}& \\mbox{minimize} & \\mathbf{q}^{T}\\mathbf{x} + r \\\\\n& \\mbox{subject to} & \\mathbf{l} \\leq A\\mathbf{x} \\leq \\mathbf{u}\n\\end{eqnarray*} in $ n $ real variables $ \\mathbf{x} = (x_0, \\ldots, x_{n-1}) $ and $ m $ constraints. Here, $ \\mathbf{q} $ is an $ n $ -dimensional vector (the linear objective function), $ r $ is a constant, $ A $ is an $ m\\times n$ matrix (the constraint matrix), $ \\mathbf{l} $ is an $ m $ -dimensional vector of lower constraint bounds, where $ l_i \\in \\mathbb{R} \\cup \\{-\\infty\\} $ for all $ i $ , $ \\mathbf{u} $ is an $ m $ -dimensional vector of upper constraint bounds, where $ u_i \\in \\mathbb{R} \\cup \\{+\\infty\\} $ for all $ i $ .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "LinearProgramTraits::resize",
+        "brief": "Allocates memory for n variables and m constraints in lp .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t n, const std::size_t m)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "36",
+        "section": "Memory"
+      },
+      {
+        "kind": "function",
+        "name": "set_q",
+        "qualified_name": "LinearProgramTraits::set_q",
+        "brief": "Sets the entry qi of lp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "46",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_r",
+        "qualified_name": "LinearProgramTraits::set_r",
+        "brief": "Sets the entry r of lp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FT value)",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "51",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_A",
+        "qualified_name": "LinearProgramTraits::set_A",
+        "brief": "Sets the entry Aij in the row i and column j of the constraint matrix A of lp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const std::size_t j, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "57",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_l",
+        "qualified_name": "LinearProgramTraits::set_l",
+        "brief": "Sets the entry li of lp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "62",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_u",
+        "qualified_name": "LinearProgramTraits::set_u",
+        "brief": "Sets the entry ui of lp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "67",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "solve",
+        "qualified_name": "LinearProgramTraits::solve",
+        "brief": "solves the linear program.",
+        "detailed": "Number of values in solution equals to the number n of values in the vector x . OutIterator a model of OutputIterator that accepts values of type FieldNumberType solution an output iterator with the solution a status of the computation success == true",
+        "return_type": "bool",
+        "argsstring": "(OutIterator solution)",
+        "params": [
+          {
+            "type": "OutIterator",
+            "name": "solution",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/LinearProgramTraits.h",
+        "line": "88",
+        "section": "Solution"
+      }
+    ]
+  },
+  "MixedIntegerProgramLinearConstraint": {
+    "kind": "class",
+    "name": "MixedIntegerProgramLinearConstraint",
+    "brief": "MixedIntegerProgramLinearConstraint is a concept of a linear constraint in a Mixed Integer Programming (MIP) problem.",
+    "detailed": "Has models CGAL::Linear_constraint <FT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "MixedIntegerProgramLinearConstraint",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::MixedIntegerProgramLinearConstraint",
+        "brief": "Constructs a linear constraint, initialized with the solver it belongs to, the lower bound, upper bound, name, and index.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(MixedIntegerProgramTraits *solver, FT lb, FT ub, const std::string &name, int idx)",
+        "params": [
+          {
+            "type": "MixedIntegerProgramTraits *",
+            "name": "solver",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "134",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "name",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::name",
+        "brief": "Returns the name of the constraint.",
+        "detailed": "",
+        "return_type": "const std::string &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "144",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_name",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_name",
+        "brief": "Sets the name of the constraint.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::string &n)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "149",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "index",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::index",
+        "brief": "Returns the index of the constraint.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "154",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_index",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_index",
+        "brief": "Sets the index of the constraint.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int idx)",
+        "params": [
+          {
+            "type": "int",
+            "name": "idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "159",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solver",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::solver",
+        "brief": "Returns the solver that owns this constraint.",
+        "detailed": "",
+        "return_type": "const MixedIntegerProgramTraits *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "162",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solver",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::solver",
+        "brief": "",
+        "detailed": "",
+        "return_type": "MixedIntegerProgramTraits *",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "163",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_lower_bound",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_lower_bound",
+        "brief": "Sets the lower bound.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT lb)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "166",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_upper_bound",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_upper_bound",
+        "brief": "Sets the upper bound.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT ub)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "169",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_bounds",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_bounds",
+        "brief": "Sets both lower and upper bounds.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT lb, FT ub)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "172",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "lower_bound",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::lower_bound",
+        "brief": "Gets the lower bound.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "175",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "upper_bound",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::upper_bound",
+        "brief": "Gets the upper bound.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "178",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_bounds",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::get_bounds",
+        "brief": "Gets both lower and upper bounds.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT &lb, FT &ub) const",
+        "params": [
+          {
+            "type": "FT &",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT &",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "181",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_coefficients",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_coefficients",
+        "brief": "Sets the coefficients of the constraint.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::unordered_map< const MixedIntegerProgramVariable *, FT > &coeffs)",
+        "params": [
+          {
+            "type": "const std::unordered_map< const MixedIntegerProgramVariable *, FT > &",
+            "name": "coeffs",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "188",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "add_coefficient",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::add_coefficient",
+        "brief": "Adds a coefficient to a variable of the constraint.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const MixedIntegerProgramVariable *var, FT coeff)",
+        "params": [
+          {
+            "type": "const MixedIntegerProgramVariable *",
+            "name": "var",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "coeff",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "191",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "coefficients",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::coefficients",
+        "brief": "Returns the coefficients of the constraint.",
+        "detailed": "",
+        "return_type": "const std::unordered_map< const MixedIntegerProgramVariable *, FT > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "194",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_coefficient",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::get_coefficient",
+        "brief": "Gets the coefficient of the variable in this constraint.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const MixedIntegerProgramVariable *var) const",
+        "params": [
+          {
+            "type": "const MixedIntegerProgramVariable *",
+            "name": "var",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "197",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_offset",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::set_offset",
+        "brief": "Sets the constant term.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT value)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "200",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "offset",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::offset",
+        "brief": "Gets the constant term.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "203",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::clear",
+        "brief": "Clears all variables and sets the constant term to zero.",
+        "detailed": "Useful to reuse the object to define a new linear constraint.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "207",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "infinity",
+        "qualified_name": "MixedIntegerProgramLinearConstraint::infinity",
+        "brief": "Gets the infinity threshold (e.g., 1e20).",
+        "detailed": "Values greater than this value are considered as infinity.",
+        "return_type": "FT",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "185",
+        "section": "Operations"
+      }
+    ]
+  },
+  "MixedIntegerProgramLinearObjective": {
+    "kind": "class",
+    "name": "MixedIntegerProgramLinearObjective",
+    "brief": "MixedIntegerProgramLinearObjective is a concept of the linear objective function in a Mixed Integer Programming (MIP) problem.",
+    "detailed": "Has models CGAL::Linear_objective <FT>",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Sense",
+        "qualified_name": "MixedIntegerProgramLinearObjective::Sense",
+        "brief": "The objective sense (i.e., optimization direction).",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "232",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "MixedIntegerProgramLinearObjective",
+        "qualified_name": "MixedIntegerProgramLinearObjective::MixedIntegerProgramLinearObjective",
+        "brief": "Constructs a linear objective, initialized with the solver it belongs to and the objective sense.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(MixedIntegerProgramTraits *solver, Sense sense)",
+        "params": [
+          {
+            "type": "MixedIntegerProgramTraits *",
+            "name": "solver",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Sense",
+            "name": "sense",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "243",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "set_sense",
+        "qualified_name": "MixedIntegerProgramLinearObjective::set_sense",
+        "brief": "Sets the objective sense.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Sense sense)",
+        "params": [
+          {
+            "type": "Sense",
+            "name": "sense",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "251",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "sense",
+        "qualified_name": "MixedIntegerProgramLinearObjective::sense",
+        "brief": "Gets the objective sense.",
+        "detailed": "",
+        "return_type": "Sense",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "254",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_coefficients",
+        "qualified_name": "MixedIntegerProgramLinearObjective::set_coefficients",
+        "brief": "Sets the coefficients of the constraint.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::unordered_map< const MixedIntegerProgramVariable *, FT > &coeffs)",
+        "params": [
+          {
+            "type": "const std::unordered_map< const MixedIntegerProgramVariable *, FT > &",
+            "name": "coeffs",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "257",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "add_coefficient",
+        "qualified_name": "MixedIntegerProgramLinearObjective::add_coefficient",
+        "brief": "Adds a coefficient to a variable of the constraint.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const MixedIntegerProgramVariable *var, FT coeff)",
+        "params": [
+          {
+            "type": "const MixedIntegerProgramVariable *",
+            "name": "var",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "coeff",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "260",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "coefficients",
+        "qualified_name": "MixedIntegerProgramLinearObjective::coefficients",
+        "brief": "Returns the coefficients of the constraint.",
+        "detailed": "",
+        "return_type": "const std::unordered_map< const MixedIntegerProgramVariable *, FT > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "263",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_coefficient",
+        "qualified_name": "MixedIntegerProgramLinearObjective::get_coefficient",
+        "brief": "Gets the coefficient of the variable in this constraint.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(const MixedIntegerProgramVariable *var) const",
+        "params": [
+          {
+            "type": "const MixedIntegerProgramVariable *",
+            "name": "var",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "266",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_offset",
+        "qualified_name": "MixedIntegerProgramLinearObjective::set_offset",
+        "brief": "Sets the constant term.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT value)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "269",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "offset",
+        "qualified_name": "MixedIntegerProgramLinearObjective::offset",
+        "brief": "Gets the constant term.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "272",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "MixedIntegerProgramLinearObjective::clear",
+        "brief": "Clears the objective (i.e., removes all variables, resets the objective sense to UNDEFINED).",
+        "detailed": "Useful to reuse the object to define a new linear objective.",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "277",
+        "section": "Operations"
+      }
+    ]
+  },
+  "MixedIntegerProgramTraits": {
+    "kind": "class",
+    "name": "MixedIntegerProgramTraits",
+    "brief": "Concept describing the set of requirements for (constrained or unconstrained) Mixed Integer Programming (MIP) problems. A model of this concept stores the integer variables, linear objective, and linear constraints (if any) and provides a method to solve the problem.",
+    "detailed": "Has models CGAL::Mixed_integer_program_traits <T> CGAL::GLPK_mixed_integer_program_traits <T> CGAL::SCIP_mixed_integer_program_traits <T>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "MixedIntegerProgramTraits",
+        "qualified_name": "MixedIntegerProgramTraits::MixedIntegerProgramTraits",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "308",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "create_variable",
+        "qualified_name": "MixedIntegerProgramTraits::create_variable",
+        "brief": "Creates a single variable, adds it to the solver, and returns its pointer.",
+        "detailed": "Memory is managed by the solver and will be automatically released.",
+        "return_type": "MixedIntegerProgramVariable *",
+        "argsstring": "(Variable_type type, FT lb, FT ub, const std::string &name)",
+        "params": [
+          {
+            "type": "Variable_type",
+            "name": "type",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "317",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "create_variables",
+        "qualified_name": "MixedIntegerProgramTraits::create_variables",
+        "brief": "Creates a set of variables, adds them to the solver, and returns their pointers.",
+        "detailed": "(1) Variables will be given default names, e.g., x0, x1...; (2) Memory is managed by the solver and will be automatically released when the solver is destroyed.",
+        "return_type": "std::vector< MixedIntegerProgramVariable * >",
+        "argsstring": "(std::size_t n)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "323",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "create_constraint",
+        "qualified_name": "MixedIntegerProgramTraits::create_constraint",
+        "brief": "Creates a single linear constraint, adds it to the solver, and returns the pointer.",
+        "detailed": "Memory is managed by the solver and will be automatically released when the solver is destroyed.",
+        "return_type": "MixedIntegerProgramLinearConstraint *",
+        "argsstring": "(FT lb, FT ub, const std::string &name)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "328",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "create_constraints",
+        "qualified_name": "MixedIntegerProgramTraits::create_constraints",
+        "brief": "Creates a set of linear constraints, adds them to the solver, and returns their pointers.",
+        "detailed": "(1) Constraints will be given default names, e.g., c0, c1... (2) Memory is managed by the solver and will be automatically released when the solver is destroyed.",
+        "return_type": "std::vector< MixedIntegerProgramLinearConstraint * >",
+        "argsstring": "(std::size_t n)",
+        "params": [
+          {
+            "type": "std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "334",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "create_objective",
+        "qualified_name": "MixedIntegerProgramTraits::create_objective",
+        "brief": "Creates the objective function and returns the pointer.",
+        "detailed": "Memory is managed by the solver and will be automatically released when the solver is destroyed.",
+        "return_type": "MixedIntegerProgramLinearObjective *",
+        "argsstring": "(Sense sense)",
+        "params": [
+          {
+            "type": "Sense",
+            "name": "sense",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "339",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_variables",
+        "qualified_name": "MixedIntegerProgramTraits::number_of_variables",
+        "brief": "Returns the number of variables.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "342",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "variables",
+        "qualified_name": "MixedIntegerProgramTraits::variables",
+        "brief": "Returns the variables.",
+        "detailed": "",
+        "return_type": "const std::vector< MixedIntegerProgramVariable * > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "345",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "variables",
+        "qualified_name": "MixedIntegerProgramTraits::variables",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< MixedIntegerProgramVariable * > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "346",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_constraints",
+        "qualified_name": "MixedIntegerProgramTraits::number_of_constraints",
+        "brief": "Returns the number of constraints.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "349",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "constraints",
+        "qualified_name": "MixedIntegerProgramTraits::constraints",
+        "brief": "Returns the constraints.",
+        "detailed": "",
+        "return_type": "const std::vector< MixedIntegerProgramLinearConstraint * > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "352",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "constraints",
+        "qualified_name": "MixedIntegerProgramTraits::constraints",
+        "brief": "",
+        "detailed": "",
+        "return_type": "std::vector< MixedIntegerProgramLinearConstraint * > &",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "353",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_continuous_variables",
+        "qualified_name": "MixedIntegerProgramTraits::number_of_continuous_variables",
+        "brief": "Returns the number of continuous variables.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "356",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_integer_variables",
+        "qualified_name": "MixedIntegerProgramTraits::number_of_integer_variables",
+        "brief": "Returns the number of integer variables.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "359",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_binary_variables",
+        "qualified_name": "MixedIntegerProgramTraits::number_of_binary_variables",
+        "brief": "Returns the number of binary variables.",
+        "detailed": "",
+        "return_type": "std::size_t",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "362",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_continuous",
+        "qualified_name": "MixedIntegerProgramTraits::is_continuous",
+        "brief": "Returns true if all variables are continuous.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "365",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_mixed_integer_program",
+        "qualified_name": "MixedIntegerProgramTraits::is_mixed_integer_program",
+        "brief": "Returns true if this is a mixed integer program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "368",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_integer_program",
+        "qualified_name": "MixedIntegerProgramTraits::is_integer_program",
+        "brief": "Returns true if this is an integer program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "371",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_binary_program",
+        "qualified_name": "MixedIntegerProgramTraits::is_binary_program",
+        "brief": "Returns true if binary program.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "374",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "objective",
+        "qualified_name": "MixedIntegerProgramTraits::objective",
+        "brief": "Returns the objective.",
+        "detailed": "",
+        "return_type": "const MixedIntegerProgramLinearObjective *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "377",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "objective",
+        "qualified_name": "MixedIntegerProgramTraits::objective",
+        "brief": "",
+        "detailed": "",
+        "return_type": "MixedIntegerProgramLinearObjective *",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "378",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solve",
+        "qualified_name": "MixedIntegerProgramTraits::solve",
+        "brief": "Solves the program. Returns false if failed.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "381",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solution",
+        "qualified_name": "MixedIntegerProgramTraits::solution",
+        "brief": "Returns the result.",
+        "detailed": "(1) Result is valid only if the solver succeeded. (2) Each entry in the result corresponds to the variable with the same index in the program.",
+        "return_type": "const std::vector< FT > &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "387",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "error_message",
+        "qualified_name": "MixedIntegerProgramTraits::error_message",
+        "brief": "Returns the error message.",
+        "detailed": "This function should be called after call to solve() .",
+        "return_type": "const std::string &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "391",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "MixedIntegerProgramTraits::clear",
+        "brief": "Clears all variables, constraints, and the objective.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "394",
+        "section": "Operations"
+      }
+    ]
+  },
+  "MixedIntegerProgramVariable": {
+    "kind": "class",
+    "name": "MixedIntegerProgramVariable",
+    "brief": "MixedIntegerProgramVariable is a concept of a variable in a Mixed Integer Programming (MIP) problem.",
+    "detailed": "Has models CGAL::Variable < FT >",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Variable_type",
+        "qualified_name": "MixedIntegerProgramVariable::Variable_type",
+        "brief": "A variable can be continuous, integer, or binary.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "MixedIntegerProgramVariable::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "24",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "MixedIntegerProgramVariable",
+        "qualified_name": "MixedIntegerProgramVariable::MixedIntegerProgramVariable",
+        "brief": "Constructs a variable initialized with the pointer of the solver it belongs to, the variable type, lower bound, upper bound, name, and index.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(MixedIntegerProgramTraits *solver, Variable_type type, FT lb=, FT ub, const std::string &name, int idx)",
+        "params": [
+          {
+            "type": "MixedIntegerProgramTraits *",
+            "name": "solver",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Variable_type",
+            "name": "type",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::string &",
+            "name": "name",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "int",
+            "name": "idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "40",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "variable_type",
+        "qualified_name": "MixedIntegerProgramVariable::variable_type",
+        "brief": "Returns the variable type.",
+        "detailed": "",
+        "return_type": "Variable_type",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "48",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_variable_type",
+        "qualified_name": "MixedIntegerProgramVariable::set_variable_type",
+        "brief": "Sets/Changes the variable type.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Variable_type t)",
+        "params": [
+          {
+            "type": "Variable_type",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "51",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "name",
+        "qualified_name": "MixedIntegerProgramVariable::name",
+        "brief": "Returns the name of the variable.",
+        "detailed": "",
+        "return_type": "const std::string &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "56",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_name",
+        "qualified_name": "MixedIntegerProgramVariable::set_name",
+        "brief": "Sets the name of the variable.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::string &n)",
+        "params": [
+          {
+            "type": "const std::string &",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "61",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "index",
+        "qualified_name": "MixedIntegerProgramVariable::index",
+        "brief": "Returns the index of the variable.",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "66",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_index",
+        "qualified_name": "MixedIntegerProgramVariable::set_index",
+        "brief": "Sets the index of the variable.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(int idx)",
+        "params": [
+          {
+            "type": "int",
+            "name": "idx",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "71",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solver",
+        "qualified_name": "MixedIntegerProgramVariable::solver",
+        "brief": "Returns the solver that owns this variable.",
+        "detailed": "",
+        "return_type": "const MixedIntegerProgramTraits *",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "74",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solver",
+        "qualified_name": "MixedIntegerProgramVariable::solver",
+        "brief": "",
+        "detailed": "",
+        "return_type": "MixedIntegerProgramTraits *",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "75",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_lower_bound",
+        "qualified_name": "MixedIntegerProgramVariable::set_lower_bound",
+        "brief": "Sets the lower bound.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT lb)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "78",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_upper_bound",
+        "qualified_name": "MixedIntegerProgramVariable::set_upper_bound",
+        "brief": "Sets the upper bound.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT ub)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "81",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_bounds",
+        "qualified_name": "MixedIntegerProgramVariable::set_bounds",
+        "brief": "Sets both lower and upper bounds.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT lb, FT ub)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "84",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "lower_bound",
+        "qualified_name": "MixedIntegerProgramVariable::lower_bound",
+        "brief": "Gets the lower bound.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "87",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "upper_bound",
+        "qualified_name": "MixedIntegerProgramVariable::upper_bound",
+        "brief": "Gets the upper bound.",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "90",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_bounds",
+        "qualified_name": "MixedIntegerProgramVariable::get_bounds",
+        "brief": "Gets both lower and upper bounds.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT &lb, FT &ub) const",
+        "params": [
+          {
+            "type": "FT &",
+            "name": "lb",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "FT &",
+            "name": "ub",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "93",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "solution_value",
+        "qualified_name": "MixedIntegerProgramVariable::solution_value",
+        "brief": "Returns the value of the variable in the current solution.",
+        "detailed": "(1) Valid only if the program was successfully solved. (2) If the variable is integer and rounded == true, then the value will be rounded to the nearest integer.",
+        "return_type": "FT",
+        "argsstring": "(bool rounded=false) const",
+        "params": [
+          {
+            "type": "bool",
+            "name": "rounded",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "103",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_solution_value",
+        "qualified_name": "MixedIntegerProgramVariable::set_solution_value",
+        "brief": "Sets the solution value (should be called internally by the solver).",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(FT value)",
+        "params": [
+          {
+            "type": "FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "106",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "infinity",
+        "qualified_name": "MixedIntegerProgramVariable::infinity",
+        "brief": "Gets the infinity threshold (e.g., 1e20).",
+        "detailed": "Values greater than this value are considered as infinity.",
+        "return_type": "FT",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/MixedIntegerProgramTraits.h",
+        "line": "97",
+        "section": "Operations"
+      }
+    ]
+  },
+  "NormalEquationSparseLinearAlgebraTraits_d": {
+    "kind": "class",
+    "name": "NormalEquationSparseLinearAlgebraTraits_d",
+    "brief": "Concept describing the set of requirements for solving the normal equation $ A^t A X = A^t B $ , $ A $ being a matrix, $ At $ its transpose matrix, $ B $ and $ X $ being two vectors.",
+    "detailed": "SparseLinearAlgebraTraits_d Has models CGAL::Eigen_solver_traits <T>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::Matrix",
+        "brief": "Matrix type model of SparseLinearAlgebraTraits_d::Matrix .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "23",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::Vector",
+        "brief": "Vector type model of SparseLinearAlgebraTraits_d::Vector .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::NT",
+        "brief": "Number type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "NormalEquationSparseLinearAlgebraTraits_d",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::NormalEquationSparseLinearAlgebraTraits_d",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "43",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_factor",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::normal_equation_factor",
+        "brief": "Factorize the sparse matrix At * A .",
+        "detailed": "This factorization is used in normal_equation_solver() to solve the system for different right-hand side vectors. true if the factorization is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "55",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_solver",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::normal_equation_solver",
+        "brief": "Solve the sparse linear system At * A * X = At * B , with A being the matrix provided in # normal_equation_factor() , and At its transpose matrix.",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "62",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "normal_equation_solver",
+        "qualified_name": "NormalEquationSparseLinearAlgebraTraits_d::normal_equation_solver",
+        "brief": "Equivalent to a call to normal_equation_factor(A) followed by a call to normal_equation_solver(B,X) .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/NormalEquationSparseLinearAlgebraTraits_d.h",
+        "line": "68",
+        "section": "Operations"
+      }
+    ]
+  },
+  "QuadraticProgramTraits": {
+    "kind": "class",
+    "name": "QuadraticProgramTraits",
+    "brief": "A concept that describes the set of methods used to define and solve a quadratic programming ( qp ) problem of the general form:",
+    "detailed": "\\begin{eqnarray*}& \\mbox{minimize} & \\frac{1}{2}\\mathbf{x}^{T}P\\mathbf{x} + \\mathbf{q}^{T}\\mathbf{x} + r \\\\\n& \\mbox{subject to} & \\mathbf{l} \\leq A\\mathbf{x} \\leq \\mathbf{u}\n\\end{eqnarray*} in $ n $ real variables $ \\mathbf{x} = (x_0, \\ldots, x_{n-1}) $ and $ m $ constraints. Here, $ P $ is a symmetric positive-semidefinite $ n \\times n$ matrix (the quadratic objective function), $ \\mathbf{q} $ is an $ n $ -dimensional vector (the linear objective function), $ r $ is a constant, $ A $ is an $ m\\times n$ matrix (the constraint matrix), $ \\mathbf{l} $ is an $ m $ -dimensional vector of lower constraint bounds, where $ l_i \\in \\mathbb{R} \\cup \\{-\\infty\\} $ for all $ i $ , $ \\mathbf{u} $ is an $ m $ -dimensional vector of upper constraint bounds, where $ u_i \\in \\mathbb{R} \\cup \\{+\\infty\\} $ for all $ i $ . Has models CGAL::OSQP_quadratic_program_traits <T>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "resize",
+        "qualified_name": "QuadraticProgramTraits::resize",
+        "brief": "Allocates memory for n variables and m constraints in qp .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t n, const std::size_t m)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "41",
+        "section": "Memory"
+      },
+      {
+        "kind": "function",
+        "name": "set_P",
+        "qualified_name": "QuadraticProgramTraits::set_P",
+        "brief": "Sets the entries Pij and Pji of qp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const std::size_t j, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "51",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_q",
+        "qualified_name": "QuadraticProgramTraits::set_q",
+        "brief": "Sets the entry qi of qp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "56",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_r",
+        "qualified_name": "QuadraticProgramTraits::set_r",
+        "brief": "Sets the entry r of qp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const FT value)",
+        "params": [
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "61",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_A",
+        "qualified_name": "QuadraticProgramTraits::set_A",
+        "brief": "Sets the entry Aij in the row i and column j of the constraint matrix A of qp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const std::size_t j, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const std::size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "67",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_l",
+        "qualified_name": "QuadraticProgramTraits::set_l",
+        "brief": "Sets the entry li of qp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "72",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "set_u",
+        "qualified_name": "QuadraticProgramTraits::set_u",
+        "brief": "Sets the entry ui of qp to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(const std::size_t i, const FT value)",
+        "params": [
+          {
+            "type": "const std::size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "77",
+        "section": "Initialization"
+      },
+      {
+        "kind": "function",
+        "name": "solve",
+        "qualified_name": "QuadraticProgramTraits::solve",
+        "brief": "solves the quadratic program.",
+        "detailed": "Number of values in solution equals to the number n of values in the vector x . OutIterator a model of OutputIterator that accepts values of type FieldNumberType solution an output iterator with the solution a status of the computation success == true",
+        "return_type": "bool",
+        "argsstring": "(OutIterator solution)",
+        "params": [
+          {
+            "type": "OutIterator",
+            "name": "solution",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/QuadraticProgramTraits.h",
+        "line": "98",
+        "section": "Solution"
+      }
+    ]
+  },
+  "SparseLinearAlgebraTraits_d": {
+    "kind": "class",
+    "name": "SparseLinearAlgebraTraits_d",
+    "brief": "The concept SparseLinearAlgebraTraits_d is used to solve sparse linear systems A $ \\times $ X = B .",
+    "detailed": "Has models CGAL::Eigen_solver_traits <T>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "20",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "SparseLinearAlgebraTraits_d::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "SparseLinearAlgebraTraits_d",
+        "qualified_name": "SparseLinearAlgebraTraits_d::SparseLinearAlgebraTraits_d",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "40",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "SparseLinearAlgebraTraits_d::linear_solver",
+        "brief": "Solve the sparse linear system $A \\times X = B$ .",
+        "detailed": "Return true on success. The solution is then $(1/D) \\times X $ . A.row_dimension() == B.dimension() A.column_dimension() == X.dimension()",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, const Vector &B, Vector &X, NT &D)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "54",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SparseLinearAlgebraTraits_d::Matrix": {
+    "kind": "class",
+    "name": "SparseLinearAlgebraTraits_d::Matrix",
+    "brief": "SparseLinearAlgebraTraits_d::Matrix is a concept of a sparse matrix class.",
+    "detailed": "Refines Assignable DefaultConstructible Has models CGAL::Eigen_sparse_matrix <T> CGAL::Eigen_sparse_symmetric_matrix <T> SparseLinearAlgebraTraits_d SparseLinearAlgebraTraits_d::Vector",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Index",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::Index",
+        "brief": "Index type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "153",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "158",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Matrix",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::Matrix",
+        "brief": "Create a square matrix initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Index dimension)",
+        "params": [
+          {
+            "type": "Index",
+            "name": "dimension",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "168",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Matrix",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::Matrix",
+        "brief": "Create a rectangular matrix initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Index rows, Index columns)",
+        "params": [
+          {
+            "type": "Index",
+            "name": "rows",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Index",
+            "name": "columns",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "173",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "row_dimension",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::row_dimension",
+        "brief": "Return the matrix number of rows.",
+        "detailed": "",
+        "return_type": "Index",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "183",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "column_dimension",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::column_dimension",
+        "brief": "Return the matrix number of columns.",
+        "detailed": "",
+        "return_type": "Index",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "188",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "get_coef",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::get_coef",
+        "brief": "Read access to a matrix coefficient.",
+        "detailed": "0 <= row < row_dimension() 0 <= column < column_dimension()",
+        "return_type": "NT",
+        "argsstring": "(Index row, Index column) const",
+        "params": [
+          {
+            "type": "Index",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Index",
+            "name": "column",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "196",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "add_coef",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::add_coef",
+        "brief": "Write access to a matrix coefficient: a_ij = a_ij + val .",
+        "detailed": "0 <= row < row_dimension() 0 <= column < column_dimension()",
+        "return_type": "void",
+        "argsstring": "(Index row, Index column, NT value)",
+        "params": [
+          {
+            "type": "Index",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Index",
+            "name": "column",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "204",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "set_coef",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::set_coef",
+        "brief": "Write access to a matrix coefficient: a_ij = val .",
+        "detailed": "Optimization: Users can indicate that the coefficient does not already exist in the matrix by setting new_coef to true . 0 <= i < row_dimension() 0 <= j < column_dimension()",
+        "return_type": "void",
+        "argsstring": "(Index row, Index column, NT value, bool new_coef=false)",
+        "params": [
+          {
+            "type": "Index",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Index",
+            "name": "column",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "bool",
+            "name": "new_coef",
+            "default": "false",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "215",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "swap",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::swap",
+        "brief": "Swaps the content of *this and m .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Matrix &m)",
+        "params": [
+          {
+            "type": "Matrix &",
+            "name": "m",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "220",
+        "section": "Operations"
+      },
+      {
+        "kind": "friend",
+        "name": "operator*",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::operator*",
+        "brief": "Multiplication with a scalar.",
+        "detailed": "",
+        "return_type": "Matrix",
+        "argsstring": "(const NT &c, const Matrix &M)",
+        "params": [
+          {
+            "type": "const NT &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Matrix &",
+            "name": "M",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "224",
+        "section": "Operations"
+      },
+      {
+        "kind": "friend",
+        "name": "operator+",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Matrix::operator+",
+        "brief": "Sum of two matrices.",
+        "detailed": "",
+        "return_type": "Matrix",
+        "argsstring": "(const Matrix &M0, const Matrix &M1)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "M0",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Matrix &",
+            "name": "M1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "228",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SparseLinearAlgebraTraits_d::Vector": {
+    "kind": "class",
+    "name": "SparseLinearAlgebraTraits_d::Vector",
+    "brief": "SparseLinearAlgebraTraits_d::Vector is a concept of a vector that can be multiplied by a sparse matrix.",
+    "detailed": "Refines DefaultConstructible Has models CGAL::Eigen_vector <T> SparseLinearAlgebraTraits_d SparseLinearAlgebraTraits_d::Matrix",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "NT",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::NT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "83",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Index",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::Index",
+        "brief": "Index type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "88",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Vector",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::Vector",
+        "brief": "Create a vector initialized with zeros.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Index rows)",
+        "params": [
+          {
+            "type": "Index",
+            "name": "rows",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "98",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Vector",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::Vector",
+        "brief": "Copy constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Vector &toCopy)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "toCopy",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "103",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "dimension",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::dimension",
+        "brief": "Return the vector's number of coefficients.",
+        "detailed": "",
+        "return_type": "Index",
+        "argsstring": "() const",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "112",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::operator[]",
+        "brief": "Read/write access to a vector coefficient.",
+        "detailed": "0 <= row < dimension() .",
+        "return_type": "NT",
+        "argsstring": "(Index row) const",
+        "params": [
+          {
+            "type": "Index",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "118",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "operator[]",
+        "qualified_name": "SparseLinearAlgebraTraits_d::Vector::operator[]",
+        "brief": "",
+        "detailed": "",
+        "return_type": "NT &",
+        "argsstring": "(Index row)",
+        "params": [
+          {
+            "type": "Index",
+            "name": "row",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraTraits_d.h",
+        "line": "123",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SparseLinearAlgebraWithFactorTraits_d": {
+    "kind": "class",
+    "name": "SparseLinearAlgebraWithFactorTraits_d",
+    "brief": "Concept describing the set of requirements for a direct sparse linear system solver with factorization. A model of this concept stores the left-hand matrix (denoted $ A $ ) and provides an additional factorization method to solve the system for different right-hand vectors.",
+    "detailed": "Refines SparseLinearAlgebraTraits_d Has models CGAL::Eigen_solver_traits <T>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "SparseLinearAlgebraWithFactorTraits_d",
+        "qualified_name": "SparseLinearAlgebraWithFactorTraits_d::SparseLinearAlgebraWithFactorTraits_d",
+        "brief": "Default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SparseLinearAlgebraWithFactorTraits_d.h",
+        "line": "24",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "factor",
+        "qualified_name": "SparseLinearAlgebraWithFactorTraits_d::factor",
+        "brief": "Factorize the sparse matrix A .",
+        "detailed": "This factorization is used in SparseLinearAlgebraWithFactorTraits_d::linear_solver() to solve the system for different right-hand side vectors. See SparseLinearAlgebraTraits_d::linear_solver() for the description of D . true if the factorization is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &A, NT &D)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "A",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "NT &",
+            "name": "D",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraWithFactorTraits_d.h",
+        "line": "36",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "SparseLinearAlgebraWithFactorTraits_d::linear_solver",
+        "brief": "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in SparseLinearAlgebraWithFactorTraits_d::factor() .",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Vector &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraWithFactorTraits_d.h",
+        "line": "41",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "linear_solver",
+        "qualified_name": "SparseLinearAlgebraWithFactorTraits_d::linear_solver",
+        "brief": "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in SparseLinearAlgebraWithFactorTraits_d::factor() .",
+        "detailed": "true if the solver is successful and false otherwise.",
+        "return_type": "bool",
+        "argsstring": "(const Matrix &B, Vector &X)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "X",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SparseLinearAlgebraWithFactorTraits_d.h",
+        "line": "46",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SvdTraits": {
+    "kind": "class",
+    "name": "SvdTraits",
+    "brief": "The concept SvdTraits describes the linear algebra types and algorithms needed to solve in the least square sense a linear system with a singular value decomposition.",
+    "detailed": "Has models CGAL::Eigen_svd",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "SvdTraits::FT",
+        "brief": "The scalar type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "22",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vector",
+        "qualified_name": "SvdTraits::Vector",
+        "brief": "The vector type, model of the concept SvdTraits::Vector .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "27",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Matrix",
+        "qualified_name": "SvdTraits::Matrix",
+        "brief": "The matrix type, model of the concept SvdTraits::Matrix .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "32",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "solve",
+        "qualified_name": "SvdTraits::solve",
+        "brief": "Solves the system $ MX=B$ (in the least square sense if $ M$ is not square) using a singular value decomposition and returns the condition number of $ M$ .",
+        "detailed": "The solution is stored in $ B$ .",
+        "return_type": "FT",
+        "argsstring": "(const Matrix &M, Vector &B)",
+        "params": [
+          {
+            "type": "const Matrix &",
+            "name": "M",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Vector &",
+            "name": "B",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "46",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SvdTraits::Matrix": {
+    "kind": "class",
+    "name": "SvdTraits::Matrix",
+    "brief": "Concept of matrix type used by the concept SvdTraits .",
+    "detailed": "Refines DefaultConstructible Assignable Has models CGAL::Eigen_matrix <T>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Matrix",
+        "qualified_name": "SvdTraits::Matrix::Matrix",
+        "brief": "Initialize all the entries of the matrix to zero.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_t n1, size_t n2)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "n1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_t",
+            "name": "n2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "105",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_rows",
+        "qualified_name": "SvdTraits::Matrix::number_of_rows",
+        "brief": "Return the number of rows of the matrix.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "110",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "number_of_columns",
+        "qualified_name": "SvdTraits::Matrix::number_of_columns",
+        "brief": "Return the number of columns of the matrix.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "115",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SvdTraits::Matrix::operator()",
+        "brief": "Return the entry at row i and column j , i from 0 to number_of_rows - 1 , j from 0 to number_of_columns - 1 .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(size_t i, size_t j)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "121",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set",
+        "qualified_name": "SvdTraits::Matrix::set",
+        "brief": "Set the entry at row i and column j to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(size_t i, size_t j, const FT value)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_t",
+            "name": "j",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "126",
+        "section": ""
+      }
+    ]
+  },
+  "SvdTraits::Vector": {
+    "kind": "class",
+    "name": "SvdTraits::Vector",
+    "brief": "Concept of vector type used by the concept SvdTraits .",
+    "detailed": "Has models CGAL::Eigen_vector <T>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Vector",
+        "qualified_name": "SvdTraits::Vector::Vector",
+        "brief": "Initialize all the elements of the vector to zero.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(size_t n)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "n",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "66",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "size",
+        "qualified_name": "SvdTraits::Vector::size",
+        "brief": "Return the size of the vector.",
+        "detailed": "",
+        "return_type": "size_t",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "71",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "SvdTraits::Vector::operator()",
+        "brief": "Return the i -th entry, i from 0 to size() -1 .",
+        "detailed": "",
+        "return_type": "FT",
+        "argsstring": "(size_t i)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "76",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "set",
+        "qualified_name": "SvdTraits::Vector::set",
+        "brief": "Set the i -th entry to value .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(size_t i, const FT value)",
+        "params": [
+          {
+            "type": "size_t",
+            "name": "i",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const FT",
+            "name": "value",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SvdTraits.h",
+        "line": "81",
+        "section": ""
+      },
+      {
+        "kind": "function",
+        "name": "vector",
+        "qualified_name": "SvdTraits::Vector::vector",
+        "brief": "Return the vector as an array.",
+        "detailed": "",
+        "return_type": "FT *",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SvdTraits.h",
+        "line": "86",
+        "section": ""
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "Eigen": {
+    "kind": "namespace",
+    "name": "Eigen",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

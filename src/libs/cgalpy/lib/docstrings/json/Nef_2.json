@@ -1,0 +1,2450 @@
+{
+  "CGAL::Extended_cartesian": {
+    "kind": "class",
+    "name": "CGAL::Extended_cartesian",
+    "brief": "The class Extended_cartesian serves as a traits class for the class Nef_polyhedron_2 <T> .",
+    "detailed": "It uses a polynomial component representation based on a field number type FT . Is model of ExtendedKernelTraits_2 FT must be a model of FieldNumberType . CGAL::Extended_homogeneous <RT> CGAL::Filtered_extended_homogeneous <RT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Extended_cartesian",
+        "qualified_name": "CGAL::Extended_cartesian::Extended_cartesian",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Extended_cartesian.h",
+        "line": "31",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Extended_homogeneous": {
+    "kind": "class",
+    "name": "CGAL::Extended_homogeneous",
+    "brief": "The class Extended_homogeneous serves as a traits class for the class Nef_polyhedron_2 <T> .",
+    "detailed": "It uses a polynomial component representation based on a Euclidean ring number type RT . Is model of ExtendedKernelTraits_2 RT must be a model of RingNumberType . CGAL::Extended_cartesian <FT> CGAL::Filtered_extended_homogeneous <RT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Extended_homogeneous",
+        "qualified_name": "CGAL::Extended_homogeneous::Extended_homogeneous",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Extended_homogeneous.h",
+        "line": "31",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Filtered_extended_homogeneous": {
+    "kind": "class",
+    "name": "CGAL::Filtered_extended_homogeneous",
+    "brief": "The class Filtered_extended_homogeneous serves as a traits class for the class Nef_polyhedron_2 <T> .",
+    "detailed": "It uses a polynomial component representation based on a ring number type RT . Is model of ExtendedKernelTraits_2 RT must be a model of RingNumberType . CGAL::Extended_cartesian <FT> CGAL::Extended_homogeneous <RT>",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Filtered_extended_homogeneous",
+        "qualified_name": "CGAL::Filtered_extended_homogeneous::Filtered_extended_homogeneous",
+        "brief": "default constructor.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Filtered_extended_homogeneous.h",
+        "line": "29",
+        "section": "Creation"
+      }
+    ]
+  },
+  "CGAL::Nef_polyhedron_2": {
+    "kind": "class",
+    "name": "CGAL::Nef_polyhedron_2",
+    "brief": "An instance of data type Nef_polyhedron_2 <T> is a subset of the plane that is the result of forming complements and intersections starting from a finite set H of halfspaces.",
+    "detailed": "Nef_polyhedron_2 is closed under all binary set operations intersection , union , difference , complement and under the topological operations boundary , closure , and interior . The template parameter T is specified via an extended kernel concept. T must be a model of the concept ExtendedKernelTraits_2 . Exploration - Point location - Ray shooting As Nef polyhedra are the result of forming complements and intersections starting from a set H of halfspaces that are defined by oriented lines in the plane, they can be represented by an attributed plane map $ M = (V,E,F)$ . For topological queries within M the following types and operations allow exploration access to this structure. Implementation Nef polyhedra are implemented on top of a halfedge data structure and use linear space in the number of vertices, edges and facets. Operations like empty take constant time. The operations clear , complement , interior , closure , boundary , regularization , input and output take linear time. All binary set operations and comparison operations take time $O(n \\log n)$ where $ n$ is the size of the output plus the size of the input. The point location and ray shooting operations are implemented in two flavors. The NAIVE operations run in linear query time without any preprocessing, the DEFAULT operations (equals LMWT ) run in sub-linear query time, but preprocessing is triggered with the first operation. Preprocessing takes time $O(N^2)$ , the sub-linear point location time is either logarithmic when LEDA's persistent dictionaries are present or if not then the point location time is worst-case linear, but experiments show often sublinear runtimes. Ray shooting equals point location plus a walk in the constrained triangulation overlaid on the plane map representation. The cost of the walk is proportional to the number of triangles passed in direction d until an obstacle is met. In a minimum weight triangulation of the obstacles (the plane map representing the polyhedron) the theory provides a $O(\\sqrt{n})$ bound for the number of steps. Our locally minimum weight triangulation approximates the minimum weight triangulation only heuristically (the calculation of the minimum weight triangulation is conjectured to be NP hard). Thus we have no runtime guarantee but a strong experimental motivation for its approximation. Example Nef polyhedra are parameterized by a so-called extended geometric kernel. There are three kernels, one based on a homogeneous representation of extended points called Extended_homogeneous <RT> where RT is a ring type providing additionally a gcd operation, one based on a Cartesian representation of extended points called Extended_cartesian <NT> where NT is a field type, and finally Filtered_extended_homogeneous <RT> (an optimized version of the first). The following example uses the filtered homogeneous kernel to construct the intersection of two halfspaces. Example: Nef_2/nef_2_intersection.cpp Show / Hide #include <CGAL/Exact_integer.h> #include <CGAL/Filtered_extended_homogeneous.h> #include <CGAL/Nef_polyhedron_2.h> typedef CGAL::Exact_integer RT; typedef CGAL::Filtered_extended_homogeneous<RT> Extended_kernel; typedef CGAL::Nef_polyhedron_2<Extended_kernel> Nef_polyhedron; typedef Nef_polyhedron::Line Line; int main() { Nef_polyhedron N1(Line(1,0,0)); Nef_polyhedron N2(Line(0,1,0), Nef_polyhedron::EXCLUDED); Nef_polyhedron N3 = N1 * N2; // line (*) return 0; } After line (*) N3 is the intersection of N1 and N2 . The member types of Nef_polyhedron_2 < Extended_homogeneous <NT> > map to corresponding types of the standard CGAL geometry kernel (type equality in pseudo-code notation): CGAL::Nef_polyhedron_2< CGAL::Extended_cartesian< FT > > ::Point == CGAL::Cartesian<FT>::Point_2 CGAL::Nef_polyhedron_2< CGAL::Extended_homogeneous< RT > > ::Point == CGAL::Homogeneous< RT >::Point_2 CGAL::Nef_polyhedron_2< CGAL::Filtered_extended_homogeneous<RT> > ::Point == CGAL::Homogeneous<RT>::Point_2 The same holds for the types Line and Direction in the local scope of Nef_polyhedron_2 <...> .",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Boundary",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Boundary",
+        "brief": "construction selection.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "126",
+        "section": "Types"
+      },
+      {
+        "kind": "enum",
+        "name": "Content",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Content",
+        "brief": "construction selection",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "131",
+        "section": "Types"
+      },
+      {
+        "kind": "enum",
+        "name": "Location_mode",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Location_mode",
+        "brief": "selectionflag for the point location mode.",
+        "detailed": "LMWT stands for Locally Minimum Weight Triangulation, a locally optimized constrained triangulation where the weight corresponds to the length of the edges of the triangulation.",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "782",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Line",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Line",
+        "brief": "the oriented lines modeling halfplanes.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "101",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Point",
+        "brief": "the affine points of the plane.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "106",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Direction",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Direction",
+        "brief": "directions in our plane.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "111",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polygons_tag",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Polygons_tag",
+        "brief": "tag for calling polygon constructor.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "116",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Polylines_tag",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Polylines_tag",
+        "brief": "tag for calling polyline constructor.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "121",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Object_handle",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Object_handle",
+        "brief": "a generic handle to an object of the underlying plane map.",
+        "detailed": "The kind of object (vertex, halfedge, face) can be determined and the object can be assigned to a corresponding handle by the three functions: bool assign(Vertex_const_handle& h, Object_handle ) bool assign(Halfedge_const_handle& h, Object_handle ) bool assign(Face_const_handle& h, Object_handle ) where each function returns true iff the assignment to h was done.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "774",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Nef_polyhedron_2",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Nef_polyhedron_2",
+        "brief": "creates an instance N of type Nef_polyhedron_2 <T> and initializes it to the empty set if plane == EMPTY and to the whole plane if plane == COMPLETE .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Content plane=EMPTY)",
+        "params": [
+          {
+            "type": "Content",
+            "name": "plane",
+            "default": "EMPTY",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "121",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Nef_polyhedron_2",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Nef_polyhedron_2",
+        "brief": "creates a Nef polyhedron N containing the halfplane left of l including l if line== INCLUDED , excluding l if line== EXCLUDED .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Line l, Boundary line=INCLUDED)",
+        "params": [
+          {
+            "type": "Line",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Boundary",
+            "name": "line",
+            "default": "INCLUDED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "121",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Nef_polyhedron_2",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Nef_polyhedron_2",
+        "brief": "creates a Nef polyhedron N from the simple polygon P spanned by the list of points in the iterator range [it,end) and including its boundary if b = INCLUDED excluding the boundary otherwise.",
+        "detailed": "Forward_iterator has to be an iterator with value type Point . This construction expects that P is simple. The degenerate cases where P contains no point, one point or spans just one segment (two points) are correctly handled. In all degenerate cases there's only one unbounded face adjacent to the degenerate polygon. If b == INCLUDED then N is just the boundary. If b == EXCLUDED then N is the whole plane without the boundary.",
+        "return_type": "",
+        "argsstring": "(Forward_iterator it, Forward_iterator end, Boundary b=INCLUDED)",
+        "params": [
+          {
+            "type": "Forward_iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Forward_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Boundary",
+            "name": "b",
+            "default": "INCLUDED",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "121",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Nef_polyhedron_2",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Nef_polyhedron_2",
+        "brief": "The iterator range [it, end) defines a set point ranges, each of which defines the boundary of simple polygon.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Forward_iterator it, Forward_iterator end, Polygons_tag)",
+        "params": [
+          {
+            "type": "Forward_iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Forward_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polygons_tag",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "121",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Nef_polyhedron_2",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Nef_polyhedron_2",
+        "brief": "The iterator range [it, end) defines a set point ranges, each of which defines a polyline.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Forward_iterator it, Forward_iterator end, Polylines_tag)",
+        "params": [
+          {
+            "type": "Forward_iterator",
+            "name": "it",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Forward_iterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Polylines_tag",
+            "name": "",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "121",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "clear",
+        "qualified_name": "CGAL::Nef_polyhedron_2::clear",
+        "brief": "makes N the empty set if plane == EMPTY and the full plane if plane == COMPLETE .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(Content plane=EMPTY)",
+        "params": [
+          {
+            "type": "Content",
+            "name": "plane",
+            "default": "EMPTY",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "200",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_empty",
+        "qualified_name": "CGAL::Nef_polyhedron_2::is_empty",
+        "brief": "returns true if N is empty, false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "206",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_plane",
+        "qualified_name": "CGAL::Nef_polyhedron_2::is_plane",
+        "brief": "returns true if N is the whole plane, false otherwise.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "212",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "contains",
+        "qualified_name": "CGAL::Nef_polyhedron_2::contains",
+        "brief": "returns true iff the object h is contained in the set represented by N .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Object_handle h)",
+        "params": [
+          {
+            "type": "Object_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "794",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "contained_in_boundary",
+        "qualified_name": "CGAL::Nef_polyhedron_2::contained_in_boundary",
+        "brief": "returns true iff the object h is contained in the $ 1$ -skeleton of N .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Object_handle h)",
+        "params": [
+          {
+            "type": "Object_handle",
+            "name": "h",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "801",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "locate",
+        "qualified_name": "CGAL::Nef_polyhedron_2::locate",
+        "brief": "returns a generic handle h to an object (face, halfedge, vertex) of the underlying plane map that contains the point p in its relative interior.",
+        "detailed": "The point p is contained in the set represented by N if N.contains(h) is true. The location mode flag m allows one to choose between different point location strategies.",
+        "return_type": "Object_handle",
+        "argsstring": "(const Point &p, Location_mode m=DEFAULT)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Location_mode",
+            "name": "m",
+            "default": "DEFAULT",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "811",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "ray_shoot",
+        "qualified_name": "CGAL::Nef_polyhedron_2::ray_shoot",
+        "brief": "returns a handle h with N.contains(h) , that can be converted to a Vertex_/Halfedge_/Face_const_handle as described above.",
+        "detailed": "The object returned is intersected by the ray starting in p with direction d and has minimal distance to p . The operation returns an empty Object_handle if the ray shoot along d does not hit any object h of N with N.contains(h) . The location mode flag m allows one to choose between different point location strategies.",
+        "return_type": "Object_handle",
+        "argsstring": "(const Point &p, const Direction &d, Location_mode m=DEFAULT)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Direction &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Location_mode",
+            "name": "m",
+            "default": "DEFAULT",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "825",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "ray_shoot_to_boundary",
+        "qualified_name": "CGAL::Nef_polyhedron_2::ray_shoot_to_boundary",
+        "brief": "returns a handle h , that can be converted to a Vertex_/Halfedge_const_handle as described above.",
+        "detailed": "The object returned is part of the $ 1$ -skeleton of N , intersected by the ray starting in p with direction d and has minimal distance to p . The operation returns an empty Object_handle if the ray shoot along d does not hit any $ 1$ -skeleton object h of N . The location mode flag m allows one to choose between different point location strategies.",
+        "return_type": "Object_handle",
+        "argsstring": "(const Point &p, const Direction &d, Location_mode m=DEFAULT)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Direction &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Location_mode",
+            "name": "m",
+            "default": "DEFAULT",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "839",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "explorer",
+        "qualified_name": "CGAL::Nef_polyhedron_2::explorer",
+        "brief": "returns a decorator object that allows read-only access of the underlying plane map.",
+        "detailed": "See the manual page Explorer for its usage.",
+        "return_type": "Explorer",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "848",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "complement",
+        "qualified_name": "CGAL::Nef_polyhedron_2::complement",
+        "brief": "returns the complement of N in the plane.",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "231",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "interior",
+        "qualified_name": "CGAL::Nef_polyhedron_2::interior",
+        "brief": "returns the interior of N .",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "237",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "closure",
+        "qualified_name": "CGAL::Nef_polyhedron_2::closure",
+        "brief": "returns the closure of N .",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "243",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "boundary",
+        "qualified_name": "CGAL::Nef_polyhedron_2::boundary",
+        "brief": "returns the boundary of N .",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "249",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "regularization",
+        "qualified_name": "CGAL::Nef_polyhedron_2::regularization",
+        "brief": "returns the regularized polyhedron (closure of interior).",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "255",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "CGAL::Nef_polyhedron_2::intersection",
+        "brief": "returns N $ \\cap$ N1 .",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "(const Nef_polyhedron_2< T > &N1)",
+        "params": [
+          {
+            "type": "const Nef_polyhedron_2 < T > &",
+            "name": "N1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "261",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "join",
+        "qualified_name": "CGAL::Nef_polyhedron_2::join",
+        "brief": "returns N $ \\cup$ N1 .",
+        "detailed": "Note that \"union\" is a keyword of C++ and cannot be used for this operation.",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "(const Nef_polyhedron_2< T > &N1)",
+        "params": [
+          {
+            "type": "const Nef_polyhedron_2 < T > &",
+            "name": "N1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "268",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "difference",
+        "qualified_name": "CGAL::Nef_polyhedron_2::difference",
+        "brief": "returns N $ -$ N1 .",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "(const Nef_polyhedron_2< T > &N1)",
+        "params": [
+          {
+            "type": "const Nef_polyhedron_2 < T > &",
+            "name": "N1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "274",
+        "section": "Constructive Operations"
+      },
+      {
+        "kind": "function",
+        "name": "symmetric_difference",
+        "qualified_name": "CGAL::Nef_polyhedron_2::symmetric_difference",
+        "brief": "returns the symmetric difference N - T $ \\cup$ T - N .",
+        "detailed": "",
+        "return_type": "Nef_polyhedron_2 < T >",
+        "argsstring": "(const Nef_polyhedron_2< T > &N1)",
+        "params": [
+          {
+            "type": "const Nef_polyhedron_2 < T > &",
+            "name": "N1",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "280",
+        "section": "Constructive Operations"
+      }
+    ]
+  },
+  "CGAL::Nef_polyhedron_2::Explorer": {
+    "kind": "class",
+    "name": "CGAL::Nef_polyhedron_2::Explorer",
+    "brief": "a decorator to examine the underlying plane map.",
+    "detailed": "An instance E of the data type Explorer is a decorator to explore the structure of the plane map underlying the Nef polyhedron. It inherits all topological adjacency exploration operations from Topological_explorer . Explorer additionally allows one to explore the geometric embedding. The position of each vertex is given by a so-called extended point, which is either a standard affine point or the tip of a ray touching an infinimaximal square frame centered at the origin. A vertex v is called a standard vertex if its embedding is a standard point and non-standard if its embedding is a non-standard point. By the straightline embedding of their source and target vertices, edges correspond to either affine segments, rays or lines or are part of the bounding frame. Extended geometry: standard vertices are marked by S, non-standard vertices are marked by N. A : The possible embeddings of edges: an affine segment s1, an affine ray s2, an affine line s3. B : A plane map embedded by extended geometry: note that the frame is arbitrarily large, the 6 vertices on the frame are at infinity, the two faces represent a geometrically unbounded area, however they are topologically closed by the frame edges. No standard point can be placed outside the frame. Creation Explorer is copy constructable and assignable. An object can be obtained via the Nef_polyhedron_2::explorer() method of Nef_polyhedron_2 .",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Explorer::Point",
+        "brief": "the point type of finite vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "715",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Ray",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Explorer::Ray",
+        "brief": "the ray type of vertices on the frame.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "721",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "is_standard",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Explorer::is_standard",
+        "brief": "returns true iff v 's position is a standard point.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "732",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Explorer::point",
+        "brief": "returns the standard point that is the embedding of v .",
+        "detailed": "is_standard ( v ).",
+        "return_type": "Point",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "739",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "ray",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Explorer::ray",
+        "brief": "returns the ray defining the non-standard point on the frame.",
+        "detailed": "! is_standard ( v ).",
+        "return_type": "Ray",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "746",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_frame_edge",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Explorer::is_frame_edge",
+        "brief": "returns true iff e is part of the infinimaximal frame.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "752",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Nef_polyhedron_2::Topological_explorer": {
+    "kind": "class",
+    "name": "CGAL::Nef_polyhedron_2::Topological_explorer",
+    "brief": "An instance D of the data type Topological_explorer is a decorator for interfacing the topological structure of a plane map P (read-only).",
+    "detailed": "A plane map P consists of a triple $ (V, E, F)$ of vertices, edges, and faces. We collectively call them objects. An edge e is a pair of vertices (v,w) with incidence operations v = source(e) , w = target(e) . The list of all edges with source v is called the adjacency list A(v) . Edges are paired into twins. For each edge e = (v,w) there's an edge twin(e) = (w,v) and twin(twin(e)) == e The existence of the edge pairs makes P a bidirected graph, the twin links make P a map.. An edge e = (v,w) knows two adjacent edges en = next(e) and ep = previous(e) where source(en) = w , previous(en) = e and target(ep) = v and next(ep) = e . By this symmetric previous-next relationship all edges are partitioned into face cycles. Two edges $ e$ and $ e'$ are in the same face cycle if $ e = next^*(e')$ . All edges e in the same face cycle have the same incident face $ f = face(e)$ . The cyclic order on the adjacency list of a vertex v = source(e) is given by cyclic_adj_succ(e) = twin(previous(e)) and cyclic_adj_pred(e) = next(twin(e)) . A vertex v is embedded via coordinates point(v) . By the embedding of its source and target an edge corresponds to a segment. P has the property that the embedding is always order-preserving . This means a ray fixed in point(v) of a vertex v and swept around counterclockwise meets the embeddings of target(e) ( $ e \\in A(v)$ ) in the cyclic order defined by the list order of A . The embedded face cycles partition the plane into maximal connected subsets of points. Each such set corresponds to a face. A face is bounded by its incident face cycles. For all the edges in the non-trivial face cycles it holds that the face is left of the edges. There can also be trivial face cycles in form of isolated vertices in the interior of a face. Each such vertex v knows its surrounding face f = face(v) . Plane maps are attributed, for each object $ u \\in V \\cup E \\cup F$ we attribute an information mark(u) of type Mark . Mark fits the concepts assignable, default-constructible, and equal-comparable.",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Plane_map",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Plane_map",
+        "brief": "The underlying plane map type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "345",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Point",
+        "brief": "The point type of vertices.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "350",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Mark",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Mark",
+        "brief": "All objects (vertices, edges, faces) are attributed by a Mark object.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "356",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Size_type",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Size_type",
+        "brief": "The size type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "361",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_vertex_const_circulator",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Halfedge_around_vertex_const_circulator",
+        "brief": "circulating the outgoing halfedges in $ A(v)$ .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "377",
+        "section": "Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Halfedge_around_face_const_circulator",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Halfedge_around_face_const_circulator",
+        "brief": "circulating the halfedges in the face cycle of a face f .",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "384",
+        "section": "Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Hole_const_iterator",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Hole_const_iterator",
+        "brief": "iterating all holes of a face f .",
+        "detailed": "The type is convertible to Halfedge_const_handle .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "392",
+        "section": "Circulators"
+      },
+      {
+        "kind": "typedef",
+        "name": "Isolated_vertex_const_iterator",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::Isolated_vertex_const_iterator",
+        "brief": "iterating all isolated vertices of a face f .",
+        "detailed": "The type generalizes Vertex_const_handle .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "400",
+        "section": "Circulators"
+      },
+      {
+        "kind": "function",
+        "name": "source",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::source",
+        "brief": "returns the source of e .",
+        "detailed": "",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "411",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::target",
+        "brief": "returns the target of e .",
+        "detailed": "",
+        "return_type": "Vertex_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "417",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "twin",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::twin",
+        "brief": "returns the twin of e .",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "423",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "is_isolated",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::is_isolated",
+        "brief": "returns true iff $ A(v) = \\emptyset$ .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "429",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "first_out_edge",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::first_out_edge",
+        "brief": "returns one halfedge with source v .",
+        "detailed": "It's the starting point for the circular iteration over the halfedges with source v . ! is_isolated (v) .",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "437",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "last_out_edge",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::last_out_edge",
+        "brief": "returns the halfedge with source v that is the last in the circular iteration before encountering first_out_edge(v) again.",
+        "detailed": "! is_isolated (v) .",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "446",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "cyclic_adj_succ",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::cyclic_adj_succ",
+        "brief": "returns the edge after e in the cyclic ordered adjacency list of source(e) .",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "454",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "cyclic_adj_pred",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::cyclic_adj_pred",
+        "brief": "returns the edge before e in the cyclic ordered adjacency list of source(e) .",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "462",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "next",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::next",
+        "brief": "returns the next edge in the face cycle containing e .",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "468",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "previous",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::previous",
+        "brief": "returns the previous edge in the face cycle containing e .",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "474",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::face",
+        "brief": "returns the face incident to e .",
+        "detailed": "",
+        "return_type": "Face_const_handle",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "480",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "face",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::face",
+        "brief": "returns the face incident to v .",
+        "detailed": "! is_isolated (v) .",
+        "return_type": "Face_const_handle",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "487",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "halfedge",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::halfedge",
+        "brief": "returns a halfedge in the bounding face cycle of f ( Halfedge_const_handle() if there is no bounding face cycle).",
+        "detailed": "",
+        "return_type": "Halfedge_const_handle",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "495",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_begin",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::vertices_begin",
+        "brief": "iterator over vertices of the map.",
+        "detailed": "",
+        "return_type": "Vertex_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "505",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "vertices_end",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::vertices_end",
+        "brief": "past-the-end iterator for vertices.",
+        "detailed": "",
+        "return_type": "Vertex_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "510",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_begin",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::halfedges_begin",
+        "brief": "iterator over halfedges of the map.",
+        "detailed": "",
+        "return_type": "Halfedge_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "515",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "halfedges_end",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::halfedges_end",
+        "brief": "past-the-end iterator for halfedges.",
+        "detailed": "",
+        "return_type": "Halfedge_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "520",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "faces_begin",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::faces_begin",
+        "brief": "iterator over faces of the map.",
+        "detailed": "",
+        "return_type": "Face_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "525",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "faces_end",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::faces_end",
+        "brief": "past-the-end iterator for faces",
+        "detailed": "",
+        "return_type": "Face_const_iterator",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "530",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "out_edges",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::out_edges",
+        "brief": "returns a circulator for the cyclic adjacency list of v .",
+        "detailed": "",
+        "return_type": "Halfedge_around_vertex_const_circulator",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "537",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "face_cycle",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::face_cycle",
+        "brief": "returns a circulator for the outer face cycle of f .",
+        "detailed": "",
+        "return_type": "Halfedge_around_face_const_circulator",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "544",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "holes_begin",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::holes_begin",
+        "brief": "returns an iterator for all holes in the interior of f .",
+        "detailed": "A Hole_iterator can be assigned to a Halfedge_around_face_const_circulator .",
+        "return_type": "Hole_const_iterator",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "552",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "holes_end",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::holes_end",
+        "brief": "returns the past-the-end iterator of f .",
+        "detailed": "",
+        "return_type": "Hole_const_iterator",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "558",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "isolated_vertices_begin",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::isolated_vertices_begin",
+        "brief": "returns an iterator for all isolated vertices in the interior of f .",
+        "detailed": "",
+        "return_type": "Isolated_vertex_const_iterator",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "565",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "isolated_vertices_end",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::isolated_vertices_end",
+        "brief": "returns the past the end iterator of f .",
+        "detailed": "",
+        "return_type": "Isolated_vertex_const_iterator",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "572",
+        "section": "Iteration"
+      },
+      {
+        "kind": "function",
+        "name": "point",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::point",
+        "brief": "returns the embedding of v .",
+        "detailed": "",
+        "return_type": "const Point &",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "585",
+        "section": "Associated Information"
+      },
+      {
+        "kind": "function",
+        "name": "mark",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::mark",
+        "brief": "returns the mark of v .",
+        "detailed": "",
+        "return_type": "const Mark &",
+        "argsstring": "(Vertex_const_handle v)",
+        "params": [
+          {
+            "type": "Vertex_const_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "591",
+        "section": "Associated Information"
+      },
+      {
+        "kind": "function",
+        "name": "mark",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::mark",
+        "brief": "returns the mark of e .",
+        "detailed": "",
+        "return_type": "const Mark &",
+        "argsstring": "(Halfedge_const_handle e)",
+        "params": [
+          {
+            "type": "Halfedge_const_handle",
+            "name": "e",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "597",
+        "section": "Associated Information"
+      },
+      {
+        "kind": "function",
+        "name": "mark",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::mark",
+        "brief": "returns the mark of f .",
+        "detailed": "",
+        "return_type": "const Mark &",
+        "argsstring": "(Face_const_handle f)",
+        "params": [
+          {
+            "type": "Face_const_handle",
+            "name": "f",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "603",
+        "section": "Associated Information"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_vertices",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::number_of_vertices",
+        "brief": "returns the number of vertices.",
+        "detailed": "",
+        "return_type": "Size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "614",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_halfedges",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::number_of_halfedges",
+        "brief": "returns the number of halfedges.",
+        "detailed": "",
+        "return_type": "Size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "620",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_edges",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::number_of_edges",
+        "brief": "returns the number of halfedge pairs.",
+        "detailed": "",
+        "return_type": "Size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "626",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_faces",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::number_of_faces",
+        "brief": "returns the number of faces.",
+        "detailed": "",
+        "return_type": "Size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "632",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_face_cycles",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::number_of_face_cycles",
+        "brief": "returns the number of face cycles.",
+        "detailed": "",
+        "return_type": "Size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "638",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "number_of_connected_components",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::number_of_connected_components",
+        "brief": "calculates the number of connected components of P .",
+        "detailed": "",
+        "return_type": "Size_type",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "644",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "print_statistics",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::print_statistics",
+        "brief": "print the statistics of P : the number of vertices, edges, and faces.",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(std::ostream &os=std::cout)",
+        "params": [
+          {
+            "type": "std::ostream &",
+            "name": "os",
+            "default": "std::cout",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "651",
+        "section": "Statistics and Integrity"
+      },
+      {
+        "kind": "function",
+        "name": "check_integrity_and_topological_planarity",
+        "qualified_name": "CGAL::Nef_polyhedron_2::Topological_explorer::check_integrity_and_topological_planarity",
+        "brief": "checks the link structure and the genus of P .",
+        "detailed": "",
+        "return_type": "void",
+        "argsstring": "(bool faces=true)",
+        "params": [
+          {
+            "type": "bool",
+            "name": "faces",
+            "default": "true",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Nef_polyhedron_2.h",
+        "line": "657",
+        "section": "Statistics and Integrity"
+      }
+    ]
+  },
+  "ExtendedKernelTraits_2": {
+    "kind": "class",
+    "name": "ExtendedKernelTraits_2",
+    "brief": "ExtendedKernelTraits_2 is a kernel concept providing extended geometryIt is called extended geometry for simplicity, though it is not a real geometry in the classical sense. Let K be an instance of the data type ExtendedKernelTraits_2 . The central notion of extended geometry are extended points. An extended point represents either a standard affine point of the Cartesian plane or a non-standard point representing the equivalence class of rays where two rays are equivalent if one is contained in the other.",
+    "detailed": "Let $ R$ be an infinimaximal numberA finite but very large number., $ F$ be the square box with corners $ NW(-R,R)$ , $ NE(R,R)$ , $ SE(R,-R)$ , and $ SW(-R,-R)$ . Let $ p$ be a non-standard point and let $ r$ be a ray defining it. If the frame $ F$ contains the source point of $ r$ then let $ p(R)$ be the intersection of $ r$ with the frame $ F$ , if $ F$ does not contain the source of $ r$ then $ p(R)$ is undefined. For a standard point let $ p(R)$ be equal to $ p$ if $ p$ is contained in the frame $ F$ and let $ p(R)$ be undefined otherwise. Clearly, for any standard or non-standard point $ p$ , $ p(R)$ is defined for any sufficiently large $ R$ . Let $ f$ be any function on standard points, say with $ k$ arguments. We call $ f$ extensible if for any $ k$ points $ p_1$ , $ \\ldots$ , $ p_k$ the function value $ f(p_1(R),\\ldots,p_k(R))$ is constant for all sufficiently large $ R$ . We define this value as $ f(p_1,\\ldots,p_k)$ . Predicates like lexicographic order of points, orientation, and incircle tests are extensible. An extended segment is defined by two extended points such that it is either an affine segment, an affine ray, an affine line, or a segment that is part of the square box. Extended directions extend the affine notion of direction to extended objects. This extended geometry concept serves two purposes. It offers functionality for changing between standard affine and extended geometry. At the same time it provides extensible geometric primitives on the extended geometric objects. Has models CGAL::Extended_cartesian <FT> CGAL::Extended_homogeneous < RT > CGAL::Filtered_extended_homogeneous < RT >",
+    "members": [
+      {
+        "kind": "enum",
+        "name": "Point_type",
+        "qualified_name": "ExtendedKernelTraits_2::Point_type",
+        "brief": "a type descriptor for extended points.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "136",
+        "section": "Extended kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "RT",
+        "qualified_name": "ExtendedKernelTraits_2::RT",
+        "brief": "the ring type of our extended kernel.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "112",
+        "section": "Extended kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "ExtendedKernelTraits_2::Point_2",
+        "brief": "extended points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "118",
+        "section": "Extended kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_2",
+        "qualified_name": "ExtendedKernelTraits_2::Segment_2",
+        "brief": "extended segments.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "124",
+        "section": "Extended kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Direction_2",
+        "qualified_name": "ExtendedKernelTraits_2::Direction_2",
+        "brief": "extended directions.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "130",
+        "section": "Extended kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_kernel",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_kernel",
+        "brief": "the standard affine kernel.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "59",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_RT",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_RT",
+        "brief": "the standard ring type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "65",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_point_2",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_point_2",
+        "brief": "standard points.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "71",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_segment_2",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_segment_2",
+        "brief": "standard segments.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "77",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_line_2",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_line_2",
+        "brief": "standard oriented lines.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "83",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_direction_2",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_direction_2",
+        "brief": "standard directions.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "89",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_ray_2",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_ray_2",
+        "brief": "standard rays.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "95",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Standard_aff_transformation_2",
+        "qualified_name": "ExtendedKernelTraits_2::Standard_aff_transformation_2",
+        "brief": "standard affine transformations.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "101",
+        "section": "Affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point",
+        "qualified_name": "ExtendedKernelTraits_2::construct_point",
+        "brief": "creates an extended point and initializes it to the standard point p .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Standard_point_2 &p)",
+        "params": [
+          {
+            "type": "const Standard_point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "148",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point",
+        "qualified_name": "ExtendedKernelTraits_2::construct_point",
+        "brief": "creates an extended point and initializes it to the equivalence class of all the rays underlying the oriented line l .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Standard_line_2 &l)",
+        "params": [
+          {
+            "type": "const Standard_line_2 &",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "155",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point",
+        "qualified_name": "ExtendedKernelTraits_2::construct_point",
+        "brief": "creates an extended point and initializes it to the equivalence class of all the rays underlying the oriented line l(p1,p2) .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Standard_point_2 &p1, const Standard_point_2 &p2)",
+        "params": [
+          {
+            "type": "const Standard_point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Standard_point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "162",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_point",
+        "qualified_name": "ExtendedKernelTraits_2::construct_point",
+        "brief": "creates an extended point and initializes it to the equivalence class of all the rays underlying the ray starting in p in direction d .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Standard_point_2 &p, const Standard_direction_2 &d)",
+        "params": [
+          {
+            "type": "const Standard_point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Standard_direction_2 &",
+            "name": "d",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "170",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "construct_opposite_point",
+        "qualified_name": "ExtendedKernelTraits_2::construct_opposite_point",
+        "brief": "creates an extended point and initializes it to the equivalence class of all the rays underlying the oriented line opposite to l .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Standard_line_2 &l)",
+        "params": [
+          {
+            "type": "const Standard_line_2 &",
+            "name": "l",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "178",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "type",
+        "qualified_name": "ExtendedKernelTraits_2::type",
+        "brief": "determines the type of p and returns it.",
+        "detailed": "",
+        "return_type": "Point_type",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "185",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "is_standard",
+        "qualified_name": "ExtendedKernelTraits_2::is_standard",
+        "brief": "returns true iff p is a standard point.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "191",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "standard_point",
+        "qualified_name": "ExtendedKernelTraits_2::standard_point",
+        "brief": "returns the standard point represented by p .",
+        "detailed": "is_standard ( p ).",
+        "return_type": "Standard_point_2",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "197",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "standard_line",
+        "qualified_name": "ExtendedKernelTraits_2::standard_line",
+        "brief": "returns the oriented line representing the bundle of rays defining p .",
+        "detailed": "! is_standard ( p ).",
+        "return_type": "Standard_line_2",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "203",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "standard_ray",
+        "qualified_name": "ExtendedKernelTraits_2::standard_ray",
+        "brief": "a ray defining p .",
+        "detailed": "! is_standard ( p ).",
+        "return_type": "Standard_ray_2",
+        "argsstring": "(const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "209",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "NE",
+        "qualified_name": "ExtendedKernelTraits_2::NE",
+        "brief": "returns the point on the northeast frame corner.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "215",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "SE",
+        "qualified_name": "ExtendedKernelTraits_2::SE",
+        "brief": "returns the point on the southeast frame corner.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "221",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "NW",
+        "qualified_name": "ExtendedKernelTraits_2::NW",
+        "brief": "returns the point on the northwest frame corner.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "227",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "SW",
+        "qualified_name": "ExtendedKernelTraits_2::SW",
+        "brief": "returns the point on the southwest frame corner.",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "233",
+        "section": "Interfacing the affine kernel types"
+      },
+      {
+        "kind": "function",
+        "name": "source",
+        "qualified_name": "ExtendedKernelTraits_2::source",
+        "brief": "returns the source point of s .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Segment_2 &s)",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "244",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "target",
+        "qualified_name": "ExtendedKernelTraits_2::target",
+        "brief": "returns the target point of s .",
+        "detailed": "",
+        "return_type": "Point_2",
+        "argsstring": "(const Segment_2 &s)",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "250",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "construct_segment",
+        "qualified_name": "ExtendedKernelTraits_2::construct_segment",
+        "brief": "constructs a segment pq .",
+        "detailed": "",
+        "return_type": "Segment_2",
+        "argsstring": "(const Point_2 &p, const Point_2 &q)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "q",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "255",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "orientation",
+        "qualified_name": "ExtendedKernelTraits_2::orientation",
+        "brief": "returns the orientation of p with respect to the line through s .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const Segment_2 &s, const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "262",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "orientation",
+        "qualified_name": "ExtendedKernelTraits_2::orientation",
+        "brief": "returns the orientation of p3 with respect to the line through p1p2 .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2, const Point_2 &p3)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "269",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "left_turn",
+        "qualified_name": "ExtendedKernelTraits_2::left_turn",
+        "brief": "return true iff the p3 is left of the line through p1p2 .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2, const Point_2 &p3)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "276",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "is_degenerate",
+        "qualified_name": "ExtendedKernelTraits_2::is_degenerate",
+        "brief": "return true iff s is degenerate.",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Segment_2 &s)",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "283",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "compare_xy",
+        "qualified_name": "ExtendedKernelTraits_2::compare_xy",
+        "brief": "returns the lexicographic order of p1 and p2 .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "288",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "compare_x",
+        "qualified_name": "ExtendedKernelTraits_2::compare_x",
+        "brief": "returns the order on the $ x$ -coordinates of p1 and p2 .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "295",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "compare_y",
+        "qualified_name": "ExtendedKernelTraits_2::compare_y",
+        "brief": "returns the order on the $ y$ -coordinates of p1 and p2 .",
+        "detailed": "",
+        "return_type": "int",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "302",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "intersection",
+        "qualified_name": "ExtendedKernelTraits_2::intersection",
+        "brief": "returns the point of intersection of the lines supported by s1 and s2 .",
+        "detailed": "The intersection point exists.",
+        "return_type": "Point_2",
+        "argsstring": "(const Segment_2 &s1, const Segment_2 &s2)",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "s1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Segment_2 &",
+            "name": "s2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "309",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "construct_direction",
+        "qualified_name": "ExtendedKernelTraits_2::construct_direction",
+        "brief": "returns the direction of the vector p2 - p1 .",
+        "detailed": "",
+        "return_type": "Direction_2",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "316",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "strictly_ordered_ccw",
+        "qualified_name": "ExtendedKernelTraits_2::strictly_ordered_ccw",
+        "brief": "returns true iff d2 is in the interior of the counterclockwise angular sector between d1 and d3 .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Direction_2 &d1, const Direction_2 &d2, const Direction_2 &d3)",
+        "params": [
+          {
+            "type": "const Direction_2 &",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Direction_2 &",
+            "name": "d2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Direction_2 &",
+            "name": "d3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "324",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "strictly_ordered_along_line",
+        "qualified_name": "ExtendedKernelTraits_2::strictly_ordered_along_line",
+        "brief": "returns true iff p2 is in the relative interior of the segment p1p3 .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2, const Point_2 &p3)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "331",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "contains",
+        "qualified_name": "ExtendedKernelTraits_2::contains",
+        "brief": "returns true iff s contains p .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Segment_2 &s, const Point_2 &p)",
+        "params": [
+          {
+            "type": "const Segment_2 &",
+            "name": "s",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "337",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "first_pair_closer_than_second",
+        "qualified_name": "ExtendedKernelTraits_2::first_pair_closer_than_second",
+        "brief": "returns true iff $ \\|p1-p2\\| < \\|p3-p4\\|$ .",
+        "detailed": "",
+        "return_type": "bool",
+        "argsstring": "(const Point_2 &p1, const Point_2 &p2, const Point_2 &p3, const Point_2 &p4)",
+        "params": [
+          {
+            "type": "const Point_2 &",
+            "name": "p1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p2",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p3",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point_2 &",
+            "name": "p4",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "344",
+        "section": "Geometric kernel calls"
+      },
+      {
+        "kind": "function",
+        "name": "output_identifier",
+        "qualified_name": "ExtendedKernelTraits_2::output_identifier",
+        "brief": "returns a unique identifier for kernel object Input/Output.",
+        "detailed": "Usually this should be the name of the model.",
+        "return_type": "const char *",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/ExtendedKernelTraits_2.h",
+        "line": "352",
+        "section": "Geometric kernel calls"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

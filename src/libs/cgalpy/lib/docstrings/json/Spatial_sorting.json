@@ -1,0 +1,1032 @@
+{
+  "CGAL::Hilbert_policy": {
+    "kind": "struct",
+    "name": "CGAL::Hilbert_policy",
+    "brief": "Hilbert_policy is a policy class which can be used to parameterize a strategy policy in order to specify the strategy for spatial sorting.",
+    "detailed": "Hilbert_policy < Median > or Hilbert_policy < Middle > can be passed as parameter to hilbert_sort() to choose the sorting policy. Tag must be either Median or Middle . Is model of DefaultConstructible CopyConstructible Median Middle Hilbert_sort_median_policy Hilbert_sort_middle_policy",
+    "members": []
+  },
+  "CGAL::Hilbert_sort_2": {
+    "kind": "class",
+    "name": "CGAL::Hilbert_sort_2",
+    "brief": "The function object Hilbert_sort_2 sorts iterator ranges of Traits::Point_2 along a Hilbert curve by recursively subdividing at the median or the middle, depending on the PolicyTag (see Section Hilbert Sorting for more information on the policies).",
+    "detailed": "Traits must be a model of the concept SpatialSortingTraits_2 . PolicyTag is used to specify the strategy policy. Possible values are Hilbert_sort_median_policy (the default policy) or Hilbert_sort_middle_policy . ConcurrencyTag enables sequential versus parallel algorithm. Possible values are Sequential_tag , Parallel_tag , and Parallel_if_available_tag . With parallelism enabled, sorting will be performed using up to four threads. Parallel sorting is available only when the median strategy policy (the default policy) is used.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Hilbert_sort_2",
+        "qualified_name": "CGAL::Hilbert_sort_2::Hilbert_sort_2",
+        "brief": "constructs an instance with traits as traits class instance.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_2.h",
+        "line": "32",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Hilbert_sort_2::operator()",
+        "brief": "It sorts the range [begin, end) .",
+        "detailed": "InputPointIterator must be a model of RandomAccessIterator with value type Traits::Point_2 .",
+        "return_type": "void",
+        "argsstring": "(InputPointIterator begin, InputPointIterator end) const",
+        "params": [
+          {
+            "type": "InputPointIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputPointIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_2.h",
+        "line": "44",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Hilbert_sort_3": {
+    "kind": "class",
+    "name": "CGAL::Hilbert_sort_3",
+    "brief": "The function object Hilbert_sort_3 sorts iterator ranges of Traits::Point_3 along a Hilbert curve by recursively subdividing at the median or the middle, depending on the PolicyTag (see Section Hilbert Sorting for more information on the policies).",
+    "detailed": "Traits must be a model of the concept SpatialSortingTraits_3 . PolicyTag is used to specify the strategy policy. Possible values are Hilbert_sort_median_policy (the default policy) or Hilbert_sort_middle_policy . ConcurrencyTag enables sequential versus parallel algorithm. Possible values are Sequential_tag , Parallel_tag , and Parallel_if_available_tag . With parallelism enabled, sorting will be performed using up to eight threads. Parallel sorting is available only when the median strategy policy (the default policy) is used.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Hilbert_sort_3",
+        "qualified_name": "CGAL::Hilbert_sort_3::Hilbert_sort_3",
+        "brief": "constructs an instance with traits as traits class instance.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_3.h",
+        "line": "32",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Hilbert_sort_3::operator()",
+        "brief": "It sorts the range [begin, end) .",
+        "detailed": "InputPointIterator must be a model of RandomAccessIterator with value type Traits::Point_3 .",
+        "return_type": "void",
+        "argsstring": "(InputPointIterator begin, InputPointIterator end) const",
+        "params": [
+          {
+            "type": "InputPointIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputPointIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_3.h",
+        "line": "44",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Hilbert_sort_d": {
+    "kind": "class",
+    "name": "CGAL::Hilbert_sort_d",
+    "brief": "The function object Hilbert_sort_d sorts iterator ranges of Traits::Point_d along a Hilbert curve by recursively subdividing at the median or the middle depending on the PolicyTag .",
+    "detailed": "Traits must be a model for SpatialSortingTraits_d . PolicyTag is used to specify the strategy policy. Possible values are Hilbert_sort_median_policy (the default policy) or Hilbert_sort_middle_policy .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Hilbert_sort_d",
+        "qualified_name": "CGAL::Hilbert_sort_d::Hilbert_sort_d",
+        "brief": "constructs an instance with traits as traits class instance.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Traits &traits=Traits())",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_d.h",
+        "line": "27",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Hilbert_sort_d::operator()",
+        "brief": "It sorts the range [begin, end) .",
+        "detailed": "InputPointIterator must be a model of RandomAccessIterator with value type Traits::Point_d .",
+        "return_type": "void",
+        "argsstring": "(InputPointIterator begin, InputPointIterator end) const",
+        "params": [
+          {
+            "type": "InputPointIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputPointIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_d.h",
+        "line": "39",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Hilbert_sort_on_sphere_3": {
+    "kind": "class",
+    "name": "CGAL::Hilbert_sort_on_sphere_3",
+    "brief": "The function object Hilbert_sort_on_sphere_3 sorts iterator ranges of Traits::Point_3 along a Hilbert curve on a given sphere.",
+    "detailed": "Actually, it approximates a Hilbert curve on that sphere by a Hilbert curve on a certain cube. For each face of that cube, it calls an appropriate version of Hilbert_sort_2 which sorts a subset of the iterator range. Hilbert_sort_2 in each face is called with the median or the middle policy depending on the PolicyTag . The input points are supposed to be close to the input sphere. If input points are not close to the input sphere, this function still works, but it might not be a good sorting function. Traits must be a model for SpatialSortingTraits_3 . PolicyTag is used to specify the strategy policy. Possible values are Hilbert_sort_median_policy (the default policy) or Hilbert_sort_middle_policy .",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Hilbert_sort_on_sphere_3",
+        "qualified_name": "CGAL::Hilbert_sort_on_sphere_3::Hilbert_sort_on_sphere_3",
+        "brief": "constructs an instance with traits as traits class instance, sq_r as the squared_radius of the given sphere, and p as the center of the given sphere.",
+        "detailed": "The value of $sq\\_r$ should be greater than 0.",
+        "return_type": "",
+        "argsstring": "(const Traits &traits=Traits(), double sq_r=1.0, const Traits::Point_3 &p=Traits::Point_3(0, 0, 0))",
+        "params": [
+          {
+            "type": "const Traits &",
+            "name": "traits",
+            "default": "Traits()",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "sq_r",
+            "default": "1.0",
+            "brief": ""
+          },
+          {
+            "type": "const Traits::Point_3 &",
+            "name": "p",
+            "default": "Traits::Point_3(0, 0, 0)",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_on_sphere_3.h",
+        "line": "32",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Hilbert_sort_on_sphere_3::operator()",
+        "brief": "It sorts the range [begin, end) along a hilbert curve on the sphere centered at p with squared radius sq_r ; these arguments are passed in the construction of the object Hilbert_sort_on_sphere_3 .",
+        "detailed": "InputPointIterator must be a model of RandomAccessIterator with value type Traits::Point_3 .",
+        "return_type": "void",
+        "argsstring": "(InputPointIterator begin, InputPointIterator end) const",
+        "params": [
+          {
+            "type": "InputPointIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputPointIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Hilbert_sort_on_sphere_3.h",
+        "line": "47",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Median": {
+    "kind": "struct",
+    "name": "CGAL::Median",
+    "brief": "Median is a tag class.",
+    "detailed": "It can be used to parameterize a strategy policy in order to specify the strategy for spatial sorting. Hilbert_policy < Median > can be passed to as parameter to hilbert_sort() to choose the sorting policy. Is model of DefaultConstructible CopyConstructible Middle Hilbert_policy Hilbert_sort_median_policy Hilbert_sort_middle_policy",
+    "members": []
+  },
+  "CGAL::Middle": {
+    "kind": "struct",
+    "name": "CGAL::Middle",
+    "brief": "Middle is a tag class.",
+    "detailed": "It can be used to parameterize a strategy policy in order to specify the strategy for spatial sorting. Hilbert_policy < Middle > can be passed to as parameter to hilbert_sort() to choose the sorting policy. Is model of DefaultConstructible CopyConstructible Median Hilbert_policy Hilbert_sort_median_policy Hilbert_sort_middle_policy",
+    "members": []
+  },
+  "CGAL::Multiscale_sort": {
+    "kind": "class",
+    "name": "CGAL::Multiscale_sort",
+    "brief": "The class Multiscale_sort represents a sorting algorithm adaptor.",
+    "detailed": "Given a range of n points: it applies Sort on the last (1 - ratio) * n points, it recurses on the first ratio * n points, stopping when there are fewer than threshold points.",
+    "members": [
+      {
+        "kind": "function",
+        "name": "Multiscale_sort",
+        "qualified_name": "CGAL::Multiscale_sort::Multiscale_sort",
+        "brief": "constructs an instance with traits as traits class instance.",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const Sort &sort=Sort(), std::ptrdiff_t threshold=1, double ratio=0.5)",
+        "params": [
+          {
+            "type": "const Sort &",
+            "name": "sort",
+            "default": "Sort()",
+            "brief": ""
+          },
+          {
+            "type": "std::ptrdiff_t",
+            "name": "threshold",
+            "default": "1",
+            "brief": ""
+          },
+          {
+            "type": "double",
+            "name": "ratio",
+            "default": "0.5",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Multiscale_sort.h",
+        "line": "25",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "operator()",
+        "qualified_name": "CGAL::Multiscale_sort::operator()",
+        "brief": "sorts the range [begin, end) .",
+        "detailed": "Sort::operator()(InputIterator begin, InputIterator end) must be defined.",
+        "return_type": "void",
+        "argsstring": "(InputIterator begin, InputIterator end) const",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "begin",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "end",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Multiscale_sort.h",
+        "line": "37",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Spatial_sort_traits_adapter_2": {
+    "kind": "class",
+    "name": "CGAL::Spatial_sort_traits_adapter_2",
+    "brief": "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_2 induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.",
+    "detailed": "In other words, the traits provides to a spatial sort algorithm a point type which is a key, while the actual point type is Base_traits::Point_2 . Base_traits must be a model for SpatialSortingTraits_2 . PointPropertyMap must be a model of ReadablePropertyMap with value type Base_traits::Point_2 . Is model of SpatialSortingTraits_2",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_2::Point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::key_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Spatial_sort_traits_adapter_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Spatial_sort_traits_adapter_2",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_2::Spatial_sort_traits_adapter_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Spatial_sort_traits_adapter_2.h",
+        "line": "38",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Spatial_sort_traits_adapter_2",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_2::Spatial_sort_traits_adapter_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PointPropertyMap &ppmap, Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "const PointPropertyMap &",
+            "name": "ppmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Spatial_sort_traits_adapter_2.h",
+        "line": "43",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point_property_map",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_2::point_property_map",
+        "brief": "Returns a const reference to the point property map.",
+        "detailed": "",
+        "return_type": "const PointPropertyMap &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Spatial_sort_traits_adapter_2.h",
+        "line": "53",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Spatial_sort_traits_adapter_3": {
+    "kind": "class",
+    "name": "CGAL::Spatial_sort_traits_adapter_3",
+    "brief": "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_3 induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.",
+    "detailed": "In other words, the traits provides to a spatial sort algorithm a point type which is a key, while the actual point type is Base_traits::Point_3 . Base_traits must be a model for SpatialSortingTraits_3 . PointPropertyMap must be a model of ReadablePropertyMap with value type Base_traits::Point_3 . Is model of SpatialSortingTraits_3",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_3::Point_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::key_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Spatial_sort_traits_adapter_3.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Spatial_sort_traits_adapter_3",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_3::Spatial_sort_traits_adapter_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Spatial_sort_traits_adapter_3.h",
+        "line": "39",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Spatial_sort_traits_adapter_3",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_3::Spatial_sort_traits_adapter_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PointPropertyMap &ppmap, Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "const PointPropertyMap &",
+            "name": "ppmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Spatial_sort_traits_adapter_3.h",
+        "line": "44",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point_property_map",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_3::point_property_map",
+        "brief": "Returns a const reference to the point property map.",
+        "detailed": "",
+        "return_type": "const PointPropertyMap &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Spatial_sort_traits_adapter_3.h",
+        "line": "54",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL::Spatial_sort_traits_adapter_d": {
+    "kind": "class",
+    "name": "CGAL::Spatial_sort_traits_adapter_d",
+    "brief": "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_d induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.",
+    "detailed": "In other words, the traits provides to a spatial sort algorithm a point type which is a key, while the actual point type is Base_traits::Point_d . Base_traits must be a model for SpatialSortingTraits_d . PointPropertyMap must be a model of ReadablePropertyMap with value type Base_traits::Point_d . Is model of SpatialSortingTraits_d",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_d",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_d::Point_d",
+        "brief": "",
+        "detailed": "",
+        "return_type": "boost::property_traits< PointPropertyMap >::key_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Spatial_sort_traits_adapter_d.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Spatial_sort_traits_adapter_d",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_d::Spatial_sort_traits_adapter_d",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Spatial_sort_traits_adapter_d.h",
+        "line": "39",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Spatial_sort_traits_adapter_d",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_d::Spatial_sort_traits_adapter_d",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const PointPropertyMap &ppmap, Base_traits base=Base_traits())",
+        "params": [
+          {
+            "type": "const PointPropertyMap &",
+            "name": "ppmap",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "Base_traits",
+            "name": "base",
+            "default": "Base_traits()",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Spatial_sort_traits_adapter_d.h",
+        "line": "44",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point_property_map",
+        "qualified_name": "CGAL::Spatial_sort_traits_adapter_d::point_property_map",
+        "brief": "Returns a const reference to the point property map.",
+        "detailed": "",
+        "return_type": "const PointPropertyMap &",
+        "argsstring": "() const",
+        "params": [],
+        "file": "CGAL/Spatial_sort_traits_adapter_d.h",
+        "line": "54",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SpatialSortingTraits_2": {
+    "kind": "class",
+    "name": "SpatialSortingTraits_2",
+    "brief": "All 2D spatial sorting algorithms provided in CGAL are parameterized by a traits class Traits , which defines the primitives (objects and predicates) that the sorting algorithms use. SpatialSortingTraits_2 defines the complete set of primitives required in these functions and functors.",
+    "detailed": "Has models All models of the CGAL concept Kernel CGAL::Spatial_sort_traits_adapter_2 <Base_traits,PointPropertyMap>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "SpatialSortingTraits_2::Point_2",
+        "brief": "The point type on which the sorting algorithms operate.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_x_2",
+        "qualified_name": "SpatialSortingTraits_2::Compute_x_2",
+        "brief": "Functor object type returning the $ x$ coordinate of a Point_2 .",
+        "detailed": "Must provide FT operator()(Point_2 p) where FT can be used as argument of CGAL::to_double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_y_2",
+        "qualified_name": "SpatialSortingTraits_2::Compute_y_2",
+        "brief": "Functor object type returning the $ y$ coordinate of a Point_2 .",
+        "detailed": "Must provide FT operator()(Point_2 p) where FT can be used as argument of CGAL::to_double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_x_2",
+        "qualified_name": "SpatialSortingTraits_2::Less_x_2",
+        "brief": "Binary predicate object type comparing Point_2 s along the $ x$ coordinate.",
+        "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p_x < q_x$ , where $ p_x$ and $ q_x$ denote $ x$ coordinate of point $ p$ and $ q$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_y_2",
+        "qualified_name": "SpatialSortingTraits_2::Less_y_2",
+        "brief": "Binary predicate object type comparing Point_2 s along the $ y$ coordinate.",
+        "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p_y < q_y$ , where $ p_y$ and $ q_y$ denote $ y$ coordinate of point $ p$ and $ q$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "70",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "SpatialSortingTraits_2",
+        "qualified_name": "SpatialSortingTraits_2::SpatialSortingTraits_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const SpatialSortingTraits_2 &t)",
+        "params": [
+          {
+            "type": "const SpatialSortingTraits_2 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "81",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compute_x_2_object",
+        "qualified_name": "SpatialSortingTraits_2::compute_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "92",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_y_2_object",
+        "qualified_name": "SpatialSortingTraits_2::compute_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "97",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_x_2_object",
+        "qualified_name": "SpatialSortingTraits_2::less_x_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_x_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "102",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_y_2_object",
+        "qualified_name": "SpatialSortingTraits_2::less_y_2_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_y_2",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_2.h",
+        "line": "107",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SpatialSortingTraits_3": {
+    "kind": "class",
+    "name": "SpatialSortingTraits_3",
+    "brief": "All 3D spatial sorting algorithms, including sorting on the sphere, provided in CGAL are parameterized by a traits class Traits , which defines the primitives (objects and predicates) that the sorting algorithms use. SpatialSortingTraits_3 defines the complete set of primitives required in these functions and functors.",
+    "detailed": "Has models All models of the CGAL concept Kernel CGAL::Spatial_sort_traits_adapter_3 <Base_traits,PointPropertyMap>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_3",
+        "qualified_name": "SpatialSortingTraits_3::Point_3",
+        "brief": "The point type on which the sorting algorithms operate.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_x_3",
+        "qualified_name": "SpatialSortingTraits_3::Compute_x_3",
+        "brief": "Functor object type returning the $ x$ coordinate of a Point_3 .",
+        "detailed": "Must provide FT operator()(Point_3 p) where FT can be used as argument of CGAL::to_double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_y_3",
+        "qualified_name": "SpatialSortingTraits_3::Compute_y_3",
+        "brief": "Functor object type returning the $ y$ coordinate of a Point_3 .",
+        "detailed": "Must provide FT operator()(Point_3 p) where FT can be used as argument of CGAL::to_double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "46",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_z_3",
+        "qualified_name": "SpatialSortingTraits_3::Compute_z_3",
+        "brief": "Functor object type returning the $ z$ coordinate of a Point_3 .",
+        "detailed": "Must provide FT operator()(Point_3 p) where FT can be used as argument of CGAL::to_double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_x_3",
+        "qualified_name": "SpatialSortingTraits_3::Less_x_3",
+        "brief": "Binary predicate object type comparing Point_3 s along the $ x$ coordinate.",
+        "detailed": "Must provide bool operator()(Point_3 p, Point_3 q) where true is returned iff $ p_x < q_x$ , where $ p_x$ and $ q_x$ denote $ x$ coordinate of point $ p$ and $ q$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "67",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_y_3",
+        "qualified_name": "SpatialSortingTraits_3::Less_y_3",
+        "brief": "Binary predicate object type comparing Point_3 s along the $ y$ coordinate.",
+        "detailed": "Must provide bool operator()(Point_3 p, Point_3 q) where true is returned iff $ p_y < q_y$ , where $ p_y$ and $ q_y$ denote $ y$ coordinate of point $ p$ and $ q$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "79",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_z_3",
+        "qualified_name": "SpatialSortingTraits_3::Less_z_3",
+        "brief": "Binary predicate object type comparing Point_3 s along the $ z$ coordinate.",
+        "detailed": "Must provide bool operator()(Point_3 p, Point_3 q) where true is returned iff $ p_z < q_z$ , where $ p_z$ and $ q_z$ denote $ z$ coordinate of point $ p$ and $ q$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "91",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "SpatialSortingTraits_3",
+        "qualified_name": "SpatialSortingTraits_3::SpatialSortingTraits_3",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const SpatialSortingTraits_3 &t)",
+        "params": [
+          {
+            "type": "const SpatialSortingTraits_3 &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "102",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "compute_x_3_object",
+        "qualified_name": "SpatialSortingTraits_3::compute_x_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_x_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "113",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_y_3_object",
+        "qualified_name": "SpatialSortingTraits_3::compute_y_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_y_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "118",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_z_3_object",
+        "qualified_name": "SpatialSortingTraits_3::compute_z_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_z_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "123",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_x_3_object",
+        "qualified_name": "SpatialSortingTraits_3::less_x_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_x_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "128",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_y_3_object",
+        "qualified_name": "SpatialSortingTraits_3::less_y_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_y_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "133",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_z_3_object",
+        "qualified_name": "SpatialSortingTraits_3::less_z_3_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_z_3",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_3.h",
+        "line": "138",
+        "section": "Operations"
+      }
+    ]
+  },
+  "SpatialSortingTraits_d": {
+    "kind": "class",
+    "name": "SpatialSortingTraits_d",
+    "brief": "All higher dimensional spatial sorting algorithms provided in CGAL are parameterized by a traits class Traits , which defines the primitives (objects and predicates) that the sorting algorithms use. SpatialSortingTraits_d defines the complete set of primitives required in these functions and functors.",
+    "detailed": "Has models Any CGAL d -dimensional kernel. CGAL::Spatial_sort_traits_adapter_d <Base_traits,PointPropertyMap>",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_d",
+        "qualified_name": "SpatialSortingTraits_d::Point_d",
+        "brief": "The point type on which the sorting algorithms operate.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "29",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Point_dimension_d",
+        "qualified_name": "SpatialSortingTraits_d::Point_dimension_d",
+        "brief": "Functor object type returning the dimension of a Point_d .",
+        "detailed": "Must provide int operator()(Point_d p) returning the dimension of $ p$ .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "37",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_coordinate_d",
+        "qualified_name": "SpatialSortingTraits_d::Compute_coordinate_d",
+        "brief": "Functor object type returning the coordinates of a Point_d .",
+        "detailed": "Must provide FT operator()(Point_d p, int i) returning the $ i$ th coordinate of $ p$ . FT is a type that can be used as argument of CGAL::to_double .",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "47",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Less_coordinate_d",
+        "qualified_name": "SpatialSortingTraits_d::Less_coordinate_d",
+        "brief": "Binary predicate object type comparing Point_d s along some coordinate.",
+        "detailed": "Must provide bool operator()(Point_d p, Point_d q, int i) where true is returned iff $ p_i < q_i$ , where $ p_i$ and $ q_i$ denote $ i$ th coordinate of point $ p$ and $ q$ , respectively.",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "59",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "SpatialSortingTraits_d",
+        "qualified_name": "SpatialSortingTraits_d::SpatialSortingTraits_d",
+        "brief": "",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(const SpatialSortingTraits_d &t)",
+        "params": [
+          {
+            "type": "const SpatialSortingTraits_d &",
+            "name": "t",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "70",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "point_dimension_d_object",
+        "qualified_name": "SpatialSortingTraits_d::point_dimension_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Point_dimension_d",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "81",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "compute_coordinate_d_object",
+        "qualified_name": "SpatialSortingTraits_d::compute_coordinate_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Compute_coordinate_d",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "86",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "less_coordinate_d_object",
+        "qualified_name": "SpatialSortingTraits_d::less_coordinate_d_object",
+        "brief": "",
+        "detailed": "",
+        "return_type": "Less_coordinate_d",
+        "argsstring": "()",
+        "params": [],
+        "file": "Concepts/SpatialSortingTraits_d.h",
+        "line": "91",
+        "section": "Operations"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}

@@ -1,0 +1,563 @@
+{
+  "CGAL::Point_set_2": {
+    "kind": "class",
+    "name": "CGAL::Point_set_2",
+    "brief": "An instance PS of the data type Point_set_2 is a Delaunay Triangulation of its vertex set.",
+    "detailed": "The class Point_set_2 is inherited from the CGAL Delaunay triangulation, and provides additional nearest neighbor query operations and range searching operations. The Point_set_2 class of CGAL depends on template parameters standing for the geometric traits classes used by the point set and by the Delaunay triangulation (Gt) and for the triangulation data structure (Tds).",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point",
+        "qualified_name": "CGAL::Point_set_2::Point",
+        "brief": "the point type",
+        "detailed": "",
+        "return_type": "Gt::Point_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "28",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment",
+        "qualified_name": "CGAL::Point_set_2::Segment",
+        "brief": "the segment type",
+        "detailed": "",
+        "return_type": "Gt::Segment_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "33",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Circle",
+        "qualified_name": "CGAL::Point_set_2::Circle",
+        "brief": "the circle type",
+        "detailed": "",
+        "return_type": "Gt::Circle_2",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "38",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Numb_type",
+        "qualified_name": "CGAL::Point_set_2::Numb_type",
+        "brief": "the representation field number type.",
+        "detailed": "",
+        "return_type": "Gt::FT",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "43",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Triangulation",
+        "qualified_name": "CGAL::Point_set_2::Triangulation",
+        "brief": "the underlying triangulation type.",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "48",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "size_type",
+        "qualified_name": "CGAL::Point_set_2::size_type",
+        "brief": "the size type of the underlying triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation::size_type",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "53",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex",
+        "qualified_name": "CGAL::Point_set_2::Vertex",
+        "brief": "the vertex type of the underlying triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation::Vertex",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "58",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Edge",
+        "qualified_name": "CGAL::Point_set_2::Edge",
+        "brief": "the edge type of the underlying triangulation.",
+        "detailed": "",
+        "return_type": "Triangulation::Edge",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "63",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Vertex_handle",
+        "qualified_name": "CGAL::Point_set_2::Vertex_handle",
+        "brief": "handles to vertices.",
+        "detailed": "",
+        "return_type": "Triangulation::Vertex_handle",
+        "argsstring": "",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "68",
+        "section": "Types"
+      },
+      {
+        "kind": "function",
+        "name": "Point_set_2",
+        "qualified_name": "CGAL::Point_set_2::Point_set_2",
+        "brief": "creates an empty Point_set_2 .",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "()",
+        "params": [],
+        "file": "CGAL/Point_set_2.h",
+        "line": "78",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "Point_set_2",
+        "qualified_name": "CGAL::Point_set_2::Point_set_2",
+        "brief": "creates a Point_set_2 PS of the points in the range [ first , last ).",
+        "detailed": "",
+        "return_type": "",
+        "argsstring": "(InputIterator first, InputIterator last)",
+        "params": [
+          {
+            "type": "InputIterator",
+            "name": "first",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "InputIterator",
+            "name": "last",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "85",
+        "section": "Creation"
+      },
+      {
+        "kind": "function",
+        "name": "lookup",
+        "qualified_name": "CGAL::Point_set_2::lookup",
+        "brief": "if PS contains a vertex v with v.point() == p the result is a handle to v otherwise the result is NULL .",
+        "detailed": "",
+        "return_type": "Vertex _handle",
+        "argsstring": "(Point p)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "96",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbor",
+        "qualified_name": "CGAL::Point_set_2::nearest_neighbor",
+        "brief": "computes a handle to a vertex v of PS that is closest to p .",
+        "detailed": "If PS is empty, NULL is returned.",
+        "return_type": "Vertex _handle",
+        "argsstring": "(Point p)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "103",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbor",
+        "qualified_name": "CGAL::Point_set_2::nearest_neighbor",
+        "brief": "computes a handle to a vertex w of PS that is closest to v .",
+        "detailed": "If v is the only vertex in PS , NULL is returned.",
+        "return_type": "Vertex _handle",
+        "argsstring": "(Vertex_handle v)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "110",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbors",
+        "qualified_name": "CGAL::Point_set_2::nearest_neighbors",
+        "brief": "computes the k nearest neighbors of p in PS , and places the handles to the corresponding vertices as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.",
+        "detailed": "The function returns an output iterator pointing to the position beyond the end of the sequence.",
+        "return_type": "OutputIterator",
+        "argsstring": "(Point p, size_type k, OutputIterator res)",
+        "params": [
+          {
+            "type": "Point",
+            "name": "p",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "res",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "121",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "nearest_neighbors",
+        "qualified_name": "CGAL::Point_set_2::nearest_neighbors",
+        "brief": "computes the k nearest neighbors of v , and places them as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.",
+        "detailed": "The function returns an output iterator pointing to the position beyond the end of the sequence.",
+        "return_type": "OutputIterator",
+        "argsstring": "(Vertex_handle v, size_type k, OutputIterator res)",
+        "params": [
+          {
+            "type": "Vertex_handle",
+            "name": "v",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "size_type",
+            "name": "k",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "res",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "131",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "range_search",
+        "qualified_name": "CGAL::Point_set_2::range_search",
+        "brief": "computes handles to all vertices contained in the closure of disk C .",
+        "detailed": "The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence.",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Circle &C, OutputIterator res)",
+        "params": [
+          {
+            "type": "const Circle &",
+            "name": "C",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "res",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "143",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "range_search",
+        "qualified_name": "CGAL::Point_set_2::range_search",
+        "brief": "computes handles to all vertices contained in the closure of the triangle (a,b,c) .",
+        "detailed": "a , b , and c must not be collinear. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence.",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point &a, const Point &b, const Point &c, OutputIterator res)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "a",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "b",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "c",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "res",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "157",
+        "section": "Operations"
+      },
+      {
+        "kind": "function",
+        "name": "range_search",
+        "qualified_name": "CGAL::Point_set_2::range_search",
+        "brief": "computes handles to all vertices contained in the closure of the iso-rectangle (a1,b1,c1,d1) .",
+        "detailed": "a1 is the upper left point, b1 the lower left, c1 the lower right and d1 the upper right point of the iso rectangle. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence.",
+        "return_type": "OutputIterator",
+        "argsstring": "(const Point &a1, const Point &b1, const Point &c1, const Point &d1, OutputIterator res)",
+        "params": [
+          {
+            "type": "const Point &",
+            "name": "a1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "b1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "c1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "const Point &",
+            "name": "d1",
+            "default": "",
+            "brief": ""
+          },
+          {
+            "type": "OutputIterator",
+            "name": "res",
+            "default": "",
+            "brief": ""
+          }
+        ],
+        "file": "CGAL/Point_set_2.h",
+        "line": "171",
+        "section": "Operations"
+      }
+    ]
+  },
+  "PointSetTraits": {
+    "kind": "class",
+    "name": "PointSetTraits",
+    "brief": "A point set traits class has to provide some primitives that are used by the point set class. The following catalog lists the involved primitives. For details about these types see the Kernel traits documentation.",
+    "detailed": "",
+    "members": [
+      {
+        "kind": "typedef",
+        "name": "Point_2",
+        "qualified_name": "PointSetTraits::Point_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "20",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Circle_2",
+        "qualified_name": "PointSetTraits::Circle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "25",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Segment_2",
+        "qualified_name": "PointSetTraits::Segment_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "30",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "FT",
+        "qualified_name": "PointSetTraits::FT",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "35",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Orientation_2",
+        "qualified_name": "PointSetTraits::Orientation_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "40",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Side_of_oriented_circle_2",
+        "qualified_name": "PointSetTraits::Side_of_oriented_circle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "45",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_circle_2",
+        "qualified_name": "PointSetTraits::Construct_circle_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "50",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compute_squared_distance_2",
+        "qualified_name": "PointSetTraits::Compute_squared_distance_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "55",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Bounded_side_2",
+        "qualified_name": "PointSetTraits::Bounded_side_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "60",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Compare_distance_2",
+        "qualified_name": "PointSetTraits::Compare_distance_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "65",
+        "section": "Types"
+      },
+      {
+        "kind": "typedef",
+        "name": "Construct_center_2",
+        "qualified_name": "PointSetTraits::Construct_center_2",
+        "brief": "",
+        "detailed": "",
+        "return_type": "unspecified_type",
+        "argsstring": "",
+        "params": [],
+        "file": "Concepts/PointSetTraits.h",
+        "line": "70",
+        "section": "Types"
+      }
+    ]
+  },
+  "CGAL": {
+    "kind": "namespace",
+    "name": "CGAL",
+    "brief": "",
+    "detailed": "",
+    "members": []
+  },
+  "std": {
+    "kind": "namespace",
+    "name": "std",
+    "brief": "STL namespace.",
+    "detailed": "",
+    "members": []
+  }
+}
