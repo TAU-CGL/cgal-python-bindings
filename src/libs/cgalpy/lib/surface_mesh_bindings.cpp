@@ -634,10 +634,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            [](const Sm& sm, Vi v, bool check_all_incident_halfedges = true)
            { return sm.is_border(v, check_all_incident_halfedges); },
            py::arg("v"), py::arg("check_all_incident_halfedges") = true)
-      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); }, py::arg("v"))
-      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); }, py::arg("e"))
-      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); }, py::arg("f"))
-      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); }, py::arg("h"))
+      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); }, py::arg("v"),
+           doc::CGAL_Surface_mesh_is_removed)
+      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); }, py::arg("e"),
+           doc::CGAL_Surface_mesh_is_removed_1)
+      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); }, py::arg("f"),
+           doc::CGAL_Surface_mesh_is_removed_2)
+      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); }, py::arg("h"),
+           doc::CGAL_Surface_mesh_is_removed_3)
       .def("source", &Sm::source)
       .def("target", &Sm::target)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
@@ -650,14 +654,18 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("prev", &Sm::prev)
       .def("resize", &Sm::resize)
       .def("set_target", &Sm::set_target)
-      .def("has_garbage", &Sm::has_garbage)
-      .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); })
+      .def("has_garbage", &Sm::has_garbage,
+           doc::CGAL_Surface_mesh_has_garbage)
+      .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); },
+           doc::CGAL_Surface_mesh_collect_garbage)
       .def("is_isolated", &Sm::is_isolated)
       .def("set_next_only", &Sm::set_next_only)
       .def("set_prev_only", &Sm::set_prev_only)
       .def("shrink_to_fit", &Sm::shrink_to_fit)
-      .def("set_recycle_garbage", &Sm::set_recycle_garbage)
-      .def("does_recycle_garbage", &Sm::does_recycle_garbage)
+      .def("set_recycle_garbage", &Sm::set_recycle_garbage,
+           doc::CGAL_Surface_mesh_set_recycle_garbage)
+      .def("does_recycle_garbage", &Sm::does_recycle_garbage,
+           doc::CGAL_Surface_mesh_does_recycle_garbage)
 
       .def("number_of_removed_edges", &Sm::number_of_removed_edges,
            doc::CGAL_Surface_mesh_number_of_removed_edges)
@@ -686,12 +694,17 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            "Inserts other into sm.",
            py::is_operator())
 
-      .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_),
+           doc::CGAL_Surface_mesh_is_valid)
 #if CGAL_VERSION_NR >= 1050600000
-      .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_),
+           doc::CGAL_Surface_mesh_is_valid_1)
+      .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_),
+           doc::CGAL_Surface_mesh_is_valid_2)
+      .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_),
+           doc::CGAL_Surface_mesh_is_valid_3)
+      .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_),
+           doc::CGAL_Surface_mesh_is_valid_4)
 #endif
       ;
 
