@@ -12,6 +12,7 @@
 #include "CGALPY/visibility_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/Visibility_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -36,17 +37,24 @@ void export_visibility_2(py::module_& m) {
   using Arr = vis2::Arrangement_2;
   using Point = vis2::Point_2;
   using Face = vis2::Face;
+  namespace doc = cgalpy::docstrings::Visibility_2;
 
   if (! add_attr<Spv>(m, "Simple_polygon_visibility_2")) {
     py::class_<Spv> spv_c(m, "Simple_polygon_visibility_2");
     spv_c.def(py::init<>())
       .def(py::init<const Arr&>())
-      .def("is_attached", &Spv::is_attached)
-      .def("attach", &Spv::attach)
-      .def("detach", &Spv::detach)
-      .def("arrangement_2", &Spv::arrangement_2)
-      .def("compute_visibility", vis2::compute_visibility1<Spv>)
-      .def("compute_visibility", vis2::compute_visibility2<Spv>)
+      .def("is_attached", &Spv::is_attached,
+           doc::Visibility_2_is_attached)
+      .def("attach", &Spv::attach,
+           doc::CGAL_Simple_polygon_visibility_2_attach)
+      .def("detach", &Spv::detach,
+           doc::Visibility_2_detach)
+      .def("arrangement_2", &Spv::arrangement_2,
+           doc::Visibility_2_arrangement_2)
+      .def("compute_visibility", vis2::compute_visibility1<Spv>,
+           doc::Visibility_2_compute_visibility)
+      .def("compute_visibility", vis2::compute_visibility2<Spv>,
+           doc::Visibility_2_compute_visibility_1)
       ;
   }
 
@@ -55,12 +63,18 @@ void export_visibility_2(py::module_& m) {
     py::class_<Tev> tev_c(m, "Triangular_expansion_visibility_2");
     tev_c.def(py::init<>())
       .def(py::init<const Arr&>())
-      .def("is_attached", &Tev::is_attached)
-      .def("attach", &Tev::attach)
-      .def("detach", &Tev::detach)
-      .def("arrangement_2", &Tev::arrangement_2)
-      .def("compute_visibility", vis2::compute_visibility1<Tev>)
-      .def("compute_visibility", vis2::compute_visibility2<Tev>)
+      .def("is_attached", &Tev::is_attached,
+           doc::Visibility_2_is_attached)
+      .def("attach", &Tev::attach,
+           doc::CGAL_Triangular_expansion_visibility_2_attach)
+      .def("detach", &Tev::detach,
+           doc::Visibility_2_detach)
+      .def("arrangement_2", &Tev::arrangement_2,
+           doc::Visibility_2_arrangement_2)
+      .def("compute_visibility", vis2::compute_visibility1<Tev>,
+           doc::Visibility_2_compute_visibility)
+      .def("compute_visibility", vis2::compute_visibility2<Tev>,
+           doc::Visibility_2_compute_visibility_1)
       ;
   }
 }
