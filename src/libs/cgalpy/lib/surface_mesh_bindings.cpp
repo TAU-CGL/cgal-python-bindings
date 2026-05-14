@@ -595,20 +595,30 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("has_valid_index", &sm::has_valid_index_h<Sm>)
       .def("has_valid_index", &sm::has_valid_index_f<Sm>)
 
-      .def("remove_vertex", &Sm::remove_vertex)
-      .def("remove_edge", &Sm::remove_edge)
-      .def("remove_face", &Sm::remove_face)
+      .def("remove_vertex", &Sm::remove_vertex,
+           doc::CGAL_Surface_mesh_remove_vertex)
+      .def("remove_edge", &Sm::remove_edge,
+           doc::CGAL_Surface_mesh_remove_edge)
+      .def("remove_face", &Sm::remove_face,
+           doc::CGAL_Surface_mesh_remove_face)
       .def("num_vertices", &Sm::num_vertices)
-      .def("number_of_vertices", &Sm::number_of_vertices)
+      .def("number_of_vertices", &Sm::number_of_vertices,
+           doc::CGAL_Surface_mesh_number_of_vertices)
       .def("num_halfedges", &Sm::num_halfedges)
-      .def("number_of_halfedges", &Sm::number_of_halfedges)
+      .def("number_of_halfedges", &Sm::number_of_halfedges,
+           doc::CGAL_Surface_mesh_number_of_halfedges)
       .def("num_edges", &Sm::num_edges)
-      .def("number_of_edges", &Sm::number_of_edges)
+      .def("number_of_edges", &Sm::number_of_edges,
+           doc::CGAL_Surface_mesh_number_of_edges)
       .def("num_faces", &Sm::num_faces)
-      .def("number_of_faces", &Sm::number_of_faces)
-      .def("is_empty", &Sm::is_empty)
-      .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
-      .def("clear", &Sm::clear)
+      .def("number_of_faces", &Sm::number_of_faces,
+           doc::CGAL_Surface_mesh_number_of_faces)
+      .def("is_empty", &Sm::is_empty,
+           doc::CGAL_Surface_mesh_is_empty)
+      .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps,
+           doc::CGAL_Surface_mesh_clear_without_removing_property_maps)
+      .def("clear", &Sm::clear,
+           doc::CGAL_Surface_mesh_clear)
       .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); }, py::arg("v"))
       .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); }, py::arg("f"))
       .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); }, py::arg("e"))
@@ -649,10 +659,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("set_recycle_garbage", &Sm::set_recycle_garbage)
       .def("does_recycle_garbage", &Sm::does_recycle_garbage)
 
-      .def("number_of_removed_edges", &Sm::number_of_removed_edges)
-      .def("number_of_removed_faces", &Sm::number_of_removed_faces)
-      .def("number_of_removed_vertices", &Sm::number_of_removed_vertices)
-      .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
+      .def("number_of_removed_edges", &Sm::number_of_removed_edges,
+           doc::CGAL_Surface_mesh_number_of_removed_edges)
+      .def("number_of_removed_faces", &Sm::number_of_removed_faces,
+           doc::CGAL_Surface_mesh_number_of_removed_faces)
+      .def("number_of_removed_vertices", &Sm::number_of_removed_vertices,
+           doc::CGAL_Surface_mesh_number_of_removed_vertices)
+      .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges,
+           doc::CGAL_Surface_mesh_number_of_removed_halfedges)
 
       .def("next_around_source", &Sm::next_around_source)
       .def("prev_around_source", &Sm::prev_around_source)
