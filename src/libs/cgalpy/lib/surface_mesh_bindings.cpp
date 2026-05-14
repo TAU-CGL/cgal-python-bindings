@@ -54,6 +54,7 @@
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/surface_mesh_types.hpp"
+#include "cgalpy/Surface_mesh_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -416,6 +417,7 @@ void add_sm_index(C& c) {
 // Export Surface_mesh.
 template <typename SurfaceMesh>
 void export_surface_mesh_impl(py::module_& m, const char* name) {
+  namespace doc = cgalpy::docstrings::Surface_mesh;
   using Sm = SurfaceMesh;
   using Pnt = typename Sm::Point;
   using Vec = Kernel::Vector_3;
@@ -566,17 +568,27 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       sm::export_dynamic_property_maps<Sm, FT, py::rv_policy::reference_internal>(m, "FT");
 
 
-    sm_c.def(py::init<>())
-      .def(py::init<const Sm&>())
+    sm_c.def(py::init<>(),
+              doc::CGAL_Surface_mesh_Surface_mesh)
+      .def(py::init<const Sm&>(),
+           doc::CGAL_Surface_mesh_Surface_mesh_1)
       // .def("assign", &Sm::assign, ri)
-      .def("add_vertex", py::overload_cast<>(&Sm::add_vertex))
-      .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex))
-      .def("add_edge", py::overload_cast<>(&Sm::add_edge))
-      .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge))
-      .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face))
-      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face))
-      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
-      .def("add_face", &sm::add_face<Sm>)
+      .def("add_vertex", py::overload_cast<>(&Sm::add_vertex),
+           doc::CGAL_Surface_mesh_add_vertex)
+      .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex),
+           doc::CGAL_Surface_mesh_add_vertex_1)
+      .def("add_edge", py::overload_cast<>(&Sm::add_edge),
+           doc::CGAL_Surface_mesh_add_edge)
+      .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge),
+           doc::CGAL_Surface_mesh_add_edge_1)
+      .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face),
+           doc::CGAL_Surface_mesh_add_face)
+      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face),
+           doc::CGAL_Surface_mesh_add_face_1)
+      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face),
+           doc::CGAL_Surface_mesh_add_face_2)
+      .def("add_face", &sm::add_face<Sm>,
+           doc::CGAL_Surface_mesh_add_face_3)
 
       .def("has_valid_index", &sm::has_valid_index_v<Sm>)
       .def("has_valid_index", &sm::has_valid_index_e<Sm>)
