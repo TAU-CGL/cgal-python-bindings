@@ -33,6 +33,7 @@
 #include "CGALPY/Arr_overlay_function_traits.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
@@ -727,44 +728,72 @@ void export_aos(py::module_& m) {
   using Aos = aos2::Arrangement_on_surface_2;
   using Gt = Aos::Geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
+  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
 
   py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
   aos_c.def(py::init<>())
     .def(py::init<const Aos&>())
     .def(py::init<const Gt*>(), py::keep_alive<1, 2>())
-    .def("geometry_traits", &aos2::geometry_traits, ri)
+    .def("geometry_traits", &aos2::geometry_traits, ri,
+         doc::CGAL_Arrangement_on_surface_2_geometry_traits)
     .def("topology_traits", &aos2::topology_traits, ri)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS) || \
        (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
        (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS))
-    .def("fictitious_face", &aos2::fictitious_face, ri)
+    .def("fictitious_face", &aos2::fictitious_face, ri,
+         doc::CGAL_Arrangement_on_surface_2_fictitious_face)
 #endif
-    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri)
-    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri)
-    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex1, ri)
-    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex2, ri)
-    .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri)
-    .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri)
-    .def("insert_at_vertices", &aos2::insert_at_vertices1, ri)
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex)
+    .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex_1)
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex1, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex)
+    .def("insert_from_right_vertex", &aos2::insert_from_right_vertex2, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex_1)
+    .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior)
+    .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior_1)
+    .def("insert_at_vertices", &aos2::insert_at_vertices1, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_at_vertices)
     // .def("insert_at_vertices", &aos2::insert_at_vertices2, ri)
-    .def("insert_at_vertices", &aos2::insert_at_vertices3, ri)
-    .def("insert_at_vertices", &aos2::insert_at_vertices4, ri)
-    .def("modify_vertex", &aos2::modify_vertex, ri)
-    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, ri)
-    .def("modify_edge", &aos2::modify_edge, ri)
-    .def("split_edge", &aos2::split_edge, ri)
-    .def("merge_edge", &aos2::merge_edge, ri)
-    .def("remove_edge", &aos2::remove_edge, ri)
-    .def("is_empty", &Aos::is_empty)
-    .def("is_valid", &Aos::is_valid)
-    .def("number_of_edges", &Aos::number_of_edges)
-    .def("number_of_faces", &Aos::number_of_faces)
-    .def("number_of_halfedges", &Aos::number_of_halfedges)
-    .def("number_of_isolated_vertices", &Aos::number_of_isolated_vertices)
-    .def("number_of_unbounded_faces", &Aos::number_of_unbounded_faces)
-    .def("number_of_vertices", &Aos::number_of_vertices)
-    .def("assign", &Aos::assign)
-    .def("clear", &Aos::clear)
+    .def("insert_at_vertices", &aos2::insert_at_vertices3, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_1)
+    .def("insert_at_vertices", &aos2::insert_at_vertices4, ri,
+         doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_2)
+    .def("modify_vertex", &aos2::modify_vertex, ri,
+         doc::CGAL_Arrangement_on_surface_2_modify_vertex)
+    .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, ri,
+         doc::CGAL_Arrangement_on_surface_2_remove_isolated_vertex)
+    .def("modify_edge", &aos2::modify_edge, ri,
+         doc::CGAL_Arrangement_on_surface_2_modify_edge)
+    .def("split_edge", &aos2::split_edge, ri,
+         doc::CGAL_Arrangement_on_surface_2_split_edge)
+    .def("merge_edge", &aos2::merge_edge, ri,
+         doc::CGAL_Arrangement_on_surface_2_merge_edge)
+    .def("remove_edge", &aos2::remove_edge, ri,
+         doc::CGAL_Arrangement_on_surface_2_remove_edge)
+    .def("is_empty", &Aos::is_empty,
+         doc::CGAL_Arrangement_on_surface_2_is_empty)
+    .def("is_valid", &Aos::is_valid,
+         doc::CGAL_Arrangement_on_surface_2_is_valid)
+    .def("number_of_edges", &Aos::number_of_edges,
+         doc::CGAL_Arrangement_on_surface_2_number_of_edges)
+    .def("number_of_faces", &Aos::number_of_faces,
+         doc::CGAL_Arrangement_on_surface_2_number_of_faces)
+    .def("number_of_halfedges", &Aos::number_of_halfedges,
+         doc::CGAL_Arrangement_on_surface_2_number_of_halfedges)
+    .def("number_of_isolated_vertices", &Aos::number_of_isolated_vertices,
+         doc::CGAL_Arrangement_on_surface_2_number_of_isolated_vertices)
+    .def("number_of_unbounded_faces", &Aos::number_of_unbounded_faces,
+         doc::CGAL_Arrangement_on_surface_2_number_of_unbounded_faces)
+    .def("number_of_vertices", &Aos::number_of_vertices,
+         doc::CGAL_Arrangement_on_surface_2_number_of_vertices)
+    .def("assign", &Aos::assign,
+         doc::CGAL_Arrangement_on_surface_2_assign)
+    .def("clear", &Aos::clear,
+         doc::CGAL_Arrangement_on_surface_2_clear)
     ;
 
   using Vci = Aos::Vertex_const_iterator;

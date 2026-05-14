@@ -526,6 +526,7 @@ endif ()
 
 # Add all include directories
 include_directories(include)
+include_directories(${cgalpy_GENERATED_INC_DIR})
 
 # Internal dependencies
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
