@@ -33,6 +33,17 @@ else()
   set(${component}_GEN_DOCSTRINGS_CMD ${Python_EXECUTABLE} ${${component}_GEN_DOCSTRINGS})
 endif()
 
+function(get_docstring_module_name short_name out_var)
+  # Public binding submodules use short names (e.g. Aos2, Ker, Bso2),
+  # while generated docstring JSON/files use long CGAL package names
+  # (e.g. Arrangement_on_surface_2, Kernel_23, Boolean_set_operations_2).
+  if(DEFINED CGALPY_DOCSTRING_MODULE_${short_name})
+    set(${out_var} ${CGALPY_DOCSTRING_MODULE_${short_name}} PARENT_SCOPE)
+  else()
+    set(${out_var} ${short_name} PARENT_SCOPE)
+  endif()
+endfunction()
+
 function(add_module_docstring module)
   set(${component}_GEN_DOCSTRINGS_OUTPUT
       ${${component}_GENERATED_INC_DIR}/${component}/${module}_docstrings.hpp
@@ -69,6 +80,39 @@ function(add_module_docstring module)
       ${${component}_GENERATED_LIB_DIR}/${module}_docstrings.cpp
       GENERATED)
 endfunction()
+
+set(CGALPY_DOCSTRING_MODULE_Aos2 Arrangement_on_surface_2)
+set(CGALPY_DOCSTRING_MODULE_As2 Alpha_shapes_2)
+set(CGALPY_DOCSTRING_MODULE_As3 Alpha_shapes_3)
+set(CGALPY_DOCSTRING_MODULE_Bgl BGL)
+set(CGALPY_DOCSTRING_MODULE_Bso2 Boolean_set_operations_2)
+set(CGALPY_DOCSTRING_MODULE_Bv Bounding_volumes)
+set(CGALPY_DOCSTRING_MODULE_Bvr Basic_viewer)
+set(CGALPY_DOCSTRING_MODULE_Ch2 Convex_hull_2)
+set(CGALPY_DOCSTRING_MODULE_Ch3 Convex_hull_3)
+set(CGALPY_DOCSTRING_MODULE_Env2 Envelope_2)
+set(CGALPY_DOCSTRING_MODULE_Env3 Envelope_3)
+set(CGALPY_DOCSTRING_MODULE_Gog Generator)
+set(CGALPY_DOCSTRING_MODULE_Ker Kernel_23)
+set(CGALPY_DOCSTRING_MODULE_Kerd Kernel_d)
+set(CGALPY_DOCSTRING_MODULE_Ms2 Minkowski_sum_2)
+set(CGALPY_DOCSTRING_MODULE_Nef3 Nef_3)
+set(CGALPY_DOCSTRING_MODULE_Pmp Polygon_mesh_processing)
+set(CGALPY_DOCSTRING_MODULE_Pol2 Polygon)
+set(CGALPY_DOCSTRING_MODULE_Pol3 Polyhedron)
+set(CGALPY_DOCSTRING_MODULE_Pp2 Partition_2)
+set(CGALPY_DOCSTRING_MODULE_Sd Shape_detection)
+set(CGALPY_DOCSTRING_MODULE_Sm Surface_mesh)
+set(CGALPY_DOCSTRING_MODULE_Sms Surface_mesh_simplification)
+set(CGALPY_DOCSTRING_MODULE_Smsk Surface_mesh_skeletonization)
+set(CGALPY_DOCSTRING_MODULE_Sn2 Straight_skeleton_2)
+set(CGALPY_DOCSTRING_MODULE_Ss Spatial_searching)
+set(CGALPY_DOCSTRING_MODULE_Ss2 Surface_sweep_2)
+set(CGALPY_DOCSTRING_MODULE_St Spatial_sorting)
+set(CGALPY_DOCSTRING_MODULE_Tri2 Triangulation_2)
+set(CGALPY_DOCSTRING_MODULE_Tri3 Triangulation_3)
+set(CGALPY_DOCSTRING_MODULE_Trid Triangulation)
+set(CGALPY_DOCSTRING_MODULE_Vis2 Visibility_2)
 
 ################################################################################
 ######## Packages ###############################################################
@@ -527,6 +571,7 @@ endif ()
 # Add all include directories
 include_directories(include)
 include_directories(${cgalpy_GENERATED_INC_DIR})
+include_directories(${cgalpy_GENERATED_INC_DIR}/${component})
 
 # Internal dependencies
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
@@ -951,8 +996,11 @@ list(APPEND CGALPY_STUBS_DEPENDS CGALPY_STUBS)
 
 foreach (MODULE IN LISTS CGALPY_MODULES)
   add_module(${MODULE})
-  add_module_docstring(${MODULE})
+  get_docstring_module_name(${MODULE} DOCSTRING_MODULE)
+  add_module_docstring(${DOCSTRING_MODULE})
 endforeach ()
+
+target_sources(CGALPY PRIVATE ${cgalpy_AUTO_GENERATED_SRC_FILES})
 
 add_custom_target(STUBS ALL DEPENDS ${CGALPY_STUBS_DEPENDS})
 list(APPEND CGALPY_BUILD_DEPENDS ${CGALPY_STUBS_DEPENDS})
