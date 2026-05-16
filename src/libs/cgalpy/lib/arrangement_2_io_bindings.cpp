@@ -71,7 +71,7 @@ void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
                           new (arr) Arr();      // placement new
                           Formatter formatter;
                           CGAL::IO::read(*arr, is, formatter);
-                        });
+                        }, py::arg("str"));
 
 #else
   add_insertion(arr_c, "__str__");
