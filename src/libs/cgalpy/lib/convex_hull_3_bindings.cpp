@@ -75,20 +75,25 @@ convex_hull_3_with_traits_with_kernel(py::list& lst,
 void export_convex_hull_3(py::module_& m) {
   using Pm = ch3::Polygonal_mesh;
 
-  m.def("convex_hull_3", &ch3::convex_hull_3);
-  m.def("convex_hull_3", &ch3::convex_hull_3_with_kernel);
+  m.def("convex_hull_3", &ch3::convex_hull_3, py::arg("lst"));
+  m.def("convex_hull_3", &ch3::convex_hull_3_with_kernel,
+        py::arg("lst"), py::arg("kernel"));
 
 #if CGALPY_CH3_POLYGONAL_MESH == CGALPY_CH3_POLYHEDRON_3_POLYGONAL_MESH
   m.def("convex_hull_3", &ch3::convex_hull_3_with_traits,
+        py::arg("lst"), py::arg("traits"),
         py::keep_alive<0, 2>());
   m.def("convex_hull_3", &ch3::convex_hull_3_with_traits_with_kernel,
+        py::arg("lst"), py::arg("traits"), py::arg("kernel"),
         py::keep_alive<0, 2>());
 #endif
 
   using Isc1 = bool(*)(const Pm&);
   using Isc2 = bool(*)(const Pm&, const Kernel&);
   m.def("is_strongly_convex_3",
-        static_cast<Isc1>(&CGAL::is_strongly_convex_3<Pm>));
+        static_cast<Isc1>(&CGAL::is_strongly_convex_3<Pm>),
+        py::arg("pm"));
   m.def("is_strongly_convex_3",
-        static_cast<Isc2>(&CGAL::is_strongly_convex_3<Pm>));
+        static_cast<Isc2>(&CGAL::is_strongly_convex_3<Pm>),
+        py::arg("pm"), py::arg("kernel"));
 }
