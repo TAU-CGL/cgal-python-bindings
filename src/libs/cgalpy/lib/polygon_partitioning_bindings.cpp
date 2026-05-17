@@ -162,29 +162,34 @@ void export_polygon_partition_2(py::module_& m) {
   // m.def("convex_partition_is_valid_2", &pp2::convex_partition_is_valid_2);
   // m.def("y_monotone_partition_is_valid_2",
   //       &pp2::y_monotone_partition_is_valid_2);
-  m.def("is_y_monotone_2", &pp2::is_y_monotone_2);
-  m.def("is_convex_2", &pp2::is_convex_2);
+  m.def("is_y_monotone_2", &pp2::is_y_monotone_2, py::arg("polygon"));
+  m.def("is_convex_2", &pp2::is_convex_2, py::arg("polygon"));
 
   if (! add_attr<PVD_2>(m, "Polygon_vertical_decomposition")) {
     py::class_<PVD_2>(m, "Polygon_vertical_decomposition")
       .def(py::init<>())
-      .def("__call__", &pp2::polygon_vertical_decomposition_2<Pgn_2>)
-      .def("__call__", &pp2::polygon_vertical_decomposition_2<Pwh_2>)
+      .def("__call__", &pp2::polygon_vertical_decomposition_2<Pgn_2>,
+      py::arg("polygon"))
+      .def("__call__", &pp2::polygon_vertical_decomposition_2<Pwh_2>,
+      py::arg("polygon_with_holes"))
     ;
   }
 
   if (! add_attr<PTD_2>(m, "Polygon_triangulation_decomposition")) {
     py::class_<PTD_2>(m, "Polygon_triangulation_decomposition")
       .def(py::init<>())
-      .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pgn_2>)
-      .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pwh_2>)
+      .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pgn_2>,
+      py::arg("polygon"))
+      .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pwh_2>,
+      py::arg("polygon_with_holes"))
       ;
   }
 
   if (! add_attr<SSABD_2>(m, "Small_side_angle_bisector_decomposition")) {
     py::class_<SSABD_2>(m, "Small_side_angle_bisector_decomposition")
       .def(py::init<>())
-      .def("__call__", &pp2::small_side_angle_bisector_decomposition_2)
+      .def("__call__", &pp2::small_side_angle_bisector_decomposition_2,
+      py::arg("polygon"))
       ;
   }
 }

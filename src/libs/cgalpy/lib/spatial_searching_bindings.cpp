@@ -83,18 +83,18 @@ template <typename T>
 void bind_kd_tree(py::module_& m, const char* python_name) {
   py::class_<T>(m, python_name)
     .def(py::init<>())
-    .def("__init__", &init_tree_from_list<T>)
-    .def("insert", static_cast<void(T::*)(const typename T::Point_d&)>(&T::insert))
-    .def("insert", &tree_insert<T>)
-    .def("remove", static_cast<void(T::*)(const typename T::Point_d&)>(&T::remove))
+    .def("__init__", &init_tree_from_list<T>, py::arg("points"))
+    .def("insert", static_cast<void(T::*)(const typename T::Point_d&)>(&T::insert), py::arg("point"))
+    .def("insert", &tree_insert<T>, py::arg("points"))
+    .def("remove", static_cast<void(T::*)(const typename T::Point_d&)>(&T::remove), py::arg("point"))
     .def("build", static_cast<void (T::*)()>(&T::build))
     .def("invalidate_build", &T::invalidate_build)
     .def("points", &points<T>)
-    .def("search", &tree_search<T, Fuzzy_iso_box>)
-    .def("search", &tree_search<T, Fuzzy_sphere>)
+    .def("search", &tree_search<T, Fuzzy_iso_box>, py::arg("query"))
+    .def("search", &tree_search<T, Fuzzy_sphere>, py::arg("query"))
     .def("size", &T::size)
     .def("capacity", &T::capacity)
-    .def("reserve", &T::reserve)
+    .def("reserve", &T::reserve, py::arg("capacity"))
     ;
 }
 
@@ -120,30 +120,40 @@ void export_spatial_searching(py::module_& m) {
   BOOST_ASSERT(res);
 
   py::class_<Fuzzy_iso_box>(m, "Fuzzy_iso_box")
-    .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>())
-    .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT_d>())
-    .def("contains", &Fuzzy_iso_box::contains)
-    .def("inner_range_intersects", &Fuzzy_iso_box::inner_range_intersects)
-    .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains)
+    .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d>(),
+        py::arg("p"), py::arg("q"))
+    .def(py::init<Fuzzy_iso_box::Point_d, Fuzzy_iso_box::Point_d, FT_d>(),
+        py::arg("p"), py::arg("q"), py::arg("epsilon"))
+    .def("contains", &Fuzzy_iso_box::contains, py::arg("point"))
+    .def("inner_range_intersects", &Fuzzy_iso_box::inner_range_intersects,
+        py::arg("rectangle"))
+    .def("outer_range_contains", &Fuzzy_iso_box::outer_range_contains,
+        py::arg("rectangle"))
     ;
 
   py::class_<Fuzzy_sphere>(m, "Fuzzy_sphere")
-    .def(py::init<Point_d, FT_d, FT_d>())
-    .def("contains", &Fuzzy_sphere::contains)
-    .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects)
-    .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains)
+    .def(py::init<Point_d, FT_d, FT_d>(),
+        py::arg("center"), py::arg("radius"), py::arg("epsilon"))
+    .def("contains", &Fuzzy_sphere::contains, py::arg("point"))
+    .def("inner_range_intersects", &Fuzzy_sphere::inner_range_intersects,
+        py::arg("rectangle"))
+    .def("outer_range_intersects", &Fuzzy_sphere::outer_range_contains,
+        py::arg("rectangle"))
     ;
 
   py::class_<Kd_tree_rectangle>(m, "Kd_tree_rectangle")
-    .def(py::init<int>())
-    .def("min_coord", &Kd_tree_rectangle::min_coord)
-    .def("max_coord", &Kd_tree_rectangle::max_coord)
-    .def("set_upper_bound", &Kd_tree_rectangle::set_upper_bound)
-    .def("set_lower_bound", &Kd_tree_rectangle::set_lower_bound)
+    .def(py::init<int>(), py::arg("dimension"))
+    .def("min_coord", &Kd_tree_rectangle::min_coord, py::arg("dimension"))
+    .def("max_coord", &Kd_tree_rectangle::max_coord, py::arg("dimension"))
+    .def("set_upper_bound", &Kd_tree_rectangle::set_upper_bound,
+        py::arg("dimension"), py::arg("value"))
+    .def("set_lower_bound", &Kd_tree_rectangle::set_lower_bound,
+        py::arg("dimension"), py::arg("value"))
     .def("max_span_coord", &Kd_tree_rectangle::max_span_coord)
     .def("max_span", &Kd_tree_rectangle::max_span)
     .def("dimension", &Kd_tree_rectangle::dimension)
-    .def("split", &Kd_tree_rectangle::split)
+    .def("split", &Kd_tree_rectangle::split,
+        py::arg("other"), py::arg("dimension"), py::arg("value"))
     ;
 
   bind_kd_tree<Kd_tree>(m, "Kd_tree");
@@ -154,19 +164,27 @@ void export_spatial_searching(py::module_& m) {
     .def("transformed_distance",
          py::overload_cast<const Dp::Query_item&, const Dp::Point_d&>
          (&Dp::transformed_distance, py::const_))
-    .def("min_distance_to_rectangle", &Dp::min_distance_to_rectangle)
-    .def("max_distance_to_rectangle", &Dp::max_distance_to_rectangle)
-    .def("transformed_distance", py::overload_cast<const FT_d&>(&Dp::transformed_distance, py::const_))
-    .def("inverse_of_transformed_distance", &Dp::inverse_of_transformed_distance)
+    .def("min_distance_to_rectangle", &Dp::min_distance_to_rectangle,
+        py::arg("query"), py::arg("rectangle"))
+    .def("max_distance_to_rectangle", &Dp::max_distance_to_rectangle,
+        py::arg("query"), py::arg("rectangle"))
+    .def("transformed_distance", py::overload_cast<const FT_d&>(&Dp::transformed_distance, py::const_),
+        py::arg("distance"))
+    .def("inverse_of_transformed_distance", &Dp::inverse_of_transformed_distance,
+        py::arg("distance"))
     ;
 
   using Ed = Euclidean_distance;
   py::class_<Ed>(m, "Euclidean_distance")
     .def(py::init<>())
-    .def("transformed_distance", py::overload_cast<const Ed::Query_item&, const Ed::Point_d&>(&Ed::transformed_distance, py::const_))
-    .def("min_distance_to_rectangle", py::overload_cast<const Ed::Query_item&, const Kd_tree_rectangle&>(&Ed::min_distance_to_rectangle, py::const_))
-    .def("max_distance_to_rectangle", py::overload_cast<const Ed::Query_item&, const Kd_tree_rectangle&>(&Ed::max_distance_to_rectangle, py::const_))
-    .def("transformed_distance", py::overload_cast<FT_d>(&Ed::transformed_distance, py::const_))
+    .def("transformed_distance", py::overload_cast<const Ed::Query_item&, const Ed::Point_d&>(&Ed::transformed_distance, py::const_),
+        py::arg("query"), py::arg("point"))
+    .def("min_distance_to_rectangle", py::overload_cast<const Ed::Query_item&, const Kd_tree_rectangle&>(&Ed::min_distance_to_rectangle, py::const_),
+        py::arg("query"), py::arg("rectangle"))
+    .def("max_distance_to_rectangle", py::overload_cast<const Ed::Query_item&, const Kd_tree_rectangle&>(&Ed::max_distance_to_rectangle, py::const_),
+        py::arg("query"), py::arg("rectangle"))
+    .def("transformed_distance", py::overload_cast<FT_d>(&Ed::transformed_distance, py::const_),
+        py::arg("distance"))
     //.def("inverse_of_transformed_distance", &Ed::inverse_of_transformed_distance)
     ;
 

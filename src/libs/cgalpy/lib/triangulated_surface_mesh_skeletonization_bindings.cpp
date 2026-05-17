@@ -110,6 +110,7 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
     //      "\n");
     // High Level Functions
     .def("__call__", &CGAL::Mean_curvature_flow_skeletonization<Tm>::operator(),
+        py::arg("skeleton"),
          "Creates the curve skeleton: the input surface mesh is iteratively contracted until convergence, and then turned into a curve skeleton.\n"
          "\n"
          "This is equivalent to calling contract_until_convergence() and convert_to_skeleton().\n"
@@ -196,12 +197,16 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
         //                          pair.first, pair.second, py::keep_alive<0, 1>());
       // }, "Return an iterator of vertices of the skeleton.");
   m.def("num_vertices", [](const Skeleton& skeleton) { return boost::num_vertices(skeleton); },
+        py::arg("skeleton"),
                "Returns the number of vertices in the skeleton.");
   m.def("num_edges", [](const Skeleton& skeleton) { return boost::num_edges(skeleton); },
+        py::arg("skeleton"),
                "Returns the number of edges in the skeleton.");
-  m.def("source", [](const boost::list_edge<unsigned long, boost::no_property>& e, const Skeleton& skeleton) { source(e, skeleton); },
+  m.def("source", [](const boost::list_edge<unsigned long, boost::no_property>& e, const Skeleton& skeleton) { return source(e, skeleton); },
+        py::arg("edge"), py::arg("skeleton"),
                "Returns the source vertex of the edge e.");
-  m.def("target", [](const boost::list_edge<unsigned long, boost::no_property>& e, const Skeleton& skeleton) { target(e, skeleton); },
+  m.def("target", [](const boost::list_edge<unsigned long, boost::no_property>& e, const Skeleton& skeleton) { return target(e, skeleton); },
+        py::arg("edge"), py::arg("skeleton"),
                "Returns the target vertex of the edge e.");
 
   using Visitor = boost_utils::Polyline_visitor<Skeleton>;
@@ -240,6 +245,7 @@ void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
         "• Surface_mesh_skeletonization/simple_mcfskel_example.py.");
 
   m.def("extract_mean_curvature_flow_skeleton", &CGAL::extract_mean_curvature_flow_skeleton<Tm>,
+        py::arg("tmesh"), py::arg("skeleton"),
         "extracts a medially centered curve skeleton for the triangle mesh tmesh. This function uses the class CGAL::Mean_curvature_flow_skeletonization with the default parameters. This function is provided only if Eigen 3.2 (or greater) is available and CGAL_EIGEN3_ENABLED is defined.\n"
         "\n"
         "Precondition\n"

@@ -62,7 +62,7 @@ void export_geometric_object_generators(py::module_& m) {
 
   if (! add_attr<Rpid>(m, "Random_points_in_disc_2")) {
     py::class_<Rpid>(m, "Random_points_in_disc_2")
-      .def(py::init<double>())
+      .def(py::init<double>(), py::arg("radius"))
       .def("__iter__", [](Rpid& g) -> Rpid& { return g; }, ri)
       .def("__next__", [](Rpid& g) -> Point_2 { return *g++; })
       ;

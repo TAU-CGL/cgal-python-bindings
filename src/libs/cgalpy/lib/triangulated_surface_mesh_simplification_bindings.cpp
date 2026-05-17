@@ -752,31 +752,36 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
   py::class_<Ecsp>(m, "Edge_count_stop_predicate")
     .def(py::init<edges_size_type>(), py::arg("threshold"))
-    .def("__call__", [](Ecsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
+    .def("__call__", [](Ecsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); },
+         py::arg("edge_profile"), py::arg("initial_edge_count"), py::arg("current_edge_count"))
     ;
 
   using Ecrsp = SMS::Edge_count_ratio_stop_predicate<Tm>;
   py::class_<Ecrsp>(m, "Edge_count_ratio_stop_predicate")
     .def(py::init<double>(), py::arg("ratio"))
-    .def("__call__", [](Ecrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
+    .def("__call__", [](Ecrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); },
+         py::arg("edge_profile"), py::arg("initial_edge_count"), py::arg("current_edge_count"))
     ;
 
   using Elsp = SMS::Edge_length_stop_predicate<FT>;
   py::class_<Elsp>(m, "Edge_length_stop_predicate")
     .def(py::init<const FT>(), py::arg("threshold"))
-    .def("__call__", [](Elsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
+    .def("__call__", [](Elsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); },
+         py::arg("edge_profile"), py::arg("initial_edge_count"), py::arg("current_edge_count"))
     ;
 
   using Fcsp = SMS::Face_count_stop_predicate<Tm>;
   py::class_<Fcsp>(m, "Face_count_stop_predicate")
     .def(py::init<edges_size_type>(), py::arg("threshold"))
-    .def("__call__", [](Fcsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
+    .def("__call__", [](Fcsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); },
+         py::arg("edge_profile"), py::arg("initial_edge_count"), py::arg("current_edge_count"))
     ;
 
   using Fcrsp = SMS::Face_count_ratio_stop_predicate<Tm>;
   py::class_<Fcrsp>(m, "Face_count_ratio_stop_predicate")
     .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"))
-    .def("__call__", [](Fcrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); })
+    .def("__call__", [](Fcrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec) { return self(0, ep, iec, cec); },
+         py::arg("edge_profile"), py::arg("initial_edge_count"), py::arg("current_edge_count"))
     ;
 
   // Policies //
