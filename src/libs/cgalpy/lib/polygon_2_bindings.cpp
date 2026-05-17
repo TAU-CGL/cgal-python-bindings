@@ -235,22 +235,22 @@ void export_polygon_2(py::module_& m) {
     py::class_<Pgn> pgn_c(m, "Polygon_2");
     pgn_c.def(py::init<>())
       .def(py::init<const Pgn&>())
-      .def("__init__", &pol2::init_polygon_2)
-      .def("push_back", &Pgn::push_back)
+      .def("__init__", &pol2::init_polygon_2, py::arg("lst"))
+      .def("push_back", &Pgn::push_back, py::arg("p"))
       .def("is_simple", &Pgn::is_simple)
       .def("is_convex", &Pgn::is_convex)
       .def("orientation", &Pgn::orientation)
-      .def("oriented_side", &Pgn::oriented_side)
-      .def("bounded_side", &Pgn::bounded_side)
+      .def("oriented_side", &Pgn::oriented_side, py::arg("p"))
+      .def("bounded_side", &Pgn::bounded_side, py::arg("p"))
       .def("is_empty", &Pgn::is_empty)
       .def("is_counterclockwise_oriented", &Pgn::is_counterclockwise_oriented)
       .def("is_clockwise_oriented", &Pgn::is_clockwise_oriented)
       .def("is_collinear_oriented", &Pgn::is_collinear_oriented)
-      .def("has_on_positive_side", &Pgn::has_on_positive_side)
-      .def("has_on_negative_side", &Pgn::has_on_negative_side)
-      .def("has_on_boundary", &Pgn::has_on_boundary)
-      .def("has_on_bounded_side", &Pgn::has_on_bounded_side)
-      .def("has_on_unbounded_side", &Pgn::has_on_unbounded_side)
+      .def("has_on_positive_side", &Pgn::has_on_positive_side, py::arg("p"))
+      .def("has_on_negative_side", &Pgn::has_on_negative_side, py::arg("p"))
+      .def("has_on_boundary", &Pgn::has_on_boundary, py::arg("p"))
+      .def("has_on_bounded_side", &Pgn::has_on_bounded_side, py::arg("p"))
+      .def("has_on_unbounded_side", &Pgn::has_on_unbounded_side, py::arg("p"))
       .def("size", &Pgn::size)
       .def("area", &Pgn::area)
       .def("bbox", &Pgn::bbox)
@@ -266,10 +266,10 @@ void export_polygon_2(py::module_& m) {
       // 2. Wrap the mutable method with the `reference_internal` call policy.
       // 3. Add the `const_` tag to the overloaded const function, as the
       //    overloading is based on constness.
-      .def("vertex_mutable", py::overload_cast<size_t>(&Pgn::vertex), ri)
-      .def("vertex", py::overload_cast<size_t>(&Pgn::vertex, py::const_))
+      .def("vertex_mutable", py::overload_cast<size_t>(&Pgn::vertex), py::arg("i"), ri)
+      .def("vertex", py::overload_cast<size_t>(&Pgn::vertex, py::const_), py::arg("i"))
 
-      .def("edge", &Pgn::edge)
+      .def("edge", &Pgn::edge, py::arg("i"))
       .def("clear", &Pgn::clear)
       .def("reverse_orientation", &Pgn::reverse_orientation)
       .def(py::self == py::self)
@@ -291,28 +291,28 @@ void export_polygon_2(py::module_& m) {
   }
 
   // Free functions
-  m.def("area_2", &pol2::area_2_1);
-  m.def("area_2", &pol2::area_2_2);
-  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_1);
-  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_2);
-  m.def("bounded_side_2", &pol2::bounded_side_2_1);
-  m.def("bounded_side_2", &pol2::bounded_side_2_2);
-  m.def("is_convex_2", &pol2::is_convex_2_1);
-  m.def("is_convex_2", &pol2::is_convex_2_2);
-  m.def("is_simple_2", &pol2::is_simple_2_1);
-  m.def("is_simple_2", &pol2::is_simple_2_2);
-  m.def("left_vertex_2", &pol2::left_vertex_2_1);
-  m.def("left_vertex_2", &pol2::left_vertex_2_2);
-  m.def("orientation_2", &pol2::orientation_2_1);
-  m.def("orientation_2", &pol2::orientation_2_2);
-  m.def("oriented_side_2", &pol2::oriented_side_2_1);
-  m.def("oriented_side_2", &pol2::oriented_side_2_2);
-  m.def("polygon_area_2", &pol2::polygon_area_2_1);
-  m.def("polygon_area_2", &pol2::polygon_area_2_2);
-  m.def("right_vertex_2", &pol2::right_vertex_2_1);
-  m.def("right_vertex_2", &pol2::right_vertex_2_2);
-  m.def("top_vertex_2)", &pol2::top_vertex_2_1);
-  m.def("top_vertex_2)", &pol2::top_vertex_2_2);
+  m.def("area_2", &pol2::area_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("area_2", &pol2::area_2_2, py::arg("points"));
+  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_2, py::arg("points"));
+  m.def("bounded_side_2", &pol2::bounded_side_2_1, py::arg("points"), py::arg("pnt"), py::arg("kernel"));
+  m.def("bounded_side_2", &pol2::bounded_side_2_2, py::arg("points"), py::arg("pnt"));
+  m.def("is_convex_2", &pol2::is_convex_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("is_convex_2", &pol2::is_convex_2_2, py::arg("points"));
+  m.def("is_simple_2", &pol2::is_simple_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("is_simple_2", &pol2::is_simple_2_2, py::arg("points"));
+  m.def("left_vertex_2", &pol2::left_vertex_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("left_vertex_2", &pol2::left_vertex_2_2, py::arg("points"));
+  m.def("orientation_2", &pol2::orientation_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("orientation_2", &pol2::orientation_2_2, py::arg("points"));
+  m.def("oriented_side_2", &pol2::oriented_side_2_1, py::arg("points"), py::arg("pnt"), py::arg("kernel"));
+  m.def("oriented_side_2", &pol2::oriented_side_2_2, py::arg("points"), py::arg("pnt"));
+  m.def("polygon_area_2", &pol2::polygon_area_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("polygon_area_2", &pol2::polygon_area_2_2, py::arg("points"));
+  m.def("right_vertex_2", &pol2::right_vertex_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("right_vertex_2", &pol2::right_vertex_2_2, py::arg("points"));
+  m.def("top_vertex_2)", &pol2::top_vertex_2_1, py::arg("points"), py::arg("kernel"));
+  m.def("top_vertex_2)", &pol2::top_vertex_2_2, py::arg("points"));
 
 #ifdef CGALPY_HAS_VISUAL
   using Draw = void(*)(const Pgn&, const char*);

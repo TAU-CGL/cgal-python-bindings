@@ -734,8 +734,8 @@ void export_aos(py::module_& m) {
 
   py::class_<Aos> aos_c(m, "Arrangement_on_surface_2");
   aos_c.def(py::init<>())
-    .def(py::init<const Aos&>())
-    .def(py::init<const Gt*>(), py::keep_alive<1, 2>())
+    .def(py::init<const Aos&>(), py::arg("other"))
+    .def(py::init<const Gt*>(), py::arg("traits"), py::keep_alive<1, 2>())
     .def("geometry_traits", &aos2::geometry_traits, ri,
          doc::CGAL_Arrangement_on_surface_2_geometry_traits)
     .def("topology_traits", &aos2::topology_traits, ri)
@@ -746,36 +746,51 @@ void export_aos(py::module_& m) {
          doc::CGAL_Arrangement_on_surface_2_fictitious_face)
 #endif
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex)
+        py::arg("c"), py::arg("v"),
+        doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex_1)
+        py::arg("c"), py::arg("h"),
+        doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex_1)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex1, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex)
+        py::arg("c"), py::arg("v"),
+        doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex2, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex_1)
+        py::arg("c"), py::arg("h"),
+        doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex_1)
     .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior)
+        py::arg("c"), py::arg("f"),
+        doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior)
     .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior_1)
+        py::arg("p"), py::arg("f"),
+        doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior_1)
     .def("insert_at_vertices", &aos2::insert_at_vertices1, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_at_vertices)
+        py::arg("c"), py::arg("v1"), py::arg("v2"),
+        doc::CGAL_Arrangement_on_surface_2_insert_at_vertices)
     // .def("insert_at_vertices", &aos2::insert_at_vertices2, ri)
     .def("insert_at_vertices", &aos2::insert_at_vertices3, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_1)
+        py::arg("c"), py::arg("h1"), py::arg("v2"),
+        doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_1)
     .def("insert_at_vertices", &aos2::insert_at_vertices4, ri,
-         doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_2)
+        py::arg("c"), py::arg("h1"), py::arg("h2"),
+        doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_2)
     .def("modify_vertex", &aos2::modify_vertex, ri,
-         doc::CGAL_Arrangement_on_surface_2_modify_vertex)
+        py::arg("v"), py::arg("p"),
+        doc::CGAL_Arrangement_on_surface_2_modify_vertex)
     .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, ri,
-         doc::CGAL_Arrangement_on_surface_2_remove_isolated_vertex)
+        py::arg("v"),
+        doc::CGAL_Arrangement_on_surface_2_remove_isolated_vertex)
     .def("modify_edge", &aos2::modify_edge, ri,
-         doc::CGAL_Arrangement_on_surface_2_modify_edge)
+        py::arg("e"), py::arg("c"),
+        doc::CGAL_Arrangement_on_surface_2_modify_edge)
     .def("split_edge", &aos2::split_edge, ri,
-         doc::CGAL_Arrangement_on_surface_2_split_edge)
+        py::arg("e"), py::arg("c1"), py::arg("c2"),
+        doc::CGAL_Arrangement_on_surface_2_split_edge)
     .def("merge_edge", &aos2::merge_edge, ri,
-         doc::CGAL_Arrangement_on_surface_2_merge_edge)
+        py::arg("e1"), py::arg("e2"), py::arg("c"),
+        doc::CGAL_Arrangement_on_surface_2_merge_edge)
     .def("remove_edge", &aos2::remove_edge, ri,
-         doc::CGAL_Arrangement_on_surface_2_remove_edge)
+        py::arg("e"),
+        doc::CGAL_Arrangement_on_surface_2_remove_edge)
     .def("is_empty", &Aos::is_empty,
          doc::CGAL_Arrangement_on_surface_2_is_empty)
     .def("is_valid", &Aos::is_valid,
