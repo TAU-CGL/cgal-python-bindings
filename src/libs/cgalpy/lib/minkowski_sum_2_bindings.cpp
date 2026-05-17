@@ -165,29 +165,39 @@ void export_minkowski_sum_2(py::module_& m) {
                                                          strategy_types);
 #endif
 
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>);
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>);
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>);
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>);
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>, py::arg("p"), py::arg("q"));
 
   m.def("minkowski_sum_by_full_convolution_2",
-        &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>);
+        &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>,
+        py::arg("p"), py::arg("q"));
 
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>);
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>,
+        py::arg("p"), py::arg("q"));
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>);
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>,
+        py::arg("p"), py::arg("q"));
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>);
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>,
+        py::arg("p"), py::arg("q"));
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>);
+        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>,
+        py::arg("p"), py::arg("q"));
 
-  m.def("approximated_offset_2", &ms2::approximated_offset_2);
-  m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh);
-  m.def("approximated_inset_2", &ms2::approximated_inset_2);
+  m.def("approximated_offset_2", &ms2::approximated_offset_2,
+        py::arg("p"), py::arg("r"), py::arg("eps"));
+  m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh,
+        py::arg("pwh"), py::arg("r"), py::arg("eps"));
+  m.def("approximated_inset_2", &ms2::approximated_inset_2,
+        py::arg("p"), py::arg("r"), py::arg("eps"));
 
-  m.def("offset_polygon_2", &ms2::offset_polygon_2);
-  m.def("inset_polygon_2", &ms2::inset_polygon_2);
+  m.def("offset_polygon_2", &ms2::offset_polygon_2,
+        py::arg("pgn"), py::arg("r"), py::arg("traits"));
+  m.def("inset_polygon_2", &ms2::inset_polygon_2,
+        py::arg("pgn"), py::arg("r"), py::arg("traits"));
 
   if (add_attr<CS_pgn>(m, "Circle_segment_polygon_2")) return;
   auto cs_pgn_c = py::class_<CS_pgn>(m, "Circle_segment_polygon_2");

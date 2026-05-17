@@ -80,21 +80,25 @@ void export_envelope_3(py::module_& m) {
   if (! add_attr<Edos>(m, "Envelope_diagram_on_surface_2")) {
     py::class_<Edos, Aos> edos_c(m, "Envelope_diagram_on_surface_2");
     edos_c.def(py::init<>())
-      .def(py::init<const Edos&>())
-      .def(py::init<const Traits*>())
+      .def(py::init<const Edos&>(), py::arg("other"))
+      .def(py::init<const Traits*>(), py::arg("traits"))
       ;
   }
 
   if (! add_attr<Ed>(m, "Envelope_diagram_2")) {
     py::class_<Ed, Edos> ed_c(m, "Envelope_diagram_2");
     ed_c.def(py::init<>())
-      .def(py::init<const Ed&>())
-      .def(py::init<const Traits*>())
+      .def(py::init<const Ed&>(), py::arg("other"))
+      .def(py::init<const Traits*>(), py::arg("traits"))
       ;
   }
 
-  m.def("lower_envelope_3", &env3::lower_envelope_3);
-  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3);
-  m.def("upper_envelope_3", &env3::upper_envelope_3);
-  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3);
+  m.def("lower_envelope_3", &env3::lower_envelope_3,
+        py::arg("surfaces"));
+  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3,
+        py::arg("surfaces"));
+  m.def("upper_envelope_3", &env3::upper_envelope_3,
+        py::arg("surfaces"));
+  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3,
+        py::arg("surfaces"));
 }

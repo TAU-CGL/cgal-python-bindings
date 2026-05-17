@@ -165,15 +165,19 @@ bool do_curves_intersect1(py::list& curves, bool consider_common_endpoints, cons
 void export_surface_sweep_2(py::module_& m) {
   m.def("compute_intersection_points", &ss2::compute_intersection_points0,
         py::arg("curves"), py::arg("report_endpoints") = false)
-    .def("compute_intersection_points", &ss2::compute_intersection_points1)
+    .def("compute_intersection_points", &ss2::compute_intersection_points1,
+         py::arg("curves"), py::arg("report_endpoints"), py::arg("traits"))
     ;
 
   m.def("compute_subcurves", &ss2::compute_subcurves0,
         py::arg("curves"), py::arg("mult_overlaps") = false)
-    .def("compute_subcurves", &ss2::compute_subcurves1)
+    .def("compute_subcurves", &ss2::compute_subcurves1,
+         py::arg("curves"), py::arg("mult_overlaps"), py::arg("traits"))
     ;
 
-  m.def("do_curves_intersect", &ss2::do_curves_intersect0)
-    .def("do_curves_intersect", &ss2::do_curves_intersect1)
+  m.def("do_curves_intersect", &ss2::do_curves_intersect0,
+        py::arg("curves"), py::arg("consider_common_endpoints"))
+    .def("do_curves_intersect", &ss2::do_curves_intersect1,
+         py::arg("curves"), py::arg("consider_common_endpoints"), py::arg("traits"))
     ;
 }

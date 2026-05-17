@@ -42,18 +42,21 @@ void export_visibility_2(py::module_& m) {
   if (! add_attr<Spv>(m, "Simple_polygon_visibility_2")) {
     py::class_<Spv> spv_c(m, "Simple_polygon_visibility_2");
     spv_c.def(py::init<>())
-      .def(py::init<const Arr&>())
+      .def(py::init<const Arr&>(), py::arg("arr"))
       .def("is_attached", &Spv::is_attached,
            doc::Visibility_2_is_attached)
       .def("attach", &Spv::attach,
+           py::arg("arr"),
            doc::CGAL_Simple_polygon_visibility_2_attach)
       .def("detach", &Spv::detach,
            doc::Visibility_2_detach)
       .def("arrangement_2", &Spv::arrangement_2,
            doc::Visibility_2_arrangement_2)
       .def("compute_visibility", vis2::compute_visibility1<Spv>,
+           py::arg("q"), py::arg("f"), py::arg("arr"),
            doc::Visibility_2_compute_visibility)
       .def("compute_visibility", vis2::compute_visibility2<Spv>,
+           py::arg("q"), py::arg("h"), py::arg("arr"),
            doc::Visibility_2_compute_visibility_1)
       ;
   }
@@ -62,18 +65,21 @@ void export_visibility_2(py::module_& m) {
   if (! add_attr<Tev>(m, "Triangular_expansion_visibility_2")) {
     py::class_<Tev> tev_c(m, "Triangular_expansion_visibility_2");
     tev_c.def(py::init<>())
-      .def(py::init<const Arr&>())
+      .def(py::init<const Arr&>(), py::arg("arr"))
       .def("is_attached", &Tev::is_attached,
            doc::Visibility_2_is_attached)
       .def("attach", &Tev::attach,
+           py::arg("arr"),
            doc::CGAL_Triangular_expansion_visibility_2_attach)
       .def("detach", &Tev::detach,
            doc::Visibility_2_detach)
       .def("arrangement_2", &Tev::arrangement_2,
            doc::Visibility_2_arrangement_2)
       .def("compute_visibility", vis2::compute_visibility1<Tev>,
+           py::arg("q"), py::arg("f"), py::arg("arr"),
            doc::Visibility_2_compute_visibility)
       .def("compute_visibility", vis2::compute_visibility2<Tev>,
+           py::arg("q"), py::arg("h"), py::arg("arr"),
            doc::Visibility_2_compute_visibility_1)
       ;
   }

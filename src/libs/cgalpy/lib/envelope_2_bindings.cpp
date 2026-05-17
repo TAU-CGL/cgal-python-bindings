@@ -80,7 +80,7 @@ void export_envelope_2 (py::module_& m) {
   if (! add_attr<Vertex>(m, "Vertex")) {
     py::class_<Vertex> vertex_c(m, "Vertex");
     vertex_c.def(py::init<>())
-      .def(py::init<const Pnt&>())
+      .def(py::init<const Pnt&>(), py::arg("point"))
       .def("point", &Vertex::point, ri)
       .def("number_of_curves", &Vertex::number_of_curves)
       .def("left", [](const Vertex& v)->const Edge& { return *(v.left()); }, ri)
@@ -117,8 +117,12 @@ void export_envelope_2 (py::module_& m) {
       ;
   }
 
-  m.def("lower_envelope_2", &env2::lower_envelope_2);
-  m.def("lower_envelope_x_monotone_2", &env2::lower_envelope_x_monotone_2);
-  m.def("upper_envelope_2", &env2::upper_envelope_2);
-  m.def("upper_envelope_x_monotone_2", &env2::upper_envelope_x_monotone_2);
+  m.def("lower_envelope_2", &env2::lower_envelope_2,
+        py::arg("curves"));
+  m.def("lower_envelope_x_monotone_2", &env2::lower_envelope_x_monotone_2,
+        py::arg("curves"));
+  m.def("upper_envelope_2", &env2::upper_envelope_2,
+        py::arg("curves"));
+  m.def("upper_envelope_x_monotone_2", &env2::upper_envelope_x_monotone_2,
+        py::arg("curves"));
 }
