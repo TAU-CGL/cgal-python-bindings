@@ -76,7 +76,7 @@ void export_triangulation_2(py::module_& m) {
   using Tricc = CGAL::Triangulation_cw_ccw_2;
   if (! add_attr<Tricc>(m, "Triangulation_cw_ccw_2")) {
     py::class_<Tricc>(m, "Triangulation_cw_ccw_2")
-      .def(py::init<Tricc&>())
+      .def(py::init<Tricc&>(), py::arg("other"))
       .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); })
       .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); })
       ;
@@ -88,7 +88,7 @@ void export_triangulation_2(py::module_& m) {
   py::class_<Tds, Tricc> tds_c(m, "Triangulation_data_structure_2");
 
   tds_c.def(py::init<>())
-    .def(py::init<Tds&>())
+    .def(py::init<Tds&>(), py::arg("other"))
     .def("clear", &Tds::clear, "Delete all faces and all finite vertices\n")
     // .def("copy_tds", &copy_tds),
     // .def("copy_tds", &copy_tds),

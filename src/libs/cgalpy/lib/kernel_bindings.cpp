@@ -981,7 +981,7 @@ void export_kernel_module(py::module_& m) {
 
   /// \name Global kernel functions
   /// @{
-  m.def("abs", &CGAL::abs<FT>);
+  m.def("abs", &CGAL::abs<FT>, py::arg("value"));
 
   using Angle_fnc1 = CGAL::Angle(*)(const Vec_2&, const Vec_2&);
   using Angle_fnc2 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -1257,8 +1257,10 @@ void export_kernel_module(py::module_& m) {
 
   using Sp_fnc2 = FT(*)(const Vec_2&, const Vec_2&);
   using Sp_fnc3 = FT(*)(const Vec_3&, const Vec_3&);
-  m.def("scalar_product", static_cast<Sp_fnc2>(&CGAL::scalar_product<Kernel>));
-  m.def("scalar_product", static_cast<Sp_fnc3>(&CGAL::scalar_product<Kernel>));
+  m.def("scalar_product", static_cast<Sp_fnc2>(&CGAL::scalar_product<Kernel>),
+        py::arg("v1"), py::arg("v2"));
+  m.def("scalar_product", static_cast<Sp_fnc3>(&CGAL::scalar_product<Kernel>),
+        py::arg("v1"), py::arg("v2"));
 
   using Sobc_fnc1 =
     CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
@@ -1266,15 +1268,18 @@ void export_kernel_module(py::module_& m) {
   using Sobc_fnc2 =
     CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("side_of_bounded_circle",
-        static_cast<Sobc_fnc1>(&CGAL::side_of_bounded_circle<Kernel>));
+        static_cast<Sobc_fnc1>(&CGAL::side_of_bounded_circle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
   m.def("side_of_bounded_circle",
-        static_cast<Sobc_fnc2>(&CGAL::side_of_bounded_circle<Kernel>));
+        static_cast<Sobc_fnc2>(&CGAL::side_of_bounded_circle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Sooc_fnc =
     CGAL::Oriented_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
                            const Pnt_2&);
   m.def("side_of_oriented_circle",
-        static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>));
+        static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
 
   // squared_distance() bindings
   CGALPY::Type_list<Pnt_2, Line_2, Ray_2, Seg_2, Tri_2, Wd_pnt_2> type_list_2;
@@ -1287,37 +1292,48 @@ void export_kernel_module(py::module_& m) {
   using Sd_fnc1 = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Sd_fnc2 = FT(*)(const Pnt_2&, const Pnt_2&);
   using Sd_fnc3 = FT(*)(const Pnt_2&);
-  m.def("squared_radius", static_cast<Sd_fnc1>(&CGAL::squared_radius<Kernel>));
-  m.def("squared_radius", static_cast<Sd_fnc2>(&CGAL::squared_radius<Kernel>));
-  m.def("squared_radius", static_cast<Sd_fnc3>(&CGAL::squared_radius<Kernel>));
+  m.def("squared_radius", static_cast<Sd_fnc1>(&CGAL::squared_radius<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
+  m.def("squared_radius", static_cast<Sd_fnc2>(&CGAL::squared_radius<Kernel>),
+        py::arg("p"), py::arg("q"));
+  m.def("squared_radius", static_cast<Sd_fnc3>(&CGAL::squared_radius<Kernel>),
+        py::arg("p"));
 
   using Xe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
-  m.def("x_equal", static_cast<Xe_fnc>(&CGAL::x_equal<Kernel>));
+  m.def("x_equal", static_cast<Xe_fnc>(&CGAL::x_equal<Kernel>),
+        py::arg("p"), py::arg("q"));
 
   using Ye_fnc =bool(*)(const Pnt_2&, const Pnt_2&) ;
-  m.def("y_equal", static_cast<Ye_fnc>(&CGAL::y_equal<Kernel>));
+  m.def("y_equal", static_cast<Ye_fnc>(&CGAL::y_equal<Kernel>),
+        py::arg("p"), py::arg("q"));
 
   using Do_fnc = bool(*)(const Bbox_2&, const Bbox_2&);
-  m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap));
+  m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap),
+        py::arg("bbox1"), py::arg("bbox2"));
 
   using Do_fnc3 = bool(*)(const Bbox_3&, const Bbox_3&);
-  m.def("do_overlap", static_cast<Do_fnc3>(&CGAL::do_overlap));
+  m.def("do_overlap", static_cast<Do_fnc3>(&CGAL::do_overlap),
+        py::arg("bbox1"), py::arg("bbox2"));
 
   using Cmp3_fnc = CGAL::Comparison_result(*)(const Pnt_3&, const Pnt_3&);
-  m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>));
+  m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>),
+        py::arg("p"), py::arg("q"));
 
   //! From number_utils.h. \todo move to algebraic foundations
   using Cmp_fnc = CGAL::Comparison_result(*)(const FT&, const FT&);
-  m.def("compare", static_cast<Cmp_fnc>(&CGAL::compare<FT>));
+  m.def("compare", static_cast<Cmp_fnc>(&CGAL::compare<FT>),
+        py::arg("x"), py::arg("y"));
 
   using Sign_fnc = CGAL::Comparison_result(*)(const FT&);
-  m.def("sign", static_cast<Sign_fnc>(&CGAL::sign<FT>));
+  m.def("sign", static_cast<Sign_fnc>(&CGAL::sign<FT>),
+        py::arg("value"));
 
   using Square_res = CGAL::Algebraic_structure_traits<FT>::Square::result_type;
   using Square_fnc = Square_res(*)(const FT&);
-  m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>));
+  m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>),
+        py::arg("value"));
 
-  m.def("to_double", &CGAL::to_double<FT>);
+  m.def("to_double", &CGAL::to_double<FT>, py::arg("value"));
 
   m.def("approximate_dihedral_angle", &CGAL::approximate_dihedral_angle<Kernel>,
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));

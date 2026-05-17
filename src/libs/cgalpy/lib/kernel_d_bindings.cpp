@@ -68,7 +68,7 @@ private:
 // (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
 void bind_do_intersect_d_2T(py::module_& m, decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
-{ m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>)); }
+{ m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>), py::arg("obj1"), py::arg("obj2")); }
 
 template<typename, typename>
 void bind_do_intersect_d_2T(py::module_& m, ...) {}
@@ -140,7 +140,7 @@ void export_kernel_d(py::module_& m) {
                for (std::size_t i = 0; i < p1.dimension(); ++i) vec[i] = p2[i] - p1[i];
                Vecd v(p1.dimension(), vec.begin(), vec.end());
                return v;
-             })
+             }, py::arg("p1"), py::arg("p2"))
         ;
     }
   }

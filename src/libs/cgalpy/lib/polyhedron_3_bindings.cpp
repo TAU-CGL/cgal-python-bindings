@@ -430,8 +430,8 @@ void export_polyhedron_3(py::module_& m) {
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3");
     prn_c.def(py::init<>())
-      .def(py::init<const Prn&>())
-      .def(py::init<const pol3::Traits&>())
+      .def(py::init<const Prn&>(), py::arg("other"))
+      .def(py::init<const pol3::Traits&>(), py::arg("traits"))
       .def("add_facet_to_border", &Prn::add_facet_to_border)
       .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border)
       .def("bytes", &Prn::bytes)
@@ -450,7 +450,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("inside_out", &Prn::inside_out)
       .def("is_closed", &Prn::is_closed)
       .def("is_empty", &Prn::is_empty)
-      .def("is_tetrahedron", &pol3::is_tetrahedron)
+      .def("is_tetrahedron", &pol3::is_tetrahedron, py::arg("halfedge"))
       .def("is_triangle", &Prn::is_triangle)
       .def("is_valid", &Prn::is_valid)
       .def("join_facet", &Prn::join_facet)
@@ -458,7 +458,8 @@ void export_polyhedron_3(py::module_& m) {
       .def("join_vertex", &Prn::join_vertex)
       .def("keep_largest_connected_components", &Prn::keep_largest_connected_components)
       .def("make_hole", &Prn::make_hole)
-      .def("make_tetrahedron", &pol3::make_tetrahedron1, ri)
+      .def("make_tetrahedron", &pol3::make_tetrahedron1, ri,
+            py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"))
       .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
       .def("normalize_border", &Prn::normalize_border)
       .def("normalized_border_is_valid", &Prn::normalized_border_is_valid)
@@ -471,7 +472,8 @@ void export_polyhedron_3(py::module_& m) {
       .def("split_loop", &Prn::split_loop)
       .def("split_vertex", &Prn::split_vertex)
       .def("make_triangle", &pol3::make_triangle_empty)
-      .def("make_triangle", &pol3::make_triangle)
+      .def("make_triangle", &pol3::make_triangle,
+            py::arg("p1"), py::arg("p2"), py::arg("p3"))
       .def("delegate", &Prn::delegate)
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_))
       .def("is_pure_bivalent", py::overload_cast<>(&Prn::is_pure_bivalent, py::const_))
@@ -572,15 +574,15 @@ void export_polyhedron_3(py::module_& m) {
   m.def("get_vertex_point_map", [](Prn& g) { return CGAL::get(CGAL::vertex_point, g); }, ri, py::arg("graph"));
 
   // Free functions
-  m.def("clear", &CGAL::clear<Prn>);
-  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
-  m.def("is_closed", &CGAL::is_closed<Prn>);
+  m.def("clear", &CGAL::clear<Prn>, py::arg("graph"));
+  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>, py::arg("graph"));
+  m.def("is_closed", &CGAL::is_closed<Prn>, py::arg("graph"));
 
   // Iterators
-  m.def("edges", &pol3::my_edges<Prn>, py::keep_alive<0, 1>());
-  m.def("faces", &pol3::my_faces<Prn>, py::keep_alive<0, 1>());
-  m.def("halfedges", &pol3::my_halfedges<Prn>, py::keep_alive<0, 1>());
-  m.def("vertices", &pol3::my_vertices<Prn>, py::keep_alive<0, 1>());
+  m.def("edges", &pol3::my_edges<Prn>, py::keep_alive<0, 1>(), py::arg("graph"));
+  m.def("faces", &pol3::my_faces<Prn>, py::keep_alive<0, 1>(), py::arg("graph"));
+  m.def("halfedges", &pol3::my_halfedges<Prn>, py::keep_alive<0, 1>(), py::arg("graph"));
+  m.def("vertices", &pol3::my_vertices<Prn>, py::keep_alive<0, 1>(), py::arg("graph"));
 
   // Functions that do not involve handlers
   m.def("add_edge", &bgl::my_add_edge<Prn>);
@@ -596,12 +598,12 @@ void export_polyhedron_3(py::module_& m) {
   // Other
   // m.def("add_vertex", &pol3::add_vertex_p);
   // m.def("adjacent_vertices", &pol3::adjacent_vertices);
-  m.def("degree", &pol3::degree_f);
-  m.def("degree", &pol3::degree_v);
+  m.def("degree", &pol3::degree_f, py::arg("face"), py::arg("graph"));
+  m.def("degree", &pol3::degree_v, py::arg("vertex"), py::arg("graph"));
   // m.def("edge", &pol3::edge);
-  m.def("face", &pol3::face_h, ref);
-  m.def("halfedge", &pol3::halfedge_v, ref);
-  m.def("halfedge", &pol3::halfedge_f, ref);
+  m.def("face", &pol3::face_h, ref, py::arg("halfedge"), py::arg("graph"));
+  m.def("halfedge", &pol3::halfedge_v, ref, py::arg("vertex"), py::arg("graph"));
+  m.def("halfedge", &pol3::halfedge_f, ref, py::arg("face"), py::arg("graph"));
   // m.def("halfedge", &pol3::halfedge_vv);
   // m.def("in_degree", &pol3::in_degree);
   // m.def("is_valid_vertex_descriptor",
@@ -616,16 +618,16 @@ void export_polyhedron_3(py::module_& m) {
   // m.def("is_valid_face_descriptor",
   //       &bgl::my_is_valid_face_descriptor<Prn>,
   //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  m.def("next", &pol3::next_h, ref);
-  m.def("opposite", &pol3::opposite_h, ref);
+  m.def("next", &pol3::next_h, ref, py::arg("halfedge"), py::arg("graph"));
+  m.def("opposite", &pol3::opposite_h, ref, py::arg("halfedge"), py::arg("graph"));
   // m.def("out_degree", &bgl::out_degree<Prn>);
-  m.def("prev", &pol3::prev_h, ref);
+  m.def("prev", &pol3::prev_h, ref, py::arg("halfedge"), py::arg("graph"));
   // m.def("remove_edge", &bgl::remove_edge_vv<Prn>);
   // m.def("remove_edge", &bgl::remove_edge_e<Prn>);
   // m.def("remove_face", &bgl::remove_face<Prn>);
   // m.def("remove_vertex", &bgl::remove_vertex<Prn>);
-  m.def("source", &pol3::source_h, ref);
-  m.def("target", &pol3::target_h, ref);
+  m.def("source", &pol3::source_h, ref, py::arg("halfedge"), py::arg("graph"));
+  m.def("target", &pol3::target_h, ref, py::arg("halfedge"), py::arg("graph"));
   // m.def("set_face", &bgl::set_face<Prn>);
   // m.def("set_halfedge", &bgl::set_halfedge_vh<Prn>);
   // m.def("set_halfedge", &bgl::set_halfedge_fh<Prn>);

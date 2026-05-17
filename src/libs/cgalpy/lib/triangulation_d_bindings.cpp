@@ -643,7 +643,7 @@ void export_triangulation_d(py::module_& m) {
       .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0,
            "Partially determine whether the triangulation is valid\n"
            "Parameters:\n"
-           "  verbos (bool) indicates whether to be verbose\n"
+           "  verbose (bool) indicates whether to be verbose\n"
            "  level (int) the verbosity level\n"
            "Return:\n"
            "  Boolean\n")
@@ -693,7 +693,7 @@ void export_triangulation_d(py::module_& m) {
            "Parameters:\n"
            "  v (Vertex)\n"
            "  star (Vertex)\n")
-      .def("set_current_dimension", &Tds::set_current_dimension,
+      .def("set_current_dimension", &Tds::set_current_dimension, py::arg("d"),
            "Forces the current dimension of the complex to to a given one\n"
            "Parameters:\n"
            "  d (int): the new dimension\n")
@@ -901,10 +901,10 @@ void export_triangulation_d(py::module_& m) {
            "  f (Face): the input face\n"
            "Return:\n"
            "  Boolean\n")
-      .def("is_valid", &Tri::is_valid, py::arg("verbos") = false, py::arg("level") = 0,
+      .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0,
            "Partially determine whether the triangulation is valid\n"
            "Parameters:\n"
-           "  verbos (bool) indicates whether to be verbose\n"
+           "  verbose (bool) indicates whether to be verbose\n"
            "  level (int) the verbosity level\n"
            "Return:\n"
            "  Boolean\n")
@@ -1000,15 +1000,15 @@ void export_triangulation_d(py::module_& m) {
     // Face
     if (! add_attr<Face>(tri_c, "Face")) {
       py::class_<Face>(tri_c, "Face")
-        .def(py::init<int>())
-        .def(py::init<const Face&>())
+        .def(py::init<int>(), py::arg("dim"))
+        .def(py::init<const Face&>(), py::arg("other"))
         .def("face_dimension", &Face::face_dimension)
         .def("index", &Face::index)
-        .def("vertex", [](Face& f, int i)->Vertex& { return *(f.vertex(i)); }, ri)
+        .def("vertex", [](Face& f, int i)->Vertex& { return *(f.vertex(i)); }, ri, py::arg("i"))
         .def("Full_cell", [](Face& f)->Fc& { return *(f.full_cell()); }, ri)
         .def("clear", &Face::clear)
-        .def("set_full_cell", trid::set_full_cell)
-        .def("set_index", &Face::set_index)
+        .def("set_full_cell", trid::set_full_cell, py::arg("full_cell"))
+        .def("set_index", &Face::set_index, py::arg("index"))
         ;
     }
 

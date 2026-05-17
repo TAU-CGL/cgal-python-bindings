@@ -571,35 +571,44 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     sm_c.def(py::init<>(),
               doc::CGAL_Surface_mesh_Surface_mesh)
       .def(py::init<const Sm&>(),
+            py::arg("other"),
            doc::CGAL_Surface_mesh_Surface_mesh_1)
       // .def("assign", &Sm::assign, ri)
       .def("add_vertex", py::overload_cast<>(&Sm::add_vertex),
            doc::CGAL_Surface_mesh_add_vertex)
       .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex),
+            py::arg("point"),
            doc::CGAL_Surface_mesh_add_vertex_1)
       .def("add_edge", py::overload_cast<>(&Sm::add_edge),
            doc::CGAL_Surface_mesh_add_edge)
       .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge),
+            py::arg("source"), py::arg("target"),
            doc::CGAL_Surface_mesh_add_edge_1)
       .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face),
            doc::CGAL_Surface_mesh_add_face)
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face),
+            py::arg("v0"), py::arg("v1"), py::arg("v2"),
            doc::CGAL_Surface_mesh_add_face_1)
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face),
+            py::arg("v0"), py::arg("v1"), py::arg("v2"), py::arg("v3"),
            doc::CGAL_Surface_mesh_add_face_2)
       .def("add_face", &sm::add_face<Sm>,
+            py::arg("vertices"),
            doc::CGAL_Surface_mesh_add_face_3)
 
-      .def("has_valid_index", &sm::has_valid_index_v<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_e<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_h<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_f<Sm>)
+      .def("has_valid_index", &sm::has_valid_index_v<Sm>, py::arg("vertex"))
+      .def("has_valid_index", &sm::has_valid_index_e<Sm>, py::arg("edge"))
+      .def("has_valid_index", &sm::has_valid_index_h<Sm>, py::arg("halfedge"))
+      .def("has_valid_index", &sm::has_valid_index_f<Sm>, py::arg("face"))
 
       .def("remove_vertex", &Sm::remove_vertex,
+            py::arg("vertex"),
            doc::CGAL_Surface_mesh_remove_vertex)
       .def("remove_edge", &Sm::remove_edge,
+            py::arg("edge"),
            doc::CGAL_Surface_mesh_remove_edge)
       .def("remove_face", &Sm::remove_face,
+            py::arg("face"),
            doc::CGAL_Surface_mesh_remove_face)
       .def("num_vertices", &Sm::num_vertices)
       .def("number_of_vertices", &Sm::number_of_vertices,
@@ -683,7 +692,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
       // .def("property_stats", &Sm::property_stats)
 
-      .def("point", &sm::my_point<Sm>, ri)
+      .def("point", &sm::my_point<Sm>, ri, py::arg("vertex"))
       .def("points", &sm::points<Sm, Vi, Pnt>)
 
       // .def("__iadd__",
@@ -695,15 +704,20 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::is_operator())
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_),
+            py::arg("verbose") = false,
            doc::CGAL_Surface_mesh_is_valid)
 #if CGAL_VERSION_NR >= 1050600000
       .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_),
+            py::arg("vertex"), py::arg("verbose") = false,
            doc::CGAL_Surface_mesh_is_valid_1)
       .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_),
+            py::arg("edge"), py::arg("verbose") = false,
            doc::CGAL_Surface_mesh_is_valid_2)
       .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_),
+            py::arg("halfedge"), py::arg("verbose") = false,
            doc::CGAL_Surface_mesh_is_valid_3)
       .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_),
+            py::arg("face"), py::arg("verbose") = false,
            doc::CGAL_Surface_mesh_is_valid_4)
 #endif
       ;
