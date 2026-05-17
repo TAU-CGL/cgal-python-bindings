@@ -62,7 +62,7 @@ void export_basic_viewer(py::module_& m) {
   if (! add_attr<Gso>(m, "Graphics_scene_options_base")) {
     py::class_<Gso>(m, "Graphics_scene_options_base")
       .def(py::init<>())
-      .def("ignore_all_faces", &Gso::ignore_all_faces)
+      .def("ignore_all_faces", &Gso::ignore_all_faces, py::arg("b"))
       ;
   }
 
@@ -70,8 +70,8 @@ void export_basic_viewer(py::module_& m) {
   if (! add_attr<Gsoe>(m, "Graphics_scene_options")) {
     py::class_<Gsoe, Gso>(m, "Graphics_scene_options", py::type_slots(bvr::gsoe_slots))
       .def(py::init<>())
-      .def("colored_face", &Gsoe::apply_colored_face)
-      .def("face_color", &Gsoe::apply_face_color)
+      .def("colored_face", &Gsoe::apply_colored_face, py::arg("colored_face_object"))
+      .def("face_color", &Gsoe::apply_face_color, py::arg("face_color_object"))
       ;
   }
 
@@ -82,8 +82,8 @@ void export_basic_viewer(py::module_& m) {
       ;
   }
 
-  m.def("add_to_graphics_scene", [](const bvr::Ds& ds, Gs& gs) { CGAL::add_to_graphics_scene(ds, gs); })
+  m.def("add_to_graphics_scene", [](const bvr::Ds& ds, Gs& gs) { CGAL::add_to_graphics_scene(ds, gs); }, py::arg("ds"), py::arg("gs"))
     .def("add_to_graphics_scene",
-         [](const bvr::Ds& ds, Gs& gs, const Gso& gso) { CGAL::add_to_graphics_scene(ds, gs, gso); })
-    .def("draw_graphics_scene", &CGAL::draw_graphics_scene);
+         [](const bvr::Ds& ds, Gs& gs, const Gso& gso) { CGAL::add_to_graphics_scene(ds, gs, gso); }, py::arg("ds"), py::arg("gs"), py::arg("gso"))
+    .def("draw_graphics_scene", &CGAL::draw_graphics_scene, py::arg("graphics_scene"), py::arg("title") = "CGAL Basic Viewer");
 }

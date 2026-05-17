@@ -290,40 +290,40 @@ void export_alpha_shape_3(py::module_& m) {
     .def(py::init<tri3::Triangulation_3&, as3::FT&, as3::Mode>(),
          py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
 #endif
-    .def("__init__", &as3::as_init1)
-    .def("__init__", &as3::as_init2)
-    .def("__init__", &as3::as_init3)
+    .def("__init__", &as3::as_init1, py::arg("points"))
+    .def("__init__", &as3::as_init2, py::arg("points"), py::arg("alpha"))
+    .def("__init__", &as3::as_init3, py::arg("points"), py::arg("alpha"))
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("__init__", &as3::as_init4)
-    .def("__init__", &as3::as_init5)
+    .def("__init__", &as3::as_init4, py::arg("points"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def("__init__", &as3::as_init5, py::arg("points"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
 #endif
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("make_alpha_shape", &as3::make_alpha_shape)
-    .def("set_mode", &As3::set_mode)
-    .def("set_alpha", &As3::set_alpha)
+    .def("make_alpha_shape", &as3::make_alpha_shape, py::arg("points"))
+    .def("set_mode", &As3::set_mode, py::arg("mode") = As3::REGULARIZED)
+    .def("set_alpha", &As3::set_alpha, py::arg("alpha"))
 #endif
     .def("clear", &As3::clear)
     // Query Functions
     .def("get_alpha", &As3::get_alpha)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def("get_mode", &As3::get_mode)
-    .def("get_nth_alpha", &As3::get_nth_alpha)
+    .def("get_nth_alpha", &As3::get_nth_alpha, py::arg("n"))
     .def("number_of_alphas", &As3::number_of_alphas)
-    .def("classify", classify1)
-    .def("classify", classify2)
-    .def("classify", classify3)
-    .def("classify", classify4)
-    .def("classify", classify5)
-    .def("classify", classify6)
-    .def("classify", classify7)
-    .def("classify", classify8)
-    .def("classify", classify9)
-    .def("classify", classify10)
-    .def("classify", classify11)
-    .def("classify", classify12)
-    .def("get_alpha_status", get_alpha_status1)
-    .def("get_alpha_status", get_alpha_status2)
+    .def("classify", classify1, py::arg("point"), py::arg("alpha"))
+    .def("classify", classify2, py::arg("edge"), py::arg("alpha"))
+    .def("classify", classify3, py::arg("facet"), py::arg("alpha"))
+    .def("classify", classify4, py::arg("vertex"), py::arg("alpha"))
+    .def("classify", classify5, py::arg("cell"), py::arg("alpha"))
+    .def("classify", classify6, py::arg("cell"), py::arg("i"), py::arg("alpha"))
+    .def("classify", classify7, py::arg("point"))
+    .def("classify", classify8, py::arg("edge"))
+    .def("classify", classify9, py::arg("facet"))
+    .def("classify", classify10, py::arg("vertex"))
+    .def("classify", classify11, py::arg("cell"))
+    .def("classify", classify12, py::arg("cell"), py::arg("i"))
+    .def("get_alpha_status", get_alpha_status1, py::arg("edge"))
+    .def("get_alpha_status", get_alpha_status2, py::arg("facet"))
 #endif
     .def("alpha_shape_cells", &as3::alpha_shape_cells)
     .def("alpha_shape_facets", &as3::alpha_shape_facets)
@@ -334,13 +334,13 @@ void export_alpha_shape_3(py::module_& m) {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     // Traversal of the alpha-Values
     .def("alphas", &as3::alphas, py::keep_alive<0, 1>())
-    .def("alpha_find", &As3::alpha_find)
-    .def("alpha_lower_bound", &As3::alpha_lower_bound)
-    .def("alpha_upper_bound", &As3::alpha_upper_bound)
+    .def("alpha_find", &As3::alpha_find, py::arg("alpha"))
+    .def("alpha_lower_bound", &As3::alpha_lower_bound, py::arg("alpha"))
+    .def("alpha_upper_bound", &As3::alpha_upper_bound, py::arg("alpha"))
     // Operations
     .def("number_of_solid_components", number_of_solid_components1)
-    .def("number_of_solid_components", number_of_solid_components2)
-    .def("find_optimal_alpha", &As3::find_optimal_alpha)
+    .def("number_of_solid_components", number_of_solid_components2, py::arg("alpha"))
+    .def("find_optimal_alpha", &As3::find_optimal_alpha, py::arg("nb_components"))
     .def("find_alpha_solid", &As3::find_alpha_solid)
 #endif
     ;

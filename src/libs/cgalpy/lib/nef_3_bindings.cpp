@@ -104,10 +104,12 @@ void export_nef_3(py::module_& m) {
       .def(py::init<const Pm&>(), py::arg("pm"))
       .def("volumes", &nef3::my_volumes, py::keep_alive<0, 1>())
       .def("convert_inner_shell_to_polyhedron",
-           &nef3::convert_inner_shell_to_polyhedron)
+           &nef3::convert_inner_shell_to_polyhedron,
+         py::arg("volume"))
     ;
 
   }
 
-  m.def("convex_decomposition_3", &CGAL::convex_decomposition_3<Np3>);
+  m.def("convex_decomposition_3", &CGAL::convex_decomposition_3<Np3>,
+        py::arg("np"));
 }
