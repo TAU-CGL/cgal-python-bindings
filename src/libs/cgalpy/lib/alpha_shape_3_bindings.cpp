@@ -279,12 +279,27 @@ void export_alpha_shape_3(py::module_& m) {
 #endif
 
   py::class_<As3> as3_c(m, "Alpha_shape_3");
+
+  py::enum_<as3::Classification_type>(as3_c, "Classification_type")
+    .value("EXTERIOR", As3::EXTERIOR)
+    .value("SINGULAR", As3::SINGULAR)
+    .value("REGULAR", As3::REGULAR)
+    .value("INTERIOR", As3::INTERIOR)
+    .export_values()
+    ;
+
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
+  py::enum_<as3::Mode>(as3_c, "Mode")
+    .value("GENERAL", As3::GENERAL)
+    .value("REGULARIZED", As3::REGULARIZED)
+    .export_values()
+    ;
+#endif
+
   as3_c.def(py::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(py::init<double, as3::Mode>(),
-         py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<as3::FT&, as3::Mode>(),
-         py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<double, as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<as3::FT&, as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
     .def(py::init<tri3::Triangulation_3&, double, as3::Mode>(),
          py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
     .def(py::init<tri3::Triangulation_3&, as3::FT&, as3::Mode>(),
@@ -345,21 +360,7 @@ void export_alpha_shape_3(py::module_& m) {
 #endif
     ;
 
-  py::enum_<as3::Classification_type>(as3_c, "Classification_type")
-    .value("EXTERIOR", As3::EXTERIOR)
-    .value("SINGULAR", As3::SINGULAR)
-    .value("REGULAR", As3::REGULAR)
-    .value("INTERIOR", As3::INTERIOR)
-    .export_values()
-    ;
-
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  py::enum_<as3::Mode>(as3_c, "Mode")
-    .value("GENERAL", As3::GENERAL)
-    .value("REGULARIZED", As3::REGULARIZED)
-    .export_values()
-    ;
-
   py::class_<as3::Alpha_status>(as3_c, "Alpha_status")
     .def(py::init<>())
     // Modifiers
@@ -375,10 +376,11 @@ void export_alpha_shape_3(py::module_& m) {
     .def("alpha_mid", &as3::Alpha_status::alpha_mid)
     .def("alpha_max", &as3::Alpha_status::alpha_max)
     ;
+#endif
 
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
   using Ai = as3::Alpha_iterator;
   add_iterator<Ai, Ai>("Alpha_iterator", as3_c);
-
 #endif
 
   // Types that have been registered already:
