@@ -77,12 +77,29 @@ void export_alpha_shape_2(py::module_& m) {
   as2::Classification_type (As2::*classify10)(const as2::Face_handle& s, int i) const = &As2::classify;
 
   py::class_<As2> as2_c(m, "Alpha_shape_2");
+
+  py::enum_<as2::Mode>(as2_c, "Mode")
+    .value("GENERAL", As2::GENERAL)
+    .value("REGULARIZED", As2::REGULARIZED)
+    .export_values()
+    ;
+
+  py::enum_<as2::Classification_type>(as2_c, "Classification_type")
+    .value("EXTERIOR", As2::EXTERIOR)
+    .value("SINGULAR", As2::SINGULAR)
+    .value("REGULAR", As2::REGULAR)
+    .value("INTERIOR", As2::INTERIOR)
+    .export_values()
+    ;
+
   as2_c.def(py::init<>())
-    .def(py::init<double, as2::Mode>())
-    .def(py::init<as2::FT&, as2::Mode>())
-    .def(py::init<Tri2&, double, as2::Mode>())
-    .def(py::init<Tri2&, as2::FT&, as2::Mode>())
-    .def("__init__", &as2::as_init)
+    .def(py::init<double, as2::Mode>(), py::arg("alpha"), py::arg("mode") = As2::GENERAL)
+    .def(py::init<as2::FT&, as2::Mode>(), py::arg("alpha"), py::arg("mode") = As2::GENERAL)
+    .def(py::init<Tri2&, double, as2::Mode>(), py::arg("triangulation"),
+         py::arg("alpha"), py::arg("mode") = As2::GENERAL)
+    .def(py::init<Tri2&, as2::FT&, as2::Mode>(), py::arg("triangulation"),
+         py::arg("alpha"), py::arg("mode") = As2::GENERAL)
+    .def("__init__", &as2::as_init, py::arg("points"))
     .def("clear", &As2::clear)
     .def("set_mode", &As2::set_mode)
     .def("set_alpha", &As2::set_alpha)
@@ -116,20 +133,6 @@ void export_alpha_shape_2(py::module_& m) {
 
   // Alpha_shape_vertices_iterator;
   // Alpha_shape_edges_iterator;
-
-  py::enum_<as2::Classification_type>(as2_c, "Classification_type")
-    .value("EXTERIOR", As2::EXTERIOR)
-    .value("SINGULAR", As2::SINGULAR)
-    .value("REGULAR", As2::REGULAR)
-    .value("INTERIOR", As2::INTERIOR)
-    .export_values()
-    ;
-
-  py::enum_<as2::Mode>(as2_c, "Mode")
-    .value("GENERAL", As2::GENERAL)
-    .value("REGULARIZED", As2::REGULARIZED)
-    .export_values()
-    ;
 
   // Types that have been registered already:
   if (tri2::is_periodic())
