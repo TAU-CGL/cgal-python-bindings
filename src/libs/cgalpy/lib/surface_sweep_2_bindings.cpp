@@ -121,7 +121,7 @@ py::list compute_subcurves1(py::list& curves, bool mult_overlaps, const Geometry
 
 // Binding for determining whether an intersection occurs between any pair
 // of curves in a given range.
-  bool do_curves_intersect0(py::list& curves, bool consider_common_endpoints) {
+  bool do_intersect0(py::list& curves, bool consider_common_endpoints = true) {
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
     auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
@@ -141,7 +141,7 @@ py::list compute_subcurves1(py::list& curves, bool mult_overlaps, const Geometry
 
 // Binding for determining whether an intersection occurs between any pair
 // of curves in a given range.
-bool do_curves_intersect1(py::list& curves, bool consider_common_endpoints, const Geometry_traits_2& traits) {
+bool do_intersect1(py::list& curves, bool consider_common_endpoints, const Geometry_traits_2& traits) {
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
     auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
@@ -173,7 +173,9 @@ void export_surface_sweep_2(py::module_& m) {
     .def("compute_subcurves", &ss2::compute_subcurves1)
     ;
 
-  m.def("do_curves_intersect", &ss2::do_curves_intersect0)
-    .def("do_curves_intersect", &ss2::do_curves_intersect1)
+  m.def("do_intersect", &ss2::do_intersect0,
+        py::arg("curves"), py::arg("consider_common_endpoints") = true)
+    .def("do_intersect", &ss2::do_intersect1,
+         py::arg("curves"), py::arg("consider_common_endpoints"), py::arg("traits"))
     ;
 }
