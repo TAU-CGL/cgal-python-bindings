@@ -124,67 +124,73 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_algebraic_segment_traits")) return;
 
-  py::class_<Integer> integer_c(m, "Integer");
-  integer_c.def(py::init<>())
-    .def(py::init_implicit<int>())
-    // .def("value", &Integer::longValue)
-    .def(py::self + py::self)
-    .def(py::self += py::self)
-    .def(py::self - py::self)
-    .def(py::self -= py::self)
-    .def(py::self *= py::self)
-    ;
+  if (! add_attr<Integer>(m, "Integer")) {
+    py::class_<Integer> integer_c(m, "Integer");
+    integer_c.def(py::init<>())
+      .def(py::init_implicit<int>())
+      // .def("value", &Integer::longValue)
+      .def(py::self + py::self)
+      .def(py::self += py::self)
+      .def(py::self - py::self)
+      .def(py::self -= py::self)
+      .def(py::self *= py::self)
+      ;
 
-  add_insertion(integer_c, "__str__");
-  add_insertion(integer_c, "__repr__");
+    add_insertion(integer_c, "__str__");
+    add_insertion(integer_c, "__repr__");
+  }
 
   using Cmp = CGAL::Comparison_result(Ar::*)(const Ar&) const;
-  py::class_<Ar> ar1_c(m, "Algebraic_real_1");
-  ar1_c.def(py::init<>())
-    .def(py::init<Ar&>())
-    .def(py::init_implicit<int>())
-    .def(py::init<Ar::Rational&>())
-    .def(py::init<const aos2::Polynomial_1&, Ar::Rational, Ar::Rational>())
-    .def("bisect", &Ar::bisect)
-    .def("compare", static_cast<Cmp>(&Ar::compare<Ar>))
-    .def("degree", &Ar::degree)
-    .def("high", &Ar::high)
-    .def("is_rational", &Ar::is_rational)
-    .def("is_root_of", &Ar::is_root_of)
-    .def("low", &Ar::low)
-    .def("polynomial", &Ar::polynomial)
-    .def("rational", &Ar::rational)
-    .def("rational_between", &Ar::rational_between)
-    .def("refine", &Ar::refine)
-    .def("refine_to", &Ar::refine_to)
-    .def("sign_at_low", &Ar::sign_at_low)
-    .def("simplify", &Ar::simplify)
-    .def("to_double", &Ar::to_double)
-    .def("upper", &Ar::upper)
-    .def(py::self == py::self)
-    .def(py::self != py::self)
-    .def(py::self != py::self)
-    .def(py::self < py::self)
-    .def(py::self > py::self)
-    .def(py::self <= py::self)
-    .def(py::self >= py::self)
-    ;
+  if (! add_attr<Ar>(m, "Algebraic_real_1")) {
+    py::class_<Ar> ar1_c(m, "Algebraic_real_1");
+    ar1_c.def(py::init<>())
+      .def(py::init<Ar&>())
+      .def(py::init_implicit<int>())
+      .def(py::init<Ar::Rational&>())
+      .def(py::init<const aos2::Polynomial_1&, Ar::Rational, Ar::Rational>())
+      .def("bisect", &Ar::bisect)
+      .def("compare", static_cast<Cmp>(&Ar::compare<Ar>))
+      .def("degree", &Ar::degree)
+      .def("high", &Ar::high)
+      .def("is_rational", &Ar::is_rational)
+      .def("is_root_of", &Ar::is_root_of)
+      .def("low", &Ar::low)
+      .def("polynomial", &Ar::polynomial)
+      .def("rational", &Ar::rational)
+      .def("rational_between", &Ar::rational_between)
+      .def("refine", &Ar::refine)
+      .def("refine_to", &Ar::refine_to)
+      .def("sign_at_low", &Ar::sign_at_low)
+      .def("simplify", &Ar::simplify)
+      .def("to_double", &Ar::to_double)
+      .def("upper", &Ar::upper)
+      .def(py::self == py::self)
+      .def(py::self != py::self)
+      .def(py::self != py::self)
+      .def(py::self < py::self)
+      .def(py::self > py::self)
+      .def(py::self <= py::self)
+      .def(py::self >= py::self)
+      ;
 
-  add_insertion(ar1_c, "__str__");
-  add_insertion(ar1_c, "__repr__");
+    add_insertion(ar1_c, "__str__");
+    add_insertion(ar1_c, "__repr__");
+  }
 
-  py::class_<aos2::Bound> bound_c(m, "Bound");
-  bound_c.def(py::init<>())
-    // .def("value", &aos2::Bound::longValue)
-    .def(py::self + py::self)
-    .def(py::self += py::self)
-    .def(py::self - py::self)
-    .def(py::self -= py::self)
-    .def(py::self *= py::self)
-    ;
+  if (! add_attr<aos2::Bound>(m, "Bound")) {
+    py::class_<aos2::Bound> bound_c(m, "Bound");
+    bound_c.def(py::init<>())
+      // .def("value", &aos2::Bound::longValue)
+      .def(py::self + py::self)
+      .def(py::self += py::self)
+      .def(py::self - py::self)
+      .def(py::self -= py::self)
+      .def(py::self *= py::self)
+      ;
 
-  add_insertion(bound_c, "__str__");
-  add_insertion(bound_c, "__repr__");
+    add_insertion(bound_c, "__str__");
+    add_insertion(bound_c, "__repr__");
+  }
 
   //bind_construct_polynomial<Pt1>("Construct_polynomial_1");
   //bind_construct_polynomial<Pt2>("Construct_polynomial_2");
