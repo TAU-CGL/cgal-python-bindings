@@ -87,20 +87,20 @@ d : int
 Returns: NT";
 
 // CGAL::Box_intersection_d::Box_d
-constexpr const char* CGAL_Box_intersection_d_Box_d__class__ = "Box_d is a generic iso-oriented bounding box in dimension $ D$ .";
+constexpr const char* Box_intersection_d_Box_d__class__ = "Box_d is a generic iso-oriented bounding box in dimension $ D$ .";
 
-constexpr const char* CGAL_Box_intersection_d_Box_d_NT = "number type to represent the box boundaries.
+constexpr const char* Box_intersection_d_Box_d_NT = "number type to represent the box boundaries.
 
 Allowed are the built-in types int , unsigned int , float , and double .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Box_intersection_d_Box_d_ID = "type for the box id -number.
+constexpr const char* Box_intersection_d_Box_d_ID = "type for the box id -number.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Box_intersection_d_Box_d_Box_d = "Default constructor.
+constexpr const char* Box_intersection_d_Box_d_Box_d = "Default constructor.
 
 No particular initialization.";
-constexpr const char* CGAL_Box_intersection_d_Box_d_Box_d_1 = "Constructor initialized to the complete or the empty space.
+constexpr const char* Box_intersection_d_Box_d_Box_d_1 = "Constructor initialized to the complete or the empty space.
 
 If empty, all interval starting(end) points will be set to positive(negative)
 infinity.
@@ -108,7 +108,7 @@ infinity.
 Parameters
 ----------
 complete : bool";
-constexpr const char* CGAL_Box_intersection_d_Box_d_Box_d_2 = "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ .
+constexpr const char* Box_intersection_d_Box_d_Box_d_2 = "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ .
 
 lo[i] $ <$ hi[i] for $ 0 \\leq i < D$ .
 
@@ -116,21 +116,21 @@ Parameters
 ----------
 lo : NT
 hi : NT";
-constexpr const char* CGAL_Box_intersection_d_Box_d_Box_d_3 = "constructs from bbox .
+constexpr const char* Box_intersection_d_Box_d_Box_d_3 = "constructs from bbox .
 
 Requirements: $ D=2$ and NT $ \\equiv$ double .
 
 Parameters
 ----------
 bbox : const Bbox_2 &";
-constexpr const char* CGAL_Box_intersection_d_Box_d_Box_d_4 = "constructs from bbox .
+constexpr const char* Box_intersection_d_Box_d_Box_d_4 = "constructs from bbox .
 
 Requirements: $ D=3$ and NT $ \\equiv$ double .
 
 Parameters
 ----------
 bbox : const Bbox_3 &";
-constexpr const char* CGAL_Box_intersection_d_Box_d_init = "initializes to the complete or the empty space.
+constexpr const char* Box_intersection_d_Box_d_init = "initializes to the complete or the empty space.
 
 If empty, all interval starting(end) points will be set to positive(negative)
 infinity.
@@ -138,20 +138,20 @@ infinity.
 Parameters
 ----------
 complete : bool";
-constexpr const char* CGAL_Box_intersection_d_Box_d_extend = "extend box to contain the old box and point .
+constexpr const char* Box_intersection_d_Box_d_extend = "extend box to contain the old box and point .
 
 Parameters
 ----------
 point : NT";
-constexpr const char* CGAL_Box_intersection_d_Box_d_dimension = "returns $ D$ , the dimension of the box.
+constexpr const char* Box_intersection_d_Box_d_dimension = "returns $ D$ , the dimension of the box.
 
 Returns: int";
-constexpr const char* CGAL_Box_intersection_d_Box_d_id = "returns a unique box id, see the IdPolicy template parameter above for the different choices.
+constexpr const char* Box_intersection_d_Box_d_id = "returns a unique box id, see the IdPolicy template parameter above for the different choices.
 
 IdPolicy $ \\neq$ ID_NONE
 
 Returns: std::size_t";
-constexpr const char* CGAL_Box_intersection_d_Box_d_min_coord = "returns the lower boundary in dimension d
+constexpr const char* Box_intersection_d_Box_d_min_coord = "returns the lower boundary in dimension d
 
 $ 0 \\leq$ d $ < D$ .
 
@@ -160,7 +160,7 @@ Parameters
 d : int
 
 Returns: NT";
-constexpr const char* CGAL_Box_intersection_d_Box_d_max_coord = "returns the upper boundary in dimension d
+constexpr const char* Box_intersection_d_Box_d_max_coord = "returns the upper boundary in dimension d
 
 $ 0 \\leq$ d $ < D$ .
 
@@ -169,43 +169,43 @@ Parameters
 d : int
 
 Returns: NT";
-constexpr const char* CGAL_Box_intersection_d_Box_d_bbox = "returns the bounding box Requirements: $ D=2$ and NT $ \\equiv$ double
+constexpr const char* Box_intersection_d_Box_d_bbox = "returns the bounding box Requirements: $ D=2$ and NT $ \\equiv$ double
 
 Returns: const Bbox_2 &";
-constexpr const char* CGAL_Box_intersection_d_Box_d_bbox_1 = "returns the bounding box Requirements: $ D=3$ and NT $ \\equiv$ double
+constexpr const char* Box_intersection_d_Box_d_bbox_1 = "returns the bounding box Requirements: $ D=3$ and NT $ \\equiv$ double
 
 Returns: const Bbox_3 &";
-constexpr const char* CGAL_Box_intersection_d_Box_d_extend_1 = "extends box to the smallest box that additionally contains the point represented by coordinates in p .
+constexpr const char* Box_intersection_d_Box_d_extend_1 = "extends box to the smallest box that additionally contains the point represented by coordinates in p .
 
 Parameters
 ----------
 p : NT";
-constexpr const char* CGAL_Box_intersection_d_Box_d_extend_2 = "extends box to the smallest box that additionally contains the point represented by coordinate intervals in p .
+constexpr const char* Box_intersection_d_Box_d_extend_2 = "extends box to the smallest box that additionally contains the point represented by coordinate intervals in p .
 
 Parameters
 ----------
 p : std::pair< NT , NT >";
 
 // CGAL::Box_intersection_d::Box_traits_d
-constexpr const char* CGAL_Box_intersection_d_Box_traits_d__class__ = "This is the default traits class for the intersection algorithms for iso-oriented boxes.";
+constexpr const char* Box_intersection_d_Box_traits_d__class__ = "This is the default traits class for the intersection algorithms for iso-oriented boxes.";
 
-constexpr const char* CGAL_Box_intersection_d_Box_traits_d_Box_traits_d = "default constructor.";
+constexpr const char* Box_intersection_d_Box_traits_d_Box_traits_d = "default constructor.";
 
 // CGAL::Box_intersection_d::Box_with_handle_d
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d__class__ = "Box_with_handle_d is a generic iso-oriented bounding box in dimension $ D$ that stores additionally a handle to some underlying geometric object.";
+constexpr const char* Box_intersection_d_Box_with_handle_d__class__ = "Box_with_handle_d is a generic iso-oriented bounding box in dimension $ D$ that stores additionally a handle to some underlying geometric object.";
 
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_NT = "number type to represent the box boundaries.
+constexpr const char* Box_intersection_d_Box_with_handle_d_NT = "number type to represent the box boundaries.
 
 Allowed are the built-in types int , unsigned int , float , and double .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_ID = "type for the box id -number.
+constexpr const char* Box_intersection_d_Box_with_handle_d_ID = "type for the box id -number.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_Box_with_handle_d = "Default constructor.
+constexpr const char* Box_intersection_d_Box_with_handle_d_Box_with_handle_d = "Default constructor.
 
 No particular initialization.";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_Box_with_handle_d_1 = "initializes to the complete or the empty space.
+constexpr const char* Box_intersection_d_Box_with_handle_d_Box_with_handle_d_1 = "initializes to the complete or the empty space.
 
 If empty, all interval starting (end) points will be set to positive
 (negative) infinity, sets handle to $ h$ .
@@ -214,7 +214,7 @@ Parameters
 ----------
 complete : bool
 h : Handle";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_Box_with_handle_d_2 = "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ and sets the handle to $ h$ .
+constexpr const char* Box_intersection_d_Box_with_handle_d_Box_with_handle_d_2 = "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ and sets the handle to $ h$ .
 
 lo[i] $ <$ hi[i] for $ 0 \\leq i < D$ .
 
@@ -223,19 +223,19 @@ Parameters
 lo : NT
 hi : NT
 h : Handle";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_Box_with_handle_d_3 = "constructs from bbox and sets the handle to $ h$ , exists iff $ D=2$ and NT $\\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_handle_d_Box_with_handle_d_3 = "constructs from bbox and sets the handle to $ h$ , exists iff $ D=2$ and NT $\\equiv$ double .
 
 Parameters
 ----------
 bbox : const Bbox_2 &
 h : Handle";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_Box_with_handle_d_4 = "constructs from bbox and sets the handle to $ h$ , exists iff $ D=3$ and NT $\\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_handle_d_Box_with_handle_d_4 = "constructs from bbox and sets the handle to $ h$ , exists iff $ D=3$ and NT $\\equiv$ double .
 
 Parameters
 ----------
 bbox : const Bbox_3 &
 h : Handle";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_init = "initializes to the complete or the empty space.
+constexpr const char* Box_intersection_d_Box_with_handle_d_init = "initializes to the complete or the empty space.
 
 If empty, all interval starting(end) points will be set to positive(negative)
 infinity.
@@ -243,58 +243,58 @@ infinity.
 Parameters
 ----------
 complete : bool";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_extend = "extend box to contain the old box and point .
+constexpr const char* Box_intersection_d_Box_with_handle_d_extend = "extend box to contain the old box and point .
 
 Parameters
 ----------
 point : NT";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_handle = "returns the handle stored in box .
+constexpr const char* Box_intersection_d_Box_with_handle_d_handle = "returns the handle stored in box .
 
 Returns: Handle";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_id = "returns a unique box id, see the IdPolicy template parameter above for the different choices.
+constexpr const char* Box_intersection_d_Box_with_handle_d_id = "returns a unique box id, see the IdPolicy template parameter above for the different choices.
 
 Does not exist if ID_NONE has been chosen for the IdPolicy .
 
 Returns: std::size_t";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_min_coord = "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < D$ .
+constexpr const char* Box_intersection_d_Box_with_handle_d_min_coord = "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < D$ .
 
 Parameters
 ----------
 d : int
 
 Returns: NT";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_max_coord = "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < D$ .
+constexpr const char* Box_intersection_d_Box_with_handle_d_max_coord = "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < D$ .
 
 Parameters
 ----------
 d : int
 
 Returns: NT";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_bbox = "returns the bounding box iff $ D=2$ and NT $ \\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_handle_d_bbox = "returns the bounding box iff $ D=2$ and NT $ \\equiv$ double .
 
 Returns: const Bbox_2 &";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_bbox_1 = "returns the bounding box iff $ D=3$ and NT $ \\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_handle_d_bbox_1 = "returns the bounding box iff $ D=3$ and NT $ \\equiv$ double .
 
 Returns: const Bbox_3 &";
-constexpr const char* CGAL_Box_intersection_d_Box_with_handle_d_dimension = "returns $ D$ , the dimension of the box.
+constexpr const char* Box_intersection_d_Box_with_handle_d_dimension = "returns $ D$ , the dimension of the box.
 
 Returns: int";
 
 // CGAL::Box_intersection_d::Box_with_info_d
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d__class__ = "Box_with_info_d is a generic iso-oriented bounding box in dimension $ D$ that stores additionally a variable to some underlying geometric object.";
+constexpr const char* Box_intersection_d_Box_with_info_d__class__ = "Box_with_info_d is a generic iso-oriented bounding box in dimension $ D$ that stores additionally a variable to some underlying geometric object.";
 
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_NT = "number type to represent the box boundaries.
+constexpr const char* Box_intersection_d_Box_with_info_d_NT = "number type to represent the box boundaries.
 
 Allowed are the built-in types int , unsigned int , float , and double .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_ID = "type for the box id -number.
+constexpr const char* Box_intersection_d_Box_with_info_d_ID = "type for the box id -number.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_Box_with_info_d = "Default constructor.
+constexpr const char* Box_intersection_d_Box_with_info_d_Box_with_info_d = "Default constructor.
 
 No particular initialization.";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_Box_with_info_d_1 = "initializes to the complete or the empty space.
+constexpr const char* Box_intersection_d_Box_with_info_d_Box_with_info_d_1 = "initializes to the complete or the empty space.
 
 If empty, all interval starting (end) points will be set to positive
 (negative) infinity, sets info to $ info$ .
@@ -303,7 +303,7 @@ Parameters
 ----------
 complete : bool
 info : Info";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_Box_with_info_d_2 = "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ and sets info to $ info$ .
+constexpr const char* Box_intersection_d_Box_with_info_d_Box_with_info_d_2 = "initializes the box intervals to [ lo[i] , hi[i] ], $ 0 \\leq i < D$ and sets info to $ info$ .
 
 lo[i] $ <$ hi[i] for $ 0 \\leq i < D$ .
 
@@ -312,19 +312,19 @@ Parameters
 lo : NT
 hi : NT
 info : Info";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_Box_with_info_d_3 = "constructs from bbox and sets info to $ info$ , exists iff $ D=2$ and NT $\\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_info_d_Box_with_info_d_3 = "constructs from bbox and sets info to $ info$ , exists iff $ D=2$ and NT $\\equiv$ double .
 
 Parameters
 ----------
 bbox : const Bbox_2 &
 info : Info";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_Box_with_info_d_4 = "constructs from bbox and sets info to $ info$ , exists iff $ D=3$ and NT $\\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_info_d_Box_with_info_d_4 = "constructs from bbox and sets info to $ info$ , exists iff $ D=3$ and NT $\\equiv$ double .
 
 Parameters
 ----------
 bbox : const Bbox_3 &
 info : Info";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_init = "initializes to the complete or the empty space.
+constexpr const char* Box_intersection_d_Box_with_info_d_init = "initializes to the complete or the empty space.
 
 If empty, all interval starting(end) points will be set to positive(negative)
 infinity.
@@ -332,40 +332,40 @@ infinity.
 Parameters
 ----------
 complete : bool";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_extend = "extend box to contain the old box and point .
+constexpr const char* Box_intersection_d_Box_with_info_d_extend = "extend box to contain the old box and point .
 
 Parameters
 ----------
 point : NT";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_info = "returns the info stored in box .
+constexpr const char* Box_intersection_d_Box_with_info_d_info = "returns the info stored in box .
 
 Returns: Info";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_id = "returns a unique box id, see the IdPolicy template parameter above for the different choices.
+constexpr const char* Box_intersection_d_Box_with_info_d_id = "returns a unique box id, see the IdPolicy template parameter above for the different choices.
 
 Does not exist if ID_NONE has been chosen for the IdPolicy .
 
 Returns: std::size_t";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_min_coord = "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < D$ .
+constexpr const char* Box_intersection_d_Box_with_info_d_min_coord = "returns the lower boundary in dimension d , $ 0 \\leq$ d $ < D$ .
 
 Parameters
 ----------
 d : int
 
 Returns: NT";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_max_coord = "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < D$ .
+constexpr const char* Box_intersection_d_Box_with_info_d_max_coord = "returns the upper boundary in dimension d , $ 0 \\leq$ d $ < D$ .
 
 Parameters
 ----------
 d : int
 
 Returns: NT";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_bbox = "returns the bounding box iff $ D=2$ and NT $ \\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_info_d_bbox = "returns the bounding box iff $ D=2$ and NT $ \\equiv$ double .
 
 Returns: const Bbox_2 &";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_bbox_1 = "returns the bounding box iff $ D=3$ and NT $ \\equiv$ double .
+constexpr const char* Box_intersection_d_Box_with_info_d_bbox_1 = "returns the bounding box iff $ D=3$ and NT $ \\equiv$ double .
 
 Returns: const Bbox_3 &";
-constexpr const char* CGAL_Box_intersection_d_Box_with_info_d_dimension = "returns $ D$ , the dimension of the box.
+constexpr const char* Box_intersection_d_Box_with_info_d_dimension = "returns $ D$ , the dimension of the box.
 
 Returns: int";
 

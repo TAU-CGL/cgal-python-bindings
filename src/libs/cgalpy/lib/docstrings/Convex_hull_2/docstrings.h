@@ -8,26 +8,26 @@ namespace docstrings {
 namespace Convex_hull_2 {
 
 // CGAL::Convex_hull_constructive_traits_2
-constexpr const char* CGAL_Convex_hull_constructive_traits_2__class__ = "The class Convex_hull_constructive_traits_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation function.";
+constexpr const char* Convex_hull_constructive_traits_2__class__ = "The class Convex_hull_constructive_traits_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation function.";
 
-constexpr const char* CGAL_Convex_hull_constructive_traits_2_Compare_signed_distance_to_line_2 = "This internal functor builds and cache the line on the first call to its operator() .
+constexpr const char* Convex_hull_constructive_traits_2_Compare_signed_distance_to_line_2 = "This internal functor builds and cache the line on the first call to its operator() .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_constructive_traits_2_Convex_hull_constructive_traits_2 = "default constructor.";
+constexpr const char* Convex_hull_constructive_traits_2_Convex_hull_constructive_traits_2 = "default constructor.";
 
 // CGAL::Convex_hull_traits_2
-constexpr const char* CGAL_Convex_hull_traits_2__class__ = "The class Convex_hull_traits_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation function.";
+constexpr const char* Convex_hull_traits_2__class__ = "The class Convex_hull_traits_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation function.";
 
-constexpr const char* CGAL_Convex_hull_traits_2_Convex_hull_traits_2 = "copy constructor.
+constexpr const char* Convex_hull_traits_2_Convex_hull_traits_2 = "copy constructor.
 
 Parameters
 ----------
 t : Convex_hull_traits_2 &";
 
 // CGAL::Convex_hull_traits_adapter_2
-constexpr const char* CGAL_Convex_hull_traits_adapter_2__class__ = "The class Convex_hull_traits_adapter_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation functions.";
+constexpr const char* Convex_hull_traits_adapter_2__class__ = "The class Convex_hull_traits_adapter_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation functions.";
 
-constexpr const char* CGAL_Convex_hull_traits_adapter_2_point_property_map = "Returns a const reference to the point property map.
+constexpr const char* Convex_hull_traits_adapter_2_point_property_map = "Returns a const reference to the point property map.
 
 Returns: const PointPropertyMap &";
 

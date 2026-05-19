@@ -8,18 +8,18 @@ namespace docstrings {
 namespace Surface_mesh_skeletonization {
 
 // CGAL::Mean_curvature_flow_skeletonization
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization__class__ = "Function object that enables to extract the mean curvature flow skeleton of a triangulated surface mesh.";
+constexpr const char* Mean_curvature_flow_skeletonization__class__ = "Function object that enables to extract the mean curvature flow skeleton of a triangulated surface mesh.";
 
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_Skeleton = "The graph type representing the skeleton. The vertex property Vmap is a struct with a member point of type Traits::Point_3 and a member vertices of type std::vector<boost::graph_traits<TriangleMesh>::vertex_descriptor> . See the boost documentation page for more details.
+constexpr const char* Mean_curvature_flow_skeletonization_Skeleton = "The graph type representing the skeleton. The vertex property Vmap is a struct with a member point of type Traits::Point_3 and a member vertices of type std::vector<boost::graph_traits<TriangleMesh>::vertex_descriptor> . See the boost documentation page for more details.
 
 Returns: boost::adjacency_list< boost::vecS, boost::vecS, boost::undirectedS, Vmap >";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_Meso_skeleton = "When using the low level API it is possible to access the intermediate results of the skeletonization process, called meso-skeleton. It is a triangulated surface mesh which is model of FaceListGraph and HalfedgeListGraph .
+constexpr const char* Mean_curvature_flow_skeletonization_Meso_skeleton = "When using the low level API it is possible to access the intermediate results of the skeletonization process, called meso-skeleton. It is a triangulated surface mesh which is model of FaceListGraph and HalfedgeListGraph .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_meso_skeleton = "Reference to the collapsed triangulated surface mesh.
+constexpr const char* Mean_curvature_flow_skeletonization_meso_skeleton = "Reference to the collapsed triangulated surface mesh.
 
 Returns: const Meso_skeleton &";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_Mean_curvature_flow_skeletonization = "The constructor of a skeletonization object.
+constexpr const char* Mean_curvature_flow_skeletonization_Mean_curvature_flow_skeletonization = "The constructor of a skeletonization object.
 
 The algorithm parameters are initialized such that: max_triangle_angle() ==
 110 quality_speed_tradeoff() == 0.1 medially_centered_speed_tradeoff() == 0.2
@@ -35,39 +35,39 @@ Parameters
 tmesh : const TriangleMesh &
 vertex_point_map : VertexPointMap
 traits : Traits";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_max_triangle_angle = "During the local remeshing step, a triangle will be split if it has an angle larger than max_triangle_angle() .
+constexpr const char* Mean_curvature_flow_skeletonization_max_triangle_angle = "During the local remeshing step, a triangle will be split if it has an angle larger than max_triangle_angle() .
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_min_edge_length = "During the local remeshing step, an edge will be collapse if it is length is less than min_edge_length() .
+constexpr const char* Mean_curvature_flow_skeletonization_min_edge_length = "During the local remeshing step, an edge will be collapse if it is length is less than min_edge_length() .
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_max_triangle_angle = "set function for max_triangle_angle()
+constexpr const char* Mean_curvature_flow_skeletonization_set_max_triangle_angle = "set function for max_triangle_angle()
 
 Parameters
 ----------
 value : double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_min_edge_length = "set function for min_edge_length()
+constexpr const char* Mean_curvature_flow_skeletonization_set_min_edge_length = "set function for min_edge_length()
 
 Parameters
 ----------
 value : double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_max_iterations = "Maximum number of iterations performed by contract_until_convergence() .
+constexpr const char* Mean_curvature_flow_skeletonization_max_iterations = "Maximum number of iterations performed by contract_until_convergence() .
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_area_variation_factor = "The convergence is considered to be reached if the variation of the area of the meso-skeleton after one iteration is smaller than area_variation_factor() *original_area where original_area is the area of the input triangle mesh.
+constexpr const char* Mean_curvature_flow_skeletonization_area_variation_factor = "The convergence is considered to be reached if the variation of the area of the meso-skeleton after one iteration is smaller than area_variation_factor() *original_area where original_area is the area of the input triangle mesh.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_max_iterations = "set function for max_iterations()
+constexpr const char* Mean_curvature_flow_skeletonization_set_max_iterations = "set function for max_iterations()
 
 Parameters
 ----------
 value : std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_area_variation_factor = "set function for area_variation_factor()
+constexpr const char* Mean_curvature_flow_skeletonization_set_area_variation_factor = "set function for area_variation_factor()
 
 Parameters
 ----------
 value : double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_quality_speed_tradeoff = "This is an advanced function.
+constexpr const char* Mean_curvature_flow_skeletonization_quality_speed_tradeoff = "This is an advanced function.
 
 Advanced Controls the velocity of movement and approximation quality:
 decreasing this value makes the mean curvature flow based contraction converge
@@ -75,10 +75,10 @@ faster, but results in a skeleton of lower quality. This parameter corresponds
 to $ w_H $ in the original publication.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_is_medially_centered = "If true , the meso-skeleton placement will be attracted by an approximation of the medial axis of the mesh during the contraction steps, so will be the result skeleton.
+constexpr const char* Mean_curvature_flow_skeletonization_is_medially_centered = "If true , the meso-skeleton placement will be attracted by an approximation of the medial axis of the mesh during the contraction steps, so will be the result skeleton.
 
 Returns: bool";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_medially_centered_speed_tradeoff = "This is an advanced function.
+constexpr const char* Mean_curvature_flow_skeletonization_medially_centered_speed_tradeoff = "This is an advanced function.
 
 Advanced Controls the smoothness of the medial approximation: increasing this
 value results in a (less smooth) skeleton closer to the medial axis, as well
@@ -86,22 +86,22 @@ as a lower convergence speed. It is only used if is_medially_centered() ==true
 . This parameter corresponds to $ w_M $ in the original publication.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_quality_speed_tradeoff = "set function for quality_speed_tradeoff()
+constexpr const char* Mean_curvature_flow_skeletonization_set_quality_speed_tradeoff = "set function for quality_speed_tradeoff()
 
 Parameters
 ----------
 value : double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_is_medially_centered = "set function for is_medially_centered()
+constexpr const char* Mean_curvature_flow_skeletonization_set_is_medially_centered = "set function for is_medially_centered()
 
 Parameters
 ----------
 value : bool";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_medially_centered_speed_tradeoff = "set function for medially_centered_speed_tradeoff()
+constexpr const char* Mean_curvature_flow_skeletonization_set_medially_centered_speed_tradeoff = "set function for medially_centered_speed_tradeoff()
 
 Parameters
 ----------
 value : double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_set_fixed_vertices = "This is an advanced function.
+constexpr const char* Mean_curvature_flow_skeletonization_set_fixed_vertices = "This is an advanced function.
 
 Advanced sets the vertices in the range [begin, end) as fixed. Fixed vertices
 will not be moved during contraction and this will therefore prevent
@@ -115,7 +115,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_operator = "Creates the curve skeleton: the input surface mesh is iteratively contracted until convergence, and then turned into a curve skeleton.
+constexpr const char* Mean_curvature_flow_skeletonization_operator = "Creates the curve skeleton: the input surface mesh is iteratively contracted until convergence, and then turned into a curve skeleton.
 
 This is equivalent to calling contract_until_convergence() and
 convert_to_skeleton() . skeleton graph that will contain the skeleton of the
@@ -127,19 +127,19 @@ respectively.
 Parameters
 ----------
 skeleton : Skeleton &";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_contract_geometry = "Runs one contraction step following the mean curvature flow.";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_collapse_edges = "Collapses edges of the meso-skeleton with length less than min_edge_length() and returns the number of edges collapsed.
+constexpr const char* Mean_curvature_flow_skeletonization_contract_geometry = "Runs one contraction step following the mean curvature flow.";
+constexpr const char* Mean_curvature_flow_skeletonization_collapse_edges = "Collapses edges of the meso-skeleton with length less than min_edge_length() and returns the number of edges collapsed.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_split_faces = "Splits faces of the meso-skeleton having one angle greater than max_triangle_angle() and returns the number of faces split.
+constexpr const char* Mean_curvature_flow_skeletonization_split_faces = "Splits faces of the meso-skeleton having one angle greater than max_triangle_angle() and returns the number of faces split.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_detect_degeneracies = "Prevents degenerate vertices to move during the following contraction steps and returns the number of newly fixed vertices.
+constexpr const char* Mean_curvature_flow_skeletonization_detect_degeneracies = "Prevents degenerate vertices to move during the following contraction steps and returns the number of newly fixed vertices.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_contract = "Performs subsequent calls to contract_geometry() , collapse_edges() , split_faces() and detect_degeneracies() .";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_contract_until_convergence = "Iteratively calls contract() until the change of surface area of the meso-skeleton after one iteration is smaller than area_variation_factor() *original_area where original_area is the area of the input triangle mesh, or if the maximum number of iterations has been reached.";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_convert_to_skeleton = "Converts the contracted surface mesh to a skeleton curve.
+constexpr const char* Mean_curvature_flow_skeletonization_contract = "Performs subsequent calls to contract_geometry() , collapse_edges() , split_faces() and detect_degeneracies() .";
+constexpr const char* Mean_curvature_flow_skeletonization_contract_until_convergence = "Iteratively calls contract() until the change of surface area of the meso-skeleton after one iteration is smaller than area_variation_factor() *original_area where original_area is the area of the input triangle mesh, or if the maximum number of iterations has been reached.";
+constexpr const char* Mean_curvature_flow_skeletonization_convert_to_skeleton = "Converts the contracted surface mesh to a skeleton curve.
 
 Skeleton an instantiation of boost::adjacency_list as a data structure for the
 skeleton curve. skeleton graph that will contain the skeleton of tmesh . It
@@ -148,107 +148,107 @@ should be empty before passed to the function.
 Parameters
 ----------
 skeleton : Skeleton &";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_tmesh = "The meso-skeleton.
+constexpr const char* Mean_curvature_flow_skeletonization_m_tmesh = "The meso-skeleton.
 
 Returns: mTriangleMesh";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_vertex_id_pmap = "Storing indices of all vertices.
+constexpr const char* Mean_curvature_flow_skeletonization_m_vertex_id_pmap = "Storing indices of all vertices.
 
 Returns: VertexIndexMap";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_hedge_id_pmap = "Storing indices of all edges.
+constexpr const char* Mean_curvature_flow_skeletonization_m_hedge_id_pmap = "Storing indices of all edges.
 
 Returns: HalfedgeIndexMap";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_tmesh_point_pmap = "Storing the point for mTriangleMesh vertex_descriptor.
+constexpr const char* Mean_curvature_flow_skeletonization_m_tmesh_point_pmap = "Storing the point for mTriangleMesh vertex_descriptor.
 
 Returns: mVertexPointMap";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_traits = "Traits class.
+constexpr const char* Mean_curvature_flow_skeletonization_m_traits = "Traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_omega_H = "Controlling the velocity of movement and approximation quality.
+constexpr const char* Mean_curvature_flow_skeletonization_m_omega_H = "Controlling the velocity of movement and approximation quality.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_omega_P = "Controlling the smoothness of the medial approximation.
+constexpr const char* Mean_curvature_flow_skeletonization_m_omega_P = "Controlling the smoothness of the medial approximation.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_min_edge_length = "Edges with length less than min_edge_length will be collapsed.
+constexpr const char* Mean_curvature_flow_skeletonization_m_min_edge_length = "Edges with length less than min_edge_length will be collapsed.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_alpha_TH = "Triangles with angle greater than alpha_TH will be split.
+constexpr const char* Mean_curvature_flow_skeletonization_m_alpha_TH = "Triangles with angle greater than alpha_TH will be split.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_zero_TH = "Value very close to zero.
+constexpr const char* Mean_curvature_flow_skeletonization_m_zero_TH = "Value very close to zero.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_delta_area = "contract_until_convergence will stop if the change of area in one iteration is less than delta_area .
+constexpr const char* Mean_curvature_flow_skeletonization_m_delta_area = "contract_until_convergence will stop if the change of area in one iteration is less than delta_area .
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_original_area = "Surface area of original surface mesh.
+constexpr const char* Mean_curvature_flow_skeletonization_m_original_area = "Surface area of original surface mesh.
 
 Returns: double";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_max_iterations = "Maximum number of iterations.
+constexpr const char* Mean_curvature_flow_skeletonization_m_max_iterations = "Maximum number of iterations.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_is_medially_centered = "Should the skeleton be medially centered?
+constexpr const char* Mean_curvature_flow_skeletonization_m_is_medially_centered = "Should the skeleton be medially centered?
 
 Returns: bool";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_are_poles_computed = "Are poles computed?
+constexpr const char* Mean_curvature_flow_skeletonization_m_are_poles_computed = "Are poles computed?
 
 Returns: bool";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_weight_calculator = "Cotangent weight calculator.
+constexpr const char* Mean_curvature_flow_skeletonization_m_weight_calculator = "Cotangent weight calculator.
 
 Returns: Weight_calculator";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_edge_weight = "Storing the weights for edges.
+constexpr const char* Mean_curvature_flow_skeletonization_m_edge_weight = "Storing the weights for edges.
 
 Returns: std::vector< double >";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_solver = "The sparse solver.
+constexpr const char* Mean_curvature_flow_skeletonization_m_solver = "The sparse solver.
 
 Returns: SolverTraits";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_vertex_id_count = "Assign a unique id to a new vertex.
+constexpr const char* Mean_curvature_flow_skeletonization_m_vertex_id_count = "Assign a unique id to a new vertex.
 
 Returns: int";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_max_id = "The maximum id for original surface.
+constexpr const char* Mean_curvature_flow_skeletonization_m_max_id = "The maximum id for original surface.
 
 vertices with ids greater than m_max_id are created during split, thus will
 not be considered in correspondence tracking.
 
 Returns: int";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_new_id = "Used when assembling the matrix.
+constexpr const char* Mean_curvature_flow_skeletonization_m_new_id = "Used when assembling the matrix.
 
 Returns: std::map< int, int >";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_halfedge_angle = "The incident angle for a halfedge.
+constexpr const char* Mean_curvature_flow_skeletonization_m_halfedge_angle = "The incident angle for a halfedge.
 
 Returns: std::vector< double >";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_m_normals = "The normal of surface points.
+constexpr const char* Mean_curvature_flow_skeletonization_m_normals = "The normal of surface points.
 
 Returns: std::vector< Vector >";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_init_args = "Initialize the parameters for Mean_curvature_flow_skeletonization .";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_init = "Initialize some global data structures such as vertex id.
+constexpr const char* Mean_curvature_flow_skeletonization_init_args = "Initialize the parameters for Mean_curvature_flow_skeletonization .";
+constexpr const char* Mean_curvature_flow_skeletonization_init = "Initialize some global data structures such as vertex id.
 
 Parameters
 ----------
 tmesh : const TriangleMesh &
 vpm : VertexPointMap";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_compute_edge_weight = "Compute cotangent weights of all edges.";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_assemble_LHS = "Assemble the left hand side.
+constexpr const char* Mean_curvature_flow_skeletonization_compute_edge_weight = "Compute cotangent weights of all edges.";
+constexpr const char* Mean_curvature_flow_skeletonization_assemble_LHS = "Assemble the left hand side.
 
 Parameters
 ----------
 A : typename SolverTraits::Matrix &";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_assemble_RHS = "Assemble the right hand side.
+constexpr const char* Mean_curvature_flow_skeletonization_assemble_RHS = "Assemble the right hand side.
 
 Parameters
 ----------
 Bx : typename SolverTraits::Vector &
 By : typename SolverTraits::Vector &
 Bz : typename SolverTraits::Vector &";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_update_vertex_id = "The order of vertex id is the same as the traverse order.";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_update_pole = "Track correspondent original surface points during collapse.
+constexpr const char* Mean_curvature_flow_skeletonization_update_vertex_id = "The order of vertex id is the same as the traverse order.";
+constexpr const char* Mean_curvature_flow_skeletonization_update_pole = "Track correspondent original surface points during collapse.
 
 Parameters
 ----------
 v0 : vertex_descriptor
 vkept : vertex_descriptor";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_compute_incident_angle = "Compute the incident angles for all the halfedges.";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_project_vertex = "Project the vertex vk to the line of vs and vt .
+constexpr const char* Mean_curvature_flow_skeletonization_compute_incident_angle = "Compute the incident angles for all the halfedges.";
+constexpr const char* Mean_curvature_flow_skeletonization_project_vertex = "Project the vertex vk to the line of vs and vt .
 
 Parameters
 ----------
@@ -258,14 +258,14 @@ vk : const vertex_descriptor
 vnew : const vertex_descriptor
 
 Returns: Point";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_split_flat_triangles = "Split triangles with an angle greater than alpha_TH .
+constexpr const char* Mean_curvature_flow_skeletonization_split_flat_triangles = "Split triangles with an angle greater than alpha_TH .
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_detect_degeneracies_in_disk = "Test degeneracy of a vertex by counting the euler characteristic of its local neighborhood disk.
+constexpr const char* Mean_curvature_flow_skeletonization_detect_degeneracies_in_disk = "Test degeneracy of a vertex by counting the euler characteristic of its local neighborhood disk.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_compute_voronoi_pole = "Compute the Voronoi pole for surface vertices. The pole is the furthest vertex in the Voronoi cell containing the given vertex.";
-constexpr const char* CGAL_Mean_curvature_flow_skeletonization_compute_vertex_normal = "Compute an approximate vertex normal for all vertices.";
+constexpr const char* Mean_curvature_flow_skeletonization_compute_voronoi_pole = "Compute the Voronoi pole for surface vertices. The pole is the furthest vertex in the Voronoi cell containing the given vertex.";
+constexpr const char* Mean_curvature_flow_skeletonization_compute_vertex_normal = "Compute an approximate vertex normal for all vertices.";
 
 
 

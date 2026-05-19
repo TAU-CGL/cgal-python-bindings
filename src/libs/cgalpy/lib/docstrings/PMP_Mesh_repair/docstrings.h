@@ -8,11 +8,11 @@ namespace docstrings {
 namespace PMP_Mesh_repair {
 
 // CGAL::Polygon_mesh_processing::Default_orientation_visitor
-constexpr const char* CGAL_Polygon_mesh_processing_Default_orientation_visitor__class__ = "Default visitor model of PMPPolygonSoupOrientationVisitor .";
+constexpr const char* Polygon_mesh_processing_Default_orientation_visitor__class__ = "Default visitor model of PMPPolygonSoupOrientationVisitor .";
 
 
 // CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor
-constexpr const char* CGAL_Polygon_mesh_processing_Hole_filling_Default_visitor__class__ = "Default hole filling visitor model of PMPHolefillingVisitor .";
+constexpr const char* Polygon_mesh_processing_Hole_filling_Default_visitor__class__ = "Default hole filling visitor model of PMPHolefillingVisitor .";
 
 
 // std

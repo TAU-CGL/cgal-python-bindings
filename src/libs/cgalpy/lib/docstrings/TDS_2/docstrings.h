@@ -8,37 +8,37 @@ namespace docstrings {
 namespace TDS_2 {
 
 // CGAL::Triangulation_data_structure_2
-constexpr const char* CGAL_Triangulation_data_structure_2__class__ = "The class Triangulation_data_structure_2 is a model for the TriangulationDataStructure_2 concept.";
+constexpr const char* Triangulation_data_structure_2__class__ = "The class Triangulation_data_structure_2 is a model for the TriangulationDataStructure_2 concept.";
 
-constexpr const char* CGAL_Triangulation_data_structure_2_Vertex = "The vertex type.
+constexpr const char* Triangulation_data_structure_2_Vertex = "The vertex type.
 
 Section The Rebind Mechanism
 
 Returns: VertexBase::template Rebind_TDS< Tds >::Other";
-constexpr const char* CGAL_Triangulation_data_structure_2_Face = "The face type.
+constexpr const char* Triangulation_data_structure_2_Face = "The face type.
 
 Section The Rebind Mechanism
 
 Returns: FaceBase::template Rebind_TDS< Tds >::Other";
-constexpr const char* CGAL_Triangulation_data_structure_2_Vertex_range = "Vertex container type.
+constexpr const char* Triangulation_data_structure_2_Vertex_range = "Vertex container type.
 
 Returns: Compact_container< Vertex >";
-constexpr const char* CGAL_Triangulation_data_structure_2_Face_range = "Face container type.
+constexpr const char* Triangulation_data_structure_2_Face_range = "Face container type.
 
 Returns: Compact_container< Face >";
-constexpr const char* CGAL_Triangulation_data_structure_2_faces = "returns a reference to the container of faces.
+constexpr const char* Triangulation_data_structure_2_faces = "returns a reference to the container of faces.
 
 Returns: Face_range &";
-constexpr const char* CGAL_Triangulation_data_structure_2_faces_1 = "returns a reference to the container of faces.
+constexpr const char* Triangulation_data_structure_2_faces_1 = "returns a reference to the container of faces.
 
 Returns: Face_range &";
-constexpr const char* CGAL_Triangulation_data_structure_2_vertices = "returns a reference to the container of vertices.
+constexpr const char* Triangulation_data_structure_2_vertices = "returns a reference to the container of vertices.
 
 Returns: Vertex_range &";
-constexpr const char* CGAL_Triangulation_data_structure_2_vertices_1 = "returns a reference to the container of vertices.
+constexpr const char* Triangulation_data_structure_2_vertices_1 = "returns a reference to the container of vertices.
 
 Returns: Vertex_range &";
-constexpr const char* CGAL_Triangulation_data_structure_2_join_vertices = "joins the vertices that are endpoints of the edge (f,i) , and returns a vertex handle to common vertex (see Fig. figtdssplitjoin ).
+constexpr const char* Triangulation_data_structure_2_join_vertices = "joins the vertices that are endpoints of the edge (f,i) , and returns a vertex handle to common vertex (see Fig. figtdssplitjoin ).
 
 f must be different from Face_handle() and i must be 0 , 1 or 2 .
 
@@ -48,28 +48,28 @@ f : Face_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_data_structure_2_join_vertices_1 = "joins the vertices that are endpoints of the edge e , and returns a vertex handle to common vertex.
+constexpr const char* Triangulation_data_structure_2_join_vertices_1 = "joins the vertices that are endpoints of the edge e , and returns a vertex handle to common vertex.
 
 Parameters
 ----------
 e : Edge
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_data_structure_2_join_vertices_2 = "joins the vertices that are endpoints of the edge *eit , and returns a vertex handle to common vertex.
+constexpr const char* Triangulation_data_structure_2_join_vertices_2 = "joins the vertices that are endpoints of the edge *eit , and returns a vertex handle to common vertex.
 
 Parameters
 ----------
 eit : Edge_iterator
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_data_structure_2_join_vertices_3 = "joins the vertices that are endpoints of the edge *ec , and returns a vertex handle to common vertex.
+constexpr const char* Triangulation_data_structure_2_join_vertices_3 = "joins the vertices that are endpoints of the edge *ec , and returns a vertex handle to common vertex.
 
 Parameters
 ----------
 ec : Edges_circulator
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_data_structure_2_split_vertex = "splits the vertex v into two vertices v1 and v2 .
+constexpr const char* Triangulation_data_structure_2_split_vertex = "splits the vertex v into two vertices v1 and v2 .
 
 The common faces f and g of v1 and v2 are created after (in the
 counterclockwise sense) the faces f1 and f2 . The 4-tuple (v1,v2,f,g) is
@@ -84,7 +84,7 @@ f1 : Face_handle
 f2 : Face_handle
 
 Returns: boost::tuples::tuple< Vertex_handle, Vertex_handle, Face_handle, Face_handle >";
-constexpr const char* CGAL_Triangulation_data_structure_2_insert_degree_2 = "inserts a degree two vertex and two faces adjacent to it that have two common edges.
+constexpr const char* Triangulation_data_structure_2_insert_degree_2 = "inserts a degree two vertex and two faces adjacent to it that have two common edges.
 
 The edge defined by the face handle f and the integer i is duplicated. It
 returns a handle to the vertex created (see Fig. figtdsirdeg2 ).
@@ -95,7 +95,7 @@ f : Face_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_data_structure_2_remove_degree_2 = "removes a degree 2 vertex and the two faces adjacent to it.
+constexpr const char* Triangulation_data_structure_2_remove_degree_2 = "removes a degree 2 vertex and the two faces adjacent to it.
 
 The two edges of the star of v that are not incident to it are collapsed (see
 Fig. figtdsirdeg2 ). The degree of v must be equal to 2.
@@ -105,10 +105,10 @@ Parameters
 v : Vertex_handle";
 
 // CGAL::Triangulation_ds_face_base_2
-constexpr const char* CGAL_Triangulation_ds_face_base_2__class__ = "The class Triangulation_ds_face_base_2 is a model for the concept TriangulationDSFaceBase_2 to be used by Triangulation_data_structure_2 .";
+constexpr const char* Triangulation_ds_face_base_2__class__ = "The class Triangulation_ds_face_base_2 is a model for the concept TriangulationDSFaceBase_2 to be used by Triangulation_data_structure_2 .";
 
 // CGAL::Triangulation_ds_vertex_base_2
-constexpr const char* CGAL_Triangulation_ds_vertex_base_2__class__ = "The class Triangulation_ds_vertex_base_2 can be used as the base vertex for a Triangulation_data_structure_2 , it is a model of the concept TriangulationDSVertexBase_2 .";
+constexpr const char* Triangulation_ds_vertex_base_2__class__ = "The class Triangulation_ds_vertex_base_2 can be used as the base vertex for a Triangulation_data_structure_2 , it is a model of the concept TriangulationDSVertexBase_2 .";
 
 // TriangulationDataStructure_2
 constexpr const char* TriangulationDataStructure_2__class__ = "The concept TriangulationDataStructure_2 describes the requirements for the second template parameter of the basic triangulation class Triangulation_2<Traits,Tds> and of all other 2D triangulation classes.";

@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Generator {
 
 // CGAL::Combination_enumerator
-constexpr const char* CGAL_Combination_enumerator__class__ = "The class Combination_enumerator is used to enumerate all fixed-size combinations (subsets) of a source range of elements.";
+constexpr const char* Combination_enumerator__class__ = "The class Combination_enumerator is used to enumerate all fixed-size combinations (subsets) of a source range of elements.";
 
-constexpr const char* CGAL_Combination_enumerator_Combination_enumerator = "This constructor initializes the object to enumerate the combinations of k elements from the source range [first, beyond) .
+constexpr const char* Combination_enumerator_Combination_enumerator = "This constructor initializes the object to enumerate the combinations of k elements from the source range [first, beyond) .
 
 The current combination is set to the first combination of the enumeration. 1
 <= k <= beyond - first
@@ -20,12 +20,12 @@ Parameters
 k : int
 first : const CombinationElement &
 beyond : const CombinationElement &";
-constexpr const char* CGAL_Combination_enumerator_Combination_enumerator_1 = "The copy constructor.
+constexpr const char* Combination_enumerator_Combination_enumerator_1 = "The copy constructor.
 
 Parameters
 ----------
 combi : const Combination_enumerator &";
-constexpr const char* CGAL_Combination_enumerator_operator = "Returns the i -th element of the current combination.
+constexpr const char* Combination_enumerator_operator = "Returns the i -th element of the current combination.
 
 0 <= i < number_of_elements()
 
@@ -34,25 +34,25 @@ Parameters
 i : int
 
 Returns: const CombinationElement &";
-constexpr const char* CGAL_Combination_enumerator_number_of_elements = "Returns the size of the enumerated combinations (the parameter k from the class' constructor).
+constexpr const char* Combination_enumerator_number_of_elements = "Returns the size of the enumerated combinations (the parameter k from the class' constructor).
 
 Returns: int";
-constexpr const char* CGAL_Combination_enumerator_min_element = "Returns the smallest element of the source range.
+constexpr const char* Combination_enumerator_min_element = "Returns the smallest element of the source range.
 
 (the parameter first of the constructor of the class).
 
 Returns: const CombinationElement &";
-constexpr const char* CGAL_Combination_enumerator_beyond_element = "Returns the successor to the largest element of the source range (the parameter beyond of the constructor of the class).
+constexpr const char* Combination_enumerator_beyond_element = "Returns the successor to the largest element of the source range (the parameter beyond of the constructor of the class).
 
 Returns: const CombinationElement &";
-constexpr const char* CGAL_Combination_enumerator_finished = "Returns true if and only if all combinations have been enumerated.
+constexpr const char* Combination_enumerator_finished = "Returns true if and only if all combinations have been enumerated.
 
 Returns: bool";
-constexpr const char* CGAL_Combination_enumerator_reset = "Resets the enumerator.
+constexpr const char* Combination_enumerator_reset = "Resets the enumerator.
 
 The current combination is set to the first one of the enumeration.";
-constexpr const char* CGAL_Combination_enumerator_operator_1 = "Moves *this to the next combination.";
-constexpr const char* CGAL_Combination_enumerator_operator_2 = "Post-incrementation.
+constexpr const char* Combination_enumerator_operator_1 = "Moves *this to the next combination.";
+constexpr const char* Combination_enumerator_operator_2 = "Post-incrementation.
 
 Same as the pre-incrementation above, but returns the original value of *this
 .
@@ -64,9 +64,9 @@ Parameters
 Returns: Combination_enumerator";
 
 // CGAL::Points_on_segment_2
-constexpr const char* CGAL_Points_on_segment_2__class__ = "The class Points_on_segment_2 is a generator for points on a segment whose endpoints are specified upon construction.";
+constexpr const char* Points_on_segment_2__class__ = "The class Points_on_segment_2 is a generator for points on a segment whose endpoints are specified upon construction.";
 
-constexpr const char* CGAL_Points_on_segment_2_Points_on_segment_2 = "creates an input iterator g generating points of type P equally spaced on the segment from $ p$ to $ q$ .
+constexpr const char* Points_on_segment_2_Points_on_segment_2 = "creates an input iterator g generating points of type P equally spaced on the segment from $ p$ to $ q$ .
 
 $ n-i$ points are placed on the segment defined by $ p$ and $ q$ . Values of
 the index parameter $ i$ larger than 0 indicate starting points for the
@@ -81,41 +81,41 @@ p : const Point_2 &
 q : const Point_2 &
 n : std::size_t
 i : std::size_t";
-constexpr const char* CGAL_Points_on_segment_2_range = "returns the range in which the point coordinates lie, i.e. $ \\forall x: |x| \\leq$ range() and $ \\forall y: |y| \\leq$ range()
+constexpr const char* Points_on_segment_2_range = "returns the range in which the point coordinates lie, i.e. $ \\forall x: |x| \\leq$ range() and $ \\forall y: |y| \\leq$ range()
 
 Returns: double";
-constexpr const char* CGAL_Points_on_segment_2_source = "returns the source point of the segment.
+constexpr const char* Points_on_segment_2_source = "returns the source point of the segment.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Points_on_segment_2_target = "returns the target point of the segment.
+constexpr const char* Points_on_segment_2_target = "returns the target point of the segment.
 
 Returns: const Point_2 &";
 
 // CGAL::Random
-constexpr const char* CGAL_Random__class__ = "The class Random is a random numbers generator.";
+constexpr const char* Random__class__ = "The class Random is a random numbers generator.";
 
-constexpr const char* CGAL_Random_State = "The State type.
+constexpr const char* Random_State = "The State type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Random_Random = "Default constructor.
+constexpr const char* Random_Random = "Default constructor.
 
 The seed is chosen based on the system time.";
-constexpr const char* CGAL_Random_Random_1 = "Constructor initializing its internal state using seed .
+constexpr const char* Random_Random_1 = "Constructor initializing its internal state using seed .
 
 Equal values for seed result in equal sequences of random numbers.
 
 Parameters
 ----------
 seed : unsigned int";
-constexpr const char* CGAL_Random_get_bool = "returns a random bool .
+constexpr const char* Random_get_bool = "returns a random bool .
 
 Returns: bool";
-constexpr const char* CGAL_Random_get_bits = "returns a random int value from the interval $[0,2^b)$ .
+constexpr const char* Random_get_bits = "returns a random int value from the interval $[0,2^b)$ .
 
 This is supposed to be efficient.
 
 Returns: int";
-constexpr const char* CGAL_Random_get_int = "returns a random int from the interval [lower,upper) .
+constexpr const char* Random_get_int = "returns a random int from the interval [lower,upper) .
 
 Parameters
 ----------
@@ -123,7 +123,7 @@ lower : int
 upper : int
 
 Returns: int";
-constexpr const char* CGAL_Random_get_double = "returns a random double from the interval [lower,upper) .
+constexpr const char* Random_get_double = "returns a random double from the interval [lower,upper) .
 
 Parameters
 ----------
@@ -131,7 +131,7 @@ lower : double
 upper : double
 
 Returns: double";
-constexpr const char* CGAL_Random_uniform_smallint = "returns a random IntType from the interval [lower,upper) .
+constexpr const char* Random_uniform_smallint = "returns a random IntType from the interval [lower,upper) .
 
 IntType can be an integral type as int , std::ptrdiff_t , std::size_t ,etc. In
 contrast to get_int this function may return upper .
@@ -142,7 +142,7 @@ lower : IntType
 upper : IntType
 
 Returns: IntType";
-constexpr const char* CGAL_Random_uniform_int = "returns a random IntType from the interval [lower,upper) .
+constexpr const char* Random_uniform_int = "returns a random IntType from the interval [lower,upper) .
 
 IntType can be an integral type as int , std::ptrdiff_t , std::size_t ,etc. In
 contrast to get_int this function may return upper .
@@ -153,7 +153,7 @@ lower : IntType
 upper : IntType
 
 Returns: IntType";
-constexpr const char* CGAL_Random_uniform_real = "returns a random RealType from the interval [lower,upper) .
+constexpr const char* Random_uniform_real = "returns a random RealType from the interval [lower,upper) .
 
 RealType can be float , double , etc.
 
@@ -163,32 +163,32 @@ lower : RealType
 upper : RealType
 
 Returns: Realtype";
-constexpr const char* CGAL_Random_uniform_01 = "returns a random RealType from the interval [0,1) .
+constexpr const char* Random_uniform_01 = "returns a random RealType from the interval [0,1) .
 
 RealType can be float , double , etc.
 
 Returns: RealType";
-constexpr const char* CGAL_Random_operator = "returns random``uniform_int<IntType>( 0, upper-1) .
+constexpr const char* Random_operator = "returns random``uniform_int<IntType>( 0, upper-1) .
 
 Parameters
 ----------
 upper : IntType
 
 Returns: IntType";
-constexpr const char* CGAL_Random_get_seed = "returns the seed used for initialization.
+constexpr const char* Random_get_seed = "returns the seed used for initialization.
 
 Returns: unsigned int";
-constexpr const char* CGAL_Random_save_state = "saves the current internal state in state .
+constexpr const char* Random_save_state = "saves the current internal state in state .
 
 Parameters
 ----------
 state : State &";
-constexpr const char* CGAL_Random_restore_state = "restores the internal state from state .
+constexpr const char* Random_restore_state = "restores the internal state from state .
 
 Parameters
 ----------
 state : State const &";
-constexpr const char* CGAL_Random_operator_1 = "returns true , iff the random object and random2 have equal internal states.
+constexpr const char* Random_operator_1 = "returns true , iff the random object and random2 have equal internal states.
 
 Parameters
 ----------
@@ -197,29 +197,29 @@ random2 : Random const &
 Returns: bool";
 
 // CGAL::Random_convex_set_traits_2
-constexpr const char* CGAL_Random_convex_set_traits_2__class__ = "The class Random_convex_set_traits_2 serves as a traits class for the function random_convex_set_2() .";
+constexpr const char* Random_convex_set_traits_2__class__ = "The class Random_convex_set_traits_2 serves as a traits class for the function random_convex_set_2() .";
 
-constexpr const char* CGAL_Random_convex_set_traits_2_Sum = "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , Point_2 >
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Random_convex_set_traits_2_Scale = "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , Point_2 >
+constexpr const char* Random_convex_set_traits_2_Sum = "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , Point_2 >
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Random_convex_set_traits_2_Max_coordinate = "function object class derived from CGAL::cpp98::unary_function< Point_2 , FT >
+constexpr const char* Random_convex_set_traits_2_Scale = "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , Point_2 >
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Random_convex_set_traits_2_Angle_less = "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , bool>
+constexpr const char* Random_convex_set_traits_2_Max_coordinate = "function object class derived from CGAL::cpp98::unary_function< Point_2 , FT >
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Random_convex_set_traits_2_Random_convex_set_traits_2 = "default constructor";
-constexpr const char* CGAL_Random_convex_set_traits_2_origin = "returns CGAL::ORIGIN.
+constexpr const char* Random_convex_set_traits_2_Angle_less = "function object class derived from CGAL::cpp98::binary_function< Point_2 , Point_2 , bool>
+
+Returns: unspecified_type";
+constexpr const char* Random_convex_set_traits_2_Random_convex_set_traits_2 = "default constructor";
+constexpr const char* Random_convex_set_traits_2_origin = "returns CGAL::ORIGIN.
 
 Returns: Point_2";
 
 // CGAL::Random_points_in_ball_d
-constexpr const char* CGAL_Random_points_in_ball_d__class__ = "The class Random_points_in_ball_d is an input iterator creating points uniformly distributed in an open ball in any dimension.";
+constexpr const char* Random_points_in_ball_d__class__ = "The class Random_points_in_ball_d is an input iterator creating points uniformly distributed in an open ball in any dimension.";
 
-constexpr const char* CGAL_Random_points_in_ball_d_Random_points_in_ball_d = "$ g$ is an input iterator creating points of type Point_d uniformly distributed in the open ball in dimension $ dim$ with radius $ r$ , i.e. $ |*g| < r$ .
+constexpr const char* Random_points_in_ball_d_Random_points_in_ball_d = "$ g$ is an input iterator creating points of type Point_d uniformly distributed in the open ball in dimension $ dim$ with radius $ r$ , i.e. $ |*g| < r$ .
 
 $ 2\\cdot dim+1$ random numbers are needed from rnd for each point.
 
@@ -230,9 +230,9 @@ r : double
 rnd : Random &";
 
 // CGAL::Random_points_in_cube_3
-constexpr const char* CGAL_Random_points_in_cube_3__class__ = "The class Random_points_in_cube_3 is an input iterator creating points uniformly distributed in a half-open cube.";
+constexpr const char* Random_points_in_cube_3__class__ = "The class Random_points_in_cube_3 is an input iterator creating points uniformly distributed in a half-open cube.";
 
-constexpr const char* CGAL_Random_points_in_cube_3_Random_points_in_cube_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed in the half-open cube with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g: -a \\le p.x(),p.y(),p.z() < a$ .
+constexpr const char* Random_points_in_cube_3_Random_points_in_cube_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed in the half-open cube with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g: -a \\le p.x(),p.y(),p.z() < a$ .
 
 Three random numbers are needed from rnd for each point.
 
@@ -242,9 +242,9 @@ a : double
 rnd : Random &";
 
 // CGAL::Random_points_in_cube_d
-constexpr const char* CGAL_Random_points_in_cube_d__class__ = "The class Random_points_in_cube_d is an input iterator creating points uniformly distributed in a half-open cube.";
+constexpr const char* Random_points_in_cube_d__class__ = "The class Random_points_in_cube_d is an input iterator creating points uniformly distributed in a half-open cube.";
 
-constexpr const char* CGAL_Random_points_in_cube_d_Random_points_in_cube_d = "$ g$ is an input iterator creating points of type Point_d uniformly distributed in the half-open cube of dimension $ dim$ with side length $ 2 a$ , centered at the origin.
+constexpr const char* Random_points_in_cube_d_Random_points_in_cube_d = "$ g$ is an input iterator creating points of type Point_d uniformly distributed in the half-open cube of dimension $ dim$ with side length $ 2 a$ , centered at the origin.
 
 For every point $ p = *g$ and for all $ i<dim$ we have $ -a \\le p[i] < a$ . $
 dim$ random numbers are needed from rnd for each point.
@@ -256,9 +256,9 @@ a : double
 rnd : Random &";
 
 // CGAL::Random_points_in_disc_2
-constexpr const char* CGAL_Random_points_in_disc_2__class__ = "The class Random_points_in_disc_2 is an input iterator creating points uniformly distributed in an open disc.";
+constexpr const char* Random_points_in_disc_2__class__ = "The class Random_points_in_disc_2 is an input iterator creating points uniformly distributed in an open disc.";
 
-constexpr const char* CGAL_Random_points_in_disc_2_Random_points_in_disc_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed in the open disc with radius $ r$ , i.e. $ |*g| < r$ .
+constexpr const char* Random_points_in_disc_2_Random_points_in_disc_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed in the open disc with radius $ r$ , i.e. $ |*g| < r$ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -268,9 +268,9 @@ r : double
 rnd : Random &";
 
 // CGAL::Random_points_in_sphere_3
-constexpr const char* CGAL_Random_points_in_sphere_3__class__ = "The class Random_points_in_sphere_3 is an input iterator creating points uniformly distributed strictly inside a sphere.";
+constexpr const char* Random_points_in_sphere_3__class__ = "The class Random_points_in_sphere_3 is an input iterator creating points uniformly distributed strictly inside a sphere.";
 
-constexpr const char* CGAL_Random_points_in_sphere_3_Random_points_in_sphere_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed strictly inside the sphere with radius $ r$ , i.e. $ |*g| < r$ .
+constexpr const char* Random_points_in_sphere_3_Random_points_in_sphere_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed strictly inside the sphere with radius $ r$ , i.e. $ |*g| < r$ .
 
 Three random numbers are needed from rnd for each point.
 
@@ -280,9 +280,9 @@ r : double
 rnd : Random &";
 
 // CGAL::Random_points_in_square_2
-constexpr const char* CGAL_Random_points_in_square_2__class__ = "The class Random_points_in_square_2 is an input iterator creating points uniformly distributed in a half-open square.";
+constexpr const char* Random_points_in_square_2__class__ = "The class Random_points_in_square_2 is an input iterator creating points uniformly distributed in a half-open square.";
 
-constexpr const char* CGAL_Random_points_in_square_2_Random_points_in_square_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed in the half-open square with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g: -a \\le p.x() < a$ and $ -a \\le p.y() < a$ .
+constexpr const char* Random_points_in_square_2_Random_points_in_square_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed in the half-open square with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g: -a \\le p.x() < a$ and $ -a \\le p.y() < a$ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -292,9 +292,9 @@ a : double
 rnd : Random &";
 
 // CGAL::Random_points_in_tetrahedral_mesh_3
-constexpr const char* CGAL_Random_points_in_tetrahedral_mesh_3__class__ = "The class Random_points_in_tetrahedral_mesh_3 is an input iterator creating points uniformly distributed inside a tetrahedral mesh of type Mesh_complex_3_in_triangulation_3 .";
+constexpr const char* Random_points_in_tetrahedral_mesh_3__class__ = "The class Random_points_in_tetrahedral_mesh_3 is an input iterator creating points uniformly distributed inside a tetrahedral mesh of type Mesh_complex_3_in_triangulation_3 .";
 
-constexpr const char* CGAL_Random_points_in_tetrahedral_mesh_3_Random_points_in_tetrahedral_mesh_3 = "creates an input iterator g generating points of type Weighted_point_3 uniformly distributed inside the tetrahedra of the mesh.
+constexpr const char* Random_points_in_tetrahedral_mesh_3_Random_points_in_tetrahedral_mesh_3 = "creates an input iterator g generating points of type Weighted_point_3 uniformly distributed inside the tetrahedra of the mesh.
 
 Each tetrahedron has a probability to be chosen to hold the point depending on
 its volume.
@@ -303,14 +303,14 @@ Parameters
 ----------
 c3t3 : const C3T3 &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_tetrahedral_mesh_3_point_and_support = "returns the last point generated and a handle to the cell used to generate that point.
+constexpr const char* Random_points_in_tetrahedral_mesh_3_point_and_support = "returns the last point generated and a handle to the cell used to generate that point.
 
 Returns: std::pair< Point_3, typename C3t3::Triangulation::Cell_handle >";
 
 // CGAL::Random_points_in_tetrahedral_mesh_boundary_3
-constexpr const char* CGAL_Random_points_in_tetrahedral_mesh_boundary_3__class__ = "The class Random_points_in_tetrahedral_mesh_boundary_3 is an input iterator creating points uniformly distributed on the boundary of a tetrahedral mesh of type Mesh_complex_3_in_triangulation_3 .";
+constexpr const char* Random_points_in_tetrahedral_mesh_boundary_3__class__ = "The class Random_points_in_tetrahedral_mesh_boundary_3 is an input iterator creating points uniformly distributed on the boundary of a tetrahedral mesh of type Mesh_complex_3_in_triangulation_3 .";
 
-constexpr const char* CGAL_Random_points_in_tetrahedral_mesh_boundary_3_Random_points_in_tetrahedral_mesh_boundary_3 = "creates an input iterator g generating points of type Weighted_point_3 uniformly distributed on the mesh.
+constexpr const char* Random_points_in_tetrahedral_mesh_boundary_3_Random_points_in_tetrahedral_mesh_boundary_3 = "creates an input iterator g generating points of type Weighted_point_3 uniformly distributed on the mesh.
 
 Each triangle has a probability to be chosen to hold the point depending on
 its area.
@@ -319,14 +319,14 @@ Parameters
 ----------
 c3t3 : const C3T3 &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_tetrahedral_mesh_boundary_3_point_and_support = "returns the last point generated and the facet used to generate that point.
+constexpr const char* Random_points_in_tetrahedral_mesh_boundary_3_point_and_support = "returns the last point generated and the facet used to generate that point.
 
 Returns: std::pair< Point_3, typename C3t3::Triangulation::Facet >";
 
 // CGAL::Random_points_in_tetrahedron_3
-constexpr const char* CGAL_Random_points_in_tetrahedron_3__class__ = "The class Random_points_in_tetrahedron_3 is an input iterator creating points uniformly distributed inside a tetrahedron.";
+constexpr const char* Random_points_in_tetrahedron_3__class__ = "The class Random_points_in_tetrahedron_3 is an input iterator creating points uniformly distributed inside a tetrahedron.";
 
-constexpr const char* CGAL_Random_points_in_tetrahedron_3_Random_points_in_tetrahedron_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside the tetrahedron with vertices $ p, q, r $ and $ s $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r + \\delta s $ , for some $ \\alpha, \\beta, \\gamma, \\delta \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma + \\delta = 1 $ .
+constexpr const char* Random_points_in_tetrahedron_3_Random_points_in_tetrahedron_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside the tetrahedron with vertices $ p, q, r $ and $ s $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r + \\delta s $ , for some $ \\alpha, \\beta, \\gamma, \\delta \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma + \\delta = 1 $ .
 
 Three random numbers are needed from rnd for each point.
 
@@ -337,7 +337,7 @@ q : Point_3 &
 r : Point_3 &
 s : Point_3 &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_tetrahedron_3_Random_points_in_tetrahedron_3_1 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside a tetrahedron $t$ with vertices $ p, q, r $ and $ s $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r + \\delta s $ , for some $ \\alpha, \\beta, \\gamma, \\delta \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma + \\delta = 1 $ .
+constexpr const char* Random_points_in_tetrahedron_3_Random_points_in_tetrahedron_3_1 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside a tetrahedron $t$ with vertices $ p, q, r $ and $ s $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r + \\delta s $ , for some $ \\alpha, \\beta, \\gamma, \\delta \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma + \\delta = 1 $ .
 
 Three random numbers are needed from rnd for each point.
 
@@ -347,9 +347,9 @@ t : Tetrahedron_3 &
 rnd : Random &";
 
 // CGAL::Random_points_in_triangle_2
-constexpr const char* CGAL_Random_points_in_triangle_2__class__ = "The class Random_points_in_triangle_2 is an input iterator creating points uniformly distributed inside a triangle.";
+constexpr const char* Random_points_in_triangle_2__class__ = "The class Random_points_in_triangle_2 is an input iterator creating points uniformly distributed inside a triangle.";
 
-constexpr const char* CGAL_Random_points_in_triangle_2_Random_points_in_triangle_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed inside the triangle with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
+constexpr const char* Random_points_in_triangle_2_Random_points_in_triangle_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed inside the triangle with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -359,7 +359,7 @@ p : Point_2 &
 q : Point_2 &
 r : Point_2 &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangle_2_Random_points_in_triangle_2_1 = "creates an input iterator g generating points of type Point_2 uniformly distributed inside a triangle $t$ with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
+constexpr const char* Random_points_in_triangle_2_Random_points_in_triangle_2_1 = "creates an input iterator g generating points of type Point_2 uniformly distributed inside a triangle $t$ with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -369,9 +369,9 @@ t : Triangle_2 &
 rnd : Random &";
 
 // CGAL::Random_points_in_triangle_3
-constexpr const char* CGAL_Random_points_in_triangle_3__class__ = "The class Random_points_in_triangle_3 is an input iterator creating points uniformly distributed inside a 3D triangle.";
+constexpr const char* Random_points_in_triangle_3__class__ = "The class Random_points_in_triangle_3 is an input iterator creating points uniformly distributed inside a 3D triangle.";
 
-constexpr const char* CGAL_Random_points_in_triangle_3_Random_points_in_triangle_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside the 3D triangle with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
+constexpr const char* Random_points_in_triangle_3_Random_points_in_triangle_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside the 3D triangle with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -381,7 +381,7 @@ p : Point_3 &
 q : Point_3 &
 r : Point_3 &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangle_3_Random_points_in_triangle_3_1 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside a 3D triangle $t$ with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
+constexpr const char* Random_points_in_triangle_3_Random_points_in_triangle_3_1 = "creates an input iterator g generating points of type Point_3 uniformly distributed inside a 3D triangle $t$ with vertices $ p, q $ and $ r $ , i.e., $*g = \\alpha p + \\beta q + \\gamma r $ , for some $ \\alpha, \\beta, \\gamma \\in [0, 1] $ and $ \\alpha + \\beta + \\gamma = 1 $ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -391,9 +391,9 @@ t : Triangle_3 &
 rnd : Random &";
 
 // CGAL::Random_points_in_triangle_mesh_2
-constexpr const char* CGAL_Random_points_in_triangle_mesh_2__class__ = "The class Random_points_in_triangle_mesh_2 is an input iterator creating points uniformly distributed inside a 2D domain represented by a 2D triangulation.";
+constexpr const char* Random_points_in_triangle_mesh_2__class__ = "The class Random_points_in_triangle_mesh_2 is an input iterator creating points uniformly distributed inside a 2D domain represented by a 2D triangulation.";
 
-constexpr const char* CGAL_Random_points_in_triangle_mesh_2_Random_points_in_triangle_mesh_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed between the triangles of the triangulation.
+constexpr const char* Random_points_in_triangle_mesh_2_Random_points_in_triangle_mesh_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed between the triangles of the triangulation.
 
 Each triangle has a probability to be chosen to hold the point depending on
 its area.
@@ -402,14 +402,14 @@ Parameters
 ----------
 triangulation : const Triangulation &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangle_mesh_2_point_and_support = "returns the last point generated and a handle of the face used to generate that point.
+constexpr const char* Random_points_in_triangle_mesh_2_point_and_support = "returns the last point generated and a handle of the face used to generate that point.
 
 Returns: std::pair< Point_2, typename Triangulation::Face_handle >";
 
 // CGAL::Random_points_in_triangle_mesh_3
-constexpr const char* CGAL_Random_points_in_triangle_mesh_3__class__ = "The class Random_points_in_triangle_mesh_3 is an input iterator creating points uniformly distributed inside the faces of a triangle mesh model of FaceListGraph .";
+constexpr const char* Random_points_in_triangle_mesh_3__class__ = "The class Random_points_in_triangle_mesh_3 is an input iterator creating points uniformly distributed inside the faces of a triangle mesh model of FaceListGraph .";
 
-constexpr const char* CGAL_Random_points_in_triangle_mesh_3_Random_points_in_triangle_mesh_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed in the faces of mesh .
+constexpr const char* Random_points_in_triangle_mesh_3_Random_points_in_triangle_mesh_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed in the faces of mesh .
 
 Each triangle has a probability to be chosen to hold the point depending on
 its area.
@@ -419,14 +419,14 @@ Parameters
 mesh : const TriangleMesh &
 vpm : VertexPointMap
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangle_mesh_3_point_and_support = "returns the last point generated and a descriptor of the face used to generate that point.
+constexpr const char* Random_points_in_triangle_mesh_3_point_and_support = "returns the last point generated and a descriptor of the face used to generate that point.
 
 Returns: std::pair< Point_3 , typename boost::graph_traits< TriangleMesh >::face_descriptor >";
 
 // CGAL::Random_points_in_triangle_soup_3
-constexpr const char* CGAL_Random_points_in_triangle_soup_3__class__ = "The class Random_points_in_triangle_soup_3 is an input iterator creating points uniformly distributed inside a soup of triangles.";
+constexpr const char* Random_points_in_triangle_soup_3__class__ = "The class Random_points_in_triangle_soup_3 is an input iterator creating points uniformly distributed inside a soup of triangles.";
 
-constexpr const char* CGAL_Random_points_in_triangle_soup_3_Random_points_in_triangle_soup_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed between the triangles of the range.
+constexpr const char* Random_points_in_triangle_soup_3_Random_points_in_triangle_soup_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed between the triangles of the range.
 
 Each triangle has a probability to be chosen to hold the point depending on
 its area.
@@ -436,14 +436,14 @@ Parameters
 points : const PointRange &
 triangles : const TriangleRange &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangle_soup_3_point_and_support = "returns the last point generated and the id in the input range of the triangle used to generate that point.
+constexpr const char* Random_points_in_triangle_soup_3_point_and_support = "returns the last point generated and the id in the input range of the triangle used to generate that point.
 
 Returns: std::pair< Point_3, std::size_t >";
 
 // CGAL::Random_points_in_triangles_2
-constexpr const char* CGAL_Random_points_in_triangles_2__class__ = "The class Random_points_in_triangles_2 is an input iterator creating points uniformly distributed inside a range of Triangle_2 .";
+constexpr const char* Random_points_in_triangles_2__class__ = "The class Random_points_in_triangles_2 is an input iterator creating points uniformly distributed inside a range of Triangle_2 .";
 
-constexpr const char* CGAL_Random_points_in_triangles_2_Random_points_in_triangles_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed between the triangles of the range.
+constexpr const char* Random_points_in_triangles_2_Random_points_in_triangles_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed between the triangles of the range.
 
 Each triangle has a probability to be chosen to hold the point depending on
 its area.
@@ -452,14 +452,14 @@ Parameters
 ----------
 triangles : const TriangleRange &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangles_2_point_and_support = "returns the last point generated and a pointer to the input triangle used to generate that point.
+constexpr const char* Random_points_in_triangles_2_point_and_support = "returns the last point generated and a pointer to the input triangle used to generate that point.
 
 Returns: std::pair< Point_2, const Triangle_2 * >";
 
 // CGAL::Random_points_in_triangles_3
-constexpr const char* CGAL_Random_points_in_triangles_3__class__ = "The class Random_points_in_triangles_3 is an input iterator creating points uniformly distributed inside a range of Triangle_3 .";
+constexpr const char* Random_points_in_triangles_3__class__ = "The class Random_points_in_triangles_3 is an input iterator creating points uniformly distributed inside a range of Triangle_3 .";
 
-constexpr const char* CGAL_Random_points_in_triangles_3_Random_points_in_triangles_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed between the triangles of the range.
+constexpr const char* Random_points_in_triangles_3_Random_points_in_triangles_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed between the triangles of the range.
 
 Each triangle has a probability to be chosen to hold the point depending on
 its area.
@@ -468,14 +468,14 @@ Parameters
 ----------
 triangulation : const TriangleRange &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_in_triangles_3_point_and_support = "returns the last point generated and a pointer to the input triangle used to generate that point.
+constexpr const char* Random_points_in_triangles_3_point_and_support = "returns the last point generated and a pointer to the input triangle used to generate that point.
 
 Returns: std::pair< Point_3, const Triangle_3 * >";
 
 // CGAL::Random_points_on_circle_2
-constexpr const char* CGAL_Random_points_on_circle_2__class__ = "The class Random_points_on_circle_2 is an input iterator creating points uniformly distributed on a circle.";
+constexpr const char* Random_points_on_circle_2__class__ = "The class Random_points_on_circle_2 is an input iterator creating points uniformly distributed on a circle.";
 
-constexpr const char* CGAL_Random_points_on_circle_2_Random_points_on_circle_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed on the circle with radius $ r$ , i.e. $ |*g| == r$ .
+constexpr const char* Random_points_on_circle_2_Random_points_on_circle_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed on the circle with radius $ r$ , i.e. $ |*g| == r$ .
 
 A single random number is needed from rnd for each point.
 
@@ -485,9 +485,9 @@ r : double
 rnd : Random &";
 
 // CGAL::Random_points_on_graph_edges_3
-constexpr const char* CGAL_Random_points_on_graph_edges_3__class__ = "The class Random_points_on_graph_edges_3 is an input iterator creating points uniformly distributed on the edges of a graph model of EdgeListGraph .";
+constexpr const char* Random_points_on_graph_edges_3__class__ = "The class Random_points_on_graph_edges_3 is an input iterator creating points uniformly distributed on the edges of a graph model of EdgeListGraph .";
 
-constexpr const char* CGAL_Random_points_on_graph_edges_3_Random_points_on_graph_edges_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the edges of the graph.
+constexpr const char* Random_points_on_graph_edges_3_Random_points_on_graph_edges_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the edges of the graph.
 
 Each edge has a probability to be chosen to hold the point depending on its
 length.
@@ -497,14 +497,14 @@ Parameters
 mesh : const EdgeListGraph &
 vpm : VertexPointMap
 rnd : Random &";
-constexpr const char* CGAL_Random_points_on_graph_edges_3_point_and_support = "returns the last point generated and a descriptor of the edge used to generate that point.
+constexpr const char* Random_points_on_graph_edges_3_point_and_support = "returns the last point generated and a descriptor of the edge used to generate that point.
 
 Returns: std::pair< Point_3 , typename boost::graph_traits< EdgeListGraph >::edge_descriptor >";
 
 // CGAL::Random_points_on_segment_2
-constexpr const char* CGAL_Random_points_on_segment_2__class__ = "The class Random_points_on_segment_2 is an input iterator creating points uniformly distributed on a segment.";
+constexpr const char* Random_points_on_segment_2__class__ = "The class Random_points_on_segment_2 is an input iterator creating points uniformly distributed on a segment.";
 
-constexpr const char* CGAL_Random_points_on_segment_2_Random_points_on_segment_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed on the segment from $ p$ to $ q$ (excluding $ q$ ), i.e. $ *g == (1-\\lambda)\\, p + \\lambda q$ where $ 0 \\le\\lambda< 1$ .
+constexpr const char* Random_points_on_segment_2_Random_points_on_segment_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed on the segment from $ p$ to $ q$ (excluding $ q$ ), i.e. $ *g == (1-\\lambda)\\, p + \\lambda q$ where $ 0 \\le\\lambda< 1$ .
 
 A single random number is needed from rnd for each point. The expressions
 to_double(p.x()) and to_double(p.y()) must result in the respective double
@@ -517,9 +517,9 @@ q : const Point_2 &
 rnd : Random &";
 
 // CGAL::Random_points_on_segment_3
-constexpr const char* CGAL_Random_points_on_segment_3__class__ = "The class Random_points_on_segment_3 is an input iterator creating points uniformly distributed on a segment.";
+constexpr const char* Random_points_on_segment_3__class__ = "The class Random_points_on_segment_3 is an input iterator creating points uniformly distributed on a segment.";
 
-constexpr const char* CGAL_Random_points_on_segment_3_Random_points_on_segment_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the segment from p to q (excluding q ).
+constexpr const char* Random_points_on_segment_3_Random_points_on_segment_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the segment from p to q (excluding q ).
 
 A single random number is needed from rnd for each point. The expressions
 to_double(p.x()) and to_double(p.y()) must result in the respective double
@@ -530,7 +530,7 @@ Parameters
 p : const Point_3 &
 q : const Point_3 &
 rnd : Random &";
-constexpr const char* CGAL_Random_points_on_segment_3_Random_points_on_segment_3_1 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the segment from $ p$ to $ q$ (excluding $ q$ ), i.e. $ *g == (1-\\lambda)\\, p + \\lambda q$ where $ 0 \\le\\lambda< 1$ .
+constexpr const char* Random_points_on_segment_3_Random_points_on_segment_3_1 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the segment from $ p$ to $ q$ (excluding $ q$ ), i.e. $ *g == (1-\\lambda)\\, p + \\lambda q$ where $ 0 \\le\\lambda< 1$ .
 
 A single random number is needed from rnd for each point. The expressions
 to_double(p.x()) , to_double(p.y()) , and to_double(p.z()) must result in the
@@ -544,9 +544,9 @@ q : const Point_3 &
 rnd : Random &";
 
 // CGAL::Random_points_on_sphere_3
-constexpr const char* CGAL_Random_points_on_sphere_3__class__ = "The class Random_points_on_sphere_3 is an input iterator creating points uniformly distributed on a sphere.";
+constexpr const char* Random_points_on_sphere_3__class__ = "The class Random_points_on_sphere_3 is an input iterator creating points uniformly distributed on a sphere.";
 
-constexpr const char* CGAL_Random_points_on_sphere_3_Random_points_on_sphere_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the boundary of a sphere with radius $ r$ , i.e. $ |*g| == r$ .
+constexpr const char* Random_points_on_sphere_3_Random_points_on_sphere_3 = "creates an input iterator g generating points of type Point_3 uniformly distributed on the boundary of a sphere with radius $ r$ , i.e. $ |*g| == r$ .
 
 Two random numbers are needed from rnd for each point.
 
@@ -556,9 +556,9 @@ r : double
 rnd : Random &";
 
 // CGAL::Random_points_on_sphere_d
-constexpr const char* CGAL_Random_points_on_sphere_d__class__ = "The class Random_points_on_sphere_d is an input iterator creating points uniformly distributed on a sphere.";
+constexpr const char* Random_points_on_sphere_d__class__ = "The class Random_points_on_sphere_d is an input iterator creating points uniformly distributed on a sphere.";
 
-constexpr const char* CGAL_Random_points_on_sphere_d_Random_points_on_sphere_d = "$ g$ is an input iterator creating points of type Point_d uniformly distributed on a sphere in dimension $ dim$ with radius $ r$ , i.e. $ |*g| == r$ .
+constexpr const char* Random_points_on_sphere_d_Random_points_on_sphere_d = "$ g$ is an input iterator creating points of type Point_d uniformly distributed on a sphere in dimension $ dim$ with radius $ r$ , i.e. $ |*g| == r$ .
 
 $ 2\\cdot dim$ random numbers are needed from rnd for each point.
 
@@ -569,9 +569,9 @@ r : double
 rnd : Random &";
 
 // CGAL::Random_points_on_square_2
-constexpr const char* CGAL_Random_points_on_square_2__class__ = "The class Random_points_on_square_2 is an input iterator creating points uniformly distributed on the boundary of a square.";
+constexpr const char* Random_points_on_square_2__class__ = "The class Random_points_on_square_2 is an input iterator creating points uniformly distributed on the boundary of a square.";
 
-constexpr const char* CGAL_Random_points_on_square_2_Random_points_on_square_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed on the boundary of the square with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g:$ one coordinate is either $ a$ or $ -a$ and for the other coordinate $ c$ holds $ -a \\le c < a$ .
+constexpr const char* Random_points_on_square_2_Random_points_on_square_2 = "creates an input iterator g generating points of type Point_2 uniformly distributed on the boundary of the square with side length $ 2 a$ , centered at the origin, i.e. $ \\forall p = *g:$ one coordinate is either $ a$ or $ -a$ and for the other coordinate $ c$ holds $ -a \\le c < a$ .
 
 A single random number is needed from rnd for each point.
 

@@ -990,22 +990,30 @@ void export_kernel_module(py::module_& m) {
   using Angle_fnc4 = CGAL::Angle(*)(const Pnt_3&, const Pnt_3&, const Pnt_3&);
   using Angle_fnc5 = CGAL::Angle(*)(const Pnt_3&, const Pnt_3&, const Pnt_3&,
                                     const Pnt_3&);
-  m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc4>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>));
+  m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>),
+        py::arg("v1"), py::arg("v2"));
+  m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
+  m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
+  m.def("angle", static_cast<Angle_fnc4>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
+  m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
 
   using Area_fnc = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>));
+  m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Aoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_ordered_along_line",
-        static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>));
+        static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Asoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_strictly_ordered_along_line",
-        static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>));
+        static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Bc_fnc1 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&);
   using Bc_fnc2 =
@@ -1014,14 +1022,24 @@ void export_kernel_module(py::module_& m) {
   using Bc_fnc3 =
     Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&,
              const FT&, const Pnt_2&, const FT&);
-  m.def("barycenter", static_cast<Bc_fnc1>(&CGAL::barycenter<Kernel>));
-  m.def("barycenter", static_cast<Bc_fnc2>(&CGAL::barycenter<Kernel>));
-  m.def("barycenter", static_cast<Bc_fnc3>(&CGAL::barycenter<Kernel>));
+  m.def("barycenter", static_cast<Bc_fnc1>(&CGAL::barycenter<Kernel>),
+        py::arg("point1"), py::arg("weight1"),
+        py::arg("point2"), py::arg("weight2"));
+  m.def("barycenter", static_cast<Bc_fnc2>(&CGAL::barycenter<Kernel>),
+        py::arg("point1"), py::arg("weight1"),
+        py::arg("point2"), py::arg("weight2"),
+        py::arg("point3"), py::arg("weight3"));
+  m.def("barycenter", static_cast<Bc_fnc3>(&CGAL::barycenter<Kernel>),
+        py::arg("point1"), py::arg("weight1"),
+        py::arg("point2"), py::arg("weight2"),
+        py::arg("point3"), py::arg("weight3"),
+        py::arg("point4"), py::arg("weight4"));
 
-  m.def("bbox_2", &ker::bbox_2);
+  m.def("bbox_2", &ker::bbox_2, py::arg("points"));
 
   using Bisector_fnc = Line_2(*)(const Pnt_2&, const Pnt_2&);
-  m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>));
+  m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>),
+        py::arg("p"), py::arg("q"));
 
   // Requires sqrt operation
   //def<Line_2(const Line_2&, const Line_2&)>("bisector", &CGAL::bisector);
@@ -1030,61 +1048,77 @@ void export_kernel_module(py::module_& m) {
   using Cr_fnc2 =
     Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Cr_fnc3 = Pnt_2(*)(const Tri_2&);
-  m.def("centroid", static_cast<Cr_fnc1>(&CGAL::centroid<Kernel>));
-  m.def("centroid", static_cast<Cr_fnc2>(&CGAL::centroid<Kernel>));
-  m.def("centroid", static_cast<Cr_fnc3>(&CGAL::centroid<Kernel>));
+  m.def("centroid", static_cast<Cr_fnc1>(&CGAL::centroid<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
+  m.def("centroid", static_cast<Cr_fnc2>(&CGAL::centroid<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
+  m.def("centroid", static_cast<Cr_fnc3>(&CGAL::centroid<Kernel>),
+        py::arg("triangle"));
 
   using Cc_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
   using Cc_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Cc_fnc3 = Pnt_2(*)(const Tri_2&);
-  m.def("circumcenter", static_cast<Cc_fnc1>(&CGAL::circumcenter<Kernel>));
-  m.def("circumcenter", static_cast<Cc_fnc2>(&CGAL::circumcenter<Kernel>));
-  m.def("circumcenter", static_cast<Cc_fnc3>(&CGAL::circumcenter<Kernel>));
+  m.def("circumcenter", static_cast<Cc_fnc1>(&CGAL::circumcenter<Kernel>),
+        py::arg("p"), py::arg("q"));
+  m.def("circumcenter", static_cast<Cc_fnc2>(&CGAL::circumcenter<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
+  m.def("circumcenter", static_cast<Cc_fnc3>(&CGAL::circumcenter<Kernel>),
+        py::arg("triangle"));
 
   using Caoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear_are_ordered_along_line",
-        static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>));
+        static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Casoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear_are_strictly_ordered_along_line",
 
-        static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>));
+        static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Clr_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>));
+  m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Cdtp_fnc =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("compare_distance_to_point",
-        static_cast<Cdtp_fnc>(&CGAL::compare_distance_to_point<Kernel>));
+        static_cast<Cdtp_fnc>(&CGAL::compare_distance_to_point<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"));
 
   using Cl_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_lexicographically",
-        static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>));
+        static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>),
+        py::arg("p"), py::arg("q"));
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
   using Csdtl_fnc1 =
     CGAL::Comparison_result(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
   m.def("compare_signed_distance_to_line",
-        static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>));
+        static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>),
+        py::arg("line"), py::arg("p"), py::arg("q"));
 #endif
   using Csdtl_fnc2 =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
                                const Pnt_2&);
   m.def("compare_signed_distance_to_line",
-        static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>));
+        static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
 
   using Cs_fnc1 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&);
   using Cs_fnc2 =
     CGAL::Comparison_result(*)(const Segment_2&, const Segment_2&);
-  m.def("compare_slope", static_cast<Cs_fnc1>(&CGAL::compare_slope<Kernel>));
-  m.def("compare_slope", static_cast<Cs_fnc2>(&CGAL::compare_slope<Kernel>));
+  m.def("compare_slope", static_cast<Cs_fnc1>(&CGAL::compare_slope<Kernel>),
+        py::arg("line1"), py::arg("line2"));
+  m.def("compare_slope", static_cast<Cs_fnc2>(&CGAL::compare_slope<Kernel>),
+        py::arg("segment1"), py::arg("segment2"));
 
   using Csd_fnc =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const FT&);
   m.def("compare_squared_distance",
-        static_cast<Csd_fnc>(&CGAL::compare_squared_distance<Kernel>));
+        static_cast<Csd_fnc>(&CGAL::compare_squared_distance<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("squared_distance"));
 
   using Cx_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   using Cx_fnc2 =
@@ -1094,13 +1128,18 @@ void export_kernel_module(py::module_& m) {
   using Cx_fnc4 =
     CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
                                const Line_2&);
-  m.def("compare_x", static_cast<Cx_fnc1>(&CGAL::compare_x<Kernel>));
-  m.def("compare_x", static_cast<Cx_fnc2>(&CGAL::compare_x<Kernel>));
-  m.def("compare_x", static_cast<Cx_fnc3>(&CGAL::compare_x<Kernel>));
-  m.def("compare_x", static_cast<Cx_fnc4>(&CGAL::compare_x<Kernel>));
+  m.def("compare_x", static_cast<Cx_fnc1>(&CGAL::compare_x<Kernel>),
+        py::arg("p"), py::arg("q"));
+  m.def("compare_x", static_cast<Cx_fnc2>(&CGAL::compare_x<Kernel>),
+        py::arg("point"), py::arg("line1"), py::arg("line2"));
+  m.def("compare_x", static_cast<Cx_fnc3>(&CGAL::compare_x<Kernel>),
+        py::arg("line1"), py::arg("line2"), py::arg("line3"));
+  m.def("compare_x", static_cast<Cx_fnc4>(&CGAL::compare_x<Kernel>),
+        py::arg("line1"), py::arg("line2"), py::arg("line3"), py::arg("line4"));
 
   using Cxy_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
-  m.def("compare_xy", static_cast<Cxy_fnc>(&CGAL::compare_xy<Kernel>));
+  m.def("compare_xy", static_cast<Cxy_fnc>(&CGAL::compare_xy<Kernel>),
+        py::arg("p"), py::arg("q"));
 
   using Cxaty_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&);
   using Cxaty_fnc2 =

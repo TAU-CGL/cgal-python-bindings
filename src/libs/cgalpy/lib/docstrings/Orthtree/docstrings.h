@@ -8,45 +8,45 @@ namespace docstrings {
 namespace Orthtree {
 
 // CGAL::Orthtree
-constexpr const char* CGAL_Orthtree__class__ = "A data structure using an axis-aligned hyperrectangle decomposition of dD space for efficient access and computation.";
+constexpr const char* Orthtree__class__ = "A data structure using an axis-aligned hyperrectangle decomposition of dD space for efficient access and computation.";
 
-constexpr const char* CGAL_Orthtree_Kernel = "Kernel type.
+constexpr const char* Orthtree_Kernel = "Kernel type.
 
 Returns: typename Traits::Kernel";
-constexpr const char* CGAL_Orthtree_FT = "Number type.
+constexpr const char* Orthtree_FT = "Number type.
 
 Returns: typename Traits::FT";
-constexpr const char* CGAL_Orthtree_Point = "Point type.
+constexpr const char* Orthtree_Point = "Point type.
 
 Returns: typename Traits::Point_d";
-constexpr const char* CGAL_Orthtree_Bbox = "Bounding box type.
+constexpr const char* Orthtree_Bbox = "Bounding box type.
 
 Returns: typename Traits::Bbox_d";
-constexpr const char* CGAL_Orthtree_Sphere = "Sphere type.
+constexpr const char* Orthtree_Sphere = "Sphere type.
 
 Returns: typename Traits::Sphere_d";
-constexpr const char* CGAL_Orthtree_Adjacency = "Adjacency type.
+constexpr const char* Orthtree_Adjacency = "Adjacency type.
 
 Returns: typename Traits::Adjacency";
-constexpr const char* CGAL_Orthtree_Node_index = "Index of a given node in the tree; the root always has index 0.
+constexpr const char* Orthtree_Node_index = "Index of a given node in the tree; the root always has index 0.
 
 Returns: typename Traits::Node_index";
-constexpr const char* CGAL_Orthtree_has_data = "true if GeomTraits is a model of OrthtreeTraitsWithData and false otherwise.
+constexpr const char* Orthtree_has_data = "true if GeomTraits is a model of OrthtreeTraitsWithData and false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_supports_neighbor_search = "true if GeomTraits is a model of CollectionPartitioningOrthtreeTraits and false otherwise.
+constexpr const char* Orthtree_supports_neighbor_search = "true if GeomTraits is a model of CollectionPartitioningOrthtreeTraits and false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_supports_ball_search = "true if GeomTraits provides a Has_on_bounded_side functor and false otherwise.
+constexpr const char* Orthtree_supports_ball_search = "true if GeomTraits provides a Has_on_bounded_side functor and false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_dimension = "Dimension of the tree.
+constexpr const char* Orthtree_dimension = "Dimension of the tree.
 
 Returns: int";
-constexpr const char* CGAL_Orthtree_Self = "Self alias for convenience.
+constexpr const char* Orthtree_Self = "Self alias for convenience.
 
 Returns: Orthtree < Traits >";
-constexpr const char* CGAL_Orthtree_Local_coordinates = "Set of bits representing this node's relationship to its parent.
+constexpr const char* Orthtree_Local_coordinates = "Set of bits representing this node's relationship to its parent.
 
 Equivalent to an array of Booleans, where index[0] is whether x is greater,
 index[1] is whether y is greater, index[2] is whether z is greater, and so on
@@ -54,25 +54,25 @@ for higher dimensions if needed. Used to represent a node's relationship to
 the center of its parent.
 
 Returns: std::bitset< dimension >";
-constexpr const char* CGAL_Orthtree_Global_coordinates = "Coordinates representing this node's relationship with the rest of the tree.
+constexpr const char* Orthtree_Global_coordinates = "Coordinates representing this node's relationship with the rest of the tree.
 
 Each value (x, y, z, ...) of global coordinates is calculated by doubling the
 parent's global coordinates and adding the local coordinates.
 
 Returns: std::array< std::uint32_t, dimension >";
-constexpr const char* CGAL_Orthtree_Split_predicate = "A predicate that determines whether a node must be split when refining a tree.
+constexpr const char* Orthtree_Split_predicate = "A predicate that determines whether a node must be split when refining a tree.
 
 Returns: std::function< bool( Node_index , const Self &)>";
-constexpr const char* CGAL_Orthtree_Node_index_range = "A model of ForwardRange whose value type is Node_index .
+constexpr const char* Orthtree_Node_index_range = "A model of ForwardRange whose value type is Node_index .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Orthtree_Property_map = "A model of LvaluePropertyMap with Node_index as key type and T as value type.
+constexpr const char* Orthtree_Property_map = "A model of LvaluePropertyMap with Node_index as key type and T as value type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Orthtree_degree = "Degree of the tree (number of children of non-leaf nodes).
+constexpr const char* Orthtree_degree = "Degree of the tree (number of children of non-leaf nodes).
 
 Returns: int";
-constexpr const char* CGAL_Orthtree_Orthtree = "constructs an orthtree for a traits instance.
+constexpr const char* Orthtree_Orthtree = "constructs an orthtree for a traits instance.
 
 The constructed orthtree has a root node with no children, containing the
 contents determined by Construct_root_node_contents from the traits class.
@@ -85,22 +85,22 @@ traits the traits object.
 Parameters
 ----------
 traits : Traits";
-constexpr const char* CGAL_Orthtree_Orthtree_1 = "constructs an orthtree from a set of arguments provided to the traits constructor
+constexpr const char* Orthtree_Orthtree_1 = "constructs an orthtree from a set of arguments provided to the traits constructor
 
 Parameters
 ----------
 args : Args &&...";
-constexpr const char* CGAL_Orthtree_Orthtree_2 = "copy constructor
+constexpr const char* Orthtree_Orthtree_2 = "copy constructor
 
 Parameters
 ----------
 other : const Orthtree &";
-constexpr const char* CGAL_Orthtree_Orthtree_3 = "move constructor
+constexpr const char* Orthtree_Orthtree_3 = "move constructor
 
 Parameters
 ----------
 other : Orthtree &&";
-constexpr const char* CGAL_Orthtree_refine = "recursively subdivides the orthtree until it meets the given criteria.
+constexpr const char* Orthtree_refine = "recursively subdivides the orthtree until it meets the given criteria.
 
 The split predicate should return true if a leaf node should be split and
 false otherwise. This function may be called several times with different
@@ -111,7 +111,7 @@ split_predicate determines whether or not a leaf node needs to be subdivided.
 Parameters
 ----------
 split_predicate : const Split_predicate &";
-constexpr const char* CGAL_Orthtree_refine_1 = "convenience overload that refines an orthtree using a maximum depth and maximum number of contained elements in a node as split predicate.
+constexpr const char* Orthtree_refine_1 = "convenience overload that refines an orthtree using a maximum depth and maximum number of contained elements in a node as split predicate.
 
 This is equivalent to calling
 refine(Orthtrees::Maximum_depth_and_maximum_contained_elements(max_depth,
@@ -131,19 +131,19 @@ max_depth : size_t
 bucket_size : size_t
 
 Returns: std::enable_if_t< Orthtree::has_data , void >";
-constexpr const char* CGAL_Orthtree_grade = "refines the orthtree such that the difference of depth between two immediate neighbor leaves is never more than 1.
+constexpr const char* Orthtree_grade = "refines the orthtree such that the difference of depth between two immediate neighbor leaves is never more than 1.
 
 This is done only by adding nodes, nodes are never removed.";
-constexpr const char* CGAL_Orthtree_traits = "provides direct read-only access to the tree traits.
+constexpr const char* Orthtree_traits = "provides direct read-only access to the tree traits.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Orthtree_root = "provides access to the root node, and by extension the rest of the tree.
+constexpr const char* Orthtree_root = "provides access to the root node, and by extension the rest of the tree.
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_depth = "returns the deepest level reached by a leaf node in this tree (root being level 0).
+constexpr const char* Orthtree_depth = "returns the deepest level reached by a leaf node in this tree (root being level 0).
 
 Returns: std::size_t";
-constexpr const char* CGAL_Orthtree_traverse = "constructs a node index range using a tree-traversal function.
+constexpr const char* Orthtree_traverse = "constructs a node index range using a tree-traversal function.
 
 This method allows iteration over the nodes of the tree with a user-selected
 order (preorder, postorder, leaves-only, etc.). Traversal a model of
@@ -155,7 +155,7 @@ Parameters
 traversal : Traversal
 
 Returns: Node_index_range";
-constexpr const char* CGAL_Orthtree_traverse_1 = "convenience method for using a traversal without constructing it yourself
+constexpr const char* Orthtree_traverse_1 = "convenience method for using a traversal without constructing it yourself
 
 Traversal a model of OrthtreeTraversal args Arguments to pass to the
 traversal's constructor, excluding the first (always an orthtree reference) a
@@ -166,7 +166,7 @@ Parameters
 args : Args &&...
 
 Returns: Node_index_range";
-constexpr const char* CGAL_Orthtree_bbox = "constructs the bounding box of a node.
+constexpr const char* Orthtree_bbox = "constructs the bounding box of a node.
 
 The object constructed is not the bounding box of the node's contents, but the
 bounding box of the node itself. n node to generate a bounding box for the
@@ -177,7 +177,7 @@ Parameters
 n : Node_index
 
 Returns: Bbox";
-constexpr const char* CGAL_Orthtree_add_property = "gets a property for nodes, adding it if it does not already exist.
+constexpr const char* Orthtree_add_property = "gets a property for nodes, adding it if it does not already exist.
 
 T the type of the property to add name the name of the new property
 default_value the default value assigned to nodes for this property pair of
@@ -190,7 +190,7 @@ name : const std::string &
 default_value : const T
 
 Returns: std::pair< Property_map < T >, bool >";
-constexpr const char* CGAL_Orthtree_property = "gets a property of the nodes if it exists.
+constexpr const char* Orthtree_property = "gets a property of the nodes if it exists.
 
 T the type of the property to retrieve name the name of the property an
 optional containing the property map if it exists
@@ -200,10 +200,10 @@ Parameters
 name : const std::string &
 
 Returns: std::optional< Property_map < T > >";
-constexpr const char* CGAL_Orthtree_properties = "returns a vector of all property names.
+constexpr const char* Orthtree_properties = "returns a vector of all property names.
 
 Returns: std::vector< std::string >";
-constexpr const char* CGAL_Orthtree_remove_property = "removes the node property from the tree.
+constexpr const char* Orthtree_remove_property = "removes the node property from the tree.
 
 T the type of the property to remove property the property to be removed from
 the tree. true if property was a valid property of the tree.
@@ -213,7 +213,7 @@ Parameters
 property : Property_map < T >
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_locate = "finds the leaf node which contains a particular point in space.
+constexpr const char* Orthtree_locate = "finds the leaf node which contains a particular point in space.
 
 Traverses the orthtree and finds the leaf cell that has a domain enclosing the
 point passed. The point passed must be within the region enclosed by the
@@ -226,7 +226,7 @@ Parameters
 point : const Point &
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_nearest_k_neighbors = "finds the k nearest neighbors of the point query .
+constexpr const char* Orthtree_nearest_k_neighbors = "finds the k nearest neighbors of the point query .
 
 Nearest neighbors are outputted in order of increasing distance to query .
 OutputIterator a model of OutputIterator that accepts
@@ -241,7 +241,7 @@ k : std::size_t
 output : OutputIterator
 
 Returns: std::enable_if_t< Orthtree::supports_neighbor_search , OutputIterator >";
-constexpr const char* CGAL_Orthtree_neighbors_within_radius = "finds the elements in the sphere query .
+constexpr const char* Orthtree_neighbors_within_radius = "finds the elements in the sphere query .
 
 Elements are outputted in order of increasing distance to the center of the
 sphere. OutputIterator a model of OutputIterator that accepts
@@ -255,7 +255,7 @@ query : const Sphere &
 output : OutputIterator
 
 Returns: std::enable_if_t< Orthtree::supports_neighbor_search , OutputIterator >";
-constexpr const char* CGAL_Orthtree_nearest_k_neighbors_within_radius = "finds at most k elements within a specific radius that are nearest to the center of the sphere query : if query does not contain at least k elements, only contained elements will be returned.
+constexpr const char* Orthtree_nearest_k_neighbors_within_radius = "finds at most k elements within a specific radius that are nearest to the center of the sphere query : if query does not contain at least k elements, only contained elements will be returned.
 
 This function is useful when the user already knows how sparse the elements
 are, or if they do not care about elements that are too far away. Setting a
@@ -273,7 +273,7 @@ k : std::size_t
 output : OutputIterator
 
 Returns: std::enable_if_t< Orthtree::supports_neighbor_search , OutputIterator >";
-constexpr const char* CGAL_Orthtree_intersected_nodes = "finds the leaf nodes that intersect with any primitive.
+constexpr const char* Orthtree_intersected_nodes = "finds the leaf nodes that intersect with any primitive.
 
 this function requires the function bool CGAL::do_intersect(QueryType,
 Traits::Bbox_d) to be defined. This function finds all the intersecting leaf
@@ -288,7 +288,7 @@ query : const Query &
 output : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Orthtree_intersected_nodes_1 = "finds the leaf nodes that intersect with a ball.
+constexpr const char* Orthtree_intersected_nodes_1 = "finds the leaf nodes that intersect with a ball.
 
 This function finds all the intersecting leaf nodes and writes their indices
 to the output iterator. Requires the Traits class to provide the functor via
@@ -306,7 +306,7 @@ squared_radius : const FT
 output : OutputIterator
 
 Returns: std::enable_if_t< Orthtree::supports_ball_search , OutputIterator >";
-constexpr const char* CGAL_Orthtree_intersected_nodes_2 = "finds the leaf nodes that intersect with any primitive.
+constexpr const char* Orthtree_intersected_nodes_2 = "finds the leaf nodes that intersect with any primitive.
 
 This function finds all the intersecting leaf nodes and writes their indices
 to the output iterator. Query the primitive class (e.g., sphere, ray)
@@ -323,7 +323,7 @@ output : OutputIterator
 func : IntersectionFunctor &
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Orthtree_operator = "compares the topology of the orthtree with that of rhs .
+constexpr const char* Orthtree_operator = "compares the topology of the orthtree with that of rhs .
 
 Trees may be considered equivalent even if they have different contents.
 Equivalent trees must have the same root bounding box and the same node
@@ -335,7 +335,7 @@ Parameters
 rhs : const Self &
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_operator_1 = "compares the topology of the orthtree with that of rhs .
+constexpr const char* Orthtree_operator_1 = "compares the topology of the orthtree with that of rhs .
 
 rhs the other orthtree false if the trees have the same topology, and true
 otherwise
@@ -345,21 +345,21 @@ Parameters
 rhs : const Self &
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_is_leaf = "determines whether the node specified by index n is a leaf node.
+constexpr const char* Orthtree_is_leaf = "determines whether the node specified by index n is a leaf node.
 
 Parameters
 ----------
 n : Node_index
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_is_root = "determines whether the node specified by index n is the root node.
+constexpr const char* Orthtree_is_root = "determines whether the node specified by index n is the root node.
 
 Parameters
 ----------
 n : Node_index
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_depth_1 = "determines the depth of the node specified.
+constexpr const char* Orthtree_depth_1 = "determines the depth of the node specified.
 
 The root node has depth 0, its children have depth 1, and so on. n index of
 the node to check. the depth of the node n within its tree.
@@ -369,35 +369,35 @@ Parameters
 n : Node_index
 
 Returns: std::size_t";
-constexpr const char* CGAL_Orthtree_data = "retrieves a reference to the Node_data associated with the node specified by n if GeomTraits is a model of OrthtreeTraitswithData , and nullptr otherwise.
+constexpr const char* Orthtree_data = "retrieves a reference to the Node_data associated with the node specified by n if GeomTraits is a model of OrthtreeTraitswithData , and nullptr otherwise.
 
 Parameters
 ----------
 n : Node_index
 
 Returns: std::conditional_t< has_data , Node_data &, void * > &";
-constexpr const char* CGAL_Orthtree_data_1 = "retrieves a const reference to the Node_data associated with the node specified by n if GeomTraits is a model of OrthtreeTraitswithData , and nullptr otherwise.
+constexpr const char* Orthtree_data_1 = "retrieves a const reference to the Node_data associated with the node specified by n if GeomTraits is a model of OrthtreeTraitswithData , and nullptr otherwise.
 
 Parameters
 ----------
 n : Node_index
 
 Returns: std::conditional_t< has_data , const Node_data &, void * >";
-constexpr const char* CGAL_Orthtree_global_coordinates = "retrieves the global coordinates of the node.
+constexpr const char* Orthtree_global_coordinates = "retrieves the global coordinates of the node.
 
 Parameters
 ----------
 n : Node_index
 
 Returns: Global_coordinates";
-constexpr const char* CGAL_Orthtree_local_coordinates = "retrieves the local coordinates of the node.
+constexpr const char* Orthtree_local_coordinates = "retrieves the local coordinates of the node.
 
 Parameters
 ----------
 n : Node_index
 
 Returns: Local_coordinates";
-constexpr const char* CGAL_Orthtree_parent = "returns this n's parent.
+constexpr const char* Orthtree_parent = "returns this n's parent.
 
 !is_root() n index of the node to retrieve the parent of the index of the
 parent of node n
@@ -407,7 +407,7 @@ Parameters
 n : Node_index
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_child = "returns a node's i th child.
+constexpr const char* Orthtree_child = "returns a node's i th child.
 
 !is_leaf() n index of the node to retrieve the child of i in [0, 2^D)
 specifying the child to retrieve the index of the i th child of node n
@@ -418,7 +418,7 @@ n : Node_index
 i : std::size_t
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_descendant = "retrieves an arbitrary descendant of the node specified by node .
+constexpr const char* Orthtree_descendant = "retrieves an arbitrary descendant of the node specified by node .
 
 Convenience function to avoid the need to call
 orthtree.child(orthtree.child(node, 0), 1) . Each index in indices specifies
@@ -434,7 +434,7 @@ node : Node_index
 indices : Indices...
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_node = "convenience function for retrieving arbitrary nodes.
+constexpr const char* Orthtree_node = "convenience function for retrieving arbitrary nodes.
 
 Equivalent to tree.descendant(tree.root(), indices...) . indices the integer
 indices specifying the descent to perform, starting from the root the index of
@@ -445,7 +445,7 @@ Parameters
 indices : Indices...
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_next_sibling = "finds the next sibling in the parent of the node specified by the index n .
+constexpr const char* Orthtree_next_sibling = "finds the next sibling in the parent of the node specified by the index n .
 
 Traverses the tree in increasing order of local index (e.g., 000, 001, 010,
 etc.) n the index of the node to find the sibling of the index of the next
@@ -456,7 +456,7 @@ Parameters
 n : Node_index
 
 Returns: const std::optional< Node_index >";
-constexpr const char* CGAL_Orthtree_next_sibling_up = "finds the next sibling of the parent of the node specified by n if it exists.
+constexpr const char* Orthtree_next_sibling_up = "finds the next sibling of the parent of the node specified by n if it exists.
 
 n the index node to find the sibling up of. The index of the next sibling of
 the parent of n if n is not the root and its parent has a sibling, otherwise
@@ -467,7 +467,7 @@ Parameters
 n : Node_index
 
 Returns: const std::optional< Node_index >";
-constexpr const char* CGAL_Orthtree_deepest_first_child = "finds the leaf node reached when descending the tree and always choosing child 0.
+constexpr const char* Orthtree_deepest_first_child = "finds the leaf node reached when descending the tree and always choosing child 0.
 
 This is the starting point of a depth-first traversal. n the index of the node
 to find the deepest first child of. the index of the deepest first child of
@@ -478,7 +478,7 @@ Parameters
 n : Node_index
 
 Returns: Node_index";
-constexpr const char* CGAL_Orthtree_first_child_at_depth = "finds node reached when descending the tree to a depth d and always choosing child 0.
+constexpr const char* Orthtree_first_child_at_depth = "finds node reached when descending the tree to a depth d and always choosing child 0.
 
 Similar to deepest_first_child() , but does go to a fixed depth. n the index
 of the node to find the d th first child of. d the depth to descend to. the
@@ -490,7 +490,7 @@ n : Node_index
 d : std::size_t
 
 Returns: std::optional< Node_index >";
-constexpr const char* CGAL_Orthtree_split = "splits a node into subnodes.
+constexpr const char* Orthtree_split = "splits a node into subnodes.
 
 Only leaf nodes should be split. When a node is split it is no longer a leaf
 node. The full set of degree children are constructed automatically, and their
@@ -501,7 +501,7 @@ n index of the node to split
 Parameters
 ----------
 n : Node_index";
-constexpr const char* CGAL_Orthtree_barycenter = "returns the center point of a node.
+constexpr const char* Orthtree_barycenter = "returns the center point of a node.
 
 n index of the node to find the center point for the center point of node n
 
@@ -510,7 +510,7 @@ Parameters
 n : Node_index
 
 Returns: Point";
-constexpr const char* CGAL_Orthtree_adjacent_node = "finds the directly adjacent node in a specific direction
+constexpr const char* Orthtree_adjacent_node = "finds the directly adjacent node in a specific direction
 
 direction.to_ulong < 2 * dimension Adjacent nodes are found according to
 several properties: adjacent nodes may be larger than the seek node, but never
@@ -537,7 +537,7 @@ n : Node_index
 direction : const Local_coordinates &
 
 Returns: std::optional< Node_index >";
-constexpr const char* CGAL_Orthtree_adjacent_node_1 = "equivalent to adjacent_node() , with an adjacency direction rather than a bitset.
+constexpr const char* Orthtree_adjacent_node_1 = "equivalent to adjacent_node() , with an adjacency direction rather than a bitset.
 
 n index of the node to find a neighbor of adjacency which way to find the
 adjacent node relative to this one
@@ -548,7 +548,7 @@ n : Node_index
 adjacency : Adjacency
 
 Returns: std::optional< Node_index >";
-constexpr const char* CGAL_Orthtree_is_topology_equal = "determines whether a pair of subtrees have the same topology.
+constexpr const char* Orthtree_is_topology_equal = "determines whether a pair of subtrees have the same topology.
 
 lhsNode index of a node in lhsTree lhsTree an Orthtree rhsNode index of a node
 in rhsTree rhsTree another Orthtree true if lhsNode and rhsNode have the same
@@ -562,7 +562,7 @@ rhsNode : Node_index
 rhsTree : const Self &
 
 Returns: bool";
-constexpr const char* CGAL_Orthtree_is_topology_equal_1 = "helper function for calling is_topology_equal() on the root nodes of two trees.
+constexpr const char* Orthtree_is_topology_equal_1 = "helper function for calling is_topology_equal() on the root nodes of two trees.
 
 lhs an Orthtree rhs another Orthtree true if lhs and rhs have the same
 topology, and false otherwise
@@ -577,13 +577,13 @@ Returns: bool";
 
 
 // CGAL::Orthtree_traits
-constexpr const char* CGAL_Orthtree_traits__class__ = "Traits class for defining an orthtree using the class CGAL::Orthtree without storing data in the nodes.";
+constexpr const char* Orthtree_traits__class__ = "Traits class for defining an orthtree using the class CGAL::Orthtree without storing data in the nodes.";
 
 
 // CGAL::Orthtree_traits_base
-constexpr const char* CGAL_Orthtree_traits_base__class__ = "The class Orthtree_traits_base is a base class providing common choices for types and functors.";
+constexpr const char* Orthtree_traits_base__class__ = "The class Orthtree_traits_base is a base class providing common choices for types and functors.";
 
-constexpr const char* CGAL_Orthtree_traits_base_Adjacency = "Adjacency type.
+constexpr const char* Orthtree_traits_base_Adjacency = "Adjacency type.
 
 This type is used to identify adjacency directions with easily understandable
 keywords (left, right, up, down, ...) and is thus mainly useful in 2D and 3D.
@@ -607,23 +607,23 @@ Returns: int";
 
 
 // CGAL::Orthtree_traits_face_graph
-constexpr const char* CGAL_Orthtree_traits_face_graph__class__ = "Traits class for the Orthtree class to be used to construct a 3D octree around a triangulated surface mesh.";
+constexpr const char* Orthtree_traits_face_graph__class__ = "Traits class for the Orthtree class to be used to construct a 3D octree around a triangulated surface mesh.";
 
 
 // CGAL::Orthtree_traits_face_graph::Split_predicate_node_min_extent
-constexpr const char* CGAL_Orthtree_traits_face_graph_Split_predicate_node_min_extent__class__ = "Recommended split predicate to pass to Orthtree::refine() function so that the octree is refined until a node is either empty or has an extent that would be smaller after split than the corresponding value provided to the constructor.";
+constexpr const char* Orthtree_traits_face_graph_Split_predicate_node_min_extent__class__ = "Recommended split predicate to pass to Orthtree::refine() function so that the octree is refined until a node is either empty or has an extent that would be smaller after split than the corresponding value provided to the constructor.";
 
-constexpr const char* CGAL_Orthtree_traits_face_graph_Split_predicate_node_min_extent_Split_predicate_node_min_extent = "constructor with me being the minimal value a node extent could be (same value for all dimension).
+constexpr const char* Orthtree_traits_face_graph_Split_predicate_node_min_extent_Split_predicate_node_min_extent = "constructor with me being the minimal value a node extent could be (same value for all dimension).
 
 Parameters
 ----------
 me : const FT &";
-constexpr const char* CGAL_Orthtree_traits_face_graph_Split_predicate_node_min_extent_Split_predicate_node_min_extent_1 = "constructor with me being the minimal value a node extent could be (one value per dimension).
+constexpr const char* Orthtree_traits_face_graph_Split_predicate_node_min_extent_Split_predicate_node_min_extent_1 = "constructor with me being the minimal value a node extent could be (one value per dimension).
 
 Parameters
 ----------
 me : const std::array< FT, 3 > &";
-constexpr const char* CGAL_Orthtree_traits_face_graph_Split_predicate_node_min_extent_operator = "returns true if ni should be split, false otherwise.
+constexpr const char* Orthtree_traits_face_graph_Split_predicate_node_min_extent_operator = "returns true if ni should be split, false otherwise.
 
 Parameters
 ----------
@@ -633,7 +633,7 @@ tree : const Tree &
 Returns: bool";
 
 // CGAL::Orthtree_traits_point
-constexpr const char* CGAL_Orthtree_traits_point__class__ = "Traits class for defining an orthtree of points using the class CGAL::Orthtree .";
+constexpr const char* Orthtree_traits_point__class__ = "Traits class for defining an orthtree of points using the class CGAL::Orthtree .";
 
 
 
@@ -643,13 +643,13 @@ constexpr const char* CGAL_Orthtree_traits_point__class__ = "Traits class for de
 
 
 // CGAL::Orthtrees::Leaves_traversal
-constexpr const char* CGAL_Orthtrees_Leaves_traversal__class__ = "A class used for performing a traversal on leaves only.";
+constexpr const char* Orthtrees_Leaves_traversal__class__ = "A class used for performing a traversal on leaves only.";
 
 
 // CGAL::Orthtrees::Level_traversal
-constexpr const char* CGAL_Orthtrees_Level_traversal__class__ = "A class used for performing a traversal of a specific depth level.";
+constexpr const char* Orthtrees_Level_traversal__class__ = "A class used for performing a traversal of a specific depth level.";
 
-constexpr const char* CGAL_Orthtrees_Level_traversal_Level_traversal = "constructs a depth -level traversal.
+constexpr const char* Orthtrees_Level_traversal_Level_traversal = "constructs a depth -level traversal.
 
 Parameters
 ----------
@@ -657,14 +657,14 @@ orthtree : const Tree &
 depth : std::size_t";
 
 // CGAL::Orthtrees::Maximum_contained_elements
-constexpr const char* CGAL_Orthtrees_Maximum_contained_elements__class__ = "A class used to choose when a node should be split depending on the number of contained elements.";
+constexpr const char* Orthtrees_Maximum_contained_elements__class__ = "A class used to choose when a node should be split depending on the number of contained elements.";
 
-constexpr const char* CGAL_Orthtrees_Maximum_contained_elements_Maximum_contained_elements = "creates a predicate based on the number of contained elements.
+constexpr const char* Orthtrees_Maximum_contained_elements_Maximum_contained_elements = "creates a predicate based on the number of contained elements.
 
 Parameters
 ----------
 bucket_size : std::size_t";
-constexpr const char* CGAL_Orthtrees_Maximum_contained_elements_operator = "returns true if the node with index i should be split, false otherwise.
+constexpr const char* Orthtrees_Maximum_contained_elements_operator = "returns true if the node with index i should be split, false otherwise.
 
 Parameters
 ----------
@@ -674,14 +674,14 @@ tree : const Orthtree < GeomTraits > &
 Returns: bool";
 
 // CGAL::Orthtrees::Maximum_depth
-constexpr const char* CGAL_Orthtrees_Maximum_depth__class__ = "A class used to choose when a node should be split depending on the depth.";
+constexpr const char* Orthtrees_Maximum_depth__class__ = "A class used to choose when a node should be split depending on the depth.";
 
-constexpr const char* CGAL_Orthtrees_Maximum_depth_Maximum_depth = "creates a maximum depth predicate.
+constexpr const char* Orthtrees_Maximum_depth_Maximum_depth = "creates a maximum depth predicate.
 
 Parameters
 ----------
 max_depth : std::size_t";
-constexpr const char* CGAL_Orthtrees_Maximum_depth_operator = "returns true if the node with index i should be split, false otherwise.
+constexpr const char* Orthtrees_Maximum_depth_operator = "returns true if the node with index i should be split, false otherwise.
 
 Parameters
 ----------
@@ -691,15 +691,15 @@ tree : const Orthtree < GeomTraits > &
 Returns: bool";
 
 // CGAL::Orthtrees::Maximum_depth_and_maximum_contained_elements
-constexpr const char* CGAL_Orthtrees_Maximum_depth_and_maximum_contained_elements__class__ = "A class used to choose when a node should be split depending on the depth and the number of contained elements.";
+constexpr const char* Orthtrees_Maximum_depth_and_maximum_contained_elements__class__ = "A class used to choose when a node should be split depending on the depth and the number of contained elements.";
 
-constexpr const char* CGAL_Orthtrees_Maximum_depth_and_maximum_contained_elements_Maximum_depth_and_maximum_contained_elements = "creates a predicate using maximum depth or bucket size.
+constexpr const char* Orthtrees_Maximum_depth_and_maximum_contained_elements_Maximum_depth_and_maximum_contained_elements = "creates a predicate using maximum depth or bucket size.
 
 Parameters
 ----------
 max_depth : std::size_t
 bucket_size : std::size_t";
-constexpr const char* CGAL_Orthtrees_Maximum_depth_and_maximum_contained_elements_operator = "returns true if the node with index i should be split, false otherwise.
+constexpr const char* Orthtrees_Maximum_depth_and_maximum_contained_elements_operator = "returns true if the node with index i should be split, false otherwise.
 
 Parameters
 ----------
@@ -709,11 +709,11 @@ tree : const Orthtree < GeomTraits > &
 Returns: bool";
 
 // CGAL::Orthtrees::Postorder_traversal
-constexpr const char* CGAL_Orthtrees_Postorder_traversal__class__ = "A class used for performing a postorder traversal.";
+constexpr const char* Orthtrees_Postorder_traversal__class__ = "A class used for performing a postorder traversal.";
 
 
 // CGAL::Orthtrees::Preorder_traversal
-constexpr const char* CGAL_Orthtrees_Preorder_traversal__class__ = "A class used for performing a preorder traversal.";
+constexpr const char* Orthtrees_Preorder_traversal__class__ = "A class used for performing a preorder traversal.";
 
 
 // CollectionPartitioningOrthtreeTraits

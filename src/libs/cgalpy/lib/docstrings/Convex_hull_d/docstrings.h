@@ -7,43 +7,43 @@ namespace cgalpy {
 namespace docstrings {
 namespace Convex_hull_d {
 
-constexpr const char* CGAL_Convex_hull_d_R = "the representation class.
+constexpr const char* Convex_hull_d_R = "the representation class.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Point_d = "the point type.
+constexpr const char* Convex_hull_d_Point_d = "the point type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Hyperplane_d = "the hyperplane type.
+constexpr const char* Convex_hull_d_Hyperplane_d = "the hyperplane type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Simplex_handle = "handle for simplices.
+constexpr const char* Convex_hull_d_Simplex_handle = "handle for simplices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Facet_handle = "handle for facets.
+constexpr const char* Convex_hull_d_Facet_handle = "handle for facets.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Vertex_handle = "handle for vertices.
+constexpr const char* Convex_hull_d_Vertex_handle = "handle for vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Simplex_iterator = "iterator for simplices.
+constexpr const char* Convex_hull_d_Simplex_iterator = "iterator for simplices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Facet_iterator = "iterator for facets.
+constexpr const char* Convex_hull_d_Facet_iterator = "iterator for facets.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Vertex_iterator = "iterator for vertices.
+constexpr const char* Convex_hull_d_Vertex_iterator = "iterator for vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Hull_vertex_iterator = "iterator for vertices that are part of the convex hull.
+constexpr const char* Convex_hull_d_Hull_vertex_iterator = "iterator for vertices that are part of the convex hull.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Point_const_iterator = "const iterator for all inserted points.
+constexpr const char* Convex_hull_d_Point_const_iterator = "const iterator for all inserted points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Hull_point_const_iterator = "const iterator for all points that are part of the convex hull.
+constexpr const char* Convex_hull_d_Hull_point_const_iterator = "const iterator for all points that are part of the convex hull.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_d_Convex_hull_d = "creates an instance C of type Convex_hull_d .
+constexpr const char* Convex_hull_d_Convex_hull_d = "creates an instance C of type Convex_hull_d .
 
 The dimension of the underlying space is $ d$ and S is initialized to the
 empty point set. The traits class R specifies the models of all types and the
@@ -55,20 +55,20 @@ Parameters
 ----------
 d : int
 Kernel : R";
-constexpr const char* CGAL_Convex_hull_d_dimension = "returns the dimension of ambient space.
+constexpr const char* Convex_hull_d_dimension = "returns the dimension of ambient space.
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_current_dimension = "returns the affine dimension dcur of $ S$ .
+constexpr const char* Convex_hull_d_current_dimension = "returns the affine dimension dcur of $ S$ .
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_associated_point = "returns the point associated with vertex $ v$ .
+constexpr const char* Convex_hull_d_associated_point = "returns the point associated with vertex $ v$ .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Point_d";
-constexpr const char* CGAL_Convex_hull_d_vertex_of_simplex = "returns the vertex corresponding to the $ i$ -th vertex of $ s$ .
+constexpr const char* Convex_hull_d_vertex_of_simplex = "returns the vertex corresponding to the $ i$ -th vertex of $ s$ .
 
 $ 0 \\leq i \\leq dcur$ .
 
@@ -78,7 +78,7 @@ s : Simplex_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Convex_hull_d_point_of_simplex = "same as C.associated_point(C.vertex_of_simplex(s,i)) .
+constexpr const char* Convex_hull_d_point_of_simplex = "same as C.associated_point(C.vertex_of_simplex(s,i)) .
 
 Parameters
 ----------
@@ -86,7 +86,7 @@ s : Simplex_handle
 i : int
 
 Returns: Point_d";
-constexpr const char* CGAL_Convex_hull_d_opposite_simplex = "returns the simplex opposite to the $ i$ -th vertex of $ s$ ( Simplex_handle() if there is no such simplex).
+constexpr const char* Convex_hull_d_opposite_simplex = "returns the simplex opposite to the $ i$ -th vertex of $ s$ ( Simplex_handle() if there is no such simplex).
 
 $ 0 \\leq i \\leq dcur$ .
 
@@ -96,7 +96,7 @@ s : Simplex_handle
 i : int
 
 Returns: Simplex_handle";
-constexpr const char* CGAL_Convex_hull_d_index_of_vertex_in_opposite_simplex = "returns the index of the vertex opposite to the $ i$ -th vertex of $ s$ .
+constexpr const char* Convex_hull_d_index_of_vertex_in_opposite_simplex = "returns the index of the vertex opposite to the $ i$ -th vertex of $ s$ .
 
 $ 0 \\leq i \\leq dcur$ and there is a simplex opposite to the $ i$ -th vertex
 of $ s$ .
@@ -107,7 +107,7 @@ s : Simplex_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_simplex = "returns a simplex of which $ v$ is a node.
+constexpr const char* Convex_hull_d_simplex = "returns a simplex of which $ v$ is a node.
 
 Note that this simplex is not unique.
 
@@ -116,14 +116,14 @@ Parameters
 v : Vertex_handle
 
 Returns: Simplex_handle";
-constexpr const char* CGAL_Convex_hull_d_index = "returns the index of $ v$ in simplex(v) .
+constexpr const char* Convex_hull_d_index = "returns the index of $ v$ in simplex(v) .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_vertex_of_facet = "returns the vertex corresponding to the $ i$ -th vertex of $ f$ .
+constexpr const char* Convex_hull_d_vertex_of_facet = "returns the vertex corresponding to the $ i$ -th vertex of $ f$ .
 
 $ 0 \\leq i < dcur$ .
 
@@ -133,7 +133,7 @@ f : Facet_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Convex_hull_d_point_of_facet = "same as C.associated_point(C.vertex_of_facet(f,i)) .
+constexpr const char* Convex_hull_d_point_of_facet = "same as C.associated_point(C.vertex_of_facet(f,i)) .
 
 Parameters
 ----------
@@ -141,7 +141,7 @@ f : Facet_handle
 i : int
 
 Returns: Point_d";
-constexpr const char* CGAL_Convex_hull_d_opposite_facet = "returns the facet opposite to the $ i$ -th vertex of $ f$ ( Facet_handle() if there is no such facet).
+constexpr const char* Convex_hull_d_opposite_facet = "returns the facet opposite to the $ i$ -th vertex of $ f$ ( Facet_handle() if there is no such facet).
 
 $ 0 \\leq i < dcur$ and dcur > 1 .
 
@@ -151,7 +151,7 @@ f : Facet_handle
 i : int
 
 Returns: Facet_handle";
-constexpr const char* CGAL_Convex_hull_d_index_of_vertex_in_opposite_facet = "returns the index of the vertex opposite to the $ i$ -th vertex of $ f$ .
+constexpr const char* Convex_hull_d_index_of_vertex_in_opposite_facet = "returns the index of the vertex opposite to the $ i$ -th vertex of $ f$ .
 
 $ 0 \\leq i < dcur$ and dcur > 1 .
 
@@ -161,7 +161,7 @@ f : Facet_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_hyperplane_supporting = "returns a hyperplane supporting facet f .
+constexpr const char* Convex_hull_d_hyperplane_supporting = "returns a hyperplane supporting facet f .
 
 The hyperplane is oriented such that the interior of C is on the negative side
 of it. f is a facet of C and dcur > 1 .
@@ -171,7 +171,7 @@ Parameters
 f : Facet_handle
 
 Returns: Hyperplane_d";
-constexpr const char* CGAL_Convex_hull_d_insert = "adds point x to the underlying set of points.
+constexpr const char* Convex_hull_d_insert = "adds point x to the underlying set of points.
 
 If $ x$ is equal to (the point associated with) a vertex of the current hull
 this vertex is returned and its associated point is changed to $ x$ . If $ x$
@@ -187,7 +187,7 @@ Parameters
 x : const Point_d &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Convex_hull_d_insert_1 = "adds S = set [first,last) to the underlying set of points.
+constexpr const char* Convex_hull_d_insert_1 = "adds S = set [first,last) to the underlying set of points.
 
 If any point S[i] is equal to (the point associated with) a vertex of the
 current hull its associated point is changed to S[i] .
@@ -196,14 +196,14 @@ Parameters
 ----------
 first : Forward_iterator
 last : Forward_iterator";
-constexpr const char* CGAL_Convex_hull_d_is_dimension_jump = "returns true if $ x$ is not contained in the affine hull of S .
+constexpr const char* Convex_hull_d_is_dimension_jump = "returns true if $ x$ is not contained in the affine hull of S .
 
 Parameters
 ----------
 x : const Point_d &
 
 Returns: bool";
-constexpr const char* CGAL_Convex_hull_d_facets_visible_from = "returns the list of all facets that are visible from x .
+constexpr const char* Convex_hull_d_facets_visible_from = "returns the list of all facets that are visible from x .
 
 x is contained in the affine hull of S .
 
@@ -212,7 +212,7 @@ Parameters
 x : const Point_d &
 
 Returns: std::list< Facet_handle >";
-constexpr const char* CGAL_Convex_hull_d_bounded_side = "returns ON_BOUNDED_SIDE ( ON_BOUNDARY , ON_UNBOUNDED_SIDE ) if x is contained in the interior (lies on the boundary, is contained in the exterior) of C .
+constexpr const char* Convex_hull_d_bounded_side = "returns ON_BOUNDED_SIDE ( ON_BOUNDARY , ON_UNBOUNDED_SIDE ) if x is contained in the interior (lies on the boundary, is contained in the exterior) of C .
 
 x is contained in the affine hull of S .
 
@@ -221,22 +221,22 @@ Parameters
 x : const Point_d &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Convex_hull_d_clear = "re-initializes C to an empty hull in $ d$ -dimensional space.
+constexpr const char* Convex_hull_d_clear = "re-initializes C to an empty hull in $ d$ -dimensional space.
 
 Parameters
 ----------
 d : int";
-constexpr const char* CGAL_Convex_hull_d_number_of_vertices = "returns the number of vertices of C .
+constexpr const char* Convex_hull_d_number_of_vertices = "returns the number of vertices of C .
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_number_of_facets = "returns the number of facets of C .
+constexpr const char* Convex_hull_d_number_of_facets = "returns the number of facets of C .
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_number_of_simplices = "returns the number of bounded simplices of C .
+constexpr const char* Convex_hull_d_number_of_simplices = "returns the number of bounded simplices of C .
 
 Returns: int";
-constexpr const char* CGAL_Convex_hull_d_print_statistics = "gives information about the size of the current hull and the number of visibility tests performed.";
-constexpr const char* CGAL_Convex_hull_d_is_valid = "checks the validity of the data structure.
+constexpr const char* Convex_hull_d_print_statistics = "gives information about the size of the current hull and the number of visibility tests performed.";
+constexpr const char* Convex_hull_d_is_valid = "checks the validity of the data structure.
 
 If throw_exceptions == true then the program throws the following exceptions
 to inform about the problem. chull_has_center_on_wrong_side_of_hull_facet the
@@ -249,64 +249,64 @@ Parameters
 throw_exceptions : bool
 
 Returns: bool";
-constexpr const char* CGAL_Convex_hull_d_vertices_begin = "an iterator of C to start the iteration over all vertices of the complex.
+constexpr const char* Convex_hull_d_vertices_begin = "an iterator of C to start the iteration over all vertices of the complex.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Convex_hull_d_vertices_end = "the past the end iterator for vertices.
+constexpr const char* Convex_hull_d_vertices_end = "the past the end iterator for vertices.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Convex_hull_d_simplices_begin = "an iterator of C to start the iteration over all simplices of the complex.
+constexpr const char* Convex_hull_d_simplices_begin = "an iterator of C to start the iteration over all simplices of the complex.
 
 Returns: Simplex_iterator";
-constexpr const char* CGAL_Convex_hull_d_simplices_end = "the past the end iterator for simplices.
+constexpr const char* Convex_hull_d_simplices_end = "the past the end iterator for simplices.
 
 Returns: Simplex_iterator";
-constexpr const char* CGAL_Convex_hull_d_facets_begin = "an iterator of C to start the iteration over all facets of the complex.
+constexpr const char* Convex_hull_d_facets_begin = "an iterator of C to start the iteration over all facets of the complex.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Convex_hull_d_facets_end = "the past the end iterator for facets.
+constexpr const char* Convex_hull_d_facets_end = "the past the end iterator for facets.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Convex_hull_d_hull_vertices_begin = "an iterator to start the iteration over all vertices of C that are part of the convex hull.
+constexpr const char* Convex_hull_d_hull_vertices_begin = "an iterator to start the iteration over all vertices of C that are part of the convex hull.
 
 Returns: Hull_vertex_iterator";
-constexpr const char* CGAL_Convex_hull_d_hull_vertices_end = "the past the end iterator for hull vertices.
+constexpr const char* Convex_hull_d_hull_vertices_end = "the past the end iterator for hull vertices.
 
 Returns: Hull_vertex_iterator";
-constexpr const char* CGAL_Convex_hull_d_points_begin = "returns the start iterator for all points that have been inserted to construct C .
+constexpr const char* Convex_hull_d_points_begin = "returns the start iterator for all points that have been inserted to construct C .
 
 Returns: Point_const_iterator";
-constexpr const char* CGAL_Convex_hull_d_points_end = "returns the past the end iterator for points.
+constexpr const char* Convex_hull_d_points_end = "returns the past the end iterator for points.
 
 Returns: Point_const_iterator";
-constexpr const char* CGAL_Convex_hull_d_hull_points_begin = "returns an iterator to start the iteration over all points in the convex hull C .
+constexpr const char* Convex_hull_d_hull_points_begin = "returns an iterator to start the iteration over all points in the convex hull C .
 
 Included are points in the interior of facets.
 
 Returns: Hull_point_const_iterator";
-constexpr const char* CGAL_Convex_hull_d_hull_points_end = "returns the past the end iterator for points in the convex hull.
+constexpr const char* Convex_hull_d_hull_points_end = "returns the past the end iterator for points in the convex hull.
 
 Returns: Hull_point_const_iterator";
-constexpr const char* CGAL_Convex_hull_d_visit_all_facets = "each facet of C is visited by the visitor object V .
+constexpr const char* Convex_hull_d_visit_all_facets = "each facet of C is visited by the visitor object V .
 
 V has to have a function call operator: void operator()(Facet_handle) const
 
 Parameters
 ----------
 V : const Visitor &";
-constexpr const char* CGAL_Convex_hull_d_all_points = "returns a list of all points that have been inserted to construct C .
+constexpr const char* Convex_hull_d_all_points = "returns a list of all points that have been inserted to construct C .
 
 Returns: const std::list< Point_d > &";
-constexpr const char* CGAL_Convex_hull_d_all_vertices = "returns a list of all vertices of C (also interior ones).
+constexpr const char* Convex_hull_d_all_vertices = "returns a list of all vertices of C (also interior ones).
 
 Returns: std::list< Vertex_handle >";
-constexpr const char* CGAL_Convex_hull_d_all_simplices = "returns a list of all simplices in C .
+constexpr const char* Convex_hull_d_all_simplices = "returns a list of all simplices in C .
 
 Returns: std::list< Simplex_handle >";
-constexpr const char* CGAL_Convex_hull_d_all_facets = "returns a list of all facets of C .
+constexpr const char* Convex_hull_d_all_facets = "returns a list of all facets of C .
 
 Returns: std::list< Facet_handle >";
-constexpr const char* CGAL_Convex_hull_d_convex_hull_d_to_polyhedron_3 = "
+constexpr const char* Convex_hull_d_convex_hull_d_to_polyhedron_3 = "
 Deprecated This package is deprecated since the version 4.6 of CGAL. The
 package PkgTriangulations should be used instead. converts the convex hull C
 to polyhedral surface stored in P . dim == 3 and dcur == 3 .
@@ -315,7 +315,7 @@ Parameters
 ----------
 C : const Convex_hull_d < R > &
 P : Polyhedron_3< T, HDS > &";
-constexpr const char* CGAL_Convex_hull_d_d3_surface_map = "
+constexpr const char* Convex_hull_d_d3_surface_map = "
 Deprecated This package is deprecated since the version 4.6 of CGAL. The
 package PkgTriangulations should be used instead constructs the representation
 of the surface of C as a bidirected LEDA graph G . dim == 3 .
@@ -325,31 +325,31 @@ Parameters
 C : const Convex_hull_d < R > &
 G : GRAPH< typename Convex_hull_d < R > ::Point_d , int > &";
 
-constexpr const char* CGAL_Convex_hull_d_traits_3_Convex_hull_d_traits_3 = "default constructor.";
+constexpr const char* Convex_hull_d_traits_3_Convex_hull_d_traits_3 = "default constructor.";
 
-constexpr const char* CGAL_Delaunay_d_Delaunay_voronoi_kind = "interface flags";
-constexpr const char* CGAL_Delaunay_d_Simplex_handle = "handles to the simplices of the complex.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Vertex_handle = "handles to vertices of the complex.
+constexpr const char* Delaunay_d_Delaunay_voronoi_kind = "interface flags";
+constexpr const char* Delaunay_d_Simplex_handle = "handles to the simplices of the complex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Point_d = "the point type
+constexpr const char* Delaunay_d_Vertex_handle = "handles to vertices of the complex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Sphere_d = "the sphere type
+constexpr const char* Delaunay_d_Point_d = "the point type
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Point_const_iterator = "the iterator for points.
+constexpr const char* Delaunay_d_Sphere_d = "the sphere type
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Vertex_iterator = "the iterator for vertices.
+constexpr const char* Delaunay_d_Point_const_iterator = "the iterator for points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Simplex_iterator = "the iterator for simplices.
+constexpr const char* Delaunay_d_Vertex_iterator = "the iterator for vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_d_Delaunay_d = "creates an instance DT of type Delaunay_d .
+constexpr const char* Delaunay_d_Simplex_iterator = "the iterator for simplices.
+
+Returns: unspecified_type";
+constexpr const char* Delaunay_d_Delaunay_d = "creates an instance DT of type Delaunay_d .
 
 The dimension of the underlying space is d and S is initialized to the empty
 point set. The traits class R specifies the models of all types and the
@@ -364,27 +364,27 @@ Parameters
 d : int
 k1 : R
 k2 : Lifted_R";
-constexpr const char* CGAL_Delaunay_d_dimension = "returns the dimension of ambient space.
+constexpr const char* Delaunay_d_dimension = "returns the dimension of ambient space.
 
 Returns: int";
-constexpr const char* CGAL_Delaunay_d_current_dimension = "returns the affine dimension of the current point set, i.e., -1 is $ S$ is empty, 0 if $ S$ consists of a single point, 1 if all points of $ S$ lie on a common line, etc.
+constexpr const char* Delaunay_d_current_dimension = "returns the affine dimension of the current point set, i.e., -1 is $ S$ is empty, 0 if $ S$ consists of a single point, 1 if all points of $ S$ lie on a common line, etc.
 
 Returns: int";
-constexpr const char* CGAL_Delaunay_d_is_simplex_of_nearest = "returns true if s is a simplex of the nearest site triangulation.
+constexpr const char* Delaunay_d_is_simplex_of_nearest = "returns true if s is a simplex of the nearest site triangulation.
 
 Parameters
 ----------
 s : Simplex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_d_is_simplex_of_furthest = "returns true if s is a simplex of the furthest site triangulation.
+constexpr const char* Delaunay_d_is_simplex_of_furthest = "returns true if s is a simplex of the furthest site triangulation.
 
 Parameters
 ----------
 s : Simplex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_d_vertex_of_simplex = "returns the vertex associated with the i -th node of s .
+constexpr const char* Delaunay_d_vertex_of_simplex = "returns the vertex associated with the i -th node of s .
 
 0 <= i <= dcur .
 
@@ -394,14 +394,14 @@ s : Simplex_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_d_associated_point = "returns the point associated with vertex v .
+constexpr const char* Delaunay_d_associated_point = "returns the point associated with vertex v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Point_d";
-constexpr const char* CGAL_Delaunay_d_point_of_simplex = "returns the point associated with the i -th vertex of s .
+constexpr const char* Delaunay_d_point_of_simplex = "returns the point associated with the i -th vertex of s .
 
 0 <= i <= dcur .
 
@@ -411,7 +411,7 @@ s : Simplex_handle
 i : int
 
 Returns: Point_d";
-constexpr const char* CGAL_Delaunay_d_opposite_simplex = "returns the simplex opposite to the i -th vertex of s ( Simplex_handle() if there is no such simplex).
+constexpr const char* Delaunay_d_opposite_simplex = "returns the simplex opposite to the i -th vertex of s ( Simplex_handle() if there is no such simplex).
 
 0 <= i <= dcur .
 
@@ -421,7 +421,7 @@ s : Simplex_handle
 i : int
 
 Returns: Simplex_handle";
-constexpr const char* CGAL_Delaunay_d_index_of_vertex_in_opposite_simplex = "returns the index of the vertex opposite to the i -th vertex of s .
+constexpr const char* Delaunay_d_index_of_vertex_in_opposite_simplex = "returns the index of the vertex opposite to the i -th vertex of s .
 
 0 <= i <= dcur .
 
@@ -431,21 +431,21 @@ s : Simplex_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Delaunay_d_simplex = "returns a simplex of the nearest site triangulation incident to v .
+constexpr const char* Delaunay_d_simplex = "returns a simplex of the nearest site triangulation incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Simplex_handle";
-constexpr const char* CGAL_Delaunay_d_index = "returns the index of v in DT.simplex(v) .
+constexpr const char* Delaunay_d_index = "returns the index of v in DT.simplex(v) .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: int";
-constexpr const char* CGAL_Delaunay_d_contains = "returns true if x is contained in the closure of simplex s .
+constexpr const char* Delaunay_d_contains = "returns true if x is contained in the closure of simplex s .
 
 Parameters
 ----------
@@ -453,11 +453,11 @@ s : Simplex_handle
 x : const Point_d &
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_d_empty = "decides whether DT is empty.
+constexpr const char* Delaunay_d_empty = "decides whether DT is empty.
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_d_clear = "re-initializes DT to the empty Delaunay triangulation.";
-constexpr const char* CGAL_Delaunay_d_insert = "inserts point x into DT and returns the corresponding Vertex_handle .
+constexpr const char* Delaunay_d_clear = "re-initializes DT to the empty Delaunay triangulation.";
+constexpr const char* Delaunay_d_insert = "inserts point x into DT and returns the corresponding Vertex_handle .
 
 More precisely, if there is already a vertex v in DT positioned at x (i.e.,
 associated_point(v) is equal to x ) then associated_point(v) is changed to x
@@ -470,35 +470,35 @@ Parameters
 x : const Point_d &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_d_locate = "returns a simplex of the nearest site triangulation containing x in its closure (returns Simplex_handle() if x lies outside the convex hull of $ S$ ).
+constexpr const char* Delaunay_d_locate = "returns a simplex of the nearest site triangulation containing x in its closure (returns Simplex_handle() if x lies outside the convex hull of $ S$ ).
 
 Parameters
 ----------
 x : const Point_d &
 
 Returns: Simplex_handle";
-constexpr const char* CGAL_Delaunay_d_lookup = "if DT contains a vertex v with associated_point(v) = x the result is v otherwise the result is Vertex_handle() .
+constexpr const char* Delaunay_d_lookup = "if DT contains a vertex v with associated_point(v) = x the result is v otherwise the result is Vertex_handle() .
 
 Parameters
 ----------
 x : const Point_d &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_d_nearest_neighbor = "computes a vertex v of DT that is closest to x , i.e., dist(x,associated_point(v)) = min{dist(x, associated_point(u) | u $\\in S$ } .
+constexpr const char* Delaunay_d_nearest_neighbor = "computes a vertex v of DT that is closest to x , i.e., dist(x,associated_point(v)) = min{dist(x, associated_point(u) | u $\\in S$ } .
 
 Parameters
 ----------
 x : const Point_d &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_d_range_search = "returns the list of all vertices contained in the closure of sphere $ C$ .
+constexpr const char* Delaunay_d_range_search = "returns the list of all vertices contained in the closure of sphere $ C$ .
 
 Parameters
 ----------
 C : const Sphere_d &
 
 Returns: std::list< Vertex_handle >";
-constexpr const char* CGAL_Delaunay_d_range_search_1 = "returns the list of all vertices contained in the closure of the simplex whose corners are given by A .
+constexpr const char* Delaunay_d_range_search_1 = "returns the list of all vertices contained in the closure of the simplex whose corners are given by A .
 
 A must consist of d+1 affinely independent points in base space.
 
@@ -507,40 +507,40 @@ Parameters
 A : const std::vector< Point_d > &
 
 Returns: std::list< Vertex_handle >";
-constexpr const char* CGAL_Delaunay_d_all_simplices = "returns a list of all simplices of either the nearest or the furthest site Delaunay triangulation of S .
+constexpr const char* Delaunay_d_all_simplices = "returns a list of all simplices of either the nearest or the furthest site Delaunay triangulation of S .
 
 Parameters
 ----------
 k : Delaunay_voronoi_kind
 
 Returns: std::list< Simplex_handle >";
-constexpr const char* CGAL_Delaunay_d_all_vertices = "returns a list of all vertices of either the nearest or the furthest site Delaunay triangulation of S .
+constexpr const char* Delaunay_d_all_vertices = "returns a list of all vertices of either the nearest or the furthest site Delaunay triangulation of S .
 
 Parameters
 ----------
 k : Delaunay_voronoi_kind
 
 Returns: std::list< Vertex_handle >";
-constexpr const char* CGAL_Delaunay_d_all_points = "returns $ S$ .
+constexpr const char* Delaunay_d_all_points = "returns $ S$ .
 
 Returns: std::list< Point_d >";
-constexpr const char* CGAL_Delaunay_d_points_begin = "returns the start iterator for points in DT .
+constexpr const char* Delaunay_d_points_begin = "returns the start iterator for points in DT .
 
 Returns: Point_const_iterator";
-constexpr const char* CGAL_Delaunay_d_points_end = "returns the past the end iterator for points in DT .
+constexpr const char* Delaunay_d_points_end = "returns the past the end iterator for points in DT .
 
 Returns: Point_const_iterator";
-constexpr const char* CGAL_Delaunay_d_simplices_begin = "returns the start iterator for simplices of DT .
+constexpr const char* Delaunay_d_simplices_begin = "returns the start iterator for simplices of DT .
 
 Parameters
 ----------
 k : Delaunay_voronoi_kind
 
 Returns: Simplex_iterator";
-constexpr const char* CGAL_Delaunay_d_simplices_end = "returns the past the end iterator for simplices of DT .
+constexpr const char* Delaunay_d_simplices_end = "returns the past the end iterator for simplices of DT .
 
 Returns: Simplex_iterator";
-constexpr const char* CGAL_Delaunay_d_d2_map = "constructs a LEDA graph representation of the nearest ( kind = NEAREST or the furthest ( kind = FURTHEST ) site Delaunay triangulation.
+constexpr const char* Delaunay_d_d2_map = "constructs a LEDA graph representation of the nearest ( kind = NEAREST or the furthest ( kind = FURTHEST ) site Delaunay triangulation.
 
 dim() == 2 .
 
@@ -708,7 +708,7 @@ last) , which determines if the points in tuple[first,last) are affinely indepen
 Returns: unspecified_type";
 constexpr const char* DelaunayTraits_d_DelaunayTraits_d = "A default constructor and copy constructor is required.";
 
-constexpr const char* CGAL_Convex_hull_d_convex_hull_d_to_polyhedron_3_1 = "
+constexpr const char* Convex_hull_d_convex_hull_d_to_polyhedron_3_1 = "
 Deprecated This package is deprecated since the version 4.6 of CGAL. The
 package PkgTriangulations should be used instead. converts the convex hull C
 to polyhedral surface stored in P . dim == 3 and dcur == 3 .
@@ -717,7 +717,7 @@ Parameters
 ----------
 C : const Convex_hull_d < R > &
 P : Polyhedron_3< T, HDS > &";
-constexpr const char* CGAL_Convex_hull_d_d3_surface_map_1 = "
+constexpr const char* Convex_hull_d_d3_surface_map_1 = "
 Deprecated This package is deprecated since the version 4.6 of CGAL. The
 package PkgTriangulations should be used instead constructs the representation
 of the surface of C as a bidirected LEDA graph G . dim == 3 .
@@ -726,7 +726,7 @@ Parameters
 ----------
 C : const Convex_hull_d < R > &
 G : GRAPH< typename Convex_hull_d < R >::Point_d, int > &";
-constexpr const char* CGAL_Delaunay_d_d2_map_1 = "constructs a LEDA graph representation of the nearest ( kind = NEAREST or the furthest ( kind = FURTHEST ) site Delaunay triangulation.
+constexpr const char* Delaunay_d_d2_map_1 = "constructs a LEDA graph representation of the nearest ( kind = NEAREST or the furthest ( kind = FURTHEST ) site Delaunay triangulation.
 
 dim() == 2 .
 

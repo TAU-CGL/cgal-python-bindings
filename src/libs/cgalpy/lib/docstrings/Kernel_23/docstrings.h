@@ -8,20 +8,20 @@ namespace docstrings {
 namespace Kernel_23 {
 
 // CGAL::Aff_transformation_2
-constexpr const char* CGAL_Aff_transformation_2__class__ = "The class Aff_transformation_2 represents two-dimensional affine transformations.";
+constexpr const char* Aff_transformation_2__class__ = "The class Aff_transformation_2 represents two-dimensional affine transformations.";
 
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2 = "introduces an identity transformation.
+constexpr const char* Aff_transformation_2_Aff_transformation_2 = "introduces an identity transformation.
 
 Parameters
 ----------
  : const Identity_transformation &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_1 = "introduces a translation by a vector v .
+constexpr const char* Aff_transformation_2_Aff_transformation_2_1 = "introduces a translation by a vector v .
 
 Parameters
 ----------
  : const Translation
 v : const Vector_2 < Kernel > &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_2 = "approximates the rotation over the angle indicated by direction d , such that the differences between the sines and cosines of the rotation given by d and the approximating rotation are at most $ num/den$ each.
+constexpr const char* Aff_transformation_2_Aff_transformation_2_2 = "approximates the rotation over the angle indicated by direction d , such that the differences between the sines and cosines of the rotation given by d and the approximating rotation are at most $ num/den$ each.
 
 num/den > 0 and d != 0 .
 
@@ -31,7 +31,7 @@ Parameters
 d : const Direction_2 < Kernel > &
 num : const Kernel::RT &
 den : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_3 = "introduces a rotation by the angle rho .
+constexpr const char* Aff_transformation_2_Aff_transformation_2_3 = "introduces a rotation by the angle rho .
 
 sine_rho 2 + cosine_rho 2 == hw 2 .
 
@@ -41,20 +41,20 @@ Parameters
 sine_rho : const Kernel::RT &
 cosine_rho : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_4 = "introduces a scaling by a scale factor $ s/hw$ .
+constexpr const char* Aff_transformation_2_Aff_transformation_2_4 = "introduces a scaling by a scale factor $ s/hw$ .
 
 Parameters
 ----------
  : const Scaling
 s : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_5 = "introduces a reflection by a line l .
+constexpr const char* Aff_transformation_2_Aff_transformation_2_5 = "introduces a reflection by a line l .
 
 Parameters
 ----------
  : const Reflection
 l : const Line_2 < Kernel > &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_6 = "introduces a general affine transformation in the $3 \\times 3$ matrix form $\\small \\mbox{\\( \\left(\\begin{array}{ccc}
+constexpr const char* Aff_transformation_2_Aff_transformation_2_6 = "introduces a general affine transformation in the $3 \\times 3$ matrix form $\\small \\mbox{\\( \\left(\\begin{array}{ccc}
       m_{00} & m_{01} & m_{02}\\\\
       m_{10} & m_{11} & m_{12}\\\\
       0     &  0     & hw
@@ -76,7 +76,7 @@ m10 : const Kernel::RT &
 m11 : const Kernel::RT &
 m12 : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_2_Aff_transformation_2_7 = "introduces a general linear transformation $\\small \\mbox{\\(\\left(\\begin{array}{ccc}
+constexpr const char* Aff_transformation_2_Aff_transformation_2_7 = "introduces a general linear transformation $\\small \\mbox{\\(\\left(\\begin{array}{ccc}
                  m_{00} & m_{01} & 0\\\\
                  m_{10} & m_{11} & 0\\\\
                   0     &  0     & hw
@@ -89,42 +89,42 @@ m01 : const Kernel::RT &
 m10 : const Kernel::RT &
 m11 : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_2_operator = "composes two affine transformations.
+constexpr const char* Aff_transformation_2_operator = "composes two affine transformations.
 
 Parameters
 ----------
 s : const Aff_transformation_2 < Kernel > &
 
 Returns: Aff_transformation_2 < Kernel >";
-constexpr const char* CGAL_Aff_transformation_2_inverse = "gives the inverse transformation.
+constexpr const char* Aff_transformation_2_inverse = "gives the inverse transformation.
 
 Returns: Aff_transformation_2 < Kernel >";
-constexpr const char* CGAL_Aff_transformation_2_operator_1 = "compares two affine transformations.
+constexpr const char* Aff_transformation_2_operator_1 = "compares two affine transformations.
 
 Parameters
 ----------
 s : const Aff_transformation_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_is_even = "returns true , if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.
+constexpr const char* Aff_transformation_2_is_even = "returns true , if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_is_odd = "returns true , if the transformation is reflecting.
+constexpr const char* Aff_transformation_2_is_odd = "returns true , if the transformation is reflecting.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_is_scaling = "returns true , if the object was constructed using the tag CGAL::Scaling , or is the result of the composition of only such scaling transformation objects.
+constexpr const char* Aff_transformation_2_is_scaling = "returns true , if the object was constructed using the tag CGAL::Scaling , or is the result of the composition of only such scaling transformation objects.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_is_translation = "returns true , if the object was constructed using the tag CGAL::Translation , or is the result of the composition of only such translation transformation objects.
+constexpr const char* Aff_transformation_2_is_translation = "returns true , if the object was constructed using the tag CGAL::Translation , or is the result of the composition of only such translation transformation objects.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_is_rotation = "returns true , if the object was constructed using the tag CGAL::Rotation , or is the result of the composition of only such rotation transformation objects.
+constexpr const char* Aff_transformation_2_is_rotation = "returns true , if the object was constructed using the tag CGAL::Rotation , or is the result of the composition of only such rotation transformation objects.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_is_reflection = "returns true , if the object was constructed using the tag CGAL::Reflection , or is the result of the composition of only such reflection transformation objects.
+constexpr const char* Aff_transformation_2_is_reflection = "returns true , if the object was constructed using the tag CGAL::Reflection , or is the result of the composition of only such reflection transformation objects.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_2_m = "returns entry $ m_{ij}$ in a matrix representation in which $ m_{22}$ is 1.
+constexpr const char* Aff_transformation_2_m = "returns entry $ m_{ij}$ in a matrix representation in which $ m_{22}$ is 1.
 
 Parameters
 ----------
@@ -132,7 +132,7 @@ i : int
 j : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Aff_transformation_2_hm = "returns entry $ m_{ij}$ in some fixed matrix representation.
+constexpr const char* Aff_transformation_2_hm = "returns entry $ m_{ij}$ in some fixed matrix representation.
 
 Parameters
 ----------
@@ -142,27 +142,27 @@ j : int
 Returns: Kernel::RT";
 
 // CGAL::Aff_transformation_3
-constexpr const char* CGAL_Aff_transformation_3__class__ = "The class Aff_transformation_3 represents three-dimensional affine transformations.";
+constexpr const char* Aff_transformation_3__class__ = "The class Aff_transformation_3 represents three-dimensional affine transformations.";
 
-constexpr const char* CGAL_Aff_transformation_3_Aff_transformation_3 = "introduces an identity transformation.
+constexpr const char* Aff_transformation_3_Aff_transformation_3 = "introduces an identity transformation.
 
 Parameters
 ----------
  : const Identity_transformation &";
-constexpr const char* CGAL_Aff_transformation_3_Aff_transformation_3_1 = "introduces a translation by a vector v .
+constexpr const char* Aff_transformation_3_Aff_transformation_3_1 = "introduces a translation by a vector v .
 
 Parameters
 ----------
  : const Translation
 v : const Vector_3 < Kernel > &";
-constexpr const char* CGAL_Aff_transformation_3_Aff_transformation_3_2 = "introduces a scaling by a scale factor $ s/hw$ .
+constexpr const char* Aff_transformation_3_Aff_transformation_3_2 = "introduces a scaling by a scale factor $ s/hw$ .
 
 Parameters
 ----------
  : const Scaling
 s : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_3_Aff_transformation_3_3 = "introduces a general affine transformation of the matrix form $\\small \\mbox{\\(\\left(\\begin{array}{cccc}
+constexpr const char* Aff_transformation_3_Aff_transformation_3_3 = "introduces a general affine transformation of the matrix form $\\small \\mbox{\\(\\left(\\begin{array}{cccc}
                  m_{00} & m_{01} & m_{02} & m_{03}\\\\
                  m_{10} & m_{11} & m_{12} & m_{13}\\\\
                  m_{20} & m_{21} & m_{22} & m_{23}\\\\
@@ -192,7 +192,7 @@ m21 : const Kernel::RT &
 m22 : const Kernel::RT &
 m23 : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_3_Aff_transformation_3_4 = "introduces a general linear transformation of the matrix form $\\small \\mbox{\\(\\left(\\begin{array}{cccc}
+constexpr const char* Aff_transformation_3_Aff_transformation_3_4 = "introduces a general linear transformation of the matrix form $\\small \\mbox{\\(\\left(\\begin{array}{cccc}
                  m_{00} & m_{01} & m_{02} & 0\\\\
                  m_{10} & m_{11} & m_{12} & 0\\\\
                  m_{20} & m_{21} & m_{22} & 0\\\\
@@ -212,36 +212,36 @@ m20 : const Kernel::RT &
 m21 : const Kernel::RT &
 m22 : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Aff_transformation_3_operator = "composes two affine transformations.
+constexpr const char* Aff_transformation_3_operator = "composes two affine transformations.
 
 Parameters
 ----------
 s : const Aff_transformation_3 < Kernel > &
 
 Returns: Aff_transformation_3 < Kernel >";
-constexpr const char* CGAL_Aff_transformation_3_inverse = "gives the inverse transformation.
+constexpr const char* Aff_transformation_3_inverse = "gives the inverse transformation.
 
 Returns: Aff_transformation_3 < Kernel >";
-constexpr const char* CGAL_Aff_transformation_3_operator_1 = "compares two affine transformations.
+constexpr const char* Aff_transformation_3_operator_1 = "compares two affine transformations.
 
 Parameters
 ----------
 s : const Aff_transformation_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_3_is_even = "returns true , if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.
+constexpr const char* Aff_transformation_3_is_even = "returns true , if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_3_is_odd = "returns true , if the transformation is reflecting.
+constexpr const char* Aff_transformation_3_is_odd = "returns true , if the transformation is reflecting.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_3_is_scaling = "returns true , if the object was constructed using the tag CGAL::Scaling , or is the result of the composition of only such scaling transformation objects.
+constexpr const char* Aff_transformation_3_is_scaling = "returns true , if the object was constructed using the tag CGAL::Scaling , or is the result of the composition of only such scaling transformation objects.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_3_is_translation = "returns true , if the object was constructed using the tag CGAL::Translation , or is the result of the composition of only such translation transformation objects.
+constexpr const char* Aff_transformation_3_is_translation = "returns true , if the object was constructed using the tag CGAL::Translation , or is the result of the composition of only such translation transformation objects.
 
 Returns: bool";
-constexpr const char* CGAL_Aff_transformation_3_m = "returns entry $ m_{ij}$ in a matrix representation in which $ m_{33}$ is 1.
+constexpr const char* Aff_transformation_3_m = "returns entry $ m_{ij}$ in a matrix representation in which $ m_{33}$ is 1.
 
 Parameters
 ----------
@@ -249,7 +249,7 @@ i : int
 j : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Aff_transformation_3_hm = "returns entry $ m_{ij}$ in some fixed matrix representation.
+constexpr const char* Aff_transformation_3_hm = "returns entry $ m_{ij}$ in some fixed matrix representation.
 
 Parameters
 ----------
@@ -259,14 +259,14 @@ j : int
 Returns: Kernel::RT";
 
 // CGAL::Ambient_dimension
-constexpr const char* CGAL_Ambient_dimension__class__ = "The class Ambient_dimension allows to retrieve the dimension of the ambient space of a type T in a kernel K .";
+constexpr const char* Ambient_dimension__class__ = "The class Ambient_dimension allows to retrieve the dimension of the ambient space of a type T in a kernel K .";
 
-constexpr const char* CGAL_Ambient_dimension_type = "Either Dimension_tag <dim> if the dimension is a compile-time constant of value dim , or Dynamic_dimension_tag otherwise.
+constexpr const char* Ambient_dimension_type = "Either Dimension_tag <dim> if the dimension is a compile-time constant of value dim , or Dynamic_dimension_tag otherwise.
 
 It is implemented as K::Ambient_dimension<T>::type .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Ambient_dimension_value = "The dimension value as a compile-time integral constant.
+constexpr const char* Ambient_dimension_value = "The dimension value as a compile-time integral constant.
 
 It is implemented as K::Ambient_dimension<T>::type::value . It exists only
 when the dimension is a compile-time constant.
@@ -274,10 +274,10 @@ when the dimension is a compile-time constant.
 Returns: const int";
 
 // CGAL::Bbox_2
-constexpr const char* CGAL_Bbox_2__class__ = "An object b of the class Bbox_2 is a bounding box in the two-dimensional Euclidean plane $ \\E^2$ .";
+constexpr const char* Bbox_2__class__ = "An object b of the class Bbox_2 is a bounding box in the two-dimensional Euclidean plane $ \\E^2$ .";
 
-constexpr const char* CGAL_Bbox_2_Bbox_2 = "constructs an empty bounding box with lower left corner point at $ (\\infty, \\infty) $ and with upper right corner point at $ (-\\infty, -\\infty) $ , $ \\infty $ being std::numeric_limits<double>::infinity() .";
-constexpr const char* CGAL_Bbox_2_Bbox_2_1 = "constructs a bounding box b with lower left corner at ( xmin , ymin ) and with upper right corner at ( xmax , ymax ) .
+constexpr const char* Bbox_2_Bbox_2 = "constructs an empty bounding box with lower left corner point at $ (\\infty, \\infty) $ and with upper right corner point at $ (-\\infty, -\\infty) $ , $ \\infty $ being std::numeric_limits<double>::infinity() .";
+constexpr const char* Bbox_2_Bbox_2_1 = "constructs a bounding box b with lower left corner at ( xmin , ymin ) and with upper right corner at ( xmax , ymax ) .
 
 Parameters
 ----------
@@ -285,24 +285,24 @@ x_min : double
 y_min : double
 x_max : double
 y_max : double";
-constexpr const char* CGAL_Bbox_2_operator = "Test for equality.
+constexpr const char* Bbox_2_operator = "Test for equality.
 
 Parameters
 ----------
 c : const Bbox_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Bbox_2_operator_1 = "Test for inequality.
+constexpr const char* Bbox_2_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 q : const Bbox_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Bbox_2_dimension = "Returns 2.
+constexpr const char* Bbox_2_dimension = "Returns 2.
 
 Returns: int";
-constexpr const char* CGAL_Bbox_2_min = "Returns xmin() if i==0 or ymin() if i==1 .
+constexpr const char* Bbox_2_min = "Returns xmin() if i==0 or ymin() if i==1 .
 
 i==0 or i==1
 
@@ -311,7 +311,7 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Bbox_2_max = "Returns xmax() if i==0 or ymax() if i==1 .
+constexpr const char* Bbox_2_max = "Returns xmax() if i==0 or ymax() if i==1 .
 
 i==0 or i==1
 
@@ -320,33 +320,33 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Bbox_2_operator_2 = "returns a bounding box of b and c .
+constexpr const char* Bbox_2_operator_2 = "returns a bounding box of b and c .
 
 Parameters
 ----------
 c : const Bbox_2 &
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Bbox_2_operator_3 = "updates b to be the bounding box of b and c and returns itself.
+constexpr const char* Bbox_2_operator_3 = "updates b to be the bounding box of b and c and returns itself.
 
 Parameters
 ----------
 c : const Bbox_2 &
 
 Returns: Bbox_2 &";
-constexpr const char* CGAL_Bbox_2_dilate = "dilates the bounding box by a specified number of ULP.
+constexpr const char* Bbox_2_dilate = "dilates the bounding box by a specified number of ULP.
 
 Parameters
 ----------
 dist : int";
-constexpr const char* CGAL_Bbox_2_scale = "scales the bounding box by factor , while keeping its center fixed.
+constexpr const char* Bbox_2_scale = "scales the bounding box by factor , while keeping its center fixed.
 
 factor > 0
 
 Parameters
 ----------
 factor : double";
-constexpr const char* CGAL_Bbox_2_bbox_2 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_2_bbox_2 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Each object in the range must have a member function BBox_2 bbox() returning
 its bounding box.
@@ -357,7 +357,7 @@ begin : InputIterator
 past_end : InputIterator
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Bbox_2_bbox_2_1 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_2_bbox_2_1 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Traits must provide a functor Traits::Construct_bbox_2 having an operator
 returning the bounding box of each object in the range. Traits must also have
@@ -372,10 +372,10 @@ traits : const Traits &
 Returns: Bbox_2";
 
 // CGAL::Bbox_3
-constexpr const char* CGAL_Bbox_3__class__ = "An object b of the class Bbox_3 is a bounding box in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Bbox_3__class__ = "An object b of the class Bbox_3 is a bounding box in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Bbox_3_Bbox_3 = "constructs an empty bounding box with lower left corner point at $ (\\infty, \\infty, \\infty) $ and with upper right corner point at $ (-\\infty, -\\infty, -\\infty) $ , $ \\infty $ being std::numeric_limits<double>::infinity() .";
-constexpr const char* CGAL_Bbox_3_Bbox_3_1 = "constructs a bounding box b with lexicographically smallest corner point at ( xmin , ymin , zmin ) and lexicographically largest corner point at ( xmax , ymax , zmax ) .
+constexpr const char* Bbox_3_Bbox_3 = "constructs an empty bounding box with lower left corner point at $ (\\infty, \\infty, \\infty) $ and with upper right corner point at $ (-\\infty, -\\infty, -\\infty) $ , $ \\infty $ being std::numeric_limits<double>::infinity() .";
+constexpr const char* Bbox_3_Bbox_3_1 = "constructs a bounding box b with lexicographically smallest corner point at ( xmin , ymin , zmin ) and lexicographically largest corner point at ( xmax , ymax , zmax ) .
 
 Parameters
 ----------
@@ -385,24 +385,24 @@ z_min : double
 x_max : double
 y_max : double
 z_max : double";
-constexpr const char* CGAL_Bbox_3_operator = "Test for equality.
+constexpr const char* Bbox_3_operator = "Test for equality.
 
 Parameters
 ----------
 c : const Bbox_3 &
 
 Returns: bool";
-constexpr const char* CGAL_Bbox_3_operator_1 = "Test for inequality.
+constexpr const char* Bbox_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 q : const Bbox_3 &
 
 Returns: bool";
-constexpr const char* CGAL_Bbox_3_dimension = "Returns 3.
+constexpr const char* Bbox_3_dimension = "Returns 3.
 
 Returns: int";
-constexpr const char* CGAL_Bbox_3_min = "Returns xmin() if i==0 or ymin() if i==1 or zmin() if i==2 .
+constexpr const char* Bbox_3_min = "Returns xmin() if i==0 or ymin() if i==1 or zmin() if i==2 .
 
 i>=0 and i<=2
 
@@ -411,7 +411,7 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Bbox_3_max = "Returns xmax() if i==0 or ymax() if i==1 or zmax() if i==2 .
+constexpr const char* Bbox_3_max = "Returns xmax() if i==0 or ymax() if i==1 or zmax() if i==2 .
 
 i>=0 and i<=2
 
@@ -420,33 +420,33 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Bbox_3_operator_2 = "returns a bounding box of b and c .
+constexpr const char* Bbox_3_operator_2 = "returns a bounding box of b and c .
 
 Parameters
 ----------
 c : const Bbox_3 &
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Bbox_3_operator_3 = "updates b to be the bounding box of b and c and returns itself.
+constexpr const char* Bbox_3_operator_3 = "updates b to be the bounding box of b and c and returns itself.
 
 Parameters
 ----------
 c : const Bbox_3 &
 
 Returns: Bbox_3 &";
-constexpr const char* CGAL_Bbox_3_dilate = "dilates the bounding box by a specified number of ULP.
+constexpr const char* Bbox_3_dilate = "dilates the bounding box by a specified number of ULP.
 
 Parameters
 ----------
 dist : int";
-constexpr const char* CGAL_Bbox_3_scale = "scales the bounding box by factor , while keeping its center fixed.
+constexpr const char* Bbox_3_scale = "scales the bounding box by factor , while keeping its center fixed.
 
 factor > 0
 
 Parameters
 ----------
 factor : double";
-constexpr const char* CGAL_Bbox_3_bbox_3 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_3_bbox_3 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Each object in the range must have a member function BBox_3 bbox() returning
 its bounding box.
@@ -457,7 +457,7 @@ begin : InputIterator
 past_end : InputIterator
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Bbox_3_bbox_3_1 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_3_bbox_3_1 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Traits must provide a functor Traits::Construct_bbox_3 having an operator
 returning the bounding box of each object in the range. Traits must also have
@@ -472,14 +472,14 @@ traits : const Traits &
 Returns: Bbox_3";
 
 // CGAL::Cartesian
-constexpr const char* CGAL_Cartesian__class__ = "A model for Kernel that uses Cartesian coordinates to represent the geometric objects.";
+constexpr const char* Cartesian__class__ = "A model for Kernel that uses Cartesian coordinates to represent the geometric objects.";
 
 
 // CGAL::Cartesian_converter
-constexpr const char* CGAL_Cartesian_converter__class__ = "Cartesian_converter converts objects from the kernel traits K1 to the kernel traits K2 using NTConverter to do the conversion.";
+constexpr const char* Cartesian_converter__class__ = "Cartesian_converter converts objects from the kernel traits K1 to the kernel traits K2 using NTConverter to do the conversion.";
 
-constexpr const char* CGAL_Cartesian_converter_Cartesian_converter = "Default constructor.";
-constexpr const char* CGAL_Cartesian_converter_operator = "returns a K2::Point_2 whose coordinates are those of p , converted by NTConverter .
+constexpr const char* Cartesian_converter_Cartesian_converter = "Default constructor.";
+constexpr const char* Cartesian_converter_operator = "returns a K2::Point_2 whose coordinates are those of p , converted by NTConverter .
 
 Parameters
 ----------
@@ -488,9 +488,9 @@ p : const K1::Point_2 &
 Returns: K2::Point_2";
 
 // CGAL::Circle_2
-constexpr const char* CGAL_Circle_2__class__ = "An object c of type Circle_2 is a circle in the two-dimensional Euclidean plane $ \\E^2$ .";
+constexpr const char* Circle_2__class__ = "An object c of type Circle_2 is a circle in the two-dimensional Euclidean plane $ \\E^2$ .";
 
-constexpr const char* CGAL_Circle_2_Circle_2 = "introduces a variable c of type Circle_2 .
+constexpr const char* Circle_2_Circle_2 = "introduces a variable c of type Circle_2 .
 
 It is initialized to the circle with center center , squared radius
 squared_radius and orientation ori . ori != COLLINEAR and squared_radius >= 0
@@ -502,7 +502,7 @@ Parameters
 center : const Point_2 < Kernel > &
 squared_radius : const Kernel::FT &
 ori : const Orientation &";
-constexpr const char* CGAL_Circle_2_Circle_2_1 = "introduces a variable c of type Circle_2 .
+constexpr const char* Circle_2_Circle_2_1 = "introduces a variable c of type Circle_2 .
 
 It is initialized to the unique circle which passes through the points p , q
 and r . The orientation of the circle is the orientation of the point triple p
@@ -513,7 +513,7 @@ Parameters
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 r : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Circle_2_Circle_2_2 = "introduces a variable c of type Circle_2 .
+constexpr const char* Circle_2_Circle_2_2 = "introduces a variable c of type Circle_2 .
 
 It is initialized to the circle with diameter $ \\overline{pq}$ and orientation
 ori . ori != COLLINEAR .
@@ -523,7 +523,7 @@ Parameters
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 ori : const Orientation &";
-constexpr const char* CGAL_Circle_2_Circle_2_3 = "introduces a variable c of type Circle_2 .
+constexpr const char* Circle_2_Circle_2_3 = "introduces a variable c of type Circle_2 .
 
 It is initialized to the circle with center center , squared radius zero and
 orientation ori . ori != COLLINEAR . c.is_degenerate() = true . Exactness This
@@ -534,62 +534,62 @@ Parameters
 ----------
 center : const Point_2 < Kernel > &
 ori : const Orientation &";
-constexpr const char* CGAL_Circle_2_center = "returns the center of c .
+constexpr const char* Circle_2_center = "returns the center of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Point_2 < Kernel > &";
-constexpr const char* CGAL_Circle_2_squared_radius = "returns the squared radius of c .
+constexpr const char* Circle_2_squared_radius = "returns the squared radius of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Kernel::FT &";
-constexpr const char* CGAL_Circle_2_orientation = "returns the orientation of c .
+constexpr const char* Circle_2_orientation = "returns the orientation of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Orientation";
-constexpr const char* CGAL_Circle_2_operator = "returns true , iff c and circle2 are equal, i.e. if they have the same center, same squared radius and same orientation.
+constexpr const char* Circle_2_operator = "returns true , iff c and circle2 are equal, i.e. if they have the same center, same squared radius and same orientation.
 
 Parameters
 ----------
 circle2 : const Circle_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circle_2_operator_1 = "returns true , iff c and circle2 are not equal.
+constexpr const char* Circle_2_operator_1 = "returns true , iff c and circle2 are not equal.
 
 Parameters
 ----------
 circle2 : const Circle_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circle_2_is_degenerate = "returns true , iff c is degenerate, i.e. if c has squared radius zero.
+constexpr const char* Circle_2_is_degenerate = "returns true , iff c is degenerate, i.e. if c has squared radius zero.
 
 Returns: bool";
-constexpr const char* CGAL_Circle_2_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of c , resp.
+constexpr const char* Circle_2_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of c , resp.
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Circle_2_bounded_side = "returns ON_BOUNDED_SIDE , ON_BOUNDARY , or ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of c , resp.
+constexpr const char* Circle_2_bounded_side = "returns ON_BOUNDED_SIDE , ON_BOUNDARY , or ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of c , resp.
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Circle_2_opposite = "returns the circle with the same center and squared radius as c but with opposite orientation.
+constexpr const char* Circle_2_opposite = "returns the circle with the same center and squared radius as c but with opposite orientation.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Circle_2 < Kernel >";
-constexpr const char* CGAL_Circle_2_orthogonal_transform = "returns the circle obtained by applying $ at$ on c .
+constexpr const char* Circle_2_orthogonal_transform = "returns the circle obtained by applying $ at$ on c .
 
 at is an orthogonal transformation.
 
@@ -598,14 +598,14 @@ Parameters
 at : Aff_transformation_2 < Kernel > const &
 
 Returns: Circle_2 < Kernel >";
-constexpr const char* CGAL_Circle_2_bbox = "returns a bounding box containing c .
+constexpr const char* Circle_2_bbox = "returns a bounding box containing c .
 
 Returns: Bbox_2";
 
 // CGAL::Circle_3
-constexpr const char* CGAL_Circle_3__class__ = "An object c of type Circle_3 is a circle in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Circle_3__class__ = "An object c of type Circle_3 is a circle in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Circle_3_Circle_3 = "introduces a variable c of type Circle_3 .
+constexpr const char* Circle_3_Circle_3 = "introduces a variable c of type Circle_3 .
 
 It is initialized to the circle of center center and squared radius sq_r in
 plane plane . center lies in plane and sq_r >= 0 . Exactness This construction
@@ -617,7 +617,7 @@ Parameters
 center : const Point_3 < Kernel > &
 sq_r : const Kernel::FT &
 plane : const Plane_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_Circle_3_1 = "introduces a variable c of type Circle_3 .
+constexpr const char* Circle_3_Circle_3_1 = "introduces a variable c of type Circle_3 .
 
 It is initialized to the circle of center center and squared radius sq_r in a
 plane normal to the vector n . sq_r >= 0 .
@@ -627,7 +627,7 @@ Parameters
 center : const Point_3 < Kernel > &
 sq_r : const Kernel::FT &
 n : const Vector_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_Circle_3_2 = "introduces a variable c of type Circle_3 .
+constexpr const char* Circle_3_Circle_3_2 = "introduces a variable c of type Circle_3 .
 
 It is initialized to the circle passing through the three points. The three
 points are not collinear.
@@ -637,7 +637,7 @@ Parameters
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 r : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_Circle_3_3 = "introduces a variable c of type Circle_3 .
+constexpr const char* Circle_3_Circle_3_3 = "introduces a variable c of type Circle_3 .
 
 It is initialized to the circle along which the two spheres intersect. The two
 spheres intersect along a circle.
@@ -646,7 +646,7 @@ Parameters
 ----------
 sphere1 : const Sphere_3 < Kernel > &
 sphere2 : const Sphere_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_Circle_3_4 = "introduces a variable c of type Circle_3 .
+constexpr const char* Circle_3_Circle_3_4 = "introduces a variable c of type Circle_3 .
 
 It is initialized to the circle along which the sphere and the plane
 intersect. The sphere and the plane intersect along a circle.
@@ -655,7 +655,7 @@ Parameters
 ----------
 sphere : const Sphere_3 < Kernel > &
 plane : const Plane_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_Circle_3_5 = "introduces a variable c of type Circle_3 .
+constexpr const char* Circle_3_Circle_3_5 = "introduces a variable c of type Circle_3 .
 
 It is initialized to the circle along which the sphere and the plane
 intersect. The sphere and the plane intersect along a circle.
@@ -664,46 +664,46 @@ Parameters
 ----------
 plane : const Plane_3 < Kernel > &
 sphere : const Sphere_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_center = "returns the center of c .
+constexpr const char* Circle_3_center = "returns the center of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Point_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_squared_radius = "returns the squared radius of c .
+constexpr const char* Circle_3_squared_radius = "returns the squared radius of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Kernel::FT &";
-constexpr const char* CGAL_Circle_3_supporting_plane = "returns the supporting plane of c .
+constexpr const char* Circle_3_supporting_plane = "returns the supporting plane of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Plane_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_diametral_sphere = "returns the diametral sphere of c .
+constexpr const char* Circle_3_diametral_sphere = "returns the diametral sphere of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Sphere_3 < Kernel > &";
-constexpr const char* CGAL_Circle_3_area_divided_by_pi = "returns the area of c , divided by $ \\pi$ .
+constexpr const char* Circle_3_area_divided_by_pi = "returns the area of c , divided by $ \\pi$ .
 
 Returns: Kernel::FT const &";
-constexpr const char* CGAL_Circle_3_approximate_area = "returns an approximation of the area of c .
+constexpr const char* Circle_3_approximate_area = "returns an approximation of the area of c .
 
 Returns: double";
-constexpr const char* CGAL_Circle_3_squared_length_divided_by_pi_square = "returns the squared length of c , divided by $ \\pi^2$ .
+constexpr const char* Circle_3_squared_length_divided_by_pi_square = "returns the squared length of c , divided by $ \\pi^2$ .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Circle_3_approximate_squared_length = "returns an approximation of the squared length (i.e. perimeter) of c .
+constexpr const char* Circle_3_approximate_squared_length = "returns an approximation of the squared length (i.e. perimeter) of c .
 
 Returns: double";
-constexpr const char* CGAL_Circle_3_bbox = "returns a bounding box containing c .
+constexpr const char* Circle_3_bbox = "returns a bounding box containing c .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Circle_3_operator = "returns true , iff c1 and c2 are equal, i.e. if they have the same center, the same squared radius and the same supporting plane.
+constexpr const char* Circle_3_operator = "returns true , iff c1 and c2 are equal, i.e. if they have the same center, the same squared radius and the same supporting plane.
 
 Parameters
 ----------
@@ -713,16 +713,16 @@ c2 : Circle_3 < Kernel > const &
 Returns: bool";
 
 // CGAL::Dimension_tag
-constexpr const char* CGAL_Dimension_tag__class__ = "An object of the class Dimension_tag is an empty object which can be used for dispatching functions based on the dimension of an object, as provided by the dim parameter.";
+constexpr const char* Dimension_tag__class__ = "An object of the class Dimension_tag is an empty object which can be used for dispatching functions based on the dimension of an object, as provided by the dim parameter.";
 
-constexpr const char* CGAL_Dimension_tag_value = "The value of the dim parameter.
+constexpr const char* Dimension_tag_value = "The value of the dim parameter.
 
 Returns: const int";
 
 // CGAL::Direction_2
-constexpr const char* CGAL_Direction_2__class__ = "An object d of the class Direction_2 is a vector in the two-dimensional vector space $ \\mathbb{R}^2$ where we forget about its length.";
+constexpr const char* Direction_2__class__ = "An object d of the class Direction_2 is a vector in the two-dimensional vector space $ \\mathbb{R}^2$ where we forget about its length.";
 
-constexpr const char* CGAL_Direction_2_Direction_2 = "introduces the direction d of vector v .
+constexpr const char* Direction_2_Direction_2 = "introduces the direction d of vector v .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -730,22 +730,22 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 v : const Vector_2 < Kernel > &";
-constexpr const char* CGAL_Direction_2_Direction_2_1 = "introduces the direction d of line l .
+constexpr const char* Direction_2_Direction_2_1 = "introduces the direction d of line l .
 
 Parameters
 ----------
 l : const Line_2 < Kernel > &";
-constexpr const char* CGAL_Direction_2_Direction_2_2 = "introduces the direction d of ray r .
+constexpr const char* Direction_2_Direction_2_2 = "introduces the direction d of ray r .
 
 Parameters
 ----------
 r : const Ray_2 < Kernel > &";
-constexpr const char* CGAL_Direction_2_Direction_2_3 = "introduces the direction d of segment s .
+constexpr const char* Direction_2_Direction_2_3 = "introduces the direction d of segment s .
 
 Parameters
 ----------
 s : const Segment_2 < Kernel > &";
-constexpr const char* CGAL_Direction_2_Direction_2_4 = "introduces a direction d passing through the origin and the point with Cartesian coordinates $ (x, y)$ .
+constexpr const char* Direction_2_Direction_2_4 = "introduces a direction d passing through the origin and the point with Cartesian coordinates $ (x, y)$ .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -754,7 +754,7 @@ Parameters
 ----------
 x : const Kernel::RT &
 y : const Kernel::RT &";
-constexpr const char* CGAL_Direction_2_delta = "returns values, such that d == Direction_2 < Kernel >(delta(0),delta(1)) .
+constexpr const char* Direction_2_delta = "returns values, such that d == Direction_2 < Kernel >(delta(0),delta(1)) .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -764,19 +764,19 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_2_dx = "returns delta(0) .
+constexpr const char* Direction_2_dx = "returns delta(0) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_2_dy = "returns delta(1) .
+constexpr const char* Direction_2_dy = "returns delta(1) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_2_counterclockwise_in_between = "returns true, iff d is not equal to d1 , and while rotating counterclockwise starting at d1 , d is reached strictly before d2 is reached.
+constexpr const char* Direction_2_counterclockwise_in_between = "returns true, iff d is not equal to d1 , and while rotating counterclockwise starting at d1 , d is reached strictly before d2 is reached.
 
 Note that true is returned if d1 == d2 , unless also d == d1 .
 
@@ -786,13 +786,13 @@ d1 : const Direction_2 < Kernel > &
 d2 : const Direction_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Direction_2_operator = "The direction opposite to d .
+constexpr const char* Direction_2_operator = "The direction opposite to d .
 
 Returns: Direction_2 < Kernel >";
-constexpr const char* CGAL_Direction_2_vector = "returns a vector that has the same direction as d .
+constexpr const char* Direction_2_vector = "returns a vector that has the same direction as d .
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Direction_2_transform = "returns the direction obtained by applying t on d .
+constexpr const char* Direction_2_transform = "returns the direction obtained by applying t on d .
 
 Parameters
 ----------
@@ -801,9 +801,9 @@ t : const Aff_transformation_2 < Kernel > &
 Returns: Direction_2 < Kernel >";
 
 // CGAL::Direction_3
-constexpr const char* CGAL_Direction_3__class__ = "An object of the class Direction_3 is a vector in the three-dimensional vector space $ \\mathbb{R}^3$ where we forget about their length.";
+constexpr const char* Direction_3__class__ = "An object of the class Direction_3 is a vector in the three-dimensional vector space $ \\mathbb{R}^3$ where we forget about their length.";
 
-constexpr const char* CGAL_Direction_3_Direction_3 = "introduces a direction d initialized with the direction of vector v .
+constexpr const char* Direction_3_Direction_3 = "introduces a direction d initialized with the direction of vector v .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -811,22 +811,22 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 v : const Vector_3 < Kernel > &";
-constexpr const char* CGAL_Direction_3_Direction_3_1 = "introduces the direction d of line l .
+constexpr const char* Direction_3_Direction_3_1 = "introduces the direction d of line l .
 
 Parameters
 ----------
 l : const Line_3 < Kernel > &";
-constexpr const char* CGAL_Direction_3_Direction_3_2 = "introduces the direction d of ray r .
+constexpr const char* Direction_3_Direction_3_2 = "introduces the direction d of ray r .
 
 Parameters
 ----------
 r : const Ray_3 < Kernel > &";
-constexpr const char* CGAL_Direction_3_Direction_3_3 = "introduces the direction d of segment s .
+constexpr const char* Direction_3_Direction_3_3 = "introduces the direction d of segment s .
 
 Parameters
 ----------
 s : const Segment_3 < Kernel > &";
-constexpr const char* CGAL_Direction_3_Direction_3_4 = "introduces a direction d initialized with the direction from the origin to the point with Cartesian coordinates $ (x, y, z)$ .
+constexpr const char* Direction_3_Direction_3_4 = "introduces a direction d initialized with the direction from the origin to the point with Cartesian coordinates $ (x, y, z)$ .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -836,7 +836,7 @@ Parameters
 x : const Kernel::RT &
 y : const Kernel::RT &
 z : const Kernel::RT &";
-constexpr const char* CGAL_Direction_3_delta = "returns values, such that d == Direction_3 < Kernel >(delta(0),delta(1),delta(2)) .
+constexpr const char* Direction_3_delta = "returns values, such that d == Direction_3 < Kernel >(delta(0),delta(1),delta(2)) .
 
 0 <= i <= 2 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -846,51 +846,51 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_3_dx = "returns delta(0) .
+constexpr const char* Direction_3_dx = "returns delta(0) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_3_dy = "returns delta(1) .
+constexpr const char* Direction_3_dy = "returns delta(1) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_3_dz = "returns delta(2) .
+constexpr const char* Direction_3_dz = "returns delta(2) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Direction_3_operator = "Test for equality.
+constexpr const char* Direction_3_operator = "Test for equality.
 
 Parameters
 ----------
 e : const Direction_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Direction_3_operator_1 = "Test for inequality.
+constexpr const char* Direction_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 e : const Direction_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Direction_3_operator_2 = "The direction opposite to d .
+constexpr const char* Direction_3_operator_2 = "The direction opposite to d .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Direction_3 < Kernel >";
-constexpr const char* CGAL_Direction_3_vector = "returns a vector that has the same direction as d .
+constexpr const char* Direction_3_vector = "returns a vector that has the same direction as d .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Direction_3_transform = "returns the direction obtained by applying t on d .
+constexpr const char* Direction_3_transform = "returns the direction obtained by applying t on d .
 
 Parameters
 ----------
@@ -899,32 +899,32 @@ t : const Aff_transformation_3 < Kernel > &
 Returns: Direction_3 < Kernel >";
 
 // CGAL::Dynamic_dimension_tag
-constexpr const char* CGAL_Dynamic_dimension_tag__class__ = "An object of the class Dynamic_dimension_tag is an empty object which can be used for dispatching functions based on the dimension of an object.";
+constexpr const char* Dynamic_dimension_tag__class__ = "An object of the class Dynamic_dimension_tag is an empty object which can be used for dispatching functions based on the dimension of an object.";
 
 // CGAL::Exact_predicates_exact_constructions_kernel
-constexpr const char* CGAL_Exact_predicates_exact_constructions_kernel__class__ = "A typedef to a kernel which has the following properties:";
+constexpr const char* Exact_predicates_exact_constructions_kernel__class__ = "A typedef to a kernel which has the following properties:";
 
 // CGAL::Exact_predicates_exact_constructions_kernel_with_kth_root
-constexpr const char* CGAL_Exact_predicates_exact_constructions_kernel_with_kth_root__class__ = "A typedef to a kernel which has the following properties:";
+constexpr const char* Exact_predicates_exact_constructions_kernel_with_kth_root__class__ = "A typedef to a kernel which has the following properties:";
 
 // CGAL::Exact_predicates_exact_constructions_kernel_with_root_of
-constexpr const char* CGAL_Exact_predicates_exact_constructions_kernel_with_root_of__class__ = "A typedef to a kernel which has the following properties:";
+constexpr const char* Exact_predicates_exact_constructions_kernel_with_root_of__class__ = "A typedef to a kernel which has the following properties:";
 
 // CGAL::Exact_predicates_exact_constructions_kernel_with_sqrt
-constexpr const char* CGAL_Exact_predicates_exact_constructions_kernel_with_sqrt__class__ = "A typedef to a kernel which has the following properties:";
+constexpr const char* Exact_predicates_exact_constructions_kernel_with_sqrt__class__ = "A typedef to a kernel which has the following properties:";
 
 // CGAL::Exact_predicates_inexact_constructions_kernel
-constexpr const char* CGAL_Exact_predicates_inexact_constructions_kernel__class__ = "A typedef to a kernel that has the following properties:";
+constexpr const char* Exact_predicates_inexact_constructions_kernel__class__ = "A typedef to a kernel that has the following properties:";
 
 // CGAL::Feature_dimension
-constexpr const char* CGAL_Feature_dimension__class__ = "The class Feature_dimension allows to retrieve the geometric dimension of a type T in a kernel K .";
+constexpr const char* Feature_dimension__class__ = "The class Feature_dimension allows to retrieve the geometric dimension of a type T in a kernel K .";
 
-constexpr const char* CGAL_Feature_dimension_type = "Either Dimension_tag <dim> if the dimension is a compile-time constant of value dim , or Dynamic_dimension_tag otherwise.
+constexpr const char* Feature_dimension_type = "Either Dimension_tag <dim> if the dimension is a compile-time constant of value dim , or Dynamic_dimension_tag otherwise.
 
 It is implemented as K::Feature_dimension<T>::type .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Feature_dimension_value = "The dimension value as a compile-time integral constant.
+constexpr const char* Feature_dimension_value = "The dimension value as a compile-time integral constant.
 
 It is implemented as K::Feature_dimension<T>::type::value . It exists only
 when the dimension is a compile-time constant.
@@ -932,33 +932,33 @@ when the dimension is a compile-time constant.
 Returns: const int";
 
 // CGAL::Filtered_kernel
-constexpr const char* CGAL_Filtered_kernel__class__ = "Filtered_kernel is a kernel that uses a filtering technique based on interval arithmetic form to achieve exact and efficient predicates.";
+constexpr const char* Filtered_kernel__class__ = "Filtered_kernel is a kernel that uses a filtering technique based on interval arithmetic form to achieve exact and efficient predicates.";
 
-constexpr const char* CGAL_Filtered_kernel_Exact_kernel = "The type of the exact kernel.
+constexpr const char* Filtered_kernel_Exact_kernel = "The type of the exact kernel.
 
 Returns: EK";
-constexpr const char* CGAL_Filtered_kernel_Approximate_kernel = "The type of the approximate \"filtering\" kernel.
+constexpr const char* Filtered_kernel_Approximate_kernel = "The type of the approximate \"filtering\" kernel.
 
 Returns: FK";
-constexpr const char* CGAL_Filtered_kernel_Has_static_filters = "A Boolean value corresponding to the second template argument.
+constexpr const char* Filtered_kernel_Has_static_filters = "A Boolean value corresponding to the second template argument.
 
 Tells whether static filters are provided.
 
 Returns: const bool";
 
 // CGAL::Filtered_kernel_adaptor
-constexpr const char* CGAL_Filtered_kernel_adaptor__class__ = "Filtered_kernel_adaptor is a kernel that uses a filtering technique to obtain a kernel with exact and efficient predicate functors.";
+constexpr const char* Filtered_kernel_adaptor__class__ = "Filtered_kernel_adaptor is a kernel that uses a filtering technique to obtain a kernel with exact and efficient predicate functors.";
 
 // CGAL::Filtered_predicate
-constexpr const char* CGAL_Filtered_predicate__class__ = "Filtered_predicate is an adaptor for predicate function objects that allows one to produce efficient and exact predicates.";
+constexpr const char* Filtered_predicate__class__ = "Filtered_predicate is an adaptor for predicate function objects that allows one to produce efficient and exact predicates.";
 
-constexpr const char* CGAL_Filtered_predicate_result_type = "The return type of the function operators.
+constexpr const char* Filtered_predicate_result_type = "The return type of the function operators.
 
 It must also be the same type as EP::result_type .
 
 Returns: FP::result_type";
-constexpr const char* CGAL_Filtered_predicate_Filtered_predicate = "Default constructor.";
-constexpr const char* CGAL_Filtered_predicate_operator = "The function operator for predicates.
+constexpr const char* Filtered_predicate_Filtered_predicate = "Default constructor.";
+constexpr const char* Filtered_predicate_operator = "The function operator for predicates.
 
 Parameters
 ----------
@@ -967,14 +967,14 @@ a... : A
 Returns: result_type";
 
 // CGAL::Homogeneous
-constexpr const char* CGAL_Homogeneous__class__ = "A model for a Kernel using homogeneous coordinates to represent the geometric objects.";
+constexpr const char* Homogeneous__class__ = "A model for a Kernel using homogeneous coordinates to represent the geometric objects.";
 
 
 // CGAL::Homogeneous_converter
-constexpr const char* CGAL_Homogeneous_converter__class__ = "Homogeneous_converter converts objects from the kernel traits K1 to the kernel traits K2 .";
+constexpr const char* Homogeneous_converter__class__ = "Homogeneous_converter converts objects from the kernel traits K1 to the kernel traits K2 .";
 
-constexpr const char* CGAL_Homogeneous_converter_Homogeneous_converter = "Default constructor.";
-constexpr const char* CGAL_Homogeneous_converter_operator = "returns a K2::Point_2 which coordinates are those of p , converted by RTConverter .
+constexpr const char* Homogeneous_converter_Homogeneous_converter = "Default constructor.";
+constexpr const char* Homogeneous_converter_operator = "returns a K2::Point_2 which coordinates are those of p , converted by RTConverter .
 
 Parameters
 ----------
@@ -983,12 +983,12 @@ p : const K1::Point_2 &
 Returns: K2::Point_2";
 
 // CGAL::Identity_transformation
-constexpr const char* CGAL_Identity_transformation__class__ = "Tag class for affine transformations.";
+constexpr const char* Identity_transformation__class__ = "Tag class for affine transformations.";
 
 // CGAL::Iso_cuboid_3
-constexpr const char* CGAL_Iso_cuboid_3__class__ = "An object c of the data type Iso_cuboid_3 is a cuboid in the Euclidean space $ \\E^3$ with edges parallel to the $ x$ , $ y$ and $ z$ axis of the coordinate system.";
+constexpr const char* Iso_cuboid_3__class__ = "An object c of the data type Iso_cuboid_3 is a cuboid in the Euclidean space $ \\E^3$ with edges parallel to the $ x$ , $ y$ and $ z$ axis of the coordinate system.";
 
-constexpr const char* CGAL_Iso_cuboid_3_Iso_cuboid_3 = "introduces an iso-oriented cuboid c with diagonal opposite vertices p and q .
+constexpr const char* Iso_cuboid_3_Iso_cuboid_3 = "introduces an iso-oriented cuboid c with diagonal opposite vertices p and q .
 
 Note that the object is brought in the canonical form. Exactness This
 construction is trivial and therefore always exact in
@@ -998,7 +998,7 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Iso_cuboid_3_Iso_cuboid_3_1 = "introduces an iso-oriented cuboid c with diagonal opposite vertices p and q .
+constexpr const char* Iso_cuboid_3_Iso_cuboid_3_1 = "introduces an iso-oriented cuboid c with diagonal opposite vertices p and q .
 
 The int argument value is only used to distinguish the two overloaded
 functions. p.x()<=q.x() , p.y()<=q.y() and p.z()<=q.z() . Exactness This
@@ -1010,7 +1010,7 @@ Parameters
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
  : int";
-constexpr const char* CGAL_Iso_cuboid_3_Iso_cuboid_3_2 = "introduces an iso-oriented cuboid c whose minimal $ x$ coordinate is the one of left , the maximal $ x$ coordinate is the one of right , the minimal $ y$ coordinate is the one of bottom , the maximal $ y$ coordinate is the one of top , the minimal $ z$ coordinate is the one of far , the maximal $ z$ coordinate is the one of close .
+constexpr const char* Iso_cuboid_3_Iso_cuboid_3_2 = "introduces an iso-oriented cuboid c whose minimal $ x$ coordinate is the one of left , the maximal $ x$ coordinate is the one of right , the minimal $ y$ coordinate is the one of bottom , the maximal $ y$ coordinate is the one of top , the minimal $ z$ coordinate is the one of far , the maximal $ z$ coordinate is the one of close .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1023,7 +1023,7 @@ bottom : const Point_3 < Kernel > &
 top : const Point_3 < Kernel > &
 far : const Point_3 < Kernel > &
 close : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Iso_cuboid_3_Iso_cuboid_3_3 = "introduces an iso-oriented cuboid c with diagonal opposite vertices ( min_hx/hw , min_hy/hw , min_hz/hw ) and ( max_hx/hw , max_hy/hw , max_hz/hw ).
+constexpr const char* Iso_cuboid_3_Iso_cuboid_3_3 = "introduces an iso-oriented cuboid c with diagonal opposite vertices ( min_hx/hw , min_hy/hw , min_hz/hw ) and ( max_hx/hw , max_hy/hw , max_hz/hw ).
 
 hw != 0 .
 
@@ -1036,7 +1036,7 @@ max_hx : const Kernel::RT &
 max_hy : const Kernel::RT &
 max_hz : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Iso_cuboid_3_Iso_cuboid_3_4 = "If Kernel::RT is constructible from double, introduces an iso-oriented cuboid from bbox .
+constexpr const char* Iso_cuboid_3_Iso_cuboid_3_4 = "If Kernel::RT is constructible from double, introduces an iso-oriented cuboid from bbox .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1044,21 +1044,21 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 bbox : const Bbox_3 &";
-constexpr const char* CGAL_Iso_cuboid_3_operator = "Test for equality: two iso-oriented cuboid are equal, iff their lower left and their upper right vertices are equal.
+constexpr const char* Iso_cuboid_3_operator = "Test for equality: two iso-oriented cuboid are equal, iff their lower left and their upper right vertices are equal.
 
 Parameters
 ----------
 c2 : const Iso_cuboid_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Iso_cuboid_3_operator_1 = "Test for inequality.
+constexpr const char* Iso_cuboid_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 c2 : const Iso_cuboid_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Iso_cuboid_3_vertex = "returns the i-th vertex modulo 8 of c .
+constexpr const char* Iso_cuboid_3_vertex = "returns the i-th vertex modulo 8 of c .
 
 starting with the lower left vertex. Exactness This construction is trivial
 and therefore always exact in Exact_predicates_inexact_constructions_kernel .
@@ -1068,7 +1068,7 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Iso_cuboid_3_operator_2 = "returns vertex(i) , as indicated in the figure below:
+constexpr const char* Iso_cuboid_3_operator_2 = "returns vertex(i) , as indicated in the figure below:
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1078,55 +1078,55 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Iso_cuboid_3_min = "returns the smallest vertex of c (= vertex(0) ).
+constexpr const char* Iso_cuboid_3_min = "returns the smallest vertex of c (= vertex(0) ).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Iso_cuboid_3_max = "returns the largest vertex of c (= vertex(7) ).
+constexpr const char* Iso_cuboid_3_max = "returns the largest vertex of c (= vertex(7) ).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Iso_cuboid_3_xmin = "returns smallest Cartesian $ x$ -coordinate in c .
+constexpr const char* Iso_cuboid_3_xmin = "returns smallest Cartesian $ x$ -coordinate in c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_ymin = "returns smallest Cartesian $ y$ -coordinate in c .
+constexpr const char* Iso_cuboid_3_ymin = "returns smallest Cartesian $ y$ -coordinate in c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_zmin = "returns smallest Cartesian $ z$ -coordinate in c .
+constexpr const char* Iso_cuboid_3_zmin = "returns smallest Cartesian $ z$ -coordinate in c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_xmax = "returns largest Cartesian $ x$ -coordinate in c .
+constexpr const char* Iso_cuboid_3_xmax = "returns largest Cartesian $ x$ -coordinate in c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_ymax = "returns largest Cartesian $ y$ -coordinate in c .
+constexpr const char* Iso_cuboid_3_ymax = "returns largest Cartesian $ y$ -coordinate in c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_zmax = "returns largest Cartesian $ z$ -coordinate in c .
+constexpr const char* Iso_cuboid_3_zmax = "returns largest Cartesian $ z$ -coordinate in c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_min_coord = "returns i -th Cartesian coordinate of the smallest vertex of c .
+constexpr const char* Iso_cuboid_3_min_coord = "returns i -th Cartesian coordinate of the smallest vertex of c .
 
 0 <= i <= 2 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -1136,7 +1136,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_max_coord = "returns i -th Cartesian coordinate of the largest vertex of c .
+constexpr const char* Iso_cuboid_3_max_coord = "returns i -th Cartesian coordinate of the largest vertex of c .
 
 0 <= i <= 2 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -1146,26 +1146,26 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_is_degenerate = "c is degenerate, if all vertices are coplanar.
+constexpr const char* Iso_cuboid_3_is_degenerate = "c is degenerate, if all vertices are coplanar.
 
 Returns: bool";
-constexpr const char* CGAL_Iso_cuboid_3_bounded_side = "returns either ON_UNBOUNDED_SIDE , ON_BOUNDED_SIDE , or the constant ON_BOUNDARY , depending on where point p is.
+constexpr const char* Iso_cuboid_3_bounded_side = "returns either ON_UNBOUNDED_SIDE , ON_BOUNDED_SIDE , or the constant ON_BOUNDARY , depending on where point p is.
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Iso_cuboid_3_volume = "returns the volume of c .
+constexpr const char* Iso_cuboid_3_volume = "returns the volume of c .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_cuboid_3_bbox = "returns a bounding box containing c .
+constexpr const char* Iso_cuboid_3_bbox = "returns a bounding box containing c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Iso_cuboid_3_transform = "returns the iso-oriented cuboid obtained by applying t on the smallest and the largest of c .
+constexpr const char* Iso_cuboid_3_transform = "returns the iso-oriented cuboid obtained by applying t on the smallest and the largest of c .
 
 The angle at a rotation must be a multiple of $ \\pi/2$ , otherwise the
 resulting cuboid does not have the same size. Note that rotating about an
@@ -1178,9 +1178,9 @@ t : const Aff_transformation_3 < Kernel > &
 Returns: Iso_cuboid_3 < Kernel >";
 
 // CGAL::Iso_rectangle_2
-constexpr const char* CGAL_Iso_rectangle_2__class__ = "An object r of the data type Iso_rectangle_2 is a rectangle in the Euclidean plane $ \\E^2$ with sides parallel to the $ x$ and $ y$ axis of the coordinate system.";
+constexpr const char* Iso_rectangle_2__class__ = "An object r of the data type Iso_rectangle_2 is a rectangle in the Euclidean plane $ \\E^2$ with sides parallel to the $ x$ and $ y$ axis of the coordinate system.";
 
-constexpr const char* CGAL_Iso_rectangle_2_Iso_rectangle_2 = "introduces an iso-oriented rectangle r with diagonal opposite vertices p and q .
+constexpr const char* Iso_rectangle_2_Iso_rectangle_2 = "introduces an iso-oriented rectangle r with diagonal opposite vertices p and q .
 
 Note that the object is brought in the canonical form. Exactness This
 construction is trivial and therefore always exact in
@@ -1190,7 +1190,7 @@ Parameters
 ----------
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Iso_rectangle_2_Iso_rectangle_2_1 = "introduces an iso-oriented rectangle r with diagonal opposite vertices p and q .
+constexpr const char* Iso_rectangle_2_Iso_rectangle_2_1 = "introduces an iso-oriented rectangle r with diagonal opposite vertices p and q .
 
 The int argument value is only used to distinguish the two overloaded
 functions. p.x()<=q.x() and p.y()<=q.y() . Exactness This construction is
@@ -1202,7 +1202,7 @@ Parameters
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
  : int";
-constexpr const char* CGAL_Iso_rectangle_2_Iso_rectangle_2_2 = "introduces an iso-oriented rectangle r whose minimal $ x$ coordinate is the one of left , the maximal $ x$ coordinate is the one of right , the minimal $ y$ coordinate is the one of bottom , the maximal $ y$ coordinate is the one of top .
+constexpr const char* Iso_rectangle_2_Iso_rectangle_2_2 = "introduces an iso-oriented rectangle r whose minimal $ x$ coordinate is the one of left , the maximal $ x$ coordinate is the one of right , the minimal $ y$ coordinate is the one of bottom , the maximal $ y$ coordinate is the one of top .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1213,7 +1213,7 @@ left : const Point_2 < Kernel > &
 right : const Point_2 < Kernel > &
 bottom : const Point_2 < Kernel > &
 top : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Iso_rectangle_2_Iso_rectangle_2_3 = "introduces an iso-oriented rectangle r with diagonal opposite vertices ( min_hx/hw , min_hy/hw ) and ( max_hx/hw , max_hy/hw ).
+constexpr const char* Iso_rectangle_2_Iso_rectangle_2_3 = "introduces an iso-oriented rectangle r with diagonal opposite vertices ( min_hx/hw , min_hy/hw ) and ( max_hx/hw , max_hy/hw ).
 
 hw != 0 .
 
@@ -1224,7 +1224,7 @@ min_hy : const Kernel::RT &
 max_hx : const Kernel::RT &
 max_hy : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Iso_rectangle_2_Iso_rectangle_2_4 = "If Kernel::RT is constructible from double, introduces an iso-oriented rectangle from bbox .
+constexpr const char* Iso_rectangle_2_Iso_rectangle_2_4 = "If Kernel::RT is constructible from double, introduces an iso-oriented rectangle from bbox .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1232,21 +1232,21 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 bbox : const Bbox_2 &";
-constexpr const char* CGAL_Iso_rectangle_2_operator = "Test for equality: two iso-oriented rectangles are equal, iff their lower left and their upper right vertices are equal.
+constexpr const char* Iso_rectangle_2_operator = "Test for equality: two iso-oriented rectangles are equal, iff their lower left and their upper right vertices are equal.
 
 Parameters
 ----------
 r2 : const Iso_rectangle_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Iso_rectangle_2_operator_1 = "Test for inequality.
+constexpr const char* Iso_rectangle_2_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 r2 : const Iso_rectangle_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Iso_rectangle_2_vertex = "returns the i-th vertex modulo 4 of r in counterclockwise order, starting with the lower left vertex.
+constexpr const char* Iso_rectangle_2_vertex = "returns the i-th vertex modulo 4 of r in counterclockwise order, starting with the lower left vertex.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1256,7 +1256,7 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Iso_rectangle_2_operator_2 = "returns vertex(i) .
+constexpr const char* Iso_rectangle_2_operator_2 = "returns vertex(i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1266,43 +1266,43 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Iso_rectangle_2_min = "returns the lower left vertex of r (= vertex(0) ).
+constexpr const char* Iso_rectangle_2_min = "returns the lower left vertex of r (= vertex(0) ).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Iso_rectangle_2_max = "returns the upper right vertex of r (= vertex(2) ).
+constexpr const char* Iso_rectangle_2_max = "returns the upper right vertex of r (= vertex(2) ).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Iso_rectangle_2_xmin = "returns the $ x$ coordinate of lower left vertex of r .
+constexpr const char* Iso_rectangle_2_xmin = "returns the $ x$ coordinate of lower left vertex of r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_ymin = "returns the $ y$ coordinate of lower left vertex of r .
+constexpr const char* Iso_rectangle_2_ymin = "returns the $ y$ coordinate of lower left vertex of r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_xmax = "returns the $ x$ coordinate of upper right vertex of r .
+constexpr const char* Iso_rectangle_2_xmax = "returns the $ x$ coordinate of upper right vertex of r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_ymax = "returns the $ y$ coordinate of upper right vertex of r .
+constexpr const char* Iso_rectangle_2_ymax = "returns the $ y$ coordinate of upper right vertex of r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_min_coord = "returns the i -th Cartesian coordinate of the lower left vertex of r .
+constexpr const char* Iso_rectangle_2_min_coord = "returns the i -th Cartesian coordinate of the lower left vertex of r .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -1312,7 +1312,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_max_coord = "returns the i -th Cartesian coordinate of the upper right vertex of r .
+constexpr const char* Iso_rectangle_2_max_coord = "returns the i -th Cartesian coordinate of the upper right vertex of r .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -1322,26 +1322,26 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_is_degenerate = "r is degenerate, if all vertices are collinear.
+constexpr const char* Iso_rectangle_2_is_degenerate = "r is degenerate, if all vertices are collinear.
 
 Returns: bool";
-constexpr const char* CGAL_Iso_rectangle_2_bounded_side = "returns either ON_UNBOUNDED_SIDE , ON_BOUNDED_SIDE , or the constant ON_BOUNDARY , depending on where point p is.
+constexpr const char* Iso_rectangle_2_bounded_side = "returns either ON_UNBOUNDED_SIDE , ON_BOUNDED_SIDE , or the constant ON_BOUNDARY , depending on where point p is.
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Iso_rectangle_2_area = "returns the area of r .
+constexpr const char* Iso_rectangle_2_area = "returns the area of r .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Iso_rectangle_2_bbox = "returns a bounding box containing r .
+constexpr const char* Iso_rectangle_2_bbox = "returns a bounding box containing r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Iso_rectangle_2_transform = "returns the iso-oriented rectangle obtained by applying t on the lower left and the upper right corner of r .
+constexpr const char* Iso_rectangle_2_transform = "returns the iso-oriented rectangle obtained by applying t on the lower left and the upper right corner of r .
 
 The angle at a rotation must be a multiple of $ \\pi/2$ , otherwise the
 resulting rectangle does not have the same side length. Note that rotating
@@ -1355,16 +1355,16 @@ t : const Aff_transformation_2 < Kernel > &
 Returns: Iso_rectangle_2 < Kernel >";
 
 // CGAL::Kernel_traits
-constexpr const char* CGAL_Kernel_traits__class__ = "The class Kernel_traits provides access to the kernel model to which the argument type T belongs.";
+constexpr const char* Kernel_traits__class__ = "The class Kernel_traits provides access to the kernel model to which the argument type T belongs.";
 
-constexpr const char* CGAL_Kernel_traits_Kernel = "If T is a type K::Point_2 of some kernel model K , then Kernel is equal to K .
+constexpr const char* Kernel_traits_Kernel = "If T is a type K::Point_2 of some kernel model K , then Kernel is equal to K .
 
 Returns: T::R";
 
 // CGAL::Line_2
-constexpr const char* CGAL_Line_2__class__ = "An object l of the data type Line_2 is a directed straight line in the two-dimensional Euclidean plane $ \\E^2$ .";
+constexpr const char* Line_2__class__ = "An object l of the data type Line_2 is a directed straight line in the two-dimensional Euclidean plane $ \\E^2$ .";
 
-constexpr const char* CGAL_Line_2_Line_2 = "introduces a line l with the line equation in Cartesian coordinates $ ax +by +c = 0$ .
+constexpr const char* Line_2_Line_2 = "introduces a line l with the line equation in Cartesian coordinates $ ax +by +c = 0$ .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1374,7 +1374,7 @@ Parameters
 a : const Kernel::RT &
 b : const Kernel::RT &
 c : const Kernel::RT &";
-constexpr const char* CGAL_Line_2_Line_2_1 = "introduces a line l passing through the points p and q .
+constexpr const char* Line_2_Line_2_1 = "introduces a line l passing through the points p and q .
 
 Line l is directed from p to q .
 
@@ -1382,61 +1382,61 @@ Parameters
 ----------
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Line_2_Line_2_2 = "introduces a line l passing through point p with direction d .
+constexpr const char* Line_2_Line_2_2 = "introduces a line l passing through point p with direction d .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 d : const Direction_2 < Kernel > &";
-constexpr const char* CGAL_Line_2_Line_2_3 = "introduces a line l passing through point p and oriented by v .
+constexpr const char* Line_2_Line_2_3 = "introduces a line l passing through point p and oriented by v .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 v : const Vector_2 < Kernel > &";
-constexpr const char* CGAL_Line_2_Line_2_4 = "introduces a line l supporting the segment s , oriented from source to target.
+constexpr const char* Line_2_Line_2_4 = "introduces a line l supporting the segment s , oriented from source to target.
 
 Parameters
 ----------
 s : const Segment_2 < Kernel > &";
-constexpr const char* CGAL_Line_2_Line_2_5 = "introduces a line l supporting the ray r , with same orientation.
+constexpr const char* Line_2_Line_2_5 = "introduces a line l supporting the ray r , with same orientation.
 
 Parameters
 ----------
 r : const Ray_2 < Kernel > &";
-constexpr const char* CGAL_Line_2_operator = "Test for equality: two lines are equal, iff they have a non empty intersection and the same direction.
+constexpr const char* Line_2_operator = "Test for equality: two lines are equal, iff they have a non empty intersection and the same direction.
 
 Parameters
 ----------
 h : const Line_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_2_operator_1 = "Test for inequality.
+constexpr const char* Line_2_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 h : const Line_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_2_a = "returns the first coefficient of l .
+constexpr const char* Line_2_a = "returns the first coefficient of l .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Line_2_b = "returns the second coefficient of l .
+constexpr const char* Line_2_b = "returns the second coefficient of l .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Line_2_c = "returns the third coefficient of l .
+constexpr const char* Line_2_c = "returns the third coefficient of l .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Line_2_point = "returns an arbitrary point on l .
+constexpr const char* Line_2_point = "returns an arbitrary point on l .
 
 It holds point(i) == point(j) , iff i==j . Furthermore, l is directed from
 point(i) to point(j) , for all i $ <$ j .
@@ -1446,14 +1446,14 @@ Parameters
 i : const Kernel::FT
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Line_2_projection = "returns the orthogonal projection of p onto l .
+constexpr const char* Line_2_projection = "returns the orthogonal projection of p onto l .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Line_2_x_at_y = "returns the $ x$ -coordinate of the point at l with given $ y$ -coordinate.
+constexpr const char* Line_2_x_at_y = "returns the $ x$ -coordinate of the point at l with given $ y$ -coordinate.
 
 l is not horizontal.
 
@@ -1462,7 +1462,7 @@ Parameters
 y : const Kernel::FT &
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Line_2_y_at_x = "returns the $ y$ -coordinate of the point at l with given $ x$ -coordinate.
+constexpr const char* Line_2_y_at_x = "returns the $ y$ -coordinate of the point at l with given $ x$ -coordinate.
 
 l is not vertical.
 
@@ -1471,36 +1471,36 @@ Parameters
 x : const Kernel::FT &
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Line_2_is_degenerate = "line l is degenerate, if the coefficients a and b of the line equation are zero.
+constexpr const char* Line_2_is_degenerate = "line l is degenerate, if the coefficients a and b of the line equation are zero.
 
 Returns: bool";
-constexpr const char* CGAL_Line_2_oriented_side = "returns ON_ORIENTED_BOUNDARY , ON_NEGATIVE_SIDE , or the constant ON_POSITIVE_SIDE , depending on the position of p relative to the oriented line l .
+constexpr const char* Line_2_oriented_side = "returns ON_ORIENTED_BOUNDARY , ON_NEGATIVE_SIDE , or the constant ON_POSITIVE_SIDE , depending on the position of p relative to the oriented line l .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Line_2_to_vector = "returns a vector having the direction of l .
+constexpr const char* Line_2_to_vector = "returns a vector having the direction of l .
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Line_2_direction = "returns the direction of l .
+constexpr const char* Line_2_direction = "returns the direction of l .
 
 Returns: Direction_2 < Kernel >";
-constexpr const char* CGAL_Line_2_opposite = "returns the line with opposite direction.
+constexpr const char* Line_2_opposite = "returns the line with opposite direction.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Line_2 < Kernel >";
-constexpr const char* CGAL_Line_2_perpendicular = "returns the line perpendicular to l and passing through p , where the direction is the direction of l rotated counterclockwise by 90 degrees.
+constexpr const char* Line_2_perpendicular = "returns the line perpendicular to l and passing through p , where the direction is the direction of l rotated counterclockwise by 90 degrees.
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Line_2 < Kernel >";
-constexpr const char* CGAL_Line_2_transform = "returns the line obtained by applying t on a point on l and the direction of l .
+constexpr const char* Line_2_transform = "returns the line obtained by applying t on a point on l and the direction of l .
 
 Parameters
 ----------
@@ -1509,9 +1509,9 @@ t : const Aff_transformation_2 < Kernel > &
 Returns: Line_2 < Kernel >";
 
 // CGAL::Line_3
-constexpr const char* CGAL_Line_3__class__ = "An object l of the data type Line_3 is a directed straight line in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Line_3__class__ = "An object l of the data type Line_3 is a directed straight line in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Line_3_Line_3 = "introduces a line l passing through the points p and q .
+constexpr const char* Line_3_Line_3 = "introduces a line l passing through the points p and q .
 
 Line l is directed from p to q .
 
@@ -1519,7 +1519,7 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Line_3_Line_3_1 = "introduces a line l passing through point p with direction d .
+constexpr const char* Line_3_Line_3_1 = "introduces a line l passing through point p with direction d .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1528,7 +1528,7 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 d : const Direction_3 < Kernel > &";
-constexpr const char* CGAL_Line_3_Line_3_2 = "introduces a line l passing through point p and oriented by v .
+constexpr const char* Line_3_Line_3_2 = "introduces a line l passing through point p and oriented by v .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1537,38 +1537,38 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 v : const Vector_3 < Kernel > &";
-constexpr const char* CGAL_Line_3_Line_3_3 = "returns the line supporting the segment s , oriented from source to target.
+constexpr const char* Line_3_Line_3_3 = "returns the line supporting the segment s , oriented from source to target.
 
 Parameters
 ----------
 s : const Segment_3 < Kernel > &";
-constexpr const char* CGAL_Line_3_Line_3_4 = "returns the line supporting the ray r , with the same orientation.
+constexpr const char* Line_3_Line_3_4 = "returns the line supporting the ray r , with the same orientation.
 
 Parameters
 ----------
 r : const Ray_3 < Kernel > &";
-constexpr const char* CGAL_Line_3_operator = "Test for equality: two lines are equal, iff they have a non empty intersection and the same direction.
+constexpr const char* Line_3_operator = "Test for equality: two lines are equal, iff they have a non empty intersection and the same direction.
 
 Parameters
 ----------
 h : const Line_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_3_operator_1 = "Test for inequality.
+constexpr const char* Line_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 h : const Line_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_3_projection = "returns the orthogonal projection of p on l .
+constexpr const char* Line_3_projection = "returns the orthogonal projection of p on l .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Line_3_point = "returns an arbitrary point on l .
+constexpr const char* Line_3_point = "returns an arbitrary point on l .
 
 It holds point(i) = point(j) , iff i=j .
 
@@ -1577,42 +1577,42 @@ Parameters
 i : const Kernel::FT
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Line_3_is_degenerate = "returns true iff line l is degenerated to a point.
+constexpr const char* Line_3_is_degenerate = "returns true iff line l is degenerated to a point.
 
 Returns: bool";
-constexpr const char* CGAL_Line_3_has_on = "returns true iff p lies on l .
+constexpr const char* Line_3_has_on = "returns true iff p lies on l .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_3_perpendicular_plane = "returns the plane perpendicular to l passing through p .
+constexpr const char* Line_3_perpendicular_plane = "returns the plane perpendicular to l passing through p .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Plane_3 < Kernel >";
-constexpr const char* CGAL_Line_3_opposite = "returns the line with opposite direction.
+constexpr const char* Line_3_opposite = "returns the line with opposite direction.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Line_3 < Kernel >";
-constexpr const char* CGAL_Line_3_to_vector = "returns a vector having the same direction as l .
+constexpr const char* Line_3_to_vector = "returns a vector having the same direction as l .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Line_3_direction = "returns the direction of l .
+constexpr const char* Line_3_direction = "returns the direction of l .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Direction_3 < Kernel >";
-constexpr const char* CGAL_Line_3_transform = "returns the line obtained by applying t on a point on l and the direction of l .
+constexpr const char* Line_3_transform = "returns the line obtained by applying t on a point on l and the direction of l .
 
 Parameters
 ----------
@@ -1621,15 +1621,15 @@ t : const Aff_transformation_3 < Kernel > &
 Returns: Line_3 < Kernel >";
 
 // CGAL::Null_vector
-constexpr const char* CGAL_Null_vector__class__ = "CGAL defines a symbolic constant NULL_VECTOR to construct zero length vectors.";
+constexpr const char* Null_vector__class__ = "CGAL defines a symbolic constant NULL_VECTOR to construct zero length vectors.";
 
 // CGAL::Origin
-constexpr const char* CGAL_Origin__class__ = "CGAL defines a symbolic constant ORIGIN which denotes the point at the origin.";
+constexpr const char* Origin__class__ = "CGAL defines a symbolic constant ORIGIN which denotes the point at the origin.";
 
 // CGAL::Plane_3
-constexpr const char* CGAL_Plane_3__class__ = "An object h of the data type Plane_3 is an oriented plane in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Plane_3__class__ = "An object h of the data type Plane_3 is an oriented plane in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Plane_3_Plane_3 = "creates a plane h defined by the equation $ a\\, px +b\\, py +c\\, pz + d = 0$ .
+constexpr const char* Plane_3_Plane_3 = "creates a plane h defined by the equation $ a\\, px +b\\, py +c\\, pz + d = 0$ .
 
 Notice that h is degenerate if $ a = b = c = 0$ . Exactness This construction
 is trivial and therefore always exact in
@@ -1641,7 +1641,7 @@ a : const Kernel::RT &
 b : const Kernel::RT &
 c : const Kernel::RT &
 d : const Kernel::RT &";
-constexpr const char* CGAL_Plane_3_Plane_3_1 = "creates a plane h passing through the points p , q and r .
+constexpr const char* Plane_3_Plane_3_1 = "creates a plane h passing through the points p , q and r .
 
 The plane is oriented such that p , q and r are oriented in a positive sense
 (that is counterclockwise) when seen from the positive side of h . Notice that
@@ -1652,37 +1652,37 @@ Parameters
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 r : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_Plane_3_2 = "introduces a plane h that passes through point p and that is orthogonal to v .
+constexpr const char* Plane_3_Plane_3_2 = "introduces a plane h that passes through point p and that is orthogonal to v .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 v : const Vector_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_Plane_3_3 = "introduces a plane h that passes through point p and that has as an orthogonal direction equal to d .
+constexpr const char* Plane_3_Plane_3_3 = "introduces a plane h that passes through point p and that has as an orthogonal direction equal to d .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 d : const Direction_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_Plane_3_4 = "introduces a plane h that is defined through the three points l.point(0) , l.point(1) and p .
+constexpr const char* Plane_3_Plane_3_4 = "introduces a plane h that is defined through the three points l.point(0) , l.point(1) and p .
 
 Parameters
 ----------
 l : const Line_3 < Kernel > &
 p : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_Plane_3_5 = "introduces a plane h that is defined through the three points r.point(0) , r.point(1) and p .
+constexpr const char* Plane_3_Plane_3_5 = "introduces a plane h that is defined through the three points r.point(0) , r.point(1) and p .
 
 Parameters
 ----------
 r : const Ray_3 < Kernel > &
 p : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_Plane_3_6 = "introduces a plane h that is defined through the three points s.source() , s.target() and p .
+constexpr const char* Plane_3_Plane_3_6 = "introduces a plane h that is defined through the three points s.source() , s.target() and p .
 
 Parameters
 ----------
 s : const Segment_3 < Kernel > &
 p : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_Plane_3_7 = "introduces a plane h that is defined as the plane containing the circle.
+constexpr const char* Plane_3_Plane_3_7 = "introduces a plane h that is defined as the plane containing the circle.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1690,45 +1690,45 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 c : const Circle_3 < Kernel > &";
-constexpr const char* CGAL_Plane_3_operator = "Test for equality: two planes are equal, iff they have a non empty intersection and the same orientation.
+constexpr const char* Plane_3_operator = "Test for equality: two planes are equal, iff they have a non empty intersection and the same orientation.
 
 Parameters
 ----------
 h2 : const Plane_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Plane_3_operator_1 = "Test for inequality.
+constexpr const char* Plane_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 h2 : const Plane_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Plane_3_a = "returns the first coefficient of h .
+constexpr const char* Plane_3_a = "returns the first coefficient of h .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Plane_3_b = "returns the second coefficient of h .
+constexpr const char* Plane_3_b = "returns the second coefficient of h .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Plane_3_c = "returns the third coefficient of h .
+constexpr const char* Plane_3_c = "returns the third coefficient of h .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Plane_3_d = "returns the fourth coefficient of h .
+constexpr const char* Plane_3_d = "returns the fourth coefficient of h .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Plane_3_perpendicular_line = "returns the line that is perpendicular to h and that passes through point p .
+constexpr const char* Plane_3_perpendicular_line = "returns the line that is perpendicular to h and that passes through point p .
 
 The line is oriented from the negative to the positive side of h .
 
@@ -1737,65 +1737,65 @@ Parameters
 p : const Point_3 < Kernel > &
 
 Returns: Line_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_projection = "returns the orthogonal projection of p on h .
+constexpr const char* Plane_3_projection = "returns the orthogonal projection of p on h .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_opposite = "returns the plane with opposite orientation.
+constexpr const char* Plane_3_opposite = "returns the plane with opposite orientation.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Plane_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_point = "returns an arbitrary point on h .
+constexpr const char* Plane_3_point = "returns an arbitrary point on h .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_orthogonal_vector = "returns a vector that is orthogonal to h and that is directed to the positive side of h .
+constexpr const char* Plane_3_orthogonal_vector = "returns a vector that is orthogonal to h and that is directed to the positive side of h .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_orthogonal_direction = "returns the direction that is orthogonal to h and that is directed to the positive side of h .
+constexpr const char* Plane_3_orthogonal_direction = "returns the direction that is orthogonal to h and that is directed to the positive side of h .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Direction_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_base1 = "returns a vector orthogonal to orthogonal_vector() .
+constexpr const char* Plane_3_base1 = "returns a vector orthogonal to orthogonal_vector() .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_base2 = "returns a vector that is both orthogonal to base1() , and to orthogonal_vector() , and such that the result of orientation ( point() , point() + base1() , point() + base2() , point() + orthogonal_vector() ) is positive.
+constexpr const char* Plane_3_base2 = "returns a vector that is both orthogonal to base1() , and to orthogonal_vector() , and such that the result of orientation ( point() , point() + base1() , point() + base2() , point() + orthogonal_vector() ) is positive.
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_to_2d = "returns the image point of the projection of p under an affine transformation, which maps h onto the $ xy$ -plane, with the $ z$ -coordinate removed.
+constexpr const char* Plane_3_to_2d = "returns the image point of the projection of p under an affine transformation, which maps h onto the $ xy$ -plane, with the $ z$ -coordinate removed.
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Plane_3_to_3d = "returns a point q , such that to_2d( to_3d( p )) is equal to p .
+constexpr const char* Plane_3_to_3d = "returns a point q , such that to_2d( to_3d( p )) is equal to p .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Plane_3_oriented_side = "returns either ON_ORIENTED_BOUNDARY , or the constant ON_POSITIVE_SIDE , or the constant ON_NEGATIVE_SIDE , determined by the position of p relative to the oriented plane h .
+constexpr const char* Plane_3_oriented_side = "returns either ON_ORIENTED_BOUNDARY , or the constant ON_POSITIVE_SIDE , or the constant ON_NEGATIVE_SIDE , determined by the position of p relative to the oriented plane h .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Plane_3_is_degenerate = "Plane h is degenerate, if the coefficients a , b , and c of the plane equation are zero.
+constexpr const char* Plane_3_is_degenerate = "Plane h is degenerate, if the coefficients a , b , and c of the plane equation are zero.
 
 Returns: bool";
-constexpr const char* CGAL_Plane_3_transform = "returns the plane obtained by applying t on a point of h and the orthogonal direction of h .
+constexpr const char* Plane_3_transform = "returns the plane obtained by applying t on a point of h and the orthogonal direction of h .
 
 Parameters
 ----------
@@ -1804,12 +1804,12 @@ t : const Aff_transformation_3 < Kernel > &
 Returns: Plane_3 < Kernel >";
 
 // CGAL::Point_2
-constexpr const char* CGAL_Point_2__class__ = "An object p of the class Point_2 is a point in the two-dimensional Euclidean plane $ \\E^2$ .";
+constexpr const char* Point_2__class__ = "An object p of the class Point_2 is a point in the two-dimensional Euclidean plane $ \\E^2$ .";
 
-constexpr const char* CGAL_Point_2_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
+constexpr const char* Point_2_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_2_Point_2 = "introduces a variable p with Cartesian coordinates $ (0,0)$ .
+constexpr const char* Point_2_Point_2 = "introduces a variable p with Cartesian coordinates $ (0,0)$ .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1817,13 +1817,13 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 ORIGIN : const Origin &";
-constexpr const char* CGAL_Point_2_Point_2_1 = "introduces a point p initialized to ( x , y ) .
+constexpr const char* Point_2_Point_2_1 = "introduces a point p initialized to ( x , y ) .
 
 Parameters
 ----------
 x : int
 y : int";
-constexpr const char* CGAL_Point_2_Point_2_2 = "introduces a point p initialized to ( x , y ) provided RT supports construction from double .
+constexpr const char* Point_2_Point_2_2 = "introduces a point p initialized to ( x , y ) provided RT supports construction from double .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1832,7 +1832,7 @@ Parameters
 ----------
 x : double
 y : double";
-constexpr const char* CGAL_Point_2_Point_2_3 = "introduces a point p initialized to (hx/hw,hy/hw) .
+constexpr const char* Point_2_Point_2_3 = "introduces a point p initialized to (hx/hw,hy/hw) .
 
 hw != Kernel::RT(0) .
 
@@ -1841,7 +1841,7 @@ Parameters
 hx : const Kernel::RT &
 hy : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Point_2_Point_2_4 = "introduces a point p initialized to ( x , y ) .
+constexpr const char* Point_2_Point_2_4 = "introduces a point p initialized to ( x , y ) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -1850,7 +1850,7 @@ Parameters
 ----------
 x : const Kernel::FT &
 y : const Kernel::FT &";
-constexpr const char* CGAL_Point_2_Point_2_5 = "introduces a point from a weighted point.
+constexpr const char* Point_2_Point_2_5 = "introduces a point from a weighted point.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel . The explicit keyword is used
@@ -1860,7 +1860,7 @@ to avoid accidental implicit conversions between Point_2 and Weighted_point_2
 Parameters
 ----------
 wp : const Kernel::Weighted_point_2 &";
-constexpr const char* CGAL_Point_2_operator = "Test for equality.
+constexpr const char* Point_2_operator = "Test for equality.
 
 Two points are equal, iff their $ x$ and $ y$ coordinates are equal. The point
 can be compared with ORIGIN .
@@ -1870,7 +1870,7 @@ Parameters
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_1 = "Test for inequality.
+constexpr const char* Point_2_operator_1 = "Test for inequality.
 
 The point can be compared with ORIGIN .
 
@@ -1879,42 +1879,42 @@ Parameters
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_2 = "translates the point by the vector v .
+constexpr const char* Point_2_operator_2 = "translates the point by the vector v .
 
 Parameters
 ----------
 v : const Vector_2 < Kernel > &
 
 Returns: Point_2 < Kernel > &";
-constexpr const char* CGAL_Point_2_operator_3 = "translates the point by the vector - v .
+constexpr const char* Point_2_operator_3 = "translates the point by the vector - v .
 
 Parameters
 ----------
 v : const Vector_2 < Kernel > &
 
 Returns: Point_2 < Kernel > &";
-constexpr const char* CGAL_Point_2_hx = "returns the homogeneous $ x$ coordinate.
+constexpr const char* Point_2_hx = "returns the homogeneous $ x$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_2_hy = "returns the homogeneous $ y$ coordinate.
+constexpr const char* Point_2_hy = "returns the homogeneous $ y$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_2_hw = "returns the homogenizing coordinate.
+constexpr const char* Point_2_hw = "returns the homogenizing coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_2_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
+constexpr const char* Point_2_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_2_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
+constexpr const char* Point_2_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_2_homogeneous = "returns the i-th homogeneous coordinate of p .
+constexpr const char* Point_2_homogeneous = "returns the i-th homogeneous coordinate of p .
 
 0 <= i <= 2 .
 
@@ -1923,7 +1923,7 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_2_cartesian = "returns the i-th Cartesian coordinate of p .
+constexpr const char* Point_2_cartesian = "returns the i-th Cartesian coordinate of p .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -1933,7 +1933,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_2_operator_4 = "returns cartesian(i) .
+constexpr const char* Point_2_operator_4 = "returns cartesian(i) .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -1943,29 +1943,29 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_2_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
+constexpr const char* Point_2_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Point_2_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
+constexpr const char* Point_2_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Point_2_dimension = "returns the dimension (the constant 2).
+constexpr const char* Point_2_dimension = "returns the dimension (the constant 2).
 
 Returns: int";
-constexpr const char* CGAL_Point_2_bbox = "returns a bounding box containing p .
+constexpr const char* Point_2_bbox = "returns a bounding box containing p .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Point_2_transform = "returns the point obtained by applying t on p .
+constexpr const char* Point_2_transform = "returns the point obtained by applying t on p .
 
 Parameters
 ----------
 t : const Aff_transformation_2 < Kernel > &
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Point_2_operator_5 = "returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() .
+constexpr const char* Point_2_operator_5 = "returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() .
 
 Parameters
 ----------
@@ -1973,7 +1973,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_6 = "returns true iff p is lexicographically greater than q .
+constexpr const char* Point_2_operator_6 = "returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -1981,7 +1981,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_7 = "returns true iff p is lexicographically smaller or equal to q .
+constexpr const char* Point_2_operator_7 = "returns true iff p is lexicographically smaller or equal to q .
 
 Parameters
 ----------
@@ -1989,7 +1989,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_8 = "returns true iff p is lexicographically greater or equal to q .
+constexpr const char* Point_2_operator_8 = "returns true iff p is lexicographically greater or equal to q .
 
 Parameters
 ----------
@@ -1997,7 +1997,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_9 = "returns the difference vector between q and p .
+constexpr const char* Point_2_operator_9 = "returns the difference vector between q and p .
 
 You can substitute ORIGIN for either p or q , but not for both.
 
@@ -2009,12 +2009,12 @@ q : const Point_2 < Kernel > &
 Returns: Vector_2 < Kernel >";
 
 // CGAL::Point_3
-constexpr const char* CGAL_Point_3__class__ = "An object of the class Point_3 is a point in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Point_3__class__ = "An object of the class Point_3 is a point in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Point_3_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
+constexpr const char* Point_3_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_3_Point_3 = "introduces a point with Cartesian coordinates $ (0,0,0)$ .
+constexpr const char* Point_3_Point_3 = "introduces a point with Cartesian coordinates $ (0,0,0)$ .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2022,14 +2022,14 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 ORIGIN : const Origin &";
-constexpr const char* CGAL_Point_3_Point_3_1 = "introduces a point p initialized to ( x , y , z ) .
+constexpr const char* Point_3_Point_3_1 = "introduces a point p initialized to ( x , y , z ) .
 
 Parameters
 ----------
 x : int
 y : int
 z : int";
-constexpr const char* CGAL_Point_3_Point_3_2 = "introduces a point p initialized to ( x , y , z ) provided RT supports it.
+constexpr const char* Point_3_Point_3_2 = "introduces a point p initialized to ( x , y , z ) provided RT supports it.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2039,7 +2039,7 @@ Parameters
 x : double
 y : double
 z : double";
-constexpr const char* CGAL_Point_3_Point_3_3 = "introduces a point p initialized to (hx/hw,hy/hw, hz/hw) .
+constexpr const char* Point_3_Point_3_3 = "introduces a point p initialized to (hx/hw,hy/hw, hz/hw) .
 
 hw != 0 .
 
@@ -2049,7 +2049,7 @@ hx : const Kernel::RT &
 hy : const Kernel::RT &
 hz : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Point_3_Point_3_4 = "introduces a point p initialized to ( x , y , z ) .
+constexpr const char* Point_3_Point_3_4 = "introduces a point p initialized to ( x , y , z ) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2059,7 +2059,7 @@ Parameters
 x : const Kernel::FT &
 y : const Kernel::FT &
 z : const Kernel::FT &";
-constexpr const char* CGAL_Point_3_Point_3_5 = "introduces a point from a weighted point.
+constexpr const char* Point_3_Point_3_5 = "introduces a point from a weighted point.
 
 The explicit keyword is used to avoid accidental implicit conversions between
 Point_3 and Weighted_point_3 . Exactness This construction is trivial and
@@ -2068,65 +2068,65 @@ therefore always exact in Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 wp : const Kernel::Weighted_point_3 &";
-constexpr const char* CGAL_Point_3_operator = "Test for equality: Two points are equal, iff their $ x$ , $ y$ and $ z$ coordinates are equal.
+constexpr const char* Point_3_operator = "Test for equality: Two points are equal, iff their $ x$ , $ y$ and $ z$ coordinates are equal.
 
 Parameters
 ----------
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_1 = "Test for inequality.
+constexpr const char* Point_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_2 = "translates the point by the vector v .
+constexpr const char* Point_3_operator_2 = "translates the point by the vector v .
 
 Parameters
 ----------
 v : const Vector_3 < Kernel > &
 
 Returns: Point_3 < Kernel > &";
-constexpr const char* CGAL_Point_3_operator_3 = "translates the point by the vector - v .
+constexpr const char* Point_3_operator_3 = "translates the point by the vector - v .
 
 Parameters
 ----------
 v : const Vector_3 < Kernel > &
 
 Returns: Point_3 < Kernel > &";
-constexpr const char* CGAL_Point_3_hx = "returns the homogeneous $ x$ coordinate.
+constexpr const char* Point_3_hx = "returns the homogeneous $ x$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_3_hy = "returns the homogeneous $ y$ coordinate.
+constexpr const char* Point_3_hy = "returns the homogeneous $ y$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_3_hz = "returns the homogeneous $ z$ coordinate.
+constexpr const char* Point_3_hz = "returns the homogeneous $ z$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_3_hw = "returns the homogenizing coordinate.
+constexpr const char* Point_3_hw = "returns the homogenizing coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_3_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
+constexpr const char* Point_3_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_3_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
+constexpr const char* Point_3_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_3_z = "returns the Cartesian $ z$ coordinate, that is hz() / hw() .
+constexpr const char* Point_3_z = "returns the Cartesian $ z$ coordinate, that is hz() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_3_homogeneous = "returns the i-th homogeneous coordinate of p .
+constexpr const char* Point_3_homogeneous = "returns the i-th homogeneous coordinate of p .
 
 0 <= i <= 3 .
 
@@ -2135,7 +2135,7 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Point_3_cartesian = "returns the i-th Cartesian coordinate of p .
+constexpr const char* Point_3_cartesian = "returns the i-th Cartesian coordinate of p .
 
 0 <= i <= 2 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -2145,7 +2145,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_3_operator_4 = "returns cartesian(i) .
+constexpr const char* Point_3_operator_4 = "returns cartesian(i) .
 
 0 <= i <= 2 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -2155,29 +2155,29 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Point_3_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
+constexpr const char* Point_3_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Point_3_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
+constexpr const char* Point_3_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Point_3_dimension = "returns the dimension (the constant 3).
+constexpr const char* Point_3_dimension = "returns the dimension (the constant 3).
 
 Returns: int";
-constexpr const char* CGAL_Point_3_bbox = "returns a bounding box containing p .
+constexpr const char* Point_3_bbox = "returns a bounding box containing p .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Point_3_transform = "returns the point obtained by applying t on p .
+constexpr const char* Point_3_transform = "returns the point obtained by applying t on p .
 
 Parameters
 ----------
 t : const Aff_transformation_3 < Kernel > &
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Point_3_operator_5 = "returns true iff p is lexicographically smaller than q (the lexicographical order being defined on the Cartesian coordinates).
+constexpr const char* Point_3_operator_5 = "returns true iff p is lexicographically smaller than q (the lexicographical order being defined on the Cartesian coordinates).
 
 Parameters
 ----------
@@ -2185,7 +2185,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_6 = "returns true iff p is lexicographically greater than q .
+constexpr const char* Point_3_operator_6 = "returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -2193,7 +2193,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_7 = "returns true iff p is lexicographically smaller or equal to q .
+constexpr const char* Point_3_operator_7 = "returns true iff p is lexicographically smaller or equal to q .
 
 Parameters
 ----------
@@ -2201,7 +2201,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_8 = "returns true iff p is lexicographically greater or equal to q .
+constexpr const char* Point_3_operator_8 = "returns true iff p is lexicographically greater or equal to q .
 
 Parameters
 ----------
@@ -2209,7 +2209,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_9 = "returns the difference vector between q and p .
+constexpr const char* Point_3_operator_9 = "returns the difference vector between q and p .
 
 You can substitute ORIGIN for either p or q , but not for both.
 
@@ -2221,9 +2221,9 @@ q : const Point_3 < Kernel > &
 Returns: Vector_3 < Kernel >";
 
 // CGAL::Projection_traits_3
-constexpr const char* CGAL_Projection_traits_3__class__ = "The class Projection_traits_3 works similarly to the Projection_traits_xy_3 , Projection_traits_xz_3 , and Projection_traits_yz_3 traits classes, enabling the use of 2D algorithms on the projections of 3D data onto an arbitrary plane.";
+constexpr const char* Projection_traits_3__class__ = "The class Projection_traits_3 works similarly to the Projection_traits_xy_3 , Projection_traits_xz_3 , and Projection_traits_yz_3 traits classes, enabling the use of 2D algorithms on the projections of 3D data onto an arbitrary plane.";
 
-constexpr const char* CGAL_Projection_traits_3_Projection_traits_3 = "Constructor.
+constexpr const char* Projection_traits_3_Projection_traits_3 = "Constructor.
 
 normal a vector orthogonal to the projection plane.
 
@@ -2232,9 +2232,9 @@ Parameters
 normal : const typename GeomTraits::Vector_3 &";
 
 // CGAL::Projection_traits_xy_3
-constexpr const char* CGAL_Projection_traits_xy_3__class__ = "The class Projection_traits_xy_3 is an adapter to apply 2D algorithms to the projections of 3D data on the xy -plane.";
+constexpr const char* Projection_traits_xy_3__class__ = "The class Projection_traits_xy_3 is an adapter to apply 2D algorithms to the projections of 3D data on the xy -plane.";
 
-constexpr const char* CGAL_Projection_traits_xy_3_Intersect_2 = "A construction object.
+constexpr const char* Projection_traits_xy_3_Intersect_2 = "A construction object.
 
 Provides the operator : std::optional< std::variant< Point_2 , Segment_2 > >
 operator()(Segment_2 s1, Segment_2 s2); which returns a 3D object whose
@@ -2246,13 +2246,13 @@ p1 and p2 are the two points of s1 and s2 respectively, both projecting on p .
 The projection of s1 and the projection of s2 are non-degenerate 2D segments.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Projection_traits_xy_3_Projection_traits_xy_3 = "default constructor.";
-constexpr const char* CGAL_Projection_traits_xy_3_Projection_traits_xy_3_1 = "Copy constructor.
+constexpr const char* Projection_traits_xy_3_Projection_traits_xy_3 = "default constructor.";
+constexpr const char* Projection_traits_xy_3_Projection_traits_xy_3_1 = "Copy constructor.
 
 Parameters
 ----------
 tr : Projection_traits_xy_3";
-constexpr const char* CGAL_Projection_traits_xy_3_operator = "Assignment operator.
+constexpr const char* Projection_traits_xy_3_operator = "Assignment operator.
 
 Parameters
 ----------
@@ -2261,15 +2261,15 @@ tr : Projection_traits_xy_3
 Returns: Projection_traits_xy_3";
 
 // CGAL::Projection_traits_xz_3
-constexpr const char* CGAL_Projection_traits_xz_3__class__ = "The class Projection_traits_xz_3 is an adapter to apply 2D algorithms to the projections of 3D data on the xz -plane.";
+constexpr const char* Projection_traits_xz_3__class__ = "The class Projection_traits_xz_3 is an adapter to apply 2D algorithms to the projections of 3D data on the xz -plane.";
 
 // CGAL::Projection_traits_yz_3
-constexpr const char* CGAL_Projection_traits_yz_3__class__ = "The class Projection_traits_yz_3 is an adapter to apply 2D algorithms to the projections of 3D data on the yz -plane.";
+constexpr const char* Projection_traits_yz_3__class__ = "The class Projection_traits_yz_3 is an adapter to apply 2D algorithms to the projections of 3D data on the yz -plane.";
 
 // CGAL::Ray_2
-constexpr const char* CGAL_Ray_2__class__ = "An object r of the data type Ray_2 is a directed straight ray in the two-dimensional Euclidean plane $ \\E^2$ .";
+constexpr const char* Ray_2__class__ = "An object r of the data type Ray_2 is a directed straight ray in the two-dimensional Euclidean plane $ \\E^2$ .";
 
-constexpr const char* CGAL_Ray_2_Ray_2 = "introduces a ray r with source p and passing through point q .
+constexpr const char* Ray_2_Ray_2 = "introduces a ray r with source p and passing through point q .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2278,45 +2278,45 @@ Parameters
 ----------
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Ray_2_Ray_2_1 = "introduces a ray r starting at source p with direction d .
+constexpr const char* Ray_2_Ray_2_1 = "introduces a ray r starting at source p with direction d .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 d : const Direction_2 < Kernel > &";
-constexpr const char* CGAL_Ray_2_Ray_2_2 = "introduces a ray r starting at source p with the direction of v .
+constexpr const char* Ray_2_Ray_2_2 = "introduces a ray r starting at source p with the direction of v .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 v : const Vector_2 < Kernel > &";
-constexpr const char* CGAL_Ray_2_Ray_2_3 = "introduces a ray r starting at source p with the same direction as l .
+constexpr const char* Ray_2_Ray_2_3 = "introduces a ray r starting at source p with the same direction as l .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 l : const Line_2 < Kernel > &";
-constexpr const char* CGAL_Ray_2_operator = "Test for equality: two rays are equal, iff they have the same source and the same direction.
+constexpr const char* Ray_2_operator = "Test for equality: two rays are equal, iff they have the same source and the same direction.
 
 Parameters
 ----------
 h : const Ray_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_2_operator_1 = "Test for inequality.
+constexpr const char* Ray_2_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 h : const Ray_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_2_source = "returns the source of r .
+constexpr const char* Ray_2_source = "returns the source of r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Ray_2_point = "returns a point on r .
+constexpr const char* Ray_2_point = "returns a point on r .
 
 point(0) is the source, point(i) , with i>0 , is different from the source. i
 >= 0 .
@@ -2326,29 +2326,29 @@ Parameters
 i : const Kernel::FT
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Ray_2_direction = "returns the direction of r .
+constexpr const char* Ray_2_direction = "returns the direction of r .
 
 Returns: Direction_2 < Kernel >";
-constexpr const char* CGAL_Ray_2_to_vector = "returns a vector giving the direction of r .
+constexpr const char* Ray_2_to_vector = "returns a vector giving the direction of r .
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Ray_2_supporting_line = "returns the line supporting r which has the same direction.
+constexpr const char* Ray_2_supporting_line = "returns the line supporting r which has the same direction.
 
 Returns: Line_2 < Kernel >";
-constexpr const char* CGAL_Ray_2_opposite = "returns the ray with the same source and the opposite direction.
+constexpr const char* Ray_2_opposite = "returns the ray with the same source and the opposite direction.
 
 Returns: Ray_2 < Kernel >";
-constexpr const char* CGAL_Ray_2_is_degenerate = "ray r is degenerate, if the source and the second defining point fall together (that is if the direction is degenerate).
+constexpr const char* Ray_2_is_degenerate = "ray r is degenerate, if the source and the second defining point fall together (that is if the direction is degenerate).
 
 Returns: bool";
-constexpr const char* CGAL_Ray_2_has_on = "A point is on r , iff it is equal to the source of r , or if it is in the interior of r .
+constexpr const char* Ray_2_has_on = "A point is on r , iff it is equal to the source of r , or if it is in the interior of r .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_2_collinear_has_on = "checks if point p is on r .
+constexpr const char* Ray_2_collinear_has_on = "checks if point p is on r .
 
 This function is faster than function has_on() if the precondition checking is
 disabled. p is on the supporting line of r .
@@ -2358,7 +2358,7 @@ Parameters
 p : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_2_transform = "returns the ray obtained by applying t on the source and on the direction of r .
+constexpr const char* Ray_2_transform = "returns the ray obtained by applying t on the source and on the direction of r .
 
 Parameters
 ----------
@@ -2367,9 +2367,9 @@ t : const Aff_transformation_2 < Kernel > &
 Returns: Ray_2 < Kernel >";
 
 // CGAL::Ray_3
-constexpr const char* CGAL_Ray_3__class__ = "An object r of the data type Ray_3 is a directed straight ray in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Ray_3__class__ = "An object r of the data type Ray_3 is a directed straight ray in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Ray_3_Ray_3 = "introduces a ray r with source p and passing through point q .
+constexpr const char* Ray_3_Ray_3 = "introduces a ray r with source p and passing through point q .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2378,45 +2378,45 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Ray_3_Ray_3_1 = "introduces a ray r with source p and with direction d .
+constexpr const char* Ray_3_Ray_3_1 = "introduces a ray r with source p and with direction d .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 d : const Direction_3 < Kernel > &";
-constexpr const char* CGAL_Ray_3_Ray_3_2 = "introduces a ray r with source p and with a direction given by v .
+constexpr const char* Ray_3_Ray_3_2 = "introduces a ray r with source p and with a direction given by v .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 v : const Vector_3 < Kernel > &";
-constexpr const char* CGAL_Ray_3_Ray_3_3 = "introduces a ray r starting at source p with the same direction as l .
+constexpr const char* Ray_3_Ray_3_3 = "introduces a ray r starting at source p with the same direction as l .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 l : const Line_3 < Kernel > &";
-constexpr const char* CGAL_Ray_3_operator = "Test for equality: two rays are equal, iff they have the same source and the same direction.
+constexpr const char* Ray_3_operator = "Test for equality: two rays are equal, iff they have the same source and the same direction.
 
 Parameters
 ----------
 h : const Ray_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_3_operator_1 = "Test for inequality.
+constexpr const char* Ray_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 h : const Ray_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_3_source = "returns the source of r
+constexpr const char* Ray_3_source = "returns the source of r
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Ray_3_point = "returns a point on r .
+constexpr const char* Ray_3_point = "returns a point on r .
 
 point(0) is the source. point(i) , with i>0 , is different from the source. i
 >= 0 .
@@ -2426,29 +2426,29 @@ Parameters
 i : const Kernel::FT
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Ray_3_direction = "returns the direction of r .
+constexpr const char* Ray_3_direction = "returns the direction of r .
 
 Returns: Direction_3 < Kernel >";
-constexpr const char* CGAL_Ray_3_to_vector = "returns a vector giving the direction of r .
+constexpr const char* Ray_3_to_vector = "returns a vector giving the direction of r .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Ray_3_supporting_line = "returns the line supporting r which has the same direction.
+constexpr const char* Ray_3_supporting_line = "returns the line supporting r which has the same direction.
 
 Returns: Line_3 < Kernel >";
-constexpr const char* CGAL_Ray_3_opposite = "returns the ray with the same source and the opposite direction.
+constexpr const char* Ray_3_opposite = "returns the ray with the same source and the opposite direction.
 
 Returns: Ray_3 < Kernel >";
-constexpr const char* CGAL_Ray_3_is_degenerate = "ray r is degenerate, if the source and the second defining point fall together (that is if the direction is degenerate).
+constexpr const char* Ray_3_is_degenerate = "ray r is degenerate, if the source and the second defining point fall together (that is if the direction is degenerate).
 
 Returns: bool";
-constexpr const char* CGAL_Ray_3_has_on = "A point is on r , iff it is equal to the source of r , or if it is in the interior of r .
+constexpr const char* Ray_3_has_on = "A point is on r , iff it is equal to the source of r , or if it is in the interior of r .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_3_transform = "returns the ray obtained by applying t on the source and on the direction of r .
+constexpr const char* Ray_3_transform = "returns the ray obtained by applying t on the source and on the direction of r .
 
 Parameters
 ----------
@@ -2457,18 +2457,18 @@ t : const Aff_transformation_3 < Kernel > &
 Returns: Ray_3 < Kernel >";
 
 // CGAL::Reflection
-constexpr const char* CGAL_Reflection__class__ = "Tag class for affine transformations.";
+constexpr const char* Reflection__class__ = "Tag class for affine transformations.";
 
 // CGAL::Rotation
-constexpr const char* CGAL_Rotation__class__ = "Tag class for affine transformations.";
+constexpr const char* Rotation__class__ = "Tag class for affine transformations.";
 
 // CGAL::Scaling
-constexpr const char* CGAL_Scaling__class__ = "Tag class for affine transformations.";
+constexpr const char* Scaling__class__ = "Tag class for affine transformations.";
 
 // CGAL::Segment_2
-constexpr const char* CGAL_Segment_2__class__ = "An object s of the data type Segment_2 is a directed straight line segment in the two-dimensional Euclidean plane $ \\E^2$ , i.e. a straight line segment $ [p,q]$ connecting two points $ p,q \\in \\mathbb{R}^2$ .";
+constexpr const char* Segment_2__class__ = "An object s of the data type Segment_2 is a directed straight line segment in the two-dimensional Euclidean plane $ \\E^2$ , i.e. a straight line segment $ [p,q]$ connecting two points $ p,q \\in \\mathbb{R}^2$ .";
 
-constexpr const char* CGAL_Segment_2_Segment_2 = "introduces a segment s with source p and target q .
+constexpr const char* Segment_2_Segment_2 = "introduces a segment s with source p and target q .
 
 The segment is directed from the source towards the target. Exactness This
 construction is trivial and therefore always exact in
@@ -2478,45 +2478,45 @@ Parameters
 ----------
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Segment_2_operator = "Test for equality: Two segments are equal, iff their sources and targets are equal.
+constexpr const char* Segment_2_operator = "Test for equality: Two segments are equal, iff their sources and targets are equal.
 
 Parameters
 ----------
 q : const Segment_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_2_operator_1 = "Test for inequality.
+constexpr const char* Segment_2_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 q : const Segment_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_2_source = "returns the source of s .
+constexpr const char* Segment_2_source = "returns the source of s .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_target = "returns the target of s .
+constexpr const char* Segment_2_target = "returns the target of s .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_min = "returns the point of s with lexicographically smallest coordinate.
+constexpr const char* Segment_2_min = "returns the point of s with lexicographically smallest coordinate.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_max = "returns the point of s with lexicographically largest coordinate.
+constexpr const char* Segment_2_max = "returns the point of s with lexicographically largest coordinate.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_vertex = "returns source or target of s : vertex(0) returns the source of s , vertex(1) returns the target of s .
+constexpr const char* Segment_2_vertex = "returns source or target of s : vertex(0) returns the source of s , vertex(1) returns the target of s .
 
 The parameter i is taken modulo 2, which gives easy access to the other
 vertex. Exactness This construction is trivial and therefore always exact in
@@ -2527,7 +2527,7 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_point = "returns vertex(i) .
+constexpr const char* Segment_2_point = "returns vertex(i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2537,7 +2537,7 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_operator_2 = "returns vertex(i) .
+constexpr const char* Segment_2_operator_2 = "returns vertex(i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2547,37 +2547,37 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_squared_length = "returns the squared length of s .
+constexpr const char* Segment_2_squared_length = "returns the squared length of s .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Segment_2_direction = "returns the direction from source to target of s .
+constexpr const char* Segment_2_direction = "returns the direction from source to target of s .
 
 Returns: Direction_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_to_vector = "returns the vector s.target() - s.source() .
+constexpr const char* Segment_2_to_vector = "returns the vector s.target() - s.source() .
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_opposite = "returns a segment with source and target point interchanged.
+constexpr const char* Segment_2_opposite = "returns a segment with source and target point interchanged.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Segment_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_supporting_line = "returns the line l passing through s .
+constexpr const char* Segment_2_supporting_line = "returns the line l passing through s .
 
 Line l has the same orientation as segment s .
 
 Returns: Line_2 < Kernel >";
-constexpr const char* CGAL_Segment_2_is_degenerate = "segment s is degenerate, if source and target are equal.
+constexpr const char* Segment_2_is_degenerate = "segment s is degenerate, if source and target are equal.
 
 Returns: bool";
-constexpr const char* CGAL_Segment_2_has_on = "A point is on s , iff it is equal to the source or target of s , or if it is in the interior of s .
+constexpr const char* Segment_2_has_on = "A point is on s , iff it is equal to the source or target of s , or if it is in the interior of s .
 
 Parameters
 ----------
 p : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_2_collinear_has_on = "checks if point p is on segment s .
+constexpr const char* Segment_2_collinear_has_on = "checks if point p is on segment s .
 
 This function is faster than function has_on() . p is on the supporting line
 of s .
@@ -2587,13 +2587,13 @@ Parameters
 p : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_2_bbox = "returns a bounding box containing s .
+constexpr const char* Segment_2_bbox = "returns a bounding box containing s .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Segment_2_transform = "returns the segment obtained by applying t on the source and the target of s .
+constexpr const char* Segment_2_transform = "returns the segment obtained by applying t on the source and the target of s .
 
 Parameters
 ----------
@@ -2602,10 +2602,10 @@ t : const Aff_transformation_2 < Kernel > &
 Returns: Segment_2 < Kernel >";
 
 // CGAL::Segment_3
-constexpr const char* CGAL_Segment_3__class__ = "An object s of the data type Segment_3 is a directed straight line segment in the three-dimensional Euclidean space $ \\E^3$ , that is a straight line segment $ [p,q]$ connecting two points $ p,q \\in
+constexpr const char* Segment_3__class__ = "An object s of the data type Segment_3 is a directed straight line segment in the three-dimensional Euclidean space $ \\E^3$ , that is a straight line segment $ [p,q]$ connecting two points $ p,q \\in
 \\R^3$ .";
 
-constexpr const char* CGAL_Segment_3_Segment_3 = "introduces a segment s with source p and target q .
+constexpr const char* Segment_3_Segment_3 = "introduces a segment s with source p and target q .
 
 It is directed from the source towards the target. Exactness This construction
 is trivial and therefore always exact in
@@ -2615,45 +2615,45 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Segment_3_operator = "Test for equality: Two segments are equal, iff their sources and targets are equal.
+constexpr const char* Segment_3_operator = "Test for equality: Two segments are equal, iff their sources and targets are equal.
 
 Parameters
 ----------
 q : const Segment_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_3_operator_1 = "Test for inequality.
+constexpr const char* Segment_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 q : const Segment_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_3_source = "returns the source of s .
+constexpr const char* Segment_3_source = "returns the source of s .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_target = "returns the target of s .
+constexpr const char* Segment_3_target = "returns the target of s .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_min = "returns the point of s with smallest coordinate (lexicographically).
+constexpr const char* Segment_3_min = "returns the point of s with smallest coordinate (lexicographically).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_max = "returns the point of s with largest coordinate (lexicographically).
+constexpr const char* Segment_3_max = "returns the point of s with largest coordinate (lexicographically).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_vertex = "returns source or target of s : vertex(0) returns the source, vertex(1) returns the target.
+constexpr const char* Segment_3_vertex = "returns source or target of s : vertex(0) returns the source, vertex(1) returns the target.
 
 The parameter i is taken modulo 2, which gives easy access to the other
 vertex. Exactness This construction is trivial and therefore always exact in
@@ -2664,7 +2664,7 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_point = "returns vertex(i) .
+constexpr const char* Segment_3_point = "returns vertex(i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2674,7 +2674,7 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_operator_2 = "returns vertex(i) .
+constexpr const char* Segment_3_operator_2 = "returns vertex(i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2684,44 +2684,44 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_squared_length = "returns the squared length of s .
+constexpr const char* Segment_3_squared_length = "returns the squared length of s .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Segment_3_to_vector = "returns the vector s.target() - s.source() .
+constexpr const char* Segment_3_to_vector = "returns the vector s.target() - s.source() .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_direction = "returns the direction from source to target.
+constexpr const char* Segment_3_direction = "returns the direction from source to target.
 
 Returns: Direction_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_opposite = "returns a segment with source and target interchanged.
+constexpr const char* Segment_3_opposite = "returns a segment with source and target interchanged.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Segment_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_supporting_line = "returns the line l passing through s .
+constexpr const char* Segment_3_supporting_line = "returns the line l passing through s .
 
 Line l has the same orientation as segment s , that is from the source to the
 target of s .
 
 Returns: Line_3 < Kernel >";
-constexpr const char* CGAL_Segment_3_is_degenerate = "segment s is degenerate, if source and target fall together.
+constexpr const char* Segment_3_is_degenerate = "segment s is degenerate, if source and target fall together.
 
 Returns: bool";
-constexpr const char* CGAL_Segment_3_has_on = "A point is on s , iff it is equal to the source or target of s , or if it is in the interior of s .
+constexpr const char* Segment_3_has_on = "A point is on s , iff it is equal to the source or target of s , or if it is in the interior of s .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_3_bbox = "returns a bounding box containing s .
+constexpr const char* Segment_3_bbox = "returns a bounding box containing s .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Segment_3_transform = "returns the segment obtained by applying t on the source and the target of s .
+constexpr const char* Segment_3_transform = "returns the segment obtained by applying t on the source and the target of s .
 
 Parameters
 ----------
@@ -2730,17 +2730,17 @@ t : const Aff_transformation_3 < Kernel > &
 Returns: Segment_3 < Kernel >";
 
 // CGAL::Simple_cartesian
-constexpr const char* CGAL_Simple_cartesian__class__ = "A model for a Kernel using Cartesian coordinates to represent the geometric objects.";
+constexpr const char* Simple_cartesian__class__ = "A model for a Kernel using Cartesian coordinates to represent the geometric objects.";
 
 
 // CGAL::Simple_homogeneous
-constexpr const char* CGAL_Simple_homogeneous__class__ = "A model for a Kernel using homogeneous coordinates to represent the geometric objects.";
+constexpr const char* Simple_homogeneous__class__ = "A model for a Kernel using homogeneous coordinates to represent the geometric objects.";
 
 
 // CGAL::Sphere_3
-constexpr const char* CGAL_Sphere_3__class__ = "An object of type Sphere_3 is a sphere in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Sphere_3__class__ = "An object of type Sphere_3 is a sphere in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Sphere_3_Sphere_3 = "introduces a variable c of type Sphere_3 .
+constexpr const char* Sphere_3_Sphere_3 = "introduces a variable c of type Sphere_3 .
 
 It is initialized to the sphere with center center , squared radius
 squared_radius and orientation orientation . orientation != COPLANAR and
@@ -2752,7 +2752,7 @@ Parameters
 center : const Point_3 < Kernel > &
 squared_radius : const Kernel::FT &
 orientation : const Orientation &";
-constexpr const char* CGAL_Sphere_3_Sphere_3_1 = "introduces a variable c of type Sphere_3 .
+constexpr const char* Sphere_3_Sphere_3_1 = "introduces a variable c of type Sphere_3 .
 
 It is initialized to the unique sphere which passes through the points p , q ,
 r and s . The orientation of the sphere is the orientation of the point
@@ -2764,7 +2764,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 r : const Point_3 < Kernel > &
 s : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Sphere_3_Sphere_3_2 = "introduces a variable c of type Sphere_3 .
+constexpr const char* Sphere_3_Sphere_3_2 = "introduces a variable c of type Sphere_3 .
 
 It is initialized to the smallest sphere which passes through the points p , q
 , and r . The orientation of the sphere is o . o != COPLANAR .
@@ -2775,7 +2775,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 r : const Point_3 < Kernel > &
 o : const Orientation &";
-constexpr const char* CGAL_Sphere_3_Sphere_3_3 = "introduces a variable c of type Sphere_3 .
+constexpr const char* Sphere_3_Sphere_3_3 = "introduces a variable c of type Sphere_3 .
 
 It is initialized to the smallest sphere which passes through the points p and
 q . The orientation of the sphere is o . o != COPLANAR .
@@ -2785,7 +2785,7 @@ Parameters
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 o : const Orientation &";
-constexpr const char* CGAL_Sphere_3_Sphere_3_4 = "introduces a variable c of type Sphere_3 .
+constexpr const char* Sphere_3_Sphere_3_4 = "introduces a variable c of type Sphere_3 .
 
 It is initialized to the sphere with center center , squared radius zero and
 orientation orientation . orientation != COPLANAR . c.is_degenerate() = true .
@@ -2796,7 +2796,7 @@ Parameters
 ----------
 center : const Point_3 < Kernel > &
 orientation : const Orientation &";
-constexpr const char* CGAL_Sphere_3_Sphere_3_5 = "introduces a variable c of type Sphere_3 .
+constexpr const char* Sphere_3_Sphere_3_5 = "introduces a variable c of type Sphere_3 .
 
 It is initialized to the diametral sphere of the circle. Exactness This
 construction is trivial and therefore always exact in
@@ -2805,62 +2805,62 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 c : const Circle_3 < Kernel > &";
-constexpr const char* CGAL_Sphere_3_center = "returns the center of c .
+constexpr const char* Sphere_3_center = "returns the center of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: const Point_3 < Kernel > &";
-constexpr const char* CGAL_Sphere_3_squared_radius = "returns the squared radius of c .
+constexpr const char* Sphere_3_squared_radius = "returns the squared radius of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT const &";
-constexpr const char* CGAL_Sphere_3_orientation = "returns the orientation of c .
+constexpr const char* Sphere_3_orientation = "returns the orientation of c .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Orientation const &";
-constexpr const char* CGAL_Sphere_3_operator = "returns true , iff c and sphere2 are equal, i.e. if they have the same center, same squared radius and same orientation.
+constexpr const char* Sphere_3_operator = "returns true , iff c and sphere2 are equal, i.e. if they have the same center, same squared radius and same orientation.
 
 Parameters
 ----------
 sphere2 : const Sphere_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_3_operator_1 = "returns true , iff c and sphere2 are not equal.
+constexpr const char* Sphere_3_operator_1 = "returns true , iff c and sphere2 are not equal.
 
 Parameters
 ----------
 sphere2 : const Sphere_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_3_is_degenerate = "returns true , iff c is degenerate, i.e. if c has squared radius zero.
+constexpr const char* Sphere_3_is_degenerate = "returns true , iff c is degenerate, i.e. if c has squared radius zero.
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_3_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of c , resp.
+constexpr const char* Sphere_3_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of c , resp.
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Sphere_3_bounded_side = "returns ON_BOUNDED_SIDE , ON_BOUNDARY , or ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of c , resp.
+constexpr const char* Sphere_3_bounded_side = "returns ON_BOUNDED_SIDE , ON_BOUNDARY , or ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of c , resp.
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Sphere_3_opposite = "returns the sphere with the same center and squared radius as c but with opposite orientation.
+constexpr const char* Sphere_3_opposite = "returns the sphere with the same center and squared radius as c but with opposite orientation.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Sphere_3 < Kernel >";
-constexpr const char* CGAL_Sphere_3_orthogonal_transform = "returns the sphere obtained by applying at on c .
+constexpr const char* Sphere_3_orthogonal_transform = "returns the sphere obtained by applying at on c .
 
 at is an orthogonal transformation.
 
@@ -2869,14 +2869,14 @@ Parameters
 at : Aff_transformation_3 < Kernel > const &
 
 Returns: Sphere_3 < Kernel >";
-constexpr const char* CGAL_Sphere_3_bbox = "returns a bounding box containing c .
+constexpr const char* Sphere_3_bbox = "returns a bounding box containing c .
 
 Returns: Bbox_3";
 
 // CGAL::Tetrahedron_3
-constexpr const char* CGAL_Tetrahedron_3__class__ = "An object t of the class Tetrahedron_3 is an oriented tetrahedron in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Tetrahedron_3__class__ = "An object t of the class Tetrahedron_3 is an oriented tetrahedron in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Tetrahedron_3_Tetrahedron_3 = "introduces a tetrahedron t with vertices p0 , p1 , p2 and p3 .
+constexpr const char* Tetrahedron_3_Tetrahedron_3 = "introduces a tetrahedron t with vertices p0 , p1 , p2 and p3 .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2887,21 +2887,21 @@ p0 : const Point_3 < Kernel > &
 p1 : const Point_3 < Kernel > &
 p2 : const Point_3 < Kernel > &
 p3 : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Tetrahedron_3_operator = "Test for equality: two tetrahedra t and t2 are equal, iff t and t2 have the same orientation and their sets (not sequences) of vertices are equal.
+constexpr const char* Tetrahedron_3_operator = "Test for equality: two tetrahedra t and t2 are equal, iff t and t2 have the same orientation and their sets (not sequences) of vertices are equal.
 
 Parameters
 ----------
 t2 : const Tetrahedron_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Tetrahedron_3_operator_1 = "Test for inequality.
+constexpr const char* Tetrahedron_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 t2 : const Tetrahedron_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Tetrahedron_3_vertex = "returns the i-th vertex modulo 4 of t .
+constexpr const char* Tetrahedron_3_vertex = "returns the i-th vertex modulo 4 of t .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2911,7 +2911,7 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Tetrahedron_3_operator_2 = "returns vertex(int i) .
+constexpr const char* Tetrahedron_3_operator_2 = "returns vertex(int i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2921,10 +2921,10 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Tetrahedron_3_is_degenerate = "Tetrahedron t is degenerate, if the vertices are coplanar.
+constexpr const char* Tetrahedron_3_is_degenerate = "Tetrahedron t is degenerate, if the vertices are coplanar.
 
 Returns: bool";
-constexpr const char* CGAL_Tetrahedron_3_oriented_side = "
+constexpr const char* Tetrahedron_3_oriented_side = "
 t is not degenerate.
 
 Parameters
@@ -2932,7 +2932,7 @@ Parameters
 p : const Point_3 < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Tetrahedron_3_bounded_side = "
+constexpr const char* Tetrahedron_3_bounded_side = "
 t is not degenerate.
 
 Parameters
@@ -2940,16 +2940,16 @@ Parameters
 p : const Point_3 < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Tetrahedron_3_volume = "returns the signed volume of t .
+constexpr const char* Tetrahedron_3_volume = "returns the signed volume of t .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Tetrahedron_3_bbox = "returns a bounding box containing t .
+constexpr const char* Tetrahedron_3_bbox = "returns a bounding box containing t .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Tetrahedron_3_transform = "returns the tetrahedron obtained by applying at on the three vertices of t .
+constexpr const char* Tetrahedron_3_transform = "returns the tetrahedron obtained by applying at on the three vertices of t .
 
 Parameters
 ----------
@@ -2958,12 +2958,12 @@ at : const Aff_transformation_3 < Kernel > &
 Returns: Tetrahedron_3 < Kernel >";
 
 // CGAL::Translation
-constexpr const char* CGAL_Translation__class__ = "Tag class for affine transformations.";
+constexpr const char* Translation__class__ = "Tag class for affine transformations.";
 
 // CGAL::Triangle_2
-constexpr const char* CGAL_Triangle_2__class__ = "An object t of the class Triangle_2 is a triangle in the two-dimensional Euclidean plane $ \\E^2$ .";
+constexpr const char* Triangle_2__class__ = "An object t of the class Triangle_2 is a triangle in the two-dimensional Euclidean plane $ \\E^2$ .";
 
-constexpr const char* CGAL_Triangle_2_Triangle_2 = "introduces a triangle t with vertices p , q and r .
+constexpr const char* Triangle_2_Triangle_2 = "introduces a triangle t with vertices p , q and r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2973,21 +2973,21 @@ Parameters
 p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 r : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Triangle_2_operator = "Test for equality: two triangles are equal, iff there exists a cyclic permutation of the vertices of $ t2$ , such that they are equal to the vertices of t .
+constexpr const char* Triangle_2_operator = "Test for equality: two triangles are equal, iff there exists a cyclic permutation of the vertices of $ t2$ , such that they are equal to the vertices of t .
 
 Parameters
 ----------
 t2 : const Triangle_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_2_operator_1 = "Test for inequality.
+constexpr const char* Triangle_2_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 t2 : const Triangle_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_2_vertex = "returns the i-th vertex modulo 3 of t .
+constexpr const char* Triangle_2_vertex = "returns the i-th vertex modulo 3 of t .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -2997,7 +2997,7 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Triangle_2_operator_2 = "returns vertex(i) .
+constexpr const char* Triangle_2_operator_2 = "returns vertex(i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3007,13 +3007,13 @@ Parameters
 i : int
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Triangle_2_is_degenerate = "triangle t is degenerate, if the vertices are collinear.
+constexpr const char* Triangle_2_is_degenerate = "triangle t is degenerate, if the vertices are collinear.
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_2_orientation = "returns the orientation of t .
+constexpr const char* Triangle_2_orientation = "returns the orientation of t .
 
 Returns: Orientation";
-constexpr const char* CGAL_Triangle_2_oriented_side = "returns ON_ORIENTED_BOUNDARY , or POSITIVE_SIDE , or the constant ON_NEGATIVE_SIDE , determined by the position of point p .
+constexpr const char* Triangle_2_oriented_side = "returns ON_ORIENTED_BOUNDARY , or POSITIVE_SIDE , or the constant ON_NEGATIVE_SIDE , determined by the position of point p .
 
 t is not degenerate.
 
@@ -3022,7 +3022,7 @@ Parameters
 p : const Point_2 < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Triangle_2_bounded_side = "returns the constant ON_BOUNDARY , ON_BOUNDED_SIDE , or else ON_UNBOUNDED_SIDE , depending on where point p is.
+constexpr const char* Triangle_2_bounded_side = "returns the constant ON_BOUNDARY , ON_BOUNDED_SIDE , or else ON_UNBOUNDED_SIDE , depending on where point p is.
 
 t is not degenerate.
 
@@ -3031,7 +3031,7 @@ Parameters
 p : const Point_2 < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Triangle_2_has_on_unbounded_side = "
+constexpr const char* Triangle_2_has_on_unbounded_side = "
 t is not degenerate.
 
 Parameters
@@ -3039,22 +3039,22 @@ Parameters
 p : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_2_opposite = "returns a triangle where the boundary is oriented the other way round (this flips the positive and the negative side, but not the bounded and unbounded side).
+constexpr const char* Triangle_2_opposite = "returns a triangle where the boundary is oriented the other way round (this flips the positive and the negative side, but not the bounded and unbounded side).
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Triangle_2 < Kernel >";
-constexpr const char* CGAL_Triangle_2_area = "returns the signed area of t .
+constexpr const char* Triangle_2_area = "returns the signed area of t .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Triangle_2_bbox = "returns a bounding box containing t .
+constexpr const char* Triangle_2_bbox = "returns a bounding box containing t .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Triangle_2_transform = "returns the triangle obtained by applying $ at$ on the three vertices of t .
+constexpr const char* Triangle_2_transform = "returns the triangle obtained by applying $ at$ on the three vertices of t .
 
 Parameters
 ----------
@@ -3063,9 +3063,9 @@ at : const Aff_transformation_2 < Kernel > &
 Returns: Triangle_2 < Kernel >";
 
 // CGAL::Triangle_3
-constexpr const char* CGAL_Triangle_3__class__ = "An object t of the class Triangle_3 is a triangle in the three-dimensional Euclidean space $ \\E^3$ .";
+constexpr const char* Triangle_3__class__ = "An object t of the class Triangle_3 is a triangle in the three-dimensional Euclidean space $ \\E^3$ .";
 
-constexpr const char* CGAL_Triangle_3_Triangle_3 = "introduces a triangle t with vertices p , q and r .
+constexpr const char* Triangle_3_Triangle_3 = "introduces a triangle t with vertices p , q and r .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3075,21 +3075,21 @@ Parameters
 p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 r : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Triangle_3_operator = "Test for equality: two triangles t1 and t2 are equal, iff there exists a cyclic permutation of the vertices of t2 , such that they are equal to the vertices of t1 .
+constexpr const char* Triangle_3_operator = "Test for equality: two triangles t1 and t2 are equal, iff there exists a cyclic permutation of the vertices of t2 , such that they are equal to the vertices of t1 .
 
 Parameters
 ----------
 t2 : const Triangle_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_3_operator_1 = "Test for inequality.
+constexpr const char* Triangle_3_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 t2 : const Triangle_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_3_vertex = "returns the i-th vertex modulo 3 of t .
+constexpr const char* Triangle_3_vertex = "returns the i-th vertex modulo 3 of t .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3099,7 +3099,7 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Triangle_3_operator_2 = "returns vertex(int i) .
+constexpr const char* Triangle_3_operator_2 = "returns vertex(int i) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3109,29 +3109,29 @@ Parameters
 i : int
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Triangle_3_supporting_plane = "returns the supporting plane of t , with same orientation.
+constexpr const char* Triangle_3_supporting_plane = "returns the supporting plane of t , with same orientation.
 
 Returns: Plane_3 < Kernel >";
-constexpr const char* CGAL_Triangle_3_is_degenerate = "t is degenerate if its vertices are collinear.
+constexpr const char* Triangle_3_is_degenerate = "t is degenerate if its vertices are collinear.
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_3_has_on = "A point is on t , if it is on a vertex, an edge or the face of t .
+constexpr const char* Triangle_3_has_on = "A point is on t , if it is on a vertex, an edge or the face of t .
 
 Parameters
 ----------
 p : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangle_3_squared_area = "returns a square of the area of t .
+constexpr const char* Triangle_3_squared_area = "returns a square of the area of t .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Triangle_3_bbox = "returns a bounding box containing t .
+constexpr const char* Triangle_3_bbox = "returns a bounding box containing t .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Triangle_3_transform = "returns the triangle obtained by applying at on the three vertices of t .
+constexpr const char* Triangle_3_transform = "returns the triangle obtained by applying at on the three vertices of t .
 
 Parameters
 ----------
@@ -3140,44 +3140,44 @@ at : const Aff_transformation_3 < Kernel > &
 Returns: Triangle_3 < Kernel >";
 
 // CGAL::Vector_2
-constexpr const char* CGAL_Vector_2__class__ = "An object v of the class Vector_2 is a vector in the two-dimensional vector space $ \\mathbb{R}^2$ .";
+constexpr const char* Vector_2__class__ = "An object v of the class Vector_2 is a vector in the two-dimensional vector space $ \\mathbb{R}^2$ .";
 
-constexpr const char* CGAL_Vector_2_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a vector.
+constexpr const char* Vector_2_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a vector.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Vector_2_Vector_2 = "introduces the vector b-a .
+constexpr const char* Vector_2_Vector_2 = "introduces the vector b-a .
 
 Parameters
 ----------
 a : const Point_2 < Kernel > &
 b : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_Vector_2_1 = "introduces the vector s.target()-s.source() .
+constexpr const char* Vector_2_Vector_2_1 = "introduces the vector s.target()-s.source() .
 
 Parameters
 ----------
 s : const Segment_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_Vector_2_2 = "introduces the vector having the same direction as r .
+constexpr const char* Vector_2_Vector_2_2 = "introduces the vector having the same direction as r .
 
 Parameters
 ----------
 r : const Ray_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_Vector_2_3 = "introduces the vector having the same direction as l .
+constexpr const char* Vector_2_Vector_2_3 = "introduces the vector having the same direction as l .
 
 Parameters
 ----------
 l : const Line_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_Vector_2_4 = "introduces a null vector v .
+constexpr const char* Vector_2_Vector_2_4 = "introduces a null vector v .
 
 Parameters
 ----------
 NULL_VECTOR : const Null_vector &";
-constexpr const char* CGAL_Vector_2_Vector_2_5 = "introduces a vector v initialized to ( x , y ) .
+constexpr const char* Vector_2_Vector_2_5 = "introduces a vector v initialized to ( x , y ) .
 
 Parameters
 ----------
 x : int
 y : int";
-constexpr const char* CGAL_Vector_2_Vector_2_6 = "introduces a vector v initialized to ( x , y ) .
+constexpr const char* Vector_2_Vector_2_6 = "introduces a vector v initialized to ( x , y ) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3186,7 +3186,7 @@ Parameters
 ----------
 x : double
 y : double";
-constexpr const char* CGAL_Vector_2_Vector_2_7 = "introduces a vector v initialized to (hx/hw,hy/hw) .
+constexpr const char* Vector_2_Vector_2_7 = "introduces a vector v initialized to (hx/hw,hy/hw) .
 
 hw != 0 .
 
@@ -3195,7 +3195,7 @@ Parameters
 hx : const Kernel::RT &
 hy : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Vector_2_Vector_2_8 = "introduces a vector v initialized to ( x , y ) .
+constexpr const char* Vector_2_Vector_2_8 = "introduces a vector v initialized to ( x , y ) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3204,28 +3204,28 @@ Parameters
 ----------
 x : const Kernel::FT &
 y : const Kernel::FT &";
-constexpr const char* CGAL_Vector_2_hx = "returns the homogeneous $ x$ coordinate.
+constexpr const char* Vector_2_hx = "returns the homogeneous $ x$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_2_hy = "returns the homogeneous $ y$ coordinate.
+constexpr const char* Vector_2_hy = "returns the homogeneous $ y$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_2_hw = "returns the homogenizing coordinate.
+constexpr const char* Vector_2_hw = "returns the homogenizing coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_2_x = "returns the x -coordinate of v , that is hx() / hw() .
+constexpr const char* Vector_2_x = "returns the x -coordinate of v , that is hx() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_2_y = "returns the y -coordinate of v , that is hy() / hw() .
+constexpr const char* Vector_2_y = "returns the y -coordinate of v , that is hy() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_2_homogeneous = "returns the i-th homogeneous coordinate of v .
+constexpr const char* Vector_2_homogeneous = "returns the i-th homogeneous coordinate of v .
 
 0 <= i <= 2 .
 
@@ -3234,7 +3234,7 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_2_cartesian = "returns the i-th Cartesian coordinate of v .
+constexpr const char* Vector_2_cartesian = "returns the i-th Cartesian coordinate of v .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -3244,7 +3244,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_2_operator = "returns cartesian(i) .
+constexpr const char* Vector_2_operator = "returns cartesian(i) .
 
 0 <= i <= 1 . Exactness This construction is trivial and therefore always
 exact in Exact_predicates_inexact_constructions_kernel .
@@ -3254,36 +3254,36 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_2_cartesian_begin = "returns an iterator to the Cartesian coordinates of v , starting with the 0th coordinate.
+constexpr const char* Vector_2_cartesian_begin = "returns an iterator to the Cartesian coordinates of v , starting with the 0th coordinate.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Vector_2_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of v .
+constexpr const char* Vector_2_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of v .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Vector_2_dimension = "returns the dimension (the constant 2).
+constexpr const char* Vector_2_dimension = "returns the dimension (the constant 2).
 
 Returns: int";
-constexpr const char* CGAL_Vector_2_direction = "returns the direction which passes through v .
+constexpr const char* Vector_2_direction = "returns the direction which passes through v .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Direction_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_transform = "returns the vector obtained by applying t on v .
+constexpr const char* Vector_2_transform = "returns the vector obtained by applying t on v .
 
 Parameters
 ----------
 t : const Aff_transformation_2 < Kernel > &
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_perpendicular = "returns the vector perpendicular to v in clockwise or counterclockwise orientation.
+constexpr const char* Vector_2_perpendicular = "returns the vector perpendicular to v in clockwise or counterclockwise orientation.
 
 Parameters
 ----------
 o : const Orientation &
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_operator_1 = "Test for equality: two vectors are equal, iff their $ x$ and $ y$ coordinates are equal.
+constexpr const char* Vector_2_operator_1 = "Test for equality: two vectors are equal, iff their $ x$ and $ y$ coordinates are equal.
 
 You can compare a vector with the NULL_VECTOR .
 
@@ -3292,7 +3292,7 @@ Parameters
 w : const Vector_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Vector_2_operator_2 = "Test for inequality.
+constexpr const char* Vector_2_operator_2 = "Test for inequality.
 
 You can compare a vector with the NULL_VECTOR .
 
@@ -3301,100 +3301,100 @@ Parameters
 w : const Vector_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Vector_2_operator_3 = "Addition.
+constexpr const char* Vector_2_operator_3 = "Addition.
 
 Parameters
 ----------
 w : const Vector_2 < Kernel > &
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_operator_4 = "Addition.
+constexpr const char* Vector_2_operator_4 = "Addition.
 
 Parameters
 ----------
 w : const Vector_2 < Kernel > &
 
 Returns: Vector_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_operator_5 = "Subtraction.
+constexpr const char* Vector_2_operator_5 = "Subtraction.
 
 Parameters
 ----------
 w : const Vector_2 < Kernel > &
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_operator_6 = "Subtraction.
+constexpr const char* Vector_2_operator_6 = "Subtraction.
 
 Parameters
 ----------
 w : const Vector_2 < Kernel > &
 
 Returns: Vector_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_operator_7 = "returns the opposite vector.
+constexpr const char* Vector_2_operator_7 = "returns the opposite vector.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_operator_8 = "returns the scalar product (= inner product) of the two vectors.
+constexpr const char* Vector_2_operator_8 = "returns the scalar product (= inner product) of the two vectors.
 
 Parameters
 ----------
 w : const Vector_2 < Kernel > &
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_2_operator_9 = "Division by a scalar.
+constexpr const char* Vector_2_operator_9 = "Division by a scalar.
 
 Parameters
 ----------
 s : const Kernel::RT &
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Vector_2_operator_10 = "Division by a scalar.
+constexpr const char* Vector_2_operator_10 = "Division by a scalar.
 
 Parameters
 ----------
 s : const Kernel::RT &
 
 Returns: Vector_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_operator_11 = "Multiplication by a scalar.
+constexpr const char* Vector_2_operator_11 = "Multiplication by a scalar.
 
 Parameters
 ----------
 s : const Kernel::RT &
 
 Returns: Vector_2 < Kernel > &";
-constexpr const char* CGAL_Vector_2_squared_length = "returns the squared length of v .
+constexpr const char* Vector_2_squared_length = "returns the squared length of v .
 
 Returns: Kernel::FT";
 
 // CGAL::Vector_3
-constexpr const char* CGAL_Vector_3__class__ = "An object of the class Vector_3 is a vector in the three-dimensional vector space $ \\mathbb{R}^3$ .";
+constexpr const char* Vector_3__class__ = "An object of the class Vector_3 is a vector in the three-dimensional vector space $ \\mathbb{R}^3$ .";
 
-constexpr const char* CGAL_Vector_3_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a vector.
+constexpr const char* Vector_3_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a vector.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Vector_3_Vector_3 = "introduces the vector b-a .
+constexpr const char* Vector_3_Vector_3 = "introduces the vector b-a .
 
 Parameters
 ----------
 a : const Point_3 < Kernel > &
 b : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_Vector_3_1 = "introduces the vector s.target()-s.source() .
+constexpr const char* Vector_3_Vector_3_1 = "introduces the vector s.target()-s.source() .
 
 Parameters
 ----------
 s : const Segment_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_Vector_3_2 = "introduces a vector having the same direction as r .
+constexpr const char* Vector_3_Vector_3_2 = "introduces a vector having the same direction as r .
 
 Parameters
 ----------
 r : const Ray_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_Vector_3_3 = "introduces a vector having the same direction as l .
+constexpr const char* Vector_3_Vector_3_3 = "introduces a vector having the same direction as l .
 
 Parameters
 ----------
 l : const Line_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_Vector_3_4 = "introduces a null vector v .
+constexpr const char* Vector_3_Vector_3_4 = "introduces a null vector v .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3402,14 +3402,14 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 NULL_VECTOR : const Null_vector &";
-constexpr const char* CGAL_Vector_3_Vector_3_5 = "introduces a vector v initialized to ( x , y , z ) .
+constexpr const char* Vector_3_Vector_3_5 = "introduces a vector v initialized to ( x , y , z ) .
 
 Parameters
 ----------
 x : int
 y : int
 z : int";
-constexpr const char* CGAL_Vector_3_Vector_3_6 = "introduces a vector v initialized to ( x , y , z ) .
+constexpr const char* Vector_3_Vector_3_6 = "introduces a vector v initialized to ( x , y , z ) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3419,7 +3419,7 @@ Parameters
 x : double
 y : double
 z : double";
-constexpr const char* CGAL_Vector_3_Vector_3_7 = "introduces a vector v initialized to (hx/hw, hy/hw, hz/hw) .
+constexpr const char* Vector_3_Vector_3_7 = "introduces a vector v initialized to (hx/hw, hy/hw, hz/hw) .
 
 Parameters
 ----------
@@ -3427,7 +3427,7 @@ hx : const Kernel::RT &
 hy : const Kernel::RT &
 hz : const Kernel::RT &
 hw : const Kernel::RT &";
-constexpr const char* CGAL_Vector_3_Vector_3_8 = "introduces a vector v initialized to ( x , y , z ) .
+constexpr const char* Vector_3_Vector_3_8 = "introduces a vector v initialized to ( x , y , z ) .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3437,37 +3437,37 @@ Parameters
 x : const Kernel::FT &
 y : const Kernel::FT &
 z : const Kernel::FT &";
-constexpr const char* CGAL_Vector_3_hx = "returns the homogeneous $ x$ coordinate.
+constexpr const char* Vector_3_hx = "returns the homogeneous $ x$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_3_hy = "returns the homogeneous $ y$ coordinate.
+constexpr const char* Vector_3_hy = "returns the homogeneous $ y$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_3_hz = "returns the homogeneous $ z$ coordinate.
+constexpr const char* Vector_3_hz = "returns the homogeneous $ z$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_3_hw = "returns the homogenizing coordinate.
+constexpr const char* Vector_3_hw = "returns the homogenizing coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_3_x = "returns the x -coordinate of v , that is hx() / hw() .
+constexpr const char* Vector_3_x = "returns the x -coordinate of v , that is hx() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_3_y = "returns the y -coordinate of v , that is hy() / hw() .
+constexpr const char* Vector_3_y = "returns the y -coordinate of v , that is hy() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_3_z = "returns the z coordinate of v , that is hz() / hw() .
+constexpr const char* Vector_3_z = "returns the z coordinate of v , that is hz() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_3_homogeneous = "returns the i-th homogeneous coordinate of v .
+constexpr const char* Vector_3_homogeneous = "returns the i-th homogeneous coordinate of v .
 
 0 <= i <= 3 .
 
@@ -3476,7 +3476,7 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Vector_3_cartesian = "returns the i-th Cartesian coordinate of v .
+constexpr const char* Vector_3_cartesian = "returns the i-th Cartesian coordinate of v .
 
 0 <= i <= 2 Exactness This construction is trivial and therefore always exact
 in Exact_predicates_inexact_constructions_kernel .
@@ -3486,7 +3486,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_3_operator = "returns cartesian(i) .
+constexpr const char* Vector_3_operator = "returns cartesian(i) .
 
 0 <= i <= 2 Exactness This construction is trivial and therefore always exact
 in Exact_predicates_inexact_constructions_kernel .
@@ -3496,29 +3496,29 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_3_cartesian_begin = "returns an iterator to the Cartesian coordinates of v , starting with the 0th coordinate.
+constexpr const char* Vector_3_cartesian_begin = "returns an iterator to the Cartesian coordinates of v , starting with the 0th coordinate.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Vector_3_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of v .
+constexpr const char* Vector_3_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of v .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Vector_3_dimension = "returns the dimension (the constant 3).
+constexpr const char* Vector_3_dimension = "returns the dimension (the constant 3).
 
 Returns: int";
-constexpr const char* CGAL_Vector_3_transform = "returns the vector obtained by applying t on v .
+constexpr const char* Vector_3_transform = "returns the vector obtained by applying t on v .
 
 Parameters
 ----------
 t : const Aff_transformation_3 < Kernel > &
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Vector_3_direction = "returns the direction of v .
+constexpr const char* Vector_3_direction = "returns the direction of v .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Direction_3 < Kernel >";
-constexpr const char* CGAL_Vector_3_operator_1 = "Test for equality: two vectors are equal, iff their $ x$ , $ y$ and $ z$ coordinates are equal.
+constexpr const char* Vector_3_operator_1 = "Test for equality: two vectors are equal, iff their $ x$ , $ y$ and $ z$ coordinates are equal.
 
 You can compare a vector with the NULL_VECTOR .
 
@@ -3527,7 +3527,7 @@ Parameters
 w : const Vector_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Vector_3_operator_2 = "Test for inequality.
+constexpr const char* Vector_3_operator_2 = "Test for inequality.
 
 You can compare a vector with the NULL_VECTOR .
 
@@ -3536,79 +3536,79 @@ Parameters
 w : const Vector_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Vector_3_operator_3 = "Addition.
+constexpr const char* Vector_3_operator_3 = "Addition.
 
 Parameters
 ----------
 w : const Vector_3 < Kernel > &
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Vector_3_operator_4 = "Addition.
+constexpr const char* Vector_3_operator_4 = "Addition.
 
 Parameters
 ----------
 w : const Vector_3 < Kernel > &
 
 Returns: Vector_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_operator_5 = "Subtraction.
+constexpr const char* Vector_3_operator_5 = "Subtraction.
 
 Parameters
 ----------
 w : const Vector_3 < Kernel > &
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Vector_3_operator_6 = "Subtraction.
+constexpr const char* Vector_3_operator_6 = "Subtraction.
 
 Parameters
 ----------
 w : const Vector_3 < Kernel > &
 
 Returns: Vector_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_operator_7 = "Returns the opposite vector.
+constexpr const char* Vector_3_operator_7 = "Returns the opposite vector.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Vector_3_operator_8 = "Division by a scalar.
+constexpr const char* Vector_3_operator_8 = "Division by a scalar.
 
 Parameters
 ----------
 s : const Kernel::RT &
 
 Returns: Vector_3 < Kernel >";
-constexpr const char* CGAL_Vector_3_operator_9 = "Division by a scalar.
+constexpr const char* Vector_3_operator_9 = "Division by a scalar.
 
 Parameters
 ----------
 s : const Kernel::RT &
 
 Returns: Vector_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_operator_10 = "returns the scalar product (= inner product) of the two vectors.
+constexpr const char* Vector_3_operator_10 = "returns the scalar product (= inner product) of the two vectors.
 
 Parameters
 ----------
 w : const Vector_3 < Kernel > &
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Vector_3_operator_11 = "Multiplication by a scalar.
+constexpr const char* Vector_3_operator_11 = "Multiplication by a scalar.
 
 Parameters
 ----------
 s : const Kernel::FT &
 
 Returns: Vector_3 < Kernel > &";
-constexpr const char* CGAL_Vector_3_squared_length = "returns the squared length of v .
+constexpr const char* Vector_3_squared_length = "returns the squared length of v .
 
 Returns: Kernel::FT";
 
 // CGAL::Weighted_point_2
-constexpr const char* CGAL_Weighted_point_2__class__ = "An object of the class Weighted_point_2 is a tuple of a two-dimensional point and a scalar weight.";
+constexpr const char* Weighted_point_2__class__ = "An object of the class Weighted_point_2 is a tuple of a two-dimensional point and a scalar weight.";
 
-constexpr const char* CGAL_Weighted_point_2_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
+constexpr const char* Weighted_point_2_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Weighted_point_2_Weighted_point_2 = "introduces a weighted point with Cartesian coordinates (0,0) and weight 0 .
+constexpr const char* Weighted_point_2_Weighted_point_2 = "introduces a weighted point with Cartesian coordinates (0,0) and weight 0 .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3616,7 +3616,7 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 ORIGIN : const Origin &";
-constexpr const char* CGAL_Weighted_point_2_Weighted_point_2_1 = "introduces a weighted point from point p and weight 0 .
+constexpr const char* Weighted_point_2_Weighted_point_2_1 = "introduces a weighted point from point p and weight 0 .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel . The explicit keyword is used
@@ -3626,7 +3626,7 @@ to avoid accidental implicit conversions between Point_2 and Weighted_point_2
 Parameters
 ----------
 p : const Point_2 < Kernel > &";
-constexpr const char* CGAL_Weighted_point_2_Weighted_point_2_2 = "introduces a weighted point from point p and weight w .
+constexpr const char* Weighted_point_2_Weighted_point_2_2 = "introduces a weighted point from point p and weight w .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3635,7 +3635,7 @@ Parameters
 ----------
 p : const Point_2 < Kernel > &
 w : Kernel::FT &";
-constexpr const char* CGAL_Weighted_point_2_Weighted_point_2_3 = "introduces a weighted point with coordinates x , y , and weight 0 .
+constexpr const char* Weighted_point_2_Weighted_point_2_3 = "introduces a weighted point with coordinates x , y , and weight 0 .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3644,19 +3644,19 @@ Parameters
 ----------
 x : const Kernel::FT &
 y : const Kernel::FT &";
-constexpr const char* CGAL_Weighted_point_2_point = "returns the point of the weighted point.
+constexpr const char* Weighted_point_2_point = "returns the point of the weighted point.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_2 < Kernel >";
-constexpr const char* CGAL_Weighted_point_2_weight = "returns the weight of the weighted point.
+constexpr const char* Weighted_point_2_weight = "returns the weight of the weighted point.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_2_operator = "Test for equality.
+constexpr const char* Weighted_point_2_operator = "Test for equality.
 
 Two points are equal, iff their $ x$ and $ y$ coordinates are equal. The point
 can be compared with ORIGIN .
@@ -3666,7 +3666,7 @@ Parameters
 q : const Weighted_point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Weighted_point_2_operator_1 = "Test for inequality.
+constexpr const char* Weighted_point_2_operator_1 = "Test for inequality.
 
 The point can be compared with ORIGIN .
 
@@ -3675,28 +3675,28 @@ Parameters
 q : const Weighted_point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Weighted_point_2_hx = "returns the homogeneous $ x$ coordinate.
+constexpr const char* Weighted_point_2_hx = "returns the homogeneous $ x$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_2_hy = "returns the homogeneous $ y$ coordinate.
+constexpr const char* Weighted_point_2_hy = "returns the homogeneous $ y$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_2_hw = "returns the homogenizing coordinate.
+constexpr const char* Weighted_point_2_hw = "returns the homogenizing coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_2_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
+constexpr const char* Weighted_point_2_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_2_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
+constexpr const char* Weighted_point_2_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_2_homogeneous = "returns the i-th homogeneous coordinate of p .
+constexpr const char* Weighted_point_2_homogeneous = "returns the i-th homogeneous coordinate of p .
 
 0 <= i <= 2
 
@@ -3705,7 +3705,7 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_2_cartesian = "returns the i-th Cartesian coordinate of p .
+constexpr const char* Weighted_point_2_cartesian = "returns the i-th Cartesian coordinate of p .
 
 0 <= i <= 1 Exactness This construction is trivial and therefore always exact
 in Exact_predicates_inexact_constructions_kernel .
@@ -3715,7 +3715,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_2_operator_2 = "returns cartesian(i) .
+constexpr const char* Weighted_point_2_operator_2 = "returns cartesian(i) .
 
 0 <= i <= 1 Exactness This construction is trivial and therefore always exact
 in Exact_predicates_inexact_constructions_kernel .
@@ -3725,22 +3725,22 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_2_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
+constexpr const char* Weighted_point_2_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Weighted_point_2_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
+constexpr const char* Weighted_point_2_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Weighted_point_2_dimension = "returns the dimension (the constant 2).
+constexpr const char* Weighted_point_2_dimension = "returns the dimension (the constant 2).
 
 Returns: int";
-constexpr const char* CGAL_Weighted_point_2_bbox = "returns a bounding box containing p .
+constexpr const char* Weighted_point_2_bbox = "returns a bounding box containing p .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Weighted_point_2_transform = "returns the weighted point obtained by applying t on p .
+constexpr const char* Weighted_point_2_transform = "returns the weighted point obtained by applying t on p .
 
 Parameters
 ----------
@@ -3749,12 +3749,12 @@ t : const Aff_transformation_2 < Kernel > &
 Returns: Weighted_point_2 < Kernel >";
 
 // CGAL::Weighted_point_3
-constexpr const char* CGAL_Weighted_point_3__class__ = "An object of the class Weighted_point_3 is a tuple of a three-dimensional point and a scalar weight.";
+constexpr const char* Weighted_point_3__class__ = "An object of the class Weighted_point_3 is a tuple of a three-dimensional point and a scalar weight.";
 
-constexpr const char* CGAL_Weighted_point_3_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
+constexpr const char* Weighted_point_3_Cartesian_const_iterator = "An iterator for enumerating the Cartesian coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Weighted_point_3_Weighted_point_3 = "introduces a weighted point with Cartesian coordinates (0,0,0) and weight 0 .
+constexpr const char* Weighted_point_3_Weighted_point_3 = "introduces a weighted point with Cartesian coordinates (0,0,0) and weight 0 .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3762,7 +3762,7 @@ Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 ORIGIN : const Origin &";
-constexpr const char* CGAL_Weighted_point_3_Weighted_point_3_1 = "introduces a weighted point from point p and weight 0 .
+constexpr const char* Weighted_point_3_Weighted_point_3_1 = "introduces a weighted point from point p and weight 0 .
 
 The explicit keyword is used to avoid accidental implicit conversions between
 Point_3 and Weighted_point_3 . Exactness This construction is trivial and
@@ -3771,7 +3771,7 @@ therefore always exact in Exact_predicates_inexact_constructions_kernel .
 Parameters
 ----------
 p : const Point_3 < Kernel > &";
-constexpr const char* CGAL_Weighted_point_3_Weighted_point_3_2 = "introduces a weighted point from point p and weight w .
+constexpr const char* Weighted_point_3_Weighted_point_3_2 = "introduces a weighted point from point p and weight w .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3780,7 +3780,7 @@ Parameters
 ----------
 p : const Point_3 < Kernel > &
 w : Kernel::FT &";
-constexpr const char* CGAL_Weighted_point_3_Weighted_point_3_3 = "introduces a weighted point with coordinates x , y , z and weight 0 .
+constexpr const char* Weighted_point_3_Weighted_point_3_3 = "introduces a weighted point with coordinates x , y , z and weight 0 .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
@@ -3790,19 +3790,19 @@ Parameters
 x : const Kernel::FT &
 y : const Kernel::FT &
 z : const Kernel::FT &";
-constexpr const char* CGAL_Weighted_point_3_point = "returns the point of the weighted point.
+constexpr const char* Weighted_point_3_point = "returns the point of the weighted point.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Point_3 < Kernel >";
-constexpr const char* CGAL_Weighted_point_3_weight = "returns the weight of the weighted point.
+constexpr const char* Weighted_point_3_weight = "returns the weight of the weighted point.
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_3_operator = "Test for equality.
+constexpr const char* Weighted_point_3_operator = "Test for equality.
 
 Two points are equal, iff their $ x$ , $ y$ , and $ z$ coordinates are equal.
 The point can be compared with ORIGIN .
@@ -3812,7 +3812,7 @@ Parameters
 q : const Weighted_point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Weighted_point_3_operator_1 = "Test for inequality.
+constexpr const char* Weighted_point_3_operator_1 = "Test for inequality.
 
 The point can be compared with ORIGIN .
 
@@ -3821,37 +3821,37 @@ Parameters
 q : const Weighted_point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Weighted_point_3_hx = "returns the homogeneous $ x$ coordinate.
+constexpr const char* Weighted_point_3_hx = "returns the homogeneous $ x$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_3_hy = "returns the homogeneous $ y$ coordinate.
+constexpr const char* Weighted_point_3_hy = "returns the homogeneous $ y$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_3_hz = "returns the homogeneous $ z$ coordinate.
+constexpr const char* Weighted_point_3_hz = "returns the homogeneous $ z$ coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_3_hw = "returns the homogenizing coordinate.
+constexpr const char* Weighted_point_3_hw = "returns the homogenizing coordinate.
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_3_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
+constexpr const char* Weighted_point_3_x = "returns the Cartesian $ x$ coordinate, that is hx() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_3_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
+constexpr const char* Weighted_point_3_y = "returns the Cartesian $ y$ coordinate, that is hy() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_3_z = "returns the Cartesian $ z$ coordinate, that is hz() / hw() .
+constexpr const char* Weighted_point_3_z = "returns the Cartesian $ z$ coordinate, that is hz() / hw() .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_3_homogeneous = "returns the i-th homogeneous coordinate of p .
+constexpr const char* Weighted_point_3_homogeneous = "returns the i-th homogeneous coordinate of p .
 
 0 <= i <= 3
 
@@ -3860,7 +3860,7 @@ Parameters
 i : int
 
 Returns: Kernel::RT";
-constexpr const char* CGAL_Weighted_point_3_cartesian = "returns the i-th Cartesian coordinate of p .
+constexpr const char* Weighted_point_3_cartesian = "returns the i-th Cartesian coordinate of p .
 
 0 <= i <= 2 Exactness This construction is trivial and therefore always exact
 in Exact_predicates_inexact_constructions_kernel .
@@ -3870,7 +3870,7 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_3_operator_2 = "returns cartesian(i) .
+constexpr const char* Weighted_point_3_operator_2 = "returns cartesian(i) .
 
 0 <= i <= 2 Exactness This construction is trivial and therefore always exact
 in Exact_predicates_inexact_constructions_kernel .
@@ -3880,22 +3880,22 @@ Parameters
 i : int
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Weighted_point_3_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
+constexpr const char* Weighted_point_3_cartesian_begin = "returns an iterator to the Cartesian coordinates of p , starting with the 0th coordinate.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Weighted_point_3_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
+constexpr const char* Weighted_point_3_cartesian_end = "returns an off the end iterator to the Cartesian coordinates of p .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Weighted_point_3_dimension = "returns the dimension (the constant 3).
+constexpr const char* Weighted_point_3_dimension = "returns the dimension (the constant 3).
 
 Returns: int";
-constexpr const char* CGAL_Weighted_point_3_bbox = "returns a bounding box containing p .
+constexpr const char* Weighted_point_3_bbox = "returns a bounding box containing p .
 
 Exactness This construction is trivial and therefore always exact in
 Exact_predicates_inexact_constructions_kernel .
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Weighted_point_3_transform = "returns the weighted point obtained by applying t on p .
+constexpr const char* Weighted_point_3_transform = "returns the weighted point obtained by applying t on p .
 
 Parameters
 ----------
@@ -9195,7 +9195,7 @@ constexpr const char* Kernel_WeightedPoint_3__class__ = "A type representing wei
 // ProjectionTraitsGeometricTraits_3
 constexpr const char* ProjectionTraitsGeometricTraits_3__class__ = "The concept ProjectionTraitsGeometricTraits_3 provides types and functors required to be used with the class CGAL::Projection_traits_3 .";
 
-constexpr const char* CGAL_Bbox_2_bbox_2_2 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_2_bbox_2_2 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Each object in the range must have a member function BBox_2 bbox() returning
 its bounding box.
@@ -9206,7 +9206,7 @@ begin : InputIterator
 past_end : InputIterator
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Bbox_2_bbox_2_3 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_2_bbox_2_3 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Traits must provide a functor Traits::Construct_bbox_2 having an operator
 returning the bounding box of each object in the range. Traits must also have
@@ -9219,7 +9219,7 @@ past_end : InputIterator
 traits : const Traits &
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Bbox_3_bbox_3_2 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_3_bbox_3_2 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Each object in the range must have a member function BBox_3 bbox() returning
 its bounding box.
@@ -9230,7 +9230,7 @@ begin : InputIterator
 past_end : InputIterator
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Bbox_3_bbox_3_3 = "returns the bounding box of the objects in the range [first,past_end[ .
+constexpr const char* Bbox_3_bbox_3_3 = "returns the bounding box of the objects in the range [first,past_end[ .
 
 Traits must provide a functor Traits::Construct_bbox_3 having an operator
 returning the bounding box of each object in the range. Traits must also have
@@ -9243,7 +9243,7 @@ past_end : InputIterator
 traits : const Traits &
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Circle_3_operator_1 = "returns true , iff c1 and c2 are equal, i.e. if they have the same center, the same squared radius and the same supporting plane.
+constexpr const char* Circle_3_operator_1 = "returns true , iff c1 and c2 are equal, i.e. if they have the same center, the same squared radius and the same supporting plane.
 
 Parameters
 ----------
@@ -9251,7 +9251,7 @@ c1 : const Circle_3 < Kernel > &
 c2 : Circle_3 < Kernel > const &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_10 = "returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() .
+constexpr const char* Point_2_operator_10 = "returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() .
 
 Parameters
 ----------
@@ -9259,7 +9259,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_11 = "returns true iff p is lexicographically greater than q .
+constexpr const char* Point_2_operator_11 = "returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -9267,7 +9267,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_12 = "returns true iff p is lexicographically smaller or equal to q .
+constexpr const char* Point_2_operator_12 = "returns true iff p is lexicographically smaller or equal to q .
 
 Parameters
 ----------
@@ -9275,7 +9275,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_13 = "returns true iff p is lexicographically greater or equal to q .
+constexpr const char* Point_2_operator_13 = "returns true iff p is lexicographically greater or equal to q .
 
 Parameters
 ----------
@@ -9283,7 +9283,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_2_operator_14 = "returns the difference vector between q and p .
+constexpr const char* Point_2_operator_14 = "returns the difference vector between q and p .
 
 You can substitute ORIGIN for either p or q , but not for both.
 
@@ -9293,7 +9293,7 @@ p : const Point_2 < Kernel > &
 q : const Point_2 < Kernel > &
 
 Returns: Vector_2 < Kernel >";
-constexpr const char* CGAL_Point_3_operator_10 = "returns true iff p is lexicographically smaller than q (the lexicographical order being defined on the Cartesian coordinates).
+constexpr const char* Point_3_operator_10 = "returns true iff p is lexicographically smaller than q (the lexicographical order being defined on the Cartesian coordinates).
 
 Parameters
 ----------
@@ -9301,7 +9301,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_11 = "returns true iff p is lexicographically greater than q .
+constexpr const char* Point_3_operator_11 = "returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -9309,7 +9309,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_12 = "returns true iff p is lexicographically smaller or equal to q .
+constexpr const char* Point_3_operator_12 = "returns true iff p is lexicographically smaller or equal to q .
 
 Parameters
 ----------
@@ -9317,7 +9317,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_13 = "returns true iff p is lexicographically greater or equal to q .
+constexpr const char* Point_3_operator_13 = "returns true iff p is lexicographically greater or equal to q .
 
 Parameters
 ----------
@@ -9325,7 +9325,7 @@ p : const Point_3 < Kernel > &
 q : const Point_3 < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_3_operator_14 = "returns the difference vector between q and p .
+constexpr const char* Point_3_operator_14 = "returns the difference vector between q and p .
 
 You can substitute ORIGIN for either p or q , but not for both.
 

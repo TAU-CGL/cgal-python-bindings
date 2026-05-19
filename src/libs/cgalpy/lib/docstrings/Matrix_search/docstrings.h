@@ -34,22 +34,22 @@ column : int
 Returns: Entry";
 
 // CGAL::Dynamic_matrix
-constexpr const char* CGAL_Dynamic_matrix__class__ = "The class Dynamic_matrix is an adaptor for an arbitrary matrix class M to provide the dynamic operations needed for monotone matrix search.";
+constexpr const char* Dynamic_matrix__class__ = "The class Dynamic_matrix is an adaptor for an arbitrary matrix class M to provide the dynamic operations needed for monotone matrix search.";
 
-constexpr const char* CGAL_Dynamic_matrix_Dynamic_matrix = "initializes the dynamic matrix to m .
+constexpr const char* Dynamic_matrix_Dynamic_matrix = "initializes the dynamic matrix to m .
 
 m is not copied, we only store a reference.
 
 Parameters
 ----------
 m : const M &";
-constexpr const char* CGAL_Dynamic_matrix_number_of_columns = "returns the number of columns.
+constexpr const char* Dynamic_matrix_number_of_columns = "returns the number of columns.
 
 Returns: int";
-constexpr const char* CGAL_Dynamic_matrix_number_of_rows = "returns the number of rows.
+constexpr const char* Dynamic_matrix_number_of_rows = "returns the number of rows.
 
 Returns: int";
-constexpr const char* CGAL_Dynamic_matrix_operator = "returns the entry at position ( row , column ).
+constexpr const char* Dynamic_matrix_operator = "returns the entry at position ( row , column ).
 
 $ 0 \\le$ row $ <$ number_of_rows() , and $ 0 \\le$ column $ <$
 number_of_columns() .
@@ -60,7 +60,7 @@ row : int
 column : int
 
 Returns: Entry";
-constexpr const char* CGAL_Dynamic_matrix_replace_column = "replace column old with column number new .
+constexpr const char* Dynamic_matrix_replace_column = "replace column old with column number new .
 
 $ 0 \\le$ old , new $ <$ number_of_columns() .
 
@@ -68,43 +68,43 @@ Parameters
 ----------
 old : int
 new : int";
-constexpr const char* CGAL_Dynamic_matrix_extract_all_even_rows = "returns a new matrix consisting of all rows of the dynamic matrix with even index, (i.e. first row is row $ 0$ of the dynamic matrix, second row is row $ 2$ of the dynamic matrix, etc.).
+constexpr const char* Dynamic_matrix_extract_all_even_rows = "returns a new matrix consisting of all rows of the dynamic matrix with even index, (i.e. first row is row $ 0$ of the dynamic matrix, second row is row $ 2$ of the dynamic matrix, etc.).
 
 number_of_rows() $ > 0$ .
 
 Returns: Matrix *";
-constexpr const char* CGAL_Dynamic_matrix_shrink_to_quadratic_size = "deletes the rightmost columns, such that the dynamic matrix becomes quadratic.
+constexpr const char* Dynamic_matrix_shrink_to_quadratic_size = "deletes the rightmost columns, such that the dynamic matrix becomes quadratic.
 
 number_of_columns() $ \\ge$ number_of_rows() . number_of_rows() $ ==$
 number_of_columns() .";
 
 // CGAL::Sorted_matrix_search_traits_adaptor
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor__class__ = "The class Sorted_matrix_search_traits_adaptor can be used as an adaptor to create sorted matrix search traits classes for arbitrary feasibility test and matrix classes F resp. M .";
+constexpr const char* Sorted_matrix_search_traits_adaptor__class__ = "The class Sorted_matrix_search_traits_adaptor can be used as an adaptor to create sorted matrix search traits classes for arbitrary feasibility test and matrix classes F resp. M .";
 
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_Matrix = "typedef to M .
+constexpr const char* Sorted_matrix_search_traits_adaptor_Matrix = "typedef to M .
 
 Returns: M";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_Value = "typedef to Matrix::Value .
+constexpr const char* Sorted_matrix_search_traits_adaptor_Value = "typedef to Matrix::Value .
 
 Returns: Matrix::Value";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_Compare_strictly = "typedef to std::less< Value > .
+constexpr const char* Sorted_matrix_search_traits_adaptor_Compare_strictly = "typedef to std::less< Value > .
 
 Returns: std::less< Value >";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_Compare_non_strictly = "typedef to std::less_equal< Value > .
+constexpr const char* Sorted_matrix_search_traits_adaptor_Compare_non_strictly = "typedef to std::less_equal< Value > .
 
 Returns: std::less_equal< Value >";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_Sorted_matrix_search_traits_adaptor = "initializes t to use m for feasibility testing.
+constexpr const char* Sorted_matrix_search_traits_adaptor_Sorted_matrix_search_traits_adaptor = "initializes t to use m for feasibility testing.
 
 Parameters
 ----------
 m : const F &";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_compare_strictly = "returns the Compare_strictly object to be used for the search.
+constexpr const char* Sorted_matrix_search_traits_adaptor_compare_strictly = "returns the Compare_strictly object to be used for the search.
 
 Returns: Compare_strictly";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_compare_non_strictly = "returns the Compare_non_strictly object to be used for the search.
+constexpr const char* Sorted_matrix_search_traits_adaptor_compare_non_strictly = "returns the Compare_non_strictly object to be used for the search.
 
 Returns: Compare_non_strictly";
-constexpr const char* CGAL_Sorted_matrix_search_traits_adaptor_is_feasible = "uses the feasibility test given during creation.
+constexpr const char* Sorted_matrix_search_traits_adaptor_is_feasible = "uses the feasibility test given during creation.
 
 Parameters
 ----------

@@ -8,21 +8,21 @@ namespace docstrings {
 namespace Optimal_bounding_box {
 
 // CGAL::Oriented_bounding_box_traits_3
-constexpr const char* CGAL_Oriented_bounding_box_traits_3__class__ = "The class CGAL::Oriented_bounding_box_traits_3 is a traits type to be used with the overloads of the function CGAL::oriented_bounding_box() .";
+constexpr const char* Oriented_bounding_box_traits_3__class__ = "The class CGAL::Oriented_bounding_box_traits_3 is a traits type to be used with the overloads of the function CGAL::oriented_bounding_box() .";
 
-constexpr const char* CGAL_Oriented_bounding_box_traits_3_FT = "The field number type.
+constexpr const char* Oriented_bounding_box_traits_3_FT = "The field number type.
 
 Returns: K::FT";
-constexpr const char* CGAL_Oriented_bounding_box_traits_3_Aff_transformation_3 = "The affine transformation type.
+constexpr const char* Oriented_bounding_box_traits_3_Aff_transformation_3 = "The affine transformation type.
 
 Returns: CGAL::Aff_transformation_3< K >";
-constexpr const char* CGAL_Oriented_bounding_box_traits_3_Matrix = "The matrix type.
+constexpr const char* Oriented_bounding_box_traits_3_Matrix = "The matrix type.
 
 Returns: CGAL::Eigen_matrix< FT , 3, 3 >";
-constexpr const char* CGAL_Oriented_bounding_box_traits_3_Vector = "The matrix type.
+constexpr const char* Oriented_bounding_box_traits_3_Vector = "The matrix type.
 
 Returns: CGAL::Eigen_vector< FT , 3 >";
-constexpr const char* CGAL_Oriented_bounding_box_traits_3_get_Q = "Performs the QR-decomposition of the matrix m to a unitary matrix and an upper triagonal and returns the unitary matrix.
+constexpr const char* Oriented_bounding_box_traits_3_get_Q = "Performs the QR-decomposition of the matrix m to a unitary matrix and an upper triagonal and returns the unitary matrix.
 
 Parameters
 ----------

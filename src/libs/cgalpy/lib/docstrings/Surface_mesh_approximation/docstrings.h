@@ -8,12 +8,12 @@ namespace docstrings {
 namespace Surface_mesh_approximation {
 
 // CGAL::Surface_mesh_approximation::L21_metric_plane_proxy
-constexpr const char* CGAL_Surface_mesh_approximation_L21_metric_plane_proxy__class__ = "Approximation L21 metric of vector proxy.";
+constexpr const char* Surface_mesh_approximation_L21_metric_plane_proxy__class__ = "Approximation L21 metric of vector proxy.";
 
-constexpr const char* CGAL_Surface_mesh_approximation_L21_metric_plane_proxy_Proxy = "Proxy type.
+constexpr const char* Surface_mesh_approximation_L21_metric_plane_proxy_Proxy = "Proxy type.
 
 Returns: GeomTraits::Vector_3";
-constexpr const char* CGAL_Surface_mesh_approximation_L21_metric_plane_proxy_L21_metric_plane_proxy = "Constructor.
+constexpr const char* Surface_mesh_approximation_L21_metric_plane_proxy_L21_metric_plane_proxy = "Constructor.
 
 tm triangle mesh vpmap vertex point map
 
@@ -21,7 +21,7 @@ Parameters
 ----------
 tm : const TriangleMesh &
 vpmap : const VertexPointMap &";
-constexpr const char* CGAL_Surface_mesh_approximation_L21_metric_plane_proxy_compute_error = "computes the L2,1 error from a face to a proxy.
+constexpr const char* Surface_mesh_approximation_L21_metric_plane_proxy_compute_error = "computes the L2,1 error from a face to a proxy.
 
 tm input triangle mesh f face_descriptor of a face px proxy computed error
 
@@ -32,7 +32,7 @@ tm : const TriangleMesh &
 px : const Proxy &
 
 Returns: FT";
-constexpr const char* CGAL_Surface_mesh_approximation_L21_metric_plane_proxy_fit_proxy = "fits a proxy to a range of faces.
+constexpr const char* Surface_mesh_approximation_L21_metric_plane_proxy_fit_proxy = "fits a proxy to a range of faces.
 
 FaceRange range of face descriptors, model of Range. faces the range of faces
 to be fitted tm input triangle mesh fitted proxy
@@ -45,12 +45,12 @@ tm : const TriangleMesh &
 Returns: Proxy";
 
 // CGAL::Surface_mesh_approximation::L2_metric_plane_proxy
-constexpr const char* CGAL_Surface_mesh_approximation_L2_metric_plane_proxy__class__ = "Approximation L2 metric of plane proxy.";
+constexpr const char* Surface_mesh_approximation_L2_metric_plane_proxy__class__ = "Approximation L2 metric of plane proxy.";
 
-constexpr const char* CGAL_Surface_mesh_approximation_L2_metric_plane_proxy_Proxy = "Proxy type.
+constexpr const char* Surface_mesh_approximation_L2_metric_plane_proxy_Proxy = "Proxy type.
 
 Returns: GeomTraits::Plane_3";
-constexpr const char* CGAL_Surface_mesh_approximation_L2_metric_plane_proxy_L2_metric_plane_proxy = "Constructor.
+constexpr const char* Surface_mesh_approximation_L2_metric_plane_proxy_L2_metric_plane_proxy = "Constructor.
 
 tm triangle mesh vpmap vertex point map
 
@@ -58,7 +58,7 @@ Parameters
 ----------
 tm : const TriangleMesh &
 vpmap : const VertexPointMap &";
-constexpr const char* CGAL_Surface_mesh_approximation_L2_metric_plane_proxy_compute_error = "computes the L21 error from a face to a proxy, using integral (closed-form) computation.
+constexpr const char* Surface_mesh_approximation_L2_metric_plane_proxy_compute_error = "computes the L21 error from a face to a proxy, using integral (closed-form) computation.
 
 tm input triangle mesh f face_descriptor of a face px proxy computed error
 
@@ -69,7 +69,7 @@ tm : const TriangleMesh &
 px : const Proxy &
 
 Returns: FT";
-constexpr const char* CGAL_Surface_mesh_approximation_L2_metric_plane_proxy_fit_proxy = "fits a proxy from a range of faces, in the L2 sense, with an integral (closed-form) formulation.
+constexpr const char* Surface_mesh_approximation_L2_metric_plane_proxy_fit_proxy = "fits a proxy from a range of faces, in the L2 sense, with an integral (closed-form) formulation.
 
 The best-fit plane passes through the center of mass and is defined by the two
 principal components of the integral covariance matrix. FaceRange range of
@@ -84,21 +84,21 @@ tm : const TriangleMesh &
 Returns: Proxy";
 
 // CGAL::Variational_shape_approximation
-constexpr const char* CGAL_Variational_shape_approximation__class__ = "Main class for Variational Shape Approximation algorithm.";
+constexpr const char* Variational_shape_approximation__class__ = "Main class for Variational Shape Approximation algorithm.";
 
-constexpr const char* CGAL_Variational_shape_approximation_Geom_traits = "Geometric traits type.
+constexpr const char* Variational_shape_approximation_Geom_traits = "Geometric traits type.
 
 Returns: GeomTraits";
-constexpr const char* CGAL_Variational_shape_approximation_Error_metric = "Error metric for proxy fitting type.
+constexpr const char* Variational_shape_approximation_Error_metric = "Error metric for proxy fitting type.
 
 Returns: ErrorMetricProxy";
-constexpr const char* CGAL_Variational_shape_approximation_Proxy = "Proxy type.
+constexpr const char* Variational_shape_approximation_Proxy = "Proxy type.
 
 Returns: Error_metric::Proxy";
-constexpr const char* CGAL_Variational_shape_approximation_Indexed_triangle = "Indexed triangle type.
+constexpr const char* Variational_shape_approximation_Indexed_triangle = "Indexed triangle type.
 
 Returns: std::array< std::size_t, 3 >";
-constexpr const char* CGAL_Variational_shape_approximation_Variational_shape_approximation = "initializes internal data for the approximation.
+constexpr const char* Variational_shape_approximation_Variational_shape_approximation = "initializes internal data for the approximation.
 
 tm CGAL TriangleMesh on which approximation operates vpoint_map vertex point
 map of the mesh error_metric an ErrorMetricProxy object
@@ -108,7 +108,7 @@ Parameters
 tm : const TriangleMesh &
 vpoint_map : const VertexPointMap &
 error_metric : const Error_metric &";
-constexpr const char* CGAL_Variational_shape_approximation_initialize_seeds = "initializes the seeds with both maximum number of proxies and minimum error drop stop criteria.
+constexpr const char* Variational_shape_approximation_initialize_seeds = "initializes the seeds with both maximum number of proxies and minimum error drop stop criteria.
 
 The first criterion met stops the seeding. Parameters out of range are
 ignored. NamedParameters a sequence of bgl_namedparameters np an optional
@@ -132,7 +132,7 @@ Parameters
 np : const NamedParameters &
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_run = "runs the partitioning and fitting processes on the whole surface.
+constexpr const char* Variational_shape_approximation_run = "runs the partitioning and fitting processes on the whole surface.
 
 nb_iterations number of iterations. total fitting error
 
@@ -141,7 +141,7 @@ Parameters
 nb_iterations : std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Variational_shape_approximation_run_to_convergence = "calls run while error decrease is greater than cvg_threshold .
+constexpr const char* Variational_shape_approximation_run_to_convergence = "calls run while error decrease is greater than cvg_threshold .
 
 cvg_threshold the percentage of error change between two successive runs,
 should be in range (0, 1) . max_iterations maximum number of iterations
@@ -156,12 +156,12 @@ max_iterations : const std::size_t
 avg_interval : std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_compute_total_error = "computes fitting error of current partition to the proxies.
+constexpr const char* Variational_shape_approximation_compute_total_error = "computes fitting error of current partition to the proxies.
 
 total fitting error
 
 Returns: FT";
-constexpr const char* CGAL_Variational_shape_approximation_add_to_furthest_proxies = "adds proxies to the worst regions one by one.
+constexpr const char* Variational_shape_approximation_add_to_furthest_proxies = "adds proxies to the worst regions one by one.
 
 The re-fitting is performed after each proxy is inserted. nb_proxies number of
 proxies to be added nb_iterations number of re-fitting iterations number of
@@ -173,7 +173,7 @@ nb_proxies : const std::size_t
 nb_iterations : const std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_add_proxies_error_diffusion = "adds proxies by diffusing fitting error into current partition.
+constexpr const char* Variational_shape_approximation_add_proxies_error_diffusion = "adds proxies by diffusing fitting error into current partition.
 
 Each partition is added with the number of proxies in proportion to its
 fitting error. nb_proxies number of proxies to be added number of proxies
@@ -184,7 +184,7 @@ Parameters
 nb_proxies : const std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_teleport_proxies = "teleports the local minimum to the worst region by combining the merging and adding processes.
+constexpr const char* Variational_shape_approximation_teleport_proxies = "teleports the local minimum to the worst region by combining the merging and adding processes.
 
 The re-fitting is performed after each teleportation. Here if we specify more
 than one proxy this means we teleport in a naive iterative fashion. nb_proxies
@@ -200,7 +200,7 @@ nb_iterations : const std::size_t
 no_threshold_test : const bool
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_merge = "merges two specified adjacent regions.
+constexpr const char* Variational_shape_approximation_merge = "merges two specified adjacent regions.
 
 The overall re-fitting is not performed and the proxy index map is maintained.
 two proxies must be adjacent, and 0 <= px0 < px1 < proxies.size() px0 the kept
@@ -213,7 +213,7 @@ px0 : const std::size_t
 px1 : const std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Variational_shape_approximation_find_best_merge = "simulates merging and local re-fitting of all pairs of adjacent proxies and finds the best pair to merge.
+constexpr const char* Variational_shape_approximation_find_best_merge = "simulates merging and local re-fitting of all pairs of adjacent proxies and finds the best pair to merge.
 
 The best is defined as the minimum merged sum error change (increase or
 decrease) among all pairs. use_threshold_test if true and a best pair of
@@ -227,7 +227,7 @@ Parameters
 use_threshold_test : const bool
 
 Returns: std::optional< std::pair< std::size_t, std::size_t > >";
-constexpr const char* CGAL_Variational_shape_approximation_split = "splits within a specified proxy area via N-section (by default bisection), other regions are not affected.
+constexpr const char* Variational_shape_approximation_split = "splits within a specified proxy area via N-section (by default bisection), other regions are not affected.
 
 px_idx proxy index. n number of split sections. nb_relaxations number of
 relaxations within the proxy area px_idx after the split true if split
@@ -240,7 +240,7 @@ n : const std::size_t
 nb_relaxations : const std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_extract_mesh = "extracts the output mesh in the form of an indexed triangle set.
+constexpr const char* Variational_shape_approximation_extract_mesh = "extracts the output mesh in the form of an indexed triangle set.
 
 NamedParameters a sequence of bgl_namedparameters np an optional sequence of
 Named Parameters among the ones listed below true if the extracted surface
@@ -268,7 +268,7 @@ Parameters
 np : const NamedParameters &
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_output = "outputs approximation results.
+constexpr const char* Variational_shape_approximation_output = "outputs approximation results.
 
 NamedParameters a sequence of bgl_namedparameters np an optional sequence of
 Named Parameters among the ones listed below Output Named Parameters <button
@@ -293,10 +293,10 @@ Default: no output operation is performed
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Variational_shape_approximation_number_of_proxies = "returns the number of proxies.
+constexpr const char* Variational_shape_approximation_number_of_proxies = "returns the number of proxies.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_init_random = "randomly initializes proxies with both maximum number of proxies and minimum error drop stop criteria, where the first criterion met stops the seeding.
+constexpr const char* Variational_shape_approximation_init_random = "randomly initializes proxies with both maximum number of proxies and minimum error drop stop criteria, where the first criterion met stops the seeding.
 
 To ensure the randomness, call std::srand() beforehand. max_nb_proxies maximum
 number of proxies, should be in range (nb_connected_components, nb_faces / 3)
@@ -311,7 +311,7 @@ min_error_drop : const FT
 nb_relaxations : const std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_init_incremental = "incrementally initializes proxies with both maximum number of proxies and minimum error drop stop criteria, The first criterion met stops the seeding.
+constexpr const char* Variational_shape_approximation_init_incremental = "incrementally initializes proxies with both maximum number of proxies and minimum error drop stop criteria, The first criterion met stops the seeding.
 
 max_nb_proxies maximum number of proxies, should be in range
 (nb_connected_components, nb_faces / 3) min_error_drop minimum error drop,
@@ -325,7 +325,7 @@ min_error_drop : const FT
 nb_relaxations : const std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_init_hierarchical = "hierarchically initializes proxies with both maximum number of proxies and minimum error drop stop criteria, where the first criterion met stops the seeding.
+constexpr const char* Variational_shape_approximation_init_hierarchical = "hierarchically initializes proxies with both maximum number of proxies and minimum error drop stop criteria, where the first criterion met stops the seeding.
 
 max_nb_proxies maximum number of proxies, should be in range
 (nb_connected_components, nb_faces / 3) min_error_drop minimum error drop,
@@ -339,7 +339,7 @@ min_error_drop : const FT
 nb_relaxations : const std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_partition = "partitions the area tagged with CGAL_VSA_INVALID_TAG with proxies, global face proxy map is updated.
+constexpr const char* Variational_shape_approximation_partition = "partitions the area tagged with CGAL_VSA_INVALID_TAG with proxies, global face proxy map is updated.
 
 Propagates the proxy seed faces and floods the tagged area to minimize the
 fitting error. ProxyWrapperIterator forward iterator with Proxy_wrapper as
@@ -350,7 +350,7 @@ Parameters
 ----------
 beg : const ProxyWrapperIterator
 end : const ProxyWrapperIterator";
-constexpr const char* CGAL_Variational_shape_approximation_fit = "refits and updates input range of proxies, sequential.
+constexpr const char* Variational_shape_approximation_fit = "refits and updates input range of proxies, sequential.
 
 ProxyWrapperIterator forward iterator with Proxy_wrapper as value type beg
 iterator point to the first element end iterator point to the one past the
@@ -361,12 +361,12 @@ Parameters
 beg : const ProxyWrapperIterator
 end : const ProxyWrapperIterator
 t : const CGAL::Sequential_tag &";
-constexpr const char* CGAL_Variational_shape_approximation_add_to_furthest_proxy = "adds a proxy seed at the face with the maximum fitting error.
+constexpr const char* Variational_shape_approximation_add_to_furthest_proxy = "adds a proxy seed at the face with the maximum fitting error.
 
 true if add is successfully, and false otherwise
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_fit_proxy_from_patch = "fits a new (wrapped) proxy from a region patch.
+constexpr const char* Variational_shape_approximation_fit_proxy_from_patch = "fits a new (wrapped) proxy from a region patch.
 
 Compute proxy parameters from a list of faces. Find proxy seed face. Sum the
 proxy error. FacePatch container with face_descriptor as data type px_patch
@@ -378,14 +378,14 @@ px_patch : const FacePatch &
 px_idx : const std::size_t
 
 Returns: Proxy_wrapper";
-constexpr const char* CGAL_Variational_shape_approximation_add_one_proxy_at = "adds a proxy at face f.
+constexpr const char* Variational_shape_approximation_add_one_proxy_at = "adds a proxy at face f.
 
 f where to the proxy is initialized from
 
 Parameters
 ----------
 f : const face_descriptor";
-constexpr const char* CGAL_Variational_shape_approximation_fit_proxy_from_face = "fits a new (wrapped) proxy from a face.
+constexpr const char* Variational_shape_approximation_fit_proxy_from_face = "fits a new (wrapped) proxy from a face.
 
 Compute proxy parameters from the face. Set seed to this face. Update the
 proxy error. Update proxy map. current face proxy map is valid f face px_idx
@@ -397,7 +397,7 @@ f : const face_descriptor
 px_idx : const std::size_t
 
 Returns: Proxy_wrapper";
-constexpr const char* CGAL_Variational_shape_approximation_random_pick_non_seed_faces = "picks a number of non-seed faces into an empty vector randomly.
+constexpr const char* Variational_shape_approximation_random_pick_non_seed_faces = "picks a number of non-seed faces into an empty vector randomly.
 
 nb_requested requested number of faces picked_faces shuffled faces vector true
 if the requested number of faces are selected, and false otherwise
@@ -408,13 +408,13 @@ nb_requested : const std::size_t
 picked_faces : std::vector< face_descriptor > &
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_bootstrap_from_connected_components = "initializes proxies from each connected component of the input mesh.
+constexpr const char* Variational_shape_approximation_bootstrap_from_connected_components = "initializes proxies from each connected component of the input mesh.
 
 This function clears proxy vector and sets face proxy map to initial state,
 intended only for bootstrapping initialization. Coarse approximation iteration
 is not performed, because it is inaccurate anyway and may yield degenerate
 cases (e.g. a standard cube model).";
-constexpr const char* CGAL_Variational_shape_approximation_compute_proxy_planes = "computes proxy planes.
+constexpr const char* Variational_shape_approximation_compute_proxy_planes = "computes proxy planes.
 
 The proxy may not contain the plane related properties, so we need these
 internal planes, used in the chord subdivision and anchor location.
@@ -423,8 +423,8 @@ if_pca_plane set true to use the PCA plane fitting
 Parameters
 ----------
 if_pca_plane : const bool";
-constexpr const char* CGAL_Variational_shape_approximation_find_anchors = "finds the anchors.";
-constexpr const char* CGAL_Variational_shape_approximation_find_edges = "finds and approximates the chord connecting the anchors.
+constexpr const char* Variational_shape_approximation_find_anchors = "finds the anchors.";
+constexpr const char* Variational_shape_approximation_find_edges = "finds and approximates the chord connecting the anchors.
 
 boundary_subdivision_ratio the chord subdivision ratio threshold to the chord
 length or average edge length for boundary edges subdivision_ratio boundary
@@ -440,19 +440,19 @@ subdivision_ratio : const FT
 boundary_subdivision_ratio : const FT
 relative_to_chord : const bool
 with_dihedral_angle : const bool";
-constexpr const char* CGAL_Variational_shape_approximation_add_anchors = "adds anchors to the boundary cycles with only 2 anchors.";
-constexpr const char* CGAL_Variational_shape_approximation_pseudo_cdt = "runs the pseudo Constrained Delaunay Triangulation at each proxy region, and stores the extracted indexed triangles in tris .
+constexpr const char* Variational_shape_approximation_add_anchors = "adds anchors to the boundary cycles with only 2 anchors.";
+constexpr const char* Variational_shape_approximation_pseudo_cdt = "runs the pseudo Constrained Delaunay Triangulation at each proxy region, and stores the extracted indexed triangles in tris .
 
 all anchors are found, i.e. all boundary cycles have been visited and attached
 with at least 3 anchors.";
-constexpr const char* CGAL_Variational_shape_approximation_walk_to_first_anchor = "walks along the region boundary cycle to the first halfedge pointing to a vertex associated with an anchor.
+constexpr const char* Variational_shape_approximation_walk_to_first_anchor = "walks along the region boundary cycle to the first halfedge pointing to a vertex associated with an anchor.
 
 he_start region boundary halfedge
 
 Parameters
 ----------
 he_start : halfedge_descriptor &";
-constexpr const char* CGAL_Variational_shape_approximation_walk_to_next_anchor = "walks along the region boundary cycle to the next anchor and records the path as a Boundary_chord .
+constexpr const char* Variational_shape_approximation_walk_to_next_anchor = "walks along the region boundary cycle to the next anchor and records the path as a Boundary_chord .
 
 he_start starting region boundary halfedge pointing to a vertex associated
 with an anchor chord recorded path chord
@@ -461,14 +461,14 @@ Parameters
 ----------
 he_start : halfedge_descriptor &
 chord : Boundary_chord &";
-constexpr const char* CGAL_Variational_shape_approximation_walk_to_next_border_halfedge = "walks to the next boundary cycle halfedge.
+constexpr const char* Variational_shape_approximation_walk_to_next_border_halfedge = "walks to the next boundary cycle halfedge.
 
 he_start region boundary halfedge
 
 Parameters
 ----------
 he_start : halfedge_descriptor &";
-constexpr const char* CGAL_Variational_shape_approximation_subdivide_chord = "subdivides a chord recursively in range [chord_begin, chord_end) .
+constexpr const char* Variational_shape_approximation_subdivide_chord = "subdivides a chord recursively in range [chord_begin, chord_end) .
 
 chord_begin begin iterator of the chord chord_end end iterator of the chord
 subdivision_ratio the chord recursive split error threshold
@@ -489,7 +489,7 @@ relative_to_chord : const bool
 with_dihedral_angle : const bool
 
 Returns: std::size_t";
-constexpr const char* CGAL_Variational_shape_approximation_is_anchor_attached = "tests if the target vertex of a halfedge is attached with an anchor.
+constexpr const char* Variational_shape_approximation_is_anchor_attached = "tests if the target vertex of a halfedge is attached with an anchor.
 
 he a halfedge descriptor true is attached with an anchor, and false otherwise.
 
@@ -498,7 +498,7 @@ Parameters
 he : const halfedge_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_is_anchor_attached_1 = "checks if a vertex is attached with an anchor.
+constexpr const char* Variational_shape_approximation_is_anchor_attached_1 = "checks if a vertex is attached with an anchor.
 
 VertexAnchorIndexMap ReadablePropertyMap with
 boost::graph_traits<TriangleMesh>::vertex_descriptor as key and std::size_t as
@@ -510,26 +510,26 @@ vtx : const typename boost::property_traits< VertexAnchorIndexMap >::key_type
 vanchor_map : const VertexAnchorIndexMap &
 
 Returns: bool";
-constexpr const char* CGAL_Variational_shape_approximation_attach_anchor = "attaches an anchor to the vertex.
+constexpr const char* Variational_shape_approximation_attach_anchor = "attaches an anchor to the vertex.
 
 vtx vertex
 
 Parameters
 ----------
 vtx : const vertex_descriptor";
-constexpr const char* CGAL_Variational_shape_approximation_attach_anchor_1 = "attaches an anchor to the target vertex of the halfedge.
+constexpr const char* Variational_shape_approximation_attach_anchor_1 = "attaches an anchor to the target vertex of the halfedge.
 
 he halfedge
 
 Parameters
 ----------
 he : const halfedge_descriptor";
-constexpr const char* CGAL_Variational_shape_approximation_optimize_anchor_location = "optimizes the anchor location by averaging the projection points of the anchor vertex to the incident proxy plane.
+constexpr const char* Variational_shape_approximation_optimize_anchor_location = "optimizes the anchor location by averaging the projection points of the anchor vertex to the incident proxy plane.
 
 Parameters
 ----------
 optimize_boundary_anchor_location : bool";
-constexpr const char* CGAL_Variational_shape_approximation_compute_averaged_edge_length = "calculates the averaged edge length of a triangle mesh.
+constexpr const char* Variational_shape_approximation_compute_averaged_edge_length = "calculates the averaged edge length of a triangle mesh.
 
 tm the input triangle mesh vpoint_map vertex point map averaged edge length
 
@@ -539,7 +539,7 @@ tm : const TriangleMesh &
 vpoint_map : const VertexPointMap &
 
 Returns: FT";
-constexpr const char* CGAL_Variational_shape_approximation_fit_plane_area_averaged = "fits an area averaged plane from a range of faces.
+constexpr const char* Variational_shape_approximation_fit_plane_area_averaged = "fits an area averaged plane from a range of faces.
 
 FaceIterator face_descriptor container iterator beg container begin end
 container end fitted plane
@@ -550,7 +550,7 @@ beg : const FaceIterator &
 end : const FaceIterator &
 
 Returns: Plane_3";
-constexpr const char* CGAL_Variational_shape_approximation_fit_plane_pca = "fits a plane from a range of faces with PCA algorithm.
+constexpr const char* Variational_shape_approximation_fit_plane_pca = "fits a plane from a range of faces with PCA algorithm.
 
 FaceIterator face_descriptor container iterator beg container begin end
 container end fitted plane

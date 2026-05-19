@@ -8,17 +8,17 @@ namespace docstrings {
 namespace Triangulation_on_hyperbolic_surface_2 {
 
 // CGAL::Combinatorial_map_with_cross_ratios_item
-constexpr const char* CGAL_Combinatorial_map_with_cross_ratios_item__class__ = "This item defines attributes of edges that are of type Complex_number reprensenting cross-ratios.";
+constexpr const char* Combinatorial_map_with_cross_ratios_item__class__ = "This item defines attributes of edges that are of type Complex_number reprensenting cross-ratios.";
 
 
 // CGAL::Hyperbolic_fundamental_domain_2
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2__class__ = "represents a fundamental domain of a closed orientable hyperbolic surface.";
+constexpr const char* Hyperbolic_fundamental_domain_2__class__ = "represents a fundamental domain of a closed orientable hyperbolic surface.";
 
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_Point = "Point type.
+constexpr const char* Hyperbolic_fundamental_domain_2_Point = "Point type.
 
 Returns: Traits::Hyperbolic_point_2";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_Hyperbolic_fundamental_domain_2 = "Default constructor.";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_Hyperbolic_fundamental_domain_2_1 = "Constructor from vertices and pairings ranges.
+constexpr const char* Hyperbolic_fundamental_domain_2_Hyperbolic_fundamental_domain_2 = "Default constructor.";
+constexpr const char* Hyperbolic_fundamental_domain_2_Hyperbolic_fundamental_domain_2_1 = "Constructor from vertices and pairings ranges.
 
 PointRange a model of the concepts RandomAccessContainer whose value_type is
 Point . PairingRange a model of the concepts RandomAccessContainer whose
@@ -28,12 +28,12 @@ Parameters
 ----------
 vertices : PointRange &
 pairings : PairingRange &";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_size = "returns the number of vertices (equivalently, the number of sides) of the domain.
+constexpr const char* Hyperbolic_fundamental_domain_2_size = "returns the number of vertices (equivalently, the number of sides) of the domain.
 
 Hyperbolic_fundamental_domain_2< Traits >::is_valid()
 
 Returns: std::size_t";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_vertex = "returns the i-th vertex.
+constexpr const char* Hyperbolic_fundamental_domain_2_vertex = "returns the i-th vertex.
 
 is_valid()
 
@@ -42,7 +42,7 @@ Parameters
 i : std::size_t
 
 Returns: const Point &";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_paired_side = "returns the index of the side paired to the i-th side.
+constexpr const char* Hyperbolic_fundamental_domain_2_paired_side = "returns the index of the side paired to the i-th side.
 
 is_valid()
 
@@ -51,7 +51,7 @@ Parameters
 i : std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_side_pairing = "returns the isometry that maps the side paired to side $ i $ to side $ i $ .
+constexpr const char* Hyperbolic_fundamental_domain_2_side_pairing = "returns the isometry that maps the side paired to side $ i $ to side $ i $ .
 
 is_valid()
 
@@ -60,15 +60,15 @@ Parameters
 i : std::size_t
 
 Returns: Hyperbolic_isometry_2 < Traits >";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_2_is_valid = "checks that the number of vertices is even, that there are as many side pairings as vertices, and that the vertices all lie within the open unit disk.
+constexpr const char* Hyperbolic_fundamental_domain_2_is_valid = "checks that the number of vertices is even, that there are as many side pairings as vertices, and that the vertices all lie within the open unit disk.
 
 Returns: bool";
 
 // CGAL::Hyperbolic_fundamental_domain_factory_2
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_factory_2__class__ = "Factory class, whose only purpose is to construct random fundamental domains of closed orientable hyperbolic surfaces.";
+constexpr const char* Hyperbolic_fundamental_domain_factory_2__class__ = "Factory class, whose only purpose is to construct random fundamental domains of closed orientable hyperbolic surfaces.";
 
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_factory_2_Hyperbolic_fundamental_domain_factory_2 = "Constructor.";
-constexpr const char* CGAL_Hyperbolic_fundamental_domain_factory_2_make_hyperbolic_fundamental_domain_g2 = "randomly generates a convex domain of a closed orientable hyperbolic surface of genus two from a seed.
+constexpr const char* Hyperbolic_fundamental_domain_factory_2_Hyperbolic_fundamental_domain_factory_2 = "Constructor.";
+constexpr const char* Hyperbolic_fundamental_domain_factory_2_make_hyperbolic_fundamental_domain_g2 = "randomly generates a convex domain of a closed orientable hyperbolic surface of genus two from a seed.
 
 Parameters
 ----------
@@ -77,16 +77,16 @@ seed : unsigned int
 Returns: Hyperbolic_fundamental_domain_2 < Traits >";
 
 // CGAL::Hyperbolic_isometry_2
-constexpr const char* CGAL_Hyperbolic_isometry_2__class__ = "represents an isometry in the Poincaré disk model.";
+constexpr const char* Hyperbolic_isometry_2__class__ = "represents an isometry in the Poincaré disk model.";
 
-constexpr const char* CGAL_Hyperbolic_isometry_2_Complex_number = "Complex number type.
+constexpr const char* Hyperbolic_isometry_2_Complex_number = "Complex number type.
 
 Returns: Traits::Complex";
-constexpr const char* CGAL_Hyperbolic_isometry_2_Point = "Point type.
+constexpr const char* Hyperbolic_isometry_2_Point = "Point type.
 
 Returns: Traits::Hyperbolic_point_2";
-constexpr const char* CGAL_Hyperbolic_isometry_2_Hyperbolic_isometry_2 = "Default constructor to the identity.";
-constexpr const char* CGAL_Hyperbolic_isometry_2_Hyperbolic_isometry_2_1 = "Constructor from coefficients.
+constexpr const char* Hyperbolic_isometry_2_Hyperbolic_isometry_2 = "Default constructor to the identity.";
+constexpr const char* Hyperbolic_isometry_2_Hyperbolic_isometry_2_1 = "Constructor from coefficients.
 
 Parameters
 ----------
@@ -94,28 +94,28 @@ c0 : const Complex_number &
 c1 : const Complex_number &
 c2 : const Complex_number &
 c3 : const Complex_number &";
-constexpr const char* CGAL_Hyperbolic_isometry_2_get_coefficient = "returns the index-th coefficient.
+constexpr const char* Hyperbolic_isometry_2_get_coefficient = "returns the index-th coefficient.
 
 Parameters
 ----------
 index : int
 
 Returns: const Complex_number &";
-constexpr const char* CGAL_Hyperbolic_isometry_2_evaluate = "evaluates the isometry at point $ p $ .
+constexpr const char* Hyperbolic_isometry_2_evaluate = "evaluates the isometry at point $ p $ .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Point";
-constexpr const char* CGAL_Hyperbolic_isometry_2_operator = "evaluates the isometry at point $ p $ .
+constexpr const char* Hyperbolic_isometry_2_operator = "evaluates the isometry at point $ p $ .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Point";
-constexpr const char* CGAL_Hyperbolic_isometry_2_operator_1 = "returns the composition of two isometries.
+constexpr const char* Hyperbolic_isometry_2_operator_1 = "returns the composition of two isometries.
 
 Parameters
 ----------
@@ -123,8 +123,8 @@ iso1 : const Hyperbolic_isometry_2 < Traits > &
 iso2 : const Hyperbolic_isometry_2 < Traits > &
 
 Returns: Hyperbolic_isometry_2 < Traits >";
-constexpr const char* CGAL_Hyperbolic_isometry_2_set_to_identity = "sets the isometry to the identity.";
-constexpr const char* CGAL_Hyperbolic_isometry_2_set_coefficients = "sets the coefficients of the isometry.
+constexpr const char* Hyperbolic_isometry_2_set_to_identity = "sets the isometry to the identity.";
+constexpr const char* Hyperbolic_isometry_2_set_coefficients = "sets the coefficients of the isometry.
 
 The implementation does not check that the resulting transformation is an
 isometry.
@@ -135,7 +135,7 @@ c0 : const Complex_number &
 c1 : const Complex_number &
 c2 : const Complex_number &
 c3 : const Complex_number &";
-constexpr const char* CGAL_Hyperbolic_isometry_2_set_coefficient = "sets a particular coefficient of the isometry.
+constexpr const char* Hyperbolic_isometry_2_set_coefficient = "sets a particular coefficient of the isometry.
 
 The implementation does not check that the resulting transformation is an
 isometry.
@@ -146,40 +146,40 @@ index : int
 coefficient : const Complex_number &";
 
 // CGAL::Triangulation_on_hyperbolic_surface_2
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2__class__ = "represents a triangulation of a closed orientable hyperbolic surface.";
+constexpr const char* Triangulation_on_hyperbolic_surface_2__class__ = "represents a triangulation of a closed orientable hyperbolic surface.";
 
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Combinatorial_map_with_cross_ratios = "Type of combinatorial map whose edges are decorated with complex numbers.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Combinatorial_map_with_cross_ratios = "Type of combinatorial map whose edges are decorated with complex numbers.
 
 Returns: Combinatorial_map< 2, Attributes >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Dart_descriptor = "Combinatorial map dart descriptor type.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Dart_descriptor = "Combinatorial map dart descriptor type.
 
 Returns: Combinatorial_map_with_cross_ratios::Dart_descriptor";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Dart_const_descriptor = "Combinatorial map dart const descriptor type.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Dart_const_descriptor = "Combinatorial map dart const descriptor type.
 
 Returns: Combinatorial_map_with_cross_ratios::Dart_const_descriptor";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Vertex_range = "Range of one dart for each vertex (that is 0-cell) of the combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Vertex_range = "Range of one dart for each vertex (that is 0-cell) of the combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios::template One_dart_per_cell_range< 0 >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Edge_range = "Range of one dart for each edge (that is 1-cell) of the combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Edge_range = "Range of one dart for each edge (that is 1-cell) of the combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios::template One_dart_per_cell_range< 1 >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Face_range = "Range of one dart for each face (that is 2-cell) of the combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Face_range = "Range of one dart for each face (that is 2-cell) of the combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios::template One_dart_per_cell_range< 2 >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Vertex_const_range = "Range of one dart for each vertex (that is 0-cell) of the combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Vertex_const_range = "Range of one dart for each vertex (that is 0-cell) of the combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios::template One_dart_per_cell_const_range< 0 >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Edge_const_range = "Range of one dart for each edge (that is 1-cell) of the combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Edge_const_range = "Range of one dart for each edge (that is 1-cell) of the combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios::template One_dart_per_cell_const_range< 1 >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Face_const_range = "Range of one dart for each face (that is 2-cell) of the combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Face_const_range = "Range of one dart for each face (that is 2-cell) of the combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios::template One_dart_per_cell_const_range< 2 >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Point = "Point type.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Point = "Point type.
 
 Returns: Traits::Hyperbolic_point_2";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Triangulation_on_hyperbolic_surface_2 = "Default constructor.";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Triangulation_on_hyperbolic_surface_2_1 = "Constructor from a convex fundamental domain: triangulates the polygon of the domain.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Triangulation_on_hyperbolic_surface_2 = "Default constructor.";
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Triangulation_on_hyperbolic_surface_2_1 = "Constructor from a convex fundamental domain: triangulates the polygon of the domain.
 
 (The triangulation is defined by adding an internal edge between
 domain.vertex(size-1) and the other vertices. The anchor has the three
@@ -189,13 +189,13 @@ vertices of indices size-1 and 0.)
 Parameters
 ----------
 domain : const Hyperbolic_fundamental_domain_2 < Traits > &";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Triangulation_on_hyperbolic_surface_2_2 = "Constructor from a decorated combinatorial map and an anchor.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Triangulation_on_hyperbolic_surface_2_2 = "Constructor from a decorated combinatorial map and an anchor.
 
 Parameters
 ----------
 cmap : Combinatorial_map_with_cross_ratios &
 an_anchor : Anchor &";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_operator = "
+constexpr const char* Triangulation_on_hyperbolic_surface_2_operator = "
 other.is_valid()
 
 Parameters
@@ -203,43 +203,43 @@ Parameters
 other : Triangulation_on_hyperbolic_surface_2
 
 Returns: Triangulation_on_hyperbolic_surface_2 &";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_combinatorial_map = "returns the decorated combinatorial map.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_combinatorial_map = "returns the decorated combinatorial map.
 
 Returns: Combinatorial_map_with_cross_ratios &";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_has_anchor = "returns whether the triangulation has an anchor or not.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_has_anchor = "returns whether the triangulation has an anchor or not.
 
 is_valid()
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_anchor = "returns the anchor.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_anchor = "returns the anchor.
 
 is_valid() && has_anchor()
 
 Returns: Anchor &";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_anchor_1 = "returns the anchor.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_anchor_1 = "returns the anchor.
 
 is_valid() && has_anchor()
 
 Returns: const Anchor &";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_vertices_range = "returns the range of vertices.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_vertices_range = "returns the range of vertices.
 
 Returns: Vertex_range";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_edges_range = "returns the range of edges.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_edges_range = "returns the range of edges.
 
 Returns: Edge_range";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_faces_range = "returns the range of faces.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_faces_range = "returns the range of faces.
 
 Returns: Face_range";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_vertices_const_range = "returns the range of vertices.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_vertices_const_range = "returns the range of vertices.
 
 Returns: Vertex_const_range";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_edges_const_range = "returns the range of edges.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_edges_const_range = "returns the range of edges.
 
 Returns: Edge_const_range";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_faces_const_range = "returns the range of faces.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_faces_const_range = "returns the range of faces.
 
 Returns: Face_const_range";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_is_Delaunay_flippable = "returns whether the edge supported by the dart is Delaunay flippable or not.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_is_Delaunay_flippable = "returns whether the edge supported by the dart is Delaunay flippable or not.
 
 An edge $ e $ is Delaunay flippable if the imaginary part of its cross ratio
 is positive. is_valid()
@@ -249,22 +249,22 @@ Parameters
 dart : Dart_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_flip = "flips the edge supported by the dart.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_flip = "flips the edge supported by the dart.
 
 is_valid()
 
 Parameters
 ----------
 dart : Dart_descriptor";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_is_Delaunay = "determines if the triangulation is a valid Delaunay triangulation.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_is_Delaunay = "determines if the triangulation is a valid Delaunay triangulation.
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_make_Delaunay = "applies the Delaunay flip algorithm: flips Delaunay-flippable edges until there is no such edge anymore.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_make_Delaunay = "applies the Delaunay flip algorithm: flips Delaunay-flippable edges until there is no such edge anymore.
 
 is_valid()
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_lift = "lifts the triangulation in the hyperbolic plane.
+constexpr const char* Triangulation_on_hyperbolic_surface_2_lift = "lifts the triangulation in the hyperbolic plane.
 
 Returns, for every triangle $ t $ of the triangulation, one of the darts of $
 t $ in the combinatorial map of the triangulation, together with a triple $
@@ -278,7 +278,7 @@ Parameters
 center : bool
 
 Returns: std::vector< std::tuple< Dart_const_descriptor , Point , Point , Point > >";
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_is_valid = "checks that the underlying combinatorial map $ M $ has no boundary and calls the is_valid method of $ M $ .
+constexpr const char* Triangulation_on_hyperbolic_surface_2_is_valid = "checks that the underlying combinatorial map $ M $ has no boundary and calls the is_valid method of $ M $ .
 
 If there is an anchor, then checks that the dart descriptor of the anchor does
 indeed point to a dart of $ M $ , and checks that the three vertices of the
@@ -287,7 +287,7 @@ anchor lie within the open unit disk.
 Returns: bool";
 
 // CGAL::Triangulation_on_hyperbolic_surface_2::Anchor
-constexpr const char* CGAL_Triangulation_on_hyperbolic_surface_2_Anchor__class__ = "stores a dart $ d $ of the combinatorial map, belonging to a triangle $ t $ , and stores the three vertices of a lift of $ t $ in the hyperbolic plane.";
+constexpr const char* Triangulation_on_hyperbolic_surface_2_Anchor__class__ = "stores a dart $ d $ of the combinatorial map, belonging to a triangle $ t $ , and stores the three vertices of a lift of $ t $ in the hyperbolic plane.";
 
 
 // ComplexNumber

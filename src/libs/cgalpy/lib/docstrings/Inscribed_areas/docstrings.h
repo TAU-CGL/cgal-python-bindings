@@ -8,30 +8,30 @@ namespace docstrings {
 namespace Inscribed_areas {
 
 // CGAL::Extremal_polygon_area_traits_2
-constexpr const char* CGAL_Extremal_polygon_area_traits_2__class__ = "This is an advanced class.";
+constexpr const char* Extremal_polygon_area_traits_2__class__ = "This is an advanced class.";
 
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_FT = "typedef to K::FT .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_Point_2 = "typedef to K::Point_2 .
+constexpr const char* Extremal_polygon_area_traits_2_FT = "typedef to K::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_Less_xy_2 = "typedef to K::Less_xy_2 .
+constexpr const char* Extremal_polygon_area_traits_2_Point_2 = "typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_Orientation_2 = "typedef to K::Orientation_2 .
+constexpr const char* Extremal_polygon_area_traits_2_Less_xy_2 = "typedef to K::Less_xy_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_Operation = "AdaptableBinaryFunction class op : Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT .
+constexpr const char* Extremal_polygon_area_traits_2_Orientation_2 = "typedef to K::Orientation_2 .
+
+Returns: unspecified_type";
+constexpr const char* Extremal_polygon_area_traits_2_Operation = "AdaptableBinaryFunction class op : Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT .
 
 For a fixed Point_2 $ root$ , op $ (p,\\,q)$ returns twice the area of the
 triangle $ (root,\\, q,\\, p)$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_min_k = "returns 3.
+constexpr const char* Extremal_polygon_area_traits_2_min_k = "returns 3.
 
 Returns: int";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_init = "returns FT(0) .
+constexpr const char* Extremal_polygon_area_traits_2_init = "returns FT(0) .
 
 Parameters
 ----------
@@ -39,14 +39,14 @@ p : const Point_2 &
 q : const Point_2 &
 
 Returns: FT";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_operation = "returns Operation where p is the fixed $ root$ point.
+constexpr const char* Extremal_polygon_area_traits_2_operation = "returns Operation where p is the fixed $ root$ point.
 
 Parameters
 ----------
 p : const Point_2 &
 
 Returns: Operation";
-constexpr const char* CGAL_Extremal_polygon_area_traits_2_compute_min_k_gon = "writes the vertices of [ points_begin , points_end ) forming a maximum area triangle rooted at points_begin[0] to o and returns the past-the-end iterator for that sequence (== o + 3 ).
+constexpr const char* Extremal_polygon_area_traits_2_compute_min_k_gon = "writes the vertices of [ points_begin , points_end ) forming a maximum area triangle rooted at points_begin[0] to o and returns the past-the-end iterator for that sequence (== o + 3 ).
 
 Parameters
 ----------
@@ -58,30 +58,30 @@ o : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Extremal_polygon_perimeter_traits_2
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2__class__ = "This is an advanced class.";
+constexpr const char* Extremal_polygon_perimeter_traits_2__class__ = "This is an advanced class.";
 
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_FT = "typedef to K::FT .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_Point_2 = "typedef to K::Point_2 .
+constexpr const char* Extremal_polygon_perimeter_traits_2_FT = "typedef to K::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_Less_xy_2 = "typedef to K::Less_xy_2 .
+constexpr const char* Extremal_polygon_perimeter_traits_2_Point_2 = "typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_Orientation_2 = "typedef to K::Orientation_2 .
+constexpr const char* Extremal_polygon_perimeter_traits_2_Less_xy_2 = "typedef to K::Less_xy_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_Operation = "AdaptableBinaryFunction class op : Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT .
+constexpr const char* Extremal_polygon_perimeter_traits_2_Orientation_2 = "typedef to K::Orientation_2 .
+
+Returns: unspecified_type";
+constexpr const char* Extremal_polygon_perimeter_traits_2_Operation = "AdaptableBinaryFunction class op : Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT .
 
 For a fixed Point_2 $ root$ , op $ (p,\\,q)$ returns $ d(r,\\,p) + d(p,\\,q) -
 d(r,\\,q)$ where $ d$ denotes the Euclidean distance.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_min_k = "returns 2.
+constexpr const char* Extremal_polygon_perimeter_traits_2_min_k = "returns 2.
 
 Returns: int";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_init = "returns twice the Euclidean distance between p and q .
+constexpr const char* Extremal_polygon_perimeter_traits_2_init = "returns twice the Euclidean distance between p and q .
 
 Parameters
 ----------
@@ -89,14 +89,14 @@ p : const Point_2 &
 q : const Point_2 &
 
 Returns: FT";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_operation = "returns Operation where p is the fixed $ root$ point.
+constexpr const char* Extremal_polygon_perimeter_traits_2_operation = "returns Operation where p is the fixed $ root$ point.
 
 Parameters
 ----------
 p : const Point_2 &
 
 Returns: Operation";
-constexpr const char* CGAL_Extremal_polygon_perimeter_traits_2_compute_min_k_gon = "writes the pair ( points_begin[0] , p ) where p is drawn from [ points_begin , points_end ) such that the Euclidean distance between both points is maximized (maximum perimeter 2-gon rooted at points_begin[0] ) to o and returns the past-the-end iterator for that sequence (== o + 2 ).
+constexpr const char* Extremal_polygon_perimeter_traits_2_compute_min_k_gon = "writes the pair ( points_begin[0] , p ) where p is drawn from [ points_begin , points_end ) such that the Euclidean distance between both points is maximized (maximum perimeter 2-gon rooted at points_begin[0] ) to o and returns the past-the-end iterator for that sequence (== o + 2 ).
 
 Parameters
 ----------
@@ -108,23 +108,23 @@ o : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Largest_empty_iso_rectangle_2
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2__class__ = "Given a set of points in the plane, the class Largest_empty_iso_rectangle_2 is a data structure that maintains an iso-rectangle with the largest area among all iso-rectangles that are inside a given bounding box( iso-rectangle), and that do not contain any point of the point set.";
+constexpr const char* Largest_empty_iso_rectangle_2__class__ = "Given a set of points in the plane, the class Largest_empty_iso_rectangle_2 is a data structure that maintains an iso-rectangle with the largest area among all iso-rectangles that are inside a given bounding box( iso-rectangle), and that do not contain any point of the point set.";
 
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_const_iterator = "Iterator over the points.
+constexpr const char* Largest_empty_iso_rectangle_2_const_iterator = "Iterator over the points.
 
 This iterator allows to enumerate the points. It is non mutable, bidirectional
 and its value type is Point_2 . It is invalidated by any insertion or removal
 of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2 = "Constructor.
+constexpr const char* Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2 = "Constructor.
 
 The iso-rectangle b is the bounding rectangle.
 
 Parameters
 ----------
 b : const Iso_rectangle_2 &";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2_1 = "Constructor.
+constexpr const char* Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2_1 = "Constructor.
 
 The iso-rectangle whose lower left and upper right points are p and q
 respectively is the bounding rectangle.
@@ -133,39 +133,39 @@ Parameters
 ----------
 p : const Point_2
 q : const Point_2";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2_2 = "Constructor.
+constexpr const char* Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2_2 = "Constructor.
 
 The iso-rectangle whose lower left point and upper right points are (0,0) and
 (1,1) respectively is the bounding rectangle.";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2_3 = "Copy constructor.
+constexpr const char* Largest_empty_iso_rectangle_2_Largest_empty_iso_rectangle_2_3 = "Copy constructor.
 
 Parameters
 ----------
 tr : const Largest_empty_iso_rectangle_2< Traits >";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_traits = "Returns a const reference to the traits object.
+constexpr const char* Largest_empty_iso_rectangle_2_traits = "Returns a const reference to the traits object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_begin = "Returns an iterator to the beginning of the point set.
+constexpr const char* Largest_empty_iso_rectangle_2_begin = "Returns an iterator to the beginning of the point set.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_end = "Returns a past-the-end iterator for the point set.
+constexpr const char* Largest_empty_iso_rectangle_2_end = "Returns a past-the-end iterator for the point set.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_get_left_bottom_right_top = "Returns the four points that define the largest empty iso-rectangle.
+constexpr const char* Largest_empty_iso_rectangle_2_get_left_bottom_right_top = "Returns the four points that define the largest empty iso-rectangle.
 
 (Note that these points are not necessarily on a corner of an iso-rectangle.)
 
 Returns: Quadruple< Point_2 , Point_2 , Point_2 , Point_2 >";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_get_largest_empty_iso_rectangle = "Returns the largest empty iso-rectangle.
+constexpr const char* Largest_empty_iso_rectangle_2_get_largest_empty_iso_rectangle = "Returns the largest empty iso-rectangle.
 
 (Note that the two points defining the iso-rectangle are not necessarily part
 of the point set.)
 
 Returns: Iso_rectangle_2";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_get_bounding_box = "Returns the iso-rectangle passed in the constructor.
+constexpr const char* Largest_empty_iso_rectangle_2_get_bounding_box = "Returns the iso-rectangle passed in the constructor.
 
 Returns: Iso_rectangle_2";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_insert = "Inserts point p in the point set, if it is not already in the set and on the bounded side of the bounding rectangle.
+constexpr const char* Largest_empty_iso_rectangle_2_insert = "Inserts point p in the point set, if it is not already in the set and on the bounded side of the bounding rectangle.
 
 Points on the boundary can be ignored as they lead to the same result.
 
@@ -174,12 +174,12 @@ Parameters
 p : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_push_back = "Inserts point p in the point set, if it is not already in the set.
+constexpr const char* Largest_empty_iso_rectangle_2_push_back = "Inserts point p in the point set, if it is not already in the set.
 
 Parameters
 ----------
 p : const Point_2 &";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_insert_1 = "Inserts the points in the range [first, last) , and returns the number of inserted points.
+constexpr const char* Largest_empty_iso_rectangle_2_insert_1 = "Inserts the points in the range [first, last) , and returns the number of inserted points.
 
 InputIterator must be an iterator with value type Point_2 .
 
@@ -189,7 +189,7 @@ first : InputIterator
 last : InputIterator
 
 Returns: int";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_remove = "Removes point p .
+constexpr const char* Largest_empty_iso_rectangle_2_remove = "Removes point p .
 
 Returns false iff p is not in the point set.
 
@@ -198,7 +198,7 @@ Parameters
 p : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Largest_empty_iso_rectangle_2_clear = "Removes all points.";
+constexpr const char* Largest_empty_iso_rectangle_2_clear = "Removes all points.";
 
 // ExtremalPolygonTraits_2
 constexpr const char* ExtremalPolygonTraits_2__class__ = "This is an advanced concept.";

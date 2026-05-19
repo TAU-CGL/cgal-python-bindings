@@ -9,17 +9,17 @@ namespace Surface_mesh_simplification {
 
 
 // CGAL::Surface_mesh_simplification::Bounded_normal_change_filter
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_filter__class__ = "The class Bounded_normal_change_filter is a model for the PlacementFilter concept.";
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_filter__class__ = "The class Bounded_normal_change_filter is a model for the PlacementFilter concept.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter_1 = "Constructor.
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter = "Default constructor";
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter_1 = "Constructor.
 
 filter is the filter that will be filtered.
 
 Parameters
 ----------
 filter : const Filter &";
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_filter_operator = "returns the placement, if it does not get filtered by the wrapped filter and if no triangle in the profile has its normal changed by more than 90 degrees.
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_filter_operator = "returns the placement, if it does not get filtered by the wrapped filter and if no triangle in the profile has its normal changed by more than 90 degrees.
 
 Parameters
 ----------
@@ -28,15 +28,15 @@ op : std::optional< typename Profile::Point >
 
 Returns: std::optional< typename Edge_profile::Point >";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement_1 = "Constructor.
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement = "Default constructor";
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement_1 = "Constructor.
 
 get_placement is the placement that will be filtered.
 
 Parameters
 ----------
 get_placement : const Get_placement_ &";
-constexpr const char* CGAL_Surface_mesh_simplification_Bounded_normal_change_placement_operator = "Returns the placement computed by get_placement , if no triangle in the profile has its normal changed by more than 90 degree.
+constexpr const char* Surface_mesh_simplification_Bounded_normal_change_placement_operator = "Returns the placement computed by get_placement , if no triangle in the profile has its normal changed by more than 90 degree.
 
 Parameters
 ----------
@@ -45,21 +45,21 @@ profile : const Edge_profile &
 Returns: std::optional< typename Edge_profile::Point >";
 
 // CGAL::Surface_mesh_simplification::Constrained_placement
-constexpr const char* CGAL_Surface_mesh_simplification_Constrained_placement__class__ = "The class Constrained_placement is a model for the concept GetPlacement .";
+constexpr const char* Surface_mesh_simplification_Constrained_placement__class__ = "The class Constrained_placement is a model for the concept GetPlacement .";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Constrained_placement_Constrained_placement = "Constructor.
+constexpr const char* Surface_mesh_simplification_Constrained_placement_Constrained_placement = "Constructor.
 
 Parameters
 ----------
 map : Edge_is_constrained_map_
 get_placement : const Get_placement_ &";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Count_ratio_stop_predicate_Count_ratio_stop_predicate = "Initializes the predicate establishing the ratio .
+constexpr const char* Surface_mesh_simplification_Count_ratio_stop_predicate_Count_ratio_stop_predicate = "Initializes the predicate establishing the ratio .
 
 Parameters
 ----------
 ratio : const double";
-constexpr const char* CGAL_Surface_mesh_simplification_Count_ratio_stop_predicate_operator = "Returns (double(current_edge_count) / double(initial_edge_count)) < ratio .
+constexpr const char* Surface_mesh_simplification_Count_ratio_stop_predicate_operator = "Returns (double(current_edge_count) / double(initial_edge_count)) < ratio .
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -72,12 +72,12 @@ current_edge_count : const Edge_profile::edges_size_type
 
 Returns: bool";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Count_stop_predicate_Count_stop_predicate = "Initializes the predicate establishing the threshold value.
+constexpr const char* Surface_mesh_simplification_Count_stop_predicate_Count_stop_predicate = "Initializes the predicate establishing the threshold value.
 
 Parameters
 ----------
 threshold : const Edge_profile::edges_size_type";
-constexpr const char* CGAL_Surface_mesh_simplification_Count_stop_predicate_operator = "Returns (current_edge_count < threshold) .
+constexpr const char* Surface_mesh_simplification_Count_stop_predicate_operator = "Returns (current_edge_count < threshold) .
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -91,14 +91,14 @@ current_edge_count : const Edge_profile::edges_size_type
 Returns: bool";
 
 // CGAL::Surface_mesh_simplification::Edge_collapse_visitor_base
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_collapse_visitor_base__class__ = "The class Surface_mesh_simplification::Edge_collapse_visitor_base provides a base class for models of the EdgeCollapseSimplificationVisitor concept.";
+constexpr const char* Surface_mesh_simplification_Edge_collapse_visitor_base__class__ = "The class Surface_mesh_simplification::Edge_collapse_visitor_base provides a base class for models of the EdgeCollapseSimplificationVisitor concept.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_count_ratio_stop_predicate_Edge_count_ratio_stop_predicate = "Initializes the predicate establishing the ratio .
+constexpr const char* Surface_mesh_simplification_Edge_count_ratio_stop_predicate_Edge_count_ratio_stop_predicate = "Initializes the predicate establishing the ratio .
 
 Parameters
 ----------
 ratio : const double";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_count_ratio_stop_predicate_operator = "Returns (double(current_edge_count) / double(initial_edge_count)) < ratio .
+constexpr const char* Surface_mesh_simplification_Edge_count_ratio_stop_predicate_operator = "Returns (double(current_edge_count) / double(initial_edge_count)) < ratio .
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -111,12 +111,12 @@ current_edge_count : const Edge_profile::edges_size_type
 
 Returns: bool";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_count_stop_predicate_Edge_count_stop_predicate = "Initializes the predicate establishing the threshold value.
+constexpr const char* Surface_mesh_simplification_Edge_count_stop_predicate_Edge_count_stop_predicate = "Initializes the predicate establishing the threshold value.
 
 Parameters
 ----------
 threshold : const Edge_profile::edges_size_type";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_count_stop_predicate_operator = "Returns (current_edge_count < threshold) .
+constexpr const char* Surface_mesh_simplification_Edge_count_stop_predicate_operator = "Returns (current_edge_count < threshold) .
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -130,10 +130,10 @@ current_edge_count : const Edge_profile::edges_size_type
 Returns: bool";
 
 // CGAL::Surface_mesh_simplification::Edge_length_cost
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_length_cost__class__ = "The class Edge_length_cost is a model for the GetCost concept, which computes the collapse cost as the squared length of the edge.";
+constexpr const char* Surface_mesh_simplification_Edge_length_cost__class__ = "The class Edge_length_cost is a model for the GetCost concept, which computes the collapse cost as the squared length of the edge.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_length_cost_Edge_length_cost = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_length_cost_operator = "Returns the collapse cost as the squared distance between the points of the source and target vertices (that is, profile.p0() and profile.p1() .
+constexpr const char* Surface_mesh_simplification_Edge_length_cost_Edge_length_cost = "Default constructor";
+constexpr const char* Surface_mesh_simplification_Edge_length_cost_operator = "Returns the collapse cost as the squared distance between the points of the source and target vertices (that is, profile.p0() and profile.p1() .
 
 The argument placement is unused.
 
@@ -145,14 +145,14 @@ placement : const std::optional< typename Edge_profile::Point > &
 Returns: std::optional< typename Edge_profile::FT >";
 
 // CGAL::Surface_mesh_simplification::Edge_length_stop_predicate
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_length_stop_predicate__class__ = "The class Edge_length_stop_predicate is a model for the StopPredicate concept, which returns true when the top edge in the priority queue is larger than a certain threshold.";
+constexpr const char* Surface_mesh_simplification_Edge_length_stop_predicate__class__ = "The class Edge_length_stop_predicate is a model for the StopPredicate concept, which returns true when the top edge in the priority queue is larger than a certain threshold.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_length_stop_predicate_Edge_length_stop_predicate = "Initializes the predicate establishing the threshold value.
+constexpr const char* Surface_mesh_simplification_Edge_length_stop_predicate_Edge_length_stop_predicate = "Initializes the predicate establishing the threshold value.
 
 Parameters
 ----------
 threshold : const Edge_profile::FT";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_length_stop_predicate_operator = "Returns (CGAL::squared_distance(edge_profile.p0(),edge_profile.p1()) > threshold*threshold) .
+constexpr const char* Surface_mesh_simplification_Edge_length_stop_predicate_operator = "Returns (CGAL::squared_distance(edge_profile.p0(),edge_profile.p1()) > threshold*threshold) .
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -166,103 +166,103 @@ current_edge_count : const Edge_profile::edges_size_type
 Returns: bool";
 
 // CGAL::Surface_mesh_simplification::Edge_profile
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile__class__ = "The class Edge_profile regroups useful information about an edge, such as its incident vertices and faces.";
+constexpr const char* Surface_mesh_simplification_Edge_profile__class__ = "The class Edge_profile regroups useful information about an edge, such as its incident vertices and faces.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_Triangle_mesh = "The type of the surface mesh to simplify.
+constexpr const char* Surface_mesh_simplification_Edge_profile_Triangle_mesh = "The type of the surface mesh to simplify.
 
 Returns: TriangleMesh";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_Vertex_point_map = "The type of a property map that maps vertices on points.
+constexpr const char* Surface_mesh_simplification_Edge_profile_Vertex_point_map = "The type of a property map that maps vertices on points.
 
 Returns: VertexPointMap";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_Geom_traits = "The type of a kernel-like objects used for predicates and constructions.
+constexpr const char* Surface_mesh_simplification_Edge_profile_Geom_traits = "The type of a kernel-like objects used for predicates and constructions.
 
 Returns: GeomTraits";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_vertex_descriptor = "A BGL vertex descriptor representing a vertex of the surface mesh.
+constexpr const char* Surface_mesh_simplification_Edge_profile_vertex_descriptor = "A BGL vertex descriptor representing a vertex of the surface mesh.
 
 Returns: boost::graph_traits< TriangleMesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_halfedge_descriptor = "A BGL halfedge descriptor representing a halfedge of the surface mesh.
+constexpr const char* Surface_mesh_simplification_Edge_profile_halfedge_descriptor = "A BGL halfedge descriptor representing a halfedge of the surface mesh.
 
 Returns: boost::graph_traits< TriangleMesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_edge_descriptor = "A BGL edge descriptor representing an edge of the surface mesh.
+constexpr const char* Surface_mesh_simplification_Edge_profile_edge_descriptor = "A BGL edge descriptor representing an edge of the surface mesh.
 
 Returns: boost::graph_traits< TriangleMesh >::edge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_edges_size_type = "The unsigned integer type used for representing the number of edges in the graph.
+constexpr const char* Surface_mesh_simplification_Edge_profile_edges_size_type = "The unsigned integer type used for representing the number of edges in the graph.
 
 Returns: boost::graph_traits< TriangleMesh >::edges_size_type";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_Point = "The point type for the surface mesh vertex.
+constexpr const char* Surface_mesh_simplification_Edge_profile_Point = "The point type for the surface mesh vertex.
 
 Returns: boost::property_traits< VertexPointMap >::value_type";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_FT = "The coordinate type of points.
+constexpr const char* Surface_mesh_simplification_Edge_profile_FT = "The coordinate type of points.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_v0 = "One of vertices of the edge to be collapsed.
+constexpr const char* Surface_mesh_simplification_Edge_profile_v0 = "One of vertices of the edge to be collapsed.
 
 Returns: vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_v1 = "The other vertex of the edge to be collapsed.
+constexpr const char* Surface_mesh_simplification_Edge_profile_v1 = "The other vertex of the edge to be collapsed.
 
 Returns: vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_v0_v1 = "One of the directed edges corresponding to the halfedge being collapsed.
+constexpr const char* Surface_mesh_simplification_Edge_profile_v0_v1 = "One of the directed edges corresponding to the halfedge being collapsed.
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_v1_v0 = "The other directed edge corresponding to the halfedge being collapsed.
+constexpr const char* Surface_mesh_simplification_Edge_profile_v1_v0 = "The other directed edge corresponding to the halfedge being collapsed.
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_p0 = "The point of vertex v0 .
+constexpr const char* Surface_mesh_simplification_Edge_profile_p0 = "The point of vertex v0 .
 
 Returns: const Point &";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_p1 = "The point of vertex v1 .
+constexpr const char* Surface_mesh_simplification_Edge_profile_p1 = "The point of vertex v1 .
 
 Returns: const Point &";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_vL = "If v0v1 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.
+constexpr const char* Surface_mesh_simplification_Edge_profile_vL = "If v0v1 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.
 
 Returns: vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_v1_vL = "If v0v1 belongs to a finite face (is not a border edge) the directed edge from v1 to vL , a null descriptor otherwise.
+constexpr const char* Surface_mesh_simplification_Edge_profile_v1_vL = "If v0v1 belongs to a finite face (is not a border edge) the directed edge from v1 to vL , a null descriptor otherwise.
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_vL_v0 = "If v0v1 belongs to a finite face (is not a border edge) the directed edge from vL to v0 , a null descriptor otherwise.
+constexpr const char* Surface_mesh_simplification_Edge_profile_vL_v0 = "If v0v1 belongs to a finite face (is not a border edge) the directed edge from vL to v0 , a null descriptor otherwise.
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_vR = "If v1v0 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.
+constexpr const char* Surface_mesh_simplification_Edge_profile_vR = "If v1v0 belongs to a finite face (is not a border edge) the third vertex of that triangular face, a null descriptor otherwise.
 
 Returns: vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_v0_vR = "If v1v0 belongs to a finite face (is not a border edge) the directed edge from v0 to vR , a null descriptor otherwise.
+constexpr const char* Surface_mesh_simplification_Edge_profile_v0_vR = "If v1v0 belongs to a finite face (is not a border edge) the directed edge from v0 to vR , a null descriptor otherwise.
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_vR_v1 = "If v1v0 belongs to a finite face (is not a border edge) the directed edge from vR to v1 , a null descriptor otherwise.
+constexpr const char* Surface_mesh_simplification_Edge_profile_vR_v1 = "If v1v0 belongs to a finite face (is not a border edge) the directed edge from vR to v1 , a null descriptor otherwise.
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_link = "The unique sequence of the vertices around v0v1 in topological order ( ccw or cw depending on the relative ordering of v0 and v1 in the profile).
+constexpr const char* Surface_mesh_simplification_Edge_profile_link = "The unique sequence of the vertices around v0v1 in topological order ( ccw or cw depending on the relative ordering of v0 and v1 in the profile).
 
 The sequence may have duplicates, but when this happens the edge is not
 collapsible.
 
 Returns: std::vector< vertex_descriptor >";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_border_edges = "The unique collection of the border directed edges incident upon v0 and v1 .
+constexpr const char* Surface_mesh_simplification_Edge_profile_border_edges = "The unique collection of the border directed edges incident upon v0 and v1 .
 
 Returns: std::vector< halfedge_descriptor >";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_left_face_exists = "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v0v1 is not a border edge).
+constexpr const char* Surface_mesh_simplification_Edge_profile_left_face_exists = "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v0v1 is not a border edge).
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_right_face_exists = "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v1v0 is not a border edge).
+constexpr const char* Surface_mesh_simplification_Edge_profile_right_face_exists = "Indicates if v0v1 belongs to a finite face of the surface mesh (i.e, v1v0 is not a border edge).
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_surface_mesh = "Returns the surface mesh the edge belongs to.
+constexpr const char* Surface_mesh_simplification_Edge_profile_surface_mesh = "Returns the surface mesh the edge belongs to.
 
 Returns: const Triangle_mesh &";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_vertex_point_map = "Returns the vertex point property map.
+constexpr const char* Surface_mesh_simplification_Edge_profile_vertex_point_map = "Returns the vertex point property map.
 
 Returns: const Vertex_point_map &";
-constexpr const char* CGAL_Surface_mesh_simplification_Edge_profile_geom_traits = "Returns the geometric traits class.
+constexpr const char* Surface_mesh_simplification_Edge_profile_geom_traits = "Returns the geometric traits class.
 
 Returns: const Geom_traits &";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Face_count_ratio_stop_predicate_Face_count_ratio_stop_predicate = "Initializes the predicate establishing the ratio .
+constexpr const char* Surface_mesh_simplification_Face_count_ratio_stop_predicate_Face_count_ratio_stop_predicate = "Initializes the predicate establishing the ratio .
 
 Parameters
 ----------
 ratio : const double
 tmesh : const TriangleMesh &";
-constexpr const char* CGAL_Surface_mesh_simplification_Face_count_ratio_stop_predicate_operator = "Returns true if the ratio of current face count over initial face count is strictly smaller than ratio , and false otherwise.
+constexpr const char* Surface_mesh_simplification_Face_count_ratio_stop_predicate_operator = "Returns true if the ratio of current face count over initial face count is strictly smaller than ratio , and false otherwise.
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -275,12 +275,12 @@ current_edge_count : const Edge_profile::edges_size_type
 
 Returns: bool";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Face_count_stop_predicate_Face_count_stop_predicate = "Initializes the predicate establishing the threshold value.
+constexpr const char* Surface_mesh_simplification_Face_count_stop_predicate_Face_count_stop_predicate = "Initializes the predicate establishing the threshold value.
 
 Parameters
 ----------
 threshold : const Edge_profile::edges_size_type";
-constexpr const char* CGAL_Surface_mesh_simplification_Face_count_stop_predicate_operator = "Returns true if the current face count is strictly smaller than threshold , and false otherwise.
+constexpr const char* Surface_mesh_simplification_Face_count_stop_predicate_operator = "Returns true if the current face count is strictly smaller than threshold , and false otherwise.
 
 All other parameters are ignored (but exist since this is a generic policy).
 
@@ -294,9 +294,9 @@ current_edge_count : const Edge_profile::edges_size_type
 Returns: bool";
 
 // CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_and_line_policies
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies__class__ = "The class GarlandHeckbert_plane_and_line_policies regroups the cost and placement policies based on the Garland-Heckbert \"Plane and line\" strategy of Liu and colleagues [6] .";
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies__class__ = "The class GarlandHeckbert_plane_and_line_policies regroups the cost and placement policies based on the Garland-Heckbert \"Plane and line\" strategy of Liu and colleagues [6] .";
 
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies_GarlandHeckbert_plane_and_line_policies = "initializes the Garland-Heckbert plane and line policies.
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies_GarlandHeckbert_plane_and_line_policies = "initializes the Garland-Heckbert plane and line policies.
 
 NamedParameters a sequence of Named Parameters tmesh the triangle mesh np an
 optional sequence of Named Parameters among the ones listed below Optional
@@ -316,77 +316,77 @@ Parameters
 ----------
 tmesh : TriangleMesh &
 np : const NamedParameters &";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies_Get_cost = "The type of the Garland-Heckbert cost functor, a model of the concept GetCost .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies_Get_cost = "The type of the Garland-Heckbert cost functor, a model of the concept GetCost .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies_Get_placement = "The type of the Garland-Heckbert placement functor, a model of the concept GetPlacement .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_and_line_policies_Get_placement = "The type of the Garland-Heckbert placement functor, a model of the concept GetPlacement .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_simplification::GarlandHeckbert_plane_policies
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_policies__class__ = "The class GarlandHeckbert_plane_policies regroups the cost and placement policies based on the Garland-Heckbert \"Classic Plane\" strategy (Section Garland-Heckbert Cost and Placement Strategy ).";
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_policies__class__ = "The class GarlandHeckbert_plane_policies regroups the cost and placement policies based on the Garland-Heckbert \"Classic Plane\" strategy (Section Garland-Heckbert Cost and Placement Strategy ).";
 
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_policies_GarlandHeckbert_plane_policies = "initializes the Garland-Heckbert Plane policies.
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_policies_GarlandHeckbert_plane_policies = "initializes the Garland-Heckbert Plane policies.
 
 Parameters
 ----------
 tmesh : TriangleMesh &";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_plane_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_plane_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_plane_policies
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies__class__ = "The class GarlandHeckbert_probabilistic_plane_policies regroups the cost and placement policies based on the \"Probabilistic Plane\" strategy of Trettner and Kobbelt [8] .";
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies__class__ = "The class GarlandHeckbert_probabilistic_plane_policies regroups the cost and placement policies based on the \"Probabilistic Plane\" strategy of Trettner and Kobbelt [8] .";
 
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies_GarlandHeckbert_probabilistic_plane_policies = "initializes the Garland-Heckbert Probabilistic Plane policies.
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies_GarlandHeckbert_probabilistic_plane_policies = "initializes the Garland-Heckbert Probabilistic Plane policies.
 
 Parameters
 ----------
 tmesh : TriangleMesh &";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_plane_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_simplification::GarlandHeckbert_probabilistic_triangle_policies
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies__class__ = "The class GarlandHeckbert_probabilistic_triangle_policies regroups the cost and placement policies based on the \"Probabilistic Triangle\" strategy of Trettner and Kobbelt [8] .";
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies__class__ = "The class GarlandHeckbert_probabilistic_triangle_policies regroups the cost and placement policies based on the \"Probabilistic Triangle\" strategy of Trettner and Kobbelt [8] .";
 
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies_GarlandHeckbert_probabilistic_triangle_policies = "initializes the Garland-Heckbert \"Probabilistic Triangle\" policies.
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies_GarlandHeckbert_probabilistic_triangle_policies = "initializes the Garland-Heckbert \"Probabilistic Triangle\" policies.
 
 Parameters
 ----------
 tmesh : TriangleMesh &";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_probabilistic_triangle_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_simplification::GarlandHeckbert_triangle_policies
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_triangle_policies__class__ = "The class GarlandHeckbert_triangle_policies regroups the cost and placement policies using the triangle-based Garland-Heckbert strategy (Section Garland-Heckbert Cost and Placement Strategy ).";
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_triangle_policies__class__ = "The class GarlandHeckbert_triangle_policies regroups the cost and placement policies using the triangle-based Garland-Heckbert strategy (Section Garland-Heckbert Cost and Placement Strategy ).";
 
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_triangle_policies_GarlandHeckbert_triangle_policies = "initializes the Garland-Heckbert Triangle policies.
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_triangle_policies_GarlandHeckbert_triangle_policies = "initializes the Garland-Heckbert Triangle policies.
 
 Parameters
 ----------
 tmesh : TriangleMesh &";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_triangle_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_triangle_policies_Get_cost = "The type of the Garland Heckbert cost functor, a model of the concept GetCost .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_simplification_GarlandHeckbert_triangle_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
+constexpr const char* Surface_mesh_simplification_GarlandHeckbert_triangle_policies_Get_placement = "The type of the Garland Heckbert placement functor, a model of the concept GetPlacement .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_simplification::LindstromTurk_cost
-constexpr const char* CGAL_Surface_mesh_simplification_LindstromTurk_cost__class__ = "The class LindstromTurk_cost provides a model for the GetCost concept.";
+constexpr const char* Surface_mesh_simplification_LindstromTurk_cost__class__ = "The class LindstromTurk_cost provides a model for the GetCost concept.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_LindstromTurk_cost_LindstromTurk_cost = "Initializes the policy with the given weighting unit factor .
+constexpr const char* Surface_mesh_simplification_LindstromTurk_cost_LindstromTurk_cost = "Initializes the policy with the given weighting unit factor .
 
 See Lindstrom-Turk Cost and Placement Strategy for details on the meaning of
 this factor.
@@ -394,7 +394,7 @@ this factor.
 Parameters
 ----------
 factor : const FT";
-constexpr const char* CGAL_Surface_mesh_simplification_LindstromTurk_cost_operator = "Returns the cost of collapsing the edge (represented by its profile) considering the new placement computed for it.
+constexpr const char* Surface_mesh_simplification_LindstromTurk_cost_operator = "Returns the cost of collapsing the edge (represented by its profile) considering the new placement computed for it.
 
 Parameters
 ----------
@@ -404,9 +404,9 @@ placement : const std::optional< typename Edge_profile::Point > &
 Returns: std::optional< typename Edge_profile::FT >";
 
 // CGAL::Surface_mesh_simplification::LindstromTurk_placement
-constexpr const char* CGAL_Surface_mesh_simplification_LindstromTurk_placement__class__ = "The class LindstromTurk_placement provides a model for the GetPlacement concept.";
+constexpr const char* Surface_mesh_simplification_LindstromTurk_placement__class__ = "The class LindstromTurk_placement provides a model for the GetPlacement concept.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_LindstromTurk_placement_LindstromTurk_placement = "Initializes the policy with the given weighting unit factor .
+constexpr const char* Surface_mesh_simplification_LindstromTurk_placement_LindstromTurk_placement = "Initializes the policy with the given weighting unit factor .
 
 See Lindstrom-Turk Cost and Placement Strategy for details on the meaning of
 this factor.
@@ -414,7 +414,7 @@ this factor.
 Parameters
 ----------
 factor : const Edge_profile::FT &";
-constexpr const char* CGAL_Surface_mesh_simplification_LindstromTurk_placement_operator = "Returns the new position for the remaining vertex after collapsing the edge (represented by its profile).
+constexpr const char* Surface_mesh_simplification_LindstromTurk_placement_operator = "Returns the new position for the remaining vertex after collapsing the edge (represented by its profile).
 
 Parameters
 ----------
@@ -423,10 +423,10 @@ profile : const Edge_profile &
 Returns: std::optional< typename Edge_profile::Point >";
 
 // CGAL::Surface_mesh_simplification::Midpoint_placement
-constexpr const char* CGAL_Surface_mesh_simplification_Midpoint_placement__class__ = "The class Midpoint_placement is a model for the GetPlacement concept which computes the placement as the midpoint position along the edge.";
+constexpr const char* Surface_mesh_simplification_Midpoint_placement__class__ = "The class Midpoint_placement is a model for the GetPlacement concept which computes the placement as the midpoint position along the edge.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Midpoint_placement_Midpoint_placement = "Default constructor.";
-constexpr const char* CGAL_Surface_mesh_simplification_Midpoint_placement_operator = "Returns the placement (vertex position) as the midpoint between the points of the source and target vertices ( profile.p0() and profile.p1() ).
+constexpr const char* Surface_mesh_simplification_Midpoint_placement_Midpoint_placement = "Default constructor.";
+constexpr const char* Surface_mesh_simplification_Midpoint_placement_operator = "Returns the placement (vertex position) as the midpoint between the points of the source and target vertices ( profile.p0() and profile.p1() ).
 
 Parameters
 ----------
@@ -435,10 +435,10 @@ profile : const Edge_profile &
 Returns: std::optional< typename Edge_profile::Point >";
 
 // CGAL::Surface_mesh_simplification::Polyhedral_envelope_filter
-constexpr const char* CGAL_Surface_mesh_simplification_Polyhedral_envelope_filter__class__ = "The class Polyhedral_envelope_filter is a model for the PlacementFilter concept.";
+constexpr const char* Surface_mesh_simplification_Polyhedral_envelope_filter__class__ = "The class Polyhedral_envelope_filter is a model for the PlacementFilter concept.";
 
-constexpr const char* CGAL_Surface_mesh_simplification_Polyhedral_envelope_filter_Polyhedral_envelope_filter = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_simplification_Polyhedral_envelope_filter_Polyhedral_envelope_filter_1 = "Constructor.
+constexpr const char* Surface_mesh_simplification_Polyhedral_envelope_filter_Polyhedral_envelope_filter = "Default constructor";
+constexpr const char* Surface_mesh_simplification_Polyhedral_envelope_filter_Polyhedral_envelope_filter_1 = "Constructor.
 
 dist is the parameter given to the polyhedral envelope filter is the filter
 that will be filtered.
@@ -447,7 +447,7 @@ Parameters
 ----------
 dist : const FT &
 filter : const Filter &";
-constexpr const char* CGAL_Surface_mesh_simplification_Polyhedral_envelope_filter_operator = "returns the placement, if it does not get filtered by the wrapped filter, and if all triangles in the profile are inside the polyhedral envelope.
+constexpr const char* Surface_mesh_simplification_Polyhedral_envelope_filter_operator = "returns the placement, if it does not get filtered by the wrapped filter, and if all triangles in the profile are inside the polyhedral envelope.
 
 Parameters
 ----------
@@ -455,7 +455,7 @@ profile : const Edge_profile &
 op : std::optional< typename Profile::Point >
 
 Returns: std::optional< typename Edge_profile::Point >";
-constexpr const char* CGAL_Surface_mesh_simplification_Polyhedral_envelope_filter_FT = "The number type.
+constexpr const char* Surface_mesh_simplification_Polyhedral_envelope_filter_FT = "The number type.
 
 Returns: Geom_traits::FT";
 
@@ -588,7 +588,7 @@ current_edge_count : const Edge_profile::edges_size_type
 
 Returns: bool";
 
-constexpr const char* CGAL_Surface_mesh_simplification_make_GarlandHeckbert_plane_and_line_policies = "creates a Garland-Heckbert plane and line policies object.
+constexpr const char* Surface_mesh_simplification_make_GarlandHeckbert_plane_and_line_policies = "creates a Garland-Heckbert plane and line policies object.
 
 Parameters
 ----------

@@ -8,46 +8,46 @@ namespace docstrings {
 namespace Nef_2 {
 
 // CGAL::Extended_cartesian
-constexpr const char* CGAL_Extended_cartesian__class__ = "The class Extended_cartesian serves as a traits class for the class Nef_polyhedron_2 <T> .";
+constexpr const char* Extended_cartesian__class__ = "The class Extended_cartesian serves as a traits class for the class Nef_polyhedron_2 <T> .";
 
-constexpr const char* CGAL_Extended_cartesian_Extended_cartesian = "default constructor.";
+constexpr const char* Extended_cartesian_Extended_cartesian = "default constructor.";
 
 // CGAL::Extended_homogeneous
-constexpr const char* CGAL_Extended_homogeneous__class__ = "The class Extended_homogeneous serves as a traits class for the class Nef_polyhedron_2 <T> .";
+constexpr const char* Extended_homogeneous__class__ = "The class Extended_homogeneous serves as a traits class for the class Nef_polyhedron_2 <T> .";
 
-constexpr const char* CGAL_Extended_homogeneous_Extended_homogeneous = "default constructor.";
+constexpr const char* Extended_homogeneous_Extended_homogeneous = "default constructor.";
 
 // CGAL::Filtered_extended_homogeneous
-constexpr const char* CGAL_Filtered_extended_homogeneous__class__ = "The class Filtered_extended_homogeneous serves as a traits class for the class Nef_polyhedron_2 <T> .";
+constexpr const char* Filtered_extended_homogeneous__class__ = "The class Filtered_extended_homogeneous serves as a traits class for the class Nef_polyhedron_2 <T> .";
 
-constexpr const char* CGAL_Filtered_extended_homogeneous_Filtered_extended_homogeneous = "default constructor.";
+constexpr const char* Filtered_extended_homogeneous_Filtered_extended_homogeneous = "default constructor.";
 
 // CGAL::Nef_polyhedron_2
-constexpr const char* CGAL_Nef_polyhedron_2__class__ = "An instance of data type Nef_polyhedron_2 <T> is a subset of the plane that is the result of forming complements and intersections starting from a finite set H of halfspaces.";
+constexpr const char* Nef_polyhedron_2__class__ = "An instance of data type Nef_polyhedron_2 <T> is a subset of the plane that is the result of forming complements and intersections starting from a finite set H of halfspaces.";
 
-constexpr const char* CGAL_Nef_polyhedron_2_Boundary = "construction selection.";
-constexpr const char* CGAL_Nef_polyhedron_2_Content = "construction selection";
-constexpr const char* CGAL_Nef_polyhedron_2_Location_mode = "selectionflag for the point location mode.
+constexpr const char* Nef_polyhedron_2_Boundary = "construction selection.";
+constexpr const char* Nef_polyhedron_2_Content = "construction selection";
+constexpr const char* Nef_polyhedron_2_Location_mode = "selectionflag for the point location mode.
 
 LMWT stands for Locally Minimum Weight Triangulation, a locally optimized
 constrained triangulation where the weight corresponds to the length of the
 edges of the triangulation.";
-constexpr const char* CGAL_Nef_polyhedron_2_Line = "the oriented lines modeling halfplanes.
+constexpr const char* Nef_polyhedron_2_Line = "the oriented lines modeling halfplanes.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Point = "the affine points of the plane.
+constexpr const char* Nef_polyhedron_2_Point = "the affine points of the plane.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Direction = "directions in our plane.
+constexpr const char* Nef_polyhedron_2_Direction = "directions in our plane.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Polygons_tag = "tag for calling polygon constructor.
+constexpr const char* Nef_polyhedron_2_Polygons_tag = "tag for calling polygon constructor.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Polylines_tag = "tag for calling polyline constructor.
+constexpr const char* Nef_polyhedron_2_Polylines_tag = "tag for calling polyline constructor.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Object_handle = "a generic handle to an object of the underlying plane map.
+constexpr const char* Nef_polyhedron_2_Object_handle = "a generic handle to an object of the underlying plane map.
 
 The kind of object (vertex, halfedge, face) can be determined and the object
 can be assigned to a corresponding handle by the three functions: bool
@@ -57,18 +57,18 @@ assign(Face_const_handle& h, Object_handle ) where each function returns true
 iff the assignment to h was done.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Nef_polyhedron_2 = "creates an instance N of type Nef_polyhedron_2 <T> and initializes it to the empty set if plane == EMPTY and to the whole plane if plane == COMPLETE .
+constexpr const char* Nef_polyhedron_2_Nef_polyhedron_2 = "creates an instance N of type Nef_polyhedron_2 <T> and initializes it to the empty set if plane == EMPTY and to the whole plane if plane == COMPLETE .
 
 Parameters
 ----------
 plane : Content";
-constexpr const char* CGAL_Nef_polyhedron_2_Nef_polyhedron_2_1 = "creates a Nef polyhedron N containing the halfplane left of l including l if line== INCLUDED , excluding l if line== EXCLUDED .
+constexpr const char* Nef_polyhedron_2_Nef_polyhedron_2_1 = "creates a Nef polyhedron N containing the halfplane left of l including l if line== INCLUDED , excluding l if line== EXCLUDED .
 
 Parameters
 ----------
 l : Line
 line : Boundary";
-constexpr const char* CGAL_Nef_polyhedron_2_Nef_polyhedron_2_2 = "creates a Nef polyhedron N from the simple polygon P spanned by the list of points in the iterator range [it,end) and including its boundary if b = INCLUDED excluding the boundary otherwise.
+constexpr const char* Nef_polyhedron_2_Nef_polyhedron_2_2 = "creates a Nef polyhedron N from the simple polygon P spanned by the list of points in the iterator range [it,end) and including its boundary if b = INCLUDED excluding the boundary otherwise.
 
 Forward_iterator has to be an iterator with value type Point . This
 construction expects that P is simple. The degenerate cases where P contains
@@ -82,46 +82,46 @@ Parameters
 it : Forward_iterator
 end : Forward_iterator
 b : Boundary";
-constexpr const char* CGAL_Nef_polyhedron_2_Nef_polyhedron_2_3 = "The iterator range [it, end) defines a set point ranges, each of which defines the boundary of simple polygon.
+constexpr const char* Nef_polyhedron_2_Nef_polyhedron_2_3 = "The iterator range [it, end) defines a set point ranges, each of which defines the boundary of simple polygon.
 
 Parameters
 ----------
 it : Forward_iterator
 end : Forward_iterator
  : Polygons_tag";
-constexpr const char* CGAL_Nef_polyhedron_2_Nef_polyhedron_2_4 = "The iterator range [it, end) defines a set point ranges, each of which defines a polyline.
+constexpr const char* Nef_polyhedron_2_Nef_polyhedron_2_4 = "The iterator range [it, end) defines a set point ranges, each of which defines a polyline.
 
 Parameters
 ----------
 it : Forward_iterator
 end : Forward_iterator
  : Polylines_tag";
-constexpr const char* CGAL_Nef_polyhedron_2_clear = "makes N the empty set if plane == EMPTY and the full plane if plane == COMPLETE .
+constexpr const char* Nef_polyhedron_2_clear = "makes N the empty set if plane == EMPTY and the full plane if plane == COMPLETE .
 
 Parameters
 ----------
 plane : Content";
-constexpr const char* CGAL_Nef_polyhedron_2_is_empty = "returns true if N is empty, false otherwise.
+constexpr const char* Nef_polyhedron_2_is_empty = "returns true if N is empty, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_2_is_plane = "returns true if N is the whole plane, false otherwise.
+constexpr const char* Nef_polyhedron_2_is_plane = "returns true if N is the whole plane, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_2_contains = "returns true iff the object h is contained in the set represented by N .
+constexpr const char* Nef_polyhedron_2_contains = "returns true iff the object h is contained in the set represented by N .
 
 Parameters
 ----------
 h : Object_handle
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_2_contained_in_boundary = "returns true iff the object h is contained in the $ 1$ -skeleton of N .
+constexpr const char* Nef_polyhedron_2_contained_in_boundary = "returns true iff the object h is contained in the $ 1$ -skeleton of N .
 
 Parameters
 ----------
 h : Object_handle
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_2_locate = "returns a generic handle h to an object (face, halfedge, vertex) of the underlying plane map that contains the point p in its relative interior.
+constexpr const char* Nef_polyhedron_2_locate = "returns a generic handle h to an object (face, halfedge, vertex) of the underlying plane map that contains the point p in its relative interior.
 
 The point p is contained in the set represented by N if N.contains(h) is true.
 The location mode flag m allows one to choose between different point location
@@ -133,7 +133,7 @@ p : const Point &
 m : Location_mode
 
 Returns: Object_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_ray_shoot = "returns a handle h with N.contains(h) , that can be converted to a Vertex_/Halfedge_/Face_const_handle as described above.
+constexpr const char* Nef_polyhedron_2_ray_shoot = "returns a handle h with N.contains(h) , that can be converted to a Vertex_/Halfedge_/Face_const_handle as described above.
 
 The object returned is intersected by the ray starting in p with direction d
 and has minimal distance to p . The operation returns an empty Object_handle
@@ -148,7 +148,7 @@ d : const Direction &
 m : Location_mode
 
 Returns: Object_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_ray_shoot_to_boundary = "returns a handle h , that can be converted to a Vertex_/Halfedge_const_handle as described above.
+constexpr const char* Nef_polyhedron_2_ray_shoot_to_boundary = "returns a handle h , that can be converted to a Vertex_/Halfedge_const_handle as described above.
 
 The object returned is part of the $ 1$ -skeleton of N , intersected by the
 ray starting in p with direction d and has minimal distance to p . The
@@ -163,34 +163,34 @@ d : const Direction &
 m : Location_mode
 
 Returns: Object_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_explorer = "returns a decorator object that allows read-only access of the underlying plane map.
+constexpr const char* Nef_polyhedron_2_explorer = "returns a decorator object that allows read-only access of the underlying plane map.
 
 See the manual page Explorer for its usage.
 
 Returns: Explorer";
-constexpr const char* CGAL_Nef_polyhedron_2_complement = "returns the complement of N in the plane.
+constexpr const char* Nef_polyhedron_2_complement = "returns the complement of N in the plane.
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_interior = "returns the interior of N .
+constexpr const char* Nef_polyhedron_2_interior = "returns the interior of N .
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_closure = "returns the closure of N .
+constexpr const char* Nef_polyhedron_2_closure = "returns the closure of N .
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_boundary = "returns the boundary of N .
+constexpr const char* Nef_polyhedron_2_boundary = "returns the boundary of N .
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_regularization = "returns the regularized polyhedron (closure of interior).
+constexpr const char* Nef_polyhedron_2_regularization = "returns the regularized polyhedron (closure of interior).
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_intersection = "returns N $ \\cap$ N1 .
+constexpr const char* Nef_polyhedron_2_intersection = "returns N $ \\cap$ N1 .
 
 Parameters
 ----------
 N1 : const Nef_polyhedron_2 < T > &
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_join = "returns N $ \\cup$ N1 .
+constexpr const char* Nef_polyhedron_2_join = "returns N $ \\cup$ N1 .
 
 Note that \"union\" is a keyword of C++ and cannot be used for this operation.
 
@@ -199,14 +199,14 @@ Parameters
 N1 : const Nef_polyhedron_2 < T > &
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_difference = "returns N $ -$ N1 .
+constexpr const char* Nef_polyhedron_2_difference = "returns N $ -$ N1 .
 
 Parameters
 ----------
 N1 : const Nef_polyhedron_2 < T > &
 
 Returns: Nef_polyhedron_2 < T >";
-constexpr const char* CGAL_Nef_polyhedron_2_symmetric_difference = "returns the symmetric difference N - T $ \\cup$ T - N .
+constexpr const char* Nef_polyhedron_2_symmetric_difference = "returns the symmetric difference N - T $ \\cup$ T - N .
 
 Parameters
 ----------
@@ -215,22 +215,22 @@ N1 : const Nef_polyhedron_2 < T > &
 Returns: Nef_polyhedron_2 < T >";
 
 // CGAL::Nef_polyhedron_2::Explorer
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer__class__ = "a decorator to examine the underlying plane map.";
+constexpr const char* Nef_polyhedron_2_Explorer__class__ = "a decorator to examine the underlying plane map.";
 
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer_Point = "the point type of finite vertices.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer_Ray = "the ray type of vertices on the frame.
+constexpr const char* Nef_polyhedron_2_Explorer_Point = "the point type of finite vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer_is_standard = "returns true iff v 's position is a standard point.
+constexpr const char* Nef_polyhedron_2_Explorer_Ray = "the ray type of vertices on the frame.
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_2_Explorer_is_standard = "returns true iff v 's position is a standard point.
 
 Parameters
 ----------
 v : Vertex_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer_point = "returns the standard point that is the embedding of v .
+constexpr const char* Nef_polyhedron_2_Explorer_point = "returns the standard point that is the embedding of v .
 
 is_standard ( v ).
 
@@ -239,7 +239,7 @@ Parameters
 v : Vertex_const_handle
 
 Returns: Point";
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer_ray = "returns the ray defining the non-standard point on the frame.
+constexpr const char* Nef_polyhedron_2_Explorer_ray = "returns the ray defining the non-standard point on the frame.
 
 ! is_standard ( v ).
 
@@ -248,7 +248,7 @@ Parameters
 v : Vertex_const_handle
 
 Returns: Ray";
-constexpr const char* CGAL_Nef_polyhedron_2_Explorer_is_frame_edge = "returns true iff e is part of the infinimaximal frame.
+constexpr const char* Nef_polyhedron_2_Explorer_is_frame_edge = "returns true iff e is part of the infinimaximal frame.
 
 Parameters
 ----------
@@ -257,65 +257,65 @@ e : Halfedge_const_handle
 Returns: bool";
 
 // CGAL::Nef_polyhedron_2::Topological_explorer
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer__class__ = "An instance D of the data type Topological_explorer is a decorator for interfacing the topological structure of a plane map P (read-only).";
+constexpr const char* Nef_polyhedron_2_Topological_explorer__class__ = "An instance D of the data type Topological_explorer is a decorator for interfacing the topological structure of a plane map P (read-only).";
 
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Plane_map = "The underlying plane map type.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Point = "The point type of vertices.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Plane_map = "The underlying plane map type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Mark = "All objects (vertices, edges, faces) are attributed by a Mark object.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Point = "The point type of vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Size_type = "The size type.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Mark = "All objects (vertices, edges, faces) are attributed by a Mark object.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Halfedge_around_vertex_const_circulator = "circulating the outgoing halfedges in $ A(v)$ .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Size_type = "The size type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Halfedge_around_face_const_circulator = "circulating the halfedges in the face cycle of a face f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Halfedge_around_vertex_const_circulator = "circulating the outgoing halfedges in $ A(v)$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Hole_const_iterator = "iterating all holes of a face f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Halfedge_around_face_const_circulator = "circulating the halfedges in the face cycle of a face f .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Hole_const_iterator = "iterating all holes of a face f .
 
 The type is convertible to Halfedge_const_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_Isolated_vertex_const_iterator = "iterating all isolated vertices of a face f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_Isolated_vertex_const_iterator = "iterating all isolated vertices of a face f .
 
 The type generalizes Vertex_const_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_source = "returns the source of e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_source = "returns the source of e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Vertex_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_target = "returns the target of e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_target = "returns the target of e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Vertex_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_twin = "returns the twin of e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_twin = "returns the twin of e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_is_isolated = "returns true iff $ A(v) = \\emptyset$ .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_is_isolated = "returns true iff $ A(v) = \\emptyset$ .
 
 Parameters
 ----------
 v : Vertex_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_first_out_edge = "returns one halfedge with source v .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_first_out_edge = "returns one halfedge with source v .
 
 It's the starting point for the circular iteration over the halfedges with
 source v . ! is_isolated (v) .
@@ -325,7 +325,7 @@ Parameters
 v : Vertex_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_last_out_edge = "returns the halfedge with source v that is the last in the circular iteration before encountering first_out_edge(v) again.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_last_out_edge = "returns the halfedge with source v that is the last in the circular iteration before encountering first_out_edge(v) again.
 
 ! is_isolated (v) .
 
@@ -334,42 +334,42 @@ Parameters
 v : Vertex_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_cyclic_adj_succ = "returns the edge after e in the cyclic ordered adjacency list of source(e) .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_cyclic_adj_succ = "returns the edge after e in the cyclic ordered adjacency list of source(e) .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_cyclic_adj_pred = "returns the edge before e in the cyclic ordered adjacency list of source(e) .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_cyclic_adj_pred = "returns the edge before e in the cyclic ordered adjacency list of source(e) .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_next = "returns the next edge in the face cycle containing e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_next = "returns the next edge in the face cycle containing e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_previous = "returns the previous edge in the face cycle containing e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_previous = "returns the previous edge in the face cycle containing e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_face = "returns the face incident to e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_face = "returns the face incident to e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Face_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_face_1 = "returns the face incident to v .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_face_1 = "returns the face incident to v .
 
 ! is_isolated (v) .
 
@@ -378,46 +378,46 @@ Parameters
 v : Vertex_const_handle
 
 Returns: Face_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_halfedge = "returns a halfedge in the bounding face cycle of f ( Halfedge_const_handle() if there is no bounding face cycle).
+constexpr const char* Nef_polyhedron_2_Topological_explorer_halfedge = "returns a halfedge in the bounding face cycle of f ( Halfedge_const_handle() if there is no bounding face cycle).
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: Halfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_vertices_begin = "iterator over vertices of the map.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_vertices_begin = "iterator over vertices of the map.
 
 Returns: Vertex_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_vertices_end = "past-the-end iterator for vertices.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_vertices_end = "past-the-end iterator for vertices.
 
 Returns: Vertex_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_halfedges_begin = "iterator over halfedges of the map.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_halfedges_begin = "iterator over halfedges of the map.
 
 Returns: Halfedge_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_halfedges_end = "past-the-end iterator for halfedges.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_halfedges_end = "past-the-end iterator for halfedges.
 
 Returns: Halfedge_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_faces_begin = "iterator over faces of the map.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_faces_begin = "iterator over faces of the map.
 
 Returns: Face_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_faces_end = "past-the-end iterator for faces
+constexpr const char* Nef_polyhedron_2_Topological_explorer_faces_end = "past-the-end iterator for faces
 
 Returns: Face_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_out_edges = "returns a circulator for the cyclic adjacency list of v .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_out_edges = "returns a circulator for the cyclic adjacency list of v .
 
 Parameters
 ----------
 v : Vertex_const_handle
 
 Returns: Halfedge_around_vertex_const_circulator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_face_cycle = "returns a circulator for the outer face cycle of f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_face_cycle = "returns a circulator for the outer face cycle of f .
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: Halfedge_around_face_const_circulator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_holes_begin = "returns an iterator for all holes in the interior of f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_holes_begin = "returns an iterator for all holes in the interior of f .
 
 A Hole_iterator can be assigned to a Halfedge_around_face_const_circulator .
 
@@ -426,79 +426,79 @@ Parameters
 f : Face_const_handle
 
 Returns: Hole_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_holes_end = "returns the past-the-end iterator of f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_holes_end = "returns the past-the-end iterator of f .
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: Hole_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_isolated_vertices_begin = "returns an iterator for all isolated vertices in the interior of f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_isolated_vertices_begin = "returns an iterator for all isolated vertices in the interior of f .
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: Isolated_vertex_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_isolated_vertices_end = "returns the past the end iterator of f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_isolated_vertices_end = "returns the past the end iterator of f .
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: Isolated_vertex_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_point = "returns the embedding of v .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_point = "returns the embedding of v .
 
 Parameters
 ----------
 v : Vertex_const_handle
 
 Returns: const Point &";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_mark = "returns the mark of v .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_mark = "returns the mark of v .
 
 Parameters
 ----------
 v : Vertex_const_handle
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_mark_1 = "returns the mark of e .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_mark_1 = "returns the mark of e .
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_mark_2 = "returns the mark of f .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_mark_2 = "returns the mark of f .
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_number_of_vertices = "returns the number of vertices.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_number_of_vertices = "returns the number of vertices.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_number_of_halfedges = "returns the number of halfedges.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_number_of_halfedges = "returns the number of halfedges.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_number_of_edges = "returns the number of halfedge pairs.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_number_of_edges = "returns the number of halfedge pairs.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_number_of_faces = "returns the number of faces.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_number_of_faces = "returns the number of faces.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_number_of_face_cycles = "returns the number of face cycles.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_number_of_face_cycles = "returns the number of face cycles.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_number_of_connected_components = "calculates the number of connected components of P .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_number_of_connected_components = "calculates the number of connected components of P .
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_print_statistics = "print the statistics of P : the number of vertices, edges, and faces.
+constexpr const char* Nef_polyhedron_2_Topological_explorer_print_statistics = "print the statistics of P : the number of vertices, edges, and faces.
 
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Nef_polyhedron_2_Topological_explorer_check_integrity_and_topological_planarity = "checks the link structure and the genus of P .
+constexpr const char* Nef_polyhedron_2_Topological_explorer_check_integrity_and_topological_planarity = "checks the link structure and the genus of P .
 
 Parameters
 ----------

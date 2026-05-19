@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Kinetic_surface_reconstruction {
 
 // CGAL::Kinetic_surface_reconstruction_3
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3__class__ = "Pipeline for piecewise planar surface reconstruction from a point cloud via inside/outside labeling of a kinetic partition using min-cut.";
+constexpr const char* Kinetic_surface_reconstruction_3__class__ = "Pipeline for piecewise planar surface reconstruction from a point cloud via inside/outside labeling of a kinetic partition using min-cut.";
 
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_Kinetic_surface_reconstruction_3 = "creates a Kinetic_shape_reconstruction_3 object.
+constexpr const char* Kinetic_surface_reconstruction_3_Kinetic_surface_reconstruction_3 = "creates a Kinetic_shape_reconstruction_3 object.
 
 points an instance of PointRange with 3D points and corresponding 3D normal
 vectors. np a sequence of Named Parameters among the ones listed below
@@ -24,7 +24,7 @@ Parameters
 ----------
 points : Point_range &
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_detect_planar_shapes = "detects shapes in the provided point cloud and regularizes them.
+constexpr const char* Kinetic_surface_reconstruction_3_detect_planar_shapes = "detects shapes in the provided point cloud and regularizes them.
 
 NamedParameters a sequence of Named Parameters np an instance of
 NamedParameters . Optional Named Parameters <button class=\"collapsible\">
@@ -70,18 +70,18 @@ Parameters
 np : const NamedParameters &
 
 Returns: std::size_t";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_detected_planar_shapes = "returns the support planes of the detected and regularized shapes.
+constexpr const char* Kinetic_surface_reconstruction_3_detected_planar_shapes = "returns the support planes of the detected and regularized shapes.
 
 vector with a Plane_3 for each detected planar shape. shape detection
 performed
 
 Returns: const std::vector< Plane_3 > &";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_detected_planar_shape_indices = "returns the indices of detected and regularized shapes.
+constexpr const char* Kinetic_surface_reconstruction_3_detected_planar_shape_indices = "returns the indices of detected and regularized shapes.
 
 indices into points for each detected planar shape. shape detection performed
 
 Returns: const std::vector< std::vector< std::size_t > > &";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_detection_and_partition = "detects and regularizes shapes in the provided point cloud and creates the kinetic space partition.
+constexpr const char* Kinetic_surface_reconstruction_3_detection_and_partition = "detects and regularizes shapes in the provided point cloud and creates the kinetic space partition.
 
 Combines calls of detect_planar_shapes() , initialize_partition() and
 partition() . NamedParameters a sequence of Named Parameters k maximum number
@@ -133,7 +133,7 @@ Parameters
 ----------
 k : std::size_t
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_initialize_partition = "initializes the kinetic partition.
+constexpr const char* Kinetic_surface_reconstruction_3_initialize_partition = "initializes the kinetic partition.
 
 np a sequence of Named Parameters among the ones listed below Optional Named
 Parameters <button class=\"collapsible\"> reorient_bbox </button> Use the
@@ -145,7 +145,7 @@ partition. Type: FT Default: 1.1 shape detection performed
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_partition = "propagates the kinetic polygons in the initialized partition.
+constexpr const char* Kinetic_surface_reconstruction_3_partition = "propagates the kinetic polygons in the initialized partition.
 
 k maximum number of allowed intersections for each input polygon before its
 expansion stops. partition initialized
@@ -153,12 +153,12 @@ expansion stops. partition initialized
 Parameters
 ----------
 k : std::size_t";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_kinetic_partition = "gives access to the kinetic partition.
+constexpr const char* Kinetic_surface_reconstruction_3_kinetic_partition = "gives access to the kinetic partition.
 
 created kinetic partition data structure partition created
 
 Returns: const KSP &";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_reconstruct_with_ground = "uses min-cut to solve an inside/outside labeling of the volumes of the kinetic partition and provides the reconstructed surface as a list of indexed polygons.
+constexpr const char* Kinetic_surface_reconstruction_3_reconstruct_with_ground = "uses min-cut to solve an inside/outside labeling of the volumes of the kinetic partition and provides the reconstructed surface as a list of indexed polygons.
 
 Estimates a horizontal ground plane within the detected shapes. Cells in the
 partition below the ground plane receive a weight to be labeled as inside. The
@@ -175,7 +175,7 @@ Parameters
 lambda : FT
 pit : OutputPointIterator
 polyit : OutputPolygonIterator";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_reconstruct = "uses min-cut to solve an inside/outside labeling of the volumes of the kinetic partition and provides the reconstructed surface as a list of indexed polygons.
+constexpr const char* Kinetic_surface_reconstruction_3_reconstruct = "uses min-cut to solve an inside/outside labeling of the volumes of the kinetic partition and provides the reconstructed surface as a list of indexed polygons.
 
 The external_nodes parameter allows to indicate the preferred labels for faces
 on the bounding box. OutputPointIterator an output iterator taking Point_3 .
@@ -195,10 +195,10 @@ lambda : FT
 external_nodes : std::map< typename KSP::Face_support, bool >
 pit : OutputPointIterator
 polyit : OutputPolygonIterator";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_setup_energyterms = "creates the visibility (data-) and regularity energy terms from the input point cloud and the kinetic partition.
+constexpr const char* Kinetic_surface_reconstruction_3_setup_energyterms = "creates the visibility (data-) and regularity energy terms from the input point cloud and the kinetic partition.
 
 successful initialization";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_setup_energyterms_1 = "provides the data and regularity energy terms for reconstruction via min-cut.
+constexpr const char* Kinetic_surface_reconstruction_3_setup_energyterms_1 = "provides the data and regularity energy terms for reconstruction via min-cut.
 
 edges contains a vector of pairs of volume indices. Indicates which volumes
 should be connected in the min-cut formulation. edge_costs contains the cost
@@ -216,7 +216,7 @@ edge_costs : const std::vector< double > &
 cost_matrix : const std::vector< std::vector< double > > &
 
 Returns: bool";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_reconstructed_model_trilist = "provides the reconstructed surface as a list of indexed triangles.
+constexpr const char* Kinetic_surface_reconstruction_3_reconstructed_model_trilist = "provides the reconstructed surface as a list of indexed triangles.
 
 pit an output iterator taking Point_3 . triit an output iterator taking
 std::size_t. successful reconstruction
@@ -225,7 +225,7 @@ Parameters
 ----------
 pit : OutputPointIterator
 triit : OutputTriangleIterator";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_reconstructed_model_polylist_lcc = "provides the reconstructed surface as a list of indexed polygons.
+constexpr const char* Kinetic_surface_reconstruction_3_reconstructed_model_polylist_lcc = "provides the reconstructed surface as a list of indexed polygons.
 
 pit an output iterator taking Point_3 . polyit an output iterator taking
 std::vector<std::size_t>. lambda trades data faithfulness of the
@@ -237,7 +237,7 @@ Parameters
 pit : OutputPointIterator
 polyit : OutputPolygonIterator
 lambda : FT";
-constexpr const char* CGAL_Kinetic_surface_reconstruction_3_reconstructed_model_polylist = "provides the reconstructed surface as a list of indexed polygons.
+constexpr const char* Kinetic_surface_reconstruction_3_reconstructed_model_polylist = "provides the reconstructed surface as a list of indexed polygons.
 
 pit an output iterator taking Point_3 . polyit an output iterator taking
 std::vector<std::size_t> . successful reconstruction

@@ -8,7 +8,7 @@ namespace docstrings {
 namespace Envelope_2 {
 
 // CGAL::Envelope_diagram_1
-constexpr const char* CGAL_Envelope_diagram_1__class__ = "This class is the default envelope-diagram class used by envelope functions to represent the minimization or the maximization diagram of a set of curves.";
+constexpr const char* Envelope_diagram_1__class__ = "This class is the default envelope-diagram class used by envelope functions to represent the minimization or the maximization diagram of a set of curves.";
 
 // EnvelopeDiagram_1
 constexpr const char* EnvelopeDiagram_1__class__ = "This concept defines the representation of an envelope diagram of a set of planar curve. The envelope diagram is a subdivision of the $ x$ -axis into 0-dimensional cells ( vertices ) and 1-dimensional cells ( edges ), such that the identity of the curves that induce the lower envelope (or the upper envelope) over each cell is fixed.";

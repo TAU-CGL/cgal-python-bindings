@@ -113,20 +113,20 @@ Parameters
 I : std::pair< FT , FT >";
 
 // CGAL::Alpha_shape_2
-constexpr const char* CGAL_Alpha_shape_2__class__ = "The class Alpha_shape_2 represents the family of $ \\alpha$ -shapes of points in a plane for all positive $ \\alpha$ .";
+constexpr const char* Alpha_shape_2__class__ = "The class Alpha_shape_2 represents the family of $ \\alpha$ -shapes of points in a plane for all positive $ \\alpha$ .";
 
-constexpr const char* CGAL_Alpha_shape_2_Classification_type = "Distinguishes the different cases for classifying a $ k$ -dimensional face of the underlying triangulation of the $ \\alpha$ -shape.";
-constexpr const char* CGAL_Alpha_shape_2_Mode = "In general, an alpha shape can be disconnected and contain many singular edges or vertices.
+constexpr const char* Alpha_shape_2_Classification_type = "Distinguishes the different cases for classifying a $ k$ -dimensional face of the underlying triangulation of the $ \\alpha$ -shape.";
+constexpr const char* Alpha_shape_2_Mode = "In general, an alpha shape can be disconnected and contain many singular edges or vertices.
 
 Its regularized version is formed by the set of regular edges and their
 vertices.";
-constexpr const char* CGAL_Alpha_shape_2_Gt = "the alpha shape traits type.
+constexpr const char* Alpha_shape_2_Gt = "the alpha shape traits type.
 
 it has to derive from a triangulation traits class. For example Dt::Point is a
 point class.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Alpha_shape_2_FT = "the number type of alpha values.
+constexpr const char* Alpha_shape_2_FT = "the number type of alpha values.
 
 In case ExactAlphaComparisonTag is CGAL::Tag_false , it is Gt::FT. In case
 ExactAlphaComparisonTag is CGAL::Tag_true , it is a number type allowing
@@ -145,31 +145,31 @@ as the alpha shapes class that creates it is valid and has not been modified.
 For convenience, classical comparison operators are provided for the type FT .
 
 Returns: Gt::FT";
-constexpr const char* CGAL_Alpha_shape_2_Point = "The point type.
+constexpr const char* Alpha_shape_2_Point = "The point type.
 
 For basic alpha shapes, Point will be equal to Gt::Point_2 . For weighted
 alpha shapes, Point will be equal to Gt::Weighted_point_2 .
 
 Returns: Dt::Point";
-constexpr const char* CGAL_Alpha_shape_2_size_type = "The size type.
+constexpr const char* Alpha_shape_2_size_type = "The size type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Alpha_shape_2_Alpha_iterator = "A bidirectional and non-mutable iterator that allow to traverse the increasing sequence of different $ \\alpha$ -values.
+constexpr const char* Alpha_shape_2_Alpha_iterator = "A bidirectional and non-mutable iterator that allow to traverse the increasing sequence of different $ \\alpha$ -values.
 
 Its value_type is FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Alpha_shape_2_Alpha_shape_vertices_iterator = "A bidirectional and non-mutable iterator that allow to traverse the vertices which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
+constexpr const char* Alpha_shape_2_Alpha_shape_vertices_iterator = "A bidirectional and non-mutable iterator that allow to traverse the vertices which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
 
 Its value_type is Dt::Vertex_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Alpha_shape_2_Alpha_shape_edges_iterator = "A bidirectional and non-mutable iterator that allow to traverse the edges which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
+constexpr const char* Alpha_shape_2_Alpha_shape_edges_iterator = "A bidirectional and non-mutable iterator that allow to traverse the edges which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
 
 Its value_type is Dt::Edge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Alpha_shape_2_Alpha_shape_2 = "Introduces an empty alpha-shape for a positive $ \\alpha$ -value alpha .
+constexpr const char* Alpha_shape_2_Alpha_shape_2 = "Introduces an empty alpha-shape for a positive $ \\alpha$ -value alpha .
 
 alpha $ \\geq~0$ .
 
@@ -177,7 +177,7 @@ Parameters
 ----------
 alpha : FT
 m : Mode";
-constexpr const char* CGAL_Alpha_shape_2_Alpha_shape_2_1 = "Builds an alpha shape of mode m from the triangulation dt for a positive $ \\alpha$ -value alpha .
+constexpr const char* Alpha_shape_2_Alpha_shape_2_1 = "Builds an alpha shape of mode m from the triangulation dt for a positive $ \\alpha$ -value alpha .
 
 This operation destroys the triangulation. alpha $ \\geq~0$ .
 
@@ -186,7 +186,7 @@ Parameters
 dt : Dt &
 alpha : FT
 m : Mode";
-constexpr const char* CGAL_Alpha_shape_2_Alpha_shape_2_2 = "Initializes the family of alpha-shapes with the points in the range [first,last) and introduces an $ \\alpha$ -shape for a positive $ \\alpha$ -value alpha .
+constexpr const char* Alpha_shape_2_Alpha_shape_2_2 = "Initializes the family of alpha-shapes with the points in the range [first,last) and introduces an $ \\alpha$ -shape for a positive $ \\alpha$ -value alpha .
 
 InputIterator must be an input iterator with the value type Point . alpha $
 \\geq0$ .
@@ -197,7 +197,7 @@ first : InputIterator
 last : InputIterator
 alpha : const FT &
 m : Mode";
-constexpr const char* CGAL_Alpha_shape_2_make_alpha_shape = "Initialize the family of alpha-shapes with the points in the range [first,last) .
+constexpr const char* Alpha_shape_2_make_alpha_shape = "Initialize the family of alpha-shapes with the points in the range [first,last) .
 
 Returns the number of inserted points. If the function is applied to an
 non-empty family of alpha-shape, it is cleared before initialization.
@@ -209,8 +209,8 @@ first : InputIterator
 last : InputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Alpha_shape_2_clear = "Clears the structure.";
-constexpr const char* CGAL_Alpha_shape_2_set_alpha = "Sets the $ \\alpha$ -value to alpha .
+constexpr const char* Alpha_shape_2_clear = "Clears the structure.";
+constexpr const char* Alpha_shape_2_set_alpha = "Sets the $ \\alpha$ -value to alpha .
 
 Returns the previous $ \\alpha$ -value. alpha $ \\geq0$ .
 
@@ -219,14 +219,14 @@ Parameters
 alpha : const FT &
 
 Returns: FT";
-constexpr const char* CGAL_Alpha_shape_2_get_alpha = "Returns the current $ \\alpha$ -value.
+constexpr const char* Alpha_shape_2_get_alpha = "Returns the current $ \\alpha$ -value.
 
 Parameters
 ----------
  : void
 
 Returns: const FT &";
-constexpr const char* CGAL_Alpha_shape_2_get_nth_alpha = "Returns the n -th $\\alpha$ -value, sorted in an increasing order.
+constexpr const char* Alpha_shape_2_get_nth_alpha = "Returns the n -th $\\alpha$ -value, sorted in an increasing order.
 
 n $ <$ number of alphas.
 
@@ -235,10 +235,10 @@ Parameters
 n : size_type
 
 Returns: const FT &";
-constexpr const char* CGAL_Alpha_shape_2_number_of_alphas = "Returns the number of different alpha-values.
+constexpr const char* Alpha_shape_2_number_of_alphas = "Returns the number of different alpha-values.
 
 Returns: size_type";
-constexpr const char* CGAL_Alpha_shape_2_set_mode = "Sets the mode to its general or regularized version.
+constexpr const char* Alpha_shape_2_set_mode = "Sets the mode to its general or regularized version.
 
 Returns the previous mode.
 
@@ -247,36 +247,36 @@ Parameters
 m : Mode
 
 Returns: Mode";
-constexpr const char* CGAL_Alpha_shape_2_get_mode = "Returns the mode, that is either GENERAL or REGULARIZED .
+constexpr const char* Alpha_shape_2_get_mode = "Returns the mode, that is either GENERAL or REGULARIZED .
 
 Parameters
 ----------
  : void
 
 Returns: Mode";
-constexpr const char* CGAL_Alpha_shape_2_alpha_shape_vertices_begin = "Starts at an arbitrary finite vertex which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
+constexpr const char* Alpha_shape_2_alpha_shape_vertices_begin = "Starts at an arbitrary finite vertex which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
 
 Returns: Alpha_shape_vertices_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_shape_vertices_end = "Past-the-end iterator.
+constexpr const char* Alpha_shape_2_alpha_shape_vertices_end = "Past-the-end iterator.
 
 Returns: Alpha_shape_vertices_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_shape_edges_begin = "Starts at an arbitrary finite edge which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
+constexpr const char* Alpha_shape_2_alpha_shape_edges_begin = "Starts at an arbitrary finite edge which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .
 
 In regularized mode, edges are represented as a pair (f,i), where f is an
 interior face of the $ \\alpha$ -shape.
 
 Returns: Alpha_shape_edges_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_shape_edges_end = "Past-the-end iterator.
+constexpr const char* Alpha_shape_2_alpha_shape_edges_end = "Past-the-end iterator.
 
 Returns: Alpha_shape_edges_iterator";
-constexpr const char* CGAL_Alpha_shape_2_number_of_solid_components = "Returns the number of solid components of the alpha shape, that is, the number of components of its regularized version.
+constexpr const char* Alpha_shape_2_number_of_solid_components = "Returns the number of solid components of the alpha shape, that is, the number of components of its regularized version.
 
 Parameters
 ----------
 alpha : const FT &
 
 Returns: size_type";
-constexpr const char* CGAL_Alpha_shape_2_find_optimal_alpha = "Returns an iterator pointing to the first element with $ \\alpha$ -value such that the alpha shape satisfies the following two properties:
+constexpr const char* Alpha_shape_2_find_optimal_alpha = "Returns an iterator pointing to the first element with $ \\alpha$ -value such that the alpha shape satisfies the following two properties:
 
 All data points are either on the boundary or in the interior of the
 regularized version of the alpha shape. The number of solid component of the
@@ -289,7 +289,7 @@ Parameters
 nb_components : size_type
 
 Returns: Alpha_iterator";
-constexpr const char* CGAL_Alpha_shape_2_operator = "Inserts the alpha shape for the current $ \\alpha$ -value into the stream os .
+constexpr const char* Alpha_shape_2_operator = "Inserts the alpha shape for the current $ \\alpha$ -value into the stream os .
 
 CGAL/IO/io.h must be included. The insert operator must be defined for Point .
 
@@ -299,7 +299,7 @@ os : std::ostream &
 A : const Alpha_shape_2 < Dt > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Alpha_shape_2_classify = "Locates a point p in the underlying triangulation and Classifies the associated k-face with respect to the alpha shape.
+constexpr const char* Alpha_shape_2_classify = "Locates a point p in the underlying triangulation and Classifies the associated k-face with respect to the alpha shape.
 
 Parameters
 ----------
@@ -307,7 +307,7 @@ p : const Point &
 alpha : const FT &
 
 Returns: Classification_type";
-constexpr const char* CGAL_Alpha_shape_2_classify_1 = "Classifies the face f of the underlying triangulation with respect to the alpha shape.
+constexpr const char* Alpha_shape_2_classify_1 = "Classifies the face f of the underlying triangulation with respect to the alpha shape.
 
 Parameters
 ----------
@@ -315,7 +315,7 @@ f : Face_handle
 alpha : const FT &
 
 Returns: Classification_type";
-constexpr const char* CGAL_Alpha_shape_2_classify_2 = "Classifies the edge e of the underlying triangulation with respect to the alpha shape.
+constexpr const char* Alpha_shape_2_classify_2 = "Classifies the edge e of the underlying triangulation with respect to the alpha shape.
 
 Parameters
 ----------
@@ -323,7 +323,7 @@ e : Edge
 alpha : const FT &
 
 Returns: Classification_type";
-constexpr const char* CGAL_Alpha_shape_2_classify_3 = "Classifies the edge of the face f opposite to the vertex with index i of the underlying triangulation with respect to the alpha shape.
+constexpr const char* Alpha_shape_2_classify_3 = "Classifies the edge of the face f opposite to the vertex with index i of the underlying triangulation with respect to the alpha shape.
 
 Parameters
 ----------
@@ -332,7 +332,7 @@ i : int
 alpha : const FT &
 
 Returns: Classification_type";
-constexpr const char* CGAL_Alpha_shape_2_classify_4 = "Classifies the vertex v of the underlying triangulation with respect to the alpha shape.
+constexpr const char* Alpha_shape_2_classify_4 = "Classifies the vertex v of the underlying triangulation with respect to the alpha shape.
 
 Parameters
 ----------
@@ -340,27 +340,27 @@ v : Vertex_handle
 alpha : const FT &
 
 Returns: Classification_type";
-constexpr const char* CGAL_Alpha_shape_2_alpha_begin = "Returns an iterator that allows to traverse the sorted sequence of $ \\alpha$ -values of the family of alpha shapes.
+constexpr const char* Alpha_shape_2_alpha_begin = "Returns an iterator that allows to traverse the sorted sequence of $ \\alpha$ -values of the family of alpha shapes.
 
 Returns: Alpha_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_end = "Returns the corresponding past-the-end iterator.
+constexpr const char* Alpha_shape_2_alpha_end = "Returns the corresponding past-the-end iterator.
 
 Returns: Alpha_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_find = "Returns an iterator pointing to an element with $ \\alpha$ -value alpha , or the corresponding past-the-end iterator if such an element is not found.
+constexpr const char* Alpha_shape_2_alpha_find = "Returns an iterator pointing to an element with $ \\alpha$ -value alpha , or the corresponding past-the-end iterator if such an element is not found.
 
 Parameters
 ----------
 alpha : const FT &
 
 Returns: Alpha_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_lower_bound = "Returns an iterator pointing to the first element with $ \\alpha$ -value not less than alpha .
+constexpr const char* Alpha_shape_2_alpha_lower_bound = "Returns an iterator pointing to the first element with $ \\alpha$ -value not less than alpha .
 
 Parameters
 ----------
 alpha : const FT &
 
 Returns: Alpha_iterator";
-constexpr const char* CGAL_Alpha_shape_2_alpha_upper_bound = "Returns an iterator pointing to the first element with $ \\alpha$ -value greater than alpha .
+constexpr const char* Alpha_shape_2_alpha_upper_bound = "Returns an iterator pointing to the first element with $ \\alpha$ -value greater than alpha .
 
 Parameters
 ----------
@@ -369,10 +369,10 @@ alpha : const FT &
 Returns: Alpha_iterator";
 
 // CGAL::Alpha_shape_face_base_2
-constexpr const char* CGAL_Alpha_shape_face_base_2__class__ = "The class Alpha_shape_face_base_2 is the default model for the concept AlphaShapeFace_2 .";
+constexpr const char* Alpha_shape_face_base_2__class__ = "The class Alpha_shape_face_base_2 is the default model for the concept AlphaShapeFace_2 .";
 
 // CGAL::Alpha_shape_vertex_base_2
-constexpr const char* CGAL_Alpha_shape_vertex_base_2__class__ = "The class Alpha_shape_vertex_base_2 is the default model for the concept AlphaShapeVertex_2 .";
+constexpr const char* Alpha_shape_vertex_base_2__class__ = "The class Alpha_shape_vertex_base_2 is the default model for the concept AlphaShapeVertex_2 .";
 
 // WeightedAlphaShapeTraits_2
 constexpr const char* WeightedAlphaShapeTraits_2__class__ = "The concept WeightedAlphaShapeTraits_2 describes the requirements for the geometric traits class of the underlying regular triangulation of a weighted alpha shape.";

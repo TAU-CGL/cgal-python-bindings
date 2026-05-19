@@ -8,27 +8,27 @@ namespace docstrings {
 namespace Stream_lines_2 {
 
 // CGAL::Euler_integrator_2
-constexpr const char* CGAL_Euler_integrator_2__class__ = "This class implements the first order Euler integrator.";
+constexpr const char* Euler_integrator_2__class__ = "This class implements the first order Euler integrator.";
 
-constexpr const char* CGAL_Euler_integrator_2_Euler_integrator_2 = "Creates an Euler integrator with integration_step as integration step.
+constexpr const char* Euler_integrator_2_Euler_integrator_2 = "Creates an Euler integrator with integration_step as integration step.
 
 Parameters
 ----------
 integration_step : const FT &";
 
 // CGAL::Regular_grid_2
-constexpr const char* CGAL_Regular_grid_2__class__ = "This class provides a 2D vector field specified by a set of sample points defined on a regular grid, with a bilinear interpolation scheme over its cells (i.e. for each point p in a cell c , the vector value is interpolated from the vertices of c ).";
+constexpr const char* Regular_grid_2__class__ = "This class provides a 2D vector field specified by a set of sample points defined on a regular grid, with a bilinear interpolation scheme over its cells (i.e. for each point p in a cell c , the vector value is interpolated from the vertices of c ).";
 
-constexpr const char* CGAL_Regular_grid_2_FT = "the scalar type.
+constexpr const char* Regular_grid_2_FT = "the scalar type.
 
 Returns: StreamLinesTraits_2::FT";
-constexpr const char* CGAL_Regular_grid_2_Point_2 = "the point type.
+constexpr const char* Regular_grid_2_Point_2 = "the point type.
 
 Returns: StreamLinesTraits_2::Point_2";
-constexpr const char* CGAL_Regular_grid_2_Vector_2 = "the vector type.
+constexpr const char* Regular_grid_2_Vector_2 = "the vector type.
 
 Returns: StreamLinesTraits_2::Vector_2";
-constexpr const char* CGAL_Regular_grid_2_Regular_grid_2 = "Generate a regular grid whose size is x_size by y_size , while x_samples and y_samples specify the number of samples on x and y .
+constexpr const char* Regular_grid_2_Regular_grid_2 = "Generate a regular grid whose size is x_size by y_size , while x_samples and y_samples specify the number of samples on x and y .
 
 Parameters
 ----------
@@ -36,79 +36,79 @@ x_samples : int
 y_samples : int
 x_size : FT
 y_size : FT";
-constexpr const char* CGAL_Regular_grid_2_set_xy = "Attribute the vector v to the position (i,j) on the regular grid.
+constexpr const char* Regular_grid_2_set_xy = "Attribute the vector v to the position (i,j) on the regular grid.
 
 Parameters
 ----------
 i : int
 j : int
 v : Vector_2";
-constexpr const char* CGAL_Regular_grid_2_get_dimension = "returns the dimension of the grid.
+constexpr const char* Regular_grid_2_get_dimension = "returns the dimension of the grid.
 
 Returns: std::pair< int, int >";
-constexpr const char* CGAL_Regular_grid_2_get_size = "returns the size of the grid.
+constexpr const char* Regular_grid_2_get_size = "returns the size of the grid.
 
 Returns: std::pair< FT , FT >";
 
 // CGAL::Runge_kutta_integrator_2
-constexpr const char* CGAL_Runge_kutta_integrator_2__class__ = "This class implements the second order Runge-Kutta integrator.";
+constexpr const char* Runge_kutta_integrator_2__class__ = "This class implements the second order Runge-Kutta integrator.";
 
-constexpr const char* CGAL_Runge_kutta_integrator_2_Runge_kutta_integrator_2 = "Creates a Runge-Kutta second order integrator with integration_step as integration step.
+constexpr const char* Runge_kutta_integrator_2_Runge_kutta_integrator_2 = "Creates a Runge-Kutta second order integrator with integration_step as integration step.
 
 Parameters
 ----------
 integration_step : const FT &";
 
 // CGAL::Stream_lines_2
-constexpr const char* CGAL_Stream_lines_2__class__ = "The class Stream_lines_2 generates a placement of streamlines in a 2D domain according to a bidimensional vector field.";
+constexpr const char* Stream_lines_2__class__ = "The class Stream_lines_2 generates a placement of streamlines in a 2D domain according to a bidimensional vector field.";
 
-constexpr const char* CGAL_Stream_lines_2_Geom_traits = "the traits class.
+constexpr const char* Stream_lines_2_Geom_traits = "the traits class.
 
 Returns: VectorField_2::Geom_traits";
-constexpr const char* CGAL_Stream_lines_2_FT = "the scalar type.
+constexpr const char* Stream_lines_2_FT = "the scalar type.
 
 Returns: VectorField_2::FT";
-constexpr const char* CGAL_Stream_lines_2_Point_2 = "the point type.
+constexpr const char* Stream_lines_2_Point_2 = "the point type.
 
 Returns: VectorField_2::Point_2";
-constexpr const char* CGAL_Stream_lines_2_Vector_2 = "the vector type.
+constexpr const char* Stream_lines_2_Vector_2 = "the vector type.
 
 Returns: VectorField_2::Vector_2";
-constexpr const char* CGAL_Stream_lines_2_Point_iterator_2 = "iterator of points with value type Point_2 .
+constexpr const char* Stream_lines_2_Point_iterator_2 = "iterator of points with value type Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Stream_lines_2_Stream_line_iterator_2 = "an iterator to visit the streamlines with value type std::pair< Point_iterator_2 , Point_iterator_2 > .
+constexpr const char* Stream_lines_2_Stream_line_iterator_2 = "an iterator to visit the streamlines with value type std::pair< Point_iterator_2 , Point_iterator_2 > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Stream_lines_2_begin = "Starts at the first streamline.
+constexpr const char* Stream_lines_2_begin = "Starts at the first streamline.
 
 Returns: Stream_line_iterator";
-constexpr const char* CGAL_Stream_lines_2_end = "Past-the-end iterator.
+constexpr const char* Stream_lines_2_end = "Past-the-end iterator.
 
 Returns: Stream_line_iterator";
-constexpr const char* CGAL_Stream_lines_2_set_separating_distance = "Modify the separating distance.
+constexpr const char* Stream_lines_2_set_separating_distance = "Modify the separating distance.
 
 Parameters
 ----------
 new_value : FT";
-constexpr const char* CGAL_Stream_lines_2_set_saturation_ratio = "Modify the saturation ratio.
+constexpr const char* Stream_lines_2_set_saturation_ratio = "Modify the saturation ratio.
 
 Parameters
 ----------
 new_value : FT";
-constexpr const char* CGAL_Stream_lines_2_update = "Update the placement after changing the separating distance or the saturation ratio.";
-constexpr const char* CGAL_Stream_lines_2_get_separating_distance = "returns the separating distance.
+constexpr const char* Stream_lines_2_update = "Update the placement after changing the separating distance or the saturation ratio.";
+constexpr const char* Stream_lines_2_get_separating_distance = "returns the separating distance.
 
 Returns: FT";
-constexpr const char* CGAL_Stream_lines_2_get_saturation_ratio = "returns the saturation ratio.
+constexpr const char* Stream_lines_2_get_saturation_ratio = "returns the saturation ratio.
 
 Returns: FT";
-constexpr const char* CGAL_Stream_lines_2_print_stream_lines = "prints the streamlines to an ASCII file: line by line, and point by point.
+constexpr const char* Stream_lines_2_print_stream_lines = "prints the streamlines to an ASCII file: line by line, and point by point.
 
 Parameters
 ----------
 fw : std::ofstream &";
-constexpr const char* CGAL_Stream_lines_2_Stream_lines_2 = "Constructor which generates a streamline placement.
+constexpr const char* Stream_lines_2_Stream_lines_2 = "Constructor which generates a streamline placement.
 
 Parameters
 ----------
@@ -118,18 +118,18 @@ separating_distance : FT
 saturation_ratio : FT";
 
 // CGAL::Triangular_field_2
-constexpr const char* CGAL_Triangular_field_2__class__ = "This class provides a vector field specified by a set of sample points defined on a triangulated domain.";
+constexpr const char* Triangular_field_2__class__ = "This class provides a vector field specified by a set of sample points defined on a triangulated domain.";
 
-constexpr const char* CGAL_Triangular_field_2_FT = "the scalar type.
+constexpr const char* Triangular_field_2_FT = "the scalar type.
 
 Returns: StreamLinesTraits_2::FT";
-constexpr const char* CGAL_Triangular_field_2_Point_2 = "the point type.
+constexpr const char* Triangular_field_2_Point_2 = "the point type.
 
 Returns: StreamLinesTraits_2::Point_2";
-constexpr const char* CGAL_Triangular_field_2_Vector_2 = "the vector type.
+constexpr const char* Triangular_field_2_Vector_2 = "the vector type.
 
 Returns: StreamLinesTraits_2::Vector_2";
-constexpr const char* CGAL_Triangular_field_2_Triangular_field_2 = "Defines the points in the range [first_point, last_point) as the sample points of the triangular field, with the corresponding number of vectors started at first_vector .
+constexpr const char* Triangular_field_2_Triangular_field_2 = "Defines the points in the range [first_point, last_point) as the sample points of the triangular field, with the corresponding number of vectors started at first_vector .
 
 PointInputIterator must be an input iterator with the value type Point_2 .
 VectorInputIterator must be an input iterator with the value type Vector_2 .

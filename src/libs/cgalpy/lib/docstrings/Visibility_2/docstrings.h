@@ -8,21 +8,21 @@ namespace docstrings {
 namespace Visibility_2 {
 
 // CGAL::Rotational_sweep_visibility_2
-constexpr const char* CGAL_Rotational_sweep_visibility_2__class__ = "This class is a model of the concept Visibility_2 can answer visibility queries within a polygon that may have holes.";
+constexpr const char* Rotational_sweep_visibility_2__class__ = "This class is a model of the concept Visibility_2 can answer visibility queries within a polygon that may have holes.";
 
-constexpr const char* CGAL_Rotational_sweep_visibility_2_Arrangement_2 = "The type of the input arrangement.
+constexpr const char* Rotational_sweep_visibility_2_Arrangement_2 = "The type of the input arrangement.
 
 Returns: Arrangement_2";
-constexpr const char* CGAL_Rotational_sweep_visibility_2_Regularization_category = "identifies whether the regularized visibility area is computed (either #Tag_true or #Tag_false ).
+constexpr const char* Rotational_sweep_visibility_2_Regularization_category = "identifies whether the regularized visibility area is computed (either #Tag_true or #Tag_false ).
 
 Returns: RegularizationCategory";
-constexpr const char* CGAL_Rotational_sweep_visibility_2_Supports_general_polygon_category = "See Visibility_2::Supports_general_polygon_category .
+constexpr const char* Rotational_sweep_visibility_2_Supports_general_polygon_category = "See Visibility_2::Supports_general_polygon_category .
 
 Returns: Tag_true";
-constexpr const char* CGAL_Rotational_sweep_visibility_2_Supports_simple_polygon_category = "See Visibility_2::Supports_simple_polygon_category .
+constexpr const char* Rotational_sweep_visibility_2_Supports_simple_polygon_category = "See Visibility_2::Supports_simple_polygon_category .
 
 Returns: Tag_true";
-constexpr const char* CGAL_Rotational_sweep_visibility_2_attach = "Attaches the given arrangement to the visibility object.
+constexpr const char* Rotational_sweep_visibility_2_attach = "Attaches the given arrangement to the visibility object.
 
 This operation takes $O(1)$ as the class does no preprocessing. In case the
 object is already attached to another arrangement, the visibility object gets
@@ -33,21 +33,21 @@ Parameters
 arr : const Arrangement_2 &";
 
 // CGAL::Simple_polygon_visibility_2
-constexpr const char* CGAL_Simple_polygon_visibility_2__class__ = "This class is a model of the concept Visibility_2 can answer visibility queries within a simple polygon with no holes.";
+constexpr const char* Simple_polygon_visibility_2__class__ = "This class is a model of the concept Visibility_2 can answer visibility queries within a simple polygon with no holes.";
 
-constexpr const char* CGAL_Simple_polygon_visibility_2_Arrangement_2 = "The arrangement type is used for input.
+constexpr const char* Simple_polygon_visibility_2_Arrangement_2 = "The arrangement type is used for input.
 
 Returns: Arrangement_2";
-constexpr const char* CGAL_Simple_polygon_visibility_2_Regularization_category = "identifies whether the regularized visibility area is computed (either #Tag_true or #Tag_false ).
+constexpr const char* Simple_polygon_visibility_2_Regularization_category = "identifies whether the regularized visibility area is computed (either #Tag_true or #Tag_false ).
 
 Returns: RegularizationCategory";
-constexpr const char* CGAL_Simple_polygon_visibility_2_Supports_general_polygon_category = "See Visibility_2::Supports_general_polygon_category .
+constexpr const char* Simple_polygon_visibility_2_Supports_general_polygon_category = "See Visibility_2::Supports_general_polygon_category .
 
 Returns: Tag_false";
-constexpr const char* CGAL_Simple_polygon_visibility_2_Supports_simple_polygon_category = "See Visibility_2::Supports_simple_polygon_category .
+constexpr const char* Simple_polygon_visibility_2_Supports_simple_polygon_category = "See Visibility_2::Supports_simple_polygon_category .
 
 Returns: Tag_true";
-constexpr const char* CGAL_Simple_polygon_visibility_2_attach = "Attaches the given arrangement to the visibility object.
+constexpr const char* Simple_polygon_visibility_2_attach = "Attaches the given arrangement to the visibility object.
 
 This operation takes $O(1)$ as the class does no preprocessing. In case the
 object is already attached to another arrangement, the visibility object gets
@@ -58,21 +58,21 @@ Parameters
 arr : const Arrangement_2 &";
 
 // CGAL::Triangular_expansion_visibility_2
-constexpr const char* CGAL_Triangular_expansion_visibility_2__class__ = "This class is a model of the concept Visibility_2 can answer visibility queries within a polygon that may have holes.";
+constexpr const char* Triangular_expansion_visibility_2__class__ = "This class is a model of the concept Visibility_2 can answer visibility queries within a polygon that may have holes.";
 
-constexpr const char* CGAL_Triangular_expansion_visibility_2_Arrangement_2 = "The type of the input arrangement.
+constexpr const char* Triangular_expansion_visibility_2_Arrangement_2 = "The type of the input arrangement.
 
 Returns: Arrangement_2_";
-constexpr const char* CGAL_Triangular_expansion_visibility_2_Regularization_category = "identifies whether the regularized visibility area is computed (either #Tag_true or #Tag_false ).
+constexpr const char* Triangular_expansion_visibility_2_Regularization_category = "identifies whether the regularized visibility area is computed (either #Tag_true or #Tag_false ).
 
 Returns: RegularizationCategory";
-constexpr const char* CGAL_Triangular_expansion_visibility_2_Supports_general_polygon_category = "See Visibility_2::Supports_general_polygon_category .
+constexpr const char* Triangular_expansion_visibility_2_Supports_general_polygon_category = "See Visibility_2::Supports_general_polygon_category .
 
 Returns: Tag_true";
-constexpr const char* CGAL_Triangular_expansion_visibility_2_Supports_simple_polygon_category = "See Visibility_2::Supports_simple_polygon_category .
+constexpr const char* Triangular_expansion_visibility_2_Supports_simple_polygon_category = "See Visibility_2::Supports_simple_polygon_category .
 
 Returns: Tag_true";
-constexpr const char* CGAL_Triangular_expansion_visibility_2_attach = "Attaches the given arrangement to the visibility object and computes the restricted triangulation.
+constexpr const char* Triangular_expansion_visibility_2_attach = "Attaches the given arrangement to the visibility object and computes the restricted triangulation.
 
 This takes $O(n)$ $ time, where $ n $ is the number of vertices. From this
 moment on the class observes changes in the arrangement. If the arrangement

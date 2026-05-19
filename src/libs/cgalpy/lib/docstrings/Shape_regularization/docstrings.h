@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Shape_regularization {
 
 // CGAL::Shape_regularization::ContourDirections
-constexpr const char* CGAL_Shape_regularization_ContourDirections__class__ = "We assume that each contour has one or several principal directions. By implementing a model of this concept, the user sets such directions and provides a way to orient contour edges towards these directions. All contour regularization functions in this package are parameterized by this concept.";
+constexpr const char* Shape_regularization_ContourDirections__class__ = "We assume that each contour has one or several principal directions. By implementing a model of this concept, the user sets such directions and provides a way to orient contour edges towards these directions. All contour regularization functions in this package are parameterized by this concept.";
 
-constexpr const char* CGAL_Shape_regularization_ContourDirections_orient = "orients a given segment with the index query_index towards the best-fit direction of the contour.
+constexpr const char* Shape_regularization_ContourDirections_orient = "orients a given segment with the index query_index towards the best-fit direction of the contour.
 
 Parameters
 ----------
@@ -18,9 +18,9 @@ query_index : const std::size_t
 segment : Segment_2 &";
 
 // CGAL::Shape_regularization::Contours::Longest_direction_2
-constexpr const char* CGAL_Shape_regularization_Contours_Longest_direction_2__class__ = "Estimates the longest principal direction of the contour.";
+constexpr const char* Shape_regularization_Contours_Longest_direction_2__class__ = "Estimates the longest principal direction of the contour.";
 
-constexpr const char* CGAL_Shape_regularization_Contours_Longest_direction_2_Longest_direction_2 = "initializes all internal data structures.
+constexpr const char* Shape_regularization_Contours_Longest_direction_2_Longest_direction_2 = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range a const range of
 ordered 2D points, which form a contour is_closed indicates whether the
@@ -36,7 +36,7 @@ Parameters
 input_range : const InputRange &
 is_closed : const bool
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_Contours_Longest_direction_2_orient = "orients a given segment with the index query_index towards the longest principal direction.
+constexpr const char* Shape_regularization_Contours_Longest_direction_2_orient = "orients a given segment with the index query_index towards the longest principal direction.
 
 query_index an index of the contour vertex that emits the contour edge being
 segment segment a segment to be rotated query_index >= 0 && query_index <
@@ -47,16 +47,16 @@ Parameters
 ----------
 query_index : const std::size_t
 segment : Segment_2 &";
-constexpr const char* CGAL_Shape_regularization_Contours_Longest_direction_2_number_of_directions = "returns the number of principal directions of the contour.
+constexpr const char* Shape_regularization_Contours_Longest_direction_2_number_of_directions = "returns the number of principal directions of the contour.
 
 The returned number is always one.
 
 Returns: std::size_t";
 
 // CGAL::Shape_regularization::Contours::Multiple_directions_2
-constexpr const char* CGAL_Shape_regularization_Contours_Multiple_directions_2__class__ = "Estimates possibly multiple principal directions of the contour based on the user-specified minimum length and maximum angle bounds.";
+constexpr const char* Shape_regularization_Contours_Multiple_directions_2__class__ = "Estimates possibly multiple principal directions of the contour based on the user-specified minimum length and maximum angle bounds.";
 
-constexpr const char* CGAL_Shape_regularization_Contours_Multiple_directions_2_Multiple_directions_2 = "initializes all internal data structures.
+constexpr const char* Shape_regularization_Contours_Multiple_directions_2_Multiple_directions_2 = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range a const range of
 ordered 2D points, which form a contour is_closed indicates whether the
@@ -81,7 +81,7 @@ Parameters
 input_range : const InputRange &
 is_closed : const bool
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_Contours_Multiple_directions_2_orient = "orients a given segment with the index query_index towards the best-fit found principal direction.
+constexpr const char* Shape_regularization_Contours_Multiple_directions_2_orient = "orients a given segment with the index query_index towards the best-fit found principal direction.
 
 query_index an index of the contour vertex that emits the contour edge being
 segment segment a segment to be rotated query_index >= 0 && query_index <
@@ -92,16 +92,16 @@ Parameters
 ----------
 query_index : const std::size_t
 segment : Segment_2 &";
-constexpr const char* CGAL_Shape_regularization_Contours_Multiple_directions_2_number_of_directions = "returns the number of principal directions of the contour.
+constexpr const char* Shape_regularization_Contours_Multiple_directions_2_number_of_directions = "returns the number of principal directions of the contour.
 
 The returned number is always greater or equal than one.
 
 Returns: std::size_t";
 
 // CGAL::Shape_regularization::Contours::User_defined_directions_2
-constexpr const char* CGAL_Shape_regularization_Contours_User_defined_directions_2__class__ = "Sets multiple user-specified principal directions of the contour.";
+constexpr const char* Shape_regularization_Contours_User_defined_directions_2__class__ = "Sets multiple user-specified principal directions of the contour.";
 
-constexpr const char* CGAL_Shape_regularization_Contours_User_defined_directions_2_User_defined_directions_2 = "initializes all internal data structures.
+constexpr const char* Shape_regularization_Contours_User_defined_directions_2_User_defined_directions_2 = "initializes all internal data structures.
 
 DirectionRange a model of ConstRange whose value type is
 GeomTraits::Direction_2 NamedParameters a sequence of Named Parameters
@@ -123,7 +123,7 @@ input_range : const InputRange &
 is_closed : const bool
 direction_range : const DirectionRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_Contours_User_defined_directions_2_orient = "orients a given segment with the index query_index towards the best-fit user-specified principal direction.
+constexpr const char* Shape_regularization_Contours_User_defined_directions_2_orient = "orients a given segment with the index query_index towards the best-fit user-specified principal direction.
 
 query_index an index of the contour vertex that emits the contour edge being
 segment segment a segment to be rotated query_index >= 0 && query_index <
@@ -134,16 +134,16 @@ Parameters
 ----------
 query_index : const std::size_t
 segment : Segment_2 &";
-constexpr const char* CGAL_Shape_regularization_Contours_User_defined_directions_2_number_of_directions = "returns the number of principal directions of the contour.
+constexpr const char* Shape_regularization_Contours_User_defined_directions_2_number_of_directions = "returns the number of principal directions of the contour.
 
 The returned number equals to the number of the user-specified directions.
 
 Returns: std::size_t";
 
 // CGAL::Shape_regularization::NeighborQuery
-constexpr const char* CGAL_Shape_regularization_NeighborQuery__class__ = "A concept that describes the set of methods used by the class QP_regularization to access neighbors of a geometric object being regularized.";
+constexpr const char* Shape_regularization_NeighborQuery__class__ = "A concept that describes the set of methods used by the class QP_regularization to access neighbors of a geometric object being regularized.";
 
-constexpr const char* CGAL_Shape_regularization_NeighborQuery_operator = "fills in neighbors with indices of all geometric objects, which are direct neighbors of the object with the index query_index .
+constexpr const char* Shape_regularization_NeighborQuery_operator = "fills in neighbors with indices of all geometric objects, which are direct neighbors of the object with the index query_index .
 
 QP_regularization calls this method once for each object from the input range.
 
@@ -153,9 +153,9 @@ query_index : const std::size_t
 neighbors : std::vector< std::size_t > &";
 
 // CGAL::Shape_regularization::QP_regularization
-constexpr const char* CGAL_Shape_regularization_QP_regularization__class__ = "Shape regularization algorithm based on the quadratic programming global optimization.";
+constexpr const char* Shape_regularization_QP_regularization__class__ = "Shape regularization algorithm based on the quadratic programming global optimization.";
 
-constexpr const char* CGAL_Shape_regularization_QP_regularization_QP_regularization = "initializes all internal data structures.
+constexpr const char* Shape_regularization_QP_regularization_QP_regularization = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range a const range of
 input objects for shape regularization neighbor_query an instance of
@@ -175,21 +175,21 @@ neighbor_query : NeighQuery &
 regularization_type : RegType &
 quadratic_program : QPSolver &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_QP_regularization_regularize = "runs the shape regularization algorithm.";
-constexpr const char* CGAL_Shape_regularization_QP_regularization_clear = "clears all internal data structures.
+constexpr const char* Shape_regularization_QP_regularization_regularize = "runs the shape regularization algorithm.";
+constexpr const char* Shape_regularization_QP_regularization_clear = "clears all internal data structures.
 
 This method does not release the allocated memory but only removes the class
 internal data.";
-constexpr const char* CGAL_Shape_regularization_QP_regularization_release_memory = "releases all memory that is used internally.
+constexpr const char* Shape_regularization_QP_regularization_release_memory = "releases all memory that is used internally.
 
 This method first calls the clear() method and then releases the allocated
 memory.";
 
 
 // CGAL::Shape_regularization::RegularizationType
-constexpr const char* CGAL_Shape_regularization_RegularizationType__class__ = "A concept that describes the set of methods used by the class QP_regularization to access various data required for setting up the global regularization problem.";
+constexpr const char* Shape_regularization_RegularizationType__class__ = "A concept that describes the set of methods used by the class QP_regularization to access various data required for setting up the global regularization problem.";
 
-constexpr const char* CGAL_Shape_regularization_RegularizationType_bound = "returns the maximum bound on a regularization characteristic (angle-orientation/ distance-offset/etc.) with respect to which a geometric object with the index query_index is being regularized.
+constexpr const char* Shape_regularization_RegularizationType_bound = "returns the maximum bound on a regularization characteristic (angle-orientation/ distance-offset/etc.) with respect to which a geometric object with the index query_index is being regularized.
 
 QP_regularization calls this method once for each object from the input range.
 
@@ -198,7 +198,7 @@ Parameters
 query_index : const std::size_t
 
 Returns: FieldNumberType";
-constexpr const char* CGAL_Shape_regularization_RegularizationType_target = "returns an objective function value between two geometric objects, which are direct neighbors, that is they form a neighbor pair i <-> j .
+constexpr const char* Shape_regularization_RegularizationType_target = "returns an objective function value between two geometric objects, which are direct neighbors, that is they form a neighbor pair i <-> j .
 
 Neighbors are provided by the concept NeighborQuery . QP_regularization calls
 this method once for each neighbor pair being regularized.
@@ -209,7 +209,7 @@ i : const std::size_t
 j : const std::size_t
 
 Returns: FieldNumberType";
-constexpr const char* CGAL_Shape_regularization_RegularizationType_update = "updates regularization characteristics (angle-orientation/distance-offset/etc.) of the geometric objects being regularized using values from solution , one value per one regularized object.
+constexpr const char* Shape_regularization_RegularizationType_update = "updates regularization characteristics (angle-orientation/distance-offset/etc.) of the geometric objects being regularized using values from solution , one value per one regularized object.
 
 These values depend on what is being regularized, they could be angle or
 offset differences for example. The solution vector is computed by the
@@ -224,12 +224,12 @@ Parameters
 solution : const std::vector< FieldNumberType > &";
 
 // CGAL::Shape_regularization::Segments::Angle_regularization_2
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2__class__ = "An angle-based regularization type for 2D segments that reinforces parallelism and orthogonality relationships.";
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2__class__ = "An angle-based regularization type for 2D segments that reinforces parallelism and orthogonality relationships.";
 
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_FT = "Number type.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_Angle_regularization_2 = "initializes all internal data structures.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_Angle_regularization_2 = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range a range of 2D
 segments to be regularized np an optional sequence of Named Parameters among
@@ -245,7 +245,7 @@ Parameters
 ----------
 input_range : InputRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_add_group = "inserts a group of segments from input_range .
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_add_group = "inserts a group of segments from input_range .
 
 Each group of segments is provided as a collection of their indices and only
 segments within the group are being regularized that is no relationships
@@ -258,7 +258,7 @@ range of segment indices index_range.size() >= 2
 Parameters
 ----------
 index_range : const IndexRange &";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_target = "calculates the target value between 2 segments, which are direct neighbors to each other.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_target = "calculates the target value between 2 segments, which are direct neighbors to each other.
 
 The target value is the angle difference between initial orientations of two
 segments i and j . i index of the first segment j index of the second segment
@@ -270,14 +270,14 @@ i : const std::size_t
 j : const std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_bound = "returns maximum_angle .
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_bound = "returns maximum_angle .
 
 Parameters
 ----------
  : const std::size_t
 
 Returns: const FT";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_update = "applies new orientations computed by the QuadraticProgramTraits to the initial segments.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_update = "applies new orientations computed by the QuadraticProgramTraits to the initial segments.
 
 Number of values in solution equals to the number n of segments being
 regularized + the number m of neighbor pairs between these segments. Each of n
@@ -287,7 +287,7 @@ a vector with angles in degrees solution.size() >= 1
 Parameters
 ----------
 solution : const std::vector< FT > &";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_parallel_groups = "creates groups of indices, where each group represents parallel segments.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_parallel_groups = "creates groups of indices, where each group represents parallel segments.
 
 This method calls Segments::parallel_groups() . OutIterator a model of
 OutputIterator that accepts elements of type std::vector<std::size_t> groups
@@ -298,7 +298,7 @@ Parameters
 groups : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_orthogonal_groups = "creates groups of indices, where each group represents orthogonal segments.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_orthogonal_groups = "creates groups of indices, where each group represents orthogonal segments.
 
 This method calls Segments::orthogonal_groups() . OutIterator a model of
 OutputIterator that accepts elements of type std::vector<std::size_t> groups
@@ -309,15 +309,15 @@ Parameters
 groups : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_number_of_modified_segments = "returns the number of modified segments.
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_number_of_modified_segments = "returns the number of modified segments.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_regularization_Segments_Angle_regularization_2_clear = "clears all internal data structures.";
+constexpr const char* Shape_regularization_Segments_Angle_regularization_2_clear = "clears all internal data structures.";
 
 // CGAL::Shape_regularization::Segments::Delaunay_neighbor_query_2
-constexpr const char* CGAL_Shape_regularization_Segments_Delaunay_neighbor_query_2__class__ = "A neighbor query based on a Delaunay triangulation, which enables to find the nearest neighbors in a set of GeomTraits::Segment_2 .";
+constexpr const char* Shape_regularization_Segments_Delaunay_neighbor_query_2__class__ = "A neighbor query based on a Delaunay triangulation, which enables to find the nearest neighbors in a set of GeomTraits::Segment_2 .";
 
-constexpr const char* CGAL_Shape_regularization_Segments_Delaunay_neighbor_query_2_Delaunay_neighbor_query_2 = "initializes all internal data structures.
+constexpr const char* Shape_regularization_Segments_Delaunay_neighbor_query_2_Delaunay_neighbor_query_2 = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range a const range of 2D
 segments np an optional sequence of Named Parameters among the ones listed
@@ -330,7 +330,7 @@ Parameters
 ----------
 input_range : const InputRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_Segments_Delaunay_neighbor_query_2_add_group = "inserts a group of segments from input_range and finds their neighbors within the group.
+constexpr const char* Shape_regularization_Segments_Delaunay_neighbor_query_2_add_group = "inserts a group of segments from input_range and finds their neighbors within the group.
 
 Each group of segments is provided as a collection of their indices and only
 neighbors of segments within the group are computed that is no relationships
@@ -343,7 +343,7 @@ range of segment indices index_range.size() >= 2
 Parameters
 ----------
 index_range : const IndexRange &";
-constexpr const char* CGAL_Shape_regularization_Segments_Delaunay_neighbor_query_2_operator = "fills in a vector with indices of segments, which are direct neighbors of the query segment.
+constexpr const char* Shape_regularization_Segments_Delaunay_neighbor_query_2_operator = "fills in a vector with indices of segments, which are direct neighbors of the query segment.
 
 query_index an index of the query segment neighbors indices of segments, which
 are direct neighbors of the query segment query_index >= 0 && query_index <
@@ -353,15 +353,15 @@ Parameters
 ----------
 query_index : const std::size_t
 neighbors : std::vector< std::size_t > &";
-constexpr const char* CGAL_Shape_regularization_Segments_Delaunay_neighbor_query_2_clear = "clears all internal data structures.";
+constexpr const char* Shape_regularization_Segments_Delaunay_neighbor_query_2_clear = "clears all internal data structures.";
 
 // CGAL::Shape_regularization::Segments::Offset_regularization_2
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2__class__ = "An offset-based regularization type for 2D segments that reinforces collinearity relationships.";
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2__class__ = "An offset-based regularization type for 2D segments that reinforces collinearity relationships.";
 
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_FT = "Number type.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_Offset_regularization_2 = "initializes all internal data structures.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_Offset_regularization_2 = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range a range of 2D
 segments to be regularized np an optional sequence of Named Parameters among
@@ -378,7 +378,7 @@ Parameters
 ----------
 input_range : InputRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_add_group = "inserts a group of segments from input_range .
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_add_group = "inserts a group of segments from input_range .
 
 Each group of segments is provided as a collection of their indices and only
 segments within the group are being regularized that is no relationships
@@ -391,7 +391,7 @@ range of segment indices index_range.size() >= 2
 Parameters
 ----------
 index_range : const IndexRange &";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_target = "calculates the target value between 2 parallel segments, which are direct neighbors to each other.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_target = "calculates the target value between 2 parallel segments, which are direct neighbors to each other.
 
 The target value is the distance between two parallel segments i and j , where
 the distance is defined as the distance between the midpoint of the ith
@@ -405,14 +405,14 @@ i : const std::size_t
 j : const std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_bound = "returns maximum_offset .
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_bound = "returns maximum_offset .
 
 Parameters
 ----------
  : const std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_update = "applies new positions computed by the QuadraticProgramTraits to the initial segments.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_update = "applies new positions computed by the QuadraticProgramTraits to the initial segments.
 
 Number of values in solution equals to the number n of segments being
 regularized + the number m of neighbor pairs between these segments. Each of n
@@ -422,7 +422,7 @@ vector with offsets in unit lengths solution.size() >= 1
 Parameters
 ----------
 solution : const std::vector< FT > &";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_collinear_groups = "creates groups of indices, where each group represents collinear segments.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_collinear_groups = "creates groups of indices, where each group represents collinear segments.
 
 This method calls Segments::collinear_groups() . OutIterator a model of
 OutputIterator that accepts elements of type std::vector<std::size_t> groups
@@ -433,10 +433,10 @@ Parameters
 groups : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_number_of_modified_segments = "returns the number of modified segments.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_number_of_modified_segments = "returns the number of modified segments.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_unique_segments = "returns segments, which best-fit collinear groups.
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_unique_segments = "returns segments, which best-fit collinear groups.
 
 This method first calls Segments::collinear_groups() and then substitutes each
 group of collinear segments by an average segment. The number of returned
@@ -449,7 +449,7 @@ Parameters
 segments : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Shape_regularization_Segments_Offset_regularization_2_clear = "clears all internal data structures.";
+constexpr const char* Shape_regularization_Segments_Offset_regularization_2_clear = "clears all internal data structures.";
 
 // std
 constexpr const char* std__class__ = "STL namespace.";

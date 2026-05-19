@@ -45,7 +45,7 @@ def collect_entries(data):
     seen = {}
     for compound_name, compound in data.items():
         if compound.get("brief"):
-            ident = make_identifier(compound_name) + "__class__"
+            ident = make_identifier(strip_cgal_namespace(compound_name)) + "__class__"
             doc = escape_cpp(compound["brief"].strip())
             entries.append((ident, doc))
 
@@ -57,6 +57,7 @@ def collect_entries(data):
 
             qname = member.get("qualified_name") or \
                     f"{compound_name}__{member.get('name', 'unknown')}"
+            qname = strip_cgal_namespace(qname)
             ident = make_identifier(qname)
 
             # Disambiguate overloads

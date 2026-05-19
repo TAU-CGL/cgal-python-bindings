@@ -24,6 +24,44 @@
 
 namespace py = nanobind;
 
+// Docstrings
+namespace {
+  const char* COMPLEMENT_DOC = R"pbdoc(
+Compute the complement of a general polygon.
+)pbdoc";
+
+  const char* DO_INTERSECT_DOC = R"pbdoc(
+Check whether two polygons or polygons-with-holes intersect.
+)pbdoc";
+
+  const char* INTERSECTION_DOC = R"pbdoc(
+Compute the intersection of two polygons or polygons-with-holes.
+)pbdoc";
+
+  const char* DIFFERENCE_DOC = R"pbdoc(
+Compute the difference of two polygons or polygons-with-holes.
+)pbdoc";
+
+  const char* JOIN_DOC = R"pbdoc(
+Compute the union (join) of two polygons or polygons-with-holes.
+)pbdoc";
+
+  const char* SYMMETRIC_DIFFERENCE_DOC = R"pbdoc(
+Compute the symmetric difference of two polygons or polygons-with-holes.
+)pbdoc";
+
+  const char* ORIENTED_SIDE_DOC = R"pbdoc(
+Determine the relative oriented side of a point or polygon with respect to a polygon.
+)pbdoc";
+
+#if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
+    (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
+  const char* CONNECT_HOLES_DOC = R"pbdoc(
+Connect the holes of a polygon with holes by inserting narrow passages.
+)pbdoc";
+#endif
+}
+
 namespace bso2 {
 
 //
@@ -169,46 +207,46 @@ void export_boolean_set_operations_2(py::module_& m) {
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
-  m.def("complement", bso2::complement0, py::arg("pgn"));
-  m.def("complement", bso2::complement1, py::arg("pgn"));
-  m.def("do_intersect", &bso2::do_intersect<Pgn, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("do_intersect", &bso2::do_intersect<Pgn, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("do_intersect", &bso2::do_intersect<Pwh, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("do_intersect", &bso2::do_intersect<Pwh, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("do_intersect", &bso2::do_intersect_range<Pgn, Pwh>, py::arg("pgn_lst"), py::arg("pwh_lst"));
-  m.def("intersection", &bso2::intersection_linear<Pgn, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("intersection", &bso2::intersection_linear<Pgn, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("intersection", &bso2::intersection_linear<Pwh, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("intersection", &bso2::intersection_linear<Pwh, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("intersection", &bso2::intersection_linear<Pgn, Pgn, Gt>, py::arg("p0"), py::arg("p1"), py::arg("traits"));
-  m.def("intersection", &bso2::intersection_linear<Pgn, Pwh, Gt>, py::arg("p0"), py::arg("p1"), py::arg("traits"));
-  m.def("intersection", &bso2::intersection_linear<Pwh, Pgn, Gt>, py::arg("p0"), py::arg("p1"), py::arg("traits"));
-  m.def("intersection", &bso2::intersection_linear<Pwh, Pwh, Gt>, py::arg("p0"), py::arg("p1"), py::arg("traits"));
-  m.def("intersection", &bso2::intersection_range<Pgn, Pwh>, py::arg("pgn_lst"), py::arg("pwh_lst"));
-  m.def("difference", &bso2::difference_linear<Pgn, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("difference", &bso2::difference_linear<Pgn, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("difference", &bso2::difference_linear<Pwh, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("difference", &bso2::difference_linear<Pwh, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("join", &bso2::join_linear<Pgn, Pgn>, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
-  m.def("join", &bso2::join_linear<Pwh, Pgn>, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
-  m.def("join", &bso2::join_linear<Pgn, Pwh>, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
-  m.def("join", &bso2::join_linear<Pwh, Pwh>, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
-  m.def("join", &bso2::join_range<Pgn, Pwh>, py::arg("pgn_lst"), py::arg("pwh_lst"));
-  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pgn, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pgn, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("symmetric_difference", &bso2::symmetric_difference_range<Pgn, Pwh>, py::arg("pgn_lst"), py::arg("pwh_lst"));
-  m.def("oriented_side", &bso2::oriented_side<Pnt, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("oriented_side", &bso2::oriented_side<Pnt, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("oriented_side", &bso2::oriented_side<Pgn, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("oriented_side", &bso2::oriented_side<Pgn, Pwh>, py::arg("p0"), py::arg("p1"));
-  m.def("oriented_side", &bso2::oriented_side<Pwh, Pgn>, py::arg("p0"), py::arg("p1"));
-  m.def("oriented_side", &bso2::oriented_side<Pwh, Pwh>, py::arg("p0"), py::arg("p1"));
+  m.def("complement", bso2::complement0, COMPLEMENT_DOC, py::arg("pgn"));
+  m.def("complement", bso2::complement1, COMPLEMENT_DOC, py::arg("pgn"));
+  m.def("do_intersect", &bso2::do_intersect<Pgn, Pgn>, DO_INTERSECT_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("do_intersect", &bso2::do_intersect<Pgn, Pwh>, DO_INTERSECT_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("do_intersect", &bso2::do_intersect<Pwh, Pgn>, DO_INTERSECT_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("do_intersect", &bso2::do_intersect<Pwh, Pwh>, DO_INTERSECT_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("do_intersect", &bso2::do_intersect_range<Pgn, Pwh>, DO_INTERSECT_DOC, py::arg("pgn_lst"), py::arg("pwh_lst"));
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pgn>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pwh>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pgn>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pwh>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pgn, Gt>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"), py::arg("traits"));
+  m.def("intersection", &bso2::intersection_linear<Pgn, Pwh, Gt>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"), py::arg("traits"));
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pgn, Gt>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"), py::arg("traits"));
+  m.def("intersection", &bso2::intersection_linear<Pwh, Pwh, Gt>, INTERSECTION_DOC, py::arg("p0"), py::arg("p1"), py::arg("traits"));
+  m.def("intersection", &bso2::intersection_range<Pgn, Pwh>, INTERSECTION_DOC, py::arg("pgn_lst"), py::arg("pwh_lst"));
+  m.def("difference", &bso2::difference_linear<Pgn, Pgn>, DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("difference", &bso2::difference_linear<Pgn, Pwh>, DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("difference", &bso2::difference_linear<Pwh, Pgn>, DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("difference", &bso2::difference_linear<Pwh, Pwh>, DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("join", &bso2::join_linear<Pgn, Pgn>, JOIN_DOC, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
+  m.def("join", &bso2::join_linear<Pwh, Pgn>, JOIN_DOC, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
+  m.def("join", &bso2::join_linear<Pgn, Pwh>, JOIN_DOC, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
+  m.def("join", &bso2::join_linear<Pwh, Pwh>, JOIN_DOC, py::arg("p0"), py::arg("p1"), py::arg("pwh"));
+  m.def("join", &bso2::join_range<Pgn, Pwh>, JOIN_DOC, py::arg("pgn_lst"), py::arg("pwh_lst"));
+  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pgn, Pgn>, SYMMETRIC_DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pgn, Pwh>, SYMMETRIC_DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pgn>, SYMMETRIC_DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("symmetric_difference", &bso2::symmetric_difference_linear<Pwh, Pwh>, SYMMETRIC_DIFFERENCE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("symmetric_difference", &bso2::symmetric_difference_range<Pgn, Pwh>, SYMMETRIC_DIFFERENCE_DOC, py::arg("pgn_lst"), py::arg("pwh_lst"));
+  m.def("oriented_side", &bso2::oriented_side<Pnt, Pgn>, ORIENTED_SIDE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("oriented_side", &bso2::oriented_side<Pnt, Pwh>, ORIENTED_SIDE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("oriented_side", &bso2::oriented_side<Pgn, Pgn>, ORIENTED_SIDE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("oriented_side", &bso2::oriented_side<Pgn, Pwh>, ORIENTED_SIDE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("oriented_side", &bso2::oriented_side<Pwh, Pgn>, ORIENTED_SIDE_DOC, py::arg("p0"), py::arg("p1"));
+  m.def("oriented_side", &bso2::oriented_side<Pwh, Pwh>, ORIENTED_SIDE_DOC, py::arg("p0"), py::arg("p1"));
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
     (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS)
-  m.def("connect_holes", &bso2::connect_holes, py::arg("pwh"));
+  m.def("connect_holes", &bso2::connect_holes, CONNECT_HOLES_DOC, py::arg("pwh"));
 #else
 
   if (! add_attr<Pgn>(m, "General_polygon_2")) {

@@ -8,53 +8,53 @@ namespace docstrings {
 namespace TDS_3 {
 
 // CGAL::Triangulation_data_structure_3
-constexpr const char* CGAL_Triangulation_data_structure_3__class__ = "The class Triangulation_data_structure_3 stores a 3D-triangulation data structure and provides the optional geometric functionalities to be used as a parameter for a 3D-geometric triangulation (see Chapter 3D Triangulations).";
+constexpr const char* Triangulation_data_structure_3__class__ = "The class Triangulation_data_structure_3 stores a 3D-triangulation data structure and provides the optional geometric functionalities to be used as a parameter for a 3D-geometric triangulation (see Chapter 3D Triangulations).";
 
-constexpr const char* CGAL_Triangulation_data_structure_3_Vertex = "The vertex type.
+constexpr const char* Triangulation_data_structure_3_Vertex = "The vertex type.
 
 Section Cyclic Dependency
 
 Returns: VertexBase::template Rebind_TDS< Tds >::Other";
-constexpr const char* CGAL_Triangulation_data_structure_3_Cell = "The face type.
+constexpr const char* Triangulation_data_structure_3_Cell = "The face type.
 
 Section Cyclic Dependency
 
 Returns: CellBase::template Rebind_TDS< Tds >::Other";
-constexpr const char* CGAL_Triangulation_data_structure_3_Vertex_range = "Vertex container type.
+constexpr const char* Triangulation_data_structure_3_Vertex_range = "Vertex container type.
 
 If ConcurrencyTag is Parallel_tag , a Concurrent_compact_container is used
 instead of a Compact_container .
 
 Returns: Compact_container< Vertex , Default >";
-constexpr const char* CGAL_Triangulation_data_structure_3_Cell_range = "Cell container type.
+constexpr const char* Triangulation_data_structure_3_Cell_range = "Cell container type.
 
 If ConcurrencyTag is Parallel_tag , a Concurrent_compact_container is used
 instead of a Compact_container .
 
 Returns: Compact_container< Cell , Default >";
-constexpr const char* CGAL_Triangulation_data_structure_3_cells = "Returns a reference to the container of cells.
+constexpr const char* Triangulation_data_structure_3_cells = "Returns a reference to the container of cells.
 
 Returns: Cell_range &";
-constexpr const char* CGAL_Triangulation_data_structure_3_cells_1 = "Returns a reference to the container of cells.
+constexpr const char* Triangulation_data_structure_3_cells_1 = "Returns a reference to the container of cells.
 
 Returns: Cell_range &";
-constexpr const char* CGAL_Triangulation_data_structure_3_vertices = "Returns a reference to the container of vertices.
+constexpr const char* Triangulation_data_structure_3_vertices = "Returns a reference to the container of vertices.
 
 Returns: Vertex_range &";
-constexpr const char* CGAL_Triangulation_data_structure_3_vertices_1 = "Returns a reference to the container of vertices.
+constexpr const char* Triangulation_data_structure_3_vertices_1 = "Returns a reference to the container of vertices.
 
 Returns: Vertex_range &";
 
 // CGAL::Triangulation_ds_cell_base_3
-constexpr const char* CGAL_Triangulation_ds_cell_base_3__class__ = "The class Triangulation_ds_cell_base_3 <> is a model for the concept TriangulationDSCellBase_3 to be used by Triangulation_data_structure_3 .";
+constexpr const char* Triangulation_ds_cell_base_3__class__ = "The class Triangulation_ds_cell_base_3 <> is a model for the concept TriangulationDSCellBase_3 to be used by Triangulation_data_structure_3 .";
 
 // CGAL::Triangulation_ds_vertex_base_3
-constexpr const char* CGAL_Triangulation_ds_vertex_base_3__class__ = "The class Triangulation_ds_vertex_base_3 can be used as the base vertex for a 3D-triangulation data structure, it is a model of the concept TriangulationDSVertexBase_3 .";
+constexpr const char* Triangulation_ds_vertex_base_3__class__ = "The class Triangulation_ds_vertex_base_3 can be used as the base vertex for a 3D-triangulation data structure, it is a model of the concept TriangulationDSVertexBase_3 .";
 
 // CGAL::Triangulation_utils_3
-constexpr const char* CGAL_Triangulation_utils_3__class__ = "The class Triangulation_utils_3 defines operations on the indices of vertices and neighbors within a cell.";
+constexpr const char* Triangulation_utils_3__class__ = "The class Triangulation_utils_3 defines operations on the indices of vertices and neighbors within a cell.";
 
-constexpr const char* CGAL_Triangulation_utils_3_next_around_edge = "In dimension 3, index of the neighbor n that is next to the current cell, when turning positively around an oriented edge whose endpoints are indexed i and j .
+constexpr const char* Triangulation_utils_3_next_around_edge = "In dimension 3, index of the neighbor n that is next to the current cell, when turning positively around an oriented edge whose endpoints are indexed i and j .
 
 According to the usual numbering of vertices and neighbors in a given cell, it
 is also the index of the vertex opposite to this neighbor n . (see
@@ -66,7 +66,7 @@ i : unsigned int
 j : unsigned int
 
 Returns: unsigned int";
-constexpr const char* CGAL_Triangulation_utils_3_vertex_triple_index = "In dimension 3, index of the j -th vertex in counterclockwise order on the face opposite to vertex with i of the cell.
+constexpr const char* Triangulation_utils_3_vertex_triple_index = "In dimension 3, index of the j -th vertex in counterclockwise order on the face opposite to vertex with i of the cell.
 
 ( i < 4 ) && ( j < 3 ) .
 
@@ -76,7 +76,7 @@ i : const int
 j : const int
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_utils_3_ccw = "Has a meaning only in dimension 2.
+constexpr const char* Triangulation_utils_3_ccw = "Has a meaning only in dimension 2.
 
 Computes the index of the vertex that is next to the vertex numbered i in
 counterclockwise direction. (see fig__Triangulation3figutils ). i<3 .
@@ -86,7 +86,7 @@ Parameters
 i : unsigned int
 
 Returns: unsigned int";
-constexpr const char* CGAL_Triangulation_utils_3_cw = "Same for clockwise.
+constexpr const char* Triangulation_utils_3_cw = "Same for clockwise.
 
 Parameters
 ----------

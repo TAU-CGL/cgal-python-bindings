@@ -8,14 +8,14 @@ namespace docstrings {
 namespace Interpolation {
 
 // CGAL::Data_access
-constexpr const char* CGAL_Data_access__class__ = "The struct Data_access implements a functor that allows to retrieve data from an associative container.";
+constexpr const char* Data_access__class__ = "The struct Data_access implements a functor that allows to retrieve data from an associative container.";
 
-constexpr const char* CGAL_Data_access_Data_access = "Introduces a Data_access to the container map .
+constexpr const char* Data_access_Data_access = "Introduces a Data_access to the container map .
 
 Parameters
 ----------
 map : const Map &";
-constexpr const char* CGAL_Data_access_operator = "If there is an entry for p in the container map , then the pair of map.find(p) and true is returned.
+constexpr const char* Data_access_operator = "If there is an entry for p in the container map , then the pair of map.find(p) and true is returned.
 
 Otherwise, the Boolean value of the pair is false .
 
@@ -26,29 +26,29 @@ p : const Key_type &
 Returns: std::pair< Data_type , bool >";
 
 // CGAL::Interpolation_gradient_fitting_traits_2
-constexpr const char* CGAL_Interpolation_gradient_fitting_traits_2__class__ = "Interpolation_gradient_fitting_traits_2 is a model for the concepts InterpolationTraits and GradientFittingTraits .";
+constexpr const char* Interpolation_gradient_fitting_traits_2__class__ = "Interpolation_gradient_fitting_traits_2 is a model for the concepts InterpolationTraits and GradientFittingTraits .";
 
 
 // CGAL::Interpolation_traits_2
-constexpr const char* CGAL_Interpolation_traits_2__class__ = "Interpolation_traits_2 is a model for the concept InterpolationTraits and can be used to instantiate the geometric traits class of interpolation methods applied on a bivariate function over a two-dimensional domain.";
+constexpr const char* Interpolation_traits_2__class__ = "Interpolation_traits_2 is a model for the concept InterpolationTraits and can be used to instantiate the geometric traits class of interpolation methods applied on a bivariate function over a two-dimensional domain.";
 
 
 // CGAL::Voronoi_intersection_2_traits_3
-constexpr const char* CGAL_Voronoi_intersection_2_traits_3__class__ = "Voronoi_intersection_2_traits_3 is a model for the concept RegularTriangulationTraits_2 .";
+constexpr const char* Voronoi_intersection_2_traits_3__class__ = "Voronoi_intersection_2_traits_3 is a model for the concept RegularTriangulationTraits_2 .";
 
-constexpr const char* CGAL_Voronoi_intersection_2_traits_3_Less_distance_to_point_2 = "Necessary for certificated coordinates / neighbors computation.
+constexpr const char* Voronoi_intersection_2_traits_3_Less_distance_to_point_2 = "Necessary for certificated coordinates / neighbors computation.
 
 Returns: K::Less_distance_to_point_3";
-constexpr const char* CGAL_Voronoi_intersection_2_traits_3_Compute_squared_distance_2 = "Necessary for certificated coordinates / neighbors computation.
+constexpr const char* Voronoi_intersection_2_traits_3_Compute_squared_distance_2 = "Necessary for certificated coordinates / neighbors computation.
 
 Returns: K::Compute_squared_distance_3";
-constexpr const char* CGAL_Voronoi_intersection_2_traits_3_Compute_area_2 = "An instance of this function object class computes the square root of the result of K::Compute_squared_area_3 .
+constexpr const char* Voronoi_intersection_2_traits_3_Compute_area_2 = "An instance of this function object class computes the square root of the result of K::Compute_squared_area_3 .
 
 If the number type FT does not support the square root operation, the result
 is cast to double before computing the square root.
 
 Returns: Compute_area_3< K >";
-constexpr const char* CGAL_Voronoi_intersection_2_traits_3_Voronoi_intersection_2_traits_3 = "The plane associated to the traits class contains point and has as normal vector normal .
+constexpr const char* Voronoi_intersection_2_traits_3_Voronoi_intersection_2_traits_3 = "The plane associated to the traits class contains point and has as normal vector normal .
 
 The optional kernel parameter k is the base class of the traits class.
 

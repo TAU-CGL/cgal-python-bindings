@@ -202,12 +202,12 @@ i : bool
 
 Returns: AlgebraicKernelForCircles::Root_for_circles_2_2";
 
-constexpr const char* CGAL_Circular_arc_2_Circular_arc_2 = "Constructs an arc from a full circle.
+constexpr const char* Circular_arc_2_Circular_arc_2 = "Constructs an arc from a full circle.
 
 Parameters
 ----------
 c : const Circle_2< CircularKernel > &";
-constexpr const char* CGAL_Circular_arc_2_Circular_arc_2_1 = "Constructs the circular arc supported by c , whose source is p and whose target is q when traversing the circle in counterclockwise direction.
+constexpr const char* Circular_arc_2_Circular_arc_2_1 = "Constructs the circular arc supported by c , whose source is p and whose target is q when traversing the circle in counterclockwise direction.
 
 p and q lie on c .
 
@@ -216,7 +216,7 @@ Parameters
 c : const Circle_2< CircularKernel > &
 p : const Circular_arc_point_2 < CircularKernel > &
 q : const Circular_arc_point_2 < CircularKernel > &";
-constexpr const char* CGAL_Circular_arc_2_Circular_arc_2_2 = "Constructs an arc that is supported by the circle of type Circle_2< CircularKernel > passing through the points p , q and r .
+constexpr const char* Circular_arc_2_Circular_arc_2_2 = "Constructs an arc that is supported by the circle of type Circle_2< CircularKernel > passing through the points p , q and r .
 
 The source and target are respectively p and r , when traversing the
 supporting circle in the counterclockwise direction. Note that, depending on
@@ -228,30 +228,30 @@ Parameters
 p : const Point_2 < CircularKernel > &
 q : const Point_2 < CircularKernel > &
 r : const Point_2 < CircularKernel > &";
-constexpr const char* CGAL_Circular_arc_2_center = "returns the center of the supporting circle.
+constexpr const char* Circular_arc_2_center = "returns the center of the supporting circle.
 
 Returns: Point_2 < CircularKernel > const &";
-constexpr const char* CGAL_Circular_arc_2_squared_radius = "returns the squared radius of the supporting circle.
+constexpr const char* Circular_arc_2_squared_radius = "returns the squared radius of the supporting circle.
 
 Returns: CircularKernel::FT const &";
-constexpr const char* CGAL_Circular_arc_2_left = "
+constexpr const char* Circular_arc_2_left = "
 ca . is_x_monotone() .
 
 Returns: Circular_arc_point_2 < CircularKernel >";
-constexpr const char* CGAL_Circular_arc_2_right = "
+constexpr const char* Circular_arc_2_right = "
 ca . is_x_monotone() .
 
 Returns: Circular_arc_point_2 < CircularKernel >";
-constexpr const char* CGAL_Circular_arc_2_bbox = "Returns a bounding box containing the arc.
+constexpr const char* Circular_arc_2_bbox = "Returns a bounding box containing the arc.
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Circular_arc_2_is_x_monotone = "Tests whether the arc is x-monotone.
+constexpr const char* Circular_arc_2_is_x_monotone = "Tests whether the arc is x-monotone.
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_2_is_y_monotone = "Tests whether the arc is y-monotone.
+constexpr const char* Circular_arc_2_is_y_monotone = "Tests whether the arc is y-monotone.
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_2_operator = "Test for equality.
+constexpr const char* Circular_arc_2_operator = "Test for equality.
 
 Two arcs are equal, iff their non-oriented supporting circles are equal (i.e.
 they have same center and same squared radius) and their endpoints are equal.
@@ -262,7 +262,7 @@ ca1 : const Circular_arc_2 < CircularKernel > &
 ca2 : const Circular_arc_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_2_operator_1 = "Test for non-equality.
+constexpr const char* Circular_arc_2_operator_1 = "Test for non-equality.
 
 Parameters
 ----------
@@ -271,16 +271,16 @@ ca2 : const Circular_arc_2 < CircularKernel > &
 
 Returns: bool";
 
-constexpr const char* CGAL_Circular_arc_point_2_x = "x -coordinate of the point.
+constexpr const char* Circular_arc_point_2_x = "x -coordinate of the point.
 
 Returns: const CircularKernel::Root_of_2 &";
-constexpr const char* CGAL_Circular_arc_point_2_y = "y -coordinate of the point.
+constexpr const char* Circular_arc_point_2_y = "y -coordinate of the point.
 
 Returns: const CircularKernel::Root_of_2 &";
-constexpr const char* CGAL_Circular_arc_point_2_bbox = "Returns a bounding box around the point.
+constexpr const char* Circular_arc_point_2_bbox = "Returns a bounding box around the point.
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Circular_arc_point_2_operator = "Test for equality.
+constexpr const char* Circular_arc_point_2_operator = "Test for equality.
 
 Two points are equal, iff their x and y coordinates are equal.
 
@@ -290,7 +290,7 @@ p : const Circular_arc_point_2 < CircularKernel > &
 q : const Circular_arc_point_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_2_operator_1 = "Test for nonequality.
+constexpr const char* Circular_arc_point_2_operator_1 = "Test for nonequality.
 
 Parameters
 ----------
@@ -298,7 +298,7 @@ p : const Circular_arc_point_2 < CircularKernel > &
 q : const Circular_arc_point_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_2_operator_2 = "Returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() .
+constexpr const char* Circular_arc_point_2_operator_2 = "Returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() .
 
 Parameters
 ----------
@@ -306,7 +306,7 @@ p : const Circular_arc_point_2 < CircularKernel > &
 q : const Circular_arc_point_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_2_operator_3 = "Returns true iff p is lexicographically greater than q .
+constexpr const char* Circular_arc_point_2_operator_3 = "Returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -314,7 +314,7 @@ p : const Circular_arc_point_2 < CircularKernel > &
 q : const Circular_arc_point_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_2_operator_4 = "Returns true iff p is lexicographically smaller than or equal to q .
+constexpr const char* Circular_arc_point_2_operator_4 = "Returns true iff p is lexicographically smaller than or equal to q .
 
 Parameters
 ----------
@@ -322,7 +322,7 @@ p : const Circular_arc_point_2 < CircularKernel > &
 q : const Circular_arc_point_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_2_operator_5 = "Returns true iff p is lexicographically greater than or equal to q .
+constexpr const char* Circular_arc_point_2_operator_5 = "Returns true iff p is lexicographically greater than or equal to q .
 
 Parameters
 ----------
@@ -331,17 +331,17 @@ q : const Circular_arc_point_2 < CircularKernel > &
 
 Returns: bool";
 
-constexpr const char* CGAL_Circular_kernel_2_RT = "Ring number type.
+constexpr const char* Circular_kernel_2_RT = "Ring number type.
 
 Returns: AlgebraicKernelForCircles::RT";
-constexpr const char* CGAL_Circular_kernel_2_FT = "Field number type.
+constexpr const char* Circular_kernel_2_FT = "Field number type.
 
 Returns: AlgebraicKernelForCircles::FT";
 
 // CGAL::Exact_circular_kernel_2
-constexpr const char* CGAL_Exact_circular_kernel_2__class__ = "A typedef to a circular kernel that provides both exact geometric predicates and exact geometric constructions.";
+constexpr const char* Exact_circular_kernel_2__class__ = "A typedef to a circular kernel that provides both exact geometric predicates and exact geometric constructions.";
 
-constexpr const char* CGAL_Line_arc_2_Line_arc_2 = "Construct the line segment supported by l , whose source is p1 and whose target is p2 .
+constexpr const char* Line_arc_2_Line_arc_2 = "Construct the line segment supported by l , whose source is p1 and whose target is p2 .
 
 p1 and p2 lie on l .
 
@@ -350,17 +350,17 @@ Parameters
 l : const Line_2< CircularKernel > &
 p1 : const Circular_arc_point_2 < CircularKernel > &
 p2 : const Circular_arc_point_2 < CircularKernel > &";
-constexpr const char* CGAL_Line_arc_2_Line_arc_2_1 = "Same.
+constexpr const char* Line_arc_2_Line_arc_2_1 = "Same.
 
 Parameters
 ----------
 l : const Line_2< CircularKernel > &
 p1 : const Point_2 < CircularKernel > &
 p2 : const Point_2 < CircularKernel > &";
-constexpr const char* CGAL_Line_arc_2_bbox = "Returns a bounding box containing the line segment.
+constexpr const char* Line_arc_2_bbox = "Returns a bounding box containing the line segment.
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Line_arc_2_operator = "Test for equality.
+constexpr const char* Line_arc_2_operator = "Test for equality.
 
 Two arcs are equal, iff their non-oriented supporting lines are equal (i.e.
 they contain the same set of points) and their endpoints are equal.
@@ -371,7 +371,7 @@ la1 : const Line_arc_2 < CircularKernel > &
 la2 : const Line_arc_2 < CircularKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_arc_2_operator_1 = "Test for non-equality.
+constexpr const char* Line_arc_2_operator_1 = "Test for non-equality.
 
 Parameters
 ----------

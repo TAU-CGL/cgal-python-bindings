@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Frechet_distance {
 
 // CGAL::Frechet_distance::Neighbor_search
-constexpr const char* CGAL_Frechet_distance_Neighbor_search__class__ = "A data structure to store polylines with a function that enables to find those polylines which are closer than a distance bound to a query polyline.";
+constexpr const char* Frechet_distance_Neighbor_search__class__ = "A data structure to store polylines with a function that enables to find those polylines which are closer than a distance bound to a query polyline.";
 
-constexpr const char* CGAL_Frechet_distance_Neighbor_search_Neighbor_search = "constructs a neighbor search data structure for polylines
+constexpr const char* Frechet_distance_Neighbor_search_Neighbor_search = "constructs a neighbor search data structure for polylines
 
 ConcurrencyTag enables sequential versus parallel construction. Possible
 values are Sequential_tag , Parallel_tag , and Parallel_if_available_tag .
@@ -20,7 +20,7 @@ Parameters
 ----------
 polylines : const PolylineRange &
 tag : ConcurrencyTag";
-constexpr const char* CGAL_Frechet_distance_Neighbor_search_get_close_curves = "returns the indices of the inserted polylines that are closer than distance to the polyline query .
+constexpr const char* Frechet_distance_Neighbor_search_get_close_curves = "returns the indices of the inserted polylines that are closer than distance to the polyline query .
 
 query the query polyline distance the distance bound ConcurrencyTag enables
 sequential versus parallel computation. Possible values are Sequential_tag ,

@@ -8,55 +8,55 @@ namespace docstrings {
 namespace Periodic_4_hyperbolic_triangulation_2 {
 
 // CGAL::Hyperbolic_octagon_translation
-constexpr const char* CGAL_Hyperbolic_octagon_translation__class__ = "The class Hyperbolic_octagon_translation defines an object to represent a hyperbolic translation of the fundamental group of the Bolza surface $\\mathcal M$ .";
+constexpr const char* Hyperbolic_octagon_translation__class__ = "The class Hyperbolic_octagon_translation defines an object to represent a hyperbolic translation of the fundamental group of the Bolza surface $\\mathcal M$ .";
 
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Generator = "Enumeration type for the alphabet $\\mathcal A$ .
+constexpr const char* Hyperbolic_octagon_translation_Generator = "Enumeration type for the alphabet $\\mathcal A$ .
 
 This enumeration can be used to recover the generators of the group $\\mathcal
 G$ . generator()
 
 Returns: Word_letter";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_FT = "Field number type of the coefficients of $\\alpha$ and $\\beta$ .
+constexpr const char* Hyperbolic_octagon_translation_FT = "Field number type of the coefficients of $\\alpha$ and $\\beta$ .
 
 This number type must be the same as the field number type FT of the class
 Periodic_4_hyperbolic_Delaunay_triangulation_2_traits . alpha() beta()
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Word_letter = "Represents a single letter of the alphabet $\\mathcal A$ .
+constexpr const char* Hyperbolic_octagon_translation_Word_letter = "Represents a single letter of the alphabet $\\mathcal A$ .
 
 By extension, represents a generator of the group $\\mathcal G$ .
 
 Returns: unsigned short int";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Word = "Represents a word on the alphabet $\\mathcal A$ .
+constexpr const char* Hyperbolic_octagon_translation_Word = "Represents a word on the alphabet $\\mathcal A$ .
 
 By extension, represents a hyperbolic translation in the group $\\mathcal A$ .
 
 Returns: std::vector< Word_letter >";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Hyperbolic_octagon_translation = "Default constructor. Creates the identity translation of the group $\\mathcal G$ .";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_1 = "Creates the translation described by the word w .
+constexpr const char* Hyperbolic_octagon_translation_Hyperbolic_octagon_translation = "Default constructor. Creates the identity translation of the group $\\mathcal G$ .";
+constexpr const char* Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_1 = "Creates the translation described by the word w .
 
 Parameters
 ----------
 w : Word";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_2 = "Creates the translation described by the one-letter word l .
+constexpr const char* Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_2 = "Creates the translation described by the one-letter word l .
 
 Parameters
 ----------
 l : Word_letter";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_3 = "Creates the translation described by the two-letter word lm .
+constexpr const char* Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_3 = "Creates the translation described by the two-letter word lm .
 
 Parameters
 ----------
 l : Word_letter
 m : Word_letter";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_4 = "Creates the translation described by the three-letter word lmn .
+constexpr const char* Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_4 = "Creates the translation described by the three-letter word lmn .
 
 Parameters
 ----------
 l : Word_letter
 m : Word_letter
 n : Word_letter";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_5 = "Creates the translation described by the four-letter word lmno .
+constexpr const char* Hyperbolic_octagon_translation_Hyperbolic_octagon_translation_5 = "Creates the translation described by the four-letter word lmno .
 
 Parameters
 ----------
@@ -64,42 +64,42 @@ l : Word_letter
 m : Word_letter
 n : Word_letter
 o : Word_letter";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_operator = "Multiplication operator; composes the current translation with other .
+constexpr const char* Hyperbolic_octagon_translation_operator = "Multiplication operator; composes the current translation with other .
 
 Parameters
 ----------
 other : const Hyperbolic_octagon_translation &
 
 Returns: Hyperbolic_octagon_translation";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_operator_1 = "Difference operator; the difference of two translations $v$ and $w$ is defined as $v * w^{-1}$ .
+constexpr const char* Hyperbolic_octagon_translation_operator_1 = "Difference operator; the difference of two translations $v$ and $w$ is defined as $v * w^{-1}$ .
 
 Parameters
 ----------
 other : const Hyperbolic_octagon_translation &
 
 Returns: Hyperbolic_octagon_translation";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_operator_2 = "Assignment operator; modifying the translation after the assignment leaves other unaffected.
+constexpr const char* Hyperbolic_octagon_translation_operator_2 = "Assignment operator; modifying the translation after the assignment leaves other unaffected.
 
 Parameters
 ----------
 other : const Hyperbolic_octagon_translation &
 
 Returns: Hyperbolic_octagon_translation &";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_operator_3 = "Equality operator.
+constexpr const char* Hyperbolic_octagon_translation_operator_3 = "Equality operator.
 
 Parameters
 ----------
 other : const Hyperbolic_octagon_translation < FT > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_operator_4 = "Inequality operator.
+constexpr const char* Hyperbolic_octagon_translation_operator_4 = "Inequality operator.
 
 Parameters
 ----------
 other : const Hyperbolic_octagon_translation < FT > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_operator_5 = "Comparison operator.
+constexpr const char* Hyperbolic_octagon_translation_operator_5 = "Comparison operator.
 
 Each translation $g$ of $\\mathcal G$ , when applied to the octagon $\\mathcal
 D_O$ , produces a copy of $\\mathcal D_O$ labeled by the translation $g$ . The
@@ -113,32 +113,32 @@ Parameters
 other : const Hyperbolic_octagon_translation < FT > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_inverse = "Returns the inverse of the current translation.
+constexpr const char* Hyperbolic_octagon_translation_inverse = "Returns the inverse of the current translation.
 
 Returns: Hyperbolic_octagon_translation";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_alpha = "Returns the coefficient $\\alpha$ of the translation.
+constexpr const char* Hyperbolic_octagon_translation_alpha = "Returns the coefficient $\\alpha$ of the translation.
 
 The first element of the returned pair contains the real part of $\\alpha$ .
 The second element contains its imaginary part.
 
 Returns: std::pair< FT , FT >";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_beta = "Returns the coefficient $\\beta$ of the translation.
+constexpr const char* Hyperbolic_octagon_translation_beta = "Returns the coefficient $\\beta$ of the translation.
 
 The first element of the returned pair contains the real part of $\\beta$ . The
 second element contains its imaginary part.
 
 Returns: std::pair< FT , FT >";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_is_identity = "Returns true if the current translation represents the identity element of the group $\\mathcal G$ .
+constexpr const char* Hyperbolic_octagon_translation_is_identity = "Returns true if the current translation represents the identity element of the group $\\mathcal G$ .
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_to_string = "Returns a string representation of the translation, containing its Word_letter s.
+constexpr const char* Hyperbolic_octagon_translation_to_string = "Returns a string representation of the translation, containing its Word_letter s.
 
 This function is given as utility for printing/debugging purposes. For
 example, for the translation $abcd$ , this function returns 0527 , and for the
 identity it returns _ .
 
 Returns: std::string";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_generator = "Return the generator wl of the group $\\mathcal G$ .
+constexpr const char* Hyperbolic_octagon_translation_generator = "Return the generator wl of the group $\\mathcal G$ .
 
 Note that wl can be an element of the enumeration set Generator . The calls
 generator(0) and generator(A) will both return the translation $a$ .
@@ -148,7 +148,7 @@ Parameters
 wl : const Word_letter
 
 Returns: Self";
-constexpr const char* CGAL_Hyperbolic_octagon_translation_generators = "Returns the set of generators of $\\mathcal G$ and their inverses in a std::vector .
+constexpr const char* Hyperbolic_octagon_translation_generators = "Returns the set of generators of $\\mathcal G$ and their inverses in a std::vector .
 
 The generators are given in the order: $ [a, \\overline{b}, c, \\overline{d},
 \\overline{a}, b, \\overline{c}, d].$
@@ -158,19 +158,19 @@ Parameters
 gens : std::vector< Hyperbolic_octagon_translation < FT > > &";
 
 // CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2__class__ = "The class Periodic_4_hyperbolic_Delaunay_triangulation_2 enables the construction and handling of Delaunay triangulations of the Bolza surface.";
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2__class__ = "The class Periodic_4_hyperbolic_Delaunay_triangulation_2 enables the construction and handling of Delaunay triangulations of the Bolza surface.";
 
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_Periodic_4_hyperbolic_Delaunay_triangulation_2 = "Default constructor with an optional parameter for the geometric traits object.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_Periodic_4_hyperbolic_Delaunay_triangulation_2 = "Default constructor with an optional parameter for the geometric traits object.
 
 Parameters
 ----------
 gt : const Geom_traits &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_Periodic_4_hyperbolic_Delaunay_triangulation_2_1 = "Copy constructor.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_Periodic_4_hyperbolic_Delaunay_triangulation_2_1 = "Copy constructor.
 
 Parameters
 ----------
 tr : const Periodic_4_hyperbolic_Delaunay_triangulation_2 &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_Periodic_4_hyperbolic_Delaunay_triangulation_2_2 = "Point range constructor.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_Periodic_4_hyperbolic_Delaunay_triangulation_2_2 = "Point range constructor.
 
 Initializes a triangulation and then inserts the points in the iterator range
 [first, last) .
@@ -180,8 +180,8 @@ Parameters
 first : InputIterator
 last : InputIterator
 gt : const Geom_traits &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_clear = "Deletes all faces and vertices of the triangulation, and re-initializes the triangulation data structure with the set of dummy points.";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_find_conflicts = "Computes the conflict zone induced by p .
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_clear = "Deletes all faces and vertices of the triangulation, and re-initializes the triangulation data structure with the set of dummy points.";
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_find_conflicts = "Computes the conflict zone induced by p .
 
 The output iterator it contains all faces in conflict with p . The optional
 parameters start and ltr , if given, must be such that start translated by ltr
@@ -193,17 +193,17 @@ p : const Point &
 it : OutputFaceIterator
 start : Face_handle
 ltr : Hyperbolic_translation";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_is_dummy_vertex = "Checks if the vertex vh is part of the set of vertices storing dummy points.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_is_dummy_vertex = "Checks if the vertex vh is part of the set of vertices storing dummy points.
 
 Parameters
 ----------
 vh : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_number_of_dummy_points = "Returns the number of dummy points currently existing in the triangulation.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_number_of_dummy_points = "Returns the number of dummy points currently existing in the triangulation.
 
 Returns: int";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_is_valid = "Checks the combinatorial validity of the triangulation, and also the validity of its geometric embedding.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_is_valid = "Checks the combinatorial validity of the triangulation, and also the validity of its geometric embedding.
 
 In more detail, this function verifies that: The underlying triangulation data
 structure, is valid (see the function is_valid ()) Each face of the
@@ -217,7 +217,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_insert = "Inserts the point p in the triangulation.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_insert = "Inserts the point p in the triangulation.
 
 The face start , if given, is used as a starting place for the location of the
 point. Note that this function does not remove unnecessary dummy points. The
@@ -230,7 +230,7 @@ p : const Point &
 start : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_insert_1 = "Inserts all points in the input iterator into the triangulation.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_insert_1 = "Inserts all points in the input iterator into the triangulation.
 
 Note that this function by default tries to remove unnecessary dummy points at
 the end of the insertion process. This behavior is controlled by the optional
@@ -244,7 +244,7 @@ last : InputIterator
 flag_try_to_remove_dummy_vertices : const bool
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_remove = "Removes the vertex v from the triangulation.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_remove = "Removes the vertex v from the triangulation.
 
 Note that v is removed from the triangulation only if the resulting
 triangulation remains a simplicial complex. The function returns true if the
@@ -255,7 +255,7 @@ Parameters
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_remove_1 = "Removes the vertices in the iterator range [first, last) from the triangulation.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_remove_1 = "Removes the vertices in the iterator range [first, last) from the triangulation.
 
 all vertices in [first, last) are vertices of the triangulation.
 
@@ -263,13 +263,13 @@ Parameters
 ----------
 first : VertexRemoveIterator
 last : VertexRemoveIterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_try_to_remove_dummy_vertices = "Tries to remove the dummy points from the triangulation one by one.
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_try_to_remove_dummy_vertices = "Tries to remove the dummy points from the triangulation one by one.
 
 Returns the number of dummy points that could not be removed and are still
 present in the triangulation.
 
 Returns: int";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_dual = "Returns the dual of face f , i.e., the hyperbolic center of the disk defined by the vertices of f .
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_dual = "Returns the dual of face f , i.e., the hyperbolic center of the disk defined by the vertices of f .
 
 If the optional parameter nbtr is given, then this function returns the dual
 of the periodic triangle (f, nbtr) .
@@ -280,7 +280,7 @@ f : Face_handle
 nbtr : Hyperbolic_translation
 
 Returns: Voronoi_point";
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_2_dual_1 = "Returns the hyperbolic segment that is dual to the edge e .
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_2_dual_1 = "Returns the hyperbolic segment that is dual to the edge e .
 
 Parameters
 ----------
@@ -289,75 +289,75 @@ e : const Edge &
 Returns: Segment";
 
 // CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2
-constexpr const char* CGAL_Periodic_4_hyperbolic_Delaunay_triangulation_traits_2__class__ = "The class Periodic_4_hyperbolic_Delaunay_triangulation_traits_2 is the default traits class for the class Periodic_4_hyperbolic_Delaunay_triangulation_2 .";
+constexpr const char* Periodic_4_hyperbolic_Delaunay_triangulation_traits_2__class__ = "The class Periodic_4_hyperbolic_Delaunay_triangulation_traits_2 is the default traits class for the class Periodic_4_hyperbolic_Delaunay_triangulation_2 .";
 
 
 // CGAL::Periodic_4_hyperbolic_triangulation_2
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2__class__ = "The class Periodic_4_hyperbolic_triangulation_2 offers base functionalities needed by Periodic_4_hyperbolic_Delaunay_triangulation_2 .";
+constexpr const char* Periodic_4_hyperbolic_triangulation_2__class__ = "The class Periodic_4_hyperbolic_triangulation_2 offers base functionalities needed by Periodic_4_hyperbolic_Delaunay_triangulation_2 .";
 
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Point = "Represents a point in the hyperbolic plane.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Point = "Represents a point in the hyperbolic plane.
 
 Note that for Delaunay triangulations of the Bolza surface, all points must
 lie inside the original hyperbolic octagon.
 
 Returns: Triangulation_data_structure::Vertex::Point";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Hyperbolic_segment = "Represents a hyperbolic segment in the hyperbolic plane.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Hyperbolic_segment = "Represents a hyperbolic segment in the hyperbolic plane.
 
 Returns: Geometric_traits::Hyperbolic_segment_2";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Hyperbolic_triangle = "Represents a triangle contained in the Poincaré disk.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Hyperbolic_triangle = "Represents a triangle contained in the Poincaré disk.
 
 Returns: Geometric_traits::Hyperbolic_triangle_2";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Periodic_point = "Represents a periodic point, i.e., a pair of a point in the original octagon and a hyperbolic translation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Periodic_point = "Represents a periodic point, i.e., a pair of a point in the original octagon and a hyperbolic translation.
 
 Returns: std::pair< Point , Hyperbolic_translation >";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Periodic_segment = "Represents a periodic segment, defined by two periodic points.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Periodic_segment = "Represents a periodic segment, defined by two periodic points.
 
 Returns: std::array< std::pair< Point , Hyperbolic_translation >, 2 >";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Periodic_triangle = "Represents a periodic triangle, defined by three periodic points.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Periodic_triangle = "Represents a periodic triangle, defined by three periodic points.
 
 Returns: std::array< std::pair< Point , Hyperbolic_translation >, 3 >";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Periodic_4_hyperbolic_triangulation_2 = "Default constructor, with an optional parameter for the geometric traits object.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Periodic_4_hyperbolic_triangulation_2 = "Default constructor, with an optional parameter for the geometric traits object.
 
 Parameters
 ----------
 gt : const Geometric_traits &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_Periodic_4_hyperbolic_triangulation_2_1 = "Copy constructor.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_Periodic_4_hyperbolic_triangulation_2_1 = "Copy constructor.
 
 Parameters
 ----------
 tr : const Periodic_4_hyperbolic_triangulation_2 &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
 
 Parameters
 ----------
 tr : Periodic_4_hyperbolic_triangulation_2
 
 Returns: Periodic_4_hyperbolic_triangulation_2 &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_swap = "The triangulation is swapped with tr .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_swap = "The triangulation is swapped with tr .
 
 Parameters
 ----------
 tr : Periodic_4_hyperbolic_triangulation_2 &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_clear = "Deletes all faces and vertices of the triangulation.";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_geom_traits = "Returns a const reference to the geometric traits object.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_clear = "Deletes all faces and vertices of the triangulation.";
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_geom_traits = "Returns a const reference to the geometric traits object.
 
 Returns: const Geometric_traits &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_tds = "Returns a const reference to the triangulation data structure.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_tds = "Returns a const reference to the triangulation data structure.
 
 Returns: const Triangulation_data_structure &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_tds_1 = "Returns a reference to the triangulation data structure.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_tds_1 = "Returns a reference to the triangulation data structure.
 
 Returns: Triangulation_data_structure &";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_number_of_vertices = "Returns the number of vertices in the triangulation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_number_of_vertices = "Returns the number of vertices in the triangulation.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_number_of_edges = "Returns the number of edges in the triangulation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_number_of_edges = "Returns the number of edges in the triangulation.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_number_of_faces = "Returns the number of faces in the triangulation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_number_of_faces = "Returns the number of faces in the triangulation.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_point = "Returns the periodic point given by the i -th vertex of face f , that is the point in the original domain and the translation of the vertex in f .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_point = "Returns the periodic point given by the i -th vertex of face f , that is the point in the original domain and the translation of the vertex in f .
 
 $0 \\leq i \\leq 2$
 
@@ -367,7 +367,7 @@ f : const Face_handle
 i : int
 
 Returns: Periodic_point";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_segment = "Returns the periodic segment formed by the two point-translation pairs (p1, tr1) and (p2, tr2) .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_segment = "Returns the periodic segment formed by the two point-translation pairs (p1, tr1) and (p2, tr2) .
 
 Parameters
 ----------
@@ -377,7 +377,7 @@ tr1 : const Hyperbolic_translation &
 tr2 : const Hyperbolic_translation &
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_segment_1 = "Returns the periodic segment formed by the two point-translation pairs (p1, Id) and (p2, Id) , where Id is the identity translation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_segment_1 = "Returns the periodic segment formed by the two point-translation pairs (p1, Id) and (p2, Id) , where Id is the identity translation.
 
 Parameters
 ----------
@@ -385,7 +385,7 @@ p1 : const Point &
 p2 : const Point &
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_segment_2 = "Returns the periodic segment formed by the endpoints of edge (f,i,j) .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_segment_2 = "Returns the periodic segment formed by the endpoints of edge (f,i,j) .
 
 $ 0 \\leq i,j \\leq 2, \\qquad i \\neq j $
 
@@ -396,7 +396,7 @@ i : int
 j : int
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_segment_3 = "Returns the periodic segment formed by the endpoints of edge e .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_segment_3 = "Returns the periodic segment formed by the endpoints of edge e .
 
 Note that the translations in the resulting periodic segment are determined by
 e.first .
@@ -406,7 +406,7 @@ Parameters
 e : const Edge &
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_segment_4 = "Returns the periodic segment formed by the endpoints of edge e translated by tr .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_segment_4 = "Returns the periodic segment formed by the endpoints of edge e translated by tr .
 
 Note that the translations in the resulting segment are determined by the
 translations in e.first , multiplied on the left by tr .
@@ -417,14 +417,14 @@ e : const Edge &
 tr : const Hyperbolic_translation &
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_triangle = "Returns the periodic triangle formed by the pairs of points and translations corresponding to each vertex of f .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_triangle = "Returns the periodic triangle formed by the pairs of points and translations corresponding to each vertex of f .
 
 Parameters
 ----------
 f : const Face &
 
 Returns: Periodic_triangle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_periodic_triangle_1 = "Returns the periodic triangle formed by the pairs of points and translations corresponding to each vertex of f , translated by tr .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_periodic_triangle_1 = "Returns the periodic triangle formed by the pairs of points and translations corresponding to each vertex of f , translated by tr .
 
 Parameters
 ----------
@@ -432,14 +432,14 @@ f : const Face &
 tr : const Hyperbolic_translation &
 
 Returns: Periodic_triangle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_point = "Converts the periodic point pp into a point in the hyperbolic plane by applying pp.second to pp.first .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_point = "Converts the periodic point pp into a point in the hyperbolic plane by applying pp.second to pp.first .
 
 Parameters
 ----------
 pp : const Periodic_point &
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment = "Constructs the hyperbolic segment formed by the endpoints of edge (fh, idx) .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment = "Constructs the hyperbolic segment formed by the endpoints of edge (fh, idx) .
 
 $ 0 \\leq idx \\leq 2 $
 
@@ -449,7 +449,7 @@ fh : const Face_handle &
 idx : int
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment_1 = "Returns the hyperbolic segment with endpoints p1 and p2 .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment_1 = "Returns the hyperbolic segment with endpoints p1 and p2 .
 
 Parameters
 ----------
@@ -457,35 +457,35 @@ p1 : const Point &
 p2 : const Point &
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment_2 = "Returns the hyperbolic segment formed by the endpoints of e .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment_2 = "Returns the hyperbolic segment formed by the endpoints of e .
 
 Parameters
 ----------
 e : const pair< Face_handle , int > &
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment_3 = "Returns the hyperbolic segment formed by the endpoints of ps .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_hyperbolic_segment_3 = "Returns the hyperbolic segment formed by the endpoints of ps .
 
 Parameters
 ----------
 ps : const Periodic_segment &
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_triangle = "Returns the triangle formed by the vertices of fh .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_triangle = "Returns the triangle formed by the vertices of fh .
 
 Parameters
 ----------
 fh : const Face_handle &
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_construct_triangle_1 = "Returns the triangle formed by the vertices of pt .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_construct_triangle_1 = "Returns the triangle formed by the vertices of pt .
 
 Parameters
 ----------
 pt : const Periodic_triangle &
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_hyperbolic_periodic_locate = "Returns the face rf for which the periodic triangle (rf, lo) contains the query point p .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_hyperbolic_periodic_locate = "Returns the face rf for which the periodic triangle (rf, lo) contains the query point p .
 
 The parameter start , if provided, is used as a starting point for the
 location.
@@ -497,7 +497,7 @@ lo : Hyperbolic_translation &
 start : const Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_hyperbolic_periodic_locate_1 = "Same as above.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_hyperbolic_periodic_locate_1 = "Same as above.
 
 The value of the variable lt indicates whether p has been located inside the
 hyperbolic triangle, on one of its sides, or on one of its vertices. If p is
@@ -514,7 +514,7 @@ lo : Hyperbolic_translation &
 start : const Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_hyperbolic_locate = "Returns the canonical representative of the face that contains the query point p .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_hyperbolic_locate = "Returns the canonical representative of the face that contains the query point p .
 
 The parameter start , if provided, is used as a starting point for the
 location.
@@ -525,7 +525,7 @@ p : const Point &
 start : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_hyperbolic_locate_1 = "Same as above.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_hyperbolic_locate_1 = "Same as above.
 
 The value of the variable lt indicates whether p has been located inside the
 canonical representative, on one of its sides, or on one of its vertices. If p
@@ -541,7 +541,7 @@ li : int &
 start : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_orientation = "Returns the Orientation of the points p1, p2, p3 .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_orientation = "Returns the Orientation of the points p1, p2, p3 .
 
 CGAL::orientation()
 
@@ -552,7 +552,7 @@ p2 : const Point &
 p3 : const Point &
 
 Returns: Orientation";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_orientation_1 = "Returns the Orientation of the three periodic points (p1, tr1), (p2, tr2) and (p3, tr3) .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_orientation_1 = "Returns the Orientation of the three periodic points (p1, tr1), (p2, tr2) and (p3, tr3) .
 
 Parameters
 ----------
@@ -564,7 +564,7 @@ tr2 : const Hyperbolic_translation &
 tr3 : const Hyperbolic_translation &
 
 Returns: Orientation";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_side_of_oriented_circle = "Returns the Oriented_side on which q is located with respect to the circle defined by the points p1,p2,p3 .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_side_of_oriented_circle = "Returns the Oriented_side on which q is located with respect to the circle defined by the points p1,p2,p3 .
 
 CGAL::side_of_oriented_circle()
 
@@ -576,7 +576,7 @@ p3 : const Point &
 q : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_side_of_oriented_circle_1 = "Returns the Oriented_side on which the periodic point (q, trq) is located with respect to the circle defined by the periodic points (p1, tr1), (p2, tr2) and (p3, tr3) .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_side_of_oriented_circle_1 = "Returns the Oriented_side on which the periodic point (q, trq) is located with respect to the circle defined by the periodic points (p1, tr1), (p2, tr2) and (p3, tr3) .
 
 Parameters
 ----------
@@ -590,14 +590,14 @@ tr3 : const Hyperbolic_translation &
 trq : const Hyperbolic_translation &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_is_vertex = "Tests whether v is a vertex of the triangulation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_is_vertex = "Tests whether v is a vertex of the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_is_edge = "Tests whether (u, v) is an edge of the triangulation.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_is_edge = "Tests whether (u, v) is an edge of the triangulation.
 
 If the edge is found, then it is the i -th edge of fh .
 
@@ -609,7 +609,7 @@ fh : Face_handle &
 i : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_is_face = "Tests whether there exists a face in the triangulation with vertices u, v and w .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_is_face = "Tests whether there exists a face in the triangulation with vertices u, v and w .
 
 If the face is found, then it is returned as fh .
 
@@ -621,7 +621,7 @@ w : Vertex_handle
 fh : Face_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_has_vertex = "Tests whether face f has v as a vertex.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_has_vertex = "Tests whether face f has v as a vertex.
 
 If the answer is true , then i contains the index of v in f .
 
@@ -632,38 +632,38 @@ v : const Vertex_handle
 i : const int
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_vertices_begin = "Starts at an arbitrary vertex.
 
 Iterates over all the vertices in the triangulation.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_vertices_end = "Past-the-end iterator.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_vertices_end = "Past-the-end iterator.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_edges_begin = "Starts at an arbitrary edge.
 
 Iterates over all the edges in the triangulation.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_edges_end = "Past-the-end iterator.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_edges_end = "Past-the-end iterator.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_faces_begin = "Starts at an arbitrary face.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_faces_begin = "Starts at an arbitrary face.
 
 Iterates over all the faces of the triangulation.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_faces_end = "Past-the-end iterator.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_faces_end = "Past-the-end iterator.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_adjacent_vertices = "Starts at an arbitrary vertex incident to v .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_adjacent_vertices = "Starts at an arbitrary vertex incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_adjacent_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_adjacent_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
 
 Parameters
 ----------
@@ -671,14 +671,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_incident_edges = "Starts at an arbitrary edge incident to v .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_incident_edges = "Starts at an arbitrary edge incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
 
 Parameters
 ----------
@@ -686,14 +686,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_incident_faces = "Starts at an arbitrary face incident to v .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_incident_faces = "Starts at an arbitrary face incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_incident_faces_1 = "Starts at face f .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_incident_faces_1 = "Starts at face f .
 
 Parameters
 ----------
@@ -701,7 +701,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_incident_faces_2 = "Copies the faces incident to v into the output iterator faces .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_incident_faces_2 = "Copies the faces incident to v into the output iterator faces .
 
 Parameters
 ----------
@@ -709,7 +709,7 @@ v : Vertex_handle
 faces : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_incident_edges_2 = "Copies the edges incident to v into the output iterator edges .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_incident_edges_2 = "Copies the edges incident to v into the output iterator edges .
 
 Parameters
 ----------
@@ -717,7 +717,7 @@ v : Vertex_handle
 edges : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_adjacent_vertices_2 = "Copies the vertices incident to v into the output iterator vertices .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_adjacent_vertices_2 = "Copies the vertices incident to v into the output iterator vertices .
 
 Parameters
 ----------
@@ -725,14 +725,14 @@ v : Vertex_handle
 vertices : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_degree = "Returns the degree of v , i.e., the number of edges incident to v .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_degree = "Returns the degree of v , i.e., the number of edges incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_mirror_index = "Returns the index of f in its i -th neighbor.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_mirror_index = "Returns the index of f in its i -th neighbor.
 
 Parameters
 ----------
@@ -740,7 +740,7 @@ f : Face_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_mirror_vertex = "Returns the vertex of the i -th neighbor of f that is opposite to f .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_mirror_vertex = "Returns the vertex of the i -th neighbor of f that is opposite to f .
 
 Parameters
 ----------
@@ -748,14 +748,14 @@ f : Face_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_mirror_edge = "Returns the same edge seen from the other adjacent face.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_mirror_edge = "Returns the same edge seen from the other adjacent face.
 
 Parameters
 ----------
 e : Edge
 
 Returns: Edge";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_neighbor_translation = "Returns the hyperbolic translation for which the i -th neighbor of fh is adjacent to (the canonical representative of) fh in the hyperbolic plane.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_neighbor_translation = "Returns the hyperbolic translation for which the i -th neighbor of fh is adjacent to (the canonical representative of) fh in the hyperbolic plane.
 
 Parameters
 ----------
@@ -763,14 +763,14 @@ fh : const Face_handle
 i : int
 
 Returns: Hyperbolic_translation";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_is_valid = "Checks the combinatorial validity of the triangulation, and also the validity of its geometric embedding.
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_is_valid = "Checks the combinatorial validity of the triangulation, and also the validity of its geometric embedding.
 
 Parameters
 ----------
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_2_is_valid_1 = "Checks the combinatorial validity of face f .
+constexpr const char* Periodic_4_hyperbolic_triangulation_2_is_valid_1 = "Checks the combinatorial validity of face f .
 
 Parameters
 ----------
@@ -780,10 +780,10 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Periodic_4_hyperbolic_triangulation_face_base_2
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_face_base_2__class__ = "The class Periodic_4_hyperbolic_triangulation_face_base_2 is the default model for the concept Periodic_4HyperbolicTriangulationFaceBase_2 .";
+constexpr const char* Periodic_4_hyperbolic_triangulation_face_base_2__class__ = "The class Periodic_4_hyperbolic_triangulation_face_base_2 is the default model for the concept Periodic_4HyperbolicTriangulationFaceBase_2 .";
 
 // CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2
-constexpr const char* CGAL_Periodic_4_hyperbolic_triangulation_vertex_base_2__class__ = "The class Periodic_4_hyperbolic_triangulation_vertex_base_2 is the default model for the concept Periodic_4HyperbolicTriangulationVertexBase_2 .";
+constexpr const char* Periodic_4_hyperbolic_triangulation_vertex_base_2__class__ = "The class Periodic_4_hyperbolic_triangulation_vertex_base_2 is the default model for the concept Periodic_4HyperbolicTriangulationVertexBase_2 .";
 
 constexpr const char* Periodic_4HyperbolicDelaunayTriangulationTraits_2_Compute_approximate_hyperbolic_diameter = "Must provide the function operator.
 

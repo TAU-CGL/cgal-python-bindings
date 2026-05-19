@@ -8,15 +8,15 @@ namespace docstrings {
 namespace Surface_mesher {
 
 // CGAL::Gray_level_image_3
-constexpr const char* CGAL_Gray_level_image_3__class__ = "A 3D gray image is a tri-dimensional array that associates a scalar value to each triple of integer $ (x, y, z)$ in the range of the image.";
+constexpr const char* Gray_level_image_3__class__ = "A 3D gray image is a tri-dimensional array that associates a scalar value to each triple of integer $ (x, y, z)$ in the range of the image.";
 
-constexpr const char* CGAL_Gray_level_image_3_FT = "the numerical type FT .
+constexpr const char* Gray_level_image_3_FT = "the numerical type FT .
 
 Returns: FT_";
-constexpr const char* CGAL_Gray_level_image_3_Point = "the point type.
+constexpr const char* Gray_level_image_3_Point = "the point type.
 
 Returns: Point_";
-constexpr const char* CGAL_Gray_level_image_3_Gray_level_image_3 = "filename is the path to a file of a type supported by ImageIO .
+constexpr const char* Gray_level_image_3_Gray_level_image_3 = "filename is the path to a file of a type supported by ImageIO .
 
 iso_value is an isovalue of the interpolation function $ f$ .
 
@@ -24,7 +24,7 @@ Parameters
 ----------
 filename : const char *
 iso_value : FT";
-constexpr const char* CGAL_Gray_level_image_3_operator = "Returns the sign of $ f(p)$ - iso_value .
+constexpr const char* Gray_level_image_3_operator = "Returns the sign of $ f(p)$ - iso_value .
 
 Parameters
 ----------
@@ -33,9 +33,9 @@ p : const Point &
 Returns: FT";
 
 // CGAL::Implicit_surface_3
-constexpr const char* CGAL_Implicit_surface_3__class__ = "The class Implicit_surface_3 implements a surface described as the zero level set of a function $ f : \\mathbb{R}^3 \\longrightarrow \\mathbb{R}$ .";
+constexpr const char* Implicit_surface_3__class__ = "The class Implicit_surface_3 implements a surface described as the zero level set of a function $ f : \\mathbb{R}^3 \\longrightarrow \\mathbb{R}$ .";
 
-constexpr const char* CGAL_Implicit_surface_3_Implicit_surface_3 = "f is the object of type Function that represents the implicit surface.
+constexpr const char* Implicit_surface_3_Implicit_surface_3 = "f is the object of type Function that represents the implicit surface.
 
 bounding_sphere is a bounding sphere of the implicit surface. The evaluation
 of f at the center c of this sphere must be negative: $ f(c)<0$ . error_bound
@@ -53,18 +53,18 @@ bounding_sphere : Sphere_3
 error_bound : FT";
 
 // CGAL::Surface_mesh_cell_base_3
-constexpr const char* CGAL_Surface_mesh_cell_base_3__class__ = "The class Surface_mesh_cell_base_3 is a model of the concept SurfaceMeshCellBase_3 .";
+constexpr const char* Surface_mesh_cell_base_3__class__ = "The class Surface_mesh_cell_base_3 is a model of the concept SurfaceMeshCellBase_3 .";
 
 // CGAL::Surface_mesh_complex_2_in_triangulation_3
-constexpr const char* CGAL_Surface_mesh_complex_2_in_triangulation_3__class__ = "The class Surface_mesh_complex_2_in_triangulation_3 implements a data structure to store the restricted Delaunay triangulation used by the surface mesh generator.";
+constexpr const char* Surface_mesh_complex_2_in_triangulation_3__class__ = "The class Surface_mesh_complex_2_in_triangulation_3 implements a data structure to store the restricted Delaunay triangulation used by the surface mesh generator.";
 
 // CGAL::Surface_mesh_default_criteria_3
-constexpr const char* CGAL_Surface_mesh_default_criteria_3__class__ = "The class Surface_mesh_default_criteria_3 implements the most commonly used combination of meshing criteria.";
+constexpr const char* Surface_mesh_default_criteria_3__class__ = "The class Surface_mesh_default_criteria_3 implements the most commonly used combination of meshing criteria.";
 
-constexpr const char* CGAL_Surface_mesh_default_criteria_3_FT = "The numerical type.
+constexpr const char* Surface_mesh_default_criteria_3_FT = "The numerical type.
 
 Returns: Tr::FT";
-constexpr const char* CGAL_Surface_mesh_default_criteria_3_Surface_mesh_default_criteria_3 = "Returns a Surface_mesh_default_criteria_3 with angle_bound , radius_bound , distance_bound as bounds for the minimum facet angle in degrees, the radius of the surface Delaunay balls and the center-center distances respectively.
+constexpr const char* Surface_mesh_default_criteria_3_Surface_mesh_default_criteria_3 = "Returns a Surface_mesh_default_criteria_3 with angle_bound , radius_bound , distance_bound as bounds for the minimum facet angle in degrees, the radius of the surface Delaunay balls and the center-center distances respectively.
 
 Parameters
 ----------
@@ -73,24 +73,24 @@ radius_bound : FT
 distance_bound : FT";
 
 // CGAL::Surface_mesh_default_triangulation_3
-constexpr const char* CGAL_Surface_mesh_default_triangulation_3__class__ = "The class Surface_mesh_default_triangulation_3 is a model of the concept SurfaceMeshTriangulation_3 , whose vertex base and cell base classes are models of the concepts SurfaceMeshVertexBase_3 and SurfaceMeshCellBase_3 respectively.";
+constexpr const char* Surface_mesh_default_triangulation_3__class__ = "The class Surface_mesh_default_triangulation_3 is a model of the concept SurfaceMeshTriangulation_3 , whose vertex base and cell base classes are models of the concepts SurfaceMeshVertexBase_3 and SurfaceMeshCellBase_3 respectively.";
 
-constexpr const char* CGAL_Surface_mesh_default_triangulation_3_Vertex = "the vertex type which is model of SurfaceMeshVertexBase_3 .
+constexpr const char* Surface_mesh_default_triangulation_3_Vertex = "the vertex type which is model of SurfaceMeshVertexBase_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_default_triangulation_3_Cell = "the cell type which is model of SurfaceMeshCellBase_3 .
+constexpr const char* Surface_mesh_default_triangulation_3_Cell = "the cell type which is model of SurfaceMeshCellBase_3 .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_traits_generator_3
-constexpr const char* CGAL_Surface_mesh_traits_generator_3__class__ = "The class Surface_mesh_traits_generator_3 provides a type type , that is a model of the concept SurfaceMeshTraits_3 for the surface type Surface .";
+constexpr const char* Surface_mesh_traits_generator_3__class__ = "The class Surface_mesh_traits_generator_3 provides a type type , that is a model of the concept SurfaceMeshTraits_3 for the surface type Surface .";
 
-constexpr const char* CGAL_Surface_mesh_traits_generator_3_type = "A model of the concept SurfaceMeshTraits_3 .
+constexpr const char* Surface_mesh_traits_generator_3_type = "A model of the concept SurfaceMeshTraits_3 .
 
 Returns: unspecified_type";
 
 // CGAL::Surface_mesh_vertex_base_3
-constexpr const char* CGAL_Surface_mesh_vertex_base_3__class__ = "The class Surface_mesh_vertex_base_3 is a model of the concept SurfaceMeshVertexBase_3 .";
+constexpr const char* Surface_mesh_vertex_base_3__class__ = "The class Surface_mesh_vertex_base_3 is a model of the concept SurfaceMeshVertexBase_3 .";
 
 // ImplicitFunction
 constexpr const char* ImplicitFunction__class__ = "The concept ImplicitFunction describes a function object whose operator() computes the values of a function $ f : \\mathbb{R}^3 \\longrightarrow \\mathbb{R}$ .";
@@ -804,7 +804,7 @@ constexpr const char* SurfaceMeshVertexBase_3_cached_number_of_components = "Thi
 
 Returns: int";
 
-constexpr const char* CGAL_output_surface_facets_to_polyhedron = "
+constexpr const char* output_surface_facets_to_polyhedron = "
 Deprecated Gets reconstructed surface out of a
 SurfaceMeshComplex_2InTriangulation_3 object. This variant exports the surface
 as a polyhedron. It requires the surface to be manifold. For this purpose, you

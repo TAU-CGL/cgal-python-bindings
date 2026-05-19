@@ -1775,40 +1775,40 @@ constexpr const char* AosXMonotoneTraits_2_Merge_2 = "models the concept AosTrai
 
 Returns: unspecified_type";
 
-constexpr const char* CGAL_Aos_observer_Arrangement_2 = "the type of the associated arrangement.
+constexpr const char* Aos_observer_Arrangement_2 = "the type of the associated arrangement.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Aos_observer_Point_2 = "the point type.
+constexpr const char* Aos_observer_Point_2 = "the point type.
 
 Returns: Arrangement_2::Point_2";
-constexpr const char* CGAL_Aos_observer_X_monotone_curve_2 = "the $x$ -monotone curve type.
+constexpr const char* Aos_observer_X_monotone_curve_2 = "the $x$ -monotone curve type.
 
 Returns: Arrangement_2::X_monotone_curve_2";
-constexpr const char* CGAL_Aos_observer_Vertex_handle = "the type of a handle to an arrangement vertex.
+constexpr const char* Aos_observer_Vertex_handle = "the type of a handle to an arrangement vertex.
 
 Returns: Arrangement_2::Vertex_handle";
-constexpr const char* CGAL_Aos_observer_Halfedge_handle = "the type of a handle to an arrangement halfedge.
+constexpr const char* Aos_observer_Halfedge_handle = "the type of a handle to an arrangement halfedge.
 
 Returns: Arrangement_2::Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_Face_handle = "the type of a handle to an arrangement face.
+constexpr const char* Aos_observer_Face_handle = "the type of a handle to an arrangement face.
 
 Returns: Arrangement_2::Face_handle";
-constexpr const char* CGAL_Aos_observer_Ccb_halfedge_circulator = "represents a connected component of the boundary (CCB), either an outer boundary or an inner boundary (the latter is also referred to as a hole).
+constexpr const char* Aos_observer_Ccb_halfedge_circulator = "represents a connected component of the boundary (CCB), either an outer boundary or an inner boundary (the latter is also referred to as a hole).
 
 Returns: Arrangement_2::Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_Aos_observer = "constructs an observer that is unattached to any arrangement instance.";
-constexpr const char* CGAL_Aos_observer_Aos_observer_1 = "constructs an observer and attaches it to the given arrangement arr .
+constexpr const char* Aos_observer_Aos_observer = "constructs an observer that is unattached to any arrangement instance.";
+constexpr const char* Aos_observer_Aos_observer_1 = "constructs an observer and attaches it to the given arrangement arr .
 
 Parameters
 ----------
 arr : Arrangement_2 &";
-constexpr const char* CGAL_Aos_observer_attach = "attaches the observer to the given arrangement arr .
+constexpr const char* Aos_observer_attach = "attaches the observer to the given arrangement arr .
 
 Parameters
 ----------
 arr : Arrangement_2 &";
-constexpr const char* CGAL_Aos_observer_detach = "detaches the observer from its arrangement.";
-constexpr const char* CGAL_Aos_observer_before_assign = "issued just before the attached arrangement is assigned with the contents of another arrangement.
+constexpr const char* Aos_observer_detach = "detaches the observer from its arrangement.";
+constexpr const char* Aos_observer_before_assign = "issued just before the attached arrangement is assigned with the contents of another arrangement.
 
 arr The other arrangement. Notice that the arrangement type is the type used
 to instantiate the observer, which is conveniently defined as
@@ -1817,20 +1817,20 @@ Arrangement_2::Base_aos .
 Parameters
 ----------
 arr : const typename Arrangement_2::Base_aos &";
-constexpr const char* CGAL_Aos_observer_after_assign = "issued immediately after the attached arrangement has been assigned with the contents of another arrangement.";
-constexpr const char* CGAL_Aos_observer_before_clear = "issued just before the attached arrangement is cleared.";
-constexpr const char* CGAL_Aos_observer_after_clear = "issued immediately after the attached arrangement has been cleared, so it now consists only of a the unbounded face uf .
+constexpr const char* Aos_observer_after_assign = "issued immediately after the attached arrangement has been assigned with the contents of another arrangement.";
+constexpr const char* Aos_observer_before_clear = "issued just before the attached arrangement is cleared.";
+constexpr const char* Aos_observer_after_clear = "issued immediately after the attached arrangement has been cleared, so it now consists only of a the unbounded face uf .
 
 Parameters
 ----------
 uf : Face_handle";
-constexpr const char* CGAL_Aos_observer_before_global_change = "issued just before a global function starts to modify the attached arrangement.
+constexpr const char* Aos_observer_before_global_change = "issued just before a global function starts to modify the attached arrangement.
 
 It is guaranteed that no queries (especially no point-location queries) are
 issued until the termination of the global function is indicated by
 after_global_change() .";
-constexpr const char* CGAL_Aos_observer_after_global_change = "issued immediately after a global function has stopped modifying the attached arrangement.";
-constexpr const char* CGAL_Aos_observer_before_attach = "issued just before the observer is attached to the arrangement instance arr .
+constexpr const char* Aos_observer_after_global_change = "issued immediately after a global function has stopped modifying the attached arrangement.";
+constexpr const char* Aos_observer_before_attach = "issued just before the observer is attached to the arrangement instance arr .
 
 arr The arrangement that is about to attach the observer. Notice that the
 arrangement type is the type used to instantiate the observer, which is
@@ -1839,15 +1839,15 @@ conveniently defined as Arrangement_2::Base_aos .
 Parameters
 ----------
 arr : const typename Arrangement_2::Base_aos &";
-constexpr const char* CGAL_Aos_observer_after_attach = "issued immediately after the observer has been attached to an arrangement instance.";
-constexpr const char* CGAL_Aos_observer_before_detach = "issued just before the observer is detached from its arrangement instance.";
-constexpr const char* CGAL_Aos_observer_after_detach = "issued immediately after the observer has been detached from its arrangement instance.";
-constexpr const char* CGAL_Aos_observer_before_create_vertex = "issued just before a new vertex that corresponds to the point p is created.
+constexpr const char* Aos_observer_after_attach = "issued immediately after the observer has been attached to an arrangement instance.";
+constexpr const char* Aos_observer_before_detach = "issued just before the observer is detached from its arrangement instance.";
+constexpr const char* Aos_observer_after_detach = "issued immediately after the observer has been detached from its arrangement instance.";
+constexpr const char* Aos_observer_before_create_vertex = "issued just before a new vertex that corresponds to the point p is created.
 
 Parameters
 ----------
 p : const Point_2 &";
-constexpr const char* CGAL_Aos_observer_after_create_vertex = "issued immediately after a new vertex v has been created.
+constexpr const char* Aos_observer_after_create_vertex = "issued immediately after a new vertex v has been created.
 
 Note that the vertex still has no incident edges and is not connected to any
 other vertex.
@@ -1855,7 +1855,7 @@ other vertex.
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_before_create_boundary_vertex = "issued just before a new vertex at infinity is created, cv is the curve incident to the surface boundary, ind is the relevant curve-end, ps_x is the boundary condition of the vertex in $x$ and ps_y is the boundary condition of the vertex in $y$ .
+constexpr const char* Aos_observer_before_create_boundary_vertex = "issued just before a new vertex at infinity is created, cv is the curve incident to the surface boundary, ind is the relevant curve-end, ps_x is the boundary condition of the vertex in $x$ and ps_y is the boundary condition of the vertex in $y$ .
 
 Parameters
 ----------
@@ -1863,7 +1863,7 @@ cv : const X_monotone_curve_2 &
 ind : Arr_curve_end
 ps_x : Arr_parameter_space
 ps_y : Arr_parameter_space";
-constexpr const char* CGAL_Aos_observer_after_create_boundary_vertex = "issued immediately after a new vertex v has been created.
+constexpr const char* Aos_observer_after_create_boundary_vertex = "issued immediately after a new vertex v has been created.
 
 Note that the vertex still has no incident edges and is not connected to any
 other vertex.
@@ -1871,14 +1871,14 @@ other vertex.
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_before_create_edge = "issued just before a new edge that corresponds to the $x$ -monotone curve c and connects the vertices v1 and v2 is created.
+constexpr const char* Aos_observer_before_create_edge = "issued just before a new edge that corresponds to the $x$ -monotone curve c and connects the vertices v1 and v2 is created.
 
 Parameters
 ----------
 c : const X_monotone_curve_2 &
 v1 : Vertex_handle
 v2 : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_after_create_edge = "issued immediately after a new edge e has been created.
+constexpr const char* Aos_observer_after_create_edge = "issued immediately after a new edge e has been created.
 
 The halfedge that is sent to this function is always directed from v1 to v2
 (see before_create_edge() ).
@@ -1886,29 +1886,29 @@ The halfedge that is sent to this function is always directed from v1 to v2
 Parameters
 ----------
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_before_modify_vertex = "issued just before a vertex v is modified to be associated with the point p .
+constexpr const char* Aos_observer_before_modify_vertex = "issued just before a vertex v is modified to be associated with the point p .
 
 Parameters
 ----------
 v : Vertex_handle
 p : const Point_2 &";
-constexpr const char* CGAL_Aos_observer_after_modify_vertex = "issued immediately after an existing vertex v has been modified.
+constexpr const char* Aos_observer_after_modify_vertex = "issued immediately after an existing vertex v has been modified.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_before_modify_edge = "issued just before an edge e is modified to be associated with the $x$ -monotone curve c .
+constexpr const char* Aos_observer_before_modify_edge = "issued just before an edge e is modified to be associated with the $x$ -monotone curve c .
 
 Parameters
 ----------
 e : Halfedge_handle
 c : const X_monotone_curve_2 &";
-constexpr const char* CGAL_Aos_observer_after_modify_edge = "issued immediately after an existing edge e has been modified.
+constexpr const char* Aos_observer_after_modify_edge = "issued immediately after an existing edge e has been modified.
 
 Parameters
 ----------
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_before_split_edge = "issued just before an edge e is split into two edges that should be associated with the $x$ -monotone curves c1 and c2 .
+constexpr const char* Aos_observer_before_split_edge = "issued just before an edge e is split into two edges that should be associated with the $x$ -monotone curves c1 and c2 .
 
 The vertex v corresponds to the split point, and will be used to separate the
 two resulting edges.
@@ -1919,13 +1919,13 @@ e : Halfedge_handle
 v : Vertex_handle
 c1 : const X_monotone_curve_2 &
 c2 : const X_monotone_curve_2 &";
-constexpr const char* CGAL_Aos_observer_after_split_edge = "issued immediately after an existing edge has been split into the two given edges e1 and e2 .
+constexpr const char* Aos_observer_after_split_edge = "issued immediately after an existing edge has been split into the two given edges e1 and e2 .
 
 Parameters
 ----------
 e1 : Halfedge_handle
 e2 : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_before_split_fictitious_edge = "issued just before a fictitious edge e is split into two.
+constexpr const char* Aos_observer_before_split_fictitious_edge = "issued just before a fictitious edge e is split into two.
 
 The vertex at infinity v corresponds to the split point, and will be used to
 separate the two resulting edges.
@@ -1934,19 +1934,19 @@ Parameters
 ----------
 e : Halfedge_handle
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_after_split_fictitious_edge = "issued immediately after an existing fictitious edge has been split into the two given fictitious edges e1 and e2 .
+constexpr const char* Aos_observer_after_split_fictitious_edge = "issued immediately after an existing fictitious edge has been split into the two given fictitious edges e1 and e2 .
 
 Parameters
 ----------
 e1 : Halfedge_handle
 e2 : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_before_split_face = "issued just before a face f is split into two, as a result of the insertion of the edge e into the arrangement.
+constexpr const char* Aos_observer_before_split_face = "issued just before a face f is split into two, as a result of the insertion of the edge e into the arrangement.
 
 Parameters
 ----------
 f : Face_handle
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_split_face = "issued immediately after the existing face f1 has been split, such that a portion of it now forms a new face f2 .
+constexpr const char* Aos_observer_after_split_face = "issued immediately after the existing face f1 has been split, such that a portion of it now forms a new face f2 .
 
 The flag is_hole designates whether f2 forms a hole (an inner CCB) inside f1 .
 
@@ -1955,107 +1955,107 @@ Parameters
 f1 : Face_handle
 f2 : Face_handle
 is_hole : bool";
-constexpr const char* CGAL_Aos_observer_before_split_outer_ccb = "issued just before outer CCB h inside a face f is split into two, as a result of the removal of the edge e from the arrangement.
+constexpr const char* Aos_observer_before_split_outer_ccb = "issued just before outer CCB h inside a face f is split into two, as a result of the removal of the edge e from the arrangement.
 
 Parameters
 ----------
 f : Face_handle
 h : Ccb_halfedge_circulator
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_split_outer_ccb = "issued immediately after an outer CCB of the face f has been split, resulting in the two holes h1 and h2 .
+constexpr const char* Aos_observer_after_split_outer_ccb = "issued immediately after an outer CCB of the face f has been split, resulting in the two holes h1 and h2 .
 
 Parameters
 ----------
 f : Face_handle
 h1 : Ccb_halfedge_circulator
 h2 : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_split_inner_ccb = "issued just before an inner CCB h inside a face f is split into two, as a result of the removal of the edge e from the arrangement.
+constexpr const char* Aos_observer_before_split_inner_ccb = "issued just before an inner CCB h inside a face f is split into two, as a result of the removal of the edge e from the arrangement.
 
 Parameters
 ----------
 f : Face_handle
 h : Ccb_halfedge_circulator
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_split_inner_ccb = "issued immediately after an inner CCB of the face f has been split, resulting in the two inner CCBs (holes) h1 and h2 .
+constexpr const char* Aos_observer_after_split_inner_ccb = "issued immediately after an inner CCB of the face f has been split, resulting in the two inner CCBs (holes) h1 and h2 .
 
 Parameters
 ----------
 f : Face_handle
 h1 : Ccb_halfedge_circulator
 h2 : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_add_outer_ccb = "issued just before the edge e is inserted as a new outer CCB inside the face f .
+constexpr const char* Aos_observer_before_add_outer_ccb = "issued just before the edge e is inserted as a new outer CCB inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_add_outer_ccb = "issued immediately after a new outer ccb h has been created.
+constexpr const char* Aos_observer_after_add_outer_ccb = "issued immediately after a new outer ccb h has been created.
 
 The outer ccb always consists of a single pair of twin halfedges.
 
 Parameters
 ----------
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_add_inner_ccb = "issued just before the edge e is inserted as a new inner CCB inside the face f .
+constexpr const char* Aos_observer_before_add_inner_ccb = "issued just before the edge e is inserted as a new inner CCB inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_add_inner_ccb = "issued immediately after a new inner CCB h has been created.
+constexpr const char* Aos_observer_after_add_inner_ccb = "issued immediately after a new inner CCB h has been created.
 
 The inner CCB always consists of a single pair of twin halfedges.
 
 Parameters
 ----------
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_add_isolated_vertex = "issued just before the vertex v is inserted as an isolated vertex inside the face f .
+constexpr const char* Aos_observer_before_add_isolated_vertex = "issued just before the vertex v is inserted as an isolated vertex inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_after_add_isolated_vertex = "issued immediately after the vertex v has been set as an isolated vertex.
+constexpr const char* Aos_observer_after_add_isolated_vertex = "issued immediately after the vertex v has been set as an isolated vertex.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_before_merge_edge = "issued just before the two edges e1 and e2 are merged to form a single edge that will be associated with the $x$ -monotone curve c .
+constexpr const char* Aos_observer_before_merge_edge = "issued just before the two edges e1 and e2 are merged to form a single edge that will be associated with the $x$ -monotone curve c .
 
 Parameters
 ----------
 e1 : Halfedge_handle
 e2 : Halfedge_handle
 c : const X_monotone_curve_2 &";
-constexpr const char* CGAL_Aos_observer_after_merge_edge = "issued immediately after two edges have been merged to form the edge e .
+constexpr const char* Aos_observer_after_merge_edge = "issued immediately after two edges have been merged to form the edge e .
 
 Parameters
 ----------
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_before_merge_fictitious_edge = "issued just before the two fictitious edges e1 and e2 are merged to form a single fictitious edge.
+constexpr const char* Aos_observer_before_merge_fictitious_edge = "issued just before the two fictitious edges e1 and e2 are merged to form a single fictitious edge.
 
 Parameters
 ----------
 e1 : Halfedge_handle
 e2 : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_merge_fictitious_edge = "issued immediately after two fictitious edges have been merged to form the fictitious edge e .
+constexpr const char* Aos_observer_after_merge_fictitious_edge = "issued immediately after two fictitious edges have been merged to form the fictitious edge e .
 
 Parameters
 ----------
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_before_merge_face = "issued just before the two edges f1 and f2 are merged to form a single face, following the removal of the edge e from the arrangement.
+constexpr const char* Aos_observer_before_merge_face = "issued just before the two edges f1 and f2 are merged to form a single face, following the removal of the edge e from the arrangement.
 
 Parameters
 ----------
 f1 : Face_handle
 f2 : Face_handle
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_merge_face = "issued immediately after two faces have been merged to form the face f .
+constexpr const char* Aos_observer_after_merge_face = "issued immediately after two faces have been merged to form the face f .
 
 Parameters
 ----------
 f : Face_handle";
-constexpr const char* CGAL_Aos_observer_before_merge_outer_ccb = "issued just before two outer ccbs h1 and h2 inside the face f are merged to form a single connected component, following the insertion of the edge e into the arrangement.
+constexpr const char* Aos_observer_before_merge_outer_ccb = "issued just before two outer ccbs h1 and h2 inside the face f are merged to form a single connected component, following the insertion of the edge e into the arrangement.
 
 Parameters
 ----------
@@ -2063,13 +2063,13 @@ f : Face_handle
 h1 : Ccb_halfedge_circulator
 h2 : Ccb_halfedge_circulator
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_merge_outer_ccb = "issued immediately after two outer cCBs have been merged to form a single outer CCB h inside the face f .
+constexpr const char* Aos_observer_after_merge_outer_ccb = "issued immediately after two outer cCBs have been merged to form a single outer CCB h inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_merge_inner_ccb = "issued just before two inner CCBs h1 and h2 inside the face f are merged to form a single connected component, following the insertion of the edge e into the arrangement.
+constexpr const char* Aos_observer_before_merge_inner_ccb = "issued just before two inner CCBs h1 and h2 inside the face f are merged to form a single connected component, following the insertion of the edge e into the arrangement.
 
 Parameters
 ----------
@@ -2077,13 +2077,13 @@ f : Face_handle
 h1 : Ccb_halfedge_circulator
 h2 : Ccb_halfedge_circulator
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_merge_inner_ccb = "issued immediately after two inner CCBs have been merged to form a single inner CCB h inside the face f .
+constexpr const char* Aos_observer_after_merge_inner_ccb = "issued immediately after two inner CCBs have been merged to form a single inner CCB h inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_move_outer_ccb = "issued just before the outer CCB h is moved from one face to another.
+constexpr const char* Aos_observer_before_move_outer_ccb = "issued just before the outer CCB h is moved from one face to another.
 
 This can happen if the face to_f containing the outer CCB has just been split
 from from_f .
@@ -2093,12 +2093,12 @@ Parameters
 from_f : Face_handle
 to_f : Face_handle
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_after_move_outer_ccb = "issued immediately after the outer CCB h has been moved to a new face.
+constexpr const char* Aos_observer_after_move_outer_ccb = "issued immediately after the outer CCB h has been moved to a new face.
 
 Parameters
 ----------
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_move_inner_ccb = "issued just before the inner CCB h is moved from one face to another.
+constexpr const char* Aos_observer_before_move_inner_ccb = "issued just before the inner CCB h is moved from one face to another.
 
 This can happen if the face to_f containing the inner CCB has just been split
 from from_f .
@@ -2108,12 +2108,12 @@ Parameters
 from_f : Face_handle
 to_f : Face_handle
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_after_move_inner_ccb = "issued immediately after the inner CCB h has been moved to a new face.
+constexpr const char* Aos_observer_after_move_inner_ccb = "issued immediately after the inner CCB h has been moved to a new face.
 
 Parameters
 ----------
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_before_move_isolated_vertex = "issued just before the isolated vertex v is moved from one face to another.
+constexpr const char* Aos_observer_before_move_isolated_vertex = "issued just before the isolated vertex v is moved from one face to another.
 
 This can happen if the face to_f containing the isolated vertex has just been
 split from from_f .
@@ -2123,66 +2123,66 @@ Parameters
 from_f : Face_handle
 to_f : Face_handle
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_after_move_isolated_vertex = "issued immediately after the isolated vertex v has been moved to a new face.
+constexpr const char* Aos_observer_after_move_isolated_vertex = "issued immediately after the isolated vertex v has been moved to a new face.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_before_remove_vertex = "issued just before the vertex v is removed from the arrangement.
+constexpr const char* Aos_observer_before_remove_vertex = "issued just before the vertex v is removed from the arrangement.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Aos_observer_after_remove_vertex = "issued immediately after a vertex has been removed (and deleted) from the arrangement.";
-constexpr const char* CGAL_Aos_observer_before_remove_edge = "issued just before the edge e is removed from the arrangement.
+constexpr const char* Aos_observer_after_remove_vertex = "issued immediately after a vertex has been removed (and deleted) from the arrangement.";
+constexpr const char* Aos_observer_before_remove_edge = "issued just before the edge e is removed from the arrangement.
 
 Parameters
 ----------
 e : Halfedge_handle";
-constexpr const char* CGAL_Aos_observer_after_remove_edge = "issued immediately after an edge has been removed (and deleted) from the arrangement.";
-constexpr const char* CGAL_Aos_observer_before_remove_outer_ccb = "issued just before the outer ccb f is removed from inside the face f .
+constexpr const char* Aos_observer_after_remove_edge = "issued immediately after an edge has been removed (and deleted) from the arrangement.";
+constexpr const char* Aos_observer_before_remove_outer_ccb = "issued just before the outer ccb f is removed from inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_after_remove_outer_ccb = "issued immediately after a outer CCB has been removed (and deleted) from inside the face f .
+constexpr const char* Aos_observer_after_remove_outer_ccb = "issued immediately after a outer CCB has been removed (and deleted) from inside the face f .
 
 Parameters
 ----------
 f : Face_handle";
-constexpr const char* CGAL_Aos_observer_before_remove_inner_ccb = "issued just before the inner CCB f is removed from inside the face f .
+constexpr const char* Aos_observer_before_remove_inner_ccb = "issued just before the inner CCB f is removed from inside the face f .
 
 Parameters
 ----------
 f : Face_handle
 h : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Aos_observer_after_remove_inner_ccb = "issued immediately after a inner CCB has been removed (and deleted) from inside the face f .
+constexpr const char* Aos_observer_after_remove_inner_ccb = "issued immediately after a inner CCB has been removed (and deleted) from inside the face f .
 
 Parameters
 ----------
 f : Face_handle";
 
-constexpr const char* CGAL_Arr_accessor_Arrangement_2 = "the type of the associated arrangement.
+constexpr const char* Arr_accessor_Arrangement_2 = "the type of the associated arrangement.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_accessor_Point_2 = "the point type.
+constexpr const char* Arr_accessor_Point_2 = "the point type.
 
 Returns: Arrangement_2::Point_2";
-constexpr const char* CGAL_Arr_accessor_X_monotone_curve_2 = "the $x$ -monotone curve type.
+constexpr const char* Arr_accessor_X_monotone_curve_2 = "the $x$ -monotone curve type.
 
 Returns: Arrangement_2::X_monotone_curve_2";
-constexpr const char* CGAL_Arr_accessor_Ccb_halfedge_circulator = "represents the boundary of a connected component (CCB).
+constexpr const char* Arr_accessor_Ccb_halfedge_circulator = "represents the boundary of a connected component (CCB).
 
 Returns: Arrangement_2::Ccb_halfedge_circulator";
-constexpr const char* CGAL_Arr_accessor_Arr_accessor = "constructs an accessor attached to the given arrangement arr .
+constexpr const char* Arr_accessor_Arr_accessor = "constructs an accessor attached to the given arrangement arr .
 
 Parameters
 ----------
 arr : Arrangement_2 &";
-constexpr const char* CGAL_Arr_accessor_notify_before_global_change = "notifies the arrangement observer that a global change is going to take place (for the usage of the global functions that operate on arrangements).";
-constexpr const char* CGAL_Arr_accessor_notify_after_global_change = "notifies the arrangement observer that a global change has taken place (for the usage of the global functions that operate on arrangements).";
-constexpr const char* CGAL_Arr_accessor_locate_around_vertex = "locates a place for the curve c around the vertex v and returns a halfedge whose target is v , where c should be inserted between this halfedge and the next halfedge around v in a clockwise order.
+constexpr const char* Arr_accessor_notify_before_global_change = "notifies the arrangement observer that a global change is going to take place (for the usage of the global functions that operate on arrangements).";
+constexpr const char* Arr_accessor_notify_after_global_change = "notifies the arrangement observer that a global change has taken place (for the usage of the global functions that operate on arrangements).";
+constexpr const char* Arr_accessor_locate_around_vertex = "locates a place for the curve c around the vertex v and returns a halfedge whose target is v , where c should be inserted between this halfedge and the next halfedge around v in a clockwise order.
 
 Parameters
 ----------
@@ -2190,7 +2190,7 @@ v : Vertex_handle
 c : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_halfedge_distance = "counts the number of edges along the path from e1 to e2 .
+constexpr const char* Arr_accessor_halfedge_distance = "counts the number of edges along the path from e1 to e2 .
 
 In case the two halfedges do not belong to the same connected component, the
 function returns (-1).
@@ -2201,7 +2201,7 @@ e1 : Halfedge_const_handle
 e2 : Halfedge_const_handle
 
 Returns: int";
-constexpr const char* CGAL_Arr_accessor_is_inside_new_face = "determines whether a new halfedge we are about to create, which is to be associated with the curve c and directed from pred1->target() to pred2->target() , lies on the inner CCB of the new face that will be created, introducing this new edge.
+constexpr const char* Arr_accessor_is_inside_new_face = "determines whether a new halfedge we are about to create, which is to be associated with the curve c and directed from pred1->target() to pred2->target() , lies on the inner CCB of the new face that will be created, introducing this new edge.
 
 pred1->target() and pred2->target() are associated with c 's endpoints. pred1
 and pred2 belong to the same connected component, such that a new face is
@@ -2214,7 +2214,7 @@ pred2 : Halfedge_handle
 c : const X_monotone_curve_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Arr_accessor_point_is_in = "determines whether a given point lies within the region bounded by a boundary of the connected component that he belongs to.
+constexpr const char* Arr_accessor_point_is_in = "determines whether a given point lies within the region bounded by a boundary of the connected component that he belongs to.
 
 Note that if the function returns true , then p is contained within he->face()
 (but not on its boundary), or inside one of the inner CCBs of this face, or it
@@ -2226,21 +2226,21 @@ p : const Point_2 &
 he : Halfedge_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Arr_accessor_is_on_outer_boundary = "determines whether he lies on the outer boundary of its incident face.
+constexpr const char* Arr_accessor_is_on_outer_boundary = "determines whether he lies on the outer boundary of its incident face.
 
 Parameters
 ----------
 he : Halfedge_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Arr_accessor_is_on_inner_boundary = "determines whether he lies on the inner boundary of its incident face (that is, whether it lies on the boundary of one of the inner CCBs of this face).
+constexpr const char* Arr_accessor_is_on_inner_boundary = "determines whether he lies on the inner boundary of its incident face (that is, whether it lies on the boundary of one of the inner CCBs of this face).
 
 Parameters
 ----------
 he : Halfedge_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Arr_accessor_create_vertex = "creates a new vertex an associates it with the point p .
+constexpr const char* Arr_accessor_create_vertex = "creates a new vertex an associates it with the point p .
 
 There is no existing vertex already associated with p .
 
@@ -2249,7 +2249,7 @@ Parameters
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arr_accessor_insert_in_face_interior_ex = "inserts the curve c as a new inner CCBs (hole) of the face f , connecting the two isolated vertices v1 and v2 .
+constexpr const char* Arr_accessor_insert_in_face_interior_ex = "inserts the curve c as a new inner CCBs (hole) of the face f , connecting the two isolated vertices v1 and v2 .
 
 res is the comparison result between these two end-vertices. The function
 returns a handle for one one of the new halfedges corresponding to the
@@ -2266,7 +2266,7 @@ v2 : Vertex_handle
 res : Comparison_result
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_insert_from_vertex_ex = "inserts the curve c into the arrangement, such that one of its endpoints corresponds to an arrangement, which is the target vertex of the halfedge pred , such that c is inserted to the circular list of halfedges around pred->target() right between pred and its successor.
+constexpr const char* Arr_accessor_insert_from_vertex_ex = "inserts the curve c into the arrangement, such that one of its endpoints corresponds to an arrangement, which is the target vertex of the halfedge pred , such that c is inserted to the circular list of halfedges around pred->target() right between pred and its successor.
 
 The other end-vertex is given by an isolated vertex v , where res is the
 comparison result between pred->target() and v . The function returns a handle
@@ -2282,7 +2282,7 @@ v : Vertex_handle
 res : Comparison_result
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_insert_at_vertices_ex = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by pred1->target() and pred2->target() .
+constexpr const char* Arr_accessor_insert_at_vertices_ex = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by pred1->target() and pred2->target() .
 
 res is the comparison result between these two end-vertices. The function
 creates a new halfedge pair that connects the two vertices (with pred1 and
@@ -2302,7 +2302,7 @@ res : Comparison_result
 new_face : bool &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_insert_isolated_vertex = "inserts v as an isolated vertex inside f .
+constexpr const char* Arr_accessor_insert_isolated_vertex = "inserts v as an isolated vertex inside f .
 
 v->point() is contained in the interior of the given face.
 
@@ -2310,7 +2310,7 @@ Parameters
 ----------
 f : Face_handle
 v : Vertex_handle";
-constexpr const char* CGAL_Arr_accessor_move_hole = "moves the given hole (inner CCB) from the interior of the face f1 to the face f2 .
+constexpr const char* Arr_accessor_move_hole = "moves the given hole (inner CCB) from the interior of the face f1 to the face f2 .
 
 hole is currently contained in f1 and should be moved to f2 .
 
@@ -2319,7 +2319,7 @@ Parameters
 f1 : Face_handle
 f2 : Face_handle
 hole : Ccb_halfedge_circulator";
-constexpr const char* CGAL_Arr_accessor_move_isolated_vertex = "moves the given isolated vertex from the interior of the face f1 inside the face f2 .
+constexpr const char* Arr_accessor_move_isolated_vertex = "moves the given isolated vertex from the interior of the face f1 inside the face f2 .
 
 v is indeed an isolated vertex currently contained in f1 and should be moved
 to f2 .
@@ -2331,7 +2331,7 @@ f2 : Face_handle
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Arr_accessor_relocate_in_new_face = "relocates all inner ccbs and isolated vertices to their proper position immediately after a face has split due to the insertion of a new halfedge, namely after insert_at_vertices_ex() was invoked and indicated that a new face has been created.
+constexpr const char* Arr_accessor_relocate_in_new_face = "relocates all inner ccbs and isolated vertices to their proper position immediately after a face has split due to the insertion of a new halfedge, namely after insert_at_vertices_ex() was invoked and indicated that a new face has been created.
 
 he is the halfedge returned by insert_at_vertices_ex() , such that
 he->twin()->face is the face that has just been split and he->face() is the
@@ -2340,17 +2340,17 @@ newly created face.
 Parameters
 ----------
 he : Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_relocate_holes_in_new_face = "relocates all inner ccbs in a new face, as detailed above.
+constexpr const char* Arr_accessor_relocate_holes_in_new_face = "relocates all inner ccbs in a new face, as detailed above.
 
 Parameters
 ----------
 he : Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_relocate_isolated_vertices_in_new_face = "relocates all isolated vertices in a new face, as detailed above.
+constexpr const char* Arr_accessor_relocate_isolated_vertices_in_new_face = "relocates all isolated vertices in a new face, as detailed above.
 
 Parameters
 ----------
 he : Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_modify_vertex_ex = "modifies the point associated with the vertex v (the point may be geometrically different than the one currently associated with v ).
+constexpr const char* Arr_accessor_modify_vertex_ex = "modifies the point associated with the vertex v (the point may be geometrically different than the one currently associated with v ).
 
 The function returns a handle to the modified vertex (same as v ). No other
 arrangement vertex is already associated with p . The topology of the
@@ -2362,7 +2362,7 @@ v : Vertex_handle
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arr_accessor_modify_edge_ex = "modifies the $x$ -monotone curve associated with the edge e (the curve c may be geometrically different than the one currently associated with e ).
+constexpr const char* Arr_accessor_modify_edge_ex = "modifies the $x$ -monotone curve associated with the edge e (the curve c may be geometrically different than the one currently associated with e ).
 
 The function returns a handle to the modified edge (same as e ). The interior
 of c is disjoint from all existing arrangement vertices and edges.
@@ -2373,7 +2373,7 @@ e : Halfedge_handle
 c : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_split_edge_ex = "splits a given edge into two at the split point p , and associate the $x$ -monotone curves c1 and c2 with the resulting edges, such that c1 connects he->source() with p and c2 connects p with he->target() .
+constexpr const char* Arr_accessor_split_edge_ex = "splits a given edge into two at the split point p , and associate the $x$ -monotone curves c1 and c2 with the resulting edges, such that c1 connects he->source() with p and c2 connects p with he->target() .
 
 The function return a handle to the split halfedge directed from he->source()
 to the split point p . The endpoints of c1 and c2 correspond to p and to he 's
@@ -2387,7 +2387,7 @@ c1 : const X_monotone_curve_2 &
 c2 : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_split_edge_ex_1 = "splits a given edge into two at by the vertex v , and associate the $x$ -monotone curves c1 and c2 with the resulting edges, such that c1 connects he->source() with v and c2 connects v with he->target() .
+constexpr const char* Arr_accessor_split_edge_ex_1 = "splits a given edge into two at by the vertex v , and associate the $x$ -monotone curves c1 and c2 with the resulting edges, such that c1 connects he->source() with v and c2 connects v with he->target() .
 
 The function return a handle to the split halfedge directed from he->source()
 to v . The endpoints of c1 and c2 correspond to v and to he 's end-vertices,
@@ -2401,7 +2401,7 @@ c1 : const X_monotone_curve_2 &
 c2 : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arr_accessor_remove_edge_ex = "removes the edge he from the arrangement, such that if the edge removal causes the creation of a new hole (inner CCB), he->target() lies on the boundary of this hole.
+constexpr const char* Arr_accessor_remove_edge_ex = "removes the edge he from the arrangement, such that if the edge removal causes the creation of a new hole (inner CCB), he->target() lies on the boundary of this hole.
 
 The flags remove_source and remove_target indicate whether the end-vertices of
 he should be removed as well, in case they have no other incident edges. If
@@ -2417,35 +2417,35 @@ remove_target : bool
 Returns: Face_handle";
 
 // CGAL::Arr_algebraic_segment_traits_2
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2__class__ = "The traits class Arr_algebraic_segment_traits_2 is a model of the AosTraits_2 concept that handles planar algebraic curves of arbitrary degree, and $x$ -monotone of such curves.";
+constexpr const char* Arr_algebraic_segment_traits_2__class__ = "The traits class Arr_algebraic_segment_traits_2 is a model of the AosTraits_2 concept that handles planar algebraic curves of arbitrary degree, and $x$ -monotone of such curves.";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Site_of_point = "Value to specify whether a point should be in the interior of a segment, or its minimal point, or its maximal point in lexicographic order.";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Polynomial_2 = "the type for bivariate polynomials, with innermost coefficient type Coefficient .
+constexpr const char* Arr_algebraic_segment_traits_2_Site_of_point = "Value to specify whether a point should be in the interior of a segment, or its minimal point, or its maximal point in lexicographic order.";
+constexpr const char* Arr_algebraic_segment_traits_2_Polynomial_2 = "the type for bivariate polynomials, with innermost coefficient type Coefficient .
 
 Constitutes a model of the concept Polynomial_d with two variables.
 CGAL::Polynomial_d
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Algebraic_kernel_1 = "model for the concept AlgebraicKernel_1
+constexpr const char* Arr_algebraic_segment_traits_2_Algebraic_kernel_1 = "model for the concept AlgebraicKernel_1
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Algebraic_real_1 = "represents coordinates of points.
+constexpr const char* Arr_algebraic_segment_traits_2_Algebraic_real_1 = "represents coordinates of points.
 
 Typedef from Algebraic_kernel_1::Algebraic_real_1
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Bound = "Typedef from Algebraic_kernel_1::Bound .
+constexpr const char* Arr_algebraic_segment_traits_2_Bound = "Typedef from Algebraic_kernel_1::Bound .
 
 Returns: unspecified_type";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_curve_2_operator = "returns a Curve_2 object that represents the curve defined by the polynomial p
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_curve_2_operator = "returns a Curve_2 object that represents the curve defined by the polynomial p
 
 Parameters
 ----------
 p : Polynomial_2
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_curve_2_operator_1 = "returns a Curve_2 object specified by s .
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_curve_2_operator_1 = "returns a Curve_2 object specified by s .
 
 The passed string represents the defining polynomial of the curve and must be
 given in a MAPLE-readable format using \"x\" as first and \"y\" as second
@@ -2458,7 +2458,7 @@ s : std::string
 
 Returns: Curve_2";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_point_2_operator = "returns a Point_2 object that represents the arcno -th point in the fiber of cv at $x$ -coordinate x , counted from the bottom, starting with zero.
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_point_2_operator = "returns a Point_2 object that represents the arcno -th point in the fiber of cv at $x$ -coordinate x , counted from the bottom, starting with zero.
 
 ( cv must not have a vertical line at x , and $0\\leq arcno < c$ , where $c$ is
 the number of points in the fiber of cv at x .)
@@ -2470,7 +2470,7 @@ cv : Curve_2
 arcno : int
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_point_2_operator_1 = "returns a Point_2 object that represents the point on xcv at $x$ -coordinate x
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_point_2_operator_1 = "returns a Point_2 object that represents the point on xcv at $x$ -coordinate x
 
 ( x is in the $x$ -range of xcv .)
 
@@ -2480,7 +2480,7 @@ x : Algebraic_real_1
 xcv : X_monotone_curve_2
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_point_2_operator_2 = "returns a Point_2 object that represents (x,y)
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_point_2_operator_2 = "returns a Point_2 object that represents (x,y)
 
 Parameters
 ----------
@@ -2488,7 +2488,7 @@ x : Algebraic_real_1
 y : Algebraic_real_1
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_point_2_operator_3 = "returns a Point_2 object that represents (x,y)
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_point_2_operator_3 = "returns a Point_2 object that represents (x,y)
 
 Parameters
 ----------
@@ -2496,7 +2496,7 @@ x : Coefficient
 y : Coefficient
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_point_2_operator_4 = "returns a Point_2 object that represents (x,y)
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_point_2_operator_4 = "returns a Point_2 object that represents (x,y)
 
 Parameters
 ----------
@@ -2504,7 +2504,7 @@ x : Bound
 y : Bound
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_point_2_operator_5 = "returns a Point_2 object that represents (x,y)
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_point_2_operator_5 = "returns a Point_2 object that represents (x,y)
 
 Parameters
 ----------
@@ -2513,7 +2513,7 @@ y : int
 
 Returns: Point_2";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator = "inserts a sequence of X_monotone_curve_2 objects (terminal segments) into an output container given through an output iterator.
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator = "inserts a sequence of X_monotone_curve_2 objects (terminal segments) into an output container given through an output iterator.
 
 These terminal segments compose an $x$ -monotone (or vertical) segment of a
 given curve that starts in end_min , and ends in end_max . cv The input curve.
@@ -2531,7 +2531,7 @@ end_max : Point_2
 oi : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_1 = "inserts a sequence of X_monotone_curve_2 objects into an output container given through an output iterator.
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_1 = "inserts a sequence of X_monotone_curve_2 objects into an output container given through an output iterator.
 
 These segments form an $x$ -monotone (or vertical) segment of the curve cv .
 If site_of_p == POINT_IN_INTERIOR , the maximal segment that contains p in its
@@ -2552,7 +2552,7 @@ site_of_p : Site_of_point
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_2 = "inserts a sequence of X_monotone_curve_2 objects into an output container given through an output iterator.
+constexpr const char* Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_2 = "inserts a sequence of X_monotone_curve_2 objects into an output container given through an output iterator.
 
 These segments form a straight-line segment connecting the points p and q . If
 p and q share the same $x$ -coordinate, the constructed vertical segment
@@ -2570,19 +2570,19 @@ out : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Arr_algebraic_segment_traits_2::Curve_2
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Curve_2__class__ = "A model of the AosTraits_2::Curve_2 concept.";
+constexpr const char* Arr_algebraic_segment_traits_2_Curve_2__class__ = "A model of the AosTraits_2::Curve_2 concept.";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Curve_2_polynomial = "returns the defining polynomial of the curve.
+constexpr const char* Arr_algebraic_segment_traits_2_Curve_2_polynomial = "returns the defining polynomial of the curve.
 
 Returns: Polynomial_2";
 
 // CGAL::Arr_algebraic_segment_traits_2::Point_2
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Point_2__class__ = "A model of the AosBasicTraits_2::Point_2 concept.";
+constexpr const char* Arr_algebraic_segment_traits_2_Point_2__class__ = "A model of the AosBasicTraits_2::Point_2 concept.";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Point_2_x = "returns the $x$ -coordinate of p .
+constexpr const char* Arr_algebraic_segment_traits_2_Point_2_x = "returns the $x$ -coordinate of p .
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Point_2_y = "returns the $y$ -coordinates of p .
+constexpr const char* Arr_algebraic_segment_traits_2_Point_2_y = "returns the $y$ -coordinates of p .
 
 Attention: As described above, points are not stored by their $y$ -coordinate
 in Algebraic_real_1 representation. In fact, this representation must be
@@ -2591,33 +2591,33 @@ high-degree polynomials. Therefore, it is recommended to avoid to call this
 function as much as possible.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Point_2_curve = "returns a Curve_2 instance that p is part of.
+constexpr const char* Arr_algebraic_segment_traits_2_Point_2_curve = "returns a Curve_2 instance that p is part of.
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Point_2_arcno = "returns the arc number of p .
+constexpr const char* Arr_algebraic_segment_traits_2_Point_2_arcno = "returns the arc number of p .
 
 Returns: int";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_Point_2_to_double = "returns double-approximations of the $x$ - and $y$ -coordinates.
+constexpr const char* Arr_algebraic_segment_traits_2_Point_2_to_double = "returns double-approximations of the $x$ - and $y$ -coordinates.
 
 Returns: std::pair< double, double >";
 
 // CGAL::Arr_algebraic_segment_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2__class__ = "A model of the AosBasicTraits_2::X_monotone_curve_2 concept.";
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2__class__ = "A model of the AosBasicTraits_2::X_monotone_curve_2 concept.";
 
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2_curve = "returns the supporting algebraic curve of s .
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2_curve = "returns the supporting algebraic curve of s .
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2_is_vertical = "returns whether s is a vertical segment.
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2_is_vertical = "returns whether s is a vertical segment.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2_is_finite = "returns whether s has a finite endpoint on the left
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2_is_finite = "returns whether s has a finite endpoint on the left
 
 Parameters
 ----------
 ce : CGAL::Arr_curve_end
 
 Returns: bool";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2_curve_end = "
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2_curve_end = "
 (The corresponding curve end is finite)
 
 Parameters
@@ -2625,32 +2625,32 @@ Parameters
 ce : CGAL::Arr_curve_end
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2_arcno = "returns the arc number of the segment.
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2_arcno = "returns the arc number of the segment.
 
 (The segment is non-vertical)
 
 Returns: int";
-constexpr const char* CGAL_Arr_algebraic_segment_traits_2_X_monotone_curve_2_x = "returns the $x$ -coordinate of a vertical segment.
+constexpr const char* Arr_algebraic_segment_traits_2_X_monotone_curve_2_x = "returns the $x$ -coordinate of a vertical segment.
 
 (The segment is vertical)
 
 Returns: Algebraic_real_1";
 
 // CGAL::Arr_Bezier_curve_traits_2
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2__class__ = "The traits class Arr_Bezier_curve_traits_2 is a model of the AosTraits_2 concept that handles planar B zier curves.";
+constexpr const char* Arr_Bezier_curve_traits_2__class__ = "The traits class Arr_Bezier_curve_traits_2 is a model of the AosTraits_2 concept that handles planar B zier curves.";
 
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Rational = "the NtTraits::Rational type (and also the RatKernel::FT type).
+constexpr const char* Arr_Bezier_curve_traits_2_Rational = "the NtTraits::Rational type (and also the RatKernel::FT type).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Algebraic = "the NtTraits::Algebraic type (and also the AlgKernel::FT type).
+constexpr const char* Arr_Bezier_curve_traits_2_Algebraic = "the NtTraits::Algebraic type (and also the AlgKernel::FT type).
 
 Returns: unspecified_type";
 
 // CGAL::Arr_Bezier_curve_traits_2::Curve_2
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2__class__ = "The Curve_2 class nested within the B zier traits class is used to represent a B zier curve of arbitrary degree, which is defined by a sequence of rational control points.";
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2__class__ = "The Curve_2 class nested within the B zier traits class is used to represent a B zier curve of arbitrary degree, which is defined by a sequence of rational control points.";
 
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2_Curve_2 = "default constructor.";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2_Curve_2_1 = "constructs a B zier curve as defined by the given range of control points.
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2_Curve_2 = "default constructor.";
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2_Curve_2_1 = "constructs a B zier curve as defined by the given range of control points.
 
 The value-type of InputIterator is RatKernel::Point_2 . The input range must
 contain at least two control points.
@@ -2659,10 +2659,10 @@ Parameters
 ----------
 pts_begin : InputIterator
 pts_end : InputIterator";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2_number_of_control_points = "returns the number of control points that define B .
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2_number_of_control_points = "returns the number of control points that define B .
 
 Returns: std::size_t";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2_control_point = "returns the $k$ th control point.
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2_control_point = "returns the $k$ th control point.
 
 Note that the first control point equals the curve source, while the last
 control point equals its target. The rest of the control points do not lie on
@@ -2673,14 +2673,14 @@ Parameters
 k : std::size_t
 
 Returns: RatKernel::Point_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2_operator = "returns the point $B(t)$ on the curve that corresponds to the given rational parameter value.
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2_operator = "returns the point $B(t)$ on the curve that corresponds to the given rational parameter value.
 
 Parameters
 ----------
 t : const Rational &
 
 Returns: RatKernel::Point_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Curve_2_operator_1 = "returns the point $B(t)$ on the curve that corresponds to the given algebraic parameter value.
+constexpr const char* Arr_Bezier_curve_traits_2_Curve_2_operator_1 = "returns the point $B(t)$ on the curve that corresponds to the given algebraic parameter value.
 
 Parameters
 ----------
@@ -2689,10 +2689,10 @@ t : const Algebraic &
 Returns: AlgKernel::Point_2";
 
 // CGAL::Arr_Bezier_curve_traits_2::Point_2
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2__class__ = "The Point_2 class nested within the B zier traits class is used to represent: (i) an endpoint of a B zier curve, (ii) a vertical tangency point of a curve, used to subdivide it into $x$ -monotone subcurve, and (iii) an intersection point between two curves.";
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2__class__ = "The Point_2 class nested within the B zier traits class is used to represent: (i) an endpoint of a B zier curve, (ii) a vertical tangency point of a curve, used to subdivide it into $x$ -monotone subcurve, and (iii) an intersection point between two curves.";
 
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_Point_2 = "default constructor.";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_Point_2_1 = "constructs the point $B(t_0)$ on the given curve.
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_Point_2 = "default constructor.";
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_Point_2_1 = "constructs the point $B(t_0)$ on the given curve.
 
 As $t_0$ is an algebraic number, the point has algebraic coordinates.
 
@@ -2700,7 +2700,7 @@ Parameters
 ----------
 B : const Curve_2 &
 t_0 : const Algebraic &";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_Point_2_2 = "constructs the point $B(t_0)$ on the given curve.
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_Point_2_2 = "constructs the point $B(t_0)$ on the given curve.
 
 As $t_0$ is a rational number, the point has rational coordinates.
 
@@ -2708,90 +2708,90 @@ Parameters
 ----------
 B : const Curve_2 &
 t_0 : const Rational &";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_approximate = "returns the approximated coordinates of p .
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_approximate = "returns the approximated coordinates of p .
 
 Returns: std::pair< double, double >";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_is_exact = "returns whether the coordinates of p are computed in an exact manner.
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_is_exact = "returns whether the coordinates of p are computed in an exact manner.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_x = "returns the $x$ -coordinate of p .
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_x = "returns the $x$ -coordinate of p .
 
 p is exactly computed.
 
 Returns: Algebraic";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_y = "returns the $y$ -coordinate of p .
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_y = "returns the $y$ -coordinate of p .
 
 p is exactly computed.
 
 Returns: Algebraic";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_is_rational = "returns whether the coordinates of p are rational numbers.
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_is_rational = "returns whether the coordinates of p are rational numbers.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_Point_2_Point_2_3 = "casts p to a point with rational coordinates.
+constexpr const char* Arr_Bezier_curve_traits_2_Point_2_Point_2_3 = "casts p to a point with rational coordinates.
 
 p has rational coordinates.";
 
 // CGAL::Arr_Bezier_curve_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the B zier traits is used to represent $x$ -monotone subcurves of B zier curves.";
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the B zier traits is used to represent $x$ -monotone subcurves of B zier curves.";
 
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2_supporting_curve = "returns the supporting B zier curve of b .
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2_supporting_curve = "returns the supporting B zier curve of b .
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2_source = "returns the source point of b .
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2_source = "returns the source point of b .
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2_target = "returns the target point of b .
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2_target = "returns the target point of b .
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2_left = "returns the left ( $xy$ -lexicographically smaller) endpoint of b .
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2_left = "returns the left ( $xy$ -lexicographically smaller) endpoint of b .
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2_right = "returns the right ( $xy$ -lexicographically smaller) endpoint of b .
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2_right = "returns the right ( $xy$ -lexicographically smaller) endpoint of b .
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_Bezier_curve_traits_2_X_monotone_curve_2_parameter_range = "return the approximate parameter range defining the subcurve b .
+constexpr const char* Arr_Bezier_curve_traits_2_X_monotone_curve_2_parameter_range = "return the approximate parameter range defining the subcurve b .
 
 Returns: std::pair< double, double >";
 
-constexpr const char* CGAL_Arr_bounded_planar_topology_traits_2_Arr_bounded_planar_topology_traits_2 = "constructs default";
-constexpr const char* CGAL_Arr_bounded_planar_topology_traits_2_Arr_bounded_planar_topology_traits_2_1 = "constructs from a geometry-traits object.
+constexpr const char* Arr_bounded_planar_topology_traits_2_Arr_bounded_planar_topology_traits_2 = "constructs default";
+constexpr const char* Arr_bounded_planar_topology_traits_2_Arr_bounded_planar_topology_traits_2_1 = "constructs from a geometry-traits object.
 
 traits the traits.
 
 Parameters
 ----------
 traits : const GeometryTraits_2 *";
-constexpr const char* CGAL_Arr_bounded_planar_topology_traits_2_dcel = "obtains the DCEL (const version).
+constexpr const char* Arr_bounded_planar_topology_traits_2_dcel = "obtains the DCEL (const version).
 
 Returns: const Dcel &";
-constexpr const char* CGAL_Arr_bounded_planar_topology_traits_2_dcel_1 = "obtains the DCEL (non-const version).
+constexpr const char* Arr_bounded_planar_topology_traits_2_dcel_1 = "obtains the DCEL (non-const version).
 
 Returns: Dcel &";
-constexpr const char* CGAL_Arr_bounded_planar_topology_traits_2_unbounded_face = "obtains the unbounded face (const version).
+constexpr const char* Arr_bounded_planar_topology_traits_2_unbounded_face = "obtains the unbounded face (const version).
 
 Returns: const Face *";
-constexpr const char* CGAL_Arr_bounded_planar_topology_traits_2_unbounded_face_1 = "obtains the unbounded face (non-const version).
+constexpr const char* Arr_bounded_planar_topology_traits_2_unbounded_face_1 = "obtains the unbounded face (non-const version).
 
 Returns: Face *";
 
 // CGAL::Arr_circle_segment_traits_2
-constexpr const char* CGAL_Arr_circle_segment_traits_2__class__ = "The class Arr_circle_segment_traits_2 is a model of the AosTraits_2 concept and can be used to construct and maintain arrangements of circular arcs and line segments.";
+constexpr const char* Arr_circle_segment_traits_2__class__ = "The class Arr_circle_segment_traits_2 is a model of the AosTraits_2 concept and can be used to construct and maintain arrangements of circular arcs and line segments.";
 
 // CGAL::Arr_circle_segment_traits_2::Curve_2
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2__class__ = "The Curve_2 class nested within the traits class can represent arbitrary circular arcs, full circles and line segments and support their construction in various ways.";
+constexpr const char* Arr_circle_segment_traits_2_Curve_2__class__ = "The Curve_2 class nested within the traits class can represent arbitrary circular arcs, full circles and line segments and support their construction in various ways.";
 
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2 = "constructs an curve corresponding to the line segment seg .
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2 = "constructs an curve corresponding to the line segment seg .
 
 Parameters
 ----------
 seg : const typename Kernel::Segment_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_1 = "constructs an curve corresponding to the line segment directed from source to target , both having rational coordinates.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_1 = "constructs an curve corresponding to the line segment directed from source to target , both having rational coordinates.
 
 Parameters
 ----------
 source : const typename Kernel::Point_2 &
 target : const typename Kernel::Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_2 = "constructs an curve corresponding to the line segment supported by the given line, directed from source to target .
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_2 = "constructs an curve corresponding to the line segment supported by the given line, directed from source to target .
 
 Note that the two endpoints may have one-root coordinates. Both endpoints must
 lie on the given supporting line.
@@ -2801,7 +2801,7 @@ Parameters
 line : const typename Kernel::Line_2 &
 source : const Point_2 &
 target : const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_3 = "constructs an curve corresponding to the given circle.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_3 = "constructs an curve corresponding to the given circle.
 
 circ has a center point with rational coordinates and its squared radius is
 rational.
@@ -2809,14 +2809,14 @@ rational.
 Parameters
 ----------
 circ : const typename Kernel::Circle_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_4 = "constructs an curve corresponding to a circle centered at the rational point c whose radius r is rational.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_4 = "constructs an curve corresponding to a circle centered at the rational point c whose radius r is rational.
 
 Parameters
 ----------
 c : const typename Kernel::Point_2 &
 r : const typename Kernel::FT &
 orient : Orientation";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_5 = "constructs a circular arc supported by circ , which has a center point with rational coordinates and whose squared radius is rational, with the given endpoints.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_5 = "constructs a circular arc supported by circ , which has a center point with rational coordinates and whose squared radius is rational, with the given endpoints.
 
 The orientation of the arc is the same as the orientation of circ . Both
 endpoints must lie on the given supporting circle.
@@ -2826,7 +2826,7 @@ Parameters
 circ : const typename Kernel::Circle_2 &
 source : const Point_2 &
 target : const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_6 = "constructs a circular arc supported by a circle centered at the rational point c whose radius r is rational, directed from source to target with the given orientation.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_6 = "constructs a circular arc supported by a circle centered at the rational point c whose radius r is rational, directed from source to target with the given orientation.
 
 Both endpoints must lie on the supporting circle.
 
@@ -2837,7 +2837,7 @@ r : const typename Kernel::FT &
 orient : Orientation
 source : const Point_2 &
 target : const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_Curve_2_7 = "constructs an circular arc whose endpoints are source and target that passes through mid .
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_Curve_2_7 = "constructs an circular arc whose endpoints are source and target that passes through mid .
 
 All three points have rational coordinates. The three points must not be
 collinear.
@@ -2847,78 +2847,78 @@ Parameters
 source : const typename Kernel::Point_2 &
 mid : const typename Kernel::Point_2 &
 target : const typename Kernel::Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_is_full = "indicates whether the curve represents a full circle.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_is_full = "indicates whether the curve represents a full circle.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_source = "returns the source point.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_source = "returns the source point.
 
 cv is not a full circle.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_target = "returns the target point.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_target = "returns the target point.
 
 cv is not a full circle.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_orientation = "returns the orientation of the curve ( COLLINEAR in case of line segments).
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_orientation = "returns the orientation of the curve ( COLLINEAR in case of line segments).
 
 Returns: Orientation";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_is_linear = "determines whether cv is a line segment.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_is_linear = "determines whether cv is a line segment.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_is_circular = "determines whether cv is a circular arc.
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_is_circular = "determines whether cv is a circular arc.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_supporting_line = "returns the supporting line of cv .
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_supporting_line = "returns the supporting line of cv .
 
 cv is a line segment.
 
 Returns: Kernel::Line_2";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Curve_2_supporting_circle = "returns the supporting circle of cv .
+constexpr const char* Arr_circle_segment_traits_2_Curve_2_supporting_circle = "returns the supporting circle of cv .
 
 cv is a circular arc.
 
 Returns: Kernel::Circle_2";
 
 // CGAL::Arr_circle_segment_traits_2::Point_2
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2__class__ = "The Point_2 number-type nested within the traits class represents a Cartesian point whose coordinates are algebraic numbers of type CoordNT .";
+constexpr const char* Arr_circle_segment_traits_2_Point_2__class__ = "The Point_2 number-type nested within the traits class represents a Cartesian point whose coordinates are algebraic numbers of type CoordNT .";
 
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_Rational = "the Kernel::FT type.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_CoordNT = "the algebraic number-type.
+constexpr const char* Arr_circle_segment_traits_2_Point_2_Rational = "the Kernel::FT type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_Point_2 = "constructs default";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_Point_2_1 = "creates the point $(x,y)$ .
+constexpr const char* Arr_circle_segment_traits_2_Point_2_CoordNT = "the algebraic number-type.
+
+Returns: unspecified_type";
+constexpr const char* Arr_circle_segment_traits_2_Point_2_Point_2 = "constructs default";
+constexpr const char* Arr_circle_segment_traits_2_Point_2_Point_2_1 = "creates the point $(x,y)$ .
 
 Parameters
 ----------
 x : const Rational &
 y : const Rational &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_Point_2_2 = "creates the point $(x,y)$ .
+constexpr const char* Arr_circle_segment_traits_2_Point_2_Point_2_2 = "creates the point $(x,y)$ .
 
 Parameters
 ----------
 x : const CoordNT &
 y : const CoordNT &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_x = "returns the $x$ -coordinate.
+constexpr const char* Arr_circle_segment_traits_2_Point_2_x = "returns the $x$ -coordinate.
 
 Returns: CoordNT";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_Point_2_y = "returns the $y$ -coordinate.
+constexpr const char* Arr_circle_segment_traits_2_Point_2_y = "returns the $y$ -coordinate.
 
 Returns: CoordNT";
 
 // CGAL::Arr_circle_segment_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits class can represent $x$ -monotone and line segments (which are always weakly $x$ -monotone).";
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits class can represent $x$ -monotone and line segments (which are always weakly $x$ -monotone).";
 
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs an curve corresponding to the line segment directed from source to target , both having rational coordinates.
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs an curve corresponding to the line segment directed from source to target , both having rational coordinates.
 
 Parameters
 ----------
 source : const typename Kernel::Point_2 &
 target : const typename Kernel::Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs an curve corresponding to the line segment supported by the given line, directed from source to target .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs an curve corresponding to the line segment supported by the given line, directed from source to target .
 
 Note that the two endpoints may have one-root coordinates. Both endpoints must
 lie on the given supporting line.
@@ -2928,7 +2928,7 @@ Parameters
 line : const typename Kernel::Line_2 &
 source : const Point_2 &
 target : const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs a circular arc supported by circ , which has a center point with rational coordinates and whose squared radius is rational, with the given endpoints.
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs a circular arc supported by circ , which has a center point with rational coordinates and whose squared radius is rational, with the given endpoints.
 
 The orientation of the arc is determined by orient . Both endpoints must lie
 on the given supporting circle. The circular arc is $x$ -monotone.
@@ -2939,79 +2939,79 @@ circ : const typename Kernel::Circle_2 &
 source : const Point_2 &
 target : const Point_2 &
 orient : Orientation";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_source = "returns the source point of xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_source = "returns the source point of xcv .
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_target = "returns the target point of xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_target = "returns the target point of xcv .
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_is_directed_right = "returns true if xcv is directed right, false otherwise.
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_is_directed_right = "returns true if xcv is directed right, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_left = "returns the left (lexicographically smaller) endpoint of xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_left = "returns the left (lexicographically smaller) endpoint of xcv .
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_right = "returns the right (lexicographically larger) endpoint of xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_right = "returns the right (lexicographically larger) endpoint of xcv .
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_orientation = "returns the orientation of the curve ( COLLINEAR in case of line segments).
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_orientation = "returns the orientation of the curve ( COLLINEAR in case of line segments).
 
 Returns: Orientation";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_is_linear = "determines whether xcv is a line segment.
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_is_linear = "determines whether xcv is a line segment.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_is_circular = "determines whether xcv is a circular arc.
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_is_circular = "determines whether xcv is a circular arc.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_supporting_line = "returns the supporting line of xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_supporting_line = "returns the supporting line of xcv .
 
 xcv is a line segment.
 
 Returns: Kernel::Line_2";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_supporting_circle = "returns the supporting circle of xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_supporting_circle = "returns the supporting circle of xcv .
 
 xcv is a circular arc.
 
 Returns: Kernel::Circle_2";
-constexpr const char* CGAL_Arr_circle_segment_traits_2_X_monotone_curve_2_bbox = "returns a bounding box of the arc xcv .
+constexpr const char* Arr_circle_segment_traits_2_X_monotone_curve_2_bbox = "returns a bounding box of the arc xcv .
 
 Returns: Bbox_2";
 
 // CGAL::Arr_circular_arc_traits_2
-constexpr const char* CGAL_Arr_circular_arc_traits_2__class__ = "This class is a traits class for CGAL arrangements, built on top of a model of concept CircularKernel .";
+constexpr const char* Arr_circular_arc_traits_2__class__ = "This class is a traits class for CGAL arrangements, built on top of a model of concept CircularKernel .";
 
 // CGAL::Arr_circular_line_arc_traits_2
-constexpr const char* CGAL_Arr_circular_line_arc_traits_2__class__ = "This class is a traits class for CGAL arrangements, built on top of a model of concept CircularKernel .";
+constexpr const char* Arr_circular_line_arc_traits_2__class__ = "This class is a traits class for CGAL arrangements, built on top of a model of concept CircularKernel .";
 
 // CGAL::Arr_closed_side_tag
-constexpr const char* CGAL_Arr_closed_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is closed, and curves that reach this side might be inserted into the arrangement.";
+constexpr const char* Arr_closed_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is closed, and curves that reach this side might be inserted into the arrangement.";
 
 // CGAL::Arr_conic_traits_2
-constexpr const char* CGAL_Arr_conic_traits_2__class__ = "The class Arr_conic_traits_2 is a model of the AosTraits_2 concept and can be used to construct and maintain arrangements of bounded segments of algebraic curves of degree $2$ at most, also known as conic curves .";
+constexpr const char* Arr_conic_traits_2__class__ = "The class Arr_conic_traits_2 is a model of the AosTraits_2 concept and can be used to construct and maintain arrangements of bounded segments of algebraic curves of degree $2$ at most, also known as conic curves .";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Rational = "the NtTraits::Rational type (and also the RatKernel::FT type).
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Arr_conic_traits_2_Algebraic = "the NtTraits::Algebraic type (and also the AlgKernel::FT type).
+constexpr const char* Arr_conic_traits_2_Rational = "the NtTraits::Rational type (and also the RatKernel::FT type).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_conic_traits_2_construct_curve_2_object = "obtains a Construct_curve_2 functor.
+constexpr const char* Arr_conic_traits_2_Algebraic = "the NtTraits::Algebraic type (and also the AlgKernel::FT type).
+
+Returns: unspecified_type";
+constexpr const char* Arr_conic_traits_2_construct_curve_2_object = "obtains a Construct_curve_2 functor.
 
 Returns: Construct_curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_construct_x_monotone_curve_2_object = "obtains a Construct_x_monotone_curve_2 functor.
+constexpr const char* Arr_conic_traits_2_construct_x_monotone_curve_2_object = "obtains a Construct_x_monotone_curve_2 functor.
 
 Returns: Construct_x_monotone_curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_construct_bbox_2_object = "obtains a Bbox_2 functor.
+constexpr const char* Arr_conic_traits_2_construct_bbox_2_object = "obtains a Bbox_2 functor.
 
 Returns: Construct_bbox_2";
-constexpr const char* CGAL_Arr_conic_traits_2_trim_2_object = "obtains a Trim_2 functor.
+constexpr const char* Arr_conic_traits_2_trim_2_object = "obtains a Trim_2 functor.
 
 Returns: Trim_2";
 
 // CGAL::Arr_conic_traits_2::Construct_bbox_2
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_bbox_2__class__ = "A functor that constructs a bounding box of a conic arc.";
+constexpr const char* Arr_conic_traits_2_Construct_bbox_2__class__ = "A functor that constructs a bounding box of a conic arc.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_bbox_2_operator = "obtains a bounding box for a conic arc.
+constexpr const char* Arr_conic_traits_2_Construct_bbox_2_operator = "obtains a bounding box for a conic arc.
 
 cv The conic arc. The bounding box.
 
@@ -3020,7 +3020,7 @@ Parameters
 cv : const Curve_2 &
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_bbox_2_operator_1 = "obtains a bounding box for an $x$ -monotone conic arc.
+constexpr const char* Arr_conic_traits_2_Construct_bbox_2_operator_1 = "obtains a bounding box for an $x$ -monotone conic arc.
 
 xcv The $x$ -monotone conic arc. The bounding box.
 
@@ -3031,23 +3031,23 @@ xcv : const X_monotone_curve_2 &
 Returns: Bbox_2";
 
 // CGAL::Arr_conic_traits_2::Construct_curve_2
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2__class__ = "A functor that constructs a conic arc.";
+constexpr const char* Arr_conic_traits_2_Construct_curve_2__class__ = "A functor that constructs a conic arc.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator = "constructs an arc corresponding to the line segment seg .
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator = "constructs an arc corresponding to the line segment seg .
 
 Parameters
 ----------
 seg : const typename RatKernel::Segment_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_1 = "constructs an arc corresponding to the full circle circ (note that this circle has a center point with rational coordinates and rational squared radius).
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_1 = "constructs an arc corresponding to the full circle circ (note that this circle has a center point with rational coordinates and rational squared radius).
 
 Parameters
 ----------
 circ : const typename RatKernel::Circle_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_2 = "constructs a circular arc supported by the circle circ , going in the given orientation o from the source point ps to its target point pt .
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_2 = "constructs a circular arc supported by the circle circ , going in the given orientation o from the source point ps to its target point pt .
 
 ps and pt both lie on the circle circ . o is not COLLINEAR .
 
@@ -3059,7 +3059,7 @@ ps : const Point_2 &
 pt : const Point_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_3 = "constructs a circular arc going from p1 (its source point) through p2 to p3 (its target point).
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_3 = "constructs a circular arc going from p1 (its source point) through p2 to p3 (its target point).
 
 Note that all three points have rational coordinates. The orientation of the
 arc is determined automatically. The three points are not collinear.
@@ -3071,7 +3071,7 @@ p2 : const typename RatKernel::Point_2 &
 p3 : const typename RatKernel::Point_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_4 = "constructs a conic arc that corresponds to the full conic curve $r x^2 + s y^2 + t x y + u x + v y + w = 0$ .
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_4 = "constructs a conic arc that corresponds to the full conic curve $r x^2 + s y^2 + t x y + u x + v y + w = 0$ .
 
 As a conic arc must be bounded, the given curve must be an ellipse, that is $4
 r s - t^2 > 0$ .
@@ -3086,7 +3086,7 @@ v : const Rational &
 w : const Rational &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_5 = "constructs a conic arc supported by the conic curve $r x^2 + s y^2 + t x y + u x + v y + w = 0$ , going in the given orientation o from the source point ps to its target point pt .
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_5 = "constructs a conic arc supported by the conic curve $r x^2 + s y^2 + t x y + u x + v y + w = 0$ , going in the given orientation o from the source point ps to its target point pt .
 
 ps and pt both satisfy the equation of the supporting conic curve and define a
 bounded segment of this curve (e.g. in case of a hyperbolic arc, both point
@@ -3107,7 +3107,7 @@ ps : const Point_2 &
 pt : const Point_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_6 = "constructs a conic arc going from p1 (its source point) through p2 , p3 and p4 (in this order) to p5 (its target point).
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_6 = "constructs a conic arc going from p1 (its source point) through p2 , p3 and p4 (in this order) to p5 (its target point).
 
 Note that all five points have rational coordinates. The orientation of the
 arc is determined automatically. No three points of the five are not
@@ -3122,7 +3122,7 @@ p4 : const typename RatKernel::Point_2 &
 p5 : const typename RatKernel::Point_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_curve_2_operator_7 = "constructs a conic arc supported by the conic curve $r x^2 + s y^2 + t x y + u x + v y + w = 0$ , going in the given orientation o from its source point to its target Point.
+constexpr const char* Arr_conic_traits_2_Construct_curve_2_operator_7 = "constructs a conic arc supported by the conic curve $r x^2 + s y^2 + t x y + u x + v y + w = 0$ , going in the given orientation o from its source point to its target Point.
 
 In this case only some approximations of the endpoints ( app_ps and app_pt ,
 respectively) is available, and their exact locations are given implicitly,
@@ -3162,9 +3162,9 @@ w2 : const Rational &
 Returns: Curve_2";
 
 // CGAL::Arr_conic_traits_2::Construct_x_monotone_curve_2
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_x_monotone_curve_2__class__ = "A functor that constructs an $x$ -monotone conic arc.";
+constexpr const char* Arr_conic_traits_2_Construct_x_monotone_curve_2__class__ = "A functor that constructs an $x$ -monotone conic arc.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_x_monotone_curve_2_operator = "converts a given arc to an $x$ -monotone arc.
+constexpr const char* Arr_conic_traits_2_Construct_x_monotone_curve_2_operator = "converts a given arc to an $x$ -monotone arc.
 
 cv The input arc. cv is $x$ -monotone.
 
@@ -3173,7 +3173,7 @@ Parameters
 cv : const Curve_2 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_x_monotone_curve_2_operator_1 = "constructs an $x$ -monotone curve connecting the two given endpoints.
+constexpr const char* Arr_conic_traits_2_Construct_x_monotone_curve_2_operator_1 = "constructs an $x$ -monotone curve connecting the two given endpoints.
 
 source The first point. target The second point. source and target must not be
 the same. A segment connecting source and target .
@@ -3184,7 +3184,7 @@ source : const Point_2 &
 target : const Point_2 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_conic_traits_2_Construct_x_monotone_curve_2_operator_2 = "constructs a special segment of a given line connecting to given endpoints.
+constexpr const char* Arr_conic_traits_2_Construct_x_monotone_curve_2_operator_2 = "constructs a special segment of a given line connecting to given endpoints.
 
 a b c The coefficients of the supporting line ( $ax + by + c = 0$ ). source
 The source point. target The target point. source and target must not be the
@@ -3201,10 +3201,10 @@ target : const Point_2 &
 Returns: X_monotone_curve_2";
 
 // CGAL::Arr_conic_traits_2::Curve_2
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2__class__ = "The Curve_2 class nested within the conic-arc traits can represent arbitrary conic arcs and support their construction in various ways.";
+constexpr const char* Arr_conic_traits_2_Curve_2__class__ = "The Curve_2 class nested within the conic-arc traits can represent arbitrary conic arcs and support their construction in various ways.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_Curve_2 = "constructs an empty (invalid) arc.";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_is_valid = "indicates whether a is a valid conic arc.
+constexpr const char* Arr_conic_traits_2_Curve_2_Curve_2 = "constructs an empty (invalid) arc.";
+constexpr const char* Arr_conic_traits_2_Curve_2_is_valid = "indicates whether a is a valid conic arc.
 
 As the precondition to some of the constructor listed above are quite
 complicated, their violation does not cause the program to abort. Instead, the
@@ -3213,58 +3213,58 @@ is however recommended to check that a constructed arc is valid before
 inserting it to an arrangement.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_is_x_monotone = "determines whether the arc is $x$ -monotone, namely each vertical line intersects it at most once.
+constexpr const char* Arr_conic_traits_2_Curve_2_is_x_monotone = "determines whether the arc is $x$ -monotone, namely each vertical line intersects it at most once.
 
 A vertical line segment is also considered (weakly) $x$ -monotone.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_is_y_monotone = "determines whether the arc is $y$ -monotone, namely each horizontal line intersects it at most once.
+constexpr const char* Arr_conic_traits_2_Curve_2_is_y_monotone = "determines whether the arc is $y$ -monotone, namely each horizontal line intersects it at most once.
 
 A horizontal line segment is also considered (weakly) $x$ -monotone.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_is_full_conic = "indicates whether the arc represents a full conic curve (en ellipse or a circle).
+constexpr const char* Arr_conic_traits_2_Curve_2_is_full_conic = "indicates whether the arc represents a full conic curve (en ellipse or a circle).
 
 Returns: bool";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_r = "returns the coefficient of $x^2$ .
+constexpr const char* Arr_conic_traits_2_Curve_2_r = "returns the coefficient of $x^2$ .
 
 Returns: const NtTraits::Integer &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_s = "returns the coefficient of $t^2$ .
+constexpr const char* Arr_conic_traits_2_Curve_2_s = "returns the coefficient of $t^2$ .
 
 Returns: const NtTraits::Integer &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_t = "returns the coefficient of $x y$ .
+constexpr const char* Arr_conic_traits_2_Curve_2_t = "returns the coefficient of $x y$ .
 
 Returns: const NtTraits::Integer &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_u = "returns the coefficient of $x$ .
+constexpr const char* Arr_conic_traits_2_Curve_2_u = "returns the coefficient of $x$ .
 
 Returns: const NtTraits::Integer &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_v = "returns the coefficient of $y$ .
+constexpr const char* Arr_conic_traits_2_Curve_2_v = "returns the coefficient of $y$ .
 
 Returns: const NtTraits::Integer &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_w = "returns the free coefficient.
+constexpr const char* Arr_conic_traits_2_Curve_2_w = "returns the free coefficient.
 
 Returns: const NtTraits::Integer &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_source = "returns the source point of the arc.
+constexpr const char* Arr_conic_traits_2_Curve_2_source = "returns the source point of the arc.
 
 a is not a full conic curve.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_target = "returns the target point of the arc.
+constexpr const char* Arr_conic_traits_2_Curve_2_target = "returns the target point of the arc.
 
 a is not a full conic curve.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_orientation = "returns the orientation of the arc.
+constexpr const char* Arr_conic_traits_2_Curve_2_orientation = "returns the orientation of the arc.
 
 Returns: Orientation";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_set_source = "sets a new source point for the conic arc.
+constexpr const char* Arr_conic_traits_2_Curve_2_set_source = "sets a new source point for the conic arc.
 
 ps lies on the supporting conic of a .
 
 Parameters
 ----------
 ps : const Point_2 &";
-constexpr const char* CGAL_Arr_conic_traits_2_Curve_2_set_target = "sets a new target point for the conic arc.
+constexpr const char* Arr_conic_traits_2_Curve_2_set_target = "sets a new target point for the conic arc.
 
 pt lies on the supporting conic of a .
 
@@ -3273,22 +3273,22 @@ Parameters
 pt : const Point_2 &";
 
 // CGAL::Arr_conic_traits_2::Point_2
-constexpr const char* CGAL_Arr_conic_traits_2_Point_2__class__ = "The Point_2 class nested within the conic-arc traits is used to represent points.";
+constexpr const char* Arr_conic_traits_2_Point_2__class__ = "The Point_2 class nested within the conic-arc traits is used to represent points.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Point_2_Point_2 = "constructs a default point.";
-constexpr const char* CGAL_Arr_conic_traits_2_Point_2_Point_2_1 = "constructs a point from an algebraic point.
+constexpr const char* Arr_conic_traits_2_Point_2_Point_2 = "constructs a default point.";
+constexpr const char* Arr_conic_traits_2_Point_2_Point_2_1 = "constructs a point from an algebraic point.
 
 Parameters
 ----------
 p : const typename Alg_kernel::Point_2 &";
-constexpr const char* CGAL_Arr_conic_traits_2_Point_2_Point_2_2 = "constructs from homogeneous coordinates.
+constexpr const char* Arr_conic_traits_2_Point_2_Point_2_2 = "constructs from homogeneous coordinates.
 
 Parameters
 ----------
 hx : const Algebraic &
 hy : const Algebraic &
 hz : const Algebraic &";
-constexpr const char* CGAL_Arr_conic_traits_2_Point_2_Point_2_3 = "constructs from Cartesian coordinates.
+constexpr const char* Arr_conic_traits_2_Point_2_Point_2_3 = "constructs from Cartesian coordinates.
 
 Parameters
 ----------
@@ -3296,9 +3296,9 @@ x : const Algebraic &
 y : const Algebraic &";
 
 // CGAL::Arr_conic_traits_2::Trim_2
-constexpr const char* CGAL_Arr_conic_traits_2_Trim_2__class__ = "A functor that trims a conic arc.";
+constexpr const char* Arr_conic_traits_2_Trim_2__class__ = "A functor that trims a conic arc.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_Trim_2_operator = "trims the given $x$ -monotone arc to new endpoints.
+constexpr const char* Arr_conic_traits_2_Trim_2_operator = "trims the given $x$ -monotone arc to new endpoints.
 
 xcv The $x$ -monotone arc source The new source point. target The new target
 point. source and target lies on the arc.
@@ -3312,78 +3312,78 @@ target : const Point_2 &
 Returns: X_monotone_curve_2";
 
 // CGAL::Arr_conic_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_conic_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the conic-arc traits is used to represent $x$ -monotone conic arcs.";
+constexpr const char* Arr_conic_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the conic-arc traits is used to represent $x$ -monotone conic arcs.";
 
-constexpr const char* CGAL_Arr_conic_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs an empty (invalid) arc.";
-constexpr const char* CGAL_Arr_conic_traits_2_X_monotone_curve_2_left = "returns the left (lexicographically smaller) endpoint of xa .
+constexpr const char* Arr_conic_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs an empty (invalid) arc.";
+constexpr const char* Arr_conic_traits_2_X_monotone_curve_2_left = "returns the left (lexicographically smaller) endpoint of xa .
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_conic_traits_2_X_monotone_curve_2_right = "returns the right (lexicographically larger) endpoint of xa .
+constexpr const char* Arr_conic_traits_2_X_monotone_curve_2_right = "returns the right (lexicographically larger) endpoint of xa .
 
 Returns: const Point_2 &";
 
 // CGAL::Arr_consolidated_curve_data_traits_2
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2__class__ = "The class Arr_consolidated_curve_data_traits_2 is a model of the concept AosTraits_2 , and serves as a decorator class that enables the extension of the curve type defined by the Traits parameter.";
+constexpr const char* Arr_consolidated_curve_data_traits_2__class__ = "The class Arr_consolidated_curve_data_traits_2 is a model of the concept AosTraits_2 , and serves as a decorator class that enables the extension of the curve type defined by the Traits parameter.";
 
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Base_traits_2 = "the base traits-class.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Base_traits_2 = "the base traits-class.
 
 Returns: Traits";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Base_curve_2 = "the base curve.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Base_curve_2 = "the base curve.
 
 Returns: Base_traits_2::Curve_2";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Base_x_monotone_curve_2 = "the base $x$ -monotone curve.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Base_x_monotone_curve_2 = "the base $x$ -monotone curve.
 
 Returns: Base_traits_2::X_monotone_curve_2";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container = "a set of data objects that is associated with an $x$ -monotone curve.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container = "a set of data objects that is associated with an $x$ -monotone curve.
 
 Returns: unspecified_type typedef";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_iterator = "a non-mutable iterator for the data objects in the data container.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_iterator = "a non-mutable iterator for the data objects in the data container.
 
 Returns: unspecified_type typedef";
 
 // CGAL::Arr_consolidated_curve_data_traits_2::Data_container
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container__class__ = "The Data_container class nested within the consolidated curve-data traits and associated with the Traits::X_monotone_curve_2 type is maintained as a list with unique data objects.";
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container__class__ = "The Data_container class nested within the consolidated curve-data traits and associated with the Traits::X_monotone_curve_2 type is maintained as a list with unique data objects.";
 
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_Data_container = "constructs default.";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_Data_container_1 = "constructs set containing a single data object.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_Data_container = "constructs default.";
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_Data_container_1 = "constructs set containing a single data object.
 
 Parameters
 ----------
 data : const Data &";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_size = "returns the number of data objects in the set.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_size = "returns the number of data objects in the set.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_begin = "returns an iterator pointing to the first data object.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_begin = "returns an iterator pointing to the first data object.
 
 Returns: Data_iterator";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_end = "returns a past-the-end iterator for the data objects.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_end = "returns a past-the-end iterator for the data objects.
 
 Returns: Data_iterator";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_front = "returns the first data object inserted into the set.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_front = "returns the first data object inserted into the set.
 
 The number of data objects is not $0$ .
 
 Returns: const Data &";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_back = "returns the last data object inserted into the set.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_back = "returns the last data object inserted into the set.
 
 The number of data objects is not $0$ .
 
 Returns: const Data &";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_operator = "checks whether the two sets contain the same data objects (regardless of order).
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_operator = "checks whether the two sets contain the same data objects (regardless of order).
 
 Parameters
 ----------
 other : const Data_container &
 
 Returns: bool";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_find = "finds the given data object in the set and returns an iterator for this object, or end() if it is not found.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_find = "finds the given data object in the set and returns an iterator for this object, or end() if it is not found.
 
 Parameters
 ----------
 data : const Data &
 
 Returns: Data_iterator";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_insert = "inserts the given data object into the set.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_insert = "inserts the given data object into the set.
 
 Returns true on success, or false if the set already contains the object.
 
@@ -3392,7 +3392,7 @@ Parameters
 data : const Data &
 
 Returns: bool";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_erase = "erases the given data object from the set.
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_erase = "erases the given data object from the set.
 
 Returns true on success, or false if the set does not contain the object.
 
@@ -3401,32 +3401,32 @@ Parameters
 data : const Data &
 
 Returns: bool";
-constexpr const char* CGAL_Arr_consolidated_curve_data_traits_2_Data_container_clear = "clears the set.";
+constexpr const char* Arr_consolidated_curve_data_traits_2_Data_container_clear = "clears the set.";
 
 // CGAL::Arr_contracted_side_tag
-constexpr const char* CGAL_Arr_contracted_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is contracted, and curves that approach this side might be inserted into the arrangement.";
+constexpr const char* Arr_contracted_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is contracted, and curves that approach this side might be inserted into the arrangement.";
 
 // CGAL::Arr_counting_traits_2
-constexpr const char* CGAL_Arr_counting_traits_2__class__ = "A metadata traits-class decorator for the arrangement package.";
+constexpr const char* Arr_counting_traits_2__class__ = "A metadata traits-class decorator for the arrangement package.";
 
-constexpr const char* CGAL_Arr_counting_traits_2_Arr_counting_traits_2 = "constructs default
+constexpr const char* Arr_counting_traits_2_Arr_counting_traits_2 = "constructs default
 
 Parameters
 ----------
 args : Args ...";
-constexpr const char* CGAL_Arr_counting_traits_2_Arr_counting_traits_2_1 = "disables copy constructor.
+constexpr const char* Arr_counting_traits_2_Arr_counting_traits_2_1 = "disables copy constructor.
 
 Parameters
 ----------
  : const Arr_counting_traits_2 &";
-constexpr const char* CGAL_Arr_counting_traits_2_count = "obtains the counter of the given operation
+constexpr const char* Arr_counting_traits_2_count = "obtains the counter of the given operation
 
 Parameters
 ----------
 id : Operation_id
 
 Returns: std::size_t";
-constexpr const char* CGAL_Arr_counting_traits_2_print = "prints the counter associated with an operation.
+constexpr const char* Arr_counting_traits_2_print = "prints the counter associated with an operation.
 
 Parameters
 ----------
@@ -3434,201 +3434,201 @@ os : OutStream &
 id : Operation_id
 
 Returns: OutStream &";
-constexpr const char* CGAL_Arr_counting_traits_2_clear_counters = "cleans all operation counters";
+constexpr const char* Arr_counting_traits_2_clear_counters = "cleans all operation counters";
 
 // CGAL::Arr_curve_data_traits_2
-constexpr const char* CGAL_Arr_curve_data_traits_2__class__ = "The class Arr_curve_data_traits_2 is a model of the AosTraits_2 concept and serves as a decorator class that allows the extension of the curves defined by the base traits-class (the Tr parameter), which serves as a geometric traits-class (a model of the AosTraits_2 concept), with extraneous (non-geometric) data fields.";
+constexpr const char* Arr_curve_data_traits_2__class__ = "The class Arr_curve_data_traits_2 is a model of the AosTraits_2 concept and serves as a decorator class that allows the extension of the curves defined by the base traits-class (the Tr parameter), which serves as a geometric traits-class (a model of the AosTraits_2 concept), with extraneous (non-geometric) data fields.";
 
-constexpr const char* CGAL_Arr_curve_data_traits_2_Base_traits_2 = "the base traits-class.
+constexpr const char* Arr_curve_data_traits_2_Base_traits_2 = "the base traits-class.
 
 Returns: Tr";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Base_curve_2 = "the base curve.
+constexpr const char* Arr_curve_data_traits_2_Base_curve_2 = "the base curve.
 
 Returns: Base_traits_2::Curve_2";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Base_x_monotone_curve_2 = "the base $x$ -monotone curve.
+constexpr const char* Arr_curve_data_traits_2_Base_x_monotone_curve_2 = "the base $x$ -monotone curve.
 
 Returns: Base_traits_2::X_monotone_curve_2";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Point_2 = "the point type.
+constexpr const char* Arr_curve_data_traits_2_Point_2 = "the point type.
 
 Returns: Base_traits_2::Point_2";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Merge = "the merge functor.
+constexpr const char* Arr_curve_data_traits_2_Merge = "the merge functor.
 
 Returns: Mrg";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Convert = "the conversion functor.
+constexpr const char* Arr_curve_data_traits_2_Convert = "the conversion functor.
 
 Returns: Cnv";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_data = "the type of data associated with curves.
+constexpr const char* Arr_curve_data_traits_2_Curve_data = "the type of data associated with curves.
 
 Returns: CData";
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_data = "the type of data associated with $x$ -monotone curves.
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_data = "the type of data associated with $x$ -monotone curves.
 
 Returns: XData";
 
 // CGAL::Arr_curve_data_traits_2::Curve_2
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_2__class__ = "The Curve_2 class nested within the curve-data traits extends the Base_traits_2::Curve_2 type with an extra data field of type Data .";
+constexpr const char* Arr_curve_data_traits_2_Curve_2__class__ = "The Curve_2 class nested within the curve-data traits extends the Base_traits_2::Curve_2 type with an extra data field of type Data .";
 
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_2_Curve_2 = "constructs default";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_2_Curve_2_1 = "constructs curve from the given base curve with uninitialized data field.
+constexpr const char* Arr_curve_data_traits_2_Curve_2_Curve_2 = "constructs default";
+constexpr const char* Arr_curve_data_traits_2_Curve_2_Curve_2_1 = "constructs curve from the given base curve with uninitialized data field.
 
 Parameters
 ----------
 base : const Base_curve_2 &";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_2_Curve_2_2 = "constructs curve from the given base curve with an attached data field.
+constexpr const char* Arr_curve_data_traits_2_Curve_2_Curve_2_2 = "constructs curve from the given base curve with an attached data field.
 
 Parameters
 ----------
 base : const Base_curve_2 &
 data : const Data &";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_2_data = "returns the data field (a non-const version, which returns a reference to the data object, is also available).
+constexpr const char* Arr_curve_data_traits_2_Curve_2_data = "returns the data field (a non-const version, which returns a reference to the data object, is also available).
 
 Returns: const Curve_data &";
-constexpr const char* CGAL_Arr_curve_data_traits_2_Curve_2_set_data = "sets the data field.
+constexpr const char* Arr_curve_data_traits_2_Curve_2_set_data = "sets the data field.
 
 Parameters
 ----------
 data : const Curve_data &";
 
 // CGAL::Arr_curve_data_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the curve-data traits extends the Base_traits_2::X_monotone_curve_2 type with an extra data field.";
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the curve-data traits extends the Base_traits_2::X_monotone_curve_2 type with an extra data field.";
 
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs default";
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs an $x$ -monotone curve from the given base curve with uninitialized data field.
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs default";
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs an $x$ -monotone curve from the given base curve with uninitialized data field.
 
 Parameters
 ----------
 base : const Base_x_monotone_curve_2 &";
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs an $x$ -monotone curve from the given base $x$ -monotone curve with an attached data field.
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs an $x$ -monotone curve from the given base $x$ -monotone curve with an attached data field.
 
 Parameters
 ----------
 base : const Base_x_monotone_curve_2 &
 data : const X_monotone_curve_data &";
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_2_data = "returns the field (a non-const version, which returns a reference to the data object, is also available).
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_2_data = "returns the field (a non-const version, which returns a reference to the data object, is also available).
 
 Returns: const X_monotone_curve_data &";
-constexpr const char* CGAL_Arr_curve_data_traits_2_X_monotone_curve_2_set_data = "sets the data field.
+constexpr const char* Arr_curve_data_traits_2_X_monotone_curve_2_set_data = "sets the data field.
 
 Parameters
 ----------
 data : const X_monotone_curve_data &";
 
 // CGAL::Arr_dcel
-constexpr const char* CGAL_Arr_dcel__class__ = "The DCEL class used by the Arrangement_2 , Arr_bounded_planar_topology_traits_2 , Arr_unb_planar_topology_traits_2 class templates and other templates.";
+constexpr const char* Arr_dcel__class__ = "The DCEL class used by the Arrangement_2 , Arr_bounded_planar_topology_traits_2 , Arr_unb_planar_topology_traits_2 class templates and other templates.";
 
 // CGAL::Arr_dcel_base::Arr_face_base
-constexpr const char* CGAL_Arr_dcel_base_Arr_face_base__class__ = "The basic DCEL face type.";
+constexpr const char* Arr_dcel_base_Arr_face_base__class__ = "The basic DCEL face type.";
 
 // CGAL::Arr_dcel_base::Arr_halfedge_base
-constexpr const char* CGAL_Arr_dcel_base_Arr_halfedge_base__class__ = "The basic DCEL halfedge type.";
+constexpr const char* Arr_dcel_base_Arr_halfedge_base__class__ = "The basic DCEL halfedge type.";
 
 // CGAL::Arr_dcel_base::Arr_vertex_base
-constexpr const char* CGAL_Arr_dcel_base_Arr_vertex_base__class__ = "The basic DCEL vertex type.";
+constexpr const char* Arr_dcel_base_Arr_vertex_base__class__ = "The basic DCEL vertex type.";
 
 // CGAL::Arr_default_overlay_traits
-constexpr const char* CGAL_Arr_default_overlay_traits__class__ = "An instance of Arr_default_overlay_traits should be used for overlaying two arrangements of type Arrangement that store no auxiliary data with their DCEL records, where the resulting overlaid arrangement stores no auxiliary DCEL data as well.";
+constexpr const char* Arr_default_overlay_traits__class__ = "An instance of Arr_default_overlay_traits should be used for overlaying two arrangements of type Arrangement that store no auxiliary data with their DCEL records, where the resulting overlaid arrangement stores no auxiliary DCEL data as well.";
 
 // CGAL::Arr_extended_dcel
-constexpr const char* CGAL_Arr_extended_dcel__class__ = "The Arr_extended_dcel class-template extends the topological-features of the DCEL namely the vertex, halfedge, and face types.";
+constexpr const char* Arr_extended_dcel__class__ = "The Arr_extended_dcel class-template extends the topological-features of the DCEL namely the vertex, halfedge, and face types.";
 
 // CGAL::Arr_extended_dcel_text_formatter
-constexpr const char* CGAL_Arr_extended_dcel_text_formatter__class__ = "Arr_extended_dcel_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an Arrangement instance using a simple text format.";
+constexpr const char* Arr_extended_dcel_text_formatter__class__ = "Arr_extended_dcel_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an Arrangement instance using a simple text format.";
 
 // CGAL::Arr_extended_face
-constexpr const char* CGAL_Arr_extended_face__class__ = "The Arr_extended_face class-template extends the face topological-features of the DCEL.";
+constexpr const char* Arr_extended_face__class__ = "The Arr_extended_face class-template extends the face topological-features of the DCEL.";
 
-constexpr const char* CGAL_Arr_extended_face_assign = "assigns f with the contents of the other vertex.
+constexpr const char* Arr_extended_face_assign = "assigns f with the contents of the other vertex.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arr_extended_face_data = "obtains the auxiliary data (a non-const version, returning a reference to a mutable data object is also available).
+constexpr const char* Arr_extended_face_data = "obtains the auxiliary data (a non-const version, returning a reference to a mutable data object is also available).
 
 Returns: const FData &";
-constexpr const char* CGAL_Arr_extended_face_set_data = "sets the auxiliary data.
+constexpr const char* Arr_extended_face_set_data = "sets the auxiliary data.
 
 Parameters
 ----------
 data : const FData &";
 
 // CGAL::Arr_extended_halfedge
-constexpr const char* CGAL_Arr_extended_halfedge__class__ = "The Arr_extended_halfedge class-template extends the halfedge topological-features of the DCEL.";
+constexpr const char* Arr_extended_halfedge__class__ = "The Arr_extended_halfedge class-template extends the halfedge topological-features of the DCEL.";
 
-constexpr const char* CGAL_Arr_extended_halfedge_assign = "assigns he with the contents of the other vertex.
+constexpr const char* Arr_extended_halfedge_assign = "assigns he with the contents of the other vertex.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arr_extended_halfedge_data = "obtains the auxiliary data (a non-const version, returning a reference to a mutable data object is also available).
+constexpr const char* Arr_extended_halfedge_data = "obtains the auxiliary data (a non-const version, returning a reference to a mutable data object is also available).
 
 Returns: const HData &";
-constexpr const char* CGAL_Arr_extended_halfedge_set_data = "sets the auxiliary data.
+constexpr const char* Arr_extended_halfedge_set_data = "sets the auxiliary data.
 
 Parameters
 ----------
 data : const HData &";
 
 // CGAL::Arr_extended_vertex
-constexpr const char* CGAL_Arr_extended_vertex__class__ = "The Arr_extended_vertex class-template extends the vertex topological-features of the DCEL.";
+constexpr const char* Arr_extended_vertex__class__ = "The Arr_extended_vertex class-template extends the vertex topological-features of the DCEL.";
 
-constexpr const char* CGAL_Arr_extended_vertex_assign = "assigns v with the contents of the other vertex.
+constexpr const char* Arr_extended_vertex_assign = "assigns v with the contents of the other vertex.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arr_extended_vertex_data = "obtains the auxiliary data (a non-const version, returning a reference to a mutable data object is also available).
+constexpr const char* Arr_extended_vertex_data = "obtains the auxiliary data (a non-const version, returning a reference to a mutable data object is also available).
 
 Returns: const VData &";
-constexpr const char* CGAL_Arr_extended_vertex_set_data = "sets the auxiliary data.
+constexpr const char* Arr_extended_vertex_set_data = "sets the auxiliary data.
 
 Parameters
 ----------
 data : const VData &";
 
 // CGAL::Arr_face_extended_dcel
-constexpr const char* CGAL_Arr_face_extended_dcel__class__ = "The Arr_face_extended_dcel class-template extends the DCEL face-records, making it possible to store extra (non-geometric) data with the arrangement faces.";
+constexpr const char* Arr_face_extended_dcel__class__ = "The Arr_face_extended_dcel class-template extends the DCEL face-records, making it possible to store extra (non-geometric) data with the arrangement faces.";
 
 // CGAL::Arr_face_extended_text_formatter
-constexpr const char* CGAL_Arr_face_extended_text_formatter__class__ = "Arr_face_extended_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an Arrangement instance using a simple text format.";
+constexpr const char* Arr_face_extended_text_formatter__class__ = "Arr_face_extended_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an Arrangement instance using a simple text format.";
 
 // CGAL::Arr_face_index_map
-constexpr const char* CGAL_Arr_face_index_map__class__ = "Arr_face_index_map maintains a mapping of face handles of an attached arrangement object to indices (of type unsigned int ).";
+constexpr const char* Arr_face_index_map__class__ = "Arr_face_index_map maintains a mapping of face handles of an attached arrangement object to indices (of type unsigned int ).";
 
-constexpr const char* CGAL_Arr_face_index_map_Arrangement_2 = "the type of the attached arrangement.
+constexpr const char* Arr_face_index_map_Arrangement_2 = "the type of the attached arrangement.
 
 Returns: Arrangement_";
-constexpr const char* CGAL_Arr_face_index_map_Face_handle = "The face handle type.
+constexpr const char* Arr_face_index_map_Face_handle = "The face handle type.
 
 Returns: Base_aos::Face_handle";
-constexpr const char* CGAL_Arr_face_index_map_Index_map = "The type of mapping of faces to indices.
+constexpr const char* Arr_face_index_map_Index_map = "The type of mapping of faces to indices.
 
 Returns: Unique_hash_map< Face_handle , value_type >";
-constexpr const char* CGAL_Arr_face_index_map_Arr_face_index_map = "constructs a map that is unattached to any arrangement instance.";
-constexpr const char* CGAL_Arr_face_index_map_Arr_face_index_map_1 = "constructs a map and attaches it to the given arrangement arr .
+constexpr const char* Arr_face_index_map_Arr_face_index_map = "constructs a map that is unattached to any arrangement instance.";
+constexpr const char* Arr_face_index_map_Arr_face_index_map_1 = "constructs a map and attaches it to the given arrangement arr .
 
 Parameters
 ----------
 arr : Base_aos &";
 
 // CGAL::Arr_face_overlay_traits
-constexpr const char* CGAL_Arr_face_overlay_traits__class__ = "An instance of Arr_face_overlay_traits should be used for overlaying two arrangements of types Arr_A and Arr_B , which are instantiated using the same geometric traits-class and with the DCEL classes Dcel_A and Dcel_B respectively, in order to store their overlay in an arrangement of type Arr_R , which is instantiated using a third DCEL class Dcel_R .";
+constexpr const char* Arr_face_overlay_traits__class__ = "An instance of Arr_face_overlay_traits should be used for overlaying two arrangements of types Arr_A and Arr_B , which are instantiated using the same geometric traits-class and with the DCEL classes Dcel_A and Dcel_B respectively, in order to store their overlay in an arrangement of type Arr_R , which is instantiated using a third DCEL class Dcel_R .";
 
 // CGAL::Arr_geodesic_arc_on_sphere_traits_2
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2__class__ = "The traits class Arr_geodesic_arc_on_sphere_traits_2 is a model of the AosTraits_2 concept.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2__class__ = "The traits class Arr_geodesic_arc_on_sphere_traits_2 is a model of the AosTraits_2 concept.";
 
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_construct_point_2_object = "returns an instance of Construct_point_2 .
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_construct_point_2_object = "returns an instance of Construct_point_2 .
 
 Returns: Construct_point_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_construct_x_monotone_curve_2_object = "returns an instance of Construct_x_monotone_curve_2 .
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_construct_x_monotone_curve_2_object = "returns an instance of Construct_x_monotone_curve_2 .
 
 Returns: Construct_x_monotone_curve_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_construct_curve_2_object = "returns an instance of Construct_curve_2 .
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_construct_curve_2_object = "returns an instance of Construct_curve_2 .
 
 Returns: Construct_curve_2";
 
 // CGAL::Arr_geodesic_arc_on_sphere_traits_2::Construct_curve_2
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2__class__ = "Construction functor of geodesic arcs.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2__class__ = "Construction functor of geodesic arcs.";
 
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator = "constructs a full great circle from a normal to a plane.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator = "constructs a full great circle from a normal to a plane.
 
 normal the normal to the plane containing the great circle.
 
@@ -3637,7 +3637,7 @@ Parameters
 normal : const Direction_3 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator_1 = "constructs the minor geodesic arc from two endpoints.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator_1 = "constructs the minor geodesic arc from two endpoints.
 
 The minor arc is the one with the smaller angle among the two geodesic arcs
 with the given endpoints. Find out whether the arc is $x$ -monotone. If it is
@@ -3653,7 +3653,7 @@ p : const Point_2 &
 q : const Point_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator_2 = "constructs a geodesic arc from two endpoints and a normal to the plane containing the arc.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator_2 = "constructs a geodesic arc from two endpoints and a normal to the plane containing the arc.
 
 The two endpoints determine the plane. The normal determines the orientation
 of the plane and the final arc (whether its the minor arc or the major arc).
@@ -3670,9 +3670,9 @@ normal : const Direction_3 &
 Returns: Curve_2";
 
 // CGAL::Arr_geodesic_arc_on_sphere_traits_2::Construct_point_2
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2__class__ = "Construction functor of a point.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2__class__ = "Construction functor of a point.";
 
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_operator = "constructs a point on the sphere from three coordinates, which define a (not necessarily normalized) direction.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_operator = "constructs a point on the sphere from three coordinates, which define a (not necessarily normalized) direction.
 
 x the x coordinate y the y coordinate z the z coordinate
 
@@ -3683,7 +3683,7 @@ y : const FT &
 z : const FT &
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_operator_1 = "constructs a point on the sphere from a (not necessarily normalized) direction.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_operator_1 = "constructs a point on the sphere from a (not necessarily normalized) direction.
 
 other the other direction
 
@@ -3694,9 +3694,9 @@ other : const Direction_3 &
 Returns: Point_2";
 
 // CGAL::Arr_geodesic_arc_on_sphere_traits_2::Construct_x_monotone_curve_2
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2__class__ = "Construction functor of $x$ -monotone geodesic arcs.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2__class__ = "Construction functor of $x$ -monotone geodesic arcs.";
 
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator = "constructs the minor geodesic arc from two endpoints.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator = "constructs the minor geodesic arc from two endpoints.
 
 The minor arc is the one with the smaller angle among the two geodesic arcs
 with the given endpoints. Find out whether the arc is $x$ -monotone. If it is
@@ -3714,7 +3714,7 @@ p : const Point_2 &
 q : const Point_2 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator_1 = "constructs a full great circle from a normal to a plane.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator_1 = "constructs a full great circle from a normal to a plane.
 
 Observe that the constructed arc has one endpoint that lies on the
 identification curve. This point is considered both the source and target (and
@@ -3726,7 +3726,7 @@ Parameters
 normal : const Direction_3 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator_2 = "constructs a geodesic arc from two endpoints and a normal to the plane containing the arc.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator_2 = "constructs a geodesic arc from two endpoints and a normal to the plane containing the arc.
 
 The two endpoints determine the plane. The normal determines the orientation
 of the plane and the final arc (whether its the minor arc or the major arc).
@@ -3745,10 +3745,10 @@ Returns: X_monotone_curve_2";
 
 
 // CGAL::Arr_geodesic_arc_on_sphere_traits_2::Point_2
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Point_2__class__ = "The Point_2 class nested within the traits is used to represent a point on a sphere centered at the origin.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Point_2__class__ = "The Point_2 class nested within the traits is used to represent a point on a sphere centered at the origin.";
 
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Point_2_Location_type = "The location type indicates a location in the parameter space.";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Point_2_Point_2 = "constructs a point from a direction and a location.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Point_2_Location_type = "The location type indicates a location in the parameter space.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Point_2_Point_2 = "constructs a point from a direction and a location.
 
 dir the direction. location indicates the location of the point pre-image in
 the parameter space.
@@ -3757,23 +3757,23 @@ Parameters
 ----------
 dir : const Direction_3 &
 location : Location_type";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Point_2_set_location = "sets the location of the point pre-image in the parameter space.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Point_2_set_location = "sets the location of the point pre-image in the parameter space.
 
 location the updated location of the point pre-image in the parameter space.
 
 Parameters
 ----------
 location : Location_type";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_Point_2_location = "obtains the location of the point.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_Point_2_location = "obtains the location of the point.
 
 the location of the point pre-image in the parameter space.
 
 Returns: Location_type";
 
 // CGAL::Arr_geodesic_arc_on_sphere_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits is used to represent an $x$ -monotone geodesic arc on the a sphere centered at the origin.";
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits is used to represent an $x$ -monotone geodesic arc on the a sphere centered at the origin.";
 
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs an $x$ -monotone geodesic arc.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs an $x$ -monotone geodesic arc.
 
 source the source point of the arc. target the target point of the arc. normal
 the normal of the plane that contains the arc. is_vertical is the arc vertical
@@ -3791,7 +3791,7 @@ is_directed_right : bool
 is_full : bool
 is_degenerate : bool
 is_empty : bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs an $x$ -monotone geodesic arc.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs an $x$ -monotone geodesic arc.
 
 normal the normal of the plane containing the arc. source the source-point
 direction. target the target-point direction. Both endpoints lie on the given
@@ -3802,7 +3802,7 @@ Parameters
 source : const Point_2 &
 target : const Point_2 &
 normal : const Direction_3 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs a full great-circle.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs a full great-circle.
 
 point the endpoint of the full great-circle. normal the normal of the plane
 containing the arc. the point lies on the given plane. the point pre-image
@@ -3813,35 +3813,35 @@ Parameters
 ----------
 point : const Point_2 &
 normal : const Direction_3 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_source = "sets the source endpoint.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_source = "sets the source endpoint.
 
 source the updated source endpoint.
 
 Parameters
 ----------
 source : const Point_2 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_target = "sets the target endpoint.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_target = "sets the target endpoint.
 
 target the updated target endpoint.
 
 Parameters
 ----------
 target : const Point_2 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_normal = "sets the normal of the underlying plane.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_normal = "sets the normal of the underlying plane.
 
 normal the updated normal of the underlying plane.
 
 Parameters
 ----------
 normal : const Direction_3 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_vertical = "sets the flag that indicates whether the arc is vertical.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_vertical = "sets the flag that indicates whether the arc is vertical.
 
 flag indicates whether the arc pre-image in the parameter space is vertical.
 
 Parameters
 ----------
 flag : bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_directed_right = "sets the flag that indicates whether the direction of the arc pre-image in the parameter space is from left to right.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_directed_right = "sets the flag that indicates whether the direction of the arc pre-image in the parameter space is from left to right.
 
 flag indicates whether the arc pre-image in the parameter space is from left
 to right.
@@ -3849,72 +3849,72 @@ to right.
 Parameters
 ----------
 flag : bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_full = "sets the flag that indicates whether the arc is a full great circle.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_full = "sets the flag that indicates whether the arc is a full great circle.
 
 flag indicates whether the arc is a full great circle.
 
 Parameters
 ----------
 flag : bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_degenerate = "sets the flag that indicates whether the arc degenerates to a point.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_degenerate = "sets the flag that indicates whether the arc degenerates to a point.
 
 flag indicates whether the arc degenerates to a point.
 
 Parameters
 ----------
 flag : bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_empty = "sets the flag that indicates whether the arc is empty.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_set_is_empty = "sets the flag that indicates whether the arc is empty.
 
 flag indicates whether the arc is empty.
 
 Parameters
 ----------
 flag : bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_source = "obtains the source point.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_source = "obtains the source point.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_target = "obtains the target point.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_target = "obtains the target point.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_normal = "obtains the normal to the containing plane.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_normal = "obtains the normal to the containing plane.
 
 Returns: const Direction_3 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_left = "obtains the (lexicographically) left endpoint direction.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_left = "obtains the (lexicographically) left endpoint direction.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_right = "obtains the (lexicographically) right endpoint.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_right = "obtains the (lexicographically) right endpoint.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_vertical = "Determines whether the arc is vertical.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_vertical = "Determines whether the arc is vertical.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_directed_right = "determines whether the arc is directed lexicographically from left to right.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_directed_right = "determines whether the arc is directed lexicographically from left to right.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_full = "determines whether the arc is a great circle.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_full = "determines whether the arc is a great circle.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_degenerate = "determines whether the arc is degenerate.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_degenerate = "determines whether the arc is degenerate.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_empty = "determines whether the arc is empty.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_empty = "determines whether the arc is empty.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_meridian = "determines whether the arc is a meridian.
+constexpr const char* Arr_geodesic_arc_on_sphere_traits_2_X_monotone_curve_2_is_meridian = "determines whether the arc is a meridian.
 
 Returns: bool";
 
 // CGAL::Arr_identified_side_tag
-constexpr const char* CGAL_Arr_identified_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is identified, and curves that approach this side might be inserted into the arrangement.";
+constexpr const char* Arr_identified_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is identified, and curves that approach this side might be inserted into the arrangement.";
 
 // CGAL::Arr_line_arc_traits_2
-constexpr const char* CGAL_Arr_line_arc_traits_2__class__ = "This class is a traits class for CGAL arrangements, built on top of a model of concept CircularKernel .";
+constexpr const char* Arr_line_arc_traits_2__class__ = "This class is a traits class for CGAL arrangements, built on top of a model of concept CircularKernel .";
 
 // CGAL::Arr_linear_traits_2
-constexpr const char* CGAL_Arr_linear_traits_2__class__ = "The traits class Arr_linear_traits_2 is a model of the AosTraits_2 concept, which enables the construction and maintenance of arrangements of linear objects.";
+constexpr const char* Arr_linear_traits_2__class__ = "The traits class Arr_linear_traits_2 is a model of the AosTraits_2 concept, which enables the construction and maintenance of arrangements of linear objects.";
 
 
-constexpr const char* CGAL_Arr_linear_traits_2_Trim_2_operator = "trims the given $x$ -monotone curve to an from src to tgt .
+constexpr const char* Arr_linear_traits_2_Trim_2_operator = "trims the given $x$ -monotone curve to an from src to tgt .
 
 \\ pre src and tgt lies on the curve
 
@@ -3927,90 +3927,90 @@ tgt : const Point_2 &
 Returns: X_monotone_curve_2";
 
 // CGAL::Arr_linear_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 (and the Curve_2 ) class nested within the linear-traits can represent all types of linear objects.";
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 (and the Curve_2 ) class nested within the linear-traits can represent all types of linear objects.";
 
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs a line segment.
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs a line segment.
 
 Parameters
 ----------
 seg : const Segment_2 &";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs a ray.
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs a ray.
 
 Parameters
 ----------
 ray : const Ray_2 &";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs a line.
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs a line.
 
 Parameters
 ----------
 ln : const Line_2 &";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_is_segment = "returns whether c is a segment (has two bounded endpoints).
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_is_segment = "returns whether c is a segment (has two bounded endpoints).
 
 Returns: bool";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_segment = "returns a segment object equivalent to c .
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_segment = "returns a segment object equivalent to c .
 
 c is a segment.
 
 Returns: Segment_2";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_is_ray = "returns whether c is a ray (has a bounded source point and its other end is unbounded).
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_is_ray = "returns whether c is a ray (has a bounded source point and its other end is unbounded).
 
 Returns: bool";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_ray = "returns a ray object equivalent to c .
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_ray = "returns a ray object equivalent to c .
 
 c is a ray.
 
 Returns: Ray_2";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_is_line = "returns whether c is a line (has only unbounded ends).
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_is_line = "returns whether c is a line (has only unbounded ends).
 
 Returns: bool";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_line = "returns a line object equivalent to c .
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_line = "returns a line object equivalent to c .
 
 c is a line.
 
 Returns: Line_2";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_supporting_line = "returns the supporting line of c .
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_supporting_line = "returns the supporting line of c .
 
 c is not a point (a degenerate curve).
 
 Returns: Line_2";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_source = "returns c 's source point.
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_source = "returns c 's source point.
 
 c is a point, a segment or a ray.
 
 Returns: Point_2";
-constexpr const char* CGAL_Arr_linear_traits_2_X_monotone_curve_2_target = "returns c 's target point.
+constexpr const char* Arr_linear_traits_2_X_monotone_curve_2_target = "returns c 's target point.
 
 c is a point or a segment.
 
 Returns: Point_2";
 
 // CGAL::Arr_non_caching_segment_basic_traits_2
-constexpr const char* CGAL_Arr_non_caching_segment_basic_traits_2__class__ = "The traits class Arr_non_caching_segment_basic_traits_2 is a model of the AosTraits_2 concept that allow the construction and maintenance of arrangements of sets of pairwise interior-disjoint line segments.";
+constexpr const char* Arr_non_caching_segment_basic_traits_2__class__ = "The traits class Arr_non_caching_segment_basic_traits_2 is a model of the AosTraits_2 concept that allow the construction and maintenance of arrangements of sets of pairwise interior-disjoint line segments.";
 
 // CGAL::Arr_non_caching_segment_traits_2
-constexpr const char* CGAL_Arr_non_caching_segment_traits_2__class__ = "The traits class Arr_non_caching_segment_traits_2 is a model of the AosTraits_2 concept that allows the construction and maintenance of arrangements of line segments.";
+constexpr const char* Arr_non_caching_segment_traits_2__class__ = "The traits class Arr_non_caching_segment_traits_2 is a model of the AosTraits_2 concept that allows the construction and maintenance of arrangements of line segments.";
 
 // CGAL::Arr_oblivious_side_tag
-constexpr const char* CGAL_Arr_oblivious_side_tag__class__ = "This type tag is used to indicate that the condition of a boundary side of the parameter space is irrelevant.";
+constexpr const char* Arr_oblivious_side_tag__class__ = "This type tag is used to indicate that the condition of a boundary side of the parameter space is irrelevant.";
 
 // CGAL::Arr_open_side_tag
-constexpr const char* CGAL_Arr_open_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is open, and curves that approach this side might be inserted into the arrangement.";
+constexpr const char* Arr_open_side_tag__class__ = "This type tag is used to indicate that a side of the parameter space, either left, right, bottom, or top, is open, and curves that approach this side might be inserted into the arrangement.";
 
 // CGAL::Arr_point_location_result
-constexpr const char* CGAL_Arr_point_location_result__class__ = "A unary metafunction to determine the return type of a point-location or vertical ray-shoot query.";
+constexpr const char* Arr_point_location_result__class__ = "A unary metafunction to determine the return type of a point-location or vertical ray-shoot query.";
 
-constexpr const char* CGAL_Arr_point_location_result_Type = "The type of the arrangement feature that is the result of a point-location query or a vertical ray-shoot query, namely, std::variant< Arrangement_on_surface_2::Vertex_const_handle , Arrangement_on_surface_2::Halfedge_const_handle , Arrangement_on_surface_2::Face_const_handle > .
+constexpr const char* Arr_point_location_result_Type = "The type of the arrangement feature that is the result of a point-location query or a vertical ray-shoot query, namely, std::variant< Arrangement_on_surface_2::Vertex_const_handle , Arrangement_on_surface_2::Halfedge_const_handle , Arrangement_on_surface_2::Face_const_handle > .
 
 Returns: unspecified_type";
 
 // CGAL::Arr_polycurve_traits_2
-constexpr const char* CGAL_Arr_polycurve_traits_2__class__ = "Note: The SubcurveTraits_2 can comprise of Line_segments, Conic_arcs, Circular_arc, Bezier_curves, or Linear_curves.";
+constexpr const char* Arr_polycurve_traits_2__class__ = "Note: The SubcurveTraits_2 can comprise of Line_segments, Conic_arcs, Circular_arc, Bezier_curves, or Linear_curves.";
 
 
 // CGAL::Arr_polycurve_traits_2::Construct_curve_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Construct_curve_2__class__ = "Construction functor of a general (not necessarily $x$ -monotone) polycurve.";
+constexpr const char* Arr_polycurve_traits_2_Construct_curve_2__class__ = "Construction functor of a general (not necessarily $x$ -monotone) polycurve.";
 
-constexpr const char* CGAL_Arr_polycurve_traits_2_Construct_curve_2_operator = "obtains a polycurve that comprises of one given subcurve.
+constexpr const char* Arr_polycurve_traits_2_Construct_curve_2_operator = "obtains a polycurve that comprises of one given subcurve.
 
 subcurve input subcurve. subcurve is not degenerated (not tested). A polycurve
 with one subcurve, namely subcurve .
@@ -4020,7 +4020,7 @@ Parameters
 subcurve : const Subcurve_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Construct_curve_2_operator_1 = "constructs a well-oriented polycurve from a range of either SubcurveTraits_2::Point_2 or SubcurveTraits_2::Curve_2 .
+constexpr const char* Arr_polycurve_traits_2_Construct_curve_2_operator_1 = "constructs a well-oriented polycurve from a range of either SubcurveTraits_2::Point_2 or SubcurveTraits_2::Curve_2 .
 
 begin iterator pointing to the first element in the range. end iterator
 pointing to the past-the-end element in the range. The given range form a
@@ -4036,40 +4036,40 @@ end : ForwardIterator
 Returns: Curve_2";
 
 // CGAL::Arr_polycurve_traits_2::Construct_x_monotone_curve_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Construct_x_monotone_curve_2__class__ = "Construction functor of $x$ -monotone polycurve.";
+constexpr const char* Arr_polycurve_traits_2_Construct_x_monotone_curve_2__class__ = "Construction functor of $x$ -monotone polycurve.";
 
 // CGAL::Arr_polycurve_traits_2::Curve_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2__class__ = "The Curve_2 type nested in the Arr_polycurve_traits_2 represents general continuous piecewise-linear subcurves (a polycurve can be self-intersecting) and support their construction from range of subcurves.";
+constexpr const char* Arr_polycurve_traits_2_Curve_2__class__ = "The Curve_2 type nested in the Arr_polycurve_traits_2 represents general continuous piecewise-linear subcurves (a polycurve can be self-intersecting) and support their construction from range of subcurves.";
 
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Subcurves_container = "The container of the subcurves that comprises the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Subcurves_container = "The container of the subcurves that comprises the polycurve.
 
 Returns: std::vector< Subcurve_2 >";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Size = "The size of the container that comprises the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Size = "The size of the container that comprises the polycurve.
 
 Returns: Subcurves_container::size_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_const_iterator = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_const_iterator = "
 Deprecated A bidirectional iterator that allows traversing the points that
 comprise a polycurve's subcurves.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_const_reverse_iterator = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_const_reverse_iterator = "
 Deprecated A bidirectional iterator that allows traversing the points that
 comprise a polycurve's subcurves.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Subcurve_const_iterator = "A bidirectional constant iterator that allows traversing the subcurves that comprise the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Subcurve_const_iterator = "A bidirectional constant iterator that allows traversing the subcurves that comprise the polycurve.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Subcurve_const_reverse_iterator = "A bidirectional constant iterator that allows traversing the subcurves that comprise the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Subcurve_const_reverse_iterator = "A bidirectional constant iterator that allows traversing the subcurves that comprise the polycurve.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Curve_2 = "constructs default; constructs an empty polycurve.";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Curve_2_1 = "constructs a polycurve from one subcurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Curve_2 = "constructs default; constructs an empty polycurve.";
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Curve_2_1 = "constructs a polycurve from one subcurve.
 
 Parameters
 ----------
 subcurve : const Subcurve_2";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_Curve_2_2 = "constructs a polycurve defined by the given range of subcurves [first, last) (the value-type of InputIterator must be SubcurveTraits_2::Curve_2 .
+constexpr const char* Arr_polycurve_traits_2_Curve_2_Curve_2_2 = "constructs a polycurve defined by the given range of subcurves [first, last) (the value-type of InputIterator must be SubcurveTraits_2::Curve_2 .
 
 In general, the subcurves might not be $x$ -monotone, furthermore, they might
 not form a continuous polycurve. The subcurves in the range should form a
@@ -4084,50 +4084,50 @@ Parameters
 ----------
 first : Iterator
 last : Iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_points = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_points = "
 Deprecated obtains the number of subcurve end-points that comprise the
 polycurve. Note that for a bounded polycurve, if there are $n$ points in the
 polycurve, it comprises $(n - 1)$ subcurves. Currently, only bounded
 polycurves are supported.
 
 Returns: unsigned_int";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_begin = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_begin = "
 Deprecated obtains an iterator pointing at the source point of the polycurve.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_begin_subcurves = "obtains an iterator pointing at the first subcurve of the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_begin_subcurves = "obtains an iterator pointing at the first subcurve of the polycurve.
 
 Returns: Subcurve_const_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_end = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_end = "
 Deprecated obtains an iterator pointing after the end of the polycurve.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_end_subcurves = "obtains an iterator pointing at the past-the-end subcurve of the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_end_subcurves = "obtains an iterator pointing at the past-the-end subcurve of the polycurve.
 
 Returns: Subcurve_const_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_rbegin = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_rbegin = "
 Deprecated obtains an iterator pointing at the target point of the polycurve.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_rbegin_subcurves = "obtains an iterator pointing at the last subcurve of the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_rbegin_subcurves = "obtains an iterator pointing at the last subcurve of the polycurve.
 
 Returns: Subcurve_const_reverse_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_rend = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_rend = "
 Deprecated obtains an iterator pointing before the beginning of the polycurve.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_rend_subcurves = "obtains an iterator pointing at the past-the-end subcurve of the polycurve in reverse order.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_rend_subcurves = "obtains an iterator pointing at the past-the-end subcurve of the polycurve in reverse order.
 
 Returns: Subcurve_const_reverse_iterator";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_size = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_size = "
 Deprecated obtains the number of subcurves composing the polycurve (equivalent
 to pi.points() - 1 ). Was replaced by number_of_subcurves()
 
 Returns: size_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_number_of_subcurves = "obtains the number of subcurves that comprise the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_number_of_subcurves = "obtains the number of subcurves that comprise the polycurve.
 
 Returns: size_type";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_operator = "obtains the $k$ -th subcurve of the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_operator = "obtains the $k$ -th subcurve of the polycurve.
 
 $k$ is not greater than or equal to $n-1$ , where $n$ is the number of
 subcurves.
@@ -4137,10 +4137,10 @@ Parameters
 k : size_t
 
 Returns: SubcurveTraits_2::X_monotone_curve_2";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_bbox = "obtains the bounding box of the polycurve.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_bbox = "obtains the bounding box of the polycurve.
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_push_back = "appends a subcurve to the polycurve at the back.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_push_back = "appends a subcurve to the polycurve at the back.
 
 Warning: This function does not perform the precondition test that the
 Push_back_2 functor does. Thus, it is recommended to use the latter. subcurve
@@ -4151,7 +4151,7 @@ subcurve in the polycurve.
 Parameters
 ----------
 subcurve : const Subcurve_2 &";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_push_front = "appends a subcurve to the polycurve at the front.
+constexpr const char* Arr_polycurve_traits_2_Curve_2_push_front = "appends a subcurve to the polycurve at the front.
 
 Warning: This is a risky function! Don't use it! Prefer the corresponding
 functor which is provided in the traits class. subcurve The new subcurve to be
@@ -4162,19 +4162,19 @@ polycurve.
 Parameters
 ----------
 subcurve : const Subcurve_2 &";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_push_back_1 = "
+constexpr const char* Arr_polycurve_traits_2_Curve_2_push_back_1 = "
 Deprecated adds a new point to the polycurvs, which becomes the new target
 point of pi .
 
 Parameters
 ----------
 p : const Point_2 &";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Curve_2_clear = "resets the polycurve.";
+constexpr const char* Arr_polycurve_traits_2_Curve_2_clear = "resets the polycurve.";
 
 // CGAL::Arr_polycurve_traits_2::Make_x_monotone_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Make_x_monotone_2__class__ = "subdivides a given subcurve into $x$ -monotone subcurves and isolated points, and insert them into an output container.";
+constexpr const char* Arr_polycurve_traits_2_Make_x_monotone_2__class__ = "subdivides a given subcurve into $x$ -monotone subcurves and isolated points, and insert them into an output container.";
 
-constexpr const char* CGAL_Arr_polycurve_traits_2_Make_x_monotone_2_operator = "performs the subdivision.
+constexpr const char* Arr_polycurve_traits_2_Make_x_monotone_2_operator = "performs the subdivision.
 
 cv the subcurve. oi The output iterator that points at the output container.
 the past-the-end iterator of the output container. if cv is not empty, then it
@@ -4189,12 +4189,12 @@ oi : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Arr_polycurve_traits_2::Number_of_points_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Number_of_points_2__class__ = "Function object which returns the number of subcurve end-points of a polycurve.";
+constexpr const char* Arr_polycurve_traits_2_Number_of_points_2__class__ = "Function object which returns the number of subcurve end-points of a polycurve.";
 
 // CGAL::Arr_polycurve_traits_2::Push_back_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Push_back_2__class__ = "Functor to augment a polycurve by either adding a vertex or a subcurve at the back.";
+constexpr const char* Arr_polycurve_traits_2_Push_back_2__class__ = "Functor to augment a polycurve by either adding a vertex or a subcurve at the back.";
 
-constexpr const char* CGAL_Arr_polycurve_traits_2_Push_back_2_operator = "appends a subcurve subcurve to an existing polycurve cv at the back.
+constexpr const char* Arr_polycurve_traits_2_Push_back_2_operator = "appends a subcurve subcurve to an existing polycurve cv at the back.
 
 If cv is empty, subcurve will be its first subcurve. cv a polycurve. Note, cv
 is (not necessarily) $x$ -monotone. subcurve a subcurve (not necessarily $x$
@@ -4204,7 +4204,7 @@ Parameters
 ----------
 cv : Curve_2 &
 subcurve : const Subcurve_2 &";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Push_back_2_operator_1 = "appends a subcurve subcurve to an existing $x$ -monotone polycurve xcv at the back.
+constexpr const char* Arr_polycurve_traits_2_Push_back_2_operator_1 = "appends a subcurve subcurve to an existing $x$ -monotone polycurve xcv at the back.
 
 If xcv is empty, subcurve will be its first subcurve. xcv existing $x$
 -monotone polycurve subcurve the subcurve to be added If xcv is not empty then
@@ -4218,9 +4218,9 @@ xcv : X_monotone_curve_2 &
 subcurve : const X_monotone_subcurve_2 &";
 
 // CGAL::Arr_polycurve_traits_2::Push_front_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_Push_front_2__class__ = "Functor to augment a polycurve by either adding a vertex or a subcurve at the front.";
+constexpr const char* Arr_polycurve_traits_2_Push_front_2__class__ = "Functor to augment a polycurve by either adding a vertex or a subcurve at the front.";
 
-constexpr const char* CGAL_Arr_polycurve_traits_2_Push_front_2_operator = "appends a subcurve subcurve to an existing polycurve cv at the front.
+constexpr const char* Arr_polycurve_traits_2_Push_front_2_operator = "appends a subcurve subcurve to an existing polycurve cv at the front.
 
 If cv is empty, subcurve will be its first subcurve. cv a polycurve. Note, cv
 is (not necessarily) $x$ -monotone. subcurve a subcurve (not necessarily $x$
@@ -4230,7 +4230,7 @@ Parameters
 ----------
 cv : Curve_2 &
 subcurve : const Subcurve_2 &";
-constexpr const char* CGAL_Arr_polycurve_traits_2_Push_front_2_operator_1 = "appends a subcurve subcurve to an existing $x$ -monotone polycurve xcv at the front.
+constexpr const char* Arr_polycurve_traits_2_Push_front_2_operator_1 = "appends a subcurve subcurve to an existing $x$ -monotone polycurve xcv at the front.
 
 If xcv is empty, subcurve will be its first subcurve. xcv existing $x$
 -monotone polycurve subcurve the subcurve to be added If xcv is not empty then
@@ -4243,7 +4243,7 @@ Parameters
 xcv : X_monotone_curve_2 &
 subcurve : const X_monotone_subcurve_2 &";
 
-constexpr const char* CGAL_Arr_polycurve_traits_2_Trim_2_operator = "obtains a trimmed version of the polycurve with src and tgt as end vertices.
+constexpr const char* Arr_polycurve_traits_2_Trim_2_operator = "obtains a trimmed version of the polycurve with src and tgt as end vertices.
 
 src and tgt will be swapped if they do not conform to the direction of the
 polycurve.
@@ -4257,16 +4257,16 @@ tgt : const Point_2 &
 Returns: X_monotone_curve_2";
 
 // CGAL::Arr_polycurve_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_polycurve_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the polycurve traits is used to represent $x$ -monotone piecewise linear subcurves.";
+constexpr const char* Arr_polycurve_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the polycurve traits is used to represent $x$ -monotone piecewise linear subcurves.";
 
 // CGAL::Arr_polyline_traits_2
-constexpr const char* CGAL_Arr_polyline_traits_2__class__ = "The traits class Arr_polyline_traits_2 handles piecewise linear curves, commonly referred to as polylines.";
+constexpr const char* Arr_polyline_traits_2__class__ = "The traits class Arr_polyline_traits_2 handles piecewise linear curves, commonly referred to as polylines.";
 
 
 // CGAL::Arr_polyline_traits_2::Construct_curve_2
-constexpr const char* CGAL_Arr_polyline_traits_2_Construct_curve_2__class__ = "Construction functor of a general (not necessarily $x$ -monotone) polyline.";
+constexpr const char* Arr_polyline_traits_2_Construct_curve_2__class__ = "Construction functor of a general (not necessarily $x$ -monotone) polyline.";
 
-constexpr const char* CGAL_Arr_polyline_traits_2_Construct_curve_2_operator = "obtains a polyline connecting the two given endpoints.
+constexpr const char* Arr_polyline_traits_2_Construct_curve_2_operator = "obtains a polyline connecting the two given endpoints.
 
 p The first point. q The second point. A segment connecting p and q . p and q
 are distinct.
@@ -4277,7 +4277,7 @@ p : const Point_2 &
 q : const Point_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_polyline_traits_2_Construct_curve_2_operator_1 = "obtains a polyline that comprises of one given segment.
+constexpr const char* Arr_polyline_traits_2_Construct_curve_2_operator_1 = "obtains a polyline that comprises of one given segment.
 
 seg input segment A polyline with one segment, namely seg . seg is not
 degenerated (not tested)
@@ -4287,7 +4287,7 @@ Parameters
 seg : const Segment_2 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_polyline_traits_2_Construct_curve_2_operator_2 = "constructs a well-oriented polyline from a range of either SegmentTraits_2::Point_2 or SegmentTraits_2::Segment_2 .
+constexpr const char* Arr_polyline_traits_2_Construct_curve_2_operator_2 = "constructs a well-oriented polyline from a range of either SegmentTraits_2::Point_2 or SegmentTraits_2::Segment_2 .
 
 begin iterator pointing to the first element in the range. end iterator
 pointing to the past-the-end element in the range. A polyline using the
@@ -4303,24 +4303,24 @@ end : ForwardIterator
 Returns: Curve_2";
 
 // CGAL::Arr_polyline_traits_2::Construct_x_monotone_curve_2
-constexpr const char* CGAL_Arr_polyline_traits_2_Construct_x_monotone_curve_2__class__ = "Construction functor of $x$ -monotone polyline.";
+constexpr const char* Arr_polyline_traits_2_Construct_x_monotone_curve_2__class__ = "Construction functor of $x$ -monotone polyline.";
 
 // CGAL::Arr_polyline_traits_2::Curve_2
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2__class__ = "The Curve_2 type nested within the traits class respresnts polylines.";
+constexpr const char* Arr_polyline_traits_2_Curve_2__class__ = "The Curve_2 type nested within the traits class respresnts polylines.";
 
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_Segment_const_iterator = "Const iterator of subcurves.
+constexpr const char* Arr_polyline_traits_2_Curve_2_Segment_const_iterator = "Const iterator of subcurves.
 
 Returns: std::vector< X_monotone_segment_2 >::const_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_Segment_const_reverse_iterator = "Reverse const iterator of subcurves.
+constexpr const char* Arr_polyline_traits_2_Curve_2_Segment_const_reverse_iterator = "Reverse const iterator of subcurves.
 
 Returns: std::reverse_iterator< Segment_const_iterator >";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_Curve_2 = "constructs default.";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_Curve_2_1 = "constructs from a subcurve.
+constexpr const char* Arr_polyline_traits_2_Curve_2_Curve_2 = "constructs default.";
+constexpr const char* Arr_polyline_traits_2_Curve_2_Curve_2_1 = "constructs from a subcurve.
 
 Parameters
 ----------
 seg : const Segment_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_Curve_2_2 = "constructs a polyline from a range of subcurves.
+constexpr const char* Arr_polyline_traits_2_Curve_2_Curve_2_2 = "constructs a polyline from a range of subcurves.
 
 begin An iterator pointing to the first subcurve in the range. end An iterator
 pointing after the past-the-end subcurve in the range. The end of subcurve n
@@ -4330,28 +4330,28 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_begin_segments = "obtains an iterator for the polycurve subcurves.
+constexpr const char* Arr_polyline_traits_2_Curve_2_begin_segments = "obtains an iterator for the polycurve subcurves.
 
 Returns: Segment_const_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_end_segments = "obtains a past-the-end iterator for the polycurve subcurves.
+constexpr const char* Arr_polyline_traits_2_Curve_2_end_segments = "obtains a past-the-end iterator for the polycurve subcurves.
 
 Returns: Segment_const_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_rbegin_segments = "obtains the first reverse iterator of the polyline subcurves.
+constexpr const char* Arr_polyline_traits_2_Curve_2_rbegin_segments = "obtains the first reverse iterator of the polyline subcurves.
 
 Returns: Segment_const_reverse_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_rend_segments = "obtains the past-the-end reverse iterator for the polyline points.
+constexpr const char* Arr_polyline_traits_2_Curve_2_rend_segments = "obtains the past-the-end reverse iterator for the polyline points.
 
 Returns: Segment_const_reverse_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_Curve_2_number_of_segments = "obtains the number of subcurves that comprise the poyline.
+constexpr const char* Arr_polyline_traits_2_Curve_2_number_of_segments = "obtains the number of subcurves that comprise the poyline.
 
 The number of subcurves.
 
 Returns: Segments_size_type";
 
 // CGAL::Arr_polyline_traits_2::Push_back_2
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_back_2__class__ = "Functor to augment a polyline by either adding a vertex or a segment at the back.";
+constexpr const char* Arr_polyline_traits_2_Push_back_2__class__ = "Functor to augment a polyline by either adding a vertex or a segment at the back.";
 
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_back_2_operator = "appends a point p to an existing polyline cv at the back.
+constexpr const char* Arr_polyline_traits_2_Push_back_2_operator = "appends a point p to an existing polyline cv at the back.
 
 cv a polyline. Note, cv is not (necessarily) $x$ -monotone. p a point to be
 appended to cv at the back. cv contains at least one segment.
@@ -4360,7 +4360,7 @@ Parameters
 ----------
 cv : Curve_2 &
 p : const Point_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_back_2_operator_1 = "appends a segment seg to an existing polyline cv at the back.
+constexpr const char* Arr_polyline_traits_2_Push_back_2_operator_1 = "appends a segment seg to an existing polyline cv at the back.
 
 If cv is empty, seg will be its first segment. cv a polyline. Note, cv is (not
 necessarily) $x$ -monotone. seg a segment (not necessarily $x$ -monotone) to
@@ -4370,7 +4370,7 @@ Parameters
 ----------
 cv : Curve_2 &
 seg : const Segment_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_back_2_operator_2 = "appends a point p to an existing $x$ -monotone polyline xcv at the back.
+constexpr const char* Arr_polyline_traits_2_Push_back_2_operator_2 = "appends a point p to an existing $x$ -monotone polyline xcv at the back.
 
 xcv the existing $x$ -monotone polyline p the point to be pushed back. xcv
 contains at least one segment p is either to the right of xcv if it is
@@ -4380,7 +4380,7 @@ Parameters
 ----------
 xcv : const X_monotone_curve_2 &
 p : Point_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_back_2_operator_3 = "appends a segment seg to an existing $x$ -monotone polyline xcv at the back.
+constexpr const char* Arr_polyline_traits_2_Push_back_2_operator_3 = "appends a segment seg to an existing $x$ -monotone polyline xcv at the back.
 
 If xcv is empty, seg will be its first segment. xcv existing $x$ -monotone
 polyline seg the segment to be added If xcv is not empty then seg extends xcv
@@ -4393,9 +4393,9 @@ xcv : const X_monotone_curve_2 &
 seg : Segment_2 &";
 
 // CGAL::Arr_polyline_traits_2::Push_front_2
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_front_2__class__ = "Functor to augment a polyline by either adding a vertex or a segment at the front.";
+constexpr const char* Arr_polyline_traits_2_Push_front_2__class__ = "Functor to augment a polyline by either adding a vertex or a segment at the front.";
 
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_front_2_operator = "appends a point p to an existing polyline cv at the front.
+constexpr const char* Arr_polyline_traits_2_Push_front_2_operator = "appends a point p to an existing polyline cv at the front.
 
 cv a polyline. Note, cv is not (necessarily) $x$ -monotone. p a point to be
 appended to cv at the back. cv contains at least one segment.
@@ -4404,7 +4404,7 @@ Parameters
 ----------
 cv : Curve_2 &
 p : const Point_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_front_2_operator_1 = "appends a segment seg to an existing polyline cv at the front.
+constexpr const char* Arr_polyline_traits_2_Push_front_2_operator_1 = "appends a segment seg to an existing polyline cv at the front.
 
 If cv is empty, seg will be its first segment. cv a polyline. Note, cv is (not
 necessarily) $x$ -monotone. seg a segment (not necessarily $x$ -monotone) to
@@ -4414,7 +4414,7 @@ Parameters
 ----------
 cv : Curve_2 &
 seg : const Segment_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_front_2_operator_2 = "appends a point p to an existing $x$ -monotone polyline xcv at the front.
+constexpr const char* Arr_polyline_traits_2_Push_front_2_operator_2 = "appends a point p to an existing $x$ -monotone polyline xcv at the front.
 
 xcv the existing $x$ -monotone polyline p the point to be pushed back. xcv
 contains at least one segment p is either to the left of xcv if it is oriented
@@ -4424,7 +4424,7 @@ Parameters
 ----------
 xcv : const X_monotone_curve_2 &
 p : Point_2 &";
-constexpr const char* CGAL_Arr_polyline_traits_2_Push_front_2_operator_3 = "appends a segment seg to an existing $x$ -monotone polyline xcv at the front.
+constexpr const char* Arr_polyline_traits_2_Push_front_2_operator_3 = "appends a segment seg to an existing $x$ -monotone polyline xcv at the front.
 
 If xcv is empty, seg will be its first segment. xcv existing $x$ -monotone
 polyline seg the segment to be added If xcv is not empty then seg extends xcv
@@ -4438,21 +4438,21 @@ xcv : const X_monotone_curve_2 &
 seg : Segment_2 &";
 
 // CGAL::Arr_polyline_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 type nested within the traits class respresnts $x$ -monotone polylines.";
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 type nested within the traits class respresnts $x$ -monotone polylines.";
 
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_Segment_const_iterator = "Const iterator of subcurves.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_Segment_const_iterator = "Const iterator of subcurves.
 
 Returns: std::vector< X_monotone_segment_2 >::const_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_Segment_const_reverse_iterator = "Reverse const iterator of subcurves.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_Segment_const_reverse_iterator = "Reverse const iterator of subcurves.
 
 Returns: std::reverse_iterator< Segment_const_iterator >";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs default.";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs from a subcurve.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs default.";
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_X_monotone_curve_2_1 = "constructs from a subcurve.
 
 Parameters
 ----------
 seg : X_monotone_segment_2";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs from a range.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_X_monotone_curve_2_2 = "constructs from a range.
 
 Similar to the constructor of a general polycurve. Like in the case of general
 polycurve, for the sake of backwards compatibility we have to keep an
@@ -4463,54 +4463,54 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_begin_segments = "obtains the first iterator of the polyline subcurves.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_begin_segments = "obtains the first iterator of the polyline subcurves.
 
 Returns: Segment_const_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_end_segments = "obtains the past-the-end iterator of the polyline subcurves.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_end_segments = "obtains the past-the-end iterator of the polyline subcurves.
 
 Returns: Segment_const_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_rbegin_segments = "obtains the first reverse iterator of the polyline subcurves.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_rbegin_segments = "obtains the first reverse iterator of the polyline subcurves.
 
 Returns: Segment_const_reverse_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_rend_segments = "obtains the past-the-end reverse iterator for the polyline points.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_rend_segments = "obtains the past-the-end reverse iterator for the polyline points.
 
 Returns: Segment_const_reverse_iterator";
-constexpr const char* CGAL_Arr_polyline_traits_2_X_monotone_curve_2_number_of_segments = "obtains the number of subcurves that comprise the poyline.
+constexpr const char* Arr_polyline_traits_2_X_monotone_curve_2_number_of_segments = "obtains the number of subcurves that comprise the poyline.
 
 The number of subcurves.
 
 Returns: Segments_size_type";
 
 // CGAL::Arr_rational_function_traits_2
-constexpr const char* CGAL_Arr_rational_function_traits_2__class__ = "The traits class Arr_rational_function_traits_2 is a model of the AosTraits_2 concept.";
+constexpr const char* Arr_rational_function_traits_2__class__ = "The traits class Arr_rational_function_traits_2 is a model of the AosTraits_2 concept.";
 
-constexpr const char* CGAL_Arr_rational_function_traits_2_Arr_rational_function_traits_2 = "constructs an empty traits that uses the kernel pointed by kernel for performing algebraic operations.
+constexpr const char* Arr_rational_function_traits_2_Arr_rational_function_traits_2 = "constructs an empty traits that uses the kernel pointed by kernel for performing algebraic operations.
 
 Parameters
 ----------
 kernel : const Algebraic_kernel_d_1 *";
-constexpr const char* CGAL_Arr_rational_function_traits_2_construct_curve_2_object = "returns an instance of Construct_curve_2 .
+constexpr const char* Arr_rational_function_traits_2_construct_curve_2_object = "returns an instance of Construct_curve_2 .
 
 Returns: Construct_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_construct_x_monotone_curve_2_object = "returns an instance of Construct_x_monotone_curve_2 .
+constexpr const char* Arr_rational_function_traits_2_construct_x_monotone_curve_2_object = "returns an instance of Construct_x_monotone_curve_2 .
 
 Returns: Construct_x_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_cleanup_cache = "deletes all curves from the cache that exist only there.";
-constexpr const char* CGAL_Arr_rational_function_traits_2_algebraic_kernel_d_1 = "returns a pointer to the used algebraic kernel object.
+constexpr const char* Arr_rational_function_traits_2_cleanup_cache = "deletes all curves from the cache that exist only there.";
+constexpr const char* Arr_rational_function_traits_2_algebraic_kernel_d_1 = "returns a pointer to the used algebraic kernel object.
 
 Returns: const Algebraic_kernel_d_1 *";
 
 // CGAL::Arr_rational_function_traits_2::Construct_curve_2
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2__class__ = "Functor to construct a Curve_2 .";
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2__class__ = "Functor to construct a Curve_2 .";
 
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator = "constructs a curve representing the polynomial function $y = P(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator = "constructs a curve representing the polynomial function $y = P(x)$ .
 
 Parameters
 ----------
 P : Polynomial_1
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_1 = "constructs a curve representing the polynomial function $y = P(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_1 = "constructs a curve representing the polynomial function $y = P(x)$ .
 
 The function is defined over the interval $[x,+\\infty)$ if $right$ is true and
 $(-\\infty,x]$ otherwise.
@@ -4522,7 +4522,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_2 = "constructs a curve representing the polynomial function $y = P(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_2 = "constructs a curve representing the polynomial function $y = P(x)$ .
 
 The function is defined over the interval $[lower,upper]$ .
 
@@ -4533,7 +4533,7 @@ lower : const Algebraic_real_1 &
 upper : const Algebraic_real_1 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_3 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_3 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ .
 
 Parameters
 ----------
@@ -4541,7 +4541,7 @@ P : Polynomial_1
 Q : Polynomial_1
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_4 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_4 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ .
 
 The function is defined over the interval $I=[x,+\\infty)$ if $right$ is true
 and $I=(-\\infty,x]$ otherwise.
@@ -4554,7 +4554,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_5 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_5 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ .
 
 The function is defined over the interval $I=[lower,upper]$ .
 
@@ -4566,7 +4566,7 @@ lower : const Algebraic_real_1 &
 upper : const Algebraic_real_1 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_6 = "constructs a curve representing the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_6 = "constructs a curve representing the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
 
 Parameters
 ----------
@@ -4574,7 +4574,7 @@ begin : InputIterator
 end : InputIterator
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_7 = "constructs a curve representing the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_7 = "constructs a curve representing the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
 
 The function is defined over the interval $[x,+\\infty)$ if $right$ is true and
 $(-\\infty,x]$ otherwise.
@@ -4587,7 +4587,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_8 = "constructs a curve representing the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_8 = "constructs a curve representing the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
 
 The function is defined over the interval $[lower,upper]$ .
 
@@ -4599,7 +4599,7 @@ lower : const Algebraic_real_1 &
 upper : const Algebraic_real_1 &
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_9 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_9 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
 
 Parameters
 ----------
@@ -4609,7 +4609,7 @@ begin_denom : InputIterator
 end_denom : InputIterator
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_10 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_10 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
 
 The function is defined over the interval $I=[x,+\\infty)$ if $right$ is true
 and $I=(-\\infty,x]$ otherwise.
@@ -4624,7 +4624,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: Curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_curve_2_operator_11 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
+constexpr const char* Arr_rational_function_traits_2_Construct_curve_2_operator_11 = "constructs a curve representing the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
 
 The function is defined over the interval $I=[lower,upper]$ .
 
@@ -4640,16 +4640,16 @@ upper : const Algebraic_real_1 &
 Returns: Curve_2";
 
 // CGAL::Arr_rational_function_traits_2::Construct_x_monotone_curve_2
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2__class__ = "Functor to construct a X_monotone_curve_2 .";
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2__class__ = "Functor to construct a X_monotone_curve_2 .";
 
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ .
 
 Parameters
 ----------
 P : Polynomial_1
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_1 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_1 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ .
 
 The function is defined over the interval $[x,+\\infty)$ if $right$ is true and
 $(-\\infty,x]$ otherwise.
@@ -4661,7 +4661,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_2 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_2 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ .
 
 The function is defined over the interval $[lower,upper]$ .
 
@@ -4672,7 +4672,7 @@ lower : const Algebraic_real_1 &
 upper : const Algebraic_real_1 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_3 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_3 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ .
 
 $Q$ has no real roots.
 
@@ -4682,7 +4682,7 @@ P : Polynomial_1
 Q : Polynomial_1
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_4 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_4 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ .
 
 The function is defined over the interval $I=[x,+\\infty)$ if $right$ is true
 and $I=(-\\infty,x]$ otherwise. $Q$ has no real roots in the interior of $I$ .
@@ -4695,7 +4695,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_5 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_5 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ .
 
 The function is defined over the interval $I=[lower,upper]$ . $Q$ has no real
 roots in the interior of $I$ .
@@ -4708,7 +4708,7 @@ lower : const Algebraic_real_1 &
 upper : const Algebraic_real_1 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_6 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_6 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
 
 Parameters
 ----------
@@ -4716,7 +4716,7 @@ begin : InputIterator
 end : InputIterator
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_7 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_7 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
 
 The function is defined over the interval $[x,+\\infty)$ if $right$ is true and
 $(-\\infty,x]$ otherwise.
@@ -4729,7 +4729,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_8 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_8 = "constructs an $x$ -monotone curve supported by the polynomial function $y = P(x)$ , where the coefficients of $P$ are given in the range [begin,end) .
 
 The function is defined over the interval $[lower,upper]$ .
 
@@ -4740,7 +4740,7 @@ lower : InputIterator end const Algebraic_real_1 &
 upper : const Algebraic_real_1 &
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_9 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_9 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
 
 $Q$ has no real roots.
 
@@ -4752,7 +4752,7 @@ begin_denom : InputIterator
 end_denom : InputIterator
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_10 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_10 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
 
 The function is defined over the interval $I=[x,+\\infty)$ if $right$ is true
 and $I=(-\\infty,x]$ otherwise. $Q$ has no real roots in the interior of $I$ .
@@ -4767,7 +4767,7 @@ x : const Algebraic_real_1 &
 right : bool
 
 Returns: X_monotone_curve_2";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_11 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
+constexpr const char* Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_11 = "constructs an $x$ -monotone curve supported by the rational function $y = P(x)/Q(x)$ , where the coefficients of $P$ and $Q$ are given in the ranges [begin_numer,end_numer) and [begin_denom,end_denom) , respectively.
 
 The function is defined over the interval $I=[lower,upper]$ . $Q$ has no real
 roots in the interior of $I$ .
@@ -4784,47 +4784,47 @@ upper : const Algebraic_real_1 &
 Returns: X_monotone_curve_2";
 
 // CGAL::Arr_rational_function_traits_2::Curve_2
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2__class__ = "The Curve_2 class nested within the traits is used to represent rational functions which may be restricted to a certain $x$ -range.";
+constexpr const char* Arr_rational_function_traits_2_Curve_2__class__ = "The Curve_2 class nested within the traits is used to represent rational functions which may be restricted to a certain $x$ -range.";
 
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_numerator = "returns the numerator of the supporting rational function.
-
-Returns: const Polynomial_1 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_denominator = "returns the denominator of the supporting rational function.
+constexpr const char* Arr_rational_function_traits_2_Curve_2_numerator = "returns the numerator of the supporting rational function.
 
 Returns: const Polynomial_1 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_is_continuous = "returns whether urve is continuous, namely whether it does not contains any vertical asymptotes in its interior.
+constexpr const char* Arr_rational_function_traits_2_Curve_2_denominator = "returns the denominator of the supporting rational function.
+
+Returns: const Polynomial_1 &";
+constexpr const char* Arr_rational_function_traits_2_Curve_2_is_continuous = "returns whether urve is continuous, namely whether it does not contains any vertical asymptotes in its interior.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_left_parameter_space_in_x = "returns whether the $x$ -coordinate of urve's left end is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_Curve_2_left_parameter_space_in_x = "returns whether the $x$ -coordinate of urve's left end is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_right_parameter_space_in_x = "returns whether the $x$ -coordinate of urve's right end is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_Curve_2_right_parameter_space_in_x = "returns whether the $x$ -coordinate of urve's right end is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_left_x = "returns the $x$ -coordinate of the left end.
+constexpr const char* Arr_rational_function_traits_2_Curve_2_left_x = "returns the $x$ -coordinate of the left end.
 
 left_boundary_in_x() == ARR_INTERIOR
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Curve_2_right_x = "returns the $x$ -coordinate of the right end.
+constexpr const char* Arr_rational_function_traits_2_Curve_2_right_x = "returns the $x$ -coordinate of the right end.
 
 right_boundary_in_x() == ARR_INTERIOR
 
 Returns: Algebraic_real_1";
 
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_numerator = "returns the numerator of the supporting rational function.
+constexpr const char* Arr_rational_function_traits_2_Point_2_numerator = "returns the numerator of the supporting rational function.
 
 Returns: Polynomial_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_denominator = "returns the denominator of the supporting rational function.
+constexpr const char* Arr_rational_function_traits_2_Point_2_denominator = "returns the denominator of the supporting rational function.
 
 Returns: Polynomial_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_to_double = "returns double-approximations of the x- and y-coordinates.
+constexpr const char* Arr_rational_function_traits_2_Point_2_to_double = "returns double-approximations of the x- and y-coordinates.
 
 Returns: std::pair< double, double >";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_x = "returns the $x$ -coordinate of the point.
+constexpr const char* Arr_rational_function_traits_2_Point_2_x = "returns the $x$ -coordinate of the point.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_y = "obtains the $y$ -coordinates of the point.
+constexpr const char* Arr_rational_function_traits_2_Point_2_y = "obtains the $y$ -coordinates of the point.
 
 Attention: As described above, points are not stored by their $y$ -coordinate
 in Algebraic_real_1 representation. In fact, this representation must be
@@ -4833,7 +4833,7 @@ high-degree polynomials. Therefore, it is recommended to avoid calls to this
 function as much as possible.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_approximate_absolute_x = "Computes a pair $p$ approximating the $x$ -coordinate with respect to the given absolute precision $a$ .
+constexpr const char* Arr_rational_function_traits_2_Point_2_approximate_absolute_x = "Computes a pair $p$ approximating the $x$ -coordinate with respect to the given absolute precision $a$ .
 
 $p.first \\leq x \\leq p.second$ $p.second - p.first \\leq 2^{-a}$
 
@@ -4842,7 +4842,7 @@ Parameters
 a : int
 
 Returns: std::pair< Bound , Bound >";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_approximate_absolute_y = "Computes a pair $p$ approximating the $y$ -coordinate with respect to the given absolute precision $a$ .
+constexpr const char* Arr_rational_function_traits_2_Point_2_approximate_absolute_y = "Computes a pair $p$ approximating the $y$ -coordinate with respect to the given absolute precision $a$ .
 
 $p.first \\leq y \\leq p.second$ $p.second - p.first \\leq 2^{-a}$
 
@@ -4851,7 +4851,7 @@ Parameters
 a : int
 
 Returns: std::pair< Bound , Bound >";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_approximate_relative_x = "Computes a pair $p$ approximating the $x$ -coordinate with respect to the given relative precision $r$ .
+constexpr const char* Arr_rational_function_traits_2_Point_2_approximate_relative_x = "Computes a pair $p$ approximating the $x$ -coordinate with respect to the given relative precision $r$ .
 
 $p.first \\leq x \\leq p.second$ $p.second - p.first \\leq2^{-r}|x|$
 
@@ -4860,7 +4860,7 @@ Parameters
 r : int
 
 Returns: std::pair< Bound , Bound >";
-constexpr const char* CGAL_Arr_rational_function_traits_2_Point_2_approximate_relative_y = "computes a pair $p$ approximating the $y$ -coordinate with respect to the given relative precision $r$ .
+constexpr const char* Arr_rational_function_traits_2_Point_2_approximate_relative_y = "computes a pair $p$ approximating the $y$ -coordinate with respect to the given relative precision $r$ .
 
 $p.first \\leq y \\leq p.second$ $p.second - p.first \\leq2^{-r}|y|$
 
@@ -4871,102 +4871,102 @@ r : int
 Returns: std::pair< Bound , Bound >";
 
 // CGAL::Arr_rational_function_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits is used to represent $x$ -monotone parts of rational functions.";
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits is used to represent $x$ -monotone parts of rational functions.";
 
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_numerator = "returns the numerator of the supporting rational function.
-
-Returns: const Polynomial_1 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_denominator = "returns the denominator of the supporting rational function.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_numerator = "returns the numerator of the supporting rational function.
 
 Returns: const Polynomial_1 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_source_parameter_space_in_x = "returns whether the $x$ -coordinate of the source is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_denominator = "returns the denominator of the supporting rational function.
+
+Returns: const Polynomial_1 &";
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_source_parameter_space_in_x = "returns whether the $x$ -coordinate of the source is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_source_parameter_space_in_y = "returns whether the $y$ -coordinate of the source is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_source_parameter_space_in_y = "returns whether the $y$ -coordinate of the source is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_source = "returns the source point of the arc.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_source = "returns the source point of the arc.
 
 Both the $x$ - and $y$ -coordinates of the source point is finite.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_source_x = "returns the $x$ -coordinate of the source point.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_source_x = "returns the $x$ -coordinate of the source point.
 
 The $x$ -coordinate of the source point is finite.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_target_parameter_space_in_x = "returns whether the $x$ -coordinate of the target is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_target_parameter_space_in_x = "returns whether the $x$ -coordinate of the target is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_target_parameter_space_in_y = "returns whether the $y$ -coordinate of the target is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_target_parameter_space_in_y = "returns whether the $y$ -coordinate of the target is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_target = "returns the target point of the arc.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_target = "returns the target point of the arc.
 
 Both the $x$ - and $y$ -coordinates of the target point is finite.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_target_x = "returns the $x$ -coordinate of the target point.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_target_x = "returns the $x$ -coordinate of the target point.
 
 The $x$ -coordinate of the target point is finite.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_left_parameter_space_in_x = "returns whether the $x$ -coordinate of the left curve end is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_left_parameter_space_in_x = "returns whether the $x$ -coordinate of the left curve end is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_left_parameter_space_in_y = "returns whether the $y$ -coordinate of the left curve end is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_left_parameter_space_in_y = "returns whether the $y$ -coordinate of the left curve end is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_left = "returns the left point of the arc.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_left = "returns the left point of the arc.
 
 Both the $x$ - and $y$ -coordinates of the left point is finite.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_left_x = "returns the $x$ -coordinate of the left point.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_left_x = "returns the $x$ -coordinate of the left point.
 
 The $x$ -coordinate of the left point is finite.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_right_parameter_space_in_x = "returns whether the $x$ -coordinate of the right curve end is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_right_parameter_space_in_x = "returns whether the $x$ -coordinate of the right curve end is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_right_parameter_space_in_y = "returns whether the $y$ -coordinate of the right curve end is finite or whether it is $\\pm\\infty$ .
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_right_parameter_space_in_y = "returns whether the $y$ -coordinate of the right curve end is finite or whether it is $\\pm\\infty$ .
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_right = "returns the right point of the arc.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_right = "returns the right point of the arc.
 
 Both the $x$ - and $y$ -coordinates of The right point is finite.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_right_x = "returns the $x$ -coordinate of the right point.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_right_x = "returns the $x$ -coordinate of the right point.
 
 The $x$ -coordinate of the right point is finite.
 
 Returns: Algebraic_real_1";
-constexpr const char* CGAL_Arr_rational_function_traits_2_X_monotone_curve_2_is_left_to_right = "returns whether the curve is oriented from left to right.
+constexpr const char* Arr_rational_function_traits_2_X_monotone_curve_2_is_left_to_right = "returns whether the curve is oriented from left to right.
 
 Returns: bool";
 
 // CGAL::Arr_segment_traits_2
-constexpr const char* CGAL_Arr_segment_traits_2__class__ = "The traits class Arr_segment_traits_2 is a model of the AosTraits_2 concept, which allows the construction and maintenance of arrangements of line segments.";
+constexpr const char* Arr_segment_traits_2__class__ = "The traits class Arr_segment_traits_2 is a model of the AosTraits_2 concept, which allows the construction and maintenance of arrangements of line segments.";
 
-constexpr const char* CGAL_Arr_segment_traits_2_Segment_2 = "the segment type.
+constexpr const char* Arr_segment_traits_2_Segment_2 = "the segment type.
 
 Returns: Kernel::Segment_2";
-constexpr const char* CGAL_Arr_segment_traits_2_Line_2 = "the line type.
+constexpr const char* Arr_segment_traits_2_Line_2 = "the line type.
 
 Returns: Kernel::Line_2";
-constexpr const char* CGAL_Arr_segment_traits_2_Point_2 = "the point type.
+constexpr const char* Arr_segment_traits_2_Point_2 = "the point type.
 
 Returns: Kernel::Point_2";
-constexpr const char* CGAL_Arr_segment_traits_2_Curve_2 = "The curve type.
+constexpr const char* Arr_segment_traits_2_Curve_2 = "The curve type.
 
 Returns: X_monotone_curve_2";
 
 // CGAL::Arr_segment_traits_2::Trim_2
-constexpr const char* CGAL_Arr_segment_traits_2_Trim_2__class__ = "A functor that trims curves.";
+constexpr const char* Arr_segment_traits_2_Trim_2__class__ = "A functor that trims curves.";
 
-constexpr const char* CGAL_Arr_segment_traits_2_Trim_2_X_monotone_curve_2 = "trims the given $x$ -monotone curve to an from src to tgt .
+constexpr const char* Arr_segment_traits_2_Trim_2_X_monotone_curve_2 = "trims the given $x$ -monotone curve to an from src to tgt .
 
 \\ pre src and tgt lies on the curve
 
@@ -4977,65 +4977,65 @@ src : const Point_2 &
 tgt : const Point_2 &";
 
 // CGAL::Arr_segment_traits_2::X_monotone_curve_2
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits class is used to represent segments.";
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2__class__ = "The X_monotone_curve_2 class nested within the traits class is used to represent segments.";
 
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs default.";
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2_left = "obtains the (lexicographically) left endpoint.
-
-Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2_right = "obtains the (lexicographically) right endpoint.
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2_X_monotone_curve_2 = "constructs default.";
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2_left = "obtains the (lexicographically) left endpoint.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2_line = "obtains the supporting line.
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2_right = "obtains the (lexicographically) right endpoint.
+
+Returns: const Point_2 &";
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2_line = "obtains the supporting line.
 
 Returns: const Line_2 &";
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2_is_vertical = "determines whether the curve is vertical.
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2_is_vertical = "determines whether the curve is vertical.
 
 Returns: bool";
-constexpr const char* CGAL_Arr_segment_traits_2_X_monotone_curve_2_is_directed_right = "determines whether the curve is directed lexicographic from left to right
+constexpr const char* Arr_segment_traits_2_X_monotone_curve_2_is_directed_right = "determines whether the curve is directed lexicographic from left to right
 
 Returns: bool";
 
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_Arr_spherical_topology_traits_2 = "constructs default";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_Arr_spherical_topology_traits_2_1 = "constructs from a geometry-traits object.
+constexpr const char* Arr_spherical_topology_traits_2_Arr_spherical_topology_traits_2 = "constructs default";
+constexpr const char* Arr_spherical_topology_traits_2_Arr_spherical_topology_traits_2_1 = "constructs from a geometry-traits object.
 
 traits the traits.
 
 Parameters
 ----------
 traits : const GeometryTraits_2 *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_dcel = "obtains the DCEL (const version).
+constexpr const char* Arr_spherical_topology_traits_2_dcel = "obtains the DCEL (const version).
 
 Returns: const Dcel &";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_dcel_1 = "obtains the DCEL (non-const version).
+constexpr const char* Arr_spherical_topology_traits_2_dcel_1 = "obtains the DCEL (non-const version).
 
 Returns: Dcel &";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_spherical_face = "obtains the spherical face (const version).
+constexpr const char* Arr_spherical_topology_traits_2_spherical_face = "obtains the spherical face (const version).
 
 Returns: const Face *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_spherical_face_1 = "obtains the spherical face (non-const version).
+constexpr const char* Arr_spherical_topology_traits_2_spherical_face_1 = "obtains the spherical face (non-const version).
 
 Returns: Face *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_south_pole = "obtains the south pole (const version).
+constexpr const char* Arr_spherical_topology_traits_2_south_pole = "obtains the south pole (const version).
 
 Returns: const Vertex *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_south_pole_1 = "obtains the south pole (non-const version).
+constexpr const char* Arr_spherical_topology_traits_2_south_pole_1 = "obtains the south pole (non-const version).
 
 Returns: Vertex *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_north_pole = "obtains the north pole (const version).
+constexpr const char* Arr_spherical_topology_traits_2_north_pole = "obtains the north pole (const version).
 
 Returns: const Vertex *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_north_pole_1 = "obtains the north pole (non-const version).
+constexpr const char* Arr_spherical_topology_traits_2_north_pole_1 = "obtains the north pole (non-const version).
 
 Returns: Vertex *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_discontinuity_vertex = "obtains a vertex on the line of discontinuity that corresponds to the given point (or return NULL if no such vertex exists).
+constexpr const char* Arr_spherical_topology_traits_2_discontinuity_vertex = "obtains a vertex on the line of discontinuity that corresponds to the given point (or return NULL if no such vertex exists).
 
 Parameters
 ----------
 pt : const Point_2 &
 
 Returns: const Vertex *";
-constexpr const char* CGAL_Arr_spherical_topology_traits_2_discontinuity_vertex_1 = "obtains a vertex on the line of discontinuity that corresponds to the given point (or return NULL if no such vertex exists).
+constexpr const char* Arr_spherical_topology_traits_2_discontinuity_vertex_1 = "obtains a vertex on the line of discontinuity that corresponds to the given point (or return NULL if no such vertex exists).
 
 Parameters
 ----------
@@ -5044,39 +5044,39 @@ pt : const Point_2 &
 Returns: Vertex *";
 
 // CGAL::Arr_text_formatter
-constexpr const char* CGAL_Arr_text_formatter__class__ = "Arr_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an Arrangement instance using a simple text format.";
+constexpr const char* Arr_text_formatter__class__ = "Arr_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an Arrangement instance using a simple text format.";
 
 // CGAL::Arr_tracing_traits_2
-constexpr const char* CGAL_Arr_tracing_traits_2__class__ = "A metadata traits-class decorator for the arrangement package.";
+constexpr const char* Arr_tracing_traits_2__class__ = "A metadata traits-class decorator for the arrangement package.";
 
-constexpr const char* CGAL_Arr_tracing_traits_2_Arr_tracing_traits_2 = "constructs default
+constexpr const char* Arr_tracing_traits_2_Arr_tracing_traits_2 = "constructs default
 
 Parameters
 ----------
 args : Args ...";
-constexpr const char* CGAL_Arr_tracing_traits_2_Arr_tracing_traits_2_1 = "disables copy constructor.
+constexpr const char* Arr_tracing_traits_2_Arr_tracing_traits_2_1 = "disables copy constructor.
 
 Parameters
 ----------
  : const Arr_tracing_traits_2 &";
-constexpr const char* CGAL_Arr_tracing_traits_2_enable_trace = "enables the trace of a traits operation
+constexpr const char* Arr_tracing_traits_2_enable_trace = "enables the trace of a traits operation
 
 id the operation identifier
 
 Parameters
 ----------
 id : Operation_id";
-constexpr const char* CGAL_Arr_tracing_traits_2_enable_all_traces = "enables the trace of all traits operations";
-constexpr const char* CGAL_Arr_tracing_traits_2_disable_trace = "disables the trace of a traits operation
+constexpr const char* Arr_tracing_traits_2_enable_all_traces = "enables the trace of all traits operations";
+constexpr const char* Arr_tracing_traits_2_disable_trace = "disables the trace of a traits operation
 
 id the operation identifier
 
 Parameters
 ----------
 id : Operation_id";
-constexpr const char* CGAL_Arr_tracing_traits_2_disable_all_traces = "disables the trace of all traits operations";
+constexpr const char* Arr_tracing_traits_2_disable_all_traces = "disables the trace of all traits operations";
 
-constexpr const char* CGAL_Arr_trapezoid_ric_point_location_Arr_trapezoid_ric_point_location = "If with_guarantees is set to true , the construction performs rebuilds in order to guarantee a resulting structure with linear size and logarithmic query time.
+constexpr const char* Arr_trapezoid_ric_point_location_Arr_trapezoid_ric_point_location = "If with_guarantees is set to true , the construction performs rebuilds in order to guarantee a resulting structure with linear size and logarithmic query time.
 
 Otherwise the structure has expected linear size and expected logarithmic
 query time.
@@ -5084,7 +5084,7 @@ query time.
 Parameters
 ----------
 with_guarantees : bool";
-constexpr const char* CGAL_Arr_trapezoid_ric_point_location_Arr_trapezoid_ric_point_location_1 = "constructs a point location search structure for the given arrangement.
+constexpr const char* Arr_trapezoid_ric_point_location_Arr_trapezoid_ric_point_location_1 = "constructs a point location search structure for the given arrangement.
 
 If with_guarantees is set to true , the construction performs rebuilds in
 order to guarantee a resulting structure with linear size and logarithmic
@@ -5095,385 +5095,385 @@ Parameters
 ----------
 arr : const Arrangement &
 with_guarantees : bool";
-constexpr const char* CGAL_Arr_trapezoid_ric_point_location_with_guarantees = "If with_guarantees is set to true , the structure will guarantee linear size and logarithmic query time, that is, this function may cause a reconstruction of the data structure.
+constexpr const char* Arr_trapezoid_ric_point_location_with_guarantees = "If with_guarantees is set to true , the structure will guarantee linear size and logarithmic query time, that is, this function may cause a reconstruction of the data structure.
 
 Parameters
 ----------
 with_guarantees : bool";
 
-constexpr const char* CGAL_Arr_unb_planar_topology_traits_2_Arr_unb_planar_topology_traits_2 = "constructs default.";
-constexpr const char* CGAL_Arr_unb_planar_topology_traits_2_Arr_unb_planar_topology_traits_2_1 = "constructs from a geometry-traits object.
+constexpr const char* Arr_unb_planar_topology_traits_2_Arr_unb_planar_topology_traits_2 = "constructs default.";
+constexpr const char* Arr_unb_planar_topology_traits_2_Arr_unb_planar_topology_traits_2_1 = "constructs from a geometry-traits object.
 
 traits the traits.
 
 Parameters
 ----------
 traits : const GeometryTraits_2 *";
-constexpr const char* CGAL_Arr_unb_planar_topology_traits_2_dcel = "obtains the DCEL (const version).
+constexpr const char* Arr_unb_planar_topology_traits_2_dcel = "obtains the DCEL (const version).
 
 Returns: const Dcel &";
-constexpr const char* CGAL_Arr_unb_planar_topology_traits_2_dcel_1 = "obtains the DCEL (non-const version).
+constexpr const char* Arr_unb_planar_topology_traits_2_dcel_1 = "obtains the DCEL (non-const version).
 
 Returns: Dcel &";
-constexpr const char* CGAL_Arr_unb_planar_topology_traits_2_unbounded_face = "obtains the unbounded face (const version).
+constexpr const char* Arr_unb_planar_topology_traits_2_unbounded_face = "obtains the unbounded face (const version).
 
 Returns: const Face *";
-constexpr const char* CGAL_Arr_unb_planar_topology_traits_2_unbounded_face_1 = "obtains the unbounded face (non-const version).
+constexpr const char* Arr_unb_planar_topology_traits_2_unbounded_face_1 = "obtains the unbounded face (non-const version).
 
 Returns: Face *";
 
 // CGAL::Arr_vertex_index_map
-constexpr const char* CGAL_Arr_vertex_index_map__class__ = "Arr_vertex_index_map maintains a mapping of vertex handles of an attached arrangement object to indices (of type unsigned int ).";
+constexpr const char* Arr_vertex_index_map__class__ = "Arr_vertex_index_map maintains a mapping of vertex handles of an attached arrangement object to indices (of type unsigned int ).";
 
-constexpr const char* CGAL_Arr_vertex_index_map_Arrangement_2 = "the type of the attached arrangement.
+constexpr const char* Arr_vertex_index_map_Arrangement_2 = "the type of the attached arrangement.
 
 Returns: Arrangement_";
-constexpr const char* CGAL_Arr_vertex_index_map_Vertex_handle = "The vertex handle type.
+constexpr const char* Arr_vertex_index_map_Vertex_handle = "The vertex handle type.
 
 Returns: Base_aos::Vertex_handle";
-constexpr const char* CGAL_Arr_vertex_index_map_Index_map = "The type of mapping of vertices to indices.
+constexpr const char* Arr_vertex_index_map_Index_map = "The type of mapping of vertices to indices.
 
 Returns: Unique_hash_map< Vertex_handle , value_type >";
-constexpr const char* CGAL_Arr_vertex_index_map_Arr_vertex_index_map = "constructs a map that is unattached to any arrangement instance.";
-constexpr const char* CGAL_Arr_vertex_index_map_Arr_vertex_index_map_1 = "constructs a map and attaches it to the given arrangement arr .
+constexpr const char* Arr_vertex_index_map_Arr_vertex_index_map = "constructs a map that is unattached to any arrangement instance.";
+constexpr const char* Arr_vertex_index_map_Arr_vertex_index_map_1 = "constructs a map and attaches it to the given arrangement arr .
 
 Parameters
 ----------
 arr : Base_aos &";
 
 // CGAL::Arr_with_history_text_formatter
-constexpr const char* CGAL_Arr_with_history_text_formatter__class__ = "Arr_with_history_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an arrangement-with-history instance using a simple text format.";
+constexpr const char* Arr_with_history_text_formatter__class__ = "Arr_with_history_text_formatter defines the format of an arrangement in an input or output stream (typically a file stream), thus enabling reading and writing an arrangement-with-history instance using a simple text format.";
 
-constexpr const char* CGAL_Arrangement_2_Geometry_traits = "the geometry traits class.
+constexpr const char* Arrangement_2_Geometry_traits = "the geometry traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Arrangement_2_Topology_traits = "The topology traits.
+constexpr const char* Arrangement_2_Topology_traits = "The topology traits.
 
 Returns: Default_planar_topology< Geometry_traits , Dcel >::Traits";
-constexpr const char* CGAL_Arrangement_2_Base = "The base arrangement on surface type.
+constexpr const char* Arrangement_2_Base = "The base arrangement on surface type.
 
 Returns: Arrangement_on_surface_2 < Geometry_traits , Topology_traits >";
-constexpr const char* CGAL_Arrangement_2_Arrangement_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the entire plane.";
-constexpr const char* CGAL_Arrangement_2_Arrangement_2_1 = "copy constructor.
+constexpr const char* Arrangement_2_Arrangement_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the entire plane.";
+constexpr const char* Arrangement_2_Arrangement_2_1 = "copy constructor.
 
 Parameters
 ----------
 other : const Arrangement_2< Traits, Dcel > &";
-constexpr const char* CGAL_Arrangement_2_Arrangement_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
+constexpr const char* Arrangement_2_Arrangement_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
 
 Parameters
 ----------
 traits : const Traits *";
-constexpr const char* CGAL_Arrangement_2_operator = "assignment operator.
+constexpr const char* Arrangement_2_operator = "assignment operator.
 
 Parameters
 ----------
  : other
 
 Returns: Arrangement_2 < Traits, Dcel > &";
-constexpr const char* CGAL_Arrangement_2_assign = "assigns the contents of another arrangement.
+constexpr const char* Arrangement_2_assign = "assigns the contents of another arrangement.
 
 Parameters
 ----------
 other : const Arrangement_2 < Traits, Dcel > &";
-constexpr const char* CGAL_Arrangement_2_clear = "clears the arrangement.";
-constexpr const char* CGAL_Arrangement_2_traits = "obtains the traits object used by the arrangement instance.
+constexpr const char* Arrangement_2_clear = "clears the arrangement.";
+constexpr const char* Arrangement_2_traits = "obtains the traits object used by the arrangement instance.
 
 A const version is also available.
 
 Returns: Traits *";
 
-constexpr const char* CGAL_Arrangement_on_surface_2_Geometry_traits_2 = "the geometry traits class in use.
+constexpr const char* Arrangement_on_surface_2_Geometry_traits_2 = "the geometry traits class in use.
 
 Returns: GeometryTraits";
-constexpr const char* CGAL_Arrangement_on_surface_2_Topology_traits = "the topology traits class in use.
+constexpr const char* Arrangement_on_surface_2_Topology_traits = "the topology traits class in use.
 
 Returns: TopologyTraits";
-constexpr const char* CGAL_Arrangement_on_surface_2_Self = "a private type used as an abbreviation of the Arrangement_on_surface_2 type hereafter.
+constexpr const char* Arrangement_on_surface_2_Self = "a private type used as an abbreviation of the Arrangement_on_surface_2 type hereafter.
 
 Returns: Arrangement_on_surface_2 < Geometry_traits_2 , Topology_traits >";
-constexpr const char* CGAL_Arrangement_on_surface_2_Point_2 = "the point type, as defined by the traits class.
+constexpr const char* Arrangement_on_surface_2_Point_2 = "the point type, as defined by the traits class.
 
 Returns: Geometry_traits_2::Point_2";
-constexpr const char* CGAL_Arrangement_on_surface_2_X_monotone_curve_2 = "the $x$ -monotone curve type, as defined by the traits class.
+constexpr const char* Arrangement_on_surface_2_X_monotone_curve_2 = "the $x$ -monotone curve type, as defined by the traits class.
 
 Returns: Geometry_traits_2::X_monotone_curve_2";
-constexpr const char* CGAL_Arrangement_on_surface_2_Size = "the size type (equivalent to std::size_t ).
+constexpr const char* Arrangement_on_surface_2_Size = "the size type (equivalent to std::size_t ).
 
 Returns: Dcel::Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_handle = "Mutable.
+constexpr const char* Arrangement_on_surface_2_Vertex_handle = "Mutable.
 
 a handle to an arrangement vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_handle = "a handle to a halfedge.
+constexpr const char* Arrangement_on_surface_2_Halfedge_handle = "a handle to a halfedge.
 
 The halfedge and its twin form together an arrangement edge.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_handle = "a handle to an arrangement face.
+constexpr const char* Arrangement_on_surface_2_Face_handle = "a handle to an arrangement face.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_iterator = "a bidirectional iterator over the vertices of the arrangement.
+constexpr const char* Arrangement_on_surface_2_Vertex_iterator = "a bidirectional iterator over the vertices of the arrangement.
 
 Its value-type is Vertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_iterator = "a bidirectional iterator over the halfedges of the arrangement.
+constexpr const char* Arrangement_on_surface_2_Halfedge_iterator = "a bidirectional iterator over the halfedges of the arrangement.
 
 Its value-type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Edge_iterator = "a bidirectional iterator over the edges of the arrangement.
+constexpr const char* Arrangement_on_surface_2_Edge_iterator = "a bidirectional iterator over the edges of the arrangement.
 
 (That is, it skips every other halfedge.) Its value-type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_iterator = "a bidirectional iterator over the faces of arrangement.
+constexpr const char* Arrangement_on_surface_2_Face_iterator = "a bidirectional iterator over the faces of arrangement.
 
 Its value-type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Unbounded_face_iterator = "a bidirectional iterator over the unbounded faces of arrangement.
+constexpr const char* Arrangement_on_surface_2_Unbounded_face_iterator = "a bidirectional iterator over the unbounded faces of arrangement.
 
 Its value-type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_around_vertex_circulator = "a bidirectional circulator over the halfedges that have a given vertex as their target.
+constexpr const char* Arrangement_on_surface_2_Halfedge_around_vertex_circulator = "a bidirectional circulator over the halfedges that have a given vertex as their target.
 
 Its value-type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Ccb_halfedge_circulator = "a bidirectional circulator over the halfedges of a CCB (connected component of the boundary).
+constexpr const char* Arrangement_on_surface_2_Ccb_halfedge_circulator = "a bidirectional circulator over the halfedges of a CCB (connected component of the boundary).
 
 Its value-type is Halfedge . Each bounded face has a single CCB representing
 it outer boundary, and may have several inner CCBs representing its holes.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Inner_ccb_iterator = "a bidirectional iterator over the inner CCBs of a given face.
+constexpr const char* Arrangement_on_surface_2_Inner_ccb_iterator = "a bidirectional iterator over the inner CCBs of a given face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Outer_ccb_iterator = "a bidirectional iterator over the outer CCBs of a given face.
+constexpr const char* Arrangement_on_surface_2_Outer_ccb_iterator = "a bidirectional iterator over the outer CCBs of a given face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Hole_iterator = "a bidirectional iterator over the holes (i.e., inner CCBs) contained inside a given face.
+constexpr const char* Arrangement_on_surface_2_Hole_iterator = "a bidirectional iterator over the holes (i.e., inner CCBs) contained inside a given face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Isolated_vertex_iterator = "a bidirectional iterator over the isolated vertices contained inside a given face.
+constexpr const char* Arrangement_on_surface_2_Isolated_vertex_iterator = "a bidirectional iterator over the isolated vertices contained inside a given face.
 
 Its value type is Vertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_const_handle = "Constant.
+constexpr const char* Arrangement_on_surface_2_Vertex_const_handle = "Constant.
 
 a handle to an arrangement vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_const_handle = "a handle to a halfedge.
+constexpr const char* Arrangement_on_surface_2_Halfedge_const_handle = "a handle to a halfedge.
 
 The halfedge and its twin form together an arrangement edge.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_const_handle = "a handle to an arrangement face.
+constexpr const char* Arrangement_on_surface_2_Face_const_handle = "a handle to an arrangement face.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_const_iterator = "a bidirectional iterator over the vertices of the arrangement.
+constexpr const char* Arrangement_on_surface_2_Vertex_const_iterator = "a bidirectional iterator over the vertices of the arrangement.
 
 Its value-type is Vertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_const_iterator = "a bidirectional iterator over the halfedges of the arrangement.
+constexpr const char* Arrangement_on_surface_2_Halfedge_const_iterator = "a bidirectional iterator over the halfedges of the arrangement.
 
 Its value-type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Edge_const_iterator = "a bidirectional iterator over the edges of the arrangement.
+constexpr const char* Arrangement_on_surface_2_Edge_const_iterator = "a bidirectional iterator over the edges of the arrangement.
 
 (That is, it skips every other halfedge.) Its value-type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_const_iterator = "a bidirectional iterator over the faces of arrangement.
+constexpr const char* Arrangement_on_surface_2_Face_const_iterator = "a bidirectional iterator over the faces of arrangement.
 
 Its value-type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Unbounded_face_const_iterator = "a bidirectional iterator over the unbounded faces of arrangement.
+constexpr const char* Arrangement_on_surface_2_Unbounded_face_const_iterator = "a bidirectional iterator over the unbounded faces of arrangement.
 
 Its value-type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_around_vertex_const_circulator = "a bidirectional circulator over the halfedges that have a given vertex as their target.
+constexpr const char* Arrangement_on_surface_2_Halfedge_around_vertex_const_circulator = "a bidirectional circulator over the halfedges that have a given vertex as their target.
 
 Its value-type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Ccb_halfedge_const_circulator = "a bidirectional circulator over the halfedges of a CCB (connected component of the boundary).
+constexpr const char* Arrangement_on_surface_2_Ccb_halfedge_const_circulator = "a bidirectional circulator over the halfedges of a CCB (connected component of the boundary).
 
 Its value-type is Halfedge . Each bounded face has a single CCB representing
 it outer boundary, and may have several inner CCBs representing its holes.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Inner_ccb_const_iterator = "a bidirectional iterator over the inner CCBs of a given face.
+constexpr const char* Arrangement_on_surface_2_Inner_ccb_const_iterator = "a bidirectional iterator over the inner CCBs of a given face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Outer_ccb_const_iterator = "a bidirectional iterator over the outer CCBs of a given face.
+constexpr const char* Arrangement_on_surface_2_Outer_ccb_const_iterator = "a bidirectional iterator over the outer CCBs of a given face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Hole_const_iterator = "a bidirectional iterator over the holes (i.e., inner CCBs) contained inside a given face.
+constexpr const char* Arrangement_on_surface_2_Hole_const_iterator = "a bidirectional iterator over the holes (i.e., inner CCBs) contained inside a given face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Isolated_vertex_const_iterator = "a bidirectional iterator over the isolated vertices contained inside a given face.
+constexpr const char* Arrangement_on_surface_2_Isolated_vertex_const_iterator = "a bidirectional iterator over the isolated vertices contained inside a given face.
 
 Its value type is Vertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_2_Arrangement_on_surface_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the entire plane.";
-constexpr const char* CGAL_Arrangement_on_surface_2_Arrangement_on_surface_2_1 = "copy constructor.
+constexpr const char* Arrangement_on_surface_2_Arrangement_on_surface_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the entire plane.";
+constexpr const char* Arrangement_on_surface_2_Arrangement_on_surface_2_1 = "copy constructor.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arrangement_on_surface_2_Arrangement_on_surface_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
+constexpr const char* Arrangement_on_surface_2_Arrangement_on_surface_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
 
 Parameters
 ----------
 traits : const GeometryTraits *";
-constexpr const char* CGAL_Arrangement_on_surface_2_operator = "assignment operator.
+constexpr const char* Arrangement_on_surface_2_operator = "assignment operator.
 
 Parameters
 ----------
  : other
 
 Returns: Self &";
-constexpr const char* CGAL_Arrangement_on_surface_2_assign = "assigns the contents of another arrangement.
+constexpr const char* Arrangement_on_surface_2_assign = "assigns the contents of another arrangement.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arrangement_on_surface_2_clear = "clears the arrangement.";
-constexpr const char* CGAL_Arrangement_on_surface_2_geometry_traits = "obtains the traits object used by the arrangement instance.
+constexpr const char* Arrangement_on_surface_2_clear = "clears the arrangement.";
+constexpr const char* Arrangement_on_surface_2_geometry_traits = "obtains the traits object used by the arrangement instance.
 
 A const version is also available.
 
 Returns: Geometry_traits_2 *";
-constexpr const char* CGAL_Arrangement_on_surface_2_is_empty = "determines whether the arrangement is empty (contains only the unbounded face, with no vertices or edges).
+constexpr const char* Arrangement_on_surface_2_is_empty = "determines whether the arrangement is empty (contains only the unbounded face, with no vertices or edges).
 
 Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_vertices = "obtains the number of vertices in the arrangement.
+constexpr const char* Arrangement_on_surface_2_number_of_vertices = "obtains the number of vertices in the arrangement.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_isolated_vertices = "obtains the total number of isolated vertices in the arrangement.
+constexpr const char* Arrangement_on_surface_2_number_of_isolated_vertices = "obtains the total number of isolated vertices in the arrangement.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_vertices_begin = "obtains the begin-iterator of the vertices in the arrangement.
+constexpr const char* Arrangement_on_surface_2_vertices_begin = "obtains the begin-iterator of the vertices in the arrangement.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_vertices_end = "obtains the past-the-end iterator of the vertices in the arrangement.
+constexpr const char* Arrangement_on_surface_2_vertices_end = "obtains the past-the-end iterator of the vertices in the arrangement.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_vertex_handles = "obtains a range over handles of the arrangement vertices.
+constexpr const char* Arrangement_on_surface_2_vertex_handles = "obtains a range over handles of the arrangement vertices.
 
 Returns: Iterator_range< Prevent_deref< Vertex_iterator > >";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_vertices_at_infinity = "obtains the number of arrangement vertices that lie at infinity and are not associated with valid points.
+constexpr const char* Arrangement_on_surface_2_number_of_vertices_at_infinity = "obtains the number of arrangement vertices that lie at infinity and are not associated with valid points.
 
 Such vertices are not considered to be regular arrangement vertices and
 arr.number_of_vertices() does not count them.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_halfedges = "obtains the number of halfedges in the arrangement.
+constexpr const char* Arrangement_on_surface_2_number_of_halfedges = "obtains the number of halfedges in the arrangement.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_halfedges_begin = "obtains the begin-iterator of the halfedges in the arrangement.
+constexpr const char* Arrangement_on_surface_2_halfedges_begin = "obtains the begin-iterator of the halfedges in the arrangement.
 
 Returns: Halfedge_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_halfedges_end = "obtains the past-the-end iterator of the halfedges in the arrangement.
+constexpr const char* Arrangement_on_surface_2_halfedges_end = "obtains the past-the-end iterator of the halfedges in the arrangement.
 
 Returns: Halfedge_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_halfedge_handles = "obtains a range over handles of the arrangement halfedges.
+constexpr const char* Arrangement_on_surface_2_halfedge_handles = "obtains a range over handles of the arrangement halfedges.
 
 Returns: Iterator_range< Prevent_deref< Halfedge_iterator > >";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_edges = "obtains the number of edges in the arrangement (equivalent to arr.number_of_halfedges() / 2 ).
+constexpr const char* Arrangement_on_surface_2_number_of_edges = "obtains the number of edges in the arrangement (equivalent to arr.number_of_halfedges() / 2 ).
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_edges_begin = "obtains the begin-iterator of the edges in the arrangement.
+constexpr const char* Arrangement_on_surface_2_edges_begin = "obtains the begin-iterator of the edges in the arrangement.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_edges_end = "obtains the past-the-end iterator of the edges in the arrangement.
+constexpr const char* Arrangement_on_surface_2_edges_end = "obtains the past-the-end iterator of the edges in the arrangement.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_edge_handles = "obtains a range over handles of the arrangement edges.
+constexpr const char* Arrangement_on_surface_2_edge_handles = "obtains a range over handles of the arrangement edges.
 
 Returns: Iterator_range< Prevent_deref< Edge_iterator > >";
-constexpr const char* CGAL_Arrangement_on_surface_2_unbounded_face = "obtains a handle for an unbounded face of the arrangement.
+constexpr const char* Arrangement_on_surface_2_unbounded_face = "obtains a handle for an unbounded face of the arrangement.
 
 In case the arrangement comprises only bounded curves, there is a single
 unbounded face and the function returns a handle to it. Otherwise, a handle to
 an arbitrary unbounded face is returned.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_faces = "obtains the number of faces in the arrangement.
+constexpr const char* Arrangement_on_surface_2_number_of_faces = "obtains the number of faces in the arrangement.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_faces_begin = "obtains the begin-iterator of the faces in the arrangement.
+constexpr const char* Arrangement_on_surface_2_faces_begin = "obtains the begin-iterator of the faces in the arrangement.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_faces_end = "obtains the past-the-end iterator of the faces in the arrangement.
+constexpr const char* Arrangement_on_surface_2_faces_end = "obtains the past-the-end iterator of the faces in the arrangement.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_face_handles = "obtains a range over handles of the arrangement faces.
+constexpr const char* Arrangement_on_surface_2_face_handles = "obtains a range over handles of the arrangement faces.
 
 Returns: Iterator_range< Prevent_deref< Face_iterator > >";
-constexpr const char* CGAL_Arrangement_on_surface_2_number_of_unbounded_faces = "obtains the number of unbounded faces in the arrangement.
+constexpr const char* Arrangement_on_surface_2_number_of_unbounded_faces = "obtains the number of unbounded faces in the arrangement.
 
 Note arr.number_of_faces() also counts the unbounded faces of the arrangement.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_unbounded_faces_begin = "obtains the begin-iterator of the unbounded faces in the arrangement.
+constexpr const char* Arrangement_on_surface_2_unbounded_faces_begin = "obtains the begin-iterator of the unbounded faces in the arrangement.
 
 Returns: Unbounded_face_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_unbounded_faces_end = "obtains the past-the-end iterator of the unbounded faces in the arrangement.
+constexpr const char* Arrangement_on_surface_2_unbounded_faces_end = "obtains the past-the-end iterator of the unbounded faces in the arrangement.
 
 Returns: Unbounded_face_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_fictitious_face = "obtains a handle to the fictitious face of the arrangement.
+constexpr const char* Arrangement_on_surface_2_fictitious_face = "obtains a handle to the fictitious face of the arrangement.
 
 If the arrangement is not unbounded, there is no fictitious face. In this case
 the result is not deterministic. A const version is also available.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_non_const_handle = "casts the given constant vertex handle to an equivalent mutable handle.
+constexpr const char* Arrangement_on_surface_2_non_const_handle = "casts the given constant vertex handle to an equivalent mutable handle.
 
 Parameters
 ----------
 v : Vertex_const_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_non_const_handle_1 = "casts the given constant halfedge handle to an equivalent mutable handle.
+constexpr const char* Arrangement_on_surface_2_non_const_handle_1 = "casts the given constant halfedge handle to an equivalent mutable handle.
 
 Parameters
 ----------
 e : Halfedge_const_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_non_const_handle_2 = "casts the given constant face handle to an equivalent mutable handle.
+constexpr const char* Arrangement_on_surface_2_non_const_handle_2 = "casts the given constant face handle to an equivalent mutable handle.
 
 Parameters
 ----------
 f : Face_const_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_in_face_interior = "inserts the point p into the arrangement as an isolated vertex in the interior of the face f and returns a handle for the newly created vertex.
+constexpr const char* Arrangement_on_surface_2_insert_in_face_interior = "inserts the point p into the arrangement as an isolated vertex in the interior of the face f and returns a handle for the newly created vertex.
 
 p lies in the interior of the face f .
 
@@ -5483,7 +5483,7 @@ p : const Point_2 &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_in_face_interior_1 = "inserts the curve c that is entirely contained in the interior of a given face f .
+constexpr const char* Arrangement_on_surface_2_insert_in_face_interior_1 = "inserts the curve c that is entirely contained in the interior of a given face f .
 
 If c is a bounded curve two new vertices that correspond to c 's endpoints are
 created and connected with a newly created halfedge pair, which forms a new
@@ -5503,7 +5503,7 @@ c : const X_monotone_curve_2 &
 f : Face_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_from_left_vertex = "inserts the curve c into the arrangement, such that its left endpoint corresponds to a given arrangement vertex.
+constexpr const char* Arrangement_on_surface_2_insert_from_left_vertex = "inserts the curve c into the arrangement, such that its left endpoint corresponds to a given arrangement vertex.
 
 As a result, a new vertex that correspond to c 's right endpoint is created
 and connected to v with a newly created halfedge pair. If c has an unbounded
@@ -5522,7 +5522,7 @@ c : const X_monotone_curve_2 &
 v : Vertex_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_from_right_vertex = "inserts the curve c into the arrangement, such that its right endpoint corresponds to a given arrangement vertex.
+constexpr const char* Arrangement_on_surface_2_insert_from_right_vertex = "inserts the curve c into the arrangement, such that its right endpoint corresponds to a given arrangement vertex.
 
 As a result, a new vertex that correspond to c 's left endpoint is created and
 connected to v with a newly created halfedge pair. If c has an unbounded left
@@ -5540,7 +5540,7 @@ c : const X_monotone_curve_2 &
 v : Vertex_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_at_vertices = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by v1 and v2 .
+constexpr const char* Arrangement_on_surface_2_insert_at_vertices = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by v1 and v2 .
 
 The function creates a new halfedge pair that connects the two vertices, and
 returns a handle for the halfedge directed from v1 to v2 . The interior of c
@@ -5556,7 +5556,7 @@ v1 : Vertex_handle
 v2 : Vertex_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_in_face_interior_2 = "inserts an unbounded curve c into the arrangement, such that c is entirely contained within a single unbounded face of the arrangement.
+constexpr const char* Arrangement_on_surface_2_insert_in_face_interior_2 = "inserts an unbounded curve c into the arrangement, such that c is entirely contained within a single unbounded face of the arrangement.
 
 fict_pred1 specifies the fictitious halfedge that should contain the vertex at
 infinity that corresponds to the unbounded end of c . If both ends of c are
@@ -5575,7 +5575,7 @@ fict_pred1 : Halfedge_handle
 fict_pred2 : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_from_left_vertex_1 = "inserts the curve c into the arrangement, such that its left endpoint corresponds to a given arrangement vertex.
+constexpr const char* Arrangement_on_surface_2_insert_from_left_vertex_1 = "inserts the curve c into the arrangement, such that its left endpoint corresponds to a given arrangement vertex.
 
 This vertex is the target vertex of the halfedge pred , such that c is
 inserted to the circular list of halfedges around pred->target() right between
@@ -5592,7 +5592,7 @@ c : const X_monotone_curve_2 &
 pred : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_from_left_vertex_2 = "inserts an unbounded curve c into the arrangement, such that its left endpoint is bounded and corresponds to a given arrangement vertex.
+constexpr const char* Arrangement_on_surface_2_insert_from_left_vertex_2 = "inserts an unbounded curve c into the arrangement, such that its left endpoint is bounded and corresponds to a given arrangement vertex.
 
 This vertex is the target vertex of the halfedge pred , such that c is
 inserted to the circular list of halfedges around pred->target() right between
@@ -5613,7 +5613,7 @@ pred : Halfedge_handle
 fict_pred : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_from_right_vertex_1 = "inserts the curve c into the arrangement, such that its right endpoint corresponds to a given arrangement vertex.
+constexpr const char* Arrangement_on_surface_2_insert_from_right_vertex_1 = "inserts the curve c into the arrangement, such that its right endpoint corresponds to a given arrangement vertex.
 
 This vertex is the target vertex of the halfedge pred , such that c is
 inserted to the circular list of halfedges around pred->target() right between
@@ -5630,7 +5630,7 @@ c : const X_monotone_curve_2 &
 pred : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_from_right_vertex_2 = "inserts an unbounded curve c into the arrangement, such that its right endpoint is bounded and corresponds to a given arrangement vertex.
+constexpr const char* Arrangement_on_surface_2_insert_from_right_vertex_2 = "inserts an unbounded curve c into the arrangement, such that its right endpoint is bounded and corresponds to a given arrangement vertex.
 
 This vertex is the target vertex of the halfedge pred , such that c is
 inserted to the circular list of halfedges around pred->target() right between
@@ -5651,7 +5651,7 @@ pred : Halfedge_handle
 fict_pred : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_at_vertices_1 = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by pred1->target() and v2 .
+constexpr const char* Arrangement_on_surface_2_insert_at_vertices_1 = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by pred1->target() and v2 .
 
 The function creates a new halfedge pair that connects the two vertices (where
 the corresponding halfedge is inserted right between pred1 and its successor
@@ -5668,7 +5668,7 @@ pred1 : Halfedge_handle
 v2 : Vertex_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_insert_at_vertices_2 = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by pred1->target() and pred2->target() .
+constexpr const char* Arrangement_on_surface_2_insert_at_vertices_2 = "inserts the curve c into the arrangement, such that both c 's endpoints correspond to existing arrangement vertices, given by pred1->target() and pred2->target() .
 
 The function creates a new halfedge pair that connects the two vertices (with
 pred1 and pred2 indicate the exact place for these halfedges around the two
@@ -5686,7 +5686,7 @@ pred1 : Halfedge_handle
 pred2 : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_modify_vertex = "sets p to be the point associated with the vertex v .
+constexpr const char* Arrangement_on_surface_2_modify_vertex = "sets p to be the point associated with the vertex v .
 
 The function returns a handle for the modified vertex (same as v ). v is not a
 vertex at infinity and p is geometrically equivalent to the point currently
@@ -5698,7 +5698,7 @@ v : Vertex_handle
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_remove_isolated_vertex = "removes the isolated vertex v from the arrangement.
+constexpr const char* Arrangement_on_surface_2_remove_isolated_vertex = "removes the isolated vertex v from the arrangement.
 
 The function obtains the face f that used to contain the isolated vertex. v is
 an isolated vertex (has no incident edges).
@@ -5708,7 +5708,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_modify_edge = "sets c to be the $x$ -monotone curve associated with the edge e .
+constexpr const char* Arrangement_on_surface_2_modify_edge = "sets c to be the $x$ -monotone curve associated with the edge e .
 
 The function obtains a handle for the modified edge (same as e ). c is
 geometrically equivalent to the curve currently associated with e .
@@ -5719,7 +5719,7 @@ e : Halfedge_handle
 c : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_split_edge = "splits the edge e into two edges (more precisely, into two halfedge pairs), associated with the given subcurves c1 and c2 , and creates a vertex that corresponds to the split point.
+constexpr const char* Arrangement_on_surface_2_split_edge = "splits the edge e into two edges (more precisely, into two halfedge pairs), associated with the given subcurves c1 and c2 , and creates a vertex that corresponds to the split point.
 
 The function obtains a handle for the halfedge, whose source is the same as
 e->source() and whose target vertex is the split point. Either c1 's left
@@ -5734,7 +5734,7 @@ c1 : const X_monotone_curve_2 &
 c2 : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_merge_edge = "merges the edges represented by e1 and e2 into a single edge, associated with the given merged curve c .
+constexpr const char* Arrangement_on_surface_2_merge_edge = "merges the edges represented by e1 and e2 into a single edge, associated with the given merged curve c .
 
 Denote e1 's end-vertices as $u_1$ and $v$ , while e2 's end-vertices are
 denoted $u_2$ and $v$ . The function removes the common vertex $v$ returns a
@@ -5749,7 +5749,7 @@ e2 : Halfedge_handle
 c : const X_monotone_curve_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_remove_edge = "removes the edge e from the arrangement.
+constexpr const char* Arrangement_on_surface_2_remove_edge = "removes the edge e from the arrangement.
 
 Since the e may be the only edge incident to its source vertex (or its target
 vertex), this vertex can be removed as well. The flags remove_source and
@@ -5765,7 +5765,7 @@ remove_source : bool
 remove_target : bool
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_is_valid = "obtains true if arr represents a valid instance of Arrangement_on_surface_2 .
+constexpr const char* Arrangement_on_surface_2_is_valid = "obtains true if arr represents a valid instance of Arrangement_on_surface_2 .
 
 In particular, the functions checks the topological structure of the
 arrangement and assures that it is valid. In addition, the function performs
@@ -5777,277 +5777,277 @@ vertex are ordered clockwise.
 Returns: bool";
 
 // CGAL::Arrangement_on_surface_2::Face
-constexpr const char* CGAL_Arrangement_on_surface_2_Face__class__ = "An object of the class Face represents an arrangement face, namely, a $2$ -dimensional arrangement cell.";
+constexpr const char* Arrangement_on_surface_2_Face__class__ = "An object of the class Face represents an arrangement face, namely, a $2$ -dimensional arrangement cell.";
 
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_Inner_ccb_iterator = "a bidirectional iterator over the inner CCBs of the face.
+constexpr const char* Arrangement_on_surface_2_Face_Inner_ccb_iterator = "a bidirectional iterator over the inner CCBs of the face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: Base::Inner_ccb_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_Outer_ccb_iterator = "a bidirectional iterator over the outer CCBs of the face.
+constexpr const char* Arrangement_on_surface_2_Face_Outer_ccb_iterator = "a bidirectional iterator over the outer CCBs of the face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: Base::Outer_ccb_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_Hole_iterator = "a bidirectional iterator over the holes (i.e., inner CCBs) contained inside the face.
+constexpr const char* Arrangement_on_surface_2_Face_Hole_iterator = "a bidirectional iterator over the holes (i.e., inner CCBs) contained inside the face.
 
 Its value type is Ccb_halfedge_circulator .
 
 Returns: Base::Hole_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_Isolated_vertex_iterator = "a bidirectional iterator over the isolated vertices contained inside the face.
+constexpr const char* Arrangement_on_surface_2_Face_Isolated_vertex_iterator = "a bidirectional iterator over the isolated vertices contained inside the face.
 
 Its value type is Vertex .
 
 Returns: Base::Isolated_vertex_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_Face = "default constructor.";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_is_fictitious = "obtains a Boolean indicating whether this is the fictitious face, which contain the entire arrangement (and does not have an outer CCB).
+constexpr const char* Arrangement_on_surface_2_Face_Face = "default constructor.";
+constexpr const char* Arrangement_on_surface_2_Face_is_fictitious = "obtains a Boolean indicating whether this is the fictitious face, which contain the entire arrangement (and does not have an outer CCB).
 
 An arrangement that supports only bounded curves does not have a fictitious
 face at all.
 
 Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_is_unbounded = "obtains a Boolean indicating whether the face is unbounded.
+constexpr const char* Arrangement_on_surface_2_Face_is_unbounded = "obtains a Boolean indicating whether the face is unbounded.
 
 Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_number_of_outer_ccbs = "obtains the number of outer CCBs of the face.
+constexpr const char* Arrangement_on_surface_2_Face_number_of_outer_ccbs = "obtains the number of outer CCBs of the face.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_outer_ccbs_begin = "obtains a begin iterator for the outer CCBs of the face.
+constexpr const char* Arrangement_on_surface_2_Face_outer_ccbs_begin = "obtains a begin iterator for the outer CCBs of the face.
 
 Returns: Outer_ccb_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_outer_ccbs_end = "obtains a past-the-end iterator for the outer CCBs.
+constexpr const char* Arrangement_on_surface_2_Face_outer_ccbs_end = "obtains a past-the-end iterator for the outer CCBs.
 
 Returns: Outer_ccb_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_number_of_inner_ccbs = "obtains the number of inner CCBs of the face.
+constexpr const char* Arrangement_on_surface_2_Face_number_of_inner_ccbs = "obtains the number of inner CCBs of the face.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_inner_ccbs_begin = "obtains a begin iterator for the inner CCBs of the face.
+constexpr const char* Arrangement_on_surface_2_Face_inner_ccbs_begin = "obtains a begin iterator for the inner CCBs of the face.
 
 Returns: Inner_ccb_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_inner_ccbs_end = "obtains a past-the-end iterator for the inner CCBs.
+constexpr const char* Arrangement_on_surface_2_Face_inner_ccbs_end = "obtains a past-the-end iterator for the inner CCBs.
 
 Returns: Inner_ccb_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_has_outer_ccb = "indicates whether the face has an outer CCB.
+constexpr const char* Arrangement_on_surface_2_Face_has_outer_ccb = "indicates whether the face has an outer CCB.
 
 (The fictitious face and the unbounded face of an arrangement that does not
 have a fictitious face do not have outer CCBs.)
 
 Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_outer_ccb = "obtains a circulator that enables traversing the outer boundary of f .
+constexpr const char* Arrangement_on_surface_2_Face_outer_ccb = "obtains a circulator that enables traversing the outer boundary of f .
 
 The edges along the CCB are traversed in a counterclockwise direction. The
 face f has an outer CCB.
 
 Returns: Ccb_halfedge_circulator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_number_of_holes = "obtains the number of holes (inner CCBs) inside the face.
+constexpr const char* Arrangement_on_surface_2_Face_number_of_holes = "obtains the number of holes (inner CCBs) inside the face.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_holes_begin = "obtains an iterator for traversing all the holes (inner CCBs) of f .
+constexpr const char* Arrangement_on_surface_2_Face_holes_begin = "obtains an iterator for traversing all the holes (inner CCBs) of f .
 
 Returns: Hole_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_holes_end = "obtains a past-the-end iterator for the holes of f .
+constexpr const char* Arrangement_on_surface_2_Face_holes_end = "obtains a past-the-end iterator for the holes of f .
 
 Returns: Hole_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_isolated_vertices_begin = "obtains an iterator for traversing all the isolated vertices contained in the interior of f .
+constexpr const char* Arrangement_on_surface_2_Face_isolated_vertices_begin = "obtains an iterator for traversing all the isolated vertices contained in the interior of f .
 
 Returns: Isolated_vertex_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Face_isolated_vertices_end = "obtains a past-the-end iterator for the isolated vertices contained inside f .
+constexpr const char* Arrangement_on_surface_2_Face_isolated_vertices_end = "obtains a past-the-end iterator for the isolated vertices contained inside f .
 
 Returns: Isolated_vertex_iterator";
 
 // CGAL::Arrangement_on_surface_2::Halfedge
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge__class__ = "An object $e$ of the class Halfedge represents a halfedge in the arrangement.";
+constexpr const char* Arrangement_on_surface_2_Halfedge__class__ = "An object $e$ of the class Halfedge represents a halfedge in the arrangement.";
 
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_Halfedge = "default constructor.";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_is_fictitious = "determines whether the halfedge is fictitious (i.e., connects two vertices at infinity and is not associated with a valid curve).
+constexpr const char* Arrangement_on_surface_2_Halfedge_Halfedge = "default constructor.";
+constexpr const char* Arrangement_on_surface_2_Halfedge_is_fictitious = "determines whether the halfedge is fictitious (i.e., connects two vertices at infinity and is not associated with a valid curve).
 
 Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_source = "obtains a handle for the source vertex of e .
+constexpr const char* Arrangement_on_surface_2_Halfedge_source = "obtains a handle for the source vertex of e .
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_target = "obtains a handle for the target vertex of e .
+constexpr const char* Arrangement_on_surface_2_Halfedge_target = "obtains a handle for the target vertex of e .
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_direction = "obtains the direction of the halfedge: ARR_LEFT_TO_RIGHT if e 's source vertex is lexicographically smaller than it target (so the halfedge is directed from left to right), and ARR_RIGHT_TO_LEFT if it is lexicographically larger than the target (so the halfedge is directed from right to left).
+constexpr const char* Arrangement_on_surface_2_Halfedge_direction = "obtains the direction of the halfedge: ARR_LEFT_TO_RIGHT if e 's source vertex is lexicographically smaller than it target (so the halfedge is directed from left to right), and ARR_RIGHT_TO_LEFT if it is lexicographically larger than the target (so the halfedge is directed from right to left).
 
 Returns: Arr_halfedge_direction";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_face = "obtains the face that e is incident to (The face lies to the left of e ).
+constexpr const char* Arrangement_on_surface_2_Halfedge_face = "obtains the face that e is incident to (The face lies to the left of e ).
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_twin = "obtains the twin halfedge.
+constexpr const char* Arrangement_on_surface_2_Halfedge_twin = "obtains the twin halfedge.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_prev = "obtains e 's predecessor in the connected component it belongs to.
+constexpr const char* Arrangement_on_surface_2_Halfedge_prev = "obtains e 's predecessor in the connected component it belongs to.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_next = "obtains e 's successor in the connected component it belongs to.
+constexpr const char* Arrangement_on_surface_2_Halfedge_next = "obtains e 's successor in the connected component it belongs to.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_ccb = "obtains a circulator that allows traversing the halfedges of the connected component boundary (CCB) that contains e .
+constexpr const char* Arrangement_on_surface_2_Halfedge_ccb = "obtains a circulator that allows traversing the halfedges of the connected component boundary (CCB) that contains e .
 
 The circulator is initialized to point to e .
 
 Returns: Ccb_halfedge_circulator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Halfedge_curve = "obtains the $x$ -monotone curve associated with e .
+constexpr const char* Arrangement_on_surface_2_Halfedge_curve = "obtains the $x$ -monotone curve associated with e .
 
 e is not a fictitious halfedge.
 
 Returns: const Traits::X_monotone_curve_2 &";
 
 // CGAL::Arrangement_on_surface_2::Vertex
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex__class__ = "An object $v$ of the class Vertex represents an arrangement vertex, that is a $0$ -dimensional cell, associated with a point on the ambient surface.";
+constexpr const char* Arrangement_on_surface_2_Vertex__class__ = "An object $v$ of the class Vertex represents an arrangement vertex, that is a $0$ -dimensional cell, associated with a point on the ambient surface.";
 
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_Vertex = "default constructor.";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_is_at_open_boundary = "checks whether the vertex lies at infinity and not associated with a point with bounded coordinates.
-
-Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_is_isolated = "checks whether the vertex is isolated (i.e., has no incident edges).
+constexpr const char* Arrangement_on_surface_2_Vertex_Vertex = "default constructor.";
+constexpr const char* Arrangement_on_surface_2_Vertex_is_at_open_boundary = "checks whether the vertex lies at infinity and not associated with a point with bounded coordinates.
 
 Returns: bool";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_degree = "obtains the number of edges incident to v .
+constexpr const char* Arrangement_on_surface_2_Vertex_is_isolated = "checks whether the vertex is isolated (i.e., has no incident edges).
+
+Returns: bool";
+constexpr const char* Arrangement_on_surface_2_Vertex_degree = "obtains the number of edges incident to v .
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_incident_halfedges = "obtains a circulator that allows going over the halfedges incident to v (that have v as their target).
+constexpr const char* Arrangement_on_surface_2_Vertex_incident_halfedges = "obtains a circulator that allows going over the halfedges incident to v (that have v as their target).
 
 The edges are traversed in a clockwise direction around v . v is not an
 isolated vertex.
 
 Returns: Halfedge_around_vertex_circulator";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_face = "obtains a handle to the face that contains v in its interior.
+constexpr const char* Arrangement_on_surface_2_Vertex_face = "obtains a handle to the face that contains v in its interior.
 
 v is an isolated vertex.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_point = "obtains the point associated with the vertex.
+constexpr const char* Arrangement_on_surface_2_Vertex_point = "obtains the point associated with the vertex.
 
 v is not a vertex at infinity.
 
 Returns: const Traits::Point_2 &";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_parameter_space_in_x = "obtains the placement of the $x$ -coordinate in the parameter space, that is, either the left boundary-side, the interior, or the right boundary-side.
+constexpr const char* Arrangement_on_surface_2_Vertex_parameter_space_in_x = "obtains the placement of the $x$ -coordinate in the parameter space, that is, either the left boundary-side, the interior, or the right boundary-side.
 
 If the vertex lies on an identified vertical side, the return value is
 non-deterministic.
 
 Returns: Arr_parameter_space";
-constexpr const char* CGAL_Arrangement_on_surface_2_Vertex_parameter_space_in_y = "obtains the placement of the $y$ -coordinate in the parameter space, that is, either the bottom boundary-side, the interior, or the top boundary-side.
+constexpr const char* Arrangement_on_surface_2_Vertex_parameter_space_in_y = "obtains the placement of the $y$ -coordinate in the parameter space, that is, either the bottom boundary-side, the interior, or the top boundary-side.
 
 If the vertex lies on an identified horizontal side, the return value is
 non-deterministic.
 
 Returns: Arr_parameter_space";
 
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Geometry_traits_2 = "the geometry traits class in use.
+constexpr const char* Arrangement_on_surface_with_history_2_Geometry_traits_2 = "the geometry traits class in use.
 
 Returns: GeometryTraits";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Topology_traits = "the topology traits class in use.
+constexpr const char* Arrangement_on_surface_with_history_2_Topology_traits = "the topology traits class in use.
 
 Returns: TopologyTraits";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Self = "a private type used as an abbreviation of the Arrangement_on_surface_with_history_2 type hereafter.
+constexpr const char* Arrangement_on_surface_with_history_2_Self = "a private type used as an abbreviation of the Arrangement_on_surface_with_history_2 type hereafter.
 
 Returns: Arrangement_on_surface_with_history_2 < Geometry_traits_2 , TopologyTraits >";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Point_2 = "the point type, as defined by the traits class.
+constexpr const char* Arrangement_on_surface_with_history_2_Point_2 = "the point type, as defined by the traits class.
 
 Returns: Geometry_traits_2::Point_2";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_X_monotone_curve_2 = "the $x$ -monotone curve type, as defined by the traits class.
+constexpr const char* Arrangement_on_surface_with_history_2_X_monotone_curve_2 = "the $x$ -monotone curve type, as defined by the traits class.
 
 Returns: Geometry_traits_2::X_monotone_curve_2";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Curve_2 = "the curve type, as defined by the traits class.
+constexpr const char* Arrangement_on_surface_with_history_2_Curve_2 = "the curve type, as defined by the traits class.
 
 Returns: Geometry_traits_2::Curve_2";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Curve_handle = "a handle for an input curve.
+constexpr const char* Arrangement_on_surface_with_history_2_Curve_handle = "a handle for an input curve.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Curve_iterator = "a bidirectional iterator over the curves that induce the arrangement.
+constexpr const char* Arrangement_on_surface_with_history_2_Curve_iterator = "a bidirectional iterator over the curves that induce the arrangement.
 
 Its value-type is Curve_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Induced_edge_iterator = "an iterator over the edges induced by an input curve.
+constexpr const char* Arrangement_on_surface_with_history_2_Induced_edge_iterator = "an iterator over the edges induced by an input curve.
 
 Its value type is Halfedge_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Originating_curve_iterator = "an iterator for the curves that originate a given arrangement edge.
+constexpr const char* Arrangement_on_surface_with_history_2_Originating_curve_iterator = "an iterator for the curves that originate a given arrangement edge.
 
 Its value type is Curve_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Arrangement_on_surface_with_history_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the whole plane.";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Arrangement_on_surface_with_history_2_1 = "copy constructor.
+constexpr const char* Arrangement_on_surface_with_history_2_Arrangement_on_surface_with_history_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the whole plane.";
+constexpr const char* Arrangement_on_surface_with_history_2_Arrangement_on_surface_with_history_2_1 = "copy constructor.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_Arrangement_on_surface_with_history_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
+constexpr const char* Arrangement_on_surface_with_history_2_Arrangement_on_surface_with_history_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
 
 Parameters
 ----------
 traits : Geometry_traits_2 *";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_operator = "assignment operator.
+constexpr const char* Arrangement_on_surface_with_history_2_operator = "assignment operator.
 
 Parameters
 ----------
  : other
 
 Returns: Self &";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_assign = "assigns the contents of another arrangement.
+constexpr const char* Arrangement_on_surface_with_history_2_assign = "assigns the contents of another arrangement.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_clear = "clears the arrangement.";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_number_of_curves = "returns the number of input curves that induce the arrangement.
+constexpr const char* Arrangement_on_surface_with_history_2_clear = "clears the arrangement.";
+constexpr const char* Arrangement_on_surface_with_history_2_number_of_curves = "returns the number of input curves that induce the arrangement.
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_curves_begin = "returns the begin-iterator of the curves inducing the arrangement.
+constexpr const char* Arrangement_on_surface_with_history_2_curves_begin = "returns the begin-iterator of the curves inducing the arrangement.
 
 Returns: Curve_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_curves_end = "returns the past-the-end iterator of the curves inducing the arrangement.
+constexpr const char* Arrangement_on_surface_with_history_2_curves_end = "returns the past-the-end iterator of the curves inducing the arrangement.
 
 Returns: Curve_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_number_of_induced_edges = "returns the number of arrangement edges induced by the curve ch .
+constexpr const char* Arrangement_on_surface_with_history_2_number_of_induced_edges = "returns the number of arrangement edges induced by the curve ch .
 
 Parameters
 ----------
 ch : Curve_handle
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_induced_edges_begin = "returns the begin-iterator of the edges induced by the curve ch .
+constexpr const char* Arrangement_on_surface_with_history_2_induced_edges_begin = "returns the begin-iterator of the edges induced by the curve ch .
 
 Parameters
 ----------
 ch : Curve_handle
 
 Returns: Induced_edge_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_induced_edges_end = "returns the past-the-end iterator of the edges induced by the curve ch .
+constexpr const char* Arrangement_on_surface_with_history_2_induced_edges_end = "returns the past-the-end iterator of the edges induced by the curve ch .
 
 Parameters
 ----------
 ch : Curve_handle
 
 Returns: Induced_edge_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_number_of_originating_curves = "returns the number of input curves that originate the edge e .
+constexpr const char* Arrangement_on_surface_with_history_2_number_of_originating_curves = "returns the number of input curves that originate the edge e .
 
 Parameters
 ----------
 e : Halfedge_handle
 
 Returns: Size";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_originating_curves_begin = "returns the begin-iterator of the curves originating the edge e .
+constexpr const char* Arrangement_on_surface_with_history_2_originating_curves_begin = "returns the begin-iterator of the curves originating the edge e .
 
 Parameters
 ----------
 e : Halfedge_handle
 
 Returns: Originating_curve_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_originating_curves_end = "returns the past-the-end iterator of the curves originating the edge e .
+constexpr const char* Arrangement_on_surface_with_history_2_originating_curves_end = "returns the past-the-end iterator of the curves originating the edge e .
 
 Parameters
 ----------
 e : Halfedge_handle
 
 Returns: Originating_curve_iterator";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_split_edge = "splits the edge e into two edges (more precisely, into two halfedge pairs), at a given split point p .
+constexpr const char* Arrangement_on_surface_with_history_2_split_edge = "splits the edge e into two edges (more precisely, into two halfedge pairs), at a given split point p .
 
 The function returns a handle for the halfedge whose source is the same as
 e->source() and whose target vertex is the split point. p lies in the interior
@@ -6059,7 +6059,7 @@ e : Halfedge_handle
 p : const Point_2 &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_merge_edge = "merges the edges represented by e1 and e2 into a single edge.
+constexpr const char* Arrangement_on_surface_with_history_2_merge_edge = "merges the edges represented by e1 and e2 into a single edge.
 
 The function returns a handle for one of the merged halfedges. e1 and e2 share
 a common end-vertex, of degree $2$ , and the $x$ -monotone curves associated
@@ -6071,7 +6071,7 @@ e1 : Halfedge_handle
 e2 : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Arrangement_on_surface_with_history_2_remove_edge = "removes the edge e from the arrangement.
+constexpr const char* Arrangement_on_surface_with_history_2_remove_edge = "removes the edge e from the arrangement.
 
 Since the e may be the only edge incident to its source vertex (or its target
 vertex), this vertex can be removed as well. The flags remove_source and
@@ -6088,61 +6088,61 @@ remove_target : bool
 
 Returns: Face_handle";
 
-constexpr const char* CGAL_Arrangement_with_history_2_Geometry_traits = "the geometry traits class.
+constexpr const char* Arrangement_with_history_2_Geometry_traits = "the geometry traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Arrangement_with_history_2_Topology_traits = "The topology traits.
+constexpr const char* Arrangement_with_history_2_Topology_traits = "The topology traits.
 
 Returns: Default_planar_topology< Geometry_traits , Dcel >::Traits";
-constexpr const char* CGAL_Arrangement_with_history_2_Base = "The base arrangement on surface type.
+constexpr const char* Arrangement_with_history_2_Base = "The base arrangement on surface type.
 
 Returns: Arrangement_on_surface_with_history_2 < Geometry_traits , Topology_traits >";
-constexpr const char* CGAL_Arrangement_with_history_2_Arrangement_with_history_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the whole plane.";
-constexpr const char* CGAL_Arrangement_with_history_2_Arrangement_with_history_2_1 = "copy constructor.
+constexpr const char* Arrangement_with_history_2_Arrangement_with_history_2 = "constructs an empty arrangement containing one unbounded face, which corresponds to the whole plane.";
+constexpr const char* Arrangement_with_history_2_Arrangement_with_history_2_1 = "copy constructor.
 
 Parameters
 ----------
 other : const Arrangement_with_history_2< Traits, Dcel > &";
-constexpr const char* CGAL_Arrangement_with_history_2_Arrangement_with_history_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
+constexpr const char* Arrangement_with_history_2_Arrangement_with_history_2_2 = "constructs an empty arrangement that uses the given traits instance for performing the geometric predicates.
 
 Parameters
 ----------
 traits : const Traits *";
-constexpr const char* CGAL_Arrangement_with_history_2_operator = "assignment operator.
+constexpr const char* Arrangement_with_history_2_operator = "assignment operator.
 
 Parameters
 ----------
  : other
 
 Returns: Arrangement_with_history_2 < Traits, Dcel > &";
-constexpr const char* CGAL_Arrangement_with_history_2_assign = "assigns the contents of another arrangement.
+constexpr const char* Arrangement_with_history_2_assign = "assigns the contents of another arrangement.
 
 Parameters
 ----------
 other : const Arrangement_with_history_2 < Traits, Dcel > &";
-constexpr const char* CGAL_Arrangement_with_history_2_clear = "clears the arrangement.";
-constexpr const char* CGAL_Arrangement_with_history_2_traits = "obtains the traits object used by the arrangement instance.
+constexpr const char* Arrangement_with_history_2_clear = "clears the arrangement.";
+constexpr const char* Arrangement_with_history_2_traits = "obtains the traits object used by the arrangement instance.
 
 A const version is also available.
 
 Returns: Traits *";
 
 // CGAL::CORE_algebraic_number_traits
-constexpr const char* CGAL_CORE_algebraic_number_traits__class__ = "CORE_algebraic_number_traits is a traits class for CORE's algebraic number types.";
+constexpr const char* CORE_algebraic_number_traits__class__ = "CORE_algebraic_number_traits is a traits class for CORE's algebraic number types.";
 
-constexpr const char* CGAL_CORE_algebraic_number_traits_Integer = "The integer number type.
+constexpr const char* CORE_algebraic_number_traits_Integer = "The integer number type.
 
 Returns: CORE::BigInt";
-constexpr const char* CGAL_CORE_algebraic_number_traits_Rational = "The rational number type.
+constexpr const char* CORE_algebraic_number_traits_Rational = "The rational number type.
 
 Returns: CORE::BigRat";
-constexpr const char* CGAL_CORE_algebraic_number_traits_Polynomial = "The polynomial type.
+constexpr const char* CORE_algebraic_number_traits_Polynomial = "The polynomial type.
 
 Returns: CORE::Polynomial< Integer >";
-constexpr const char* CGAL_CORE_algebraic_number_traits_Algebraic = "The algebraic number type.
+constexpr const char* CORE_algebraic_number_traits_Algebraic = "The algebraic number type.
 
 Returns: CORE::Expr";
-constexpr const char* CGAL_CORE_algebraic_number_traits_numerator = "obtains the numerator of a rational number.
+constexpr const char* CORE_algebraic_number_traits_numerator = "obtains the numerator of a rational number.
 
 q The rational number. The numerator of q .
 
@@ -6151,7 +6151,7 @@ Parameters
 q : const Rational &
 
 Returns: Integer";
-constexpr const char* CGAL_CORE_algebraic_number_traits_denominator = "obtains the denominator of a rational number.
+constexpr const char* CORE_algebraic_number_traits_denominator = "obtains the denominator of a rational number.
 
 q The rational number. The denominator of q .
 
@@ -6160,7 +6160,7 @@ Parameters
 q : const Rational &
 
 Returns: Integer";
-constexpr const char* CGAL_CORE_algebraic_number_traits_convert = "converts an integer to an algebraic number.
+constexpr const char* CORE_algebraic_number_traits_convert = "converts an integer to an algebraic number.
 
 z The integer. The algebraic number equivalent to z .
 
@@ -6169,7 +6169,7 @@ Parameters
 z : const Integer &
 
 Returns: Algebraic";
-constexpr const char* CGAL_CORE_algebraic_number_traits_convert_1 = "converts a rational number to an algebraic number.
+constexpr const char* CORE_algebraic_number_traits_convert_1 = "converts a rational number to an algebraic number.
 
 q A rational number. The algebraic number equivalent to q .
 
@@ -6178,7 +6178,7 @@ Parameters
 q : const Rational &
 
 Returns: Algebraic";
-constexpr const char* CGAL_CORE_algebraic_number_traits_rational_in_interval = "constructs a rational number that lies strictly between two algebraic values.
+constexpr const char* CORE_algebraic_number_traits_rational_in_interval = "constructs a rational number that lies strictly between two algebraic values.
 
 x1 The first algebraic value. x2 The second algebraic value. The two values
 are not equal. The rational number that lies in the open interval ( x1 , x2 ).
@@ -6189,7 +6189,7 @@ x1 : const Algebraic &
 x2 : const Algebraic &
 
 Returns: Rational";
-constexpr const char* CGAL_CORE_algebraic_number_traits_double_interval = "obtains a range of double-precision floats that contains the given algebraic number.
+constexpr const char* CORE_algebraic_number_traits_double_interval = "obtains a range of double-precision floats that contains the given algebraic number.
 
 x The given number. The range of double-precision floats that contain x .
 
@@ -6198,7 +6198,7 @@ Parameters
 x : const Algebraic &
 
 Returns: std::pair< double, double >";
-constexpr const char* CGAL_CORE_algebraic_number_traits_convert_coefficients = "converts a sequence of rational coefficients to an equivalent sequence of integer coefficients.
+constexpr const char* CORE_algebraic_number_traits_convert_coefficients = "converts a sequence of rational coefficients to an equivalent sequence of integer coefficients.
 
 If the input coefficients are $q(1),\\ldots,q(k)$ , where $q(i) = n(i)/d(i)$ ,
 then the output coefficients will be of the form: $a(i) = \\frac{n(i) \\cdot
@@ -6218,7 +6218,7 @@ end : InputIterator
 oi : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_CORE_algebraic_number_traits_sqrt = "computes the square root of an algebraic number.
+constexpr const char* CORE_algebraic_number_traits_sqrt = "computes the square root of an algebraic number.
 
 x The number. The square root of x . x is non-negative.
 
@@ -6227,7 +6227,7 @@ Parameters
 x : const Algebraic &
 
 Returns: Algebraic";
-constexpr const char* CGAL_CORE_algebraic_number_traits_solve_quadratic_equation = "computes the roots of a quadratic equations $a*x^2+ b*x + c = 0$ with integer coefficients, and inserts them into an output container given through an output iterator.
+constexpr const char* CORE_algebraic_number_traits_solve_quadratic_equation = "computes the roots of a quadratic equations $a*x^2+ b*x + c = 0$ with integer coefficients, and inserts them into an output container given through an output iterator.
 
 a The coefficient of $x^2$ b The coefficient of $x$ c The free term. oi The
 output iterator of the output container of real-valued solutions of the
@@ -6242,7 +6242,7 @@ c : const NT &
 oi : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_CORE_algebraic_number_traits_construct_polynomial = "constructs a polynomial with integer coefficients.
+constexpr const char* CORE_algebraic_number_traits_construct_polynomial = "constructs a polynomial with integer coefficients.
 
 coeffs The coefficients of the input polynomial. degree The degree of the
 input polynomial. The polynomial.
@@ -6253,7 +6253,7 @@ coeffs : const Integer *
 degree : unsigned int
 
 Returns: Polynomial";
-constexpr const char* CGAL_CORE_algebraic_number_traits_construct_polynomial_1 = "constructs a polynomial with integer coefficients given rational coefficients.
+constexpr const char* CORE_algebraic_number_traits_construct_polynomial_1 = "constructs a polynomial with integer coefficients given rational coefficients.
 
 coeffs The coefficients of the input polynomial. degree The degree of the
 input polynomial. poly Output: The resulting polynomial with integer
@@ -6268,7 +6268,7 @@ poly : Polynomial &
 poly_denom : Integer &
 
 Returns: bool";
-constexpr const char* CGAL_CORE_algebraic_number_traits_construct_polynomials = "constructs two polynomials with integer coefficients such that $P(x)/Q(x)$ is a rational function equivalent to the one represented by the two given vectors of rational coefficients.
+constexpr const char* CORE_algebraic_number_traits_construct_polynomials = "constructs two polynomials with integer coefficients such that $P(x)/Q(x)$ is a rational function equivalent to the one represented by the two given vectors of rational coefficients.
 
 It is guaranteed that the GCD of $P(x)$ and $Q(x)$ is trivial. p_coeffs The
 coefficients of the input numerator polynomial. p_degree The degree of the
@@ -6288,14 +6288,14 @@ p_poly : Polynomial &
 q_poly : Polynomial &
 
 Returns: bool";
-constexpr const char* CGAL_CORE_algebraic_number_traits_degree = "Compute the degree of a polynomial.
+constexpr const char* CORE_algebraic_number_traits_degree = "Compute the degree of a polynomial.
 
 Parameters
 ----------
 poly : const Polynomial &
 
 Returns: int";
-constexpr const char* CGAL_CORE_algebraic_number_traits_evaluate_at = "evaluates a polynomial at a given $x$ -value.
+constexpr const char* CORE_algebraic_number_traits_evaluate_at = "evaluates a polynomial at a given $x$ -value.
 
 poly The polynomial. x The value to evaluate at. The value of the polynomial
 at x .
@@ -6306,7 +6306,7 @@ poly : const Polynomial &
 x : NT &
 
 Returns: NT";
-constexpr const char* CGAL_CORE_algebraic_number_traits_derive = "computes the derivative of the given polynomial.
+constexpr const char* CORE_algebraic_number_traits_derive = "computes the derivative of the given polynomial.
 
 poly The polynomial $p(x)$ . The derivative $p'(x)$ .
 
@@ -6315,7 +6315,7 @@ Parameters
 poly : const Polynomial &
 
 Returns: Polynomial";
-constexpr const char* CGAL_CORE_algebraic_number_traits_scale = "multiplies a polynomial by some scalar coefficient.
+constexpr const char* CORE_algebraic_number_traits_scale = "multiplies a polynomial by some scalar coefficient.
 
 poly The polynomial $P(x)$ . a The scalar value. The scalar multiplication $a
 \\cdot P(x)$ .
@@ -6326,7 +6326,7 @@ poly : const Polynomial &
 a : const Integer &
 
 Returns: Polynomial";
-constexpr const char* CGAL_CORE_algebraic_number_traits_divide = "performs \"long division\" of two polynomials: Given $A(x)$ and $B(x)$ compute two polynomials $Q(x)$ and $R(x)$ such that: $A(x) = Q(x) \\cdot B(x) + R(x)$ and $R(x)$ has minimal degree.
+constexpr const char* CORE_algebraic_number_traits_divide = "performs \"long division\" of two polynomials: Given $A(x)$ and $B(x)$ compute two polynomials $Q(x)$ and $R(x)$ such that: $A(x) = Q(x) \\cdot B(x) + R(x)$ and $R(x)$ has minimal degree.
 
 poly_a The first polynomial $A(x)$ . poly_b The second polynomial $A(x)$ . rem
 Output: The remainder polynomial $R(x)$ . The quontient polynomial $Q(x)$ .
@@ -6338,7 +6338,7 @@ poly_b : const Polynomial &
 rem : Polynomial &
 
 Returns: Polynomial";
-constexpr const char* CGAL_CORE_algebraic_number_traits_compute_polynomial_roots = "computes the real-valued roots of a polynomial with integer coefficients, and inserts them in ascending order into an output container given through an output iterator.
+constexpr const char* CORE_algebraic_number_traits_compute_polynomial_roots = "computes the real-valued roots of a polynomial with integer coefficients, and inserts them in ascending order into an output container given through an output iterator.
 
 poly The input polynomial. oi The output iterator of the output container of
 real-valued root of the polynomial. The past-the-end iterator of the output
@@ -6350,7 +6350,7 @@ poly : const Polynomial &
 oi : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_CORE_algebraic_number_traits_compute_polynomial_roots_1 = "computes the real-valued roots of a polynomial with integer coefficients within a given interval, and inserts them in ascending order into an output container given through an output iterator.
+constexpr const char* CORE_algebraic_number_traits_compute_polynomial_roots_1 = "computes the real-valued roots of a polynomial with integer coefficients within a given interval, and inserts them in ascending order into an output container given through an output iterator.
 
 poly The input polynomial. x_min The left bound of the interval. x_max The
 right bound of the interval. oi The output iterator of the output container of
@@ -6472,7 +6472,7 @@ f : Face_handle_R";
 constexpr const char* AosTraits__class__ = "The namespace containing concepts specific to Arrangements.";
 
 // CGAL
-constexpr const char* CGAL__class__ = "Copyright (c) 2007,2009,2010,2011 Tel-Aviv University (Israel).";
+constexpr const char* _class__ = "Copyright (c) 2007,2009,2010,2011 Tel-Aviv University (Israel).";
 
 
 // std

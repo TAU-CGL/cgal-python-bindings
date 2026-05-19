@@ -8,22 +8,22 @@ namespace docstrings {
 namespace Segment_Delaunay_graph_Linf_2 {
 
 // CGAL::Segment_Delaunay_graph_Linf_2
-constexpr const char* CGAL_Segment_Delaunay_graph_Linf_2__class__ = "The class Segment_Delaunay_graph_Linf_2 represents the segment Delaunay graph under the $ L_{\\infty} $ metric (which is the dual graph of the 2D segment Voronoi diagram under the $ L_{\\infty} $ metric).";
+constexpr const char* Segment_Delaunay_graph_Linf_2__class__ = "The class Segment_Delaunay_graph_Linf_2 represents the segment Delaunay graph under the $ L_{\\infty} $ metric (which is the dual graph of the 2D segment Voronoi diagram under the $ L_{\\infty} $ metric).";
 
 // CGAL::Segment_Delaunay_graph_Linf_filtered_traits_2
-constexpr const char* CGAL_Segment_Delaunay_graph_Linf_filtered_traits_2__class__ = "The class Segment_Delaunay_graph_Linf_filtered_traits_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_Linf_filtered_traits_2__class__ = "The class Segment_Delaunay_graph_Linf_filtered_traits_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
 
 // CGAL::Segment_Delaunay_graph_Linf_filtered_traits_without_intersections_2
-constexpr const char* CGAL_Segment_Delaunay_graph_Linf_filtered_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_Linf_filtered_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_Linf_filtered_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_Linf_filtered_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
 
 // CGAL::Segment_Delaunay_graph_Linf_hierarchy_2
-constexpr const char* CGAL_Segment_Delaunay_graph_Linf_hierarchy_2__class__ = "This class is equivalent to the Segment_Delaunay_graph_hierarchy_2 class, but it uses Segment_Delaunay_graph_Linf_2 <Gt,DS> at every level of the hierarchy (instead of Segment_Delaunay_graph_2<Gt,DS> at each level of Segment_Delaunay_graph_hierarchy_2 ).";
+constexpr const char* Segment_Delaunay_graph_Linf_hierarchy_2__class__ = "This class is equivalent to the Segment_Delaunay_graph_hierarchy_2 class, but it uses Segment_Delaunay_graph_Linf_2 <Gt,DS> at every level of the hierarchy (instead of Segment_Delaunay_graph_2<Gt,DS> at each level of Segment_Delaunay_graph_hierarchy_2 ).";
 
 // CGAL::Segment_Delaunay_graph_Linf_traits_2
-constexpr const char* CGAL_Segment_Delaunay_graph_Linf_traits_2__class__ = "The class Segment_Delaunay_graph_Linf_traits_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_Linf_traits_2__class__ = "The class Segment_Delaunay_graph_Linf_traits_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
 
 // CGAL::Segment_Delaunay_graph_Linf_traits_without_intersections_2
-constexpr const char* CGAL_Segment_Delaunay_graph_Linf_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_Linf_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_Linf_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_Linf_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphLinfTraits_2 concept.";
 
 // SegmentDelaunayGraphLinfTraits_2
 constexpr const char* SegmentDelaunayGraphLinfTraits_2__class__ = "The concept SegmentDelaunayGraphLinfTraits_2 provides traits for constructing the segment Delaunay graph under the $ L_{\\infty} $ distance. The segment Delaunay graph is the dual of the segment Voronoi diagram. We stress that we consider the 1-dimensionalization of $ L_{\\infty} $ bisectors between two sites which is explained in Section Bisectors and 1-Dimensionalization of the User Manual, and this reflects on the constructed graph (and its dual diagram). These traits should be used in the Gt template parameter of the CGAL::Segment_Delaunay_graph_Linf_2 <Gt,DS> and CGAL::Segment_Delaunay_graph_Linf_hierarchy_2 <Gt,STag,DS> class templates. The concept is a refinement of SegmentDelaunayGraphTraits_2 . In particular, it provides a type Site_2 , which must be a model of the concept SegmentDelaunayGraphSite_2 . It also provides constructions for sites and several function object types for the predicates.";

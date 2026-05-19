@@ -69,38 +69,38 @@ Defined only if Info is different from void .
 Returns: const Info &";
 
 // CGAL::Cell_attribute
-constexpr const char* CGAL_Cell_attribute__class__ = "The class Cell_attribute represents an attribute containing (or not) an information.";
+constexpr const char* Cell_attribute__class__ = "The class Cell_attribute represents an attribute containing (or not) an information.";
 
 
 // CGAL::Cell_attribute_with_id
-constexpr const char* CGAL_Cell_attribute_with_id__class__ = "The class Cell_attribute_with_id represents an attribute containing (or not) an information, and having an id.";
+constexpr const char* Cell_attribute_with_id__class__ = "The class Cell_attribute_with_id represents an attribute containing (or not) an information, and having an id.";
 
-constexpr const char* CGAL_Cell_attribute_with_id_id = "Returns the index.
+constexpr const char* Cell_attribute_with_id_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_Cell_attribute_with_id_id_1 = "Returns the index by reference.
+constexpr const char* Cell_attribute_with_id_id_1 = "Returns the index by reference.
 
 Returns: int &";
 
 // CGAL::Combinatorial_map
-constexpr const char* CGAL_Combinatorial_map__class__ = "The class Combinatorial_map represents a d D combinatorial map.";
+constexpr const char* Combinatorial_map__class__ = "The class Combinatorial_map represents a d D combinatorial map.";
 
-constexpr const char* CGAL_Combinatorial_map_Dart_info = "Information associated with darts.
+constexpr const char* Combinatorial_map_Dart_info = "Information associated with darts.
 
 Equal to void if Dart_info is not defined in the items class.
 
 Returns: Items::Dart_wrapper< Self >::Dart_info";
-constexpr const char* CGAL_Combinatorial_map_Attributes = "The tuple of cell attributes.
+constexpr const char* Combinatorial_map_Attributes = "The tuple of cell attributes.
 
 Equal to std::tuple<> if Attributes is not defined in the items class.
 
 Returns: Items::Dart_wrapper< Self >::Attributes";
-constexpr const char* CGAL_Combinatorial_map_dimension = "The dimension of the combinatorial map.
+constexpr const char* Combinatorial_map_dimension = "The dimension of the combinatorial map.
 
 Returns: const unsigned int";
 
 // CGAL::Generic_map_min_items
-constexpr const char* CGAL_Generic_map_min_items__class__ = "The class Generic_map_min_items defines void as the information associated with darts, and no attribute is enabled.";
+constexpr const char* Generic_map_min_items__class__ = "The class Generic_map_min_items defines void as the information associated with darts, and no attribute is enabled.";
 
 // CombinatorialMap
 constexpr const char* CombinatorialMap__class__ = "The concept CombinatorialMap defines a d -dimensional combinatorial map.";

@@ -8,12 +8,12 @@ namespace docstrings {
 namespace Cone_spanners_2 {
 
 // CGAL::Compute_cone_boundaries_2
-constexpr const char* CGAL_Compute_cone_boundaries_2__class__ = "The functor for computing the directions of cone boundaries with a given cone number and a given initial direction.";
+constexpr const char* Compute_cone_boundaries_2__class__ = "The functor for computing the directions of cone boundaries with a given cone number and a given initial direction.";
 
-constexpr const char* CGAL_Compute_cone_boundaries_2_Direction_2 = "the direction type.
+constexpr const char* Compute_cone_boundaries_2_Direction_2 = "the direction type.
 
 Returns: Traits::Direction_2";
-constexpr const char* CGAL_Compute_cone_boundaries_2_operator = "The operator().
+constexpr const char* Compute_cone_boundaries_2_operator = "The operator().
 
 The direction of the first ray can be specified by the parameter
 initial_direction , which allows the first ray to start at any direction. This
@@ -33,18 +33,18 @@ result : DirectionOutputIterator
 Returns: DirectionOutputIterator";
 
 // CGAL::Construct_theta_graph_2
-constexpr const char* CGAL_Construct_theta_graph_2__class__ = "A template functor for constructing Theta graphs with a given set of 2D points and a given initial direction for the cone boundaries.";
+constexpr const char* Construct_theta_graph_2__class__ = "A template functor for constructing Theta graphs with a given set of 2D points and a given initial direction for the cone boundaries.";
 
-constexpr const char* CGAL_Construct_theta_graph_2_Graph = "the specific type of boost::adjacency_list .
+constexpr const char* Construct_theta_graph_2_Graph = "the specific type of boost::adjacency_list .
 
 Returns: Graph_";
-constexpr const char* CGAL_Construct_theta_graph_2_Point_2 = "the point type
+constexpr const char* Construct_theta_graph_2_Point_2 = "the point type
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Construct_theta_graph_2_Direction_2 = "the direction type
+constexpr const char* Construct_theta_graph_2_Direction_2 = "the direction type
 
 Returns: Traits::Direction_2";
-constexpr const char* CGAL_Construct_theta_graph_2_Construct_theta_graph_2 = "Constructor.
+constexpr const char* Construct_theta_graph_2_Construct_theta_graph_2 = "Constructor.
 
 k Number of cones to divide space into initial_direction A direction denoting
 one of the rays dividing the cones. This allows arbitrary rotations of the
@@ -56,7 +56,7 @@ Parameters
 k : unsigned int
 initial_direction : Direction_2
 cones_selected : Cones_selected";
-constexpr const char* CGAL_Construct_theta_graph_2_operator = "Function operator to construct a Theta graph.
+constexpr const char* Construct_theta_graph_2_operator = "Function operator to construct a Theta graph.
 
 For the details of this algorithm, please refer to the User Manual.
 PointInputIterator an InputIterator with value type Point_2 . start An
@@ -70,10 +70,10 @@ end : const PointInputIterator &
 g : Graph_ &
 
 Returns: Graph_ &";
-constexpr const char* CGAL_Construct_theta_graph_2_number_of_cones = "returns the number of cones.
+constexpr const char* Construct_theta_graph_2_number_of_cones = "returns the number of cones.
 
 Returns: unsigned int";
-constexpr const char* CGAL_Construct_theta_graph_2_directions = "outputs the set of directions to the iterator result .
+constexpr const char* Construct_theta_graph_2_directions = "outputs the set of directions to the iterator result .
 
 DirectionOutputIterator an OutputIterator with value type Direction_2 . result
 
@@ -84,18 +84,18 @@ result : DirectionOutputIterator
 Returns: DirectionOutputIterator";
 
 // CGAL::Construct_yao_graph_2
-constexpr const char* CGAL_Construct_yao_graph_2__class__ = "A template functor for constructing Yao graphs with a given set of 2D points and a given initial direction for the cone boundaries.";
+constexpr const char* Construct_yao_graph_2__class__ = "A template functor for constructing Yao graphs with a given set of 2D points and a given initial direction for the cone boundaries.";
 
-constexpr const char* CGAL_Construct_yao_graph_2_Graph = "the specific type of boost::adjacency_list .
+constexpr const char* Construct_yao_graph_2_Graph = "the specific type of boost::adjacency_list .
 
 Returns: Graph_";
-constexpr const char* CGAL_Construct_yao_graph_2_Point_2 = "the point type
+constexpr const char* Construct_yao_graph_2_Point_2 = "the point type
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Construct_yao_graph_2_Direction_2 = "the direction type
+constexpr const char* Construct_yao_graph_2_Direction_2 = "the direction type
 
 Returns: Traits::Direction_2";
-constexpr const char* CGAL_Construct_yao_graph_2_Construct_yao_graph_2 = "Constructor.
+constexpr const char* Construct_yao_graph_2_Construct_yao_graph_2 = "Constructor.
 
 k Number of cones to divide space into initial_direction A direction denoting
 one of the rays dividing the cones. This allows arbitrary rotations of the
@@ -107,7 +107,7 @@ Parameters
 k : unsigned int
 initial_direction : Direction_2
 cones_selected : Cones_selected";
-constexpr const char* CGAL_Construct_yao_graph_2_operator = "Function operator to construct a Yao graph.
+constexpr const char* Construct_yao_graph_2_operator = "Function operator to construct a Yao graph.
 
 For the details of this algorithm, please refer to the User Manual.
 PointInputIterator an InputIterator with value type Point_2 . start An
@@ -121,10 +121,10 @@ end : const PointInputIterator &
 g : Graph_ &
 
 Returns: Graph_ &";
-constexpr const char* CGAL_Construct_yao_graph_2_number_of_cones = "returns the number of cones.
+constexpr const char* Construct_yao_graph_2_number_of_cones = "returns the number of cones.
 
 Returns: unsigned int";
-constexpr const char* CGAL_Construct_yao_graph_2_directions = "outputs the set of directions to the iterator result .
+constexpr const char* Construct_yao_graph_2_directions = "outputs the set of directions to the iterator result .
 
 DirectionOutputIterator an OutputIterator with value type Direction_2 . result
 

@@ -8,17 +8,17 @@ namespace docstrings {
 namespace Spatial_sorting {
 
 // CGAL::Hilbert_policy
-constexpr const char* CGAL_Hilbert_policy__class__ = "Hilbert_policy is a policy class which can be used to parameterize a strategy policy in order to specify the strategy for spatial sorting.";
+constexpr const char* Hilbert_policy__class__ = "Hilbert_policy is a policy class which can be used to parameterize a strategy policy in order to specify the strategy for spatial sorting.";
 
 // CGAL::Hilbert_sort_2
-constexpr const char* CGAL_Hilbert_sort_2__class__ = "The function object Hilbert_sort_2 sorts iterator ranges of Traits::Point_2 along a Hilbert curve by recursively subdividing at the median or the middle, depending on the PolicyTag (see Section Hilbert Sorting for more information on the policies).";
+constexpr const char* Hilbert_sort_2__class__ = "The function object Hilbert_sort_2 sorts iterator ranges of Traits::Point_2 along a Hilbert curve by recursively subdividing at the median or the middle, depending on the PolicyTag (see Section Hilbert Sorting for more information on the policies).";
 
-constexpr const char* CGAL_Hilbert_sort_2_Hilbert_sort_2 = "constructs an instance with traits as traits class instance.
+constexpr const char* Hilbert_sort_2_Hilbert_sort_2 = "constructs an instance with traits as traits class instance.
 
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Hilbert_sort_2_operator = "It sorts the range [begin, end) .
+constexpr const char* Hilbert_sort_2_operator = "It sorts the range [begin, end) .
 
 InputPointIterator must be a model of RandomAccessIterator with value type
 Traits::Point_2 .
@@ -29,14 +29,14 @@ begin : InputPointIterator
 end : InputPointIterator";
 
 // CGAL::Hilbert_sort_3
-constexpr const char* CGAL_Hilbert_sort_3__class__ = "The function object Hilbert_sort_3 sorts iterator ranges of Traits::Point_3 along a Hilbert curve by recursively subdividing at the median or the middle, depending on the PolicyTag (see Section Hilbert Sorting for more information on the policies).";
+constexpr const char* Hilbert_sort_3__class__ = "The function object Hilbert_sort_3 sorts iterator ranges of Traits::Point_3 along a Hilbert curve by recursively subdividing at the median or the middle, depending on the PolicyTag (see Section Hilbert Sorting for more information on the policies).";
 
-constexpr const char* CGAL_Hilbert_sort_3_Hilbert_sort_3 = "constructs an instance with traits as traits class instance.
+constexpr const char* Hilbert_sort_3_Hilbert_sort_3 = "constructs an instance with traits as traits class instance.
 
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Hilbert_sort_3_operator = "It sorts the range [begin, end) .
+constexpr const char* Hilbert_sort_3_operator = "It sorts the range [begin, end) .
 
 InputPointIterator must be a model of RandomAccessIterator with value type
 Traits::Point_3 .
@@ -47,14 +47,14 @@ begin : InputPointIterator
 end : InputPointIterator";
 
 // CGAL::Hilbert_sort_d
-constexpr const char* CGAL_Hilbert_sort_d__class__ = "The function object Hilbert_sort_d sorts iterator ranges of Traits::Point_d along a Hilbert curve by recursively subdividing at the median or the middle depending on the PolicyTag .";
+constexpr const char* Hilbert_sort_d__class__ = "The function object Hilbert_sort_d sorts iterator ranges of Traits::Point_d along a Hilbert curve by recursively subdividing at the median or the middle depending on the PolicyTag .";
 
-constexpr const char* CGAL_Hilbert_sort_d_Hilbert_sort_d = "constructs an instance with traits as traits class instance.
+constexpr const char* Hilbert_sort_d_Hilbert_sort_d = "constructs an instance with traits as traits class instance.
 
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Hilbert_sort_d_operator = "It sorts the range [begin, end) .
+constexpr const char* Hilbert_sort_d_operator = "It sorts the range [begin, end) .
 
 InputPointIterator must be a model of RandomAccessIterator with value type
 Traits::Point_d .
@@ -65,9 +65,9 @@ begin : InputPointIterator
 end : InputPointIterator";
 
 // CGAL::Hilbert_sort_on_sphere_3
-constexpr const char* CGAL_Hilbert_sort_on_sphere_3__class__ = "The function object Hilbert_sort_on_sphere_3 sorts iterator ranges of Traits::Point_3 along a Hilbert curve on a given sphere.";
+constexpr const char* Hilbert_sort_on_sphere_3__class__ = "The function object Hilbert_sort_on_sphere_3 sorts iterator ranges of Traits::Point_3 along a Hilbert curve on a given sphere.";
 
-constexpr const char* CGAL_Hilbert_sort_on_sphere_3_Hilbert_sort_on_sphere_3 = "constructs an instance with traits as traits class instance, sq_r as the squared_radius of the given sphere, and p as the center of the given sphere.
+constexpr const char* Hilbert_sort_on_sphere_3_Hilbert_sort_on_sphere_3 = "constructs an instance with traits as traits class instance, sq_r as the squared_radius of the given sphere, and p as the center of the given sphere.
 
 The value of $sq\\_r$ should be greater than 0.
 
@@ -76,7 +76,7 @@ Parameters
 traits : const Traits &
 sq_r : double
 p : const Traits::Point_3 &";
-constexpr const char* CGAL_Hilbert_sort_on_sphere_3_operator = "It sorts the range [begin, end) along a hilbert curve on the sphere centered at p with squared radius sq_r ; these arguments are passed in the construction of the object Hilbert_sort_on_sphere_3 .
+constexpr const char* Hilbert_sort_on_sphere_3_operator = "It sorts the range [begin, end) along a hilbert curve on the sphere centered at p with squared radius sq_r ; these arguments are passed in the construction of the object Hilbert_sort_on_sphere_3 .
 
 InputPointIterator must be a model of RandomAccessIterator with value type
 Traits::Point_3 .
@@ -87,22 +87,22 @@ begin : InputPointIterator
 end : InputPointIterator";
 
 // CGAL::Median
-constexpr const char* CGAL_Median__class__ = "Median is a tag class.";
+constexpr const char* Median__class__ = "Median is a tag class.";
 
 // CGAL::Middle
-constexpr const char* CGAL_Middle__class__ = "Middle is a tag class.";
+constexpr const char* Middle__class__ = "Middle is a tag class.";
 
 // CGAL::Multiscale_sort
-constexpr const char* CGAL_Multiscale_sort__class__ = "The class Multiscale_sort represents a sorting algorithm adaptor.";
+constexpr const char* Multiscale_sort__class__ = "The class Multiscale_sort represents a sorting algorithm adaptor.";
 
-constexpr const char* CGAL_Multiscale_sort_Multiscale_sort = "constructs an instance with traits as traits class instance.
+constexpr const char* Multiscale_sort_Multiscale_sort = "constructs an instance with traits as traits class instance.
 
 Parameters
 ----------
 sort : const Sort &
 threshold : std::ptrdiff_t
 ratio : double";
-constexpr const char* CGAL_Multiscale_sort_operator = "sorts the range [begin, end) .
+constexpr const char* Multiscale_sort_operator = "sorts the range [begin, end) .
 
 Sort::operator()(InputIterator begin, InputIterator end) must be defined.
 
@@ -112,23 +112,23 @@ begin : InputIterator
 end : InputIterator";
 
 // CGAL::Spatial_sort_traits_adapter_2
-constexpr const char* CGAL_Spatial_sort_traits_adapter_2__class__ = "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_2 induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.";
+constexpr const char* Spatial_sort_traits_adapter_2__class__ = "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_2 induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.";
 
-constexpr const char* CGAL_Spatial_sort_traits_adapter_2_point_property_map = "Returns a const reference to the point property map.
+constexpr const char* Spatial_sort_traits_adapter_2_point_property_map = "Returns a const reference to the point property map.
 
 Returns: const PointPropertyMap &";
 
 // CGAL::Spatial_sort_traits_adapter_3
-constexpr const char* CGAL_Spatial_sort_traits_adapter_3__class__ = "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_3 induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.";
+constexpr const char* Spatial_sort_traits_adapter_3__class__ = "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_3 induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.";
 
-constexpr const char* CGAL_Spatial_sort_traits_adapter_3_point_property_map = "Returns a const reference to the point property map.
+constexpr const char* Spatial_sort_traits_adapter_3_point_property_map = "Returns a const reference to the point property map.
 
 Returns: const PointPropertyMap &";
 
 // CGAL::Spatial_sort_traits_adapter_d
-constexpr const char* CGAL_Spatial_sort_traits_adapter_d__class__ = "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_d induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.";
+constexpr const char* Spatial_sort_traits_adapter_d__class__ = "Given a property map associating a key to a point, the class Spatial_sort_traits_adapter_d induces a spatial reorder of the keys instead of the points, the comparisons being done on the associated points.";
 
-constexpr const char* CGAL_Spatial_sort_traits_adapter_d_point_property_map = "Returns a const reference to the point property map.
+constexpr const char* Spatial_sort_traits_adapter_d_point_property_map = "Returns a const reference to the point property map.
 
 Returns: const PointPropertyMap &";
 

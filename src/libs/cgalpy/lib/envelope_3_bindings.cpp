@@ -14,6 +14,25 @@
 
 namespace py = nanobind;
 
+// Docstrings
+namespace {
+  const char* LOWER_ENVELOPE_3_DOC = R"pbdoc(
+Compute the lower envelope of a range of 3D surfaces.
+)pbdoc";
+
+  const char* LOWER_ENVELOPE_XY_MONOTONE_3_DOC = R"pbdoc(
+Compute the lower envelope of a range of xy-monotone 3D surfaces.
+)pbdoc";
+
+  const char* UPPER_ENVELOPE_3_DOC = R"pbdoc(
+Compute the upper envelope of a range of 3D surfaces.
+)pbdoc";
+
+  const char* UPPER_ENVELOPE_XY_MONOTONE_3_DOC = R"pbdoc(
+Compute the upper envelope of a range of xy-monotone 3D surfaces.
+)pbdoc";
+}
+
 namespace env3 {
 
 //
@@ -94,11 +113,15 @@ void export_envelope_3(py::module_& m) {
   }
 
   m.def("lower_envelope_3", &env3::lower_envelope_3,
+        LOWER_ENVELOPE_3_DOC,
         py::arg("surfaces"));
   m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3,
+        LOWER_ENVELOPE_XY_MONOTONE_3_DOC,
         py::arg("surfaces"));
   m.def("upper_envelope_3", &env3::upper_envelope_3,
+        UPPER_ENVELOPE_3_DOC,
         py::arg("surfaces"));
   m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3,
+        UPPER_ENVELOPE_XY_MONOTONE_3_DOC,
         py::arg("surfaces"));
 }

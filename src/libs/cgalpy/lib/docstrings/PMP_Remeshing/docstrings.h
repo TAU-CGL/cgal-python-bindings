@@ -8,9 +8,9 @@ namespace docstrings {
 namespace PMP_Remeshing {
 
 // CGAL::Polygon_mesh_processing::Adaptive_sizing_field
-constexpr const char* CGAL_Polygon_mesh_processing_Adaptive_sizing_field__class__ = "A sizing field describing variable target mesh edge lengths for CGAL::Polygon_mesh_processing::isotropic_remeshing() .";
+constexpr const char* Polygon_mesh_processing_Adaptive_sizing_field__class__ = "A sizing field describing variable target mesh edge lengths for CGAL::Polygon_mesh_processing::isotropic_remeshing() .";
 
-constexpr const char* CGAL_Polygon_mesh_processing_Adaptive_sizing_field_Adaptive_sizing_field = "Constructor.
+constexpr const char* Polygon_mesh_processing_Adaptive_sizing_field_Adaptive_sizing_field = "Constructor.
 
 FaceRange range of boost::graph_traits<PolygonMesh>::face_descriptor , model
 of Range . Its iterator type is ForwardIterator . NamedParameters a sequence
@@ -52,30 +52,30 @@ np : const NamedParameters &";
 
 
 // CGAL::Polygon_mesh_processing::Triangulate_faces::Default_visitor
-constexpr const char* CGAL_Polygon_mesh_processing_Triangulate_faces_Default_visitor__class__ = "Default visitor model for the functions triangulate_face() and triangulate_faces() , model of PMPTriangulateFaceVisitor .";
+constexpr const char* Polygon_mesh_processing_Triangulate_faces_Default_visitor__class__ = "Default visitor model for the functions triangulate_face() and triangulate_faces() , model of PMPTriangulateFaceVisitor .";
 
-constexpr const char* CGAL_Polygon_mesh_processing_Triangulate_faces_Default_visitor_face_descriptor = "face descriptor type
+constexpr const char* Polygon_mesh_processing_Triangulate_faces_Default_visitor_face_descriptor = "face descriptor type
 
 Returns: boost::graph_traits< PolygonMesh >::face_descriptor";
-constexpr const char* CGAL_Polygon_mesh_processing_Triangulate_faces_Default_visitor_vertex_descriptor = "vertex descriptor type
+constexpr const char* Polygon_mesh_processing_Triangulate_faces_Default_visitor_vertex_descriptor = "vertex descriptor type
 
 Returns: boost::graph_traits< PolygonMesh >::vertex_descriptor";
 
 
 // CGAL::Polygon_mesh_processing::Triangulate_polygons::Default_visitor
-constexpr const char* CGAL_Polygon_mesh_processing_Triangulate_polygons_Default_visitor__class__ = "Default visitor for the function triangulate_polygons() , model of PMPTriangulateFaceVisitor .";
+constexpr const char* Polygon_mesh_processing_Triangulate_polygons_Default_visitor__class__ = "Default visitor for the function triangulate_polygons() , model of PMPTriangulateFaceVisitor .";
 
-constexpr const char* CGAL_Polygon_mesh_processing_Triangulate_polygons_Default_visitor_face_descriptor = "face id type, referring to the position of the polygon in the input range
+constexpr const char* Polygon_mesh_processing_Triangulate_polygons_Default_visitor_face_descriptor = "face id type, referring to the position of the polygon in the input range
 
 Returns: std::size_t";
-constexpr const char* CGAL_Polygon_mesh_processing_Triangulate_polygons_Default_visitor_vertex_descriptor = "vertex id type
+constexpr const char* Polygon_mesh_processing_Triangulate_polygons_Default_visitor_vertex_descriptor = "vertex id type
 
 Returns: std::size_t";
 
 // CGAL::Polygon_mesh_processing::Uniform_sizing_field
-constexpr const char* CGAL_Polygon_mesh_processing_Uniform_sizing_field__class__ = "A sizing field describing a uniform target edge length for CGAL::Polygon_mesh_processing::isotropic_remeshing() .";
+constexpr const char* Polygon_mesh_processing_Uniform_sizing_field__class__ = "A sizing field describing a uniform target edge length for CGAL::Polygon_mesh_processing::isotropic_remeshing() .";
 
-constexpr const char* CGAL_Polygon_mesh_processing_Uniform_sizing_field_Uniform_sizing_field = "Constructor.
+constexpr const char* Polygon_mesh_processing_Uniform_sizing_field_Uniform_sizing_field = "Constructor.
 
 size the target edge length for isotropic remeshing. If set to 0, the
 criterion for edge length is ignored and edges are neither split nor
@@ -86,7 +86,7 @@ Parameters
 ----------
 size : const FT
 vpmap : const VPMap &";
-constexpr const char* CGAL_Polygon_mesh_processing_Uniform_sizing_field_Uniform_sizing_field_1 = "Constructor using internal vertex point map of the input polygon mesh.
+constexpr const char* Polygon_mesh_processing_Uniform_sizing_field_Uniform_sizing_field_1 = "Constructor using internal vertex point map of the input polygon mesh.
 
 size the target edge length for isotropic remeshing. If set to 0, the
 criterion for edge length is ignored and edges are neither split nor
@@ -99,11 +99,11 @@ Parameters
 size : const FT
 pmesh : const PolygonMesh &";
 
-constexpr const char* CGAL_Mesh_facet_topology = "The enum Mesh_facet_topology is designed to tell which constraints have to be checked on each surface facet during the mesh refinement process.
+constexpr const char* Mesh_facet_topology = "The enum Mesh_facet_topology is designed to tell which constraints have to be checked on each surface facet during the mesh refinement process.
 
 CGAL::Mesh_criteria_3<Tr> , CGAL::Mesh_facet_criteria_3<Tr> .";
 
-constexpr const char* CGAL_Polygon_mesh_processing_smooth_mesh = "
+constexpr const char* Polygon_mesh_processing_smooth_mesh = "
 Deprecated This function is deprecated since CGAL 5.5,
 CGAL::Polygon_mesh_processing::angle_and_area_smoothing() should be used
 instead.

@@ -8,42 +8,42 @@ namespace docstrings {
 namespace Hyperbolic_triangulation_2 {
 
 // CGAL::Hyperbolic_Delaunay_triangulation_2
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2__class__ = "The class Hyperbolic_Delaunay_triangulation_2 is the main class of the 2D Hyperbolic Delaunay Triangulations package.";
+constexpr const char* Hyperbolic_Delaunay_triangulation_2__class__ = "The class Hyperbolic_Delaunay_triangulation_2 is the main class of the 2D Hyperbolic Delaunay Triangulations package.";
 
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_size_type = "Size type (integral unsigned).
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_size_type = "Size type (integral unsigned).
 
 Returns: Triangulation_data_structure::size_type";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_Hyperbolic_Delaunay_triangulation_2 = "Default constructor
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_Hyperbolic_Delaunay_triangulation_2 = "Default constructor
 
 Parameters
 ----------
 gt : const Geom_traits &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_Hyperbolic_Delaunay_triangulation_2_1 = "Copy constructor.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_Hyperbolic_Delaunay_triangulation_2_1 = "Copy constructor.
 
 Parameters
 ----------
 tr : const Hyperbolic_Delaunay_triangulation_2< Gt, Tds > &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_Hyperbolic_Delaunay_triangulation_2_2 = "Equivalent to creating an empty triangulation and calling insert(first, last) .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_Hyperbolic_Delaunay_triangulation_2_2 = "Equivalent to creating an empty triangulation and calling insert(first, last) .
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator
 gt : const Geom_traits &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
 
 Parameters
 ----------
 tr : Hyperbolic_Delaunay_triangulation_2
 
 Returns: Hyperbolic_Delaunay_triangulation_2 &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_swap = "The triangulation is swapped with tr .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_swap = "The triangulation is swapped with tr .
 
 Parameters
 ----------
 tr : Hyperbolic_Delaunay_triangulation_2 &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_clear = "Deletes all vertices and faces of the triangulation.";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_operator_1 = "Equality operator.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_clear = "Deletes all vertices and faces of the triangulation.";
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_operator_1 = "Equality operator.
 
 Todo implement!
 
@@ -53,7 +53,7 @@ t1 : const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &
 t2 : const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_operator_2 = "Inequality operator.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_operator_2 = "Inequality operator.
 
 Todo implement!
 
@@ -63,31 +63,31 @@ t1 : const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &
 t2 : const Hyperbolic_Delaunay_triangulation_2 < Gt, Tds > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_geom_traits = "Returns a const reference to the geometric traits object.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_geom_traits = "Returns a const reference to the geometric traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_tds = "Returns a const reference to the triangulation data structure.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_tds = "Returns a const reference to the triangulation data structure.
 
 Returns: const Triangulation_data_structure &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_tds_1 = "Returns a reference to the triangulation data structure.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_tds_1 = "Returns a reference to the triangulation data structure.
 
 Returns: Triangulation_data_structure &";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_is_valid = "Checks the combinatorial validity of the triangulation, the validity of its geometric embedding, and also that all edges and faces are Delaunay hyperbolic.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_is_valid = "Checks the combinatorial validity of the triangulation, the validity of its geometric embedding, and also that all edges and faces are Delaunay hyperbolic.
 
 Returns: bool";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_dimension = "Returns the dimension of the affine hull.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_dimension = "Returns the dimension of the affine hull.
 
 Returns: int";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_number_of_vertices = "Returns the number of vertices.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_number_of_vertices = "Returns the number of vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_number_of_hyperbolic_edges = "Returns the number of hyperbolic edges.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_number_of_hyperbolic_edges = "Returns the number of hyperbolic edges.
 
 Returns: size_type";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_number_of_hyperbolic_faces = "Returns the number of hyperbolic faces.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_number_of_hyperbolic_faces = "Returns the number of hyperbolic faces.
 
 Returns: size_type";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_hyperbolic_segment = "Returns the hyperbolic segment formed by the vertices of the edge (f, i) .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_hyperbolic_segment = "Returns the hyperbolic segment formed by the vertices of the edge (f, i) .
 
 Parameters
 ----------
@@ -95,21 +95,21 @@ f : const Face_handle
 i : const int
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_hyperbolic_segment_1 = "Returns the hyperbolic segment formed by the vertices of edge e .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_hyperbolic_segment_1 = "Returns the hyperbolic segment formed by the vertices of edge e .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_point = "Returns the hyperbolic point given by the finite vertex vh .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_point = "Returns the hyperbolic point given by the finite vertex vh .
 
 Parameters
 ----------
 vh : const Vertex_handle
 
 Returns: Point";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_point_1 = "Returns the point given by vertex i of face fh .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_point_1 = "Returns the point given by vertex i of face fh .
 
 t.dimension() $ \\geq0$ and $ i \\in\\{0,1,2\\}$ in dimension 2, $ i \\in\\{0,1\\}$
 in dimension 1, $ i = 0$ in dimension 0, and the vertex is finite.
@@ -120,7 +120,7 @@ fh : const Face_handle
 i : const int
 
 Returns: Point";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_insert = "Inserts the point p in the triangulation.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_insert = "Inserts the point p in the triangulation.
 
 If the point p coincides with an existing vertex, then the vertex is returned
 and the triangulation is not modified. The optional parameter start is used to
@@ -132,7 +132,7 @@ p : const Point &
 start : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_insert_1 = "Inserts the points in the range [first,last) into the triangulation.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_insert_1 = "Inserts the points in the range [first,last) into the triangulation.
 
 Returns the number of inserted points. Note that this function is not
 guaranteed to insert the points following the order of InputIterator , as
@@ -145,14 +145,14 @@ first : InputIterator
 last : InputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_remove = "Removes the vertex v from the triangulation.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_remove = "Removes the vertex v from the triangulation.
 
 v is a vertex of the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_remove_1 = "Removes the vertices in the iterator range [first, last) from the triangulation.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_remove_1 = "Removes the vertices in the iterator range [first, last) from the triangulation.
 
 all vertices in [first, last) are vertices of the triangulation.
 
@@ -160,7 +160,7 @@ Parameters
 ----------
 first : VertexRemoveIterator
 last : VertexRemoveIterator";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_locate = "Locates the point query in the triangulation.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_locate = "Locates the point query in the triangulation.
 
 If the point query lies inside the hyperbolic convex hull of the points of the
 triangulation, then the hyperbolic face that contains the query in its
@@ -176,7 +176,7 @@ query : const Point &
 hint : const Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_locate_1 = "Same as above.
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_locate_1 = "Same as above.
 
 The variable lt contains information about the element in which query has been
 located. See the enumeration Locate_type for details. If lt is
@@ -192,7 +192,7 @@ li : int &
 hint : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_find_conflicts = "Computes the conflict zone induced by p .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_find_conflicts = "Computes the conflict zone induced by p .
 
 If the optional parameter start is given, then it must be a face in conflict
 with p . Returns an iterator on the faces of the triangulation in conflict
@@ -205,7 +205,7 @@ fit : OutputItFaces
 start : Face_handle
 
 Returns: OutputItFaces";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_dual = "Returns the hyperbolic center of the circumdisk of f .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_dual = "Returns the hyperbolic center of the circumdisk of f .
 
 f is hyperbolic
 
@@ -214,14 +214,14 @@ Parameters
 f : Face_handle
 
 Returns: Hyperbolic_Voronoi_point";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_dual_1 = "Returns the hyperbolic segment that is dual to e .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_dual_1 = "Returns the hyperbolic segment that is dual to e .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Hyperbolic_segment";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_2_dual_2 = "Returns the hyperbolic segment that is dual to the edge (f,i) .
+constexpr const char* Hyperbolic_Delaunay_triangulation_2_dual_2 = "Returns the hyperbolic segment that is dual to the edge (f,i) .
 
 f is hyperbolic
 
@@ -233,37 +233,37 @@ i : int
 Returns: Hyperbolic_segment";
 
 // CGAL::Hyperbolic_Delaunay_triangulation_CK_traits_2
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_CK_traits_2__class__ = "The class Hyperbolic_Delaunay_triangulation_CK_traits_2 is designed as one of the default models for the traits concept HyperbolicDelaunayTriangulationTraits_2 offered by CGAL.";
+constexpr const char* Hyperbolic_Delaunay_triangulation_CK_traits_2__class__ = "The class Hyperbolic_Delaunay_triangulation_CK_traits_2 is designed as one of the default models for the traits concept HyperbolicDelaunayTriangulationTraits_2 offered by CGAL.";
 
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_CK_traits_2_Hyperbolic_Delaunay_triangulation_CK_traits_2 = "Default constructor";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_CK_traits_2_Hyperbolic_Delaunay_triangulation_CK_traits_2_1 = "Copy constructor.
+constexpr const char* Hyperbolic_Delaunay_triangulation_CK_traits_2_Hyperbolic_Delaunay_triangulation_CK_traits_2 = "Default constructor";
+constexpr const char* Hyperbolic_Delaunay_triangulation_CK_traits_2_Hyperbolic_Delaunay_triangulation_CK_traits_2_1 = "Copy constructor.
 
 Parameters
 ----------
 other : const Hyperbolic_Delaunay_triangulation_CK_traits_2 &";
 
 // CGAL::Hyperbolic_Delaunay_triangulation_traits_2
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_traits_2__class__ = "The class Hyperbolic_Delaunay_triangulation_traits_2 is designed as one of the default models for the traits concept HyperbolicDelaunayTriangulationTraits_2 offered by CGAL.";
+constexpr const char* Hyperbolic_Delaunay_triangulation_traits_2__class__ = "The class Hyperbolic_Delaunay_triangulation_traits_2 is designed as one of the default models for the traits concept HyperbolicDelaunayTriangulationTraits_2 offered by CGAL.";
 
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_traits_2_Hyperbolic_Delaunay_triangulation_traits_2 = "Default constructor";
-constexpr const char* CGAL_Hyperbolic_Delaunay_triangulation_traits_2_Hyperbolic_Delaunay_triangulation_traits_2_1 = "Copy constructor.
+constexpr const char* Hyperbolic_Delaunay_triangulation_traits_2_Hyperbolic_Delaunay_triangulation_traits_2 = "Default constructor";
+constexpr const char* Hyperbolic_Delaunay_triangulation_traits_2_Hyperbolic_Delaunay_triangulation_traits_2_1 = "Copy constructor.
 
 Parameters
 ----------
 other : const Hyperbolic_Delaunay_triangulation_traits_2 &";
 
 // CGAL::Hyperbolic_triangulation_face_base_2
-constexpr const char* CGAL_Hyperbolic_triangulation_face_base_2__class__ = "The class Hyperbolic_triangulation_face_base_2 is designed as the default model for the face concept HyperbolicTriangulationFaceBase_2 offered by CGAL.";
+constexpr const char* Hyperbolic_triangulation_face_base_2__class__ = "The class Hyperbolic_triangulation_face_base_2 is designed as the default model for the face concept HyperbolicTriangulationFaceBase_2 offered by CGAL.";
 
-constexpr const char* CGAL_Hyperbolic_triangulation_face_base_2_Hyperbolic_triangulation_face_base_2 = "Default constructor";
-constexpr const char* CGAL_Hyperbolic_triangulation_face_base_2_Hyperbolic_triangulation_face_base_2_1 = "Creates a face to which the vertices v0, v1, v2 are incident.
+constexpr const char* Hyperbolic_triangulation_face_base_2_Hyperbolic_triangulation_face_base_2 = "Default constructor";
+constexpr const char* Hyperbolic_triangulation_face_base_2_Hyperbolic_triangulation_face_base_2_1 = "Creates a face to which the vertices v0, v1, v2 are incident.
 
 Parameters
 ----------
 v0 : Vertex_handle
 v1 : Vertex_handle
 v2 : Vertex_handle";
-constexpr const char* CGAL_Hyperbolic_triangulation_face_base_2_Hyperbolic_triangulation_face_base_2_2 = "Creates a face to which the vertices v0, v1, v2 are incident, and the faces n0, n1, n2 are neighbors.
+constexpr const char* Hyperbolic_triangulation_face_base_2_Hyperbolic_triangulation_face_base_2_2 = "Creates a face to which the vertices v0, v1, v2 are incident, and the faces n0, n1, n2 are neighbors.
 
 Parameters
 ----------

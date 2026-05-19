@@ -8,22 +8,22 @@ namespace docstrings {
 namespace Kernel_d {
 
 // CGAL::Aff_transformation_d
-constexpr const char* CGAL_Aff_transformation_d__class__ = "An instance of the data type Aff_transformation_d <Kernel> is an affine transformation of $ d$ -dimensional space.";
+constexpr const char* Aff_transformation_d__class__ = "An instance of the data type Aff_transformation_d <Kernel> is an affine transformation of $ d$ -dimensional space.";
 
-constexpr const char* CGAL_Aff_transformation_d_LA = "the linear algebra layer.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Aff_transformation_d_Matrix = "the matrix type.
+constexpr const char* Aff_transformation_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d = "introduces some transformation.";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_1 = "introduces the identity transformation in $ d$ -dimensional space.
+constexpr const char* Aff_transformation_d_Matrix = "the matrix type.
+
+Returns: unspecified_type";
+constexpr const char* Aff_transformation_d_Aff_transformation_d = "introduces some transformation.";
+constexpr const char* Aff_transformation_d_Aff_transformation_d_1 = "introduces the identity transformation in $ d$ -dimensional space.
 
 Parameters
 ----------
 d : int
  : Identity_transformation";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_2 = "introduces the transformation of $ d$ -space specified by matrix $ M$ .
+constexpr const char* Aff_transformation_d_Aff_transformation_d_2 = "introduces the transformation of $ d$ -space specified by matrix $ M$ .
 
 M is a square matrix of dimension $ d + 1$ where entries in the last row of M
 except the diagonal entry must be zero; the diagonal entry must be non-zero.
@@ -31,7 +31,7 @@ except the diagonal entry must be zero; the diagonal entry must be non-zero.
 Parameters
 ----------
 M : Matrix";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_3 = "introduces the transformation of $ d$ -space specified by a diagonal matrix with entries set [start,end) on the diagonal (a scaling of the space).
+constexpr const char* Aff_transformation_d_Aff_transformation_d_3 = "introduces the transformation of $ d$ -space specified by a diagonal matrix with entries set [start,end) on the diagonal (a scaling of the space).
 
 set [start,end) is a vector of dimension $ d+1$ .
 
@@ -40,13 +40,13 @@ Parameters
  : Scaling
 start : Forward_iterator
 end : Forward_iterator";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_4 = "introduces the translation by vector $ v$ .
+constexpr const char* Aff_transformation_d_Aff_transformation_d_4 = "introduces the translation by vector $ v$ .
 
 Parameters
 ----------
  : Translation
 v : Vector_d < Kernel >";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_5 = "returns a scaling by a scale factor num/den .
+constexpr const char* Aff_transformation_d_Aff_transformation_d_5 = "returns a scaling by a scale factor num/den .
 
 den != 0 .
 
@@ -56,7 +56,7 @@ d : int
  : Scaling
 num : RT
 den : RT";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_6 = "returns a planar rotation with sine and cosine values sin_num/den and cos_num/den in the plane spanned by the base vectors $ b_{e1}$ and $ b_{e2}$ in $ d$ -space.
+constexpr const char* Aff_transformation_d_Aff_transformation_d_6 = "returns a planar rotation with sine and cosine values sin_num/den and cos_num/den in the plane spanned by the base vectors $ b_{e1}$ and $ b_{e2}$ in $ d$ -space.
 
 Thus the default use delivers a planar rotation in the $ x$ - $ y$ plane. $
 sin\\_num^2 + cos\\_num^2 = den^2$ and $ 0 \\leq e_1 < e_2 < d$ . den != 0 .
@@ -70,7 +70,7 @@ cos_num : RT
 den : RT
 e1 : int
 e2 : int";
-constexpr const char* CGAL_Aff_transformation_d_Aff_transformation_d_7 = "returns a planar rotation within a two-dimensional linear subspace.
+constexpr const char* Aff_transformation_d_Aff_transformation_d_7 = "returns a planar rotation within a two-dimensional linear subspace.
 
 The subspace is spanned by the base vectors $ b_{e1}$ and $ b_{e2}$ in $ d$
 -space. The rotation parameters are given by the $ 2$ -dimensional direction
@@ -88,18 +88,18 @@ num : RT
 den : RT
 e1 : int
 e2 : int";
-constexpr const char* CGAL_Aff_transformation_d_dimension = "the dimension of the underlying space
+constexpr const char* Aff_transformation_d_dimension = "the dimension of the underlying space
 
 Returns: int";
-constexpr const char* CGAL_Aff_transformation_d_matrix = "returns the transformation matrix
+constexpr const char* Aff_transformation_d_matrix = "returns the transformation matrix
 
 Returns: const Matrix &";
-constexpr const char* CGAL_Aff_transformation_d_inverse = "returns the inverse transformation.
+constexpr const char* Aff_transformation_d_inverse = "returns the inverse transformation.
 
 t.matrix() is invertible.
 
 Returns: Aff_transformation_d < Kernel >";
-constexpr const char* CGAL_Aff_transformation_d_operator = "composition of transformations.
+constexpr const char* Aff_transformation_d_operator = "composition of transformations.
 
 Note that transformations are not necessarily commutative. t*s is the
 transformation which transforms first by t and then by s .
@@ -111,17 +111,17 @@ s : const Aff_transformation_d < Kernel > &
 Returns: Aff_transformation_d < Kernel >";
 
 // CGAL::Bbox_d
-constexpr const char* CGAL_Bbox_d__class__ = "An object b of the class Bbox_d is a bounding box in the d-dimensional Euclidean space $ \\E^d$ .";
+constexpr const char* Bbox_d__class__ = "An object b of the class Bbox_d is a bounding box in the d-dimensional Euclidean space $ \\E^d$ .";
 
-constexpr const char* CGAL_Bbox_d_Bbox_d = "constructs an empty bounding box with lower left corner coordinates at $ \\infty $ and with upper right corner coordinates at $ -\\infty $ , where $ \\infty $ means std::numeric_limits<double>::infinity() .";
-constexpr const char* CGAL_Bbox_d_Bbox_d_1 = "constructs a d-dimensional bounding box from a 2D bounding box.
+constexpr const char* Bbox_d_Bbox_d = "constructs an empty bounding box with lower left corner coordinates at $ \\infty $ and with upper right corner coordinates at $ -\\infty $ , where $ \\infty $ means std::numeric_limits<double>::infinity() .";
+constexpr const char* Bbox_d_Bbox_d_1 = "constructs a d-dimensional bounding box from a 2D bounding box.
 
 the dimension must be 2D
 
 Parameters
 ----------
 b : const Bbox_2 &";
-constexpr const char* CGAL_Bbox_d_Bbox_d_2 = "constructs a d-dimensional bounding box from a range of coordinates
+constexpr const char* Bbox_d_Bbox_d_2 = "constructs a d-dimensional bounding box from a range of coordinates
 
 the range must have the size of the dimension. InputIterator an input iterator
 with value type double
@@ -130,77 +130,77 @@ Parameters
 ----------
 b : InputIterator
 e : InputIterator";
-constexpr const char* CGAL_Bbox_d_Bbox_d_3 = "constructs a d-dimensional bounding box from a 3D bounding box.
+constexpr const char* Bbox_d_Bbox_d_3 = "constructs a d-dimensional bounding box from a 3D bounding box.
 
 the dimension must be 3D
 
 Parameters
 ----------
 b : const Bbox_3 &";
-constexpr const char* CGAL_Bbox_d_operator = "tests for equality.
+constexpr const char* Bbox_d_operator = "tests for equality.
 
 Parameters
 ----------
 c : const Bbox_d &
 
 Returns: bool";
-constexpr const char* CGAL_Bbox_d_operator_1 = "tests for inequality.
+constexpr const char* Bbox_d_operator_1 = "tests for inequality.
 
 Parameters
 ----------
 q : const Bbox_d &
 
 Returns: bool";
-constexpr const char* CGAL_Bbox_d_dimension = "returns the dimension.
+constexpr const char* Bbox_d_dimension = "returns the dimension.
 
 Returns: int";
-constexpr const char* CGAL_Bbox_d_min = "returns the i -th Cartesian coordinate of the \"lower left\" corner.
+constexpr const char* Bbox_d_min = "returns the i -th Cartesian coordinate of the \"lower left\" corner.
 
 Parameters
 ----------
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Bbox_d_max = "returns the i -th Cartesian coordinate of the \"upper right\" corner.
+constexpr const char* Bbox_d_max = "returns the i -th Cartesian coordinate of the \"upper right\" corner.
 
 Parameters
 ----------
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Bbox_d_cartesian_begin = "returns an iterator for the Cartesian coordinates of the \"lower left\" and the \"upper right\" corner.
+constexpr const char* Bbox_d_cartesian_begin = "returns an iterator for the Cartesian coordinates of the \"lower left\" and the \"upper right\" corner.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Bbox_d_cartesian_end = "returns the past-the-end iterator for the Cartesian coordinates of the \"lower left\" and the \"upper right\" corner.
+constexpr const char* Bbox_d_cartesian_end = "returns the past-the-end iterator for the Cartesian coordinates of the \"lower left\" and the \"upper right\" corner.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Bbox_d_operator_2 = "returns a bounding box of b and c .
+constexpr const char* Bbox_d_operator_2 = "returns a bounding box of b and c .
 
 Parameters
 ----------
 c : const Bbox_d &
 
 Returns: Bbox_d";
-constexpr const char* CGAL_Bbox_d_operator_3 = "updates b to be the bounding box of b and c and returns itself.
+constexpr const char* Bbox_d_operator_3 = "updates b to be the bounding box of b and c and returns itself.
 
 Parameters
 ----------
 c : const Bbox_d &
 
 Returns: Bbox_d &";
-constexpr const char* CGAL_Bbox_d_dilate = "dilates the bounding box by a specified number of ULP.
+constexpr const char* Bbox_d_dilate = "dilates the bounding box by a specified number of ULP.
 
 Parameters
 ----------
 dist : int";
-constexpr const char* CGAL_Bbox_d_scale = "scales the bounding box by factor , while keeping its center fixed.
+constexpr const char* Bbox_d_scale = "scales the bounding box by factor , while keeping its center fixed.
 
 factor > 0
 
 Parameters
 ----------
 factor : double";
-constexpr const char* CGAL_Bbox_d_do_overlap = "returns true , iff bb1 and bb2 overlap, i.e., iff their intersection is non-empty.
+constexpr const char* Bbox_d_do_overlap = "returns true , iff bb1 and bb2 overlap, i.e., iff their intersection is non-empty.
 
 Parameters
 ----------
@@ -210,27 +210,27 @@ bb2 : const Bbox_d < DimensionTag > &
 Returns: bool";
 
 // CGAL::Cartesian_d
-constexpr const char* CGAL_Cartesian_d__class__ = "A model for Kernel_d (and even KernelWithLifting_d ) that uses Cartesian coordinates to represent the geometric objects.";
+constexpr const char* Cartesian_d__class__ = "A model for Kernel_d (and even KernelWithLifting_d ) that uses Cartesian coordinates to represent the geometric objects.";
 
 // CGAL::Direction_d
-constexpr const char* CGAL_Direction_d__class__ = "A Direction_d is a vector in the $ d$ -dimensional vector space where we forget about its length.";
+constexpr const char* Direction_d__class__ = "A Direction_d is a vector in the $ d$ -dimensional vector space where we forget about its length.";
 
-constexpr const char* CGAL_Direction_d_LA = "the linear algebra layer.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Direction_d_Delta_const_iterator = "a read-only iterator for the deltas of dir .
+constexpr const char* Direction_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Direction_d_Base_direction = "construction tag.
+constexpr const char* Direction_d_Delta_const_iterator = "a read-only iterator for the deltas of dir .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Direction_d_Direction_d = "introduces a variable dir of type Direction_d <Kernel> .";
-constexpr const char* CGAL_Direction_d_Direction_d_1 = "introduces a variable dir of type Direction_d <Kernel> initialized to the direction of v .
+constexpr const char* Direction_d_Base_direction = "construction tag.
+
+Returns: unspecified_type";
+constexpr const char* Direction_d_Direction_d = "introduces a variable dir of type Direction_d <Kernel> .";
+constexpr const char* Direction_d_Direction_d_1 = "introduces a variable dir of type Direction_d <Kernel> initialized to the direction of v .
 
 Parameters
 ----------
 v : Vector_d < Kernel >";
-constexpr const char* CGAL_Direction_d_Direction_d_2 = "introduces a variable dir of type Direction_d <Kernel> in dimension d with representation tuple set [first,last) .
+constexpr const char* Direction_d_Direction_d_2 = "introduces a variable dir of type Direction_d <Kernel> in dimension d with representation tuple set [first,last) .
 
 d is nonnegative, [first,last) has d elements. InputIterator has RT as value
 type.
@@ -240,7 +240,7 @@ Parameters
 d : int
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Direction_d_Direction_d_3 = "returns a variable dir of type Direction_d <Kernel> initialized to the direction of the $ i$ -th base vector of dimension $ d$ .
+constexpr const char* Direction_d_Direction_d_3 = "returns a variable dir of type Direction_d <Kernel> initialized to the direction of the $ i$ -th base vector of dimension $ d$ .
 
 $ 0 \\leq i < d$ .
 
@@ -249,23 +249,23 @@ Parameters
 d : int
  : Base_direction
 i : int";
-constexpr const char* CGAL_Direction_d_Direction_d_4 = "introduces a variable dir of type Direction_d <Kernel> in $ 2$ -dimensional space.
+constexpr const char* Direction_d_Direction_d_4 = "introduces a variable dir of type Direction_d <Kernel> in $ 2$ -dimensional space.
 
 Parameters
 ----------
 x : RT
 y : RT";
-constexpr const char* CGAL_Direction_d_Direction_d_5 = "introduces a variable dir of type Direction_d <Kernel> in $ 3$ -dimensional space.
+constexpr const char* Direction_d_Direction_d_5 = "introduces a variable dir of type Direction_d <Kernel> in $ 3$ -dimensional space.
 
 Parameters
 ----------
 x : RT
 y : RT
 z : RT";
-constexpr const char* CGAL_Direction_d_dimension = "returns the dimension of dir .
+constexpr const char* Direction_d_dimension = "returns the dimension of dir .
 
 Returns: int";
-constexpr const char* CGAL_Direction_d_delta = "returns the $ i$ -th component of dir .
+constexpr const char* Direction_d_delta = "returns the $ i$ -th component of dir .
 
 $ 0 \\leq i < d$ .
 
@@ -274,7 +274,7 @@ Parameters
 i : int
 
 Returns: RT";
-constexpr const char* CGAL_Direction_d_operator = "returns the $ i$ -th delta of dir .
+constexpr const char* Direction_d_operator = "returns the $ i$ -th delta of dir .
 
 $ 0 \\leq i < d$ .
 
@@ -283,43 +283,43 @@ Parameters
 i : int
 
 Returns: RT";
-constexpr const char* CGAL_Direction_d_deltas_begin = "returns an iterator pointing to the first delta of dir .
+constexpr const char* Direction_d_deltas_begin = "returns an iterator pointing to the first delta of dir .
 
 Returns: Delta_const_iterator";
-constexpr const char* CGAL_Direction_d_deltas_end = "returns an iterator pointing beyond the last delta of dir .
+constexpr const char* Direction_d_deltas_end = "returns an iterator pointing beyond the last delta of dir .
 
 Returns: Delta_const_iterator";
-constexpr const char* CGAL_Direction_d_vector = "returns a vector pointing in direction dir .
+constexpr const char* Direction_d_vector = "returns a vector pointing in direction dir .
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Direction_d_is_degenerate = "returns true iff dir.delta(i)==0 for all $ 0\\leq i < d$ .
+constexpr const char* Direction_d_is_degenerate = "returns true iff dir.delta(i)==0 for all $ 0\\leq i < d$ .
 
 Returns: bool";
-constexpr const char* CGAL_Direction_d_transform = "returns $ t(p)$ .
+constexpr const char* Direction_d_transform = "returns $ t(p)$ .
 
 Parameters
 ----------
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Direction_d_opposite = "returns the direction opposite to dir .
+constexpr const char* Direction_d_opposite = "returns the direction opposite to dir .
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Direction_d_operator_1 = "returns the direction opposite to dir .
+constexpr const char* Direction_d_operator_1 = "returns the direction opposite to dir .
 
 Returns: Direction_d < Kernel >";
 
 // CGAL::Epeck_d
-constexpr const char* CGAL_Epeck_d__class__ = "A model for Kernel_d , minus Kernel_d::Point_of_sphere_d , that uses Cartesian coordinates to represent the geometric objects.";
+constexpr const char* Epeck_d__class__ = "A model for Kernel_d , minus Kernel_d::Point_of_sphere_d , that uses Cartesian coordinates to represent the geometric objects.";
 
-constexpr const char* CGAL_Epeck_d_Dimension = "the dimension
+constexpr const char* Epeck_d_Dimension = "the dimension
 
 Returns: DimensionTag";
 
 // CGAL::Epeck_d::Cartesian_const_iterator
-constexpr const char* CGAL_Epeck_d_Cartesian_const_iterator__class__ = "A bidirectional iterator over the Cartesian coordinates of a point.";
+constexpr const char* Epeck_d_Cartesian_const_iterator__class__ = "A bidirectional iterator over the Cartesian coordinates of a point.";
 
-constexpr const char* CGAL_Epeck_d_Compute_power_product_d_operator = "returns the power product (aka power distance) of the weighted points pw and qw , that is, the squared Euclidean distance between the points minus their weights.
+constexpr const char* Epeck_d_Compute_power_product_d_operator = "returns the power product (aka power distance) of the weighted points pw and qw , that is, the squared Euclidean distance between the points minus their weights.
 
 Parameters
 ----------
@@ -328,7 +328,7 @@ qw : Weighted_point_d
 
 Returns: FT";
 
-constexpr const char* CGAL_Epeck_d_Compute_squared_radius_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
+constexpr const char* Epeck_d_Compute_squared_radius_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and passes through all the
 points of A. The order of the points of A does not matter. A is affinely
@@ -341,7 +341,7 @@ last : ForwardIterator
 
 Returns: FT";
 
-constexpr const char* CGAL_Epeck_d_Compute_squared_radius_smallest_orthogonal_sphere_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
+constexpr const char* Epeck_d_Compute_squared_radius_smallest_orthogonal_sphere_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and orthogonal to all the
 spheres of A. The order of the points of A does not matter. A is affinely
@@ -354,7 +354,7 @@ last : ForwardIterator
 
 Returns: FT";
 
-constexpr const char* CGAL_Epeck_d_Construct_bbox_d_operator = "returns the bounding box of point p .
+constexpr const char* Epeck_d_Construct_bbox_d_operator = "returns the bounding box of point p .
 
 Parameters
 ----------
@@ -362,14 +362,14 @@ p : Point_d
 
 Returns: Bbox_d < DimensionTag >";
 
-constexpr const char* CGAL_Epeck_d_Construct_cartesian_const_iterator_d_operator = "returns the begin iterator to iterate over the Cartesian coordinates of point p .
+constexpr const char* Epeck_d_Construct_cartesian_const_iterator_d_operator = "returns the begin iterator to iterate over the Cartesian coordinates of point p .
 
 Parameters
 ----------
 p : Point_d
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epeck_d_Construct_cartesian_const_iterator_d_operator_1 = "returns the past-the-end iterator to iterate over the Cartesian coordinates of point p .
+constexpr const char* Epeck_d_Construct_cartesian_const_iterator_d_operator_1 = "returns the past-the-end iterator to iterate over the Cartesian coordinates of point p .
 
 Parameters
 ----------
@@ -378,7 +378,7 @@ p : Point_d
 
 Returns: Cartesian_const_iterator_d";
 
-constexpr const char* CGAL_Epeck_d_Construct_circumcenter_d_operator = "returns the center of the sphere defined by A=tuple[first,last) .
+constexpr const char* Epeck_d_Construct_circumcenter_d_operator = "returns the center of the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and passes through all the
 points of A. The order of the points of A does not matter. A is affinely
@@ -391,7 +391,7 @@ last : ForwardIterator
 
 Returns: Point_d";
 
-constexpr const char* CGAL_Epeck_d_Construct_power_sphere_d_operator = "returns a weighted point on the affine hull of the weighted points of A=tuple[first,last) at power distance 0 of each of them.
+constexpr const char* Epeck_d_Construct_power_sphere_d_operator = "returns a weighted point on the affine hull of the weighted points of A=tuple[first,last) at power distance 0 of each of them.
 
 In other words, this returns the smallest sphere orthogonal to the spheres of
 A. A is affinely independent. ForwardIterator has Epeck_d::Weighted_point_d as
@@ -405,9 +405,9 @@ last : ForwardIterator
 Returns: Weighted_point_d";
 
 // CGAL::Epeck_d::Point_d
-constexpr const char* CGAL_Epeck_d_Point_d__class__ = "represents a point in the Euclidean space";
+constexpr const char* Epeck_d_Point_d__class__ = "represents a point in the Euclidean space";
 
-constexpr const char* CGAL_Epeck_d_Point_d_Point_d = "introduces a point with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
+constexpr const char* Epeck_d_Point_d_Point_d = "introduces a point with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
 
 DimensionTag is a fixed dimension, not Dynamic_dimension_tag .
 
@@ -416,7 +416,7 @@ Parameters
 x0 : double
 x1 : double
  : ...";
-constexpr const char* CGAL_Epeck_d_Point_d_Point_d_1 = "introduces a point with coordinate set [first,end) .
+constexpr const char* Epeck_d_Point_d_Point_d_1 = "introduces a point with coordinate set [first,end) .
 
 If DimensionTag is a fixed dimension, it matches std::distance(first,end) .
 ForwardIterator has its value type that is convertible to double .
@@ -425,7 +425,7 @@ Parameters
 ----------
 first : ForwardIterator
 end : ForwardIterator";
-constexpr const char* CGAL_Epeck_d_Point_d_operator = "returns the i-th coordinate of a point.
+constexpr const char* Epeck_d_Point_d_operator = "returns the i-th coordinate of a point.
 
 i is non-negative and less than the dimension.
 
@@ -434,13 +434,13 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Epeck_d_Point_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
+constexpr const char* Epeck_d_Point_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epeck_d_Point_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
+constexpr const char* Epeck_d_Point_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epeck_d_Point_d_operator_1 = "returns whether the points coincide.
+constexpr const char* Epeck_d_Point_d_operator_1 = "returns whether the points coincide.
 
 Parameters
 ----------
@@ -448,7 +448,7 @@ Parameters
  : Point_d
 
 Returns: bool";
-constexpr const char* CGAL_Epeck_d_Point_d_operator_2 = "returns whether the points are distinct.
+constexpr const char* Epeck_d_Point_d_operator_2 = "returns whether the points are distinct.
 
 Parameters
 ----------
@@ -457,7 +457,7 @@ Parameters
 
 Returns: bool";
 
-constexpr const char* CGAL_Epeck_d_Power_side_of_bounded_power_sphere_d_operator = "returns the relative position of weighted point p to the sphere defined by A=tuple[first,last) .
+constexpr const char* Epeck_d_Power_side_of_bounded_power_sphere_d_operator = "returns the relative position of weighted point p to the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and orthogonal to all the
 spheres of A. The order of the points of A does not matter. A is affinely
@@ -471,7 +471,7 @@ p : const Weighted_point_d &
 
 Returns: Bounded_side";
 
-constexpr const char* CGAL_Epeck_d_Side_of_bounded_sphere_d_operator = "returns the relative position of point p to the sphere defined by A=tuple[first,last) .
+constexpr const char* Epeck_d_Side_of_bounded_sphere_d_operator = "returns the relative position of point p to the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and passes through all the
 points of A. The order of the points of A does not matter. A is affinely
@@ -486,9 +486,9 @@ p : const Point_d &
 Returns: Bounded_side";
 
 // CGAL::Epeck_d::Vector_d
-constexpr const char* CGAL_Epeck_d_Vector_d__class__ = "represents a vector in the Euclidean space";
+constexpr const char* Epeck_d_Vector_d__class__ = "represents a vector in the Euclidean space";
 
-constexpr const char* CGAL_Epeck_d_Vector_d_Vector_d = "introduces a vector with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
+constexpr const char* Epeck_d_Vector_d_Vector_d = "introduces a vector with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
 
 DimensionTag is a fixed dimension, not Dynamic_dimension_tag .
 
@@ -497,7 +497,7 @@ Parameters
 x0 : double
 x1 : double
  : ...";
-constexpr const char* CGAL_Epeck_d_Vector_d_Vector_d_1 = "introduces a vector with coordinate set [first,end) .
+constexpr const char* Epeck_d_Vector_d_Vector_d_1 = "introduces a vector with coordinate set [first,end) .
 
 If DimensionTag is a fixed dimension, it matches std::distance(first,end) .
 ForwardIterator has its value type that is convertible to double .
@@ -506,7 +506,7 @@ Parameters
 ----------
 first : ForwardIterator
 end : ForwardIterator";
-constexpr const char* CGAL_Epeck_d_Vector_d_operator = "returns the i-th coordinate of a vector.
+constexpr const char* Epeck_d_Vector_d_operator = "returns the i-th coordinate of a vector.
 
 i is non-negative and less than the dimension.
 
@@ -515,13 +515,13 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Epeck_d_Vector_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
+constexpr const char* Epeck_d_Vector_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epeck_d_Vector_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
+constexpr const char* Epeck_d_Vector_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epeck_d_Vector_d_operator_1 = "returns whether the vectors coincide.
+constexpr const char* Epeck_d_Vector_d_operator_1 = "returns whether the vectors coincide.
 
 Parameters
 ----------
@@ -529,7 +529,7 @@ Parameters
  : Vector_d
 
 Returns: bool";
-constexpr const char* CGAL_Epeck_d_Vector_d_operator_2 = "returns whether the vectors are distinct.
+constexpr const char* Epeck_d_Vector_d_operator_2 = "returns whether the vectors are distinct.
 
 Parameters
 ----------
@@ -539,32 +539,32 @@ Parameters
 Returns: bool";
 
 // CGAL::Epeck_d::Weighted_point_d
-constexpr const char* CGAL_Epeck_d_Weighted_point_d__class__ = "represents a weighted point in the Euclidean space";
+constexpr const char* Epeck_d_Weighted_point_d__class__ = "represents a weighted point in the Euclidean space";
 
-constexpr const char* CGAL_Epeck_d_Weighted_point_d_Weighted_point_d = "introduces a weighted point with point p and weight w.
+constexpr const char* Epeck_d_Weighted_point_d_Weighted_point_d = "introduces a weighted point with point p and weight w.
 
 Parameters
 ----------
 p : const Point_d &
 w : const double &";
-constexpr const char* CGAL_Epeck_d_Weighted_point_d_point = "extracts the point of a weighted point.
+constexpr const char* Epeck_d_Weighted_point_d_point = "extracts the point of a weighted point.
 
 Returns: Point_d";
-constexpr const char* CGAL_Epeck_d_Weighted_point_d_weight = "extracts the weight of a weighted point.
+constexpr const char* Epeck_d_Weighted_point_d_weight = "extracts the weight of a weighted point.
 
 Returns: double";
 
 // CGAL::Epick_d
-constexpr const char* CGAL_Epick_d__class__ = "A model for Kernel_d that uses Cartesian coordinates to represent the geometric objects.";
+constexpr const char* Epick_d__class__ = "A model for Kernel_d that uses Cartesian coordinates to represent the geometric objects.";
 
-constexpr const char* CGAL_Epick_d_Dimension = "the dimension
+constexpr const char* Epick_d_Dimension = "the dimension
 
 Returns: DimensionTag";
 
 // CGAL::Epick_d::Cartesian_const_iterator
-constexpr const char* CGAL_Epick_d_Cartesian_const_iterator__class__ = "A bidirectional iterator over the Cartesian coordinates of a point.";
+constexpr const char* Epick_d_Cartesian_const_iterator__class__ = "A bidirectional iterator over the Cartesian coordinates of a point.";
 
-constexpr const char* CGAL_Epick_d_Compute_power_product_d_operator = "returns the power product (aka power distance) of the weighted points pw and qw , that is, the squared Euclidean distance between the points minus their weights.
+constexpr const char* Epick_d_Compute_power_product_d_operator = "returns the power product (aka power distance) of the weighted points pw and qw , that is, the squared Euclidean distance between the points minus their weights.
 
 Parameters
 ----------
@@ -573,7 +573,7 @@ qw : Weighted_point_d
 
 Returns: FT";
 
-constexpr const char* CGAL_Epick_d_Compute_squared_radius_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
+constexpr const char* Epick_d_Compute_squared_radius_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and passes through all the
 points of A. The order of the points of A does not matter. A is affinely
@@ -586,7 +586,7 @@ last : ForwardIterator
 
 Returns: FT";
 
-constexpr const char* CGAL_Epick_d_Compute_squared_radius_smallest_orthogonal_sphere_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
+constexpr const char* Epick_d_Compute_squared_radius_smallest_orthogonal_sphere_d_operator = "returns the radius of the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and orthogonal to all the
 spheres of A. The order of the points of A does not matter. A is affinely
@@ -599,7 +599,7 @@ last : ForwardIterator
 
 Returns: FT";
 
-constexpr const char* CGAL_Epick_d_Construct_bbox_d_operator = "returns the bounding box of point p .
+constexpr const char* Epick_d_Construct_bbox_d_operator = "returns the bounding box of point p .
 
 Parameters
 ----------
@@ -607,14 +607,14 @@ p : Point_d
 
 Returns: Bbox_d < DimensionTag >";
 
-constexpr const char* CGAL_Epick_d_Construct_cartesian_const_iterator_d_operator = "returns the begin iterator to iterate over the Cartesian coordinates of point p .
+constexpr const char* Epick_d_Construct_cartesian_const_iterator_d_operator = "returns the begin iterator to iterate over the Cartesian coordinates of point p .
 
 Parameters
 ----------
 p : Point_d
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epick_d_Construct_cartesian_const_iterator_d_operator_1 = "returns the past-the-end iterator to iterate over the Cartesian coordinates of point p .
+constexpr const char* Epick_d_Construct_cartesian_const_iterator_d_operator_1 = "returns the past-the-end iterator to iterate over the Cartesian coordinates of point p .
 
 Parameters
 ----------
@@ -623,7 +623,7 @@ p : Point_d
 
 Returns: Cartesian_const_iterator_d";
 
-constexpr const char* CGAL_Epick_d_Construct_circumcenter_d_operator = "returns the center of the sphere defined by A=tuple[first,last) .
+constexpr const char* Epick_d_Construct_circumcenter_d_operator = "returns the center of the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and passes through all the
 points of A. The order of the points of A does not matter. A is affinely
@@ -636,7 +636,7 @@ last : ForwardIterator
 
 Returns: Point_d";
 
-constexpr const char* CGAL_Epick_d_Construct_power_sphere_d_operator = "returns a weighted point on the affine hull of the weighted points of A=tuple[first,last) at power distance 0 of each of them.
+constexpr const char* Epick_d_Construct_power_sphere_d_operator = "returns a weighted point on the affine hull of the weighted points of A=tuple[first,last) at power distance 0 of each of them.
 
 In other words, this returns the smallest sphere orthogonal to the spheres of
 A. A is affinely independent. ForwardIterator has Epick_d::Weighted_point_d as
@@ -650,9 +650,9 @@ last : ForwardIterator
 Returns: Weighted_point_d";
 
 // CGAL::Epick_d::Point_d
-constexpr const char* CGAL_Epick_d_Point_d__class__ = "represents a point in the Euclidean space";
+constexpr const char* Epick_d_Point_d__class__ = "represents a point in the Euclidean space";
 
-constexpr const char* CGAL_Epick_d_Point_d_Point_d = "introduces a point with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
+constexpr const char* Epick_d_Point_d_Point_d = "introduces a point with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
 
 DimensionTag is a fixed dimension, not Dynamic_dimension_tag .
 
@@ -661,7 +661,7 @@ Parameters
 x0 : double
 x1 : double
  : ...";
-constexpr const char* CGAL_Epick_d_Point_d_Point_d_1 = "introduces a point with coordinate set [first,end) .
+constexpr const char* Epick_d_Point_d_Point_d_1 = "introduces a point with coordinate set [first,end) .
 
 If DimensionTag is a fixed dimension, it matches std::distance(first,end) .
 InputIterator has its value type that is convertible to double .
@@ -670,7 +670,7 @@ Parameters
 ----------
 first : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Epick_d_Point_d_operator = "returns the i-th coordinate of a point.
+constexpr const char* Epick_d_Point_d_operator = "returns the i-th coordinate of a point.
 
 i is non-negative and less than the dimension.
 
@@ -679,13 +679,13 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Epick_d_Point_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
+constexpr const char* Epick_d_Point_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epick_d_Point_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
+constexpr const char* Epick_d_Point_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epick_d_Point_d_operator_1 = "returns whether the points coincide.
+constexpr const char* Epick_d_Point_d_operator_1 = "returns whether the points coincide.
 
 This may not be safe if the points are the result of inexact constructions.
 
@@ -695,7 +695,7 @@ Parameters
  : Point_d
 
 Returns: bool";
-constexpr const char* CGAL_Epick_d_Point_d_operator_2 = "returns whether the points are distinct.
+constexpr const char* Epick_d_Point_d_operator_2 = "returns whether the points are distinct.
 
 This may not be safe if the points are the result of inexact constructions.
 
@@ -706,7 +706,7 @@ Parameters
 
 Returns: bool";
 
-constexpr const char* CGAL_Epick_d_Power_side_of_bounded_power_sphere_d_operator = "returns the relative position of weighted point p to the sphere defined by A=tuple[first,last) .
+constexpr const char* Epick_d_Power_side_of_bounded_power_sphere_d_operator = "returns the relative position of weighted point p to the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and orthogonal to all the
 spheres of A. The order of the points of A does not matter. A is affinely
@@ -720,7 +720,7 @@ p : const Weighted_point_d &
 
 Returns: Bounded_side";
 
-constexpr const char* CGAL_Epick_d_Side_of_bounded_sphere_d_operator = "returns the relative position of point p to the sphere defined by A=tuple[first,last) .
+constexpr const char* Epick_d_Side_of_bounded_sphere_d_operator = "returns the relative position of point p to the sphere defined by A=tuple[first,last) .
 
 The sphere is centered in the affine hull of A and passes through all the
 points of A. The order of the points of A does not matter. A is affinely
@@ -735,9 +735,9 @@ p : const Point_d &
 Returns: Bounded_side";
 
 // CGAL::Epick_d::Vector_d
-constexpr const char* CGAL_Epick_d_Vector_d__class__ = "represents a vector in the Euclidean space";
+constexpr const char* Epick_d_Vector_d__class__ = "represents a vector in the Euclidean space";
 
-constexpr const char* CGAL_Epick_d_Vector_d_Vector_d = "introduces a vector with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
+constexpr const char* Epick_d_Vector_d_Vector_d = "introduces a vector with coordinates (x0, x1, ...) where the number of coordinates matches the dimension.
 
 DimensionTag is a fixed dimension, not Dynamic_dimension_tag .
 
@@ -746,7 +746,7 @@ Parameters
 x0 : double
 x1 : double
  : ...";
-constexpr const char* CGAL_Epick_d_Vector_d_Vector_d_1 = "introduces a vector with coordinate set [first,end) .
+constexpr const char* Epick_d_Vector_d_Vector_d_1 = "introduces a vector with coordinate set [first,end) .
 
 If DimensionTag is a fixed dimension, it matches std::distance(first,end) .
 InputIterator has its value type that is convertible to double .
@@ -755,7 +755,7 @@ Parameters
 ----------
 first : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Epick_d_Vector_d_operator = "returns the i-th coordinate of a vector.
+constexpr const char* Epick_d_Vector_d_operator = "returns the i-th coordinate of a vector.
 
 i is non-negative and less than the dimension.
 
@@ -764,13 +764,13 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Epick_d_Vector_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
+constexpr const char* Epick_d_Vector_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epick_d_Vector_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
+constexpr const char* Epick_d_Vector_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate.
 
 Returns: Cartesian_const_iterator_d";
-constexpr const char* CGAL_Epick_d_Vector_d_operator_1 = "returns whether the vectors coincide.
+constexpr const char* Epick_d_Vector_d_operator_1 = "returns whether the vectors coincide.
 
 This may not be safe if the vectors are the result of inexact constructions.
 
@@ -780,7 +780,7 @@ Parameters
  : Vector_d
 
 Returns: bool";
-constexpr const char* CGAL_Epick_d_Vector_d_operator_2 = "returns whether the vectors are distinct.
+constexpr const char* Epick_d_Vector_d_operator_2 = "returns whether the vectors are distinct.
 
 This may not be safe if the vectors are the result of inexact constructions.
 
@@ -792,35 +792,35 @@ Parameters
 Returns: bool";
 
 // CGAL::Epick_d::Weighted_point_d
-constexpr const char* CGAL_Epick_d_Weighted_point_d__class__ = "represents a weighted point in the Euclidean space";
+constexpr const char* Epick_d_Weighted_point_d__class__ = "represents a weighted point in the Euclidean space";
 
-constexpr const char* CGAL_Epick_d_Weighted_point_d_Weighted_point_d = "introduces a weighted point with point p and weight w.
+constexpr const char* Epick_d_Weighted_point_d_Weighted_point_d = "introduces a weighted point with point p and weight w.
 
 Parameters
 ----------
 p : const Point_d &
 w : const double &";
-constexpr const char* CGAL_Epick_d_Weighted_point_d_point = "extracts the point of a weighted point.
+constexpr const char* Epick_d_Weighted_point_d_point = "extracts the point of a weighted point.
 
 Returns: Point_d";
-constexpr const char* CGAL_Epick_d_Weighted_point_d_weight = "extracts the weight of a weighted point.
+constexpr const char* Epick_d_Weighted_point_d_weight = "extracts the weight of a weighted point.
 
 Returns: double";
 
 // CGAL::Homogeneous_d
-constexpr const char* CGAL_Homogeneous_d__class__ = "A model for a Kernel_d (and even KernelWithLifting_d ) using homogeneous coordinates to represent the geometric objects.";
+constexpr const char* Homogeneous_d__class__ = "A model for a Kernel_d (and even KernelWithLifting_d ) using homogeneous coordinates to represent the geometric objects.";
 
 // CGAL::Hyperplane_d
-constexpr const char* CGAL_Hyperplane_d__class__ = "An instance of data type Hyperplane_d is an oriented hyperplane in $ d$ - dimensional space.";
+constexpr const char* Hyperplane_d__class__ = "An instance of data type Hyperplane_d is an oriented hyperplane in $ d$ - dimensional space.";
 
-constexpr const char* CGAL_Hyperplane_d_LA = "the linear algebra layer.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Hyperplane_d_Coefficient_const_iterator = "a read-only iterator for the coefficients.
+constexpr const char* Hyperplane_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d = "introduces a variable h of type Hyperplane_d <Kernel> .";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d_1 = "introduces a variable h of type Hyperplane_d <Kernel> initialized to the hyperplane with coefficients set [first,last) and D .
+constexpr const char* Hyperplane_d_Coefficient_const_iterator = "a read-only iterator for the coefficients.
+
+Returns: unspecified_type";
+constexpr const char* Hyperplane_d_Hyperplane_d = "introduces a variable h of type Hyperplane_d <Kernel> .";
+constexpr const char* Hyperplane_d_Hyperplane_d_1 = "introduces a variable h of type Hyperplane_d <Kernel> initialized to the hyperplane with coefficients set [first,last) and D .
 
 size [first,last) == d . InputIterator has RT as value type.
 
@@ -830,7 +830,7 @@ d : int
 first : InputIterator
 last : InputIterator
 D : RT";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d_2 = "introduces a variable h of type Hyperplane_d <Kernel> initialized to the hyperplane with coefficients set [first,last) .
+constexpr const char* Hyperplane_d_Hyperplane_d_2 = "introduces a variable h of type Hyperplane_d <Kernel> initialized to the hyperplane with coefficients set [first,last) .
 
 size [first,last) == d+1 . InputIterator has RT as value type.
 
@@ -839,7 +839,7 @@ Parameters
 d : int
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d_3 = "constructs some hyperplane that passes through the points in set [first,last) .
+constexpr const char* Hyperplane_d_Hyperplane_d_3 = "constructs some hyperplane that passes through the points in set [first,last) .
 
 If side is ON_POSITIVE_SIDE or ON_NEGATIVE_SIDE then o is on that side of the
 constructed hyperplane. A hyperplane with the stated properties must exist.
@@ -851,7 +851,7 @@ first : ForwardIterator
 last : ForwardIterator
 o : Point_d < Kernel >
 side : Oriented_side";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d_4 = "constructs the hyperplane with normal direction dir that passes through $ p$ .
+constexpr const char* Hyperplane_d_Hyperplane_d_4 = "constructs the hyperplane with normal direction dir that passes through $ p$ .
 
 The direction dir points into the positive side.
 p.dimension()==dir.dimension() and dir is not degenerate.
@@ -860,14 +860,14 @@ Parameters
 ----------
 p : Point_d < Kernel >
 dir : Direction_d < Kernel >";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d_5 = "introduces a variable h of type Hyperplane_d <Kernel> in $ 2$ -dimensional space with equation $ ax+by+c=0$ .
+constexpr const char* Hyperplane_d_Hyperplane_d_5 = "introduces a variable h of type Hyperplane_d <Kernel> in $ 2$ -dimensional space with equation $ ax+by+c=0$ .
 
 Parameters
 ----------
 a : RT
 b : RT
 c : RT";
-constexpr const char* CGAL_Hyperplane_d_Hyperplane_d_6 = "introduces a variable h of type Hyperplane_d <Kernel> in $ 3$ -dimensional space with equation $ ax+by+cz+d=0$ .
+constexpr const char* Hyperplane_d_Hyperplane_d_6 = "introduces a variable h of type Hyperplane_d <Kernel> in $ 3$ -dimensional space with equation $ ax+by+cz+d=0$ .
 
 Parameters
 ----------
@@ -875,10 +875,10 @@ a : RT
 b : RT
 c : RT
 d : RT";
-constexpr const char* CGAL_Hyperplane_d_dimension = "returns the dimension of h .
+constexpr const char* Hyperplane_d_dimension = "returns the dimension of h .
 
 Returns: int";
-constexpr const char* CGAL_Hyperplane_d_operator = "returns the $ i$ -th coefficient of h .
+constexpr const char* Hyperplane_d_operator = "returns the $ i$ -th coefficient of h .
 
 $ 0 \\leq i \\leq d$ .
 
@@ -887,7 +887,7 @@ Parameters
 i : int
 
 Returns: RT";
-constexpr const char* CGAL_Hyperplane_d_coefficient = "returns the $ i$ -th coefficient of h .
+constexpr const char* Hyperplane_d_coefficient = "returns the $ i$ -th coefficient of h .
 
 $ 0 \\leq i \\leq d$ .
 
@@ -896,24 +896,24 @@ Parameters
 i : int
 
 Returns: RT";
-constexpr const char* CGAL_Hyperplane_d_coefficients_begin = "returns an iterator pointing to the first coefficient.
+constexpr const char* Hyperplane_d_coefficients_begin = "returns an iterator pointing to the first coefficient.
 
 Returns: Coefficient_const_iterator";
-constexpr const char* CGAL_Hyperplane_d_coefficients_end = "returns an iterator pointing beyond the last coefficient.
+constexpr const char* Hyperplane_d_coefficients_end = "returns an iterator pointing beyond the last coefficient.
 
 Returns: Coefficient_const_iterator";
-constexpr const char* CGAL_Hyperplane_d_orthogonal_vector = "returns the orthogonal vector of h .
+constexpr const char* Hyperplane_d_orthogonal_vector = "returns the orthogonal vector of h .
 
 It points from the negative halfspace into the positive halfspace and its
 homogeneous coordinates are $ (c_0, \\ldots, c_{d - 1},1)$ .
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Hyperplane_d_orthogonal_direction = "returns the orthogonal direction of h .
+constexpr const char* Hyperplane_d_orthogonal_direction = "returns the orthogonal direction of h .
 
 It points from the negative halfspace into the positive halfspace.
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Hyperplane_d_oriented_side = "returns the side of the hyperplane h containing $ p$ .
+constexpr const char* Hyperplane_d_oriented_side = "returns the side of the hyperplane h containing $ p$ .
 
 h.dimension() == p.dimension() .
 
@@ -922,7 +922,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Hyperplane_d_has_on = "returns true iff point p lies on the hyperplane h .
+constexpr const char* Hyperplane_d_has_on = "returns true iff point p lies on the hyperplane h .
 
 h.dimension() == p.dimension() .
 
@@ -931,7 +931,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperplane_d_has_on_boundary = "returns true iff point p lies on the boundary of hyperplane h .
+constexpr const char* Hyperplane_d_has_on_boundary = "returns true iff point p lies on the boundary of hyperplane h .
 
 h.dimension() == p.dimension() .
 
@@ -940,7 +940,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperplane_d_has_on_positive_side = "returns true iff point p lies on the positive side of hyperplane h .
+constexpr const char* Hyperplane_d_has_on_positive_side = "returns true iff point p lies on the positive side of hyperplane h .
 
 h.dimension() == p.dimension() .
 
@@ -949,7 +949,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperplane_d_has_on_negative_side = "returns true iff point p lies on the negative side of hyperplane h .
+constexpr const char* Hyperplane_d_has_on_negative_side = "returns true iff point p lies on the negative side of hyperplane h .
 
 h.dimension() == p.dimension() .
 
@@ -958,7 +958,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperplane_d_transform = "returns $ t(h)$ .
+constexpr const char* Hyperplane_d_transform = "returns $ t(h)$ .
 
 h.dimension() == t.dimension() .
 
@@ -967,7 +967,7 @@ Parameters
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Hyperplane_d < Kernel >";
-constexpr const char* CGAL_Hyperplane_d_weak_equality = "test for weak equality.
+constexpr const char* Hyperplane_d_weak_equality = "test for weak equality.
 
 h1.dimension() == h2.dimension() .
 
@@ -979,56 +979,56 @@ h2 : const Hyperplane_d < Kernel > &
 Returns: bool";
 
 // CGAL::Iso_box_d
-constexpr const char* CGAL_Iso_box_d__class__ = "An object $ b$ of the data type Iso_box_d is an iso-box in the Euclidean space $ \\E^d$ with edges parallel to the axes of the coordinate system.";
+constexpr const char* Iso_box_d__class__ = "An object $ b$ of the data type Iso_box_d is an iso-box in the Euclidean space $ \\E^d$ with edges parallel to the axes of the coordinate system.";
 
-constexpr const char* CGAL_Iso_box_d_Iso_box_d = "introduces an iso-oriented iso-box b with diagonal opposite vertices $ p$ and $ q$ .
+constexpr const char* Iso_box_d_Iso_box_d = "introduces an iso-oriented iso-box b with diagonal opposite vertices $ p$ and $ q$ .
 
 Parameters
 ----------
 p : const Point_d < Kernel > &
 q : const Point_d < Kernel > &";
-constexpr const char* CGAL_Iso_box_d_operator = "Test for equality: two iso-oriented cuboid are equal, iff their lower left and their upper right vertices are equal.
+constexpr const char* Iso_box_d_operator = "Test for equality: two iso-oriented cuboid are equal, iff their lower left and their upper right vertices are equal.
 
 Parameters
 ----------
 b2 : const Iso_box_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Iso_box_d_operator_1 = "Test for inequality.
+constexpr const char* Iso_box_d_operator_1 = "Test for inequality.
 
 Parameters
 ----------
 b2 : const Iso_box_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Iso_box_d_min = "returns the smallest vertex of b .
+constexpr const char* Iso_box_d_min = "returns the smallest vertex of b .
 
 Returns: const Point_d < Kernel > &";
-constexpr const char* CGAL_Iso_box_d_max = "returns the largest vertex of b .
+constexpr const char* Iso_box_d_max = "returns the largest vertex of b .
 
 Returns: const Point_d < Kernel > &";
-constexpr const char* CGAL_Iso_box_d_is_degenerate = "b is degenerate, if all vertices are collinear.
+constexpr const char* Iso_box_d_is_degenerate = "b is degenerate, if all vertices are collinear.
 
 Returns: bool";
-constexpr const char* CGAL_Iso_box_d_bounded_side = "returns either ON_UNBOUNDED_SIDE , ON_BOUNDED_SIDE , or the constant ON_BOUNDARY , depending on where point $ p$ is.
+constexpr const char* Iso_box_d_bounded_side = "returns either ON_UNBOUNDED_SIDE , ON_BOUNDED_SIDE , or the constant ON_BOUNDARY , depending on where point $ p$ is.
 
 Parameters
 ----------
 p : const Point_d < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Iso_box_d_volume = "returns the volume of b .
+constexpr const char* Iso_box_d_volume = "returns the volume of b .
 
 Returns: Kernel_d::FT";
 
 // CGAL::Line_d
-constexpr const char* CGAL_Line_d__class__ = "An instance of data type Line_d is an oriented line in $ d$ -dimensional Euclidean space.";
+constexpr const char* Line_d__class__ = "An instance of data type Line_d is an oriented line in $ d$ -dimensional Euclidean space.";
 
-constexpr const char* CGAL_Line_d_LA = "the linear algebra layer.
+constexpr const char* Line_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Line_d_Line_d = "introduces a variable l of type Line_d <Kernel> .";
-constexpr const char* CGAL_Line_d_Line_d_1 = "introduces a line through p and q and oriented from p to q .
+constexpr const char* Line_d_Line_d = "introduces a variable l of type Line_d <Kernel> .";
+constexpr const char* Line_d_Line_d_1 = "introduces a line through p and q and oriented from p to q .
 
 $ p$ and $ q$ are distinct and have the same dimension.
 
@@ -1036,7 +1036,7 @@ Parameters
 ----------
 p : Point_d < Kernel >
 q : Point_d < Kernel >";
-constexpr const char* CGAL_Line_d_Line_d_2 = "introduces a line through p with direction dir .
+constexpr const char* Line_d_Line_d_2 = "introduces a line through p with direction dir .
 
 p.dimension()==dir.dimension() , dir is not degenerate.
 
@@ -1044,22 +1044,22 @@ Parameters
 ----------
 p : Point_d < Kernel >
 dir : Direction_d < Kernel >";
-constexpr const char* CGAL_Line_d_Line_d_3 = "introduces a variable l of type Line_d <Kernel> and initializes it to the line through s.source() and s.target() with direction from s.source() to s.target() .
+constexpr const char* Line_d_Line_d_3 = "introduces a variable l of type Line_d <Kernel> and initializes it to the line through s.source() and s.target() with direction from s.source() to s.target() .
 
 $ s$ is not degenerate.
 
 Parameters
 ----------
 s : Segment_d < Kernel >";
-constexpr const char* CGAL_Line_d_Line_d_4 = "introduces a variable l of type Line_d <Kernel> and initializes it to the line through r.point(1) and r.point(2) .
+constexpr const char* Line_d_Line_d_4 = "introduces a variable l of type Line_d <Kernel> and initializes it to the line through r.point(1) and r.point(2) .
 
 Parameters
 ----------
 r : Ray_d < Kernel >";
-constexpr const char* CGAL_Line_d_dimension = "returns the dimension of the ambient space.
+constexpr const char* Line_d_dimension = "returns the dimension of the ambient space.
 
 Returns: int";
-constexpr const char* CGAL_Line_d_point = "returns an arbitrary point on l .
+constexpr const char* Line_d_point = "returns an arbitrary point on l .
 
 It holds that point(i) == point(j) , iff i==j . Furthermore, l is directed
 from point(i) to point(j) , for all i < j .
@@ -1069,13 +1069,13 @@ Parameters
 i : int
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Line_d_opposite = "returns the line (point(2),point(1)) of opposite direction.
+constexpr const char* Line_d_opposite = "returns the line (point(2),point(1)) of opposite direction.
 
 Returns: Line_d < Kernel >";
-constexpr const char* CGAL_Line_d_direction = "returns the direction of l .
+constexpr const char* Line_d_direction = "returns the direction of l .
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Line_d_transform = "returns $ t(l)$ .
+constexpr const char* Line_d_transform = "returns $ t(l)$ .
 
 l.dimension()==t.dimension() .
 
@@ -1084,7 +1084,7 @@ Parameters
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Line_d < Kernel >";
-constexpr const char* CGAL_Line_d_operator = "returns l+v , i.e., l translated by vector $ v$ .
+constexpr const char* Line_d_operator = "returns l+v , i.e., l translated by vector $ v$ .
 
 l.dimension()==v.dimension() .
 
@@ -1093,7 +1093,7 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Line_d < Kernel >";
-constexpr const char* CGAL_Line_d_projection = "returns the point of intersection of l with the hyperplane that is orthogonal to l and that contains p .
+constexpr const char* Line_d_projection = "returns the point of intersection of l with the hyperplane that is orthogonal to l and that contains p .
 
 l.dimension()==p.dimension() .
 
@@ -1102,7 +1102,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Line_d_has_on = "returns true if $ p$ lies on l and false otherwise.
+constexpr const char* Line_d_has_on = "returns true if $ p$ lies on l and false otherwise.
 
 l.dimension()==p.dimension() .
 
@@ -1111,7 +1111,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_d_weak_equality = "Test for equality as unoriented lines.
+constexpr const char* Line_d_weak_equality = "Test for equality as unoriented lines.
 
 l1.dimension()==l2.dimension() .
 
@@ -1121,7 +1121,7 @@ l1 : const Line_d < Kernel > &
 l2 : const Line_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_d_parallel = "returns true if l1 and l2 are parallel as unoriented lines and false otherwise.
+constexpr const char* Line_d_parallel = "returns true if l1 and l2 are parallel as unoriented lines and false otherwise.
 
 l1.dimension()==l2.dimension() .
 
@@ -1133,31 +1133,31 @@ l2 : const Line_d < Kernel > &
 Returns: bool";
 
 // CGAL::Linear_algebraCd
-constexpr const char* CGAL_Linear_algebraCd__class__ = "The class Linear_algebraCd serves as the default traits class for the LA parameter of CGAL::Cartesian_d <FT,LA> .";
+constexpr const char* Linear_algebraCd__class__ = "The class Linear_algebraCd serves as the default traits class for the LA parameter of CGAL::Cartesian_d <FT,LA> .";
 
 // CGAL::Linear_algebraHd
-constexpr const char* CGAL_Linear_algebraHd__class__ = "The class Linear_algebraHd serves as the default traits class for the LA parameter of CGAL::Homogeneous_d <RT,LA> .";
+constexpr const char* Linear_algebraHd__class__ = "The class Linear_algebraHd serves as the default traits class for the LA parameter of CGAL::Homogeneous_d <RT,LA> .";
 
 // CGAL::Point_d
-constexpr const char* CGAL_Point_d__class__ = "An instance of data type Point_d <Kernel> is a point of Euclidean space in dimension $ d$ .";
+constexpr const char* Point_d__class__ = "An instance of data type Point_d <Kernel> is a point of Euclidean space in dimension $ d$ .";
 
-constexpr const char* CGAL_Point_d_LA = "the linear algebra layer.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Point_d_Cartesian_const_iterator = "a read-only iterator for the Cartesian coordinates.
+constexpr const char* Point_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_d_Homogeneous_const_iterator = "a read-only iterator for the homogeneous coordinates.
+constexpr const char* Point_d_Cartesian_const_iterator = "a read-only iterator for the Cartesian coordinates.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_d_Point_d = "introduces a variable p of type Point_d <Kernel> .";
-constexpr const char* CGAL_Point_d_Point_d_1 = "introduces a variable p of type Point_d <Kernel> in $ d$ -dimensional space, initialized to the origin.
+constexpr const char* Point_d_Homogeneous_const_iterator = "a read-only iterator for the homogeneous coordinates.
+
+Returns: unspecified_type";
+constexpr const char* Point_d_Point_d = "introduces a variable p of type Point_d <Kernel> .";
+constexpr const char* Point_d_Point_d_1 = "introduces a variable p of type Point_d <Kernel> in $ d$ -dimensional space, initialized to the origin.
 
 Parameters
 ----------
 d : int
  : Origin";
-constexpr const char* CGAL_Point_d_Point_d_2 = "introduces a variable p of type Point_d <Kernel> in dimension d .
+constexpr const char* Point_d_Point_d_2 = "introduces a variable p of type Point_d <Kernel> in dimension d .
 
 If size [first,last) == d this creates a point with Cartesian coordinates set
 [first,last) . If size [first,last) == d+1 the range specifies the homogeneous
@@ -1171,7 +1171,7 @@ Parameters
 d : int
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Point_d_Point_d_3 = "introduces a variable p of type Point_d <Kernel> in dimension d initialized to the point with homogeneous coordinates as defined by H = set [first,last) and D : $ (\\pm H[0],
+constexpr const char* Point_d_Point_d_3 = "introduces a variable p of type Point_d <Kernel> in dimension d initialized to the point with homogeneous coordinates as defined by H = set [first,last) and D : $ (\\pm H[0],
 \\pm H[1], \\ldots, \\pm H[d-1], \\pm D)$ .
 
 The sign chosen is the sign of $ D$ . D is non-zero, the iterator range
@@ -1183,7 +1183,7 @@ d : int
 first : InputIterator
 last : InputIterator
 D : RT";
-constexpr const char* CGAL_Point_d_Point_d_4 = "introduces a variable p of type Point_d <Kernel> in $ 2$ -dimensional space.
+constexpr const char* Point_d_Point_d_4 = "introduces a variable p of type Point_d <Kernel> in $ 2$ -dimensional space.
 
 $ w \\neq0$ .
 
@@ -1192,7 +1192,7 @@ Parameters
 x : RT
 y : RT
 w : RT";
-constexpr const char* CGAL_Point_d_Point_d_5 = "introduces a variable p of type Point_d <Kernel> in $ 3$ -dimensional space.
+constexpr const char* Point_d_Point_d_5 = "introduces a variable p of type Point_d <Kernel> in $ 3$ -dimensional space.
 
 $ w \\neq0$ .
 
@@ -1202,10 +1202,10 @@ x : RT
 y : RT
 z : RT
 w : RT";
-constexpr const char* CGAL_Point_d_dimension = "returns the dimension of p .
+constexpr const char* Point_d_dimension = "returns the dimension of p .
 
 Returns: int";
-constexpr const char* CGAL_Point_d_cartesian = "returns the $ i$ -th Cartesian coordinate of p .
+constexpr const char* Point_d_cartesian = "returns the $ i$ -th Cartesian coordinate of p .
 
 $ 0 \\leq i < d$ .
 
@@ -1214,7 +1214,7 @@ Parameters
 i : int
 
 Returns: FT";
-constexpr const char* CGAL_Point_d_operator = "returns the $ i$ -th Cartesian coordinate of p .
+constexpr const char* Point_d_operator = "returns the $ i$ -th Cartesian coordinate of p .
 
 $ 0 \\leq i < d$ .
 
@@ -1223,7 +1223,7 @@ Parameters
 i : int
 
 Returns: FT";
-constexpr const char* CGAL_Point_d_homogeneous = "returns the $ i$ -th homogeneous coordinate of p .
+constexpr const char* Point_d_homogeneous = "returns the $ i$ -th homogeneous coordinate of p .
 
 $ 0 \\leq i \\leq d$ .
 
@@ -1232,33 +1232,33 @@ Parameters
 i : int
 
 Returns: RT";
-constexpr const char* CGAL_Point_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate $ p_0$ of p .
+constexpr const char* Point_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate $ p_0$ of p .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Point_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate of p .
+constexpr const char* Point_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate of p .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Point_d_homogeneous_begin = "returns an iterator pointing to the zeroth homogeneous coordinate $ h_0$ of p .
+constexpr const char* Point_d_homogeneous_begin = "returns an iterator pointing to the zeroth homogeneous coordinate $ h_0$ of p .
 
 Returns: Homogeneous_const_iterator";
-constexpr const char* CGAL_Point_d_homogeneous_end = "returns an iterator pointing beyond the last homogeneous coordinate of p .
+constexpr const char* Point_d_homogeneous_end = "returns an iterator pointing beyond the last homogeneous coordinate of p .
 
 Returns: Homogeneous_const_iterator";
-constexpr const char* CGAL_Point_d_transform = "returns $ t(p)$ .
+constexpr const char* Point_d_transform = "returns $ t(p)$ .
 
 Parameters
 ----------
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Point_d_operator_1 = "returns the vector $ p-O$ .
+constexpr const char* Point_d_operator_1 = "returns the vector $ p-O$ .
 
 Parameters
 ----------
 o : const Origin &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Point_d_operator_2 = "returns $ p -
+constexpr const char* Point_d_operator_2 = "returns $ p -
 q$ .
 
 p.dimension() == q.dimension() .
@@ -1268,7 +1268,7 @@ Parameters
 q : const Point_d < Kernel > &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Point_d_operator_3 = "returns $ p +
+constexpr const char* Point_d_operator_3 = "returns $ p +
 v$ .
 
 p.dimension() == v.dimension() .
@@ -1278,7 +1278,7 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Point_d_operator_4 = "returns $ p -
+constexpr const char* Point_d_operator_4 = "returns $ p -
 v$ .
 
 p.dimension() == v.dimension() .
@@ -1288,7 +1288,7 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Point_d_operator_5 = "adds v to p .
+constexpr const char* Point_d_operator_5 = "adds v to p .
 
 p.dimension() == v.dimension() .
 
@@ -1297,7 +1297,7 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Point_d < Kernel > &";
-constexpr const char* CGAL_Point_d_operator_6 = "subtracts v from p .
+constexpr const char* Point_d_operator_6 = "subtracts v from p .
 
 p.dimension() == v.dimension() .
 
@@ -1306,14 +1306,14 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Point_d < Kernel > &";
-constexpr const char* CGAL_Point_d_operator_7 = "returns true if p is the origin.
+constexpr const char* Point_d_operator_7 = "returns true if p is the origin.
 
 Parameters
 ----------
  : const Origin &
 
 Returns: bool";
-constexpr const char* CGAL_Point_d_operator_8 = "returns true iff p is lexicographically smaller than q with respect to Cartesian lexicographic order of points.
+constexpr const char* Point_d_operator_8 = "returns true iff p is lexicographically smaller than q with respect to Cartesian lexicographic order of points.
 
 p.dimension() == q.dimension() .
 
@@ -1322,7 +1322,7 @@ Parameters
 q : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_d_operator_9 = "returns true iff p is lexicographically greater than q with respect to Cartesian lexicographic order of points.
+constexpr const char* Point_d_operator_9 = "returns true iff p is lexicographically greater than q with respect to Cartesian lexicographic order of points.
 
 p.dimension() == q.dimension() .
 
@@ -1331,7 +1331,7 @@ Parameters
 q : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_d_operator_10 = "returns true iff p is lexicographically smaller than or equal to q with respect to Cartesian lexicographic order of points.
+constexpr const char* Point_d_operator_10 = "returns true iff p is lexicographically smaller than or equal to q with respect to Cartesian lexicographic order of points.
 
 p.dimension() == q.dimension() .
 
@@ -1340,7 +1340,7 @@ Parameters
 q : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Point_d_operator_11 = "returns true iff p is lexicographically greater than or equal to q with respect to Cartesian lexicographic order of points.
+constexpr const char* Point_d_operator_11 = "returns true iff p is lexicographically greater than or equal to q with respect to Cartesian lexicographic order of points.
 
 p.dimension() == q.dimension() .
 
@@ -1351,13 +1351,13 @@ q : const Point_d < Kernel > &
 Returns: bool";
 
 // CGAL::Ray_d
-constexpr const char* CGAL_Ray_d__class__ = "An instance of data type Ray_d is a ray in $ d$ -dimensional Euclidean space.";
+constexpr const char* Ray_d__class__ = "An instance of data type Ray_d is a ray in $ d$ -dimensional Euclidean space.";
 
-constexpr const char* CGAL_Ray_d_LA = "the linear algebra layer.
+constexpr const char* Ray_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Ray_d_Ray_d = "introduces some ray in $ d$ -dimensional space.";
-constexpr const char* CGAL_Ray_d_Ray_d_1 = "introduces a ray through p and q and starting at p .
+constexpr const char* Ray_d_Ray_d = "introduces some ray in $ d$ -dimensional space.";
+constexpr const char* Ray_d_Ray_d_1 = "introduces a ray through p and q and starting at p .
 
 $ p$ and $ q$ are distinct and have the same dimension.
 p.dimension()==q.dimension() .
@@ -1366,7 +1366,7 @@ Parameters
 ----------
 p : Point_d < Kernel >
 q : Point_d < Kernel >";
-constexpr const char* CGAL_Ray_d_Ray_d_2 = "introduces a ray starting in p with direction dir .
+constexpr const char* Ray_d_Ray_d_2 = "introduces a ray starting in p with direction dir .
 
 p and dir have the same dimension and dir is not degenerate.
 p.dimension()==dir.dimension() .
@@ -1375,20 +1375,20 @@ Parameters
 ----------
 p : Point_d < Kernel >
 dir : Direction_d < Kernel >";
-constexpr const char* CGAL_Ray_d_Ray_d_3 = "introduces a ray through s.source() and s.target() and starting at s.source() .
+constexpr const char* Ray_d_Ray_d_3 = "introduces a ray through s.source() and s.target() and starting at s.source() .
 
 $ s$ is not degenerate.
 
 Parameters
 ----------
 s : Segment_d < Kernel >";
-constexpr const char* CGAL_Ray_d_dimension = "returns the dimension of the ambient space.
+constexpr const char* Ray_d_dimension = "returns the dimension of the ambient space.
 
 Returns: int";
-constexpr const char* CGAL_Ray_d_source = "returns the source point of r .
+constexpr const char* Ray_d_source = "returns the source point of r .
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Ray_d_point = "returns a point on r .
+constexpr const char* Ray_d_point = "returns a point on r .
 
 point(0) is the source. point(i) , with $ i>0$ , is different from the source.
 $ i \\geq0$ .
@@ -1398,16 +1398,16 @@ Parameters
 i : int
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Ray_d_direction = "returns the direction of r .
+constexpr const char* Ray_d_direction = "returns the direction of r .
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Ray_d_supporting_line = "returns the supporting line of r .
+constexpr const char* Ray_d_supporting_line = "returns the supporting line of r .
 
 Returns: Line_d < Kernel >";
-constexpr const char* CGAL_Ray_d_opposite = "returns the ray with direction opposite to r and starting in source .
+constexpr const char* Ray_d_opposite = "returns the ray with direction opposite to r and starting in source .
 
 Returns: Ray_d < Kernel >";
-constexpr const char* CGAL_Ray_d_transform = "returns $ t(r)$ .
+constexpr const char* Ray_d_transform = "returns $ t(r)$ .
 
 r.dimension()==t.dimension() .
 
@@ -1416,7 +1416,7 @@ Parameters
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Ray_d < Kernel >";
-constexpr const char* CGAL_Ray_d_operator = "returns r+v , i.e., r translated by vector $ v$ .
+constexpr const char* Ray_d_operator = "returns r+v , i.e., r translated by vector $ v$ .
 
 r.dimension()==v.dimension() .
 
@@ -1425,7 +1425,7 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Ray_d < Kernel >";
-constexpr const char* CGAL_Ray_d_has_on = "A point is on r , iff it is equal to the source of r , or if it is in the interior of r .
+constexpr const char* Ray_d_has_on = "A point is on r , iff it is equal to the source of r , or if it is in the interior of r .
 
 r.dimension()==p.dimension() .
 
@@ -1434,7 +1434,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_d_parallel = "returns true if the unoriented supporting lines of r1 and r2 are parallel and false otherwise.
+constexpr const char* Ray_d_parallel = "returns true if the unoriented supporting lines of r1 and r2 are parallel and false otherwise.
 
 r1.dimension()==r2.dimension() .
 
@@ -1446,13 +1446,13 @@ r2 : const Ray_d < Kernel > &
 Returns: bool";
 
 // CGAL::Segment_d
-constexpr const char* CGAL_Segment_d__class__ = "An instance $ s$ of the data type Segment_d is a directed straight line segment in $ d$ -dimensional Euclidean space connecting two points $ p$ and $ q$ .";
+constexpr const char* Segment_d__class__ = "An instance $ s$ of the data type Segment_d is a directed straight line segment in $ d$ -dimensional Euclidean space connecting two points $ p$ and $ q$ .";
 
-constexpr const char* CGAL_Segment_d_LA = "the linear algebra layer.
+constexpr const char* Segment_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_d_Segment_d = "introduces a variable s of type Segment_d <Kernel> .";
-constexpr const char* CGAL_Segment_d_Segment_d_1 = "introduces a variable s of type Segment_d <Kernel> which is initialized to the segment $ (p,q)$ .
+constexpr const char* Segment_d_Segment_d = "introduces a variable s of type Segment_d <Kernel> .";
+constexpr const char* Segment_d_Segment_d_1 = "introduces a variable s of type Segment_d <Kernel> which is initialized to the segment $ (p,q)$ .
 
 p.dimension()==q.dimension() .
 
@@ -1460,7 +1460,7 @@ Parameters
 ----------
 p : Point_d < Kernel >
 q : Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_Segment_d_2 = "introduces a variable s of type Segment_d <Kernel> which is initialized to the segment (p,p+v) .
+constexpr const char* Segment_d_Segment_d_2 = "introduces a variable s of type Segment_d <Kernel> which is initialized to the segment (p,p+v) .
 
 p.dimension()==v.dimension() .
 
@@ -1468,16 +1468,16 @@ Parameters
 ----------
 p : Point_d < Kernel >
 v : Vector_d < Kernel >";
-constexpr const char* CGAL_Segment_d_dimension = "returns the dimension of the ambient space.
+constexpr const char* Segment_d_dimension = "returns the dimension of the ambient space.
 
 Returns: int";
-constexpr const char* CGAL_Segment_d_source = "returns the source point of segment s .
+constexpr const char* Segment_d_source = "returns the source point of segment s .
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_target = "returns the target point of segment s .
+constexpr const char* Segment_d_target = "returns the target point of segment s .
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_vertex = "returns source or target of s : vertex(0) returns the source, vertex(1) returns the target.
+constexpr const char* Segment_d_vertex = "returns source or target of s : vertex(0) returns the source, vertex(1) returns the target.
 
 The parameter $ i$ is taken modulo $ 2$ , which gives easy access to the other
 vertex. $ i \\geq0$ .
@@ -1487,41 +1487,41 @@ Parameters
 i : int
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_point = "returns vertex(i) .
+constexpr const char* Segment_d_point = "returns vertex(i) .
 
 Parameters
 ----------
 i : int
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_operator = "returns vertex(i) .
+constexpr const char* Segment_d_operator = "returns vertex(i) .
 
 Parameters
 ----------
 i : int
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_min = "returns the lexicographically smaller vertex.
+constexpr const char* Segment_d_min = "returns the lexicographically smaller vertex.
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_max = "returns the lexicographically larger vertex.
+constexpr const char* Segment_d_max = "returns the lexicographically larger vertex.
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Segment_d_opposite = "returns the segment ( target() , source() ) .
+constexpr const char* Segment_d_opposite = "returns the segment ( target() , source() ) .
 
 Returns: Segment_d < Kernel >";
-constexpr const char* CGAL_Segment_d_direction = "returns the direction from source to target.
+constexpr const char* Segment_d_direction = "returns the direction from source to target.
 
 s is non-degenerate.
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Segment_d_vector = "returns the vector from source to target.
+constexpr const char* Segment_d_vector = "returns the vector from source to target.
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Segment_d_squared_length = "returns the square of the length of s .
+constexpr const char* Segment_d_squared_length = "returns the square of the length of s .
 
 Returns: FT";
-constexpr const char* CGAL_Segment_d_has_on = "returns true if $ p$ lies on s and false otherwise.
+constexpr const char* Segment_d_has_on = "returns true if $ p$ lies on s and false otherwise.
 
 s.dimension()==p.dimension() .
 
@@ -1530,12 +1530,12 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_supporting_line = "returns the supporting line of s .
+constexpr const char* Segment_d_supporting_line = "returns the supporting line of s .
 
 s is non-degenerate.
 
 Returns: Line_d < Kernel >";
-constexpr const char* CGAL_Segment_d_transform = "returns $ t(s)$ .
+constexpr const char* Segment_d_transform = "returns $ t(s)$ .
 
 s.dimension()==t.dimension() .
 
@@ -1544,7 +1544,7 @@ Parameters
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Segment_d < Kernel >";
-constexpr const char* CGAL_Segment_d_operator_1 = "returns $ s+v$ , i.e., s translated by vector $ v$ .
+constexpr const char* Segment_d_operator_1 = "returns $ s+v$ , i.e., s translated by vector $ v$ .
 
 s.dimension()==v.dimension() .
 
@@ -1553,10 +1553,10 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Segment_d < Kernel >";
-constexpr const char* CGAL_Segment_d_is_degenerate = "returns true if s is degenerate i.e. s.source()=s.target() .
+constexpr const char* Segment_d_is_degenerate = "returns true if s is degenerate i.e. s.source()=s.target() .
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_weak_equality = "Test for equality as unoriented segments.
+constexpr const char* Segment_d_weak_equality = "Test for equality as unoriented segments.
 
 s1.dimension()==s2.dimension() .
 
@@ -1566,7 +1566,7 @@ s1 : const Segment_d < Kernel > &
 s2 : const Segment_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_parallel = "return true if one of the segments is degenerate or if the unoriented supporting lines are parallel.
+constexpr const char* Segment_d_parallel = "return true if one of the segments is degenerate or if the unoriented supporting lines are parallel.
 
 s1.dimension()==s2.dimension() .
 
@@ -1576,7 +1576,7 @@ s1 : const Segment_d < Kernel > &
 s2 : const Segment_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_common_endpoint = "if s1 and s2 touch in a common end point, this point is assigned to common and the result is true , otherwise the result is false .
+constexpr const char* Segment_d_common_endpoint = "if s1 and s2 touch in a common end point, this point is assigned to common and the result is true , otherwise the result is false .
 
 If s1==s2 then one of the endpoints is returned.
 s1.dimension()==s2.dimension() .
@@ -1590,16 +1590,16 @@ common : Point_d < Kernel > &
 Returns: bool";
 
 // CGAL::Sphere_d
-constexpr const char* CGAL_Sphere_d__class__ = "An instance $ S$ of the data type Sphere_d is an oriented sphere in some $ d$ -dimensional space.";
+constexpr const char* Sphere_d__class__ = "An instance $ S$ of the data type Sphere_d is an oriented sphere in some $ d$ -dimensional space.";
 
-constexpr const char* CGAL_Sphere_d_LA = "the linear algebra layer.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Sphere_d_point_iterator = "a read-only iterator for points defining the sphere.
+constexpr const char* Sphere_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Sphere_d_Sphere_d = "introduces a variable S of type Sphere_d <Kernel> .";
-constexpr const char* CGAL_Sphere_d_Sphere_d_1 = "introduces a variable S of type Sphere_d <Kernel> .
+constexpr const char* Sphere_d_point_iterator = "a read-only iterator for points defining the sphere.
+
+Returns: unspecified_type";
+constexpr const char* Sphere_d_Sphere_d = "introduces a variable S of type Sphere_d <Kernel> .";
+constexpr const char* Sphere_d_Sphere_d_1 = "introduces a variable S of type Sphere_d <Kernel> .
 
 S is initialized to the sphere through the points in A = tuple [first,last) .
 $A$ consists of $d+1$ $d$ -dimensional points. ForwardIterator has Point_d
@@ -1610,10 +1610,10 @@ Parameters
 d : int
 first : ForwardIterator
 last : ForwardIterator";
-constexpr const char* CGAL_Sphere_d_dimension = "returns the dimension of the ambient space.
+constexpr const char* Sphere_d_dimension = "returns the dimension of the ambient space.
 
 Returns: int";
-constexpr const char* CGAL_Sphere_d_point = "returns the $ i$ th defining point.
+constexpr const char* Sphere_d_point = "returns the $ i$ th defining point.
 
 $ 0 \\le i \\le dim $
 
@@ -1622,35 +1622,35 @@ Parameters
 i : int
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Sphere_d_points_begin = "returns an iterator pointing to the first defining point.
+constexpr const char* Sphere_d_points_begin = "returns an iterator pointing to the first defining point.
 
 Returns: point_iterator";
-constexpr const char* CGAL_Sphere_d_points_end = "returns an iterator pointing beyond the last defining point.
+constexpr const char* Sphere_d_points_end = "returns an iterator pointing beyond the last defining point.
 
 Returns: point_iterator";
-constexpr const char* CGAL_Sphere_d_is_degenerate = "returns true iff the defining points are not full dimensional.
+constexpr const char* Sphere_d_is_degenerate = "returns true iff the defining points are not full dimensional.
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_is_legal = "returns true iff the set of defining points is legal.
+constexpr const char* Sphere_d_is_legal = "returns true iff the set of defining points is legal.
 
 A set of defining points is legal iff their orientation is non-zero or if they
 are all equal.
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_center = "returns the center of S .
+constexpr const char* Sphere_d_center = "returns the center of S .
 
 S is legal.
 
 Returns: Point_d < Kernel >";
-constexpr const char* CGAL_Sphere_d_squared_radius = "returns the squared radius of the sphere.
+constexpr const char* Sphere_d_squared_radius = "returns the squared radius of the sphere.
 
 S is legal.
 
 Returns: FT";
-constexpr const char* CGAL_Sphere_d_orientation = "returns the orientation of S .
+constexpr const char* Sphere_d_orientation = "returns the orientation of S .
 
 Returns: Orientation";
-constexpr const char* CGAL_Sphere_d_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of sphere, resp.
+constexpr const char* Sphere_d_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of sphere, resp.
 
 S.dimension()==p.dimension() .
 
@@ -1659,7 +1659,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Sphere_d_bounded_side = "returns ON_BOUNDED_SIDE , ON_BOUNDARY , or ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of sphere, resp.
+constexpr const char* Sphere_d_bounded_side = "returns ON_BOUNDED_SIDE , ON_BOUNDARY , or ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of sphere, resp.
 
 S.dimension()==p.dimension() .
 
@@ -1668,7 +1668,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Sphere_d_has_on_positive_side = "returns S.oriented_side(p)==ON_POSITIVE_SIDE .
+constexpr const char* Sphere_d_has_on_positive_side = "returns S.oriented_side(p)==ON_POSITIVE_SIDE .
 
 S.dimension()==p.dimension() .
 
@@ -1677,7 +1677,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_has_on_negative_side = "returns S.oriented_side(p)==ON_NEGATIVE_SIDE .
+constexpr const char* Sphere_d_has_on_negative_side = "returns S.oriented_side(p)==ON_NEGATIVE_SIDE .
 
 S.dimension()==p.dimension() .
 
@@ -1686,7 +1686,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_has_on_boundary = "returns S.oriented_side(p)==ON_ORIENTED_BOUNDARY , which is the same as S.bounded_side(p)==ON_BOUNDARY .
+constexpr const char* Sphere_d_has_on_boundary = "returns S.oriented_side(p)==ON_ORIENTED_BOUNDARY , which is the same as S.bounded_side(p)==ON_BOUNDARY .
 
 S.dimension()==p.dimension() .
 
@@ -1695,7 +1695,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_has_on_bounded_side = "returns S.bounded_side(p)==ON_BOUNDED_SIDE .
+constexpr const char* Sphere_d_has_on_bounded_side = "returns S.bounded_side(p)==ON_BOUNDED_SIDE .
 
 S.dimension()==p.dimension() .
 
@@ -1704,7 +1704,7 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_has_on_unbounded_side = "returns S.bounded_side(p)==ON_UNBOUNDED_SIDE .
+constexpr const char* Sphere_d_has_on_unbounded_side = "returns S.bounded_side(p)==ON_UNBOUNDED_SIDE .
 
 S.dimension()==p.dimension() .
 
@@ -1713,10 +1713,10 @@ Parameters
 p : const Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_opposite = "returns the sphere with the same center and squared radius as S but with opposite orientation.
+constexpr const char* Sphere_d_opposite = "returns the sphere with the same center and squared radius as S but with opposite orientation.
 
 Returns: Sphere_d < Kernel >";
-constexpr const char* CGAL_Sphere_d_operator = "returns the sphere translated by v .
+constexpr const char* Sphere_d_operator = "returns the sphere translated by v .
 
 S.dimension()==v.dimension() .
 
@@ -1725,7 +1725,7 @@ Parameters
 v : const Vector_d < Kernel > &
 
 Returns: Sphere_d < Kernel >";
-constexpr const char* CGAL_Sphere_d_weak_equality = "Test for equality as unoriented spheres.
+constexpr const char* Sphere_d_weak_equality = "Test for equality as unoriented spheres.
 
 S1.dimension()==S2.dimension() .
 
@@ -1737,22 +1737,22 @@ S2 : const Sphere_d < Kernel > &
 Returns: bool";
 
 // CGAL::Vector_d
-constexpr const char* CGAL_Vector_d__class__ = "An instance of data type Vector_d <Kernel> is a vector of Euclidean space in dimension $ d$ .";
+constexpr const char* Vector_d__class__ = "An instance of data type Vector_d <Kernel> is a vector of Euclidean space in dimension $ d$ .";
 
-constexpr const char* CGAL_Vector_d_LA = "the linear algebra layer.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Vector_d_Cartesian_const_iterator = "a read-only iterator for the Cartesian coordinates.
+constexpr const char* Vector_d_LA = "the linear algebra layer.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Vector_d_Homogeneous_const_iterator = "a read-only iterator for the homogeneous coordinates.
+constexpr const char* Vector_d_Cartesian_const_iterator = "a read-only iterator for the Cartesian coordinates.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Vector_d_Base_vector = "construction tag.
+constexpr const char* Vector_d_Homogeneous_const_iterator = "a read-only iterator for the homogeneous coordinates.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Vector_d_Vector_d = "introduces a variable v of type Vector_d <Kernel> .";
-constexpr const char* CGAL_Vector_d_Vector_d_1 = "introduces the zero vector v of type Vector_d <Kernel> in $ d$ -dimensional space.
+constexpr const char* Vector_d_Base_vector = "construction tag.
+
+Returns: unspecified_type";
+constexpr const char* Vector_d_Vector_d = "introduces a variable v of type Vector_d <Kernel> .";
+constexpr const char* Vector_d_Vector_d_1 = "introduces the zero vector v of type Vector_d <Kernel> in $ d$ -dimensional space.
 
 For the creation flag CGAL::NULL_VECTOR can be used.
 
@@ -1760,7 +1760,7 @@ Parameters
 ----------
 d : int
  : Null_vector";
-constexpr const char* CGAL_Vector_d_Vector_d_2 = "introduces a variable v of type Vector_d <Kernel> in dimension d .
+constexpr const char* Vector_d_Vector_d_2 = "introduces a variable v of type Vector_d <Kernel> in dimension d .
 
 If size [first,last) == d this creates a vector with Cartesian coordinates set
 [first,last) . If size [first,last) == p+1 the range specifies the homogeneous
@@ -1774,7 +1774,7 @@ Parameters
 d : int
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Vector_d_Vector_d_3 = "introduces a variable v of type Vector_d <Kernel> in dimension d initialized to the vector with homogeneous coordinates as defined by H = set [first,last) and D : $ (\\pm H_0,
+constexpr const char* Vector_d_Vector_d_3 = "introduces a variable v of type Vector_d <Kernel> in dimension d initialized to the vector with homogeneous coordinates as defined by H = set [first,last) and D : $ (\\pm H_0,
 \\pm H_1, \\ldots, \\pm H_{D-1}, \\pm H_D)$ .
 
 The sign chosen is the sign of $ D$ . D is non-zero, the iterator range
@@ -1786,7 +1786,7 @@ d : int
 first : InputIterator
 last : InputIterator
 D : RT";
-constexpr const char* CGAL_Vector_d_Vector_d_4 = "returns a variable v of type Vector_d <Kernel> initialized to the $ i$ -th base vector of dimension $ d$ .
+constexpr const char* Vector_d_Vector_d_4 = "returns a variable v of type Vector_d <Kernel> initialized to the $ i$ -th base vector of dimension $ d$ .
 
 $ 0 \\leq i < d$ .
 
@@ -1795,7 +1795,7 @@ Parameters
 d : int
  : Base_vector
 i : int";
-constexpr const char* CGAL_Vector_d_Vector_d_5 = "introduces a variable v of type Vector_d <Kernel> in $ 2$ -dimensional space.
+constexpr const char* Vector_d_Vector_d_5 = "introduces a variable v of type Vector_d <Kernel> in $ 2$ -dimensional space.
 
 $ w \\neq0$ .
 
@@ -1804,7 +1804,7 @@ Parameters
 x : RT
 y : RT
 w : RT";
-constexpr const char* CGAL_Vector_d_Vector_d_6 = "introduces a variable v of type Vector_d <Kernel> in $ 3$ -dimensional space.
+constexpr const char* Vector_d_Vector_d_6 = "introduces a variable v of type Vector_d <Kernel> in $ 3$ -dimensional space.
 
 $ w \\neq0$ .
 
@@ -1814,10 +1814,10 @@ x : RT
 y : RT
 z : RT
 w : RT";
-constexpr const char* CGAL_Vector_d_dimension = "returns the dimension of v .
+constexpr const char* Vector_d_dimension = "returns the dimension of v .
 
 Returns: int";
-constexpr const char* CGAL_Vector_d_cartesian = "returns the $ i$ -th Cartesian coordinate of v .
+constexpr const char* Vector_d_cartesian = "returns the $ i$ -th Cartesian coordinate of v .
 
 $ 0 \\leq i < d$ .
 
@@ -1826,7 +1826,7 @@ Parameters
 i : int
 
 Returns: FT";
-constexpr const char* CGAL_Vector_d_operator = "returns the $ i$ -th Cartesian coordinate of v .
+constexpr const char* Vector_d_operator = "returns the $ i$ -th Cartesian coordinate of v .
 
 $ 0 \\leq i < d$ .
 
@@ -1835,7 +1835,7 @@ Parameters
 i : int
 
 Returns: FT";
-constexpr const char* CGAL_Vector_d_homogeneous = "returns the $ i$ -th homogeneous coordinate of v .
+constexpr const char* Vector_d_homogeneous = "returns the $ i$ -th homogeneous coordinate of v .
 
 $ 0 \\leq i \\leq d$ .
 
@@ -1844,115 +1844,115 @@ Parameters
 i : int
 
 Returns: RT";
-constexpr const char* CGAL_Vector_d_squared_length = "returns the square of the length of v .
+constexpr const char* Vector_d_squared_length = "returns the square of the length of v .
 
 Returns: FT";
-constexpr const char* CGAL_Vector_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate of v .
+constexpr const char* Vector_d_cartesian_begin = "returns an iterator pointing to the zeroth Cartesian coordinate of v .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Vector_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate of v .
+constexpr const char* Vector_d_cartesian_end = "returns an iterator pointing beyond the last Cartesian coordinate of v .
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Vector_d_homogeneous_begin = "returns an iterator pointing to the zeroth homogeneous coordinate of v .
+constexpr const char* Vector_d_homogeneous_begin = "returns an iterator pointing to the zeroth homogeneous coordinate of v .
 
 Returns: Homogeneous_const_iterator";
-constexpr const char* CGAL_Vector_d_homogeneous_end = "returns an iterator pointing beyond the last homogeneous coordinate of v .
+constexpr const char* Vector_d_homogeneous_end = "returns an iterator pointing beyond the last homogeneous coordinate of v .
 
 Returns: Homogeneous_const_iterator";
-constexpr const char* CGAL_Vector_d_direction = "returns the direction of v .
+constexpr const char* Vector_d_direction = "returns the direction of v .
 
 Returns: Direction_d < Kernel >";
-constexpr const char* CGAL_Vector_d_transform = "returns $ t(v)$ .
+constexpr const char* Vector_d_transform = "returns $ t(v)$ .
 
 Parameters
 ----------
 t : const Aff_transformation_d < Kernel > &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_operator_1 = "multiplies all Cartesian coordinates by n .
+constexpr const char* Vector_d_operator_1 = "multiplies all Cartesian coordinates by n .
 
 Parameters
 ----------
 n : const RT &
 
 Returns: Vector_d < Kernel > &";
-constexpr const char* CGAL_Vector_d_operator_2 = "multiplies all Cartesian coordinates by r .
+constexpr const char* Vector_d_operator_2 = "multiplies all Cartesian coordinates by r .
 
 Parameters
 ----------
 r : const FT &
 
 Returns: Vector_d < Kernel > &";
-constexpr const char* CGAL_Vector_d_operator_3 = "returns the vector with Cartesian coordinates $ v_i/n, 0 \\leq i < d$ .
+constexpr const char* Vector_d_operator_3 = "returns the vector with Cartesian coordinates $ v_i/n, 0 \\leq i < d$ .
 
 Parameters
 ----------
 n : const RT &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_operator_4 = "returns the vector with Cartesian coordinates $ v_i/r, 0 \\leq i < d$ .
+constexpr const char* Vector_d_operator_4 = "returns the vector with Cartesian coordinates $ v_i/r, 0 \\leq i < d$ .
 
 Parameters
 ----------
 r : const FT &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_operator_5 = "divides all Cartesian coordinates by n .
+constexpr const char* Vector_d_operator_5 = "divides all Cartesian coordinates by n .
 
 Parameters
 ----------
 n : const RT &
 
 Returns: Vector_d < Kernel > &";
-constexpr const char* CGAL_Vector_d_operator_6 = "divides all Cartesian coordinates by r .
+constexpr const char* Vector_d_operator_6 = "divides all Cartesian coordinates by r .
 
 Parameters
 ----------
 r : const FT &
 
 Returns: Vector_d < Kernel > &";
-constexpr const char* CGAL_Vector_d_operator_7 = "inner product, i.e., $ \\sum_{ 0 \\le i < d } v_i w_i$ , where $ v_i$ and $ w_i$ are the Cartesian coordinates of $ v$ and $ w$ respectively.
+constexpr const char* Vector_d_operator_7 = "inner product, i.e., $ \\sum_{ 0 \\le i < d } v_i w_i$ , where $ v_i$ and $ w_i$ are the Cartesian coordinates of $ v$ and $ w$ respectively.
 
 Parameters
 ----------
 w : const Vector_d < Kernel > &
 
 Returns: FT";
-constexpr const char* CGAL_Vector_d_operator_8 = "returns the vector with Cartesian coordinates $ v_i+w_i, 0 \\leq i < d$ .
+constexpr const char* Vector_d_operator_8 = "returns the vector with Cartesian coordinates $ v_i+w_i, 0 \\leq i < d$ .
 
 Parameters
 ----------
 w : const Vector_d < Kernel > &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_operator_9 = "addition plus assignment.
+constexpr const char* Vector_d_operator_9 = "addition plus assignment.
 
 Parameters
 ----------
 w : const Vector_d < Kernel > &
 
 Returns: Vector_d < Kernel > &";
-constexpr const char* CGAL_Vector_d_operator_10 = "returns the vector with Cartesian coordinates $ v_i-w_i, 0 \\leq i < d$ .
+constexpr const char* Vector_d_operator_10 = "returns the vector with Cartesian coordinates $ v_i-w_i, 0 \\leq i < d$ .
 
 Parameters
 ----------
 w : const Vector_d < Kernel > &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_operator_11 = "subtraction plus assignment.
+constexpr const char* Vector_d_operator_11 = "subtraction plus assignment.
 
 Parameters
 ----------
 w : const Vector_d < Kernel > &
 
 Returns: Vector_d < Kernel > &";
-constexpr const char* CGAL_Vector_d_operator_12 = "returns the vector in opposite direction.
+constexpr const char* Vector_d_operator_12 = "returns the vector in opposite direction.
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_is_zero = "returns true if v is the zero vector.
+constexpr const char* Vector_d_is_zero = "returns true if v is the zero vector.
 
 Returns: bool";
-constexpr const char* CGAL_Vector_d_operator_13 = "returns the vector with Cartesian coordinates $ n v_i$ .
+constexpr const char* Vector_d_operator_13 = "returns the vector with Cartesian coordinates $ n v_i$ .
 
 Parameters
 ----------
@@ -1960,7 +1960,7 @@ n : const RT &
 v : const Vector_d < Kernel > &
 
 Returns: Vector_d < Kernel >";
-constexpr const char* CGAL_Vector_d_operator_14 = "returns the vector with Cartesian coordinates $ r v_i, 0 \\leq i <
+constexpr const char* Vector_d_operator_14 = "returns the vector with Cartesian coordinates $ r v_i, 0 \\leq i <
 d$ .
 
 Parameters
@@ -3118,7 +3118,7 @@ r : const NT &
 
 Returns: Vector";
 
-constexpr const char* CGAL_Bbox_d_do_overlap_1 = "returns true , iff bb1 and bb2 overlap, i.e., iff their intersection is non-empty.
+constexpr const char* Bbox_d_do_overlap_1 = "returns true , iff bb1 and bb2 overlap, i.e., iff their intersection is non-empty.
 
 Parameters
 ----------
@@ -3126,7 +3126,7 @@ bb1 : const Bbox_d < DimensionTag > &
 bb2 : const Bbox_d < DimensionTag > &
 
 Returns: bool";
-constexpr const char* CGAL_Hyperplane_d_weak_equality_1 = "test for weak equality.
+constexpr const char* Hyperplane_d_weak_equality_1 = "test for weak equality.
 
 h1.dimension() == h2.dimension() .
 
@@ -3136,7 +3136,7 @@ h1 : const Hyperplane_d < Kernel > &
 h2 : const Hyperplane_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_d_weak_equality_1 = "Test for equality as unoriented lines.
+constexpr const char* Line_d_weak_equality_1 = "Test for equality as unoriented lines.
 
 l1.dimension()==l2.dimension() .
 
@@ -3146,7 +3146,7 @@ l1 : const Line_d < Kernel > &
 l2 : const Line_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_d_parallel_1 = "returns true if l1 and l2 are parallel as unoriented lines and false otherwise.
+constexpr const char* Line_d_parallel_1 = "returns true if l1 and l2 are parallel as unoriented lines and false otherwise.
 
 l1.dimension()==l2.dimension() .
 
@@ -3156,7 +3156,7 @@ l1 : const Line_d < Kernel > &
 l2 : const Line_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Ray_d_parallel_1 = "returns true if the unoriented supporting lines of r1 and r2 are parallel and false otherwise.
+constexpr const char* Ray_d_parallel_1 = "returns true if the unoriented supporting lines of r1 and r2 are parallel and false otherwise.
 
 r1.dimension()==r2.dimension() .
 
@@ -3166,7 +3166,7 @@ r1 : const Ray_d < Kernel > &
 r2 : const Ray_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_weak_equality_1 = "Test for equality as unoriented segments.
+constexpr const char* Segment_d_weak_equality_1 = "Test for equality as unoriented segments.
 
 s1.dimension()==s2.dimension() .
 
@@ -3176,7 +3176,7 @@ s1 : const Segment_d < Kernel > &
 s2 : const Segment_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_parallel_1 = "return true if one of the segments is degenerate or if the unoriented supporting lines are parallel.
+constexpr const char* Segment_d_parallel_1 = "return true if one of the segments is degenerate or if the unoriented supporting lines are parallel.
 
 s1.dimension()==s2.dimension() .
 
@@ -3186,7 +3186,7 @@ s1 : const Segment_d < Kernel > &
 s2 : const Segment_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Segment_d_common_endpoint_1 = "if s1 and s2 touch in a common end point, this point is assigned to common and the result is true , otherwise the result is false .
+constexpr const char* Segment_d_common_endpoint_1 = "if s1 and s2 touch in a common end point, this point is assigned to common and the result is true , otherwise the result is false .
 
 If s1==s2 then one of the endpoints is returned.
 s1.dimension()==s2.dimension() .
@@ -3198,7 +3198,7 @@ s2 : const Segment_d < Kernel > &
 common : Point_d < Kernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Sphere_d_weak_equality_1 = "Test for equality as unoriented spheres.
+constexpr const char* Sphere_d_weak_equality_1 = "Test for equality as unoriented spheres.
 
 S1.dimension()==S2.dimension() .
 

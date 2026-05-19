@@ -116,68 +116,68 @@ Point_3 p) which returns true iff p lies on the bounded side of s .
 
 Returns: unspecified_type";
 
-constexpr const char* CGAL_Compact_mesh_cell_3_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Compact_mesh_cell_3_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
-constexpr const char* CGAL_Compact_mesh_cell_3_surface_index_table = "Stores surface_index for each facet of the cell.
+constexpr const char* Compact_mesh_cell_3_surface_index_table = "Stores surface_index for each facet of the cell.
 
 Returns: std::array< Surface_patch_index, 4 >";
-constexpr const char* CGAL_Compact_mesh_cell_3_surface_center_table = "Stores surface center of each facet of the cell.
+constexpr const char* Compact_mesh_cell_3_surface_center_table = "Stores surface center of each facet of the cell.
 
 Returns: std::array< Point_3, 4 >";
-constexpr const char* CGAL_Compact_mesh_cell_3_N = "Stores surface center index of each facet of the cell.
+constexpr const char* Compact_mesh_cell_3_N = "Stores surface center index of each facet of the cell.
 
 Returns: std::array< Cell_handle, 4 >";
-constexpr const char* CGAL_Compact_mesh_cell_3_sliver_value = "Stores visited facets (4 first bits).
+constexpr const char* Compact_mesh_cell_3_sliver_value = "Stores visited facets (4 first bits).
 
 Returns: double";
-constexpr const char* CGAL_Compact_mesh_cell_3_set_surface_patch_index = "Set surface index of facet to index .
+constexpr const char* Compact_mesh_cell_3_set_surface_patch_index = "Set surface index of facet to index .
 
 Parameters
 ----------
 facet : const int
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Compact_mesh_cell_3_surface_patch_index = "Returns surface index of facet facet .
+constexpr const char* Compact_mesh_cell_3_surface_patch_index = "Returns surface index of facet facet .
 
 Parameters
 ----------
 facet : const int
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Compact_mesh_cell_3_set_facet_surface_center = "Sets surface center of facet to point .
+constexpr const char* Compact_mesh_cell_3_set_facet_surface_center = "Sets surface center of facet to point .
 
 Parameters
 ----------
 facet : const int
 point : const Point_3 &";
-constexpr const char* CGAL_Compact_mesh_cell_3_get_facet_surface_center = "Returns surface center of facet .
+constexpr const char* Compact_mesh_cell_3_get_facet_surface_center = "Returns surface center of facet .
 
 Parameters
 ----------
 facet : const int
 
 Returns: Point_3";
-constexpr const char* CGAL_Compact_mesh_cell_3_set_facet_surface_center_index = "Sets surface center index of facet to index .
+constexpr const char* Compact_mesh_cell_3_set_facet_surface_center_index = "Sets surface center index of facet to index .
 
 Parameters
 ----------
 facet : const int
 index : const Index &";
-constexpr const char* CGAL_Compact_mesh_cell_3_get_facet_surface_center_index = "Returns surface center of facet .
+constexpr const char* Compact_mesh_cell_3_get_facet_surface_center_index = "Returns surface center of facet .
 
 Parameters
 ----------
 facet : const int
 
 Returns: Index";
-constexpr const char* CGAL_Compact_mesh_cell_3_is_facet_on_surface = "Returns true if facet lies on a surface patch.
+constexpr const char* Compact_mesh_cell_3_is_facet_on_surface = "Returns true if facet lies on a surface patch.
 
 Parameters
 ----------
 facet : const int
 
 Returns: bool";
-constexpr const char* CGAL_Compact_mesh_cell_3_surface_index = "Returns surface index of facet facet .
+constexpr const char* Compact_mesh_cell_3_surface_index = "Returns surface index of facet facet .
 
 Parameters
 ----------
@@ -186,28 +186,28 @@ facet : const int
 Returns: Surface_index";
 
 // CGAL::Compact_mesh_cell_base_3
-constexpr const char* CGAL_Compact_mesh_cell_base_3__class__ = "The class Compact_mesh_cell_base_3 <GT, MD> is a model of the concept MeshCellBase_3 .";
+constexpr const char* Compact_mesh_cell_base_3__class__ = "The class Compact_mesh_cell_base_3 <GT, MD> is a model of the concept MeshCellBase_3 .";
 
 
 
-constexpr const char* CGAL_Compact_mesh_cell_base_3_base_set_facet_visited = "Marks facet as visited.
-
-Parameters
-----------
-facet : const int";
-constexpr const char* CGAL_Compact_mesh_cell_base_3_base_reset_visited = "Marks facet as not visited.
+constexpr const char* Compact_mesh_cell_base_3_base_set_facet_visited = "Marks facet as visited.
 
 Parameters
 ----------
 facet : const int";
-constexpr const char* CGAL_Compact_mesh_cell_base_3_base_is_facet_visited = "Returns true if facet is marked as visited.
+constexpr const char* Compact_mesh_cell_base_3_base_reset_visited = "Marks facet as not visited.
+
+Parameters
+----------
+facet : const int";
+constexpr const char* Compact_mesh_cell_base_3_base_is_facet_visited = "Returns true if facet is marked as visited.
 
 Parameters
 ----------
 facet : const int
 
 Returns: bool";
-constexpr const char* CGAL_Compact_mesh_cell_base_3_base_try_to_set_circumcenter = "Precondition weighted_circumcenter_ == nullptr.
+constexpr const char* Compact_mesh_cell_base_3_base_try_to_set_circumcenter = "Precondition weighted_circumcenter_ == nullptr.
 
 Parameters
 ----------
@@ -216,9 +216,9 @@ cc : Point_3 *";
 
 
 // CGAL::Construct_initial_points_gray_image
-constexpr const char* CGAL_Construct_initial_points_gray_image__class__ = "Functor for generating initial points in gray images.";
+constexpr const char* Construct_initial_points_gray_image__class__ = "Functor for generating initial points in gray images.";
 
-constexpr const char* CGAL_Construct_initial_points_gray_image_Construct_initial_points_gray_image = "Constructs a functor for generating initial points in gray images.
+constexpr const char* Construct_initial_points_gray_image_Construct_initial_points_gray_image = "Constructs a functor for generating initial points in gray images.
 
 image the gray image that defines the mesh domain domain the mesh domain
 iso_value the iso value corresponding to the surface of the domain
@@ -233,7 +233,7 @@ image : const CGAL::Image_3 &
 domain : const MeshDomain &
 iso_value : const double
 image_values_to_subdomain_indices : const Functor";
-constexpr const char* CGAL_Construct_initial_points_gray_image_operator = "constructs at least n points by collecting them on the surface of all subdomains in the image, even if they are not connected components.
+constexpr const char* Construct_initial_points_gray_image_operator = "constructs at least n points by collecting them on the surface of all subdomains in the image, even if they are not connected components.
 
 Using this functor guarantees to initialize each connected component.
 OutputIterator model of OutputIterator for tuple-like objects containing a
@@ -250,9 +250,9 @@ n : const int
 Returns: OutputIterator";
 
 // CGAL::Construct_initial_points_labeled_image
-constexpr const char* CGAL_Construct_initial_points_labeled_image__class__ = "Functor for generating initial points in labeled images.";
+constexpr const char* Construct_initial_points_labeled_image__class__ = "Functor for generating initial points in labeled images.";
 
-constexpr const char* CGAL_Construct_initial_points_labeled_image_Construct_initial_points_labeled_image = "Constructs a functor for generating initial points in labeled images.
+constexpr const char* Construct_initial_points_labeled_image_Construct_initial_points_labeled_image = "Constructs a functor for generating initial points in labeled images.
 
 image the labeled image that defines the mesh domain domain the mesh domain np
 an optional sequence of Named Parameters among the ones listed below: Optional
@@ -265,7 +265,7 @@ Parameters
 image : const CGAL::Image_3 &
 domain : const MeshDomain &
 np : NamedParameters";
-constexpr const char* CGAL_Construct_initial_points_labeled_image_operator = "constructs at least n initial points.
+constexpr const char* Construct_initial_points_labeled_image_operator = "constructs at least n initial points.
 
 OutputIterator model of OutputIterator for tuple-like objects containing a
 Weighted_point_3 for the point an int for the minimal dimension of the
@@ -281,10 +281,10 @@ n : const int
 Returns: OutputIterator";
 
 // CGAL::Image_3
-constexpr const char* CGAL_Image_3__class__ = "The class Image_3 holds a shared pointer to a 3D image buffer.";
+constexpr const char* Image_3__class__ = "The class Image_3 holds a shared pointer to a 3D image buffer.";
 
-constexpr const char* CGAL_Image_3_Image_3 = "The default-constructor. The object is invalid until a call to read() .";
-constexpr const char* CGAL_Image_3_read = "Open a 3D image file.
+constexpr const char* Image_3_Image_3 = "The default-constructor. The object is invalid until a call to read() .";
+constexpr const char* Image_3_read = "Open a 3D image file.
 
 Returns true if the file was successfully loaded.
 
@@ -295,9 +295,9 @@ file : const char *
 Returns: bool";
 
 // CGAL::Implicit_multi_domain_to_labeling_function_wrapper
-constexpr const char* CGAL_Implicit_multi_domain_to_labeling_function_wrapper__class__ = "The class Implicit_multi_domain_to_labeling_function_wrapper is a helper class to get a function with integer values labeling the components of a multidomain.";
+constexpr const char* Implicit_multi_domain_to_labeling_function_wrapper__class__ = "The class Implicit_multi_domain_to_labeling_function_wrapper is a helper class to get a function with integer values labeling the components of a multidomain.";
 
-constexpr const char* CGAL_Implicit_multi_domain_to_labeling_function_wrapper_Implicit_multi_domain_to_labeling_function_wrapper = "Construction from a vector of implicit functions and a vector of vector of signs.
+constexpr const char* Implicit_multi_domain_to_labeling_function_wrapper_Implicit_multi_domain_to_labeling_function_wrapper = "Construction from a vector of implicit functions and a vector of vector of signs.
 
 implicit_functions the vector of implicit functions. position_vectors the
 vector of vector of signs. Each vector of positions describes a component.
@@ -307,7 +307,7 @@ Parameters
 ----------
 implicit_functions : const Function_vector &
 position_vectors : const std::vector< std::vector< Sign > > &";
-constexpr const char* CGAL_Implicit_multi_domain_to_labeling_function_wrapper_Implicit_multi_domain_to_labeling_function_wrapper_1 = "Construction from a vector of implicit functions.
+constexpr const char* Implicit_multi_domain_to_labeling_function_wrapper_Implicit_multi_domain_to_labeling_function_wrapper_1 = "Construction from a vector of implicit functions.
 
 implicit_functions the vector of implicit functions. Position vectors are
 built automatically so that the union of components equals the union of the
@@ -316,7 +316,7 @@ functions.
 Parameters
 ----------
 implicit_functions : const Function_vector &";
-constexpr const char* CGAL_Implicit_multi_domain_to_labeling_function_wrapper_Implicit_multi_domain_to_labeling_function_wrapper_2 = "Construction from a vector of implicit functions and a vector of strings.
+constexpr const char* Implicit_multi_domain_to_labeling_function_wrapper_Implicit_multi_domain_to_labeling_function_wrapper_2 = "Construction from a vector of implicit functions and a vector of strings.
 
 implicit_functions the vector of implicit functions. position_strings the
 vector of strings. The strings contained in this vector must contain '+' or
@@ -330,17 +330,17 @@ position_strings : const std::vector< std::string > &";
 
 
 // CGAL::Implicit_to_labeling_function_wrapper
-constexpr const char* CGAL_Implicit_to_labeling_function_wrapper__class__ = "This class is designed to wrap an implicit function which describes a domain by [p is inside if f(p)<0] to a function which takes its values into {0,1}.";
+constexpr const char* Implicit_to_labeling_function_wrapper__class__ = "This class is designed to wrap an implicit function which describes a domain by [p is inside if f(p)<0] to a function which takes its values into {0,1}.";
 
-constexpr const char* CGAL_Implicit_to_labeling_function_wrapper_f = "Function to wrap.
+constexpr const char* Implicit_to_labeling_function_wrapper_f = "Function to wrap.
 
 Returns: Stored_function";
-constexpr const char* CGAL_Implicit_to_labeling_function_wrapper_Implicit_to_labeling_function_wrapper = "Constructor.
+constexpr const char* Implicit_to_labeling_function_wrapper_Implicit_to_labeling_function_wrapper = "Constructor.
 
 Parameters
 ----------
 f : Function_";
-constexpr const char* CGAL_Implicit_to_labeling_function_wrapper_operator = "Operator ().
+constexpr const char* Implicit_to_labeling_function_wrapper_operator = "Operator ().
 
 Parameters
 ----------
@@ -349,12 +349,12 @@ p : const Point_3 &
 Returns: return_type";
 
 // CGAL::Labeled_mesh_domain_3
-constexpr const char* CGAL_Labeled_mesh_domain_3__class__ = "The class Labeled_mesh_domain_3 implements indexed domains.";
+constexpr const char* Labeled_mesh_domain_3__class__ = "The class Labeled_mesh_domain_3 implements indexed domains.";
 
-constexpr const char* CGAL_Labeled_mesh_domain_3_Subdomain_index = "The subdomain index of this model of MeshDomain_3 .
+constexpr const char* Labeled_mesh_domain_3_Subdomain_index = "The subdomain index of this model of MeshDomain_3 .
 
 Returns: Subdomain_index_";
-constexpr const char* CGAL_Labeled_mesh_domain_3_Labeling_function = "The type of object that stores the function using type-erasure.
+constexpr const char* Labeled_mesh_domain_3_Labeling_function = "The type of object that stores the function using type-erasure.
 
 A labeling function f must return 0 if the point is not located in any
 subdomain. The return type of labeling functions is an integer. Let p be a
@@ -365,19 +365,19 @@ function, a function object, a lambda expression... that takes a Point_3 as
 argument, and returns a type convertible to Subdomain_index .
 
 Returns: std::function< Subdomain_index (const Point_3 &)>";
-constexpr const char* CGAL_Labeled_mesh_domain_3_Point_3 = "The point type of the geometric traits class.
+constexpr const char* Labeled_mesh_domain_3_Point_3 = "The point type of the geometric traits class.
 
 Returns: BGT::Point_3";
-constexpr const char* CGAL_Labeled_mesh_domain_3_Sphere_3 = "The sphere type of the geometric traits class.
+constexpr const char* Labeled_mesh_domain_3_Sphere_3 = "The sphere type of the geometric traits class.
 
 Returns: BGT::Sphere_3";
-constexpr const char* CGAL_Labeled_mesh_domain_3_Iso_cuboid_3 = "The iso-cuboid type of the geometric traits class.
+constexpr const char* Labeled_mesh_domain_3_Iso_cuboid_3 = "The iso-cuboid type of the geometric traits class.
 
 Returns: BGT::Iso_cuboid_3";
-constexpr const char* CGAL_Labeled_mesh_domain_3_FT = "The number type (a field type) of the geometric traits class.
+constexpr const char* Labeled_mesh_domain_3_FT = "The number type (a field type) of the geometric traits class.
 
 Returns: BGT::FT";
-constexpr const char* CGAL_Labeled_mesh_domain_3_Labeled_mesh_domain_3 = "Construction from a function, a bounding object and a relative error bound.
+constexpr const char* Labeled_mesh_domain_3_Labeled_mesh_domain_3 = "Construction from a function, a bounding object and a relative error bound.
 
 Function a type compatible with Labeling_function . The class
 CGAL::Implicit_multi_domain_to_labeling_function_wrapper is a good candidate
@@ -401,7 +401,7 @@ Parameters
 function : const Function &
 bounding_object : const Bounding_object &
 np : const NamedParameters &";
-constexpr const char* CGAL_Labeled_mesh_domain_3_create_gray_image_mesh_domain = "Construction from a 3D gray image.
+constexpr const char* Labeled_mesh_domain_3_create_gray_image_mesh_domain = "Construction from a 3D gray image.
 
 This static method is a named constructor . It constructs a domain described
 by a 3D gray image. A 3D gray image is a grid of voxels, where each voxel is
@@ -440,7 +440,7 @@ image_ : const CGAL::Image_3 &
 np : const NamedParameters &
 
 Returns: Labeled_mesh_domain_3";
-constexpr const char* CGAL_Labeled_mesh_domain_3_create_labeled_image_mesh_domain = "Construction from a 3D labeled image.
+constexpr const char* Labeled_mesh_domain_3_create_labeled_image_mesh_domain = "Construction from a 3D labeled image.
 
 This static method is a named constructor . It constructs a domain described
 by a 3D labeled image. A 3D labeled image is a grid of voxels, where each
@@ -513,7 +513,7 @@ image_ : const CGAL::Image_3 &
 np : const NamedParameters &
 
 Returns: auto";
-constexpr const char* CGAL_Labeled_mesh_domain_3_create_implicit_mesh_domain = "Construction from an implicit function.
+constexpr const char* Labeled_mesh_domain_3_create_implicit_mesh_domain = "Construction from an implicit function.
 
 This static method is a named constructor . It constructs a domain whose
 bounding surface is described implicitly as the zero level set of a function.
@@ -549,9 +549,9 @@ Returns: Labeled_mesh_domain_3";
 
 
 // CGAL::Mesh_3::Detect_features_in_image
-constexpr const char* CGAL_Mesh_3_Detect_features_in_image__class__ = "Functor for feature detection in labeled images.";
+constexpr const char* Mesh_3_Detect_features_in_image__class__ = "Functor for feature detection in labeled images.";
 
-constexpr const char* CGAL_Mesh_3_Detect_features_in_image_operator = "detects and constructs the polylines that lie at the intersection of three or more subdomains.
+constexpr const char* Mesh_3_Detect_features_in_image_operator = "detects and constructs the polylines that lie at the intersection of three or more subdomains.
 
 Each subdomain inside the bounding box of the input labeled image is defined
 as the set of voxels with the same value. The outside of the bounding box of
@@ -567,7 +567,7 @@ Parameters
 image : const CGAL::Image_3 &
 
 Returns: std::vector< std::vector< Point > >";
-constexpr const char* CGAL_Mesh_3_Detect_features_in_image_operator_1 = "Similar to the above function, but modifies weights to set the voxels that are part of a polyline feature to 0.
+constexpr const char* Mesh_3_Detect_features_in_image_operator_1 = "Similar to the above function, but modifies weights to set the voxels that are part of a polyline feature to 0.
 
 Parameters
 ----------
@@ -577,9 +577,9 @@ weights : CGAL::Image_3 &
 Returns: std::vector< std::vector< Point > >";
 
 // CGAL::Mesh_3::Detect_features_on_image_bbox
-constexpr const char* CGAL_Mesh_3_Detect_features_on_image_bbox__class__ = "Functor for feature detection in labeled images.";
+constexpr const char* Mesh_3_Detect_features_on_image_bbox__class__ = "Functor for feature detection in labeled images.";
 
-constexpr const char* CGAL_Mesh_3_Detect_features_on_image_bbox_operator = "detects and constructs the polylines that lie at the intersection of two or more subdomains and the bounding box of the input labeled image.
+constexpr const char* Mesh_3_Detect_features_on_image_bbox_operator = "detects and constructs the polylines that lie at the intersection of two or more subdomains and the bounding box of the input labeled image.
 
 Each subdomain inside the bounding box of the input labeled image is defined
 as the set of voxels with the same value. The outside of the bounding box of
@@ -596,7 +596,7 @@ Parameters
 image : const CGAL::Image_3 &
 
 Returns: std::vector< std::vector< Point > >";
-constexpr const char* CGAL_Mesh_3_Detect_features_on_image_bbox_operator_1 = "Similar to the above function, but modifies weights to set the voxels that are part of a polyline feature to 0.
+constexpr const char* Mesh_3_Detect_features_on_image_bbox_operator_1 = "Similar to the above function, but modifies weights to set the voxels that are part of a polyline feature to 0.
 
 Parameters
 ----------
@@ -605,18 +605,18 @@ weights : CGAL::Image_3 &
 
 Returns: std::vector< std::vector< Point > >";
 
-constexpr const char* CGAL_Mesh_3_Mesh_polyhedron_face_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Mesh_3_Mesh_polyhedron_face_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
 
-constexpr const char* CGAL_Mesh_3_Mesh_polyhedron_halfedge_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Mesh_3_Mesh_polyhedron_halfedge_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
 
 
 
 
-constexpr const char* CGAL_Mesh_3_Mesh_polyhedron_vertex_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Mesh_3_Mesh_polyhedron_vertex_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
 
@@ -624,12 +624,12 @@ Returns: Tag_true";
 
 
 // CGAL::Mesh_cell_criteria_3
-constexpr const char* CGAL_Mesh_cell_criteria_3__class__ = "The class Mesh_cell_criteria_3 is a model of MeshCellCriteria_3 .";
+constexpr const char* Mesh_cell_criteria_3__class__ = "The class Mesh_cell_criteria_3 is a model of MeshCellCriteria_3 .";
 
-constexpr const char* CGAL_Mesh_cell_criteria_3_FT = "Numerical type.
+constexpr const char* Mesh_cell_criteria_3_FT = "Numerical type.
 
 Returns: Tr::Geom_traits::FT";
-constexpr const char* CGAL_Mesh_cell_criteria_3_Mesh_cell_criteria_3 = "Returns an object to serve as default criteria for cells.
+constexpr const char* Mesh_cell_criteria_3_Mesh_cell_criteria_3 = "Returns an object to serve as default criteria for cells.
 
 radius_edge_bound is the upper bound for the radius-edge ratio of the
 tetrahedra. radius_bound is a uniform upper bound for the circumradii of the
@@ -644,7 +644,7 @@ Parameters
 radius_edge_bound : const FT &
 radius_bound : const FT &
 min_radius_bound : const FT &";
-constexpr const char* CGAL_Mesh_cell_criteria_3_Mesh_cell_criteria_3_1 = "Returns an object to serve as default criteria for facets.
+constexpr const char* Mesh_cell_criteria_3_Mesh_cell_criteria_3_1 = "Returns an object to serve as default criteria for facets.
 
 SizingField must be a model of the concept MeshDomainField_3 . The behavior
 and semantic of the arguments are the same as above, except that the radius
@@ -655,7 +655,7 @@ Parameters
 radius_edge_bound : const FT &
 radius_bound : const Sizing_field &
 min_radius_bound : const FT &";
-constexpr const char* CGAL_Mesh_cell_criteria_3_operator = "returns whether the cell cell is bad or not.
+constexpr const char* Mesh_cell_criteria_3_operator = "returns whether the cell cell is bad or not.
 
 tr the triangulation within which cell lives cell the cell
 
@@ -667,23 +667,23 @@ cell : const Cell_handle &
 Returns: Is_cell_bad";
 
 // CGAL::Mesh_constant_domain_field_3
-constexpr const char* CGAL_Mesh_constant_domain_field_3__class__ = "The class Mesh_constant_domain_field_3 is a model of concept MeshDomainField_3 .";
+constexpr const char* Mesh_constant_domain_field_3__class__ = "The class Mesh_constant_domain_field_3 is a model of concept MeshDomainField_3 .";
 
-constexpr const char* CGAL_Mesh_constant_domain_field_3_FT = "Numerical type.
+constexpr const char* Mesh_constant_domain_field_3_FT = "Numerical type.
 
 Returns: GT::FT";
-constexpr const char* CGAL_Mesh_constant_domain_field_3_Point_3 = "Point type.
+constexpr const char* Mesh_constant_domain_field_3_Point_3 = "Point type.
 
 Returns: GT::Point_3";
-constexpr const char* CGAL_Mesh_constant_domain_field_3_Index = "Type of index of the vertices of the triangulation.
+constexpr const char* Mesh_constant_domain_field_3_Index = "Type of index of the vertices of the triangulation.
 
 Returns: Index_";
-constexpr const char* CGAL_Mesh_constant_domain_field_3_Mesh_constant_domain_field_3 = "Builds a constant domain field with size size .
+constexpr const char* Mesh_constant_domain_field_3_Mesh_constant_domain_field_3 = "Builds a constant domain field with size size .
 
 Parameters
 ----------
 size : const FT &";
-constexpr const char* CGAL_Mesh_constant_domain_field_3_operator = "Returns the size of query points of dimension dim and index index .
+constexpr const char* Mesh_constant_domain_field_3_operator = "Returns the size of query points of dimension dim and index index .
 
 Parameters
 ----------
@@ -692,7 +692,7 @@ dim : const int
 index : const Index &
 
 Returns: FT";
-constexpr const char* CGAL_Mesh_constant_domain_field_3_set_size = "Sets the size such that operator() for any query point of dimension dim and index index returns size .
+constexpr const char* Mesh_constant_domain_field_3_set_size = "Sets the size such that operator() for any query point of dimension dim and index index returns size .
 
 Parameters
 ----------
@@ -701,31 +701,31 @@ dim : const int
 index : const Index &";
 
 // CGAL::Mesh_criteria_3
-constexpr const char* CGAL_Mesh_criteria_3__class__ = "The class gathers the refinement criteria for mesh tetrahedra and surface facets where surface facets are facets in the mesh approximating the domain surface patches.";
+constexpr const char* Mesh_criteria_3__class__ = "The class gathers the refinement criteria for mesh tetrahedra and surface facets where surface facets are facets in the mesh approximating the domain surface patches.";
 
-constexpr const char* CGAL_Mesh_criteria_3_Edge_criteria = "The criteria for edges.
+constexpr const char* Mesh_criteria_3_Edge_criteria = "The criteria for edges.
 
 Returns: Mesh_edge_criteria_3 < Tr >";
-constexpr const char* CGAL_Mesh_criteria_3_Facet_criteria = "The criteria for facets.
+constexpr const char* Mesh_criteria_3_Facet_criteria = "The criteria for facets.
 
 Returns: Mesh_facet_criteria_3 < Tr >";
-constexpr const char* CGAL_Mesh_criteria_3_Cell_criteria = "The criteria for cells.
+constexpr const char* Mesh_criteria_3_Cell_criteria = "The criteria for cells.
 
 Returns: Mesh_cell_criteria_3 < Tr >";
-constexpr const char* CGAL_Mesh_criteria_3_Mesh_criteria_3 = "Construction from facet and cell criteria, the edge criteria are ignored in this case.
+constexpr const char* Mesh_criteria_3_Mesh_criteria_3 = "Construction from facet and cell criteria, the edge criteria are ignored in this case.
 
 Parameters
 ----------
 facet_criteria : Facet_criteria
 cell_criteria : Cell_criteria";
-constexpr const char* CGAL_Mesh_criteria_3_Mesh_criteria_3_1 = "Constructor from edge, face, and cell criteria.
+constexpr const char* Mesh_criteria_3_Mesh_criteria_3_1 = "Constructor from edge, face, and cell criteria.
 
 Parameters
 ----------
 edge_criteria : Edge_criteria
 facet_criteria : Facet_criteria
 cell_criteria : Cell_criteria";
-constexpr const char* CGAL_Mesh_criteria_3_Mesh_criteria_3_2 = "Construction from criteria parameters.
+constexpr const char* Mesh_criteria_3_Mesh_criteria_3_2 = "Construction from criteria parameters.
 
 Note that each size or distance parameter can be specified using two ways:
 either as a scalar field or as a numerical value when the field is uniform. If
@@ -780,9 +780,9 @@ Parameters
 np : const NamedParameters &";
 
 // CGAL::Mesh_domain_with_polyline_features_3
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3__class__ = "The class Mesh_domain_with_polyline_features_3 enables the user to add some 0- and 1-dimensional features into any model of the MeshDomain_3 concept.";
+constexpr const char* Mesh_domain_with_polyline_features_3__class__ = "The class Mesh_domain_with_polyline_features_3 enables the user to add some 0- and 1-dimensional features into any model of the MeshDomain_3 concept.";
 
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_add_features = "adds 1-dimensional features in the domain.
+constexpr const char* Mesh_domain_with_polyline_features_3_add_features = "adds 1-dimensional features in the domain.
 
 The value type of InputIterator must be a model of the concept MeshPolyline_3
 .
@@ -791,7 +791,7 @@ Parameters
 ----------
 first : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_add_features_and_incidences = "adds 1-dimensional features (curves) from the range [first, end) in the domain with their incidences with 2-dimensional features (patches) of the domain.
+constexpr const char* Mesh_domain_with_polyline_features_3_add_features_and_incidences = "adds 1-dimensional features (curves) from the range [first, end) in the domain with their incidences with 2-dimensional features (patches) of the domain.
 
 InputIterator input iterator over curves PolylinePMap is a model of
 ReadablePropertyMap with key type
@@ -812,7 +812,7 @@ first : InputIterator
 end : InputIterator
 polyline_pmap : PolylinePMap
 incident_patches_indices_pmap : IncidentPatchesIndicesPMap";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_get_corners = "implements MeshDomainWithFeatures_3::get_corners() .
+constexpr const char* Mesh_domain_with_polyline_features_3_get_corners = "implements MeshDomainWithFeatures_3::get_corners() .
 
 OutputIterator is std::pair<Corner_index, Point_3>
 
@@ -821,7 +821,7 @@ Parameters
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_get_curves = "implements MeshDomainWithFeatures_3::get_curves() .
+constexpr const char* Mesh_domain_with_polyline_features_3_get_curves = "implements MeshDomainWithFeatures_3::get_curves() .
 
 OutputIterator value type is std::tuple<Curve_index, std::pair<Point_3,Index>,
 std::pair<Point_3,Index> >
@@ -831,7 +831,7 @@ Parameters
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_curve_segment_length = "implements MeshDomainWithFeatures_3::curve_segment_length() .
+constexpr const char* Mesh_domain_with_polyline_features_3_curve_segment_length = "implements MeshDomainWithFeatures_3::curve_segment_length() .
 
 Parameters
 ----------
@@ -841,14 +841,14 @@ curve_index : const Curve_index &
 orientation : CGAL::Orientation
 
 Returns: FT";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_curve_length = "implements MeshDomainWithFeatures_3::curve_length() .
+constexpr const char* Mesh_domain_with_polyline_features_3_curve_length = "implements MeshDomainWithFeatures_3::curve_length() .
 
 Parameters
 ----------
 curve_index : const Curve_index &
 
 Returns: FT";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_construct_point_on_curve = "implements MeshDomainWithFeatures_3::construct_point_on_curve() .
+constexpr const char* Mesh_domain_with_polyline_features_3_construct_point_on_curve = "implements MeshDomainWithFeatures_3::construct_point_on_curve() .
 
 Parameters
 ----------
@@ -857,7 +857,7 @@ curve_index : const Curve_index &
 distance : FT
 
 Returns: Point_3";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_construct_point_on_curve_1 = "implements MeshDomainWithFeatures_3::construct_point_on_curve() .
+constexpr const char* Mesh_domain_with_polyline_features_3_construct_point_on_curve_1 = "implements MeshDomainWithFeatures_3::construct_point_on_curve() .
 
 Parameters
 ----------
@@ -867,7 +867,7 @@ distance : FT
 starting_point_it : Position_on_curve
 
 Returns: Point_and_position";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_distance_sign_along_loop = "implements MeshDomainWithFeatures_3::distance_sign_along_loop() .
+constexpr const char* Mesh_domain_with_polyline_features_3_distance_sign_along_loop = "implements MeshDomainWithFeatures_3::distance_sign_along_loop() .
 
 Parameters
 ----------
@@ -877,7 +877,7 @@ r : const Point_3 &
 index : const Curve_index &
 
 Returns: CGAL::Sign";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_distance_sign = "implements MeshDomainWithFeatures_3::distance_sign() .
+constexpr const char* Mesh_domain_with_polyline_features_3_distance_sign = "implements MeshDomainWithFeatures_3::distance_sign() .
 
 Parameters
 ----------
@@ -886,14 +886,14 @@ q : const Point_3 &
 index : const Curve_index &
 
 Returns: CGAL::Sign";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_is_loop = "implements MeshDomainWithFeatures_3::is_loop() .
+constexpr const char* Mesh_domain_with_polyline_features_3_is_loop = "implements MeshDomainWithFeatures_3::is_loop() .
 
 Parameters
 ----------
 index : const Curve_index &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_is_curve_segment_covered = "implements MeshDomainWithFeatures_3::is_curve_segment_covered() .
+constexpr const char* Mesh_domain_with_polyline_features_3_is_curve_segment_covered = "implements MeshDomainWithFeatures_3::is_curve_segment_covered() .
 
 Parameters
 ----------
@@ -905,7 +905,7 @@ sq_r1 : const FT
 sq_r2 : const FT
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_locate_corner = "locates the corner point p on the curve identified by curve_index
+constexpr const char* Mesh_domain_with_polyline_features_3_locate_corner = "locates the corner point p on the curve identified by curve_index
 
 Parameters
 ----------
@@ -913,63 +913,63 @@ curve_index : const Curve_index &
 p : const Point_3 &
 
 Returns: Position_on_curve";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_index_from_surface_patch_index = "Returns the index to be stored in a vertex lying on the surface identified by index .
+constexpr const char* Mesh_domain_with_polyline_features_3_index_from_surface_patch_index = "Returns the index to be stored in a vertex lying on the surface identified by index .
 
 Parameters
 ----------
 index : const Surface_patch_index &
 
 Returns: Index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_index_from_subdomain_index = "Returns the index to be stored in a vertex lying in the subdomain identified by index .
+constexpr const char* Mesh_domain_with_polyline_features_3_index_from_subdomain_index = "Returns the index to be stored in a vertex lying in the subdomain identified by index .
 
 Parameters
 ----------
 index : const Subdomain_index &
 
 Returns: Index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_index_from_curve_index = "returns an Index from a Curve_index
+constexpr const char* Mesh_domain_with_polyline_features_3_index_from_curve_index = "returns an Index from a Curve_index
 
 Parameters
 ----------
 index : const Curve_index &
 
 Returns: Index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_index_from_corner_index = "returns an Index from a Corner_index
+constexpr const char* Mesh_domain_with_polyline_features_3_index_from_corner_index = "returns an Index from a Corner_index
 
 Parameters
 ----------
 index : const Corner_index &
 
 Returns: Index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_surface_patch_index = "Returns the Surface_patch_index of the surface patch where lies a vertex with dimension 2 and index index .
+constexpr const char* Mesh_domain_with_polyline_features_3_surface_patch_index = "Returns the Surface_patch_index of the surface patch where lies a vertex with dimension 2 and index index .
 
 Parameters
 ----------
 index : const Index &
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_subdomain_index = "Returns the index of the subdomain containing a vertex with dimension 3 and index index .
+constexpr const char* Mesh_domain_with_polyline_features_3_subdomain_index = "Returns the index of the subdomain containing a vertex with dimension 3 and index index .
 
 Parameters
 ----------
 index : const Index &
 
 Returns: Subdomain_index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_curve_index = "returns a Curve_index from an Index
+constexpr const char* Mesh_domain_with_polyline_features_3_curve_index = "returns a Curve_index from an Index
 
 Parameters
 ----------
 index : const Index &
 
 Returns: Curve_index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_corner_index = "returns a Corner_index from an Index
+constexpr const char* Mesh_domain_with_polyline_features_3_corner_index = "returns a Corner_index from an Index
 
 Parameters
 ----------
 index : const Index &
 
 Returns: Corner_index";
-constexpr const char* CGAL_Mesh_domain_with_polyline_features_3_point_corner_index = "returns Index associated to p (p must be the coordinates of a corner point)
+constexpr const char* Mesh_domain_with_polyline_features_3_point_corner_index = "returns Index associated to p (p must be the coordinates of a corner point)
 
 Parameters
 ----------
@@ -979,12 +979,12 @@ Returns: std::optional< Corner_index >";
 
 
 // CGAL::Mesh_edge_criteria_3
-constexpr const char* CGAL_Mesh_edge_criteria_3__class__ = "The function object class Mesh_edge_criteria_3 is a model of MeshEdgeCriteria_3 .";
+constexpr const char* Mesh_edge_criteria_3__class__ = "The function object class Mesh_edge_criteria_3 is a model of MeshEdgeCriteria_3 .";
 
-constexpr const char* CGAL_Mesh_edge_criteria_3_FT = "Numerical type.
+constexpr const char* Mesh_edge_criteria_3_FT = "Numerical type.
 
 Returns: Tr::Geom_traits::FT";
-constexpr const char* CGAL_Mesh_edge_criteria_3_Mesh_edge_criteria_3 = "returns an object to serve as criteria for edges.
+constexpr const char* Mesh_edge_criteria_3_Mesh_edge_criteria_3 = "returns an object to serve as criteria for edges.
 
 length_bound is an upper bound for the length of the edges which are used to
 discretize the curves. It can be a functional or a constant. min_length_bound
@@ -1005,12 +1005,12 @@ min_length_bound : const FT &
 distance_bound : const DistanceField &";
 
 // CGAL::Mesh_facet_criteria_3
-constexpr const char* CGAL_Mesh_facet_criteria_3__class__ = "The class Mesh_facet_criteria_3 is a model of MeshFacetCriteria_3 .";
+constexpr const char* Mesh_facet_criteria_3__class__ = "The class Mesh_facet_criteria_3 is a model of MeshFacetCriteria_3 .";
 
-constexpr const char* CGAL_Mesh_facet_criteria_3_FT = "Numerical type.
+constexpr const char* Mesh_facet_criteria_3_FT = "Numerical type.
 
 Returns: Tr::Geom_traits::FT";
-constexpr const char* CGAL_Mesh_facet_criteria_3_Mesh_facet_criteria_3 = "returns an object to serve as criteria for facets.
+constexpr const char* Mesh_facet_criteria_3_Mesh_facet_criteria_3 = "returns an object to serve as criteria for facets.
 
 angle_bound is the lower bound for the angles in degrees of the surface mesh
 facets. radius_bound is a uniform upper bound for the radius of the surface
@@ -1029,7 +1029,7 @@ radius_bound : const FT &
 distance_bound : const FT &
 topology : const Mesh_facet_topology
 min_radius_bound : const FT &";
-constexpr const char* CGAL_Mesh_facet_criteria_3_Mesh_facet_criteria_3_1 = "Returns an object to serve as criteria for facets.
+constexpr const char* Mesh_facet_criteria_3_Mesh_facet_criteria_3_1 = "Returns an object to serve as criteria for facets.
 
 The types SizingField and DistanceField must be models of the concept
 MeshDomainField_3 . The behavior and semantic of the arguments are the same as
@@ -1043,7 +1043,7 @@ radius_bound : const SizingField &
 distance_bound : const DistanceField &
 topology : const Mesh_facet_topology
 min_radius_bound : const FT &";
-constexpr const char* CGAL_Mesh_facet_criteria_3_operator = "returns whether the facet facet is bad or not.
+constexpr const char* Mesh_facet_criteria_3_operator = "returns whether the facet facet is bad or not.
 
 tr the triangulation within which facet lives facet the facet
 
@@ -1053,44 +1053,44 @@ tr : const Tr &
 facet : const Facet &
 
 Returns: Is_facet_bad";
-constexpr const char* CGAL_Mesh_facet_criteria_3_squared_min_radius_bound = "
+constexpr const char* Mesh_facet_criteria_3_squared_min_radius_bound = "
 the squared value of minimal radius bound if it was set, and std::nullopt
 otherwise
 
 Returns: std::optional< FT >";
 
 // CGAL::Mesh_polyhedron_3
-constexpr const char* CGAL_Mesh_polyhedron_3__class__ = "The class Mesh_polyhedron_3 provides a customized Polyhedron_3 type.";
+constexpr const char* Mesh_polyhedron_3__class__ = "The class Mesh_polyhedron_3 provides a customized Polyhedron_3 type.";
 
-constexpr const char* CGAL_Mesh_polyhedron_3_type = "CGAL::Polyhedron_3<IGT> type with customized PolyhedronItems_3 designed to handle sharp feature detection.
+constexpr const char* Mesh_polyhedron_3_type = "CGAL::Polyhedron_3<IGT> type with customized PolyhedronItems_3 designed to handle sharp feature detection.
 
 Returns: unspecified_type";
 
 // CGAL::Mesh_triangulation_3
-constexpr const char* CGAL_Mesh_triangulation_3__class__ = "The class Mesh_triangulation_3 is a class template which provides the triangulation type to be used for the 3D triangulation embedding the mesh.";
+constexpr const char* Mesh_triangulation_3__class__ = "The class Mesh_triangulation_3 is a class template which provides the triangulation type to be used for the 3D triangulation embedding the mesh.";
 
-constexpr const char* CGAL_Mesh_triangulation_3_type = "The triangulation type to be used for the 3D triangulation embedding the mesh.
+constexpr const char* Mesh_triangulation_3_type = "The triangulation type to be used for the 3D triangulation embedding the mesh.
 
 This type is a wrapper around the type CGAL::Regular_triangulation_3 , whose
 vertex and cell base classes are respectively VertexBase and CellBase .
 
 Returns: unspecified_type";
 
-constexpr const char* CGAL_Mesh_vertex_3_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Mesh_vertex_3_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
 
 // CGAL::Mesh_vertex_base_3
-constexpr const char* CGAL_Mesh_vertex_base_3__class__ = "The class Mesh_vertex_base_3 is a model of the concept MeshVertexBase_3 .";
+constexpr const char* Mesh_vertex_base_3__class__ = "The class Mesh_vertex_base_3 is a model of the concept MeshVertexBase_3 .";
 
 
 
 
 
 // CGAL::Polyhedral_complex_mesh_domain_3
-constexpr const char* CGAL_Polyhedral_complex_mesh_domain_3__class__ = "The class Polyhedral_complex_mesh_domain_3 implements a domain defined by a collection of polyhedral surfaces, forming a complex.";
+constexpr const char* Polyhedral_complex_mesh_domain_3__class__ = "The class Polyhedral_complex_mesh_domain_3 implements a domain defined by a collection of polyhedral surfaces, forming a complex.";
 
-constexpr const char* CGAL_Polyhedral_complex_mesh_domain_3_Polyhedral_complex_mesh_domain_3 = "constructs a domain defined by a set of polyhedral surfaces, describing a polyhedral complex.
+constexpr const char* Polyhedral_complex_mesh_domain_3_Polyhedral_complex_mesh_domain_3 = "constructs a domain defined by a set of polyhedral surfaces, describing a polyhedral complex.
 
 begin first iterator on the input polyhedral surfaces end past the end
 iterator on the input polyhedral surfaces indices_begin first iterator on the
@@ -1111,7 +1111,7 @@ begin : InputPolyhedraIterator
 end : InputPolyhedraIterator
 indices_begin : InputPairOfSubdomainIndicesIterator
 indices_end : InputPairOfSubdomainIndicesIterator";
-constexpr const char* CGAL_Polyhedral_complex_mesh_domain_3_detect_features = "detects sharp features and boundaries of the polyhedral components of the complex (including potential internal polyhedra), and inserts them as features of the domain.
+constexpr const char* Polyhedral_complex_mesh_domain_3_detect_features = "detects sharp features and boundaries of the polyhedral components of the complex (including potential internal polyhedra), and inserts them as features of the domain.
 
 angle_bound gives the maximum angle (in degrees) between the two normal
 vectors of adjacent triangles. For an edge of the polyhedron, if the angle
@@ -1122,15 +1122,15 @@ feature of the domain.
 Parameters
 ----------
 angle_bound : FT";
-constexpr const char* CGAL_Polyhedral_complex_mesh_domain_3_detect_borders = "detects border edges of the polyhedral components of the complex, and inserts them as features of the domain.
+constexpr const char* Polyhedral_complex_mesh_domain_3_detect_borders = "detects border edges of the polyhedral components of the complex, and inserts them as features of the domain.
 
 This function should only be called alone, and not before or after
 detect_features() .";
 
 // CGAL::Polyhedral_mesh_domain_3
-constexpr const char* CGAL_Polyhedral_mesh_domain_3__class__ = "The class Polyhedral_mesh_domain_3 implements a domain defined by a simplicial polyhedral surface.";
+constexpr const char* Polyhedral_mesh_domain_3__class__ = "The class Polyhedral_mesh_domain_3 implements a domain defined by a simplicial polyhedral surface.";
 
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3 = "Construction from a polyhedral surface which must be free of intersections.
+constexpr const char* Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3 = "Construction from a polyhedral surface which must be free of intersections.
 
 If polyhedron is closed, its inside will be meshed, otherwise there will be no
 interior and only the surface will be meshed.
@@ -1138,7 +1138,7 @@ interior and only the surface will be meshed.
 Parameters
 ----------
 polyhedron : const Polyhedron &";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3_1 = "Construction from a polyhedral surface, and a bounding polyhedral surface.
+constexpr const char* Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3_1 = "Construction from a polyhedral surface, and a bounding polyhedral surface.
 
 The first polyhedron must be entirely included inside bounding_polyhedron ,
 which must be closed and free of intersections. Using this constructor enables
@@ -1149,7 +1149,7 @@ Parameters
 ----------
 p : const Polyhedron &
 bounding_polyhedron : const Polyhedron &";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3_2 = "Constructor from a sequence of polyhedral surfaces, and a bounding polyhedral surface.
+constexpr const char* Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3_2 = "Constructor from a sequence of polyhedral surfaces, and a bounding polyhedral surface.
 
 InputPolyhedraPtrIterator must be a model of ForwardIterator and value type
 Polyhedron* begin iterator for a sequence of pointers to polyhedra end
@@ -1161,7 +1161,7 @@ Parameters
 begin : InputPolyhedraPtrIterator
 end : InputPolyhedraPtrIterator
 bounding_polyhedron : const Polyhedron &";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3_3 = "Constructor from a sequence of polyhedral surfaces, without a bounding surface.
+constexpr const char* Polyhedral_mesh_domain_3_Polyhedral_mesh_domain_3_3 = "Constructor from a sequence of polyhedral surfaces, without a bounding surface.
 
 The domain will always answer false to is_in_domain() queries.
 InputPolyhedraPtrIterator must be a model of ForwardIterator and value type
@@ -1172,37 +1172,37 @@ Parameters
 ----------
 begin : InputPolyhedraPtrIterator
 end : InputPolyhedraPtrIterator";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Index = "Type of indexes to characterize the lowest dimensional face of the input.
+constexpr const char* Polyhedral_mesh_domain_3_Index = "Type of indexes to characterize the lowest dimensional face of the input.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_tree = "The AABB tree: intersection detection and more.
+constexpr const char* Polyhedral_mesh_domain_3_tree = "The AABB tree: intersection detection and more.
 
 Returns: AABB_tree_";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_bbox = "Returns a bounding box of the domain.
+constexpr const char* Polyhedral_mesh_domain_3_bbox = "Returns a bounding box of the domain.
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_index_from_surface_patch_index = "Returns the index to be stored in a vertex lying on the surface identified by index .
+constexpr const char* Polyhedral_mesh_domain_3_index_from_surface_patch_index = "Returns the index to be stored in a vertex lying on the surface identified by index .
 
 Parameters
 ----------
 index : const Surface_patch_index &
 
 Returns: Index";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_index_from_subdomain_index = "Returns the index to be stored in a vertex lying in the subdomain identified by index .
+constexpr const char* Polyhedral_mesh_domain_3_index_from_subdomain_index = "Returns the index to be stored in a vertex lying in the subdomain identified by index .
 
 Parameters
 ----------
 index : const Subdomain_index &
 
 Returns: Index";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_surface_patch_index = "Returns the Surface_patch_index of the surface patch where lies a vertex with dimension 2 and index index .
+constexpr const char* Polyhedral_mesh_domain_3_surface_patch_index = "Returns the Surface_patch_index of the surface patch where lies a vertex with dimension 2 and index index .
 
 Parameters
 ----------
 index : const Index &
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_subdomain_index = "Returns the index of the subdomain containing a vertex with dimension 3 and index index .
+constexpr const char* Polyhedral_mesh_domain_3_subdomain_index = "Returns the index of the subdomain containing a vertex with dimension 3 and index index .
 
 Parameters
 ----------
@@ -1211,27 +1211,27 @@ index : const Index &
 Returns: Subdomain_index";
 
 // CGAL::Polyhedral_mesh_domain_3::Construct_initial_points
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Construct_initial_points__class__ = "constructs a set of n points on the surface, and output them to the output iterator pts whose value type is required to be std::pair<Point_3, Index> .";
+constexpr const char* Polyhedral_mesh_domain_3_Construct_initial_points__class__ = "constructs a set of n points on the surface, and output them to the output iterator pts whose value type is required to be std::pair<Point_3, Index> .";
 
 
 // CGAL::Polyhedral_mesh_domain_3::Construct_intersection
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Construct_intersection__class__ = "Returns a point in the intersection of the primitive type with some boundary surface.";
+constexpr const char* Polyhedral_mesh_domain_3_Construct_intersection__class__ = "Returns a point in the intersection of the primitive type with some boundary surface.";
 
 
 // CGAL::Polyhedral_mesh_domain_3::Do_intersect_surface
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Do_intersect_surface__class__ = "Returns true if the element type intersects properly any of the surface patches describing either the domain boundary or some subdomain boundary.";
+constexpr const char* Polyhedral_mesh_domain_3_Do_intersect_surface__class__ = "Returns true if the element type intersects properly any of the surface patches describing either the domain boundary or some subdomain boundary.";
 
 
 // CGAL::Polyhedral_mesh_domain_3::Is_in_domain
-constexpr const char* CGAL_Polyhedral_mesh_domain_3_Is_in_domain__class__ = "Returns true if point p is in the domain.";
+constexpr const char* Polyhedral_mesh_domain_3_Is_in_domain__class__ = "Returns true if point p is in the domain.";
 
 
 
 
 // CGAL::Polyhedral_mesh_domain_with_features_3
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3__class__ = "The class Polyhedral_mesh_domain_with_features_3 implements a domain whose boundary is a simplicial polyhedral surface.";
+constexpr const char* Polyhedral_mesh_domain_with_features_3__class__ = "The class Polyhedral_mesh_domain_with_features_3 implements a domain whose boundary is a simplicial polyhedral surface.";
 
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3 = "Constructor from a polyhedral surface.
+constexpr const char* Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3 = "Constructor from a polyhedral surface.
 
 No feature detection is done at this level. Note that a copy of polyhedron
 will be made. The polyhedron polyhedron must be free of intersections. If
@@ -1241,7 +1241,7 @@ interior and only the surface will be meshed.
 Parameters
 ----------
 polyhedron : const Polyhedron &";
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3_1 = "Constructor from a polyhedral surface, and a bounding polyhedral surface.
+constexpr const char* Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3_1 = "Constructor from a polyhedral surface, and a bounding polyhedral surface.
 
 The first polyhedron should be entirely included inside bounding_polyhedron ,
 which has to be closed and free of intersections. Using this constructor
@@ -1252,7 +1252,7 @@ Parameters
 ----------
 polyhedron : const Polyhedron &
 bounding_polyhedron : const Polyhedron &";
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3_2 = "Constructor from a sequence of polyhedral surfaces, without a bounding surface.
+constexpr const char* Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3_2 = "Constructor from a sequence of polyhedral surfaces, without a bounding surface.
 
 The domain will always answer false to is_in_domain() queries.
 InputPolyhedraPtrIterator must be a model of ForwardIterator with value type
@@ -1263,7 +1263,7 @@ Parameters
 ----------
 begin : InputPolyhedraPtrIterator
 end : InputPolyhedraPtrIterator";
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3_3 = "Constructor from a sequence of polyhedral surfaces, and a bounding polyhedral surface.
+constexpr const char* Polyhedral_mesh_domain_with_features_3_Polyhedral_mesh_domain_with_features_3_3 = "Constructor from a sequence of polyhedral surfaces, and a bounding polyhedral surface.
 
 InputPolyhedraPtrIterator must be a model of ForwardIterator with value type
 Polyhedron* begin iterator for a sequence of pointers to polyhedra end
@@ -1275,7 +1275,7 @@ Parameters
 begin : InputPolyhedraPtrIterator
 end : InputPolyhedraPtrIterator
 bounding_polyhedron : const Polyhedron &";
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3_detect_features = "detects sharp features and boundaries of the internal bounding polyhedron (and the potential internal polyhedra) and inserts them as features of the domain.
+constexpr const char* Polyhedral_mesh_domain_with_features_3_detect_features = "detects sharp features and boundaries of the internal bounding polyhedron (and the potential internal polyhedra) and inserts them as features of the domain.
 
 angle_bound gives the maximum angle (in degrees) between the two normal
 vectors of adjacent triangles. For an edge of a polyhedron, if the angle
@@ -1285,15 +1285,15 @@ bound, then the edge is considered as a feature edge.
 Parameters
 ----------
 angle_bound : FT";
-constexpr const char* CGAL_Polyhedral_mesh_domain_with_features_3_detect_borders = "detects border edges of the bounding polyhedron and inserts them as features of the domain.
+constexpr const char* Polyhedral_mesh_domain_with_features_3_detect_borders = "detects border edges of the bounding polyhedron and inserts them as features of the domain.
 
 This function should only be called alone, and not before or after
 detect_features() .";
 
 // CGAL::Sizing_field_with_aabb_tree
-constexpr const char* CGAL_Sizing_field_with_aabb_tree__class__ = "The class Sizing_field_with_aabb_tree is a model of concept MeshDomainField_3 .";
+constexpr const char* Sizing_field_with_aabb_tree__class__ = "The class Sizing_field_with_aabb_tree is a model of concept MeshDomainField_3 .";
 
-constexpr const char* CGAL_Sizing_field_with_aabb_tree_Sizing_field_with_aabb_tree = "Constructor for the sizing field.
+constexpr const char* Sizing_field_with_aabb_tree_Sizing_field_with_aabb_tree = "Constructor for the sizing field.
 
 d the maximal value returned by operator() , corresponding to an upper bound
 on feature edge lengths in the output mesh. domain the mesh domain to be
@@ -1303,7 +1303,7 @@ Parameters
 ----------
 d : const FT &
 domain : const MeshDomain &";
-constexpr const char* CGAL_Sizing_field_with_aabb_tree_operator = "returns the value of the sizing field at the point p , assumed to be included in the input complex feature with dimension dimension and mesh subcomplex index id .
+constexpr const char* Sizing_field_with_aabb_tree_operator = "returns the value of the sizing field at the point p , assumed to be included in the input complex feature with dimension dimension and mesh subcomplex index id .
 
 Parameters
 ----------

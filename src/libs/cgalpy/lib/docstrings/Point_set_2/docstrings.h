@@ -8,50 +8,50 @@ namespace docstrings {
 namespace Point_set_2 {
 
 // CGAL::Point_set_2
-constexpr const char* CGAL_Point_set_2__class__ = "An instance PS of the data type Point_set_2 is a Delaunay Triangulation of its vertex set.";
+constexpr const char* Point_set_2__class__ = "An instance PS of the data type Point_set_2 is a Delaunay Triangulation of its vertex set.";
 
-constexpr const char* CGAL_Point_set_2_Point = "the point type
+constexpr const char* Point_set_2_Point = "the point type
 
 Returns: Gt::Point_2";
-constexpr const char* CGAL_Point_set_2_Segment = "the segment type
+constexpr const char* Point_set_2_Segment = "the segment type
 
 Returns: Gt::Segment_2";
-constexpr const char* CGAL_Point_set_2_Circle = "the circle type
+constexpr const char* Point_set_2_Circle = "the circle type
 
 Returns: Gt::Circle_2";
-constexpr const char* CGAL_Point_set_2_Numb_type = "the representation field number type.
+constexpr const char* Point_set_2_Numb_type = "the representation field number type.
 
 Returns: Gt::FT";
-constexpr const char* CGAL_Point_set_2_Triangulation = "the underlying triangulation type.
+constexpr const char* Point_set_2_Triangulation = "the underlying triangulation type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_set_2_size_type = "the size type of the underlying triangulation.
+constexpr const char* Point_set_2_size_type = "the size type of the underlying triangulation.
 
 Returns: Triangulation::size_type";
-constexpr const char* CGAL_Point_set_2_Vertex = "the vertex type of the underlying triangulation.
+constexpr const char* Point_set_2_Vertex = "the vertex type of the underlying triangulation.
 
 Returns: Triangulation::Vertex";
-constexpr const char* CGAL_Point_set_2_Edge = "the edge type of the underlying triangulation.
+constexpr const char* Point_set_2_Edge = "the edge type of the underlying triangulation.
 
 Returns: Triangulation::Edge";
-constexpr const char* CGAL_Point_set_2_Vertex_handle = "handles to vertices.
+constexpr const char* Point_set_2_Vertex_handle = "handles to vertices.
 
 Returns: Triangulation::Vertex_handle";
-constexpr const char* CGAL_Point_set_2_Point_set_2 = "creates an empty Point_set_2 .";
-constexpr const char* CGAL_Point_set_2_Point_set_2_1 = "creates a Point_set_2 PS of the points in the range [ first , last ).
+constexpr const char* Point_set_2_Point_set_2 = "creates an empty Point_set_2 .";
+constexpr const char* Point_set_2_Point_set_2_1 = "creates a Point_set_2 PS of the points in the range [ first , last ).
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Point_set_2_lookup = "if PS contains a vertex v with v.point() == p the result is a handle to v otherwise the result is NULL .
+constexpr const char* Point_set_2_lookup = "if PS contains a vertex v with v.point() == p the result is a handle to v otherwise the result is NULL .
 
 Parameters
 ----------
 p : Point
 
 Returns: Vertex _handle";
-constexpr const char* CGAL_Point_set_2_nearest_neighbor = "computes a handle to a vertex v of PS that is closest to p .
+constexpr const char* Point_set_2_nearest_neighbor = "computes a handle to a vertex v of PS that is closest to p .
 
 If PS is empty, NULL is returned.
 
@@ -60,7 +60,7 @@ Parameters
 p : Point
 
 Returns: Vertex _handle";
-constexpr const char* CGAL_Point_set_2_nearest_neighbor_1 = "computes a handle to a vertex w of PS that is closest to v .
+constexpr const char* Point_set_2_nearest_neighbor_1 = "computes a handle to a vertex w of PS that is closest to v .
 
 If v is the only vertex in PS , NULL is returned.
 
@@ -69,7 +69,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Vertex _handle";
-constexpr const char* CGAL_Point_set_2_nearest_neighbors = "computes the k nearest neighbors of p in PS , and places the handles to the corresponding vertices as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.
+constexpr const char* Point_set_2_nearest_neighbors = "computes the k nearest neighbors of p in PS , and places the handles to the corresponding vertices as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.
 
 The function returns an output iterator pointing to the position beyond the
 end of the sequence.
@@ -81,7 +81,7 @@ k : size_type
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Point_set_2_nearest_neighbors_1 = "computes the k nearest neighbors of v , and places them as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.
+constexpr const char* Point_set_2_nearest_neighbors_1 = "computes the k nearest neighbors of v , and places them as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.
 
 The function returns an output iterator pointing to the position beyond the
 end of the sequence.
@@ -93,7 +93,7 @@ k : size_type
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Point_set_2_range_search = "computes handles to all vertices contained in the closure of disk C .
+constexpr const char* Point_set_2_range_search = "computes handles to all vertices contained in the closure of disk C .
 
 The computed vertex handles will be placed as a sequence of objects in a
 container of value type of res which points to the first object in the
@@ -106,7 +106,7 @@ C : const Circle &
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Point_set_2_range_search_1 = "computes handles to all vertices contained in the closure of the triangle (a,b,c) .
+constexpr const char* Point_set_2_range_search_1 = "computes handles to all vertices contained in the closure of the triangle (a,b,c) .
 
 a , b , and c must not be collinear. The computed vertex handles will be
 placed as a sequence of objects in a container of value type of res which
@@ -121,7 +121,7 @@ c : const Point &
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Point_set_2_range_search_2 = "computes handles to all vertices contained in the closure of the iso-rectangle (a1,b1,c1,d1) .
+constexpr const char* Point_set_2_range_search_2 = "computes handles to all vertices contained in the closure of the iso-rectangle (a1,b1,c1,d1) .
 
 a1 is the upper left point, b1 the lower left, c1 the lower right and d1 the
 upper right point of the iso rectangle. The computed vertex handles will be

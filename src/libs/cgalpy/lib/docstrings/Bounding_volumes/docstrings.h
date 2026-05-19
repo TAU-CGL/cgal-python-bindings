@@ -50,30 +50,30 @@ p : const Point &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Approximate_min_ellipsoid_d
-constexpr const char* CGAL_Approximate_min_ellipsoid_d__class__ = "An object of class Approximate_min_ellipsoid_d is an approximation to the ellipsoid of smallest volume enclosing a finite multiset of points in $ d$ -dimensional Euclidean space $ \\E^d$ , $ d\\ge 2$ .";
+constexpr const char* Approximate_min_ellipsoid_d__class__ = "An object of class Approximate_min_ellipsoid_d is an approximation to the ellipsoid of smallest volume enclosing a finite multiset of points in $ d$ -dimensional Euclidean space $ \\E^d$ , $ d\\ge 2$ .";
 
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_FT = "typedef Traits::FT FT (which is always a typedef to double ).
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_ET = "typedef Traits::ET ET (which is an exact number type used for exact computation like for example in achieved_epsilon() ).
+constexpr const char* Approximate_min_ellipsoid_d_FT = "typedef Traits::FT FT (which is always a typedef to double ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_Point = "typedef Traits::Point Point
+constexpr const char* Approximate_min_ellipsoid_d_ET = "typedef Traits::ET ET (which is an exact number type used for exact computation like for example in achieved_epsilon() ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_Cartesian_const_iterator = "typedef Traits::Cartesian_const_iterator Cartesian_const_iterator
+constexpr const char* Approximate_min_ellipsoid_d_Point = "typedef Traits::Point Point
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_Center_coordinate_iterator = "A model of STL concept RandomAccessIterator with value type double that is used to iterate over the Cartesian center coordinates of the computed ellipsoid, see center_cartesian_begin() .
+constexpr const char* Approximate_min_ellipsoid_d_Cartesian_const_iterator = "typedef Traits::Cartesian_const_iterator Cartesian_const_iterator
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_Axes_lengths_iterator = "A model of STL concept RandomAccessIterator with value type double that is used to iterate over the lengths of the semiaxes of the computed ellipsoid, see axes_lengths_begin() .
+constexpr const char* Approximate_min_ellipsoid_d_Center_coordinate_iterator = "A model of STL concept RandomAccessIterator with value type double that is used to iterate over the Cartesian center coordinates of the computed ellipsoid, see center_cartesian_begin() .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_Axes_direction_coordinate_iterator = "A model of STL concept RandomAccessIterator with value type double that is used to iterate over the Cartesian coordinates of the direction of a fixed axis of the computed ellipsoid, see axis_direction_cartesian_begin() .
+constexpr const char* Approximate_min_ellipsoid_d_Axes_lengths_iterator = "A model of STL concept RandomAccessIterator with value type double that is used to iterate over the lengths of the semiaxes of the computed ellipsoid, see axes_lengths_begin() .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_Approximate_min_ellipsoid_d = "initializes ame to an $ (1+\\epsilon)$ -approximation of $ (P)$ with $ P$ being the set of points in the range [ first , last ).
+constexpr const char* Approximate_min_ellipsoid_d_Axes_direction_coordinate_iterator = "A model of STL concept RandomAccessIterator with value type double that is used to iterate over the Cartesian coordinates of the direction of a fixed axis of the computed ellipsoid, see axis_direction_cartesian_begin() .
+
+Returns: unspecified_type";
+constexpr const char* Approximate_min_ellipsoid_d_Approximate_min_ellipsoid_d = "initializes ame to an $ (1+\\epsilon)$ -approximation of $ (P)$ with $ P$ being the set of points in the range [ first , last ).
 
 The number $ \\epsilon$ in this will be at most eps , if possible. However, due
 to the limited precision in the algorithm's underlying arithmetic, it can
@@ -91,15 +91,15 @@ eps : double
 first : Iterator
 last : Iterator
 traits : const Traits &";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_number_of_points = "returns the number of points of ame , i.e., $ |P|$ .
+constexpr const char* Approximate_min_ellipsoid_d_number_of_points = "returns the number of points of ame , i.e., $ |P|$ .
 
 Returns: unsigned int";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_achieved_epsilon = "returns a number $ \\epsilon'$ such that the computed approximation is (under exact arithmetic) guaranteed to be an $ (1+\\epsilon')$ -approximation to $ (P)$ .
+constexpr const char* Approximate_min_ellipsoid_d_achieved_epsilon = "returns a number $ \\epsilon'$ such that the computed approximation is (under exact arithmetic) guaranteed to be an $ (1+\\epsilon')$ -approximation to $ (P)$ .
 
 ame.is_full_dimensional() == true . $ \\epsilon'>=0$ .
 
 Returns: double";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_defining_matrix = "gives access to the $ (i,j)$ th entry of the matrix $ E$ in the representation $ \\{ x\\in\\E^d \\mid x^T E x + x^T e + \\eta\\leq0
+constexpr const char* Approximate_min_ellipsoid_d_defining_matrix = "gives access to the $ (i,j)$ th entry of the matrix $ E$ in the representation $ \\{ x\\in\\E^d \\mid x^T E x + x^T e + \\eta\\leq0
 \\}$ of the computed approximation ellipsoid $ {\\cal E}$ .
 
 The number returned by this routine is $ (1+\\epsilon')(d+1)\\,E_{ij}$ , where $
@@ -113,7 +113,7 @@ i : int
 j : int
 
 Returns: double";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_defining_vector = "gives access to the $ i$ th entry of the vector $ e$ in the representation $ \\{ x\\in\\E^d \\mid x^T E x + x^T e + \\eta\\leq0
+constexpr const char* Approximate_min_ellipsoid_d_defining_vector = "gives access to the $ i$ th entry of the vector $ e$ in the representation $ \\{ x\\in\\E^d \\mid x^T E x + x^T e + \\eta\\leq0
 \\}$ of the computed approximation ellipsoid $ {\\cal E}$ .
 
 The number returned by this routine is $ (1+\\epsilon')(d+1)\\,e_{i}$ , where $
@@ -126,7 +126,7 @@ Parameters
 i : int
 
 Returns: double";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_defining_scalar = "gives access to the scalar $ \\eta$ from the representation $ \\{ x\\in\\E^d \\mid x^T E x + x^T e + \\eta\\leq0
+constexpr const char* Approximate_min_ellipsoid_d_defining_scalar = "gives access to the scalar $ \\eta$ from the representation $ \\{ x\\in\\E^d \\mid x^T E x + x^T e + \\eta\\leq0
 \\}$ of the computed approximation ellipsoid $ {\\cal E}$ .
 
 The number returned by this routine is $ (1+\\epsilon')(d+1)\\,(\\eta+1)$ , where
@@ -134,25 +134,25 @@ $ \\epsilon'$ is the number returned by achieved_epsilon() .
 ame.is_full_dimensional() == true .
 
 Returns: double";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits = "returns a const reference to the traits class object.
+constexpr const char* Approximate_min_ellipsoid_d_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_dimension = "returns the dimension of the ambient space, i.e., the dimension of the points $ P$ .
+constexpr const char* Approximate_min_ellipsoid_d_dimension = "returns the dimension of the ambient space, i.e., the dimension of the points $ P$ .
 
 Returns: int";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_center_cartesian_begin = "returns an iterator pointing to the first of the $ d$ Cartesian coordinates of the computed ellipsoid's center.
+constexpr const char* Approximate_min_ellipsoid_d_center_cartesian_begin = "returns an iterator pointing to the first of the $ d$ Cartesian coordinates of the computed ellipsoid's center.
 
 The returned point is a floating-point approximation to the ellipsoid's exact
 center; no guarantee is given w.r.t. the involved relative error.
 ame.is_full_dimensional() == true .
 
 Returns: Center_coordinate_iterator";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_center_cartesian_end = "returns the past-the-end iterator corresponding to center_cartesian_begin() .
+constexpr const char* Approximate_min_ellipsoid_d_center_cartesian_end = "returns the past-the-end iterator corresponding to center_cartesian_begin() .
 
 ame.is_full_dimensional() == true .
 
 Returns: Center_coordinate_iterator";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_axes_lengths_begin = "returns an iterator pointing to the first of the $ d$ descendantly sorted lengths of the computed ellipsoid's axes.
+constexpr const char* Approximate_min_ellipsoid_d_axes_lengths_begin = "returns an iterator pointing to the first of the $ d$ descendantly sorted lengths of the computed ellipsoid's axes.
 
 The $ d$ returned numbers are floating-point approximations to the exact
 axes-lengths of the computed ellipsoid; no guarantee is given w.r.t. the
@@ -160,12 +160,12 @@ involved relative error. (See also method axis_direction_cartesian_begin() .)
 ame.is_full_dimensional() == true , and $ d\\in\\{2,3\\}$ .
 
 Returns: Axes_lengths_iterator";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_axes_lengths_end = "returns the past-the-end iterator corresponding to axes_lengths_begin() .
+constexpr const char* Approximate_min_ellipsoid_d_axes_lengths_end = "returns the past-the-end iterator corresponding to axes_lengths_begin() .
 
 ame.is_full_dimensional() == true , and $ d\\in\\{2,3\\}$ .
 
 Returns: Axes_lengths_iterator";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_axis_direction_cartesian_begin = "returns an iterator pointing to the first of the $ d$ Cartesian coordinates of the computed ellipsoid's $ i$ th axis direction (i.e., unit vector in direction of the ellipsoid's $ i$ th axis).
+constexpr const char* Approximate_min_ellipsoid_d_axis_direction_cartesian_begin = "returns an iterator pointing to the first of the $ d$ Cartesian coordinates of the computed ellipsoid's $ i$ th axis direction (i.e., unit vector in direction of the ellipsoid's $ i$ th axis).
 
 The direction described by this iterator is a floating-point approximation to
 the exact axis direction of the computed ellipsoid; no guarantee is given
@@ -178,7 +178,7 @@ Parameters
 i : int
 
 Returns: Axes_direction_coordinate_iterator";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_axis_direction_cartesian_end = "returns the past-the-end iterator corresponding to axis_direction_cartesian_begin() .
+constexpr const char* Approximate_min_ellipsoid_d_axis_direction_cartesian_end = "returns the past-the-end iterator corresponding to axis_direction_cartesian_begin() .
 
 ame.is_full_dimensional() == true , and $ d\\in\\{2,3\\}$ , and $ 0\\leq i < d$ .
 
@@ -187,7 +187,7 @@ Parameters
 i : int
 
 Returns: Axes_direction_coordinate_iterator";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_is_full_dimensional = "returns whether $ P$ is full-dimensional or not, i.e., returns true if and only if $ P$ is full-dimensional.
+constexpr const char* Approximate_min_ellipsoid_d_is_full_dimensional = "returns whether $ P$ is full-dimensional or not, i.e., returns true if and only if $ P$ is full-dimensional.
 
 Note: due to the limited precision in the algorithm's underlying arithmetic,
 the result of this method is not always correct. Rather, a return value of
@@ -202,7 +202,7 @@ pointset $ P'$ such that the points $ P'$ and $ P$ have almost identical
 coordinates and $ P'$ is full-dimensional.
 
 Returns: bool";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_is_valid = "returns true iff ame is valid according to the above definition.
+constexpr const char* Approximate_min_ellipsoid_d_is_valid = "returns true iff ame is valid according to the above definition.
 
 If verbose is true , some messages concerning the performed checks are written
 to the standard error stream.
@@ -212,7 +212,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_write_eps = "Writes the points $ P$ and the computed approximation to $ (P)$ as an EPS-file under pathname name .
+constexpr const char* Approximate_min_ellipsoid_d_write_eps = "Writes the points $ P$ and the computed approximation to $ (P)$ as an EPS-file under pathname name .
 
 The dimension of points $ P$ must be $ 2$ . Note: this routine is provided as
 a debugging routine; future version of CGAL might not provide it anymore.
@@ -223,113 +223,113 @@ Parameters
 name : const std::string &";
 
 // CGAL::Approximate_min_ellipsoid_d_traits_2
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_2__class__ = "The class Approximate_min_ellipsoid_d_traits_2 is a traits class for CGAL::Approximate_min_ellipsoid_d <Traits> using the 2-dimensional CGAL kernel.";
+constexpr const char* Approximate_min_ellipsoid_d_traits_2__class__ = "The class Approximate_min_ellipsoid_d_traits_2 is a traits class for CGAL::Approximate_min_ellipsoid_d <Traits> using the 2-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_2_FT = "typedef double FT .
+constexpr const char* Approximate_min_ellipsoid_d_traits_2_FT = "typedef double FT .
 
 The kernel's number type K::RT must be convertible to double .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_2_ET = "typedef to the second template argument, ET .
+constexpr const char* Approximate_min_ellipsoid_d_traits_2_ET = "typedef to the second template argument, ET .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_2_Point = "typedef K::Point_2 Point
+constexpr const char* Approximate_min_ellipsoid_d_traits_2_Point = "typedef K::Point_2 Point
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_2_Cartesian_const_iterator = "typedef K::Cartesian_const_iterator_2 Cartesian_const_iterator
+constexpr const char* Approximate_min_ellipsoid_d_traits_2_Cartesian_const_iterator = "typedef K::Cartesian_const_iterator_2 Cartesian_const_iterator
 
 Returns: unspecified_type";
 
 // CGAL::Approximate_min_ellipsoid_d_traits_3
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_3__class__ = "The class Approximate_min_ellipsoid_d_traits_3 is a traits class for CGAL::Approximate_min_ellipsoid_d <Traits> using the 3-dimensional CGAL kernel.";
+constexpr const char* Approximate_min_ellipsoid_d_traits_3__class__ = "The class Approximate_min_ellipsoid_d_traits_3 is a traits class for CGAL::Approximate_min_ellipsoid_d <Traits> using the 3-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_3_FT = "typedef double FT .
+constexpr const char* Approximate_min_ellipsoid_d_traits_3_FT = "typedef double FT .
 
 The kernel's number type K::RT must be convertible to double .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_3_ET = "typedef to the second template argument, ET .
+constexpr const char* Approximate_min_ellipsoid_d_traits_3_ET = "typedef to the second template argument, ET .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_3_Point = "typedef K::Point_3 Point
+constexpr const char* Approximate_min_ellipsoid_d_traits_3_Point = "typedef K::Point_3 Point
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_3_Cartesian_const_iterator = "typedef K::Cartesian_const_iterator_3 Cartesian_const_iterator
+constexpr const char* Approximate_min_ellipsoid_d_traits_3_Cartesian_const_iterator = "typedef K::Cartesian_const_iterator_3 Cartesian_const_iterator
 
 Returns: unspecified_type";
 
 // CGAL::Approximate_min_ellipsoid_d_traits_d
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_d__class__ = "The class Approximate_min_ellipsoid_d_traits_d is a traits class for CGAL::Approximate_min_ellipsoid_d <Traits> using the d-dimensional CGAL kernel.";
+constexpr const char* Approximate_min_ellipsoid_d_traits_d__class__ = "The class Approximate_min_ellipsoid_d_traits_d is a traits class for CGAL::Approximate_min_ellipsoid_d <Traits> using the d-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_d_FT = "typedef double FT .
+constexpr const char* Approximate_min_ellipsoid_d_traits_d_FT = "typedef double FT .
 
 The kernel's number type K::RT must be convertible to double .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_d_ET = "typedef to the second template argument, ET .
+constexpr const char* Approximate_min_ellipsoid_d_traits_d_ET = "typedef to the second template argument, ET .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_d_Point = "typedef K::Point_d Point
+constexpr const char* Approximate_min_ellipsoid_d_traits_d_Point = "typedef K::Point_d Point
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Approximate_min_ellipsoid_d_traits_d_Cartesian_const_iterator = "typedef K::Cartesian_const_iterator Cartesian_const_iterator
+constexpr const char* Approximate_min_ellipsoid_d_traits_d_Cartesian_const_iterator = "typedef K::Cartesian_const_iterator Cartesian_const_iterator
 
 Returns: unspecified_type";
 
 // CGAL::Min_annulus_d
-constexpr const char* CGAL_Min_annulus_d__class__ = "An object of the class Min_annulus_d is the unique annulus (region between two concentric spheres with radii $ r$ and $ R$ , $ r \\leq R$ ) enclosing a finite set of points in $ d$ -dimensional Euclidean space $ \\E^d$ , where the difference $ R^2-r^2$ is minimal.";
+constexpr const char* Min_annulus_d__class__ = "An object of the class Min_annulus_d is the unique annulus (region between two concentric spheres with radii $ r$ and $ R$ , $ r \\leq R$ ) enclosing a finite set of points in $ d$ -dimensional Euclidean space $ \\E^d$ , where the difference $ R^2-r^2$ is minimal.";
 
-constexpr const char* CGAL_Min_annulus_d_Point = "typedef to Traits::Point_d .
+constexpr const char* Min_annulus_d_Point = "typedef to Traits::Point_d .
 
 Point type used to represent the input points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_FT = "typedef to Traits::FT .
+constexpr const char* Min_annulus_d_FT = "typedef to Traits::FT .
 
 Number type used to return the squared radii of the smallest enclosing
 annulus.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_ET = "typedef to Traits::ET .
+constexpr const char* Min_annulus_d_ET = "typedef to Traits::ET .
 
 Number type used to do the exact computations in the underlying solver for
 quadratic programs (cf. Implementation ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_Point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Min_annulus_d_Point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the points of the smallest enclosing annulus.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_Support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Min_annulus_d_Support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the support points of the smallest enclosing annulus.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_Inner_support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Min_annulus_d_Inner_support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the inner support points of the smallest enclosing annulus.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_Outer_support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Min_annulus_d_Outer_support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the outer support points of the smallest enclosing annulus.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_Coordinate_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type ET .
+constexpr const char* Min_annulus_d_Coordinate_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type ET .
 
 Used to access the coordinates of the center of the smallest enclosing
 annulus.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_annulus_d_Min_annulus_d = "initializes min_annulus to $ ma(\\emptyset)$ .
+constexpr const char* Min_annulus_d_Min_annulus_d = "initializes min_annulus to $ ma(\\emptyset)$ .
 
 Parameters
 ----------
 traits : const Traits &
 verbose : int
 stream : std::ostream &";
-constexpr const char* CGAL_Min_annulus_d_Min_annulus_d_1 = "initializes min_annulus to $ ma(P)$ with $ P$ being the set of points in the range [ first , last ).
+constexpr const char* Min_annulus_d_Min_annulus_d_1 = "initializes min_annulus to $ ma(P)$ with $ P$ being the set of points in the range [ first , last ).
 
 InputIterator is a model of InputIterator with Point as value type. All points
 have the same dimension.
@@ -341,89 +341,89 @@ last : InputIterator
 traits : const Traits &
 verbose : int
 stream : std::ostream &";
-constexpr const char* CGAL_Min_annulus_d_ambient_dimension = "returns the dimension of the points in $ P$ .
+constexpr const char* Min_annulus_d_ambient_dimension = "returns the dimension of the points in $ P$ .
 
 If min_annulus is empty, the ambient dimension is $ -1$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_annulus_d_number_of_points = "returns the number of points of min_annulus , i.e. $ |P|$ .
+constexpr const char* Min_annulus_d_number_of_points = "returns the number of points of min_annulus , i.e. $ |P|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_annulus_d_number_of_support_points = "returns the number of support points of min_annulus , i.e. $ |S|$ .
+constexpr const char* Min_annulus_d_number_of_support_points = "returns the number of support points of min_annulus , i.e. $ |S|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_annulus_d_number_of_inner_support_points = "returns the number of support points of min_annulus which lie on the inner sphere.
+constexpr const char* Min_annulus_d_number_of_inner_support_points = "returns the number of support points of min_annulus which lie on the inner sphere.
 
 Returns: int";
-constexpr const char* CGAL_Min_annulus_d_number_of_outer_support_points = "returns the number of support points of min_annulus which lie on the outer sphere.
+constexpr const char* Min_annulus_d_number_of_outer_support_points = "returns the number of support points of min_annulus which lie on the outer sphere.
 
 Returns: int";
-constexpr const char* CGAL_Min_annulus_d_points_begin = "returns an iterator referring to the first point of min_annulus .
+constexpr const char* Min_annulus_d_points_begin = "returns an iterator referring to the first point of min_annulus .
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_annulus_d_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_annulus_d_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_annulus_d_support_points_begin = "returns an iterator referring to the first support point of min_annulus .
+constexpr const char* Min_annulus_d_support_points_begin = "returns an iterator referring to the first support point of min_annulus .
 
 $ ma(P)$ is not degenerate, i.e., number_of_support_points() is at least one.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_annulus_d_support_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_annulus_d_support_points_end = "returns the corresponding past-the-end iterator.
 
 $ ma(P)$ is not degenerate, i.e., number_of_support_points() is at least one.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_annulus_d_inner_support_points_begin = "returns an iterator referring to the first inner support point of min_annulus .
+constexpr const char* Min_annulus_d_inner_support_points_begin = "returns an iterator referring to the first inner support point of min_annulus .
 
 Returns: Inner_support_point_iterator";
-constexpr const char* CGAL_Min_annulus_d_inner_support_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_annulus_d_inner_support_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Inner_support_point_iterator";
-constexpr const char* CGAL_Min_annulus_d_outer_support_points_begin = "returns an iterator referring to the first outer support point of min_annulus .
+constexpr const char* Min_annulus_d_outer_support_points_begin = "returns an iterator referring to the first outer support point of min_annulus .
 
 Returns: Outer_support_point_iterator";
-constexpr const char* CGAL_Min_annulus_d_outer_support_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_annulus_d_outer_support_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Outer_support_point_iterator";
-constexpr const char* CGAL_Min_annulus_d_center = "returns the center of min_annulus .
+constexpr const char* Min_annulus_d_center = "returns the center of min_annulus .
 
 An implicit conversion from ET to RT must be available. min_annulus is not
 empty.
 
 Returns: Point";
-constexpr const char* CGAL_Min_annulus_d_squared_inner_radius = "returns the squared inner radius of min_annulus .
+constexpr const char* Min_annulus_d_squared_inner_radius = "returns the squared inner radius of min_annulus .
 
 An implicit conversion from ET to RT must be available. min_annulus is not
 empty.
 
 Returns: FT";
-constexpr const char* CGAL_Min_annulus_d_squared_outer_radius = "returns the squared outer radius of min_annulus .
+constexpr const char* Min_annulus_d_squared_outer_radius = "returns the squared outer radius of min_annulus .
 
 An implicit conversion from ET to RT must be available. min_annulus is not
 empty.
 
 Returns: FT";
-constexpr const char* CGAL_Min_annulus_d_center_coordinates_begin = "returns an iterator referring to the first coordinate of the center of min_annulus .
+constexpr const char* Min_annulus_d_center_coordinates_begin = "returns an iterator referring to the first coordinate of the center of min_annulus .
 
 The coordinates have a rational representation, i.e. the first $ d$ elements
 of the iterator range are the numerators and the $ (d\\!+\\!1)$ -st element is
 the common denominator.
 
 Returns: Coordinate_iterator";
-constexpr const char* CGAL_Min_annulus_d_center_coordinates_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_annulus_d_center_coordinates_end = "returns the corresponding past-the-end iterator.
 
 Returns: Coordinate_iterator";
-constexpr const char* CGAL_Min_annulus_d_squared_inner_radius_numerator = "returns the numerator of the squared inner radius of min_annulus .
+constexpr const char* Min_annulus_d_squared_inner_radius_numerator = "returns the numerator of the squared inner radius of min_annulus .
 
 Returns: ET";
-constexpr const char* CGAL_Min_annulus_d_squared_outer_radius_numerator = "returns the numerator of the squared outer radius of min_annulus .
+constexpr const char* Min_annulus_d_squared_outer_radius_numerator = "returns the numerator of the squared outer radius of min_annulus .
 
 Returns: ET";
-constexpr const char* CGAL_Min_annulus_d_squared_radii_denominator = "returns the denominator of the squared radii of min_annulus .
+constexpr const char* Min_annulus_d_squared_radii_denominator = "returns the denominator of the squared radii of min_annulus .
 
 Returns: ET";
-constexpr const char* CGAL_Min_annulus_d_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of min_annulus , resp.
+constexpr const char* Min_annulus_d_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of min_annulus , resp.
 
 The dimension of p equals min_annulus.ambient_dimension() if min_annulus is
 not empty.
@@ -433,7 +433,7 @@ Parameters
 p : const Point &
 
 Returns: CGAL::Bounded_side";
-constexpr const char* CGAL_Min_annulus_d_has_on_bounded_side = "returns true , iff p lies properly inside min_annulus .
+constexpr const char* Min_annulus_d_has_on_bounded_side = "returns true , iff p lies properly inside min_annulus .
 
 The dimension of p equals min_annulus.ambient_dimension() if min_annulus is
 not empty.
@@ -443,7 +443,7 @@ Parameters
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_annulus_d_has_on_boundary = "returns true , iff p lies on the boundary of min_annulus .
+constexpr const char* Min_annulus_d_has_on_boundary = "returns true , iff p lies on the boundary of min_annulus .
 
 The dimension of p equals min_annulus.ambient_dimension() if min_annulus is
 not empty.
@@ -453,7 +453,7 @@ Parameters
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_annulus_d_has_on_unbounded_side = "returns true , iff p lies properly outside of min_annulus .
+constexpr const char* Min_annulus_d_has_on_unbounded_side = "returns true , iff p lies properly outside of min_annulus .
 
 The dimension of p equals min_annulus.ambient_dimension() if min_annulus is
 not empty.
@@ -463,14 +463,14 @@ Parameters
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_annulus_d_is_empty = "returns true , iff min_annulus is empty (this implies degeneracy).
+constexpr const char* Min_annulus_d_is_empty = "returns true , iff min_annulus is empty (this implies degeneracy).
 
 Returns: bool";
-constexpr const char* CGAL_Min_annulus_d_is_degenerate = "returns true , iff min_annulus is degenerate, i.e. if min_annulus is empty or equal to a single point.
+constexpr const char* Min_annulus_d_is_degenerate = "returns true , iff min_annulus is degenerate, i.e. if min_annulus is empty or equal to a single point.
 
 Returns: bool";
-constexpr const char* CGAL_Min_annulus_d_clear = "resets min_annulus to $ ma(\\emptyset)$ .";
-constexpr const char* CGAL_Min_annulus_d_set = "sets min_annulus to $ ma(P)$ , where $ P$ is the set of points in the range [ first , last ).
+constexpr const char* Min_annulus_d_clear = "resets min_annulus to $ ma(\\emptyset)$ .";
+constexpr const char* Min_annulus_d_set = "sets min_annulus to $ ma(P)$ , where $ P$ is the set of points in the range [ first , last ).
 
 InputIterator is a model of InputIterator with Point as value type. All points
 have the same dimension.
@@ -479,7 +479,7 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_annulus_d_insert = "inserts p into min_annulus .
+constexpr const char* Min_annulus_d_insert = "inserts p into min_annulus .
 
 The dimension of p equals min_annulus.ambient_dimension() if min_annulus is
 not empty.
@@ -487,7 +487,7 @@ not empty.
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Min_annulus_d_insert_1 = "inserts the points in the range [ first , last ) into min_annulus and recomputes the smallest enclosing annulus.
+constexpr const char* Min_annulus_d_insert_1 = "inserts the points in the range [ first , last ) into min_annulus and recomputes the smallest enclosing annulus.
 
 InputIterator is a model of InputIterator with Point as value type. All points
 have the same dimension. If min_annulus is not empty, this dimension must be
@@ -497,7 +497,7 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_annulus_d_is_valid = "returns true , iff min_annulus is valid.
+constexpr const char* Min_annulus_d_is_valid = "returns true , iff min_annulus is valid.
 
 If verbose is true , some messages concerning the performed checks are written
 to standard error stream. The second parameter level is not used, we provide
@@ -509,10 +509,10 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Min_annulus_d_traits = "returns a const reference to the traits class object.
+constexpr const char* Min_annulus_d_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Min_annulus_d_operator = "writes min_annulus to output stream os .
+constexpr const char* Min_annulus_d_operator = "writes min_annulus to output stream os .
 
 An overload of operator<< must be defined for Point .
 
@@ -522,7 +522,7 @@ os : std::ostream &
 min_annulus : const Min_annulus_d < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_annulus_d_operator_1 = "reads min_annulus from input stream is .
+constexpr const char* Min_annulus_d_operator_1 = "reads min_annulus from input stream is .
 
 An overload of operator>> must be defined for Point .
 
@@ -534,25 +534,25 @@ is : std::istream &
 Returns: std::istream &";
 
 // CGAL::Min_circle_2
-constexpr const char* CGAL_Min_circle_2__class__ = "An object of the class Min_circle_2 is the unique circle of smallest area enclosing a finite (multi)set of points in two-dimensional Euclidean space $ \\E^2$ .";
+constexpr const char* Min_circle_2__class__ = "An object of the class Min_circle_2 is the unique circle of smallest area enclosing a finite (multi)set of points in two-dimensional Euclidean space $ \\E^2$ .";
 
-constexpr const char* CGAL_Min_circle_2_Point = "typedef to Traits::Point .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_circle_2_Circle = "typedef to Traits::Circle .
+constexpr const char* Min_circle_2_Point = "typedef to Traits::Point .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_circle_2_Point_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Point .
+constexpr const char* Min_circle_2_Circle = "typedef to Traits::Circle .
+
+Returns: unspecified_type";
+constexpr const char* Min_circle_2_Point_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Point .
 
 Used to access the points of the smallest enclosing circle.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_circle_2_Support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Min_circle_2_Support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the support points of the smallest enclosing circle.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_circle_2_Min_circle_2 = "initializes min_circle to $ mc(P)$ with $ P$ being the set of points in the range [ first , last ).
+constexpr const char* Min_circle_2_Min_circle_2 = "initializes min_circle to $ mc(P)$ with $ P$ being the set of points in the range [ first , last ).
 
 If randomize is true , a random permutation of $ P$ is computed in advance,
 using the random numbers generator random . Usually, this will not be
@@ -568,14 +568,14 @@ last : InputIterator
 randomize : bool
 random : Random &
 traits : const Traits &";
-constexpr const char* CGAL_Min_circle_2_Min_circle_2_1 = "initializes min_circle to $ mc(\\emptyset)$ , the empty set.
+constexpr const char* Min_circle_2_Min_circle_2_1 = "initializes min_circle to $ mc(\\emptyset)$ , the empty set.
 
 min_circle.is_empty() = true .
 
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Min_circle_2_Min_circle_2_2 = "initializes min_circle to $ mc(\\{p\\})$ , the set $ \\{p\\}$ .
+constexpr const char* Min_circle_2_Min_circle_2_2 = "initializes min_circle to $ mc(\\{p\\})$ , the set $ \\{p\\}$ .
 
 min_circle.is_degenerate() = true .
 
@@ -583,14 +583,14 @@ Parameters
 ----------
 p : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_circle_2_Min_circle_2_3 = "initializes min_circle to $ mc(\\{p1,p2\\})$ , the circle with diameter equal to the segment connecting $ p1$ and $ p2$ .
+constexpr const char* Min_circle_2_Min_circle_2_3 = "initializes min_circle to $ mc(\\{p1,p2\\})$ , the circle with diameter equal to the segment connecting $ p1$ and $ p2$ .
 
 Parameters
 ----------
 p1 : const Point &
 p2 : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_circle_2_Min_circle_2_4 = "initializes min_circle to $ mc(\\{p1,p2,p3\\})$ .
+constexpr const char* Min_circle_2_Min_circle_2_4 = "initializes min_circle to $ mc(\\{p1,p2,p3\\})$ .
 
 Parameters
 ----------
@@ -598,25 +598,25 @@ p1 : const Point &
 p2 : const Point &
 p3 : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_circle_2_number_of_points = "returns the number of points of min_circle , i.e. $ |P|$ .
+constexpr const char* Min_circle_2_number_of_points = "returns the number of points of min_circle , i.e. $ |P|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_circle_2_number_of_support_points = "returns the number of support points of min_circle , i.e. $ |S|$ .
+constexpr const char* Min_circle_2_number_of_support_points = "returns the number of support points of min_circle , i.e. $ |S|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_circle_2_points_begin = "returns an iterator referring to the first point of min_circle .
+constexpr const char* Min_circle_2_points_begin = "returns an iterator referring to the first point of min_circle .
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_circle_2_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_circle_2_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_circle_2_support_points_begin = "returns an iterator referring to the first support point of min_circle .
+constexpr const char* Min_circle_2_support_points_begin = "returns an iterator referring to the first support point of min_circle .
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_circle_2_support_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_circle_2_support_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_circle_2_support_point = "returns the i -th support point of min_circle .
+constexpr const char* Min_circle_2_support_point = "returns the i -th support point of min_circle .
 
 Between two modifying operations (see below) any call to
 min_circle.support_point(i) with the same i returns the same point. $ 0 \\leq
@@ -627,49 +627,49 @@ Parameters
 i : int
 
 Returns: const Point &";
-constexpr const char* CGAL_Min_circle_2_circle = "returns the current circle of min_circle .
+constexpr const char* Min_circle_2_circle = "returns the current circle of min_circle .
 
 Returns: const Circle &";
-constexpr const char* CGAL_Min_circle_2_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary of, or properly outside of min_circle , resp.
+constexpr const char* Min_circle_2_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary of, or properly outside of min_circle , resp.
 
 Parameters
 ----------
 p : const Point &
 
 Returns: CGAL::Bounded_side";
-constexpr const char* CGAL_Min_circle_2_has_on_bounded_side = "returns true , iff p lies properly inside min_circle .
+constexpr const char* Min_circle_2_has_on_bounded_side = "returns true , iff p lies properly inside min_circle .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_circle_2_has_on_boundary = "returns true , iff p lies on the boundary of min_circle .
+constexpr const char* Min_circle_2_has_on_boundary = "returns true , iff p lies on the boundary of min_circle .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_circle_2_has_on_unbounded_side = "returns true , iff p lies properly outside of min_circle .
+constexpr const char* Min_circle_2_has_on_unbounded_side = "returns true , iff p lies properly outside of min_circle .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_circle_2_is_empty = "returns true , iff min_circle is empty (this implies degeneracy).
+constexpr const char* Min_circle_2_is_empty = "returns true , iff min_circle is empty (this implies degeneracy).
 
 Returns: bool";
-constexpr const char* CGAL_Min_circle_2_is_degenerate = "returns true , iff min_circle is degenerate, i.e. if min_circle is empty or equal to a single point, equivalently if the number of support points is less than 2.
+constexpr const char* Min_circle_2_is_degenerate = "returns true , iff min_circle is degenerate, i.e. if min_circle is empty or equal to a single point, equivalently if the number of support points is less than 2.
 
 Returns: bool";
-constexpr const char* CGAL_Min_circle_2_insert = "inserts p into min_circle and recomputes the smallest enclosing circle.
+constexpr const char* Min_circle_2_insert = "inserts p into min_circle and recomputes the smallest enclosing circle.
 
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Min_circle_2_insert_1 = "inserts the points in the range [ first , last ) into min_circle and recomputes the smallest enclosing circle by calling insert(p) for each point p in [ first , last ).
+constexpr const char* Min_circle_2_insert_1 = "inserts the points in the range [ first , last ) into min_circle and recomputes the smallest enclosing circle by calling insert(p) for each point p in [ first , last ).
 
 InputIterator must be a model of InputIterator with Point as value type.
 
@@ -677,10 +677,10 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_circle_2_clear = "deletes all points in min_circle and sets min_circle to the empty set.
+constexpr const char* Min_circle_2_clear = "deletes all points in min_circle and sets min_circle to the empty set.
 
 min_circle.is_empty() = true .";
-constexpr const char* CGAL_Min_circle_2_is_valid = "returns true , iff min_circle is valid.
+constexpr const char* Min_circle_2_is_valid = "returns true , iff min_circle is valid.
 
 If verbose is true , some messages concerning the performed checks are written
 to standard error stream. The second parameter level is not used, we provide
@@ -692,10 +692,10 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Min_circle_2_traits = "returns a const reference to the traits class object.
+constexpr const char* Min_circle_2_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Min_circle_2_operator = "writes min_circle to output stream os .
+constexpr const char* Min_circle_2_operator = "writes min_circle to output stream os .
 
 An overload of operator<< must be defined for Point (and for Circle , if
 pretty printing is used).
@@ -706,7 +706,7 @@ os : std::ostream &
 min_circle : const Min_circle_2 < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_circle_2_operator_1 = "reads min_circle from input stream is .
+constexpr const char* Min_circle_2_operator_1 = "reads min_circle from input stream is .
 
 An overload of operator>> must be defined for Point .
 
@@ -718,21 +718,21 @@ is : std::istream &
 Returns: std::istream &";
 
 // CGAL::Min_circle_2_traits_2
-constexpr const char* CGAL_Min_circle_2_traits_2__class__ = "The class Min_circle_2_traits_2 is a traits class for Min_circle_2 <Traits> using the two-dimensional CGAL kernel.";
+constexpr const char* Min_circle_2_traits_2__class__ = "The class Min_circle_2_traits_2 is a traits class for Min_circle_2 <Traits> using the two-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Min_circle_2_traits_2_Point = "typedef to K::Point_2 .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_circle_2_traits_2_Circle = "internal type.
+constexpr const char* Min_circle_2_traits_2_Point = "typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_circle_2_traits_2_Min_circle_2_traits_2 = "default constructor.";
-constexpr const char* CGAL_Min_circle_2_traits_2_Min_circle_2_traits_2_1 = "copy constructor.
+constexpr const char* Min_circle_2_traits_2_Circle = "internal type.
+
+Returns: unspecified_type";
+constexpr const char* Min_circle_2_traits_2_Min_circle_2_traits_2 = "default constructor.";
+constexpr const char* Min_circle_2_traits_2_Min_circle_2_traits_2_1 = "copy constructor.
 
 Parameters
 ----------
  : const Min_circle_2_traits_2< K > &";
-constexpr const char* CGAL_Min_circle_2_traits_2_orientation = "returns CGAL::orientation( p, q, r) .
+constexpr const char* Min_circle_2_traits_2_orientation = "returns CGAL::orientation( p, q, r) .
 
 Parameters
 ----------
@@ -743,29 +743,29 @@ r : const Point &
 Returns: CGAL::Orientation";
 
 // CGAL::Min_ellipse_2
-constexpr const char* CGAL_Min_ellipse_2__class__ = "An object of the class Min_ellipse_2 is the unique ellipse of smallest area enclosing a finite (multi)set of points in two-dimensional Euclidean space $ \\E^2$ .";
+constexpr const char* Min_ellipse_2__class__ = "An object of the class Min_ellipse_2 is the unique ellipse of smallest area enclosing a finite (multi)set of points in two-dimensional Euclidean space $ \\E^2$ .";
 
-constexpr const char* CGAL_Min_ellipse_2_Point = "Typedef to Traits::Point .
+constexpr const char* Min_ellipse_2_Point = "Typedef to Traits::Point .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_ellipse_2_Ellipse = "Typedef to Traits::Ellipse .
+constexpr const char* Min_ellipse_2_Ellipse = "Typedef to Traits::Ellipse .
 
 If you are using the predefined traits class CGAL::Min_ellipse_2_traits_2 <K>
 , you can access the coefficients of the ellipse, see the documentation of
 CGAL::Min_ellipse_2_traits_2 <K> and the example below.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_ellipse_2_Point_iterator = "Non-mutable model of the STL concept BidirectionalIterator with value type Point .
+constexpr const char* Min_ellipse_2_Point_iterator = "Non-mutable model of the STL concept BidirectionalIterator with value type Point .
 
 Used to access the points of the smallest enclosing ellipse.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_ellipse_2_Support_point_iterator = "Non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Min_ellipse_2_Support_point_iterator = "Non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the support points of the smallest enclosing ellipse.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_ellipse_2_Min_Ellipse_2 = "initializes min_ellipse to $ me(P)$ with $ P$ being the set of points in the range [ first , last ).
+constexpr const char* Min_ellipse_2_Min_Ellipse_2 = "initializes min_ellipse to $ me(P)$ with $ P$ being the set of points in the range [ first , last ).
 
 If randomize is true , a random permutation of $ P$ is computed in advance,
 using the random numbers generator random . Usually, this will not be
@@ -781,7 +781,7 @@ last : InputIterator
 randomize : bool
 random : Random &
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_Min_ellipse_2 = "creates a variable min_ellipse of type Min_ellipse_2 .
+constexpr const char* Min_ellipse_2_Min_ellipse_2 = "creates a variable min_ellipse of type Min_ellipse_2 .
 
 It is initialized to $ me(\\emptyset)$ , the empty set. min_ellipse.is_empty()
 = true .
@@ -789,7 +789,7 @@ It is initialized to $ me(\\emptyset)$ , the empty set. min_ellipse.is_empty()
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_Min_ellipse_2_1 = "initializes min_ellipse to $ me(\\{p\\})$ , the set $ \\{p\\}$ .
+constexpr const char* Min_ellipse_2_Min_ellipse_2_1 = "initializes min_ellipse to $ me(\\{p\\})$ , the set $ \\{p\\}$ .
 
 min_ellipse.is_degenerate() = true .
 
@@ -797,7 +797,7 @@ Parameters
 ----------
 p : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_Min_ellipse_2_2 = "initializes min_ellipse to $ me(\\{p,q\\})$ , the set $ \\{ (1-\\lambda) p + \\lambda q \\mid 0 \\leq \\lambda \\leq 1 \\}$
+constexpr const char* Min_ellipse_2_Min_ellipse_2_2 = "initializes min_ellipse to $ me(\\{p,q\\})$ , the set $ \\{ (1-\\lambda) p + \\lambda q \\mid 0 \\leq \\lambda \\leq 1 \\}$
 
 min_ellipse.is_degenerate() = true .
 
@@ -806,7 +806,7 @@ Parameters
 p : const Point &
 q : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_Min_ellipse_2_3 = "initializes min_ellipse to $ me(\\{p1,p2,p3\\})$ .
+constexpr const char* Min_ellipse_2_Min_ellipse_2_3 = "initializes min_ellipse to $ me(\\{p1,p2,p3\\})$ .
 
 Parameters
 ----------
@@ -814,7 +814,7 @@ p1 : const Point &
 p2 : const Point &
 p3 : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_Min_ellipse_2_4 = "initializes min_ellipse to $ me(\\{p1,p2,p3,p4\\})$ .
+constexpr const char* Min_ellipse_2_Min_ellipse_2_4 = "initializes min_ellipse to $ me(\\{p1,p2,p3,p4\\})$ .
 
 Parameters
 ----------
@@ -823,7 +823,7 @@ p2 : const Point &
 p3 : const Point &
 p4 : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_Min_ellipse_2_5 = "initializes min_ellipse to $ me(\\{p1,p2,p3,p4,p5\\})$ .
+constexpr const char* Min_ellipse_2_Min_ellipse_2_5 = "initializes min_ellipse to $ me(\\{p1,p2,p3,p4,p5\\})$ .
 
 Parameters
 ----------
@@ -833,25 +833,25 @@ p3 : const Point &
 p4 : const Point &
 p5 : const Point &
 traits : const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_number_of_points = "returns the number of points of min_ellipse , i.e. $ |P|$ .
+constexpr const char* Min_ellipse_2_number_of_points = "returns the number of points of min_ellipse , i.e. $ |P|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_ellipse_2_number_of_support_points = "returns the number of support points of min_ellipse , i.e. $ |S|$ .
+constexpr const char* Min_ellipse_2_number_of_support_points = "returns the number of support points of min_ellipse , i.e. $ |S|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_ellipse_2_points_begin = "returns an iterator referring to the first point of min_ellipse .
+constexpr const char* Min_ellipse_2_points_begin = "returns an iterator referring to the first point of min_ellipse .
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_ellipse_2_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_ellipse_2_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_ellipse_2_support_points_begin = "returns an iterator referring to the first support point of min_ellipse .
+constexpr const char* Min_ellipse_2_support_points_begin = "returns an iterator referring to the first support point of min_ellipse .
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_ellipse_2_support_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_ellipse_2_support_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_ellipse_2_support_point = "returns the i -th support point of min_ellipse .
+constexpr const char* Min_ellipse_2_support_point = "returns the i -th support point of min_ellipse .
 
 Between two modifying operations (see below) any call to
 min_ellipse.support_point(i) with the same i returns the same point. $ 0 \\leq
@@ -862,49 +862,49 @@ Parameters
 i : int
 
 Returns: const Point &";
-constexpr const char* CGAL_Min_ellipse_2_ellipse = "returns the current ellipse of min_ellipse .
+constexpr const char* Min_ellipse_2_ellipse = "returns the current ellipse of min_ellipse .
 
 Returns: const Ellipse &";
-constexpr const char* CGAL_Min_ellipse_2_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary of, or properly outside of min_ellipse , resp.
+constexpr const char* Min_ellipse_2_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary of, or properly outside of min_ellipse , resp.
 
 Parameters
 ----------
 p : const Point &
 
 Returns: CGAL::Bounded_side";
-constexpr const char* CGAL_Min_ellipse_2_has_on_bounded_side = "returns true , iff p lies properly inside min_ellipse .
+constexpr const char* Min_ellipse_2_has_on_bounded_side = "returns true , iff p lies properly inside min_ellipse .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_has_on_boundary = "returns true , iff p lies on the boundary of min_ellipse .
+constexpr const char* Min_ellipse_2_has_on_boundary = "returns true , iff p lies on the boundary of min_ellipse .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_has_on_unbounded_side = "returns true , iff p lies properly outside of min_ellipse .
+constexpr const char* Min_ellipse_2_has_on_unbounded_side = "returns true , iff p lies properly outside of min_ellipse .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_is_empty = "returns true , iff min_ellipse is empty (this implies degeneracy).
+constexpr const char* Min_ellipse_2_is_empty = "returns true , iff min_ellipse is empty (this implies degeneracy).
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_is_degenerate = "returns true , iff min_ellipse is degenerate, i.e. if min_ellipse is empty, equal to a single point or equal to a segment, equivalently if the number of support points is less than 3.
+constexpr const char* Min_ellipse_2_is_degenerate = "returns true , iff min_ellipse is degenerate, i.e. if min_ellipse is empty, equal to a single point or equal to a segment, equivalently if the number of support points is less than 3.
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_insert = "inserts p into min_ellipse and recomputes the smallest enclosing ellipse.
+constexpr const char* Min_ellipse_2_insert = "inserts p into min_ellipse and recomputes the smallest enclosing ellipse.
 
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Min_ellipse_2_insert_1 = "inserts the points in the range [ first , last ) into min_ellipse and recomputes the smallest enclosing ellipse by calling insert(p) for each point p in [ first , last ).
+constexpr const char* Min_ellipse_2_insert_1 = "inserts the points in the range [ first , last ) into min_ellipse and recomputes the smallest enclosing ellipse by calling insert(p) for each point p in [ first , last ).
 
 InputIterator is a model of InputIterator with Point as value type.
 
@@ -912,10 +912,10 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_ellipse_2_clear = "deletes all points in min_ellipse and sets min_ellipse to the empty set.
+constexpr const char* Min_ellipse_2_clear = "deletes all points in min_ellipse and sets min_ellipse to the empty set.
 
 min_ellipse.is_empty() = true .";
-constexpr const char* CGAL_Min_ellipse_2_is_valid = "returns true , iff min_ellipse contains all points of its defining set $ P$ .
+constexpr const char* Min_ellipse_2_is_valid = "returns true , iff min_ellipse contains all points of its defining set $ P$ .
 
 If verbose is true , some messages concerning the performed checks are written
 to standard error stream. The second parameter level is not used, we provide
@@ -927,10 +927,10 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_traits = "returns a const reference to the traits class object.
+constexpr const char* Min_ellipse_2_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Min_ellipse_2_operator = "writes min_ellipse to output stream os .
+constexpr const char* Min_ellipse_2_operator = "writes min_ellipse to output stream os .
 
 An overload of operator<< must be defined for Point (and for Ellipse , if
 pretty printing is used).
@@ -941,7 +941,7 @@ os : std::ostream &
 min_ellipse : const Min_ellipse_2 < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_ellipse_2_operator_1 = "reads min_ellipse from input stream is .
+constexpr const char* Min_ellipse_2_operator_1 = "reads min_ellipse from input stream is .
 
 An overload of operator>> must be defined for Point .
 
@@ -953,18 +953,18 @@ is : std::istream &
 Returns: std::istream &";
 
 // CGAL::Min_ellipse_2_traits_2
-constexpr const char* CGAL_Min_ellipse_2_traits_2__class__ = "The class Min_ellipse_2_traits_2 is a traits class for CGAL::Min_ellipse_2 <Traits> using the two-dimensional CGAL kernel.";
+constexpr const char* Min_ellipse_2_traits_2__class__ = "The class Min_ellipse_2_traits_2 is a traits class for CGAL::Min_ellipse_2 <Traits> using the two-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Min_ellipse_2_traits_2_Point = "typedef to K::Point_2 .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_ellipse_2_traits_2_Ellipse = "internal type.
+constexpr const char* Min_ellipse_2_traits_2_Point = "typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_ellipse_2_traits_2_is_circle = "tests whether the ellipse is a circle.
+constexpr const char* Min_ellipse_2_traits_2_Ellipse = "internal type.
+
+Returns: unspecified_type";
+constexpr const char* Min_ellipse_2_traits_2_is_circle = "tests whether the ellipse is a circle.
 
 Returns: bool";
-constexpr const char* CGAL_Min_ellipse_2_traits_2_double_coefficients = "gives a double approximation of the ellipse's conic equation.
+constexpr const char* Min_ellipse_2_traits_2_double_coefficients = "gives a double approximation of the ellipse's conic equation.
 
 If K is a Cartesian kernel, the ellipse is the set of all points $ (x,y)$
 satisfying $ rx^2+sy^2+txy+ux+vy+w=0$ . In the Homogeneous case, the ellipse
@@ -979,102 +979,102 @@ t : double &
 u : double &
 v : double &
 w : double &";
-constexpr const char* CGAL_Min_ellipse_2_traits_2_Min_ellipse_2_traits_2 = "default constructor.";
-constexpr const char* CGAL_Min_ellipse_2_traits_2_Min_ellipse_2_traits_2_1 = "copy constructor.
+constexpr const char* Min_ellipse_2_traits_2_Min_ellipse_2_traits_2 = "default constructor.";
+constexpr const char* Min_ellipse_2_traits_2_Min_ellipse_2_traits_2_1 = "copy constructor.
 
 Parameters
 ----------
  : const Min_ellipse_2_traits_2< K > &";
 
 // CGAL::Min_quadrilateral_default_traits_2
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2__class__ = "The class Min_quadrilateral_default_traits_2 is a traits class for the functions min_rectangle_2() , min_parallelogram_2() and min_strip_2() using a two-dimensional CGAL kernel.";
+constexpr const char* Min_quadrilateral_default_traits_2__class__ = "The class Min_quadrilateral_default_traits_2 is a traits class for the functions min_rectangle_2() , min_parallelogram_2() and min_strip_2() using a two-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Point_2 = "Kernel::Point_2 .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Vector_2 = "Kernel::Vector_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Point_2 = "Kernel::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Direction_2 = "Kernel::Direction_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Vector_2 = "Kernel::Vector_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Line_2 = "Kernel::Line_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Direction_2 = "Kernel::Direction_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Rectangle_2 = "internal type.
+constexpr const char* Min_quadrilateral_default_traits_2_Line_2 = "Kernel::Line_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Parallelogram_2 = "internal type.
+constexpr const char* Min_quadrilateral_default_traits_2_Rectangle_2 = "internal type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Strip_2 = "internal type.
+constexpr const char* Min_quadrilateral_default_traits_2_Parallelogram_2 = "internal type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Equal_2 = "Kernel::Equal_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Strip_2 = "internal type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Less_xy_2 = "Kernel::Less_xy_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Equal_2 = "Kernel::Equal_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Less_yx_2 = "Kernel::Less_yx_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Less_xy_2 = "Kernel::Less_xy_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Orientation_2 = "Kernel::Orientation_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Less_yx_2 = "Kernel::Less_yx_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Has_on_negative_side_2 = "Kernel::Has_on_negative_side_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Orientation_2 = "Kernel::Orientation_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Compare_angle_with_x_axis_2 = "Kernel::Compare_angle_with_x_axis_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Has_on_negative_side_2 = "Kernel::Has_on_negative_side_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Area_less_rectangle_2 = "AdaptableBinaryFunction class.
+constexpr const char* Min_quadrilateral_default_traits_2_Compare_angle_with_x_axis_2 = "Kernel::Compare_angle_with_x_axis_2 .
+
+Returns: unspecified_type";
+constexpr const char* Min_quadrilateral_default_traits_2_Area_less_rectangle_2 = "AdaptableBinaryFunction class.
 
 op : Rectangle_2 $ \\times$ Rectangle_2 $ \\rightarrow$ bool . op(r1,r2) returns
 true, iff the area of $ r1$ is strictly less than the area of $ r2$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Area_less_parallelogram_2 = "AdaptableBinaryFunction class op : Parallelogram_2 $ \\times$ Parallelogram_2 $ \\rightarrow$ bool .
+constexpr const char* Min_quadrilateral_default_traits_2_Area_less_parallelogram_2 = "AdaptableBinaryFunction class op : Parallelogram_2 $ \\times$ Parallelogram_2 $ \\rightarrow$ bool .
 
 op(p1,p2) returns true, iff the area of $ p1$ is strictly less than the area
 of $ p2$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Width_less_strip_2 = "AdaptableBinaryFunction class.
+constexpr const char* Min_quadrilateral_default_traits_2_Width_less_strip_2 = "AdaptableBinaryFunction class.
 
 op : Strip_2 $ \\times$ Strip_2 $ \\rightarrow$ bool . op(s1,s2) returns true,
 iff the width of $ s1$ is strictly less than the width of $ s2$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_vector_2 = "Kernel::Construct_vector_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_vector_2 = "Kernel::Construct_vector_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_vector_from_direction_2 = "AdaptableFunctor.
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_vector_from_direction_2 = "AdaptableFunctor.
 
 op : Direction_2 $ \\rightarrow$ Vector_2 . op(d) returns a vector in direction
 d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_perpendicular_vector_2 = "Kernel::Construct_perpendicular_vector_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_perpendicular_vector_2 = "Kernel::Construct_perpendicular_vector_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_direction_2 = "Kernel::Construct_direction_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_direction_2 = "Kernel::Construct_direction_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_opposite_direction_2 = "Kernel::Construct_opposite_direction_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_opposite_direction_2 = "Kernel::Construct_opposite_direction_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_line_2 = "Kernel::Construct_line_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_line_2 = "Kernel::Construct_line_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_rectangle_2 = "Function class op : Point_2 $ \\times$ Direction_2 $ \\times$ Point_2 $ \\times$ Point_2 $ \\times$ Point_2 $ \\rightarrow$ Rectangle_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_rectangle_2 = "Function class op : Point_2 $ \\times$ Direction_2 $ \\times$ Point_2 $ \\times$ Point_2 $ \\times$ Point_2 $ \\rightarrow$ Rectangle_2 .
 
 If the points p1 , p2 , p3 , p4 form the boundary of a convex polygon
 (oriented counterclockwise), op(p1,d,p2,p3,p4) returns the rectangle with one
 of the points on each side and one sides parallel to d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_parallelogram_2 = "Function class.
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_parallelogram_2 = "Function class.
 
 op : Point_2 $ \\times$ Direction_2 $ \\times$ Point_2 $ \\times$ Direction_2 $
 \\times$ Point_2 $ \\times$ Point_2 $ \\rightarrow$ Rectangle_2 . If the points
@@ -1083,13 +1083,13 @@ counterclockwise), op(p1,d1,p2,d2,p3,p4) returns the parallelogram with one of
 the points on each side and one side parallel to each of d1 and d2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_Construct_strip_2 = "Function class op : Point_2 $ \\times$ Direction_2 $ \\times$ Point_2 $ \\rightarrow$ Strip_2 .
+constexpr const char* Min_quadrilateral_default_traits_2_Construct_strip_2 = "Function class op : Point_2 $ \\times$ Direction_2 $ \\times$ Point_2 $ \\rightarrow$ Strip_2 .
 
 op(p1,d,p2) returns the strip bounded by the lines through p1 resp. p2 with
 direction d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_copy_rectangle_vertices_2 = "copies the four vertices of r in counterclockwise order to o .
+constexpr const char* Min_quadrilateral_default_traits_2_copy_rectangle_vertices_2 = "copies the four vertices of r in counterclockwise order to o .
 
 Parameters
 ----------
@@ -1097,7 +1097,7 @@ r : const Rectangle_2 &
 o : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_copy_parallelogram_vertices_2 = "copies the four vertices of p in counterclockwise order to o .
+constexpr const char* Min_quadrilateral_default_traits_2_copy_parallelogram_vertices_2 = "copies the four vertices of p in counterclockwise order to o .
 
 Parameters
 ----------
@@ -1105,7 +1105,7 @@ p : const Parallelogram_2 &
 o : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Min_quadrilateral_default_traits_2_copy_strip_lines_2 = "copies the two lines bounding s to o .
+constexpr const char* Min_quadrilateral_default_traits_2_copy_strip_lines_2 = "copies the two lines bounding s to o .
 
 Parameters
 ----------
@@ -1115,136 +1115,136 @@ o : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Min_sphere_annulus_d_traits_2
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2__class__ = "The class Min_sphere_annulus_d_traits_2 is a traits class for the $ d$ -dimensional optimization algorithms using the two-dimensional CGAL kernel.";
+constexpr const char* Min_sphere_annulus_d_traits_2__class__ = "The class Min_sphere_annulus_d_traits_2 is a traits class for the $ d$ -dimensional optimization algorithms using the two-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Point_d = "typedef to K::Point_2 .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Rep_tag = "typedef to K::Rep_tag .
+constexpr const char* Min_sphere_annulus_d_traits_2_Point_d = "typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_RT = "typedef to K::RT .
+constexpr const char* Min_sphere_annulus_d_traits_2_Rep_tag = "typedef to K::Rep_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_FT = "typedef to K::FT .
+constexpr const char* Min_sphere_annulus_d_traits_2_RT = "typedef to K::RT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Access_dimension_d = "typedef to K::Access_dimension_2 .
+constexpr const char* Min_sphere_annulus_d_traits_2_FT = "typedef to K::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Access_coordinates_begin_d = "typedef to K::Access_coordinates_begin_2 .
+constexpr const char* Min_sphere_annulus_d_traits_2_Access_dimension_d = "typedef to K::Access_dimension_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Construct_point_d = "typedef to K::Construct_point_2 .
+constexpr const char* Min_sphere_annulus_d_traits_2_Access_coordinates_begin_d = "typedef to K::Access_coordinates_begin_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_ET = "second template parameter (default is K::RT ).
+constexpr const char* Min_sphere_annulus_d_traits_2_Construct_point_d = "typedef to K::Construct_point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_NT = "third template parameter (default is K::RT ).
+constexpr const char* Min_sphere_annulus_d_traits_2_ET = "second template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Min_sphere_annulus_d_traits_2 = "default constructor.";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_2_Min_sphere_annulus_d_traits_2_1 = "copy constructor.
+constexpr const char* Min_sphere_annulus_d_traits_2_NT = "third template parameter (default is K::RT ).
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_annulus_d_traits_2_Min_sphere_annulus_d_traits_2 = "default constructor.";
+constexpr const char* Min_sphere_annulus_d_traits_2_Min_sphere_annulus_d_traits_2_1 = "copy constructor.
 
 Parameters
 ----------
  : const Min_sphere_annulus_d_traits_2< K, ET , NT > &";
 
 // CGAL::Min_sphere_annulus_d_traits_3
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3__class__ = "The class Min_sphere_annulus_d_traits_3 is a traits class for the $ d$ -dimensional optimization algorithms using the three-dimensional CGAL kernel.";
+constexpr const char* Min_sphere_annulus_d_traits_3__class__ = "The class Min_sphere_annulus_d_traits_3 is a traits class for the $ d$ -dimensional optimization algorithms using the three-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Point_d = "typedef to K::Point_3 .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Rep_tag = "typedef to K::Rep_tag .
+constexpr const char* Min_sphere_annulus_d_traits_3_Point_d = "typedef to K::Point_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_RT = "typedef to K::RT .
+constexpr const char* Min_sphere_annulus_d_traits_3_Rep_tag = "typedef to K::Rep_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_FT = "typedef to K::FT .
+constexpr const char* Min_sphere_annulus_d_traits_3_RT = "typedef to K::RT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Access_dimension_d = "typedef to K::Access_dimension_3 .
+constexpr const char* Min_sphere_annulus_d_traits_3_FT = "typedef to K::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Access_coordinates_begin_d = "typedef to K::Access_coordinates_begin_3 .
+constexpr const char* Min_sphere_annulus_d_traits_3_Access_dimension_d = "typedef to K::Access_dimension_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Construct_point_d = "typedef to K::Construct_point_3 .
+constexpr const char* Min_sphere_annulus_d_traits_3_Access_coordinates_begin_d = "typedef to K::Access_coordinates_begin_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_ET = "second template parameter (default is K::RT ).
+constexpr const char* Min_sphere_annulus_d_traits_3_Construct_point_d = "typedef to K::Construct_point_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_NT = "third template parameter (default is K::RT ).
+constexpr const char* Min_sphere_annulus_d_traits_3_ET = "second template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Min_sphere_annulus_d_traits_3 = "default constructor.";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_3_Min_sphere_annulus_d_traits_3_1 = "copy constructor.
+constexpr const char* Min_sphere_annulus_d_traits_3_NT = "third template parameter (default is K::RT ).
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_annulus_d_traits_3_Min_sphere_annulus_d_traits_3 = "default constructor.";
+constexpr const char* Min_sphere_annulus_d_traits_3_Min_sphere_annulus_d_traits_3_1 = "copy constructor.
 
 Parameters
 ----------
  : const Min_sphere_annulus_d_traits_3< K, ET , NT > &";
 
 // CGAL::Min_sphere_annulus_d_traits_d
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d__class__ = "The class Min_sphere_annulus_d_traits_d is a traits class for the $ d$ -dimensional optimization algorithms using the $ d$ -dimensional CGAL kernel.";
+constexpr const char* Min_sphere_annulus_d_traits_d__class__ = "The class Min_sphere_annulus_d_traits_d is a traits class for the $ d$ -dimensional optimization algorithms using the $ d$ -dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Point_d = "typedef to K::Point_d .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Rep_tag = "typedef to K::Rep_tag .
+constexpr const char* Min_sphere_annulus_d_traits_d_Point_d = "typedef to K::Point_d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_RT = "typedef to K::RT .
+constexpr const char* Min_sphere_annulus_d_traits_d_Rep_tag = "typedef to K::Rep_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_FT = "typedef to K::FT .
+constexpr const char* Min_sphere_annulus_d_traits_d_RT = "typedef to K::RT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Access_dimension_d = "typedef to K::Access_dimension_d .
+constexpr const char* Min_sphere_annulus_d_traits_d_FT = "typedef to K::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Access_coordinates_begin_d = "typedef to K::Access_coordinates_begin_d .
+constexpr const char* Min_sphere_annulus_d_traits_d_Access_dimension_d = "typedef to K::Access_dimension_d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Construct_point_d = "typedef to K::Construct_point_d .
+constexpr const char* Min_sphere_annulus_d_traits_d_Access_coordinates_begin_d = "typedef to K::Access_coordinates_begin_d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_ET = "second template parameter (default is K::RT ).
+constexpr const char* Min_sphere_annulus_d_traits_d_Construct_point_d = "typedef to K::Construct_point_d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_NT = "third template parameter (default is K::RT ).
+constexpr const char* Min_sphere_annulus_d_traits_d_ET = "second template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Min_sphere_annulus_d_traits_d = "default constructor.";
-constexpr const char* CGAL_Min_sphere_annulus_d_traits_d_Min_sphere_annulus_d_traits_d_1 = "copy constructor.
+constexpr const char* Min_sphere_annulus_d_traits_d_NT = "third template parameter (default is K::RT ).
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_annulus_d_traits_d_Min_sphere_annulus_d_traits_d = "default constructor.";
+constexpr const char* Min_sphere_annulus_d_traits_d_Min_sphere_annulus_d_traits_d_1 = "copy constructor.
 
 Parameters
 ----------
  : const Min_sphere_annulus_d_traits_d< K, ET , NT > &";
 
 // CGAL::Min_sphere_d
-constexpr const char* CGAL_Min_sphere_d__class__ = "An object of the class Min_sphere_d is the unique sphere of smallest volume enclosing a finite (multi)set of points in $ d$ -dimensional Euclidean space $ \\E^d$ .";
+constexpr const char* Min_sphere_d__class__ = "An object of the class Min_sphere_d is the unique sphere of smallest volume enclosing a finite (multi)set of points in $ d$ -dimensional Euclidean space $ \\E^d$ .";
 
-constexpr const char* CGAL_Min_sphere_d_FT = "typedef to Traits::FT .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_d_Point = "typedef to Traits::Point .
+constexpr const char* Min_sphere_d_FT = "typedef to Traits::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_d_Point_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Point .
+constexpr const char* Min_sphere_d_Point = "typedef to Traits::Point .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_d_Point_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Point .
 
 Used to access the points used to build the smallest enclosing sphere.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_d_Support_point_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Point .
+constexpr const char* Min_sphere_d_Support_point_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Point .
 
 Used to access the support points defining the smallest enclosing sphere.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_d_Min_sphere_d = "creates a variable of type Min_sphere_d and initializes it to $ ms(\\emptyset)$ .
+constexpr const char* Min_sphere_d_Min_sphere_d = "creates a variable of type Min_sphere_d and initializes it to $ ms(\\emptyset)$ .
 
 If the traits parameter is not supplied, the class Traits must provide a
 default constructor.
@@ -1252,7 +1252,7 @@ default constructor.
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Min_sphere_d_Min_sphere_d_1 = "creates a variable min_sphere of type Min_sphere_d .
+constexpr const char* Min_sphere_d_Min_sphere_d_1 = "creates a variable min_sphere of type Min_sphere_d .
 
 It is initialized to $ ms(P)$ with $ P$ being the set of points in the range [
 first , last ). InputIterator is a model of InputIterator with Point as value
@@ -1264,40 +1264,40 @@ Parameters
 first : InputIterator
 last : InputIterator
 traits : const Traits &";
-constexpr const char* CGAL_Min_sphere_d_number_of_points = "returns the number of points of min_sphere , i.e. $ |P|$ .
+constexpr const char* Min_sphere_d_number_of_points = "returns the number of points of min_sphere , i.e. $ |P|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_sphere_d_number_of_support_points = "returns the number of support points of min_sphere , i.e. $ |S|$ .
+constexpr const char* Min_sphere_d_number_of_support_points = "returns the number of support points of min_sphere , i.e. $ |S|$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_sphere_d_points_begin = "returns an iterator referring to the first point of min_sphere .
+constexpr const char* Min_sphere_d_points_begin = "returns an iterator referring to the first point of min_sphere .
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_sphere_d_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_sphere_d_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Min_sphere_d_support_points_begin = "returns an iterator referring to the first support point of min_sphere .
+constexpr const char* Min_sphere_d_support_points_begin = "returns an iterator referring to the first support point of min_sphere .
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_sphere_d_support_points_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_sphere_d_support_points_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Min_sphere_d_ambient_dimension = "returns the dimension of the points in $ P$ .
+constexpr const char* Min_sphere_d_ambient_dimension = "returns the dimension of the points in $ P$ .
 
 If min_sphere is empty, the ambient dimension is $ -1$ .
 
 Returns: int";
-constexpr const char* CGAL_Min_sphere_d_center = "returns the center of min_sphere .
+constexpr const char* Min_sphere_d_center = "returns the center of min_sphere .
 
 min_sphere is not empty.
 
 Returns: const Point &";
-constexpr const char* CGAL_Min_sphere_d_squared_radius = "returns the squared radius of min_sphere .
+constexpr const char* Min_sphere_d_squared_radius = "returns the squared radius of min_sphere .
 
 min_sphere is not empty.
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_d_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of min_sphere , resp.
+constexpr const char* Min_sphere_d_bounded_side = "returns CGAL::ON_BOUNDED_SIDE , CGAL::ON_BOUNDARY , or CGAL::ON_UNBOUNDED_SIDE iff p lies properly inside, on the boundary, or properly outside of min_sphere , resp.
 
 If min_sphere is not empty, the dimension of $ p$ equals ambient_dimension() .
 
@@ -1306,7 +1306,7 @@ Parameters
 p : const Point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Min_sphere_d_has_on_bounded_side = "returns true , iff p lies properly inside min_sphere .
+constexpr const char* Min_sphere_d_has_on_bounded_side = "returns true , iff p lies properly inside min_sphere .
 
 If min_sphere is not empty, the dimension of $ p$ equals ambient_dimension() .
 
@@ -1315,7 +1315,7 @@ Parameters
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_d_has_on_boundary = "returns true , iff p lies on the boundary of min_sphere .
+constexpr const char* Min_sphere_d_has_on_boundary = "returns true , iff p lies on the boundary of min_sphere .
 
 if min_sphere is not empty, the dimension of $ p$ equals ambient_dimension() .
 
@@ -1324,7 +1324,7 @@ Parameters
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_d_has_on_unbounded_side = "returns true , iff p lies properly outside of min_sphere .
+constexpr const char* Min_sphere_d_has_on_unbounded_side = "returns true , iff p lies properly outside of min_sphere .
 
 If min_sphere is not empty, the dimension of $ p$ equals ambient_dimension() .
 
@@ -1333,14 +1333,14 @@ Parameters
 p : const Point &
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_d_is_empty = "returns true , iff min_sphere is empty (this implies degeneracy).
+constexpr const char* Min_sphere_d_is_empty = "returns true , iff min_sphere is empty (this implies degeneracy).
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_d_is_degenerate = "returns true , iff min_sphere is degenerate, i.e. if min_sphere is empty or equal to a single point, equivalently if the number of support points is less than 2.
+constexpr const char* Min_sphere_d_is_degenerate = "returns true , iff min_sphere is degenerate, i.e. if min_sphere is empty or equal to a single point, equivalently if the number of support points is less than 2.
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_d_clear = "resets min_sphere to $ ms(\\emptyset)$ .";
-constexpr const char* CGAL_Min_sphere_d_set = "sets min_sphere to the $ ms(P)$ , where $ P$ is the set of points in the range [ first , last ).
+constexpr const char* Min_sphere_d_clear = "resets min_sphere to $ ms(\\emptyset)$ .";
+constexpr const char* Min_sphere_d_set = "sets min_sphere to the $ ms(P)$ , where $ P$ is the set of points in the range [ first , last ).
 
 InputIterator is a model of InputIterator with Point as value type. All points
 have the same dimension.
@@ -1349,7 +1349,7 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_sphere_d_insert = "inserts p into min_sphere .
+constexpr const char* Min_sphere_d_insert = "inserts p into min_sphere .
 
 If p lies inside the current sphere, this is a constant-time operation,
 otherwise it might take longer, but usually substantially less than
@@ -1359,7 +1359,7 @@ equals ambient_dimension() if min_sphere is not empty.
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Min_sphere_d_insert_1 = "inserts the points in the range [ first , last ) into min_sphere and recomputes the smallest enclosing sphere, by calling insert for all points in the range.
+constexpr const char* Min_sphere_d_insert_1 = "inserts the points in the range [ first , last ) into min_sphere and recomputes the smallest enclosing sphere, by calling insert for all points in the range.
 
 InputIterator is a model of InputIterator with Point as value type. All points
 have the same dimension. If min_sphere is not empty, this dimension must be
@@ -1369,7 +1369,7 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_sphere_d_is_valid = "returns true , iff min_sphere is valid.
+constexpr const char* Min_sphere_d_is_valid = "returns true , iff min_sphere is valid.
 
 If verbose is true , some messages concerning the performed checks are written
 to standard error stream. The second parameter level is not used, we provide
@@ -1381,10 +1381,10 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_d_traits = "returns a const reference to the traits class object.
+constexpr const char* Min_sphere_d_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Min_sphere_d_operator = "writes min_sphere to output stream os .
+constexpr const char* Min_sphere_d_operator = "writes min_sphere to output stream os .
 
 An overload of operator<< must be defined for Point .
 
@@ -1394,7 +1394,7 @@ os : std::ostream &
 min_sphere : const Min_sphere_d < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_sphere_d_operator_1 = "reads min_sphere from input stream is .
+constexpr const char* Min_sphere_d_operator_1 = "reads min_sphere from input stream is .
 
 An overload of operator>> must be defined for Point
 
@@ -1406,31 +1406,31 @@ is : std::istream &
 Returns: std::istream &";
 
 // CGAL::Min_sphere_of_points_d_traits_2
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2__class__ = "The class Min_sphere_of_points_d_traits_2 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
+constexpr const char* Min_sphere_of_points_d_traits_2__class__ = "The class Min_sphere_of_points_d_traits_2 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
 
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_D = "is the constant 2, i.e. the dimension of $ \\mathbb{R}^2$ .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_Radius = "is a typedef to the template parameter FT
+constexpr const char* Min_sphere_of_points_d_traits_2_D = "is the constant 2, i.e. the dimension of $ \\mathbb{R}^2$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_Point = "is a typedef to K::Point_2 .
+constexpr const char* Min_sphere_of_points_d_traits_2_Radius = "is a typedef to the template parameter FT
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_Sphere = "is a typedef to Point .
+constexpr const char* Min_sphere_of_points_d_traits_2_Point = "is a typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_2 .
+constexpr const char* Min_sphere_of_points_d_traits_2_Sphere = "is a typedef to Point .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_radius = "returns 0 .
+constexpr const char* Min_sphere_of_points_d_traits_2_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_2 .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_points_d_traits_2_radius = "returns 0 .
 
 Parameters
 ----------
 s : const Sphere &
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_2_center_cartesian_begin = "maps to s.first.cartesian_begin() .
+constexpr const char* Min_sphere_of_points_d_traits_2_center_cartesian_begin = "maps to s.first.cartesian_begin() .
 
 Parameters
 ----------
@@ -1439,31 +1439,31 @@ s : const Sphere &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Min_sphere_of_points_d_traits_3
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3__class__ = "The class Min_sphere_of_points_d_traits_3 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
+constexpr const char* Min_sphere_of_points_d_traits_3__class__ = "The class Min_sphere_of_points_d_traits_3 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
 
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_D = "is the constant 3, i.e. the dimension of $ \\mathbb{R}^3$ .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_Radius = "is a typedef to the template parameter FT
+constexpr const char* Min_sphere_of_points_d_traits_3_D = "is the constant 3, i.e. the dimension of $ \\mathbb{R}^3$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_Point = "is a typedef to K::Point_3 .
+constexpr const char* Min_sphere_of_points_d_traits_3_Radius = "is a typedef to the template parameter FT
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_Sphere = "is a typedef to Point .
+constexpr const char* Min_sphere_of_points_d_traits_3_Point = "is a typedef to K::Point_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_3 .
+constexpr const char* Min_sphere_of_points_d_traits_3_Sphere = "is a typedef to Point .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_radius = "returns 0 .
+constexpr const char* Min_sphere_of_points_d_traits_3_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_3 .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_points_d_traits_3_radius = "returns 0 .
 
 Parameters
 ----------
 s : const Sphere &
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_3_center_cartesian_begin = "maps to s.first.cartesian_begin() .
+constexpr const char* Min_sphere_of_points_d_traits_3_center_cartesian_begin = "maps to s.first.cartesian_begin() .
 
 Parameters
 ----------
@@ -1472,31 +1472,31 @@ s : const Sphere &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Min_sphere_of_points_d_traits_d
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d__class__ = "The class Min_sphere_of_points_d_traits_d <K, FT ,Dim,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
+constexpr const char* Min_sphere_of_points_d_traits_d__class__ = "The class Min_sphere_of_points_d_traits_d <K, FT ,Dim,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
 
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_D = "is the constant Dim .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_Radius = "is a typedef to the template parameter FT
+constexpr const char* Min_sphere_of_points_d_traits_d_D = "is the constant Dim .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_Point = "is a typedef to K::Point_d .
+constexpr const char* Min_sphere_of_points_d_traits_d_Radius = "is a typedef to the template parameter FT
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_Sphere = "is a typedef to Point .
+constexpr const char* Min_sphere_of_points_d_traits_d_Point = "is a typedef to K::Point_d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_d .
+constexpr const char* Min_sphere_of_points_d_traits_d_Sphere = "is a typedef to Point .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_radius = "returns 0 .
+constexpr const char* Min_sphere_of_points_d_traits_d_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_d .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_points_d_traits_d_radius = "returns 0 .
 
 Parameters
 ----------
 s : const Sphere &
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_of_points_d_traits_d_center_cartesian_begin = "maps to s.cartesian_begin() .
+constexpr const char* Min_sphere_of_points_d_traits_d_center_cartesian_begin = "maps to s.cartesian_begin() .
 
 Parameters
 ----------
@@ -1505,15 +1505,15 @@ s : const Sphere &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Min_sphere_of_spheres_d
-constexpr const char* CGAL_Min_sphere_of_spheres_d__class__ = "An object of the class Min_sphere_of_spheres_d is a data structure that represents the unique sphere of smallest volume enclosing a finite set of spheres in $ d$ -dimensional Euclidean space $ \\E^d$ .";
+constexpr const char* Min_sphere_of_spheres_d__class__ = "An object of the class Min_sphere_of_spheres_d is a data structure that represents the unique sphere of smallest volume enclosing a finite set of spheres in $ d$ -dimensional Euclidean space $ \\E^d$ .";
 
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Sphere = "is a typedef to Traits::Sphere .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_FT = "is a typedef to Traits::FT .
+constexpr const char* Min_sphere_of_spheres_d_Sphere = "is a typedef to Traits::Sphere .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Result = "is the type of the radius and of the center coordinates of the computed minsphere: When FT is an inexact number type ( double , for instance), then Result is simply FT .
+constexpr const char* Min_sphere_of_spheres_d_FT = "is a typedef to Traits::FT .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_spheres_d_Result = "is the type of the radius and of the center coordinates of the computed minsphere: When FT is an inexact number type ( double , for instance), then Result is simply FT .
 
 However, when FT is an exact number type, then Result is a typedef to a
 derived class of std::pair< FT , FT > ; an instance of this type represents
@@ -1522,7 +1522,7 @@ element of the pair and where the number $ t$ is accessed using the member
 function discriminant() of class Min_sphere_of_spheres_d <Traits> .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Algorithm = "is either CGAL::LP_algorithm or CGAL::Farthest_first_heuristic .
+constexpr const char* Min_sphere_of_spheres_d_Algorithm = "is either CGAL::LP_algorithm or CGAL::Farthest_first_heuristic .
 
 As is described in the documentation of concept MinSphereOfSpheresTraits , the
 type Algorithm reflects the method which is used to compute the minsphere.
@@ -1531,15 +1531,15 @@ Traits::Algorithm should not be supported anymore in a future release, then
 Algorithm will have another type.)
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Support_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Sphere .
+constexpr const char* Min_sphere_of_spheres_d_Support_iterator = "non-mutable model of the STL concept BidirectionalIterator with value type Sphere .
 
 Used to access the support spheres defining the smallest enclosing sphere.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Cartesian_const_iterator = "non-mutable model of the STL concept BidirectionalIterator to access the center coordinates of the minsphere.
+constexpr const char* Min_sphere_of_spheres_d_Cartesian_const_iterator = "non-mutable model of the STL concept BidirectionalIterator to access the center coordinates of the minsphere.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Min_sphere_of_spheres_d = "creates a variable of type Min_sphere_of_spheres_d and initializes it to $ ms(\\emptyset)$ .
+constexpr const char* Min_sphere_of_spheres_d_Min_sphere_of_spheres_d = "creates a variable of type Min_sphere_of_spheres_d and initializes it to $ ms(\\emptyset)$ .
 
 If the traits parameter is not supplied, the class Traits must provide a
 default constructor.
@@ -1547,7 +1547,7 @@ default constructor.
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_Min_sphere_of_spheres_d_1 = "creates a variable minsphere of type Min_sphere_of_spheres_d and inserts (cf.
+constexpr const char* Min_sphere_of_spheres_d_Min_sphere_of_spheres_d_1 = "creates a variable minsphere of type Min_sphere_of_spheres_d and inserts (cf.
 
 insert() ) the spheres from the range [ first , last ). InputIterator is a
 model of InputIterator with Sphere as value type. If the traits parameter is
@@ -1558,13 +1558,13 @@ Parameters
 first : InputIterator
 last : InputIterator
 traits : const Traits &";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_support_begin = "returns an iterator referring to the first support sphere of minsphere .
+constexpr const char* Min_sphere_of_spheres_d_support_begin = "returns an iterator referring to the first support sphere of minsphere .
 
 Returns: Support_iterator";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_support_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Min_sphere_of_spheres_d_support_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_iterator";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_discriminant = "returns the discriminant of minsphere .
+constexpr const char* Min_sphere_of_spheres_d_discriminant = "returns the discriminant of minsphere .
 
 This number is undefined when FT is an inexact number type. When FT is exact,
 the center coordinates and the radius of the minsphere are numbers of the form
@@ -1572,7 +1572,7 @@ $ a+b\\sqrt{t}$ , where $ t$ is the discriminant of the minsphere as returned
 by this function. minsphere is not empty, and FT is an exact number type.
 
 Returns: const FT &";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_radius = "returns the radius of minsphere .
+constexpr const char* Min_sphere_of_spheres_d_radius = "returns the radius of minsphere .
 
 If FT is an exact number type then the radius of the minsphere is the real
 number $ a+b\\sqrt{t}$ , where $ t$ is the minsphere's discriminant, $ a$ is
@@ -1580,7 +1580,7 @@ the first and $ b$ the second component of the pair returned by radius() .
 minsphere is not empty.
 
 Returns: Result";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_center_cartesian_begin = "returns a const-iterator to the first of the Traits::D center coordinates of minsphere .
+constexpr const char* Min_sphere_of_spheres_d_center_cartesian_begin = "returns a const-iterator to the first of the Traits::D center coordinates of minsphere .
 
 The iterator returns objects of type Result . If FT is an exact number type,
 then a center coordinate is represented by a pair $ (a,b)$ describing the real
@@ -1588,16 +1588,16 @@ number $ a+b\\sqrt{t}$ , where $ t$ is the minsphere's discriminant (cf.
 discriminant() ). minsphere is not empty.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_center_cartesian_end = "returns the corresponding past-the-end iterator, i.e.
+constexpr const char* Min_sphere_of_spheres_d_center_cartesian_end = "returns the corresponding past-the-end iterator, i.e.
 
 \\ center_cartesian_begin() +Traits::D . minsphere is not empty.
 
 Returns: Cartesian_const_iterator";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_is_empty = "returns true , iff minsphere is empty, i.e. iff $ ms(S)=\\emptyset$ .
+constexpr const char* Min_sphere_of_spheres_d_is_empty = "returns true , iff minsphere is empty, i.e. iff $ ms(S)=\\emptyset$ .
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_clear = "resets minsphere to $ ms(\\emptyset)$ , with $ S:= \\emptyset$ .";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_set = "sets minsphere to the $ ms(S)$ , where $ S$ is the set of spheres in the range [ first , last ).
+constexpr const char* Min_sphere_of_spheres_d_clear = "resets minsphere to $ ms(\\emptyset)$ , with $ S:= \\emptyset$ .";
+constexpr const char* Min_sphere_of_spheres_d_set = "sets minsphere to the $ ms(S)$ , where $ S$ is the set of spheres in the range [ first , last ).
 
 InputIterator is a model of InputIterator with Sphere as value type.
 
@@ -1605,12 +1605,12 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_insert = "inserts the sphere s into the set $ S$ of instance minsphere .
+constexpr const char* Min_sphere_of_spheres_d_insert = "inserts the sphere s into the set $ S$ of instance minsphere .
 
 Parameters
 ----------
 s : const Sphere &";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_insert_1 = "inserts the spheres in the range [ first , last ) into the set $ S$ of instance minsphere .
+constexpr const char* Min_sphere_of_spheres_d_insert_1 = "inserts the spheres in the range [ first , last ) into the set $ S$ of instance minsphere .
 
 InputIterator is a model of InputIterator with Sphere as value type.
 
@@ -1618,41 +1618,41 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_is_valid = "returns true , iff minsphere is valid.
+constexpr const char* Min_sphere_of_spheres_d_is_valid = "returns true , iff minsphere is valid.
 
 When FT is inexact, this routine always returns true .
 
 Returns: bool";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits = "returns a const reference to the traits class object.
+constexpr const char* Min_sphere_of_spheres_d_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
 
 // CGAL::Min_sphere_of_spheres_d_traits_2
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2__class__ = "The class Min_sphere_of_spheres_d_traits_2 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
+constexpr const char* Min_sphere_of_spheres_d_traits_2__class__ = "The class Min_sphere_of_spheres_d_traits_2 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
 
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_Radius = "is a typedef to the template parameter FT
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_Point = "is a typedef to K::Point_2 .
+constexpr const char* Min_sphere_of_spheres_d_traits_2_Radius = "is a typedef to the template parameter FT
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_Sphere = "is a typedef to std::pair< Point , Radius > .
+constexpr const char* Min_sphere_of_spheres_d_traits_2_Point = "is a typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_2 .
+constexpr const char* Min_sphere_of_spheres_d_traits_2_Sphere = "is a typedef to std::pair< Point , Radius > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_D = "is the constant 2, i.e. the dimension of $ \\mathbb{R}^2$ .
+constexpr const char* Min_sphere_of_spheres_d_traits_2_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_2 .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_spheres_d_traits_2_D = "is the constant 2, i.e. the dimension of $ \\mathbb{R}^2$ .
 
 Returns: const int";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_radius = "maps to s.second .
+constexpr const char* Min_sphere_of_spheres_d_traits_2_radius = "maps to s.second .
 
 Parameters
 ----------
 s : const Sphere &
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_2_center_cartesian_begin = "maps to s.first.cartesian_begin() .
+constexpr const char* Min_sphere_of_spheres_d_traits_2_center_cartesian_begin = "maps to s.first.cartesian_begin() .
 
 Parameters
 ----------
@@ -1661,31 +1661,31 @@ s : const Sphere &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Min_sphere_of_spheres_d_traits_3
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3__class__ = "The class Min_sphere_of_spheres_d_traits_3 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
+constexpr const char* Min_sphere_of_spheres_d_traits_3__class__ = "The class Min_sphere_of_spheres_d_traits_3 <K, FT ,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
 
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_Radius = "is a typedef to the template parameter FT
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_Point = "is a typedef to K::Point_3 .
+constexpr const char* Min_sphere_of_spheres_d_traits_3_Radius = "is a typedef to the template parameter FT
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_Sphere = "is a typedef to std::pair< Point , Radius > .
+constexpr const char* Min_sphere_of_spheres_d_traits_3_Point = "is a typedef to K::Point_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_3 .
+constexpr const char* Min_sphere_of_spheres_d_traits_3_Sphere = "is a typedef to std::pair< Point , Radius > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_D = "is the constant 3, i.e. the dimension of $ \\mathbb{R}^3$ .
+constexpr const char* Min_sphere_of_spheres_d_traits_3_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_3 .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_spheres_d_traits_3_D = "is the constant 3, i.e. the dimension of $ \\mathbb{R}^3$ .
 
 Returns: const int";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_radius = "returns 0 .
+constexpr const char* Min_sphere_of_spheres_d_traits_3_radius = "returns 0 .
 
 Parameters
 ----------
 s : const Sphere &
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_3_center_cartesian_begin = "maps to s.first.cartesian_begin() .
+constexpr const char* Min_sphere_of_spheres_d_traits_3_center_cartesian_begin = "maps to s.first.cartesian_begin() .
 
 Parameters
 ----------
@@ -1694,31 +1694,31 @@ s : const Sphere &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Min_sphere_of_spheres_d_traits_d
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d__class__ = "The class Min_sphere_of_spheres_d_traits_d <K, FT ,Dim,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
+constexpr const char* Min_sphere_of_spheres_d_traits_d__class__ = "The class Min_sphere_of_spheres_d_traits_d <K, FT ,Dim,UseSqrt, Algorithm > is a model for concept MinSphereOfSpheresTraits .";
 
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_Radius = "is a typedef to the template parameter FT
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_Point = "is a typedef to K::Point_d .
+constexpr const char* Min_sphere_of_spheres_d_traits_d_Radius = "is a typedef to the template parameter FT
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_Sphere = "is a typedef to std::pair< Point , Radius > .
+constexpr const char* Min_sphere_of_spheres_d_traits_d_Point = "is a typedef to K::Point_d .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_d .
+constexpr const char* Min_sphere_of_spheres_d_traits_d_Sphere = "is a typedef to std::pair< Point , Radius > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_D = "is the constant Dim .
+constexpr const char* Min_sphere_of_spheres_d_traits_d_Cartesian_const_iterator = "is a typedef to K::Cartesian_const_iterator_d .
+
+Returns: unspecified_type";
+constexpr const char* Min_sphere_of_spheres_d_traits_d_D = "is the constant Dim .
 
 Returns: const int";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_radius = "maps to s.second .
+constexpr const char* Min_sphere_of_spheres_d_traits_d_radius = "maps to s.second .
 
 Parameters
 ----------
 s : const Sphere &
 
 Returns: FT";
-constexpr const char* CGAL_Min_sphere_of_spheres_d_traits_d_center_cartesian_begin = "maps to s.first.cartesian_begin() .
+constexpr const char* Min_sphere_of_spheres_d_traits_d_center_cartesian_begin = "maps to s.first.cartesian_begin() .
 
 Parameters
 ----------
@@ -1727,42 +1727,42 @@ s : const Sphere &
 Returns: Cartesian_const_iterator";
 
 // CGAL::Rectangular_p_center_default_traits_2
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2__class__ = "The class Rectangular_p_center_default_traits_2 defines types and operations needed to compute rectilinear $ p$ -centers of a planar point set using the function rectangular_p_center_2() .";
+constexpr const char* Rectangular_p_center_default_traits_2__class__ = "The class Rectangular_p_center_default_traits_2 defines types and operations needed to compute rectilinear $ p$ -centers of a planar point set using the function rectangular_p_center_2() .";
 
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_FT = "typedef to K::FT .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Point_2 = "typedef to K::Point_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_FT = "typedef to K::FT .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Iso_rectangle_2 = "typedef to K::Iso_rectangle_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Point_2 = "typedef to K::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Less_x_2 = "typedef to K::Less_x_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Iso_rectangle_2 = "typedef to K::Iso_rectangle_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Less_y_2 = "typedef to K::Less_y_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Less_x_2 = "typedef to K::Less_x_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Construct_vertex_2 = "typedef to K::Construct_vertex_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Less_y_2 = "typedef to K::Less_y_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Construct_iso_rectangle_2 = "typedef to K::Construct_iso_rectangle_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Construct_vertex_2 = "typedef to K::Construct_vertex_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Signed_x_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the signed distance of two points' $ x$ -coordinates.
+constexpr const char* Rectangular_p_center_default_traits_2_Construct_iso_rectangle_2 = "typedef to K::Construct_iso_rectangle_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Signed_y_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the signed distance of two points' $ y$ -coordinates.
+constexpr const char* Rectangular_p_center_default_traits_2_Signed_x_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the signed distance of two points' $ x$ -coordinates.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Infinity_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the $ ||\\cdot||_{\\infty}$ distance of two points.
+constexpr const char* Rectangular_p_center_default_traits_2_Signed_y_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the signed distance of two points' $ y$ -coordinates.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Signed_infinity_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the signed $ ||\\cdot||_{\\infty}$ distance of two points.
+constexpr const char* Rectangular_p_center_default_traits_2_Infinity_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the $ ||\\cdot||_{\\infty}$ distance of two points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Construct_point_2_below_left_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Signed_infinity_distance_2 = "adaptable binary function class: Point_2 $ \\times$ Point_2 $ \\rightarrow$ FT returns the signed $ ||\\cdot||_{\\infty}$ distance of two points.
+
+Returns: unspecified_type";
+constexpr const char* Rectangular_p_center_default_traits_2_Construct_point_2_below_left_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
 
 For arguments $ (p,\\,q,\\,r)$ it returns the lower-left corner of the
 iso-oriented square with sidelength $ r$ and upper-right corner at the
@@ -1770,7 +1770,7 @@ intersection of the vertical line through $ p$ and the horizontal line through
 $ q$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Construct_point_2_below_right_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Construct_point_2_below_right_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
 
 For arguments $ (p,\\,q,\\,r)$ it returns the lower-right corner of the
 iso-oriented square with sidelength $ r$ and upper-left corner at the
@@ -1778,7 +1778,7 @@ intersection of the vertical line through $ p$ and the horizontal line through
 $ q$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Construct_point_2_above_right_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Construct_point_2_above_right_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
 
 For arguments $ (p,\\,q,\\,r)$ it returns the upper-right corner of the
 iso-oriented square with sidelength $ r$ and lower-left corner at the
@@ -1786,7 +1786,7 @@ intersection of the vertical line through $ p$ and the horizontal line through
 $ q$ .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rectangular_p_center_default_traits_2_Construct_point_2_above_left_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
+constexpr const char* Rectangular_p_center_default_traits_2_Construct_point_2_above_left_implicit_point_2 = "3-argument function class: Point_2 $ \\times$ Point_2 $ \\times$ FT $ \\rightarrow$ Point_2 .
 
 For arguments $ (p,\\,q,\\,r)$ it returns the upper-left corner of the
 iso-oriented square with sidelength $ r$ and lower-right corner at the
@@ -2364,7 +2364,7 @@ $ q$ .
 
 Returns: unspecified_type";
 
-constexpr const char* CGAL_Min_annulus_d_operator_2 = "writes min_annulus to output stream os .
+constexpr const char* Min_annulus_d_operator_2 = "writes min_annulus to output stream os .
 
 An overload of operator<< must be defined for Point .
 
@@ -2374,7 +2374,7 @@ os : std::ostream &
 min_annulus : const Min_annulus_d < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_annulus_d_operator_3 = "reads min_annulus from input stream is .
+constexpr const char* Min_annulus_d_operator_3 = "reads min_annulus from input stream is .
 
 An overload of operator>> must be defined for Point .
 
@@ -2384,7 +2384,7 @@ is : std::istream &
  : Min_annulus_d < Traits > min_annulus &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Min_circle_2_operator_2 = "writes min_circle to output stream os .
+constexpr const char* Min_circle_2_operator_2 = "writes min_circle to output stream os .
 
 An overload of operator<< must be defined for Point (and for Circle , if
 pretty printing is used).
@@ -2395,7 +2395,7 @@ os : std::ostream &
 min_circle : const Min_circle_2 < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_circle_2_operator_3 = "reads min_circle from input stream is .
+constexpr const char* Min_circle_2_operator_3 = "reads min_circle from input stream is .
 
 An overload of operator>> must be defined for Point .
 
@@ -2405,7 +2405,7 @@ is : std::istream &
  : Min_circle_2 < Traits > min_circle &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Min_ellipse_2_operator_2 = "writes min_ellipse to output stream os .
+constexpr const char* Min_ellipse_2_operator_2 = "writes min_ellipse to output stream os .
 
 An overload of operator<< must be defined for Point (and for Ellipse , if
 pretty printing is used).
@@ -2416,7 +2416,7 @@ os : std::ostream &
 min_ellipse : const Min_ellipse_2 < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_ellipse_2_operator_3 = "reads min_ellipse from input stream is .
+constexpr const char* Min_ellipse_2_operator_3 = "reads min_ellipse from input stream is .
 
 An overload of operator>> must be defined for Point .
 
@@ -2426,7 +2426,7 @@ is : std::istream &
  : Min_ellipse_2 < Traits > min_ellipse &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Min_sphere_d_operator_2 = "writes min_sphere to output stream os .
+constexpr const char* Min_sphere_d_operator_2 = "writes min_sphere to output stream os .
 
 An overload of operator<< must be defined for Point .
 
@@ -2436,7 +2436,7 @@ os : std::ostream &
 min_sphere : const Min_sphere_d < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Min_sphere_d_operator_3 = "reads min_sphere from input stream is .
+constexpr const char* Min_sphere_d_operator_3 = "reads min_sphere from input stream is .
 
 An overload of operator>> must be defined for Point
 

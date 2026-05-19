@@ -8,13 +8,13 @@ namespace docstrings {
 namespace Jet_fitting_3 {
 
 // CGAL::Monge_via_jet_fitting
-constexpr const char* CGAL_Monge_via_jet_fitting__class__ = "The class Monge_via_jet_fitting is designed to perform the estimation of the local differential quantities at a given point.";
+constexpr const char* Monge_via_jet_fitting__class__ = "The class Monge_via_jet_fitting is designed to perform the estimation of the local differential quantities at a given point.";
 
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form = "see the page Monge_via_jet_fitting::Monge_form .
+constexpr const char* Monge_via_jet_fitting_Monge_form = "see the page Monge_via_jet_fitting::Monge_form .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_via_jet_fitting = "default constructor";
-constexpr const char* CGAL_Monge_via_jet_fitting_operator = "This operator performs all the computations.
+constexpr const char* Monge_via_jet_fitting_Monge_via_jet_fitting = "default constructor";
+constexpr const char* Monge_via_jet_fitting_operator = "This operator performs all the computations.
 
 The $ N$ input points are given by the InputIterator parameters which
 value-type are Data_kernel::Point_3 , d is the degree of the fitted
@@ -29,10 +29,10 @@ d : size_t
  : size_t d'
 
 Returns: Monge_form";
-constexpr const char* CGAL_Monge_via_jet_fitting_condition_number = "condition number of the linear fitting system.
+constexpr const char* Monge_via_jet_fitting_condition_number = "condition number of the linear fitting system.
 
 Returns: FT";
-constexpr const char* CGAL_Monge_via_jet_fitting_pca_basis = "pca eigenvalues and eigenvectors, the pca_basis has always 3 such pairs.
+constexpr const char* Monge_via_jet_fitting_pca_basis = "pca eigenvalues and eigenvectors, the pca_basis has always 3 such pairs.
 
 $ i$ ranges from 0 to 2.
 
@@ -43,34 +43,34 @@ i : size_t
 Returns: std::pair< FT , Vector_3 >";
 
 // CGAL::Monge_via_jet_fitting::Monge_form
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form__class__ = "The class Monge_form stores the Monge representation, i.e., the Monge coordinate system and the coefficients of the Monge form in this system.";
+constexpr const char* Monge_via_jet_fitting_Monge_form__class__ = "The class Monge_form stores the Monge representation, i.e., the Monge coordinate system and the coefficients of the Monge form in this system.";
 
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form_Monge_form = "default constructor.";
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form_origin = "Point on the fitted surface where differential quantities are computed.
+constexpr const char* Monge_via_jet_fitting_Monge_form_Monge_form = "default constructor.";
+constexpr const char* Monge_via_jet_fitting_Monge_form_origin = "Point on the fitted surface where differential quantities are computed.
 
 Returns: Point_3";
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form_principal_curvatures = "$ i=0$ for the maximum and $ i=1$ for the minimum.
+constexpr const char* Monge_via_jet_fitting_Monge_form_principal_curvatures = "$ i=0$ for the maximum and $ i=1$ for the minimum.
 
 Parameters
 ----------
 i : size_t
 
 Returns: FT";
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form_third_order_coefficients = "$ 0 \\leq i \\leq3$
+constexpr const char* Monge_via_jet_fitting_Monge_form_third_order_coefficients = "$ 0 \\leq i \\leq3$
 
 Parameters
 ----------
 i : size_t
 
 Returns: FT";
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form_fourth_order_coefficients = "$ 0 \\leq i \\leq4$
+constexpr const char* Monge_via_jet_fitting_Monge_form_fourth_order_coefficients = "$ 0 \\leq i \\leq4$
 
 Parameters
 ----------
 i : size_t
 
 Returns: FT";
-constexpr const char* CGAL_Monge_via_jet_fitting_Monge_form_comply_wrt_given_normal = "change principal basis and Monge coefficients so that the given_normal and the Monge normal make an acute angle.
+constexpr const char* Monge_via_jet_fitting_Monge_form_comply_wrt_given_normal = "change principal basis and Monge coefficients so that the given_normal and the Monge normal make an acute angle.
 
 If given_normal * normal_direction() < 0 then change the orientation: if $
 z=g(x,y)$ in the basis (d1,d2,n) then in the basis (d2,d1,-n) $

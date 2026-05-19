@@ -8,26 +8,26 @@ namespace docstrings {
 namespace Polygon_mesh_processing {
 
 // CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions
-constexpr const char* CGAL_Polygon_mesh_processing_Principal_curvatures_and_directions__class__ = "a struct for storing principal curvatures and directions.";
+constexpr const char* Polygon_mesh_processing_Principal_curvatures_and_directions__class__ = "a struct for storing principal curvatures and directions.";
 
-constexpr const char* CGAL_Polygon_mesh_processing_Principal_curvatures_and_directions_min_curvature = "min curvature magnitude
-
-Returns: GT::FT";
-constexpr const char* CGAL_Polygon_mesh_processing_Principal_curvatures_and_directions_max_curvature = "max curvature magnitude
+constexpr const char* Polygon_mesh_processing_Principal_curvatures_and_directions_min_curvature = "min curvature magnitude
 
 Returns: GT::FT";
-constexpr const char* CGAL_Polygon_mesh_processing_Principal_curvatures_and_directions_min_direction = "min curvature direction vector
+constexpr const char* Polygon_mesh_processing_Principal_curvatures_and_directions_max_curvature = "max curvature magnitude
+
+Returns: GT::FT";
+constexpr const char* Polygon_mesh_processing_Principal_curvatures_and_directions_min_direction = "min curvature direction vector
 
 Returns: GT::Vector_3";
-constexpr const char* CGAL_Polygon_mesh_processing_Principal_curvatures_and_directions_max_direction = "max curvature direction vector
+constexpr const char* Polygon_mesh_processing_Principal_curvatures_and_directions_max_direction = "max curvature direction vector
 
 Returns: GT::Vector_3";
 
 // CGAL::Polyhedral_envelope
-constexpr const char* CGAL_Polyhedral_envelope__class__ = "This class can be used to check if a query point, segment, or triangle is inside or outside a polyhedral envelope of a set of triangles, constructed for a given $ \\epsilon $ distance tolerance.";
+constexpr const char* Polyhedral_envelope__class__ = "This class can be used to check if a query point, segment, or triangle is inside or outside a polyhedral envelope of a set of triangles, constructed for a given $ \\epsilon $ distance tolerance.";
 
-constexpr const char* CGAL_Polyhedral_envelope_Polyhedral_envelope = "Default constructor, envelope is empty";
-constexpr const char* CGAL_Polyhedral_envelope_Polyhedral_envelope_1 = "Constructor with a triangulated surface mesh.
+constexpr const char* Polyhedral_envelope_Polyhedral_envelope = "Default constructor, envelope is empty";
+constexpr const char* Polyhedral_envelope_Polyhedral_envelope_1 = "Constructor with a triangulated surface mesh.
 
 TriangleMesh a model of VertexListGraph and FaceListGraph NamedParameters a
 sequence of Named Parameters tmesh a triangle mesh epsilon the distance of the
@@ -51,7 +51,7 @@ Parameters
 tmesh : const TriangleMesh &
 epsilon : double
 np : const NamedParameters &";
-constexpr const char* CGAL_Polyhedral_envelope_Polyhedral_envelope_2 = "Constructor using a subset of faces of a triangulated surface mesh.
+constexpr const char* Polyhedral_envelope_Polyhedral_envelope_2 = "Constructor using a subset of faces of a triangulated surface mesh.
 
 FaceRange a model of ConstRange with FaceRange::const_iterator being a model
 of InputIterator with boost::graph_traits<TriangleMesh>::face_descriptor as
@@ -79,7 +79,7 @@ face_range : const FaceRange &
 tmesh : const TriangleMesh &
 epsilon : double
 np : const NamedParameters &";
-constexpr const char* CGAL_Polyhedral_envelope_Polyhedral_envelope_3 = "Constructor with a triangle soup.
+constexpr const char* Polyhedral_envelope_Polyhedral_envelope_3 = "Constructor with a triangle soup.
 
 PointRange a model of the concept ConstRange with PointRange::const_iterator
 being a model of InputIterator with a point as value type TriangleRange a
@@ -105,14 +105,14 @@ points : const PointRange &
 triangles : const TriangleRange &
 epsilon : double
 np : const NamedParameters &";
-constexpr const char* CGAL_Polyhedral_envelope_operator = "returns true , iff the query point is inside the polyhedral envelope.
+constexpr const char* Polyhedral_envelope_operator = "returns true , iff the query point is inside the polyhedral envelope.
 
 Parameters
 ----------
 query : const Point_3 &
 
 Returns: bool";
-constexpr const char* CGAL_Polyhedral_envelope_operator_1 = "returns true , iff the query segment defined by the points source and target is inside the polyhedral envelope.
+constexpr const char* Polyhedral_envelope_operator_1 = "returns true , iff the query segment defined by the points source and target is inside the polyhedral envelope.
 
 Parameters
 ----------
@@ -120,7 +120,7 @@ source : const Point_3 &
 target : const Point_3 &
 
 Returns: bool";
-constexpr const char* CGAL_Polyhedral_envelope_operator_2 = "returns true , iff the query triangle formed by the points t0 , t1 , and t2 is inside the polyhedral envelope.
+constexpr const char* Polyhedral_envelope_operator_2 = "returns true , iff the query triangle formed by the points t0 , t1 , and t2 is inside the polyhedral envelope.
 
 Parameters
 ----------
@@ -129,7 +129,7 @@ t1 : const Point_3 &
 t2 : const Point_3 &
 
 Returns: bool";
-constexpr const char* CGAL_Polyhedral_envelope_operator_3 = "returns true , iff all the triangles of tmesh are inside the polyhedral envelope.
+constexpr const char* Polyhedral_envelope_operator_3 = "returns true , iff all the triangles of tmesh are inside the polyhedral envelope.
 
 TriangleMesh a model of FaceListGraph NamedParameters a sequence of Named
 Parameters tmesh a triangle mesh np an optional sequence of Named Parameters
@@ -151,7 +151,7 @@ tmesh : const TriangleMesh &
 np : const NamedParameters &
 
 Returns: bool";
-constexpr const char* CGAL_Polyhedral_envelope_operator_4 = "returns true , iff all the triangles in triangles are inside the polyhedral envelope.
+constexpr const char* Polyhedral_envelope_operator_4 = "returns true , iff all the triangles in triangles are inside the polyhedral envelope.
 
 PointRange a model of the concept ConstRange with PointRange::const_iterator
 being a model of InputIterator with a point as value type TriangleRange a
@@ -174,7 +174,7 @@ triangles : const TriangleRange &
 np : const NamedParameters &
 
 Returns: bool";
-constexpr const char* CGAL_Polyhedral_envelope_operator_5 = "returns true , iff all the triangles in triangle_range are inside the polyhedral envelope.
+constexpr const char* Polyhedral_envelope_operator_5 = "returns true , iff all the triangles in triangle_range are inside the polyhedral envelope.
 
 TriangleRange a model of ConstRange with TriangleRange::const_iterator being a
 model of InputIterator with a value type being itself a model of ConstRange
@@ -186,7 +186,7 @@ Parameters
 triangle_range : const TriangleRange &
 
 Returns: bool";
-constexpr const char* CGAL_Polyhedral_envelope_is_empty = "returns true if the polyhedral envelope is empty, and false otherwise.
+constexpr const char* Polyhedral_envelope_is_empty = "returns true if the polyhedral envelope is empty, and false otherwise.
 
 Returns: bool";
 
@@ -197,43 +197,43 @@ Returns: bool";
 
 
 // CGAL::Rigid_triangle_mesh_collision_detection
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection__class__ = "This class provides methods to perform some intersection tests between triangle meshes that undergo affine transformations (rotation, translation, and scaling).";
+constexpr const char* Rigid_triangle_mesh_collision_detection__class__ = "This class provides methods to perform some intersection tests between triangle meshes that undergo affine transformations (rotation, translation, and scaling).";
 
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_reserve = "increases the capacity of data structures used internally, size being the number of meshes expected to be added.
+constexpr const char* Rigid_triangle_mesh_collision_detection_reserve = "increases the capacity of data structures used internally, size being the number of meshes expected to be added.
 
 Parameters
 ----------
 size : std::size_t";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_remove_mesh = "removes the mesh with id mesh_id from the set, the indices of other meshes are kept unchanged.
+constexpr const char* Rigid_triangle_mesh_collision_detection_remove_mesh = "removes the mesh with id mesh_id from the set, the indices of other meshes are kept unchanged.
 
 Parameters
 ----------
 mesh_id : std::size_t";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_size = "returns the number of meshes in the set
+constexpr const char* Rigid_triangle_mesh_collision_detection_size = "returns the number of meshes in the set
 
 Returns: std::size_t";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_AABB_tree = "The AABB_tree type representing the triangles of each input mesh.
+constexpr const char* Rigid_triangle_mesh_collision_detection_AABB_tree = "The AABB_tree type representing the triangles of each input mesh.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_Vertex_point_map = "The vertex point map type used with TriangleMesh .
+constexpr const char* Rigid_triangle_mesh_collision_detection_Vertex_point_map = "The vertex point map type used with TriangleMesh .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_Point_3 = "Point type.
+constexpr const char* Rigid_triangle_mesh_collision_detection_Point_3 = "Point type.
 
 Returns: boost::property_traits< Vertex_point_map >::value_type";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_Rigid_triangle_mesh_collision_detection = "move constructor
+constexpr const char* Rigid_triangle_mesh_collision_detection_Rigid_triangle_mesh_collision_detection = "move constructor
 
 Parameters
 ----------
 other : Rigid_triangle_mesh_collision_detection &&";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_operator = "move assignment operator
+constexpr const char* Rigid_triangle_mesh_collision_detection_operator = "move assignment operator
 
 Parameters
 ----------
 other : Rigid_triangle_mesh_collision_detection &&
 
 Returns: Rigid_triangle_mesh_collision_detection &";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_add_mesh = "adds mesh tm to the set of meshes to be considered for intersection.
+constexpr const char* Rigid_triangle_mesh_collision_detection_add_mesh = "adds mesh tm to the set of meshes to be considered for intersection.
 
 NamedParameters a sequence of Named Parameters tm triangulated surface mesh to
 add np an optional sequence of Named Parameters among the ones listed below
@@ -259,7 +259,7 @@ tm : const TriangleMesh &
 np : const NamedParameters &
 
 Returns: std::size_t";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_add_mesh_1 = "adds an instance of a triangulated surface mesh using an external tree of its faces.
+constexpr const char* Rigid_triangle_mesh_collision_detection_add_mesh_1 = "adds an instance of a triangulated surface mesh using an external tree of its faces.
 
 The tree is not copied and the lifetime of tree must be longer than that of
 this class. NamedParameters a sequence of Named Parameters tree an AABB-tree
@@ -287,13 +287,13 @@ tm : const TriangleMesh &
 np : const NamedParameters &
 
 Returns: std::size_t";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_set_transformation = "sets the transformation associated to a mesh identified by its id in the set.
+constexpr const char* Rigid_triangle_mesh_collision_detection_set_transformation = "sets the transformation associated to a mesh identified by its id in the set.
 
 Parameters
 ----------
 mesh_id : std::size_t
 aff_trans : const Aff_transformation_3< K > &";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_get_all_intersections = "returns a vector of the ids of meshes within ids that have at least a face intersecting a face of the mesh with id mesh_id .
+constexpr const char* Rigid_triangle_mesh_collision_detection_get_all_intersections = "returns a vector of the ids of meshes within ids that have at least a face intersecting a face of the mesh with id mesh_id .
 
 If mesh_id is in ids , it is not reported. MeshIdRange a range of ids
 convertible to std::size_t .
@@ -304,14 +304,14 @@ mesh_id : std::size_t
 ids : const MeshIdRange &
 
 Returns: std::vector< std::size_t >";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_get_all_intersections_1 = "returns a vector of the ids of meshes in the set that have at least a face intersecting a face of the mesh with id mesh_id
+constexpr const char* Rigid_triangle_mesh_collision_detection_get_all_intersections_1 = "returns a vector of the ids of meshes in the set that have at least a face intersecting a face of the mesh with id mesh_id
 
 Parameters
 ----------
 mesh_id : std::size_t
 
 Returns: std::vector< std::size_t >";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_get_all_intersections_and_inclusions = "returns a vector of the ids of meshes within ids that are intersecting with the mesh with id mesh_id , considering volume inclusions for closed meshes.
+constexpr const char* Rigid_triangle_mesh_collision_detection_get_all_intersections_and_inclusions = "returns a vector of the ids of meshes within ids that are intersecting with the mesh with id mesh_id , considering volume inclusions for closed meshes.
 
 More precisely, if at least one face of a mesh with id i intersects a face of
 the mesh with id mesh_id , the pair (i, false) is put in the output vector. If
@@ -333,7 +333,7 @@ mesh_id : std::size_t
 ids : const MeshIdRange &
 
 Returns: std::vector< std::pair< std::size_t, bool > >";
-constexpr const char* CGAL_Rigid_triangle_mesh_collision_detection_get_all_intersections_and_inclusions_1 = "returns a vector of the ids of meshes in the set that are intersecting with the mesh with id mesh_id , considering volume inclusions for closed meshes.
+constexpr const char* Rigid_triangle_mesh_collision_detection_get_all_intersections_and_inclusions_1 = "returns a vector of the ids of meshes in the set that are intersecting with the mesh with id mesh_id , considering volume inclusions for closed meshes.
 
 See the previous overload for details.
 
@@ -344,12 +344,12 @@ mesh_id : std::size_t
 Returns: std::vector< std::pair< std::size_t, bool > >";
 
 // CGAL::Side_of_triangle_mesh
-constexpr const char* CGAL_Side_of_triangle_mesh__class__ = "This class provides an efficient point location functionality with respect to a domain bounded by one or several disjoint closed triangle meshes.";
+constexpr const char* Side_of_triangle_mesh__class__ = "This class provides an efficient point location functionality with respect to a domain bounded by one or several disjoint closed triangle meshes.";
 
-constexpr const char* CGAL_Side_of_triangle_mesh_AABB_tree = "AABB-tree accepting faces of TriangleMesh .
+constexpr const char* Side_of_triangle_mesh_AABB_tree = "AABB-tree accepting faces of TriangleMesh .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh = "Constructor with one triangulated surface mesh.
+constexpr const char* Side_of_triangle_mesh_Side_of_triangle_mesh = "Constructor with one triangulated surface mesh.
 
 tmesh the triangulated surface mesh bounding the domain to be tested vpmap the
 property map with the points associated to the vertices of tmesh gt an
@@ -361,7 +361,7 @@ Parameters
 tmesh : const TriangleMesh &
 vpmap : VertexPointMap
 gt : const GeomTraits &";
-constexpr const char* CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh_1 = "Constructor with one surface triangle mesh, using get(boost::vertex_point, tmesh) as vertex point property map.
+constexpr const char* Side_of_triangle_mesh_Side_of_triangle_mesh_1 = "Constructor with one surface triangle mesh, using get(boost::vertex_point, tmesh) as vertex point property map.
 
 tmesh the triangulated surface mesh bounding the domain to be tested gt an
 instance of the geometric traits class CGAL::is_closed(tmesh)
@@ -371,7 +371,7 @@ Parameters
 ----------
 tmesh : const TriangleMesh &
 gt : const GeomTraits &";
-constexpr const char* CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh_2 = "Constructor that takes a pre-built CGAL AABB_tree of the triangulated surface mesh primitives.
+constexpr const char* Side_of_triangle_mesh_Side_of_triangle_mesh_2 = "Constructor that takes a pre-built CGAL AABB_tree of the triangulated surface mesh primitives.
 
 tree a CGAL AABB_tree with AABB_face_graph_triangle_primitive as Primitive
 type gt an instance of the geometric traits class tree contains a set of
@@ -381,7 +381,7 @@ Parameters
 ----------
 tree : const AABB_tree &
 gt : const GeomTraits &";
-constexpr const char* CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh_3 = "Constructor that takes a pre-built CGAL AABB_tree of the triangulated surface mesh primitives, and moves it.
+constexpr const char* Side_of_triangle_mesh_Side_of_triangle_mesh_3 = "Constructor that takes a pre-built CGAL AABB_tree of the triangulated surface mesh primitives, and moves it.
 
 tree a CGAL AABB_tree with AABB_face_graph_triangle_primitive as Primitive
 type gt an instance of the geometric traits class tree contains a set of
@@ -391,14 +391,14 @@ Parameters
 ----------
 tree : AABB_tree &&
 gt : const GeomTraits &";
-constexpr const char* CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh_4 = "Constructor moving an instance of Side_of_triangle_mesh to a new memory location with minimal memory copy.
+constexpr const char* Side_of_triangle_mesh_Side_of_triangle_mesh_4 = "Constructor moving an instance of Side_of_triangle_mesh to a new memory location with minimal memory copy.
 
 other the instance to be moved
 
 Parameters
 ----------
 other : Side_of_triangle_mesh &&";
-constexpr const char* CGAL_Side_of_triangle_mesh_operator = "Assign operator moving an instance of Side_of_triangle_mesh to this location with minimal memory copy.
+constexpr const char* Side_of_triangle_mesh_operator = "Assign operator moving an instance of Side_of_triangle_mesh to this location with minimal memory copy.
 
 other the instance to be moved a reference to this
 
@@ -407,7 +407,7 @@ Parameters
 other : Side_of_triangle_mesh &&
 
 Returns: Side_of_triangle_mesh &";
-constexpr const char* CGAL_Side_of_triangle_mesh_operator_1 = "returns the location of a query point
+constexpr const char* Side_of_triangle_mesh_operator_1 = "returns the location of a query point
 
 point the query point to be located with respect to the input polyhedral
 surface CGAL::ON_BOUNDED_SIDE if the point is inside the volume bounded by the

@@ -8,50 +8,50 @@ namespace docstrings {
 namespace Surface_mesh_deformation {
 
 // CGAL::Deformation_Eigen_closest_rotation_traits_3
-constexpr const char* CGAL_Deformation_Eigen_closest_rotation_traits_3__class__ = "A class to compute the closest rotation in Frobenius norm to a 3x3 Matrix using the Eigen library .";
+constexpr const char* Deformation_Eigen_closest_rotation_traits_3__class__ = "A class to compute the closest rotation in Frobenius norm to a 3x3 Matrix using the Eigen library .";
 
 // CGAL::Deformation_Eigen_polar_closest_rotation_traits_3
-constexpr const char* CGAL_Deformation_Eigen_polar_closest_rotation_traits_3__class__ = "A class to compute the closest rotation in Frobenius norm to a 3x3 Matrix using the Eigen library .";
+constexpr const char* Deformation_Eigen_polar_closest_rotation_traits_3__class__ = "A class to compute the closest rotation in Frobenius norm to a 3x3 Matrix using the Eigen library .";
 
 // CGAL::Surface_mesh_deformation
-constexpr const char* CGAL_Surface_mesh_deformation__class__ = "Class providing the functionalities for deforming a triangulated surface mesh.";
+constexpr const char* Surface_mesh_deformation__class__ = "Class providing the functionalities for deforming a triangulated surface mesh.";
 
-constexpr const char* CGAL_Surface_mesh_deformation_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_deformation_Triangle_mesh = "Triangle mesh type.
 
 Returns: TM";
-constexpr const char* CGAL_Surface_mesh_deformation_Vertex_index_map = "vertex index map type
+constexpr const char* Surface_mesh_deformation_Vertex_index_map = "vertex index map type
 
 Returns: VIM";
-constexpr const char* CGAL_Surface_mesh_deformation_Hedge_index_map = "halfedge index map type
+constexpr const char* Surface_mesh_deformation_Hedge_index_map = "halfedge index map type
 
 Returns: HIM";
-constexpr const char* CGAL_Surface_mesh_deformation_Sparse_linear_solver = "sparse linear solver type
+constexpr const char* Surface_mesh_deformation_Sparse_linear_solver = "sparse linear solver type
 
 Returns: ST";
-constexpr const char* CGAL_Surface_mesh_deformation_Closest_rotation_traits = "closest rotation traits type
+constexpr const char* Surface_mesh_deformation_Closest_rotation_traits = "closest rotation traits type
 
 Returns: CR";
-constexpr const char* CGAL_Surface_mesh_deformation_Vertex_point_map = "vertex point map type
+constexpr const char* Surface_mesh_deformation_Vertex_point_map = "vertex point map type
 
 Returns: VPM";
-constexpr const char* CGAL_Surface_mesh_deformation_Weight_calculator = "weight calculator functor type
+constexpr const char* Surface_mesh_deformation_Weight_calculator = "weight calculator functor type
 
 Returns: WC";
-constexpr const char* CGAL_Surface_mesh_deformation_vertex_descriptor = "The type for vertex descriptor.
+constexpr const char* Surface_mesh_deformation_vertex_descriptor = "The type for vertex descriptor.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_deformation_halfedge_descriptor = "The type for halfedge descriptor.
+constexpr const char* Surface_mesh_deformation_halfedge_descriptor = "The type for halfedge descriptor.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_deformation_Point = "The 3D point type, model of RawPoint_3 .
+constexpr const char* Surface_mesh_deformation_Point = "The 3D point type, model of RawPoint_3 .
 
 Returns: boost::property_traits< Vertex_point_map >::value_type";
-constexpr const char* CGAL_Surface_mesh_deformation_Roi_vertex_range = "A constant iterator range over the vertices of the region-of-interest.
+constexpr const char* Surface_mesh_deformation_Roi_vertex_range = "A constant iterator range over the vertices of the region-of-interest.
 
 It is a model of ConstRange with vertex_descriptor as iterator value type.
 
 Returns: std::vector< vertex_descriptor >";
-constexpr const char* CGAL_Surface_mesh_deformation_Surface_mesh_deformation = "The constructor of a deformation object.
+constexpr const char* Surface_mesh_deformation_Surface_mesh_deformation = "The constructor of a deformation object.
 
 triangle_mesh consists of only triangular facets triangle_mesh triangulated
 surface mesh to deform vertex_index_map a property map which associates a
@@ -68,9 +68,9 @@ vertex_index_map : Vertex_index_map
 hedge_index_map : Hedge_index_map
 vertex_point_map : Vertex_point_map
 weight_calculator : Weight_calculator";
-constexpr const char* CGAL_Surface_mesh_deformation_clear_roi_vertices = "Erases all the vertices from the region-of-interest (control vertices included).";
-constexpr const char* CGAL_Surface_mesh_deformation_clear_control_vertices = "Erases all the vertices from the set of control vertices.";
-constexpr const char* CGAL_Surface_mesh_deformation_insert_control_vertex = "Inserts a vertex in the set of control vertices.
+constexpr const char* Surface_mesh_deformation_clear_roi_vertices = "Erases all the vertices from the region-of-interest (control vertices included).";
+constexpr const char* Surface_mesh_deformation_clear_control_vertices = "Erases all the vertices from the set of control vertices.";
+constexpr const char* Surface_mesh_deformation_insert_control_vertex = "Inserts a vertex in the set of control vertices.
 
 The vertex is also inserted in the region-of-interest if it is not already in
 it. vd the vertex to be inserted true if vd is not already a control vertex.
@@ -80,7 +80,7 @@ Parameters
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_insert_control_vertices = "Inserts a range of vertices in the set of control vertices.
+constexpr const char* Surface_mesh_deformation_insert_control_vertices = "Inserts a range of vertices in the set of control vertices.
 
 The vertices are also inserted in the region-of-interest if they are not
 already in it. InputIterator input iterator type with vertex_descriptor as
@@ -91,7 +91,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Surface_mesh_deformation_erase_control_vertex = "Erases a vertex from the set of control vertices.
+constexpr const char* Surface_mesh_deformation_erase_control_vertex = "Erases a vertex from the set of control vertices.
 
 vd the vertex to be erased true if vd was a control vertex.
 
@@ -100,7 +100,7 @@ Parameters
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_insert_roi_vertices = "Inserts a range of vertices in the region-of-interest.
+constexpr const char* Surface_mesh_deformation_insert_roi_vertices = "Inserts a range of vertices in the region-of-interest.
 
 InputIterator input iterator with vertex_descriptor as value type begin first
 iterator of the range of vertices end past-the-end iterator of the range of
@@ -110,7 +110,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Surface_mesh_deformation_insert_roi_vertex = "Inserts a vertex in the region-of-interest.
+constexpr const char* Surface_mesh_deformation_insert_roi_vertex = "Inserts a vertex in the region-of-interest.
 
 vd the vertex to be inserted true if vd is not already in the
 region-of-interest.
@@ -120,7 +120,7 @@ Parameters
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_erase_roi_vertex = "Erases a vertex from the region-of-interest and the set of control vertices.
+constexpr const char* Surface_mesh_deformation_erase_roi_vertex = "Erases a vertex from the region-of-interest and the set of control vertices.
 
 At the next call to preprocess() , any vertex that is no longer in the
 region-of-interest will be assigned to its original position (that is the
@@ -133,7 +133,7 @@ Parameters
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_preprocess = "Preprocessing function that need to be called each time the region-of-interest or the set of control vertices are changed before calling deform() .
+constexpr const char* Surface_mesh_deformation_preprocess = "Preprocessing function that need to be called each time the region-of-interest or the set of control vertices are changed before calling deform() .
 
 If not already done, deform() first calls this function. Advanced Collects the
 vertices not in the region-of-interest that are adjacent to a vertex from the
@@ -147,7 +147,7 @@ vertices are set, or if the weighting scheme used features too many zero and
 breaks the connectivity information.
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_set_target_position = "Sets the target position of a control vertex.
+constexpr const char* Surface_mesh_deformation_set_target_position = "Sets the target position of a control vertex.
 
 vd the control vertex the target position is set target_position the new
 target position
@@ -156,7 +156,7 @@ Parameters
 ----------
 vd : vertex_descriptor
 target_position : const Point &";
-constexpr const char* CGAL_Surface_mesh_deformation_translate = "Updates the target position of vd by applying a translation of vector t .
+constexpr const char* Surface_mesh_deformation_translate = "Updates the target position of vd by applying a translation of vector t .
 
 Vect is a 3D vector class, with Vect(double x,double y, double z) being a
 constructor from its Cartesian coordinates and double Vect::operator[](int i)
@@ -167,7 +167,7 @@ Parameters
 ----------
 vd : vertex_descriptor
 t : const Vect &";
-constexpr const char* CGAL_Surface_mesh_deformation_translate_1 = "Equivalent to calling the overload taking only one control vertex, for each vertex in the range [begin,end[ .
+constexpr const char* Surface_mesh_deformation_translate_1 = "Equivalent to calling the overload taking only one control vertex, for each vertex in the range [begin,end[ .
 
 InputIterator input iterator type with vertex_descriptor as value type Vect is
 a 3D vector class, with Vect(double x,double y, double z) being a constructor
@@ -181,7 +181,7 @@ Parameters
 begin : InputIterator
 end : InputIterator
 t : const Vect &";
-constexpr const char* CGAL_Surface_mesh_deformation_rotate = "Updates the target position of vd by applying to its last target position a rotation defined by the quaternion quat , the center of the rotation being the origin translated by to_rotation_center .
+constexpr const char* Surface_mesh_deformation_rotate = "Updates the target position of vd by applying to its last target position a rotation defined by the quaternion quat , the center of the rotation being the origin translated by to_rotation_center .
 
 Quaternion is a quaternion class with Vect operator*(Quaternion, Vect)
 returning the product of a quaternion with a vector Vect is a 3D vector class,
@@ -196,7 +196,7 @@ Parameters
 vd : vertex_descriptor
 to_rotation_center : const Vect &
 quat : const Quaternion &";
-constexpr const char* CGAL_Surface_mesh_deformation_rotate_1 = "Equivalent to calling the overload taking only one control vertex, for each vertex in the range [begin,end[ .
+constexpr const char* Surface_mesh_deformation_rotate_1 = "Equivalent to calling the overload taking only one control vertex, for each vertex in the range [begin,end[ .
 
 InputIterator input iterator type with vertex_descriptor as value type
 Quaternion is a quaternion class with Vect operator*(Quaternion, Vect)
@@ -214,7 +214,7 @@ begin : InputIterator
 end : InputIterator
 to_rotation_center : const Vect &
 quat : const Quaternion &";
-constexpr const char* CGAL_Surface_mesh_deformation_target_position = "Returns the target position of a control vertex.
+constexpr const char* Surface_mesh_deformation_target_position = "Returns the target position of a control vertex.
 
 vd a control vertex is_control_vertex(vd)
 
@@ -223,13 +223,13 @@ Parameters
 vd : vertex_descriptor
 
 Returns: const Point &";
-constexpr const char* CGAL_Surface_mesh_deformation_deform = "Deforms the region-of-interest according to the deformation algorithm, using the target positions of each control vertex set by using rotate() , translate() , or set_target_position() .
+constexpr const char* Surface_mesh_deformation_deform = "Deforms the region-of-interest according to the deformation algorithm, using the target positions of each control vertex set by using rotate() , translate() , or set_target_position() .
 
 The points associated to each vertex of the input triangle mesh that are
 inside the region-of-interest are updated. Nothing happens if preprocess()
 returns false . set_iterations(unsigned int iterations) , set_tolerance(double
 tolerance) , deform(unsigned int iterations, double tolerance)";
-constexpr const char* CGAL_Surface_mesh_deformation_deform_1 = "Same as deform() but the number of iterations and the tolerance are one-time parameters.
+constexpr const char* Surface_mesh_deformation_deform_1 = "Same as deform() but the number of iterations and the tolerance are one-time parameters.
 
 iterations number of iterations for optimization procedure tolerance tolerance
 of convergence (see explanations set_tolerance(double tolerance) )
@@ -238,11 +238,11 @@ Parameters
 ----------
 iterations : unsigned int
 tolerance : double";
-constexpr const char* CGAL_Surface_mesh_deformation_reset = "Resets the points associated to the vertices of the region-of-interest at their initial positions at time of the functor construction or after the last call to overwrite_initial_geometry() .
+constexpr const char* Surface_mesh_deformation_reset = "Resets the points associated to the vertices of the region-of-interest at their initial positions at time of the functor construction or after the last call to overwrite_initial_geometry() .
 
 if the region-of-interest or the set of control vertices have been modified
 since the last call to preprocess() , it will be called prior to the reset.";
-constexpr const char* CGAL_Surface_mesh_deformation_overwrite_initial_geometry = "Sets the initial positions of the vertices from the region-of-interest to the current positions.
+constexpr const char* Surface_mesh_deformation_overwrite_initial_geometry = "Sets the initial positions of the vertices from the region-of-interest to the current positions.
 
 Calling this function has the same effect as creating a new deformation object
 with the current deformed triangle mesh, keeping the region-of-interest and
@@ -254,18 +254,18 @@ and the optimal rotations are computed using the original positions of the
 points associated to the vertices. Thus, if a deformed version of the surface
 mesh is used as reference, the surface mesh properties the algorithm tries to
 preserve are those of an altered version (which are already degraded).";
-constexpr const char* CGAL_Surface_mesh_deformation_iterations = "Gets the default number of iterations (5) or the value passed to the function set_iterations() .
+constexpr const char* Surface_mesh_deformation_iterations = "Gets the default number of iterations (5) or the value passed to the function set_iterations() .
 
 Returns: unsigned int";
-constexpr const char* CGAL_Surface_mesh_deformation_tolerance = "Gets the default tolerance parameter (1e-4) or the value passed to the function set_tolerance() .
+constexpr const char* Surface_mesh_deformation_tolerance = "Gets the default tolerance parameter (1e-4) or the value passed to the function set_tolerance() .
 
 Returns: double";
-constexpr const char* CGAL_Surface_mesh_deformation_set_iterations = "Sets the maximum number of iterations ran by deform() .
+constexpr const char* Surface_mesh_deformation_set_iterations = "Sets the maximum number of iterations ran by deform() .
 
 Parameters
 ----------
 iterations : unsigned int";
-constexpr const char* CGAL_Surface_mesh_deformation_set_tolerance = "Sets the tolerance of the convergence used in deform() .
+constexpr const char* Surface_mesh_deformation_set_tolerance = "Sets the tolerance of the convergence used in deform() .
 
 If tolerance ==0 , no energy based termination criteria is used (preventing to
 do the energy computation at each iteration step) tolerance >
@@ -275,10 +275,10 @@ will be used as a termination criterium.
 Parameters
 ----------
 tolerance : double";
-constexpr const char* CGAL_Surface_mesh_deformation_roi_vertices = "Returns the range of vertices in the region-of-interest.
+constexpr const char* Surface_mesh_deformation_roi_vertices = "Returns the range of vertices in the region-of-interest.
 
 Returns: const Roi_vertex_range &";
-constexpr const char* CGAL_Surface_mesh_deformation_is_roi_vertex = "Tests whether a vertex is inside the region-of-interest.
+constexpr const char* Surface_mesh_deformation_is_roi_vertex = "Tests whether a vertex is inside the region-of-interest.
 
 vd the query vertex true if vd has been inserted to (and not erased from) the
 region-of-interest.
@@ -288,7 +288,7 @@ Parameters
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_is_control_vertex = "Tests whether a vertex is a control vertex.
+constexpr const char* Surface_mesh_deformation_is_control_vertex = "Tests whether a vertex is a control vertex.
 
 vd the query vertex true if vd has been inserted to (and not erased from) the
 set of control vertices.
@@ -298,10 +298,10 @@ Parameters
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_triangle_mesh = "Provides access to the triangle mesh being deformed.
+constexpr const char* Surface_mesh_deformation_triangle_mesh = "Provides access to the triangle mesh being deformed.
 
 Returns: const Triangle_mesh &";
-constexpr const char* CGAL_Surface_mesh_deformation_set_sre_arap_alpha = "Sets the alpha coefficient that determines the weight of the bending term (rotation smoothness) for the SRE-ARAP deformation technique.
+constexpr const char* Surface_mesh_deformation_set_sre_arap_alpha = "Sets the alpha coefficient that determines the weight of the bending term (rotation smoothness) for the SRE-ARAP deformation technique.
 
 The range of values can be from 0 to infinity. When alpha=0, the method
 reverts to ARAP. When alpha is increased, neighboring rotations become similar
@@ -313,68 +313,68 @@ by powers of 10. The default value for alpha is 0.02.
 Parameters
 ----------
 a : double";
-constexpr const char* CGAL_Surface_mesh_deformation_m_triangle_mesh = "Source triangulated surface mesh for modeling.
+constexpr const char* Surface_mesh_deformation_m_triangle_mesh = "Source triangulated surface mesh for modeling.
 
 Returns: Triangle_mesh &";
-constexpr const char* CGAL_Surface_mesh_deformation_original = "original positions of roi (size: ros + boundary_of_ros)
+constexpr const char* Surface_mesh_deformation_original = "original positions of roi (size: ros + boundary_of_ros)
 
 Returns: std::vector< Point >";
-constexpr const char* CGAL_Surface_mesh_deformation_solution = "storing position of ros vertices during iterations (size: ros + boundary_of_ros)
+constexpr const char* Surface_mesh_deformation_solution = "storing position of ros vertices during iterations (size: ros + boundary_of_ros)
 
 Returns: std::vector< Point >";
-constexpr const char* CGAL_Surface_mesh_deformation_vertex_index_map = "storing indices of all vertices
+constexpr const char* Surface_mesh_deformation_vertex_index_map = "storing indices of all vertices
 
 Returns: Vertex_index_map";
-constexpr const char* CGAL_Surface_mesh_deformation_hedge_index_map = "storing indices of all halfedges
+constexpr const char* Surface_mesh_deformation_hedge_index_map = "storing indices of all halfedges
 
 Returns: Hedge_index_map";
-constexpr const char* CGAL_Surface_mesh_deformation_roi = "region of interest
+constexpr const char* Surface_mesh_deformation_roi = "region of interest
 
 Returns: std::vector< vertex_descriptor >";
-constexpr const char* CGAL_Surface_mesh_deformation_ros = "region of solution, including roi and hard constraints on boundary of roi
+constexpr const char* Surface_mesh_deformation_ros = "region of solution, including roi and hard constraints on boundary of roi
 
 Returns: std::vector< vertex_descriptor >";
-constexpr const char* CGAL_Surface_mesh_deformation_ros_id_map = "(size: num vertices)
+constexpr const char* Surface_mesh_deformation_ros_id_map = "(size: num vertices)
 
 Returns: std::vector< std::size_t >";
-constexpr const char* CGAL_Surface_mesh_deformation_is_roi_map = "(size: num vertices)
+constexpr const char* Surface_mesh_deformation_is_roi_map = "(size: num vertices)
 
 Returns: std::vector< bool >";
-constexpr const char* CGAL_Surface_mesh_deformation_is_ctrl_map = "(size: num vertices)
+constexpr const char* Surface_mesh_deformation_is_ctrl_map = "(size: num vertices)
 
 Returns: std::vector< bool >";
-constexpr const char* CGAL_Surface_mesh_deformation_hedge_weight = "all halfedge weights
+constexpr const char* Surface_mesh_deformation_hedge_weight = "all halfedge weights
 
 Returns: std::vector< double >";
-constexpr const char* CGAL_Surface_mesh_deformation_rot_mtr = "rotation matrices of ros vertices (size: ros)
+constexpr const char* Surface_mesh_deformation_rot_mtr = "rotation matrices of ros vertices (size: ros)
 
 Returns: std::vector< CR_matrix >";
-constexpr const char* CGAL_Surface_mesh_deformation_m_solver = "linear sparse solver
+constexpr const char* Surface_mesh_deformation_m_solver = "linear sparse solver
 
 Returns: Sparse_linear_solver";
-constexpr const char* CGAL_Surface_mesh_deformation_m_iterations = "number of maximal iterations
+constexpr const char* Surface_mesh_deformation_m_iterations = "number of maximal iterations
 
 Returns: unsigned int";
-constexpr const char* CGAL_Surface_mesh_deformation_m_tolerance = "tolerance of convergence
+constexpr const char* Surface_mesh_deformation_m_tolerance = "tolerance of convergence
 
 Returns: double";
-constexpr const char* CGAL_Surface_mesh_deformation_need_preprocess_factorization = "is there any need to compute L and factorize
+constexpr const char* Surface_mesh_deformation_need_preprocess_factorization = "is there any need to compute L and factorize
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_need_preprocess_region_of_solution = "is there any need to compute region of solution
+constexpr const char* Surface_mesh_deformation_need_preprocess_region_of_solution = "is there any need to compute region of solution
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_last_preprocess_successful = "stores the result of last call to preprocess()
+constexpr const char* Surface_mesh_deformation_last_preprocess_successful = "stores the result of last call to preprocess()
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_deformation_assign_ros_id_to_one_ring = "Assigns id to one ring neighbor of vd, and also push them into push_vector.
+constexpr const char* Surface_mesh_deformation_assign_ros_id_to_one_ring = "Assigns id to one ring neighbor of vd, and also push them into push_vector.
 
 Parameters
 ----------
 vd : vertex_descriptor
 next_id : std::size_t &
 push_vector : std::vector< vertex_descriptor > &";
-constexpr const char* CGAL_Surface_mesh_deformation_region_of_solution = "Find region of solution, including roi and hard constraints, which is the 1-ring vertices out roi Contains four parts:
+constexpr const char* Surface_mesh_deformation_region_of_solution = "Find region of solution, including roi and hard constraints, which is the 1-ring vertices out roi Contains four parts:
 
 if there is any vertex which is no longer roi, set its position back to
 original position assign a ros id to vertices inside ros + ros-boundary
@@ -383,18 +383,18 @@ previous matrix, otherwise set zero reinitialize original, and solution, if a
 vertex is previously roi, then use its original position in old_original, else
 use point(). In both case we are using \"original position\" of the vertex. same
 for solution (it is required to prevent jumping effects)";
-constexpr const char* CGAL_Surface_mesh_deformation_assemble_laplacian_and_factorize = "Assemble Laplacian matrix A of linear system A*X=B.";
-constexpr const char* CGAL_Surface_mesh_deformation_assemble_laplacian_and_factorize_arap = "Construct matrix that corresponds to left-hand side of eq:lap_ber in user manual Also constraints are integrated as eq:lap_energy_system in user manual.";
-constexpr const char* CGAL_Surface_mesh_deformation_assemble_laplacian_and_factorize_spokes_and_rims = "Construct matrix that corresponds to left-hand side of eq:lap_ber_rims in user manual Also constraints are integrated as eq:lap_energy_system in user manual.";
-constexpr const char* CGAL_Surface_mesh_deformation_optimal_rotations = "Local step of iterations, computing optimal rotation matrices.";
-constexpr const char* CGAL_Surface_mesh_deformation_update_solution = "Global step of iterations, updating solution.";
-constexpr const char* CGAL_Surface_mesh_deformation_update_solution_arap = "calculate right-hand side of eq:lap_ber in user manual and solve the system";
-constexpr const char* CGAL_Surface_mesh_deformation_update_solution_spokes_and_rims = "calculate right-hand side of eq:lap_ber_rims in user manual and solve the system";
-constexpr const char* CGAL_Surface_mesh_deformation_assign_solution = "Assign solution to target surface mesh.";
-constexpr const char* CGAL_Surface_mesh_deformation_energy = "Compute modeling energy.
+constexpr const char* Surface_mesh_deformation_assemble_laplacian_and_factorize = "Assemble Laplacian matrix A of linear system A*X=B.";
+constexpr const char* Surface_mesh_deformation_assemble_laplacian_and_factorize_arap = "Construct matrix that corresponds to left-hand side of eq:lap_ber in user manual Also constraints are integrated as eq:lap_energy_system in user manual.";
+constexpr const char* Surface_mesh_deformation_assemble_laplacian_and_factorize_spokes_and_rims = "Construct matrix that corresponds to left-hand side of eq:lap_ber_rims in user manual Also constraints are integrated as eq:lap_energy_system in user manual.";
+constexpr const char* Surface_mesh_deformation_optimal_rotations = "Local step of iterations, computing optimal rotation matrices.";
+constexpr const char* Surface_mesh_deformation_update_solution = "Global step of iterations, updating solution.";
+constexpr const char* Surface_mesh_deformation_update_solution_arap = "calculate right-hand side of eq:lap_ber in user manual and solve the system";
+constexpr const char* Surface_mesh_deformation_update_solution_spokes_and_rims = "calculate right-hand side of eq:lap_ber_rims in user manual and solve the system";
+constexpr const char* Surface_mesh_deformation_assign_solution = "Assign solution to target surface mesh.";
+constexpr const char* Surface_mesh_deformation_energy = "Compute modeling energy.
 
 Returns: double";
-constexpr const char* CGAL_Surface_mesh_deformation_sub_to_CR_vector = "p1 - p2, return CR_vector
+constexpr const char* Surface_mesh_deformation_sub_to_CR_vector = "p1 - p2, return CR_vector
 
 Parameters
 ----------
@@ -402,14 +402,14 @@ p1 : const Point &
 p2 : const Point &
 
 Returns: CR_vector";
-constexpr const char* CGAL_Surface_mesh_deformation_id = "shorthand of get(vertex_index_map, v)
+constexpr const char* Surface_mesh_deformation_id = "shorthand of get(vertex_index_map, v)
 
 Parameters
 ----------
 vd : vertex_descriptor
 
 Returns: std::size_t";
-constexpr const char* CGAL_Surface_mesh_deformation_id_1 = "shorthand of get(hedge_index_map, e)
+constexpr const char* Surface_mesh_deformation_id_1 = "shorthand of get(hedge_index_map, e)
 
 Parameters
 ----------

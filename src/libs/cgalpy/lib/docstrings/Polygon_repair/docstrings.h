@@ -8,16 +8,16 @@ namespace docstrings {
 namespace Polygon_repair {
 
 // CGAL::Polygon_repair::Even_odd_rule
-constexpr const char* CGAL_Polygon_repair_Even_odd_rule__class__ = "Tag class to select the even odd rule when calling CGAL::Polygon_repair::repair() .";
+constexpr const char* Polygon_repair_Even_odd_rule__class__ = "Tag class to select the even odd rule when calling CGAL::Polygon_repair::repair() .";
 
 // CGAL::Polygon_repair::Intersection_rule
-constexpr const char* CGAL_Polygon_repair_Intersection_rule__class__ = "Tag class to select the intersection rule when calling CGAL::Polygon_repair::repair() .";
+constexpr const char* Polygon_repair_Intersection_rule__class__ = "Tag class to select the intersection rule when calling CGAL::Polygon_repair::repair() .";
 
 // CGAL::Polygon_repair::Non_zero_rule
-constexpr const char* CGAL_Polygon_repair_Non_zero_rule__class__ = "Tag class to select the non zero rule when calling CGAL::Polygon_repair::repair() .";
+constexpr const char* Polygon_repair_Non_zero_rule__class__ = "Tag class to select the non zero rule when calling CGAL::Polygon_repair::repair() .";
 
 // CGAL::Polygon_repair::Union_rule
-constexpr const char* CGAL_Polygon_repair_Union_rule__class__ = "Tag class to select the union rule when calling CGAL::Polygon_repair::repair() .";
+constexpr const char* Polygon_repair_Union_rule__class__ = "Tag class to select the union rule when calling CGAL::Polygon_repair::repair() .";
 
 
 // std

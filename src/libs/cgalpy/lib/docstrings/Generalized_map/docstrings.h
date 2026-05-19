@@ -8,19 +8,19 @@ namespace docstrings {
 namespace Generalized_map {
 
 // CGAL::Generalized_map
-constexpr const char* CGAL_Generalized_map__class__ = "The class Generalized_map represents a d D generalized map.";
+constexpr const char* Generalized_map__class__ = "The class Generalized_map represents a d D generalized map.";
 
-constexpr const char* CGAL_Generalized_map_Dart_info = "Information associated with darts.
+constexpr const char* Generalized_map_Dart_info = "Information associated with darts.
 
 Equal to void if Dart_info is not defined in the items class.
 
 Returns: Items::Dart_wrapper< Self >::Dart_info";
-constexpr const char* CGAL_Generalized_map_Attributes = "The tuple of cell attributes.
+constexpr const char* Generalized_map_Attributes = "The tuple of cell attributes.
 
 Equal to std::tuple<> if Attributes is not defined in the items class.
 
 Returns: Items::Dart_wrapper< Self >::Attributes";
-constexpr const char* CGAL_Generalized_map_dimension = "The dimension of the generalized map.
+constexpr const char* Generalized_map_dimension = "The dimension of the generalized map.
 
 Returns: const unsigned int";
 

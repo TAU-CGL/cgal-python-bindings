@@ -8,12 +8,12 @@ namespace docstrings {
 namespace Scale_space_reconstruction_3 {
 
 // CGAL::Scale_space_reconstruction_3::Advancing_front_mesher
-constexpr const char* CGAL_Scale_space_reconstruction_3_Advancing_front_mesher__class__ = "Surface mesher for scale space reconstruction based on CGAL::Advancing_front_surface_reconstruction .";
+constexpr const char* Scale_space_reconstruction_3_Advancing_front_mesher__class__ = "Surface mesher for scale space reconstruction based on CGAL::Advancing_front_surface_reconstruction .";
 
-constexpr const char* CGAL_Scale_space_reconstruction_3_Advancing_front_mesher_Point = "defines the point type.
+constexpr const char* Scale_space_reconstruction_3_Advancing_front_mesher_Point = "defines the point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Advancing_front_mesher_Advancing_front_mesher = "Constructs and advancing front mesher.
+constexpr const char* Scale_space_reconstruction_3_Advancing_front_mesher_Advancing_front_mesher = "Constructs and advancing front mesher.
 
 maximum_facet_length upper bound on the length of the facets.
 radius_ratio_bound candidates incident to surface triangles which are not in
@@ -31,24 +31,24 @@ beta : FT";
 
 
 // CGAL::Scale_space_reconstruction_3::Alpha_shape_mesher
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher__class__ = "Surface mesher for scale space reconstruction based on CGAL::Alpha_shape_3 .";
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher__class__ = "Surface mesher for scale space reconstruction based on CGAL::Alpha_shape_3 .";
 
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_Point = "defines the point type.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_Point = "defines the point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_Facet = "defines a triple of point indices indicating a triangle of the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_Facet = "defines a triple of point indices indicating a triangle of the surface.
 
 Returns: std::array< unsigned int, 3 >";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_Facet_iterator = "defines an iterator over the triples.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_Facet_iterator = "defines an iterator over the triples.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_Facet_const_iterator = "defines a constant iterator over the triples.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_Facet_const_iterator = "defines a constant iterator over the triples.
 
 Returns: const unspecified_type";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_Facetset = "defines a collection of triples.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_Facetset = "defines a collection of triples.
 
 Returns: std::list< Facet >";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_Alpha_shape_mesher = "Constructs an alpha shape mesher.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_Alpha_shape_mesher = "Constructs an alpha shape mesher.
 
 squared_radius $\\alpha$ parameter of the alpha shape algorithm.
 separate_shells determines whether to collect the surface per shell.
@@ -67,29 +67,29 @@ squared_radius : FT
 separate_shells : bool
 force_manifold : bool
 border_angle : FT";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_number_of_triangles = "gives the number of triangles of the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_number_of_triangles = "gives the number of triangles of the surface.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_surface_begin = "gives an iterator to the first triple in the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_surface_begin = "gives an iterator to the first triple in the surface.
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_surface_begin_1 = "gives an iterator to the first triple in the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_surface_begin_1 = "gives an iterator to the first triple in the surface.
 
 Changes to the surface may change its topology.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_surface_end = "gives a past-the-end iterator of the triples in the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_surface_end = "gives a past-the-end iterator of the triples in the surface.
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_surface_end_1 = "gives a past-the-end iterator of the triples in the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_surface_end_1 = "gives a past-the-end iterator of the triples in the surface.
 
 Changes to the surface may change its topology.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_number_of_shells = "gives the number of shells of the surface.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_number_of_shells = "gives the number of shells of the surface.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_shell_begin = "gives an iterator to the first triple in a given shell.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_shell_begin = "gives an iterator to the first triple in a given shell.
 
 shell is the index of the shell to access. shell is in the range [ 0,
 number_of_shells() ).
@@ -99,7 +99,7 @@ Parameters
 shell : std::size_t
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_shell_begin_1 = "gives an iterator to the first triple in a given shell.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_shell_begin_1 = "gives an iterator to the first triple in a given shell.
 
 shell is the index of the shell to access. shell is in the range [ 0,
 number_of_shells() ). Changes to a shell may invalidate the topology of the
@@ -110,7 +110,7 @@ Parameters
 shell : std::size_t
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_shell_end = "gives a past-the-end iterator of the triples in a given shell.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_shell_end = "gives a past-the-end iterator of the triples in a given shell.
 
 shell is the index of the shell to access. shell is in the range [ 0,
 number_of_shells() ).
@@ -120,7 +120,7 @@ Parameters
 shell : std::size_t
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_shell_end_1 = "gives a past-the-end iterator of the triples in a given shell.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_shell_end_1 = "gives a past-the-end iterator of the triples in a given shell.
 
 shell is the index of the shell to access. shell is in the range [ 0,
 number_of_shells() ). Changes to a shell may invalidate the topology of the
@@ -131,30 +131,30 @@ Parameters
 shell : std::size_t
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_begin = "gives an iterator to the first triple of the garbage facets that may be discarded if 2-manifold output is required.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_begin = "gives an iterator to the first triple of the garbage facets that may be discarded if 2-manifold output is required.
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_begin_1 = "gives an iterator to the first triple of the garbage facets that may be discarded if 2-manifold output is required.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_begin_1 = "gives an iterator to the first triple of the garbage facets that may be discarded if 2-manifold output is required.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_end = "gives a past-the-end iterator of the triples of the garbage facets that may be discarded if 2-manifold output is required.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_end = "gives a past-the-end iterator of the triples of the garbage facets that may be discarded if 2-manifold output is required.
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_end_1 = "gives a past-the-end iterator of the triples of the garbage facets that may be discarded if 2-manifold output is required.
+constexpr const char* Scale_space_reconstruction_3_Alpha_shape_mesher_garbage_end_1 = "gives a past-the-end iterator of the triples of the garbage facets that may be discarded if 2-manifold output is required.
 
 Returns: Facet_iterator";
 
 
 // CGAL::Scale_space_reconstruction_3::Jet_smoother
-constexpr const char* CGAL_Scale_space_reconstruction_3_Jet_smoother__class__ = "Smoother for scale space reconstruction based on CGAL::jet_smooth_point_set() .";
+constexpr const char* Scale_space_reconstruction_3_Jet_smoother__class__ = "Smoother for scale space reconstruction based on CGAL::jet_smooth_point_set() .";
 
-constexpr const char* CGAL_Scale_space_reconstruction_3_Jet_smoother_FT = "defines the field number type.
+constexpr const char* Scale_space_reconstruction_3_Jet_smoother_FT = "defines the field number type.
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Jet_smoother_Point = "defines the point type.
+constexpr const char* Scale_space_reconstruction_3_Jet_smoother_Point = "defines the point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Jet_smoother_Jet_smoother = "Constructs a jet smoother.
+constexpr const char* Scale_space_reconstruction_3_Jet_smoother_Jet_smoother = "Constructs a jet smoother.
 
 k number of neighbors used degree_fitting fitting degree degree_monge Monge
 degree
@@ -166,9 +166,9 @@ degree_fitting : unsigned int
 degree_monge : unsigned int";
 
 // CGAL::Scale_space_reconstruction_3::Mesher
-constexpr const char* CGAL_Scale_space_reconstruction_3_Mesher__class__ = "Concept describing a meshing algorithm used to produce the output mesh of the scale space reconstruction algorithm.";
+constexpr const char* Scale_space_reconstruction_3_Mesher__class__ = "Concept describing a meshing algorithm used to produce the output mesh of the scale space reconstruction algorithm.";
 
-constexpr const char* CGAL_Scale_space_reconstruction_3_Mesher_operator = "
+constexpr const char* Scale_space_reconstruction_3_Mesher_operator = "
 InputIterator iterator over input points. OutputIterator output iterator to
 which std::array<std::size_t, 3> can be assigned. begin iterator over the
 first input point. end past-the-end iterator over the input points. output
@@ -181,9 +181,9 @@ end : InputIterator
 output : OutputIterator";
 
 // CGAL::Scale_space_reconstruction_3::Smoother
-constexpr const char* CGAL_Scale_space_reconstruction_3_Smoother__class__ = "Concept describing a smoothing algorithm used to construct the scales of the scale space reconstruction algorithm.";
+constexpr const char* Scale_space_reconstruction_3_Smoother__class__ = "Concept describing a smoothing algorithm used to construct the scales of the scale space reconstruction algorithm.";
 
-constexpr const char* CGAL_Scale_space_reconstruction_3_Smoother_operator = "
+constexpr const char* Scale_space_reconstruction_3_Smoother_operator = "
 InputIterator iterator over input points. begin iterator over the first input
 point. end past-the-end iterator over the input points.
 
@@ -193,18 +193,18 @@ begin : InputIterator
 end : InputIterator";
 
 // CGAL::Scale_space_reconstruction_3::Weighted_PCA_smoother
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother__class__ = "Smoother for scale space reconstruction based on a principal component analysis weighted by the local density of points.";
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother__class__ = "Smoother for scale space reconstruction based on a principal component analysis weighted by the local density of points.";
 
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother_FT = "defines the field number type.
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother_FT = "defines the field number type.
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother_Point = "defines the point type.
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother_Point = "defines the point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother_Vector = "defines the vector type.
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother_Vector = "defines the vector type.
 
 Returns: Geom_traits::Vector_3";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother_Weighted_PCA_smoother = "Constructs a weighted PCA smoother that will automatically estimate the neighborhood radius.
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother_Weighted_PCA_smoother = "Constructs a weighted PCA smoother that will automatically estimate the neighborhood radius.
 
 neighbors is the number of neighbors a point's neighborhood should contain on
 average. samples is the number of points sampled to estimate the neighborhood
@@ -214,7 +214,7 @@ Parameters
 ----------
 neighbors : unsigned int
 samples : unsigned int";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother_Weighted_PCA_smoother_1 = "Constructs a weighted PCA smoother.
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother_Weighted_PCA_smoother_1 = "Constructs a weighted PCA smoother.
 
 squared_radius neighborhood squared radius used for principal component
 analysis.
@@ -222,7 +222,7 @@ analysis.
 Parameters
 ----------
 squared_radius : FT";
-constexpr const char* CGAL_Scale_space_reconstruction_3_Weighted_PCA_smoother_squared_radius = "Returns the computed (or user-specified) squared radius.
+constexpr const char* Scale_space_reconstruction_3_Weighted_PCA_smoother_squared_radius = "Returns the computed (or user-specified) squared radius.
 
 Returns: FT";
 
@@ -230,10 +230,10 @@ Returns: FT";
 
 
 // CGAL::Scale_space_surface_reconstruction_3
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3__class__ = "computes a triangulated surface mesh interpolating a point set.";
+constexpr const char* Scale_space_surface_reconstruction_3__class__ = "computes a triangulated surface mesh interpolating a point set.";
 
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Scale_space_surface_reconstruction_3 = "Empty constructor.";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Scale_space_surface_reconstruction_3_1 = "Constructs a reconstruction object with the given point range.
+constexpr const char* Scale_space_surface_reconstruction_3_Scale_space_surface_reconstruction_3 = "Empty constructor.";
+constexpr const char* Scale_space_surface_reconstruction_3_Scale_space_surface_reconstruction_3_1 = "Constructs a reconstruction object with the given point range.
 
 This constructor is equivalent to constructing an empty object and then
 calling insert(begin, end) . InputIterator is an iterator over the point
@@ -245,7 +245,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_insert = "inserts a point into the scale-space at the current scale.
+constexpr const char* Scale_space_surface_reconstruction_3_insert = "inserts a point into the scale-space at the current scale.
 
 p is the point to insert. Inserting the point does not automatically construct
 or update the surface. In order to construct the surface, call #
@@ -254,7 +254,7 @@ reconstruct_surface() . insert(InputIterator begin, InputIterator end) .
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_insert_1 = "inserts a collection of points into the scale-space at the current scale.
+constexpr const char* Scale_space_surface_reconstruction_3_insert_1 = "inserts a collection of points into the scale-space at the current scale.
 
 InputIterator is an iterator over the point collection. The value type of the
 iterator must be a Point . begin is an iterator to the first point of the
@@ -267,7 +267,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_increase_scale = "increases the scale by a number of iterations.
+constexpr const char* Scale_space_surface_reconstruction_3_increase_scale = "increases the scale by a number of iterations.
 
 Each iteration the scale is increased, the points set at a higher scale is
 computed. At a higher scale, the points set is smoother. If no smoothing
@@ -283,7 +283,7 @@ Parameters
 ----------
 iterations : std::size_t
 smoother : const Smoother &";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_reconstruct_surface = "constructs a triangle mesh from the point set at a fixed scale.
+constexpr const char* Scale_space_surface_reconstruction_3_reconstruct_surface = "constructs a triangle mesh from the point set at a fixed scale.
 
 The order of the points at the current scale is the same as the order at the
 original scale, meaning that the surface can interpolate the point set at the
@@ -298,95 +298,95 @@ insert(begin, end) . increase_scale() .
 Parameters
 ----------
 mesher : const Mesher &";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_number_of_points = "gives the number of points of the surface.
+constexpr const char* Scale_space_surface_reconstruction_3_number_of_points = "gives the number of points of the surface.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_points = "gives the range of points
+constexpr const char* Scale_space_surface_reconstruction_3_points = "gives the range of points
 
 Returns: const Point_range &";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_points_begin = "gives an iterator to the first point at the current scale.
+constexpr const char* Scale_space_surface_reconstruction_3_points_begin = "gives an iterator to the first point at the current scale.
 
 Changes to the scale-space do not cause an automatic update to the surface.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_points_end = "gives a past-the-end iterator of the points at the current scale.
+constexpr const char* Scale_space_surface_reconstruction_3_points_end = "gives a past-the-end iterator of the points at the current scale.
 
 Changes to the scale-space do not cause an automatic update to the surface.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_points_begin_1 = "gives an iterator to the first point at the current scale.
+constexpr const char* Scale_space_surface_reconstruction_3_points_begin_1 = "gives an iterator to the first point at the current scale.
 
 Returns: Point_const_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_points_end_1 = "gives a past-the-end iterator of the points at the current scale.
+constexpr const char* Scale_space_surface_reconstruction_3_points_end_1 = "gives a past-the-end iterator of the points at the current scale.
 
 Returns: Point_const_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_number_of_facets = "gives the number of facets of the surface.
+constexpr const char* Scale_space_surface_reconstruction_3_number_of_facets = "gives the number of facets of the surface.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_facets = "gives the range of facets
+constexpr const char* Scale_space_surface_reconstruction_3_facets = "gives the range of facets
 
 Returns: const Facet_range &";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_facets_begin = "gives an iterator to the first triple in the surface.
+constexpr const char* Scale_space_surface_reconstruction_3_facets_begin = "gives an iterator to the first triple in the surface.
 
 Changes to the surface may change its topology.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_facets_end = "gives a past-the-end iterator of the triples in the surface.
+constexpr const char* Scale_space_surface_reconstruction_3_facets_end = "gives a past-the-end iterator of the triples in the surface.
 
 Changes to the surface may change its topology.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_facets_begin_1 = "gives an iterator to the first triple in the surface.
+constexpr const char* Scale_space_surface_reconstruction_3_facets_begin_1 = "gives an iterator to the first triple in the surface.
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_facets_end_1 = "gives a past-the-end iterator of the triples in the surface.
+constexpr const char* Scale_space_surface_reconstruction_3_facets_end_1 = "gives a past-the-end iterator of the triples in the surface.
 
 Returns: Facet_const_iterator";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_FT = "defines the field number type.
+constexpr const char* Scale_space_surface_reconstruction_3_FT = "defines the field number type.
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Point = "defines the point type.
+constexpr const char* Scale_space_surface_reconstruction_3_Point = "defines the point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Facet = "defines a facet of the surface (triple of point indices).
+constexpr const char* Scale_space_surface_reconstruction_3_Facet = "defines a facet of the surface (triple of point indices).
 
 Returns: std::array< std::size_t, 3 >";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Point_range = "defines a range points.
+constexpr const char* Scale_space_surface_reconstruction_3_Point_range = "defines a range points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Point_iterator = "defines an iterator over the points.
+constexpr const char* Scale_space_surface_reconstruction_3_Point_iterator = "defines an iterator over the points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Point_const_iterator = "defines a constant iterator over the points.
+constexpr const char* Scale_space_surface_reconstruction_3_Point_const_iterator = "defines a constant iterator over the points.
 
 Returns: const unspecified_type";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Facet_range = "defines a range of facets
+constexpr const char* Scale_space_surface_reconstruction_3_Facet_range = "defines a range of facets
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Facet_iterator = "defines an iterator over the facets.
+constexpr const char* Scale_space_surface_reconstruction_3_Facet_iterator = "defines an iterator over the facets.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Scale_space_surface_reconstruction_3_Facet_const_iterator = "defines a constant iterator over the facets.
+constexpr const char* Scale_space_surface_reconstruction_3_Facet_const_iterator = "defines a constant iterator over the facets.
 
 Returns: const unspecified_type";
 
-constexpr const char* CGAL_Shape_construction_3_FT = "defines the number field type.
+constexpr const char* Shape_construction_3_FT = "defines the number field type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Shape_construction_3_Point = "defines the point type.
+constexpr const char* Shape_construction_3_Point = "defines the point type.
 
 Returns: GeomTraits::Point_3";
-constexpr const char* CGAL_Shape_construction_3_Triangulation_data_structure = "defines the triangulation data structure type.
+constexpr const char* Shape_construction_3_Triangulation_data_structure = "defines the triangulation data structure type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Shape_construction_3_Triangulation = "defines the triangulation type.
+constexpr const char* Shape_construction_3_Triangulation = "defines the triangulation type.
 
 Returns: Delaunay_triangulation_3< GeomTraits, Triangulation_data_structure >";
-constexpr const char* CGAL_Shape_construction_3_Shape = "defines the shape type.
+constexpr const char* Shape_construction_3_Shape = "defines the shape type.
 
 Returns: Alpha_shape_3< Triangulation >";
-constexpr const char* CGAL_Shape_construction_3_Shape_construction_3 = "constructs a default shape constructor.";
-constexpr const char* CGAL_Shape_construction_3_construct = "constructs a new shape.
+constexpr const char* Shape_construction_3_Shape_construction_3 = "constructs a default shape constructor.";
+constexpr const char* Shape_construction_3_construct = "constructs a new shape.
 
 Important note: Shape_construction_3 does not take responsibility for
 destroying the object after use. shape points to the shape to base the new
@@ -400,7 +400,7 @@ shape : Shape *
 squared_radius : const FT &
 
 Returns: Shape *";
-constexpr const char* CGAL_Shape_construction_3_construct_1 = "constructs a new shape.
+constexpr const char* Shape_construction_3_construct_1 = "constructs a new shape.
 
 Important note: Shape_construction_3 does not take responsibility for
 destroying the object after use. InputIterator an iterator over the points.
@@ -415,7 +415,7 @@ end : InputIterator
 squared_radius : const FT &
 
 Returns: Shape *";
-constexpr const char* CGAL_Shape_construction_3_change_scale = "changes the scale of a shape.
+constexpr const char* Shape_construction_3_change_scale = "changes the scale of a shape.
 
 Important note: Shape_construction_3 may destroy the shape object and replace
 it by a new shape. shape points to the shape to adjust. squared_radius is the

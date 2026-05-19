@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Convex_hull_3 {
 
 // CGAL::Convex_hull_hierarchy_3
-constexpr const char* CGAL_Convex_hull_hierarchy_3__class__ = "This class stores a convex hull in a data structure optimized for fast intersection tests.";
+constexpr const char* Convex_hull_hierarchy_3__class__ = "This class stores a convex hull in a data structure optimized for fast intersection tests.";
 
-constexpr const char* CGAL_Convex_hull_hierarchy_3_Convex_hull_hierarchy_3 = "Constructor taking a graph g .
+constexpr const char* Convex_hull_hierarchy_3_Convex_hull_hierarchy_3 = "Constructor taking a graph g .
 
 If compute_convex_hull is set to true , compute and use the convex hull of g
 instead. Graph a model of VertexListGraph NamedParameters a sequence of named
@@ -30,7 +30,7 @@ Parameters
 ----------
 g : const Graph &
 np : const NamedParameters &";
-constexpr const char* CGAL_Convex_hull_hierarchy_3_Convex_hull_hierarchy_3_1 = "Constructor taking the points in the range [first, last) .
+constexpr const char* Convex_hull_hierarchy_3_Convex_hull_hierarchy_3_1 = "Constructor taking the points in the range [first, last) .
 
 PointIterator is an input iterator with a value type equivalent to
 Traits::Point_3 Traits is a model of the concept ConvexHullTraits_3 . For the
@@ -42,10 +42,10 @@ Parameters
 begin : PointIterator
 end : PointIterator
 traits : const Traits &";
-constexpr const char* CGAL_Convex_hull_hierarchy_3_mesh = "returns a const reference to the mesh stored by the class.
+constexpr const char* Convex_hull_hierarchy_3_mesh = "returns a const reference to the mesh stored by the class.
 
 Returns: const PolygonMesh &";
-constexpr const char* CGAL_Convex_hull_hierarchy_3_extreme_vertex_3 = "returns the vertex of the convex hull whose geometric position projected onto that direction is maximal.
+constexpr const char* Convex_hull_hierarchy_3_extreme_vertex_3 = "returns the vertex of the convex hull whose geometric position projected onto that direction is maximal.
 
 If not unique, a single vertex is returned. Direction must be a Direction_3
 typedef of a CGAL kernel dir the direction
@@ -57,21 +57,21 @@ dir : const Direction &
 Returns: vertex_descriptor";
 
 // CGAL::Convex_hull_traits_3
-constexpr const char* CGAL_Convex_hull_traits_3__class__ = "The class Convex_hull_traits_3 serves as a traits class for the function convex_hull_3() .";
+constexpr const char* Convex_hull_traits_3__class__ = "The class Convex_hull_traits_3 serves as a traits class for the function convex_hull_3() .";
 
-constexpr const char* CGAL_Convex_hull_traits_3_Plane_3 = "A triple of points, in order to avoid the need for exact constructions.
+constexpr const char* Convex_hull_traits_3_Plane_3 = "A triple of points, in order to avoid the need for exact constructions.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Convex_hull_traits_3_Convex_hull_traits_3 = "copy constructor.
+constexpr const char* Convex_hull_traits_3_Convex_hull_traits_3 = "copy constructor.
 
 Parameters
 ----------
 t : Convex_hull_traits_3 &";
 
 // CGAL::Extreme_points_traits_adapter_3
-constexpr const char* CGAL_Extreme_points_traits_adapter_3__class__ = "The class Extreme_points_traits_adapter_3 serves as a traits class for the function extreme_points_3() .";
+constexpr const char* Extreme_points_traits_adapter_3__class__ = "The class Extreme_points_traits_adapter_3 serves as a traits class for the function extreme_points_3() .";
 
-constexpr const char* CGAL_Extreme_points_traits_adapter_3_Extreme_points_traits_adapter_3 = "Constructor for the adapter.
+constexpr const char* Extreme_points_traits_adapter_3_Extreme_points_traits_adapter_3 = "Constructor for the adapter.
 
 It uses the functors from Base_traits with a call to get() for each argument.
 pmap the propertymap used for retrieving the data. base the base
@@ -81,7 +81,7 @@ Parameters
 ----------
 pmap : const PointPropertyMap &
 base : Base_traits";
-constexpr const char* CGAL_Extreme_points_traits_adapter_3_get_point = "
+constexpr const char* Extreme_points_traits_adapter_3_get_point = "
 the CGAL::Point_3 associated with k
 
 Parameters

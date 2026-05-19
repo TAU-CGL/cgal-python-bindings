@@ -8,21 +8,21 @@ namespace docstrings {
 namespace Polygonal_surface_reconstruction {
 
 // CGAL::Polygonal_surface_reconstruction
-constexpr const char* CGAL_Polygonal_surface_reconstruction__class__ = "Implementation of the Polygonal Surface Reconstruction method.";
+constexpr const char* Polygonal_surface_reconstruction__class__ = "Implementation of the Polygonal Surface Reconstruction method.";
 
-constexpr const char* CGAL_Polygonal_surface_reconstruction_FT = "number type.
+constexpr const char* Polygonal_surface_reconstruction_FT = "number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_Point = "point type.
+constexpr const char* Polygonal_surface_reconstruction_Point = "point type.
 
 Returns: GeomTraits::Point_3";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_Vector = "vector type.
+constexpr const char* Polygonal_surface_reconstruction_Vector = "vector type.
 
 Returns: GeomTraits::Vector_3";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_Plane = "plane type.
+constexpr const char* Polygonal_surface_reconstruction_Plane = "plane type.
 
 Returns: GeomTraits::Plane_3";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_reconstruct = "Reconstructs a watertight polygonal mesh model.
+constexpr const char* Polygonal_surface_reconstruction_reconstruct = "Reconstructs a watertight polygonal mesh model.
 
 MixedIntegerProgramTraits a model of MixedIntegerProgramTraits PolygonMesh a
 model of MutableFaceGraph true if the reconstruction succeeded, false
@@ -36,17 +36,17 @@ wt_coverage : double  —  weight for the point coverage term.
 wt_complexity : double  —  weight for the model complexity term.
 
 Returns: bool";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_output_candidate_faces = "Gives the user the possibility to access the intermediate candidate faces (i.e., the faces induced by the intersection of the supporting planes).
+constexpr const char* Polygonal_surface_reconstruction_output_candidate_faces = "Gives the user the possibility to access the intermediate candidate faces (i.e., the faces induced by the intersection of the supporting planes).
 
 PolygonMesh a model of MutableFaceGraph .
 
 Parameters
 ----------
 candidate_faces : PolygonMesh &";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_error_message = "Gets the error message (if reconstruction failed).
+constexpr const char* Polygonal_surface_reconstruction_error_message = "Gets the error message (if reconstruction failed).
 
 Returns: const std::string &";
-constexpr const char* CGAL_Polygonal_surface_reconstruction_Polygonal_surface_reconstruction = "Creates a Polygonal Surface Reconstruction object.
+constexpr const char* Polygonal_surface_reconstruction_Polygonal_surface_reconstruction = "Creates a Polygonal Surface Reconstruction object.
 
 After construction, candidate faces are generated and point/face confidence
 values are computed, allowing to reuse them in the subsequent reconstruction

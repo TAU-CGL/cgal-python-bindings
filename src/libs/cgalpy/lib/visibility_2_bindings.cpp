@@ -47,7 +47,7 @@ void export_visibility_2(py::module_& m) {
            doc::Visibility_2_is_attached)
       .def("attach", &Spv::attach,
            py::arg("arr"),
-           doc::CGAL_Simple_polygon_visibility_2_attach)
+           doc::Simple_polygon_visibility_2_attach)
       .def("detach", &Spv::detach,
            doc::Visibility_2_detach)
       .def("arrangement_2", &Spv::arrangement_2,
@@ -70,7 +70,7 @@ void export_visibility_2(py::module_& m) {
            doc::Visibility_2_is_attached)
       .def("attach", &Tev::attach,
            py::arg("arr"),
-           doc::CGAL_Triangular_expansion_visibility_2_attach)
+           doc::Triangular_expansion_visibility_2_attach)
       .def("detach", &Tev::detach,
            doc::Visibility_2_detach)
       .def("arrangement_2", &Tev::arrangement_2,

@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Property_map {
 
 // CGAL::Boolean_property_map
-constexpr const char* CGAL_Boolean_property_map__class__ = "Read-write property map turning a set (such a std::set , boost::unordered_set , std::unordered_set ) into a property map associating a Boolean to the value type of the set.";
+constexpr const char* Boolean_property_map__class__ = "Read-write property map turning a set (such a std::set , boost::unordered_set , std::unordered_set ) into a property map associating a Boolean to the value type of the set.";
 
-constexpr const char* CGAL_Boolean_property_map_Boolean_property_map = "Constructor taking a copy of the set.
+constexpr const char* Boolean_property_map_Boolean_property_map = "Constructor taking a copy of the set.
 
 Note that set_ must be valid while the property map is in use.
 
@@ -19,24 +19,24 @@ Parameters
 set_ : Set &";
 
 // CGAL::Cartesian_converter_property_map
-constexpr const char* CGAL_Cartesian_converter_property_map__class__ = "Read-write property map doing on-the-fly conversions between two default constructible CGAL Cartesian kernels.";
+constexpr const char* Cartesian_converter_property_map__class__ = "Read-write property map doing on-the-fly conversions between two default constructible CGAL Cartesian kernels.";
 
 
 // CGAL::Compose_property_map
-constexpr const char* CGAL_Compose_property_map__class__ = "Property map that composes two property maps, that is a call on an instance Compose_property_map compose_property_map(key_map, value_map) of get(compose_property_map, k) returns get(value_map, get(key_map, k)) .";
+constexpr const char* Compose_property_map__class__ = "Property map that composes two property maps, that is a call on an instance Compose_property_map compose_property_map(key_map, value_map) of get(compose_property_map, k) returns get(value_map, get(key_map, k)) .";
 
-constexpr const char* CGAL_Compose_property_map_key_type = "< Use the key type of KeyMap as keytype
+constexpr const char* Compose_property_map_key_type = "< Use the key type of KeyMap as keytype
 
 Use the value type of ValueMap as value type
 
 Returns: boost::property_traits< KeyMap >::key_type";
-constexpr const char* CGAL_Compose_property_map_value_type = "Use the reference type of ValueMap as reference.
+constexpr const char* Compose_property_map_value_type = "Use the reference type of ValueMap as reference.
 
 Returns: boost::property_traits< ValueMap >::value_type";
-constexpr const char* CGAL_Compose_property_map_reference = "Use the category of the ValueMap .
+constexpr const char* Compose_property_map_reference = "Use the category of the ValueMap .
 
 Returns: boost::property_traits< ValueMap >::reference";
-constexpr const char* CGAL_Compose_property_map_Compose_property_map = "Constructor.
+constexpr const char* Compose_property_map_Compose_property_map = "Constructor.
 
 Parameters
 ----------
@@ -44,9 +44,9 @@ key_map : KeyMap
 value_map : ValueMap";
 
 // CGAL::Constant_property_map
-constexpr const char* CGAL_Constant_property_map__class__ = "Property map that returns a fixed value.";
+constexpr const char* Constant_property_map__class__ = "Property map that returns a fixed value.";
 
-constexpr const char* CGAL_Constant_property_map_get = "Free function that returns pm.default_value .
+constexpr const char* Constant_property_map_get = "Free function that returns pm.default_value .
 
 Parameters
 ----------
@@ -54,7 +54,7 @@ pm : const Constant_property_map &
  : const key_type &
 
 Returns: reference";
-constexpr const char* CGAL_Constant_property_map_put = "Free function that does nothing.
+constexpr const char* Constant_property_map_put = "Free function that does nothing.
 
 Parameters
 ----------
@@ -63,21 +63,21 @@ Parameters
  : const value_type &";
 
 // CGAL::Dereference_property_map
-constexpr const char* CGAL_Dereference_property_map__class__ = "Property map that converts a T* pointer (or in general an iterator over T elements) to the T object.";
+constexpr const char* Dereference_property_map__class__ = "Property map that converts a T* pointer (or in general an iterator over T elements) to the T object.";
 
-constexpr const char* CGAL_Dereference_property_map_key_type = "typedef to 'T*'
+constexpr const char* Dereference_property_map_key_type = "typedef to 'T*'
 
 Returns: Iter";
-constexpr const char* CGAL_Dereference_property_map_value_type = "typedef to 'T'
+constexpr const char* Dereference_property_map_value_type = "typedef to 'T'
 
 Returns: std::remove_const_t< T >";
-constexpr const char* CGAL_Dereference_property_map_reference = "typedef to 'T&'
+constexpr const char* Dereference_property_map_reference = "typedef to 'T&'
 
 Returns: std::iterator_traits< Iter >::reference";
-constexpr const char* CGAL_Dereference_property_map_category = "boost::lvalue_property_map_tag
+constexpr const char* Dereference_property_map_category = "boost::lvalue_property_map_tag
 
 Returns: boost::lvalue_property_map_tag";
-constexpr const char* CGAL_Dereference_property_map_operator = "Access a property map element.
+constexpr const char* Dereference_property_map_operator = "Access a property map element.
 
 Iter Type convertible to key_type .
 
@@ -88,21 +88,21 @@ it : const Iter_ &
 Returns: reference";
 
 // CGAL::First_of_pair_property_map
-constexpr const char* CGAL_First_of_pair_property_map__class__ = "Property map that accesses the first item of a std::pair .";
+constexpr const char* First_of_pair_property_map__class__ = "Property map that accesses the first item of a std::pair .";
 
-constexpr const char* CGAL_First_of_pair_property_map_key_type = "typedef to Pair
+constexpr const char* First_of_pair_property_map_key_type = "typedef to Pair
 
 Returns: Pair";
-constexpr const char* CGAL_First_of_pair_property_map_value_type = "typedef to Pair::first_type
+constexpr const char* First_of_pair_property_map_value_type = "typedef to Pair::first_type
 
 Returns: Pair::first_type";
-constexpr const char* CGAL_First_of_pair_property_map_reference = "typedef to const value_type &
+constexpr const char* First_of_pair_property_map_reference = "typedef to const value_type &
 
 Returns: const value_type &";
-constexpr const char* CGAL_First_of_pair_property_map_category = "boost::lvalue_property_map_tag
+constexpr const char* First_of_pair_property_map_category = "boost::lvalue_property_map_tag
 
 Returns: boost::lvalue_property_map_tag";
-constexpr const char* CGAL_First_of_pair_property_map_operator = "Access a property map element.
+constexpr const char* First_of_pair_property_map_operator = "Access a property map element.
 
 pair a key whose first item is accessed
 
@@ -113,24 +113,24 @@ pair : const key_type &
 Returns: const value_type &";
 
 // CGAL::Identity_property_map
-constexpr const char* CGAL_Identity_property_map__class__ = "A LvaluePropertyMap property map mapping a key to itself (by reference).";
+constexpr const char* Identity_property_map__class__ = "A LvaluePropertyMap property map mapping a key to itself (by reference).";
 
 // CGAL::Nth_of_tuple_property_map
-constexpr const char* CGAL_Nth_of_tuple_property_map__class__ = "Property map that accesses the Nth item of a boost::tuple or a std::tuple .";
+constexpr const char* Nth_of_tuple_property_map__class__ = "Property map that accesses the Nth item of a boost::tuple or a std::tuple .";
 
-constexpr const char* CGAL_Nth_of_tuple_property_map_key_type = "typedef to Tuple
+constexpr const char* Nth_of_tuple_property_map_key_type = "typedef to Tuple
 
 Returns: Tuple";
-constexpr const char* CGAL_Nth_of_tuple_property_map_value_type = "typedef to the N-th type of the tuple
+constexpr const char* Nth_of_tuple_property_map_value_type = "typedef to the N-th type of the tuple
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nth_of_tuple_property_map_reference = "typedef to const value_type &
+constexpr const char* Nth_of_tuple_property_map_reference = "typedef to const value_type &
 
 Returns: const value_type &";
-constexpr const char* CGAL_Nth_of_tuple_property_map_category = "boost::lvalue_property_map_tag
+constexpr const char* Nth_of_tuple_property_map_category = "boost::lvalue_property_map_tag
 
 Returns: boost::lvalue_property_map_tag";
-constexpr const char* CGAL_Nth_of_tuple_property_map_operator = "Access a property map element.
+constexpr const char* Nth_of_tuple_property_map_operator = "Access a property map element.
 
 tuple a key whose Nth item is accessed
 
@@ -140,7 +140,7 @@ tuple : const key_type &
 
 Returns: const value_type &";
 
-constexpr const char* CGAL_Nth_of_tuple_property_map_N_std_tuple_T_make_nth_of_tuple_property_map = "Free function to create a Nth_of_tuple_property_map property map.
+constexpr const char* Nth_of_tuple_property_map_N_std_tuple_T_make_nth_of_tuple_property_map = "Free function to create a Nth_of_tuple_property_map property map.
 
 Parameters
 ----------
@@ -149,39 +149,39 @@ Parameters
 Returns: Nth_of_tuple_property_map < N, std::tuple< T... > >";
 
 // CGAL::Pointer_property_map
-constexpr const char* CGAL_Pointer_property_map__class__ = "Utility class providing shortcuts to property maps based on raw pointers.";
+constexpr const char* Pointer_property_map__class__ = "Utility class providing shortcuts to property maps based on raw pointers.";
 
-constexpr const char* CGAL_Pointer_property_map_type = "mutable LvaluePropertyMap
+constexpr const char* Pointer_property_map_type = "mutable LvaluePropertyMap
 
 Returns: boost::iterator_property_map< T *, boost::typed_identity_property_map< std::size_t >, T, T & >";
-constexpr const char* CGAL_Pointer_property_map_const_type = "non-mutable LvaluePropertyMap
+constexpr const char* Pointer_property_map_const_type = "non-mutable LvaluePropertyMap
 
 Returns: boost::iterator_property_map< const T *, boost::typed_identity_property_map< std::size_t >, T, const T & >";
 
 // CGAL::Property_map_to_unary_function
-constexpr const char* CGAL_Property_map_to_unary_function__class__ = "Struct that turns a property map into a unary functor with operator()(key k) calling the get function with k .";
+constexpr const char* Property_map_to_unary_function__class__ = "Struct that turns a property map into a unary functor with operator()(key k) calling the get function with k .";
 
 
 // CGAL::Random_access_property_map
-constexpr const char* CGAL_Random_access_property_map__class__ = "A property map with std::size_t as key-type that can be used to access the i-th element in a container with random access.";
+constexpr const char* Random_access_property_map__class__ = "A property map with std::size_t as key-type that can be used to access the i-th element in a container with random access.";
 
 
 // CGAL::Second_of_pair_property_map
-constexpr const char* CGAL_Second_of_pair_property_map__class__ = "Property map that accesses the second item of a std::pair .";
+constexpr const char* Second_of_pair_property_map__class__ = "Property map that accesses the second item of a std::pair .";
 
-constexpr const char* CGAL_Second_of_pair_property_map_key_type = "typedef to Pair
+constexpr const char* Second_of_pair_property_map_key_type = "typedef to Pair
 
 Returns: Pair";
-constexpr const char* CGAL_Second_of_pair_property_map_value_type = "typedef to Pair::second_type
+constexpr const char* Second_of_pair_property_map_value_type = "typedef to Pair::second_type
 
 Returns: Pair::second_type";
-constexpr const char* CGAL_Second_of_pair_property_map_reference = "typedef to const value_type &
+constexpr const char* Second_of_pair_property_map_reference = "typedef to const value_type &
 
 Returns: const value_type &";
-constexpr const char* CGAL_Second_of_pair_property_map_category = "boost::lvalue_property_map_tag
+constexpr const char* Second_of_pair_property_map_category = "boost::lvalue_property_map_tag
 
 Returns: boost::lvalue_property_map_tag";
-constexpr const char* CGAL_Second_of_pair_property_map_operator = "Access a property map element.
+constexpr const char* Second_of_pair_property_map_operator = "Access a property map element.
 
 pair a key whose second item is accessed
 

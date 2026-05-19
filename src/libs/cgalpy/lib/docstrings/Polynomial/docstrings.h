@@ -8,33 +8,33 @@ namespace docstrings {
 namespace Polynomial {
 
 // CGAL::Exponent_vector
-constexpr const char* CGAL_Exponent_vector__class__ = "For a given (multivariate) monomial the vector of its exponents is called the exponent vector.";
+constexpr const char* Exponent_vector__class__ = "For a given (multivariate) monomial the vector of its exponents is called the exponent vector.";
 
-constexpr const char* CGAL_Exponent_vector_Exponent_vector = "Default constructor.";
-constexpr const char* CGAL_Exponent_vector_Exponent_vector_1 = "The copy constructor.
+constexpr const char* Exponent_vector_Exponent_vector = "Default constructor.";
+constexpr const char* Exponent_vector_Exponent_vector_1 = "The copy constructor.
 
 Parameters
 ----------
 ev_ : const Exponent_vector &";
-constexpr const char* CGAL_Exponent_vector_Exponent_vector_2 = "Creates a vector containing the given element.
+constexpr const char* Exponent_vector_Exponent_vector_2 = "Creates a vector containing the given element.
 
 Parameters
 ----------
 e1 : int";
-constexpr const char* CGAL_Exponent_vector_Exponent_vector_3 = "Creates a vector containing the given elements.
+constexpr const char* Exponent_vector_Exponent_vector_3 = "Creates a vector containing the given elements.
 
 Parameters
 ----------
 e1 : int
 e2 : int";
-constexpr const char* CGAL_Exponent_vector_Exponent_vector_4 = "Creates a vector containing the given elements.
+constexpr const char* Exponent_vector_Exponent_vector_4 = "Creates a vector containing the given elements.
 
 Parameters
 ----------
 e1 : int
 e2 : int
 e3 : int";
-constexpr const char* CGAL_Exponent_vector_Exponent_vector_5 = "Creates a vector containing the given elements.
+constexpr const char* Exponent_vector_Exponent_vector_5 = "Creates a vector containing the given elements.
 
 Parameters
 ----------
@@ -42,7 +42,7 @@ e1 : int
 e2 : int
 e3 : int
 e4 : int";
-constexpr const char* CGAL_Exponent_vector_Exponent_vector_6 = "Creates a vector with a copy of the given range.
+constexpr const char* Exponent_vector_Exponent_vector_6 = "Creates a vector with a copy of the given range.
 
 InputIterator must allow the value type int .
 
@@ -50,7 +50,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Exponent_vector_operator = "
+constexpr const char* Exponent_vector_operator = "
 ev1.size() == ev2.size().
 
 Parameters
@@ -59,7 +59,7 @@ ev1 : const Exponent_vector &
 ev2 : const Exponent_vector &
 
 Returns: Exponent_vector";
-constexpr const char* CGAL_Exponent_vector_operator_1 = "
+constexpr const char* Exponent_vector_operator_1 = "
 ev1.size() == ev2.size()
 
 Parameters
@@ -68,7 +68,7 @@ ev1 : const Exponent_vector &
 ev2 : const Exponent_vector &
 
 Returns: Exponent_vector";
-constexpr const char* CGAL_Exponent_vector_operator_2 = "
+constexpr const char* Exponent_vector_operator_2 = "
 fo .size() == ev2.size()
 
 Parameters
@@ -76,7 +76,7 @@ Parameters
 ev2 : const Exponent_vector &
 
 Returns: Exponent_vector";
-constexpr const char* CGAL_Exponent_vector_operator_3 = "
+constexpr const char* Exponent_vector_operator_3 = "
 fo .size() == ev2.size()
 
 Parameters
@@ -84,7 +84,7 @@ Parameters
 ev2 : const Exponent_vector &
 
 Returns: Exponent_vector";
-constexpr const char* CGAL_Exponent_vector_operator_4 = "Lexicographic compare, starting with the last variable.
+constexpr const char* Exponent_vector_operator_4 = "Lexicographic compare, starting with the last variable.
 
 Parameters
 ----------
@@ -92,7 +92,7 @@ ev1 : const Exponent_vector &
 ev2 : const Exponent_vector &
 
 Returns: bool";
-constexpr const char* CGAL_Exponent_vector_is_valid = "Returns true if all entries of exponent vector ev are not negative.
+constexpr const char* Exponent_vector_is_valid = "Returns true if all entries of exponent vector ev are not negative.
 
 Parameters
 ----------
@@ -101,52 +101,52 @@ ev : const Exponent_vector &
 Returns: bool";
 
 // CGAL::Polynomial
-constexpr const char* CGAL_Polynomial__class__ = "An instance of the data type Polynomial represents a polynomial $ p = a_0 + a_1*x + ...a_i*x^i$ from the ring $ \\mathrm{Coeff}[x]$ .";
+constexpr const char* Polynomial__class__ = "An instance of the data type Polynomial represents a polynomial $ p = a_0 + a_1*x + ...a_i*x^i$ from the ring $ \\mathrm{Coeff}[x]$ .";
 
-constexpr const char* CGAL_Polynomial_Polynomial = "Introduces an variable initialized with 0.";
-constexpr const char* CGAL_Polynomial_Polynomial_1 = "copy constructor.
+constexpr const char* Polynomial_Polynomial = "Introduces an variable initialized with 0.";
+constexpr const char* Polynomial_Polynomial_1 = "copy constructor.
 
 Parameters
 ----------
 x : const Polynomial &";
-constexpr const char* CGAL_Polynomial_Polynomial_2 = "Constructor from int.
+constexpr const char* Polynomial_Polynomial_2 = "Constructor from int.
 
 Parameters
 ----------
 i : const int &";
-constexpr const char* CGAL_Polynomial_Polynomial_3 = "Constructor from type Coeff.
+constexpr const char* Polynomial_Polynomial_3 = "Constructor from type Coeff.
 
 Parameters
 ----------
 x : const Coeff &";
-constexpr const char* CGAL_Polynomial_Polynomial_4 = "Constructor from iterator range with value type Coeff.
+constexpr const char* Polynomial_Polynomial_4 = "Constructor from iterator range with value type Coeff.
 
 Parameters
 ----------
 first : Forward_iterator
 last : Forward_iterator";
-constexpr const char* CGAL_Polynomial_begin = "A const random access iterator pointing to the constant coefficient.
+constexpr const char* Polynomial_begin = "A const random access iterator pointing to the constant coefficient.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Polynomial_end = "A const random access iterator pointing beyond the leading coefficient.
+constexpr const char* Polynomial_end = "A const random access iterator pointing beyond the leading coefficient.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Polynomial_degree = "The degree of the polynomial in $ x$ .
+constexpr const char* Polynomial_degree = "The degree of the polynomial in $ x$ .
 
 The degree of the zero polynomial is 0.
 
 Returns: int";
-constexpr const char* CGAL_Polynomial_operator = "Const access to the coefficient of $ x^i$ .
+constexpr const char* Polynomial_operator = "Const access to the coefficient of $ x^i$ .
 
 Parameters
 ----------
 i : unsigned int
 
 Returns: const NT &";
-constexpr const char* CGAL_Polynomial_lcoeff = "Const access to the leading coefficient.
+constexpr const char* Polynomial_lcoeff = "Const access to the leading coefficient.
 
 Returns: const NT &";
-constexpr const char* CGAL_Polynomial_operator_1 = "Writes poly to ostream os .
+constexpr const char* Polynomial_operator_1 = "Writes poly to ostream os .
 
 The format depends on the CGAL::IO::MODE of os . In case the mode is
 CGAL::IO::ASCII the format is $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , where $ d$
@@ -160,7 +160,7 @@ os : std::ostream &
 poly : const Polynomial < Coeff > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polynomial_operator_2 = "Reads poly from istream is in format $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , the output format in mode CGAL::IO::ASCII .
+constexpr const char* Polynomial_operator_2 = "Reads poly from istream is in format $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , the output format in mode CGAL::IO::ASCII .
 
 Parameters
 ----------
@@ -170,12 +170,12 @@ poly : const Polynomial < Coeff > &
 Returns: std::istream &";
 
 // CGAL::Polynomial_traits_d
-constexpr const char* CGAL_Polynomial_traits_d__class__ = "A model of concept PolynomialTraits_d .";
+constexpr const char* Polynomial_traits_d__class__ = "A model of concept PolynomialTraits_d .";
 
 // CGAL::Polynomial_type_generator
-constexpr const char* CGAL_Polynomial_type_generator__class__ = "This class template provides a convenient way to obtain the type representing a multivariate polynomial with d variables, where T is the innermost coefficient type.";
+constexpr const char* Polynomial_type_generator__class__ = "This class template provides a convenient way to obtain the type representing a multivariate polynomial with d variables, where T is the innermost coefficient type.";
 
-constexpr const char* CGAL_Polynomial_type_generator_Type = "The generated type.
+constexpr const char* Polynomial_type_generator_Type = "The generated type.
 
 Returns: unspecified_type";
 
@@ -1248,14 +1248,14 @@ p : first_argument_type
 
 Returns: result_type";
 
-constexpr const char* CGAL_Exponent_vector_is_valid_1 = "Returns true if all entries of exponent vector ev are not negative.
+constexpr const char* Exponent_vector_is_valid_1 = "Returns true if all entries of exponent vector ev are not negative.
 
 Parameters
 ----------
 ev : const Exponent_vector &
 
 Returns: bool";
-constexpr const char* CGAL_Polynomial_operator_3 = "Writes poly to ostream os .
+constexpr const char* Polynomial_operator_3 = "Writes poly to ostream os .
 
 The format depends on the CGAL::IO::MODE of os . In case the mode is
 CGAL::IO::ASCII the format is $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , where $ d$
@@ -1269,7 +1269,7 @@ os : std::ostream &
 poly : const Polynomial < Coeff > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polynomial_operator_4 = "Reads poly from istream is in format $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , the output format in mode CGAL::IO::ASCII .
+constexpr const char* Polynomial_operator_4 = "Reads poly from istream is in format $ P[d(0,a_0)(1,a_1)\\dots(d,a_d)]$ , the output format in mode CGAL::IO::ASCII .
 
 Parameters
 ----------

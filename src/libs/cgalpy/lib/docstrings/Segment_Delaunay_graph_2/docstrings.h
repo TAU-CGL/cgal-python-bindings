@@ -8,109 +8,109 @@ namespace docstrings {
 namespace Segment_Delaunay_graph_2 {
 
 // CGAL::Segment_Delaunay_graph_2
-constexpr const char* CGAL_Segment_Delaunay_graph_2__class__ = "The class Segment_Delaunay_graph_2 represents the segment Delaunay graph (which is the dual graph of the 2D segment Voronoi diagram).";
+constexpr const char* Segment_Delaunay_graph_2__class__ = "The class Segment_Delaunay_graph_2 represents the segment Delaunay graph (which is the dual graph of the 2D segment Voronoi diagram).";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Geom_traits = "Type for the geometric traits.
+constexpr const char* Segment_Delaunay_graph_2_Geom_traits = "Type for the geometric traits.
 
 Returns: Gt";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Storage_traits = "Type for the storage traits.
+constexpr const char* Segment_Delaunay_graph_2_Storage_traits = "Type for the storage traits.
 
 Returns: St";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Data_structure = "Type for the underlying data structure.
+constexpr const char* Segment_Delaunay_graph_2_Data_structure = "Type for the underlying data structure.
 
 Returns: DS";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Triangulation_data_structure = "This type has been added so that the Segment_Delaunay_graph_2 class is a model of the DelaunayGraph_2 concept.
+constexpr const char* Segment_Delaunay_graph_2_Triangulation_data_structure = "This type has been added so that the Segment_Delaunay_graph_2 class is a model of the DelaunayGraph_2 concept.
 
 Returns: Data_structure";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_size_type = "Size type (an unsigned integral type).
+constexpr const char* Segment_Delaunay_graph_2_size_type = "Size type (an unsigned integral type).
 
 Returns: DS::size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Point_2 = "Type for the point defined in the geometric traits.
+constexpr const char* Segment_Delaunay_graph_2_Point_2 = "Type for the point defined in the geometric traits.
 
 Returns: Gt::Point_2";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Site_2 = "Type for the segment Delaunay graph site, defined in the geometric traits.
+constexpr const char* Segment_Delaunay_graph_2_Site_2 = "Type for the segment Delaunay graph site, defined in the geometric traits.
 
 Returns: Gt::Site_2";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Storage_site_2 = "Type for the segment Delaunay storage site, defined in the storage traits.
+constexpr const char* Segment_Delaunay_graph_2_Storage_site_2 = "Type for the segment Delaunay storage site, defined in the storage traits.
 
 Returns: Storage_traits::Storage_site_2";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Point_container = "Type for the container of points.
+constexpr const char* Segment_Delaunay_graph_2_Point_container = "Type for the container of points.
 
 Returns: Storage_traits::Point_container";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Point_handle = "Handle type for points in the point container.
+constexpr const char* Segment_Delaunay_graph_2_Point_handle = "Handle type for points in the point container.
 
 Returns: Storage_traits::Point_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Edge = "The edge type.
+constexpr const char* Segment_Delaunay_graph_2_Edge = "The edge type.
 
 The Edge(f,i) is the edge common to faces f and f.neighbor(i) . It is also the
 edge joining the vertices vertex(cw(i)) and vertex(ccw(i)) of f . i must be 0
 , 1 or 2 .
 
 Returns: DS::Edge";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Vertex = "Type for a vertex.
+constexpr const char* Segment_Delaunay_graph_2_Vertex = "Type for a vertex.
 
 Returns: DS::Vertex";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Face = "Type for a face.
+constexpr const char* Segment_Delaunay_graph_2_Face = "Type for a face.
 
 Returns: DS::Face";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Vertex_handle = "Type for a handle to a vertex.
+constexpr const char* Segment_Delaunay_graph_2_Vertex_handle = "Type for a handle to a vertex.
 
 Returns: DS::Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Face_handle = "Type for a handle to a face.
+constexpr const char* Segment_Delaunay_graph_2_Face_handle = "Type for a handle to a face.
 
 Returns: DS::Face_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Vertex_circulator = "Type for a circulator over vertices incident to a given vertex.
+constexpr const char* Segment_Delaunay_graph_2_Vertex_circulator = "Type for a circulator over vertices incident to a given vertex.
 
 Returns: DS::Vertex_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Face_circulator = "Type for a circulator over faces incident to a given vertex.
+constexpr const char* Segment_Delaunay_graph_2_Face_circulator = "Type for a circulator over faces incident to a given vertex.
 
 Returns: DS::Face_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Edge_circulator = "Type for a circulator over edges incident to a given vertex.
+constexpr const char* Segment_Delaunay_graph_2_Edge_circulator = "Type for a circulator over edges incident to a given vertex.
 
 Returns: DS::Edge_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_All_vertices_iterator = "Type for an iterator over all vertices.
+constexpr const char* Segment_Delaunay_graph_2_All_vertices_iterator = "Type for an iterator over all vertices.
 
 Returns: DS::Vertex_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_All_faces_iterator = "Type for an iterator over all faces.
+constexpr const char* Segment_Delaunay_graph_2_All_faces_iterator = "Type for an iterator over all faces.
 
 Returns: DS::Face_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_All_edges_iterator = "Type for an iterator over all edges.
+constexpr const char* Segment_Delaunay_graph_2_All_edges_iterator = "Type for an iterator over all edges.
 
 Returns: DS::Edge_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Finite_vertices_iterator = "Type for an iterator over finite vertices.
+constexpr const char* Segment_Delaunay_graph_2_Finite_vertices_iterator = "Type for an iterator over finite vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Finite_faces_iterator = "Type for an iterator over finite faces.
+constexpr const char* Segment_Delaunay_graph_2_Finite_faces_iterator = "Type for an iterator over finite faces.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Finite_edges_iterator = "Type for an iterator over finite edges.
+constexpr const char* Segment_Delaunay_graph_2_Finite_edges_iterator = "Type for an iterator over finite edges.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Input_sites_iterator = "Type for a bidirectional iterator over all input sites.
+constexpr const char* Segment_Delaunay_graph_2_Input_sites_iterator = "Type for a bidirectional iterator over all input sites.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Output_sites_iterator = "Type for a bidirectional iterator over all output sites (the sites in the Delaunay graph).
+constexpr const char* Segment_Delaunay_graph_2_Output_sites_iterator = "Type for a bidirectional iterator over all output sites (the sites in the Delaunay graph).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_input_sites_begin = "Starts at an arbitrary input site.
+constexpr const char* Segment_Delaunay_graph_2_input_sites_begin = "Starts at an arbitrary input site.
 
 Returns: Input_sites_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_input_sites_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_input_sites_end = "Past-the-end iterator.
 
 Returns: Input_sites_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_output_sites_begin = "Starts at an arbitrary output site.
+constexpr const char* Segment_Delaunay_graph_2_output_sites_begin = "Starts at an arbitrary output site.
 
 Returns: Output_sites_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_output_sites_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_output_sites_end = "Past-the-end iterator.
 
 Returns: Output_sites_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Segment_Delaunay_graph_2 = "Creates the segment Delaunay graph using gt as geometric traits and st as storage traits.
+constexpr const char* Segment_Delaunay_graph_2_Segment_Delaunay_graph_2 = "Creates the segment Delaunay graph using gt as geometric traits and st as storage traits.
 
 Parameters
 ----------
 gt : Gt
 st : St";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_Segment_Delaunay_graph_2_1 = "Creates the segment Delaunay graph using gt as geometric traits, st as storage traits, and inserts all sites in the range [ first , beyond ).
+constexpr const char* Segment_Delaunay_graph_2_Segment_Delaunay_graph_2_1 = "Creates the segment Delaunay graph using gt as geometric traits, st as storage traits, and inserts all sites in the range [ first , beyond ).
 
 Input_iterator must be a model of InputIterator . The value type of
 Input_iterator must be either Point_2 or Site_2 .
@@ -121,99 +121,99 @@ first : Input_iterator
 beyond : Input_iterator
 gt : Gt
 gt : St";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_geom_traits = "Returns a reference to the segment Delaunay graph geometric traits object.
+constexpr const char* Segment_Delaunay_graph_2_geom_traits = "Returns a reference to the segment Delaunay graph geometric traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_storage_traits = "Returns a reference to the segment Delaunay graph storage traits object.
+constexpr const char* Segment_Delaunay_graph_2_storage_traits = "Returns a reference to the segment Delaunay graph storage traits object.
 
 Returns: const Storage_traits &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_point_container = "Returns a reference to the point container object.
+constexpr const char* Segment_Delaunay_graph_2_point_container = "Returns a reference to the point container object.
 
 Returns: const Point_container &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_data_structure = "Returns a reference to the segment Delaunay graph data structure object.
+constexpr const char* Segment_Delaunay_graph_2_data_structure = "Returns a reference to the segment Delaunay graph data structure object.
 
 Returns: const Data_structure &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_tds = "Same as data_structure() .
+constexpr const char* Segment_Delaunay_graph_2_tds = "Same as data_structure() .
 
 It has been added for compliance to the DelaunayGraph_2 concept.
 
 Returns: const Data_structure &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_dimension = "Returns the dimension of the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_dimension = "Returns the dimension of the segment Delaunay graph.
 
 The dimension is $ -1$ if the graph contains no sites, $ 0$ if the graph
 contains one site, $ 1$ if it contains two sites and $ 2$ if it contains three
 or more sites.
 
 Returns: int";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_number_of_vertices = "Returns the number of finite vertices of the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_number_of_vertices = "Returns the number of finite vertices of the segment Delaunay graph.
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_number_of_faces = "Returns the number of faces (both finite and infinite) of the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_number_of_faces = "Returns the number of faces (both finite and infinite) of the segment Delaunay graph.
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_number_of_input_sites = "Return the number of input sites.
+constexpr const char* Segment_Delaunay_graph_2_number_of_input_sites = "Return the number of input sites.
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_number_of_output_sites = "Return the number of output sites.
+constexpr const char* Segment_Delaunay_graph_2_number_of_output_sites = "Return the number of output sites.
 
 This is equal to the number of vertices in the segment Delaunay graph.
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_infinite_face = "Returns a face incident to the infinite_vertex .
+constexpr const char* Segment_Delaunay_graph_2_infinite_face = "Returns a face incident to the infinite_vertex .
 
 Returns: Face_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_infinite_vertex = "Returns the infinite_vertex .
+constexpr const char* Segment_Delaunay_graph_2_infinite_vertex = "Returns the infinite_vertex .
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_vertex = "Returns a vertex distinct from the infinite_vertex .
+constexpr const char* Segment_Delaunay_graph_2_finite_vertex = "Returns a vertex distinct from the infinite_vertex .
 
 The number of sites in the segment Delaunay graph must be at least one.
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_vertices_begin = "Starts at an arbitrary finite vertex.
+constexpr const char* Segment_Delaunay_graph_2_finite_vertices_begin = "Starts at an arbitrary finite vertex.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_vertices_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_finite_vertices_end = "Past-the-end iterator.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_edges_begin = "Starts at an arbitrary finite edge.
+constexpr const char* Segment_Delaunay_graph_2_finite_edges_begin = "Starts at an arbitrary finite edge.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_edges_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_finite_edges_end = "Past-the-end iterator.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_faces_begin = "Starts at an arbitrary finite face.
+constexpr const char* Segment_Delaunay_graph_2_finite_faces_begin = "Starts at an arbitrary finite face.
 
 Returns: Finite_faces_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_finite_faces_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_finite_faces_end = "Past-the-end iterator.
 
 Returns: Finite_faces_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_all_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Segment_Delaunay_graph_2_all_vertices_begin = "Starts at an arbitrary vertex.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_all_vertices_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_all_vertices_end = "Past-the-end iterator.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_all_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Segment_Delaunay_graph_2_all_edges_begin = "Starts at an arbitrary edge.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_all_edges_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_all_edges_end = "Past-the-end iterator.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_all_faces_begin = "Starts at an arbitrary face.
+constexpr const char* Segment_Delaunay_graph_2_all_faces_begin = "Starts at an arbitrary face.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_all_faces_end = "Past-the-end iterator.
+constexpr const char* Segment_Delaunay_graph_2_all_faces_end = "Past-the-end iterator.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_incident_faces = "Starts at an arbitrary face incident to v .
+constexpr const char* Segment_Delaunay_graph_2_incident_faces = "Starts at an arbitrary face incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_incident_faces_1 = "Starts at face f .
+constexpr const char* Segment_Delaunay_graph_2_incident_faces_1 = "Starts at face f .
 
 Face f is incident to vertex v .
 
@@ -223,14 +223,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_incident_edges = "Starts at an arbitrary edge incident to v .
+constexpr const char* Segment_Delaunay_graph_2_incident_edges = "Starts at an arbitrary edge incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
+constexpr const char* Segment_Delaunay_graph_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
 
 Face f is incident to vertex v .
 
@@ -240,14 +240,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_incident_vertices = "Starts at an arbitrary vertex incident to v .
+constexpr const char* Segment_Delaunay_graph_2_incident_vertices = "Starts at an arbitrary vertex incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_incident_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
+constexpr const char* Segment_Delaunay_graph_2_incident_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
 
 Face f is incident to vertex v .
 
@@ -257,21 +257,21 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_is_infinite = "true , iff v is the infinite_vertex .
+constexpr const char* Segment_Delaunay_graph_2_is_infinite = "true , iff v is the infinite_vertex .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_is_infinite_1 = "true , iff face f is infinite.
+constexpr const char* Segment_Delaunay_graph_2_is_infinite_1 = "true , iff face f is infinite.
 
 Parameters
 ----------
 f : Face_handle
 
 Returns: bool";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_is_infinite_2 = "true , iff edge (f,i) is infinite.
+constexpr const char* Segment_Delaunay_graph_2_is_infinite_2 = "true , iff edge (f,i) is infinite.
 
 Parameters
 ----------
@@ -279,21 +279,21 @@ f : Face_handle
 i : int
 
 Returns: bool";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_is_infinite_3 = "true , iff edge e is infinite.
+constexpr const char* Segment_Delaunay_graph_2_is_infinite_3 = "true , iff edge e is infinite.
 
 Parameters
 ----------
 e : Edge
 
 Returns: bool";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_is_infinite_4 = "true , iff edge *ec is infinite.
+constexpr const char* Segment_Delaunay_graph_2_is_infinite_4 = "true , iff edge *ec is infinite.
 
 Parameters
 ----------
 ec : Edge_circulator
 
 Returns: bool";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert = "Iteratively inserts the sites in the range [ first , beyond ).
+constexpr const char* Segment_Delaunay_graph_2_insert = "Iteratively inserts the sites in the range [ first , beyond ).
 
 Input_iterator must be a model of InputIterator and its value type must be
 either Point_2 or Site_2 . the number of sites inserted in the Delaunay graph
@@ -304,7 +304,7 @@ first : Input_iterator
 beyond : Input_iterator
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_1 = "Iteratively inserts the sites in the range [ first , beyond ).
+constexpr const char* Segment_Delaunay_graph_2_insert_1 = "Iteratively inserts the sites in the range [ first , beyond ).
 
 Input_iterator must be a model of InputIterator and its value type must be
 either Point_2 or Site_2 . the number of sites inserted in the Delaunay graph
@@ -316,7 +316,7 @@ beyond : Input_iterator
  : CGAL::Tag_false
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_2 = "Decomposes the range [first,beyond) into a range of input points and a range of input segments that are respectively passed to insert_segments() and insert_points() .
+constexpr const char* Segment_Delaunay_graph_2_insert_2 = "Decomposes the range [first,beyond) into a range of input points and a range of input segments that are respectively passed to insert_segments() and insert_points() .
 
 Non-input sites are first random_shuffled and then inserted one by one.
 Input_iterator must be a model of InputIterator and its value type must be
@@ -330,7 +330,7 @@ beyond : Input_iterator
  : CGAL::Tag_true
 
 Returns: size_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_points = "Inserts the points in the range [first,beyond) as sites.
+constexpr const char* Segment_Delaunay_graph_2_insert_points = "Inserts the points in the range [first,beyond) as sites.
 
 Note that this function is not guaranteed to insert the points following the
 order of PointInputIterator , as spatial_sort() is used to improve efficiency.
@@ -343,7 +343,7 @@ first : PointIterator
 beyond : PointIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_segments = "Inserts the segments in the range [first,beyond) as sites.
+constexpr const char* Segment_Delaunay_graph_2_insert_segments = "Inserts the segments in the range [first,beyond) as sites.
 
 Note that this function is not guaranteed to insert the segments following the
 order of SegmentIterator , as spatial_sort() is used to improve efficiency.
@@ -357,7 +357,7 @@ first : SegmentIterator
 beyond : SegmentIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_segments_1 = "Same as above except that each segment is given as a pair of indices of the points in the range [points_first, points_beyond).
+constexpr const char* Segment_Delaunay_graph_2_insert_segments_1 = "Same as above except that each segment is given as a pair of indices of the points in the range [points_first, points_beyond).
 
 The indices must start from 0 to std::distance(points_first, points_beyond)
 PointIterator is an input iterator with Point_2 as value type. IndicesIterator
@@ -372,7 +372,7 @@ indices_first : IndicesIterator
 indices_beyond : IndicesIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_3 = "Inserts the point p in the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_insert_3 = "Inserts the point p in the segment Delaunay graph.
 
 If p has already been inserted, then the vertex handle of its already inserted
 copy is returned. If p has not been inserted yet, the vertex handle of p is
@@ -383,7 +383,7 @@ Parameters
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_4 = "Inserts p in the segment Delaunay graph using the site associated with vnear as an estimate for the nearest neighbor of p .
+constexpr const char* Segment_Delaunay_graph_2_insert_4 = "Inserts p in the segment Delaunay graph using the site associated with vnear as an estimate for the nearest neighbor of p .
 
 The vertex handle returned has the same semantics as the vertex handle
 returned by the method Vertex_handle insert(Point_2 p) .
@@ -394,7 +394,7 @@ p : const Point_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_5 = "Inserts the closed segment with endpoints p1 and p2 in the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_insert_5 = "Inserts the closed segment with endpoints p1 and p2 in the segment Delaunay graph.
 
 If the segment has already been inserted in the Delaunay graph then the vertex
 handle of its already inserted copy is returned. If the segment does not
@@ -409,7 +409,7 @@ p1 : const Point_2 &
 p2 : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_6 = "Inserts the segment whose endpoints are p1 and p2 in the segment Delaunay graph using the site associated with vnear as an estimate for the nearest neighbor of p1 .
+constexpr const char* Segment_Delaunay_graph_2_insert_6 = "Inserts the segment whose endpoints are p1 and p2 in the segment Delaunay graph using the site associated with vnear as an estimate for the nearest neighbor of p1 .
 
 The vertex handle returned has the same semantics as the vertex handle
 returned by the method Vertex_handle insert(Point_2 p1, Point_2 p2) .
@@ -421,7 +421,7 @@ p2 : const Point_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_7 = "Inserts the site s in the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_insert_7 = "Inserts the site s in the segment Delaunay graph.
 
 The vertex handle returned has the same semantics as the vertex handle
 returned by the methods Vertex_handle insert(Point_2 p) and Vertex_handle
@@ -433,7 +433,7 @@ Parameters
 s : const Site_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_insert_8 = "Inserts s in the segment Delaunay graph using the site associated with vnear as an estimate for the nearest neighbor of s , if s is a point, or the first endpoint of s , if s is a segment.
+constexpr const char* Segment_Delaunay_graph_2_insert_8 = "Inserts s in the segment Delaunay graph using the site associated with vnear as an estimate for the nearest neighbor of s , if s is a point, or the first endpoint of s , if s is a segment.
 
 The vertex handle returned has the same semantics as the vertex handle
 returned by the method Vertex_handle insert(Site_2 s) . s.is_input() must be
@@ -445,7 +445,7 @@ s : const Site_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_nearest_neighbor = "Finds the nearest neighbor of the point p .
+constexpr const char* Segment_Delaunay_graph_2_nearest_neighbor = "Finds the nearest neighbor of the point p .
 
 In other words it finds the site whose segment Voronoi diagram cell contains p
 . Ties are broken arbitrarily and one of the nearest neighbors of p is
@@ -457,7 +457,7 @@ Parameters
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_nearest_neighbor_1 = "Finds the nearest neighbor of the point p using the site associated with vnear as an estimate for the nearest neighbor of p .
+constexpr const char* Segment_Delaunay_graph_2_nearest_neighbor_1 = "Finds the nearest neighbor of the point p using the site associated with vnear as an estimate for the nearest neighbor of p .
 
 Ties are broken arbitrarily and one of the nearest neighbors of p is returned.
 If there are no sites in the segment Delaunay graph Vertex_handle() is
@@ -469,7 +469,7 @@ p : const Point_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_draw_dual = "Draws the segment Voronoi diagram to the stream str .
+constexpr const char* Segment_Delaunay_graph_2_draw_dual = "Draws the segment Voronoi diagram to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) Stream& operator<<(Stream&, Gt::Ray_2) Stream&
@@ -480,7 +480,7 @@ Parameters
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_draw_skeleton = "Draws the segment Voronoi diagram to the stream str , except the edges of the diagram corresponding to a segment and its endpoints.
+constexpr const char* Segment_Delaunay_graph_2_draw_skeleton = "Draws the segment Voronoi diagram to the stream str , except the edges of the diagram corresponding to a segment and its endpoints.
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) Stream& operator<<(Stream&, Gt::Ray_2) Stream&
@@ -491,7 +491,7 @@ Parameters
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_draw_dual_edge = "Draws the edge e of the segment Voronoi diagram to the stream str .
+constexpr const char* Segment_Delaunay_graph_2_draw_dual_edge = "Draws the edge e of the segment Voronoi diagram to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) Stream& operator<<(Stream&, Gt::Ray_2) Stream&
@@ -503,7 +503,7 @@ e : Edge
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_draw_dual_edge_1 = "Draws the edge *ec of the segment Voronoi diagram to the stream str .
+constexpr const char* Segment_Delaunay_graph_2_draw_dual_edge_1 = "Draws the edge *ec of the segment Voronoi diagram to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) Stream& operator<<(Stream&, Gt::Ray_2) Stream&
@@ -515,7 +515,7 @@ ec : Edge_circulator
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_draw_dual_edge_2 = "Draws the edge *eit of the segment Voronoi diagram to the stream str .
+constexpr const char* Segment_Delaunay_graph_2_draw_dual_edge_2 = "Draws the edge *eit of the segment Voronoi diagram to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) Stream& operator<<(Stream&, Gt::Ray_2) Stream&
@@ -527,7 +527,7 @@ eit : All_edges_iterator
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_draw_dual_edge_3 = "Draws the edge *eit of the segment Voronoi diagram to the stream str .
+constexpr const char* Segment_Delaunay_graph_2_draw_dual_edge_3 = "Draws the edge *eit of the segment Voronoi diagram to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) Stream& operator<<(Stream&, Gt::Ray_2) Stream&
@@ -539,7 +539,7 @@ eit : Finite_edges_iterator
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_file_output = "Writes the current state of the segment Delaunay graph to an output stream.
+constexpr const char* Segment_Delaunay_graph_2_file_output = "Writes the current state of the segment Delaunay graph to an output stream.
 
 In particular, all sites in the diagram are written to the stream (represented
 through appropriate input sites), as well as the underlying combinatorial data
@@ -548,12 +548,12 @@ structure.
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_file_input = "Reads the state of the segment Delaunay graph from an input stream.
+constexpr const char* Segment_Delaunay_graph_2_file_input = "Reads the state of the segment Delaunay graph from an input stream.
 
 Parameters
 ----------
 is : std::istream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_operator = "Writes the current state of the segment Delaunay graph to an output stream.
+constexpr const char* Segment_Delaunay_graph_2_operator = "Writes the current state of the segment Delaunay graph to an output stream.
 
 Parameters
 ----------
@@ -561,7 +561,7 @@ os : std::ostream &
 sdg : const Segment_Delaunay_graph_2 < Gt, St, DS > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_operator_1 = "Reads the state of the segment Delaunay graph from an input stream.
+constexpr const char* Segment_Delaunay_graph_2_operator_1 = "Reads the state of the segment Delaunay graph from an input stream.
 
 Parameters
 ----------
@@ -569,7 +569,7 @@ is : std::istream &
 sdg : Segment_Delaunay_graph_2 < Gt, St, DS > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_is_valid = "Checks the validity of the segment Delaunay graph.
+constexpr const char* Segment_Delaunay_graph_2_is_valid = "Checks the validity of the segment Delaunay graph.
 
 If verbose is true a short message is sent to std::cerr . If level is 0, only
 the data structure is validated. If level is 1, then both the data structure
@@ -582,8 +582,8 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_clear = "Clears all contents of the segment Delaunay graph.";
-constexpr const char* CGAL_Segment_Delaunay_graph_2_swap = "The segment Delaunay graphs other and *this are swapped.
+constexpr const char* Segment_Delaunay_graph_2_clear = "Clears all contents of the segment Delaunay graph.";
+constexpr const char* Segment_Delaunay_graph_2_swap = "The segment Delaunay graphs other and *this are swapped.
 
 For a segment Delaunay graph sdg , the operation sdg . swap(other) should be
 preferred to sdg``= other or to sdg``(other) if other is deleted afterwards.
@@ -593,46 +593,46 @@ Parameters
 other : Segment_Delaunay_graph_2 < Gt, St, DS > &";
 
 // CGAL::Segment_Delaunay_graph_filtered_traits_2
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_2__class__ = "The class Segment_Delaunay_graph_filtered_traits_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_filtered_traits_2__class__ = "The class Segment_Delaunay_graph_filtered_traits_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_2_Construction_traits = "A type for the segment Delaunay graph traits, where the kernel is CK .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_2_Filtering_traits = "A type for the segment Delaunay graph traits, where the kernel is FK .
+constexpr const char* Segment_Delaunay_graph_filtered_traits_2_Construction_traits = "A type for the segment Delaunay graph traits, where the kernel is CK .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_2_Exact_traits = "A type for the segment Delaunay graph traits, where the kernel is EK .
+constexpr const char* Segment_Delaunay_graph_filtered_traits_2_Filtering_traits = "A type for the segment Delaunay graph traits, where the kernel is FK .
+
+Returns: unspecified_type";
+constexpr const char* Segment_Delaunay_graph_filtered_traits_2_Exact_traits = "A type for the segment Delaunay graph traits, where the kernel is EK .
 
 Returns: unspecified_type";
 
 // CGAL::Segment_Delaunay_graph_filtered_traits_without_intersections_2
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_filtered_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_filtered_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_filtered_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_without_intersections_2_Construction_traits = "A type for the segment Delaunay graph traits, where the kernel is CK .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_without_intersections_2_Filtering_traits = "A type for the segment Delaunay graph traits, where the kernel is FK .
+constexpr const char* Segment_Delaunay_graph_filtered_traits_without_intersections_2_Construction_traits = "A type for the segment Delaunay graph traits, where the kernel is CK .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Segment_Delaunay_graph_filtered_traits_without_intersections_2_Exact_traits = "A type for the segment Delaunay graph traits, where the kernel is EK .
+constexpr const char* Segment_Delaunay_graph_filtered_traits_without_intersections_2_Filtering_traits = "A type for the segment Delaunay graph traits, where the kernel is FK .
+
+Returns: unspecified_type";
+constexpr const char* Segment_Delaunay_graph_filtered_traits_without_intersections_2_Exact_traits = "A type for the segment Delaunay graph traits, where the kernel is EK .
 
 Returns: unspecified_type";
 
 // CGAL::Segment_Delaunay_graph_hierarchy_2
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2__class__ = "We provide an alternative to the class Segment_Delaunay_graph_2 <Gt,St,DS> for the incremental construction of the segment Delaunay graph.";
+constexpr const char* Segment_Delaunay_graph_hierarchy_2__class__ = "We provide an alternative to the class Segment_Delaunay_graph_2 <Gt,St,DS> for the incremental construction of the segment Delaunay graph.";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_Segments_in_hierarchy_tag = "A type for the STag template parameter.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_Segments_in_hierarchy_tag = "A type for the STag template parameter.
 
 Returns: STag";
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_Base = "A type for the base class.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_Base = "A type for the base class.
 
 Returns: CGAL::Segment_Delaunay_graph_2 < Gt, St, DS >";
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_Segment_Delaunay_graph_hierarchy_2 = "Creates a hierarchy of segment Delaunay graphs using gt as geometric traits.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_Segment_Delaunay_graph_hierarchy_2 = "Creates a hierarchy of segment Delaunay graphs using gt as geometric traits.
 
 Parameters
 ----------
 gt : Gt";
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_Segment_Delaunay_graph_hierarchy_2_1 = "Creates a segment Delaunay graph hierarchy using gt as geometric traits and inserts all sites in the range [ first , beyond ).
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_Segment_Delaunay_graph_hierarchy_2_1 = "Creates a segment Delaunay graph hierarchy using gt as geometric traits and inserts all sites in the range [ first , beyond ).
 
 Input_iterator must be a model of InputIterator . The value type of
 Input_iterator must be either Point_2 or Site_2 .
@@ -642,7 +642,7 @@ Parameters
 first : Input_iterator
 beyond : Input_iterator
 gt : Gt";
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_operator = "Writes the current state of the segment Delaunay graph hierarchy to an output stream.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_operator = "Writes the current state of the segment Delaunay graph hierarchy to an output stream.
 
 In particular, all sites in the diagram are written to the stream (represented
 through appropriate input sites), as well as the underlying combinatorial
@@ -654,7 +654,7 @@ os : std::ostream &
 svdh : const Segment_Delaunay_graph_hierarchy_2 < Gt, St, STag, DS > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_operator_1 = "Reads the state of the segment Delaunay graph hierarchy from an input stream.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_operator_1 = "Reads the state of the segment Delaunay graph hierarchy from an input stream.
 
 Parameters
 ----------
@@ -664,51 +664,51 @@ svdh : const Segment_Delaunay_graph_hierarchy_2 < Gt, St, STag, DS > &
 Returns: std::istream &";
 
 // CGAL::Segment_Delaunay_graph_hierarchy_vertex_base_2
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_vertex_base_2__class__ = "The class Segment_Delaunay_graph_hierarchy_vertex_base_2 provides a model for the SegmentDelaunayGraphHierarchyVertexBase_2 concept, which is the vertex base required by the Segment_Delaunay_graph_hierarchy_2 <Gt,St,STag,DS> class.";
+constexpr const char* Segment_Delaunay_graph_hierarchy_vertex_base_2__class__ = "The class Segment_Delaunay_graph_hierarchy_vertex_base_2 provides a model for the SegmentDelaunayGraphHierarchyVertexBase_2 concept, which is the vertex base required by the Segment_Delaunay_graph_hierarchy_2 <Gt,St,STag,DS> class.";
 
 // CGAL::Segment_Delaunay_graph_site_2
-constexpr const char* CGAL_Segment_Delaunay_graph_site_2__class__ = "The class Segment_Delaunay_graph_site_2 is a model for the concept SegmentDelaunayGraphSite_2 .";
+constexpr const char* Segment_Delaunay_graph_site_2__class__ = "The class Segment_Delaunay_graph_site_2 is a model for the concept SegmentDelaunayGraphSite_2 .";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_site_2_Kernel = "A type for the template parameter K .
+constexpr const char* Segment_Delaunay_graph_site_2_Kernel = "A type for the template parameter K .
 
 Returns: K";
 
 // CGAL::Segment_Delaunay_graph_storage_site_2
-constexpr const char* CGAL_Segment_Delaunay_graph_storage_site_2__class__ = "The class Segment_Delaunay_graph_storage_site_2 is a model for the concept SegmentDelaunayGraphStorageSite_2 .";
+constexpr const char* Segment_Delaunay_graph_storage_site_2__class__ = "The class Segment_Delaunay_graph_storage_site_2 is a model for the concept SegmentDelaunayGraphStorageSite_2 .";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_storage_site_2_Storage_traits = "A type for the template parameter St .
+constexpr const char* Segment_Delaunay_graph_storage_site_2_Storage_traits = "A type for the template parameter St .
 
 Returns: St";
 
 // CGAL::Segment_Delaunay_graph_storage_site_with_info_2
-constexpr const char* CGAL_Segment_Delaunay_graph_storage_site_with_info_2__class__ = "The class Segment_Delaunay_graph_storage_site_with_info_2 is a model for the concept SegmentDelaunayGraphStorageSite_2 .";
+constexpr const char* Segment_Delaunay_graph_storage_site_with_info_2__class__ = "The class Segment_Delaunay_graph_storage_site_with_info_2 is a model for the concept SegmentDelaunayGraphStorageSite_2 .";
 
 
 // CGAL::Segment_Delaunay_graph_storage_traits_2
-constexpr const char* CGAL_Segment_Delaunay_graph_storage_traits_2__class__ = "The class Segment_Delaunay_graph_storage_traits_2 provides a model for the SegmentDelaunayGraphStorageTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_storage_traits_2__class__ = "The class Segment_Delaunay_graph_storage_traits_2 provides a model for the SegmentDelaunayGraphStorageTraits_2 concept.";
 
 
 // CGAL::Segment_Delaunay_graph_storage_traits_with_info_2
-constexpr const char* CGAL_Segment_Delaunay_graph_storage_traits_with_info_2__class__ = "The class Segment_Delaunay_graph_storage_traits_with_info_2 provides a model for the SegmentDelaunayGraphStorageTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_storage_traits_with_info_2__class__ = "The class Segment_Delaunay_graph_storage_traits_with_info_2 provides a model for the SegmentDelaunayGraphStorageTraits_2 concept.";
 
 
 // CGAL::Segment_Delaunay_graph_traits_2
-constexpr const char* CGAL_Segment_Delaunay_graph_traits_2__class__ = "The class Segment_Delaunay_graph_traits_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_traits_2__class__ = "The class Segment_Delaunay_graph_traits_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_traits_2_Kernel = "A typedef for the template parameter K .
+constexpr const char* Segment_Delaunay_graph_traits_2_Kernel = "A typedef for the template parameter K .
 
 Returns: K";
-constexpr const char* CGAL_Segment_Delaunay_graph_traits_2_Method_tag = "A typedef for the template parameter MTag .
+constexpr const char* Segment_Delaunay_graph_traits_2_Method_tag = "A typedef for the template parameter MTag .
 
 Returns: MTag";
 
 // CGAL::Segment_Delaunay_graph_traits_without_intersections_2
-constexpr const char* CGAL_Segment_Delaunay_graph_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_traits_without_intersections_2__class__ = "The class Segment_Delaunay_graph_traits_without_intersections_2 provides a model for the SegmentDelaunayGraphTraits_2 concept.";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_traits_without_intersections_2_Kernel = "A typedef for the template parameter K .
+constexpr const char* Segment_Delaunay_graph_traits_without_intersections_2_Kernel = "A typedef for the template parameter K .
 
 Returns: K";
-constexpr const char* CGAL_Segment_Delaunay_graph_traits_without_intersections_2_Method_tag = "A typedef for the template parameter MTag .
+constexpr const char* Segment_Delaunay_graph_traits_without_intersections_2_Method_tag = "A typedef for the template parameter MTag .
 
 Returns: MTag";
 
@@ -1461,7 +1461,7 @@ level : int
 
 Returns: bool";
 
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_operator_2 = "Writes the current state of the segment Delaunay graph hierarchy to an output stream.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_operator_2 = "Writes the current state of the segment Delaunay graph hierarchy to an output stream.
 
 In particular, all sites in the diagram are written to the stream (represented
 through appropriate input sites), as well as the underlying combinatorial
@@ -1473,7 +1473,7 @@ os : std::ostream &
 svdh : const Segment_Delaunay_graph_hierarchy_2 < Gt, St, STag, DS > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Segment_Delaunay_graph_hierarchy_2_operator_3 = "Reads the state of the segment Delaunay graph hierarchy from an input stream.
+constexpr const char* Segment_Delaunay_graph_hierarchy_2_operator_3 = "Reads the state of the segment Delaunay graph hierarchy from an input stream.
 
 Parameters
 ----------

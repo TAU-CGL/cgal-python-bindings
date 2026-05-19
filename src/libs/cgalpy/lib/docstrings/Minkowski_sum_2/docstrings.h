@@ -8,28 +8,28 @@ namespace docstrings {
 namespace Minkowski_sum_2 {
 
 // CGAL::Greene_convex_decomposition_2
-constexpr const char* CGAL_Greene_convex_decomposition_2__class__ = "The Greene_convex_decomposition_2 class implements the approximation algorithm of Greene for the decomposition of an input polygon into convex sub-polygons [6] .";
+constexpr const char* Greene_convex_decomposition_2__class__ = "The Greene_convex_decomposition_2 class implements the approximation algorithm of Greene for the decomposition of an input polygon into convex sub-polygons [6] .";
 
 
 // CGAL::Hertel_Mehlhorn_convex_decomposition_2
-constexpr const char* CGAL_Hertel_Mehlhorn_convex_decomposition_2__class__ = "The Hertel_Mehlhorn_convex_decomposition_2 class implements the approximation algorithm of Hertel and Mehlhorn for decomposing a polygon into convex sub-polygons [8] .";
+constexpr const char* Hertel_Mehlhorn_convex_decomposition_2__class__ = "The Hertel_Mehlhorn_convex_decomposition_2 class implements the approximation algorithm of Hertel and Mehlhorn for decomposing a polygon into convex sub-polygons [8] .";
 
 
 // CGAL::Optimal_convex_decomposition_2
-constexpr const char* CGAL_Optimal_convex_decomposition_2__class__ = "The Optimal_convex_decomposition_2 class provides an implementation of Greene's dynamic programming algorithm for optimal decomposition of a polygon into convex sub-polygons [6] .";
+constexpr const char* Optimal_convex_decomposition_2__class__ = "The Optimal_convex_decomposition_2 class provides an implementation of Greene's dynamic programming algorithm for optimal decomposition of a polygon into convex sub-polygons [6] .";
 
 
 // CGAL::Polygon_nop_decomposition_2
-constexpr const char* CGAL_Polygon_nop_decomposition_2__class__ = "The Polygon_nop_decomposition_2 class implements a convex decomposition of a polygon, which merely passes the input polygon to the list of output convex polygons.";
+constexpr const char* Polygon_nop_decomposition_2__class__ = "The Polygon_nop_decomposition_2 class implements a convex decomposition of a polygon, which merely passes the input polygon to the list of output convex polygons.";
 
 // CGAL::Polygon_triangulation_decomposition_2
-constexpr const char* CGAL_Polygon_triangulation_decomposition_2__class__ = "The Polygon_triangulation_decomposition_2 class implements a convex decomposition of a polygon or a polygon with holes into triangles using the Delaunay constrained triangulation functionality of the 2D Triangulation package.";
+constexpr const char* Polygon_triangulation_decomposition_2__class__ = "The Polygon_triangulation_decomposition_2 class implements a convex decomposition of a polygon or a polygon with holes into triangles using the Delaunay constrained triangulation functionality of the 2D Triangulation package.";
 
 // CGAL::Polygon_vertical_decomposition_2
-constexpr const char* CGAL_Polygon_vertical_decomposition_2__class__ = "The Polygon_vertical_decomposition_2 class implements a convex decomposition of a polygon or a polygon with holes into pseudo trapezoids utilizing the CGAL::decompose() free function of the 2D Arrangements package.";
+constexpr const char* Polygon_vertical_decomposition_2__class__ = "The Polygon_vertical_decomposition_2 class implements a convex decomposition of a polygon or a polygon with holes into pseudo trapezoids utilizing the CGAL::decompose() free function of the 2D Arrangements package.";
 
 // CGAL::Small_side_angle_bisector_decomposition_2
-constexpr const char* CGAL_Small_side_angle_bisector_decomposition_2__class__ = "The Small_side_angle_bisector_decomposition_2 class implements a simple yet efficient heuristic for decomposing an input polygon into convex sub-polygons.";
+constexpr const char* Small_side_angle_bisector_decomposition_2__class__ = "The Small_side_angle_bisector_decomposition_2 class implements a simple yet efficient heuristic for decomposing an input polygon into convex sub-polygons.";
 
 // PolygonConvexDecomposition_2
 constexpr const char* PolygonConvexDecomposition_2__class__ = "A model of the PolygonConvexDecomposition_2 concept is capable of decomposing an input polygon $ P$ into a set of convex sub-polygons $ P_1, \\ldots, P_k$ , such that $ \\cup_{i=1}^{k}{P_k} = P$ .";

@@ -8,25 +8,25 @@ namespace docstrings {
 namespace Mesh_2 {
 
 // CGAL::Delaunay_mesh_criteria_2
-constexpr const char* CGAL_Delaunay_mesh_criteria_2__class__ = "The class Delaunay_mesh_criteria_2 is a model for the MeshingCriteria_2 concept.";
+constexpr const char* Delaunay_mesh_criteria_2__class__ = "The class Delaunay_mesh_criteria_2 is a model for the MeshingCriteria_2 concept.";
 
-constexpr const char* CGAL_Delaunay_mesh_criteria_2_Delaunay_mesh_criteria_2 = "Default constructor with bound $ B=\\sqrt{2}$ .";
-constexpr const char* CGAL_Delaunay_mesh_criteria_2_Delaunay_mesh_criteria_2_1 = "Construct a traits class with bound $ B=\\sqrt{\\frac{1}{4 b}}$ .
+constexpr const char* Delaunay_mesh_criteria_2_Delaunay_mesh_criteria_2 = "Default constructor with bound $ B=\\sqrt{2}$ .";
+constexpr const char* Delaunay_mesh_criteria_2_Delaunay_mesh_criteria_2_1 = "Construct a traits class with bound $ B=\\sqrt{\\frac{1}{4 b}}$ .
 
 Parameters
 ----------
 b : double";
 
 // CGAL::Delaunay_mesh_face_base_2
-constexpr const char* CGAL_Delaunay_mesh_face_base_2__class__ = "The class Delaunay_mesh_face_base_2 is a model for the concept DelaunayMeshFaceBase_2 .";
+constexpr const char* Delaunay_mesh_face_base_2__class__ = "The class Delaunay_mesh_face_base_2 is a model for the concept DelaunayMeshFaceBase_2 .";
 
 // CGAL::Delaunay_mesh_size_criteria_2
-constexpr const char* CGAL_Delaunay_mesh_size_criteria_2__class__ = "The class Delaunay_mesh_size_criteria_2 is a model for the MeshingCriteria_2 concept.";
+constexpr const char* Delaunay_mesh_size_criteria_2__class__ = "The class Delaunay_mesh_size_criteria_2 is a model for the MeshingCriteria_2 concept.";
 
-constexpr const char* CGAL_Delaunay_mesh_size_criteria_2_Delaunay_mesh_size_criteria_2 = "Default constructor with $ B=\\sqrt{2}$ .
+constexpr const char* Delaunay_mesh_size_criteria_2_Delaunay_mesh_size_criteria_2 = "Default constructor with $ B=\\sqrt{2}$ .
 
 No bound on size.";
-constexpr const char* CGAL_Delaunay_mesh_size_criteria_2_Delaunay_mesh_size_criteria_2_1 = "Construct a traits class with bound $ B=\\sqrt{\\frac{1}{4
+constexpr const char* Delaunay_mesh_size_criteria_2_Delaunay_mesh_size_criteria_2_1 = "Construct a traits class with bound $ B=\\sqrt{\\frac{1}{4
 b}}$ .
 
 If $ S \\neq0$ , the size bound is $ S$ . If $ S = 0$ , there is no bound on
@@ -38,30 +38,30 @@ b : double
 S : double";
 
 // CGAL::Delaunay_mesh_vertex_base_2
-constexpr const char* CGAL_Delaunay_mesh_vertex_base_2__class__ = "The class Delaunay_mesh_vertex_base_2 is a model for the concept DelaunayMeshVertexBase_2 .";
+constexpr const char* Delaunay_mesh_vertex_base_2__class__ = "The class Delaunay_mesh_vertex_base_2 is a model for the concept DelaunayMeshVertexBase_2 .";
 
 // CGAL::Delaunay_mesher_2
-constexpr const char* CGAL_Delaunay_mesher_2__class__ = "This class implements a 2D mesh generator.";
+constexpr const char* Delaunay_mesher_2__class__ = "This class implements a 2D mesh generator.";
 
-constexpr const char* CGAL_Delaunay_mesher_2_Geom_traits = "the geometric traits class.
+constexpr const char* Delaunay_mesher_2_Geom_traits = "the geometric traits class.
 
 Returns: CDT::Geom_traits";
-constexpr const char* CGAL_Delaunay_mesher_2_Seeds_iterator = "const iterator over defined seeds.
+constexpr const char* Delaunay_mesher_2_Seeds_iterator = "const iterator over defined seeds.
 
 Its value type is Geom_traits::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_mesher_2_Delaunay_mesher_2 = "creates a new mesher, working on t , with meshing criteria criteria .
+constexpr const char* Delaunay_mesher_2_Delaunay_mesher_2 = "creates a new mesher, working on t , with meshing criteria criteria .
 
 Parameters
 ----------
 t : CDT &
 criteria : Criteria";
-constexpr const char* CGAL_Delaunay_mesher_2_clear_seeds = "sets seeds to the empty set.
+constexpr const char* Delaunay_mesher_2_clear_seeds = "sets seeds to the empty set.
 
 All finite connected components of the constrained triangulation will be
 refined.";
-constexpr const char* CGAL_Delaunay_mesher_2_set_seeds = "sets seeds to the sequence [begin, end) .
+constexpr const char* Delaunay_mesher_2_set_seeds = "sets seeds to the sequence [begin, end) .
 
 If mark==true , the mesh domain is the union of the bounded connected
 components including at least one seed. If mark==false , the domain is the
@@ -74,22 +74,22 @@ Parameters
 begin : InputIterator
 end : InputIterator
 mark : const bool";
-constexpr const char* CGAL_Delaunay_mesher_2_seeds_begin = "Start of the seeds sequence.
+constexpr const char* Delaunay_mesher_2_seeds_begin = "Start of the seeds sequence.
 
 Returns: Seeds_const_iterator";
-constexpr const char* CGAL_Delaunay_mesher_2_seeds_end = "Past the end of the seeds sequence.
+constexpr const char* Delaunay_mesher_2_seeds_end = "Past the end of the seeds sequence.
 
 Returns: Seeds_const_iterator";
-constexpr const char* CGAL_Delaunay_mesher_2_refine_mesh = "refines the constrained Delaunay triangulation into a mesh satisfying the criteria defined by the traits.";
-constexpr const char* CGAL_Delaunay_mesher_2_get_criteria = "returns a const reference to the criteria traits object.
+constexpr const char* Delaunay_mesher_2_refine_mesh = "refines the constrained Delaunay triangulation into a mesh satisfying the criteria defined by the traits.";
+constexpr const char* Delaunay_mesher_2_get_criteria = "returns a const reference to the criteria traits object.
 
 Returns: const Criteria &";
-constexpr const char* CGAL_Delaunay_mesher_2_set_criteria = "assigns criteria to the criteria traits object.
+constexpr const char* Delaunay_mesher_2_set_criteria = "assigns criteria to the criteria traits object.
 
 Parameters
 ----------
 criteria : Criteria";
-constexpr const char* CGAL_Delaunay_mesher_2_set_criteria_1 = "assigns criteria to the criteria traits object.
+constexpr const char* Delaunay_mesher_2_set_criteria_1 = "assigns criteria to the criteria traits object.
 
 If recalculate_bad_faces is false , the list of bad faces is let empty and the
 function set_bad_faces() should be called before refine_mesh .
@@ -98,7 +98,7 @@ Parameters
 ----------
 criteria : Criteria
 recalculate_bad_faces : bool";
-constexpr const char* CGAL_Delaunay_mesher_2_set_bad_faces = "This method permits to set the list of bad triangles directly, from the sequence [begin, end) , so that the algorithm will not scan the whole set of triangles to find bad ones.
+constexpr const char* Delaunay_mesher_2_set_bad_faces = "This method permits to set the list of bad triangles directly, from the sequence [begin, end) , so that the algorithm will not scan the whole set of triangles to find bad ones.
 
 To use if there is a non-naive way to find bad triangles. InputIterator must
 be an input iterator with value type Face_handle .
@@ -107,61 +107,61 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Delaunay_mesher_2_init = "This method must be called just before the first call to the following step by step refinement method, that is when all vertices and constrained edges have been inserted into the constrained Delaunay triangulation.
+constexpr const char* Delaunay_mesher_2_init = "This method must be called just before the first call to the following step by step refinement method, that is when all vertices and constrained edges have been inserted into the constrained Delaunay triangulation.
 
 It must be called again before any subsequent calls to the step by step
 refinement method if new vertices or constrained edges have been inserted
 since the last call.";
-constexpr const char* CGAL_Delaunay_mesher_2_is_refinement_done = "Tests if the step by step refinement algorithm is done.
+constexpr const char* Delaunay_mesher_2_is_refinement_done = "Tests if the step by step refinement algorithm is done.
 
 If it returns true , the following calls to step_by_step_refine_mesh will not
 insert any points, until some new constrained segments or points are inserted
 in the triangulation and init is called again.
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_mesher_2_step_by_step_refine_mesh = "Applies one step of the algorithm, by inserting one point, if the algorithm is not done.
+constexpr const char* Delaunay_mesher_2_step_by_step_refine_mesh = "Applies one step of the algorithm, by inserting one point, if the algorithm is not done.
 
 Returns false iff no point has been inserted because the algorithm is done.
 
 Returns: bool";
 
 // CGAL::Triangulation_conformer_2
-constexpr const char* CGAL_Triangulation_conformer_2__class__ = "The class Triangulation_conformer_2 is an auxiliary class of Delaunay_mesher_2 <CDT> .";
+constexpr const char* Triangulation_conformer_2__class__ = "The class Triangulation_conformer_2 is an auxiliary class of Delaunay_mesher_2 <CDT> .";
 
-constexpr const char* CGAL_Triangulation_conformer_2_Triangulation_conformer_2 = "Create a new conforming maker, working on t .
+constexpr const char* Triangulation_conformer_2_Triangulation_conformer_2 = "Create a new conforming maker, working on t .
 
 Parameters
 ----------
 t : CDT &";
-constexpr const char* CGAL_Triangulation_conformer_2_make_conforming_Delaunay = "Refines the triangulation into a conforming Delaunay triangulation.
+constexpr const char* Triangulation_conformer_2_make_conforming_Delaunay = "Refines the triangulation into a conforming Delaunay triangulation.
 
 After a call to this method, all triangles fulfill the Delaunay property, that
 is the empty circle property.";
-constexpr const char* CGAL_Triangulation_conformer_2_make_conforming_Gabriel = "Refines the triangulation into a conforming Gabriel triangulation.
+constexpr const char* Triangulation_conformer_2_make_conforming_Gabriel = "Refines the triangulation into a conforming Gabriel triangulation.
 
 After a call to this method, all constrained edges $ e$ have the Gabriel
 property : the circle with diameter $ e$ does not contain any vertex of the
 triangulation.";
-constexpr const char* CGAL_Triangulation_conformer_2_is_conforming_Delaunay = "Returns true iff all triangles fulfill the Delaunay property.
+constexpr const char* Triangulation_conformer_2_is_conforming_Delaunay = "Returns true iff all triangles fulfill the Delaunay property.
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_conformer_2_is_conforming_Gabriel = "Returns true iff all constrained edges have the Gabriel property: their circumsphere is empty.
+constexpr const char* Triangulation_conformer_2_is_conforming_Gabriel = "Returns true iff all constrained edges have the Gabriel property: their circumsphere is empty.
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_conformer_2_init_Delaunay = "The method must be called after all points and constrained segments are inserted and before any call to the following methods.
+constexpr const char* Triangulation_conformer_2_init_Delaunay = "The method must be called after all points and constrained segments are inserted and before any call to the following methods.
 
 If some points or segments are then inserted in the triangulation, this method
 must be called again.";
-constexpr const char* CGAL_Triangulation_conformer_2_step_by_step_conforming_Delaunay = "Applies one step of the algorithm, by inserting one point, if the algorithm is not done.
+constexpr const char* Triangulation_conformer_2_step_by_step_conforming_Delaunay = "Applies one step of the algorithm, by inserting one point, if the algorithm is not done.
 
 Returns false iff no point has been inserted because the algorithm is done.
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_conformer_2_init_Gabriel = "Analog to init_Delaunay for Gabriel conforming.";
-constexpr const char* CGAL_Triangulation_conformer_2_step_by_step_conforming_Gabriel = "Analog to step_by_step_conforming_Delaunay() for Gabriel conforming.
+constexpr const char* Triangulation_conformer_2_init_Gabriel = "Analog to init_Delaunay for Gabriel conforming.";
+constexpr const char* Triangulation_conformer_2_step_by_step_conforming_Gabriel = "Analog to step_by_step_conforming_Delaunay() for Gabriel conforming.
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_conformer_2_is_conforming_done = "Tests if the step by step conforming algorithm is done.
+constexpr const char* Triangulation_conformer_2_is_conforming_done = "Tests if the step by step conforming algorithm is done.
 
 If it returns true , the following calls to step_by_step_conforming_XX will
 not insert any points, until some new constrained segments or points are

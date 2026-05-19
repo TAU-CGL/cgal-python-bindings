@@ -27,53 +27,53 @@ constexpr const char* AllFurthestNeighborsTraits_2_Orientation_2 = "model for Ke
 Returns: unspecified_type";
 
 // CGAL::Polytope_distance_d
-constexpr const char* CGAL_Polytope_distance_d__class__ = "An object of the class Polytope_distance_d represents the (squared) distance between two convex polytopes, given as the convex hulls of two finite point sets in $ d$ -dimensional Euclidean space $ \\E^d$ .";
+constexpr const char* Polytope_distance_d__class__ = "An object of the class Polytope_distance_d represents the (squared) distance between two convex polytopes, given as the convex hulls of two finite point sets in $ d$ -dimensional Euclidean space $ \\E^d$ .";
 
-constexpr const char* CGAL_Polytope_distance_d_Point = "typedef to Traits::Point_d .
+constexpr const char* Polytope_distance_d_Point = "typedef to Traits::Point_d .
 
 Point type used to represent the input points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_FT = "typedef to Traits::FT .
+constexpr const char* Polytope_distance_d_FT = "typedef to Traits::FT .
 
 Number type used to return the squared distance between the two polytopes.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_ET = "typedef to Traits::ET .
+constexpr const char* Polytope_distance_d_ET = "typedef to Traits::ET .
 
 Number type used to do the exact computations in the underlying solver for
 quadratic programs (cf. Implementation ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_Point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Polytope_distance_d_Point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the points of the two polytopes.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_Support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
+constexpr const char* Polytope_distance_d_Support_point_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type Point .
 
 Used to access the support points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_Support_point_index_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type int .
+constexpr const char* Polytope_distance_d_Support_point_index_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type int .
 
 Used to access the indices of the support points in the provided input order
 (starting from 0 in both point sets).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_Coordinate_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type ET .
+constexpr const char* Polytope_distance_d_Coordinate_iterator = "non-mutable model of the STL concept RandomAccessIterator with value type ET .
 
 Used to access the coordinates of the realizing points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_Polytope_distance_d = "initializes poly_dist to $ pd(\\emptyset, \\emptyset)$ .
+constexpr const char* Polytope_distance_d_Polytope_distance_d = "initializes poly_dist to $ pd(\\emptyset, \\emptyset)$ .
 
 Parameters
 ----------
 traits : const Traits &
 verbose : int
 stream : std::ostream &";
-constexpr const char* CGAL_Polytope_distance_d_Polytope_distance_d_1 = "initializes poly_dist to $ pd(P,Q)$ with $ P$ and $ Q$ being the sets of points in the range [ p_first , p_last ) and [ q_first , q_last ), respectively.
+constexpr const char* Polytope_distance_d_Polytope_distance_d_1 = "initializes poly_dist to $ pd(P,Q)$ with $ P$ and $ Q$ being the sets of points in the range [ p_first , p_last ) and [ q_first , q_last ), respectively.
 
 InputIterator1 has Point as value type. InputIterator2 has Point as value
 type. All points have the same dimension. If verbose is set to $ 1$ , $ 2$ ,
@@ -89,117 +89,117 @@ q_last : InputIterator2
 traits : const Traits &
 verbose : int
 stream : std::ostream &";
-constexpr const char* CGAL_Polytope_distance_d_ambient_dimension = "returns the dimension of the points in $ P$ and $ Q$ .
+constexpr const char* Polytope_distance_d_ambient_dimension = "returns the dimension of the points in $ P$ and $ Q$ .
 
 If poly_dist is $ pd(\\emptyset, \\emptyset)$ , the ambient dimension is $ -1$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_number_of_points = "returns the number of all points of poly_dist , i.e. $ |P|+|Q|$ .
+constexpr const char* Polytope_distance_d_number_of_points = "returns the number of all points of poly_dist , i.e. $ |P|+|Q|$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_number_of_points_p = "returns the number of points in $ P$ .
+constexpr const char* Polytope_distance_d_number_of_points_p = "returns the number of points in $ P$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_number_of_points_q = "returns the number of points in $ Q$ .
+constexpr const char* Polytope_distance_d_number_of_points_q = "returns the number of points in $ Q$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_number_of_support_points = "returns the number of support points of poly_dist , i.e. $ |S_P|+|S_Q|$ .
+constexpr const char* Polytope_distance_d_number_of_support_points = "returns the number of support points of poly_dist , i.e. $ |S_P|+|S_Q|$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_number_of_support_points_p = "returns the number of support points in $ S_P$ .
+constexpr const char* Polytope_distance_d_number_of_support_points_p = "returns the number of support points in $ S_P$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_number_of_support_points_q = "returns the number of support points in $ S_Q$ .
+constexpr const char* Polytope_distance_d_number_of_support_points_q = "returns the number of support points in $ S_Q$ .
 
 Returns: int";
-constexpr const char* CGAL_Polytope_distance_d_points_p_begin = "returns an iterator referring to the first point in $ P$ .
+constexpr const char* Polytope_distance_d_points_p_begin = "returns an iterator referring to the first point in $ P$ .
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_points_p_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_points_p_end = "returns the corresponding past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_points_q_begin = "returns an iterator referring to the first point in $ Q$ .
+constexpr const char* Polytope_distance_d_points_q_begin = "returns an iterator referring to the first point in $ Q$ .
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_points_q_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_points_q_end = "returns the corresponding past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_p_begin = "returns an iterator referring to the first support point in $ S_P$ .
+constexpr const char* Polytope_distance_d_support_points_p_begin = "returns an iterator referring to the first support point in $ S_P$ .
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_p_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_support_points_p_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_q_begin = "returns an iterator referring to the first support point in $ S_Q$ .
+constexpr const char* Polytope_distance_d_support_points_q_begin = "returns an iterator referring to the first support point in $ S_Q$ .
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_q_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_support_points_q_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_p_indices_begin = "returns an iterator referring to the index of the first support point in $ P$ .
+constexpr const char* Polytope_distance_d_support_points_p_indices_begin = "returns an iterator referring to the index of the first support point in $ P$ .
 
 Returns: Support_point_index_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_p_indices_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_support_points_p_indices_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_index_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_q_indices_begin = "returns an iterator referring to the index of the first support point in $ Q$ .
+constexpr const char* Polytope_distance_d_support_points_q_indices_begin = "returns an iterator referring to the index of the first support point in $ Q$ .
 
 Returns: Support_point_index_iterator";
-constexpr const char* CGAL_Polytope_distance_d_support_points_q_indices_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_support_points_q_indices_end = "returns the corresponding past-the-end iterator.
 
 Returns: Support_point_index_iterator";
-constexpr const char* CGAL_Polytope_distance_d_realizing_point_p = "returns the realizing point of $ P$ .
+constexpr const char* Polytope_distance_d_realizing_point_p = "returns the realizing point of $ P$ .
 
 An implicit conversion from ET to RT must be available. $ pd(P,Q)$ is finite.
 
 Returns: Point";
-constexpr const char* CGAL_Polytope_distance_d_realizing_point_q = "returns the realizing point of $ Q$ .
+constexpr const char* Polytope_distance_d_realizing_point_q = "returns the realizing point of $ Q$ .
 
 An implicit conversion from ET to RT must be available. $ pd(P,Q)$ is finite.
 
 Returns: Point";
-constexpr const char* CGAL_Polytope_distance_d_squared_distance = "returns the squared distance of poly_dist , i.e. $ (pd(P,Q))^2$ .
+constexpr const char* Polytope_distance_d_squared_distance = "returns the squared distance of poly_dist , i.e. $ (pd(P,Q))^2$ .
 
 An implicit conversion from ET to RT must be available. $ pd(P,Q)$ is finite.
 
 Returns: FT";
-constexpr const char* CGAL_Polytope_distance_d_realizing_point_p_coordinates_begin = "returns an iterator referring to the first coordinate of the realizing point of $ P$ .
+constexpr const char* Polytope_distance_d_realizing_point_p_coordinates_begin = "returns an iterator referring to the first coordinate of the realizing point of $ P$ .
 
 The coordinates have a rational representation, i.e. the first $ d$ elements
 of the iterator range are the numerators and the $ (d\\!+\\!1)$ -st element is
 the common denominator.
 
 Returns: Coordinate_iterator";
-constexpr const char* CGAL_Polytope_distance_d_realizing_point_p_coordinates_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_realizing_point_p_coordinates_end = "returns the corresponding past-the-end iterator.
 
 Returns: Coordinate_iterator";
-constexpr const char* CGAL_Polytope_distance_d_realizing_point_q_coordinates_begin = "returns an iterator referring to the first coordinate of the realizing point of $ Q$ .
+constexpr const char* Polytope_distance_d_realizing_point_q_coordinates_begin = "returns an iterator referring to the first coordinate of the realizing point of $ Q$ .
 
 The coordinates have a rational representation, i.e. the first $ d$ elements
 of the iterator range are the numerators and the $ (d\\!+\\!1)$ -st element is
 the common denominator.
 
 Returns: Coordinate_iterator";
-constexpr const char* CGAL_Polytope_distance_d_realizing_point_q_coordinates_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Polytope_distance_d_realizing_point_q_coordinates_end = "returns the corresponding past-the-end iterator.
 
 Returns: Coordinate_iterator";
-constexpr const char* CGAL_Polytope_distance_d_squared_distance_numerator = "returns the numerator of the squared distance of poly_dist .
+constexpr const char* Polytope_distance_d_squared_distance_numerator = "returns the numerator of the squared distance of poly_dist .
 
 Returns: ET";
-constexpr const char* CGAL_Polytope_distance_d_squared_distance_denominator = "returns the denominator of the squared distance of poly_dist .
+constexpr const char* Polytope_distance_d_squared_distance_denominator = "returns the denominator of the squared distance of poly_dist .
 
 Returns: ET";
-constexpr const char* CGAL_Polytope_distance_d_is_finite = "returns true , if $ pd(P,Q)$ is finite, i.e. none of the two polytopes is empty.
+constexpr const char* Polytope_distance_d_is_finite = "returns true , if $ pd(P,Q)$ is finite, i.e. none of the two polytopes is empty.
 
 Returns: bool";
-constexpr const char* CGAL_Polytope_distance_d_is_zero = "returns true , if $ pd(P,Q)$ is zero, i.e. the two polytopes intersect (this implies degeneracy).
+constexpr const char* Polytope_distance_d_is_zero = "returns true , if $ pd(P,Q)$ is zero, i.e. the two polytopes intersect (this implies degeneracy).
 
 Returns: bool";
-constexpr const char* CGAL_Polytope_distance_d_is_degenerate = "returns true , iff $ pd(P,Q)$ is degenerate, i.e. $ pd(P,Q)$ is not finite.
+constexpr const char* Polytope_distance_d_is_degenerate = "returns true , iff $ pd(P,Q)$ is degenerate, i.e. $ pd(P,Q)$ is not finite.
 
 Returns: bool";
-constexpr const char* CGAL_Polytope_distance_d_clear = "resets poly_dist to $ pd(\\emptyset, \\emptyset)$ .";
-constexpr const char* CGAL_Polytope_distance_d_set = "sets poly_dist to $ pd(P,Q)$ with $ P$ and $ Q$ being the sets of points in the ranges [ p_first , p_last ) and [ q_first , q_last ), respectively.
+constexpr const char* Polytope_distance_d_clear = "resets poly_dist to $ pd(\\emptyset, \\emptyset)$ .";
+constexpr const char* Polytope_distance_d_set = "sets poly_dist to $ pd(P,Q)$ with $ P$ and $ Q$ being the sets of points in the ranges [ p_first , p_last ) and [ q_first , q_last ), respectively.
 
 InputIterator1 has Point as value type. InputIterator2 has Point as value
 type. All points have the same dimension.
@@ -210,7 +210,7 @@ p_first : InputIterator1
 p_last : InputIterator1
 q_first : InputIterator2
 q_last : InputIterator2";
-constexpr const char* CGAL_Polytope_distance_d_set_p = "sets poly_dist to $ pd(P,Q)$ with $ P$ being the set of points in the range [ p_first , p_last ) ( $ Q$ remains unchanged).
+constexpr const char* Polytope_distance_d_set_p = "sets poly_dist to $ pd(P,Q)$ with $ P$ being the set of points in the range [ p_first , p_last ) ( $ Q$ remains unchanged).
 
 InputIterator has Point as value type. All points in $ P$ have dimension
 poly_dist``. ambient_dimension() if $ Q$ is not empty.
@@ -219,7 +219,7 @@ Parameters
 ----------
 p_first : InputIterator
 p_last : InputIterator";
-constexpr const char* CGAL_Polytope_distance_d_set_q = "sets poly_dist to $ pd(P,Q)$ with $ Q$ being the set of points in the range [ q_first , q_last ) ( $ P$ remains unchanged).
+constexpr const char* Polytope_distance_d_set_q = "sets poly_dist to $ pd(P,Q)$ with $ Q$ being the set of points in the range [ q_first , q_last ) ( $ P$ remains unchanged).
 
 InputIterator has Point as value type. All points in $ Q$ have dimension
 poly_dist``. ambient_dimension() if $ P$ is not empty.
@@ -228,7 +228,7 @@ Parameters
 ----------
 q_first : InputIterator
 q_last : InputIterator";
-constexpr const char* CGAL_Polytope_distance_d_insert_p = "inserts p into $ P$ .
+constexpr const char* Polytope_distance_d_insert_p = "inserts p into $ P$ .
 
 The dimension of p equals poly_dist``. ambient_dimension() if poly_dist is not
 $ pd(\\emptyset, \\emptyset)$ .
@@ -236,7 +236,7 @@ $ pd(\\emptyset, \\emptyset)$ .
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Polytope_distance_d_insert_q = "inserts q into $ Q$ .
+constexpr const char* Polytope_distance_d_insert_q = "inserts q into $ Q$ .
 
 The dimension of q equals poly_dist``. ambient_dimension() if poly_dist is not
 $ pd(\\emptyset, \\emptyset)$ .
@@ -244,7 +244,7 @@ $ pd(\\emptyset, \\emptyset)$ .
 Parameters
 ----------
 q : const Point &";
-constexpr const char* CGAL_Polytope_distance_d_insert = "inserts the points in the range [ p_first , p_last ) and [ q_first , q_last ) into $ P$ and $ Q$ , respectively, and recomputes the (squared) distance.
+constexpr const char* Polytope_distance_d_insert = "inserts the points in the range [ p_first , p_last ) and [ q_first , q_last ) into $ P$ and $ Q$ , respectively, and recomputes the (squared) distance.
 
 InputIterator1 has Point as value type. InputIterator2 has Point as value
 type. All points have the same dimension. If poly_dist is not $ pd(\\emptyset,
@@ -257,7 +257,7 @@ p_first : InputIterator1
 p_last : InputIterator1
 q_first : InputIterator2
 q_last : InputIterator2";
-constexpr const char* CGAL_Polytope_distance_d_insert_p_1 = "inserts the points in the range [ p_first , p_last ) into $ P$ and recomputes the (squared) distance ( $ Q$ remains unchanged).
+constexpr const char* Polytope_distance_d_insert_p_1 = "inserts the points in the range [ p_first , p_last ) into $ P$ and recomputes the (squared) distance ( $ Q$ remains unchanged).
 
 InputIterator has Point as value type. All points have the same dimension. If
 poly_dist is not empty, this dimension must be equal to poly_dist``.
@@ -267,7 +267,7 @@ Parameters
 ----------
 p_first : InputIterator
 p_last : InputIterator";
-constexpr const char* CGAL_Polytope_distance_d_insert_q_1 = "inserts the points in the range [ q_first , q_last ) into $ Q$ and recomputes the (squared) distance ( $ P$ remains unchanged).
+constexpr const char* Polytope_distance_d_insert_q_1 = "inserts the points in the range [ q_first , q_last ) into $ Q$ and recomputes the (squared) distance ( $ P$ remains unchanged).
 
 InputIterator has Point as value type. All points have the same dimension. If
 poly_dist is not empty, this dimension must be equal to poly_dist``.
@@ -277,7 +277,7 @@ Parameters
 ----------
 q_first : InputIterator
 q_last : InputIterator";
-constexpr const char* CGAL_Polytope_distance_d_is_valid = "returns true , iff poly_dist is valid.
+constexpr const char* Polytope_distance_d_is_valid = "returns true , iff poly_dist is valid.
 
 If verbose is true , some messages concerning the performed checks are written
 to standard error stream. The second parameter level is not used, we provide
@@ -292,10 +292,10 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Polytope_distance_d_traits = "returns a const reference to the traits class object.
+constexpr const char* Polytope_distance_d_traits = "returns a const reference to the traits class object.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Polytope_distance_d_operator = "writes poly_dist to output stream os .
+constexpr const char* Polytope_distance_d_operator = "writes poly_dist to output stream os .
 
 An overload of operator<< must be defined for Point_d .
 
@@ -305,7 +305,7 @@ os : std::ostream &
 poly_dist : const Polytope_distance_d < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polytope_distance_d_operator_1 = "reads poly_dist from input stream is .
+constexpr const char* Polytope_distance_d_operator_1 = "reads poly_dist from input stream is .
 
 An overload of operator>> must be defined for Point_d .
 
@@ -317,135 +317,135 @@ is : std::istream &
 Returns: std::istream &";
 
 // CGAL::Polytope_distance_d_traits_2
-constexpr const char* CGAL_Polytope_distance_d_traits_2__class__ = "The class Polytope_distance_d_traits_2 is a traits class for the $ d$ -dimensional optimization algorithms using the two-dimensional CGAL kernel.";
+constexpr const char* Polytope_distance_d_traits_2__class__ = "The class Polytope_distance_d_traits_2 is a traits class for the $ d$ -dimensional optimization algorithms using the two-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Point_d = "the point type.
+constexpr const char* Polytope_distance_d_traits_2_Point_d = "the point type.
 
 Returns: K::Point_2";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Rep_tag = "typedef to K::Rep_tag .
+constexpr const char* Polytope_distance_d_traits_2_Rep_tag = "typedef to K::Rep_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_RT = "the ring type.
+constexpr const char* Polytope_distance_d_traits_2_RT = "the ring type.
 
 Returns: K::RT";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_FT = "the field type.
+constexpr const char* Polytope_distance_d_traits_2_FT = "the field type.
 
 Returns: K::FT";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Access_dimension_d = "functor returning 2 .
+constexpr const char* Polytope_distance_d_traits_2_Access_dimension_d = "functor returning 2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Access_coordinates_begin_d = "functor constructing the begin iterator of the homogeneous coordinates of a point.
+constexpr const char* Polytope_distance_d_traits_2_Access_coordinates_begin_d = "functor constructing the begin iterator of the homogeneous coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Construct_point_d = "functor constructing a point from a coordinate range.
+constexpr const char* Polytope_distance_d_traits_2_Construct_point_d = "functor constructing a point from a coordinate range.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_ET = "second template parameter (default is K::RT ).
+constexpr const char* Polytope_distance_d_traits_2_ET = "second template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_NT = "third template parameter (default is K::RT ).
+constexpr const char* Polytope_distance_d_traits_2_NT = "third template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Polytope_distance_d_traits_2 = "default constructor.";
-constexpr const char* CGAL_Polytope_distance_d_traits_2_Polytope_distance_d_traits_2_1 = "copy constructor.
+constexpr const char* Polytope_distance_d_traits_2_Polytope_distance_d_traits_2 = "default constructor.";
+constexpr const char* Polytope_distance_d_traits_2_Polytope_distance_d_traits_2_1 = "copy constructor.
 
 Parameters
 ----------
  : const Polytope_distance_d_traits_2< K, ET , NT > &";
 
 // CGAL::Polytope_distance_d_traits_3
-constexpr const char* CGAL_Polytope_distance_d_traits_3__class__ = "The class Polytope_distance_d_traits_3 is a traits class for the $ d$ -dimensional optimization algorithms using the three-dimensional CGAL kernel.";
+constexpr const char* Polytope_distance_d_traits_3__class__ = "The class Polytope_distance_d_traits_3 is a traits class for the $ d$ -dimensional optimization algorithms using the three-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Point_d = "the point type.
+constexpr const char* Polytope_distance_d_traits_3_Point_d = "the point type.
 
 Returns: K::Point_3";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Rep_tag = "typedef to K::Rep_tag .
+constexpr const char* Polytope_distance_d_traits_3_Rep_tag = "typedef to K::Rep_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_RT = "the ring number type.
+constexpr const char* Polytope_distance_d_traits_3_RT = "the ring number type.
 
 Returns: K::RT";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_FT = "the field number type.
+constexpr const char* Polytope_distance_d_traits_3_FT = "the field number type.
 
 Returns: K::FT";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Access_dimension_d = "functor returning 3 .
+constexpr const char* Polytope_distance_d_traits_3_Access_dimension_d = "functor returning 3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Access_coordinates_begin_d = "functor constructing the begin iterator of the homogeneous coordinates of a point.
+constexpr const char* Polytope_distance_d_traits_3_Access_coordinates_begin_d = "functor constructing the begin iterator of the homogeneous coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Construct_point_d = "functor constructing a point from a coordinate range.
+constexpr const char* Polytope_distance_d_traits_3_Construct_point_d = "functor constructing a point from a coordinate range.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_ET = "second template parameter (default is K::RT ).
+constexpr const char* Polytope_distance_d_traits_3_ET = "second template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_NT = "third template parameter (default is K::RT ).
+constexpr const char* Polytope_distance_d_traits_3_NT = "third template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Polytope_distance_d_traits_3 = "default constructor.";
-constexpr const char* CGAL_Polytope_distance_d_traits_3_Polytope_distance_d_traits_3_1 = "copy constructor.
+constexpr const char* Polytope_distance_d_traits_3_Polytope_distance_d_traits_3 = "default constructor.";
+constexpr const char* Polytope_distance_d_traits_3_Polytope_distance_d_traits_3_1 = "copy constructor.
 
 Parameters
 ----------
  : const Polytope_distance_d_traits_3< K, ET , NT > &";
 
 // CGAL::Polytope_distance_d_traits_d
-constexpr const char* CGAL_Polytope_distance_d_traits_d__class__ = "The class Polytope_distance_d_traits_d is a traits class for the $ d$ -dimensional optimization algorithms using the $ d$ -dimensional CGAL kernel.";
+constexpr const char* Polytope_distance_d_traits_d__class__ = "The class Polytope_distance_d_traits_d is a traits class for the $ d$ -dimensional optimization algorithms using the $ d$ -dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Point_d = "the point type.
+constexpr const char* Polytope_distance_d_traits_d_Point_d = "the point type.
 
 Returns: K::Point_d";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Rep_tag = "typedef to K::Rep_tag .
+constexpr const char* Polytope_distance_d_traits_d_Rep_tag = "typedef to K::Rep_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_RT = "the ring type.
+constexpr const char* Polytope_distance_d_traits_d_RT = "the ring type.
 
 Returns: K::RT";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_FT = "the field type.
+constexpr const char* Polytope_distance_d_traits_d_FT = "the field type.
 
 Returns: K::FT";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Access_dimension_d = "functor returning the dimension of a point.
+constexpr const char* Polytope_distance_d_traits_d_Access_dimension_d = "functor returning the dimension of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Access_coordinates_begin_d = "functor constructing the begin iterator of the homogeneous coordinates of a point.
+constexpr const char* Polytope_distance_d_traits_d_Access_coordinates_begin_d = "functor constructing the begin iterator of the homogeneous coordinates of a point.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Construct_point_d = "functor constructing a point from a coordinate range.
+constexpr const char* Polytope_distance_d_traits_d_Construct_point_d = "functor constructing a point from a coordinate range.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_ET = "second template parameter (default is K::RT ).
+constexpr const char* Polytope_distance_d_traits_d_ET = "second template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_NT = "third template parameter (default is K::RT ).
+constexpr const char* Polytope_distance_d_traits_d_NT = "third template parameter (default is K::RT ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Polytope_distance_d_traits_d = "default constructor.";
-constexpr const char* CGAL_Polytope_distance_d_traits_d_Polytope_distance_d_traits_d_1 = "copy constructor.
+constexpr const char* Polytope_distance_d_traits_d_Polytope_distance_d_traits_d = "default constructor.";
+constexpr const char* Polytope_distance_d_traits_d_Polytope_distance_d_traits_d_1 = "copy constructor.
 
 Parameters
 ----------
  : const Polytope_distance_d_traits_d< K, ET , NT > &";
 
 // CGAL::Width_3
-constexpr const char* CGAL_Width_3__class__ = "Given a set of points $ \\mathcal{S}=\\left\\{p_1,\\ldots , p_n\\right\\}$ in $ \\mathbb{R}^3$ .";
+constexpr const char* Width_3__class__ = "Given a set of points $ \\mathcal{S}=\\left\\{p_1,\\ldots , p_n\\right\\}$ in $ \\mathbb{R}^3$ .";
 
-constexpr const char* CGAL_Width_3_Point_3 = "point type.
+constexpr const char* Width_3_Point_3 = "point type.
 
 Returns: Traits::Point_3";
-constexpr const char* CGAL_Width_3_Plane_3 = "plane type.
+constexpr const char* Width_3_Plane_3 = "plane type.
 
 Returns: Traits::Plane_3";
-constexpr const char* CGAL_Width_3_Vector_3 = "vector type.
+constexpr const char* Width_3_Vector_3 = "vector type.
 
 Returns: Traits::Vector_3";
-constexpr const char* CGAL_Width_3_RT = "algebraic ring type.
+constexpr const char* Width_3_RT = "algebraic ring type.
 
 Returns: Traits::RT";
-constexpr const char* CGAL_Width_3_ChullTraits = "traits class for the 3D convex hull algorithm.
+constexpr const char* Width_3_ChullTraits = "traits class for the 3D convex hull algorithm.
 
 Returns: Traits::ChullTraits";
-constexpr const char* CGAL_Width_3_Width_3 = "creates a variable width initialized to the width of $ \\mathcal{S}$ - with $ \\mathcal{S}$ being the set of points in the range [ first , beyond ).
+constexpr const char* Width_3_Width_3 = "creates a variable width initialized to the width of $ \\mathcal{S}$ - with $ \\mathcal{S}$ being the set of points in the range [ first , beyond ).
 
 InputIterator has Point_3 as value type.
 
@@ -453,7 +453,7 @@ Parameters
 ----------
 first : InputIterator
 beyond : InputIterator";
-constexpr const char* CGAL_Width_3_Width_3_1 = "creates a variable width initialized to the width of the polyhedron $ P$ .
+constexpr const char* Width_3_Width_3_1 = "creates a variable width initialized to the width of the polyhedron $ P$ .
 
 Note that the vertex point coordinates are altered! $ P$ is a convex
 polyhedron. Polyhedron is a CGAL::Polyhedron_3 with facets supporting plane
@@ -463,7 +463,7 @@ $ \\equiv$ Plane_3 .
 Parameters
 ----------
 P : Polyhedron &";
-constexpr const char* CGAL_Width_3_get_squared_width = "returns the squared width.
+constexpr const char* Width_3_get_squared_width = "returns the squared width.
 
 For the reason of exact computation not the width itself is stored, but the
 squared width as a fraction: The numerator in width_num and the denominator in
@@ -474,13 +474,13 @@ Parameters
 ----------
 width_num : RT &
 width_denom : RT &";
-constexpr const char* CGAL_Width_3_get_width_planes = "The planes e1 and e2 are the two parallel supporting planes, which distance is minimal (among all such planes).
+constexpr const char* Width_3_get_width_planes = "The planes e1 and e2 are the two parallel supporting planes, which distance is minimal (among all such planes).
 
 Parameters
 ----------
 e1 : Plane_3 &
 e2 : Plane_3 &";
-constexpr const char* CGAL_Width_3_get_width_coefficients = "The returned coefficients A,B,C,D,K have the property that width-plane e1 is given by the equation $ Ax+By+Cz+D=0$ and width-plane e2 by $ Ax+By+Cz+K=0$ .
+constexpr const char* Width_3_get_width_coefficients = "The returned coefficients A,B,C,D,K have the property that width-plane e1 is given by the equation $ Ax+By+Cz+D=0$ and width-plane e2 by $ Ax+By+Cz+K=0$ .
 
 Parameters
 ----------
@@ -489,12 +489,12 @@ B : RT &
 C : RT &
 D : RT &
 K : RT &";
-constexpr const char* CGAL_Width_3_get_build_direction = "returns a direction $ \\mathbf{d}_{opt}$ such that the width-planes e1 and e2 are perpendicular to $ \\mathbf{d}_{opt}$ .
+constexpr const char* Width_3_get_build_direction = "returns a direction $ \\mathbf{d}_{opt}$ such that the width-planes e1 and e2 are perpendicular to $ \\mathbf{d}_{opt}$ .
 
 The width of the point set is minimal in this direction.
 
 Returns: Vector_3";
-constexpr const char* CGAL_Width_3_get_all_build_directions = "All the build directions are stored in the vector dir .
+constexpr const char* Width_3_get_all_build_directions = "All the build directions are stored in the vector dir .
 
 It might happen that a certain body has several different build directions,
 but it is also possible to have only one build direction.
@@ -502,43 +502,43 @@ but it is also possible to have only one build direction.
 Parameters
 ----------
 dir : std::vector< Vector_3 > &";
-constexpr const char* CGAL_Width_3_get_number_of_optimal_solutions = "returns the number of optimal solutions, i.e., the number of optimal build directions.
+constexpr const char* Width_3_get_number_of_optimal_solutions = "returns the number of optimal solutions, i.e., the number of optimal build directions.
 
 Returns: int";
 
 // CGAL::Width_default_traits_3
-constexpr const char* CGAL_Width_default_traits_3__class__ = "The class Width_default_traits_3 is a traits class for Width_3 <Traits> using the three-dimensional CGAL kernel.";
+constexpr const char* Width_default_traits_3__class__ = "The class Width_default_traits_3 is a traits class for Width_3 <Traits> using the three-dimensional CGAL kernel.";
 
-constexpr const char* CGAL_Width_default_traits_3_Width_default_traits_3 = "default constructor.";
-constexpr const char* CGAL_Width_default_traits_3_get_hx = "returns the homogeneous $ x$ -coordinate of point $ p$ .
-
-Parameters
-----------
-p : const Point_3 &
-
-Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_hy = "returns the homogeneous $ y$ -coordinate of point $ p$ .
+constexpr const char* Width_default_traits_3_Width_default_traits_3 = "default constructor.";
+constexpr const char* Width_default_traits_3_get_hx = "returns the homogeneous $ x$ -coordinate of point $ p$ .
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_hz = "returns the homogeneous $ z$ -coordinate of point $ p$ .
+constexpr const char* Width_default_traits_3_get_hy = "returns the homogeneous $ y$ -coordinate of point $ p$ .
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_hw = "returns the homogenizing coordinate of point $ p$ .
+constexpr const char* Width_default_traits_3_get_hz = "returns the homogeneous $ z$ -coordinate of point $ p$ .
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_point_coordinates = "returns all homogeneous coordinates of point $ p$ at once.
+constexpr const char* Width_default_traits_3_get_hw = "returns the homogenizing coordinate of point $ p$ .
+
+Parameters
+----------
+p : const Point_3 &
+
+Returns: RT";
+constexpr const char* Width_default_traits_3_get_point_coordinates = "returns all homogeneous coordinates of point $ p$ at once.
 
 Parameters
 ----------
@@ -547,35 +547,35 @@ px : RT &
 py : RT &
 pz : RT &
 ph : RT &";
-constexpr const char* CGAL_Width_default_traits_3_get_a = "returns the first coefficient of plane $ f$ .
+constexpr const char* Width_default_traits_3_get_a = "returns the first coefficient of plane $ f$ .
 
 Parameters
 ----------
 f : const Plane_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_b = "returns the second coefficient of plane $ f$ .
+constexpr const char* Width_default_traits_3_get_b = "returns the second coefficient of plane $ f$ .
 
 Parameters
 ----------
 f : const Plane_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_c = "returns the third coefficient of plane $ f$ .
+constexpr const char* Width_default_traits_3_get_c = "returns the third coefficient of plane $ f$ .
 
 Parameters
 ----------
 f : const Plane_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_d = "returns the fourth coefficient of plane $ f$ .
+constexpr const char* Width_default_traits_3_get_d = "returns the fourth coefficient of plane $ f$ .
 
 Parameters
 ----------
 f : const Plane_3 &
 
 Returns: RT";
-constexpr const char* CGAL_Width_default_traits_3_get_plane_coefficients = "returns all four plane coefficients of $ f$ at once.
+constexpr const char* Width_default_traits_3_get_plane_coefficients = "returns all four plane coefficients of $ f$ at once.
 
 Parameters
 ----------
@@ -584,7 +584,7 @@ a : RT &
 b : RT &
 c : RT &
 d : RT &";
-constexpr const char* CGAL_Width_default_traits_3_make_point = "returns a point of type Point_3 with homogeneous coordinates $ hx$ , $ hy$ , $ hz$ and $ hw$ .
+constexpr const char* Width_default_traits_3_make_point = "returns a point of type Point_3 with homogeneous coordinates $ hx$ , $ hy$ , $ hz$ and $ hw$ .
 
 Parameters
 ----------
@@ -594,7 +594,7 @@ hz : const RT &
 hw : const RT &
 
 Returns: Point_3";
-constexpr const char* CGAL_Width_default_traits_3_make_plane = "returns a plane of type Plane_3 whose coefficients are $ a$ , $ b$ , $ c$ and $ d$ .
+constexpr const char* Width_default_traits_3_make_plane = "returns a plane of type Plane_3 whose coefficients are $ a$ , $ b$ , $ c$ and $ d$ .
 
 Parameters
 ----------
@@ -604,7 +604,7 @@ c : const RT &
 d : const RT &
 
 Returns: Plane_3";
-constexpr const char* CGAL_Width_default_traits_3_make_vector = "returns a vector of type Vector_3 with the four coefficients $ a$ , $ b$ , $ c$ and 1.
+constexpr const char* Width_default_traits_3_make_vector = "returns a vector of type Vector_3 with the four coefficients $ a$ , $ b$ , $ c$ and 1.
 
 Parameters
 ----------
@@ -800,7 +800,7 @@ c : const RT &
 
 Returns: Vector_3";
 
-constexpr const char* CGAL_Polytope_distance_d_operator_2 = "writes poly_dist to output stream os .
+constexpr const char* Polytope_distance_d_operator_2 = "writes poly_dist to output stream os .
 
 An overload of operator<< must be defined for Point_d .
 
@@ -810,7 +810,7 @@ os : std::ostream &
 poly_dist : const Polytope_distance_d < Traits > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polytope_distance_d_operator_3 = "reads poly_dist from input stream is .
+constexpr const char* Polytope_distance_d_operator_3 = "reads poly_dist from input stream is .
 
 An overload of operator>> must be defined for Point_d .
 

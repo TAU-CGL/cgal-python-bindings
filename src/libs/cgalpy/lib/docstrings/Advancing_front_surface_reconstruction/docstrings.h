@@ -87,9 +87,9 @@ constexpr const char* AdvancingFrontSurfaceReconstructionTraits_3_compute_square
 Returns: Compute_squared_distance_3";
 
 // CGAL::Advancing_front_surface_reconstruction
-constexpr const char* CGAL_Advancing_front_surface_reconstruction__class__ = "The class Advancing_front_surface_reconstruction enables advanced users to provide the unstructured point cloud in a 3D Delaunay triangulation.";
+constexpr const char* Advancing_front_surface_reconstruction__class__ = "The class Advancing_front_surface_reconstruction enables advanced users to provide the unstructured point cloud in a 3D Delaunay triangulation.";
 
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Triangulation_data_structure_2 = "The type of the 2D triangulation data structure describing the reconstructed surface, being a model of TriangulationDataStructure_2 .
+constexpr const char* Advancing_front_surface_reconstruction_Triangulation_data_structure_2 = "The type of the 2D triangulation data structure describing the reconstructed surface, being a model of TriangulationDataStructure_2 .
 
 The type Triangulation_data_structure_2::Vertex is model of the concept
 TriangulationDataStructure_2::Vertex and has additionally the method
@@ -102,49 +102,49 @@ boundary edge. In case the surface has boundaries, the 2D surface has one
 vertex which is associated to the infinite vertex of the 3D triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Triangulation_3 = "The type of the 3D Delaunay triangulation (the first template parameter).
+constexpr const char* Advancing_front_surface_reconstruction_Triangulation_3 = "The type of the 3D Delaunay triangulation (the first template parameter).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Priority = "The type of the facet priority functor (the second template parameter).
+constexpr const char* Advancing_front_surface_reconstruction_Priority = "The type of the facet priority functor (the second template parameter).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_FT = "The number type.
+constexpr const char* Advancing_front_surface_reconstruction_FT = "The number type.
 
 Returns: Triangulation_3::Geom_traits::FT";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Point = "The point type.
+constexpr const char* Advancing_front_surface_reconstruction_Point = "The point type.
 
 Returns: Triangulation_3::Point";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Vertex_handle = "The vertex handle type of the 3D triangulation.
+constexpr const char* Advancing_front_surface_reconstruction_Vertex_handle = "The vertex handle type of the 3D triangulation.
 
 Returns: Triangulation_3::Vertex_handle";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Cell_handle = "The cell handle type of the 3D triangulation.
+constexpr const char* Advancing_front_surface_reconstruction_Cell_handle = "The cell handle type of the 3D triangulation.
 
 Returns: Triangulation_3::Cell_handle";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Facet = "The facet type of the 3D triangulation.
+constexpr const char* Advancing_front_surface_reconstruction_Facet = "The facet type of the 3D triangulation.
 
 Returns: Triangulation_3::Facet";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Outlier_range = "A bidirectional iterator range which enables to enumerate all points that were removed from the 3D Delaunay triangulation during the surface reconstruction.
+constexpr const char* Advancing_front_surface_reconstruction_Outlier_range = "A bidirectional iterator range which enables to enumerate all points that were removed from the 3D Delaunay triangulation during the surface reconstruction.
 
 The value type of the iterator is Point .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Vertex_on_boundary_range = "A bidirectional iterator range which enables to visit all vertices on a boundary.
+constexpr const char* Advancing_front_surface_reconstruction_Vertex_on_boundary_range = "A bidirectional iterator range which enables to visit all vertices on a boundary.
 
 The value type of the iterator is Vertex_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Boundary_range = "A bidirectional iterator range which enables to visit all boundaries.
+constexpr const char* Advancing_front_surface_reconstruction_Boundary_range = "A bidirectional iterator range which enables to visit all boundaries.
 
 The value type of the iterator is Vertex_on_boundary_range .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_Advancing_front_surface_reconstruction = "Constructor for the unstructured point cloud given as 3D Delaunay triangulation.
+constexpr const char* Advancing_front_surface_reconstruction_Advancing_front_surface_reconstruction = "Constructor for the unstructured point cloud given as 3D Delaunay triangulation.
 
 Parameters
 ----------
 dt : Triangulation_3 &
 priority : Priority";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_run = "runs the surface reconstruction function.
+constexpr const char* Advancing_front_surface_reconstruction_run = "runs the surface reconstruction function.
 
 radius_ratio_bound candidates incident to surface triangles which are not in
 the beta-wedge are discarded, if the ratio of their radius and the radius of
@@ -158,43 +158,43 @@ Parameters
 ----------
 radius_ratio_bound : double
 beta : double";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_triangulation_data_structure_2 = "returns the reconstructed surface.
+constexpr const char* Advancing_front_surface_reconstruction_triangulation_data_structure_2 = "returns the reconstructed surface.
 
 Returns: const Triangulation_data_structure_2 &";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_triangulation_3 = "returns the underlying 3D Delaunay triangulation.
+constexpr const char* Advancing_front_surface_reconstruction_triangulation_3 = "returns the underlying 3D Delaunay triangulation.
 
 Returns: Triangulation_3 &";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_outliers = "returns an iterator range over the outliers.
+constexpr const char* Advancing_front_surface_reconstruction_outliers = "returns an iterator range over the outliers.
 
 Returns: const Outlier_range &";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_boundaries = "returns an iterator range over the boundaries.
+constexpr const char* Advancing_front_surface_reconstruction_boundaries = "returns an iterator range over the boundaries.
 
 Returns: const Boundary_range &";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_has_boundaries = "returns true if the reconstructed surface has boundaries.
+constexpr const char* Advancing_front_surface_reconstruction_has_boundaries = "returns true if the reconstructed surface has boundaries.
 
 Returns: bool";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_has_on_surface = "returns true if the facet is on the surface.
+constexpr const char* Advancing_front_surface_reconstruction_has_on_surface = "returns true if the facet is on the surface.
 
 Parameters
 ----------
 f : Facet
 
 Returns: bool";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_has_on_surface_1 = "returns true if the facet f2 is on the surface.
+constexpr const char* Advancing_front_surface_reconstruction_has_on_surface_1 = "returns true if the facet f2 is on the surface.
 
 Parameters
 ----------
 f2 : typename Triangulation_data_structure_2::Face_handle
 
 Returns: bool";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_has_on_surface_2 = "returns true if the vertex v2 is on the surface.
+constexpr const char* Advancing_front_surface_reconstruction_has_on_surface_2 = "returns true if the vertex v2 is on the surface.
 
 Parameters
 ----------
 v2 : typename Triangulation_data_structure_2::Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_smallest_radius_delaunay_sphere = "computes the priority of the facet (c,index) such that the facet with the smallest radius of Delaunay sphere has the highest priority.
+constexpr const char* Advancing_front_surface_reconstruction_smallest_radius_delaunay_sphere = "computes the priority of the facet (c,index) such that the facet with the smallest radius of Delaunay sphere has the highest priority.
 
 c handle to the cell containing the facet index index of the facet in c
 
@@ -204,19 +204,19 @@ c : const Cell_handle &
 index : const int &
 
 Returns: FT";
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_infinity = "returns the infinite floating value that prevents a facet to be used.
+constexpr const char* Advancing_front_surface_reconstruction_infinity = "returns the infinite floating value that prevents a facet to be used.
 
 Returns: FT";
 
 
 
 // CGAL::Advancing_front_surface_reconstruction_cell_base_3
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_cell_base_3__class__ = "The class Advancing_front_surface_reconstruction_cell_base_3 is the default cell type for the class Advancing_front_surface_reconstruction .";
+constexpr const char* Advancing_front_surface_reconstruction_cell_base_3__class__ = "The class Advancing_front_surface_reconstruction_cell_base_3 is the default cell type for the class Advancing_front_surface_reconstruction .";
 
 
 
 // CGAL::Advancing_front_surface_reconstruction_vertex_base_3
-constexpr const char* CGAL_Advancing_front_surface_reconstruction_vertex_base_3__class__ = "The class Advancing_front_surface_reconstruction_vertex_base_3 is the default vertex type for the class Advancing_front_surface_reconstruction .";
+constexpr const char* Advancing_front_surface_reconstruction_vertex_base_3__class__ = "The class Advancing_front_surface_reconstruction_vertex_base_3 is the default vertex type for the class Advancing_front_surface_reconstruction .";
 
 
 

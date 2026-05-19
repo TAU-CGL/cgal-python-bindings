@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Basic_viewer {
 
 // CGAL::Graphics_scene
-constexpr const char* CGAL_Graphics_scene__class__ = "The class Graphics_scene stores points, segments, triangles, rays, and lines.";
+constexpr const char* Graphics_scene__class__ = "The class Graphics_scene stores points, segments, triangles, rays, and lines.";
 
-constexpr const char* CGAL_Graphics_scene_add_point = "adds the given point in the scene.
+constexpr const char* Graphics_scene_add_point = "adds the given point in the scene.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 .
@@ -18,7 +18,7 @@ or Kernel::WeightedPoint_3 .
 Parameters
 ----------
 p : const KPoint &";
-constexpr const char* CGAL_Graphics_scene_add_point_1 = "adds the given colored point in the scene.
+constexpr const char* Graphics_scene_add_point_1 = "adds the given colored point in the scene.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 .
@@ -27,7 +27,7 @@ Parameters
 ----------
 p : const KPoint &
 color : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_add_segment = "adds the given segment in the scene.
+constexpr const char* Graphics_scene_add_segment = "adds the given segment in the scene.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 .
@@ -36,7 +36,7 @@ Parameters
 ----------
 p1 : const KPoint &
 p2 : const KPoint &";
-constexpr const char* CGAL_Graphics_scene_add_segment_1 = "adds the given colored segment in the scene.
+constexpr const char* Graphics_scene_add_segment_1 = "adds the given colored segment in the scene.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 .
@@ -46,7 +46,7 @@ Parameters
 p1 : const KPoint &
 p2 : const KPoint &
 color : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_add_ray = "adds the given ray in the scene: a half line starting from p and having v as direction.
+constexpr const char* Graphics_scene_add_ray = "adds the given ray in the scene: a half line starting from p and having v as direction.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or
@@ -56,7 +56,7 @@ Parameters
 ----------
 p : const KPoint &
 v : const KVector &";
-constexpr const char* CGAL_Graphics_scene_add_ray_1 = "adds the given colored ray in the scene: a half line starting from p and having v as direction.
+constexpr const char* Graphics_scene_add_ray_1 = "adds the given colored ray in the scene: a half line starting from p and having v as direction.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or
@@ -67,7 +67,7 @@ Parameters
 p : const KPoint &
 v : const KVector &
 color : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_add_line = "adds the given line in the scene, defined by p and v as direction.
+constexpr const char* Graphics_scene_add_line = "adds the given line in the scene, defined by p and v as direction.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or
@@ -77,7 +77,7 @@ Parameters
 ----------
 p : const KPoint &
 v : const KVector &";
-constexpr const char* CGAL_Graphics_scene_add_line_1 = "adds the given colored line in the scene, defined by p and v as direction.
+constexpr const char* Graphics_scene_add_line_1 = "adds the given colored line in the scene, defined by p and v as direction.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or
@@ -88,16 +88,16 @@ Parameters
 p : const KPoint &
 v : const KVector &
 color : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_face_begin = "starts a new face.";
-constexpr const char* CGAL_Graphics_scene_face_begin_1 = "starts a new colored face.
+constexpr const char* Graphics_scene_face_begin = "starts a new face.";
+constexpr const char* Graphics_scene_face_begin_1 = "starts a new colored face.
 
 Parameters
 ----------
 color : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_a_face_started = "return true iff a face is started.
+constexpr const char* Graphics_scene_a_face_started = "return true iff a face is started.
 
 Returns: bool";
-constexpr const char* CGAL_Graphics_scene_add_point_in_face = "adds the given point in the current face.
+constexpr const char* Graphics_scene_add_point_in_face = "adds the given point in the current face.
 
 a_face_started() KPoint a model of Kernel::Point_2 , Kernel::Point_3 ,
 Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .
@@ -107,7 +107,7 @@ Parameters
 kp : const KPoint &
 
 Returns: bool";
-constexpr const char* CGAL_Graphics_scene_add_point_in_face_1 = "adds the given point in the current face, having the vertex normal.
+constexpr const char* Graphics_scene_add_point_in_face_1 = "adds the given point in the current face, having the vertex normal.
 
 a_face_started() KPoint a model of Kernel::Point_2 , Kernel::Point_3 ,
 Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 . KVector a model of
@@ -119,10 +119,10 @@ kp : const KPoint &
 p_normal : const KVector &
 
 Returns: bool";
-constexpr const char* CGAL_Graphics_scene_face_end = "ends the current face.
+constexpr const char* Graphics_scene_face_end = "ends the current face.
 
 a_face_started()";
-constexpr const char* CGAL_Graphics_scene_add_text = "adds the given text at the given position in the scene.
+constexpr const char* Graphics_scene_add_text = "adds the given text at the given position in the scene.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 .
@@ -131,7 +131,7 @@ Parameters
 ----------
 kp : const KPoint &
 txt : const char *";
-constexpr const char* CGAL_Graphics_scene_add_text_1 = "adds the given text at the given position in the scene.
+constexpr const char* Graphics_scene_add_text_1 = "adds the given text at the given position in the scene.
 
 KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2
 or Kernel::WeightedPoint_3 .
@@ -140,65 +140,65 @@ Parameters
 ----------
 kp : const KPoint &
 txt : const std::string &";
-constexpr const char* CGAL_Graphics_scene_empty = "returns true iff the scene has no element.
+constexpr const char* Graphics_scene_empty = "returns true iff the scene has no element.
 
 Returns: bool";
-constexpr const char* CGAL_Graphics_scene_clear = "clears the scene, i.e., removes all points, segments, triangles, and text.";
-constexpr const char* CGAL_Graphics_scene_bounding_box = "returns the bounding box of all the elements in the scene.
+constexpr const char* Graphics_scene_clear = "clears the scene, i.e., removes all points, segments, triangles, and text.";
+constexpr const char* Graphics_scene_bounding_box = "returns the bounding box of all the elements in the scene.
 
 Returns: const CGAL::Bbox_3 &";
-constexpr const char* CGAL_Graphics_scene_is_two_dimensional = "returns true if the scene is in 2D, i.e., lies on the XY or XZ or YZ plane.
+constexpr const char* Graphics_scene_is_two_dimensional = "returns true if the scene is in 2D, i.e., lies on the XY or XZ or YZ plane.
 
 Returns: bool";
-constexpr const char* CGAL_Graphics_scene_set_default_color_face = "set the default color of faces
+constexpr const char* Graphics_scene_set_default_color_face = "set the default color of faces
 
 Parameters
 ----------
 c : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_set_default_color_point = "set the default color of points
+constexpr const char* Graphics_scene_set_default_color_point = "set the default color of points
 
 Parameters
 ----------
 c : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_set_default_color_segment = "set the default color of segments
+constexpr const char* Graphics_scene_set_default_color_segment = "set the default color of segments
 
 Parameters
 ----------
 c : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_set_default_color_ray = "set the default color of rays
+constexpr const char* Graphics_scene_set_default_color_ray = "set the default color of rays
 
 Parameters
 ----------
 c : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_set_default_color_line = "set the default color of lines
+constexpr const char* Graphics_scene_set_default_color_line = "set the default color of lines
 
 Parameters
 ----------
 c : const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_get_default_color_face = "returns the default color of faces
+constexpr const char* Graphics_scene_get_default_color_face = "returns the default color of faces
 
 Returns: const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_get_default_color_point = "returns the default color of points
+constexpr const char* Graphics_scene_get_default_color_point = "returns the default color of points
 
 Returns: const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_get_default_color_segment = "returns the default color of segments
+constexpr const char* Graphics_scene_get_default_color_segment = "returns the default color of segments
 
 Returns: const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_get_default_color_ray = "returns the default color of rays
+constexpr const char* Graphics_scene_get_default_color_ray = "returns the default color of rays
 
 Returns: const CGAL::IO::Color &";
-constexpr const char* CGAL_Graphics_scene_get_default_color_line = "returns the default color of lines
+constexpr const char* Graphics_scene_get_default_color_line = "returns the default color of lines
 
 Returns: const CGAL::IO::Color &";
 
 // CGAL::Graphics_scene_options
-constexpr const char* CGAL_Graphics_scene_options__class__ = "The class Graphics_scene_options is used to tune the way that the cells of a given data structure of CGAL are considered.";
+constexpr const char* Graphics_scene_options__class__ = "The class Graphics_scene_options is used to tune the way that the cells of a given data structure of CGAL are considered.";
 
 
 // CGAL::Qt::Basic_viewer
-constexpr const char* CGAL_Qt_Basic_viewer__class__ = "The class Basic_viewer is a Qt widget based on QGLViewer that allows to visualize 3D elements: points, segments, triangles, rays and lines.";
+constexpr const char* Qt_Basic_viewer__class__ = "The class Basic_viewer is a Qt widget based on QGLViewer that allows to visualize 3D elements: points, segments, triangles, rays and lines.";
 
-constexpr const char* CGAL_Qt_Basic_viewer_Basic_viewer = "Constructor given a pointer on a QWidget (can be a nullptr ) and a Graphics_scene .
+constexpr const char* Qt_Basic_viewer_Basic_viewer = "Constructor given a pointer on a QWidget (can be a nullptr ) and a Graphics_scene .
 
 title will be the title of the window.
 
@@ -207,70 +207,70 @@ Parameters
 parent : QWidget *
 scene : const Graphics_scene &
 title : const char *";
-constexpr const char* CGAL_Qt_Basic_viewer_size_vertices = "Set size of vertices.
+constexpr const char* Qt_Basic_viewer_size_vertices = "Set size of vertices.
 
 s The size of vertices.
 
 Parameters
 ----------
 s : float";
-constexpr const char* CGAL_Qt_Basic_viewer_size_edges = "Set size of edges.
+constexpr const char* Qt_Basic_viewer_size_edges = "Set size of edges.
 
 s The size of edges.
 
 Parameters
 ----------
 s : float";
-constexpr const char* CGAL_Qt_Basic_viewer_size_rays = "Set size of rays.
+constexpr const char* Qt_Basic_viewer_size_rays = "Set size of rays.
 
 s The size of rays.
 
 Parameters
 ----------
 s : float";
-constexpr const char* CGAL_Qt_Basic_viewer_size_lines = "Set size of lines.
+constexpr const char* Qt_Basic_viewer_size_lines = "Set size of lines.
 
 s The size of lines.
 
 Parameters
 ----------
 s : float";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_vertices = "Enables or disables the drawing of vertices.
+constexpr const char* Qt_Basic_viewer_draw_vertices = "Enables or disables the drawing of vertices.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_edges = "Enables or disables the drawing of edges.
+constexpr const char* Qt_Basic_viewer_draw_edges = "Enables or disables the drawing of edges.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_rays = "Enables or disables the drawing of rays.
+constexpr const char* Qt_Basic_viewer_draw_rays = "Enables or disables the drawing of rays.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_lines = "Enables or disables the drawing of lines.
+constexpr const char* Qt_Basic_viewer_draw_lines = "Enables or disables the drawing of lines.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_faces = "enables or disables the drawing of faces.
+constexpr const char* Qt_Basic_viewer_draw_faces = "enables or disables the drawing of faces.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_text = "enables or disables the drawing of texts.
+constexpr const char* Qt_Basic_viewer_draw_text = "enables or disables the drawing of texts.
 
 enables or disables the drawing of texts. b Set to true to enable, false to
 disable.
@@ -278,150 +278,150 @@ disable.
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_mesh_triangles = "Enables or disables the drawing of mesh triangles.
+constexpr const char* Qt_Basic_viewer_draw_mesh_triangles = "Enables or disables the drawing of mesh triangles.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_use_default_color = "Enables or disables the use of only one color or the use of multiple colors.
+constexpr const char* Qt_Basic_viewer_use_default_color = "Enables or disables the use of only one color or the use of multiple colors.
 
 b Set to true to use only one color, false to use multiple colors.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_use_default_color_normals = "Enables or disables the use of a single color for all normals.
+constexpr const char* Qt_Basic_viewer_use_default_color_normals = "Enables or disables the use of a single color for all normals.
 
 b Set to true to enable, false to disable.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_flat_shading = "enables or disables the use of flat shading or the use of smooth shading.
+constexpr const char* Qt_Basic_viewer_flat_shading = "enables or disables the use of flat shading or the use of smooth shading.
 
 b Set to true for flat shading, false for smooth shading.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_reverse_normal = "Enables or disables the reversal of normals.
+constexpr const char* Qt_Basic_viewer_reverse_normal = "Enables or disables the reversal of normals.
 
 b Set to true to reverse normals, false to keep normals as is.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_Basic_viewer_default_color_normals = "Sets the default color of the normals.
+constexpr const char* Qt_Basic_viewer_default_color_normals = "Sets the default color of the normals.
 
 c The default color of the normals.
 
 Parameters
 ----------
 c : const CGAL::IO::Color &";
-constexpr const char* CGAL_Qt_Basic_viewer_normal_height_factor = "Sets the height factor value of the normals.
+constexpr const char* Qt_Basic_viewer_normal_height_factor = "Sets the height factor value of the normals.
 
 h The height factor value of the normals.
 
 Parameters
 ----------
 h : float";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_draw_vertices = "Toggles the drawing of vertices.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_draw_edges = "Toggles the drawing of edges.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_draw_rays = "Toggles the drawing of rays.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_draw_lines = "Toggles the drawing of lines.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_draw_faces = "Toggles the drawing of faces.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_use_default_color = "Toggles the use of mono color mode.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_use_default_color_normal = "Toggles the use of the default color mode for normals.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_flat_shading = "Toggles the use of flat shading.";
-constexpr const char* CGAL_Qt_Basic_viewer_toggle_draw_text = "Toggles the drawing of text.";
-constexpr const char* CGAL_Qt_Basic_viewer_reverse_all_normals = "Reverses all normals of vertices and faces.";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_vertices_1 = "Checks if vertices are drawn.
+constexpr const char* Qt_Basic_viewer_toggle_draw_vertices = "Toggles the drawing of vertices.";
+constexpr const char* Qt_Basic_viewer_toggle_draw_edges = "Toggles the drawing of edges.";
+constexpr const char* Qt_Basic_viewer_toggle_draw_rays = "Toggles the drawing of rays.";
+constexpr const char* Qt_Basic_viewer_toggle_draw_lines = "Toggles the drawing of lines.";
+constexpr const char* Qt_Basic_viewer_toggle_draw_faces = "Toggles the drawing of faces.";
+constexpr const char* Qt_Basic_viewer_toggle_use_default_color = "Toggles the use of mono color mode.";
+constexpr const char* Qt_Basic_viewer_toggle_use_default_color_normal = "Toggles the use of the default color mode for normals.";
+constexpr const char* Qt_Basic_viewer_toggle_flat_shading = "Toggles the use of flat shading.";
+constexpr const char* Qt_Basic_viewer_toggle_draw_text = "Toggles the drawing of text.";
+constexpr const char* Qt_Basic_viewer_reverse_all_normals = "Reverses all normals of vertices and faces.";
+constexpr const char* Qt_Basic_viewer_draw_vertices_1 = "Checks if vertices are drawn.
 
 true if vertices are drawn, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_edges_1 = "Checks if edges are drawn.
+constexpr const char* Qt_Basic_viewer_draw_edges_1 = "Checks if edges are drawn.
 
 true if edges are drawn, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_rays_1 = "Checks if rays are drawn.
+constexpr const char* Qt_Basic_viewer_draw_rays_1 = "Checks if rays are drawn.
 
 true if rays are drawn, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_lines_1 = "Checks if lines are drawn.
+constexpr const char* Qt_Basic_viewer_draw_lines_1 = "Checks if lines are drawn.
 
 true if lines are drawn, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_faces_1 = "Checks if faces are drawn.
+constexpr const char* Qt_Basic_viewer_draw_faces_1 = "Checks if faces are drawn.
 
 true if faces are drawn, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_draw_text_1 = "Checks if text is drawn.
+constexpr const char* Qt_Basic_viewer_draw_text_1 = "Checks if text is drawn.
 
 true if text is drawn, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_use_default_color_1 = "Checks if the default color mode is used.
+constexpr const char* Qt_Basic_viewer_use_default_color_1 = "Checks if the default color mode is used.
 
 true if mono color mode is used, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_use_default_color_normal = "Checks if the default color mode for normals is used.
+constexpr const char* Qt_Basic_viewer_use_default_color_normal = "Checks if the default color mode for normals is used.
 
 true if default color mode for normals is used, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_reverse_normal_1 = "Checks if normals are reversed.
+constexpr const char* Qt_Basic_viewer_reverse_normal_1 = "Checks if normals are reversed.
 
 true if normals are reversed, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_clipping_plane_enabled = "Checks if the clipping plane is enabled.
+constexpr const char* Qt_Basic_viewer_clipping_plane_enabled = "Checks if the clipping plane is enabled.
 
 true if the clipping plane is enabled, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_is_two_dimensional = "Checks if m_no_2D_mode is false and the graphics scene is two-dimensional.
+constexpr const char* Qt_Basic_viewer_is_two_dimensional = "Checks if m_no_2D_mode is false and the graphics scene is two-dimensional.
 
 true if m_no_2D_mode is false and the scene is 2D, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_Basic_viewer_clipping_plane = "Gets the clipping plane when enabled.
+constexpr const char* Qt_Basic_viewer_clipping_plane = "Gets the clipping plane when enabled.
 
 The clipping plane as a
 CGAL::Exact_predicates_inexact_constructions_kernel::Plane_3 object.
 
 Returns: CGAL::Exact_predicates_inexact_constructions_kernel::Plane_3";
-constexpr const char* CGAL_Qt_Basic_viewer_graphics_scene = "Gets the graphics scene of the viewer.
+constexpr const char* Qt_Basic_viewer_graphics_scene = "Gets the graphics scene of the viewer.
 
 A reference to the Graphics_scene object.
 
 Returns: const Graphics_scene &";
-constexpr const char* CGAL_Qt_Basic_viewer_draw = "draws the viewer without recomputing all internal buffers.";
-constexpr const char* CGAL_Qt_Basic_viewer_redraw = "redraws the viewer, i.e., recompute all internal buffers and update the window.";
-constexpr const char* CGAL_Qt_Basic_viewer_on_key_pressed = "Function called when a key is pressed.
+constexpr const char* Qt_Basic_viewer_draw = "draws the viewer without recomputing all internal buffers.";
+constexpr const char* Qt_Basic_viewer_redraw = "redraws the viewer, i.e., recompute all internal buffers and update the window.";
+constexpr const char* Qt_Basic_viewer_on_key_pressed = "Function called when a key is pressed.
 
 Users can define their own function in order to add specific behavior.
 
 Returns: std::function< bool(QKeyEvent *, CGAL::Qt::Basic_viewer *)>";
 
 // CGAL::Qt::QApplication_and_basic_viewer
-constexpr const char* CGAL_Qt_QApplication_and_basic_viewer__class__ = "The class QApplication_and_basic_viewer regroups a Basic_viewer and Qt QApplication .";
+constexpr const char* Qt_QApplication_and_basic_viewer__class__ = "The class QApplication_and_basic_viewer regroups a Basic_viewer and Qt QApplication .";
 
-constexpr const char* CGAL_Qt_QApplication_and_basic_viewer_QApplication_and_basic_viewer = "Constructor given a Graphics_scene and possibly a title.
+constexpr const char* Qt_QApplication_and_basic_viewer_QApplication_and_basic_viewer = "Constructor given a Graphics_scene and possibly a title.
 
 Parameters
 ----------
 gs : const CGAL::Graphics_scene &
 title : const char *";
-constexpr const char* CGAL_Qt_QApplication_and_basic_viewer_run = "runs the QApplication , i.e., open the Qt window. A call to this method is blocking, that is the program continues as soon as the user closes the window.";
-constexpr const char* CGAL_Qt_QApplication_and_basic_viewer_basic_viewer = "returns a reference to the Basic_viewer associated with this.
+constexpr const char* Qt_QApplication_and_basic_viewer_run = "runs the QApplication , i.e., open the Qt window. A call to this method is blocking, that is the program continues as soon as the user closes the window.";
+constexpr const char* Qt_QApplication_and_basic_viewer_basic_viewer = "returns a reference to the Basic_viewer associated with this.
 
 Returns: Basic_viewer &";
 

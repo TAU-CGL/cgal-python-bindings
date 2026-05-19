@@ -496,61 +496,61 @@ x : argument_type
 Returns: result_type";
 
 // CGAL::Algebraic_structure_traits
-constexpr const char* CGAL_Algebraic_structure_traits__class__ = "An instance of Algebraic_structure_traits is a model of AlgebraicStructureTraits , where T is the associated type.";
+constexpr const char* Algebraic_structure_traits__class__ = "An instance of Algebraic_structure_traits is a model of AlgebraicStructureTraits , where T is the associated type.";
 
 // CGAL::Coercion_traits
-constexpr const char* CGAL_Coercion_traits__class__ = "An instance of Coercion_traits reflects the type coercion of the types A and B, it is symmetric in the two template arguments.";
+constexpr const char* Coercion_traits__class__ = "An instance of Coercion_traits reflects the type coercion of the types A and B, it is symmetric in the two template arguments.";
 
-constexpr const char* CGAL_Coercion_traits_Are_explicit_interoperable = "Tag indicating whether the two types A and B are a model of ExplicitInteroperable .
-
-This is either CGAL::Tag_true or CGAL::Tag_false .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Coercion_traits_Are_implicit_interoperable = "Tag indicating whether the two types A and B are a model of ImplicitInteroperable .
+constexpr const char* Coercion_traits_Are_explicit_interoperable = "Tag indicating whether the two types A and B are a model of ExplicitInteroperable .
 
 This is either CGAL::Tag_true or CGAL::Tag_false .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Coercion_traits_Type = "The coercion type of A and B .
+constexpr const char* Coercion_traits_Are_implicit_interoperable = "Tag indicating whether the two types A and B are a model of ImplicitInteroperable .
+
+This is either CGAL::Tag_true or CGAL::Tag_false .
+
+Returns: unspecified_type";
+constexpr const char* Coercion_traits_Type = "The coercion type of A and B .
 
 In case A and B are not ExplicitInteroperable this is undefined.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Coercion_traits_Cast = "A model of the AdaptableFunctor concept, providing the conversion of A or B to Type .
+constexpr const char* Coercion_traits_Cast = "A model of the AdaptableFunctor concept, providing the conversion of A or B to Type .
 
 In case A and B are not ExplicitInteroperable this is undefined.
 
 Returns: unspecified_type";
 
 // CGAL::Euclidean_ring_tag
-constexpr const char* CGAL_Euclidean_ring_tag__class__ = "Tag indicating that a type is a model of the EuclideanRing concept.";
+constexpr const char* Euclidean_ring_tag__class__ = "Tag indicating that a type is a model of the EuclideanRing concept.";
 
 // CGAL::Field_tag
-constexpr const char* CGAL_Field_tag__class__ = "Tag indicating that a type is a model of the Field concept.";
+constexpr const char* Field_tag__class__ = "Tag indicating that a type is a model of the Field concept.";
 
 // CGAL::Field_with_kth_root_tag
-constexpr const char* CGAL_Field_with_kth_root_tag__class__ = "Tag indicating that a type is a model of the FieldWithKthRoot concept.";
+constexpr const char* Field_with_kth_root_tag__class__ = "Tag indicating that a type is a model of the FieldWithKthRoot concept.";
 
 // CGAL::Field_with_root_of_tag
-constexpr const char* CGAL_Field_with_root_of_tag__class__ = "Tag indicating that a type is a model of the FieldWithRootOf concept.";
+constexpr const char* Field_with_root_of_tag__class__ = "Tag indicating that a type is a model of the FieldWithRootOf concept.";
 
 // CGAL::Field_with_sqrt_tag
-constexpr const char* CGAL_Field_with_sqrt_tag__class__ = "Tag indicating that a type is a model of the FieldWithSqrt concept.";
+constexpr const char* Field_with_sqrt_tag__class__ = "Tag indicating that a type is a model of the FieldWithSqrt concept.";
 
 // CGAL::Fraction_traits
-constexpr const char* CGAL_Fraction_traits__class__ = "An instance of Fraction_traits is a model of FractionTraits , where T is the associated type.";
+constexpr const char* Fraction_traits__class__ = "An instance of Fraction_traits is a model of FractionTraits , where T is the associated type.";
 
 // CGAL::Integral_domain_tag
-constexpr const char* CGAL_Integral_domain_tag__class__ = "Tag indicating that a type is a model of the IntegralDomain concept.";
+constexpr const char* Integral_domain_tag__class__ = "Tag indicating that a type is a model of the IntegralDomain concept.";
 
 // CGAL::Integral_domain_without_division_tag
-constexpr const char* CGAL_Integral_domain_without_division_tag__class__ = "Tag indicating that a type is a model of the IntegralDomainWithoutDivision concept.";
+constexpr const char* Integral_domain_without_division_tag__class__ = "Tag indicating that a type is a model of the IntegralDomainWithoutDivision concept.";
 
 // CGAL::Real_embeddable_traits
-constexpr const char* CGAL_Real_embeddable_traits__class__ = "An instance of Real_embeddable_traits is a model of RealEmbeddableTraits , where T is the associated type.";
+constexpr const char* Real_embeddable_traits__class__ = "An instance of Real_embeddable_traits is a model of RealEmbeddableTraits , where T is the associated type.";
 
 // CGAL::Unique_factorization_domain_tag
-constexpr const char* CGAL_Unique_factorization_domain_tag__class__ = "Tag indicating that a type is a model of the UniqueFactorizationDomain concept.";
+constexpr const char* Unique_factorization_domain_tag__class__ = "Tag indicating that a type is a model of the UniqueFactorizationDomain concept.";
 
 // EuclideanRing
 constexpr const char* EuclideanRing__class__ = "A model of EuclideanRing represents a Euclidean ring (or Euclidean domain). It is an UniqueFactorizationDomain that affords a suitable notion of minimality of remainders such that given $ x$ and $ y \\neq 0$ we obtain an (almost) unique solution to $ x = qy + r $ by demanding that a solution $ (q,r)$ is chosen to minimize $ r$ . In particular, $ r$ is chosen to be $ 0$ if possible.";

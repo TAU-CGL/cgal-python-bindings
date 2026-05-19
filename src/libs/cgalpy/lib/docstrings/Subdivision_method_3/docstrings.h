@@ -8,34 +8,34 @@ namespace docstrings {
 namespace Subdivision_method_3 {
 
 // CGAL::CatmullClark_mask_3
-constexpr const char* CGAL_CatmullClark_mask_3__class__ = "The geometry mask of Catmull-Clark subdivision.";
+constexpr const char* CatmullClark_mask_3__class__ = "The geometry mask of Catmull-Clark subdivision.";
 
-constexpr const char* CGAL_CatmullClark_mask_3_CatmullClark_mask_3 = "Constructor.
+constexpr const char* CatmullClark_mask_3_CatmullClark_mask_3 = "Constructor.
 
 The default vertex point property map, get(vertex_point, pmesh) , is used.
 
 Parameters
 ----------
 pmesh : Mesh *";
-constexpr const char* CGAL_CatmullClark_mask_3_CatmullClark_mask_3_1 = "Constructor with a custom vertex point property map.
+constexpr const char* CatmullClark_mask_3_CatmullClark_mask_3_1 = "Constructor with a custom vertex point property map.
 
 Parameters
 ----------
 pmesh : Mesh *
 vpmap : VertexPointMap";
-constexpr const char* CGAL_CatmullClark_mask_3_edge_node = "computes the Catmull-Clark edge-point pt of the edge edge .
+constexpr const char* CatmullClark_mask_3_edge_node = "computes the Catmull-Clark edge-point pt of the edge edge .
 
 Parameters
 ----------
 edge : halfedge_descriptor
 pt : Point &";
-constexpr const char* CGAL_CatmullClark_mask_3_vertex_node = "computes the Catmull-Clark vertex-point pt of the vertex vertex .
+constexpr const char* CatmullClark_mask_3_vertex_node = "computes the Catmull-Clark vertex-point pt of the vertex vertex .
 
 Parameters
 ----------
 vertex : vertex_descriptor
 pt : Point &";
-constexpr const char* CGAL_CatmullClark_mask_3_border_node = "computes the Catmull-Clark edge-point ept and the Catmull-Clark vertex-point vpt of the border edge edge .
+constexpr const char* CatmullClark_mask_3_border_node = "computes the Catmull-Clark edge-point ept and the Catmull-Clark vertex-point vpt of the border edge edge .
 
 Parameters
 ----------
@@ -44,22 +44,22 @@ ept : Point &
 vpt : Point &";
 
 // CGAL::DooSabin_mask_3
-constexpr const char* CGAL_DooSabin_mask_3__class__ = "The geometry mask of Doo-Sabin subdivision.";
+constexpr const char* DooSabin_mask_3__class__ = "The geometry mask of Doo-Sabin subdivision.";
 
-constexpr const char* CGAL_DooSabin_mask_3_DooSabin_mask_3 = "Constructor.
+constexpr const char* DooSabin_mask_3_DooSabin_mask_3 = "Constructor.
 
 The default vertex point property map, get(vertex_point, pmesh) , is used.
 
 Parameters
 ----------
 pmesh : Mesh *";
-constexpr const char* CGAL_DooSabin_mask_3_DooSabin_mask_3_1 = "Constructor with a custom vertex point property map.
+constexpr const char* DooSabin_mask_3_DooSabin_mask_3_1 = "Constructor with a custom vertex point property map.
 
 Parameters
 ----------
 pmesh : Mesh *
 vpmap : VertexPointMap";
-constexpr const char* CGAL_DooSabin_mask_3_corner_node = "computes the Doo-Sabin point pt of the vertex pointed by the halfedge he .
+constexpr const char* DooSabin_mask_3_corner_node = "computes the Doo-Sabin point pt of the vertex pointed by the halfedge he .
 
 Parameters
 ----------
@@ -67,42 +67,42 @@ he : halfedge_descriptor
 pt : Point &";
 
 // CGAL::DQQ_stencil_3
-constexpr const char* CGAL_DQQ_stencil_3__class__ = "The stencil of the Dual-Quadrilateral-Quadrisection.";
+constexpr const char* DQQ_stencil_3__class__ = "The stencil of the Dual-Quadrilateral-Quadrisection.";
 
 
 // CGAL::Linear_mask_3
-constexpr const char* CGAL_Linear_mask_3__class__ = "Bi-linear geometry mask for PQQ, PTQ, and Sqrt(3) schemes.";
+constexpr const char* Linear_mask_3__class__ = "Bi-linear geometry mask for PQQ, PTQ, and Sqrt(3) schemes.";
 
 
 // CGAL::Loop_mask_3
-constexpr const char* CGAL_Loop_mask_3__class__ = "The geometry mask of Loop subdivision.";
+constexpr const char* Loop_mask_3__class__ = "The geometry mask of Loop subdivision.";
 
-constexpr const char* CGAL_Loop_mask_3_Loop_mask_3 = "Constructor.
+constexpr const char* Loop_mask_3_Loop_mask_3 = "Constructor.
 
 The default vertex point property map, get(vertex_point, pmesh) , is used.
 
 Parameters
 ----------
 pmesh : Mesh *";
-constexpr const char* CGAL_Loop_mask_3_Loop_mask_3_1 = "Constructor with a custom vertex point property map.
+constexpr const char* Loop_mask_3_Loop_mask_3_1 = "Constructor with a custom vertex point property map.
 
 Parameters
 ----------
 pmesh : Mesh *
 vpmap : VertexPointMap";
-constexpr const char* CGAL_Loop_mask_3_edge_node = "computes the Loop edge-point pt of the edge edge .
+constexpr const char* Loop_mask_3_edge_node = "computes the Loop edge-point pt of the edge edge .
 
 Parameters
 ----------
 edge : halfedge_descriptor
 pt : Point &";
-constexpr const char* CGAL_Loop_mask_3_vertex_node = "computes the Loop vertex-point pt of the vertex vertex .
+constexpr const char* Loop_mask_3_vertex_node = "computes the Loop vertex-point pt of the vertex vertex .
 
 Parameters
 ----------
 vertex : vertex_descriptor
 pt : Point &";
-constexpr const char* CGAL_Loop_mask_3_border_node = "computes the Loop edge-point ept and the Loop vertex-point vpt of the border edge edge .
+constexpr const char* Loop_mask_3_border_node = "computes the Loop edge-point ept and the Loop vertex-point vpt of the border edge edge .
 
 Parameters
 ----------
@@ -111,32 +111,32 @@ ept : Point &
 vpt : Point &";
 
 // CGAL::PQQ_stencil_3
-constexpr const char* CGAL_PQQ_stencil_3__class__ = "The stencil of the Primal-Quadrilateral-Quadrisection.";
+constexpr const char* PQQ_stencil_3__class__ = "The stencil of the Primal-Quadrilateral-Quadrisection.";
 
 
 // CGAL::Sqrt3_mask_3
-constexpr const char* CGAL_Sqrt3_mask_3__class__ = "The geometry mask of Sqrt(3) subdivision.";
+constexpr const char* Sqrt3_mask_3__class__ = "The geometry mask of Sqrt(3) subdivision.";
 
-constexpr const char* CGAL_Sqrt3_mask_3_Sqrt3_mask_3 = "Constructor.
+constexpr const char* Sqrt3_mask_3_Sqrt3_mask_3 = "Constructor.
 
 The default vertex point property map, get(vertex_point, pmesh) , is used.
 
 Parameters
 ----------
 pmesh : Mesh *";
-constexpr const char* CGAL_Sqrt3_mask_3_Sqrt3_mask_3_1 = "Constructor with a custom vertex point property map.
+constexpr const char* Sqrt3_mask_3_Sqrt3_mask_3_1 = "Constructor with a custom vertex point property map.
 
 Parameters
 ----------
 pmesh : Mesh *
 vpmap : VertexPointMap";
-constexpr const char* CGAL_Sqrt3_mask_3_vertex_node = "computes the $ \\sqrt{3}$ vertex-point pt of the vertex vd .
+constexpr const char* Sqrt3_mask_3_vertex_node = "computes the $ \\sqrt{3}$ vertex-point pt of the vertex vd .
 
 Parameters
 ----------
 vertex : vertex_descriptor
 pt : Point &";
-constexpr const char* CGAL_Sqrt3_mask_3_border_node = "computes the $ \\sqrt{3}$ edge-points ept1 and ept2 of the halfedge hd .
+constexpr const char* Sqrt3_mask_3_border_node = "computes the $ \\sqrt{3}$ edge-points ept1 and ept2 of the halfedge hd .
 
 The updated point coordinates for the target vertex of hd is also computed and
 put in vpt . Border subdivision only happens every second step of a single
@@ -313,7 +313,7 @@ constexpr const char* SubdivisionMask_3__class__ = "This concept defines types u
 
 
 // CGAL::Subdivision_method_3
-constexpr const char* CGAL_Subdivision_method_3__class__ = "The namespace containing the subdivision methods.";
+constexpr const char* Subdivision_method_3__class__ = "The namespace containing the subdivision methods.";
 
 // std
 constexpr const char* std__class__ = "STL namespace.";

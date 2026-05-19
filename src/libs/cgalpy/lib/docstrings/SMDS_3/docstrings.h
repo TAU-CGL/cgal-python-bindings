@@ -7,33 +7,33 @@ namespace cgalpy {
 namespace docstrings {
 namespace SMDS_3 {
 
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_3_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Compact_simplicial_mesh_cell_3_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_3_surface_index_table = "Stores surface_index for each facet of the cell.
+constexpr const char* Compact_simplicial_mesh_cell_3_surface_index_table = "Stores surface_index for each facet of the cell.
 
 Returns: std::array< Surface_patch_index, 4 >";
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_3_set_surface_patch_index = "Set surface index of facet to index .
+constexpr const char* Compact_simplicial_mesh_cell_3_set_surface_patch_index = "Set surface index of facet to index .
 
 Parameters
 ----------
 facet : const int
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_3_surface_patch_index = "Returns surface index of facet facet .
+constexpr const char* Compact_simplicial_mesh_cell_3_surface_patch_index = "Returns surface index of facet facet .
 
 Parameters
 ----------
 facet : const int
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_3_is_facet_on_surface = "Returns true if facet lies on a surface patch.
+constexpr const char* Compact_simplicial_mesh_cell_3_is_facet_on_surface = "Returns true if facet lies on a surface patch.
 
 Parameters
 ----------
 facet : const int
 
 Returns: bool";
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_3_surface_index = "Returns surface index of facet facet .
+constexpr const char* Compact_simplicial_mesh_cell_3_surface_index = "Returns surface index of facet facet .
 
 Parameters
 ----------
@@ -42,7 +42,7 @@ facet : const int
 Returns: Surface_index";
 
 // CGAL::Compact_simplicial_mesh_cell_base_3
-constexpr const char* CGAL_Compact_simplicial_mesh_cell_base_3__class__ = "The class Compact_simplicial_mesh_cell_base_3 is a model of the concept SimplicialMeshCellBase_3 .";
+constexpr const char* Compact_simplicial_mesh_cell_base_3__class__ = "The class Compact_simplicial_mesh_cell_base_3 is a model of the concept SimplicialMeshCellBase_3 .";
 
 
 
@@ -66,207 +66,207 @@ constexpr const char* CGAL_Compact_simplicial_mesh_cell_base_3__class__ = "The c
 
 
 // CGAL::Mesh_complex_3_in_triangulation_3
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3__class__ = "A data structure to represent and maintain a 3D complex embedded in a 3D triangulation.";
+constexpr const char* Mesh_complex_3_in_triangulation_3__class__ = "A data structure to represent and maintain a 3D complex embedded in a 3D triangulation.";
 
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Index = "Index type.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Index = "Index type.
 
 Returns: Tr::Vertex::Index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Surface_patch_index = "Surface index type.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Surface_patch_index = "Surface index type.
 
 Returns: Tr::Cell::Surface_patch_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Subdomain_index = "Subdomain index type.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Subdomain_index = "Subdomain index type.
 
 Returns: Tr::Cell::Subdomain_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Corner_index = "Corner index type.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Corner_index = "Corner index type.
 
 Returns: CornerIndex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Curve_index = "Curve index type.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Curve_index = "Curve index type.
 
 Returns: CurveIndex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Cells_in_complex_iterator = "Iterator type to visit the cells of the 3D complex.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Cells_in_complex_iterator = "Iterator type to visit the cells of the 3D complex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Facets_in_complex_iterator = "Iterator type to visit the facets of the 2D complex.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Facets_in_complex_iterator = "Iterator type to visit the facets of the 2D complex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Edges_in_complex_iterator = "Iterator type to visit the edges of the 1D complex.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Edges_in_complex_iterator = "Iterator type to visit the edges of the 1D complex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Vertices_in_complex_iterator = "Iterator type to visit the vertices of the 0D complex.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Vertices_in_complex_iterator = "Iterator type to visit the vertices of the 0D complex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Cells_in_complex = "Range type for iterating over all cells of the 3D complex, with a nested type iterator that has as value type Cell_handle .
+constexpr const char* Mesh_complex_3_in_triangulation_3_Cells_in_complex = "Range type for iterating over all cells of the 3D complex, with a nested type iterator that has as value type Cell_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Facets_in_complex = "Range type for iterating over all facets of the 2D complex, with a nested type iterator that has as value type Facet .
+constexpr const char* Mesh_complex_3_in_triangulation_3_Facets_in_complex = "Range type for iterating over all facets of the 2D complex, with a nested type iterator that has as value type Facet .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Edges_in_complex = "Range type for iterating over all cells of the 1D complex, with a nested type iterator that has as value type Edge .
+constexpr const char* Mesh_complex_3_in_triangulation_3_Edges_in_complex = "Range type for iterating over all cells of the 1D complex, with a nested type iterator that has as value type Edge .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Vertices_in_complex = "Range type for iterating over all vertices of the 0D complex, with a nested type iterator that has as value type Vertex_handle .
+constexpr const char* Mesh_complex_3_in_triangulation_3_Vertices_in_complex = "Range type for iterating over all vertices of the 0D complex, with a nested type iterator that has as value type Vertex_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Mesh_complex_3_in_triangulation_3 = "Constructor builds an empty 3D complex.";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Mesh_complex_3_in_triangulation_3_1 = "Copy constructor.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Mesh_complex_3_in_triangulation_3 = "Constructor builds an empty 3D complex.";
+constexpr const char* Mesh_complex_3_in_triangulation_3_Mesh_complex_3_in_triangulation_3_1 = "Copy constructor.
 
 Parameters
 ----------
 rhs : const Self &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Mesh_complex_3_in_triangulation_3_2 = "Move constructor.
+constexpr const char* Mesh_complex_3_in_triangulation_3_Mesh_complex_3_in_triangulation_3_2 = "Move constructor.
 
 Parameters
 ----------
 rhs : Self &&";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_operator = "Assignment operator, also serves as move-assignment.
+constexpr const char* Mesh_complex_3_in_triangulation_3_operator = "Assignment operator, also serves as move-assignment.
 
 Parameters
 ----------
 rhs : Self
 
 Returns: Self &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_swap = "swaps this and rhs
+constexpr const char* Mesh_complex_3_in_triangulation_3_swap = "swaps this and rhs
 
 Parameters
 ----------
 rhs : Self &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_triangulation = "returns a const reference to the triangulation
+constexpr const char* Mesh_complex_3_in_triangulation_3_triangulation = "returns a const reference to the triangulation
 
 Returns: const Triangulation &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_clear = "clears data of the complex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_triangulation = "sets the internal triangulation to tr
+constexpr const char* Mesh_complex_3_in_triangulation_3_clear = "clears data of the complex";
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_triangulation = "sets the internal triangulation to tr
 
 Parameters
 ----------
 tr : const Triangulation &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_triangulation_1 = "sets the internal triangulation to tr
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_triangulation_1 = "sets the internal triangulation to tr
 
 Parameters
 ----------
 tr : Triangulation &&";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_add_to_complex = "adds cell cell to the 3D complex, with subdomain index index
+constexpr const char* Mesh_complex_3_in_triangulation_3_add_to_complex = "adds cell cell to the 3D complex, with subdomain index index
 
 Parameters
 ----------
 cell : const Cell_handle &
 index : const Subdomain_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_add_to_complex_1 = "adds facet facet to the 2D complex, with surface index index
+constexpr const char* Mesh_complex_3_in_triangulation_3_add_to_complex_1 = "adds facet facet to the 2D complex, with surface index index
 
 Parameters
 ----------
 facet : const Facet &
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_add_to_complex_2 = "adds facet( cell , i ) to the 2D complex, with surface index index
+constexpr const char* Mesh_complex_3_in_triangulation_3_add_to_complex_2 = "adds facet( cell , i ) to the 2D complex, with surface index index
 
 Parameters
 ----------
 cell : const Cell_handle &
 i : const int
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_add_to_complex_3 = "adds edge e to complex, with curve index index
+constexpr const char* Mesh_complex_3_in_triangulation_3_add_to_complex_3 = "adds edge e to complex, with curve index index
 
 Parameters
 ----------
 e : const Edge &
 index : const Curve_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_add_to_complex_4 = "adds edge ( v1 , v2 ) to the 1D complex, with Curve_index index
+constexpr const char* Mesh_complex_3_in_triangulation_3_add_to_complex_4 = "adds edge ( v1 , v2 ) to the 1D complex, with Curve_index index
 
 Parameters
 ----------
 v1 : const Vertex_handle &
 v2 : const Vertex_handle &
 index : const Curve_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_add_to_complex_5 = "marks vertex v as a corner of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_add_to_complex_5 = "marks vertex v as a corner of the complex
 
 Parameters
 ----------
 v : const Vertex_handle &
 index : const Corner_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_from_complex = "removes cell cell from the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_from_complex = "removes cell cell from the 3D complex
 
 Parameters
 ----------
 cell : const Cell_handle &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_from_complex_1 = "removes facet facet from the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_from_complex_1 = "removes facet facet from the 2D complex
 
 Parameters
 ----------
 facet : const Facet &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_from_complex_2 = "removes facet( cell , i ) from the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_from_complex_2 = "removes facet( cell , i ) from the 2D complex
 
 Parameters
 ----------
 c : const Cell_handle &
 i : const int";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_from_complex_3 = "removes edge e from the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_from_complex_3 = "removes edge e from the 1D complex
 
 Parameters
 ----------
 e : const Edge &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_from_complex_4 = "removes edge (v1,v2) from the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_from_complex_4 = "removes edge (v1,v2) from the 1D complex
 
 Parameters
 ----------
 v1 : const Vertex_handle &
 v2 : const Vertex_handle &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_from_complex_5 = "removes vertex v from the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_from_complex_5 = "removes vertex v from the complex
 
 Parameters
 ----------
 v : const Vertex_handle &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_index = "sets the index of vertex vertex to index
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_index = "sets the index of vertex vertex to index
 
 Parameters
 ----------
 vertex : const Vertex_handle &
 index : const Index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_surface_patch_index = "sets the surface index of facet facet to index
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_surface_patch_index = "sets the surface index of facet facet to index
 
 Parameters
 ----------
 f : const Facet &
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_surface_patch_index_1 = "sets the surface index of facet( cell , i ) to index
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_surface_patch_index_1 = "sets the surface index of facet( cell , i ) to index
 
 Parameters
 ----------
 cell : const Cell_handle &
 i : const int
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_subdomain_index = "sets the subdomain index of cell cell to index
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_subdomain_index = "sets the subdomain index of cell cell to index
 
 Parameters
 ----------
 cell : const Cell_handle &
 index : const Subdomain_index &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_set_dimension = "sets the dimension of vertex vertex to dimension
+constexpr const char* Mesh_complex_3_in_triangulation_3_set_dimension = "sets the dimension of vertex vertex to dimension
 
 Parameters
 ----------
 vertex : const Vertex_handle &
 dimension : int";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_index = "returns the index of vertex v
+constexpr const char* Mesh_complex_3_in_triangulation_3_index = "returns the index of vertex v
 
 Parameters
 ----------
 v : const Vertex_handle &
 
 Returns: Index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_subdomain_index = "returns the subdomain index of cell cell
+constexpr const char* Mesh_complex_3_in_triangulation_3_subdomain_index = "returns the subdomain index of cell cell
 
 Parameters
 ----------
 cell : const Cell_handle &
 
 Returns: Subdomain_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_surface_patch_index = "returns the surface index of facet f
+constexpr const char* Mesh_complex_3_in_triangulation_3_surface_patch_index = "returns the surface index of facet f
 
 Parameters
 ----------
 f : const Facet &
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_surface_patch_index_1 = "returns the surface index of facet( cell , i )
+constexpr const char* Mesh_complex_3_in_triangulation_3_surface_patch_index_1 = "returns the surface index of facet( cell , i )
 
 Parameters
 ----------
@@ -274,21 +274,21 @@ cell : const Cell_handle &
 i : const int
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_in_dimension = "returns the dimension of the lowest dimensional face of the input 3D complex that contains the vertex
+constexpr const char* Mesh_complex_3_in_triangulation_3_in_dimension = "returns the dimension of the lowest dimensional face of the input 3D complex that contains the vertex
 
 Parameters
 ----------
 v : const Vertex_handle &
 
 Returns: int";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_curve_index = "returns the curve index of edge e
+constexpr const char* Mesh_complex_3_in_triangulation_3_curve_index = "returns the curve index of edge e
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Curve_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_curve_index_1 = "returns the curve index of the edge formed by v1 and v2
+constexpr const char* Mesh_complex_3_in_triangulation_3_curve_index_1 = "returns the curve index of the edge formed by v1 and v2
 
 Parameters
 ----------
@@ -296,52 +296,52 @@ v1 : const Vertex_handle &
 v2 : const Vertex_handle &
 
 Returns: Curve_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_corner_index = "returns the corner index of vertex v
+constexpr const char* Mesh_complex_3_in_triangulation_3_corner_index = "returns the corner index of vertex v
 
 Parameters
 ----------
 v : const Vertex_handle &
 
 Returns: Corner_index";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_cells_in_complex = "returns the number of cells which belong to the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_cells_in_complex = "returns the number of cells which belong to the 3D complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_cells = "returns the number of cells which belong to the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_cells = "returns the number of cells which belong to the 3D complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_facets_in_complex = "returns the number of surface facets of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_facets_in_complex = "returns the number of surface facets of the complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_facets = "returns the number of surface facets of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_facets = "returns the number of surface facets of the complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_edges_in_complex = "returns the number of edges of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_edges_in_complex = "returns the number of edges of the complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_edges = "returns the number of edges of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_edges = "returns the number of edges of the complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_vertices_in_complex = "returns the number of corners of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_vertices_in_complex = "returns the number of corners of the complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_number_of_corners = "returns the number of corners of the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_number_of_corners = "returns the number of corners of the complex
 
 Returns: size_type";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_is_in_complex = "returns true if cell cell belongs to the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_is_in_complex = "returns true if cell cell belongs to the 3D complex
 
 Parameters
 ----------
 cell : const Cell_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_is_in_complex_1 = "returns true if facet facet belongs to the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_is_in_complex_1 = "returns true if facet facet belongs to the 2D complex
 
 Parameters
 ----------
 facet : const Facet &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_is_in_complex_2 = "returns true if facet ( cell , i ) belongs to the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_is_in_complex_2 = "returns true if facet ( cell , i ) belongs to the 2D complex
 
 Parameters
 ----------
@@ -349,14 +349,14 @@ cell : const Cell_handle &
 i : const int
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_is_in_complex_3 = "returns true if edge e belongs to the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_is_in_complex_3 = "returns true if edge e belongs to the 1D complex
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_is_in_complex_4 = "returns true if edge (v1,v2) belongs to the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_is_in_complex_4 = "returns true if edge (v1,v2) belongs to the 1D complex
 
 Parameters
 ----------
@@ -364,21 +364,21 @@ v1 : const Vertex_handle &
 v2 : const Vertex_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_is_in_complex_5 = "returns true if v is a 0-dimensional feature in the complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_is_in_complex_5 = "returns true if v is a 0-dimensional feature in the complex
 
 Parameters
 ----------
 v : const Vertex_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_output_boundary_to_off = "outputs the outer boundary of the entire domain, with facets oriented outward.
+constexpr const char* Mesh_complex_3_in_triangulation_3_output_boundary_to_off = "outputs the outer boundary of the entire domain, with facets oriented outward.
 
 Parameters
 ----------
 out : std::ostream &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_output_boundary_to_off_1 = "outputs the outer boundary of the selected subdomain, with facets oriented outward.
+constexpr const char* Mesh_complex_3_in_triangulation_3_output_boundary_to_off_1 = "outputs the outer boundary of the selected subdomain, with facets oriented outward.
 
 Parameters
 ----------
@@ -386,101 +386,101 @@ out : std::ostream &
 subdomain : Subdomain_index
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_output_facets_in_complex_to_off = "outputs the surface facets, with a consistent orientation at the interface of two subdomains.
+constexpr const char* Mesh_complex_3_in_triangulation_3_output_facets_in_complex_to_off = "outputs the surface facets, with a consistent orientation at the interface of two subdomains.
 
 Parameters
 ----------
 out : std::ostream &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_output_to_medit = "outputs the mesh to os in Medit format.
+constexpr const char* Mesh_complex_3_in_triangulation_3_output_to_medit = "outputs the mesh to os in Medit format.
 
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_cells_in_complex_begin = "returns a Cells_in_complex_iterator to the first cell of the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_cells_in_complex_begin = "returns a Cells_in_complex_iterator to the first cell of the 3D complex
 
 Returns: Cells_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_cells_in_complex_begin_1 = "returns a Cells_in_complex_iterator to the first cell of the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_cells_in_complex_begin_1 = "returns a Cells_in_complex_iterator to the first cell of the 3D complex
 
 Parameters
 ----------
 index : const Subdomain_index &
 
 Returns: Cells_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_cells_in_complex_end = "returns the past-the-end iterator for the cells of the 3D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_cells_in_complex_end = "returns the past-the-end iterator for the cells of the 3D complex
 
 Returns: Cells_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_facets_in_complex_begin = "returns a Facets_in_complex_iterator to the first facet of the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_facets_in_complex_begin = "returns a Facets_in_complex_iterator to the first facet of the 2D complex
 
 Returns: Facets_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_facets_in_complex_begin_1 = "returns a Facets_in_complex_iterator to the first facet of the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_facets_in_complex_begin_1 = "returns a Facets_in_complex_iterator to the first facet of the 2D complex
 
 Parameters
 ----------
 index : const Surface_patch_index &
 
 Returns: Facets_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_facets_in_complex_end = "returns past-the-end iterator on facet of the 2D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_facets_in_complex_end = "returns past-the-end iterator on facet of the 2D complex
 
 Parameters
 ----------
  : const Surface_patch_index
 
 Returns: Facets_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_edges_in_complex_begin = "returns a Edges_in_complex_iterator to the first edge of the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_edges_in_complex_begin = "returns a Edges_in_complex_iterator to the first edge of the 1D complex
 
 Returns: Edges_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_edges_in_complex_begin_1 = "returns a Edges_in_complex_iterator to the first edge of the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_edges_in_complex_begin_1 = "returns a Edges_in_complex_iterator to the first edge of the 1D complex
 
 Parameters
 ----------
 index : const Curve_index &
 
 Returns: Edges_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_edges_in_complex_end = "returns past-the-end iterator on edges of the 1D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_edges_in_complex_end = "returns past-the-end iterator on edges of the 1D complex
 
 Parameters
 ----------
  : const Curve_index &
 
 Returns: Edges_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_vertices_in_complex_begin = "returns a Vertices_in_complex_iterator to the first vertex of the 0D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_vertices_in_complex_begin = "returns a Vertices_in_complex_iterator to the first vertex of the 0D complex
 
 Returns: Vertices_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_vertices_in_complex_begin_1 = "returns a Vertices_in_complex_iterator to the first vertex of the 0D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_vertices_in_complex_begin_1 = "returns a Vertices_in_complex_iterator to the first vertex of the 0D complex
 
 Parameters
 ----------
 index : const Corner_index &
 
 Returns: Vertices_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_vertices_in_complex_end = "returns past-the-end iterator on vertices of the 0D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_vertices_in_complex_end = "returns past-the-end iterator on vertices of the 0D complex
 
 Returns: Vertices_in_complex_iterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_vertices_in_complex = "returns a range of iterators over vertices of the 0D complex
+constexpr const char* Mesh_complex_3_in_triangulation_3_vertices_in_complex = "returns a range of iterators over vertices of the 0D complex
 
 The value type of Vertices_in_complex::iterator is Vertex_handle .
 
 Returns: Vertices_in_complex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_edges_in_complex = "returns a range of iterators over the edges of the 1D complex, starting at an arbitrary edge.
+constexpr const char* Mesh_complex_3_in_triangulation_3_edges_in_complex = "returns a range of iterators over the edges of the 1D complex, starting at an arbitrary edge.
 
 Returns an empty range when t.dimension() < 2 .
 
 Returns: Edges_in_complex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_facets_in_complex = "returns a range of iterators over the facets of the 2D complex, starting at an arbitrary facet.
+constexpr const char* Mesh_complex_3_in_triangulation_3_facets_in_complex = "returns a range of iterators over the facets of the 2D complex, starting at an arbitrary facet.
 
 Returns an empty range when t.dimension() < 2 .
 
 Returns: Facets_in_complex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_cells_in_complex = "returns a range of iterators over cells of the 3D complex.
+constexpr const char* Mesh_complex_3_in_triangulation_3_cells_in_complex = "returns a range of iterators over cells of the 3D complex.
 
 Returns an empty range when triangulation() . number_of_cells() == 0 or
 complex is empty. The value type of Cells_in_complex::iterator is Cell_handle
 .
 
 Returns: Cells_in_complex";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_remove_isolated_vertices = "The tetrahedral mesh generation algorithm implemented in CGAL::make_mesh_3() and CGAL::refine_mesh_3() does not guarantee that all the points inserted by the algorithm are actually present in the final mesh.
+constexpr const char* Mesh_complex_3_in_triangulation_3_remove_isolated_vertices = "The tetrahedral mesh generation algorithm implemented in CGAL::make_mesh_3() and CGAL::refine_mesh_3() does not guarantee that all the points inserted by the algorithm are actually present in the final mesh.
 
 In most cases, all points are used, but if the geometry of the object has
 small features compared to the size of the simplices (triangles and
@@ -491,7 +491,7 @@ small set of auxiliary vertices that belong to the triangulation but are
 isolated from the complex at the end of the meshing process. This function
 removes these so-called isolated vertices, that belong to the triangulation
 but not to any simplex of the C3T3 , from the triangulation.";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_adjacent_vertices_in_complex = "fills out with incident edges (1-dimensional features of v ).
+constexpr const char* Mesh_complex_3_in_triangulation_3_adjacent_vertices_in_complex = "fills out with incident edges (1-dimensional features of v ).
 
 OutputIterator value type is std::pair<Vertex_handle,Curve_index> v->
 in_dimension() < 2
@@ -502,14 +502,14 @@ v : const Vertex_handle &
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_has_incident_facets_in_complex = "Returns true if the vertex v has is incident to at least a facet of the complex.
+constexpr const char* Mesh_complex_3_in_triangulation_3_has_incident_facets_in_complex = "Returns true if the vertex v has is incident to at least a facet of the complex.
 
 Parameters
 ----------
 v : const Vertex_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_union_find_of_incident_facets = "Extract the subset F of facets of the complex incident to v and return the number of connected component of the adjacency graph of F .
+constexpr const char* Mesh_complex_3_in_triangulation_3_union_find_of_incident_facets = "Extract the subset F of facets of the complex incident to v and return the number of connected component of the adjacency graph of F .
 
 Parameters
 ----------
@@ -518,7 +518,7 @@ v : const Vertex_handle
 Returns: std::size_t";
 
 // CGAL::Mesh_complex_3_in_triangulation_3::Cell_not_in_complex
-constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Cell_not_in_complex__class__ = "A class to filter cells which do not belong to the complex.";
+constexpr const char* Mesh_complex_3_in_triangulation_3_Cell_not_in_complex__class__ = "A class to filter cells which do not belong to the complex.";
 
 
 
@@ -529,35 +529,35 @@ constexpr const char* CGAL_Mesh_complex_3_in_triangulation_3_Cell_not_in_complex
 
 
 // CGAL::Simplicial_mesh_cell_base_3
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3__class__ = "The class Simplicial_mesh_cell_base_3 is a model of the concept SimplicialMeshCellBase_3 .";
+constexpr const char* Simplicial_mesh_cell_base_3__class__ = "The class Simplicial_mesh_cell_base_3 is a model of the concept SimplicialMeshCellBase_3 .";
 
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Simplicial_mesh_cell_base_3_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3_surface_index_table = "Stores surface_index for each facet of the cell.
+constexpr const char* Simplicial_mesh_cell_base_3_surface_index_table = "Stores surface_index for each facet of the cell.
 
 Returns: std::array< Surface_patch_index, 4 >";
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3_set_surface_patch_index = "Set surface index of facet to index .
+constexpr const char* Simplicial_mesh_cell_base_3_set_surface_patch_index = "Set surface index of facet to index .
 
 Parameters
 ----------
 facet : const int
 index : const Surface_patch_index &";
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3_surface_patch_index = "Returns surface index of facet facet .
+constexpr const char* Simplicial_mesh_cell_base_3_surface_patch_index = "Returns surface index of facet facet .
 
 Parameters
 ----------
 facet : const int
 
 Returns: Surface_patch_index";
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3_is_facet_on_surface = "Returns true if facet lies on a surface patch.
+constexpr const char* Simplicial_mesh_cell_base_3_is_facet_on_surface = "Returns true if facet lies on a surface patch.
 
 Parameters
 ----------
 facet : const int
 
 Returns: bool";
-constexpr const char* CGAL_Simplicial_mesh_cell_base_3_surface_index = "Returns surface index of facet facet .
+constexpr const char* Simplicial_mesh_cell_base_3_surface_index = "Returns surface index of facet facet .
 
 Parameters
 ----------
@@ -567,9 +567,9 @@ Returns: Surface_index";
 
 
 // CGAL::Simplicial_mesh_vertex_base_3
-constexpr const char* CGAL_Simplicial_mesh_vertex_base_3__class__ = "The class Simplicial_mesh_vertex_base_3 is a model of the concept SimplicialMeshVertexBase_3 .";
+constexpr const char* Simplicial_mesh_vertex_base_3__class__ = "The class Simplicial_mesh_vertex_base_3 is a model of the concept SimplicialMeshVertexBase_3 .";
 
-constexpr const char* CGAL_Simplicial_mesh_vertex_base_3_Has_timestamp = "For the determinism of Compact_container iterators.
+constexpr const char* Simplicial_mesh_vertex_base_3_Has_timestamp = "For the determinism of Compact_container iterators.
 
 Returns: Tag_true";
 
@@ -1094,7 +1094,7 @@ constexpr const char* SimplicialMeshVertexBase_3_cached_number_of_components = "
 
 Returns: std::size_t";
 
-constexpr const char* CGAL_output_to_medit = "outputs a mesh complex to the medit ( .mesh ) file format. See [1] for a comprehensive description of this file format.
+constexpr const char* output_to_medit = "outputs a mesh complex to the medit ( .mesh ) file format. See [1] for a comprehensive description of this file format.
 
 Deprecated This function is deprecated. Users should instead use
 CGAL::IO::write_MEDIT() os the output stream c3t3 the mesh complex
@@ -1109,7 +1109,7 @@ os : std::ostream &
 c3t3 : const C3T3 &
 renumber_subdomain_indices : bool
 show_patches : bool";
-constexpr const char* CGAL_output_to_tetgen = "exports a mesh complex to tetgen format
+constexpr const char* output_to_tetgen = "exports a mesh complex to tetgen format
 
 filename the path to the output files, without the extension. c3t3 the mesh
 complex rebind if true , labels of cells are rebound into [1..nb_of_labels]
@@ -1123,7 +1123,7 @@ filename : std::string
 c3t3 : const C3T3 &
 rebind : bool
 show_patches : bool";
-constexpr const char* CGAL_output_to_vtu = "exports a tetrahedral mesh complex using the UnstructuredGrid XML format.
+constexpr const char* output_to_vtu = "exports a tetrahedral mesh complex using the UnstructuredGrid XML format.
 
 C3T3 a model of MeshComplexWithFeatures_3InTriangulation_3 . os the stream
 used for writing c3t3 the mesh complex mode decides if the data should be
@@ -1136,7 +1136,7 @@ os : std::ostream &
 c3t3 : const C3T3 &
 mode : Mode";
 
-constexpr const char* CGAL_IO_output_to_avizo = "exports a mesh complex to the Avizo ( .am ) file format
+constexpr const char* IO_output_to_avizo = "exports a mesh complex to the Avizo ( .am ) file format
 
 C3T3 a class model of MeshComplex_3InTriangulation_3 os the output stream c3t3
 the mesh complex IOStreamAvizo
@@ -1146,7 +1146,7 @@ Parameters
 os : std::ostream &
 c3t3 : const C3T3 &";
 
-constexpr const char* CGAL_Mesh_3_save_binary_file = "outputs a mesh complex to the CGAL binary file format ( .binary.cgal ).
+constexpr const char* Mesh_3_save_binary_file = "outputs a mesh complex to the CGAL binary file format ( .binary.cgal ).
 
 C3T3 Type of mesh complex, model of MeshComplex_3InTriangulation_3 os the
 output stream, opened in binary mode c3t3 the mesh complex
@@ -1158,7 +1158,7 @@ os : std::ostream &
 c3t3 : const C3T3 &
 
 Returns: bool";
-constexpr const char* CGAL_Mesh_3_load_binary_file = "loads a mesh complex from a file written in CGAL binary file format ( .binary.cgal ).
+constexpr const char* Mesh_3_load_binary_file = "loads a mesh complex from a file written in CGAL binary file format ( .binary.cgal ).
 
 C3T3 Type of mesh complex, model of MeshComplex_3InTriangulation_3 is the
 input stream, opened in binary mode c3t3 the mesh complex

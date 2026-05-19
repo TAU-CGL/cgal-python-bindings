@@ -38,7 +38,7 @@ namespace PMP_Boolean_operations {
 
 
 // CGAL::Polygon_mesh_processing::Corefinement::Intersection_of_triangle_meshes::Less_for_nodes_along_an_edge
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Intersection_of_triangle_meshes_Less_for_nodes_along_an_edge__class__ = "TODO AUTOREF_TAG replace this by a lexical sort.";
+constexpr const char* Polygon_mesh_processing_Corefinement_Intersection_of_triangle_meshes_Less_for_nodes_along_an_edge__class__ = "TODO AUTOREF_TAG replace this by a lexical sort.";
 
 
 
@@ -46,7 +46,7 @@ constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Intersection_of_
 
 
 
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_Non_manifold_output_visitor = "constructor where meshes are exactly the same as the one passed a function in Corefinement and Autorefinement .
+constexpr const char* Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_Non_manifold_output_visitor = "constructor where meshes are exactly the same as the one passed a function in Corefinement and Autorefinement .
 
 The visitor cannot be reused for several calls to the aforementioned function.
 tm1 first triangle mesh in the same order as in the function in Corefinement
@@ -60,7 +60,7 @@ tm1 : TriangleMesh &
 tm2 : TriangleMesh &
 vpm1 : VPM1
 vpm2 : VPM1";
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_intersection = "fills a polygon soup with the intersection between input meshes provided in the constructor, after a call to either corefine_and_compute_boolean_operations() or corefine_and_compute_intersection() .
+constexpr const char* Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_intersection = "fills a polygon soup with the intersection between input meshes provided in the constructor, after a call to either corefine_and_compute_boolean_operations() or corefine_and_compute_intersection() .
 
 PointRange a model of the concept RandomAccessContainer whose value type is
 the value type of VPM1 and VPM2 . PolygonRange a model of the concepts
@@ -72,7 +72,7 @@ Parameters
 ----------
 points : PointRange &
 triangles : PolygonRange &";
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_union = "fills a polygon soup with the union between input meshes provided in the constructor, after a call to either corefine_and_compute_boolean_operations() or corefine_and_compute_union() .
+constexpr const char* Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_union = "fills a polygon soup with the union between input meshes provided in the constructor, after a call to either corefine_and_compute_boolean_operations() or corefine_and_compute_union() .
 
 PointRange a model of the concept RandomAccessContainer whose value type is
 the value type of VPM1 and VPM2 . PolygonRange a model of the concepts
@@ -84,7 +84,7 @@ Parameters
 ----------
 points : PointRange &
 triangles : PolygonRange &";
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_tm1_minus_tm2 = "fills a polygon soup with the difference between input meshes provided in the constructor, after a call to either corefine_and_compute_boolean_operations() or corefine_and_compute_difference() .
+constexpr const char* Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_tm1_minus_tm2 = "fills a polygon soup with the difference between input meshes provided in the constructor, after a call to either corefine_and_compute_boolean_operations() or corefine_and_compute_difference() .
 
 PointRange a model of the concept RandomAccessContainer whose value type is
 the value type of VPM1 and VPM2 . PolygonRange a model of the concepts
@@ -96,7 +96,7 @@ Parameters
 ----------
 points : PointRange &
 triangles : PolygonRange &";
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_tm2_minus_tm1 = "fills a polygon soup with the opposite difference between input meshes provided in the constructor, after a call to corefine_and_compute_boolean_operations() .
+constexpr const char* Polygon_mesh_processing_Corefinement_Non_manifold_output_visitor_extract_tm2_minus_tm1 = "fills a polygon soup with the opposite difference between input meshes provided in the constructor, after a call to corefine_and_compute_boolean_operations() .
 
 PointRange a model of the concept RandomAccessContainer whose value type is
 the value type of VPM1 and VPM2 . PolygonRange a model of the concepts
@@ -111,7 +111,7 @@ triangles : PolygonRange &";
 
 
 
-constexpr const char* CGAL_Polygon_mesh_processing_Corefinement_Patch_container_dump_patch = "debug
+constexpr const char* Polygon_mesh_processing_Corefinement_Patch_container_dump_patch = "debug
 
 Parameters
 ----------
@@ -133,34 +133,34 @@ Returns: std::ostream &";
 
 
 // CGAL::Polygon_mesh_slicer
-constexpr const char* CGAL_Polygon_mesh_slicer__class__ = "Function object that computes the intersection of a plane with a triangulated surface mesh.";
+constexpr const char* Polygon_mesh_slicer__class__ = "Function object that computes the intersection of a plane with a triangulated surface mesh.";
 
-constexpr const char* CGAL_Polygon_mesh_slicer_graph_traits = "Polygon_mesh typedefs.
+constexpr const char* Polygon_mesh_slicer_graph_traits = "Polygon_mesh typedefs.
 
 Returns: boost::graph_traits< TriangleMesh >";
-constexpr const char* CGAL_Polygon_mesh_slicer_Plane_3 = "Geometric typedefs.
+constexpr const char* Polygon_mesh_slicer_Plane_3 = "Geometric typedefs.
 
 Returns: Traits::Plane_3";
-constexpr const char* CGAL_Polygon_mesh_slicer_AL_vertex_info = "typedefs for internal graph to get connectivity of the polylines
+constexpr const char* Polygon_mesh_slicer_AL_vertex_info = "typedefs for internal graph to get connectivity of the polylines
 
 Returns: std::variant< vertex_descriptor, edge_descriptor >";
-constexpr const char* CGAL_Polygon_mesh_slicer_General_traversal_traits = "Traversal traits.
+constexpr const char* Polygon_mesh_slicer_General_traversal_traits = "Traversal traits.
 
 Returns: Polygon_mesh_slicer_::Traversal_traits< AL_graph, TriangleMesh, VertexPointMap, typename AABBTree::AABB_traits, Traits >";
-constexpr const char* CGAL_Polygon_mesh_slicer_AABB_tree = "the AABB-tree type used internally
+constexpr const char* Polygon_mesh_slicer_AABB_tree = "the AABB-tree type used internally
 
 Returns: AABBTree";
-constexpr const char* CGAL_Polygon_mesh_slicer_m_tree_ptr = "member variables
+constexpr const char* Polygon_mesh_slicer_m_tree_ptr = "member variables
 
 Returns: const AABBTree *";
-constexpr const char* CGAL_Polygon_mesh_slicer_next_edge = "Convenience graph functions.
+constexpr const char* Polygon_mesh_slicer_next_edge = "Convenience graph functions.
 
 Parameters
 ----------
 ed : edge_descriptor
 
 Returns: edge_descriptor";
-constexpr const char* CGAL_Polygon_mesh_slicer_update_al_graph_connectivity = "Other private functions.
+constexpr const char* Polygon_mesh_slicer_update_al_graph_connectivity = "Other private functions.
 
 handle edge insertion in the adjacency_list graph we add an edge between two
 edge_descriptor if they share a common facet
@@ -171,7 +171,7 @@ ed : edge_descriptor
 vd : AL_vertex_descriptor
 al_edge_map : AL_edge_map &
 al_graph : AL_graph &";
-constexpr const char* CGAL_Polygon_mesh_slicer_Polygon_mesh_slicer = "Constructor using edges(tmesh) to initialize the internal AABB_tree .
+constexpr const char* Polygon_mesh_slicer_Polygon_mesh_slicer = "Constructor using edges(tmesh) to initialize the internal AABB_tree .
 
 tmesh the triangulated surface mesh to be sliced. It must be valid and non
 modified as long as the functor is used. vpmap an instance of the vertex point
@@ -183,7 +183,7 @@ Parameters
 tmesh : const TriangleMesh &
 vpmap : VertexPointMap
 traits : const Traits &";
-constexpr const char* CGAL_Polygon_mesh_slicer_Polygon_mesh_slicer_1 = "Constructor using a pre-built AABB_tree of edges provided by the user.
+constexpr const char* Polygon_mesh_slicer_Polygon_mesh_slicer_1 = "Constructor using a pre-built AABB_tree of edges provided by the user.
 
 tmesh the triangulated surface mesh to be sliced. It must be valid and non
 modified as long as the functor is used. tree must be initialized with all the
@@ -196,7 +196,7 @@ tmesh : const TriangleMesh &
 tree : const AABBTree &
 vpmap : VertexPointMap
 traits : const Traits &";
-constexpr const char* CGAL_Polygon_mesh_slicer_Polygon_mesh_slicer_2 = "Constructor using edges(tmesh) to initialize the internal AABB_tree .
+constexpr const char* Polygon_mesh_slicer_Polygon_mesh_slicer_2 = "Constructor using edges(tmesh) to initialize the internal AABB_tree .
 
 The vertex point property map used is get(CGAL::vertex_point, tmesh) tmesh the
 triangulated surface mesh to be sliced. It must be valid and non modified as
@@ -206,7 +206,7 @@ Parameters
 ----------
 tmesh : const TriangleMesh &
 traits : const Traits &";
-constexpr const char* CGAL_Polygon_mesh_slicer_Polygon_mesh_slicer_3 = "Constructor using a AABB_tree provided by the user.
+constexpr const char* Polygon_mesh_slicer_Polygon_mesh_slicer_3 = "Constructor using a AABB_tree provided by the user.
 
 The vertex point property map used is get(CGAL::vertex_point, tmesh) tmesh the
 triangulated surface mesh to be sliced. It must be valid and non modified as
@@ -218,7 +218,7 @@ Parameters
 tmesh : const TriangleMesh &
 tree : const AABBTree &
 traits : const Traits &";
-constexpr const char* CGAL_Polygon_mesh_slicer_operator = "constructs the intersecting polylines of plane with the input triangulated surface mesh.
+constexpr const char* Polygon_mesh_slicer_operator = "constructs the intersecting polylines of plane with the input triangulated surface mesh.
 
 If a polyline is closed, the first and last point of that polyline will be
 identical. Each resulting polyline P is oriented such that for two consecutive
@@ -242,7 +242,7 @@ out : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Polygon_mesh_slicer::Compare_face
-constexpr const char* CGAL_Polygon_mesh_slicer_Compare_face__class__ = "Auxiliary classes.";
+constexpr const char* Polygon_mesh_slicer_Compare_face__class__ = "Auxiliary classes.";
 
 
 
@@ -250,16 +250,16 @@ constexpr const char* CGAL_Polygon_mesh_slicer_Compare_face__class__ = "Auxiliar
 
 
 
-constexpr const char* CGAL_Polygon_mesh_slicer_Traversal_traits_vertex_descriptor = "typedefs
+constexpr const char* Polygon_mesh_slicer_Traversal_traits_vertex_descriptor = "typedefs
 
 Returns: boost::graph_traits< TriangleMesh >::vertex_descriptor";
-constexpr const char* CGAL_Polygon_mesh_slicer_Traversal_traits_m_all_coplanar_edges = "container filled by intersection()
+constexpr const char* Polygon_mesh_slicer_Traversal_traits_m_all_coplanar_edges = "container filled by intersection()
 
 Returns: std::set< edge_descriptor > &";
-constexpr const char* CGAL_Polygon_mesh_slicer_Traversal_traits_m_tmesh = "data members
+constexpr const char* Polygon_mesh_slicer_Traversal_traits_m_tmesh = "data members
 
 Returns: TriangleMesh &";
-constexpr const char* CGAL_Polygon_mesh_slicer_Traversal_traits_oriented_side_3 = "predicates
+constexpr const char* Polygon_mesh_slicer_Traversal_traits_oriented_side_3 = "predicates
 
 Returns: Traits::Oriented_side_3";
 
@@ -537,7 +537,7 @@ constexpr const char* PMPCorefinementVisitor_halfedge_descriptor = "Halfedge des
 
 Returns: unspecified_type";
 
-constexpr const char* CGAL_Polygon_mesh_processing_autorefine_impl_polygon_soup_snap_rounding_impl = "rounds the coordinates of the points so that they fit in doubles while making and keeping the model intersection free by potentially subdividing the triangles.
+constexpr const char* Polygon_mesh_processing_autorefine_impl_polygon_soup_snap_rounding_impl = "rounds the coordinates of the points so that they fit in doubles while making and keeping the model intersection free by potentially subdividing the triangles.
 
 The input can be any triangle soup and the output is an intersection-free
 triangle soup with Hausdorff distance between the input and the output bounded

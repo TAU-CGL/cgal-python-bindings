@@ -8,14 +8,14 @@ namespace docstrings {
 namespace Periodic_3_mesh_3 {
 
 // CGAL::Implicit_to_labeled_subdomains_function_wrapper
-constexpr const char* CGAL_Implicit_to_labeled_subdomains_function_wrapper__class__ = "The class Implicit_to_labeled_subdomains_function_wrapper is a helper class designed to wrap an implicit function which describes a domain by [ p is inside if f(p)<0 ] to a function that takes its values into {1, 2} and thus describes a multidomain: the subspace described by f(p)<0 is attributed the subdomain index 1 and the subspace described by f(p)>0 is attributed the subdomain index 2 .";
+constexpr const char* Implicit_to_labeled_subdomains_function_wrapper__class__ = "The class Implicit_to_labeled_subdomains_function_wrapper is a helper class designed to wrap an implicit function which describes a domain by [ p is inside if f(p)<0 ] to a function that takes its values into {1, 2} and thus describes a multidomain: the subspace described by f(p)<0 is attributed the subdomain index 1 and the subspace described by f(p)>0 is attributed the subdomain index 2 .";
 
-constexpr const char* CGAL_Implicit_to_labeled_subdomains_function_wrapper_Implicit_to_labeled_subdomains_function_wrapper = "Construction from an implicit function.
+constexpr const char* Implicit_to_labeled_subdomains_function_wrapper_Implicit_to_labeled_subdomains_function_wrapper = "Construction from an implicit function.
 
 Parameters
 ----------
 f : Function";
-constexpr const char* CGAL_Implicit_to_labeled_subdomains_function_wrapper_operator = "Returns 1 or 2 , depending on whether $ f(p) $ is negative or not.
+constexpr const char* Implicit_to_labeled_subdomains_function_wrapper_operator = "Returns 1 or 2 , depending on whether $ f(p) $ is negative or not.
 
 Parameters
 ----------
@@ -24,15 +24,15 @@ p : const Point_3 &
 Returns: int";
 
 // CGAL::Periodic_3_function_wrapper
-constexpr const char* CGAL_Periodic_3_function_wrapper__class__ = "The class Periodic_3_function_wrapper is a helper class designed to wrap an (a priori non-periodic) implicit function describing a domain through the relationship [ p is inside if f(p)<0 ] and defined over the canonical cuboid to a function defined over the whole Euclidean space and periodic, with the same period as the canonical cuboid.";
+constexpr const char* Periodic_3_function_wrapper__class__ = "The class Periodic_3_function_wrapper is a helper class designed to wrap an (a priori non-periodic) implicit function describing a domain through the relationship [ p is inside if f(p)<0 ] and defined over the canonical cuboid to a function defined over the whole Euclidean space and periodic, with the same period as the canonical cuboid.";
 
-constexpr const char* CGAL_Periodic_3_function_wrapper_Periodic_3_function_wrapper = "Construction from an implicit function and the canonical cuboid.
+constexpr const char* Periodic_3_function_wrapper_Periodic_3_function_wrapper = "Construction from an implicit function and the canonical cuboid.
 
 Parameters
 ----------
 f : Function
 domain : const Iso_cuboid_3 &";
-constexpr const char* CGAL_Periodic_3_function_wrapper_operator = "Evaluates the function $ f $ passed in input at the canonical representative of $ p $ .
+constexpr const char* Periodic_3_function_wrapper_operator = "Evaluates the function $ f $ passed in input at the canonical representative of $ p $ .
 
 Parameters
 ----------
@@ -41,9 +41,9 @@ p : const Point_3 &
 Returns: FT";
 
 // CGAL::Periodic_3_mesh_triangulation_3
-constexpr const char* CGAL_Periodic_3_mesh_triangulation_3__class__ = "The class Periodic_3_mesh_triangulation_3 is a class template which provides the triangulation type to be used for the 3D periodic triangulation embedding the mesh.";
+constexpr const char* Periodic_3_mesh_triangulation_3__class__ = "The class Periodic_3_mesh_triangulation_3 is a class template which provides the triangulation type to be used for the 3D periodic triangulation embedding the mesh.";
 
-constexpr const char* CGAL_Periodic_3_mesh_triangulation_3_type = "The triangulation type to be used for the 3D triangulation embedding the mesh.
+constexpr const char* Periodic_3_mesh_triangulation_3_type = "The triangulation type to be used for the 3D triangulation embedding the mesh.
 
 This type is a wrapper around the type
 CGAL::Periodic_3_regular_triangulation_3 , whose vertex and cell base classes

@@ -8,10 +8,10 @@ namespace docstrings {
 namespace Isosurfacing_3 {
 
 // CGAL::Isosurfacing::Cartesian_grid_3
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3__class__ = "The class Cartesian_grid_3 represents a 3D Cartesian grid, that is the partition of an iso-cuboid into identical iso-cuboidal cells.";
+constexpr const char* Isosurfacing_Cartesian_grid_3__class__ = "The class Cartesian_grid_3 represents a 3D Cartesian grid, that is the partition of an iso-cuboid into identical iso-cuboidal cells.";
 
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_Cartesian_grid_3 = "Default constructor.";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_1 = "creates a Cartesian grid with dimensions[0]*dimensions[1]*dimensions[2] grid vertices.
+constexpr const char* Isosurfacing_Cartesian_grid_3_Cartesian_grid_3 = "Default constructor.";
+constexpr const char* Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_1 = "creates a Cartesian grid with dimensions[0]*dimensions[1]*dimensions[2] grid vertices.
 
 The grid covers the space described by the iso-cuboid span . span the
 geometric span of the grid dimensions the number of grid vertices in the x , y
@@ -23,7 +23,7 @@ Parameters
 span : const Iso_cuboid_3 &
 dimensions : const std::array< std::size_t, 3 > &
 gt : const Geom_traits &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_2 = "creates a Cartesian grid with dimensions[0]*dimensions[1]*dimensions[2] grid vertices.
+constexpr const char* Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_2 = "creates a Cartesian grid with dimensions[0]*dimensions[1]*dimensions[2] grid vertices.
 
 The grid covers the space described by the iso-cuboid span, itself described
 through two diagonal corners p and q . p the lexicographically smallest corner
@@ -38,7 +38,7 @@ p : const Point_3 &
 q : const Point_3 &
 dimensions : const std::array< std::size_t, 3 > &
 gt : const Geom_traits &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_3 = "creates a Cartesian grid using a prescribed grid step spacing .
+constexpr const char* Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_3 = "creates a Cartesian grid using a prescribed grid step spacing .
 
 The grid covers the space described by the iso-cuboid span . span the
 geometric span of the grid spacing the dimension of the paving cell, in the x
@@ -50,7 +50,7 @@ Parameters
 span : const Iso_cuboid_3 &
 spacing : const Vector_3 &
 gt : const Geom_traits &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_4 = "creates a Cartesian grid using a prescribed grid step.
+constexpr const char* Isosurfacing_Cartesian_grid_3_Cartesian_grid_3_4 = "creates a Cartesian grid using a prescribed grid step.
 
 The grid covers the space described by an iso-cuboid, itself described through
 two diagonal corners. p the lexicographically smallest corner of the
@@ -65,25 +65,25 @@ p : const Point_3 &
 q : const Point_3 &
 spacing : const Vector_3 &
 gt : const Geom_traits &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_geom_traits = "returns the geometric traits class.
+constexpr const char* Isosurfacing_Cartesian_grid_3_geom_traits = "returns the geometric traits class.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_span = "returns an iso-cuboid representing the geometric span of the Cartesian grid.
+constexpr const char* Isosurfacing_Cartesian_grid_3_span = "returns an iso-cuboid representing the geometric span of the Cartesian grid.
 
 Returns: const Iso_cuboid_3 &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_xdim = "returns the number of grid vertices in the x direction.
+constexpr const char* Isosurfacing_Cartesian_grid_3_xdim = "returns the number of grid vertices in the x direction.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_ydim = "returns the number of grid vertices in the y direction.
+constexpr const char* Isosurfacing_Cartesian_grid_3_ydim = "returns the number of grid vertices in the y direction.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_zdim = "returns the number of grid vertices in the z direction.
+constexpr const char* Isosurfacing_Cartesian_grid_3_zdim = "returns the number of grid vertices in the z direction.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_spacing = "returns the spacing of the Cartesian grid, that is a vector whose coordinates are the grid steps in the x , y , and z directions, respectively.
+constexpr const char* Isosurfacing_Cartesian_grid_3_spacing = "returns the spacing of the Cartesian grid, that is a vector whose coordinates are the grid steps in the x , y , and z directions, respectively.
 
 Returns: const Vector_3 &";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_linear_index = "returns the index of a grid cell given its indices (i.e., (k * y_dim + j) * x_dim + i ).
+constexpr const char* Isosurfacing_Cartesian_grid_3_linear_index = "returns the index of a grid cell given its indices (i.e., (k * y_dim + j) * x_dim + i ).
 
 Parameters
 ----------
@@ -92,7 +92,7 @@ j : const std::size_t
 k : const std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_index = "returns the coordinates of the grid cell that contains a given point.
+constexpr const char* Isosurfacing_Cartesian_grid_3_index = "returns the coordinates of the grid cell that contains a given point.
 
 For points on the boundary between two cells, the smaller index is returned. p
 the point to be located p is inside the grid.
@@ -102,7 +102,7 @@ Parameters
 p : const Point_3 &
 
 Returns: std::array< std::size_t, 3 >";
-constexpr const char* CGAL_Isosurfacing_Cartesian_grid_3_point = "returns the geometric location of the grid vertex described by its three indices.
+constexpr const char* Isosurfacing_Cartesian_grid_3_point = "returns the geometric location of the grid vertex described by its three indices.
 
 Depending on the value of the template parameter MemoryPolicy , locations
 might not be stored but calculated on-the-fly. i the index in the x direction
@@ -119,15 +119,15 @@ k : const std::size_t
 Returns: decltype(auto)";
 
 // CGAL::Isosurfacing::Dichotomy_edge_intersection
-constexpr const char* CGAL_Isosurfacing_Dichotomy_edge_intersection__class__ = "The class Dichotomy_edge_intersection uses a dichotomy to find the intersection point between an edge and the isosurface.";
+constexpr const char* Isosurfacing_Dichotomy_edge_intersection__class__ = "The class Dichotomy_edge_intersection uses a dichotomy to find the intersection point between an edge and the isosurface.";
 
-constexpr const char* CGAL_Isosurfacing_Dichotomy_edge_intersection_Dichotomy_edge_intersection = "Constructor, enabling setting up the two criteria which can stop the dichotomy: either a threshold on the value (i.e., the difference between the isovalue and the value at the current point is smaller than relative_eps * isovalue ), or a maximum number of iterations.
+constexpr const char* Isosurfacing_Dichotomy_edge_intersection_Dichotomy_edge_intersection = "Constructor, enabling setting up the two criteria which can stop the dichotomy: either a threshold on the value (i.e., the difference between the isovalue and the value at the current point is smaller than relative_eps * isovalue ), or a maximum number of iterations.
 
 Parameters
 ----------
 max_iterations : unsigned int
 relative_eps : double";
-constexpr const char* CGAL_Isosurfacing_Dichotomy_edge_intersection_operator = "computes the intersection point between an edge and the isosurface.
+constexpr const char* Isosurfacing_Dichotomy_edge_intersection_operator = "computes the intersection point between an edge and the isosurface.
 
 The result (if it exists) is stored in p . Domain must be a model of
 IsosurfacingDomain_3 p_0 the location of the first vertex of the edge p_1 the
@@ -150,9 +150,9 @@ p : typename Domain::Geom_traits::Point_3 &
 Returns: bool";
 
 // CGAL::Isosurfacing::Dual_contouring_domain_3
-constexpr const char* CGAL_Isosurfacing_Dual_contouring_domain_3__class__ = "A domain that can be used as input in the Dual Contouring algorithm.";
+constexpr const char* Isosurfacing_Dual_contouring_domain_3__class__ = "A domain that can be used as input in the Dual Contouring algorithm.";
 
-constexpr const char* CGAL_Isosurfacing_Dual_contouring_domain_3_Dual_contouring_domain_3 = "constructs a domain that can be used with the Dual Contouring algorithm.
+constexpr const char* Isosurfacing_Dual_contouring_domain_3_Dual_contouring_domain_3 = "constructs a domain that can be used with the Dual Contouring algorithm.
 
 partition the space partitioning data structure values a continuous field of
 scalar values, defined over the geometric span of partition gradients a
@@ -170,9 +170,9 @@ gradients : const GradientField &
 intersection_oracle : const EdgeIntersectionOracle &";
 
 // CGAL::Isosurfacing::Finite_difference_gradient_3
-constexpr const char* CGAL_Isosurfacing_Finite_difference_gradient_3__class__ = "Class template for a gradient that is calculated using finite differences.";
+constexpr const char* Isosurfacing_Finite_difference_gradient_3__class__ = "Class template for a gradient that is calculated using finite differences.";
 
-constexpr const char* CGAL_Isosurfacing_Finite_difference_gradient_3_Finite_difference_gradient_3 = "creates a new instance of this gradient class.
+constexpr const char* Isosurfacing_Finite_difference_gradient_3_Finite_difference_gradient_3 = "creates a new instance of this gradient class.
 
 ValueFunction must be a model of IsosurfacingValueField_3 . function the
 function giving the scalar value at each point delta the distance between
@@ -183,7 +183,7 @@ Parameters
 function : const ValueFunction &
 delta : const FT
 gt : const Geom_traits &";
-constexpr const char* CGAL_Isosurfacing_Finite_difference_gradient_3_operator = "returns the value the gradient at a point in 3D space.
+constexpr const char* Isosurfacing_Finite_difference_gradient_3_operator = "returns the value the gradient at a point in 3D space.
 
 p the point at which the gradient is computed.
 
@@ -194,9 +194,9 @@ p : const Point_3 &
 Returns: Vector_3";
 
 // CGAL::Isosurfacing::Gradient_function_3
-constexpr const char* CGAL_Isosurfacing_Gradient_function_3__class__ = "The class Gradient_function_3 represents a field of vectors computed using a user-provided unary function.";
+constexpr const char* Isosurfacing_Gradient_function_3__class__ = "The class Gradient_function_3 represents a field of vectors computed using a user-provided unary function.";
 
-constexpr const char* CGAL_Isosurfacing_Gradient_function_3_Gradient_function_3 = "constructs a field of gradients using a gradient function and a partition.
+constexpr const char* Isosurfacing_Gradient_function_3_Gradient_function_3 = "constructs a field of gradients using a gradient function and a partition.
 
 Function must provide the following function signature: Vector_3
 operator()(const Point_3&) const fn the function providing gradients partition
@@ -206,14 +206,14 @@ Parameters
 ----------
 fn : const Function &
 partition : const Partition &";
-constexpr const char* CGAL_Isosurfacing_Gradient_function_3_operator = "returns the value of the function at the point p .
+constexpr const char* Isosurfacing_Gradient_function_3_operator = "returns the value of the function at the point p .
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: Vector_3";
-constexpr const char* CGAL_Isosurfacing_Gradient_function_3_operator_1 = "returns the value of the function at the vertex v .
+constexpr const char* Isosurfacing_Gradient_function_3_operator_1 = "returns the value of the function at the vertex v .
 
 Parameters
 ----------
@@ -222,12 +222,12 @@ v : const vertex_descriptor &
 Returns: const Vector_3 &";
 
 // CGAL::Isosurfacing::Grid_vertex_memory_policy
-constexpr const char* CGAL_Isosurfacing_Grid_vertex_memory_policy__class__ = "A policy to choose whether grid vertex locations should be cached, or recomputed at each access.";
+constexpr const char* Isosurfacing_Grid_vertex_memory_policy__class__ = "A policy to choose whether grid vertex locations should be cached, or recomputed at each access.";
 
 // CGAL::Isosurfacing::Interpolated_discrete_gradients_3
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_gradients_3__class__ = "Class template for a gradient field that is computed using discrete values and interpolation.";
+constexpr const char* Isosurfacing_Interpolated_discrete_gradients_3__class__ = "Class template for a gradient field that is computed using discrete values and interpolation.";
 
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_gradients_3_compute_discrete_gradients = "computes (using finite difference) and stores gradients at all vertices of the grid.
+constexpr const char* Isosurfacing_Interpolated_discrete_gradients_3_compute_discrete_gradients = "computes (using finite difference) and stores gradients at all vertices of the grid.
 
 ValueField must be a model of IsosurfacingValueField_3 values a field of
 values whose gradient are being computed
@@ -235,7 +235,7 @@ values whose gradient are being computed
 Parameters
 ----------
 values : const ValueField &";
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_gradients_3_operator = "returns the gradient stored at the grid vertex described by its three indices.
+constexpr const char* Isosurfacing_Interpolated_discrete_gradients_3_operator = "returns the gradient stored at the grid vertex described by its three indices.
 
 This function can be used to set the gradient at a grid vertex. i the index in
 the x direction j the index in the y direction k the index in the z direction
@@ -248,7 +248,7 @@ j : const std::size_t
 k : const std::size_t
 
 Returns: Vector_3 &";
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_gradients_3_operator_1 = "returns the gradient stored at the grid vertex described by a set of indices.
+constexpr const char* Isosurfacing_Interpolated_discrete_gradients_3_operator_1 = "returns the gradient stored at the grid vertex described by a set of indices.
 
 i the index in the x direction j the index in the y direction k the index in
 the z direction i < xdim() and j < ydim() and k < zdim()
@@ -260,7 +260,7 @@ j : const std::size_t
 k : const std::size_t
 
 Returns: const Vector_3 &";
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_gradients_3_operator_2 = "returns the gradient at a given point p .
+constexpr const char* Isosurfacing_Interpolated_discrete_gradients_3_operator_2 = "returns the gradient at a given point p .
 
 Parameters
 ----------
@@ -269,9 +269,9 @@ p : const Point_3 &
 Returns: Vector_3";
 
 // CGAL::Isosurfacing::Interpolated_discrete_values_3
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_values_3__class__ = "Class template for a field of values that are calculated using discrete values and interpolation.";
+constexpr const char* Isosurfacing_Interpolated_discrete_values_3__class__ = "Class template for a field of values that are calculated using discrete values and interpolation.";
 
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_values_3_operator = "returns the scalar value stored at the grid vertex described by its three indices.
+constexpr const char* Isosurfacing_Interpolated_discrete_values_3_operator = "returns the scalar value stored at the grid vertex described by its three indices.
 
 This function can be used to set the value at a grid vertex. i the index in
 the x direction j the index in the y direction k the index in the z direction
@@ -284,7 +284,7 @@ j : const std::size_t
 k : const std::size_t
 
 Returns: FT &";
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_values_3_operator_1 = "returns the scalar value stored at the grid vertex described by its three indices.
+constexpr const char* Isosurfacing_Interpolated_discrete_values_3_operator_1 = "returns the scalar value stored at the grid vertex described by its three indices.
 
 i the index in the x direction j the index in the y direction k the index in
 the z direction i < xdim() and j < ydim() and k < zdim()
@@ -296,14 +296,14 @@ j : const std::size_t
 k : const std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_values_3_operator_2 = "returns the interpolated value at vertex v .
+constexpr const char* Isosurfacing_Interpolated_discrete_values_3_operator_2 = "returns the interpolated value at vertex v .
 
 Parameters
 ----------
 v : const vertex_descriptor &
 
 Returns: FT";
-constexpr const char* CGAL_Isosurfacing_Interpolated_discrete_values_3_operator_3 = "returns the interpolated value at point p .
+constexpr const char* Isosurfacing_Interpolated_discrete_values_3_operator_3 = "returns the interpolated value at point p .
 
 Parameters
 ----------
@@ -312,9 +312,9 @@ p : const Point_3 &
 Returns: FT";
 
 // CGAL::Isosurfacing::Linear_interpolation_edge_intersection
-constexpr const char* CGAL_Isosurfacing_Linear_interpolation_edge_intersection__class__ = "The class Linear_interpolation_edge_intersection uses linear interpolation to find the intersection point between an edge and the isosurface.";
+constexpr const char* Isosurfacing_Linear_interpolation_edge_intersection__class__ = "The class Linear_interpolation_edge_intersection uses linear interpolation to find the intersection point between an edge and the isosurface.";
 
-constexpr const char* CGAL_Isosurfacing_Linear_interpolation_edge_intersection_operator = "computes the intersection point between an edge and the isosurface.
+constexpr const char* Isosurfacing_Linear_interpolation_edge_intersection_operator = "computes the intersection point between an edge and the isosurface.
 
 Domain must be a model of IsosurfacingDomain_3 p_0 the location of the first
 vertex of the edge p_1 the location of the second vertex of the edge val_0 the
@@ -336,9 +336,9 @@ p : typename Domain::Geom_traits::Point_3 &
 Returns: bool";
 
 // CGAL::Isosurfacing::Marching_cubes_domain_3
-constexpr const char* CGAL_Isosurfacing_Marching_cubes_domain_3__class__ = "A domain that can be used with the Marching Cubes algorithm.";
+constexpr const char* Isosurfacing_Marching_cubes_domain_3__class__ = "A domain that can be used with the Marching Cubes algorithm.";
 
-constexpr const char* CGAL_Isosurfacing_Marching_cubes_domain_3_Marching_cubes_domain_3 = "constructs a domain that can be used with the Marching Cubes algorithm.
+constexpr const char* Isosurfacing_Marching_cubes_domain_3_Marching_cubes_domain_3 = "constructs a domain that can be used with the Marching Cubes algorithm.
 
 partition the space partitioning data structure values a continuous field of
 scalar values, defined over the geometric span of partition
@@ -354,39 +354,39 @@ values : const ValueField &
 intersection_oracle : const EdgeIntersectionOracle &";
 
 // CGAL::Isosurfacing::partition_traits
-constexpr const char* CGAL_Isosurfacing_partition_traits__class__ = "The class partition_traits is the API compatibility layer between a model of IsosurfacingPartition_3 and the isosurfacing domain classes CGAL::Isosurfacing::Marching_cubes_domain_3 and CGAL::Isosurfacing::Dual_contouring_domain_3 .";
+constexpr const char* Isosurfacing_partition_traits__class__ = "The class partition_traits is the API compatibility layer between a model of IsosurfacingPartition_3 and the isosurfacing domain classes CGAL::Isosurfacing::Marching_cubes_domain_3 and CGAL::Isosurfacing::Dual_contouring_domain_3 .";
 
-constexpr const char* CGAL_Isosurfacing_partition_traits_vertex_descriptor = "A vertex descriptor corresponds to a unique vertex in an abstract partition instance.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_edge_descriptor = "An edge descriptor corresponds to a unique edge in an abstract partition instance.
+constexpr const char* Isosurfacing_partition_traits_vertex_descriptor = "A vertex descriptor corresponds to a unique vertex in an abstract partition instance.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_cell_descriptor = "A cell descriptor corresponds to a unique edge in an abstract partition instance.
+constexpr const char* Isosurfacing_partition_traits_edge_descriptor = "An edge descriptor corresponds to a unique edge in an abstract partition instance.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_Edge_vertices = "A container for the two vertices of an edge.
+constexpr const char* Isosurfacing_partition_traits_cell_descriptor = "A cell descriptor corresponds to a unique edge in an abstract partition instance.
+
+Returns: unspecified_type";
+constexpr const char* Isosurfacing_partition_traits_Edge_vertices = "A container for the two vertices of an edge.
 
 Must be a model of RandomAccessContainer whose value_type must be
 vertex_descriptor .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_Cells_incident_to_edge = "A container for the cells incident to an edge.
+constexpr const char* Isosurfacing_partition_traits_Cells_incident_to_edge = "A container for the cells incident to an edge.
 
 Must be a model of ForwardRange whose value_type must be cell_descriptor .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_Cell_vertices = "A container for the vertices of a cell.
+constexpr const char* Isosurfacing_partition_traits_Cell_vertices = "A container for the vertices of a cell.
 
 Must be a model of ForwardRange whose value_type must be vertex_descriptor .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_Cell_edges = "A container for the edges of a cell.
+constexpr const char* Isosurfacing_partition_traits_Cell_edges = "A container for the edges of a cell.
 
 Must be a model of ForwardRange whose value_type must be edge_descriptor .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Isosurfacing_partition_traits_point = "
+constexpr const char* Isosurfacing_partition_traits_point = "
 the 3D location of the vertex v .
 
 Parameters
@@ -395,7 +395,7 @@ v : vertex_descriptor
 partition : IsosurfacingPartition_3
 
 Returns: Point_3";
-constexpr const char* CGAL_Isosurfacing_partition_traits_incident_vertices = "
+constexpr const char* Isosurfacing_partition_traits_incident_vertices = "
 the two vertices incident to the edge e .
 
 Parameters
@@ -404,7 +404,7 @@ e : edge_descriptor
 partition : IsosurfacingPartition_3
 
 Returns: Edge_vertices";
-constexpr const char* CGAL_Isosurfacing_partition_traits_incident_cells = "
+constexpr const char* Isosurfacing_partition_traits_incident_cells = "
 all the cells incident to the edge e , in a geometrically ordered manner
 around the edge.
 
@@ -414,7 +414,7 @@ e : edge_descriptor
 partition : IsosurfacingPartition_3
 
 Returns: Cells_incident_to_edge";
-constexpr const char* CGAL_Isosurfacing_partition_traits_cell_vertices = "
+constexpr const char* Isosurfacing_partition_traits_cell_vertices = "
 all the vertices of the cell c .
 
 Parameters
@@ -423,7 +423,7 @@ c : cell_descriptor
 partition : IsosurfacingPartition_3
 
 Returns: Cell_vertices";
-constexpr const char* CGAL_Isosurfacing_partition_traits_cell_edges = "
+constexpr const char* Isosurfacing_partition_traits_cell_edges = "
 all the edges of the cell c .
 
 Parameters
@@ -432,7 +432,7 @@ c : cell_descriptor
 partition : IsosurfacingPartition_3
 
 Returns: Cell_edges";
-constexpr const char* CGAL_Isosurfacing_partition_traits_for_each_vertex = "iterates over all vertices, and calls the functor f on each one.
+constexpr const char* Isosurfacing_partition_traits_for_each_vertex = "iterates over all vertices, and calls the functor f on each one.
 
 ConcurrencyTag decides if the vertices are iterated sequentially or in
 parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag
@@ -444,7 +444,7 @@ Parameters
 ----------
 f : Functor &
 partition : IsosurfacingPartition_3";
-constexpr const char* CGAL_Isosurfacing_partition_traits_for_each_edge = "iterates over all edges, and calls the functor f on each one.
+constexpr const char* Isosurfacing_partition_traits_for_each_edge = "iterates over all edges, and calls the functor f on each one.
 
 ConcurrencyTag decides if the edges are iterated sequentially or in parallel.
 Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or
@@ -456,7 +456,7 @@ Parameters
 ----------
 f : Functor &
 partition : IsosurfacingPartition_3";
-constexpr const char* CGAL_Isosurfacing_partition_traits_for_each_cell = "iterates over all cells, and calls the functor f on each one.
+constexpr const char* Isosurfacing_partition_traits_for_each_cell = "iterates over all cells, and calls the functor f on each one.
 
 ConcurrencyTag decides if the cells are iterated sequentially or in parallel.
 Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or
@@ -469,7 +469,7 @@ Parameters
 f : Functor &
 partition : IsosurfacingPartition_3";
 
-constexpr const char* CGAL_Isosurfacing_Trilinear_interpolation_interpolated_value = "interpolates the values at a given point using trilinear interpolation.
+constexpr const char* Isosurfacing_Trilinear_interpolation_interpolated_value = "interpolates the values at a given point using trilinear interpolation.
 
 p the point at which values are interpolated g the grid values the continuous
 field of scalar values, defined over the geometric span of g
@@ -481,7 +481,7 @@ g : const Grid &
 values : const std::vector< FT > &
 
 Returns: FT";
-constexpr const char* CGAL_Isosurfacing_Trilinear_interpolation_interpolated_gradient = "interpolates the gradients at a given point using trilinear interpolation.
+constexpr const char* Isosurfacing_Trilinear_interpolation_interpolated_gradient = "interpolates the gradients at a given point using trilinear interpolation.
 
 p the point at which to interpolate the gradients g the grid gradients the
 continuous field of vector values, defined over the geometric span of g
@@ -495,9 +495,9 @@ gradients : const std::vector< Vector_3 > &
 Returns: Vector_3";
 
 // CGAL::Isosurfacing::Value_function_3
-constexpr const char* CGAL_Isosurfacing_Value_function_3__class__ = "The class Value_function_3 represents a field of scalars computed using a user-provided unary function.";
+constexpr const char* Isosurfacing_Value_function_3__class__ = "The class Value_function_3 represents a field of scalars computed using a user-provided unary function.";
 
-constexpr const char* CGAL_Isosurfacing_Value_function_3_Value_function_3 = "constructs a field of values using a value function and a partition.
+constexpr const char* Isosurfacing_Value_function_3_Value_function_3 = "constructs a field of values using a value function and a partition.
 
 Function must provide the following function signature: FT operator()(const
 Point_3&) const fn the function providing values partition the space
@@ -507,14 +507,14 @@ Parameters
 ----------
 fn : const Function &
 partition : const Partition &";
-constexpr const char* CGAL_Isosurfacing_Value_function_3_operator = "returns the value of the function at the point p .
+constexpr const char* Isosurfacing_Value_function_3_operator = "returns the value of the function at the point p .
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: FT";
-constexpr const char* CGAL_Isosurfacing_Value_function_3_operator_1 = "returns the value of the function at the vertex v .
+constexpr const char* Isosurfacing_Value_function_3_operator_1 = "returns the value of the function at the vertex v .
 
 Parameters
 ----------

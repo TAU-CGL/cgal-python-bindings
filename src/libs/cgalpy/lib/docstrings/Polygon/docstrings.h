@@ -8,12 +8,12 @@ namespace docstrings {
 namespace Polygon {
 
 // CGAL::General_polygon_with_holes_2
-constexpr const char* CGAL_General_polygon_with_holes_2__class__ = "The class General_polygon_with_holes_2 models the concept GeneralPolygonWithHoles_2 .";
+constexpr const char* General_polygon_with_holes_2__class__ = "The class General_polygon_with_holes_2 models the concept GeneralPolygonWithHoles_2 .";
 
-constexpr const char* CGAL_General_polygon_with_holes_2_Polygon_2 = "polygon without hole type
+constexpr const char* General_polygon_with_holes_2_Polygon_2 = "polygon without hole type
 
 Returns: Polygon_";
-constexpr const char* CGAL_General_polygon_with_holes_2_operator = "This operator exports a General_polygon_with_holes_2 to the output stream os .
+constexpr const char* General_polygon_with_holes_2_operator = "This operator exports a General_polygon_with_holes_2 to the output stream os .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, CGAL::IO::set_ascii_mode() and
@@ -31,7 +31,7 @@ os : std::ostream &
 p : const General_polygon_with_holes_2< Polygon_ > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_General_polygon_with_holes_2_operator_1 = "This operator imports a General_polygon_with_holes_2 from the input stream is .
+constexpr const char* General_polygon_with_holes_2_operator_1 = "This operator imports a General_polygon_with_holes_2 from the input stream is .
 
 Both ASCII and binary formats are supported, and the format is automatically
 detected. The format consists of the number of curves of the outer boundary
@@ -55,25 +55,25 @@ Returns: std::istream &";
 
 
 // CGAL::Multipolygon_with_holes_2
-constexpr const char* CGAL_Multipolygon_with_holes_2__class__ = "The class Multipolygon_with_holes_2 models the concept MultipolygonWithHoles_2 .";
+constexpr const char* Multipolygon_with_holes_2__class__ = "The class Multipolygon_with_holes_2 models the concept MultipolygonWithHoles_2 .";
 
-constexpr const char* CGAL_Multipolygon_with_holes_2_Polygon_2 = "polygon type
+constexpr const char* Multipolygon_with_holes_2_Polygon_2 = "polygon type
 
 Returns: CGAL::Polygon_2 < Kernel, Container_ >";
-constexpr const char* CGAL_Multipolygon_with_holes_2_Polygon_with_holes_2 = "polygon with holes type
+constexpr const char* Multipolygon_with_holes_2_Polygon_with_holes_2 = "polygon with holes type
 
 Returns: CGAL::Polygon_with_holes_2 < Kernel, Container_ >";
-constexpr const char* CGAL_Multipolygon_with_holes_2_Size = "the size type
+constexpr const char* Multipolygon_with_holes_2_Size = "the size type
 
 Returns: unsigned int";
-constexpr const char* CGAL_Multipolygon_with_holes_2_Multipolygon_with_holes_2 = "Default constructor.";
-constexpr const char* CGAL_Multipolygon_with_holes_2_Multipolygon_with_holes_2_1 = "Constructor from polygons.
+constexpr const char* Multipolygon_with_holes_2_Multipolygon_with_holes_2 = "Default constructor.";
+constexpr const char* Multipolygon_with_holes_2_Multipolygon_with_holes_2_1 = "Constructor from polygons.
 
 Parameters
 ----------
 p_begin : PolygonsInputIterator
 p_end : PolygonsInputIterator";
-constexpr const char* CGAL_Multipolygon_with_holes_2_operator = "inserts a multipolygon with holes to the output stream os .
+constexpr const char* Multipolygon_with_holes_2_operator = "inserts a multipolygon with holes to the output stream os .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, set_ascii_mode() and set_binary_mode() , respectively.
@@ -94,45 +94,45 @@ mp : const Multipolygon_with_holes_2 < Kernel, Container_ > &
 Returns: std::ostream &";
 
 // CGAL::Polygon_2
-constexpr const char* CGAL_Polygon_2__class__ = "The class Polygon_2 implements polygons.";
+constexpr const char* Polygon_2__class__ = "The class Polygon_2 implements polygons.";
 
-constexpr const char* CGAL_Polygon_2_Container = "The container type.
+constexpr const char* Polygon_2_Container = "The container type.
 
 Returns: Container_";
-constexpr const char* CGAL_Polygon_2_FT = "The number type of the coordinates of the points of the polygon.
+constexpr const char* Polygon_2_FT = "The number type of the coordinates of the points of the polygon.
 
 Returns: Traits_::FT";
-constexpr const char* CGAL_Polygon_2_Point_2 = "The point type of the polygon.
+constexpr const char* Polygon_2_Point_2 = "The point type of the polygon.
 
 Returns: Traits_::Point_2";
-constexpr const char* CGAL_Polygon_2_Segment_2 = "The type of a segment between two points of the polygon.
+constexpr const char* Polygon_2_Segment_2 = "The type of a segment between two points of the polygon.
 
 Returns: Traits_::Segment_2";
-constexpr const char* CGAL_Polygon_2_Vertex_iterator = "vertex iterator type
+constexpr const char* Polygon_2_Vertex_iterator = "vertex iterator type
 
 Returns: Container::iterator";
-constexpr const char* CGAL_Polygon_2_Vertices = "a range type to iterate over the vertices
+constexpr const char* Polygon_2_Vertices = "a range type to iterate over the vertices
 
 Returns: Container";
-constexpr const char* CGAL_Polygon_2_Vertex_circulator = "vertex circulator type
+constexpr const char* Polygon_2_Vertex_circulator = "vertex circulator type
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polygon_2_Edge_const_iterator = "edge iterator type
+constexpr const char* Polygon_2_Edge_const_iterator = "edge iterator type
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polygon_2_Edges = "a range type to iterate over the vertices
+constexpr const char* Polygon_2_Edges = "a range type to iterate over the vertices
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polygon_2_Edge_const_circulator = "edge circular type
+constexpr const char* Polygon_2_Edge_const_circulator = "edge circular type
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Polygon_2_Polygon_2 = "Creates an empty polygon.";
-constexpr const char* CGAL_Polygon_2_Polygon_2_1 = "Creates an empty polygon.
+constexpr const char* Polygon_2_Polygon_2 = "Creates an empty polygon.";
+constexpr const char* Polygon_2_Polygon_2_1 = "Creates an empty polygon.
 
 Parameters
 ----------
 p_traits : const Traits &";
-constexpr const char* CGAL_Polygon_2_Polygon_2_2 = "Creates a polygon with vertices from the sequence defined by the range [first,last).
+constexpr const char* Polygon_2_Polygon_2_2 = "Creates a polygon with vertices from the sequence defined by the range [first,last).
 
 The value type of InputIterator must be Point_2 .
 
@@ -141,13 +141,13 @@ Parameters
 first : InputIterator
 last : InputIterator
 p_traits : Traits";
-constexpr const char* CGAL_Polygon_2_set = "Acts as *i = q , except that that would be illegal because the iterator is not mutable.
+constexpr const char* Polygon_2_set = "Acts as *i = q , except that that would be illegal because the iterator is not mutable.
 
 Parameters
 ----------
 i : Vertex_iterator
 q : const Point_2 &";
-constexpr const char* CGAL_Polygon_2_insert = "Inserts the vertex q before i .
+constexpr const char* Polygon_2_insert = "Inserts the vertex q before i .
 
 The return value points to the inserted vertex.
 
@@ -157,7 +157,7 @@ i : Vertex_iterator
 q : const Point_2 &
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Polygon_2_insert_1 = "Inserts the vertex q before i .
+constexpr const char* Polygon_2_insert_1 = "Inserts the vertex q before i .
 
 The return value points to the inserted vertex.
 
@@ -167,7 +167,7 @@ i : Vertex_circulator
 q : const Point_2 &
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Polygon_2_insert_2 = "Inserts the vertices in the range [first, last) before i .
+constexpr const char* Polygon_2_insert_2 = "Inserts the vertices in the range [first, last) before i .
 
 The value type of points in the range [first,last) must be Point_2 .
 
@@ -176,7 +176,7 @@ Parameters
 i : Vertex_iterator
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Polygon_2_insert_3 = "Inserts the vertices in the range [first, last) before i .
+constexpr const char* Polygon_2_insert_3 = "Inserts the vertices in the range [first, last) before i .
 
 The value type of points in the range [first,last) must be Point_2 .
 
@@ -185,26 +185,26 @@ Parameters
 i : Vertex_circulator
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Polygon_2_push_back = "Has the same semantics as p.insert(p.vertices_end(), q) .
+constexpr const char* Polygon_2_push_back = "Has the same semantics as p.insert(p.vertices_end(), q) .
 
 Parameters
 ----------
 x : const Point_2 &";
-constexpr const char* CGAL_Polygon_2_erase = "Erases the vertex pointed to by i .
+constexpr const char* Polygon_2_erase = "Erases the vertex pointed to by i .
 
 Parameters
 ----------
 i : Vertex_iterator
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Polygon_2_erase_1 = "Erases the vertex pointed to by i .
+constexpr const char* Polygon_2_erase_1 = "Erases the vertex pointed to by i .
 
 Parameters
 ----------
 i : Vertex_circulator
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Polygon_2_erase_2 = "Erases the vertices in the range [first, last) .
+constexpr const char* Polygon_2_erase_2 = "Erases the vertices in the range [first, last) .
 
 Parameters
 ----------
@@ -212,47 +212,47 @@ first : Vertex_iterator
 last : Vertex_iterator
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Polygon_2_clear = "Erases the vertices in the range [first, last) .";
-constexpr const char* CGAL_Polygon_2_reverse_orientation = "Reverses the orientation of the polygon.
+constexpr const char* Polygon_2_clear = "Erases the vertices in the range [first, last) .";
+constexpr const char* Polygon_2_reverse_orientation = "Reverses the orientation of the polygon.
 
 The vertex pointed to by p.vertices_begin() remains the same.";
-constexpr const char* CGAL_Polygon_2_vertices_begin = "Returns a constant iterator that allows to traverse the vertices of the polygon.
+constexpr const char* Polygon_2_vertices_begin = "Returns a constant iterator that allows to traverse the vertices of the polygon.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Polygon_2_vertices_end = "Returns the corresponding past-the-end iterator.
+constexpr const char* Polygon_2_vertices_end = "Returns the corresponding past-the-end iterator.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Polygon_2_vertices = "returns the range of vertices.
+constexpr const char* Polygon_2_vertices = "returns the range of vertices.
 
 Returns: const Vertices &";
-constexpr const char* CGAL_Polygon_2_vertices_circulator = "Returns a constant circulator that allows to traverse the vertices of the polygon.
+constexpr const char* Polygon_2_vertices_circulator = "Returns a constant circulator that allows to traverse the vertices of the polygon.
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Polygon_2_edges_begin = "Returns a non-mutable iterator that allows to traverse the edges of the polygon.
+constexpr const char* Polygon_2_edges_begin = "Returns a non-mutable iterator that allows to traverse the edges of the polygon.
 
 Returns: Edge_const_iterator";
-constexpr const char* CGAL_Polygon_2_edges_end = "Returns the corresponding past-the-end iterator.
+constexpr const char* Polygon_2_edges_end = "Returns the corresponding past-the-end iterator.
 
 Returns: Edge_const_iterator";
-constexpr const char* CGAL_Polygon_2_edges = "returns the range of edges.
+constexpr const char* Polygon_2_edges = "returns the range of edges.
 
 Returns: Edges";
-constexpr const char* CGAL_Polygon_2_edges_circulator = "Returns a non-mutable circulator that allows to traverse the edges of the polygon.
+constexpr const char* Polygon_2_edges_circulator = "Returns a non-mutable circulator that allows to traverse the edges of the polygon.
 
 Returns: Edge_const_circulator";
-constexpr const char* CGAL_Polygon_2_is_simple = "Returns whether this is a simple polygon.
+constexpr const char* Polygon_2_is_simple = "Returns whether this is a simple polygon.
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_is_convex = "Returns whether this is convex.
+constexpr const char* Polygon_2_is_convex = "Returns whether this is convex.
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_orientation = "Returns the orientation.
+constexpr const char* Polygon_2_orientation = "Returns the orientation.
 
 If the number of vertices p.size() < 3 then COLLINEAR is returned.
 p.is_simple() .
 
 Returns: Orientation";
-constexpr const char* CGAL_Polygon_2_oriented_side = "Returns ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , or ON_ORIENTED_BOUNDARY , depending on where point q is.
+constexpr const char* Polygon_2_oriented_side = "Returns ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , or ON_ORIENTED_BOUNDARY , depending on where point q is.
 
 p.is_simple() .
 
@@ -261,7 +261,7 @@ Parameters
 value : const Point_2 &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Polygon_2_bounded_side = "Returns the symbolic constant ON_BOUNDED_SIDE , ON_BOUNDARY or ON_UNBOUNDED_SIDE , depending on where point q is.
+constexpr const char* Polygon_2_bounded_side = "Returns the symbolic constant ON_BOUNDED_SIDE , ON_BOUNDARY or ON_UNBOUNDED_SIDE , depending on where point q is.
 
 p.is_simple() .
 
@@ -270,141 +270,141 @@ Parameters
 value : const Point_2 &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Polygon_2_bbox = "Returns the smallest bounding box containing this polygon.
+constexpr const char* Polygon_2_bbox = "Returns the smallest bounding box containing this polygon.
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Polygon_2_area = "Returns the signed area of the polygon.
+constexpr const char* Polygon_2_area = "Returns the signed area of the polygon.
 
 This means that the area is positive for counter clockwise polygons and
 negative for clockwise polygons.
 
 Returns: FT";
-constexpr const char* CGAL_Polygon_2_left_vertex = "Returns the leftmost vertex of the polygon with the smallest x -coordinate.
+constexpr const char* Polygon_2_left_vertex = "Returns the leftmost vertex of the polygon with the smallest x -coordinate.
 
 Returns: Vertex_const_iterator";
-constexpr const char* CGAL_Polygon_2_right_vertex = "Returns the rightmost vertex of the polygon with the largest x -coordinate.
+constexpr const char* Polygon_2_right_vertex = "Returns the rightmost vertex of the polygon with the largest x -coordinate.
 
 Returns: Vertex_const_iterator";
-constexpr const char* CGAL_Polygon_2_top_vertex = "Returns the topmost vertex of the polygon with the largest y -coordinate.
+constexpr const char* Polygon_2_top_vertex = "Returns the topmost vertex of the polygon with the largest y -coordinate.
 
 Returns: Vertex_const_iterator";
-constexpr const char* CGAL_Polygon_2_bottom_vertex = "Returns the bottommost vertex of the polygon with the smallest y -coordinate.
+constexpr const char* Polygon_2_bottom_vertex = "Returns the bottommost vertex of the polygon with the smallest y -coordinate.
 
 Returns: Vertex_const_iterator";
-constexpr const char* CGAL_Polygon_2_is_counterclockwise_oriented = "returns orientation() == COUNTERCLOCKWISE
+constexpr const char* Polygon_2_is_counterclockwise_oriented = "returns orientation() == COUNTERCLOCKWISE
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_is_clockwise_oriented = "returns orientation() == CLOCKWISE
+constexpr const char* Polygon_2_is_clockwise_oriented = "returns orientation() == CLOCKWISE
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_is_collinear_oriented = "returns orientation() == COLLINEAR
+constexpr const char* Polygon_2_is_collinear_oriented = "returns orientation() == COLLINEAR
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_has_on_positive_side = "returns oriented_side(q) == ON_POSITIVE_SIDE
+constexpr const char* Polygon_2_has_on_positive_side = "returns oriented_side(q) == ON_POSITIVE_SIDE
 
 Parameters
 ----------
 q : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_has_on_negative_side = "returns oriented_side(q) == ON_NEGATIVE_SIDE
+constexpr const char* Polygon_2_has_on_negative_side = "returns oriented_side(q) == ON_NEGATIVE_SIDE
 
 Parameters
 ----------
 q : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_has_on_boundary = "returns bounded_side(q) == ON_BOUNDARY
+constexpr const char* Polygon_2_has_on_boundary = "returns bounded_side(q) == ON_BOUNDARY
 
 Parameters
 ----------
 q : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_has_on_bounded_side = "returns bounded_side(q) == ON_BOUNDED_SIDE
+constexpr const char* Polygon_2_has_on_bounded_side = "returns bounded_side(q) == ON_BOUNDED_SIDE
 
 Parameters
 ----------
 q : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_has_on_unbounded_side = "returns bounded_side(q) == ON_UNBOUNDED_SIDE
+constexpr const char* Polygon_2_has_on_unbounded_side = "returns bounded_side(q) == ON_UNBOUNDED_SIDE
 
 Parameters
 ----------
 q : const Point_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_vertex = "Returns a (const) reference to the i -th vertex.
+constexpr const char* Polygon_2_vertex = "Returns a (const) reference to the i -th vertex.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Polygon_2_operator = "Returns a (const) reference to the i -th vertex.
+constexpr const char* Polygon_2_operator = "Returns a (const) reference to the i -th vertex.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Polygon_2_vertex_1 = "Returns a reference to the i -th vertex.
+constexpr const char* Polygon_2_vertex_1 = "Returns a reference to the i -th vertex.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: Point_2 &";
-constexpr const char* CGAL_Polygon_2_operator_1 = "Returns a reference to the i -th vertex.
+constexpr const char* Polygon_2_operator_1 = "Returns a reference to the i -th vertex.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: Point_2 &";
-constexpr const char* CGAL_Polygon_2_edge = "Returns the i -th edge.
+constexpr const char* Polygon_2_edge = "Returns the i -th edge.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: Segment_2";
-constexpr const char* CGAL_Polygon_2_size = "Returns the number of vertices of the polygon.
+constexpr const char* Polygon_2_size = "Returns the number of vertices of the polygon.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Polygon_2_is_empty = "Returns size() == 0 .
+constexpr const char* Polygon_2_is_empty = "Returns size() == 0 .
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_container = "Returns a const reference to the sequence of vertices of the polygon.
+constexpr const char* Polygon_2_container = "Returns a const reference to the sequence of vertices of the polygon.
 
 Returns: const Container_ &";
-constexpr const char* CGAL_Polygon_2_container_1 = "Returns a reference to the sequence of vertices of the polygon.
+constexpr const char* Polygon_2_container_1 = "Returns a reference to the sequence of vertices of the polygon.
 
 Returns: Container_ &";
-constexpr const char* CGAL_Polygon_2_begin = "Returns an iterator to the first vertex of the polygon.
+constexpr const char* Polygon_2_begin = "Returns an iterator to the first vertex of the polygon.
 
 Returns: Container_::iterator";
-constexpr const char* CGAL_Polygon_2_end = "Returns an iterator to the element after the last vertex of the polygon.
+constexpr const char* Polygon_2_end = "Returns an iterator to the element after the last vertex of the polygon.
 
 Returns: Container_::iterator";
-constexpr const char* CGAL_Polygon_2_begin_1 = "Returns a const iterator to the first vertex of the polygon.
+constexpr const char* Polygon_2_begin_1 = "Returns a const iterator to the first vertex of the polygon.
 
 Returns: const Container_::const_iterator";
-constexpr const char* CGAL_Polygon_2_end_1 = "Returns a const iterator to the element after the last vertex of the polygon.
+constexpr const char* Polygon_2_end_1 = "Returns a const iterator to the element after the last vertex of the polygon.
 
 Returns: const Container_::const_iterator";
-constexpr const char* CGAL_Polygon_2_resize = "Resizes the container. Calls container() .resize(s) .
+constexpr const char* Polygon_2_resize = "Resizes the container. Calls container() .resize(s) .
 
 Parameters
 ----------
 s : std::size_t";
-constexpr const char* CGAL_Polygon_2_reserve = "Calls container() .reserve(s) if this is available for Container .
+constexpr const char* Polygon_2_reserve = "Calls container() .reserve(s) if this is available for Container .
 
 Parameters
 ----------
 s : std::size_t";
-constexpr const char* CGAL_Polygon_2_operator_2 = "Test for equality: two polygons are equal iff there exists a cyclic permutation of the vertices of p2 such that they are equal to the vertices of p1 .
+constexpr const char* Polygon_2_operator_2 = "Test for equality: two polygons are equal iff there exists a cyclic permutation of the vertices of p2 such that they are equal to the vertices of p1 .
 
 Note that the template argument Container of p1 and p2 may be different.
 
@@ -414,7 +414,7 @@ p1 : const Polygon_2 < Traits_, Container1_P > &
 p2 : const Polygon_2 < Traits_, Container2_P > &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_operator_3 = "Test for inequality.
+constexpr const char* Polygon_2_operator_3 = "Test for inequality.
 
 Parameters
 ----------
@@ -422,7 +422,7 @@ p1 : const Polygon_2 < Traits_, Container1_P > &
 p2 : const Polygon_2 < Traits_, Container2_P > &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_transform = "Returns the image of the polygon p under the transformation t .
+constexpr const char* Polygon_2_transform = "Returns the image of the polygon p under the transformation t .
 
 Parameters
 ----------
@@ -430,7 +430,7 @@ t : const Transformation &
 p : const Polygon_2 < Traits_, Container_ > &
 
 Returns: Polygon_2 < Traits_, Container_ >";
-constexpr const char* CGAL_Polygon_2_operator_4 = "Reads a polygon from stream is and assigns it to p .
+constexpr const char* Polygon_2_operator_4 = "Reads a polygon from stream is and assigns it to p .
 
 The extract operator must be defined for Point_2 .
 
@@ -440,7 +440,7 @@ is : std::istream &
 p : Polygon_2 < Traits_, Container_ > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Polygon_2_operator_5 = "Inserts the polygon p into the stream os .
+constexpr const char* Polygon_2_operator_5 = "Inserts the polygon p into the stream os .
 
 The insert operator must be defined for Point_2 .
 
@@ -456,32 +456,32 @@ Returns: std::ostream &";
 
 
 // CGAL::Polygon_with_holes_2
-constexpr const char* CGAL_Polygon_with_holes_2__class__ = "The class Polygon_with_holes_2 models the concept GeneralPolygonWithHoles_2 .";
+constexpr const char* Polygon_with_holes_2__class__ = "The class Polygon_with_holes_2 models the concept GeneralPolygonWithHoles_2 .";
 
-constexpr const char* CGAL_Polygon_with_holes_2_Polygon_with_holes_2 = "Default constructor.";
-constexpr const char* CGAL_Polygon_with_holes_2_Polygon_with_holes_2_1 = "Constructor from the base class.
+constexpr const char* Polygon_with_holes_2_Polygon_with_holes_2 = "Default constructor.";
+constexpr const char* Polygon_with_holes_2_Polygon_with_holes_2_1 = "Constructor from the base class.
 
 Parameters
 ----------
 base : const Base &";
-constexpr const char* CGAL_Polygon_with_holes_2_Polygon_with_holes_2_2 = "Constructor from a polygon.
+constexpr const char* Polygon_with_holes_2_Polygon_with_holes_2_2 = "Constructor from a polygon.
 
 Parameters
 ----------
 pgn_boundary : const Polygon_2 &";
-constexpr const char* CGAL_Polygon_with_holes_2_Polygon_with_holes_2_3 = "Cconstructor moving a polygon.
+constexpr const char* Polygon_with_holes_2_Polygon_with_holes_2_3 = "Cconstructor moving a polygon.
 
 Parameters
 ----------
 pgn_boundary : Polygon_2 &&";
-constexpr const char* CGAL_Polygon_with_holes_2_Polygon_with_holes_2_4 = "Constructor from a polygon (outer boundary) and hole polygons.
+constexpr const char* Polygon_with_holes_2_Polygon_with_holes_2_4 = "Constructor from a polygon (outer boundary) and hole polygons.
 
 Parameters
 ----------
 pgn_boundary : const Polygon_2 &
 h_begin : HolesInputIterator
 h_end : HolesInputIterator";
-constexpr const char* CGAL_Polygon_with_holes_2_Polygon_with_holes_2_5 = "Cconstructor moving a polygon.
+constexpr const char* Polygon_with_holes_2_Polygon_with_holes_2_5 = "Cconstructor moving a polygon.
 
 In order to move the hole polygons a std::move_iterator may be used.
 
@@ -490,10 +490,10 @@ Parameters
 pgn_boundary : Polygon_2 &&
 h_begin : HolesInputIterator
 h_end : HolesInputIterator";
-constexpr const char* CGAL_Polygon_with_holes_2_bbox = "returns the bounding box of the polygon with holes
+constexpr const char* Polygon_with_holes_2_bbox = "returns the bounding box of the polygon with holes
 
 Returns: Bbox_2";
-constexpr const char* CGAL_Polygon_with_holes_2_operator = "This operator exports a polygon with holes to the output stream os .
+constexpr const char* Polygon_with_holes_2_operator = "This operator exports a polygon with holes to the output stream os .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, CGAL::IO::set_ascii_mode() and
@@ -512,7 +512,7 @@ os : std::ostream &
 p : const Polygon_with_holes_2 < Kernel_, Container_ > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polygon_with_holes_2_operator_1 = "This operator imports a polygon with holes from the input stream is .
+constexpr const char* Polygon_with_holes_2_operator_1 = "This operator imports a polygon with holes from the input stream is .
 
 Both ASCII and binary formats are supported, and the format is automatically
 detected. The format consists of the number of points of the outer boundary
@@ -706,7 +706,7 @@ constexpr const char* PolygonTraits_2_construct_segment_2_object = "returns the 
 
 Returns: Construct_segment_2";
 
-constexpr const char* CGAL_Polygon_2_operator_6 = "Test for equality: two polygons are equal iff there exists a cyclic permutation of the vertices of p2 such that they are equal to the vertices of p1 .
+constexpr const char* Polygon_2_operator_6 = "Test for equality: two polygons are equal iff there exists a cyclic permutation of the vertices of p2 such that they are equal to the vertices of p1 .
 
 Note that the template argument Container of p1 and p2 may be different.
 
@@ -716,7 +716,7 @@ p1 : const Polygon_2 < Traits_, Container1_P > &
 p2 : const Polygon_2 < Traits_, Container2_P > &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_operator_7 = "Test for inequality.
+constexpr const char* Polygon_2_operator_7 = "Test for inequality.
 
 Parameters
 ----------
@@ -724,7 +724,7 @@ p1 : const Polygon_2 < Traits_, Container1_P > &
 p2 : const Polygon_2 < Traits_, Container2_P > &
 
 Returns: bool";
-constexpr const char* CGAL_Polygon_2_transform_1 = "Returns the image of the polygon p under the transformation t .
+constexpr const char* Polygon_2_transform_1 = "Returns the image of the polygon p under the transformation t .
 
 Parameters
 ----------
@@ -732,7 +732,7 @@ t : const Transformation &
 p : const Polygon_2 < Traits_, Container_ > &
 
 Returns: Polygon_2 < Traits_, Container_ >";
-constexpr const char* CGAL_Polygon_2_operator_8 = "Reads a polygon from stream is and assigns it to p .
+constexpr const char* Polygon_2_operator_8 = "Reads a polygon from stream is and assigns it to p .
 
 The extract operator must be defined for Point_2 .
 
@@ -742,7 +742,7 @@ is : std::istream &
 p : Polygon_2 < Traits_, Container_ > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Polygon_2_operator_9 = "Inserts the polygon p into the stream os .
+constexpr const char* Polygon_2_operator_9 = "Inserts the polygon p into the stream os .
 
 The insert operator must be defined for Point_2 .
 
@@ -752,7 +752,7 @@ os : std::ostream &
 p : const Polygon_2 < Traits_, Container_ > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_General_polygon_with_holes_2_operator_2 = "This operator exports a General_polygon_with_holes_2 to the output stream os .
+constexpr const char* General_polygon_with_holes_2_operator_2 = "This operator exports a General_polygon_with_holes_2 to the output stream os .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, CGAL::IO::set_ascii_mode() and
@@ -770,7 +770,7 @@ os : std::ostream &
 p : const General_polygon_with_holes_2 < Polygon_ > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_General_polygon_with_holes_2_operator_3 = "This operator imports a General_polygon_with_holes_2 from the input stream is .
+constexpr const char* General_polygon_with_holes_2_operator_3 = "This operator imports a General_polygon_with_holes_2 from the input stream is .
 
 Both ASCII and binary formats are supported, and the format is automatically
 detected. The format consists of the number of curves of the outer boundary
@@ -784,7 +784,7 @@ is : std::istream &
 p : General_polygon_with_holes_2 < Polygon_ > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Multipolygon_with_holes_2_operator_1 = "inserts a multipolygon with holes to the output stream os .
+constexpr const char* Multipolygon_with_holes_2_operator_1 = "inserts a multipolygon with holes to the output stream os .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, set_ascii_mode() and set_binary_mode() , respectively.
@@ -803,7 +803,7 @@ os : std::ostream &
 mp : const Multipolygon_with_holes_2 < Kernel, Container_ > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polygon_with_holes_2_operator_2 = "This operator exports a polygon with holes to the output stream os .
+constexpr const char* Polygon_with_holes_2_operator_2 = "This operator exports a polygon with holes to the output stream os .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, CGAL::IO::set_ascii_mode() and
@@ -822,7 +822,7 @@ os : std::ostream &
 p : const Polygon_with_holes_2 < Kernel_, Container_ > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Polygon_with_holes_2_operator_3 = "This operator imports a polygon with holes from the input stream is .
+constexpr const char* Polygon_with_holes_2_operator_3 = "This operator imports a polygon with holes from the input stream is .
 
 Both ASCII and binary formats are supported, and the format is automatically
 detected. The format consists of the number of points of the outer boundary

@@ -8,12 +8,12 @@ namespace docstrings {
 namespace Periodic_2_triangulation_2 {
 
 // CGAL::Graphics_scene_options_periodic_2_triangulation_2
-constexpr const char* CGAL_Graphics_scene_options_periodic_2_triangulation_2__class__ = "The class Graphics_scene_options_periodic_2_triangulation_2 defines data and methods used to tune the way that the cells of a Periodic_2_triangulation_2 are considered for drawing or to be added into a graphics scene.";
+constexpr const char* Graphics_scene_options_periodic_2_triangulation_2__class__ = "The class Graphics_scene_options_periodic_2_triangulation_2 defines data and methods used to tune the way that the cells of a Periodic_2_triangulation_2 are considered for drawing or to be added into a graphics scene.";
 
 // CGAL::Periodic_2_Delaunay_triangulation_2
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2__class__ = "The class Periodic_2_Delaunay_triangulation_2 represents a Delaunay triangulation in two-dimensional periodic space.";
+constexpr const char* Periodic_2_Delaunay_triangulation_2__class__ = "The class Periodic_2_Delaunay_triangulation_2 represents a Delaunay triangulation in two-dimensional periodic space.";
 
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_Periodic_2_Delaunay_triangulation_2 = "Creates an empty periodic Delaunay triangulation dt , with domain as original domain and possibly specifying a traits class traits .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_Periodic_2_Delaunay_triangulation_2 = "Creates an empty periodic Delaunay triangulation dt , with domain as original domain and possibly specifying a traits class traits .
 
 domain is a square.
 
@@ -21,12 +21,12 @@ Parameters
 ----------
 domain : const Iso_rectangle &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_Periodic_2_Delaunay_triangulation_2_1 = "Copy constructor.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_Periodic_2_Delaunay_triangulation_2_1 = "Copy constructor.
 
 Parameters
 ----------
 dt1 : const Periodic_2_Delaunay_triangulation_2 &";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_Periodic_2_Delaunay_triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_Periodic_2_Delaunay_triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .
 
 The value_type of first and last are Point s lying inside domain and domain is
 a square.
@@ -37,7 +37,7 @@ first : InputIterator
 last : InputIterator
 domain : const Iso_rectangle &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_insert = "Inserts point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_insert = "Inserts point p in the triangulation and returns the corresponding vertex.
 
 The optional argument start is used as a starting place for the point
 location. p lies in the original domain domain .
@@ -48,7 +48,7 @@ p : const Point &
 start : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_insert_1 = "Inserts point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_insert_1 = "Inserts point p in the triangulation and returns the corresponding vertex.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of
@@ -63,14 +63,14 @@ li : int
 lj : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_insert_2 = "Inserts the points in the iterator range [first, last) .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_insert_2 = "Inserts the points in the iterator range [first, last) .
 
 Returns the number of inserted points. This function uses spatial sorting (cf.
 chapter secspatial_sorting) and therefore is not guaranteed to insert the
@@ -86,12 +86,12 @@ last : InputIterator
 is_large_point_set : bool
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_remove = "Removes the vertex from the triangulation.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_remove = "Removes the vertex from the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_move_if_no_collision = "if there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_move_if_no_collision = "if there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
 
 Otherwise, the triangulation is not modified and the vertex at point p is
 returned. p lies in the original domain domain .
@@ -102,7 +102,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_move_point = "Moves the point stored in v to p , while preserving the Delaunay property.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_move_point = "Moves the point stored in v to p , while preserving the Delaunay property.
 
 This performs an action semantically equivalent to remove(v) followed by
 insert(p) , but is supposedly faster to performing these two operations
@@ -115,7 +115,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_nearest_vertex = "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_nearest_vertex = "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.
 
 The optional argument f is a hint specifying where to start the search. It
 always returns a vertex corresponding to a point inside domain even if
@@ -128,7 +128,7 @@ p : Point
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_side_of_oriented_circle = "Returns on which side of the circumcircle of face f lies the point p .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_side_of_oriented_circle = "Returns on which side of the circumcircle of face f lies the point p .
 
 The circle is assumed to be counterclockwise oriented, so its positive side
 correspond to its bounded side. This predicate is available only if the
@@ -140,7 +140,7 @@ f : Face_handle
 p : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_get_conflicts_and_boundary = "OutputItFaces is an output iterator with Face_handle as value type.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_get_conflicts_and_boundary = "OutputItFaces is an output iterator with Face_handle as value type.
 
 OutputItBoundaryEdges stands for an output iterator with Edge as value type.
 This members function outputs in the container pointed to by fit the faces
@@ -160,7 +160,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: std::pair< OutputItFaces, OutputItBoundaryEdges >";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_get_conflicts = "same as above except that only the faces in conflict with p are output.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_get_conflicts = "same as above except that only the faces in conflict with p are output.
 
 The function returns the resulting output iterator. start is in conflict with
 p and p lies in the original domain domain .
@@ -172,7 +172,7 @@ fit : OutputItFaces
 start : Face_handle
 
 Returns: OutputItFaces";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_get_boundary_of_conflicts = "OutputItBoundaryEdges stands for an output iterator with Edge as value type.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_get_boundary_of_conflicts = "OutputItBoundaryEdges stands for an output iterator with Edge as value type.
 
 This function outputs in the container pointed to by eit , the boundary of the
 zone in conflict with p . The boundary edges of the conflict zone are output
@@ -188,7 +188,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: OutputItBoundaryEdges";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_circumcenter = "Compute the circumcenter of the face pointed to by f.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_circumcenter = "Compute the circumcenter of the face pointed to by f.
 
 This function is available only if the corresponding function is provided in
 the geometric traits.
@@ -198,42 +198,42 @@ Parameters
 f : Face_handle
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_dual = "Returns the center of the circle circumscribed to face f .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_dual = "Returns the center of the circle circumscribed to face f .
 
 Parameters
 ----------
 f : const Face_handle &
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_dual_1 = "returns a segment whose endpoints are the duals of both incident faces.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_dual_1 = "returns a segment whose endpoints are the duals of both incident faces.
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_dual_2 = "Idem.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_dual_2 = "Idem.
 
 Parameters
 ----------
 ec : const Edge_circulator &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_dual_3 = "Idem.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_dual_3 = "Idem.
 
 Parameters
 ----------
 ei : const Edge_iterator &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_draw_dual = "output the dual Voronoi diagram to stream ps .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_draw_dual = "output the dual Voronoi diagram to stream ps .
 
 Parameters
 ----------
 ps : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_side_of_oriented_circle_1 = "Returns the side of p with respect to the circle circumscribing the triangle associated with f .
+constexpr const char* Periodic_2_Delaunay_triangulation_2_side_of_oriented_circle_1 = "Returns the side of p with respect to the circle circumscribing the triangle associated with f .
 
 Periodic copies are checked if necessary.
 
@@ -244,7 +244,7 @@ p : const Point &
 perturb : bool
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_is_valid = "This is an advanced function.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_is_valid = "This is an advanced function.
 
 Advanced Checks the combinatorial validity of the triangulation and the
 validity of its geometric embedding (see Section Representation ). Also checks
@@ -256,7 +256,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_2_is_valid_1 = "This is an advanced function.
+constexpr const char* Periodic_2_Delaunay_triangulation_2_is_valid_1 = "This is an advanced function.
 
 Advanced Checks the combinatorial and geometric validity of the face (see
 Section Representation ). Also checks that the circumscribing circle of faces
@@ -271,104 +271,104 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Periodic_2_Delaunay_triangulation_traits_2
-constexpr const char* CGAL_Periodic_2_Delaunay_triangulation_traits_2__class__ = "The class Periodic_2_Delaunay_triangulation_traits_2 is designed as a default traits class for the class Periodic_2_Delaunay_triangulation_2 <Traits, Tds> .";
+constexpr const char* Periodic_2_Delaunay_triangulation_traits_2__class__ = "The class Periodic_2_Delaunay_triangulation_traits_2 is designed as a default traits class for the class Periodic_2_Delaunay_triangulation_2 <Traits, Tds> .";
 
 // CGAL::Periodic_2_offset_2
-constexpr const char* CGAL_Periodic_2_offset_2__class__ = "The class Periodic_2_offset_2 is a model of the concept Periodic_2Offset_2 .";
+constexpr const char* Periodic_2_offset_2__class__ = "The class Periodic_2_offset_2 is a model of the concept Periodic_2Offset_2 .";
 
 // CGAL::Periodic_2_triangulation_2
-constexpr const char* CGAL_Periodic_2_triangulation_2__class__ = "The class Periodic_2_triangulation_2 represents a 2-dimensional triangulation of a point set in $ \\mathbb T_c^2$ .";
+constexpr const char* Periodic_2_triangulation_2__class__ = "The class Periodic_2_triangulation_2 represents a 2-dimensional triangulation of a point set in $ \\mathbb T_c^2$ .";
 
-constexpr const char* CGAL_Periodic_2_triangulation_2_Geom_traits = "the traits class.
+constexpr const char* Periodic_2_triangulation_2_Geom_traits = "the traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Triangulation_data_structure = "the triangulation data structure type.
+constexpr const char* Periodic_2_triangulation_2_Triangulation_data_structure = "the triangulation data structure type.
 
 Returns: Tds";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Offset = "the offset type.
+constexpr const char* Periodic_2_triangulation_2_Offset = "the offset type.
 
 Returns: Geom_traits::Periodic_2_offset_2";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Iso_rectangle = "the iso rectangle type.
+constexpr const char* Periodic_2_triangulation_2_Iso_rectangle = "the iso rectangle type.
 
 Returns: Geom_traits::Iso_rectangle_2";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Covering_sheets = "integer tuple to store the number of sheets in each direction of space.
+constexpr const char* Periodic_2_triangulation_2_Covering_sheets = "integer tuple to store the number of sheets in each direction of space.
 
 Returns: array< int, 2 >";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Point = "the point type.
+constexpr const char* Periodic_2_triangulation_2_Point = "the point type.
 
 Returns: Geom_traits::Point_2";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Segment = "the segment type.
+constexpr const char* Periodic_2_triangulation_2_Segment = "the segment type.
 
 Returns: Geom_traits::Segment_2";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Triangle = "the triangle type.
+constexpr const char* Periodic_2_triangulation_2_Triangle = "the triangle type.
 
 Returns: Geom_traits::Triangle_2";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Periodic_point = "represents a point-offset pair.
+constexpr const char* Periodic_2_triangulation_2_Periodic_point = "represents a point-offset pair.
 
 The point in the pair lies in the original domain.
 
 Returns: std::pair< Point , Offset >";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Periodic_segment = "a pair of periodic points representing a segment in the periodic domain.
+constexpr const char* Periodic_2_triangulation_2_Periodic_segment = "a pair of periodic points representing a segment in the periodic domain.
 
 Returns: array< Periodic_point , 2 >";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Periodic_triangle = "a triple of periodic points representing a triangle in the periodic domain.
+constexpr const char* Periodic_2_triangulation_2_Periodic_triangle = "a triple of periodic points representing a triangle in the periodic domain.
 
 Returns: array< Periodic_point , 3 >";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Vertex = "the vertex type.
+constexpr const char* Periodic_2_triangulation_2_Vertex = "the vertex type.
 
 Returns: Tds::Vertex";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Face = "the face type.
+constexpr const char* Periodic_2_triangulation_2_Face = "the face type.
 
 Returns: Tds::Face";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Edge = "the edge type.
+constexpr const char* Periodic_2_triangulation_2_Edge = "the edge type.
 
 Returns: Tds::Edge";
-constexpr const char* CGAL_Periodic_2_triangulation_2_size_type = "size type (an unsigned integral type).
+constexpr const char* Periodic_2_triangulation_2_size_type = "size type (an unsigned integral type).
 
 Returns: Tds::size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_difference_type = "difference type (a signed integral type).
+constexpr const char* Periodic_2_triangulation_2_difference_type = "difference type (a signed integral type).
 
 Returns: Tds::difference_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Vertex_handle = "handle to a vertex.
+constexpr const char* Periodic_2_triangulation_2_Vertex_handle = "handle to a vertex.
 
 Returns: Tds::Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Face_handle = "handle to a face.
+constexpr const char* Periodic_2_triangulation_2_Face_handle = "handle to a face.
 
 Returns: Tds::Face_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Face_iterator = "iterator over all faces.
+constexpr const char* Periodic_2_triangulation_2_Face_iterator = "iterator over all faces.
 
 Returns: Tds::Face_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Edge_iterator = "iterator over all edges.
+constexpr const char* Periodic_2_triangulation_2_Edge_iterator = "iterator over all edges.
 
 Returns: Tds::Edge_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Vertex_iterator = "iterator over all vertices.
+constexpr const char* Periodic_2_triangulation_2_Vertex_iterator = "iterator over all vertices.
 
 Returns: Tds::Vertex_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Unique_vertex_iterator = "iterator over the vertices whose corresponding points lie in the original domain, i.e.
+constexpr const char* Periodic_2_triangulation_2_Unique_vertex_iterator = "iterator over the vertices whose corresponding points lie in the original domain, i.e.
 
 for each set of periodic copies the Unique_vertex_iterator iterates over
 exactly one representative.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Face_circulator = "circulator over all faces incident to a given vertex.
+constexpr const char* Periodic_2_triangulation_2_Face_circulator = "circulator over all faces incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Edge_circulator = "circulator over all edges incident to a given vertex.
+constexpr const char* Periodic_2_triangulation_2_Edge_circulator = "circulator over all edges incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Vertex_circulator = "circulator over all vertices adjacent to a given vertex.
+constexpr const char* Periodic_2_triangulation_2_Vertex_circulator = "circulator over all vertices adjacent to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Periodic_triangle_iterator = "iterator over the triangles corresponding to faces of the triangulation.
+constexpr const char* Periodic_2_triangulation_2_Periodic_triangle_iterator = "iterator over the triangles corresponding to faces of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Periodic_segment_iterator = "iterator over the segments corresponding to edges of the triangulation.
+constexpr const char* Periodic_2_triangulation_2_Periodic_segment_iterator = "iterator over the segments corresponding to edges of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Periodic_point_iterator = "iterator over the points corresponding to vertices of the triangulation.
+constexpr const char* Periodic_2_triangulation_2_Periodic_point_iterator = "iterator over the points corresponding to vertices of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Triangulation_2 = "Introduces an empty triangulation t with domain as original domain.
+constexpr const char* Periodic_2_triangulation_2_Triangulation_2 = "Introduces an empty triangulation t with domain as original domain.
 
 domain is a square.
 
@@ -376,7 +376,7 @@ Parameters
 ----------
 domain : const Iso_rectangle &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Triangulation_2_1 = "Copy constructor.
+constexpr const char* Periodic_2_triangulation_2_Triangulation_2_1 = "Copy constructor.
 
 All the vertices and faces are duplicated. After the copy, this and tr refer
 to different triangulations: if tr is modified, this is not.
@@ -384,7 +384,7 @@ to different triangulations: if tr is modified, this is not.
 Parameters
 ----------
 tr : const Triangulation_2 &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_operator = "Assignment.
+constexpr const char* Periodic_2_triangulation_2_operator = "Assignment.
 
 All the vertices and faces are duplicated. After the assignment, this and tr
 refer to different triangulations: if tr is modified, this is not.
@@ -394,7 +394,7 @@ Parameters
 tr : const Triangulation_2 < Traits, Tds > &
 
 Returns: Triangulation_2";
-constexpr const char* CGAL_Periodic_2_triangulation_2_swap = "The triangulations tr and this are swapped.
+constexpr const char* Periodic_2_triangulation_2_swap = "The triangulations tr and this are swapped.
 
 t.swap(tr) should be preferred to this = tr or to t(tr) if tr is deleted after
 that.
@@ -402,63 +402,63 @@ that.
 Parameters
 ----------
 tr : Triangulation_2 &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_clear = "Deletes all faces and vertices resulting in an empty triangulation.";
-constexpr const char* CGAL_Periodic_2_triangulation_2_geom_traits = "Returns a const reference to the triangulation traits object.
+constexpr const char* Periodic_2_triangulation_2_clear = "Deletes all faces and vertices resulting in an empty triangulation.";
+constexpr const char* Periodic_2_triangulation_2_geom_traits = "Returns a const reference to the triangulation traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_tds = "Returns a const reference to the triangulation data structure.
+constexpr const char* Periodic_2_triangulation_2_tds = "Returns a const reference to the triangulation data structure.
 
 Returns: const Triangulation_data_structure_2 &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_domain = "Returns the original domain.
+constexpr const char* Periodic_2_triangulation_2_domain = "Returns the original domain.
 
 Returns: Iso_rectangle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_sheets = "Returns the number of sheets of the covering space the triangulation is currently computed in.
+constexpr const char* Periodic_2_triangulation_2_number_of_sheets = "Returns the number of sheets of the covering space the triangulation is currently computed in.
 
 Returns: Covering_sheets";
-constexpr const char* CGAL_Periodic_2_triangulation_2_dimension = "Returns the dimension of the convex hull.
+constexpr const char* Periodic_2_triangulation_2_dimension = "Returns the dimension of the convex hull.
 
 The dimension is zero if the triangulation is empty and two otherwise.
 
 Returns: int";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_vertices = "Returns the number of vertices.
+constexpr const char* Periodic_2_triangulation_2_number_of_vertices = "Returns the number of vertices.
 
 Counts all vertices that are representatives of the same point in $ \\mathbb
 T_c^2$ as one vertex.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_faces = "Returns the number of faces.
+constexpr const char* Periodic_2_triangulation_2_number_of_faces = "Returns the number of faces.
 
 Counts all faces that are representatives of the same triangle in $ \\mathbb
 T_c^2$ as one face.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_stored_vertices = "Returns the number of vertices in the data structure.
+constexpr const char* Periodic_2_triangulation_2_number_of_stored_vertices = "Returns the number of vertices in the data structure.
 
 This is the same as the number of sheets times number_of_vertices() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_stored_faces = "Returns the number of faces in the data structure.
+constexpr const char* Periodic_2_triangulation_2_number_of_stored_faces = "Returns the number of faces in the data structure.
 
 This is the same as the number of sheets times number_of_faces() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_tds_1 = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_tds_1 = "This is an advanced function.
 
 Advanced Returns a reference to the triangulation data structure.
 
 Returns: Triangulation_data_structure_2 &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_edges = "Returns the number of edges.
+constexpr const char* Periodic_2_triangulation_2_number_of_edges = "Returns the number of edges.
 
 Counts all edges that are representatives of the same segment in $ \\mathbb
 T_c^2$ as one edge.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_number_of_stored_edges = "Returns the number of edges in the data structure.
+constexpr const char* Periodic_2_triangulation_2_number_of_stored_edges = "Returns the number of edges in the data structure.
 
 This is the same as the number of sheets times number_of_edges() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_extensible_triangulation_in_1_sheet_h1 = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_is_extensible_triangulation_in_1_sheet_h1 = "This is an advanced function.
 
 Advanced The current triangulation remains a triangulation in the 1-sheeted
 covering space even after adding points if this method returns true . This
@@ -468,7 +468,7 @@ test runs in constant-time when not computing in the 1-sheeted covering space.
 criterion [1] .)
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_extensible_triangulation_in_1_sheet_h2 = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_is_extensible_triangulation_in_1_sheet_h2 = "This is an advanced function.
 
 Advanced The same as is_extensible_triangulation_in_1_sheet_h1() but with a
 more precise heuristic, i.e. it might answer true in cases in which
@@ -478,21 +478,21 @@ test uses the diameter of the largest empty circle in the input point set as a
 criterion [1] .)
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_triangulation_in_1_sheet = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_is_triangulation_in_1_sheet = "This is an advanced function.
 
 Advanced Returns true if the current triangulation would still be a
 triangulation in the 1-sheeted covering space, returns false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_convert_to_1_sheeted_covering = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_convert_to_1_sheeted_covering = "This is an advanced function.
 
 Advanced Converts the current triangulation into the same periodic
 triangulation in the 1-sheeted covering space. is_triangulation_in_1_sheet()";
-constexpr const char* CGAL_Periodic_2_triangulation_2_convert_to_9_sheeted_covering = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_convert_to_9_sheeted_covering = "This is an advanced function.
 
 Advanced Converts the current triangulation into the same periodic
 triangulation in the 9-sheeted covering space.";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_point = "Returns the periodic point given by vertex v .
+constexpr const char* Periodic_2_triangulation_2_periodic_point = "Returns the periodic point given by vertex v .
 
 If this is represented in the 1-sheeted covering space, the offset is always
 zero. Otherwise v can correspond to a periodic copy outside the domain of an
@@ -503,7 +503,7 @@ Parameters
 v : const Vertex_handle
 
 Returns: Periodic_point";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_point_1 = "If this is represented in the 1-sheeted covering space, this function returns the periodic point given by the $ i$ -th vertex of face f , that is the point in the original domain and the offset of the vertex in f .
+constexpr const char* Periodic_2_triangulation_2_periodic_point_1 = "If this is represented in the 1-sheeted covering space, this function returns the periodic point given by the $ i$ -th vertex of face f , that is the point in the original domain and the offset of the vertex in f .
 
 If this is represented in the 9-sheeted covering space, this offset is
 possibly added to another offset determining the periodic copy. $ i
@@ -515,7 +515,7 @@ f : const Face_handle
 i : int
 
 Returns: Periodic_point";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_segment = "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (f,i) .
+constexpr const char* Periodic_2_triangulation_2_periodic_segment = "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (f,i) .
 
 $ i \\in\\{0,1,2\\}$
 
@@ -525,42 +525,42 @@ f : const Face_handle
 i : int
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_segment_1 = "Same as the previous method for edge e .
+constexpr const char* Periodic_2_triangulation_2_periodic_segment_1 = "Same as the previous method for edge e .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_triangle = "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet f .
+constexpr const char* Periodic_2_triangulation_2_periodic_triangle = "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet f .
 
 Parameters
 ----------
 f : const Face_handle
 
 Returns: Periodic_triangle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_point = "Converts the Periodic_point pp (point-offset pair) to the corresponding Point in $ \\mathbb R^2$ .
+constexpr const char* Periodic_2_triangulation_2_point = "Converts the Periodic_point pp (point-offset pair) to the corresponding Point in $ \\mathbb R^2$ .
 
 Parameters
 ----------
 pp : const Periodic_point &
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_2_triangulation_2_segment = "Converts the Periodic_segment s to a Segment .
+constexpr const char* Periodic_2_triangulation_2_segment = "Converts the Periodic_segment s to a Segment .
 
 Parameters
 ----------
 s : const Periodic_segment &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_triangle = "Converts the Periodic_triangle this to a Triangle .
+constexpr const char* Periodic_2_triangulation_2_triangle = "Converts the Periodic_triangle this to a Triangle .
 
 Parameters
 ----------
 t : const Periodic_triangle &
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_point_1 = "Equivalent to the call t.point(t.periodic_point(fh,i)); .
+constexpr const char* Periodic_2_triangulation_2_point_1 = "Equivalent to the call t.point(t.periodic_point(fh,i)); .
 
 Parameters
 ----------
@@ -568,14 +568,14 @@ fh : Face_handle
 i : int
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_2_triangulation_2_point_2 = "Equivalent to the call t.point(t.periodic_point(v)); .
+constexpr const char* Periodic_2_triangulation_2_point_2 = "Equivalent to the call t.point(t.periodic_point(v)); .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_2_triangulation_2_segment_1 = "Equivalent to the call t.segment(t.periodic_segment(f,i)); .
+constexpr const char* Periodic_2_triangulation_2_segment_1 = "Equivalent to the call t.segment(t.periodic_segment(f,i)); .
 
 Parameters
 ----------
@@ -583,35 +583,35 @@ f : Face_handle
 i : int
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_segment_2 = "Equivalent to the call t.segment(t.periodic_segment(e)); .
+constexpr const char* Periodic_2_triangulation_2_segment_2 = "Equivalent to the call t.segment(t.periodic_segment(e)); .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_segment_3 = "Equivalent to the call t.segment(t.periodic_segment(ec->first, ec->second)); .
+constexpr const char* Periodic_2_triangulation_2_segment_3 = "Equivalent to the call t.segment(t.periodic_segment(ec->first, ec->second)); .
 
 Parameters
 ----------
 ec : const Edge_circulator &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_segment_4 = "Equivalent to the call t.segment(t.periodic_segment(ei->first, ei->second)); .
+constexpr const char* Periodic_2_triangulation_2_segment_4 = "Equivalent to the call t.segment(t.periodic_segment(ei->first, ei->second)); .
 
 Parameters
 ----------
 ei : const Edge_iterator &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_2_triangulation_2_triangle_1 = "Equivalent to the call t.triangle(t.periodic_triangle(f)); .
+constexpr const char* Periodic_2_triangulation_2_triangle_1 = "Equivalent to the call t.triangle(t.periodic_triangle(f)); .
 
 Parameters
 ----------
 f : Face_handle
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_edge = "true if there is an edge having va and vb as vertices.
+constexpr const char* Periodic_2_triangulation_2_is_edge = "true if there is an edge having va and vb as vertices.
 
 Parameters
 ----------
@@ -619,7 +619,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_edge_1 = "as above.
+constexpr const char* Periodic_2_triangulation_2_is_edge_1 = "as above.
 
 In addition, if true is returned, the edge with vertices va and vb is the edge
 e=(fr,i) where fr is a handle to the face incident to e and on the right side
@@ -633,7 +633,7 @@ fr : Face_handle &
 i : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_face = "true if there is a face having v1 , v2 and v3 as vertices.
+constexpr const char* Periodic_2_triangulation_2_is_face = "true if there is a face having v1 , v2 and v3 as vertices.
 
 Parameters
 ----------
@@ -642,7 +642,7 @@ v2 : Vertex_handle
 v3 : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_face_1 = "as above.
+constexpr const char* Periodic_2_triangulation_2_is_face_1 = "as above.
 
 In addition, if true is returned, fr is a handle to the face with v1 , v2 and
 v3 as vertices.
@@ -655,7 +655,7 @@ v3 : Vertex_handle
 fr : Face_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_locate = "If the triangulation is not empty, a face that contains the query in its interior or on its boundary is returned.
+constexpr const char* Periodic_2_triangulation_2_locate = "If the triangulation is not empty, a face that contains the query in its interior or on its boundary is returned.
 
 If the triangulation is empty, the default constructed Face_handle is
 returned.
@@ -666,7 +666,7 @@ query : const Point &
 f : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_locate_1 = "Same as above.
+constexpr const char* Periodic_2_triangulation_2_locate_1 = "Same as above.
 
 Additionally, the parameters lt and li describe where the query point is
 located. The variable lt is set to the locate type of the query. If lt==
@@ -683,7 +683,7 @@ li : int &
 h : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_oriented_side = "Returns on which side of the oriented boundary of f the point p lies.
+constexpr const char* Periodic_2_triangulation_2_oriented_side = "Returns on which side of the oriented boundary of f the point p lies.
 
 Parameters
 ----------
@@ -691,25 +691,25 @@ f : Face_handle
 p : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Periodic_2_triangulation_2_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Periodic_2_triangulation_2_vertices_begin = "Starts at an arbitrary vertex.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_vertices_end = "Past-the-end iterator.
+constexpr const char* Periodic_2_triangulation_2_vertices_end = "Past-the-end iterator.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Periodic_2_triangulation_2_edges_begin = "Starts at an arbitrary edge.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_edges_end = "Past-the-end iterator.
+constexpr const char* Periodic_2_triangulation_2_edges_end = "Past-the-end iterator.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_faces_begin = "Starts at an arbitrary face.
+constexpr const char* Periodic_2_triangulation_2_faces_begin = "Starts at an arbitrary face.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_faces_end = "Past-the-end iterator.
+constexpr const char* Periodic_2_triangulation_2_faces_end = "Past-the-end iterator.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_points_begin = "Iterates over the points of the triangulation.
+constexpr const char* Periodic_2_triangulation_2_periodic_points_begin = "Iterates over the points of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_2_triangulation_2::Iterator_type .
@@ -719,7 +719,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_point_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_points_end = "Past-the-end iterator.
+constexpr const char* Periodic_2_triangulation_2_periodic_points_end = "Past-the-end iterator.
 
 Note that to match another Periodic_point_iterator both must have the same
 Iterator_type it .
@@ -729,7 +729,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_point_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_segments_begin = "Iterates over the segments of the triangulation.
+constexpr const char* Periodic_2_triangulation_2_periodic_segments_begin = "Iterates over the segments of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_2_triangulation_2::Iterator_type .
@@ -739,7 +739,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_segment_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_segments_end = "Past-the-end iterator.
+constexpr const char* Periodic_2_triangulation_2_periodic_segments_end = "Past-the-end iterator.
 
 Note that to match another Periodic_segment_iterator both must have the same
 Iterator_type it .
@@ -749,7 +749,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_segment_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_triangles_begin = "Iterates over the triangles of the triangulation.
+constexpr const char* Periodic_2_triangulation_2_periodic_triangles_begin = "Iterates over the triangles of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_2_triangulation_2::Iterator_type .
@@ -759,7 +759,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_triangle_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_periodic_triangles_end = "Past-the-end iterator.
+constexpr const char* Periodic_2_triangulation_2_periodic_triangles_end = "Past-the-end iterator.
 
 Note that to match another Periodic_triangle_iterator both must have the same
 Iterator_type it .
@@ -769,14 +769,14 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_triangle_iterator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_incident_faces = "Starts at an arbitrary face incident to v .
+constexpr const char* Periodic_2_triangulation_2_incident_faces = "Starts at an arbitrary face incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_incident_faces_1 = "Starts at face f .
+constexpr const char* Periodic_2_triangulation_2_incident_faces_1 = "Starts at face f .
 
 Face f is incident to vertex v .
 
@@ -786,14 +786,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_incident_edges = "Starts at an arbitrary edge incident to v .
+constexpr const char* Periodic_2_triangulation_2_incident_edges = "Starts at an arbitrary edge incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
+constexpr const char* Periodic_2_triangulation_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
 
 Face f is incident to vertex v .
 
@@ -803,14 +803,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_adjacent_vertices = "Starts at an arbitrary vertex adjacent to v .
+constexpr const char* Periodic_2_triangulation_2_adjacent_vertices = "Starts at an arbitrary vertex adjacent to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_adjacent_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
+constexpr const char* Periodic_2_triangulation_2_adjacent_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
 
 Face f is incident to vertex v .
 
@@ -820,7 +820,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Periodic_2_triangulation_2_mirror_vertex = "returns the vertex of the $ i^{th}$ neighbor of f that is opposite to f .
+constexpr const char* Periodic_2_triangulation_2_mirror_vertex = "returns the vertex of the $ i^{th}$ neighbor of f that is opposite to f .
 
 $ 0 \\leq i \\leq 2$ .
 
@@ -830,7 +830,7 @@ f : Face_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_mirror_index = "returns the index of f in its $ i^{th}$ neighbor.
+constexpr const char* Periodic_2_triangulation_2_mirror_index = "returns the index of f in its $ i^{th}$ neighbor.
 
 $0 \\leq i \\leq 2$ .
 
@@ -840,7 +840,7 @@ f : Face_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Periodic_2_triangulation_2_insert_first = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_insert_first = "This is an advanced function.
 
 Advanced Inserts the first vertex.
 
@@ -849,7 +849,7 @@ Parameters
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_insert_in_face = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_insert_in_face = "This is an advanced function.
 
 Advanced Inserts vertex v in face f . Face f is modified, two new faces are
 created. If the triangulation contains periodic copies, a point is inserted in
@@ -861,7 +861,7 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_remove_degree_3 = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_remove_degree_3 = "This is an advanced function.
 
 Advanced Removes a vertex of degree three. Two of the incident faces are
 destroyed, the third one is modified. Vertex v is a vertex with degree three.
@@ -869,14 +869,14 @@ destroyed, the third one is modified. Vertex v is a vertex with degree three.
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_remove_first = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_remove_first = "This is an advanced function.
 
 Advanced Removes the unique vertex in the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_star_hole = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_star_hole = "This is an advanced function.
 
 Advanced creates a new vertex v and use it to star the hole whose boundary is
 described by the sequence of edges [edge_begin, edge_end] . Returns a handle
@@ -889,7 +889,7 @@ edge_begin : EdgeIt
 edge_end : EdgeIt
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_star_hole_1 = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_star_hole_1 = "This is an advanced function.
 
 Advanced same as above, except that the algorithm first recycles faces in the
 sequence [face_begin, face_end] and create new ones only when the sequence is
@@ -904,7 +904,7 @@ face_begin : FaceIt
 face_end : FaceIt
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_set_domain = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_set_domain = "This is an advanced function.
 
 Advanced Changes the domain. Note that this function calls clear() , i.e., it
 erases the existing triangulation.
@@ -912,7 +912,7 @@ erases the existing triangulation.
 Parameters
 ----------
 dom : const Iso_rectangle";
-constexpr const char* CGAL_Periodic_2_triangulation_2_ccw = "Returns $ i+1$ modulo 3.
+constexpr const char* Periodic_2_triangulation_2_ccw = "Returns $ i+1$ modulo 3.
 
 $0 \\leq i \\leq 2$ .
 
@@ -921,7 +921,7 @@ Parameters
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Periodic_2_triangulation_2_cw = "Returns $ i+2$ modulo 3.
+constexpr const char* Periodic_2_triangulation_2_cw = "Returns $ i+2$ modulo 3.
 
 $0 \\leq i \\leq 2$ .
 
@@ -930,14 +930,14 @@ Parameters
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Periodic_2_triangulation_2_degree = "Returns the degree of the vertex v .
+constexpr const char* Periodic_2_triangulation_2_degree = "Returns the degree of the vertex v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: size_t";
-constexpr const char* CGAL_Periodic_2_triangulation_2_is_valid = "This is an advanced function.
+constexpr const char* Periodic_2_triangulation_2_is_valid = "This is an advanced function.
 
 Advanced Checks the combinatorial validity of the triangulation and also the
 validity of its geometric embedding. This method is mainly a debugging help
@@ -949,11 +949,11 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Iterator_type = "The enum Iterator_type is defined by Periodic_2_triangulation_2 to specify the behavior of geometric iterators.";
-constexpr const char* CGAL_Periodic_2_triangulation_2_Locate_type = "The enum Locate_type is defined by Periodic_2_triangulation_2 to specify which case occurs when locating a point in the triangulation.
+constexpr const char* Periodic_2_triangulation_2_Iterator_type = "The enum Iterator_type is defined by Periodic_2_triangulation_2 to specify the behavior of geometric iterators.";
+constexpr const char* Periodic_2_triangulation_2_Locate_type = "The enum Locate_type is defined by Periodic_2_triangulation_2 to specify which case occurs when locating a point in the triangulation.
 
 If the triangulation does not contain any points EMPTY is returned.";
-constexpr const char* CGAL_Periodic_2_triangulation_2_operator_1 = "Writes the triangulation t into the stream os .
+constexpr const char* Periodic_2_triangulation_2_operator_1 = "Writes the triangulation t into the stream os .
 
 The output operator must be defined for Point .
 
@@ -963,7 +963,7 @@ os : ostream &
 t : const Periodic_2_triangulation_2 < Traits, Tds > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_operator_2 = "Reads a triangulation from stream is and assigns it to t .
+constexpr const char* Periodic_2_triangulation_2_operator_2 = "Reads a triangulation from stream is and assigns it to t .
 
 The input operator must be defined for Point .
 
@@ -975,16 +975,16 @@ t : Triangulation_2 < Traits, Tds > &
 Returns: istream &";
 
 // CGAL::Periodic_2_triangulation_face_base_2
-constexpr const char* CGAL_Periodic_2_triangulation_face_base_2__class__ = "The class Periodic_2_triangulation_face_base_2 is a model of the concept Periodic_2TriangulationFaceBase_2 to be used by Triangulation_data_structure_2 to represent faces of a periodic triangulation.";
+constexpr const char* Periodic_2_triangulation_face_base_2__class__ = "The class Periodic_2_triangulation_face_base_2 is a model of the concept Periodic_2TriangulationFaceBase_2 to be used by Triangulation_data_structure_2 to represent faces of a periodic triangulation.";
 
 // CGAL::Periodic_2_triangulation_hierarchy_2
-constexpr const char* CGAL_Periodic_2_triangulation_hierarchy_2__class__ = "The class Periodic_2_triangulation_hierarchy_2 implements a triangulation augmented with a data structure which allows fast point location queries.";
+constexpr const char* Periodic_2_triangulation_hierarchy_2__class__ = "The class Periodic_2_triangulation_hierarchy_2 implements a triangulation augmented with a data structure which allows fast point location queries.";
 
 // CGAL::Periodic_2_triangulation_traits_2
-constexpr const char* CGAL_Periodic_2_triangulation_traits_2__class__ = "The class Periodic_2_triangulation_traits_2 is designed as a default traits class for the class CGAL::Periodic_2_triangulation_2 < Periodic_2TriangulationTraits_2 ,TriangulationDataStructure_2> .";
+constexpr const char* Periodic_2_triangulation_traits_2__class__ = "The class Periodic_2_triangulation_traits_2 is designed as a default traits class for the class CGAL::Periodic_2_triangulation_2 < Periodic_2TriangulationTraits_2 ,TriangulationDataStructure_2> .";
 
 // CGAL::Periodic_2_triangulation_vertex_base_2
-constexpr const char* CGAL_Periodic_2_triangulation_vertex_base_2__class__ = "The class Periodic_2_triangulation_vertex_base_2 is a model of the concept Periodic_2TriangulationVertexBase_2 to be used by Triangulation_data_structure_2 to represent vertices of a periodic triangulation.";
+constexpr const char* Periodic_2_triangulation_vertex_base_2__class__ = "The class Periodic_2_triangulation_vertex_base_2 is a model of the concept Periodic_2TriangulationVertexBase_2 to be used by Triangulation_data_structure_2 to represent vertices of a periodic triangulation.";
 
 // GraphicsSceneOptionsPeriodic2Triangulation2
 constexpr const char* GraphicsSceneOptionsPeriodic2Triangulation2__class__ = "The concept GraphicsSceneOptionsPeriodic2Triangulation2 defines data and methods used to tune the way that the cells of a Periodic_2_triangulation_2 are considered for drawing or to be added into a graphics scene.";
@@ -1322,7 +1322,7 @@ Parameters
 o : Periodic_2_offset_2";
 constexpr const char* Periodic_2TriangulationVertexBase_2_clear_offset = "Sets the offset flag to false and clears the offset.";
 
-constexpr const char* CGAL_Periodic_2_triangulation_2_operator_3 = "Writes the triangulation t into the stream os .
+constexpr const char* Periodic_2_triangulation_2_operator_3 = "Writes the triangulation t into the stream os .
 
 The output operator must be defined for Point .
 
@@ -1332,7 +1332,7 @@ os : ostream &
 t : const Periodic_2_triangulation_2 < Traits, Tds > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Periodic_2_triangulation_2_operator_4 = "Reads a triangulation from stream is and assigns it to t .
+constexpr const char* Periodic_2_triangulation_2_operator_4 = "Reads a triangulation from stream is and assigns it to t .
 
 The input operator must be defined for Point .
 

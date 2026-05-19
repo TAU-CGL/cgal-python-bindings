@@ -8,51 +8,51 @@ namespace docstrings {
 namespace CGAL_ipelets {
 
 // CGAL::Ipelet_base
-constexpr const char* CGAL_Ipelet_base__class__ = "Ipelet_base is an abstract base class for defining an ipelet.";
+constexpr const char* Ipelet_base__class__ = "Ipelet_base is an abstract base class for defining an ipelet.";
 
-constexpr const char* CGAL_Ipelet_base_Kernel = "The kernel used to define internal types.
+constexpr const char* Ipelet_base_Kernel = "The kernel used to define internal types.
 
 Returns: Kernel";
-constexpr const char* CGAL_Ipelet_base_FT = "The number type of the coordinates.
+constexpr const char* Ipelet_base_FT = "The number type of the coordinates.
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Ipelet_base_Point_2 = "The point type.
+constexpr const char* Ipelet_base_Point_2 = "The point type.
 
 Returns: Kernel::Point_2";
-constexpr const char* CGAL_Ipelet_base_Circle_2 = "The circle type.
+constexpr const char* Ipelet_base_Circle_2 = "The circle type.
 
 Returns: Kernel::Circle_2";
-constexpr const char* CGAL_Ipelet_base_Circular_arc_2 = "The circular arc type.
+constexpr const char* Ipelet_base_Circular_arc_2 = "The circular arc type.
 
 The CGAL::Sign , equals either to CGAL::COUNTERCLOCKWISE or CGAL::CLOCKWISE ,
 indicates if the arc is the set of points on the circle from the first point
 to the second point turning clockwise or counterclockwise.
 
 Returns: CGAL::tuple< Circle_2 , Point_2 , Point_2 , CGAL::Sign >";
-constexpr const char* CGAL_Ipelet_base_Weighted_point_2 = "The weighted point type.
+constexpr const char* Ipelet_base_Weighted_point_2 = "The weighted point type.
 
 Returns: CGAL::Weighted_point< Point, FT >";
-constexpr const char* CGAL_Ipelet_base_Segment_2 = "The segment type.
+constexpr const char* Ipelet_base_Segment_2 = "The segment type.
 
 Returns: Kernel::Segment_2";
-constexpr const char* CGAL_Ipelet_base_Line_2 = "The line type.
+constexpr const char* Ipelet_base_Line_2 = "The line type.
 
 Returns: Kernel::Line_2";
-constexpr const char* CGAL_Ipelet_base_Ray_2 = "The ray type.
+constexpr const char* Ipelet_base_Ray_2 = "The ray type.
 
 Returns: Kernel::Ray_2";
-constexpr const char* CGAL_Ipelet_base_Triangle_2 = "The triangle type.
+constexpr const char* Ipelet_base_Triangle_2 = "The triangle type.
 
 Returns: Kernel::Triangle_2";
-constexpr const char* CGAL_Ipelet_base_Polygon_2 = "The polygon type.
+constexpr const char* Ipelet_base_Polygon_2 = "The polygon type.
 
 Returns: CGAL::Polygon_2< Kernel >";
-constexpr const char* CGAL_Ipelet_base_Iso_rectangle_2 = "A type to represent bounding boxes.
+constexpr const char* Ipelet_base_Iso_rectangle_2 = "A type to represent bounding boxes.
 
 Returns: Kernel::Iso_rectangle_2";
-constexpr const char* CGAL_Ipelet_base_Point_grabber = "Class type providing operators to extract points from segments and polygons.";
-constexpr const char* CGAL_Ipelet_base_Segment_grabber = "Class type providing operators to extract segments from polygons.";
-constexpr const char* CGAL_Ipelet_base_CGAL_ipelet = "initializes an ipelet.
+constexpr const char* Ipelet_base_Point_grabber = "Class type providing operators to extract points from segments and polygons.";
+constexpr const char* Ipelet_base_Segment_grabber = "Class type providing operators to extract segments from polygons.";
+constexpr const char* Ipelet_base_CGAL_ipelet = "initializes an ipelet.
 
 The string name is the name given to the ipelet in the Ipe menu. The string
 array fct_names contains the names of these functions as they will appear in
@@ -68,19 +68,19 @@ Parameters
 fct_names : const std::string
 help_msg : const std::string
 name : const std::string";
-constexpr const char* CGAL_Ipelet_base_get_ipe_page = "This is an advanced function.
+constexpr const char* Ipelet_base_get_ipe_page = "This is an advanced function.
 
 Advanced returns a pointer to an Ipe object representing the drawing page.
 Refer to the Ipe library documentation for more details.
 
 Returns: IpePage *";
-constexpr const char* CGAL_Ipelet_base_get_ipelet_helper = "This is an advanced function.
+constexpr const char* Ipelet_base_get_ipelet_helper = "This is an advanced function.
 
 Advanced returns a pointer to an Ipe object providing services to Ipelets.
 Refer to the Ipe library documentation for more details.
 
 Returns: IpeletHelper *";
-constexpr const char* CGAL_Ipelet_base_show_help = "Prints in Ipe a pop-up help message constructed from the string array of the constructor.
+constexpr const char* Ipelet_base_show_help = "Prints in Ipe a pop-up help message constructed from the string array of the constructor.
 
 This function expects that the last function defined in the ipelet is
 dedicated to print the help message. When the boolean one_per_func is true ,
@@ -92,17 +92,17 @@ constructor.
 Parameters
 ----------
 one_per_func : bool";
-constexpr const char* CGAL_Ipelet_base_print_error_message = "Prints the string msg as a message in Ipe.
+constexpr const char* Ipelet_base_print_error_message = "Prints the string msg as a message in Ipe.
 
 Parameters
 ----------
 msg : std::string";
-constexpr const char* CGAL_Ipelet_base_protected_run = "function called when the user selects the CGAL ipelet.
+constexpr const char* Ipelet_base_protected_run = "function called when the user selects the CGAL ipelet.
 
 Parameters
 ----------
 i : int";
-constexpr const char* CGAL_Ipelet_base_read_active_objects = "This function assigns to output iterator out all handled objects selected in Ipe.
+constexpr const char* Ipelet_base_read_active_objects = "This function assigns to output iterator out all handled objects selected in Ipe.
 
 Objects read belong to the set of read objects (even within groups). The
 output iterator out must be able to handle all read objects (see
@@ -121,7 +121,7 @@ deselect_all : bool
 delete_selected_objects : bool
 
 Returns: Iso_rectangle_2";
-constexpr const char* CGAL_Ipelet_base_point_grabber = "returns an output iterator which wraps it .
+constexpr const char* Ipelet_base_point_grabber = "returns an output iterator which wraps it .
 
 OutputIterator must be a model of the output iterator concept accepting
 assignments from Point_2 . The returned output iterator will accept
@@ -135,7 +135,7 @@ Parameters
 it : OutputIterator
 
 Returns: boost::function_output_iterator< Point_grabber < OutputIterator > >";
-constexpr const char* CGAL_Ipelet_base_segment_grabber = "returns an output iterator which wraps it .
+constexpr const char* Ipelet_base_segment_grabber = "returns an output iterator which wraps it .
 
 OutputIterator must be a model of the output iterator concept accepting
 assignments from Segment_2 . The returned output iterator will accept
@@ -148,7 +148,7 @@ Parameters
 it : OutputIterator
 
 Returns: boost::function_output_iterator< Segment_grabber < OutputIterator > >";
-constexpr const char* CGAL_Ipelet_base_draw_in_ipe = "This function draws in the page of Ipe a given object.
+constexpr const char* Ipelet_base_draw_in_ipe = "This function draws in the page of Ipe a given object.
 
 T must be a type inside the set of drawable objects . When object is of type
 Line_2 or Ray_2 , only the part of the object that is inside the page of Ipe
@@ -160,14 +160,14 @@ Parameters
 ----------
 object : const T &
 deselect : bool";
-constexpr const char* CGAL_Ipelet_base_draw_in_ipe_1 = "Same as above, except that objects are clipped to bbox before been drawn.
+constexpr const char* Ipelet_base_draw_in_ipe_1 = "Same as above, except that objects are clipped to bbox before been drawn.
 
 Parameters
 ----------
 object : const T &
 bbox : const Iso_rectangle_2 &
 deselect : bool";
-constexpr const char* CGAL_Ipelet_base_draw_in_ipe_2 = "This function draws in the page of Ipe a set of objects given by an iterator range.
+constexpr const char* Ipelet_base_draw_in_ipe_2 = "This function draws in the page of Ipe a set of objects given by an iterator range.
 
 These objects must be of a type inside the set of drawable objects . If the
 boolean makegrp is set to true , objects drawn define a group in Ipe. If the
@@ -179,7 +179,7 @@ begin : Iterator
 end : Iterator
 makegrp : bool
 deselectall : bool";
-constexpr const char* CGAL_Ipelet_base_draw_in_ipe_3 = "Same as above, except that objects are clipped to bbox before been drawn.
+constexpr const char* Ipelet_base_draw_in_ipe_3 = "Same as above, except that objects are clipped to bbox before been drawn.
 
 Parameters
 ----------
@@ -188,7 +188,7 @@ end : Iterator
 bbox : const Iso_rectangle_2 &
 makegrp : bool
 deselectall : bool";
-constexpr const char* CGAL_Ipelet_base_draw_polyline_in_ipe = "This function draws in the page of Ipe a polyline defined by an iterator range of points.
+constexpr const char* Ipelet_base_draw_polyline_in_ipe = "This function draws in the page of Ipe a polyline defined by an iterator range of points.
 
 If the boolean setclose is true , the polyline drawn is closed. If the boolean
 deselect is set to true , polyline drawn is deselected.
@@ -199,7 +199,7 @@ first : iterator
 last : iterator
 setclose : bool
 deselect : bool";
-constexpr const char* CGAL_Ipelet_base_draw_dual_in_ipe = "This function draws in the page of Ipe the dual of a 2D CGAL triangulation.
+constexpr const char* Ipelet_base_draw_dual_in_ipe = "This function draws in the page of Ipe the dual of a 2D CGAL triangulation.
 
 The edges of the dual are restricted to the interior of bbox . If the boolean
 makegrp is set to true , segments drawn define a group in Ipe. If the boolean
@@ -211,7 +211,7 @@ T : Triangulation
 bbox : const Iso_rectangle_2 &
 makegrp : bool
 deselect : bool";
-constexpr const char* CGAL_Ipelet_base_draw_skeleton_in_ipe = "This function draws in the page of Ipe the Voronoi segment skeleton from a triangulation of segments.
+constexpr const char* Ipelet_base_draw_skeleton_in_ipe = "This function draws in the page of Ipe the Voronoi segment skeleton from a triangulation of segments.
 
 The edges are restricted to the interior of bbox . If the boolean makegrp is
 set to true , segments drawn define a group in Ipe. If the boolean deselect is
@@ -223,7 +223,7 @@ T : Triangulation
 bbox : const Iso_rectangle_2 &
 makegrp : bool
 deselect : bool";
-constexpr const char* CGAL_Ipelet_base_request_value_from_user = "This function induces the creation of a dialog box requesting a value from the user.
+constexpr const char* Ipelet_base_request_value_from_user = "This function induces the creation of a dialog box requesting a value from the user.
 
 The string msg is printed in this dialog box. Ipe lexer tries to convert the
 user input into an object of type T (a simple type such as int , float , etc).

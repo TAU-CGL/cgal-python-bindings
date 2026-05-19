@@ -22,6 +22,37 @@
 
 namespace py = nanobind;
 
+// Docstrings
+namespace {
+  const char* MINKOWSKI_SUM_2_DOC = R"pbdoc(
+Compute the Minkowski sum of two polygons.
+)pbdoc";
+
+  const char* MINKOWSKI_SUM_BY_FULL_CONVOLUTION_2_DOC = R"pbdoc(
+Compute the Minkowski sum of two polygons using the full convolution method.
+)pbdoc";
+
+  const char* MINKOWSKI_SUM_BY_REDUCED_CONVOLUTION_2_DOC = R"pbdoc(
+Compute the Minkowski sum of two polygons using the reduced convolution method.
+)pbdoc";
+
+  const char* APPROXIMATED_OFFSET_2_DOC = R"pbdoc(
+Compute an approximated offset of a polygon by a given radius.
+)pbdoc";
+
+  const char* APPROXIMATED_INSET_2_DOC = R"pbdoc(
+Compute an approximated inset of a polygon by a given radius.
+)pbdoc";
+
+  const char* OFFSET_POLYGON_2_DOC = R"pbdoc(
+Compute the exact offset of a rational polygon by a given radius.
+)pbdoc";
+
+  const char* INSET_POLYGON_2_DOC = R"pbdoc(
+Compute the exact inset of a rational polygon by a given radius.
+)pbdoc";
+}
+
 namespace ms2 {
 
 #if CGAL_VERSION_NR > 1050500000
@@ -53,7 +84,9 @@ template <typename T1, typename T2, typename T3,
 void bind_mink_sum_decomp_one_strategy(py::module_& m, bool) {
   m.def("minkowski_sum_2",
         static_cast<Polygon_with_holes_2(*)(const T1&, const T2&, const T3&)>
-          (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>));
+          (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3>),
+        MINKOWSKI_SUM_2_DOC,
+        py::arg("p"), py::arg("q"), py::arg("strategy"));
 }
 
 // Two Decomposition Staretegies
@@ -67,7 +100,9 @@ void bind_mink_sum_decomp_two_strategies(py::module_& m, bool) {
   m.def("minkowski_sum_2",
         static_cast<Polygon_with_holes_2(*)(const T1&, const T2&,
                                             const T3&, const T4&)>
-        (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>));
+        (&CGAL::minkowski_sum_2<Kernel, Point_2_container, T3, T4>),
+        MINKOWSKI_SUM_2_DOC,
+        py::arg("p"), py::arg("q"), py::arg("strategy1"), py::arg("strategy2"));
 }
 
 #endif
@@ -165,38 +200,48 @@ void export_minkowski_sum_2(py::module_& m) {
                                                          strategy_types);
 #endif
 
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>, py::arg("p"), py::arg("q"));
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>, py::arg("p"), py::arg("q"));
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>, py::arg("p"), py::arg("q"));
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>, MINKOWSKI_SUM_2_DOC, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>, MINKOWSKI_SUM_2_DOC, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>, MINKOWSKI_SUM_2_DOC, py::arg("p"), py::arg("q"));
+  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>, MINKOWSKI_SUM_2_DOC, py::arg("p"), py::arg("q"));
 
   m.def("minkowski_sum_by_full_convolution_2",
         &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>,
+        MINKOWSKI_SUM_BY_FULL_CONVOLUTION_2_DOC,
         py::arg("p"), py::arg("q"));
 
   m.def("minkowski_sum_by_reduced_convolution_2",
         &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>,
+        MINKOWSKI_SUM_BY_REDUCED_CONVOLUTION_2_DOC,
         py::arg("p"), py::arg("q"));
   m.def("minkowski_sum_by_reduced_convolution_2",
         &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>,
+        MINKOWSKI_SUM_BY_REDUCED_CONVOLUTION_2_DOC,
         py::arg("p"), py::arg("q"));
   m.def("minkowski_sum_by_reduced_convolution_2",
         &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>,
+        MINKOWSKI_SUM_BY_REDUCED_CONVOLUTION_2_DOC,
         py::arg("p"), py::arg("q"));
   m.def("minkowski_sum_by_reduced_convolution_2",
         &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>,
+        MINKOWSKI_SUM_BY_REDUCED_CONVOLUTION_2_DOC,
         py::arg("p"), py::arg("q"));
 
   m.def("approximated_offset_2", &ms2::approximated_offset_2,
+        APPROXIMATED_OFFSET_2_DOC,
         py::arg("p"), py::arg("r"), py::arg("eps"));
   m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh,
+        APPROXIMATED_OFFSET_2_DOC,
         py::arg("pwh"), py::arg("r"), py::arg("eps"));
   m.def("approximated_inset_2", &ms2::approximated_inset_2,
+        APPROXIMATED_INSET_2_DOC,
         py::arg("p"), py::arg("r"), py::arg("eps"));
 
   m.def("offset_polygon_2", &ms2::offset_polygon_2,
+        OFFSET_POLYGON_2_DOC,
         py::arg("pgn"), py::arg("r"), py::arg("traits"));
   m.def("inset_polygon_2", &ms2::inset_polygon_2,
+        INSET_POLYGON_2_DOC,
         py::arg("pgn"), py::arg("r"), py::arg("traits"));
 
   if (add_attr<CS_pgn>(m, "Circle_segment_polygon_2")) return;

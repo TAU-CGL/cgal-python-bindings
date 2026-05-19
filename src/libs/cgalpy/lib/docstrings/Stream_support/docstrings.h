@@ -7,12 +7,12 @@ namespace cgalpy {
 namespace docstrings {
 namespace Stream_support {
 
-constexpr const char* CGAL_Benchmark_rep_Benchmark_rep = "initialize with a const reference to t .
+constexpr const char* Benchmark_rep_Benchmark_rep = "initialize with a const reference to t .
 
 Parameters
 ----------
 tt : const T &";
-constexpr const char* CGAL_Benchmark_rep_operator = "perform the output, calls operator<< by default.
+constexpr const char* Benchmark_rep_operator = "perform the output, calls operator<< by default.
 
 Parameters
 ----------
@@ -21,10 +21,10 @@ os : std::ostream &
 Returns: std::ostream &";
 
 // CGAL::Color
-constexpr const char* CGAL_Color__class__ = "An object of the class Color is a color available for drawing operations in many CGAL output streams.";
+constexpr const char* Color__class__ = "An object of the class Color is a color available for drawing operations in many CGAL output streams.";
 
-constexpr const char* CGAL_Color_Color = "creates a color with rgba-value (0,0,0,255) , i.e. black.";
-constexpr const char* CGAL_Color_Color_1 = "creates a color with rgba-value ( red , green , blue , alpha ) .
+constexpr const char* Color_Color = "creates a color with rgba-value (0,0,0,255) , i.e. black.";
+constexpr const char* Color_Color_1 = "creates a color with rgba-value ( red , green , blue , alpha ) .
 
 Parameters
 ----------
@@ -32,54 +32,54 @@ red : unsigned char
 green : unsigned char
 blue : unsigned char
 alpha : unsigned char";
-constexpr const char* CGAL_Color_red = "returns the red component.
+constexpr const char* Color_red = "returns the red component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_Color_red_1 = "returns a reference on the red component.
+constexpr const char* Color_red_1 = "returns a reference on the red component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_Color_green = "returns the green component.
+constexpr const char* Color_green = "returns the green component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_Color_green_1 = "returns a reference on the green component.
+constexpr const char* Color_green_1 = "returns a reference on the green component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_Color_blue = "returns the blue component.
+constexpr const char* Color_blue = "returns the blue component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_Color_blue_1 = "returns a reference on the blue component.
+constexpr const char* Color_blue_1 = "returns a reference on the blue component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_Color_alpha = "returns the alpha component.
+constexpr const char* Color_alpha = "returns the alpha component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_Color_alpha_1 = "returns a reference on the alpha component.
+constexpr const char* Color_alpha_1 = "returns a reference on the alpha component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_Color_operator = "returns the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
+constexpr const char* Color_operator = "returns the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: unsigned char";
-constexpr const char* CGAL_Color_operator_1 = "returns a reference on the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
+constexpr const char* Color_operator_1 = "returns a reference on the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: unsigned char &";
-constexpr const char* CGAL_Color_to_rgba = "returns the array with rgba values.
+constexpr const char* Color_to_rgba = "returns the array with rgba values.
 
 Returns: const std::array< unsigned char, 4 > &";
-constexpr const char* CGAL_Color_to_rgb = "returns the array with rgb values.
+constexpr const char* Color_to_rgb = "returns the array with rgb values.
 
 Returns: const std::array< unsigned char, 3 > &";
-constexpr const char* CGAL_Color_to_hsv = "computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.
+constexpr const char* Color_to_hsv = "computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.
 
 Returns: std::array< double, 3 >";
-constexpr const char* CGAL_Color_set_rgb = "replaces the rgb values of the colors by the one given as parameters.
+constexpr const char* Color_set_rgb = "replaces the rgb values of the colors by the one given as parameters.
 
 Parameters
 ----------
@@ -89,7 +89,7 @@ blue : unsigned char
 alpha : unsigned char
 
 Returns: Color &";
-constexpr const char* CGAL_Color_set_hsv = "replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.
+constexpr const char* Color_set_hsv = "replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.
 
 Parameters
 ----------
@@ -99,37 +99,37 @@ value : double
 alpha : unsigned char
 
 Returns: Color &";
-constexpr const char* CGAL_Color_red_2 = "Constructs Color(255,0,0).
+constexpr const char* Color_red_2 = "Constructs Color(255,0,0).
 
 Returns: Color";
-constexpr const char* CGAL_Color_green_2 = "Constructs Color(0,255,0).
+constexpr const char* Color_green_2 = "Constructs Color(0,255,0).
 
 Returns: Color";
-constexpr const char* CGAL_Color_blue_2 = "Constructs Color(0,0,255).
+constexpr const char* Color_blue_2 = "Constructs Color(0,0,255).
 
 Returns: Color";
-constexpr const char* CGAL_Color_black = "Constructs Color(0,0,0).
+constexpr const char* Color_black = "Constructs Color(0,0,0).
 
 Returns: Color";
-constexpr const char* CGAL_Color_deep_blue = "Constructs Color(10,0,100).
+constexpr const char* Color_deep_blue = "Constructs Color(10,0,100).
 
 Returns: Color";
-constexpr const char* CGAL_Color_gray = "Constructs Color(100,100,100).
+constexpr const char* Color_gray = "Constructs Color(100,100,100).
 
 Returns: Color";
-constexpr const char* CGAL_Color_orange = "Constructs Color(235,150,0).
+constexpr const char* Color_orange = "Constructs Color(235,150,0).
 
 Returns: Color";
-constexpr const char* CGAL_Color_purple = "Constructs Color(100,0,70).
+constexpr const char* Color_purple = "Constructs Color(100,0,70).
 
 Returns: Color";
-constexpr const char* CGAL_Color_violet = "Constructs Color(255,0,255).
+constexpr const char* Color_violet = "Constructs Color(255,0,255).
 
 Returns: Color";
-constexpr const char* CGAL_Color_white = "Constructs Color(255,255,255).
+constexpr const char* Color_white = "Constructs Color(255,255,255).
 
 Returns: Color";
-constexpr const char* CGAL_Color_yellow = "Constructs Color(255,255,0).
+constexpr const char* Color_yellow = "Constructs Color(255,255,0).
 
 Returns: Color";
 
@@ -145,21 +145,21 @@ Returns: Color";
 
 
 // CGAL::Input_rep
-constexpr const char* CGAL_Input_rep__class__ = "The definition of Input_rep is completely symmetric to Output_rep .";
+constexpr const char* Input_rep__class__ = "The definition of Input_rep is completely symmetric to Output_rep .";
 
-constexpr const char* CGAL_Input_rep_Input_rep = "initialize with a reference to t .
+constexpr const char* Input_rep_Input_rep = "initialize with a reference to t .
 
 Parameters
 ----------
 tt : T &";
-constexpr const char* CGAL_Input_rep_operator = "perform the input, calls operator>> by default.
+constexpr const char* Input_rep_operator = "perform the input, calls operator>> by default.
 
 Parameters
 ----------
 is : std::istream &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Input_rep_operator_1 = "stream input to the Input_rep calls its operator() .
+constexpr const char* Input_rep_operator_1 = "stream input to the Input_rep calls its operator() .
 
 CGAL defines input operators for classes that are derived from the class
 std::istream . This allows to read from input streams as std::cin , as well as
@@ -173,19 +173,19 @@ rep : Input_rep < T >
 
 Returns: std::istream &";
 
-constexpr const char* CGAL_Input_rep_std_optional_T_Input_rep = "initialize with a reference to t .
+constexpr const char* Input_rep_std_optional_T_Input_rep = "initialize with a reference to t .
 
 Parameters
 ----------
 tt : std::optional< T > &";
-constexpr const char* CGAL_Input_rep_std_optional_T_operator = "perform the input, calls operator>> by default.
+constexpr const char* Input_rep_std_optional_T_operator = "perform the input, calls operator>> by default.
 
 Parameters
 ----------
 is : std::istream &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Input_rep_std_optional_T_operator_1 = "stream input to the Input_rep calls its operator() .
+constexpr const char* Input_rep_std_optional_T_operator_1 = "stream input to the Input_rep calls its operator() .
 
 CGAL defines input operators for classes that are derived from the class
 std::istream . This allows to read from input streams as std::cin , as well as
@@ -202,24 +202,24 @@ Returns: std::istream &";
 
 
 // CGAL::IO::Basic_color_stream_guard
-constexpr const char* CGAL_IO_Basic_color_stream_guard__class__ = "RAII helper class for temporarily installing a color streambuf on a stream.";
+constexpr const char* IO_Basic_color_stream_guard__class__ = "RAII helper class for temporarily installing a color streambuf on a stream.";
 
-constexpr const char* CGAL_IO_Basic_color_stream_guard_char_type = "Character type.
+constexpr const char* IO_Basic_color_stream_guard_char_type = "Character type.
 
 Returns: typename StreamT::char_type";
-constexpr const char* CGAL_IO_Basic_color_stream_guard_traits_type = "Character traits type.
+constexpr const char* IO_Basic_color_stream_guard_traits_type = "Character traits type.
 
 Returns: typename StreamT::traits_type";
-constexpr const char* CGAL_IO_Basic_color_stream_guard_streambuf_type = "Type of the color streambuf.
+constexpr const char* IO_Basic_color_stream_guard_streambuf_type = "Type of the color streambuf.
 
 Returns: Basic_color_streambuf < char_type , traits_type >";
-constexpr const char* CGAL_IO_Basic_color_stream_guard_wrapped_streambuf_type = "Type of the wrapped streambuf.
+constexpr const char* IO_Basic_color_stream_guard_wrapped_streambuf_type = "Type of the wrapped streambuf.
 
 Returns: std::basic_streambuf< char_type , traits_type >";
-constexpr const char* CGAL_IO_Basic_color_stream_guard_string = "String type matching character type.
+constexpr const char* IO_Basic_color_stream_guard_string = "String type matching character type.
 
 Returns: std::basic_string< char_type >";
-constexpr const char* CGAL_IO_Basic_color_stream_guard_Basic_color_stream_guard = "constructs and installs a color streambuf with one or more colors.
+constexpr const char* IO_Basic_color_stream_guard_Basic_color_stream_guard = "constructs and installs a color streambuf with one or more colors.
 
 AnsiColors Variadic list of Ansi_color values stream The stream to modify
 colors One or more colors to combine (e.g., Ansi_color::Bold , Ansi_color::Red
@@ -229,40 +229,40 @@ Parameters
 ----------
 stream : StreamT &
 colors : AnsiColors...";
-constexpr const char* CGAL_IO_Basic_color_stream_guard_Basic_color_stream_guard_1 = "Destructor - restores the original streambuf.";
+constexpr const char* IO_Basic_color_stream_guard_Basic_color_stream_guard_1 = "Destructor - restores the original streambuf.";
 
 // CGAL::IO::Basic_color_streambuf
-constexpr const char* CGAL_IO_Basic_color_streambuf__class__ = "The class template Basic_color_streambuf wraps another basic_streambuf and automatically adds ANSI color codes to the output.";
+constexpr const char* IO_Basic_color_streambuf__class__ = "The class template Basic_color_streambuf wraps another basic_streambuf and automatically adds ANSI color codes to the output.";
 
-constexpr const char* CGAL_IO_Basic_color_streambuf_char_type = "Character type.
+constexpr const char* IO_Basic_color_streambuf_char_type = "Character type.
 
 Returns: CharT";
-constexpr const char* CGAL_IO_Basic_color_streambuf_traits_type = "Character traits type.
+constexpr const char* IO_Basic_color_streambuf_traits_type = "Character traits type.
 
 Returns: Traits";
-constexpr const char* CGAL_IO_Basic_color_streambuf_int_type = "Integer type for character representation.
+constexpr const char* IO_Basic_color_streambuf_int_type = "Integer type for character representation.
 
 Returns: typename traits_type::int_type";
-constexpr const char* CGAL_IO_Basic_color_streambuf_pos_type = "Position type for stream positioning.
+constexpr const char* IO_Basic_color_streambuf_pos_type = "Position type for stream positioning.
 
 Returns: typename traits_type::pos_type";
-constexpr const char* CGAL_IO_Basic_color_streambuf_off_type = "Offset type for stream positioning.
+constexpr const char* IO_Basic_color_streambuf_off_type = "Offset type for stream positioning.
 
 Returns: typename traits_type::off_type";
-constexpr const char* CGAL_IO_Basic_color_streambuf_streambuf_type = "Type of the wrapped streambuf.
+constexpr const char* IO_Basic_color_streambuf_streambuf_type = "Type of the wrapped streambuf.
 
 Returns: std::basic_streambuf< char_type , traits_type >";
-constexpr const char* CGAL_IO_Basic_color_streambuf_string = "String type matching character type.
+constexpr const char* IO_Basic_color_streambuf_string = "String type matching character type.
 
 Returns: std::basic_string< char_type >";
-constexpr const char* CGAL_IO_Basic_color_streambuf_make_color_code = "Generate ANSI escape sequence for the set of colors.
+constexpr const char* IO_Basic_color_streambuf_make_color_code = "Generate ANSI escape sequence for the set of colors.
 
 Parameters
 ----------
 colors : std::array< Ansi_color , N >
 
 Returns: string";
-constexpr const char* CGAL_IO_Basic_color_streambuf_Basic_color_streambuf = "constructs a color streambuf wrapper with one or more colors.
+constexpr const char* IO_Basic_color_streambuf_Basic_color_streambuf = "constructs a color streambuf wrapper with one or more colors.
 
 Colors are automatically disabled if the wrapped buffer is not connected to a
 color-capable terminal (checked via isatty() and TERM variable), or if the
@@ -274,23 +274,23 @@ Parameters
 ----------
 wrapped_buf : streambuf_type &
 colors : AnsiColors...";
-constexpr const char* CGAL_IO_Basic_color_streambuf_color_code = "gets the current color code string.
+constexpr const char* IO_Basic_color_streambuf_color_code = "gets the current color code string.
 
 Returns: const string &";
-constexpr const char* CGAL_IO_Basic_color_streambuf_set_color_code = "sets a new color code.
+constexpr const char* IO_Basic_color_streambuf_set_color_code = "sets a new color code.
 
 color_code The new color code to apply
 
 Parameters
 ----------
 color_code : string";
-constexpr const char* CGAL_IO_Basic_color_streambuf_colors_enabled = "checks if colors are enabled for this streambuf.
+constexpr const char* IO_Basic_color_streambuf_colors_enabled = "checks if colors are enabled for this streambuf.
 
 Returns: bool";
-constexpr const char* CGAL_IO_Basic_color_streambuf_wrapped_streambuf = "gets the wrapped streambuf.
+constexpr const char* IO_Basic_color_streambuf_wrapped_streambuf = "gets the wrapped streambuf.
 
 Returns: streambuf_type &";
-constexpr const char* CGAL_IO_Basic_color_streambuf_detect_color_support = "detects if the wrapped buffer supports color output.
+constexpr const char* IO_Basic_color_streambuf_detect_color_support = "detects if the wrapped buffer supports color output.
 
 Parameters
 ----------
@@ -299,24 +299,24 @@ buf : streambuf_type *
 Returns: bool";
 
 // CGAL::IO::Basic_indenting_stream_guard
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard__class__ = "RAII helper class for temporarily installing an indenting streambuf on a stream.";
+constexpr const char* IO_Basic_indenting_stream_guard__class__ = "RAII helper class for temporarily installing an indenting streambuf on a stream.";
 
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_char_type = "Character type.
+constexpr const char* IO_Basic_indenting_stream_guard_char_type = "Character type.
 
 Returns: typename StreamT::char_type";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_traits_type = "Character traits type.
+constexpr const char* IO_Basic_indenting_stream_guard_traits_type = "Character traits type.
 
 Returns: typename StreamT::traits_type";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_streambuf_type = "Type of the indenting streambuf.
+constexpr const char* IO_Basic_indenting_stream_guard_streambuf_type = "Type of the indenting streambuf.
 
 Returns: Basic_indenting_streambuf < char_type , traits_type >";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_wrapped_streambuf_type = "Type of the wrapped streambuf.
+constexpr const char* IO_Basic_indenting_stream_guard_wrapped_streambuf_type = "Type of the wrapped streambuf.
 
 Returns: std::basic_streambuf< char_type , traits_type >";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_string = "String type matching character type.
+constexpr const char* IO_Basic_indenting_stream_guard_string = "String type matching character type.
 
 Returns: std::basic_string< char_type >";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_Basic_indenting_stream_guard = "constructs and installs an indenting streambuf on the given stream.
+constexpr const char* IO_Basic_indenting_stream_guard_Basic_indenting_stream_guard = "constructs and installs an indenting streambuf on the given stream.
 
 stream The stream to modify indent_string The indentation string to use
 
@@ -324,7 +324,7 @@ Parameters
 ----------
 stream : StreamT &
 indent_string : const string &";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_Basic_indenting_stream_guard_1 = "constructs and installs an indenting streambuf on the given stream
+constexpr const char* IO_Basic_indenting_stream_guard_Basic_indenting_stream_guard_1 = "constructs and installs an indenting streambuf on the given stream
 
 stream The stream to modify spaces_per_level Number of indentation spaces
 
@@ -332,33 +332,33 @@ Parameters
 ----------
 stream : StreamT &
 spaces_per_level : int";
-constexpr const char* CGAL_IO_Basic_indenting_stream_guard_Basic_indenting_stream_guard_2 = "Destructor - restores the original streambuf.";
+constexpr const char* IO_Basic_indenting_stream_guard_Basic_indenting_stream_guard_2 = "Destructor - restores the original streambuf.";
 
 // CGAL::IO::Basic_indenting_streambuf
-constexpr const char* CGAL_IO_Basic_indenting_streambuf__class__ = "The class template Basic_indenting_streambuf wraps another basic_streambuf and automatically adds indentation at the beginning of each line.";
+constexpr const char* IO_Basic_indenting_streambuf__class__ = "The class template Basic_indenting_streambuf wraps another basic_streambuf and automatically adds indentation at the beginning of each line.";
 
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_char_type = "Character type.
+constexpr const char* IO_Basic_indenting_streambuf_char_type = "Character type.
 
 Returns: CharT";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_traits_type = "Character traits type.
+constexpr const char* IO_Basic_indenting_streambuf_traits_type = "Character traits type.
 
 Returns: Traits";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_int_type = "Integer type for character representation.
+constexpr const char* IO_Basic_indenting_streambuf_int_type = "Integer type for character representation.
 
 Returns: typename traits_type::int_type";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_pos_type = "Position type for stream positioning.
+constexpr const char* IO_Basic_indenting_streambuf_pos_type = "Position type for stream positioning.
 
 Returns: typename traits_type::pos_type";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_off_type = "Offset type for stream positioning.
+constexpr const char* IO_Basic_indenting_streambuf_off_type = "Offset type for stream positioning.
 
 Returns: typename traits_type::off_type";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_streambuf_type = "Type of the wrapped streambuf.
+constexpr const char* IO_Basic_indenting_streambuf_streambuf_type = "Type of the wrapped streambuf.
 
 Returns: std::basic_streambuf< char_type , traits_type >";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_string = "String type matching character type.
+constexpr const char* IO_Basic_indenting_streambuf_string = "String type matching character type.
 
 Returns: std::basic_string< char_type >";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_Basic_indenting_streambuf = "constructs an indenting streambuf wrapper.
+constexpr const char* IO_Basic_indenting_streambuf_Basic_indenting_streambuf = "constructs an indenting streambuf wrapper.
 
 wrapped_buf The underlying streambuf to wrap indent_string The string to use
 for indentation (default: 2 spaces)
@@ -367,17 +367,17 @@ Parameters
 ----------
 wrapped_buf : streambuf_type &
 indent_string : const string &";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_indent_string = "gets the current indentation string.
+constexpr const char* IO_Basic_indenting_streambuf_indent_string = "gets the current indentation string.
 
 Returns: const string &";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_set_indent_string = "sets a new indentation string.
+constexpr const char* IO_Basic_indenting_streambuf_set_indent_string = "sets a new indentation string.
 
 new_indent The new indentation string
 
 Parameters
 ----------
 new_indent : const string &";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_set_indent_level = "sets indentation level using repeated spaces.
+constexpr const char* IO_Basic_indenting_streambuf_set_indent_level = "sets indentation level using repeated spaces.
 
 level Number of indentation levels spaces_per_level Number of spaces per level
 (default: 2)
@@ -386,15 +386,15 @@ Parameters
 ----------
 level : int
 spaces_per_level : int";
-constexpr const char* CGAL_IO_Basic_indenting_streambuf_wrapped_streambuf = "gets the wrapped streambuf.
+constexpr const char* IO_Basic_indenting_streambuf_wrapped_streambuf = "gets the wrapped streambuf.
 
 Returns: streambuf_type &";
 
 // CGAL::IO::Color
-constexpr const char* CGAL_IO_Color__class__ = "An object of the class Color is a color available for drawing operations in many CGAL output streams.";
+constexpr const char* IO_Color__class__ = "An object of the class Color is a color available for drawing operations in many CGAL output streams.";
 
-constexpr const char* CGAL_IO_Color_Color = "creates a color with rgba-value (0,0,0,255) , i.e. black.";
-constexpr const char* CGAL_IO_Color_Color_1 = "creates a color with rgba-value ( red , green , blue , alpha ) .
+constexpr const char* IO_Color_Color = "creates a color with rgba-value (0,0,0,255) , i.e. black.";
+constexpr const char* IO_Color_Color_1 = "creates a color with rgba-value ( red , green , blue , alpha ) .
 
 Parameters
 ----------
@@ -402,54 +402,54 @@ red : unsigned char
 green : unsigned char
 blue : unsigned char
 alpha : unsigned char";
-constexpr const char* CGAL_IO_Color_red = "returns the red component.
+constexpr const char* IO_Color_red = "returns the red component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_IO_Color_red_1 = "returns a reference on the red component.
+constexpr const char* IO_Color_red_1 = "returns a reference on the red component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_IO_Color_green = "returns the green component.
+constexpr const char* IO_Color_green = "returns the green component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_IO_Color_green_1 = "returns a reference on the green component.
+constexpr const char* IO_Color_green_1 = "returns a reference on the green component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_IO_Color_blue = "returns the blue component.
+constexpr const char* IO_Color_blue = "returns the blue component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_IO_Color_blue_1 = "returns a reference on the blue component.
+constexpr const char* IO_Color_blue_1 = "returns a reference on the blue component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_IO_Color_alpha = "returns the alpha component.
+constexpr const char* IO_Color_alpha = "returns the alpha component.
 
 Returns: unsigned char";
-constexpr const char* CGAL_IO_Color_alpha_1 = "returns a reference on the alpha component.
+constexpr const char* IO_Color_alpha_1 = "returns a reference on the alpha component.
 
 Returns: unsigned char &";
-constexpr const char* CGAL_IO_Color_operator = "returns the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
+constexpr const char* IO_Color_operator = "returns the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: unsigned char";
-constexpr const char* CGAL_IO_Color_operator_1 = "returns a reference on the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
+constexpr const char* IO_Color_operator_1 = "returns a reference on the $i^{th}$ component of the rgb color (the $0^{th}$ is red, the $1^{st}$ is green, the $2^{nd}$ is blue and the $3^{rd}$ is alpha).
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: unsigned char &";
-constexpr const char* CGAL_IO_Color_to_rgba = "returns the array with rgba values.
+constexpr const char* IO_Color_to_rgba = "returns the array with rgba values.
 
 Returns: const std::array< unsigned char, 4 > &";
-constexpr const char* CGAL_IO_Color_to_rgb = "returns the array with rgb values.
+constexpr const char* IO_Color_to_rgb = "returns the array with rgb values.
 
 Returns: const std::array< unsigned char, 3 > &";
-constexpr const char* CGAL_IO_Color_to_hsv = "computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.
+constexpr const char* IO_Color_to_hsv = "computes the hsv (hue, saturation, value) values and returns an array representing them as float values between 0 and 1.
 
 Returns: std::array< double, 3 >";
-constexpr const char* CGAL_IO_Color_set_rgb = "replaces the rgb values of the colors by the one given as parameters.
+constexpr const char* IO_Color_set_rgb = "replaces the rgb values of the colors by the one given as parameters.
 
 Parameters
 ----------
@@ -459,7 +459,7 @@ blue : unsigned char
 alpha : unsigned char
 
 Returns: Color &";
-constexpr const char* CGAL_IO_Color_set_hsv = "replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.
+constexpr const char* IO_Color_set_hsv = "replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.
 
 Parameters
 ----------
@@ -469,43 +469,43 @@ value : double
 alpha : unsigned char
 
 Returns: Color &";
-constexpr const char* CGAL_IO_Color_black = "Constructs Color(0,0,0).
+constexpr const char* IO_Color_black = "Constructs Color(0,0,0).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_blue_2 = "Constructs Color(0,0,255).
+constexpr const char* IO_Color_blue_2 = "Constructs Color(0,0,255).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_deep_blue = "Constructs Color(10,0,100).
+constexpr const char* IO_Color_deep_blue = "Constructs Color(10,0,100).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_gray = "Constructs Color(100,100,100).
+constexpr const char* IO_Color_gray = "Constructs Color(100,100,100).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_green_2 = "Constructs Color(0,255,0).
+constexpr const char* IO_Color_green_2 = "Constructs Color(0,255,0).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_orange = "Constructs Color(235,150,0).
+constexpr const char* IO_Color_orange = "Constructs Color(235,150,0).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_purple = "Constructs Color(100,0,70).
+constexpr const char* IO_Color_purple = "Constructs Color(100,0,70).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_red_2 = "Constructs Color(255,0,0).
+constexpr const char* IO_Color_red_2 = "Constructs Color(255,0,0).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_violet = "Constructs Color(255,0,255).
+constexpr const char* IO_Color_violet = "Constructs Color(255,0,255).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_white = "Constructs Color(255,255,255).
+constexpr const char* IO_Color_white = "Constructs Color(255,255,255).
 
 Returns: Color";
-constexpr const char* CGAL_IO_Color_yellow = "Constructs Color(255,255,0).
+constexpr const char* IO_Color_yellow = "Constructs Color(255,255,0).
 
 Returns: Color";
 
 
 // CGAL::IO::PLY_property
-constexpr const char* CGAL_IO_PLY_property__class__ = "Class used to identify a PLY property as a type and a name.";
+constexpr const char* IO_PLY_property__class__ = "Class used to identify a PLY property as a type and a name.";
 
 
 
@@ -526,12 +526,12 @@ constexpr const char* CGAL_IO_PLY_property__class__ = "Class used to identify a 
 
 
 // CGAL::Istream_iterator
-constexpr const char* CGAL_Istream_iterator__class__ = "The class Istream_iterator is an input iterator adaptor for the input stream class Stream and value type T .";
+constexpr const char* Istream_iterator__class__ = "The class Istream_iterator is an input iterator adaptor for the input stream class Stream and value type T .";
 
-constexpr const char* CGAL_Istream_iterator_Istream_iterator = "creates an end-of-stream iterator.
+constexpr const char* Istream_iterator_Istream_iterator = "creates an end-of-stream iterator.
 
 This is a past-the-end iterator, and it is useful when constructing a range.";
-constexpr const char* CGAL_Istream_iterator_Istream_iterator_1 = "creates an input iterator reading from s .
+constexpr const char* Istream_iterator_Istream_iterator_1 = "creates an input iterator reading from s .
 
 When s reaches end of stream, this iterator will compare equal to an
 end-of-stream iterator created using the default constructor.
@@ -541,31 +541,31 @@ Parameters
 s : Stream &";
 
 // CGAL::Ostream_iterator
-constexpr const char* CGAL_Ostream_iterator__class__ = "The class Ostream_iterator is an output iterator adaptor for the output stream class Stream and value type T .";
+constexpr const char* Ostream_iterator__class__ = "The class Ostream_iterator is an output iterator adaptor for the output stream class Stream and value type T .";
 
-constexpr const char* CGAL_Ostream_iterator_Ostream_iterator = "creates an output iterator writing to s .
+constexpr const char* Ostream_iterator_Ostream_iterator = "creates an output iterator writing to s .
 
 Parameters
 ----------
 s : Stream &";
 
 // CGAL::Output_rep
-constexpr const char* CGAL_Output_rep__class__ = "The purpose of Output_rep is to provide a way to control output formatting that works independently of the object's stream output operator.";
+constexpr const char* Output_rep__class__ = "The purpose of Output_rep is to provide a way to control output formatting that works independently of the object's stream output operator.";
 
-constexpr const char* CGAL_Output_rep_Output_rep = "initialize with a const reference to t .
+constexpr const char* Output_rep_Output_rep = "initialize with a const reference to t .
 
 Parameters
 ----------
 tt : const T &
  : F";
-constexpr const char* CGAL_Output_rep_operator = "perform the output, calls operator<< by default.
+constexpr const char* Output_rep_operator = "perform the output, calls operator<< by default.
 
 Parameters
 ----------
 os : std::ostream &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Output_rep_operator_1 = "stream output of the Output_rep calls its operator() .
+constexpr const char* Output_rep_operator_1 = "stream output of the Output_rep calls its operator() .
 
 CGAL defines output operators for classes that are derived from the class
 std::ostream . This enables to write to output streams as std::cout or
@@ -580,7 +580,7 @@ rep : Output_rep < T, F >
 
 Returns: std::ostream &";
 
-constexpr const char* CGAL_Output_rep_Func_IO_manip_tag_operator = "stream output of the Output_rep calls its operator() .
+constexpr const char* Output_rep_Func_IO_manip_tag_operator = "stream output of the Output_rep calls its operator() .
 
 CGAL defines output operators for classes that are derived from the class
 std::ostream . This enables to write to output streams as std::cout or
@@ -595,7 +595,7 @@ rep : Output_rep< Func, IO_manip_tag >
 
 Returns: std::ostream &";
 
-constexpr const char* CGAL_Output_rep_std_optional_T_F_operator = "stream output of the Output_rep calls its operator() .
+constexpr const char* Output_rep_std_optional_T_F_operator = "stream output of the Output_rep calls its operator() .
 
 CGAL defines output operators for classes that are derived from the class
 std::ostream . This enables to write to output streams as std::cout or
@@ -610,7 +610,7 @@ rep : Output_rep< T, F >
 
 Returns: std::ostream &";
 
-constexpr const char* CGAL_Output_rep_std_variant_T_F_operator = "stream output of the Output_rep calls its operator() .
+constexpr const char* Output_rep_std_variant_T_F_operator = "stream output of the Output_rep calls its operator() .
 
 CGAL defines output operators for classes that are derived from the class
 std::ostream . This enables to write to output streams as std::cout or
@@ -627,15 +627,15 @@ Returns: std::ostream &";
 
 
 // CGAL::Verbose_ostream
-constexpr const char* CGAL_Verbose_ostream__class__ = "The class Verbose_ostream can be used as an output stream.";
+constexpr const char* Verbose_ostream__class__ = "The class Verbose_ostream can be used as an output stream.";
 
-constexpr const char* CGAL_Verbose_ostream_Verbose_ostream = "creates an output stream with state set to active that writes to the stream out .
+constexpr const char* Verbose_ostream_Verbose_ostream = "creates an output stream with state set to active that writes to the stream out .
 
 Parameters
 ----------
 active : bool
 out : std::ostream &";
-constexpr const char* CGAL_Verbose_ostream_operator = "writes the object t into the stream out .
+constexpr const char* Verbose_ostream_operator = "writes the object t into the stream out .
 
 Parameters
 ----------

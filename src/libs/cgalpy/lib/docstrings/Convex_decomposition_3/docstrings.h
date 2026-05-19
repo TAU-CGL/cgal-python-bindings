@@ -25,7 +25,7 @@ namespace Convex_decomposition_3 {
 
 
 // CGAL
-constexpr const char* CGAL__class__ = "The CGAL namespace.";
+constexpr const char* _class__ = "The CGAL namespace.";
 
 // std
 constexpr const char* std__class__ = "STL namespace.";

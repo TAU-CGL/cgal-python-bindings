@@ -8,14 +8,14 @@ namespace docstrings {
 namespace Polyline_simplification_2 {
 
 // CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost
-constexpr const char* CGAL_Polyline_simplification_2_Hybrid_squared_distance_cost__class__ = "This class is a cost function which calculates the cost as the square of the distance between the original and simplified polylines, possibly scaled based on a factor.";
+constexpr const char* Polyline_simplification_2_Hybrid_squared_distance_cost__class__ = "This class is a cost function which calculates the cost as the square of the distance between the original and simplified polylines, possibly scaled based on a factor.";
 
-constexpr const char* CGAL_Polyline_simplification_2_Hybrid_squared_distance_cost_Hybrid_squared_distance_cost = "Initializes the cost function with the specified ratio .
+constexpr const char* Polyline_simplification_2_Hybrid_squared_distance_cost_Hybrid_squared_distance_cost = "Initializes the cost function with the specified ratio .
 
 Parameters
 ----------
 ratio : FT";
-constexpr const char* CGAL_Polyline_simplification_2_Hybrid_squared_distance_cost_operator = "Compute the hybrid squared distance cost.
+constexpr const char* Polyline_simplification_2_Hybrid_squared_distance_cost_operator = "Compute the hybrid squared distance cost.
 
 Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and
 vicr=std::next(vicq) , returns the maximal square distance between each point
@@ -37,10 +37,10 @@ Returns: std::optional< typename CDT::Geom_traits::FT >";
 
 
 // CGAL::Polyline_simplification_2::Scaled_squared_distance_cost
-constexpr const char* CGAL_Polyline_simplification_2_Scaled_squared_distance_cost__class__ = "This class is a cost function which calculates the cost as a scaled variant of the square of the distance between the original and simplified polylines.";
+constexpr const char* Polyline_simplification_2_Scaled_squared_distance_cost__class__ = "This class is a cost function which calculates the cost as a scaled variant of the square of the distance between the original and simplified polylines.";
 
-constexpr const char* CGAL_Polyline_simplification_2_Scaled_squared_distance_cost_Scaled_squared_distance_cost = "Initializes the cost function.";
-constexpr const char* CGAL_Polyline_simplification_2_Scaled_squared_distance_cost_operator = "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) , returns the maximum of the square distances between each point along the original subpolyline between vicp and vicr , and the straight line segment from *vicp->point() to *vicr->point() divided by the shortest squared distance between that segment and each of the vertices adjacent to vicq .
+constexpr const char* Polyline_simplification_2_Scaled_squared_distance_cost_Scaled_squared_distance_cost = "Initializes the cost function.";
+constexpr const char* Polyline_simplification_2_Scaled_squared_distance_cost_operator = "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) , returns the maximum of the square distances between each point along the original subpolyline between vicp and vicr , and the straight line segment from *vicp->point() to *vicr->point() divided by the shortest squared distance between that segment and each of the vertices adjacent to vicq .
 
 CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that
 is model of PolylineSimplificationVertexBase_2 .
@@ -53,10 +53,10 @@ vicq : typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_
 Returns: std::optional< typename CDT::Geom_traits::FT >";
 
 // CGAL::Polyline_simplification_2::Squared_distance_cost
-constexpr const char* CGAL_Polyline_simplification_2_Squared_distance_cost__class__ = "This class is a cost function which calculates the cost as the square of the distance between the original and simplified polylines.";
+constexpr const char* Polyline_simplification_2_Squared_distance_cost__class__ = "This class is a cost function which calculates the cost as the square of the distance between the original and simplified polylines.";
 
-constexpr const char* CGAL_Polyline_simplification_2_Squared_distance_cost_Squared_distance_cost = "Initializes the cost function.";
-constexpr const char* CGAL_Polyline_simplification_2_Squared_distance_cost_operator = "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) ,.
+constexpr const char* Polyline_simplification_2_Squared_distance_cost_Squared_distance_cost = "Initializes the cost function.";
+constexpr const char* Polyline_simplification_2_Squared_distance_cost_operator = "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) ,.
 
 returns the maximum of the square distances between each point along the
 original subpolyline, between vicp and vicr , and the straight line segment
@@ -72,14 +72,14 @@ vicq : typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_
 Returns: std::optional< typename CDT::Geom_traits::FT >";
 
 // CGAL::Polyline_simplification_2::Stop_above_cost_threshold
-constexpr const char* CGAL_Polyline_simplification_2_Stop_above_cost_threshold__class__ = "This class is a stop predicate returning true when the cost for simplifying a vertex is greater than a certain threshold.";
+constexpr const char* Polyline_simplification_2_Stop_above_cost_threshold__class__ = "This class is a stop predicate returning true when the cost for simplifying a vertex is greater than a certain threshold.";
 
-constexpr const char* CGAL_Polyline_simplification_2_Stop_above_cost_threshold_Stop_above_cost_threshold = "Initializes it with the given threshold value.
+constexpr const char* Polyline_simplification_2_Stop_above_cost_threshold_Stop_above_cost_threshold = "Initializes it with the given threshold value.
 
 Parameters
 ----------
 threshold : double";
-constexpr const char* CGAL_Polyline_simplification_2_Stop_above_cost_threshold_operator = "Returns true when cost is greater or equal than the threshold.
+constexpr const char* Polyline_simplification_2_Stop_above_cost_threshold_operator = "Returns true when cost is greater or equal than the threshold.
 
 CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that
 is model of PolylineSimplificationVertexBase_2 .
@@ -95,14 +95,14 @@ cost : typename CDT::Geom_traits::FT
 Returns: bool";
 
 // CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold
-constexpr const char* CGAL_Polyline_simplification_2_Stop_below_count_ratio_threshold__class__ = "This class is a stop predicate returning true when the percentage of remaining vertices is smaller than a certain threshold.";
+constexpr const char* Polyline_simplification_2_Stop_below_count_ratio_threshold__class__ = "This class is a stop predicate returning true when the percentage of remaining vertices is smaller than a certain threshold.";
 
-constexpr const char* CGAL_Polyline_simplification_2_Stop_below_count_ratio_threshold_Stop_below_count_ratio_threshold = "Initializes it with the given threshold value.
+constexpr const char* Polyline_simplification_2_Stop_below_count_ratio_threshold_Stop_below_count_ratio_threshold = "Initializes it with the given threshold value.
 
 Parameters
 ----------
 threshold : double";
-constexpr const char* CGAL_Polyline_simplification_2_Stop_below_count_ratio_threshold_operator = "Returns true when ( current_count / initial_count ) is smaller or equal than the threshold.
+constexpr const char* Polyline_simplification_2_Stop_below_count_ratio_threshold_operator = "Returns true when ( current_count / initial_count ) is smaller or equal than the threshold.
 
 CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that
 is model of PolylineSimplificationVertexBase_2 .
@@ -118,14 +118,14 @@ current_count : std::size_t
 Returns: bool";
 
 // CGAL::Polyline_simplification_2::Stop_below_count_threshold
-constexpr const char* CGAL_Polyline_simplification_2_Stop_below_count_threshold__class__ = "This class is a stop predicate returning true when the number of vertices is smaller than a certain threshold.";
+constexpr const char* Polyline_simplification_2_Stop_below_count_threshold__class__ = "This class is a stop predicate returning true when the number of vertices is smaller than a certain threshold.";
 
-constexpr const char* CGAL_Polyline_simplification_2_Stop_below_count_threshold_Stop_below_count_threshold = "Initializes it with the given threshold value.
+constexpr const char* Polyline_simplification_2_Stop_below_count_threshold_Stop_below_count_threshold = "Initializes it with the given threshold value.
 
 Parameters
 ----------
 threshold : std::size_t";
-constexpr const char* CGAL_Polyline_simplification_2_Stop_below_count_threshold_operator = "Returns true when current_count is smaller or equal than the threshold.
+constexpr const char* Polyline_simplification_2_Stop_below_count_threshold_operator = "Returns true when current_count is smaller or equal than the threshold.
 
 CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that
 is model of PolylineSimplificationVertexBase_2 .
@@ -141,7 +141,7 @@ current_count : std::size_t
 Returns: bool";
 
 // CGAL::Polyline_simplification_2::Vertex_base_2
-constexpr const char* CGAL_Polyline_simplification_2_Vertex_base_2__class__ = "A vertex base class with data members needed by the simplification algorithm.";
+constexpr const char* Polyline_simplification_2_Vertex_base_2__class__ = "A vertex base class with data members needed by the simplification algorithm.";
 
 
 // PolylineSimplificationCostFunction

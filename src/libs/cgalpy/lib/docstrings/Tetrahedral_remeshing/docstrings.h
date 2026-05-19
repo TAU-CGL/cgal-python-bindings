@@ -7,7 +7,7 @@ namespace cgalpy {
 namespace docstrings {
 namespace Tetrahedral_remeshing {
 
-constexpr const char* CGAL_Adaptive_remeshing_sizing_field_interpolate_on_n_vertices = "Returns size at point p , by interpolation among neighbors.
+constexpr const char* Adaptive_remeshing_sizing_field_interpolate_on_n_vertices = "Returns size at point p , by interpolation among neighbors.
 
 Parameters
 ----------
@@ -15,7 +15,7 @@ p : const Point_3 &
 vertices : const std::vector< Point_with_info > &
 
 Returns: FT";
-constexpr const char* CGAL_Adaptive_remeshing_sizing_field_operator = "Returns size at point p , assumed to be included in the input subcomplex with dimension dim and index index .
+constexpr const char* Adaptive_remeshing_sizing_field_operator = "Returns size at point p , assumed to be included in the input subcomplex with dimension dim and index index .
 
 Parameters
 ----------
@@ -28,23 +28,23 @@ Returns: FT";
 
 
 // CGAL::Tetrahedral_remeshing::Remeshing_cell_base_3
-constexpr const char* CGAL_Tetrahedral_remeshing_Remeshing_cell_base_3__class__ = "The class Remeshing_cell_base_3 is a model of the concept RemeshingCellBase_3 .";
+constexpr const char* Tetrahedral_remeshing_Remeshing_cell_base_3__class__ = "The class Remeshing_cell_base_3 is a model of the concept RemeshingCellBase_3 .";
 
 
 
 // CGAL::Tetrahedral_remeshing::Remeshing_triangulation_3
-constexpr const char* CGAL_Tetrahedral_remeshing_Remeshing_triangulation_3__class__ = "The class Remeshing_triangulation_3 is a class template which provides a valid triangulation type that can be used as the 3D triangulation input for the tetrahedral remeshing process.";
+constexpr const char* Tetrahedral_remeshing_Remeshing_triangulation_3__class__ = "The class Remeshing_triangulation_3 is a class template which provides a valid triangulation type that can be used as the 3D triangulation input for the tetrahedral remeshing process.";
 
 
 // CGAL::Tetrahedral_remeshing::Remeshing_vertex_base_3
-constexpr const char* CGAL_Tetrahedral_remeshing_Remeshing_vertex_base_3__class__ = "The class Remeshing_vertex_base_3 is a model of the concept RemeshingVertexBase_3 .";
+constexpr const char* Tetrahedral_remeshing_Remeshing_vertex_base_3__class__ = "The class Remeshing_vertex_base_3 is a model of the concept RemeshingVertexBase_3 .";
 
 
 // CGAL::Tetrahedral_remeshing_sizing_field
-constexpr const char* CGAL_Tetrahedral_remeshing_sizing_field__class__ = "Sizing field virtual class, designed for tetrahedral remeshing.";
+constexpr const char* Tetrahedral_remeshing_sizing_field__class__ = "Sizing field virtual class, designed for tetrahedral remeshing.";
 
 
-constexpr const char* CGAL_Uniform_sizing_field_Uniform_sizing_field = "Constructor.
+constexpr const char* Uniform_sizing_field_Uniform_sizing_field = "Constructor.
 
 size the target edge length for remeshing
 

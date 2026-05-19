@@ -8,21 +8,21 @@ namespace docstrings {
 namespace Triangulation_on_sphere_2 {
 
 // CGAL::Delaunay_triangulation_on_sphere_2
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2__class__ = "The class Delaunay_triangulation_on_sphere_2 is designed to represent the Delaunay triangulation of a set of points on the 2-sphere.";
+constexpr const char* Delaunay_triangulation_on_sphere_2__class__ = "The class Delaunay_triangulation_on_sphere_2 is designed to represent the Delaunay triangulation of a set of points on the 2-sphere.";
 
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Geom_traits = "The traits class.
+constexpr const char* Delaunay_triangulation_on_sphere_2_Geom_traits = "The traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Point = "The point type representing a point on the sphere.
+constexpr const char* Delaunay_triangulation_on_sphere_2_Point = "The point type representing a point on the sphere.
 
 Returns: Traits::Point_on_sphere_2";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2 = "introduces an empty triangulation and sets the center and radius of the sphere to c and r respectively.
+constexpr const char* Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2 = "introduces an empty triangulation and sets the center and radius of the sphere to c and r respectively.
 
 Parameters
 ----------
 c : const Point_3 &
 r : const FT";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_1 = "introduces an empty triangulation.
+constexpr const char* Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_1 = "introduces an empty triangulation.
 
 The values for the center and radius must be either already set in the traits
 (if gt is provided) or must be set after the construction, using the function
@@ -31,7 +31,7 @@ set_center_and_radius() .
 Parameters
 ----------
 gt : const Geom_traits &";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_2 = "introduces an empty triangulation, sets the center and radius of the sphere to c and r respectively, and inserts the point range [first; beyond[ .
+constexpr const char* Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_2 = "introduces an empty triangulation, sets the center and radius of the sphere to c and r respectively, and inserts the point range [first; beyond[ .
 
 PointOnSphereIterator must be a model of InputIterator with value type
 Point_on_sphere_2 or Point_3 .
@@ -42,7 +42,7 @@ first : PointOnSphereIterator
 beyond : PointOnSphereIterator
 center : const Point_3 &
 radius : const FT";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_3 = "introduces an empty triangulation whose center and radius are set according to values within the traits and inserts the point range [first;beyond[ .
+constexpr const char* Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_3 = "introduces an empty triangulation whose center and radius are set according to values within the traits and inserts the point range [first;beyond[ .
 
 It is the user's responsibility to ensure that the center and radius are set
 as intended in gt . PointOnSphereIterator must be a model of InputIterator
@@ -53,14 +53,14 @@ Parameters
 first : PointOnSphereIterator
 beyond : PointOnSphereIterator
 gt : const Geom_traits &";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_4 = "Copy constructor.
+constexpr const char* Delaunay_triangulation_on_sphere_2_Delaunay_triangulation_on_sphere_2_4 = "Copy constructor.
 
 All the vertices and faces are duplicated.
 
 Parameters
 ----------
 tr : const Delaunay_triangulation_on_sphere_2< Traits, TDS > &";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_side_of_oriented_circle = "returns the side of p with respect to the circle circumscribing the triangle associated with f .
+constexpr const char* Delaunay_triangulation_on_sphere_2_side_of_oriented_circle = "returns the side of p with respect to the circle circumscribing the triangle associated with f .
 
 Parameters
 ----------
@@ -68,7 +68,7 @@ f : Face_handle
 p : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_insert = "inserts the point p .
+constexpr const char* Delaunay_triangulation_on_sphere_2_insert = "inserts the point p .
 
 If the point p coincides with an already existing vertex, this vertex is
 returned and the triangulation remains unchanged. The optional parameter f is
@@ -80,7 +80,7 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_insert_1 = "inserts the point p at the location given by (lt, loc, li) .
+constexpr const char* Delaunay_triangulation_on_sphere_2_insert_1 = "inserts the point p at the location given by (lt, loc, li) .
 
 Triangulation_on_sphere_2::locate()
 
@@ -92,14 +92,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Delaunay_triangulation_on_sphere_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_insert_2 = "inserts the points in the range [first, beyond) and returns the number of inserted points.
+constexpr const char* Delaunay_triangulation_on_sphere_2_insert_2 = "inserts the points in the range [first, beyond) and returns the number of inserted points.
 
 PointOnSphereIterator must be a model of InputIterator with value type Point .
 
@@ -109,12 +109,12 @@ first : PointOnSphereIterator
 beyond : PointOnSphereIterator
 
 Returns: size_type";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_remove = "removes the vertex v from the triangulation.
+constexpr const char* Delaunay_triangulation_on_sphere_2_remove = "removes the vertex v from the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p into output iterators.
+constexpr const char* Delaunay_triangulation_on_sphere_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p into output iterators.
 
 This function outputs in the container pointed to by fit the faces which are
 in conflict with point p , i. e., the faces whose circumcircle contains p . It
@@ -137,35 +137,35 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: std::pair< OutputItFaces, OutputItBoundaryEdges >";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual = "returns the center of the circle circumscribed to face f
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual = "returns the center of the circle circumscribed to face f
 
 Parameters
 ----------
 f : const Face_handle
 
 Returns: Point_3";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_1 = "returns the line segment with endpoints the circumcenters of the faces incident to the edge e .
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_1 = "returns the line segment with endpoints the circumcenters of the faces incident to the edge e .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Segment_3";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_2 = "returns the line segment with endpoints the circumcenters of the faces incident to the edge *ec .
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_2 = "returns the line segment with endpoints the circumcenters of the faces incident to the edge *ec .
 
 Parameters
 ----------
 ec : const Edge_circulator
 
 Returns: Segment_3";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_3 = "returns the line segment with endpoints the circumcenters of the faces incident to the edge *ei .
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_3 = "returns the line segment with endpoints the circumcenters of the faces incident to the edge *ei .
 
 Parameters
 ----------
 ei : const All_edges_iterator
 
 Returns: Segment_3";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_on_sphere = "returns the intersection of the dual of the face f and the sphere.
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_on_sphere = "returns the intersection of the dual of the face f and the sphere.
 
 dimension() == 2 and f is a solid face.
 
@@ -174,7 +174,7 @@ Parameters
 f : const Face_handle
 
 Returns: Point";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_on_sphere_1 = "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge e .
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_on_sphere_1 = "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge e .
 
 dimension() == 2 and e is not a ghost edge.
 
@@ -183,7 +183,7 @@ Parameters
 e : const Edge &
 
 Returns: Arc_on_sphere_2";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_on_sphere_2 = "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge *ec .
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_on_sphere_2 = "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge *ec .
 
 dimension() == 2 and *ec is not a ghost edge.
 
@@ -192,7 +192,7 @@ Parameters
 ec : const Edge_circulator
 
 Returns: Arc_on_sphere_2";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_dual_on_sphere_3 = "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge *ei .
+constexpr const char* Delaunay_triangulation_on_sphere_2_dual_on_sphere_3 = "returns the arc of great circle with endpoints the circumcenters of the faces incident to the edge *ei .
 
 dimension() == 2 and *ei is not a ghost edge.
 
@@ -201,7 +201,7 @@ Parameters
 ei : const All_edges_iterator
 
 Returns: Arc_on_sphere_2";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_2_is_valid = "tests the validity of the triangulation as a Triangulation_on_sphere_2 and additionally tests the Delaunay property.
+constexpr const char* Delaunay_triangulation_on_sphere_2_is_valid = "tests the validity of the triangulation as a Triangulation_on_sphere_2 and additionally tests the Delaunay property.
 
 This method is mainly useful for debugging Delaunay triangulation algorithms.
 
@@ -213,30 +213,30 @@ level : int
 Returns: bool";
 
 // CGAL::Delaunay_triangulation_on_sphere_traits_2
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2__class__ = "The class Delaunay_triangulation_on_sphere_traits_2 is a model of the concept DelaunayTriangulationOnSphereTraits_2 .";
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2__class__ = "The class Delaunay_triangulation_on_sphere_traits_2 is a model of the concept DelaunayTriangulationOnSphereTraits_2 .";
 
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_Collinear_are_strictly_ordered_on_great_circle_2 = "Internally uses LK::Coplanar_orientation_3 .
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_Collinear_are_strictly_ordered_on_great_circle_2 = "Internally uses LK::Coplanar_orientation_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_Equal_on_sphere_2 = "If the kernel cannot represent algebraic coordinates exactly, there is a tolerance around the sphere, and thus different points of $ \\mathbb{R}^3$ can actually correspond to the same point on the sphere.
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_Equal_on_sphere_2 = "If the kernel cannot represent algebraic coordinates exactly, there is a tolerance around the sphere, and thus different points of $ \\mathbb{R}^3$ can actually correspond to the same point on the sphere.
 
 This functor checks if two points project onto the same point on the sphere.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_Orientation_on_sphere_2 = "Internally uses LK::Orientation_3 .
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_Orientation_on_sphere_2 = "Internally uses LK::Orientation_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_Construct_arc_on_sphere_2 = "Internally uses SK::Construct_circular_arc_3 .
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_Construct_arc_on_sphere_2 = "Internally uses SK::Construct_circular_arc_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_is_on_sphere = "returns whether p is exactly on the sphere if LK can represent algebraic coordinates, or whether p is within an automatically computed small distance otherwise.
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_is_on_sphere = "returns whether p is exactly on the sphere if LK can represent algebraic coordinates, or whether p is within an automatically computed small distance otherwise.
 
 Parameters
 ----------
 p : const Point_on_sphere_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_are_points_too_close = "returns false if LK can represent algebraic coordinates, or whether the distance between p and q is lower than $ 2 \\sqrt{R\\delta} $ otherwise.
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_are_points_too_close = "returns false if LK can represent algebraic coordinates, or whether the distance between p and q is lower than $ 2 \\sqrt{R\\delta} $ otherwise.
 
 Parameters
 ----------
@@ -244,27 +244,27 @@ p : const Point_on_sphere_2 &
 q : const Point_on_sphere_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_FT = "The field number type.
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_FT = "The field number type.
 
 Returns: LK::FT";
-constexpr const char* CGAL_Delaunay_triangulation_on_sphere_traits_2_Arc_on_sphere_2 = "An arc of a great circle, used to represent a curved segment on the sphere (Voronoi or Delaunay edge).
+constexpr const char* Delaunay_triangulation_on_sphere_traits_2_Arc_on_sphere_2 = "An arc of a great circle, used to represent a curved segment on the sphere (Voronoi or Delaunay edge).
 
 Returns: SK::Circular_arc_3";
 
 // CGAL::Projection_on_sphere_traits_3
-constexpr const char* CGAL_Projection_on_sphere_traits_3__class__ = "The class Projection_on_sphere_traits_3 is a model of the concept DelaunayTriangulationOnSphereTraits_2 .";
+constexpr const char* Projection_on_sphere_traits_3__class__ = "The class Projection_on_sphere_traits_3 is a model of the concept DelaunayTriangulationOnSphereTraits_2 .";
 
-constexpr const char* CGAL_Projection_on_sphere_traits_3_Equal_on_sphere_2 = "Points are equal if they have the same projection onto the sphere.
+constexpr const char* Projection_on_sphere_traits_3_Equal_on_sphere_2 = "Points are equal if they have the same projection onto the sphere.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Projection_on_sphere_traits_3_is_on_sphere = "Due to the chosen point representation, any point is theoretically on the sphere, and this function always returns true .
+constexpr const char* Projection_on_sphere_traits_3_is_on_sphere = "Due to the chosen point representation, any point is theoretically on the sphere, and this function always returns true .
 
 Parameters
 ----------
 p : const Point_on_sphere_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Projection_on_sphere_traits_3_are_points_too_close = "returns false if LK can represent algebraic coordinates, or whether the distance between p and q is lower than $ 2 \\sqrt{R\\delta} $ otherwise (see the traits class CGAL::Delaunay_triangulation_on_sphere_traits_2 ).
+constexpr const char* Projection_on_sphere_traits_3_are_points_too_close = "returns false if LK can represent algebraic coordinates, or whether the distance between p and q is lower than $ 2 \\sqrt{R\\delta} $ otherwise (see the traits class CGAL::Delaunay_triangulation_on_sphere_traits_2 ).
 
 Parameters
 ----------
@@ -272,18 +272,18 @@ p : const Point_on_sphere_2 &
 q : const Point_on_sphere_2 &
 
 Returns: bool";
-constexpr const char* CGAL_Projection_on_sphere_traits_3_FT = "The field number type.
+constexpr const char* Projection_on_sphere_traits_3_FT = "The field number type.
 
 Returns: LK::FT";
-constexpr const char* CGAL_Projection_on_sphere_traits_3_Point_on_sphere_2 = "The point on the sphere type.
+constexpr const char* Projection_on_sphere_traits_3_Point_on_sphere_2 = "The point on the sphere type.
 
 Returns: unspecified_type";
 
 // CGAL::Triangulation_on_sphere_2
-constexpr const char* CGAL_Triangulation_on_sphere_2__class__ = "The class Triangulation_on_sphere_2 is the basic class designed to represent a triangulation of a point set on a sphere: its vertices coincide with the points of the set.";
+constexpr const char* Triangulation_on_sphere_2__class__ = "The class Triangulation_on_sphere_2 is the basic class designed to represent a triangulation of a point set on a sphere: its vertices coincide with the points of the set.";
 
-constexpr const char* CGAL_Triangulation_on_sphere_2_Locate_type = "specifies which case occurs when locating a query point in the triangulation.";
-constexpr const char* CGAL_Triangulation_on_sphere_2_locate = "locates the point query in the triangulation, and returns information on this location.
+constexpr const char* Triangulation_on_sphere_2_Locate_type = "specifies which case occurs when locating a query point in the triangulation.";
+constexpr const char* Triangulation_on_sphere_2_locate = "locates the point query in the triangulation, and returns information on this location.
 
 If the point is (according to the traits) not on the sphere or is too close to
 an existing vertex, or if the dimension of the triangulation is not 2, or if
@@ -299,7 +299,7 @@ query : const Point &
 f : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Triangulation_on_sphere_2_locate_1 = "Same as above.
+constexpr const char* Triangulation_on_sphere_2_locate_1 = "Same as above.
 
 Additionally, the parameters lt and li describe where the query point is
 located. The variable lt is set to the locate type of the query. If lt==
@@ -316,94 +316,94 @@ li : int &
 h : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Geom_traits = "The traits class.
+constexpr const char* Triangulation_on_sphere_2_Geom_traits = "The traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Triangulation_data_structure = "The triangulation data structure type.
+constexpr const char* Triangulation_on_sphere_2_Triangulation_data_structure = "The triangulation data structure type.
 
 Returns: TDS";
-constexpr const char* CGAL_Triangulation_on_sphere_2_size_type = "Size type (an unsigned integral type).
+constexpr const char* Triangulation_on_sphere_2_size_type = "Size type (an unsigned integral type).
 
 Returns: Triangulation_data_structure::size_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_FT = "The number type.
+constexpr const char* Triangulation_on_sphere_2_FT = "The number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Point = "The point type representing a point on the sphere.
+constexpr const char* Triangulation_on_sphere_2_Point = "The point type representing a point on the sphere.
 
 Returns: Traits::Point_on_sphere_2";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Point_3 = "The 3D point type.
+constexpr const char* Triangulation_on_sphere_2_Point_3 = "The 3D point type.
 
 Returns: Traits::Point_3";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Segment_3 = "The 3D segment type.
+constexpr const char* Triangulation_on_sphere_2_Segment_3 = "The 3D segment type.
 
 Returns: Traits::Segment_3";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Triangle_3 = "The 3D triangle type.
+constexpr const char* Triangulation_on_sphere_2_Triangle_3 = "The 3D triangle type.
 
 Returns: Traits::Triangle_3";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Arc_on_sphere_2 = "An arc of a great circle, used to represent a curved segment (Voronoi or Delaunay edge).
+constexpr const char* Triangulation_on_sphere_2_Arc_on_sphere_2 = "An arc of a great circle, used to represent a curved segment (Voronoi or Delaunay edge).
 
 Returns: Traits::Arc_on_sphere_2";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Vertex = "The vertex type.
+constexpr const char* Triangulation_on_sphere_2_Vertex = "The vertex type.
 
 Returns: TDS::Vertex";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Edge = "The edge type.
+constexpr const char* Triangulation_on_sphere_2_Edge = "The edge type.
 
 Returns: TDS::Edge";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Face = "The face type.
+constexpr const char* Triangulation_on_sphere_2_Face = "The face type.
 
 Returns: TDS::Face";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Vertex_handle = "Handle to a vertex.
+constexpr const char* Triangulation_on_sphere_2_Vertex_handle = "Handle to a vertex.
 
 Returns: TDS::Vertex_handle";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Face_handle = "Handle to a face.
+constexpr const char* Triangulation_on_sphere_2_Face_handle = "Handle to a face.
 
 Returns: TDS::Face_handle";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Vertices_iterator = "Iterator over all vertices.
+constexpr const char* Triangulation_on_sphere_2_Vertices_iterator = "Iterator over all vertices.
 
 Returns: TDS::Vertex_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Vertex_handles = "Range type for iterating over all vertices, with a nested type iterator that has as value type Vertex_handle .
+constexpr const char* Triangulation_on_sphere_2_Vertex_handles = "Range type for iterating over all vertices, with a nested type iterator that has as value type Vertex_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_on_sphere_2_All_edges_iterator = "Iterator over all edges.
+constexpr const char* Triangulation_on_sphere_2_All_edges_iterator = "Iterator over all edges.
 
 Returns: TDS::Edge_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_All_edges = "Range type for iterating over all edges (including non-solid ones).
+constexpr const char* Triangulation_on_sphere_2_All_edges = "Range type for iterating over all edges (including non-solid ones).
 
 Returns: Iterator_range< All_edges_iterator >";
-constexpr const char* CGAL_Triangulation_on_sphere_2_All_faces_iterator = "Iterator over all faces.
+constexpr const char* Triangulation_on_sphere_2_All_faces_iterator = "Iterator over all faces.
 
 Returns: TDS::Face_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_All_face_handles = "Range type for iterating over all faces (including ghost faces), with a nested type iterator that has as value type Face_handle .
+constexpr const char* Triangulation_on_sphere_2_All_face_handles = "Range type for iterating over all faces (including ghost faces), with a nested type iterator that has as value type Face_handle .
 
 Returns: Iterator_range< All_faces_iterator >";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Solid_edges_iterator = "Iterator over all solid edges.
+constexpr const char* Triangulation_on_sphere_2_Solid_edges_iterator = "Iterator over all solid edges.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Solid_edges = "Range type for iterating over all solid edges.
+constexpr const char* Triangulation_on_sphere_2_Solid_edges = "Range type for iterating over all solid edges.
 
 Returns: Iterator_range< Solid_edges_iterator >";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Solid_faces_iterator = "Iterator over all solid faces.
+constexpr const char* Triangulation_on_sphere_2_Solid_faces_iterator = "Iterator over all solid faces.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Solid_face_handles = "Range type for iterating over solid faces, with a nested type iterator that has as value type Face_handle .
+constexpr const char* Triangulation_on_sphere_2_Solid_face_handles = "Range type for iterating over solid faces, with a nested type iterator that has as value type Face_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Vertex_circulator = "Circulator over all vertices incident to a given vertex.
+constexpr const char* Triangulation_on_sphere_2_Vertex_circulator = "Circulator over all vertices incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Edge_circulator = "Circulator over all edges incident to a given vertex.
+constexpr const char* Triangulation_on_sphere_2_Edge_circulator = "Circulator over all edges incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Face_circulator = "Circulator over all faces incident to a given vertex.
+constexpr const char* Triangulation_on_sphere_2_Face_circulator = "Circulator over all faces incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Point_iterator = "Iterator over the points corresponding the vertices of the triangulation.
+constexpr const char* Triangulation_on_sphere_2_Point_iterator = "Iterator over the points corresponding the vertices of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Points = "Range type for iterating over the points of the finite vertices.
+constexpr const char* Triangulation_on_sphere_2_Points = "Range type for iterating over the points of the finite vertices.
 
 Returns: Iterator_range< Point_iterator >";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Triangulation_on_sphere_2 = "constructs an empty triangulation.
+constexpr const char* Triangulation_on_sphere_2_Triangulation_on_sphere_2 = "constructs an empty triangulation.
 
 The values for the center and radius must be either already set in the traits
 (if gt is passed) or must be set after the construction, using the function
@@ -412,13 +412,13 @@ set_center_and_radius() .
 Parameters
 ----------
 gt : const Traits &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Triangulation_on_sphere_2_1 = "constructs an empty triangulation and sets the center and radius to c and r respectively.
+constexpr const char* Triangulation_on_sphere_2_Triangulation_on_sphere_2_1 = "constructs an empty triangulation and sets the center and radius to c and r respectively.
 
 Parameters
 ----------
 c : const Point_3 &
 r : const FT";
-constexpr const char* CGAL_Triangulation_on_sphere_2_Triangulation_on_sphere_2_2 = "Copy constructor.
+constexpr const char* Triangulation_on_sphere_2_Triangulation_on_sphere_2_2 = "Copy constructor.
 
 All the vertices and faces are duplicated. After the copy, *this and tr refer
 to different triangulations: if tr is modified, *this is not.
@@ -426,7 +426,7 @@ to different triangulations: if tr is modified, *this is not.
 Parameters
 ----------
 tr : const Triangulation_on_sphere_2 &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_operator = "Assignment operator.
+constexpr const char* Triangulation_on_sphere_2_operator = "Assignment operator.
 
 This performs a deep copy of the triangulation, duplicating both vertices and
 faces.
@@ -436,13 +436,13 @@ Parameters
 tr : Triangulation_on_sphere_2 < Traits, TDS >
 
 Returns: Triangulation_on_sphere_2 &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_swap = "The triangulations tr and *this are swapped.
+constexpr const char* Triangulation_on_sphere_2_swap = "The triangulations tr and *this are swapped.
 
 Parameters
 ----------
 tr : Triangulation_on_sphere_2 &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_clear = "deletes all faces and vertices, resulting in an empty triangulation.";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_ghost = "returns true if f is a ghost face, and false otherwise.
+constexpr const char* Triangulation_on_sphere_2_clear = "deletes all faces and vertices, resulting in an empty triangulation.";
+constexpr const char* Triangulation_on_sphere_2_is_ghost = "returns true if f is a ghost face, and false otherwise.
 
 dimension() == 2
 
@@ -451,7 +451,7 @@ Parameters
 f : const Face_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_ghost_1 = "returns true if e is a ghost edge, that is if both its incident faces are ghost faces, and false otherwise.
+constexpr const char* Triangulation_on_sphere_2_is_ghost_1 = "returns true if e is a ghost edge, that is if both its incident faces are ghost faces, and false otherwise.
 
 dimension() == 2
 
@@ -460,7 +460,7 @@ Parameters
 e : const Edge &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_sphere_2_dimension = "returns:
+constexpr const char* Triangulation_on_sphere_2_dimension = "returns:
 
 -2 if the triangulation is empty -1 if the triangulation contains a single
 vertex 0 if the triangulation contains exactly two vertices 1 if the
@@ -471,34 +471,34 @@ is not triangulated itself. Thus the triangulation of dimension one consists
 of one polygon and has no faces.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_on_sphere_2_geom_traits = "returns a const reference to the triangulation traits object.
+constexpr const char* Triangulation_on_sphere_2_geom_traits = "returns a const reference to the triangulation traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_tds = "returns a const reference to the triangulation data structure.
+constexpr const char* Triangulation_on_sphere_2_tds = "returns a const reference to the triangulation data structure.
 
 Returns: const Triangulation_data_structure &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_number_of_vertices = "returns the number of vertices.
+constexpr const char* Triangulation_on_sphere_2_number_of_vertices = "returns the number of vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_number_of_faces = "returns the number of faces.
+constexpr const char* Triangulation_on_sphere_2_number_of_faces = "returns the number of faces.
 
 Note that this includes ghost faces.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_number_of_ghost_faces = "returns the number of ghost faces.
+constexpr const char* Triangulation_on_sphere_2_number_of_ghost_faces = "returns the number of ghost faces.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_number_of_solid_faces = "returns the number of solid faces.
+constexpr const char* Triangulation_on_sphere_2_number_of_solid_faces = "returns the number of solid faces.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_on_sphere_2_point = "returns the geometric position of the vertex v .
+constexpr const char* Triangulation_on_sphere_2_point = "returns the geometric position of the vertex v .
 
 Parameters
 ----------
 v : const Vertex_handle
 
 Returns: const Point &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_point_1 = "returns the geometric position of the i -th vertex of the face f .
+constexpr const char* Triangulation_on_sphere_2_point_1 = "returns the geometric position of the i -th vertex of the face f .
 
 Parameters
 ----------
@@ -506,7 +506,7 @@ f : const Face_handle
 i : const int
 
 Returns: const Point &";
-constexpr const char* CGAL_Triangulation_on_sphere_2_segment = "returns the 3D line segment formed by the vertices of the edge e .
+constexpr const char* Triangulation_on_sphere_2_segment = "returns the 3D line segment formed by the vertices of the edge e .
 
 t.dimension() $ \\geq1$ .
 
@@ -515,7 +515,7 @@ Parameters
 e : const Edge &
 
 Returns: Segment_3";
-constexpr const char* CGAL_Triangulation_on_sphere_2_segment_1 = "returns the 3D line segment formed by the vertices of the edge (f, i) .
+constexpr const char* Triangulation_on_sphere_2_segment_1 = "returns the 3D line segment formed by the vertices of the edge (f, i) .
 
 t.dimension() $ \\geq1$ .
 
@@ -525,7 +525,7 @@ f : const Face_handle
 i : int
 
 Returns: Segment_3";
-constexpr const char* CGAL_Triangulation_on_sphere_2_segment_on_sphere = "returns the great circle arc formed by the vertices of the edge e .
+constexpr const char* Triangulation_on_sphere_2_segment_on_sphere = "returns the great circle arc formed by the vertices of the edge e .
 
 t.dimension() $ \\geq1$ .
 
@@ -534,7 +534,7 @@ Parameters
 e : const Edge &
 
 Returns: Arc_on_sphere_2";
-constexpr const char* CGAL_Triangulation_on_sphere_2_segment_on_sphere_1 = "returns the great circle arc formed by the vertices of the edge (f, i) .
+constexpr const char* Triangulation_on_sphere_2_segment_on_sphere_1 = "returns the great circle arc formed by the vertices of the edge (f, i) .
 
 t.dimension() $ \\geq1$ .
 
@@ -544,7 +544,7 @@ f : const Face_handle
 i : int
 
 Returns: Arc_on_sphere_2";
-constexpr const char* CGAL_Triangulation_on_sphere_2_triangle = "returns the 3D triangle formed by the three vertices of the face f .
+constexpr const char* Triangulation_on_sphere_2_triangle = "returns the 3D triangle formed by the three vertices of the face f .
 
 t.dimension() $ \\geq2$ .
 
@@ -553,71 +553,71 @@ Parameters
 f : const Face_handle
 
 Returns: Triangle_3";
-constexpr const char* CGAL_Triangulation_on_sphere_2_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Triangulation_on_sphere_2_vertices_begin = "Starts at an arbitrary vertex.
 
 Returns: Vertices_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_vertices_end = "Past-the-end iterator.
+constexpr const char* Triangulation_on_sphere_2_vertices_end = "Past-the-end iterator.
 
 Returns: Vertices_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_vertex_handles = "returns a range of iterators over all vertices.
+constexpr const char* Triangulation_on_sphere_2_vertex_handles = "returns a range of iterators over all vertices.
 
 While the value type of Vertices_iterator is Vertex , the value type of
 Vertex_handles::iterator is Vertex_handle .
 
 Returns: Vertex_handles";
-constexpr const char* CGAL_Triangulation_on_sphere_2_all_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Triangulation_on_sphere_2_all_edges_begin = "Starts at an arbitrary edge.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_all_edges_end = "Past-the-end iterator.
+constexpr const char* Triangulation_on_sphere_2_all_edges_end = "Past-the-end iterator.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_all_edges = "returns a range of iterators over all edges.
+constexpr const char* Triangulation_on_sphere_2_all_edges = "returns a range of iterators over all edges.
 
 Returns: All_edges";
-constexpr const char* CGAL_Triangulation_on_sphere_2_all_faces_begin = "Starts at an arbitrary face.
+constexpr const char* Triangulation_on_sphere_2_all_faces_begin = "Starts at an arbitrary face.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_all_faces_end = "Past-the-end iterator.
+constexpr const char* Triangulation_on_sphere_2_all_faces_end = "Past-the-end iterator.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_all_face_handles = "returns a range of iterators over all faces.
+constexpr const char* Triangulation_on_sphere_2_all_face_handles = "returns a range of iterators over all faces.
 
 While the value type of All_faces_iterator is Face , the value type of
 All_face_handles::iterator is Face_handle .
 
 Returns: All_face_handles";
-constexpr const char* CGAL_Triangulation_on_sphere_2_solid_faces_begin = "Starts at an arbitrary face.
+constexpr const char* Triangulation_on_sphere_2_solid_faces_begin = "Starts at an arbitrary face.
 
 Returns: Solid_faces_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_solid_faces_end = "Past-the-end iterator.
+constexpr const char* Triangulation_on_sphere_2_solid_faces_end = "Past-the-end iterator.
 
 Returns: Solid_faces_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_solid_face_handles = "returns a range of iterators over all solid faces.
+constexpr const char* Triangulation_on_sphere_2_solid_face_handles = "returns a range of iterators over all solid faces.
 
 While the value type of Solid_faces_iterator is Face , the value type of
 Solid_face_handles::iterator is Face_handle .
 
 Returns: Solid_face_handles";
-constexpr const char* CGAL_Triangulation_on_sphere_2_solid_edges_begin = "Starts at an arbitrary face.
+constexpr const char* Triangulation_on_sphere_2_solid_edges_begin = "Starts at an arbitrary face.
 
 Returns: Solid_edges_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_solid_edges_end = "Past-the-end iterator.
+constexpr const char* Triangulation_on_sphere_2_solid_edges_end = "Past-the-end iterator.
 
 Returns: Solid_edges_iterator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_solid_edges = "returns a range of iterators over all solid edges.
+constexpr const char* Triangulation_on_sphere_2_solid_edges = "returns a range of iterators over all solid edges.
 
 Returns: Solid_edges";
-constexpr const char* CGAL_Triangulation_on_sphere_2_points = "returns a range of iterators over all the points of the triangulations.
+constexpr const char* Triangulation_on_sphere_2_points = "returns a range of iterators over all the points of the triangulations.
 
 Returns: Points";
-constexpr const char* CGAL_Triangulation_on_sphere_2_adjacent_vertices = "Starts at an arbitrary vertex adjacent to the vertex v .
+constexpr const char* Triangulation_on_sphere_2_adjacent_vertices = "Starts at an arbitrary vertex adjacent to the vertex v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_adjacent_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
+constexpr const char* Triangulation_on_sphere_2_adjacent_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
 
 The face f is incident to the vertex v .
 
@@ -627,14 +627,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_incident_edges = "Starts at an arbitrary edge incident to the vertex v .
+constexpr const char* Triangulation_on_sphere_2_incident_edges = "Starts at an arbitrary edge incident to the vertex v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
+constexpr const char* Triangulation_on_sphere_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
 
 The face f is incident to the vertex v .
 
@@ -644,7 +644,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_incident_faces = "Starts at an arbitrary face incident to the vertex v .
+constexpr const char* Triangulation_on_sphere_2_incident_faces = "Starts at an arbitrary face incident to the vertex v .
 
 Note that this may contain ghost faces.
 
@@ -653,7 +653,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_incident_faces_1 = "Starts at face f .
+constexpr const char* Triangulation_on_sphere_2_incident_faces_1 = "Starts at face f .
 
 The face f is incident to the vertex v .
 
@@ -663,7 +663,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_edge = "returns true if there exists an edge (ghost or solid) having va and vb as vertices.
+constexpr const char* Triangulation_on_sphere_2_is_edge = "returns true if there exists an edge (ghost or solid) having va and vb as vertices.
 
 Parameters
 ----------
@@ -671,7 +671,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_edge_1 = "returns true if there exists an edge (ghost or solid) having va and vb as vertices.
+constexpr const char* Triangulation_on_sphere_2_is_edge_1 = "returns true if there exists an edge (ghost or solid) having va and vb as vertices.
 
 If true is returned, the edge with vertices va and vb is the edge e=(fr,i)
 where fr is a handle to the face incident to e and on the right side of e
@@ -685,7 +685,7 @@ fr : Face_handle &
 i : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_face = "returns true if there exists a face (ghost or solid) having v1 , v2 and v3 as vertices.
+constexpr const char* Triangulation_on_sphere_2_is_face = "returns true if there exists a face (ghost or solid) having v1 , v2 and v3 as vertices.
 
 Parameters
 ----------
@@ -694,7 +694,7 @@ v2 : Vertex_handle
 v3 : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_face_1 = "returns true if there exists a face (ghost or solid) having v1 , v2 and v3 as vertices.
+constexpr const char* Triangulation_on_sphere_2_is_face_1 = "returns true if there exists a face (ghost or solid) having v1 , v2 and v3 as vertices.
 
 If true is returned, fr is a handle to the face with v1 , v2 and v3 as
 vertices.
@@ -707,7 +707,7 @@ v3 : Vertex_handle
 fr : Face_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_on_sphere_2_is_valid = "tests the validity of the triangulation as a Triangulation_on_sphere_2 .
+constexpr const char* Triangulation_on_sphere_2_is_valid = "tests the validity of the triangulation as a Triangulation_on_sphere_2 .
 
 This function tests the validity of the underlying data structure (using the
 function TriangulationDataStructure_2::is_valid() ), and the validity of the

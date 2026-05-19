@@ -8,125 +8,125 @@ namespace docstrings {
 namespace GraphicsView {
 
 // CGAL::Qt::CircularArcGraphicsItem
-constexpr const char* CGAL_Qt_CircularArcGraphicsItem__class__ = "An object of type CircularArcGraphicsItem is a graphics item that encapsulates a circular arc.";
+constexpr const char* Qt_CircularArcGraphicsItem__class__ = "An object of type CircularArcGraphicsItem is a graphics item that encapsulates a circular arc.";
 
-constexpr const char* CGAL_Qt_CircularArcGraphicsItem_CircularArcGraphicsItem = "Constructs a graphics item for a circular arc.";
-constexpr const char* CGAL_Qt_CircularArcGraphicsItem_edgesPen = "Returns the pen used to draw edges.
+constexpr const char* Qt_CircularArcGraphicsItem_CircularArcGraphicsItem = "Constructs a graphics item for a circular arc.";
+constexpr const char* Qt_CircularArcGraphicsItem_edgesPen = "Returns the pen used to draw edges.
 
 Returns: QPen";
-constexpr const char* CGAL_Qt_CircularArcGraphicsItem_setEdgesPen = "Sets the pen used to draw edges.";
-constexpr const char* CGAL_Qt_CircularArcGraphicsItem_setArc = "Sets the circular arc.
+constexpr const char* Qt_CircularArcGraphicsItem_setEdgesPen = "Sets the pen used to draw edges.";
+constexpr const char* Qt_CircularArcGraphicsItem_setArc = "Sets the circular arc.
 
 Parameters
 ----------
 ca2 : const Circular_arc_2< CK > &";
 
 // CGAL::Qt::ConstrainedTriangulationGraphicsItem
-constexpr const char* CGAL_Qt_ConstrainedTriangulationGraphicsItem__class__ = "An object of type ConstrainedTriangulationGraphicsItem is a graphics item that encapsulates a constrained triangulation.";
+constexpr const char* Qt_ConstrainedTriangulationGraphicsItem__class__ = "An object of type ConstrainedTriangulationGraphicsItem is a graphics item that encapsulates a constrained triangulation.";
 
-constexpr const char* CGAL_Qt_ConstrainedTriangulationGraphicsItem_ConstrainedTriangulationGraphicsItem = "Constructs a graphics item for triangulation ct .
+constexpr const char* Qt_ConstrainedTriangulationGraphicsItem_ConstrainedTriangulationGraphicsItem = "Constructs a graphics item for triangulation ct .
 
 Parameters
 ----------
 ct : CT *";
-constexpr const char* CGAL_Qt_ConstrainedTriangulationGraphicsItem_constraintsPen = "Returns the pen used to draw constraints.
+constexpr const char* Qt_ConstrainedTriangulationGraphicsItem_constraintsPen = "Returns the pen used to draw constraints.
 
 Returns: QPen";
-constexpr const char* CGAL_Qt_ConstrainedTriangulationGraphicsItem_setConstraintsPen = "Sets the pen used to draw constraints.";
+constexpr const char* Qt_ConstrainedTriangulationGraphicsItem_setConstraintsPen = "Sets the pen used to draw constraints.";
 
 // CGAL::Qt::Converter
-constexpr const char* CGAL_Qt_Converter__class__ = "An object of type Converter converts 2D CGAL Kernel objects to their equivalent objects in Qt , and the other way round.";
+constexpr const char* Qt_Converter__class__ = "An object of type Converter converts 2D CGAL Kernel objects to their equivalent objects in Qt , and the other way round.";
 
-constexpr const char* CGAL_Qt_Converter_Converter = "The clipping rect is used for unbounded CGAL objects.
+constexpr const char* Qt_Converter_Converter = "The clipping rect is used for unbounded CGAL objects.
 
 Parameters
 ----------
 clippingRect : QRectF";
-constexpr const char* CGAL_Qt_Converter_operator = "Converts a bounding box.
+constexpr const char* Qt_Converter_operator = "Converts a bounding box.
 
 Parameters
 ----------
  : Bbox_2
 
 Returns: QRectF";
-constexpr const char* CGAL_Qt_Converter_operator_1 = "Converts a point.
+constexpr const char* Qt_Converter_operator_1 = "Converts a point.
 
 Parameters
 ----------
  : K::Point_2
 
 Returns: QPointF";
-constexpr const char* CGAL_Qt_Converter_operator_2 = "Converts a circular arc point.
+constexpr const char* Qt_Converter_operator_2 = "Converts a circular arc point.
 
 Parameters
 ----------
  : K::Circular_arc_point_2
 
 Returns: QPointF";
-constexpr const char* CGAL_Qt_Converter_operator_3 = "Converts a segment.
+constexpr const char* Qt_Converter_operator_3 = "Converts a segment.
 
 Parameters
 ----------
  : K::Segment_2
 
 Returns: QLineF";
-constexpr const char* CGAL_Qt_Converter_operator_4 = "Clips the ray and converts the resulting segment.
+constexpr const char* Qt_Converter_operator_4 = "Clips the ray and converts the resulting segment.
 
 Parameters
 ----------
  : K::Ray_2
 
 Returns: QLineF";
-constexpr const char* CGAL_Qt_Converter_operator_5 = "Clips the line and converts the resulting segment.
+constexpr const char* Qt_Converter_operator_5 = "Clips the line and converts the resulting segment.
 
 Parameters
 ----------
  : K::Line_2
 
 Returns: QLineF";
-constexpr const char* CGAL_Qt_Converter_operator_6 = "Converts a triangle.
+constexpr const char* Qt_Converter_operator_6 = "Converts a triangle.
 
 Parameters
 ----------
  : K::Triangle_2
 
 Returns: QPolygonF";
-constexpr const char* CGAL_Qt_Converter_operator_7 = "Converts an iso rectangle.
+constexpr const char* Qt_Converter_operator_7 = "Converts an iso rectangle.
 
 Parameters
 ----------
  : K::Iso_rectangle_2
 
 Returns: QRectF";
-constexpr const char* CGAL_Qt_Converter_operator_8 = "Converts a list of points to a polygon.
+constexpr const char* Qt_Converter_operator_8 = "Converts a list of points to a polygon.
 
 Parameters
 ----------
  : std::list< K::Point_2 >
 
 Returns: QPolygonF";
-constexpr const char* CGAL_Qt_Converter_operator_9 = "Converts a point.
+constexpr const char* Qt_Converter_operator_9 = "Converts a point.
 
 Parameters
 ----------
  : QPointF
 
 Returns: K::Point_2";
-constexpr const char* CGAL_Qt_Converter_operator_10 = "Converts a segment.
+constexpr const char* Qt_Converter_operator_10 = "Converts a segment.
 
 Parameters
 ----------
  : QLineF
 
 Returns: K::Segment_2";
-constexpr const char* CGAL_Qt_Converter_operator_11 = "Converts an iso rectangle.
+constexpr const char* Qt_Converter_operator_11 = "Converts an iso rectangle.
 
 Parameters
 ----------
  : QRectF
 
 Returns: K::Iso_rectangle_2";
-constexpr const char* CGAL_Qt_Converter_operator_12 = "Converts a polygon to a list of points.
+constexpr const char* Qt_Converter_operator_12 = "Converts a polygon to a list of points.
 
 Parameters
 ----------
@@ -134,14 +134,14 @@ Parameters
  : QPolygonF";
 
 // CGAL::Qt::GraphicsItem
-constexpr const char* CGAL_Qt_GraphicsItem__class__ = "The CGAL graphics items hold pointers to CGAL data structures.";
+constexpr const char* Qt_GraphicsItem__class__ = "The CGAL graphics items hold pointers to CGAL data structures.";
 
-constexpr const char* CGAL_Qt_GraphicsItem_modelChanged = "This slot must be provided by derived classes.";
+constexpr const char* Qt_GraphicsItem_modelChanged = "This slot must be provided by derived classes.";
 
 // CGAL::Qt::GraphicsViewCircleInput
-constexpr const char* CGAL_Qt_GraphicsViewCircleInput__class__ = "An object of type GraphicsViewCircleInput creates a circle, defined by either center and radius, or two or three points on the circle.";
+constexpr const char* Qt_GraphicsViewCircleInput__class__ = "An object of type GraphicsViewCircleInput creates a circle, defined by either center and radius, or two or three points on the circle.";
 
-constexpr const char* CGAL_Qt_GraphicsViewCircleInput_GraphicsViewCircleInput = "
+constexpr const char* Qt_GraphicsViewCircleInput_GraphicsViewCircleInput = "
 p is a parent object. s is the scene where the circle is generated.
 pointsOnCircle is the number of points on the circle to be generated, that is
 the default value 1 corresponds to the case center/radius.
@@ -151,57 +151,57 @@ Parameters
 p : QObject *
 s : QGraphicsScene *
 pointsOnCircle : int";
-constexpr const char* CGAL_Qt_GraphicsViewCircleInput_generate = "The object o contains a std::pair<K::Point_2, K::FT> for center and radius, or a std::pair<K::Point_2, K::Point_2> for two points defining the circle, or CGAL::array<K::Point_2, 3> for three points defining the circle.
+constexpr const char* Qt_GraphicsViewCircleInput_generate = "The object o contains a std::pair<K::Point_2, K::FT> for center and radius, or a std::pair<K::Point_2, K::Point_2> for two points defining the circle, or CGAL::array<K::Point_2, 3> for three points defining the circle.
 
 Parameters
 ----------
 o : Object";
 
 // CGAL::Qt::GraphicsViewCircularArcInput
-constexpr const char* CGAL_Qt_GraphicsViewCircularArcInput__class__ = "An object of type GraphicsViewCircularArcInput creates a circular arc, defined by three points on a circle.";
+constexpr const char* Qt_GraphicsViewCircularArcInput__class__ = "An object of type GraphicsViewCircularArcInput creates a circular arc, defined by three points on a circle.";
 
-constexpr const char* CGAL_Qt_GraphicsViewCircularArcInput_GraphicsViewCircularArcInput = "
+constexpr const char* Qt_GraphicsViewCircularArcInput_GraphicsViewCircularArcInput = "
 p is a parent object. s is the scene where the circular arc is generated.
 
 Parameters
 ----------
 p : QObject *
 s : QGraphicsScene *";
-constexpr const char* CGAL_Qt_GraphicsViewCircularArcInput_generate = "The object o contains a Circular_arc_2<K> .
+constexpr const char* Qt_GraphicsViewCircularArcInput_generate = "The object o contains a Circular_arc_2<K> .
 
 Parameters
 ----------
 o : Object";
 
 // CGAL::Qt::GraphicsViewInput
-constexpr const char* CGAL_Qt_GraphicsViewInput__class__ = "An object of type GraphicsViewInput can emit a signal with CGAL::Object as argument.";
+constexpr const char* Qt_GraphicsViewInput__class__ = "An object of type GraphicsViewInput can emit a signal with CGAL::Object as argument.";
 
-constexpr const char* CGAL_Qt_GraphicsViewInput_generate = "A signal that emits a CGAL::Object .
+constexpr const char* Qt_GraphicsViewInput_generate = "A signal that emits a CGAL::Object .
 
 Parameters
 ----------
  : Object";
 
 // CGAL::Qt::GraphicsViewIsoRectangleInput
-constexpr const char* CGAL_Qt_GraphicsViewIsoRectangleInput__class__ = "An object of type GraphicsViewIsoRectangleInput creates an axis parallel rectangle.";
+constexpr const char* Qt_GraphicsViewIsoRectangleInput__class__ = "An object of type GraphicsViewIsoRectangleInput creates an axis parallel rectangle.";
 
-constexpr const char* CGAL_Qt_GraphicsViewIsoRectangleInput_GraphicsViewIsoRectangleInput = "
+constexpr const char* Qt_GraphicsViewIsoRectangleInput_GraphicsViewIsoRectangleInput = "
 p is a parent object. s is the scene where the iso rectangle is generated.
 
 Parameters
 ----------
 p : QObject *
 s : QGraphicsScene *";
-constexpr const char* CGAL_Qt_GraphicsViewIsoRectangleInput_generate = "The object o contains a K::Iso_rectangle_2 .
+constexpr const char* Qt_GraphicsViewIsoRectangleInput_generate = "The object o contains a K::Iso_rectangle_2 .
 
 Parameters
 ----------
 o : Object";
 
 // CGAL::Qt::GraphicsViewNavigation
-constexpr const char* CGAL_Qt_GraphicsViewNavigation__class__ = "An object of type GraphicsViewNavigation can be added as event filter to a Qt::QGraphicsView and its viewport.";
+constexpr const char* Qt_GraphicsViewNavigation__class__ = "An object of type GraphicsViewNavigation can be added as event filter to a Qt::QGraphicsView and its viewport.";
 
-constexpr const char* CGAL_Qt_GraphicsViewNavigation_eventFilter = "The event filter.
+constexpr const char* Qt_GraphicsViewNavigation_eventFilter = "The event filter.
 
 Parameters
 ----------
@@ -209,16 +209,16 @@ obj : QObject *
 event : QEvent *
 
 Returns: bool";
-constexpr const char* CGAL_Qt_GraphicsViewNavigation_mouseCoordinates = "Emits the real world mouse coordinates.
+constexpr const char* Qt_GraphicsViewNavigation_mouseCoordinates = "Emits the real world mouse coordinates.
 
 Parameters
 ----------
 p : QPointF";
 
 // CGAL::Qt::GraphicsViewPolylineInput
-constexpr const char* CGAL_Qt_GraphicsViewPolylineInput__class__ = "An object of type GraphicsViewPolylineInput creates a list of points.";
+constexpr const char* Qt_GraphicsViewPolylineInput__class__ = "An object of type GraphicsViewPolylineInput creates a list of points.";
 
-constexpr const char* CGAL_Qt_GraphicsViewPolylineInput_GraphicsViewPolylineInput = "
+constexpr const char* Qt_GraphicsViewPolylineInput_GraphicsViewPolylineInput = "
 p is a parent object. s is the scene where the polyline is generated. n is the
 number of points of the polyline to be generated. If n = 0 , that is the
 default value, the number of points of the polyline is not limited. closed
@@ -230,78 +230,78 @@ p : QObject *
 s : QGraphicsScene *
 n : int
 closed : bool";
-constexpr const char* CGAL_Qt_GraphicsViewPolylineInput_generate = "The object o contains a std::list<K::Point_2> .
+constexpr const char* Qt_GraphicsViewPolylineInput_generate = "The object o contains a std::list<K::Point_2> .
 
 Parameters
 ----------
 o : CGAL::Object";
 
 // CGAL::Qt::PainterOstream
-constexpr const char* CGAL_Qt_PainterOstream__class__ = "An object of type PainterOstream provides output operators for Kernel objects.";
+constexpr const char* Qt_PainterOstream__class__ = "An object of type PainterOstream provides output operators for Kernel objects.";
 
-constexpr const char* CGAL_Qt_PainterOstream_PainterOstream = "The clipping rect is used for unbounded Kernel objects.
+constexpr const char* Qt_PainterOstream_PainterOstream = "The clipping rect is used for unbounded Kernel objects.
 
 Parameters
 ----------
 qp : QPainter *
 clippingRect : QRectF";
-constexpr const char* CGAL_Qt_PainterOstream_operator = "Draws a point.
+constexpr const char* Qt_PainterOstream_operator = "Draws a point.
 
 Parameters
 ----------
  : K::Point_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_1 = "Draws a segment.
+constexpr const char* Qt_PainterOstream_operator_1 = "Draws a segment.
 
 Parameters
 ----------
  : K::Segment_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_2 = "Draws a clipped ray.
+constexpr const char* Qt_PainterOstream_operator_2 = "Draws a clipped ray.
 
 Parameters
 ----------
  : K::Ray_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_3 = "Draws a clipped line.
+constexpr const char* Qt_PainterOstream_operator_3 = "Draws a clipped line.
 
 Parameters
 ----------
  : K::Line_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_4 = "Draws a triangle.
+constexpr const char* Qt_PainterOstream_operator_4 = "Draws a triangle.
 
 Parameters
 ----------
  : K::Triangle_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_5 = "Draws an iso rectangle.
+constexpr const char* Qt_PainterOstream_operator_5 = "Draws an iso rectangle.
 
 Parameters
 ----------
  : K::Iso_rectangle_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_6 = "Draws a circle.
+constexpr const char* Qt_PainterOstream_operator_6 = "Draws a circle.
 
 Parameters
 ----------
  : K::Circle_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_7 = "Draws a circular arc.
+constexpr const char* Qt_PainterOstream_operator_7 = "Draws a circular arc.
 
 Parameters
 ----------
  : K::Circular_arc_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_8 = "Draws a polyline.
+constexpr const char* Qt_PainterOstream_operator_8 = "Draws a polyline.
 
 In order to close it the first and last point must be equal.
 
@@ -310,21 +310,21 @@ Parameters
  : std::list< K::Point_2 >
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_9 = "Draws an iso rectangle.
+constexpr const char* Qt_PainterOstream_operator_9 = "Draws an iso rectangle.
 
 Parameters
 ----------
  : Bbox_2
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_10 = "Sets the pen used in the next paint operations.
+constexpr const char* Qt_PainterOstream_operator_10 = "Sets the pen used in the next paint operations.
 
 Parameters
 ----------
  : QPen
 
 Returns: PainterOstream < K >";
-constexpr const char* CGAL_Qt_PainterOstream_operator_11 = "Sets the brush used in the next paint operations.
+constexpr const char* Qt_PainterOstream_operator_11 = "Sets the brush used in the next paint operations.
 
 Parameters
 ----------
@@ -333,54 +333,54 @@ Parameters
 Returns: PainterOstream < K >";
 
 // CGAL::Qt::TriangulationGraphicsItem
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem__class__ = "An object of type TriangulationGraphicsItem is a graphics item that encapsulates a 2D triangulation.";
+constexpr const char* Qt_TriangulationGraphicsItem__class__ = "An object of type TriangulationGraphicsItem is a graphics item that encapsulates a 2D triangulation.";
 
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_TriangulationGraphicsItem = "Constructs a graphics item for a triangulation pointed by t .
+constexpr const char* Qt_TriangulationGraphicsItem_TriangulationGraphicsItem = "Constructs a graphics item for a triangulation pointed by t .
 
 Parameters
 ----------
 t : T *";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_verticesPen = "Returns the pen used to draw vertices.
+constexpr const char* Qt_TriangulationGraphicsItem_verticesPen = "Returns the pen used to draw vertices.
 
 Returns: QPen";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_setVerticesPen = "Sets the pen used to draw vertices.";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_edgesPen = "Returns the pen used to draw edges.
+constexpr const char* Qt_TriangulationGraphicsItem_setVerticesPen = "Sets the pen used to draw vertices.";
+constexpr const char* Qt_TriangulationGraphicsItem_edgesPen = "Returns the pen used to draw edges.
 
 Returns: QPen";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_setEdgesPen = "Sets the pen used to draw edges.";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_visibleVertices = "Returns true , iff vertices are drawn.
+constexpr const char* Qt_TriangulationGraphicsItem_setEdgesPen = "Sets the pen used to draw edges.";
+constexpr const char* Qt_TriangulationGraphicsItem_visibleVertices = "Returns true , iff vertices are drawn.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_setVisibleVertices = "Sets the property.
+constexpr const char* Qt_TriangulationGraphicsItem_setVisibleVertices = "Sets the property.
 
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_visibleEdges = "Returns true , iff edges are drawn.
+constexpr const char* Qt_TriangulationGraphicsItem_visibleEdges = "Returns true , iff edges are drawn.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_TriangulationGraphicsItem_setVisibleEdges = "Sets the property.
+constexpr const char* Qt_TriangulationGraphicsItem_setVisibleEdges = "Sets the property.
 
 Parameters
 ----------
 b : bool";
 
 // CGAL::Qt::VoronoiGraphicsItem
-constexpr const char* CGAL_Qt_VoronoiGraphicsItem__class__ = "An object of type VoronoiGraphicsItem is a graphics item that encapsulates a Delaunay triangulation in order to draw its dual, the Voronoi diagram.";
+constexpr const char* Qt_VoronoiGraphicsItem__class__ = "An object of type VoronoiGraphicsItem is a graphics item that encapsulates a Delaunay triangulation in order to draw its dual, the Voronoi diagram.";
 
-constexpr const char* CGAL_Qt_VoronoiGraphicsItem_VoronoiGraphicsItem = "Constructs a graphics item for the dual of the Delaunay triangulation dt .
+constexpr const char* Qt_VoronoiGraphicsItem_VoronoiGraphicsItem = "Constructs a graphics item for the dual of the Delaunay triangulation dt .
 
 Parameters
 ----------
 dt : DT *";
-constexpr const char* CGAL_Qt_VoronoiGraphicsItem_edgesPen = "Returns the pen used to draw edges.
+constexpr const char* Qt_VoronoiGraphicsItem_edgesPen = "Returns the pen used to draw edges.
 
 Returns: QPen";
-constexpr const char* CGAL_Qt_VoronoiGraphicsItem_setEdgesPen = "Set the pen used to draw edges.";
-constexpr const char* CGAL_Qt_VoronoiGraphicsItem_visibleEdges = "Returns true , iff edges are drawn.
+constexpr const char* Qt_VoronoiGraphicsItem_setEdgesPen = "Set the pen used to draw edges.";
+constexpr const char* Qt_VoronoiGraphicsItem_visibleEdges = "Returns true , iff edges are drawn.
 
 Returns: bool";
-constexpr const char* CGAL_Qt_VoronoiGraphicsItem_setVisibleEdges = "Set the property.
+constexpr const char* Qt_VoronoiGraphicsItem_setVisibleEdges = "Set the property.
 
 Parameters
 ----------

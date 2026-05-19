@@ -8,49 +8,49 @@ namespace docstrings {
 namespace Surface_mesh_shortest_path {
 
 // CGAL::Surface_mesh_shortest_path
-constexpr const char* CGAL_Surface_mesh_shortest_path__class__ = "Computes shortest surface paths from one or more source points on a surface mesh.";
+constexpr const char* Surface_mesh_shortest_path__class__ = "Computes shortest surface paths from one or more source points on a surface mesh.";
 
-constexpr const char* CGAL_Surface_mesh_shortest_path_Triangle_mesh = "The triangle mesh type which this algorithm acts on.
+constexpr const char* Surface_mesh_shortest_path_Triangle_mesh = "The triangle mesh type which this algorithm acts on.
 
 Returns: Traits::Triangle_mesh";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Graph_traits = "The BGL graph traits for this triangle mesh.
+constexpr const char* Surface_mesh_shortest_path_Graph_traits = "The BGL graph traits for this triangle mesh.
 
 Returns: boost::graph_traits< Triangle_mesh >";
-constexpr const char* CGAL_Surface_mesh_shortest_path_vertex_descriptor = "Descriptors for the vertices of Triangle_mesh .
+constexpr const char* Surface_mesh_shortest_path_vertex_descriptor = "Descriptors for the vertices of Triangle_mesh .
 
 Returns: Graph_traits::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_shortest_path_halfedge_descriptor = "Descriptors for the halfedges of Triangle_mesh .
+constexpr const char* Surface_mesh_shortest_path_halfedge_descriptor = "Descriptors for the halfedges of Triangle_mesh .
 
 Returns: Graph_traits::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_shortest_path_face_descriptor = "Descriptors of the faces of Triangle_mesh .
+constexpr const char* Surface_mesh_shortest_path_face_descriptor = "Descriptors of the faces of Triangle_mesh .
 
 Returns: Graph_traits::face_descriptor";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Vertex_index_map = "The vertex index property map class.
+constexpr const char* Surface_mesh_shortest_path_Vertex_index_map = "The vertex index property map class.
 
 Returns: VIM";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Halfedge_index_map = "The halfedge index property map class.
+constexpr const char* Surface_mesh_shortest_path_Halfedge_index_map = "The halfedge index property map class.
 
 Returns: HIM";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Face_index_map = "The face index property map class.
+constexpr const char* Surface_mesh_shortest_path_Face_index_map = "The face index property map class.
 
 Returns: FIM";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Vertex_point_map = "The vertex point property map class.
+constexpr const char* Surface_mesh_shortest_path_Vertex_point_map = "The vertex point property map class.
 
 Returns: VPM";
-constexpr const char* CGAL_Surface_mesh_shortest_path_FT = "The numeric type used by this algorithm.
+constexpr const char* Surface_mesh_shortest_path_FT = "The numeric type used by this algorithm.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Point_3 = "The 3-dimensional point type, which must coincide with the value type of Vertex_point_map .
+constexpr const char* Surface_mesh_shortest_path_Point_3 = "The 3-dimensional point type, which must coincide with the value type of Vertex_point_map .
 
 Returns: Traits::Point_3";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Barycentric_coordinates = "An ordered triple which specifies a location inside a triangle as a convex combination of its three vertices.
+constexpr const char* Surface_mesh_shortest_path_Barycentric_coordinates = "An ordered triple which specifies a location inside a triangle as a convex combination of its three vertices.
 
 Returns: Traits::Barycentric_coordinates";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Barycentric_coordinate = "
+constexpr const char* Surface_mesh_shortest_path_Barycentric_coordinate = "
 Deprecated
 
 Returns: Barycentric_coordinates";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Face_location = "An ordered pair specifying a location on the surface of the Triangle_mesh .
+constexpr const char* Surface_mesh_shortest_path_Face_location = "An ordered pair specifying a location on the surface of the Triangle_mesh .
 
 If tm is the input graph and given the pair ( f , bc ) such that bc is (w0,
 w1, w2) , the correspondence with the weights in bc and the vertices of the
@@ -58,13 +58,13 @@ face f is the following: w0 = source(halfedge(f,tm),tm) w1 =
 target(halfedge(f,tm),tm) w2 = target(next(halfedge(f,tm),tm),tm)
 
 Returns: std::pair< face_descriptor , Barycentric_coordinates >";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Shortest_path_result = "The return type from shortest path distance queries.
+constexpr const char* Surface_mesh_shortest_path_Shortest_path_result = "The return type from shortest path distance queries.
 
 Stores the distance to the nearest source point, and a Source_point_iterator
 to the source point itself.
 
 Returns: std::pair< FT , Source_point_iterator >";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Surface_mesh_shortest_path = "creates a shortest paths object using tm as input.
+constexpr const char* Surface_mesh_shortest_path_Surface_mesh_shortest_path = "creates a shortest paths object using tm as input.
 
 Equivalent to Surface_mesh_shortest_path (tm, get(boost::vertex_index, tm),
 get(boost::halfedge_index, tm), get(boost::face_index, tm),
@@ -75,7 +75,7 @@ Parameters
 ----------
 tm : const Triangle_mesh &
 traits : const Traits &";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Surface_mesh_shortest_path_1 = "creates a shortest paths object using tm as input.
+constexpr const char* Surface_mesh_shortest_path_Surface_mesh_shortest_path_1 = "creates a shortest paths object using tm as input.
 
 No copy of the Triangle_mesh is made, only a reference to the tm is held. tm
 The surface mesh to compute shortest paths on. Note that it must be
@@ -94,7 +94,7 @@ halfedgeIndexMap : Halfedge_index_map
 faceIndexMap : Face_index_map
 vertexPointMap : Vertex_point_map
 traits : const Traits &";
-constexpr const char* CGAL_Surface_mesh_shortest_path_add_source_point = "adds v as a source for the shortest path queries.
+constexpr const char* Surface_mesh_shortest_path_add_source_point = "adds v as a source for the shortest path queries.
 
 No change to the internal shortest paths data structure occurs until either
 Surface_mesh_shortest_path::build_sequence_tree() or the first shortest path
@@ -105,7 +105,7 @@ Parameters
 v : vertex_descriptor
 
 Returns: Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_add_source_point_1 = "adds a point inside the face f as a source for the shortest path queries.
+constexpr const char* Surface_mesh_shortest_path_add_source_point_1 = "adds a point inside the face f as a source for the shortest path queries.
 
 No change to the internal shortest paths data structure occurs until either
 Surface_mesh_shortest_path::build_sequence_tree() or the first shortest path
@@ -119,14 +119,14 @@ f : const face_descriptor
 location : const Barycentric_coordinates &
 
 Returns: Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_add_source_point_2 = "adds a point inside a face as a source for the shortest path queries, equivalent to Surface_mesh_shortest_path::add_source_point (location.first, location.second);
+constexpr const char* Surface_mesh_shortest_path_add_source_point_2 = "adds a point inside a face as a source for the shortest path queries, equivalent to Surface_mesh_shortest_path::add_source_point (location.first, location.second);
 
 Parameters
 ----------
 location : const Face_location &
 
 Returns: Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_add_source_points = "adds a range of points as sources for the shortest path queries.
+constexpr const char* Surface_mesh_shortest_path_add_source_points = "adds a range of points as sources for the shortest path queries.
 
 No change to the internal shortest paths data structure occurs until either
 Surface_mesh_shortest_path::build_sequence_tree() or the first shortest path
@@ -142,7 +142,7 @@ begin : InputIterator
 end : InputIterator
 
 Returns: Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_remove_source_point = "removes a source point for the shortest path queries.
+constexpr const char* Surface_mesh_shortest_path_remove_source_point = "removes a source point for the shortest path queries.
 
 No change to the internal shortest paths data structure occurs until either
 Surface_mesh_shortest_path::build_sequence_tree() or the first shortest path
@@ -152,43 +152,43 @@ removed. it iterator to the source point to be removed
 Parameters
 ----------
 it : Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_remove_all_source_points = "removes all source points for the shortest path queries.
+constexpr const char* Surface_mesh_shortest_path_remove_all_source_points = "removes all source points for the shortest path queries.
 
 No change to the internal shortest paths data structure occurs until either
 Surface_mesh_shortest_path::build_sequence_tree() or the first shortest path
 query is done. For a version which deletes all data immediately, use clear()
 instead.";
-constexpr const char* CGAL_Surface_mesh_shortest_path_build_sequence_tree = "Computes all pending changes to the internal sequence tree.
+constexpr const char* Surface_mesh_shortest_path_build_sequence_tree = "Computes all pending changes to the internal sequence tree.
 
 A call to this method will only trigger a computation only if some change to
 the set of source points occurred since the last time the sequence tree was
 computed.";
-constexpr const char* CGAL_Surface_mesh_shortest_path_clear = "removes all data, the class is as if it was constructed.
+constexpr const char* Surface_mesh_shortest_path_clear = "removes all data, the class is as if it was constructed.
 
 All internal containers are cleared and the internal sequence tree is also
 cleared. For a version which defers deletion until it is necessary, use
 Surface_mesh_shortest_path::remove_all_source_points() .";
-constexpr const char* CGAL_Surface_mesh_shortest_path_source_points_begin = "returns an iterator to the first source point location
+constexpr const char* Surface_mesh_shortest_path_source_points_begin = "returns an iterator to the first source point location
 
 The elements will appear in the order they were inserted to the structure by
 calls to add_source_point() or add_source_points() . Deleted points will not
 appear in the sequence. An iterator to the first of the stored source points.
 
 Returns: Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_source_points_end = "returns an iterator to one past the last source point location
+constexpr const char* Surface_mesh_shortest_path_source_points_end = "returns an iterator to one past the last source point location
 
 An iterator to one past-the-end in the list of stored source points.
 
 Returns: Source_point_iterator";
-constexpr const char* CGAL_Surface_mesh_shortest_path_number_of_source_points = "returns the total number of source points used for the shortest path queries.
+constexpr const char* Surface_mesh_shortest_path_number_of_source_points = "returns the total number of source points used for the shortest path queries.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Surface_mesh_shortest_path_changed_since_last_build = "determines if the internal sequence tree is valid (already built and no new source point has been added).
+constexpr const char* Surface_mesh_shortest_path_changed_since_last_build = "determines if the internal sequence tree is valid (already built and no new source point has been added).
 
 true if the structure needs to be rebuilt, false otherwise
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_shortest_path_shortest_distance_to_source_points = "Computes the shortest surface distance from a vertex to any source point.
+constexpr const char* Surface_mesh_shortest_path_shortest_distance_to_source_points = "Computes the shortest surface distance from a vertex to any source point.
 
 v A vertex of the input face graph A pair, containing the distance to the
 source point, and an iterator to the source point. If no source point was
@@ -201,7 +201,7 @@ Parameters
 v : const vertex_descriptor
 
 Returns: Shortest_path_result";
-constexpr const char* CGAL_Surface_mesh_shortest_path_shortest_distance_to_source_points_1 = "Computes the shortest surface distance from any surface location to any source point.
+constexpr const char* Surface_mesh_shortest_path_shortest_distance_to_source_points_1 = "Computes the shortest surface distance from any surface location to any source point.
 
 f A face of the input face graph location Barycentric coordinates of the query
 point on face f A pair, containing the distance to the source point, and an
@@ -215,7 +215,7 @@ f : const face_descriptor
 location : const Barycentric_coordinates &
 
 Returns: Shortest_path_result";
-constexpr const char* CGAL_Surface_mesh_shortest_path_shortest_path_sequence_to_source_points = "visits the sequence of edges, vertices and faces traversed by the shortest path from a vertex to any source point.
+constexpr const char* Surface_mesh_shortest_path_shortest_path_sequence_to_source_points = "visits the sequence of edges, vertices and faces traversed by the shortest path from a vertex to any source point.
 
 Visits simplices, starting from the query vertex, back to the nearest source
 point. If no shortest path could be found (for example, the surface is
@@ -233,7 +233,7 @@ v : const vertex_descriptor
 visitor : Visitor &
 
 Returns: Shortest_path_result";
-constexpr const char* CGAL_Surface_mesh_shortest_path_shortest_path_sequence_to_source_points_1 = "visits the sequence of edges, vertices and faces traversed by the shortest path from any surface location to any source point.
+constexpr const char* Surface_mesh_shortest_path_shortest_path_sequence_to_source_points_1 = "visits the sequence of edges, vertices and faces traversed by the shortest path from any surface location to any source point.
 
 Visits simplices, starting from the query point, back to the nearest source
 point. If no shortest path could be found (for example, the surface is
@@ -253,7 +253,7 @@ location : const Barycentric_coordinates &
 visitor : Visitor &
 
 Returns: Shortest_path_result";
-constexpr const char* CGAL_Surface_mesh_shortest_path_shortest_path_points_to_source_points = "Computes the sequence of points in the shortest path along the surface of the input face graph from the given vertex to the closest source point.
+constexpr const char* Surface_mesh_shortest_path_shortest_path_points_to_source_points = "Computes the sequence of points in the shortest path along the surface of the input face graph from the given vertex to the closest source point.
 
 v A vertex of the input face graph output An OutputIterator to receive the
 shortest path points as Point_3 objects A pair, containing the distance to the
@@ -268,7 +268,7 @@ v : const vertex_descriptor
 output : OutputIterator
 
 Returns: Shortest_path_result";
-constexpr const char* CGAL_Surface_mesh_shortest_path_shortest_path_points_to_source_points_1 = "Computes the sequence of points in the shortest path along the surface of the input face graph from the given query location to the closest source point.
+constexpr const char* Surface_mesh_shortest_path_shortest_path_points_to_source_points_1 = "Computes the sequence of points in the shortest path along the surface of the input face graph from the given query location to the closest source point.
 
 f A face of on the input face graph location The barycentric coordinates of
 the query point on face f output An OutputIterator to receive the shortest
@@ -284,7 +284,7 @@ location : const Barycentric_coordinates &
 output : OutputIterator
 
 Returns: Shortest_path_result";
-constexpr const char* CGAL_Surface_mesh_shortest_path_point = "returns the 3-dimensional coordinates at the barycentric coordinates of the given face.
+constexpr const char* Surface_mesh_shortest_path_point = "returns the 3-dimensional coordinates at the barycentric coordinates of the given face.
 
 The following static overloads are also available: static Point_3 point (
 face_descriptor f, Barycentric_coordinates location, const Triangle_mesh & tm,
@@ -299,7 +299,7 @@ f : const face_descriptor
 location : const Barycentric_coordinates &
 
 Returns: Point_3";
-constexpr const char* CGAL_Surface_mesh_shortest_path_point_1 = "returns the 3-dimensional coordinates at the parametric location along the given edge.
+constexpr const char* Surface_mesh_shortest_path_point_1 = "returns the 3-dimensional coordinates at the parametric location along the given edge.
 
 The following static overloads are also available: static Point_3 point (
 halfedge_descriptor edge, FT t, const Triangle_mesh & tm, const Traits& traits
@@ -314,7 +314,7 @@ edge : const halfedge_descriptor
 t : const FT
 
 Returns: Point_3";
-constexpr const char* CGAL_Surface_mesh_shortest_path_point_2 = "returns the 3-dimensional coordinates of the given vertex.
+constexpr const char* Surface_mesh_shortest_path_point_2 = "returns the 3-dimensional coordinates of the given vertex.
 
 v A vertex of the input face graph
 
@@ -323,7 +323,7 @@ Parameters
 v : const vertex_descriptor
 
 Returns: decltype(auto)";
-constexpr const char* CGAL_Surface_mesh_shortest_path_face_location = "returns the location of the given vertex as a Face_location
+constexpr const char* Surface_mesh_shortest_path_face_location = "returns the location of the given vertex as a Face_location
 
 The following static overload is also available: static Face_location
 face_location ( vertex_descriptor vertex, const Triangle_mesh & tm, const
@@ -334,7 +334,7 @@ Parameters
 vertex : const vertex_descriptor
 
 Returns: Face_location";
-constexpr const char* CGAL_Surface_mesh_shortest_path_face_location_1 = "returns a location along the given edge as a Face_location .
+constexpr const char* Surface_mesh_shortest_path_face_location_1 = "returns a location along the given edge as a Face_location .
 
 The following static overload is also available: static Face_location
 face_location ( halfedge_descriptor he, FT t, const Triangle_mesh & tm, const
@@ -347,7 +347,7 @@ he : const halfedge_descriptor
 t : const FT
 
 Returns: Face_location";
-constexpr const char* CGAL_Surface_mesh_shortest_path_locate = "returns the nearest face location to the given point.
+constexpr const char* Surface_mesh_shortest_path_locate = "returns the nearest face location to the given point.
 
 Note that this will (re-)build an AABB_tree on each call. If you need to call
 this function more than once, use build_aabb_tree() to cache a copy of the
@@ -363,7 +363,7 @@ Parameters
 p : const Point_3 &
 
 Returns: Face_location";
-constexpr const char* CGAL_Surface_mesh_shortest_path_locate_1 = "returns the face location nearest to the given point.
+constexpr const char* Surface_mesh_shortest_path_locate_1 = "returns the face location nearest to the given point.
 
 The following static overload is also available: static Face_location
 locate(const Point_3& p, const AABB_tree<AABBTraits>& tree, const
@@ -378,7 +378,7 @@ p : const Point_3 &
 tree : const AABB_tree< AABBTraits > &
 
 Returns: Face_location";
-constexpr const char* CGAL_Surface_mesh_shortest_path_locate_2 = "returns the face location along ray nearest to its source point.
+constexpr const char* Surface_mesh_shortest_path_locate_2 = "returns the face location along ray nearest to its source point.
 
 Note that this will (re-)build an AABB_tree on each call. If you need to call
 this function more than once, use build_aabb_tree() to cache a copy of the
@@ -394,7 +394,7 @@ Parameters
 ray : const Ray_3 &
 
 Returns: Face_location";
-constexpr const char* CGAL_Surface_mesh_shortest_path_locate_3 = "returns the face location along ray nearest to its source point.
+constexpr const char* Surface_mesh_shortest_path_locate_3 = "returns the face location along ray nearest to its source point.
 
 The following static overload is also available: static Face_location
 locate(const Ray_3& ray, const AABB_tree<AABBTraits>& tree, const
@@ -409,7 +409,7 @@ ray : const Ray_3 &
 tree : const AABB_tree< AABBTraits > &
 
 Returns: Face_location";
-constexpr const char* CGAL_Surface_mesh_shortest_path_build_aabb_tree = "creates an AABB_tree suitable for use with locate .
+constexpr const char* Surface_mesh_shortest_path_build_aabb_tree = "creates an AABB_tree suitable for use with locate .
 
 The following static overload is also available: static void build_aabb_tree
 (const Triangle_mesh & tm, AABB_tree<AABBTraits>& outTree) AABBTraits A model
@@ -422,25 +422,25 @@ outTree : AABB_tree< AABBTraits > &";
 
 
 // CGAL::Surface_mesh_shortest_path::Source_point_iterator
-constexpr const char* CGAL_Surface_mesh_shortest_path_Source_point_iterator__class__ = "A model of BidirectionalIterator to access the source points.";
+constexpr const char* Surface_mesh_shortest_path_Source_point_iterator__class__ = "A model of BidirectionalIterator to access the source points.";
 
-constexpr const char* CGAL_Surface_mesh_shortest_path_Source_point_iterator_Source_point_iterator = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_shortest_path_Source_point_iterator_Source_point_iterator_1 = "Copy constructor.
+constexpr const char* Surface_mesh_shortest_path_Source_point_iterator_Source_point_iterator = "Default constructor";
+constexpr const char* Surface_mesh_shortest_path_Source_point_iterator_Source_point_iterator_1 = "Copy constructor.
 
 Parameters
 ----------
 other : const Source_point_iterator &";
 
 // CGAL::Surface_mesh_shortest_path_traits
-constexpr const char* CGAL_Surface_mesh_shortest_path_traits__class__ = "A model of the concept SurfaceMeshShortestPathTraits as required by the Surface_mesh_shortest_path class.";
+constexpr const char* Surface_mesh_shortest_path_traits__class__ = "A model of the concept SurfaceMeshShortestPathTraits as required by the Surface_mesh_shortest_path class.";
 
-constexpr const char* CGAL_Surface_mesh_shortest_path_traits_Kernel = "Kernel type.
+constexpr const char* Surface_mesh_shortest_path_traits_Kernel = "Kernel type.
 
 Returns: K";
-constexpr const char* CGAL_Surface_mesh_shortest_path_traits_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_shortest_path_traits_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh";
-constexpr const char* CGAL_Surface_mesh_shortest_path_traits_Barycentric_coordinates = "Barycentric coordinates type.
+constexpr const char* Surface_mesh_shortest_path_traits_Barycentric_coordinates = "Barycentric coordinates type.
 
 Returns: std::array< FT, 3 >";
 
@@ -667,9 +667,9 @@ location : Barycentric_coordinates";
 
 
 // CGAL::Surface_mesh_shortest_paths_3
-constexpr const char* CGAL_Surface_mesh_shortest_paths_3__class__ = "Namespace containing support members specific to this package.";
+constexpr const char* Surface_mesh_shortest_paths_3__class__ = "Namespace containing support members specific to this package.";
 
-constexpr const char* CGAL_Surface_mesh_shortest_paths_3_Barycentric_coordinates_type = "Classification of the location of a 3-tuple barycentric coordinates in a triangle.";
+constexpr const char* Surface_mesh_shortest_paths_3_Barycentric_coordinates_type = "Classification of the location of a 3-tuple barycentric coordinates in a triangle.";
 
 // std
 constexpr const char* std__class__ = "STL namespace.";

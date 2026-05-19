@@ -8,19 +8,19 @@ namespace docstrings {
 namespace Triangulation_2 {
 
 // CGAL::Constrained_Delaunay_triangulation_2
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2__class__ = "A constrained Delaunay triangulation is a triangulation with constrained edges which tries to be as much Delaunay as possible.";
+constexpr const char* Constrained_Delaunay_triangulation_2__class__ = "A constrained Delaunay triangulation is a triangulation with constrained edges which tries to be as much Delaunay as possible.";
 
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_Constrained_Delaunay_triangulation_2 = "introduces an empty constrained Delaunay triangulation cdt .
+constexpr const char* Constrained_Delaunay_triangulation_2_Constrained_Delaunay_triangulation_2 = "introduces an empty constrained Delaunay triangulation cdt .
 
 Parameters
 ----------
 t : const Traits &";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_Constrained_Delaunay_triangulation_2_1 = "Copy constructor: All faces and vertices are duplicated and the constrained status of edges is copied.
+constexpr const char* Constrained_Delaunay_triangulation_2_Constrained_Delaunay_triangulation_2_1 = "Copy constructor: All faces and vertices are duplicated and the constrained status of edges is copied.
 
 Parameters
 ----------
 cdt1 : const Constrained_Delaunay_triangulation_2 &";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_Constrained_Delaunay_triangulation_2_2 = "builds a constrained triangulation with constraints in the range [first,last) by calling insert_constraints(first, last) .
+constexpr const char* Constrained_Delaunay_triangulation_2_Constrained_Delaunay_triangulation_2_2 = "builds a constrained triangulation with constraints in the range [first,last) by calling insert_constraints(first, last) .
 
 ConstraintIterator is an InputIterator with value type std::pair< Point ,
 Point > or Segment .
@@ -30,7 +30,7 @@ Parameters
 first : ConstraintIterator
 last : ConstraintIterator
 t : const Traits &";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert = "inserts point p in the triangulation, with face f as a hint for the location of p .
+constexpr const char* Constrained_Delaunay_triangulation_2_insert = "inserts point p in the triangulation, with face f as a hint for the location of p .
 
 Parameters
 ----------
@@ -38,7 +38,7 @@ p : Point
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_1 = "inserts point p in the triangulation at the location given by (lt,loc,i) .
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_1 = "inserts point p in the triangulation at the location given by (lt,loc,i) .
 
 Triangulation_2::locate()
 
@@ -50,14 +50,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Constrained_Delaunay_triangulation_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_2 = "inserts the points in the range [first,last) .
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_2 = "inserts the points in the range [first,last) .
 
 Returns the number of inserted points. PointIterator is an InputIterator with
 value type Point .
@@ -68,7 +68,7 @@ first : PointIterator
 last : PointIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_3 = "inserts the points in the iterator range [first,last) .
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_3 = "inserts the points in the iterator range [first,last) .
 
 Returns the number of inserted points. Note that this function is not
 guaranteed to insert the points following the order of PointWithInfoIterator ,
@@ -85,24 +85,24 @@ first : PointWithInfoIterator
 last : PointWithInfoIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_constraint = "Inserts the line segment ab as a constraint in the triangulation.
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_constraint = "Inserts the line segment ab as a constraint in the triangulation.
 
 Parameters
 ----------
 a : Point
 b : Point";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_push_back_1 = "inserts the line segment between the points c.first and c.second as a constraint in the triangulation.
+constexpr const char* Constrained_Delaunay_triangulation_2_push_back_1 = "inserts the line segment between the points c.first and c.second as a constraint in the triangulation.
 
 Parameters
 ----------
 c : const std::pair< Point , Point > &";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_constraint_1 = "inserts the line segment whose endpoints are the vertices va and vb as a constraint in the triangulation.
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_constraint_1 = "inserts the line segment whose endpoints are the vertices va and vb as a constraint in the triangulation.
 
 Parameters
 ----------
 va : Vertex_handle
 vb : Vertex_handle";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_constraint_2 = "Inserts a polyline defined by the points in the range [first,last) .
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_constraint_2 = "Inserts a polyline defined by the points in the range [first,last) .
 
 The polyline is considered as a polygon if the first and last point are equal
 or if close = true . This enables for example passing the vertex range of a
@@ -113,7 +113,7 @@ Parameters
 first : PointIterator
 last : PointIterator
 close : bool";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_constraints = "inserts the constraints in the range [first,last) .
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_constraints = "inserts the constraints in the range [first,last) .
 
 Note that this function is not guaranteed to insert the constraints following
 the order of ConstraintIterator , as spatial_sort() is used to improve
@@ -130,7 +130,7 @@ first : ConstraintIterator
 last : ConstraintIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_unique_constraints = "Same as insert_constraints(begin,end) except that duplicated pairs of points are only considered once.
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_unique_constraints = "Same as insert_constraints(begin,end) except that duplicated pairs of points are only considered once.
 
 Inserting the same constraint several times may cause problems in case of
 intersecting segments and non-exact constructions. Indeed, when an inserted
@@ -146,7 +146,7 @@ first : ConstraintIterator
 last : ConstraintIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_constraints_1 = "Same as above except that each constraint is given as a pair of indices of the points in the range [points_first, points_last).
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_constraints_1 = "Same as above except that each constraint is given as a pair of indices of the points in the range [points_first, points_last).
 
 The indices must go from 0 to std::distance(points_first, points_last)
 PointIterator is an InputIterator with the value type Point . IndicesIterator
@@ -162,7 +162,7 @@ indices_first : IndicesIterator
 indices_last : IndicesIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_insert_unique_constraints_1 = "Same as insert_constraint(points_first, points_last, indices_first, indices_last) except that duplicated pairs of points are only considered once.
+constexpr const char* Constrained_Delaunay_triangulation_2_insert_unique_constraints_1 = "Same as insert_constraint(points_first, points_last, indices_first, indices_last) except that duplicated pairs of points are only considered once.
 
 Inserting the same constraint several times may cause problems in case of
 intersecting segments and non-exact constructions. Indeed, when an inserted
@@ -181,25 +181,25 @@ indices_first : IndicesIterator
 indices_last : IndicesIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_remove = "removes vertex v.
+constexpr const char* Constrained_Delaunay_triangulation_2_remove = "removes vertex v.
 
 Vertex v is not incident to a constrained edge.
 
 Parameters
 ----------
 v : Vertex_handle &";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_remove_incident_constraints = "makes the edges incident to vertex v unconstrained edges.
+constexpr const char* Constrained_Delaunay_triangulation_2_remove_incident_constraints = "makes the edges incident to vertex v unconstrained edges.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_remove_constraint = "makes the edge (f,i) unconstrained.
+constexpr const char* Constrained_Delaunay_triangulation_2_remove_constraint = "makes the edge (f,i) unconstrained.
 
 Parameters
 ----------
 f : const Face_handle &
 i : int";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p into output iterators.
+constexpr const char* Constrained_Delaunay_triangulation_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p into output iterators.
 
 This function outputs in the container pointed to by fit the faces which are
 in conflict with point p . It outputs in the container pointed to by eit the
@@ -218,7 +218,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: std::pair< OutputItFaces, OutputItBoundaryEdges >";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_get_conflicts = "outputs the faces of the conflict zone of point p into an output iterator.
+constexpr const char* Constrained_Delaunay_triangulation_2_get_conflicts = "outputs the faces of the conflict zone of point p into an output iterator.
 
 Same as get_conflicts_and_boundary except that only the faces in conflict with
 p are output. The function returns the resulting output iterator. dimension()
@@ -231,7 +231,7 @@ fit : OutputItFaces
 start : Face_handle
 
 Returns: OutputItFaces";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_get_boundary_of_conflicts = "outputs the boundary edges of the conflict zone of point p into an output iterator.
+constexpr const char* Constrained_Delaunay_triangulation_2_get_boundary_of_conflicts = "outputs the boundary edges of the conflict zone of point p into an output iterator.
 
 This functions outputs in the container pointed to by eit , the boundary of
 the zone in conflict with p . The boundary edges of the conflict zone are
@@ -247,10 +247,10 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: OutputItBoundaryEdges";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_is_valid = "checks if the triangulation is valid and if each constrained edge is consistently marked constrained in its two incident faces.
+constexpr const char* Constrained_Delaunay_triangulation_2_is_valid = "checks if the triangulation is valid and if each constrained edge is consistently marked constrained in its two incident faces.
 
 Returns: bool";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_is_flipable = "determines if edge (f,i) can be flipped.
+constexpr const char* Constrained_Delaunay_triangulation_2_is_flipable = "determines if edge (f,i) can be flipped.
 
 Advanced Returns true if edge (f,i) is not constrained and the circle
 circumscribing f contains the vertex of f->neighbor(i) opposite to edge (f,i)
@@ -262,7 +262,7 @@ f : Face_handle
 i : int
 
 Returns: bool";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_flip = "This is an advanced function.
+constexpr const char* Constrained_Delaunay_triangulation_2_flip = "This is an advanced function.
 
 Advanced Flip f and f->neighbor(i) .
 
@@ -270,7 +270,7 @@ Parameters
 ----------
 f : Face_handle &
 i : int";
-constexpr const char* CGAL_Constrained_Delaunay_triangulation_2_propagating_flip = "makes the triangulation constrained Delaunay by flipping edges.
+constexpr const char* Constrained_Delaunay_triangulation_2_propagating_flip = "makes the triangulation constrained Delaunay by flipping edges.
 
 Advanced The list edges contains an initial list of edges to be flipped. The
 returned triangulation is constrained Delaunay if the initial list contains at
@@ -283,44 +283,44 @@ Parameters
 edges : List_edges &";
 
 // CGAL::Constrained_triangulation_2
-constexpr const char* CGAL_Constrained_triangulation_2__class__ = "A constrained triangulation is a triangulation of a set of points which has to include among its edges a given set of polylines joining the points.";
+constexpr const char* Constrained_triangulation_2__class__ = "A constrained triangulation is a triangulation of a set of points which has to include among its edges a given set of polylines joining the points.";
 
-constexpr const char* CGAL_Constrained_triangulation_2_Constraint = "
+constexpr const char* Constrained_triangulation_2_Constraint = "
 Deprecated The type of constraints.
 
 Returns: std::pair< Point , Point >";
-constexpr const char* CGAL_Constrained_triangulation_2_Constrained_edges_iterator = "A bidirectional iterator to visit all the edges e of the triangulation which are constrained.
+constexpr const char* Constrained_triangulation_2_Constrained_edges_iterator = "A bidirectional iterator to visit all the edges e of the triangulation which are constrained.
 
 The order of visit is undefined. The value type of this iterator is Edge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_2_Constrained_edges = "A range type to iterate over the constrained edges.
+constexpr const char* Constrained_triangulation_2_Constrained_edges = "A range type to iterate over the constrained edges.
 
 Returns: Iterator_range< Constrained_edges_iterator >";
-constexpr const char* CGAL_Constrained_triangulation_2_Intersection_tag = "The intersection tag which decides how intersections between input constraints are dealt with.
+constexpr const char* Constrained_triangulation_2_Intersection_tag = "The intersection tag which decides how intersections between input constraints are dealt with.
 
 Returns: Itag";
-constexpr const char* CGAL_Constrained_triangulation_2_Constrained_triangulation_2 = "Default constructor.";
-constexpr const char* CGAL_Constrained_triangulation_2_Constrained_triangulation_2_1 = "Copy constructor: All faces and vertices are duplicated and the constrained status of edges is copied.
+constexpr const char* Constrained_triangulation_2_Constrained_triangulation_2 = "Default constructor.";
+constexpr const char* Constrained_triangulation_2_Constrained_triangulation_2_1 = "Copy constructor: All faces and vertices are duplicated and the constrained status of edges is copied.
 
 Parameters
 ----------
 ct1 : const Constrained_triangulation_2 &";
-constexpr const char* CGAL_Constrained_triangulation_2_is_constrained = "returns true if edge e is a constrained edge.
+constexpr const char* Constrained_triangulation_2_is_constrained = "returns true if edge e is a constrained edge.
 
 Parameters
 ----------
 e : Edge
 
 Returns: bool";
-constexpr const char* CGAL_Constrained_triangulation_2_are_there_incident_constraints = "returns true if at least one of the edges incident to vertex v is constrained.
+constexpr const char* Constrained_triangulation_2_are_there_incident_constraints = "returns true if at least one of the edges incident to vertex v is constrained.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Constrained_triangulation_2_incident_constraints = "outputs the constrained edges incident to v into the output iterator out and returns the resulting output iterator.
+constexpr const char* Constrained_triangulation_2_incident_constraints = "outputs the constrained edges incident to v into the output iterator out and returns the resulting output iterator.
 
 OutputItEdges is an OutputIterator with Edge as value type.
 
@@ -330,16 +330,16 @@ v : Vertex_handle
 out : OutputItEdges
 
 Returns: OutputItEdges";
-constexpr const char* CGAL_Constrained_triangulation_2_constrained_edges_begin = "returns an iterator that enumerates the constrained edges.
+constexpr const char* Constrained_triangulation_2_constrained_edges_begin = "returns an iterator that enumerates the constrained edges.
 
 Returns: Constrained_edges_iterator";
-constexpr const char* CGAL_Constrained_triangulation_2_constrained_edges_end = "returns the past-the-end iterator.
+constexpr const char* Constrained_triangulation_2_constrained_edges_end = "returns the past-the-end iterator.
 
 Returns: Constrained_edges_iterator";
-constexpr const char* CGAL_Constrained_triangulation_2_constrained_edges = "returns a range of constrained edges.
+constexpr const char* Constrained_triangulation_2_constrained_edges = "returns a range of constrained edges.
 
 Returns: Constrained_edges";
-constexpr const char* CGAL_Constrained_triangulation_2_insert = "inserts point p and restores the status (constrained or not) of all the touched edges.
+constexpr const char* Constrained_triangulation_2_insert = "inserts point p and restores the status (constrained or not) of all the touched edges.
 
 If present, f is used as a hint for the location of p .
 
@@ -349,7 +349,7 @@ p : Point
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_2_insert_1 = "inserts point p in the triangulation at the location given by (lt,loc,i) .
+constexpr const char* Constrained_triangulation_2_insert_1 = "inserts point p in the triangulation at the location given by (lt,loc,i) .
 
 Triangulation_2::locate()
 
@@ -361,14 +361,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Constrained_triangulation_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_2_insert_constraint = "inserts points a and b in this order, and inserts the line segment ab as a constraint.
+constexpr const char* Constrained_triangulation_2_insert_constraint = "inserts points a and b in this order, and inserts the line segment ab as a constraint.
 
 Removes the faces crossed by segment ab and creates new faces instead. If a
 vertex c lies on segment ab , constraint ab is replaced by the two constraints
@@ -379,12 +379,12 @@ Parameters
 ----------
 a : Point
 b : Point";
-constexpr const char* CGAL_Constrained_triangulation_2_push_back_1 = "Equivalent to insert (c.first, c.second) .
+constexpr const char* Constrained_triangulation_2_push_back_1 = "Equivalent to insert (c.first, c.second) .
 
 Parameters
 ----------
 c : const std::pair< Point , Point > &";
-constexpr const char* CGAL_Constrained_triangulation_2_insert_constraint_1 = "inserts the line segment s whose endpoints are the vertices va and vb as a constraint.
+constexpr const char* Constrained_triangulation_2_insert_constraint_1 = "inserts the line segment s whose endpoints are the vertices va and vb as a constraint.
 
 The triangles intersected by s are removed and new ones are created.
 
@@ -392,7 +392,7 @@ Parameters
 ----------
 va : const Vertex_handle &
 vb : const Vertex_handle &";
-constexpr const char* CGAL_Constrained_triangulation_2_insert_constraint_2 = "inserts a polyline defined by the points in the range [first,last) .
+constexpr const char* Constrained_triangulation_2_insert_constraint_2 = "inserts a polyline defined by the points in the range [first,last) .
 
 The polyline is considered as a polygon if the first and last point are equal
 or if close = true . This enables for example passing the vertex range of a
@@ -403,25 +403,25 @@ Parameters
 first : PointIterator
 last : PointIterator
 close : bool";
-constexpr const char* CGAL_Constrained_triangulation_2_remove = "removes a vertex v .
+constexpr const char* Constrained_triangulation_2_remove = "removes a vertex v .
 
 Vertex v is not incident to a constrained edge.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_2_remove_incident_constraints = "makes the edges incident to vertex v unconstrained edges.
+constexpr const char* Constrained_triangulation_2_remove_incident_constraints = "makes the edges incident to vertex v unconstrained edges.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_2_remove_constrained_edge = "makes edge (f,i) unconstrained.
+constexpr const char* Constrained_triangulation_2_remove_constrained_edge = "makes edge (f,i) unconstrained.
 
 Parameters
 ----------
 f : Face_handle
 i : int";
-constexpr const char* CGAL_Constrained_triangulation_2_is_valid = "checks the validity of the triangulation and the consistency of the constrained marks in edges.
+constexpr const char* Constrained_triangulation_2_is_valid = "checks the validity of the triangulation and the consistency of the constrained marks in edges.
 
 Parameters
 ----------
@@ -429,7 +429,7 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Constrained_triangulation_2_operator = "writes the triangulation as for Triangulation_2 <Traits,Tds> and, for each face f , and integers i=0,1,2 , writes \"C\" or \"N\" depending whether edge (f,i) is constrained or not.
+constexpr const char* Constrained_triangulation_2_operator = "writes the triangulation as for Triangulation_2 <Traits,Tds> and, for each face f , and integers i=0,1,2 , writes \"C\" or \"N\" depending whether edge (f,i) is constrained or not.
 
 Parameters
 ----------
@@ -437,7 +437,7 @@ os : std::ostream &
 ct : const Constrained_triangulation_2 < Traits, Tds, Itag > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Constrained_triangulation_2_operator_1 = "reads a triangulation from stream is and assigns it to c t .
+constexpr const char* Constrained_triangulation_2_operator_1 = "reads a triangulation from stream is and assigns it to c t .
 
 Data in the stream must have the same format operator<< uses. Note that ct is
 first cleared.
@@ -450,77 +450,77 @@ ct : Constrained_triangulation_2 < Traits, Tds, Itag > Ct &
 Returns: std::istream &";
 
 // CGAL::Constrained_triangulation_face_base_2
-constexpr const char* CGAL_Constrained_triangulation_face_base_2__class__ = "The class Constrained_triangulation_face_base_2 is the default model for the concept ConstrainedTriangulationFaceBase_2 to be used as base face class of constrained triangulations.";
+constexpr const char* Constrained_triangulation_face_base_2__class__ = "The class Constrained_triangulation_face_base_2 is the default model for the concept ConstrainedTriangulationFaceBase_2 to be used as base face class of constrained triangulations.";
 
 // CGAL::Constrained_triangulation_plus_2
-constexpr const char* CGAL_Constrained_triangulation_plus_2__class__ = "The class Constrained_triangulation_plus_2 <Tr> provides a constrained triangulation with an additional data structure that keeps track of the input constraints and of their refinement in the triangulation.";
+constexpr const char* Constrained_triangulation_plus_2__class__ = "The class Constrained_triangulation_plus_2 <Tr> provides a constrained triangulation with an additional data structure that keeps track of the input constraints and of their refinement in the triangulation.";
 
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Triangulation = "The triangulation base class.
+constexpr const char* Constrained_triangulation_plus_2_Triangulation = "The triangulation base class.
 
 Returns: Tr";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Intersection_tag = "The intersection tag as defined in Tr .
+constexpr const char* Constrained_triangulation_plus_2_Intersection_tag = "The intersection tag as defined in Tr .
 
 Returns: Tr::Intersection_tag";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Constraint_id = "The identifier of a polyline constraint.
+constexpr const char* Constrained_triangulation_plus_2_Constraint_id = "The identifier of a polyline constraint.
 
 The class is model of Assignable , CopyConstructible , DefaultConstructible ,
 LessThanComparable and EqualityComparable . A default constructed
 Constraint_id is a singular value that can not be the ID of a constraint.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Constraint_iterator = "A bidirectional iterator to visit all the input constraints.
+constexpr const char* Constrained_triangulation_plus_2_Constraint_iterator = "A bidirectional iterator to visit all the input constraints.
 
 The order of visit is undefined. The value type of this iterator is
 Constraint_id .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Constraints = "A range type for iterating over all constraints.
+constexpr const char* Constrained_triangulation_plus_2_Constraints = "A range type for iterating over all constraints.
 
 The iterator type of the range is Constraint_iterator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Subconstraint = "A subconstraint is a pair of vertices that correspond to an Edge .
+constexpr const char* Constrained_triangulation_plus_2_Subconstraint = "A subconstraint is a pair of vertices that correspond to an Edge .
 
 Returns: std::pair< Vertex_handle, Vertex_handle >";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Subconstraint_iterator = "A bidirectional iterator to visit all the subconstraints of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_Subconstraint_iterator = "A bidirectional iterator to visit all the subconstraints of the triangulation.
 
 The order of visit is undefined. The value type of this iterator is
 Subconstraint .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Subconstraints = "A range type for iterating over all subconstraints.
+constexpr const char* Constrained_triangulation_plus_2_Subconstraints = "A range type for iterating over all subconstraints.
 
 The iterator type of the range is Subconstraint_iterator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Subconstraint_and_contexts_iterator = "A bidirectional iterator to visit all the subconstraints of the triangulation and the contexts of their enclosing constraints.
+constexpr const char* Constrained_triangulation_plus_2_Subconstraint_and_contexts_iterator = "A bidirectional iterator to visit all the subconstraints of the triangulation and the contexts of their enclosing constraints.
 
 The order of visit is undefined. The value type of this iterator is const
 std::pair<const Subconstraint , std::list< Context >*> .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Subconstraints_and_contexts = "A range type for iterating over all subconstraints.
+constexpr const char* Constrained_triangulation_plus_2_Subconstraints_and_contexts = "A range type for iterating over all subconstraints.
 
 The iterator type of the range is Subconstraint_and_contexts_iterator .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Vertices_in_constraint_iterator = "A bidirectional iterator on the vertices of the chain of subconstraints representing a constraint.
+constexpr const char* Constrained_triangulation_plus_2_Vertices_in_constraint_iterator = "A bidirectional iterator on the vertices of the chain of subconstraints representing a constraint.
 
 The value type of this iterator is Vertex_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Vertices_in_constraint = "A range type for iterating over the vertices of the constraint.
+constexpr const char* Constrained_triangulation_plus_2_Vertices_in_constraint = "A range type for iterating over the vertices of the constraint.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Context_iterator = "A bidirectional iterator on constraints enclosing a given subconstraint.
+constexpr const char* Constrained_triangulation_plus_2_Context_iterator = "A bidirectional iterator on constraints enclosing a given subconstraint.
 
 The value type of this iterator is Context .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Contexts = "Range type for iterating over contexts.
+constexpr const char* Constrained_triangulation_plus_2_Contexts = "Range type for iterating over contexts.
 
 Returns: Iterator_range< Context_iterator >";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Points_in_constraint_iterator = "This is an advanced type.
+constexpr const char* Constrained_triangulation_plus_2_Points_in_constraint_iterator = "This is an advanced type.
 
 Advanced An iterator on the points of the original constraint before
 simplification steps are applied. The value type of this iterator is Point . A
@@ -528,7 +528,7 @@ Vertices_in_constraint_iterator can be converted into a
 Points_in_constraint_iterator , but not the other way around.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_points_in_constraint_begin = "This is an advanced function.
+constexpr const char* Constrained_triangulation_plus_2_points_in_constraint_begin = "This is an advanced function.
 
 Advanced returns an iterator to the first point on the constraint before any
 simplification step.
@@ -538,7 +538,7 @@ Parameters
 cid : Constraint_id
 
 Returns: Points_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_points_in_constraint_end = "This is an advanced function.
+constexpr const char* Constrained_triangulation_plus_2_points_in_constraint_end = "This is an advanced function.
 
 Advanced returns an iterator past the last point on the constraint before any
 simplification step.
@@ -548,7 +548,7 @@ Parameters
 cid : Constraint_id
 
 Returns: Points_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_simplify = "This is an advanced function.
+constexpr const char* Constrained_triangulation_plus_2_simplify = "This is an advanced function.
 
 Advanced removes the vertex at vicq from the constraint and the triangulation.
 The point of that vertex remains stored in the sequence of original points of
@@ -567,7 +567,7 @@ std::prev(vicq) and vir = std::next(vicr) . The line segment between
 Parameters
 ----------
 vicq : Vertices_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_remove_points_without_corresponding_vertex = "This is an advanced function.
+constexpr const char* Constrained_triangulation_plus_2_remove_points_without_corresponding_vertex = "This is an advanced function.
 
 Advanced removes the original points that correspond to vertices in the
 constraint cid which have been removed by the simplify() function.
@@ -577,21 +577,21 @@ Parameters
 cid : Constraint_id
 
 Returns: size_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_remove_points_without_corresponding_vertex_1 = "This is an advanced function.
+constexpr const char* Constrained_triangulation_plus_2_remove_points_without_corresponding_vertex_1 = "This is an advanced function.
 
 Advanced removes all original points that correspond to vertices in the
 constraints which have been removed by the simplify() function.";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Constrained_triangulation_plus_2 = "introduces an empty triangulation.
+constexpr const char* Constrained_triangulation_plus_2_Constrained_triangulation_plus_2 = "introduces an empty triangulation.
 
 Parameters
 ----------
 gt : const Geom_traits &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Constrained_triangulation_plus_2_1 = "Copy constructor.
+constexpr const char* Constrained_triangulation_plus_2_Constrained_triangulation_plus_2_1 = "Copy constructor.
 
 Parameters
 ----------
 ct : const Constrained_triangulation_plus_2 &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Constrained_triangulation_plus_2_2 = "introduces a constrained triangulation from the constraints in the range [first,last) .
+constexpr const char* Constrained_triangulation_plus_2_Constrained_triangulation_plus_2_2 = "introduces a constrained triangulation from the constraints in the range [first,last) .
 
 ConstraintIterator must be an InputIterator with the value type
 std::pair<Point,Point> or Segment .
@@ -601,7 +601,7 @@ Parameters
 first : ConstraintIterator
 last : ConstraintIterator
 gt : const Geom_traits &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_operator = "Assignment.
+constexpr const char* Constrained_triangulation_plus_2_operator = "Assignment.
 
 All the vertices and faces are duplicated. The bidirectional mapping between
 constraints and subconstraints is also duplicated.
@@ -611,7 +611,7 @@ Parameters
 tr : const Constrained_triangulation_plus_2 &
 
 Returns: Constrained_triangulation_plus_2";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_swap = "The triangulations tr and this triangulation are swapped.
+constexpr const char* Constrained_triangulation_plus_2_swap = "The triangulations tr and this triangulation are swapped.
 
 This operation should be preferred to the assignment or to the copy
 constructor if tr is deleted after that.
@@ -619,7 +619,7 @@ constructor if tr is deleted after that.
 Parameters
 ----------
 tr : Constrained_triangulation_plus_2";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert = "inserts point p as a vertex of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_insert = "inserts point p as a vertex of the triangulation.
 
 Parameters
 ----------
@@ -627,7 +627,7 @@ p : const Point &
 start : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_1 = "inserts point p in the triangulation at the location given by (lt,loc,i) .
+constexpr const char* Constrained_triangulation_plus_2_insert_1 = "inserts point p in the triangulation at the location given by (lt,loc,i) .
 
 Triangulation_2::locate()
 
@@ -639,14 +639,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Constrained_triangulation_plus_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_2 = "inserts the points in the range [first,last) .
+constexpr const char* Constrained_triangulation_plus_2_insert_2 = "inserts the points in the range [first,last) .
 
 Returns the number of inserted points. PointIterator must be an InputIterator
 with the value type Point .
@@ -657,7 +657,7 @@ first : PointIterator
 last : PointIterator
 
 Returns: size_type";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_constraint = "inserts the constraint segment ab in the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_insert_constraint = "inserts the constraint segment ab in the triangulation.
 
 If the two points are equal the point is inserted but no constraint, and a
 default constructed Constraint_id is returned.
@@ -668,7 +668,7 @@ a : Point
 b : Point
 
 Returns: Constraint_id";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_push_back_1 = "inserts the constraint c in the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_push_back_1 = "inserts the constraint c in the triangulation.
 
 If the two points are equal the point is inserted but no constraint, and a
 default constructed Constraint_id is returned.
@@ -676,7 +676,7 @@ default constructed Constraint_id is returned.
 Parameters
 ----------
 c : const std::pair< Point, Point > &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_constraint_1 = "inserts a constraint whose endpoints are the vertices pointed by va and vb in the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_insert_constraint_1 = "inserts a constraint whose endpoints are the vertices pointed by va and vb in the triangulation.
 
 If the two vertex handles are equal no constraint is inserted, and a default
 constructed Constraint_id is returned.
@@ -687,7 +687,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: Constraint_id";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_constraint_2 = "inserts a polyline defined by the points in the range [first,last) and returns the constraint id.
+constexpr const char* Constrained_triangulation_plus_2_insert_constraint_2 = "inserts a polyline defined by the points in the range [first,last) and returns the constraint id.
 
 The polyline is considered as a closed curve if the first and last point are
 equal or if close == true . This enables for example passing the vertex range
@@ -705,7 +705,7 @@ last : PointIterator
 close : bool
 
 Returns: Constraint_id";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_constraints = "inserts the constraints in the range [first,last) .
+constexpr const char* Constrained_triangulation_plus_2_insert_constraints = "inserts the constraints in the range [first,last) .
 
 Note that this function is not guaranteed to insert the constraints following
 the order of ConstraintIterator , as spatial_sort() is used to improve
@@ -723,7 +723,7 @@ first : ConstraintIterator
 last : ConstraintIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_unique_constraints = "Same as insert_constraints(begin,end) except that duplicated pairs of points are only considered once.
+constexpr const char* Constrained_triangulation_plus_2_insert_unique_constraints = "Same as insert_constraints(begin,end) except that duplicated pairs of points are only considered once.
 
 Inserting the same constraint several times may cause problems in case of
 intersecting segments and non-exact constructions. the number of inserted
@@ -736,7 +736,7 @@ first : ConstraintIterator
 last : ConstraintIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_constraints_1 = "Same as above except that each constraint is given as a pair of indices of the points in the range [points_first, points_last).
+constexpr const char* Constrained_triangulation_plus_2_insert_constraints_1 = "Same as above except that each constraint is given as a pair of indices of the points in the range [points_first, points_last).
 
 The indices must go from 0 to std::distance(points_first, points_last)
 PointIterator is an InputIterator with value type Point . IndicesIterator is
@@ -752,7 +752,7 @@ indices_first : IndicesIterator
 indices_last : IndicesIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_insert_unique_constraints_1 = "Same as insert_constraint(points_first, points_last, indices_first, indices_last) except that duplicated pair of points are only considered once.
+constexpr const char* Constrained_triangulation_plus_2_insert_unique_constraints_1 = "Same as insert_constraint(points_first, points_last, indices_first, indices_last) except that duplicated pair of points are only considered once.
 
 Inserting the same constraint several times may cause problems in case of
 intersecting segments and non-exact constructions. the number of inserted
@@ -768,7 +768,7 @@ indices_first : IndicesIterator
 indices_last : IndicesIterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_split_subconstraint_graph_into_constraints = "splits into constraints the graph of subconstraints.
+constexpr const char* Constrained_triangulation_plus_2_split_subconstraint_graph_into_constraints = "splits into constraints the graph of subconstraints.
 
 Consider the graph g={V,E} where V is the set of vertices of the triangulation
 and E is the set of all subconstraints of all constraints of the
@@ -783,39 +783,39 @@ vertex will be considered as a polyline endpoint. split_graph_into_polylines()
 Parameters
 ----------
 is_terminal : const std::function< bool(Vertex_handle)> &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_remove_constraint = "removes the constraint cid , without removing the points from the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_remove_constraint = "removes the constraint cid , without removing the points from the triangulation.
 
 Parameters
 ----------
 cid : Constraint_id";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_constraints_begin = "returns a Constraint_iterator that points at the first constraint of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_constraints_begin = "returns a Constraint_iterator that points at the first constraint of the triangulation.
 
 Returns: Constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_constraints_end = "returns the past-the-end iterator of the constraints of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_constraints_end = "returns the past-the-end iterator of the constraints of the triangulation.
 
 Returns: Constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_constraints = "returns a range of constraints.
+constexpr const char* Constrained_triangulation_plus_2_constraints = "returns a range of constraints.
 
 Returns: Constraints";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_subconstraints_begin = "returns a Subconstraint_iterator pointing at the first subconstraint of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_subconstraints_begin = "returns a Subconstraint_iterator pointing at the first subconstraint of the triangulation.
 
 Returns: Subconstraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_subconstraints_end = "returns the past-the-end iterator of the subconstraints of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_subconstraints_end = "returns the past-the-end iterator of the subconstraints of the triangulation.
 
 Returns: Subconstraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_subconstraints = "returns a range of subconstraints.
+constexpr const char* Constrained_triangulation_plus_2_subconstraints = "returns a range of subconstraints.
 
 Returns: Subconstraints";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_subconstraints_and_contexts_begin = "returns a Subconstraint_and_contexts_iterator pointing at the first subconstraint of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_subconstraints_and_contexts_begin = "returns a Subconstraint_and_contexts_iterator pointing at the first subconstraint of the triangulation.
 
 Returns: Subconstraint_and_contexts_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_subconstraints_and_contexts_end = "returns the past-the-end iterator of the subconstraints of the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_subconstraints_and_contexts_end = "returns the past-the-end iterator of the subconstraints of the triangulation.
 
 Returns: Subconstraint_and_contexts_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_subconstraints_and_contexts = "returns a range of subconstraints with the contexts of their enclosing constraints.
+constexpr const char* Constrained_triangulation_plus_2_subconstraints_and_contexts = "returns a range of subconstraints with the contexts of their enclosing constraints.
 
 Returns: Subconstraints_and_contexts";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_number_of_enclosing_constraints = "returns the number of constraints enclosing the subconstraint (va,vb) .
+constexpr const char* Constrained_triangulation_plus_2_number_of_enclosing_constraints = "returns the number of constraints enclosing the subconstraint (va,vb) .
 
 va and vb refer to the vertices of a constrained edge of the triangulation.
 
@@ -825,7 +825,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: int";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_context = "returns the Context relative to one of the constraints enclosing the subconstraint (va,vb) .
+constexpr const char* Constrained_triangulation_plus_2_context = "returns the Context relative to one of the constraints enclosing the subconstraint (va,vb) .
 
 va and vb refer to the vertices of a constrained edge of the triangulation.
 
@@ -835,7 +835,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: Context";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_contexts_begin = "returns an iterator pointing at the first Context of the sequence of contexts corresponding to the constraints enclosing the subconstraint (va,vb) .
+constexpr const char* Constrained_triangulation_plus_2_contexts_begin = "returns an iterator pointing at the first Context of the sequence of contexts corresponding to the constraints enclosing the subconstraint (va,vb) .
 
 va and vb refer to the vertices of a constrained edge of the triangulation.
 
@@ -845,7 +845,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: Context_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_contexts_end = "returns a past-the-end iterator of the sequence of contexts corresponding to the constraints enclosing the subconstraint (va,vb) .
+constexpr const char* Constrained_triangulation_plus_2_contexts_end = "returns a past-the-end iterator of the sequence of contexts corresponding to the constraints enclosing the subconstraint (va,vb) .
 
 va and vb refer to the vertices of a constrained edge of the triangulation.
 
@@ -855,7 +855,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: Context_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_contexts = "returns a range of contexts.
+constexpr const char* Constrained_triangulation_plus_2_contexts = "returns a range of contexts.
 
 Parameters
 ----------
@@ -863,28 +863,28 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: Contexts";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_vertices_in_constraint_begin = "returns an iterator on the first vertex on the constraint cid .
+constexpr const char* Constrained_triangulation_plus_2_vertices_in_constraint_begin = "returns an iterator on the first vertex on the constraint cid .
 
 Parameters
 ----------
 cid : Constraint_id
 
 Returns: Vertices_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_vertices_in_constraint_end = "returns an iterator past the last vertex on the constraint cid .
+constexpr const char* Constrained_triangulation_plus_2_vertices_in_constraint_end = "returns an iterator past the last vertex on the constraint cid .
 
 Parameters
 ----------
 cid : Constraint_id
 
 Returns: Vertices_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_vertices_in_constraint = "returns a range of the vertices on the constraint cid .
+constexpr const char* Constrained_triangulation_plus_2_vertices_in_constraint = "returns a range of the vertices on the constraint cid .
 
 Parameters
 ----------
 cid : Constraint_id
 
 Returns: Vertices_in_constraint";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_operator_1 = "writes the triangulation as for Tr , then writes one constraint per line, starting with the number of vertices and the indices of the vertices of the constraint.
+constexpr const char* Constrained_triangulation_plus_2_operator_1 = "writes the triangulation as for Tr , then writes one constraint per line, starting with the number of vertices and the indices of the vertices of the constraint.
 
 Parameters
 ----------
@@ -892,7 +892,7 @@ os : std::ostream &
 ctp : const Constrained_triangulation_plus_2 < Tr > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_operator_2 = "reads a triangulation from stream is and assigns it to the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_operator_2 = "reads a triangulation from stream is and assigns it to the triangulation.
 
 Parameters
 ----------
@@ -902,44 +902,44 @@ ctp : Constrained_triangulation_plus_2 < Tr > &
 Returns: std::istream &";
 
 // CGAL::Constrained_triangulation_plus_2::Context
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Context__class__ = "A context enables the access to the vertices of a constraint that pass through a subconstraint.";
+constexpr const char* Constrained_triangulation_plus_2_Context__class__ = "A context enables the access to the vertices of a constraint that pass through a subconstraint.";
 
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Context_id = "returns the constraint id.
+constexpr const char* Constrained_triangulation_plus_2_Context_id = "returns the constraint id.
 
 Returns: Constraint_id";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Context_vertices_begin = "returns the first vertex of the enclosing constraint.
+constexpr const char* Constrained_triangulation_plus_2_Context_vertices_begin = "returns the first vertex of the enclosing constraint.
 
 Returns: Vertices_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Context_vertices_end = "returns the past-the-end of the vertices of the enclosing constraint.
+constexpr const char* Constrained_triangulation_plus_2_Context_vertices_end = "returns the past-the-end of the vertices of the enclosing constraint.
 
 Returns: Vertices_in_constraint_iterator";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_Context_current = "returns the iterator vici of the enclosing constraint for which *vici and *std::next(vici) correspond to the two vertices of the subconstraint.
+constexpr const char* Constrained_triangulation_plus_2_Context_current = "returns the iterator vici of the enclosing constraint for which *vici and *std::next(vici) correspond to the two vertices of the subconstraint.
 
 Returns: Vertices_in_constraint_iterator";
 
 // CGAL::Delaunay_triangulation_2
-constexpr const char* CGAL_Delaunay_triangulation_2__class__ = "The class Delaunay_triangulation_2 is designed to represent the Delaunay triangulation of a set of points in a plane.";
+constexpr const char* Delaunay_triangulation_2__class__ = "The class Delaunay_triangulation_2 is designed to represent the Delaunay triangulation of a set of points in a plane.";
 
-constexpr const char* CGAL_Delaunay_triangulation_2_Delaunay_triangulation_2 = "Default constructor.
+constexpr const char* Delaunay_triangulation_2_Delaunay_triangulation_2 = "Default constructor.
 
 Parameters
 ----------
 gt : const Traits &";
-constexpr const char* CGAL_Delaunay_triangulation_2_Delaunay_triangulation_2_1 = "Copy constructor.
+constexpr const char* Delaunay_triangulation_2_Delaunay_triangulation_2_1 = "Copy constructor.
 
 All the vertices and faces are duplicated.
 
 Parameters
 ----------
 tr : const Delaunay_triangulation_2< Traits, Tds > &";
-constexpr const char* CGAL_Delaunay_triangulation_2_Delaunay_triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last).
+constexpr const char* Delaunay_triangulation_2_Delaunay_triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last).
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator
 gt : Traits";
-constexpr const char* CGAL_Delaunay_triangulation_2_insert = "inserts point p .
+constexpr const char* Delaunay_triangulation_2_insert = "inserts point p .
 
 If point p coincides with an already existing vertex, this vertex is returned
 and the triangulation is not updated. Optional parameter f is used to
@@ -951,7 +951,7 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_insert_1 = "inserts a point p at the location given by (lt,loc,li) .
+constexpr const char* Delaunay_triangulation_2_insert_1 = "inserts a point p at the location given by (lt,loc,li) .
 
 Triangulation_2::locate()
 
@@ -963,14 +963,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Delaunay_triangulation_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_insert_2 = "inserts the points in the range [first,last) .
+constexpr const char* Delaunay_triangulation_2_insert_2 = "inserts the points in the range [first,last) .
 
 Returns the number of inserted points. Note that this function is not
 guaranteed to insert the points following the order of PointInputIterator , as
@@ -983,7 +983,7 @@ first : PointInputIterator
 last : PointInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Delaunay_triangulation_2_insert_3 = "inserts the points in the iterator range [first,last) .
+constexpr const char* Delaunay_triangulation_2_insert_3 = "inserts the points in the iterator range [first,last) .
 
 Returns the number of inserted points. Note that this function is not
 guaranteed to insert the points following the order of
@@ -1001,12 +1001,12 @@ first : PointWithInfoInputIterator
 last : PointWithInfoInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Delaunay_triangulation_2_remove = "removes the vertex from the triangulation.
+constexpr const char* Delaunay_triangulation_2_remove = "removes the vertex from the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_move_if_no_collision = "If there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
+constexpr const char* Delaunay_triangulation_2_move_if_no_collision = "If there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
 
 Otherwise, the triangulation is not modified and the vertex at point p is
 returned. Vertex v must be finite.
@@ -1017,7 +1017,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_move = "Same as move_if_no_collision() , if there is no collision.
+constexpr const char* Delaunay_triangulation_2_move = "Same as move_if_no_collision() , if there is no collision.
 
 Otherwise, v is deleted and the vertex placed on p is returned. Vertex v must
 be finite.
@@ -1028,7 +1028,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_nearest_vertex = "returns any nearest vertex of p .
+constexpr const char* Delaunay_triangulation_2_nearest_vertex = "returns any nearest vertex of p .
 
 The implemented function begins with a location step and f may be used to
 initialize the location.
@@ -1039,7 +1039,7 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p into output iterators.
+constexpr const char* Delaunay_triangulation_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p into output iterators.
 
 This function outputs in the container pointed to by fit the faces which are
 in conflict with point p , i. e., the faces whose circumcircle contains p . It
@@ -1059,7 +1059,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: std::pair< OutputItFaces, OutputItBoundaryEdges >";
-constexpr const char* CGAL_Delaunay_triangulation_2_get_conflicts = "outputs the faces of the conflict zone of point p into an output iterator.
+constexpr const char* Delaunay_triangulation_2_get_conflicts = "outputs the faces of the conflict zone of point p into an output iterator.
 
 same as get_conflicts_and_boundary() except that only the faces in conflict
 with p are output. The function returns the resulting output iterator.
@@ -1072,7 +1072,7 @@ fit : OutputItFaces
 start : Face_handle
 
 Returns: OutputItFaces";
-constexpr const char* CGAL_Delaunay_triangulation_2_get_boundary_of_conflicts = "outputs the boundary edges of the conflict zone of point p into an output iterator.
+constexpr const char* Delaunay_triangulation_2_get_boundary_of_conflicts = "outputs the boundary edges of the conflict zone of point p into an output iterator.
 
 This function outputs in the container pointed to by eit , the boundary of the
 zone in conflict with p . The boundary edges of the conflict zone are output
@@ -1087,7 +1087,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: OutputItBoundaryEdges";
-constexpr const char* CGAL_Delaunay_triangulation_2_dual = "returns the center of the circle circumscribed to face f .
+constexpr const char* Delaunay_triangulation_2_dual = "returns the center of the circle circumscribed to face f .
 
 f is not infinite.
 
@@ -1096,7 +1096,7 @@ Parameters
 f : const Face_handle &
 
 Returns: Point";
-constexpr const char* CGAL_Delaunay_triangulation_2_dual_1 = "returns a segment, a ray or a line supported by the bisector of the endpoints of e .
+constexpr const char* Delaunay_triangulation_2_dual_1 = "returns a segment, a ray or a line supported by the bisector of the endpoints of e .
 
 If faces incident to e are both finite, a segment whose endpoints are the
 duals of each incident face is returned. If only one incident face is finite,
@@ -1108,28 +1108,28 @@ Parameters
 e : const Edge &
 
 Returns: Object";
-constexpr const char* CGAL_Delaunay_triangulation_2_dual_2 = "Idem.
+constexpr const char* Delaunay_triangulation_2_dual_2 = "Idem.
 
 Parameters
 ----------
 ec : const Edge_circulator &
 
 Returns: Object";
-constexpr const char* CGAL_Delaunay_triangulation_2_dual_3 = "Idem.
+constexpr const char* Delaunay_triangulation_2_dual_3 = "Idem.
 
 Parameters
 ----------
 ei : const Edge_iterator &
 
 Returns: Object";
-constexpr const char* CGAL_Delaunay_triangulation_2_draw_dual = "output the dual Voronoi diagram to stream ps .
+constexpr const char* Delaunay_triangulation_2_draw_dual = "output the dual Voronoi diagram to stream ps .
 
 Parameters
 ----------
 ps : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Delaunay_triangulation_2_side_of_oriented_circle = "returns the side of p with respect to the circle circumscribing the triangle associated with f .
+constexpr const char* Delaunay_triangulation_2_side_of_oriented_circle = "returns the side of p with respect to the circle circumscribing the triangle associated with f .
 
 Parameters
 ----------
@@ -1137,7 +1137,7 @@ f : Face_handle
 p : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Delaunay_triangulation_2_is_valid = "tests the validity of the triangulation as a Triangulation_2 and additionally tests the Delaunay property.
+constexpr const char* Delaunay_triangulation_2_is_valid = "tests the validity of the triangulation as a Triangulation_2 and additionally tests the Delaunay property.
 
 This method is mainly useful for debugging Delaunay triangulation algorithms.
 
@@ -1149,9 +1149,9 @@ level : int
 Returns: bool";
 
 // CGAL::Delaunay_triangulation_face_base_2
-constexpr const char* CGAL_Delaunay_triangulation_face_base_2__class__ = "The class Delaunay_triangulation_face_base_2 is a model of the concept DelaunayTriangulationFaceBase_2 .";
+constexpr const char* Delaunay_triangulation_face_base_2__class__ = "The class Delaunay_triangulation_face_base_2 is a model of the concept DelaunayTriangulationFaceBase_2 .";
 
-constexpr const char* CGAL_Delaunay_triangulation_face_base_2_circumcenter = "returns the circumcenter of the face
+constexpr const char* Delaunay_triangulation_face_base_2_circumcenter = "returns the circumcenter of the face
 
 Parameters
 ----------
@@ -1160,9 +1160,9 @@ gt : const Traits &
 Returns: const Point &";
 
 // CGAL::Delaunay_triangulation_face_base_with_circumcenter_2
-constexpr const char* CGAL_Delaunay_triangulation_face_base_with_circumcenter_2__class__ = "The class Delaunay_triangulation_face_base_with_circumcenter_2 derives from Fb , a face base class of a 2D triangulation.";
+constexpr const char* Delaunay_triangulation_face_base_with_circumcenter_2__class__ = "The class Delaunay_triangulation_face_base_with_circumcenter_2 derives from Fb , a face base class of a 2D triangulation.";
 
-constexpr const char* CGAL_Delaunay_triangulation_face_base_with_circumcenter_2_circumcenter = "computes the circumcenter of the triangle, or retrieves it if already computed.
+constexpr const char* Delaunay_triangulation_face_base_with_circumcenter_2_circumcenter = "computes the circumcenter of the triangle, or retrieves it if already computed.
 
 Parameters
 ----------
@@ -1171,43 +1171,43 @@ gt : const Traits &
 Returns: const Point &";
 
 // CGAL::Exact_intersections_tag
-constexpr const char* CGAL_Exact_intersections_tag__class__ = "Intersection tag for constrained triangulations, if exact predicates and exact constructions are provided.";
+constexpr const char* Exact_intersections_tag__class__ = "Intersection tag for constrained triangulations, if exact predicates and exact constructions are provided.";
 
 // CGAL::Exact_predicates_tag
-constexpr const char* CGAL_Exact_predicates_tag__class__ = "Intersection tag for constrained triangulations, if the geometric traits provides exact predicates but approximate constructions.";
+constexpr const char* Exact_predicates_tag__class__ = "Intersection tag for constrained triangulations, if the geometric traits provides exact predicates but approximate constructions.";
 
 // CGAL::No_constraint_intersection_requiring_constructions_tag
-constexpr const char* CGAL_No_constraint_intersection_requiring_constructions_tag__class__ = "Intersection tag for constrained triangulations, when input constraints are not allowed to intersect except if the intersection does not require any new point construction.";
+constexpr const char* No_constraint_intersection_requiring_constructions_tag__class__ = "Intersection tag for constrained triangulations, when input constraints are not allowed to intersect except if the intersection does not require any new point construction.";
 
 // CGAL::No_constraint_intersection_tag
-constexpr const char* CGAL_No_constraint_intersection_tag__class__ = "Intersection tag for constrained triangulations, when input constraints are not allowed to intersect except at a single common extremity.";
+constexpr const char* No_constraint_intersection_tag__class__ = "Intersection tag for constrained triangulations, when input constraints are not allowed to intersect except at a single common extremity.";
 
 // CGAL::No_intersection_tag
-constexpr const char* CGAL_No_intersection_tag__class__ = "Intersection tag for constrained triangulations, when input constraints do not intersect.";
+constexpr const char* No_intersection_tag__class__ = "Intersection tag for constrained triangulations, when input constraints do not intersect.";
 
 // CGAL::Regular_triangulation_2
-constexpr const char* CGAL_Regular_triangulation_2__class__ = "The class Regular_triangulation_2 is designed to maintain the regular triangulation of a set of weighted points.";
+constexpr const char* Regular_triangulation_2__class__ = "The class Regular_triangulation_2 is designed to maintain the regular triangulation of a set of weighted points.";
 
-constexpr const char* CGAL_Regular_triangulation_2_All_vertices_iterator = "An iterator that allows to enumerate the vertices that are not hidden.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Regular_triangulation_2_Finite_vertices_iterator = "An iterator that allows to enumerate the finite vertices that are not hidden.
+constexpr const char* Regular_triangulation_2_All_vertices_iterator = "An iterator that allows to enumerate the vertices that are not hidden.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Regular_triangulation_2_Hidden_vertices_iterator = "An iterator that allows to enumerate the hidden vertices.
+constexpr const char* Regular_triangulation_2_Finite_vertices_iterator = "An iterator that allows to enumerate the finite vertices that are not hidden.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Regular_triangulation_2_Regular_triangulation_2 = "introduces an empty regular triangulation.
+constexpr const char* Regular_triangulation_2_Hidden_vertices_iterator = "An iterator that allows to enumerate the hidden vertices.
+
+Returns: unspecified_type";
+constexpr const char* Regular_triangulation_2_Regular_triangulation_2 = "introduces an empty regular triangulation.
 
 Parameters
 ----------
 gt : const Traits &";
-constexpr const char* CGAL_Regular_triangulation_2_Regular_triangulation_2_1 = "Copy constructor.
+constexpr const char* Regular_triangulation_2_Regular_triangulation_2_1 = "Copy constructor.
 
 Parameters
 ----------
 rt : const Regular_triangulation_2 &";
-constexpr const char* CGAL_Regular_triangulation_2_Regular_triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last).
+constexpr const char* Regular_triangulation_2_Regular_triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last).
 
 Parameters
 ----------
@@ -1216,7 +1216,7 @@ last : InputIterator
 gt : Traits
 
 Returns: Regular_triangulation_2< Traits, Tds >";
-constexpr const char* CGAL_Regular_triangulation_2_insert = "inserts weighted point p in the regular triangulation.
+constexpr const char* Regular_triangulation_2_insert = "inserts weighted point p in the regular triangulation.
 
 If the point p does not appear as a vertex of the triangulation, the returned
 vertex is a hidden vertex. If given the parameter f is used as a hint for the
@@ -1228,7 +1228,7 @@ p : const Weighted_point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_2_insert_1 = "insert a weighted point p whose bare-point is assumed to be located in lt,loc,li .
+constexpr const char* Regular_triangulation_2_insert_1 = "insert a weighted point p whose bare-point is assumed to be located in lt,loc,li .
 
 See the description of member function Triangulation_2::locate() .
 
@@ -1240,14 +1240,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Regular_triangulation_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_2_insert_2 = "inserts the weighted points in the range [first,last) .
+constexpr const char* Regular_triangulation_2_insert_2 = "inserts the weighted points in the range [first,last) .
 
 It returns the difference of the number of vertices between after and before
 the insertions (it may be negative due to hidden points). Note that this
@@ -1261,7 +1261,7 @@ first : InputIterator
 last : InputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Regular_triangulation_2_insert_3 = "inserts the weighted points in the range [first,last) .
+constexpr const char* Regular_triangulation_2_insert_3 = "inserts the weighted points in the range [first,last) .
 
 It returns the difference of the number of vertices between after and before
 the insertions (it may be negative due to hidden points). Note that this
@@ -1280,12 +1280,12 @@ first : WeightedPointWithInfoInputIterator
 last : WeightedPointWithInfoInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Regular_triangulation_2_remove = "removes the vertex from the triangulation.
+constexpr const char* Regular_triangulation_2_remove = "removes the vertex from the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_2_get_conflicts_and_boundary_and_hidden_vertices = "outputs the faces, boundary edges, and hidden vertices of the conflict zone of point p to output iterators.
+constexpr const char* Regular_triangulation_2_get_conflicts_and_boundary_and_hidden_vertices = "outputs the faces, boundary edges, and hidden vertices of the conflict zone of point p to output iterators.
 
 OutputItFaces is an output iterator with Face_handle as value type.
 OutputItBoundaryEdges is an output iterator with Edge as value type.
@@ -1309,7 +1309,7 @@ vit : OutputItHiddenVertices
 start : Face_handle
 
 Returns: CGAL::Triple< OutputItFaces, OutputItBoundaryEdges, OutputItHiddenVertices >";
-constexpr const char* CGAL_Regular_triangulation_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p to output iterators.
+constexpr const char* Regular_triangulation_2_get_conflicts_and_boundary = "outputs the faces and boundary edges of the conflict zone of point p to output iterators.
 
 See get_conflicts_and_boundary_and_hidden_vertices() for details. The function
 returns in a std::pair the resulting output iterators. dimension() ==2 .
@@ -1322,7 +1322,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: std::pair< OutputItFaces, OutputItBoundaryEdges >";
-constexpr const char* CGAL_Regular_triangulation_2_get_conflicts_and_hidden_vertices = "outputs the faces and hidden vertices of the conflict zone of point p to output iterators.
+constexpr const char* Regular_triangulation_2_get_conflicts_and_hidden_vertices = "outputs the faces and hidden vertices of the conflict zone of point p to output iterators.
 
 See get_conflicts_and_boundary_and_hidden_vertices() for details. The function
 returns in a std::pair the resulting output iterators. dimension() ==2 .
@@ -1335,7 +1335,7 @@ vit : OutputItHiddenVertices
 start : Face_handle
 
 Returns: std::pair< OutputItFaces, OutputItHiddenVertices >";
-constexpr const char* CGAL_Regular_triangulation_2_get_boundary_of_conflicts_and_hidden_vertices = "outputs the boundary edges and hidden vertices of the conflict zone of point p to output iterators.
+constexpr const char* Regular_triangulation_2_get_boundary_of_conflicts_and_hidden_vertices = "outputs the boundary edges and hidden vertices of the conflict zone of point p to output iterators.
 
 See get_conflicts_and_boundary_and_hidden_vertices() for details. The function
 returns in a std::pair the resulting output iterators.
@@ -1348,7 +1348,7 @@ vit : OutputItHiddenVertices
 start : Face_handle
 
 Returns: std::pair< OutputItBoundaryEdges, OutputItHiddenVertices >";
-constexpr const char* CGAL_Regular_triangulation_2_get_conflicts = "outputs the faces of the conflict zone of point p to output iterators.
+constexpr const char* Regular_triangulation_2_get_conflicts = "outputs the faces of the conflict zone of point p to output iterators.
 
 The function returns the resulting output iterator. dimension() ==2 .
 
@@ -1359,7 +1359,7 @@ fit : OutputItFaces
 start : Face_handle
 
 Returns: OutputItFaces";
-constexpr const char* CGAL_Regular_triangulation_2_get_boundary_of_conflicts = "outputs the boundary edges of the conflict zone of p in counterclockwise order where each edge is described through the incident face which is not in conflict with p .
+constexpr const char* Regular_triangulation_2_get_boundary_of_conflicts = "outputs the boundary edges of the conflict zone of p in counterclockwise order where each edge is described through the incident face which is not in conflict with p .
 
 The function returns the resulting output iterator.
 
@@ -1370,7 +1370,7 @@ eit : OutputItBoundaryEdges
 start : Face_handle
 
 Returns: OutputItBoundaryEdges";
-constexpr const char* CGAL_Regular_triangulation_2_get_hidden_vertices = "outputs the hidden vertices of the conflict zone of p into an output iterator.
+constexpr const char* Regular_triangulation_2_get_hidden_vertices = "outputs the hidden vertices of the conflict zone of p into an output iterator.
 
 The function returns the resulting output iterator.
 
@@ -1381,7 +1381,7 @@ vit : OutputItHiddenVertices
 start : Face_handle
 
 Returns: OutputItHiddenVertices";
-constexpr const char* CGAL_Regular_triangulation_2_nearest_power_vertex = "returns the vertex of the triangulation which is nearest to p with respect to the power distance.
+constexpr const char* Regular_triangulation_2_nearest_power_vertex = "returns the vertex of the triangulation which is nearest to p with respect to the power distance.
 
 This means that the power of the query point p with respect to the weighted
 point in the nearest vertex is smaller than the power of p with respect to the
@@ -1393,31 +1393,31 @@ Parameters
 p : Bare_point
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_2_number_of_vertices = "returns the number of finite vertices that are not hidden.
+constexpr const char* Regular_triangulation_2_number_of_vertices = "returns the number of finite vertices that are not hidden.
 
 Returns: int";
-constexpr const char* CGAL_Regular_triangulation_2_number_of_hidden_vertices = "returns the number of hidden vertices.
+constexpr const char* Regular_triangulation_2_number_of_hidden_vertices = "returns the number of hidden vertices.
 
 Returns: int";
-constexpr const char* CGAL_Regular_triangulation_2_hidden_vertices_begin = "starts at an arbitrary hidden vertex.
+constexpr const char* Regular_triangulation_2_hidden_vertices_begin = "starts at an arbitrary hidden vertex.
 
 Returns: Hidden_vertices_iterator";
-constexpr const char* CGAL_Regular_triangulation_2_hidden_vertices_end = "Past-the-end iterator for the sequence of hidden vertices.
+constexpr const char* Regular_triangulation_2_hidden_vertices_end = "Past-the-end iterator for the sequence of hidden vertices.
 
 Returns: Hidden_vertices_iterator";
-constexpr const char* CGAL_Regular_triangulation_2_finite_vertices_begin = "starts at an arbitrary unhidden finite vertex
+constexpr const char* Regular_triangulation_2_finite_vertices_begin = "starts at an arbitrary unhidden finite vertex
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Regular_triangulation_2_finite_vertices_end = "Past-the-end iterator.
+constexpr const char* Regular_triangulation_2_finite_vertices_end = "Past-the-end iterator.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Regular_triangulation_2_all_vertices_begin = "starts at an arbitrary unhidden vertex.
+constexpr const char* Regular_triangulation_2_all_vertices_begin = "starts at an arbitrary unhidden vertex.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Regular_triangulation_2_all_vertices_end = "Past-the-end iterator.
+constexpr const char* Regular_triangulation_2_all_vertices_end = "Past-the-end iterator.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Regular_triangulation_2_weighted_circumcenter = "returns the center of the circle orthogonal to the three weighted points corresponding to the vertices of face f .
+constexpr const char* Regular_triangulation_2_weighted_circumcenter = "returns the center of the circle orthogonal to the three weighted points corresponding to the vertices of face f .
 
 f is not infinite.
 
@@ -1426,14 +1426,14 @@ Parameters
 f : const Face_handle &
 
 Returns: Point";
-constexpr const char* CGAL_Regular_triangulation_2_dual = "same as weighted_circumcenter.
+constexpr const char* Regular_triangulation_2_dual = "same as weighted_circumcenter.
 
 Parameters
 ----------
 f : const Face_handle &
 
 Returns: Point";
-constexpr const char* CGAL_Regular_triangulation_2_dual_1 = "If both incident faces are finite, returns a segment whose endpoints are the duals of each incident face.
+constexpr const char* Regular_triangulation_2_dual_1 = "If both incident faces are finite, returns a segment whose endpoints are the duals of each incident face.
 
 If only one incident face is finite, returns a ray whose endpoint is the dual
 of the finite incident face and supported by the line which is the bisector of
@@ -1445,28 +1445,28 @@ Parameters
 e : const Edge &
 
 Returns: Object";
-constexpr const char* CGAL_Regular_triangulation_2_dual_2 = "Idem.
+constexpr const char* Regular_triangulation_2_dual_2 = "Idem.
 
 Parameters
 ----------
 ec : const Edge_circulator &
 
 Returns: Object";
-constexpr const char* CGAL_Regular_triangulation_2_dual_3 = "Idem.
+constexpr const char* Regular_triangulation_2_dual_3 = "Idem.
 
 Parameters
 ----------
 ei : const Edge_iterator &
 
 Returns: Object";
-constexpr const char* CGAL_Regular_triangulation_2_draw_dual = "output the dual power diagram to stream ps .
+constexpr const char* Regular_triangulation_2_draw_dual = "output the dual power diagram to stream ps .
 
 Parameters
 ----------
 ps : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Regular_triangulation_2_power_test = "returns the power test of p with respect to the power circle associated with f .
+constexpr const char* Regular_triangulation_2_power_test = "returns the power test of p with respect to the power circle associated with f .
 
 Parameters
 ----------
@@ -1474,7 +1474,7 @@ f : Face_handle
 p : const Weighted_point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Regular_triangulation_2_is_valid = "tests the validity of the triangulation as a Triangulation_2 and additionally test the regularity of the triangulation.
+constexpr const char* Regular_triangulation_2_is_valid = "tests the validity of the triangulation as a Triangulation_2 and additionally test the regularity of the triangulation.
 
 This method is useful to debug regular triangulation algorithms implemented by
 the user.
@@ -1487,134 +1487,134 @@ level : int
 Returns: bool";
 
 // CGAL::Regular_triangulation_face_base_2
-constexpr const char* CGAL_Regular_triangulation_face_base_2__class__ = "The class Regular_triangulation_face_base_2 is a model of the concept RegularTriangulationFaceBase_2 .";
+constexpr const char* Regular_triangulation_face_base_2__class__ = "The class Regular_triangulation_face_base_2 is a model of the concept RegularTriangulationFaceBase_2 .";
 
 // CGAL::Regular_triangulation_vertex_base_2
-constexpr const char* CGAL_Regular_triangulation_vertex_base_2__class__ = "The class Regular_triangulation_vertex_base_2 is a model of the concept RegularTriangulationVertexBase_2 .";
+constexpr const char* Regular_triangulation_vertex_base_2__class__ = "The class Regular_triangulation_vertex_base_2 is a model of the concept RegularTriangulationVertexBase_2 .";
 
 
 // CGAL::Robust_circumcenter_filtered_traits_2
-constexpr const char* CGAL_Robust_circumcenter_filtered_traits_2__class__ = "Upgrades the functors models of Kernel::ConstructCircumcenter_2 and Kernel::ComputeSquaredRadius_2 that are provided by K with robust versions.";
+constexpr const char* Robust_circumcenter_filtered_traits_2__class__ = "Upgrades the functors models of Kernel::ConstructCircumcenter_2 and Kernel::ComputeSquaredRadius_2 that are provided by K with robust versions.";
 
-constexpr const char* CGAL_Robust_circumcenter_filtered_traits_2_Construct_circumcenter_2 = "a model of Kernel::ConstructCircumcenter_2
+constexpr const char* Robust_circumcenter_filtered_traits_2_Construct_circumcenter_2 = "a model of Kernel::ConstructCircumcenter_2
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Robust_circumcenter_filtered_traits_2_Compute_squared_radius_2 = "a model of Kernel::ComputeSquaredRadius_2
+constexpr const char* Robust_circumcenter_filtered_traits_2_Compute_squared_radius_2 = "a model of Kernel::ComputeSquaredRadius_2
 
 Returns: unspecified_type";
 
 // CGAL::Robust_weighted_circumcenter_filtered_traits_2
-constexpr const char* CGAL_Robust_weighted_circumcenter_filtered_traits_2__class__ = "Upgrades the functors models of Kernel::ConstructWeightedCircumcenter_2 , and Kernel::ComputeSquaredRadiusSmallestOrthogonalCircle_2 that are provided by K with robust versions.";
+constexpr const char* Robust_weighted_circumcenter_filtered_traits_2__class__ = "Upgrades the functors models of Kernel::ConstructWeightedCircumcenter_2 , and Kernel::ComputeSquaredRadiusSmallestOrthogonalCircle_2 that are provided by K with robust versions.";
 
-constexpr const char* CGAL_Robust_weighted_circumcenter_filtered_traits_2_Construct_weighted_circumcenter_2 = "a model of Kernel::ConstructWeightedCircumcenter_2
+constexpr const char* Robust_weighted_circumcenter_filtered_traits_2_Construct_weighted_circumcenter_2 = "a model of Kernel::ConstructWeightedCircumcenter_2
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Robust_weighted_circumcenter_filtered_traits_2_Compute_squared_radius_smallest_orthogonal_circle_2 = "a model of Kernel::ComputeSquaredRadiusSmallestOrthogonalCircle_2
+constexpr const char* Robust_weighted_circumcenter_filtered_traits_2_Compute_squared_radius_smallest_orthogonal_circle_2 = "a model of Kernel::ComputeSquaredRadiusSmallestOrthogonalCircle_2
 
 Returns: unspecified_type";
 
 // CGAL::Triangulation_2
-constexpr const char* CGAL_Triangulation_2__class__ = "The class Triangulation_2 is the basic class designed to handle triangulations of set of points $ { A}$ in the plane.";
+constexpr const char* Triangulation_2__class__ = "The class Triangulation_2 is the basic class designed to handle triangulations of set of points $ { A}$ in the plane.";
 
-constexpr const char* CGAL_Triangulation_2_Locate_type = "specifies which case occurs when locating a point in the triangulation.
+constexpr const char* Triangulation_2_Locate_type = "specifies which case occurs when locating a point in the triangulation.
 
 CGAL::Triangulation_2 <Traits,Tds>";
-constexpr const char* CGAL_Triangulation_2_Vertex_handle = "Handle to a vertex.
+constexpr const char* Triangulation_2_Vertex_handle = "Handle to a vertex.
 
 Returns: Tds::Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_Face_handle = "Handle to a face.
+constexpr const char* Triangulation_2_Face_handle = "Handle to a face.
 
 Returns: Tds::Face_handle";
-constexpr const char* CGAL_Triangulation_2_All_faces_iterator = "Iterator over all faces.
+constexpr const char* Triangulation_2_All_faces_iterator = "Iterator over all faces.
 
 Returns: Tds::Face_iterator";
-constexpr const char* CGAL_Triangulation_2_All_edges_iterator = "Iterator over all edges.
+constexpr const char* Triangulation_2_All_edges_iterator = "Iterator over all edges.
 
 Returns: Tds::Edge_iterator";
-constexpr const char* CGAL_Triangulation_2_All_vertices_iterator = "Iterator over all vertices.
+constexpr const char* Triangulation_2_All_vertices_iterator = "Iterator over all vertices.
 
 Returns: Tds::Vertex_iterator";
-constexpr const char* CGAL_Triangulation_2_Finite_faces_iterator = "Iterator over finite faces.
+constexpr const char* Triangulation_2_Finite_faces_iterator = "Iterator over finite faces.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Finite_edges_iterator = "Iterator over finite edges.
+constexpr const char* Triangulation_2_Finite_edges_iterator = "Iterator over finite edges.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Finite_vertices_iterator = "Iterator over finite vertices.
+constexpr const char* Triangulation_2_Finite_vertices_iterator = "Iterator over finite vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Point_iterator = "Iterator over the points corresponding to the finite vertices of the triangulation.
+constexpr const char* Triangulation_2_Point_iterator = "Iterator over the points corresponding to the finite vertices of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_All_face_handles = "Range type for iterating over all faces (including infinite faces), with a nested type iterator that has as value type Face_handle .
+constexpr const char* Triangulation_2_All_face_handles = "Range type for iterating over all faces (including infinite faces), with a nested type iterator that has as value type Face_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_2_All_edges = "Range type for iterating over all edges (including infinite ones).
+constexpr const char* Triangulation_2_All_edges = "Range type for iterating over all edges (including infinite ones).
 
 Returns: Iterator_range< All_edges_iterator >";
-constexpr const char* CGAL_Triangulation_2_All_vertex_handles = "Range type for iterating over all vertices (including the infinite vertex), with a nested type iterator that has as value type Vertex_handle .
+constexpr const char* Triangulation_2_All_vertex_handles = "Range type for iterating over all vertices (including the infinite vertex), with a nested type iterator that has as value type Vertex_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_2_Finite_face_handles = "Range type for iterating over finite faces, with a nested type iterator that has as value type Face_handle .
+constexpr const char* Triangulation_2_Finite_face_handles = "Range type for iterating over finite faces, with a nested type iterator that has as value type Face_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_2_Finite_edges = "Range type for iterating over finite edges.
+constexpr const char* Triangulation_2_Finite_edges = "Range type for iterating over finite edges.
 
 Returns: Iterator_range< Finite_edges_iterator >";
-constexpr const char* CGAL_Triangulation_2_Finite_vertex_handles = "Range type for iterating over finite vertices, with a nested type iterator that has as value type Vertex_handle .
+constexpr const char* Triangulation_2_Finite_vertex_handles = "Range type for iterating over finite vertices, with a nested type iterator that has as value type Vertex_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_2_Points = "Range type for iterating over the points of the finite vertices.
+constexpr const char* Triangulation_2_Points = "Range type for iterating over the points of the finite vertices.
 
 Returns: Iterator_range< Point_iterator >";
-constexpr const char* CGAL_Triangulation_2_Line_face_circulator = "Circulator over all faces intersected by a line.
+constexpr const char* Triangulation_2_Line_face_circulator = "Circulator over all faces intersected by a line.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Face_circulator = "Circulator over all faces incident to a given vertex.
+constexpr const char* Triangulation_2_Face_circulator = "Circulator over all faces incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Edge_circulator = "Circulator over all edges incident to a given vertex.
+constexpr const char* Triangulation_2_Edge_circulator = "Circulator over all edges incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Vertex_circulator = "Circulator over all vertices incident to a given vertex.
+constexpr const char* Triangulation_2_Vertex_circulator = "Circulator over all vertices incident to a given vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_2_Geom_traits = "The traits class.
+constexpr const char* Triangulation_2_Geom_traits = "The traits class.
 
 Returns: Traits";
-constexpr const char* CGAL_Triangulation_2_Triangulation_data_structure = "The triangulation data structure type.
+constexpr const char* Triangulation_2_Triangulation_data_structure = "The triangulation data structure type.
 
 Returns: Tds";
-constexpr const char* CGAL_Triangulation_2_Point = "The point type.
+constexpr const char* Triangulation_2_Point = "The point type.
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Triangulation_2_Segment = "The segment type.
+constexpr const char* Triangulation_2_Segment = "The segment type.
 
 Returns: Traits::Segment_2";
-constexpr const char* CGAL_Triangulation_2_Triangle = "The triangle type.
+constexpr const char* Triangulation_2_Triangle = "The triangle type.
 
 Returns: Traits::Triangle_2";
-constexpr const char* CGAL_Triangulation_2_Vertex = "The vertex type.
+constexpr const char* Triangulation_2_Vertex = "The vertex type.
 
 Returns: Tds::Vertex";
-constexpr const char* CGAL_Triangulation_2_Face = "The face type.
+constexpr const char* Triangulation_2_Face = "The face type.
 
 Returns: Tds::Face";
-constexpr const char* CGAL_Triangulation_2_Edge = "The edge type.
+constexpr const char* Triangulation_2_Edge = "The edge type.
 
 Returns: Tds::Edge";
-constexpr const char* CGAL_Triangulation_2_size_type = "Size type (an unsigned integral type).
+constexpr const char* Triangulation_2_size_type = "Size type (an unsigned integral type).
 
 Returns: Tds::size_type";
-constexpr const char* CGAL_Triangulation_2_difference_type = "Difference type (a signed integral type).
+constexpr const char* Triangulation_2_difference_type = "Difference type (a signed integral type).
 
 Returns: Tds::difference_type";
-constexpr const char* CGAL_Triangulation_2_Triangulation_2 = "introduces an empty triangulation.
+constexpr const char* Triangulation_2_Triangulation_2 = "introduces an empty triangulation.
 
 Parameters
 ----------
 gt : const Traits &";
-constexpr const char* CGAL_Triangulation_2_Triangulation_2_1 = "Copy constructor.
+constexpr const char* Triangulation_2_Triangulation_2_1 = "Copy constructor.
 
 All the vertices and faces are duplicated. After the copy, *this and tr refer
 to different triangulations: if tr is modified, *this is not.
@@ -1622,14 +1622,14 @@ to different triangulations: if tr is modified, *this is not.
 Parameters
 ----------
 tr : const Triangulation_2 &";
-constexpr const char* CGAL_Triangulation_2_Triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last).
+constexpr const char* Triangulation_2_Triangulation_2_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last).
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator
 gt : const Traits &";
-constexpr const char* CGAL_Triangulation_2_operator = "Assignment.
+constexpr const char* Triangulation_2_operator = "Assignment.
 
 All the vertices and faces are duplicated. After the assignment, *this and tr
 refer to different triangulations: if tr is modified, *this is not.
@@ -1639,7 +1639,7 @@ Parameters
 tr : const Triangulation_2 < Traits, Tds > &
 
 Returns: Triangulation_2";
-constexpr const char* CGAL_Triangulation_2_swap = "The triangulations tr and *this are swapped.
+constexpr const char* Triangulation_2_swap = "The triangulations tr and *this are swapped.
 
 This method should be used instead of assignment of copy constructor. if tr is
 deleted after that.
@@ -1647,49 +1647,49 @@ deleted after that.
 Parameters
 ----------
 tr : Triangulation_2 &";
-constexpr const char* CGAL_Triangulation_2_clear = "deletes all faces and finite vertices resulting in an empty triangulation.";
-constexpr const char* CGAL_Triangulation_2_dimension = "returns the dimension of the convex hull.
+constexpr const char* Triangulation_2_clear = "deletes all faces and finite vertices resulting in an empty triangulation.";
+constexpr const char* Triangulation_2_dimension = "returns the dimension of the convex hull.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_2_number_of_vertices = "returns the number of finite vertices.
+constexpr const char* Triangulation_2_number_of_vertices = "returns the number of finite vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_2_number_of_faces = "returns the number of finite faces.
+constexpr const char* Triangulation_2_number_of_faces = "returns the number of finite faces.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_2_infinite_face = "returns a face incident to the infinite vertex.
+constexpr const char* Triangulation_2_infinite_face = "returns a face incident to the infinite vertex.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Triangulation_2_infinite_vertex = "returns the infinite vertex.
+constexpr const char* Triangulation_2_infinite_vertex = "returns the infinite vertex.
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_finite_vertex = "returns a vertex distinct from the infinite vertex.
+constexpr const char* Triangulation_2_finite_vertex = "returns a vertex distinct from the infinite vertex.
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_geom_traits = "returns a const reference to the triangulation traits object.
+constexpr const char* Triangulation_2_geom_traits = "returns a const reference to the triangulation traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Triangulation_2_tds = "returns a const reference to the triangulation data structure.
+constexpr const char* Triangulation_2_tds = "returns a const reference to the triangulation data structure.
 
 Returns: const TriangulationDataStructure_2 &";
-constexpr const char* CGAL_Triangulation_2_tds_1 = "returns a reference to the triangulation data structure.
+constexpr const char* Triangulation_2_tds_1 = "returns a reference to the triangulation data structure.
 
 Returns: TriangulationDataStructure_2 &";
-constexpr const char* CGAL_Triangulation_2_is_infinite = "returns true iff v is the infinite vertex.
+constexpr const char* Triangulation_2_is_infinite = "returns true iff v is the infinite vertex.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_infinite_1 = "returns true iff face f is infinite.
+constexpr const char* Triangulation_2_is_infinite_1 = "returns true iff face f is infinite.
 
 Parameters
 ----------
 f : Face_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_infinite_2 = "returns true iff edge (f,i) is infinite.
+constexpr const char* Triangulation_2_is_infinite_2 = "returns true iff edge (f,i) is infinite.
 
 Parameters
 ----------
@@ -1697,35 +1697,35 @@ f : Face_handle
 i : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_infinite_3 = "returns true iff edge e is infinite.
+constexpr const char* Triangulation_2_is_infinite_3 = "returns true iff edge e is infinite.
 
 Parameters
 ----------
 e : Edge
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_infinite_4 = "returns true iff edge *ec is infinite.
+constexpr const char* Triangulation_2_is_infinite_4 = "returns true iff edge *ec is infinite.
 
 Parameters
 ----------
 ec : Edge_circulator
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_infinite_5 = "returns true iff edge *ei is infinite.
+constexpr const char* Triangulation_2_is_infinite_5 = "returns true iff edge *ei is infinite.
 
 Parameters
 ----------
 ei : All_edges_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_vertex = "returns true if v is a vertex of the triangulation.
+constexpr const char* Triangulation_2_is_vertex = "returns true if v is a vertex of the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_edge = "returns true if there is an edge having va and vb as vertices.
+constexpr const char* Triangulation_2_is_edge = "returns true if there is an edge having va and vb as vertices.
 
 Parameters
 ----------
@@ -1733,7 +1733,7 @@ va : Vertex_handle
 vb : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_edge_1 = "As above.
+constexpr const char* Triangulation_2_is_edge_1 = "As above.
 
 In addition, if true is returned, the edge with vertices va and vb is the edge
 e=(fr,i) where fr is a handle to the face incident to e and on the right side
@@ -1747,7 +1747,7 @@ fr : Face_handle &
 i : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_includes_edge = "returns true if the line segment from va to vb includes an edge e incident to va .
+constexpr const char* Triangulation_2_includes_edge = "returns true if the line segment from va to vb includes an edge e incident to va .
 
 If true , vbb becomes the other vertex of e , e is the edge (fr,i) where fr is
 a handle to the face incident to e and on the right side e oriented from va to
@@ -1762,7 +1762,7 @@ fr : Face_handle &
 i : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_face = "returns true if there is a face having v1 , v2 and v3 as vertices.
+constexpr const char* Triangulation_2_is_face = "returns true if there is a face having v1 , v2 and v3 as vertices.
 
 Parameters
 ----------
@@ -1771,7 +1771,7 @@ v2 : Vertex_handle
 v3 : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_is_face_1 = "As above.
+constexpr const char* Triangulation_2_is_face_1 = "As above.
 
 In addition, if true is returned, fr is a handle to the face with v1 , v2 and
 v3 as vertices.
@@ -1784,7 +1784,7 @@ v3 : Vertex_handle
 fr : Face_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_locate = "If the point query lies inside the convex hull of the points, a face that contains the query in its interior or on its boundary is returned.
+constexpr const char* Triangulation_2_locate = "If the point query lies inside the convex hull of the points, a face that contains the query in its interior or on its boundary is returned.
 
 If the point query lies outside the convex hull of the triangulation but in
 the affine hull, the returned face is an infinite face which is a proof of the
@@ -1803,7 +1803,7 @@ query : const Point &
 f : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Triangulation_2_inexact_locate = "Same as locate() but uses inexact predicates.
+constexpr const char* Triangulation_2_inexact_locate = "Same as locate() but uses inexact predicates.
 
 This function returns a handle on a face that is a good approximation of the
 exact location of query , while being faster. Note that it may return a handle
@@ -1816,7 +1816,7 @@ query : const Point &
 start : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Triangulation_2_locate_1 = "Same as above.
+constexpr const char* Triangulation_2_locate_1 = "Same as above.
 
 Additionally, the parameters lt and li describe where the query point is
 located. The variable lt is set to the locate type of the query. If lt==
@@ -1833,7 +1833,7 @@ li : int &
 h : Face_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Triangulation_2_oriented_side = "returns on which side of the oriented boundary of f lies the point p .
+constexpr const char* Triangulation_2_oriented_side = "returns on which side of the oriented boundary of f lies the point p .
 
 f is finite.
 
@@ -1843,7 +1843,7 @@ f : Face_handle
 p : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Triangulation_2_side_of_oriented_circle = "returns on which side of the circumcircle of face f lies the point p .
+constexpr const char* Triangulation_2_side_of_oriented_circle = "returns on which side of the circumcircle of face f lies the point p .
 
 The circle is assumed to be counterclockwise oriented, so its positive side
 correspond to its bounded side. This predicate is available only if the
@@ -1855,7 +1855,7 @@ f : Face_handle
 p : const Point &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_Triangulation_2_flip = "exchanges the edge incident to f and f->neighbor(i) with the other diagonal of the quadrilateral formed by f and f->neighbor(i) .
+constexpr const char* Triangulation_2_flip = "exchanges the edge incident to f and f->neighbor(i) with the other diagonal of the quadrilateral formed by f and f->neighbor(i) .
 
 The faces f and f->neighbor(i) are finite faces and their union form a convex
 quadrilateral.
@@ -1864,7 +1864,7 @@ Parameters
 ----------
 f : Face_handle
 i : int";
-constexpr const char* CGAL_Triangulation_2_insert = "inserts point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Triangulation_2_insert = "inserts point p in the triangulation and returns the corresponding vertex.
 
 If point p coincides with an already existing vertex, this vertex is returned
 and the triangulation remains unchanged. If point p is on an edge, the two
@@ -1883,7 +1883,7 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_1 = "Same as above except that the location of the point p to be inserted is assumed to be given by (lt,loc,i) (see the description of the locate method above.).
+constexpr const char* Triangulation_2_insert_1 = "Same as above except that the location of the point p to be inserted is assumed to be given by (lt,loc,i) (see the description of the locate method above.).
 
 Parameters
 ----------
@@ -1893,14 +1893,14 @@ loc : Face_handle
 li : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_push_back = "Equivalent to insert(p) .
+constexpr const char* Triangulation_2_push_back = "Equivalent to insert(p) .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_2 = "inserts the points in the range [first,last) in the given order, and returns the number of inserted points.
+constexpr const char* Triangulation_2_insert_2 = "inserts the points in the range [first,last) in the given order, and returns the number of inserted points.
 
 PointInputIterator must be an input iterator with value type Point .
 
@@ -1910,7 +1910,7 @@ first : PointInputIterator
 last : PointInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Triangulation_2_insert_3 = "inserts the points in the iterator range [first,last) in the given order, and returns the number of inserted points.
+constexpr const char* Triangulation_2_insert_3 = "inserts the points in the iterator range [first,last) in the given order, and returns the number of inserted points.
 
 Given a pair (p,i) , the vertex v storing p also stores i , that is v.point()
 == p and v.info() == i . If several pairs have the same point, only one vertex
@@ -1925,14 +1925,14 @@ first : PointWithInfoInputIterator
 last : PointWithInfoInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Triangulation_2_remove = "removes the vertex from the triangulation.
+constexpr const char* Triangulation_2_remove = "removes the vertex from the triangulation.
 
 The created hole is re-triangulated. Vertex v must be finite.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_move_if_no_collision = "If there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
+constexpr const char* Triangulation_2_move_if_no_collision = "If there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
 
 Otherwise, the triangulation is not modified and the vertex at point p is
 returned. Vertex v must be finite.
@@ -1943,7 +1943,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_move = "If there is no collision during the move, this function is the same as move_if_no_collision .
+constexpr const char* Triangulation_2_move = "If there is no collision during the move, this function is the same as move_if_no_collision .
 
 Otherwise, v is removed and the vertex at point p is returned. Vertex v must
 be finite.
@@ -1954,21 +1954,21 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_first = "inserts the first finite vertex .
+constexpr const char* Triangulation_2_insert_first = "inserts the first finite vertex .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_second = "inserts the second finite vertex .
+constexpr const char* Triangulation_2_insert_second = "inserts the second finite vertex .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_in_face = "inserts vertex v in face f .
+constexpr const char* Triangulation_2_insert_in_face = "inserts vertex v in face f .
 
 Face f is modified, two new faces are created. The point in vertex v lies
 inside face f .
@@ -1979,7 +1979,7 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_in_edge = "inserts vertex v in edge i of f .
+constexpr const char* Triangulation_2_insert_in_edge = "inserts vertex v in edge i of f .
 
 The point in vertex v lies on the edge opposite to the vertex i of face f .
 
@@ -1990,7 +1990,7 @@ f : Face_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_outside_convex_hull = "inserts a point which is outside the convex hull but in the affine hull.
+constexpr const char* Triangulation_2_insert_outside_convex_hull = "inserts a point which is outside the convex hull but in the affine hull.
 
 The handle f points to a face which is a proof of the location of p , see the
 description of the locate method above.
@@ -2001,14 +2001,14 @@ p : const Point &
 f : Face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_insert_outside_affine_hull = "Inserts a point which is outside the affine hull.
+constexpr const char* Triangulation_2_insert_outside_affine_hull = "Inserts a point which is outside the affine hull.
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_remove_degree_3 = "Removes a vertex of degree three.
+constexpr const char* Triangulation_2_remove_degree_3 = "Removes a vertex of degree three.
 
 Two of the incident faces are destroyed, the third one is modified. Vertex v
 is a finite vertex with degree three.
@@ -2016,17 +2016,17 @@ is a finite vertex with degree three.
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_remove_second = "removes the before last finite vertex.
+constexpr const char* Triangulation_2_remove_second = "removes the before last finite vertex.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_remove_first = "removes the last finite vertex.
+constexpr const char* Triangulation_2_remove_first = "removes the last finite vertex.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_star_hole = "creates a new vertex v and use it to star the hole whose boundary is described by the sequence of edges [edge_begin, edge_end) .
+constexpr const char* Triangulation_2_star_hole = "creates a new vertex v and use it to star the hole whose boundary is described by the sequence of edges [edge_begin, edge_end) .
 
 Returns a handle to the new vertex. This function is intended to be used in
 conjunction with the find_conflicts() member functions of Delaunay and
@@ -2039,7 +2039,7 @@ edge_begin : EdgeIt
 edge_end : EdgeIt
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_star_hole_1 = "Same as above, except that the algorithm first recycles faces in the sequence [face_begin, face_end) and create new ones only when the sequence is exhausted.
+constexpr const char* Triangulation_2_star_hole_1 = "Same as above, except that the algorithm first recycles faces in the sequence [face_begin, face_end) and create new ones only when the sequence is exhausted.
 
 This function is intended to be used in conjunction with the find_conflicts()
 member functions of Delaunay and constrained Delaunay triangulations to
@@ -2054,91 +2054,91 @@ face_begin : FaceIt
 face_end : FaceIt
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_finite_vertices_begin = "returns an iterator over finite vertices of the triangulation.
+constexpr const char* Triangulation_2_finite_vertices_begin = "returns an iterator over finite vertices of the triangulation.
 
 Starts at an arbitrary finite vertex.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Triangulation_2_finite_vertices_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_finite_vertices_end = "Past-the-end iterator.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Triangulation_2_finite_edges_begin = "returns an iterator over finite edges of the triangulation.
+constexpr const char* Triangulation_2_finite_edges_begin = "returns an iterator over finite edges of the triangulation.
 
 Starts at an arbitrary finite edge.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Triangulation_2_finite_edges_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_finite_edges_end = "Past-the-end iterator.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Triangulation_2_finite_faces_begin = "returns an iterator over finite faces of the triangulation.
+constexpr const char* Triangulation_2_finite_faces_begin = "returns an iterator over finite faces of the triangulation.
 
 Starts at an arbitrary finite face.
 
 Returns: Finite_faces_iterator";
-constexpr const char* CGAL_Triangulation_2_finite_faces_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_finite_faces_end = "Past-the-end iterator.
 
 Returns: Finite_faces_iterator";
-constexpr const char* CGAL_Triangulation_2_points_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_points_end = "Past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Triangulation_2_finite_vertex_handles = "returns a range of iterators over finite vertices.
+constexpr const char* Triangulation_2_finite_vertex_handles = "returns a range of iterators over finite vertices.
 
 While the value type of Finite_vertices_iterator is Vertex , the value type of
 Finite_vertex_handles::iterator is Vertex_handle .
 
 Returns: Finite_vertex_handles";
-constexpr const char* CGAL_Triangulation_2_finite_edges = "returns a range of iterators over finite edges.
+constexpr const char* Triangulation_2_finite_edges = "returns a range of iterators over finite edges.
 
 Returns: Finite_edges";
-constexpr const char* CGAL_Triangulation_2_finite_face_handles = "returns a range of iterators over finite faces.
+constexpr const char* Triangulation_2_finite_face_handles = "returns a range of iterators over finite faces.
 
 While the value type of Finite_faces_iterator is Face , the value type of
 Finite_face_handles::iterator is Face_handle .
 
 Returns: Finite_face_handles";
-constexpr const char* CGAL_Triangulation_2_points = "returns a range of iterators over the points of finite vertices.
+constexpr const char* Triangulation_2_points = "returns a range of iterators over the points of finite vertices.
 
 Returns: Points";
-constexpr const char* CGAL_Triangulation_2_all_vertices_begin = "returns an iterator over all vertices of the triangulation.
+constexpr const char* Triangulation_2_all_vertices_begin = "returns an iterator over all vertices of the triangulation.
 
 Starts at an arbitrary vertex
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Triangulation_2_all_vertices_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_all_vertices_end = "Past-the-end iterator.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Triangulation_2_all_edges_begin = "returns an iterator over all edges of the triangulation.
+constexpr const char* Triangulation_2_all_edges_begin = "returns an iterator over all edges of the triangulation.
 
 starts at an arbitrary edge.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Triangulation_2_all_edges_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_all_edges_end = "Past-the-end iterator.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Triangulation_2_all_faces_begin = "returns an iterator over all faces of the triangulation.
+constexpr const char* Triangulation_2_all_faces_begin = "returns an iterator over all faces of the triangulation.
 
 Starts at an arbitrary face.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Triangulation_2_all_faces_end = "Past-the-end iterator.
+constexpr const char* Triangulation_2_all_faces_end = "Past-the-end iterator.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Triangulation_2_all_vertex_handles = "returns a range of iterators over all vertices.
+constexpr const char* Triangulation_2_all_vertex_handles = "returns a range of iterators over all vertices.
 
 While the value type of All_vertices_iterator is Vertex , the value type of
 All_vertex_handles::iterator is Vertex_handle .
 
 Returns: All_vertex_handles";
-constexpr const char* CGAL_Triangulation_2_all_edges = "returns a range of iterators over all edges.
+constexpr const char* Triangulation_2_all_edges = "returns a range of iterators over all edges.
 
 Returns: All_edges";
-constexpr const char* CGAL_Triangulation_2_all_face_handles = "returns a range of iterators over all faces.
+constexpr const char* Triangulation_2_all_face_handles = "returns a range of iterators over all faces.
 
 While the value type of All_faces_iterator is Face , the value type of
 All_face_handles::iterator is Face_handle .
 
 Returns: All_face_handles";
-constexpr const char* CGAL_Triangulation_2_line_walk = "This function returns a circulator that allows to visit the faces intersected by the line pq .
+constexpr const char* Triangulation_2_line_walk = "This function returns a circulator that allows to visit the faces intersected by the line pq .
 
 If there is no such face the circulator has a singular value. The starting
 point of the circulator is the face f , or the first finite face traversed by
@@ -2157,7 +2157,7 @@ q : const Point &
 f : Face_handle
 
 Returns: Line_face_circulator";
-constexpr const char* CGAL_Triangulation_2_incident_faces = "returns a circulator over the faces incident to v .
+constexpr const char* Triangulation_2_incident_faces = "returns a circulator over the faces incident to v .
 
 Starts at an arbitrary face incident to v .
 
@@ -2166,7 +2166,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Triangulation_2_incident_faces_1 = "returns a circulator over the faces incident to v .
+constexpr const char* Triangulation_2_incident_faces_1 = "returns a circulator over the faces incident to v .
 
 Starts at face f . Face f is incident to vertex v .
 
@@ -2176,7 +2176,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Triangulation_2_incident_edges = "returns a circulator over the edges incident to v .
+constexpr const char* Triangulation_2_incident_edges = "returns a circulator over the edges incident to v .
 
 Starts at an arbitrary edge incident to v .
 
@@ -2185,7 +2185,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Triangulation_2_incident_edges_1 = "returns a circulator over the edges incident to v .
+constexpr const char* Triangulation_2_incident_edges_1 = "returns a circulator over the edges incident to v .
 
 Starts at the first edge of f incident to v , in counterclockwise order around
 v . Face f is incident to vertex v .
@@ -2196,7 +2196,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Triangulation_2_incident_vertices = "returns a circulator over the vertices adjacent to v .
+constexpr const char* Triangulation_2_incident_vertices = "returns a circulator over the vertices adjacent to v .
 
 Starts at an arbitrary vertex incident to v .
 
@@ -2205,7 +2205,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Triangulation_2_incident_vertices_1 = "returns a circulator over the vertices adjacent to v .
+constexpr const char* Triangulation_2_incident_vertices_1 = "returns a circulator over the vertices adjacent to v .
 
 Starts at the first vertex of f adjacent to v in counterclockwise order around
 v . Face f is incident to vertex v .
@@ -2216,7 +2216,7 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Triangulation_2_degree = "returns the degree of v , that is, the number of incident vertices.
+constexpr const char* Triangulation_2_degree = "returns the degree of v , that is, the number of incident vertices.
 
 The infinite vertex is counted. v != Vertex_handle() , t.is_vertex(v) .
 
@@ -2225,7 +2225,7 @@ Parameters
 v : Vertex_handle
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_2_mirror_vertex = "returns the vertex of the $ i^{th}$ neighbor of f that is opposite to f .
+constexpr const char* Triangulation_2_mirror_vertex = "returns the vertex of the $ i^{th}$ neighbor of f that is opposite to f .
 
 $ 0\\leq i \\leq2$ .
 
@@ -2235,7 +2235,7 @@ f : Face_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_2_mirror_index = "returns the index of f in its $ i^{th}$ neighbor.
+constexpr const char* Triangulation_2_mirror_index = "returns the index of f in its $ i^{th}$ neighbor.
 
 $ 0\\leq i \\leq2$ .
 
@@ -2245,7 +2245,7 @@ f : Face_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_2_mirror_edge = "returns the same edge seen from the other adjacent face.
+constexpr const char* Triangulation_2_mirror_edge = "returns the same edge seen from the other adjacent face.
 
 $ 0\\leq i \\leq2$ .
 
@@ -2254,7 +2254,7 @@ Parameters
 e : Edge
 
 Returns: Edge";
-constexpr const char* CGAL_Triangulation_2_ccw = "returns $ i+1$ modulo 3.
+constexpr const char* Triangulation_2_ccw = "returns $ i+1$ modulo 3.
 
 $ 0\\leq i \\leq2$ .
 
@@ -2263,7 +2263,7 @@ Parameters
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_2_cw = "returns $ i+2$ modulo 3.
+constexpr const char* Triangulation_2_cw = "returns $ i+2$ modulo 3.
 
 $ 0\\leq i \\leq2$ .
 
@@ -2272,7 +2272,7 @@ Parameters
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_2_triangle = "returns the triangle formed by the three vertices of f .
+constexpr const char* Triangulation_2_triangle = "returns the triangle formed by the three vertices of f .
 
 The face is finite.
 
@@ -2281,7 +2281,7 @@ Parameters
 f : Face_handle
 
 Returns: Triangle";
-constexpr const char* CGAL_Triangulation_2_segment = "returns the line segment formed by the vertices ccw(i) and cw(i) of face f .
+constexpr const char* Triangulation_2_segment = "returns the line segment formed by the vertices ccw(i) and cw(i) of face f .
 
 $ 0\\leq i \\leq2$ . The vertices ccw(i) and cw(i) of f are finite.
 
@@ -2291,7 +2291,7 @@ f : Face_handle
 i : int
 
 Returns: Segment";
-constexpr const char* CGAL_Triangulation_2_segment_1 = "returns the line segment corresponding to edge e .
+constexpr const char* Triangulation_2_segment_1 = "returns the line segment corresponding to edge e .
 
 e is a finite edge.
 
@@ -2300,7 +2300,7 @@ Parameters
 e : const Edge &
 
 Returns: Segment";
-constexpr const char* CGAL_Triangulation_2_segment_2 = "returns the line segment corresponding to edge *ec .
+constexpr const char* Triangulation_2_segment_2 = "returns the line segment corresponding to edge *ec .
 
 *ec is a finite edge.
 
@@ -2309,7 +2309,7 @@ Parameters
 ec : const Edge_circulator &
 
 Returns: Segment";
-constexpr const char* CGAL_Triangulation_2_segment_3 = "returns the line segment corresponding to edge *ei .
+constexpr const char* Triangulation_2_segment_3 = "returns the line segment corresponding to edge *ei .
 
 *ei is a finite edge.
 
@@ -2318,7 +2318,7 @@ Parameters
 ei : const Edge_iterator &
 
 Returns: Segment";
-constexpr const char* CGAL_Triangulation_2_point = "returns the point given by vertex i of face f .
+constexpr const char* Triangulation_2_point = "returns the point given by vertex i of face f .
 
 t.dimension() $ \\geq0$ and $ i \\in\\{0,1,2\\}$ in dimension 2, $ i \\in\\{0,1\\}$
 in dimension 1, $ i = 0$ in dimension 0, and the vertex is finite.
@@ -2329,7 +2329,7 @@ f : Face_handle
 i : int
 
 Returns: const Point &";
-constexpr const char* CGAL_Triangulation_2_point_1 = "Same as the previous method for vertex v .
+constexpr const char* Triangulation_2_point_1 = "Same as the previous method for vertex v .
 
 t.dimension() $ \\geq0$ and the vertex is finite.
 
@@ -2338,7 +2338,7 @@ Parameters
 v : Vertex_handle
 
 Returns: const Point &";
-constexpr const char* CGAL_Triangulation_2_circumcenter = "computes the circumcenter of the face pointed to by f.
+constexpr const char* Triangulation_2_circumcenter = "computes the circumcenter of the face pointed to by f.
 
 This function is available only if the corresponding function is provided in
 the geometric traits.
@@ -2348,7 +2348,7 @@ Parameters
 f : Face_handle
 
 Returns: Point";
-constexpr const char* CGAL_Triangulation_2_set_infinite_vertex = "This is an advanced function.
+constexpr const char* Triangulation_2_set_infinite_vertex = "This is an advanced function.
 
 Advanced This method is meant to be used only if you have done a low-level
 operation on the underlying tds that invalidated the infinite vertex. Sets the
@@ -2357,7 +2357,7 @@ infinite vertex.
 Parameters
 ----------
 v : const Vertex_handle &";
-constexpr const char* CGAL_Triangulation_2_is_valid = "checks the combinatorial validity of the triangulation and also the validity of its geometric embedding.
+constexpr const char* Triangulation_2_is_valid = "checks the combinatorial validity of the triangulation and also the validity of its geometric embedding.
 
 This method is mainly a debugging help for the users of advanced features.
 
@@ -2367,7 +2367,7 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_2_operator_1 = "inserts the triangulation into the stream os .
+constexpr const char* Triangulation_2_operator_1 = "inserts the triangulation into the stream os .
 
 The insert operator must be defined for Point .
 
@@ -2377,7 +2377,7 @@ os : ostream &
 T : const Triangulation_2 < Traits, Tds > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Triangulation_2_operator_2 = "reads a triangulation from stream is and assigns it to the triangulation.
+constexpr const char* Triangulation_2_operator_2 = "reads a triangulation from stream is and assigns it to the triangulation.
 
 The extract operator must be defined for Point .
 
@@ -2389,17 +2389,17 @@ T : const Triangulation_2 < Traits, Tds > &
 Returns: istream &";
 
 // CGAL::Triangulation_cw_ccw_2
-constexpr const char* CGAL_Triangulation_cw_ccw_2__class__ = "The class Triangulation_cw_ccw_2 offers two functions int cw(int i) and int ccw(int i) which, given the index of a vertex in a face, compute the index of the next vertex of the same face in clockwise or counterclockwise order.";
+constexpr const char* Triangulation_cw_ccw_2__class__ = "The class Triangulation_cw_ccw_2 offers two functions int cw(int i) and int ccw(int i) which, given the index of a vertex in a face, compute the index of the next vertex of the same face in clockwise or counterclockwise order.";
 
-constexpr const char* CGAL_Triangulation_cw_ccw_2_Triangulation_cw_ccw_2 = "Default constructor.";
-constexpr const char* CGAL_Triangulation_cw_ccw_2_ccw = "returns the index of the neighbor or vertex that is next to the neighbor or vertex with index i in counterclockwise order around a face.
+constexpr const char* Triangulation_cw_ccw_2_Triangulation_cw_ccw_2 = "Default constructor.";
+constexpr const char* Triangulation_cw_ccw_2_ccw = "returns the index of the neighbor or vertex that is next to the neighbor or vertex with index i in counterclockwise order around a face.
 
 Parameters
 ----------
 i : const int
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_cw_ccw_2_cw = "returns the index of the neighbor or vertex that is next to the neighbor or vertex with index i in counterclockwise order around a face.
+constexpr const char* Triangulation_cw_ccw_2_cw = "returns the index of the neighbor or vertex that is next to the neighbor or vertex with index i in counterclockwise order around a face.
 
 Parameters
 ----------
@@ -2408,35 +2408,35 @@ i : const int
 Returns: int";
 
 // CGAL::Triangulation_face_base_2
-constexpr const char* CGAL_Triangulation_face_base_2__class__ = "The class Triangulation_face_base_2 is a model for the concept TriangulationFaceBase_2 .";
+constexpr const char* Triangulation_face_base_2__class__ = "The class Triangulation_face_base_2 is a model for the concept TriangulationFaceBase_2 .";
 
 // CGAL::Triangulation_face_base_with_info_2
-constexpr const char* CGAL_Triangulation_face_base_with_info_2__class__ = "The class Triangulation_face_base_with_info_2 is a model of the concept TriangulationFaceBase_2 to be plugged into the triangulation data structure of a triangulation class.";
+constexpr const char* Triangulation_face_base_with_info_2__class__ = "The class Triangulation_face_base_with_info_2 is a model of the concept TriangulationFaceBase_2 to be plugged into the triangulation data structure of a triangulation class.";
 
-constexpr const char* CGAL_Triangulation_face_base_with_info_2_info = "returns a const reference to the object of type Info stored in the face.
+constexpr const char* Triangulation_face_base_with_info_2_info = "returns a const reference to the object of type Info stored in the face.
 
 Returns: const Info &";
-constexpr const char* CGAL_Triangulation_face_base_with_info_2_info_1 = "returns a reference to the object of type Info stored in the face.
+constexpr const char* Triangulation_face_base_with_info_2_info_1 = "returns a reference to the object of type Info stored in the face.
 
 Returns: Info &";
 
 // CGAL::Triangulation_hierarchy_2
-constexpr const char* CGAL_Triangulation_hierarchy_2__class__ = "The class Triangulation_hierarchy_2 implements a triangulation augmented with a data structure which allows fast point location queries.";
+constexpr const char* Triangulation_hierarchy_2__class__ = "The class Triangulation_hierarchy_2 implements a triangulation augmented with a data structure which allows fast point location queries.";
 
 // CGAL::Triangulation_hierarchy_vertex_base_2
-constexpr const char* CGAL_Triangulation_hierarchy_vertex_base_2__class__ = "The class Triangulation_hierarchy_vertex_base_2 is designed to be used as a vertex base class of a triangulation plugged into a Triangulation_hierarchy_2 <Tr> .";
+constexpr const char* Triangulation_hierarchy_vertex_base_2__class__ = "The class Triangulation_hierarchy_vertex_base_2 is designed to be used as a vertex base class of a triangulation plugged into a Triangulation_hierarchy_2 <Tr> .";
 
 // CGAL::Triangulation_vertex_base_2
-constexpr const char* CGAL_Triangulation_vertex_base_2__class__ = "The class Triangulation_vertex_base_2 is the default model for the concept TriangulationVertexBase_2 .";
+constexpr const char* Triangulation_vertex_base_2__class__ = "The class Triangulation_vertex_base_2 is the default model for the concept TriangulationVertexBase_2 .";
 
 
 // CGAL::Triangulation_vertex_base_with_info_2
-constexpr const char* CGAL_Triangulation_vertex_base_with_info_2__class__ = "The class Triangulation_vertex_base_with_info_2 is designed to be used as a base vertex class of a triangulation.";
+constexpr const char* Triangulation_vertex_base_with_info_2__class__ = "The class Triangulation_vertex_base_with_info_2 is designed to be used as a base vertex class of a triangulation.";
 
-constexpr const char* CGAL_Triangulation_vertex_base_with_info_2_info = "returns a const reference to the object of type Info stored in the vertex.
+constexpr const char* Triangulation_vertex_base_with_info_2_info = "returns a const reference to the object of type Info stored in the vertex.
 
 Returns: const Info &";
-constexpr const char* CGAL_Triangulation_vertex_base_with_info_2_info_1 = "returns a reference to the object of type Info stored in the vertex.
+constexpr const char* Triangulation_vertex_base_with_info_2_info_1 = "returns a reference to the object of type Info stored in the vertex.
 
 Returns: Info &";
 
@@ -2883,7 +2883,7 @@ constexpr const char* TriangulationVertexBaseWithInfo_2_info_1 = "returns a refe
 
 Returns: Info &";
 
-constexpr const char* CGAL_Constrained_triangulation_2_operator_2 = "writes the triangulation as for Triangulation_2 <Traits,Tds> and, for each face f , and integers i=0,1,2 , writes \"C\" or \"N\" depending whether edge (f,i) is constrained or not.
+constexpr const char* Constrained_triangulation_2_operator_2 = "writes the triangulation as for Triangulation_2 <Traits,Tds> and, for each face f , and integers i=0,1,2 , writes \"C\" or \"N\" depending whether edge (f,i) is constrained or not.
 
 Parameters
 ----------
@@ -2891,7 +2891,7 @@ os : std::ostream &
 ct : const Constrained_triangulation_2 < Traits, Tds, Itag > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Constrained_triangulation_2_operator_3 = "reads a triangulation from stream is and assigns it to c t .
+constexpr const char* Constrained_triangulation_2_operator_3 = "reads a triangulation from stream is and assigns it to c t .
 
 Data in the stream must have the same format operator<< uses. Note that ct is
 first cleared.
@@ -2902,7 +2902,7 @@ is : std::istream &
 ct : Constrained_triangulation_2 < Traits, Tds, Itag > Ct &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_operator_3 = "writes the triangulation as for Tr , then writes one constraint per line, starting with the number of vertices and the indices of the vertices of the constraint.
+constexpr const char* Constrained_triangulation_plus_2_operator_3 = "writes the triangulation as for Tr , then writes one constraint per line, starting with the number of vertices and the indices of the vertices of the constraint.
 
 Parameters
 ----------
@@ -2910,7 +2910,7 @@ os : std::ostream &
 ctp : const Constrained_triangulation_plus_2 < Tr > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Constrained_triangulation_plus_2_operator_4 = "reads a triangulation from stream is and assigns it to the triangulation.
+constexpr const char* Constrained_triangulation_plus_2_operator_4 = "reads a triangulation from stream is and assigns it to the triangulation.
 
 Parameters
 ----------
@@ -2918,7 +2918,7 @@ is : std::istream &
 ctp : Constrained_triangulation_plus_2 < Tr > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Triangulation_2_operator_3 = "inserts the triangulation into the stream os .
+constexpr const char* Triangulation_2_operator_3 = "inserts the triangulation into the stream os .
 
 The insert operator must be defined for Point .
 
@@ -2928,7 +2928,7 @@ os : ostream &
 T : const Triangulation_2 < Traits, Tds > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Triangulation_2_operator_4 = "reads a triangulation from stream is and assigns it to the triangulation.
+constexpr const char* Triangulation_2_operator_4 = "reads a triangulation from stream is and assigns it to the triangulation.
 
 The extract operator must be defined for Point .
 

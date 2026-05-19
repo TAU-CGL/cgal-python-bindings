@@ -127,36 +127,36 @@ xc1 : ArrDirectionalTraits::X_monotone_curve_2 &
 xc2 : ArrDirectionalTraits::X_monotone_curve_2 &";
 
 // CGAL::General_polygon_2
-constexpr const char* CGAL_General_polygon_2__class__ = "The class General_polygon_2 models the concept GeneralPolygon_2 .";
+constexpr const char* General_polygon_2__class__ = "The class General_polygon_2 models the concept GeneralPolygon_2 .";
 
-constexpr const char* CGAL_General_polygon_2_Size = "number of edges size type.
+constexpr const char* General_polygon_2_Size = "number of edges size type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_General_polygon_2_Curve_2 = "a general planar curve.
+constexpr const char* General_polygon_2_Curve_2 = "a general planar curve.
 
 Returns: ArrTraits::Curve_2";
-constexpr const char* CGAL_General_polygon_2_General_polygon_2 = "constructs a General_polygon_2 from a $X$ -monotone curves.
+constexpr const char* General_polygon_2_General_polygon_2 = "constructs a General_polygon_2 from a $X$ -monotone curves.
 
 Parameters
 ----------
 begin : CurveIterator
 end : CurveIterator";
-constexpr const char* CGAL_General_polygon_2_size = "returns the number of edges of the general polygon.
+constexpr const char* General_polygon_2_size = "returns the number of edges of the general polygon.
 
 Returns: Size";
-constexpr const char* CGAL_General_polygon_2_clear = "clears the polygon.";
-constexpr const char* CGAL_General_polygon_2_reverse_orientation = "reverses the orientation of the polygon.
+constexpr const char* General_polygon_2_clear = "clears the polygon.";
+constexpr const char* General_polygon_2_reverse_orientation = "reverses the orientation of the polygon.
 
 is_simple() .";
-constexpr const char* CGAL_General_polygon_2_is_empty = "returns true if the polygon is empty, and false otherwise.
+constexpr const char* General_polygon_2_is_empty = "returns true if the polygon is empty, and false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_2_orientation = "returns the orientation of the polygon.
+constexpr const char* General_polygon_2_orientation = "returns the orientation of the polygon.
 
 is_simple() .
 
 Returns: Orientation";
-constexpr const char* CGAL_General_polygon_2_operator = "This operator imports a general polygon from the input stream in .
+constexpr const char* General_polygon_2_operator = "This operator imports a general polygon from the input stream in .
 
 Both ASCII and binary formats are supported, and the format is automatically
 detected. The format consists of the number of points of the outer boundary
@@ -170,7 +170,7 @@ in : std::istream &
 P : CGAL::General_polygon_2 < ArrTraits > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_General_polygon_2_operator_1 = "This operator exports a general polygon to the output stream out .
+constexpr const char* General_polygon_2_operator_1 = "This operator exports a general polygon to the output stream out .
 
 An ASCII and a binary format exist. The format can be selected with the CGAL
 modifiers for streams, set_ascii_mode and set_binary_mode respectively. The
@@ -188,87 +188,87 @@ P : CGAL::General_polygon_2 < ArrTraits > &
 Returns: std::ostream &";
 
 // CGAL::General_polygon_set_2
-constexpr const char* CGAL_General_polygon_set_2__class__ = "An object of the General_polygon_set_2 class-template represents a point set in the plane bounded by $ x$ monotone curves.";
+constexpr const char* General_polygon_set_2__class__ = "An object of the General_polygon_set_2 class-template represents a point set in the plane bounded by $ x$ monotone curves.";
 
-constexpr const char* CGAL_General_polygon_set_2_Traits_2 = "the traits class in use.
+constexpr const char* General_polygon_set_2_Traits_2 = "the traits class in use.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_General_polygon_set_2_Polygon_2 = "the general polygon type.
+constexpr const char* General_polygon_set_2_Polygon_2 = "the general polygon type.
 
 Must model the GpsTraitsGeneralPolygon_2 concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_General_polygon_set_2_Polygon_with_holes_2 = "the general polygon with holes type.
+constexpr const char* General_polygon_set_2_Polygon_with_holes_2 = "the general polygon with holes type.
 
 Must model the GpsTraitsGeneralPolygonWithHoles_2 concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_General_polygon_set_2_Size = "number of polygons with holes size type.
+constexpr const char* General_polygon_set_2_Size = "number of polygons with holes size type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_General_polygon_set_2_Arrangement_2 = "the arrangement type used internally.
+constexpr const char* General_polygon_set_2_Arrangement_2 = "the arrangement type used internally.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2 = "default constructor; constructs an empty set of polygons gps represented by an empty arrangement.";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2_1 = "copy constructor.
+constexpr const char* General_polygon_set_2_General_polygon_set_2 = "default constructor; constructs an empty set of polygons gps represented by an empty arrangement.";
+constexpr const char* General_polygon_set_2_General_polygon_set_2_1 = "copy constructor.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2_2 = "constructs an empty set of polygons that uses the given traits object for performing the geometric operations.
+constexpr const char* General_polygon_set_2_General_polygon_set_2_2 = "constructs an empty set of polygons that uses the given traits object for performing the geometric operations.
 
 Parameters
 ----------
 traits : const Traits &";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2_3 = "constructs a set of polygons that consists of the single polygon pgn .
+constexpr const char* General_polygon_set_2_General_polygon_set_2_3 = "constructs a set of polygons that consists of the single polygon pgn .
 
 Parameters
 ----------
 pgn : const Polygon_2 &";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2_4 = "constructs a set of polygons that consists of the single polygon with holes pgn_with_holes .
+constexpr const char* General_polygon_set_2_General_polygon_set_2_4 = "constructs a set of polygons that consists of the single polygon with holes pgn_with_holes .
 
 Parameters
 ----------
 pgn_with_holes : const Polygon_with_holes_2 &";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2_5 = "constructs a set of polygons that uses the given traits object and consists of the single polygon pgn .
+constexpr const char* General_polygon_set_2_General_polygon_set_2_5 = "constructs a set of polygons that uses the given traits object and consists of the single polygon pgn .
 
 Parameters
 ----------
 pgn : const Polygon_2 &
 traits : const Traits &";
-constexpr const char* CGAL_General_polygon_set_2_General_polygon_set_2_6 = "constructs a set of polygons that uses the given traits object and consists of the single polygon with holes pgn_with_holes .
+constexpr const char* General_polygon_set_2_General_polygon_set_2_6 = "constructs a set of polygons that uses the given traits object and consists of the single polygon with holes pgn_with_holes .
 
 Parameters
 ----------
 pgn_with_holes : const Polygon_with_holes_2 &
 traits : const Traits &";
-constexpr const char* CGAL_General_polygon_set_2_polygons_with_holes = "obtains the polygons with holes represented by gps .
+constexpr const char* General_polygon_set_2_polygons_with_holes = "obtains the polygons with holes represented by gps .
 
 Parameters
 ----------
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_General_polygon_set_2_number_of_polygons_with_holes = "returns the total number of general polygons represented by gps .
+constexpr const char* General_polygon_set_2_number_of_polygons_with_holes = "returns the total number of general polygons represented by gps .
 
 Returns: Size";
-constexpr const char* CGAL_General_polygon_set_2_is_empty = "returns true if gps represents an empty set.
+constexpr const char* General_polygon_set_2_is_empty = "returns true if gps represents an empty set.
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_set_2_is_plane = "returns true if gps represents the entire plane.
+constexpr const char* General_polygon_set_2_is_plane = "returns true if gps represents the entire plane.
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_set_2_traits = "obtains an instance of the traits.
+constexpr const char* General_polygon_set_2_traits = "obtains an instance of the traits.
 
 If the traits was passed as a parameter to the constructor of gps , it is
 returned. Otherwise, a newly created instance is returned.
 
 Returns: Traits &";
-constexpr const char* CGAL_General_polygon_set_2_arrangement = "obtains the arrangement data structure that internally represents the general-polygon set.
+constexpr const char* General_polygon_set_2_arrangement = "obtains the arrangement data structure that internally represents the general-polygon set.
 
 Returns: const Arrangement_2 &";
-constexpr const char* CGAL_General_polygon_set_2_clear = "clears gps .";
-constexpr const char* CGAL_General_polygon_set_2_insert = "inserts pgn into gps .
+constexpr const char* General_polygon_set_2_clear = "clears gps .";
+constexpr const char* General_polygon_set_2_insert = "inserts pgn into gps .
 
 pgn and the point set represented by gps are disjoint. This precondition
 enables the use of very efficient insertion methods. Use the respective
@@ -279,7 +279,7 @@ precondition cannot be guaranteed, use the join method.
 Parameters
 ----------
 pgn : Polygon_2 &";
-constexpr const char* CGAL_General_polygon_set_2_insert_1 = "inserts pgn_with_holes into gps .
+constexpr const char* General_polygon_set_2_insert_1 = "inserts pgn_with_holes into gps .
 
 pgn_with_holes does not intersect with the point set represented by gps ,
 except maybe at the vertices. If this relaxed precondition cannot be
@@ -288,7 +288,7 @@ guaranteed, use the join method.
 Parameters
 ----------
 pgn_with_holes : Polygon_with_holes_2 &";
-constexpr const char* CGAL_General_polygon_set_2_insert_2 = "inserts the range of polygons (or polygons with holes) into gps .
+constexpr const char* General_polygon_set_2_insert_2 = "inserts the range of polygons (or polygons with holes) into gps .
 
 (The value type of the input iterator is used to distinguish between the two.)
 If the given range contains objects of type Polygon_with_holes_2 , then these
@@ -301,7 +301,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_General_polygon_set_2_insert_3 = "inserts the two ranges of polygons and polygons with holes into gps .
+constexpr const char* General_polygon_set_2_insert_3 = "inserts the two ranges of polygons and polygons with holes into gps .
 
 All polygons in the first range, all polygon with holes in the second range,
 and the point set represented by gps are pairwise disjoint, except maybe at
@@ -313,30 +313,30 @@ pgn_begin : InputIterator1
 pgn_end : InputIterator1
 pgn_with_holes_begin : InputIterator2
 pgn_with_holes_end : InputIterator2";
-constexpr const char* CGAL_General_polygon_set_2_complement = "computes the complement of gps .";
-constexpr const char* CGAL_General_polygon_set_2_complement_1 = "computes the complement of other .
+constexpr const char* General_polygon_set_2_complement = "computes the complement of gps .";
+constexpr const char* General_polygon_set_2_complement_1 = "computes the complement of other .
 
 gps is overridden by the result.
 
 Parameters
 ----------
 other : const Polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_intersection = "computes the intersection of gps and other .
+constexpr const char* General_polygon_set_2_intersection = "computes the intersection of gps and other .
 
 Parameters
 ----------
 other : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_intersection_1 = "computes the intersection of gps and pgn .
+constexpr const char* General_polygon_set_2_intersection_1 = "computes the intersection of gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_2 &";
-constexpr const char* CGAL_General_polygon_set_2_intersection_2 = "computes the intersection of gps and pgn .
+constexpr const char* General_polygon_set_2_intersection_2 = "computes the intersection of gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_with_holes_2 &";
-constexpr const char* CGAL_General_polygon_set_2_intersection_3 = "computes the intersection of a collection of point sets.
+constexpr const char* General_polygon_set_2_intersection_3 = "computes the intersection of a collection of point sets.
 
 The collection consists of the polygons (or polygons with holes) in the given
 range and the point set represented by gps . (The value type of the input
@@ -346,7 +346,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_General_polygon_set_2_intersection_4 = "computes the intersection of a collection of point sets.
+constexpr const char* General_polygon_set_2_intersection_4 = "computes the intersection of a collection of point sets.
 
 The collection consists of the polygons and polygons with holes in the given
 two ranges and the point set represented by gps .
@@ -357,22 +357,22 @@ pgn_begin : InputIterator1
 pgn_end : InputIterator1
 pgn_with_holes_begin : InputIterator2
 pgn_with_holes_end : InputIterator2";
-constexpr const char* CGAL_General_polygon_set_2_join = "computes the union of gps and other .
+constexpr const char* General_polygon_set_2_join = "computes the union of gps and other .
 
 Parameters
 ----------
 other : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_join_1 = "computes the union of gps and pgn .
+constexpr const char* General_polygon_set_2_join_1 = "computes the union of gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_2 &";
-constexpr const char* CGAL_General_polygon_set_2_join_2 = "computes the union of gps and pgn .
+constexpr const char* General_polygon_set_2_join_2 = "computes the union of gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_with_holes_2 &";
-constexpr const char* CGAL_General_polygon_set_2_join_3 = "computes the union of the polygons (or polygons with holes) in the given range and the point set represented by gps .
+constexpr const char* General_polygon_set_2_join_3 = "computes the union of the polygons (or polygons with holes) in the given range and the point set represented by gps .
 
 (The value type of the input iterator is used to distinguish between the two
 options.)
@@ -381,7 +381,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_General_polygon_set_2_join_4 = "computes the union of the polygons and polygons with holes in the given two ranges and the point set represented by gps .
+constexpr const char* General_polygon_set_2_join_4 = "computes the union of the polygons and polygons with holes in the given two ranges and the point set represented by gps .
 
 Parameters
 ----------
@@ -389,37 +389,37 @@ pgn_begin : InputIterator1
 pgn_end : InputIterator1
 pgn_with_holes_begin : InputIterator2
 pgn_with_holes_end : InputIterator2";
-constexpr const char* CGAL_General_polygon_set_2_difference = "computes the difference between gps and other .
+constexpr const char* General_polygon_set_2_difference = "computes the difference between gps and other .
 
 Parameters
 ----------
 other : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_difference_1 = "computes the difference between gps and pgn .
+constexpr const char* General_polygon_set_2_difference_1 = "computes the difference between gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_2 &";
-constexpr const char* CGAL_General_polygon_set_2_difference_2 = "computes the difference between gps and pgn .
+constexpr const char* General_polygon_set_2_difference_2 = "computes the difference between gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_with_holes_2 &";
-constexpr const char* CGAL_General_polygon_set_2_symmetric_difference = "computes the symmetric difference between gps and other .
+constexpr const char* General_polygon_set_2_symmetric_difference = "computes the symmetric difference between gps and other .
 
 Parameters
 ----------
 other : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_symmetric_difference_1 = "computes the symmetric difference between gps and pgn .
+constexpr const char* General_polygon_set_2_symmetric_difference_1 = "computes the symmetric difference between gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_2 &";
-constexpr const char* CGAL_General_polygon_set_2_symmetric_difference_2 = "computes the symmetric difference between gps and pgn .
+constexpr const char* General_polygon_set_2_symmetric_difference_2 = "computes the symmetric difference between gps and pgn .
 
 Parameters
 ----------
 pgn : const Polygon_with_holes_2 &";
-constexpr const char* CGAL_General_polygon_set_2_symmetric_difference_3 = "computes the symmetric difference (xor) of a collection of point sets.
+constexpr const char* General_polygon_set_2_symmetric_difference_3 = "computes the symmetric difference (xor) of a collection of point sets.
 
 The collection consists of the polygons (or polygons with holes) in the given
 range and the point set represented by gps . (The value type of the input
@@ -429,7 +429,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_General_polygon_set_2_symmetric_difference_4 = "computes the symmetric difference (xor) of a collection of point sets.
+constexpr const char* General_polygon_set_2_symmetric_difference_4 = "computes the symmetric difference (xor) of a collection of point sets.
 
 The collection consists of the polygons and polygons with holes in the given
 two ranges and the point set represented by gps .
@@ -440,52 +440,52 @@ pgn_begin : InputIterator1
 pgn_end : InputIterator1
 pgn_with_holes_begin : InputIterator2
 pgn_with_holes_end : InputIterator2";
-constexpr const char* CGAL_General_polygon_set_2_intersection_5 = "computes the intersection of gps1 and gps2 .
+constexpr const char* General_polygon_set_2_intersection_5 = "computes the intersection of gps1 and gps2 .
 
 Parameters
 ----------
 gps1 : const General_polygon_set_2 &
 gps2 : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_join_5 = "computes the union of gps1 and gps2 .
+constexpr const char* General_polygon_set_2_join_5 = "computes the union of gps1 and gps2 .
 
 Parameters
 ----------
 gps1 : const General_polygon_set_2 &
 gps2 : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_difference_3 = "computes the difference between gps1 and gps2 .
+constexpr const char* General_polygon_set_2_difference_3 = "computes the difference between gps1 and gps2 .
 
 Parameters
 ----------
 gps1 : const General_polygon_set_2 &
 gps2 : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_symmetric_difference_5 = "computes the symmetric difference between gps1 and gps2 .
+constexpr const char* General_polygon_set_2_symmetric_difference_5 = "computes the symmetric difference between gps1 and gps2 .
 
 Parameters
 ----------
 gps1 : const General_polygon_set_2 &
 gps2 : const General_polygon_set_2 &";
-constexpr const char* CGAL_General_polygon_set_2_do_intersect = "returns true if gps and other intersect in their interior, and false otherwise.
+constexpr const char* General_polygon_set_2_do_intersect = "returns true if gps and other intersect in their interior, and false otherwise.
 
 Parameters
 ----------
 other : const General_polygon_set_2 &
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_set_2_do_intersect_1 = "returns true if gps and pgn intersect in their interior, and false otherwise.
+constexpr const char* General_polygon_set_2_do_intersect_1 = "returns true if gps and pgn intersect in their interior, and false otherwise.
 
 Parameters
 ----------
 pgn : const Polygon_2 &
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_set_2_do_intersect_2 = "returns true if gps and pgn intersect in their interior, and false otherwise.
+constexpr const char* General_polygon_set_2_do_intersect_2 = "returns true if gps and pgn intersect in their interior, and false otherwise.
 
 Parameters
 ----------
 pgn : const Polygon_with_holes_2 &
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_set_2_do_intersect_3 = "returns true if the interior of the point sets in a collection intersect, and false otherwise.
+constexpr const char* General_polygon_set_2_do_intersect_3 = "returns true if the interior of the point sets in a collection intersect, and false otherwise.
 
 The collection consists of the polygons (or polygons with holes) in the given
 range and the point set represented by gps . (The value type of the input
@@ -495,7 +495,7 @@ Parameters
 ----------
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_General_polygon_set_2_do_intersect_4 = "returns true if the interior of the point sets in a collection intersect, and false otherwise.
+constexpr const char* General_polygon_set_2_do_intersect_4 = "returns true if the interior of the point sets in a collection intersect, and false otherwise.
 
 The collection consists of the polygons and polygons with holes in the given
 two ranges and the point set represented by gps .
@@ -506,7 +506,7 @@ pgn_begin : InputIterator1
 pgn_end : InputIterator1
 pgn_with_holes_begin : InputIterator2
 pgn_with_holes_end : InputIterator2";
-constexpr const char* CGAL_General_polygon_set_2_locate = "obtains a polygon with holes that contains the query point p , if exists, through pgn , and returns true .
+constexpr const char* General_polygon_set_2_locate = "obtains a polygon with holes that contains the query point p , if exists, through pgn , and returns true .
 
 Otherwise, returns false .
 
@@ -516,59 +516,59 @@ p : const Point_2 &
 pgn : Polygon_with_holes_2 &
 
 Returns: bool";
-constexpr const char* CGAL_General_polygon_set_2_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of gps respectively.
+constexpr const char* General_polygon_set_2_oriented_side = "returns either the constant ON_ORIENTED_BOUNDARY , ON_POSITIVE_SIDE , or ON_NEGATIVE_SIDE , iff p lies on the boundary, properly on the positive side, or properly on the negative side of gps respectively.
 
 Parameters
 ----------
 q : const Point_2 &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_General_polygon_set_2_oriented_side_1 = "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff other and gps are completely disjoint, in contact, or intersect in their interior, respectively.
+constexpr const char* General_polygon_set_2_oriented_side_1 = "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff other and gps are completely disjoint, in contact, or intersect in their interior, respectively.
 
 Parameters
 ----------
 other : const General_polygon_set_2 &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_General_polygon_set_2_oriented_side_2 = "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff pgn and gps are completely disjoint, in contact, or intersect in their interior, respectively.
+constexpr const char* General_polygon_set_2_oriented_side_2 = "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff pgn and gps are completely disjoint, in contact, or intersect in their interior, respectively.
 
 Parameters
 ----------
 pgn : const Polygon_2 &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_General_polygon_set_2_oriented_side_3 = "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff pgn and gps are completely disjoint, in contact, or intersect in their interior, respectively.
+constexpr const char* General_polygon_set_2_oriented_side_3 = "returns either the constant ON_NEGATIVE_SIDE , ON_ORIENTED_BOUNDARY , or ON_POSITIVE_SIDE , iff pgn and gps are completely disjoint, in contact, or intersect in their interior, respectively.
 
 Parameters
 ----------
 pgn : const Polygon_with_holes_2 &
 
 Returns: Oriented_side";
-constexpr const char* CGAL_General_polygon_set_2_is_valid = "returns true if gps represents a valid point set.
+constexpr const char* General_polygon_set_2_is_valid = "returns true if gps represents a valid point set.
 
 Returns: bool";
 
 // CGAL::Gps_circle_segment_traits_2
-constexpr const char* CGAL_Gps_circle_segment_traits_2__class__ = "The traits class Gps_circle_segment_traits_2 models the GeneralPolygonSetTraits_2 concept.";
+constexpr const char* Gps_circle_segment_traits_2__class__ = "The traits class Gps_circle_segment_traits_2 models the GeneralPolygonSetTraits_2 concept.";
 
 // CGAL::Gps_default_dcel
-constexpr const char* CGAL_Gps_default_dcel__class__ = "The default DCEL class template used by the General_polygon_set_2 and General_polygon_with_holes_2 class templates.";
+constexpr const char* Gps_default_dcel__class__ = "The default DCEL class template used by the General_polygon_set_2 and General_polygon_with_holes_2 class templates.";
 
 // CGAL::Gps_face_base
-constexpr const char* CGAL_Gps_face_base__class__ = "An instance of this template serves as a basis type for any face record of the DCEL class used by instances of the General_polygon_set_2 and General_polygon_with_holes_2 class templates.";
+constexpr const char* Gps_face_base__class__ = "An instance of this template serves as a basis type for any face record of the DCEL class used by instances of the General_polygon_set_2 and General_polygon_with_holes_2 class templates.";
 
 // CGAL::Gps_halfedge_base
-constexpr const char* CGAL_Gps_halfedge_base__class__ = "An instance of this template serves as a basis type for any halfedge record of the DCEL class used by instances of the General_polygon_set_2 and General_polygon_with_holes_2 class templates.";
+constexpr const char* Gps_halfedge_base__class__ = "An instance of this template serves as a basis type for any halfedge record of the DCEL class used by instances of the General_polygon_set_2 and General_polygon_with_holes_2 class templates.";
 
 
 // CGAL::Gps_traits_2
-constexpr const char* CGAL_Gps_traits_2__class__ = "The traits class Gps_traits_2 models the concept GeneralPolygonSetTraits_2 .";
+constexpr const char* Gps_traits_2__class__ = "The traits class Gps_traits_2 models the concept GeneralPolygonSetTraits_2 .";
 
 // CGAL::Graphics_scene_options_polygon_set_2
-constexpr const char* CGAL_Graphics_scene_options_polygon_set_2__class__ = "The class Graphics_scene_options_polygon_set_2 defines data and methods used to tune the way that the cells of a Polygon_set_2 are considered for drawing or to be added into a graphics scene.";
+constexpr const char* Graphics_scene_options_polygon_set_2__class__ = "The class Graphics_scene_options_polygon_set_2 defines data and methods used to tune the way that the cells of a Polygon_set_2 are considered for drawing or to be added into a graphics scene.";
 
 // CGAL::Polygon_set_2
-constexpr const char* CGAL_Polygon_set_2__class__ = "The class Polygon_set_2 represents sets of linear polygons with holes.";
+constexpr const char* Polygon_set_2__class__ = "The class Polygon_set_2 represents sets of linear polygons with holes.";
 
 constexpr const char* GeneralPolygon_2_X_monotone_curve_2 = "represents a planar (weakly) $ x$ -monotone curve.
 

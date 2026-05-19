@@ -737,80 +737,80 @@ void export_aos(py::module_& m) {
     .def(py::init<const Aos&>(), py::arg("other"))
     .def(py::init<const Gt*>(), py::arg("traits"), py::keep_alive<1, 2>())
     .def("geometry_traits", &aos2::geometry_traits, ri,
-         doc::CGAL_Arrangement_on_surface_2_geometry_traits)
+         doc::Arrangement_on_surface_2_geometry_traits)
     .def("topology_traits", &aos2::topology_traits, ri)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS) || \
        (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \
        (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS))
     .def("fictitious_face", &aos2::fictitious_face, ri,
-         doc::CGAL_Arrangement_on_surface_2_fictitious_face)
+         doc::Arrangement_on_surface_2_fictitious_face)
 #endif
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex1, ri,
         py::arg("c"), py::arg("v"),
-        doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex)
+        doc::Arrangement_on_surface_2_insert_from_left_vertex)
     .def("insert_from_left_vertex", &aos2::insert_from_left_vertex2, ri,
         py::arg("c"), py::arg("h"),
-        doc::CGAL_Arrangement_on_surface_2_insert_from_left_vertex_1)
+        doc::Arrangement_on_surface_2_insert_from_left_vertex_1)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex1, ri,
         py::arg("c"), py::arg("v"),
-        doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex)
+        doc::Arrangement_on_surface_2_insert_from_right_vertex)
     .def("insert_from_right_vertex", &aos2::insert_from_right_vertex2, ri,
         py::arg("c"), py::arg("h"),
-        doc::CGAL_Arrangement_on_surface_2_insert_from_right_vertex_1)
+        doc::Arrangement_on_surface_2_insert_from_right_vertex_1)
     .def("insert_in_face_interior", &aos2::insert_xcv_in_face_interior, ri,
         py::arg("c"), py::arg("f"),
-        doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior)
+        doc::Arrangement_on_surface_2_insert_in_face_interior)
     .def("insert_in_face_interior", &aos2::insert_pnt_in_face_interior, ri,
         py::arg("p"), py::arg("f"),
-        doc::CGAL_Arrangement_on_surface_2_insert_in_face_interior_1)
+        doc::Arrangement_on_surface_2_insert_in_face_interior_1)
     .def("insert_at_vertices", &aos2::insert_at_vertices1, ri,
         py::arg("c"), py::arg("v1"), py::arg("v2"),
-        doc::CGAL_Arrangement_on_surface_2_insert_at_vertices)
+        doc::Arrangement_on_surface_2_insert_at_vertices)
     // .def("insert_at_vertices", &aos2::insert_at_vertices2, ri)
     .def("insert_at_vertices", &aos2::insert_at_vertices3, ri,
         py::arg("c"), py::arg("h1"), py::arg("v2"),
-        doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_1)
+        doc::Arrangement_on_surface_2_insert_at_vertices_1)
     .def("insert_at_vertices", &aos2::insert_at_vertices4, ri,
         py::arg("c"), py::arg("h1"), py::arg("h2"),
-        doc::CGAL_Arrangement_on_surface_2_insert_at_vertices_2)
+        doc::Arrangement_on_surface_2_insert_at_vertices_2)
     .def("modify_vertex", &aos2::modify_vertex, ri,
         py::arg("v"), py::arg("p"),
-        doc::CGAL_Arrangement_on_surface_2_modify_vertex)
+        doc::Arrangement_on_surface_2_modify_vertex)
     .def("remove_isolated_vertex", &aos2::remove_isolated_vertex, ri,
         py::arg("v"),
-        doc::CGAL_Arrangement_on_surface_2_remove_isolated_vertex)
+        doc::Arrangement_on_surface_2_remove_isolated_vertex)
     .def("modify_edge", &aos2::modify_edge, ri,
         py::arg("e"), py::arg("c"),
-        doc::CGAL_Arrangement_on_surface_2_modify_edge)
+        doc::Arrangement_on_surface_2_modify_edge)
     .def("split_edge", &aos2::split_edge, ri,
         py::arg("e"), py::arg("c1"), py::arg("c2"),
-        doc::CGAL_Arrangement_on_surface_2_split_edge)
+        doc::Arrangement_on_surface_2_split_edge)
     .def("merge_edge", &aos2::merge_edge, ri,
         py::arg("e1"), py::arg("e2"), py::arg("c"),
-        doc::CGAL_Arrangement_on_surface_2_merge_edge)
+        doc::Arrangement_on_surface_2_merge_edge)
     .def("remove_edge", &aos2::remove_edge, ri,
         py::arg("e"),
-        doc::CGAL_Arrangement_on_surface_2_remove_edge)
+        doc::Arrangement_on_surface_2_remove_edge)
     .def("is_empty", &Aos::is_empty,
-         doc::CGAL_Arrangement_on_surface_2_is_empty)
+         doc::Arrangement_on_surface_2_is_empty)
     .def("is_valid", &Aos::is_valid,
-         doc::CGAL_Arrangement_on_surface_2_is_valid)
+         doc::Arrangement_on_surface_2_is_valid)
     .def("number_of_edges", &Aos::number_of_edges,
-         doc::CGAL_Arrangement_on_surface_2_number_of_edges)
+         doc::Arrangement_on_surface_2_number_of_edges)
     .def("number_of_faces", &Aos::number_of_faces,
-         doc::CGAL_Arrangement_on_surface_2_number_of_faces)
+         doc::Arrangement_on_surface_2_number_of_faces)
     .def("number_of_halfedges", &Aos::number_of_halfedges,
-         doc::CGAL_Arrangement_on_surface_2_number_of_halfedges)
+         doc::Arrangement_on_surface_2_number_of_halfedges)
     .def("number_of_isolated_vertices", &Aos::number_of_isolated_vertices,
-         doc::CGAL_Arrangement_on_surface_2_number_of_isolated_vertices)
+         doc::Arrangement_on_surface_2_number_of_isolated_vertices)
     .def("number_of_unbounded_faces", &Aos::number_of_unbounded_faces,
-         doc::CGAL_Arrangement_on_surface_2_number_of_unbounded_faces)
+         doc::Arrangement_on_surface_2_number_of_unbounded_faces)
     .def("number_of_vertices", &Aos::number_of_vertices,
-         doc::CGAL_Arrangement_on_surface_2_number_of_vertices)
+         doc::Arrangement_on_surface_2_number_of_vertices)
     .def("assign", &Aos::assign,
-         doc::CGAL_Arrangement_on_surface_2_assign)
+         doc::Arrangement_on_surface_2_assign)
     .def("clear", &Aos::clear,
-         doc::CGAL_Arrangement_on_surface_2_clear)
+         doc::Arrangement_on_surface_2_clear)
     ;
 
   using Vci = Aos::Vertex_const_iterator;

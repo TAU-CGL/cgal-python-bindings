@@ -8,77 +8,77 @@ namespace docstrings {
 namespace Shape_detection {
 
 // CGAL::Shape_detection::Cone
-constexpr const char* CGAL_Shape_detection_Cone__class__ = "Cone implements Shape_base .";
+constexpr const char* Shape_detection_Cone__class__ = "Cone implements Shape_base .";
 
-constexpr const char* CGAL_Shape_detection_Cone_angle = "Opening angle between the axis and the surface of the cone.
+constexpr const char* Shape_detection_Cone_angle = "Opening angle between the axis and the surface of the cone.
 
 Returns: FT";
-constexpr const char* CGAL_Shape_detection_Cone_apex = "Apex of the cone.
+constexpr const char* Shape_detection_Cone_apex = "Apex of the cone.
 
 Returns: Point_3";
-constexpr const char* CGAL_Shape_detection_Cone_axis = "Axis points from the apex into the cone.
+constexpr const char* Shape_detection_Cone_axis = "Axis points from the apex into the cone.
 
 Returns: Vector_3";
 
 // CGAL::Shape_detection::Cylinder
-constexpr const char* CGAL_Shape_detection_Cylinder__class__ = "Cylinder implements Shape_base .";
+constexpr const char* Shape_detection_Cylinder__class__ = "Cylinder implements Shape_base .";
 
-constexpr const char* CGAL_Shape_detection_Cylinder_Line_3 = "Line type.
+constexpr const char* Shape_detection_Cylinder_Line_3 = "Line type.
 
 Returns: Traits::Line_3";
-constexpr const char* CGAL_Shape_detection_Cylinder_axis = "Axis of the cylinder.
+constexpr const char* Shape_detection_Cylinder_axis = "Axis of the cylinder.
 
 Returns: Line_3";
-constexpr const char* CGAL_Shape_detection_Cylinder_radius = "Radius of the cylinder.
+constexpr const char* Shape_detection_Cylinder_radius = "Radius of the cylinder.
 
 Returns: FT";
 
 // CGAL::Shape_detection::Efficient_RANSAC
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC__class__ = "Shape detection algorithm based on the RANSAC method.";
+constexpr const char* Shape_detection_Efficient_RANSAC__class__ = "Shape detection algorithm based on the RANSAC method.";
 
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Input_range = "Model of the concept Range with random access iterators, providing input points and normals through the following two property maps.
+constexpr const char* Shape_detection_Efficient_RANSAC_Input_range = "Model of the concept Range with random access iterators, providing input points and normals through the following two property maps.
 
 Returns: Traits::Input_range";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Point_map = "Property map to access the location of an input point.
+constexpr const char* Shape_detection_Efficient_RANSAC_Point_map = "Property map to access the location of an input point.
 
 Returns: Traits::Point_map";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Normal_map = "Property map to access the unoriented normal of an input point.
+constexpr const char* Shape_detection_Efficient_RANSAC_Normal_map = "Property map to access the unoriented normal of an input point.
 
 Returns: Traits::Normal_map";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Shape = "Shape type.
+constexpr const char* Shape_detection_Efficient_RANSAC_Shape = "Shape type.
 
 Returns: Shape_base < Traits >";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Plane_shape = "Plane shape type.
+constexpr const char* Shape_detection_Efficient_RANSAC_Plane_shape = "Plane shape type.
 
 Returns: Plane < Traits >";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Shape_range = "Iterator_range with a bidirectional constant iterator type with value type std::shared_ptr< Shape > .
+constexpr const char* Shape_detection_Efficient_RANSAC_Shape_range = "Iterator_range with a bidirectional constant iterator type with value type std::shared_ptr< Shape > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Plane_range = "Iterator_range with a bidirectional constant iterator type with value type std::shared_ptr< Plane_shape > .
+constexpr const char* Shape_detection_Efficient_RANSAC_Plane_range = "Iterator_range with a bidirectional constant iterator type with value type std::shared_ptr< Plane_shape > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Point_index_range = "Iterator_range with a bidirectional iterator with value type std::size_t as indices into the input data that has not been assigned to a shape.
+constexpr const char* Shape_detection_Efficient_RANSAC_Point_index_range = "Iterator_range with a bidirectional iterator with value type std::size_t as indices into the input data that has not been assigned to a shape.
 
 As this range class has no size() method, the method
 Efficient_RANSAC::number_of_unassigned_points() is provided.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Efficient_RANSAC = "Constructs an empty shape detection object.
+constexpr const char* Shape_detection_Efficient_RANSAC_Efficient_RANSAC = "Constructs an empty shape detection object.
 
 Parameters
 ----------
 t : Traits";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Efficient_RANSAC_1 = "Releases all memory allocated by this instance including shapes.";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_traits = "Retrieves the traits class.
+constexpr const char* Shape_detection_Efficient_RANSAC_Efficient_RANSAC_1 = "Releases all memory allocated by this instance including shapes.";
+constexpr const char* Shape_detection_Efficient_RANSAC_traits = "Retrieves the traits class.
 
 Returns: const Traits &";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_point_map = "Retrieves the point property map.
+constexpr const char* Shape_detection_Efficient_RANSAC_point_map = "Retrieves the point property map.
 
 Returns: const Point_map &";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_normal = "Retrieves the normal property map.
+constexpr const char* Shape_detection_Efficient_RANSAC_normal = "Retrieves the normal property map.
 
 Returns: const Normal_map &";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_set_input = "Sets the input data.
+constexpr const char* Shape_detection_Efficient_RANSAC_set_input = "Sets the input data.
 
 The range must stay valid until the detection has been performed and the
 access to the results is no longer required. The data in the input is
@@ -90,30 +90,30 @@ Parameters
 input_range : Input_range &  —  Range of input data.
 point_map : Point_map  —  Property map to access the position of an input point.
 normal_map : Normal_map  —  Property map to access the normal of an input point.";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_add_shape_factory = "Registers the shape type ShapeType in the detection engine that must inherit from Shape_base .
+constexpr const char* Shape_detection_Efficient_RANSAC_add_shape_factory = "Registers the shape type ShapeType in the detection engine that must inherit from Shape_base .
 
 For example, for registering a plane as detectable shape, you should call
 ransac.add_shape_factory< Shape_detection::Plane <Traits> >(); . Note that if
 your call is within a template, you should add the template keyword just
 before add_shape_factory : ransac.template add_shape_factory <
 Shape_detection::Plane <Traits> >(); .";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_preprocess = "Constructs internal data structures required for the shape detection.
+constexpr const char* Shape_detection_Efficient_RANSAC_preprocess = "Constructs internal data structures required for the shape detection.
 
 These structures only depend on the input data, i.e. the points and normal
 vectors. This method is called by detect() , if it was not called before by
 the user.
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_clear_shape_factories = "Removes all shape types registered for detection.";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_clear_octrees = "Frees memory allocated for the internal search structures but keeps the detected shapes.
+constexpr const char* Shape_detection_Efficient_RANSAC_clear_shape_factories = "Removes all shape types registered for detection.";
+constexpr const char* Shape_detection_Efficient_RANSAC_clear_octrees = "Frees memory allocated for the internal search structures but keeps the detected shapes.
 
 It invalidates the range retrieved using unassigned_points() .";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_clear = "Calls clear_octrees() and removes all detected shapes.
+constexpr const char* Shape_detection_Efficient_RANSAC_clear = "Calls clear_octrees() and removes all detected shapes.
 
 All internal structures are cleaned, including formerly detected shapes. Thus
 iterators and ranges retrieved through shapes() , planes() and
 indices_of_unassigned_points() are invalidated.";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_detect = "Performs the shape detection.
+constexpr const char* Shape_detection_Efficient_RANSAC_detect = "Performs the shape detection.
 
 Shape types considered during the detection are those registered using
 add_shape_factory() . options parameters for shape detection callback can be
@@ -131,54 +131,54 @@ options : const Parameters &
 callback : const std::function< bool(double)> &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_shapes = "Returns an Iterator_range with a bidirectional iterator with value type std::shared_ptr< Shape > over the detected shapes in the order of detection.
+constexpr const char* Shape_detection_Efficient_RANSAC_shapes = "Returns an Iterator_range with a bidirectional iterator with value type std::shared_ptr< Shape > over the detected shapes in the order of detection.
 
 Depending on the chosen probability for the detection, the shapes are ordered
 with decreasing size.
 
 Returns: Shape_range";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_planes = "Returns an Iterator_range with a bidirectional iterator with value type std::shared_ptr< Plane_shape > over only the detected planes in the order of detection.
+constexpr const char* Shape_detection_Efficient_RANSAC_planes = "Returns an Iterator_range with a bidirectional iterator with value type std::shared_ptr< Plane_shape > over only the detected planes in the order of detection.
 
 Depending on the chosen probability for the detection, the planes are ordered
 with decreasing size.
 
 Returns: Plane_range";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_number_of_unassigned_points = "Number of points not assigned to a shape.
+constexpr const char* Shape_detection_Efficient_RANSAC_number_of_unassigned_points = "Number of points not assigned to a shape.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_indices_of_unassigned_points = "Returns an Iterator_range with a bidirectional iterator with value type std::size_t as indices into the input data that has not been assigned to a shape.
+constexpr const char* Shape_detection_Efficient_RANSAC_indices_of_unassigned_points = "Returns an Iterator_range with a bidirectional iterator with value type std::size_t as indices into the input data that has not been assigned to a shape.
 
 Returns: Point_index_range";
 
 // CGAL::Shape_detection::Efficient_RANSAC::Parameters
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Parameters__class__ = "Parameters for the shape detection algorithm.";
+constexpr const char* Shape_detection_Efficient_RANSAC_Parameters__class__ = "Parameters for the shape detection algorithm.";
 
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Parameters_probability = "Probability to control search endurance.
+constexpr const char* Shape_detection_Efficient_RANSAC_Parameters_probability = "Probability to control search endurance.
 
 Default value is 0.05. A lower probability provides a higher reliability and
 determinism at the cost of longer running time due to a higher search
 endurance. It must belong to the interval [0, 1].
 
 Returns: FT";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Parameters_min_points = "Minimum number of points in a shape.
+constexpr const char* Shape_detection_Efficient_RANSAC_Parameters_min_points = "Minimum number of points in a shape.
 
 Default value is 1% of total number of input points. It must belong to the
 interval [0, +inf).
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Parameters_epsilon = "Maximum acceptable Euclidean distance between a point and a shape.
+constexpr const char* Shape_detection_Efficient_RANSAC_Parameters_epsilon = "Maximum acceptable Euclidean distance between a point and a shape.
 
 Default value is 1% of the bounding box diagonal. It must belong to the
 interval [0, +inf).
 
 Returns: FT";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Parameters_normal_threshold = "Maximum threshold on the dot product between the estimated shape's normal and the point's normal, that is the cosine of the angle (cos(25°) = 0.9).
+constexpr const char* Shape_detection_Efficient_RANSAC_Parameters_normal_threshold = "Maximum threshold on the dot product between the estimated shape's normal and the point's normal, that is the cosine of the angle (cos(25°) = 0.9).
 
 Default value is 0.9 (around 25 degrees). It must belong to the interval [0,
 1].
 
 Returns: FT";
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_Parameters_cluster_epsilon = "Maximum acceptable Euclidean distance between points, which are assumed to be neighbors.
+constexpr const char* Shape_detection_Efficient_RANSAC_Parameters_cluster_epsilon = "Maximum acceptable Euclidean distance between points, which are assumed to be neighbors.
 
 Default value is 1% of the bounding box diagonal. It must belong to the
 interval [0, +inf).
@@ -186,31 +186,31 @@ interval [0, +inf).
 Returns: FT";
 
 // CGAL::Shape_detection::Efficient_RANSAC_traits
-constexpr const char* CGAL_Shape_detection_Efficient_RANSAC_traits__class__ = "Default traits class for the CGAL::Shape_detection::Efficient_RANSAC .";
+constexpr const char* Shape_detection_Efficient_RANSAC_traits__class__ = "Default traits class for the CGAL::Shape_detection::Efficient_RANSAC .";
 
 
 // CGAL::Shape_detection::Plane
-constexpr const char* CGAL_Shape_detection_Plane__class__ = "Plane implements Shape_base .";
+constexpr const char* Shape_detection_Plane__class__ = "Plane implements Shape_base .";
 
-constexpr const char* CGAL_Shape_detection_Plane_Plane_3 = "Plane type for the conversion operator.
+constexpr const char* Shape_detection_Plane_Plane_3 = "Plane type for the conversion operator.
 
 Returns: Traits::Plane_3";
-constexpr const char* CGAL_Shape_detection_Plane_operator_Plane_3 = "Conversion operator to Plane_3 type.";
-constexpr const char* CGAL_Shape_detection_Plane_plane_normal = "Normal vector of the plane.
+constexpr const char* Shape_detection_Plane_operator_Plane_3 = "Conversion operator to Plane_3 type.";
+constexpr const char* Shape_detection_Plane_plane_normal = "Normal vector of the plane.
 
 Returns: Vector_3";
-constexpr const char* CGAL_Shape_detection_Plane_d = "Signed distance from the origin.
+constexpr const char* Shape_detection_Plane_d = "Signed distance from the origin.
 
 Returns: FT";
 
 // CGAL::Shape_detection::Plane_map
-constexpr const char* CGAL_Shape_detection_Plane_map__class__ = "Property map that associates a detected plane object CGAL::Shape_detection::Plane to a CGAL::Plane_3 object.";
+constexpr const char* Shape_detection_Plane_map__class__ = "Property map that associates a detected plane object CGAL::Shape_detection::Plane to a CGAL::Plane_3 object.";
 
 
 // CGAL::Shape_detection::Point_set::K_neighbor_query
-constexpr const char* CGAL_Shape_detection_Point_set_K_neighbor_query__class__ = "K nearest neighbors search in a set of 2D or 3D points.";
+constexpr const char* Shape_detection_Point_set_K_neighbor_query__class__ = "K nearest neighbors search in a set of 2D or 3D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_K_neighbor_query_K_neighbor_query = "initializes a Kd-tree with input points.
+constexpr const char* Shape_detection_Point_set_K_neighbor_query_K_neighbor_query = "initializes a Kd-tree with input points.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -229,7 +229,7 @@ Parameters
 ----------
 input_range : const InputRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_K_neighbor_query_operator = "implements NeighborQuery::operator()() .
+constexpr const char* Shape_detection_Point_set_K_neighbor_query_operator = "implements NeighborQuery::operator()() .
 
 This operator finds the K closest points to the point around the query point
 query using a Kd-tree. These references to the points are returned in
@@ -240,26 +240,26 @@ Parameters
 ----------
 query : const Item
 neighbors : std::vector< Item > &";
-constexpr const char* CGAL_Shape_detection_Point_set_K_neighbor_query_Item = "Item type. Needs to be compatible to Region_type::Item.
+constexpr const char* Shape_detection_Point_set_K_neighbor_query_Item = "Item type. Needs to be compatible to Region_type::Item.
 
 Returns: Item_";
 
 // CGAL::Shape_detection::Point_set::Least_squares_circle_fit_region
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region__class__ = "Region type based on the quality of the least squares circle fit applied to 2D points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region__class__ = "Region type based on the quality of the least squares circle fit applied to 2D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_Region = "Region type.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_Region = "Region type.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_Region_unordered_map = "Region map.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_Region_unordered_map = "Region map.
 
 Returns: std::unordered_map< Item , std::size_t, internal::hash_item< Item > >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_Least_squares_circle_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_Least_squares_circle_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np an optional sequence of
 Named Parameters among the ones listed below Optional Named Parameters <button
@@ -289,20 +289,20 @@ minimum_region_size > 0 minimum_radius >= 0 maximum_radius >= minimum_radius
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region successful fitted primitive
 via successful call of update(region) with a sufficient large region
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function controls if a point with the item query is within the
 maximum_distance from the corresponding circle and if the angle between its
@@ -316,7 +316,7 @@ query : const Item
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the estimated radius is between minimum_radius and
 maximum_radius and if the region contains at least min_region_size points.
@@ -327,7 +327,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares circle to all points from the region .
 region indices of points included in the region Boolean true if the circle
@@ -340,19 +340,19 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Point_set::Least_squares_circle_fit_region::Primitive
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_region_Primitive__class__ = "Primitive .";
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_region_Primitive__class__ = "Primitive .";
 
 
 // CGAL::Shape_detection::Point_set::Least_squares_circle_fit_sorting
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_sorting__class__ = "Sorting of 2D points with respect to the local circle fit quality.";
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_sorting__class__ = "Sorting of 2D points with respect to the local circle fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_sorting_Least_squares_circle_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_sorting_Least_squares_circle_fit_sorting = "initializes all internal data structures.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -373,24 +373,24 @@ Parameters
 input_range : const InputRange &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_sorting_sort = "sorts Items of input points.";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_circle_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_sorting_sort = "sorts Items of input points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_circle_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
 
 Returns: const Seed_range";
 
 // CGAL::Shape_detection::Point_set::Least_squares_cylinder_fit_region
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region__class__ = "Region type based on the quality of the least squares cylinder fit applied to 3D points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region__class__ = "Region type based on the quality of the least squares cylinder fit applied to 3D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_Region_unordered_map = "Region map.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_Region_unordered_map = "Region map.
 
 Returns: std::unordered_map< Item , std::size_t, internal::hash_item< Item > >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_Least_squares_cylinder_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_Least_squares_cylinder_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below Optional Named Parameters <button
@@ -421,20 +421,20 @@ minimum_region_size > 0 minimum_radius >= 0 maximum_radius >= minimum_radius
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region successful fitted primitive
 via successful call of update(region) with a sufficient large region
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function controls if a point with the index query_index is within the
 maximum_distance from the corresponding cylinder and if the angle between its
@@ -448,7 +448,7 @@ query : const Item
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the estimated radius is between minimum_radius and
 maximum_radius and if the region contains at least min_region_size points.
@@ -459,7 +459,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares cylinder to all points from the region .
 region indices of points included in the region Boolean true if the cylinder
@@ -472,19 +472,19 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Point_set::Least_squares_cylinder_fit_region::Primitive
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_region_Primitive__class__ = "Primitive .";
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_region_Primitive__class__ = "Primitive .";
 
 
 // CGAL::Shape_detection::Point_set::Least_squares_cylinder_fit_sorting
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_sorting__class__ = "Sorting of 3D points with respect to the local cylinder fit quality.";
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_sorting__class__ = "Sorting of 3D points with respect to the local cylinder fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_Least_squares_cylinder_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_Least_squares_cylinder_fit_sorting = "initializes all internal data structures.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -507,27 +507,27 @@ Parameters
 input_range : const InputRange &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_sort = "sorts indices of input points.";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_sort = "sorts indices of input points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_cylinder_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
 
 Returns: const Seed_range";
 
 // CGAL::Shape_detection::Point_set::Least_squares_line_fit_region
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region__class__ = "Region type based on the quality of the least squares line fit applied to 2D points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region__class__ = "Region type based on the quality of the least squares line fit applied to 2D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_Primitive = "Primitive .
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_Primitive = "Primitive .
 
 Returns: typename GeomTraits::Line_2";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_Region_unordered_map = "Region map.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_Region_unordered_map = "Region map.
 
 Returns: std::unordered_map< Item , std::size_t, internal::hash_item< Item > >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_Least_squares_line_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_Least_squares_line_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below Optional Named Parameters <button
@@ -552,20 +552,20 @@ minimum_region_size > 0
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region successful fitted primitive
 via successful call of update(region) with a sufficient large region
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function controls if a point with the index query_index is within the
 maximum_distance from the corresponding line and if the angle between its
@@ -580,7 +580,7 @@ query : const Item
  : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the region contains at least minimum_region_size
 points. region indices of points included in the region Boolean true or false
@@ -590,7 +590,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares line to all points from the region .
 region indices of points included in the region Boolean true if the line
@@ -603,15 +603,15 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Point_set::Least_squares_line_fit_sorting
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_sorting__class__ = "Sorting of 2D points with respect to the local line fit quality.";
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_sorting__class__ = "Sorting of 2D points with respect to the local line fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_sorting_Least_squares_line_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_sorting_Least_squares_line_fit_sorting = "initializes all internal data structures.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -632,27 +632,27 @@ Parameters
 input_range : const InputRange &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_sorting_sort = "sorts indices of input points.";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_line_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_sorting_sort = "sorts indices of input points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_line_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
 
 Returns: const Seed_range";
 
 // CGAL::Shape_detection::Point_set::Least_squares_plane_fit_region
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region__class__ = "Region type based on the quality of the least squares plane fit applied to 3D points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region__class__ = "Region type based on the quality of the least squares plane fit applied to 3D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_Primitive = "Primitive .
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_Primitive = "Primitive .
 
 Returns: typename GeomTraits::Plane_3";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_Region_unordered_map = "Region map.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_Region_unordered_map = "Region map.
 
 Returns: std::unordered_map< Item , std::size_t, internal::hash_item< Item > >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_Least_squares_plane_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_Least_squares_plane_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below Optional Named Parameters <button
@@ -677,20 +677,20 @@ maximum_angle <= 90 cosine_of_maximum_angle >= 0 && cosine_of_maximum_angle <=
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region successful fitted primitive
 via successful call of update(region) with a sufficient large region
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function controls if the point query is within the maximum_distance from
 the corresponding plane and if the angle between its normal and the plane's
@@ -704,7 +704,7 @@ query : const Item
  : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the region contains at least minimum_region_size
 points. region Points of the region represented as Items . Boolean true or
@@ -715,7 +715,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares plane to all points from the region .
 region Points of the region represented as Items . Boolean true if the plane
@@ -728,15 +728,15 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Point_set::Least_squares_plane_fit_sorting
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting__class__ = "Sorting of 3D points with respect to the local plane fit quality.";
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting__class__ = "Sorting of 3D points with respect to the local plane fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_Least_squares_plane_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_Least_squares_plane_fit_sorting = "initializes all internal data structures.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -759,33 +759,33 @@ Parameters
 input_range : const InputRange &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_sort = "sorts Items of input points.";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_sort = "sorts Items of input points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
 
 Returns: const Seed_range &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_mean_distance = "the average of the maximal point to fitted plane distance in each neighborhood.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_mean_distance = "the average of the maximal point to fitted plane distance in each neighborhood.
 
 Returns: double";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_plane_fit_sorting_mean_deviation = "the average of the maximal normal deviation to fitted plane in each neighborhood.
+constexpr const char* Shape_detection_Point_set_Least_squares_plane_fit_sorting_mean_deviation = "the average of the maximal normal deviation to fitted plane in each neighborhood.
 
 Returns: double";
 
 // CGAL::Shape_detection::Point_set::Least_squares_sphere_fit_region
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region__class__ = "Region type based on the quality of the least squares sphere fit applied to 3D points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region__class__ = "Region type based on the quality of the least squares sphere fit applied to 3D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_Primitive = "Primitive .
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_Primitive = "Primitive .
 
 Returns: typename GeomTraits::Sphere_3";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_Region_unordered_map = "Region map.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_Region_unordered_map = "Region map.
 
 Returns: std::unordered_map< Item , std::size_t, internal::hash_item< Item > >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_Least_squares_sphere_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_Least_squares_sphere_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below Optional Named Parameters <button
@@ -815,20 +815,20 @@ minimum_region_size > 0 minimum_radius >= 0 maximum_radius >= minimum_radius
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region fitted primitive via
 successful call of update(region) with a sufficient large region
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function controls if a point with the index query_index is within the
 maximum_distance from the corresponding sphere and if the angle between its
@@ -842,7 +842,7 @@ query : const Item
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the estimated radius is between minimum_radius and
 maximum_radius and if the region contains at least min_region_size points.
@@ -853,7 +853,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares sphere to all points from the region .
 region indices of points included in the region Boolean true if the sphere
@@ -866,15 +866,15 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Point_set::Least_squares_sphere_fit_sorting
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_sorting__class__ = "Sorting of 3D points with respect to the local sphere fit quality.";
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_sorting__class__ = "Sorting of 3D points with respect to the local sphere fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_sorting_Least_squares_sphere_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_sorting_Least_squares_sphere_fit_sorting = "initializes all internal data structures.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -895,18 +895,18 @@ Parameters
 input_range : const InputRange &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_sorting_sort = "sorts indices of input points.";
-constexpr const char* CGAL_Shape_detection_Point_set_Least_squares_sphere_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_sorting_sort = "sorts indices of input points.";
+constexpr const char* Shape_detection_Point_set_Least_squares_sphere_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input points.
 
 Returns: const Seed_range &";
 
 // CGAL::Shape_detection::Point_set::Sphere_neighbor_query
-constexpr const char* CGAL_Shape_detection_Point_set_Sphere_neighbor_query__class__ = "Fuzzy sphere neighbors search in a set of 2D or 3D points.";
+constexpr const char* Shape_detection_Point_set_Sphere_neighbor_query__class__ = "Fuzzy sphere neighbors search in a set of 2D or 3D points.";
 
-constexpr const char* CGAL_Shape_detection_Point_set_Sphere_neighbor_query_FT = "Number type.
+constexpr const char* Shape_detection_Point_set_Sphere_neighbor_query_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Point_set_Sphere_neighbor_query_Sphere_neighbor_query = "initializes a Kd-tree with input points.
+constexpr const char* Shape_detection_Point_set_Sphere_neighbor_query_Sphere_neighbor_query = "initializes a Kd-tree with input points.
 
 InputRange a model of ConstRange whose iterator type is RandomAccessIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -926,7 +926,7 @@ Parameters
 ----------
 input_range : const InputRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Point_set_Sphere_neighbor_query_operator = "implements NeighborQuery::operator()() .
+constexpr const char* Shape_detection_Point_set_Sphere_neighbor_query_operator = "implements NeighborQuery::operator()() .
 
 This operator finds all points, which fall into a sphere of the fixed radius
 sphere_radius centered at the query point. The references of those neighbors
@@ -940,15 +940,15 @@ query : const Item
 neighbors : std::vector< Item > &";
 
 // CGAL::Shape_detection::Point_to_shape_index_map
-constexpr const char* CGAL_Shape_detection_Point_to_shape_index_map__class__ = "Property map that associates a point index to its assigned shape found by the CGAL::Shape_detection::Efficient_RANSAC algorithm.";
+constexpr const char* Shape_detection_Point_to_shape_index_map__class__ = "Property map that associates a point index to its assigned shape found by the CGAL::Shape_detection::Efficient_RANSAC algorithm.";
 
-constexpr const char* CGAL_Shape_detection_Point_to_shape_index_map_key_type = "Index of the point in the random access point range.
+constexpr const char* Shape_detection_Point_to_shape_index_map_key_type = "Index of the point in the random access point range.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_detection_Point_to_shape_index_map_value_type = "Index of the shape (-1 if the point is not assigned to any shape).
+constexpr const char* Shape_detection_Point_to_shape_index_map_value_type = "Index of the shape (-1 if the point is not assigned to any shape).
 
 Returns: int";
-constexpr const char* CGAL_Shape_detection_Point_to_shape_index_map_Point_to_shape_index_map = "Constructs a property map to map points to their associated shape.
+constexpr const char* Shape_detection_Point_to_shape_index_map_Point_to_shape_index_map = "Constructs a property map to map points to their associated shape.
 
 shapes must be a range of shapes detected using points . ShapeRange must be an
 Iterator_range with a bidirectional constant iterator type with value type
@@ -960,15 +960,15 @@ points : const PointRange &
 shapes : const ShapeRange &";
 
 // CGAL::Shape_detection::Polygon_mesh::Face_area_sorting
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting__class__ = "Sorting of polygon mesh faces with respect to their area.";
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting__class__ = "Sorting of polygon mesh faces with respect to their area.";
 
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting_Item = "Item type.
 
 Returns: typename boost::graph_traits< PolygonMesh >::face_descriptor";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting_Face_area_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting_Face_area_sorting = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters pmesh an instance of
 PolygonMesh that represents a polygon mesh np a sequence of Named Parameters
@@ -984,7 +984,7 @@ Parameters
 ----------
 pmesh : const PolygonMesh &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting_Face_area_sorting_1 = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting_Face_area_sorting_1 = "initializes all internal data structures.
 
 Three-parameter constructor with a dummy parameter provided for compatibility
 with other sorting types. Dummy Dummy parameter, not used. NamedParameters a
@@ -1002,27 +1002,27 @@ Parameters
 pmesh : const PolygonMesh &
  : const Dummy &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting_sort = "sorts Items of input faces.";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Face_area_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input faces.
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting_sort = "sorts Items of input faces.";
+constexpr const char* Shape_detection_Polygon_mesh_Face_area_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input faces.
 
 Returns: const Seed_range &";
 
 // CGAL::Shape_detection::Polygon_mesh::Least_squares_plane_fit_region
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region__class__ = "Region type based on the quality of the least squares plane fit applied to faces of a polygon mesh.";
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region__class__ = "Region type based on the quality of the least squares plane fit applied to faces of a polygon mesh.";
 
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Item = "Item type.
 
 Returns: face_descriptor";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Primitive = "Primitive .
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Primitive = "Primitive .
 
 Returns: typename GeomTraits::Plane_3";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Region_index_map = "Region map.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Region_index_map = "Region map.
 
 Returns: typename boost::property_map< PolygonMesh, CGAL::dynamic_face_property_t< std::size_t > >::const_type";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Least_squares_plane_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_Least_squares_plane_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters pmesh an instance of
 PolygonMesh that represents a polygon mesh np a sequence of Named Parameters
@@ -1055,20 +1055,20 @@ Parameters
 ----------
 pmesh : const PolygonMesh &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps each face to a
 std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region. is_valid_region(region)
 update(region)
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function determines if the face query is within the maximum_distance from
 the corresponding plane and if the angle between its normal and the plane's
@@ -1082,7 +1082,7 @@ query : const Item
  : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the region contains at least minimum_region_size
 faces. region Faces of the region represented as Items .
@@ -1092,7 +1092,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares plane to all vertices of the faces from
 the region . region Faces of the region represented as Items . Boolean true if
@@ -1105,15 +1105,15 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Polygon_mesh::Least_squares_plane_fit_sorting
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting__class__ = "Sorting of polygon mesh faces with respect to the local plane fit quality.";
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting__class__ = "Sorting of polygon mesh faces with respect to the local plane fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_Item = "Item type.
 
 Returns: typename boost::graph_traits< PolygonMesh >::face_descriptor";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_Least_squares_plane_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_Least_squares_plane_fit_sorting = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters pmesh an instance of
 PolygonMesh that represents a polygon mesh neighbor_query an instance of
@@ -1131,15 +1131,15 @@ Parameters
 pmesh : const PolygonMesh &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_sort = "sorts Items of input faces.";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input faces.
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_sort = "sorts Items of input faces.";
+constexpr const char* Shape_detection_Polygon_mesh_Least_squares_plane_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input faces.
 
 Returns: const Seed_range &";
 
 // CGAL::Shape_detection::Polygon_mesh::One_ring_neighbor_query
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_One_ring_neighbor_query__class__ = "Edge-adjacent faces connectivity in a polygon mesh.";
+constexpr const char* Shape_detection_Polygon_mesh_One_ring_neighbor_query__class__ = "Edge-adjacent faces connectivity in a polygon mesh.";
 
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_One_ring_neighbor_query_One_ring_neighbor_query = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_One_ring_neighbor_query_One_ring_neighbor_query = "initializes all internal data structures.
 
 pmesh an instance of a PolygonMesh that represents a polygon mesh
 faces(pmesh).size() > 0
@@ -1147,7 +1147,7 @@ faces(pmesh).size() > 0
 Parameters
 ----------
 pmesh : const PolygonMesh &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_One_ring_neighbor_query_operator = "implements NeighborQuery::operator()() .
+constexpr const char* Shape_detection_Polygon_mesh_One_ring_neighbor_query_operator = "implements NeighborQuery::operator()() .
 
 This operator retrieves all faces, which are edge-adjacent to the face query .
 These Items are returned in neighbors . query Item of the query face neighbors
@@ -1158,26 +1158,26 @@ Parameters
 ----------
 query : const Item
 neighbors : std::vector< Item > &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_One_ring_neighbor_query_Item = "Item type.
+constexpr const char* Shape_detection_Polygon_mesh_One_ring_neighbor_query_Item = "Item type.
 
 Returns: typename boost::graph_traits< PolygonMesh >::face_descriptor";
 
 // CGAL::Shape_detection::Polygon_mesh::Plane_face_region
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region__class__ = "Region type based on the plane of the first face selected.";
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region__class__ = "Region type based on the plane of the first face selected.";
 
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_FT = "Number type.
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_Item = "Item type.
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_Item = "Item type.
 
 Returns: face_descriptor";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_Primitive = "Primitive .
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_Primitive = "Primitive .
 
 Returns: typename GeomTraits::Plane_3";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_Region_index_map = "Region map.
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_Region_index_map = "Region map.
 
 Returns: typename boost::property_map< PolygonMesh, CGAL::dynamic_face_property_t< std::size_t > >::const_type";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_Plane_face_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_Plane_face_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters pmesh an instance of
 PolygonMesh that represents a polygon mesh np a sequence of Named Parameters
@@ -1210,19 +1210,19 @@ Parameters
 ----------
 pmesh : const PolygonMesh &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps each face to a
 std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_primitive = "implements RegionType::primitive() .
 
 This function provides the support plane of the seed face. Primitive
 parameters that fits the region. is_valid_region(region) update(region)
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function determines if the face query is within the maximum_distance from
 the corresponding plane and if the angle between its normal and the plane's
@@ -1236,7 +1236,7 @@ query : const Item
  : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the region contains at least minimum_region_size
 faces. region Faces of the region represented as Items .
@@ -1246,7 +1246,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Plane_face_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Polygon_mesh_Plane_face_region_update = "implements RegionType::update() .
 
 This function uses the support plane of the seed face as primitive. region
 Faces of the region represented as Items . Boolean true if the seed face is
@@ -1259,18 +1259,18 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Polygon_mesh::Polyline_graph
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph__class__ = "Polygon mesh edges connected into a graph.";
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph__class__ = "Polygon mesh edges connected into a graph.";
 
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_Item = "Item type.
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_Item = "Item type.
 
 Returns: typename boost::graph_traits< PolygonMesh >::edge_descriptor";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_Segment_range = "a model of ConstRange whose iterator type is RandomAccessIterator and value type is edge_descriptor of the PolygonMesh ( boost::graph_traits<PolygonMesh>::edge_descriptor ).
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_Segment_range = "a model of ConstRange whose iterator type is RandomAccessIterator and value type is edge_descriptor of the PolygonMesh ( boost::graph_traits<PolygonMesh>::edge_descriptor ).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_Segment_map = "a model of ReadablePropertyMap whose key type is the value type of Segment_range and value type is Segment_3 from the CGAL Kernel used by VertexPointMap .
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_Segment_map = "a model of ReadablePropertyMap whose key type is the value type of Segment_range and value type is Segment_3 from the CGAL Kernel used by VertexPointMap .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_Polyline_graph = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_Polyline_graph = "initializes all internal data structures.
 
 FaceToRegionMap a model of ReadablePropertyMap whose key type is
 face_descriptor of the PolygonMesh (
@@ -1289,7 +1289,7 @@ Parameters
 pmesh : const PolygonMesh &
 face_to_region_map : FaceToRegionMap
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_Polyline_graph_1 = "initializes all internal data structures.
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_Polyline_graph_1 = "initializes all internal data structures.
 
 FaceToRegionMap a model of ReadablePropertyMap whose key type is
 face_descriptor of the PolygonMesh (
@@ -1312,7 +1312,7 @@ pmesh : const PolygonMesh &
 edge_range : const EdgeRange &
 face_to_region_map : FaceToRegionMap
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_operator = "implements NeighborQuery::operator()() .
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_operator = "implements NeighborQuery::operator()() .
 
 This operator retrieves all edges from segment_range() , which are neighbors
 of the edge query . The Items are returned in neighbors . query Iterator of
@@ -1324,27 +1324,27 @@ Parameters
 ----------
 query : const I
 neighbors : std::vector< edge_descriptor > &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_segment_range = "returns an instance of Segment_range to access edges, which form polylines
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_segment_range = "returns an instance of Segment_range to access edges, which form polylines
 
 Returns: const Segment_range &";
-constexpr const char* CGAL_Shape_detection_Polygon_mesh_Polyline_graph_segment_map = "returns an instance of Segment_map that maps an edge from segment_range() to Segment_3 from the CGAL Kernel used by VertexPointMap .
+constexpr const char* Shape_detection_Polygon_mesh_Polyline_graph_segment_map = "returns an instance of Segment_map that maps an edge from segment_range() to Segment_3 from the CGAL Kernel used by VertexPointMap .
 
 Returns: const Segment_map &";
 
 
 // CGAL::Shape_detection::Region_growing
-constexpr const char* CGAL_Shape_detection_Region_growing__class__ = "Main class/entry point for running the region growing algorithm.";
+constexpr const char* Shape_detection_Region_growing__class__ = "Main class/entry point for running the region growing algorithm.";
 
-constexpr const char* CGAL_Shape_detection_Region_growing_Item = "Item type.
+constexpr const char* Shape_detection_Region_growing_Item = "Item type.
 
 Returns: typename RegionType::Item";
-constexpr const char* CGAL_Shape_detection_Region_growing_Primitive_and_region = "Primitive and region type.
+constexpr const char* Shape_detection_Region_growing_Primitive_and_region = "Primitive and region type.
 
 Returns: std::pair< typename Region_type::Primitive, Region >";
-constexpr const char* CGAL_Shape_detection_Region_growing_Region_map = "Item to region property map.
+constexpr const char* Shape_detection_Region_growing_Region_map = "Item to region property map.
 
 Returns: RegionMap";
-constexpr const char* CGAL_Shape_detection_Region_growing_Region_growing = "initializes the region growing algorithm.
+constexpr const char* Shape_detection_Region_growing_Region_growing = "initializes the region growing algorithm.
 
 InputRange a model of ConstRange ItemMap a model of ReadablePropertyMap with
 InputRange::const_iterator as key type and Item as value type. A default can
@@ -1362,7 +1362,7 @@ input_range : const InputRange &
 neighbor_query : NeighborQuery &
 region_type : RegionType &
 item_map : ItemMap";
-constexpr const char* CGAL_Shape_detection_Region_growing_Region_growing_1 = "initializes the region growing algorithm.
+constexpr const char* Shape_detection_Region_growing_Region_growing_1 = "initializes the region growing algorithm.
 
 InputRange a model of ConstRange SeedRange a model of ConstRange with Item as
 value type ItemMap a model of ReadablePropertyMap with
@@ -1383,7 +1383,7 @@ seed_range : SeedRange &
 neighbor_query : NeighborQuery &
 region_type : RegionType &
 item_map : ItemMap";
-constexpr const char* CGAL_Shape_detection_Region_growing_Region_growing_2 = "initializes the region growing algorithm.
+constexpr const char* Shape_detection_Region_growing_Region_growing_2 = "initializes the region growing algorithm.
 
 InputRange a model of ConstRange ItemMap a model of ReadablePropertyMap with
 InputRange::const_iterator as key type and Item as value type. A default can
@@ -1403,7 +1403,7 @@ neighbor_query : NeighborQuery &
 region_type : RegionType &
 rm : Region_map
 item_map : ItemMap";
-constexpr const char* CGAL_Shape_detection_Region_growing_Region_growing_3 = "initializes the region growing algorithm.
+constexpr const char* Shape_detection_Region_growing_Region_growing_3 = "initializes the region growing algorithm.
 
 InputRange a model of ConstRange SeedRange a model of ConstRange with Item as
 value type ItemMap a model of ReadablePropertyMap with
@@ -1426,7 +1426,7 @@ neighbor_query : NeighborQuery &
 region_type : RegionType &
 rm : Region_map
 item_map : ItemMap";
-constexpr const char* CGAL_Shape_detection_Region_growing_detect = "runs the region growing algorithm and fills an output iterator with the fitted primitive and their region.
+constexpr const char* Shape_detection_Region_growing_detect = "runs the region growing algorithm and fills an output iterator with the fitted primitive and their region.
 
 PrimitiveAndRegionOutputIterator a model of OutputIterator whose value type is
 Primitive_and_region region_out an output iterator of type
@@ -1438,12 +1438,12 @@ Parameters
 region_out : PrimitiveAndRegionOutputIterator
 
 Returns: PrimitiveAndRegionOutputIterator";
-constexpr const char* CGAL_Shape_detection_Region_growing_region_map = "provides a property map that provides the region index (or std::size_t(-1)) for each input element.
+constexpr const char* Shape_detection_Region_growing_region_map = "provides a property map that provides the region index (or std::size_t(-1)) for each input element.
 
 Property map that maps each iterator of the input range to a region index.
 
 Returns: const Region_map &";
-constexpr const char* CGAL_Shape_detection_Region_growing_unassigned_items = "fills an output iterator with all unassigned items.
+constexpr const char* Shape_detection_Region_growing_unassigned_items = "fills an output iterator with all unassigned items.
 
 ItemOutputIterator a model of OutputIterator whose value type is Item
 InputRange a model of ConstRange ItemMap a model of ReadablePropertyMap with
@@ -1463,21 +1463,21 @@ item_map : ItemMap
 Returns: ItemOutputIterator";
 
 // CGAL::Shape_detection::Segment_set::Least_squares_line_fit_region
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region__class__ = "Region type based on the quality of the least squares line fit applied to a segment set.";
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region__class__ = "Region type based on the quality of the least squares line fit applied to a segment set.";
 
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_FT = "Number type.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_Item = "Item type.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_Primitive = "Primitive type depends on the dimension of the input data.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_Primitive = "Primitive type depends on the dimension of the input data.
 
 Returns: typename GeomTraits::Line_2 or typename GeomTraits::Line_3";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_Region_unordered_map = "Region map.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_Region_unordered_map = "Region map.
 
 Returns: std::unordered_map< Item , std::size_t, internal::hash_item< Item > >";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_Least_squares_line_fit_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_Least_squares_line_fit_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below InputRange a model of ConstRange whose
@@ -1502,20 +1502,20 @@ minimum_region_size > 0
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_primitive = "implements RegionType::primitive() .
 
 This function provides the last primitive that has been fitted with the
 region. Primitive parameters that fits the region successful fitted primitive
 via successful call of update(region) with a sufficient large region
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function controls if a segment with the index query is within the
 maximum_distance from the corresponding line and if the angle between the
@@ -1530,7 +1530,7 @@ query : const Item
  : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the region contains at least minimum_region_size
 segments. region Segments of the region represented as Items . Boolean true or
@@ -1541,7 +1541,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_region_update = "implements RegionType::update() .
 
 This function fits the least squares line to all segments from the region .
 region Segments of the region represented as Items . Boolean true if the line
@@ -1554,15 +1554,15 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Segment_set::Least_squares_line_fit_sorting
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_sorting__class__ = "Sorting of segments with respect to the local line fit quality.";
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_sorting__class__ = "Sorting of segments with respect to the local line fit quality.";
 
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_sorting_Least_squares_line_fit_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_sorting_Least_squares_line_fit_sorting = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters input_range an instance of
 InputRange with 2D or 3D segments neighbor_query an instance of NeighborQuery
@@ -1583,21 +1583,21 @@ Parameters
 input_range : const InputRange &
 neighbor_query : NeighborQuery &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_sorting_sort = "sorts Items of input segments.";
-constexpr const char* CGAL_Shape_detection_Segment_set_Least_squares_line_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input segments.
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_sorting_sort = "sorts Items of input segments.";
+constexpr const char* Shape_detection_Segment_set_Least_squares_line_fit_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input segments.
 
 Returns: const Seed_range &";
 
 // CGAL::Shape_detection::Segment_set::Line_segment_region
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region__class__ = "Region type based on the line of the first segment selected.";
+constexpr const char* Shape_detection_Segment_set_Line_segment_region__class__ = "Region type based on the line of the first segment selected.";
 
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_FT = "Number type.
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_FT = "Number type.
 
 Returns: typename GeomTraits::FT";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_Item = "Item type.
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_Line_segment_region = "initializes all internal data structures.
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_Line_segment_region = "initializes all internal data structures.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below Optional Named Parameters <button
@@ -1621,19 +1621,19 @@ minimum_region_size > 0
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_region_index_map = "implements RegionType::region_index_map() .
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_region_index_map = "implements RegionType::region_index_map() .
 
 This function creates an empty property map that maps iterators on the input
 range Item to std::size_t .
 
 Returns: Region_index_map";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_primitive = "implements RegionType::primitive() .
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_primitive = "implements RegionType::primitive() .
 
 This function provides the support line of the seed segment. Primitive
 parameters that fits the region is_valid_region(region) update(region)
 
 Returns: Primitive";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_is_part_of_region = "implements RegionType::is_part_of_region() .
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_is_part_of_region = "implements RegionType::is_part_of_region() .
 
 This function determines if a segment with the index query is within the
 maximum_distance from the corresponding line and if the angle between the
@@ -1647,7 +1647,7 @@ query : const Item
  : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_is_valid_region = "implements RegionType::is_valid_region() .
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_is_valid_region = "implements RegionType::is_valid_region() .
 
 This function controls if the region contains at least minimum_region_size
 segments. region Segments of the region represented as Items .
@@ -1657,7 +1657,7 @@ Parameters
 region : const Region &
 
 Returns: bool";
-constexpr const char* CGAL_Shape_detection_Segment_set_Line_segment_region_update = "implements RegionType::update() .
+constexpr const char* Shape_detection_Segment_set_Line_segment_region_update = "implements RegionType::update() .
 
 This function uses the support line of the seed segment as primitive. region
 Segments of the region represented as Items . Boolean true if the line fitting
@@ -1670,15 +1670,15 @@ region : const Region &
 Returns: bool";
 
 // CGAL::Shape_detection::Segment_set::Segment_length_sorting
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting__class__ = "Sorting of segments with respect to their length.";
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting__class__ = "Sorting of segments with respect to their length.";
 
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting_Item = "Item type.
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting_Item = "Item type.
 
 Returns: Item_";
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting_Seed_range = "Seed range.
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting_Seed_range = "Seed range.
 
 Returns: std::vector< Item >";
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting_Segment_length_sorting = "initializes all internal data structures.
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting_Segment_length_sorting = "initializes all internal data structures.
 
 InputRange a model of ConstRange whose iterator type is InputIterator
 NamedParameters a sequence of Named Parameters input_range an instance of
@@ -1697,7 +1697,7 @@ Parameters
 ----------
 input_range : const InputRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting_Segment_length_sorting_1 = "initializes all internal data structures.
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting_Segment_length_sorting_1 = "initializes all internal data structures.
 
 Three-parameter constructor with a dummy parameter provided for compatibility
 with other sorting types. InputRange a model of ConstRange whose iterator type
@@ -1719,42 +1719,42 @@ Parameters
 input_range : const InputRange &
  : const Dummy &
 np : const NamedParameters &";
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting_sort = "sorts Items of input segments.";
-constexpr const char* CGAL_Shape_detection_Segment_set_Segment_length_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input segments.
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting_sort = "sorts Items of input segments.";
+constexpr const char* Shape_detection_Segment_set_Segment_length_sorting_ordered = "returns an instance of Seed_range to access the ordered Items of input segments.
 
 Returns: const Seed_range &";
 
 // CGAL::Shape_detection::Shape_base
-constexpr const char* CGAL_Shape_detection_Shape_base__class__ = "Base class for shape types that defines an interface to construct a shape from a set of points and to compute the point distance and normal deviation from the surface normal.";
+constexpr const char* Shape_detection_Shape_base__class__ = "Base class for shape types that defines an interface to construct a shape from a set of points and to compute the point distance and normal deviation from the surface normal.";
 
-constexpr const char* CGAL_Shape_detection_Shape_base_FT = "Number type.
+constexpr const char* Shape_detection_Shape_base_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Shape_detection_Shape_base_Point_3 = "Point type.
+constexpr const char* Shape_detection_Shape_base_Point_3 = "Point type.
 
 Returns: Traits::Point_3";
-constexpr const char* CGAL_Shape_detection_Shape_base_Vector_3 = "Vector type.
+constexpr const char* Shape_detection_Shape_base_Vector_3 = "Vector type.
 
 Returns: Traits::Vector_3";
-constexpr const char* CGAL_Shape_detection_Shape_base_indices_of_assigned_points = "Returns the indices of the points in the input range assigned to this shape.
+constexpr const char* Shape_detection_Shape_base_indices_of_assigned_points = "Returns the indices of the points in the input range assigned to this shape.
 
 Returns: const std::vector< std::size_t > &";
-constexpr const char* CGAL_Shape_detection_Shape_base_info = "Returns a string containing the shape type and the numerical parameters.
+constexpr const char* Shape_detection_Shape_base_info = "Returns a string containing the shape type and the numerical parameters.
 
 Returns: std::string";
-constexpr const char* CGAL_Shape_detection_Shape_base_squared_distance = "Computes the squared Euclidean distance from the query point p to the shape.
+constexpr const char* Shape_detection_Shape_base_squared_distance = "Computes the squared Euclidean distance from the query point p to the shape.
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: FT";
-constexpr const char* CGAL_Shape_detection_Shape_base_create_shape = "Constructs the shape based on a minimal set of samples from the input data.
+constexpr const char* Shape_detection_Shape_base_create_shape = "Constructs the shape based on a minimal set of samples from the input data.
 
 Parameters
 ----------
 indices : const std::vector< std::size_t > &";
-constexpr const char* CGAL_Shape_detection_Shape_base_connected_component = "Determines the largest cluster of inlier points.
+constexpr const char* Shape_detection_Shape_base_connected_component = "Determines the largest cluster of inlier points.
 
 A point belongs to a cluster if there is a point in the cluster closer than
 cluster_epsilon distance.
@@ -1765,7 +1765,7 @@ indices : std::vector< std::size_t > &
 cluster_epsilon : FT
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_detection_Shape_base_connected_component_kdTree = "Determines the largest cluster with a point-to-point distance not larger than cluster_epsilon .
+constexpr const char* Shape_detection_Shape_base_connected_component_kdTree = "Determines the largest cluster with a point-to-point distance not larger than cluster_epsilon .
 
 This general version performs a region growing within the inliers using a
 Kd-tree.
@@ -1776,7 +1776,7 @@ indices : std::vector< std::size_t > &
 cluster_epsilon : FT
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_detection_Shape_base_squared_distance_1 = "Computes the squared Euclidean distance from a set of points to the shape.
+constexpr const char* Shape_detection_Shape_base_squared_distance_1 = "Computes the squared Euclidean distance from a set of points to the shape.
 
 The distances will be stored in the so called parameter.
 
@@ -1784,57 +1784,57 @@ Parameters
 ----------
 indices : const std::vector< std::size_t > &
 distances : std::vector< FT > &";
-constexpr const char* CGAL_Shape_detection_Shape_base_cos_to_normal = "Computes the deviation of the point normal from the surface normal at the projected point in form of the dot product and writes the result into the provided angles vector.
+constexpr const char* Shape_detection_Shape_base_cos_to_normal = "Computes the deviation of the point normal from the surface normal at the projected point in form of the dot product and writes the result into the provided angles vector.
 
 Parameters
 ----------
 indices : const std::vector< std::size_t > &
 angles : std::vector< FT > &";
-constexpr const char* CGAL_Shape_detection_Shape_base_minimum_sample_size = "Returns minimal number of sample points required for construction.
+constexpr const char* Shape_detection_Shape_base_minimum_sample_size = "Returns minimal number of sample points required for construction.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Shape_detection_Shape_base_point = "Retrieves the point location from its index.
+constexpr const char* Shape_detection_Shape_base_point = "Retrieves the point location from its index.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: boost::property_traits< typenameTraits::Point_map >::reference";
-constexpr const char* CGAL_Shape_detection_Shape_base_normal = "Retrieves the normal vector from its index.
+constexpr const char* Shape_detection_Shape_base_normal = "Retrieves the normal vector from its index.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: boost::property_traits< typenameTraits::Normal_map >::reference";
-constexpr const char* CGAL_Shape_detection_Shape_base_traits = "Retrieves the traits class.
+constexpr const char* Shape_detection_Shape_base_traits = "Retrieves the traits class.
 
 Returns: const Traits &";
 
 // CGAL::Shape_detection::Sphere
-constexpr const char* CGAL_Shape_detection_Sphere__class__ = "Sphere implements Shape_base .";
+constexpr const char* Shape_detection_Sphere__class__ = "Sphere implements Shape_base .";
 
-constexpr const char* CGAL_Shape_detection_Sphere_operator_Sphere_3 = "Conversion operator to convert to Sphere_3 type.";
-constexpr const char* CGAL_Shape_detection_Sphere_center = "Access to the center.
+constexpr const char* Shape_detection_Sphere_operator_Sphere_3 = "Conversion operator to convert to Sphere_3 type.";
+constexpr const char* Shape_detection_Sphere_center = "Access to the center.
 
 Returns: Point_3";
-constexpr const char* CGAL_Shape_detection_Sphere_radius = "Access to the radius of the sphere.
+constexpr const char* Shape_detection_Sphere_radius = "Access to the radius of the sphere.
 
 Returns: FT";
 
 // CGAL::Shape_detection::Torus
-constexpr const char* CGAL_Shape_detection_Torus__class__ = "Torus implements Shape_base .";
+constexpr const char* Shape_detection_Torus__class__ = "Torus implements Shape_base .";
 
-constexpr const char* CGAL_Shape_detection_Torus_axis = "Direction of symmetry axis.
+constexpr const char* Shape_detection_Torus_axis = "Direction of symmetry axis.
 
 Returns: Vector_3";
-constexpr const char* CGAL_Shape_detection_Torus_center = "Center point on symmetry axis.
+constexpr const char* Shape_detection_Torus_center = "Center point on symmetry axis.
 
 Returns: Point_3";
-constexpr const char* CGAL_Shape_detection_Torus_major_radius = "Major radius of the torus.
+constexpr const char* Shape_detection_Torus_major_radius = "Major radius of the torus.
 
 Returns: FT";
-constexpr const char* CGAL_Shape_detection_Torus_minor_radius = "Minor radius of the torus.
+constexpr const char* Shape_detection_Torus_minor_radius = "Minor radius of the torus.
 
 Returns: FT";
 

@@ -362,108 +362,108 @@ constexpr const char* ApolloniusSite_2_weight = "Returns the weight of the Apoll
 Returns: Weight";
 
 // CGAL::Apollonius_graph_2
-constexpr const char* CGAL_Apollonius_graph_2__class__ = "The class Apollonius_graph_2 represents the Apollonius graph.";
+constexpr const char* Apollonius_graph_2__class__ = "The class Apollonius_graph_2 represents the Apollonius graph.";
 
-constexpr const char* CGAL_Apollonius_graph_2_Data_structure = "A type for the underlying data structure.
+constexpr const char* Apollonius_graph_2_Data_structure = "A type for the underlying data structure.
 
 Returns: Agds";
-constexpr const char* CGAL_Apollonius_graph_2_Triangulation_data_structure = "Same as the Data_structure type.
+constexpr const char* Apollonius_graph_2_Triangulation_data_structure = "Same as the Data_structure type.
 
 This type has been introduced in order for the Apollonius_graph_2 class to be
 a model of the DelaunayGraph_2 concept.
 
 Returns: Data_structure";
-constexpr const char* CGAL_Apollonius_graph_2_Geom_traits = "A type for the geometric traits.
+constexpr const char* Apollonius_graph_2_Geom_traits = "A type for the geometric traits.
 
 Returns: Gt";
-constexpr const char* CGAL_Apollonius_graph_2_Point_2 = "A type for the point defined in the geometric traits.
+constexpr const char* Apollonius_graph_2_Point_2 = "A type for the point defined in the geometric traits.
 
 Returns: Gt::Point_2";
-constexpr const char* CGAL_Apollonius_graph_2_Site_2 = "A type for the Apollonius site, defined in the geometric traits.
+constexpr const char* Apollonius_graph_2_Site_2 = "A type for the Apollonius site, defined in the geometric traits.
 
 Returns: Gt::Site_2";
-constexpr const char* CGAL_Apollonius_graph_2_Edge = "the edge type.
+constexpr const char* Apollonius_graph_2_Edge = "the edge type.
 
 The Edge(f,i) is the edge common to faces f and f.neighbor(i) . It is also the
 edge joining the vertices f->vertex(cw(i)) and f->vertex(ccw(i)) of f . i must
 be 0 , 1 or 2 .
 
 Returns: Data_structure::Edge";
-constexpr const char* CGAL_Apollonius_graph_2_Vertex = "A type for a vertex.
+constexpr const char* Apollonius_graph_2_Vertex = "A type for a vertex.
 
 Returns: Data_structure::Vertex";
-constexpr const char* CGAL_Apollonius_graph_2_Face = "A type for a face.
+constexpr const char* Apollonius_graph_2_Face = "A type for a face.
 
 Returns: Data_structure::Face";
-constexpr const char* CGAL_Apollonius_graph_2_Vertex_handle = "A type for a handle to a vertex.
+constexpr const char* Apollonius_graph_2_Vertex_handle = "A type for a handle to a vertex.
 
 Returns: Data_structure::Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_Face_handle = "A type for a handle to a face.
+constexpr const char* Apollonius_graph_2_Face_handle = "A type for a handle to a face.
 
 Returns: Data_structure::Face_handle";
-constexpr const char* CGAL_Apollonius_graph_2_Vertex_circulator = "A type for a circulator over vertices incident to a given vertex.
+constexpr const char* Apollonius_graph_2_Vertex_circulator = "A type for a circulator over vertices incident to a given vertex.
 
 Returns: Data_structure::Vertex_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_Face_circulator = "A type for a circulator over faces incident to a given vertex.
+constexpr const char* Apollonius_graph_2_Face_circulator = "A type for a circulator over faces incident to a given vertex.
 
 Returns: Data_structure::Face_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_Edge_circulator = "A type for a circulator over edges incident to a given vertex.
+constexpr const char* Apollonius_graph_2_Edge_circulator = "A type for a circulator over edges incident to a given vertex.
 
 Returns: Data_structure::Edge_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_All_vertices_iterator = "A type for an iterator over all vertices.
+constexpr const char* Apollonius_graph_2_All_vertices_iterator = "A type for an iterator over all vertices.
 
 Returns: Data_structure::Vertex_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_All_faces_iterator = "A type for an iterator over all faces.
+constexpr const char* Apollonius_graph_2_All_faces_iterator = "A type for an iterator over all faces.
 
 Returns: Data_structure::Face_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_All_edges_iterator = "A type for an iterator over all edges.
+constexpr const char* Apollonius_graph_2_All_edges_iterator = "A type for an iterator over all edges.
 
 Returns: Data_structure::Edge_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_size_type = "An unsigned integral type.
+constexpr const char* Apollonius_graph_2_size_type = "An unsigned integral type.
 
 Returns: Data_structure::size_type";
-constexpr const char* CGAL_Apollonius_graph_2_Finite_vertices_iterator = "A type for an iterator over finite vertices.
+constexpr const char* Apollonius_graph_2_Finite_vertices_iterator = "A type for an iterator over finite vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Apollonius_graph_2_Finite_faces_iterator = "A type for an iterator over finite faces.
+constexpr const char* Apollonius_graph_2_Finite_faces_iterator = "A type for an iterator over finite faces.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Apollonius_graph_2_Finite_edges_iterator = "A type for an iterator over finite edges.
+constexpr const char* Apollonius_graph_2_Finite_edges_iterator = "A type for an iterator over finite edges.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Apollonius_graph_2_Sites_iterator = "A type for an iterator over all sites.
+constexpr const char* Apollonius_graph_2_Sites_iterator = "A type for an iterator over all sites.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Apollonius_graph_2_Visible_sites_iterator = "A type for an iterator over all visible sites.
+constexpr const char* Apollonius_graph_2_Visible_sites_iterator = "A type for an iterator over all visible sites.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Apollonius_graph_2_Hidden_sites_iterator = "A type for an iterator over all hidden sites.
+constexpr const char* Apollonius_graph_2_Hidden_sites_iterator = "A type for an iterator over all hidden sites.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Apollonius_graph_2_sites_begin = "Starts at an arbitrary site.
+constexpr const char* Apollonius_graph_2_sites_begin = "Starts at an arbitrary site.
 
 Returns: Sites_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_sites_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_sites_end = "Past-the-end iterator.
 
 Returns: Sites_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_visible_sites_begin = "Starts at an arbitrary visible site.
+constexpr const char* Apollonius_graph_2_visible_sites_begin = "Starts at an arbitrary visible site.
 
 Returns: Visible_sites_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_visible_sites_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_visible_sites_end = "Past-the-end iterator.
 
 Returns: Visible_sites_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_hidden_sites_begin = "Starts at an arbitrary hidden site.
+constexpr const char* Apollonius_graph_2_hidden_sites_begin = "Starts at an arbitrary hidden site.
 
 Returns: Hidden_sites_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_hidden_sites_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_hidden_sites_end = "Past-the-end iterator.
 
 Returns: Hidden_sites_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_Apollonius_graph_2 = "Creates an Apollonius graph ag using gt as geometric traits.
+constexpr const char* Apollonius_graph_2_Apollonius_graph_2 = "Creates an Apollonius graph ag using gt as geometric traits.
 
 Parameters
 ----------
 gt : Gt";
-constexpr const char* CGAL_Apollonius_graph_2_Apollonius_graph_2_1 = "Creates an Apollonius graph ag using gt as geometric traits and inserts all sites in the range [ first , beyond ).
+constexpr const char* Apollonius_graph_2_Apollonius_graph_2_1 = "Creates an Apollonius graph ag using gt as geometric traits and inserts all sites in the range [ first , beyond ).
 
 Input_iterator must be a model of InputIterator . The value type of
 Input_iterator must be Site_2 .
@@ -473,7 +473,7 @@ Parameters
 first : Input_iterator
 beyond : Input_iterator
 gt : Gt";
-constexpr const char* CGAL_Apollonius_graph_2_Apollonius_graph_2_2 = "Copy constructor.
+constexpr const char* Apollonius_graph_2_Apollonius_graph_2_2 = "Copy constructor.
 
 All faces and vertices are duplicated. After the construction, ag and other
 refer to two different Apollonius graphs : if other is modified, ag is not.
@@ -481,7 +481,7 @@ refer to two different Apollonius graphs : if other is modified, ag is not.
 Parameters
 ----------
 other : const Apollonius_graph_2< Gt, Agds > &";
-constexpr const char* CGAL_Apollonius_graph_2_operator = "Assignment.
+constexpr const char* Apollonius_graph_2_operator = "Assignment.
 
 If ag and other are the same object nothing is done. Otherwise, all the
 vertices and faces are duplicated. After the assignment, ag and other refer to
@@ -492,87 +492,87 @@ Parameters
 other : const Apollonius_graph_2 < Gt, Agds > &
 
 Returns: Apollonius_graph_2 < Gt, Agds >";
-constexpr const char* CGAL_Apollonius_graph_2_geom_traits = "Returns a reference to the Apollonius graph traits object.
+constexpr const char* Apollonius_graph_2_geom_traits = "Returns a reference to the Apollonius graph traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Apollonius_graph_2_data_structure = "Returns a reference to the underlying data structure.
+constexpr const char* Apollonius_graph_2_data_structure = "Returns a reference to the underlying data structure.
 
 Returns: const Data_structure &";
-constexpr const char* CGAL_Apollonius_graph_2_tds = "Same as data_structure() .
+constexpr const char* Apollonius_graph_2_tds = "Same as data_structure() .
 
 This method has been added in compliance with the DelaunayGraph_2 concept.
 
 Returns: const Data_structure &";
-constexpr const char* CGAL_Apollonius_graph_2_dimension = "Returns the dimension of the Apollonius graph.
+constexpr const char* Apollonius_graph_2_dimension = "Returns the dimension of the Apollonius graph.
 
 Returns: int";
-constexpr const char* CGAL_Apollonius_graph_2_number_of_vertices = "Returns the number of finite vertices.
+constexpr const char* Apollonius_graph_2_number_of_vertices = "Returns the number of finite vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Apollonius_graph_2_number_of_visible_sites = "Returns the number of visible sites.
+constexpr const char* Apollonius_graph_2_number_of_visible_sites = "Returns the number of visible sites.
 
 Returns: size_type";
-constexpr const char* CGAL_Apollonius_graph_2_number_of_hidden_sites = "Returns the number of hidden sites.
+constexpr const char* Apollonius_graph_2_number_of_hidden_sites = "Returns the number of hidden sites.
 
 Returns: size_type";
-constexpr const char* CGAL_Apollonius_graph_2_number_of_faces = "Returns the number of faces (both finite and infinite) of the Apollonius graph.
+constexpr const char* Apollonius_graph_2_number_of_faces = "Returns the number of faces (both finite and infinite) of the Apollonius graph.
 
 Returns: size_type";
-constexpr const char* CGAL_Apollonius_graph_2_infinite_face = "Returns a face incident to the infinite_vertex .
+constexpr const char* Apollonius_graph_2_infinite_face = "Returns a face incident to the infinite_vertex .
 
 Returns: Face_handle";
-constexpr const char* CGAL_Apollonius_graph_2_infinite_vertex = "Returns the infinite_vertex .
+constexpr const char* Apollonius_graph_2_infinite_vertex = "Returns the infinite_vertex .
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_finite_vertex = "Returns a vertex distinct from the infinite_vertex .
+constexpr const char* Apollonius_graph_2_finite_vertex = "Returns a vertex distinct from the infinite_vertex .
 
 The number of (visible) vertices in the Apollonius graph must be at least one.
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_finite_vertices_begin = "Starts at an arbitrary finite vertex.
+constexpr const char* Apollonius_graph_2_finite_vertices_begin = "Starts at an arbitrary finite vertex.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_finite_vertices_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_finite_vertices_end = "Past-the-end iterator.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_finite_edges_begin = "Starts at an arbitrary finite edge.
+constexpr const char* Apollonius_graph_2_finite_edges_begin = "Starts at an arbitrary finite edge.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_finite_edges_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_finite_edges_end = "Past-the-end iterator.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_finite_faces_begin = "Starts at an arbitrary finite face.
+constexpr const char* Apollonius_graph_2_finite_faces_begin = "Starts at an arbitrary finite face.
 
 Returns: Finite_faces_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_finite_faces_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_finite_faces_end = "Past-the-end iterator.
 
 Returns: Finite_faces_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_all_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Apollonius_graph_2_all_vertices_begin = "Starts at an arbitrary vertex.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_all_vertices_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_all_vertices_end = "Past-the-end iterator.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_all_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Apollonius_graph_2_all_edges_begin = "Starts at an arbitrary edge.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_all_edges_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_all_edges_end = "Past-the-end iterator.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_all_faces_begin = "Starts at an arbitrary face.
+constexpr const char* Apollonius_graph_2_all_faces_begin = "Starts at an arbitrary face.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_all_faces_end = "Past-the-end iterator.
+constexpr const char* Apollonius_graph_2_all_faces_end = "Past-the-end iterator.
 
 Returns: All_faces_iterator";
-constexpr const char* CGAL_Apollonius_graph_2_incident_faces = "Starts at an arbitrary face incident to v .
+constexpr const char* Apollonius_graph_2_incident_faces = "Starts at an arbitrary face incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_incident_faces_1 = "Starts at face f .
+constexpr const char* Apollonius_graph_2_incident_faces_1 = "Starts at face f .
 
 Face f is incident to vertex v .
 
@@ -582,14 +582,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Face_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_incident_edges = "Starts at an arbitrary edge incident to v .
+constexpr const char* Apollonius_graph_2_incident_edges = "Starts at an arbitrary edge incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
+constexpr const char* Apollonius_graph_2_incident_edges_1 = "Starts at the first edge of f incident to v , in counterclockwise order around v .
 
 Face f is incident to vertex v .
 
@@ -599,14 +599,14 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Edge_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_incident_vertices = "Starts at an arbitrary vertex incident to v .
+constexpr const char* Apollonius_graph_2_incident_vertices = "Starts at an arbitrary vertex incident to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_incident_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
+constexpr const char* Apollonius_graph_2_incident_vertices_1 = "Starts at the first vertex of f adjacent to v in counterclockwise order around v .
 
 Face f is incident to vertex v .
 
@@ -616,21 +616,21 @@ v : Vertex_handle
 f : Face_handle
 
 Returns: Vertex_circulator";
-constexpr const char* CGAL_Apollonius_graph_2_is_infinite = "true , iff v is the infinite_vertex .
+constexpr const char* Apollonius_graph_2_is_infinite = "true , iff v is the infinite_vertex .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_2_is_infinite_1 = "true , iff face f is infinite.
+constexpr const char* Apollonius_graph_2_is_infinite_1 = "true , iff face f is infinite.
 
 Parameters
 ----------
 f : Face_handle
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_2_is_infinite_2 = "true , iff edge (f,i) is infinite.
+constexpr const char* Apollonius_graph_2_is_infinite_2 = "true , iff edge (f,i) is infinite.
 
 Parameters
 ----------
@@ -638,21 +638,21 @@ f : Face_handle
 i : int
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_2_is_infinite_3 = "true , iff edge e is infinite.
+constexpr const char* Apollonius_graph_2_is_infinite_3 = "true , iff edge e is infinite.
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_2_is_infinite_4 = "true , iff edge *ec is infinite.
+constexpr const char* Apollonius_graph_2_is_infinite_4 = "true , iff edge *ec is infinite.
 
 Parameters
 ----------
 ec : Edge_circulator
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_2_insert = "Inserts the sites in the range [ first , beyond ).
+constexpr const char* Apollonius_graph_2_insert = "Inserts the sites in the range [ first , beyond ).
 
 The number of sites in the range [ first , beyond ) is returned.
 Input_iterator must be a model of InputIterator and its value type must be
@@ -664,7 +664,7 @@ first : Input_iterator
 beyond : Input_iterator
 
 Returns: unsigned int";
-constexpr const char* CGAL_Apollonius_graph_2_insert_1 = "Inserts the site s in the Apollonius graph.
+constexpr const char* Apollonius_graph_2_insert_1 = "Inserts the site s in the Apollonius graph.
 
 If s is visible then the vertex handle of s is returned, otherwise
 Vertex_handle(nullptr) is returned.
@@ -674,7 +674,7 @@ Parameters
 s : const Site_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_insert_2 = "Inserts s in the Apollonius graph using the site associated with vnear as an estimate for the nearest neighbor of the center of s .
+constexpr const char* Apollonius_graph_2_insert_2 = "Inserts s in the Apollonius graph using the site associated with vnear as an estimate for the nearest neighbor of the center of s .
 
 If s is visible then the vertex handle of s is returned, otherwise
 Vertex_handle(nullptr) is returned.
@@ -685,14 +685,14 @@ s : const Site_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_remove = "Removes the site associated to the vertex handle v from the Apollonius graph.
+constexpr const char* Apollonius_graph_2_remove = "Removes the site associated to the vertex handle v from the Apollonius graph.
 
 v must correspond to a valid finite vertex of the Apollonius graph.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_nearest_neighbor = "Finds the nearest neighbor of the point p .
+constexpr const char* Apollonius_graph_2_nearest_neighbor = "Finds the nearest neighbor of the point p .
 
 In other words it finds the site whose Apollonius cell contains p . Ties are
 broken arbitrarily and one of the nearest neighbors of p is returned. If there
@@ -704,7 +704,7 @@ Parameters
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_nearest_neighbor_1 = "Finds the nearest neighbor of the point p using the site associated with vnear as an estimate for the nearest neighbor of p .
+constexpr const char* Apollonius_graph_2_nearest_neighbor_1 = "Finds the nearest neighbor of the point p using the site associated with vnear as an estimate for the nearest neighbor of p .
 
 Ties are broken arbitrarily and one of the nearest neighbors of p is returned.
 If there are no visible sites in the Apollonius diagram Vertex_handle(nullptr)
@@ -716,7 +716,7 @@ p : const Point_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_2_dual = "Returns the dual corresponding to the face handle f .
+constexpr const char* Apollonius_graph_2_dual = "Returns the dual corresponding to the face handle f .
 
 The returned object can be assigned to one of the following: Site_2 ,
 Gt::Line_2 .
@@ -726,7 +726,7 @@ Parameters
 f : Face_handle
 
 Returns: Gt::Object_2";
-constexpr const char* CGAL_Apollonius_graph_2_dual_1 = "Returns the dual of the face to which it points to.
+constexpr const char* Apollonius_graph_2_dual_1 = "Returns the dual of the face to which it points to.
 
 The returned object can be assigned to one of the following: Site_2 ,
 Gt::Line_2 .
@@ -736,14 +736,14 @@ Parameters
 it : All_faces_iterator
 
 Returns: Gt::Object_2";
-constexpr const char* CGAL_Apollonius_graph_2_dual_2 = "Returns the dual of the face to which it points to.
+constexpr const char* Apollonius_graph_2_dual_2 = "Returns the dual of the face to which it points to.
 
 Parameters
 ----------
 it : Finite_faces_iterator
 
 Returns: Site";
-constexpr const char* CGAL_Apollonius_graph_2_draw_primal = "Draws the Apollonius graph to the stream str .
+constexpr const char* Apollonius_graph_2_draw_primal = "Draws the Apollonius graph to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) .
@@ -753,7 +753,7 @@ Parameters
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Apollonius_graph_2_draw_dual = "Draws the dual of the Apollonius graph, i.e., the Apollonius diagram, to the stream str .
+constexpr const char* Apollonius_graph_2_draw_dual = "Draws the dual of the Apollonius graph, i.e., the Apollonius diagram, to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) , Stream&
@@ -764,7 +764,7 @@ Parameters
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Apollonius_graph_2_draw_primal_edge = "Draws the edge e of the Apollonius graph to the stream str .
+constexpr const char* Apollonius_graph_2_draw_primal_edge = "Draws the edge e of the Apollonius graph to the stream str .
 
 The following operators must be defined: Stream& operator<<(Stream&,
 Gt::Segment_2) , Stream& operator<<(Stream&, Gt::Ray_2) .
@@ -775,7 +775,7 @@ e : const Edge &
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Apollonius_graph_2_draw_dual_edge = "Draws the dual of the edge e to the stream str .
+constexpr const char* Apollonius_graph_2_draw_dual_edge = "Draws the dual of the edge e to the stream str .
 
 The dual of e is an edge of the Apollonius diagram. The following operators
 must be defined: Stream& operator<<(Stream&, Gt::Segment_2) , Stream&
@@ -787,7 +787,7 @@ e : const Edge &
 str : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Apollonius_graph_2_file_output = "Writes the current state of the Apollonius graph to an output stream.
+constexpr const char* Apollonius_graph_2_file_output = "Writes the current state of the Apollonius graph to an output stream.
 
 In particular, all visible and hidden sites are written as well as the
 underlying combinatorial data structure.
@@ -795,12 +795,12 @@ underlying combinatorial data structure.
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Apollonius_graph_2_file_input = "Reads the state of the Apollonius graph from an input stream.
+constexpr const char* Apollonius_graph_2_file_input = "Reads the state of the Apollonius graph from an input stream.
 
 Parameters
 ----------
 is : std::istream &";
-constexpr const char* CGAL_Apollonius_graph_2_operator_1 = "Writes the current state of the Apollonius graph to an output stream.
+constexpr const char* Apollonius_graph_2_operator_1 = "Writes the current state of the Apollonius graph to an output stream.
 
 Parameters
 ----------
@@ -808,7 +808,7 @@ os : std::ostream &
 ag : const Apollonius_graph_2 < Gt, Agds > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Apollonius_graph_2_operator_2 = "Reads the state of the Apollonius graph from an input stream.
+constexpr const char* Apollonius_graph_2_operator_2 = "Reads the state of the Apollonius graph from an input stream.
 
 Parameters
 ----------
@@ -816,7 +816,7 @@ is : std::istream &
 ag : const Apollonius_graph_2 < Gt, Agds > &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Apollonius_graph_2_is_valid = "Checks the validity of the Apollonius graph.
+constexpr const char* Apollonius_graph_2_is_valid = "Checks the validity of the Apollonius graph.
 
 If verbose is true a short message is sent to std::cerr . If level is 0, only
 the data structure is validated. If level is 1, then both the data structure
@@ -829,8 +829,8 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_2_clear = "Clears all contents of the Apollonius graph.";
-constexpr const char* CGAL_Apollonius_graph_2_swap = "The Apollonius graphs other and ag are swapped.
+constexpr const char* Apollonius_graph_2_clear = "Clears all contents of the Apollonius graph.";
+constexpr const char* Apollonius_graph_2_swap = "The Apollonius graphs other and ag are swapped.
 
 ag.swap(other) should be preferred to ag = other or to ag(other) if other is
 deleted afterwards.
@@ -840,15 +840,15 @@ Parameters
 other : Apollonius_graph_2 < Gt, Agds > &";
 
 // CGAL::Apollonius_graph_filtered_traits_2
-constexpr const char* CGAL_Apollonius_graph_filtered_traits_2__class__ = "The class Apollonius_graph_filtered_traits_2 provides a model for the ApolloniusGraphTraits_2 concept.";
+constexpr const char* Apollonius_graph_filtered_traits_2__class__ = "The class Apollonius_graph_filtered_traits_2 provides a model for the ApolloniusGraphTraits_2 concept.";
 
-constexpr const char* CGAL_Apollonius_graph_filtered_traits_2_Apollonius_graph_filtered_traits_2 = "Default constructor.";
-constexpr const char* CGAL_Apollonius_graph_filtered_traits_2_Apollonius_graph_filtered_traits_2_1 = "Copy constructor.
+constexpr const char* Apollonius_graph_filtered_traits_2_Apollonius_graph_filtered_traits_2 = "Default constructor.";
+constexpr const char* Apollonius_graph_filtered_traits_2_Apollonius_graph_filtered_traits_2_1 = "Copy constructor.
 
 Parameters
 ----------
 other : Apollonius_graph_filtered_traits_2< CK, CM, EK, EM, FK, FM >";
-constexpr const char* CGAL_Apollonius_graph_filtered_traits_2_operator = "Assignment operator.
+constexpr const char* Apollonius_graph_filtered_traits_2_operator = "Assignment operator.
 
 Parameters
 ----------
@@ -857,21 +857,21 @@ Parameters
 Returns: Apollonius_graph_filtered_traits_2 < CK, CM, EK, EM, FK, FM >";
 
 // CGAL::Apollonius_graph_hierarchy_2
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2__class__ = "We provide an alternative to the class Apollonius_graph_2 <Gt,Agds> for the dynamic construction of the Apollonius graph.";
+constexpr const char* Apollonius_graph_hierarchy_2__class__ = "We provide an alternative to the class Apollonius_graph_2 <Gt,Agds> for the dynamic construction of the Apollonius graph.";
 
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_Apollonius_graph_hierarchy_2 = "Creates a hierarchy of Apollonius graphs using gt as geometric traits.
+constexpr const char* Apollonius_graph_hierarchy_2_Apollonius_graph_hierarchy_2 = "Creates a hierarchy of Apollonius graphs using gt as geometric traits.
 
 Parameters
 ----------
 gt : Gt";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_Apollonius_graph_hierarchy_2_1 = "Creates an Apollonius graph hierarchy using gt as geometric traits and inserts all sites in the range [ first , beyond ).
+constexpr const char* Apollonius_graph_hierarchy_2_Apollonius_graph_hierarchy_2_1 = "Creates an Apollonius graph hierarchy using gt as geometric traits and inserts all sites in the range [ first , beyond ).
 
 Parameters
 ----------
 first : Input_iterator
 beyond : Input_iterator
 gt : Gt";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_Apollonius_graph_hierarchy_2_2 = "Copy constructor.
+constexpr const char* Apollonius_graph_hierarchy_2_Apollonius_graph_hierarchy_2_2 = "Copy constructor.
 
 All faces, vertices, and inter-level pointers are duplicated. After the
 construction, agh and other refer to two different Apollonius graph
@@ -880,7 +880,7 @@ hierarchies: if other is modified, agh is not.
 Parameters
 ----------
 other : const Apollonius_graph_hierarchy_2< Gt, Agds > &";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_operator = "Assignment.
+constexpr const char* Apollonius_graph_hierarchy_2_operator = "Assignment.
 
 All faces, vertices and inter-level pointers are duplicated. After the
 construction, agh and other refer to two different Apollonius graph
@@ -891,7 +891,7 @@ Parameters
 other : Apollonius_graph_hierarchy_2 < Gt, Agds >
 
 Returns: Apollonius_graph_hierarchy_2 < Gt, Agds >";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_insert = "Inserts the sites in the range [ first , beyond ).
+constexpr const char* Apollonius_graph_hierarchy_2_insert = "Inserts the sites in the range [ first , beyond ).
 
 The number of sites in the range [ first , beyond ) is returned.
 Input_iterator must be a model of InputIterator and its value type must be
@@ -903,7 +903,7 @@ first : Input_iterator
 beyond : Input_iterator
 
 Returns: unsigned int";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_insert_1 = "Inserts the site s in the Apollonius graph hierarchy.
+constexpr const char* Apollonius_graph_hierarchy_2_insert_1 = "Inserts the site s in the Apollonius graph hierarchy.
 
 If s is visible then the vertex handle of s is returned, otherwise
 Vertex_handle(nullptr) is returned.
@@ -913,7 +913,7 @@ Parameters
 s : const Site_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_insert_2 = "Inserts s in the Apollonius graph hierarchy using the site associated with vnear as an estimate for the nearest neighbor of the center of s .
+constexpr const char* Apollonius_graph_hierarchy_2_insert_2 = "Inserts s in the Apollonius graph hierarchy using the site associated with vnear as an estimate for the nearest neighbor of the center of s .
 
 If s is visible then the vertex handle of s is returned, otherwise
 Vertex_handle(nullptr) is returned. A call to this method is equivalent to
@@ -926,14 +926,14 @@ s : const Site_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_remove = "Removes the site associated to the vertex handle v from the Apollonius graph hierarchy.
+constexpr const char* Apollonius_graph_hierarchy_2_remove = "Removes the site associated to the vertex handle v from the Apollonius graph hierarchy.
 
 v must correspond to a valid finite vertex of the Apollonius graph hierarchy.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_nearest_neighbor = "Finds the nearest neighbor of the point p .
+constexpr const char* Apollonius_graph_hierarchy_2_nearest_neighbor = "Finds the nearest neighbor of the point p .
 
 In other words it finds the site whose Apollonius cell contains p . Ties are
 broken arbitrarily and one of the nearest neighbors of p is returned. If there
@@ -945,7 +945,7 @@ Parameters
 p : const Point_2 &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_nearest_neighbor_1 = "Finds the nearest neighbor of the point p .
+constexpr const char* Apollonius_graph_hierarchy_2_nearest_neighbor_1 = "Finds the nearest neighbor of the point p .
 
 If there are no visible sites in the Apollonius diagram Vertex_handle(nullptr)
 is returned. A call to this method is equivalent to agh.nearest_neighbor(p);
@@ -958,7 +958,7 @@ p : const Point_2 &
 vnear : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_file_output = "Writes the current state of the Apollonius graph hierarchy to an output stream.
+constexpr const char* Apollonius_graph_hierarchy_2_file_output = "Writes the current state of the Apollonius graph hierarchy to an output stream.
 
 In particular, all visible and hidden sites are written as well as the
 underlying combinatorial hierarchical data structure.
@@ -966,12 +966,12 @@ underlying combinatorial hierarchical data structure.
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_file_input = "Reads the state of the Apollonius graph hierarchy from an input stream.
+constexpr const char* Apollonius_graph_hierarchy_2_file_input = "Reads the state of the Apollonius graph hierarchy from an input stream.
 
 Parameters
 ----------
 is : std::istream &";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_operator_1 = "Writes the current state of the Apollonius graph hierarchy to an output stream.
+constexpr const char* Apollonius_graph_hierarchy_2_operator_1 = "Writes the current state of the Apollonius graph hierarchy to an output stream.
 
 Parameters
 ----------
@@ -979,7 +979,7 @@ os : std::ostream &
 agh : Apollonius_graph_hierarchy_2 < Gt, Agds >
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_operator_2 = "Reads the state of the Apollonius graph hierarchy from an input stream.
+constexpr const char* Apollonius_graph_hierarchy_2_operator_2 = "Reads the state of the Apollonius graph hierarchy from an input stream.
 
 Parameters
 ----------
@@ -987,7 +987,7 @@ is : std::istream &
 agh : Apollonius_graph_hierarchy_2 < Gt, Agds >
 
 Returns: std::istream &";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_is_valid = "Checks the validity of the Apollonius graph hierarchy.
+constexpr const char* Apollonius_graph_hierarchy_2_is_valid = "Checks the validity of the Apollonius graph hierarchy.
 
 If verbose is true a short message is sent to std::cerr . If level is 0, the
 data structure at all levels is validated, as well as the inter-level
@@ -1002,8 +1002,8 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_clear = "Clears all contents of the Apollonius graph hierarchy.";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_2_swap = "The Apollonius graph hierarchies other and agh are swapped.
+constexpr const char* Apollonius_graph_hierarchy_2_clear = "Clears all contents of the Apollonius graph hierarchy.";
+constexpr const char* Apollonius_graph_hierarchy_2_swap = "The Apollonius graph hierarchies other and agh are swapped.
 
 agh.swap(other) should be preferred to agh = other or to agh(other) if other
 is deleted afterwards.
@@ -1013,15 +1013,15 @@ Parameters
 other : Apollonius_graph_hierarchy_2 < Gt, Agds > &";
 
 // CGAL::Apollonius_graph_hierarchy_vertex_base_2
-constexpr const char* CGAL_Apollonius_graph_hierarchy_vertex_base_2__class__ = "The class Apollonius_graph_hierarchy_vertex_base_2 provides a model for the ApolloniusGraphHierarchyVertexBase_2 concept, which is the vertex base required by the Apollonius_graph_hierarchy_2 <Gt,Agds> class.";
+constexpr const char* Apollonius_graph_hierarchy_vertex_base_2__class__ = "The class Apollonius_graph_hierarchy_vertex_base_2 provides a model for the ApolloniusGraphHierarchyVertexBase_2 concept, which is the vertex base required by the Apollonius_graph_hierarchy_2 <Gt,Agds> class.";
 
-constexpr const char* CGAL_Apollonius_graph_hierarchy_vertex_base_2_Apollonius_graph_hierarchy_vertex_base_2 = "Default constructor.";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_vertex_base_2_Apollonius_graph_hierarchy_vertex_base_2_1 = "Constructs a vertex associated with the site s and embedded at the center of s .
+constexpr const char* Apollonius_graph_hierarchy_vertex_base_2_Apollonius_graph_hierarchy_vertex_base_2 = "Default constructor.";
+constexpr const char* Apollonius_graph_hierarchy_vertex_base_2_Apollonius_graph_hierarchy_vertex_base_2_1 = "Constructs a vertex associated with the site s and embedded at the center of s .
 
 Parameters
 ----------
 s : const Site_2 &";
-constexpr const char* CGAL_Apollonius_graph_hierarchy_vertex_base_2_Apollonius_graph_hierarchy_vertex_base_2_2 = "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .
+constexpr const char* Apollonius_graph_hierarchy_vertex_base_2_Apollonius_graph_hierarchy_vertex_base_2_2 = "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .
 
 Parameters
 ----------
@@ -1029,15 +1029,15 @@ s : const Site_2 &
 f : Face_handle";
 
 // CGAL::Apollonius_graph_traits_2
-constexpr const char* CGAL_Apollonius_graph_traits_2__class__ = "The class Apollonius_graph_traits_2 provides a model for the ApolloniusGraphTraits_2 concept.";
+constexpr const char* Apollonius_graph_traits_2__class__ = "The class Apollonius_graph_traits_2 provides a model for the ApolloniusGraphTraits_2 concept.";
 
-constexpr const char* CGAL_Apollonius_graph_traits_2_Apollonius_graph_traits_2 = "Default constructor.";
-constexpr const char* CGAL_Apollonius_graph_traits_2_Apollonius_graph_traits_2_1 = "Copy constructor.
+constexpr const char* Apollonius_graph_traits_2_Apollonius_graph_traits_2 = "Default constructor.";
+constexpr const char* Apollonius_graph_traits_2_Apollonius_graph_traits_2_1 = "Copy constructor.
 
 Parameters
 ----------
 other : const Apollonius_graph_traits_2< K, Method_tag > &";
-constexpr const char* CGAL_Apollonius_graph_traits_2_operator = "Assignment operator.
+constexpr const char* Apollonius_graph_traits_2_operator = "Assignment operator.
 
 Parameters
 ----------
@@ -1046,15 +1046,15 @@ other : const Apollonius_graph_traits_2 < K, Method_tag > &
 Returns: Apollonius_graph_traits_2 < K, Method_tag >";
 
 // CGAL::Apollonius_graph_vertex_base_2
-constexpr const char* CGAL_Apollonius_graph_vertex_base_2__class__ = "The class Apollonius_graph_vertex_base_2 provides a model for the ApolloniusGraphVertexBase_2 concept which is the vertex base required by the ApolloniusGraphDataStructure_2 concept.";
+constexpr const char* Apollonius_graph_vertex_base_2__class__ = "The class Apollonius_graph_vertex_base_2 provides a model for the ApolloniusGraphVertexBase_2 concept which is the vertex base required by the ApolloniusGraphDataStructure_2 concept.";
 
-constexpr const char* CGAL_Apollonius_graph_vertex_base_2_Apollonius_graph_vertex_base_2 = "Default constructor.";
-constexpr const char* CGAL_Apollonius_graph_vertex_base_2_Apollonius_graph_vertex_base_2_1 = "Constructs a vertex associated with the site s and embedded at the center of s .
+constexpr const char* Apollonius_graph_vertex_base_2_Apollonius_graph_vertex_base_2 = "Default constructor.";
+constexpr const char* Apollonius_graph_vertex_base_2_Apollonius_graph_vertex_base_2_1 = "Constructs a vertex associated with the site s and embedded at the center of s .
 
 Parameters
 ----------
 s : const Site_2 &";
-constexpr const char* CGAL_Apollonius_graph_vertex_base_2_Apollonius_graph_vertex_base_2_2 = "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .
+constexpr const char* Apollonius_graph_vertex_base_2_Apollonius_graph_vertex_base_2_2 = "Constructs a vertex associated with the site s , embedded at the center of s , and pointing to the face associated with the face handle f .
 
 Parameters
 ----------
@@ -1062,14 +1062,14 @@ s : const Site_2 &
 f : Face_handle";
 
 // CGAL::Apollonius_site_2
-constexpr const char* CGAL_Apollonius_site_2__class__ = "The class Apollonius_site_2 is a model for the concept ApolloniusSite_2 .";
+constexpr const char* Apollonius_site_2__class__ = "The class Apollonius_site_2 is a model for the concept ApolloniusSite_2 .";
 
-constexpr const char* CGAL_Apollonius_site_2_Apollonius_site_2 = "Copy constructor.
+constexpr const char* Apollonius_site_2_Apollonius_site_2 = "Copy constructor.
 
 Parameters
 ----------
 other : const Apollonius_site_2< K > &";
-constexpr const char* CGAL_Apollonius_site_2_operator = "Inserts the Apollonius site s into the stream os .
+constexpr const char* Apollonius_site_2_operator = "Inserts the Apollonius site s into the stream os .
 
 The insert operator must be defined for Point_2 and Weight .
 
@@ -1079,7 +1079,7 @@ os : std::ostream &
 s : const Apollonius_site_2 < K > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Apollonius_site_2_operator_1 = "Reads an Apollonius site from the stream is and assigns it to s .
+constexpr const char* Apollonius_site_2_operator_1 = "Reads an Apollonius site from the stream is and assigns it to s .
 
 The extract operator must be defined for Point_2 and Weight .
 
@@ -1090,7 +1090,7 @@ s : const Apollonius_site_2 < K > &
 
 Returns: std::istream &";
 
-constexpr const char* CGAL_Apollonius_site_2_operator_2 = "Inserts the Apollonius site s into the stream os .
+constexpr const char* Apollonius_site_2_operator_2 = "Inserts the Apollonius site s into the stream os .
 
 The insert operator must be defined for Point_2 and Weight .
 
@@ -1100,7 +1100,7 @@ os : std::ostream &
 s : const Apollonius_site_2 < K > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Apollonius_site_2_operator_3 = "Reads an Apollonius site from the stream is and assigns it to s .
+constexpr const char* Apollonius_site_2_operator_3 = "Reads an Apollonius site from the stream is and assigns it to s .
 
 The extract operator must be defined for Point_2 and Weight .
 

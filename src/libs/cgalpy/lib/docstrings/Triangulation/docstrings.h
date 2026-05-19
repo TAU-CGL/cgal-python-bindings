@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Triangulation {
 
 // CGAL::Delaunay_triangulation
-constexpr const char* CGAL_Delaunay_triangulation__class__ = "This class is used to maintain the Delaunay triangulation of a set of points in $ \\mathbb{R}^D $ .";
+constexpr const char* Delaunay_triangulation__class__ = "This class is used to maintain the Delaunay triangulation of a set of points in $ \\mathbb{R}^D $ .";
 
-constexpr const char* CGAL_Delaunay_triangulation_Delaunay_triangulation = "Instantiates a Delaunay triangulation with one vertex (the vertex at infinity).
+constexpr const char* Delaunay_triangulation_Delaunay_triangulation = "Instantiates a Delaunay triangulation with one vertex (the vertex at infinity).
 
 See the description of the inherited nested type
 Triangulation::Maximal_dimension for an explanation of the use of the
@@ -20,7 +20,7 @@ Parameters
 ----------
 dim : int
 gt : const Geom_traits &";
-constexpr const char* CGAL_Delaunay_triangulation_remove = "Remove the vertex v from the Delaunay triangulation.
+constexpr const char* Delaunay_triangulation_remove = "Remove the vertex v from the Delaunay triangulation.
 
 If the current dimension of the triangulation has not changed after the
 removal, then the returned full cell c geometrically contains the removed
@@ -33,7 +33,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Delaunay_triangulation_remove_1 = "Remove the vertices pointed by the vertex handles in the range [start, end) .
+constexpr const char* Delaunay_triangulation_remove_1 = "Remove the vertices pointed by the vertex handles in the range [start, end) .
 
 ForwardIterator must be an input iterator with the value type Vertex_handle .
 
@@ -41,7 +41,7 @@ Parameters
 ----------
 start : ForwardIterator
 end : ForwardIterator";
-constexpr const char* CGAL_Delaunay_triangulation_insert = "Inserts the points found in range [s,e) in the Delaunay triangulation and ensures that the empty-ball property is preserved.
+constexpr const char* Delaunay_triangulation_insert = "Inserts the points found in range [s,e) in the Delaunay triangulation and ensures that the empty-ball property is preserved.
 
 Returns the number of vertices actually inserted. (If more than one vertex
 share the same position in space, only one insertion is counted.)
@@ -53,7 +53,7 @@ s : ForwardIterator
 e : ForwardIterator
 
 Returns: size_type";
-constexpr const char* CGAL_Delaunay_triangulation_insert_1 = "Inserts point p in the Delaunay triangulation and ensures that the empty-ball property is preserved.
+constexpr const char* Delaunay_triangulation_insert_1 = "Inserts point p in the Delaunay triangulation and ensures that the empty-ball property is preserved.
 
 Returns a Vertex_handle to the vertex of the triangulation with position p .
 Prior to the actual insertion, p is located in the triangulation; hint is used
@@ -65,7 +65,7 @@ p : const Point &
 hint : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_insert_2 = "Same as above but uses a vertex as starting place for the search.
+constexpr const char* Delaunay_triangulation_insert_2 = "Same as above but uses a vertex as starting place for the search.
 
 Parameters
 ----------
@@ -73,7 +73,7 @@ p : const Point &
 hint : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_insert_3 = "Inserts the point p in the Delaunay triangulation and ensures that the empty-ball property is preserved.
+constexpr const char* Delaunay_triangulation_insert_3 = "Inserts the point p in the Delaunay triangulation and ensures that the empty-ball property is preserved.
 
 Returns a handle to the (possibly newly created) vertex at that position. The
 behavior depends on the value of lt : OUTSIDE_AFFINE_HULL Point p is inserted
@@ -93,7 +93,7 @@ ft : const Facet &
 c : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_is_in_conflict = "Returns true if and only if the point p is in (Delaunay) conflict with full cell c (i.e., the circumscribing ball of $ c$ contains $ p$ in its interior).
+constexpr const char* Delaunay_triangulation_is_in_conflict = "Returns true if and only if the point p is in (Delaunay) conflict with full cell c (i.e., the circumscribing ball of $ c$ contains $ p$ in its interior).
 
 Parameters
 ----------
@@ -101,7 +101,7 @@ p : const Point &
 c : Full_cell_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_triangulation_compute_conflict_zone = "Outputs handles to the full cells in conflict with point p into the OutputIterator out .
+constexpr const char* Delaunay_triangulation_compute_conflict_zone = "Outputs handles to the full cells in conflict with point p into the OutputIterator out .
 
 The full cell c is used as a starting point for gathering the full cells in
 conflict with p . A facet (cc,i) on the boundary of the conflict zone with cc
@@ -117,12 +117,12 @@ out : OutputIterator
 Returns: Facet";
 
 // CGAL::Regular_triangulation
-constexpr const char* CGAL_Regular_triangulation__class__ = "This class is used to maintain the regular triangulation also known as weighted Delaunay triangulation of a set of weighted points in $ \\mathbb{R}^D $ .";
+constexpr const char* Regular_triangulation__class__ = "This class is used to maintain the regular triangulation also known as weighted Delaunay triangulation of a set of weighted points in $ \\mathbb{R}^D $ .";
 
-constexpr const char* CGAL_Regular_triangulation_Weighted_point = "A point in Euclidean space with an associated weight.
+constexpr const char* Regular_triangulation_Weighted_point = "A point in Euclidean space with an associated weight.
 
 Returns: RegularTriangulationTraits_::Weighted_point_d";
-constexpr const char* CGAL_Regular_triangulation_Regular_triangulation = "Instantiates a regular triangulation with one vertex (the vertex at infinity).
+constexpr const char* Regular_triangulation_Regular_triangulation = "Instantiates a regular triangulation with one vertex (the vertex at infinity).
 
 See the description of the inherited nested type
 Triangulation::Maximal_dimension for an explanation of the use of the
@@ -132,7 +132,7 @@ Parameters
 ----------
 dim : int
 gt : const Geom_traits &";
-constexpr const char* CGAL_Regular_triangulation_insert = "Inserts weighted point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Regular_triangulation_insert = "Inserts weighted point p in the triangulation and returns the corresponding vertex.
 
 If this insertion creates a vertex, this vertex is returned. If p coincides
 with an existing vertex and has a greater weight, then the existing weighted
@@ -150,7 +150,7 @@ p : const Weighted_point &
 hint : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_insert_1 = "Same as above but uses a vertex as starting place for the search.
+constexpr const char* Regular_triangulation_insert_1 = "Same as above but uses a vertex as starting place for the search.
 
 Parameters
 ----------
@@ -158,7 +158,7 @@ p : const Weighted_point &
 hint : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_insert_2 = "Inserts weighted point p in the triangulation.
+constexpr const char* Regular_triangulation_insert_2 = "Inserts weighted point p in the triangulation.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of
@@ -173,7 +173,7 @@ ft : const Facet &
 c : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_insert_3 = "Inserts the weighted points found in range [s,e) in the regular triangulation.
+constexpr const char* Regular_triangulation_insert_3 = "Inserts the weighted points found in range [s,e) in the regular triangulation.
 
 Returns the difference between the number of vertices after and before the
 insertions (it may be negative due to hidden points). Note that this function
@@ -187,7 +187,7 @@ s : ForwardIterator
 e : ForwardIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Regular_triangulation_insert_if_in_star = "inserts the weighted point p in the triangulation on the condition that the vertex star_center appears in the conflict zone of p (that is, p would appear in the star of star_center after the insertion).
+constexpr const char* Regular_triangulation_insert_if_in_star = "inserts the weighted point p in the triangulation on the condition that the vertex star_center appears in the conflict zone of p (that is, p would appear in the star of star_center after the insertion).
 
 If the insertion of p creates a new vertex, this vertex is returned.
 Otherwise, a default constructed handle is returned. If the dimension of the
@@ -207,7 +207,7 @@ star_center : Vertex_handle
 start : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_insert_if_in_star_1 = "Same as the above insert_if_in_star() , but uses a vertex as starting place for the search.
+constexpr const char* Regular_triangulation_insert_if_in_star_1 = "Same as the above insert_if_in_star() , but uses a vertex as starting place for the search.
 
 Parameters
 ----------
@@ -216,7 +216,7 @@ star_center : Vertex_handle
 hint : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_insert_if_in_star_2 = "inserts the weighted point p in the triangulation.
+constexpr const char* Regular_triangulation_insert_if_in_star_2 = "inserts the weighted point p in the triangulation.
 
 This function is similar to the above insert_if_in_star() function, but takes
 as additional parameters the return values of the location query of p .
@@ -232,7 +232,7 @@ ft : const Facet &
 s : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_is_in_conflict = "Returns true if and only if the point p is in conflict with full cell c (A weighted point p is said to be in conflict with a cell c if it has a negative power distance to the power sphere of c .).
+constexpr const char* Regular_triangulation_is_in_conflict = "Returns true if and only if the point p is in conflict with full cell c (A weighted point p is said to be in conflict with a cell c if it has a negative power distance to the power sphere of c .).
 
 Parameters
 ----------
@@ -240,7 +240,7 @@ p : const Weighted_point &
 c : Full_cell_const_handle
 
 Returns: bool";
-constexpr const char* CGAL_Regular_triangulation_compute_conflict_zone = "Outputs handles to the full cells in conflict with point p into the OutputIterator out .
+constexpr const char* Regular_triangulation_compute_conflict_zone = "Outputs handles to the full cells in conflict with point p into the OutputIterator out .
 
 The full cell c is used as a starting point for gathering the full cells in
 conflict with p . A facet (cc,i) on the boundary of the conflict zone with cc
@@ -254,113 +254,113 @@ c : Full_cell_handle
 out : OutputIterator
 
 Returns: Facet";
-constexpr const char* CGAL_Regular_triangulation_number_of_vertices = "Returns the number of finite vertices that are not hidden.
+constexpr const char* Regular_triangulation_number_of_vertices = "Returns the number of finite vertices that are not hidden.
 
 Returns: size_type";
-constexpr const char* CGAL_Regular_triangulation_number_of_hidden_vertices = "Returns the number of hidden vertices.
+constexpr const char* Regular_triangulation_number_of_hidden_vertices = "Returns the number of hidden vertices.
 
 Returns: size_type";
 
 // CGAL::Regular_triangulation_traits_adapter
-constexpr const char* CGAL_Regular_triangulation_traits_adapter__class__ = "The class Regular_triangulation_traits_adapter is used internally by the class Regular_triangulation to wrap its first template parameter ( RegularTriangulationTraits_ ) so that the base class Triangulation manipulates weighted points instead of bare points.";
+constexpr const char* Regular_triangulation_traits_adapter__class__ = "The class Regular_triangulation_traits_adapter is used internally by the class Regular_triangulation to wrap its first template parameter ( RegularTriangulationTraits_ ) so that the base class Triangulation manipulates weighted points instead of bare points.";
 
-constexpr const char* CGAL_Regular_triangulation_traits_adapter_Base = "The base traits.
+constexpr const char* Regular_triangulation_traits_adapter_Base = "The base traits.
 
 Returns: RTTraits";
-constexpr const char* CGAL_Regular_triangulation_traits_adapter_Point_d = "The weighted point type.
+constexpr const char* Regular_triangulation_traits_adapter_Point_d = "The weighted point type.
 
 Returns: K::Weighted_point_d";
-constexpr const char* CGAL_Regular_triangulation_traits_adapter_Regular_triangulation_traits_adapter = "The default constructor.";
+constexpr const char* Regular_triangulation_traits_adapter_Regular_triangulation_traits_adapter = "The default constructor.";
 
 // CGAL::TDS_full_cell_default_storage_policy
-constexpr const char* CGAL_TDS_full_cell_default_storage_policy__class__ = "A tag class to indicate that no mirror indices are stored in full cells.";
+constexpr const char* TDS_full_cell_default_storage_policy__class__ = "A tag class to indicate that no mirror indices are stored in full cells.";
 
 // CGAL::TDS_full_cell_mirror_storage_policy
-constexpr const char* CGAL_TDS_full_cell_mirror_storage_policy__class__ = "A tag class to indicate that mirror indices are stored in full cells.";
+constexpr const char* TDS_full_cell_mirror_storage_policy__class__ = "A tag class to indicate that mirror indices are stored in full cells.";
 
 // CGAL::Triangulation
-constexpr const char* CGAL_Triangulation__class__ = "This class implements triangulations of point sets in dimension $ d $ .";
+constexpr const char* Triangulation__class__ = "This class implements triangulations of point sets in dimension $ d $ .";
 
-constexpr const char* CGAL_Triangulation_Locate_type = "Used by Triangulation to specify which case occurs when locating a point in the triangulation.";
-constexpr const char* CGAL_Triangulation_Vertex_handle = "handle to a vertex
+constexpr const char* Triangulation_Locate_type = "Used by Triangulation to specify which case occurs when locating a point in the triangulation.";
+constexpr const char* Triangulation_Vertex_handle = "handle to a vertex
 
 Returns: TriangulationDataStructure_::Vertex_handle";
-constexpr const char* CGAL_Triangulation_Vertex_const_handle = "const handle to a vertex
+constexpr const char* Triangulation_Vertex_const_handle = "const handle to a vertex
 
 Returns: TriangulationDataStructure_::Vertex_const_handle";
-constexpr const char* CGAL_Triangulation_Vertex_iterator = "iterator over all vertices (including the infinite one)
+constexpr const char* Triangulation_Vertex_iterator = "iterator over all vertices (including the infinite one)
 
 Returns: TriangulationDataStructure_::Vertex_iterator";
-constexpr const char* CGAL_Triangulation_Vertex_const_iterator = "const iterator over all vertices (including the infinite one)
+constexpr const char* Triangulation_Vertex_const_iterator = "const iterator over all vertices (including the infinite one)
 
 Returns: TriangulationDataStructure_::Vertex_const_iterator";
-constexpr const char* CGAL_Triangulation_Finite_vertex_iterator = "iterator over finite vertices
+constexpr const char* Triangulation_Finite_vertex_iterator = "iterator over finite vertices
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_Finite_vertex_const_iterator = "const iterator over finite vertices
+constexpr const char* Triangulation_Finite_vertex_const_iterator = "const iterator over finite vertices
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_Full_cell_handle = "handle to a full cell
+constexpr const char* Triangulation_Full_cell_handle = "handle to a full cell
 
 Returns: TriangulationDataStructure_::Full_cell_handle";
-constexpr const char* CGAL_Triangulation_Full_cell_const_handle = "const handle to a full cell
+constexpr const char* Triangulation_Full_cell_const_handle = "const handle to a full cell
 
 Returns: TriangulationDataStructure_::Full_cell_const_handle";
-constexpr const char* CGAL_Triangulation_Full_cell_iterator = "iterator over all full cells (including the infinite ones)
+constexpr const char* Triangulation_Full_cell_iterator = "iterator over all full cells (including the infinite ones)
 
 Returns: TriangulationDataStructure_::Full_cell_iterator";
-constexpr const char* CGAL_Triangulation_Full_cell_const_iterator = "const iterator over all full cells (including the infinite ones)
+constexpr const char* Triangulation_Full_cell_const_iterator = "const iterator over all full cells (including the infinite ones)
 
 Returns: TriangulationDataStructure_::Full_cell_const_iterator";
-constexpr const char* CGAL_Triangulation_Finite_full_cell_iterator = "iterator over finite full cells
+constexpr const char* Triangulation_Finite_full_cell_iterator = "iterator over finite full cells
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_Finite_full_cell_const_iterator = "const iterator over finite full cells
+constexpr const char* Triangulation_Finite_full_cell_const_iterator = "const iterator over finite full cells
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_Facet_iterator = "iterator over all facets (including the infinite ones)
+constexpr const char* Triangulation_Facet_iterator = "iterator over all facets (including the infinite ones)
 
 Returns: TriangulationDataStructure_::Facet_iterator";
-constexpr const char* CGAL_Triangulation_Finite_facet_iterator = "iterator over finite facets
+constexpr const char* Triangulation_Finite_facet_iterator = "iterator over finite facets
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_size_type = "size type (an unsigned integral type)
+constexpr const char* Triangulation_size_type = "size type (an unsigned integral type)
 
 Returns: TriangulationDataStructure_::size_type";
-constexpr const char* CGAL_Triangulation_difference_type = "difference type (a signed integral type)
+constexpr const char* Triangulation_difference_type = "difference type (a signed integral type)
 
 Returns: TriangulationDataStructure_::difference_type";
-constexpr const char* CGAL_Triangulation_Geom_traits = "Type for the model of the TriangulationTraits_ concept.
+constexpr const char* Triangulation_Geom_traits = "Type for the model of the TriangulationTraits_ concept.
 
 Returns: TriangulationTraits_";
-constexpr const char* CGAL_Triangulation_Point = "A point in Euclidean space.
+constexpr const char* Triangulation_Point = "A point in Euclidean space.
 
 Note that in the context of a Regular_triangulation class (which derives from
 this class), TriangulationTraits_::Point_d is a weighted point.
 
 Returns: TriangulationTraits_::Point_d";
-constexpr const char* CGAL_Triangulation_Maximal_dimension = "This indicates whether the maximal dimension is static (i.e. if the type of Maximal_dimension is CGAL::Dimension_tag<int dim> ) or dynamic (i.e. if the type of Maximal_dimension is CGAL::Dynamic_dimension_tag ).
+constexpr const char* Triangulation_Maximal_dimension = "This indicates whether the maximal dimension is static (i.e. if the type of Maximal_dimension is CGAL::Dimension_tag<int dim> ) or dynamic (i.e. if the type of Maximal_dimension is CGAL::Dynamic_dimension_tag ).
 
 In the latter case, the dim parameter passed to the constructor of the class
 is used.
 
 Returns: TriangulationTraits_::Dimension";
-constexpr const char* CGAL_Triangulation_Triangulation_ds = "The second template parameter: the triangulation data structure.
+constexpr const char* Triangulation_Triangulation_ds = "The second template parameter: the triangulation data structure.
 
 Returns: TriangulationDataStructure_";
-constexpr const char* CGAL_Triangulation_Vertex = "A model of the concept TriangulationVertex .
+constexpr const char* Triangulation_Vertex = "A model of the concept TriangulationVertex .
 
 Returns: TriangulationDataStructure_::Vertex";
-constexpr const char* CGAL_Triangulation_Full_cell = "A model of the concept TriangulationFullCell .
+constexpr const char* Triangulation_Full_cell = "A model of the concept TriangulationFullCell .
 
 Returns: TriangulationDataStructure_::Full_cell";
-constexpr const char* CGAL_Triangulation_Facet = "The facet class.
+constexpr const char* Triangulation_Facet = "The facet class.
 
 Returns: TriangulationDataStructure_::Facet";
-constexpr const char* CGAL_Triangulation_Face = "A model of the concept TriangulationDSFace .
+constexpr const char* Triangulation_Face = "A model of the concept TriangulationDSFace .
 
 Returns: TriangulationDataStructure_::Face";
-constexpr const char* CGAL_Triangulation_Triangulation = "Instantiates a triangulation with one vertex (the vertex at infinity).
+constexpr const char* Triangulation_Triangulation = "Instantiates a triangulation with one vertex (the vertex at infinity).
 
 See the description of the nested type Maximal_dimension above for an
 explanation of the use of the parameter dim . The triangulation stores a copy
@@ -370,128 +370,128 @@ Parameters
 ----------
 dim : int
 gt : const Geom_traits &";
-constexpr const char* CGAL_Triangulation_Triangulation_1 = "The copy constructor.
+constexpr const char* Triangulation_Triangulation_1 = "The copy constructor.
 
 Parameters
 ----------
 t2 : const Triangulation &";
-constexpr const char* CGAL_Triangulation_tds = "Returns a const reference to the underlying triangulation data structure.
+constexpr const char* Triangulation_tds = "Returns a const reference to the underlying triangulation data structure.
 
 Returns: const Triangulation_ds &";
-constexpr const char* CGAL_Triangulation_tds_1 = "This is an advanced function.
+constexpr const char* Triangulation_tds_1 = "This is an advanced function.
 
 Advanced Returns a non-const reference to the underlying triangulation data
 structure.
 
 Returns: Triangulation_ds &";
-constexpr const char* CGAL_Triangulation_geom_traits = "Returns a const reference to the geometric traits instance.
+constexpr const char* Triangulation_geom_traits = "Returns a const reference to the geometric traits instance.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Triangulation_maximal_dimension = "Returns the maximal dimension of the full dimensional cells that can be stored in the triangulation.
+constexpr const char* Triangulation_maximal_dimension = "Returns the maximal dimension of the full dimensional cells that can be stored in the triangulation.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_current_dimension = "Returns the dimension of the triangulation (as an embedded manifold).
+constexpr const char* Triangulation_current_dimension = "Returns the dimension of the triangulation (as an embedded manifold).
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_empty = "Returns true if the triangulation has no finite vertex.
+constexpr const char* Triangulation_empty = "Returns true if the triangulation has no finite vertex.
 
 Returns false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_number_of_vertices = "Returns the number of finite vertices in the triangulation.
+constexpr const char* Triangulation_number_of_vertices = "Returns the number of finite vertices in the triangulation.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_number_of_full_cells = "Returns the number of full cells of maximal dimension in the triangulation (full cells incident to the vertex at infinity are counted).
+constexpr const char* Triangulation_number_of_full_cells = "Returns the number of full cells of maximal dimension in the triangulation (full cells incident to the vertex at infinity are counted).
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_infinite_vertex = "Returns a handle to the vertex at infinity.
+constexpr const char* Triangulation_infinite_vertex = "Returns a handle to the vertex at infinity.
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_infinite_full_cell = "Returns a handle to some full cell incident to the vertex at infinity.
+constexpr const char* Triangulation_infinite_full_cell = "Returns a handle to some full cell incident to the vertex at infinity.
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Triangulation_number_of_finite_full_cells = "Returns the number of full cells of maximal dimension that are not incident to the vertex at infinity.
+constexpr const char* Triangulation_number_of_finite_full_cells = "Returns the number of full cells of maximal dimension that are not incident to the vertex at infinity.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_is_infinite = "Returns true if and only if the vertex v is the infinite vertex.
+constexpr const char* Triangulation_is_infinite = "Returns true if and only if the vertex v is the infinite vertex.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_is_infinite_1 = "Returns true if and only if c is incident to the infinite vertex.
+constexpr const char* Triangulation_is_infinite_1 = "Returns true if and only if c is incident to the infinite vertex.
 
 Parameters
 ----------
 c : Full_cell_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_is_infinite_2 = "Returns true if and only if facet ft is incident to the infinite vertex.
+constexpr const char* Triangulation_is_infinite_2 = "Returns true if and only if facet ft is incident to the infinite vertex.
 
 Parameters
 ----------
 ft : const Facet &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_is_infinite_3 = "Returns true if and only if the face f is incident to the infinite vertex.
+constexpr const char* Triangulation_is_infinite_3 = "Returns true if and only if the face f is incident to the infinite vertex.
 
 Parameters
 ----------
 f : const Face &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_full_cell = "Returns a full cell containing the facet f .
+constexpr const char* Triangulation_full_cell = "Returns a full cell containing the facet f .
 
 Parameters
 ----------
 f : const Facet &
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Triangulation_index_of_covertex = "Returns the index of the vertex of the full cell c=tr.full_cell(f) which does not belong to f .
+constexpr const char* Triangulation_index_of_covertex = "Returns the index of the vertex of the full cell c=tr.full_cell(f) which does not belong to f .
 
 Parameters
 ----------
 f : const Facet &
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_vertices_begin = "The first vertex of tr .
+constexpr const char* Triangulation_vertices_begin = "The first vertex of tr .
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Triangulation_vertices_end = "The beyond vertex of tr .
+constexpr const char* Triangulation_vertices_end = "The beyond vertex of tr .
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Triangulation_finite_vertices_begin = "The first finite vertex of tr .
+constexpr const char* Triangulation_finite_vertices_begin = "The first finite vertex of tr .
 
 Returns: Finite_vertex_iterator";
-constexpr const char* CGAL_Triangulation_finite_vertices_end = "The beyond finite vertex of tr .
+constexpr const char* Triangulation_finite_vertices_end = "The beyond finite vertex of tr .
 
 Returns: Finite_vertex_iterator";
-constexpr const char* CGAL_Triangulation_full_cells_begin = "The first full cell of tr .
+constexpr const char* Triangulation_full_cells_begin = "The first full cell of tr .
 
 Returns: Full_cell_iterator";
-constexpr const char* CGAL_Triangulation_full_cells_end = "The beyond full cell of tr .
+constexpr const char* Triangulation_full_cells_end = "The beyond full cell of tr .
 
 Returns: Full_cell_iterator";
-constexpr const char* CGAL_Triangulation_finite_full_cells_begin = "The first finite full cell of tr .
+constexpr const char* Triangulation_finite_full_cells_begin = "The first finite full cell of tr .
 
 Returns: Finite_full_cell_iterator";
-constexpr const char* CGAL_Triangulation_finite_full_cells_end = "The beyond finite full cell of tr .
+constexpr const char* Triangulation_finite_full_cells_end = "The beyond finite full cell of tr .
 
 Returns: Finite_full_cell_iterator";
-constexpr const char* CGAL_Triangulation_facets_begin = "Iterator to the first facet of the triangulation.
+constexpr const char* Triangulation_facets_begin = "Iterator to the first facet of the triangulation.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Triangulation_facets_end = "Iterator to the beyond facet of the triangulation.
+constexpr const char* Triangulation_facets_end = "Iterator to the beyond facet of the triangulation.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Triangulation_finite_facets_begin = "Iterator to the first finite facet of the triangulation.
+constexpr const char* Triangulation_finite_facets_begin = "Iterator to the first finite facet of the triangulation.
 
 Returns: Finite_facet_iterator";
-constexpr const char* CGAL_Triangulation_finite_facets_end = "Iterator to the beyond finite facet of the triangulation.
+constexpr const char* Triangulation_finite_facets_end = "Iterator to the beyond finite facet of the triangulation.
 
 Returns: Finite_facet_iterator";
-constexpr const char* CGAL_Triangulation_locate = "The optional argument hint is used as a starting place for the search.
+constexpr const char* Triangulation_locate = "The optional argument hint is used as a starting place for the search.
 
 If the query point lies outside the affine hull of the points (which can
 happen when tr . current_dimension() < tr . maximal_dimension() ) or if there
@@ -511,7 +511,7 @@ query : const Point &
 hint : Full_cell_const_handle
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Triangulation_locate_1 = "Same as above but hint is a vertex and not a full cell.
+constexpr const char* Triangulation_locate_1 = "Same as above but hint is a vertex and not a full cell.
 
 Parameters
 ----------
@@ -519,7 +519,7 @@ query : const Point &
 hint : Vertex_handle
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Triangulation_locate_2 = "The optional argument hint is used as a starting place for the search.
+constexpr const char* Triangulation_locate_2 = "The optional argument hint is used as a starting place for the search.
 
 If the query point lies outside the affine hull of the points (which can
 happen when tr . current_dimension() < tr . maximal_dimension() ) or if there
@@ -550,7 +550,7 @@ ft : Facet &
 hint : Full_cell_handle
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Triangulation_locate_3 = "Same as above but hint , the starting place for the search, is a vertex.
+constexpr const char* Triangulation_locate_3 = "Same as above but hint , the starting place for the search, is a vertex.
 
 The parameter hint is ignored if it is a default constructed Vertex_handle() .
 
@@ -562,7 +562,7 @@ f : Face &
 hint : Vertex_handle
 
 Returns: Full_cell_handle";
-constexpr const char* CGAL_Triangulation_contract_face = "Contracts the Face f to a single vertex at position p .
+constexpr const char* Triangulation_contract_face = "Contracts the Face f to a single vertex at position p .
 
 Returns a handle to that vertex. The boundary of the union of full cells
 incident to f must be a triangulation of a sphere of dimension tr .
@@ -574,7 +574,7 @@ p : const Point &
 f : const Face &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert = "Inserts the points found in range [s,e) in the triangulation.
+constexpr const char* Triangulation_insert = "Inserts the points found in range [s,e) in the triangulation.
 
 Returns the number of vertices actually inserted. (If several vertices share
 the same position in space, only the vertex that was actually inserted is
@@ -587,7 +587,7 @@ s : ForwardIterator
 e : ForwardIterator
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_insert_1 = "Inserts point p in the triangulation.
+constexpr const char* Triangulation_insert_1 = "Inserts point p in the triangulation.
 
 Returns a Vertex_handle to the vertex of the triangulation with position p .
 Prior to the actual insertion, p is located in the triangulation; hint is used
@@ -599,7 +599,7 @@ p : const Point &
 hint : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_2 = "Same as above but uses a vertex hint as the starting place for the search.
+constexpr const char* Triangulation_insert_2 = "Same as above but uses a vertex hint as the starting place for the search.
 
 Parameters
 ----------
@@ -607,7 +607,7 @@ p : const Point &
 hint : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_3 = "Inserts point p into the triangulation and returns a handle to the Vertex at that position.
+constexpr const char* Triangulation_insert_3 = "Inserts point p into the triangulation and returns a handle to the Vertex at that position.
 
 The action taken depends on the value of loc_type : ON_VERTEX The
 triangulation remains unchanged. IN_FACE The point p is inserted in the Face f
@@ -625,7 +625,7 @@ ft : Facet &
 c : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_in_hole = "Removes the full cells in the range $ C=$ [s, e) , inserts a vertex at position p and fills the hole by connecting each face of the boundary to p .
+constexpr const char* Triangulation_insert_in_hole = "Removes the full cells in the range $ C=$ [s, e) , inserts a vertex at position p and fills the hole by connecting each face of the boundary to p .
 
 A Vertex_handle to the new Vertex is returned. The facet ft must lie on the
 boundary of $ C$ and its defining full cell, tr . full_cell(ft) must lie
@@ -642,7 +642,7 @@ ft : const Facet &
 out : OutputIterator
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_in_hole_1 = "Same as above, but the newly created full cells are not retrieved.
+constexpr const char* Triangulation_insert_in_hole_1 = "Same as above, but the newly created full cells are not retrieved.
 
 Parameters
 ----------
@@ -652,7 +652,7 @@ e : ForwardIterator
 ft : const Facet &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_in_face = "Inserts point p in the triangulation.
+constexpr const char* Triangulation_insert_in_face = "Inserts point p in the triangulation.
 
 p must lie in the relative interior of f .
 
@@ -662,7 +662,7 @@ p : const Point &
 f : const Face &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_in_facet = "Inserts point p in the triangulation.
+constexpr const char* Triangulation_insert_in_facet = "Inserts point p in the triangulation.
 
 p must lie in the relative interior of ft .
 
@@ -672,7 +672,7 @@ p : const Point &
 ft : const Facet &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_in_full_cell = "Inserts point p in the triangulation.
+constexpr const char* Triangulation_insert_in_full_cell = "Inserts point p in the triangulation.
 
 p must lie in the interior of c .
 
@@ -682,7 +682,7 @@ p : const Point &
 c : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_outside_convex_hull = "Inserts point p in the triangulation.
+constexpr const char* Triangulation_insert_outside_convex_hull = "Inserts point p in the triangulation.
 
 p must lie outside the convex hull of tr . The halfspace defined by the
 infinite full cell c must contain p .
@@ -693,7 +693,7 @@ Parameters
 c : Full_cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_insert_outside_affine_hull = "Inserts point p in the triangulation.
+constexpr const char* Triangulation_insert_outside_affine_hull = "Inserts point p in the triangulation.
 
 p must lie outside the affine hull of tr .
 
@@ -702,7 +702,7 @@ Parameters
  : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_is_valid = "This is a function for debugging purpose.
+constexpr const char* Triangulation_is_valid = "This is a function for debugging purpose.
 
 Debugging Support Partially checks whether tr is a triangulation. This
 function returns true if the combinatorial triangulation data structure's
@@ -716,7 +716,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_are_incident_full_cells_valid = "This is a function for debugging purpose.
+constexpr const char* Triangulation_are_incident_full_cells_valid = "This is a function for debugging purpose.
 
 Debugging Support Returns true if and only if all finite full cells incident
 to v have positive orientation. The verbose parameter is not used.
@@ -727,7 +727,7 @@ v : Vertex_const_handle
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_operator = "Reads the underlying combinatorial triangulation from is by calling the corresponding input operator of the triangulation data structure class (note that the infinite vertex is numbered 0), and the non-combinatorial information by calling the corresponding input operators of the vertex and the full cell classes (such as point coordinates), which are provided by overloading the stream operators of the vertex and full cell types.
+constexpr const char* Triangulation_operator = "Reads the underlying combinatorial triangulation from is by calling the corresponding input operator of the triangulation data structure class (note that the infinite vertex is numbered 0), and the non-combinatorial information by calling the corresponding input operators of the vertex and the full cell classes (such as point coordinates), which are provided by overloading the stream operators of the vertex and full cell types.
 
 Assigns the resulting triangulation to t .
 
@@ -737,7 +737,7 @@ is : std::istream &
 t : Triangulation &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Triangulation_operator_1 = "Writes the triangulation t into os .
+constexpr const char* Triangulation_operator_1 = "Writes the triangulation t into os .
 
 Parameters
 ----------
@@ -747,9 +747,9 @@ t : const Triangulation &
 Returns: std::ostream &";
 
 // CGAL::Triangulation_data_structure
-constexpr const char* CGAL_Triangulation_data_structure__class__ = "This class is a data structure used for storing a triangulation of dimension $ d\\leq D$ ( D is the maximal dimension).";
+constexpr const char* Triangulation_data_structure__class__ = "This class is a data structure used for storing a triangulation of dimension $ d\\leq D$ ( D is the maximal dimension).";
 
-constexpr const char* CGAL_Triangulation_data_structure_Rebind_vertex = "This is an advanced type.
+constexpr const char* Triangulation_data_structure_Rebind_vertex = "This is an advanced type.
 
 Advanced This template class allows to get the type of a triangulation data
 structure that only changes the vertex type. It has to define a type Other
@@ -757,7 +757,7 @@ which is a rebound triangulation data structure with Vb2 as vertex type. It
 can be implemented using a nested template class.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_data_structure_Rebind_full_cell = "This is an advanced type.
+constexpr const char* Triangulation_data_structure_Rebind_full_cell = "This is an advanced type.
 
 Advanced This template class allows to get the type of a triangulation data
 structure that only changes the full cell type. It has to define a type Other
@@ -765,7 +765,7 @@ which is a rebound triangulation data structure with Fcb2 as full cell type.
 It can be implemented using a nested template class.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_data_structure_Triangulation_data_structure = "The copy constructor.
+constexpr const char* Triangulation_data_structure_Triangulation_data_structure = "The copy constructor.
 
 Creates a copy of the Triangulation_data_structure t2 passed as argument. All
 vertices and full cells are duplicated.
@@ -773,7 +773,7 @@ vertices and full cells are duplicated.
 Parameters
 ----------
 t2 : const Triangulation_data_structure &";
-constexpr const char* CGAL_Triangulation_data_structure_is_valid = "Implements the validity checks required by the concept TriangulationDataStructure .
+constexpr const char* Triangulation_data_structure_is_valid = "Implements the validity checks required by the concept TriangulationDataStructure .
 
 Note that passing all these tests does not guarantee that we have a
 triangulation (abstract pure simplicial complex).
@@ -783,7 +783,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_data_structure_insert_in_tagged_hole = "This is an advanced function.
+constexpr const char* Triangulation_data_structure_insert_in_tagged_hole = "This is an advanced function.
 
 Advanced A set C of full cells satisfying the same condition as in method
 Triangulation_data_structure::insert_in_hole() is assumed to be marked. This
@@ -801,9 +801,9 @@ new_full_cells : OutputIterator
 Returns: Full_cell_handle";
 
 // CGAL::Triangulation_ds_full_cell
-constexpr const char* CGAL_Triangulation_ds_full_cell__class__ = "This class is the default model used for the full cell of the class Triangulation_data_structure .";
+constexpr const char* Triangulation_ds_full_cell__class__ = "This class is the default model used for the full cell of the class Triangulation_data_structure .";
 
-constexpr const char* CGAL_Triangulation_ds_full_cell_is_valid = "This is an advanced function.
+constexpr const char* Triangulation_ds_full_cell_is_valid = "This is an advanced function.
 
 Advanced Implements the validity checks required by the concept
 TriangulationDSFullCell .
@@ -815,9 +815,9 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Triangulation_ds_vertex
-constexpr const char* CGAL_Triangulation_ds_vertex__class__ = "The class Triangulation_ds_vertex serves as the default vertex template parameter in the class Triangulation_data_structure <Dimensionality, TriangulationDSVertex_, TriangulationDSFullCell_> .";
+constexpr const char* Triangulation_ds_vertex__class__ = "The class Triangulation_ds_vertex serves as the default vertex template parameter in the class Triangulation_data_structure <Dimensionality, TriangulationDSVertex_, TriangulationDSFullCell_> .";
 
-constexpr const char* CGAL_Triangulation_ds_vertex_is_valid = "This is an advanced function.
+constexpr const char* Triangulation_ds_vertex_is_valid = "This is an advanced function.
 
 Advanced Implements the validity checks required by the concept
 TriangulationDSVertex . Does not implement additional checks.
@@ -829,30 +829,30 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Triangulation_face
-constexpr const char* CGAL_Triangulation_face__class__ = "A Triangulation_face is a model of the concept TriangulationDSFace .";
+constexpr const char* Triangulation_face__class__ = "A Triangulation_face is a model of the concept TriangulationDSFace .";
 
 // CGAL::Triangulation_full_cell
-constexpr const char* CGAL_Triangulation_full_cell__class__ = "The class Triangulation_full_cell is a model of the concept TriangulationFullCell .";
+constexpr const char* Triangulation_full_cell__class__ = "The class Triangulation_full_cell is a model of the concept TriangulationFullCell .";
 
-constexpr const char* CGAL_Triangulation_full_cell_Data = "The type of the additional data stored in the cell.
+constexpr const char* Triangulation_full_cell_Data = "The type of the additional data stored in the cell.
 
 If you read a Triangulation_full_cell from a stream (a file) or write a
 Triangulation_full_cell to a stream, then streaming operators << and >> must
 be provided for this type.
 
 Returns: Data";
-constexpr const char* CGAL_Triangulation_full_cell_Triangulation_full_cell = "Sets the maximum possible dimension of the cell to dmax .
+constexpr const char* Triangulation_full_cell_Triangulation_full_cell = "Sets the maximum possible dimension of the cell to dmax .
 
 Parameters
 ----------
 dmax : int";
-constexpr const char* CGAL_Triangulation_full_cell_data = "Returns a const reference to the stored data.
+constexpr const char* Triangulation_full_cell_data = "Returns a const reference to the stored data.
 
 Returns: const Data &";
-constexpr const char* CGAL_Triangulation_full_cell_data_1 = "Returns a non-const reference to the stored data.
+constexpr const char* Triangulation_full_cell_data_1 = "Returns a non-const reference to the stored data.
 
 Returns: Data &";
-constexpr const char* CGAL_Triangulation_full_cell_operator = "Inputs the non-combinatorial information given by the cell, i.e., the point and other possible information.
+constexpr const char* Triangulation_full_cell_operator = "Inputs the non-combinatorial information given by the cell, i.e., the point and other possible information.
 
 The data of type Data is also read.
 
@@ -862,7 +862,7 @@ is : std::istream &
 v : Triangulation_full_cell &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Triangulation_full_cell_operator_1 = "Outputs the non-combinatorial information given by the cell, i.e., the point and other possible information.
+constexpr const char* Triangulation_full_cell_operator_1 = "Outputs the non-combinatorial information given by the cell, i.e., the point and other possible information.
 
 The data of type Data is also written.
 
@@ -874,19 +874,19 @@ v : const Triangulation_full_cell &
 Returns: std::ostream &";
 
 // CGAL::Triangulation_vertex
-constexpr const char* CGAL_Triangulation_vertex__class__ = "The class Triangulation_vertex is a model of the concept TriangulationVertex .";
+constexpr const char* Triangulation_vertex__class__ = "The class Triangulation_vertex is a model of the concept TriangulationVertex .";
 
-constexpr const char* CGAL_Triangulation_vertex_Point = "The point type.
+constexpr const char* Triangulation_vertex_Point = "The point type.
 
 Returns: TriangulationTraits_::Point_d";
-constexpr const char* CGAL_Triangulation_vertex_Data = "The type of the additional data stored in the vertex.
+constexpr const char* Triangulation_vertex_Data = "The type of the additional data stored in the vertex.
 
 If you read a Triangulation_vertex from a stream (a file) or write a
 Triangulation_vertex to a stream, then streaming operators << and >> must be
 provided for this type.
 
 Returns: Data";
-constexpr const char* CGAL_Triangulation_vertex_Triangulation_vertex = "Constructs a vertex with incident full cell c .
+constexpr const char* Triangulation_vertex_Triangulation_vertex = "Constructs a vertex with incident full cell c .
 
 The vertex is embedded at point p and the parameter t is passed to the Data
 constructor.
@@ -896,20 +896,20 @@ Parameters
 c : Full_cell_handle
 p : const Point &
 t : const T &";
-constexpr const char* CGAL_Triangulation_vertex_Triangulation_vertex_1 = "Same as above, but without incident full cell.
+constexpr const char* Triangulation_vertex_Triangulation_vertex_1 = "Same as above, but without incident full cell.
 
 Parameters
 ----------
 p : const Point &
 t : const T &";
-constexpr const char* CGAL_Triangulation_vertex_Triangulation_vertex_2 = "Same as above, but with default-constructed Point and Data .";
-constexpr const char* CGAL_Triangulation_vertex_data = "Returns a const reference to the stored data.
+constexpr const char* Triangulation_vertex_Triangulation_vertex_2 = "Same as above, but with default-constructed Point and Data .";
+constexpr const char* Triangulation_vertex_data = "Returns a const reference to the stored data.
 
 Returns: const Data &";
-constexpr const char* CGAL_Triangulation_vertex_data_1 = "Returns a non-const reference to the stored data.
+constexpr const char* Triangulation_vertex_data_1 = "Returns a non-const reference to the stored data.
 
 Returns: Data &";
-constexpr const char* CGAL_Triangulation_vertex_operator = "Inputs the non-combinatorial information given by the vertex, i.e., the point and other possible information.
+constexpr const char* Triangulation_vertex_operator = "Inputs the non-combinatorial information given by the vertex, i.e., the point and other possible information.
 
 The data of type Data is also read.
 
@@ -919,7 +919,7 @@ is : std::istream &
 v : Triangulation_vertex &
 
 Returns: std::istream &";
-constexpr const char* CGAL_Triangulation_vertex_operator_1 = "Outputs the non-combinatorial information given by the vertex, i.e., the point and other possible information.
+constexpr const char* Triangulation_vertex_operator_1 = "Outputs the non-combinatorial information given by the vertex, i.e., the point and other possible information.
 
 The data of type Data is also written.
 

@@ -268,18 +268,18 @@ i : bool
 
 Returns: AlgebraicKernelForSpheres::Root_for_spheres_2_3";
 
-constexpr const char* CGAL_Circular_arc_3_Circular_arc_3 = "Constructs an arc from a full circle.
+constexpr const char* Circular_arc_3_Circular_arc_3 = "Constructs an arc from a full circle.
 
 Parameters
 ----------
 c : const Circle_3< SphericalKernel > &";
-constexpr const char* CGAL_Circular_arc_3_Circular_arc_3_1 = "Constructs an arc from a full circle, using pt as source and target.
+constexpr const char* Circular_arc_3_Circular_arc_3_1 = "Constructs an arc from a full circle, using pt as source and target.
 
 Parameters
 ----------
 c : const Circle_3< SphericalKernel > &
 pt : const Circular_arc_point_3 &";
-constexpr const char* CGAL_Circular_arc_3_Circular_arc_3_2 = "The circular arc constructed from a circle, a source, and a target, is defined as the set of points of the circle that lie between the source p1 and the target p2 , when traversing the circle counterclockwise seen from the side of the plane of the circle pointed by its positive normal vectors.
+constexpr const char* Circular_arc_3_Circular_arc_3_2 = "The circular arc constructed from a circle, a source, and a target, is defined as the set of points of the circle that lie between the source p1 and the target p2 , when traversing the circle counterclockwise seen from the side of the plane of the circle pointed by its positive normal vectors.
 
 In this definition, we say that a normal vector $ (a,b,c)$ is positive if $
 (a,b,c)>(0,0,0)$ (i.e. $ (a>0) || (a==0) \\&\\& (b>0) ||
@@ -292,7 +292,7 @@ Parameters
 c : const Circle_3< SphericalKernel > &
 p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &";
-constexpr const char* CGAL_Circular_arc_3_Circular_arc_3_3 = "Constructs an arc that is supported by the circle of type Circle_3< SphericalKernel > passing through the points p , q and r .
+constexpr const char* Circular_arc_3_Circular_arc_3_3 = "Constructs an arc that is supported by the circle of type Circle_3< SphericalKernel > passing through the points p , q and r .
 
 The source and target are respectively p and r , when traversing the
 supporting circle in the counterclockwise direction seen from the side of the
@@ -305,13 +305,13 @@ Parameters
 p : const Point_3< SphericalKernel > &
 q : const Point_3< SphericalKernel > &
 r : const Point_3< SphericalKernel > &";
-constexpr const char* CGAL_Circular_arc_3_center = "returns the center of the supporting circle.
+constexpr const char* Circular_arc_3_center = "returns the center of the supporting circle.
 
 Returns: Point_3< SphericalKernel > const &";
-constexpr const char* CGAL_Circular_arc_3_squared_radius = "returns the squared radius of the supporting circle.
+constexpr const char* Circular_arc_3_squared_radius = "returns the squared radius of the supporting circle.
 
 Returns: SphericalKernel::FT const &";
-constexpr const char* CGAL_Circular_arc_3_operator = "Test for equality.
+constexpr const char* Circular_arc_3_operator = "Test for equality.
 
 Two arcs are equal, iff their non-oriented supporting planes are equal, and
 the centers and squared radii of their respective supporting circles are
@@ -323,7 +323,7 @@ a1 : const Circular_arc_3 < SphericalKernel > &
 a2 : const Circular_arc_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_3_operator_1 = "Test for nonequality.
+constexpr const char* Circular_arc_3_operator_1 = "Test for nonequality.
 
 Parameters
 ----------
@@ -332,19 +332,19 @@ a2 : const Circular_arc_3 < SphericalKernel > &
 
 Returns: bool";
 
-constexpr const char* CGAL_Circular_arc_point_3_x = "$ x$ -coordinate of the point.
+constexpr const char* Circular_arc_point_3_x = "$ x$ -coordinate of the point.
 
 Returns: const SphericalKernel::Root_of_2 &";
-constexpr const char* CGAL_Circular_arc_point_3_y = "$ y$ -coordinate of the point.
+constexpr const char* Circular_arc_point_3_y = "$ y$ -coordinate of the point.
 
 Returns: const SphericalKernel::Root_of_2 &";
-constexpr const char* CGAL_Circular_arc_point_3_z = "$ z$ -coordinate of the point.
+constexpr const char* Circular_arc_point_3_z = "$ z$ -coordinate of the point.
 
 Returns: const SphericalKernel::Root_of_2 &";
-constexpr const char* CGAL_Circular_arc_point_3_bbox = "Returns a bounding box around the point.
+constexpr const char* Circular_arc_point_3_bbox = "Returns a bounding box around the point.
 
 Returns: Bbox_3";
-constexpr const char* CGAL_Circular_arc_point_3_operator = "Test for equality.
+constexpr const char* Circular_arc_point_3_operator = "Test for equality.
 
 Two points are equal, iff their $ x$ , $ y$ and $ z$ coordinates are equal.
 
@@ -354,7 +354,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_1 = "Test for nonequality.
+constexpr const char* Circular_arc_point_3_operator_1 = "Test for nonequality.
 
 Parameters
 ----------
@@ -362,7 +362,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_2 = "Returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() or if p.x() == q.x() and p.y() == q.y() and p.z() < q.z() .
+constexpr const char* Circular_arc_point_3_operator_2 = "Returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() or if p.x() == q.x() and p.y() == q.y() and p.z() < q.z() .
 
 Parameters
 ----------
@@ -370,7 +370,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_3 = "Returns true iff p is lexicographically greater than q .
+constexpr const char* Circular_arc_point_3_operator_3 = "Returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -378,7 +378,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_4 = "Returns true iff p is lexicographically smaller than or equal to q .
+constexpr const char* Circular_arc_point_3_operator_4 = "Returns true iff p is lexicographically smaller than or equal to q .
 
 Parameters
 ----------
@@ -386,7 +386,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_5 = "Returns true iff p is lexicographically greater than or equal to q .
+constexpr const char* Circular_arc_point_3_operator_5 = "Returns true iff p is lexicographically greater than or equal to q .
 
 Parameters
 ----------
@@ -396,9 +396,9 @@ q : const Circular_arc_point_3 < SphericalKernel > &
 Returns: bool";
 
 // CGAL::Exact_spherical_kernel_3
-constexpr const char* CGAL_Exact_spherical_kernel_3__class__ = "A typedef to a spherical kernel that provides both exact geometric predicates and exact geometric constructions.";
+constexpr const char* Exact_spherical_kernel_3__class__ = "A typedef to a spherical kernel that provides both exact geometric predicates and exact geometric constructions.";
 
-constexpr const char* CGAL_Line_arc_3_Line_arc_3 = "Construct the line segment supported by l , whose source is p1 , and whose target is p2 .
+constexpr const char* Line_arc_3_Line_arc_3 = "Construct the line segment supported by l , whose source is p1 , and whose target is p2 .
 
 p1 and p2 lie on l . p1 and p2 are different.
 
@@ -407,23 +407,23 @@ Parameters
 l : const Line_3< SphericalKernel > &
 p1 : const Circular_arc_point_3 < SphericalKernel > &
 p2 : const Circular_arc_point_3 < SphericalKernel > &";
-constexpr const char* CGAL_Line_arc_3_Line_arc_3_1 = "Same.
+constexpr const char* Line_arc_3_Line_arc_3_1 = "Same.
 
 Parameters
 ----------
 l : const Line_3< SphericalKernel > &
 p1 : const Point_3< SphericalKernel > &
 p2 : const Point_3< SphericalKernel > &";
-constexpr const char* CGAL_Line_arc_3_min = "Constructs the minimum vertex according to the lexicographic ordering of coordinates.
+constexpr const char* Line_arc_3_min = "Constructs the minimum vertex according to the lexicographic ordering of coordinates.
 
 Returns: Circular_arc_point_3 < SphericalKernel >";
-constexpr const char* CGAL_Line_arc_3_max = "Same for the maximum vertex.
+constexpr const char* Line_arc_3_max = "Same for the maximum vertex.
 
 Returns: Circular_arc_point_3 < SphericalKernel >";
-constexpr const char* CGAL_Line_arc_3_is_vertical = "Returns true iff the segment is vertical.
+constexpr const char* Line_arc_3_is_vertical = "Returns true iff the segment is vertical.
 
 Returns: bool";
-constexpr const char* CGAL_Line_arc_3_operator = "Test for equality.
+constexpr const char* Line_arc_3_operator = "Test for equality.
 
 Two segments are equal, iff their non-oriented supporting lines are equal
 (i.e. they define the same set of points), and their endpoints are the same.
@@ -434,7 +434,7 @@ s1 : const Line_arc_3 < SphericalKernel > &
 s2 : const Line_arc_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_arc_3_operator_1 = "Test for nonequality.
+constexpr const char* Line_arc_3_operator_1 = "Test for nonequality.
 
 Parameters
 ----------
@@ -442,7 +442,7 @@ s1 : const Line_arc_3 < SphericalKernel > &
 s2 : const Line_arc_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Line_arc_3_operator_2 = "The format for input/output is, for each line arc: a Line_3 (the supporting line) and two Circular_arc_point_3 (the two endpoints), under the condition that the endpoints are actually lying on the line.
+constexpr const char* Line_arc_3_operator_2 = "The format for input/output is, for each line arc: a Line_3 (the supporting line) and two Circular_arc_point_3 (the two endpoints), under the condition that the endpoints are actually lying on the line.
 
 Parameters
 ----------
@@ -450,7 +450,7 @@ is : std::istream &
 ca : Line_arc_3 &
 
 Returns: istream &";
-constexpr const char* CGAL_Line_arc_3_operator_3 = "The format for input/output is, for each line arc: a Line_3 (the supporting line) and two Circular_arc_point_3 (the two endpoints), under the condition that the endpoints are actually lying on the line.
+constexpr const char* Line_arc_3_operator_3 = "The format for input/output is, for each line arc: a Line_3 (the supporting line) and two Circular_arc_point_3 (the two endpoints), under the condition that the endpoints are actually lying on the line.
 
 Parameters
 ----------
@@ -459,10 +459,10 @@ ca : const Line_arc_3 &
 
 Returns: ostream &";
 
-constexpr const char* CGAL_Spherical_kernel_3_RT = "Ring number type.
+constexpr const char* Spherical_kernel_3_RT = "Ring number type.
 
 Returns: AlgebraicKernelForSpheres::RT";
-constexpr const char* CGAL_Spherical_kernel_3_FT = "Field number type.
+constexpr const char* Spherical_kernel_3_FT = "Field number type.
 
 Returns: AlgebraicKernelForSpheres::FT";
 
@@ -1264,7 +1264,7 @@ p : const SphericalKernel::Circular_arc_point_3 &
 l1 : SphericalKernel::Line_arc_3 &
 l2 : SphericalKernel::Line_arc_3 &";
 
-constexpr const char* CGAL_Circular_arc_point_3_operator_6 = "Test for equality.
+constexpr const char* Circular_arc_point_3_operator_6 = "Test for equality.
 
 Two points are equal, iff their $ x$ , $ y$ and $ z$ coordinates are equal.
 
@@ -1274,7 +1274,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_7 = "Test for nonequality.
+constexpr const char* Circular_arc_point_3_operator_7 = "Test for nonequality.
 
 Parameters
 ----------
@@ -1282,7 +1282,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_8 = "Returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() or if p.x() == q.x() and p.y() == q.y() and p.z() < q.z() .
+constexpr const char* Circular_arc_point_3_operator_8 = "Returns true iff p is lexicographically smaller than q , i.e. either if p.x() < q.x() or if p.x() == q.x() and p.y() < q.y() or if p.x() == q.x() and p.y() == q.y() and p.z() < q.z() .
 
 Parameters
 ----------
@@ -1290,7 +1290,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_9 = "Returns true iff p is lexicographically greater than q .
+constexpr const char* Circular_arc_point_3_operator_9 = "Returns true iff p is lexicographically greater than q .
 
 Parameters
 ----------
@@ -1298,7 +1298,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_10 = "Returns true iff p is lexicographically smaller than or equal to q .
+constexpr const char* Circular_arc_point_3_operator_10 = "Returns true iff p is lexicographically smaller than or equal to q .
 
 Parameters
 ----------
@@ -1306,7 +1306,7 @@ p : const Circular_arc_point_3 < SphericalKernel > &
 q : const Circular_arc_point_3 < SphericalKernel > &
 
 Returns: bool";
-constexpr const char* CGAL_Circular_arc_point_3_operator_11 = "Returns true iff p is lexicographically greater than or equal to q .
+constexpr const char* Circular_arc_point_3_operator_11 = "Returns true iff p is lexicographically greater than or equal to q .
 
 Parameters
 ----------

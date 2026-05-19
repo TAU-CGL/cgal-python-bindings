@@ -8,17 +8,17 @@ namespace docstrings {
 namespace Surface_mesh_topology {
 
 // CGAL::Surface_mesh_topology::Curves_on_surface_topology
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology__class__ = "The class Curves_on_surface_topology provides methods to compute shortest non contractible cycles and to test homotopy on paths.";
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology__class__ = "The class Curves_on_surface_topology provides methods to compute shortest non contractible cycles and to test homotopy on paths.";
 
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_halfedge_descriptor = "A descriptor to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_halfedge_descriptor = "A descriptor to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_Curves_on_surface_topology = "creates a Curves_on_surface_topology object using amesh as input.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_Curves_on_surface_topology = "creates a Curves_on_surface_topology object using amesh as input.
 
 Parameters
 ----------
 amesh : const Mesh &";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_are_freely_homotopic = "returns true if the closed paths p1 and p2 are freely homotopic.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_are_freely_homotopic = "returns true if the closed paths p1 and p2 are freely homotopic.
 
 p1 and p2 must be two paths on amesh .
 
@@ -28,7 +28,7 @@ p1 : const Path_on_surface < Mesh > &
 p2 : const Path_on_surface < Mesh > &
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_are_homotopic_with_fixed_endpoints = "returns true if the paths p1 and p2 are homotopic with fixed endpoints.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_are_homotopic_with_fixed_endpoints = "returns true if the paths p1 and p2 are homotopic with fixed endpoints.
 
 The paths p1 and p2 must have the same endpoints but must not be closed.
 Equivalent to is_contractible(q) where q is the concatenation of p1 and the
@@ -40,7 +40,7 @@ p1 : const Path_on_surface < Mesh > &
 p2 : const Path_on_surface < Mesh > &
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_is_contractible = "returns true if the closed path p is contractible.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_is_contractible = "returns true if the closed path p is contractible.
 
 p must be a closed path on amesh .
 
@@ -49,7 +49,7 @@ Parameters
 p : const Path_on_surface < Mesh > &
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_is_homotopic_to_simple_cycle = "returns true if the closed path p is homotopic to some simple cycle.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_is_homotopic_to_simple_cycle = "returns true if the closed path p is homotopic to some simple cycle.
 
 p must be a closed path on amesh .
 
@@ -58,12 +58,12 @@ Parameters
 p : const Path_on_surface < Mesh > &
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_compute_edge_width = "returns a non-contractible cycle of type Path_on_surface with minimal number of edges.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_compute_edge_width = "returns a non-contractible cycle of type Path_on_surface with minimal number of edges.
 
 This number of edges is the edge width of the mesh.
 
 Returns: Path_on_surface < Mesh >";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_compute_shortest_non_contractible_cycle = "returns a non-contractible cycle of type Path_on_surface with minimal length, where the length of a cycle is the sum of the weights of its edges computed thanks to the WeightFunctor wf .
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_compute_shortest_non_contractible_cycle = "returns a non-contractible cycle of type Path_on_surface with minimal length, where the length of a cycle is the sum of the weights of its edges computed thanks to the WeightFunctor wf .
 
 By default, all the edge weights are set to 1 (thanks to the
 Unit_weight_functor functor).
@@ -73,7 +73,7 @@ Parameters
 wf : const WeightFunctor &
 
 Returns: Path_on_surface < Mesh >";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_compute_shortest_non_contractible_cycle_with_base_point = "returns a non-contractible cycle of type Path_on_surface with minimal length going through the source vertex of d , where the length of a cycle is the sum of the weights of its edges computed thanks to the WeightFunctor wf .
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_compute_shortest_non_contractible_cycle_with_base_point = "returns a non-contractible cycle of type Path_on_surface with minimal length going through the source vertex of d , where the length of a cycle is the sum of the weights of its edges computed thanks to the WeightFunctor wf .
 
 By default, all the edge weights are set to 1 (thanks to the
 Unit_weight_functor functor).
@@ -84,7 +84,7 @@ d : halfedge_descriptor
 wf : const WeightFunctor &
 
 Returns: Path_on_surface < Mesh >";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_compute_face_width = "returns a vector of darts representing a non-contractible curve with a minimal number of intersection with the graph of the mesh.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_compute_face_width = "returns a vector of darts representing a non-contractible curve with a minimal number of intersection with the graph of the mesh.
 
 This curve can be described by the alternating sequence of faces and vertices
 it goes through, so that each dart in the returned vector belongs to both a
@@ -93,7 +93,7 @@ vertices are viewed as subsets of darts.) The size of the returned vector is
 the face width of the mesh.
 
 Returns: std::vector< halfedge_descriptor >";
-constexpr const char* CGAL_Surface_mesh_topology_Curves_on_surface_topology_set_verbose = "set whether the function should output error message to std::cerr when the prerequisite of the argument(s) is not met.
+constexpr const char* Surface_mesh_topology_Curves_on_surface_topology_set_verbose = "set whether the function should output error message to std::cerr when the prerequisite of the argument(s) is not met.
 
 Affects are_freely_homotopic(p1, p2) , are_homotopic_with_fixed_endpoints(p1,
 p2) , is_contractible(p) , and is_homotopic_to_simple_cycle(p)
@@ -103,41 +103,41 @@ Parameters
 is_verbose : bool";
 
 // CGAL::Surface_mesh_topology::Euclidean_length_weight_functor
-constexpr const char* CGAL_Surface_mesh_topology_Euclidean_length_weight_functor__class__ = "A model of WeightFunctor assigning its Euclidean length to every edge.";
+constexpr const char* Surface_mesh_topology_Euclidean_length_weight_functor__class__ = "A model of WeightFunctor assigning its Euclidean length to every edge.";
 
-constexpr const char* CGAL_Surface_mesh_topology_Euclidean_length_weight_functor_Weight_t = "Number type of the weights.
+constexpr const char* Surface_mesh_topology_Euclidean_length_weight_functor_Weight_t = "Number type of the weights.
 
 Returns: double";
-constexpr const char* CGAL_Surface_mesh_topology_Euclidean_length_weight_functor_Euclidean_length_weight_functor = "creates a Euclidean_length_weight_functor given a mesh.
+constexpr const char* Surface_mesh_topology_Euclidean_length_weight_functor_Euclidean_length_weight_functor = "creates a Euclidean_length_weight_functor given a mesh.
 
 Parameters
 ----------
 m : const Mesh &";
 
 // CGAL::Surface_mesh_topology::Path_on_surface
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface__class__ = "The class Path_on_surface represents a walk in a mesh which is either a model of CombinatorialMap , a model of GeneralizedMap or a model of a FaceGraph .";
+constexpr const char* Surface_mesh_topology_Path_on_surface__class__ = "The class Path_on_surface represents a walk in a mesh which is either a model of CombinatorialMap , a model of GeneralizedMap or a model of a FaceGraph .";
 
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_halfedge_descriptor = "A handle to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.
+constexpr const char* Surface_mesh_topology_Path_on_surface_halfedge_descriptor = "A handle to Dart for combinatorial/generalized maps, or a halfedge descriptor for models of the FaceGraph concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_Path_on_surface = "creates an empty path object which lies on amesh .
+constexpr const char* Surface_mesh_topology_Path_on_surface_Path_on_surface = "creates an empty path object which lies on amesh .
 
 Parameters
 ----------
 amesh : const Mesh &";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_is_empty = "returns true iff this path is empty
+constexpr const char* Surface_mesh_topology_Path_on_surface_is_empty = "returns true iff this path is empty
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_is_closed = "returns true iff this path is closed.
+constexpr const char* Surface_mesh_topology_Path_on_surface_is_closed = "returns true iff this path is closed.
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_is_simple = "returns true iff this path does not pass twice through a same edge or a same vertex.
+constexpr const char* Surface_mesh_topology_Path_on_surface_is_simple = "returns true iff this path does not pass twice through a same edge or a same vertex.
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_length = "returns the length of the path, i.e. its number of edges.
+constexpr const char* Surface_mesh_topology_Path_on_surface_length = "returns the length of the path, i.e. its number of edges.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_operator = "returns the ith dart of the path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_operator = "returns the ith dart of the path.
 
 i< length() .
 
@@ -146,8 +146,8 @@ Parameters
 i : std::size_t
 
 Returns: halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_clear = "clears this path.";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_can_be_pushed = "returns true iff hd can be added at the end of this path. If flip is true, the direction of hd is reversed before checking
+constexpr const char* Surface_mesh_topology_Path_on_surface_clear = "clears this path.";
+constexpr const char* Surface_mesh_topology_Path_on_surface_can_be_pushed = "returns true iff hd can be added at the end of this path. If flip is true, the direction of hd is reversed before checking
 
 Parameters
 ----------
@@ -155,7 +155,7 @@ hd : halfedge_descriptor
 flip : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_push_back = "adds hd at the end of this path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_push_back = "adds hd at the end of this path.
 
 If flip is true, the opposite of hd is considered. can_be_pushed(hd)
 
@@ -163,7 +163,7 @@ Parameters
 ----------
 hd : halfedge_descriptor
 flip : bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_can_be_pushed_by_index = "returns true iff the dart/halfedge with index i can be added at the end of this path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_can_be_pushed_by_index = "returns true iff the dart/halfedge with index i can be added at the end of this path.
 
 If Mesh is a Polyhedron_3 , takes time proportional to the number of
 darts/halfedges.
@@ -173,7 +173,7 @@ Parameters
 i : std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_push_back_by_index = "adds the dart/halfedge with index i at the end of this path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_push_back_by_index = "adds the dart/halfedge with index i at the end of this path.
 
 If Mesh is a Polyhedron_3 , takes time proportional to the number of
 halfedges. can_be_pushed_by_index(i)
@@ -181,7 +181,7 @@ halfedges. can_be_pushed_by_index(i)
 Parameters
 ----------
 i : std::size_t";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_push_back_by_index_1 = "adds successively all dart/halfedges in l (a sequence of indices), at the end of the path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_push_back_by_index_1 = "adds successively all dart/halfedges in l (a sequence of indices), at the end of the path.
 
 If Mesh is a Polyhedron_3 , takes time proportional to the number of
 halfedges. For each index i , can_be_pushed_by_index(i) should be true.
@@ -189,7 +189,7 @@ halfedges. For each index i , can_be_pushed_by_index(i) should be true.
 Parameters
 ----------
 l : std::initializer_list< std::size_t >";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_extend_positive_turn = "adds the dart/halfedge obtained by turning nb times around the target vertex of the last dart/halfedge in this path, in the positive circular order.
+constexpr const char* Surface_mesh_topology_Path_on_surface_extend_positive_turn = "adds the dart/halfedge obtained by turning nb times around the target vertex of the last dart/halfedge in this path, in the positive circular order.
 
 To extend with a positive 1 turn thus amounts to extend with the next()
 pointer. (A zero turn corresponds to the opposite() pointer.) ! is_empty()
@@ -197,7 +197,7 @@ pointer. (A zero turn corresponds to the opposite() pointer.) ! is_empty()
 Parameters
 ----------
 nb : std::size_t";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_extend_negative_turn = "adds the dart/halfedge obtained by turning nb times around the target vertex of the last dart/halfedge in this path, in the negative circular order.
+constexpr const char* Surface_mesh_topology_Path_on_surface_extend_negative_turn = "adds the dart/halfedge obtained by turning nb times around the target vertex of the last dart/halfedge in this path, in the negative circular order.
 
 To extend with a negative 1 turn thus amounts to extend with the composite
 pointer: opposite(prev(opposite())) . ! is_empty()
@@ -205,7 +205,7 @@ pointer: opposite(prev(opposite())) . ! is_empty()
 Parameters
 ----------
 nb : std::size_t";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_can_be_pushed_by_label = "returns true iff the dart/halfedge with label l can be added at the end of this path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_can_be_pushed_by_label = "returns true iff the dart/halfedge with label l can be added at the end of this path.
 
 Mesh must be a model of PolygonalSchema concept.
 
@@ -214,7 +214,7 @@ Parameters
 l : const std::string &
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_push_back_by_label = "adds successively all darts/halfedges in s (a sequence of labels separated by spaces) at the end of this path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_push_back_by_label = "adds successively all darts/halfedges in s (a sequence of labels separated by spaces) at the end of this path.
 
 For each label, l, can_be_pushed_by_label(l) should be true. Mesh must be a
 model of PolygonalSchema concept.
@@ -222,7 +222,7 @@ model of PolygonalSchema concept.
 Parameters
 ----------
 s : const std::string &";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_operator_1 = "concatenates other to this path.
+constexpr const char* Surface_mesh_topology_Path_on_surface_operator_1 = "concatenates other to this path.
 
 the last vertex of this path should coincide with the first vertex of other .
 
@@ -231,14 +231,14 @@ Parameters
 other : const Self &
 
 Returns: Self &";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_reverse = "reverses this path (i.e. negates its orientation).";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_generate_random_path = "creates a random open path with length darts/halfedges.
+constexpr const char* Surface_mesh_topology_Path_on_surface_reverse = "reverses this path (i.e. negates its orientation).";
+constexpr const char* Surface_mesh_topology_Path_on_surface_generate_random_path = "creates a random open path with length darts/halfedges.
 
 Parameters
 ----------
 length : std::size_t
 random : Random &";
-constexpr const char* CGAL_Surface_mesh_topology_Path_on_surface_generate_random_closed_path = "creates a random closed path with at least length darts/halfedges.
+constexpr const char* Surface_mesh_topology_Path_on_surface_generate_random_closed_path = "creates a random closed path with at least length darts/halfedges.
 
 Parameters
 ----------
@@ -246,18 +246,18 @@ length : std::size_t
 random : Random &";
 
 // CGAL::Surface_mesh_topology::Polygonal_schema_min_items
-constexpr const char* CGAL_Surface_mesh_topology_Polygonal_schema_min_items__class__ = "The class Polygonal_schema_min_items defines a struct with a std::string as the information associated with darts, and no attribute is enabled.";
+constexpr const char* Surface_mesh_topology_Polygonal_schema_min_items__class__ = "The class Polygonal_schema_min_items defines a struct with a std::string as the information associated with darts, and no attribute is enabled.";
 
 // CGAL::Surface_mesh_topology::Polygonal_schema_with_combinatorial_map
-constexpr const char* CGAL_Surface_mesh_topology_Polygonal_schema_with_combinatorial_map__class__ = "The class Polygonal_schema_with_combinatorial_map is a model of PolygonalSchema using Combinatorial_map as underlying model.";
+constexpr const char* Surface_mesh_topology_Polygonal_schema_with_combinatorial_map__class__ = "The class Polygonal_schema_with_combinatorial_map is a model of PolygonalSchema using Combinatorial_map as underlying model.";
 
 // CGAL::Surface_mesh_topology::Polygonal_schema_with_generalized_map
-constexpr const char* CGAL_Surface_mesh_topology_Polygonal_schema_with_generalized_map__class__ = "The class Polygonal_schema_with_generalized_map is a model of PolygonalSchema using Generalized_map as underlying model.";
+constexpr const char* Surface_mesh_topology_Polygonal_schema_with_generalized_map__class__ = "The class Polygonal_schema_with_generalized_map is a model of PolygonalSchema using Generalized_map as underlying model.";
 
 // CGAL::Surface_mesh_topology::Unit_weight_functor
-constexpr const char* CGAL_Surface_mesh_topology_Unit_weight_functor__class__ = "A model of WeightFunctor assigning unit weight to every edge.";
+constexpr const char* Surface_mesh_topology_Unit_weight_functor__class__ = "A model of WeightFunctor assigning unit weight to every edge.";
 
-constexpr const char* CGAL_Surface_mesh_topology_Unit_weight_functor_Weight_t = "Number type of the weights.
+constexpr const char* Surface_mesh_topology_Unit_weight_functor_Weight_t = "Number type of the weights.
 
 Returns: unsigned int";
 

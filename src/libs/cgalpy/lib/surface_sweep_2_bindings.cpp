@@ -15,6 +15,21 @@
 
 namespace py = nanobind;
 
+// Docstrings
+namespace {
+  const char* COMPUTE_INTERSECTION_POINTS_DOC = R"pbdoc(
+Compute all intersection points induced by a range of input curves.
+)pbdoc";
+
+  const char* COMPUTE_SUBCURVES_DOC = R"pbdoc(
+Compute all x-monotone subcurves disjoint in their interiors induced by a range of input curves.
+)pbdoc";
+
+  const char* DO_CURVES_INTERSECT_DOC = R"pbdoc(
+Determine whether any pair of curves in a given range intersect.
+)pbdoc";
+}
+
 namespace ss2 {
 
 // Binding for computing all intersection points induced by a range of input curves.
@@ -164,20 +179,26 @@ bool do_intersect1(py::list& curves, bool consider_common_endpoints, const Geome
 //
 void export_surface_sweep_2(py::module_& m) {
   m.def("compute_intersection_points", &ss2::compute_intersection_points0,
+        COMPUTE_INTERSECTION_POINTS_DOC,
         py::arg("curves"), py::arg("report_endpoints") = false)
     .def("compute_intersection_points", &ss2::compute_intersection_points1,
+         COMPUTE_INTERSECTION_POINTS_DOC,
          py::arg("curves"), py::arg("report_endpoints"), py::arg("traits"))
     ;
 
   m.def("compute_subcurves", &ss2::compute_subcurves0,
+        COMPUTE_SUBCURVES_DOC,
         py::arg("curves"), py::arg("mult_overlaps") = false)
     .def("compute_subcurves", &ss2::compute_subcurves1,
+         COMPUTE_SUBCURVES_DOC,
          py::arg("curves"), py::arg("mult_overlaps"), py::arg("traits"))
     ;
 
   m.def("do_intersect", &ss2::do_intersect0,
+        DO_CURVES_INTERSECT_DOC,
         py::arg("curves"), py::arg("consider_common_endpoints") = true)
     .def("do_intersect", &ss2::do_intersect1,
-         py::arg("curves"), py::arg("consider_common_endpoints"), py::arg("traits"))
+        DO_CURVES_INTERSECT_DOC,
+        py::arg("curves"), py::arg("consider_common_endpoints"), py::arg("traits"))
     ;
 }

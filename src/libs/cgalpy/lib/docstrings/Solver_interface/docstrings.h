@@ -8,16 +8,16 @@ namespace docstrings {
 namespace Solver_interface {
 
 // CGAL::Eigen_diagonalize_traits
-constexpr const char* CGAL_Eigen_diagonalize_traits__class__ = "The class Eigen_diagonalize_traits provides an interface to the diagonalization of covariance matrices of Eigen.";
+constexpr const char* Eigen_diagonalize_traits__class__ = "The class Eigen_diagonalize_traits provides an interface to the diagonalization of covariance matrices of Eigen.";
 
-constexpr const char* CGAL_Eigen_diagonalize_traits_construct_covariance_matrix = "Construct the covariance matrix.
+constexpr const char* Eigen_diagonalize_traits_construct_covariance_matrix = "Construct the covariance matrix.
 
 Parameters
 ----------
 cov : const Covariance_matrix &
 
 Returns: EigenMatrix";
-constexpr const char* CGAL_Eigen_diagonalize_traits_diagonalize_selfadjoint_matrix = "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the selfadjoint matrix represented by m .
+constexpr const char* Eigen_diagonalize_traits_diagonalize_selfadjoint_matrix = "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the selfadjoint matrix represented by m .
 
 Eigenvalues are sorted by increasing order. true if the operation was
 successful and false otherwise.
@@ -29,7 +29,7 @@ eigenvectors : EigenMatrix &
 eigenvalues : EigenVector &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_diagonalize_traits_diagonalize_selfadjoint_covariance_matrix = "Fill eigenvalues with the eigenvalues of the covariance matrix represented by cov .
+constexpr const char* Eigen_diagonalize_traits_diagonalize_selfadjoint_covariance_matrix = "Fill eigenvalues with the eigenvalues of the covariance matrix represented by cov .
 
 Eigenvalues are sorted by increasing order. true if the operation was
 successful and false otherwise.
@@ -40,7 +40,7 @@ cov : const Covariance_matrix &
 eigenvalues : Vector &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_diagonalize_traits_diagonalize_selfadjoint_covariance_matrix_1 = "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the covariance matrix represented by cov .
+constexpr const char* Eigen_diagonalize_traits_diagonalize_selfadjoint_covariance_matrix_1 = "Fill eigenvalues with the eigenvalues and eigenvectors with the eigenvectors of the covariance matrix represented by cov .
 
 Eigenvalues are sorted by increasing order. true if the operation was
 successful and false otherwise.
@@ -52,7 +52,7 @@ eigenvalues : Vector &
 eigenvectors : Matrix &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_diagonalize_traits_extract_largest_eigenvector_of_covariance_matrix = "Extract the eigenvector associated to the largest eigenvalue of the covariance matrix represented by cov .
+constexpr const char* Eigen_diagonalize_traits_extract_largest_eigenvector_of_covariance_matrix = "Extract the eigenvector associated to the largest eigenvalue of the covariance matrix represented by cov .
 
 true if the operation was successful and false otherwise.
 
@@ -64,13 +64,13 @@ normal : Vector &
 Returns: bool";
 
 // CGAL::Eigen_matrix
-constexpr const char* CGAL_Eigen_matrix__class__ = "The class Eigen_matrix is a wrapper around Eigen matrix type Eigen::Matrix .";
+constexpr const char* Eigen_matrix__class__ = "The class Eigen_matrix is a wrapper around Eigen matrix type Eigen::Matrix .";
 
-constexpr const char* CGAL_Eigen_matrix_EigenType = "The internal matrix type from Eigen.
+constexpr const char* Eigen_matrix_EigenType = "The internal matrix type from Eigen.
 
 Returns: ::Eigen::Matrix< FT, D1, D2 >";
-constexpr const char* CGAL_Eigen_matrix_Eigen_matrix = "Constructs a null matrix.";
-constexpr const char* CGAL_Eigen_matrix_Eigen_matrix_1 = "Constructs an uninitialized matrix with nr rows and nc columns.
+constexpr const char* Eigen_matrix_Eigen_matrix = "Constructs a null matrix.";
+constexpr const char* Eigen_matrix_Eigen_matrix_1 = "Constructs an uninitialized matrix with nr rows and nc columns.
 
 This is useful for dynamic-size matrices. For fixed-size matrices, it is
 redundant to pass these parameters.
@@ -79,18 +79,18 @@ Parameters
 ----------
 nr : std::size_t
 nc : std::size_t";
-constexpr const char* CGAL_Eigen_matrix_Eigen_matrix_2 = "Constructs a matrix from an Eigen matrix.
+constexpr const char* Eigen_matrix_Eigen_matrix_2 = "Constructs a matrix from an Eigen matrix.
 
 Parameters
 ----------
 b : const EigenType &";
-constexpr const char* CGAL_Eigen_matrix_number_of_rows = "Returns the matrix number of rows.
+constexpr const char* Eigen_matrix_number_of_rows = "Returns the matrix number of rows.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Eigen_matrix_number_of_columns = "Returns the matrix number of columns.
+constexpr const char* Eigen_matrix_number_of_columns = "Returns the matrix number of columns.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Eigen_matrix_operator = "Returns the value of the matrix at position (i,j).
+constexpr const char* Eigen_matrix_operator = "Returns the value of the matrix at position (i,j).
 
 Parameters
 ----------
@@ -98,31 +98,31 @@ i : std::size_t
 j : std::size_t
 
 Returns: FT";
-constexpr const char* CGAL_Eigen_matrix_set = "Writes access to a matrix coefficient: a_ij <- val .
+constexpr const char* Eigen_matrix_set = "Writes access to a matrix coefficient: a_ij <- val .
 
 Parameters
 ----------
 i : std::size_t
 j : std::size_t
 value : FT";
-constexpr const char* CGAL_Eigen_matrix_eigen_object = "Returns the internal matrix, with type EigenType .
+constexpr const char* Eigen_matrix_eigen_object = "Returns the internal matrix, with type EigenType .
 
 Returns: const EigenType &";
 
 // CGAL::Eigen_solver_traits
-constexpr const char* CGAL_Eigen_solver_traits__class__ = "The class Eigen_solver_traits provides an interface to the sparse solvers of Eigen.";
+constexpr const char* Eigen_solver_traits__class__ = "The class Eigen_solver_traits provides an interface to the sparse solvers of Eigen.";
 
-constexpr const char* CGAL_Eigen_solver_traits_Matrix = "If T is Eigen::ConjugateGradient<M> or Eigen::SimplicialCholesky<M> , Matrix is CGAL::Eigen_sparse_symmetric_matrix <T> , and CGAL::Eigen_sparse_matrix <T> otherwise.
+constexpr const char* Eigen_solver_traits_Matrix = "If T is Eigen::ConjugateGradient<M> or Eigen::SimplicialCholesky<M> , Matrix is CGAL::Eigen_sparse_symmetric_matrix <T> , and CGAL::Eigen_sparse_matrix <T> otherwise.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Eigen_solver_traits_solver = "Returns a reference to the internal Eigen solver.
+constexpr const char* Eigen_solver_traits_solver = "Returns a reference to the internal Eigen solver.
 
 This function can be used for example to set specific parameters of the
 solver.
 
 Returns: EigenSolverT &";
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_solver_traits = "Constructor.";
-constexpr const char* CGAL_Eigen_solver_traits_linear_solver = "Solve the sparse linear system $ A \\times X = B $ .
+constexpr const char* Eigen_solver_traits_Eigen_solver_traits = "Constructor.";
+constexpr const char* Eigen_solver_traits_linear_solver = "Solve the sparse linear system $ A \\times X = B $ .
 
 Return true on success. The solution is then $ (1/D) \\times X $ .
 A.row_dimension() == B.dimension(). A.column_dimension() == X.dimension().
@@ -135,7 +135,7 @@ X : Vector &
 D : NT &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_factor = "Factorize the sparse matrix $ A $ .
+constexpr const char* Eigen_solver_traits_factor = "Factorize the sparse matrix $ A $ .
 
 This factorization is used in linear_solver() to solve the system for
 different right-hand side vectors. See linear_solver() for the description of
@@ -147,7 +147,7 @@ A : const Matrix &
 D : NT &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_linear_solver_1 = "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in factor() .
+constexpr const char* Eigen_solver_traits_linear_solver_1 = "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in factor() .
 
 true if the solver is successful and false otherwise.
 
@@ -157,7 +157,7 @@ B : const Vector &
 X : Vector &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_linear_solver_2 = "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in factor() .
+constexpr const char* Eigen_solver_traits_linear_solver_2 = "Solve the sparse linear system $ A \\times X = B$ , with $ A $ being the matrix provided in factor() .
 
 true if the solver is successful and false otherwise.
 
@@ -167,7 +167,7 @@ B : const Matrix &
 X : Vector &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_normal_equation_factor = "Factorize the sparse matrix $ A^t \\times A$ , where $ A^t $ is the transpose matrix of $ A $ .
+constexpr const char* Eigen_solver_traits_normal_equation_factor = "Factorize the sparse matrix $ A^t \\times A$ , where $ A^t $ is the transpose matrix of $ A $ .
 
 This factorization is used in normal_equation_solver() to solve the system for
 different right-hand side vectors. true if the factorization is successful and
@@ -178,7 +178,7 @@ Parameters
 A : const Matrix &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_normal_equation_solver = "Solve the sparse linear system $ A^t \\times A \\times X = A^t \\times B $ , with $ A $ being the matrix provided in # normal_equation_factor() , and $ A^t $ its transpose matrix.
+constexpr const char* Eigen_solver_traits_normal_equation_solver = "Solve the sparse linear system $ A^t \\times A \\times X = A^t \\times B $ , with $ A $ being the matrix provided in # normal_equation_factor() , and $ A^t $ its transpose matrix.
 
 true if the solver is successful and false otherwise.
 
@@ -188,7 +188,7 @@ B : const Vector &
 X : Vector &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_normal_equation_solver_1 = "Equivalent to a call to normal_equation_factor(A) followed by a call to normal_equation_solver(B, X) .
+constexpr const char* Eigen_solver_traits_normal_equation_solver_1 = "Equivalent to a call to normal_equation_factor(A) followed by a call to normal_equation_solver(B, X) .
 
 Parameters
 ----------
@@ -198,14 +198,14 @@ X : Vector &
 
 Returns: bool";
 
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_Eigen_solver_traits = "Constructor.";
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_solver = "Returns a reference to the internal Eigen solver.
+constexpr const char* Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_Eigen_solver_traits = "Constructor.";
+constexpr const char* Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_solver = "Returns a reference to the internal Eigen solver.
 
 This function can be used for example to set specific parameters of the
 solver.
 
 Returns: EigenSolverT &";
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_linear_solver = "Solve the sparse linear system $ A \\times X = B $ .
+constexpr const char* Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_linear_solver = "Solve the sparse linear system $ A \\times X = B $ .
 
 Return true on success. The solution is then $ (1/D) \\times X $ .
 A.row_dimension() == B.dimension(). A.column_dimension() == X.dimension().
@@ -218,7 +218,7 @@ X : Vector &
 D : NT &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_factor = "Factorize the sparse matrix $ A $ .
+constexpr const char* Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_factor = "Factorize the sparse matrix $ A $ .
 
 This factorization is used in linear_solver() to solve the system for
 different right-hand side vectors. See linear_solver() for the description of
@@ -230,7 +230,7 @@ A : const Matrix &
 D : NT &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_normal_equation_factor = "Factorize the sparse matrix $ A^t \\times A$ , where $ A^t $ is the transpose matrix of $ A $ .
+constexpr const char* Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_normal_equation_factor = "Factorize the sparse matrix $ A^t \\times A$ , where $ A^t $ is the transpose matrix of $ A $ .
 
 This factorization is used in normal_equation_solver() to solve the system for
 different right-hand side vectors. true if the factorization is successful and
@@ -241,7 +241,7 @@ Parameters
 A : const Matrix &
 
 Returns: bool";
-constexpr const char* CGAL_Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_normal_equation_solver = "Solve the sparse linear system $ A^t \\times A \\times X = A^t \\times B $ , with $ A $ being the matrix provided in # normal_equation_factor() , and $ A^t $ its transpose matrix.
+constexpr const char* Eigen_solver_traits_Eigen_BiCGSTAB_Eigen_sparse_matrix_double_EigenType_normal_equation_solver = "Solve the sparse linear system $ A^t \\times A \\times X = A^t \\times B $ , with $ A $ being the matrix provided in # normal_equation_factor() , and $ A^t $ its transpose matrix.
 
 true if the solver is successful and false otherwise.
 
@@ -253,24 +253,24 @@ X : Vector &
 Returns: bool";
 
 // CGAL::Eigen_sparse_matrix
-constexpr const char* CGAL_Eigen_sparse_matrix__class__ = "The class Eigen_sparse_matrix is a wrapper around Eigen matrix type Eigen::SparseMatrix that represents general matrices, be they symmetric or not.";
+constexpr const char* Eigen_sparse_matrix__class__ = "The class Eigen_sparse_matrix is a wrapper around Eigen matrix type Eigen::SparseMatrix that represents general matrices, be they symmetric or not.";
 
-constexpr const char* CGAL_Eigen_sparse_matrix_EigenType = "The internal matrix type from Eigen.
+constexpr const char* Eigen_sparse_matrix_EigenType = "The internal matrix type from Eigen.
 
 Returns: Eigen::SparseMatrix< T >";
-constexpr const char* CGAL_Eigen_sparse_matrix_Eigen_sparse_matrix = "Create a square matrix initialized with zeros.
+constexpr const char* Eigen_sparse_matrix_Eigen_sparse_matrix = "Create a square matrix initialized with zeros.
 
 Parameters
 ----------
 dim : std::size_t  —  Matrix dimension.
 is_symmetric : bool  —  Symmetric/hermitian?";
-constexpr const char* CGAL_Eigen_sparse_matrix_Eigen_sparse_matrix_1 = "Create a square matrix initialized with zeros.
+constexpr const char* Eigen_sparse_matrix_Eigen_sparse_matrix_1 = "Create a square matrix initialized with zeros.
 
 Parameters
 ----------
 dim : int  —  Matrix dimension.
 is_symmetric : bool  —  Symmetric/hermitian?";
-constexpr const char* CGAL_Eigen_sparse_matrix_Eigen_sparse_matrix_2 = "Create a rectangular matrix initialized with zeros.
+constexpr const char* Eigen_sparse_matrix_Eigen_sparse_matrix_2 = "Create a rectangular matrix initialized with zeros.
 
 rows == columns if is_symmetric is true.
 
@@ -279,8 +279,8 @@ Parameters
 rows : std::size_t  —  Number of rows.
 columns : std::size_t  —  Number of columns.
 is_symmetric : bool  —  Symmetric/hermitian?";
-constexpr const char* CGAL_Eigen_sparse_matrix_Eigen_sparse_matrix_3 = "Delete this object and the wrapped matrix.";
-constexpr const char* CGAL_Eigen_sparse_matrix_Eigen_sparse_matrix_4 = "Create a rectangular matrix initialized with zeros.
+constexpr const char* Eigen_sparse_matrix_Eigen_sparse_matrix_3 = "Delete this object and the wrapped matrix.";
+constexpr const char* Eigen_sparse_matrix_Eigen_sparse_matrix_4 = "Create a rectangular matrix initialized with zeros.
 
 rows == columns if is_symmetric is true.
 
@@ -289,13 +289,13 @@ Parameters
 rows : int  —  Number of rows.
 columns : int  —  Number of columns.
 is_symmetric : bool  —  Symmetric/hermitian?";
-constexpr const char* CGAL_Eigen_sparse_matrix_row_dimension = "Return the matrix number of rows.
+constexpr const char* Eigen_sparse_matrix_row_dimension = "Return the matrix number of rows.
 
 Returns: int";
-constexpr const char* CGAL_Eigen_sparse_matrix_column_dimension = "Return the matrix number of columns.
+constexpr const char* Eigen_sparse_matrix_column_dimension = "Return the matrix number of columns.
 
 Returns: int";
-constexpr const char* CGAL_Eigen_sparse_matrix_set_coef = "Write access to a matrix coefficient: a_ij <- val.
+constexpr const char* Eigen_sparse_matrix_set_coef = "Write access to a matrix coefficient: a_ij <- val.
 
 Users can optimize calls to this function by setting 'new_coef' to true if the
 coefficient does not already exist in the matrix. For symmetric matrices,
@@ -309,7 +309,7 @@ i_ : std::size_t
 j_ : std::size_t
 val : T
 new_coef : bool";
-constexpr const char* CGAL_Eigen_sparse_matrix_add_coef = "Write access to a matrix coefficient: a_ij <- a_ij + val.
+constexpr const char* Eigen_sparse_matrix_add_coef = "Write access to a matrix coefficient: a_ij <- a_ij + val.
 
 For symmetric matrices, Eigen_sparse_matrix only stores the lower triangle
 add_coef() does nothing if (i, j) belongs to the upper triangle. 0 <= i <
@@ -320,7 +320,7 @@ Parameters
 i_ : std::size_t
 j_ : std::size_t
 val : T";
-constexpr const char* CGAL_Eigen_sparse_matrix_get_coef = "Read access to a matrix coefficient.
+constexpr const char* Eigen_sparse_matrix_get_coef = "Read access to a matrix coefficient.
 
 Complexity: $O(log(n))$ if the matrix is already built. $O(n)$ if the matrix
 is not built. n being the number of entries in the matrix. 0 <= i <
@@ -332,22 +332,22 @@ i_ : std::size_t
 j_ : std::size_t
 
 Returns: NT";
-constexpr const char* CGAL_Eigen_sparse_matrix_eigen_object = "Return the internal matrix, with type EigenType .
+constexpr const char* Eigen_sparse_matrix_eigen_object = "Return the internal matrix, with type EigenType .
 
 Returns: const EigenType &";
-constexpr const char* CGAL_Eigen_sparse_matrix_eigen_object_1 = "Return the internal matrix, with type EigenType .
+constexpr const char* Eigen_sparse_matrix_eigen_object_1 = "Return the internal matrix, with type EigenType .
 
 Returns: EigenType &";
 
 // CGAL::Eigen_sparse_symmetric_matrix
-constexpr const char* CGAL_Eigen_sparse_symmetric_matrix__class__ = "The class Eigen_sparse_symmetric_matrix is a wrapper around Eigen matrix type Eigen::SparseMatrix .";
+constexpr const char* Eigen_sparse_symmetric_matrix__class__ = "The class Eigen_sparse_symmetric_matrix is a wrapper around Eigen matrix type Eigen::SparseMatrix .";
 
-constexpr const char* CGAL_Eigen_sparse_symmetric_matrix_Eigen_sparse_symmetric_matrix = "Create a square symmetric matrix initialized with zeros.
+constexpr const char* Eigen_sparse_symmetric_matrix_Eigen_sparse_symmetric_matrix = "Create a square symmetric matrix initialized with zeros.
 
 Parameters
 ----------
 dim : int  —  Matrix dimension.";
-constexpr const char* CGAL_Eigen_sparse_symmetric_matrix_Eigen_sparse_symmetric_matrix_1 = "Create a square symmetric matrix initialized with zeros.
+constexpr const char* Eigen_sparse_symmetric_matrix_Eigen_sparse_symmetric_matrix_1 = "Create a square symmetric matrix initialized with zeros.
 
 rows == columns.
 
@@ -357,9 +357,9 @@ rows : int  —  Number of rows.
 columns : int  —  Number of columns.";
 
 // CGAL::Eigen_svd
-constexpr const char* CGAL_Eigen_svd__class__ = "The class Eigen_svd provides an algorithm to solve in the least square sense a linear system with a singular value decomposition using thirdpartyEigen.";
+constexpr const char* Eigen_svd__class__ = "The class Eigen_svd provides an algorithm to solve in the least square sense a linear system with a singular value decomposition using thirdpartyEigen.";
 
-constexpr const char* CGAL_Eigen_svd_solve = "Solves the system $ MX=B$ (in the least square sense if $ M$ is not square) using a singular value decomposition.The solution is stored in $ B$ .
+constexpr const char* Eigen_svd_solve = "Solves the system $ MX=B$ (in the least square sense if $ M$ is not square) using a singular value decomposition.The solution is stored in $ B$ .
 
 the condition number of $ M$
 
@@ -371,65 +371,65 @@ B : Vector &
 Returns: FT";
 
 // CGAL::Eigen_vector
-constexpr const char* CGAL_Eigen_vector__class__ = "The class Eigen_vector is a wrapper around Eigen vector type , which is a simple array of numbers.";
+constexpr const char* Eigen_vector__class__ = "The class Eigen_vector is a wrapper around Eigen vector type , which is a simple array of numbers.";
 
-constexpr const char* CGAL_Eigen_vector_EigenType = "The internal vector type from Eigen.
+constexpr const char* Eigen_vector_EigenType = "The internal vector type from Eigen.
 
 Returns: ::Eigen::Matrix< T, D, 1 >";
-constexpr const char* CGAL_Eigen_vector_Eigen_vector = "Constructs a null vector.";
-constexpr const char* CGAL_Eigen_vector_Eigen_vector_1 = "Create a vector initialized with zeros.
+constexpr const char* Eigen_vector_Eigen_vector = "Constructs a null vector.";
+constexpr const char* Eigen_vector_Eigen_vector_1 = "Create a vector initialized with zeros.
 
 Parameters
 ----------
 dimension : std::size_t";
-constexpr const char* CGAL_Eigen_vector_Eigen_vector_2 = "Copy constructor.
+constexpr const char* Eigen_vector_Eigen_vector_2 = "Copy constructor.
 
 Parameters
 ----------
 toCopy : const Eigen_vector &";
-constexpr const char* CGAL_Eigen_vector_dimension = "Return the vector's number of coefficients.
+constexpr const char* Eigen_vector_dimension = "Return the vector's number of coefficients.
 
 Returns: int";
-constexpr const char* CGAL_Eigen_vector_eigen_object = "Return the internal vector wrapped by this object.
+constexpr const char* Eigen_vector_eigen_object = "Return the internal vector wrapped by this object.
 
 Returns: const EigenType &";
-constexpr const char* CGAL_Eigen_vector_eigen_object_1 = "Return the internal vector wrapped by this object.
+constexpr const char* Eigen_vector_eigen_object_1 = "Return the internal vector wrapped by this object.
 
 Returns: EigenType &";
-constexpr const char* CGAL_Eigen_vector_set = "Write access to a vector coefficient: a_i <- value .
+constexpr const char* Eigen_vector_set = "Write access to a vector coefficient: a_i <- value .
 
 Parameters
 ----------
 i : std::size_t
 value : NT";
-constexpr const char* CGAL_Eigen_vector_vector = "Return a pointer to the data array of this vector.
+constexpr const char* Eigen_vector_vector = "Return a pointer to the data array of this vector.
 
 Returns: NT *";
 
 // CGAL::GLPK_mixed_integer_program_traits
-constexpr const char* CGAL_GLPK_mixed_integer_program_traits__class__ = "This class provides an interface for formulating and solving constrained or unconstrained mixed integer programs using thirdpartyGLPK, which must be available on the system.";
+constexpr const char* GLPK_mixed_integer_program_traits__class__ = "This class provides an interface for formulating and solving constrained or unconstrained mixed integer programs using thirdpartyGLPK, which must be available on the system.";
 
 // CGAL::Linear_constraint
-constexpr const char* CGAL_Linear_constraint__class__ = "The linear constraint of a mixed integer program.";
+constexpr const char* Linear_constraint__class__ = "The linear constraint of a mixed integer program.";
 
 // CGAL::Linear_objective
-constexpr const char* CGAL_Linear_objective__class__ = "The linear objective of a mixed integer program.";
+constexpr const char* Linear_objective__class__ = "The linear objective of a mixed integer program.";
 
 // CGAL::Mixed_integer_program_traits
-constexpr const char* CGAL_Mixed_integer_program_traits__class__ = "The class CGAL::Mixed_integer_program_traits provides an interface for formulating and solving (constrained or unconstrained) mixed integer programs.";
+constexpr const char* Mixed_integer_program_traits__class__ = "The class CGAL::Mixed_integer_program_traits provides an interface for formulating and solving (constrained or unconstrained) mixed integer programs.";
 
 // CGAL::OSQP_quadratic_program_traits
-constexpr const char* CGAL_OSQP_quadratic_program_traits__class__ = "wraps the external OSQP solver.";
+constexpr const char* OSQP_quadratic_program_traits__class__ = "wraps the external OSQP solver.";
 
-constexpr const char* CGAL_OSQP_quadratic_program_traits_OSQP_quadratic_program_traits = "Default constructor";
-constexpr const char* CGAL_OSQP_quadratic_program_traits_OSQP_quadratic_program_traits_1 = "Constructor.
+constexpr const char* OSQP_quadratic_program_traits_OSQP_quadratic_program_traits = "Default constructor";
+constexpr const char* OSQP_quadratic_program_traits_OSQP_quadratic_program_traits_1 = "Constructor.
 
 n the number of variables
 
 Parameters
 ----------
 n : const std::size_t";
-constexpr const char* CGAL_OSQP_quadratic_program_traits_OSQP_quadratic_program_traits_2 = "Constructor.
+constexpr const char* OSQP_quadratic_program_traits_OSQP_quadratic_program_traits_2 = "Constructor.
 
 n the number of variables m the number of constraints
 
@@ -437,8 +437,8 @@ Parameters
 ----------
 n : const std::size_t
 m : const std::size_t";
-constexpr const char* CGAL_OSQP_quadratic_program_traits_clear = "Resets the problem, removing all existing entries and setting sizes to 0 .";
-constexpr const char* CGAL_OSQP_quadratic_program_traits_resize = "Changes the number of variables and the number of constraints of the problem.
+constexpr const char* OSQP_quadratic_program_traits_clear = "Resets the problem, removing all existing entries and setting sizes to 0 .";
+constexpr const char* OSQP_quadratic_program_traits_resize = "Changes the number of variables and the number of constraints of the problem.
 
 Calling this function also clears all previous entries.
 
@@ -448,10 +448,10 @@ new_n : const std::size_t
 new_m : const std::size_t";
 
 // CGAL::SCIP_mixed_integer_program_traits
-constexpr const char* CGAL_SCIP_mixed_integer_program_traits__class__ = "This class provides an interface for formulating and solving constrained or unconstrained mixed integer programs using thirdpartySCIP (which must be available on the system).";
+constexpr const char* SCIP_mixed_integer_program_traits__class__ = "This class provides an interface for formulating and solving constrained or unconstrained mixed integer programs using thirdpartySCIP (which must be available on the system).";
 
 // CGAL::Variable
-constexpr const char* CGAL_Variable__class__ = "The variable of a mixed integer program.";
+constexpr const char* Variable__class__ = "The variable of a mixed integer program.";
 
 // DiagonalizeTraits
 constexpr const char* DiagonalizeTraits__class__ = "Concept providing functions to extract eigenvectors and eigenvalues from covariance matrices represented by an array a , using symmetric diagonalization.";

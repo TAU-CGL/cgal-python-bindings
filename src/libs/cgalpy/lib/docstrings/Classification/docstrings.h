@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Classification {
 
 // CGAL::Classification::Classifier
-constexpr const char* CGAL_Classification_Classifier__class__ = "Concept describing a classifier used by classification functions (see CGAL::Classification::classify() , CGAL::Classification::classify_with_local_smoothing() and CGAL::Classification::classify_with_graphcut() ).";
+constexpr const char* Classification_Classifier__class__ = "Concept describing a classifier used by classification functions (see CGAL::Classification::classify() , CGAL::Classification::classify_with_local_smoothing() and CGAL::Classification::classify_with_graphcut() ).";
 
-constexpr const char* CGAL_Classification_Classifier_operator = "Computes for each label indexed from 0 to out.size() , the probability (between 0 and 1) that the item at item_index belongs to this label.
+constexpr const char* Classification_Classifier_operator = "Computes for each label indexed from 0 to out.size() , the probability (between 0 and 1) that the item at item_index belongs to this label.
 
 Parameters
 ----------
@@ -18,9 +18,9 @@ item_index : std::size_t
 out : std::vector< float > &";
 
 // CGAL::Classification::Cluster
-constexpr const char* CGAL_Classification_Cluster__class__ = "Class that represent a cluster of items to be classified as a single atomic object.";
+constexpr const char* Classification_Cluster__class__ = "Class that represent a cluster of items to be classified as a single atomic object.";
 
-constexpr const char* CGAL_Classification_Cluster_Cluster = "Constructs an empty cluster of items.
+constexpr const char* Classification_Cluster_Cluster = "Constructs an empty cluster of items.
 
 Items in the clusters will be subsets of range . range input range. item_map
 property map to access the input items.
@@ -29,55 +29,55 @@ Parameters
 ----------
 range : const ItemRange &
 item_map : ItemMap";
-constexpr const char* CGAL_Classification_Cluster_clear = "Clears the cluster.";
-constexpr const char* CGAL_Classification_Cluster_insert = "inserts element of index idx in the cluster.
+constexpr const char* Classification_Cluster_clear = "Clears the cluster.";
+constexpr const char* Classification_Cluster_insert = "inserts element of index idx in the cluster.
 
 Parameters
 ----------
 idx : std::size_t";
-constexpr const char* CGAL_Classification_Cluster_size = "returns the number of items in the cluster.
+constexpr const char* Classification_Cluster_size = "returns the number of items in the cluster.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Cluster_index = "returns the index (in the input range) of the i^{th} element of the cluster.
+constexpr const char* Classification_Cluster_index = "returns the index (in the input range) of the i^{th} element of the cluster.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Cluster_operator = "returns the i^{th} item of the cluster.
+constexpr const char* Classification_Cluster_operator = "returns the i^{th} item of the cluster.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: const Item &";
-constexpr const char* CGAL_Classification_Cluster_bbox = "returns the bounding box of the cluster.
+constexpr const char* Classification_Cluster_bbox = "returns the bounding box of the cluster.
 
 Returns: const CGAL::Bbox_3 &";
-constexpr const char* CGAL_Classification_Cluster_training = "returns the input classification value used for training.
+constexpr const char* Classification_Cluster_training = "returns the input classification value used for training.
 
 Returns: int";
-constexpr const char* CGAL_Classification_Cluster_training_1 = "returns a reference to the input classification value used for training.
+constexpr const char* Classification_Cluster_training_1 = "returns a reference to the input classification value used for training.
 
 Returns: int &";
-constexpr const char* CGAL_Classification_Cluster_label = "returns the output classification value.
+constexpr const char* Classification_Cluster_label = "returns the output classification value.
 
 Returns: int";
-constexpr const char* CGAL_Classification_Cluster_label_1 = "returns a reference to the output classification value.
+constexpr const char* Classification_Cluster_label_1 = "returns a reference to the output classification value.
 
 Returns: int &";
 
 // CGAL::Classification::ETHZ::Random_forest_classifier
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier__class__ = "Classifier based on the ETH Zurich version of the random forest algorithm [2] .";
+constexpr const char* Classification_ETHZ_Random_forest_classifier__class__ = "Classifier based on the ETH Zurich version of the random forest algorithm [2] .";
 
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_Random_forest_classifier = "instantiates the classifier using the sets of labels and features .
+constexpr const char* Classification_ETHZ_Random_forest_classifier_Random_forest_classifier = "instantiates the classifier using the sets of labels and features .
 
 Parameters
 ----------
 labels : const Label_set &
 features : const Feature_set &";
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_Random_forest_classifier_1 = "copies the other classifier's configuration using another set of features .
+constexpr const char* Classification_ETHZ_Random_forest_classifier_Random_forest_classifier_1 = "copies the other classifier's configuration using another set of features .
 
 This constructor can be used to apply a trained random forest to another data
 set. The feature set should be composed of the same features than the ones
@@ -87,7 +87,7 @@ Parameters
 ----------
 other : const Random_forest_classifier &
 features : const Feature_set &";
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_train = "runs the training algorithm.
+constexpr const char* Classification_ETHZ_Random_forest_classifier_train = "runs the training algorithm.
 
 From the set of provided ground truth, this algorithm estimates sets up the
 random trees that produce the most accurate result with respect to this ground
@@ -113,7 +113,7 @@ ground_truth : const LabelIndexRange &
 reset_trees : bool
 num_trees : std::size_t
 max_depth : std::size_t";
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_get_feature_usage = "computes, for each feature, how many nodes in the forest uses it as a split criterion.
+constexpr const char* Classification_ETHZ_Random_forest_classifier_get_feature_usage = "computes, for each feature, how many nodes in the forest uses it as a split criterion.
 
 Each tree of the random forest recursively splits the training data set using
 at each node one of the input features. This method counts, for each feature,
@@ -132,7 +132,7 @@ feature set order.
 Parameters
 ----------
 count : std::vector< std::size_t > &";
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_save_configuration = "saves the current configuration in the stream output .
+constexpr const char* Classification_ETHZ_Random_forest_classifier_save_configuration = "saves the current configuration in the stream output .
 
 This allows to easily save and recover a specific classification
 configuration. The output file is written in a binary format that is readable
@@ -141,7 +141,7 @@ by the load_configuration() method.
 Parameters
 ----------
 output : std::ostream &";
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_load_configuration = "loads a configuration from the stream input .
+constexpr const char* Classification_ETHZ_Random_forest_classifier_load_configuration = "loads a configuration from the stream input .
 
 The input file should be a binary file written by the save_configuration()
 method. The feature set of the classifier should contain the exact same
@@ -154,7 +154,7 @@ ETHZ Random Forest changed in CGAL 5.2.
 Parameters
 ----------
 input : std::istream &";
-constexpr const char* CGAL_Classification_ETHZ_Random_forest_classifier_convert_deprecated_configuration_to_new_format = "converts a deprecated configuration (in compressed ASCII format) to a new configuration (in binary format).
+constexpr const char* Classification_ETHZ_Random_forest_classifier_convert_deprecated_configuration_to_new_format = "converts a deprecated configuration (in compressed ASCII format) to a new configuration (in binary format).
 
 The input file should be a GZIP container written by the save_configuration()
 method from CGAL 5.1 and earlier. The output is a valid configuration for CGAL
@@ -167,16 +167,16 @@ input : std::istream &
 output : std::ostream &";
 
 // CGAL::Classification::Evaluation
-constexpr const char* CGAL_Classification_Evaluation__class__ = "Class to compute several measurements to evaluate the quality of a classification output.";
+constexpr const char* Classification_Evaluation__class__ = "Class to compute several measurements to evaluate the quality of a classification output.";
 
-constexpr const char* CGAL_Classification_Evaluation_Evaluation = "instantiates an empty evaluation object.
+constexpr const char* Classification_Evaluation_Evaluation = "instantiates an empty evaluation object.
 
 labels labels used.
 
 Parameters
 ----------
 labels : const Label_set &";
-constexpr const char* CGAL_Classification_Evaluation_Evaluation_1 = "instantiates an evaluation object and computes all measurements.
+constexpr const char* Classification_Evaluation_Evaluation_1 = "instantiates an evaluation object and computes all measurements.
 
 labels labels used. ground_truth vector of label indices: it should contain
 the index of the corresponding label in the Label_set provided in the
@@ -189,7 +189,7 @@ Parameters
 labels : const Label_set &
 ground_truth : const GroundTruthIndexRange &
 result : const ResultIndexRange &";
-constexpr const char* CGAL_Classification_Evaluation_append = "appends more items to the evaluation object.
+constexpr const char* Classification_Evaluation_append = "appends more items to the evaluation object.
 
 ground_truth vector of label indices: it should contain the index of the
 corresponding label in the Label_set provided in the constructor. Input items
@@ -200,7 +200,7 @@ Parameters
 ----------
 ground_truth : const GroundTruthIndexRange &
 result : const ResultIndexRange &";
-constexpr const char* CGAL_Classification_Evaluation_confusion = "returns the number of items whose ground truth is ground_truth and which were classified as result .
+constexpr const char* Classification_Evaluation_confusion = "returns the number of items whose ground truth is ground_truth and which were classified as result .
 
 Parameters
 ----------
@@ -208,7 +208,7 @@ ground_truth : Label_handle
 result : Label_handle
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Evaluation_precision = "returns the precision of the training for the given label.
+constexpr const char* Classification_Evaluation_precision = "returns the precision of the training for the given label.
 
 Precision is the number of true positives divided by the sum of the true
 positives and the false positives.
@@ -218,7 +218,7 @@ Parameters
 label : Label_handle
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_recall = "returns the recall of the training for the given label.
+constexpr const char* Classification_Evaluation_recall = "returns the recall of the training for the given label.
 
 Recall is the number of true positives divided by the sum of the true
 positives and the false negatives.
@@ -228,7 +228,7 @@ Parameters
 label : Label_handle
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_f1_score = "returns the $F_1$ score of the training for the given label.
+constexpr const char* Classification_Evaluation_f1_score = "returns the $F_1$ score of the training for the given label.
 
 $F_1$ score is the harmonic mean of precision() and recall() : \\[F_1 = 2
 \\times \\frac{precision \\times recall}{precision + recall} \\]
@@ -238,7 +238,7 @@ Parameters
 label : Label_handle
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_intersection_over_union = "returns the intersection over union of the training for the given label.
+constexpr const char* Classification_Evaluation_intersection_over_union = "returns the intersection over union of the training for the given label.
 
 Intersection over union is the number of true positives divided by the sum of
 the true positives, of the false positives and of the false negatives.
@@ -248,25 +248,25 @@ Parameters
 label : Label_handle
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_number_of_misclassified_items = "returns the number of misclassified items.
+constexpr const char* Classification_Evaluation_number_of_misclassified_items = "returns the number of misclassified items.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Evaluation_number_of_items = "returns the total number of items used for evaluation.
+constexpr const char* Classification_Evaluation_number_of_items = "returns the total number of items used for evaluation.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Evaluation_accuracy = "returns the accuracy of the training.
+constexpr const char* Classification_Evaluation_accuracy = "returns the accuracy of the training.
 
 Accuracy is the total number of true positives divided by the total number of
 provided inliers.
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_mean_f1_score = "returns the mean $F_1$ score of the training over all labels (see f1_score() ).
+constexpr const char* Classification_Evaluation_mean_f1_score = "returns the mean $F_1$ score of the training over all labels (see f1_score() ).
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_mean_intersection_over_union = "returns the mean intersection over union of the training over all labels (see intersection_over_union() ).
+constexpr const char* Classification_Evaluation_mean_intersection_over_union = "returns the mean intersection over union of the training over all labels (see intersection_over_union() ).
 
 Returns: float";
-constexpr const char* CGAL_Classification_Evaluation_operator = "outputs the evaluation in a simple ASCII format to the stream os .
+constexpr const char* Classification_Evaluation_operator = "outputs the evaluation in a simple ASCII format to the stream os .
 
 Parameters
 ----------
@@ -274,7 +274,7 @@ os : std::ostream &
 evaluation : const Evaluation &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Classification_Evaluation_output_to_html = "outputs the evaluation as an HTML page to the stream os .
+constexpr const char* Classification_Evaluation_output_to_html = "outputs the evaluation as an HTML page to the stream os .
 
 Parameters
 ----------
@@ -284,21 +284,21 @@ evaluation : const Evaluation &
 Returns: std::ostream &";
 
 // CGAL::Classification::Face_descriptor_to_center_of_mass_map
-constexpr const char* CGAL_Classification_Face_descriptor_to_center_of_mass_map__class__ = "Property map that constructs the center of mass of the face of a mesh on-the-fly.";
+constexpr const char* Classification_Face_descriptor_to_center_of_mass_map__class__ = "Property map that constructs the center of mass of the face of a mesh on-the-fly.";
 
 
 // CGAL::Classification::Face_descriptor_to_face_descriptor_with_bbox_map
-constexpr const char* CGAL_Classification_Face_descriptor_to_face_descriptor_with_bbox_map__class__ = "Property map that constructs a face descriptor with a bbox() method from a face descriptor.";
+constexpr const char* Classification_Face_descriptor_to_face_descriptor_with_bbox_map__class__ = "Property map that constructs a face descriptor with a bbox() method from a face descriptor.";
 
 
 // CGAL::Classification::Face_descriptor_to_face_descriptor_with_bbox_map::face_descriptor_with_bbox
-constexpr const char* CGAL_Classification_Face_descriptor_to_face_descriptor_with_bbox_map_face_descriptor_with_bbox__class__ = "Face descriptor with a precomputed bounding box.";
+constexpr const char* Classification_Face_descriptor_to_face_descriptor_with_bbox_map_face_descriptor_with_bbox__class__ = "Face descriptor with a precomputed bounding box.";
 
 
 // CGAL::Classification::Feature::Cluster_mean_of_feature
-constexpr const char* CGAL_Classification_Feature_Cluster_mean_of_feature__class__ = "Feature that computes the mean values of an itemwise feature over the respective items of clusters.";
+constexpr const char* Classification_Feature_Cluster_mean_of_feature__class__ = "Feature that computes the mean values of an itemwise feature over the respective items of clusters.";
 
-constexpr const char* CGAL_Classification_Feature_Cluster_mean_of_feature_Cluster_mean_of_feature = "constructs the feature.
+constexpr const char* Classification_Feature_Cluster_mean_of_feature_Cluster_mean_of_feature = "constructs the feature.
 
 ClusterRange model of ConstRange . Its iterator type is RandomAccessIterator
 and its value type is the key type of Cluster . clusters input range.
@@ -311,9 +311,9 @@ clusters : ClusterRange &
 itemwise_feature : Feature_handle";
 
 // CGAL::Classification::Feature::Cluster_size
-constexpr const char* CGAL_Classification_Feature_Cluster_size__class__ = "Feature that returns the size of each cluster.";
+constexpr const char* Classification_Feature_Cluster_size__class__ = "Feature that returns the size of each cluster.";
 
-constexpr const char* CGAL_Classification_Feature_Cluster_size_Cluster_size = "constructs the feature.
+constexpr const char* Classification_Feature_Cluster_size_Cluster_size = "constructs the feature.
 
 ClusterRange model of ConstRange . Its iterator type is RandomAccessIterator
 and its value type is the key type of Cluster . clusters input range.
@@ -323,9 +323,9 @@ Parameters
 clusters : ClusterRange &";
 
 // CGAL::Classification::Feature::Cluster_variance_of_feature
-constexpr const char* CGAL_Classification_Feature_Cluster_variance_of_feature__class__ = "Feature that computes the variance values of an itemwise feature over the respective items of clusters.";
+constexpr const char* Classification_Feature_Cluster_variance_of_feature__class__ = "Feature that computes the variance values of an itemwise feature over the respective items of clusters.";
 
-constexpr const char* CGAL_Classification_Feature_Cluster_variance_of_feature_Cluster_variance_of_feature = "constructs the feature.
+constexpr const char* Classification_Feature_Cluster_variance_of_feature_Cluster_variance_of_feature = "constructs the feature.
 
 ClusterRange model of ConstRange . Its iterator type is RandomAccessIterator
 and its value type is the key type of Cluster . clusters input range.
@@ -340,9 +340,9 @@ itemwise_feature : Feature_handle
 mean_feature : Feature_handle";
 
 // CGAL::Classification::Feature::Cluster_vertical_extent
-constexpr const char* CGAL_Classification_Feature_Cluster_vertical_extent__class__ = "Feature that returns the length of the smallest interval on the Z axis that contains all the items of a cluster.";
+constexpr const char* Classification_Feature_Cluster_vertical_extent__class__ = "Feature that returns the length of the smallest interval on the Z axis that contains all the items of a cluster.";
 
-constexpr const char* CGAL_Classification_Feature_Cluster_vertical_extent_Cluster_vertical_extent = "constructs the feature.
+constexpr const char* Classification_Feature_Cluster_vertical_extent_Cluster_vertical_extent = "constructs the feature.
 
 ClusterRange model of ConstRange . Its iterator type is RandomAccessIterator
 and its value type is the key type of Cluster . clusters input range.
@@ -352,10 +352,10 @@ Parameters
 clusters : const ClusterRange &";
 
 // CGAL::Classification::Feature::Color_channel
-constexpr const char* CGAL_Classification_Feature_Color_channel__class__ = "Feature based on HSV colorimetric information.";
+constexpr const char* Classification_Feature_Color_channel__class__ = "Feature based on HSV colorimetric information.";
 
-constexpr const char* CGAL_Classification_Feature_Color_channel_Channel = "Selected channel.";
-constexpr const char* CGAL_Classification_Feature_Color_channel_Color_channel = "constructs a feature based on the given color channel.
+constexpr const char* Classification_Feature_Color_channel_Channel = "Selected channel.";
+constexpr const char* Classification_Feature_Color_channel_Color_channel = "constructs a feature based on the given color channel.
 
 input point range. color_map property map to access the colors of the input
 points. channel chosen HSV channel.
@@ -367,9 +367,9 @@ color_map : ColorMap
 channel : Channel";
 
 // CGAL::Classification::Feature::Distance_to_plane
-constexpr const char* CGAL_Classification_Feature_Distance_to_plane__class__ = "Feature based on local distance to a fitted plane.";
+constexpr const char* Classification_Feature_Distance_to_plane__class__ = "Feature based on local distance to a fitted plane.";
 
-constexpr const char* CGAL_Classification_Feature_Distance_to_plane_Distance_to_plane = "constructs the feature.
+constexpr const char* Classification_Feature_Distance_to_plane_Distance_to_plane = "constructs the feature.
 
 input point range. point_map property map to access the input points. eigen
 class with precomputed eigenvectors and eigenvalues.
@@ -381,9 +381,9 @@ point_map : PointMap
 eigen : const Local_eigen_analysis &";
 
 // CGAL::Classification::Feature::Echo_scatter
-constexpr const char* CGAL_Classification_Feature_Echo_scatter__class__ = "Feature based on echo scatter.";
+constexpr const char* Classification_Feature_Echo_scatter__class__ = "Feature based on echo scatter.";
 
-constexpr const char* CGAL_Classification_Feature_Echo_scatter_Echo_scatter = "constructs the feature.
+constexpr const char* Classification_Feature_Echo_scatter_Echo_scatter = "constructs the feature.
 
 input point range. echo_map property map to access the echo values of the
 input points. grid precomputed Planimetric_grid . radius_neighbors radius of
@@ -397,9 +397,9 @@ grid : const Grid &
 radius_neighbors : float";
 
 // CGAL::Classification::Feature::Eigenvalue
-constexpr const char* CGAL_Classification_Feature_Eigenvalue__class__ = "Feature based on the eigenvalues of the covariance matrix of a local neighborhood.";
+constexpr const char* Classification_Feature_Eigenvalue__class__ = "Feature based on the eigenvalues of the covariance matrix of a local neighborhood.";
 
-constexpr const char* CGAL_Classification_Feature_Eigenvalue_Eigenvalue = "Constructs the feature.
+constexpr const char* Classification_Feature_Eigenvalue_Eigenvalue = "Constructs the feature.
 
 Input model of ConstRange . Its iterator type is RandomAccessIterator . input
 input range. eigen class with precomputed eigenvectors and eigenvalues. idx
@@ -412,9 +412,9 @@ eigen : const Classification::Local_eigen_analysis &
 idx : unsigned int";
 
 // CGAL::Classification::Feature::Elevation
-constexpr const char* CGAL_Classification_Feature_Elevation__class__ = "Feature based on local elevation.";
+constexpr const char* Classification_Feature_Elevation__class__ = "Feature based on local elevation.";
 
-constexpr const char* CGAL_Classification_Feature_Elevation_Elevation = "constructs the feature.
+constexpr const char* Classification_Feature_Elevation_Elevation = "constructs the feature.
 
 input point range. point_map property map to access the input points. grid
 precomputed Planimetric_grid . radius_dtm radius for digital terrain modeling
@@ -428,9 +428,9 @@ grid : const Grid &
 radius_dtm : float";
 
 // CGAL::Classification::Feature::Height_above
-constexpr const char* CGAL_Classification_Feature_Height_above__class__ = "Feature based on local height distribution This feature computes the distance between the maximum height on the local cell of the planimetric grid and a point's height.";
+constexpr const char* Classification_Feature_Height_above__class__ = "Feature based on local height distribution This feature computes the distance between the maximum height on the local cell of the planimetric grid and a point's height.";
 
-constexpr const char* CGAL_Classification_Feature_Height_above_Height_above = "constructs the feature.
+constexpr const char* Classification_Feature_Height_above_Height_above = "constructs the feature.
 
 input point range. point_map property map to access the input points. grid
 precomputed Planimetric_grid .
@@ -442,9 +442,9 @@ point_map : PointMap
 grid : const Grid &";
 
 // CGAL::Classification::Feature::Height_below
-constexpr const char* CGAL_Classification_Feature_Height_below__class__ = "Feature based on local height distribution This feature computes the distance between a point's height and the minimum height on the local cell of the planimetric grid.";
+constexpr const char* Classification_Feature_Height_below__class__ = "Feature based on local height distribution This feature computes the distance between a point's height and the minimum height on the local cell of the planimetric grid.";
 
-constexpr const char* CGAL_Classification_Feature_Height_below_Height_below = "constructs the feature.
+constexpr const char* Classification_Feature_Height_below_Height_below = "constructs the feature.
 
 input point range. point_map property map to access the input points. grid
 precomputed Planimetric_grid .
@@ -456,9 +456,9 @@ point_map : PointMap
 grid : const Grid &";
 
 // CGAL::Classification::Feature::Simple_feature
-constexpr const char* CGAL_Classification_Feature_Simple_feature__class__ = "Feature based on a user-defined scalar field.";
+constexpr const char* Classification_Feature_Simple_feature__class__ = "Feature based on a user-defined scalar field.";
 
-constexpr const char* CGAL_Classification_Feature_Simple_feature_Simple_feature = "constructs the feature using an input range and a property map.
+constexpr const char* Classification_Feature_Simple_feature_Simple_feature = "constructs the feature using an input range and a property map.
 
 input point range. property_map property map to access scalar field. name name
 of the property (no default name is given).
@@ -470,9 +470,9 @@ property_map : PropertyMap
 name : const std::string &";
 
 // CGAL::Classification::Feature::Vertical_dispersion
-constexpr const char* CGAL_Classification_Feature_Vertical_dispersion__class__ = "Feature based on local vertical dispersion of points.";
+constexpr const char* Classification_Feature_Vertical_dispersion__class__ = "Feature based on local vertical dispersion of points.";
 
-constexpr const char* CGAL_Classification_Feature_Vertical_dispersion_Vertical_dispersion = "constructs the feature.
+constexpr const char* Classification_Feature_Vertical_dispersion_Vertical_dispersion = "constructs the feature.
 
 input point range. point_map property map to access the input points. grid
 precomputed Planimetric_grid . radius_neighbors radius of local neighborhoods.
@@ -485,9 +485,9 @@ grid : const Grid &
 radius_neighbors : float";
 
 // CGAL::Classification::Feature::Vertical_range
-constexpr const char* CGAL_Classification_Feature_Vertical_range__class__ = "Feature based on local height distribution.";
+constexpr const char* Classification_Feature_Vertical_range__class__ = "Feature based on local height distribution.";
 
-constexpr const char* CGAL_Classification_Feature_Vertical_range_Vertical_range = "constructs the feature.
+constexpr const char* Classification_Feature_Vertical_range_Vertical_range = "constructs the feature.
 
 input point range. point_map property map to access the input points. grid
 precomputed Planimetric_grid .
@@ -499,9 +499,9 @@ point_map : PointMap
 grid : const Grid &";
 
 // CGAL::Classification::Feature::Verticality
-constexpr const char* CGAL_Classification_Feature_Verticality__class__ = "Feature based on local verticality.";
+constexpr const char* Classification_Feature_Verticality__class__ = "Feature based on local verticality.";
 
-constexpr const char* CGAL_Classification_Feature_Verticality_Verticality = "constructs the feature using local eigen analysis.
+constexpr const char* Classification_Feature_Verticality_Verticality = "constructs the feature using local eigen analysis.
 
 InputRange model of ConstRange . Its iterator type is RandomAccessIterator .
 input input range. eigen class with precomputed eigenvectors and eigenvalues.
@@ -510,7 +510,7 @@ Parameters
 ----------
 input : const InputRange &
 eigen : const Local_eigen_analysis &";
-constexpr const char* CGAL_Classification_Feature_Verticality_Verticality_1 = "constructs the feature using provided normals of points.
+constexpr const char* Classification_Feature_Verticality_Verticality_1 = "constructs the feature using provided normals of points.
 
 PointRange model of ConstRange . Its iterator type is RandomAccessIterator and
 its value type is the key type of VectorMap . VectorMap model of
@@ -524,17 +524,17 @@ input : const PointRange &
 normal_map : VectorMap";
 
 // CGAL::Classification::Feature_base
-constexpr const char* CGAL_Classification_Feature_base__class__ = "Abstract class describing a classification feature that associates a scalar value to each item of the classification input.";
+constexpr const char* Classification_Feature_base__class__ = "Abstract class describing a classification feature that associates a scalar value to each item of the classification input.";
 
-constexpr const char* CGAL_Classification_Feature_base_name = "returns the name of the feature (initialized to abstract_feature for Feature_base ).
+constexpr const char* Classification_Feature_base_name = "returns the name of the feature (initialized to abstract_feature for Feature_base ).
 
 Returns: const std::string &";
-constexpr const char* CGAL_Classification_Feature_base_set_name = "changes the name of the feature.
+constexpr const char* Classification_Feature_base_set_name = "changes the name of the feature.
 
 Parameters
 ----------
 name : const std::string &";
-constexpr const char* CGAL_Classification_Feature_base_value = "returns the value taken by the feature for at the item for the item at position index .
+constexpr const char* Classification_Feature_base_value = "returns the value taken by the feature for at the item for the item at position index .
 
 This method must be implemented by inherited classes.
 
@@ -545,13 +545,13 @@ index : std::size_t
 Returns: float";
 
 // CGAL::Classification::Feature_handle
-constexpr const char* CGAL_Classification_Feature_handle__class__ = "Handle to a Feature_base .";
+constexpr const char* Classification_Feature_handle__class__ = "Handle to a Feature_base .";
 
 // CGAL::Classification::Feature_set
-constexpr const char* CGAL_Classification_Feature_set__class__ = "sets of features (see Feature_base ) used as input by classification algorithms.";
+constexpr const char* Classification_Feature_set__class__ = "sets of features (see Feature_base ) used as input by classification algorithms.";
 
-constexpr const char* CGAL_Classification_Feature_set_Feature_set = "creates an empty feature set.";
-constexpr const char* CGAL_Classification_Feature_set_add = "instantiates a new feature and adds it to the set.
+constexpr const char* Classification_Feature_set_Feature_set = "creates an empty feature set.";
+constexpr const char* Classification_Feature_set_add = "instantiates a new feature and adds it to the set.
 
 If several calls of add() are surrounded by begin_parallel_additions() and
 end_parallel_additions() , they are computed in parallel. They are still
@@ -567,7 +567,7 @@ Parameters
 t : T &&...
 
 Returns: Feature_handle";
-constexpr const char* CGAL_Classification_Feature_set_remove = "removes a feature.
+constexpr const char* Classification_Feature_set_remove = "removes a feature.
 
 feature the handle to feature type that must be removed. true if the feature
 was correctly removed, false if its handle was not found.
@@ -577,8 +577,8 @@ Parameters
 feature : Feature_handle
 
 Returns: bool";
-constexpr const char* CGAL_Classification_Feature_set_clear = "removes all features.";
-constexpr const char* CGAL_Classification_Feature_set_begin_parallel_additions = "initializes structures to compute features in parallel.
+constexpr const char* Classification_Feature_set_clear = "removes all features.";
+constexpr const char* Classification_Feature_set_begin_parallel_additions = "initializes structures to compute features in parallel.
 
 If the user wants to add features in parallel, this function should be called
 before making several calls of add() . After the calls of add() ,
@@ -589,50 +589,50 @@ highly recommended to always call begin_parallel_additions() , add() and
 end_parallel_additions() within the same scope , to avoid keeping references
 to temporary objects that might be deleted before the thread has terminated.
 end_parallel_additions()";
-constexpr const char* CGAL_Classification_Feature_set_end_parallel_additions = "waits for the end of parallel feature computation and clears dedicated data structures afterwards.
+constexpr const char* Classification_Feature_set_end_parallel_additions = "waits for the end of parallel feature computation and clears dedicated data structures afterwards.
 
 If the user wants to add features in parallel, this function should be called
 after begin_parallel_additions() and several calls of add() . If thirdpartyTBB
 is not available, this function does nothing. begin_parallel_additions()";
-constexpr const char* CGAL_Classification_Feature_set_size = "returns how many features are defined.
+constexpr const char* Classification_Feature_set_size = "returns how many features are defined.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Feature_set_operator = "returns the $i^{th}$ feature.
+constexpr const char* Classification_Feature_set_operator = "returns the $i^{th}$ feature.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: Feature_handle";
-constexpr const char* CGAL_Classification_Feature_set_const_iterator = "A random access constant iterator with value type Feature_handle .
+constexpr const char* Classification_Feature_set_const_iterator = "A random access constant iterator with value type Feature_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Classification_Feature_set_iterator = "A random access iterator with value type Feature_handle .
+constexpr const char* Classification_Feature_set_iterator = "A random access iterator with value type Feature_handle .
 
 Returns: unspecified_type";
 
 
 // CGAL::Classification::Label
-constexpr const char* CGAL_Classification_Label__class__ = "Classification label (for example: vegetation, ground, etc.).";
+constexpr const char* Classification_Label__class__ = "Classification label (for example: vegetation, ground, etc.).";
 
-constexpr const char* CGAL_Classification_Label_name = "returns the name of the classification label ( e.g .
+constexpr const char* Classification_Label_name = "returns the name of the classification label ( e.g .
 
 vegetation).
 
 Returns: const std::string &";
-constexpr const char* CGAL_Classification_Label_index = "returns the index of the classification label in the label set.
+constexpr const char* Classification_Label_index = "returns the index of the classification label in the label set.
 
 This index cannot be changed by the user and is handled directly by the label
 set.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Label_standard_index = "returns the standard index of the classification label ( e.g .
+constexpr const char* Classification_Label_standard_index = "returns the standard index of the classification label ( e.g .
 
 index in the ASPRS standard). This index is purely user-oriented and is not
 used by the classification algorithms.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Label_color = "returns the color used to represent the label.
+constexpr const char* Classification_Label_color = "returns the color used to represent the label.
 
 The color is purely user-oriented and is not used by the classification
 algorithms. It is not to be confused with a color attribute embedded in a data
@@ -641,17 +641,17 @@ set which can be used (see Color_channel ).
 Returns: const CGAL::IO::Color &";
 
 // CGAL::Classification::Label_handle
-constexpr const char* CGAL_Classification_Label_handle__class__ = "Handle to a classification Label .";
+constexpr const char* Classification_Label_handle__class__ = "Handle to a classification Label .";
 
 // CGAL::Classification::Label_set
-constexpr const char* CGAL_Classification_Label_set__class__ = "sets of Label used as input by classification algorithms.";
+constexpr const char* Classification_Label_set__class__ = "sets of Label used as input by classification algorithms.";
 
-constexpr const char* CGAL_Classification_Label_set_Label_set = "constructs a label set from a set of label names.
+constexpr const char* Classification_Label_set_Label_set = "constructs a label set from a set of label names.
 
 Parameters
 ----------
 labels : std::initializer_list< const char * >";
-constexpr const char* CGAL_Classification_Label_set_add = "adds a label.
+constexpr const char* Classification_Label_set_add = "adds a label.
 
 Names, standard indices and colors are not used for identification: two labels
 in the same set can have the same name, standard index or color, but not the
@@ -667,7 +667,7 @@ color : CGAL::IO::Color
 standard_index : std::size_t
 
 Returns: Label_handle";
-constexpr const char* CGAL_Classification_Label_set_add_1 = "adds a label with default standard index and color.
+constexpr const char* Classification_Label_set_add_1 = "adds a label with default standard index and color.
 
 This functions tries to map label names to standard ASPRS labels and
 automatically picks the standard_index and color of the label: \"unassigned\" is
@@ -697,7 +697,7 @@ Parameters
 name : const char *
 
 Returns: Label_handle";
-constexpr const char* CGAL_Classification_Label_set_remove = "removes a label.
+constexpr const char* Classification_Label_set_remove = "removes a label.
 
 label the handle to the label that must be removed. true if the label was
 correctly removed, false if its handle was not found.
@@ -707,18 +707,18 @@ Parameters
 label : Label_handle
 
 Returns: bool";
-constexpr const char* CGAL_Classification_Label_set_clear = "removes all labels.";
-constexpr const char* CGAL_Classification_Label_set_size = "returns how many labels are defined.
+constexpr const char* Classification_Label_set_clear = "removes all labels.";
+constexpr const char* Classification_Label_set_size = "returns how many labels are defined.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Label_set_operator = "returns the $i^{th}$ label.
+constexpr const char* Classification_Label_set_operator = "returns the $i^{th}$ label.
 
 Parameters
 ----------
 i : std::size_t
 
 Returns: Label_handle";
-constexpr const char* CGAL_Classification_Label_set_is_valid_ground_truth = "checks the validity of the ground truth with respect to the label set.
+constexpr const char* Classification_Label_set_is_valid_ground_truth = "checks the validity of the ground truth with respect to the label set.
 
 ground_truth range of label indices. This function checks that all these
 indices are either -1 (for unclassified) or a valid index of one of the
@@ -734,17 +734,17 @@ ground_truth : const LabelIndexRange &
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Classification_Label_set_const_iterator = "A random access constant iterator with value type Label_handle .
+constexpr const char* Classification_Label_set_const_iterator = "A random access constant iterator with value type Label_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Classification_Label_set_iterator = "A random access iterator with value type Label_handle .
+constexpr const char* Classification_Label_set_iterator = "A random access iterator with value type Label_handle .
 
 Returns: unspecified_type";
 
 // CGAL::Classification::Local_eigen_analysis
-constexpr const char* CGAL_Classification_Local_eigen_analysis__class__ = "Class that precomputes and stores the eigenvectors and eigenvalues of the covariance matrices of all points of a point set using a local neighborhood.";
+constexpr const char* Classification_Local_eigen_analysis__class__ = "Class that precomputes and stores the eigenvectors and eigenvalues of the covariance matrices of all points of a point set using a local neighborhood.";
 
-constexpr const char* CGAL_Classification_Local_eigen_analysis_create_from_point_set = "computes the local eigen analysis of an input point set based on a local neighborhood.
+constexpr const char* Classification_Local_eigen_analysis_create_from_point_set = "computes the local eigen analysis of an input point set based on a local neighborhood.
 
 PointRange model of ConstRange . Its iterator type is RandomAccessIterator and
 its value type is the key type of PointMap . PointMap model of
@@ -768,7 +768,7 @@ neighbor_query : const NeighborQuery &
  : const DiagonalizeTraits &
 
 Returns: Local_eigen_analysis";
-constexpr const char* CGAL_Classification_Local_eigen_analysis_create_from_face_graph = "computes the local eigen analysis of an input face graph based on a local neighborhood.
+constexpr const char* Classification_Local_eigen_analysis_create_from_face_graph = "computes the local eigen analysis of an input face graph based on a local neighborhood.
 
 FaceListGraph model of FaceListGraph . NeighborQuery model of NeighborQuery
 ConcurrencyTag enables sequential versus parallel algorithm. Possible values
@@ -788,7 +788,7 @@ neighbor_query : const NeighborQuery &
  : const DiagonalizeTraits &
 
 Returns: Local_eigen_analysis";
-constexpr const char* CGAL_Classification_Local_eigen_analysis_create_from_point_clusters = "computes the local eigen analysis of an input set of point clusters based on a local neighborhood.
+constexpr const char* Classification_Local_eigen_analysis_create_from_point_clusters = "computes the local eigen analysis of an input set of point clusters based on a local neighborhood.
 
 ClusterRange model of ConstRange . Its iterator type is RandomAccessIterator
 and its value type is the key type of PointMap . ConcurrencyTag enables
@@ -807,7 +807,7 @@ input : const ClusterRange &
  : const DiagonalizeTraits &
 
 Returns: Local_eigen_analysis";
-constexpr const char* CGAL_Classification_Local_eigen_analysis_normal_vector = "returns the estimated unoriented normal vector of the point at position index .
+constexpr const char* Classification_Local_eigen_analysis_normal_vector = "returns the estimated unoriented normal vector of the point at position index .
 
 GeomTraits model of CGAL Kernel.
 
@@ -816,7 +816,7 @@ Parameters
 index : std::size_t
 
 Returns: GeomTraits::Vector_3";
-constexpr const char* CGAL_Classification_Local_eigen_analysis_plane = "returns the estimated local tangent plane of the point at position index .
+constexpr const char* Classification_Local_eigen_analysis_plane = "returns the estimated local tangent plane of the point at position index .
 
 GeomTraits model of CGAL Kernel.
 
@@ -825,23 +825,23 @@ Parameters
 index : std::size_t
 
 Returns: GeomTraits::Plane_3";
-constexpr const char* CGAL_Classification_Local_eigen_analysis_eigenvalue = "returns the normalized eigenvalues of the point at position index .
+constexpr const char* Classification_Local_eigen_analysis_eigenvalue = "returns the normalized eigenvalues of the point at position index .
 
 Parameters
 ----------
 index : std::size_t
 
 Returns: Eigenvalues";
-constexpr const char* CGAL_Classification_Local_eigen_analysis_Eigenvalues = "Eigenvalues (sorted in ascending order).
+constexpr const char* Classification_Local_eigen_analysis_Eigenvalues = "Eigenvalues (sorted in ascending order).
 
 Returns: std::array< float, 3 >";
 
 
 
 // CGAL::Classification::Mesh_feature_generator
-constexpr const char* CGAL_Classification_Mesh_feature_generator__class__ = "generates a set of generic features for surface mesh classification.";
+constexpr const char* Classification_Mesh_feature_generator__class__ = "generates a set of generic features for surface mesh classification.";
 
-constexpr const char* CGAL_Classification_Mesh_feature_generator_Mesh_feature_generator = "initializes a feature generator from an input range.
+constexpr const char* Classification_Mesh_feature_generator_Mesh_feature_generator = "initializes a feature generator from an input range.
 
 If not provided by the user, The size of the smallest scale is automatically
 estimated using a method equivalent to CGAL::compute_average_spacing() using 6
@@ -858,7 +858,7 @@ input : const FaceListGraph &
 point_map : PointMap
 nb_scales : std::size_t
 voxel_size : float";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_generate_face_based_features = "generates geometric features based on face information.
+constexpr const char* Classification_Mesh_feature_generator_generate_face_based_features = "generates geometric features based on face information.
 
 At each scale, the following features are generated:
 CGAL::Classification::Feature::Eigenvalue with indices 0, 1 and 2 The version
@@ -868,7 +868,7 @@ the feature set where the features are instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_generate_point_based_features = "generates geometric features based on point position information.
+constexpr const char* Classification_Mesh_feature_generator_generate_point_based_features = "generates geometric features based on point position information.
 
 At each scale, the following features are generated by considering the mesh as
 a point cloud through PointMap :
@@ -883,34 +883,34 @@ the features are instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_bbox = "returns the bounding box of the input point set.
+constexpr const char* Classification_Mesh_feature_generator_bbox = "returns the bounding box of the input point set.
 
 Returns: const Iso_cuboid_3 &";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_neighborhood = "returns the neighborhood structure at scale scale .
+constexpr const char* Classification_Mesh_feature_generator_neighborhood = "returns the neighborhood structure at scale scale .
 
 Parameters
 ----------
 scale : std::size_t
 
 Returns: const Neighborhood &";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_grid = "returns the planimetric grid structure at scale scale .
+constexpr const char* Classification_Mesh_feature_generator_grid = "returns the planimetric grid structure at scale scale .
 
 Parameters
 ----------
 scale : std::size_t
 
 Returns: const Planimetric_grid &";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_eigen = "returns the local eigen analysis structure at scale scale .
+constexpr const char* Classification_Mesh_feature_generator_eigen = "returns the local eigen analysis structure at scale scale .
 
 Parameters
 ----------
 scale : std::size_t
 
 Returns: const Local_eigen_analysis &";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_number_of_scales = "returns the number of scales that were computed.
+constexpr const char* Classification_Mesh_feature_generator_number_of_scales = "returns the number of scales that were computed.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_grid_resolution = "returns the grid resolution at scale scale .
+constexpr const char* Classification_Mesh_feature_generator_grid_resolution = "returns the grid resolution at scale scale .
 
 This resolution is the length and width of a cell of the Planimetric_grid
 defined at this scale.
@@ -920,7 +920,7 @@ Parameters
 scale : std::size_t
 
 Returns: float";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_radius_neighbors = "returns the radius used for neighborhood queries at scale scale .
+constexpr const char* Classification_Mesh_feature_generator_radius_neighbors = "returns the radius used for neighborhood queries at scale scale .
 
 This radius is the smallest radius that is relevant from a geometric point of
 view at this scale (that is to say that encloses a few cells of
@@ -931,7 +931,7 @@ Parameters
 scale : std::size_t
 
 Returns: float";
-constexpr const char* CGAL_Classification_Mesh_feature_generator_radius_dtm = "returns the radius used for digital terrain modeling at scale scale .
+constexpr const char* Classification_Mesh_feature_generator_radius_dtm = "returns the radius used for digital terrain modeling at scale scale .
 
 This radius represents the minimum size of a building at this scale.
 
@@ -943,19 +943,19 @@ Returns: float";
 
 
 // CGAL::Classification::Mesh_neighborhood
-constexpr const char* CGAL_Classification_Mesh_neighborhood__class__ = "Class that generates models of NeighborQuery based on an input mesh.";
+constexpr const char* Classification_Mesh_neighborhood__class__ = "Class that generates models of NeighborQuery based on an input mesh.";
 
-constexpr const char* CGAL_Classification_Mesh_neighborhood_Mesh_neighborhood = "constructs a neighborhood object based on the input mesh.
+constexpr const char* Classification_Mesh_neighborhood_Mesh_neighborhood = "constructs a neighborhood object based on the input mesh.
 
 mesh input mesh.
 
 Parameters
 ----------
 mesh : const FaceListGraph &";
-constexpr const char* CGAL_Classification_Mesh_neighborhood_one_ring_neighbor_query = "returns a 1-ring neighbor query object.
+constexpr const char* Classification_Mesh_neighborhood_one_ring_neighbor_query = "returns a 1-ring neighbor query object.
 
 Returns: One_ring_neighbor_query";
-constexpr const char* CGAL_Classification_Mesh_neighborhood_n_ring_neighbor_query = "returns an N-ring neighbor query object.
+constexpr const char* Classification_Mesh_neighborhood_n_ring_neighbor_query = "returns an N-ring neighbor query object.
 
 Parameters
 ----------
@@ -965,9 +965,9 @@ Returns: N_ring_neighbor_query";
 
 
 // CGAL::Classification::Mesh_neighborhood::N_ring_neighbor_query
-constexpr const char* CGAL_Classification_Mesh_neighborhood_N_ring_neighbor_query__class__ = "Functor that computes the N-ring neighborhood of the face of an input mesh.";
+constexpr const char* Classification_Mesh_neighborhood_N_ring_neighbor_query__class__ = "Functor that computes the N-ring neighborhood of the face of an input mesh.";
 
-constexpr const char* CGAL_Classification_Mesh_neighborhood_N_ring_neighbor_query_N_ring_neighbor_query = "constructs a N-ring neighbor query object.
+constexpr const char* Classification_Mesh_neighborhood_N_ring_neighbor_query_N_ring_neighbor_query = "constructs a N-ring neighbor query object.
 
 neighborhood mesh neighborhood object. n size of neighborhood.
 
@@ -977,9 +977,9 @@ neighborhood : const Mesh_neighborhood &
 n : const std::size_t";
 
 // CGAL::Classification::Mesh_neighborhood::One_ring_neighbor_query
-constexpr const char* CGAL_Classification_Mesh_neighborhood_One_ring_neighbor_query__class__ = "Functor that computes the 1-ring neighborhood of the face of an input mesh.";
+constexpr const char* Classification_Mesh_neighborhood_One_ring_neighbor_query__class__ = "Functor that computes the 1-ring neighborhood of the face of an input mesh.";
 
-constexpr const char* CGAL_Classification_Mesh_neighborhood_One_ring_neighbor_query_One_ring_neighbor_query = "constructs a 1-ring neighbor query object.
+constexpr const char* Classification_Mesh_neighborhood_One_ring_neighbor_query_One_ring_neighbor_query = "constructs a 1-ring neighbor query object.
 
 neighborhood mesh neighborhood object.
 
@@ -988,12 +988,12 @@ Parameters
 neighborhood : const Mesh_neighborhood &";
 
 // CGAL::Classification::NeighborQuery
-constexpr const char* CGAL_Classification_NeighborQuery__class__ = "Concept describing a neighbor query used for classification.";
+constexpr const char* Classification_NeighborQuery__class__ = "Concept describing a neighbor query used for classification.";
 
-constexpr const char* CGAL_Classification_NeighborQuery_value_type = "Type of the data that is classified.
+constexpr const char* Classification_NeighborQuery_value_type = "Type of the data that is classified.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Classification_NeighborQuery_operator = "puts in output the indices of the neighbors of query .
+constexpr const char* Classification_NeighborQuery_operator = "puts in output the indices of the neighbors of query .
 
 OutputIterator An output iterator accepting std::size_t values.
 
@@ -1005,9 +1005,9 @@ output : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Classification::OpenCV::Random_forest_classifier
-constexpr const char* CGAL_Classification_OpenCV_Random_forest_classifier__class__ = "Classifier based on the OpenCV version of the random forest algorithm.";
+constexpr const char* Classification_OpenCV_Random_forest_classifier__class__ = "Classifier based on the OpenCV version of the random forest algorithm.";
 
-constexpr const char* CGAL_Classification_OpenCV_Random_forest_classifier_Random_forest_classifier = "instantiates the classifier using the sets of labels and features .
+constexpr const char* Classification_OpenCV_Random_forest_classifier_Random_forest_classifier = "instantiates the classifier using the sets of labels and features .
 
 Parameters documentation is copy-pasted from the official documentation of
 OpenCV . For more details on this method, please refer to it. labels label set
@@ -1043,7 +1043,7 @@ min_sample_count : int
 max_categories : int
 max_number_of_trees_in_the_forest : int
 forest_accuracy : float";
-constexpr const char* CGAL_Classification_OpenCV_Random_forest_classifier_train = "runs the training algorithm.
+constexpr const char* Classification_OpenCV_Random_forest_classifier_train = "runs the training algorithm.
 
 From the set of provided ground truth, this algorithm estimates sets up the
 random trees that produce the most accurate result with respect to this ground
@@ -1056,7 +1056,7 @@ ground truth information should be given the value -1 .
 Parameters
 ----------
 ground_truth : const LabelIndexRange &";
-constexpr const char* CGAL_Classification_OpenCV_Random_forest_classifier_save_configuration = "saves the current configuration in the file named filename .
+constexpr const char* Classification_OpenCV_Random_forest_classifier_save_configuration = "saves the current configuration in the file named filename .
 
 This allows to easily save and recover a specific classification
 configuration. The output file is written in an XML format that is readable by
@@ -1065,7 +1065,7 @@ the load_configuration() method.
 Parameters
 ----------
 filename : const char *";
-constexpr const char* CGAL_Classification_OpenCV_Random_forest_classifier_load_configuration = "loads a configuration from the file named filename .
+constexpr const char* Classification_OpenCV_Random_forest_classifier_load_configuration = "loads a configuration from the file named filename .
 
 The input file should be in the XML format written by the save_configuration()
 method. The feature set of the classifier should contain the exact same
@@ -1077,12 +1077,12 @@ Parameters
 filename : const char *";
 
 // CGAL::Classification::Planimetric_grid
-constexpr const char* CGAL_Classification_Planimetric_grid__class__ = "Class that precomputes a 2D planimetric grid.";
+constexpr const char* Classification_Planimetric_grid__class__ = "Class that precomputes a 2D planimetric grid.";
 
-constexpr const char* CGAL_Classification_Planimetric_grid_iterator = "A forward iterator with value type std::size_t .
+constexpr const char* Classification_Planimetric_grid_iterator = "A forward iterator with value type std::size_t .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Classification_Planimetric_grid_Planimetric_grid = "constructs a planimetric grid based on the input range.
+constexpr const char* Classification_Planimetric_grid_Planimetric_grid = "constructs a planimetric grid based on the input range.
 
 input point range. point_map property map to access the input points. bbox
 bounding box of the input range. grid_resolution resolution of the planimetric
@@ -1094,16 +1094,16 @@ input : const PointRange &
 point_map : PointMap
 bbox : const Iso_cuboid_3 &
 grid_resolution : float";
-constexpr const char* CGAL_Classification_Planimetric_grid_resolution = "returns the resolution of the grid.
+constexpr const char* Classification_Planimetric_grid_resolution = "returns the resolution of the grid.
 
 Returns: float";
-constexpr const char* CGAL_Classification_Planimetric_grid_width = "returns the number of cells along the X-axis.
+constexpr const char* Classification_Planimetric_grid_width = "returns the number of cells along the X-axis.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Planimetric_grid_height = "returns the number of cells along the Y-axis.
+constexpr const char* Classification_Planimetric_grid_height = "returns the number of cells along the Y-axis.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Planimetric_grid_indices_begin = "returns the begin iterator on the indices of the points lying in the cell at position ( x , y ) .
+constexpr const char* Classification_Planimetric_grid_indices_begin = "returns the begin iterator on the indices of the points lying in the cell at position ( x , y ) .
 
 Parameters
 ----------
@@ -1111,7 +1111,7 @@ x : std::size_t
 y : std::size_t
 
 Returns: iterator";
-constexpr const char* CGAL_Classification_Planimetric_grid_indices_end = "returns the past-the-end iterator on the indices of the points lying in the cell at position ( x , y ) .
+constexpr const char* Classification_Planimetric_grid_indices_end = "returns the past-the-end iterator on the indices of the points lying in the cell at position ( x , y ) .
 
 Parameters
 ----------
@@ -1119,7 +1119,7 @@ x : std::size_t
 y : std::size_t
 
 Returns: iterator";
-constexpr const char* CGAL_Classification_Planimetric_grid_has_points = "returns false if the cell at position ( x , y ) is empty, true otherwise.
+constexpr const char* Classification_Planimetric_grid_has_points = "returns false if the cell at position ( x , y ) is empty, true otherwise.
 
 Parameters
 ----------
@@ -1127,14 +1127,14 @@ x : std::size_t
 y : std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Classification_Planimetric_grid_x = "returns the x grid coordinate of the point at position index .
+constexpr const char* Classification_Planimetric_grid_x = "returns the x grid coordinate of the point at position index .
 
 Parameters
 ----------
 index : std::size_t
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Planimetric_grid_y = "returns the y grid coordinate of the point at position index .
+constexpr const char* Classification_Planimetric_grid_y = "returns the y grid coordinate of the point at position index .
 
 Parameters
 ----------
@@ -1143,9 +1143,9 @@ index : std::size_t
 Returns: std::size_t";
 
 // CGAL::Classification::Point_set_feature_generator
-constexpr const char* CGAL_Classification_Point_set_feature_generator__class__ = "generates a set of generic features for point set classification.";
+constexpr const char* Classification_Point_set_feature_generator__class__ = "generates a set of generic features for point set classification.";
 
-constexpr const char* CGAL_Classification_Point_set_feature_generator_Point_set_feature_generator = "initializes a feature generator from an input range.
+constexpr const char* Classification_Point_set_feature_generator_Point_set_feature_generator = "initializes a feature generator from an input range.
 
 If not provided by the user, The size of the smallest scale is automatically
 estimated using a method equivalent to CGAL::compute_average_spacing() using 6
@@ -1162,7 +1162,7 @@ input : const PointRange &
 point_map : PointMap
 nb_scales : std::size_t
 voxel_size : float";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_point_based_features = "generates geometric features based on point position information.
+constexpr const char* Classification_Point_set_feature_generator_generate_point_based_features = "generates geometric features based on point position information.
 
 This is a meta-function that calls the following functions:
 generate_eigen_features() generate_dispersion_features()
@@ -1173,7 +1173,7 @@ instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_eigen_features = "generates geometric eigen features.
+constexpr const char* Classification_Point_set_feature_generator_generate_eigen_features = "generates geometric eigen features.
 
 At each scale, features CGAL::Classification::Feature::Eigenvalue with indices
 0, 1 and 2 are generated. features the feature set where the features are
@@ -1182,7 +1182,7 @@ instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_dispersion_features = "generates geometric features based on local dispersion information.
+constexpr const char* Classification_Point_set_feature_generator_generate_dispersion_features = "generates geometric features based on local dispersion information.
 
 At each scale, the following features are generated:
 CGAL::Classification::Feature::Distance_to_plane
@@ -1192,7 +1192,7 @@ where the features are instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_elevation_features = "generates geometric features based on elevation information.
+constexpr const char* Classification_Point_set_feature_generator_generate_elevation_features = "generates geometric features based on elevation information.
 
 At each scale, the following features are generated:
 CGAL::Classification::Feature::Elevation
@@ -1204,7 +1204,7 @@ the features are instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_normal_based_features = "generates geometric features based on normal analysis information.
+constexpr const char* Classification_Point_set_feature_generator_generate_normal_based_features = "generates geometric features based on normal analysis information.
 
 At each scale, the version of CGAL::Classification::Feature::Verticality based
 on eigenvalue is generated. features the feature set where the features are
@@ -1213,7 +1213,7 @@ instantiated.
 Parameters
 ----------
 features : Feature_set &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_normal_based_features_1 = "generates geometric features based on normal vector information.
+constexpr const char* Classification_Point_set_feature_generator_generate_normal_based_features_1 = "generates geometric features based on normal vector information.
 
 Generates the version of CGAL::Classification::Feature::Verticality based on
 normal vectors. VectorMap model of ReadablePropertyMap whose key type is the
@@ -1226,7 +1226,7 @@ Parameters
 ----------
 features : Feature_set &
 normal_map : const VectorMap &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_color_based_features = "generates geometric features based on point color information.
+constexpr const char* Classification_Point_set_feature_generator_generate_color_based_features = "generates geometric features based on point color information.
 
 Generates CGAL::Classification::Feature::Color_channel with channels HUE ,
 SATURATION and VALUE . ColorMap model of ReadablePropertyMap whose key type is
@@ -1238,7 +1238,7 @@ Parameters
 ----------
 features : Feature_set &
 color_map : const ColorMap &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_generate_echo_based_features = "generates geometric features based on echo information.
+constexpr const char* Classification_Point_set_feature_generator_generate_echo_based_features = "generates geometric features based on echo information.
 
 At each scale, generates CGAL::Classification::Feature::Echo_scatter . EchoMap
 model of ReadablePropertyMap whose key type is the value type of the iterator
@@ -1250,34 +1250,34 @@ Parameters
 ----------
 features : Feature_set &
 echo_map : const EchoMap &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_bbox = "returns the bounding box of the input point set.
+constexpr const char* Classification_Point_set_feature_generator_bbox = "returns the bounding box of the input point set.
 
 Returns: const Iso_cuboid_3 &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_neighborhood = "returns the neighborhood structure at scale scale .
+constexpr const char* Classification_Point_set_feature_generator_neighborhood = "returns the neighborhood structure at scale scale .
 
 Parameters
 ----------
 scale : std::size_t
 
 Returns: const Neighborhood &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_grid = "returns the planimetric grid structure at scale scale .
+constexpr const char* Classification_Point_set_feature_generator_grid = "returns the planimetric grid structure at scale scale .
 
 Parameters
 ----------
 scale : std::size_t
 
 Returns: const Planimetric_grid &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_eigen = "returns the local eigen analysis structure at scale scale .
+constexpr const char* Classification_Point_set_feature_generator_eigen = "returns the local eigen analysis structure at scale scale .
 
 Parameters
 ----------
 scale : std::size_t
 
 Returns: const Local_eigen_analysis &";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_number_of_scales = "returns the number of scales that were computed.
+constexpr const char* Classification_Point_set_feature_generator_number_of_scales = "returns the number of scales that were computed.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_grid_resolution = "returns the grid resolution at scale scale .
+constexpr const char* Classification_Point_set_feature_generator_grid_resolution = "returns the grid resolution at scale scale .
 
 This resolution is the length and width of a cell of the Planimetric_grid
 defined at this scale.
@@ -1287,7 +1287,7 @@ Parameters
 scale : std::size_t
 
 Returns: float";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_radius_neighbors = "returns the radius used for neighborhood queries at scale scale .
+constexpr const char* Classification_Point_set_feature_generator_radius_neighbors = "returns the radius used for neighborhood queries at scale scale .
 
 This radius is the smallest radius that is relevant from a geometric point of
 view at this scale (that is to say that encloses a few cells of
@@ -1298,7 +1298,7 @@ Parameters
 scale : std::size_t
 
 Returns: float";
-constexpr const char* CGAL_Classification_Point_set_feature_generator_radius_dtm = "returns the radius used for digital terrain modeling at scale scale .
+constexpr const char* Classification_Point_set_feature_generator_radius_dtm = "returns the radius used for digital terrain modeling at scale scale .
 
 This radius represents the minimum size of a building at this scale.
 
@@ -1310,9 +1310,9 @@ Returns: float";
 
 
 // CGAL::Classification::Point_set_neighborhood
-constexpr const char* CGAL_Classification_Point_set_neighborhood__class__ = "Class that precomputes spatial searching structures for an input point set and gives access to the local neighborhood of a point as a set of indices.";
+constexpr const char* Classification_Point_set_neighborhood__class__ = "Class that precomputes spatial searching structures for an input point set and gives access to the local neighborhood of a point as a set of indices.";
 
-constexpr const char* CGAL_Classification_Point_set_neighborhood_Point_set_neighborhood = "constructs a neighborhood object based on the input range.
+constexpr const char* Classification_Point_set_neighborhood_Point_set_neighborhood = "constructs a neighborhood object based on the input range.
 
 ConcurrencyTag enables sequential versus parallel algorithm. Possible values
 are Sequential_tag , Parallel_tag , and Parallel_if_available_tag . If no tag
@@ -1324,7 +1324,7 @@ Parameters
 input : const PointRange &
 point_map : PointMap
  : const ConcurrencyTag &";
-constexpr const char* CGAL_Classification_Point_set_neighborhood_Point_set_neighborhood_1 = "constructs a simplified neighborhood object based on the input range.
+constexpr const char* Classification_Point_set_neighborhood_Point_set_neighborhood_1 = "constructs a simplified neighborhood object based on the input range.
 
 This method first computes a simplified version of the input point set by
 voxelization: a 3D grid is defined and for each subset present in one cell,
@@ -1341,14 +1341,14 @@ input : const PointRange &
 point_map : PointMap
 voxel_size : float
  : const ConcurrencyTag &";
-constexpr const char* CGAL_Classification_Point_set_neighborhood_k_neighbor_query = "returns a neighbor query object with fixed number of neighbors k .
+constexpr const char* Classification_Point_set_neighborhood_k_neighbor_query = "returns a neighbor query object with fixed number of neighbors k .
 
 Parameters
 ----------
 k : const unsigned int
 
 Returns: K_neighbor_query";
-constexpr const char* CGAL_Classification_Point_set_neighborhood_sphere_neighbor_query = "returns a neighbor query object with fixed radius radius .
+constexpr const char* Classification_Point_set_neighborhood_sphere_neighbor_query = "returns a neighbor query object with fixed radius radius .
 
 Parameters
 ----------
@@ -1357,9 +1357,9 @@ radius : const float
 Returns: Sphere_neighbor_query";
 
 // CGAL::Classification::Point_set_neighborhood::K_neighbor_query
-constexpr const char* CGAL_Classification_Point_set_neighborhood_K_neighbor_query__class__ = "Functor that computes the neighborhood of an input point with a fixed number of neighbors.";
+constexpr const char* Classification_Point_set_neighborhood_K_neighbor_query__class__ = "Functor that computes the neighborhood of an input point with a fixed number of neighbors.";
 
-constexpr const char* CGAL_Classification_Point_set_neighborhood_K_neighbor_query_K_neighbor_query = "constructs a K neighbor query object.
+constexpr const char* Classification_Point_set_neighborhood_K_neighbor_query_K_neighbor_query = "constructs a K neighbor query object.
 
 neighborhood point set neighborhood object. k number of neighbors per query.
 
@@ -1370,9 +1370,9 @@ k : unsigned int";
 
 
 // CGAL::Classification::Point_set_neighborhood::Sphere_neighbor_query
-constexpr const char* CGAL_Classification_Point_set_neighborhood_Sphere_neighbor_query__class__ = "Functor that computes the neighborhood of an input point defined as the points lying in a sphere of fixed radius centered at the input point.";
+constexpr const char* Classification_Point_set_neighborhood_Sphere_neighbor_query__class__ = "Functor that computes the neighborhood of an input point defined as the points lying in a sphere of fixed radius centered at the input point.";
 
-constexpr const char* CGAL_Classification_Point_set_neighborhood_Sphere_neighbor_query_Sphere_neighbor_query = "constructs a range neighbor query object.
+constexpr const char* Classification_Point_set_neighborhood_Sphere_neighbor_query_Sphere_neighbor_query = "constructs a range neighbor query object.
 
 neighborhood point set neighborhood object. radius radius of the neighbor
 query sphere.
@@ -1383,9 +1383,9 @@ neighborhood : const Point_set_neighborhood &
 radius : float";
 
 // CGAL::Classification::Sum_of_weighted_features_classifier
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier__class__ = "Classifier based on the sum of weighted features with user-defined effects on labels.";
+constexpr const char* Classification_Sum_of_weighted_features_classifier__class__ = "Classifier based on the sum of weighted features with user-defined effects on labels.";
 
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_Sum_of_weighted_features_classifier = "instantiates the classifier using the sets of labels and features .
+constexpr const char* Classification_Sum_of_weighted_features_classifier_Sum_of_weighted_features_classifier = "instantiates the classifier using the sets of labels and features .
 
 If the label set of the feature set are modified after instantiating this
 object (addition of removal of a label and/or of a feature), another
@@ -1396,27 +1396,27 @@ Parameters
 ----------
 labels : const Label_set &
 features : const Feature_set &";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_set_weight = "sets the weight of feature ( weight must be positive).
+constexpr const char* Classification_Sum_of_weighted_features_classifier_set_weight = "sets the weight of feature ( weight must be positive).
 
 Parameters
 ----------
 feature : Feature_handle
 weight : float";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_weight = "returns the weight of feature .
+constexpr const char* Classification_Sum_of_weighted_features_classifier_weight = "returns the weight of feature .
 
 Parameters
 ----------
 feature : Feature_handle
 
 Returns: float";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_set_effect = "sets the effect of feature on label .
+constexpr const char* Classification_Sum_of_weighted_features_classifier_set_effect = "sets the effect of feature on label .
 
 Parameters
 ----------
 label : Label_handle
 feature : Feature_handle
 effect : Effect";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_effect = "returns the effect of feature on label .
+constexpr const char* Classification_Sum_of_weighted_features_classifier_effect = "returns the effect of feature on label .
 
 Parameters
 ----------
@@ -1424,7 +1424,7 @@ label : Label_handle
 feature : Feature_handle
 
 Returns: Effect";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_train = "runs the training algorithm.
+constexpr const char* Classification_Sum_of_weighted_features_classifier_train = "runs the training algorithm.
 
 From the set of provided ground truth, this algorithm estimates the sets of
 weights and effects that produce the most accurate result with respect to this
@@ -1445,7 +1445,7 @@ ground_truth : const LabelIndexRange &
 nb_tests : unsigned int
 
 Returns: float";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_save_configuration = "saves the current configuration in the stream output .
+constexpr const char* Classification_Sum_of_weighted_features_classifier_save_configuration = "saves the current configuration in the stream output .
 
 This allows to easily save and recover a specific classification
 configuration, that is to say: The weight of each feature The effects of each
@@ -1455,7 +1455,7 @@ readable by the load_configuration() method.
 Parameters
 ----------
 output : std::ostream &";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_load_configuration = "loads a configuration from the stream input .
+constexpr const char* Classification_Sum_of_weighted_features_classifier_load_configuration = "loads a configuration from the stream input .
 
 A configuration is a set of weights and effects. The input file should be in
 the XML format written by the save_configuration() method. Labels and features
@@ -1478,7 +1478,7 @@ input : std::istream &
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Classification_Sum_of_weighted_features_classifier_Effect = "Defines the effect of a feature on a type.";
+constexpr const char* Classification_Sum_of_weighted_features_classifier_Effect = "Defines the effect of a feature on a type.";
 
 
 // std

@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Barycentric_coordinates_2 {
 
 // CGAL::Barycentric_coordinates::BarycentricCoordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricCoordinates_2__class__ = "A concept that describes the set of methods that should be defined for all coordinate models used to parameterize the class Generalized_barycentric_coordinates_2 .";
+constexpr const char* Barycentric_coordinates_BarycentricCoordinates_2__class__ = "A concept that describes the set of methods that should be defined for all coordinate models used to parameterize the class Generalized_barycentric_coordinates_2 .";
 
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricCoordinates_2_BarycentricCoordinates_2 = "Creates a class that implements generalized barycentric coordinates for any query point that does not belong to the polygon's boundary.
+constexpr const char* Barycentric_coordinates_BarycentricCoordinates_2_BarycentricCoordinates_2 = "Creates a class that implements generalized barycentric coordinates for any query point that does not belong to the polygon's boundary.
 
 The polygon is given by a range of vertices of the type Traits::Point_2 stored
 in a container of the type std::vector .
@@ -19,7 +19,7 @@ Parameters
 ----------
 vertices : const std::vector< Traits::Point_2 > &
 barycentric_traits : const Traits &";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricCoordinates_2_weights = "A function that computes generalized barycentric coordinates without normalization that are called generalized barycentric weights (as fast as possible algorithm is used).
+constexpr const char* Barycentric_coordinates_BarycentricCoordinates_2_weights = "A function that computes generalized barycentric coordinates without normalization that are called generalized barycentric weights (as fast as possible algorithm is used).
 
 Weights are computed with respect to a query point of the type Traits::Point_2
 and stored in the output iterator output . The function returns a pointer to
@@ -31,7 +31,7 @@ query_point : const Traits::Point_2 &
 output : OutputIterator &
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricCoordinates_2_coordinates_on_bounded_side = "A function that computes generalized barycentric coordinates on the bounded side of a polygon with one of two possible algorithms: one is precise and one is fast.
+constexpr const char* Barycentric_coordinates_BarycentricCoordinates_2_coordinates_on_bounded_side = "A function that computes generalized barycentric coordinates on the bounded side of a polygon with one of two possible algorithms: one is precise and one is fast.
 
 The algorithm type is specified by the parameter type_of_algorithm .
 Coordinates are computed with respect to a query point of the type
@@ -45,7 +45,7 @@ output : OutputIterator &
 type_of_algorithm : const Type_of_algorithm
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricCoordinates_2_coordinates_on_unbounded_side = "A function that computes generalized barycentric coordinates on the unbounded side of a polygon with one of two possible algorithms: one is precise and one is fast.
+constexpr const char* Barycentric_coordinates_BarycentricCoordinates_2_coordinates_on_unbounded_side = "A function that computes generalized barycentric coordinates on the unbounded side of a polygon with one of two possible algorithms: one is precise and one is fast.
 
 The algorithm type is specified by the parameter type_of_algorithm .
 Coordinates are computed with respect to a query point of the type
@@ -61,98 +61,98 @@ type_of_algorithm : const Type_of_algorithm
 Returns: std::optional< OutputIterator >";
 
 // CGAL::Barycentric_coordinates::BarycentricTraits_2
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2__class__ = "A concept that describes the set of requirements of the template parameter GeomTraits used to parameterize all classes and functions with 2D barycentric coordinates from the namespace CGAL::Barycentric_coordinates .";
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2__class__ = "A concept that describes the set of requirements of the template parameter GeomTraits used to parameterize all classes and functions with 2D barycentric coordinates from the namespace CGAL::Barycentric_coordinates .";
 
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_FT = "A model of FieldNumberType .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Comparison_result = "CGAL::Comparison_result or Uncertain<CGAL::Comparison_result> .
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_FT = "A model of FieldNumberType .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Orientation = "CGAL::Orientation or Uncertain<CGAL::Orientation> .
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Comparison_result = "CGAL::Comparison_result or Uncertain<CGAL::Comparison_result> .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Point_2 = "A model of Kernel::Point_2 .
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Orientation = "CGAL::Orientation or Uncertain<CGAL::Orientation> .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Vector_2 = "A model of Kernel::Vector_2 .
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Point_2 = "A model of Kernel::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compute_area_2 = "A construction object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Vector_2 = "A model of Kernel::Vector_2 .
+
+Returns: unspecified_type";
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compute_area_2 = "A construction object that must provide the function operator:
 
 FT operator(const Point_2 & p, const Point_2 & q, const Point_2 & r) that
 returns the signed area of the triangle defined by the points p , q , and r .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compute_squared_distance_2 = "A construction object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compute_squared_distance_2 = "A construction object that must provide the function operator:
 
 FT operator(const Point_2 & p, const Point_2 & q) that returns the squared
 Euclidean distance between the points p and q .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compute_squared_length_2 = "A construction object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compute_squared_length_2 = "A construction object that must provide the function operator:
 
 FT operator(const Vector_2 & v) that returns the squared length of the vector
 v .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compute_scalar_product_2 = "A construction object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compute_scalar_product_2 = "A construction object that must provide the function operator:
 
 FT operator(const Vector_2 & v, const Vector_2 & w) that returns the scalar
 product of the vectors v and w .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compute_determinant_2 = "A construction object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compute_determinant_2 = "A construction object that must provide the function operator:
 
 FT operator(const Vector_2 & v, const Vector_2 & w) that returns the
 determinant of the vectors v and w .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Construct_vector_2 = "A construction object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Construct_vector_2 = "A construction object that must provide the function operator:
 
 Vector_2 operator()(const Point_2 & p, const Point_2 & q) that returns the
 vector through the points p and q .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Equal_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Equal_2 = "A predicate object that must provide the function operator:
 
 bool operator(const Point_2 & p, const Point_2 & q) that returns true if p = q
 and false otherwise.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Collinear_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Collinear_2 = "A predicate object that must provide the function operator:
 
 bool operator(const Point_2 & p, const Point_2 & q, const Point_2 & r) that
 returns true if the points p , q , and r are collinear and false otherwise.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Collinear_are_ordered_along_line_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Collinear_are_ordered_along_line_2 = "A predicate object that must provide the function operator:
 
 bool operator(const Point_2 & p, const Point_2 & q, const Point_2 & r) that
 returns true if the point q lies between the points p and r and all three
 points are collinear.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Less_xy_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Less_xy_2 = "A predicate object that must provide the function operator:
 
 bool operator(const Point_2 & p, const Point_2 & q) that returns true iff the
 x-coordinate of p is smaller than the x-coordinate of q or if they are the
 same and the y-coordinate of p is smaller than the y-coordinate of q .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compare_x_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compare_x_2 = "A predicate object that must provide the function operator:
 
 Comparison_result operator(const Point_2 & p, const Point_2 & q) that compares
 the Cartesian x-coordinates of the points p and q .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Compare_y_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Compare_y_2 = "A predicate object that must provide the function operator:
 
 Comparison_result operator(const Point_2 & p, const Point_2 & q) that compares
 the Cartesian y-coordinates of the points p and q .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_BarycentricTraits_2_Orientation_2 = "A predicate object that must provide the function operator:
+constexpr const char* Barycentric_coordinates_BarycentricTraits_2_Orientation_2 = "A predicate object that must provide the function operator:
 
 Orientation operator(const Point_2 & p, const Point_2 & q, const Point_2 & r)
 that returns CGAL::LEFT_TURN if r lies to the left of the oriented line l
@@ -163,15 +163,15 @@ Returns: unspecified_type";
 
 
 // CGAL::Barycentric_coordinates::Delaunay_domain_2
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2__class__ = "2D Delaunay domain restricted to a simple polygon.";
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2__class__ = "2D Delaunay domain restricted to a simple polygon.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_Delaunay_domain_2 = "initializes all internal data structures.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_Delaunay_domain_2 = "initializes all internal data structures.
 
 polygon an instance of VertexRange with the vertices of a simple polygon
 traits a traits class with geometric objects, predicates, and constructions;
@@ -184,7 +184,7 @@ Parameters
 polygon : const VertexRange &
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_create = "creates a refined Delaunay triangulation restricted to the input polygon.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_create = "creates a refined Delaunay triangulation restricted to the input polygon.
 
 After the construction is completed, the first n vertices are the polygon
 vertices, the next m vertices are the vertices generated along the polygon
@@ -199,7 +199,7 @@ Parameters
 ----------
 max_edge_length : const FT
 seeds : const PointRange &";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_barycenters = "computes barycenters of all generated triangles.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_barycenters = "computes barycenters of all generated triangles.
 
 OutIterator a model of OutputIterator that accepts points of type Point_2
 b_begin the beginning of the destination range with the computed barycenters
@@ -211,12 +211,12 @@ Parameters
 b_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_number_of_vertices = "returns the number of triangulation vertices.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_number_of_vertices = "returns the number of triangulation vertices.
 
 This function implements DiscretizedDomain_2::number_of_vertices() .
 
 Returns: std::size_t";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_vertex = "returns a const reference to the triangulation vertex with the index query_index .
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_vertex = "returns a const reference to the triangulation vertex with the index query_index .
 
 This function implements DiscretizedDomain_2::vertex() . query_index an index
 of the requested vertex query_index >= 0 && query_index < number_of_vertices()
@@ -226,7 +226,7 @@ Parameters
 query_index : const std::size_t
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_is_on_boundary = "controls if the triangulation vertex with the index query_index is on the polygon boundary.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_is_on_boundary = "controls if the triangulation vertex with the index query_index is on the polygon boundary.
 
 This function implements DiscretizedDomain_2::is_on_boundary() . query_index
 an index of the query vertex query_index >= 0 && query_index <
@@ -237,7 +237,7 @@ Parameters
 query_index : const std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_operator = "returns the one-ring neighborhood of the triangulation vertex with the index query_index .
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_operator = "returns the one-ring neighborhood of the triangulation vertex with the index query_index .
 
 This function implements DiscretizedDomain_2::operator()() . query_index an
 index of the query vertex neighbors stores indices of the vertices, which from
@@ -248,7 +248,7 @@ Parameters
 ----------
 query_index : const std::size_t
 neighbors : std::vector< std::size_t > &";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_locate = "locates a triangle that contains a given query point.
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_locate = "locates a triangle that contains a given query point.
 
 If triangle is empty, the query point does not belong to the domain. This
 function implements DiscretizedDomain_2::locate() . query a query point
@@ -259,29 +259,29 @@ Parameters
 ----------
 query : const Point_2 &
 triangle : std::vector< std::size_t > &";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_clear = "clears all internal data structures.";
-constexpr const char* CGAL_Barycentric_coordinates_Delaunay_domain_2_release_memory = "releases all memory that is used internally.";
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_clear = "clears all internal data structures.";
+constexpr const char* Barycentric_coordinates_Delaunay_domain_2_release_memory = "releases all memory that is used internally.";
 
 // CGAL::Barycentric_coordinates::Discrete_harmonic_2
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_2__class__ = "The class Discrete_harmonic_2 implements 2D discrete harmonic coordinates ( [2] , [9] , [1] ).";
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_2__class__ = "The class Discrete_harmonic_2 implements 2D discrete harmonic coordinates ( [2] , [9] , [1] ).";
 
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_2_Point_2 = "Point type.
 
 Returns: Traits::Point_2";
 
 // CGAL::Barycentric_coordinates::Discrete_harmonic_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_coordinates_2__class__ = "2D discrete harmonic coordinates.";
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_coordinates_2__class__ = "2D discrete harmonic coordinates.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_coordinates_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_coordinates_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_coordinates_2_Discrete_harmonic_coordinates_2 = "initializes all internal data structures.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_coordinates_2_Discrete_harmonic_coordinates_2 = "initializes all internal data structures.
 
 This class implements the behavior of discrete harmonic coordinates for 2D
 query points. polygon an instance of VertexRange with the vertices of a
@@ -298,7 +298,7 @@ polygon : const VertexRange &
 policy : const Computation_policy_2
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_coordinates_2_weights = "computes 2D discrete harmonic weights.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_coordinates_2_weights = "computes 2D discrete harmonic weights.
 
 This function fills weights with 2D discrete harmonic weights computed at the
 query point with respect to the vertices of the input polygon. If query
@@ -315,7 +315,7 @@ query : const Point_2 &
 w_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Discrete_harmonic_coordinates_2_operator = "computes 2D discrete harmonic coordinates.
+constexpr const char* Barycentric_coordinates_Discrete_harmonic_coordinates_2_operator = "computes 2D discrete harmonic coordinates.
 
 This function fills c_begin with 2D discrete harmonic coordinates computed at
 the query point with respect to the vertices of the input polygon. The number
@@ -336,32 +336,32 @@ c_begin : OutIterator
 Returns: OutIterator";
 
 // CGAL::Barycentric_coordinates::DiscretizedDomain_2
-constexpr const char* CGAL_Barycentric_coordinates_DiscretizedDomain_2__class__ = "A concept that describes the set of methods that should be defined for all discretized domains obtained by meshing the interior part of a simple polygon.";
+constexpr const char* Barycentric_coordinates_DiscretizedDomain_2__class__ = "A concept that describes the set of methods that should be defined for all discretized domains obtained by meshing the interior part of a simple polygon.";
 
-constexpr const char* CGAL_Barycentric_coordinates_DiscretizedDomain_2_number_of_vertices = "returns the number of vertices after meshing the domain.
+constexpr const char* Barycentric_coordinates_DiscretizedDomain_2_number_of_vertices = "returns the number of vertices after meshing the domain.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Barycentric_coordinates_DiscretizedDomain_2_vertex = "returns a const reference to the vertex with the index query_index , the Vertex_2 type being a model of Kernel::Point_2 .
+constexpr const char* Barycentric_coordinates_DiscretizedDomain_2_vertex = "returns a const reference to the vertex with the index query_index , the Vertex_2 type being a model of Kernel::Point_2 .
 
 Parameters
 ----------
 query_index : const std::size_t
 
 Returns: const Vertex_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_DiscretizedDomain_2_is_on_boundary = "verifies if the vertex with the index query_index is on the boundary of the domain.
+constexpr const char* Barycentric_coordinates_DiscretizedDomain_2_is_on_boundary = "verifies if the vertex with the index query_index is on the boundary of the domain.
 
 Parameters
 ----------
 query_index : const std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Barycentric_coordinates_DiscretizedDomain_2_operator = "fills neighbors with the indices of the vertices, which form the one-ring neighborhood of the vertex with the index query_index , the neighbors have to be in the counterclockwise order and form a simple polygon.
+constexpr const char* Barycentric_coordinates_DiscretizedDomain_2_operator = "fills neighbors with the indices of the vertices, which form the one-ring neighborhood of the vertex with the index query_index , the neighbors have to be in the counterclockwise order and form a simple polygon.
 
 Parameters
 ----------
 query_index : const std::size_t
 neighbors : std::vector< std::size_t > &";
-constexpr const char* CGAL_Barycentric_coordinates_DiscretizedDomain_2_locate = "fills indices with the indices of the vertices, which form a finite element of the domain, that contains a query point; if no indices are found, the query point does not belong to the domain; the type Query_2 is a model of Kernel::Point_2 .
+constexpr const char* Barycentric_coordinates_DiscretizedDomain_2_locate = "fills indices with the indices of the vertices, which form a finite element of the domain, that contains a query point; if no indices are found, the query point does not belong to the domain; the type Query_2 is a model of Kernel::Point_2 .
 
 Parameters
 ----------
@@ -369,21 +369,21 @@ query : const Query_2 &
 indices : std::vector< std::size_t > &";
 
 // CGAL::Barycentric_coordinates::Generalized_barycentric_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2__class__ = "The class Generalized_barycentric_coordinates_2 implements generalized barycentric coordinates along the polygon's boundary and provides a common interface for all coordinate classes.";
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2__class__ = "The class Generalized_barycentric_coordinates_2 implements generalized barycentric coordinates along the polygon's boundary and provides a common interface for all coordinate classes.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_Point_2 = "Point type.
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_Vertex_range = "Range of vertices in a polygon.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_Vertex_range = "Range of vertices in a polygon.
 
 This type is a model of the concept Range . Its iterator type is
 RandomAccessIterator , and its value type is Traits::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_Generalized_barycentric_coordinates_2 = "Creates the class Generalized_barycentric_coordinates_2 that implements generalized barycentric coordinates along the polygon's boundary given by a range of vertices [ first_vertex , last_vertex ) .
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_Generalized_barycentric_coordinates_2 = "Creates the class Generalized_barycentric_coordinates_2 that implements generalized barycentric coordinates along the polygon's boundary given by a range of vertices [ first_vertex , last_vertex ) .
 
 InputIterator must be an input iterator with a value type equivalent to
 Traits::Point_2 . Number of the polygon's vertices > 2. The provided polygon
@@ -394,7 +394,7 @@ Parameters
 first_vertex : const InputIterator &
 last_vertex : const InputIterator &
 b_traits : const Traits &";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_operator = "Computes generalized barycentric coordinates for any query point in the plane with respect to all the vertices of the polygon.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_operator = "Computes generalized barycentric coordinates for any query point in the plane with respect to all the vertices of the polygon.
 
 Computed coordinates are stored in the output iterator output . Different
 choices of the parameter query_point_location are possible:
@@ -419,7 +419,7 @@ query_point_location : Query_point_location
 type_of_algorithm : Type_of_algorithm
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_compute_on_edge = "Computes generalized barycentric coordinates for a query point on the polygon's boundary with known index of the edge to which this point belongs.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_compute_on_edge = "Computes generalized barycentric coordinates for a query point on the polygon's boundary with known index of the edge to which this point belongs.
 
 Computed coordinates are stored in the output iterator output , and it is a
 set of zeros with two possibly non zero values. The provided query point
@@ -433,7 +433,7 @@ index : const int
 output : OutputIterator
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_compute_on_vertex = "Computes generalized barycentric coordinates for a query point, which coincides with one of the polygon's vertices, with known index.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_compute_on_vertex = "Computes generalized barycentric coordinates for a query point, which coincides with one of the polygon's vertices, with known index.
 
 Computed coordinates are stored in the output iterator output , and it is a
 set of zeros with value of one at the vertex of interest. (0 <= index) &&
@@ -445,7 +445,7 @@ index : const int
 output : OutputIterator
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_compute_weights = "Computes generalized barycentric weights (unnormalized coordinates) for any strictly interior query point with respect to all the vertices of the polygon.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_compute_weights = "Computes generalized barycentric weights (unnormalized coordinates) for any strictly interior query point with respect to all the vertices of the polygon.
 
 Computed weights are stored in the output iterator output . The provided query
 point belongs to the polygon's interior, excluding the boundary.
@@ -456,27 +456,27 @@ query_point : const Point_2 &
 output : OutputIterator
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_vertices = "Returns all the vertices of the polygon.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_vertices = "Returns all the vertices of the polygon.
 
 Returns: const Vertex_range &";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_first_vertex = "Returns the first vertex of the polygon.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_first_vertex = "Returns the first vertex of the polygon.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Generalized_barycentric_coordinates_2_last_vertex = "Returns the last vertex of the polygon.
+constexpr const char* Barycentric_coordinates_Generalized_barycentric_coordinates_2_last_vertex = "Returns the last vertex of the polygon.
 
 Returns: const Point_2 &";
 
 
 // CGAL::Barycentric_coordinates::Harmonic_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2__class__ = "2D harmonic coordinates.";
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2__class__ = "2D harmonic coordinates.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_Harmonic_coordinates_2 = "initializes all internal data structures.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_Harmonic_coordinates_2 = "initializes all internal data structures.
 
 This class implements the behavior of harmonic coordinates for 2D query
 points. polygon an instance of VertexRange with the vertices of a simple
@@ -492,7 +492,7 @@ polygon : const VertexRange &
 domain : const DiscretizedDomain &
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_operator = "evaluates 2D harmonic coordinates.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_operator = "evaluates 2D harmonic coordinates.
 
 This function fills c_begin with harmonic coordinates evaluated at the query
 point with respect to the vertices of the input polygon. Evaluation is
@@ -515,7 +515,7 @@ query : const Point_2 &
 c_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_operator_1 = "returns 2D harmonic coordinates at one domain vertex.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_operator_1 = "returns 2D harmonic coordinates at one domain vertex.
 
 This function fills c_begin with harmonic coordinates computed at the vertex
 of the input domain with the index query_index . The number of returned
@@ -535,7 +535,7 @@ query_index : const std::size_t
 c_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_operator_2 = "returns 2D harmonic coordinates at all domain vertices.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_operator_2 = "returns 2D harmonic coordinates at all domain vertices.
 
 This function fills c_begin with harmonic coordinates computed at the vertices
 of the input domain. The number of returned coordinates equals to the number
@@ -549,42 +549,42 @@ Parameters
 c_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_compute = "computes 2D harmonic coordinates at the vertices of the input domain.";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_setup = "computes all necessary harmonic data.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_compute = "computes 2D harmonic coordinates at the vertices of the input domain.";
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_setup = "computes all necessary harmonic data.
 
 This function fills in the left side matrix A and the right side vector b of
 the linear system Ax = b. The matrix A is a sparse symmetric positive definite
 matrix. The solution vector x of this system gives the harmonic coordinates at
 the vertices of the input domain.";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_factorize = "factorizes the matrix A.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_factorize = "factorizes the matrix A.
 
 setup() is called";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_solve = "solves the linear system Ax = b.
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_solve = "solves the linear system Ax = b.
 
 factorize() is called";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_clear = "clears all internal data structures.";
-constexpr const char* CGAL_Barycentric_coordinates_Harmonic_coordinates_2_release_memory = "releases all memory that is used internally.";
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_clear = "clears all internal data structures.";
+constexpr const char* Barycentric_coordinates_Harmonic_coordinates_2_release_memory = "releases all memory that is used internally.";
 
 // CGAL::Barycentric_coordinates::Mean_value_2
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_2__class__ = "The class Mean_value_2 implements 2D mean value coordinates ( [5] , [2] , [3] ).";
+constexpr const char* Barycentric_coordinates_Mean_value_2__class__ = "The class Mean_value_2 implements 2D mean value coordinates ( [5] , [2] , [3] ).";
 
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Mean_value_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Mean_value_2_Point_2 = "Point type.
 
 Returns: Traits::Point_2";
 
 // CGAL::Barycentric_coordinates::Mean_value_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_coordinates_2__class__ = "2D mean value coordinates.";
+constexpr const char* Barycentric_coordinates_Mean_value_coordinates_2__class__ = "2D mean value coordinates.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Mean_value_coordinates_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Mean_value_coordinates_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_coordinates_2_Mean_value_coordinates_2 = "initializes all internal data structures.
+constexpr const char* Barycentric_coordinates_Mean_value_coordinates_2_Mean_value_coordinates_2 = "initializes all internal data structures.
 
 This class implements the behavior of mean value coordinates for 2D query
 points. polygon an instance of VertexRange with the vertices of a simple
@@ -601,7 +601,7 @@ polygon : const VertexRange &
 policy : const Computation_policy_2
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_coordinates_2_weights = "computes 2D mean value weights.
+constexpr const char* Barycentric_coordinates_Mean_value_coordinates_2_weights = "computes 2D mean value weights.
 
 This function fills weights with 2D mean value weights computed at the query
 point with respect to the vertices of the input polygon. If query belongs to
@@ -618,7 +618,7 @@ query : const Point_2 &
 w_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Mean_value_coordinates_2_operator = "computes 2D mean value coordinates.
+constexpr const char* Barycentric_coordinates_Mean_value_coordinates_2_operator = "computes 2D mean value coordinates.
 
 This function fills c_begin with 2D mean value coordinates computed at the
 query point with respect to the vertices of the input polygon. The number of
@@ -639,21 +639,21 @@ c_begin : OutIterator
 Returns: OutIterator";
 
 // CGAL::Barycentric_coordinates::Segment_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2__class__ = "The class Segment_coordinates_2 implements barycentric coordinates with respect to an arbitrary non-degenerate segment along an arbitrary line in the plane.";
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2__class__ = "The class Segment_coordinates_2 implements barycentric coordinates with respect to an arbitrary non-degenerate segment along an arbitrary line in the plane.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_Point_2 = "Point type.
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_Vertex_range = "Range of vertices in a segment.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_Vertex_range = "Range of vertices in a segment.
 
 This type is a model of the concept Range . Its iterator type is
 RandomAccessIterator , and its value type is Traits::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_Segment_coordinates_2 = "Creates the class Segment_coordinates_2 that implements segment coordinates with respect to an arbitrary non-degenerate segment along an arbitrary line in the plane.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_Segment_coordinates_2 = "Creates the class Segment_coordinates_2 that implements segment coordinates with respect to an arbitrary non-degenerate segment along an arbitrary line in the plane.
 
 The segment is given by its two vertices. Segment is not degenerate.
 
@@ -662,7 +662,7 @@ Parameters
 first_vertex : const Point_2 &
 second_vertex : const Point_2 &
 b_traits : const Traits &";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_operator = "Computes segment barycentric coordinates for a chosen query point with respect to both vertices of the segment.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_operator = "Computes segment barycentric coordinates for a chosen query point with respect to both vertices of the segment.
 
 Computed coordinates are stored in the output iterator output .
 
@@ -672,16 +672,16 @@ query_point : const Point_2 &
 output : OutputIterator
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_vertices = "Returns both vertices of the segment.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_vertices = "Returns both vertices of the segment.
 
 Returns: const Vertex_range &";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_first_vertex = "Returns the first vertex of the segment.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_first_vertex = "Returns the first vertex of the segment.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_second_vertex = "Returns the second vertex of the segment.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_second_vertex = "Returns the second vertex of the segment.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_compute_segment_coordinates_2 = "This is a global function that takes both vertices of a segment and computes segment coordinates at a given query point with respect to these vertices.
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_compute_segment_coordinates_2 = "This is a global function that takes both vertices of a segment and computes segment coordinates at a given query point with respect to these vertices.
 
 Deprecated This part of the package is deprecated since the version 5.4 of
 CGAL. Traits must be a model of the concept BarycentricTraits_2 .
@@ -696,21 +696,21 @@ barycentric_traits : const Traits &
 Returns: std::array< typename Traits::FT, 2 >";
 
 // CGAL::Barycentric_coordinates::Triangle_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2__class__ = "The class Triangle_coordinates_2 implements barycentric coordinates ( [1] , [2] ) with respect to an arbitrary non-degenerate triangle in the plane.";
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2__class__ = "The class Triangle_coordinates_2 implements barycentric coordinates ( [1] , [2] ) with respect to an arbitrary non-degenerate triangle in the plane.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_Point_2 = "Point type.
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_Vertex_range = "Range of vertices in a triangle.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_Vertex_range = "Range of vertices in a triangle.
 
 This type is a model of the concept Range . Its iterator type is
 RandomAccessIterator , and its value type is Traits::Point_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_Triangle_coordinates_2 = "Creates the class Triangle_coordinates_2 that implements triangle coordinates with respect to an arbitrary non-degenerate triangle in the plane.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_Triangle_coordinates_2 = "Creates the class Triangle_coordinates_2 that implements triangle coordinates with respect to an arbitrary non-degenerate triangle in the plane.
 
 The triangle is given by its three vertices. Triangle is not degenerate.
 
@@ -720,7 +720,7 @@ first_vertex : const Point_2 &
 second_vertex : const Point_2 &
 third_vertex : const Point_2 &
 b_traits : const Traits &";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_operator = "Computes triangle barycentric coordinates for a chosen query point with respect to all three vertices of the triangle.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_operator = "Computes triangle barycentric coordinates for a chosen query point with respect to all three vertices of the triangle.
 
 Computed coordinates are stored in the output iterator output .
 
@@ -730,19 +730,19 @@ query_point : const Point_2 &
 output : OutputIterator
 
 Returns: std::optional< OutputIterator >";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_vertices = "Returns all the vertices of the triangle.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_vertices = "Returns all the vertices of the triangle.
 
 Returns: const Vertex_range &";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_first_vertex = "Returns the first vertex of the triangle.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_first_vertex = "Returns the first vertex of the triangle.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_second_vertex = "Returns the second vertex of the triangle.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_second_vertex = "Returns the second vertex of the triangle.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_third_vertex = "Returns the third vertex of the triangle.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_third_vertex = "Returns the third vertex of the triangle.
 
 Returns: const Point_2 &";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_compute_triangle_coordinates_2 = "This is a global function that takes three vertices of a triangle and computes triangle coordinates at a given query point with respect to these vertices.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_compute_triangle_coordinates_2 = "This is a global function that takes three vertices of a triangle and computes triangle coordinates at a given query point with respect to these vertices.
 
 Deprecated This part of the package is deprecated since the version 5.4 of
 CGAL. Traits must be a model of the concept BarycentricTraits_2 .
@@ -758,25 +758,25 @@ barycentric_traits : const Traits &
 Returns: std::array< typename Traits::FT, 3 >";
 
 // CGAL::Barycentric_coordinates::Wachspress_2
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_2__class__ = "The class Wachspress_2 implements 2D Wachspress coordinates ( [2] , [8] , [10] ).";
+constexpr const char* Barycentric_coordinates_Wachspress_2__class__ = "The class Wachspress_2 implements 2D Wachspress coordinates ( [2] , [8] , [10] ).";
 
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Wachspress_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Wachspress_2_Point_2 = "Point type.
 
 Returns: Traits::Point_2";
 
 // CGAL::Barycentric_coordinates::Wachspress_coordinates_2
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_coordinates_2__class__ = "2D Wachspress coordinates.";
+constexpr const char* Barycentric_coordinates_Wachspress_coordinates_2__class__ = "2D Wachspress coordinates.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_coordinates_2_FT = "Number type.
+constexpr const char* Barycentric_coordinates_Wachspress_coordinates_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_coordinates_2_Point_2 = "Point type.
+constexpr const char* Barycentric_coordinates_Wachspress_coordinates_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_coordinates_2_Wachspress_coordinates_2 = "initializes all internal data structures.
+constexpr const char* Barycentric_coordinates_Wachspress_coordinates_2_Wachspress_coordinates_2 = "initializes all internal data structures.
 
 This class implements the behavior of Wachspress coordinates for 2D query
 points. polygon an instance of VertexRange with the vertices of a strictly
@@ -793,7 +793,7 @@ polygon : const VertexRange &
 policy : const Computation_policy_2
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_coordinates_2_weights = "computes 2D Wachspress weights.
+constexpr const char* Barycentric_coordinates_Wachspress_coordinates_2_weights = "computes 2D Wachspress weights.
 
 This function fills weights with 2D Wachspress weights computed at the query
 point with respect to the vertices of the input polygon. If query belongs to
@@ -810,7 +810,7 @@ query : const Point_2 &
 w_begin : OutIterator
 
 Returns: OutIterator";
-constexpr const char* CGAL_Barycentric_coordinates_Wachspress_coordinates_2_operator = "computes 2D Wachspress coordinates.
+constexpr const char* Barycentric_coordinates_Wachspress_coordinates_2_operator = "computes 2D Wachspress coordinates.
 
 This function fills c_begin with 2D Wachspress coordinates computed at the
 query point with respect to the vertices of the input polygon. The number of
@@ -831,18 +831,18 @@ c_begin : OutIterator
 Returns: OutIterator";
 
 // CGAL::Barycentric_coordinates
-constexpr const char* CGAL_Barycentric_coordinates__class__ = "The namespace Barycentric_coordinates contains implementations of all generalized barycentric coordinates: 2D, 3D, related enumerations, etc.";
+constexpr const char* Barycentric_coordinates__class__ = "The namespace Barycentric_coordinates contains implementations of all generalized barycentric coordinates: 2D, 3D, related enumerations, etc.";
 
-constexpr const char* CGAL_Barycentric_coordinates_Computation_policy_2 = "Computation_policy_2 provides a way to choose an asymptotic time complexity of the algorithm and its precision for computing 2D barycentric weights and coordinates.";
-constexpr const char* CGAL_Barycentric_coordinates_Query_point_location = "Query_point_location is enumeration with possible locations of a query point provided by the user.
-
-Deprecated This part of the package is deprecated since the version 5.4 of
-CGAL.";
-constexpr const char* CGAL_Barycentric_coordinates_Type_of_algorithm = "Type_of_algorithm is enumeration with possible algorithms to compute coordinates.
+constexpr const char* Barycentric_coordinates_Computation_policy_2 = "Computation_policy_2 provides a way to choose an asymptotic time complexity of the algorithm and its precision for computing 2D barycentric weights and coordinates.";
+constexpr const char* Barycentric_coordinates_Query_point_location = "Query_point_location is enumeration with possible locations of a query point provided by the user.
 
 Deprecated This part of the package is deprecated since the version 5.4 of
 CGAL.";
-constexpr const char* CGAL_Barycentric_coordinates_Segment_coordinates_2_compute_segment_coordinates_2_1 = "This is a global function that takes both vertices of a segment and computes segment coordinates at a given query point with respect to these vertices.
+constexpr const char* Barycentric_coordinates_Type_of_algorithm = "Type_of_algorithm is enumeration with possible algorithms to compute coordinates.
+
+Deprecated This part of the package is deprecated since the version 5.4 of
+CGAL.";
+constexpr const char* Barycentric_coordinates_Segment_coordinates_2_compute_segment_coordinates_2_1 = "This is a global function that takes both vertices of a segment and computes segment coordinates at a given query point with respect to these vertices.
 
 Deprecated This part of the package is deprecated since the version 5.4 of
 CGAL. Traits must be a model of the concept BarycentricTraits_2 .
@@ -855,7 +855,7 @@ query_point : const typename Traits::Point_2 &
 barycentric_traits : const Traits &
 
 Returns: std::array< typename Traits::FT, 2 >";
-constexpr const char* CGAL_Barycentric_coordinates_Triangle_coordinates_2_compute_triangle_coordinates_2_1 = "This is a global function that takes three vertices of a triangle and computes triangle coordinates at a given query point with respect to these vertices.
+constexpr const char* Barycentric_coordinates_Triangle_coordinates_2_compute_triangle_coordinates_2_1 = "This is a global function that takes three vertices of a triangle and computes triangle coordinates at a given query point with respect to these vertices.
 
 Deprecated This part of the package is deprecated since the version 5.4 of
 CGAL. Traits must be a model of the concept BarycentricTraits_2 .

@@ -58,6 +58,15 @@
 
 namespace py = nanobind;
 
+namespace {
+constexpr const char* HAS_VALID_INDEX_DOC =
+  "Returns whether the given vertex, edge, halfedge, or face index is valid.";
+constexpr const char* SET_NEXT_ONLY_DOC =
+  "Sets the next halfedge of h to nh without updating the previous halfedge of nh.";
+constexpr const char* SET_PREV_ONLY_DOC =
+  "Sets the previous halfedge of h to ph without updating the next halfedge of ph.";
+} // namespace
+
 namespace sm {
 
 //! Add a face from a list of vertices.
@@ -569,65 +578,73 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
 
     sm_c.def(py::init<>(),
-              doc::CGAL_Surface_mesh_Surface_mesh)
+              doc::Surface_mesh_Surface_mesh)
       .def(py::init<const Sm&>(),
             py::arg("other"),
-           doc::CGAL_Surface_mesh_Surface_mesh_1)
+           doc::Surface_mesh_Surface_mesh_1)
       // .def("assign", &Sm::assign, ri)
       .def("add_vertex", py::overload_cast<>(&Sm::add_vertex),
-           doc::CGAL_Surface_mesh_add_vertex)
+           doc::Surface_mesh_add_vertex)
       .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex),
             py::arg("point"),
-           doc::CGAL_Surface_mesh_add_vertex_1)
+           doc::Surface_mesh_add_vertex_1)
       .def("add_edge", py::overload_cast<>(&Sm::add_edge),
-           doc::CGAL_Surface_mesh_add_edge)
+           doc::Surface_mesh_add_edge)
       .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge),
             py::arg("source"), py::arg("target"),
-           doc::CGAL_Surface_mesh_add_edge_1)
+           doc::Surface_mesh_add_edge_1)
       .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face),
-           doc::CGAL_Surface_mesh_add_face)
+           doc::Surface_mesh_add_face)
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face),
             py::arg("v0"), py::arg("v1"), py::arg("v2"),
-           doc::CGAL_Surface_mesh_add_face_1)
+           doc::Surface_mesh_add_face_1)
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face),
             py::arg("v0"), py::arg("v1"), py::arg("v2"), py::arg("v3"),
-           doc::CGAL_Surface_mesh_add_face_2)
+           doc::Surface_mesh_add_face_2)
       .def("add_face", &sm::add_face<Sm>,
             py::arg("vertices"),
-           doc::CGAL_Surface_mesh_add_face_3)
+           doc::Surface_mesh_add_face_3)
 
-      .def("has_valid_index", &sm::has_valid_index_v<Sm>, py::arg("vertex"))
-      .def("has_valid_index", &sm::has_valid_index_e<Sm>, py::arg("edge"))
-      .def("has_valid_index", &sm::has_valid_index_h<Sm>, py::arg("halfedge"))
-      .def("has_valid_index", &sm::has_valid_index_f<Sm>, py::arg("face"))
+      .def("has_valid_index", &sm::has_valid_index_v<Sm>, py::arg("vertex"),
+            HAS_VALID_INDEX_DOC)
+      .def("has_valid_index", &sm::has_valid_index_e<Sm>, py::arg("edge"),
+            HAS_VALID_INDEX_DOC)
+      .def("has_valid_index", &sm::has_valid_index_h<Sm>, py::arg("halfedge"),
+            HAS_VALID_INDEX_DOC)
+      .def("has_valid_index", &sm::has_valid_index_f<Sm>, py::arg("face"),
+            HAS_VALID_INDEX_DOC)
 
       .def("remove_vertex", &Sm::remove_vertex,
             py::arg("vertex"),
-           doc::CGAL_Surface_mesh_remove_vertex)
+           doc::Surface_mesh_remove_vertex)
       .def("remove_edge", &Sm::remove_edge,
             py::arg("edge"),
-           doc::CGAL_Surface_mesh_remove_edge)
+           doc::Surface_mesh_remove_edge)
       .def("remove_face", &Sm::remove_face,
             py::arg("face"),
-           doc::CGAL_Surface_mesh_remove_face)
-      .def("num_vertices", &Sm::num_vertices)
+           doc::Surface_mesh_remove_face)
+      .def("num_vertices", &Sm::num_vertices,
+            doc::Surface_mesh_number_of_vertices)
       .def("number_of_vertices", &Sm::number_of_vertices,
-           doc::CGAL_Surface_mesh_number_of_vertices)
-      .def("num_halfedges", &Sm::num_halfedges)
+           doc::Surface_mesh_number_of_vertices)
+      .def("num_halfedges", &Sm::num_halfedges,
+            doc::Surface_mesh_number_of_halfedges)
       .def("number_of_halfedges", &Sm::number_of_halfedges,
-           doc::CGAL_Surface_mesh_number_of_halfedges)
-      .def("num_edges", &Sm::num_edges)
+           doc::Surface_mesh_number_of_halfedges)
+      .def("num_edges", &Sm::num_edges,
+            doc::Surface_mesh_number_of_edges)
       .def("number_of_edges", &Sm::number_of_edges,
-           doc::CGAL_Surface_mesh_number_of_edges)
-      .def("num_faces", &Sm::num_faces)
+           doc::Surface_mesh_number_of_edges)
+      .def("num_faces", &Sm::num_faces,
+            doc::Surface_mesh_number_of_faces)
       .def("number_of_faces", &Sm::number_of_faces,
-           doc::CGAL_Surface_mesh_number_of_faces)
+           doc::Surface_mesh_number_of_faces)
       .def("is_empty", &Sm::is_empty,
-           doc::CGAL_Surface_mesh_is_empty)
+           doc::Surface_mesh_is_empty)
       .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps,
-           doc::CGAL_Surface_mesh_clear_without_removing_property_maps)
+           doc::Surface_mesh_clear_without_removing_property_maps)
       .def("clear", &Sm::clear,
-           doc::CGAL_Surface_mesh_clear)
+           doc::Surface_mesh_clear)
       .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); }, py::arg("v"))
       .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); }, py::arg("f"))
       .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); }, py::arg("e"))
@@ -644,51 +661,68 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            { return sm.is_border(v, check_all_incident_halfedges); },
            py::arg("v"), py::arg("check_all_incident_halfedges") = true)
       .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); }, py::arg("v"),
-           doc::CGAL_Surface_mesh_is_removed)
+           doc::Surface_mesh_is_removed)
       .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); }, py::arg("e"),
-           doc::CGAL_Surface_mesh_is_removed_1)
+           doc::Surface_mesh_is_removed_1)
       .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); }, py::arg("f"),
-           doc::CGAL_Surface_mesh_is_removed_2)
+           doc::Surface_mesh_is_removed_2)
       .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); }, py::arg("h"),
-           doc::CGAL_Surface_mesh_is_removed_3)
-      .def("source", &Sm::source)
-      .def("target", &Sm::target)
+           doc::Surface_mesh_is_removed_3)
+      .def("source", &Sm::source, py::arg("halfedge"),
+           doc::Surface_mesh_source)
+      .def("target", &Sm::target, py::arg("halfedge"),
+           doc::Surface_mesh_target)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
-      .def("edge", &Sm::edge)
-      .def("face", &Sm::face)
-      .def("join", &Sm::join)
-      .def("next", &Sm::next)
-      .def("prev", &Sm::prev)
-      .def("resize", &Sm::resize)
-      .def("set_target", &Sm::set_target)
+      .def("edge", &Sm::edge, py::arg("halfedge"),
+           doc::Surface_mesh_edge)
+      .def("face", &Sm::face, py::arg("halfedge"),
+           doc::Surface_mesh_face)
+      .def("join", &Sm::join, py::arg("other"),
+           doc::Surface_mesh_join)
+      .def("next", &Sm::next, py::arg("halfedge"),
+           doc::Surface_mesh_next)
+      .def("prev", &Sm::prev, py::arg("halfedge"),
+           doc::Surface_mesh_prev)
+      .def("resize", &Sm::resize,
+           doc::Surface_mesh_resize)
+      .def("set_target", &Sm::set_target, py::arg("halfedge"), py::arg("vertex"),
+           doc::Surface_mesh_set_target)
       .def("has_garbage", &Sm::has_garbage,
-           doc::CGAL_Surface_mesh_has_garbage)
+           doc::Surface_mesh_has_garbage)
       .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); },
-           doc::CGAL_Surface_mesh_collect_garbage)
-      .def("is_isolated", &Sm::is_isolated)
-      .def("set_next_only", &Sm::set_next_only)
-      .def("set_prev_only", &Sm::set_prev_only)
-      .def("shrink_to_fit", &Sm::shrink_to_fit)
+           doc::Surface_mesh_collect_garbage)
+      .def("is_isolated", &Sm::is_isolated,
+           doc::Surface_mesh_is_isolated)
+      .def("set_next_only", &Sm::set_next_only,
+            SET_NEXT_ONLY_DOC)
+      .def("set_prev_only", &Sm::set_prev_only,
+            SET_PREV_ONLY_DOC)
+      .def("shrink_to_fit", &Sm::shrink_to_fit,
+           "Shrinks internal storage to fit the current number of simplices and associated properties.")
       .def("set_recycle_garbage", &Sm::set_recycle_garbage,
-           doc::CGAL_Surface_mesh_set_recycle_garbage)
+           doc::Surface_mesh_set_recycle_garbage)
       .def("does_recycle_garbage", &Sm::does_recycle_garbage,
-           doc::CGAL_Surface_mesh_does_recycle_garbage)
+           doc::Surface_mesh_does_recycle_garbage)
 
       .def("number_of_removed_edges", &Sm::number_of_removed_edges,
-           doc::CGAL_Surface_mesh_number_of_removed_edges)
+           doc::Surface_mesh_number_of_removed_edges)
       .def("number_of_removed_faces", &Sm::number_of_removed_faces,
-           doc::CGAL_Surface_mesh_number_of_removed_faces)
+           doc::Surface_mesh_number_of_removed_faces)
       .def("number_of_removed_vertices", &Sm::number_of_removed_vertices,
-           doc::CGAL_Surface_mesh_number_of_removed_vertices)
+           doc::Surface_mesh_number_of_removed_vertices)
       .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges,
-           doc::CGAL_Surface_mesh_number_of_removed_halfedges)
+           doc::Surface_mesh_number_of_removed_halfedges)
 
-      .def("next_around_source", &Sm::next_around_source)
-      .def("prev_around_source", &Sm::prev_around_source)
-      .def("next_around_target", &Sm::next_around_target)
-      .def("prev_around_target", &Sm::prev_around_target)
+      .def("next_around_source", &Sm::next_around_source,
+           doc::Surface_mesh_next_around_source)
+      .def("prev_around_source", &Sm::prev_around_source,
+           doc::Surface_mesh_prev_around_source)
+      .def("next_around_target", &Sm::next_around_target,
+           doc::Surface_mesh_next_around_target)
+      .def("prev_around_target", &Sm::prev_around_target,
+           doc::Surface_mesh_prev_around_target)
 
       // .def("property_stats", &Sm::property_stats)
 
@@ -705,20 +739,20 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
       .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_),
             py::arg("verbose") = false,
-           doc::CGAL_Surface_mesh_is_valid)
+           doc::Surface_mesh_is_valid)
 #if CGAL_VERSION_NR >= 1050600000
       .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_),
             py::arg("vertex"), py::arg("verbose") = false,
-           doc::CGAL_Surface_mesh_is_valid_1)
+           doc::Surface_mesh_is_valid_1)
       .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_),
             py::arg("edge"), py::arg("verbose") = false,
-           doc::CGAL_Surface_mesh_is_valid_2)
+           doc::Surface_mesh_is_valid_3)
       .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_),
             py::arg("halfedge"), py::arg("verbose") = false,
-           doc::CGAL_Surface_mesh_is_valid_3)
+           doc::Surface_mesh_is_valid_2)
       .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_),
             py::arg("face"), py::arg("verbose") = false,
-           doc::CGAL_Surface_mesh_is_valid_4)
+           doc::Surface_mesh_is_valid_4)
 #endif
       ;
 
@@ -882,10 +916,14 @@ void export_surface_mesh(py::module_& m) {
   m.def("add_vertex", &bgl::my_add_vertex<Sm_3>);
   // Not documented
   // m.def("collect_garbage", &bgl::my_collect_garbage<Sm_3>);
-  m.def("num_edges", &bgl::my_num_edges<Sm_3>);
-  m.def("num_faces", &bgl::my_num_faces<Sm_3>);
-  m.def("num_halfedges", &bgl::my_num_halfedges<Sm_3>);
-  m.def("num_vertices", &bgl::my_num_vertices<Sm_3>);
+  m.def("num_edges", &bgl::my_num_edges<Sm_3>,
+        doc::Surface_mesh_number_of_edges);
+  m.def("num_faces", &bgl::my_num_faces<Sm_3>,
+        doc::Surface_mesh_number_of_faces);
+  m.def("num_halfedges", &bgl::my_num_halfedges<Sm_3>,
+        doc::Surface_mesh_number_of_halfedges);
+  m.def("num_vertices", &bgl::my_num_vertices<Sm_3>,
+        doc::Surface_mesh_number_of_vertices);
   m.def("remove_all_elements", &bgl::my_remove_all_elements<Sm_3>);
   m.def("reserve", &bgl::my_reserve<Sm_3>);
 
@@ -904,61 +942,137 @@ void export_surface_mesh(py::module_& m) {
 #endif
 
   // Other
-  m.def("adjacent_vertices", &bgl::adjacent_vertices<Sm_3>);
-  m.def("add_vertex", &bgl::add_vertex_p<Sm_3>);
-  m.def("degree", &bgl::degree_v<Sm_3>);
-  m.def("degree", &bgl::degree_f<Sm_3>);
-  m.def("edge", &bgl::edge<Sm_3>);
-  m.def("edge", &bgl::edge_vv<Sm_3>);
-  m.def("face", &bgl::face<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_e<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_f<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_v<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_vv<Sm_3>);
-  m.def("in_degree", &bgl::in_degree<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_h<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_e<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_v<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_edge<Sm_3>);
+
+  constexpr auto sm_adjacent_vertices_doc =
+      "Returns the vertices adjacent to a vertex in the surface mesh.";
+  constexpr auto sm_edge_vv_doc =
+      "Returns the edge connecting source and target vertices if it exists.";
+  constexpr auto sm_in_degree_doc =
+      "Returns the in-degree of a vertex in the surface mesh.";
+  constexpr auto sm_is_border_edge_doc =
+      "Returns whether the edge corresponding to the halfedge is a border edge.";
+  constexpr auto sm_is_valid_vertex_descriptor_doc =
+      "Checks whether v is a valid vertex descriptor in g. If verbose is true, prints diagnostics.";
+  constexpr auto sm_is_valid_halfedge_descriptor_doc =
+      "Checks whether h is a valid halfedge descriptor in g. If verbose is true, prints diagnostics.";
+  constexpr auto sm_is_valid_edge_descriptor_doc =
+      "Checks whether e is a valid edge descriptor in g. If verbose is true, prints diagnostics.";
+  constexpr auto sm_is_valid_face_descriptor_doc =
+      "Checks whether f is a valid face descriptor in g. If verbose is true, prints diagnostics.";
+  constexpr auto sm_out_degree_doc =
+      "Returns the out-degree of a vertex in the surface mesh.";
+  constexpr auto sm_source_e_doc =
+      "Returns the source vertex of an edge descriptor.";
+  constexpr auto sm_target_e_doc =
+      "Returns the target vertex of an edge descriptor.";
+  constexpr auto sm_in_edges_doc =
+      "Returns the incoming edges of a vertex.";
+  constexpr auto sm_out_edges_doc =
+      "Returns the outgoing edges of a vertex.";
+  constexpr auto sm_make_tetrahedron_doc =
+      "Constructs a tetrahedron in the surface mesh and returns the created halfedge descriptor.";
+
+  m.def("adjacent_vertices", &bgl::adjacent_vertices<Sm_3>,
+        sm_adjacent_vertices_doc);
+  m.def("add_vertex", &bgl::add_vertex_p<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_add_vertex_1));
+  m.def("degree", &bgl::degree_v<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_degree));
+  m.def("degree", &bgl::degree_f<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_degree_1));
+  m.def("edge", &bgl::edge<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_edge));
+  m.def("edge", &bgl::edge_vv<Sm_3>,
+        sm_edge_vv_doc);
+  m.def("face", &bgl::face<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_face));
+  m.def("halfedge", &bgl::halfedge_e<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_halfedge_3));
+  m.def("halfedge", &bgl::halfedge_f<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_halfedge_1));
+  m.def("halfedge", &bgl::halfedge_v<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_halfedge));
+  m.def("halfedge", &bgl::halfedge_vv<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_halfedge_2));
+  m.def("in_degree", &bgl::in_degree<Sm_3>,
+        sm_in_degree_doc);
+  m.def("is_border", &bgl::my_is_border_h<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_is_border_1));
+  m.def("is_border", &bgl::my_is_border_e<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_is_border_2));
+  m.def("is_border", &bgl::my_is_border_v<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_is_border));
+  m.def("is_border", &bgl::my_is_border_edge<Sm_3>,
+        sm_is_border_edge_doc);
   m.def("is_valid_vertex_descriptor", &bgl::my_is_valid_vertex_descriptor<Sm_3>,
+        sm_is_valid_vertex_descriptor_doc,
         py::arg("v"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_halfedge_descriptor", &bgl::my_is_valid_halfedge_descriptor<Sm_3>,
+        sm_is_valid_halfedge_descriptor_doc,
         py::arg("h"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_edge_descriptor", &bgl::my_is_valid_edge_descriptor<Sm_3>,
+        sm_is_valid_edge_descriptor_doc,
         py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_face_descriptor", &bgl::my_is_valid_face_descriptor<Sm_3>,
+        sm_is_valid_face_descriptor_doc,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  m.def("next", &bgl::next<Sm_3>);
-  m.def("null_face", &bgl::null_face<Sm_3>);
-  m.def("null_halfedge", &bgl::null_halfedge<Sm_3>);
-  m.def("null_vertex", &bgl::null_vertex<Sm_3>);
-  m.def("opposite", &bgl::opposite<Sm_3>);
-  m.def("out_degree", &bgl::out_degree<Sm_3>);
-  m.def("prev", &bgl::prev<Sm_3>);
-  m.def("source", &bgl::source_e<Sm_3>);
-  m.def("source", &bgl::source_h<Sm_3>);
-  m.def("target", &bgl::target_e<Sm_3>);
-  m.def("target", &bgl::target_h<Sm_3>);
-  m.def("remove_edge", &bgl::remove_edge_e<Sm_3>);
+  m.def("next", &bgl::next<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_next));
+  m.def("null_face", &bgl::null_face<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_null_face));
+  m.def("null_halfedge", &bgl::null_halfedge<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_null_halfedge));
+  m.def("null_vertex", &bgl::null_vertex<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_null_vertex));
+  m.def("opposite", &bgl::opposite<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_opposite));
+  m.def("out_degree", &bgl::out_degree<Sm_3>,
+        sm_out_degree_doc);
+  m.def("prev", &bgl::prev<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_prev));
+  m.def("source", &bgl::source_e<Sm_3>,
+        sm_source_e_doc);
+  m.def("source", &bgl::source_h<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_source));
+  m.def("target", &bgl::target_e<Sm_3>,
+        sm_target_e_doc);
+  m.def("target", &bgl::target_h<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_target));
+  m.def("remove_edge", &bgl::remove_edge_e<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_remove_edge));
   // Fails to compile, but also not documented
   // m.def("remove_edge", &bgl::remove_edge_vv<Sm_3>);
-  m.def("remove_face", &bgl::remove_face<Sm_3>);
-  m.def("remove_vertex", &bgl::remove_vertex<Sm_3>);
-  m.def("set_face", &bgl::set_face<Sm_3>);
-  m.def("set_halfedge", &bgl::set_halfedge_vh<Sm_3>);
-  m.def("set_halfedge", &bgl::set_halfedge_fh<Sm_3>);
-  m.def("set_next", &bgl::set_next<Sm_3>);
-  m.def("set_target", &bgl::set_target<Sm_3>);
+  m.def("remove_face", &bgl::remove_face<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_remove_face));
+  m.def("remove_vertex", &bgl::remove_vertex<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_remove_vertex));
+  m.def("set_face", &bgl::set_face<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_set_face));
+  m.def("set_halfedge", &bgl::set_halfedge_vh<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_set_halfedge));
+  m.def("set_halfedge", &bgl::set_halfedge_fh<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_set_halfedge_1));
+  m.def("set_next", &bgl::set_next<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_set_next));
+  m.def("set_target", &bgl::set_target<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_set_target));
 
-  m.def("vertices", &boost_utils::my_vertices<Sm_3>);
-  m.def("edges", &boost_utils::my_edges<Sm_3>);
-  m.def("in_edges", &boost_utils::my_in_edges<Sm_3>);
-  m.def("out_edges", &boost_utils::my_out_edges<Sm_3>);
-  m.def("halfedges", &boost_utils::my_halfedges<Sm_3>);
-  m.def("faces", &boost_utils::my_faces<Sm_3>);
+  m.def("vertices", &boost_utils::my_vertices<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_vertices));
+  m.def("edges", &boost_utils::my_edges<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_edges));
+  m.def("in_edges", &boost_utils::my_in_edges<Sm_3>,
+        sm_in_edges_doc);
+  m.def("out_edges", &boost_utils::my_out_edges<Sm_3>,
+        sm_out_edges_doc);
+  m.def("halfedges", &boost_utils::my_halfedges<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_halfedges));
+  m.def("faces", &boost_utils::my_faces<Sm_3>,
+        DOC_FUNC(CGAL_Surface_mesh_faces));
 
   // Generator Functions
-  m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Sm_3>);
+  m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Sm_3>,
+        sm_make_tetrahedron_doc);
 
   // Euler operations
   boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);

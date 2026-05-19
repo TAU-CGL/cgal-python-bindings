@@ -148,168 +148,168 @@ constexpr const char* AdaptationTraits_2_nearest_site_2_object = "This method is
 Returns: Nearest_site_2";
 
 // CGAL::Apollonius_graph_adaptation_traits_2
-constexpr const char* CGAL_Apollonius_graph_adaptation_traits_2__class__ = "The class Apollonius_graph_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
+constexpr const char* Apollonius_graph_adaptation_traits_2__class__ = "The class Apollonius_graph_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
 
 
 // CGAL::Apollonius_graph_caching_degeneracy_removal_policy_2
-constexpr const char* CGAL_Apollonius_graph_caching_degeneracy_removal_policy_2__class__ = "The class Apollonius_graph_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Apollonius_graph_caching_degeneracy_removal_policy_2__class__ = "The class Apollonius_graph_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Apollonius_graph_degeneracy_removal_policy_2
-constexpr const char* CGAL_Apollonius_graph_degeneracy_removal_policy_2__class__ = "The class Apollonius_graph_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Apollonius_graph_degeneracy_removal_policy_2__class__ = "The class Apollonius_graph_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Delaunay_triangulation_adaptation_traits_2
-constexpr const char* CGAL_Delaunay_triangulation_adaptation_traits_2__class__ = "The class Delaunay_triangulation_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
+constexpr const char* Delaunay_triangulation_adaptation_traits_2__class__ = "The class Delaunay_triangulation_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
 
 
 // CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2
-constexpr const char* CGAL_Delaunay_triangulation_caching_degeneracy_removal_policy_2__class__ = "The class Delaunay_triangulation_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Delaunay_triangulation_caching_degeneracy_removal_policy_2__class__ = "The class Delaunay_triangulation_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Delaunay_triangulation_degeneracy_removal_policy_2
-constexpr const char* CGAL_Delaunay_triangulation_degeneracy_removal_policy_2__class__ = "The class Delaunay_triangulation_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Delaunay_triangulation_degeneracy_removal_policy_2__class__ = "The class Delaunay_triangulation_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Graphics_scene_options_voronoi_diagram_2
-constexpr const char* CGAL_Graphics_scene_options_voronoi_diagram_2__class__ = "The class Graphics_scene_options_voronoi_diagram_2 defines data and methods used to tune the way that the cells of a Voronoi_diagram_2 are considered for drawing or to be added into a graphics scene.";
+constexpr const char* Graphics_scene_options_voronoi_diagram_2__class__ = "The class Graphics_scene_options_voronoi_diagram_2 defines data and methods used to tune the way that the cells of a Voronoi_diagram_2 are considered for drawing or to be added into a graphics scene.";
 
 // CGAL::Identity_policy_2
-constexpr const char* CGAL_Identity_policy_2__class__ = "The class Identity_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Identity_policy_2__class__ = "The class Identity_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Regular_triangulation_adaptation_traits_2
-constexpr const char* CGAL_Regular_triangulation_adaptation_traits_2__class__ = "The class Regular_triangulation_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
+constexpr const char* Regular_triangulation_adaptation_traits_2__class__ = "The class Regular_triangulation_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
 
 
 // CGAL::Regular_triangulation_caching_degeneracy_removal_policy_2
-constexpr const char* CGAL_Regular_triangulation_caching_degeneracy_removal_policy_2__class__ = "The class Regular_triangulation_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Regular_triangulation_caching_degeneracy_removal_policy_2__class__ = "The class Regular_triangulation_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Regular_triangulation_degeneracy_removal_policy_2
-constexpr const char* CGAL_Regular_triangulation_degeneracy_removal_policy_2__class__ = "The class Regular_triangulation_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Regular_triangulation_degeneracy_removal_policy_2__class__ = "The class Regular_triangulation_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Segment_Delaunay_graph_adaptation_traits_2
-constexpr const char* CGAL_Segment_Delaunay_graph_adaptation_traits_2__class__ = "The class Segment_Delaunay_graph_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
+constexpr const char* Segment_Delaunay_graph_adaptation_traits_2__class__ = "The class Segment_Delaunay_graph_adaptation_traits_2 provides a model for the AdaptationTraits_2 concept.";
 
 
 // CGAL::Segment_Delaunay_graph_caching_degeneracy_removal_policy_2
-constexpr const char* CGAL_Segment_Delaunay_graph_caching_degeneracy_removal_policy_2__class__ = "The class Segment_Delaunay_graph_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Segment_Delaunay_graph_caching_degeneracy_removal_policy_2__class__ = "The class Segment_Delaunay_graph_caching_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Segment_Delaunay_graph_degeneracy_removal_policy_2
-constexpr const char* CGAL_Segment_Delaunay_graph_degeneracy_removal_policy_2__class__ = "The class Segment_Delaunay_graph_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
+constexpr const char* Segment_Delaunay_graph_degeneracy_removal_policy_2__class__ = "The class Segment_Delaunay_graph_degeneracy_removal_policy_2 provides a model for the AdaptationPolicy_2 concept.";
 
 
 // CGAL::Voronoi_diagram_2
-constexpr const char* CGAL_Voronoi_diagram_2__class__ = "The class Voronoi_diagram_2 provides an adaptor that enables us to view a triangulated Delaunay graph as their dual subdivision, the Voronoi diagram.";
+constexpr const char* Voronoi_diagram_2__class__ = "The class Voronoi_diagram_2 provides an adaptor that enables us to view a triangulated Delaunay graph as their dual subdivision, the Voronoi diagram.";
 
-constexpr const char* CGAL_Voronoi_diagram_2_Delaunay_graph = "A type for the dual Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Delaunay_graph = "A type for the dual Delaunay graph.
 
 Returns: DG";
-constexpr const char* CGAL_Voronoi_diagram_2_Adaptation_traits = "A type for the adaptation traits needed by the Voronoi diagram adaptor.
+constexpr const char* Voronoi_diagram_2_Adaptation_traits = "A type for the adaptation traits needed by the Voronoi diagram adaptor.
 
 Returns: AT";
-constexpr const char* CGAL_Voronoi_diagram_2_Adaptation_policy = "A type for the adaptation policy used.
+constexpr const char* Voronoi_diagram_2_Adaptation_policy = "A type for the adaptation policy used.
 
 Returns: AP";
-constexpr const char* CGAL_Voronoi_diagram_2_Point_2 = "A type a point.
+constexpr const char* Voronoi_diagram_2_Point_2 = "A type a point.
 
 Returns: Adaptation_traits::Point_2";
-constexpr const char* CGAL_Voronoi_diagram_2_Site_2 = "A type for the sites of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Site_2 = "A type for the sites of the Voronoi diagram.
 
 Returns: Adaptation_traits::Site_2";
-constexpr const char* CGAL_Voronoi_diagram_2_size_type = "A type for sizes.
+constexpr const char* Voronoi_diagram_2_size_type = "A type for sizes.
 
 Returns: Delaunay_graph::size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Delaunay_geom_traits = "A type for the geometric traits of the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Delaunay_geom_traits = "A type for the geometric traits of the Delaunay graph.
 
 Returns: Delaunay_graph::Geom_traits";
-constexpr const char* CGAL_Voronoi_diagram_2_Delaunay_vertex_handle = "A type for the vertex handles of the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Delaunay_vertex_handle = "A type for the vertex handles of the Delaunay graph.
 
 Returns: Delaunay_graph::Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Delaunay_face_handle = "A type for the face handles of the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Delaunay_face_handle = "A type for the face handles of the Delaunay graph.
 
 Returns: Delaunay_graph::Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Delaunay_edge = "A type for the edges of the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Delaunay_edge = "A type for the edges of the Delaunay graph.
 
 Returns: Delaunay_graph::Edge";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_handle = "Handle for halfedges.
+constexpr const char* Voronoi_diagram_2_Halfedge_handle = "Handle for halfedges.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_handle = "Handle for vertices.
+constexpr const char* Voronoi_diagram_2_Vertex_handle = "Handle for vertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_handle = "Handle for faces.
+constexpr const char* Voronoi_diagram_2_Face_handle = "Handle for faces.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Edge_iterator = "A type for an iterator over Voronoi edges.
+constexpr const char* Voronoi_diagram_2_Edge_iterator = "A type for an iterator over Voronoi edges.
 
 Edges are considered non-oriented. Its value type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_iterator = "A type for an iterator over Voronoi halfedges.
+constexpr const char* Voronoi_diagram_2_Halfedge_iterator = "A type for an iterator over Voronoi halfedges.
 
 Halfedges are oriented and come in pairs. Its value type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_iterator = "A type for an iterator over Voronoi faces.
+constexpr const char* Voronoi_diagram_2_Face_iterator = "A type for an iterator over Voronoi faces.
 
 Its value type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_iterator = "A type for an iterator over Voronoi vertices.
+constexpr const char* Voronoi_diagram_2_Vertex_iterator = "A type for an iterator over Voronoi vertices.
 
 Its value type is Vertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_around_vertex_circulator = "A type for a circulator over the halfedges that have a common vertex as their target.
+constexpr const char* Voronoi_diagram_2_Halfedge_around_vertex_circulator = "A type for a circulator over the halfedges that have a common vertex as their target.
 
 Its value type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Ccb_halfedge_circulator = "A type for a circulator over the halfedges on the boundary of a Voronoi face.
+constexpr const char* Voronoi_diagram_2_Ccb_halfedge_circulator = "A type for a circulator over the halfedges on the boundary of a Voronoi face.
 
 Its value type of is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Unbounded_faces_iterator = "A type for an iterator over the unbounded faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Unbounded_faces_iterator = "A type for an iterator over the unbounded faces of the Voronoi diagram.
 
 Its value type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Bounded_faces_iterator = "A type for an iterator over the bounded faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Bounded_faces_iterator = "A type for an iterator over the bounded faces of the Voronoi diagram.
 
 Its value type is Face .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Unbounded_halfedges_iterator = "A type for an iterator over the unbounded halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Unbounded_halfedges_iterator = "A type for an iterator over the unbounded halfedges of the Voronoi diagram.
 
 Its value type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Bounded_halfedges_iterator = "A type for an iterator over the bounded halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Bounded_halfedges_iterator = "A type for an iterator over the bounded halfedges of the Voronoi diagram.
 
 Its value type is Halfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Site_iterator = "A type for an iterator over the sites of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Site_iterator = "A type for an iterator over the sites of the Voronoi diagram.
 
 Its value type is Site_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Locate_result = "The result type of the point location queries.
+constexpr const char* Voronoi_diagram_2_Locate_result = "The result type of the point location queries.
 
 Returns: std::variant< Face_handle , Halfedge_handle , Vertex_handle >";
-constexpr const char* CGAL_Voronoi_diagram_2_Voronoi_diagram_2 = "Creates a Voronoi diagram using at as adaptation traits and ap as adaptation policy; the underlying Delaunay graph is created using gt as geometric traits.
+constexpr const char* Voronoi_diagram_2_Voronoi_diagram_2 = "Creates a Voronoi diagram using at as adaptation traits and ap as adaptation policy; the underlying Delaunay graph is created using gt as geometric traits.
 
 Parameters
 ----------
 at : Adaptation_traits
 ap : Adaptation_policy
 gt : Delaunay_geom_traits";
-constexpr const char* CGAL_Voronoi_diagram_2_Voronoi_diagram_2_1 = "Creates a Voronoi diagram from the Delaunay graph dg and using at as adaptation traits and ap as adaptation policy.
+constexpr const char* Voronoi_diagram_2_Voronoi_diagram_2_1 = "Creates a Voronoi diagram from the Delaunay graph dg and using at as adaptation traits and ap as adaptation policy.
 
 The Delaunay graph dg is fully copied if swap_dg is set to false , or swapped
 with the one stored internally if swap_dg is set to true .
@@ -320,7 +320,7 @@ dg : Delaunay_graph
 swap_dg : bool
 at : Adaptation_traits
 ap : Adaptation_policy";
-constexpr const char* CGAL_Voronoi_diagram_2_Voronoi_diagram_2_2 = "Creates a Voronoi diagram using as sites the sites in the iterator range [first, beyond) , at as adaptation traits and ap as adaptation policy; the underlying Delaunay graph is created using gt as geometric traits.
+constexpr const char* Voronoi_diagram_2_Voronoi_diagram_2_2 = "Creates a Voronoi diagram using as sites the sites in the iterator range [first, beyond) , at as adaptation traits and ap as adaptation policy; the underlying Delaunay graph is created using gt as geometric traits.
 
 Iterator must be a model of the InputIterator concept and its value type must
 be Site_2 .
@@ -332,128 +332,128 @@ beyond : Iterator
 at : Adaptation_traits
 ap : Adaptation_policy
 gt : Delaunay_geom_traits";
-constexpr const char* CGAL_Voronoi_diagram_2_dual = "Returns a const reference to the dual graph, i.e., the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_dual = "Returns a const reference to the dual graph, i.e., the Delaunay graph.
 
 Returns: Delaunay_graph";
-constexpr const char* CGAL_Voronoi_diagram_2_dual_1 = "Returns a handle to the halfedge in the Voronoi diagram that is dual to the edge e in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_dual_1 = "Returns a handle to the halfedge in the Voronoi diagram that is dual to the edge e in the Delaunay graph.
 
 Parameters
 ----------
 e : Delaunay_edge
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_dual_2 = "Returns a handle to the face in the Voronoi diagram that is dual to the vertex corresponding to the vertex handle v in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_dual_2 = "Returns a handle to the face in the Voronoi diagram that is dual to the vertex corresponding to the vertex handle v in the Delaunay graph.
 
 Parameters
 ----------
 v : Delaunay_vertex_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_dual_3 = "Returns a handle to the vertex in the Voronoi diagram that is dual to the face corresponding to the face handle f in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_dual_3 = "Returns a handle to the vertex in the Voronoi diagram that is dual to the face corresponding to the face handle f in the Delaunay graph.
 
 Parameters
 ----------
 f : Delaunay_face_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_adaptation_traits = "Returns a reference to the Voronoi traits.
+constexpr const char* Voronoi_diagram_2_adaptation_traits = "Returns a reference to the Voronoi traits.
 
 Returns: Adaptation_traits";
-constexpr const char* CGAL_Voronoi_diagram_2_adaptation_policy = "Returns a reference to the adaptation policy.
+constexpr const char* Voronoi_diagram_2_adaptation_policy = "Returns a reference to the adaptation policy.
 
 Returns: Adaptation_policy";
-constexpr const char* CGAL_Voronoi_diagram_2_number_of_vertices = "Returns the number of Voronoi vertices.
+constexpr const char* Voronoi_diagram_2_number_of_vertices = "Returns the number of Voronoi vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_number_of_faces = "Returns the number of Voronoi faces (bounded and unbounded).
+constexpr const char* Voronoi_diagram_2_number_of_faces = "Returns the number of Voronoi faces (bounded and unbounded).
 
 Returns: size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_number_of_halfedges = "Returns the number of halfedges (bounded and unbounded) in the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_number_of_halfedges = "Returns the number of halfedges (bounded and unbounded) in the Voronoi diagram.
 
 This is always an even number.
 
 Returns: size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_number_of_connected_components = "Returns the number of connected components of the Voronoi skeleton.
+constexpr const char* Voronoi_diagram_2_number_of_connected_components = "Returns the number of connected components of the Voronoi skeleton.
 
 Returns: size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_unbounded_face = "Returns one of the unbounded faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_unbounded_face = "Returns one of the unbounded faces of the Voronoi diagram.
 
 If no unbounded faces exist (this can happen if the number of sites is zero)
 the default constructed face handle is returned.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_bounded_face = "Returns one of the bounded faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_bounded_face = "Returns one of the bounded faces of the Voronoi diagram.
 
 If no bounded faces exist the default constructed face handle is returned.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_unbounded_halfedge = "Returns one of the unbounded halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_unbounded_halfedge = "Returns one of the unbounded halfedges of the Voronoi diagram.
 
 If no unbounded halfedges exist the default constructed halfedge handle is
 returned.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_bounded_halfedge = "Returns one of the bounded halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_bounded_halfedge = "Returns one of the bounded halfedges of the Voronoi diagram.
 
 If no bounded halfedges exist the default constructed halfedge handle is
 returned.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_faces_begin = "Starts at an arbitrary Voronoi face.
+constexpr const char* Voronoi_diagram_2_faces_begin = "Starts at an arbitrary Voronoi face.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_faces_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_faces_end = "Past-the-end iterator.
 
 Returns: Face_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_unbounded_faces_begin = "Starts at an arbitrary unbounded Voronoi face.
+constexpr const char* Voronoi_diagram_2_unbounded_faces_begin = "Starts at an arbitrary unbounded Voronoi face.
 
 Returns: Unbounded_faces_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_unbounded_faces_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_unbounded_faces_end = "Past-the-end iterator.
 
 Returns: Unbounded_faces_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_bounded_faces_begin = "Starts at an arbitrary bounded Voronoi face.
+constexpr const char* Voronoi_diagram_2_bounded_faces_begin = "Starts at an arbitrary bounded Voronoi face.
 
 Returns: Bounded_faces_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_bounded_faces_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_bounded_faces_end = "Past-the-end iterator.
 
 Returns: Bounded_faces_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_edges_begin = "Starts at an arbitrary Voronoi edge.
+constexpr const char* Voronoi_diagram_2_edges_begin = "Starts at an arbitrary Voronoi edge.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_edges_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_edges_end = "Past-the-end iterator.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_halfedges_begin = "Starts at an arbitrary Voronoi halfedge.
+constexpr const char* Voronoi_diagram_2_halfedges_begin = "Starts at an arbitrary Voronoi halfedge.
 
 Returns: Halfedge_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_halfedges_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_halfedges_end = "Past-the-end iterator.
 
 Returns: Halfedge_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_unbounded_halfedges_begin = "Starts at an arbitrary unbounded Voronoi edge.
+constexpr const char* Voronoi_diagram_2_unbounded_halfedges_begin = "Starts at an arbitrary unbounded Voronoi edge.
 
 Returns: Unbounded_halfedges_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_unbounded_halfedges_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_unbounded_halfedges_end = "Past-the-end iterator.
 
 Returns: Unbounded_halfedges_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_bounded_halfedges_begin = "Starts at an arbitrary bounded Voronoi edge.
+constexpr const char* Voronoi_diagram_2_bounded_halfedges_begin = "Starts at an arbitrary bounded Voronoi edge.
 
 Returns: Bounded_halfedges_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_bounded_halfedges_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_bounded_halfedges_end = "Past-the-end iterator.
 
 Returns: Bounded_halfedges_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_vertices_begin = "Starts at an arbitrary Voronoi vertex.
+constexpr const char* Voronoi_diagram_2_vertices_begin = "Starts at an arbitrary Voronoi vertex.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_vertices_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_vertices_end = "Past-the-end iterator.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_sites_begin = "Starts at an arbitrary site.
+constexpr const char* Voronoi_diagram_2_sites_begin = "Starts at an arbitrary site.
 
 Returns: Site_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_sites_end = "Past-the-end iterator.
+constexpr const char* Voronoi_diagram_2_sites_end = "Past-the-end iterator.
 
 Returns: Site_iterator";
-constexpr const char* CGAL_Voronoi_diagram_2_ccb_halfedges = "Returns a circulator over the halfedges on the boundary of f .
+constexpr const char* Voronoi_diagram_2_ccb_halfedges = "Returns a circulator over the halfedges on the boundary of f .
 
 The circulator is initialized to an arbitrary halfedge on the boundary of the
 Voronoi face f .
@@ -463,7 +463,7 @@ Parameters
 f : Face_handle
 
 Returns: Ccb_halfedge_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_ccb_halfedges_1 = "Returns a circulator over the halfedges on the boundary of f .
+constexpr const char* Voronoi_diagram_2_ccb_halfedges_1 = "Returns a circulator over the halfedges on the boundary of f .
 
 The circulator is initialized with the halfedge h . The halfedge h must lie on
 the boundary of f .
@@ -474,7 +474,7 @@ f : Face_handle
 h : Halfedge_handle
 
 Returns: Ccb_halfedge_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_incident_halfedges = "Returns a circulator over the halfedges whose target is the Voronoi vertex v .
+constexpr const char* Voronoi_diagram_2_incident_halfedges = "Returns a circulator over the halfedges whose target is the Voronoi vertex v .
 
 The circulator is initialized to an arbitrary halfedge incident to v .
 
@@ -483,7 +483,7 @@ Parameters
 v : Vertex_handle
 
 Returns: Halfedge_around_vertex_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_incident_halfedges_1 = "Returns a circulator over the halfedges whose target is the Voronoi vertex v .
+constexpr const char* Voronoi_diagram_2_incident_halfedges_1 = "Returns a circulator over the halfedges whose target is the Voronoi vertex v .
 
 The circulator is initialized with the halfedge h . The vertex v must be the
 target vertex of the halfedge h .
@@ -494,7 +494,7 @@ v : Vertex_handle
 h : Halfedge_handle
 
 Returns: Halfedge_around_vertex_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_insert = "Inserts the site t in the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_insert = "Inserts the site t in the Voronoi diagram.
 
 A handle to the face corresponding to the Voronoi face of t in the Voronoi
 diagram is returned. If t has an empty Voronoi cell, the default constructed
@@ -506,7 +506,7 @@ Parameters
 t : Site_2
 
 Returns: Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_insert_1 = "Inserts, in the Voronoi diagram, the sites in the iterator range [first, beyond) .
+constexpr const char* Voronoi_diagram_2_insert_1 = "Inserts, in the Voronoi diagram, the sites in the iterator range [first, beyond) .
 
 The value type of Iterator must be Site_2 . The number of sites in the
 iterator range is returned. This method is supported only if
@@ -518,7 +518,7 @@ first : Iterator
 beyond : Iterator
 
 Returns: size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_locate = "Performs point location for the query point p .
+constexpr const char* Voronoi_diagram_2_locate = "Performs point location for the query point p .
 
 In other words, the face, halfedge or vertex of the Voronoi diagram is found
 on which the point p lies. This method is supported only if
@@ -530,7 +530,7 @@ Parameters
 p : Point_2
 
 Returns: Locate_result";
-constexpr const char* CGAL_Voronoi_diagram_2_file_output = "Writes the current state of the Voronoi diagram to the output stream os .
+constexpr const char* Voronoi_diagram_2_file_output = "Writes the current state of the Voronoi diagram to the output stream os .
 
 The following operator must be defined: std::ostream&
 operator<<(std::ostream&, Delaunay_graph )
@@ -538,7 +538,7 @@ operator<<(std::ostream&, Delaunay_graph )
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Voronoi_diagram_2_file_input = "Reads the current state of the Voronoi diagram from the input stream is .
+constexpr const char* Voronoi_diagram_2_file_input = "Reads the current state of the Voronoi diagram from the input stream is .
 
 The following operator must be defined: std::istream&
 operator>>(std::istream&, Delaunay_graph )
@@ -546,7 +546,7 @@ operator>>(std::istream&, Delaunay_graph )
 Parameters
 ----------
 is : std::istream &";
-constexpr const char* CGAL_Voronoi_diagram_2_operator = "Writes the current state of the Voronoi diagram to the output stream os .
+constexpr const char* Voronoi_diagram_2_operator = "Writes the current state of the Voronoi diagram to the output stream os .
 
 The following operator must be defined: std::ostream&
 operator<<(std::ostream&, Delaunay_graph )
@@ -557,7 +557,7 @@ os : std::ostream &
 vd : Voronoi_diagram_2 < DG, AT, AP >
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Voronoi_diagram_2_operator_1 = "Reads the current state of the Voronoi diagram from the input stream is .
+constexpr const char* Voronoi_diagram_2_operator_1 = "Reads the current state of the Voronoi diagram from the input stream is .
 
 The following operator must be defined: std::istream&
 operator>>(std::istream&, Delaunay_graph )
@@ -568,11 +568,11 @@ is : std::istream &
 vd : Voronoi_diagram_2 < DG, AT, AP >
 
 Returns: std::istream &";
-constexpr const char* CGAL_Voronoi_diagram_2_is_valid = "Checks the validity of the dual Delaunay graph and the Voronoi diagram adaptor.
+constexpr const char* Voronoi_diagram_2_is_valid = "Checks the validity of the dual Delaunay graph and the Voronoi diagram adaptor.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_clear = "Clears all contents of the Voronoi diagram.";
-constexpr const char* CGAL_Voronoi_diagram_2_swap = "The Voronoi diagrams other and vd are swapped.
+constexpr const char* Voronoi_diagram_2_clear = "Clears all contents of the Voronoi diagram.";
+constexpr const char* Voronoi_diagram_2_swap = "The Voronoi diagrams other and vd are swapped.
 
 vd . swap(other) should be preferred to vd``= other or to vd``(other) if other
 is deleted afterwards.
@@ -582,227 +582,227 @@ Parameters
 other : Voronoi_diagram_2 < DG, AT, AP >";
 
 // CGAL::Voronoi_diagram_2::Face
-constexpr const char* CGAL_Voronoi_diagram_2_Face__class__ = "The class Face is the class provided by the Voronoi_diagram_2 <DG,AT,AP> class for Voronoi faces.";
+constexpr const char* Voronoi_diagram_2_Face__class__ = "The class Face is the class provided by the Voronoi_diagram_2 <DG,AT,AP> class for Voronoi faces.";
 
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Vertex = "A type for the vertices of the Voronoi diagram.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Halfedge = "A type for the halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Face_Vertex = "A type for the vertices of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Vertex_handle = "Handle for the vertices of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Face_Halfedge = "A type for the halfedges of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Face_handle = "Handle for the faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Face_Vertex_handle = "Handle for the vertices of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Halfedge_handle = "Handle for the halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Face_Face_handle = "Handle for the faces of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Ccb_halfedge_circulator = "A type for a bidirectional circulator over the halfedges on the boundary of the face.
+constexpr const char* Voronoi_diagram_2_Face_Halfedge_handle = "Handle for the halfedges of the Voronoi diagram.
+
+Returns: unspecified_type";
+constexpr const char* Voronoi_diagram_2_Face_Ccb_halfedge_circulator = "A type for a bidirectional circulator over the halfedges on the boundary of the face.
 
 The value type of the circulator is
 CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge , and is convertible to
 Halfedge_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Delaunay_graph = "A type for the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Face_Delaunay_graph = "A type for the Delaunay graph.
 
 It is a model of the DelaunayGraph_2 concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_Delaunay_vertex_handle = "A type for the handle of the dual vertex.
+constexpr const char* Voronoi_diagram_2_Face_Delaunay_vertex_handle = "A type for the handle of the dual vertex.
 
 Returns: Delaunay_graph::Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_halfedge = "Returns an incident halfedge on the boundary of f .
+constexpr const char* Voronoi_diagram_2_Face_halfedge = "Returns an incident halfedge on the boundary of f .
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_ccb = "Returns a bidirectional circulator for traversing the halfedges on the boundary of f .
+constexpr const char* Voronoi_diagram_2_Face_ccb = "Returns a bidirectional circulator for traversing the halfedges on the boundary of f .
 
 The halfedges are traversed in counterclockwise order.
 
 Returns: Ccb_halfedge_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_dual = "Returns a handle to the corresponding dual vertex in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Face_dual = "Returns a handle to the corresponding dual vertex in the Delaunay graph.
 
 Returns: Delaunay_vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_is_unbounded = "Returns true iff the face is an unbounded face in the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Face_is_unbounded = "Returns true iff the face is an unbounded face in the Voronoi diagram.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_is_halfedge_on_ccb = "Returns true iff e is a halfedge of the boundary of f .
+constexpr const char* Voronoi_diagram_2_Face_is_halfedge_on_ccb = "Returns true iff e is a halfedge of the boundary of f .
 
 Parameters
 ----------
 e : Halfedge
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Face_is_valid = "Returns true iff the following conditions are met: the face is not rejected by the chosen adaptation policy; all its adjacent halfedges do not have zero length; all its adjacent halfedges return the face as their adjacent face.
+constexpr const char* Voronoi_diagram_2_Face_is_valid = "Returns true iff the following conditions are met: the face is not rejected by the chosen adaptation policy; all its adjacent halfedges do not have zero length; all its adjacent halfedges return the face as their adjacent face.
 
 Returns: bool";
 
 // CGAL::Voronoi_diagram_2::Halfedge
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge__class__ = "The class Halfedge is the class provided by the Voronoi_diagram_2 <DG,AT,AP> class for Voronoi halfedges.";
+constexpr const char* Voronoi_diagram_2_Halfedge__class__ = "The class Halfedge is the class provided by the Voronoi_diagram_2 <DG,AT,AP> class for Voronoi halfedges.";
 
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Vertex = "A type for the vertices of the Voronoi diagram.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Face = "A type for the faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Halfedge_Vertex = "A type for the vertices of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Vertex_handle = "Handle for the vertices of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Halfedge_Face = "A type for the faces of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Face_handle = "Handle for the faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Halfedge_Vertex_handle = "Handle for the vertices of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Halfedge_handle = "Handle for the halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Halfedge_Face_handle = "Handle for the faces of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Ccb_halfedge_circulator = "A type for a bidirectional circulator over the halfedges of the boundary of a Voronoi face.
+constexpr const char* Voronoi_diagram_2_Halfedge_Halfedge_handle = "Handle for the halfedges of the Voronoi diagram.
+
+Returns: unspecified_type";
+constexpr const char* Voronoi_diagram_2_Halfedge_Ccb_halfedge_circulator = "A type for a bidirectional circulator over the halfedges of the boundary of a Voronoi face.
 
 The value type of the circulator is
 CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge and is convertible to
 Halfedge_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Delaunay_graph = "A type for the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Halfedge_Delaunay_graph = "A type for the Delaunay graph.
 
 It is a model of the DelaunayGraph_2 concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Delaunay_edge = "A type for the dual edge in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Halfedge_Delaunay_edge = "A type for the dual edge in the Delaunay graph.
 
 Returns: Delaunay_graph::Edge";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_Delaunay_vertex_handle = "A type for vertex handles in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Halfedge_Delaunay_vertex_handle = "A type for vertex handles in the Delaunay graph.
 
 Returns: Delaunay_graph::Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_twin = "Returns the twin halfedge.
+constexpr const char* Voronoi_diagram_2_Halfedge_twin = "Returns the twin halfedge.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_opposite = "Same as e.twin() .
+constexpr const char* Voronoi_diagram_2_Halfedge_opposite = "Same as e.twin() .
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_next = "Returns the next halfedge in the counterclockwise sense around the boundary of the face that e is incident to.
+constexpr const char* Voronoi_diagram_2_Halfedge_next = "Returns the next halfedge in the counterclockwise sense around the boundary of the face that e is incident to.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_previous = "Returns the previous halfedge in the counterclockwise sense around the boundary of the adjacent face.
+constexpr const char* Voronoi_diagram_2_Halfedge_previous = "Returns the previous halfedge in the counterclockwise sense around the boundary of the adjacent face.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_face = "Returns the face that e is incident to.
+constexpr const char* Voronoi_diagram_2_Halfedge_face = "Returns the face that e is incident to.
 
 Returns: Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_source = "Returns the source vertex of e .
+constexpr const char* Voronoi_diagram_2_Halfedge_source = "Returns the source vertex of e .
 
 The source vertex must exist, i.e., has_source() must return true .
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_target = "Returns the target vertex of e .
+constexpr const char* Voronoi_diagram_2_Halfedge_target = "Returns the target vertex of e .
 
 The target vertex must exist, i.e., has_target() must return true .
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_ccb = "Returns a bidirectional circulator to traverse the halfedges on the boundary of the Voronoi face containing e .
+constexpr const char* Voronoi_diagram_2_Halfedge_ccb = "Returns a bidirectional circulator to traverse the halfedges on the boundary of the Voronoi face containing e .
 
 The circulator is initialized to e . Applying operator++ (resp. operator- ) to
 this circulator returns the next halfedge on the boundary of the face
 containing e in the counterclockwise (resp. clockwise) sense.
 
 Returns: Ccb_halfedge_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_dual = "Returns the corresponding dual edge in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Halfedge_dual = "Returns the corresponding dual edge in the Delaunay graph.
 
 Returns: Delaunay_edge";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_up = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site above the Voronoi edge.
+constexpr const char* Voronoi_diagram_2_Halfedge_up = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site above the Voronoi edge.
 
 Returns: Delaunay_vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_down = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site below the Voronoi edge.
+constexpr const char* Voronoi_diagram_2_Halfedge_down = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site below the Voronoi edge.
 
 Returns: Delaunay_vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_left = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site to the left of the Voronoi edge.
+constexpr const char* Voronoi_diagram_2_Halfedge_left = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site to the left of the Voronoi edge.
 
 has_source() must be true .
 
 Returns: Delaunay_vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_right = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site to the right of the Voronoi edge.
+constexpr const char* Voronoi_diagram_2_Halfedge_right = "Returns a handle to the vertex in the Delaunay graph corresponding to the defining site to the right of the Voronoi edge.
 
 has_target() must be true .
 
 Returns: Delaunay_vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_has_source = "Returns true iff the halfedge corresponds to a bisecting segment or a bisecting ray oriented appropriately so that its apex is its source.
+constexpr const char* Voronoi_diagram_2_Halfedge_has_source = "Returns true iff the halfedge corresponds to a bisecting segment or a bisecting ray oriented appropriately so that its apex is its source.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_has_target = "Returns true iff the halfedge corresponds to a bisecting segment or a bisecting ray oriented appropriately so that its apex is its target.
+constexpr const char* Voronoi_diagram_2_Halfedge_has_target = "Returns true iff the halfedge corresponds to a bisecting segment or a bisecting ray oriented appropriately so that its apex is its target.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_is_unbounded = "Returns true iff the source or the target of the halfedge does not exist, i.e., if either of has_source() or has_target() return false .
+constexpr const char* Voronoi_diagram_2_Halfedge_is_unbounded = "Returns true iff the source or the target of the halfedge does not exist, i.e., if either of has_source() or has_target() return false .
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_is_bisector = "Returns true iff the Voronoi edge is an entire bisector.
+constexpr const char* Voronoi_diagram_2_Halfedge_is_bisector = "Returns true iff the Voronoi edge is an entire bisector.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_is_segment = "Returns true iff the Voronoi edge has both a source and a target Voronoi vertex.
+constexpr const char* Voronoi_diagram_2_Halfedge_is_segment = "Returns true iff the Voronoi edge has both a source and a target Voronoi vertex.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_is_ray = "Returns true iff the Voronoi edge has either a source or a target Voronoi vertex, but not both; in other words it is a bisecting ray.
+constexpr const char* Voronoi_diagram_2_Halfedge_is_ray = "Returns true iff the Voronoi edge has either a source or a target Voronoi vertex, but not both; in other words it is a bisecting ray.
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Halfedge_is_valid = "Returns true if the following conditions are met: the halfedge is not a rejected edge with respect to the chosen adaptation policy; the twin edge of its twin edge is itself; its adjacent face is not a rejected face with respect to the chosen adaptation policy; its source and target vertices are valid (provided they exist, of course); the previous of its next halfedge is itself and the next of its previous halfedge is itself.
+constexpr const char* Voronoi_diagram_2_Halfedge_is_valid = "Returns true if the following conditions are met: the halfedge is not a rejected edge with respect to the chosen adaptation policy; the twin edge of its twin edge is itself; its adjacent face is not a rejected face with respect to the chosen adaptation policy; its source and target vertices are valid (provided they exist, of course); the previous of its next halfedge is itself and the next of its previous halfedge is itself.
 
 Returns: bool";
 
 // CGAL::Voronoi_diagram_2::Vertex
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex__class__ = "The class Vertex is the Voronoi vertex class provided by the class Voronoi_diagram_2 <DG,AT,AP> class.";
+constexpr const char* Voronoi_diagram_2_Vertex__class__ = "The class Vertex is the Voronoi vertex class provided by the class Voronoi_diagram_2 <DG,AT,AP> class.";
 
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Halfedge = "A type for the halfedges of the Voronoi diagram.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Face = "A type for the faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Vertex_Halfedge = "A type for the halfedges of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Vertex_handle = "Handle for the vertices of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Vertex_Face = "A type for the faces of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Face_handle = "Handle for the faces of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Vertex_Vertex_handle = "Handle for the vertices of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Halfedge_handle = "Handle for the halfedges of the Voronoi diagram.
+constexpr const char* Voronoi_diagram_2_Vertex_Face_handle = "Handle for the faces of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Point_2 = "A type for the point represented by the vertex.
+constexpr const char* Voronoi_diagram_2_Vertex_Halfedge_handle = "Handle for the halfedges of the Voronoi diagram.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_size_type = "A type for sizes.
+constexpr const char* Voronoi_diagram_2_Vertex_Point_2 = "A type for the point represented by the vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Halfedge_around_vertex_circulator = "A type for a bidirectional circulator that allows to traverse all incident halfedges, i.e., all halfedges that have the vertex as their target.
+constexpr const char* Voronoi_diagram_2_Vertex_size_type = "A type for sizes.
+
+Returns: unspecified_type";
+constexpr const char* Voronoi_diagram_2_Vertex_Halfedge_around_vertex_circulator = "A type for a bidirectional circulator that allows to traverse all incident halfedges, i.e., all halfedges that have the vertex as their target.
 
 The value type of the circulator is
 CGAL::Voronoi_diagram_2<DG,AT,AP>::Halfedge and is convertible to
 Halfedge_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Delaunay_graph = "A type for the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Vertex_Delaunay_graph = "A type for the Delaunay graph.
 
 It is a model of the DelaunayGraph_2 concept.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Delaunay_face_handle = "A type for the handle of the dual face.
+constexpr const char* Voronoi_diagram_2_Vertex_Delaunay_face_handle = "A type for the handle of the dual face.
 
 Returns: Delaunay_graph::Face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_Delaunay_vertex_handle = "A type for the vertex handles in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Vertex_Delaunay_vertex_handle = "A type for the vertex handles in the Delaunay graph.
 
 Returns: Delaunay_graph::Vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_halfedge = "Returns an incident halfedge that has v as its target.
+constexpr const char* Voronoi_diagram_2_Vertex_halfedge = "Returns an incident halfedge that has v as its target.
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_degree = "Returns the in-degree of the vertex, i.e. the number of halfedges that have v as their target.
+constexpr const char* Voronoi_diagram_2_Vertex_degree = "Returns the in-degree of the vertex, i.e. the number of halfedges that have v as their target.
 
 Returns: size_type";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_point = "Returns the point represented by the vertex.
+constexpr const char* Voronoi_diagram_2_Vertex_point = "Returns the point represented by the vertex.
 
 Returns: Point_2";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_dual = "Returns a handle to the corresponding dual face in the Delaunay graph.
+constexpr const char* Voronoi_diagram_2_Vertex_dual = "Returns a handle to the corresponding dual face in the Delaunay graph.
 
 Returns: Delaunay_face_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_site = "Returns a handle to the vertex in the Delaunay graph corresponding to the $ (i+1)$ -th generating site of the Voronoi vertex.
+constexpr const char* Voronoi_diagram_2_Vertex_site = "Returns a handle to the vertex in the Delaunay graph corresponding to the $ (i+1)$ -th generating site of the Voronoi vertex.
 
 i must be smaller or equal to 2.
 
@@ -811,27 +811,27 @@ Parameters
 i : unsigned int
 
 Returns: Delaunay_vertex_handle";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_incident_halfedges = "Returns a bidirectional circulator that allows the traversal of the halfedges that have v as their target.
+constexpr const char* Voronoi_diagram_2_Vertex_incident_halfedges = "Returns a bidirectional circulator that allows the traversal of the halfedges that have v as their target.
 
 Applying operator++ (resp. operator- ) to this circulator returns the next
 incident halfedge in the counterclockwise (resp. clockwise) sense.
 
 Returns: Halfedge_around_vertex_circulator";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_is_incident_edge = "Returns true if the halfedge e is incident to v .
+constexpr const char* Voronoi_diagram_2_Vertex_is_incident_edge = "Returns true if the halfedge e is incident to v .
 
 Parameters
 ----------
 e : Halfedge_handle
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_is_incident_face = "Returns true if the face f is incident to v .
+constexpr const char* Voronoi_diagram_2_Vertex_is_incident_face = "Returns true if the face f is incident to v .
 
 Parameters
 ----------
 e : Face_handle
 
 Returns: bool";
-constexpr const char* CGAL_Voronoi_diagram_2_Vertex_is_valid = "Returns true if the following conditions are met: the dual face is not an infinite face; all incident halfedges have the vertex as their target.
+constexpr const char* Voronoi_diagram_2_Vertex_is_valid = "Returns true if the following conditions are met: the dual face is not an infinite face; all incident halfedges have the vertex as their target.
 
 Returns: bool";
 

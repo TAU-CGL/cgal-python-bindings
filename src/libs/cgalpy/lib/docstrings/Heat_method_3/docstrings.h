@@ -8,45 +8,45 @@ namespace docstrings {
 namespace Heat_method_3 {
 
 // CGAL::Heat_method_3::Direct
-constexpr const char* CGAL_Heat_method_3_Direct__class__ = "A tag class used to specify that the heat method is applied to the input mesh.";
+constexpr const char* Heat_method_3_Direct__class__ = "A tag class used to specify that the heat method is applied to the input mesh.";
 
 // CGAL::Heat_method_3::Intrinsic_Delaunay
-constexpr const char* CGAL_Heat_method_3_Intrinsic_Delaunay__class__ = "A tag class used to specify that the heat method applies the intrinsic Delaunay triangulation to the input mesh.";
+constexpr const char* Heat_method_3_Intrinsic_Delaunay__class__ = "A tag class used to specify that the heat method applies the intrinsic Delaunay triangulation to the input mesh.";
 
 // CGAL::Heat_method_3::Surface_mesh_geodesic_distances_3
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3__class__ = "Class Surface_mesh_geodesic_distances_3 computes estimated geodesic distances for a set of source vertices where sources can be added and removed.";
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3__class__ = "Class Surface_mesh_geodesic_distances_3 computes estimated geodesic distances for a set of source vertices where sources can be added and removed.";
 
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_vertex_descriptor = "Vertex descriptor type.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_vertex_descriptor = "Vertex descriptor type.
 
 Returns: boost::graph_traits< TriangleMesh >::vertex_descriptor";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_Vertex_const_range = "a model of ConstRange with an iterator that is model of ForwardIterator with vertex_descriptor as value type.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_Vertex_const_range = "a model of ConstRange with an iterator that is model of ForwardIterator with vertex_descriptor as value type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_Vertex_point_map = "Vertex point map type derived from VertexPointMap .
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_Vertex_point_map = "Vertex point map type derived from VertexPointMap .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_Surface_mesh_geodesic_distances_3 = "Constructor.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_Surface_mesh_geodesic_distances_3 = "Constructor.
 
 Parameters
 ----------
 tm : const TriangleMesh &";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_Surface_mesh_geodesic_distances_3_1 = "Constructor.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_Surface_mesh_geodesic_distances_3_1 = "Constructor.
 
 Parameters
 ----------
 tm : const TriangleMesh &
 vpm : Vertex_point_map";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_triangle_mesh = "returns the triangle mesh the algorithm is running on.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_triangle_mesh = "returns the triangle mesh the algorithm is running on.
 
 Returns: const TriangleMesh &";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_add_source = "adds vd to the source set, returning false if vd is already in the set.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_add_source = "adds vd to the source set, returning false if vd is already in the set.
 
 Parameters
 ----------
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_add_sources = "adds the range of vertices to the source set.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_add_sources = "adds the range of vertices to the source set.
 
 VertexConstRange a model of the concept ConstRange with value type
 boost::graph_traits<TriangleMesh>::vertex_descriptor
@@ -54,18 +54,18 @@ boost::graph_traits<TriangleMesh>::vertex_descriptor
 Parameters
 ----------
 vrange : const VertexConstRange &";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_remove_source = "removes vd from the source set, returning true if vd was in the set.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_remove_source = "removes vd from the source set, returning true if vd was in the set.
 
 Parameters
 ----------
 vd : vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_clear_sources = "clears the current source set.";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_sources = "returns the source set.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_clear_sources = "clears the current source set.";
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_sources = "returns the source set.
 
 Returns: const Vertex_const_range &";
-constexpr const char* CGAL_Heat_method_3_Surface_mesh_geodesic_distances_3_estimate_geodesic_distances = "fills the distance property map with the estimated geodesic distance of each vertex to the closest source vertex.
+constexpr const char* Heat_method_3_Surface_mesh_geodesic_distances_3_estimate_geodesic_distances = "fills the distance property map with the estimated geodesic distance of each vertex to the closest source vertex.
 
 VertexDistanceMap a property map model of WritablePropertyMap with
 vertex_descriptor as key type and double as value type. vdm the vertex

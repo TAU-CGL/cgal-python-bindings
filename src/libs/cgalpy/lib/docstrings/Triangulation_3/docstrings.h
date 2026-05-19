@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Triangulation_3 {
 
 // CGAL::Delaunay_triangulation_3
-constexpr const char* CGAL_Delaunay_triangulation_3__class__ = "The class Delaunay_triangulation_3 represents a three-dimensional Delaunay triangulation.";
+constexpr const char* Delaunay_triangulation_3__class__ = "The class Delaunay_triangulation_3 represents a three-dimensional Delaunay triangulation.";
 
-constexpr const char* CGAL_Delaunay_triangulation_3_Delaunay_triangulation_3 = "Creates an empty Delaunay triangulation, possibly specifying a traits class traits .
+constexpr const char* Delaunay_triangulation_3_Delaunay_triangulation_3 = "Creates an empty Delaunay triangulation, possibly specifying a traits class traits .
 
 lock_ds is an optional pointer to the lock data structure for parallel
 operations. It must be provided if concurrency is enabled.
@@ -19,7 +19,7 @@ Parameters
 ----------
 traits : const Geom_traits &
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Delaunay_triangulation_3_Delaunay_triangulation_3_1 = "Copy constructor.
+constexpr const char* Delaunay_triangulation_3_Delaunay_triangulation_3_1 = "Copy constructor.
 
 The pointer to the lock data structure is not copied. Thus, the copy won't be
 concurrency-safe as long as the user has not called
@@ -28,7 +28,7 @@ Triangulation_3::set_lock_data_structure() .
 Parameters
 ----------
 dt1 : const Delaunay_triangulation_3 &";
-constexpr const char* CGAL_Delaunay_triangulation_3_Delaunay_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last) .
+constexpr const char* Delaunay_triangulation_3_Delaunay_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last) .
 
 If parallelism is enabled, the points will be inserted in parallel.
 
@@ -38,7 +38,7 @@ first : InputIterator
 last : InputIterator
 traits : const Geom_traits &
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Delaunay_triangulation_3_Delaunay_triangulation_3_3 = "Same as before, with last two parameters in reverse order.
+constexpr const char* Delaunay_triangulation_3_Delaunay_triangulation_3_3 = "Same as before, with last two parameters in reverse order.
 
 Parameters
 ----------
@@ -46,7 +46,7 @@ first : InputIterator
 last : InputIterator
 lock_ds : Lock_data_structure *
 traits : const Geom_traits &";
-constexpr const char* CGAL_Delaunay_triangulation_3_insert = "Inserts the point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Delaunay_triangulation_3_insert = "Inserts the point p in the triangulation and returns the corresponding vertex.
 
 Similar to the insertion in a triangulation, but ensures in addition the empty
 sphere property of all the created faces. The optional argument start is used
@@ -65,7 +65,7 @@ start : Cell_handle
 could_lock_zone : bool *
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_insert_1 = "Same as above but uses hint as a starting place for the search.
+constexpr const char* Delaunay_triangulation_3_insert_1 = "Same as above but uses hint as a starting place for the search.
 
 Parameters
 ----------
@@ -74,7 +74,7 @@ hint : Vertex_handle
 could_lock_zone : bool *
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_insert_2 = "Inserts the point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Delaunay_triangulation_3_insert_2 = "Inserts the point p in the triangulation and returns the corresponding vertex.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of
@@ -90,7 +90,7 @@ lj : int
 could_lock_zone : bool *
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_insert_3 = "Inserts the points in the iterator range [first,last) .
+constexpr const char* Delaunay_triangulation_3_insert_3 = "Inserts the points in the iterator range [first,last) .
 
 Returns the number of inserted points. Note that this function is not
 guaranteed to insert the points following the order of PointInputIterator , as
@@ -104,7 +104,7 @@ first : PointInputIterator
 last : PointInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Delaunay_triangulation_3_insert_4 = "Inserts the points in the iterator range [first,last) .
+constexpr const char* Delaunay_triangulation_3_insert_4 = "Inserts the points in the iterator range [first,last) .
 
 Returns the number of inserted points. Note that this function is not
 guaranteed to insert the points following the order of
@@ -123,7 +123,7 @@ first : PointWithInfoInputIterator
 last : PointWithInfoInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Delaunay_triangulation_3_move_if_no_collision = "If there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
+constexpr const char* Delaunay_triangulation_3_move_if_no_collision = "If there is not already another vertex placed on p , the triangulation is modified such that the new position of vertex v is p , and v is returned.
 
 Otherwise, the triangulation is not modified and the vertex at point p is
 returned. Vertex v must be finite.
@@ -134,7 +134,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_move = "If there is no collision during the move, this function is the same as move_if_no_collision .
+constexpr const char* Delaunay_triangulation_3_move = "If there is no collision during the move, this function is the same as move_if_no_collision .
 
 Otherwise, v is removed and the vertex at point p is returned. Vertex v must
 be finite.
@@ -145,14 +145,14 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_remove = "Removes the vertex v from the triangulation.
+constexpr const char* Delaunay_triangulation_3_remove = "Removes the vertex v from the triangulation.
 
 v is a finite vertex of the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_remove_1 = "Removes the vertex v from the triangulation.
+constexpr const char* Delaunay_triangulation_3_remove_1 = "Removes the vertex v from the triangulation.
 
 This function is concurrency-safe if the triangulation is concurrency-safe. It
 will first try to lock all the cells adjacent to v . If it succeeds,
@@ -170,7 +170,7 @@ v : Vertex_handle
 could_lock_zone : bool *
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_triangulation_3_remove_2 = "Removes the vertices specified by the iterator range [first, beyond) .
+constexpr const char* Delaunay_triangulation_3_remove_2 = "Removes the vertices specified by the iterator range [first, beyond) .
 
 The number of vertices removed is returned. If parallelism is enabled, the
 points will be removed in parallel. Note that if at some step, the
@@ -185,7 +185,7 @@ first : InputIterator
 beyond : InputIterator
 
 Returns: int";
-constexpr const char* CGAL_Delaunay_triangulation_3_remove_cluster = "This function has exactly the same result and the same preconditions as remove(first, beyond) .
+constexpr const char* Delaunay_triangulation_3_remove_cluster = "This function has exactly the same result and the same preconditions as remove(first, beyond) .
 
 The difference is in the implementation and efficiency. This version does not
 re-triangulate the hole after each point removal but only after removing all
@@ -201,7 +201,7 @@ first : InputIterator
 beyond : InputIterator
 
 Returns: int";
-constexpr const char* CGAL_Delaunay_triangulation_3_side_of_sphere = "Returns a value indicating on which side of the circumscribed sphere of c the point p lies.
+constexpr const char* Delaunay_triangulation_3_side_of_sphere = "Returns a value indicating on which side of the circumscribed sphere of c the point p lies.
 
 More precisely, it returns: ON_BOUNDED_SIDE if p is inside the sphere. For an
 infinite cell this means that p lies strictly either in the half space limited
@@ -218,7 +218,7 @@ c : Cell_handle
 p : const Point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Delaunay_triangulation_3_side_of_circle = "Returns a value indicating on which side of the circumscribed circle of f the point p lies.
+constexpr const char* Delaunay_triangulation_3_side_of_circle = "Returns a value indicating on which side of the circumscribed circle of f the point p lies.
 
 More precisely, it returns: in dimension 3: For a finite facet, ON_BOUNDARY if
 p lies on the circle, ON_UNBOUNDED_SIDE when it lies in the exterior of the
@@ -239,7 +239,7 @@ f : const Facet &
 p : const Point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Delaunay_triangulation_3_side_of_circle_1 = "Same as the previous method for facet i of cell c .
+constexpr const char* Delaunay_triangulation_3_side_of_circle_1 = "Same as the previous method for facet i of cell c .
 
 Parameters
 ----------
@@ -248,7 +248,7 @@ i : int
 p : const Point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Delaunay_triangulation_3_nearest_vertex = "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.
+constexpr const char* Delaunay_triangulation_3_nearest_vertex = "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.
 
 The optional argument c is a hint specifying where to start the search. c is a
 cell of dt .
@@ -259,7 +259,7 @@ p : const Point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_nearest_vertex_in_cell = "Returns the vertex of the cell c that is nearest to $ p$ .
+constexpr const char* Delaunay_triangulation_3_nearest_vertex_in_cell = "Returns the vertex of the cell c that is nearest to $ p$ .
 
 Parameters
 ----------
@@ -267,7 +267,7 @@ p : const Point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Delaunay_triangulation_3_find_conflicts = "Computes the conflict hole induced by p .
+constexpr const char* Delaunay_triangulation_3_find_conflicts = "Computes the conflict hole induced by p .
 
 The starting cell (resp. facet) c must be in conflict. Then this function
 returns respectively in the output iterators: cit : the cells (resp. facets)
@@ -295,7 +295,7 @@ cit : OutputIteratorCells
 could_lock_zone : bool *
 
 Returns: std::pair< OutputIteratorBoundaryFacets, OutputIteratorCells >";
-constexpr const char* CGAL_Delaunay_triangulation_3_find_conflicts_1 = "Same as the other find_conflicts() function, except that it also computes the internal facets, i.e. the facets common to two cells which are in conflict with p .
+constexpr const char* Delaunay_triangulation_3_find_conflicts_1 = "Same as the other find_conflicts() function, except that it also computes the internal facets, i.e. the facets common to two cells which are in conflict with p .
 
 Then this function returns respectively in the output iterators: cit : the
 cells (resp. facets) in conflict. bfit : the facets (resp. edges) on the
@@ -323,7 +323,7 @@ ifit : OutputIteratorInternalFacets
 could_lock_zone : bool *
 
 Returns: Triple< OutputIteratorBoundaryFacets, OutputIteratorCells, OutputIteratorInternalFacets >";
-constexpr const char* CGAL_Delaunay_triangulation_3_vertices_in_conflict = "
+constexpr const char* Delaunay_triangulation_3_vertices_in_conflict = "
 Deprecated This function is renamed vertices_on_conflict_zone_boundary since
 CGAL-3.8.
 
@@ -334,7 +334,7 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Delaunay_triangulation_3_vertices_on_conflict_zone_boundary = "Similar to find_conflicts() , but reports the vertices which are on the boundary of the conflict hole of p , in the output iterator res .
+constexpr const char* Delaunay_triangulation_3_vertices_on_conflict_zone_boundary = "Similar to find_conflicts() , but reports the vertices which are on the boundary of the conflict hole of p , in the output iterator res .
 
 Returns the resulting output iterator. dt . dimension() $ \\geq2$ , and c is in
 conflict with p .
@@ -346,7 +346,7 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Delaunay_triangulation_3_dual = "Returns the circumcenter of the four vertices of c.
+constexpr const char* Delaunay_triangulation_3_dual = "Returns the circumcenter of the four vertices of c.
 
 dt . dimension() $ =3$ and c is not infinite.
 
@@ -355,7 +355,7 @@ Parameters
 c : Cell_handle
 
 Returns: Point";
-constexpr const char* CGAL_Delaunay_triangulation_3_dual_1 = "Returns the dual of facet f , which is.
+constexpr const char* Delaunay_triangulation_3_dual_1 = "Returns the dual of facet f , which is.
 
 in dimension 3: either a segment, if the two cells incident to f are finite,
 or a ray, if one of them is infinite; in dimension 2: a point. dt .
@@ -366,7 +366,7 @@ Parameters
 f : Facet
 
 Returns: Object";
-constexpr const char* CGAL_Delaunay_triangulation_3_dual_2 = "same as the previous method for facet (c,i) .
+constexpr const char* Delaunay_triangulation_3_dual_2 = "same as the previous method for facet (c,i) .
 
 Parameters
 ----------
@@ -374,7 +374,7 @@ c : Cell_handle
 i : int
 
 Returns: Object";
-constexpr const char* CGAL_Delaunay_triangulation_3_dual_support = "returns the line supporting the dual of the facet.
+constexpr const char* Delaunay_triangulation_3_dual_support = "returns the line supporting the dual of the facet.
 
 dt . dimension() $ \\geq2$ and f is not infinite.
 
@@ -384,14 +384,14 @@ c : Cell_handle
 i : int
 
 Returns: Line";
-constexpr const char* CGAL_Delaunay_triangulation_3_draw_dual = "Sends the set of duals to all the facets of dt into os .
+constexpr const char* Delaunay_triangulation_3_draw_dual = "Sends the set of duals to all the facets of dt into os .
 
 Parameters
 ----------
 os : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Delaunay_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ).
+constexpr const char* Delaunay_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ).
 
 Also checks that all the circumscribing spheres (resp. circles in dimension 2)
 of cells (resp. facets in dimension 2) are empty. When verbose is set to true,
@@ -402,7 +402,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Delaunay_triangulation_3_is_valid_1 = "This is a function for debugging purpose.
+constexpr const char* Delaunay_triangulation_3_is_valid_1 = "This is a function for debugging purpose.
 
 Debugging Support Checks the combinatorial and geometric validity of the cell
 (see Section Representation ). Also checks that the circumscribing sphere
@@ -418,9 +418,9 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Delaunay_triangulation_cell_base_3
-constexpr const char* CGAL_Delaunay_triangulation_cell_base_3__class__ = "The class Delaunay_triangulation_cell_base_3 is a model of the concept DelaunayTriangulationCellBase_3 .";
+constexpr const char* Delaunay_triangulation_cell_base_3__class__ = "The class Delaunay_triangulation_cell_base_3 is a model of the concept DelaunayTriangulationCellBase_3 .";
 
-constexpr const char* CGAL_Delaunay_triangulation_cell_base_3_circumcenter = "Returns the circumcenter of the cell.
+constexpr const char* Delaunay_triangulation_cell_base_3_circumcenter = "Returns the circumcenter of the cell.
 
 Parameters
 ----------
@@ -429,9 +429,9 @@ gt : const Traits &
 Returns: const Point &";
 
 // CGAL::Delaunay_triangulation_cell_base_with_circumcenter_3
-constexpr const char* CGAL_Delaunay_triangulation_cell_base_with_circumcenter_3__class__ = "The class Delaunay_triangulation_cell_base_with_circumcenter_3 derives from Cb , a cell base class of a 3D triangulation.";
+constexpr const char* Delaunay_triangulation_cell_base_with_circumcenter_3__class__ = "The class Delaunay_triangulation_cell_base_with_circumcenter_3 derives from Cb , a cell base class of a 3D triangulation.";
 
-constexpr const char* CGAL_Delaunay_triangulation_cell_base_with_circumcenter_3_circumcenter = "Computes the circumcenter of the tetrahedron, or retrieves it if already computed.
+constexpr const char* Delaunay_triangulation_cell_base_with_circumcenter_3_circumcenter = "Computes the circumcenter of the tetrahedron, or retrieves it if already computed.
 
 Parameters
 ----------
@@ -440,15 +440,15 @@ gt : const Traits &
 Returns: const Point &";
 
 // CGAL::Regular_triangulation_3
-constexpr const char* CGAL_Regular_triangulation_3__class__ = "Let $ {S}^{(w)}$ be a set of weighted points in $ \\mathbb{R}^3$ .";
+constexpr const char* Regular_triangulation_3__class__ = "Let $ {S}^{(w)}$ be a set of weighted points in $ \\mathbb{R}^3$ .";
 
-constexpr const char* CGAL_Regular_triangulation_3_Bare_point = "The type for points p of weighted points $ {p}^{(w)}=(p,w_p)$ .
+constexpr const char* Regular_triangulation_3_Bare_point = "The type for points p of weighted points $ {p}^{(w)}=(p,w_p)$ .
 
 Returns: Traits::Point_3";
-constexpr const char* CGAL_Regular_triangulation_3_Weighted_point = "The type for weighted points.
+constexpr const char* Regular_triangulation_3_Weighted_point = "The type for weighted points.
 
 Returns: Traits::Weighted_point_3";
-constexpr const char* CGAL_Regular_triangulation_3_Regular_triangulation_3 = "Creates an empty regular triangulation, possibly specifying a traits class traits .
+constexpr const char* Regular_triangulation_3_Regular_triangulation_3 = "Creates an empty regular triangulation, possibly specifying a traits class traits .
 
 lock_ds is an optional pointer to the lock data structure for parallel
 operations. It must be provided if concurrency is enabled.
@@ -457,7 +457,7 @@ Parameters
 ----------
 traits : const Traits &
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Regular_triangulation_3_Regular_triangulation_3_1 = "Copy constructor.
+constexpr const char* Regular_triangulation_3_Regular_triangulation_3_1 = "Copy constructor.
 
 The pointer to the lock data structure is not copied. Thus, the copy won't be
 concurrency-safe as long as the user has not called
@@ -466,7 +466,7 @@ Triangulation_3::set_lock_data_structure .
 Parameters
 ----------
 rt1 : const Regular_triangulation_3 &";
-constexpr const char* CGAL_Regular_triangulation_3_Regular_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last) .
+constexpr const char* Regular_triangulation_3_Regular_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last) .
 
 If parallelism is enabled, the points will be inserted in parallel.
 InputIterator must be an input iterator with value type Weighted_point .
@@ -477,7 +477,7 @@ first : InputIterator
 last : InputIterator
 traits : const Traits &
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Regular_triangulation_3_Regular_triangulation_3_3 = "Same as before, with last two parameters in reverse order.
+constexpr const char* Regular_triangulation_3_Regular_triangulation_3_3 = "Same as before, with last two parameters in reverse order.
 
 Parameters
 ----------
@@ -485,7 +485,7 @@ first : InputIterator
 last : InputIterator
 lock_ds : Lock_data_structure *
 traits : const Traits &";
-constexpr const char* CGAL_Regular_triangulation_3_insert = "Inserts the weighted point p in the triangulation.
+constexpr const char* Regular_triangulation_3_insert = "Inserts the weighted point p in the triangulation.
 
 The optional argument start is used as a starting place for the search. If
 this insertion creates a vertex, this vertex is returned. If p coincides with
@@ -510,7 +510,7 @@ start : Cell_handle
 could_lock_zone : bool *
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_insert_1 = "Same as above but uses hint as a starting place for the search.
+constexpr const char* Regular_triangulation_3_insert_1 = "Same as above but uses hint as a starting place for the search.
 
 Parameters
 ----------
@@ -519,7 +519,7 @@ hint : Vertex_handle
 could_lock_zone : bool *
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_insert_2 = "Inserts the weighted point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Regular_triangulation_3_insert_2 = "Inserts the weighted point p in the triangulation and returns the corresponding vertex.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of
@@ -535,7 +535,7 @@ lj : int
 could_lock_zone : bool *
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_insert_3 = "Inserts the weighted points in the range [first,last) .
+constexpr const char* Regular_triangulation_3_insert_3 = "Inserts the weighted points in the range [first,last) .
 
 It returns the difference of the number of vertices between after and before
 the insertions (it may be negative due to hidden points). Note that this
@@ -550,7 +550,7 @@ first : InputIterator
 last : InputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Regular_triangulation_3_insert_4 = "Inserts the weighted points in the iterator range [first,last) .
+constexpr const char* Regular_triangulation_3_insert_4 = "Inserts the weighted points in the iterator range [first,last) .
 
 It returns the difference of the number of vertices between after and before
 the insertions (it may be negative due to hidden points). Note that this
@@ -570,7 +570,7 @@ first : WeightedPointWithInfoInputIterator
 last : WeightedPointWithInfoInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Regular_triangulation_3_insert_in_hole = "Creates a new vertex by starring a hole.
+constexpr const char* Regular_triangulation_3_insert_in_hole = "Creates a new vertex by starring a hole.
 
 It takes an iterator range [cell_begin,cell_end) of Cell_handle s which
 specifies a hole: a set of connected cells (resp. facets in dimension 2) which
@@ -595,7 +595,7 @@ begin : Cell_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_insert_in_hole_1 = "Same as above, except that newv will be used as the new vertex, which must have been allocated previously with, e.g. create_vertex .
+constexpr const char* Regular_triangulation_3_insert_in_hole_1 = "Same as above, except that newv will be used as the new vertex, which must have been allocated previously with, e.g. create_vertex .
 
 Parameters
 ----------
@@ -607,12 +607,12 @@ i : int
 newv : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_remove = "Removes the vertex v from the triangulation.
+constexpr const char* Regular_triangulation_3_remove = "Removes the vertex v from the triangulation.
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_remove_1 = "Removes the vertex v from the triangulation.
+constexpr const char* Regular_triangulation_3_remove_1 = "Removes the vertex v from the triangulation.
 
 This function is concurrency-safe if the triangulation is concurrency-safe. It
 will first try to lock all the cells adjacent to v . If it succeeds,
@@ -630,7 +630,7 @@ v : Vertex_handle
 could_lock_zone : bool *
 
 Returns: bool";
-constexpr const char* CGAL_Regular_triangulation_3_remove_2 = "Removes the vertices specified by the iterator range [first, beyond) .
+constexpr const char* Regular_triangulation_3_remove_2 = "Removes the vertices specified by the iterator range [first, beyond) .
 
 The number of vertices removed is returned. If parallelism is enabled, the
 points will be removed in parallel. Note that if at some step, the
@@ -645,7 +645,7 @@ first : InputIterator
 beyond : InputIterator
 
 Returns: int";
-constexpr const char* CGAL_Regular_triangulation_3_side_of_power_sphere = "Returns the position of the weighted point $ p$ with respect to the power sphere of c .
+constexpr const char* Regular_triangulation_3_side_of_power_sphere = "Returns the position of the weighted point $ p$ with respect to the power sphere of c .
 
 More precisely, it returns: ON_BOUNDED_SIDE if $
 \\Pi({p}^{(w)}-{z(c)}^{(w)})<0$ where $ {z(c)}^{(w)}$ is the power sphere of c
@@ -666,7 +666,7 @@ c : Cell_handle
 p : const Weighted_point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Regular_triangulation_3_side_of_power_circle = "Returns the position of the point p with respect to the power circle of f .
+constexpr const char* Regular_triangulation_3_side_of_power_circle = "Returns the position of the point p with respect to the power circle of f .
 
 More precisely, it returns: in dimension 3: For a finite facet, ON_BOUNDARY if
 p is orthogonal to the power circle in the plane of the facet,
@@ -691,7 +691,7 @@ f : const Facet &
 p : const Weighted_point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Regular_triangulation_3_side_of_power_circle_1 = "Same as the previous method for facet i of cell c .
+constexpr const char* Regular_triangulation_3_side_of_power_circle_1 = "Same as the previous method for facet i of cell c .
 
 Parameters
 ----------
@@ -700,7 +700,7 @@ i : int
 p : const Weighted_point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Regular_triangulation_3_side_of_power_segment = "In dimension 1, returns.
+constexpr const char* Regular_triangulation_3_side_of_power_segment = "In dimension 1, returns.
 
 ON_BOUNDED_SIDE if $ \\Pi({p}^{(w)}-{z(c)}^{(w)})<0$ , where $ {z(c)}^{(w)}$ is
 the power segment of the edge represented by c , ON_BOUNDARY if $
@@ -713,7 +713,7 @@ c : Cell_handle
 p : const Weighted_point &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Regular_triangulation_3_nearest_power_vertex = "Returns the vertex of the triangulation which is nearest to $ p$ with respect to the power distance.
+constexpr const char* Regular_triangulation_3_nearest_power_vertex = "Returns the vertex of the triangulation which is nearest to $ p$ with respect to the power distance.
 
 This means that the power of the query point p with respect to the weighted
 point in the returned vertex is smaller than the power of p with respect to
@@ -728,7 +728,7 @@ p : const Bare_point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_nearest_power_vertex_in_cell = "Returns the vertex of the cell c that is nearest to $ p$ with respect to the power distance.
+constexpr const char* Regular_triangulation_3_nearest_power_vertex_in_cell = "Returns the vertex of the cell c that is nearest to $ p$ with respect to the power distance.
 
 Parameters
 ----------
@@ -736,7 +736,7 @@ p : const Bare_point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Regular_triangulation_3_find_conflicts = "Compute the conflicts with p .
+constexpr const char* Regular_triangulation_3_find_conflicts = "Compute the conflicts with p .
 
 p The query point. c The starting cell. cit The cells (resp. facets) in
 conflict with p . bfit The facets (resp. edges) on the boundary of the
@@ -773,7 +773,7 @@ this_facet_must_be_in_the_cz : const Facet *
 the_facet_is_in_its_cz : bool *
 
 Returns: Triple< OutputIteratorBoundaryFacets, OutputIteratorCells, OutputIteratorInternalFacets >";
-constexpr const char* CGAL_Regular_triangulation_3_vertices_in_conflict = "
+constexpr const char* Regular_triangulation_3_vertices_in_conflict = "
 Deprecated This function is renamed vertices_on_conflict_zone_boundary since
 CGAL-3.8.
 
@@ -784,7 +784,7 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Regular_triangulation_3_vertices_on_conflict_zone_boundary = "Similar to find_conflicts() , but reports the vertices which are on the boundary of the conflict zone of p , in the output iterator res .
+constexpr const char* Regular_triangulation_3_vertices_on_conflict_zone_boundary = "Similar to find_conflicts() , but reports the vertices which are on the boundary of the conflict zone of p , in the output iterator res .
 
 Returns the resulting output iterator. dimension() $ \\geq2$ , and c is a cell
 containing p .
@@ -796,7 +796,7 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Regular_triangulation_3_vertices_inside_conflict_zone = "Similar to find_conflicts() , but reports the vertices which are in the interior of the conflict zone of p , in the output iterator res .
+constexpr const char* Regular_triangulation_3_vertices_inside_conflict_zone = "Similar to find_conflicts() , but reports the vertices which are in the interior of the conflict zone of p , in the output iterator res .
 
 The vertices that are on the boundary of the conflict zone are not reported.
 Returns the resulting output iterator. dimension() $ \\geq2$ , and c is a cell
@@ -809,7 +809,7 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Regular_triangulation_3_dual = "Returns the weighted circumcenter of the four vertices of c.
+constexpr const char* Regular_triangulation_3_dual = "Returns the weighted circumcenter of the four vertices of c.
 
 dimension() $ =3$ and c is not infinite.
 
@@ -818,7 +818,7 @@ Parameters
 c : Cell_handle
 
 Returns: Bare_point";
-constexpr const char* CGAL_Regular_triangulation_3_dual_1 = "Returns the dual of facet f , which is.
+constexpr const char* Regular_triangulation_3_dual_1 = "Returns the dual of facet f , which is.
 
 in dimension 3: either a segment, if the two cells incident to f are finite,
 or a ray, if one of them is infinite; in dimension 2: a point. dimension() $
@@ -829,7 +829,7 @@ Parameters
 f : Facet
 
 Returns: Object";
-constexpr const char* CGAL_Regular_triangulation_3_dual_2 = "same as the previous method for facet (c,i) .
+constexpr const char* Regular_triangulation_3_dual_2 = "same as the previous method for facet (c,i) .
 
 Parameters
 ----------
@@ -837,14 +837,14 @@ c : Cell_handle
 i : int
 
 Returns: Object";
-constexpr const char* CGAL_Regular_triangulation_3_draw_dual = "Writes the set of duals to all the facets of the regular triangulation into os .
+constexpr const char* Regular_triangulation_3_draw_dual = "Writes the set of duals to all the facets of the regular triangulation into os .
 
 Parameters
 ----------
 os : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Regular_triangulation_3_is_valid = "This is a function for debugging purpose.
+constexpr const char* Regular_triangulation_3_is_valid = "This is a function for debugging purpose.
 
 Debugging Support Checks the combinatorial validity of the triangulation and
 the validity of its geometric embedding (see Section Representation ). Also
@@ -861,20 +861,20 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Regular_triangulation_cell_base_3
-constexpr const char* CGAL_Regular_triangulation_cell_base_3__class__ = "The class Regular_triangulation_cell_base_3 derives from Cb , a cell base class of a 3D triangulation.";
+constexpr const char* Regular_triangulation_cell_base_3__class__ = "The class Regular_triangulation_cell_base_3 derives from Cb , a cell base class of a 3D triangulation.";
 
-constexpr const char* CGAL_Regular_triangulation_cell_base_3_hidden_points_begin = "Returns an iterator pointing to the first hidden point.
-
-Returns: Point_iterator";
-constexpr const char* CGAL_Regular_triangulation_cell_base_3_hidden_points_end = "Returns a past-the-end iterator.
+constexpr const char* Regular_triangulation_cell_base_3_hidden_points_begin = "Returns an iterator pointing to the first hidden point.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Regular_triangulation_cell_base_3_hide_point = "Adds p to the set of hidden points of the cell.
+constexpr const char* Regular_triangulation_cell_base_3_hidden_points_end = "Returns a past-the-end iterator.
+
+Returns: Point_iterator";
+constexpr const char* Regular_triangulation_cell_base_3_hide_point = "Adds p to the set of hidden points of the cell.
 
 Parameters
 ----------
 p : const Point &";
-constexpr const char* CGAL_Regular_triangulation_cell_base_3_weighted_circumcenter = "Returns the weighted circumcenter of the cell.
+constexpr const char* Regular_triangulation_cell_base_3_weighted_circumcenter = "Returns the weighted circumcenter of the cell.
 
 Be careful that the return type is Point_3 , and the radius of the weighted
 circumcenter is not supposed to be computed by the constructor
@@ -888,9 +888,9 @@ gt : const Traits &
 Returns: Point_3";
 
 // CGAL::Regular_triangulation_cell_base_with_weighted_circumcenter_3
-constexpr const char* CGAL_Regular_triangulation_cell_base_with_weighted_circumcenter_3__class__ = "The class Regular_triangulation_cell_base_with_weighted_circumcenter_3 derives from Cb , a cell base class of a 3D triangulation.";
+constexpr const char* Regular_triangulation_cell_base_with_weighted_circumcenter_3__class__ = "The class Regular_triangulation_cell_base_with_weighted_circumcenter_3 derives from Cb , a cell base class of a 3D triangulation.";
 
-constexpr const char* CGAL_Regular_triangulation_cell_base_with_weighted_circumcenter_3_weighted_circumcenter = "Computes the weighted circumcenter of the tetrahedron, or retrieves it if it has already been computed.
+constexpr const char* Regular_triangulation_cell_base_with_weighted_circumcenter_3_weighted_circumcenter = "Computes the weighted circumcenter of the tetrahedron, or retrieves it if it has already been computed.
 
 The returned point has no weight.
 
@@ -899,7 +899,7 @@ Parameters
 gt : const Traits &
 
 Returns: const Point_3 &";
-constexpr const char* CGAL_Regular_triangulation_cell_base_with_weighted_circumcenter_3_swap = "Swaps the Regular_triangulation_cell_base_with_weighted_circumcenter_3 and other .
+constexpr const char* Regular_triangulation_cell_base_with_weighted_circumcenter_3_swap = "Swaps the Regular_triangulation_cell_base_with_weighted_circumcenter_3 and other .
 
 This function should be preferred to an assignment or the copy constructor if
 other is deleted thereafter.
@@ -909,129 +909,129 @@ Parameters
 other : Regular_triangulation_cell_base_with_weighted_circumcenter_3 &";
 
 // CGAL::Regular_triangulation_vertex_base_3
-constexpr const char* CGAL_Regular_triangulation_vertex_base_3__class__ = "The class Regular_triangulation_vertex_base_3 is a model of the concept RegularTriangulationVertexBase_3 , the base vertex of a 3D regular triangulation.";
+constexpr const char* Regular_triangulation_vertex_base_3__class__ = "The class Regular_triangulation_vertex_base_3 is a model of the concept RegularTriangulationVertexBase_3 , the base vertex of a 3D regular triangulation.";
 
 
 // CGAL::Robust_circumcenter_filtered_traits_3
-constexpr const char* CGAL_Robust_circumcenter_filtered_traits_3__class__ = "Upgrades the functors models of Kernel::ConstructCircumcenter_3 , Kernel::ComputeSquaredRadius_3 that are provided by K with robust versions.";
+constexpr const char* Robust_circumcenter_filtered_traits_3__class__ = "Upgrades the functors models of Kernel::ConstructCircumcenter_3 , Kernel::ComputeSquaredRadius_3 that are provided by K with robust versions.";
 
-constexpr const char* CGAL_Robust_circumcenter_filtered_traits_3_Construct_circumcenter_3 = "a model of Kernel::ConstructCircumcenter_3
+constexpr const char* Robust_circumcenter_filtered_traits_3_Construct_circumcenter_3 = "a model of Kernel::ConstructCircumcenter_3
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Robust_circumcenter_filtered_traits_3_Compute_squared_radius_3 = "a model of Kernel::ComputeSquaredRadius_3
+constexpr const char* Robust_circumcenter_filtered_traits_3_Compute_squared_radius_3 = "a model of Kernel::ComputeSquaredRadius_3
 
 Returns: unspecified_type";
 
 // CGAL::Robust_weighted_circumcenter_filtered_traits_3
-constexpr const char* CGAL_Robust_weighted_circumcenter_filtered_traits_3__class__ = "Upgrades the functors models of Kernel::ConstructWeightedCircumcenter_3 , Kernel::ComputeSquaredRadiusSmallestOrthogonalSphere_3 that are provided by K with robust versions.";
+constexpr const char* Robust_weighted_circumcenter_filtered_traits_3__class__ = "Upgrades the functors models of Kernel::ConstructWeightedCircumcenter_3 , Kernel::ComputeSquaredRadiusSmallestOrthogonalSphere_3 that are provided by K with robust versions.";
 
-constexpr const char* CGAL_Robust_weighted_circumcenter_filtered_traits_3_Construct_weighted_circumcenter_3 = "a model of Kernel::ConstructWeightedCircumcenter_3
+constexpr const char* Robust_weighted_circumcenter_filtered_traits_3_Construct_weighted_circumcenter_3 = "a model of Kernel::ConstructWeightedCircumcenter_3
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Robust_weighted_circumcenter_filtered_traits_3_Compute_squared_radius_smallest_orthogonal_sphere_3 = "a model of Kernel::ComputeSquaredRadiusSmallestOrthogonalSphere_3
+constexpr const char* Robust_weighted_circumcenter_filtered_traits_3_Compute_squared_radius_smallest_orthogonal_sphere_3 = "a model of Kernel::ComputeSquaredRadiusSmallestOrthogonalSphere_3
 
 Returns: unspecified_type";
 
 // CGAL::Triangulation_3
-constexpr const char* CGAL_Triangulation_3__class__ = "The class Triangulation_3 represents a 3-dimensional tetrahedralization of points.";
+constexpr const char* Triangulation_3__class__ = "The class Triangulation_3 represents a 3-dimensional tetrahedralization of points.";
 
-constexpr const char* CGAL_Triangulation_3_Concurrency_tag = "Concurrency tag (from the TDS).
+constexpr const char* Triangulation_3_Concurrency_tag = "Concurrency tag (from the TDS).
 
 Returns: Triangulation_data_structure::Concurrency_tag";
-constexpr const char* CGAL_Triangulation_3_Vertex_handle = "handle to a vertex
+constexpr const char* Triangulation_3_Vertex_handle = "handle to a vertex
 
 Returns: Triangulation_data_structure::Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_Cell_handle = "handle to a cell
+constexpr const char* Triangulation_3_Cell_handle = "handle to a cell
 
 Returns: Triangulation_data_structure::Cell_handle";
-constexpr const char* CGAL_Triangulation_3_Simplex = "Reference to a simplex (vertex, edge, facet or cell) of the triangulation.
+constexpr const char* Triangulation_3_Simplex = "Reference to a simplex (vertex, edge, facet or cell) of the triangulation.
 
 Returns: Triangulation_simplex_3 < Self >";
-constexpr const char* CGAL_Triangulation_3_size_type = "Size type (an unsigned integral type).
+constexpr const char* Triangulation_3_size_type = "Size type (an unsigned integral type).
 
 Returns: Triangulation_data_structure::size_type";
-constexpr const char* CGAL_Triangulation_3_difference_type = "Difference type (a signed integral type).
+constexpr const char* Triangulation_3_difference_type = "Difference type (a signed integral type).
 
 Returns: Triangulation_data_structure::difference_type";
-constexpr const char* CGAL_Triangulation_3_All_cells_iterator = "iterator over cells
+constexpr const char* Triangulation_3_All_cells_iterator = "iterator over cells
 
 Returns: Triangulation_data_structure::Cell_iterator";
-constexpr const char* CGAL_Triangulation_3_All_facets_iterator = "iterator over facets
+constexpr const char* Triangulation_3_All_facets_iterator = "iterator over facets
 
 Returns: Triangulation_data_structure::Facet_iterator";
-constexpr const char* CGAL_Triangulation_3_All_edges_iterator = "iterator over edges
+constexpr const char* Triangulation_3_All_edges_iterator = "iterator over edges
 
 Returns: Triangulation_data_structure::Edge_iterator";
-constexpr const char* CGAL_Triangulation_3_All_vertices_iterator = "iterator over vertices
+constexpr const char* Triangulation_3_All_vertices_iterator = "iterator over vertices
 
 Returns: Triangulation_data_structure::Vertex_iterator";
-constexpr const char* CGAL_Triangulation_3_Finite_cells_iterator = "iterator over finite cells
+constexpr const char* Triangulation_3_Finite_cells_iterator = "iterator over finite cells
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_Finite_facets_iterator = "iterator over finite facets
+constexpr const char* Triangulation_3_Finite_facets_iterator = "iterator over finite facets
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_Finite_edges_iterator = "iterator over finite edges
+constexpr const char* Triangulation_3_Finite_edges_iterator = "iterator over finite edges
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_Finite_vertices_iterator = "iterator over finite vertices
+constexpr const char* Triangulation_3_Finite_vertices_iterator = "iterator over finite vertices
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_Point_iterator = "iterator over the points corresponding to the finite vertices of the triangulation.
+constexpr const char* Triangulation_3_Point_iterator = "iterator over the points corresponding to the finite vertices of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_Cell_circulator = "circulator over all cells incident to a given edge
+constexpr const char* Triangulation_3_Cell_circulator = "circulator over all cells incident to a given edge
 
 Returns: Triangulation_data_structure::Cell_circulator";
-constexpr const char* CGAL_Triangulation_3_Facet_circulator = "circulator over all facets incident to a given edge
+constexpr const char* Triangulation_3_Facet_circulator = "circulator over all facets incident to a given edge
 
 Returns: Triangulation_data_structure::Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_Segment_cell_iterator = "iterator over cells intersected by a line segment.
+constexpr const char* Triangulation_3_Segment_cell_iterator = "iterator over cells intersected by a line segment.
 
 Segment_cell_iterator implements the concept ForwardIterator and is
 non-mutable. Its value type is Cell_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_Segment_simplex_iterator = "iterator over simplices intersected by a line segment.
+constexpr const char* Triangulation_3_Segment_simplex_iterator = "iterator over simplices intersected by a line segment.
 
 Segment_simplex_iterator implements the concept ForwardIterator and is
 non-mutable. Its value type is Triangulation_simplex_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Triangulation_3_All_cell_handles = "range type for iterating over all cell handles (including infinite cells), with a nested type iterator that has as value type Cell_handle .
+constexpr const char* Triangulation_3_All_cell_handles = "range type for iterating over all cell handles (including infinite cells), with a nested type iterator that has as value type Cell_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_3_All_facets = "range type for iterating over facets.
+constexpr const char* Triangulation_3_All_facets = "range type for iterating over facets.
 
 Returns: Iterator_range< All_facets_iterator >";
-constexpr const char* CGAL_Triangulation_3_All_edges = "range type for iterating over edges.
+constexpr const char* Triangulation_3_All_edges = "range type for iterating over edges.
 
 Returns: Iterator_range< All_edges_iterator >";
-constexpr const char* CGAL_Triangulation_3_All_vertex_handles = "range type for iterating over all vertex handles, with a nested type iterator that has as value type Vertex_handle .
+constexpr const char* Triangulation_3_All_vertex_handles = "range type for iterating over all vertex handles, with a nested type iterator that has as value type Vertex_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_3_Finite_cell_handles = "range type for iterating over finite cell handles, with a nested type iterator that has as value type Cell_handle .
+constexpr const char* Triangulation_3_Finite_cell_handles = "range type for iterating over finite cell handles, with a nested type iterator that has as value type Cell_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_3_Finite_facets = "range type for iterating over finite facets.
+constexpr const char* Triangulation_3_Finite_facets = "range type for iterating over finite facets.
 
 Returns: Iterator_range< Finite_facets_iterator >";
-constexpr const char* CGAL_Triangulation_3_Finite_edges = "range type for iterating over finite edges.
+constexpr const char* Triangulation_3_Finite_edges = "range type for iterating over finite edges.
 
 Returns: Iterator_range< Finite_edges_iterator >";
-constexpr const char* CGAL_Triangulation_3_Finite_vertex_handles = "range type for iterating over finite vertex handles, with a nested type iterator that has as value type Vertex_handle .
+constexpr const char* Triangulation_3_Finite_vertex_handles = "range type for iterating over finite vertex handles, with a nested type iterator that has as value type Vertex_handle .
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_3_Points = "range type for iterating over the points of the finite vertices.
+constexpr const char* Triangulation_3_Points = "range type for iterating over the points of the finite vertices.
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_3_Segment_traverser_cell_handles = "range type for iterating over the cells intersected by a line segment.
+constexpr const char* Triangulation_3_Segment_traverser_cell_handles = "range type for iterating over the cells intersected by a line segment.
 
 Returns: Iterator_range< unspecified_type >";
-constexpr const char* CGAL_Triangulation_3_Segment_traverser_simplices = "range type for iterating over the simplices intersected by a line segment.
+constexpr const char* Triangulation_3_Segment_traverser_simplices = "range type for iterating over the simplices intersected by a line segment.
 
 Returns: Iterator_range< Segment_simplex_iterator >";
-constexpr const char* CGAL_Triangulation_3_Triangulation_3 = "Introduces a triangulation t having only one vertex which is the infinite vertex.
+constexpr const char* Triangulation_3_Triangulation_3 = "Introduces a triangulation t having only one vertex which is the infinite vertex.
 
 lock_ds is an optional pointer to the lock data structure for parallel
 operations. It must be provided if concurrency is enabled.
@@ -1040,13 +1040,13 @@ Parameters
 ----------
 traits : const Geom_traits &
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Triangulation_3_Triangulation_3_1 = "Same as the previous one, but with parameters in reverse order.
+constexpr const char* Triangulation_3_Triangulation_3_1 = "Same as the previous one, but with parameters in reverse order.
 
 Parameters
 ----------
 lock_ds : Lock_data_structure *
 traits : const Geom_traits &";
-constexpr const char* CGAL_Triangulation_3_Triangulation_3_2 = "Copy constructor.
+constexpr const char* Triangulation_3_Triangulation_3_2 = "Copy constructor.
 
 All vertices and faces are duplicated. The pointer to the lock data structure
 is not copied. Thus, the copy won't be concurrency-safe as long as the user
@@ -1055,7 +1055,7 @@ has not call Triangulation_3::set_lock_data_structure .
 Parameters
 ----------
 tr : const Triangulation_3 &";
-constexpr const char* CGAL_Triangulation_3_Triangulation_3_3 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last) .
+constexpr const char* Triangulation_3_Triangulation_3_3 = "Equivalent to constructing an empty triangulation with the optional traits class argument and calling insert(first,last) .
 
 Parameters
 ----------
@@ -1063,7 +1063,7 @@ first : InputIterator
 last : InputIterator
 traits : const Geom_traits &
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Triangulation_3_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
+constexpr const char* Triangulation_3_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
 
 The previous triangulation held by t is deleted.
 
@@ -1072,7 +1072,7 @@ Parameters
 tr : const Triangulation_3 &
 
 Returns: Triangulation_3 &";
-constexpr const char* CGAL_Triangulation_3_swap = "The triangulations tr and t are swapped.
+constexpr const char* Triangulation_3_swap = "The triangulations tr and t are swapped.
 
 t.swap(tr) should be preferred to t = tr or to t(tr) if tr is deleted after
 that. Indeed, there is no copy of cells and vertices, thus this method runs in
@@ -1081,8 +1081,8 @@ constant time.
 Parameters
 ----------
 tr : Triangulation_3 &";
-constexpr const char* CGAL_Triangulation_3_clear = "Deletes all finite vertices and all cells of t .";
-constexpr const char* CGAL_Triangulation_3_operator_1 = "Equality operator.
+constexpr const char* Triangulation_3_clear = "Deletes all finite vertices and all cells of t .";
+constexpr const char* Triangulation_3_operator_1 = "Equality operator.
 
 Returns true iff there exist a bijection between the vertices of t1 and those
 of t2 and a bijection between the cells of t1 and those of t2 , which preserve
@@ -1096,7 +1096,7 @@ t1 : const Triangulation_3 < GT, Tds1 > &
 t2 : const Triangulation_3 < GT, Tds2 > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_operator_2 = "The opposite of operator== .
+constexpr const char* Triangulation_3_operator_2 = "The opposite of operator== .
 
 Parameters
 ----------
@@ -1104,13 +1104,13 @@ t1 : const Triangulation_3 < GT, Tds1 > &
 t2 : const Triangulation_3 < GT, Tds2 > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_geom_traits = "Returns a const reference to the geometric traits object.
+constexpr const char* Triangulation_3_geom_traits = "Returns a const reference to the geometric traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Triangulation_3_tds = "Returns a const reference to the triangulation data structure.
+constexpr const char* Triangulation_3_tds = "Returns a const reference to the triangulation data structure.
 
 Returns: const Triangulation_data_structure &";
-constexpr const char* CGAL_Triangulation_3_tds_1 = "Returns a reference to the triangulation data structure.
+constexpr const char* Triangulation_3_tds_1 = "Returns a reference to the triangulation data structure.
 
 Advanced This method is mainly a help for users implementing their own
 triangulation algorithms. The responsibility of keeping a valid triangulation
@@ -1118,19 +1118,19 @@ belongs to the user when using advanced operations allowing a direct
 manipulation of the tds .
 
 Returns: Triangulation_data_structure &";
-constexpr const char* CGAL_Triangulation_3_dimension = "Returns the dimension of the affine hull.
+constexpr const char* Triangulation_3_dimension = "Returns the dimension of the affine hull.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_3_number_of_vertices = "Returns the number of finite vertices.
+constexpr const char* Triangulation_3_number_of_vertices = "Returns the number of finite vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_number_of_cells = "Returns the number of cells or 0 if t.dimension() < 3 .
+constexpr const char* Triangulation_3_number_of_cells = "Returns the number of cells or 0 if t.dimension() < 3 .
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_infinite_vertex = "Returns the infinite vertex.
+constexpr const char* Triangulation_3_infinite_vertex = "Returns the infinite vertex.
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_set_infinite_vertex = "This is an advanced function.
+constexpr const char* Triangulation_3_set_infinite_vertex = "This is an advanced function.
 
 Advanced This method is meant to be used only if you have done a low-level
 operation on the underlying tds that invalidated the infinite vertex. Sets the
@@ -1139,35 +1139,35 @@ infinite vertex.
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_infinite_cell = "Returns a cell incident to the infinite vertex.
+constexpr const char* Triangulation_3_infinite_cell = "Returns a cell incident to the infinite vertex.
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_3_number_of_facets = "The number of facets.
+constexpr const char* Triangulation_3_number_of_facets = "The number of facets.
 
 Returns 0 if t.dimension() < 2 .
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_number_of_edges = "The number of edges.
+constexpr const char* Triangulation_3_number_of_edges = "The number of edges.
 
 Returns 0 if t.dimension() < 1 .
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_number_of_finite_cells = "The number of finite cells.
+constexpr const char* Triangulation_3_number_of_finite_cells = "The number of finite cells.
 
 Returns 0 if t.dimension() < 3 .
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_number_of_finite_facets = "The number of finite facets.
+constexpr const char* Triangulation_3_number_of_finite_facets = "The number of finite facets.
 
 Returns 0 if t.dimension() < 2 .
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_number_of_finite_edges = "The number of finite edges.
+constexpr const char* Triangulation_3_number_of_finite_edges = "The number of finite edges.
 
 Returns 0 if t.dimension() < 1 .
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_tetrahedron = "Returns the tetrahedron formed by the four vertices of c .
+constexpr const char* Triangulation_3_tetrahedron = "Returns the tetrahedron formed by the four vertices of c .
 
 t.dimension() == 3 and the cell is finite.
 
@@ -1176,7 +1176,7 @@ Parameters
 c : Cell_handle
 
 Returns: Tetrahedron";
-constexpr const char* CGAL_Triangulation_3_triangle = "Returns the triangle formed by the three vertices of facet (c,i) .
+constexpr const char* Triangulation_3_triangle = "Returns the triangle formed by the three vertices of facet (c,i) .
 
 The triangle is oriented so that its normal points to the inside of cell c .
 t.dimension() $ \\geq2$ and $ i \\in\\{0,1,2,3\\}$ in dimension 3, $ i = 3$ in
@@ -1188,7 +1188,7 @@ c : Cell_handle
 i : int
 
 Returns: Triangle";
-constexpr const char* CGAL_Triangulation_3_triangle_1 = "Same as the previous method for facet f .
+constexpr const char* Triangulation_3_triangle_1 = "Same as the previous method for facet f .
 
 t.dimension() $ \\geq2$ and the facet is finite.
 
@@ -1197,7 +1197,7 @@ Parameters
 f : const Facet &
 
 Returns: Triangle";
-constexpr const char* CGAL_Triangulation_3_segment = "Returns the line segment formed by the vertices of e .
+constexpr const char* Triangulation_3_segment = "Returns the line segment formed by the vertices of e .
 
 t.dimension() $ \\geq1$ and e is finite.
 
@@ -1206,7 +1206,7 @@ Parameters
 e : const Edge &
 
 Returns: Segment";
-constexpr const char* CGAL_Triangulation_3_segment_1 = "Same as the previous method for edge (c,i,j) .
+constexpr const char* Triangulation_3_segment_1 = "Same as the previous method for edge (c,i,j) .
 
 As above and $ i\\neq j$ . Moreover $ i,j \\in\\{0,1,2,3\\}$ in dimension 3, $ i,j
 \\in\\{0,1,2\\}$ in dimension 2, $ i,j \\in\\{0,1\\}$ in dimension 1, and the edge
@@ -1219,7 +1219,7 @@ i : int
 j : int
 
 Returns: Segment";
-constexpr const char* CGAL_Triangulation_3_point = "Returns the point given by vertex i of cell c .
+constexpr const char* Triangulation_3_point = "Returns the point given by vertex i of cell c .
 
 t.dimension() $ \\geq0$ and $ i \\in\\{0,1,2,3\\}$ in dimension 3, $ i
 \\in\\{0,1,2\\}$ in dimension 2, $ i \\in\\{0,1\\}$ in dimension 1, $ i = 0$ in
@@ -1231,7 +1231,7 @@ c : Cell_handle
 i : int
 
 Returns: const Point &";
-constexpr const char* CGAL_Triangulation_3_point_1 = "Same as the previous method for vertex v .
+constexpr const char* Triangulation_3_point_1 = "Same as the previous method for vertex v .
 
 t.dimension() $ \\geq0$ and the vertex is finite.
 
@@ -1240,14 +1240,14 @@ Parameters
 v : Vertex_handle
 
 Returns: const Point &";
-constexpr const char* CGAL_Triangulation_3_is_infinite = "true , iff vertex v is the infinite vertex.
+constexpr const char* Triangulation_3_is_infinite = "true , iff vertex v is the infinite vertex.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_infinite_1 = "true , iff c is incident to the infinite vertex.
+constexpr const char* Triangulation_3_is_infinite_1 = "true , iff c is incident to the infinite vertex.
 
 t.dimension() == 3 .
 
@@ -1256,7 +1256,7 @@ Parameters
 c : Cell_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_infinite_2 = "true , iff the facet i of cell c is incident to the infinite vertex.
+constexpr const char* Triangulation_3_is_infinite_2 = "true , iff the facet i of cell c is incident to the infinite vertex.
 
 t.dimension() $ \\geq2$ and $ i\\in\\{0,1,2,3\\}$ in dimension 3, $ i=3$ in
 dimension 2.
@@ -1267,7 +1267,7 @@ c : Cell_handle
 i : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_infinite_3 = "true iff facet f is incident to the infinite vertex.
+constexpr const char* Triangulation_3_is_infinite_3 = "true iff facet f is incident to the infinite vertex.
 
 t.dimension() $ \\geq2$ .
 
@@ -1276,7 +1276,7 @@ Parameters
 f : const Facet &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_infinite_4 = "true , iff the edge (i,j) of cell c is incident to the infinite vertex.
+constexpr const char* Triangulation_3_is_infinite_4 = "true , iff the edge (i,j) of cell c is incident to the infinite vertex.
 
 t.dimension() $ \\geq1$ and $ i\\neq j$ . Moreover $ i,j \\in\\{0,1,2,3\\}$ in
 dimension 3, $ i,j \\in\\{0,1,2\\}$ in dimension 2, $ i,j \\in\\{0,1\\}$ in
@@ -1289,7 +1289,7 @@ i : int
 j : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_infinite_5 = "true iff edge e is incident to the infinite vertex.
+constexpr const char* Triangulation_3_is_infinite_5 = "true iff edge e is incident to the infinite vertex.
 
 t.dimension() $ \\geq1$ .
 
@@ -1298,7 +1298,7 @@ Parameters
 e : const Edge &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_vertex = "Tests whether p is a vertex of t by locating p in the triangulation.
+constexpr const char* Triangulation_3_is_vertex = "Tests whether p is a vertex of t by locating p in the triangulation.
 
 If p is found, the associated vertex v is given.
 
@@ -1308,14 +1308,14 @@ p : const Point &
 v : Vertex_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_vertex_1 = "Tests whether v is a vertex of t .
+constexpr const char* Triangulation_3_is_vertex_1 = "Tests whether v is a vertex of t .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_edge = "Tests whether (u,v) is an edge of t .
+constexpr const char* Triangulation_3_is_edge = "Tests whether (u,v) is an edge of t .
 
 If the edge is found, it gives a cell c having this edge and the indices i and
 j of the vertices u and v in c , in this order. u and v are vertices of t .
@@ -1329,7 +1329,7 @@ i : int &
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_facet = "Tests whether (u,v,w) is a facet of t .
+constexpr const char* Triangulation_3_is_facet = "Tests whether (u,v,w) is a facet of t .
 
 If the facet is found, it computes a cell c having this facet and the indices
 i , j and k of the vertices u , v and w in c , in this order. u , v and w are
@@ -1346,14 +1346,14 @@ j : int &
 k : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_cell = "Tests whether c is a cell of t .
+constexpr const char* Triangulation_3_is_cell = "Tests whether c is a cell of t .
 
 Parameters
 ----------
 c : Cell_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_cell_1 = "Tests whether (u,v,w,x) is a cell of t .
+constexpr const char* Triangulation_3_is_cell_1 = "Tests whether (u,v,w,x) is a cell of t .
 
 If the cell c is found, the method computes the indices i , j , k and l of the
 vertices u , v , w and x in c , in this order. u , v , w and x are vertices of
@@ -1372,7 +1372,7 @@ k : int &
 l : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_cell_2 = "Tests whether (u,v,w,x) is a cell of t and computes this cell c .
+constexpr const char* Triangulation_3_is_cell_2 = "Tests whether (u,v,w,x) is a cell of t and computes this cell c .
 
 u , v , w and x are vertices of t .
 
@@ -1385,7 +1385,7 @@ x : Vertex_handle
 c : Cell_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_has_vertex = "If v is a vertex of f , then j is the index of v in the cell f.first , and the method returns true .
+constexpr const char* Triangulation_3_has_vertex = "If v is a vertex of f , then j is the index of v in the cell f.first , and the method returns true .
 
 t.dimension() == 3
 
@@ -1396,7 +1396,7 @@ v : Vertex_handle
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_has_vertex_1 = "Same for facet (c,i) .
+constexpr const char* Triangulation_3_has_vertex_1 = "Same for facet (c,i) .
 
 Computes the index j of v in c .
 
@@ -1408,7 +1408,7 @@ v : Vertex_handle
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_has_vertex_2 = "Same as the first two methods, but these two methods do not return the index of the vertex.
+constexpr const char* Triangulation_3_has_vertex_2 = "Same as the first two methods, but these two methods do not return the index of the vertex.
 
 Parameters
 ----------
@@ -1417,7 +1417,7 @@ i : int
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_are_equal = "For these three methods:
+constexpr const char* Triangulation_3_are_equal = "For these three methods:
 
 t.dimension() == 3 .
 
@@ -1428,7 +1428,7 @@ n : Cell_handle
 j : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_locate = "If the point query lies inside the convex hull of the points, the cell that contains the query in its interior is returned.
+constexpr const char* Triangulation_3_locate = "If the point query lies inside the convex hull of the points, the cell that contains the query in its interior is returned.
 
 If query lies on a facet, an edge or on a vertex, one of the cells having
 query on its boundary is returned. If the point query lies outside the convex
@@ -1452,7 +1452,7 @@ start : Cell_handle
 could_lock_zone : bool *
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_3_locate_1 = "Same as above but uses hint as the starting place for the search.
+constexpr const char* Triangulation_3_locate_1 = "Same as above but uses hint as the starting place for the search.
 
 Parameters
 ----------
@@ -1461,7 +1461,7 @@ hint : Vertex_handle
 could_lock_zone : bool *
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_3_inexact_locate = "Same as locate() but uses inexact predicates.
+constexpr const char* Triangulation_3_inexact_locate = "Same as locate() but uses inexact predicates.
 
 This function returns a handle on a cell that is a good approximation of the
 exact location of query , while being faster. Note that it may return a handle
@@ -1476,7 +1476,7 @@ query : const Point &
 start : Cell_handle
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_3_locate_2 = "If query lies inside the affine hull of the points, the $ k$ -face (finite or infinite) that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX , EDGE , FACET , CELL , or OUTSIDE_CONVEX_HULL if the cell is infinite and query lies strictly in it) and two indices li and lj that specify the $ k$ -face of the cell containing query .
+constexpr const char* Triangulation_3_locate_2 = "If query lies inside the affine hull of the points, the $ k$ -face (finite or infinite) that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX , EDGE , FACET , CELL , or OUTSIDE_CONVEX_HULL if the cell is infinite and query lies strictly in it) and two indices li and lj that specify the $ k$ -face of the cell containing query .
 
 If the $ k$ -face is a cell, li and lj have no meaning; if it is a facet
 (resp. vertex), li gives the index of the facet (resp. vertex) and lj has no
@@ -1502,7 +1502,7 @@ start : Cell_handle
 could_lock_zone : bool *
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_3_locate_3 = "Same as above but uses hint as the starting place for the search.
+constexpr const char* Triangulation_3_locate_3 = "Same as above but uses hint as the starting place for the search.
 
 Parameters
 ----------
@@ -1514,7 +1514,7 @@ hint : Vertex_handle
 could_lock_zone : bool *
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_3_side_of_cell = "Returns a value indicating on which side of the oriented boundary of c the point p lies.
+constexpr const char* Triangulation_3_side_of_cell = "Returns a value indicating on which side of the oriented boundary of c the point p lies.
 
 More precisely, it returns: ON_BOUNDED_SIDE if p is inside the cell. For an
 infinite cell this means that p lies strictly in the half space limited by its
@@ -1535,7 +1535,7 @@ li : int &
 lj : int &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Triangulation_3_side_of_facet = "Returns a value indicating on which side of the oriented boundary of f the point p lies:
+constexpr const char* Triangulation_3_side_of_facet = "Returns a value indicating on which side of the oriented boundary of f the point p lies:
 
 ON_BOUNDED_SIDE if p is inside the facet. For an infinite facet this means
 that p lies strictly in the half plane limited by its finite edge and not
@@ -1557,7 +1557,7 @@ li : int &
 lj : int &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Triangulation_3_side_of_facet_1 = "Same as the previous method for the facet (c,3) .
+constexpr const char* Triangulation_3_side_of_facet_1 = "Same as the previous method for the facet (c,3) .
 
 Parameters
 ----------
@@ -1568,7 +1568,7 @@ li : int &
 lj : int &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Triangulation_3_side_of_edge = "Returns a value indicating on which side of the oriented boundary of e the point p lies:
+constexpr const char* Triangulation_3_side_of_edge = "Returns a value indicating on which side of the oriented boundary of e the point p lies:
 
 ON_BOUNDED_SIDE if p is inside the edge. For an infinite edge this means that
 p lies in the half line defined by the vertex and not containing any other
@@ -1587,7 +1587,7 @@ lt : Locate_type &
 li : int &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Triangulation_3_side_of_edge_1 = "Same as the previous method for edge $ (c,0,1)$ .
+constexpr const char* Triangulation_3_side_of_edge_1 = "Same as the previous method for edge $ (c,0,1)$ .
 
 Parameters
 ----------
@@ -1597,7 +1597,7 @@ lt : Locate_type &
 li : int &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Triangulation_3_flip = "Before flipping, these methods check that edge e=(c,i,j) is flippable (which is quite expensive).
+constexpr const char* Triangulation_3_flip = "Before flipping, these methods check that edge e=(c,i,j) is flippable (which is quite expensive).
 
 They return false or true according to this test.
 
@@ -1608,7 +1608,7 @@ i : int
 j : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_flip_flippable = "Should be preferred to the previous methods when the edge is known to be flippable.
+constexpr const char* Triangulation_3_flip_flippable = "Should be preferred to the previous methods when the edge is known to be flippable.
 
 The edge is flippable.
 
@@ -1617,7 +1617,7 @@ Parameters
 c : Cell_handle
 i : int
 j : int";
-constexpr const char* CGAL_Triangulation_3_flip_1 = "Before flipping, these methods check that facet f=(c,i) is flippable (which is quite expensive).
+constexpr const char* Triangulation_3_flip_1 = "Before flipping, these methods check that facet f=(c,i) is flippable (which is quite expensive).
 
 They return false or true according to this test.
 
@@ -1627,7 +1627,7 @@ c : Cell_handle
 i : int
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_flip_flippable_1 = "Should be preferred to the previous methods when the facet is known to be flippable.
+constexpr const char* Triangulation_3_flip_flippable_1 = "Should be preferred to the previous methods when the facet is known to be flippable.
 
 The facet is flippable.
 
@@ -1635,7 +1635,7 @@ Parameters
 ----------
 c : Cell_handle
 i : int";
-constexpr const char* CGAL_Triangulation_3_insert = "Inserts the point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Triangulation_3_insert = "Inserts the point p in the triangulation and returns the corresponding vertex.
 
 If point p coincides with an already existing vertex, this vertex is returned
 and the triangulation remains unchanged. If point p lies in the convex hull of
@@ -1658,7 +1658,7 @@ p : const Point &
 start : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_1 = "Same as above but uses hint as the starting place for the search.
+constexpr const char* Triangulation_3_insert_1 = "Same as above but uses hint as the starting place for the search.
 
 Parameters
 ----------
@@ -1666,7 +1666,7 @@ p : const Point &
 hint : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_2 = "Inserts the point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Triangulation_3_insert_2 = "Inserts the point p in the triangulation and returns the corresponding vertex.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of locate() above.
@@ -1680,7 +1680,7 @@ li : int
 lj : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_3 = "Inserts the points in the range [first,last) in the given order, and returns the number of inserted points.
+constexpr const char* Triangulation_3_insert_3 = "Inserts the points in the range [first,last) in the given order, and returns the number of inserted points.
 
 Parameters
 ----------
@@ -1688,7 +1688,7 @@ first : PointInputIterator
 last : PointInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Triangulation_3_insert_4 = "Inserts the points in the iterator range [first,last) in the given order, and returns the number of inserted points.
+constexpr const char* Triangulation_3_insert_4 = "Inserts the points in the iterator range [first,last) in the given order, and returns the number of inserted points.
 
 Given a pair (p,i) , the vertex v storing p also stores i , that is v.point()
 == p and v.info() == i . If several pairs have the same point, only one vertex
@@ -1703,7 +1703,7 @@ first : PointWithInfoInputIterator
 last : PointWithInfoInputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Triangulation_3_insert_in_cell = "Inserts the point p in the cell c .
+constexpr const char* Triangulation_3_insert_in_cell = "Inserts the point p in the cell c .
 
 The cell c is split into 4 tetrahedra. t.dimension() == 3 and p lies strictly
 inside cell c .
@@ -1714,7 +1714,7 @@ p : const Point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_in_facet = "Inserts the point p in the facet f .
+constexpr const char* Triangulation_3_insert_in_facet = "Inserts the point p in the facet f .
 
 In dimension 3, the 2 neighboring cells are split into 3 tetrahedra; in
 dimension 2, the facet is split into 3 triangles. t.dimension() $ \\geq2$ and p
@@ -1726,7 +1726,7 @@ p : const Point &
 f : const Facet &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_in_facet_1 = "As above, insertion in the facet (c,i) .
+constexpr const char* Triangulation_3_insert_in_facet_1 = "As above, insertion in the facet (c,i) .
 
 As above and $ i \\in\\{0,1,2,3\\}$ in dimension 3, $ i = 3$ in dimension 2.
 
@@ -1737,7 +1737,7 @@ c : Cell_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_in_edge = "Inserts p in the edge e .
+constexpr const char* Triangulation_3_insert_in_edge = "Inserts p in the edge e .
 
 In dimension 3, all the cells having this edge are split into 2 tetrahedra; in
 dimension 2, the 2 neighboring facets are split into 2 triangles; in dimension
@@ -1750,7 +1750,7 @@ p : const Point &
 e : const Edge &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_in_edge_1 = "As above, inserts p in the edge $ (i, j)$ of c .
+constexpr const char* Triangulation_3_insert_in_edge_1 = "As above, inserts p in the edge $ (i, j)$ of c .
 
 As above and $ i\\neq j$ . Moreover $ i,j \\in\\{0,1,2,3\\}$ in dimension 3, $ i,j
 \\in\\{0,1,2\\}$ in dimension 2, $ i,j \\in\\{0,1\\}$ in dimension 1.
@@ -1763,7 +1763,7 @@ i : int
 j : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_outside_convex_hull = "The cell c must be an infinite cell containing p .
+constexpr const char* Triangulation_3_insert_outside_convex_hull = "The cell c must be an infinite cell containing p .
 
 Links p to all points in the triangulation that are visible from p . Updates
 consequently the infinite faces. See Figure
@@ -1778,7 +1778,7 @@ p : const Point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_outside_affine_hull = "p is linked to all the points, and the infinite vertex is linked to all the points (including p ) to triangulate the new infinite face, so that all the points now belong to the boundary of the convex hull.
+constexpr const char* Triangulation_3_insert_outside_affine_hull = "p is linked to all the points, and the infinite vertex is linked to all the points (including p ) to triangulate the new infinite face, so that all the points now belong to the boundary of the convex hull.
 
 See Figure Triangulation3figinsert_outside_affine_hull . This method can be
 used to insert the first point in an empty triangulation. t.dimension() < 3
@@ -1790,7 +1790,7 @@ Parameters
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_in_hole = "Creates a new vertex by starring a hole.
+constexpr const char* Triangulation_3_insert_in_hole = "Creates a new vertex by starring a hole.
 
 It takes an iterator range [cell_begin,cell_end) of Cell_handle s which
 specifies a hole: a set of connected cells (resp. facets in dimension 2) which
@@ -1815,7 +1815,7 @@ begin : Cell_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_insert_in_hole_1 = "Same as above, except that newv will be used as the new vertex, which must have been allocated previously with e.g. create_vertex .
+constexpr const char* Triangulation_3_insert_in_hole_1 = "Same as above, except that newv will be used as the new vertex, which must have been allocated previously with e.g. create_vertex .
 
 Parameters
 ----------
@@ -1827,158 +1827,158 @@ i : int
 newv : Vertex_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_finite_vertices_begin = "Starts at an arbitrary finite vertex.
+constexpr const char* Triangulation_3_finite_vertices_begin = "Starts at an arbitrary finite vertex.
 
 Then ++ and -- will iterate over finite vertices.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_vertices_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_finite_vertices_end = "Past-the-end iterator.
 
 Returns: Finite_vertices_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_edges_begin = "Starts at an arbitrary finite edge.
+constexpr const char* Triangulation_3_finite_edges_begin = "Starts at an arbitrary finite edge.
 
 Then ++ and -- will iterate over finite edges.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_edges_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_finite_edges_end = "Past-the-end iterator.
 
 Returns: Finite_edges_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_facets_begin = "Starts at an arbitrary finite facet.
+constexpr const char* Triangulation_3_finite_facets_begin = "Starts at an arbitrary finite facet.
 
 Then ++ and -- will iterate over finite facets. Returns finite_facets_end()
 when t.dimension() < 2 .
 
 Returns: Finite_facets_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_facets_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_finite_facets_end = "Past-the-end iterator.
 
 Returns: Finite_facets_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_cells_begin = "Starts at an arbitrary finite cell.
+constexpr const char* Triangulation_3_finite_cells_begin = "Starts at an arbitrary finite cell.
 
 Then ++ and -- will iterate over finite cells. Returns finite_cells_end() when
 t.dimension() < 3 .
 
 Returns: Finite_cells_iterator";
-constexpr const char* CGAL_Triangulation_3_finite_cells_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_finite_cells_end = "Past-the-end iterator.
 
 Returns: Finite_cells_iterator";
-constexpr const char* CGAL_Triangulation_3_all_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Triangulation_3_all_vertices_begin = "Starts at an arbitrary vertex.
 
 Iterates over all vertices (even the infinite one).
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Triangulation_3_all_vertices_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_all_vertices_end = "Past-the-end iterator.
 
 Returns: All_vertices_iterator";
-constexpr const char* CGAL_Triangulation_3_all_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Triangulation_3_all_edges_begin = "Starts at an arbitrary edge.
 
 Iterates over all edges (even infinite ones). Returns edges_end() when
 t.dimension() < 1 .
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Triangulation_3_all_edges_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_all_edges_end = "Past-the-end iterator.
 
 Returns: All_edges_iterator";
-constexpr const char* CGAL_Triangulation_3_all_facets_begin = "Starts at an arbitrary facet.
+constexpr const char* Triangulation_3_all_facets_begin = "Starts at an arbitrary facet.
 
 Iterates over all facets (even infinite ones). Returns facets_end() when
 t.dimension() < 2 .
 
 Returns: All_facets_iterator";
-constexpr const char* CGAL_Triangulation_3_all_facets_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_all_facets_end = "Past-the-end iterator.
 
 Returns: All_facets_iterator";
-constexpr const char* CGAL_Triangulation_3_all_cells_begin = "Starts at an arbitrary cell.
+constexpr const char* Triangulation_3_all_cells_begin = "Starts at an arbitrary cell.
 
 Iterates over all cells (even infinite ones). Returns cells_end() when
 t.dimension() < 3 .
 
 Returns: All_cells_iterator";
-constexpr const char* CGAL_Triangulation_3_all_cells_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_all_cells_end = "Past-the-end iterator.
 
 Returns: All_cells_iterator";
-constexpr const char* CGAL_Triangulation_3_points_begin = "Iterates over the points of the triangulation.
+constexpr const char* Triangulation_3_points_begin = "Iterates over the points of the triangulation.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Triangulation_3_points_end = "Past-the-end iterator.
+constexpr const char* Triangulation_3_points_end = "Past-the-end iterator.
 
 Returns: Point_iterator";
-constexpr const char* CGAL_Triangulation_3_all_cell_handles = "returns a range of iterators over all cells (even the infinite cells).
+constexpr const char* Triangulation_3_all_cell_handles = "returns a range of iterators over all cells (even the infinite cells).
 
 Returns an empty range when t.number_of_cells() == 0 . While the value type of
 All_cells_iterator is Cell , the value type of All_cell_handles::iterator is
 Cell_handle .
 
 Returns: All_cell_handles";
-constexpr const char* CGAL_Triangulation_3_all_facets = "returns a range of iterators starting at an arbitrary facet.
+constexpr const char* Triangulation_3_all_facets = "returns a range of iterators starting at an arbitrary facet.
 
 Returns an empty range when t.dimension() < 2 .
 
 Returns: All_facets";
-constexpr const char* CGAL_Triangulation_3_all_edges = "returns a range of iterators starting at an arbitrary edge.
+constexpr const char* Triangulation_3_all_edges = "returns a range of iterators starting at an arbitrary edge.
 
 Returns an empty range when t.dimension() < 2 .
 
 Returns: All_edges";
-constexpr const char* CGAL_Triangulation_3_all_vertex_handles = "returns a range of iterators over all vertices (even the infinite one).
+constexpr const char* Triangulation_3_all_vertex_handles = "returns a range of iterators over all vertices (even the infinite one).
 
 While the value type of All_vertices_iterator is Vertex , the value type of
 All_vertex_handles::iterator is Vertex_handle .
 
 Returns: All_vertex_handles";
-constexpr const char* CGAL_Triangulation_3_finite_cell_handles = "returns a range of iterators over finite cells.
+constexpr const char* Triangulation_3_finite_cell_handles = "returns a range of iterators over finite cells.
 
 Returns an empty range when t.number_of_cells() == 0 . While the value type of
 Finite_cells_iterator is Cell , the value type of
 Finite_cell_handles::iterator is Cell_handle .
 
 Returns: Finite_cell_handles";
-constexpr const char* CGAL_Triangulation_3_finite_facets = "returns a range of iterators starting at an arbitrary facet.
+constexpr const char* Triangulation_3_finite_facets = "returns a range of iterators starting at an arbitrary facet.
 
 Returns an empty range when t.dimension() < 2 .
 
 Returns: Finite_facets";
-constexpr const char* CGAL_Triangulation_3_finite_edges = "returns a range of iterators starting at an arbitrary edge.
+constexpr const char* Triangulation_3_finite_edges = "returns a range of iterators starting at an arbitrary edge.
 
 Returns an empty range when t.dimension() < 2 .
 
 Returns: Finite_edges";
-constexpr const char* CGAL_Triangulation_3_finite_vertex_handles = "returns a range of iterators over finite vertices.
+constexpr const char* Triangulation_3_finite_vertex_handles = "returns a range of iterators over finite vertices.
 
 While the value type of Finite_vertices_iterator is Vertex , the value type of
 Finite_vertex_handles::iterator is Vertex_handle .
 
 Returns: Finite_vertex_handles";
-constexpr const char* CGAL_Triangulation_3_points = "returns a range of iterators over the points of finite vertices.
+constexpr const char* Triangulation_3_points = "returns a range of iterators over the points of finite vertices.
 
 Returns: Points";
-constexpr const char* CGAL_Triangulation_3_vertices = "returns an array containing the vertices of e , in the order of their indices e.second and e.third in the cell e.first .
+constexpr const char* Triangulation_3_vertices = "returns an array containing the vertices of e , in the order of their indices e.second and e.third in the cell e.first .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: std::array< Vertex_handle , 2 >";
-constexpr const char* CGAL_Triangulation_3_vertices_1 = "returns an array containing the vertices of f , in counterclockwise order on the face of f.first opposite to vertex f.first->vertex(f.second) .
+constexpr const char* Triangulation_3_vertices_1 = "returns an array containing the vertices of f , in counterclockwise order on the face of f.first opposite to vertex f.first->vertex(f.second) .
 
 Parameters
 ----------
 f : const Facet &
 
 Returns: std::array< Vertex_handle , 3 >";
-constexpr const char* CGAL_Triangulation_3_vertices_2 = "returns an array containing the vertices of c , in the same order as the indices in c .
+constexpr const char* Triangulation_3_vertices_2 = "returns an array containing the vertices of c , in the same order as the indices in c .
 
 Parameters
 ----------
 c : const Cell_handle
 
 Returns: std::array< Vertex_handle , 4 >";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_cell_handles = "returns a range of iterators over the cells intersected by a line segment
+constexpr const char* Triangulation_3_segment_traverser_cell_handles = "returns a range of iterators over the cells intersected by a line segment
 
 Returns: Segment_traverser_cell_handles";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_simplices = "returns a range of iterators over the simplices intersected by a line segment
+constexpr const char* Triangulation_3_segment_traverser_simplices = "returns a range of iterators over the simplices intersected by a line segment
 
 Returns: Segment_traverser_simplices";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_cells_begin = "returns the iterator that allows to visit the cells intersected by the line segment [vs,vt] .
+constexpr const char* Triangulation_3_segment_traverser_cells_begin = "returns the iterator that allows to visit the cells intersected by the line segment [vs,vt] .
 
 The initial value of the iterator is the cell containing vs and intersected by
 the line segment [vs,vt] in its interior. The first cell incident to vt is the
@@ -1992,7 +1992,7 @@ vs : Vertex_handle
 vt : Vertex_handle
 
 Returns: Segment_cell_iterator";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_cells_begin_1 = "returns the iterator that allows to visit the cells intersected by the line segment [ps, pt] .
+constexpr const char* Triangulation_3_segment_traverser_cells_begin_1 = "returns the iterator that allows to visit the cells intersected by the line segment [ps, pt] .
 
 If [ps,pt] entirely lies outside the convex hull, the iterator visits exactly
 one infinite cell. The initial value of the iterator is the cell containing ps
@@ -2013,13 +2013,13 @@ pt : const Point &
 hint : Cell_handle
 
 Returns: Segment_cell_iterator";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_cells_end = "returns the past-the-end iterator over the intersected cells.
+constexpr const char* Triangulation_3_segment_traverser_cells_end = "returns the past-the-end iterator over the intersected cells.
 
 This iterator cannot be dereferenced. It indicates when the
 Segment_cell_iterator has passed the target. t.dimension() >= 2
 
 Returns: Segment_cell_iterator";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_simplices_begin = "returns the iterator that allows to visit the simplices intersected by the line segment [vs,vt] .
+constexpr const char* Triangulation_3_segment_traverser_simplices_begin = "returns the iterator that allows to visit the simplices intersected by the line segment [vs,vt] .
 
 The initial value of the iterator is vs . The iterator remains valid until vt
 is passed. vs and vt must be different vertices and neither can be the
@@ -2031,7 +2031,7 @@ vs : Vertex_handle
 vt : Vertex_handle
 
 Returns: Segment_simplex_iterator";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_simplices_begin_1 = "returns the iterator that allows to visit the simplices intersected by the line segment [ps,pt] .
+constexpr const char* Triangulation_3_segment_traverser_simplices_begin_1 = "returns the iterator that allows to visit the simplices intersected by the line segment [ps,pt] .
 
 If [ps,pt] entirely lies outside the convex hull, the iterator visits exactly
 one infinite cell. The initial value of the iterator is the lowest dimension
@@ -2048,13 +2048,13 @@ pt : const Point &
 hint : Cell_handle
 
 Returns: Segment_simplex_iterator";
-constexpr const char* CGAL_Triangulation_3_segment_traverser_simplices_end = "returns the past-the-end iterator over the intersected simplices.
+constexpr const char* Triangulation_3_segment_traverser_simplices_end = "returns the past-the-end iterator over the intersected simplices.
 
 This iterator cannot be dereferenced. It indicates when the
 Segment_simplex_iterator has passed the target. t.dimension() >= 2
 
 Returns: Segment_simplex_iterator";
-constexpr const char* CGAL_Triangulation_3_incident_cells = "Starts at an arbitrary cell incident to e .
+constexpr const char* Triangulation_3_incident_cells = "Starts at an arbitrary cell incident to e .
 
 t.dimension() == 3 .
 
@@ -2063,7 +2063,7 @@ Parameters
 e : Edge
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_cells_1 = "As above for edge (i,j) of c .
+constexpr const char* Triangulation_3_incident_cells_1 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -2072,7 +2072,7 @@ i : int
 j : int
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_cells_2 = "Starts at cell start .
+constexpr const char* Triangulation_3_incident_cells_2 = "Starts at cell start .
 
 t.dimension() == 3 and start is incident to e .
 
@@ -2082,7 +2082,7 @@ e : Edge
 start : Cell_handle
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_cells_3 = "As above for edge (i,j) of c .
+constexpr const char* Triangulation_3_incident_cells_3 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -2092,7 +2092,7 @@ j : int
 start : Cell_handle
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_facets = "Starts at an arbitrary facet incident to e .
+constexpr const char* Triangulation_3_incident_facets = "Starts at an arbitrary facet incident to e .
 
 t.dimension() == 3
 
@@ -2101,7 +2101,7 @@ Parameters
 e : Edge
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_facets_1 = "As above for edge (i,j) of c .
+constexpr const char* Triangulation_3_incident_facets_1 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -2110,7 +2110,7 @@ i : int
 j : int
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_facets_2 = "Starts at facet start .
+constexpr const char* Triangulation_3_incident_facets_2 = "Starts at facet start .
 
 start is incident to e .
 
@@ -2120,7 +2120,7 @@ e : Edge
 start : Facet
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_facets_3 = "Starts at facet of index f in start .
+constexpr const char* Triangulation_3_incident_facets_3 = "Starts at facet of index f in start .
 
 Parameters
 ----------
@@ -2129,7 +2129,7 @@ start : Cell_handle
 f : int
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_facets_4 = "As above for edge (i,j) of c .
+constexpr const char* Triangulation_3_incident_facets_4 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -2139,7 +2139,7 @@ j : int
 start : Facet
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_facets_5 = "As above for edge (i,j) of c and facet (start,f) .
+constexpr const char* Triangulation_3_incident_facets_5 = "As above for edge (i,j) of c and facet (start,f) .
 
 Parameters
 ----------
@@ -2150,7 +2150,7 @@ start : Cell_handle
 f : int
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Triangulation_3_incident_cells_4 = "Copies the Cell_handle s of all cells incident to v to the output iterator cells .
+constexpr const char* Triangulation_3_incident_cells_4 = "Copies the Cell_handle s of all cells incident to v to the output iterator cells .
 
 Returns the resulting output iterator. t.dimension() == 3 v != Vertex_handle()
 and t.is_vertex(v) .
@@ -2161,7 +2161,7 @@ v : Vertex_handle
 cells : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_try_lock_and_get_incident_cells = "Try to lock and copy the Cell_handle s of all cells incident to v into cells .
+constexpr const char* Triangulation_3_try_lock_and_get_incident_cells = "Try to lock and copy the Cell_handle s of all cells incident to v into cells .
 
 Returns true in case of success. Otherwise, cells is emptied and the function
 returns false . In any case, the locked cells are not unlocked by
@@ -2174,7 +2174,7 @@ v : Vertex_handle
 cells : std::vector< Cell_handle > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_finite_incident_cells = "Copies the Cell_handle s of all finite cells incident to v to the output iterator cells .
+constexpr const char* Triangulation_3_finite_incident_cells = "Copies the Cell_handle s of all finite cells incident to v to the output iterator cells .
 
 Returns the resulting output iterator. t.dimension() == 3 v != Vertex_handle()
 and t.is_vertex(v) .
@@ -2185,7 +2185,7 @@ v : Vertex_handle
 cells : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_incident_facets_6 = "Copies all Facet s incident to v to the output iterator facets .
+constexpr const char* Triangulation_3_incident_facets_6 = "Copies all Facet s incident to v to the output iterator facets .
 
 Returns the resulting output iterator. t.dimension() > 1 v != Vertex_handle()
 and t.is_vertex(v) .
@@ -2196,7 +2196,7 @@ v : Vertex_handle
 facets : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_finite_incident_facets = "Copies all finite Facet s incident to v to the output iterator facets .
+constexpr const char* Triangulation_3_finite_incident_facets = "Copies all finite Facet s incident to v to the output iterator facets .
 
 Returns the resulting output iterator. t.dimension() > 1 v != Vertex_handle()
 and t.is_vertex(v) .
@@ -2207,7 +2207,7 @@ v : Vertex_handle
 facets : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_incident_edges = "Copies all Edge s incident to v to the output iterator edges .
+constexpr const char* Triangulation_3_incident_edges = "Copies all Edge s incident to v to the output iterator edges .
 
 Returns the resulting output iterator. t.dimension() > 0 v != Vertex_handle()
 and t.is_vertex(v) .
@@ -2218,7 +2218,7 @@ v : Vertex_handle
 edges : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_finite_incident_edges = "Copies all finite Edge s incident to v to the output iterator edges .
+constexpr const char* Triangulation_3_finite_incident_edges = "Copies all finite Edge s incident to v to the output iterator edges .
 
 Returns the resulting output iterator. t.dimension() > 0 v != Vertex_handle()
 and t.is_vertex(v) .
@@ -2229,7 +2229,7 @@ v : Vertex_handle
 edges : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_adjacent_vertices = "Copies the Vertex_handle s of all vertices adjacent to v to the output iterator vertices .
+constexpr const char* Triangulation_3_adjacent_vertices = "Copies the Vertex_handle s of all vertices adjacent to v to the output iterator vertices .
 
 If t.dimension() < 0 , then do nothing. Returns the resulting output iterator.
 v != Vertex_handle() and t.is_vertex(v) .
@@ -2240,7 +2240,7 @@ v : Vertex_handle
 vertices : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_finite_adjacent_vertices = "Copies the Vertex_handle s of all finite vertices adjacent to v to the output iterator vertices .
+constexpr const char* Triangulation_3_finite_adjacent_vertices = "Copies the Vertex_handle s of all finite vertices adjacent to v to the output iterator vertices .
 
 If t.dimension() < 0 , then do nothing. Returns the resulting output iterator.
 v != Vertex_handle() and t.is_vertex(v) .
@@ -2251,7 +2251,7 @@ v : Vertex_handle
 vertices : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Triangulation_3_degree = "Returns the degree of v , that is, the number of incident vertices.
+constexpr const char* Triangulation_3_degree = "Returns the degree of v , that is, the number of incident vertices.
 
 The infinite vertex is counted. v != Vertex_handle() and t.is_vertex(v) .
 
@@ -2260,7 +2260,7 @@ Parameters
 v : Vertex_handle
 
 Returns: size_type";
-constexpr const char* CGAL_Triangulation_3_mirror_index = "Returns the index of c in its $ i^{th}$ neighbor.
+constexpr const char* Triangulation_3_mirror_index = "Returns the index of c in its $ i^{th}$ neighbor.
 
 $ i \\in\\{0, 1, 2, 3\\}$ .
 
@@ -2270,7 +2270,7 @@ c : Cell_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_3_mirror_vertex = "Returns the vertex of the $ i^{th}$ neighbor of c that is opposite to c .
+constexpr const char* Triangulation_3_mirror_vertex = "Returns the vertex of the $ i^{th}$ neighbor of c that is opposite to c .
 
 $ i \\in\\{0, 1, 2, 3\\}$ .
 
@@ -2280,14 +2280,14 @@ c : Cell_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Triangulation_3_mirror_facet = "Returns the same facet seen from the other adjacent cell.
+constexpr const char* Triangulation_3_mirror_facet = "Returns the same facet seen from the other adjacent cell.
 
 Parameters
 ----------
 f : Facet
 
 Returns: Facet";
-constexpr const char* CGAL_Triangulation_3_is_valid = "This is a function for debugging purpose.
+constexpr const char* Triangulation_3_is_valid = "This is a function for debugging purpose.
 
 Debugging Support Checks the combinatorial validity of the triangulation.
 Checks also the validity of its geometric embedding (see Section
@@ -2299,7 +2299,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_is_valid_1 = "This is a function for debugging purpose.
+constexpr const char* Triangulation_3_is_valid_1 = "This is a function for debugging purpose.
 
 Debugging Support Checks the combinatorial validity of the cell by calling the
 is_valid method of the cell class. Also checks the geometric validity of c ,
@@ -2313,59 +2313,59 @@ c : Cell_handle
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_3_set_lock_data_structure = "Set the pointer to the lock data structure.
+constexpr const char* Triangulation_3_set_lock_data_structure = "Set the pointer to the lock data structure.
 
 Parameters
 ----------
 lock_ds : Lock_data_structure *";
-constexpr const char* CGAL_Triangulation_3_Locate_type = "The enum Locate_type is defined by Triangulation_3 to specify which case occurs when locating a point in the triangulation.";
+constexpr const char* Triangulation_3_Locate_type = "The enum Locate_type is defined by Triangulation_3 to specify which case occurs when locating a point in the triangulation.";
 
 // CGAL::Triangulation_cell_base_3
-constexpr const char* CGAL_Triangulation_cell_base_3__class__ = "The class Triangulation_cell_base_3 is a model of the concept TriangulationCellBase_3 , the base cell of a 3D-triangulation.";
+constexpr const char* Triangulation_cell_base_3__class__ = "The class Triangulation_cell_base_3 is a model of the concept TriangulationCellBase_3 , the base cell of a 3D-triangulation.";
 
 // CGAL::Triangulation_cell_base_with_info_3
-constexpr const char* CGAL_Triangulation_cell_base_with_info_3__class__ = "The class Triangulation_cell_base_with_info_3 is a model of the concept TriangulationCellBase_3 , the base cell of a 3D-triangulation.";
+constexpr const char* Triangulation_cell_base_with_info_3__class__ = "The class Triangulation_cell_base_with_info_3 is a model of the concept TriangulationCellBase_3 , the base cell of a 3D-triangulation.";
 
-constexpr const char* CGAL_Triangulation_cell_base_with_info_3_info = "Returns a const reference to the object of type Info stored in the cell.
+constexpr const char* Triangulation_cell_base_with_info_3_info = "Returns a const reference to the object of type Info stored in the cell.
 
 Returns: const Info &";
-constexpr const char* CGAL_Triangulation_cell_base_with_info_3_info_1 = "Returns a reference to the object of type Info stored in the cell.
+constexpr const char* Triangulation_cell_base_with_info_3_info_1 = "Returns a reference to the object of type Info stored in the cell.
 
 Returns: Info &";
 
 // CGAL::Triangulation_simplex_3
-constexpr const char* CGAL_Triangulation_simplex_3__class__ = "The class Triangulation_simplex_3 stores a simplex of any dimension defined by the TriangulationDataStructure_3 class.";
+constexpr const char* Triangulation_simplex_3__class__ = "The class Triangulation_simplex_3 stores a simplex of any dimension defined by the TriangulationDataStructure_3 class.";
 
-constexpr const char* CGAL_Triangulation_simplex_3_Simplex = "The simplex class itself.
+constexpr const char* Triangulation_simplex_3_Simplex = "The simplex class itself.
 
 Returns: Triangulation_simplex_3 < TriangulationDataStructure_3 >";
-constexpr const char* CGAL_Triangulation_simplex_3_Triangulation_simplex_3 = "Initializes the simplex to an invalid simplex.";
-constexpr const char* CGAL_Triangulation_simplex_3_dimension = "returns the dimension of the simplex.
+constexpr const char* Triangulation_simplex_3_Triangulation_simplex_3 = "Initializes the simplex to an invalid simplex.";
+constexpr const char* Triangulation_simplex_3_dimension = "returns the dimension of the simplex.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_simplex_3_operator_Vertex_handle = "Returns the Vertex_handle stored in the simplex.
+constexpr const char* Triangulation_simplex_3_operator_Vertex_handle = "Returns the Vertex_handle stored in the simplex.
 
 dimension() == 0";
-constexpr const char* CGAL_Triangulation_simplex_3_operator_Edge = "Returns the Edge stored in the simplex.
+constexpr const char* Triangulation_simplex_3_operator_Edge = "Returns the Edge stored in the simplex.
 
 dimension() == 1";
-constexpr const char* CGAL_Triangulation_simplex_3_operator_Facet = "Returns the Facet stored in the simplex.
+constexpr const char* Triangulation_simplex_3_operator_Facet = "Returns the Facet stored in the simplex.
 
 dimension() == 2";
-constexpr const char* CGAL_Triangulation_simplex_3_operator_Cell_handle = "Returns the Cell_handle stored in the simplex.
+constexpr const char* Triangulation_simplex_3_operator_Cell_handle = "Returns the Cell_handle stored in the simplex.
 
 dimension() == 3";
-constexpr const char* CGAL_Triangulation_simplex_3_incident_cell = "Returns a cell incident to the simplex.
+constexpr const char* Triangulation_simplex_3_incident_cell = "Returns a cell incident to the simplex.
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Triangulation_simplex_3_operator = "Test whether two simplices are equal.
+constexpr const char* Triangulation_simplex_3_operator = "Test whether two simplices are equal.
 
 Parameters
 ----------
 s1 : const Triangulation_simplex_3 < TriangulationDataStructure_3 > &
 
 Returns: bool";
-constexpr const char* CGAL_Triangulation_simplex_3_operator_1 = "Defines a ordering on the simplices.
+constexpr const char* Triangulation_simplex_3_operator_1 = "Defines a ordering on the simplices.
 
 This ordering depends on the memory layout and is independent of the geometry.
 Therefore, the ordering is not intrinsic
@@ -2377,16 +2377,16 @@ s1 : const Triangulation_simplex_3 < TriangulationDataStructure_3 > &
 Returns: bool";
 
 // CGAL::Triangulation_vertex_base_3
-constexpr const char* CGAL_Triangulation_vertex_base_3__class__ = "The class Triangulation_vertex_base_3 is a model of the concept TriangulationVertexBase_3 , the base vertex of a 3D-triangulation.";
+constexpr const char* Triangulation_vertex_base_3__class__ = "The class Triangulation_vertex_base_3 is a model of the concept TriangulationVertexBase_3 , the base vertex of a 3D-triangulation.";
 
 
 // CGAL::Triangulation_vertex_base_with_info_3
-constexpr const char* CGAL_Triangulation_vertex_base_with_info_3__class__ = "The class Triangulation_vertex_base_with_info_3 is a model of the concept TriangulationVertexBase_3 , the base vertex of a 3D-triangulation.";
+constexpr const char* Triangulation_vertex_base_with_info_3__class__ = "The class Triangulation_vertex_base_with_info_3 is a model of the concept TriangulationVertexBase_3 , the base vertex of a 3D-triangulation.";
 
-constexpr const char* CGAL_Triangulation_vertex_base_with_info_3_info = "Returns a const reference to the object of type Info stored in the vertex.
+constexpr const char* Triangulation_vertex_base_with_info_3_info = "Returns a const reference to the object of type Info stored in the vertex.
 
 Returns: const Info &";
-constexpr const char* CGAL_Triangulation_vertex_base_with_info_3_info_1 = "Returns a reference to the object of type Info stored in the vertex.
+constexpr const char* Triangulation_vertex_base_with_info_3_info_1 = "Returns a reference to the object of type Info stored in the vertex.
 
 Returns: Info &";
 

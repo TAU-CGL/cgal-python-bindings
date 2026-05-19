@@ -38,62 +38,62 @@ constexpr const char* CellAttributeWithPoint_point_1 = "Returns the point of thi
 Returns: const Point &";
 
 // CGAL::Cell_attribute_with_point
-constexpr const char* CGAL_Cell_attribute_with_point__class__ = "The class Cell_attribute_with_point represents an attribute containing a point and containing an information when Info_ is different from void .";
+constexpr const char* Cell_attribute_with_point__class__ = "The class Cell_attribute_with_point represents an attribute containing a point and containing an information when Info_ is different from void .";
 
 
 // CGAL::Cell_attribute_with_point_and_id
-constexpr const char* CGAL_Cell_attribute_with_point_and_id__class__ = "The class Cell_attribute_with_point_and_id represents an attribute containing a point, containing an information when Info_ is different from void , and having an id.";
+constexpr const char* Cell_attribute_with_point_and_id__class__ = "The class Cell_attribute_with_point_and_id represents an attribute containing a point, containing an information when Info_ is different from void , and having an id.";
 
-constexpr const char* CGAL_Cell_attribute_with_point_and_id_id = "Returns the index.
+constexpr const char* Cell_attribute_with_point_and_id_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_Cell_attribute_with_point_and_id_id_1 = "Returns the index by reference.
+constexpr const char* Cell_attribute_with_point_and_id_id_1 = "Returns the index by reference.
 
 Returns: int &";
 
 // CGAL::Linear_cell_complex_for_combinatorial_map
-constexpr const char* CGAL_Linear_cell_complex_for_combinatorial_map__class__ = "The class Linear_cell_complex_for_combinatorial_map represents a linear cell complex in dimension d , in an ambient space of dimension d2 , using a combinatorial map as underlying combinatorial data-structure.";
+constexpr const char* Linear_cell_complex_for_combinatorial_map__class__ = "The class Linear_cell_complex_for_combinatorial_map represents a linear cell complex in dimension d , in an ambient space of dimension d2 , using a combinatorial map as underlying combinatorial data-structure.";
 
-constexpr const char* CGAL_Linear_cell_complex_for_combinatorial_map_ambient_dimension = "Ambient dimension, must be > 1.
+constexpr const char* Linear_cell_complex_for_combinatorial_map_ambient_dimension = "Ambient dimension, must be > 1.
 
 Returns: const unsigned int";
 
 // CGAL::Linear_cell_complex_for_generalized_map
-constexpr const char* CGAL_Linear_cell_complex_for_generalized_map__class__ = "The class Linear_cell_complex_for_generalized_map represents a linear cell complex in dimension d , in an ambient space of dimension d2 , using a generalized map as underlying combinatorial data-structure.";
+constexpr const char* Linear_cell_complex_for_generalized_map__class__ = "The class Linear_cell_complex_for_generalized_map represents a linear cell complex in dimension d , in an ambient space of dimension d2 , using a generalized map as underlying combinatorial data-structure.";
 
-constexpr const char* CGAL_Linear_cell_complex_for_generalized_map_ambient_dimension = "Ambient dimension, must be > 1.
+constexpr const char* Linear_cell_complex_for_generalized_map_ambient_dimension = "Ambient dimension, must be > 1.
 
 Returns: unsigned int";
 
 // CGAL::Linear_cell_complex_incremental_builder_3
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3__class__ = "The auxiliary class Linear_cell_complex_incremental_builder_3 supports the incremental construction of linear cell complexes.";
+constexpr const char* Linear_cell_complex_incremental_builder_3__class__ = "The auxiliary class Linear_cell_complex_incremental_builder_3 supports the incremental construction of linear cell complexes.";
 
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_Linear_cell_complex_incremental_builder_3 = "Constructor.
+constexpr const char* Linear_cell_complex_incremental_builder_3_Linear_cell_complex_incremental_builder_3 = "Constructor.
 
 Parameters
 ----------
 alcc : LCC &";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_begin_surface = "starts a new surface.";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_add_vertex = "adds a new vertex for p and returns its handle.
+constexpr const char* Linear_cell_complex_incremental_builder_3_begin_surface = "starts a new surface.";
+constexpr const char* Linear_cell_complex_incremental_builder_3_add_vertex = "adds a new vertex for p and returns its handle.
 
 Parameters
 ----------
 p : const Point_3 &
 
 Returns: VAH";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_begin_facet = "starts a new facet.";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_add_vertex_to_facet = "adds vertex i at the end of the current facet.
+constexpr const char* Linear_cell_complex_incremental_builder_3_begin_facet = "starts a new facet.";
+constexpr const char* Linear_cell_complex_incremental_builder_3_add_vertex_to_facet = "adds vertex i at the end of the current facet.
 
 Parameters
 ----------
 i : size_type";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_end_facet = "ends the construction of the facet and returns the first dart of this facet.
+constexpr const char* Linear_cell_complex_incremental_builder_3_end_facet = "ends the construction of the facet and returns the first dart of this facet.
 
 Returns: DH";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_end_surface = "ends the construction of the surface and returns one dart of the created surface.
+constexpr const char* Linear_cell_complex_incremental_builder_3_end_surface = "ends the construction of the surface and returns one dart of the created surface.
 
 Returns: DH";
-constexpr const char* CGAL_Linear_cell_complex_incremental_builder_3_add_facet = "is a synonym for begin_facet() , a call to add_vertex_to_facet() for each value in the range [first,beyond) , and a call to end_facet() .
+constexpr const char* Linear_cell_complex_incremental_builder_3_add_facet = "is a synonym for begin_facet() , a call to add_vertex_to_facet() for each value in the range [first,beyond) , and a call to end_facet() .
 
 Parameters
 ----------
@@ -102,10 +102,10 @@ l : std::initializer_list< size_type >
 Returns: DH";
 
 // CGAL::Linear_cell_complex_min_items
-constexpr const char* CGAL_Linear_cell_complex_min_items__class__ = "The class Linear_cell_complex_min_items defines void as the information associated with darts, and the attributes used.";
+constexpr const char* Linear_cell_complex_min_items__class__ = "The class Linear_cell_complex_min_items defines void as the information associated with darts, and the attributes used.";
 
 // CGAL::Linear_cell_complex_traits
-constexpr const char* CGAL_Linear_cell_complex_traits__class__ = "This geometric traits concept is used in the Linear_cell_complex_for_combinatorial_map and Linear_cell_complex_for_generalized_map classes.";
+constexpr const char* Linear_cell_complex_traits__class__ = "This geometric traits concept is used in the Linear_cell_complex_for_combinatorial_map and Linear_cell_complex_for_generalized_map classes.";
 
 
 // LinearCellComplex

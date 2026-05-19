@@ -8,54 +8,54 @@ namespace docstrings {
 namespace Nef_S2 {
 
 // CGAL::Nef_polyhedron_S2
-constexpr const char* CGAL_Nef_polyhedron_S2__class__ = "An instance of data type Nef_polyhedron_S2 <Traits> is a subset of the sphere $ S_2$ that is the result of forming complements and intersections starting from a finite set H of halfspaces bounded by a plane containing the origin.";
+constexpr const char* Nef_polyhedron_S2__class__ = "An instance of data type Nef_polyhedron_S2 <Traits> is a subset of the sphere $ S_2$ that is the result of forming complements and intersections starting from a finite set H of halfspaces bounded by a plane containing the origin.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_Boundary = "construction selection.";
-constexpr const char* CGAL_Nef_polyhedron_S2_Content = "construction selection.";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_const_handle = "non-mutable handle to svertex.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_const_handle = "non-mutable handle to shalfedge.
+constexpr const char* Nef_polyhedron_S2_Boundary = "construction selection.";
+constexpr const char* Nef_polyhedron_S2_Content = "construction selection.";
+constexpr const char* Nef_polyhedron_S2_SVertex_const_handle = "non-mutable handle to svertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_const_handle = "non-mutable handle to shalfloop.
+constexpr const char* Nef_polyhedron_S2_SHalfedge_const_handle = "non-mutable handle to shalfedge.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_const_handle = "non-mutable handle to sface.
+constexpr const char* Nef_polyhedron_S2_SHalfloop_const_handle = "non-mutable handle to shalfloop.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_const_iterator = "non-mutable iterator over all svertices.
+constexpr const char* Nef_polyhedron_S2_SFace_const_handle = "non-mutable handle to sface.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_const_iterator = "non-mutable iterator over all shalfedges.
+constexpr const char* Nef_polyhedron_S2_SVertex_const_iterator = "non-mutable iterator over all svertices.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_const_iterator = "non-mutable iterator over all shalfloops.
+constexpr const char* Nef_polyhedron_S2_SHalfedge_const_iterator = "non-mutable iterator over all shalfedges.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_const_iterator = "non-mutable iterator over all sfaces.
+constexpr const char* Nef_polyhedron_S2_SHalfloop_const_iterator = "non-mutable iterator over all shalfloops.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_around_svertex_const_circulator = "circulating the adjacency list of an svertex v .
+constexpr const char* Nef_polyhedron_S2_SFace_const_iterator = "non-mutable iterator over all sfaces.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_around_sface_const_circulator = "circulating the sface cycle of an sface f .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_around_svertex_const_circulator = "circulating the adjacency list of an svertex v .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_const_iterator = "iterating all sface cycles of an sface f .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_around_sface_const_circulator = "circulating the sface cycle of an sface f .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_const_iterator = "iterating all sface cycles of an sface f .
 
 The iterator has method bool is_svertex() , bool is_shalfedge() , bool
 is_shalfloop() , and can be converted to the corresponding handles
 SVertex_const_handle , SHalfedge_const_handle , or SHalfloop_const_handle .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_Mark = "attributes of objects (vertices, edges, faces).
+constexpr const char* Nef_polyhedron_S2_Mark = "attributes of objects (vertices, edges, faces).
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_size_type = "size type
+constexpr const char* Nef_polyhedron_S2_size_type = "size type
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_Object_handle = "a generic handle to an object of the underlying plane map.
+constexpr const char* Nef_polyhedron_S2_Object_handle = "a generic handle to an object of the underlying plane map.
 
 The kind of object (vertex, halfedge, face) can be determined and the object
 can be assigned to a corresponding handle by the three functions: bool
@@ -65,18 +65,18 @@ assign(Face_const_handle& h, Object_handle ) where each function returns true
 iff the assignment to h was done.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_Nef_polyhedron_S2 = "creates an instance N of type Nef_polyhedron_S2 <K> and initializes it to the empty set if sphere == EMPTY and to the whole sphere if sphere == COMPLETE .
+constexpr const char* Nef_polyhedron_S2_Nef_polyhedron_S2 = "creates an instance N of type Nef_polyhedron_S2 <K> and initializes it to the empty set if sphere == EMPTY and to the whole sphere if sphere == COMPLETE .
 
 Parameters
 ----------
 sphere : Content";
-constexpr const char* CGAL_Nef_polyhedron_S2_Nef_polyhedron_S2_1 = "creates a Nef polyhedron N containing the half-sphere left of c including c if circle== INCLUDED , excluding c if circle== EXCLUDED .
+constexpr const char* Nef_polyhedron_S2_Nef_polyhedron_S2_1 = "creates a Nef polyhedron N containing the half-sphere left of c including c if circle== INCLUDED , excluding c if circle== EXCLUDED .
 
 Parameters
 ----------
 c : Sphere_circle
 circle : Boundary";
-constexpr const char* CGAL_Nef_polyhedron_S2_Nef_polyhedron_S2_2 = "creates a Nef polyhedron N from the set of sphere segments in the iterator range [first,beyond) .
+constexpr const char* Nef_polyhedron_S2_Nef_polyhedron_S2_2 = "creates a Nef polyhedron N from the set of sphere segments in the iterator range [first,beyond) .
 
 If the set of sphere segments is a simple polygon that separates the sphere
 surface into two regions, then the polygonal region that is left of the
@@ -89,32 +89,32 @@ Parameters
 first : Forward_iterator
 beyond : Forward_iterator
 b : Boundary";
-constexpr const char* CGAL_Nef_polyhedron_S2_clear = "makes N the empty set if plane == EMPTY and the full plane if plane == COMPLETE .
+constexpr const char* Nef_polyhedron_S2_clear = "makes N the empty set if plane == EMPTY and the full plane if plane == COMPLETE .
 
 Parameters
 ----------
 plane : Content";
-constexpr const char* CGAL_Nef_polyhedron_S2_is_empty = "returns true if N is empty, false otherwise.
+constexpr const char* Nef_polyhedron_S2_is_empty = "returns true if N is empty, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_is_sphere = "returns true if N is the whole sphere, false otherwise.
+constexpr const char* Nef_polyhedron_S2_is_sphere = "returns true if N is the whole sphere, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_contains = "returns true iff the object h is contained in the set represented by N .
+constexpr const char* Nef_polyhedron_S2_contains = "returns true iff the object h is contained in the set represented by N .
 
 Parameters
 ----------
 h : Object_handle
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_contained_in_boundary = "returns true iff the object h is contained in the $ 1$ -skeleton of N .
+constexpr const char* Nef_polyhedron_S2_contained_in_boundary = "returns true iff the object h is contained in the $ 1$ -skeleton of N .
 
 Parameters
 ----------
 h : Object_handle
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_locate = "returns a generic handle h to an object (face, halfedge, vertex) of the underlying plane map that contains the point p in its relative interior.
+constexpr const char* Nef_polyhedron_S2_locate = "returns a generic handle h to an object (face, halfedge, vertex) of the underlying plane map that contains the point p in its relative interior.
 
 The point p is contained in the set represented by N if N.contains(h) is true.
 The location mode flag m allows one to choose between different point location
@@ -125,7 +125,7 @@ Parameters
 p : const Sphere_point &
 
 Returns: Object_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_ray_shoot = "returns a handle h with N.contains(h) that can be converted to a Vertex_/Halfedge_/Face_const_handle as described above.
+constexpr const char* Nef_polyhedron_S2_ray_shoot = "returns a handle h with N.contains(h) that can be converted to a Vertex_/Halfedge_/Face_const_handle as described above.
 
 The object returned is intersected by the ray starting in p with direction d
 and has minimal distance to p . The operation returns an empty Object_handle
@@ -137,7 +137,7 @@ p : const Sphere_point &
 d : const Sphere_direction &
 
 Returns: Object_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_ray_shoot_to_boundary = "returns a handle h that can be converted to a Vertex_/Halfedge_const_handle as described above.
+constexpr const char* Nef_polyhedron_S2_ray_shoot_to_boundary = "returns a handle h that can be converted to a Vertex_/Halfedge_const_handle as described above.
 
 The object returned is part of the $ 1$ -skeleton of N , intersected by the
 ray starting in p with direction d and has minimal distance to p . The
@@ -151,84 +151,84 @@ p : const Sphere_point &
 d : const Sphere_direction &
 
 Returns: Object_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_complement = "returns the complement of N in the plane.
+constexpr const char* Nef_polyhedron_S2_complement = "returns the complement of N in the plane.
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_interior = "returns the interior of N .
+constexpr const char* Nef_polyhedron_S2_interior = "returns the interior of N .
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_closure = "returns the closure of N .
+constexpr const char* Nef_polyhedron_S2_closure = "returns the closure of N .
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_boundary = "returns the boundary of N .
+constexpr const char* Nef_polyhedron_S2_boundary = "returns the boundary of N .
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_regularization = "returns the regularized polyhedron (closure of interior).
+constexpr const char* Nef_polyhedron_S2_regularization = "returns the regularized polyhedron (closure of interior).
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_intersection = "returns N $ \\cap$ N1 .
+constexpr const char* Nef_polyhedron_S2_intersection = "returns N $ \\cap$ N1 .
 
 Parameters
 ----------
 N1 : const Nef_polyhedron_S2 < K > &
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_join = "returns N $ \\cup$ N1 .
+constexpr const char* Nef_polyhedron_S2_join = "returns N $ \\cup$ N1 .
 
 Parameters
 ----------
 N1 : const Nef_polyhedron_S2 < K > &
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_difference = "returns N $ -$ N1 .
+constexpr const char* Nef_polyhedron_S2_difference = "returns N $ -$ N1 .
 
 Parameters
 ----------
 N1 : const Nef_polyhedron_S2 < K > &
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_symmetric_difference = "returns the symmetric difference N - T $ \\cup$ T - N .
+constexpr const char* Nef_polyhedron_S2_symmetric_difference = "returns the symmetric difference N - T $ \\cup$ T - N .
 
 Parameters
 ----------
 N1 : const Nef_polyhedron_S2 < K > &
 
 Returns: Nef_polyhedron_S2 < K >";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_svertices = "returns the number of svertices.
+constexpr const char* Nef_polyhedron_S2_number_of_svertices = "returns the number of svertices.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_shalfedges = "returns the number of shalfedges.
+constexpr const char* Nef_polyhedron_S2_number_of_shalfedges = "returns the number of shalfedges.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_sedges = "returns the number of sedges.
+constexpr const char* Nef_polyhedron_S2_number_of_sedges = "returns the number of sedges.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_shalfloops = "returns the number of shalfloops.
+constexpr const char* Nef_polyhedron_S2_number_of_shalfloops = "returns the number of shalfloops.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_sloops = "returns the number of sloops.
+constexpr const char* Nef_polyhedron_S2_number_of_sloops = "returns the number of sloops.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_sfaces = "returns the number of sfaces.
+constexpr const char* Nef_polyhedron_S2_number_of_sfaces = "returns the number of sfaces.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_sface_cycles = "returns the number of sface cycles.
+constexpr const char* Nef_polyhedron_S2_number_of_sface_cycles = "returns the number of sface cycles.
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_number_of_connected_components = "calculates the number of connected components of P .
+constexpr const char* Nef_polyhedron_S2_number_of_connected_components = "calculates the number of connected components of P .
 
 Returns: Size_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_print_statistics = "print the statistics of P : the number of vertices, edges, and faces.
+constexpr const char* Nef_polyhedron_S2_print_statistics = "print the statistics of P : the number of vertices, edges, and faces.
 
 Parameters
 ----------
 os : std::ostream &";
-constexpr const char* CGAL_Nef_polyhedron_S2_check_integrity_and_topological_planarity = "checks the link structure and the genus of P .
+constexpr const char* Nef_polyhedron_S2_check_integrity_and_topological_planarity = "checks the link structure and the genus of P .
 
 Parameters
 ----------
 faces : bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_has_shalfloop = "The list of all objects can be accessed via iterator ranges.
+constexpr const char* Nef_polyhedron_S2_has_shalfloop = "The list of all objects can be accessed via iterator ranges.
 
 For comfortable iteration we also provide iterations macros. The iterator
 range access operations are of the following kind: SVertex_iterator
@@ -240,10 +240,10 @@ CGAL_forall_sfaces(f,M) , CGAL_forall_sface_cycles_of(fc,F) where M is a
 sphere map and F is a sface. returns true iff there is a shalfloop.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_shalfloop = "returns access to the sloop.
+constexpr const char* Nef_polyhedron_S2_shalfloop = "returns access to the sloop.
 
 Returns: SHalfloop_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_equal_as_sets = "returns true iff c1 and c2 are equal as unoriented circles.
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_equal_as_sets = "returns true iff c1 and c2 are equal as unoriented circles.
 
 Parameters
 ----------
@@ -253,156 +253,156 @@ c2 : const Nef_polyhedron_S2 < Traits > ::Sphere_circle
 Returns: bool";
 
 // CGAL::Nef_polyhedron_S2::SFace
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace__class__ = "Figures figureNefS2SVertexIncidences and figureNefS2SHalfloopIncidences illustrate the incidences of an sface.";
+constexpr const char* Nef_polyhedron_S2_SFace__class__ = "Figures figureNefS2SVertexIncidences and figureNefS2SHalfloopIncidences illustrate the incidences of an sface.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_Mark = "type of mark.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_Object_list = "list of Object handles.
+constexpr const char* Nef_polyhedron_S2_SFace_Mark = "type of mark.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_Vertex_const_handle = "const handle to Vertex.
+constexpr const char* Nef_polyhedron_S2_SFace_Object_list = "list of Object handles.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_Volume_const_handle = "const handle to Volume.
+constexpr const char* Nef_polyhedron_S2_SFace_Vertex_const_handle = "const handle to Vertex.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_SFace_const_handle = "const handle to SFace .
+constexpr const char* Nef_polyhedron_S2_SFace_Volume_const_handle = "const handle to Volume.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_SFace_cycle_const_iterator = "const iterator over the entries to all sface cycles of a sface .
+constexpr const char* Nef_polyhedron_S2_SFace_SFace_const_handle = "const handle to SFace .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_mark = "the mark of the sface .
+constexpr const char* Nef_polyhedron_S2_SFace_SFace_cycle_const_iterator = "const iterator over the entries to all sface cycles of a sface .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_SFace_mark = "the mark of the sface .
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_sface_cycle_begin = "iterator over the entries to all sface cycles of the sface .
+constexpr const char* Nef_polyhedron_S2_SFace_sface_cycle_begin = "iterator over the entries to all sface cycles of the sface .
 
 Returns: SFace_cycle_const_iterator";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_sface_cycle_end = "past-the-end iterator.
+constexpr const char* Nef_polyhedron_S2_SFace_sface_cycle_end = "past-the-end iterator.
 
 Returns: SFace_cycle_const_iterator";
 
 // CGAL::Nef_polyhedron_S2::SFace_cycle_iterator
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator__class__ = "The type SFace_cycle_iterator iterates over a list of Object_handles .";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator__class__ = "The type SFace_cycle_iterator iterates over a list of Object_handles .";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_SVertex_handle = "const handle to SVertex .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_SHalfedge_handle = "const handle to SHalfedge .
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_SVertex_handle = "const handle to SVertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_SHalfloop_handle = "const handle to SHalfloop .
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_SHalfedge_handle = "const handle to SHalfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_SFace_cycle_iterator = "default constructor.";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_is_svertex = "returns true if the iterator represents a SVertex_handle .
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_SHalfloop_handle = "const handle to SHalfloop .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_SFace_cycle_iterator = "default constructor.";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_is_svertex = "returns true if the iterator represents a SVertex_handle .
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_is_shalfedge = "returns true if the iterator represents a SHalfedge_handle .
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_is_shalfedge = "returns true if the iterator represents a SHalfedge_handle .
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_is_shalfloop = "returns true if the iterator represents a SHalfloop_handle .
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_is_shalfloop = "returns true if the iterator represents a SHalfloop_handle .
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_operator_SVertex_handle = "casts the iterator to SVertex_handle .";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_operator_SHalfedge_handle = "casts the iterator to SHalfedge_handle .";
-constexpr const char* CGAL_Nef_polyhedron_S2_SFace_cycle_iterator_operator_SHalfloop_handle = "casts the iterator to SHalfloop_handle .";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_operator_SVertex_handle = "casts the iterator to SVertex_handle .";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_operator_SHalfedge_handle = "casts the iterator to SHalfedge_handle .";
+constexpr const char* Nef_polyhedron_S2_SFace_cycle_iterator_operator_SHalfloop_handle = "casts the iterator to SHalfloop_handle .";
 
 // CGAL::Nef_polyhedron_S2::SHalfedge
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge__class__ = "A shalfedge is a great arc on a sphere map.";
+constexpr const char* Nef_polyhedron_S2_SHalfedge__class__ = "A shalfedge is a great arc on a sphere map.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_Mark = "type of mark.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_Sphere_circle = "sphere circle type stored in SHalfedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_Mark = "type of mark.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_SVertex_const_handle = "const handle to SVertex .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_Sphere_circle = "sphere circle type stored in SHalfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_SHalfedge_const_handle = "const handle to SHalfedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_SVertex_const_handle = "const handle to SVertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_SFace_const_handle = "const handle to SFace .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_SHalfedge_const_handle = "const handle to SHalfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_mark = "the mark of the sedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_SFace_const_handle = "const handle to SFace .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_SHalfedge_mark = "the mark of the sedge .
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_circle = "the sphere circle of the sedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_circle = "the sphere circle of the sedge .
 
 Returns: const Sphere_circle &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_twin = "the twin of the sedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_twin = "the twin of the sedge .
 
 Returns: SHalfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_source = "the source svertex of the sedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_source = "the source svertex of the sedge .
 
 Returns: SVertex_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_target = "equals twin() -> source() .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_target = "equals twin() -> source() .
 
 Returns: SVertex_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_sprev = "the SHalfedge previous to the sedge in a sface cycle.
+constexpr const char* Nef_polyhedron_S2_SHalfedge_sprev = "the SHalfedge previous to the sedge in a sface cycle.
 
 Returns: SHalfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_snext = "the next SHalfedge of the sedge in a sface cycle.
+constexpr const char* Nef_polyhedron_S2_SHalfedge_snext = "the next SHalfedge of the sedge in a sface cycle.
 
 Returns: SHalfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_cyclic_adj_pred = "the edge before the sedge in the cyclic ordered adjacency list of source() .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_cyclic_adj_pred = "the edge before the sedge in the cyclic ordered adjacency list of source() .
 
 Returns: SHalfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_cyclic_adj_succ = "the edge after the sedge in the cyclic ordered adjacency list of source() .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_cyclic_adj_succ = "the edge after the sedge in the cyclic ordered adjacency list of source() .
 
 Returns: SHalfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_incident_sface = "the incident sface of the sedge .
+constexpr const char* Nef_polyhedron_S2_SHalfedge_incident_sface = "the incident sface of the sedge .
 
 Returns: SFace_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_in_outer_sface_cycle = "determines whether the sedge is in an outer sface cycle.
+constexpr const char* Nef_polyhedron_S2_SHalfedge_in_outer_sface_cycle = "determines whether the sedge is in an outer sface cycle.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfedge_in_inner_sface_cycle = "determines whether the sedge is in an inner sface cycle.
+constexpr const char* Nef_polyhedron_S2_SHalfedge_in_inner_sface_cycle = "determines whether the sedge is in an inner sface cycle.
 
 Returns: bool";
 
 // CGAL::Nef_polyhedron_S2::SHalfloop
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop__class__ = "A sloop is a great circle on a sphere.";
+constexpr const char* Nef_polyhedron_S2_SHalfloop__class__ = "A sloop is a great circle on a sphere.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_Mark = "type of mark.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_Sphere_circle = "sphere circle type stored in SHalfloop .
+constexpr const char* Nef_polyhedron_S2_SHalfloop_Mark = "type of mark.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_SHalfloop_const_handle = "const handle to SHalfloop .
+constexpr const char* Nef_polyhedron_S2_SHalfloop_Sphere_circle = "sphere circle type stored in SHalfloop .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_SFace_const_handle = "const handle to SFace .
+constexpr const char* Nef_polyhedron_S2_SHalfloop_SHalfloop_const_handle = "const handle to SHalfloop .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_mark = "the mark of the halfloop.
+constexpr const char* Nef_polyhedron_S2_SHalfloop_SFace_const_handle = "const handle to SFace .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_SHalfloop_mark = "the mark of the halfloop.
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_circle = "the sphere circle of the halfloop.
+constexpr const char* Nef_polyhedron_S2_SHalfloop_circle = "the sphere circle of the halfloop.
 
 Returns: const Sphere_circle &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_twin = "the twin of the halfloop.
+constexpr const char* Nef_polyhedron_S2_SHalfloop_twin = "the twin of the halfloop.
 
 Returns: SHalfloop_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SHalfloop_incident_sface = "the incident sface of the halfloop.
+constexpr const char* Nef_polyhedron_S2_SHalfloop_incident_sface = "the incident sface of the halfloop.
 
 Returns: SFace_const_handle";
 
 // CGAL::Nef_polyhedron_S2::Sphere_circle
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle__class__ = "An object c of type Sphere_circle is an oriented great circle on the surface of a unit sphere.";
+constexpr const char* Nef_polyhedron_S2_Sphere_circle__class__ = "An object c of type Sphere_circle is an oriented great circle on the surface of a unit sphere.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_RT = "ring type.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_Plane_3 = "plane a Sphere_circle lies in.
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_RT = "ring type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_Sphere_circle = "creates some great circle.";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_Sphere_circle_1 = "If $ p$ and $ q$ are opposite of each other, then we create the unique great circle on $ S_2$ which contains p and q.
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_Plane_3 = "plane a Sphere_circle lies in.
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_Sphere_circle = "creates some great circle.";
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_Sphere_circle_1 = "If $ p$ and $ q$ are opposite of each other, then we create the unique great circle on $ S_2$ which contains p and q.
 
 This circle is oriented such that a walk along c meets $ p$ just before the
 shorter segment between $ p$ and $ q$ . If $ p$ and $ q$ are opposite of each
@@ -412,21 +412,21 @@ Parameters
 ----------
 p : const Sphere_point &
 q : const Sphere_point &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_Sphere_circle_2 = "creates the circle corresponding to the plane h .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_Sphere_circle_2 = "creates the circle corresponding to the plane h .
 
 h contains the origin.
 
 Parameters
 ----------
 h : const Plane_3 &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_Sphere_circle_3 = "creates the circle orthogonal to the vector $ (x,y,z)$ .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_Sphere_circle_3 = "creates the circle orthogonal to the vector $ (x,y,z)$ .
 
 Parameters
 ----------
 x : const RT &
 y : const RT &
 z : const RT &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_Sphere_circle_4 = "creates a great circle orthogonal to $ c$ that contains $ p$ .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_Sphere_circle_4 = "creates a great circle orthogonal to $ c$ that contains $ p$ .
 
 $ p$ is not part of $ c$ .
 
@@ -434,23 +434,23 @@ Parameters
 ----------
 c : Sphere_circle
 p : const Sphere_point &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_opposite = "Returns a sphere circle in the opposite direction of c .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_opposite = "Returns a sphere circle in the opposite direction of c .
 
 Returns: Sphere_circle";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_has_on = "returns true iff c contains p .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_has_on = "returns true iff c contains p .
 
 Parameters
 ----------
 p : const Sphere_point &
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_plane = "returns the plane supporting c .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_plane = "returns the plane supporting c .
 
 Returns: Plane_3";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_orthogonal_pole = "returns the point that is the pole of the hemisphere left of c .
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_orthogonal_pole = "returns the point that is the pole of the hemisphere left of c .
 
 Returns: Sphere_point";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_circle_equal_as_sets_1 = "returns true iff c1 and c2 are equal as unoriented circles.
+constexpr const char* Nef_polyhedron_S2_Sphere_circle_equal_as_sets_1 = "returns true iff c1 and c2 are equal as unoriented circles.
 
 Parameters
 ----------
@@ -460,51 +460,51 @@ c2 : const Nef_polyhedron_S2 < Traits > ::Sphere_circle
 Returns: bool";
 
 // CGAL::Nef_polyhedron_S2::Sphere_point
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point__class__ = "An object p of type Sphere_point <R> is a point on the surface of a unit sphere.";
+constexpr const char* Nef_polyhedron_S2_Sphere_point__class__ = "An object p of type Sphere_point <R> is a point on the surface of a unit sphere.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_RT = "ring number type.
+constexpr const char* Nef_polyhedron_S2_Sphere_point_RT = "ring number type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_Sphere_point = "creates some sphere point.";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_Sphere_point_1 = "creates a sphere point corresponding to the point of intersection of the ray starting at the origin in direction $ (x,y,z)$ and the surface of $ S_2$ .
+constexpr const char* Nef_polyhedron_S2_Sphere_point_Sphere_point = "creates some sphere point.";
+constexpr const char* Nef_polyhedron_S2_Sphere_point_Sphere_point_1 = "creates a sphere point corresponding to the point of intersection of the ray starting at the origin in direction $ (x,y,z)$ and the surface of $ S_2$ .
 
 Parameters
 ----------
 x : RT
 y : RT
 z : RT";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_x = "the $ x$ -coordinate.
+constexpr const char* Nef_polyhedron_S2_Sphere_point_x = "the $ x$ -coordinate.
 
 Returns: RT";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_y = "the $ y$ -coordinate.
+constexpr const char* Nef_polyhedron_S2_Sphere_point_y = "the $ y$ -coordinate.
 
 Returns: RT";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_z = "the $ z$ -coordinate.
+constexpr const char* Nef_polyhedron_S2_Sphere_point_z = "the $ z$ -coordinate.
 
 Returns: RT";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_operator = "Equality.
+constexpr const char* Nef_polyhedron_S2_Sphere_point_operator = "Equality.
 
 Parameters
 ----------
 q : const Nef_polyhedron_S2 < Traits > ::Sphere_point &
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_operator_1 = "Inequality.
+constexpr const char* Nef_polyhedron_S2_Sphere_point_operator_1 = "Inequality.
 
 Parameters
 ----------
 q : const Nef_polyhedron_S2 < Traits > ::Sphere_point &
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_point_antipode = "returns the antipode of p .
+constexpr const char* Nef_polyhedron_S2_Sphere_point_antipode = "returns the antipode of p .
 
 Returns: Sphere_point";
 
 // CGAL::Nef_polyhedron_S2::Sphere_segment
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment__class__ = "An object s of type Sphere_segment is a segment in the surface of a unit sphere that is part of a great circle through the origin.";
+constexpr const char* Nef_polyhedron_S2_Sphere_segment__class__ = "An object s of type Sphere_segment is a segment in the surface of a unit sphere that is part of a great circle through the origin.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_Sphere_segment = "creates some sphere segment.";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_Sphere_segment_1 = "creates a spherical segment spanning the shorter arc from p1 to p2 if shorter_arc == true .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_Sphere_segment = "creates some sphere segment.";
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_Sphere_segment_1 = "creates a spherical segment spanning the shorter arc from p1 to p2 if shorter_arc == true .
 
 Otherwise the longer arc is created. p1 != p2 and p1 != p2.opposite() .
 
@@ -513,7 +513,7 @@ Parameters
 p1 : const Sphere_point &
 p2 : const Sphere_point &
 shorter_arc : bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_Sphere_segment_2 = "creates a spherical segment spanning the arc from p1 to p2 as part of the oriented circle c ( p1 == p2 or p1 == p2.opposite() are possible.)
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_Sphere_segment_2 = "creates a spherical segment spanning the arc from p1 to p2 as part of the oriented circle c ( p1 == p2 or p1 == p2.opposite() are possible.)
 
 p1 and p2 are contained in c .
 
@@ -522,7 +522,7 @@ Parameters
 p1 : const Sphere_point &
 p2 : const Sphere_point &
 c : const Sphere_circle &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_Sphere_segment_3 = "creates the spherical segment as part of c1 that is part of the halfsphere left of the oriented circle c2 .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_Sphere_segment_3 = "creates the spherical segment as part of c1 that is part of the halfsphere left of the oriented circle c2 .
 
 c1 != c2 as unoriented circles.
 
@@ -530,41 +530,41 @@ Parameters
 ----------
 c1 : const Sphere_circle &
 c2 : const Sphere_circle &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_source = "the source point of s .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_source = "the source point of s .
 
 Returns: const Sphere_point &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_target = "the target point of s .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_target = "the target point of s .
 
 Returns: const Sphere_point &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_sphere_circle = "the great circle supporting s .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_sphere_circle = "the great circle supporting s .
 
 Returns: const Sphere_circle &";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_opposite = "returns the spherical segment oriented from target() to source() with the same point set as s .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_opposite = "returns the spherical segment oriented from target() to source() with the same point set as s .
 
 Returns: Sphere_segment";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_complement = "returns the spherical segment oriented from target() to source() with the point set completing s to a full circle.
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_complement = "returns the spherical segment oriented from target() to source() with the point set completing s to a full circle.
 
 Returns: Sphere_segment";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_is_short = "a segment is short iff it is shorter than a half-circle.
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_is_short = "a segment is short iff it is shorter than a half-circle.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_is_long = "a segment is long iff it is longer than a half-circle.
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_is_long = "a segment is long iff it is longer than a half-circle.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_is_degenerate = "return true iff s is degenerate, i.e. source and target are the same.
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_is_degenerate = "return true iff s is degenerate, i.e. source and target are the same.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_is_halfcircle = "return true iff s is a perfect half-circle, i.e. source() .antipode == target() .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_is_halfcircle = "return true iff s is a perfect half-circle, i.e. source() .antipode == target() .
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_has_on = "return true iff s contains p .
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_has_on = "return true iff s contains p .
 
 Parameters
 ----------
 p : const Sphere_point &
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_Sphere_segment_has_in_relative_interior = "return true iff s contains p in its relative interior.
+constexpr const char* Nef_polyhedron_S2_Sphere_segment_has_in_relative_interior = "return true iff s contains p in its relative interior.
 
 Parameters
 ----------
@@ -573,39 +573,39 @@ p : const Sphere_point &
 Returns: bool";
 
 // CGAL::Nef_polyhedron_S2::SVertex
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex__class__ = "Figure figureNefS2SVertexIncidences illustrates the incidence of a svertex on a sphere map.";
+constexpr const char* Nef_polyhedron_S2_SVertex__class__ = "Figure figureNefS2SVertexIncidences illustrates the incidence of a svertex on a sphere map.";
 
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_Mark = "type of mark.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_Sphere_point = "sphere point type stored in SVertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_Mark = "type of mark.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_SVertex_const_handle = "const handle to SVertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_Sphere_point = "sphere point type stored in SVertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_SHalfedge_const_handle = "const handle to SHalfedge .
+constexpr const char* Nef_polyhedron_S2_SVertex_SVertex_const_handle = "const handle to SVertex .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_SFace_const_handle = "const handle to SFace .
+constexpr const char* Nef_polyhedron_S2_SVertex_SHalfedge_const_handle = "const handle to SHalfedge .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_mark = "the mark of the svertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_SFace_const_handle = "const handle to SFace .
+
+Returns: unspecified_type";
+constexpr const char* Nef_polyhedron_S2_SVertex_mark = "the mark of the svertex .
 
 Returns: const Mark &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_point = "the sphere point of the svertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_point = "the sphere point of the svertex .
 
 Returns: const Sphere_point &";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_is_isolated = "returns |true| if the svertex has no adjacent sedges.
+constexpr const char* Nef_polyhedron_S2_SVertex_is_isolated = "returns |true| if the svertex has no adjacent sedges.
 
 Returns: bool";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_twin = "the twin of the svertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_twin = "the twin of the svertex .
 
 Returns: SVertex_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_out_sedge = "the first out sedge of the svertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_out_sedge = "the first out sedge of the svertex .
 
 Returns: SHalfedge_const_handle";
-constexpr const char* CGAL_Nef_polyhedron_S2_SVertex_incident_sface = "the incident sface of the svertex .
+constexpr const char* Nef_polyhedron_S2_SVertex_incident_sface = "the incident sface of the svertex .
 
 Returns: SFace_const_handle";
 

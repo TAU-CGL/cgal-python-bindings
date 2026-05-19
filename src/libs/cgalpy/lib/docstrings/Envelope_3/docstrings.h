@@ -8,144 +8,144 @@ namespace docstrings {
 namespace Envelope_3 {
 
 // CGAL::Env_plane_traits_3
-constexpr const char* CGAL_Env_plane_traits_3__class__ = "The traits class template Env_plane_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of planes and half planes in the space.";
+constexpr const char* Env_plane_traits_3__class__ = "The traits class template Env_plane_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of planes and half planes in the space.";
 
 // CGAL::Env_sphere_traits_3
-constexpr const char* CGAL_Env_sphere_traits_3__class__ = "The traits class Env_sphere_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of spheres.";
+constexpr const char* Env_sphere_traits_3__class__ = "The traits class Env_sphere_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of spheres.";
 
 // CGAL::Env_surface_data_traits_3
-constexpr const char* CGAL_Env_surface_data_traits_3__class__ = "The class Env_surface_data_traits_3 is a model of the EnvelopeTraits_3 concept and serves as a decorator class that allows the extension of the surfaces defined by the base traits-class (the Traits parameter), which serves as a geometric traits-class (a model of the EnvelopeTraits_3 concept), with extraneous (non-geometric) data fields.";
+constexpr const char* Env_surface_data_traits_3__class__ = "The class Env_surface_data_traits_3 is a model of the EnvelopeTraits_3 concept and serves as a decorator class that allows the extension of the surfaces defined by the base traits-class (the Traits parameter), which serves as a geometric traits-class (a model of the EnvelopeTraits_3 concept), with extraneous (non-geometric) data fields.";
 
-constexpr const char* CGAL_Env_surface_data_traits_3_Base_traits_3 = "the base traits-class.
+constexpr const char* Env_surface_data_traits_3_Base_traits_3 = "the base traits-class.
 
 Returns: Traits";
-constexpr const char* CGAL_Env_surface_data_traits_3_Base_surface_3 = "the base surface.
+constexpr const char* Env_surface_data_traits_3_Base_surface_3 = "the base surface.
 
 Returns: Base_traits_3::Surface_3";
-constexpr const char* CGAL_Env_surface_data_traits_3_Base_xy_monotone_surface_3 = "the base $ xy$ -monotone surface surface.
+constexpr const char* Env_surface_data_traits_3_Base_xy_monotone_surface_3 = "the base $ xy$ -monotone surface surface.
 
 Returns: Base_traits_3::Xy_monotone_surface_3";
-constexpr const char* CGAL_Env_surface_data_traits_3_Convert = "the conversion functor.
+constexpr const char* Env_surface_data_traits_3_Convert = "the conversion functor.
 
 Returns: Cnv";
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_data = "the type of data associated with surfaces.
+constexpr const char* Env_surface_data_traits_3_Surface_data = "the type of data associated with surfaces.
 
 Returns: SData";
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_data = "the type of data associated with $ xy$ -monotone surfaces.
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_data = "the type of data associated with $ xy$ -monotone surfaces.
 
 Returns: XyData";
 
 // CGAL::Env_surface_data_traits_3::Surface_3
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_3__class__ = "The Surface_3 class nested within the surface-data traits extends the Base_traits_3::Surface_3 type with an extra data field.";
+constexpr const char* Env_surface_data_traits_3_Surface_3__class__ = "The Surface_3 class nested within the surface-data traits extends the Base_traits_3::Surface_3 type with an extra data field.";
 
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_3_Surface_3 = "default constructor.";
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_3_Surface_3_1 = "constructs surface from the given base surface with uninitialized data field.
+constexpr const char* Env_surface_data_traits_3_Surface_3_Surface_3 = "default constructor.";
+constexpr const char* Env_surface_data_traits_3_Surface_3_Surface_3_1 = "constructs surface from the given base surface with uninitialized data field.
 
 Parameters
 ----------
 base : const Base_surface_3 &";
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_3_Surface_3_2 = "constructs surface from the given base surface with an attached data field.
+constexpr const char* Env_surface_data_traits_3_Surface_3_Surface_3_2 = "constructs surface from the given base surface with an attached data field.
 
 Parameters
 ----------
 base : const Base_surface_3 &
 data : const Surface_data &";
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_3_data = "returns the data field (a non-const version, which returns a reference to the data object, is also available).
+constexpr const char* Env_surface_data_traits_3_Surface_3_data = "returns the data field (a non-const version, which returns a reference to the data object, is also available).
 
 Returns: const Surface_data &";
-constexpr const char* CGAL_Env_surface_data_traits_3_Surface_3_set_env_data = "sets the data field.
+constexpr const char* Env_surface_data_traits_3_Surface_3_set_env_data = "sets the data field.
 
 Parameters
 ----------
 data : const Surface_data &";
 
 // CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_3__class__ = "The Xy_monotone_surface_3 class nested within the surface-data traits extends the Base_traits_3::Xy_monotone_surface_3 type with an extra data field.";
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_3__class__ = "The Xy_monotone_surface_3 class nested within the surface-data traits extends the Base_traits_3::Xy_monotone_surface_3 type with an extra data field.";
 
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_3_Xy_monotone_surface_3 = "default constructor.";
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_3_Xy_monotone_surface_3_1 = "constructs an $ xy$ -monotone surface from the given base surface with uninitialized data field.
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_3_Xy_monotone_surface_3 = "default constructor.";
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_3_Xy_monotone_surface_3_1 = "constructs an $ xy$ -monotone surface from the given base surface with uninitialized data field.
 
 Parameters
 ----------
 base : const Base_xy_monotone_surface_3 &";
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_3_Xy_monotone_surface_3_2 = "constructs an $ x$ -monotone surface from the given base $ x$ -monotone surface with an attached data field.
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_3_Xy_monotone_surface_3_2 = "constructs an $ x$ -monotone surface from the given base $ x$ -monotone surface with an attached data field.
 
 Parameters
 ----------
 base : const Base_xy_monotone_surface_3 &
 data : const Xy_monotone_surface_data &";
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_3_data = "returns the field (a non-const version, which returns a reference to the data object, is also available).
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_3_data = "returns the field (a non-const version, which returns a reference to the data object, is also available).
 
 Returns: const Xy_monotone_surface_data &";
-constexpr const char* CGAL_Env_surface_data_traits_3_Xy_monotone_surface_3_set_env_data = "sets the data field.
+constexpr const char* Env_surface_data_traits_3_Xy_monotone_surface_3_set_env_data = "sets the data field.
 
 Parameters
 ----------
 data : const Xy_monotone_surface_data &";
 
 // CGAL::Env_triangle_traits_3
-constexpr const char* CGAL_Env_triangle_traits_3__class__ = "The traits class template Env_triangle_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of triangles in the space.";
+constexpr const char* Env_triangle_traits_3__class__ = "The traits class template Env_triangle_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of triangles in the space.";
 
 // CGAL::Envelope_diagram_2
-constexpr const char* CGAL_Envelope_diagram_2__class__ = "The class-template Envelope_diagram_2 represents the minimization diagram that corresponds to the lower envelope of a set of curves, or the maximization diagram that corresponds to their upper envelope.";
+constexpr const char* Envelope_diagram_2__class__ = "The class-template Envelope_diagram_2 represents the minimization diagram that corresponds to the lower envelope of a set of curves, or the maximization diagram that corresponds to their upper envelope.";
 
-constexpr const char* CGAL_Envelope_diagram_2_Surface_const_iterator = "an iterator for the $ xy$ -monotone surfaces that induce a diagram feature.
+constexpr const char* Envelope_diagram_2_Surface_const_iterator = "an iterator for the $ xy$ -monotone surfaces that induce a diagram feature.
 
 Its value-type is EnvTraits::Xy_monotone_surface_3 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Envelope_diagram_2_Envelope_diagram_2 = "constructs an empty diagram containing one unbounded face, which corresponds to the entire plane and has no originators.";
-constexpr const char* CGAL_Envelope_diagram_2_Envelope_diagram_2_1 = "copy constructor.
+constexpr const char* Envelope_diagram_2_Envelope_diagram_2 = "constructs an empty diagram containing one unbounded face, which corresponds to the entire plane and has no originators.";
+constexpr const char* Envelope_diagram_2_Envelope_diagram_2_1 = "copy constructor.
 
 Parameters
 ----------
 other : const Self &";
-constexpr const char* CGAL_Envelope_diagram_2_Envelope_diagram_2_2 = "constructs an empty diagram that uses the given traits instance for performing the geometric predicates.
+constexpr const char* Envelope_diagram_2_Envelope_diagram_2_2 = "constructs an empty diagram that uses the given traits instance for performing the geometric predicates.
 
 Parameters
 ----------
 traits : EnvTraits *";
 
-constexpr const char* CGAL_Envelope_diagram_2_Face_number_of_surfaces = "returns the number of $ xy$ -monotone surfaces that induce the face.
+constexpr const char* Envelope_diagram_2_Face_number_of_surfaces = "returns the number of $ xy$ -monotone surfaces that induce the face.
 
 Returns: size_t";
-constexpr const char* CGAL_Envelope_diagram_2_Face_surfaces_begin = "returns an iterator for the first $ xy$ -monotone surface that induces the face.
+constexpr const char* Envelope_diagram_2_Face_surfaces_begin = "returns an iterator for the first $ xy$ -monotone surface that induces the face.
 
 Returns: Surface_const_iterator";
-constexpr const char* CGAL_Envelope_diagram_2_Face_surfaces_end = "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce the face.
+constexpr const char* Envelope_diagram_2_Face_surfaces_end = "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce the face.
 
 Returns: Surface_const_iterator";
-constexpr const char* CGAL_Envelope_diagram_2_Face_surface = "returns the first $ xy$ -monotone surface that induce the face.
+constexpr const char* Envelope_diagram_2_Face_surface = "returns the first $ xy$ -monotone surface that induce the face.
 
 The number of surfaces is not 0.
 
 Returns: Xy_monotone_surface_3";
 
-constexpr const char* CGAL_Envelope_diagram_2_Halfedge_number_of_surfaces = "returns the number of $ xy$ -monotone surfaces that induce the halfedge.
+constexpr const char* Envelope_diagram_2_Halfedge_number_of_surfaces = "returns the number of $ xy$ -monotone surfaces that induce the halfedge.
 
 Returns: size_t";
-constexpr const char* CGAL_Envelope_diagram_2_Halfedge_surfaces_begin = "returns an iterator for the first $ xy$ -monotone surface that induces the halfedge.
+constexpr const char* Envelope_diagram_2_Halfedge_surfaces_begin = "returns an iterator for the first $ xy$ -monotone surface that induces the halfedge.
 
 Returns: Surface_const_iterator";
-constexpr const char* CGAL_Envelope_diagram_2_Halfedge_surfaces_end = "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce the halfedge.
+constexpr const char* Envelope_diagram_2_Halfedge_surfaces_end = "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce the halfedge.
 
 Returns: Surface_const_iterator";
-constexpr const char* CGAL_Envelope_diagram_2_Halfedge_surface = "returns the first $ xy$ -monotone surface that induce e .
+constexpr const char* Envelope_diagram_2_Halfedge_surface = "returns the first $ xy$ -monotone surface that induce e .
 
 The number of surfaces is not 0.
 
 Returns: Xy_monotone_surface_3";
 
-constexpr const char* CGAL_Envelope_diagram_2_Vertex_number_of_surfaces = "returns the number of $ xy$ -monotone surfaces that induce v .
+constexpr const char* Envelope_diagram_2_Vertex_number_of_surfaces = "returns the number of $ xy$ -monotone surfaces that induce v .
 
 Returns: size_t";
-constexpr const char* CGAL_Envelope_diagram_2_Vertex_surfaces_begin = "returns an iterator for the first $ xy$ -monotone surface that induces v .
+constexpr const char* Envelope_diagram_2_Vertex_surfaces_begin = "returns an iterator for the first $ xy$ -monotone surface that induces v .
 
 Returns: Surface_const_iterator";
-constexpr const char* CGAL_Envelope_diagram_2_Vertex_surfaces_end = "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce v .
+constexpr const char* Envelope_diagram_2_Vertex_surfaces_end = "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce v .
 
 Returns: Surface_const_iterator";
-constexpr const char* CGAL_Envelope_diagram_2_Vertex_surface = "returns the first $ xy$ -monotone surface that induce v .
+constexpr const char* Envelope_diagram_2_Vertex_surface = "returns the first $ xy$ -monotone surface that induce v .
 
 The number of surfaces is not 0.
 

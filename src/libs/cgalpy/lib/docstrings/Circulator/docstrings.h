@@ -11,20 +11,20 @@ namespace Circulator {
 constexpr const char* BidirectionalCirculator__class__ = "See Subsection Bidirectional Circulators in the page on Circulators.";
 
 // CGAL::Bidirectional_circulator_ptrbase
-constexpr const char* CGAL_Bidirectional_circulator_ptrbase__class__ = "bidirectional circulator.";
+constexpr const char* Bidirectional_circulator_ptrbase__class__ = "bidirectional circulator.";
 
 // CGAL::Circulator_from_container
-constexpr const char* CGAL_Circulator_from_container__class__ = "The adaptor Circulator_from_container provides a circulator for an STL container C of equal category as the iterator provided by the container.";
+constexpr const char* Circulator_from_container__class__ = "The adaptor Circulator_from_container provides a circulator for an STL container C of equal category as the iterator provided by the container.";
 
-constexpr const char* CGAL_Circulator_from_container_Circulator_from_container = "a circulator c on an empty sequence.";
-constexpr const char* CGAL_Circulator_from_container_Circulator_from_container_1 = "a circulator c initialized to refer to the first element in container , i.e. container.begin() .
+constexpr const char* Circulator_from_container_Circulator_from_container = "a circulator c on an empty sequence.";
+constexpr const char* Circulator_from_container_Circulator_from_container_1 = "a circulator c initialized to refer to the first element in container , i.e. container.begin() .
 
 The circulator c refers to an empty sequence if the container is empty.
 
 Parameters
 ----------
 container : C *";
-constexpr const char* CGAL_Circulator_from_container_Circulator_from_container_2 = "a circulator c initialized to refer to the element *i in container .
+constexpr const char* Circulator_from_container_Circulator_from_container_2 = "a circulator c initialized to refer to the element *i in container .
 
 *i is dereferenceable and refers to container .
 
@@ -34,10 +34,10 @@ container : C *
 i : C::iterator";
 
 // CGAL::Circulator_from_iterator
-constexpr const char* CGAL_Circulator_from_iterator__class__ = "The adaptor Circulator_from_iterator converts two iterators of type I , a begin and a past-the-end value, to a circulator of equal category.";
+constexpr const char* Circulator_from_iterator__class__ = "The adaptor Circulator_from_iterator converts two iterators of type I , a begin and a past-the-end value, to a circulator of equal category.";
 
-constexpr const char* CGAL_Circulator_from_iterator_Circulator_from_iterator = "a circulator c on an empty sequence.";
-constexpr const char* CGAL_Circulator_from_iterator_Circulator_from_iterator_1 = "a circulator c initialized to refer to the element *cur in a range [begin, end) .
+constexpr const char* Circulator_from_iterator_Circulator_from_iterator = "a circulator c on an empty sequence.";
+constexpr const char* Circulator_from_iterator_Circulator_from_iterator_1 = "a circulator c initialized to refer to the element *cur in a range [begin, end) .
 
 The circulator c refers to an empty sequence if begin==end .
 
@@ -46,7 +46,7 @@ Parameters
 begin : const I &
 end : const I &
 cur : const I &";
-constexpr const char* CGAL_Circulator_from_iterator_Circulator_from_iterator_2 = "a copy of circulator d referring to the element *cur .
+constexpr const char* Circulator_from_iterator_Circulator_from_iterator_2 = "a copy of circulator d referring to the element *cur .
 
 The circulator c refers to an empty sequence if d does so.
 
@@ -56,51 +56,51 @@ d : const Circulator_from_iterator< I, T, Size, Dist > &
 cur : const I &";
 
 // CGAL::Circulator_tag
-constexpr const char* CGAL_Circulator_tag__class__ = "A tag for any circulator type.";
+constexpr const char* Circulator_tag__class__ = "A tag for any circulator type.";
 
 // CGAL::Circulator_traits
-constexpr const char* CGAL_Circulator_traits__class__ = "The circulator traits class distinguishes between circulators and iterators.";
+constexpr const char* Circulator_traits__class__ = "The circulator traits class distinguishes between circulators and iterators.";
 
-constexpr const char* CGAL_Circulator_traits_category = "either Iterator_tag or Circulator_tag .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Circulator_traits_iterator_category = "corresponding iterator category for circulators.
+constexpr const char* Circulator_traits_category = "either Iterator_tag or Circulator_tag .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Circulator_traits_circulator_category = "corresponding circulator category for iterator.
+constexpr const char* Circulator_traits_iterator_category = "corresponding iterator category for circulators.
+
+Returns: unspecified_type";
+constexpr const char* Circulator_traits_circulator_category = "corresponding circulator category for iterator.
 
 Returns: unspecified_type";
 
 // CGAL::Container_from_circulator
-constexpr const char* CGAL_Container_from_circulator__class__ = "The adaptor Container_from_circulator is a class that converts any circulator type C to a kind of container class, i.e. a class that provides an iterator and a const_iterator type and two member functions ( begin() and end() ) that return the appropriate iterators.";
+constexpr const char* Container_from_circulator__class__ = "The adaptor Container_from_circulator is a class that converts any circulator type C to a kind of container class, i.e. a class that provides an iterator and a const_iterator type and two member functions ( begin() and end() ) that return the appropriate iterators.";
 
-constexpr const char* CGAL_Container_from_circulator_Container_from_circulator = "any iterator of container will have a singular value.";
-constexpr const char* CGAL_Container_from_circulator_Container_from_circulator_1 = "any iterator of container will have a singular value if the circulator c corresponds to an empty sequence.
+constexpr const char* Container_from_circulator_Container_from_circulator = "any iterator of container will have a singular value.";
+constexpr const char* Container_from_circulator_Container_from_circulator_1 = "any iterator of container will have a singular value if the circulator c corresponds to an empty sequence.
 
 Parameters
 ----------
 c : const C &";
-constexpr const char* CGAL_Container_from_circulator_begin = "the start iterator.
+constexpr const char* Container_from_circulator_begin = "the start iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Container_from_circulator_begin_1 = "the start const iterator.
+constexpr const char* Container_from_circulator_begin_1 = "the start const iterator.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Container_from_circulator_end = "the past-the-end iterator.
+constexpr const char* Container_from_circulator_end = "the past-the-end iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Container_from_circulator_end_1 = "the past-the-end const iterator.
+constexpr const char* Container_from_circulator_end_1 = "the past-the-end const iterator.
 
 Returns: const_iterator";
 
 // CGAL::Forward_circulator_ptrbase
-constexpr const char* CGAL_Forward_circulator_ptrbase__class__ = "forward circulator.";
+constexpr const char* Forward_circulator_ptrbase__class__ = "forward circulator.";
 
 // CGAL::Iterator_tag
-constexpr const char* CGAL_Iterator_tag__class__ = "A tag for any iterator type.";
+constexpr const char* Iterator_tag__class__ = "A tag for any iterator type.";
 
 // CGAL::Random_access_circulator_ptrbase
-constexpr const char* CGAL_Random_access_circulator_ptrbase__class__ = "random access circulator.";
+constexpr const char* Random_access_circulator_ptrbase__class__ = "random access circulator.";
 
 // Circulator
 constexpr const char* Circulator__class__ = "A Circulator is similar to an Iterator, with the difference that it is designed for circular data structures.";

@@ -19,20 +19,20 @@ namespace BGL {
 
 
 // CGAL::Dual
-constexpr const char* CGAL_Dual__class__ = "The class template Dual is an adaptor that creates the dual view of a FaceGraph .";
+constexpr const char* Dual__class__ = "The class template Dual is an adaptor that creates the dual view of a FaceGraph .";
 
-constexpr const char* CGAL_Dual_Primal = "The underlying primal type.
+constexpr const char* Dual_Primal = "The underlying primal type.
 
 Returns: Primal_";
-constexpr const char* CGAL_Dual_Dual = "constructs a Dual from a given primal.
+constexpr const char* Dual_Dual = "constructs a Dual from a given primal.
 
 Parameters
 ----------
 primal : const Primal &";
-constexpr const char* CGAL_Dual_primal = "returns the underlying primal.
+constexpr const char* Dual_primal = "returns the underlying primal.
 
 Returns: const Primal &";
-constexpr const char* CGAL_Dual_dual = "constructs a Dual from a given primal .
+constexpr const char* Dual_dual = "constructs a Dual from a given primal .
 
 Parameters
 ----------
@@ -41,57 +41,57 @@ primal : const Primal &
 Returns: Dual < Primal >";
 
 // CGAL::dynamic_edge_property_t
-constexpr const char* CGAL_dynamic_edge_property_t__class__ = "Dynamic edge property tag.";
+constexpr const char* dynamic_edge_property_t__class__ = "Dynamic edge property tag.";
 
 
 // CGAL::dynamic_face_property_t
-constexpr const char* CGAL_dynamic_face_property_t__class__ = "Dynamic face property tag.";
+constexpr const char* dynamic_face_property_t__class__ = "Dynamic face property tag.";
 
 
 // CGAL::dynamic_halfedge_property_t
-constexpr const char* CGAL_dynamic_halfedge_property_t__class__ = "Dynamic halfedge property tag.";
+constexpr const char* dynamic_halfedge_property_t__class__ = "Dynamic halfedge property tag.";
 
 
 // CGAL::dynamic_vertex_property_t
-constexpr const char* CGAL_dynamic_vertex_property_t__class__ = "Dynamic vertex property tag.";
+constexpr const char* dynamic_vertex_property_t__class__ = "Dynamic vertex property tag.";
 
 
 
 // CGAL::Face_around_face_circulator
-constexpr const char* CGAL_Face_around_face_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::face_descriptor .";
+constexpr const char* Face_around_face_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::face_descriptor .";
 
 
 // CGAL::Face_around_face_iterator
-constexpr const char* CGAL_Face_around_face_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::face_descriptor .";
+constexpr const char* Face_around_face_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::face_descriptor .";
 
 
 // CGAL::Face_around_target_circulator
-constexpr const char* CGAL_Face_around_target_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::face_descriptor over all faces incident to the same vertex.";
+constexpr const char* Face_around_target_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::face_descriptor over all faces incident to the same vertex.";
 
 
 // CGAL::Face_around_target_iterator
-constexpr const char* CGAL_Face_around_target_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::face_descriptor .";
+constexpr const char* Face_around_target_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::face_descriptor .";
 
 
 // CGAL::Face_filtered_graph
-constexpr const char* CGAL_Face_filtered_graph__class__ = "The class Face_filtered_graph is an adaptor that creates a filtered view of a graph by restricting it to a subset of faces.";
+constexpr const char* Face_filtered_graph__class__ = "The class Face_filtered_graph is an adaptor that creates a filtered view of a graph by restricting it to a subset of faces.";
 
-constexpr const char* CGAL_Face_filtered_graph_vertex_descriptor = "Vertex descriptor type.
+constexpr const char* Face_filtered_graph_vertex_descriptor = "Vertex descriptor type.
 
 Returns: boost::graph_traits< Graph >::vertex_descriptor";
-constexpr const char* CGAL_Face_filtered_graph_halfedge_descriptor = "Halfedge descriptor type.
+constexpr const char* Face_filtered_graph_halfedge_descriptor = "Halfedge descriptor type.
 
 Returns: boost::graph_traits< Graph >::halfedge_descriptor";
-constexpr const char* CGAL_Face_filtered_graph_edge_descriptor = "Edge descriptor type.
+constexpr const char* Face_filtered_graph_edge_descriptor = "Edge descriptor type.
 
 Returns: boost::graph_traits< Graph >::edge_descriptor";
-constexpr const char* CGAL_Face_filtered_graph_face_descriptor = "Face descriptor type.
+constexpr const char* Face_filtered_graph_face_descriptor = "Face descriptor type.
 
 Returns: boost::graph_traits< Graph >::face_descriptor";
-constexpr const char* CGAL_Face_filtered_graph_size_type = "Size type.
+constexpr const char* Face_filtered_graph_size_type = "Size type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Face_filtered_graph_Face_filtered_graph = "constructs an empty face filtered graph (no face is selected)
+constexpr const char* Face_filtered_graph_Face_filtered_graph = "constructs an empty face filtered graph (no face is selected)
 
 NamedParameters a sequence of named parameters graph the underlying graph. np
 optional sequence of named parameters among the ones listed below Optional
@@ -127,7 +127,7 @@ Parameters
 ----------
 graph : const Graph &
 np : const NamedParameters &";
-constexpr const char* CGAL_Face_filtered_graph_Face_filtered_graph_1 = "Constructor where the set of selected faces is specified as a range of patch ids.
+constexpr const char* Face_filtered_graph_Face_filtered_graph_1 = "Constructor where the set of selected faces is specified as a range of patch ids.
 
 FacePatchIDMap a model of ReadablePropertyMap with face_descriptor as key type
 and whose value type is a model of Hashable . FacePatchIDRange a model of
@@ -170,7 +170,7 @@ graph : const Graph &
 selected_face_patch_ids : const FacePatchIDRange &
 face_patch_id_map : FacePatchIDMap
 np : const NamedParameters &";
-constexpr const char* CGAL_Face_filtered_graph_Face_filtered_graph_2 = "Constructor where the set of selected faces is specified as a patch id.
+constexpr const char* Face_filtered_graph_Face_filtered_graph_2 = "Constructor where the set of selected faces is specified as a patch id.
 
 FacePatchIDMap a model of ReadablePropertyMap with face_descriptor as key type
 and whose value type is a model of Hashable . NamedParameters a sequence of
@@ -211,7 +211,7 @@ graph : const Graph &
 selected_face_patch_id : typename boost::property_traits< FacePatchIDMap >::value_type
 face_patch_id_map : FacePatchIDMap
 np : const NamedParameters &";
-constexpr const char* CGAL_Face_filtered_graph_Face_filtered_graph_3 = "Constructor where the set of selected faces is specified as a range of face descriptors.
+constexpr const char* Face_filtered_graph_Face_filtered_graph_3 = "Constructor where the set of selected faces is specified as a range of face descriptors.
 
 FaceRange a model of ConstRange with face_descriptor as value type.
 NamedParameters a sequence of named parameters graph the graph containing the
@@ -250,227 +250,227 @@ Parameters
 graph : const Graph &
 selected_faces : const FaceRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Face_filtered_graph_graph = "returns a const reference to the underlying graph.
+constexpr const char* Face_filtered_graph_graph = "returns a const reference to the underlying graph.
 
 Returns: const Graph &";
-constexpr const char* CGAL_Face_filtered_graph_graph_1 = "returns a reference to the underlying graph.
+constexpr const char* Face_filtered_graph_graph_1 = "returns a reference to the underlying graph.
 
 Returns: Graph &";
-constexpr const char* CGAL_Face_filtered_graph_set_selected_faces = "changes the set of selected faces using a patch id.
+constexpr const char* Face_filtered_graph_set_selected_faces = "changes the set of selected faces using a patch id.
 
 Parameters
 ----------
 face_patch_id : typename boost::property_traits< FacePatchIDMap >::value_type
 face_patch_id_map : FacePatchIDMap";
-constexpr const char* CGAL_Face_filtered_graph_set_selected_faces_1 = "changes the set of selected faces using a range of patch ids
+constexpr const char* Face_filtered_graph_set_selected_faces_1 = "changes the set of selected faces using a range of patch ids
 
 Parameters
 ----------
 selected_face_patch_ids : const FacePatchIDRange &
 face_patch_id_map : FacePatchIDMap";
-constexpr const char* CGAL_Face_filtered_graph_set_selected_faces_2 = "changes the set of selected faces using a range of face descriptors.
+constexpr const char* Face_filtered_graph_set_selected_faces_2 = "changes the set of selected faces using a range of face descriptors.
 
 Parameters
 ----------
 selection : const FaceRange &";
-constexpr const char* CGAL_Face_filtered_graph_number_of_faces = "returns the number of selected faces.
+constexpr const char* Face_filtered_graph_number_of_faces = "returns the number of selected faces.
 
 Returns: size_type";
-constexpr const char* CGAL_Face_filtered_graph_number_of_vertices = "returns the number of selected vertices.
+constexpr const char* Face_filtered_graph_number_of_vertices = "returns the number of selected vertices.
 
 Returns: size_type";
-constexpr const char* CGAL_Face_filtered_graph_number_of_halfedges = "returns the number of selected halfedges.
+constexpr const char* Face_filtered_graph_number_of_halfedges = "returns the number of selected halfedges.
 
 Returns: size_type";
-constexpr const char* CGAL_Face_filtered_graph_is_selection_valid = "returns true if around any vertex of a selected face there is at most a single umbrella
+constexpr const char* Face_filtered_graph_is_selection_valid = "returns true if around any vertex of a selected face there is at most a single umbrella
 
 Returns: bool";
-constexpr const char* CGAL_Face_filtered_graph_invert_selection = "inverts the selected status of faces.";
+constexpr const char* Face_filtered_graph_invert_selection = "inverts the selected status of faces.";
 
 
 // CGAL::graph_has_property
-constexpr const char* CGAL_graph_has_property__class__ = "graph_has_property is used to indicate if a model of HalfedgeGraph or FaceGraph has an internal property associated with the given PropertyTag .";
+constexpr const char* graph_has_property__class__ = "graph_has_property is used to indicate if a model of HalfedgeGraph or FaceGraph has an internal property associated with the given PropertyTag .";
 
 // CGAL::Graph_with_descriptor_with_graph
-constexpr const char* CGAL_Graph_with_descriptor_with_graph__class__ = "The class Graph_with_descriptor_with_graph wraps a graph into another graph in such a way that its descriptors contain a reference to the graph they come from.";
+constexpr const char* Graph_with_descriptor_with_graph__class__ = "The class Graph_with_descriptor_with_graph wraps a graph into another graph in such a way that its descriptors contain a reference to the graph they come from.";
 
 
 // CGAL::Graph_with_descriptor_with_graph_property_map
-constexpr const char* CGAL_Graph_with_descriptor_with_graph_property_map__class__ = "Graph_with_descriptor_with_graph_property_map enables to forward properties from a Graph to a Graph_with_descriptor_with_graph .";
+constexpr const char* Graph_with_descriptor_with_graph_property_map__class__ = "Graph_with_descriptor_with_graph_property_map enables to forward properties from a Graph to a Graph_with_descriptor_with_graph .";
 
 
 
 
 // CGAL::Halfedge_around_face_circulator
-constexpr const char* CGAL_Halfedge_around_face_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges incident to the same face or border.";
+constexpr const char* Halfedge_around_face_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges incident to the same face or border.";
 
 
 // CGAL::Halfedge_around_face_iterator
-constexpr const char* CGAL_Halfedge_around_face_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges incident to the same face or border.";
+constexpr const char* Halfedge_around_face_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges incident to the same face or border.";
 
 
 // CGAL::Halfedge_around_source_circulator
-constexpr const char* CGAL_Halfedge_around_source_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as source.";
+constexpr const char* Halfedge_around_source_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as source.";
 
 
 // CGAL::Halfedge_around_source_iterator
-constexpr const char* CGAL_Halfedge_around_source_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as source.";
+constexpr const char* Halfedge_around_source_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as source.";
 
 
 // CGAL::Halfedge_around_target_circulator
-constexpr const char* CGAL_Halfedge_around_target_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as target.";
+constexpr const char* Halfedge_around_target_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as target.";
 
 
 // CGAL::Halfedge_around_target_iterator
-constexpr const char* CGAL_Halfedge_around_target_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as target.";
+constexpr const char* Halfedge_around_target_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::halfedge_descriptor over all halfedges having the same vertex as target.";
 
 
 // CGAL::HalfedgeDS_face_max_base_with_id
-constexpr const char* CGAL_HalfedgeDS_face_max_base_with_id__class__ = "The class HalfedgeDS_face_max_base_with_id is a model of the HalfedgeDSFace concept.";
+constexpr const char* HalfedgeDS_face_max_base_with_id__class__ = "The class HalfedgeDS_face_max_base_with_id is a model of the HalfedgeDSFace concept.";
 
-constexpr const char* CGAL_HalfedgeDS_face_max_base_with_id_HalfedgeDS_face_max_base_with_id = "Default constructor.";
-constexpr const char* CGAL_HalfedgeDS_face_max_base_with_id_id = "Returns the index.
+constexpr const char* HalfedgeDS_face_max_base_with_id_HalfedgeDS_face_max_base_with_id = "Default constructor.";
+constexpr const char* HalfedgeDS_face_max_base_with_id_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_HalfedgeDS_face_max_base_with_id_id_1 = "Returns a reference to the index stored in the face.
+constexpr const char* HalfedgeDS_face_max_base_with_id_id_1 = "Returns a reference to the index stored in the face.
 
 Returns: int &";
 
 // CGAL::HalfedgeDS_halfedge_max_base_with_id
-constexpr const char* CGAL_HalfedgeDS_halfedge_max_base_with_id__class__ = "The class HalfedgeDS_halfedge_max_base_with_id is a model of the HalfedgeDSHalfedge concept.";
+constexpr const char* HalfedgeDS_halfedge_max_base_with_id__class__ = "The class HalfedgeDS_halfedge_max_base_with_id is a model of the HalfedgeDSHalfedge concept.";
 
-constexpr const char* CGAL_HalfedgeDS_halfedge_max_base_with_id_HalfedgeDS_halfedge_max_base_with_id = "Default constructor.";
-constexpr const char* CGAL_HalfedgeDS_halfedge_max_base_with_id_id = "Returns the index.
+constexpr const char* HalfedgeDS_halfedge_max_base_with_id_HalfedgeDS_halfedge_max_base_with_id = "Default constructor.";
+constexpr const char* HalfedgeDS_halfedge_max_base_with_id_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_HalfedgeDS_halfedge_max_base_with_id_id_1 = "Returns a reference to the index stored in the halfedge.
+constexpr const char* HalfedgeDS_halfedge_max_base_with_id_id_1 = "Returns a reference to the index stored in the halfedge.
 
 Returns: int &";
 
 // CGAL::HalfedgeDS_vertex_max_base_with_id
-constexpr const char* CGAL_HalfedgeDS_vertex_max_base_with_id__class__ = "The class HalfedgeDS_vertex_max_base_with_id is a model of the HalfedgeDSVertex concept.";
+constexpr const char* HalfedgeDS_vertex_max_base_with_id__class__ = "The class HalfedgeDS_vertex_max_base_with_id is a model of the HalfedgeDSVertex concept.";
 
-constexpr const char* CGAL_HalfedgeDS_vertex_max_base_with_id_HalfedgeDS_vertex_max_base_with_id = "Default constructor.";
-constexpr const char* CGAL_HalfedgeDS_vertex_max_base_with_id_id = "Returns the index.
+constexpr const char* HalfedgeDS_vertex_max_base_with_id_HalfedgeDS_vertex_max_base_with_id = "Default constructor.";
+constexpr const char* HalfedgeDS_vertex_max_base_with_id_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_HalfedgeDS_vertex_max_base_with_id_id_1 = "Returns a reference to the index stored in the vertex.
+constexpr const char* HalfedgeDS_vertex_max_base_with_id_id_1 = "Returns a reference to the index stored in the vertex.
 
 Returns: int &";
 
 
 // CGAL::Linear_cell_complex_bgl_min_items
-constexpr const char* CGAL_Linear_cell_complex_bgl_min_items__class__ = "The class Linear_cell_complex_bgl_min_items defines void as the information associated with darts, darts have ids and 0- and 2-attributes are enabled and have ids.";
+constexpr const char* Linear_cell_complex_bgl_min_items__class__ = "The class Linear_cell_complex_bgl_min_items defines void as the information associated with darts, darts have ids and 0- and 2-attributes are enabled and have ids.";
 
 // CGAL::Linear_cell_complex_for_bgl_combinatorial_map_helper
-constexpr const char* CGAL_Linear_cell_complex_for_bgl_combinatorial_map_helper__class__ = "The class Linear_cell_complex_for_bgl_combinatorial_map_helper defines a CGAL::Linear_cell_complex_for_combinatorial_map as inner type, named type , having CGAL::Linear_cell_complex_bgl_min_items as items class.";
+constexpr const char* Linear_cell_complex_for_bgl_combinatorial_map_helper__class__ = "The class Linear_cell_complex_for_bgl_combinatorial_map_helper defines a CGAL::Linear_cell_complex_for_combinatorial_map as inner type, named type , having CGAL::Linear_cell_complex_bgl_min_items as items class.";
 
-constexpr const char* CGAL_Linear_cell_complex_for_bgl_combinatorial_map_helper_type = "Type of the Linear_cell_complex_for_combinatorial_map.
+constexpr const char* Linear_cell_complex_for_bgl_combinatorial_map_helper_type = "Type of the Linear_cell_complex_for_combinatorial_map.
 
 Returns: CGAL::Linear_cell_complex_for_combinatorial_map< d, d2, LCCTraits, CGAL::Linear_cell_complex_bgl_min_items , Alloc >";
 
 
 
 // CGAL::Polyhedron_items_with_id_3
-constexpr const char* CGAL_Polyhedron_items_with_id_3__class__ = "The class Polyhedron_items_with_id_3 is a model of the PolyhedronItems_3 concept.";
+constexpr const char* Polyhedron_items_with_id_3__class__ = "The class Polyhedron_items_with_id_3 is a model of the PolyhedronItems_3 concept.";
 
-constexpr const char* CGAL_Polyhedron_items_with_id_3_Polyhedron_items_with_id_3 = "Default constructor.";
+constexpr const char* Polyhedron_items_with_id_3_Polyhedron_items_with_id_3 = "Default constructor.";
 
 
 
 // CGAL::Seam_mesh
-constexpr const char* CGAL_Seam_mesh__class__ = "This class is a data structure that takes a triangle mesh, further referred to as underlying mesh and turns some marked edges of that mesh into virtual boundary edges.";
+constexpr const char* Seam_mesh__class__ = "This class is a data structure that takes a triangle mesh, further referred to as underlying mesh and turns some marked edges of that mesh into virtual boundary edges.";
 
-constexpr const char* CGAL_Seam_mesh_TM_vertex_descriptor = "The type for the objects used to identify vertices in the underlying mesh.
+constexpr const char* Seam_mesh_TM_vertex_descriptor = "The type for the objects used to identify vertices in the underlying mesh.
 
 Returns: boost::graph_traits< TM > ::vertex_descriptor";
-constexpr const char* CGAL_Seam_mesh_TM_halfedge_descriptor = "The type for the objects used to identify halfedges in the underlying mesh.
+constexpr const char* Seam_mesh_TM_halfedge_descriptor = "The type for the objects used to identify halfedges in the underlying mesh.
 
 Returns: boost::graph_traits< TM > ::halfedge_descriptor";
-constexpr const char* CGAL_Seam_mesh_TM_halfedge_iterator = "The type for the iterators that traverse through the complete halfedge set of the underlying mesh.
+constexpr const char* Seam_mesh_TM_halfedge_iterator = "The type for the iterators that traverse through the complete halfedge set of the underlying mesh.
 
 Returns: boost::graph_traits< TM >::halfedge_iterator";
-constexpr const char* CGAL_Seam_mesh_TM_edge_descriptor = "The type for the objects used to identify edges in the underlying mesh.
+constexpr const char* Seam_mesh_TM_edge_descriptor = "The type for the objects used to identify edges in the underlying mesh.
 
 Returns: boost::graph_traits< TM > ::edge_descriptor";
-constexpr const char* CGAL_Seam_mesh_degree_size_type = "The unsigned integer type used for representing the degree of vertices in the seam mesh.
+constexpr const char* Seam_mesh_degree_size_type = "The unsigned integer type used for representing the degree of vertices in the seam mesh.
 
 Returns: boost::graph_traits< TM >::degree_size_type";
-constexpr const char* CGAL_Seam_mesh_vertices_size_type = "The unsigned integer type used to represent the number of vertices in the seam mesh.
+constexpr const char* Seam_mesh_vertices_size_type = "The unsigned integer type used to represent the number of vertices in the seam mesh.
 
 Returns: boost::graph_traits< TM >::vertices_size_type";
-constexpr const char* CGAL_Seam_mesh_edges_size_type = "The unsigned integer type used for representing the number of edges in the seam mesh.
+constexpr const char* Seam_mesh_edges_size_type = "The unsigned integer type used for representing the number of edges in the seam mesh.
 
 Returns: boost::graph_traits< TM >::edges_size_type";
-constexpr const char* CGAL_Seam_mesh_halfedges_size_type = "The unsigned integer type used for representing the number of halfedges in the seam mesh.
+constexpr const char* Seam_mesh_halfedges_size_type = "The unsigned integer type used for representing the number of halfedges in the seam mesh.
 
 Returns: boost::graph_traits< TM >::halfedges_size_type";
-constexpr const char* CGAL_Seam_mesh_faces_size_type = "The unsigned integer type used for representing the number of faces in the seam mesh.
+constexpr const char* Seam_mesh_faces_size_type = "The unsigned integer type used for representing the number of faces in the seam mesh.
 
 Returns: boost::graph_traits< TM >::faces_size_type";
-constexpr const char* CGAL_Seam_mesh_has_on_seam = "returns true if the vertex is on the seam.
+constexpr const char* Seam_mesh_has_on_seam = "returns true if the vertex is on the seam.
 
 Parameters
 ----------
 vd : TM_vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Seam_mesh_has_on_seam_1 = "returns true if the edge is on the seam.
+constexpr const char* Seam_mesh_has_on_seam_1 = "returns true if the edge is on the seam.
 
 Parameters
 ----------
 ed : TM_edge_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Seam_mesh_has_on_seam_2 = "returns true if the halfedge is on the seam.
+constexpr const char* Seam_mesh_has_on_seam_2 = "returns true if the halfedge is on the seam.
 
 Parameters
 ----------
 tmhd : TM_halfedge_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Seam_mesh_has_on_seam_3 = "returns true if the halfedge is on the seam.
+constexpr const char* Seam_mesh_has_on_seam_3 = "returns true if the halfedge is on the seam.
 
 Parameters
 ----------
 hd : const halfedge_descriptor &
 
 Returns: bool";
-constexpr const char* CGAL_Seam_mesh_number_of_seam_edges = "returns the number of seam edges in the seam mesh.
+constexpr const char* Seam_mesh_number_of_seam_edges = "returns the number of seam edges in the seam mesh.
 
 Returns: edges_size_type";
-constexpr const char* CGAL_Seam_mesh_vertices = "returns the iterator range of the vertices of the mesh.
+constexpr const char* Seam_mesh_vertices = "returns the iterator range of the vertices of the mesh.
 
 Returns: Iterator_range< vertex_iterator >";
-constexpr const char* CGAL_Seam_mesh_halfedges = "returns the iterator range of the halfedges of the mesh.
+constexpr const char* Seam_mesh_halfedges = "returns the iterator range of the halfedges of the mesh.
 
 Returns: Iterator_range< halfedge_iterator >";
-constexpr const char* CGAL_Seam_mesh_edges = "returns the iterator range of the edges of the mesh.
+constexpr const char* Seam_mesh_edges = "returns the iterator range of the edges of the mesh.
 
 Returns: Iterator_range< edge_iterator >";
-constexpr const char* CGAL_Seam_mesh_faces = "returns the iterator range of the faces of the mesh.
+constexpr const char* Seam_mesh_faces = "returns the iterator range of the faces of the mesh.
 
 Returns: Iterator_range< face_iterator >";
-constexpr const char* CGAL_Seam_mesh_num_vertices = "returns the number of vertices in the seam mesh.
+constexpr const char* Seam_mesh_num_vertices = "returns the number of vertices in the seam mesh.
 
 Returns: vertices_size_type";
-constexpr const char* CGAL_Seam_mesh_num_halfedges = "returns the number of halfedges in the seam mesh.
+constexpr const char* Seam_mesh_num_halfedges = "returns the number of halfedges in the seam mesh.
 
 Returns: halfedges_size_type";
-constexpr const char* CGAL_Seam_mesh_num_edges = "returns the number of edges in the seam mesh.
+constexpr const char* Seam_mesh_num_edges = "returns the number of edges in the seam mesh.
 
 Returns: halfedges_size_type";
-constexpr const char* CGAL_Seam_mesh_num_faces = "returns the number of faces in the seam mesh.
+constexpr const char* Seam_mesh_num_faces = "returns the number of faces in the seam mesh.
 
 Returns: faces_size_type";
-constexpr const char* CGAL_Seam_mesh_degree = "returns the number of incident halfedges of vertex v .
+constexpr const char* Seam_mesh_degree = "returns the number of incident halfedges of vertex v .
 
 Parameters
 ----------
 v : vertex_descriptor
 
 Returns: degree_size_type";
-constexpr const char* CGAL_Seam_mesh_add_seam = "marks the edge of the underlying mesh that has extremities the vertices tm_vd_s and tm_vd_s as a seam edge.
+constexpr const char* Seam_mesh_add_seam = "marks the edge of the underlying mesh that has extremities the vertices tm_vd_s and tm_vd_s as a seam edge.
 
 whether the edge was successfully marked or not. Marking will fail if: No edge
 of the underlying mesh exist with extremities tm_vd_s and tm_vd_s , the edge
@@ -484,7 +484,7 @@ tm_vd_s : TM_vertex_descriptor
 tm_vd_t : TM_vertex_descriptor
 
 Returns: bool";
-constexpr const char* CGAL_Seam_mesh_add_seams = "creates new seams.
+constexpr const char* Seam_mesh_add_seams = "creates new seams.
 
 The edges to be marked as seams are described by the range [first, last) of
 vertices of the underlying mesh. Each edge to be marked is described by two
@@ -499,7 +499,7 @@ first : InputIterator
 last : InputIterator
 
 Returns: TM_halfedge_descriptor";
-constexpr const char* CGAL_Seam_mesh_add_seams_1 = "creates new seams.
+constexpr const char* Seam_mesh_add_seams_1 = "creates new seams.
 
 A seam edge is described by a pair of integers. The integer index of a vertex
 of the underlying mesh is given by its position in the container tm_vds .
@@ -513,7 +513,7 @@ in : std::ifstream &
 tm_vds : const VdContainer &
 
 Returns: TM_halfedge_descriptor";
-constexpr const char* CGAL_Seam_mesh_add_seams_2 = "creates new seams.
+constexpr const char* Seam_mesh_add_seams_2 = "creates new seams.
 
 A seam edge is described by a pair of integers. The integer index of a vertex
 of the underlying mesh is defined as its position when iterating over the
@@ -526,7 +526,7 @@ Parameters
 in : std::ifstream &
 
 Returns: TM_halfedge_descriptor";
-constexpr const char* CGAL_Seam_mesh_add_seams_3 = "creates new seams.
+constexpr const char* Seam_mesh_add_seams_3 = "creates new seams.
 
 A seam edge is described by a pair of integers. The integer index of a vertex
 of the underlying mesh is given by its position in the container tm_vds . one
@@ -542,7 +542,7 @@ filename : const char *
 tm_vds : const VdContainer &
 
 Returns: TM_halfedge_descriptor";
-constexpr const char* CGAL_Seam_mesh_add_seams_4 = "creates new seams.
+constexpr const char* Seam_mesh_add_seams_4 = "creates new seams.
 
 A seam edge is described by a pair of integers. The integer index of a vertex
 of the underlying mesh is defined as its position when iterating over the
@@ -556,18 +556,18 @@ Parameters
 filename : const char *
 
 Returns: TM_halfedge_descriptor";
-constexpr const char* CGAL_Seam_mesh_Triangle_mesh = "The underlying mesh type.
+constexpr const char* Seam_mesh_Triangle_mesh = "The underlying mesh type.
 
 Returns: TM";
-constexpr const char* CGAL_Seam_mesh_face_descriptor = "This class represents a face of the seam mesh.
+constexpr const char* Seam_mesh_face_descriptor = "This class represents a face of the seam mesh.
 
 Is model of Descriptor
 
 Returns: boost::graph_traits< TM >::face_descriptor";
-constexpr const char* CGAL_Seam_mesh_mesh = "returns the underlying mesh.
+constexpr const char* Seam_mesh_mesh = "returns the underlying mesh.
 
 Returns: const TM &";
-constexpr const char* CGAL_Seam_mesh_Seam_mesh = "constructs a seam mesh for a triangle mesh and an edge and vertex property map
+constexpr const char* Seam_mesh_Seam_mesh = "constructs a seam mesh for a triangle mesh and an edge and vertex property map
 
 tm the underlying mesh sem the edge property map with value true for seam
 edges svm the vertex property map with value true for seam vertices the
@@ -580,15 +580,15 @@ sem : const SEM &
 svm : const SVM";
 
 // CGAL::Seam_mesh::edge_descriptor
-constexpr const char* CGAL_Seam_mesh_edge_descriptor__class__ = "This class represents an edge of the seam mesh.";
+constexpr const char* Seam_mesh_edge_descriptor__class__ = "This class represents an edge of the seam mesh.";
 
-constexpr const char* CGAL_Seam_mesh_edge_descriptor_edge_descriptor = "Default constructor";
+constexpr const char* Seam_mesh_edge_descriptor_edge_descriptor = "Default constructor";
 
 // CGAL::Seam_mesh::halfedge_descriptor
-constexpr const char* CGAL_Seam_mesh_halfedge_descriptor__class__ = "This class represents a halfedge of the seam mesh.";
+constexpr const char* Seam_mesh_halfedge_descriptor__class__ = "This class represents a halfedge of the seam mesh.";
 
-constexpr const char* CGAL_Seam_mesh_halfedge_descriptor_halfedge_descriptor = "Default constructor";
-constexpr const char* CGAL_Seam_mesh_halfedge_descriptor_halfedge_descriptor_1 = "Constructor from a halfedge of the underlying mesh.
+constexpr const char* Seam_mesh_halfedge_descriptor_halfedge_descriptor = "Default constructor";
+constexpr const char* Seam_mesh_halfedge_descriptor_halfedge_descriptor_1 = "Constructor from a halfedge of the underlying mesh.
 
 Parameters
 ----------
@@ -596,49 +596,49 @@ tmhd : TM_halfedge_descriptor
 seam : bool";
 
 // CGAL::Seam_mesh::vertex_descriptor
-constexpr const char* CGAL_Seam_mesh_vertex_descriptor__class__ = "This class represents a vertex of the seam mesh.";
+constexpr const char* Seam_mesh_vertex_descriptor__class__ = "This class represents a vertex of the seam mesh.";
 
-constexpr const char* CGAL_Seam_mesh_vertex_descriptor_vertex_descriptor = "Default constructor";
-constexpr const char* CGAL_Seam_mesh_vertex_descriptor_vertex_descriptor_1 = "Constructor from a seam mesh halfedge.
+constexpr const char* Seam_mesh_vertex_descriptor_vertex_descriptor = "Default constructor";
+constexpr const char* Seam_mesh_vertex_descriptor_vertex_descriptor_1 = "Constructor from a seam mesh halfedge.
 
 Parameters
 ----------
 h : const halfedge_descriptor &";
 
 // CGAL::Triangulation_face_base_with_id_2
-constexpr const char* CGAL_Triangulation_face_base_with_id_2__class__ = "The class Triangulation_face_base_with_id_2 is a model of the concept TriangulationFaceBase_2 , the base face of a 2D-triangulation.";
+constexpr const char* Triangulation_face_base_with_id_2__class__ = "The class Triangulation_face_base_with_id_2 is a model of the concept TriangulationFaceBase_2 , the base face of a 2D-triangulation.";
 
-constexpr const char* CGAL_Triangulation_face_base_with_id_2_id = "Returns the index.
+constexpr const char* Triangulation_face_base_with_id_2_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_face_base_with_id_2_id_1 = "Returns a reference to the index stored in the face.
+constexpr const char* Triangulation_face_base_with_id_2_id_1 = "Returns a reference to the index stored in the face.
 
 Returns: int &";
 
 // CGAL::Triangulation_vertex_base_with_id_2
-constexpr const char* CGAL_Triangulation_vertex_base_with_id_2__class__ = "The class Triangulation_vertex_base_with_id_2 is a model of the concept TriangulationVertexBase_2 , the base vertex of a 2D-triangulation.";
+constexpr const char* Triangulation_vertex_base_with_id_2__class__ = "The class Triangulation_vertex_base_with_id_2 is a model of the concept TriangulationVertexBase_2 , the base vertex of a 2D-triangulation.";
 
-constexpr const char* CGAL_Triangulation_vertex_base_with_id_2_id = "Returns the index.
+constexpr const char* Triangulation_vertex_base_with_id_2_id = "Returns the index.
 
 Returns: int";
-constexpr const char* CGAL_Triangulation_vertex_base_with_id_2_id_1 = "Returns a reference to the index stored in the vertex.
+constexpr const char* Triangulation_vertex_base_with_id_2_id_1 = "Returns a reference to the index stored in the vertex.
 
 Returns: int &";
 
 // CGAL::Vertex_around_face_circulator
-constexpr const char* CGAL_Vertex_around_face_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices incident to the same face or border.";
+constexpr const char* Vertex_around_face_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices incident to the same face or border.";
 
 
 // CGAL::Vertex_around_face_iterator
-constexpr const char* CGAL_Vertex_around_face_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices incident to the same face or border.";
+constexpr const char* Vertex_around_face_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices incident to the same face or border.";
 
 
 // CGAL::Vertex_around_target_circulator
-constexpr const char* CGAL_Vertex_around_target_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices adjacent to the same vertex.";
+constexpr const char* Vertex_around_target_circulator__class__ = "A bidirectional circulator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices adjacent to the same vertex.";
 
 
 // CGAL::Vertex_around_target_iterator
-constexpr const char* CGAL_Vertex_around_target_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices adjacent to the same vertex.";
+constexpr const char* Vertex_around_target_iterator__class__ = "A bidirectional iterator with value type boost::graph_traits<Graph>::vertex_descriptor over all vertices adjacent to the same vertex.";
 
 
 // EdgeListGraph
@@ -954,9 +954,9 @@ g : const VertexListGraph &
 Returns: boost::graph_traits< VertexListGraph >::vertices_size_type";
 
 // CGAL
-constexpr const char* CGAL__class__ = "CGAL Namespace.";
+constexpr const char* _class__ = "CGAL Namespace.";
 
-constexpr const char* CGAL_Dual_dual_1 = "constructs a Dual from a given primal .
+constexpr const char* Dual_dual_1 = "constructs a Dual from a given primal .
 
 Parameters
 ----------

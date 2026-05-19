@@ -8,10 +8,10 @@ namespace docstrings {
 namespace Point_set_processing_3 {
 
 // CGAL::Point_set_with_structure
-constexpr const char* CGAL_Point_set_with_structure__class__ = "A 3D point set with structure information based on a set of detected planes.";
+constexpr const char* Point_set_with_structure__class__ = "A 3D point set with structure information based on a set of detected planes.";
 
-constexpr const char* CGAL_Point_set_with_structure_Coherence_type = "Tag classifying the coherence of a triplet of points with respect to an inferred surface.";
-constexpr const char* CGAL_Point_set_with_structure_Point_set_with_structure = "Constructs a structured point set based on the input points and the associated shape detection object.
+constexpr const char* Point_set_with_structure_Coherence_type = "Tag classifying the coherence of a triplet of points with respect to an inferred surface.";
+constexpr const char* Point_set_with_structure_Point_set_with_structure = "Constructs a structured point set based on the input points and the associated shape detection object.
 
 PointRange is a model of ConstRange . The value type of its iterator is the
 key type of the named parameter point_map . PlaneRange is a model of
@@ -45,7 +45,7 @@ points : const PointRange &
 planes : const PlaneRange &
 epsilon : double
 np : const NamedParameters &";
-constexpr const char* CGAL_Point_set_with_structure_adjacency = "Returns all Plane_shape objects that are adjacent to the point with index i .
+constexpr const char* Point_set_with_structure_adjacency = "Returns all Plane_shape objects that are adjacent to the point with index i .
 
 Points not adjacent to any plane are free-form points, points adjacent to 1
 plane are planar points, points adjacent to 2 planes are edge points and
@@ -55,7 +55,7 @@ Parameters
 ----------
 i : std::size_t
 output : OutputIterator";
-constexpr const char* CGAL_Point_set_with_structure_facet_coherence = "Computes the coherence of a facet between the 3 points indexed by f with respect to the underlying structure.
+constexpr const char* Point_set_with_structure_facet_coherence = "Computes the coherence of a facet between the 3 points indexed by f with respect to the underlying structure.
 
 Parameters
 ----------
@@ -67,12 +67,12 @@ Returns: Coherence_type";
 
 
 // CGAL::pointmatcher::ICP_config
-constexpr const char* CGAL_pointmatcher_ICP_config__class__ = "The class ICP_config is designed to handle preparing and passing configurations to the registration methods CGAL::pointmatcher::compute_registration_transformation() and CGAL::pointmatcher::register_point_sets() .";
+constexpr const char* pointmatcher_ICP_config__class__ = "The class ICP_config is designed to handle preparing and passing configurations to the registration methods CGAL::pointmatcher::compute_registration_transformation() and CGAL::pointmatcher::register_point_sets() .";
 
-constexpr const char* CGAL_pointmatcher_ICP_config_name = "The name of the configuration component.
+constexpr const char* pointmatcher_ICP_config_name = "The name of the configuration component.
 
 Returns: std::string";
-constexpr const char* CGAL_pointmatcher_ICP_config_params = "The set of (parameter name, parameter value) pairs as a map.
+constexpr const char* pointmatcher_ICP_config_params = "The set of (parameter name, parameter value) pairs as a map.
 
 Returns: std::map< std::string, std::string >";
 

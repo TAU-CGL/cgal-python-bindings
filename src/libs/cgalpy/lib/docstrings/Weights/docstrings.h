@@ -200,15 +200,15 @@ w_begin : OutIterator
 Returns: OutIterator";
 
 // CGAL::Weights::Discrete_harmonic_weights_2
-constexpr const char* CGAL_Weights_Discrete_harmonic_weights_2__class__ = "2D discrete harmonic weights for polygons.";
+constexpr const char* Weights_Discrete_harmonic_weights_2__class__ = "2D discrete harmonic weights for polygons.";
 
-constexpr const char* CGAL_Weights_Discrete_harmonic_weights_2_FT = "Number type.
+constexpr const char* Weights_Discrete_harmonic_weights_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Weights_Discrete_harmonic_weights_2_Point_2 = "Point type.
+constexpr const char* Weights_Discrete_harmonic_weights_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Weights_Discrete_harmonic_weights_2_Discrete_harmonic_weights_2 = "initializes all internal data structures.
+constexpr const char* Weights_Discrete_harmonic_weights_2_Discrete_harmonic_weights_2 = "initializes all internal data structures.
 
 This class implements the behavior of discrete harmonic weights for 2D query
 points inside strictly convex polygons. polygon an instance of VertexRange
@@ -223,7 +223,7 @@ Parameters
 polygon : const VertexRange &
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Weights_Discrete_harmonic_weights_2_operator = "computes 2D discrete harmonic weights.
+constexpr const char* Weights_Discrete_harmonic_weights_2_operator = "computes 2D discrete harmonic weights.
 
 This function fills a destination range with 2D discrete harmonic weights
 computed at the query point with respect to the vertices of the input polygon.
@@ -241,15 +241,15 @@ w_begin : OutIterator
 Returns: OutIterator";
 
 // CGAL::Weights::Mean_value_weights_2
-constexpr const char* CGAL_Weights_Mean_value_weights_2__class__ = "2D mean value weights for polygons.";
+constexpr const char* Weights_Mean_value_weights_2__class__ = "2D mean value weights for polygons.";
 
-constexpr const char* CGAL_Weights_Mean_value_weights_2_FT = "Number type.
+constexpr const char* Weights_Mean_value_weights_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Weights_Mean_value_weights_2_Point_2 = "Point type.
+constexpr const char* Weights_Mean_value_weights_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Weights_Mean_value_weights_2_Mean_value_weights_2 = "initializes all internal data structures.
+constexpr const char* Weights_Mean_value_weights_2_Mean_value_weights_2 = "initializes all internal data structures.
 
 This class implements the behavior of mean value weights for 2D query points
 inside simple polygons. polygon an instance of VertexRange with the vertices
@@ -263,7 +263,7 @@ Parameters
 polygon : const VertexRange &
 traits : const GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Weights_Mean_value_weights_2_operator = "computes 2D mean value weights.
+constexpr const char* Weights_Mean_value_weights_2_operator = "computes 2D mean value weights.
 
 This function fills a destination range with 2D mean value weights computed at
 the query point with respect to the vertices of the input polygon. The number
@@ -281,15 +281,15 @@ w_begin : OutIterator
 Returns: OutIterator";
 
 // CGAL::Weights::Wachspress_weights_2
-constexpr const char* CGAL_Weights_Wachspress_weights_2__class__ = "2D Wachspress weights for polygons.";
+constexpr const char* Weights_Wachspress_weights_2__class__ = "2D Wachspress weights for polygons.";
 
-constexpr const char* CGAL_Weights_Wachspress_weights_2_FT = "Number type.
+constexpr const char* Weights_Wachspress_weights_2_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Weights_Wachspress_weights_2_Point_2 = "Point type.
+constexpr const char* Weights_Wachspress_weights_2_Point_2 = "Point type.
 
 Returns: GeomTraits::Point_2";
-constexpr const char* CGAL_Weights_Wachspress_weights_2_Wachspress_weights_2 = "initializes all internal data structures.
+constexpr const char* Weights_Wachspress_weights_2_Wachspress_weights_2 = "initializes all internal data structures.
 
 This class implements the behavior of Wachspress weights for 2D query points
 inside strictly convex polygons. polygon an instance of VertexRange with the
@@ -304,7 +304,7 @@ Parameters
 polygon : const VertexRange &
 traits : GeomTraits
 point_map : const PointMap";
-constexpr const char* CGAL_Weights_Wachspress_weights_2_operator = "computes 2D Wachspress weights.
+constexpr const char* Weights_Wachspress_weights_2_operator = "computes 2D Wachspress weights.
 
 This function fills a destination range with 2D Wachspress weights computed at
 the query point with respect to the vertices of the input polygon. The number

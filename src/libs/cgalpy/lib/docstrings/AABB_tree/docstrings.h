@@ -557,29 +557,29 @@ Parameters
 t : T ...";
 
 // CGAL::AABB_face_graph_triangle_primitive
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive__class__ = "Primitive type for a facet of a polyhedral surface.";
+constexpr const char* AABB_face_graph_triangle_primitive__class__ = "Primitive type for a facet of a polyhedral surface.";
 
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive_Point = "The point type.
+constexpr const char* AABB_face_graph_triangle_primitive_Point = "The point type.
 
 Returns: boost::property_traits< VertexPointPMap >::value_type";
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive_Datum = "Geometric data type.
+constexpr const char* AABB_face_graph_triangle_primitive_Datum = "Geometric data type.
 
 Returns: Kernel_traits< Point >::Kernel::Triangle_3";
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive_Id = "Id type:
+constexpr const char* AABB_face_graph_triangle_primitive_Id = "Id type:
 
 boost::graph_traits<FaceGraph>::face_descriptor if OneFaceGraphPerTree is
 CGAL::Tag_true std::pair<boost::graph_traits<FaceGraph>::face_descriptor,
 const FaceGraph*> if OneFaceGraphPerTree is CGAL::Tag_false
 
 Returns: unspecified_type";
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive_construct_shared_data = "If OneFaceGraphPerTree is CGAL::Tag_true, constructs a Shared_data object from a reference to the polyhedon graph .
+constexpr const char* AABB_face_graph_triangle_primitive_construct_shared_data = "If OneFaceGraphPerTree is CGAL::Tag_true, constructs a Shared_data object from a reference to the polyhedon graph .
 
 Parameters
 ----------
 graph : FaceGraph &
 
 Returns: unspecified_type";
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive_AABB_face_graph_triangle_primitive = "constructs a primitive.
+constexpr const char* AABB_face_graph_triangle_primitive_AABB_face_graph_triangle_primitive = "constructs a primitive.
 
 Iterator an input iterator with Id as value type. If VertexPointPMap is the
 default of the class, an additional constructor is available with vppm set to
@@ -590,7 +590,7 @@ Parameters
 it : Iterator
 graph : const FaceGraph &
 vppm : VertexPointPMap";
-constexpr const char* CGAL_AABB_face_graph_triangle_primitive_AABB_face_graph_triangle_primitive_1 = "constructs a primitive.
+constexpr const char* AABB_face_graph_triangle_primitive_AABB_face_graph_triangle_primitive_1 = "constructs a primitive.
 
 If VertexPointPMap is the default of the class, an additional constructor is
 available with vppm set to get(vertex_point, graph) .
@@ -602,29 +602,29 @@ graph : const FaceGraph &
 vppm : VertexPointPMap";
 
 // CGAL::AABB_halfedge_graph_segment_primitive
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive__class__ = "Primitive type for an edge of a polyhedral surface.";
+constexpr const char* AABB_halfedge_graph_segment_primitive__class__ = "Primitive type for an edge of a polyhedral surface.";
 
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive_Point = "The point type.
+constexpr const char* AABB_halfedge_graph_segment_primitive_Point = "The point type.
 
 Returns: boost::property_traits< boost::property_map< HalfedgeGraph, vertex_point_t >::const_type >::value_type";
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive_Datum = "Geometric data type.
+constexpr const char* AABB_halfedge_graph_segment_primitive_Datum = "Geometric data type.
 
 Returns: Kernel_traits< Point >::Kernel::Segment_3";
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive_Id = "Id type:
+constexpr const char* AABB_halfedge_graph_segment_primitive_Id = "Id type:
 
 boost::graph_traits<HalfedgeGraph>::edge_descriptor if OneHalfedgeGraphPerTree
 is Tag_true std::pair<boost::graph_traits<HalfedgeGraph>::edge_descriptor,
 const HalfedgeGraph*> if OneHalfedgeGraphPerTree is Tag_false
 
 Returns: unspecified_type";
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive_construct_shared_data = "If OneHalfedgeGraphPerTree is CGAL::Tag_true, constructs a Shared_data object from a reference to the halfedge graph.
+constexpr const char* AABB_halfedge_graph_segment_primitive_construct_shared_data = "If OneHalfedgeGraphPerTree is CGAL::Tag_true, constructs a Shared_data object from a reference to the halfedge graph.
 
 Parameters
 ----------
 graph : HalfedgeGraph &
 
 Returns: unspecified_type";
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive_AABB_halfedge_graph_segment_primitive = "constructs a primitive.
+constexpr const char* AABB_halfedge_graph_segment_primitive_AABB_halfedge_graph_segment_primitive = "constructs a primitive.
 
 Iterator is an input iterator with Id as value type. This example gives a way
 to call this constructor using the insert-by-range method of the class
@@ -637,7 +637,7 @@ Parameters
 it : Iterator
 graph : const HalfedgeGraph &
 vppm : VertexPointPMap";
-constexpr const char* CGAL_AABB_halfedge_graph_segment_primitive_AABB_halfedge_graph_segment_primitive_1 = "constructs a primitive.
+constexpr const char* AABB_halfedge_graph_segment_primitive_AABB_halfedge_graph_segment_primitive_1 = "constructs a primitive.
 
 If VertexPointPMap is the default of the class, an additional constructor is
 available with vppm set to boost::get(vertex_point, graph) .
@@ -649,9 +649,9 @@ graph : const HalfedgeGraph &
 vppm : VertexPointPMap";
 
 // CGAL::AABB_indexed_triangle_primitive_2
-constexpr const char* CGAL_AABB_indexed_triangle_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a range of three indices as value_type .";
+constexpr const char* AABB_indexed_triangle_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a range of three indices as value_type .";
 
-constexpr const char* CGAL_AABB_indexed_triangle_primitive_2_AABB_indexed_triangle_primitive_2 = "constructor from an iterator
+constexpr const char* AABB_indexed_triangle_primitive_2_AABB_indexed_triangle_primitive_2 = "constructor from an iterator
 
 Parameters
 ----------
@@ -659,35 +659,35 @@ it : IndexIterator
  : PointRange &";
 
 // CGAL::AABB_polyline_segment_primitive_2
-constexpr const char* CGAL_AABB_polyline_segment_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a 2D point as value_type .";
+constexpr const char* AABB_polyline_segment_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a 2D point as value_type .";
 
 
 // CGAL::AABB_primitive
-constexpr const char* CGAL_AABB_primitive__class__ = "Generic primitive type.";
+constexpr const char* AABB_primitive__class__ = "Generic primitive type.";
 
-constexpr const char* CGAL_AABB_primitive_Datum = "The datum type.
+constexpr const char* AABB_primitive_Datum = "The datum type.
 
 Returns: boost::property_traits< ObjectPropertyMap >::value_type";
-constexpr const char* CGAL_AABB_primitive_Point = "The point type.
+constexpr const char* AABB_primitive_Point = "The point type.
 
 Returns: boost::property_traits< PointPropertyMap >::value_type";
-constexpr const char* CGAL_AABB_primitive_Datum_reference = "The reference datum type.
+constexpr const char* AABB_primitive_Datum_reference = "The reference datum type.
 
 Returns: boost::property_traits< ObjectPropertyMap >::reference";
-constexpr const char* CGAL_AABB_primitive_Point_reference = "The reference point type.
+constexpr const char* AABB_primitive_Point_reference = "The reference point type.
 
 Returns: boost::property_traits< PointPropertyMap >::reference";
-constexpr const char* CGAL_AABB_primitive_Id = "Id type.
+constexpr const char* AABB_primitive_Id = "Id type.
 
 Returns: Id";
-constexpr const char* CGAL_AABB_primitive_AABB_primitive = "constructs a primitive and initializes the property maps.
+constexpr const char* AABB_primitive_AABB_primitive = "constructs a primitive and initializes the property maps.
 
 Parameters
 ----------
 id : Id
 o_pmap : ObjectPropertyMap
 p_pmap : PointPropertyMap";
-constexpr const char* CGAL_AABB_primitive_AABB_primitive_1 = "constructs a primitive from an iterator with Id as value type and initializes the property maps.
+constexpr const char* AABB_primitive_AABB_primitive_1 = "constructs a primitive from an iterator with Id as value type and initializes the property maps.
 
 Parameters
 ----------
@@ -697,90 +697,90 @@ p_pmap : PointPropertyMap";
 
 
 // CGAL::AABB_segment_primitive_2
-constexpr const char* CGAL_AABB_segment_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a 2D segment as value_type .";
+constexpr const char* AABB_segment_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a 2D segment as value_type .";
 
-constexpr const char* CGAL_AABB_segment_primitive_2_AABB_segment_primitive_2 = "constructor from an iterator
+constexpr const char* AABB_segment_primitive_2_AABB_segment_primitive_2 = "constructor from an iterator
 
 Parameters
 ----------
 it : Iterator";
 
 // CGAL::AABB_segment_primitive_3
-constexpr const char* CGAL_AABB_segment_primitive_3__class__ = "Primitive type that uses as identifier an iterator with a 3D segment as value_type .";
+constexpr const char* AABB_segment_primitive_3__class__ = "Primitive type that uses as identifier an iterator with a 3D segment as value_type .";
 
-constexpr const char* CGAL_AABB_segment_primitive_3_AABB_segment_primitive_3 = "constructor from an iterator
+constexpr const char* AABB_segment_primitive_3_AABB_segment_primitive_3 = "constructor from an iterator
 
 Parameters
 ----------
 it : Iterator";
 
 // CGAL::AABB_traits_2
-constexpr const char* CGAL_AABB_traits_2__class__ = "This traits class handles any type of 2D geometric primitives provided that the proper intersection tests and constructions are implemented.";
+constexpr const char* AABB_traits_2__class__ = "This traits class handles any type of 2D geometric primitives provided that the proper intersection tests and constructions are implemented.";
 
 // CGAL::AABB_traits_2::Do_intersect
-constexpr const char* CGAL_AABB_traits_2_Do_intersect__class__ = "Function object using GeomTraits::Do_intersect .";
+constexpr const char* AABB_traits_2_Do_intersect__class__ = "Function object using GeomTraits::Do_intersect .";
 
 // CGAL::AABB_traits_2::Intersection_and_primitive_id
-constexpr const char* CGAL_AABB_traits_2_Intersection_and_primitive_id__class__ = "Intersection_and_primitive_id <Query>::Type::first_type is found according to the result type of GeomTraits::Intersect_2::operator() .";
+constexpr const char* AABB_traits_2_Intersection_and_primitive_id__class__ = "Intersection_and_primitive_id <Query>::Type::first_type is found according to the result type of GeomTraits::Intersect_2::operator() .";
 
 // CGAL::AABB_traits_3
-constexpr const char* CGAL_AABB_traits_3__class__ = "This traits class handles any type of 3D geometric primitives provided that the proper intersection tests and constructions are implemented.";
+constexpr const char* AABB_traits_3__class__ = "This traits class handles any type of 3D geometric primitives provided that the proper intersection tests and constructions are implemented.";
 
 // CGAL::AABB_traits_3::Do_intersect
-constexpr const char* CGAL_AABB_traits_3_Do_intersect__class__ = "Function object using GeomTraits::Do_intersect .";
+constexpr const char* AABB_traits_3_Do_intersect__class__ = "Function object using GeomTraits::Do_intersect .";
 
 // CGAL::AABB_traits_3::Intersection_and_primitive_id
-constexpr const char* CGAL_AABB_traits_3_Intersection_and_primitive_id__class__ = "Intersection_and_primitive_id <Query>::Type::first_type is found according to the result type of GeomTraits::Intersect_3::operator() .";
+constexpr const char* AABB_traits_3_Intersection_and_primitive_id__class__ = "Intersection_and_primitive_id <Query>::Type::first_type is found according to the result type of GeomTraits::Intersect_3::operator() .";
 
 // CGAL::AABB_tree
-constexpr const char* CGAL_AABB_tree__class__ = "Static data structure for efficient intersection and distance computations in 2D and 3D.";
+constexpr const char* AABB_tree__class__ = "Static data structure for efficient intersection and distance computations in 2D and 3D.";
 
-constexpr const char* CGAL_AABB_tree_FT = "Number type returned by the distance queries.
+constexpr const char* AABB_tree_FT = "Number type returned by the distance queries.
 
 Returns: AABBTraits::FT";
-constexpr const char* CGAL_AABB_tree_Point = "Type of point.
+constexpr const char* AABB_tree_Point = "Type of point.
 
 Returns: AABBTraits::Point";
-constexpr const char* CGAL_AABB_tree_Primitive = "Type of input primitive.
+constexpr const char* AABB_tree_Primitive = "Type of input primitive.
 
 Returns: AABBTraits::Primitive";
-constexpr const char* CGAL_AABB_tree_Primitive_id = "Identifier for a primitive in the tree.
+constexpr const char* AABB_tree_Primitive_id = "Identifier for a primitive in the tree.
 
 Returns: Primitive::Id";
-constexpr const char* CGAL_AABB_tree_size_type = "Unsigned integral size type.
+constexpr const char* AABB_tree_size_type = "Unsigned integral size type.
 
 Returns: Primitives::size_type";
-constexpr const char* CGAL_AABB_tree_Bounding_box = "Type of bounding box.
+constexpr const char* AABB_tree_Bounding_box = "Type of bounding box.
 
 Returns: AABBTraits::Bounding_box";
-constexpr const char* CGAL_AABB_tree_Point_and_primitive_id = "Point and Primitive Id type.
+constexpr const char* AABB_tree_Point_and_primitive_id = "Point and Primitive Id type.
 
 Returns: AABBTraits::Point_and_primitive_id";
-constexpr const char* CGAL_AABB_tree_Object_and_primitive_id = "
+constexpr const char* AABB_tree_Object_and_primitive_id = "
 Deprecated
 
 Returns: AABBTraits::Object_and_primitive_id";
-constexpr const char* CGAL_AABB_tree_Intersection_and_primitive_id = "An alias to AABBTraits::Intersection_and_primitive_id <Query> .
+constexpr const char* AABB_tree_Intersection_and_primitive_id = "An alias to AABBTraits::Intersection_and_primitive_id <Query> .
 
 Returns: AABBTraits::Intersection_and_primitive_id < Query >";
-constexpr const char* CGAL_AABB_tree_AABB_tree = "constructs an empty tree, and initializes the internally stored traits class using traits .
+constexpr const char* AABB_tree_AABB_tree = "constructs an empty tree, and initializes the internally stored traits class using traits .
 
 Parameters
 ----------
 traits : const AABBTraits &";
-constexpr const char* CGAL_AABB_tree_AABB_tree_1 = "move constructor
+constexpr const char* AABB_tree_AABB_tree_1 = "move constructor
 
 Parameters
 ----------
 tree : Self &&";
-constexpr const char* CGAL_AABB_tree_operator = "assignment operator
+constexpr const char* AABB_tree_operator = "assignment operator
 
 Parameters
 ----------
 tree : Self &&
 
 Returns: Self &";
-constexpr const char* CGAL_AABB_tree_AABB_tree_2 = "builds the data structure from a sequence of primitives.
+constexpr const char* AABB_tree_AABB_tree_2 = "builds the data structure from a sequence of primitives.
 
 first iterator over first primitive to insert beyond past-the-end iterator
 constructs an empty tree followed by a call to insert(first,last,t...) . The
@@ -791,7 +791,7 @@ Parameters
 first : InputIterator
 beyond : InputIterator
 ... : T &&";
-constexpr const char* CGAL_AABB_tree_build = "triggers the (re)construction of the internal tree structure.
+constexpr const char* AABB_tree_build = "triggers the (re)construction of the internal tree structure.
 
 The internal tree structure is automatically invalidated by the insertion of
 any primitives after one or more calls to insert() . This procedure is called
@@ -804,14 +804,14 @@ log(n))$ , where $n$ is the number of primitives of the tree.
 Parameters
 ----------
 ... : T &&";
-constexpr const char* CGAL_AABB_tree_rebuild = "is equivalent to calling clear() , insert(first,last,t...) ,
+constexpr const char* AABB_tree_rebuild = "is equivalent to calling clear() , insert(first,last,t...) ,
 
 Parameters
 ----------
 first : ConstPrimitiveIterator
 beyond : ConstPrimitiveIterator
 ... : T &&";
-constexpr const char* CGAL_AABB_tree_insert = "adds a sequence of primitives to the set of primitives of the AABB tree.
+constexpr const char* AABB_tree_insert = "adds a sequence of primitives to the set of primitives of the AABB tree.
 
 InputIterator is any iterator and the parameter pack T contains any types such
 that Primitive has a constructor with the following signature: Primitive
@@ -824,26 +824,26 @@ Parameters
 first : InputIterator
 beyond : InputIterator
 ... : T &&";
-constexpr const char* CGAL_AABB_tree_insert_1 = "adds a primitive to the set of primitives of the tree.
+constexpr const char* AABB_tree_insert_1 = "adds a primitive to the set of primitives of the tree.
 
 Parameters
 ----------
 p : const Primitive &";
-constexpr const char* CGAL_AABB_tree_AABB_tree_3 = "clears and destroys the tree.";
-constexpr const char* CGAL_AABB_tree_traits = "returns a const reference to the internally stored traits class.
+constexpr const char* AABB_tree_AABB_tree_3 = "clears and destroys the tree.";
+constexpr const char* AABB_tree_traits = "returns a const reference to the internally stored traits class.
 
 Returns: const AABBTraits &";
-constexpr const char* CGAL_AABB_tree_clear = "clears the tree and the search tree if it was constructed, and switches on the usage of the search tree to find the hint for the distance queries";
-constexpr const char* CGAL_AABB_tree_bbox = "returns the axis-aligned bounding box of the whole tree.
+constexpr const char* AABB_tree_clear = "clears the tree and the search tree if it was constructed, and switches on the usage of the search tree to find the hint for the distance queries";
+constexpr const char* AABB_tree_bbox = "returns the axis-aligned bounding box of the whole tree.
 
 Returns: const Bounding_box";
-constexpr const char* CGAL_AABB_tree_size = "returns the number of primitives in the tree.
+constexpr const char* AABB_tree_size = "returns the number of primitives in the tree.
 
 Returns: size_type";
-constexpr const char* CGAL_AABB_tree_empty = "returns true , iff the tree contains no primitive.
+constexpr const char* AABB_tree_empty = "returns true , iff the tree contains no primitive.
 
 Returns: bool";
-constexpr const char* CGAL_AABB_tree_do_intersect = "returns true , iff the query intersects at least one of the input primitives.
+constexpr const char* AABB_tree_do_intersect = "returns true , iff the query intersects at least one of the input primitives.
 
 Query must be a type for which Do_intersect operators are defined in the
 traits class AABBTraits .
@@ -853,7 +853,7 @@ Parameters
 query : const Query &
 
 Returns: bool";
-constexpr const char* CGAL_AABB_tree_number_of_intersected_primitives = "returns the number of primitives intersected by the query.
+constexpr const char* AABB_tree_number_of_intersected_primitives = "returns the number of primitives intersected by the query.
 
 Query must be a type for which Do_intersect operators are defined in the
 traits class AABBTraits .
@@ -863,7 +863,7 @@ Parameters
 query : const Query &
 
 Returns: size_type";
-constexpr const char* CGAL_AABB_tree_all_intersected_primitives = "puts in out the ids of all intersected primitives.
+constexpr const char* AABB_tree_all_intersected_primitives = "puts in out the ids of all intersected primitives.
 
 This function does not compute the intersection points and is hence faster
 than the function all_intersections() function below. Query must be a type for
@@ -875,7 +875,7 @@ query : const Query &
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_AABB_tree_any_intersected_primitive = "returns the id of the intersected primitive that is encountered first in the tree traversal, iff the query intersects at least one of the input primitives.
+constexpr const char* AABB_tree_any_intersected_primitive = "returns the id of the intersected primitive that is encountered first in the tree traversal, iff the query intersects at least one of the input primitives.
 
 No particular order is guaranteed over the tree traversal, such that, e.g, the
 primitive returned is not necessarily the closest from the source point of a
@@ -887,7 +887,7 @@ Parameters
 query : const Query &
 
 Returns: std::optional< Primitive_id >";
-constexpr const char* CGAL_AABB_tree_all_intersections = "puts in out all intersections, as objects of Intersection_and_primitive_id <Query>::Type , between the query and the input data to the iterator.
+constexpr const char* AABB_tree_all_intersections = "puts in out all intersections, as objects of Intersection_and_primitive_id <Query>::Type , between the query and the input data to the iterator.
 
 Query must be a type for which Do_intersect and Intersection operators are
 defined in the traits class AABBTraits .
@@ -898,7 +898,7 @@ query : const Query &
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_AABB_tree_any_intersection = "returns if any the intersection that is encountered first in the tree traversal.
+constexpr const char* AABB_tree_any_intersection = "returns if any the intersection that is encountered first in the tree traversal.
 
 No particular order is guaranteed over the tree traversal, e.g, the primitive
 returned is not necessarily the closest from the query. Query must be a type
@@ -910,7 +910,7 @@ Parameters
 query : const Query &
 
 Returns: std::optional< typename Intersection_and_primitive_id < Query >::Type >";
-constexpr const char* CGAL_AABB_tree_first_intersection = "returns the intersection and primitive id closest to the source point of the ray query.
+constexpr const char* AABB_tree_first_intersection = "returns the intersection and primitive id closest to the source point of the ray query.
 
 Ray must be the same as AABBTraits::Ray and do_intersect predicates and
 intersections for it must be defined. Skip a functor with an operator bool
@@ -928,7 +928,7 @@ query : const Ray &
 skip : const SkipFunctor &
 
 Returns: std::optional< typename Intersection_and_primitive_id < Ray >::Type >";
-constexpr const char* CGAL_AABB_tree_first_intersected_primitive = "returns the primitive id closest to the source point of the ray query.
+constexpr const char* AABB_tree_first_intersected_primitive = "returns the primitive id closest to the source point of the ray query.
 
 Ray must be the same as AABBTraits::Ray and do_intersect predicates and
 intersections for it must be defined. Skip a functor with an operator bool
@@ -942,7 +942,7 @@ query : const Ray &
 skip : const SkipFunctor &
 
 Returns: std::optional< Primitive_id >";
-constexpr const char* CGAL_AABB_tree_squared_distance = "returns the minimum squared distance between the query point and all input primitives.
+constexpr const char* AABB_tree_squared_distance = "returns the minimum squared distance between the query point and all input primitives.
 
 !empty()
 
@@ -951,7 +951,7 @@ Parameters
 query : const Point &
 
 Returns: FT";
-constexpr const char* CGAL_AABB_tree_closest_point = "returns the point in the union of all input primitives which is closest to the query.
+constexpr const char* AABB_tree_closest_point = "returns the point in the union of all input primitives which is closest to the query.
 
 In case there are several closest points, one arbitrarily chosen closest point
 is returned. !empty()
@@ -961,7 +961,7 @@ Parameters
 query : const Point &
 
 Returns: Point";
-constexpr const char* CGAL_AABB_tree_closest_point_and_primitive = "returns a Point_and_primitive_id which realizes the smallest distance between the query point and all input primitives.
+constexpr const char* AABB_tree_closest_point_and_primitive = "returns a Point_and_primitive_id which realizes the smallest distance between the query point and all input primitives.
 
 !empty()
 
@@ -970,11 +970,11 @@ Parameters
 query : const Point &
 
 Returns: Point_and_primitive_id";
-constexpr const char* CGAL_AABB_tree_accelerate_distance_queries = "constructs the internal search tree from a point set taken on the internal primitives returns true iff successful memory allocation
+constexpr const char* AABB_tree_accelerate_distance_queries = "constructs the internal search tree from a point set taken on the internal primitives returns true iff successful memory allocation
 
 Returns: bool";
-constexpr const char* CGAL_AABB_tree_do_not_accelerate_distance_queries = "turns off the usage of the internal search tree and clears it if it was already constructed.";
-constexpr const char* CGAL_AABB_tree_accelerate_distance_queries_1 = "constructs an internal KD-tree containing the specified point set, to be used as the set of potential hints for accelerating the distance queries.
+constexpr const char* AABB_tree_do_not_accelerate_distance_queries = "turns off the usage of the internal search tree and clears it if it was already constructed.";
+constexpr const char* AABB_tree_accelerate_distance_queries_1 = "constructs an internal KD-tree containing the specified point set, to be used as the set of potential hints for accelerating the distance queries.
 
 Note that the search tree built in this function will not be invalidated by
 the insertion of a new primitive, and an explicit call to
@@ -987,7 +987,7 @@ first : ConstPointIterator
 beyond : ConstPointIterator
 
 Returns: bool";
-constexpr const char* CGAL_AABB_tree_squared_distance_1 = "returns the minimum squared distance between the query point and all input primitives.
+constexpr const char* AABB_tree_squared_distance_1 = "returns the minimum squared distance between the query point and all input primitives.
 
 The internal KD-tree is not used. !empty()
 
@@ -997,7 +997,7 @@ query : const Point &
 hint : const Point &
 
 Returns: FT";
-constexpr const char* CGAL_AABB_tree_closest_point_1 = "returns the point in the union of all input primitives which is closest to the query.
+constexpr const char* AABB_tree_closest_point_1 = "returns the point in the union of all input primitives which is closest to the query.
 
 In case there are several closest points, one arbitrarily chosen closest point
 is returned. The internal KD-tree is not used. !empty()
@@ -1008,7 +1008,7 @@ query : const Point &
 hint : const Point &
 
 Returns: Point";
-constexpr const char* CGAL_AABB_tree_closest_point_and_primitive_1 = "returns a Point_and_primitive_id which realizes the smallest distance between the query point and all input primitives.
+constexpr const char* AABB_tree_closest_point_and_primitive_1 = "returns a Point_and_primitive_id which realizes the smallest distance between the query point and all input primitives.
 
 The internal KD-tree is not used. !empty()
 
@@ -1018,14 +1018,14 @@ query : const Point &
 hint : const Point_and_primitive_id &
 
 Returns: Point_and_primitive_id";
-constexpr const char* CGAL_AABB_tree_datum = "Returns the datum (geometric object) represented p .
+constexpr const char* AABB_tree_datum = "Returns the datum (geometric object) represented p .
 
 Parameters
 ----------
 p : Primitive &
 
 Returns: AABBTraits::Primitive::Datum_reference";
-constexpr const char* CGAL_AABB_tree_expand = "Builds the tree by recursive expansion.
+constexpr const char* AABB_tree_expand = "Builds the tree by recursive expansion.
 
 node the root node of the subtree to generate first the first primitive to
 insert beyond the last primitive to insert range the number of primitive of
@@ -1042,18 +1042,18 @@ compute_bbox : const ComputeBbox &
 split_primitives : const SplitPrimitives &";
 
 // CGAL::AABB_triangle_primitive_2
-constexpr const char* CGAL_AABB_triangle_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a 2D triangle as value_type .";
+constexpr const char* AABB_triangle_primitive_2__class__ = "Primitive type that uses as identifier an iterator with a 2D triangle as value_type .";
 
-constexpr const char* CGAL_AABB_triangle_primitive_2_AABB_triangle_primitive_2 = "constructor from an iterator
+constexpr const char* AABB_triangle_primitive_2_AABB_triangle_primitive_2 = "constructor from an iterator
 
 Parameters
 ----------
 it : Iterator";
 
 // CGAL::AABB_triangle_primitive_3
-constexpr const char* CGAL_AABB_triangle_primitive_3__class__ = "Primitive type that uses as identifier an iterator with a 3D triangle as value_type .";
+constexpr const char* AABB_triangle_primitive_3__class__ = "Primitive type that uses as identifier an iterator with a 3D triangle as value_type .";
 
-constexpr const char* CGAL_AABB_triangle_primitive_3_AABB_triangle_primitive_3 = "constructor from an iterator
+constexpr const char* AABB_triangle_primitive_3_AABB_triangle_primitive_3 = "constructor from an iterator
 
 Parameters
 ----------

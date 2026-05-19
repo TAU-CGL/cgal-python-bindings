@@ -17,21 +17,21 @@ Must be CGAL::Tag_true .
 Returns: CGAL::Tag_true";
 
 // CGAL::Boolean_tag
-constexpr const char* CGAL_Boolean_tag__class__ = "Depending on bool B the class Boolean_tag indicates that something is true or false respectively.";
+constexpr const char* Boolean_tag__class__ = "Depending on bool B the class Boolean_tag indicates that something is true or false respectively.";
 
 
 // CGAL::Cast_function_object
-constexpr const char* CGAL_Cast_function_object__class__ = "The class Cast_function_object applies a C-style type cast to its argument.";
+constexpr const char* Cast_function_object__class__ = "The class Cast_function_object applies a C-style type cast to its argument.";
 
-constexpr const char* CGAL_Cast_function_object_Cast_function_object = "default constructor.";
-constexpr const char* CGAL_Cast_function_object_operator = "returns (Result)x .
+constexpr const char* Cast_function_object_Cast_function_object = "default constructor.";
+constexpr const char* Cast_function_object_operator = "returns (Result)x .
 
 Parameters
 ----------
 x : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Cast_function_object_operator_1 = "returns (Result)x .
+constexpr const char* Cast_function_object_operator_1 = "returns (Result)x .
 
 Parameters
 ----------
@@ -40,39 +40,39 @@ x : const argument_type &
 Returns: const result_type &";
 
 // CGAL::CC_safe_handle
-constexpr const char* CGAL_CC_safe_handle__class__ = "The class CC_safe_handle is a helper class that stores an iterator on a Compact_container (or Concurrent_compact_container ) and is able to know if the pointee has been erased after the creation of the CC_safe_handle instance.";
+constexpr const char* CC_safe_handle__class__ = "The class CC_safe_handle is a helper class that stores an iterator on a Compact_container (or Concurrent_compact_container ) and is able to know if the pointee has been erased after the creation of the CC_safe_handle instance.";
 
-constexpr const char* CGAL_CC_safe_handle_CC_safe_handle = "Introduces a safe handle from a Compact_container iterator.
+constexpr const char* CC_safe_handle_CC_safe_handle = "Introduces a safe handle from a Compact_container iterator.
 
 Parameters
 ----------
 iterator : CC_iterator";
-constexpr const char* CGAL_CC_safe_handle_is_zombie = "Returns true if the pointee has been erased, i.e. if the iterator points to a freed object or to another object.
+constexpr const char* CC_safe_handle_is_zombie = "Returns true if the pointee has been erased, i.e. if the iterator points to a freed object or to another object.
 
 Returns: bool";
-constexpr const char* CGAL_CC_safe_handle_cc_iterator = "Returns the stored Compact_container iterator.
+constexpr const char* CC_safe_handle_cc_iterator = "Returns the stored Compact_container iterator.
 
 Returns: CC_iterator";
 
 // CGAL::Compact
-constexpr const char* CGAL_Compact__class__ = "Compact is a tag class.";
+constexpr const char* Compact__class__ = "Compact is a tag class.";
 
 // CGAL::Compact_container
-constexpr const char* CGAL_Compact_container__class__ = "An object of the class Compact_container is a container of objects of type T .";
+constexpr const char* Compact_container__class__ = "An object of the class Compact_container is a container of objects of type T .";
 
-constexpr const char* CGAL_Compact_container_Compact_container = "introduces an empty container cc , eventually specifying a particular allocator a as well.
+constexpr const char* Compact_container_Compact_container = "introduces an empty container cc , eventually specifying a particular allocator a as well.
 
 Parameters
 ----------
 a : const Allocator &";
-constexpr const char* CGAL_Compact_container_Compact_container_1 = "a container with copies from the range [ first,last ), eventually specifying a particular allocator.
+constexpr const char* Compact_container_Compact_container_1 = "a container with copies from the range [ first,last ), eventually specifying a particular allocator.
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator
 a : const Allocator &";
-constexpr const char* CGAL_Compact_container_Compact_container_2 = "copy constructor.
+constexpr const char* Compact_container_Compact_container_2 = "copy constructor.
 
 Each item in cc2 is copied. The allocator is copied. The iterator order is
 preserved.
@@ -80,7 +80,7 @@ preserved.
 Parameters
 ----------
 cc2 : const Compact_container< T, Allocator > &";
-constexpr const char* CGAL_Compact_container_operator = "assignment.
+constexpr const char* Compact_container_operator = "assignment.
 
 Each item in cc2 is copied. The allocator is copied. Each item in c is
 deleted. The iterator order is preserved.
@@ -90,14 +90,14 @@ Parameters
 cc2 : const Compact_container < T, Allocator > &
 
 Returns: Compact_container < T, Allocator > &";
-constexpr const char* CGAL_Compact_container_swap = "swaps the contents of cc and cc2 in constant time complexity.
+constexpr const char* Compact_container_swap = "swaps the contents of cc and cc2 in constant time complexity.
 
 No exception is thrown.
 
 Parameters
 ----------
 cc2 : Compact_container < T, Allocator > &";
-constexpr const char* CGAL_Compact_container_reserve = "if value is less than or equal to capacity() , this call has no effect.
+constexpr const char* Compact_container_reserve = "if value is less than or equal to capacity() , this call has no effect.
 
 Otherwise, it is a request for allocation of additional memory so that then
 capacity() is greater than or equal to value. size() is unchanged.
@@ -105,54 +105,54 @@ capacity() is greater than or equal to value. size() is unchanged.
 Parameters
 ----------
 value : size_type";
-constexpr const char* CGAL_Compact_container_begin = "returns a mutable iterator referring to the first element in cc .
+constexpr const char* Compact_container_begin = "returns a mutable iterator referring to the first element in cc .
 
 Returns: iterator";
-constexpr const char* CGAL_Compact_container_begin_1 = "returns a constant iterator referring to the first element in cc .
+constexpr const char* Compact_container_begin_1 = "returns a constant iterator referring to the first element in cc .
 
 Returns: const_iterator";
-constexpr const char* CGAL_Compact_container_end = "returns a mutable iterator which is the past-end-value of cc .
+constexpr const char* Compact_container_end = "returns a mutable iterator which is the past-end-value of cc .
 
 Returns: iterator";
-constexpr const char* CGAL_Compact_container_end_1 = "returns a constant iterator which is the past-end-value of cc .
+constexpr const char* Compact_container_end_1 = "returns a constant iterator which is the past-end-value of cc .
 
 Returns: const_iterator";
-constexpr const char* CGAL_Compact_container_iterator_to = "returns an iterator which points to value .
+constexpr const char* Compact_container_iterator_to = "returns an iterator which points to value .
 
 Parameters
 ----------
 value : reference
 
 Returns: iterator";
-constexpr const char* CGAL_Compact_container_iterator_to_1 = "returns an iterator which points to value .
+constexpr const char* Compact_container_iterator_to_1 = "returns an iterator which points to value .
 
 Parameters
 ----------
 value : const_reference
 
 Returns: const_iterator";
-constexpr const char* CGAL_Compact_container_empty = "returns true iff cc is empty.
+constexpr const char* Compact_container_empty = "returns true iff cc is empty.
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_size = "returns the number of items in cc .
+constexpr const char* Compact_container_size = "returns the number of items in cc .
 
 Returns: size_type";
-constexpr const char* CGAL_Compact_container_max_size = "returns the maximum possible size of the container cc .
+constexpr const char* Compact_container_max_size = "returns the maximum possible size of the container cc .
 
 This is the allocator's max_size value.
 
 Returns: size_type";
-constexpr const char* CGAL_Compact_container_capacity = "returns the total number of elements that cc can hold without requiring reallocation.
+constexpr const char* Compact_container_capacity = "returns the total number of elements that cc can hold without requiring reallocation.
 
 Returns: size_type";
-constexpr const char* CGAL_Compact_container_is_used = "returns true if the element pos is used (i.e., valid).
+constexpr const char* Compact_container_is_used = "returns true if the element pos is used (i.e., valid).
 
 Parameters
 ----------
 pos : const_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_is_used_1 = "returns true if the element at position i in the container is used (i.e., valid).
+constexpr const char* Compact_container_is_used_1 = "returns true if the element at position i in the container is used (i.e., valid).
 
 $ 0 \\leq $ i $ < $ capacity()
 
@@ -161,7 +161,7 @@ Parameters
 i : size_type
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_operator_1 = "returns the element at pos i in the container.
+constexpr const char* Compact_container_operator_1 = "returns the element at pos i in the container.
 
 is_used(i) == true and $ 0 \\leq $ i $ < $ capacity()
 
@@ -170,7 +170,7 @@ Parameters
 i : size_type
 
 Returns: const T &";
-constexpr const char* CGAL_Compact_container_operator_2 = "returns the element at pos i in the container.
+constexpr const char* Compact_container_operator_2 = "returns the element at pos i in the container.
 
 is_used(i) == true and $ 0 \\leq $ i $ < $ capacity()
 
@@ -179,43 +179,43 @@ Parameters
 i : size_type
 
 Returns: T &";
-constexpr const char* CGAL_Compact_container_get_allocator = "returns the allocator.
+constexpr const char* Compact_container_get_allocator = "returns the allocator.
 
 Returns: Allocator";
-constexpr const char* CGAL_Compact_container_s_iterator_to = "returns an iterator which points to value ;
+constexpr const char* Compact_container_s_iterator_to = "returns an iterator which points to value ;
 
 Parameters
 ----------
 value : reference
 
 Returns: iterator";
-constexpr const char* CGAL_Compact_container_s_iterator_to_1 = "returns an iterator which points to value ;
+constexpr const char* Compact_container_s_iterator_to_1 = "returns an iterator which points to value ;
 
 Parameters
 ----------
 value : const_reference
 
 Returns: const_iterator";
-constexpr const char* CGAL_Compact_container_insert = "inserts a copy of t in cc and returns the iterator pointing to it.
+constexpr const char* Compact_container_insert = "inserts a copy of t in cc and returns the iterator pointing to it.
 
 Parameters
 ----------
 t : const T &
 
 Returns: iterator";
-constexpr const char* CGAL_Compact_container_insert_1 = "inserts the range [ first, last ) in cc .
+constexpr const char* Compact_container_insert_1 = "inserts the range [ first, last ) in cc .
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Compact_container_assign = "erases all the elements of cc , then inserts the range [ first, last ) in cc .
+constexpr const char* Compact_container_assign = "erases all the elements of cc , then inserts the range [ first, last ) in cc .
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Compact_container_emplace = "constructs an object of type T with the constructor that takes t1 as argument, inserts it in cc , and returns the iterator pointing to it.
+constexpr const char* Compact_container_emplace = "constructs an object of type T with the constructor that takes t1 as argument, inserts it in cc , and returns the iterator pointing to it.
 
 Overloads of this member function are defined that take additional arguments,
 up to 9.
@@ -225,35 +225,35 @@ Parameters
 t1 : const T1 &
 
 Returns: iterator";
-constexpr const char* CGAL_Compact_container_erase = "removes the item pointed by pos from cc .
+constexpr const char* Compact_container_erase = "removes the item pointed by pos from cc .
 
 Parameters
 ----------
 pos : iterator";
-constexpr const char* CGAL_Compact_container_erase_1 = "removes the items from the range [ first, last ) from cc .
+constexpr const char* Compact_container_erase_1 = "removes the items from the range [ first, last ) from cc .
 
 Parameters
 ----------
 first : iterator
 last : iterator";
-constexpr const char* CGAL_Compact_container_clear = "all items in cc are deleted, and the memory is deallocated.
+constexpr const char* Compact_container_clear = "all items in cc are deleted, and the memory is deallocated.
 
 After this call, cc is in the same state as if just default constructed.";
-constexpr const char* CGAL_Compact_container_owns = "returns whether pos is in the range [cc.begin(), cc.end()] ( cc.end() included).
+constexpr const char* Compact_container_owns = "returns whether pos is in the range [cc.begin(), cc.end()] ( cc.end() included).
 
 Parameters
 ----------
 pos : const_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_owns_dereferenceable = "returns whether pos is in the range [cc.begin(), cc.end()) ( cc.end() excluded).
+constexpr const char* Compact_container_owns_dereferenceable = "returns whether pos is in the range [cc.begin(), cc.end()) ( cc.end() excluded).
 
 Parameters
 ----------
 pos : const_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_merge = "adds the items of cc2 to the end of cc and cc2 becomes empty.
+constexpr const char* Compact_container_merge = "adds the items of cc2 to the end of cc and cc2 becomes empty.
 
 The time complexity is $O(cc.capacity()-cc.size())$ . cc2 must not be the same
 as cc , and the allocators of cc and cc2 must be compatible:
@@ -262,49 +262,49 @@ cc.get_allocator() == cc2.get_allocator() .
 Parameters
 ----------
 cc : Compact_container < T, Allocator > &";
-constexpr const char* CGAL_Compact_container_operator_3 = "test for equality: Two containers are equal, iff they have the same size and if their corresponding elements are equal.
+constexpr const char* Compact_container_operator_3 = "test for equality: Two containers are equal, iff they have the same size and if their corresponding elements are equal.
 
 Parameters
 ----------
 cc : const Compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_operator_4 = "test for inequality: returns !(c == cc) .
+constexpr const char* Compact_container_operator_4 = "test for inequality: returns !(c == cc) .
 
 Parameters
 ----------
 cc : const Compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_operator_5 = "compares in lexicographical order.
+constexpr const char* Compact_container_operator_5 = "compares in lexicographical order.
 
 Parameters
 ----------
 cc2 : const Compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_operator_6 = "returns cc2 <cc .
+constexpr const char* Compact_container_operator_6 = "returns cc2 <cc .
 
 Parameters
 ----------
 cc2 : const Compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_operator_7 = "returns !(cc > cc2) .
+constexpr const char* Compact_container_operator_7 = "returns !(cc > cc2) .
 
 Parameters
 ----------
 cc2 : const Compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_operator_8 = "returns !(cc < cc2) .
+constexpr const char* Compact_container_operator_8 = "returns !(cc < cc2) .
 
 Parameters
 ----------
 cc2 : const Compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Compact_container_hash_value = "returns a hash value for the pointee of i .
+constexpr const char* Compact_container_hash_value = "returns a hash value for the pointee of i .
 
 Parameters
 ----------
@@ -313,21 +313,21 @@ i : const Compact_container < T, A > ::iterator
 Returns: std::size_t";
 
 // CGAL::Compact_container_base
-constexpr const char* CGAL_Compact_container_base__class__ = "The class Compact_container_base can be used as a base class for your own type T , so that T can be used directly within Compact_container <T, Allocator> .";
+constexpr const char* Compact_container_base__class__ = "The class Compact_container_base can be used as a base class for your own type T , so that T can be used directly within Compact_container <T, Allocator> .";
 
-constexpr const char* CGAL_Compact_container_base_for_compact_container = "Returns the pointer necessary for Compact_container_traits <T> .
+constexpr const char* Compact_container_base_for_compact_container = "Returns the pointer necessary for Compact_container_traits <T> .
 
 Returns: void *";
-constexpr const char* CGAL_Compact_container_base_for_compact_container_1 = "Sets the pointer necessary for Compact_container_traits <T> to p .
+constexpr const char* Compact_container_base_for_compact_container_1 = "Sets the pointer necessary for Compact_container_traits <T> to p .
 
 Parameters
 ----------
 p : void *";
 
 // CGAL::Compact_container_traits
-constexpr const char* CGAL_Compact_container_traits__class__ = "The traits class Compact_container_traits provides the way to access the internal pointer required for T to be used in a Compact_container <T, Allocator> .";
+constexpr const char* Compact_container_traits__class__ = "The traits class Compact_container_traits provides the way to access the internal pointer required for T to be used in a Compact_container <T, Allocator> .";
 
-constexpr const char* CGAL_Compact_container_traits_pointer = "Returns the pointer held by t .
+constexpr const char* Compact_container_traits_pointer = "Returns the pointer held by t .
 
 The template version defines this function as: return
 t.for_compact_container();
@@ -337,7 +337,7 @@ Parameters
 t : const T &
 
 Returns: void *";
-constexpr const char* CGAL_Compact_container_traits_set_pointer = "Sets the pointer held by t to p .
+constexpr const char* Compact_container_traits_set_pointer = "Sets the pointer held by t to p .
 
 The template version defines this function as: t.for_compact_container(p);
 
@@ -347,28 +347,28 @@ t : T &
 p : void *";
 
 // CGAL::Compare_to_less
-constexpr const char* CGAL_Compare_to_less__class__ = "The class Compare_to_less is used to convert a functor which returns a Comparison_result to a predicate (returning bool) : it will return true iff the return value of F is SMALLER .";
+constexpr const char* Compare_to_less__class__ = "The class Compare_to_less is used to convert a functor which returns a Comparison_result to a predicate (returning bool) : it will return true iff the return value of F is SMALLER .";
 
-constexpr const char* CGAL_Compare_to_less_Type = "type of the composed functor.
+constexpr const char* Compare_to_less_Type = "type of the composed functor.
 
 Returns: unspecified_type";
 
 // CGAL::Concurrent_compact_container
-constexpr const char* CGAL_Concurrent_compact_container__class__ = "An object of the class Concurrent_compact_container is a container of objects of type T , which allows to call insert and erase operations concurrently.";
+constexpr const char* Concurrent_compact_container__class__ = "An object of the class Concurrent_compact_container is a container of objects of type T , which allows to call insert and erase operations concurrently.";
 
-constexpr const char* CGAL_Concurrent_compact_container_Concurrent_compact_container = "introduces an empty container ccc , eventually specifying a particular allocator a as well.
+constexpr const char* Concurrent_compact_container_Concurrent_compact_container = "introduces an empty container ccc , eventually specifying a particular allocator a as well.
 
 Parameters
 ----------
 a : const Allocator &";
-constexpr const char* CGAL_Concurrent_compact_container_Concurrent_compact_container_1 = "a container with copies from the range [ first,last ), eventually specifying a particular allocator.
+constexpr const char* Concurrent_compact_container_Concurrent_compact_container_1 = "a container with copies from the range [ first,last ), eventually specifying a particular allocator.
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator
 a : const Allocator &";
-constexpr const char* CGAL_Concurrent_compact_container_Concurrent_compact_container_2 = "copy constructor.
+constexpr const char* Concurrent_compact_container_Concurrent_compact_container_2 = "copy constructor.
 
 Each item in ccc2 is copied. The allocator is copied. The iterator order is
 preserved.
@@ -376,7 +376,7 @@ preserved.
 Parameters
 ----------
 ccc2 : const Concurrent_compact_container &";
-constexpr const char* CGAL_Concurrent_compact_container_operator = "assignment.
+constexpr const char* Concurrent_compact_container_operator = "assignment.
 
 Each item in ccc2 is copied. The allocator is copied. Each item in ccc is
 deleted. The iterator order is preserved.
@@ -386,92 +386,92 @@ Parameters
 ccc2 : const Concurrent_compact_container &
 
 Returns: Concurrent_compact_container &";
-constexpr const char* CGAL_Concurrent_compact_container_swap = "swaps the contents of ccc and ccc2 in constant time complexity.
+constexpr const char* Concurrent_compact_container_swap = "swaps the contents of ccc and ccc2 in constant time complexity.
 
 No exception is thrown.
 
 Parameters
 ----------
 ccc2 : Self &";
-constexpr const char* CGAL_Concurrent_compact_container_is_used = "returns true if the element pos is used (i.e. valid).
+constexpr const char* Concurrent_compact_container_is_used = "returns true if the element pos is used (i.e. valid).
 
 Parameters
 ----------
 pos : const_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_begin = "returns a mutable iterator referring to the first element in ccc .
+constexpr const char* Concurrent_compact_container_begin = "returns a mutable iterator referring to the first element in ccc .
 
 Returns: iterator";
-constexpr const char* CGAL_Concurrent_compact_container_begin_1 = "returns a constant iterator referring to the first element in ccc .
+constexpr const char* Concurrent_compact_container_begin_1 = "returns a constant iterator referring to the first element in ccc .
 
 Returns: const_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_end = "returns a mutable iterator which is the past-end-value of ccc .
+constexpr const char* Concurrent_compact_container_end = "returns a mutable iterator which is the past-end-value of ccc .
 
 Returns: iterator";
-constexpr const char* CGAL_Concurrent_compact_container_end_1 = "returns a constant iterator which is the past-end-value of ccc .
+constexpr const char* Concurrent_compact_container_end_1 = "returns a constant iterator which is the past-end-value of ccc .
 
 Returns: const_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_rbegin = "returns a mutable reverse iterator referring to the reverse beginning in ccc .
+constexpr const char* Concurrent_compact_container_rbegin = "returns a mutable reverse iterator referring to the reverse beginning in ccc .
 
 Returns: reverse_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_rbegin_1 = "returns a constant reverse iterator referring to the reverse beginning in ccc .
+constexpr const char* Concurrent_compact_container_rbegin_1 = "returns a constant reverse iterator referring to the reverse beginning in ccc .
 
 Returns: const_reverse_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_rend = "returns a mutable reverse iterator which is the reverse past-end-value of ccc .
+constexpr const char* Concurrent_compact_container_rend = "returns a mutable reverse iterator which is the reverse past-end-value of ccc .
 
 Returns: reverse_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_rend_1 = "returns a constant reverse iterator which is the reverse past-end-value of ccc .
+constexpr const char* Concurrent_compact_container_rend_1 = "returns a constant reverse iterator which is the reverse past-end-value of ccc .
 
 Returns: const_reverse_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_iterator_to = "returns an iterator which points to value .
+constexpr const char* Concurrent_compact_container_iterator_to = "returns an iterator which points to value .
 
 Parameters
 ----------
 value : reference
 
 Returns: iterator";
-constexpr const char* CGAL_Concurrent_compact_container_iterator_to_1 = "returns a constant iterator which points to value .
+constexpr const char* Concurrent_compact_container_iterator_to_1 = "returns a constant iterator which points to value .
 
 Parameters
 ----------
 value : const_reference
 
 Returns: const_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_empty = "returns true iff ccc is empty.
+constexpr const char* Concurrent_compact_container_empty = "returns true iff ccc is empty.
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_size = "returns the number of items in ccc .
+constexpr const char* Concurrent_compact_container_size = "returns the number of items in ccc .
 
 Note: do not call this function while others are inserting/erasing elements
 
 Returns: size_type";
-constexpr const char* CGAL_Concurrent_compact_container_max_size = "returns the maximum possible size of the container ccc .
+constexpr const char* Concurrent_compact_container_max_size = "returns the maximum possible size of the container ccc .
 
 This is the allocator's max_size value
 
 Returns: size_type";
-constexpr const char* CGAL_Concurrent_compact_container_capacity = "returns the total number of elements that ccc can hold without requiring reallocation.
+constexpr const char* Concurrent_compact_container_capacity = "returns the total number of elements that ccc can hold without requiring reallocation.
 
 Returns: size_type";
-constexpr const char* CGAL_Concurrent_compact_container_get_allocator = "returns the allocator
+constexpr const char* Concurrent_compact_container_get_allocator = "returns the allocator
 
 Returns: Allocator";
-constexpr const char* CGAL_Concurrent_compact_container_s_iterator_to = "returns an iterator which points to value .
+constexpr const char* Concurrent_compact_container_s_iterator_to = "returns an iterator which points to value .
 
 Parameters
 ----------
 value : reference
 
 Returns: iterator";
-constexpr const char* CGAL_Concurrent_compact_container_s_iterator_to_1 = "returns a constant iterator which points to value .
+constexpr const char* Concurrent_compact_container_s_iterator_to_1 = "returns a constant iterator which points to value .
 
 Parameters
 ----------
 value : const_reference
 
 Returns: const_iterator";
-constexpr const char* CGAL_Concurrent_compact_container_emplace = "constructs an object of type T with the constructor that takes t1 as argument, inserts it in ccc , and returns the iterator pointing to it.
+constexpr const char* Concurrent_compact_container_emplace = "constructs an object of type T with the constructor that takes t1 as argument, inserts it in ccc , and returns the iterator pointing to it.
 
 Overloads of this member function are defined that take additional arguments,
 up to 9.
@@ -481,54 +481,54 @@ Parameters
 t1 : const T1 &
 
 Returns: iterator";
-constexpr const char* CGAL_Concurrent_compact_container_insert = "inserts a copy of t in ccc and returns the iterator pointing to it.
+constexpr const char* Concurrent_compact_container_insert = "inserts a copy of t in ccc and returns the iterator pointing to it.
 
 Parameters
 ----------
 t : const T &
 
 Returns: iterator";
-constexpr const char* CGAL_Concurrent_compact_container_insert_1 = "inserts the range [ first, last ) in ccc .
+constexpr const char* Concurrent_compact_container_insert_1 = "inserts the range [ first, last ) in ccc .
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Concurrent_compact_container_assign = "erases all the elements of ccc , then inserts the range [ first, last ) in ccc .
+constexpr const char* Concurrent_compact_container_assign = "erases all the elements of ccc , then inserts the range [ first, last ) in ccc .
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Concurrent_compact_container_erase = "removes the item pointed by pos from ccc .
+constexpr const char* Concurrent_compact_container_erase = "removes the item pointed by pos from ccc .
 
 Parameters
 ----------
 x : iterator";
-constexpr const char* CGAL_Concurrent_compact_container_erase_1 = "removes the items from the range [ first, last ) from ccc .
+constexpr const char* Concurrent_compact_container_erase_1 = "removes the items from the range [ first, last ) from ccc .
 
 Parameters
 ----------
 first : iterator
 last : iterator";
-constexpr const char* CGAL_Concurrent_compact_container_clear = "all items in ccc are deleted, and the memory is deallocated.
+constexpr const char* Concurrent_compact_container_clear = "all items in ccc are deleted, and the memory is deallocated.
 
 After this call, ccc is in the same state as if just default constructed.";
-constexpr const char* CGAL_Concurrent_compact_container_owns = "returns whether pos is in the range [ccc.begin(), ccc.end()] ( ccc.end() included).
+constexpr const char* Concurrent_compact_container_owns = "returns whether pos is in the range [ccc.begin(), ccc.end()] ( ccc.end() included).
 
 Parameters
 ----------
 pos : const_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_owns_dereferencable = "returns whether pos is in the range [ccc.begin(), ccc.end()) ( ccc.end() excluded).
+constexpr const char* Concurrent_compact_container_owns_dereferencable = "returns whether pos is in the range [ccc.begin(), ccc.end()) ( ccc.end() excluded).
 
 Parameters
 ----------
 pos : const_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_merge = "adds the items of ccc2 to the end of ccc and ccc2 becomes empty.
+constexpr const char* Concurrent_compact_container_merge = "adds the items of ccc2 to the end of ccc and ccc2 becomes empty.
 
 The time complexity is $O(ccc.capacity()-ccc.size())$ . ccc2 must not be the
 same as ccc , and the allocators of ccc and ccc2 must be compatible:
@@ -537,42 +537,42 @@ ccc.get_allocator() == ccc2.get_allocator() .
 Parameters
 ----------
 ccc2 : Concurrent_compact_container < T, Allocator > &";
-constexpr const char* CGAL_Concurrent_compact_container_operator_1 = "test for equality: Two containers are equal, iff they have the same size and if their corresponding elements are equal.
+constexpr const char* Concurrent_compact_container_operator_1 = "test for equality: Two containers are equal, iff they have the same size and if their corresponding elements are equal.
 
 Parameters
 ----------
 ccc2 : const Concurrent_compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_operator_2 = "test for inequality: returns !(ccc == ccc2) .
+constexpr const char* Concurrent_compact_container_operator_2 = "test for inequality: returns !(ccc == ccc2) .
 
 Parameters
 ----------
 ccc2 : const Concurrent_compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_operator_3 = "compares in lexicographical order.
+constexpr const char* Concurrent_compact_container_operator_3 = "compares in lexicographical order.
 
 Parameters
 ----------
 ccc2 : const Concurrent_compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_operator_4 = "returns ccc2 < ccc .
+constexpr const char* Concurrent_compact_container_operator_4 = "returns ccc2 < ccc .
 
 Parameters
 ----------
 ccc2 : const Concurrent_compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_operator_5 = "returns !(ccc > ccc2) .
+constexpr const char* Concurrent_compact_container_operator_5 = "returns !(ccc > ccc2) .
 
 Parameters
 ----------
 ccc2 : const Concurrent_compact_container < T, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Concurrent_compact_container_operator_6 = "returns !(ccc < ccc2) .
+constexpr const char* Concurrent_compact_container_operator_6 = "returns !(ccc < ccc2) .
 
 Parameters
 ----------
@@ -581,9 +581,9 @@ ccc2 : const Concurrent_compact_container < T, Allocator > &
 Returns: bool";
 
 // CGAL::Concurrent_compact_container_traits
-constexpr const char* CGAL_Concurrent_compact_container_traits__class__ = "The traits class Concurrent_compact_container_traits provides the way to access the internal pointer required for T to be used in a Concurrent_compact_container <T, Allocator> .";
+constexpr const char* Concurrent_compact_container_traits__class__ = "The traits class Concurrent_compact_container_traits provides the way to access the internal pointer required for T to be used in a Concurrent_compact_container <T, Allocator> .";
 
-constexpr const char* CGAL_Concurrent_compact_container_traits_pointer = "Returns the pointer held by t .
+constexpr const char* Concurrent_compact_container_traits_pointer = "Returns the pointer held by t .
 
 The template version defines this function as: return
 t.for_compact_container();
@@ -593,7 +593,7 @@ Parameters
 t : const T &
 
 Returns: void *";
-constexpr const char* CGAL_Concurrent_compact_container_traits_set_pointer = "Sets the pointer held by t to p .
+constexpr const char* Concurrent_compact_container_traits_set_pointer = "Sets the pointer held by t to p .
 
 The template version defines this function as: t.for_compact_container(p);
 
@@ -603,9 +603,9 @@ t : T &
 p : void *";
 
 // CGAL::Const_oneset_iterator
-constexpr const char* CGAL_Const_oneset_iterator__class__ = "The class Const_oneset_iterator defines a RandomAccessIterator that always refers to a copy of a specific object of type T .";
+constexpr const char* Const_oneset_iterator__class__ = "The class Const_oneset_iterator defines a RandomAccessIterator that always refers to a copy of a specific object of type T .";
 
-constexpr const char* CGAL_Const_oneset_iterator_Const_oneset_iterator = "creates an iterator that always refers to some copy of t .
+constexpr const char* Const_oneset_iterator_Const_oneset_iterator = "creates an iterator that always refers to some copy of t .
 
 The copy is constructed by invoking T 's copy constructor and remains constant
 during the lifetime of the iterator.
@@ -615,18 +615,18 @@ Parameters
 t : T &";
 
 // CGAL::Construct_array
-constexpr const char* CGAL_Construct_array__class__ = "Functor that constructs std::array<T, N> where N is the number of arguments given to the function.";
+constexpr const char* Construct_array__class__ = "Functor that constructs std::array<T, N> where N is the number of arguments given to the function.";
 
 
 // CGAL::Counting_iterator
-constexpr const char* CGAL_Counting_iterator__class__ = "The iterator adaptor Counting_iterator adds a counter to the internal iterator of type Iterator and defines equality of two instances in terms of this counter.";
+constexpr const char* Counting_iterator__class__ = "The iterator adaptor Counting_iterator adds a counter to the internal iterator of type Iterator and defines equality of two instances in terms of this counter.";
 
-constexpr const char* CGAL_Counting_iterator_Counting_iterator = "initializes the internal counter to n and i has a singular value.
+constexpr const char* Counting_iterator_Counting_iterator = "initializes the internal counter to n and i has a singular value.
 
 Parameters
 ----------
 n : std::size_t";
-constexpr const char* CGAL_Counting_iterator_Counting_iterator_1 = "initializes the internal counter to n and i to j .
+constexpr const char* Counting_iterator_Counting_iterator_1 = "initializes the internal counter to n and i to j .
 
 Parameters
 ----------
@@ -634,34 +634,34 @@ j : Iterator
 n : std::size_t";
 
 // CGAL::cpp11::result_of
-constexpr const char* CGAL_cpp11_result_of__class__ = "Alias to the implementation of the std::result_of mechanism.";
+constexpr const char* cpp11_result_of__class__ = "Alias to the implementation of the std::result_of mechanism.";
 
-constexpr const char* CGAL_cpp11_result_of_type = "It is a type std::result_of<F>::type .
+constexpr const char* cpp11_result_of_type = "It is a type std::result_of<F>::type .
 
 Returns: unspecified_type";
 
 // CGAL::cpp20::identity
-constexpr const char* CGAL_cpp20_identity__class__ = "Replacement for std::identity that is added in C++20.";
+constexpr const char* cpp20_identity__class__ = "Replacement for std::identity that is added in C++20.";
 
 
 // CGAL::cpp98::binary_function
-constexpr const char* CGAL_cpp98_binary_function__class__ = "Replacement for std::binary_function that is deprecated since C++11, and removed from C++17.";
+constexpr const char* cpp98_binary_function__class__ = "Replacement for std::binary_function that is deprecated since C++11, and removed from C++17.";
 
 
 // CGAL::cpp98::unary_function
-constexpr const char* CGAL_cpp98_unary_function__class__ = "Replacement for std::unary_function that is deprecated since C++11, and removed from C++17.";
+constexpr const char* cpp98_unary_function__class__ = "Replacement for std::unary_function that is deprecated since C++11, and removed from C++17.";
 
 
 // CGAL::Creator_1
-constexpr const char* CGAL_Creator_1__class__ = "The class Creator_1 defines types and operations for creating objects from one argument.";
+constexpr const char* Creator_1__class__ = "The class Creator_1 defines types and operations for creating objects from one argument.";
 
-constexpr const char* CGAL_Creator_1_argument_type = "type of argument.
+constexpr const char* Creator_1_argument_type = "type of argument.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_1_result_type = "type of object to create.
+constexpr const char* Creator_1_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_1_operator = "returns result_type(a) .
+constexpr const char* Creator_1_operator = "returns result_type(a) .
 
 Parameters
 ----------
@@ -670,18 +670,18 @@ a : argument_type
 Returns: result_type";
 
 // CGAL::Creator_2
-constexpr const char* CGAL_Creator_2__class__ = "The class Creator_2 defines types and operations for creating objects from two arguments.";
+constexpr const char* Creator_2__class__ = "The class Creator_2 defines types and operations for creating objects from two arguments.";
 
-constexpr const char* CGAL_Creator_2_argument1_type = "type of first argument.
+constexpr const char* Creator_2_argument1_type = "type of first argument.
 
 Returns: Arg1";
-constexpr const char* CGAL_Creator_2_argument2_type = "type of second argument.
+constexpr const char* Creator_2_argument2_type = "type of second argument.
 
 Returns: Arg2";
-constexpr const char* CGAL_Creator_2_result_type = "type of object to create.
+constexpr const char* Creator_2_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_2_operator = "returns result_type(a1, a2) .
+constexpr const char* Creator_2_operator = "returns result_type(a1, a2) .
 
 Parameters
 ----------
@@ -691,21 +691,21 @@ a2 : argument_type2
 Returns: result_type";
 
 // CGAL::Creator_3
-constexpr const char* CGAL_Creator_3__class__ = "The class Creator_3 defines types and operations for creating objects from three arguments.";
+constexpr const char* Creator_3__class__ = "The class Creator_3 defines types and operations for creating objects from three arguments.";
 
-constexpr const char* CGAL_Creator_3_argument1_type = "type of first argument.
+constexpr const char* Creator_3_argument1_type = "type of first argument.
 
 Returns: Arg1";
-constexpr const char* CGAL_Creator_3_argument2_type = "type of second argument.
+constexpr const char* Creator_3_argument2_type = "type of second argument.
 
 Returns: Arg2";
-constexpr const char* CGAL_Creator_3_argument3_type = "type of third argument.
+constexpr const char* Creator_3_argument3_type = "type of third argument.
 
 Returns: Arg3";
-constexpr const char* CGAL_Creator_3_result_type = "type of object to create.
+constexpr const char* Creator_3_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_3_operator = "returns result_type(a1, a2,
+constexpr const char* Creator_3_operator = "returns result_type(a1, a2,
 a3) .
 
 Parameters
@@ -717,24 +717,24 @@ a3 : argument_type3
 Returns: result_type";
 
 // CGAL::Creator_4
-constexpr const char* CGAL_Creator_4__class__ = "The class Creator_4 defines types and operations for creating objects from four arguments.";
+constexpr const char* Creator_4__class__ = "The class Creator_4 defines types and operations for creating objects from four arguments.";
 
-constexpr const char* CGAL_Creator_4_argument1_type = "type of first argument.
+constexpr const char* Creator_4_argument1_type = "type of first argument.
 
 Returns: Arg1";
-constexpr const char* CGAL_Creator_4_argument2_type = "type of second argument.
+constexpr const char* Creator_4_argument2_type = "type of second argument.
 
 Returns: Arg2";
-constexpr const char* CGAL_Creator_4_argument3_type = "type of third argument.
+constexpr const char* Creator_4_argument3_type = "type of third argument.
 
 Returns: Arg3";
-constexpr const char* CGAL_Creator_4_argument4_type = "type of 4th argument.
+constexpr const char* Creator_4_argument4_type = "type of 4th argument.
 
 Returns: Arg4";
-constexpr const char* CGAL_Creator_4_result_type = "type of object to create.
+constexpr const char* Creator_4_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_4_operator = "returns result_type(a1, a2, a3, a4) .
+constexpr const char* Creator_4_operator = "returns result_type(a1, a2, a3, a4) .
 
 Parameters
 ----------
@@ -746,27 +746,27 @@ a4 : argument_type4
 Returns: result_type";
 
 // CGAL::Creator_5
-constexpr const char* CGAL_Creator_5__class__ = "The class Creator_5 defines types and operations for creating objects from five arguments.";
+constexpr const char* Creator_5__class__ = "The class Creator_5 defines types and operations for creating objects from five arguments.";
 
-constexpr const char* CGAL_Creator_5_argument1_type = "type of first argument.
+constexpr const char* Creator_5_argument1_type = "type of first argument.
 
 Returns: Arg1";
-constexpr const char* CGAL_Creator_5_argument2_type = "type of second argument.
+constexpr const char* Creator_5_argument2_type = "type of second argument.
 
 Returns: Arg2";
-constexpr const char* CGAL_Creator_5_argument3_type = "type of third argument.
+constexpr const char* Creator_5_argument3_type = "type of third argument.
 
 Returns: Arg3";
-constexpr const char* CGAL_Creator_5_argument4_type = "type of 4th argument.
+constexpr const char* Creator_5_argument4_type = "type of 4th argument.
 
 Returns: Arg4";
-constexpr const char* CGAL_Creator_5_argument5_type = "type of 5th argument.
+constexpr const char* Creator_5_argument5_type = "type of 5th argument.
 
 Returns: Arg5";
-constexpr const char* CGAL_Creator_5_result_type = "type of object to create.
+constexpr const char* Creator_5_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_5_operator = "returns result_type(a1, a2, a3, a4, a5) .
+constexpr const char* Creator_5_operator = "returns result_type(a1, a2, a3, a4, a5) .
 
 Parameters
 ----------
@@ -779,15 +779,15 @@ a5 : argument_type5
 Returns: result_type";
 
 // CGAL::Creator_uniform_2
-constexpr const char* CGAL_Creator_uniform_2__class__ = "The class Creator_uniform_2 defines types and operations for creating objects from two arguments of the same type.";
+constexpr const char* Creator_uniform_2__class__ = "The class Creator_uniform_2 defines types and operations for creating objects from two arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_2_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_2_argument_type = "type of arguments.
 
 Returns: Arge";
-constexpr const char* CGAL_Creator_uniform_2_result_type = "type of object to create.
+constexpr const char* Creator_uniform_2_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_2_operator = "returns result_type(a1, a2) .
+constexpr const char* Creator_uniform_2_operator = "returns result_type(a1, a2) .
 
 Parameters
 ----------
@@ -797,15 +797,15 @@ a2 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_3
-constexpr const char* CGAL_Creator_uniform_3__class__ = "The class Creator_uniform_3 defines types and operations for creating objects from three arguments of the same type.";
+constexpr const char* Creator_uniform_3__class__ = "The class Creator_uniform_3 defines types and operations for creating objects from three arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_3_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_3_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_3_result_type = "type of object to create.
+constexpr const char* Creator_uniform_3_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_3_operator = "returns result_type(a1, a2, a3) .
+constexpr const char* Creator_uniform_3_operator = "returns result_type(a1, a2, a3) .
 
 Parameters
 ----------
@@ -816,15 +816,15 @@ a3 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_4
-constexpr const char* CGAL_Creator_uniform_4__class__ = "The class Creator_uniform_4 defines types and operations for creating objects from four arguments of the same type.";
+constexpr const char* Creator_uniform_4__class__ = "The class Creator_uniform_4 defines types and operations for creating objects from four arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_4_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_4_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_4_result_type = "type of object to create.
+constexpr const char* Creator_uniform_4_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_4_operator = "returns result_type(a1, a2, a3, a4) .
+constexpr const char* Creator_uniform_4_operator = "returns result_type(a1, a2, a3, a4) .
 
 Parameters
 ----------
@@ -836,15 +836,15 @@ a4 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_5
-constexpr const char* CGAL_Creator_uniform_5__class__ = "The class Creator_uniform_5 defines types and operations for creating objects from five arguments of the same type.";
+constexpr const char* Creator_uniform_5__class__ = "The class Creator_uniform_5 defines types and operations for creating objects from five arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_5_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_5_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_5_result_type = "type of object to create.
+constexpr const char* Creator_uniform_5_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_5_operator = "returns result_type(a1, a2, a3, a4, a5) .
+constexpr const char* Creator_uniform_5_operator = "returns result_type(a1, a2, a3, a4, a5) .
 
 Parameters
 ----------
@@ -857,15 +857,15 @@ a5 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_6
-constexpr const char* CGAL_Creator_uniform_6__class__ = "The class Creator_uniform_6 defines types and operations for creating objects from six arguments of the same type.";
+constexpr const char* Creator_uniform_6__class__ = "The class Creator_uniform_6 defines types and operations for creating objects from six arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_6_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_6_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_6_result_type = "type of object to create.
+constexpr const char* Creator_uniform_6_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_6_operator = "returns result_type(a1, a2, a3, a4,
+constexpr const char* Creator_uniform_6_operator = "returns result_type(a1, a2, a3, a4,
 a5, a6) .
 
 Parameters
@@ -880,15 +880,15 @@ a6 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_7
-constexpr const char* CGAL_Creator_uniform_7__class__ = "The class Creator_uniform_7 defines types and operations for creating objects from seven arguments of the same type.";
+constexpr const char* Creator_uniform_7__class__ = "The class Creator_uniform_7 defines types and operations for creating objects from seven arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_7_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_7_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_7_result_type = "type of object to create.
+constexpr const char* Creator_uniform_7_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_7_operator = "returns result_type(a1, a2, a3, a4, a5, a6, a7) .
+constexpr const char* Creator_uniform_7_operator = "returns result_type(a1, a2, a3, a4, a5, a6, a7) .
 
 Parameters
 ----------
@@ -903,15 +903,15 @@ a7 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_8
-constexpr const char* CGAL_Creator_uniform_8__class__ = "The class Creator_uniform_8 defines types and operations for creating objects from eight arguments of the same type.";
+constexpr const char* Creator_uniform_8__class__ = "The class Creator_uniform_8 defines types and operations for creating objects from eight arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_8_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_8_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_8_result_type = "type of object to create.
+constexpr const char* Creator_uniform_8_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_8_operator = "returns result_type(a1, a2, a3, a4, a5, a6, a7,
+constexpr const char* Creator_uniform_8_operator = "returns result_type(a1, a2, a3, a4, a5, a6, a7,
 a8) .
 
 Parameters
@@ -928,15 +928,15 @@ a8 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_9
-constexpr const char* CGAL_Creator_uniform_9__class__ = "The class Creator_uniform_9 defines types and operations for creating objects from nine arguments of the same type.";
+constexpr const char* Creator_uniform_9__class__ = "The class Creator_uniform_9 defines types and operations for creating objects from nine arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_9_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_9_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_9_result_type = "type of object to create.
+constexpr const char* Creator_uniform_9_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_9_operator = "returns result_type(a1, a2, a3, a4,
+constexpr const char* Creator_uniform_9_operator = "returns result_type(a1, a2, a3, a4,
 a5, a6, a7, a8, a9) .
 
 Parameters
@@ -954,15 +954,15 @@ a9 : argument_type
 Returns: result_type";
 
 // CGAL::Creator_uniform_d
-constexpr const char* CGAL_Creator_uniform_d__class__ = "The class Creator_uniform_d defines types and operations for creating objects from two arguments of the same type.";
+constexpr const char* Creator_uniform_d__class__ = "The class Creator_uniform_d defines types and operations for creating objects from two arguments of the same type.";
 
-constexpr const char* CGAL_Creator_uniform_d_argument_type = "type of arguments.
+constexpr const char* Creator_uniform_d_argument_type = "type of arguments.
 
 Returns: Arg";
-constexpr const char* CGAL_Creator_uniform_d_result_type = "type of object to create.
+constexpr const char* Creator_uniform_d_result_type = "type of object to create.
 
 Returns: Result";
-constexpr const char* CGAL_Creator_uniform_d_operator = "returns result_type(d, a1, a2) .
+constexpr const char* Creator_uniform_d_operator = "returns result_type(d, a1, a2) .
 
 Parameters
 ----------
@@ -972,28 +972,28 @@ a2 : argument_type
 Returns: result_type";
 
 // CGAL::Default
-constexpr const char* CGAL_Default__class__ = "Default is a tag class.";
+constexpr const char* Default__class__ = "Default is a tag class.";
 
 // CGAL::Default::Get
-constexpr const char* CGAL_Default_Get__class__ = "A nested template providing a typedef type which equals Type if Parameter is Default , and Parameter otherwise.";
+constexpr const char* Default_Get__class__ = "A nested template providing a typedef type which equals Type if Parameter is Default , and Parameter otherwise.";
 
 
 // CGAL::Default::Lazy_get
-constexpr const char* CGAL_Default_Lazy_get__class__ = "A nested template providing a typedef type which equals MetaFct::type if Parameter is Default , and Parameter otherwise.";
+constexpr const char* Default_Lazy_get__class__ = "A nested template providing a typedef type which equals MetaFct::type if Parameter is Default , and Parameter otherwise.";
 
 
 // CGAL::Dereference
-constexpr const char* CGAL_Dereference__class__ = "The class Dereference dereferences a pointer ( operator* ).";
+constexpr const char* Dereference__class__ = "The class Dereference dereferences a pointer ( operator* ).";
 
-constexpr const char* CGAL_Dereference_Dereference = "default constructor.";
-constexpr const char* CGAL_Dereference_operator = "returns *x .
+constexpr const char* Dereference_Dereference = "default constructor.";
+constexpr const char* Dereference_operator = "returns *x .
 
 Parameters
 ----------
 x : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Dereference_operator_1 = "returns *x .
+constexpr const char* Dereference_operator_1 = "returns *x .
 
 Parameters
 ----------
@@ -1002,17 +1002,17 @@ x : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Dispatch_or_drop_output_iterator
-constexpr const char* CGAL_Dispatch_or_drop_output_iterator__class__ = "The class Dispatch_or_drop_output_iterator defines an OutputIterator that contains a tuple of output iterators, and dispatches among those based on the type of the value type which is put in it.";
+constexpr const char* Dispatch_or_drop_output_iterator__class__ = "The class Dispatch_or_drop_output_iterator defines an OutputIterator that contains a tuple of output iterators, and dispatches among those based on the type of the value type which is put in it.";
 
-constexpr const char* CGAL_Dispatch_or_drop_output_iterator_Dispatch_or_drop_output_iterator = "Constructor taking all the output iterators.
+constexpr const char* Dispatch_or_drop_output_iterator_Dispatch_or_drop_output_iterator = "Constructor taking all the output iterators.
 
 Parameters
 ----------
 o : I...";
-constexpr const char* CGAL_Dispatch_or_drop_output_iterator_get_iterator_tuple = "returns a reference to the tuple of output iterators.
+constexpr const char* Dispatch_or_drop_output_iterator_get_iterator_tuple = "returns a reference to the tuple of output iterators.
 
 Returns: const Iterator_tuple &";
-constexpr const char* CGAL_Dispatch_or_drop_output_iterator_dispatch_or_drop_output = "
+constexpr const char* Dispatch_or_drop_output_iterator_dispatch_or_drop_output = "
 a Dispatch_or_drop_output_iterator constructed from the arguments.
 
 Parameters
@@ -1022,17 +1022,17 @@ o : O...
 Returns: Dispatch_or_drop_output_iterator < tuple< V... >, tuple< O... > >";
 
 // CGAL::Dispatch_output_iterator
-constexpr const char* CGAL_Dispatch_output_iterator__class__ = "The class Dispatch_output_iterator defines an OutputIterator that contains a tuple of output iterators, and dispatches among those based on the type of the value type which is put in it.";
+constexpr const char* Dispatch_output_iterator__class__ = "The class Dispatch_output_iterator defines an OutputIterator that contains a tuple of output iterators, and dispatches among those based on the type of the value type which is put in it.";
 
-constexpr const char* CGAL_Dispatch_output_iterator_Dispatch_output_iterator = "Constructor taking all the output iterators.
+constexpr const char* Dispatch_output_iterator_Dispatch_output_iterator = "Constructor taking all the output iterators.
 
 Parameters
 ----------
 o : I...";
-constexpr const char* CGAL_Dispatch_output_iterator_get_iterator_tuple = "returns a reference to the tuple of output iterators.
+constexpr const char* Dispatch_output_iterator_get_iterator_tuple = "returns a reference to the tuple of output iterators.
 
 Returns: const Iterator_tuple &";
-constexpr const char* CGAL_Dispatch_output_iterator_dispatch_output = "
+constexpr const char* Dispatch_output_iterator_dispatch_output = "
 a Dispatch_output_iterator constructed from the arguments.
 
 Parameters
@@ -1042,21 +1042,21 @@ o : O...
 Returns: Dispatch_output_iterator < tuple< V... >, tuple< O... > >";
 
 // CGAL::Emptyset_iterator
-constexpr const char* CGAL_Emptyset_iterator__class__ = "The class Emptyset_iterator defines an OutputIterator that ignores everything written to it.";
+constexpr const char* Emptyset_iterator__class__ = "The class Emptyset_iterator defines an OutputIterator that ignores everything written to it.";
 
-constexpr const char* CGAL_Emptyset_iterator_Emptyset_iterator = "default constructor.";
+constexpr const char* Emptyset_iterator_Emptyset_iterator = "default constructor.";
 
 // CGAL::Exception_basic_ostream
-constexpr const char* CGAL_Exception_basic_ostream__class__ = "A stream-like object that throws an exception with its buffer content when destroyed.";
+constexpr const char* Exception_basic_ostream__class__ = "A stream-like object that throws an exception with its buffer content when destroyed.";
 
 
 // CGAL::Fast
-constexpr const char* CGAL_Fast__class__ = "Fast is a tag class.";
+constexpr const char* Fast__class__ = "Fast is a tag class.";
 
 // CGAL::Filter_iterator
-constexpr const char* CGAL_Filter_iterator__class__ = "The iterator adaptor Filter_iterator acts as a filter on a given range.";
+constexpr const char* Filter_iterator__class__ = "The iterator adaptor Filter_iterator acts as a filter on a given range.";
 
-constexpr const char* CGAL_Filter_iterator_Filter_iterator = "creates an iterator which filters values according to p .
+constexpr const char* Filter_iterator_Filter_iterator = "creates an iterator which filters values according to p .
 
 Initializes by taking the first valid iterator (according to p ), starting at
 c , and stopping at e if none is found.
@@ -1066,7 +1066,7 @@ Parameters
 e : Iterator
 p : Predicate
 c : Iterator";
-constexpr const char* CGAL_Filter_iterator_filter_iterator = "Constructs Filter_iterator <Iterator, Predicate>(e, p, c) .
+constexpr const char* Filter_iterator_filter_iterator = "Constructs Filter_iterator <Iterator, Predicate>(e, p, c) .
 
 Parameters
 ----------
@@ -1077,22 +1077,22 @@ c : Iterator
 Returns: Filter_iterator < Iterator, Predicate >";
 
 // CGAL::Fourtuple
-constexpr const char* CGAL_Fourtuple__class__ = "The Fourtuple class stores a homogeneous (same type) fourtuple of objects of type T .";
+constexpr const char* Fourtuple__class__ = "The Fourtuple class stores a homogeneous (same type) fourtuple of objects of type T .";
 
-constexpr const char* CGAL_Fourtuple_e0 = "first element
-
-Returns: T";
-constexpr const char* CGAL_Fourtuple_e1 = "second element
+constexpr const char* Fourtuple_e0 = "first element
 
 Returns: T";
-constexpr const char* CGAL_Fourtuple_e2 = "third element
+constexpr const char* Fourtuple_e1 = "second element
 
 Returns: T";
-constexpr const char* CGAL_Fourtuple_e3 = "fourth element
+constexpr const char* Fourtuple_e2 = "third element
 
 Returns: T";
-constexpr const char* CGAL_Fourtuple_Fourtuple = "introduces a Fourtuple using the default constructor of the elements.";
-constexpr const char* CGAL_Fourtuple_Fourtuple_1 = "constructs a Fourtuple such that e0 is constructed from x , e1 from y , e2 from z and e3 from t .
+constexpr const char* Fourtuple_e3 = "fourth element
+
+Returns: T";
+constexpr const char* Fourtuple_Fourtuple = "introduces a Fourtuple using the default constructor of the elements.";
+constexpr const char* Fourtuple_Fourtuple_1 = "constructs a Fourtuple such that e0 is constructed from x , e1 from y , e2 from z and e3 from t .
 
 Parameters
 ----------
@@ -1102,17 +1102,17 @@ z : T
 t : T";
 
 // CGAL::Get_address
-constexpr const char* CGAL_Get_address__class__ = "The class Get_address gets the address of an lvalue ( operator& ).";
+constexpr const char* Get_address__class__ = "The class Get_address gets the address of an lvalue ( operator& ).";
 
-constexpr const char* CGAL_Get_address_Get_address = "default constructor.";
-constexpr const char* CGAL_Get_address_operator = "returns &x .
+constexpr const char* Get_address_Get_address = "default constructor.";
+constexpr const char* Get_address_operator = "returns &x .
 
 Parameters
 ----------
 x : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Get_address_operator_1 = "returns &x .
+constexpr const char* Get_address_operator_1 = "returns &x .
 
 Parameters
 ----------
@@ -1121,17 +1121,17 @@ x : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Identity
-constexpr const char* CGAL_Identity__class__ = "The class Identity represents the identity function on Value .";
+constexpr const char* Identity__class__ = "The class Identity represents the identity function on Value .";
 
-constexpr const char* CGAL_Identity_Identity = "default constructor.";
-constexpr const char* CGAL_Identity_operator = "returns x .
+constexpr const char* Identity_Identity = "default constructor.";
+constexpr const char* Identity_operator = "returns x .
 
 Parameters
 ----------
 x : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Identity_operator_1 = "returns x .
+constexpr const char* Identity_operator_1 = "returns x .
 
 Parameters
 ----------
@@ -1140,63 +1140,63 @@ x : const argument_type &
 Returns: const result_type &";
 
 // CGAL::In_place_list
-constexpr const char* CGAL_In_place_list__class__ = "An object of the class In_place_list represents a sequence of items of type T that supports bidirectional iterators and allows constant time insert and erase operations anywhere within the sequence.";
+constexpr const char* In_place_list__class__ = "An object of the class In_place_list represents a sequence of items of type T that supports bidirectional iterators and allows constant time insert and erase operations anywhere within the sequence.";
 
-constexpr const char* CGAL_In_place_list_operator = "test for equality: Two lists are equal, iff they have the same size and if their corresponding elements are equal.
-
-Parameters
-----------
-ipl2 : const In_place_list < T, bool > &
-
-Returns: bool";
-constexpr const char* CGAL_In_place_list_operator_1 = "compares in lexicographical order.
+constexpr const char* In_place_list_operator = "test for equality: Two lists are equal, iff they have the same size and if their corresponding elements are equal.
 
 Parameters
 ----------
 ipl2 : const In_place_list < T, bool > &
 
 Returns: bool";
-constexpr const char* CGAL_In_place_list_begin = "returns a mutable iterator referring to the first element in ipl .
+constexpr const char* In_place_list_operator_1 = "compares in lexicographical order.
 
-Returns: iterator";
-constexpr const char* CGAL_In_place_list_begin_1 = "returns a constant iterator referring to the first element in ipl .
-
-Returns: const_iterator";
-constexpr const char* CGAL_In_place_list_end = "returns a mutable iterator which is the past-end-value of ipl .
-
-Returns: iterator";
-constexpr const char* CGAL_In_place_list_end_1 = "returns a constant iterator which is the past-end-value of ipl .
-
-Returns: const_iterator";
-constexpr const char* CGAL_In_place_list_empty = "returns true if ipl is empty.
+Parameters
+----------
+ipl2 : const In_place_list < T, bool > &
 
 Returns: bool";
-constexpr const char* CGAL_In_place_list_size = "returns the number of items in list ipl .
+constexpr const char* In_place_list_begin = "returns a mutable iterator referring to the first element in ipl .
+
+Returns: iterator";
+constexpr const char* In_place_list_begin_1 = "returns a constant iterator referring to the first element in ipl .
+
+Returns: const_iterator";
+constexpr const char* In_place_list_end = "returns a mutable iterator which is the past-end-value of ipl .
+
+Returns: iterator";
+constexpr const char* In_place_list_end_1 = "returns a constant iterator which is the past-end-value of ipl .
+
+Returns: const_iterator";
+constexpr const char* In_place_list_empty = "returns true if ipl is empty.
+
+Returns: bool";
+constexpr const char* In_place_list_size = "returns the number of items in list ipl .
 
 Returns: size_type";
-constexpr const char* CGAL_In_place_list_max_size = "returns the maximum possible size of the list l .
+constexpr const char* In_place_list_max_size = "returns the maximum possible size of the list l .
 
 Returns: size_type";
-constexpr const char* CGAL_In_place_list_front = "returns the first item in list ipl .
+constexpr const char* In_place_list_front = "returns the first item in list ipl .
 
 Returns: T &";
-constexpr const char* CGAL_In_place_list_back = "returns the last item in list ipl .
+constexpr const char* In_place_list_back = "returns the last item in list ipl .
 
 Returns: T &";
-constexpr const char* CGAL_In_place_list_get_allocator = "returns the allocator.
+constexpr const char* In_place_list_get_allocator = "returns the allocator.
 
 Returns: allocator_type";
-constexpr const char* CGAL_In_place_list_push_front = "inserts an item in front of list ipl .
+constexpr const char* In_place_list_push_front = "inserts an item in front of list ipl .
 
 Parameters
 ----------
  : T &";
-constexpr const char* CGAL_In_place_list_push_back = "inserts an item at the back of list ipl .
+constexpr const char* In_place_list_push_back = "inserts an item at the back of list ipl .
 
 Parameters
 ----------
  : T &";
-constexpr const char* CGAL_In_place_list_insert = "inserts t in front of pos .
+constexpr const char* In_place_list_insert = "inserts t in front of pos .
 
 The return value points to the inserted item.
 
@@ -1206,7 +1206,7 @@ pos : iterator
 t : T &
 
 Returns: iterator";
-constexpr const char* CGAL_In_place_list_insert_1 = "inserts t in front of pos .
+constexpr const char* In_place_list_insert_1 = "inserts t in front of pos .
 
 The return value points to the inserted item.
 
@@ -1216,53 +1216,53 @@ pos : T *
 t : T &
 
 Returns: iterator";
-constexpr const char* CGAL_In_place_list_insert_2 = "inserts $ n$ copies of t in front of pos .
+constexpr const char* In_place_list_insert_2 = "inserts $ n$ copies of t in front of pos .
 
 Parameters
 ----------
 pos : iterator
 n : size_type
 t : const T &";
-constexpr const char* CGAL_In_place_list_insert_3 = "inserts $ n$ copies of t in front of pos .
+constexpr const char* In_place_list_insert_3 = "inserts $ n$ copies of t in front of pos .
 
 Parameters
 ----------
 pos : T *
 n : size_type
 t : const T &";
-constexpr const char* CGAL_In_place_list_insert_4 = "inserts the range [ first, last ) in front of iterator pos .
+constexpr const char* In_place_list_insert_4 = "inserts the range [ first, last ) in front of iterator pos .
 
 Parameters
 ----------
 pos : iterator
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_In_place_list_insert_5 = "inserts the range [ first, last ) in front of iterator pos .
+constexpr const char* In_place_list_insert_5 = "inserts the range [ first, last ) in front of iterator pos .
 
 Parameters
 ----------
 pos : T *
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_In_place_list_pop_front = "removes the first item from list ipl .";
-constexpr const char* CGAL_In_place_list_pop_back = "removes the last item from list ipl .";
-constexpr const char* CGAL_In_place_list_erase = "removes the item from list ipl , where pos refers to.
+constexpr const char* In_place_list_pop_front = "removes the first item from list ipl .";
+constexpr const char* In_place_list_pop_back = "removes the last item from list ipl .";
+constexpr const char* In_place_list_erase = "removes the item from list ipl , where pos refers to.
 
 Parameters
 ----------
 pos : iterator";
-constexpr const char* CGAL_In_place_list_erase_1 = "removes the item from list ipl , where pos refers to.
+constexpr const char* In_place_list_erase_1 = "removes the item from list ipl , where pos refers to.
 
 Parameters
 ----------
 pos : T *";
-constexpr const char* CGAL_In_place_list_erase_2 = "removes the items in the range [ first, last ) from ipl .
+constexpr const char* In_place_list_erase_2 = "removes the items in the range [ first, last ) from ipl .
 
 Parameters
 ----------
 first : T *
 last : T *";
-constexpr const char* CGAL_In_place_list_splice = "inserts the list ipl2 before position pos and ipl2 becomes empty.
+constexpr const char* In_place_list_splice = "inserts the list ipl2 before position pos and ipl2 becomes empty.
 
 It takes constant time. (& ipl) != (& ipl2) .
 
@@ -1270,7 +1270,7 @@ Parameters
 ----------
 pos : T *
 ipl2 : In_place_list < T, bool > &";
-constexpr const char* CGAL_In_place_list_splice_1 = "inserts the list ipl2 before position pos and ipl2 becomes empty.
+constexpr const char* In_place_list_splice_1 = "inserts the list ipl2 before position pos and ipl2 becomes empty.
 
 It takes constant time. (& ipl) != (& ipl2) .
 
@@ -1279,7 +1279,7 @@ Parameters
 pos : iterator
 ipl2 : In_place_list < T, bool > &
 i : iterator";
-constexpr const char* CGAL_In_place_list_splice_2 = "inserts an element pointed to by i from list ipl2 before position pos and removes the element from ipl .
+constexpr const char* In_place_list_splice_2 = "inserts an element pointed to by i from list ipl2 before position pos and removes the element from ipl .
 
 It takes constant time. i is a valid dereferenceable iterator of ipl2 . The
 result is unchanged if pos == i or pos == ++i .
@@ -1289,7 +1289,7 @@ Parameters
 pos : T *
 ipl2 : In_place_list < T, bool > &
 i : T *";
-constexpr const char* CGAL_In_place_list_splice_3 = "inserts an element pointed to by i from list ipl2 before position pos and removes the element from ipl .
+constexpr const char* In_place_list_splice_3 = "inserts an element pointed to by i from list ipl2 before position pos and removes the element from ipl .
 
 It takes constant time. i is a valid dereferenceable iterator of ipl2 . The
 result is unchanged if pos == i or pos == ++i .
@@ -1300,7 +1300,7 @@ pos : iterator
 x : In_place_list < T, bool > &
 first : iterator
 last : iterator";
-constexpr const char* CGAL_In_place_list_splice_4 = "inserts elements in the range [ first, last ) before position pos and removes the elements from $ x$ .
+constexpr const char* In_place_list_splice_4 = "inserts elements in the range [ first, last ) before position pos and removes the elements from $ x$ .
 
 It takes constant time if &x == &``l ; otherwise, it takes linear time. [
 first, last ) is a valid range in $ x$ . pos is not in the range [ first, last
@@ -1312,17 +1312,17 @@ pos : T *
 x : In_place_list < T, bool > &
 first : T *
 last : T *";
-constexpr const char* CGAL_In_place_list_remove = "erases all elements $ e$ in the list ipl for which e == value .
+constexpr const char* In_place_list_remove = "erases all elements $ e$ in the list ipl for which e == value .
 
 It is stable. a suitable operator== for the type T .
 
 Parameters
 ----------
 value : const T &";
-constexpr const char* CGAL_In_place_list_unique = "erases all but the first element from every consecutive group of equal elements in the list ipl .
+constexpr const char* In_place_list_unique = "erases all but the first element from every consecutive group of equal elements in the list ipl .
 
 a suitable operator== for the type T .";
-constexpr const char* CGAL_In_place_list_merge = "merges the list ipl2 into the list ipl and ipl2 becomes empty.
+constexpr const char* In_place_list_merge = "merges the list ipl2 into the list ipl and ipl2 becomes empty.
 
 It is stable. Both lists are sorted in increasing order by means of a suitable
 operator< for the type T .
@@ -1330,37 +1330,37 @@ operator< for the type T .
 Parameters
 ----------
 ipl2 : In_place_list < T, bool > &";
-constexpr const char* CGAL_In_place_list_reverse = "reverses the order of the elements in ipl in linear time.";
-constexpr const char* CGAL_In_place_list_sort = "sorts the list ipl according to the operator< in time $O(n \\log n)$ where n = size() .
+constexpr const char* In_place_list_reverse = "reverses the order of the elements in ipl in linear time.";
+constexpr const char* In_place_list_sort = "sorts the list ipl according to the operator< in time $O(n \\log n)$ where n = size() .
 
 It is stable. a suitable operator< for the type T .";
-constexpr const char* CGAL_In_place_list_In_place_list = "introduces an empty list ipl .";
-constexpr const char* CGAL_In_place_list_In_place_list_1 = "copy constructor.
+constexpr const char* In_place_list_In_place_list = "introduces an empty list ipl .";
+constexpr const char* In_place_list_In_place_list_1 = "copy constructor.
 
 Each item in l1 is copied.
 
 Parameters
 ----------
 l1 : const list< T > &";
-constexpr const char* CGAL_In_place_list_In_place_list_2 = "introduces a list ipl with n items, all initialized with copies of t .
+constexpr const char* In_place_list_In_place_list_2 = "introduces a list ipl with n items, all initialized with copies of t .
 
 Parameters
 ----------
 n : size_type
 t : const T &";
-constexpr const char* CGAL_In_place_list_In_place_list_3 = "introduces a list ipl with copies from the range [ first,last ).
+constexpr const char* In_place_list_In_place_list_3 = "introduces a list ipl with copies from the range [ first,last ).
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_In_place_list_In_place_list_4 = "introduces a list ipl with copies from the range [ first,last ).
+constexpr const char* In_place_list_In_place_list_4 = "introduces a list ipl with copies from the range [ first,last ).
 
 Parameters
 ----------
 first : const T *
 last : const T *";
-constexpr const char* CGAL_In_place_list_operator_2 = "assignment.
+constexpr const char* In_place_list_operator_2 = "assignment.
 
 Each item in ipl2 is copied. Each item in ipl is deleted if the bool parameter
 is true .
@@ -1370,20 +1370,20 @@ Parameters
 ipl2 : const In_place_list < T, bool > &
 
 Returns: In_place_list < T, bool > &";
-constexpr const char* CGAL_In_place_list_swap = "swaps the contents of ipl with ipl2 .
+constexpr const char* In_place_list_swap = "swaps the contents of ipl with ipl2 .
 
 Parameters
 ----------
 ipl2 : const In_place_list < T, bool > &";
-constexpr const char* CGAL_In_place_list_destroy = "all items in ipl are deleted regardless of the bool parameter.";
-constexpr const char* CGAL_In_place_list_hash_value = "returns a hash value for the pointee of i .
+constexpr const char* In_place_list_destroy = "all items in ipl are deleted regardless of the bool parameter.";
+constexpr const char* In_place_list_hash_value = "returns a hash value for the pointee of i .
 
 Parameters
 ----------
 i : const In_place_list < T, bool > ::iterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_In_place_list_hash_value_1 = "returns a hash value for the pointee of i .
+constexpr const char* In_place_list_hash_value_1 = "returns a hash value for the pointee of i .
 
 Parameters
 ----------
@@ -1392,24 +1392,24 @@ i : const In_place_list < T, bool > ::const_iterator
 Returns: std::size_t";
 
 // CGAL::In_place_list_base
-constexpr const char* CGAL_In_place_list_base__class__ = "The node base classes provides pointers to build linked lists.";
+constexpr const char* In_place_list_base__class__ = "The node base classes provides pointers to build linked lists.";
 
-constexpr const char* CGAL_In_place_list_base_next_link = "forward pointer
+constexpr const char* In_place_list_base_next_link = "forward pointer
 
 Returns: T *";
-constexpr const char* CGAL_In_place_list_base_prev_link = "backward pointer
+constexpr const char* In_place_list_base_prev_link = "backward pointer
 
 Returns: T *";
 
 // CGAL::Insert_iterator
-constexpr const char* CGAL_Insert_iterator__class__ = "The output iterator Insert_iterator is similar to std::insert_iterator , but differs in that it calls the insert() function of the container without the iterator additional argument.";
+constexpr const char* Insert_iterator__class__ = "The output iterator Insert_iterator is similar to std::insert_iterator , but differs in that it calls the insert() function of the container without the iterator additional argument.";
 
-constexpr const char* CGAL_Insert_iterator_Insert_iterator = "initializes the internal container reference to c .
+constexpr const char* Insert_iterator_Insert_iterator = "initializes the internal container reference to c .
 
 Parameters
 ----------
 c : Container &";
-constexpr const char* CGAL_Insert_iterator_inserter = "Constructs Insert_iterator <Container>(x) .
+constexpr const char* Insert_iterator_inserter = "Constructs Insert_iterator <Container>(x) .
 
 Parameters
 ----------
@@ -1418,21 +1418,21 @@ c : Container &
 Returns: Insert_iterator < Container >";
 
 // CGAL::Inverse_index
-constexpr const char* CGAL_Inverse_index__class__ = "The class Inverse_index constructs an inverse index for a given range [i,j) of two iterators or circulators of type IC .";
+constexpr const char* Inverse_index__class__ = "The class Inverse_index constructs an inverse index for a given range [i,j) of two iterators or circulators of type IC .";
 
-constexpr const char* CGAL_Inverse_index_Inverse_index = "invalid index.";
-constexpr const char* CGAL_Inverse_index_Inverse_index_1 = "empty inverse index initialized to start at i .
+constexpr const char* Inverse_index_Inverse_index = "invalid index.";
+constexpr const char* Inverse_index_Inverse_index_1 = "empty inverse index initialized to start at i .
 
 Parameters
 ----------
 i : const IC &";
-constexpr const char* CGAL_Inverse_index_Inverse_index_2 = "inverse index initialized with range [i,j) .
+constexpr const char* Inverse_index_Inverse_index_2 = "inverse index initialized with range [i,j) .
 
 Parameters
 ----------
 i : const IC &
 j : const IC &";
-constexpr const char* CGAL_Inverse_index_operator = "returns inverse index of k .
+constexpr const char* Inverse_index_operator = "returns inverse index of k .
 
 k has been stored in the inverse index.
 
@@ -1441,23 +1441,23 @@ Parameters
 k : const IC &
 
 Returns: std::size_t";
-constexpr const char* CGAL_Inverse_index_push_back = "adds k at the end of the indices.
+constexpr const char* Inverse_index_push_back = "adds k at the end of the indices.
 
 Parameters
 ----------
 k : const IC &";
 
 // CGAL::Iterator_range
-constexpr const char* CGAL_Iterator_range__class__ = "CGAL::Iterator_range encapsulates two iterators so they fulfill the ForwardRange concept.";
+constexpr const char* Iterator_range__class__ = "CGAL::Iterator_range encapsulates two iterators so they fulfill the ForwardRange concept.";
 
-constexpr const char* CGAL_Iterator_range_size = "returns std::distance( begin() , end() )
+constexpr const char* Iterator_range_size = "returns std::distance( begin() , end() )
 
 Returns: std::size_t";
 
 // CGAL::Join_input_iterator_1
-constexpr const char* CGAL_Join_input_iterator_1__class__ = "The class Join_input_iterator_1 joins an iterator and a creator function object.";
+constexpr const char* Join_input_iterator_1__class__ = "The class Join_input_iterator_1 joins an iterator and a creator function object.";
 
-constexpr const char* CGAL_Join_input_iterator_1_Join_input_iterator_1 = "creates a join iterator from the given iterator i and the functor creator .
+constexpr const char* Join_input_iterator_1_Join_input_iterator_1 = "creates a join iterator from the given iterator i and the functor creator .
 
 Applies creator to each item read from i .
 
@@ -1465,7 +1465,7 @@ Parameters
 ----------
 i : Iterator
 creator : const Creator &";
-constexpr const char* CGAL_Join_input_iterator_1_Join_input_iterator_1_1 = "creates a join iterator from the given iterator i and a default constructed instance of Creator .
+constexpr const char* Join_input_iterator_1_Join_input_iterator_1_1 = "creates a join iterator from the given iterator i and a default constructed instance of Creator .
 
 The latter instance is applied to each item read from i .
 
@@ -1474,31 +1474,31 @@ Parameters
 i : Iterator";
 
 // CGAL::Join_input_iterator_2
-constexpr const char* CGAL_Join_input_iterator_2__class__ = "The class Join_input_iterator_2 joins two iterators.";
+constexpr const char* Join_input_iterator_2__class__ = "The class Join_input_iterator_2 joins two iterators.";
 
-constexpr const char* CGAL_Join_input_iterator_2_Join_input_iterator_2 = "Default constructor.";
-constexpr const char* CGAL_Join_input_iterator_2_Join_input_iterator_2_1 = "creates a join iterator from the given iterators i1 , i2 , and the functor op .
+constexpr const char* Join_input_iterator_2_Join_input_iterator_2 = "Default constructor.";
+constexpr const char* Join_input_iterator_2_Join_input_iterator_2_1 = "creates a join iterator from the given iterators i1 , i2 , and the functor op .
 
 Parameters
 ----------
 i1 : I1
 i2 : I2
 op : const Op &";
-constexpr const char* CGAL_Join_input_iterator_2_current_iterator1 = "returns current position of the first iterator.
+constexpr const char* Join_input_iterator_2_current_iterator1 = "returns current position of the first iterator.
 
 Returns: I1";
-constexpr const char* CGAL_Join_input_iterator_2_current_iterator2 = "returns current position of the second iterator.
+constexpr const char* Join_input_iterator_2_current_iterator2 = "returns current position of the second iterator.
 
 Returns: I2";
-constexpr const char* CGAL_Join_input_iterator_2_operator = "returns op( current_iterator1() , current_iterator2() ) .
+constexpr const char* Join_input_iterator_2_operator = "returns op( current_iterator1() , current_iterator2() ) .
 
 Returns: const value_type &";
 
 // CGAL::Join_input_iterator_3
-constexpr const char* CGAL_Join_input_iterator_3__class__ = "The class Join_input_iterator_3 joins three iterators.";
+constexpr const char* Join_input_iterator_3__class__ = "The class Join_input_iterator_3 joins three iterators.";
 
-constexpr const char* CGAL_Join_input_iterator_3_Join_input_iterator_3 = "Default constructor.";
-constexpr const char* CGAL_Join_input_iterator_3_Join_input_iterator_3_1 = "creates a join iterator from the given iterators i1 , i2 , i3 , and the functor op .
+constexpr const char* Join_input_iterator_3_Join_input_iterator_3 = "Default constructor.";
+constexpr const char* Join_input_iterator_3_Join_input_iterator_3_1 = "creates a join iterator from the given iterators i1 , i2 , i3 , and the functor op .
 
 Parameters
 ----------
@@ -1506,122 +1506,122 @@ i1 : I1
 i2 : I2
 i3 : I3
 op : const Op &";
-constexpr const char* CGAL_Join_input_iterator_3_current_iterator1 = "returns current position of the first iterator.
+constexpr const char* Join_input_iterator_3_current_iterator1 = "returns current position of the first iterator.
 
 Returns: I1";
-constexpr const char* CGAL_Join_input_iterator_3_current_iterator2 = "returns current position of the second iterator.
+constexpr const char* Join_input_iterator_3_current_iterator2 = "returns current position of the second iterator.
 
 Returns: I2";
-constexpr const char* CGAL_Join_input_iterator_3_current_iterator3 = "returns current position of the second iterator.
+constexpr const char* Join_input_iterator_3_current_iterator3 = "returns current position of the second iterator.
 
 Returns: I3";
-constexpr const char* CGAL_Join_input_iterator_3_operator = "returns op( current_iterator1() , current_iterator2() , current_iterator3() ) .
+constexpr const char* Join_input_iterator_3_operator = "returns op( current_iterator1() , current_iterator2() , current_iterator3() ) .
 
 Returns: const value_type &";
 
 // CGAL::Location_policy
-constexpr const char* CGAL_Location_policy__class__ = "Location_policy is a policy class which can be used to specify a trade-off between memory usage and time complexity for the point location strategy used in a data-structure.";
+constexpr const char* Location_policy__class__ = "Location_policy is a policy class which can be used to specify a trade-off between memory usage and time complexity for the point location strategy used in a data-structure.";
 
 // CGAL::Manifold_tag
-constexpr const char* CGAL_Manifold_tag__class__ = "The class Manifold_tag is a tag class used to monitor the surface meshing algorithm.";
+constexpr const char* Manifold_tag__class__ = "The class Manifold_tag is a tag class used to monitor the surface meshing algorithm.";
 
 // CGAL::Manifold_with_boundary_tag
-constexpr const char* CGAL_Manifold_with_boundary_tag__class__ = "The class Manifold_with_boundary_tag is a tag class used to monitor the surface meshing algorithm.";
+constexpr const char* Manifold_with_boundary_tag__class__ = "The class Manifold_with_boundary_tag is a tag class used to monitor the surface meshing algorithm.";
 
-constexpr const char* CGAL_Multiset_const_iterator = "bi-directional iterators for the elements stored in the set.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Multiset_const_reverse_iterator = "reverse bi-directional iterators for the elements stored in the set.
+constexpr const char* Multiset_const_iterator = "bi-directional iterators for the elements stored in the set.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Multiset_Multiset = "creates an empty set s that uses a default comparison functor.";
-constexpr const char* CGAL_Multiset_Multiset_1 = "creates an empty set s that uses the given comparison functor comp .
+constexpr const char* Multiset_const_reverse_iterator = "reverse bi-directional iterators for the elements stored in the set.
+
+Returns: unspecified_type";
+constexpr const char* Multiset_Multiset = "creates an empty set s that uses a default comparison functor.";
+constexpr const char* Multiset_Multiset_1 = "creates an empty set s that uses the given comparison functor comp .
 
 Parameters
 ----------
 comp : const Compare &";
-constexpr const char* CGAL_Multiset_Multiset_2 = "creates a set s containing all elements in the range [first, last) , that uses the comparison functor comp .
+constexpr const char* Multiset_Multiset_2 = "creates a set s containing all elements in the range [first, last) , that uses the comparison functor comp .
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator
 comp : const Compare &";
-constexpr const char* CGAL_Multiset_Multiset_3 = "copy constructor.
+constexpr const char* Multiset_Multiset_3 = "copy constructor.
 
 Parameters
 ----------
 other : const Multiset< Type, Compare, Allocator > &";
-constexpr const char* CGAL_Multiset_operator = "assignment operator.
+constexpr const char* Multiset_operator = "assignment operator.
 
 Parameters
 ----------
 other : const Multiset < Type, Compare, Allocator > &
 
 Returns: const Multiset < Type, Compare, Allocator > &";
-constexpr const char* CGAL_Multiset_swap = "swaps the contents of s with those of the other set.
+constexpr const char* Multiset_swap = "swaps the contents of s with those of the other set.
 
 Parameters
 ----------
 other : Multiset < Type, Compare, Allocator > &";
-constexpr const char* CGAL_Multiset_key_comp = "the comparison functor used.
+constexpr const char* Multiset_key_comp = "the comparison functor used.
 
 Returns: Compare";
-constexpr const char* CGAL_Multiset_value_comp = "the comparison functor used (same as above).
+constexpr const char* Multiset_value_comp = "the comparison functor used (same as above).
 
 Both functions have a non-const version that return a reference to the
 comparison functor.
 
 Returns: Compare";
-constexpr const char* CGAL_Multiset_empty = "returns true if the set is empty, false otherwise.
+constexpr const char* Multiset_empty = "returns true if the set is empty, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Multiset_size = "returns the number of elements stored in the set.
+constexpr const char* Multiset_size = "returns the number of elements stored in the set.
 
 Returns: size_t";
-constexpr const char* CGAL_Multiset_max_size = "returns the maximal number of elements the set can store (same as size() ).
+constexpr const char* Multiset_max_size = "returns the maximal number of elements the set can store (same as size() ).
 
 Returns: size_t";
-constexpr const char* CGAL_Multiset_begin = "returns an iterator pointing to the first element stored in the set (a const version is also available).
+constexpr const char* Multiset_begin = "returns an iterator pointing to the first element stored in the set (a const version is also available).
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_end = "returns an iterator pointing beyond the last element stored in the set (a const version is also available).
+constexpr const char* Multiset_end = "returns an iterator pointing beyond the last element stored in the set (a const version is also available).
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_rbegin = "returns a reverse iterator pointing beyond the last element stored in the set (a const version is also available).
+constexpr const char* Multiset_rbegin = "returns a reverse iterator pointing beyond the last element stored in the set (a const version is also available).
 
 Returns: reverse_iterator";
-constexpr const char* CGAL_Multiset_rend = "returns a reverse iterator pointing to the first element stored in the set (a const version is also available).
+constexpr const char* Multiset_rend = "returns a reverse iterator pointing to the first element stored in the set (a const version is also available).
 
 Returns: reverse_iterator";
-constexpr const char* CGAL_Multiset_operator_1 = "returns true if the sequences of elements in the two sets are pairwise equal (using the comparison functor).
+constexpr const char* Multiset_operator_1 = "returns true if the sequences of elements in the two sets are pairwise equal (using the comparison functor).
 
 Parameters
 ----------
 other : const Multiset < Type, Compare, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Multiset_operator_2 = "returns true if the element sequence in s is lexicographically smaller than the element sequence of other .
+constexpr const char* Multiset_operator_2 = "returns true if the element sequence in s is lexicographically smaller than the element sequence of other .
 
 Parameters
 ----------
 other : const Multiset < Type, Compare, Allocator > &
 
 Returns: bool";
-constexpr const char* CGAL_Multiset_insert = "inserts the element x into the set and returns an iterator pointing to the newly inserted element.
+constexpr const char* Multiset_insert = "inserts the element x into the set and returns an iterator pointing to the newly inserted element.
 
 Parameters
 ----------
 x : const Type &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_insert_1 = "inserts all elements in the range [first, last) into the set.
+constexpr const char* Multiset_insert_1 = "inserts all elements in the range [first, last) into the set.
 
 Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Multiset_insert_2 = "inserts the element x with a given iterator used as a hint for the position of the new element.
+constexpr const char* Multiset_insert_2 = "inserts the element x with a given iterator used as a hint for the position of the new element.
 
 It Returns an iterator pointing to the newly inserted element.
 
@@ -1631,7 +1631,7 @@ position : iterator
 x : const Type &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_insert_before = "inserts the element x as the predecessor of the element at the given position.
+constexpr const char* Multiset_insert_before = "inserts the element x as the predecessor of the element at the given position.
 
 The operation does not violate the set order - that is, x is not greater than
 the element pointed by position and not less than its current predecessor.
@@ -1642,7 +1642,7 @@ position : iterator
 x : const Type &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_insert_after = "inserts the element x as the successor of the element at the given position.
+constexpr const char* Multiset_insert_after = "inserts the element x as the successor of the element at the given position.
 
 The operation does not violate the set order - that is, x is not less than the
 element pointed by position and not greater than its current successor.
@@ -1653,20 +1653,20 @@ position : iterator
 x : const Type &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_erase = "erases all elements equivalent to x from the set and returns the number of erased elements.
+constexpr const char* Multiset_erase = "erases all elements equivalent to x from the set and returns the number of erased elements.
 
 Parameters
 ----------
 x : const Type &
 
 Returns: size_t";
-constexpr const char* CGAL_Multiset_erase_1 = "erases the element pointed by position .
+constexpr const char* Multiset_erase_1 = "erases the element pointed by position .
 
 Parameters
 ----------
 position : iterator";
-constexpr const char* CGAL_Multiset_clear = "clears the set (erases all stored elements).";
-constexpr const char* CGAL_Multiset_find = "searches for the an element equivalent to key in the set.
+constexpr const char* Multiset_clear = "clears the set (erases all stored elements).";
+constexpr const char* Multiset_find = "searches for the an element equivalent to key in the set.
 
 If the set contains objects equivalent to key , it returns an iterator
 pointing to the first one. Otherwise, end() is returned (a const version is
@@ -1678,7 +1678,7 @@ key : const Key &
 comp_key : const CompareKey &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_count = "returns the number of elements equivalent to key in the set.
+constexpr const char* Multiset_count = "returns the number of elements equivalent to key in the set.
 
 Parameters
 ----------
@@ -1686,7 +1686,7 @@ key : const Key &
 comp_key : const CompareKey &
 
 Returns: size_t";
-constexpr const char* CGAL_Multiset_lower_bound = "returns an iterator pointing to the first element in the set that is not less than key .
+constexpr const char* Multiset_lower_bound = "returns an iterator pointing to the first element in the set that is not less than key .
 
 If all set elements are less than key , end() is returned (a const version is
 also available).
@@ -1697,7 +1697,7 @@ key : const Key &
 comp_key : const CompareKey &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_upper_bound = "returns an iterator pointing to the first element in the set that is greater than key .
+constexpr const char* Multiset_upper_bound = "returns an iterator pointing to the first element in the set that is greater than key .
 
 If no set element is greater than key , end() is returned (a const version is
 also available).
@@ -1708,7 +1708,7 @@ key : const Key &
 comp_key : const CompareKey &
 
 Returns: iterator";
-constexpr const char* CGAL_Multiset_equal_range = "returns the range of set elements equivalent to the given key, namely (lower_bound(key), upper_bound(key)) (a const version is also available).
+constexpr const char* Multiset_equal_range = "returns the range of set elements equivalent to the given key, namely (lower_bound(key), upper_bound(key)) (a const version is also available).
 
 Parameters
 ----------
@@ -1716,7 +1716,7 @@ key : const Key &
 comp_key : const CompareKey &
 
 Returns: std::pair< iterator , iterator >";
-constexpr const char* CGAL_Multiset_find_lower = "returns a pair comprised of lower_bound(key) and a Boolean flag indicating whether this iterator points to an element equivalent to the given key (a const version is also available).
+constexpr const char* Multiset_find_lower = "returns a pair comprised of lower_bound(key) and a Boolean flag indicating whether this iterator points to an element equivalent to the given key (a const version is also available).
 
 Parameters
 ----------
@@ -1724,7 +1724,7 @@ key : const Key &
 comp_key : const CompareKey &
 
 Returns: std::pair< iterator , bool >";
-constexpr const char* CGAL_Multiset_replace = "replaces the element stored at the given position with x .
+constexpr const char* Multiset_replace = "replaces the element stored at the given position with x .
 
 The operation does not violate the set order - that is, x is not less that
 position 's predecessor and not greater than its successor.
@@ -1733,7 +1733,7 @@ Parameters
 ----------
 position : iterator
 x : const Type &";
-constexpr const char* CGAL_Multiset_swap_1 = "swaps places between the two elements given by pos1 and pos2 .
+constexpr const char* Multiset_swap_1 = "swaps places between the two elements given by pos1 and pos2 .
 
 The operation does not violate the set order - that is, pos1 and pos2 store
 equivalent elements.
@@ -1742,7 +1742,7 @@ Parameters
 ----------
 pos1 : iterator
 pos2 : iterator";
-constexpr const char* CGAL_Multiset_catenate = "concatenates all elements in s_prime into s and clears s_prime .
+constexpr const char* Multiset_catenate = "concatenates all elements in s_prime into s and clears s_prime .
 
 All iterators to s and to s_prime remain valid. The maximal element in s is
 not greater than the minimal element in s_prime .
@@ -1750,7 +1750,7 @@ not greater than the minimal element in s_prime .
 Parameters
 ----------
 s_prime : Self &";
-constexpr const char* CGAL_Multiset_split = "splits s such that it contains all elements that are less than the given key and such that s_prime contains all other elements.
+constexpr const char* Multiset_split = "splits s such that it contains all elements that are less than the given key and such that s_prime contains all other elements.
 
 s_prime is initially empty.
 
@@ -1759,7 +1759,7 @@ Parameters
 key : Key
 comp_key : CompareKey
 s_prime : Self &";
-constexpr const char* CGAL_Multiset_split_1 = "splits s such that it contains all set elements in the range [ begin , position) and such that s_prime contains all elements in the range [position, end() ) .
+constexpr const char* Multiset_split_1 = "splits s such that it contains all set elements in the range [ begin , position) and such that s_prime contains all elements in the range [position, end() ) .
 
 s_prime is initially empty.
 
@@ -1769,66 +1769,66 @@ position : iterator
 s_prime : Self &";
 
 // CGAL::N_step_adaptor
-constexpr const char* CGAL_N_step_adaptor__class__ = "The adaptor N_step_adaptor changes the step width of the iterator or circulator class I to N .";
+constexpr const char* N_step_adaptor__class__ = "The adaptor N_step_adaptor changes the step width of the iterator or circulator class I to N .";
 
-constexpr const char* CGAL_N_step_adaptor_N_step_adaptor = "down cast.
+constexpr const char* N_step_adaptor_N_step_adaptor = "down cast.
 
 Parameters
 ----------
 j : const I &";
 
 // CGAL::Non_manifold_tag
-constexpr const char* CGAL_Non_manifold_tag__class__ = "The class Non_manifold_tag is a tag class used to monitor the surface meshing algorithm.";
+constexpr const char* Non_manifold_tag__class__ = "The class Non_manifold_tag is a tag class used to monitor the surface meshing algorithm.";
 
 // CGAL::Null_functor
-constexpr const char* CGAL_Null_functor__class__ = "Class indicating the absence of a functor.";
+constexpr const char* Null_functor__class__ = "Class indicating the absence of a functor.";
 
 // CGAL::Null_tag
-constexpr const char* CGAL_Null_tag__class__ = "General tag indicating that non of any other possible tags is valid.";
+constexpr const char* Null_tag__class__ = "General tag indicating that non of any other possible tags is valid.";
 
 // CGAL::Object
-constexpr const char* CGAL_Object__class__ = "Some functions can return different types of objects.";
+constexpr const char* Object__class__ = "Some functions can return different types of objects.";
 
-constexpr const char* CGAL_Object_Object = "introduces an empty object.";
-constexpr const char* CGAL_Object_Object_1 = "Copy constructor.
+constexpr const char* Object_Object = "introduces an empty object.";
+constexpr const char* Object_Object_1 = "Copy constructor.
 
 Parameters
 ----------
 o : const Object &";
-constexpr const char* CGAL_Object_Object_2 = "Implicit converting constructor for compatibility with std::variant .
+constexpr const char* Object_Object_2 = "Implicit converting constructor for compatibility with std::variant .
 
 Parameters
 ----------
  : std::variant< T... >";
-constexpr const char* CGAL_Object_Object_3 = "Implicit converting constructor for compatibility with std::optional and std::variant .
+constexpr const char* Object_Object_3 = "Implicit converting constructor for compatibility with std::optional and std::variant .
 
 Parameters
 ----------
  : std::optional< std::variant< T... > >";
-constexpr const char* CGAL_Object_operator = "Assignment.
+constexpr const char* Object_operator = "Assignment.
 
 Parameters
 ----------
 o : const Object &
 
 Returns: Object &";
-constexpr const char* CGAL_Object_empty = "returns true, if obj does not contain an object of type T .
+constexpr const char* Object_empty = "returns true, if obj does not contain an object of type T .
 
 Returns: bool";
-constexpr const char* CGAL_Object_is = "returns true, iff obj contains an object of type T .
+constexpr const char* Object_is = "returns true, iff obj contains an object of type T .
 
 Returns: bool";
-constexpr const char* CGAL_Object_type = "returns the type information of the contained type, or typeid(void) if empty.
+constexpr const char* Object_type = "returns the type information of the contained type, or typeid(void) if empty.
 
 Returns: const std::type_info &";
-constexpr const char* CGAL_Object_make_object = "Creates an object that contains t .
+constexpr const char* Object_make_object = "Creates an object that contains t .
 
 Parameters
 ----------
 t : const T &
 
 Returns: Object";
-constexpr const char* CGAL_Object_assign = "assigns o to c if o was constructed from an object of type T .
+constexpr const char* Object_assign = "assigns o to c if o was constructed from an object of type T .
 
 Returns true , if the assignment was possible. For efficiency reasons, we
 recommend using object_cast instead.
@@ -1839,14 +1839,14 @@ c : T &
 o : const Object &
 
 Returns: bool";
-constexpr const char* CGAL_Object_object_cast = "Returns a pointer to the object of type T stored by o , if any, otherwise returns NULL .
+constexpr const char* Object_object_cast = "Returns a pointer to the object of type T stored by o , if any, otherwise returns NULL .
 
 Parameters
 ----------
 o : const Object *
 
 Returns: const T *";
-constexpr const char* CGAL_Object_object_cast_1 = "Returns a copy of the object of type T stored by o , if any, otherwise throws an exception of type Bad_object_cast .
+constexpr const char* Object_object_cast_1 = "Returns a copy of the object of type T stored by o , if any, otherwise throws an exception of type Bad_object_cast .
 
 Parameters
 ----------
@@ -1855,33 +1855,33 @@ o : const Object &
 Returns: T";
 
 // CGAL::Oneset_iterator
-constexpr const char* CGAL_Oneset_iterator__class__ = "The class Oneset_iterator defines an BidirectionalIterator that always refers to one specific object of type T .";
+constexpr const char* Oneset_iterator__class__ = "The class Oneset_iterator defines an BidirectionalIterator that always refers to one specific object of type T .";
 
-constexpr const char* CGAL_Oneset_iterator_Oneset_iterator = "creates an iterator referring to t .
+constexpr const char* Oneset_iterator_Oneset_iterator = "creates an iterator referring to t .
 
 Parameters
 ----------
 t : T &";
 
 // CGAL::Parallel_if_available_tag
-constexpr const char* CGAL_Parallel_if_available_tag__class__ = "This is a convenience alias to Parallel_tag if the third party library thirdpartyTBB has been found and linked, and to Sequential_tag otherwise.";
+constexpr const char* Parallel_if_available_tag__class__ = "This is a convenience alias to Parallel_tag if the third party library thirdpartyTBB has been found and linked, and to Sequential_tag otherwise.";
 
 // CGAL::Parallel_tag
-constexpr const char* CGAL_Parallel_tag__class__ = "Tag used to enable concurrency.";
+constexpr const char* Parallel_tag__class__ = "Tag used to enable concurrency.";
 
 
 // CGAL::Project_facet
-constexpr const char* CGAL_Project_facet__class__ = "The class Project_facet calls the member function facet() on an instance of type Node .";
+constexpr const char* Project_facet__class__ = "The class Project_facet calls the member function facet() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_facet_Project_facet = "default constructor.";
-constexpr const char* CGAL_Project_facet_operator = "returns n.facet() .
+constexpr const char* Project_facet_Project_facet = "default constructor.";
+constexpr const char* Project_facet_operator = "returns n.facet() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_facet_operator_1 = "returns n.facet() .
+constexpr const char* Project_facet_operator_1 = "returns n.facet() .
 
 Parameters
 ----------
@@ -1890,17 +1890,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_next
-constexpr const char* CGAL_Project_next__class__ = "The class Project_next calls the member function next() on an instance of type Node .";
+constexpr const char* Project_next__class__ = "The class Project_next calls the member function next() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_next_Project_next = "default constructor.";
-constexpr const char* CGAL_Project_next_operator = "returns n->next() .
+constexpr const char* Project_next_Project_next = "default constructor.";
+constexpr const char* Project_next_operator = "returns n->next() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_next_operator_1 = "returns n->next() .
+constexpr const char* Project_next_operator_1 = "returns n->next() .
 
 Parameters
 ----------
@@ -1909,17 +1909,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_next_opposite
-constexpr const char* CGAL_Project_next_opposite__class__ = "The class Project_next_opposite calls the member functions next()->opposite() on an instance of type Node .";
+constexpr const char* Project_next_opposite__class__ = "The class Project_next_opposite calls the member functions next()->opposite() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_next_opposite_Project_next_opposite = "default constructor.";
-constexpr const char* CGAL_Project_next_opposite_operator = "returns n->next()->opposite() .
+constexpr const char* Project_next_opposite_Project_next_opposite = "default constructor.";
+constexpr const char* Project_next_opposite_operator = "returns n->next()->opposite() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_next_opposite_operator_1 = "returns n->next()->opposite() .
+constexpr const char* Project_next_opposite_operator_1 = "returns n->next()->opposite() .
 
 Parameters
 ----------
@@ -1928,17 +1928,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_normal
-constexpr const char* CGAL_Project_normal__class__ = "The class Project_normal calls the member function normal() on an instance of type Node .";
+constexpr const char* Project_normal__class__ = "The class Project_normal calls the member function normal() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_normal_Project_normal = "default constructor.";
-constexpr const char* CGAL_Project_normal_operator = "returns n.normal() .
+constexpr const char* Project_normal_Project_normal = "default constructor.";
+constexpr const char* Project_normal_operator = "returns n.normal() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_normal_operator_1 = "returns n.normal() .
+constexpr const char* Project_normal_operator_1 = "returns n.normal() .
 
 Parameters
 ----------
@@ -1947,17 +1947,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_opposite_prev
-constexpr const char* CGAL_Project_opposite_prev__class__ = "The class Project_opposite_prev calls the member functions opposite()->prev() on an instance of type Node .";
+constexpr const char* Project_opposite_prev__class__ = "The class Project_opposite_prev calls the member functions opposite()->prev() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_opposite_prev_Project_opposite_prev = "default constructor.";
-constexpr const char* CGAL_Project_opposite_prev_operator = "returns n->opposite()->prev() .
+constexpr const char* Project_opposite_prev_Project_opposite_prev = "default constructor.";
+constexpr const char* Project_opposite_prev_operator = "returns n->opposite()->prev() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_opposite_prev_operator_1 = "returns n->opposite()->prev() .
+constexpr const char* Project_opposite_prev_operator_1 = "returns n->opposite()->prev() .
 
 Parameters
 ----------
@@ -1966,17 +1966,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_plane
-constexpr const char* CGAL_Project_plane__class__ = "The class Project_plane calls the member function plane() on an instance of type Node .";
+constexpr const char* Project_plane__class__ = "The class Project_plane calls the member function plane() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_plane_Project_plane = "default constructor.";
-constexpr const char* CGAL_Project_plane_operator = "returns n.plane() .
+constexpr const char* Project_plane_Project_plane = "default constructor.";
+constexpr const char* Project_plane_operator = "returns n.plane() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_plane_operator_1 = "returns n.plane() .
+constexpr const char* Project_plane_operator_1 = "returns n.plane() .
 
 Parameters
 ----------
@@ -1985,17 +1985,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_point
-constexpr const char* CGAL_Project_point__class__ = "The class Project_point calls the member function point() on an instance of type Node .";
+constexpr const char* Project_point__class__ = "The class Project_point calls the member function point() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_point_Project_point = "default constructor.";
-constexpr const char* CGAL_Project_point_operator = "returns n.point() .
+constexpr const char* Project_point_Project_point = "default constructor.";
+constexpr const char* Project_point_operator = "returns n.point() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_point_operator_1 = "returns n.point() .
+constexpr const char* Project_point_operator_1 = "returns n.point() .
 
 Parameters
 ----------
@@ -2004,17 +2004,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_prev
-constexpr const char* CGAL_Project_prev__class__ = "The class Project_prev calls the member function prev() on an instance of type Node .";
+constexpr const char* Project_prev__class__ = "The class Project_prev calls the member function prev() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_prev_Project_prev = "default constructor.";
-constexpr const char* CGAL_Project_prev_operator = "returns n->prev() .
+constexpr const char* Project_prev_Project_prev = "default constructor.";
+constexpr const char* Project_prev_operator = "returns n->prev() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_prev_operator_1 = "returns n->prev() .
+constexpr const char* Project_prev_operator_1 = "returns n->prev() .
 
 Parameters
 ----------
@@ -2023,17 +2023,17 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Project_vertex
-constexpr const char* CGAL_Project_vertex__class__ = "The class Project_vertex calls the member function vertex() on an instance of type Node .";
+constexpr const char* Project_vertex__class__ = "The class Project_vertex calls the member function vertex() on an instance of type Node .";
 
-constexpr const char* CGAL_Project_vertex_Project_vertex = "default constructor.";
-constexpr const char* CGAL_Project_vertex_operator = "returns n.vertex() .
+constexpr const char* Project_vertex_Project_vertex = "default constructor.";
+constexpr const char* Project_vertex_operator = "returns n.vertex() .
 
 Parameters
 ----------
 n : argument_type &
 
 Returns: result_type &";
-constexpr const char* CGAL_Project_vertex_operator_1 = "returns n.vertex() .
+constexpr const char* Project_vertex_operator_1 = "returns n.vertex() .
 
 Parameters
 ----------
@@ -2042,30 +2042,30 @@ n : const argument_type &
 Returns: const result_type &";
 
 // CGAL::Quadruple
-constexpr const char* CGAL_Quadruple__class__ = "The Quadruple class is an extension of std::pair .";
+constexpr const char* Quadruple__class__ = "The Quadruple class is an extension of std::pair .";
 
-constexpr const char* CGAL_Quadruple_first = "first element.
+constexpr const char* Quadruple_first = "first element.
 
 Please access it using get <0>() .
 
 Returns: T1";
-constexpr const char* CGAL_Quadruple_second = "second element.
+constexpr const char* Quadruple_second = "second element.
 
 Please access it using get <1>() .
 
 Returns: T2";
-constexpr const char* CGAL_Quadruple_third = "third element.
+constexpr const char* Quadruple_third = "third element.
 
 Please access it using get <2>() .
 
 Returns: T3";
-constexpr const char* CGAL_Quadruple_fourth = "fourth element.
+constexpr const char* Quadruple_fourth = "fourth element.
 
 Please access it using get <3>() .
 
 Returns: T4";
-constexpr const char* CGAL_Quadruple_Quadruple = "introduces a quadruple using the default constructor of the four elements.";
-constexpr const char* CGAL_Quadruple_Quadruple_1 = "constructs a quadruple such that first is constructed from x , second is constructed from y , third is constructed from z , and fourth is constructed from w .
+constexpr const char* Quadruple_Quadruple = "introduces a quadruple using the default constructor of the four elements.";
+constexpr const char* Quadruple_Quadruple_1 = "constructs a quadruple such that first is constructed from x , second is constructed from y , third is constructed from z , and fourth is constructed from w .
 
 Parameters
 ----------
@@ -2073,7 +2073,7 @@ x : T1
 y : T2
 z : T3
 w : T4";
-constexpr const char* CGAL_Quadruple_Quadruple_2 = "constructs a quadruple such that first is constructed from u , second is constructed from v , third is constructed from w , and fourth is constructed from x .
+constexpr const char* Quadruple_Quadruple_2 = "constructs a quadruple such that first is constructed from u , second is constructed from v , third is constructed from w , and fourth is constructed from x .
 
 Proper conversion operators must exist from U to T1 , V to T2 , W to T3 , and
 X to T4 .
@@ -2084,12 +2084,12 @@ u : U
 v : V
 w : W
 x : X";
-constexpr const char* CGAL_Quadruple_get = "Gives access to first , second , third or fourth whenever i is 0, 1, 2 or 3, via a, potentially const, reference.
+constexpr const char* Quadruple_get = "Gives access to first , second , third or fourth whenever i is 0, 1, 2 or 3, via a, potentially const, reference.
 
 Note: T stands for T1 , T2 , T3 or T4 depending on i .
 
 Returns: T";
-constexpr const char* CGAL_Quadruple_operator = "The comparison operator.
+constexpr const char* Quadruple_operator = "The comparison operator.
 
 It uses lexicographic comparison: the return value is true if the first
 element of x is less than the first element of y , and false if the first
@@ -2109,7 +2109,7 @@ x : Quadruple < T1, T2, T3, T4 >
 y : Quadruple < T1, T2, T3, T4 >
 
 Returns: bool";
-constexpr const char* CGAL_Quadruple_operator_1 = "The equality operator.
+constexpr const char* Quadruple_operator_1 = "The equality operator.
 
 The return value is true if and only the first elements of x and y are equal,
 the second elements of x and y are equal, the third elements of x and y are
@@ -2122,7 +2122,7 @@ x : Quadruple < T1, T2, T3, T4 >
 y : Quadruple < T1, T2, T3, T4 >
 
 Returns: bool";
-constexpr const char* CGAL_Quadruple_make_quadruple = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
+constexpr const char* Quadruple_make_quadruple = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
 
 Parameters
 ----------
@@ -2132,7 +2132,7 @@ z : T3
 w : T4
 
 Returns: Quadruple < T1, T2, T3, T4 >";
-constexpr const char* CGAL_Quadruple_make_tuple = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
+constexpr const char* Quadruple_make_tuple = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
 
 Parameters
 ----------
@@ -2144,29 +2144,29 @@ w : T4
 Returns: Quadruple < T1, T2, T3, T4 >";
 
 // CGAL::Random_access_adaptor
-constexpr const char* CGAL_Random_access_adaptor__class__ = "The class Random_access_adaptor provides a random access for data structures.";
+constexpr const char* Random_access_adaptor__class__ = "The class Random_access_adaptor provides a random access for data structures.";
 
-constexpr const char* CGAL_Random_access_adaptor_size_type = "size type of the STL std::vector .
+constexpr const char* Random_access_adaptor_size_type = "size type of the STL std::vector .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Random_access_adaptor_Random_access_adaptor = "invalid index.";
-constexpr const char* CGAL_Random_access_adaptor_Random_access_adaptor_1 = "empty random access index initialized to start at i .
+constexpr const char* Random_access_adaptor_Random_access_adaptor = "invalid index.";
+constexpr const char* Random_access_adaptor_Random_access_adaptor_1 = "empty random access index initialized to start at i .
 
 Parameters
 ----------
 i : const IC &";
-constexpr const char* CGAL_Random_access_adaptor_Random_access_adaptor_2 = "random access index initialized to the range [i,j) .
+constexpr const char* Random_access_adaptor_Random_access_adaptor_2 = "random access index initialized to the range [i,j) .
 
 Parameters
 ----------
 i : const IC &
 j : const IC &";
-constexpr const char* CGAL_Random_access_adaptor_reserve = "reserve r entries, if a std::vector is used internally.
+constexpr const char* Random_access_adaptor_reserve = "reserve r entries, if a std::vector is used internally.
 
 Parameters
 ----------
 r : size_type";
-constexpr const char* CGAL_Random_access_adaptor_operator = "returns iterator or circulator to the n -th item.
+constexpr const char* Random_access_adaptor_operator = "returns iterator or circulator to the n -th item.
 
 n < number of items in the data-structure.
 
@@ -2175,16 +2175,16 @@ Parameters
 n : size_type
 
 Returns: IC";
-constexpr const char* CGAL_Random_access_adaptor_push_back = "adds k at the end of the indices.
+constexpr const char* Random_access_adaptor_push_back = "adds k at the end of the indices.
 
 Parameters
 ----------
 k : const IC &";
 
 // CGAL::Random_access_value_adaptor
-constexpr const char* CGAL_Random_access_value_adaptor__class__ = "The class Random_access_value_adaptor provides a random access for data structures.";
+constexpr const char* Random_access_value_adaptor__class__ = "The class Random_access_value_adaptor provides a random access for data structures.";
 
-constexpr const char* CGAL_Random_access_value_adaptor_operator = "returns a reference to the n -th item.
+constexpr const char* Random_access_value_adaptor_operator = "returns a reference to the n -th item.
 
 n < number of items in the data-structure.
 
@@ -2195,32 +2195,32 @@ n : size_type
 Returns: T &";
 
 // CGAL::Sequential_tag
-constexpr const char* CGAL_Sequential_tag__class__ = "Tag used to disable concurrency.";
+constexpr const char* Sequential_tag__class__ = "Tag used to disable concurrency.";
 
 
 // CGAL::Sixtuple
-constexpr const char* CGAL_Sixtuple__class__ = "The Sixtuple class stores a homogeneous (same type) sixtuple of objects of type T .";
+constexpr const char* Sixtuple__class__ = "The Sixtuple class stores a homogeneous (same type) sixtuple of objects of type T .";
 
-constexpr const char* CGAL_Sixtuple_e0 = "first element
-
-Returns: T";
-constexpr const char* CGAL_Sixtuple_e1 = "second element
+constexpr const char* Sixtuple_e0 = "first element
 
 Returns: T";
-constexpr const char* CGAL_Sixtuple_e2 = "third element
+constexpr const char* Sixtuple_e1 = "second element
 
 Returns: T";
-constexpr const char* CGAL_Sixtuple_e3 = "fourth element
+constexpr const char* Sixtuple_e2 = "third element
 
 Returns: T";
-constexpr const char* CGAL_Sixtuple_e4 = "fifth element
+constexpr const char* Sixtuple_e3 = "fourth element
 
 Returns: T";
-constexpr const char* CGAL_Sixtuple_e5 = "sixth element
+constexpr const char* Sixtuple_e4 = "fifth element
 
 Returns: T";
-constexpr const char* CGAL_Sixtuple_Sixtuple = "introduces a Sixtuple using the default constructor of the elements.";
-constexpr const char* CGAL_Sixtuple_Sixtuple_1 = "constructs a Sixtuple such that e0 is constructed from x , e1 from y , e2 from z , e3 from t , e4 from u and e5 from v .
+constexpr const char* Sixtuple_e5 = "sixth element
+
+Returns: T";
+constexpr const char* Sixtuple_Sixtuple = "introduces a Sixtuple using the default constructor of the elements.";
+constexpr const char* Sixtuple_Sixtuple_1 = "constructs a Sixtuple such that e0 is constructed from x , e1 from y , e2 from z , e3 from t , e4 from u and e5 from v .
 
 Parameters
 ----------
@@ -2232,31 +2232,31 @@ u : T
 v : T";
 
 // CGAL::Spatial_lock_grid_3
-constexpr const char* CGAL_Spatial_lock_grid_3__class__ = "The class Spatial_lock_grid_3 allows to lock points with coordinates (x, y, z) in a 3D grid.";
+constexpr const char* Spatial_lock_grid_3__class__ = "The class Spatial_lock_grid_3 allows to lock points with coordinates (x, y, z) in a 3D grid.";
 
-constexpr const char* CGAL_Spatial_lock_grid_3_Spatial_lock_grid_3 = "Constructs the lock grid of size bbox , with num_grid_cells_per_axis cells per axis.
+constexpr const char* Spatial_lock_grid_3_Spatial_lock_grid_3 = "Constructs the lock grid of size bbox , with num_grid_cells_per_axis cells per axis.
 
 Parameters
 ----------
 bbox : const Bbox_3 &
 num_grid_cells_per_axis : int";
-constexpr const char* CGAL_Spatial_lock_grid_3_set_bbox = "Sets the bounding box of the domain.
+constexpr const char* Spatial_lock_grid_3_set_bbox = "Sets the bounding box of the domain.
 
 Parameters
 ----------
 bbox : const CGAL::Bbox_3 &";
 
-constexpr const char* CGAL_Threetuple_e0 = "first element
+constexpr const char* Threetuple_e0 = "first element
 
 Returns: T";
-constexpr const char* CGAL_Threetuple_e1 = "second element
+constexpr const char* Threetuple_e1 = "second element
 
 Returns: T";
-constexpr const char* CGAL_Threetuple_e2 = "third element
+constexpr const char* Threetuple_e2 = "third element
 
 Returns: T";
-constexpr const char* CGAL_Threetuple_Threetuple = "introduces a Threetuple using the default constructor of the elements.";
-constexpr const char* CGAL_Threetuple_Threetuple_1 = "constructs a Threetuple such that e0 is constructed from x , e1 is constructed from y and e2 is constructed from z .
+constexpr const char* Threetuple_Threetuple = "introduces a Threetuple using the default constructor of the elements.";
+constexpr const char* Threetuple_Threetuple_1 = "constructs a Threetuple such that e0 is constructed from x , e1 is constructed from y and e2 is constructed from z .
 
 Parameters
 ----------
@@ -2265,37 +2265,37 @@ y : T
 z : T";
 
 // CGAL::Triangulation_simplex_base_with_time_stamp
-constexpr const char* CGAL_Triangulation_simplex_base_with_time_stamp__class__ = "A base class with a time stamp.";
+constexpr const char* Triangulation_simplex_base_with_time_stamp__class__ = "A base class with a time stamp.";
 
 
 
 // CGAL::Triple
-constexpr const char* CGAL_Triple__class__ = "The Triple class is an extension of std::pair .";
+constexpr const char* Triple__class__ = "The Triple class is an extension of std::pair .";
 
-constexpr const char* CGAL_Triple_first = "first element.
+constexpr const char* Triple_first = "first element.
 
 Please access it using get <0>() .
 
 Returns: T1";
-constexpr const char* CGAL_Triple_second = "second element.
+constexpr const char* Triple_second = "second element.
 
 Please access it using get <1>() .
 
 Returns: T2";
-constexpr const char* CGAL_Triple_third = "third element.
+constexpr const char* Triple_third = "third element.
 
 Please access it using get <2>() .
 
 Returns: T3";
-constexpr const char* CGAL_Triple_Triple = "introduces a triple using the default constructor of the three elements.";
-constexpr const char* CGAL_Triple_Triple_1 = "constructs a triple such that first is constructed from x , second is constructed from y , and third is constructed from z .
+constexpr const char* Triple_Triple = "introduces a triple using the default constructor of the three elements.";
+constexpr const char* Triple_Triple_1 = "constructs a triple such that first is constructed from x , second is constructed from y , and third is constructed from z .
 
 Parameters
 ----------
 x : T1
 y : T2
 z : T3";
-constexpr const char* CGAL_Triple_Triple_2 = "constructs a triple such that first is constructed from u , second is constructed from v , and third is constructed from w .
+constexpr const char* Triple_Triple_2 = "constructs a triple such that first is constructed from u , second is constructed from v , and third is constructed from w .
 
 Proper conversion operators must exist from U to T1 , V to T2 , and W to T3 .
 
@@ -2304,12 +2304,12 @@ Parameters
 u : U
 v : V
 w : W";
-constexpr const char* CGAL_Triple_get = "Gives access to first , second or third whenever i is 0, 1 or 2, via a, potentially const, reference.
+constexpr const char* Triple_get = "Gives access to first , second or third whenever i is 0, 1 or 2, via a, potentially const, reference.
 
 Note: T stands for T1 , T2 or T3 depending on i .
 
 Returns: T";
-constexpr const char* CGAL_Triple_operator = "The comparison operator.
+constexpr const char* Triple_operator = "The comparison operator.
 
 It uses lexicographic comparison: the return value is true if the first
 element of x is less than the first element of y , and false if the first
@@ -2326,7 +2326,7 @@ x : Triple < T1, T2, T3 >
 y : Triple < T1, T2, T3 >
 
 Returns: bool";
-constexpr const char* CGAL_Triple_operator_1 = "The equality operator.
+constexpr const char* Triple_operator_1 = "The equality operator.
 
 The return value is true if and only the first elements of x and y are equal,
 the second elements of x and y are equal, and the third elements of x and y
@@ -2341,16 +2341,16 @@ y : Triple < T1, T2, T3 >
 Returns: bool";
 
 // CGAL::Twotuple
-constexpr const char* CGAL_Twotuple__class__ = "The Twotuple class stores a homogeneous (same type) pair of objects of type T .";
+constexpr const char* Twotuple__class__ = "The Twotuple class stores a homogeneous (same type) pair of objects of type T .";
 
-constexpr const char* CGAL_Twotuple_e0 = "first element
-
-Returns: T";
-constexpr const char* CGAL_Twotuple_e1 = "second element
+constexpr const char* Twotuple_e0 = "first element
 
 Returns: T";
-constexpr const char* CGAL_Twotuple_Twotuple = "introduces a Twotuple using the default constructor of the elements.";
-constexpr const char* CGAL_Twotuple_Twotuple_1 = "constructs a Twotuple such that e0 is constructed from x and e1 is constructed from y .
+constexpr const char* Twotuple_e1 = "second element
+
+Returns: T";
+constexpr const char* Twotuple_Twotuple = "introduces a Twotuple using the default constructor of the elements.";
+constexpr const char* Twotuple_Twotuple_1 = "constructs a Twotuple such that e0 is constructed from x and e1 is constructed from y .
 
 Parameters
 ----------
@@ -2358,31 +2358,31 @@ x : T
 y : T";
 
 // CGAL::Uncertain
-constexpr const char* CGAL_Uncertain__class__ = "An object of the class Uncertain represents an uncertainty on the value of type T .";
+constexpr const char* Uncertain__class__ = "An object of the class Uncertain represents an uncertainty on the value of type T .";
 
-constexpr const char* CGAL_Uncertain_value_type = "The type T .
+constexpr const char* Uncertain_value_type = "The type T .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Uncertain_Uncertain_conversion_exception = "The type of the exception thrown for uncertain conversions.
+constexpr const char* Uncertain_Uncertain_conversion_exception = "The type of the exception thrown for uncertain conversions.
 
 It is a typedef to the type CGAL::Uncertain_conversion_exception which derives
 from std::range_error .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Uncertain_Uncertain = "introduces a certain object with value T() .";
-constexpr const char* CGAL_Uncertain_Uncertain_1 = "introduces a certain object with value t .
+constexpr const char* Uncertain_Uncertain = "introduces a certain object with value T() .";
+constexpr const char* Uncertain_Uncertain_1 = "introduces a certain object with value t .
 
 Parameters
 ----------
 t : T";
-constexpr const char* CGAL_Uncertain_operator = "assigns the certain value t to u .
+constexpr const char* Uncertain_operator = "assigns the certain value t to u .
 
 Parameters
 ----------
 t : T
 
 Returns: Uncertain &";
-constexpr const char* CGAL_Uncertain_Uncertain_2 = "introduces an object representing the range with lower bound i and upper bound s .
+constexpr const char* Uncertain_Uncertain_2 = "introduces an object representing the range with lower bound i and upper bound s .
 
 $ i<= s$ .
 
@@ -2390,36 +2390,36 @@ Parameters
 ----------
 i : T
 s : T";
-constexpr const char* CGAL_Uncertain_inf = "returns the lower bound of the range represented by u .
+constexpr const char* Uncertain_inf = "returns the lower bound of the range represented by u .
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_sup = "returns the upper bound of the range represented by u .
+constexpr const char* Uncertain_sup = "returns the upper bound of the range represented by u .
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_is_same = "returns true whether u and u are the same range (equality as sets).
+constexpr const char* Uncertain_is_same = "returns true whether u and u are the same range (equality as sets).
 
 Parameters
 ----------
 u : Uncertain
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_is_certain = "returns true iff the value is certain, that is, it is unique, the range is a singleton, that is u.inf() == u.sup() .
+constexpr const char* Uncertain_is_certain = "returns true iff the value is certain, that is, it is unique, the range is a singleton, that is u.inf() == u.sup() .
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_make_certain = "if u.is_certain() , then returns the certain value which is represented.
+constexpr const char* Uncertain_make_certain = "if u.is_certain() , then returns the certain value which is represented.
 
 Otherwise, throws an exception of type Uncertain_conversion_exception . A
 profile counter of the number of such exceptions thrown during the execution
 of the program is available with CGAL_PROFILE .
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_operator_T = "conversion operator to T .
+constexpr const char* Uncertain_operator_T = "conversion operator to T .
 
 It does and returns the same thing as u . make_certain() . Note that relying
 on the automatic conversion can throw exceptions, which defeats the purpose of
 propagating uncertainty. Nevertheless, in many cases, it is hard to avoid it,
 for example for the && and $ ||$ operators for bool (see below).";
-constexpr const char* CGAL_Uncertain_operator_1 = "returns the extension of the equality operator over u and v .
+constexpr const char* Uncertain_operator_1 = "returns the extension of the equality operator over u and v .
 
 Parameters
 ----------
@@ -2427,31 +2427,7 @@ u : Uncertain < T >
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_2 = "returns u == make_uncertain(v) .
-
-Parameters
-----------
-u : Uncertain < T >
-v : T
-
-Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_3 = "returns v == u .
-
-Parameters
-----------
-u : T
-v : Uncertain < T >
-
-Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_4 = "returns the extension of the inequality operator over u and v .
-
-Parameters
-----------
-u : Uncertain < T >
-v : Uncertain < T >
-
-Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_5 = "returns u != make_uncertain(v) .
+constexpr const char* Uncertain_operator_2 = "returns u == make_uncertain(v) .
 
 Parameters
 ----------
@@ -2459,7 +2435,7 @@ u : Uncertain < T >
 v : T
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_6 = "returns v != u .
+constexpr const char* Uncertain_operator_3 = "returns v == u .
 
 Parameters
 ----------
@@ -2467,14 +2443,38 @@ u : T
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_7 = "returns the range containing the negated values of u .
+constexpr const char* Uncertain_operator_4 = "returns the extension of the inequality operator over u and v .
+
+Parameters
+----------
+u : Uncertain < T >
+v : Uncertain < T >
+
+Returns: Uncertain < bool >";
+constexpr const char* Uncertain_operator_5 = "returns u != make_uncertain(v) .
+
+Parameters
+----------
+u : Uncertain < T >
+v : T
+
+Returns: Uncertain < bool >";
+constexpr const char* Uncertain_operator_6 = "returns v != u .
+
+Parameters
+----------
+u : T
+v : Uncertain < T >
+
+Returns: Uncertain < bool >";
+constexpr const char* Uncertain_operator_7 = "returns the range containing the negated values of u .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_8 = "returns the range containing the values computed as logical or from u and v .
+constexpr const char* Uncertain_operator_8 = "returns the range containing the values computed as logical or from u and v .
 
 Parameters
 ----------
@@ -2482,7 +2482,7 @@ u : Uncertain < bool >
 v : Uncertain < bool >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_9 = "returns u | make_uncertain(v) .
+constexpr const char* Uncertain_operator_9 = "returns u | make_uncertain(v) .
 
 Parameters
 ----------
@@ -2490,7 +2490,7 @@ u : Uncertain < bool >
 v : bool
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_10 = "returns v | u .
+constexpr const char* Uncertain_operator_10 = "returns v | u .
 
 Parameters
 ----------
@@ -2498,7 +2498,7 @@ u : bool
 v : Uncertain < bool >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_11 = "returns the range containing the values computed as logical and from u and v .
+constexpr const char* Uncertain_operator_11 = "returns the range containing the values computed as logical and from u and v .
 
 Parameters
 ----------
@@ -2506,7 +2506,7 @@ u : Uncertain < bool >
 v : Uncertain < bool >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_12 = "returns u & make_uncertain(v) .
+constexpr const char* Uncertain_operator_12 = "returns u & make_uncertain(v) .
 
 Parameters
 ----------
@@ -2514,7 +2514,7 @@ u : Uncertain < bool >
 v : bool
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_13 = "returns v & u .
+constexpr const char* Uncertain_operator_13 = "returns v & u .
 
 Parameters
 ----------
@@ -2522,7 +2522,7 @@ u : bool
 v : Uncertain < bool >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_14 = "returns the extension of the less-than operator over u and v .
+constexpr const char* Uncertain_operator_14 = "returns the extension of the less-than operator over u and v .
 
 Parameters
 ----------
@@ -2530,31 +2530,7 @@ u : Uncertain < T >
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_15 = "returns u < make_uncertain(v) .
-
-Parameters
-----------
-u : Uncertain < T >
-v : T
-
-Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_16 = "returns make_uncertain(u) < v .
-
-Parameters
-----------
-u : T
-v : Uncertain < T >
-
-Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_17 = "returns the extension of the greater-than operator over u and v .
-
-Parameters
-----------
-u : Uncertain < T >
-v : Uncertain < T >
-
-Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_18 = "returns u > make_uncertain(v) .
+constexpr const char* Uncertain_operator_15 = "returns u < make_uncertain(v) .
 
 Parameters
 ----------
@@ -2562,7 +2538,7 @@ u : Uncertain < T >
 v : T
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_19 = "returns make_uncertain(u) > v .
+constexpr const char* Uncertain_operator_16 = "returns make_uncertain(u) < v .
 
 Parameters
 ----------
@@ -2570,7 +2546,7 @@ u : T
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_20 = "returns the extension of the less-than or equal operator over u and v .
+constexpr const char* Uncertain_operator_17 = "returns the extension of the greater-than operator over u and v .
 
 Parameters
 ----------
@@ -2578,7 +2554,7 @@ u : Uncertain < T >
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_21 = "returns u <= make_uncertain(v) .
+constexpr const char* Uncertain_operator_18 = "returns u > make_uncertain(v) .
 
 Parameters
 ----------
@@ -2586,7 +2562,7 @@ u : Uncertain < T >
 v : T
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_22 = "returns make_uncertain(u) <= v .
+constexpr const char* Uncertain_operator_19 = "returns make_uncertain(u) > v .
 
 Parameters
 ----------
@@ -2594,7 +2570,7 @@ u : T
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_23 = "returns the extension of the greater-than or equal operator over u and v .
+constexpr const char* Uncertain_operator_20 = "returns the extension of the less-than or equal operator over u and v .
 
 Parameters
 ----------
@@ -2602,7 +2578,7 @@ u : Uncertain < T >
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_24 = "returns u > make_uncertain(v) .
+constexpr const char* Uncertain_operator_21 = "returns u <= make_uncertain(v) .
 
 Parameters
 ----------
@@ -2610,7 +2586,7 @@ u : Uncertain < T >
 v : T
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_25 = "returns make_uncertain(u) >= v .
+constexpr const char* Uncertain_operator_22 = "returns make_uncertain(u) <= v .
 
 Parameters
 ----------
@@ -2618,7 +2594,31 @@ u : T
 v : Uncertain < T >
 
 Returns: Uncertain < bool >";
-constexpr const char* CGAL_Uncertain_operator_26 = "returns the extension of the multiplication operator over u and v .
+constexpr const char* Uncertain_operator_23 = "returns the extension of the greater-than or equal operator over u and v .
+
+Parameters
+----------
+u : Uncertain < T >
+v : Uncertain < T >
+
+Returns: Uncertain < bool >";
+constexpr const char* Uncertain_operator_24 = "returns u > make_uncertain(v) .
+
+Parameters
+----------
+u : Uncertain < T >
+v : T
+
+Returns: Uncertain < bool >";
+constexpr const char* Uncertain_operator_25 = "returns make_uncertain(u) >= v .
+
+Parameters
+----------
+u : T
+v : Uncertain < T >
+
+Returns: Uncertain < bool >";
+constexpr const char* Uncertain_operator_26 = "returns the extension of the multiplication operator over u and v .
 
 This requires T to have a multiplication operator as well.
 
@@ -2628,7 +2628,7 @@ u : Uncertain < T >
 v : Uncertain < T >
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_operator_27 = "returns u * make_uncertain(v) .
+constexpr const char* Uncertain_operator_27 = "returns u * make_uncertain(v) .
 
 Parameters
 ----------
@@ -2636,7 +2636,7 @@ u : Uncertain < T >
 v : T
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_operator_28 = "returns make_uncertain(u) * v .
+constexpr const char* Uncertain_operator_28 = "returns make_uncertain(u) * v .
 
 Parameters
 ----------
@@ -2644,76 +2644,76 @@ u : T
 v : Uncertain < T >
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_operator_29 = "returns the extension of the unary minus operator over u .
+constexpr const char* Uncertain_operator_29 = "returns the extension of the unary minus operator over u .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_enum_cast = "returns the extension of the enum_cast <T> function over u .
+constexpr const char* Uncertain_enum_cast = "returns the extension of the enum_cast <T> function over u .
 
 Parameters
 ----------
 u : Uncertain < U >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_indeterminate = "returns an indeterminate range.
+constexpr const char* Uncertain_indeterminate = "returns an indeterminate range.
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_inf_1 = "returns u.inf() .
+constexpr const char* Uncertain_inf_1 = "returns u.inf() .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_sup_1 = "returns u.sup() .
+constexpr const char* Uncertain_sup_1 = "returns u.sup() .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_is_certain_1 = "returns true .
+constexpr const char* Uncertain_is_certain_1 = "returns true .
 
 Parameters
 ----------
 t : T
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_is_certain_2 = "returns u.is_certain ().
+constexpr const char* Uncertain_is_certain_2 = "returns u.is_certain ().
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_indeterminate_1 = "returns U::indeterminate() if U is Uncertain <T> , and U() otherwise.
+constexpr const char* Uncertain_indeterminate_1 = "returns U::indeterminate() if U is Uncertain <T> , and U() otherwise.
 
 Returns: U";
-constexpr const char* CGAL_Uncertain_is_indeterminate = "returns false .
+constexpr const char* Uncertain_is_indeterminate = "returns false .
 
 Parameters
 ----------
 u : T
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_is_indeterminate_1 = "returns !is_certain(u) .
+constexpr const char* Uncertain_is_indeterminate_1 = "returns !is_certain(u) .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_get_certain = "returns t .
+constexpr const char* Uncertain_get_certain = "returns t .
 
 Parameters
 ----------
 t : T
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_get_certain_1 = "returns u.make_certain ().
+constexpr const char* Uncertain_get_certain_1 = "returns u.make_certain ().
 
 u.is_certain ().
 
@@ -2722,86 +2722,86 @@ Parameters
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_make_certain_1 = "returns t .
+constexpr const char* Uncertain_make_certain_1 = "returns t .
 
 Parameters
 ----------
 t : T
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_make_certain_2 = "returns u.make_certain ().
+constexpr const char* Uncertain_make_certain_2 = "returns u.make_certain ().
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_make_uncertain = "returns Uncertain <T>(u) .
+constexpr const char* Uncertain_make_uncertain = "returns Uncertain <T>(u) .
 
 Parameters
 ----------
 t : T
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_make_uncertain_1 = "returns u .
+constexpr const char* Uncertain_make_uncertain_1 = "returns u .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_CGAL_AND_3 = "Boolean operation with 3 arguments.";
-constexpr const char* CGAL_Uncertain_CGAL_OR_3 = "Boolean operation with 3 arguments.";
-constexpr const char* CGAL_Uncertain_certainly = "returns true iff u.is_certain() , and the u.make_certain () returns true .
+constexpr const char* Uncertain_CGAL_AND_3 = "Boolean operation with 3 arguments.";
+constexpr const char* Uncertain_CGAL_OR_3 = "Boolean operation with 3 arguments.";
+constexpr const char* Uncertain_certainly = "returns true iff u.is_certain() , and the u.make_certain () returns true .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_certainly_1 = "returns u .
+constexpr const char* Uncertain_certainly_1 = "returns u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly = "returns true iff u.is_certain() returns false , or if u.make_certain () returns true .
+constexpr const char* Uncertain_possibly = "returns true iff u.is_certain() returns false , or if u.make_certain () returns true .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_1 = "returns u .
+constexpr const char* Uncertain_possibly_1 = "returns u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_certainly_not = "returns true iff u.is_certain() , and the u.make_certain () returns false .
+constexpr const char* Uncertain_certainly_not = "returns true iff u.is_certain() , and the u.make_certain () returns false .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_certainly_not_1 = "returns !u .
+constexpr const char* Uncertain_certainly_not_1 = "returns !u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_not = "returns true iff u.is_certain() returns false , or if u.make_certain () returns false .
+constexpr const char* Uncertain_possibly_not = "returns true iff u.is_certain() returns false , or if u.make_certain () returns false .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_not_1 = "returns !u .
+constexpr const char* Uncertain_possibly_not_1 = "returns !u .
 
 Parameters
 ----------
@@ -2810,9 +2810,9 @@ u : bool
 Returns: bool";
 
 // CGAL::value_type_traits
-constexpr const char* CGAL_value_type_traits__class__ = "Class providing the value type of an iterator, and in the case of an output iterator, a type of objects that can be put in it.";
+constexpr const char* value_type_traits__class__ = "Class providing the value type of an iterator, and in the case of an output iterator, a type of objects that can be put in it.";
 
-constexpr const char* CGAL_value_type_traits_type = "If T is std::insert_iterator<Container> , std::back_insert_iterator<Container> or std::front_insert_iterator<Container> , then type is Container::value_type .
+constexpr const char* value_type_traits_type = "If T is std::insert_iterator<Container> , std::back_insert_iterator<Container> or std::front_insert_iterator<Container> , then type is Container::value_type .
 
 Otherwise, type is std::iterator_traits<T>::value_type .
 
@@ -2894,34 +2894,34 @@ Parameters
 ----------
 object : const T &";
 
-constexpr const char* CGAL_Exception_ostream = "/relates Exception_basic_ostream
+constexpr const char* Exception_ostream = "/relates Exception_basic_ostream
 
 Returns: Exception_basic_ostream < char >";
-constexpr const char* CGAL_Exception_wostream = "/relates Exception_basic_ostream
+constexpr const char* Exception_wostream = "/relates Exception_basic_ostream
 
 Returns: Exception_basic_ostream < wchar_t >";
-constexpr const char* CGAL_Compact_container_hash_value_1 = "returns a hash value for the pointee of i .
+constexpr const char* Compact_container_hash_value_1 = "returns a hash value for the pointee of i .
 
 Parameters
 ----------
 i : const Compact_container < T, A >::iterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_In_place_list_hash_value_2 = "returns a hash value for the pointee of i .
+constexpr const char* In_place_list_hash_value_2 = "returns a hash value for the pointee of i .
 
 Parameters
 ----------
 i : const In_place_list < T, bool >::iterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_In_place_list_hash_value_3 = "returns a hash value for the pointee of i .
+constexpr const char* In_place_list_hash_value_3 = "returns a hash value for the pointee of i .
 
 Parameters
 ----------
 i : const In_place_list < T, bool >::const_iterator
 
 Returns: std::size_t";
-constexpr const char* CGAL_Dispatch_or_drop_output_iterator_dispatch_or_drop_output_1 = "
+constexpr const char* Dispatch_or_drop_output_iterator_dispatch_or_drop_output_1 = "
 a Dispatch_or_drop_output_iterator constructed from the arguments.
 
 Parameters
@@ -2929,7 +2929,7 @@ Parameters
 o : O...
 
 Returns: Dispatch_or_drop_output_iterator < tuple< V... >, tuple< O... > >";
-constexpr const char* CGAL_Dispatch_output_iterator_dispatch_output_1 = "
+constexpr const char* Dispatch_output_iterator_dispatch_output_1 = "
 a Dispatch_output_iterator constructed from the arguments.
 
 Parameters
@@ -2937,7 +2937,7 @@ Parameters
 o : O...
 
 Returns: Dispatch_output_iterator < tuple< V... >, tuple< O... > >";
-constexpr const char* CGAL_Filter_iterator_filter_iterator_1 = "Constructs Filter_iterator <Iterator, Predicate>(e, p, c) .
+constexpr const char* Filter_iterator_filter_iterator_1 = "Constructs Filter_iterator <Iterator, Predicate>(e, p, c) .
 
 Parameters
 ----------
@@ -2946,21 +2946,21 @@ p : const Predicate &
 c : Iterator
 
 Returns: Filter_iterator < Iterator, Predicate >";
-constexpr const char* CGAL_Insert_iterator_inserter_1 = "Constructs Insert_iterator <Container>(x) .
+constexpr const char* Insert_iterator_inserter_1 = "Constructs Insert_iterator <Container>(x) .
 
 Parameters
 ----------
 c : Container &
 
 Returns: Insert_iterator < Container >";
-constexpr const char* CGAL_Object_make_object_1 = "Creates an object that contains t .
+constexpr const char* Object_make_object_1 = "Creates an object that contains t .
 
 Parameters
 ----------
 t : const T &
 
 Returns: Object";
-constexpr const char* CGAL_Object_assign_1 = "assigns o to c if o was constructed from an object of type T .
+constexpr const char* Object_assign_1 = "assigns o to c if o was constructed from an object of type T .
 
 Returns true , if the assignment was possible. For efficiency reasons, we
 recommend using object_cast instead.
@@ -2971,73 +2971,73 @@ c : T &
 o : const Object &
 
 Returns: bool";
-constexpr const char* CGAL_Object_object_cast_2 = "Returns a pointer to the object of type T stored by o , if any, otherwise returns NULL .
+constexpr const char* Object_object_cast_2 = "Returns a pointer to the object of type T stored by o , if any, otherwise returns NULL .
 
 Parameters
 ----------
 o : const Object *
 
 Returns: const T *";
-constexpr const char* CGAL_Object_object_cast_3 = "Returns a copy of the object of type T stored by o , if any, otherwise throws an exception of type Bad_object_cast .
+constexpr const char* Object_object_cast_3 = "Returns a copy of the object of type T stored by o , if any, otherwise throws an exception of type Bad_object_cast .
 
 Parameters
 ----------
 o : const Object &
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_inf_2 = "returns u.inf() .
+constexpr const char* Uncertain_inf_2 = "returns u.inf() .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_sup_2 = "returns u.sup() .
+constexpr const char* Uncertain_sup_2 = "returns u.sup() .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_is_certain_3 = "returns true .
+constexpr const char* Uncertain_is_certain_3 = "returns true .
 
 Parameters
 ----------
 t : T
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_is_certain_4 = "returns u.is_certain ().
+constexpr const char* Uncertain_is_certain_4 = "returns u.is_certain ().
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_indeterminate_2 = "returns U::indeterminate() if U is Uncertain <T> , and U() otherwise.
+constexpr const char* Uncertain_indeterminate_2 = "returns U::indeterminate() if U is Uncertain <T> , and U() otherwise.
 
 Returns: U";
-constexpr const char* CGAL_Uncertain_is_indeterminate_2 = "returns false .
+constexpr const char* Uncertain_is_indeterminate_2 = "returns false .
 
 Parameters
 ----------
 u : T
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_is_indeterminate_3 = "returns !is_certain(u) .
+constexpr const char* Uncertain_is_indeterminate_3 = "returns !is_certain(u) .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_get_certain_2 = "returns t .
+constexpr const char* Uncertain_get_certain_2 = "returns t .
 
 Parameters
 ----------
 t : T
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_get_certain_3 = "returns u.make_certain ().
+constexpr const char* Uncertain_get_certain_3 = "returns u.make_certain ().
 
 u.is_certain ().
 
@@ -3046,91 +3046,91 @@ Parameters
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_make_certain_3 = "returns t .
+constexpr const char* Uncertain_make_certain_3 = "returns t .
 
 Parameters
 ----------
 t : T
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_make_certain_4 = "returns u.make_certain ().
+constexpr const char* Uncertain_make_certain_4 = "returns u.make_certain ().
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: T";
-constexpr const char* CGAL_Uncertain_make_uncertain_2 = "returns Uncertain <T>(u) .
+constexpr const char* Uncertain_make_uncertain_2 = "returns Uncertain <T>(u) .
 
 Parameters
 ----------
 t : T
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_make_uncertain_3 = "returns u .
+constexpr const char* Uncertain_make_uncertain_3 = "returns u .
 
 Parameters
 ----------
 u : Uncertain < T >
 
 Returns: Uncertain < T >";
-constexpr const char* CGAL_Uncertain_certainly_2 = "returns true iff u.is_certain() , and the u.make_certain () returns true .
+constexpr const char* Uncertain_certainly_2 = "returns true iff u.is_certain() , and the u.make_certain () returns true .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_certainly_3 = "returns u .
+constexpr const char* Uncertain_certainly_3 = "returns u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_2 = "returns true iff u.is_certain() returns false , or if u.make_certain () returns true .
+constexpr const char* Uncertain_possibly_2 = "returns true iff u.is_certain() returns false , or if u.make_certain () returns true .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_3 = "returns u .
+constexpr const char* Uncertain_possibly_3 = "returns u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_certainly_not_2 = "returns true iff u.is_certain() , and the u.make_certain () returns false .
+constexpr const char* Uncertain_certainly_not_2 = "returns true iff u.is_certain() , and the u.make_certain () returns false .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_certainly_not_3 = "returns !u .
+constexpr const char* Uncertain_certainly_not_3 = "returns !u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_not_2 = "returns true iff u.is_certain() returns false , or if u.make_certain () returns false .
+constexpr const char* Uncertain_possibly_not_2 = "returns true iff u.is_certain() returns false , or if u.make_certain () returns false .
 
 Parameters
 ----------
 u : Uncertain < bool >
 
 Returns: bool";
-constexpr const char* CGAL_Uncertain_possibly_not_3 = "returns !u .
+constexpr const char* Uncertain_possibly_not_3 = "returns !u .
 
 Parameters
 ----------
 u : bool
 
 Returns: bool";
-constexpr const char* CGAL_Quadruple_make_quadruple_1 = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
+constexpr const char* Quadruple_make_quadruple_1 = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
 
 Parameters
 ----------
@@ -3140,7 +3140,7 @@ z : T3
 w : T4
 
 Returns: Quadruple < T1, T2, T3, T4 >";
-constexpr const char* CGAL_Quadruple_make_tuple_1 = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
+constexpr const char* Quadruple_make_tuple_1 = "Equivalent to Quadruple <T1, T2, T3, T4>(x, y, z, w) .
 
 Parameters
 ----------
@@ -3150,8 +3150,8 @@ z : T3
 w : T4
 
 Returns: Quadruple < T1, T2, T3, T4 >";
-constexpr const char* CGAL_Uncertain_CGAL_AND_3_1 = "Boolean operation with 3 arguments.";
-constexpr const char* CGAL_Uncertain_CGAL_OR_3_1 = "Boolean operation with 3 arguments.";
+constexpr const char* Uncertain_CGAL_AND_3_1 = "Boolean operation with 3 arguments.";
+constexpr const char* Uncertain_CGAL_OR_3_1 = "Boolean operation with 3 arguments.";
 
 // std
 constexpr const char* std__class__ = "STL namespace.";

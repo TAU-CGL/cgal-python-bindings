@@ -8,18 +8,18 @@ namespace docstrings {
 namespace Optimal_transportation_reconstruction_2 {
 
 // CGAL::Optimal_transportation_reconstruction_2
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2__class__ = "This class provides a means to reconstruct a 1-dimensional shape from a set of 2D points with masses.";
+constexpr const char* Optimal_transportation_reconstruction_2__class__ = "This class provides a means to reconstruct a 1-dimensional shape from a set of 2D points with masses.";
 
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_FT = "Number type.
+constexpr const char* Optimal_transportation_reconstruction_2_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_Point = "Point type.
+constexpr const char* Optimal_transportation_reconstruction_2_Point = "Point type.
 
 Returns: Traits::Point_2";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_Segment = "Segment type.
+constexpr const char* Optimal_transportation_reconstruction_2_Segment = "Segment type.
 
 Returns: Traits::Segment_2";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_Optimal_transportation_reconstruction_2 = "Constructor of the optimal transportation reconstruction class.
+constexpr const char* Optimal_transportation_reconstruction_2_Optimal_transportation_reconstruction_2 = "Constructor of the optimal transportation reconstruction class.
 
 It builds an initial simplicial complex for a given range of point-mass pairs.
 InputRange is a model of Range with forward iterators, providing input points
@@ -43,7 +43,7 @@ use_flip : bool
 relocation : unsigned int
 verbose : int
 traits : Traits";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_set_random_sample_size = "If sample_size == 0 , the simplification is performed using an exhaustive priority queue.
+constexpr const char* Optimal_transportation_reconstruction_2_set_random_sample_size = "If sample_size == 0 , the simplification is performed using an exhaustive priority queue.
 
 If sample_size is strictly positive the simplification is performed using a
 multiple choice approach, i.e., a best-choice selection in a random sample of
@@ -55,7 +55,7 @@ sample replaces the priority queue.
 Parameters
 ----------
 sample_size : std::size_t";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_set_verbose = "Determines how much console output the algorithm generates.
+constexpr const char* Optimal_transportation_reconstruction_2_set_verbose = "Determines how much console output the algorithm generates.
 
 If set to a value larger than 0 details about the reconstruction process are
 written to std::cerr . verbose The verbosity level.
@@ -63,17 +63,17 @@ written to std::cerr . verbose The verbosity level.
 Parameters
 ----------
 verbose : int";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_set_use_flip = "The use_flip parameter determines whether the edge flipping procedure is used for the halfedge collapse.
+constexpr const char* Optimal_transportation_reconstruction_2_set_use_flip = "The use_flip parameter determines whether the edge flipping procedure is used for the halfedge collapse.
 
 Parameters
 ----------
 use_flip : const bool";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_set_relocation = "Sets the number of vertex relocations that are performed between two edge collapses.
+constexpr const char* Optimal_transportation_reconstruction_2_set_relocation = "Sets the number of vertex relocations that are performed between two edge collapses.
 
 Parameters
 ----------
 relocation : unsigned int";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_set_relevance = "
+constexpr const char* Optimal_transportation_reconstruction_2_set_relevance = "
 relevance The relevance threshold used for filtering the edges. An edge is
 relevant from the approximation point of view if it is long, covers a large
 mass (or equivalently the number of points when all masses are equal), and has
@@ -88,7 +88,7 @@ amount of outliers.
 Parameters
 ----------
 relevance : const FT";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_run_until = "Computes a shape consisting of np points, reconstructing the input points.
+constexpr const char* Optimal_transportation_reconstruction_2_run_until = "Computes a shape consisting of np points, reconstructing the input points.
 
 np The number of points which will be present in the output. true if the
 number of points np was reached, false if the algorithm was prematurely ended
@@ -99,7 +99,7 @@ Parameters
 np : std::size_t
 
 Returns: bool";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_run = "Computes a shape, reconstructing the input, by performing steps edge collapse operators on the output simplex.
+constexpr const char* Optimal_transportation_reconstruction_2_run = "Computes a shape, reconstructing the input, by performing steps edge collapse operators on the output simplex.
 
 steps The number of edge collapse operators to be performed. true if the
 required number of steps was performed, false if the algorithm was prematurely
@@ -110,7 +110,7 @@ Parameters
 steps : const unsigned int
 
 Returns: bool";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_run_under_wasserstein_tolerance = "Computes a shape, reconstructing the input, by performing edge collapse operators on the output simplex until the user-defined tolerance is reached.
+constexpr const char* Optimal_transportation_reconstruction_2_run_under_wasserstein_tolerance = "Computes a shape, reconstructing the input, by performing edge collapse operators on the output simplex until the user-defined tolerance is reached.
 
 The tolerance is given in the sense of the Wasserstein distance. It is not a
 Hausdorff tolerance: it does not mean that the distance between the input
@@ -122,11 +122,11 @@ distance.
 Parameters
 ----------
 tolerance : const FT";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_relocate_all_points = "Since noise and missing data may prevent the reconstructed shape to have sharp corners well located, the algorithm offers the possibility to automatically relocate points after each edge collapse.
+constexpr const char* Optimal_transportation_reconstruction_2_relocate_all_points = "Since noise and missing data may prevent the reconstructed shape to have sharp corners well located, the algorithm offers the possibility to automatically relocate points after each edge collapse.
 
 The new location of the points is chosen such that the fitting of the output
 segments to the input points is improved.";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_indexed_output = "Writes the points and segments of the output simplex in an indexed format into output iterators.
+constexpr const char* Optimal_transportation_reconstruction_2_indexed_output = "Writes the points and segments of the output simplex in an indexed format into output iterators.
 
 PointOutputIterator An output iterator with value type Point .
 IndexOutputIterator An output iterator with value type std::size_t .
@@ -142,7 +142,7 @@ isolated_points : IndexOutputIterator
 segments : IndexPairOutputIterator
 
 Returns: std::tuple< PointOutputIterator, IndexOutputIterator, IndexPairOutputIterator >";
-constexpr const char* CGAL_Optimal_transportation_reconstruction_2_list_output = "Returns the solid edges and vertices present after the reconstruction process finished.
+constexpr const char* Optimal_transportation_reconstruction_2_list_output = "Returns the solid edges and vertices present after the reconstruction process finished.
 
 It takes two output iterators, one for storing the isolated points and one for
 storing the edges of the reconstructed shape. PointOutputIterator An output

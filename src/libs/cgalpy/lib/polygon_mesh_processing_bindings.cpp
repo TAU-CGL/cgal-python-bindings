@@ -505,28 +505,28 @@ void export_polygon_mesh_processing(py::module_& m) {
   py::class_<Pe>(m, "Polyhedral_envelope")
     .def(py::init<Pm&, double, const py::dict&>(),
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict(),
-         doc::CGAL_Polyhedral_envelope_Polyhedral_envelope_1)
+         doc::Polyhedral_envelope_Polyhedral_envelope_1)
     .def(py::init<const std::vector<Fd>&, Pm&, double, const py::dict&>(),
          py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict(),
-         doc::CGAL_Polyhedral_envelope_Polyhedral_envelope_2)
+         doc::Polyhedral_envelope_Polyhedral_envelope_2)
     .def(py::init<const pmp::Point_3_vec&, const std::vector<pmp::Size_t_vec>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
          py::arg("np") = py::dict(), // TODO: handle face_epsilon_map
-         doc::CGAL_Polyhedral_envelope_Polyhedral_envelope_3)
+         doc::Polyhedral_envelope_Polyhedral_envelope_3)
     .def("is_empty", &Pe::is_empty,
-         doc::CGAL_Polyhedral_envelope_is_empty)
+         doc::Polyhedral_envelope_is_empty)
     .def("inside", [](const Pe& i, const Point_3& query) { return i(query); }, py::arg("query"),
-         doc::CGAL_Polyhedral_envelope_operator)
+         doc::Polyhedral_envelope_operator)
     .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); },
          py::arg("source"), py::arg("target"),
-         doc::CGAL_Polyhedral_envelope_operator_1)
+         doc::Polyhedral_envelope_operator_1)
     .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); },
          py::arg("t0"), py::arg("t1"), py::arg("t2"),
-         doc::CGAL_Polyhedral_envelope_operator_2)
+         doc::Polyhedral_envelope_operator_2)
     .def("inside",
          [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh, internal::parse_pmp_np<Pm>(np)); },
          py::arg("tmesh"), py::arg("np") = py::dict(),
-         doc::CGAL_Polyhedral_envelope_operator_3)
+         doc::Polyhedral_envelope_operator_3)
     // TODO: inside triangle range
     ;
 

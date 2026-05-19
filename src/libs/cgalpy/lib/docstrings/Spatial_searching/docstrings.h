@@ -8,39 +8,39 @@ namespace docstrings {
 namespace Spatial_searching {
 
 // CGAL::Distance_adapter
-constexpr const char* CGAL_Distance_adapter__class__ = "A class that uses a point property map to adapt a distance class to work on a key as point type.";
+constexpr const char* Distance_adapter__class__ = "A class that uses a point property map to adapt a distance class to work on a key as point type.";
 
-constexpr const char* CGAL_Distance_adapter_Distance_adapter = "Constructor initializing the class to base and setting the point property map of the class to ppmap .
+constexpr const char* Distance_adapter_Distance_adapter = "Constructor initializing the class to base and setting the point property map of the class to ppmap .
 
 Parameters
 ----------
 ppmap : const PointPropertyMap &
 base : const Base_distance &";
-constexpr const char* CGAL_Distance_adapter_point_property_map = "Returns the point property map.
+constexpr const char* Distance_adapter_point_property_map = "Returns the point property map.
 
 Returns: const PointPropertyMap &";
 
 // CGAL::Euclidean_distance
-constexpr const char* CGAL_Euclidean_distance__class__ = "The class Euclidean_distance provides an implementation of the concept OrthogonalDistance , with the Euclidean distance ( $ l_2$ metric).";
+constexpr const char* Euclidean_distance__class__ = "The class Euclidean_distance provides an implementation of the concept OrthogonalDistance , with the Euclidean distance ( $ l_2$ metric).";
 
-constexpr const char* CGAL_Euclidean_distance_D = "Dimension Tag.
+constexpr const char* Euclidean_distance_D = "Dimension Tag.
 
 Returns: Traits::Dimension";
-constexpr const char* CGAL_Euclidean_distance_FT = "Number type.
+constexpr const char* Euclidean_distance_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Euclidean_distance_Point_d = "Point type.
+constexpr const char* Euclidean_distance_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Euclidean_distance_Query_item = "Query item type.
+constexpr const char* Euclidean_distance_Query_item = "Query item type.
 
 Returns: Point_d";
-constexpr const char* CGAL_Euclidean_distance_Euclidean_distance = "Default constructor.
+constexpr const char* Euclidean_distance_Euclidean_distance = "Default constructor.
 
 Parameters
 ----------
 t : Traits";
-constexpr const char* CGAL_Euclidean_distance_transformed_distance = "Returns the squared Euclidean distance between q and p .
+constexpr const char* Euclidean_distance_transformed_distance = "Returns the squared Euclidean distance between q and p .
 
 Parameters
 ----------
@@ -48,7 +48,7 @@ q : Query_item
 p : Point_d
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_transformed_distance_from_coordinates = "Returns the transformed distance between q and the point whose Cartesian coordinates are contained in the range [ begin , end ).
+constexpr const char* Euclidean_distance_transformed_distance_from_coordinates = "Returns the transformed distance between q and the point whose Cartesian coordinates are contained in the range [ begin , end ).
 
 Parameters
 ----------
@@ -57,7 +57,7 @@ begin : Coord_iterator
 end : Coord_iterator
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_interruptible_transformed_distance = "Returns the transformed distance between q and the point whose Cartesian coordinates are contained in the range [ begin , end ), or any value $ \\geq $ stop_if_geq_to_this if the transformed distance is $ \\geq $ stop_if_geq_to_this .
+constexpr const char* Euclidean_distance_interruptible_transformed_distance = "Returns the transformed distance between q and the point whose Cartesian coordinates are contained in the range [ begin , end ), or any value $ \\geq $ stop_if_geq_to_this if the transformed distance is $ \\geq $ stop_if_geq_to_this .
 
 Parameters
 ----------
@@ -67,7 +67,7 @@ end : Coord_iterator
 stop_if_geq_to_this : FT
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_min_distance_to_rectangle = "Returns the squared Euclidean distance between q and the point on the boundary of r closest to q .
+constexpr const char* Euclidean_distance_min_distance_to_rectangle = "Returns the squared Euclidean distance between q and the point on the boundary of r closest to q .
 
 Parameters
 ----------
@@ -75,7 +75,7 @@ q : Query_item
 r : Kd_tree_rectangle < FT , D >
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_min_distance_to_rectangle_1 = "Returns the squared Euclidean distance between q and the point on the boundary of r closest to q .
+constexpr const char* Euclidean_distance_min_distance_to_rectangle_1 = "Returns the squared Euclidean distance between q and the point on the boundary of r closest to q .
 
 Stores the distances in each dimension in dists .
 
@@ -86,7 +86,7 @@ r : Kd_tree_rectangle < FT , D >
 dists : vector< FT > &
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_max_distance_to_rectangle = "Returns the squared Euclidean distance, where $ d$ denotes the distance between q and the point on the boundary of r farthest to q .
+constexpr const char* Euclidean_distance_max_distance_to_rectangle = "Returns the squared Euclidean distance, where $ d$ denotes the distance between q and the point on the boundary of r farthest to q .
 
 Parameters
 ----------
@@ -94,7 +94,7 @@ q : Query_item
 r : Kd_tree_rectangle < FT , D >
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_max_distance_to_rectangle_1 = "Returns the squared Euclidean distance, where $ d$ denotes the distance between q and the point on the boundary of r farthest to q .
+constexpr const char* Euclidean_distance_max_distance_to_rectangle_1 = "Returns the squared Euclidean distance, where $ d$ denotes the distance between q and the point on the boundary of r farthest to q .
 
 Stores the distances in each dimension in dists .
 
@@ -105,7 +105,7 @@ r : Kd_tree_rectangle < FT , D >
 dists : vector< FT > &
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_new_distance = "Updates the squared dist incrementally and returns the updated squared distance.
+constexpr const char* Euclidean_distance_new_distance = "Updates the squared dist incrementally and returns the updated squared distance.
 
 Parameters
 ----------
@@ -115,14 +115,14 @@ new_off : FT
 cutting_dimension : int
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_transformed_distance_1 = "Returns $ d^2$ .
+constexpr const char* Euclidean_distance_transformed_distance_1 = "Returns $ d^2$ .
 
 Parameters
 ----------
 d : FT
 
 Returns: FT";
-constexpr const char* CGAL_Euclidean_distance_inverse_of_transformed_distance = "Returns $ d^{1/2}$ .
+constexpr const char* Euclidean_distance_inverse_of_transformed_distance = "Returns $ d^{1/2}$ .
 
 Parameters
 ----------
@@ -131,26 +131,26 @@ d : FT
 Returns: FT";
 
 // CGAL::Euclidean_distance_sphere_point
-constexpr const char* CGAL_Euclidean_distance_sphere_point__class__ = "The class Euclidean_distance_sphere_point provides an implementation of the GeneralDistance concept for the Euclidean distance ( $ l_2$ metric) between a $ d$ -dimensional sphere and a point, and the Euclidean distance between a $ d$ -dimensional sphere and a $ d$ -dimensional iso-rectangle defined as a $k$ - $d$ tree rectangle.";
+constexpr const char* Euclidean_distance_sphere_point__class__ = "The class Euclidean_distance_sphere_point provides an implementation of the GeneralDistance concept for the Euclidean distance ( $ l_2$ metric) between a $ d$ -dimensional sphere and a point, and the Euclidean distance between a $ d$ -dimensional sphere and a $ d$ -dimensional iso-rectangle defined as a $k$ - $d$ tree rectangle.";
 
-constexpr const char* CGAL_Euclidean_distance_sphere_point_D = "Dimension Tag.
+constexpr const char* Euclidean_distance_sphere_point_D = "Dimension Tag.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_FT = "Number type.
+constexpr const char* Euclidean_distance_sphere_point_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_Point_d = "Point type.
+constexpr const char* Euclidean_distance_sphere_point_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_Sphere_d = "Query item type.
+constexpr const char* Euclidean_distance_sphere_point_Sphere_d = "Query item type.
 
 Returns: Traits::Sphere_d";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_Euclidean_distance_sphere_point = "Default constructor.
+constexpr const char* Euclidean_distance_sphere_point_Euclidean_distance_sphere_point = "Default constructor.
 
 Parameters
 ----------
 t : Traits";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_transformed_distance = "Returns the distance between s and p .
+constexpr const char* Euclidean_distance_sphere_point_transformed_distance = "Returns the distance between s and p .
 
 Parameters
 ----------
@@ -158,7 +158,7 @@ s : Query_item
 p : Point_d
 
 Returns: NT";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_min_distance_to_rectangle = "Returns the minimal distance between a point from the sphere s and a point from r .
+constexpr const char* Euclidean_distance_sphere_point_min_distance_to_rectangle = "Returns the minimal distance between a point from the sphere s and a point from r .
 
 Parameters
 ----------
@@ -166,7 +166,7 @@ s : Query_item
 r : Kd_tree_rectangle < FT , D >
 
 Returns: NT";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_max_distance_to_rectangle = "Returns the maximal distance between the sphere s and a point from r furthest to s .
+constexpr const char* Euclidean_distance_sphere_point_max_distance_to_rectangle = "Returns the maximal distance between the sphere s and a point from r furthest to s .
 
 Parameters
 ----------
@@ -174,14 +174,14 @@ s : Query_item
 r : Kd_tree_rectangle < FT , D >
 
 Returns: NT";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_transformed_distance_1 = "Returns $ d^2$ .
+constexpr const char* Euclidean_distance_sphere_point_transformed_distance_1 = "Returns $ d^2$ .
 
 Parameters
 ----------
 d : NT
 
 Returns: NT";
-constexpr const char* CGAL_Euclidean_distance_sphere_point_inverse_of_transformed_distance = "Returns $ d^{1/2}$ .
+constexpr const char* Euclidean_distance_sphere_point_inverse_of_transformed_distance = "Returns $ d^{1/2}$ .
 
 Parameters
 ----------
@@ -190,13 +190,13 @@ d : NT
 Returns: NT";
 
 // CGAL::Fair
-constexpr const char* CGAL_Fair__class__ = "Implements the fair splitting rule.";
+constexpr const char* Fair__class__ = "Implements the fair splitting rule.";
 
-constexpr const char* CGAL_Fair_FT = "Number type.
+constexpr const char* Fair_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Fair_Fair = "Default constructor.";
-constexpr const char* CGAL_Fair_Fair_1 = "Constructor.
+constexpr const char* Fair_Fair = "Default constructor.";
+constexpr const char* Fair_Fair_1 = "Constructor.
 
 Parameters
 ----------
@@ -204,18 +204,18 @@ bucket_size : unsigned int
 aspect_ratio : FT";
 
 // CGAL::Fuzzy_iso_box
-constexpr const char* CGAL_Fuzzy_iso_box__class__ = "The class Fuzzy_iso_box implements fuzzy d -dimensional (closed) iso boxes.";
+constexpr const char* Fuzzy_iso_box__class__ = "The class Fuzzy_iso_box implements fuzzy d -dimensional (closed) iso boxes.";
 
-constexpr const char* CGAL_Fuzzy_iso_box_D = "Dimension Tag.
+constexpr const char* Fuzzy_iso_box_D = "Dimension Tag.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Fuzzy_iso_box_Point_d = "Point type.
+constexpr const char* Fuzzy_iso_box_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Fuzzy_iso_box_FT = "Number type.
+constexpr const char* Fuzzy_iso_box_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Fuzzy_iso_box_Fuzzy_iso_box = "Construct a fuzzy iso box specified by the minimal iso box containing p and q and fuzziness value epsilon .
+constexpr const char* Fuzzy_iso_box_Fuzzy_iso_box = "Construct a fuzzy iso box specified by the minimal iso box containing p and q and fuzziness value epsilon .
 
 p must be lexicographically smaller than q .
 
@@ -225,7 +225,7 @@ p : Point_d
 q : Point_d
 epsilon : FT
 t : Traits";
-constexpr const char* CGAL_Fuzzy_iso_box_Fuzzy_iso_box_1 = "Construct a fuzzy iso box specified by the minimal iso box containing p and q and fuzziness value epsilon .
+constexpr const char* Fuzzy_iso_box_Fuzzy_iso_box_1 = "Construct a fuzzy iso box specified by the minimal iso box containing p and q and fuzziness value epsilon .
 
 Only available in case Traits is Search_traits_adapter
 <Key,PointPropertyMap,BaseTraits> . p must be lexicographically smaller than q
@@ -237,14 +237,14 @@ p : Traits::Base::Point_d
 q : Traits::Base::Point_d
 epsilon : FT
 t : Traits";
-constexpr const char* CGAL_Fuzzy_iso_box_contains = "Test whether the fuzzy iso box contains p .
+constexpr const char* Fuzzy_iso_box_contains = "Test whether the fuzzy iso box contains p .
 
 Parameters
 ----------
 p : Point_d
 
 Returns: bool";
-constexpr const char* CGAL_Fuzzy_iso_box_contains_point_given_as_coordinates = "Test whether the fuzzy iso box contains the point whose Cartesian coordinates are contained in the range [ begin , end ).
+constexpr const char* Fuzzy_iso_box_contains_point_given_as_coordinates = "Test whether the fuzzy iso box contains the point whose Cartesian coordinates are contained in the range [ begin , end ).
 
 Parameters
 ----------
@@ -252,14 +252,14 @@ begin : Coord_iterator
 end : Coord_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Fuzzy_iso_box_inner_range_intersects = "Test whether the inner box intersects the rectangle associated with a node of a tree.
+constexpr const char* Fuzzy_iso_box_inner_range_intersects = "Test whether the inner box intersects the rectangle associated with a node of a tree.
 
 Parameters
 ----------
 rectangle : const Kd_tree_rectangle < FT , D > &
 
 Returns: bool";
-constexpr const char* CGAL_Fuzzy_iso_box_outer_range_contains = "Test whether the outer box encloses the rectangle associated with a node of a tree.
+constexpr const char* Fuzzy_iso_box_outer_range_contains = "Test whether the outer box encloses the rectangle associated with a node of a tree.
 
 Parameters
 ----------
@@ -268,18 +268,18 @@ rectangle : const Kd_tree_rectangle < FT , D > &
 Returns: bool";
 
 // CGAL::Fuzzy_sphere
-constexpr const char* CGAL_Fuzzy_sphere__class__ = "The class Fuzzy_sphere implements fuzzy d -dimensional spheres.";
+constexpr const char* Fuzzy_sphere__class__ = "The class Fuzzy_sphere implements fuzzy d -dimensional spheres.";
 
-constexpr const char* CGAL_Fuzzy_sphere_D = "Dimension Tag.
+constexpr const char* Fuzzy_sphere_D = "Dimension Tag.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Fuzzy_sphere_Point_d = "Point type.
+constexpr const char* Fuzzy_sphere_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Fuzzy_sphere_FT = "Number type.
+constexpr const char* Fuzzy_sphere_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Fuzzy_sphere_Fuzzy_sphere = "Construct a fuzzy sphere centered at center with radius radius and fuzziness value epsilon .
+constexpr const char* Fuzzy_sphere_Fuzzy_sphere = "Construct a fuzzy sphere centered at center with radius radius and fuzziness value epsilon .
 
 Parameters
 ----------
@@ -287,7 +287,7 @@ center : Point_d
 radius : FT
 epsilon : FT
 t : Traits";
-constexpr const char* CGAL_Fuzzy_sphere_Fuzzy_sphere_1 = "Construct a fuzzy sphere centered at center with radius radius and fuzziness value epsilon .
+constexpr const char* Fuzzy_sphere_Fuzzy_sphere_1 = "Construct a fuzzy sphere centered at center with radius radius and fuzziness value epsilon .
 
 Only available in case Traits is Search_traits_adapter
 <Key,PointPropertyMap,BaseTraits> .
@@ -298,7 +298,7 @@ center : Traits::Base::Point_d
 radius : FT
 epsilon : FT
 t : Traits";
-constexpr const char* CGAL_Fuzzy_sphere_contains = "Test whether the fuzzy sphere contains p .
+constexpr const char* Fuzzy_sphere_contains = "Test whether the fuzzy sphere contains p .
 
 That is, whether the distance between the center of the fuzzy sphere and p is
 less than $ r$ .
@@ -308,7 +308,7 @@ Parameters
 p : const Point_d &
 
 Returns: bool";
-constexpr const char* CGAL_Fuzzy_sphere_contains_point_given_as_coordinates = "Test whether the fuzzy sphere contains the point whose Cartesian coordinates are contained in the range [ begin , end ).
+constexpr const char* Fuzzy_sphere_contains_point_given_as_coordinates = "Test whether the fuzzy sphere contains the point whose Cartesian coordinates are contained in the range [ begin , end ).
 
 Parameters
 ----------
@@ -316,7 +316,7 @@ begin : Coord_iterator
 end : Coord_iterator
 
 Returns: bool";
-constexpr const char* CGAL_Fuzzy_sphere_inner_range_intersects = "Test whether the inner sphere intersects the rectangle associated with a node of a tree.
+constexpr const char* Fuzzy_sphere_inner_range_intersects = "Test whether the inner sphere intersects the rectangle associated with a node of a tree.
 
 That is, whether the minimal distance between the center of the fuzzy sphere
 and rectangle is less than $ r-\\epsilon$ .
@@ -326,7 +326,7 @@ Parameters
 rectangle : const Kd_tree_rectangle < FT , D > &
 
 Returns: bool";
-constexpr const char* CGAL_Fuzzy_sphere_outer_range_contains = "Test whether the outer sphere encloses the rectangle associated with a node of a tree.
+constexpr const char* Fuzzy_sphere_outer_range_contains = "Test whether the outer sphere encloses the rectangle associated with a node of a tree.
 
 That is, whether the maximal distance between the center of the fuzzy sphere
 and rectangle is less than $ r+\\epsilon$ .
@@ -338,30 +338,30 @@ rectangle : const Kd_tree_rectangle < FT , D > &
 Returns: bool";
 
 // CGAL::Incremental_neighbor_search
-constexpr const char* CGAL_Incremental_neighbor_search__class__ = "The class Incremental_neighbor_search implements incremental nearest and furthest neighbor searching on a tree.";
+constexpr const char* Incremental_neighbor_search__class__ = "The class Incremental_neighbor_search implements incremental nearest and furthest neighbor searching on a tree.";
 
-constexpr const char* CGAL_Incremental_neighbor_search_Point_d = "Point type.
+constexpr const char* Incremental_neighbor_search_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Incremental_neighbor_search_NT = "Number type.
+constexpr const char* Incremental_neighbor_search_NT = "Number type.
 
 Returns: Traits::NT";
-constexpr const char* CGAL_Incremental_neighbor_search_Distance = "Distance type.
+constexpr const char* Incremental_neighbor_search_Distance = "Distance type.
 
 Returns: GeneralDistance";
-constexpr const char* CGAL_Incremental_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
+constexpr const char* Incremental_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
 
 Returns: std::pair< Point_d , NT >";
-constexpr const char* CGAL_Incremental_neighbor_search_iterator = "const input iterator with value type Point_with_transformed_distance for enumerating approximate neighbors.
+constexpr const char* Incremental_neighbor_search_iterator = "const input iterator with value type Point_with_transformed_distance for enumerating approximate neighbors.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Incremental_neighbor_search_Query_item = "Query item type.
+constexpr const char* Incremental_neighbor_search_Query_item = "Query item type.
 
 Returns: GeneralDistance::Query_item";
-constexpr const char* CGAL_Incremental_neighbor_search_Tree = "The tree type.
+constexpr const char* Incremental_neighbor_search_Tree = "The tree type.
 
 Returns: SpatialTree";
-constexpr const char* CGAL_Incremental_neighbor_search_Incremental_neighbor_search = "Constructor for incremental neighbor searching of the query item q in the points stored tree using a distance d and approximation factor eps .
+constexpr const char* Incremental_neighbor_search_Incremental_neighbor_search = "Constructor for incremental neighbor searching of the query item q in the points stored tree using a distance d and approximation factor eps .
 
 Parameters
 ----------
@@ -370,13 +370,13 @@ q : QueryItem
 eps : NT
 search_nearest : bool
 d : GeneralDistance";
-constexpr const char* CGAL_Incremental_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
+constexpr const char* Incremental_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
 
 Returns: iterator";
-constexpr const char* CGAL_Incremental_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
+constexpr const char* Incremental_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Incremental_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
+constexpr const char* Incremental_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
 
 Parameters
 ----------
@@ -385,30 +385,30 @@ s : std::ostream &
 Returns: std::ostream &";
 
 // CGAL::K_neighbor_search
-constexpr const char* CGAL_K_neighbor_search__class__ = "The class K_neighbor_search implements approximate k -nearest and k -furthest neighbor searching using standard search on a tree using a general distance class.";
+constexpr const char* K_neighbor_search__class__ = "The class K_neighbor_search implements approximate k -nearest and k -furthest neighbor searching using standard search on a tree using a general distance class.";
 
-constexpr const char* CGAL_K_neighbor_search_Point_d = "Point type.
+constexpr const char* K_neighbor_search_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_K_neighbor_search_FT = "Number type.
+constexpr const char* K_neighbor_search_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_K_neighbor_search_Distance = "Distance type.
+constexpr const char* K_neighbor_search_Distance = "Distance type.
 
 Returns: GeneralDistance";
-constexpr const char* CGAL_K_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
+constexpr const char* K_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
 
 Returns: std::pair< Point_d , FT >";
-constexpr const char* CGAL_K_neighbor_search_iterator = "Bidirectional const iterator with value type Point_with_distance for enumerating approximate neighbors.
+constexpr const char* K_neighbor_search_iterator = "Bidirectional const iterator with value type Point_with_distance for enumerating approximate neighbors.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_K_neighbor_search_Query_item = "Query item type.
+constexpr const char* K_neighbor_search_Query_item = "Query item type.
 
 Returns: GeneralDistance::Query_item";
-constexpr const char* CGAL_K_neighbor_search_Tree = "The tree type.
+constexpr const char* K_neighbor_search_Tree = "The tree type.
 
 Returns: SpatialTree";
-constexpr const char* CGAL_K_neighbor_search_K_neighbor_search = "Constructor for searching approximately k neighbors of the query item q in the points stored in tree using distance class d and approximation factor eps .
+constexpr const char* K_neighbor_search_K_neighbor_search = "Constructor for searching approximately k neighbors of the query item q in the points stored in tree using distance class d and approximation factor eps .
 
 sorted indicates if the computed sequence of k -nearest neighbors needs to be
 sorted.
@@ -422,13 +422,13 @@ eps : FT
 search_nearest : bool
 d : GeneralDistance
 sorted : bool";
-constexpr const char* CGAL_K_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
+constexpr const char* K_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
 
 Returns: iterator";
-constexpr const char* CGAL_K_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
+constexpr const char* K_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_K_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
+constexpr const char* K_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
 
 Parameters
 ----------
@@ -437,42 +437,42 @@ s : std::ostream &
 Returns: std::ostream &";
 
 // CGAL::Kd_tree
-constexpr const char* CGAL_Kd_tree__class__ = "The class Kd_tree defines a k-d tree.";
+constexpr const char* Kd_tree__class__ = "The class Kd_tree defines a k-d tree.";
 
-constexpr const char* CGAL_Kd_tree_D = "Dimension tag.
+constexpr const char* Kd_tree_D = "Dimension tag.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_Point_d = "Point class.
+constexpr const char* Kd_tree_Point_d = "Point class.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Kd_tree_FT = "Number type.
+constexpr const char* Kd_tree_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Kd_tree_Splitter = "Splitter type.
+constexpr const char* Kd_tree_Splitter = "Splitter type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_iterator = "Bidirectional const iterator with value type Point_d that allows to enumerate all points in the tree.
+constexpr const char* Kd_tree_iterator = "Bidirectional const iterator with value type Point_d that allows to enumerate all points in the tree.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_Node_handle = "A handle with value type Kd_tree_node <Traits, Splitter > .
+constexpr const char* Kd_tree_Node_handle = "A handle with value type Kd_tree_node <Traits, Splitter > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_Node_const_handle = "A const handle with value type Kd_tree_node <Traits, Splitter > .
+constexpr const char* Kd_tree_Node_const_handle = "A const handle with value type Kd_tree_node <Traits, Splitter > .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_Point_d_iterator = "Random access const iterator with value type const Point_d* .
+constexpr const char* Kd_tree_Point_d_iterator = "Random access const iterator with value type const Point_d* .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_size_type = "A type that counts the number of elements in a k-d tree.
+constexpr const char* Kd_tree_size_type = "A type that counts the number of elements in a k-d tree.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Kd_tree_Kd_tree = "Constructs an empty k-d tree.
+constexpr const char* Kd_tree_Kd_tree = "Constructs an empty k-d tree.
 
 Parameters
 ----------
 s : Splitter
 t : Traits";
-constexpr const char* CGAL_Kd_tree_Kd_tree_1 = "Constructs a k-d tree on the elements from the sequence [first, beyond) using the splitting rule implemented by s .
+constexpr const char* Kd_tree_Kd_tree_1 = "Constructs a k-d tree on the elements from the sequence [first, beyond) using the splitting rule implemented by s .
 
 The value type of the InputIterator must be Point_d .
 
@@ -482,7 +482,7 @@ first : InputIterator
 beyond : InputIterator
 s : Splitter
 t : Traits";
-constexpr const char* CGAL_Kd_tree_Kd_tree_2 = "Constructs a k-d tree on the elements from the range points using the splitting rule implemented by s .
+constexpr const char* Kd_tree_Kd_tree_2 = "Constructs a k-d tree on the elements from the range points using the splitting rule implemented by s .
 
 The value type of elements in PointRange must be Point_d .
 
@@ -491,7 +491,7 @@ Parameters
 points : const PointRange &
 s : Splitter
 t : const Traits";
-constexpr const char* CGAL_Kd_tree_build = "The constructor does not build the internal data structure, and it is also not updated after calls to insert() .
+constexpr const char* Kd_tree_build = "The constructor does not build the internal data structure, and it is also not updated after calls to insert() .
 
 The method build() is called implicitly at the first call to a query or
 removal member function. You can call build() explicitly to ensure that the
@@ -502,11 +502,11 @@ Parallel_if_available_tag . This template parameter is optional: calling
 build() without specifying the concurrency tag will result in Sequential_tag
 being used. If build() is not called by the user but called implicitly at the
 first call to a query or removal member function, Sequential_tag is also used.";
-constexpr const char* CGAL_Kd_tree_invalidate_build = "This clears the internal data structure, which then gets rebuilt either by an explicit call to build() or implicitly by the next query or removal.
+constexpr const char* Kd_tree_invalidate_build = "This clears the internal data structure, which then gets rebuilt either by an explicit call to build() or implicitly by the next query or removal.
 
 The only reason to call this function explicitly is to rebalance the tree
 after some number of removals.";
-constexpr const char* CGAL_Kd_tree_insert = "Inserts the point p in the k-d tree.
+constexpr const char* Kd_tree_insert = "Inserts the point p in the k-d tree.
 
 Insertions do not dynamically update the internal data structure. The next
 query, or a call to build() , automatically triggers a rebuild of the whole
@@ -515,7 +515,7 @@ structure.
 Parameters
 ----------
 p : Point_d";
-constexpr const char* CGAL_Kd_tree_insert_1 = "Inserts the elements from the sequence [first, beyond) in the k-d tree.
+constexpr const char* Kd_tree_insert_1 = "Inserts the elements from the sequence [first, beyond) in the k-d tree.
 
 The value type of the InputIterator must be Point_d .
 
@@ -523,7 +523,7 @@ Parameters
 ----------
 first : InputIterator
 beyond : InputIterator";
-constexpr const char* CGAL_Kd_tree_remove = "Removes the point p from the k-d tree.
+constexpr const char* Kd_tree_remove = "Removes the point p from the k-d tree.
 
 It uses equal_to_p to identify the point after locating it, which can matter
 in particular when 2 points are in the same place. IdentifyPoint is a unary
@@ -537,12 +537,12 @@ Parameters
 ----------
 p : Point_d
 identify_point : IdentifyPoint";
-constexpr const char* CGAL_Kd_tree_remove_1 = "Removes point p , calling the 2-argument function remove() with a functor that simply compares coordinates.
+constexpr const char* Kd_tree_remove_1 = "Removes point p , calling the 2-argument function remove() with a functor that simply compares coordinates.
 
 Parameters
 ----------
 p : Point_d";
-constexpr const char* CGAL_Kd_tree_search_any_point = "Reports any point that is approximately contained by q .
+constexpr const char* Kd_tree_search_any_point = "Reports any point that is approximately contained by q .
 
 The types FuzzyQueryItem::Point_d and Point_d must be equivalent. To use this
 function Traits must be a model of the concept RangeSearchTraits .
@@ -552,7 +552,7 @@ Parameters
 q : FuzzyQueryItem
 
 Returns: std::optional< Point_d >";
-constexpr const char* CGAL_Kd_tree_search = "Reports the points that are approximately contained by q .
+constexpr const char* Kd_tree_search = "Reports the points that are approximately contained by q .
 
 The types FuzzyQueryItem::Point_d and Point_d must be equivalent. To use this
 function Traits must be a model of the concept RangeSearchTraits .
@@ -563,40 +563,40 @@ it : OutputIterator
 q : FuzzyQueryItem
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Kd_tree_begin = "Returns a const iterator to the first point in the tree.
+constexpr const char* Kd_tree_begin = "Returns a const iterator to the first point in the tree.
 
 Starting with CGAL 4.6, the order of the points in the iterator range [
 begin() , end() ) is not the order of insertion of the points into the tree.
 This was not guaranteed before but might have been observed and exploited.
 
 Returns: iterator";
-constexpr const char* CGAL_Kd_tree_end = "Returns the appropriate past-the-end const iterator.
+constexpr const char* Kd_tree_end = "Returns the appropriate past-the-end const iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Kd_tree_clear = "Removes all points from the k-d tree.";
-constexpr const char* CGAL_Kd_tree_size = "Returns the number of points that are stored in the tree.
+constexpr const char* Kd_tree_clear = "Removes all points from the k-d tree.";
+constexpr const char* Kd_tree_size = "Returns the number of points that are stored in the tree.
 
 Returns: size_type";
-constexpr const char* CGAL_Kd_tree_traits = "Returns the instance of the traits used to construct the tree.
+constexpr const char* Kd_tree_traits = "Returns the instance of the traits used to construct the tree.
 
 Returns: Traits";
-constexpr const char* CGAL_Kd_tree_root = "Returns a handle to the root node of the tree.
+constexpr const char* Kd_tree_root = "Returns a handle to the root node of the tree.
 
 Returns: Node_handle";
-constexpr const char* CGAL_Kd_tree_root_1 = "Returns a const handle to the root node of the tree.
+constexpr const char* Kd_tree_root_1 = "Returns a const handle to the root node of the tree.
 
 Returns: Node_const_handle";
-constexpr const char* CGAL_Kd_tree_bounding_box = "Returns a const reference to the bounding box of the root node of the tree.
+constexpr const char* Kd_tree_bounding_box = "Returns a const reference to the bounding box of the root node of the tree.
 
 Returns: const Kd_tree_rectangle < FT , D > &";
-constexpr const char* CGAL_Kd_tree_statistics = "Inserts statistics of the tree into the output stream s .
+constexpr const char* Kd_tree_statistics = "Inserts statistics of the tree into the output stream s .
 
 Parameters
 ----------
 s : std::ostream &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Kd_tree_write_graphviz = "Inserts the tree in the Graphviz format into the output stream s .
+constexpr const char* Kd_tree_write_graphviz = "Inserts the tree in the Graphviz format into the output stream s .
 
 Parameters
 ----------
@@ -604,66 +604,66 @@ s : std::ostream &
 
 Returns: std::ostream &";
 
-constexpr const char* CGAL_Kd_tree_internal_node_FT = "Number type.
+constexpr const char* Kd_tree_internal_node_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Kd_tree_internal_node_Node_handle = "Node handle.
+constexpr const char* Kd_tree_internal_node_Node_handle = "Node handle.
 
 Returns: Kd_tree < Traits, Splitter , UseExtendedNode >::Node_handle";
-constexpr const char* CGAL_Kd_tree_internal_node_Node_const_handle = "const node handle.
+constexpr const char* Kd_tree_internal_node_Node_const_handle = "const node handle.
 
 Returns: Kd_tree < Traits, Splitter , UseExtendedNode >::Node_const_handle";
-constexpr const char* CGAL_Kd_tree_internal_node_Separator = "Separator type.
+constexpr const char* Kd_tree_internal_node_Separator = "Separator type.
 
 Returns: Splitter::Separator";
-constexpr const char* CGAL_Kd_tree_internal_node_lower = "Returns a handle to the lower child of an internal node.
+constexpr const char* Kd_tree_internal_node_lower = "Returns a handle to the lower child of an internal node.
 
 Returns: Node_handle";
-constexpr const char* CGAL_Kd_tree_internal_node_upper = "Returns a handle to the upper child of an internal node.
+constexpr const char* Kd_tree_internal_node_upper = "Returns a handle to the upper child of an internal node.
 
 Returns: Node_handle";
-constexpr const char* CGAL_Kd_tree_internal_node_lower_1 = "Returns a const handle to the lower child of an internal node.
+constexpr const char* Kd_tree_internal_node_lower_1 = "Returns a const handle to the lower child of an internal node.
 
 Returns: Node_const_handle";
-constexpr const char* CGAL_Kd_tree_internal_node_upper_1 = "Returns a const handle to the upper child of an internal node.
+constexpr const char* Kd_tree_internal_node_upper_1 = "Returns a const handle to the upper child of an internal node.
 
 Returns: Node_const_handle";
-constexpr const char* CGAL_Kd_tree_internal_node_separator = "Returns a reference to the separator.
+constexpr const char* Kd_tree_internal_node_separator = "Returns a reference to the separator.
 
 Returns: Separator &";
-constexpr const char* CGAL_Kd_tree_internal_node_cutting_dimension = "Returns the cutting dimension.
+constexpr const char* Kd_tree_internal_node_cutting_dimension = "Returns the cutting dimension.
 
 Returns: int";
-constexpr const char* CGAL_Kd_tree_internal_node_cutting_value = "Returns the cutting value.
+constexpr const char* Kd_tree_internal_node_cutting_value = "Returns the cutting value.
 
 Returns: int";
-constexpr const char* CGAL_Kd_tree_internal_node_low_value = "Returns the upper limit of an extended node's lower child's tight rectangle along the node's cutting dimension.
+constexpr const char* Kd_tree_internal_node_low_value = "Returns the upper limit of an extended node's lower child's tight rectangle along the node's cutting dimension.
 
 Returns: FT";
-constexpr const char* CGAL_Kd_tree_internal_node_high_value = "Returns the lower limit of an extended node's upper child's tight rectangle along the node's cutting dimension.
+constexpr const char* Kd_tree_internal_node_high_value = "Returns the lower limit of an extended node's upper child's tight rectangle along the node's cutting dimension.
 
 Returns: FT";
 
-constexpr const char* CGAL_Kd_tree_leaf_node_iterator = "const iterator over points.
+constexpr const char* Kd_tree_leaf_node_iterator = "const iterator over points.
 
 Returns: Kd_tree < Traits, Splitter , UseExtendedNode >::iterator";
-constexpr const char* CGAL_Kd_tree_leaf_node_size = "Returns the number of items stored in a leaf node.
+constexpr const char* Kd_tree_leaf_node_size = "Returns the number of items stored in a leaf node.
 
 Returns: unsigned int";
-constexpr const char* CGAL_Kd_tree_leaf_node_begin = "Returns a const iterator to the first item in a leaf node.
+constexpr const char* Kd_tree_leaf_node_begin = "Returns a const iterator to the first item in a leaf node.
 
 Returns: iterator";
-constexpr const char* CGAL_Kd_tree_leaf_node_end = "Returns the appropriate past-the-end const iterator.
+constexpr const char* Kd_tree_leaf_node_end = "Returns the appropriate past-the-end const iterator.
 
 Returns: iterator";
 
 // CGAL::Kd_tree_node
-constexpr const char* CGAL_Kd_tree_node__class__ = "The class Kd_tree_node implements a node class for a k-d tree.";
+constexpr const char* Kd_tree_node__class__ = "The class Kd_tree_node implements a node class for a k-d tree.";
 
-constexpr const char* CGAL_Kd_tree_node_Point_d = "Point class.
+constexpr const char* Kd_tree_node_Point_d = "Point class.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Kd_tree_node_search = "Reports the points from the subtree of the node, that are approximately contained by q .
+constexpr const char* Kd_tree_node_search = "Reports the points from the subtree of the node, that are approximately contained by q .
 
 Parameters
 ----------
@@ -671,7 +671,7 @@ it : OutputIterator
 q : FuzzyQueryItem
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Kd_tree_node_search_any_point = "Reports any point from the subtree of the node, that is approximately contained by q .
+constexpr const char* Kd_tree_node_search_any_point = "Reports any point from the subtree of the node, that is approximately contained by q .
 
 Parameters
 ----------
@@ -679,34 +679,34 @@ it : OutputIterator
 q : FuzzyQueryItem
 
 Returns: std::optional< Point_d >";
-constexpr const char* CGAL_Kd_tree_node_tree_items = "Reports all the points contained by the subtree of the node.
+constexpr const char* Kd_tree_node_tree_items = "Reports all the points contained by the subtree of the node.
 
 Parameters
 ----------
 it : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Kd_tree_node_is_leaf = "Indicates whether a node is a leaf node.
+constexpr const char* Kd_tree_node_is_leaf = "Indicates whether a node is a leaf node.
 
 Returns: bool";
 
 // CGAL::Kd_tree_rectangle
-constexpr const char* CGAL_Kd_tree_rectangle__class__ = "The class Kd_tree_rectangle implements d -dimensional iso-rectangles and related operations, e.g., methods to compute bounding boxes of point sets.";
+constexpr const char* Kd_tree_rectangle__class__ = "The class Kd_tree_rectangle implements d -dimensional iso-rectangles and related operations, e.g., methods to compute bounding boxes of point sets.";
 
-constexpr const char* CGAL_Kd_tree_rectangle_Dimension = "Dimension type.
+constexpr const char* Kd_tree_rectangle_Dimension = "Dimension type.
 
 Either CGAL::Dimension_tag or CGAL::Dynamic_dimension_tag .
 
 Returns: Dimension";
-constexpr const char* CGAL_Kd_tree_rectangle_FT = "Number type.
+constexpr const char* Kd_tree_rectangle_FT = "Number type.
 
 Returns: FT";
-constexpr const char* CGAL_Kd_tree_rectangle_Kd_tree_rectangle = "Constructs a d -dimensional rectangle r with lower bound and upper bound set to zero in each dimension.
+constexpr const char* Kd_tree_rectangle_Kd_tree_rectangle = "Constructs a d -dimensional rectangle r with lower bound and upper bound set to zero in each dimension.
 
 Parameters
 ----------
 d : int";
-constexpr const char* CGAL_Kd_tree_rectangle_Kd_tree_rectangle_1 = "Constructs the bounding box of the points in the range [begin,end) , where the value type of PointIter can be used by operators of functors Construct_cartesian_const_iterator_d to define iterators with value type FT .
+constexpr const char* Kd_tree_rectangle_Kd_tree_rectangle_1 = "Constructs the bounding box of the points in the range [begin,end) , where the value type of PointIter can be used by operators of functors Construct_cartesian_const_iterator_d to define iterators with value type FT .
 
 Parameters
 ----------
@@ -714,49 +714,49 @@ d : int
 begin : PointIter
 end : PointIter
 construct_it : const Construct_cartesian_const_iterator_d &";
-constexpr const char* CGAL_Kd_tree_rectangle_min_coord = "Returns the lower bound of the rectangle in dimension i .
+constexpr const char* Kd_tree_rectangle_min_coord = "Returns the lower bound of the rectangle in dimension i .
 
 Parameters
 ----------
 i : int
 
 Returns: FT";
-constexpr const char* CGAL_Kd_tree_rectangle_max_coord = "Returns the upper bound of the rectangle in dimension i .
+constexpr const char* Kd_tree_rectangle_max_coord = "Returns the upper bound of the rectangle in dimension i .
 
 Parameters
 ----------
 i : int
 
 Returns: FT";
-constexpr const char* CGAL_Kd_tree_rectangle_set_upper_bound = "Sets upper bound in dimension i to x .
-
-Parameters
-----------
-i : int
-x : const FT &";
-constexpr const char* CGAL_Kd_tree_rectangle_set_lower_bound = "Sets lower bound in dimension i to x .
+constexpr const char* Kd_tree_rectangle_set_upper_bound = "Sets upper bound in dimension i to x .
 
 Parameters
 ----------
 i : int
 x : const FT &";
-constexpr const char* CGAL_Kd_tree_rectangle_max_span = "Returns the maximal span of the rectangle.
+constexpr const char* Kd_tree_rectangle_set_lower_bound = "Sets lower bound in dimension i to x .
+
+Parameters
+----------
+i : int
+x : const FT &";
+constexpr const char* Kd_tree_rectangle_max_span = "Returns the maximal span of the rectangle.
 
 Returns: FT";
-constexpr const char* CGAL_Kd_tree_rectangle_max_span_coord = "Returns the smallest coordinate for which the rectangle has its maximal span.
+constexpr const char* Kd_tree_rectangle_max_span_coord = "Returns the smallest coordinate for which the rectangle has its maximal span.
 
 Returns: FT";
-constexpr const char* CGAL_Kd_tree_rectangle_dimension = "Returns the dimension of the rectangle.
+constexpr const char* Kd_tree_rectangle_dimension = "Returns the dimension of the rectangle.
 
 Returns: int";
-constexpr const char* CGAL_Kd_tree_rectangle_split = "Splits rectangle in dimension d at coordinate-value value by modifying itself to lower half and by modifying r to upper half.
+constexpr const char* Kd_tree_rectangle_split = "Splits rectangle in dimension d at coordinate-value value by modifying itself to lower half and by modifying r to upper half.
 
 Parameters
 ----------
 r : Kd_tree_rectangle < FT , Dimension > &
 d : int
 value : FT";
-constexpr const char* CGAL_Kd_tree_rectangle_operator = "Inserts rectangle r in the output stream s and returns s .
+constexpr const char* Kd_tree_rectangle_operator = "Inserts rectangle r in the output stream s and returns s .
 
 Parameters
 ----------
@@ -766,26 +766,26 @@ r : Kd_tree_rectangle < FT > &
 Returns: std::ostream &";
 
 // CGAL::Manhattan_distance_iso_box_point
-constexpr const char* CGAL_Manhattan_distance_iso_box_point__class__ = "The class Manhattan_distance_iso_box_point provides an implementation of the GeneralDistance concept for the Manhattan distance ( $ l_1$ metric) between a d -dimensional iso-box and a d -dimensional point and the Manhattan distance between a d -dimensional iso-box and a d -dimensional iso-box defined as a k-d tree rectangle.";
+constexpr const char* Manhattan_distance_iso_box_point__class__ = "The class Manhattan_distance_iso_box_point provides an implementation of the GeneralDistance concept for the Manhattan distance ( $ l_1$ metric) between a d -dimensional iso-box and a d -dimensional point and the Manhattan distance between a d -dimensional iso-box and a d -dimensional iso-box defined as a k-d tree rectangle.";
 
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_D = "Dimension Tag.
+constexpr const char* Manhattan_distance_iso_box_point_D = "Dimension Tag.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_FT = "Number type.
+constexpr const char* Manhattan_distance_iso_box_point_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_Point_d = "Point type.
+constexpr const char* Manhattan_distance_iso_box_point_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_Query_item = "Query item type.
+constexpr const char* Manhattan_distance_iso_box_point_Query_item = "Query item type.
 
 Returns: Traits::Iso_box_d";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_Manhattan_distance_iso_box_point = "Default constructor.
+constexpr const char* Manhattan_distance_iso_box_point_Manhattan_distance_iso_box_point = "Default constructor.
 
 Parameters
 ----------
 t : Traits";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_transformed_distance = "Returns the transformed distance between b and p .
+constexpr const char* Manhattan_distance_iso_box_point_transformed_distance = "Returns the transformed distance between b and p .
 
 Parameters
 ----------
@@ -793,21 +793,21 @@ b : Query_item
 p : Point_d
 
 Returns: FT";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_transformed_distance_1 = "Returns the transformed value of d .
+constexpr const char* Manhattan_distance_iso_box_point_transformed_distance_1 = "Returns the transformed value of d .
 
 Parameters
 ----------
 d : FT
 
 Returns: FT";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_inverse_of_transformed_distance = "Returns the value of the inverse of the transform function applied to d .
+constexpr const char* Manhattan_distance_iso_box_point_inverse_of_transformed_distance = "Returns the value of the inverse of the transform function applied to d .
 
 Parameters
 ----------
 d : FT
 
 Returns: FT";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_min_distance_to_rectangle = "Returns the minimal distance between a point from b and a point from r .
+constexpr const char* Manhattan_distance_iso_box_point_min_distance_to_rectangle = "Returns the minimal distance between a point from b and a point from r .
 
 Parameters
 ----------
@@ -815,7 +815,7 @@ b : Query_item
 r : Kd_tree_rectangle < FT , D >
 
 Returns: FT";
-constexpr const char* CGAL_Manhattan_distance_iso_box_point_max_distance_to_rectangle = "Returns the maximal distance between the iso-box b and a point from r furthest to b .
+constexpr const char* Manhattan_distance_iso_box_point_max_distance_to_rectangle = "Returns the maximal distance between the iso-box b and a point from r furthest to b .
 
 Parameters
 ----------
@@ -825,70 +825,70 @@ r : Kd_tree_rectangle < FT , D >
 Returns: FT";
 
 // CGAL::Median_of_max_spread
-constexpr const char* CGAL_Median_of_max_spread__class__ = "Implements the median of max spread splitting rule.";
+constexpr const char* Median_of_max_spread__class__ = "Implements the median of max spread splitting rule.";
 
-constexpr const char* CGAL_Median_of_max_spread_Median_of_max_spread = "Default constructor.";
-constexpr const char* CGAL_Median_of_max_spread_Median_of_max_spread_1 = "Constructor.
+constexpr const char* Median_of_max_spread_Median_of_max_spread = "Default constructor.";
+constexpr const char* Median_of_max_spread_Median_of_max_spread_1 = "Constructor.
 
 Parameters
 ----------
 bucket_size : unsigned int";
 
 // CGAL::Median_of_rectangle
-constexpr const char* CGAL_Median_of_rectangle__class__ = "Implements the median of rectangle splitting rule.";
+constexpr const char* Median_of_rectangle__class__ = "Implements the median of rectangle splitting rule.";
 
-constexpr const char* CGAL_Median_of_rectangle_Median_of_rectangle = "Default constructor.";
-constexpr const char* CGAL_Median_of_rectangle_Median_of_rectangle_1 = "Constructor.
+constexpr const char* Median_of_rectangle_Median_of_rectangle = "Default constructor.";
+constexpr const char* Median_of_rectangle_Median_of_rectangle_1 = "Constructor.
 
 Parameters
 ----------
 bucket_size : unsigned int";
 
 // CGAL::Midpoint_of_max_spread
-constexpr const char* CGAL_Midpoint_of_max_spread__class__ = "Implements the midpoint of max spread splitting rule.";
+constexpr const char* Midpoint_of_max_spread__class__ = "Implements the midpoint of max spread splitting rule.";
 
-constexpr const char* CGAL_Midpoint_of_max_spread_Midpoint_of_max_spread = "Default constructor.";
-constexpr const char* CGAL_Midpoint_of_max_spread_Midpoint_of_max_spread_1 = "Constructor.
+constexpr const char* Midpoint_of_max_spread_Midpoint_of_max_spread = "Default constructor.";
+constexpr const char* Midpoint_of_max_spread_Midpoint_of_max_spread_1 = "Constructor.
 
 Parameters
 ----------
 bucket_size : unsigned int";
 
 // CGAL::Midpoint_of_rectangle
-constexpr const char* CGAL_Midpoint_of_rectangle__class__ = "Implements the midpoint of rectangle splitting rule.";
+constexpr const char* Midpoint_of_rectangle__class__ = "Implements the midpoint of rectangle splitting rule.";
 
-constexpr const char* CGAL_Midpoint_of_rectangle_Midpoint_of_rectangle_spread = "Default constructor.";
-constexpr const char* CGAL_Midpoint_of_rectangle_Midpoint_of_rectangle = "Constructor.
+constexpr const char* Midpoint_of_rectangle_Midpoint_of_rectangle_spread = "Default constructor.";
+constexpr const char* Midpoint_of_rectangle_Midpoint_of_rectangle = "Constructor.
 
 Parameters
 ----------
 bucket_size : unsigned int";
 
 // CGAL::Orthogonal_incremental_neighbor_search
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search__class__ = "The class Orthogonal_incremental_neighbor_search implements incremental nearest and furthest neighbor searching on a tree.";
+constexpr const char* Orthogonal_incremental_neighbor_search__class__ = "The class Orthogonal_incremental_neighbor_search implements incremental nearest and furthest neighbor searching on a tree.";
 
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_Point_d = "Point type.
+constexpr const char* Orthogonal_incremental_neighbor_search_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_FT = "Number type.
+constexpr const char* Orthogonal_incremental_neighbor_search_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_Distance = "Distance type.
+constexpr const char* Orthogonal_incremental_neighbor_search_Distance = "Distance type.
 
 Returns: OrthogonalDistance";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_Query_item = "Query item.
+constexpr const char* Orthogonal_incremental_neighbor_search_Query_item = "Query item.
 
 Returns: OrthogonalDistance::Query_item";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
+constexpr const char* Orthogonal_incremental_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
 
 Returns: std::pair< Point_d , FT >";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_iterator = "const input iterator with value type Point_with_transformed_distance for enumerating approximate neighbors.
+constexpr const char* Orthogonal_incremental_neighbor_search_iterator = "const input iterator with value type Point_with_transformed_distance for enumerating approximate neighbors.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_Tree = "The tree type.
+constexpr const char* Orthogonal_incremental_neighbor_search_Tree = "The tree type.
 
 Returns: SpatialTree";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_Orthogonal_incremental_neighbor_search = "Constructor for incremental neighbor searching of the query item query in the points stored tree using a distance d and approximation factor eps .
+constexpr const char* Orthogonal_incremental_neighbor_search_Orthogonal_incremental_neighbor_search = "Constructor for incremental neighbor searching of the query item query in the points stored tree using a distance d and approximation factor eps .
 
 Parameters
 ----------
@@ -897,13 +897,13 @@ query : Query_item
 eps : FT
 search_nearest : bool
 d : OrthogonalDistance";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
+constexpr const char* Orthogonal_incremental_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
 
 Returns: iterator";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
+constexpr const char* Orthogonal_incremental_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Orthogonal_incremental_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
+constexpr const char* Orthogonal_incremental_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
 
 Parameters
 ----------
@@ -912,30 +912,30 @@ s : std::ostream &
 Returns: std::ostream &";
 
 // CGAL::Orthogonal_k_neighbor_search
-constexpr const char* CGAL_Orthogonal_k_neighbor_search__class__ = "The class Orthogonal_k_neighbor_search implements approximate k -nearest and k -furthest neighbor searching on a tree using an orthogonal distance class.";
+constexpr const char* Orthogonal_k_neighbor_search__class__ = "The class Orthogonal_k_neighbor_search implements approximate k -nearest and k -furthest neighbor searching on a tree using an orthogonal distance class.";
 
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_Point_d = "Point type.
+constexpr const char* Orthogonal_k_neighbor_search_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_FT = "Number type.
+constexpr const char* Orthogonal_k_neighbor_search_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_Distance = "Distance type.
+constexpr const char* Orthogonal_k_neighbor_search_Distance = "Distance type.
 
 Returns: OrthogonalDistance";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_Query_item = "Query item.
+constexpr const char* Orthogonal_k_neighbor_search_Query_item = "Query item.
 
 Returns: GeneralDistance::Query_item";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
+constexpr const char* Orthogonal_k_neighbor_search_Point_with_transformed_distance = "Pair of point and transformed distance.
 
 Returns: std::pair< Point_d , FT >";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_iterator = "Bidirectional const iterator with value type Point_with_transformed_distance for enumerating approximate neighbors.
+constexpr const char* Orthogonal_k_neighbor_search_iterator = "Bidirectional const iterator with value type Point_with_transformed_distance for enumerating approximate neighbors.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_Tree = "The tree type.
+constexpr const char* Orthogonal_k_neighbor_search_Tree = "The tree type.
 
 Returns: SpatialTree";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_Orthogonal_k_neighbor_search = "Constructor for searching approximately k neighbors of the query item query in the points stored in tree using distance d and approximation factor eps .
+constexpr const char* Orthogonal_k_neighbor_search_Orthogonal_k_neighbor_search = "Constructor for searching approximately k neighbors of the query item query in the points stored in tree using distance d and approximation factor eps .
 
 sorted indicates if the computed sequence of k -nearest neighbors needs to be
 sorted.
@@ -949,13 +949,13 @@ eps : FT
 search_nearest : bool
 d : OrthogonalDistance
 sorted : bool";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
+constexpr const char* Orthogonal_k_neighbor_search_begin = "Returns a const iterator to the approximate nearest or furthest neighbor.
 
 Returns: iterator";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
+constexpr const char* Orthogonal_k_neighbor_search_end = "Returns the appropriate past-the-end const iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Orthogonal_k_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
+constexpr const char* Orthogonal_k_neighbor_search_statistics = "Inserts statistics of the search process into the output stream s .
 
 Parameters
 ----------
@@ -964,43 +964,43 @@ s : std::ostream &
 Returns: std::ostream &";
 
 // CGAL::Plane_separator
-constexpr const char* CGAL_Plane_separator__class__ = "The class Plane_separator implements a plane separator, i.e., a hyperplane that is used to separate two half spaces.";
+constexpr const char* Plane_separator__class__ = "The class Plane_separator implements a plane separator, i.e., a hyperplane that is used to separate two half spaces.";
 
-constexpr const char* CGAL_Plane_separator_Plane_separator = "Constructs a separator that separates two half spaces by a hyperplane defined by xd=v , where v denotes the d -th coordinate value.
+constexpr const char* Plane_separator_Plane_separator = "Constructs a separator that separates two half spaces by a hyperplane defined by xd=v , where v denotes the d -th coordinate value.
 
 Parameters
 ----------
 d : int
 v : FT";
-constexpr const char* CGAL_Plane_separator_Plane_separator_1 = "Copy constructor.
+constexpr const char* Plane_separator_Plane_separator_1 = "Copy constructor.
 
 Parameters
 ----------
 p : Plane_separator< FT >";
-constexpr const char* CGAL_Plane_separator_set_cutting_dimension = "Sets the cutting dimension to d .
+constexpr const char* Plane_separator_set_cutting_dimension = "Sets the cutting dimension to d .
 
 Parameters
 ----------
 d : int";
-constexpr const char* CGAL_Plane_separator_set_cutting_value = "Sets the cutting value to v .
+constexpr const char* Plane_separator_set_cutting_value = "Sets the cutting value to v .
 
 Parameters
 ----------
 v : FT";
-constexpr const char* CGAL_Plane_separator_cutting_dimension = "Returns the number of the cutting dimension.
+constexpr const char* Plane_separator_cutting_dimension = "Returns the number of the cutting dimension.
 
 Returns: int";
-constexpr const char* CGAL_Plane_separator_cutting_value = "Returns the cutting value.
+constexpr const char* Plane_separator_cutting_value = "Returns the cutting value.
 
 Returns: FT";
-constexpr const char* CGAL_Plane_separator_operator = "Assignment operator.
+constexpr const char* Plane_separator_operator = "Assignment operator.
 
 Parameters
 ----------
 s2 : Plane_separator < FT >
 
 Returns: Plane_separator < FT >";
-constexpr const char* CGAL_Plane_separator_operator_1 = "Inserts the plane separator s in the output stream os and returns os .
+constexpr const char* Plane_separator_operator_1 = "Inserts the plane separator s in the output stream os and returns os .
 
 Parameters
 ----------
@@ -1010,33 +1010,33 @@ s : Plane_separator < FT >
 Returns: std::ostream &";
 
 // CGAL::Point_container
-constexpr const char* CGAL_Point_container__class__ = "A custom container for points used to build a tree.";
+constexpr const char* Point_container__class__ = "A custom container for points used to build a tree.";
 
-constexpr const char* CGAL_Point_container_FT = "Number type.
+constexpr const char* Point_container_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Point_container_Point_d = "Point type.
+constexpr const char* Point_container_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Point_container_iterator = "An iterator with value type Point_d* .
+constexpr const char* Point_container_iterator = "An iterator with value type Point_d* .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_container_const_iterator = "A const iterator with value type const Point_d* .
+constexpr const char* Point_container_const_iterator = "A const iterator with value type const Point_d* .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Point_container_Point_container = "Construct an empty container for storing d -dimensional points.
+constexpr const char* Point_container_Point_container = "Construct an empty container for storing d -dimensional points.
 
 Parameters
 ----------
 d : int";
-constexpr const char* CGAL_Point_container_Point_container_1 = "Construct the container of d -dimensional points of type Point_d given by the iterator sequence [ begin , end ) .
+constexpr const char* Point_container_Point_container_1 = "Construct the container of d -dimensional points of type Point_d given by the iterator sequence [ begin , end ) .
 
 Parameters
 ----------
 d : int
 begin : InputIterator
 end : InputIterator";
-constexpr const char* CGAL_Point_container_split = "Given an empty container c2 with the same dimension as c , splits c into c and c2 using the separator sep .
+constexpr const char* Point_container_split = "Given an empty container c2 with the same dimension as c , splits c into c and c2 using the separator sep .
 
 If sliding is true after splitting each container contains at least one point.
 Container c should contain at least two points.
@@ -1046,85 +1046,85 @@ Parameters
 c2 : Point_container < Traits > &
 sep : SpatialSeparator
 sliding : bool";
-constexpr const char* CGAL_Point_container_swap = "Swap the contents of c and c2 .
+constexpr const char* Point_container_swap = "Swap the contents of c and c2 .
 
 Parameters
 ----------
 c2 : Point_container < Traits > &";
-constexpr const char* CGAL_Point_container_recompute_tight_bounding_box = "Recompute the bounding box of the points in the container.";
-constexpr const char* CGAL_Point_container_begin = "Returns an iterator to a pointer to the first point.
+constexpr const char* Point_container_recompute_tight_bounding_box = "Recompute the bounding box of the points in the container.";
+constexpr const char* Point_container_begin = "Returns an iterator to a pointer to the first point.
 
 Returns: iterator";
-constexpr const char* CGAL_Point_container_end = "Returns the appropriate past-the-end iterator.
+constexpr const char* Point_container_end = "Returns the appropriate past-the-end iterator.
 
 Returns: iterator";
-constexpr const char* CGAL_Point_container_begin_1 = "Returns a const iterator to a pointer to the first point.
+constexpr const char* Point_container_begin_1 = "Returns a const iterator to a pointer to the first point.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Point_container_end_1 = "Returns the appropriate past-the-end const iterator.
+constexpr const char* Point_container_end_1 = "Returns the appropriate past-the-end const iterator.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Point_container_dimension = "Returns the dimension.
+constexpr const char* Point_container_dimension = "Returns the dimension.
 
 Returns: int";
-constexpr const char* CGAL_Point_container_built_coordinate = "Returns coordinate for which the pointer list is built.
+constexpr const char* Point_container_built_coordinate = "Returns coordinate for which the pointer list is built.
 
 Returns: int";
-constexpr const char* CGAL_Point_container_max_span_coord = "Returns coordinate where the associated rectangle has maximal span.
+constexpr const char* Point_container_max_span_coord = "Returns coordinate where the associated rectangle has maximal span.
 
 Returns: int";
-constexpr const char* CGAL_Point_container_max_tight_span_coord = "Returns coordinate where the point coordinates have maximal span.
+constexpr const char* Point_container_max_tight_span_coord = "Returns coordinate where the point coordinates have maximal span.
 
 Returns: int";
-constexpr const char* CGAL_Point_container_max_span_lower = "Returns lower value of the interval corresponding to max_span_coord() .
+constexpr const char* Point_container_max_span_lower = "Returns lower value of the interval corresponding to max_span_coord() .
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_max_tight_span_lower = "Returns lower value of the interval corresponding to max_tight_span_coord() .
+constexpr const char* Point_container_max_tight_span_lower = "Returns lower value of the interval corresponding to max_tight_span_coord() .
 
 That is, the smallest max_tight_span_coord() -th coordinate of the points in c
 .
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_max_span_upper = "Returns upper value of the interval corresponding to max_span_coord() .
+constexpr const char* Point_container_max_span_upper = "Returns upper value of the interval corresponding to max_span_coord() .
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_max_span_upper_without_dim = "Returns upper value of the interval over all dimensions without taking dimension d into account.
+constexpr const char* Point_container_max_span_upper_without_dim = "Returns upper value of the interval over all dimensions without taking dimension d into account.
 
 Parameters
 ----------
 d : int
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_max_tight_span_upper = "Returns upper value of the interval corresponding to max_tight_span_coord() .
+constexpr const char* Point_container_max_tight_span_upper = "Returns upper value of the interval corresponding to max_tight_span_coord() .
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_max_spread = "Returns the size of the interval corresponding to max_span_coord() .
+constexpr const char* Point_container_max_spread = "Returns the size of the interval corresponding to max_span_coord() .
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_max_tight_spread = "Returns the size of the interval corresponding to max_tight_span_coord() .
+constexpr const char* Point_container_max_tight_spread = "Returns the size of the interval corresponding to max_tight_span_coord() .
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_median = "Returns the median value of the points stored in the container for dimension split_coord .
+constexpr const char* Point_container_median = "Returns the median value of the points stored in the container for dimension split_coord .
 
 Parameters
 ----------
 split_coord : int
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_bounding_box = "Returns the associated rectangle.
+constexpr const char* Point_container_bounding_box = "Returns the associated rectangle.
 
 Returns: const Kd_tree_rectangle < Traits > &";
-constexpr const char* CGAL_Point_container_tight_bounding_box = "Returns the bounding box of the items in associated rectangle.
+constexpr const char* Point_container_tight_bounding_box = "Returns the bounding box of the items in associated rectangle.
 
 Returns: const Kd_tree_rectangle < Traits > &";
-constexpr const char* CGAL_Point_container_max_tight_span_coord_balanced = "Returns the dimension with the maximal point spread, for which after fair splitting the ratio of the length of the longest side and the smallest side of the bounding box of the items in associated rectangle, does not exceed aspect_ratio .
+constexpr const char* Point_container_max_tight_span_coord_balanced = "Returns the dimension with the maximal point spread, for which after fair splitting the ratio of the length of the longest side and the smallest side of the bounding box of the items in associated rectangle, does not exceed aspect_ratio .
 
 Parameters
 ----------
 aspect_ratio : FT
 
 Returns: int";
-constexpr const char* CGAL_Point_container_balanced_fair = "Returns the splitting value for fair splitting.
+constexpr const char* Point_container_balanced_fair = "Returns the splitting value for fair splitting.
 
 Parameters
 ----------
@@ -1132,7 +1132,7 @@ d : int
 aspect_ratio : FT
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_balanced_sliding_fair = "Returns the splitting value for sliding fair splitting.
+constexpr const char* Point_container_balanced_sliding_fair = "Returns the splitting value for sliding fair splitting.
 
 Parameters
 ----------
@@ -1140,13 +1140,13 @@ d : int
 aspect_ratio : FT
 
 Returns: FT";
-constexpr const char* CGAL_Point_container_size = "Returns the number of points stored.
+constexpr const char* Point_container_size = "Returns the number of points stored.
 
 Returns: std::size_t";
-constexpr const char* CGAL_Point_container_empty = "Returns true if no points are present, false otherwise.
+constexpr const char* Point_container_empty = "Returns true if no points are present, false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Point_container_operator = "Prints the point container c to the output stream s and returns s .
+constexpr const char* Point_container_operator = "Prints the point container c to the output stream s and returns s .
 
 Parameters
 ----------
@@ -1156,23 +1156,23 @@ c : Point_container < Traits >
 Returns: std::ostream &";
 
 // CGAL::Search_traits
-constexpr const char* CGAL_Search_traits__class__ = "The class Search_traits can be used as a template parameter of the kd tree and the search classes.";
+constexpr const char* Search_traits__class__ = "The class Search_traits can be used as a template parameter of the kd tree and the search classes.";
 
-constexpr const char* CGAL_Search_traits_Dimension = "Dimension type.
+constexpr const char* Search_traits_Dimension = "Dimension type.
 
 Either Dimension_tag<int dim> or Dynamic_dimension_tag .
 
 Returns: Dim";
-constexpr const char* CGAL_Search_traits_FT = "The number type of the coordinates.
+constexpr const char* Search_traits_FT = "The number type of the coordinates.
 
 Returns: NT";
-constexpr const char* CGAL_Search_traits_Point_d = "Point type.
+constexpr const char* Search_traits_Point_d = "Point type.
 
 Returns: Point";
-constexpr const char* CGAL_Search_traits_Cartesian_const_iterator_d = "An iterator over the coordinates.
+constexpr const char* Search_traits_Cartesian_const_iterator_d = "An iterator over the coordinates.
 
 Returns: CartesianIterator";
-constexpr const char* CGAL_Search_traits_Construct_Cartesian_const_iterator_d = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
+constexpr const char* Search_traits_Construct_Cartesian_const_iterator_d = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
 
 The functor for begin has as argument a Point_d . The functor for the past the
 end iterator, has as argument a Point_d and an int .
@@ -1180,190 +1180,190 @@ end iterator, has as argument a Point_d and an int .
 Returns: ConstructCartesianIterator";
 
 // CGAL::Search_traits_2
-constexpr const char* CGAL_Search_traits_2__class__ = "The class Search_traits_2 can be used as a template parameter of the kd tree and the search classes.";
+constexpr const char* Search_traits_2__class__ = "The class Search_traits_2 can be used as a template parameter of the kd tree and the search classes.";
 
-constexpr const char* CGAL_Search_traits_2_Dimension = "Dimension type.
+constexpr const char* Search_traits_2_Dimension = "Dimension type.
 
 Returns: Dimension_tag< 2 >";
-constexpr const char* CGAL_Search_traits_2_FT = "Number type.
+constexpr const char* Search_traits_2_FT = "Number type.
 
 Returns: SearchGeomTraits::FT";
-constexpr const char* CGAL_Search_traits_2_Point_d = "Point type.
+constexpr const char* Search_traits_2_Point_d = "Point type.
 
 Returns: SearchGeomTraits::Point_2";
-constexpr const char* CGAL_Search_traits_2_Iso_box_d = "Iso box type.
+constexpr const char* Search_traits_2_Iso_box_d = "Iso box type.
 
 Returns: SearchGeomTraits::Iso_rectangle_2";
-constexpr const char* CGAL_Search_traits_2_Sphere_d = "Sphere type.
+constexpr const char* Search_traits_2_Sphere_d = "Sphere type.
 
 Returns: SearchGeomTraits::Circle_2";
-constexpr const char* CGAL_Search_traits_2_Cartesian_const_iterator_d = "An iterator over the Cartesian coordinates.
+constexpr const char* Search_traits_2_Cartesian_const_iterator_d = "An iterator over the Cartesian coordinates.
 
 Returns: SearchGeomTraits::Cartesian_const_iterator_2";
-constexpr const char* CGAL_Search_traits_2_Construct_cartesian_const_iterator_d = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
+constexpr const char* Search_traits_2_Construct_cartesian_const_iterator_d = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
 
 The functor for begin has as argument a Point_d . The functor for the past the
 end iterator, has as argument a Point_d and an int .
 
 Returns: SearchGeomTraits::Construct_cartesian_const_iterator_2";
-constexpr const char* CGAL_Search_traits_2_Construct_iso_box_d = "Functor with operator to construct the iso box from two points.
+constexpr const char* Search_traits_2_Construct_iso_box_d = "Functor with operator to construct the iso box from two points.
 
 Returns: SearchGeomTraits::Construct_iso_rectangle_2";
-constexpr const char* CGAL_Search_traits_2_Construct_center_d = "Functor with operator to construct the center of an object of type Sphere_d .
+constexpr const char* Search_traits_2_Construct_center_d = "Functor with operator to construct the center of an object of type Sphere_d .
 
 Returns: SearchGeomTraits::Construct_center_2";
-constexpr const char* CGAL_Search_traits_2_Compute_squared_radius_d = "Functor with operator to compute the squared radius of a an object of type Sphere_d .
+constexpr const char* Search_traits_2_Compute_squared_radius_d = "Functor with operator to compute the squared radius of a an object of type Sphere_d .
 
 Returns: SearchGeomTraits::Compute_squared_radius_2";
-constexpr const char* CGAL_Search_traits_2_Construct_min_vertex_d = "Functor with operator to construct the vertex with lexicographically smallest coordinates of an object of type Iso_box_d .
+constexpr const char* Search_traits_2_Construct_min_vertex_d = "Functor with operator to construct the vertex with lexicographically smallest coordinates of an object of type Iso_box_d .
 
 Returns: SearchGeomTraits::Construct_min_vertex_2";
-constexpr const char* CGAL_Search_traits_2_Construct_max_vertex_d = "Functor with operator to construct the vertex with lexicographically largest coordinates of an object of type Iso_box_d .
+constexpr const char* Search_traits_2_Construct_max_vertex_d = "Functor with operator to construct the vertex with lexicographically largest coordinates of an object of type Iso_box_d .
 
 Returns: SearchGeomTraits::Construct_max_vertex_2";
 
 // CGAL::Search_traits_3
-constexpr const char* CGAL_Search_traits_3__class__ = "The class Search_traits_3 can be used as a template parameter of the kd tree and the search classes.";
+constexpr const char* Search_traits_3__class__ = "The class Search_traits_3 can be used as a template parameter of the kd tree and the search classes.";
 
-constexpr const char* CGAL_Search_traits_3_Dimension = "Dimension type.
+constexpr const char* Search_traits_3_Dimension = "Dimension type.
 
 Returns: Dimension_tag< 3 >";
-constexpr const char* CGAL_Search_traits_3_FT = "Number type.
+constexpr const char* Search_traits_3_FT = "Number type.
 
 Returns: GeomTraits::FT";
-constexpr const char* CGAL_Search_traits_3_Point_d = "Point type.
+constexpr const char* Search_traits_3_Point_d = "Point type.
 
 Returns: GeomTraits::Point_3";
-constexpr const char* CGAL_Search_traits_3_Iso_box_d = "Iso box type.
+constexpr const char* Search_traits_3_Iso_box_d = "Iso box type.
 
 Returns: GeomTraits::Iso_cuboid_3";
-constexpr const char* CGAL_Search_traits_3_Sphere_d = "Sphere type.
+constexpr const char* Search_traits_3_Sphere_d = "Sphere type.
 
 Returns: GeomTraits::Sphere_3";
-constexpr const char* CGAL_Search_traits_3_Cartesian_const_iterator_d = "An iterator over the Cartesian coordinates.
+constexpr const char* Search_traits_3_Cartesian_const_iterator_d = "An iterator over the Cartesian coordinates.
 
 Returns: GeomTraits::Cartesian_const_iterator_3";
-constexpr const char* CGAL_Search_traits_3_Construct_cartesian_const_iterator_d = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
+constexpr const char* Search_traits_3_Construct_cartesian_const_iterator_d = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
 
 The functor for begin has as argument a Point_d . The functor for the past the
 end iterator, has as argument a Point_d and an int .
 
 Returns: GeomTraits::Construct_cartesian_const_iterator_3";
-constexpr const char* CGAL_Search_traits_3_Construct_iso_box_d = "Functor with operator to construct the iso box from two points.
+constexpr const char* Search_traits_3_Construct_iso_box_d = "Functor with operator to construct the iso box from two points.
 
 Returns: GeomTraits::Construct_iso_cuboid_3";
-constexpr const char* CGAL_Search_traits_3_Construct_center_d = "Functor with operator to construct the center of an object of type Sphere_d .
+constexpr const char* Search_traits_3_Construct_center_d = "Functor with operator to construct the center of an object of type Sphere_d .
 
 Returns: GeomTraits::Construct_center_3";
-constexpr const char* CGAL_Search_traits_3_Compute_squared_radius_d = "Functor with operator to compute the squared radius of a an object of type Sphere_d .
+constexpr const char* Search_traits_3_Compute_squared_radius_d = "Functor with operator to compute the squared radius of a an object of type Sphere_d .
 
 Returns: GeomTraits::Compute_squared_radius_3";
-constexpr const char* CGAL_Search_traits_3_Construct_min_vertex_d = "Functor with operator to construct the vertex with lexicographically smallest coordinates of an object of type Iso_box_d .
+constexpr const char* Search_traits_3_Construct_min_vertex_d = "Functor with operator to construct the vertex with lexicographically smallest coordinates of an object of type Iso_box_d .
 
 Returns: GeomTraits::Construct_min_vertex_3";
-constexpr const char* CGAL_Search_traits_3_Construct_max_vertex_d = "Functor with operator to construct the vertex with lexicographically largest coordinates of an object of type Iso_box_d .
+constexpr const char* Search_traits_3_Construct_max_vertex_d = "Functor with operator to construct the vertex with lexicographically largest coordinates of an object of type Iso_box_d .
 
 Returns: GeomTraits::Construct_max_vertex_3";
 
 // CGAL::Search_traits_adapter
-constexpr const char* CGAL_Search_traits_adapter__class__ = "The class Search_traits_adapter can be used as a template parameter of the kd tree and the search classes.";
+constexpr const char* Search_traits_adapter__class__ = "The class Search_traits_adapter can be used as a template parameter of the kd tree and the search classes.";
 
-constexpr const char* CGAL_Search_traits_adapter_Search_traits_adapter = "Constructor initializing the class to base and setting the point property map of the class to ppmap .
+constexpr const char* Search_traits_adapter_Search_traits_adapter = "Constructor initializing the class to base and setting the point property map of the class to ppmap .
 
 Parameters
 ----------
 ppmap : const PointPropertyMap &
 base : const BaseTraits &";
-constexpr const char* CGAL_Search_traits_adapter_point_property_map = "Returns the point property map.
+constexpr const char* Search_traits_adapter_point_property_map = "Returns the point property map.
 
 Returns: const PointPropertyMap &";
 
 // CGAL::Search_traits_d
-constexpr const char* CGAL_Search_traits_d__class__ = "The class Search_traits_d can be used as a template parameter of the kd tree and the search classes.";
+constexpr const char* Search_traits_d__class__ = "The class Search_traits_d can be used as a template parameter of the kd tree and the search classes.";
 
-constexpr const char* CGAL_Search_traits_d_Dimension = "Dimension type.
+constexpr const char* Search_traits_d_Dimension = "Dimension type.
 
 Either Dimension_tag<int dim> or Dynamic_dimension_tag .
 
 Returns: Dim";
-constexpr const char* CGAL_Search_traits_d_NT = "Number type.
+constexpr const char* Search_traits_d_NT = "Number type.
 
 Returns: Kernel::FT";
-constexpr const char* CGAL_Search_traits_d_Point_d = "Point type.
+constexpr const char* Search_traits_d_Point_d = "Point type.
 
 Returns: Kernel::Point_d";
-constexpr const char* CGAL_Search_traits_d_Iso_box_d = "Iso box type.
+constexpr const char* Search_traits_d_Iso_box_d = "Iso box type.
 
 Returns: Kernel::Iso_box_d";
-constexpr const char* CGAL_Search_traits_d_Sphere_d = "Sphere type.
+constexpr const char* Search_traits_d_Sphere_d = "Sphere type.
 
 Returns: Kernel::Sphere_d";
-constexpr const char* CGAL_Search_traits_d_Cartesian_const_iterator = "An iterator over the Cartesian coordinates.
+constexpr const char* Search_traits_d_Cartesian_const_iterator = "An iterator over the Cartesian coordinates.
 
 Returns: Kernel::Cartesian_const_iterator_d";
-constexpr const char* CGAL_Search_traits_d_Construct_cartesian_const_iterator = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
+constexpr const char* Search_traits_d_Construct_cartesian_const_iterator = "A functor with two function operators, which return the begin and past the end iterator for the Cartesian coordinates.
 
 The functor for begin has as argument a Point_d . The functor for the past the
 end iterator, has as argument a Point_d and an int .
 
 Returns: Kernel::Construct_cartesian_const_iterator_d";
-constexpr const char* CGAL_Search_traits_d_Construct_min_vertex_d = "Functor with operator to construct the vertex with lexicographically smallest coordinates of an object of type Iso_box_d .
+constexpr const char* Search_traits_d_Construct_min_vertex_d = "Functor with operator to construct the vertex with lexicographically smallest coordinates of an object of type Iso_box_d .
 
 Returns: Kernel::Construct_min_vertex_d";
-constexpr const char* CGAL_Search_traits_d_Construct_max_vertex_d = "Functor with operator to construct the vertex with lexicographically largest coordinates of an object of type Iso_box_d .
+constexpr const char* Search_traits_d_Construct_max_vertex_d = "Functor with operator to construct the vertex with lexicographically largest coordinates of an object of type Iso_box_d .
 
 Returns: Kernel::Construct_max_vertex_d";
 
 // CGAL::Sliding_fair
-constexpr const char* CGAL_Sliding_fair__class__ = "Implements the sliding fair splitting rule.";
+constexpr const char* Sliding_fair__class__ = "Implements the sliding fair splitting rule.";
 
-constexpr const char* CGAL_Sliding_fair_FT = "Number type.
+constexpr const char* Sliding_fair_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Sliding_fair_Sliding_fair = "Constructor.
+constexpr const char* Sliding_fair_Sliding_fair = "Constructor.
 
 Parameters
 ----------
 bucket_size : unsigned int
 aspect_ratio : FT";
-constexpr const char* CGAL_Sliding_fair_aspect_ratio = "Returns the maximal ratio between the largest and smallest side of a cell allowed for fair splitting.
+constexpr const char* Sliding_fair_aspect_ratio = "Returns the maximal ratio between the largest and smallest side of a cell allowed for fair splitting.
 
 Returns: FT";
-constexpr const char* CGAL_Sliding_fair_bucket_size = "Returns the bucket size of the leaf nodes.
+constexpr const char* Sliding_fair_bucket_size = "Returns the bucket size of the leaf nodes.
 
 Returns: unsigned int";
 
 // CGAL::Sliding_midpoint
-constexpr const char* CGAL_Sliding_midpoint__class__ = "Implements the sliding midpoint splitting rule.";
+constexpr const char* Sliding_midpoint__class__ = "Implements the sliding midpoint splitting rule.";
 
-constexpr const char* CGAL_Sliding_midpoint_Sliding_midpoint = "Constructor.
+constexpr const char* Sliding_midpoint_Sliding_midpoint = "Constructor.
 
 Parameters
 ----------
 bucket_size : unsigned int";
-constexpr const char* CGAL_Sliding_midpoint_bucket_size = "Returns the bucket size of the leaf nodes.
+constexpr const char* Sliding_midpoint_bucket_size = "Returns the bucket size of the leaf nodes.
 
 Returns: unsigned int";
 
 // CGAL::Weighted_Minkowski_distance
-constexpr const char* CGAL_Weighted_Minkowski_distance__class__ = "The class Weighted_Minkowski_distance provides an implementation of the concept OrthogonalDistance , with a weighted Minkowski metric on $ d$ -dimensional points defined by $ l_p(w)(r,q)= ({\\Sigma_{i=1}^{i=d} \\, w_i(r_i-q_i)^p})^{1/p}$ for $ 0 < p <\\infty$ and defined by $ l_{\\infty}(w)(r,q)=max \\{w_i |r_i-q_i| \\mid 1 \\leq i \\leq d\\}$ .";
+constexpr const char* Weighted_Minkowski_distance__class__ = "The class Weighted_Minkowski_distance provides an implementation of the concept OrthogonalDistance , with a weighted Minkowski metric on $ d$ -dimensional points defined by $ l_p(w)(r,q)= ({\\Sigma_{i=1}^{i=d} \\, w_i(r_i-q_i)^p})^{1/p}$ for $ 0 < p <\\infty$ and defined by $ l_{\\infty}(w)(r,q)=max \\{w_i |r_i-q_i| \\mid 1 \\leq i \\leq d\\}$ .";
 
-constexpr const char* CGAL_Weighted_Minkowski_distance_D = "Dimension tag.
+constexpr const char* Weighted_Minkowski_distance_D = "Dimension tag.
 
 Returns: Traits::Dimension";
-constexpr const char* CGAL_Weighted_Minkowski_distance_FT = "Number type.
+constexpr const char* Weighted_Minkowski_distance_FT = "Number type.
 
 Returns: Traits::FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_Point_d = "Point type.
+constexpr const char* Weighted_Minkowski_distance_Point_d = "Point type.
 
 Returns: Traits::Point_d";
-constexpr const char* CGAL_Weighted_Minkowski_distance_Weighted_Minkowski_distance = "Constructor implementing $ l_2$ metric for $ d$ -dimensional points.
+constexpr const char* Weighted_Minkowski_distance_Weighted_Minkowski_distance = "Constructor implementing $ l_2$ metric for $ d$ -dimensional points.
 
 Parameters
 ----------
 d : int
 t : Traits";
-constexpr const char* CGAL_Weighted_Minkowski_distance_Weighted_Minkowski_distance_1 = "Constructor implementing the $ l_{power}(weights)$ metric.
+constexpr const char* Weighted_Minkowski_distance_Weighted_Minkowski_distance_1 = "Constructor implementing the $ l_{power}(weights)$ metric.
 
 power=0 denotes the $ l_{\\infty}(weights)$ metric. The values in the iterator
 range [wb,we) are the weight.
@@ -1375,7 +1375,7 @@ dim : int
 wb : InputIterator
 we : InputIterator
 t : Traits";
-constexpr const char* CGAL_Weighted_Minkowski_distance_transformed_distance = "Returns $ d^{power}$ , where $ d$ denotes the distance between q and r .
+constexpr const char* Weighted_Minkowski_distance_transformed_distance = "Returns $ d^{power}$ , where $ d$ denotes the distance between q and r .
 
 Parameters
 ----------
@@ -1383,7 +1383,7 @@ q : Point_d
 r : Point_d
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_min_distance_to_rectangle = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r closest to q .
+constexpr const char* Weighted_Minkowski_distance_min_distance_to_rectangle = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r closest to q .
 
 Parameters
 ----------
@@ -1391,7 +1391,7 @@ q : Point_d
 r : Kd_tree_rectangle < FT , D >
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_min_distance_to_rectangle_1 = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r closest to q .
+constexpr const char* Weighted_Minkowski_distance_min_distance_to_rectangle_1 = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r closest to q .
 
 Stores the distances in each dimension in dists .
 
@@ -1402,7 +1402,7 @@ r : Kd_tree_rectangle < FT , D >
 dists : vector< FT > &
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_max_distance_to_rectangle = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r farthest to q .
+constexpr const char* Weighted_Minkowski_distance_max_distance_to_rectangle = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r farthest to q .
 
 Parameters
 ----------
@@ -1410,7 +1410,7 @@ q : Point_d
 r : Kd_tree_rectangle < FT , D >
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_max_distance_to_rectangle_1 = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r farthest to q .
+constexpr const char* Weighted_Minkowski_distance_max_distance_to_rectangle_1 = "Returns $ d^{power}$ , where $ d$ denotes the distance between the query item q and the point on the boundary of r farthest to q .
 
 Stores the distances in each dimension in dists .
 
@@ -1421,7 +1421,7 @@ r : Kd_tree_rectangle < FT , D >
 dists : vector< FT > &
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_new_distance = "Updates dist incrementally and returns the updated distance.
+constexpr const char* Weighted_Minkowski_distance_new_distance = "Updates dist incrementally and returns the updated distance.
 
 Parameters
 ----------
@@ -1431,7 +1431,7 @@ new_off : FT
 cutting_dimension : int
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_transformed_distance_1 = "Returns $ d^p$ for $ 0 < p <\\infty$ .
+constexpr const char* Weighted_Minkowski_distance_transformed_distance_1 = "Returns $ d^p$ for $ 0 < p <\\infty$ .
 
 Returns $ d$ for $ p=\\infty$ .
 
@@ -1440,7 +1440,7 @@ Parameters
 d : FT
 
 Returns: FT";
-constexpr const char* CGAL_Weighted_Minkowski_distance_inverse_of_transformed_distance = "Returns $ d^{1/p}$ for $ 0 < p <\\infty$ .
+constexpr const char* Weighted_Minkowski_distance_inverse_of_transformed_distance = "Returns $ d^{1/p}$ for $ 0 < p <\\infty$ .
 
 Returns $ d$ for $ p=\\infty$ .
 
@@ -1926,7 +1926,7 @@ sep : Separator &
 c0 : Container &
 c1 : Container &";
 
-constexpr const char* CGAL_Kd_tree_rectangle_operator_1 = "Inserts rectangle r in the output stream s and returns s .
+constexpr const char* Kd_tree_rectangle_operator_1 = "Inserts rectangle r in the output stream s and returns s .
 
 Parameters
 ----------
@@ -1934,7 +1934,7 @@ s : std::ostream &
 r : Kd_tree_rectangle < FT > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Plane_separator_operator_2 = "Inserts the plane separator s in the output stream os and returns os .
+constexpr const char* Plane_separator_operator_2 = "Inserts the plane separator s in the output stream os and returns os .
 
 Parameters
 ----------
@@ -1942,7 +1942,7 @@ os : std::ostream &
 s : Plane_separator < FT >
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Point_container_operator_1 = "Prints the point container c to the output stream s and returns s .
+constexpr const char* Point_container_operator_1 = "Prints the point container c to the output stream s and returns s .
 
 Parameters
 ----------

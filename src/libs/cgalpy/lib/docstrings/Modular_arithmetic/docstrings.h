@@ -8,35 +8,35 @@ namespace docstrings {
 namespace Modular_arithmetic {
 
 // CGAL::Modular_traits
-constexpr const char* CGAL_Modular_traits__class__ = "An instance of Modular_traits is a model of ModularTraits , where T is the associated type.";
+constexpr const char* Modular_traits__class__ = "An instance of Modular_traits is a model of ModularTraits , where T is the associated type.";
 
-constexpr const char* CGAL_Residue_Residue = "constructor which initializes with zero.";
-constexpr const char* CGAL_Residue_Residue_1 = "copy constructor.
+constexpr const char* Residue_Residue = "constructor which initializes with zero.";
+constexpr const char* Residue_Residue_1 = "copy constructor.
 
 Parameters
 ----------
 m : const Residue &";
-constexpr const char* CGAL_Residue_Residue_2 = "constructor which initializes with $ i\\mod p$ .
+constexpr const char* Residue_Residue_2 = "constructor which initializes with $ i\\mod p$ .
 
 Parameters
 ----------
 i : int";
-constexpr const char* CGAL_Residue_Residue_3 = "constructor which initializes with $ i\\mod p$ .
+constexpr const char* Residue_Residue_3 = "constructor which initializes with $ i\\mod p$ .
 
 Parameters
 ----------
 i : long";
-constexpr const char* CGAL_Residue_get_value = "returns the unique representative within the range $ [-p/2,p/2]$ , where $ p$ is the current prime.
+constexpr const char* Residue_get_value = "returns the unique representative within the range $ [-p/2,p/2]$ , where $ p$ is the current prime.
 
 Returns: int";
-constexpr const char* CGAL_Residue_set_current_prime = "sets the current prime to the given value and returns the old prime.
+constexpr const char* Residue_set_current_prime = "sets the current prime to the given value and returns the old prime.
 
 Parameters
 ----------
 p : int
 
 Returns: int";
-constexpr const char* CGAL_Residue_get_current_prime = "returns the value of the current prime.
+constexpr const char* Residue_get_current_prime = "returns the value of the current prime.
 
 Returns: int";
 

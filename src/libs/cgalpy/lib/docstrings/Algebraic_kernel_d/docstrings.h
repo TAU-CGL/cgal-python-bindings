@@ -1011,47 +1011,47 @@ res : OutputIterator
 Returns: OutputIterator";
 
 // CGAL::Algebraic_kernel_d_1
-constexpr const char* CGAL_Algebraic_kernel_d_1__class__ = "The class represents an algebraic real root by a square free polynomial and an isolating interval that uniquely defines the root.";
+constexpr const char* Algebraic_kernel_d_1__class__ = "The class represents an algebraic real root by a square free polynomial and an isolating interval that uniquely defines the root.";
 
-constexpr const char* CGAL_Algebraic_kernel_d_1_Coefficient = "Same type as the template argument Coeff .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_1_Polynomial_1 = "A model of AlgebraicKernel_d_1::Polynomial_1 .
+constexpr const char* Algebraic_kernel_d_1_Coefficient = "Same type as the template argument Coeff .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_1_Algebraic_real_1 = "A model of AlgebraicKernel_d_1::Algebraic_real_1 .
+constexpr const char* Algebraic_kernel_d_1_Polynomial_1 = "A model of AlgebraicKernel_d_1::Polynomial_1 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_1_Bound = "The choice of Coeff also determines the provided bound type.
+constexpr const char* Algebraic_kernel_d_1_Algebraic_real_1 = "A model of AlgebraicKernel_d_1::Algebraic_real_1 .
+
+Returns: unspecified_type";
+constexpr const char* Algebraic_kernel_d_1_Bound = "The choice of Coeff also determines the provided bound type.
 
 In case of Coeff is: Gmpz or Gmpq , this is Gmpq , CORE::BigInt or
 CORE::BigRat , this is CORE::BigRat , leda_integer or leda_rational , this is
 leda_rational .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_1_Multiplicity_type = "The multiplicity type is int .
+constexpr const char* Algebraic_kernel_d_1_Multiplicity_type = "The multiplicity type is int .
 
 Returns: unspecified_type";
 
 // CGAL::Algebraic_kernel_d_2
-constexpr const char* CGAL_Algebraic_kernel_d_2__class__ = "This class gathers necessary tools for solving and handling bivariate polynomial systems of general degree $ d$ .";
+constexpr const char* Algebraic_kernel_d_2__class__ = "This class gathers necessary tools for solving and handling bivariate polynomial systems of general degree $ d$ .";
 
-constexpr const char* CGAL_Algebraic_kernel_d_2_Coefficient = "Same type as the template argument Coeff .
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_2_Polynomial_2 = "A model of AlgebraicKernel_d_2::Polynomial_2 .
+constexpr const char* Algebraic_kernel_d_2_Coefficient = "Same type as the template argument Coeff .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_2_Algebraic_real_2 = "A model of AlgebraicKernel_d_2::AlgebraicReal_2 .
+constexpr const char* Algebraic_kernel_d_2_Polynomial_2 = "A model of AlgebraicKernel_d_2::Polynomial_2 .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_2_Bound = "The choice of Coeff also determines the provided bound type.
+constexpr const char* Algebraic_kernel_d_2_Algebraic_real_2 = "A model of AlgebraicKernel_d_2::AlgebraicReal_2 .
+
+Returns: unspecified_type";
+constexpr const char* Algebraic_kernel_d_2_Bound = "The choice of Coeff also determines the provided bound type.
 
 In case of Coeff is Gmpz or Gmpq , this is Gmpq CORE::BigInt or CORE::BigRat ,
 this is CORE::BigRat leda_integer or leda_rational , this is leda_rational
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Algebraic_kernel_d_2_Multiplicity_type = "The multiplicity type is int .
+constexpr const char* Algebraic_kernel_d_2_Multiplicity_type = "The multiplicity type is int .
 
 Returns: unspecified_type";
 

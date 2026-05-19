@@ -8,54 +8,54 @@ namespace docstrings {
 namespace Surface_mesh {
 
 // CGAL::Surface_mesh
-constexpr const char* CGAL_Surface_mesh__class__ = "This class is a data structure that can be used as halfedge data structure or polyhedral surface.";
+constexpr const char* Surface_mesh__class__ = "This class is a data structure that can be used as halfedge data structure or polyhedral surface.";
 
-constexpr const char* CGAL_Surface_mesh_Point = "The point type.
+constexpr const char* Surface_mesh_Point = "The point type.
 
 Returns: P";
-constexpr const char* CGAL_Surface_mesh_size_type = "The type used to represent an index.
+constexpr const char* Surface_mesh_size_type = "The type used to represent an index.
 
 Returns: std::uint32_t";
-constexpr const char* CGAL_Surface_mesh_Vertex_range = "The range over all vertex indices.
+constexpr const char* Surface_mesh_Vertex_range = "The range over all vertex indices.
 
 A model of BidirectionalRange with value type Vertex_index . vertices()
 Halfedge_range , Edge_range , Face_range
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_Halfedge_range = "The range over all halfedge indices.
+constexpr const char* Surface_mesh_Halfedge_range = "The range over all halfedge indices.
 
 A model of BidirectionalRange with value type Halfedge_index . halfedges()
 Vertex_range , Edge_range , Face_range
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_Edge_range = "The range over all edge indices.
+constexpr const char* Surface_mesh_Edge_range = "The range over all edge indices.
 
 A model of BidirectionalRange with value type Edge_index . edges()
 Halfedge_range , Vertex_range , Face_range
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_Face_range = "The range over all face indices.
+constexpr const char* Surface_mesh_Face_range = "The range over all face indices.
 
 A model of BidirectionalRange with value type Face_index . faces()
 Vertex_range , Halfedge_range , Edge_range
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_vertices = "returns the iterator range of the vertices of the mesh.
+constexpr const char* Surface_mesh_vertices = "returns the iterator range of the vertices of the mesh.
 
 Returns: Vertex_range";
-constexpr const char* CGAL_Surface_mesh_halfedges = "returns the iterator range of the halfedges of the mesh.
+constexpr const char* Surface_mesh_halfedges = "returns the iterator range of the halfedges of the mesh.
 
 Returns: Halfedge_range";
-constexpr const char* CGAL_Surface_mesh_edges = "returns the iterator range of the edges of the mesh.
+constexpr const char* Surface_mesh_edges = "returns the iterator range of the edges of the mesh.
 
 Returns: Edge_range";
-constexpr const char* CGAL_Surface_mesh_faces = "returns the iterator range of the faces of the mesh.
+constexpr const char* Surface_mesh_faces = "returns the iterator range of the faces of the mesh.
 
 Returns: Face_range";
-constexpr const char* CGAL_Surface_mesh_Property_map = "Model of LvaluePropertyMap with I as key type and T as value type, where I is either a vertex, halfedge, edge, or face index type.
+constexpr const char* Surface_mesh_Property_map = "Model of LvaluePropertyMap with I as key type and T as value type, where I is either a vertex, halfedge, edge, or face index type.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_add_property_map = "adds a property map named name with value type T and default t for index type I .
+constexpr const char* Surface_mesh_add_property_map = "adds a property map named name with value type T and default t for index type I .
 
 Returns the property map together with a Boolean that is true if a new map was
 created. In case it already exists the existing map together with false is
@@ -67,84 +67,84 @@ name : std::string
 t : const T
 
 Returns: std::pair< Property_map < I, T >, bool >";
-constexpr const char* CGAL_Surface_mesh_property_map = "returns an optional property map named name with key type I and value type T .
+constexpr const char* Surface_mesh_property_map = "returns an optional property map named name with key type I and value type T .
 
 Parameters
 ----------
 name : const std::string &
 
 Returns: std::optional< Property_map < I, T > >";
-constexpr const char* CGAL_Surface_mesh_remove_property_map = "removes property map p .
+constexpr const char* Surface_mesh_remove_property_map = "removes property map p .
 
 The memory allocated for that property map is freed.
 
 Parameters
 ----------
 p : Property_map < I, T > &";
-constexpr const char* CGAL_Surface_mesh_remove_property_maps = "removes all property maps for index type I added by a call to add_property_map <I>() .
+constexpr const char* Surface_mesh_remove_property_maps = "removes all property maps for index type I added by a call to add_property_map <I>() .
 
 The memory allocated for those property maps is freed.";
-constexpr const char* CGAL_Surface_mesh_remove_all_property_maps = "removes all property maps for all index types added by a call to add_property_map() .
+constexpr const char* Surface_mesh_remove_all_property_maps = "removes all property maps for all index types added by a call to add_property_map() .
 
 The memory allocated for those property maps is freed.";
-constexpr const char* CGAL_Surface_mesh_properties = "returns a vector with all strings that describe properties with the key type I .
+constexpr const char* Surface_mesh_properties = "returns a vector with all strings that describe properties with the key type I .
 
 I The key type of the properties.
 
 Returns: std::vector< std::string >";
-constexpr const char* CGAL_Surface_mesh_points = "returns the property for the string \"v:point\".
+constexpr const char* Surface_mesh_points = "returns the property for the string \"v:point\".
 
 Returns: Property_map < Vertex_index , Point >";
-constexpr const char* CGAL_Surface_mesh_point = "returns the point associated to vertex v .
+constexpr const char* Surface_mesh_point = "returns the point associated to vertex v .
 
 Parameters
 ----------
 v : Vertex_index
 
 Returns: const Point &";
-constexpr const char* CGAL_Surface_mesh_point_1 = "returns the point associated to vertex v .
+constexpr const char* Surface_mesh_point_1 = "returns the point associated to vertex v .
 
 Parameters
 ----------
 v : Vertex_index
 
 Returns: Point &";
-constexpr const char* CGAL_Surface_mesh_Surface_mesh = "Default constructor.";
-constexpr const char* CGAL_Surface_mesh_Surface_mesh_1 = "Copy constructor: copies rhs to *this . Performs a deep copy of all properties.
+constexpr const char* Surface_mesh_Surface_mesh = "Default constructor.";
+constexpr const char* Surface_mesh_Surface_mesh_1 = "Copy constructor: copies rhs to *this . Performs a deep copy of all properties.
 
 Parameters
 ----------
 rhs : const Surface_mesh &";
-constexpr const char* CGAL_Surface_mesh_Surface_mesh_2 = "Move constructor.
+constexpr const char* Surface_mesh_Surface_mesh_2 = "Move constructor.
 
 Parameters
 ----------
 sm : Surface_mesh &&";
-constexpr const char* CGAL_Surface_mesh_operator = "assigns rhs to *this . Performs a deep copy of all properties.
+constexpr const char* Surface_mesh_operator = "assigns rhs to *this . Performs a deep copy of all properties.
 
 Parameters
 ----------
 rhs : const Surface_mesh &
 
 Returns: Surface_mesh &";
-constexpr const char* CGAL_Surface_mesh_operator_1 = "move assignment
+constexpr const char* Surface_mesh_operator_1 = "move assignment
 
 Parameters
 ----------
 sm : Surface_mesh &&
 
 Returns: Surface_mesh &";
-constexpr const char* CGAL_Surface_mesh_assign = "assigns rhs to *this . Does not copy custom properties.
+constexpr const char* Surface_mesh_assign = "assigns rhs to *this . Does not copy custom properties.
 
 Parameters
 ----------
 rhs : const Surface_mesh &
 
 Returns: Surface_mesh &";
-constexpr const char* CGAL_Surface_mesh_add_vertex = "adds a new vertex, and resizes vertex properties if necessary.
+constexpr const char* Surface_mesh_add_vertex = "adds a new vertex, and resizes vertex properties if necessary.
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_add_vertex_1 = "adds a new vertex, resizes vertex properties if necessary, and sets the point property to p .
+constexpr const char* Surface_mesh_add_vertex_1 = "adds a new vertex, resizes vertex properties if necessary, and sets the point property to p .
 
 Several vertices may have the same point property.
 
@@ -153,10 +153,10 @@ Parameters
 p : const Point &
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_add_edge = "adds a new edge, and resizes edge and halfedge properties if necessary.
+constexpr const char* Surface_mesh_add_edge = "adds a new edge, and resizes edge and halfedge properties if necessary.
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_add_edge_1 = "adds two opposite halfedges, and resizes edge and halfedge properties if necessary.
+constexpr const char* Surface_mesh_add_edge_1 = "adds two opposite halfedges, and resizes edge and halfedge properties if necessary.
 
 Sets the targets of the halfedge to the given vertices, but does not modify
 the halfedge associated to the vertices. The function does not check whether
@@ -168,10 +168,10 @@ v0 : Vertex_index
 v1 : Vertex_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_add_face = "adds a new face, and resizes face properties if necessary.
+constexpr const char* Surface_mesh_add_face = "adds a new face, and resizes face properties if necessary.
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_add_face_1 = "if possible, adds a new face with vertices from a range with value type Vertex_index .
+constexpr const char* Surface_mesh_add_face_1 = "if possible, adds a new face with vertices from a range with value type Vertex_index .
 
 The function adds halfedges between successive vertices if they are not yet
 indicent to halfedges, or updates the connectivity of halfedges already in
@@ -184,7 +184,7 @@ Parameters
 vertices : const Range &
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_add_face_2 = "adds a new triangle connecting vertices v0 , v1 , v2 .
+constexpr const char* Surface_mesh_add_face_2 = "adds a new triangle connecting vertices v0 , v1 , v2 .
 
 the face index of the added face, or Surface_mesh::null_face() if the face
 could not be added.
@@ -196,7 +196,7 @@ v1 : Vertex_index
 v2 : Vertex_index
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_add_face_3 = "adds a new quad connecting vertices v0 , v1 , v2 , v3 .
+constexpr const char* Surface_mesh_add_face_3 = "adds a new quad connecting vertices v0 , v1 , v2 , v3 .
 
 the face index of the added face, or Surface_mesh::null_face() if the face
 could not be added.
@@ -209,51 +209,51 @@ v2 : Vertex_index
 v3 : Vertex_index
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_remove_vertex = "removes vertex v from the halfedge data structure without adjusting anything.
+constexpr const char* Surface_mesh_remove_vertex = "removes vertex v from the halfedge data structure without adjusting anything.
 
 Parameters
 ----------
 v : Vertex_index";
-constexpr const char* CGAL_Surface_mesh_remove_edge = "removes the two halfedges corresponding to e from the halfedge data structure without adjusting anything.
+constexpr const char* Surface_mesh_remove_edge = "removes the two halfedges corresponding to e from the halfedge data structure without adjusting anything.
 
 Parameters
 ----------
 e : Edge_index";
-constexpr const char* CGAL_Surface_mesh_remove_face = "removes face f from the halfedge data structure without adjusting anything.
+constexpr const char* Surface_mesh_remove_face = "removes face f from the halfedge data structure without adjusting anything.
 
 Parameters
 ----------
 f : Face_index";
-constexpr const char* CGAL_Surface_mesh_number_of_vertices = "returns the number of vertices in the mesh.
+constexpr const char* Surface_mesh_number_of_vertices = "returns the number of vertices in the mesh.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_number_of_halfedges = "returns the number of halfedges in the mesh.
+constexpr const char* Surface_mesh_number_of_halfedges = "returns the number of halfedges in the mesh.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_number_of_edges = "returns the number of edges in the mesh.
+constexpr const char* Surface_mesh_number_of_edges = "returns the number of edges in the mesh.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_number_of_faces = "returns the number of faces in the mesh.
+constexpr const char* Surface_mesh_number_of_faces = "returns the number of faces in the mesh.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_is_empty = "returns true iff the mesh is empty, i.e., has no vertices, halfedges and faces.
+constexpr const char* Surface_mesh_is_empty = "returns true iff the mesh is empty, i.e., has no vertices, halfedges and faces.
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_clear_without_removing_property_maps = "removes all vertices, halfedge, edges and faces. Collects garbage but keeps all property maps.";
-constexpr const char* CGAL_Surface_mesh_clear = "removes all vertices, halfedge, edges and faces.
+constexpr const char* Surface_mesh_clear_without_removing_property_maps = "removes all vertices, halfedge, edges and faces. Collects garbage but keeps all property maps.";
+constexpr const char* Surface_mesh_clear = "removes all vertices, halfedge, edges and faces.
 
 Collects garbage and removes all property maps added by a call to
 add_property_map() for all simplex types. After calling this method, the
 object is the same as a newly constructed object. The additional property maps
 are also removed and must thus be re-added if needed.";
-constexpr const char* CGAL_Surface_mesh_reserve = "reserves space for vertices, halfedges, edges, faces, and their currently associated properties.
+constexpr const char* Surface_mesh_reserve = "reserves space for vertices, halfedges, edges, faces, and their currently associated properties.
 
 Parameters
 ----------
 nvertices : size_type
 nedges : size_type
 nfaces : size_type";
-constexpr const char* CGAL_Surface_mesh_join = "copies the simplices from other , and copies values of properties that already exist under the same name in *this .
+constexpr const char* Surface_mesh_join = "copies the simplices from other , and copies values of properties that already exist under the same name in *this .
 
 In case *this has a property that does not exist in other the copied simplices
 get the default value of the property.
@@ -263,19 +263,19 @@ Parameters
 other : const Surface_mesh &
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_number_of_removed_vertices = "returns the number of vertices in the mesh which are marked removed.
+constexpr const char* Surface_mesh_number_of_removed_vertices = "returns the number of vertices in the mesh which are marked removed.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_number_of_removed_halfedges = "returns the number of halfedges in the mesh which are marked removed.
+constexpr const char* Surface_mesh_number_of_removed_halfedges = "returns the number of halfedges in the mesh which are marked removed.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_number_of_removed_edges = "returns the number of edges in the mesh which are marked removed.
+constexpr const char* Surface_mesh_number_of_removed_edges = "returns the number of edges in the mesh which are marked removed.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_number_of_removed_faces = "returns the number offaces in the mesh which are marked removed.
+constexpr const char* Surface_mesh_number_of_removed_faces = "returns the number offaces in the mesh which are marked removed.
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_is_removed = "returns whether vertex v is marked removed.
+constexpr const char* Surface_mesh_is_removed = "returns whether vertex v is marked removed.
 
 collect_garbage()
 
@@ -284,7 +284,7 @@ Parameters
 v : Vertex_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_removed_1 = "returns whether halfedge h is marked removed.
+constexpr const char* Surface_mesh_is_removed_1 = "returns whether halfedge h is marked removed.
 
 collect_garbage()
 
@@ -293,7 +293,7 @@ Parameters
 h : Halfedge_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_removed_2 = "returns whether edge e is marked removed.
+constexpr const char* Surface_mesh_is_removed_2 = "returns whether edge e is marked removed.
 
 collect_garbage()
 
@@ -302,7 +302,7 @@ Parameters
 e : Edge_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_removed_3 = "returns whether face f is marked removed.
+constexpr const char* Surface_mesh_is_removed_3 = "returns whether face f is marked removed.
 
 collect_garbage()
 
@@ -311,17 +311,17 @@ Parameters
 f : Face_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_has_garbage = "checks if any vertices, halfedges, edges, or faces are marked as removed.
+constexpr const char* Surface_mesh_has_garbage = "checks if any vertices, halfedges, edges, or faces are marked as removed.
 
 collect_garbage
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_collect_garbage = "really removes vertices, halfedges, edges, and faces which are marked removed.
+constexpr const char* Surface_mesh_collect_garbage = "really removes vertices, halfedges, edges, and faces which are marked removed.
 
 has_garbage() By garbage collecting elements get new indices. In case you
 store indices in an auxiliary data structure or in a property these indices
 are potentially no longer referring to the right elements.";
-constexpr const char* CGAL_Surface_mesh_set_recycle_garbage = "controls the recycling or not of simplices previously marked as removed upon addition of new elements.
+constexpr const char* Surface_mesh_set_recycle_garbage = "controls the recycling or not of simplices previously marked as removed upon addition of new elements.
 
 When set to true (default value), new elements are first picked in the garbage
 (if any) while if set to false only new elements are created.
@@ -329,17 +329,17 @@ When set to true (default value), new elements are first picked in the garbage
 Parameters
 ----------
 b : bool";
-constexpr const char* CGAL_Surface_mesh_does_recycle_garbage = "Getter.
+constexpr const char* Surface_mesh_does_recycle_garbage = "Getter.
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_valid = "perform an expensive validity check on the data structure and print found errors to std::cerr when verbose == true .
+constexpr const char* Surface_mesh_is_valid = "perform an expensive validity check on the data structure and print found errors to std::cerr when verbose == true .
 
 Parameters
 ----------
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_valid_1 = "performs a validity check on a single vertex.
+constexpr const char* Surface_mesh_is_valid_1 = "performs a validity check on a single vertex.
 
 Parameters
 ----------
@@ -347,7 +347,7 @@ v : Vertex_index
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_valid_2 = "performs a validity check on a single halfedge.
+constexpr const char* Surface_mesh_is_valid_2 = "performs a validity check on a single halfedge.
 
 Parameters
 ----------
@@ -355,7 +355,7 @@ h : Halfedge_index
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_valid_3 = "performs a validity check on a single edge.
+constexpr const char* Surface_mesh_is_valid_3 = "performs a validity check on a single edge.
 
 Parameters
 ----------
@@ -363,7 +363,7 @@ e : Edge_index
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_valid_4 = "performs a validity check on a single face.
+constexpr const char* Surface_mesh_is_valid_4 = "performs a validity check on a single face.
 
 Parameters
 ----------
@@ -371,53 +371,53 @@ f : Face_index
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_target = "returns the vertex where the halfedge h points to.
+constexpr const char* Surface_mesh_target = "returns the vertex where the halfedge h points to.
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_set_target = "sets the vertex where the halfedge h points to v .
+constexpr const char* Surface_mesh_set_target = "sets the vertex where the halfedge h points to v .
 
 Parameters
 ----------
 h : Halfedge_index
 v : Vertex_index";
-constexpr const char* CGAL_Surface_mesh_face = "returns the face incident to halfedge h .
+constexpr const char* Surface_mesh_face = "returns the face incident to halfedge h .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_set_face = "sets the incident face to halfedge h to f .
+constexpr const char* Surface_mesh_set_face = "sets the incident face to halfedge h to f .
 
 Parameters
 ----------
 h : Halfedge_index
 f : Face_index";
-constexpr const char* CGAL_Surface_mesh_next = "returns the next halfedge within the incident face.
+constexpr const char* Surface_mesh_next = "returns the next halfedge within the incident face.
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_prev = "returns the previous halfedge within the incident face.
+constexpr const char* Surface_mesh_prev = "returns the previous halfedge within the incident face.
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_set_next = "sets the next halfedge of h within the face to nh and the previous halfedge of nh to h .
+constexpr const char* Surface_mesh_set_next = "sets the next halfedge of h within the face to nh and the previous halfedge of nh to h .
 
 Parameters
 ----------
 h : Halfedge_index
 nh : Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_halfedge = "returns an incoming halfedge of vertex v .
+constexpr const char* Surface_mesh_halfedge = "returns an incoming halfedge of vertex v .
 
 If v is a border vertex this will be a border halfedge. target(halfedge(v)) ==
 v
@@ -427,68 +427,68 @@ Parameters
 v : Vertex_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_set_halfedge = "sets the incoming halfedge of vertex v to h .
+constexpr const char* Surface_mesh_set_halfedge = "sets the incoming halfedge of vertex v to h .
 
 Parameters
 ----------
 v : Vertex_index
 h : Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_halfedge_1 = "returns a halfedge of face f .
+constexpr const char* Surface_mesh_halfedge_1 = "returns a halfedge of face f .
 
 Parameters
 ----------
 f : Face_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_set_halfedge_1 = "sets the halfedge of face f to h .
+constexpr const char* Surface_mesh_set_halfedge_1 = "sets the halfedge of face f to h .
 
 Parameters
 ----------
 f : Face_index
 h : Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_opposite = "returns the opposite halfedge of h . Note that there is no function set_opposite() .
+constexpr const char* Surface_mesh_opposite = "returns the opposite halfedge of h . Note that there is no function set_opposite() .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_source = "returns the vertex the halfedge h emanates from.
+constexpr const char* Surface_mesh_source = "returns the vertex the halfedge h emanates from.
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_next_around_target = "returns opposite(next(h)) , that is the next halfedge clockwise around the target vertex of h .
+constexpr const char* Surface_mesh_next_around_target = "returns opposite(next(h)) , that is the next halfedge clockwise around the target vertex of h .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_prev_around_target = "returns prev(opposite(h)) , that is the previous halfedge clockwise around the target vertex of h .
+constexpr const char* Surface_mesh_prev_around_target = "returns prev(opposite(h)) , that is the previous halfedge clockwise around the target vertex of h .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_next_around_source = "returns next(opposite(h)) , that is the next halfedge clockwise around the source vertex of h .
+constexpr const char* Surface_mesh_next_around_source = "returns next(opposite(h)) , that is the next halfedge clockwise around the source vertex of h .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_prev_around_source = "returns opposite(prev(h)) , that is the previous halfedge clockwise around the source vertex of h .
+constexpr const char* Surface_mesh_prev_around_source = "returns opposite(prev(h)) , that is the previous halfedge clockwise around the source vertex of h .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_vertex = "returns the i-th vertex of edge e , for i=0 or 1 .
+constexpr const char* Surface_mesh_vertex = "returns the i-th vertex of edge e , for i=0 or 1 .
 
 Parameters
 ----------
@@ -496,7 +496,7 @@ e : Edge_index
 i : unsigned int
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_halfedge_2 = "finds a halfedge between two vertices.
+constexpr const char* Surface_mesh_halfedge_2 = "finds a halfedge between two vertices.
 
 Returns a default constructed Halfedge_index , if source and target are not
 connected.
@@ -507,21 +507,21 @@ source : Vertex_index
 target : Vertex_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_edge = "returns the edge that contains halfedge h as one of its two halfedges.
+constexpr const char* Surface_mesh_edge = "returns the edge that contains halfedge h as one of its two halfedges.
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: Edge_index";
-constexpr const char* CGAL_Surface_mesh_halfedge_3 = "returns the halfedge corresponding to the edge e .
+constexpr const char* Surface_mesh_halfedge_3 = "returns the halfedge corresponding to the edge e .
 
 Parameters
 ----------
 e : Edge_index
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_halfedge_4 = "returns the i-th halfedge of edge e , for i=0 or 1 .
+constexpr const char* Surface_mesh_halfedge_4 = "returns the i-th halfedge of edge e , for i=0 or 1 .
 
 Parameters
 ----------
@@ -529,21 +529,21 @@ e : Edge_index
 i : unsigned int
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_degree = "returns the number of incident halfedges of vertex v .
+constexpr const char* Surface_mesh_degree = "returns the number of incident halfedges of vertex v .
 
 Parameters
 ----------
 v : Vertex_index
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_degree_1 = "returns the number of incident halfedges of face f .
+constexpr const char* Surface_mesh_degree_1 = "returns the number of incident halfedges of face f .
 
 Parameters
 ----------
 f : Face_index
 
 Returns: size_type";
-constexpr const char* CGAL_Surface_mesh_is_border = "returns whether v is a border vertex.
+constexpr const char* Surface_mesh_is_border = "returns whether v is a border vertex.
 
 Advanced With the default value for check_all_incident_halfedges the function
 iteratates over the incident halfedges. With check_all_incident_halfedges ==
@@ -558,68 +558,68 @@ v : Vertex_index
 check_all_incident_halfedges : bool
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_border_1 = "returns whether h is a border halfege, that is if its incident face is sm.null_face() .
+constexpr const char* Surface_mesh_is_border_1 = "returns whether h is a border halfege, that is if its incident face is sm.null_face() .
 
 Parameters
 ----------
 h : Halfedge_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_is_border_2 = "returns whether e is a border edge, i.e., if any of its two halfedges is a border halfedge.
+constexpr const char* Surface_mesh_is_border_2 = "returns whether e is a border edge, i.e., if any of its two halfedges is a border halfedge.
 
 Parameters
 ----------
 e : Edge_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_set_vertex_halfedge_to_border_halfedge = "iterates over the incident halfedges and sets the incident halfedge associated to vertex v to a border halfedge and returns true if it exists.
+constexpr const char* Surface_mesh_set_vertex_halfedge_to_border_halfedge = "iterates over the incident halfedges and sets the incident halfedge associated to vertex v to a border halfedge and returns true if it exists.
 
 Parameters
 ----------
 v : Vertex_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_set_vertex_halfedge_to_border_halfedge_1 = "applies set_vertex_halfedge_to_border_halfedge(Vertex_index) on all vertices around the face associated to h .
+constexpr const char* Surface_mesh_set_vertex_halfedge_to_border_halfedge_1 = "applies set_vertex_halfedge_to_border_halfedge(Vertex_index) on all vertices around the face associated to h .
 
 Parameters
 ----------
 h : Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_set_vertex_halfedge_to_border_halfedge_2 = "applies set_vertex_halfedge_to_border_halfedge(Vertex_index) on all vertices of the surface mesh.";
-constexpr const char* CGAL_Surface_mesh_is_isolated = "returns whether v is isolated, i.e., incident to Surface_mesh::null_halfedge() .
+constexpr const char* Surface_mesh_set_vertex_halfedge_to_border_halfedge_2 = "applies set_vertex_halfedge_to_border_halfedge(Vertex_index) on all vertices of the surface mesh.";
+constexpr const char* Surface_mesh_is_isolated = "returns whether v is isolated, i.e., incident to Surface_mesh::null_halfedge() .
 
 Parameters
 ----------
 v : Vertex_index
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_null_vertex = "returns Vertex_index (std::numeric_limits< size_type >::max()) .
+constexpr const char* Surface_mesh_null_vertex = "returns Vertex_index (std::numeric_limits< size_type >::max()) .
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_null_edge = "returns Edge_index (std::numeric_limits< size_type >::max()) .
+constexpr const char* Surface_mesh_null_edge = "returns Edge_index (std::numeric_limits< size_type >::max()) .
 
 Returns: Edge_index";
-constexpr const char* CGAL_Surface_mesh_null_halfedge = "returns Halfedge_index (std::numeric_limits< size_type >::max()) .
+constexpr const char* Surface_mesh_null_halfedge = "returns Halfedge_index (std::numeric_limits< size_type >::max()) .
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_null_face = "returns Face_index (std::numeric_limits< size_type >::max()) .
+constexpr const char* Surface_mesh_null_face = "returns Face_index (std::numeric_limits< size_type >::max()) .
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_adjust_incoming_halfedge = "make sure that the incoming halfedge of vertex v is a border halfedge if v is a border vertex.
+constexpr const char* Surface_mesh_adjust_incoming_halfedge = "make sure that the incoming halfedge of vertex v is a border halfedge if v is a border vertex.
 
 Parameters
 ----------
 v : Vertex_index";
 
 // CGAL::Surface_mesh::Edge_index
-constexpr const char* CGAL_Surface_mesh_Edge_index__class__ = "This class represents an edge.";
+constexpr const char* Surface_mesh_Edge_index__class__ = "This class represents an edge.";
 
-constexpr const char* CGAL_Surface_mesh_Edge_index_Edge_index = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_Edge_index_Edge_index_1 = "constructs an Edge_index from a halfedge.
+constexpr const char* Surface_mesh_Edge_index_Edge_index = "Default constructor";
+constexpr const char* Surface_mesh_Edge_index_Edge_index_1 = "constructs an Edge_index from a halfedge.
 
 Parameters
 ----------
 he : Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_Edge_index_operator = "prints the index and a short identification string to an ostream.
+constexpr const char* Surface_mesh_Edge_index_operator = "prints the index and a short identification string to an ostream.
 
 Parameters
 ----------
@@ -629,17 +629,17 @@ e : typename Surface_mesh::Edge_index const &
 Returns: std::ostream &";
 
 // CGAL::Surface_mesh::Face_connectivity
-constexpr const char* CGAL_Surface_mesh_Face_connectivity__class__ = "This type stores the face connectivity.";
+constexpr const char* Surface_mesh_Face_connectivity__class__ = "This type stores the face connectivity.";
 
-constexpr const char* CGAL_Surface_mesh_Face_connectivity_halfedge = "a halfedge that is part of the face
+constexpr const char* Surface_mesh_Face_connectivity_halfedge = "a halfedge that is part of the face
 
 Returns: Halfedge_index";
 
 // CGAL::Surface_mesh::Face_index
-constexpr const char* CGAL_Surface_mesh_Face_index__class__ = "This class represents a face.";
+constexpr const char* Surface_mesh_Face_index__class__ = "This class represents a face.";
 
-constexpr const char* CGAL_Surface_mesh_Face_index_Face_index = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_Face_index_operator = "prints the index and a short identification string to an ostream.
+constexpr const char* Surface_mesh_Face_index_Face_index = "Default constructor";
+constexpr const char* Surface_mesh_Face_index_operator = "prints the index and a short identification string to an ostream.
 
 Parameters
 ----------
@@ -649,26 +649,26 @@ f : typename Surface_mesh::Face_index const &
 Returns: std::ostream &";
 
 // CGAL::Surface_mesh::Halfedge_connectivity
-constexpr const char* CGAL_Surface_mesh_Halfedge_connectivity__class__ = "This type stores the halfedge connectivity.";
+constexpr const char* Surface_mesh_Halfedge_connectivity__class__ = "This type stores the halfedge connectivity.";
 
-constexpr const char* CGAL_Surface_mesh_Halfedge_connectivity_face = "face incident to halfedge
+constexpr const char* Surface_mesh_Halfedge_connectivity_face = "face incident to halfedge
 
 Returns: Face_index";
-constexpr const char* CGAL_Surface_mesh_Halfedge_connectivity_vertex = "vertex the halfedge points to
+constexpr const char* Surface_mesh_Halfedge_connectivity_vertex = "vertex the halfedge points to
 
 Returns: Vertex_index";
-constexpr const char* CGAL_Surface_mesh_Halfedge_connectivity_next_halfedge = "next halfedge within a face (or along a border)
+constexpr const char* Surface_mesh_Halfedge_connectivity_next_halfedge = "next halfedge within a face (or along a border)
 
 Returns: Halfedge_index";
-constexpr const char* CGAL_Surface_mesh_Halfedge_connectivity_prev_halfedge = "previous halfedge within a face (or along a border)
+constexpr const char* Surface_mesh_Halfedge_connectivity_prev_halfedge = "previous halfedge within a face (or along a border)
 
 Returns: Halfedge_index";
 
 // CGAL::Surface_mesh::Halfedge_index
-constexpr const char* CGAL_Surface_mesh_Halfedge_index__class__ = "This class represents a halfedge.";
+constexpr const char* Surface_mesh_Halfedge_index__class__ = "This class represents a halfedge.";
 
-constexpr const char* CGAL_Surface_mesh_Halfedge_index_Halfedge_index = "Default constructor";
-constexpr const char* CGAL_Surface_mesh_Halfedge_index_operator = "prints the index and a short identification string to an ostream.
+constexpr const char* Surface_mesh_Halfedge_index_Halfedge_index = "Default constructor";
+constexpr const char* Surface_mesh_Halfedge_index_operator = "prints the index and a short identification string to an ostream.
 
 Parameters
 ----------
@@ -683,17 +683,17 @@ Returns: std::ostream &";
 
 
 // CGAL::Surface_mesh::Vertex_connectivity
-constexpr const char* CGAL_Surface_mesh_Vertex_connectivity__class__ = "This type stores the vertex connectivity.";
+constexpr const char* Surface_mesh_Vertex_connectivity__class__ = "This type stores the vertex connectivity.";
 
-constexpr const char* CGAL_Surface_mesh_Vertex_connectivity_halfedge = "an incoming halfedge per vertex (it will be a border halfedge for border vertices)
+constexpr const char* Surface_mesh_Vertex_connectivity_halfedge = "an incoming halfedge per vertex (it will be a border halfedge for border vertices)
 
 Returns: Halfedge_index";
 
 // CGAL::Surface_mesh::Vertex_index
-constexpr const char* CGAL_Surface_mesh_Vertex_index__class__ = "This class represents a vertex.";
+constexpr const char* Surface_mesh_Vertex_index__class__ = "This class represents a vertex.";
 
-constexpr const char* CGAL_Surface_mesh_Vertex_index_Vertex_index = "Default constructor.";
-constexpr const char* CGAL_Surface_mesh_Vertex_index_operator = "prints the index and a short identification string to an ostream.
+constexpr const char* Surface_mesh_Vertex_index_Vertex_index = "Default constructor.";
+constexpr const char* Surface_mesh_Vertex_index_operator = "prints the index and a short identification string to an ostream.
 
 Parameters
 ----------

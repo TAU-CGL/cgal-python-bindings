@@ -8,14 +8,14 @@ namespace docstrings {
 namespace Partition_2 {
 
 // CGAL::Is_convex_2
-constexpr const char* CGAL_Is_convex_2__class__ = "Function object class for testing if a sequence of points represents a convex polygon or not.";
+constexpr const char* Is_convex_2__class__ = "Function object class for testing if a sequence of points represents a convex polygon or not.";
 
-constexpr const char* CGAL_Is_convex_2_Is_convex_2 = "Traits satisfies the requirements of the function is_convex_2()
+constexpr const char* Is_convex_2_Is_convex_2 = "Traits satisfies the requirements of the function is_convex_2()
 
 Parameters
 ----------
 t : const Traits &";
-constexpr const char* CGAL_Is_convex_2_operator = "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a convex polygon.
+constexpr const char* Is_convex_2_operator = "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a convex polygon.
 
 Parameters
 ----------
@@ -25,9 +25,9 @@ beyond : InputIterator
 Returns: bool";
 
 // CGAL::Is_vacuously_valid
-constexpr const char* CGAL_Is_vacuously_valid__class__ = "Function object class that indicates all sequences of points are valid.";
+constexpr const char* Is_vacuously_valid__class__ = "Function object class that indicates all sequences of points are valid.";
 
-constexpr const char* CGAL_Is_vacuously_valid_operator = "returns true .
+constexpr const char* Is_vacuously_valid_operator = "returns true .
 
 Parameters
 ----------
@@ -37,14 +37,14 @@ beyond : InputIterator
 Returns: bool";
 
 // CGAL::Is_y_monotone_2
-constexpr const char* CGAL_Is_y_monotone_2__class__ = "Function object class that tests whether a sequence of points represents a $ y$ -monotone polygon or not.";
+constexpr const char* Is_y_monotone_2__class__ = "Function object class that tests whether a sequence of points represents a $ y$ -monotone polygon or not.";
 
-constexpr const char* CGAL_Is_y_monotone_2_Is_y_monotone_2 = "Traits is a model of the concept IsYMonotoneTraits_2
+constexpr const char* Is_y_monotone_2_Is_y_monotone_2 = "Traits is a model of the concept IsYMonotoneTraits_2
 
 Parameters
 ----------
 t : const Traits &";
-constexpr const char* CGAL_Is_y_monotone_2_operator = "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a $ y$ -monotone polygon.
+constexpr const char* Is_y_monotone_2_operator = "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a $ y$ -monotone polygon.
 
 Parameters
 ----------
@@ -54,9 +54,9 @@ beyond : InputIterator
 Returns: bool";
 
 // CGAL::Partition_is_valid_traits_2
-constexpr const char* CGAL_Partition_is_valid_traits_2__class__ = "Class that derives a traits class for partition_is_valid_2() from a given traits class by defining the validity testing function object in terms of a supplied template parameter.";
+constexpr const char* Partition_is_valid_traits_2__class__ = "Class that derives a traits class for partition_is_valid_2() from a given traits class by defining the validity testing function object in terms of a supplied template parameter.";
 
-constexpr const char* CGAL_Partition_is_valid_traits_2_is_valid_object = "function returning an instance of Is_valid
+constexpr const char* Partition_is_valid_traits_2_is_valid_object = "function returning an instance of Is_valid
 
 Parameters
 ----------
@@ -65,12 +65,12 @@ traits : const Traits &
 Returns: Is_valid";
 
 // CGAL::Partition_traits_2
-constexpr const char* CGAL_Partition_traits_2__class__ = "Traits class that can be used with all the 2-dimensional polygon partitioning algorithms.";
+constexpr const char* Partition_traits_2__class__ = "Traits class that can be used with all the 2-dimensional polygon partitioning algorithms.";
 
-constexpr const char* CGAL_Partition_traits_2_Less_yx_2 = "A functor with an operator which first obtains points of type R::Point_2 with the function get() applied on the point property map, and then applies the functor of R::Less_yx_2 to these points.
+constexpr const char* Partition_traits_2_Less_yx_2 = "A functor with an operator which first obtains points of type R::Point_2 with the function get() applied on the point property map, and then applies the functor of R::Less_yx_2 to these points.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Partition_traits_2_pred_object_type_object = "Returns an instance of Pred_object_type .
+constexpr const char* Partition_traits_2_pred_object_type_object = "Returns an instance of Pred_object_type .
 
 Returns: Pred_object_type";
 

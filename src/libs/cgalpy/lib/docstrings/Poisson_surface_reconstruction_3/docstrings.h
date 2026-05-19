@@ -7,41 +7,41 @@ namespace cgalpy {
 namespace docstrings {
 namespace Poisson_surface_reconstruction_3 {
 
-constexpr const char* CGAL_Lightweight_vector_3_Geom_traits = "Geometric traits class.
+constexpr const char* Lightweight_vector_3_Geom_traits = "Geometric traits class.
 
 Returns: Gt";
-constexpr const char* CGAL_Lightweight_vector_3_Vector = "Kernel's Vector_3 class.
+constexpr const char* Lightweight_vector_3_Vector = "Kernel's Vector_3 class.
 
 Returns: Geom_traits::Vector_3";
-constexpr const char* CGAL_Lightweight_vector_3_Lightweight_vector_3 = "Vector is (0,0,0) by default.
+constexpr const char* Lightweight_vector_3_Lightweight_vector_3 = "Vector is (0,0,0) by default.
 
 Parameters
 ----------
  : Null_vector";
-constexpr const char* CGAL_Lightweight_vector_3_Lightweight_vector_3_1 = "Copy constructor.
+constexpr const char* Lightweight_vector_3_Lightweight_vector_3_1 = "Copy constructor.
 
 Parameters
 ----------
 that : const Lightweight_vector_3 &";
-constexpr const char* CGAL_Lightweight_vector_3_operator = "Operator =().
+constexpr const char* Lightweight_vector_3_operator = "Operator =().
 
 Parameters
 ----------
 that : const Lightweight_vector_3 &
 
 Returns: Lightweight_vector_3 &";
-constexpr const char* CGAL_Lightweight_vector_3_Lightweight_vector_3_2 = "Destructor.";
-constexpr const char* CGAL_Lightweight_vector_3_operator_1 = "Compare vectors.
+constexpr const char* Lightweight_vector_3_Lightweight_vector_3_2 = "Destructor.";
+constexpr const char* Lightweight_vector_3_operator_1 = "Compare vectors.
 
 Parameters
 ----------
 that : const Lightweight_vector_3 &
 
 Returns: bool";
-constexpr const char* CGAL_Lightweight_vector_3_operator_Vector = "Gets (a copy of) the actual vector.";
+constexpr const char* Lightweight_vector_3_operator_Vector = "Gets (a copy of) the actual vector.";
 
 
-constexpr const char* CGAL_Mesh_3_Poisson_refine_tets_base_criteria = "Meshing criteria for tetrahedra.
+constexpr const char* Mesh_3_Poisson_refine_tets_base_criteria = "Meshing criteria for tetrahedra.
 
 Returns: Criteria";
 
@@ -52,37 +52,37 @@ Returns: Criteria";
 
 
 // CGAL::Poisson_mesh_domain_3
-constexpr const char* CGAL_Poisson_mesh_domain_3__class__ = "The class Poisson_mesh_domain_3 derives from Labeled_mesh_domain_3 for the handling of Poisson_reconstruction_function .";
+constexpr const char* Poisson_mesh_domain_3__class__ = "The class Poisson_mesh_domain_3 derives from Labeled_mesh_domain_3 for the handling of Poisson_reconstruction_function .";
 
-constexpr const char* CGAL_Poisson_mesh_domain_3_Point_3 = "
+constexpr const char* Poisson_mesh_domain_3_Point_3 = "
 The point type of the geometric traits class
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Sphere_3 = "The sphere type of the geometric traits class.
+constexpr const char* Poisson_mesh_domain_3_Sphere_3 = "The sphere type of the geometric traits class.
 
 Returns: Geom_traits::Sphere_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Iso_cuboid_3 = "The iso-cuboid type of the geometric traits class.
+constexpr const char* Poisson_mesh_domain_3_Iso_cuboid_3 = "The iso-cuboid type of the geometric traits class.
 
 Returns: Geom_traits::Iso_cuboid_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Bbox_3 = "The bounding box type.
+constexpr const char* Poisson_mesh_domain_3_Bbox_3 = "The bounding box type.
 
 Returns: CGAL::Bbox_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_FT = "The number type (a field type) of the geometric traits class.
+constexpr const char* Poisson_mesh_domain_3_FT = "The number type (a field type) of the geometric traits class.
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Ray_3 = "The ray type of the geometric traits class.
+constexpr const char* Poisson_mesh_domain_3_Ray_3 = "The ray type of the geometric traits class.
 
 Returns: Geom_traits::Ray_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Line_3 = "The line type of the geometric traits class.
+constexpr const char* Poisson_mesh_domain_3_Line_3 = "The line type of the geometric traits class.
 
 Returns: Geom_traits::Line_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Segment_3 = "The segment type of the geometric traits class.
+constexpr const char* Poisson_mesh_domain_3_Segment_3 = "The segment type of the geometric traits class.
 
 Returns: Geom_traits::Segment_3";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Function = "The Poisson function type.
+constexpr const char* Poisson_mesh_domain_3_Function = "The Poisson function type.
 
 Returns: CGAL::Poisson_reconstruction_function < Geom_traits >";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Poisson_mesh_domain_3 = "Construction from a function, a bounding object and a relative error bound.
+constexpr const char* Poisson_mesh_domain_3_Poisson_mesh_domain_3 = "Construction from a function, a bounding object and a relative error bound.
 
 Bounding_object either a bounding sphere (of type Sphere_3 ), a bounding box
 (type Bbox_3 ), or a bounding Iso_cuboid_3 NamedParameters a sequence of Named
@@ -100,7 +100,7 @@ Parameters
 function : const Function &
 bounding_object : const Bounding_object &
 np : const NamedParameters &";
-constexpr const char* CGAL_Poisson_mesh_domain_3_Poisson_mesh_domain_3_1 = "Construction from a function, a bounding object and a relative error bound.
+constexpr const char* Poisson_mesh_domain_3_Poisson_mesh_domain_3_1 = "Construction from a function, a bounding object and a relative error bound.
 
 NamedParameters a sequence of Named Parameters function the Poisson
 reconstruction function np an optional sequence of Named Parameters among the
@@ -115,7 +115,7 @@ Parameters
 ----------
 function : const Function &
 np : const NamedParameters &";
-constexpr const char* CGAL_Poisson_mesh_domain_3_create_Poisson_mesh_domain = "Construction from a Poisson implicit function.
+constexpr const char* Poisson_mesh_domain_3_create_Poisson_mesh_domain = "Construction from a Poisson implicit function.
 
 This static method is a named constructor . It constructs a domain whose
 bounding surface is described implicitly as the zero level set of a function.
@@ -140,21 +140,21 @@ Returns: Poisson_mesh_domain_3";
 
 
 // CGAL::Poisson_reconstruction_function
-constexpr const char* CGAL_Poisson_reconstruction_function__class__ = "Implementation of the Poisson Surface Reconstruction method.";
+constexpr const char* Poisson_reconstruction_function__class__ = "Implementation of the Poisson Surface Reconstruction method.";
 
-constexpr const char* CGAL_Poisson_reconstruction_function_Geom_traits = "Geometric traits class.
+constexpr const char* Poisson_reconstruction_function_Geom_traits = "Geometric traits class.
 
 Returns: Gt";
-constexpr const char* CGAL_Poisson_reconstruction_function_FT = "number type.
+constexpr const char* Poisson_reconstruction_function_FT = "number type.
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Poisson_reconstruction_function_Point = "point type.
+constexpr const char* Poisson_reconstruction_function_Point = "point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Poisson_reconstruction_function_Vector = "vector type.
+constexpr const char* Poisson_reconstruction_function_Vector = "vector type.
 
 Returns: Geom_traits::Vector_3";
-constexpr const char* CGAL_Poisson_reconstruction_function_Poisson_reconstruction_function = "Creates a Poisson implicit function from the range of points [first, beyond) .
+constexpr const char* Poisson_reconstruction_function_Poisson_reconstruction_function = "Creates a Poisson implicit function from the range of points [first, beyond) .
 
 InputIterator iterator over input points. PointPMap is a model of
 ReadablePropertyMap with a value_type = Point . It can be omitted if
@@ -167,10 +167,10 @@ first : InputIterator  —  iterator over the first input point.
 beyond : InputIterator  —  past-the-end iterator over the input points.
 point_pmap : PointPMap  —  property map: value_type of InputIterator -> Point (the position of an input point).
 normal_pmap : NormalPMap  —  property map: value_type of InputIterator -> Vector (the oriented normal of an input point).";
-constexpr const char* CGAL_Poisson_reconstruction_function_bounding_sphere = "Returns a sphere bounding the inferred surface.
+constexpr const char* Poisson_reconstruction_function_bounding_sphere = "Returns a sphere bounding the inferred surface.
 
 Returns: Sphere";
-constexpr const char* CGAL_Poisson_reconstruction_function_compute_implicit_function = "This function must be called after the insertion of oriented points.
+constexpr const char* Poisson_reconstruction_function_compute_implicit_function = "This function must be called after the insertion of oriented points.
 
 It computes the piecewise linear scalar function operator() by: applying
 Delaunay refinement, solving for operator() at each vertex of the
@@ -192,7 +192,7 @@ solver : SparseLinearAlgebraTraits_d
 smoother_hole_filling : bool
 
 Returns: bool";
-constexpr const char* CGAL_Poisson_reconstruction_function_operator = "ImplicitFunction interface: evaluates the implicit function at a given 3D query point.
+constexpr const char* Poisson_reconstruction_function_operator = "ImplicitFunction interface: evaluates the implicit function at a given 3D query point.
 
 The function compute_implicit_function() must be called before the first call
 to operator() .
@@ -202,10 +202,10 @@ Parameters
 p : const Point &
 
 Returns: FT";
-constexpr const char* CGAL_Poisson_reconstruction_function_get_inner_point = "Returns a point located inside the inferred surface.
+constexpr const char* Poisson_reconstruction_function_get_inner_point = "Returns a point located inside the inferred surface.
 
 Returns: Point";
-constexpr const char* CGAL_Poisson_reconstruction_function_forward_constructor = "function to be used for the different constructors available that are doing the same thing but with default template parameters
+constexpr const char* Poisson_reconstruction_function_forward_constructor = "function to be used for the different constructors available that are doing the same thing but with default template parameters
 
 Parameters
 ----------
@@ -214,7 +214,7 @@ beyond : InputIterator
 point_pmap : PointPMap
 normal_pmap : NormalPMap
 visitor : Visitor";
-constexpr const char* CGAL_Poisson_reconstruction_function_delaunay_refinement = "Delaunay refinement (break bad tetrahedra, where bad means badly shaped or too big).
+constexpr const char* Poisson_reconstruction_function_delaunay_refinement = "Delaunay refinement (break bad tetrahedra, where bad means badly shaped or too big).
 
 The normal of Steiner points is set to zero. Returns the number of vertices
 inserted.
@@ -227,7 +227,7 @@ max_vertices : unsigned int  —  number of vertices bound
 enlarge_ratio : FT  —  bounding box enlarge ratio
 
 Returns: unsigned int";
-constexpr const char* CGAL_Poisson_reconstruction_function_solve_poisson = "Poisson reconstruction.
+constexpr const char* Poisson_reconstruction_function_solve_poisson = "Poisson reconstruction.
 
 Returns false on error. SparseLinearAlgebraTraits_d Symmetric definite
 positive sparse linear solver.
@@ -238,7 +238,7 @@ solver : SparseLinearAlgebraTraits_d  —  sparse linear solver
 lambda : double
 
 Returns: bool";
-constexpr const char* CGAL_Poisson_reconstruction_function_set_contouring_value = "Shift and orient the implicit function such that:
+constexpr const char* Poisson_reconstruction_function_set_contouring_value = "Shift and orient the implicit function such that:
 
 the implicit function = 0 for points / f() = contouring_value, the implicit
 function < 0 inside the surface. Returns the minimum value of the implicit
@@ -249,10 +249,10 @@ Parameters
 contouring_value : FT
 
 Returns: FT";
-constexpr const char* CGAL_Poisson_reconstruction_function_median_value_at_input_vertices = "Gets median value of the implicit function over input vertices.
+constexpr const char* Poisson_reconstruction_function_median_value_at_input_vertices = "Gets median value of the implicit function over input vertices.
 
 Returns: FT";
-constexpr const char* CGAL_Poisson_reconstruction_function_assemble_poisson_row = "Assemble vi's row of the linear system A*X=B.
+constexpr const char* Poisson_reconstruction_function_assemble_poisson_row = "Assemble vi's row of the linear system A*X=B.
 
 SparseLinearAlgebraTraits_d Symmetric definite positive sparse linear solver.
 
@@ -262,7 +262,7 @@ A : typename SparseLinearAlgebraTraits_d::Matrix &
 vi : Vertex_handle
 B : typename SparseLinearAlgebraTraits_d::Vector &
 lambda : double";
-constexpr const char* CGAL_Poisson_reconstruction_function_enlarged_bounding_sphere = "Computes enlarged geometric bounding sphere of the embedded triangulation.
+constexpr const char* Poisson_reconstruction_function_enlarged_bounding_sphere = "Computes enlarged geometric bounding sphere of the embedded triangulation.
 
 Parameters
 ----------
@@ -272,42 +272,42 @@ Returns: Sphere";
 
 
 
-constexpr const char* CGAL_Reconstruction_triangulation_3_Point_type = "Point type.";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Geom_traits = "Geometric traits class / Point_3 is a typedef to Point_with_normal_3<BaseGt>.
+constexpr const char* Reconstruction_triangulation_3_Point_type = "Point type.";
+constexpr const char* Reconstruction_triangulation_3_Geom_traits = "Geometric traits class / Point_3 is a typedef to Point_with_normal_3<BaseGt>.
 
 Returns: Gt";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Vector = "typedef to Vector_3<BaseGt>
+constexpr const char* Reconstruction_triangulation_3_Vector = "typedef to Vector_3<BaseGt>
 
 Returns: Geom_traits::Vector_3";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Point = "typedef to Point_with_normal_3<BaseGt>
+constexpr const char* Reconstruction_triangulation_3_Point = "typedef to Point_with_normal_3<BaseGt>
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Point_with_normal = "Point_with_normal_3<BaseGt>.
+constexpr const char* Reconstruction_triangulation_3_Point_with_normal = "Point_with_normal_3<BaseGt>.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Input_vertices_iterator = "Iterator over input vertices.
+constexpr const char* Reconstruction_triangulation_3_Input_vertices_iterator = "Iterator over input vertices.
 
 Returns: Filter_iterator< Finite_vertices_iterator, Is_steiner_point >";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Input_point_iterator = "Iterator over input points.
+constexpr const char* Reconstruction_triangulation_3_Input_point_iterator = "Iterator over input points.
 
 Returns: Iterator_project< Input_vertices_iterator, Project_point< Vertex > >";
-constexpr const char* CGAL_Reconstruction_triangulation_3_Reconstruction_triangulation_3 = "Default constructor.";
-constexpr const char* CGAL_Reconstruction_triangulation_3_input_vertices_begin = "Gets first iterator over input vertices.
+constexpr const char* Reconstruction_triangulation_3_Reconstruction_triangulation_3 = "Default constructor.";
+constexpr const char* Reconstruction_triangulation_3_input_vertices_begin = "Gets first iterator over input vertices.
 
 Returns: Input_vertices_iterator";
-constexpr const char* CGAL_Reconstruction_triangulation_3_input_vertices_end = "Gets past-the-end iterator over input vertices.
+constexpr const char* Reconstruction_triangulation_3_input_vertices_end = "Gets past-the-end iterator over input vertices.
 
 Returns: Input_vertices_iterator";
-constexpr const char* CGAL_Reconstruction_triangulation_3_input_points_begin = "Gets iterator over the first input point.
+constexpr const char* Reconstruction_triangulation_3_input_points_begin = "Gets iterator over the first input point.
 
 Returns: Input_point_iterator";
-constexpr const char* CGAL_Reconstruction_triangulation_3_input_points_end = "Gets past-the-end iterator over the input points.
+constexpr const char* Reconstruction_triangulation_3_input_points_end = "Gets past-the-end iterator over the input points.
 
 Returns: Input_point_iterator";
-constexpr const char* CGAL_Reconstruction_triangulation_3_bounding_sphere = "Gets the bounding sphere of input points.
+constexpr const char* Reconstruction_triangulation_3_bounding_sphere = "Gets the bounding sphere of input points.
 
 Returns: Sphere";
-constexpr const char* CGAL_Reconstruction_triangulation_3_insert = "Insert point in the triangulation.
+constexpr const char* Reconstruction_triangulation_3_insert = "Insert point in the triangulation.
 
 Default type is INPUT.
 
@@ -319,7 +319,7 @@ start : Cell_handle
 visitor : Visitor
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Reconstruction_triangulation_3_insert_1 = "Insert the [first, beyond) range of points in the triangulation using a spatial sort.
+constexpr const char* Reconstruction_triangulation_3_insert_1 = "Insert the [first, beyond) range of points in the triangulation using a spatial sort.
 
 Default type is INPUT. Template Parameters: InputIterator iterator over input
 points. PointPMap is a model of ReadablePropertyMap with a value_type =
@@ -336,7 +336,7 @@ normal_pmap : NormalPMap  —  property map: value_type of InputIterator -> Vect
 visitor : Visitor
 
 Returns: int";
-constexpr const char* CGAL_Reconstruction_triangulation_3_insert_in_hole = "Delaunay refinement callback: insert STEINER point in the triangulation.
+constexpr const char* Reconstruction_triangulation_3_insert_in_hole = "Delaunay refinement callback: insert STEINER point in the triangulation.
 
 Parameters
 ----------
@@ -348,12 +348,12 @@ i : int
 type : Point_type
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Reconstruction_triangulation_3_index_unconstrained_vertices = "Index unconstrained vertices following the order of Finite_vertices_iterator.
+constexpr const char* Reconstruction_triangulation_3_index_unconstrained_vertices = "Index unconstrained vertices following the order of Finite_vertices_iterator.
 
 the number of unconstrained vertices.
 
 Returns: unsigned int";
-constexpr const char* CGAL_Reconstruction_triangulation_3_is_constrained = "Is vertex constrained, i.e.
+constexpr const char* Reconstruction_triangulation_3_is_constrained = "Is vertex constrained, i.e.
 
 does it contribute to the right or left member of the linear system?
 
@@ -365,35 +365,35 @@ Returns: bool";
 
 
 
-constexpr const char* CGAL_Reconstruction_vertex_base_3_Geom_traits = "Geometric traits class / Point_3 is a typedef to Point_with_normal_3.
+constexpr const char* Reconstruction_vertex_base_3_Geom_traits = "Geometric traits class / Point_3 is a typedef to Point_with_normal_3.
 
 Returns: Gt";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_Vector = "typedef to Vector_3
+constexpr const char* Reconstruction_vertex_base_3_Vector = "typedef to Vector_3
 
 Returns: Geom_traits::Vector_3";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_Point = "typedef to Point_with_normal_3
+constexpr const char* Reconstruction_vertex_base_3_Point = "typedef to Point_with_normal_3
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_Point_with_normal = "typedef to Point_with_normal_3
+constexpr const char* Reconstruction_vertex_base_3_Point_with_normal = "typedef to Point_with_normal_3
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_f = "Gets/sets the value of the implicit function.
+constexpr const char* Reconstruction_vertex_base_3_f = "Gets/sets the value of the implicit function.
 
 Default value is 0.0.
 
 Returns: FT";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_type = "Gets/sets the type = INPUT or STEINER.
+constexpr const char* Reconstruction_vertex_base_3_type = "Gets/sets the type = INPUT or STEINER.
 
 Returns: unsigned char";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_index = "Gets/sets the index in matrix.
+constexpr const char* Reconstruction_vertex_base_3_index = "Gets/sets the index in matrix.
 
 Returns: unsigned int";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_normal = "Gets/sets normal vector.
+constexpr const char* Reconstruction_vertex_base_3_normal = "Gets/sets normal vector.
 
 Default value is null vector.
 
 Returns: const Vector &";
-constexpr const char* CGAL_Reconstruction_vertex_base_3_Reconstruction_vertex_base_3 = "Copy constructor and operator =() are not implemented.
+constexpr const char* Reconstruction_vertex_base_3_Reconstruction_vertex_base_3 = "Copy constructor and operator =() are not implemented.
 
 Parameters
 ----------
@@ -405,7 +405,7 @@ toCopy : const Reconstruction_vertex_base_3 &";
 
 
 
-constexpr const char* CGAL_output_surface_facets_to_triangle_soup = "Gets reconstructed surface out of a SurfaceMeshComplex_2InTriangulation_3 object.
+constexpr const char* output_surface_facets_to_triangle_soup = "Gets reconstructed surface out of a SurfaceMeshComplex_2InTriangulation_3 object.
 
 This variant exports the surface as a triangle soup. OutputIteratorValueType
 value_type of OutputIterator. It is default to

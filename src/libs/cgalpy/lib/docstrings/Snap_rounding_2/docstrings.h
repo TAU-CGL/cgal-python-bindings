@@ -8,7 +8,7 @@ namespace docstrings {
 namespace Snap_rounding_2 {
 
 // CGAL::Snap_rounding_traits_2
-constexpr const char* CGAL_Snap_rounding_traits_2__class__ = "The class Snap_rounding_traits_2 <Kernel> is a model of the SnapRoundingTraits_2 concept, and is the only traits class supplied with the package.";
+constexpr const char* Snap_rounding_traits_2__class__ = "The class Snap_rounding_traits_2 <Kernel> is a model of the SnapRoundingTraits_2 concept, and is the only traits class supplied with the package.";
 
 // SnapRoundingTraits_2
 constexpr const char* SnapRoundingTraits_2__class__ = "The concept SnapRoundingTraits_2 lists the set of requirements that must be fulfilled by an instance of the Traits template-parameter of the free function CGAL::snap_rounding_2() CGAL::snap_rounding_2 <Traits,InputIterator,OutputContainer>() . The list includes the nested types of the geometric primitives used in this class and some function object types for the required predicates on those primitives.";

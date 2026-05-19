@@ -8,16 +8,16 @@ namespace docstrings {
 namespace Interval_skip_list {
 
 // CGAL::Interval_skip_list
-constexpr const char* CGAL_Interval_skip_list__class__ = "The class Interval_skip_list is a dynamic data structure that allows to find all members of a set of intervals that overlap a point.";
+constexpr const char* Interval_skip_list__class__ = "The class Interval_skip_list is a dynamic data structure that allows to find all members of a set of intervals that overlap a point.";
 
-constexpr const char* CGAL_Interval_skip_list_Value = "the type of inf and sup of the interval.
+constexpr const char* Interval_skip_list_Value = "the type of inf and sup of the interval.
 
 Returns: Interval::Value";
-constexpr const char* CGAL_Interval_skip_list_const_iterator = "An iterator over all intervals.
+constexpr const char* Interval_skip_list_const_iterator = "An iterator over all intervals.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Interval_skip_list_Interval_skip_list = "Default constructor.";
-constexpr const char* CGAL_Interval_skip_list_Interval_skip_list_1 = "Constructor that inserts the iterator range [first, last) in the interval skip list.
+constexpr const char* Interval_skip_list_Interval_skip_list = "Default constructor.";
+constexpr const char* Interval_skip_list_Interval_skip_list_1 = "Constructor that inserts the iterator range [first, last) in the interval skip list.
 
 InputIterator must be an input iterator with value type Interval .
 
@@ -25,7 +25,7 @@ Parameters
 ----------
 first : InputIterator
 last : InputIterator";
-constexpr const char* CGAL_Interval_skip_list_insert = "Inserts the iterator range [first, last) in the interval skip list, and returns the number of inserted intervals.
+constexpr const char* Interval_skip_list_insert = "Inserts the iterator range [first, last) in the interval skip list, and returns the number of inserted intervals.
 
 InputIterator must be an input iterator with value type Interval .
 
@@ -35,12 +35,12 @@ first : InputIterator
 last : InputIterator
 
 Returns: int";
-constexpr const char* CGAL_Interval_skip_list_insert_1 = "Inserts interval i in the interval skip list.
+constexpr const char* Interval_skip_list_insert_1 = "Inserts interval i in the interval skip list.
 
 Parameters
 ----------
 i : const Interval &";
-constexpr const char* CGAL_Interval_skip_list_remove = "Removes interval i from the interval skip list.
+constexpr const char* Interval_skip_list_remove = "Removes interval i from the interval skip list.
 
 Returns true iff removal was successful.
 
@@ -49,14 +49,14 @@ Parameters
 i : const Interval &
 
 Returns: bool";
-constexpr const char* CGAL_Interval_skip_list_is_contained = "Returns true iff there is an interval that contains v .
+constexpr const char* Interval_skip_list_is_contained = "Returns true iff there is an interval that contains v .
 
 Parameters
 ----------
 v : const Value &
 
 Returns: bool";
-constexpr const char* CGAL_Interval_skip_list_find_intervals = "Writes the intervals i with i.inf() $ \\leq$ v $ \\leq$ i.sup to the output iterator out .
+constexpr const char* Interval_skip_list_find_intervals = "Writes the intervals i with i.inf() $ \\leq$ v $ \\leq$ i.sup to the output iterator out .
 
 OutputIterator must be an output iterator with value type Interval .
 
@@ -66,14 +66,14 @@ v : const Value &
 out : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Interval_skip_list_clear = "Removes all intervals from the interval skip list.";
-constexpr const char* CGAL_Interval_skip_list_begin = "Returns an iterator over all intervals.
+constexpr const char* Interval_skip_list_clear = "Removes all intervals from the interval skip list.";
+constexpr const char* Interval_skip_list_begin = "Returns an iterator over all intervals.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Interval_skip_list_end = "Returns the past the end iterator.
+constexpr const char* Interval_skip_list_end = "Returns the past the end iterator.
 
 Returns: const_iterator";
-constexpr const char* CGAL_Interval_skip_list_operator = "Inserts the interval skip list isl into the stream os .
+constexpr const char* Interval_skip_list_operator = "Inserts the interval skip list isl into the stream os .
 
 The output operator must be defined for Interval .
 
@@ -85,10 +85,10 @@ isl : const Interval_skip_list < Interval > &
 Returns: ostream &";
 
 // CGAL::Interval_skip_list_interval
-constexpr const char* CGAL_Interval_skip_list_interval__class__ = "The class Interval_skip_list_interval represents intervals with lower and upper bound of type Value .";
+constexpr const char* Interval_skip_list_interval__class__ = "The class Interval_skip_list_interval represents intervals with lower and upper bound of type Value .";
 
-constexpr const char* CGAL_Interval_skip_list_interval_Interval_skip_list_interval = "Default constructor.";
-constexpr const char* CGAL_Interval_skip_list_interval_Interval_skip_list_interval_1 = "Constructs the interval with infimum i and supremum s .
+constexpr const char* Interval_skip_list_interval_Interval_skip_list_interval = "Default constructor.";
+constexpr const char* Interval_skip_list_interval_Interval_skip_list_interval_1 = "Constructs the interval with infimum i and supremum s .
 
 The arguments ic and uc have value true , iff the interval is closed at the
 lower and upper bound, respectively.
@@ -99,13 +99,13 @@ i : const Value &
 s : const Value &
 ic : bool
 uc : bool";
-constexpr const char* CGAL_Interval_skip_list_interval_inf_closed = "Returns true , iff the interval is closed at the lower bound.
+constexpr const char* Interval_skip_list_interval_inf_closed = "Returns true , iff the interval is closed at the lower bound.
 
 Returns: bool";
-constexpr const char* CGAL_Interval_skip_list_interval_sup_closed = "Returns true , iff the interval is closed at the upper bound.
+constexpr const char* Interval_skip_list_interval_sup_closed = "Returns true , iff the interval is closed at the upper bound.
 
 Returns: bool";
-constexpr const char* CGAL_Interval_skip_list_interval_operator = "Inserts the interval i into the stream os .
+constexpr const char* Interval_skip_list_interval_operator = "Inserts the interval i into the stream os .
 
 The output operator for Value is defined.
 
@@ -117,21 +117,21 @@ i : const Interval_skip_list_interval < V > &
 Returns: ostream &";
 
 // CGAL::Level_interval
-constexpr const char* CGAL_Level_interval__class__ = "The class Level_interval represents intervals for the minimum and maximum value of the z -coordinate of a face of a triangulation.";
+constexpr const char* Level_interval__class__ = "The class Level_interval represents intervals for the minimum and maximum value of the z -coordinate of a face of a triangulation.";
 
-constexpr const char* CGAL_Level_interval_Value = "The type of the $ z$ -coordinate of points stored in vertices of faces.
+constexpr const char* Level_interval_Value = "The type of the $ z$ -coordinate of points stored in vertices of faces.
 
 Returns: FT";
-constexpr const char* CGAL_Level_interval_Level_interval = "Default constructor.";
-constexpr const char* CGAL_Level_interval_Level_interval_1 = "Constructs the interval with smallest and largest z coordinate of the points stored in the vertices of the face fh points to.
+constexpr const char* Level_interval_Level_interval = "Default constructor.";
+constexpr const char* Level_interval_Level_interval_1 = "Constructs the interval with smallest and largest z coordinate of the points stored in the vertices of the face fh points to.
 
 Parameters
 ----------
 fh : FaceHandle";
-constexpr const char* CGAL_Level_interval_face_handle = "Returns the face handle.
+constexpr const char* Level_interval_face_handle = "Returns the face handle.
 
 Returns: FaceHandle";
-constexpr const char* CGAL_Level_interval_operator = "Inserts the interval i into the stream os .
+constexpr const char* Level_interval_operator = "Inserts the interval i into the stream os .
 
 The output operator for *Face_handle is defined.
 
@@ -185,7 +185,7 @@ I : const Interval &
 
 Returns: bool";
 
-constexpr const char* CGAL_Interval_skip_list_operator_1 = "Inserts the interval skip list isl into the stream os .
+constexpr const char* Interval_skip_list_operator_1 = "Inserts the interval skip list isl into the stream os .
 
 The output operator must be defined for Interval .
 
@@ -195,7 +195,7 @@ os : ostream &
 isl : const Interval_skip_list < Interval > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Interval_skip_list_interval_operator_1 = "Inserts the interval i into the stream os .
+constexpr const char* Interval_skip_list_interval_operator_1 = "Inserts the interval i into the stream os .
 
 The output operator for Value is defined.
 
@@ -205,7 +205,7 @@ os : ostream &
 i : const Interval_skip_list_interval < V > &
 
 Returns: ostream &";
-constexpr const char* CGAL_Level_interval_operator_1 = "Inserts the interval i into the stream os .
+constexpr const char* Level_interval_operator_1 = "Inserts the interval i into the stream os .
 
 The output operator for *Face_handle is defined.
 

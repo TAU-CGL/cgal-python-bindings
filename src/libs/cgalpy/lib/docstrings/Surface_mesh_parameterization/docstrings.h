@@ -8,24 +8,24 @@ namespace docstrings {
 namespace Surface_mesh_parameterization {
 
 // CGAL::Surface_mesh_parameterization::ARAP_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3__class__ = "The class ARAP_parameterizer_3 implements the Local/Global Approach to Mesh Parameterization [9] .";
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3__class__ = "The class ARAP_parameterizer_3 implements the Local/Global Approach to Mesh Parameterization [9] .";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_Border_parameterizer = "Border parameterizer type.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_Border_parameterizer = "Border parameterizer type.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_NT = "Number type, deduced from the internal vertex point map of Triangle_mesh .
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_NT = "Number type, deduced from the internal vertex point map of Triangle_mesh .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
 
 Parameters
 ----------
@@ -34,7 +34,7 @@ faces : const FaceRange &
 uvmap : const VertexUVMap
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_parameterize = "computes a mapping from a triangular 3D surface mesh to a piece of the 2D space.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_parameterize = "computes a mapping from a triangular 3D surface mesh to a piece of the 2D space.
 
 The mapping is piecewise linear (linear in each triangle). The result is the
 (u,v) pair image of each vertex of the 3D surface. VertexUVmap must be a model
@@ -60,12 +60,12 @@ vimap : VertexIndexMap
 vpmap : VertexParameterizedMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_ARAP_parameterizer_3 = "Constructor taking only the parameter $\\lambda$ .
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_ARAP_parameterizer_3 = "Constructor taking only the parameter $\\lambda$ .
 
 Parameters
 ----------
 lambda : NT";
-constexpr const char* CGAL_Surface_mesh_parameterization_ARAP_parameterizer_3_ARAP_parameterizer_3_1 = "Default Constructor.
+constexpr const char* Surface_mesh_parameterization_ARAP_parameterizer_3_ARAP_parameterizer_3_1 = "Default Constructor.
 
 border_param Object that maps the surface's border to the 2D space. sparse_la
 Traits object to access a sparse linear system. lambda Parameter to give
@@ -82,30 +82,30 @@ iterations : unsigned int
 tolerance : NT";
 
 // CGAL::Surface_mesh_parameterization::Barycentric_mapping_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3__class__ = "The class Barycentric_mapping_parameterizer_3 implements Tutte Barycentric Mapping algorithm .";
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3__class__ = "The class Barycentric_mapping_parameterizer_3 implements Tutte Barycentric Mapping algorithm .";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Border_parameterizer = "Border parameterizer type.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Border_parameterizer = "Border parameterizer type.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Barycentric_mapping_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_Barycentric_mapping_parameterizer_3 = "Constructor.
 
 Parameters
 ----------
 border_param : Border_parameterizer  —  Object that maps the surface's border to 2D space.
 sparse_la : Solver_traits  —  Traits object to access a sparse linear system.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
 
 Parameters
 ----------
@@ -114,7 +114,7 @@ bhd : halfedge_descriptor
 uvmap : const VertexUVMap
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_compute_w_ij = "computes w_ij , the coefficient of matrix A for j neighbor vertex of i .
+constexpr const char* Surface_mesh_parameterization_Barycentric_mapping_parameterizer_3_compute_w_ij = "computes w_ij , the coefficient of matrix A for j neighbor vertex of i .
 
 Parameters
 ----------
@@ -125,9 +125,9 @@ Parameters
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Circular_border_arc_length_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_arc_length_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a circle, with an arc-length parameterization: the (u,v) values are proportional to the length of border edges.";
+constexpr const char* Surface_mesh_parameterization_Circular_border_arc_length_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a circle, with an arc-length parameterization: the (u,v) values are proportional to the length of border edges.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_arc_length_parameterizer_3_compute_edge_length = "computes the length of an edge.
+constexpr const char* Surface_mesh_parameterization_Circular_border_arc_length_parameterizer_3_compute_edge_length = "computes the length of an edge.
 
 Parameters
 ----------
@@ -138,18 +138,18 @@ target : vertex_descriptor
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Circular_border_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_parameterizer_3__class__ = "This is the base class of strategies that parameterize the border of a 3D surface onto a circle.";
+constexpr const char* Surface_mesh_parameterization_Circular_border_parameterizer_3__class__ = "This is the base class of strategies that parameterize the border of a 3D surface onto a circle.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Circular_border_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Circular_border_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Circular_border_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_parameterizer_3_parameterize = "assigns to the mesh's border vertices a 2D position (i.e. a (u,v) pair) on the circle.
+constexpr const char* Surface_mesh_parameterization_Circular_border_parameterizer_3_parameterize = "assigns to the mesh's border vertices a 2D position (i.e. a (u,v) pair) on the circle.
 
 Mark them as parameterized . The distribution of vertices over the circle
 depends on the function compute_edge_length() . VertexUVmap must be a model of
@@ -174,14 +174,14 @@ uvmap : VertexUVmap
 vpmap : VertexParameterizedMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_parameterizer_3_is_border_convex = "indicates if border's shape is convex.
+constexpr const char* Surface_mesh_parameterization_Circular_border_parameterizer_3_is_border_convex = "indicates if border's shape is convex.
 
 Returns: bool";
 
 // CGAL::Surface_mesh_parameterization::Circular_border_uniform_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_uniform_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a circle in a uniform manner: points are equally spaced.";
+constexpr const char* Surface_mesh_parameterization_Circular_border_uniform_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a circle in a uniform manner: points are equally spaced.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Circular_border_uniform_parameterizer_3_compute_edge_length = "computes the length of an edge.
+constexpr const char* Surface_mesh_parameterization_Circular_border_uniform_parameterizer_3_compute_edge_length = "computes the length of an edge.
 
 Parameters
 ----------
@@ -192,27 +192,27 @@ Parameters
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Discrete_authalic_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3__class__ = "The class Discrete_authalic_parameterizer_3 implements the Discrete Authalic Parameterization algorithm.";
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3__class__ = "The class Discrete_authalic_parameterizer_3 implements the Discrete Authalic Parameterization algorithm.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Border_parameterizer = "Border parameterizer type.
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Border_parameterizer = "Border parameterizer type.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Discrete_authalic_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_Discrete_authalic_parameterizer_3 = "Constructor.
 
 Parameters
 ----------
 border_param : Border_parameterizer  —  Object that maps the surface's border to 2D space.
 sparse_la : Solver_traits  —  Traits object to access a sparse linear system.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_compute_w_ij = "computes w_ij , the (i,j), coefficient of matrix A for j neighbor vertex of i .
+constexpr const char* Surface_mesh_parameterization_Discrete_authalic_parameterizer_3_compute_w_ij = "computes w_ij , the (i,j), coefficient of matrix A for j neighbor vertex of i .
 
 mesh a triangulated surface. main_vertex_v_i the vertex of mesh with index i
 neighbor_vertex_v_j the vertex of mesh with index j
@@ -226,24 +226,24 @@ neighbor_vertex_v_j : Vertex_around_target_circulator< Triangle_mesh >
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Discrete_conformal_map_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3__class__ = "The class Discrete_conformal_map_parameterizer_3 implements the Discrete Conformal Map (DCM) parameterization.";
+constexpr const char* Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3__class__ = "The class Discrete_conformal_map_parameterizer_3 implements the Discrete Conformal Map (DCM) parameterization.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Border_parameterizer = "Border parameterizer type.
+constexpr const char* Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Border_parameterizer = "Border parameterizer type.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Discrete_conformal_map_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_Discrete_conformal_map_parameterizer_3 = "Constructor.
 
 Parameters
 ----------
 border_param : Border_parameterizer  —  Object that maps the surface's border to 2D space.
 sparse_la : Solver_traits  —  Traits object to access a sparse linear system.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_compute_w_ij = "computes w_ij , the (i,j) -coefficient of matrix A , for j neighbor vertex of i .
+constexpr const char* Surface_mesh_parameterization_Discrete_conformal_map_parameterizer_3_compute_w_ij = "computes w_ij , the (i,j) -coefficient of matrix A , for j neighbor vertex of i .
 
 mesh a triangulated surface. main_vertex_v_i the vertex of mesh with index i
 neighbor_vertex_v_j the vertex of mesh with index j
@@ -257,37 +257,37 @@ neighbor_vertex_v_j : Vertex_around_target_circulator< Triangle_mesh >
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Fixed_border_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3__class__ = "The class Fixed_border_parameterizer_3 is the base class of fixed border parameterization methods (Tutte, Floater, ...).";
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3__class__ = "The class Fixed_border_parameterizer_3 is the base class of fixed border parameterization methods (Tutte, Floater, ...).";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Border_parameterizer = "Border parameterizer type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Border_parameterizer = "Border parameterizer type.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Vector = "Solver vector type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Vector = "Solver vector type.
 
 Returns: Solver_traits::Vector";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Matrix = "Solver matrix type.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Matrix = "Solver matrix type.
 
 Returns: Solver_traits::Matrix";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Fixed_border_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Fixed_border_parameterizer_3 = "Constructor.
 
 Parameters
 ----------
 border_param : Border_parameterizer  —  Object that maps the surface's border to 2D space
 sparse_la : Solver_traits  —  Traits object to access a sparse linear system";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_Fixed_border_parameterizer_3_1 = "Destructor of base class should be virtual.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_Fixed_border_parameterizer_3_1 = "Destructor of base class should be virtual.";
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
 
 The mapping is piecewise linear (linear in each triangle). The result is the
 (u,v) pair image of each vertex of the 3D surface. VertexUVmap must be a model
@@ -314,7 +314,7 @@ vimap : VertexIndexMap
 vpmap : VertexParameterizedMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_initialize_system_from_mesh_border = "initializes A , Bu and Bv after border parameterization.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_initialize_system_from_mesh_border = "initializes A , Bu and Bv after border parameterization.
 
 Fill the border vertices' lines in both linear systems: \"u = constant\" and \"v
 = constant\". VertexUVmap must be a model of ReadWritePropertyMap with
@@ -339,7 +339,7 @@ mesh : const Triangle_mesh &
 bhd : halfedge_descriptor
 uvmap : VertexUVmap
 vimap : VertexIndexMap";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_compute_w_ij = "computes w_ij , coefficient of matrix A for j neighbor vertex of i .
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_compute_w_ij = "computes w_ij , coefficient of matrix A for j neighbor vertex of i .
 
 Implementation note: Subclasses must at least implement compute_w_ij() . mesh
 a triangulated surface. main_vertex_v_i the vertex of mesh with index i
@@ -352,7 +352,7 @@ main_vertex_v_i : vertex_descriptor
 neighbor_vertex_v_j : Vertex_around_target_circulator< Triangle_mesh >
 
 Returns: NT";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_setup_inner_vertex_relations = "Compute the line i of matrix A for i inner vertex:
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_setup_inner_vertex_relations = "Compute the line i of matrix A for i inner vertex:
 
 call compute_w_ij() to compute the A coefficient w_ij for each neighbor v_j.
 compute w_ii = - sum of w_ijs. Vertices must be indexed. Vertex i mustn't be
@@ -368,32 +368,32 @@ vertex : vertex_descriptor
 vimap : VertexIndexMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_get_border_parameterizer = "Get the object that maps the surface's border onto a 2D space.
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_get_border_parameterizer = "Get the object that maps the surface's border onto a 2D space.
 
 Returns: Border_parameterizer &";
-constexpr const char* CGAL_Surface_mesh_parameterization_Fixed_border_parameterizer_3_get_linear_algebra_traits = "Get the sparse linear algebra (traits object to access the linear system).
+constexpr const char* Surface_mesh_parameterization_Fixed_border_parameterizer_3_get_linear_algebra_traits = "Get the sparse linear algebra (traits object to access the linear system).
 
 Returns: Solver_traits &";
 
 // CGAL::Surface_mesh_parameterization::Iterative_authalic_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3__class__ = "The class Iterative_authalic_parameterizer_3 implements the Iterative Parameterization algorithm, as described by Jain et al.";
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3__class__ = "The class Iterative_authalic_parameterizer_3 implements the Iterative Parameterization algorithm, as described by Jain et al.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Border_parameterizer = "Border parameterizer type.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Border_parameterizer = "Border parameterizer type.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_get_border_parameterizer = "Get the object that maps the surface's border onto a 2D space.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_get_border_parameterizer = "Get the object that maps the surface's border onto a 2D space.
 
 Returns: Border_parameterizer &";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_get_linear_algebra_traits = "Get the sparse linear algebra (traits object to access the linear system).
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_get_linear_algebra_traits = "Get the sparse linear algebra (traits object to access the linear system).
 
 Returns: Solver_traits &";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Iterative_authalic_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_Iterative_authalic_parameterizer_3 = "Constructor.
 
 border_parameterizer Object that maps the surface's border to 2D space
 sparse_la Traits object to access a sparse linear system
@@ -402,7 +402,7 @@ Parameters
 ----------
 border_parameterizer : Border_parameterizer
 sparse_la : Solver_traits";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_initialize_system_from_mesh_border = "initializes A , Bu , and Bv after border parameterization.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_initialize_system_from_mesh_border = "initializes A , Bu , and Bv after border parameterization.
 
 Fill the border vertices' lines in both linear systems: \"u = constant\" and \"v
 = constant\". VertexUVmap must be a model of ReadWritePropertyMap with
@@ -427,7 +427,7 @@ tmesh : const Triangle_mesh &
 bhd : halfedge_descriptor
 uvmap : VertexUVmap
 vimap : VertexIndexMap";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
 
 The mapping is piecewise linear (linear in each triangle). The result is the
 (u,v) pair image of each vertex of the 3D surface. VertexUVmap must be a model
@@ -456,7 +456,7 @@ vpmap : VertexParameterizedMap
 iterations : const unsigned int &
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_compute_w_ij = "computes w_ij , coefficient of matrix A for j neighbor vertex of i .
+constexpr const char* Surface_mesh_parameterization_Iterative_authalic_parameterizer_3_compute_w_ij = "computes w_ij , coefficient of matrix A for j neighbor vertex of i .
 
 tmesh a triangulated surface. main_vertex_v_i the vertex of mesh with index i
 neighbor_vertex_v_j the vertex of mesh with index j
@@ -471,27 +471,27 @@ Returns: NT";
 
 
 // CGAL::Surface_mesh_parameterization::LSCM_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3__class__ = "The class LSCM_parameterizer_3 implements the Least Squares Conformal Maps (LSCM) parameterization [8] .";
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3__class__ = "The class LSCM_parameterizer_3 implements the Least Squares Conformal Maps (LSCM) parameterization [8] .";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_Border_parameterizer = "The border parameterizer.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_Border_parameterizer = "The border parameterizer.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_LSCM_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_LSCM_parameterizer_3 = "Constructor.
 
 Parameters
 ----------
 border_param : Border_parameterizer  —  Object that maps the surface's border to 2D space
 sparse_la : Solver_traits  —  Traits object to access a sparse linear system";
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
 
 Parameters
 ----------
@@ -500,7 +500,7 @@ bhd : halfedge_descriptor
 uvmap : const VertexUVMap
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_parameterization_LSCM_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
+constexpr const char* Surface_mesh_parameterization_LSCM_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
 
 The mapping is piecewise linear (linear in each triangle). The result is the
 (u,v) pair image of each vertex of the 3D surface. VertexUVmap must be a model
@@ -528,30 +528,30 @@ vpmap : VertexParameterizedMap
 Returns: Error_code";
 
 // CGAL::Surface_mesh_parameterization::Mean_value_coordinates_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3__class__ = "The class Mean_value_coordinates_parameterizer_3 implements Floater Mean Value Coordinates parameterization.";
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3__class__ = "The class Mean_value_coordinates_parameterizer_3 implements Floater Mean Value Coordinates parameterization.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Border_parameterizer = "The border parameterizer.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Border_parameterizer = "The border parameterizer.
 
 Returns: Border_parameterizer_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Mean_value_coordinates_parameterizer_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_Mean_value_coordinates_parameterizer_3 = "Constructor.
 
 Parameters
 ----------
 border_param : Border_parameterizer  —  Object that maps the surface's border to 2D space.
 sparse_la : Solver_traits  —  Traits object to access a sparse linear system.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_is_one_to_one_mapping = "returns whether the 3D -> 2D mapping is one-to-one.
 
 Parameters
 ----------
@@ -560,7 +560,7 @@ bhd : halfedge_descriptor
 uvmap : const VertexUVMap
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_compute_w_ij = "computes w_ij , the (i, j) -coefficient of matrix A for j neighbor vertex of i.
+constexpr const char* Surface_mesh_parameterization_Mean_value_coordinates_parameterizer_3_compute_w_ij = "computes w_ij , the (i, j) -coefficient of matrix A for j neighbor vertex of i.
 
 mesh a triangulated surface. main_vertex_v_i the vertex of mesh with index i
 neighbor_vertex_v_j the vertex of mesh with index j
@@ -574,15 +574,15 @@ neighbor_vertex_v_j : Vertex_around_target_circulator< Triangle_mesh >
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::MVC_post_processor_3
-constexpr const char* CGAL_Surface_mesh_parameterization_MVC_post_processor_3__class__ = "The class MVC_post_processor_3 implements the Free boundary linear Parameterization algorithm [7] .";
+constexpr const char* Surface_mesh_parameterization_MVC_post_processor_3__class__ = "The class MVC_post_processor_3 implements the Free boundary linear Parameterization algorithm [7] .";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_MVC_post_processor_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_MVC_post_processor_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_MVC_post_processor_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_MVC_post_processor_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_MVC_post_processor_3_parameterize = "computes a one-to-one mapping from a triangular 2D surface mesh that is not necessarily embedded to a piece of the 2D space.
+constexpr const char* Surface_mesh_parameterization_MVC_post_processor_3_parameterize = "computes a one-to-one mapping from a triangular 2D surface mesh that is not necessarily embedded to a piece of the 2D space.
 
 VertexUVmap must be a model of ReadWritePropertyMap with boost::graph_traits<
 Triangle_mesh >::vertex_descriptor as key type and Point_2 (type deduced from
@@ -601,7 +601,7 @@ uvmap : VertexUVMap
 vimap : const VertexIndexMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_MVC_post_processor_3_MVC_post_processor_3 = "Constructor.
+constexpr const char* Surface_mesh_parameterization_MVC_post_processor_3_MVC_post_processor_3 = "Constructor.
 
 sparse_la Traits object to access a sparse linear system.
 
@@ -610,15 +610,15 @@ Parameters
 sparse_la : Solver_traits";
 
 // CGAL::Surface_mesh_parameterization::Orbifold_Tutte_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3__class__ = "The class Orbifold_Tutte_parameterizer_3 implements Orbifold Tutte Planar Embeddings [1] .";
+constexpr const char* Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3__class__ = "The class Orbifold_Tutte_parameterizer_3 implements Orbifold Tutte Planar Embeddings [1] .";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_Solver_traits = "Solver traits type.
+constexpr const char* Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_Solver_traits = "Solver traits type.
 
 Returns: SolverTraits_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< SeamMesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
+constexpr const char* Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_parameterize = "computes a one-to-one mapping from a triangular 3D surface mesh to a piece of the 2D space.
 
 The mapping is piecewise linear (linear in each triangle). The result is the
 (u,v) pair image of each vertex of the 3D surface. ConeMap must be a model of
@@ -654,7 +654,7 @@ uvmap : VertexUVMap
 vimap : VertexIndexMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_Orbifold_Tutte_parameterizer_3 = "Constructor of the parameterizer.
+constexpr const char* Surface_mesh_parameterization_Orbifold_Tutte_parameterizer_3_Orbifold_Tutte_parameterizer_3 = "Constructor of the parameterizer.
 
 The arguments allow to select the desired orbifold and weight types.
 
@@ -664,10 +664,10 @@ orb_type : const Orbifold_type
 weight_type : const Weight_type";
 
 // CGAL::Surface_mesh_parameterization::Square_border_arc_length_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a square, with an arc-length parameterization: (u,v) values are proportional to the length of border edges.";
+constexpr const char* Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a square, with an arc-length parameterization: (u,v) values are proportional to the length of border edges.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3_Square_border_arc_length_parameterizer_3 = "Constructor.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3_Square_border_arc_length_parameterizer_3_1 = "Constructor with user-defined corners: the user provides four vertices of the border of the mesh, which will be parameterized to the corners of the square.
+constexpr const char* Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3_Square_border_arc_length_parameterizer_3 = "Constructor.";
+constexpr const char* Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3_Square_border_arc_length_parameterizer_3_1 = "Constructor with user-defined corners: the user provides four vertices of the border of the mesh, which will be parameterized to the corners of the square.
 
 The given vertices must be on the border.
 
@@ -677,7 +677,7 @@ v0 : vertex_descriptor
 v1 : vertex_descriptor
 v2 : vertex_descriptor
 v3 : vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3_compute_edge_length = "Compute the length of an edge.
+constexpr const char* Surface_mesh_parameterization_Square_border_arc_length_parameterizer_3_compute_edge_length = "Compute the length of an edge.
 
 Parameters
 ----------
@@ -688,18 +688,18 @@ target : vertex_descriptor
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Square_border_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3__class__ = "This is the base class of strategies that parameterize the border of a 3D surface onto a square.";
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3__class__ = "This is the base class of strategies that parameterize the border of a 3D surface onto a square.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_parameterize = "assigns to the vertices of the border of the mesh a 2D position (i.e. a (u,v) pair) on the border's shape.
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_parameterize = "assigns to the vertices of the border of the mesh a 2D position (i.e. a (u,v) pair) on the border's shape.
 
 Mark them as parameterized . VertexUVmap must be a model of
 ReadWritePropertyMap with boost::graph_traits< Triangle_mesh
@@ -723,11 +723,11 @@ uvmap : VertexUVMap
 vpmap : VertexParameterizedMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_is_border_convex = "indicates if the border's shape is convex.
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_is_border_convex = "indicates if the border's shape is convex.
 
 Returns: bool";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_Square_border_parameterizer_3 = "Constructor.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_parameterizer_3_Square_border_parameterizer_3_1 = "Constructor with user-defined corners: the user provides four vertices of the border of the mesh, which will be parameterized to the corners of the square.
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_Square_border_parameterizer_3 = "Constructor.";
+constexpr const char* Surface_mesh_parameterization_Square_border_parameterizer_3_Square_border_parameterizer_3_1 = "Constructor with user-defined corners: the user provides four vertices of the border of the mesh, which will be parameterized to the corners of the square.
 
 The given vertices must be on the border.
 
@@ -739,10 +739,10 @@ v2 : vertex_descriptor
 v3 : vertex_descriptor";
 
 // CGAL::Surface_mesh_parameterization::Square_border_uniform_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_uniform_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a square in a uniform manner: points are equally spaced.";
+constexpr const char* Surface_mesh_parameterization_Square_border_uniform_parameterizer_3__class__ = "This class parameterizes the border of a 3D surface onto a square in a uniform manner: points are equally spaced.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_uniform_parameterizer_3_Square_border_uniform_parameterizer_3 = "Constructor.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_uniform_parameterizer_3_Square_border_uniform_parameterizer_3_1 = "Constructor with user-defined corners: the user provides four vertices of the border of the mesh, which will be parameterized to the corners of the square.
+constexpr const char* Surface_mesh_parameterization_Square_border_uniform_parameterizer_3_Square_border_uniform_parameterizer_3 = "Constructor.";
+constexpr const char* Surface_mesh_parameterization_Square_border_uniform_parameterizer_3_Square_border_uniform_parameterizer_3_1 = "Constructor with user-defined corners: the user provides four vertices of the border of the mesh, which will be parameterized to the corners of the square.
 
 The given vertices must be on the border.
 
@@ -752,7 +752,7 @@ v0 : vertex_descriptor
 v1 : vertex_descriptor
 v2 : vertex_descriptor
 v3 : vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Square_border_uniform_parameterizer_3_compute_edge_length = "computes the length of an edge.
+constexpr const char* Surface_mesh_parameterization_Square_border_uniform_parameterizer_3_compute_edge_length = "computes the length of an edge.
 
 Parameters
 ----------
@@ -763,25 +763,25 @@ Parameters
 Returns: NT";
 
 // CGAL::Surface_mesh_parameterization::Two_vertices_parameterizer_3
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3__class__ = "The class Two_vertices_parameterizer_3 parameterizes two extreme vertices of a 3D surface.";
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3__class__ = "The class Two_vertices_parameterizer_3 parameterizes two extreme vertices of a 3D surface.";
 
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_Triangle_mesh = "Triangle mesh type.
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_Triangle_mesh = "Triangle mesh type.
 
 Returns: TriangleMesh_";
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_vertex_descriptor = "Mesh vertex type.
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_vertex_descriptor = "Mesh vertex type.
 
 Returns: boost::graph_traits< Triangle_mesh >::vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_halfedge_descriptor = "Mesh halfedge type.
 
 Returns: boost::graph_traits< Triangle_mesh >::halfedge_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_Two_vertices_parameterizer_3 = "Constructor.";
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_Two_vertices_parameterizer_3_1 = "Constructor where fixed vertices are provided.
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_Two_vertices_parameterizer_3 = "Constructor.";
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_Two_vertices_parameterizer_3_1 = "Constructor where fixed vertices are provided.
 
 Parameters
 ----------
 v1 : vertex_descriptor
 v2 : vertex_descriptor";
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_parameterize = "maps two extreme vertices of the 3D mesh and mark them as parameterized .
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_parameterize = "maps two extreme vertices of the 3D mesh and mark them as parameterized .
 
 VertexUVmap must be a model of ReadWritePropertyMap with boost::graph_traits<
 Triangle_mesh >::vertex_descriptor as key type and Point_2 (type deduced from
@@ -805,7 +805,7 @@ vimap : VertexIndexMap
 vpmap : VertexParameterizedMap
 
 Returns: Error_code";
-constexpr const char* CGAL_Surface_mesh_parameterization_Two_vertices_parameterizer_3_is_border_convex = "indicates if the border's shape is convex.
+constexpr const char* Surface_mesh_parameterization_Two_vertices_parameterizer_3_is_border_convex = "indicates if the border's shape is convex.
 
 Meaningless for free border parameterization algorithms.
 

@@ -8,9 +8,9 @@ namespace docstrings {
 namespace QP_solver {
 
 // CGAL::Linear_program_from_iterators
-constexpr const char* CGAL_Linear_program_from_iterators__class__ = "An object of class Linear_program_from_iterators describes a linear program of the form.";
+constexpr const char* Linear_program_from_iterators__class__ = "An object of class Linear_program_from_iterators describes a linear program of the form.";
 
-constexpr const char* CGAL_Linear_program_from_iterators_Linear_program_from_iterators = "constructs lp from given random-access iterators and the constant c0 .
+constexpr const char* Linear_program_from_iterators_Linear_program_from_iterators = "constructs lp from given random-access iterators and the constant c0 .
 
 The passed iterators are merely stored, no copying of the program data takes
 place. How these iterators are supposed to encode the linear program is
@@ -31,9 +31,9 @@ c : const C_it &
 c0 : const std::iterator_traits< C_it >value_type &";
 
 // CGAL::Nonnegative_linear_program_from_iterators
-constexpr const char* CGAL_Nonnegative_linear_program_from_iterators__class__ = "An object of class Nonnegative_linear_program_from_iterators describes a linear program of the form.";
+constexpr const char* Nonnegative_linear_program_from_iterators__class__ = "An object of class Nonnegative_linear_program_from_iterators describes a linear program of the form.";
 
-constexpr const char* CGAL_Nonnegative_linear_program_from_iterators_Nonnegative_linear_program_from_iterators = "constructs lp from given random-access iterators and the constant c0 .
+constexpr const char* Nonnegative_linear_program_from_iterators_Nonnegative_linear_program_from_iterators = "constructs lp from given random-access iterators and the constant c0 .
 
 The passed iterators are merely stored, no copying of the program data takes
 place. How these iterators are supposed to encode the nonnegative linear
@@ -50,9 +50,9 @@ c : const C_it &
 c0 : const std::iterator_traits< C_it >value_type &";
 
 // CGAL::Nonnegative_quadratic_program_from_iterators
-constexpr const char* CGAL_Nonnegative_quadratic_program_from_iterators__class__ = "An object of class Nonnegative_quadratic_program_from_iterators describes a convex quadratic program of the form.";
+constexpr const char* Nonnegative_quadratic_program_from_iterators__class__ = "An object of class Nonnegative_quadratic_program_from_iterators describes a convex quadratic program of the form.";
 
-constexpr const char* CGAL_Nonnegative_quadratic_program_from_iterators_Nonnegative_quadratic_program_from_iterators = "constructs qp from given random-access iterators and the constant c0 .
+constexpr const char* Nonnegative_quadratic_program_from_iterators_Nonnegative_quadratic_program_from_iterators = "constructs qp from given random-access iterators and the constant c0 .
 
 The passed iterators are merely stored, no copying of the program data takes
 place. How these iterators are supposed to encode the nonnegative quadratic
@@ -70,12 +70,12 @@ c : const C_it &
 c0 : const std::iterator_traits< C_it >value_type &";
 
 // CGAL::Quadratic_program
-constexpr const char* CGAL_Quadratic_program__class__ = "An object of class Quadratic_program describes a convex quadratic program of the form.";
+constexpr const char* Quadratic_program__class__ = "An object of class Quadratic_program describes a convex quadratic program of the form.";
 
-constexpr const char* CGAL_Quadratic_program_NT = "The number type of the program entries.
+constexpr const char* Quadratic_program_NT = "The number type of the program entries.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_Quadratic_program = "constructs a quadratic program with no variables and no constraints, ready for data to be added.
+constexpr const char* Quadratic_program_Quadratic_program = "constructs a quadratic program with no variables and no constraints, ready for data to be added.
 
 Unless relations are explicitly set, they will be of type default_r . Unless
 bounds are explicitly set, they will be as specified by default_fl (finite
@@ -93,13 +93,13 @@ default_fl : bool
 default_l : const NT &
 default_fu : bool
 default_u : const NT &";
-constexpr const char* CGAL_Quadratic_program_is_linear = "returns true if and only if qp is a linear program.
+constexpr const char* Quadratic_program_is_linear = "returns true if and only if qp is a linear program.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_is_nonnegative = "returns true if and only if qp is a nonnegative program.
+constexpr const char* Quadratic_program_is_nonnegative = "returns true if and only if qp is a nonnegative program.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_set_a = "sets the entry $ A_{ij}$ in column $ j$ and row $ i$ of the constraint matrix $ A$ of qp to val .
+constexpr const char* Quadratic_program_set_a = "sets the entry $ A_{ij}$ in column $ j$ and row $ i$ of the constraint matrix $ A$ of qp to val .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -109,7 +109,7 @@ Parameters
 j : int
 i : int
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_set_b = "sets the entry $ b_i$ of qp to val .
+constexpr const char* Quadratic_program_set_b = "sets the entry $ b_i$ of qp to val .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -118,7 +118,7 @@ Parameters
 ----------
 i : int
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_set_r = "sets the entry $ \\qprel_i$ of qp to rel .
+constexpr const char* Quadratic_program_set_r = "sets the entry $ \\qprel_i$ of qp to rel .
 
 CGAL::SMALLER means that the $ i$ -th constraint is of type \"\\f$ \\leq\\f$\",
 CGAL::EQUAL means \"\\f$ =\\f$\", and CGAL::LARGER encodes \"\\f$ \\geq\\f$\". An
@@ -129,7 +129,7 @@ Parameters
 ----------
 i : int
 rel : CGAL::Comparison_result";
-constexpr const char* CGAL_Quadratic_program_set_l = "if is_finite , this sets the entry $ l_j$ of qp to val , otherwise it sets $ l_j$ to $ -\\infty$ .
+constexpr const char* Quadratic_program_set_l = "if is_finite , this sets the entry $ l_j$ of qp to val , otherwise it sets $ l_j$ to $ -\\infty$ .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -139,7 +139,7 @@ Parameters
 j : int
 is_finite : bool
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_set_u = "if is_finite , this sets the entry $ u_j$ of qp to val , otherwise it sets $ u_j$ to $ \\infty$ .
+constexpr const char* Quadratic_program_set_u = "if is_finite , this sets the entry $ u_j$ of qp to val , otherwise it sets $ u_j$ to $ \\infty$ .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -149,7 +149,7 @@ Parameters
 j : int
 is_finite : bool
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_set_c = "sets the entry $ c_j$ of qp to val .
+constexpr const char* Quadratic_program_set_c = "sets the entry $ c_j$ of qp to val .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -158,14 +158,14 @@ Parameters
 ----------
 j : int
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_set_c0 = "sets the entry $ c_0$ of qp to val .
+constexpr const char* Quadratic_program_set_c0 = "sets the entry $ c_0$ of qp to val .
 
 An existing entry is overwritten.
 
 Parameters
 ----------
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_set_d = "sets the entries $ 2D_{ij}$ and $ 2D_{ji}$ of qp to val .
+constexpr const char* Quadratic_program_set_d = "sets the entries $ 2D_{ij}$ and $ 2D_{ji}$ of qp to val .
 
 Existing entries are overwritten. qp is enlarged if necessary to accommodate
 these entries. j <= i
@@ -177,9 +177,9 @@ j : int
 val : const NT &";
 
 // CGAL::Quadratic_program_from_iterators
-constexpr const char* CGAL_Quadratic_program_from_iterators__class__ = "An object of class Quadratic_program_from_iterators describes a convex quadratic program of the form.";
+constexpr const char* Quadratic_program_from_iterators__class__ = "An object of class Quadratic_program_from_iterators describes a convex quadratic program of the form.";
 
-constexpr const char* CGAL_Quadratic_program_from_iterators_Quadratic_program_from_iterators = "constructs qp from given random-access iterators and the constant c0 .
+constexpr const char* Quadratic_program_from_iterators_Quadratic_program_from_iterators = "constructs qp from given random-access iterators and the constant c0 .
 
 The passed iterators are merely stored, no copying of the program data takes
 place. How these iterators are supposed to encode the quadratic program is
@@ -201,23 +201,23 @@ c : const C_it &
 c0 : const std::iterator_traits< C_it >value_type &";
 
 // CGAL::Quadratic_program_from_mps
-constexpr const char* CGAL_Quadratic_program_from_mps__class__ = "An object of class Quadratic_program_from_mps describes a convex quadratic program of the general form.";
+constexpr const char* Quadratic_program_from_mps__class__ = "An object of class Quadratic_program_from_mps describes a convex quadratic program of the general form.";
 
-constexpr const char* CGAL_Quadratic_program_from_mps_NT = "The number type of the program entries.
+constexpr const char* Quadratic_program_from_mps_NT = "The number type of the program entries.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_from_mps_Quadratic_program_from_mps = "reads qp from the input stream in .
+constexpr const char* Quadratic_program_from_mps_Quadratic_program_from_mps = "reads qp from the input stream in .
 
 Parameters
 ----------
 in : std::istream &";
-constexpr const char* CGAL_Quadratic_program_from_mps_is_valid = "returns true if and only if an MPS-encoded quadratic program could be extracted from the input stream.
+constexpr const char* Quadratic_program_from_mps_is_valid = "returns true if and only if an MPS-encoded quadratic program could be extracted from the input stream.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_from_mps_get_error = "if ! qp``. is_valid() , this method returns an error message explaining why the input does not conform to the MPSFormat .
+constexpr const char* Quadratic_program_from_mps_get_error = "if ! qp``. is_valid() , this method returns an error message explaining why the input does not conform to the MPSFormat .
 
 Returns: const std::string &";
-constexpr const char* CGAL_Quadratic_program_from_mps_variable_name_by_index = "returns the name of the $ j$ -th variable.
+constexpr const char* Quadratic_program_from_mps_variable_name_by_index = "returns the name of the $ j$ -th variable.
 
 $ j$ must not refer to a variable that has been added later, using one of the
 set methods below.
@@ -227,7 +227,7 @@ Parameters
 j : int
 
 Returns: const std::string &";
-constexpr const char* CGAL_Quadratic_program_from_mps_variable_index_by_name = "returns the index of the variable with name name .
+constexpr const char* Quadratic_program_from_mps_variable_index_by_name = "returns the index of the variable with name name .
 
 If there is no variable with this name, the result is $ -1$ .
 
@@ -236,7 +236,7 @@ Parameters
 name : const std::string &
 
 Returns: int";
-constexpr const char* CGAL_Quadratic_program_from_mps_constraint_name_by_index = "returns the name of the $ i$ -th constraint.
+constexpr const char* Quadratic_program_from_mps_constraint_name_by_index = "returns the name of the $ i$ -th constraint.
 
 $ i$ must not refer to a constraint that has been added later, using one of
 the set methods below.
@@ -246,7 +246,7 @@ Parameters
 i : int
 
 Returns: const std::string &";
-constexpr const char* CGAL_Quadratic_program_from_mps_constraint_index_by_name = "returns the index of the constraint with name name .
+constexpr const char* Quadratic_program_from_mps_constraint_index_by_name = "returns the index of the constraint with name name .
 
 If there is no constraint with this name, the result is $ -1$ .
 
@@ -255,13 +255,13 @@ Parameters
 name : const std::string &
 
 Returns: int";
-constexpr const char* CGAL_Quadratic_program_from_mps_is_linear = "returns true if and only if qp is a linear program.
+constexpr const char* Quadratic_program_from_mps_is_linear = "returns true if and only if qp is a linear program.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_from_mps_is_nonnegative = "returns true if and only if qp is a nonnegative program.
+constexpr const char* Quadratic_program_from_mps_is_nonnegative = "returns true if and only if qp is a nonnegative program.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_a = "sets the entry $ A_{ij}$ in column $ j$ and row $ i$ of the constraint matrix $ A$ of qp to val .
+constexpr const char* Quadratic_program_from_mps_set_a = "sets the entry $ A_{ij}$ in column $ j$ and row $ i$ of the constraint matrix $ A$ of qp to val .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -271,7 +271,7 @@ Parameters
 j : int
 i : int
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_b = "sets the entry $ b_i$ of qp to val .
+constexpr const char* Quadratic_program_from_mps_set_b = "sets the entry $ b_i$ of qp to val .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -280,7 +280,7 @@ Parameters
 ----------
 i : int
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_r = "sets the entry $ \\qprel_i$ of qp to rel .
+constexpr const char* Quadratic_program_from_mps_set_r = "sets the entry $ \\qprel_i$ of qp to rel .
 
 CGAL::SMALLER means that the $ i$ -th constraint is of type \"\\f$ \\leq\\f$\",
 CGAL::EQUAL means \"\\f$ =\\f$\", and CGAL::LARGER encodes \"\\f$ \\geq\\f$\". An
@@ -291,7 +291,7 @@ Parameters
 ----------
 i : int
 rel : CGAL::Comparison_result";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_l = "if is_finite , this sets the entry $ l_j$ of qp to val , otherwise it sets $ l_j$ to $ -\\infty$ .
+constexpr const char* Quadratic_program_from_mps_set_l = "if is_finite , this sets the entry $ l_j$ of qp to val , otherwise it sets $ l_j$ to $ -\\infty$ .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -301,7 +301,7 @@ Parameters
 j : int
 is_finite : bool
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_u = "if is_finite , this sets the entry $ u_j$ of qp to val , otherwise it sets $ u_j$ to $ \\infty$ .
+constexpr const char* Quadratic_program_from_mps_set_u = "if is_finite , this sets the entry $ u_j$ of qp to val , otherwise it sets $ u_j$ to $ \\infty$ .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -311,7 +311,7 @@ Parameters
 j : int
 is_finite : bool
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_c = "sets the entry $ c_j$ of qp to val .
+constexpr const char* Quadratic_program_from_mps_set_c = "sets the entry $ c_j$ of qp to val .
 
 An existing entry is overwritten. qp is enlarged if necessary to accommodate
 this entry.
@@ -320,14 +320,14 @@ Parameters
 ----------
 j : int
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_c0 = "sets the entry $ c_0$ of qp to val .
+constexpr const char* Quadratic_program_from_mps_set_c0 = "sets the entry $ c_0$ of qp to val .
 
 An existing entry is overwritten.
 
 Parameters
 ----------
 val : const NT &";
-constexpr const char* CGAL_Quadratic_program_from_mps_set_d = "sets the entries $ 2D_{ij}$ and $ 2D_{ji}$ of qp to val .
+constexpr const char* Quadratic_program_from_mps_set_d = "sets the entries $ 2D_{ij}$ and $ 2D_{ji}$ of qp to val .
 
 Existing entries are overwritten. qp is enlarged if necessary to accommodate
 these entries. j <= i
@@ -339,10 +339,10 @@ j : int
 val : const NT &";
 
 // CGAL::Quadratic_program_options
-constexpr const char* CGAL_Quadratic_program_options__class__ = "This is a class used for passing options to the linear and quadratic programming solvers.";
+constexpr const char* Quadratic_program_options__class__ = "This is a class used for passing options to the linear and quadratic programming solvers.";
 
-constexpr const char* CGAL_Quadratic_program_options_Quadratic_program_options = "constructs an instance of Quadratic_program_options where all available options are at their defaults.";
-constexpr const char* CGAL_Quadratic_program_options_set_verbosity = "sets the verbosity of the solver to the value verbosity when options is passed to any of the four solution functions.
+constexpr const char* Quadratic_program_options_Quadratic_program_options = "constructs an instance of Quadratic_program_options where all available options are at their defaults.";
+constexpr const char* Quadratic_program_options_set_verbosity = "sets the verbosity of the solver to the value verbosity when options is passed to any of the four solution functions.
 
 The provided value must be a number between $ 0$ and $ 5$ . Verbosity $ 0$ is
 the default and results in the solver running silently. Verbosity $ 1$ prints
@@ -354,10 +354,10 @@ NDEBUG .
 Parameters
 ----------
 verbosity : int";
-constexpr const char* CGAL_Quadratic_program_options_get_verbosity = "returns the verbosity level of options .
+constexpr const char* Quadratic_program_options_get_verbosity = "returns the verbosity level of options .
 
 Returns: int";
-constexpr const char* CGAL_Quadratic_program_options_set_pricing_strategy = "sets the pricing strategy of the solver to the value pricing_strategy when options is passed to any of the four solution functions.
+constexpr const char* Quadratic_program_options_set_pricing_strategy = "sets the pricing strategy of the solver to the value pricing_strategy when options is passed to any of the four solution functions.
 
 The pricing strategy controls how the solver proceeds from any intermediate
 solution. For the available strategies and their behavior, see the
@@ -366,10 +366,10 @@ documentation of the class Quadratic_program_pricing_strategy .
 Parameters
 ----------
 pricing_strategy : Quadratic_program_pricing_strategy";
-constexpr const char* CGAL_Quadratic_program_options_get_pricing_strategy = "returns the pricing strategy of options .
+constexpr const char* Quadratic_program_options_get_pricing_strategy = "returns the pricing strategy of options .
 
 Returns: Quadratic_program_pricing_strategy";
-constexpr const char* CGAL_Quadratic_program_options_set_auto_validation = "sets the automatic validation mode of the solver to the value validate .
+constexpr const char* Quadratic_program_options_set_auto_validation = "sets the automatic validation mode of the solver to the value validate .
 
 The default is false . By providing value true you can tell the solver to
 automatically check whether the program has correctly been solved, see the
@@ -378,114 +378,114 @@ Validity section of the class Quadratic_program_solution .
 Parameters
 ----------
 validate : bool";
-constexpr const char* CGAL_Quadratic_program_options_get_auto_validation = "returns the validation mode of options .
+constexpr const char* Quadratic_program_options_get_auto_validation = "returns the validation mode of options .
 
 Returns: bool";
 
 // CGAL::Quadratic_program_solution
-constexpr const char* CGAL_Quadratic_program_solution__class__ = "An object of class Quadratic_program_solution represents the solution of a linear or convex quadratic program of the general form.";
+constexpr const char* Quadratic_program_solution__class__ = "An object of class Quadratic_program_solution represents the solution of a linear or convex quadratic program of the general form.";
 
-constexpr const char* CGAL_Quadratic_program_solution_ET = "The exact number type that was used to solve the program.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Variable_value_iterator = "An iterator type with value type Quotient< ET > to go over the values of the variables in the solution.
+constexpr const char* Quadratic_program_solution_ET = "The exact number type that was used to solve the program.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Variable_numerator_iterator = "An iterator type with value type ET to go over the numerators of the variable values with respect to a common denominator.
+constexpr const char* Quadratic_program_solution_Variable_value_iterator = "An iterator type with value type Quotient< ET > to go over the values of the variables in the solution.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Index_iterator = "An iterator type with value type int to go over the indices of the basic variables and the basic constraints.
+constexpr const char* Quadratic_program_solution_Variable_numerator_iterator = "An iterator type with value type ET to go over the numerators of the variable values with respect to a common denominator.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Optimality_certificate_iterator = "An iterator type with value type Quotient< ET > to go over an $ m$ -vector $ \\qplambda$ that proves optimality of the solution.
+constexpr const char* Quadratic_program_solution_Index_iterator = "An iterator type with value type int to go over the indices of the basic variables and the basic constraints.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Optimality_certificate_numerator_iterator = "An iterator type with value type ET to go over the numerators of the vector $ \\qplambda$ with respect to a common denominator.
+constexpr const char* Quadratic_program_solution_Optimality_certificate_iterator = "An iterator type with value type Quotient< ET > to go over an $ m$ -vector $ \\qplambda$ that proves optimality of the solution.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Infeasibility_certificate_iterator = "An iterator type with value type ET to go over an $ m$ -vector $ \\qplambda$ that proves infeasibility of the solution.
+constexpr const char* Quadratic_program_solution_Optimality_certificate_numerator_iterator = "An iterator type with value type ET to go over the numerators of the vector $ \\qplambda$ with respect to a common denominator.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Unboundedness_certificate_iterator = "An iterator type with value type ET to go over an $ n$ -vector $ \\qpw$ that proves unboundedness of the solution.
+constexpr const char* Quadratic_program_solution_Infeasibility_certificate_iterator = "An iterator type with value type ET to go over an $ m$ -vector $ \\qplambda$ that proves infeasibility of the solution.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Quadratic_program_solution_Quadratic_program_solution = "constructs a void instance of Quadratic_program_solution that is associated to no program.";
-constexpr const char* CGAL_Quadratic_program_solution_is_void = "returns true iff sol is not associated to a program.
+constexpr const char* Quadratic_program_solution_Unboundedness_certificate_iterator = "An iterator type with value type ET to go over an $ n$ -vector $ \\qpw$ that proves unboundedness of the solution.
+
+Returns: unspecified_type";
+constexpr const char* Quadratic_program_solution_Quadratic_program_solution = "constructs a void instance of Quadratic_program_solution that is associated to no program.";
+constexpr const char* Quadratic_program_solution_is_void = "returns true iff sol is not associated to a program.
 
 The condition ! sol.is_void() is a precondition for all access methods below.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_is_optimal = "returns true iff sol is an optimal solution of the associated program.
+constexpr const char* Quadratic_program_solution_is_optimal = "returns true iff sol is an optimal solution of the associated program.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_is_infeasible = "returns true iff the associated program is infeasible.
+constexpr const char* Quadratic_program_solution_is_infeasible = "returns true iff the associated program is infeasible.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_is_unbounded = "returns true iff the associated program is unbounded.
+constexpr const char* Quadratic_program_solution_is_unbounded = "returns true iff the associated program is unbounded.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_status = "returns the status of the solution; this is one of the values QP_OPTIMAL , QP_INFEASIBLE , and QP_UNBOUNDED , depending on whether the program associated to sol has an optimal solution, is infeasible, or is unbounded.
+constexpr const char* Quadratic_program_solution_status = "returns the status of the solution; this is one of the values QP_OPTIMAL , QP_INFEASIBLE , and QP_UNBOUNDED , depending on whether the program associated to sol has an optimal solution, is infeasible, or is unbounded.
 
 Returns: Quadratic_program_status";
-constexpr const char* CGAL_Quadratic_program_solution_number_of_iterations = "returns the number of iterations that it took to solve the program associated to sol .
+constexpr const char* Quadratic_program_solution_number_of_iterations = "returns the number of iterations that it took to solve the program associated to sol .
 
 Returns: int";
-constexpr const char* CGAL_Quadratic_program_solution_objective_value = "returns the objective function value of sol .
+constexpr const char* Quadratic_program_solution_objective_value = "returns the objective function value of sol .
 
 Returns: Quotient< ET >";
-constexpr const char* CGAL_Quadratic_program_solution_objective_value_numerator = "returns the numerator of the objective function value of sol .
+constexpr const char* Quadratic_program_solution_objective_value_numerator = "returns the numerator of the objective function value of sol .
 
 Returns: ET";
-constexpr const char* CGAL_Quadratic_program_solution_objective_value_denominator = "returns the denominator of the objective function value of sol .
+constexpr const char* Quadratic_program_solution_objective_value_denominator = "returns the denominator of the objective function value of sol .
 
 Returns: ET";
-constexpr const char* CGAL_Quadratic_program_solution_variable_values_begin = "returns a random-access iterator over the values of the variables in sol .
+constexpr const char* Quadratic_program_solution_variable_values_begin = "returns a random-access iterator over the values of the variables in sol .
 
 The value type is Quotient< ET > , and the valid iterator range has length $
 n$ .
 
 Returns: Variable_value_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_variable_values_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_variable_values_end = "returns the corresponding past-the-end iterator.
 
 Returns: Variable_value_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_variable_numerators_begin = "returns a random-access iterator it over the values of the variables in sol , with respect to a common denominator of all variables.
+constexpr const char* Quadratic_program_solution_variable_numerators_begin = "returns a random-access iterator it over the values of the variables in sol , with respect to a common denominator of all variables.
 
 The value type is ET , and the valid iterator range has length $ n$ .
 
 Returns: Variable_numerator_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_variable_numerators_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_variable_numerators_end = "returns the corresponding past-the-end iterator.
 
 Returns: Variable_numerator_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_variables_common_denominator = "returns the common denominator of the variable values as referred to by the previous two methods.
+constexpr const char* Quadratic_program_solution_variables_common_denominator = "returns the common denominator of the variable values as referred to by the previous two methods.
 
 Returns: const ET &";
-constexpr const char* CGAL_Quadratic_program_solution_basic_variable_indices_begin = "returns a random access iterator over the indices of the basic variables.
+constexpr const char* Quadratic_program_solution_basic_variable_indices_begin = "returns a random access iterator over the indices of the basic variables.
 
 The value type is int . It is guaranteed that any variable that is not basic
 in sol attains one of its bounds. In particular, if the bounds are of type $
 \\qpx\\geq0$ , all non-basic variables have value $ 0$ .
 
 Returns: Index_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_basic_variable_indices_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_basic_variable_indices_end = "returns the corresponding past-the-end iterator.
 
 Returns: Index_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_number_of_basic_variables = "returns the number of basic variables, equivalently the length of the range determined by the previous two iterators.
+constexpr const char* Quadratic_program_solution_number_of_basic_variables = "returns the number of basic variables, equivalently the length of the range determined by the previous two iterators.
 
 Returns: int";
-constexpr const char* CGAL_Quadratic_program_solution_basic_constraint_indices_begin = "returns a random access iterator over the indices of the basic constraints in the system $ A\\qpx\\qprel\\qpb$ .
+constexpr const char* Quadratic_program_solution_basic_constraint_indices_begin = "returns a random access iterator over the indices of the basic constraints in the system $ A\\qpx\\qprel\\qpb$ .
 
 The value type is int . It is guaranteed that any basic constraint is
 satisfied with equality. In particular, if the system is of type $ A\\qpx=\\qpb$
 , all constraints are basic.
 
 Returns: Index_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_basic_constraint_indices_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_basic_constraint_indices_end = "returns the corresponding past-the-end iterator.
 
 Returns: Index_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_number_of_basic_constraints = "returns the number of basic constraint, equivalently the length of the range determined by the previous two iterators.
+constexpr const char* Quadratic_program_solution_number_of_basic_constraints = "returns the number of basic constraint, equivalently the length of the range determined by the previous two iterators.
 
 Returns: int";
-constexpr const char* CGAL_Quadratic_program_solution_operator = "writes the status of sol to the stream out .
+constexpr const char* Quadratic_program_solution_operator = "writes the status of sol to the stream out .
 
 In case the status is QP_OPTIMAL , the optimal objective value and the values
 of the variables at the optimal solution are output as well. For more detailed
@@ -498,7 +498,7 @@ out : std::ostream &
 sol : const Quadratic_program_solution < ET > &
 
 Returns: std::ostream &";
-constexpr const char* CGAL_Quadratic_program_solution_solves_quadratic_program = "returns true iff sol solves the quadratic program qp .
+constexpr const char* Quadratic_program_solution_solves_quadratic_program = "returns true iff sol solves the quadratic program qp .
 
 If the result is false , you can get a message that describes the problem,
 through the method get_error() .
@@ -508,7 +508,7 @@ Parameters
 qp : const QuadraticProgram &
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_solves_linear_program = "returns true iff sol solves the linear program lp .
+constexpr const char* Quadratic_program_solution_solves_linear_program = "returns true iff sol solves the linear program lp .
 
 If the result is false , you can get a message that describes the problem,
 through the method get_error() .
@@ -518,7 +518,7 @@ Parameters
 lp : const LinearProgram &
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_solves_nonnegative_quadratic_program = "returns true iff sol solves the nonnegative quadratic program qp .
+constexpr const char* Quadratic_program_solution_solves_nonnegative_quadratic_program = "returns true iff sol solves the nonnegative quadratic program qp .
 
 If the result is false , you can get a message that describes the problem,
 through the method get_error() .
@@ -528,7 +528,7 @@ Parameters
 qp : const NonnegativeQuadraticProgram &
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_solves_nonnegative_linear_program = "returns true iff sol solves the nonnegative linear program lp .
+constexpr const char* Quadratic_program_solution_solves_nonnegative_linear_program = "returns true iff sol solves the nonnegative linear program lp .
 
 If the result is false , you can get a message that describes the problem,
 through the method get_error() .
@@ -538,13 +538,13 @@ Parameters
 lp : const NonnegativeLinearProgram &
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_is_valid = "returns false iff the validation through one of the previous four functions has failed.
+constexpr const char* Quadratic_program_solution_is_valid = "returns false iff the validation through one of the previous four functions has failed.
 
 Returns: bool";
-constexpr const char* CGAL_Quadratic_program_solution_get_error = "returns an error message in case any of the previous four validation functions has returned false .
+constexpr const char* Quadratic_program_solution_get_error = "returns an error message in case any of the previous four validation functions has returned false .
 
 Returns: const std::string &";
-constexpr const char* CGAL_Quadratic_program_solution_optimality_certifcate_begin = "returns a random access iterator over the optimality certificate $ \\qplambda$ as given in Lemma 1, with respect to the solution $ \\qpx^*$ obtained from sol.variable_values_begin() .
+constexpr const char* Quadratic_program_solution_optimality_certifcate_begin = "returns a random access iterator over the optimality certificate $ \\qplambda$ as given in Lemma 1, with respect to the solution $ \\qpx^*$ obtained from sol.variable_values_begin() .
 
 The value type is Quotient< ET > , and the valid iterator range has length $
 m$ . sol.is_optimal() . Lemma 1(optimality certificate): A feasible $ n$
@@ -570,23 +570,23 @@ semidefinite, we have $(\\qpx-\\qpx^*)^TD(\\qpx-\\qpx^*)\\geq 0$ and the lemma
 follows. QP_solver/optimality_certificate.cpp
 
 Returns: Optimality_certificate_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_optimality_certificate_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_optimality_certificate_end = "returns the corresponding past-the-end iterator.
 
 optimality_certifcate_begin()
 
 Returns: Optimality_certificate_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_optimality_certifcate_numerators_begin = "returns a random access iterator over the numerator values of the optimality certificate $ \\qplambda$ , with respect to the common denominator returned by sol .
+constexpr const char* Quadratic_program_solution_optimality_certifcate_numerators_begin = "returns a random access iterator over the numerator values of the optimality certificate $ \\qplambda$ , with respect to the common denominator returned by sol .
 
 variables_common_denominator() . The value type is ET , and the valid iterator
 range has length $ m$ . optimality_certifcate_begin()
 
 Returns: Optimality_certificate_numerator_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_optimality_certificate_numerators_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_optimality_certificate_numerators_end = "returns the corresponding past-the-end iterator.
 
 optimality_certifcate_begin()
 
 Returns: Optimality_certificate_numerator_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_infeasibility_certificate_begin = "returns a random access iterator over the infeasibility certificate $ \\qplambda$ as given in Lemma 2.
+constexpr const char* Quadratic_program_solution_infeasibility_certificate_begin = "returns a random access iterator over the infeasibility certificate $ \\qplambda$ as given in Lemma 2.
 
 The value type is ET , and the valid iterator range has length $ m$ .
 sol.is_infeasible() . Lemma 2 (infeasibility certificate): The program (QP) is
@@ -608,12 +608,12 @@ and 2.)} \\\\ &>& 0 & \\mbox{(by 3.)}, \\end{array} \\] and this is the desired
 contradiction $0>0$ . QP_solver/infeasibility_certificate.cpp
 
 Returns: Infeasibility_certificate_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_infeasibility_certificate_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_infeasibility_certificate_end = "returns the corresponding past-the-end iterator.
 
 infeasibility_certificate_begin()
 
 Returns: Infeasibility_certificate_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_unboundedness_certificate_begin = "returns a random access iterator over the unbounded direction $ \\qpw$ as given in Lemma 3,with respect to the solution $ \\qpx^*$ obtained from sol.variable_values_begin() .
+constexpr const char* Quadratic_program_solution_unboundedness_certificate_begin = "returns a random access iterator over the unbounded direction $ \\qpw$ as given in Lemma 3,with respect to the solution $ \\qpx^*$ obtained from sol.variable_values_begin() .
 
 The value type is ET , and the valid iterator range has length $ n$ .
 sol.is_unbounded() . Lemma 3 (unboundedness certificate:) Let $\\qpx^*$ be a
@@ -633,7 +633,7 @@ t^2\\qpw^TD\\qpw. \\end{eqnarray*} By condition 3., this tends to $-\\infty$ for
 $t\\rightarrow\\infty$ , so the problem is indeed unbounded.
 
 Returns: Unboundedness_certificate_iterator";
-constexpr const char* CGAL_Quadratic_program_solution_unboundedness_certificate_end = "returns the corresponding past-the-end iterator.
+constexpr const char* Quadratic_program_solution_unboundedness_certificate_end = "returns the corresponding past-the-end iterator.
 
 unboundedness_certificate_begin()
 

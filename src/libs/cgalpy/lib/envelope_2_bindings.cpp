@@ -17,6 +17,25 @@
 
 namespace py = nanobind;
 
+// Docstrings
+namespace {
+  const char* LOWER_ENVELOPE_2_DOC = R"pbdoc(
+Compute the lower envelope of a range of curves.
+)pbdoc";
+
+  const char* LOWER_ENVELOPE_X_MONOTONE_2_DOC = R"pbdoc(
+Compute the lower envelope of a range of x-monotone curves.
+)pbdoc";
+
+  const char* UPPER_ENVELOPE_2_DOC = R"pbdoc(
+Compute the upper envelope of a range of curves.
+)pbdoc";
+
+  const char* UPPER_ENVELOPE_X_MONOTONE_2_DOC = R"pbdoc(
+Compute the upper envelope of a range of x-monotone curves.
+)pbdoc";
+}
+
 namespace env2 {
 
 //
@@ -111,18 +130,22 @@ void export_envelope_2 (py::module_& m) {
     py::class_<Ed>(m, "Envelope_diagram_1")
       .def(py::init<>())
       .def("leftmost",
-           [](const Ed& ed)->const Edge& { return *(ed.leftmost()); }, ri)
+          [](const Ed& ed)->const Edge& { return *(ed.leftmost()); }, ri)
       .def("rightmost",
-           [](const Ed& ed)->const Edge& { return *(ed.rightmost()); }, ri)
+          [](const Ed& ed)->const Edge& { return *(ed.rightmost()); }, ri)
       ;
   }
 
   m.def("lower_envelope_2", &env2::lower_envelope_2,
+        LOWER_ENVELOPE_2_DOC,
         py::arg("curves"));
   m.def("lower_envelope_x_monotone_2", &env2::lower_envelope_x_monotone_2,
+        LOWER_ENVELOPE_X_MONOTONE_2_DOC,
         py::arg("curves"));
   m.def("upper_envelope_2", &env2::upper_envelope_2,
+        UPPER_ENVELOPE_2_DOC,
         py::arg("curves"));
   m.def("upper_envelope_x_monotone_2", &env2::upper_envelope_x_monotone_2,
+        UPPER_ENVELOPE_X_MONOTONE_2_DOC,
         py::arg("curves"));
 }

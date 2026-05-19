@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Kinetic_space_partition {
 
 // CGAL::Kinetic_space_partition_3
-constexpr const char* CGAL_Kinetic_space_partition_3__class__ = "creates the kinetic partition of the bounding box of the polygons given as input data.";
+constexpr const char* Kinetic_space_partition_3__class__ = "creates the kinetic partition of the bounding box of the polygons given as input data.";
 
-constexpr const char* CGAL_Kinetic_space_partition_3_Kinetic_space_partition_3 = "constructs an empty kinetic space partition object.
+constexpr const char* Kinetic_space_partition_3_Kinetic_space_partition_3 = "constructs an empty kinetic space partition object.
 
 Use insert() afterwards to insert polygons into the partition and initialize()
 to initialize the partition. NamedParameters a sequence of Named Parameters np
@@ -23,7 +23,7 @@ bool Default: false
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_space_partition_3_Kinetic_space_partition_3_1 = "constructs a kinetic space partition object and initializes it.
+constexpr const char* Kinetic_space_partition_3_Kinetic_space_partition_3_1 = "constructs a kinetic space partition object and initializes it.
 
 PointRange must be a model of ConstRange whose iterator type is
 RandomAccessIterator and whose value type is Point_3. PolygonRange contains
@@ -58,7 +58,7 @@ Parameters
 points : const PointRange &
 polygons : const PolygonRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_space_partition_3_insert = "inserts non-coplanar polygons, requires initialize() afterwards to have effect.
+constexpr const char* Kinetic_space_partition_3_insert = "inserts non-coplanar polygons, requires initialize() afterwards to have effect.
 
 PointRange must be a model of ConstRange whose iterator type is
 RandomAccessIterator and whose value type is GeomTraits::Point_3 .
@@ -77,7 +77,7 @@ Parameters
 points : const PointRange &
 polygons : const PolygonRange &
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_space_partition_3_initialize = "initializes the kinetic partition of the bounding box.
+constexpr const char* Kinetic_space_partition_3_initialize = "initializes the kinetic partition of the bounding box.
 
 NamedParameters a sequence of Named Parameters np a sequence of Named
 Parameters among the ones listed below Optional Named Parameters <button
@@ -97,7 +97,7 @@ provided via insert() .
 Parameters
 ----------
 np : const NamedParameters &";
-constexpr const char* CGAL_Kinetic_space_partition_3_partition = "propagates the kinetic polygons in the initialized partition.
+constexpr const char* Kinetic_space_partition_3_partition = "propagates the kinetic polygons in the initialized partition.
 
 k maximum number of allowed intersections for each input polygon before its
 expansion stops. initialized partition and k != 0
@@ -105,17 +105,17 @@ expansion stops. initialized partition and k != 0
 Parameters
 ----------
 k : std::size_t";
-constexpr const char* CGAL_Kinetic_space_partition_3_number_of_volumes = "returns the number of volumes created by the kinetic partition.
+constexpr const char* Kinetic_space_partition_3_number_of_volumes = "returns the number of volumes created by the kinetic partition.
 
 created partition
 
 Returns: std::size_t";
-constexpr const char* CGAL_Kinetic_space_partition_3_input_planes = "provides the support planes of the partition derived from the input polygons
+constexpr const char* Kinetic_space_partition_3_input_planes = "provides the support planes of the partition derived from the input polygons
 
 vector of planes. inserted polygons
 
 Returns: const std::vector< typename Intersection_kernel::Plane_3 > &";
-constexpr const char* CGAL_Kinetic_space_partition_3_get_linear_cell_complex = "exports the kinetic partition into a Linear_cell_complex_for_combinatorial_map<3, 3> using a model of KineticLCCItems as items, e.g., Kinetic_space_partition_3::Linear_cell_complex_min_items .
+constexpr const char* Kinetic_space_partition_3_get_linear_cell_complex = "exports the kinetic partition into a Linear_cell_complex_for_combinatorial_map<3, 3> using a model of KineticLCCItems as items, e.g., Kinetic_space_partition_3::Linear_cell_complex_min_items .
 
 Volume and face attributes defined in the model KineticLCCItems are filled.
 The volume index is in the range [0, number of volumes -1] LCC must be a model
@@ -126,10 +126,10 @@ Any data contained in lcc will be cleared before. created partition
 Parameters
 ----------
 lcc : LCC &";
-constexpr const char* CGAL_Kinetic_space_partition_3_Face_support = "identifies the support of a face in the exported linear cell complex, which is either an input polygon, identified by a non-negative number, a side of the bounding box in the rotated coordinate system or a face of the octree used to partition the scene.
+constexpr const char* Kinetic_space_partition_3_Face_support = "identifies the support of a face in the exported linear cell complex, which is either an input polygon, identified by a non-negative number, a side of the bounding box in the rotated coordinate system or a face of the octree used to partition the scene.
 
 Returns: int";
-constexpr const char* CGAL_Kinetic_space_partition_3_faces = "Face indices of the volume.
+constexpr const char* Kinetic_space_partition_3_faces = "Face indices of the volume.
 
 OutputIterator output iterator accepting Index volume_index index of the query
 volume. it output iterator where faces of the volume are put created partition
@@ -138,7 +138,7 @@ Parameters
 ----------
 volume_index : std::size_t
 it : OutputIterator";
-constexpr const char* CGAL_Kinetic_space_partition_3_vertex = "Mapping of a vertex index to its position.
+constexpr const char* Kinetic_space_partition_3_vertex = "Mapping of a vertex index to its position.
 
 point of the vertex created partition
 
@@ -147,7 +147,7 @@ Parameters
 vertex_index : const Index &
 
 Returns: const Point_3 &";
-constexpr const char* CGAL_Kinetic_space_partition_3_exact_vertex = "Mapping of a vertex index to its exact position.
+constexpr const char* Kinetic_space_partition_3_exact_vertex = "Mapping of a vertex index to its exact position.
 
 vector of points. created partition
 
@@ -156,7 +156,7 @@ Parameters
 vertex_index : const Index &
 
 Returns: const Intersection_kernel::Point_3 &";
-constexpr const char* CGAL_Kinetic_space_partition_3_vertices = "Vertices of a face.
+constexpr const char* Kinetic_space_partition_3_vertices = "Vertices of a face.
 
 OutputIterator output iterator accepting Point_3 face_index index of the query
 face. it output iterator where points of the face are put created partition
@@ -165,7 +165,7 @@ Parameters
 ----------
 face_index : const Index &
 it : OutputIterator";
-constexpr const char* CGAL_Kinetic_space_partition_3_exact_vertices = "Vertices of a face.
+constexpr const char* Kinetic_space_partition_3_exact_vertices = "Vertices of a face.
 
 OutputIterator output iterator accepting EPECK::Point_3 face_index index of
 the query face. it output iterator where points of the face are put created
@@ -175,7 +175,7 @@ Parameters
 ----------
 face_index : const Index &
 it : OutputIterator";
-constexpr const char* CGAL_Kinetic_space_partition_3_neighbors = "Indices of adjacent volumes.
+constexpr const char* Kinetic_space_partition_3_neighbors = "Indices of adjacent volumes.
 
 Negative indices correspond to the empty spaces behind the sides of the
 bounding box. face_index index of the query face. pair of adjacent volumes. -1
@@ -190,7 +190,7 @@ Returns: std::pair< int, int >";
 
 
 // CGAL::Kinetic_space_partition_3::Linear_cell_complex_min_items
-constexpr const char* CGAL_Kinetic_space_partition_3_Linear_cell_complex_min_items__class__ = "this class provides a minimal model of KineticLCCItems .";
+constexpr const char* Kinetic_space_partition_3_Linear_cell_complex_min_items__class__ = "this class provides a minimal model of KineticLCCItems .";
 
 
 

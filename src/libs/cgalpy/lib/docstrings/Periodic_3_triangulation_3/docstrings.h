@@ -8,9 +8,9 @@ namespace docstrings {
 namespace Periodic_3_triangulation_3 {
 
 // CGAL::Periodic_3_Delaunay_triangulation_3
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3__class__ = "The class Periodic_3_Delaunay_triangulation_3 represents a Delaunay triangulation in three-dimensional periodic space.";
+constexpr const char* Periodic_3_Delaunay_triangulation_3__class__ = "The class Periodic_3_Delaunay_triangulation_3 represents a Delaunay triangulation in three-dimensional periodic space.";
 
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_Periodic_3_Delaunay_triangulation_3 = "Creates an empty periodic Delaunay triangulation dt , with domain as original domain and possibly specifying a traits class traits .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_Periodic_3_Delaunay_triangulation_3 = "Creates an empty periodic Delaunay triangulation dt , with domain as original domain and possibly specifying a traits class traits .
 
 domain is a cube.
 
@@ -18,12 +18,12 @@ Parameters
 ----------
 domain : const Iso_cuboid &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_Periodic_3_Delaunay_triangulation_3_1 = "Copy constructor.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_Periodic_3_Delaunay_triangulation_3_1 = "Copy constructor.
 
 Parameters
 ----------
 dt1 : const Periodic_3_Delaunay_triangulation_3 &";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_Periodic_3_Delaunay_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_Periodic_3_Delaunay_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .
 
 The value_type of first and last are Point s lying inside domain and domain is
 a cube.
@@ -34,7 +34,7 @@ first : InputIterator
 last : InputIterator
 domain : const Iso_cuboid &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_insert = "Inserts point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_insert = "Inserts point p in the triangulation and returns the corresponding vertex.
 
 The optional argument start is used as a starting place for the point
 location. p lies in the original domain.
@@ -45,7 +45,7 @@ p : const Point &
 start : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_insert_1 = "Inserts point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_insert_1 = "Inserts point p in the triangulation and returns the corresponding vertex.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of
@@ -60,7 +60,7 @@ li : int
 lj : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_insert_2 = "Inserts the points in the iterator range $ \\left[\\right.$ first , last $ \\left.\\right)$ .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_insert_2 = "Inserts the points in the iterator range $ \\left[\\right.$ first , last $ \\left.\\right)$ .
 
 Returns the number of inserted points. This function uses spatial sorting (cf.
 chapter secspatial_sorting) and therefore is not guaranteed to insert the
@@ -76,7 +76,7 @@ last : InputIterator
 is_large_point_set : bool
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_move_point = "Moves the point stored in v to p , while preserving the Delaunay property.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_move_point = "Moves the point stored in v to p , while preserving the Delaunay property.
 
 This performs an action semantically equivalent to remove(v) followed by
 insert(p) , but is supposedly faster when the point has not moved much.
@@ -88,7 +88,7 @@ v : Vertex_handle
 p : const Point &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_remove = "Removes the vertex v from the triangulation.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_remove = "Removes the vertex v from the triangulation.
 
 When computing in the 27-sheeted covering space it removes all 27 copies of v
 .
@@ -96,7 +96,7 @@ When computing in the 27-sheeted covering space it removes all 27 copies of v
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_remove_1 = "Removes the vertices specified by the iterator range ( first, beyond ) of value type Vertex_handle .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_remove_1 = "Removes the vertices specified by the iterator range ( first, beyond ) of value type Vertex_handle .
 
 remove() is called for each element of the range. The number of vertices
 removed is returned; this number does not account for periodic copies of
@@ -109,7 +109,7 @@ first : InputIterator
 beyond : InputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_side_of_sphere = "Returns a value indicating on which side of the circumscribed sphere of c the point-offset pair ( p , off ) lies.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_side_of_sphere = "Returns a value indicating on which side of the circumscribed sphere of c the point-offset pair ( p , off ) lies.
 
 More precisely, it returns: ON_BOUNDED_SIDE if ( p , off ) lies inside the
 sphere. ON_BOUNDARY if ( p , off ) lies on the boundary of the sphere.
@@ -123,7 +123,7 @@ p : const Point &
 off : const Offset &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_nearest_vertex = "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_nearest_vertex = "Returns any nearest vertex to the point p , or the default constructed handle if the triangulation is empty.
 
 The optional argument c is a hint specifying where to start the search. It
 always returns a vertex corresponding to a point inside the original domain,
@@ -136,7 +136,7 @@ p : Point
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_nearest_vertex_in_cell = "Returns the vertex of the cell c that is nearest to the point-offset pair ( p , off ).
+constexpr const char* Periodic_3_Delaunay_triangulation_3_nearest_vertex_in_cell = "Returns the vertex of the cell c that is nearest to the point-offset pair ( p , off ).
 
 p lies in the original domain.
 
@@ -147,7 +147,7 @@ p : Point
 off : Offset
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_find_conflicts = "Computes the conflict hole induced by p .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_find_conflicts = "Computes the conflict hole induced by p .
 
 The starting cell c must be in conflict. Then this function returns
 respectively in the output iterators: cit : the cells in conflict. bfit : the
@@ -166,7 +166,7 @@ cit : OutputIteratorCells
 ifit : OutputIteratorInternalFacets
 
 Returns: Triple< OutputIteratorBoundaryFacets, OutputIteratorCells, OutputIteratorInternalFacets >";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_vertices_in_conflict = "Similar to find_conflicts() , but reports the vertices which are on the boundary of the conflict hole of p , in the output iterator res .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_vertices_in_conflict = "Similar to find_conflicts() , but reports the vertices which are on the boundary of the conflict hole of p , in the output iterator res .
 
 Returns the resulting output iterator. c is in conflict with p and p lies in
 the original domain.
@@ -178,28 +178,28 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_canonical_dual = "Returns the representative of the circumcenter of the four vertices of c that lies in the original domain.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_canonical_dual = "Returns the representative of the circumcenter of the four vertices of c that lies in the original domain.
 
 Parameters
 ----------
 c : Cell_handle
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual = "Returns the circumcenter of the four vertices of c.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual = "Returns the circumcenter of the four vertices of c.
 
 Parameters
 ----------
 c : Cell_handle
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_1 = "Returns the dual of the facet f , which is a periodic segment.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_1 = "Returns the dual of the facet f , which is a periodic segment.
 
 Parameters
 ----------
 f : Facet
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_2 = "same as the previous method for the facet (c,i) .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_2 = "same as the previous method for the facet (c,i) .
 
 $ i\\in\\{0,1,2,3\\}$
 
@@ -209,7 +209,7 @@ c : Cell_handle
 i : int
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_3 = "Returns in the output iterator the points of the dual polygon of edge e in the same order as the Facet_circulator returns facets incident to the edge e .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_3 = "Returns in the output iterator the points of the dual polygon of edge e in the same order as the Facet_circulator returns facets incident to the edge e .
 
 The points form the dual polygon in $ \\mathbb R^3$ , so they do not
 necessarily all lie inside the original domain.
@@ -220,7 +220,7 @@ e : Edge
 pts : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_4 = "same as the previous method for the edge (c,i,j) .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_4 = "same as the previous method for the edge (c,i,j) .
 
 $ i,j\\in\\{0,1,2,3\\}, i\\neq j$
 
@@ -232,7 +232,7 @@ j : int
 pts : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_5 = "Returns in the output iterator the points of the dual polyhedron of the vertex v in no particular order.
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_5 = "Returns in the output iterator the points of the dual polyhedron of the vertex v in no particular order.
 
 The points form the dual polyhedron in $ \\mathbb R^3$ , so they do not
 necessarily lie all inside the original domain.
@@ -243,28 +243,28 @@ v : Vertex_handle
 pts : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_draw_dual = "Sends the set of duals to all the facets of dt into os .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_draw_dual = "Sends the set of duals to all the facets of dt into os .
 
 Parameters
 ----------
 os : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_volume = "Returns the volume of the Voronoi cell dual to v .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_volume = "Returns the volume of the Voronoi cell dual to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_dual_centroid = "Returns the centroid of the Voronoi cell dual to v .
+constexpr const char* Periodic_3_Delaunay_triangulation_3_dual_centroid = "Returns the centroid of the Voronoi cell dual to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ).
+constexpr const char* Periodic_3_Delaunay_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ).
 
 Also checks that all the circumscribing spheres of cells are empty. When
 verbose is set to true, messages describing the first invalidity encountered
@@ -275,7 +275,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_3_is_valid_1 = "Checks the combinatorial and geometric validity of the cell (see Section Representation ).
+constexpr const char* Periodic_3_Delaunay_triangulation_3_is_valid_1 = "Checks the combinatorial and geometric validity of the cell (see Section Representation ).
 
 Also checks that the circumscribing sphere of cells is empty. When verbose is
 set to true, messages are printed to give a precise indication of the kind of
@@ -289,18 +289,18 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Periodic_3_Delaunay_triangulation_traits_3
-constexpr const char* CGAL_Periodic_3_Delaunay_triangulation_traits_3__class__ = "The class Periodic_3_Delaunay_triangulation_traits_3 is designed as a default traits class for the class Periodic_3_Delaunay_triangulation_3 < Periodic_3DelaunayTriangulationTraits_3 ,TriangulationDataStructure_3> .";
+constexpr const char* Periodic_3_Delaunay_triangulation_traits_3__class__ = "The class Periodic_3_Delaunay_triangulation_traits_3 is designed as a default traits class for the class Periodic_3_Delaunay_triangulation_3 < Periodic_3DelaunayTriangulationTraits_3 ,TriangulationDataStructure_3> .";
 
 // CGAL::Periodic_3_offset_3
-constexpr const char* CGAL_Periodic_3_offset_3__class__ = "The class Periodic_3_offset_3 is a model of the concept Periodic_3Offset_3 .";
+constexpr const char* Periodic_3_offset_3__class__ = "The class Periodic_3_offset_3 is a model of the concept Periodic_3Offset_3 .";
 
 // CGAL::Periodic_3_regular_triangulation_3
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3__class__ = "The class Periodic_3_regular_triangulation_3 represents a weighted Delaunay triangulation in three-dimensional periodic space.";
+constexpr const char* Periodic_3_regular_triangulation_3__class__ = "The class Periodic_3_regular_triangulation_3 represents a weighted Delaunay triangulation in three-dimensional periodic space.";
 
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_Weighted_point = "The type for points p of weighted points $ {p}^{(w)}=(p,w_p)$ .
+constexpr const char* Periodic_3_regular_triangulation_3_Weighted_point = "The type for points p of weighted points $ {p}^{(w)}=(p,w_p)$ .
 
 Returns: TDS::Weighted_point_3";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_Periodic_3_regular_triangulation_3 = "Creates an empty periodic regular triangulation rt , with domain as original domain and possibly specifying a traits class traits .
+constexpr const char* Periodic_3_regular_triangulation_3_Periodic_3_regular_triangulation_3 = "Creates an empty periodic regular triangulation rt , with domain as original domain and possibly specifying a traits class traits .
 
 domain is a cube.
 
@@ -308,12 +308,12 @@ Parameters
 ----------
 domain : const Iso_cuboid &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_Periodic_3_regular_triangulation_3_1 = "Copy constructor.
+constexpr const char* Periodic_3_regular_triangulation_3_Periodic_3_regular_triangulation_3_1 = "Copy constructor.
 
 Parameters
 ----------
 rt1 : const Periodic_3_regular_triangulation_3 &";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_Periodic_3_regular_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .
+constexpr const char* Periodic_3_regular_triangulation_3_Periodic_3_regular_triangulation_3_2 = "Equivalent to constructing an empty triangulation with the optional domain and traits class arguments and calling insert(first,last) .
 
 The value_type of first and last are Weighted_point s lying inside domain and
 domain is a cube. Their weights are non-negative and smaller than 1/64 times
@@ -328,10 +328,10 @@ last : InputIterator
 domain : const Iso_cuboid &
 traits : const Geom_traits &
 is_large_point_set : bool";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_number_of_hidden_points = "Returns the number of hidden points.
+constexpr const char* Periodic_3_regular_triangulation_3_number_of_hidden_points = "Returns the number of hidden points.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_insert = "Inserts the point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Periodic_3_regular_triangulation_3_insert = "Inserts the point p in the triangulation and returns the corresponding vertex.
 
 The optional argument start is used as a starting place for the point
 location. If this insertion creates a vertex, this vertex is returned. If p
@@ -351,7 +351,7 @@ p : const Weighted_point &
 start : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_insert_1 = "Inserts point p in the triangulation and returns the corresponding vertex.
+constexpr const char* Periodic_3_regular_triangulation_3_insert_1 = "Inserts point p in the triangulation and returns the corresponding vertex.
 
 Similar to the above insert() function, but takes as additional parameter the
 return values of a previous location query. See description of
@@ -368,7 +368,7 @@ li : int
 lj : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_insert_2 = "Inserts the points in the iterator range $ \\left[\\right.$ first , last $ \\left.\\right)$ .
+constexpr const char* Periodic_3_regular_triangulation_3_insert_2 = "Inserts the points in the iterator range $ \\left[\\right.$ first , last $ \\left.\\right)$ .
 
 Returns the number of inserted points. This function uses spatial sorting (cf.
 chapter secspatial_sorting) and therefore is not guaranteed to insert the
@@ -385,7 +385,7 @@ last : InputIterator
 is_large_point_set : bool
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_remove = "Removes the vertex v from the triangulation.
+constexpr const char* Periodic_3_regular_triangulation_3_remove = "Removes the vertex v from the triangulation.
 
 When computing in the 27-sheeted covering space it removes all 27 copies of v
 .
@@ -393,7 +393,7 @@ When computing in the 27-sheeted covering space it removes all 27 copies of v
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_remove_1 = "Removes the vertices specified by the iterator range ( first, beyond ) of value type Vertex_handle .
+constexpr const char* Periodic_3_regular_triangulation_3_remove_1 = "Removes the vertices specified by the iterator range ( first, beyond ) of value type Vertex_handle .
 
 remove() is called for each element of the range. The number of vertices
 removed is returned; this number does not account for periodic copies of
@@ -406,7 +406,7 @@ first : InputIterator
 beyond : InputIterator
 
 Returns: std::ptrdiff_t";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_side_of_power_sphere = "Returns a value indicating the position of the (weighted point, offset) pair ( p , off ) with respect to the power sphere of c .
+constexpr const char* Periodic_3_regular_triangulation_3_side_of_power_sphere = "Returns a value indicating the position of the (weighted point, offset) pair ( p , off ) with respect to the power sphere of c .
 
 More precisely, it returns: ON_BOUNDED_SIDE if the angle between the weighted
 point ( p , off ) and the power sphere of c is larger than $ \\pi/2$ or if the
@@ -422,7 +422,7 @@ p : const Weighted_point &
 off : const Offset &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_nearest_power_vertex = "Returns the vertex of the triangulation which is nearest to $ p$ with respect to the power distance.
+constexpr const char* Periodic_3_regular_triangulation_3_nearest_power_vertex = "Returns the vertex of the triangulation which is nearest to $ p$ with respect to the power distance.
 
 This means that the power of the query point p with respect to the weighted
 point in the returned vertex is smaller than the power of p with respect to
@@ -439,7 +439,7 @@ p : const Bare_point &
 c : Cell_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_find_conflicts = "Computes the conflict hole induced by p .
+constexpr const char* Periodic_3_regular_triangulation_3_find_conflicts = "Computes the conflict hole induced by p .
 
 The starting cell c must be in conflict. Then this function returns
 respectively in the output iterators: cit : the cells in conflict. bfit : the
@@ -459,7 +459,7 @@ cit : OutputIteratorCells
 ifit : OutputIteratorInternalFacets
 
 Returns: Triple< OutputIteratorBoundaryFacets, OutputIteratorCells, OutputIteratorInternalFacets >";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_vertices_in_conflict = "Similar to find_conflicts() , but reports the vertices that are on the boundary of the conflict hole of p , in the output iterator res .
+constexpr const char* Periodic_3_regular_triangulation_3_vertices_in_conflict = "Similar to find_conflicts() , but reports the vertices that are on the boundary of the conflict hole of p , in the output iterator res .
 
 Returns the resulting output iterator. c is in conflict with p and p lies in
 the original domain domain . Its weight is non-negative and smaller than 1/64
@@ -472,28 +472,28 @@ c : Cell_handle
 res : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_canonical_dual = "Returns the representative of the weighted circumcenter of the four vertices of c that lies in the original domain domain .
+constexpr const char* Periodic_3_regular_triangulation_3_canonical_dual = "Returns the representative of the weighted circumcenter of the four vertices of c that lies in the original domain domain .
 
 Parameters
 ----------
 c : Cell_handle
 
 Returns: Bare_point";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual = "Returns the circumcenter of the four vertices of c.
+constexpr const char* Periodic_3_regular_triangulation_3_dual = "Returns the circumcenter of the four vertices of c.
 
 Parameters
 ----------
 c : Cell_handle
 
 Returns: Bare_point";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_1 = "Returns the dual of the facet f , which is a periodic segment.
+constexpr const char* Periodic_3_regular_triangulation_3_dual_1 = "Returns the dual of the facet f , which is a periodic segment.
 
 Parameters
 ----------
 f : Facet
 
 Returns: Periodic_segment_3";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_2 = "same as the previous method for the facet (c,i) .
+constexpr const char* Periodic_3_regular_triangulation_3_dual_2 = "same as the previous method for the facet (c,i) .
 
 $ i\\in\\{0,1,2,3\\}$
 
@@ -503,7 +503,7 @@ c : Cell_handle
 i : int
 
 Returns: Periodic_segment_3";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_3 = "Returns in the output iterator the points of the dual polygon of the edge e in the same order as the Facet_circulator returns facets incident to the edge e .
+constexpr const char* Periodic_3_regular_triangulation_3_dual_3 = "Returns in the output iterator the points of the dual polygon of the edge e in the same order as the Facet_circulator returns facets incident to the edge e .
 
 The points form the dual polygon in $ \\mathbb R^3$ , so they do not
 necessarily all lie inside the original domain.
@@ -514,7 +514,7 @@ e : Edge
 pts : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_4 = "same as the previous method for the edge (c,i,j) .
+constexpr const char* Periodic_3_regular_triangulation_3_dual_4 = "same as the previous method for the edge (c,i,j) .
 
 $ i,j\\in\\{0,1,2,3\\}, i\\neq j$
 
@@ -526,7 +526,7 @@ j : int
 pts : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_5 = "Returns in the output iterator the points of the dual polyhedron of the vertex v in no particular order.
+constexpr const char* Periodic_3_regular_triangulation_3_dual_5 = "Returns in the output iterator the points of the dual polyhedron of the vertex v in no particular order.
 
 The points form the dual polyhedron in $ \\mathbb R^3$ , so they do not
 necessarily lie all inside the original domain.
@@ -537,28 +537,28 @@ v : Vertex_handle
 pts : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_draw_dual = "Sends the set of duals to all the facets of rt into os .
+constexpr const char* Periodic_3_regular_triangulation_3_draw_dual = "Sends the set of duals to all the facets of rt into os .
 
 Parameters
 ----------
 os : Stream &
 
 Returns: Stream &";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_volume = "Returns the volume of the cell of the power diagram dual to v .
+constexpr const char* Periodic_3_regular_triangulation_3_dual_volume = "Returns the volume of the cell of the power diagram dual to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Geom_traits::FT";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_dual_centroid = "Returns the centroid of the cell of the power diagram dual to v .
+constexpr const char* Periodic_3_regular_triangulation_3_dual_centroid = "Returns the centroid of the cell of the power diagram dual to v .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Bare_point";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ).
+constexpr const char* Periodic_3_regular_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation and the validity of its geometric embedding (see Section Representation ).
 
 Also checks that the power spheres of all cells are regular. When verbose is
 set to true, messages describing the first invalidity encountered (if any) are
@@ -569,7 +569,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_regular_triangulation_3_is_valid_1 = "Checks the combinatorial and geometric validity of the cell (see Section Representation ).
+constexpr const char* Periodic_3_regular_triangulation_3_is_valid_1 = "Checks the combinatorial and geometric validity of the cell (see Section Representation ).
 
 Also checks that its power sphere is regular. When verbose is set to true,
 messages are printed to give a precise indication of the kind of invalidity
@@ -583,126 +583,126 @@ verbose : bool
 Returns: bool";
 
 // CGAL::Periodic_3_regular_triangulation_traits_3
-constexpr const char* CGAL_Periodic_3_regular_triangulation_traits_3__class__ = "The class Periodic_3_regular_triangulation_traits_3 is designed as a default traits class for the class Periodic_3_regular_triangulation_3 < Periodic_3RegularTriangulationTraits_3 ,TriangulationDataStructure_3> .";
+constexpr const char* Periodic_3_regular_triangulation_traits_3__class__ = "The class Periodic_3_regular_triangulation_traits_3 is designed as a default traits class for the class Periodic_3_regular_triangulation_3 < Periodic_3RegularTriangulationTraits_3 ,TriangulationDataStructure_3> .";
 
 // CGAL::Periodic_3_triangulation_3
-constexpr const char* CGAL_Periodic_3_triangulation_3__class__ = "The class Periodic_3_triangulation_3 represents a 3-dimensional triangulation of a point set in $ \\mathbb T_c^3$ .";
+constexpr const char* Periodic_3_triangulation_3__class__ = "The class Periodic_3_triangulation_3 represents a 3-dimensional triangulation of a point set in $ \\mathbb T_c^3$ .";
 
-constexpr const char* CGAL_Periodic_3_triangulation_3_Locate_type = "The enum Locate_type is defined by Periodic_3_triangulation_3 to specify which case occurs when locating a point in the triangulation.
+constexpr const char* Periodic_3_triangulation_3_Locate_type = "The enum Locate_type is defined by Periodic_3_triangulation_3 to specify which case occurs when locating a point in the triangulation.
 
 If the triangulation does not contain any points EMPTY is returned.
 CGAL::Periodic_3_triangulation_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Iterator_type = "The enum Iterator_type is defined by Periodic_3_triangulation_3 to specify the behavior of geometric iterators.
+constexpr const char* Periodic_3_triangulation_3_Iterator_type = "The enum Iterator_type is defined by Periodic_3_triangulation_3 to specify the behavior of geometric iterators.
 
 The elements of the enum have the following meaning:
 CGAL::Periodic_3_triangulation_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Iso_cuboid = "A type representing an axis-aligned cuboid.
+constexpr const char* Periodic_3_triangulation_3_Iso_cuboid = "A type representing an axis-aligned cuboid.
 
 It must be a model of Traits::Iso_cuboid_3 . Used to represent the original
 domain.
 
 Returns: Geom_traits::Iso_cuboid_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Covering_sheets = "Integer triple to store the number of sheets in each direction of space.
+constexpr const char* Periodic_3_triangulation_3_Covering_sheets = "Integer triple to store the number of sheets in each direction of space.
 
 Returns: array< int, 3 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Point = "The point type of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_Point = "The point type of the triangulation.
 
 This type is equal to Geom_traits::Point_3 when considering periodic Delaunay
 triangulations and to Geom_traits::Weighted_point_3 when considering periodic
 weighted Delaunay triangulations.
 
 Returns: TDS::Vertex::Point";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Point_3 = "The geometric basic 3D point type.
+constexpr const char* Periodic_3_triangulation_3_Point_3 = "The geometric basic 3D point type.
 
 Returns: Geom_traits::Point_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_point = "Represents a point-offset pair.
+constexpr const char* Periodic_3_triangulation_3_Periodic_point = "Represents a point-offset pair.
 
 The point in the pair lies in the original domain. Note that the inner type is
 Point .
 
 Returns: std::pair< Point , Offset >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_point_3 = "Represents a point-offset pair.
+constexpr const char* Periodic_3_triangulation_3_Periodic_point_3 = "Represents a point-offset pair.
 
 The point in the pair lies in the original domain. Note that the inner type is
 Point_3 .
 
 Returns: std::pair< Point_3 , Offset >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_segment = "A periodic segment.
+constexpr const char* Periodic_3_triangulation_3_Periodic_segment = "A periodic segment.
 
 Note that the inner type is Periodic_point .
 
 Returns: array< Periodic_point , 2 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_segment_3 = "A periodic segment.
+constexpr const char* Periodic_3_triangulation_3_Periodic_segment_3 = "A periodic segment.
 
 Note that the inner type is Periodic_point_3 .
 
 Returns: array< Periodic_point_3 , 2 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_triangle = "A periodic triangle.
+constexpr const char* Periodic_3_triangulation_3_Periodic_triangle = "A periodic triangle.
 
 Note that the inner type is Periodic_point .
 
 Returns: array< Periodic_point , 3 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_triangle_3 = "A periodic triangle.
+constexpr const char* Periodic_3_triangulation_3_Periodic_triangle_3 = "A periodic triangle.
 
 Note that the inner type is Periodic_point_3 .
 
 Returns: array< Periodic_point_3 , 3 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_tetrahedron = "A periodic tetrahedron.
+constexpr const char* Periodic_3_triangulation_3_Periodic_tetrahedron = "A periodic tetrahedron.
 
 Note that the inner type is Periodic_point .
 
 Returns: array< Periodic_point , 4 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_tetrahedron_3 = "A periodic tetrahedron.
+constexpr const char* Periodic_3_triangulation_3_Periodic_tetrahedron_3 = "A periodic tetrahedron.
 
 Note that the inner type is Periodic_point_3 .
 
 Returns: array< Periodic_point_3 , 4 >";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Vertex_handle = "handle to a vertex
+constexpr const char* Periodic_3_triangulation_3_Vertex_handle = "handle to a vertex
 
 Returns: Triangulation_data_structure::Vertex_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Cell_handle = "handle to a cell
+constexpr const char* Periodic_3_triangulation_3_Cell_handle = "handle to a cell
 
 Returns: Triangulation_data_structure::Cell_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_size_type = "Size type (an unsigned integral type).
+constexpr const char* Periodic_3_triangulation_3_size_type = "Size type (an unsigned integral type).
 
 Returns: Triangulation_data_structure::size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_difference_type = "Difference type (a signed integral type).
+constexpr const char* Periodic_3_triangulation_3_difference_type = "Difference type (a signed integral type).
 
 Returns: Triangulation_data_structure::difference_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Cell_iterator = "iterator over cells
+constexpr const char* Periodic_3_triangulation_3_Cell_iterator = "iterator over cells
 
 Returns: Triangulation_data_structure::Cell_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Facet_iterator = "iterator over facets
+constexpr const char* Periodic_3_triangulation_3_Facet_iterator = "iterator over facets
 
 Returns: Triangulation_data_structure::Facet_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Edge_iterator = "iterator over edges
+constexpr const char* Periodic_3_triangulation_3_Edge_iterator = "iterator over edges
 
 Returns: Triangulation_data_structure::Edge_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Vertex_iterator = "iterator over vertices
+constexpr const char* Periodic_3_triangulation_3_Vertex_iterator = "iterator over vertices
 
 Returns: Triangulation_data_structure::Vertex_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Unique_vertex_iterator = "iterator over the vertices whose corresponding points lie in the original domain, i.e. for each set of periodic copies the Unique_vertex_iterator iterates over exactly one representative.
+constexpr const char* Periodic_3_triangulation_3_Unique_vertex_iterator = "iterator over the vertices whose corresponding points lie in the original domain, i.e. for each set of periodic copies the Unique_vertex_iterator iterates over exactly one representative.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Cell_circulator = "circulator over all cells incident to a given edge
+constexpr const char* Periodic_3_triangulation_3_Cell_circulator = "circulator over all cells incident to a given edge
 
 Returns: Triangulation_data_structure::Cell_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Facet_circulator = "circulator over all facets incident to a given edge
+constexpr const char* Periodic_3_triangulation_3_Facet_circulator = "circulator over all facets incident to a given edge
 
 Returns: Triangulation_data_structure::Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_tetrahedron_iterator = "iterator over the tetrahedra corresponding to cells of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_Periodic_tetrahedron_iterator = "iterator over the tetrahedra corresponding to cells of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_triangle_iterator = "iterator over the triangles corresponding to facets of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_Periodic_triangle_iterator = "iterator over the triangles corresponding to facets of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_segment_iterator = "iterator over the segments corresponding to edges of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_Periodic_segment_iterator = "iterator over the segments corresponding to edges of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_point_iterator = "iterator over the points corresponding to vertices of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_Periodic_point_iterator = "iterator over the points corresponding to vertices of the triangulation.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_3_triangulation_3 = "Introduces an empty triangulation t with domain as original domain.
+constexpr const char* Periodic_3_triangulation_3_Periodic_3_triangulation_3 = "Introduces an empty triangulation t with domain as original domain.
 
 domain is a cube.
 
@@ -710,14 +710,14 @@ Parameters
 ----------
 domain : const Iso_cuboid &
 traits : const Geom_traits &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_Periodic_3_triangulation_3_1 = "Copy constructor.
+constexpr const char* Periodic_3_triangulation_3_Periodic_3_triangulation_3_1 = "Copy constructor.
 
 All vertices and faces are duplicated.
 
 Parameters
 ----------
 tr : const Periodic_3_triangulation_3 &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
+constexpr const char* Periodic_3_triangulation_3_operator = "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.
 
 The previous triangulation held by t is deleted.
 
@@ -726,7 +726,7 @@ Parameters
 tr : const Periodic_3_triangulation_3 &
 
 Returns: Periodic_3_triangulation_3 &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_swap = "The triangulations tr and t are swapped.
+constexpr const char* Periodic_3_triangulation_3_swap = "The triangulations tr and t are swapped.
 
 t . swap(tr) should be preferred to t = tr or to t(tr) if tr is deleted after
 that. Indeed, there is no copy of cells and vertices, thus this method runs in
@@ -735,8 +735,8 @@ constant time.
 Parameters
 ----------
 tr : Periodic_3_triangulation_3 &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_clear = "Deletes all vertices and all cells of t .";
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator_1 = "Equality operator.
+constexpr const char* Periodic_3_triangulation_3_clear = "Deletes all vertices and all cells of t .";
+constexpr const char* Periodic_3_triangulation_3_operator_1 = "Equality operator.
 
 Returns true iff there exist a bijection between the vertices of t1 and those
 of t2 and a bijection between the cells of t1 and those of t2 , which preserve
@@ -750,7 +750,7 @@ t1 : const Periodic_3_triangulation_3 < Traits, TDS1 > &
 t2 : const Periodic_3_triangulation_3 < Traits, TDS2 > &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator_2 = "The opposite of operator== .
+constexpr const char* Periodic_3_triangulation_3_operator_2 = "The opposite of operator== .
 
 Parameters
 ----------
@@ -758,22 +758,22 @@ t1 : const Periodic_3_triangulation_3 < Traits, TDS1 > &
 t2 : const Periodic_3_triangulation_3 < Traits, TDS2 > &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_geom_traits = "Returns a const reference to the geometric traits object.
+constexpr const char* Periodic_3_triangulation_3_geom_traits = "Returns a const reference to the geometric traits object.
 
 Returns: const Geom_traits &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_tds = "Returns a const reference to the triangulation data structure.
+constexpr const char* Periodic_3_triangulation_3_tds = "Returns a const reference to the triangulation data structure.
 
 Returns: const Triangulation_data_structure &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_domain = "Returns the original domain.
+constexpr const char* Periodic_3_triangulation_3_domain = "Returns the original domain.
 
 Returns: Iso_cuboid";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_sheets = "This is an advanced function.
+constexpr const char* Periodic_3_triangulation_3_number_of_sheets = "This is an advanced function.
 
 Advanced Returns the number of sheets of the covering space the triangulation
 is currently computed in.
 
 Returns: Covering_sheets";
-constexpr const char* CGAL_Periodic_3_triangulation_3_neighbor_offset = "Get the offset between the origins of the internal offset coordinate systems of two neighboring cells with respect from ch to its i-th neighbor.
+constexpr const char* Periodic_3_triangulation_3_neighbor_offset = "Get the offset between the origins of the internal offset coordinate systems of two neighboring cells with respect from ch to its i-th neighbor.
 
 Parameters
 ----------
@@ -781,7 +781,7 @@ ch : Cell_handle
 i : int
 
 Returns: Offset";
-constexpr const char* CGAL_Periodic_3_triangulation_3_set_domain = "This is an advanced function.
+constexpr const char* Periodic_3_triangulation_3_set_domain = "This is an advanced function.
 
 Advanced Changes the domain. Note that this function calls clear() , i.e., it
 erases the existing triangulation.
@@ -789,7 +789,7 @@ erases the existing triangulation.
 Parameters
 ----------
 dom : const Iso_cuboid";
-constexpr const char* CGAL_Periodic_3_triangulation_3_tds_1 = "This is an advanced function.
+constexpr const char* Periodic_3_triangulation_3_tds_1 = "This is an advanced function.
 
 Advanced Returns a reference to the triangulation data structure. The
 responsibility of keeping a valid triangulation belongs to the user when using
@@ -797,7 +797,7 @@ advanced operations allowing a direct manipulation of the tds . This method is
 mainly a help for users implementing their own triangulation algorithms.
 
 Returns: Triangulation_data_structure &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_extensible_triangulation_in_1_sheet_h1 = "The current triangulation remains a triangulation in the 1-sheeted covering space even after adding points if this method returns true .
+constexpr const char* Periodic_3_triangulation_3_is_extensible_triangulation_in_1_sheet_h1 = "The current triangulation remains a triangulation in the 1-sheeted covering space even after adding points if this method returns true .
 
 This test relies on a heuristic, i.e. if it answers false nothing is known.
 This test runs in constant-time when not computing in the 1-sheeted covering
@@ -805,85 +805,85 @@ space. (This test uses the length of the longest edge in the triangulation as
 a criterion [1] .)
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_extensible_triangulation_in_1_sheet_h2 = "The same as is_extensible_triangulation_in_1_sheet_h1() but with a more precise heuristic, i.e. it might answer true in cases in which is_extensible_triangulation_in_1_sheet_h1() would not.
+constexpr const char* Periodic_3_triangulation_3_is_extensible_triangulation_in_1_sheet_h2 = "The same as is_extensible_triangulation_in_1_sheet_h1() but with a more precise heuristic, i.e. it might answer true in cases in which is_extensible_triangulation_in_1_sheet_h1() would not.
 
 However, it is much less time efficient when not computing in the 1-sheeted
 covering space. (This test uses the diameter of the largest empty ball in the
 input point set as a criterion [1] .)
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_triangulation_in_1_sheet = "Returns true if the current triangulation would still be a triangulation in the 1-sheeted covering space, returns false otherwise.
+constexpr const char* Periodic_3_triangulation_3_is_triangulation_in_1_sheet = "Returns true if the current triangulation would still be a triangulation in the 1-sheeted covering space, returns false otherwise.
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_convert_to_1_sheeted_covering = "Converts the current triangulation into the same periodic triangulation in the 1-sheeted covering space.
+constexpr const char* Periodic_3_triangulation_3_convert_to_1_sheeted_covering = "Converts the current triangulation into the same periodic triangulation in the 1-sheeted covering space.
 
 It is not recommended to interfere with the built-in covering management.
 Especially a premature conversion to the 1-sheeted covering space might lead
 to problems when modifying the triangulation later.";
-constexpr const char* CGAL_Periodic_3_triangulation_3_convert_to_27_sheeted_covering = "Converts the current triangulation into the same periodic triangulation in the 27-sheeted covering space.
+constexpr const char* Periodic_3_triangulation_3_convert_to_27_sheeted_covering = "Converts the current triangulation into the same periodic triangulation in the 27-sheeted covering space.
 
 It is not recommended to interfere with the built-in covering management.
 Especially a premature conversion to the 1-sheeted covering space might lead
 to problems when modifying the triangulation later.";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_vertices = "Returns the number of vertices.
+constexpr const char* Periodic_3_triangulation_3_number_of_vertices = "Returns the number of vertices.
 
 Counts all vertices that are representatives of the same point in $ \\mathbb
 T_c^3$ as one vertex.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_cells = "Returns the number of cells.
+constexpr const char* Periodic_3_triangulation_3_number_of_cells = "Returns the number of cells.
 
 Counts all cells that are representatives of the same tetrahedron in $ \\mathbb
 T_c^3$ as one cell.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_stored_vertices = "Returns the number of vertices in the data structure.
+constexpr const char* Periodic_3_triangulation_3_number_of_stored_vertices = "Returns the number of vertices in the data structure.
 
 This is the same as the number of sheets times number_of_vertices() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_stored_cells = "Returns the number of cells in the data structure.
+constexpr const char* Periodic_3_triangulation_3_number_of_stored_cells = "Returns the number of cells in the data structure.
 
 This is the same as the number of sheets times number_of_cells() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_edges = "Returns the number of edges.
+constexpr const char* Periodic_3_triangulation_3_number_of_edges = "Returns the number of edges.
 
 Counts all edges that are representatives of the same segment in $ \\mathbb
 T_c^3$ as one edge.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_facets = "Returns the number of facets.
+constexpr const char* Periodic_3_triangulation_3_number_of_facets = "Returns the number of facets.
 
 Counts all facets that are representatives of the same triangle in $ \\mathbb
 T_c^3$ as one facet.
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_stored_edges = "Returns the number of edges in the data structure.
+constexpr const char* Periodic_3_triangulation_3_number_of_stored_edges = "Returns the number of edges in the data structure.
 
 This is the same as the number of sheets times number_of_edges() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_number_of_stored_facets = "Returns the number of facets in the data structure.
+constexpr const char* Periodic_3_triangulation_3_number_of_stored_facets = "Returns the number of facets in the data structure.
 
 This is the same as the number of sheets times number_of_facets() .
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_point = "Converts the Periodic_point pp (point-offset pair) to the corresponding Point in $ \\mathbb R^3$ .
+constexpr const char* Periodic_3_triangulation_3_point = "Converts the Periodic_point pp (point-offset pair) to the corresponding Point in $ \\mathbb R^3$ .
 
 Parameters
 ----------
 pp : const Periodic_point &
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_3_triangulation_3_point_1 = "Equivalent to the call t.point(t.periodic_point(v)); .
+constexpr const char* Periodic_3_triangulation_3_point_1 = "Equivalent to the call t.point(t.periodic_point(v)); .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_3_triangulation_3_point_2 = "Equivalent to the call t.point(t.periodic_point(c,idx)); .
+constexpr const char* Periodic_3_triangulation_3_point_2 = "Equivalent to the call t.point(t.periodic_point(c,idx)); .
 
 Parameters
 ----------
@@ -891,7 +891,7 @@ c : Cell_handle
 idx : int
 
 Returns: Point";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_point = "Returns the periodic point given by vertex v .
+constexpr const char* Periodic_3_triangulation_3_periodic_point = "Returns the periodic point given by vertex v .
 
 If t is represented in the 1-sheeted covering space, the offset is always
 zero. Otherwise v can correspond to a periodic copy outside domain of an input
@@ -902,7 +902,7 @@ Parameters
 v : const Vertex_handle
 
 Returns: Periodic_point";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_point_1 = "If t is represented in the 1-sheeted covering space, this function returns the periodic point given by the $ i$ -th vertex of cell c , that is the point in the original domain and the offset of the vertex in c .
+constexpr const char* Periodic_3_triangulation_3_periodic_point_1 = "If t is represented in the 1-sheeted covering space, this function returns the periodic point given by the $ i$ -th vertex of cell c , that is the point in the original domain and the offset of the vertex in c .
 
 If t is represented in the 27-sheeted covering space, this offset is possibly
 added to another offset determining the periodic copy. $ i \\in\\{0,1,2,3\\}$
@@ -913,7 +913,7 @@ c : const Cell_handle
 i : int
 
 Returns: Periodic_point";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_segment = "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (c,i,j) .
+constexpr const char* Periodic_3_triangulation_3_periodic_segment = "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (c,i,j) .
 
 $ i,j \\in\\{0,1,2,3\\}$ , $ i\\neq j$
 
@@ -924,7 +924,7 @@ i : int
 j : int
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_segment_1 = "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (c,i,j) .
+constexpr const char* Periodic_3_triangulation_3_periodic_segment_1 = "Returns the periodic segment formed by the two point-offset pairs corresponding to the two vertices of edge (c,i,j) .
 
 A translation in accordance with offset is applied on the point-offet pairs. $
 i,j \\in\\{0,1,2,3\\}$ , $ i\\neq j$
@@ -937,14 +937,14 @@ i : int
 j : int
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_segment_2 = "Same as the previous method for edge e .
+constexpr const char* Periodic_3_triangulation_3_periodic_segment_2 = "Same as the previous method for edge e .
 
 Parameters
 ----------
 e : const Edge &
 
 Returns: Periodic_segment";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_triangle = "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet (c,i) .
+constexpr const char* Periodic_3_triangulation_3_periodic_triangle = "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet (c,i) .
 
 The triangle is oriented so that its normal points to the inside of cell c . $
 i \\in\\{0,1,2,3\\}$
@@ -955,7 +955,7 @@ c : const Cell_handle
 i : int
 
 Returns: Periodic_triangle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_triangle_1 = "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet (c,i) .
+constexpr const char* Periodic_3_triangulation_3_periodic_triangle_1 = "Returns the periodic triangle formed by the three point-offset pairs corresponding to the three vertices of facet (c,i) .
 
 A translation in accordance with offset is applied on the point-offet pairs.
 The triangle is oriented so that its normal points to the inside of cell c . $
@@ -968,21 +968,21 @@ offset : Offset
 i : int
 
 Returns: Periodic_triangle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_triangle_2 = "Same as the previous method for facet f .
+constexpr const char* Periodic_3_triangulation_3_periodic_triangle_2 = "Same as the previous method for facet f .
 
 Parameters
 ----------
 f : const Facet &
 
 Returns: Periodic_triangle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_tetrahedron = "Returns the periodic tetrahedron formed by the four point-offset pairs corresponding to the four vertices of c .
+constexpr const char* Periodic_3_triangulation_3_periodic_tetrahedron = "Returns the periodic tetrahedron formed by the four point-offset pairs corresponding to the four vertices of c .
 
 Parameters
 ----------
 c : const Cell_handle
 
 Returns: Periodic_tetrahedron";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_tetrahedron_1 = "Returns the periodic tetrahedron formed by the four point-offset pairs corresponding to the four vertices of c .
+constexpr const char* Periodic_3_triangulation_3_periodic_tetrahedron_1 = "Returns the periodic tetrahedron formed by the four point-offset pairs corresponding to the four vertices of c .
 
 A translation in accordance with offset is applied on the point-offet pairs.
 
@@ -992,7 +992,7 @@ c : const Cell_handle
 offset : Offset
 
 Returns: Periodic_tetrahedron";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_point = "Converts the periodic point of type PP to a Point_3 .
+constexpr const char* Periodic_3_triangulation_3_construct_point = "Converts the periodic point of type PP to a Point_3 .
 
 The type PP can be either Periodic_point or Periodic_point_3 .
 
@@ -1001,14 +1001,14 @@ Parameters
 pp : const PP &
 
 Returns: Point_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_point_1 = "Converts the Point p to a Point_3 .
+constexpr const char* Periodic_3_triangulation_3_construct_point_1 = "Converts the Point p to a Point_3 .
 
 Parameters
 ----------
 p : const Point &
 
 Returns: Point_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_point_2 = "Same as above, with offsets.
+constexpr const char* Periodic_3_triangulation_3_construct_point_2 = "Same as above, with offsets.
 
 Parameters
 ----------
@@ -1016,7 +1016,7 @@ p1 : const P &
 o1 : const Offset &
 
 Returns: Point_3";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_segment = "Converts the periodic segment of type PS to a Segment .
+constexpr const char* Periodic_3_triangulation_3_construct_segment = "Converts the periodic segment of type PS to a Segment .
 
 The type PS can be either Periodic_segment or Periodic_segment_3 .
 
@@ -1025,7 +1025,7 @@ Parameters
 s : const PS &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_segment_1 = "Creates a segment from two points.
+constexpr const char* Periodic_3_triangulation_3_construct_segment_1 = "Creates a segment from two points.
 
 The type P can be either Point or Point_3 .
 
@@ -1035,7 +1035,7 @@ p1 : const P &
 p2 : const P &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_segment_2 = "Same as above, with offsets.
+constexpr const char* Periodic_3_triangulation_3_construct_segment_2 = "Same as above, with offsets.
 
 Parameters
 ----------
@@ -1045,7 +1045,7 @@ o1 : const Offset &
 o2 : const Offset &
 
 Returns: Segment";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_triangle = "Converts the periodic triangle of type PT to a Triangle .
+constexpr const char* Periodic_3_triangulation_3_construct_triangle = "Converts the periodic triangle of type PT to a Triangle .
 
 The type PT can be either Periodic_triangle or Periodic_triangle_3 .
 
@@ -1054,7 +1054,7 @@ Parameters
 t : const PT &
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_triangle_1 = "Creates a triangle from three points.
+constexpr const char* Periodic_3_triangulation_3_construct_triangle_1 = "Creates a triangle from three points.
 
 The type P can be either Point or Point_3 .
 
@@ -1065,7 +1065,7 @@ p2 : const P &
 p3 : const P &
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_triangle_2 = "Same as above, with offsets.
+constexpr const char* Periodic_3_triangulation_3_construct_triangle_2 = "Same as above, with offsets.
 
 Parameters
 ----------
@@ -1077,7 +1077,7 @@ o2 : const Offset &
 o3 : const Offset &
 
 Returns: Triangle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_tetrahedron = "Converts the periodic tetrahedron of type PT to a Tetrahedron .
+constexpr const char* Periodic_3_triangulation_3_construct_tetrahedron = "Converts the periodic tetrahedron of type PT to a Tetrahedron .
 
 The type PT can be either Periodic_tetrahedron or Periodic_tetrahedron_3 .
 
@@ -1086,7 +1086,7 @@ Parameters
 t : const PT &
 
 Returns: Tetrahedron";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_tetrahedron_1 = "Creates a tetrahedron from four points.
+constexpr const char* Periodic_3_triangulation_3_construct_tetrahedron_1 = "Creates a tetrahedron from four points.
 
 The type P can be either Point or Point_3 .
 
@@ -1098,7 +1098,7 @@ p3 : const P &
 p4 : const P &
 
 Returns: Tetrahedron";
-constexpr const char* CGAL_Periodic_3_triangulation_3_construct_tetrahedron_2 = "Same as above, with offsets.
+constexpr const char* Periodic_3_triangulation_3_construct_tetrahedron_2 = "Same as above, with offsets.
 
 Parameters
 ----------
@@ -1112,7 +1112,7 @@ o3 : const Offset &
 o4 : const Offset &
 
 Returns: Tetrahedron";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_vertex = "Tests whether p is a vertex of t by locating p in the triangulation.
+constexpr const char* Periodic_3_triangulation_3_is_vertex = "Tests whether p is a vertex of t by locating p in the triangulation.
 
 If p is found, the associated vertex v is given. p lies in the original domain
 domain .
@@ -1123,14 +1123,14 @@ p : const Point &
 v : Vertex_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_vertex_1 = "Tests whether v is a vertex of t .
+constexpr const char* Periodic_3_triangulation_3_is_vertex_1 = "Tests whether v is a vertex of t .
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_edge = "Tests whether (u,v) is an edge of t .
+constexpr const char* Periodic_3_triangulation_3_is_edge = "Tests whether (u,v) is an edge of t .
 
 If the edge is found, it gives a cell c having this edge and the indices i and
 j of the vertices u and v in c , in this order. u and v are vertices of t .
@@ -1144,7 +1144,7 @@ i : int &
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_edge_1 = "Tests whether ((u,offu),(v,offu)) is an edge of t .
+constexpr const char* Periodic_3_triangulation_3_is_edge_1 = "Tests whether ((u,offu),(v,offu)) is an edge of t .
 
 If the edge is found, it gives a cell c having this edge and the indices i and
 j of the vertices u and v in c , in this order. u and v are vertices of t .
@@ -1160,7 +1160,7 @@ i : int &
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_facet = "Tests whether (u,v,w) is a facet of t .
+constexpr const char* Periodic_3_triangulation_3_is_facet = "Tests whether (u,v,w) is a facet of t .
 
 If the facet is found, it computes a cell c having this facet and the indices
 i , j and k of the vertices u , v and w in c , in this order. u , v and w are
@@ -1177,7 +1177,7 @@ j : int &
 k : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_facet_1 = "Tests whether ((u,offu),(v,offv),(w,offw)) is a facet of t .
+constexpr const char* Periodic_3_triangulation_3_is_facet_1 = "Tests whether ((u,offu),(v,offv),(w,offw)) is a facet of t .
 
 If the facet is found, it computes a cell c having this facet and the indices
 i , j and k of the vertices u , v and w in c , in this order. u , v and w are
@@ -1197,14 +1197,14 @@ j : int &
 k : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_cell = "Tests whether c is a cell of t .
+constexpr const char* Periodic_3_triangulation_3_is_cell = "Tests whether c is a cell of t .
 
 Parameters
 ----------
 c : Cell_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_cell_1 = "Tests whether (u,v,w,x) is a cell of t .
+constexpr const char* Periodic_3_triangulation_3_is_cell_1 = "Tests whether (u,v,w,x) is a cell of t .
 
 If the cell c is found, the method computes the indices i , j , k and l of the
 vertices u , v , w and x in c , in this order. u , v , w and x are vertices of
@@ -1223,7 +1223,7 @@ k : int &
 l : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_cell_2 = "Tests whether (u,v,w,x) is a cell of t and computes this cell c .
+constexpr const char* Periodic_3_triangulation_3_is_cell_2 = "Tests whether (u,v,w,x) is a cell of t and computes this cell c .
 
 u , v , w and x are vertices of t .
 
@@ -1236,7 +1236,7 @@ x : Vertex_handle
 c : Cell_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_cell_3 = "Tests whether ((u,offu),(v,offv),(w,offv),(x,offx)) is a cell of t .
+constexpr const char* Periodic_3_triangulation_3_is_cell_3 = "Tests whether ((u,offu),(v,offv),(w,offv),(x,offx)) is a cell of t .
 
 If the cell c is found, the method computes the indices i , j , k and l of the
 vertices u , v , w and x in c , in this order. u , v , w and x are vertices of
@@ -1259,7 +1259,7 @@ k : int &
 l : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_cell_4 = "Tests whether ((u,offu),(v,offv),(w,offv),(x,offx)) is a cell of t and computes this cell c .
+constexpr const char* Periodic_3_triangulation_3_is_cell_4 = "Tests whether ((u,offu),(v,offv),(w,offv),(x,offx)) is a cell of t and computes this cell c .
 
 u , v , w and x are vertices of t .
 
@@ -1276,7 +1276,7 @@ offx : const Offset &
 c : Cell_handle &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_has_vertex = "If v is a vertex of f , then j is the index of v in the cell f.first , and the method returns true .
+constexpr const char* Periodic_3_triangulation_3_has_vertex = "If v is a vertex of f , then j is the index of v in the cell f.first , and the method returns true .
 
 Parameters
 ----------
@@ -1285,7 +1285,7 @@ v : Vertex_handle
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_has_vertex_1 = "Same for facet (c,i) .
+constexpr const char* Periodic_3_triangulation_3_has_vertex_1 = "Same for facet (c,i) .
 
 Computes the index j of v in c .
 
@@ -1297,7 +1297,7 @@ v : Vertex_handle
 j : int &
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_has_vertex_2 = "Same as the first two methods, but these two methods do not return the index of the vertex.
+constexpr const char* Periodic_3_triangulation_3_has_vertex_2 = "Same as the first two methods, but these two methods do not return the index of the vertex.
 
 Parameters
 ----------
@@ -1306,7 +1306,7 @@ i : int
 v : Vertex_handle
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_locate = "Returns the cell that contains the query in its interior.
+constexpr const char* Periodic_3_triangulation_3_locate = "Returns the cell that contains the query in its interior.
 
 If query lies on a facet, an edge or on a vertex, one of the cells having
 query on its boundary is returned. The optional argument start is used as a
@@ -1318,7 +1318,7 @@ query : const Point &
 start : Cell_handle
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_locate_1 = "Returns the cell that contains the query in its interior.
+constexpr const char* Periodic_3_triangulation_3_locate_1 = "Returns the cell that contains the query in its interior.
 
 If query lies on a facet, an edge or on a vertex, one of the cells having
 query on its boundary is returned. locate_offset is the offset that must be
@@ -1334,7 +1334,7 @@ locate_offset : Offset &
 start : Cell_handle
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_inexact_locate = "Same as locate() but uses inexact predicates.
+constexpr const char* Periodic_3_triangulation_3_inexact_locate = "Same as locate() but uses inexact predicates.
 
 This function returns a handle on a cell that is a good approximation of the
 exact location of query , while being faster. Note that it may return a handle
@@ -1348,7 +1348,7 @@ query : const Point &
 start : Cell_handle
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_locate_2 = "The $ k$ -face that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX , EDGE , FACET , CELL ) and two indices li and lj that specify the $ k$ -face of the cell containing query .
+constexpr const char* Periodic_3_triangulation_3_locate_2 = "The $ k$ -face that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX , EDGE , FACET , CELL ) and two indices li and lj that specify the $ k$ -face of the cell containing query .
 
 If the $ k$ -face is a cell, li and lj have no meaning; if it is a facet
 (resp. vertex), li gives the index of the facet (resp. vertex) and lj has no
@@ -1366,7 +1366,7 @@ lj : int &
 start : Cell_handle
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_locate_3 = "The $ k$ -face that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX , EDGE , FACET , CELL ) and two indices li and lj that specify the $ k$ -face of the cell containing query .
+constexpr const char* Periodic_3_triangulation_3_locate_3 = "The $ k$ -face that contains query in its interior is returned, by means of the cell returned together with lt , which is set to the locate type of the query ( VERTEX , EDGE , FACET , CELL ) and two indices li and lj that specify the $ k$ -face of the cell containing query .
 
 If the $ k$ -face is a cell, li and lj have no meaning; if it is a facet
 (resp. vertex), li gives the index of the facet (resp. vertex) and lj has no
@@ -1388,7 +1388,7 @@ lj : int &
 start : Cell_handle
 
 Returns: Cell_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_side_of_cell = "Returns a value indicating on which side of the oriented boundary of c the point p lies.
+constexpr const char* Periodic_3_triangulation_3_side_of_cell = "Returns a value indicating on which side of the oriented boundary of c the point p lies.
 
 More precisely, it returns: ON_BOUNDED_SIDE if p is inside the cell.
 ON_BOUNDARY if p on the boundary of the cell. Then lt together with li and lj
@@ -1405,43 +1405,43 @@ li : int &
 lj : int &
 
 Returns: Bounded_side";
-constexpr const char* CGAL_Periodic_3_triangulation_3_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Periodic_3_triangulation_3_vertices_begin = "Starts at an arbitrary vertex.
 
 Iterates over all vertices. Returns vertices_end() if t . number_of_vertices()
 $ =0$ .
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_vertices_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_vertices_end = "Past-the-end iterator.
 
 Returns: Vertex_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_edges_begin = "Starts at an arbitrary edge.
+constexpr const char* Periodic_3_triangulation_3_edges_begin = "Starts at an arbitrary edge.
 
 Iterates over all edges. Returns edges_end() if t . number_of_vertices() $ =0$
 .
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_edges_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_edges_end = "Past-the-end iterator.
 
 Returns: Edge_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_facets_begin = "Starts at an arbitrary facet.
+constexpr const char* Periodic_3_triangulation_3_facets_begin = "Starts at an arbitrary facet.
 
 Iterates over all facets. Returns facets_end() if t . number_of_vertices() $
 =0$ .
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_facets_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_facets_end = "Past-the-end iterator.
 
 Returns: Facet_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_cells_begin = "Starts at an arbitrary cell.
+constexpr const char* Periodic_3_triangulation_3_cells_begin = "Starts at an arbitrary cell.
 
 Iterates over all cells. Returns cells_end() if t . number_of_vertices() $ =0$
 .
 
 Returns: Cell_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_cells_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_cells_end = "Past-the-end iterator.
 
 Returns: Cell_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_unique_vertices_begin = "Starts at an arbitrary vertex.
+constexpr const char* Periodic_3_triangulation_3_unique_vertices_begin = "Starts at an arbitrary vertex.
 
 Iterates over all vertices whose corresponding points lie in the original
 domain, i.e. for each set of periodic copies the Unique_vertex_iterator
@@ -1449,10 +1449,10 @@ iterates over exactly one representative. Returns unique_vertices_end() if t .
 number_of_vertices() $ =0$ .
 
 Returns: Unique_vertex_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_unique_vertices_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_unique_vertices_end = "Past-the-end iterator.
 
 Returns: Unique_vertex_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_points_begin = "Iterates over the points of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_periodic_points_begin = "Iterates over the points of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_3_triangulation_3::Iterator_type .
@@ -1462,7 +1462,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_point_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_points_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_periodic_points_end = "Past-the-end iterator.
 
 Note that to match another Periodic_point_iterator both must have the same
 Iterator_type it .
@@ -1472,7 +1472,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_point_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_segments_begin = "Iterates over the segments of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_periodic_segments_begin = "Iterates over the segments of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_3_triangulation_3::Iterator_type .
@@ -1482,7 +1482,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_segment_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_segments_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_periodic_segments_end = "Past-the-end iterator.
 
 Note that to match another Periodic_segment_iterator both must have the same
 Iterator_type it .
@@ -1492,7 +1492,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_segment_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_triangles_begin = "Iterates over the triangles of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_periodic_triangles_begin = "Iterates over the triangles of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_3_triangulation_3::Iterator_type .
@@ -1502,7 +1502,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_triangle_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_triangles_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_periodic_triangles_end = "Past-the-end iterator.
 
 Note that to match another Periodic_triangle_iterator both must have the same
 Iterator_type it .
@@ -1512,7 +1512,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_triangle_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_tetrahedra_begin = "Iterates over the tetrahedra of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_periodic_tetrahedra_begin = "Iterates over the tetrahedra of the triangulation.
 
 Its behavior is defined by the Iterator_type it as described on
 CGAL::Periodic_3_triangulation_3::Iterator_type .
@@ -1522,7 +1522,7 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_tetrahedron_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_periodic_tetrahedra_end = "Past-the-end iterator.
+constexpr const char* Periodic_3_triangulation_3_periodic_tetrahedra_end = "Past-the-end iterator.
 
 Note that to match another Periodic_tetrahedron_iterator both must have the
 same Iterator_type it .
@@ -1532,14 +1532,14 @@ Parameters
 it : Iterator_type
 
 Returns: Periodic_tetrahedron_iterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_cells = "Starts at an arbitrary cell incident to e .
+constexpr const char* Periodic_3_triangulation_3_incident_cells = "Starts at an arbitrary cell incident to e .
 
 Parameters
 ----------
 e : Edge
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_cells_1 = "As above for edge (i,j) of c .
+constexpr const char* Periodic_3_triangulation_3_incident_cells_1 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -1548,7 +1548,7 @@ i : int
 j : int
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_cells_2 = "Starts at cell start .
+constexpr const char* Periodic_3_triangulation_3_incident_cells_2 = "Starts at cell start .
 
 start is incident to e .
 
@@ -1558,7 +1558,7 @@ e : Edge
 start : Cell_handle
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_cells_3 = "As above for edge (i,j) of c .
+constexpr const char* Periodic_3_triangulation_3_incident_cells_3 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -1568,14 +1568,14 @@ j : int
 start : Cell_handle
 
 Returns: Cell_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets = "Starts at an arbitrary facet incident to e .
+constexpr const char* Periodic_3_triangulation_3_incident_facets = "Starts at an arbitrary facet incident to e .
 
 Parameters
 ----------
 e : Edge
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets_1 = "As above for edge (i,j) of c .
+constexpr const char* Periodic_3_triangulation_3_incident_facets_1 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -1584,7 +1584,7 @@ i : int
 j : int
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets_2 = "Starts at facet start .
+constexpr const char* Periodic_3_triangulation_3_incident_facets_2 = "Starts at facet start .
 
 start is incident to e .
 
@@ -1594,7 +1594,7 @@ e : Edge
 start : Facet
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets_3 = "Starts at facet of index f in start .
+constexpr const char* Periodic_3_triangulation_3_incident_facets_3 = "Starts at facet of index f in start .
 
 Parameters
 ----------
@@ -1603,7 +1603,7 @@ start : Cell_handle
 f : int
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets_4 = "As above for edge (i,j) of c .
+constexpr const char* Periodic_3_triangulation_3_incident_facets_4 = "As above for edge (i,j) of c .
 
 Parameters
 ----------
@@ -1613,7 +1613,7 @@ j : int
 start : Facet
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets_5 = "As above for edge (i,j) of c and facet (start,f) .
+constexpr const char* Periodic_3_triangulation_3_incident_facets_5 = "As above for edge (i,j) of c and facet (start,f) .
 
 Parameters
 ----------
@@ -1624,7 +1624,7 @@ start : Cell_handle
 f : int
 
 Returns: Facet_circulator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_cells_4 = "Copies the Cell_handle s of all cells incident to v to the output iterator cells .
+constexpr const char* Periodic_3_triangulation_3_incident_cells_4 = "Copies the Cell_handle s of all cells incident to v to the output iterator cells .
 
 Returns the resulting output iterator. v $ \\neq$ Vertex_handle() and is_vertex
 ( v )
@@ -1635,7 +1635,7 @@ v : Vertex_handle
 cells : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_facets_6 = "Copies the Facet s incident to v to the output iterator facets .
+constexpr const char* Periodic_3_triangulation_3_incident_facets_6 = "Copies the Facet s incident to v to the output iterator facets .
 
 Returns the resulting output iterator. v $ \\neq$ Vertex_handle() and is_vertex
 ( v )
@@ -1646,7 +1646,7 @@ v : Vertex_handle
 facets : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_incident_edges = "Copies the Edge s incident to v to the output iterator edges .
+constexpr const char* Periodic_3_triangulation_3_incident_edges = "Copies the Edge s incident to v to the output iterator edges .
 
 Returns the resulting output iterator. v $ \\neq$ Vertex_handle() and is_vertex
 ( v )
@@ -1657,7 +1657,7 @@ v : Vertex_handle
 edges : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_adjacent_vertices = "Copies the Vertex_handle s of all vertices adjacent to v to the output iterator vertices .
+constexpr const char* Periodic_3_triangulation_3_adjacent_vertices = "Copies the Vertex_handle s of all vertices adjacent to v to the output iterator vertices .
 
 Returns the resulting output iterator. v $ \\neq$ Vertex_handle() and is_vertex
 ( v )
@@ -1668,7 +1668,7 @@ v : Vertex_handle
 vertices : OutputIterator
 
 Returns: OutputIterator";
-constexpr const char* CGAL_Periodic_3_triangulation_3_degree = "Returns the degree of v , that is, the number of adjacent vertices.
+constexpr const char* Periodic_3_triangulation_3_degree = "Returns the degree of v , that is, the number of adjacent vertices.
 
 v $ \\neq$ Vertex_handle() and is_vertex ( v )
 
@@ -1677,7 +1677,7 @@ Parameters
 v : Vertex_handle
 
 Returns: size_type";
-constexpr const char* CGAL_Periodic_3_triangulation_3_mirror_index = "Returns the index of c in its $ i^{th}$ neighbor.
+constexpr const char* Periodic_3_triangulation_3_mirror_index = "Returns the index of c in its $ i^{th}$ neighbor.
 
 $ i \\in\\{0, 1, 2, 3\\}$ .
 
@@ -1687,7 +1687,7 @@ c : Cell_handle
 i : int
 
 Returns: int";
-constexpr const char* CGAL_Periodic_3_triangulation_3_mirror_vertex = "Returns the vertex of the $ i^{th}$ neighbor of c that is opposite to c .
+constexpr const char* Periodic_3_triangulation_3_mirror_vertex = "Returns the vertex of the $ i^{th}$ neighbor of c that is opposite to c .
 
 $ i \\in\\{0, 1, 2, 3\\}$ .
 
@@ -1697,14 +1697,14 @@ c : Cell_handle
 i : int
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_Periodic_3_triangulation_3_mirror_facet = "Returns the same facet viewed from the other adjacent cell.
+constexpr const char* Periodic_3_triangulation_3_mirror_facet = "Returns the same facet viewed from the other adjacent cell.
 
 Parameters
 ----------
 f : Facet
 
 Returns: Facet";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation.
+constexpr const char* Periodic_3_triangulation_3_is_valid = "Checks the combinatorial validity of the triangulation.
 
 Checks also the validity of its geometric embedding (see Section
 Representation ). When verbose is set to true, messages describing the first
@@ -1715,7 +1715,7 @@ Parameters
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_is_valid_1 = "Checks the combinatorial validity of the cell by calling the is_valid method of the Triangulation_data_structure cell class.
+constexpr const char* Periodic_3_triangulation_3_is_valid_1 = "Checks the combinatorial validity of the cell by calling the is_valid method of the Triangulation_data_structure cell class.
 
 Also checks the geometric validity of c , if c is finite. (See Section
 Representation .) When verbose is set to true , messages are printed to give a
@@ -1727,7 +1727,7 @@ c : Cell_handle
 verbose : bool
 
 Returns: bool";
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator_3 = "Reads a triangulation from is and stores it in t .
+constexpr const char* Periodic_3_triangulation_3_operator_3 = "Reads a triangulation from is and stores it in t .
 
 is has the below described format. The information in the iostream is: the
 original domain the number of sheets of the covering space as in
@@ -1744,7 +1744,7 @@ is : istream &
 t : Periodic_3_triangulation_3 &
 
 Returns: istream &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator_4 = "Writes the triangulation t into os .
+constexpr const char* Periodic_3_triangulation_3_operator_4 = "Writes the triangulation t into os .
 
 The information in the iostream is: the original domain the number of sheets
 of the covering space as in number_of_sheets() the number of vertices the
@@ -1762,16 +1762,16 @@ t : const Periodic_3_triangulation_3 &
 Returns: ostream &";
 
 // CGAL::Periodic_3_triangulation_ds_cell_base_3
-constexpr const char* CGAL_Periodic_3_triangulation_ds_cell_base_3__class__ = "The class Periodic_3_triangulation_ds_cell_base_3 is a model of the concept Periodic_3TriangulationDSCellBase_3 to be used by Triangulation_data_structure_3 to represent cells of a periodic triangulation.";
+constexpr const char* Periodic_3_triangulation_ds_cell_base_3__class__ = "The class Periodic_3_triangulation_ds_cell_base_3 is a model of the concept Periodic_3TriangulationDSCellBase_3 to be used by Triangulation_data_structure_3 to represent cells of a periodic triangulation.";
 
 // CGAL::Periodic_3_triangulation_ds_vertex_base_3
-constexpr const char* CGAL_Periodic_3_triangulation_ds_vertex_base_3__class__ = "The class Periodic_3_triangulation_ds_vertex_base_3 is a model of the concept Periodic_3TriangulationDSVertexBase_3 to be used by Triangulation_data_structure_3 to represent vertices of a periodic triangulation.";
+constexpr const char* Periodic_3_triangulation_ds_vertex_base_3__class__ = "The class Periodic_3_triangulation_ds_vertex_base_3 is a model of the concept Periodic_3TriangulationDSVertexBase_3 to be used by Triangulation_data_structure_3 to represent vertices of a periodic triangulation.";
 
 // CGAL::Periodic_3_triangulation_hierarchy_3
-constexpr const char* CGAL_Periodic_3_triangulation_hierarchy_3__class__ = "The class Periodic_3_triangulation_hierarchy_3 implements a triangulation augmented with a data structure which allows fast point location queries.";
+constexpr const char* Periodic_3_triangulation_hierarchy_3__class__ = "The class Periodic_3_triangulation_hierarchy_3 implements a triangulation augmented with a data structure which allows fast point location queries.";
 
 // CGAL::Periodic_3_triangulation_traits_3
-constexpr const char* CGAL_Periodic_3_triangulation_traits_3__class__ = "The class Periodic_3_triangulation_traits_3 is designed as a default traits class for the class Periodic_3_triangulation_3 < Periodic_3TriangulationTraits_3 ,TriangulationDataStructure_3> .";
+constexpr const char* Periodic_3_triangulation_traits_3__class__ = "The class Periodic_3_triangulation_traits_3 is designed as a default traits class for the class Periodic_3_triangulation_3 < Periodic_3TriangulationTraits_3 ,TriangulationDataStructure_3> .";
 
 // Periodic_3DelaunayTriangulationTraits_3
 constexpr const char* Periodic_3DelaunayTriangulationTraits_3__class__ = "The concept Periodic_3DelaunayTriangulationTraits_3 is the first template parameter of the class CGAL::Periodic_3_Delaunay_triangulation_3 . It refines the concepts Periodic_3TriangulationTraits_3 and DelaunayTriangulationTraits_3 . It redefines the geometric objects, predicates and constructions to work with point-offset pairs. In most cases the offsets will be (0,0,0) and the predicates from DelaunayTriangulationTraits_3 can be used directly. For efficiency reasons we maintain for each functor the version without offsets.";
@@ -2197,7 +2197,7 @@ constexpr const char* Periodic_3TriangulationTraits_3_get_domain = "Returns the 
 
 Returns: const Iso_cuboid_3 &";
 
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator_5 = "Reads a triangulation from is and stores it in t .
+constexpr const char* Periodic_3_triangulation_3_operator_5 = "Reads a triangulation from is and stores it in t .
 
 is has the below described format. The information in the iostream is: the
 original domain the number of sheets of the covering space as in
@@ -2214,7 +2214,7 @@ is : istream &
 t : Periodic_3_triangulation_3 &
 
 Returns: istream &";
-constexpr const char* CGAL_Periodic_3_triangulation_3_operator_6 = "Writes the triangulation t into os .
+constexpr const char* Periodic_3_triangulation_3_operator_6 = "Writes the triangulation t into os .
 
 The information in the iostream is: the original domain the number of sheets
 of the covering space as in number_of_sheets() the number of vertices the

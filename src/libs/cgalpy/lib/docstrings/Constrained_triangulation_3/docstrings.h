@@ -8,26 +8,26 @@ namespace docstrings {
 namespace Constrained_triangulation_3 {
 
 // CGAL::Conforming_constrained_Delaunay_triangulation_3
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3__class__ = "This class template represents a 3D conforming constrained Delaunay triangulation.";
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3__class__ = "This class template represents a 3D conforming constrained Delaunay triangulation.";
 
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_Conforming_constrained_Delaunay_triangulation_3 = "Default constructor.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_Conforming_constrained_Delaunay_triangulation_3 = "Default constructor.
 
 This constructor initializes an empty
 Conforming_constrained_Delaunay_triangulation_3 object.";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_Conforming_constrained_Delaunay_triangulation_3_1 = "creates a 3D constrained Delaunay triangulation conforming to the faces of a polygon mesh, following the same API and requirements as the function template make_conforming_constrained_Delaunay_triangulation_3() .
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_Conforming_constrained_Delaunay_triangulation_3_1 = "creates a 3D constrained Delaunay triangulation conforming to the faces of a polygon mesh, following the same API and requirements as the function template make_conforming_constrained_Delaunay_triangulation_3() .
 
 Parameters
 ----------
 mesh : const PolygonMesh &
 np : const NamedParameters &";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_Conforming_constrained_Delaunay_triangulation_3_2 = "creates a 3D constrained Delaunay triangulation conforming to the faces of a polygon soup, following the same API and requirements as the function template make_conforming_constrained_Delaunay_triangulation_3() .
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_Conforming_constrained_Delaunay_triangulation_3_2 = "creates a 3D constrained Delaunay triangulation conforming to the faces of a polygon soup, following the same API and requirements as the function template make_conforming_constrained_Delaunay_triangulation_3() .
 
 Parameters
 ----------
 points : const PointRange &
 polygons : const PolygonRange &
 np : const NamedParams &";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_triangulation = "returns a const reference to the underlying triangulation.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_triangulation = "returns a const reference to the underlying triangulation.
 
 This allows the use of all non-modifying functions of the base triangulation.
 See the other overload for a way to move the triangulation out of this object
@@ -35,7 +35,7 @@ and then modify it. Example usage: std::cout << \"Number of vertices in the
 CDT: \" << ccdt.triangulation().number_of_vertices() << '\\n' ;
 
 Returns: const Triangulation &";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_triangulation_1 = "moves and returns the underlying triangulation, then clears the object.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_triangulation_1 = "moves and returns the underlying triangulation, then clears the object.
 
 This function allows the underlying triangulation to be moved out of this
 object. Example usage: auto tr = std::move(ccdt).triangulation(); // Now `tr`
@@ -51,7 +51,7 @@ when the object is an rvalue. After this function is called, the object is in
 a state equivalent to that of a default-constructed object.
 
 Returns: Triangulation";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_is_facet_constrained = "returns whether a facet is constrained or not.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_is_facet_constrained = "returns whether a facet is constrained or not.
 
 f is a facet of the triangulation, of type Triangulation::Facet , as defined
 by its triangulation data structure.
@@ -61,7 +61,7 @@ Parameters
 f : const typename Triangulation::Facet &
 
 Returns: bool";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_is_facet_constrained_1 = "same as is_facet_constrained(f) with f being Triangulation::Facet(ch, index) .
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_is_facet_constrained_1 = "same as is_facet_constrained(f) with f being Triangulation::Facet(ch, index) .
 
 Parameters
 ----------
@@ -69,7 +69,7 @@ ch : typename Triangulation::Cell_handle
 index : int
 
 Returns: bool";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_face_constraint_index = "same as face_constraint_index(f) with f being Triangulation::Facet(ch, index) .
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_face_constraint_index = "same as face_constraint_index(f) with f being Triangulation::Facet(ch, index) .
 
 is_facet_constrained ( f )
 
@@ -79,7 +79,7 @@ ch : typename Triangulation::Cell_handle
 i : int
 
 Returns: CDT_3_signed_index";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_face_constraint_index_1 = "returns the index of the constraint that constrains the facet f
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_face_constraint_index_1 = "returns the index of the constraint that constrains the facet f
 
 is_facet_constrained ( f )
 
@@ -88,39 +88,39 @@ Parameters
 f : const typename Triangulation::Facet &
 
 Returns: CDT_3_signed_index";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_number_of_constrained_facets = "returns the number of constrained facets in the triangulation.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_number_of_constrained_facets = "returns the number of constrained facets in the triangulation.
 
 Returns: Triangulation::size_type";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_constrained_facets_begin = "returns an iterator to the start of the sequence of constrained facets.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_constrained_facets_begin = "returns an iterator to the start of the sequence of constrained facets.
 
 This function provides an iterator to the first facet that is constrained
 within the triangulation. The sequence of constrained facets is in an
 arbitrary order.
 
 Returns: Constrained_facets_iterator";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_constrained_facets_end = "returns the past-the-end iterator of the sequence of constrained facets.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_constrained_facets_end = "returns the past-the-end iterator of the sequence of constrained facets.
 
 Returns: Constrained_facets_iterator";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_constrained_facets = "returns a range of the constrained facets.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_constrained_facets = "returns a range of the constrained facets.
 
 Its iterator type is Constrained_facets_iterator
 
 Returns: Constrained_facets_range";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_Triangulation = "The internal triangulation type.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_Triangulation = "The internal triangulation type.
 
 Returns: typename CGAL::Default::Get< Tr, Triangulation_3< Traits, Triangulation_data_structure_3< Conforming_constrained_Delaunay_triangulation_vertex_base_3 < Traits >, Conforming_constrained_Delaunay_triangulation_cell_base_3 < Traits > > > >::type";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_Constrained_facets_iterator = "A bidirectional iterator for visiting all constrained facets of the triangulation.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_Constrained_facets_iterator = "A bidirectional iterator for visiting all constrained facets of the triangulation.
 
 The value type of this iterator is Triangulation::Facet .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_Constrained_facets_range = "defines a range type for iterating over the constrained facets.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_Constrained_facets_range = "defines a range type for iterating over the constrained facets.
 
 This type is used to iterate through all facets that are constrained. Its
 iterator type is Constrained_facets_iterator .
 
 Returns: CGAL::Iterator_range< Constrained_facets_iterator >";
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_3_debug = "Access debug options.
+constexpr const char* Conforming_constrained_Delaunay_triangulation_3_debug = "Access debug options.
 
 Returns a reference to the debug options object that controls various
 debugging and algorithmic behaviors. Use this to configure debug flags:
@@ -129,33 +129,33 @@ ccdt.debug().Steiner_points( true ); ccdt.debug().input_faces( true );
 Returns: CDT_3::Debug_options &";
 
 // CGAL::Conforming_constrained_Delaunay_triangulation_cell_base_3
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_cell_base_3__class__ = "Cell base class for the 3D conforming constrained Delaunay triangulation.";
+constexpr const char* Conforming_constrained_Delaunay_triangulation_cell_base_3__class__ = "Cell base class for the 3D conforming constrained Delaunay triangulation.";
 
 
 
 // CGAL::Conforming_constrained_Delaunay_triangulation_cell_data_3
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_cell_data_3__class__ = "Internal per-cell data for CGAL 3D conforming constrained Delaunay triangulations.";
+constexpr const char* Conforming_constrained_Delaunay_triangulation_cell_data_3__class__ = "Internal per-cell data for CGAL 3D conforming constrained Delaunay triangulations.";
 
 
 // CGAL::Conforming_constrained_Delaunay_triangulation_vertex_base_3
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_vertex_base_3__class__ = "Vertex base class for the 3D conforming constrained Delaunay triangulation.";
+constexpr const char* Conforming_constrained_Delaunay_triangulation_vertex_base_3__class__ = "Vertex base class for the 3D conforming constrained Delaunay triangulation.";
 
 
 
 // CGAL::Conforming_constrained_Delaunay_triangulation_vertex_data_3
-constexpr const char* CGAL_Conforming_constrained_Delaunay_triangulation_vertex_data_3__class__ = "Internal per-vertex data for CGAL 3D conforming constrained Delaunay triangulations.";
+constexpr const char* Conforming_constrained_Delaunay_triangulation_vertex_data_3__class__ = "Internal per-vertex data for CGAL 3D conforming constrained Delaunay triangulations.";
 
 // CGAL::Constrained_triangulation_insertion_exception
-constexpr const char* CGAL_Constrained_triangulation_insertion_exception__class__ = "Exception type thrown when a constrained Delaunay triangulation cannot be restored after the insertion of constraints.";
+constexpr const char* Constrained_triangulation_insertion_exception__class__ = "Exception type thrown when a constrained Delaunay triangulation cannot be restored after the insertion of constraints.";
 
-constexpr const char* CGAL_Constrained_triangulation_insertion_exception_Constrained_triangulation_insertion_exception = "Constructor.
+constexpr const char* Constrained_triangulation_insertion_exception_Constrained_triangulation_insertion_exception = "Constructor.
 
 failed_faces a vector of indices of the faces that could not be processed.
 
 Parameters
 ----------
 failed_faces : std::vector< CDT_3_signed_index >";
-constexpr const char* CGAL_Constrained_triangulation_insertion_exception_failed_faces = "Returns the vector of indices of the faces that could not be processed.
+constexpr const char* Constrained_triangulation_insertion_exception_failed_faces = "Returns the vector of indices of the faces that could not be processed.
 
 Returns: const std::vector< CDT_3_signed_index > &";
 

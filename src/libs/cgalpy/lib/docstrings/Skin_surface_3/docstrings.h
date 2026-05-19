@@ -8,16 +8,16 @@ namespace docstrings {
 namespace Skin_surface_3 {
 
 // CGAL::Skin_surface_3
-constexpr const char* CGAL_Skin_surface_3__class__ = "The Skin_surface_3 is the main class in this package.";
+constexpr const char* Skin_surface_3__class__ = "The Skin_surface_3 is the main class in this package.";
 
 // CGAL::Skin_surface_polyhedral_items_3
-constexpr const char* CGAL_Skin_surface_polyhedral_items_3__class__ = "An items class for the Polyhedron_3 that stores information in faces instead of an auxiliary data structure.";
+constexpr const char* Skin_surface_polyhedral_items_3__class__ = "An items class for the Polyhedron_3 that stores information in faces instead of an auxiliary data structure.";
 
 // CGAL::Skin_surface_traits_3
-constexpr const char* CGAL_Skin_surface_traits_3__class__ = "The class Skin_surface_traits_3 is designed as a default traits class for the class Skin_surface_3 < SkinSurfaceTraits_3 > .";
+constexpr const char* Skin_surface_traits_3__class__ = "The class Skin_surface_traits_3 is designed as a default traits class for the class Skin_surface_3 < SkinSurfaceTraits_3 > .";
 
 // CGAL::Union_of_balls_3
-constexpr const char* CGAL_Union_of_balls_3__class__ = "The Union_of_balls_3 is used to represent a skin surface with shrink factor equal to one, which is the boundary of the union of the input balls.";
+constexpr const char* Union_of_balls_3__class__ = "The Union_of_balls_3 is used to represent a skin surface with shrink factor equal to one, which is the boundary of the union of the input balls.";
 
 // SkinSurface_3
 constexpr const char* SkinSurface_3__class__ = "The concept SkinSurface_3 defines a skin surface and provides an interface for the dedicated skin surface mesher. The concept requires a constructor from an iterator range of weighted points and a shrink factor. By default the input balls are grown in such that the skin surface wraps around the input balls.";

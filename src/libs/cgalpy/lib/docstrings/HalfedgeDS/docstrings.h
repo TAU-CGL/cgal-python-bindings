@@ -8,14 +8,14 @@ namespace docstrings {
 namespace HalfedgeDS {
 
 // CGAL::HalfedgeDS_const_decorator
-constexpr const char* CGAL_HalfedgeDS_const_decorator__class__ = "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.";
+constexpr const char* HalfedgeDS_const_decorator__class__ = "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.";
 
-constexpr const char* CGAL_HalfedgeDS_const_decorator_HalfedgeDS_const_decorator = "keeps internally a const reference to hds .
+constexpr const char* HalfedgeDS_const_decorator_HalfedgeDS_const_decorator = "keeps internally a const reference to hds .
 
 Parameters
 ----------
 hds : const HDS &";
-constexpr const char* CGAL_HalfedgeDS_const_decorator_is_valid = "returns true if the halfedge data structure hds is valid with respect to the level value as defined above.
+constexpr const char* HalfedgeDS_const_decorator_is_valid = "returns true if the halfedge data structure hds is valid with respect to the level value as defined above.
 
 If verbose is true , statistics are written to cerr .
 
@@ -25,7 +25,7 @@ verbose : bool
 level : int
 
 Returns: bool";
-constexpr const char* CGAL_HalfedgeDS_const_decorator_normalized_border_is_valid = "returns true if the border halfedges are in normalized representation, which is when enumerating all halfedges with the halfedge iterator the following holds: The non-border edges precede the border edges.
+constexpr const char* HalfedgeDS_const_decorator_normalized_border_is_valid = "returns true if the border halfedges are in normalized representation, which is when enumerating all halfedges with the halfedge iterator the following holds: The non-border edges precede the border edges.
 
 For border edges, the second halfedge is a border halfedge. (The first
 halfedge may or may not be a border halfedge.) The halfedge iterator
@@ -39,14 +39,14 @@ verbose : bool
 Returns: bool";
 
 // CGAL::HalfedgeDS_decorator
-constexpr const char* CGAL_HalfedgeDS_decorator__class__ = "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.";
+constexpr const char* HalfedgeDS_decorator__class__ = "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.";
 
-constexpr const char* CGAL_HalfedgeDS_decorator_HalfedgeDS_decorator = "keeps internally a reference to hds .
+constexpr const char* HalfedgeDS_decorator_HalfedgeDS_decorator = "keeps internally a reference to hds .
 
 Parameters
 ----------
 hds : HDS &";
-constexpr const char* CGAL_HalfedgeDS_decorator_vertices_push_back = "appends a copy of v to hds if vertices are supported.
+constexpr const char* HalfedgeDS_decorator_vertices_push_back = "appends a copy of v to hds if vertices are supported.
 
 Returns a handle of the new vertex, or Vertex_handle() otherwise.
 
@@ -55,7 +55,7 @@ Parameters
 v : const Vertex &
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_faces_push_back = "appends a copy of f to hds if faces are supported.
+constexpr const char* HalfedgeDS_decorator_faces_push_back = "appends a copy of f to hds if faces are supported.
 
 Returns a handle of the new face, or Face_handle() otherwise.
 
@@ -64,24 +64,24 @@ Parameters
 f : const Face &
 
 Returns: Face_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_create_loop = "returns handle of a halfedge from a newly created loop in hds consisting of a single closed edge, one vertex and two faces (if supported respectively).
+constexpr const char* HalfedgeDS_decorator_create_loop = "returns handle of a halfedge from a newly created loop in hds consisting of a single closed edge, one vertex and two faces (if supported respectively).
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_create_segment = "returns a halfedge from a newly created segment in hds consisting of a single open edge, two vertices and one face (if supported respectively).
+constexpr const char* HalfedgeDS_decorator_create_segment = "returns a halfedge from a newly created segment in hds consisting of a single open edge, two vertices and one face (if supported respectively).
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_vertices_pop_front = "removes the first vertex if vertices are supported.
+constexpr const char* HalfedgeDS_decorator_vertices_pop_front = "removes the first vertex if vertices are supported.
 
 Supports_removal must be CGAL::Tag_true .";
-constexpr const char* CGAL_HalfedgeDS_decorator_vertices_pop_back = "removes the last vertex if vertices are supported.";
-constexpr const char* CGAL_HalfedgeDS_decorator_vertices_erase = "removes the vertex v if vertices are supported.
+constexpr const char* HalfedgeDS_decorator_vertices_pop_back = "removes the last vertex if vertices are supported.";
+constexpr const char* HalfedgeDS_decorator_vertices_erase = "removes the vertex v if vertices are supported.
 
 Supports_removal must be CGAL::Tag_true .
 
 Parameters
 ----------
 v : Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_vertices_erase_1 = "removes the range [first,last) if vertices are supported.
+constexpr const char* HalfedgeDS_decorator_vertices_erase_1 = "removes the range [first,last) if vertices are supported.
 
 Supports_removal must be CGAL::Tag_true .
 
@@ -89,18 +89,18 @@ Parameters
 ----------
 first : Vertex_handle
 last : Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_faces_pop_front = "removes the first face if faces are supported.
+constexpr const char* HalfedgeDS_decorator_faces_pop_front = "removes the first face if faces are supported.
 
 Supports_removal must be CGAL::Tag_true .";
-constexpr const char* CGAL_HalfedgeDS_decorator_faces_pop_back = "removes the last face if faces are supported.";
-constexpr const char* CGAL_HalfedgeDS_decorator_faces_erase = "removes the face f if faces are supported.
+constexpr const char* HalfedgeDS_decorator_faces_pop_back = "removes the last face if faces are supported.";
+constexpr const char* HalfedgeDS_decorator_faces_erase = "removes the face f if faces are supported.
 
 Supports_removal must be CGAL::Tag_true .
 
 Parameters
 ----------
 f : Face_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_faces_erase_1 = "removes the range [first,last) if faces are supported.
+constexpr const char* HalfedgeDS_decorator_faces_erase_1 = "removes the range [first,last) if faces are supported.
 
 Supports_removal must be CGAL::Tag_true .
 
@@ -108,7 +108,7 @@ Parameters
 ----------
 first : Face_handle
 last : Face_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_erase_face = "removes the face incident to h from hds and changes all halfedges incident to the face into border edges or removes them from the halfedge data structure if they were already border edges.
+constexpr const char* HalfedgeDS_decorator_erase_face = "removes the face incident to h from hds and changes all halfedges incident to the face into border edges or removes them from the halfedge data structure if they were already border edges.
 
 If this creates isolated vertices they get removed as well. See make_hole()
 for a more specialized variant. h->is_border() == false . If faces are
@@ -117,7 +117,7 @@ supported, Supports_removal must be CGAL::Tag_true .
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_erase_connected_component = "removes the vertices, halfedges, and faces that belong to the connected component of h .
+constexpr const char* HalfedgeDS_decorator_erase_connected_component = "removes the vertices, halfedges, and faces that belong to the connected component of h .
 
 For all halfedges g in the connected component g.next() != Halfedge_handle() .
 Supports_removal must be CGAL::Tag_true .
@@ -125,7 +125,7 @@ Supports_removal must be CGAL::Tag_true .
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_keep_largest_connected_components = "Erases the small connected components and the isolated vertices.
+constexpr const char* HalfedgeDS_decorator_keep_largest_connected_components = "Erases the small connected components and the isolated vertices.
 
 Keep nb_components_to_keep largest connected components. Returns the number of
 connected components erased (ignoring isolated vertices). Supports_removal
@@ -137,7 +137,7 @@ Parameters
 nb_components_to_keep : unsigned int
 
 Returns: unsigned int";
-constexpr const char* CGAL_HalfedgeDS_decorator_make_hole = "removes the face incident to h from hds and creates a hole.
+constexpr const char* HalfedgeDS_decorator_make_hole = "removes the face incident to h from hds and creates a hole.
 
 h != Halfedge_handle() and !(h->is_border()) . If faces are supported,
 Supports_removal must be CGAL::Tag_true .
@@ -145,7 +145,7 @@ Supports_removal must be CGAL::Tag_true .
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_fill_hole = "fills the hole incident to h with a new face from hds .
+constexpr const char* HalfedgeDS_decorator_fill_hole = "fills the hole incident to h with a new face from hds .
 
 Returns h . h != Halfedge_handle() and h->is_border() .
 
@@ -154,7 +154,7 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_fill_hole_1 = "fills the hole incident to h with a copy of face f .
+constexpr const char* HalfedgeDS_decorator_fill_hole_1 = "fills the hole incident to h with a copy of face f .
 
 Returns h . h != Halfedge_handle() and h->is_border() .
 
@@ -164,7 +164,7 @@ h : Halfedge_handle
 f : const Face &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_add_face_to_border = "extends the surface with a new face from hds into the hole incident to h and g .
+constexpr const char* HalfedgeDS_decorator_add_face_to_border = "extends the surface with a new face from hds into the hole incident to h and g .
 
 It creates a new edge connecting the vertex denoted by g with the vertex
 denoted by h and fills this separated part of the hole with a new face, such
@@ -179,7 +179,7 @@ h : Halfedge_handle
 g : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_add_face_to_border_1 = "extends the surface with a copy of face f into the hole incident to h and g .
+constexpr const char* HalfedgeDS_decorator_add_face_to_border_1 = "extends the surface with a copy of face f into the hole incident to h and g .
 
 It creates a new edge connecting the tip of g with the tip of h and fills this
 separated part of the hole with a copy of face f , such that the new face is
@@ -194,7 +194,7 @@ g : Halfedge_handle
 f : const Face &
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_split_face = "splits the face incident to h and g into two faces with a new diagonal between the two vertices denoted by h and g respectively.
+constexpr const char* HalfedgeDS_decorator_split_face = "splits the face incident to h and g into two faces with a new diagonal between the two vertices denoted by h and g respectively.
 
 The second (new) face obtained from hds is a copy of the first face. Returns
 h->next() after the operation, i.e., the new diagonal. The new face is to the
@@ -207,7 +207,7 @@ h : Halfedge_handle
 g : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_join_face = "joins the two faces incident to h .
+constexpr const char* HalfedgeDS_decorator_join_face = "joins the two faces incident to h .
 
 The face incident to h->opposite() gets removed from hds . Both faces might be
 holes. Returns the predecessor of h around the face. The invariant join_face(
@@ -220,7 +220,7 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_split_vertex = "splits the vertex incident to h and g into two vertices and connects them with a new edge.
+constexpr const char* HalfedgeDS_decorator_split_vertex = "splits the vertex incident to h and g into two vertices and connects them with a new edge.
 
 The second (new) vertex obtained from hds is a copy of the first vertex.
 Returns h->next()->opposite() after the operation, i.e., the new edge in the
@@ -233,7 +233,7 @@ h : Halfedge_handle
 g : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_join_vertex = "joins the two vertices incident to h .
+constexpr const char* HalfedgeDS_decorator_join_vertex = "joins the two vertices incident to h .
 
 The vertex denoted by h->opposite() gets removed by hds . Returns the
 predecessor of h around the vertex, i.e., h->opposite()->prev() . The
@@ -247,7 +247,7 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_create_center_vertex = "barycentric triangulation of h->face() .
+constexpr const char* HalfedgeDS_decorator_create_center_vertex = "barycentric triangulation of h->face() .
 
 Creates a new vertex, a copy of h->vertex() , and connects it to each vertex
 incident to h->face() splitting h->face() into triangles. h remains incident
@@ -261,7 +261,7 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_erase_center_vertex = "reverses create_center_vertex .
+constexpr const char* HalfedgeDS_decorator_erase_center_vertex = "reverses create_center_vertex .
 
 Erases the vertex pointed to by g and all incident halfedges thereby merging
 all incident faces. Only g->face() remains. The neighborhood of g->vertex()
@@ -280,7 +280,7 @@ Parameters
 g : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_split_loop = "cuts the halfedge data structure into two parts along the cycle (h,i,j) .
+constexpr const char* HalfedgeDS_decorator_split_loop = "cuts the halfedge data structure into two parts along the cycle (h,i,j) .
 
 Three new vertices (one copy for each vertex in the cycle) and three new
 halfedges (one copy for each halfedge in the cycle), and two new triangles are
@@ -297,7 +297,7 @@ i : Halfedge_handle
 j : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_join_loop = "glues the boundary of the two faces denoted by h and g together and returns h .
+constexpr const char* HalfedgeDS_decorator_join_loop = "glues the boundary of the two faces denoted by h and g together and returns h .
 
 Both faces and the vertices along the face denoted by g gets removed. Both
 faces may be holes. The invariant join_loop( h, split_loop( h, i, j)) returns
@@ -311,83 +311,83 @@ h : Halfedge_handle
 g : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_decorator_inside_out = "reverses face orientations.
+constexpr const char* HalfedgeDS_decorator_inside_out = "reverses face orientations.
 
 is_valid() of level three.";
 
 // CGAL::HalfedgeDS_default
-constexpr const char* CGAL_HalfedgeDS_default__class__ = "The class HalfedgeDS_default is a model for the HalfedgeDS concept.";
+constexpr const char* HalfedgeDS_default__class__ = "The class HalfedgeDS_default is a model for the HalfedgeDS concept.";
 
 
 // CGAL::HalfedgeDS_face_base
-constexpr const char* CGAL_HalfedgeDS_face_base__class__ = "The class HalfedgeDS_face_base is a model of the HalfedgeDSFace concept.";
+constexpr const char* HalfedgeDS_face_base__class__ = "The class HalfedgeDS_face_base is a model of the HalfedgeDSFace concept.";
 
-constexpr const char* CGAL_HalfedgeDS_face_base_Plane = "plane type for three argument version.
+constexpr const char* HalfedgeDS_face_base_Plane = "plane type for three argument version.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_HalfedgeDS_face_base_HalfedgeDS_face_base = "default constructor.";
-constexpr const char* CGAL_HalfedgeDS_face_base_HalfedgeDS_face_base_1 = "initialized with plane pln .
+constexpr const char* HalfedgeDS_face_base_HalfedgeDS_face_base = "default constructor.";
+constexpr const char* HalfedgeDS_face_base_HalfedgeDS_face_base_1 = "initialized with plane pln .
 
 Parameters
 ----------
 pln : const Plane &";
 
 // CGAL::HalfedgeDS_face_min_base
-constexpr const char* CGAL_HalfedgeDS_face_min_base__class__ = "The class HalfedgeDS_face_min_base is a model of the HalfedgeDSFace concept.";
+constexpr const char* HalfedgeDS_face_min_base__class__ = "The class HalfedgeDS_face_min_base is a model of the HalfedgeDSFace concept.";
 
-constexpr const char* CGAL_HalfedgeDS_face_min_base_HalfedgeDS_face_min_base = "default constructor.";
+constexpr const char* HalfedgeDS_face_min_base_HalfedgeDS_face_min_base = "default constructor.";
 
 // CGAL::HalfedgeDS_halfedge_base
-constexpr const char* CGAL_HalfedgeDS_halfedge_base__class__ = "The class HalfedgeDS_halfedge_base is a model of the HalfedgeDSHalfedge concept.";
+constexpr const char* HalfedgeDS_halfedge_base__class__ = "The class HalfedgeDS_halfedge_base is a model of the HalfedgeDSHalfedge concept.";
 
-constexpr const char* CGAL_HalfedgeDS_halfedge_base_HalfedgeDS_halfedge_base = "default constructor.";
+constexpr const char* HalfedgeDS_halfedge_base_HalfedgeDS_halfedge_base = "default constructor.";
 
 // CGAL::HalfedgeDS_halfedge_min_base
-constexpr const char* CGAL_HalfedgeDS_halfedge_min_base__class__ = "The class HalfedgeDS_halfedge_min_base is a model of the HalfedgeDSHalfedge concept.";
+constexpr const char* HalfedgeDS_halfedge_min_base__class__ = "The class HalfedgeDS_halfedge_min_base is a model of the HalfedgeDSHalfedge concept.";
 
-constexpr const char* CGAL_HalfedgeDS_halfedge_min_base_HalfedgeDS_halfedge_min_base = "default constructor.";
+constexpr const char* HalfedgeDS_halfedge_min_base_HalfedgeDS_halfedge_min_base = "default constructor.";
 
 // CGAL::HalfedgeDS_items_2
-constexpr const char* CGAL_HalfedgeDS_items_2__class__ = "The class HalfedgeDS_items_2 is a model of the HalfedgeDSItems concept.";
+constexpr const char* HalfedgeDS_items_2__class__ = "The class HalfedgeDS_items_2 is a model of the HalfedgeDSItems concept.";
 
 // CGAL::HalfedgeDS_items_decorator
-constexpr const char* CGAL_HalfedgeDS_items_decorator__class__ = "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.";
+constexpr const char* HalfedgeDS_items_decorator__class__ = "The class CGAL::HalfedgeDS_items_decorator <HDS> provides additional functions for vertices, halfedges, and faces of a halfedge data structure without knowing the containing halfedge data structure.";
 
-constexpr const char* CGAL_HalfedgeDS_items_decorator_HalfedgeDS = "halfedge data structure.
-
-Returns: unspecified_type";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_Vertex = "vertex type of HalfedgeDS .
+constexpr const char* HalfedgeDS_items_decorator_HalfedgeDS = "halfedge data structure.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_Halfedge = "halfedge type of HalfedgeDS .
+constexpr const char* HalfedgeDS_items_decorator_Vertex = "vertex type of HalfedgeDS .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_Face = "face type of HalfedgeDS .
+constexpr const char* HalfedgeDS_items_decorator_Halfedge = "halfedge type of HalfedgeDS .
 
 Returns: unspecified_type";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_HalfedgeDS_items_decorator = "default constructor.";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_get_vertex_halfedge = "returns the incident halfedge of v if supported, Halfedge_handle() otherwise.
+constexpr const char* HalfedgeDS_items_decorator_Face = "face type of HalfedgeDS .
+
+Returns: unspecified_type";
+constexpr const char* HalfedgeDS_items_decorator_HalfedgeDS_items_decorator = "default constructor.";
+constexpr const char* HalfedgeDS_items_decorator_get_vertex_halfedge = "returns the incident halfedge of v if supported, Halfedge_handle() otherwise.
 
 Parameters
 ----------
 v : Vertex_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_get_vertex = "returns the incident vertex of h if supported, Vertex_handle() otherwise.
+constexpr const char* HalfedgeDS_items_decorator_get_vertex = "returns the incident vertex of h if supported, Vertex_handle() otherwise.
 
 Parameters
 ----------
 h : Halfedge_handle
 
 Returns: Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_get_prev = "returns the previous halfedge of h if supported, Halfedge_handle() otherwise.
+constexpr const char* HalfedgeDS_items_decorator_get_prev = "returns the previous halfedge of h if supported, Halfedge_handle() otherwise.
 
 Parameters
 ----------
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_find_prev = "returns the previous halfedge of h .
+constexpr const char* HalfedgeDS_items_decorator_find_prev = "returns the previous halfedge of h .
 
 Uses the prev() method if supported or performs a search around the face using
 next() .
@@ -397,7 +397,7 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_find_prev_around_vertex = "returns the previous halfedge of h .
+constexpr const char* HalfedgeDS_items_decorator_find_prev_around_vertex = "returns the previous halfedge of h .
 
 Uses the prev() method if supported or performs a search around the vertex
 using next() .
@@ -407,32 +407,32 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_get_face = "returns the incident face of h if supported, Face_handle() otherwise.
+constexpr const char* HalfedgeDS_items_decorator_get_face = "returns the incident face of h if supported, Face_handle() otherwise.
 
 Parameters
 ----------
 h : Halfedge_handle
 
 Returns: Face_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_get_face_halfedge = "returns the incident halfedge of f if supported, Halfedge_handle() otherwise.
+constexpr const char* HalfedgeDS_items_decorator_get_face_halfedge = "returns the incident halfedge of f if supported, Halfedge_handle() otherwise.
 
 Parameters
 ----------
 f : Face_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_close_tip = "makes h->opposite() the successor of h .
+constexpr const char* HalfedgeDS_items_decorator_close_tip = "makes h->opposite() the successor of h .
 
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_close_tip_1 = "makes h->opposite() the successor of h and sets the incident vertex of h to v .
+constexpr const char* HalfedgeDS_items_decorator_close_tip_1 = "makes h->opposite() the successor of h and sets the incident vertex of h to v .
 
 Parameters
 ----------
 h : Halfedge_handle
 v : Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_insert_tip = "inserts the tip of the edge h into the halfedges around the vertex pointed to by v .
+constexpr const char* HalfedgeDS_items_decorator_insert_tip = "inserts the tip of the edge h into the halfedges around the vertex pointed to by v .
 
 Halfedge h->opposite() is the new successor of v and h->next() will be set to
 v->next() . The vertex of h will be set to the vertex v refers to if vertices
@@ -442,14 +442,14 @@ Parameters
 ----------
 h : Halfedge_handle
 v : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_remove_tip = "removes the edge h->next()->opposite() from the halfedge circle around the vertex referred to by h .
+constexpr const char* HalfedgeDS_items_decorator_remove_tip = "removes the edge h->next()->opposite() from the halfedge circle around the vertex referred to by h .
 
 The new successor halfedge of h will be h->next()->opposite()->next() .
 
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_insert_halfedge = "inserts the halfedge h between f and f->next() .
+constexpr const char* HalfedgeDS_items_decorator_insert_halfedge = "inserts the halfedge h between f and f->next() .
 
 The face of h will be the one f refers to if faces are supported.
 
@@ -457,14 +457,14 @@ Parameters
 ----------
 h : Halfedge_handle
 f : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_remove_halfedge = "removes edge h->next() from the halfedge circle around the face referred to by h .
+constexpr const char* HalfedgeDS_items_decorator_remove_halfedge = "removes edge h->next() from the halfedge circle around the face referred to by h .
 
 The new successor of h will be h->next()->next() .
 
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_vertex_in_vertex_loop = "loops around the vertex incident to h and sets all vertex pointers to v .
+constexpr const char* HalfedgeDS_items_decorator_set_vertex_in_vertex_loop = "loops around the vertex incident to h and sets all vertex pointers to v .
 
 h != Halfedge_handle() .
 
@@ -472,7 +472,7 @@ Parameters
 ----------
 h : Halfedge_handle
 v : Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_face_in_face_loop = "loops around the face incident to h and sets all face pointers to f .
+constexpr const char* HalfedgeDS_items_decorator_set_face_in_face_loop = "loops around the face incident to h and sets all face pointers to f .
 
 h != Halfedge_handle() .
 
@@ -480,7 +480,7 @@ Parameters
 ----------
 h : Halfedge_handle
 f : Face_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_flip_edge = "performs an edge flip.
+constexpr const char* HalfedgeDS_items_decorator_flip_edge = "performs an edge flip.
 
 It returns h after rotating the edge h one vertex in the direction of the face
 orientation. h != Halfedge_handle() and both incident faces of h are
@@ -491,51 +491,51 @@ Parameters
 h : Halfedge_handle
 
 Returns: Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_vertex_halfedge = "sets the incident halfedge of v to g .
+constexpr const char* HalfedgeDS_items_decorator_set_vertex_halfedge = "sets the incident halfedge of v to g .
 
 Parameters
 ----------
 v : Vertex_handle
 g : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_vertex_halfedge_1 = "sets the incident halfedge of the vertex v to h .
+constexpr const char* HalfedgeDS_items_decorator_set_vertex_halfedge_1 = "sets the incident halfedge of the vertex v to h .
 
 Parameters
 ----------
 h : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_vertex = "sets the incident vertex of h to v .
+constexpr const char* HalfedgeDS_items_decorator_set_vertex = "sets the incident vertex of h to v .
 
 Parameters
 ----------
 h : Halfedge_handle
 v : Vertex_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_prev = "sets the previous link of h to g .
+constexpr const char* HalfedgeDS_items_decorator_set_prev = "sets the previous link of h to g .
 
 Parameters
 ----------
 h : Halfedge_handle
 g : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_face = "sets the incident face of h to f .
+constexpr const char* HalfedgeDS_items_decorator_set_face = "sets the incident face of h to f .
 
 Parameters
 ----------
 h : Halfedge_handle
 f : Face_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_face_halfedge = "sets the incident halfedge of f to g .
+constexpr const char* HalfedgeDS_items_decorator_set_face_halfedge = "sets the incident halfedge of f to g .
 
 Parameters
 ----------
 f : Face_handle
 g : Halfedge_handle";
-constexpr const char* CGAL_HalfedgeDS_items_decorator_set_face_halfedge_1 = "sets the incident halfedge of the face f to h .
+constexpr const char* HalfedgeDS_items_decorator_set_face_halfedge_1 = "sets the incident halfedge of the face f to h .
 
 Parameters
 ----------
 h : Halfedge_handle";
 
 // CGAL::HalfedgeDS_list
-constexpr const char* CGAL_HalfedgeDS_list__class__ = "The class HalfedgeDS_list is a model for the HalfedgeDS concept.";
+constexpr const char* HalfedgeDS_list__class__ = "The class HalfedgeDS_list is a model for the HalfedgeDS concept.";
 
-constexpr const char* CGAL_HalfedgeDS_list_vertices_splice = "inserts elements in the range [ first, last ) before position target and removes the elements from source .
+constexpr const char* HalfedgeDS_list_vertices_splice = "inserts elements in the range [ first, last ) before position target and removes the elements from source .
 
 It takes constant time if &source == &``hds ; otherwise, it takes linear time
 in the size of the range. [ first, last ) is a valid range in source . target
@@ -547,7 +547,7 @@ target : Vertex_iterator
 source : Self &
 first : Vertex_iterator
 last : Vertex_iterator";
-constexpr const char* CGAL_HalfedgeDS_list_halfedges_splice = "inserts elements in the range [ first, last ) before position target and removes the elements from source .
+constexpr const char* HalfedgeDS_list_halfedges_splice = "inserts elements in the range [ first, last ) before position target and removes the elements from source .
 
 It takes constant time if &source == &``hds ; otherwise, it takes linear time
 in the size of the range. [ first, last ) is a valid range in source . target
@@ -559,7 +559,7 @@ target : Halfedge_iterator
 source : Self &
 first : Halfedge_iterator
 last : Halfedge_iterator";
-constexpr const char* CGAL_HalfedgeDS_list_faces_splice = "inserts elements in the range [ first, last ) before position target and removes the elements from source .
+constexpr const char* HalfedgeDS_list_faces_splice = "inserts elements in the range [ first, last ) before position target and removes the elements from source .
 
 It takes constant time if &source == &``hds ; otherwise, it takes linear time
 in the size of the range. [ first, last ) is a valid range in source . target
@@ -573,29 +573,29 @@ first : Face_iterator
 last : Face_iterator";
 
 // CGAL::HalfedgeDS_min_items
-constexpr const char* CGAL_HalfedgeDS_min_items__class__ = "The class HalfedgeDS_min_items is a model of the HalfedgeDSItems concept.";
+constexpr const char* HalfedgeDS_min_items__class__ = "The class HalfedgeDS_min_items is a model of the HalfedgeDSItems concept.";
 
 // CGAL::HalfedgeDS_vector
-constexpr const char* CGAL_HalfedgeDS_vector__class__ = "The class HalfedgeDS_vector is a model for the HalfedgeDS concept.";
+constexpr const char* HalfedgeDS_vector__class__ = "The class HalfedgeDS_vector is a model for the HalfedgeDS concept.";
 
 
 // CGAL::HalfedgeDS_vertex_base
-constexpr const char* CGAL_HalfedgeDS_vertex_base__class__ = "The class HalfedgeDS_vertex_base is a model of the HalfedgeDSVertex concept.";
+constexpr const char* HalfedgeDS_vertex_base__class__ = "The class HalfedgeDS_vertex_base is a model of the HalfedgeDSVertex concept.";
 
-constexpr const char* CGAL_HalfedgeDS_vertex_base_Point = "point type for three argument version.
+constexpr const char* HalfedgeDS_vertex_base_Point = "point type for three argument version.
 
 Returns: unspecified_type";
-constexpr const char* CGAL_HalfedgeDS_vertex_base_HalfedgeDS_vertex_base = "default constructor.";
-constexpr const char* CGAL_HalfedgeDS_vertex_base_HalfedgeDS_vertex_base_1 = "initialized with point p .
+constexpr const char* HalfedgeDS_vertex_base_HalfedgeDS_vertex_base = "default constructor.";
+constexpr const char* HalfedgeDS_vertex_base_HalfedgeDS_vertex_base_1 = "initialized with point p .
 
 Parameters
 ----------
 p : const Point &";
 
 // CGAL::HalfedgeDS_vertex_min_base
-constexpr const char* CGAL_HalfedgeDS_vertex_min_base__class__ = "The class HalfedgeDS_vertex_min_base is a model of the HalfedgeDSVertex concept.";
+constexpr const char* HalfedgeDS_vertex_min_base__class__ = "The class HalfedgeDS_vertex_min_base is a model of the HalfedgeDSVertex concept.";
 
-constexpr const char* CGAL_HalfedgeDS_vertex_min_base_HalfedgeDS_vertex_min_base = "default constructor.";
+constexpr const char* HalfedgeDS_vertex_min_base_HalfedgeDS_vertex_min_base = "default constructor.";
 
 // HalfedgeDS
 constexpr const char* HalfedgeDS__class__ = "The concept of a halfedge data structure (abbreviated as HalfedgeDS , or HDS for template parameters) defines an edge-centered data structure capable of maintaining incidence information of vertices, edges, and faces, for example for planar maps or polyhedral surfaces. It is a combinatorial data structure, geometric interpretation is added by classes built on top of the halfedge data structure.";
