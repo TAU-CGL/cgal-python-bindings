@@ -10,8 +10,10 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Triangulation_2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace doc = cgalpy::docstrings;
 
 namespace tri2 {
 
@@ -26,8 +28,10 @@ void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_c
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Face>(tri_c, "Face")
-    .def("is_valid", &Face::is_valid)
+  py::class_<Face>(tri_c, "Face",
+                   doc::Triangulation_2::Triangulation_2_Face)
+    .def("is_valid", &Face::is_valid,
+         doc::Triangulation_2::Triangulation_2_is_valid)
     .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
     .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
 

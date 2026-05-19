@@ -39,6 +39,10 @@ def make_identifier(name):
     return s.strip('_')
 
 
+def strip_cgal_namespace(name):
+    return name.replace("CGAL::", "")
+
+
 def collect_entries(data):
     """Return list of (ident, docstring) pairs from JSON data."""
     entries = []

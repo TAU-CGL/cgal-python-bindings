@@ -439,10 +439,14 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Sotm = CGAL::Side_of_triangle_mesh<Pm, Kernel>;
   using Sotm_op = CGAL::Bounded_side(Sotm::*)(const Point_3&)const;
   if (! add_attr<Sotm>(m, "Side_of_triangle_mesh")) {
-    py::class_<Sotm>(m, "Side_of_triangle_mesh")
-      .def(py::init<const Pm&>(), py::arg("tm"))
-      .def(py::init<const Pm&, const Kernel&>(), py::arg("tm"), py::arg("traits"))
-      .def("__call__", static_cast<Sotm_op>(&Sotm::operator()), py::arg("query"))
+    py::class_<Sotm>(m, "Side_of_triangle_mesh",
+                     doc::CGAL_Side_of_triangle_mesh__class__)
+      .def(py::init<const Pm&>(), py::arg("tm"),
+           doc::CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh)
+      .def(py::init<const Pm&, const Kernel&>(), py::arg("tm"), py::arg("traits"),
+           doc::CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh_1)
+      .def("__call__", static_cast<Sotm_op>(&Sotm::operator()), py::arg("query"),
+           doc::CGAL_Side_of_triangle_mesh_operator)
       ;
   }
 #endif
@@ -502,7 +506,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   // m.def("set_register_split_vertex", &pmp::set_register_split_vertex);
 
   using Pe = pmp::Polyhedral_envelope<Pm, Kernel>;
-  py::class_<Pe>(m, "Polyhedral_envelope")
+  py::class_<Pe>(m, "Polyhedral_envelope", doc::CGAL_Polyhedral_envelope__class__)
     .def(py::init<Pm&, double, const py::dict&>(),
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict(),
          doc::Polyhedral_envelope_Polyhedral_envelope_1)

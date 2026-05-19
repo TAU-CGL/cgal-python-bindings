@@ -41,6 +41,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "docstrings/Polyhedron/docstrings.h"
 
 extern void export_polyhedron_traits_with_normals_3(py::module_& m);
 extern void export_polyhedron_halfedge_ds(py::module_& m);
@@ -51,6 +52,7 @@ extern void export_pol3_halfedge(py::class_<pol3::Polyhedron_3>& prn_c);
 extern void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c);
 
 namespace py = nanobind;
+namespace doc = cgalpy::docstrings::Polyhedron;
 
 namespace pol3 {
 
@@ -428,17 +430,17 @@ void export_polyhedron_3(py::module_& m) {
   // define_generate_functions<py::module_, Prn, Kernel>(m); // doesn't work for polyhedron
 
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
-    py::class_<Prn> prn_c(m, "Polyhedron_3");
-    prn_c.def(py::init<>())
+    py::class_<Prn> prn_c(m, "Polyhedron_3", doc::Polyhedron_3__class__);
+    prn_c.def(py::init<>(), doc::Polyhedron_3_Polyhedron_3)
       .def(py::init<const Prn&>(), py::arg("other"))
       .def(py::init<const pol3::Traits&>(), py::arg("traits"))
       .def("add_facet_to_border", &Prn::add_facet_to_border)
       .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border)
-      .def("bytes", &Prn::bytes)
-      .def("bytes_reserved", &Prn::bytes_reserved)
-      .def("capacity_of_facets", &Prn::capacity_of_facets)
-      .def("capacity_of_halfedges", &Prn::capacity_of_halfedges)
-      .def("capacity_of_vertices", &Prn::capacity_of_vertices)
+      .def("bytes", &Prn::bytes, doc::Polyhedron_3_bytes)
+      .def("bytes_reserved", &Prn::bytes_reserved, doc::Polyhedron_3_bytes_reserved)
+      .def("capacity_of_facets", &Prn::capacity_of_facets, doc::Polyhedron_3_capacity_of_facets)
+      .def("capacity_of_halfedges", &Prn::capacity_of_halfedges, doc::Polyhedron_3_capacity_of_halfedges)
+      .def("capacity_of_vertices", &Prn::capacity_of_vertices, doc::Polyhedron_3_capacity_of_vertices)
       .def("clear", &Prn::clear)
       .def("create_center_vertex", &Prn::create_center_vertex)
       .def("erase_all", &Prn::erase_all)
@@ -449,7 +451,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("flip_edge", &Prn::flip_edge)
       .def("inside_out", &Prn::inside_out)
       .def("is_closed", &Prn::is_closed)
-      .def("is_empty", &Prn::is_empty)
+      .def("is_empty", &Prn::is_empty, doc::Polyhedron_3_empty)
       .def("is_tetrahedron", &pol3::is_tetrahedron, py::arg("halfedge"))
       .def("is_triangle", &Prn::is_triangle)
       .def("is_valid", &Prn::is_valid)
@@ -459,21 +461,25 @@ void export_polyhedron_3(py::module_& m) {
       .def("keep_largest_connected_components", &Prn::keep_largest_connected_components)
       .def("make_hole", &Prn::make_hole)
       .def("make_tetrahedron", &pol3::make_tetrahedron1, ri,
-            py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"))
-      .def("make_tetrahedron", &pol3::make_tetrahedron2, ri)
+            py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"),
+            doc::Polyhedron_3_make_tetrahedron_1)
+      .def("make_tetrahedron", &pol3::make_tetrahedron2, ri,
+            doc::Polyhedron_3_make_tetrahedron)
       .def("normalize_border", &Prn::normalize_border)
       .def("normalized_border_is_valid", &Prn::normalized_border_is_valid)
       .def("size_of_border_edges", &Prn::size_of_border_edges)
       .def("size_of_border_halfedges", &Prn::size_of_border_halfedges)
-      .def("size_of_facets", &Prn::size_of_facets)
-      .def("size_of_halfedges", &Prn::size_of_halfedges)
-      .def("size_of_vertices", &Prn::size_of_vertices)
+      .def("size_of_facets", &Prn::size_of_facets, doc::Polyhedron_3_size_of_facets)
+      .def("size_of_halfedges", &Prn::size_of_halfedges, doc::Polyhedron_3_size_of_halfedges)
+      .def("size_of_vertices", &Prn::size_of_vertices, doc::Polyhedron_3_size_of_vertices)
       .def("split_facet", &Prn::split_facet)
       .def("split_loop", &Prn::split_loop)
       .def("split_vertex", &Prn::split_vertex)
-      .def("make_triangle", &pol3::make_triangle_empty)
+      .def("make_triangle", &pol3::make_triangle_empty,
+            doc::Polyhedron_3_make_triangle)
       .def("make_triangle", &pol3::make_triangle,
-            py::arg("p1"), py::arg("p2"), py::arg("p3"))
+            py::arg("p1"), py::arg("p2"), py::arg("p3"),
+            doc::Polyhedron_3_make_triangle_1)
       .def("delegate", &Prn::delegate)
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_))
       .def("is_pure_bivalent", py::overload_cast<>(&Prn::is_pure_bivalent, py::const_))
@@ -497,10 +503,13 @@ void export_polyhedron_3(py::module_& m) {
 
     prn_c.def("vertices", &pol3::polyhedron_vertices, py::keep_alive<0, 1>())
       .def("halfedges", &pol3::polyhedron_halfedges, py::keep_alive<0, 1>())
-      .def("edges", &pol3::polyhedron_edges, py::keep_alive<0, 1>())
+      .def("edges", &pol3::polyhedron_edges, py::keep_alive<0, 1>(),
+            doc::Polyhedron_3_edges)
       .def("faces", &pol3::polyhedron_faces, py::keep_alive<0, 1>())
-      .def("points", &pol3::polyhedron_points, py::keep_alive<0, 1>())
-      .def("planes", &pol3::polyhedron_planes, py::keep_alive<0, 1>())
+      .def("points", &pol3::polyhedron_points, py::keep_alive<0, 1>(),
+            doc::Polyhedron_3_points)
+      .def("planes", &pol3::polyhedron_planes, py::keep_alive<0, 1>(),
+            doc::Polyhedron_3_planes)
       ;
 
     export_pol3_vertex(prn_c);

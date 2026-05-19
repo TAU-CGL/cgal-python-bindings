@@ -20,8 +20,11 @@
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 #include "CGALPY/types.hpp"
+#include "cgalpy/Triangulation_2_docstrings.hpp"
 
 namespace py = nanobind;
+
+namespace doc = cgalpy::docstrings;
 
 namespace tri2 {
 
@@ -75,10 +78,14 @@ void export_triangulation_2(py::module_& m) {
 
   using Tricc = CGAL::Triangulation_cw_ccw_2;
   if (! add_attr<Tricc>(m, "Triangulation_cw_ccw_2")) {
-    py::class_<Tricc>(m, "Triangulation_cw_ccw_2")
-      .def(py::init<Tricc&>(), py::arg("other"))
-      .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); })
-      .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); })
+    py::class_<Tricc>(m, "Triangulation_cw_ccw_2",
+                      doc::Triangulation_2::Triangulation_cw_ccw_2__class__)
+      .def(py::init<Tricc&>(), py::arg("other"),
+           doc::Triangulation_2::Triangulation_cw_ccw_2_Triangulation_cw_ccw_2)
+      .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); },
+                          doc::Triangulation_2::Triangulation_cw_ccw_2_ccw)
+      .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); },
+                          doc::Triangulation_2::Triangulation_cw_ccw_2_cw)
       ;
   }
 
@@ -89,7 +96,8 @@ void export_triangulation_2(py::module_& m) {
 
   tds_c.def(py::init<>())
     .def(py::init<Tds&>(), py::arg("other"))
-    .def("clear", &Tds::clear, "Delete all faces and all finite vertices\n")
+    .def("clear", &Tds::clear,
+         doc::Triangulation_2::Triangulation_2_clear)
     // .def("copy_tds", &copy_tds),
     // .def("copy_tds", &copy_tds),
     .def("create_face", &tri2::create_face1, ri)
@@ -100,12 +108,7 @@ void export_triangulation_2(py::module_& m) {
     .def("create_face", &tri2::create_face6, ri)
     .def("create_vertex", &tri2::create_vertex, ri)
     .def("degree", &tri2::degree, py::arg("v"),
-         "Obtain the degree of a vertex\n"
-         "The infinite vertex is counted"
-         "Parameters:\n"
-         " v: the vertex\n"
-         "Return:\n"
-         "  int\n")
+         doc::Triangulation_2::Triangulation_2_degree)
     // .def("delete_face", &delete_face),
     // .def("delete_vertex", &delete_vertex),
     // .def("dim_down", &dim_down),
@@ -140,17 +143,13 @@ void export_triangulation_2(py::module_& m) {
          "Return:\n"
          "  int\n")
     .def("number_of_faces", &Tds::number_of_faces,
-         "Obtain the number of two dimensional faces\n"
-         "Return:\n"
-         "  int\n")
+         doc::Triangulation_2::Triangulation_2_number_of_faces)
     .def("number_of_full_dim_faces", &Tds::number_of_full_dim_faces,
          "Obtain the number of full dimensional faces\n"
          "Return:\n"
          "  int\n")
     .def("number_of_vertices", &Tds::number_of_vertices,
-         "Obtain the number of vertices\n"
-         "Return:\n"
-         "  int\n")
+         doc::Triangulation_2::Triangulation_2_number_of_vertices)
     // .def("remove_degree_3", &remove_degree_3),
     // .def("remove_dim_down", &remove_dim_down),
     // .def("remove_first", &remove_first),
