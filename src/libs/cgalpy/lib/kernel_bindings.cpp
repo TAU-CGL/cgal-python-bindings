@@ -463,7 +463,7 @@ void export_kernel_module(py::module_& m) {
 
   // Kernel Function Objects
   if (! add_attr<Construct_vector_2>(m, "Construct_vector_2"))
-    py::class_<Construct_vector_2>(m, "Construct_vector_2")
+    py::class_<Construct_vector_2>(m, "Construct_vector_2", "Functor to construct a vector in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_vector_2 ctr, const Pnt_2& a, const Pnt_2& b)
@@ -500,7 +500,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_vector_3>(m, "Construct_vector_3"))
-    py::class_<Construct_vector_3>(m, "Construct_vector_3")
+    py::class_<Construct_vector_3>(m, "Construct_vector_3", "Functor to construct a vector in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_vector_3 ctr, const Pnt_3& a, const Pnt_3& b)
@@ -537,7 +537,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_sphere_3>(m, "Construct_sphere_3"))
-    py::class_<Construct_sphere_3>(m, "Construct_sphere_3")
+    py::class_<Construct_sphere_3>(m, "Construct_sphere_3", "Functor to construct a sphere in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_sphere_3 ctr, const Pnt_3& center,
@@ -587,7 +587,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_line_3>(m, "Construct_line_3"))
-    py::class_<Construct_line_3>(m, "Construct_line_3")
+    py::class_<Construct_line_3>(m, "Construct_line_3", "Functor to construct a line in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_line_3 ctr, const Pnt_3& p, const Pnt_3& q)
@@ -617,7 +617,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_circle_2>(m, "Construct_circle_2"))
-    py::class_<Construct_circle_2>(m, "Construct_circle_2")
+    py::class_<Construct_circle_2>(m, "Construct_circle_2", "Functor to construct a circle in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_circle_2 ctr, const Pnt_2& center,
@@ -659,7 +659,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_point_on_3>(m, "Construct_point_on_3"))
-    py::class_<Construct_point_on_3>(m, "Construct_point_on_3")
+    py::class_<Construct_point_on_3>(m, "Construct_point_on_3", "Functor to construct a point on a geometric object in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_point_on_3 ctr, const Line_3& l, const FT& i)
@@ -692,7 +692,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_x_2>(m, "Compute_x_2"))
-    py::class_<Compute_x_2>(m, "Compute_x_2")
+    py::class_<Compute_x_2>(m, "Compute_x_2", "Functor to compute the x-coordinate in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_x_2 ctr, const Point_2& p) { return ctr(p); },
@@ -705,7 +705,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_y_2>(m, "Compute_y_2"))
-    py::class_<Compute_y_2>(m, "Compute_y_2")
+    py::class_<Compute_y_2>(m, "Compute_y_2", "Functor to compute the y-coordinate in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_y_2 ctr, const Point_2& p) { return ctr(p); },
@@ -718,7 +718,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_x_3>(m, "Compute_x_3"))
-    py::class_<Compute_x_3>(m, "Compute_x_3")
+    py::class_<Compute_x_3>(m, "Compute_x_3", "Functor to compute the x-coordinate in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_x_3 ctr, const Point_3& p) { return ctr(p); },
@@ -731,7 +731,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_y_3>(m, "Compute_y_3"))
-    py::class_<Compute_y_3>(m, "Compute_y_3")
+    py::class_<Compute_y_3>(m, "Compute_y_3", "Functor to compute the y-coordinate in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_y_3 ctr, const Point_3& p) { return ctr(p); },
@@ -744,7 +744,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_z_3>(m, "Compute_z_3"))
-    py::class_<Compute_z_3>(m, "Compute_z_3")
+    py::class_<Compute_z_3>(m, "Compute_z_3", "Functor to compute the z-coordinate in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_z_3 ctr, const Point_3& p) { return ctr(p); },
@@ -757,7 +757,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_squared_length_2>(m, "Compute_squared_length_2"))
-    py::class_<Compute_squared_length_2>(m, "Compute_squared_length_2")
+    py::class_<Compute_squared_length_2>(m, "Compute_squared_length_2", "Functor to compute the squared length in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_squared_length_2 ctr, const Vector_2& v)
@@ -771,7 +771,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_squared_length_3>(m, "Compute_squared_length_3"))
-    py::class_<Compute_squared_length_3>(m, "Compute_squared_length_3")
+    py::class_<Compute_squared_length_3>(m, "Compute_squared_length_3", "Functor to compute the squared length in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_squared_length_3 ctr, const Vector_3& v)
@@ -785,7 +785,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_scaled_vector_2>(m, "Construct_scaled_vector_2"))
-    py::class_<Construct_scaled_vector_2>(m, "Construct_scaled_vector_2")
+    py::class_<Construct_scaled_vector_2>(m, "Construct_scaled_vector_2", "Functor to construct a scaled vector in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_scaled_vector_2 ctr, const Vector_2& v, const RT& scale)
@@ -800,7 +800,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_scaled_vector_3>(m, "Construct_scaled_vector_3"))
-    py::class_<Construct_scaled_vector_3>(m, "Construct_scaled_vector_3")
+    py::class_<Construct_scaled_vector_3>(m, "Construct_scaled_vector_3", "Functor to construct a scaled vector in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_scaled_vector_3 ctr, const Vector_3& v, const RT& scale)
@@ -815,7 +815,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_sum_of_vectors_2>(m, "Construct_sum_of_vectors_2"))
-    py::class_<Construct_sum_of_vectors_2>(m, "Construct_sum_of_vectors_2")
+    py::class_<Construct_sum_of_vectors_2>(m, "Construct_sum_of_vectors_2", "Functor to construct the sum of vectors in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_sum_of_vectors_2 ctr, const Vector_2& v1,
@@ -826,7 +826,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_sum_of_vectors_3>(m, "Construct_sum_of_vectors_3"))
-    py::class_<Construct_sum_of_vectors_3>(m, "Construct_sum_of_vectors_3")
+    py::class_<Construct_sum_of_vectors_3>(m, "Construct_sum_of_vectors_3", "Functor to construct the sum of vectors in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_sum_of_vectors_3 ctr, const Vector_3& v1,
@@ -837,7 +837,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_scalar_product_2>(m, "Compute_scalar_product_2"))
-    py::class_<Compute_scalar_product_2>(m, "Compute_scalar_product_2")
+    py::class_<Compute_scalar_product_2>(m, "Compute_scalar_product_2", "Functor to compute the scalar product in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_scalar_product_2 ctr, const Vector_2& v, const Vector_2& w)
@@ -847,7 +847,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_scalar_product_3>(m, "Compute_scalar_product_3"))
-    py::class_<Compute_scalar_product_3>(m, "Compute_scalar_product_3")
+    py::class_<Compute_scalar_product_3>(m, "Compute_scalar_product_3", "Functor to compute the scalar product in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_scalar_product_3 ctr, const Vector_3& v, const Vector_3& w)
@@ -857,7 +857,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_cross_product_vector_3>(m, "Construct_cross_product_vector_3"))
-    py::class_<Construct_cross_product_vector_3>(m, "Construct_cross_product_vector_3")
+    py::class_<Construct_cross_product_vector_3>(m, "Construct_cross_product_vector_3", "Functor to construct the cross product vector in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_cross_product_vector_3 ctr, const Vector_3& v,
@@ -868,7 +868,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_center_2>(m, "Construct_center_2"))
-    py::class_<Construct_center_2>(m, "Construct_center_2")
+    py::class_<Construct_center_2>(m, "Construct_center_2", "Functor to construct the center of a circle in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_center_2 ctr, const Circle_2& c) { return ctr(c); },
@@ -877,7 +877,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Construct_center_3>(m, "Construct_center_3"))
-    py::class_<Construct_center_3>(m, "Construct_center_3")
+    py::class_<Construct_center_3>(m, "Construct_center_3", "Functor to construct the center of a sphere or circle in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Construct_center_3 ctr, const Sphere_3& s) { return ctr(s); }, ri,
@@ -893,7 +893,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_squared_radius_2>(m, "Compute_squared_radius_2"))
-    py::class_<Compute_squared_radius_2>(m, "Compute_squared_radius_2")
+    py::class_<Compute_squared_radius_2>(m, "Compute_squared_radius_2", "Functor to compute the squared radius in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_squared_radius_2 ctr, const Circle_2& c)
@@ -921,7 +921,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Compute_squared_radius_3>(m, "Compute_squared_radius_3"))
-    py::class_<Compute_squared_radius_3>(m, "Compute_squared_radius_3")
+    py::class_<Compute_squared_radius_3>(m, "Compute_squared_radius_3", "Functor to compute the squared radius in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Compute_squared_radius_3 ctr, const Sphere_3& s)
@@ -960,7 +960,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Collinear_2>(m, "Collinear_2"))
-    py::class_<Collinear_2>(m, "Collinear_2")
+    py::class_<Collinear_2>(m, "Collinear_2", "Functor to test collinearity in 2D.")
       .def(py::init<>())
       .def("__call__",
            [](Collinear_2 ctr, const Pnt_2& p, const Pnt_2& q, const Pnt_2& r)
@@ -970,7 +970,7 @@ void export_kernel_module(py::module_& m) {
       ;
 
   if (! add_attr<Collinear_3>(m, "Collinear_3"))
-    py::class_<Collinear_3>(m, "Collinear_3")
+    py::class_<Collinear_3>(m, "Collinear_3", "Functor to test collinearity in 3D.")
       .def(py::init<>())
       .def("__call__",
            [](Collinear_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
