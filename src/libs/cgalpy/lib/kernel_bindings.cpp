@@ -139,7 +139,7 @@ void export_kernel_module(py::module_& m) {
 #if ((CGALPY_KERNEL == CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) || \
      (CGALPY_KERNEL == CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   if (! add_attr<FT>(m, "FT")) {
-    py::class_<FT> ft_c(m, "FT");
+    py::class_<FT> ft_c(m, "FT", "Field number type for the kernel.");
     export_ft(ft_c);
   }
 #else
@@ -150,7 +150,7 @@ void export_kernel_module(py::module_& m) {
 #endif
 
 #if CGALPY_KERNEL == CGALPY_KERNEL_EPEC_WITH_SQRT
-  py::class_<FT> ft_c(m, "FT");
+  py::class_<FT> ft_c(m, "FT", "Field number type for the kernel.");
   export_ft(ft_c);
 #endif
 
@@ -161,7 +161,7 @@ void export_kernel_module(py::module_& m) {
   using Fte = FT::Exact_type;
   using Fta = FT::Approximate_type;
   if (! add_attr<FT>(m, "FT")) {
-    py::class_<FT> ft_c(m, "FT");
+    py::class_<FT> ft_c(m, "FT", "Field number type for the kernel.");
     export_ft(ft_c);
 
     ft_c.def(py::init<Fte>())
@@ -218,7 +218,7 @@ void export_kernel_module(py::module_& m) {
   }
 
   if (! add_attr<RT>(m, "RT")) {
-    py::class_<RT> rt_c(m, "RT");
+    py::class_<RT> rt_c(m, "RT", "Ring number type for the kernel.");
     export_rt(rt_c);
   }
 
@@ -245,7 +245,7 @@ void export_kernel_module(py::module_& m) {
 
   // Kernel
   if (! add_attr<Kernel>(m, "Kernel")) {
-    py::class_<Kernel> ker_c(m, "Kernel");
+    py::class_<Kernel> ker_c(m, "Kernel", "The geometric kernel providing number types and geometric objects.");
     export_kernel<Kernel>(ker_c);
   }
 
