@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
+#include "cgalpy/Triangulation_3_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -16,4 +17,5 @@ namespace tri3 {
 
 //!
 void export_tri3_regular(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Triangulation_3;
 }

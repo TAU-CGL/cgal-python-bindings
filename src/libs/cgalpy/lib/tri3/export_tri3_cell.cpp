@@ -11,6 +11,7 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
+#include "cgalpy/Triangulation_3_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -64,8 +65,9 @@ void export_tri3_cell(py::class_<tri3::Triangulation_3>& tri_c) {
   void(tri3::Cell::*set_neighbors)(Ch, Ch, Ch, Ch) =
     &tri3::Cell::set_neighbors;
 
-  py::class_<Cell>(tri_c, "Cell")
-    .def(py::init<>())
+  py::class_<Cell>(tri_c, "Cell",
+                   doc::CGAL_Triangulation_cell_base_3__class__)
+    .def(py::init<>(), doc::CGAL_Triangulation_cell_base_3_Triangulation_cell_base_3)
     .def("vertex", &tri3::vertex, ri)
     // .def("index", py::overload_cast<Vh>(&Cell::index, py::const_))
     // .def("index", py::overload_cast<Ch>(&Cell::index, py::const_))

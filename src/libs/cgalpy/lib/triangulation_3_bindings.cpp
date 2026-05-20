@@ -25,6 +25,7 @@
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
+#include "cgalpy/Triangulation_3_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -34,6 +35,7 @@ namespace tri3 {
 
 //!
 void export_triangulation_3(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Triangulation_3;
   using Tri = tri3::Triangulation_3;
   using Edge = tri3::Edge;
   using Cell = tri3::Cell;
@@ -47,8 +49,9 @@ void export_triangulation_3(py::module_& m) {
   using Tds = tri3::Triangulation_data_structure_3;
   if (add_attr<Tds>(m, "Triangulation_data_structure_3")) return;
 
-  py::class_<Tds> tds_c(m, "Triangulation_data_structure_3");
+  py::class_<Tds> tds_c(m, "Triangulation_data_structure_3",
+                         doc::CGAL_Triangulation_data_structure_3__class__);
 
-  tds_c.def(py::init<>())
+  tds_c.def(py::init<>(), doc::CGAL_Triangulation_data_structure_3_Triangulation_data_structure_3)
     ;
 }
