@@ -164,12 +164,12 @@ void export_kernel_module(py::module_& m) {
     py::class_<FT> ft_c(m, "FT", "Field number type for the kernel.");
     export_ft(ft_c);
 
-    ft_c.def(py::init<Fte>())
-      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); })
-      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); })
-      .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
-      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri)
-      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
+    ft_c.def(py::init<Fte>(), "Constructor from exact type.")
+      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); }, "Constructor from string.")
+      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); }, "Constructor from numerator and denominator.")
+      .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); }, "Returns a double approximation.")
+      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri, "Returns the exact representation.")
+      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} , "Returns the approximate representation.")
       ;
   }
 
@@ -177,13 +177,13 @@ void export_kernel_module(py::module_& m) {
 #if CGAL_USE_GMP
   using mpz_int = boost::multiprecision::mpz_int;
   if (! add_attr<mpz_int>(m, "mpz_int")) {
-    py::class_<mpz_int> mpz_int_c(m, "mpz_int");
+    py::class_<mpz_int> mpz_int_c(m, "mpz_int", "Arbitrary precision integer type.");
     export_boost_multiprecision_int(mpz_int_c);
   }
 
   using mpq_rat = boost::multiprecision::mpq_rational;
   if (! add_attr<mpq_rat>(m, "mpq_rational")) {
-    py::class_<mpq_rat> mpq_rat_c(m, "mpq_rational");
+    py::class_<mpq_rat> mpq_rat_c(m, "mpq_rational", "Arbitrary precision rational type.");
     export_boost_multiprecision_rational(mpq_rat_c);
   }
 #endif
@@ -191,13 +191,13 @@ void export_kernel_module(py::module_& m) {
   // Export CPP boost multi-precision
   using cpp_int = boost::multiprecision::cpp_int;
   if (! add_attr<cpp_int>(m, "cpp_int")) {
-    py::class_<cpp_int> cpp_int_c(m, "cpp_int");
+    py::class_<cpp_int> cpp_int_c(m, "cpp_int", "C++ arbitrary precision integer type.");
     export_boost_multiprecision_int(cpp_int_c);
   }
 
   using cpp_rat = boost::multiprecision::cpp_rational;
   if (! add_attr<cpp_rat>(m, "cpp_rational")) {
-    py::class_<cpp_rat> cpp_rat_c(m, "cpp_rational");
+    py::class_<cpp_rat> cpp_rat_c(m, "cpp_rational", "C++ arbitrary precision rational type.");
     export_boost_multiprecision_rational(cpp_rat_c);
   }
 
@@ -208,8 +208,8 @@ void export_kernel_module(py::module_& m) {
 #endif
   // Fall back
   if (! add_attr<Fte>(m, "Exact")) {
-    py::class_<Fte> fte_c(m, "Exact");
-    fte_c.def(py::init<const Fte&>())
+    py::class_<Fte> fte_c(m, "Exact", "Exact number type representation.");
+    fte_c.def(py::init<const Fte&>(), "Copy constructor.")
       ;
 
     add_insertion(fte_c, "__str__");
