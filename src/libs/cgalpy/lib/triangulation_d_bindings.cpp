@@ -525,139 +525,104 @@ void export_triangulation_d(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Tds>(m, "Triangulation_ds")) {
-    py::class_<Tds> tds_c(m, "Triangulation_ds");
+    py::class_<Tds> tds_c(m, "Triangulation_ds",
+                         doc::CGAL_Triangulation_data_structure__class__);
 
-    tds_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
+    tds_c.def(py::init<int>(), py::arg("dim") = 0, doc::CGAL_Triangulation_data_structure_Triangulation_data_structure)
       .def(py::init<const Tds&>(), py::arg("other"), "Copy constructor")
-      .def("associate_vertex_with_full_cell", &trid::associate_vertex_with_full_cell,
-           py::arg("c"), py::arg("i"), py::arg("v"),
-           "Set the i-th vertex of c to v and, set c as the incident full cell of v")
+      .def("associate_vertex_with_full_cell", &trid::associate_vertex_with_full_cell,           py::arg("c"), py::arg("i"), py::arg("v"),           "Set the i-th vertex of c to v and, set c as the incident full cell of v")
       .def("clear", &Tds::clear, "Initialize the triangulation to the empty complex")
       // .def("collapse_face", &trid::tds_collapse_face) // bug in CGAL
-      .def("current_dimension", &Tds::current_dimension,
-           "Obtain the dimension of the full dimensional cells stored in the triangulation\n"
-           "Return:\n"
-           "  int the dimension\n")
-      .def("delete_full_cell", &trid::delete_full_cell, py::arg("c"),
+      .def("current_dimension", &Tds::current_dimension           "Return:\n"           "  int the dimension\n", doc::CGAL_Triangulation_current_dimension)      .def("delete_full_cell", &trid::delete_full_cell, py::arg("c"),
            "Remove a full cell from the triangulation\n"
            "Parameters:\n"
            "  c (Full_cell) the full cell to remove\n")
-      .def("delete_full_cells", &trid::delete_full_cells, py::arg("full_cells"),
-           "Remove a set of full cells\n"
+      .def("delete_full_cells", &trid::delete_full_cells, py::arg("full_cells"),           "Remove a set of full cells\n"
            "Parameters:\n"
            "  full_cels (list) the set of gull cells to remove\n")
-      .def("delete_vertex", &trid::delete_vertex, py::arg("v"),
-           "Remove a vertex from the triangulation\n"
+      .def("delete_vertex", &trid::delete_vertex, py::arg("v"),           "Remove a vertex from the triangulation\n"
            "Parameters:\n"
            "  v (Vertex) the vertex to remove\n")
-      .def("empty", &Tds::empty, "Determine whether the triangulation is empty")
-      .def("full_cell", &trid::full_cell1, ri, py::arg("v"),
-           "Obtain a full cell incident to a vertex\n"
+      .def("empty", &Tds::empty, doc::CGAL_Triangulation_empty)      .def("full_cell", &trid::full_cell1, ri, py::arg("v"),           "Obtain a full cell incident to a vertex\n"
            "Parameters:\n"
            "  v (Vertex) the input vertex\n")
-      .def("full_cell", &trid::full_cell2<Tds>, ri, py::arg("f"),
-           "Obtain a full cell containing a facet\n"
-           "Parameters:\n"
+      .def("full_cell", &trid::full_cell2<Tds>, ri, py::arg("f", doc::CGAL_Triangulation_full_cell)           "Parameters:\n"
            "  f (Facet) the input facet\n")
-      .def("gather_full_cells", &trid::gather_full_cells, ri, py::arg("start"), py::arg("tp"),
-           "computes (gathers) a connected set of full cells satisfying a given criterion \n"
+      .def("gather_full_cells", &trid::gather_full_cells, ri, py::arg("start"), py::arg("tp"),           "computes (gathers) a connected set of full cells satisfying a given criterion \n"
            "Parameters:\n"
            "  start (Full_cell): the starting point of the recursive traversal of adjacent full cells\n"
            "  tp (Callable): a predicate that accepts a facet implementing the criterion\n"
            "Return:\n"
            "  tuple [Facet, list] the 1st element is a facet on the boundary of the set of cells, and the 2nd is a list of full cells that satisfy the criterion\n")
-      .def("incident_faces", &trid::incident_faces<Tds>, ri, py::arg("v"), py::arg("dim"),
-           "Obtain all faces of dimension dim incident to a given vertex\n"
+      .def("incident_faces", &trid::incident_faces<Tds>, ri, py::arg("v"), py::arg("dim"),           "Obtain all faces of dimension dim incident to a given vertex\n"
            "Parameters:\n"
            "  v (Vertex: the input vertex\n"
            "  dim (int): the dimension\n"
            "Return:\n"
            "  list [Face Face ...])\n")
-      .def("incident_full_cells", &trid::incident_full_cells1<Tds>, ri, py::arg("f"),
-           "Obtain all the full cells that are incident to a face\n"
+      .def("incident_full_cells", &trid::incident_full_cells1<Tds>, ri, py::arg("f"),           "Obtain all the full cells that are incident to a face\n"
            "Parameters:\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  list: the full cells incident to f\n")
-      .def("incident_full_cells", &trid::incident_full_cells2<Tds>, ri, py::arg("v"),
-           "Obtain all the full cells that are incident to a vertex\n"
+      .def("incident_full_cells", &trid::incident_full_cells2<Tds>, ri, py::arg("v"),           "Obtain all the full cells that are incident to a vertex\n"
            "Parameters:\n"
            "  v (Vertex): the input vertex\n"
            "Return:\n"
            "  list: the full cells incident to v\n")
-      .def("index_of_covertex", &Tds::index_of_covertex<Facet>, py::arg("f"),
-           "Obtain the index of the vertex of a full cell containing a facet, which does not belong to the full cell\n"
-           "Parameters:\n"
+      .def("index_of_covertex", &Tds::index_of_covertex<Facet>, py::arg("f", doc::CGAL_Triangulation_index_of_covertex)           "Parameters:\n"
            "  f (Facet) the input facet\n"
            "Return:\n"
            "  int: the index of the vertex\n")
 
       // Insertions
-      .def("insert_in_face", &trid::tds_insert_in_face, ri, py::arg("f"),
-           "Inserts a new vertex into the triangulation data structure by subdividing a face\n"
-           "Parameters:\n"
+      .def("insert_in_face", &trid::tds_insert_in_face, ri, py::arg("f", doc::CGAL_Triangulation_insert_in_face)           "Parameters:\n"
            "  f (Face) the input face\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_facet", &trid::tds_insert_in_facet, ri, py::arg("f"),
-           "Inserts a new vertex into the triangulation data structure by subdividing a facet\n"
-           "Parameters:\n"
+      .def("insert_in_facet", &trid::tds_insert_in_facet, ri, py::arg("f", doc::CGAL_Triangulation_insert_in_facet)           "Parameters:\n"
            "  f (Facet) the input facet\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_full_cell", &trid::tds_insert_in_full_cell, ri, py::arg("c"),
-           "Insert a new vertex in a full cell into the triangulation data structure\n"
-           "Parameters:\n"
+      .def("insert_in_full_cell", &trid::tds_insert_in_full_cell, ri, py::arg("c", doc::CGAL_Triangulation_insert_in_full_cell)           "Parameters:\n"
            "  c (Full_cell) the input full cell\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_hole", &trid::tds_insert_in_hole, ri, py::arg("full_cells"), py::arg("f"),
-           "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
-           "Parameters:\n"
+      .def("insert_in_hole", &trid::tds_insert_in_hole, ri, py::arg("full_cells"), py::arg("f", doc::CGAL_Triangulation_insert_in_hole)           "Parameters:\n"
            "  full_cells (list): the input full cells\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_hole_get_full_cells", &trid::tds_insert_in_hole_get_full_cells, ri,
-           py::arg("full_cells"), py::arg("f"),
-           "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
+      .def("insert_in_hole_get_full_cells", &trid::tds_insert_in_hole_get_full_cells, ri,           py::arg("full_cells"), py::arg("f"),           "Remove a set of full cells, insert a new vertex, and connect each face on the boundary of a given set of cells to the new vertex\n"
            "Parameters:\n"
            "  full_cells (list): the input full cells\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
-      .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri, py::arg("star"),
-           "Add a new vertex, therby transform a triangulation of the sphere 𝕊^d into the triangulation of 𝕊^{d+1}\n",
+      .def("insert_increase_dimension", &trid::insert_increase_dimension1, ri, py::arg("star"),           "Add a new vertex, therby transform a triangulation of the sphere 𝕊^d into the triangulation of 𝕊^{d+1}\n",
            "Parameters:\n"
            "  star (Vertex) the anchor vertex for triangulating one hemi sphere\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_increase_dimension", &trid::insert_increase_dimension2, ri)
-           .def("is_full_cell", &trid::vertex_is_full_cell, py::arg("c"),
-                "Determine whether a full cell is part of the triangulation\n"
+      .def("insert_increase_dimension", &trid::insert_increase_dimension2, ri, "insert_increase_dimension()")           .def("is_full_cell", &trid::vertex_is_full_cell, py::arg("c"),                "Determine whether a full cell is part of the triangulation\n"
                 "Parameters:\n"
                 "  c (Full_cell): the input full cell\n"
                 "Return:\n"
                 "  bool\n")
 
-      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0,
+      .def("is_valid", &Tds::is_valid, py::arg("verbose") = true, py::arg("level") = 0, doc::CGAL_Triangulation_data_structure_is_valid, doc::CGAL_Triangulation_data_structure_is_valid,
            "Partially determine whether the triangulation is valid\n"
            "Parameters:\n"
            "  verbose (bool) indicates whether to be verbose\n"
            "  level (int) the verbosity level\n"
            "Return:\n"
            "  Boolean\n")
-      .def("is_vertex", &trid::vertex_is_vertex, py::arg("v"),
-           "Deteremines whether a given vertex is in the triangulation\n"
+      .def("is_vertex", &trid::vertex_is_vertex, py::arg("v"),           "Deteremines whether a given vertex is in the triangulation\n"
            "Parameters:\n"
            "  v (Vertex): the input vertex\n"
            "Return:\n"
            "  bool\n")
-      .def("maximal_dimension", &Tds::maximal_dimension,
-           "Obtain the maximal dimension of the full dimensional cells that can be stored in the triangulation\n"
-            "Return:\n"
-           "  int\n")
-      .def("mirror_index", &trid::mirror_index, py::arg("c"), py::arg("i"),
+      .def("maximal_dimension", &Tds::maximal_dimension            "Return:\n"           "  int\n", doc::CGAL_Triangulation_maximal_dimension)      .def("mirror_index", &trid::mirror_index, py::arg("c"), py::arg("i"),
            "Obtain the index of a full cell as a neighbor of its i-th neighbor\n"
            "Parameters:\n"
            "  c (Full_cell): the input full cell\n"
@@ -665,52 +630,37 @@ void export_triangulation_d(py::module_& m) {
            "Return:\n"
            "  int\n")
       // .def("mirror_vertex", &trid::mirror_vertex) // bug in CGAL
-      .def("neighbor", &trid::neighbor, ri, py::arg("c"), py::arg("i"),
-           "Obtain a full cell opposite to the i-th vertex of a given full cell\n"
+      .def("neighbor", &trid::neighbor, ri, py::arg("c"), py::arg("i"),           "Obtain a full cell opposite to the i-th vertex of a given full cell\n"
            "Parameters:\n"
            "  c (Full_cell): the input full cell\n"
            "  i (int) the input index\n"
            "Return:\n"
            "  Full_cell: the neighbor full cell\n")
-      .def("new_full_cell", &trid::tds_new_full_cell, ri,
-           "Inserts a new full cell into the triangulation\n"
+      .def("new_full_cell", &trid::tds_new_full_cell, ri,           "Inserts a new full cell into the triangulation\n"
            "Return:\n"
            "  c (Full_cell): the new full cell\n")
-      .def("new_vertex", &trid::tds_new_vertex, ri,
-           "Inserts a new vertex into the triangulation\n"
+      .def("new_vertex", &trid::tds_new_vertex, ri,           "Inserts a new vertex into the triangulation\n"
            "Return:\n"
            "  v (Vertex): the new vertex\n")
-      .def("number_of_full_cells", &Tds::number_of_full_cells,
-           "Obtain the number of full cells in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      .def("number_of_vertices", &Tds::number_of_vertices,
-           "Obtain the number of vertices in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      .def("remove_decrease_dimension", &trid::remove_decrease_dimension, py::arg("v"), py::arg("star"),
+      .def("number_of_full_cells", &Tds::number_of_full_cells           "Return:\n"           "  int\n", doc::CGAL_Triangulation_number_of_full_cells)      .def("number_of_vertices", &Tds::number_of_vertices           "Return:\n"           "  int\n", doc::CGAL_Triangulation_number_of_vertices)      .def("remove_decrease_dimension", &trid::remove_decrease_dimension, py::arg("v"), py::arg("star"),
            "Do exactly the opposite of insert_increase_dimension()\n"
            "Parameters:\n"
            "  v (Vertex)\n"
            "  star (Vertex)\n")
-      .def("set_current_dimension", &Tds::set_current_dimension, py::arg("d"),
-           "Forces the current dimension of the complex to to a given one\n"
+      .def("set_current_dimension", &Tds::set_current_dimension, py::arg("d"),           "Forces the current dimension of the complex to to a given one\n"
            "Parameters:\n"
            "  d (int): the new dimension\n")
-      .def("set_neighbors", &trid::tds_set_neighbors, py::arg("c1"), py::arg("i1"), py::arg("c2"), py::arg("i2"),
-           "Sets the neighbor opposite to vertex i1 of Full_cell c1 to c2\n"
+      .def("set_neighbors", &trid::tds_set_neighbors, py::arg("c1"), py::arg("i1"), py::arg("c2"), py::arg("i2"),           "Sets the neighbor opposite to vertex i1 of Full_cell c1 to c2\n"
            "Sets the neighbor opposite to vertex i2 of Full_cell c2 to c1\n"
            "Parameters:\n"
            "  c1 (Full_Cell)\n"
            "  i1 (int)\n"
            "  c2 (Full_Cell)\n"
            "  i2 (int)\n")
-      .def("star", &trid::star<Tds>, ri, py::arg("f"),
-           "Obtain all the full cells that share at least one vertex with a face"
+      .def("star", &trid::star<Tds>, ri, py::arg("f"),           "Obtain all the full cells that share at least one vertex with a face"
            "Parameters:\n"
            "  f (Face): the input face\n")
-      .def("vertex", &trid::vertex, ri, py::arg("c"), py::arg("i"),
-           "Obtain the i-th vertex of a full cell\n"
+      .def("vertex", &trid::vertex, ri, py::arg("c"), py::arg("i"),           "Obtain the i-th vertex of a full cell\n"
            "Parameters:\n"
            "  c (Full_cell): the input full cell\n"
            "  i (int) the input index\n"
@@ -718,7 +668,7 @@ void export_triangulation_d(py::module_& m) {
            "  Vertex: the new vertex\n")
 
       // Non concept
-      .def("insert_in_tagged_hole", &trid::insert_in_tagged_hole, ri, py::arg("v"), py::arg("f"),
+      .def("insert_in_tagged_hole", &trid::insert_in_tagged_hole, ri, py::arg("v"), py::arg("f"), doc::CGAL_Triangulation_data_structure_insert_in_tagged_hole, doc::CGAL_Triangulation_data_structure_insert_in_tagged_hole,
            "Connect each face on the boundary of a full cell c to a vertex\n"
            "Parameters:\n"
            "  v (Vertex) the input vertex\n"
@@ -742,77 +692,53 @@ void export_triangulation_d(py::module_& m) {
     add_iterator<Vci, Vci, const Vertex&>("Vertex_iterator", tds_c);
 
     tds_c
-      .def("facets", &trid::facets<Tds>, py::keep_alive<0, 1>(),
-           "Obtain an iterator that traverses all facets")
-      .def("full_cells", &trid::full_cells<Tds>, py::keep_alive<0, 1>(),
-           "Obtain an iterator that traverses all full cells")
-      .def("vertices", &trid::vertices<Tds>, py::keep_alive<0, 1>(),
-           "Obtain an iterator that traverses all vertices")
+      .def("facets", &trid::facets<Tds>, py::keep_alive<0, 1>(),           "Obtain an iterator that traverses all facets")
+      .def("full_cells", &trid::full_cells<Tds>, py::keep_alive<0, 1>(),           "Obtain an iterator that traverses all full cells")
+      .def("vertices", &trid::vertices<Tds>, py::keep_alive<0, 1>(),           "Obtain an iterator that traverses all vertices")
       ;
   }
 
   // Triangulation
   if (! add_attr<Tri>(m, "Triangulation")) {
-    py::class_<Tri> tri_c(m, "Triangulation");
+    py::class_<Tri> tri_c(m, "Triangulation",
+                        doc::CGAL_Triangulation__class__);
     tri_c
-      .def(py::init<int>(), py::arg("dim") = 0, "Constructor")
-      .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), "Constructor")
+      .def(py::init<int>(), py::arg("dim") = 0, doc::CGAL_Triangulation_Triangulation)
+      .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), doc::CGAL_Triangulation_Triangulation_1)
       .def(py::init<const Tri&>(), py::arg("other"), "Copy constructor")
-      .def("are_incident_full_cells_valid", &trid::are_incident_full_cells_valid,
-           py::arg("vertex"), py::arg("verbose") = false, py::arg("level") = 0,
-           "Determine whether all finite full cells incident to v have positive orientation")
-      .def("clear", &Tri::clear, "Initialize the triangulation to the empty complex")
+      .def("are_incident_full_cells_valid", &trid::are_incident_full_cells_valid,           py::arg("vertex"), py::arg("verbose") = false, py::arg("level") = 0, doc::CGAL_Triangulation_are_incident_full_cells_valid)      .def("clear", &Tri::clear, "Initialize the triangulation to the empty complex")
       // .def("collapse_face", &trid::tds_collapse_face) // bug in CGAL
-      .def("current_dimension", &Tri::current_dimension,
-           "Obtain the dimension of the full dimensional cells stored in the triangulation")
-      .def("empty", &Tri::empty, "Determine whether triangulation is empty")
-      .def("full_cell", &trid::full_cell2<Tri>, ri, py::arg("f"),
-           "Obtain a full cell containing a facet\n"
+      .def("current_dimension", &Tri::current_dimension, doc::CGAL_Triangulation_current_dimension)      .def("empty", &Tri::empty, doc::CGAL_Triangulation_empty)      .def("full_cell", &trid::full_cell2<Tri>, ri, py::arg("f"),           "Obtain a full cell containing a facet\n"
            "Parameters:\n"
            "  f (Facet) the input facet\n")
-      .def("geom_traits", &Tri::geom_traits, ri, "Obtain the geometric traits")
+      .def("geom_traits", &Tri::geom_traits, ri, doc::CGAL_Triangulation_geom_traits)
 
-      .def("incident_full_cells", &trid::incident_full_cells1<Tri>, py::arg("f"),
-           "Obtain all the full cells that are incident to a face\n"
+      .def("incident_full_cells", &trid::incident_full_cells1<Tri>, py::arg("f"),           "Obtain all the full cells that are incident to a face\n"
            "Parameters:\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  list: the full cells incident to f\n")
-      .def("incident_full_cells", &trid::incident_full_cells2<Tri>, py::arg("v"),
-           "Obtain all the full cells that are incident to a vertex\n"
+      .def("incident_full_cells", &trid::incident_full_cells2<Tri>, py::arg("v"),           "Obtain all the full cells that are incident to a vertex\n"
            "Parameters:\n"
            "  v (Vertex): the input vertex\n"
            "Return:\n"
            "  list: the full cells incident to v\n")
-      .def("incident_faces", &trid::incident_faces<Tri>, ri, py::arg("v"), py::arg("dim"),
-           "Obtain all faces of dimension dim incident to a given vertex\n"
+      .def("incident_faces", &trid::incident_faces<Tri>, ri, py::arg("v"), py::arg("dim"),           "Obtain all faces of dimension dim incident to a given vertex\n"
            "Parameters:\n"
            "  v (Vertex: the input vertex\n"
            "  dim (int): the dimension\n"
            "Return:\n"
            "  list [Face Face ...])\n")
 
-      .def("index_of_covertex", &Tri::index_of_covertex, py::arg("f"),
-           "Obtain the index of the vertex of the full cell c containing f, which does not belong to c")
-      .def("infinite_full_cell", &trid::infinite_full_cell, ri,
-           "Obtain a full cell incident to the vertex at infinity\n"
-           "Return:\n"
+      .def("index_of_covertex", &Tri::index_of_covertex, py::arg("f"), doc::CGAL_Triangulation_index_of_covertex)      .def("infinite_full_cell", &trid::infinite_full_cell, ri           "Return:\n"
            "  Full_cell\n")
-      .def("infinite_vertex",  &trid::infinite_vertex, ri,
-           "Obtain the vertex at infinity\n",
-           "Return:\n"
-           "  Vertex")
-
+      .def("infinite_vertex",  &trid::infinite_vertex, ri           "  Vertex", doc::CGAL_Triangulation_infinite_vertex)
       // Insertion
-      .def("insert", &trid::insert1<Tri>, py::arg("points"),
-           "Insert a set of points into the triangulation\n"
-           "Parameters:\n"
+      .def("insert", &trid::insert1<Tri>, py::arg("points", doc::CGAL_Triangulation_insert)           "Parameters:\n"
            "  points (list): the input points\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert2<Tri>, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
-           "Insert a point into the triangulation according to a given location type\n"
-           "Parameters:\n"
+      .def("insert", &trid::insert2<Tri>, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c", doc::CGAL_Triangulation_insert_1)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  lt (Location_type): the location type\n"
            "  f (Face)\n"
@@ -820,158 +746,95 @@ void export_triangulation_d(py::module_& m) {
            "  c (Full_cell)\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert3<Tri>, py::arg("p"), py::arg("hint"),
-           "Insert a point into the triangulation, using a hint for its location\n"
-           "Parameters:\n"
+      .def("insert", &trid::insert3<Tri>, py::arg("p"), py::arg("hint", doc::CGAL_Triangulation_insert_2)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  hint (Full_cell): the starting place of the search for the point location\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert4<Tri>, py::arg("p"), py::arg("hint"),
-           "Insert a point into the triangulation, using a hint for its location\n"
-           "Parameters:\n"
+      .def("insert", &trid::insert4<Tri>, py::arg("p"), py::arg("hint", doc::CGAL_Triangulation_insert_3)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  hint (Vertex): the starting place of the search for the point location\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert", &trid::insert5<Tri>, py::arg("p"),
-           "Insert a point into the triangulation\n"
-           "Parameters:\n"
+      .def("insert", &trid::insert5<Tri>, py::arg("p", doc::CGAL_Triangulation_insert)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "Return:\n"
            "  Vertex: the newly created vertex\n")
-      .def("insert_in_face", &trid::insert_in_face, py::arg("p"), py::arg("f"),
-           "Inserts a point into the triangulation in a given face\n"
-           "Parameters:\n"
+      .def("insert_in_face", &trid::insert_in_face, py::arg("p"), py::arg("f", doc::CGAL_Triangulation_insert_in_face)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  f (Face): the containing face\n")
-      .def("insert_in_facet", &trid::insert_in_facet, py::arg("p"), py::arg("f"),
-           "Inserts a point into the triangulation in a given facet\n"
-           "Parameters:\n"
+      .def("insert_in_facet", &trid::insert_in_facet, py::arg("p"), py::arg("f", doc::CGAL_Triangulation_insert_in_facet)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  f (Facet): the containing facet\n")
-      .def("insert_in_full_cell", &trid::insert_in_full_cell, py::arg("p"), py::arg("c"),
-           "Inserts a point into the triangulation in a given full cell\n"
-           "Parameters:\n"
+      .def("insert_in_full_cell", &trid::insert_in_full_cell, py::arg("p"), py::arg("c", doc::CGAL_Triangulation_insert_in_full_cell)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  c (Full_cell): the containing full cell\n")
-      .def("insert_in_hole", &trid::insert_in_hole,  py::arg("p"),  py::arg("full_cells"),  py::arg("f"),
-           "Remove a set of full cells, insert a new vertex at a given point, and connect each face on the boundary of a given set of cells to the new vertex\n"
-           "Parameters:\n"
+      .def("insert_in_hole", &trid::insert_in_hole,  py::arg("p"),  py::arg("full_cells"),  py::arg("f", doc::CGAL_Triangulation_insert_in_hole)           "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  full_cells (list): the input full cells\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  Vertex: the new vertex\n")
-      .def("insert_in_hole_get_full_cells", &trid::insert_in_hole_get_full_cells, py::arg("p"),
-           py::arg("full_cells"), py::arg("f"),
-           "Remove a set of full cells, insert a new vertex at a given point, and connect each face on the boundary of a given set of cells to the new vertex\n"
+      .def("insert_in_hole_get_full_cells", &trid::insert_in_hole_get_full_cells, py::arg("p"),           py::arg("full_cells"), py::arg("f"),           "Remove a set of full cells, insert a new vertex at a given point, and connect each face on the boundary of a given set of cells to the new vertex\n"
            "Parameters:\n"
            "  p (Point): the point to insert\n"
            "  full_cells (list): the input full cells\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
-      .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull, py::arg("p"), py::arg("c"),
-           "Insert a point that outside of the convex hull of the triangulation")
-      .def("insert_outside_affine_hull", &trid::insert_outside_affine_hull, py::arg("p"),
-           "Insert a point that outside of the affine hull of the triangulation")
-
-      .def("is_infinite", py::overload_cast<const Vertex&>(&Tri::is_infinite, py::const_), py::arg("v"),
-           "Determine whether a given vertex is the vertex at infinity\n"
-           "Parameters\n"
+      .def("insert_outside_convex_hull", &trid::insert_outside_convex_hull, py::arg("p"), py::arg("c"), doc::CGAL_Triangulation_insert_outside_convex_hull)      .def("insert_outside_affine_hull", &trid::insert_outside_affine_hull, py::arg("p"), doc::CGAL_Triangulation_insert_outside_affine_hull)
+      .def("is_infinite", py::overload_cast<const Vertex&>(&Tri::is_infinite, py::const_), py::arg("v", doc::CGAL_Triangulation_is_infinite)           "Parameters\n"
            "  v (Vertex): the input vertex\n"
            "Return:\n"
            "  Boolean\n")
-      .def("is_infinite", py::overload_cast<const Fc&>(&Tri::is_infinite, py::const_), py::arg("c"),
-           "Determine whether a given full cell is incident to vertex at infinity\n"
-           "Parameters\n"
+      .def("is_infinite", py::overload_cast<const Fc&>(&Tri::is_infinite, py::const_), py::arg("c", doc::CGAL_Triangulation_is_infinite)           "Parameters\n"
            "  c (Full_cell): the input vertex\n"
            "Return:\n"
            "  Boolean\n")
-      .def("is_infinite", py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_), py::arg("f"),
-           "Determine whether a given facet is incident to vertex at infinity\n"
-           "Parameters\n"
+      .def("is_infinite", py::overload_cast<const Facet&>(&Tri::is_infinite, py::const_), py::arg("f", doc::CGAL_Triangulation_is_infinite)           "Parameters\n"
            "  f (Facet): the input facet\n"
            "Return:\n"
            "  Boolean\n")
-      .def("is_infinite", py::overload_cast<const Face&>(&Tri::is_infinite, py::const_), py::arg("f"),
-           "Determine whether a given face is incident to vertex at infinity\n"
-           "Parameters\n"
+      .def("is_infinite", py::overload_cast<const Face&>(&Tri::is_infinite, py::const_), py::arg("f", doc::CGAL_Triangulation_is_infinite)           "Parameters\n"
            "  f (Face): the input face\n"
            "Return:\n"
            "  Boolean\n")
-      .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0,
-           "Partially determine whether the triangulation is valid\n"
-           "Parameters:\n"
-           "  verbose (bool) indicates whether to be verbose\n"
-           "  level (int) the verbosity level\n"
-           "Return:\n"
-           "  Boolean\n")
-      .def("locate", &trid::locate1, ri, py::arg("q"),
-           "Locate a query point\n"
-           "Parameters:\n"
+      .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0           "Parameters:\n"           "  verbose (bool) indicates whether to be verbose\n"           "  level (int) the verbosity level\n"           "Return:\n"           "  Boolean\n", doc::CGAL_Triangulation_is_valid)      .def("locate", &trid::locate1, ri, py::arg("q", doc::CGAL_Triangulation_locate)           "Parameters:\n"
            "  q (Point): the query point\n"
            "Return:\n"
            "  Full_cell\n")
-      .def("locate", &trid::locate2, ri, py::arg("q"), py::arg("v"),
-           "Locate a query point given a vertex as a hint\n"
-           "Parameters:\n"
+      .def("locate", &trid::locate2, ri, py::arg("q"), py::arg("v", doc::CGAL_Triangulation_locate_1)           "Parameters:\n"
            "  q (Point): the query point\n"
            "  v (Vertex): the hint\n"
            "Return:\n"
            "  Full_cell\n")
-      .def("locate", &trid::locate3, ri, py::arg("q"), py::arg("c"),
-           "Locate a query point given a full cell as a hint\n"
-           "Parameters:\n"
+      .def("locate", &trid::locate3, ri, py::arg("q"), py::arg("c", doc::CGAL_Triangulation_locate_2)           "Parameters:\n"
            "  q (Point): the query point\n"
            "  c (VertexFull cell): the hint\n"
            "Return:\n"
            "  Full_cell\n")
-      .def("locate_get_incident", &trid::locate4, ri, py::arg("q"),
-           "Locate a query point\n"
+      .def("locate_get_incident", &trid::locate4, ri, py::arg("q"),           "Locate a query point\n"
            "Parameters:\n"
            "  q (Point): the query point\n"
            "Return:\n"
            "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
-      .def("locate_get_incident", &trid::locate5, ri, py::arg("q"), py::arg("v"),
-           "Locate a query point given a vertex as a hint\n"
+      .def("locate_get_incident", &trid::locate5, ri, py::arg("q"), py::arg("v"),           "Locate a query point given a vertex as a hint\n"
            "Parameters:\n"
            "  q (Point): the query point\n"
            "  v (Vertex): the hint\n"
            "Return:\n"
            "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
-      .def("locate_get_incident", &trid::locate6, ri, py::arg("q"), py::arg("c"),
-           "Locate a query point given a full cell as a hint\n"
+      .def("locate_get_incident", &trid::locate6, ri, py::arg("q"), py::arg("c"),           "Locate a query point given a full cell as a hint\n"
            "Parameters:\n"
            "  q (Point): the query point\n"
            "  c (VertexFull cell): the hint\n"
            "Return:\n"
            "  tuple [Full_cell, Locate_type, [Face, Facet]\n")
-      .def("maximal_dimension", &Tri::maximal_dimension,
-           "Obtain the maximal dimension of the full dimensional cells that can be stored in the triangulation\n"
-            "Return:\n"
-           "  int\n")
-      .def("number_of_finite_full_cells", &Tri::number_of_finite_full_cells,
-           "Obtain the number of finite full cells in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      .def("number_of_full_cells", &Tri::number_of_full_cells,
-           "Obtain the number of full cells in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      .def("number_of_vertices", &Tri::number_of_vertices,
-           "Obtain the number of vertices in the triangulation\n"
-           "Return:\n"
-           "  int\n")
-      // .def("rotate_rotor", &Tri::rotate_rotor)
-      .def("star", &trid::star<Tri>, ri, py::arg("f"),
-           "Obtain all the full cells that share at least one vertex with a face"
+      .def("maximal_dimension", &Tri::maximal_dimension            "Return:\n"           "  int\n", doc::CGAL_Triangulation_maximal_dimension)      .def("number_of_finite_full_cells", &Tri::number_of_finite_full_cells           "Return:\n"           "  int\n", doc::CGAL_Triangulation_number_of_finite_full_cells)      .def("number_of_full_cells", &Tri::number_of_full_cells           "Return:\n"           "  int\n", doc::CGAL_Triangulation_number_of_full_cells)      .def("number_of_vertices", &Tri::number_of_vertices           "Return:\n"           "  int\n", doc::CGAL_Triangulation_number_of_vertices)      // .def("rotate_rotor", &Tri::rotate_rotor)
+      .def("star", &trid::star<Tri>, ri, py::arg("f"),           "Obtain all the full cells that share at least one vertex with a face"
            "Parameters:\n"
            "  f (Face): the input face\n")
-      .def("tds", py::overload_cast<>(&Tri::tds, py::const_),
-           "Obtain the underlying triangulation data structure\n"
-           "Return:\n"
+      .def("tds", py::overload_cast<>(&Tri::tds, py::const_, doc::CGAL_Triangulation_tds)           "Return:\n"
            "  Traiangulation_ds\n")
      ;
 
@@ -992,24 +855,18 @@ void export_triangulation_d(py::module_& m) {
     // Facet
     if (! add_attr<Facet>(tri_c, "Facet")) {
       py::class_<Facet>(tri_c, "Facet")
-        .def("full_cell", [](const Facet& f) { return *(f.full_cell()); }, ri)
-        .def("index_of_covertex", &Facet::index_of_covertex)
-        ;
+        .def("full_cell", [](const Facet& f) { return *(f.full_cell()); }, ri, doc::CGAL_Triangulation_full_cell)
+        .def("index_of_covertex", &Facet::index_of_covertex, doc::CGAL_Triangulation_index_of_covertex)        ;
     }
 
     // Face
     if (! add_attr<Face>(tri_c, "Face")) {
-      py::class_<Face>(tri_c, "Face")
+      py::class_<Face>(tri_c, "Face",
+                    doc::CGAL_Triangulation_face__class__)
         .def(py::init<int>(), py::arg("dim"))
         .def(py::init<const Face&>(), py::arg("other"))
-        .def("face_dimension", &Face::face_dimension)
-        .def("index", &Face::index)
-        .def("vertex", [](Face& f, int i)->Vertex& { return *(f.vertex(i)); }, ri, py::arg("i"))
-        .def("Full_cell", [](Face& f)->Fc& { return *(f.full_cell()); }, ri)
-        .def("clear", &Face::clear)
-        .def("set_full_cell", trid::set_full_cell, py::arg("full_cell"))
-        .def("set_index", &Face::set_index, py::arg("index"))
-        ;
+        .def("face_dimension", &Face::face_dimension, "face_dimension()")        .def("index", &Face::index, "index()")        .def("vertex", [](Face& f, int i)->Vertex& { return *(f.vertex(i)); }, ri, py::arg("i"), "vertex()")        .def("Full_cell", [](Face& f)->Fc& { return *(f.full_cell()); }, ri, doc::CGAL_Triangulation_Full_cell)
+        .def("clear", &Face::clear, "clear()")        .def("set_full_cell", trid::set_full_cell, py::arg("full_cell"), "set_full_cell()")        .def("set_index", &Face::set_index, py::arg("index"), "set_index()")        ;
     }
 
     add_attr<trid::Geom_traits>(tri_c, "Geom_traits");
@@ -1031,83 +888,55 @@ void export_triangulation_d(py::module_& m) {
     add_iterator<Ffi, Ffi, const Facet&>("Finite_facet_iterator", tri_c);
 
     tri_c
-      .def("facets", &trid::facets<Tri>, py::keep_alive<0, 1>())
-      .def("full_cells", &trid::full_cells<Tri>, py::keep_alive<0, 1>())
-      .def("vertices", &trid::vertices<Tri>, py::keep_alive<0, 1>())
-      .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>())
-      .def("finite_full_cells", &trid::finite_full_cells, py::keep_alive<0, 1>())
-      .def("finite_vertices", &trid::finite_vertices, py::keep_alive<0, 1>())
-      ;
+      .def("facets", &trid::facets<Tri>, py::keep_alive<0, 1>(), "facets()")      .def("full_cells", &trid::full_cells<Tri>, py::keep_alive<0, 1>(), "full_cells()")      .def("vertices", &trid::vertices<Tri>, py::keep_alive<0, 1>(), "vertices()")      .def("finite_facets", &trid::finite_facets, py::keep_alive<0, 1>(), "finite_facets()")      .def("finite_full_cells", &trid::finite_full_cells, py::keep_alive<0, 1>(), "finite_full_cells()")      .def("finite_vertices", &trid::finite_vertices, py::keep_alive<0, 1>(), "finite_vertices()")      ;
 
 #if CGALPY_TRID == CGALPY_TRID_REGULAR
     using Rtri = trid::Regular_triangulation_d;
 
     if (! add_attr<Rtri>(m, "Regular_triangulation")) {
-      py::class_<Rtri, Tri> rtri_c(m, "Regular_triangulation");
-      rtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
-        .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), "Constructor")
+      py::class_<Rtri, Tri> rtri_c(m, "Regular_triangulation",
+                              doc::CGAL_Regular_triangulation__class__);
+      rtri_c.def(py::init<int>(), py::arg("dim") = 0, doc::CGAL_Regular_triangulation_Regular_triangulation)
+        .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("gt"), doc::CGAL_Triangulation_Triangulation_1)
         .def(py::init<const Rtri&>(), py::arg("other"), "Copy constructor")
-        .def("compute_conflict_zone", &trid::compute_conflict_zone<Rtri>, ri, py::arg("p"), py::arg("c"),
-             "Obtain the full cells in conflict with a given point\n"
-             "Parameters:\n"
+        .def("compute_conflict_zone", &trid::compute_conflict_zone<Rtri>, ri, py::arg("p"), py::arg("c", doc::CGAL_Regular_triangulation_compute_conflict_zone)             "Parameters:\n"
              "  p (Point): the input point\n"
              "  c (Full_cell): the starting place of the search for conflicts\n"
              "Return:\n"
              "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
-        .def("insert_if_in_star", &trid::insert_if_in_star1, ri, py::arg("p"), py::arg("star_center"),
-             "inserts a weighted point into the triangulation on the condition "
-             "that a given vertex appears in the conflict zone of the point\n"
+        .def("insert_if_in_star", &trid::insert_if_in_star1, ri, py::arg("p"), py::arg("star_center", doc::CGAL_Regular_triangulation_insert_if_in_star)             "that a given vertex appears in the conflict zone of the point\n"
              "Parameters:\n"
              "  p (Weighted_point): the input point\n"
              "  star_center (Full_cell): the input star full cell\n"
              "Return:\n"
              "  Vertex: the new vertex\n")
-        .def("insert_if_in_star", &trid::insert_if_in_star2, ri, py::arg("p"), py::arg("star_center"),
-             py::arg("start"),
-             "inserts a weighted point into the triangulation on the condition "
-             "that a given vertex appears in the conflict zone of the point\n"
+        .def("insert_if_in_star", &trid::insert_if_in_star2, ri, py::arg("p"), py::arg("star_center"),             py::arg("start", doc::CGAL_Regular_triangulation_insert_if_in_star)             "that a given vertex appears in the conflict zone of the point\n"
              "Parameters:\n"
              "  p (Weighted_point): the input point\n"
              "  star_center (Full_cell): the input star full cell\n"
              "  start (Full_cell): the starting point of the recursive traversal of adjacent full cells\n"
              "Return:\n"
              "  Vertex: the new vertex\n")
-        .def("insert_if_in_star", &trid::insert_if_in_star3, ri, py::arg("p"), py::arg("star_center"),
-             py::arg("hint"),
-             "inserts a weighted point into the triangulation on the condition "
-             "that a given vertex appears in the conflict zone of the point\n"
+        .def("insert_if_in_star", &trid::insert_if_in_star3, ri, py::arg("p"), py::arg("star_center"),             py::arg("hint", doc::CGAL_Regular_triangulation_insert_if_in_star_1)             "that a given vertex appears in the conflict zone of the point\n"
              "Parameters:\n"
              "  p (Weighted_point): the input point\n"
              "  star_center (Full_cell): the input star full cell\n"
              "  hint (Full_cell): the starting place of the search for the point location\n"
              "Return:\n"
              "  Vertex: the new vertex\n")
-        .def("insert_if_in_star", &trid::insert_if_in_star4, ri, py::arg("p"), py::arg("star_center"),
-             py::arg("hint"),
-             "inserts a weighted point into the triangulation on the condition "
-             "that a given vertex appears in the conflict zone of the point\n"
+        .def("insert_if_in_star", &trid::insert_if_in_star4, ri, py::arg("p"), py::arg("star_center"),             py::arg("hint", doc::CGAL_Regular_triangulation_insert_if_in_star)             "that a given vertex appears in the conflict zone of the point\n"
              "Parameters:\n"
              "  p (Weighted_point): the input point\n"
              "  star_center (Full_cell): the input star full cell\n"
              "  hint (Full_cell): the starting place of the search for the point location\n"
              "Return:\n"
            "  tuple [Vertex, list]: the 1st element is the new vertex; the 2nd is a list of the newly created full cells\n")
-        .def("is_in_conflict", &trid::is_in_conflict<Rtri>, py::arg("p"), py::arg("c"),
-             "Determine whether a given point is in conflict with a given full cell\n"
-             "Parameters:\n"
+        .def("is_in_conflict", &trid::is_in_conflict<Rtri>, py::arg("p"), py::arg("c", doc::CGAL_Regular_triangulation_is_in_conflict)             "Parameters:\n"
              "  p (Weighted_point): the input point\n"
              "  c (Full_cell): the input full cell\n"
              "Return:\n"
              "  bool\n")
-        .def("number_of_hidden_vertices", &Rtri::number_of_hidden_vertices,
-             "Obtain the number of hidden vertices\n"
-             "Return:\n"
-             "  int\n")
-        .def("number_of_vertices", &Rtri::number_of_vertices,
-             "Obtain the number of finite vertices that are not hidden\n"
-             "Return:\n"
-             "  int\n")
-        ;
+        .def("number_of_hidden_vertices", &Rtri::number_of_hidden_vertices             "Return:\n"             "  int\n", doc::CGAL_Regular_triangulation_number_of_hidden_vertices)        .def("number_of_vertices", &Rtri::number_of_vertices             "Return:\n"             "  int\n", doc::CGAL_Regular_triangulation_number_of_vertices)        ;
 
       add_attr<trid::Weighted_point>(rtri_c, "Weighted_point");
     }
@@ -1117,28 +946,23 @@ void export_triangulation_d(py::module_& m) {
     using Dtri = trid::Delaunay_triangulation_d;
 
     if (! add_attr<Dtri>(m, "Delaunay_triangulation")) {
-      py::class_<Dtri, Tri> dtri_c(m, "Delaunay_triangulation");
-      dtri_c.def(py::init<int>(), py::arg("dim") = 0, "Constructor")
+      py::class_<Dtri, Tri> dtri_c(m, "Delaunay_triangulation",
+                              doc::CGAL_Delaunay_triangulation__class__);
+      dtri_c.def(py::init<int>(), py::arg("dim") = 0, doc::CGAL_Delaunay_triangulation_Delaunay_triangulation)
         .def(py::init<int, const trid::Geom_traits&>(), py::arg("dim") = 0, py::arg("traits"), "Constructor")
         .def(py::init<const Dtri&>(), py::arg("other"), "Copy constructor")
-        .def("compute_conflict_zone", &trid::compute_conflict_zone<Dtri>, ri, py::arg("p"), py::arg("c"),
-             "Obtain the full cells in conflict with a given point\n"
-             "Parameters:\n"
+        .def("compute_conflict_zone", &trid::compute_conflict_zone<Dtri>, ri, py::arg("p"), py::arg("c", doc::CGAL_Delaunay_triangulation_compute_conflict_zone)             "Parameters:\n"
              "  p (Point): the input point\n"
              "  c (Full_cell): the starting place of the search for conflicts\n"
              "Return:\n"
              "  tuple[Facet, list]: the 1st element is the facet on the boundary of the conflict zone; the 2nd element is a list of conflicting full cells\n")
 
         // Insertion
-        .def("insert", &trid::insert1<Dtri>, py::arg("points"),
-             "Insert a set of points into the triangulation\n"
-             "Parameters:\n"
+        .def("insert", &trid::insert1<Dtri>, py::arg("points", doc::CGAL_Delaunay_triangulation_insert)             "Parameters:\n"
              "  points (list): the input points\n"
              "Return:\n"
              "  Vertex: the newly created vertex\n")
-        .def("insert", &trid::insert2<Dtri>, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c"),
-             "Insert a point into the triangulation according to a given location type\n"
-             "Parameters:\n"
+        .def("insert", &trid::insert2<Dtri>, py::arg("p"), py::arg("lt"), py::arg("f"), py::arg("ft"), py::arg("c", doc::CGAL_Delaunay_triangulation_insert_1)             "Parameters:\n"
              "  p (Point): the point to insert\n"
              "  lt (Location_type): the location type\n"
              "  f (Face)\n"
@@ -1146,41 +970,29 @@ void export_triangulation_d(py::module_& m) {
              "  c (Full_cell)\n"
              "Return:\n"
              "  Vertex: the newly created vertex\n")
-        .def("insert", &trid::insert3<Dtri>, py::arg("p"), py::arg("hint"),
-             "Insert a point into the triangulation, using a hint for its location\n"
-             "Parameters:\n"
+        .def("insert", &trid::insert3<Dtri>, py::arg("p"), py::arg("hint", doc::CGAL_Delaunay_triangulation_insert_2)             "Parameters:\n"
              "  p (Point): the point to insert\n"
              "  hint (Full_cell): the starting place of the search for the point location\n"
              "Return:\n"
              "  Vertex: the newly created vertex\n")
-        .def("insert", &trid::insert4<Dtri>, py::arg("p"), py::arg("hint"),
-             "Insert a point into the triangulation, using a hint for its location\n"
-             "Parameters:\n"
+        .def("insert", &trid::insert4<Dtri>, py::arg("p"), py::arg("hint", doc::CGAL_Delaunay_triangulation_insert_3)             "Parameters:\n"
              "  p (Point): the point to insert\n"
              "  hint (Vertex): the starting place of the search for the point location\n"
              "Return:\n"
              "  Vertex: the newly created vertex\n")
-        .def("insert", &trid::insert5<Dtri>, py::arg("p"),
-             "Insert a point into the triangulation\n"
-             "Parameters:\n"
+        .def("insert", &trid::insert5<Dtri>, py::arg("p", doc::CGAL_Delaunay_triangulation_insert)             "Parameters:\n"
              "  p (Point): the point to insert\n"
              "Return:\n"
              "  Vertex: the newly created vertex\n")
 
-        .def("is_in_conflict", &trid::is_in_conflict<Dtri>, py::arg("p"), py::arg("c"),
-             "Determine whether a given point is in conflict with a given full cell\n"
-             "Parameters:\n"
+        .def("is_in_conflict", &trid::is_in_conflict<Dtri>, py::arg("p"), py::arg("c", doc::CGAL_Delaunay_triangulation_is_in_conflict)             "Parameters:\n"
              "  p (Weighted_point): the input point\n"
              "  c (Full_cell): the input full cell\n"
              "Return:\n"
              "  bool\n")
-        .def("remove", &trid::remove1, py::arg("vertices"),
-             "Remove a given set of vertices"
-             "Parameters:\n"
+        .def("remove", &trid::remove1, py::arg("vertices", doc::CGAL_Delaunay_triangulation_remove)             "Parameters:\n"
              "  vertices (list): the vertices to remove\n")
-        .def("remove", &trid::remove2, ri, py::arg("v"),
-             "Remove a given vertex"
-             "Parameters:\n"
+        .def("remove", &trid::remove2, ri, py::arg("v", doc::CGAL_Delaunay_triangulation_remove_1)             "Parameters:\n"
              "  v (Vertex): the vertex to remove\n"
               "Return:\n"
              "  Full_cell: the full cell that contains v\n")
