@@ -29,12 +29,12 @@ void export_sphere_3(C& c) {
   using Circle = typename Kernel::Circle_3;
   using Sphere = typename Kernel::Sphere_3;
 
-  c.def(py::init<>())
-    .def(py::init<const Pnt&, const FT&, CGAL::Orientation>())
-    .def(py::init<const Pnt&, const Pnt&, const Pnt&, const Pnt&>())
-    .def(py::init<const Pnt&, const Pnt&, const Pnt&, CGAL::Orientation>())
-    .def(py::init<const Pnt&, const Pnt&, CGAL::Orientation>())
-    .def(py::init<const Pnt&, CGAL::Orientation>())
+  c.def(py::init<>(), doc::Sphere_3_Sphere_3)
+    .def(py::init<const Pnt&, const FT&, CGAL::Orientation>(), doc::Sphere_3_Sphere_3_1)
+    .def(py::init<const Pnt&, const Pnt&, const Pnt&, const Pnt&>(), doc::Sphere_3_Sphere_3_2)
+    .def(py::init<const Pnt&, const Pnt&, const Pnt&, CGAL::Orientation>(), doc::Sphere_3_Sphere_3_3)
+    .def(py::init<const Pnt&, const Pnt&, CGAL::Orientation>(), doc::Sphere_3_Sphere_3_4)
+    .def(py::init<const Pnt&, CGAL::Orientation>(), doc::Sphere_3_Sphere_3_5)
     .def(py::init<const Circle&>())
     .def("center", &Sphere::center, doc::Sphere_3_center)    .def("squared_radius", &Sphere::squared_radius, doc::Sphere_3_squared_radius)    .def("orientation", &Sphere::orientation, doc::Sphere_3_orientation)    .def("is_degenerate", &Sphere::is_degenerate, doc::Sphere_3_is_degenerate)    .def("oriented_side", &Sphere::oriented_side, doc::Sphere_3_oriented_side)    .def("bounded_side", &Sphere::bounded_side, doc::Sphere_3_bounded_side)    .def("has_on_positive_side", &Sphere::has_on_positive_side)
     .def("has_on_negative_side", &Sphere::has_on_negative_side)

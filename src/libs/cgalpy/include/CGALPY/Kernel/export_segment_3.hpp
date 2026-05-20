@@ -29,7 +29,7 @@ void export_segment_3(C &c) {
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"), "Test for inequality.")
     .def("source", &Seg::source, doc::Segment_3_source)    .def("target", &Seg::target, doc::Segment_3_target)    .def("min", &Seg::min, doc::Segment_3_min)    .def("max", &Seg::max, doc::Segment_3_max)    .def("vertex", &Seg::vertex,         py::arg("i"), "returns source or target of s: vertex(0) returns the source, vertex(1) returns the target.")
-    .def("point", &Seg::point,         py::arg("i"), "returns vertex(i).")
+    .def("point", &Seg::point,         py::arg("i"), "returns vertex(i).", doc::Segment_3_point)
     .def("__getitem__", &Seg::operator[],         py::arg("i"), "returns vertex(i).")
     .def("squared_length", &Seg::squared_length, doc::Segment_3_squared_length)    .def("to_vector", &Seg::to_vector, doc::Segment_3_to_vector)    .def("direction", &Seg::direction, doc::Segment_3_direction)    .def("opposite", &Seg::opposite, doc::Segment_3_opposite)    .def("supporting_line", &Seg::supporting_line, doc::Segment_3_supporting_line)    .def("is_degenerate", &Seg::is_degenerate, doc::Segment_3_is_degenerate)    .def("has_on", &Seg::has_on, doc::Segment_3_has_on)    .def("bbox", &Seg::bbox, doc::Segment_3_bbox)    .def("transform", &Seg::transform,         py::arg("t"), "returns the segment obtained by applying t on the source and the target of s.")
     .def("__str__", to_string<Seg>)

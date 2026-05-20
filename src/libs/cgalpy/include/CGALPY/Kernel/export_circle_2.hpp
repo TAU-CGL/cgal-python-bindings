@@ -36,12 +36,12 @@ void export_circle_2(C& c) {
     .def(py::init<Pnt&, CGAL::Orientation>(),
          py::arg("center"), py::arg("orientation").noconvert())
     .def(py::init<Pnt&, FT&>(), doc::Circle_2_Circle_2_3)
-    .def(py::init<Pnt&>())
+    .def(py::init<Pnt&>(), doc::Circle_2_Circle_2)
     .def(py::init<Pnt&, Pnt&, CGAL::Orientation>(),
          py::arg("p"), py::arg("q"), py::arg("orientation").noconvert())
-    .def(py::init<Pnt&, Pnt&, FT&>())
-    .def(py::init<Pnt&, Pnt&>())
-    .def(py::init<Pnt&, Pnt&, Pnt&>())
+    .def(py::init<Pnt&, Pnt&, FT&>(), doc::Circle_2_Circle_2_1)
+    .def(py::init<Pnt&, Pnt&>(), doc::Circle_2_Circle_2_2)
+    .def(py::init<Pnt&, Pnt&, Pnt&>(), doc::Circle_2_Circle_2_3)
     .def("center", &Circle::center, doc::Circle_2_center)    .def("squared_radius", &Circle::squared_radius, doc::Circle_2_squared_radius)    .def("orientation", &Circle::orientation, doc::Circle_2_orientation)    .def("is_degenerate", &Circle::is_degenerate, doc::Circle_2_is_degenerate)    .def("oriented_side", &Circle::oriented_side, doc::Circle_2_oriented_side)    .def("bounded_side", &Circle::bounded_side, doc::Circle_2_bounded_side)    .def("has_on_positive_side", &Circle::has_on_positive_side)
     .def("has_on_negative_side", &Circle::has_on_negative_side)
     .def("has_on_boundary", &Circle::has_on_boundary)

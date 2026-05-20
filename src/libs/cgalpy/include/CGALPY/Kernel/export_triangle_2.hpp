@@ -28,7 +28,7 @@ void export_triangle_2(C& c) {
   using Pnt_2 = typename Ker::Point_2;
   using Tri_2 = typename Ker::Triangle_2;
 
-  c.def(py::init < Pnt_2&, Pnt_2&, Pnt_2&>())
+  c.def(py::init < Pnt_2&, Pnt_2&, Pnt_2&>(), doc::Triangle_2_Triangle_2)
     .def("vertex", &Tri_2::vertex, doc::Triangle_2_vertex)    .def("__getitem__", &Tri_2::operator[], doc::Triangle_2_operator)    .def("is_degenerate", &Tri_2::is_degenerate, doc::Triangle_2_is_degenerate)    .def("orientation", &Tri_2::orientation, doc::Triangle_2_orientation)    .def("oriented_side", &Tri_2::oriented_side, doc::Triangle_2_oriented_side)    .def("bounded_side", &Tri_2::bounded_side, doc::Triangle_2_bounded_side)    .def("has_on_positive_side", &Tri_2::has_on_positive_side)
     .def("has_on_negative_side", &Tri_2::has_on_negative_side)
     .def("has_on_boundary", &Tri_2::has_on_boundary)

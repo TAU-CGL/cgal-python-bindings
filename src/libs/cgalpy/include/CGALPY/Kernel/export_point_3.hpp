@@ -34,10 +34,10 @@ void export_point_3(C& c) {
   using Pnt = typename Ker::Point_3;
   using Vec = typename Ker::Vector_3;
 
-  c.def(py::init<>())
-    .def(py::init<const Ft&, const Ft&, const Ft&>())
-    .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&>())
-    .def(py::init<const Pnt&>())
+  c.def(py::init<>(), doc::Point_3_Point_3)
+    .def(py::init<const Ft&, const Ft&, const Ft&>(), doc::Point_3_Point_3_1)
+    .def(py::init<const Rt&, const Rt&, const Rt&, const Rt&>(), doc::Point_3_Point_3_2)
+    .def(py::init<const Pnt&>(), doc::Point_3_Point_3_3)
     .def(py::init_implicit<const CGAL::Origin&>())
     .def("assign", py::overload_cast<const Pnt&>(&Pnt::operator=))
     .def("x", &Pnt::x, doc::Point_3_x)    .def("y", &Pnt::y, doc::Point_3_y)    .def("z", &Pnt::z, doc::Point_3_z)    .def("hx", &Pnt::hx, doc::Point_3_hx)    .def("hy", &Pnt::hy, doc::Point_3_hy)    .def("hz", &Pnt::hz, doc::Point_3_hz)    .def("hw", &Pnt::hw, doc::Point_3_hw)    .def("bbox", &Pnt::bbox, doc::Point_3_bbox)    .def("cartesian", &Pnt::cartesian, doc::Point_3_cartesian)    .def("__getitem__", &Pnt::operator[], doc::Point_3_operator)    .def("dimension", &Pnt::dimension, doc::Point_3_dimension)    .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))

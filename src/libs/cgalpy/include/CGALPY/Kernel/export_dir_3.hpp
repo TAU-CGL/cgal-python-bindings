@@ -35,11 +35,11 @@ void export_dir_3(C& c) {
   using Seg = typename Ker::Segment_3;
   using Vec = typename Ker::Vector_3;
 
-  c.def(py::init<Vec>())
-    .def(py::init<Line>())
-    .def(py::init<Ray>())
-    .def(py::init<Seg>())
-    .def(py::init<Rt&, Rt&, Rt&>())
+  c.def(py::init<Vec>(), doc::Direction_3_Direction_3)
+    .def(py::init<Line>(), doc::Direction_3_Direction_3_1)
+    .def(py::init<Ray>(), doc::Direction_3_Direction_3_2)
+    .def(py::init<Seg>(), doc::Direction_3_Direction_3_3)
+    .def(py::init<Rt&, Rt&, Rt&>(), doc::Direction_3_Direction_3_4)
     .def("dx", &Dir::dx, doc::Direction_3_dx)    .def("dy", &Dir::dy, doc::Direction_3_dy)    .def("dz", &Dir::dz, doc::Direction_3_dz)    .def("vector", &Dir::vector, doc::Direction_3_vector)    .def("transform", &Dir::transform, doc::Direction_3_transform)    .def("delta", &Dir::delta, doc::Direction_3_delta)    .def("__str__", to_string<Dir>)
     .def("__repr__", to_string<Dir>)
     .def(py::self == py::self,

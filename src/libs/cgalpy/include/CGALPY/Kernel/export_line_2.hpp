@@ -35,12 +35,12 @@ void export_line_2(C& c) {
   using Vec = typename Ker::Vector_2;
   using Lin = typename Ker::Line_2;
 
-  c.def(py::init<Rt&, Rt&, Rt&>())
-    .def(py::init<Pnt&, Pnt&>())
-    .def(py::init<Pnt&, Dir&>())
-    .def(py::init<Pnt&, Vec&>())
-    .def(py::init<Seg&>())
-    .def(py::init<Ray&>())
+  c.def(py::init<Rt&, Rt&, Rt&>(), doc::Line_2_Line_2)
+    .def(py::init<Pnt&, Pnt&>(), doc::Line_2_Line_2_1)
+    .def(py::init<Pnt&, Dir&>(), doc::Line_2_Line_2_2)
+    .def(py::init<Pnt&, Vec&>(), doc::Line_2_Line_2_3)
+    .def(py::init<Seg&>(), doc::Line_2_Line_2_4)
+    .def(py::init<Ray&>(), doc::Line_2_Line_2_5)
     .def("a", &Lin::a, doc::Line_2_a)    .def("b", &Lin::b, doc::Line_2_b)    .def("c", &Lin::c, doc::Line_2_c)    .def("is_degenerate", &Lin::is_degenerate, doc::Line_2_is_degenerate)    .def("is_horizontal", &Lin::is_horizontal)
     .def("is_vertical", &Lin::is_vertical)
     .def("oriented_side", &Lin::oriented_side, doc::Line_2_oriented_side)    .def("has_on", &Lin::has_on)
