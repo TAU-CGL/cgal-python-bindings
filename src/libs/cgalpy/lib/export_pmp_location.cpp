@@ -19,6 +19,7 @@
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -113,6 +114,7 @@ auto is_on_vertex(const std::pair<
 
 //!
 void export_pmp_location(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   m.def("barycentic_coordinates", &pmp::barycentic_coordinates,

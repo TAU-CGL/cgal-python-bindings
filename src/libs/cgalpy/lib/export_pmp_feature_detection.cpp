@@ -21,6 +21,7 @@
 # include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -139,6 +140,7 @@ auto detect_vertex_incident_patches(PolygonMesh& pmesh,
 
 //!
 void export_pmp_feature_detection(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH

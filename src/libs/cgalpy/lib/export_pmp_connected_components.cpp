@@ -19,6 +19,7 @@
 #include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace py = nanobind;
@@ -375,6 +376,7 @@ auto split_connected_components(PolygonMesh& pmesh,
 
 //!
 void export_pmp_connected_components(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
   using Np = CGAL::parameters::Default_named_parameters;
   using Fd = boost::graph_traits<Pm>::face_descriptor;

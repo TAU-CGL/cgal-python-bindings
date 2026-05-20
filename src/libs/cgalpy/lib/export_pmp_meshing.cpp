@@ -34,6 +34,7 @@
 #include "CGALPY/Uniform_sizing_field.hpp"
 #include "CGALPY/Custom_sizing_field.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -436,6 +437,7 @@ auto random_perturbation_v(const std::vector<typename boost::graph_traits<Polygo
 
 //!
 void export_pmp_meshing(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
@@ -583,7 +585,7 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
 
   using Usf = pmp::Uniform_sizing_field<Pm>; // Work in progress
   py::class_<Usf>(m, "Uniform_sizing_field")
-    .def(py::init<const FT, const Pm&>())
+    .def(py::init<const FT, const Pm&>(), py::arg("size"), py::arg("pm"))
     .def("at", &Usf::at)
     // .def("is_too_long", &Usf::is_too_long)
     // .def("is_too_short", &Usf::is_too_short)

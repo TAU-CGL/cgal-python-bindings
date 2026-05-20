@@ -26,6 +26,7 @@
 #include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -235,6 +236,7 @@ auto stitch_boundary_cycles(const std::vector<typename boost::graph_traits<Polyg
 
 //!
 void export_pmp_combinatorial_repair(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   m.def("duplicate_non_manifold_vertices",

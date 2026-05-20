@@ -25,6 +25,7 @@
 
 #include "CGALPY/HFDefault_visitor.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -235,10 +236,12 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
 
 //!
 void export_pmp_hole_filling(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   using Hfv = pmp::HFDefault_visitor;
-  py::class_<Hfv>(m, "Hole_filling_default_visitor")
+  py::class_<Hfv>(m, "Hole_filling_default_visitor",
+                     doc::PMPHolefillingVisitor__class__)
     .def(py::init<>())
     ;
 

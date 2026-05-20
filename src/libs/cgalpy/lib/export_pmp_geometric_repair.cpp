@@ -23,6 +23,7 @@
 #include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -160,6 +161,7 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
 
 //!
 void export_pmp_geometric_repair(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   m.def("remove_almost_degenerate_faces",

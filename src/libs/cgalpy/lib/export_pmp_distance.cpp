@@ -19,6 +19,7 @@
 #include "CGALPY/pmp_np_parser.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -127,6 +128,7 @@ auto sample_triangle_soup(const Point_3_vec& points,
 /*!
  */
 void export_pmp_distance(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   m.def("approximate_Hausdorff_distance",

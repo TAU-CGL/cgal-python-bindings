@@ -27,6 +27,7 @@
 #include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -298,6 +299,7 @@ void set_link_connected_polygons(Default_orientation_visitor& v,
 
 //!
 void export_pmp_orientation(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = boost::graph_traits<Pm>::face_descriptor;

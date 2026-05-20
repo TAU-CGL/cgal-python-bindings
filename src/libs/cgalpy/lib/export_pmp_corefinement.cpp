@@ -31,6 +31,7 @@
 #include "CGALPY/Corefine_visitor.hpp"
 #include "CGALPY/Default_visitor.hpp"
 #include "CGALPY/Non_manifold_output_visitor.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -1631,6 +1632,7 @@ void set_in_place_operations_fn(Cv& v, const std::function<void(Boolean_operatio
 
 //!
 void export_pmp_corefinement(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   // Corefinement and Boolean Operations
@@ -1735,7 +1737,7 @@ void export_pmp_corefinement(py::module_& m) {
   using Nmv = pmp::Non_manifold_output_visitor<Pm>;
   py::class_<Nmv>(m, "Non_manifold_output_visitor")
     // constructor with 2 PolygonMesh arguments
-    .def(py::init<Pm&, Pm&>())
+    .def(py::init<Pm&, Pm&>(), py::arg("pm1"), py::arg("pm2"))
     // visitor.extract_intersection(points, polygons);
     .def("extract_intersection", &Nmv::my_extract_intersection)
     ;

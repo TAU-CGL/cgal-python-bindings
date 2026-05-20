@@ -21,6 +21,7 @@
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 #endif
 
 namespace py = nanobind;
@@ -81,6 +82,7 @@ bool write_polygon_mesh(const std::string& filename, const PolygonalMesh& pm, co
 
 //!
 void export_pmp_io(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
   m.def("read_polygon_mesh", &pmp::read_polygon_mesh<Pm>,
         py::arg("filename"), py::arg("params") = py::dict());

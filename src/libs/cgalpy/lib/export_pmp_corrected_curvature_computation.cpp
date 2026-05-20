@@ -22,6 +22,7 @@
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polygon_mesh_processing_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
@@ -134,10 +135,12 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 
 //!
 void export_pmp_corrected_curvature_computation(py::module_& m) {
+  namespace doc = cgalpy::docstrings::Polygon_mesh_processing;
   using Pm = pmp::Polygonal_mesh;
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
-  py::class_<Pcad>(m, "Principal_curvatures_and_directions")
+  py::class_<Pcad>(m, "Principal_curvatures_and_directions",
+                     doc::CGAL_Polygon_mesh_processing_Principal_curvatures_and_directions__class__)
     .def(py::init<FT, FT, Vector_3, Vector_3>())
     .def_ro("min_curvature", &Pcad::min_curvature)
     .def_ro("max_curvature", &Pcad::max_curvature)
