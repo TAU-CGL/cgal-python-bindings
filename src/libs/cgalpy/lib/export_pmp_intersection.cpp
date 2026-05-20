@@ -184,7 +184,9 @@ void export_pmp_intersection(py::module_& m) {
         py::arg("pm"), py::arg("np") = py::dict());
   m.def("does_triangle_soup_self_intersect", &pmp::does_triangle_soup_self_intersect, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict());
-  m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>, py::arg("range"),
+  m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>,
+          doc::Polygon_mesh_processing_intersecting_meshes,
+          py::arg("range"),
         py::arg("np") = py::dict(), py::arg("nps") = std::vector<py::dict>());
   m.def("self_intersections", &pmp::self_intersections<Pm>,
         py::arg("pm"), py::arg("np") = py::dict());

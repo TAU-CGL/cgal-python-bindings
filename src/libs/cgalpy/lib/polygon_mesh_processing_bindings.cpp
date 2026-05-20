@@ -467,6 +467,7 @@ void export_polygon_mesh_processing(py::module_& m) {
   m.def("add_bbox", &pmp::add_bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
   m.def("bbox", &pmp::bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
   m.def("border_halfedges", &pmp::border_halfedges<Pm>,
+          doc::Polygon_mesh_processing_border_halfedges,
         py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH

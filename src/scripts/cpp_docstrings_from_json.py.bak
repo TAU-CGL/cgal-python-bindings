@@ -48,57 +48,6 @@ def collect_entries(data):
     entries = []
     seen = {}
     for compound_name, compound in data.items():
-        kind = compound.get("kind", "unknown")
-        
-        # Handle namespaces: emit each member function as a top-level entry
-        if kind == "namespace":
-            for member in compound.get("members", []):
-                brief = member.get("brief", "").strip()
-                detailed = member.get("detailed", "").strip()
-
-                qname = member.get("qualified_name") or                         f"{compound_name}__{member.get('name', 'unknown')}"
-                qname = strip_cgal_namespace(qname)
-                ident = make_identifier(qname)
-
-                # Disambiguate overloads
-                if ident in seen:
-                    seen[ident] += 1
-                    ident = f"{ident}_{seen[ident]}"
-                else:
-                    seen[ident] = 0
-
-                doc_parts = []
-                if brief:
-                    doc_parts.append(brief)
-                if detailed and detailed != brief:
-                    doc_parts.append(detailed)
-                
-                # Synthetic docstring from signature if no docs available
-                if not doc_parts:
-                    func_name = member.get("name", "unknown")
-                    params = member.get("params", [])
-                    param_strs = []
-                    for p in params:
-                        ptype = p.get("type", "")
-                        pname = p.get("name", "")
-                        if ptype and pname:
-                            param_strs.append(f"{ptype} {pname}")
-                        elif pname:
-                            param_strs.append(pname)
-                    sig = f"{func_name}({', '.join(param_strs)})"
-                    ret = member.get("return_type", "").strip()
-                    if ret and ret not in ("void", ""):
-                        sig += f" -> {ret}"
-                    doc_parts.append(sig)
-                else:
-                    ret = member.get("return_type", "").strip()
-                    if ret and ret not in ("void", ""):
-                        doc_parts.append(f"Returns: {ret}")
-                
-                doc = escape_cpp(" ".join(doc_parts))
-                entries.append((ident, doc))
-            continue  # Don't process namespace as a class
-
         if compound.get("brief"):
             ident = make_identifier(strip_cgal_namespace(compound_name)) + "__class__"
             doc = escape_cpp(compound["brief"].strip())

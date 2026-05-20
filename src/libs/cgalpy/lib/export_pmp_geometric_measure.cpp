@@ -156,6 +156,7 @@ void export_pmp_geometric_measure(py::module_& m) {
   m.def("centroid", &pmp::centroid<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict());
   m.def("edge_length", &pmp::edge_length<Pm>,
+          doc::Polygon_mesh_processing_edge_length,
         py::arg("h"), py::arg("tmesh"),
         py::arg("np") = py::dict());
   m.def("face_area", &pmp::face_area<Pm>,
@@ -173,6 +174,7 @@ void export_pmp_geometric_measure(py::module_& m) {
         py::arg("m1"), py::arg("m2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
   m.def("squared_edge_length", &pmp::squared_edge_length<Pm>,
+          doc::Polygon_mesh_processing_squared_edge_length,
         py::arg("h"), py::arg("tmesh"),
         py::arg("np") = py::dict());
   m.def("squared_face_area", &pmp::squared_face_area<Pm>,
