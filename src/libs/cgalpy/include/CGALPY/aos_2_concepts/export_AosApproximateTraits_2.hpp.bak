@@ -16,7 +16,6 @@
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -47,15 +46,12 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
   // Bind the operator
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
   classes.m_approximate_2->def("__call__",
-                               static_cast<ovld2>(&Approximate_2::operator()),
-                               py::arg("p"),
-                               doc::AosTraits_ApproximatePoint_2_operator);
+                               static_cast<ovld2>(&Approximate_2::operator()));
 }
 
 // Bind the Approximate_2 traits functor
 template <typename T, typename C, typename Concepts>
 void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   static bool exported = false;
   if (exported) return;
 
@@ -68,8 +64,7 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
 
   if (! add_attr<Approximate_2>(c, "Approximate_2")) {
-    classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2",
-                                                              doc::AosApproximateTraits_2_Approximate_2);
+    classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
     using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
     classes.m_approximate_2->def("__call__",
                                  static_cast<ovld1>(&Approximate_2::operator()));

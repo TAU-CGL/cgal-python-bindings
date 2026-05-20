@@ -19,7 +19,6 @@
 #include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/bind_polynomial.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -110,7 +109,6 @@ template<typename T>
 T ipower(T& p, int i) { return CGAL::ipower(p, i); }
 
 void export_arr_algebraic_segment_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Integer = CORE::BigInt;
   using Gt = CGAL::Arr_algebraic_segment_traits_2<Integer>;
   using Cv = Gt::Curve_2;
@@ -127,7 +125,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   if (add_attr<Gt>(m, "Arr_algebraic_segment_traits")) return;
 
   if (! add_attr<Integer>(m, "Integer")) {
-    py::class_<Integer> integer_c(m, "Integer");  // no docstring available
+    py::class_<Integer> integer_c(m, "Integer");
     integer_c.def(py::init<>())
       .def(py::init_implicit<int>())
       // .def("value", &Integer::longValue)
@@ -144,7 +142,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
 
   using Cmp = CGAL::Comparison_result(Ar::*)(const Ar&) const;
   if (! add_attr<Ar>(m, "Algebraic_real_1")) {
-    py::class_<Ar> ar1_c(m, "Algebraic_real_1");  // no docstring available
+    py::class_<Ar> ar1_c(m, "Algebraic_real_1");
     ar1_c.def(py::init<>())
       .def(py::init<Ar&>())
       .def(py::init_implicit<int>())
@@ -180,7 +178,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   }
 
   if (! add_attr<aos2::Bound>(m, "Bound")) {
-    py::class_<aos2::Bound> bound_c(m, "Bound");  // no docstring available
+    py::class_<aos2::Bound> bound_c(m, "Bound");
     bound_c.def(py::init<>())
       // .def("value", &aos2::Bound::longValue)
       .def(py::self + py::self)
@@ -209,8 +207,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   m.def("ipower", &ipower<aos2::Polynomial_1>);
   m.def("ipower", &ipower<aos2::Polynomial_2>);
 
-  py::class_<Gt> traits_c(m, "Arr_algebraic_segment_traits",
-                          doc::CGAL_Arr_algebraic_segment_traits_2__class__);
+  py::class_<Gt> traits_c(m, "Arr_algebraic_segment_traits");
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
@@ -260,9 +257,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
     ;
 
   auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
-  // cv_c already has class doc from export_AosTraits_2
-  cv_c.def("polynomial_2", &Cv::polynomial_2,
-           doc::CGAL_Arr_algebraic_segment_traits_2_Curve_2_polynomial)
+  cv_c.def("polynomial_2", &Cv::polynomial_2)
     ;
 
   using Ctr_cv = Gt::Construct_curve_2;
@@ -281,12 +276,9 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
 
   using Ctr_xseg = Gt::Construct_x_monotone_segment_2;
   py::class_<Ctr_xseg>(traits_c, "Construct_x_monotone_segment_2")
-    .def("__call__", &ctr_xseg_operator0,
-        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator)
-    .def("__call__", &ctr_xseg_operator1,
-        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_1)
-    .def("__call__", &ctr_xseg_operator2,
-        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_2)
+    .def("__call__", &ctr_xseg_operator0)
+    .def("__call__", &ctr_xseg_operator1)
+    .def("__call__", &ctr_xseg_operator2)
     ;
 
   py::enum_<Gt::Site_of_point>(traits_c, "Site_of_point")

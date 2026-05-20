@@ -24,7 +24,6 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -44,7 +43,6 @@ void init_from_points(Curve_2* cv, py::list& lst) {
 
 //
 void export_arr_bezier_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
   using Rational = Nt_traits::Rational;
   using Algebraic = Nt_traits::Algebraic;

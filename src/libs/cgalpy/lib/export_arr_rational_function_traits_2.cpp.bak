@@ -17,7 +17,6 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -122,7 +121,6 @@ void export_bound(py::module_& m) {
  * \todo Combine the calls here with the calls in the algebraic traits.
  */
 void export_arr_rational_function_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Integer = CORE::BigInt;
   using Alg_kernel = CGAL::Algebraic_kernel_d_1<Integer>;
   using Gt = CGAL::Arr_rational_function_traits_2<Alg_kernel>;
@@ -142,10 +140,9 @@ void export_arr_rational_function_traits_2(py::module_& m) {
   // Export the rational-function traits itself.
   if (add_attr<Gt>(m, "Arr_rational_function_traits_2")) return;
 
-  py::class_<Gt> traits_c(m, "Arr_rational_function_traits_2",
-                          doc::CGAL_Arr_rational_function_traits_2__class__);
+  py::class_<Gt> traits_c(m, "Arr_rational_function_traits_2");
   traits_c.def(py::init<>())
-    .def(py::init<const \1&>(), py::arg("other"))
+    .def(py::init<const Gt&>())
     .def(py::init<Alg_kernel*>())
     .def("construct_curve_2_object", &Gt::construct_curve_2_object)
     .def("construct_x_monotone_curve_2_object",

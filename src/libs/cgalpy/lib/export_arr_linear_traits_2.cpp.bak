@@ -29,7 +29,6 @@
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -40,7 +39,6 @@ void set_left(Curve_2& c, Point_2& p) { c.set_left(p); }
 void set_right(Curve_2& c, Point_2& p) { c.set_right(p); }
 
 void export_arr_linear_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Gt = CGAL::Arr_linear_traits_2<Kernel>;
   using Pnt = Gt::Point_2;
   using Cv = Gt::Curve_2;
@@ -53,8 +51,7 @@ void export_arr_linear_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_linear_traits_2")) return;
 
-  py::class_<Gt, Kernel> traits_c(m, "Arr_linear_traits_2",
-                                  doc::CGAL_Arr_linear_traits_2__class__);
+  py::class_<Gt, Kernel> traits_c(m, "Arr_linear_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
@@ -87,14 +84,10 @@ void export_arr_linear_traits_2(py::module_& m) {
     .def("is_vertical", &Cv::is_vertical)
     .def("left", &Cv::left, ri)
     .def("right", &Cv::right, ri)
-    .def("set_left", static_cast<overload>(&Cv::set_left),
-         py::arg("p"))
-    .def("set_left", set_left,
-         py::arg("c"), py::arg("p"))
-    .def("set_right", static_cast<overload>(&Cv::set_right),
-         py::arg("p"))
-    .def("set_right", set_right,
-         py::arg("c"), py::arg("p"))
+    .def("set_left", static_cast<overload>(&Cv::set_left))
+    .def("set_left", set_left)
+    .def("set_right", static_cast<overload>(&Cv::set_right))
+    .def("set_right", set_right)
     .def("is_directed_right", &Cv::is_directed_right)
     .def("is_in_x_range", &Cv::is_in_x_range)
     .def("is_in_y_range", &Cv::is_in_y_range)

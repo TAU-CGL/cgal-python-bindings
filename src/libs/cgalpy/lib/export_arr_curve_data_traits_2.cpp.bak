@@ -17,7 +17,6 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/Curve_data_merge.hpp"
 #include "CGALPY/has_istream_operator.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -31,7 +30,6 @@ void export_extraction(T& xcv_c, std::true_type) { add_extraction(xcv_c); }
 
 //
 void export_arr_curve_data_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Gt = aos2::Cd_geometry_traits_2;
   using Base_gt = Gt::Base_traits_2;
   using Cv = Gt::Curve_2;

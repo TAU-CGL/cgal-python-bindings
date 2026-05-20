@@ -35,12 +35,10 @@
 #include "CGALPY/Kernel/export_segment_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/add_insertion.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
 void export_arr_conic_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   //TODO export RatKernel, AlgKernel
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
   using Rat_kernel = CGAL::Cartesian<Nt_traits::Rational>;
@@ -60,8 +58,7 @@ void export_arr_conic_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_conic_traits_2")) return;
 
-  py::class_<Gt> traits_c(m, "Arr_conic_traits_2",
-                          doc::CGAL_Arr_conic_traits_2__class__);
+  py::class_<Gt> traits_c(m, "Arr_conic_traits_2");
   traits_c.def(py::init<>())
     .def("construct_curve_2_object", &Gt::construct_curve_2_object)
     .def("construct_x_monotone_curve_2_object",
@@ -98,7 +95,7 @@ void export_arr_conic_traits_2(py::module_& m) {
   // Fall back; if other options exist, the corresponding wrappers whould be added
   if (! add_attr<Integer>(traits_c, "Integer")) {
     py::class_<Integer> int_c(traits_c, "Integer");
-    int_c.def(py::init<const \1&>(), py::arg("other"))
+    int_c.def(py::init<const Integer&>())
       .def(py::init_implicit<int>())
       ;
 
@@ -109,7 +106,7 @@ void export_arr_conic_traits_2(py::module_& m) {
   if (! add_attr<Rational>(traits_c, "Rational")) {
     py::class_<Rational> rat_c(traits_c, "Rational");
     export_ft(rat_c);
-    rat_c.def(py::init<const \1&>(), py::arg("other"))
+    rat_c.def(py::init<const Rational&>())
       .def(py::init_implicit<Integer>())
       .def(py::init<const Integer&, const Integer&>())
       ;
@@ -167,7 +164,7 @@ void export_arr_conic_traits_2(py::module_& m) {
       new py::class_<Cv>(traits_c, "Curve_2");
     auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
     cv_c.def(py::init<>())
-      .def(py::init<const \1&>(), py::arg("other"))
+      .def(py::init<const Cv&>())
       .def("is_valid", &Cv::is_valid)
       .def("r", &Cv::r, ri)
       .def("s", &Cv::s, ri)

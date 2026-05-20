@@ -15,7 +15,6 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/make_iterator.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -34,7 +33,6 @@ py::object items(const C& c) { return make_iterator(c.begin(), c.end()); }
 }
 
 void export_arr_consolidated_curve_data_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Gt = aos2::Ccd_geometry_traits_2;
   using Base_gt = aos2::Cd_geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -51,7 +49,7 @@ void export_arr_consolidated_curve_data_traits_2(py::module_& m) {
   if (! add_attr<Ul>(m, "Unique_list")) {
     py::class_<Ul> ul_c(m, "Unique_list");
     ul_c.def(py::init<>())
-      .def(py::init<const \1&>(), py::arg("other"))
+      .def(py::init<const Data&>())
       .def("size", &Ul::size)
       .def("front", &Ul::front, ri)
       .def("back", &Ul::back, ri)

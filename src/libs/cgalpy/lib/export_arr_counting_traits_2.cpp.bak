@@ -12,13 +12,11 @@
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
 //
 void export_arr_counting_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Gt = aos2::Cnt_geometry_traits_2;
   using Base_gt = Gt::Base;
 

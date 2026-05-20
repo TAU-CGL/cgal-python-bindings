@@ -26,7 +26,6 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -40,7 +39,6 @@ Segment_2 to_segment(CGAL::Arr_segment_traits_2<Kernel>::X_monotone_curve_2& c)
 
 //
 void export_arr_segment_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Gt = CGAL::Arr_segment_traits_2<Kernel>;
   using Pnt = Gt::Point_2;
   using Lin = Gt::Line_2;
@@ -50,8 +48,7 @@ void export_arr_segment_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_segment_traits_2")) return;
 
-  py::class_<Gt, Kernel> traits_c(m, "Arr_segment_traits_2",
-                                      doc::CGAL_Arr_segment_traits_2__class__);
+  py::class_<Gt, Kernel> traits_c(m, "Arr_segment_traits_2");
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
@@ -73,22 +70,18 @@ void export_arr_segment_traits_2(py::module_& m) {
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c.def(py::init_implicit<Segment_2&>())
-    .def(py::init<Pnt&, Pnt&>(), py::arg("p1"), py::arg("p2"))
-    .def(py::init<Line_2&, Pnt&, Pnt&>(), py::arg("l"), py::arg("p1"), py::arg("p2"))
+    .def(py::init<Pnt&, Pnt&>())
+    .def(py::init<Line_2&, Pnt&, Pnt&>())
     .def("flip", &Xcv::flip)
     .def("bbox", &Xcv::bbox)
 
     // Members defined in the base class:
     .def("source", [](const Xcv& xcv)->const Pnt& { return xcv.source(); }, ri)
     .def("target", [](const Xcv& xcv)->const Pnt& { return xcv.target(); }, ri)
-    .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri,
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_line)
-    .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); },
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_is_vertical)
-    .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri,
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_left)
-    .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri,
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_right)
+    .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri)
+    .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); })
+    .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri)
+    .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri)
     .def("set_left",
          [](Xcv& xcv, const Pnt& p)->void { return xcv.set_left(p); })
     .def("set_right",

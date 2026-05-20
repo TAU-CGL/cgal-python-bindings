@@ -28,7 +28,6 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
-#include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -59,7 +58,6 @@ ctr_cv(const typename Traits_::Construct_curve_2& ctr, py::list& lst) {
 
 //
 void export_arr_polyline_traits_2(py::module_& m) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   using Sgt = CGAL::Arr_segment_traits_2<Kernel>;
   using Pcbgt = CGAL::Arr_polycurve_basic_traits_2<Sgt>;
   using Pcgt = CGAL::Arr_polycurve_traits_2<Sgt>;
@@ -110,7 +108,7 @@ void export_arr_polyline_traits_2(py::module_& m) {
   // Export additional curve attributes:
   using Ctr_cv = Plgt::Construct_curve_2;
   py::class_<Ctr_cv>(plgt_c, "Construct_curve_2")
-    .def(py::init<const \1&>(), py::arg("other"))
+    .def(py::init<const Plgt&>())
     .def("__call__", &ctr_cv<Plgt>)
     ;
 
