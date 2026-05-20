@@ -45,12 +45,12 @@ void export_point_2(C& c) {
            py::sig("def __init__(self, x: RT | float, y: RT | float, w: RT | float, /) -> None"));
   }
   else {
-    c.def(py::init<const Ft&, const Ft&>())
-      .def(py::init<const Rt&, const Rt&, const Rt&>());
+    c.def(py::init<const Ft&, const Ft&>(), doc::Point_2_Point_2_2)
+      .def(py::init<const Rt&, const Rt&, const Rt&>(), doc::Point_2_Point_2_3);
   }
 
-  c.def(py::init<>())
-    .def(py::init<Pnt&>())
+  c.def(py::init<>(), doc::Point_2_Point_2_4)
+    .def(py::init<Pnt&>(), doc::Point_2_Point_2_5)
     .def(py::init_implicit<const CGAL::Origin&>())
     .def("x", &Pnt::x, doc::Point_2_x)    .def("y", &Pnt::y, doc::Point_2_y)    .def("hx", &Pnt::hx, doc::Point_2_hx)    .def("hy", &Pnt::hy, doc::Point_2_hy)    .def("hw", &Pnt::hw, doc::Point_2_hw)    .def("bbox", &Pnt::bbox, doc::Point_2_bbox)    .def("cartesian", &Pnt::cartesian, doc::Point_2_cartesian)    .def("__getitem__", &Pnt::operator[], doc::Point_2_operator)    .def("dimension", &Pnt::dimension, doc::Point_2_dimension)    .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))

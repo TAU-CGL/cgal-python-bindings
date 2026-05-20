@@ -29,13 +29,13 @@ void export_circle_2(C& c) {
   using Pnt = typename Kernel::Point_2;
   using Circle = typename Kernel::Circle_2;
 
-  c.def(py::init<>())
+  c.def(py::init<>(), doc::Circle_2_Circle_2)
     .def(py::init<Pnt&, FT&, CGAL::Orientation>(),
          py::arg("center"), py::arg("squared_radius"),
          py::arg("orientation").noconvert())
     .def(py::init<Pnt&, CGAL::Orientation>(),
          py::arg("center"), py::arg("orientation").noconvert())
-    .def(py::init<Pnt&, FT&>())
+    .def(py::init<Pnt&, FT&>(), doc::Circle_2_Circle_2_3)
     .def(py::init<Pnt&>())
     .def(py::init<Pnt&, Pnt&, CGAL::Orientation>(),
          py::arg("p"), py::arg("q"), py::arg("orientation").noconvert())

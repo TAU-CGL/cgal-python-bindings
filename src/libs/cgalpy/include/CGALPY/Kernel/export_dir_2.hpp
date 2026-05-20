@@ -35,17 +35,23 @@ void export_dir_2(C& c) {
   using Seg = typename Ker::Segment_2;
   using Vec = typename Ker::Vector_2;
 
-  c.def(py::init<Vec>())
-    .def(py::init<Line>())
-    .def(py::init<Ray>())
-    .def(py::init<Seg>())
-    .def(py::init<Rt&, Rt&>())
-    .def("dx", &Dir::dx, doc::Direction_2_dx)    .def("dy", &Dir::dy, doc::Direction_2_dy)    .def("vector", &Dir::vector, doc::Direction_2_vector)    .def("transform", &Dir::transform, doc::Direction_2_transform)    .def("counterclockwise_in_between", &Dir::counterclockwise_in_between, doc::Direction_2_counterclockwise_in_between)    .def("delta", &Dir::delta, doc::Direction_2_delta)    .def("__str__", to_string<Dir>)
+  c.def(py::init<Vec>(), doc::Direction_2_Direction_2)
+    .def(py::init<Line>(), doc::Direction_2_Direction_2_1)
+    .def(py::init<Ray>(), doc::Direction_2_Direction_2_2)
+    .def(py::init<Seg>(), doc::Direction_2_Direction_2_3)
+    .def(py::init<Rt&, Rt&>(), doc::Direction_2_Direction_2_4)
+    .def("dx", &Dir::dx, doc::Direction_2_dx)
+    .def("dy", &Dir::dy, doc::Direction_2_dy)
+    .def("vector", &Dir::vector, doc::Direction_2_vector)
+    .def("transform", &Dir::transform, doc::Direction_2_transform)
+    .def("counterclockwise_in_between", &Dir::counterclockwise_in_between, doc::Direction_2_counterclockwise_in_between)
+    .def("delta", &Dir::delta, doc::Direction_2_delta)
+    .def("__str__", to_string<Dir>)
     .def("__repr__", to_string<Dir>)
     .def(py::self == py::self,
-         py::sig("def __eq__(self, arg: object, /) -> bool"))
+        py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
-         py::sig("def __ne__(self, arg: object, /) -> bool"))
+        py::sig("def __ne__(self, arg: object, /) -> bool"))
     .def(py::self < py::self)
     .def(py::self > py::self)
     .def(py::self <= py::self)
