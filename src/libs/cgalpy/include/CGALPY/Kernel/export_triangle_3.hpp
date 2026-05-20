@@ -29,12 +29,7 @@ void export_triangle_3(C& c) {
   using Tri_3 = typename Ker::Triangle_3;
 
   c.def(py::init < Pnt_3&, Pnt_3&, Pnt_3&>())
-    .def("vertex", &Tri_3::vertex)
-    .def("__getitem__", &Tri_3::operator[])
-    .def("is_degenerate", &Tri_3::is_degenerate)
-    .def("bbox", &Tri_3::bbox)
-    .def("transform", &Tri_3::transform)
-    .def(py::self == py::self,
+    .def("vertex", &Tri_3::vertex, doc::Triangle_3_vertex)    .def("__getitem__", &Tri_3::operator[], doc::Triangle_3_operator)    .def("is_degenerate", &Tri_3::is_degenerate, doc::Triangle_3_is_degenerate)    .def("bbox", &Tri_3::bbox, doc::Triangle_3_bbox)    .def("transform", &Tri_3::transform, doc::Triangle_3_transform)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))

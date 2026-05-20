@@ -12,6 +12,8 @@
 #include <nanobind/nanobind.h>
 
 // 2D functors
+#include <cgalpy/Kernel_23_docstrings.hpp>
+namespace doc = cgalpy::docstrings::Kernel_23;
 #include "CGALPY/Kernel/export_aff_transformation_2.hpp"
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/Kernel/export_dir_2.hpp"

@@ -30,25 +30,9 @@ void export_segment_2(C& c) {
   using Seg = typename Kernel::Segment_2;
 
   c.def(py::init<Pnt&, Pnt&>())
-    .def("source", &Seg::source)
-    .def("target", &Seg::target)
-    .def("vertex", &Seg::vertex)
-    .def("point", &Seg::point)
-    .def("__getitem__", &Seg::operator[])
-    .def("min", &Seg::min)
-    .def("max", &Seg::max)
-    .def("opposite", &Seg::opposite)
-    .def("to_vector", &Seg::to_vector)
-    .def("supporting_line", &Seg::supporting_line)
-    .def("squared_length", &Seg::squared_length)
-    .def("direction", &Seg::direction)
-    .def("has_on", &Seg::has_on)
-    .def("collinear_has_on", &Seg::collinear_has_on)
-    .def("is_degenerate", &Seg::is_degenerate)
-    .def("is_horizontal", &Seg::is_horizontal)
+    .def("source", &Seg::source, doc::Segment_2_source)    .def("target", &Seg::target, doc::Segment_2_target)    .def("vertex", &Seg::vertex, doc::Segment_2_vertex)    .def("point", &Seg::point, doc::Segment_2_point)    .def("__getitem__", &Seg::operator[], doc::Segment_2_operator)    .def("min", &Seg::min, doc::Segment_2_min)    .def("max", &Seg::max, doc::Segment_2_max)    .def("opposite", &Seg::opposite, doc::Segment_2_opposite)    .def("to_vector", &Seg::to_vector, doc::Segment_2_to_vector)    .def("supporting_line", &Seg::supporting_line, doc::Segment_2_supporting_line)    .def("squared_length", &Seg::squared_length, doc::Segment_2_squared_length)    .def("direction", &Seg::direction, doc::Segment_2_direction)    .def("has_on", &Seg::has_on, doc::Segment_2_has_on)    .def("collinear_has_on", &Seg::collinear_has_on, doc::Segment_2_collinear_has_on)    .def("is_degenerate", &Seg::is_degenerate, doc::Segment_2_is_degenerate)    .def("is_horizontal", &Seg::is_horizontal)
     .def("is_vertical", &Seg::is_vertical)
-    .def("bbox", &Seg::bbox)
-    .def(py::self == py::self,
+    .def("bbox", &Seg::bbox, doc::Segment_2_bbox)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))

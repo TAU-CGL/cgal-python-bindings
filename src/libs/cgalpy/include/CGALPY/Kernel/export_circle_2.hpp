@@ -42,20 +42,13 @@ void export_circle_2(C& c) {
     .def(py::init<Pnt&, Pnt&, FT&>())
     .def(py::init<Pnt&, Pnt&>())
     .def(py::init<Pnt&, Pnt&, Pnt&>())
-    .def("center", &Circle::center)
-    .def("squared_radius", &Circle::squared_radius)
-    .def("orientation", &Circle::orientation)
-    .def("is_degenerate", &Circle::is_degenerate)
-    .def("oriented_side", &Circle::oriented_side)
-    .def("bounded_side", &Circle::bounded_side)
-    .def("has_on_positive_side", &Circle::has_on_positive_side)
+    .def("center", &Circle::center, doc::Circle_2_center)    .def("squared_radius", &Circle::squared_radius, doc::Circle_2_squared_radius)    .def("orientation", &Circle::orientation, doc::Circle_2_orientation)    .def("is_degenerate", &Circle::is_degenerate, doc::Circle_2_is_degenerate)    .def("oriented_side", &Circle::oriented_side, doc::Circle_2_oriented_side)    .def("bounded_side", &Circle::bounded_side, doc::Circle_2_bounded_side)    .def("has_on_positive_side", &Circle::has_on_positive_side)
     .def("has_on_negative_side", &Circle::has_on_negative_side)
     .def("has_on_boundary", &Circle::has_on_boundary)
     .def("has_on_bounded_side", &Circle::has_on_bounded_side)
     .def("has_on_unbounded_side",
          py::overload_cast<const Pnt&>(&Circle::has_on_unbounded_side, py::const_))
-    .def("orthogonal_transform", &Circle::orthogonal_transform)
-    .def(py::self == py::self,
+    .def("orthogonal_transform", &Circle::orthogonal_transform, doc::Circle_2_orthogonal_transform)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))

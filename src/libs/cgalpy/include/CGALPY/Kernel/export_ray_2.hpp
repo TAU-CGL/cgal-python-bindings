@@ -36,19 +36,9 @@ void export_ray_2(C& c) {
     .def(py::init<Pnt&, Dir&>())
     .def(py::init<Pnt&, Vec&>())
     .def(py::init<Pnt&, Line&>())
-    .def("is_degenerate", &Ray::is_degenerate)
-    .def("is_horizontal", &Ray::is_horizontal)
+    .def("is_degenerate", &Ray::is_degenerate, doc::Ray_2_is_degenerate)    .def("is_horizontal", &Ray::is_horizontal)
     .def("is_vertical", &Ray::is_vertical)
-    .def("direction", &Ray::direction)
-    .def("to_vector", &Ray::to_vector)
-    .def("has_on", &Ray::has_on)
-    .def("collinear_has_on", &Ray::collinear_has_on)
-    .def("point", &Ray::point)
-    .def("supporting_line", &Ray::supporting_line)
-    .def("opposite", &Ray::opposite)
-    .def("transform", &Ray::transform)
-    .def("source", &Ray::source)
-    .def(py::self == py::self,
+    .def("direction", &Ray::direction, doc::Ray_2_direction)    .def("to_vector", &Ray::to_vector, doc::Ray_2_to_vector)    .def("has_on", &Ray::has_on, doc::Ray_2_has_on)    .def("collinear_has_on", &Ray::collinear_has_on, doc::Ray_2_collinear_has_on)    .def("point", &Ray::point, doc::Ray_2_point)    .def("supporting_line", &Ray::supporting_line, doc::Ray_2_supporting_line)    .def("opposite", &Ray::opposite, doc::Ray_2_opposite)    .def("transform", &Ray::transform, doc::Ray_2_transform)    .def("source", &Ray::source, doc::Ray_2_source)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))

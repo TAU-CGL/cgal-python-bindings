@@ -123,20 +123,11 @@ void export_aff_transformation_2(C& c) {
     .def("__call__", &op_ln<Ker>,
          py::sig("def __call__(self, l: Line_2, /) -> Line_2"))
     .def(py::self * py::self, py::arg("s"), "composes two affine transformations.")
-    .def("inverse", &Aff_2::inverse, "gives the inverse transformation.")
-    .def(py::self == py::self,
+    .def("inverse", &Aff_2::inverse, doc::Aff_transformation_2_inverse)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"), "compares two affine transformations.")
-    .def("is_even", &Aff_2::is_even, "returns true, if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.")
-    .def("is_odd", &Aff_2::is_odd, "returns true, if the transformation is reflecting.")
-    .def("is_scaling", &Aff_2::is_scaling, "returns true, if the object was constructed using the tag CGAL::Scaling, or is the result of the composition of only such scaling transformation objects.")
-    .def("is_translation", &Aff_2::is_translation, "returns true, if the object was constructed using the tag CGAL::Translation, or is the result of the composition of only such translation transformation objects.")
-    .def("is_rotation", &Aff_2::is_rotation, "returns true, if the object was constructed using the tag CGAL::Rotation, or is the result of the composition of only such rotation transformation objects.")
-    .def("is_reflection", &Aff_2::is_reflection, "returns true, if the object was constructed using the tag CGAL::Reflection, or is the result of the composition of only such reflection transformation objects.")
-    .def("cartesian", &Aff_2::cartesian, py::arg("i"), py::arg("j"), "returns entry mij in a matrix representation in which m22 is 1.")
-    .def("m", &Aff_2::m, py::arg("i"), py::arg("j"), "returns entry mij in a matrix representation in which m22 is 1.")
-    .def("homogeneous", &Aff_2::homogeneous, py::arg("i"), py::arg("j"), "returns entry mij in some fixed matrix representation.")
-    .def("hm", &Aff_2::hm, py::arg("i"), py::arg("j"), "returns entry mij in some fixed matrix representation.")
-    ;
+    .def("is_even", &Aff_2::is_even, doc::Aff_transformation_2_is_even)    .def("is_odd", &Aff_2::is_odd, doc::Aff_transformation_2_is_odd)    .def("is_scaling", &Aff_2::is_scaling, doc::Aff_transformation_2_is_scaling)    .def("is_translation", &Aff_2::is_translation, doc::Aff_transformation_2_is_translation)    .def("is_rotation", &Aff_2::is_rotation, doc::Aff_transformation_2_is_rotation)    .def("is_reflection", &Aff_2::is_reflection, doc::Aff_transformation_2_is_reflection)    .def("cartesian", &Aff_2::cartesian, py::arg("i"), py::arg("j"), "returns entry mij in a matrix representation in which m22 is 1.")
+    .def("m", &Aff_2::m, py::arg("i"), py::arg("j"), doc::Aff_transformation_2_m)    .def("homogeneous", &Aff_2::homogeneous, py::arg("i"), py::arg("j"), "returns entry mij in some fixed matrix representation.")
+    .def("hm", &Aff_2::hm, py::arg("i"), py::arg("j"), doc::Aff_transformation_2_hm)    ;
 }
 
 #endif

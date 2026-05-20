@@ -37,19 +37,7 @@ void export_plane_3(C& c) {
     // .def(py::init<FT, double>())
     // .def(py::init<FT&, FT&>())
     // .def(py::init<RT&, RT&>())
-    .def("a", &Pln::a)
-    .def("b", &Pln::b)
-    .def("c", &Pln::c)
-    .def("d", &Pln::d)
-    .def("perpendicular_line", &Pln::perpendicular_line)
-    .def("projection", &Pln::projection)
-    .def("opposite", &Pln::opposite)
-    .def("point", &Pln::point)
-    .def("orthogonal_vector", &Pln::orthogonal_vector)
-    .def("orthogonal_direction", &Pln::orthogonal_direction)
-    .def("base1", &Pln::base1)
-    .def("base2", &Pln::base2)
-    .def(py::self == py::self,
+    .def("a", &Pln::a, doc::Plane_3_a)    .def("b", &Pln::b, doc::Plane_3_b)    .def("c", &Pln::c, doc::Plane_3_c)    .def("d", &Pln::d, doc::Plane_3_d)    .def("perpendicular_line", &Pln::perpendicular_line, doc::Plane_3_perpendicular_line)    .def("projection", &Pln::projection, doc::Plane_3_projection)    .def("opposite", &Pln::opposite, doc::Plane_3_opposite)    .def("point", &Pln::point, doc::Plane_3_point)    .def("orthogonal_vector", &Pln::orthogonal_vector, doc::Plane_3_orthogonal_vector)    .def("orthogonal_direction", &Pln::orthogonal_direction, doc::Plane_3_orthogonal_direction)    .def("base1", &Pln::base1, doc::Plane_3_base1)    .def("base2", &Pln::base2, doc::Plane_3_base2)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))

@@ -37,16 +37,7 @@ void export_line_3(C &c) {
          py::sig("def __eq__(self, arg: object, /) -> bool"), "Test for equality: two lines are equal, iff they have a non empty intersection and the same direction.")
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"), "Test for inequality.")
-    .def("projection", &Lin::projection, py::arg("p"), "returns the orthogonal projection of p on l.")
-    // .def("point", &Lin::point, py::arg("i"), "returns an arbitrary point on l.") // doesn't work for some reason
-    .def("is_degenerate", &Lin::is_degenerate, "returns true iff line l is degenerated to a point.")
-    .def("has_on", &Lin::has_on, py::arg("p"), "returns true iff p lies on l.")
-    .def("perpendicular_plane", &Lin::perpendicular_plane, py::arg("p"), "returns the plane perpendicular to l passing through p.")
-    .def("opposite", &Lin::opposite, "returns the line with opposite direction.")
-    .def("to_vector", &Lin::to_vector, "returns a vector having the same direction as l.")
-    .def("direction", &Lin::direction, "returns the direction of l.")
-    .def("transform", &Lin::transform, py::arg("t"), "returns the line obtained by applying t on a point on l and the direction of l.")
-    .def("__str__", &to_string<Lin>)
+    .def("projection", &Lin::projection, py::arg("p"), doc::Line_3_projection)    // .def("point", &Lin::point, py::arg("i")) // doesn't work for some reason    .def("is_degenerate", &Lin::is_degenerate, doc::Line_3_is_degenerate)    .def("has_on", &Lin::has_on, py::arg("p"), doc::Line_3_has_on)    .def("perpendicular_plane", &Lin::perpendicular_plane, py::arg("p"), doc::Line_3_perpendicular_plane)    .def("opposite", &Lin::opposite, doc::Line_3_opposite)    .def("to_vector", &Lin::to_vector, doc::Line_3_to_vector)    .def("direction", &Lin::direction, doc::Line_3_direction)    .def("transform", &Lin::transform, py::arg("t"), doc::Line_3_transform)    .def("__str__", &to_string<Lin>)
     .def("__repr__", &to_string<Lin>)
     ;
 

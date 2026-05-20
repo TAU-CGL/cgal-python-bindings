@@ -33,17 +33,8 @@ void export_ray_3(C &c) {
          py::sig("def __eq__(self, arg: object, /) -> bool"), "Test for equality: two rays are equal, iff they have the same source and the same direction.")
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"), "Test for inequality.")
-    .def("source", &Ray::source, "returns the source of r")
-    .def("point", &Ray::point,
-         py::arg("i"), "returns a point on r.\npoint(0) is the source. point(i), with i>0, is different from the source.")
-    .def("direction", &Ray::direction, "returns the direction of r.")
-    .def("to_vector", &Ray::to_vector, "returns a vector giving the direction of r.")
-    .def("supporting_line", &Ray::supporting_line, "returns the line supporting r which has the same direction.")
-    .def("opposite", &Ray::opposite, "returns the ray with the same source and the opposite direction.")
-    .def("is_degenerate", &Ray::is_degenerate, "ray r is degenerate, if the source and the second defining point fall together (that is if the direction is degenerate).")
-    .def("has_on", &Ray::has_on, "A point is on r, iff it is equal to the source of r, or if it is in the interior of r.")
-    .def("transform", &Ray::transform,
-         py::arg("t"), "returns the ray obtained by applying t on the source and on the direction of r.")
+    .def("source", &Ray::source, doc::Ray_3_source)    .def("point", &Ray::point,         py::arg("i"), "returns a point on r.\npoint(0) is the source. point(i), with i>0, is different from the source.")
+    .def("direction", &Ray::direction, doc::Ray_3_direction)    .def("to_vector", &Ray::to_vector, doc::Ray_3_to_vector)    .def("supporting_line", &Ray::supporting_line, doc::Ray_3_supporting_line)    .def("opposite", &Ray::opposite, doc::Ray_3_opposite)    .def("is_degenerate", &Ray::is_degenerate, doc::Ray_3_is_degenerate)    .def("has_on", &Ray::has_on, doc::Ray_3_has_on)    .def("transform", &Ray::transform,         py::arg("t"), "returns the ray obtained by applying t on the source and on the direction of r.")
     .def("__str__", to_string<Ray>)
     .def("__repr__", to_string<Ray>)
     ;

@@ -51,18 +51,11 @@ void export_aff_transformation_3(C& c) {
          py::sig("def __call__(self, l: Plane_3, /) -> Plane_3"))
     .def(py::self * py::self,
          py::sig("def __mul__(self, s: object, /) -> Aff_transformation_3"))
-    .def("inverse", &Aff_3::inverse, "gives the inverse transformation.")
-    .def(py::self == py::self,
+    .def("inverse", &Aff_3::inverse, doc::Aff_transformation_3_inverse)    .def(py::self == py::self,
          py::sig("def __eq__(self, s: object, /) -> bool"))
-    .def("is_even", &Aff_3::is_even, "returns true, if the transformation is not reflecting, i.e. the determinant of the involved linear transformation is non-negative.")
-    .def("is_odd", &Aff_3::is_odd, "returns true, if the transformation is reflecting.")
-    .def("is_scaling", &Aff_3::is_scaling, "returns true, if the object was constructed using the tag CGAL::Scaling, or is the result of the composition of only such scaling transformation objects.")
-    .def("is_translation", &Aff_3::is_translation, "returns true, if the object was constructed using the tag CGAL::Translation, or is the result of the composition of only such translation transformation objects.")
-    .def("cartesian", &Aff_3::cartesian, py::arg("i"), py::arg("j"))
-    .def("m", &Aff_3::m, py::arg("i"), py::arg("j"), "returns entry mij in a matrix representation in which m33 is 1.")
-    .def("homogeneous", &Aff_3::homogeneous, py::arg("i"), py::arg("j"))
-    .def("hm", &Aff_3::hm, py::arg("i"), py::arg("j"), "returns entry mij in a matrix representation in which m33 is 1.")
-    .def("__str__", to_string<Aff_3>)
+    .def("is_even", &Aff_3::is_even, doc::Aff_transformation_3_is_even)    .def("is_odd", &Aff_3::is_odd, doc::Aff_transformation_3_is_odd)    .def("is_scaling", &Aff_3::is_scaling, doc::Aff_transformation_3_is_scaling)    .def("is_translation", &Aff_3::is_translation, doc::Aff_transformation_3_is_translation)    .def("cartesian", &Aff_3::cartesian, py::arg("i"), py::arg("j"))
+    .def("m", &Aff_3::m, py::arg("i"), py::arg("j"), doc::Aff_transformation_3_m)    .def("homogeneous", &Aff_3::homogeneous, py::arg("i"), py::arg("j"))
+    .def("hm", &Aff_3::hm, py::arg("i"), py::arg("j"), doc::Aff_transformation_3_hm)    .def("__str__", to_string<Aff_3>)
     .def("__repr__", to_string<Aff_3>)
     ;
 

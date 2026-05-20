@@ -38,6 +38,8 @@
 #include "CGALPY/kernel_type.hpp"
 #include "CGALPY/Kernel/export_ft.hpp"
 #include "CGALPY/Kernel/export_rt.hpp"
+#include <cgalpy/Kernel_23_docstrings.hpp>
+namespace doc = cgalpy::docstrings::Kernel_23;
 #include "CGALPY/Kernel/export_kernel.hpp"
 #include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
@@ -249,13 +251,13 @@ void export_kernel_module(py::module_& m) {
 
   // Bbox_2
   if (! add_attr<Bbox_2>(m, "Bbox_2")) {
-    py::class_<Bbox_2> bbox_c(m, "Bbox_2");
+    py::class_<Bbox_2> bbox_c(m, "Bbox_2", doc::Bbox_2__class__);
     export_bbox_2(bbox_c);
   }
 
   // Bbox_3
   if (! add_attr<Bbox_3>(m, "Bbox_3")) {
-    py::class_<Bbox_3> bbox_c(m, "Bbox_3");
+    py::class_<Bbox_3> bbox_c(m, "Bbox_3", doc::Bbox_3__class__);
     export_bbox_3(bbox_c);
   }
 
@@ -287,67 +289,67 @@ void export_kernel_module(py::module_& m) {
 
   // Circle_2
   if (! add_attr<Circle_2>(m, "Circle_2")) {
-    py::class_<Circle_2> circle2_c(m, "Circle_2");
+    py::class_<Circle_2> circle2_c(m, "Circle_2", doc::Circle_2__class__);
     export_circle_2<Kernel>(circle2_c);
   }
 
   // Direction_2
   if (! add_attr<Dir_2>(m, "Direction_2")) {
-    py::class_<Dir_2> dir2_c(m, "Direction_2");
+    py::class_<Dir_2> dir2_c(m, "Direction_2", doc::Direction_2__class__);
     export_dir_2<Kernel>(dir2_c);
   }
 
   // Line_2
   if (! add_attr<Line_2>(m, "Line_2")) {
-    py::class_<Line_2> line2_c(m, "Line_2");
+    py::class_<Line_2> line2_c(m, "Line_2", doc::Line_2__class__);
     export_line_2<Kernel>(line2_c);
   }
 
   // Point_2
   if (! add_attr<Pnt_2>(m, "Point_2")) {
-    py::class_<Pnt_2> pnt2_c(m, "Point_2");
+    py::class_<Pnt_2> pnt2_c(m, "Point_2", doc::Point_2__class__);
     export_point_2<Kernel>(pnt2_c);
   }
 
   // Ray_2
   if (! add_attr<Ray_2>(m, "Ray_2")) {
-    py::class_<Ray_2> ray2_c(m, "Ray_2");
+    py::class_<Ray_2> ray2_c(m, "Ray_2", doc::Ray_2__class__);
     export_ray_2<Kernel>(ray2_c);
   }
 
   // Segment_2
   if (! add_attr<Seg_2>(m, "Segment_2")) {
-    py::class_<Seg_2> seg2_c(m, "Segment_2");
+    py::class_<Seg_2> seg2_c(m, "Segment_2", doc::Segment_2__class__);
     export_segment_2<Kernel>(seg2_c);
   }
 
   // Vector_2
   if (! add_attr<Vec_2>(m, "Vector_2")) {
-    py::class_<Vec_2> vec2_c(m, "Vector_2");
+    py::class_<Vec_2> vec2_c(m, "Vector_2", doc::Vector_2__class__);
     export_vector_2<Kernel>(vec2_c);
   }
 
   // Triangle_2
   if (! add_attr<Tri_2>(m, "Triangle_2")) {
-    py::class_<Tri_2> tri2_c(m, "Triangle_2");
+    py::class_<Tri_2> tri2_c(m, "Triangle_2", doc::Triangle_2__class__);
     export_triangle_2<Kernel>(tri2_c);
   }
 
   // Iso_rectangle_2
   if (! add_attr<Iso_rectangle_2>(m, "Iso_rectangle_2")) {
-    py::class_<Iso_rectangle_2>iso2_c(m, "Iso_rectangle_2");
+    py::class_<Iso_rectangle_2>iso2_c(m, "Iso_rectangle_2", doc::Iso_rectangle_2__class__);
     export_iso_rectangle_2<Kernel>(iso2_c);
   }
 
   // Aff_transformation_2
   if (! add_attr<Aff_transformation_2>(m, "Aff_transformation_2")) {
-    py::class_<Aff_transformation_2> aff2_c(m, "Aff_transformation_2");
+    py::class_<Aff_transformation_2> aff2_c(m, "Aff_transformation_2", doc::Aff_transformation_2__class__);
     export_aff_transformation_2<Kernel>(aff2_c);
   }
 
   // Aff_transformation_3
   if (! add_attr<Aff_transformation_3>(m, "Aff_transformation_3")) {
-    py::class_<Aff_transformation_3> aff3_c(m, "Aff_transformation_3");
+    py::class_<Aff_transformation_3> aff3_c(m, "Aff_transformation_3", doc::Aff_transformation_3__class__);
     export_aff_transformation_3<Kernel>(aff3_c);
   }
 
@@ -355,73 +357,73 @@ void export_kernel_module(py::module_& m) {
 
   // Circle_3
   if (! add_attr<Circle_3>(m, "Circle_3")) {
-    py::class_<Circle_3> circle3_c(m, "Circle_3");
+    py::class_<Circle_3> circle3_c(m, "Circle_3", doc::Circle_3__class__);
     export_circle_3<Kernel>(circle3_c);
   }
 
   // Direction_3
   if (! add_attr<Dir_3>(m, "Direction_3")) {
-    py::class_<Dir_3> dir3_c(m, "Direction_3");
+    py::class_<Dir_3> dir3_c(m, "Direction_3", doc::Direction_3__class__);
     export_dir_3<Kernel>(dir3_c);
   }
 
   // Point_3
   if (! add_attr<Pnt_3>(m, "Point_3")) {
-    py::class_<Pnt_3> pnt3_c(m, "Point_3");
+    py::class_<Pnt_3> pnt3_c(m, "Point_3", doc::Point_3__class__);
     export_point_3<Kernel>(pnt3_c);
   }
 
   // Line_3
   if (! add_attr<Line_3>(m, "Line_3")) {
-    py::class_<Line_3> line3_c(m, "Line_3");
+    py::class_<Line_3> line3_c(m, "Line_3", doc::Line_3__class__);
     export_line_3<Kernel>(line3_c);
   }
 
   // Ray_3
   if (! add_attr<Ray_3>(m, "Ray_3")) {
-    py::class_<Ray_3> ray3_c(m, "Ray_3");
+    py::class_<Ray_3> ray3_c(m, "Ray_3", doc::Ray_3__class__);
     export_ray_3<Kernel>(ray3_c);
   }
 
   // Segment_3
   if (! add_attr<Seg_3>(m, "Segment_3")) {
-    py::class_<Seg_3> seg3_c(m, "Segment_3");
+    py::class_<Seg_3> seg3_c(m, "Segment_3", doc::Segment_3__class__);
     export_segment_3<Kernel>(seg3_c);
   }
 
   // Tetrahedron_3
   if (! add_attr<Tetrahedron_3>(m, "Tetrahedron_3")) {
-    py::class_<Tetrahedron_3> tet3_c(m, "Tetrahedron_3");
+    py::class_<Tetrahedron_3> tet3_c(m, "Tetrahedron_3", doc::Tetrahedron_3__class__);
     export_tetrahedron_3<Kernel>(tet3_c);
   }
 
   // Triangle_2
   if (! add_attr<Tri_3>(m, "Triangle_3")) {
-    py::class_<Tri_3> tri3_c(m, "Triangle_3");
+    py::class_<Tri_3> tri3_c(m, "Triangle_3", doc::Triangle_3__class__);
     export_triangle_3<Kernel>(tri3_c);
   }
 
   // Weighted_point_3
   if (! add_attr<Wd_pnt_3>(m, "Weighted_point_3")) {
-    py::class_<Wd_pnt_3> wd_pnt3_c(m, "Weighted_point_3");
+    py::class_<Wd_pnt_3> wd_pnt3_c(m, "Weighted_point_3", doc::Weighted_point_3__class__);
     export_weighted_point_3<Kernel>(wd_pnt3_c);
   }
 
   // Vector_3
   if (! add_attr<Vec_3>(m, "Vector_3")) {
-    py::class_<Vec_3> vec3_c(m, "Vector_3");
+    py::class_<Vec_3> vec3_c(m, "Vector_3", doc::Vector_3__class__);
     export_vector_3<Kernel>(vec3_c);
   }
 
   // Plane_3
   if (! add_attr<Pln_3>(m, "Plane_3")) {
-    py::class_<Pln_3> pln3_c(m, "Plane_3");
+    py::class_<Pln_3> pln3_c(m, "Plane_3", doc::Plane_3__class__);
     export_plane_3<Kernel>(pln3_c);
   }
 
   // Sphere_3
   if (! add_attr<Sfr_3>(m, "Sphere_3")) {
-    py::class_<Sfr_3> sfr3_c(m, "Sphere_3");
+    py::class_<Sfr_3> sfr3_c(m, "Sphere_3", doc::Sphere_3__class__);
     export_sphere_3<Kernel>(sfr3_c);
   }
 

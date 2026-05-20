@@ -36,13 +36,7 @@ void export_sphere_3(C& c) {
     .def(py::init<const Pnt&, const Pnt&, CGAL::Orientation>())
     .def(py::init<const Pnt&, CGAL::Orientation>())
     .def(py::init<const Circle&>())
-    .def("center", &Sphere::center)
-    .def("squared_radius", &Sphere::squared_radius)
-    .def("orientation", &Sphere::orientation)
-    .def("is_degenerate", &Sphere::is_degenerate)
-    .def("oriented_side", &Sphere::oriented_side)
-    .def("bounded_side", &Sphere::bounded_side)
-    .def("has_on_positive_side", &Sphere::has_on_positive_side)
+    .def("center", &Sphere::center, doc::Sphere_3_center)    .def("squared_radius", &Sphere::squared_radius, doc::Sphere_3_squared_radius)    .def("orientation", &Sphere::orientation, doc::Sphere_3_orientation)    .def("is_degenerate", &Sphere::is_degenerate, doc::Sphere_3_is_degenerate)    .def("oriented_side", &Sphere::oriented_side, doc::Sphere_3_oriented_side)    .def("bounded_side", &Sphere::bounded_side, doc::Sphere_3_bounded_side)    .def("has_on_positive_side", &Sphere::has_on_positive_side)
     .def("has_on_negative_side", &Sphere::has_on_negative_side)
     .def("has_on_boundary", &Sphere::has_on_boundary)
     .def("has_on_bounded_side", &Sphere::has_on_bounded_side)
@@ -50,10 +44,7 @@ void export_sphere_3(C& c) {
          py::overload_cast<const Pnt&>(&Sphere::has_on_unbounded_side, py::const_))
     .def("has_on", py::overload_cast<const Pnt&>(&Sphere::has_on, py::const_))
     .def("has_on", py::overload_cast<const Circle&>(&Sphere::has_on, py::const_))
-    .def("opposite", &Sphere::opposite)
-    .def("orthogonal_transform", &Sphere::orthogonal_transform)
-    .def("bbox", &Sphere::bbox)
-    .def(py::self == py::self,
+    .def("opposite", &Sphere::opposite, doc::Sphere_3_opposite)    .def("orthogonal_transform", &Sphere::orthogonal_transform, doc::Sphere_3_orthogonal_transform)    .def("bbox", &Sphere::bbox, doc::Sphere_3_bbox)    .def(py::self == py::self,
          py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self,
          py::sig("def __ne__(self, arg: object, /) -> bool"))

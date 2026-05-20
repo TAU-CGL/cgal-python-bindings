@@ -29,21 +29,7 @@ void export_iso_cuboid_3(C& c) {
          py::arg("max_hx"), py::arg("max_hy"), py::arg("max_hz"),
          py::arg("hw") = Rt(1))
     .def(py::init<const CGAL::Bbox_3&>(), py::arg("bbox"))
-    .def("bbox", &Ic::bbox)
-    .def("max", &Ic::max)
-    .def("max_coord", &Ic::max_coord, py::arg("i"))
-    .def("min", &Ic::min)
-    .def("min_coord", &Ic::min_coord, py::arg("i"))
-    .def("__getitem__", &Ic::operator[], py::arg("i"))
-    .def("transform", &Ic::transform, py::arg("t"))
-    .def("vertex", &Ic::vertex, py::arg("i"))
-    .def("xmax", &Ic::xmax)
-    .def("xmin", &Ic::xmin)
-    .def("ymax", &Ic::ymax)
-    .def("ymin", &Ic::ymin)
-    .def("zmax", &Ic::zmax)
-    .def("zmin", &Ic::zmin)
-    ;
+    .def("bbox", &Ic::bbox, doc::Iso_cuboid_3_bbox)    .def("max", &Ic::max, doc::Iso_cuboid_3_max)    .def("max_coord", &Ic::max_coord, py::arg("i"), doc::Iso_cuboid_3_max_coord)    .def("min", &Ic::min, doc::Iso_cuboid_3_min)    .def("min_coord", &Ic::min_coord, py::arg("i"), doc::Iso_cuboid_3_min_coord)    .def("__getitem__", &Ic::operator[], py::arg("i"), doc::Iso_cuboid_3_operator)    .def("transform", &Ic::transform, py::arg("t"), doc::Iso_cuboid_3_transform)    .def("vertex", &Ic::vertex, py::arg("i"), doc::Iso_cuboid_3_vertex)    .def("xmax", &Ic::xmax, doc::Iso_cuboid_3_xmax)    .def("xmin", &Ic::xmin, doc::Iso_cuboid_3_xmin)    .def("ymax", &Ic::ymax, doc::Iso_cuboid_3_ymax)    .def("ymin", &Ic::ymin, doc::Iso_cuboid_3_ymin)    .def("zmax", &Ic::zmax, doc::Iso_cuboid_3_zmax)    .def("zmin", &Ic::zmin, doc::Iso_cuboid_3_zmin)    ;
 
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
