@@ -124,7 +124,9 @@ template <typename T1, typename T2,
 void bind_squared_distance(py::module_& m, bool) {
   using Sd_fnc = FT(*)(const T1&, const T2&);
   m.def("squared_distance",
-        static_cast<Sd_fnc>(&CGAL::squared_distance<Kernel>), "squared_distance() free function.");
+        static_cast<Sd_fnc>(&CGAL::squared_distance<Kernel>),
+        py::arg("obj1"), py::arg("obj2"),
+        "squared_distance() free function.");
 }
 
 //! Squared distance wrapper
@@ -164,9 +166,9 @@ void export_kernel_module(py::module_& m) {
     py::class_<FT> ft_c(m, "FT", "Field number type for the kernel.");
     export_ft(ft_c);
 
-    ft_c.def(py::init<Fte>(), "Constructor from exact type.")
-      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); }, "Constructor from string.")
-      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); }, "Constructor from numerator and denominator.")
+    ft_c.def(py::init<Fte>(), py::arg("value"), "Constructor from exact type.")
+      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); }, py::arg("value"), "Constructor from string.")
+      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); }, py::arg("numerator"), py::arg("denominator"), "Constructor from numerator and denominator.")
       .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); }, "Returns a double approximation.")
       .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri, "Returns the exact representation.")
       .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} , "Returns the approximate representation.")
@@ -209,7 +211,7 @@ void export_kernel_module(py::module_& m) {
   // Fall back
   if (! add_attr<Fte>(m, "Exact")) {
     py::class_<Fte> fte_c(m, "Exact", "Exact number type representation.");
-    fte_c.def(py::init<const Fte&>(), "Copy constructor.")
+    fte_c.def(py::init<const Fte&>(), py::arg("other"), "Copy constructor.")
       ;
 
     add_insertion(fte_c, "__str__");
