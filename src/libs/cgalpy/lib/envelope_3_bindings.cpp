@@ -11,8 +11,10 @@
 #include "CGALPY/envelope_3_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "generated/cgalpy/Envelope_3_docstrings.hpp"
 
 namespace py = nanobind;
+namespace doc = cgalpy::docstrings::Envelope_3;
 
 // Docstrings
 namespace {
@@ -105,9 +107,10 @@ void export_envelope_3(py::module_& m) {
   }
 
   if (! add_attr<Ed>(m, "Envelope_diagram_2")) {
-    py::class_<Ed, Edos> ed_c(m, "Envelope_diagram_2");
-    ed_c.def(py::init<>())
-      .def(py::init<const Ed&>(), py::arg("other"))
+    py::class_<Ed, Edos> ed_c(m, "Envelope_diagram_2", doc::CGAL_Envelope_diagram_2__class__);
+    ed_c.def(py::init<>(), doc::CGAL_Envelope_diagram_2_Envelope_diagram_2)
+      .def(py::init<const Ed&>(), py::arg("other"),
+           doc::CGAL_Envelope_diagram_2_Envelope_diagram_2_1)
       .def(py::init<const Traits*>(), py::arg("traits"))
       ;
   }
