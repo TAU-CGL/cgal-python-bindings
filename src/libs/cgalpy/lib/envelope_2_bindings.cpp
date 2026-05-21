@@ -14,8 +14,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "generated/cgalpy/Envelope_2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace doc = cgalpy::docstrings::Envelope_2;
 
 // Docstrings
 namespace {
@@ -97,13 +99,16 @@ void export_envelope_2 (py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Vertex>(m, "Vertex")) {
-    py::class_<Vertex> vertex_c(m, "Vertex");
+    py::class_<Vertex> vertex_c(m, "Vertex", doc::EnvelopeDiagramVertex__class__);
     vertex_c.def(py::init<>())
-      .def(py::init<const Pnt&>(), py::arg("point"))
-      .def("point", &Vertex::point, ri)
-      .def("number_of_curves", &Vertex::number_of_curves)
-      .def("left", [](const Vertex& v)->const Edge& { return *(v.left()); }, ri)
-      .def("right", [](const Vertex& v)->const Edge& { return *(v.right()); }, ri)
+      .def(py::init<const Pnt&>(), py::arg("point"), doc::EnvelopeDiagramVertex_EnvelopeDiagramVertex_1)
+      .def("point", &Vertex::point, ri, doc::EnvelopeDiagramVertex_point)
+      .def("number_of_curves", &Vertex::number_of_curves,
+           doc::EnvelopeDiagramVertex_number_of_curves)
+      .def("left", [](const Vertex& v)->const Edge& { return *(v.left()); }, ri,
+           doc::EnvelopeDiagramVertex_left)
+      .def("right", [](const Vertex& v)->const Edge& { return *(v.right()); }, ri,
+           doc::EnvelopeDiagramVertex_right)
       .def("curves", &env2::curves<Vertex>, py::keep_alive<0, 1>())
       ;
 
@@ -112,13 +117,17 @@ void export_envelope_2 (py::module_& m) {
   }
 
   if (! add_attr<Edge>(m, "Edge")) {
-    py::class_<Edge> edge_c(m, "Edge");
+    py::class_<Edge> edge_c(m, "Edge", doc::EnvelopeDiagramEdge__class__);
     edge_c.def(py::init<>())
-      .def("is_empty", &Edge::is_empty)
-      .def("number_of_curves", &Edge::number_of_curves)
-      .def("curve", &Edge::curve, ri)
-      .def("left", [](const Edge& e)->const Vertex& { return *(e.left()); }, ri)
-      .def("right", [](const Edge& e)->const Vertex& { return *(e.right()); }, ri)
+      .def("is_empty", &Edge::is_empty,
+           doc::EnvelopeDiagramEdge_is_empty)
+      .def("number_of_curves", &Edge::number_of_curves,
+           doc::EnvelopeDiagramEdge_number_of_curves)
+      .def("curve", &Edge::curve, ri, doc::EnvelopeDiagramEdge_curve)
+      .def("left", [](const Edge& e)->const Vertex& { return *(e.left()); }, ri,
+           doc::EnvelopeDiagramEdge_left)
+      .def("right", [](const Edge& e)->const Vertex& { return *(e.right()); }, ri,
+           doc::EnvelopeDiagramEdge_right)
       .def("curves", &env2::curves<Edge>, py::keep_alive<0, 1>())
       ;
 
@@ -127,12 +136,14 @@ void export_envelope_2 (py::module_& m) {
   }
 
   if (! add_attr<Ed>(m, "Envelope_diagram_1")) {
-    py::class_<Ed>(m, "Envelope_diagram_1")
+    py::class_<Ed>(m, "Envelope_diagram_1", doc::EnvelopeDiagram_1__class__)
       .def(py::init<>())
       .def("leftmost",
-          [](const Ed& ed)->const Edge& { return *(ed.leftmost()); }, ri)
+          [](const Ed& ed)->const Edge& { return *(ed.leftmost()); }, ri,
+          doc::EnvelopeDiagram_1_leftmost)
       .def("rightmost",
-          [](const Ed& ed)->const Edge& { return *(ed.rightmost()); }, ri)
+          [](const Ed& ed)->const Edge& { return *(ed.rightmost()); }, ri,
+          doc::EnvelopeDiagram_1_rightmost)
       ;
   }
 
