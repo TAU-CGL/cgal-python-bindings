@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+#include <cgalpy/Kernel_d_docstrings.hpp>
 
 #include <boost/iterator/iterator_facade.hpp>
 
@@ -22,6 +23,8 @@
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
+
+namespace doc = cgalpy::docstrings::Kernel_d;
 
 extern void export_gmpz(py::module_& m);
 extern void export_gmpq(py::module_& m);
@@ -123,7 +126,7 @@ void export_kernel_d(py::module_& m) {
   if (! add_attr<Kerd>(m, "Kernel_d")) {
     using Ctr_vec_d = Kerd::Construct_vector_d;
 
-    py::class_<Kerd> kerd_c(m, "Kernel_d");
+    py::class_<Kerd> kerd_c(m, "Kernel_d", doc::Kernel_d__class__);
     kerd_c.def(py::init<>())
       .def("construct_vector_d_object", [](const Kerd& k)->Ctr_vec_d{ return k.construct_vector_d_object(); })
       ;
