@@ -46,7 +46,7 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   }
 
   py::class_<Gt> traits_c(m, "Arr_circle_segment_traits_2",
-                          doc::CGAL_Arr_circle_segment_traits_2__class__);
+                          doc::Arr_circle_segment_traits_2__class__);
   traits_c.def(py::init<>());
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
@@ -59,10 +59,10 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
 
   auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
-  pnt_c.def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
-    .def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
-    .def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
-    .def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
+  pnt_c.def(py::init<Coord_nt&, Coord_nt&>(), py::arg("p1"), py::arg("p2"))
+    .def(py::init<int, Coord_nt&>(), py::arg("p1"), py::arg("p2"))
+    .def(py::init<Coord_nt&, int>(), py::arg("p1"), py::arg("p2"))
+    .def(py::init<Coord_nt&, Coord_nt&>(), py::arg("p1"), py::arg("p2"))
     .def(py::init<int, int>())
     .def("x", &aos2::Point_2::x)
     .def("y", &aos2::Point_2::y)
@@ -78,7 +78,7 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
   xcv_c
     // .def(py::init_implicit<Segment_2&>())
-    .def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
+    .def(py::init<Kernel::Point_2&, Kernel::Point_2&>(), py::arg("p1"), py::arg("p2"))
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
     .def("source", &aos2::X_monotone_curve_2::source, ri)
@@ -100,16 +100,16 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   //! \todo Handle the functions that return reference-counted objects.
   auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
   cv_c.def(py::init_implicit<Segment_2&>())
-    .def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
+    .def(py::init<Kernel::Point_2&, Kernel::Point_2&>(), py::arg("p1"), py::arg("p2"))
     .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init_implicit<Circle_2&>())
-    .def(py::init<\1&, \2&>(), py::arg("p1"), py::arg("p2"))
+    .def(py::init<Kernel::Point_2&, Kernel::Point_2&>(), py::arg("p1"), py::arg("p2"))
     .def(py::init<Point_2&, FT&, CGAL::Orientation>())
     .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&>())
     .def(py::init<Point_2&, FT&, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
     // TODO: error below: non-constant-expression cannot be narrowed from type 'int' to 'NT' (aka 'double')
     // .def(py::init<Point_2&, int, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
-    .def(py::init<\1&, \2&, \3&>(), py::arg("a"), py::arg("b"), py::arg("c"))
+    .def(py::init<Point_2&, FT&, CGAL::Orientation>(), py::arg("a"), py::arg("b"), py::arg("c"))
     .def("is_circular", &aos2::Curve_2::is_circular)
     .def("is_full", &aos2::Curve_2::is_full)
     .def("is_linear", &aos2::Curve_2::is_linear)

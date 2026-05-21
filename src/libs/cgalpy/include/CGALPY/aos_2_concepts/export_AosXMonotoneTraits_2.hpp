@@ -18,6 +18,7 @@
 #include "cgalpy/Arrangement_on_surface_2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
 
 //
 template<typename T, typename C, typename Classes>
@@ -55,7 +56,6 @@ void export_Are_mergeable_2(C& c, Classes& classes, CGAL::Tag_false) {}
 //
 template <typename T, typename C, typename Concepts>
 void export_AosXMonotoneTraits_2(C& c, Concepts& concepts) {
-  namespace doc = cgalpy::docstrings::Arrangement_on_surface_2;
   static bool exported = false;
   if (exported) return;
 

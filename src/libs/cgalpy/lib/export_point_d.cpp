@@ -66,18 +66,18 @@ void init_point_d(Point_d* pd, int d, py::list& lst) {
 
 //!
 void export_point_d(py::class_<Point_d>& pntd_c) {
-  pntd_c.doc() = doc::CGAL_Point_d__class__;
+  pntd_c.doc() = doc::Point_d__class__;
   using Kerd = Kernel_d;
   using Pntd = Point_d;
 
-  pntd_c.def(py::init<>(), doc::CGAL_Point_d_Point_d)
+  pntd_c.def(py::init<>(), doc::Point_d_Point_d)
     .def("__init__", &kerd::init_point_d)
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Pntd>)
-    .def("dimension", &Pntd::dimension, doc::CGAL_Point_d_dimension)
-    .def("cartesian", &Pntd::cartesian, doc::CGAL_Point_d_cartesian)
-    .def("__getitem__", &Pntd::operator[], doc::CGAL_Point_d_operator)
-    .def(py::self == py::self, doc::CGAL_Point_d_operator_1)
-    .def(py::self != py::self, doc::CGAL_Point_d_operator_2)
+    .def("dimension", &Pntd::dimension, doc::Point_d_dimension)
+    .def("cartesian", &Pntd::cartesian, doc::Point_d_cartesian)
+    .def("__getitem__", &Pntd::operator[], doc::Point_d_operator)
+    .def(py::self == py::self, doc::Point_d_operator_1)
+    .def(py::self != py::self, doc::Point_d_operator_2)
     //.def(py::self > py::self)
     //.def(py::self < py::self)
     //.def(py::self <= py::self)

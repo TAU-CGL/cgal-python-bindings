@@ -326,31 +326,31 @@ void export_polygon_2(py::module_& m) {
   }
 
   // Free functions
-  m.def("area_2", &pol2::area_2_1, py::arg("points"), py::arg("kernel"), doc::CGALarea2);
-  m.def("area_2", &pol2::area_2_2, py::arg("points"), doc::CGALarea2);
-  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::CGALbottomvertex2);
-  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_2, py::arg("points"), doc::CGALbottomvertex2);
-  m.def("bounded_side_2", &pol2::bounded_side_2_1, py::arg("points"), py::arg("pnt"), py::arg("kernel"), doc::CGALboundedside2);
-  m.def("bounded_side_2", &pol2::bounded_side_2_2, py::arg("points"), py::arg("pnt"), doc::CGALboundedside2);
-  m.def("is_convex_2", &pol2::is_convex_2_1, py::arg("points"), py::arg("kernel"), doc::CGALisconvex2);
-  m.def("is_convex_2", &pol2::is_convex_2_2, py::arg("points"), doc::CGALisconvex2);
-  m.def("is_simple_2", &pol2::is_simple_2_1, py::arg("points"), py::arg("kernel"), doc::CGALissimple2);
-  m.def("is_simple_2", &pol2::is_simple_2_2, py::arg("points"), doc::CGALissimple2);
-  m.def("left_vertex_2", &pol2::left_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::CGALleftvertex2);
-  m.def("left_vertex_2", &pol2::left_vertex_2_2, py::arg("points"), doc::CGALleftvertex2);
-  m.def("orientation_2", &pol2::orientation_2_1, py::arg("points"), py::arg("kernel"), doc::CGALorientation2);
-  m.def("orientation_2", &pol2::orientation_2_2, py::arg("points"), doc::CGALorientation2);
-  m.def("oriented_side_2", &pol2::oriented_side_2_1, py::arg("points"), py::arg("pnt"), py::arg("kernel"), doc::CGALorientedside2);
-  m.def("oriented_side_2", &pol2::oriented_side_2_2, py::arg("points"), py::arg("pnt"), doc::CGALorientedside2);
+  m.def("area_2", &pol2::area_2_1, py::arg("points"), py::arg("kernel"), doc::area_2);
+  m.def("area_2", &pol2::area_2_2, py::arg("points"), doc::area_2);
+  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::bottom_vertex_2);
+  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_2, py::arg("points"), doc::bottom_vertex_2);
+  m.def("bounded_side_2", &pol2::bounded_side_2_1, py::arg("points"), py::arg("pnt"), py::arg("kernel"), doc::bounded_side_2);
+  m.def("bounded_side_2", &pol2::bounded_side_2_2, py::arg("points"), py::arg("pnt"), doc::bounded_side_2);
+  m.def("is_convex_2", &pol2::is_convex_2_1, py::arg("points"), py::arg("kernel"), doc::is_convex_2);
+  m.def("is_convex_2", &pol2::is_convex_2_2, py::arg("points"), doc::is_convex_2);
+  m.def("is_simple_2", &pol2::is_simple_2_1, py::arg("points"), py::arg("kernel"), doc::is_simple_2);
+  m.def("is_simple_2", &pol2::is_simple_2_2, py::arg("points"), doc::is_simple_2);
+  m.def("left_vertex_2", &pol2::left_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::left_vertex_2);
+  m.def("left_vertex_2", &pol2::left_vertex_2_2, py::arg("points"), doc::left_vertex_2);
+  m.def("orientation_2", &pol2::orientation_2_1, py::arg("points"), py::arg("kernel"), doc::orientation_2);
+  m.def("orientation_2", &pol2::orientation_2_2, py::arg("points"), doc::orientation_2);
+  m.def("oriented_side_2", &pol2::oriented_side_2_1, py::arg("points"), py::arg("pnt"), py::arg("kernel"), doc::oriented_side_2);
+  m.def("oriented_side_2", &pol2::oriented_side_2_2, py::arg("points"), py::arg("pnt"), doc::oriented_side_2);
   m.def("polygon_area_2", &pol2::polygon_area_2_1, py::arg("points"), py::arg("kernel"), doc::Polygon_2_area);
   m.def("polygon_area_2", &pol2::polygon_area_2_2, py::arg("points"), doc::Polygon_2_area);
-  m.def("right_vertex_2", &pol2::right_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::CGALrightvertex2);
-  m.def("right_vertex_2", &pol2::right_vertex_2_2, py::arg("points"), doc::CGALrightvertex2);
-  m.def("top_vertex_2", &pol2::top_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::CGALtopvertex2);
-  m.def("top_vertex_2", &pol2::top_vertex_2_2, py::arg("points"), doc::CGALtopvertex2);
+  m.def("right_vertex_2", &pol2::right_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::right_vertex_2);
+  m.def("right_vertex_2", &pol2::right_vertex_2_2, py::arg("points"), doc::right_vertex_2);
+  m.def("top_vertex_2", &pol2::top_vertex_2_1, py::arg("points"), py::arg("kernel"), doc::top_vertex_2);
+  m.def("top_vertex_2", &pol2::top_vertex_2_2, py::arg("points"), doc::top_vertex_2);
 
 #ifdef CGALPY_HAS_VISUAL
   using Draw = void(*)(const Pgn&, const char*);
-  m.def("draw", static_cast<Draw>(CGAL::draw),  py::arg("pgn"), py::arg("title") = "", doc::CGALdraw);
+  m.def("draw", static_cast<Draw>(CGAL::draw),  py::arg("pgn"), py::arg("title") = "", doc::draw);
 #endif
 }

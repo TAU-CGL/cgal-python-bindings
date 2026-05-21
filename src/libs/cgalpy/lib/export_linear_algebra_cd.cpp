@@ -38,21 +38,19 @@ void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c) {
       .def(py::init<int>(), doc::Matrix_Matrix_1)
       .def(py::init<int, int>(), doc::Matrix_Matrix_2)
       .def("__getitem__",
-           doc::Matrix_operator,
            [](const Matd& m, py::tuple idx) {
              if (idx.size() != 2) throw std::runtime_error("Expected 2 indices");
              int i = py::cast<int>(idx[0]);
              int j = py::cast<int>(idx[1]);
              return m(i, j);
-           })
+           }, doc::Matrix_operator)
       .def("__setitem__",
-           doc::Matrix_operator_1,
            [](Matd& m, py::tuple idx, const FT_d& val) {
              if (idx.size() != 2) throw std::runtime_error("Expected 2 indices");
              int i = py::cast<int>(idx[0]);
              int j = py::cast<int>(idx[1]);
              m(i, j) = val;
-           })
+           }, doc::Matrix_operator_1)
         ;
   }
 

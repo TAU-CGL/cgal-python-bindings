@@ -32,19 +32,19 @@ void init_vector_d(Vector_d* pd, int d, py::list& lst) {
 
 //!
 void export_vector_d(py::class_<Vector_d>& vecd_c) {
-  vecd_c.doc() = doc::CGAL_Vector_d__class__;
+  vecd_c.doc() = doc::Vector_d__class__;
   using Kerd = Kernel_d;
   using Vecd = Vector_d;
 
-  vecd_c.def(py::init<>(), doc::CGAL_Vector_d_Vector_d)
+  vecd_c.def(py::init<>(), doc::Vector_d_Vector_d)
     .def("__init__", &kerd::init_vector_d)
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Vecd>)
-    .def("dimension", &Vecd::dimension, doc::CGAL_Vector_d_dimension)
-    .def("cartesian", &Vecd::cartesian, doc::CGAL_Vector_d_cartesian)
-    .def("__getitem__", &Vecd::operator[], doc::CGAL_Vector_d_operator)
+    .def("dimension", &Vecd::dimension, doc::Vector_d_dimension)
+    .def("cartesian", &Vecd::cartesian, doc::Vector_d_cartesian)
+    .def("__getitem__", &Vecd::operator[], doc::Vector_d_operator)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) || (CGAL_VERSION_NR > 1060200000)
-    .def(py::self == py::self, doc::CGAL_Vector_d_operator_1)
-    .def(py::self != py::self, doc::CGAL_Vector_d_operator_2)
+    .def(py::self == py::self, doc::Vector_d_operator_1)
+    .def(py::self != py::self, doc::Vector_d_operator_2)
 #endif
     // .def(py::self > py::self)
     // .def(py::self < py::self)

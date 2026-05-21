@@ -18,7 +18,7 @@
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
-#include "generated/cgalpy/Boolean_set_operations_2_docstrings.hpp"
+#include <cgalpy/Boolean_set_operations_2_docstrings.hpp>
 
 // The following might be needed in the future when extraction support is added
 // to specific curves types. At that point we can add support for extraction
@@ -325,7 +325,7 @@ void export_general_polygon_set_2(py::module_& m) {
          py::overload_cast<const Gpsb2&>(&Gpsb2::oriented_side, py::const_))
 
     .def("locate", &Gpsb2::locate,
-         py::arg("point"), doc::General_polygon_set_2_locate)
+         py::arg("point"), py::arg("pwh"), doc::General_polygon_set_2_locate)
 
     // Use `py::overload_cast` to cast overloaded functions.
     // 1. As a convention, add the suffix `_mutable` to the mutable version.
