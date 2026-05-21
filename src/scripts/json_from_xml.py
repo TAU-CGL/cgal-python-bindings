@@ -80,7 +80,7 @@ def parse_compound(xml_file):
 
     kind = compounddef.get("kind", "")
     # Only process classes, structs, namespaces
-    if kind not in ("class", "struct", "namespace"):
+    if kind not in ("class", "struct", "namespace", "group"):
         return None
 
     name = text_of(compounddef.find("compoundname"))
@@ -117,7 +117,7 @@ def build_json(xml_dir):
         idx = ET.parse(index_file)
         for compound in idx.getroot().findall("compound"):
             kind = compound.get("kind", "")
-            if kind in ("class", "struct", "namespace"):
+            if kind in ("class", "struct", "namespace", "group"):
                 refid = compound.get("refid", "")
                 f = xml_dir / f"{refid}.xml"
                 if f.exists():
