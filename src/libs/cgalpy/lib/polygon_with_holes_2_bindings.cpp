@@ -30,7 +30,7 @@ void init_polygon_with_holes_2(Polygon_with_holes_2* pwh, Polygon_2& p,
                                py::list& lst) {
   auto begin = stl_forward_iterator<Polygon_2>(lst);
   auto end = stl_forward_iterator<Polygon_2>(lst, false);
-  new (pwh) Polygon_with_holes_2(p, begin, end);        // placement new
+  new (pwh) Polygon_with_holes_2(p, begin, end);
 }
 
 }
@@ -44,19 +44,39 @@ void export_polygon_with_holes_2(py::module_& m) {
   using Gpwh = pol2::General_polygon_with_holes_2;
 
   if (! add_attr<Gpwh>(m, "General_polygon_with_holes_2")) {
-    py::class_<Gpwh> gpwh_c(m, "General_polygon_with_holes_2");
+    py::class_<Gpwh> gpwh_c(
+      m,
+      "General_polygon_with_holes_2",
+      "Polygon with holes represented by an outer boundary and zero or more holes."
+    );
     export_general_polygon_with_holes_2(gpwh_c);
   }
 
   if (! add_attr<Pwh>(m, "Polygon_with_holes_2")) {
-    py::class_<Pwh, Gpwh> pwh_c(m, "Polygon_with_holes_2");
-    pwh_c.def(py::init<>())
-      .def(py::init<Pgn&>())
-      .def("__init__", &pol2::init_polygon_with_holes_2)
+    py::class_<Pwh, Gpwh> pwh_c(
+      m,
+      "Polygon_with_holes_2",
+      "Polygon with holes represented by a linear outer boundary and zero or more polygonal holes."
+    );
+    pwh_c
+      .def(py::init<>(),
+           "Construct an empty polygon with holes.")
+      .def(py::init<Pgn&>(),
+           py::arg("outer_boundary"),
+           "Construct a polygon with holes from an outer boundary and no holes.")
+      .def("__init__", &pol2::init_polygon_with_holes_2,
+           py::arg("outer_boundary"),
+           py::arg("holes"),
+           "Initialize a polygon with holes from an outer boundary and a list of hole polygons.")
 
-      .def("bbox", &Pwh::bbox)
-      .def(py::self == py::self)
-      .def(py::self != py::self)
+      .def("bbox", &Pwh::bbox,
+           "Return the bounding box of the polygon with holes.")
+      .def(py::self == py::self,
+           py::arg("other"),
+           "Return whether two polygons with holes are equal.")
+      .def(py::self != py::self,
+           py::arg("other"),
+           "Return whether two polygons with holes are not equal.")
       ;
 
     add_insertion(pwh_c, "__str__");
@@ -67,6 +87,7 @@ void export_polygon_with_holes_2(py::module_& m) {
 #ifdef CGALPY_HAS_VISUAL
   using Draw = void(*)(const Pwh&, const char*);
   m.def("draw", static_cast<Draw>(CGAL::draw),
-        py::arg("pwh"), py::arg("title") = "");
+        py::arg("pwh"), py::arg("title") = "",
+        "Draw a polygon with holes in a viewer window.");
 #endif
 }
