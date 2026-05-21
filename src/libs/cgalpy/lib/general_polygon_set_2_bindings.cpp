@@ -18,6 +18,7 @@
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "generated/cgalpy/Boolean_set_operations_2_docstrings.hpp"
 
 // The following might be needed in the future when extraction support is added
 // to specific curves types. At that point we can add support for extraction
@@ -29,6 +30,7 @@
 // #include <CGAL/Arr_Bezier_curve_traits_2.h>
 
 namespace py = nanobind;
+namespace doc = cgalpy::docstrings::Boolean_set_operations_2;
 
 namespace bso2 {
 
@@ -221,20 +223,26 @@ void export_general_polygon_set_2(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Gpsb2> gpsb2_c(m, "Gps_on_surface_base_2");
-  gpsb2_c.def(py::init<>())
+  gpsb2_c.def(py::init<>(), doc::General_polygon_set_2_General_polygon_set_2)
     .def(py::init<const Gpsb2&>())
-    .def(py::init<const GT&>())
+    .def(py::init<const GT&>(),
+         py::arg("traits"), doc::General_polygon_set_2_General_polygon_set_2_2)
     .def("simplify", &Gpsb2::simplify)
 
     // Complement
-    .def("complement", py::overload_cast<>(&Gpsb2::complement))
-    .def("complement", py::overload_cast<const Gpsb2&>(&Gpsb2::complement))
+    .def("complement", py::overload_cast<>(&Gpsb2::complement), doc::General_polygon_set_2_complement)
+    .def("complement", py::overload_cast<const Gpsb2&>(&Gpsb2::complement),
+         py::arg("other"), doc::General_polygon_set_2_complement_1)
 
     // insert
-    .def("insert", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::insert))
-    .def("insert", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::insert))
-    .def("insert", &bso2::insert1)
-    .def("insert", &bso2::insert2)
+    .def("insert", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::insert),
+         py::arg("polygon"), doc::General_polygon_set_2_insert)
+    .def("insert", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::insert),
+         py::arg("polygon_with_holes"), doc::General_polygon_set_2_insert_1)
+    .def("insert", &bso2::insert1,
+         py::arg("polygons"), py::arg("polygons_with_holes"), doc::General_polygon_set_2_insert_2)
+    .def("insert", &bso2::insert2,
+         py::arg("objects"), doc::General_polygon_set_2_insert_3)
 
     // do_intersect
     .def("do_intersect",
@@ -243,8 +251,10 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<bool(Gpsb2::*)(const Pwh&)const>(&Gpsb2::do_intersect))
     .def("do_intersect",
          static_cast<bool(Gpsb2::*)(const Gpsb2&)const>(&Gpsb2::do_intersect))
-    .def("do_intersect", &bso2::do_intersect1)
-    .def("do_intersect", &bso2::do_intersect2)
+    .def("do_intersect", &bso2::do_intersect1,
+         py::arg("polygons"), py::arg("polygons_with_holes"), doc::General_polygon_set_2_do_intersect_3)
+    .def("do_intersect", &bso2::do_intersect2,
+         py::arg("objects"), doc::General_polygon_set_2_do_intersect_4)
 
     // intersection
     .def("intersection",
@@ -255,22 +265,34 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::intersection))
     .def("intersection",
          static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::intersection))
-    .def("intersection", &bso2::intersection1)
-    .def("intersection", &bso2::intersection2)
+    .def("intersection", &bso2::intersection1,
+         py::arg("polygons"), py::arg("polygons_with_holes"), doc::General_polygon_set_2_intersection_4)
+    .def("intersection", &bso2::intersection2,
+         py::arg("objects"), doc::General_polygon_set_2_intersection_5)
 
     // join
-    .def("join", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::join))
-    .def("join", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::join))
-    .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::join))
-    .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::join))
-    .def("join", &bso2::join1)
-    .def("join", &bso2::join2)
+    .def("join", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::join),
+         py::arg("polygon"), doc::General_polygon_set_2_join)
+    .def("join", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::join),
+         py::arg("polygon_with_holes"), doc::General_polygon_set_2_join_1)
+    .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::join),
+         py::arg("other"), doc::General_polygon_set_2_join_2)
+    .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::join),
+         py::arg("ps1"), py::arg("ps2"), doc::General_polygon_set_2_join_3)
+    .def("join", &bso2::join1,
+         py::arg("polygons"), py::arg("polygons_with_holes"), doc::General_polygon_set_2_join_4)
+    .def("join", &bso2::join2,
+         py::arg("objects"), doc::General_polygon_set_2_join_5)
 
     // difference
-    .def("difference", py::overload_cast<const Pgn&>(&Gpsb2::difference))
-    .def("difference", py::overload_cast<const Pwh&>(&Gpsb2::difference))
-    .def("difference", py::overload_cast<const Gpsb2&>(&Gpsb2::difference))
-    .def("difference", py::overload_cast<const Gpsb2&, const Gpsb2&>(&Gpsb2::difference))
+    .def("difference", py::overload_cast<const Pgn&>(&Gpsb2::difference),
+         py::arg("polygon"), doc::General_polygon_set_2_difference)
+    .def("difference", py::overload_cast<const Pwh&>(&Gpsb2::difference),
+         py::arg("polygon_with_holes"), doc::General_polygon_set_2_difference_1)
+    .def("difference", py::overload_cast<const Gpsb2&>(&Gpsb2::difference),
+         py::arg("other"), doc::General_polygon_set_2_difference_2)
+    .def("difference", py::overload_cast<const Gpsb2&, const Gpsb2&>(&Gpsb2::difference),
+         py::arg("ps1"), py::arg("ps2"), doc::General_polygon_set_2_difference_3)
 
     // symmetric_difference
     .def("symmetric_difference",
@@ -281,14 +303,16 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::symmetric_difference))
     .def("symmetric_difference",
          static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::symmetric_difference))
-    .def("symmetric_difference", &bso2::symmetric_difference1)
-    .def("symmetric_difference", &bso2::symmetric_difference2)
+    .def("symmetric_difference", &bso2::symmetric_difference1,
+         py::arg("polygons"), py::arg("polygons_with_holes"), doc::General_polygon_set_2_symmetric_difference_4)
+    .def("symmetric_difference", &bso2::symmetric_difference2,
+         py::arg("objects"), doc::General_polygon_set_2_symmetric_difference_5)
 
     .def("number_of_polygons_with_holes",
          &Gpsb2::number_of_polygons_with_holes)
-    .def("is_empty", &Gpsb2::is_empty)
-    .def("is_plane", &Gpsb2::is_plane)
-    .def("clear", &Gpsb2::clear)
+    .def("is_empty", &Gpsb2::is_empty, doc::General_polygon_set_2_is_empty)
+    .def("is_plane", &Gpsb2::is_plane, doc::General_polygon_set_2_is_plane)
+    .def("clear", &Gpsb2::clear, doc::General_polygon_set_2_clear)
 
     // oriented_side
     .def("oriented_side",
@@ -300,7 +324,8 @@ void export_general_polygon_set_2(py::module_& m) {
     .def("oriented_side",
          py::overload_cast<const Gpsb2&>(&Gpsb2::oriented_side, py::const_))
 
-    .def("locate", &Gpsb2::locate)
+    .def("locate", &Gpsb2::locate,
+         py::arg("point"), doc::General_polygon_set_2_locate)
 
     // Use `py::overload_cast` to cast overloaded functions.
     // 1. As a convention, add the suffix `_mutable` to the mutable version.
@@ -310,8 +335,9 @@ void export_general_polygon_set_2(py::module_& m) {
     .def("arrangement_mutable", py::overload_cast<>(&Gpsb2::arrangement), ri)
     .def("arrangement", py::overload_cast<>(&Gpsb2::arrangement, py::const_), ri)
 
-    .def("is_valid", &Gpsb2::is_valid)
-    .def("polygons_with_holes", &bso2::polygons_with_holes)
+    .def("is_valid", &Gpsb2::is_valid, doc::General_polygon_set_2_is_valid)
+    .def("polygons_with_holes", &bso2::polygons_with_holes,
+         doc::General_polygon_set_2_polygons_with_holes)
     ;
 
   py::class_<Gpsos2, Gpsb2> gpsos2_c(m, "General_polygon_set_on_surface_2");
@@ -320,14 +346,19 @@ void export_general_polygon_set_2(py::module_& m) {
     .def(py::init<const GT&>())
     ;
 
-  py::class_<Gps2, Gpsos2> gps2_c(m, "General_polygon_set_2");
+  py::class_<Gps2, Gpsos2> gps2_c(m, "General_polygon_set_2", doc::General_polygon_set_2__class__);
   gps2_c.def(py::init<>())
-    .def(py::init<const Gps2&>())
+    .def(py::init<const Gps2&>(),
+         py::arg("other"), doc::General_polygon_set_2_General_polygon_set_2_1)
     .def(py::init<const GT&>())
-    .def(py::init<const Pgn&>())
-    .def(py::init<const Pwh&>())
-    .def(py::init<const Pgn&, const GT&>())
-    .def(py::init<const Pwh&, const GT&>())
+    .def(py::init<const Pgn&>(),
+         py::arg("polygon"), doc::General_polygon_set_2_General_polygon_set_2_3)
+    .def(py::init<const Pwh&>(),
+         py::arg("polygon_with_holes"), doc::General_polygon_set_2_General_polygon_set_2_4)
+    .def(py::init<const Pgn&, const GT&>(),
+         py::arg("polygon"), py::arg("traits"), doc::General_polygon_set_2_General_polygon_set_2_5)
+    .def(py::init<const Pwh&, const GT&>(),
+         py::arg("polygon_with_holes"), py::arg("traits"), doc::General_polygon_set_2_General_polygon_set_2_6)
 
     // Use `py::overload_cast` to cast overloaded functions.
     // 1. As a convention, add the suffix `_mutable` to the mutable version.
