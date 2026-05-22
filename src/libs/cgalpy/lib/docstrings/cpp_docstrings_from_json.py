@@ -38,10 +38,31 @@ def strip_namespace(name):
 
 def sanitize_member_name(name):
     name = re.sub(r"<.*", "", name)
+    # If this is some operator-like name, turn it into a safe identifier,
+    # but NEVER collapse to a bare 'operator'.
     if name.startswith("operator") and len(name) > len("operator"):
         rest = name[len("operator"):]
+        # If the first char after 'operator' is not alnum/_ (e.g. '==', '!='),
+        # keep a short suffix instead of collapsing to bare 'operator'.
         if not re.match(r"^[A-Za-z0-9_]", rest):
-            name = "operator"
+            # e.g. operator== -> operator_eq, operator!= -> operator_ne, etc.
+            mapping = {
+                "==": "eq",
+                "!=": "ne",
+                "<": "lt",
+                "<=": "le",
+                ">": "gt",
+                ">=": "ge",
+                "+": "plus",
+                "-": "minus",
+                "*": "mul",
+                "/": "div",
+                "%": "mod",
+            }
+            # take at most 2 chars of the symbol part
+            sym = rest[:2]
+            suffix = mapping.get(sym, "op")
+            name = f"operator_{suffix}"
     name = re.sub(r"[^A-Za-z0-9_]", "", name)
     if name in CPP_KEYWORDS:
         name = name + "_"

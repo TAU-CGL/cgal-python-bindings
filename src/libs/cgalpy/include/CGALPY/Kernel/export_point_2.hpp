@@ -32,12 +32,12 @@ py::object cartesians_p2(const typename Kernel_::Point_2& p)
 // Export a two-dimensional point of a kernel.
 template <typename Kernel_, typename C>
 void export_point_2(C& c) {
+  namespace doc = cgalpy::docstrings::Kernel_23;
   using Ker = Kernel_;
   using Ft = typename Ker::FT;
   using Rt = typename Ker::RT;
   using Pnt = typename Ker::Point_2;
   using Vec = typename Ker::Vector_2;
-
   if constexpr (is_exact_ft()) {
     c.def(py::init<const Ft&, const Ft&>(),
           py::sig("def __init__(self, x: FT | float, y: FT | float, /) -> None"))
