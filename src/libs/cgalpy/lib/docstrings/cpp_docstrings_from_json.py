@@ -1,142 +1,120 @@
 #!/usr/bin/env python3
 """
 cpp_docstrings_from_json.py
-Generate C++ docstring header (.hpp) and definition (.cpp) files from a JSON docstring file.
+Generate C++ docstring header (.hpp) and definition (.cpp) from a JSON docstring file.
 
 Usage:
-    python3 cpp_docstrings_from_json.py <input.json> <module_name> <out_dir_include> <out_dir_lib>
+    python3 cpp_docstrings_from_json.py <json_file> <module_name> <include_out_dir> <lib_out_dir>
 """
 
 import json
+import re
 import sys
+from collections import Counter
 from pathlib import Path
 
-_CPP_KEYWORDS = {
+CPP_KEYWORDS = {
     "alignas","alignof","and","and_eq","asm","auto","bitand","bitor","bool",
-    "break","case","catch","char","char8_t","char16_t","char32_t","class","compl",
-    "concept","const","consteval","constexpr","constinit","const_cast","continue",
-    "co_await","co_return","co_yield","decltype","default","delete","do","double",
-    "dynamic_cast","else","enum","explicit","export","extern","false","float","for",
-    "friend","goto","if","inline","int","long","mutable","namespace","new","noexcept",
-    "not","not_eq","nullptr","operator","or","or_eq","private","protected","public",
-    "reinterpret_cast","requires","return","short","signed","sizeof","static",
-    "static_assert","static_cast","struct","switch","template","this","thread_local",
-    "throw","true","try","typedef","typeid","typename","union","unsigned","using",
-    "virtual","void","volatile","wchar_t","while","xor","xor_eq",
-    "override","final","import","module","type",
+    "break","case","catch","char","char8_t","char16_t","char32_t","class",
+    "compl","concept","const","consteval","constexpr","constinit","const_cast",
+    "continue","co_await","co_return","co_yield","decltype","default","delete",
+    "do","double","dynamic_cast","else","enum","explicit","export","extern",
+    "false","float","for","friend","goto","if","inline","int","long","mutable",
+    "namespace","new","noexcept","not","not_eq","nullptr","or","or_eq",
+    "private","protected","public","register","reinterpret_cast","requires",
+    "return","short","signed","sizeof","static","static_assert","static_cast",
+    "struct","switch","template","this","thread_local","throw","true","try",
+    "typedef","typeid","typename","union","unsigned","using","virtual","void",
+    "volatile","wchar_t","while","xor","xor_eq",
 }
+# NOTE: "operator" is NOT in CPP_KEYWORDS.
+# "SomeClass_operator" is a valid C++ identifier.
 
-def sanitize_cpp_identifier(name: str) -> str:
-    """Append '_' if name is a C++ reserved keyword."""
-    return (name + "_") if name in _CPP_KEYWORDS else name
+def strip_namespace(name):
+    result = name.replace("::", "_")
+    if result.startswith("CGAL_"):
+        result = result[len("CGAL_"):]
+    return result
 
-def make_identifier(class_name: str, member_name, overload_index: int) -> str:
-    safe_class = sanitize_cpp_identifier(class_name)
-    if member_name is None:
-        return f"{safe_class}__class__"
-    safe_member = sanitize_cpp_identifier(member_name)
-    if overload_index == 0:
-        return f"{safe_class}_{safe_member}"
-    return f"{safe_class}_{safe_member}_{overload_index}"
+def sanitize_member_name(name):
+    name = re.sub(r"<.*", "", name)
+    if name.startswith("operator") and len(name) > len("operator"):
+        rest = name[len("operator"):]
+        if not re.match(r"^[A-Za-z0-9_]", rest):
+            name = "operator"
+    name = re.sub(r"[^A-Za-z0-9_]", "", name)
+    if name in CPP_KEYWORDS:
+        name = name + "_"
+    return name
 
-def build_docstring(entry: dict) -> str:
-    parts = []
-    brief = (entry.get("brief") or "").strip()
-    if brief:
-        parts.append(brief)
-    ret = (entry.get("return_type") or "").strip()
-    if ret:
-        parts.append(f"Returns: {ret}")
-    text = " ".join(parts)
-    text = text.replace("\\", "\\\\").replace('"', '\\"')
-    return text
+def make_identifier(class_id, member_name, overload_idx):
+    base = f"{class_id}_{member_name}"
+    return base if overload_idx == 0 else f"{base}_{overload_idx}"
 
-def collect_entries(data: dict) -> list:
-    entries = []
-    for class_name, class_obj in data.items():
-        if not isinstance(class_obj, dict):
-            continue
-        class_doc = (class_obj.get("brief") or "").strip()
-        class_doc = class_doc.replace("\\", "\\\\").replace('"', '\\"')
-        entries.append((make_identifier(class_name, None, 0), class_doc))
-        members = class_obj.get("members") or []
-        seen: dict = {}
-        for member in members:
-            mname = (member.get("name") or "").strip()
-            if not mname:
-                continue
-            count = seen.get(mname, 0)
-            seen[mname] = count + 1
-            entries.append((make_identifier(class_name, mname, count),
-                            build_docstring(member)))
-    return entries
+def escape_string(s):
+    return s.replace("\\", "\\\\").replace('"', '\\"')
 
-def generate_hpp(module: str, entries: list) -> str:
-    guard = f"CGALPY_{module.upper()}_DOCSTRINGS_HPP"
-    lines = [
-        f"// AUTO-GENERATED by cpp_docstrings_from_json.py \u2014 DO NOT EDIT",
-        f"// Library: cgalpy  Module: {module}",
-        f"#ifndef {guard}",
-        f"#define {guard}",
-        "",
-        "namespace cgalpy {",
-        "namespace docstrings {",
-        f"namespace {module} {{",
-        "",
+def generate(json_path, module_name, include_out, lib_out):
+    data = json.loads(json_path.read_text())
+    declarations = []
+    definitions  = []
+
+    for raw_class_name, class_info in data.items():
+        class_id = strip_namespace(raw_class_name)
+        brief    = escape_string(class_info.get("brief", "").strip())
+        detailed = escape_string(class_info.get("detailed", "").strip())
+        doc_text = (brief + (" " + detailed if detailed else "")).strip()
+        cid = f"{class_id}___class__"
+        declarations.append(f'extern const char* const {cid};')
+        definitions.append(f'const char* const {cid} = "{doc_text}";')
+
+        name_seen = Counter()
+        for m in class_info.get("members", []):
+            sname = sanitize_member_name(m["name"])
+            idx   = name_seen[sname]; name_seen[sname] += 1
+            ident = make_identifier(class_id, sname, idx)
+            m_brief = escape_string(m.get("brief", "").strip())
+            ret     = m.get("return_type", "").strip()
+            m_doc   = m_brief
+            if ret and ret not in ("void", "", "unspecified_type"):
+                m_doc += (f" Returns: {ret}" if m_doc else f"Returns: {ret}")
+            declarations.append(f'extern const char* const {ident};')
+            definitions.append(f'const char* const {ident} = "{m_doc.strip()}";')
+
+    guard    = f"CGALPY_{module_name.upper()}_DOCSTRINGS_HPP"
+    hpp_name = f"{module_name}_docstrings.hpp"
+    cpp_name = f"{module_name}_docstrings.cpp"
+
+    hpp_lines = [
+        f"// AUTO-GENERATED by cpp_docstrings_from_json.py — DO NOT EDIT",
+        f"// Library: cgalpy  Module: {module_name}",
+        f"#ifndef {guard}", f"#define {guard}", "",
+        "namespace cgalpy {", "namespace docstrings {",
+        f"namespace {module_name} {{", "",
+    ] + declarations + [
+        "", f"}} // namespace {module_name}",
+        "} // namespace docstrings", "} // namespace cgalpy", "",
+        f"#endif // {guard}", "",
     ]
-    for ident, _ in entries:
-        lines.append(f"extern const char* const {ident};")
-    lines += [
-        "",
-        f"}} // namespace {module}",
-        "} // namespace docstrings",
-        "} // namespace cgalpy",
-        "",
-        f"#endif // {guard}",
-        "",
+    cpp_lines = [
+        f"// AUTO-GENERATED by cpp_docstrings_from_json.py — DO NOT EDIT",
+        f"// Library: cgalpy  Module: {module_name}",
+        f'#include "{hpp_name}"', "",
+        "namespace cgalpy {", "namespace docstrings {",
+        f"namespace {module_name} {{", "",
+    ] + definitions + [
+        "", f"}} // namespace {module_name}",
+        "} // namespace docstrings", "} // namespace cgalpy", "",
     ]
-    return "\n".join(lines)
 
-def generate_cpp(module: str, entries: list) -> str:
-    lines = [
-        f"// AUTO-GENERATED by cpp_docstrings_from_json.py \u2014 DO NOT EDIT",
-        f"// Library: cgalpy  Module: {module}",
-        f'#include "{module}_docstrings.hpp"',
-        "",
-        "namespace cgalpy {",
-        "namespace docstrings {",
-        f"namespace {module} {{",
-        "",
-    ]
-    for ident, doc in entries:
-        lines.append(f'const char* const {ident} = "{doc}";')
-    lines += [
-        "",
-        f"}} // namespace {module}",
-        "} // namespace docstrings",
-        "} // namespace cgalpy",
-        "",
-    ]
-    return "\n".join(lines)
-
-def main() -> None:
-    if len(sys.argv) != 5:
-        print(__doc__)
-        sys.exit(1)
-    json_path   = Path(sys.argv[1])
-    module      = sys.argv[2]
-    out_include = Path(sys.argv[3])
-    out_lib     = Path(sys.argv[4])
-    data = json.loads(json_path.read_text(encoding="utf-8"))
-    entries = collect_entries(data)
-    out_include.mkdir(parents=True, exist_ok=True)
-    out_lib.mkdir(parents=True, exist_ok=True)
-    hpp_path = out_include / f"{module}_docstrings.hpp"
-    cpp_path = out_lib     / f"{module}_docstrings.cpp"
-    hpp_path.write_text(generate_hpp(module, entries), encoding="utf-8")
-    cpp_path.write_text(generate_cpp(module, entries), encoding="utf-8")
-    print(f"[OK] {hpp_path}")
-    print(f"[OK] {cpp_path}")
+    include_out.mkdir(parents=True, exist_ok=True)
+    lib_out.mkdir(parents=True, exist_ok=True)
+    (include_out / hpp_name).write_text("\n".join(hpp_lines))
+    (lib_out     / cpp_name).write_text("\n".join(cpp_lines))
+    print(f"[OK] {include_out / hpp_name}  ({len(declarations)} declarations)")
+    print(f"[OK] {lib_out / cpp_name}  ({len(definitions)} definitions)")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) != 5:
+        print(__doc__); sys.exit(1)
+    generate(Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3]), Path(sys.argv[4]))
