@@ -49,7 +49,7 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
   classes.m_approximate_2->def("__call__",
                                static_cast<ovld2>(&Approximate_2::operator()),
                                py::arg("p"),
-                               doc::AosTraits_ApproximatePoint_2_operator);
+                               doc::AosTraits_ApproximatePoint_2_operator_op);
 }
 
 // Bind the Approximate_2 traits functor
