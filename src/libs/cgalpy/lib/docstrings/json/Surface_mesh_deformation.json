@@ -1,0 +1,2345 @@
+{
+  "schema_version": 1,
+  "package": "Surface_mesh_deformation",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 10,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Deformation_Eigen_closest_rotation_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Deformation_Eigen_closest_rotation_traits_3",
+      "brief": "A class to compute the closest rotation in Frobenius norm to a 3x3 Matrix using the Eigen library .",
+      "detailed": "The internal computation relies on Eigen::JacobiSVD<> solver. Is model of DeformationClosestRotationTraits_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_deformation___eigen__closest__rotation__traits__3.xml",
+      "file": "CGAL/Deformation_Eigen_closest_rotation_traits_3.h",
+      "line": "27"
+    },
+    "CGAL::Deformation_Eigen_polar_closest_rotation_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Deformation_Eigen_polar_closest_rotation_traits_3",
+      "brief": "A class to compute the closest rotation in Frobenius norm to a 3x3 Matrix using the Eigen library .",
+      "detailed": "The internal computation relies on a hybrid system using the solvers Eigen::SelfAdjointEigenSolver<> and Eigen::JacobiSVD<> (polar decomposition). Is model of DeformationClosestRotationTraits_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_deformation___eigen__polar__closest__rotation__traits__3.xml",
+      "file": "CGAL/Deformation_Eigen_polar_closest_rotation_traits_3.h",
+      "line": "29"
+    },
+    "CGAL::Surface_mesh_deformation": {
+      "kind": "class",
+      "name": "CGAL::Surface_mesh_deformation",
+      "brief": "Class providing the functionalities for deforming a triangulated surface mesh.",
+      "detailed": "TM a model of HalfedgeGraph VIM a model of ReadablePropertyMap with Surface_mesh_deformation::vertex_descriptor as key and unsigned int as value type. The default is boost::property_map<TM, boost::vertex_index_t>::type . HIM a model of ReadablePropertyMap with Surface_mesh_deformation::halfedge_descriptor as key and unsigned int as value type. The default is boost::property_map<TM, boost::halfedge_index_t>::type . TAG tag for selecting the deformation algorithm WC a model of SurfaceMeshDeformationWeights , with WC::Triangle_mesh being TM . If TAG is ORIGINAL_ARAP , the weights must be positive to guarantee a correct energy minimization. The default is the cotangent weighting scheme. In case TAG is ORIGINAL_ARAP , negative weights are clamped to zero. ST a model of SparseLinearAlgebraWithFactorTraits_d. If Eigen 3.2 (or greater) is available and CGAL_EIGEN3_ENABLED is defined, then an overload of Eigen_solver_traits is provided as default parameter. CGAL::Eigen_solver_traits< Eigen::SparseLU< CGAL::Eigen_sparse_matrix<double>::EigenType, Eigen::COLAMDOrdering<int> > > CR a model of DeformationClosestRotationTraits_3 . If Eigen 3.1 (or greater) is available and CGAL_EIGEN3_ENABLED is defined, Deformation_Eigen_polar_closest_rotation_traits_3 is provided as default parameter. VPM a model of ReadWritePropertyMap with Surface_mesh_deformation::vertex_descriptor as key and a point as value type. The point type must be a model of RawPoint_3 . The default is boost::property_map<TM, CGAL::vertex_point_t>::type .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Triangle_mesh",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Triangle_mesh",
+          "brief": "Triangle mesh type.",
+          "detailed": "",
+          "return_type": "TM",
+          "definition": "typedef TM CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Triangle_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "214"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_index_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Vertex_index_map",
+          "brief": "vertex index map type",
+          "detailed": "",
+          "return_type": "VIM",
+          "definition": "typedef VIM CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Vertex_index_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "227"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hedge_index_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Hedge_index_map",
+          "brief": "halfedge index map type",
+          "detailed": "",
+          "return_type": "HIM",
+          "definition": "typedef HIM CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Hedge_index_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "229"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sparse_linear_solver",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Sparse_linear_solver",
+          "brief": "sparse linear solver type",
+          "detailed": "",
+          "return_type": "ST",
+          "definition": "typedef ST CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Sparse_linear_solver",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "247"
+        },
+        {
+          "kind": "typedef",
+          "name": "Closest_rotation_traits",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Closest_rotation_traits",
+          "brief": "closest rotation traits type",
+          "detailed": "",
+          "return_type": "CR",
+          "definition": "typedef CR CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Closest_rotation_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "262"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_point_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Vertex_point_map",
+          "brief": "vertex point map type",
+          "detailed": "",
+          "return_type": "VPM",
+          "definition": "typedef VPM CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Vertex_point_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "273"
+        },
+        {
+          "kind": "typedef",
+          "name": "Weight_calculator",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Weight_calculator",
+          "brief": "weight calculator functor type",
+          "detailed": "",
+          "return_type": "WC",
+          "definition": "typedef WC CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Weight_calculator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "284"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Surface_mesh_deformation::vertex_descriptor",
+          "brief": "The type for vertex descriptor.",
+          "detailed": "",
+          "return_type": "boost::graph_traits< Triangle_mesh >::vertex_descriptor",
+          "definition": "typedef boost::graph_traits<Triangle_mesh>::vertex_descriptor CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "288"
+        },
+        {
+          "kind": "typedef",
+          "name": "halfedge_descriptor",
+          "qualified_name": "CGAL::Surface_mesh_deformation::halfedge_descriptor",
+          "brief": "The type for halfedge descriptor.",
+          "detailed": "",
+          "return_type": "boost::graph_traits< Triangle_mesh >::halfedge_descriptor",
+          "definition": "typedef boost::graph_traits<Triangle_mesh>::halfedge_descriptor CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::halfedge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "290"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Point",
+          "brief": "The 3D point type, model of RawPoint_3 .",
+          "detailed": "",
+          "return_type": "boost::property_traits< Vertex_point_map >::value_type",
+          "definition": "typedef boost::property_traits<Vertex_point_map>::value_type CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "292"
+        },
+        {
+          "kind": "typedef",
+          "name": "Roi_vertex_range",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Roi_vertex_range",
+          "brief": "A constant iterator range over the vertices of the region-of-interest.",
+          "detailed": "It is a model of ConstRange with vertex_descriptor as iterator value type.",
+          "return_type": "std::vector< vertex_descriptor >",
+          "definition": "typedef std::vector<vertex_descriptor> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Roi_vertex_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "295"
+        },
+        {
+          "kind": "function",
+          "name": "Surface_mesh_deformation",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Surface_mesh_deformation",
+          "brief": "The constructor of a deformation object.",
+          "detailed": "triangle_mesh consists of only triangular facets triangle_mesh triangulated surface mesh to deform vertex_index_map a property map which associates a unique id to each vertex, between 0 to num_vertices(triangle_mesh)-1 . hedge_index_map property map which associates a unique id to each halfedge, between 0 to 2*num_edges( triangle_mesh )-1 . vertex_point_map property map which associates a point to each vertex of the triangle mesh. weight_calculator function object or pointer for weight calculation",
+          "return_type": "",
+          "definition": "CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Surface_mesh_deformation",
+          "argsstring": "(Triangle_mesh &triangle_mesh, Vertex_index_map vertex_index_map=unspecified_internal_vertex_index_map, Hedge_index_map hedge_index_map=unspecified_internal_halfedge_index_map, Vertex_point_map vertex_point_map=get(boost::vertex_point, triangle_mesh), Weight_calculator weight_calculator=Weight_calculator(triangle_mesh, vertex_point_map))",
+          "params": [
+            {
+              "type": "Triangle_mesh &",
+              "name": "triangle_mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_index_map",
+              "name": "vertex_index_map",
+              "default": "unspecified_internal_vertex_index_map",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Hedge_index_map",
+              "name": "hedge_index_map",
+              "default": "unspecified_internal_halfedge_index_map",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_point_map",
+              "name": "vertex_point_map",
+              "default": "get(boost::vertex_point, triangle_mesh )",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Weight_calculator",
+              "name": "weight_calculator",
+              "default": "Weight_calculator ( triangle_mesh , vertex_point_map)",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Construction",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "426"
+        },
+        {
+          "kind": "function",
+          "name": "clear_roi_vertices",
+          "qualified_name": "CGAL::Surface_mesh_deformation::clear_roi_vertices",
+          "brief": "Erases all the vertices from the region-of-interest (control vertices included).",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::clear_roi_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "452"
+        },
+        {
+          "kind": "function",
+          "name": "clear_control_vertices",
+          "qualified_name": "CGAL::Surface_mesh_deformation::clear_control_vertices",
+          "brief": "Erases all the vertices from the set of control vertices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::clear_control_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "464"
+        },
+        {
+          "kind": "function",
+          "name": "insert_control_vertex",
+          "qualified_name": "CGAL::Surface_mesh_deformation::insert_control_vertex",
+          "brief": "Inserts a vertex in the set of control vertices.",
+          "detailed": "The vertex is also inserted in the region-of-interest if it is not already in it. vd the vertex to be inserted true if vd is not already a control vertex.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::insert_control_vertex",
+          "argsstring": "(vertex_descriptor vd)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "475"
+        },
+        {
+          "kind": "function",
+          "name": "insert_control_vertices",
+          "qualified_name": "CGAL::Surface_mesh_deformation::insert_control_vertices",
+          "brief": "Inserts a range of vertices in the set of control vertices.",
+          "detailed": "The vertices are also inserted in the region-of-interest if they are not already in it. InputIterator input iterator type with vertex_descriptor as value type begin first iterator of the range of vertices end past-the-end iterator of the range of vertices",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::insert_control_vertices",
+          "argsstring": "(InputIterator begin, InputIterator end)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "493"
+        },
+        {
+          "kind": "function",
+          "name": "erase_control_vertex",
+          "qualified_name": "CGAL::Surface_mesh_deformation::erase_control_vertex",
+          "brief": "Erases a vertex from the set of control vertices.",
+          "detailed": "vd the vertex to be erased true if vd was a control vertex.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::erase_control_vertex",
+          "argsstring": "(vertex_descriptor vd)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "506"
+        },
+        {
+          "kind": "function",
+          "name": "insert_roi_vertices",
+          "qualified_name": "CGAL::Surface_mesh_deformation::insert_roi_vertices",
+          "brief": "Inserts a range of vertices in the region-of-interest.",
+          "detailed": "InputIterator input iterator with vertex_descriptor as value type begin first iterator of the range of vertices end past-the-end iterator of the range of vertices",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::insert_roi_vertices",
+          "argsstring": "(InputIterator begin, InputIterator end)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "522"
+        },
+        {
+          "kind": "function",
+          "name": "insert_roi_vertex",
+          "qualified_name": "CGAL::Surface_mesh_deformation::insert_roi_vertex",
+          "brief": "Inserts a vertex in the region-of-interest.",
+          "detailed": "vd the vertex to be inserted true if vd is not already in the region-of-interest.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::insert_roi_vertex",
+          "argsstring": "(vertex_descriptor vd)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "535"
+        },
+        {
+          "kind": "function",
+          "name": "erase_roi_vertex",
+          "qualified_name": "CGAL::Surface_mesh_deformation::erase_roi_vertex",
+          "brief": "Erases a vertex from the region-of-interest and the set of control vertices.",
+          "detailed": "At the next call to preprocess() , any vertex that is no longer in the region-of-interest will be assigned to its original position (that is the position of the vertex at the time of construction or after the last call to overwrite_initial_geometry() ). vd the vertex to be erased true vd was a vertex from the region-of-interest.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::erase_roi_vertex",
+          "argsstring": "(vertex_descriptor vd)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "552"
+        },
+        {
+          "kind": "function",
+          "name": "preprocess",
+          "qualified_name": "CGAL::Surface_mesh_deformation::preprocess",
+          "brief": "Preprocessing function that need to be called each time the region-of-interest or the set of control vertices are changed before calling deform() .",
+          "detailed": "If not already done, deform() first calls this function. Advanced Collects the vertices not in the region-of-interest that are adjacent to a vertex from the region-of-interest (these vertices are internally considered as fixed control vertices). Then assembles and factorizes the Laplacian matrix used in the function deform() . A modification of the set of control vertices or the region-of-interest invalidates the preprocessing data. true if successful. A common reason for failure is that the system is rank deficient, which happens for example when all the vertices are in the region-of-interest and no control vertices are set, or if the weighting scheme used features too many zero and breaks the connectivity information.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::preprocess",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Preprocessing",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "588"
+        },
+        {
+          "kind": "function",
+          "name": "set_target_position",
+          "qualified_name": "CGAL::Surface_mesh_deformation::set_target_position",
+          "brief": "Sets the target position of a control vertex.",
+          "detailed": "vd the control vertex the target position is set target_position the new target position",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::set_target_position",
+          "argsstring": "(vertex_descriptor vd, const Point &target_position)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "target_position",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "604"
+        },
+        {
+          "kind": "function",
+          "name": "translate",
+          "qualified_name": "CGAL::Surface_mesh_deformation::translate",
+          "brief": "Updates the target position of vd by applying a translation of vector t .",
+          "detailed": "Vect is a 3D vector class, with Vect(double x,double y, double z) being a constructor from its Cartesian coordinates and double Vect::operator[](int i) with i=0,1 or 2 returning its Cartesian coordinates. vd a control vertex t translation vector is_control_vertex(vd)",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::translate",
+          "argsstring": "(vertex_descriptor vd, const Vect &t)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vect &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "623"
+        },
+        {
+          "kind": "function",
+          "name": "translate",
+          "qualified_name": "CGAL::Surface_mesh_deformation::translate",
+          "brief": "Equivalent to calling the overload taking only one control vertex, for each vertex in the range [begin,end[ .",
+          "detailed": "InputIterator input iterator type with vertex_descriptor as value type Vect is a 3D vector class, with Vect(double x,double y, double z) being a constructor from its Cartesian coordinates and double Vect::operator[](int i) with i=0,1 or 2 returning its Cartesian coordinates. begin first iterator of the range of vertices end past-the-end iterator of the range of vertices t translation vector",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::translate",
+          "argsstring": "(InputIterator begin, InputIterator end, const Vect &t)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vect &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "643"
+        },
+        {
+          "kind": "function",
+          "name": "rotate",
+          "qualified_name": "CGAL::Surface_mesh_deformation::rotate",
+          "brief": "Updates the target position of vd by applying to its last target position a rotation defined by the quaternion quat , the center of the rotation being the origin translated by to_rotation_center .",
+          "detailed": "Quaternion is a quaternion class with Vect operator*(Quaternion, Vect) returning the product of a quaternion with a vector Vect is a 3D vector class, with Vect(double x,double y, double z) being a constructor from its Cartesian coordinates and double Vect::operator[](int i) with i=0,1 or 2 returning its Cartesian coordinates. vd a control vertex to_rotation_center the vector to translate the origin to the center of the rotation quat quaternion of the rotation is_control_vertex(vd) quad represents a rotation",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::rotate",
+          "argsstring": "(vertex_descriptor vd, const Vect &to_rotation_center, const Quaternion &quat)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vect &",
+              "name": "to_rotation_center",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Quaternion &",
+              "name": "quat",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "669"
+        },
+        {
+          "kind": "function",
+          "name": "rotate",
+          "qualified_name": "CGAL::Surface_mesh_deformation::rotate",
+          "brief": "Equivalent to calling the overload taking only one control vertex, for each vertex in the range [begin,end[ .",
+          "detailed": "InputIterator input iterator type with vertex_descriptor as value type Quaternion is a quaternion class with Vect operator*(Quaternion, Vect) returning the product of a quaternion with a vector Vect is a 3D vector class, with Vect(double x,double y, double z) being a constructor from its Cartesian coordinates and double Vect::operator[](int i) with i=0,1 or 2 returning its Cartesian coordinates. begin first iterator of the range of vertices end past-the-end iterator of the range of vertices to_rotation_center the vector to translate the origin to the center of the rotation quat quaternion of the rotation quad represents a rotation",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::rotate",
+          "argsstring": "(InputIterator begin, InputIterator end, const Vect &to_rotation_center, const Quaternion &quat)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vect &",
+              "name": "to_rotation_center",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Quaternion &",
+              "name": "quat",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "696"
+        },
+        {
+          "kind": "function",
+          "name": "target_position",
+          "qualified_name": "CGAL::Surface_mesh_deformation::target_position",
+          "brief": "Returns the target position of a control vertex.",
+          "detailed": "vd a control vertex is_control_vertex(vd)",
+          "return_type": "const Point &",
+          "definition": "const Point & CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::target_position",
+          "argsstring": "(vertex_descriptor vd)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "714"
+        },
+        {
+          "kind": "function",
+          "name": "deform",
+          "qualified_name": "CGAL::Surface_mesh_deformation::deform",
+          "brief": "Deforms the region-of-interest according to the deformation algorithm, using the target positions of each control vertex set by using rotate() , translate() , or set_target_position() .",
+          "detailed": "The points associated to each vertex of the input triangle mesh that are inside the region-of-interest are updated. Nothing happens if preprocess() returns false . set_iterations(unsigned int iterations) , set_tolerance(double tolerance) , deform(unsigned int iterations, double tolerance)",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::deform",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "728"
+        },
+        {
+          "kind": "function",
+          "name": "deform",
+          "qualified_name": "CGAL::Surface_mesh_deformation::deform",
+          "brief": "Same as deform() but the number of iterations and the tolerance are one-time parameters.",
+          "detailed": "iterations number of iterations for optimization procedure tolerance tolerance of convergence (see explanations set_tolerance(double tolerance) )",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::deform",
+          "argsstring": "(unsigned int iterations, double tolerance)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "iterations",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "tolerance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "738"
+        },
+        {
+          "kind": "function",
+          "name": "reset",
+          "qualified_name": "CGAL::Surface_mesh_deformation::reset",
+          "brief": "Resets the points associated to the vertices of the region-of-interest at their initial positions at time of the functor construction or after the last call to overwrite_initial_geometry() .",
+          "detailed": "if the region-of-interest or the set of control vertices have been modified since the last call to preprocess() , it will be called prior to the reset.",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::reset",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "790"
+        },
+        {
+          "kind": "function",
+          "name": "overwrite_initial_geometry",
+          "qualified_name": "CGAL::Surface_mesh_deformation::overwrite_initial_geometry",
+          "brief": "Sets the initial positions of the vertices from the region-of-interest to the current positions.",
+          "detailed": "Calling this function has the same effect as creating a new deformation object with the current deformed triangle mesh, keeping the region-of-interest and the set of control vertices. if the region-of-interest or the set of control vertices have been modified since the last call to preprocess() , it will be called prior to the overwrite. Advanced This function might have a non-negligible effect on the result. The Laplacian matrix of the free vertices and the optimal rotations are computed using the original positions of the points associated to the vertices. Thus, if a deformed version of the surface mesh is used as reference, the surface mesh properties the algorithm tries to preserve are those of an altered version (which are already degraded).",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::overwrite_initial_geometry",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Deformation",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "822"
+        },
+        {
+          "kind": "function",
+          "name": "iterations",
+          "qualified_name": "CGAL::Surface_mesh_deformation::iterations",
+          "brief": "Gets the default number of iterations (5) or the value passed to the function set_iterations() .",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::iterations",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "870"
+        },
+        {
+          "kind": "function",
+          "name": "tolerance",
+          "qualified_name": "CGAL::Surface_mesh_deformation::tolerance",
+          "brief": "Gets the default tolerance parameter (1e-4) or the value passed to the function set_tolerance() .",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::tolerance",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "876"
+        },
+        {
+          "kind": "function",
+          "name": "set_iterations",
+          "qualified_name": "CGAL::Surface_mesh_deformation::set_iterations",
+          "brief": "Sets the maximum number of iterations ran by deform() .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::set_iterations",
+          "argsstring": "(unsigned int iterations)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "iterations",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "882"
+        },
+        {
+          "kind": "function",
+          "name": "set_tolerance",
+          "qualified_name": "CGAL::Surface_mesh_deformation::set_tolerance",
+          "brief": "Sets the tolerance of the convergence used in deform() .",
+          "detailed": "If tolerance ==0 , no energy based termination criteria is used (preventing to do the energy computation at each iteration step) tolerance > $|\\mathrm{energy}(m_i) - \\mathrm{energy}(m_{i-1})| / \\mathrm{energy}(m_i)$ will be used as a termination criterium.",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::set_tolerance",
+          "argsstring": "(double tolerance)",
+          "params": [
+            {
+              "type": "double",
+              "name": "tolerance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "889"
+        },
+        {
+          "kind": "function",
+          "name": "roi_vertices",
+          "qualified_name": "CGAL::Surface_mesh_deformation::roi_vertices",
+          "brief": "Returns the range of vertices in the region-of-interest.",
+          "detailed": "",
+          "return_type": "const Roi_vertex_range &",
+          "definition": "const Roi_vertex_range & CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::roi_vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "895"
+        },
+        {
+          "kind": "function",
+          "name": "is_roi_vertex",
+          "qualified_name": "CGAL::Surface_mesh_deformation::is_roi_vertex",
+          "brief": "Tests whether a vertex is inside the region-of-interest.",
+          "detailed": "vd the query vertex true if vd has been inserted to (and not erased from) the region-of-interest.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::is_roi_vertex",
+          "argsstring": "(vertex_descriptor vd) const",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "905"
+        },
+        {
+          "kind": "function",
+          "name": "is_control_vertex",
+          "qualified_name": "CGAL::Surface_mesh_deformation::is_control_vertex",
+          "brief": "Tests whether a vertex is a control vertex.",
+          "detailed": "vd the query vertex true if vd has been inserted to (and not erased from) the set of control vertices.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::is_control_vertex",
+          "argsstring": "(vertex_descriptor vd) const",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "913"
+        },
+        {
+          "kind": "function",
+          "name": "triangle_mesh",
+          "qualified_name": "CGAL::Surface_mesh_deformation::triangle_mesh",
+          "brief": "Provides access to the triangle mesh being deformed.",
+          "detailed": "",
+          "return_type": "const Triangle_mesh &",
+          "definition": "const Triangle_mesh & CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::triangle_mesh",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "919"
+        },
+        {
+          "kind": "function",
+          "name": "set_sre_arap_alpha",
+          "qualified_name": "CGAL::Surface_mesh_deformation::set_sre_arap_alpha",
+          "brief": "Sets the alpha coefficient that determines the weight of the bending term (rotation smoothness) for the SRE-ARAP deformation technique.",
+          "detailed": "The range of values can be from 0 to infinity. When alpha=0, the method reverts to ARAP. When alpha is increased, neighboring rotations become similar to each other, where alpha=infinity results in a global rigid transformation of the ROI. The value of alpha depends on the surface area and shape. Since alpha is not too sensitive, it can be tweaked in most cases by multiplying it by powers of 10. The default value for alpha is 0.02.",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::set_sre_arap_alpha",
+          "argsstring": "(double a)",
+          "params": [
+            {
+              "type": "double",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Utilities",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "932"
+        },
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR >",
+          "definition": "typedef Surface_mesh_deformation<TM, VIM, HIM, TAG, WC, ST, CR> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "299"
+        },
+        {
+          "kind": "typedef",
+          "name": "in_edge_iterator",
+          "qualified_name": "CGAL::Surface_mesh_deformation::in_edge_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< Triangle_mesh >::in_edge_iterator",
+          "definition": "typedef boost::graph_traits<Triangle_mesh>::in_edge_iterator CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::in_edge_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "301"
+        },
+        {
+          "kind": "typedef",
+          "name": "out_edge_iterator",
+          "qualified_name": "CGAL::Surface_mesh_deformation::out_edge_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< Triangle_mesh >::out_edge_iterator",
+          "definition": "typedef boost::graph_traits<Triangle_mesh>::out_edge_iterator CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::out_edge_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "302"
+        },
+        {
+          "kind": "typedef",
+          "name": "CR_matrix",
+          "qualified_name": "CGAL::Surface_mesh_deformation::CR_matrix",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Closest_rotation_traits::Matrix",
+          "definition": "typedef Closest_rotation_traits::Matrix CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::CR_matrix",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "304"
+        },
+        {
+          "kind": "typedef",
+          "name": "CR_vector",
+          "qualified_name": "CGAL::Surface_mesh_deformation::CR_vector",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Closest_rotation_traits::Vector",
+          "definition": "typedef Closest_rotation_traits::Vector CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::CR_vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "305"
+        },
+        {
+          "kind": "variable",
+          "name": "m_triangle_mesh",
+          "qualified_name": "CGAL::Surface_mesh_deformation::m_triangle_mesh",
+          "brief": "Source triangulated surface mesh for modeling.",
+          "detailed": "",
+          "return_type": "Triangle_mesh &",
+          "definition": "Triangle_mesh& CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::m_triangle_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "308"
+        },
+        {
+          "kind": "variable",
+          "name": "original",
+          "qualified_name": "CGAL::Surface_mesh_deformation::original",
+          "brief": "original positions of roi (size: ros + boundary_of_ros)",
+          "detailed": "",
+          "return_type": "std::vector< Point >",
+          "definition": "std::vector<Point> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::original",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "310"
+        },
+        {
+          "kind": "variable",
+          "name": "solution",
+          "qualified_name": "CGAL::Surface_mesh_deformation::solution",
+          "brief": "storing position of ros vertices during iterations (size: ros + boundary_of_ros)",
+          "detailed": "",
+          "return_type": "std::vector< Point >",
+          "definition": "std::vector<Point> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::solution",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "311"
+        },
+        {
+          "kind": "variable",
+          "name": "vertex_index_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::vertex_index_map",
+          "brief": "storing indices of all vertices",
+          "detailed": "",
+          "return_type": "Vertex_index_map",
+          "definition": "Vertex_index_map CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::vertex_index_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "313"
+        },
+        {
+          "kind": "variable",
+          "name": "hedge_index_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::hedge_index_map",
+          "brief": "storing indices of all halfedges",
+          "detailed": "",
+          "return_type": "Hedge_index_map",
+          "definition": "Hedge_index_map CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::hedge_index_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "314"
+        },
+        {
+          "kind": "variable",
+          "name": "roi",
+          "qualified_name": "CGAL::Surface_mesh_deformation::roi",
+          "brief": "region of interest",
+          "detailed": "",
+          "return_type": "std::vector< vertex_descriptor >",
+          "definition": "std::vector<vertex_descriptor> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::roi",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "316"
+        },
+        {
+          "kind": "variable",
+          "name": "ros",
+          "qualified_name": "CGAL::Surface_mesh_deformation::ros",
+          "brief": "region of solution, including roi and hard constraints on boundary of roi",
+          "detailed": "",
+          "return_type": "std::vector< vertex_descriptor >",
+          "definition": "std::vector<vertex_descriptor> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::ros",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "317"
+        },
+        {
+          "kind": "variable",
+          "name": "ros_id_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::ros_id_map",
+          "brief": "(size: num vertices)",
+          "detailed": "",
+          "return_type": "std::vector< std::size_t >",
+          "definition": "std::vector<std::size_t> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::ros_id_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "319"
+        },
+        {
+          "kind": "variable",
+          "name": "is_roi_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::is_roi_map",
+          "brief": "(size: num vertices)",
+          "detailed": "",
+          "return_type": "std::vector< bool >",
+          "definition": "std::vector<bool> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::is_roi_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "320"
+        },
+        {
+          "kind": "variable",
+          "name": "is_ctrl_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::is_ctrl_map",
+          "brief": "(size: num vertices)",
+          "detailed": "",
+          "return_type": "std::vector< bool >",
+          "definition": "std::vector<bool> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::is_ctrl_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "321"
+        },
+        {
+          "kind": "variable",
+          "name": "hedge_weight",
+          "qualified_name": "CGAL::Surface_mesh_deformation::hedge_weight",
+          "brief": "all halfedge weights",
+          "detailed": "",
+          "return_type": "std::vector< double >",
+          "definition": "std::vector<double> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::hedge_weight",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "323"
+        },
+        {
+          "kind": "variable",
+          "name": "rot_mtr",
+          "qualified_name": "CGAL::Surface_mesh_deformation::rot_mtr",
+          "brief": "rotation matrices of ros vertices (size: ros)",
+          "detailed": "",
+          "return_type": "std::vector< CR_matrix >",
+          "definition": "std::vector<CR_matrix> CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::rot_mtr",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "324"
+        },
+        {
+          "kind": "variable",
+          "name": "m_solver",
+          "qualified_name": "CGAL::Surface_mesh_deformation::m_solver",
+          "brief": "linear sparse solver",
+          "detailed": "",
+          "return_type": "Sparse_linear_solver",
+          "definition": "Sparse_linear_solver CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::m_solver",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "326"
+        },
+        {
+          "kind": "variable",
+          "name": "m_iterations",
+          "qualified_name": "CGAL::Surface_mesh_deformation::m_iterations",
+          "brief": "number of maximal iterations",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::m_iterations",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "327"
+        },
+        {
+          "kind": "variable",
+          "name": "m_tolerance",
+          "qualified_name": "CGAL::Surface_mesh_deformation::m_tolerance",
+          "brief": "tolerance of convergence",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::m_tolerance",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "328"
+        },
+        {
+          "kind": "variable",
+          "name": "need_preprocess_factorization",
+          "qualified_name": "CGAL::Surface_mesh_deformation::need_preprocess_factorization",
+          "brief": "is there any need to compute L and factorize",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::need_preprocess_factorization",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "330"
+        },
+        {
+          "kind": "variable",
+          "name": "need_preprocess_region_of_solution",
+          "qualified_name": "CGAL::Surface_mesh_deformation::need_preprocess_region_of_solution",
+          "brief": "is there any need to compute region of solution",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::need_preprocess_region_of_solution",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "331"
+        },
+        {
+          "kind": "variable",
+          "name": "last_preprocess_successful",
+          "qualified_name": "CGAL::Surface_mesh_deformation::last_preprocess_successful",
+          "brief": "stores the result of last call to preprocess()",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::last_preprocess_successful",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "333"
+        },
+        {
+          "kind": "variable",
+          "name": "vertex_point_map",
+          "qualified_name": "CGAL::Surface_mesh_deformation::vertex_point_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_point_map",
+          "definition": "Vertex_point_map CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::vertex_point_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "335"
+        },
+        {
+          "kind": "variable",
+          "name": "weight_calculator",
+          "qualified_name": "CGAL::Surface_mesh_deformation::weight_calculator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Weight_calculator",
+          "definition": "Weight_calculator CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::weight_calculator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "336"
+        },
+        {
+          "kind": "variable",
+          "name": "arap_visitor",
+          "qualified_name": "CGAL::Surface_mesh_deformation::arap_visitor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "internal::Types_selectors< Triangle_mesh , Vertex_point_map , TAG >::ARAP_visitor",
+          "definition": "internal::Types_selectors<Triangle_mesh,Vertex_point_map,TAG>::ARAP_visitor CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::arap_visitor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "339"
+        },
+        {
+          "kind": "function",
+          "name": "Surface_mesh_deformation",
+          "qualified_name": "CGAL::Surface_mesh_deformation::Surface_mesh_deformation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::Surface_mesh_deformation",
+          "argsstring": "(const Self &)=delete",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "347"
+        },
+        {
+          "kind": "function",
+          "name": "init",
+          "qualified_name": "CGAL::Surface_mesh_deformation::init",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::init",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "435"
+        },
+        {
+          "kind": "function",
+          "name": "assign_ros_id_to_one_ring",
+          "qualified_name": "CGAL::Surface_mesh_deformation::assign_ros_id_to_one_ring",
+          "brief": "Assigns id to one ring neighbor of vd, and also push them into push_vector.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::assign_ros_id_to_one_ring",
+          "argsstring": "(vertex_descriptor vd, std::size_t &next_id, std::vector< vertex_descriptor > &push_vector)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t &",
+              "name": "next_id",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::vector< vertex_descriptor > &",
+              "name": "push_vector",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "943"
+        },
+        {
+          "kind": "function",
+          "name": "region_of_solution",
+          "qualified_name": "CGAL::Surface_mesh_deformation::region_of_solution",
+          "brief": "Find region of solution, including roi and hard constraints, which is the 1-ring vertices out roi Contains four parts:",
+          "detailed": "if there is any vertex which is no longer roi, set its position back to original position assign a ros id to vertices inside ros + ros-boundary reinitialize rotation matrices, if a vertex is previously ros, use its previous matrix, otherwise set zero reinitialize original, and solution, if a vertex is previously roi, then use its original position in old_original, else use point(). In both case we are using \"original position\" of the vertex. same for solution (it is required to prevent jumping effects)",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::region_of_solution",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "968"
+        },
+        {
+          "kind": "function",
+          "name": "assemble_laplacian_and_factorize",
+          "qualified_name": "CGAL::Surface_mesh_deformation::assemble_laplacian_and_factorize",
+          "brief": "Assemble Laplacian matrix A of linear system A*X=B.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::assemble_laplacian_and_factorize",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1074"
+        },
+        {
+          "kind": "function",
+          "name": "assemble_laplacian_and_factorize_arap",
+          "qualified_name": "CGAL::Surface_mesh_deformation::assemble_laplacian_and_factorize_arap",
+          "brief": "Construct matrix that corresponds to left-hand side of eq:lap_ber in user manual Also constraints are integrated as eq:lap_energy_system in user manual.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::assemble_laplacian_and_factorize_arap",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1087"
+        },
+        {
+          "kind": "function",
+          "name": "assemble_laplacian_and_factorize_spokes_and_rims",
+          "qualified_name": "CGAL::Surface_mesh_deformation::assemble_laplacian_and_factorize_spokes_and_rims",
+          "brief": "Construct matrix that corresponds to left-hand side of eq:lap_ber_rims in user manual Also constraints are integrated as eq:lap_energy_system in user manual.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::assemble_laplacian_and_factorize_spokes_and_rims",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1130"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_rotations",
+          "qualified_name": "CGAL::Surface_mesh_deformation::optimal_rotations",
+          "brief": "Local step of iterations, computing optimal rotation matrices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::optimal_rotations",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1186"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_rotations_arap",
+          "qualified_name": "CGAL::Surface_mesh_deformation::optimal_rotations_arap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::optimal_rotations_arap",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1197"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_rotations_spokes_and_rims",
+          "qualified_name": "CGAL::Surface_mesh_deformation::optimal_rotations_spokes_and_rims",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::optimal_rotations_spokes_and_rims",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1233"
+        },
+        {
+          "kind": "function",
+          "name": "update_solution",
+          "qualified_name": "CGAL::Surface_mesh_deformation::update_solution",
+          "brief": "Global step of iterations, updating solution.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::update_solution",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1307"
+        },
+        {
+          "kind": "function",
+          "name": "update_solution_arap",
+          "qualified_name": "CGAL::Surface_mesh_deformation::update_solution_arap",
+          "brief": "calculate right-hand side of eq:lap_ber in user manual and solve the system",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::update_solution_arap",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1319"
+        },
+        {
+          "kind": "function",
+          "name": "update_solution_spokes_and_rims",
+          "qualified_name": "CGAL::Surface_mesh_deformation::update_solution_spokes_and_rims",
+          "brief": "calculate right-hand side of eq:lap_ber_rims in user manual and solve the system",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::update_solution_spokes_and_rims",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1383"
+        },
+        {
+          "kind": "function",
+          "name": "assign_solution",
+          "qualified_name": "CGAL::Surface_mesh_deformation::assign_solution",
+          "brief": "Assign solution to target surface mesh.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::assign_solution",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1455"
+        },
+        {
+          "kind": "function",
+          "name": "energy",
+          "qualified_name": "CGAL::Surface_mesh_deformation::energy",
+          "brief": "Compute modeling energy.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::energy",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1467"
+        },
+        {
+          "kind": "function",
+          "name": "energy_arap",
+          "qualified_name": "CGAL::Surface_mesh_deformation::energy_arap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::energy_arap",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1478"
+        },
+        {
+          "kind": "function",
+          "name": "energy_spokes_and_rims",
+          "qualified_name": "CGAL::Surface_mesh_deformation::energy_spokes_and_rims",
+          "brief": "",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::energy_spokes_and_rims",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1507"
+        },
+        {
+          "kind": "function",
+          "name": "need_preprocess_both",
+          "qualified_name": "CGAL::Surface_mesh_deformation::need_preprocess_both",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::need_preprocess_both",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1544"
+        },
+        {
+          "kind": "function",
+          "name": "sub_to_CR_vector",
+          "qualified_name": "CGAL::Surface_mesh_deformation::sub_to_CR_vector",
+          "brief": "p1 - p2, return CR_vector",
+          "detailed": "",
+          "return_type": "CR_vector",
+          "definition": "CR_vector CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::sub_to_CR_vector",
+          "argsstring": "(const Point &p1, const Point &p2) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1551"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_point",
+          "qualified_name": "CGAL::Surface_mesh_deformation::add_to_point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Point",
+          "definition": "Point CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::add_to_point",
+          "argsstring": "(const Point &p, const Vect &v)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vect &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1557"
+        },
+        {
+          "kind": "function",
+          "name": "sub_to_vect",
+          "qualified_name": "CGAL::Surface_mesh_deformation::sub_to_vect",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vect",
+          "definition": "Vect CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::sub_to_vect",
+          "argsstring": "(const Point &p, const Vect &v)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vect &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1562"
+        },
+        {
+          "kind": "function",
+          "name": "id",
+          "qualified_name": "CGAL::Surface_mesh_deformation::id",
+          "brief": "shorthand of get(vertex_index_map, v)",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::id",
+          "argsstring": "(vertex_descriptor vd) const",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1567"
+        },
+        {
+          "kind": "function",
+          "name": "ros_id",
+          "qualified_name": "CGAL::Surface_mesh_deformation::ros_id",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t &",
+          "definition": "std::size_t & CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::ros_id",
+          "argsstring": "(vertex_descriptor vd)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1570"
+        },
+        {
+          "kind": "function",
+          "name": "ros_id",
+          "qualified_name": "CGAL::Surface_mesh_deformation::ros_id",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::ros_id",
+          "argsstring": "(vertex_descriptor vd) const",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "vd",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1572"
+        },
+        {
+          "kind": "function",
+          "name": "id",
+          "qualified_name": "CGAL::Surface_mesh_deformation::id",
+          "brief": "shorthand of get(hedge_index_map, e)",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Surface_mesh_deformation< TM, VIM, HIM, TAG, WC, ST, CR, VPM >::id",
+          "argsstring": "(halfedge_descriptor e) const",
+          "params": [
+            {
+              "type": "halfedge_descriptor",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "1576"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_surface__mesh__deformation.xml",
+      "file": "CGAL/Surface_mesh_deformation.h",
+      "line": "204"
+    },
+    "DeformationClosestRotationTraits_3": {
+      "kind": "class",
+      "name": "DeformationClosestRotationTraits_3",
+      "brief": "Concept describing the set of requirements for computing a 3x3 rotation matrix that is close to a given 3x3 matrix, together with basic computations used in the class CGAL::Surface_mesh_deformation . The definition of close depends on the model. The fact that some basic operations are hidden behind a function is to allow to benefit from optimizations like expression template from libraries used to implement models of this concept.",
+      "detailed": "Refines DefaultConstructible Has models CGAL::Deformation_Eigen_closest_rotation_traits_3 CGAL::Deformation_Eigen_polar_closest_rotation_traits_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Matrix",
+          "qualified_name": "DeformationClosestRotationTraits_3::Matrix",
+          "brief": "3x3 matrix type having a copy constructor and an assignment operator",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type DeformationClosestRotationTraits_3::Matrix",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "23"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "DeformationClosestRotationTraits_3::Vector",
+          "brief": "3D vector type having a copy constructor",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type DeformationClosestRotationTraits_3::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "25"
+        },
+        {
+          "kind": "function",
+          "name": "add_scalar_t_vector_t_vector_transpose",
+          "qualified_name": "DeformationClosestRotationTraits_3::add_scalar_t_vector_t_vector_transpose",
+          "brief": "Equivalent to result = result + w * (v1*v2^t) .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DeformationClosestRotationTraits_3::add_scalar_t_vector_t_vector_transpose",
+          "argsstring": "(Matrix &result, double w, const Vector &v1, const Vector &v2)",
+          "params": [
+            {
+              "type": "Matrix &",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector &",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector &",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "add__scalar_t_matrix_p_scalar_t_matrix__t_vector",
+          "qualified_name": "DeformationClosestRotationTraits_3::add__scalar_t_matrix_p_scalar_t_matrix__t_vector",
+          "brief": "Equivalent to result = result + (w1*m1 + w2*m2) * v .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DeformationClosestRotationTraits_3::add__scalar_t_matrix_p_scalar_t_matrix__t_vector",
+          "argsstring": "(Vector &result, double w1, const Matrix &m1, double w2, const Matrix &m2, const Vector &v)",
+          "params": [
+            {
+              "type": "Vector &",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "w1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Matrix &",
+              "name": "m1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "w2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Matrix &",
+              "name": "m2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "add_scalar_t_matrix_sum_t_vector",
+          "qualified_name": "DeformationClosestRotationTraits_3::add_scalar_t_matrix_sum_t_vector",
+          "brief": "Equivalent to result = result + w1 * (m1 + m2 + m3) * v .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DeformationClosestRotationTraits_3::add_scalar_t_matrix_sum_t_vector",
+          "argsstring": "(Vector &result, double w1, const Matrix &m1, const Matrix &m2, const Matrix &m3, const Vector &v)",
+          "params": [
+            {
+              "type": "Vector &",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "w1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Matrix &",
+              "name": "m1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Matrix &",
+              "name": "m2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Matrix &",
+              "name": "m3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "squared_norm_vector_scalar_vector_subs",
+          "qualified_name": "DeformationClosestRotationTraits_3::squared_norm_vector_scalar_vector_subs",
+          "brief": "Returns the squared norm of v1 - m*v2 .",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double DeformationClosestRotationTraits_3::squared_norm_vector_scalar_vector_subs",
+          "argsstring": "(const Vector &v1, const Matrix &m, const Vector &v2)",
+          "params": [
+            {
+              "type": "const Vector &",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Matrix &",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector &",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "identity_matrix",
+          "qualified_name": "DeformationClosestRotationTraits_3::identity_matrix",
+          "brief": "Returns an identity matrix.",
+          "detailed": "",
+          "return_type": "Matrix",
+          "definition": "Matrix DeformationClosestRotationTraits_3::identity_matrix",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "zero_matrix",
+          "qualified_name": "DeformationClosestRotationTraits_3::zero_matrix",
+          "brief": "Returns a matrix initialized with zeros.",
+          "detailed": "",
+          "return_type": "Matrix",
+          "definition": "Matrix DeformationClosestRotationTraits_3::zero_matrix",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "vector",
+          "qualified_name": "DeformationClosestRotationTraits_3::vector",
+          "brief": "Returns the vector (x,y,z).",
+          "detailed": "",
+          "return_type": "Vector",
+          "definition": "Vector DeformationClosestRotationTraits_3::vector",
+          "argsstring": "(double x, double y, double z)",
+          "params": [
+            {
+              "type": "double",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "z",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "function",
+          "name": "vector_coordinate",
+          "qualified_name": "DeformationClosestRotationTraits_3::vector_coordinate",
+          "brief": "Returns i -th coefficient of a vector.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double DeformationClosestRotationTraits_3::vector_coordinate",
+          "argsstring": "(const Vector &v, int i)",
+          "params": [
+            {
+              "type": "const Vector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "compute_close_rotation",
+          "qualified_name": "DeformationClosestRotationTraits_3::compute_close_rotation",
+          "brief": "Computes a rotation matrix close to m and places it into R .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DeformationClosestRotationTraits_3::compute_close_rotation",
+          "argsstring": "(const Matrix &m, Matrix &R)",
+          "params": [
+            {
+              "type": "const Matrix &",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Matrix &",
+              "name": "R",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/DeformationClosestRotationTraits_3.h",
+          "line": "56"
+        }
+      ],
+      "xml_file": "class_deformation_closest_rotation_traits__3.xml",
+      "file": "Concepts/DeformationClosestRotationTraits_3.h",
+      "line": "18"
+    },
+    "RawPoint_3": {
+      "kind": "class",
+      "name": "RawPoint_3",
+      "brief": "",
+      "detailed": "Refines DefaultConstructible Assignable Concept describing the set of requirements of a simple point type.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "RawPoint_3",
+          "qualified_name": "RawPoint_3::RawPoint_3",
+          "brief": "constructor from Cartesian coordinates",
+          "detailed": "",
+          "return_type": "",
+          "definition": "RawPoint_3::RawPoint_3",
+          "argsstring": "(double x, double y, double z)",
+          "params": [
+            {
+              "type": "double",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "z",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/RawPoint_3.h",
+          "line": "13"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "RawPoint_3::operator[]",
+          "brief": "i<=0 && i<3",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double RawPoint_3::operator[]",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Coordinates Accessors",
+          "file": "Concepts/RawPoint_3.h",
+          "line": "19"
+        }
+      ],
+      "xml_file": "class_raw_point__3.xml",
+      "file": "Concepts/RawPoint_3.h",
+      "line": "7"
+    },
+    "SurfaceMeshDeformationWeights": {
+      "kind": "class",
+      "name": "SurfaceMeshDeformationWeights",
+      "brief": "Concept describing the set of requirements for calculating weights for halfedges.",
+      "detailed": "Example: // a simple model to `SurfaceMeshDeformationWeights` concept, which provides uniform weights template < class TriangleMesh> struct Identity_weight { typedef TriangleMesh Triangle_mesh; template < class VertexPo int Map> double operator()( typename boost::graph_traits<TriangleMesh>::halfedge_descriptor /*e*/ , const TriangleMesh& /*p*/ , VertexPointMap /*v*/ ) { return 1.0; } };",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Triangle_mesh",
+          "qualified_name": "SurfaceMeshDeformationWeights::Triangle_mesh",
+          "brief": "a model of HalfedgeGraph",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SurfaceMeshDeformationWeights::Triangle_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SurfaceMeshDeformationWeights.h",
+          "line": "27"
+        },
+        {
+          "kind": "function",
+          "name": "SurfaceMeshDeformationWeights",
+          "qualified_name": "SurfaceMeshDeformationWeights::SurfaceMeshDeformationWeights",
+          "brief": "Default constructor. Required only if the default parameter is used in the constructor of CGAL::Surface_mesh_deformation .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "SurfaceMeshDeformationWeights::SurfaceMeshDeformationWeights",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/SurfaceMeshDeformationWeights.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "SurfaceMeshDeformationWeights::operator()",
+          "brief": "Function computing the halfedge weight of halfedge he .",
+          "detailed": "VertexPointMap a model of ReadWritePropertyMap with boost::graph_traits<Triangle_mesh>::vertex_descriptor as key and a 3D point from a CGAL Kernel as value type",
+          "return_type": "double",
+          "definition": "double SurfaceMeshDeformationWeights::operator()",
+          "argsstring": "(boost::graph_traits< Triangle_mesh >::halfedge_descriptor he, const Triangle_mesh &triangle_mesh, VertexPointMap vpm)",
+          "params": [
+            {
+              "type": "boost::graph_traits< Triangle_mesh >::halfedge_descriptor",
+              "name": "he",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Triangle_mesh &",
+              "name": "triangle_mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexPointMap",
+              "name": "vpm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/SurfaceMeshDeformationWeights.h",
+          "line": "41"
+        }
+      ],
+      "xml_file": "class_surface_mesh_deformation_weights.xml",
+      "file": "Concepts/SurfaceMeshDeformationWeights.h",
+      "line": "21"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Surface_mesh_deformation.txt",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgSurfaceMeshDeformationRef": {
+      "kind": "group",
+      "name": "PkgSurfaceMeshDeformationRef",
+      "brief": "",
+      "detailed": "Sébastien Loriot, Olga Sorkine-Hornung, Yin Xu, and Ilker O. Yaz This package offers surface mesh deformation algorithms which provide new positions to the vertices of a surface mesh under positional constraints of some of its vertices, without requiring any additional structure other than the surface mesh itself. Introduced in: CGAL 4.5 Depends on: PkgSolverInterface and thirdpartyEigen BibTeX: cgal:lsxy-tsmd-26a License: GPL Windows Demo: CGAL Lab Classified Reference Pages Main Class # CGAL::Surface_mesh_deformation Concepts DeformationClosestRotationTraits_3 RawPoint_3 SurfaceMeshDeformationWeights Algebraic Traits # CGAL::Deformation_Eigen_closest_rotation_traits_3 # CGAL::Deformation_Eigen_polar_closest_rotation_traits_3",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Deformation_algorithm_tag",
+          "qualified_name": "CGAL::Deformation_algorithm_tag",
+          "brief": "Deformation algorithm type.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Surface_mesh_deformation.h",
+          "line": "48"
+        }
+      ],
+      "xml_file": "group___pkg_surface_mesh_deformation_ref.xml"
+    },
+    "PkgSurfaceMeshDeformationConcepts": {
+      "kind": "group",
+      "name": "PkgSurfaceMeshDeformationConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_surface_mesh_deformation_concepts.xml"
+    }
+  }
+}

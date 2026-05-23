@@ -1,0 +1,2208 @@
+{
+  "schema_version": 1,
+  "package": "PMP_Mesh_repair",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 13,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Polygon_mesh_processing::Default_orientation_visitor": {
+      "kind": "struct",
+      "name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor",
+      "brief": "Default visitor model of PMPPolygonSoupOrientationVisitor .",
+      "detailed": "All of its functions have an empty body. This class can be used as a base class if only some of the functions of the concept will be overridden.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "non_manifold_edge",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::non_manifold_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::Default_orientation_visitor::non_manifold_edge",
+          "argsstring": "(std::size_t, std::size_t, std::size_t)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "non_manifold_vertex",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::non_manifold_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::Default_orientation_visitor::non_manifold_vertex",
+          "argsstring": "(std::size_t, std::size_t)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "duplicated_vertex",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::duplicated_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::Default_orientation_visitor::duplicated_vertex",
+          "argsstring": "(std::size_t, std::size_t)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "vertex_id_in_polygon_replaced",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::vertex_id_in_polygon_replaced",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::Default_orientation_visitor::vertex_id_in_polygon_replaced",
+          "argsstring": "(std::size_t, std::size_t, std::size_t)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "polygon_orientation_reversed",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::polygon_orientation_reversed",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::Default_orientation_visitor::polygon_orientation_reversed",
+          "argsstring": "(std::size_t)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "link_connected_polygons",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Default_orientation_visitor::link_connected_polygons",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::Default_orientation_visitor::link_connected_polygons",
+          "argsstring": "(std::size_t, const std::vector< std::size_t > &)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::vector< std::size_t > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "56"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_polygon__mesh__processing_1_1_default__orientation__visitor.xml",
+      "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+      "line": "50"
+    },
+    "CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor": {
+      "kind": "struct",
+      "name": "CGAL::Polygon_mesh_processing::Hole_filling::Default_visitor",
+      "brief": "Default hole filling visitor model of PMPHolefillingVisitor .",
+      "detailed": "All of its functions have an empty body. This class can be used as a base class if only some of the functions of the concept require to be overridden.",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_polygon__mesh__processing_1_1_hole__filling_1_1_default__visitor.xml",
+      "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+      "line": "45"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "PMP_Mesh_repair.txt",
+      "line": "1"
+    },
+    "CGAL::Polygon_mesh_processing": {
+      "kind": "namespace",
+      "name": "CGAL::Polygon_mesh_processing",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "reverse_orientation",
+          "qualified_name": "CGAL::Polygon_mesh_processing::reverse_orientation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::reverse_orientation",
+          "argsstring": "(typename boost::graph_traits< PolygonMesh >::halfedge_descriptor first, PolygonMesh &pmesh)",
+          "params": [
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "238"
+        },
+        {
+          "kind": "function",
+          "name": "reverse_face_orientations_of_mesh_with_polylines",
+          "qualified_name": "CGAL::Polygon_mesh_processing::reverse_face_orientations_of_mesh_with_polylines",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::reverse_face_orientations_of_mesh_with_polylines",
+          "argsstring": "(PolygonMesh &pmesh)",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "300"
+        },
+        {
+          "kind": "function",
+          "name": "remove_a_border_edge",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_a_border_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+          "definition": "boost::graph_traits< TriangleMesh >::vertex_descriptor CGAL::Polygon_mesh_processing::remove_a_border_edge",
+          "argsstring": "(typename boost::graph_traits< TriangleMesh >::edge_descriptor ed, TriangleMesh &tm, EdgeSet &input_range, EdgeSet &edge_set, FaceSet &face_set)",
+          "params": [
+            {
+              "type": "typename boost::graph_traits< TriangleMesh >::edge_descriptor",
+              "name": "ed",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeSet &",
+              "name": "input_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeSet &",
+              "name": "edge_set",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceSet &",
+              "name": "face_set",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "1169"
+        },
+        {
+          "kind": "function",
+          "name": "remove_a_border_edge",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_a_border_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+          "definition": "boost::graph_traits< TriangleMesh >::vertex_descriptor CGAL::Polygon_mesh_processing::remove_a_border_edge",
+          "argsstring": "(typename boost::graph_traits< TriangleMesh >::edge_descriptor ed, TriangleMesh &tm)",
+          "params": [
+            {
+              "type": "typename boost::graph_traits< TriangleMesh >::edge_descriptor",
+              "name": "ed",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "1409"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degenerate_edges",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+          "argsstring": "(const EdgeRange &edge_range, TriangleMesh &tmesh, FaceSet &face_set, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const EdgeRange &",
+              "name": "edge_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceSet &",
+              "name": "face_set",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "1459"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degenerate_edges",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+          "argsstring": "(const EdgeRange &edge_range, TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const EdgeRange &",
+              "name": "edge_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "1957"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degenerate_edges",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_degenerate_edges",
+          "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "1966"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degenerate_faces",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_faces",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_degenerate_faces",
+          "argsstring": "(const FaceRange &face_range, TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const FaceRange &",
+              "name": "face_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "2018"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degenerate_faces",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_degenerate_faces",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_degenerate_faces",
+          "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "2834"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l_1_1_polygon__mesh__processing.xml",
+      "file": "CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polygon_mesh.h",
+      "line": "29"
+    },
+    "CGAL::Polygon_mesh_processing::Hole_filling": {
+      "kind": "namespace",
+      "name": "CGAL::Polygon_mesh_processing::Hole_filling",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_polygon__mesh__processing_1_1_hole__filling.xml",
+      "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+      "line": "38"
+    },
+    "CGAL::Polygon_mesh_processing::IO": {
+      "kind": "namespace",
+      "name": "CGAL::Polygon_mesh_processing::IO",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_polygon__mesh__processing_1_1_i_o.xml",
+      "file": "CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h",
+      "line": "36"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPMPMeshRepairRef": {
+      "kind": "group",
+      "name": "PkgPMPMeshRepairRef",
+      "brief": "",
+      "detailed": "Sébastien Loriot, Mael Rouxel-Labbé, and Ilker O. Yaz This CGAL package provides methods that enable treating both combinatorial and geometrical defects in polygon meshes and polygon soups: orientation, hole filling, degeneracies removal, boundary stitching, and more. Introduced in: CGAL 4.7 Depends on: documented for each function BibTeX: cgal:pmp-repair-26a License: GPL Windows Demo: CGAL Lab Classified Reference Pages Parameters Optional parameters of the functions of this package are implemented as BGLNamedParameters. The page Named Parameters describes their usage. Orientation Functions CGAL::Polygon_mesh_processing::duplicate_non_manifold_edges_in_polygon_soup() CGAL::Polygon_mesh_processing::orient_polygon_soup() CGAL::Polygon_mesh_processing::orient_triangle_soup_with_reference_triangle_soup() CGAL::Polygon_mesh_processing::orient() CGAL::Polygon_mesh_processing::orient_triangle_soup_with_reference_triangle_mesh() CGAL::Polygon_mesh_processing::is_outward_oriented() CGAL::Polygon_mesh_processing::reverse_face_orientations() CGAL::Polygon_mesh_processing::does_bound_a_volume() CGAL::Polygon_mesh_processing::orient_to_bound_a_volume() CGAL::Polygon_mesh_processing::volume_connected_components() CGAL::Polygon_mesh_processing::merge_reversible_connected_components() CGAL::Polygon_mesh_processing::compatible_orientations() Combinatorial Repair Functions CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh() CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh() CGAL::Polygon_mesh_processing::polygon_mesh_to_polygon_soup() CGAL::Polygon_mesh_processing::merge_duplicate_points_in_polygon_soup() CGAL::Polygon_mesh_processing::merge_duplicate_polygons_in_polygon_soup() CGAL::Polygon_mesh_processing::remove_isolated_points_in_polygon_soup() CGAL::Polygon_mesh_processing::remove_isolated_vertices() CGAL::Polygon_mesh_processing::repair_polygon_soup() CGAL::Polygon_mesh_processing::stitch_boundary_cycle() CGAL::Polygon_mesh_processing::stitch_boundary_cycles() CGAL::Polygon_mesh_processing::stitch_borders() CGAL::Polygon_mesh_processing::is_non_manifold_vertex() CGAL::Polygon_mesh_processing::non_manifold_vertices() CGAL::Polygon_mesh_processing::duplicate_non_manifold_vertices() CGAL::Polygon_mesh_processing::merge_duplicated_vertices_in_boundary_cycle() CGAL::Polygon_mesh_processing::merge_duplicated_vertices_in_boundary_cycles() Geometric Repair Functions CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces() Hole Filling Functions CGAL::Polygon_mesh_processing::triangulate_hole() CGAL::Polygon_mesh_processing::triangulate_and_refine_hole() CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole() CGAL::Polygon_mesh_processing::triangulate_hole_polyline() CGAL::Polygon_mesh_processing::refine() CGAL::Polygon_mesh_processing::fair() I/O Functions CGAL::Polygon_mesh_processing::IO::read_polygon_mesh() See Also Intersection Detection Functions Predicate Functions CGAL::Polygon_mesh_processing::autorefine_triangle_soup()",
+      "members": [],
+      "xml_file": "group___pkg_p_m_p_mesh_repair_ref.xml"
+    },
+    "PMP_orientation_grp": {
+      "kind": "group",
+      "name": "PMP_orientation_grp",
+      "brief": "Functions to compute or change the orientation of faces and surfaces.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Volume_error_code",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Volume_error_code",
+          "brief": "Enumeration type used to indicate the status of a set of faces classified by the function volume_connected_components() .",
+          "detailed": "The set of faces defines either a volume connected component in the case of VALID_VOLUME or a surface connected component otherwise.",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "491"
+        },
+        {
+          "kind": "function",
+          "name": "orient_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::orient_polygon_soup",
+          "brief": "tries to consistently orient a soup of polygons in 3D space.",
+          "detailed": "The algorithm re-orients polygons such that the orientation of adjacent polygons is consistent. Note that the adjacency is defined in a combinatorial sense, i.e. two polygons are sharing an edge if and only if the endpoints of this edge are represented by the same point indices in both faces (possibly in a different order); it is not sufficient for the points to be geometrically identical. One may use CGAL::Polygon_mesh_processing::merge_duplicate_points_in_polygon_soup() to convert geometrical point equality into combinatorial point equality. When it is not possible to produce a combinatorial manifold surface (for example, if the polygon soup makes up a Möbius strip), some points are duplicated. Because a polygon soup does not have any connectivity (each point has as many occurrences as the number of polygons it belongs to), duplicating one point (or a pair of points) amounts to duplicating the polygon to which it belongs. These points are either an endpoint of an edge incident to more than two polygons, an endpoint of an edge between two polygons with incompatible orientations (during the re-orientation process), or more generally a point p at which the intersection of an infinitesimally small ball centered at p with the polygons incident to it is not a topological disk. The algorithm is described in [1] . PointRange a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is the point type. PolygonRange a model of the concept RandomAccessContainer whose value_type is a model of the concept RandomAccessContainer whose value_type is std::size_t . NamedParameters a sequence of named parameters points points of the soup of polygons. Some additional points might be pushed back to resolve non-manifoldness or non-orientability issues. polygons each element in the vector describes a polygon using the index of the points in points . If needed the order of the indices of a polygon might be reversed. np optional sequence of named parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> visitor </button> a visitor used to be notified of the presence of non-manifold simplices and of the modifications done to polygons during orientation. Type: a class model of PMPPolygonSoupOrientationVisitor Default: Default_orientation_visitor true if the orientation operation succeeded. false if some points were duplicated, thus producing a combinatorially manifold but self-intersecting polyhedron. orient_triangle_soup_with_reference_triangle_mesh()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::orient_polygon_soup",
+          "argsstring": "(PointRange &points, PolygonRange &polygons, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup.h",
+          "line": "543"
+        },
+        {
+          "kind": "function",
+          "name": "duplicate_non_manifold_edges_in_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::duplicate_non_manifold_edges_in_polygon_soup",
+          "brief": "duplicates each point p at which the intersection of an infinitesimally small ball centered at p with the polygons incident to it is not a topological disk.",
+          "detailed": "PointRange a model of the concepts RandomAccessContainer and BackInsertionSequence whose value_type is the point type PolygonRange a model of the concept RandomAccessContainer whose value_type is a model of the concept RandomAccessContainer whose value_type is std::size_t , and is also a model of BackInsertionSequence points points of the soup of polygons. Some additional points might be pushed back to resolve non-manifoldness or non-orientability issues. polygons each element in the vector describes a polygon using the indices of the points in points . If needed the order of the indices of a polygon might be reversed. false if some points were duplicated, thus producing a self-intersecting surface mesh. true otherwise. orient_polygon_soup() duplicate_non_manifold_vertices()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::duplicate_non_manifold_edges_in_polygon_soup",
+          "argsstring": "(PointRange &points, PolygonRange &polygons)",
+          "params": [
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "orient_triangle_soup_with_reference_triangle_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::orient_triangle_soup_with_reference_triangle_soup",
+          "brief": "orients each triangle of a triangle soup using the orientation of its closest non degenerate triangle in a triangle soup.",
+          "detailed": "Concurrency_tag enables sequential versus parallel orientation. Possible values are Sequential_tag (the default), Parallel_if_available_tag , and Parallel_tag . ReferencePointRange a model of the concept RandomAccessContainer whose value_type is the point type ReferenceTriangleRange a model of the concept RandomAccessContainer whose value_type is a model of the concept RandomAccessContainer whose value_type is std::size_t and is of size 3 PointRange a model of the concept RandomAccessContainer whose value_type is the point type TriangleRange a model of the concept RandomAccessContainer whose value_type is a model of the concept RandomAccessContainer whose value_type is std::size_t and is of size 3. NamedParameters1 a sequence of Named Parameters NamedParameters2 a sequence of Named Parameters ref_points the points of the reference soup ref_faces triples of indices of points in ref_points defining the triangles of the reference soup points the points of the soup to be oriented faces triples of indices of points in points defining the triangles of the soup np1 an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the point set ref_points Type: a model of ReadablePropertyMap whose key type is the value type of the iterator of ReferencePointRange and whose value type is geom_traits::Point_3 Default: CGAL::Identity_property_map<geom_traits::Point_3> <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits np2 an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the point set points Type: a model of ReadablePropertyMap whose key type is the value type of the iterator of PointRange and whose value type is geom_traits::Point_3 Default: CGAL::Identity_property_map<geom_traits::Point_3> The types of points in ReferencePointRange , PointRange , and geom_traits must be the same.",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::orient_triangle_soup_with_reference_triangle_soup",
+          "argsstring": "(const ReferencePointRange &ref_points, const ReferenceFaceRange &ref_faces, const PointRange &points, FaceRange &faces, const NamedParameters1 &np1=parameters::default_values(), const NamedParameters2 &np2=parameters::default_values())",
+          "params": [
+            {
+              "type": "const ReferencePointRange &",
+              "name": "ref_points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ReferenceFaceRange &",
+              "name": "ref_faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceRange &",
+              "name": "faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h",
+          "line": "144"
+        },
+        {
+          "kind": "function",
+          "name": "orient_triangle_soup_with_reference_triangle_mesh",
+          "qualified_name": "CGAL::Polygon_mesh_processing::orient_triangle_soup_with_reference_triangle_mesh",
+          "brief": "orients each triangle of a triangle soup using the orientation of its closest non degenerate triangle in tm_ref .",
+          "detailed": "Concurrency_tag enables sequential versus parallel orientation. Possible values are Sequential_tag (the default), Parallel_if_available_tag , and Parallel_tag . PointRange a model of the concept RandomAccessContainer whose value type is the point type TriangleRange a model of the concept RandomAccessContainer whose value_type is a model of the concept RandomAccessContainer whose value_type is std::size_t and of size 3 TriangleMesh a model of FaceListGraph tm_ref the reference triangle_mesh points the points of the soup triangles the triangles of the soup np1 an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm_ref Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm_ref) <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits np2 an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the point set points Type: a model of ReadablePropertyMap whose key type is the value type of the iterator of PointRange and whose value type is geom_traits::Point_3 Default: CGAL::Identity_property_map<geom_traits::Point_3> The types of points in PointRange , geom_traits , and vertex_point_map must be the same. orient_polygon_soup()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::orient_triangle_soup_with_reference_triangle_mesh",
+          "argsstring": "(const TriangleMesh &tm_ref, const PointRange &points, TriangleRange &triangles, const NamedParameters1 &np1=parameters::default_values(), const NamedParameters2 &np2=parameters::default_values())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm_ref",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleRange &",
+              "name": "triangles",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h",
+          "line": "284"
+        },
+        {
+          "kind": "function",
+          "name": "is_outward_oriented",
+          "qualified_name": "CGAL::Polygon_mesh_processing::is_outward_oriented",
+          "brief": "tests whether a closed triangle mesh has a positive orientation.",
+          "detailed": "A closed triangle mesh is considered to have a positive orientation if the normal vectors to all its faces point outside the domain bounded by the triangle mesh. The normal vector to each face is chosen pointing on the side of the face where its sequence of vertices is seen counterclockwise. CGAL::is_closed(tm) CGAL::is_triangle_mesh(tm) If tm contains several connected components, they are oriented consistently. In other words, the answer to this predicate would be the same for each isolated connected component. TriangleMesh a model of FaceListGraph NamedParameters a sequence of Named Parameters tm the closed triangle mesh free from self-intersections to be tested np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. This function is only doing an orientation test for one connected component of tm . For performance reasons, it is left to the user to call the function does_bound_a_volume() on a triangulated version of tm to ensure the result returned is relevant. For advanced usages, the function volume_connected_components() should be used instead. CGAL::Polygon_mesh_processing::reverse_face_orientations()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::is_outward_oriented",
+          "argsstring": "(const TriangleMesh &tm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "189"
+        },
+        {
+          "kind": "function",
+          "name": "reverse_face_orientations",
+          "qualified_name": "CGAL::Polygon_mesh_processing::reverse_face_orientations",
+          "brief": "reverses for each face the order of the vertices along the face boundary.",
+          "detailed": "PolygonMesh a model of FaceListGraph and MutableFaceGraph is_outward_oriented()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::reverse_face_orientations",
+          "argsstring": "(PolygonMesh &pmesh)",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "274"
+        },
+        {
+          "kind": "function",
+          "name": "reverse_face_orientations",
+          "qualified_name": "CGAL::Polygon_mesh_processing::reverse_face_orientations",
+          "brief": "reverses for each face in face_range the order of the vertices along the face boundary.",
+          "detailed": "The function does not perform any control and if the change of orientation of the faces makes the polygon mesh invalid, the behavior is undefined. PolygonMesh a model of FaceListGraph and MutableFaceGraph FaceRange range of face descriptors, model of Range . Its iterator type is InputIterator . is_outward_oriented()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::reverse_face_orientations",
+          "argsstring": "(const FaceRange &face_range, PolygonMesh &pmesh)",
+          "params": [
+            {
+              "type": "const FaceRange &",
+              "name": "face_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "339"
+        },
+        {
+          "kind": "function",
+          "name": "orient",
+          "qualified_name": "CGAL::Polygon_mesh_processing::orient",
+          "brief": "makes each closed connected component of a triangulated surface mesh inward or outward oriented.",
+          "detailed": "If a connected component is not closed, the orientation may or may not be changed or not is not guaranteed. TriangleMesh a model of FaceListGraph and MutableFaceGraph NamedParameters a sequence of bgl_namedparameters tm a closed triangulated surface mesh np an optional sequence of Named Parameters among the ones listed below CGAL::is_closed(tm) Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tm a unique index between 0 and num_faces(tm) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> outward_orientation </button> If true , each connected component will be outward oriented (and inward oriented if false ). Type: Boolean Default: true",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::orient",
+          "argsstring": "(TriangleMesh &tm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "410"
+        },
+        {
+          "kind": "function",
+          "name": "volume_connected_components",
+          "qualified_name": "CGAL::Polygon_mesh_processing::volume_connected_components",
+          "brief": "assigns to each face of tm an id corresponding to the volume connected component it contributes to.",
+          "detailed": "Using the adjacency relation of two faces along an edge, a triangle mesh can be split into connected components ( surface components in the following). A surface component without boundary separates the 3D space into an infinite and a finite volume. We say that the finite volume is enclosed by this surface component. The volume connected components ( volume components in the following) are defined as follows: Each surface component S that is outside any volume enclosed by another surface component defines the outer boundary of a volume component. Each surface component that is inside the volume enclosed by S defines a hole if it is included in no other volume enclosed by a surface component but S . Ignoring the identified volume component, the same procedure is recursively repeated for all surface components in each hole. There are some special cases: a non-closed surface component is reported as a volume component ignoring any inclusion test a self-intersecting surface component is reported as a volume component ignoring any inclusion test a surface component intersecting another surface component is reported as a volume component, and so are all the surface components inside its enclosed volume if do_orientation_tests is set to true , if the holes are not all equally oriented (all inward or all outward) or if the holes and the outer boundary are equally oriented, each surface component is reported as a volume component, and so are all the surface components inside the corresponding enclosed volumes If do_orientation_tests is set to true and the surface components that are outside all enclosed volumes are inward oriented, they are then considered as holes of the unbounded volume (that has no outer boundary) A property map for CGAL::vertex_point_t must be either available as an internal property map of tm or provided as one of the Named Parameters. TriangleMesh a model of FaceListGraph VolumeFaceIndexMap a model of WritablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and boost::graph_traits<TriangleMesh>::faces_size_type as value type. NamedParameters a sequence of Named Parameters tm the input triangle mesh volume_id_map the property map filled by this function with indices of volume components associated to the faces of tm np an optional sequence of Named Parameters among the ones listed below CGAL::is_closed(tm) Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tm a unique index between 0 and num_faces(tm) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> face_connected_component_map </button> a property map filled by this function and that will contain for each face the id of its surface component in the range [0, number of surface components - 1] Type: a class model of WritablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> volume_inclusions </button> a container, which contains at position k the ids of all the surface components that are the first intersected by any ray with source on the surface component k and directed outside the volume enclosed by the surface component k . There is only one such id but when some surface components intersect. The size of the container is exactly the number of surface components of tm . Type: a reference_wrapper (either from boost or the standard library) containing a reference to an object that must be a model of the BackInsertionSequence concept, with a value type being a model of BackInsertionSequence of std::size_t , both types having the functions reserve() and push_back() Default: unused <button class=\"collapsible\"> do_orientation_tests </button> If true , the orientation of the faces of each surface components will be taken into account for the definition of the volume. If false , the face orientation is ignored and the volumes are defined only by the nesting of surface components. Type: Boolean Default: true <button class=\"collapsible\"> error_codes </button> a container which indicates the status of a volume assigned to a set of faces. The description of the value type is given in the documentation of the enumeration type. The size of the container is exactly the number of volume components. Type: a reference_wrapper (either from boost or the standard library) containing a reference to a container that must be a model of the BackInsertionSequence concept, with value type Volume_error_code Default: unused <button class=\"collapsible\"> do_self_intersection_tests </button> If false , it is assumed that tm does not contains any self-intersections. If true , the input might contain some self-intersections and a test is done prior to the volume decomposition. Type: Boolean Default: false <button class=\"collapsible\"> connected_component_id_to_volume_id </button> For each connected component identified using its id ccid , the id of the volume it contributes to describe is the value at the position ccid in the container. The size of the container is exactly the number of connected components. Type: a reference_wrapper (either from boost or the standard library) containing a reference to a container that must be a model of the BackInsertionSequence concept, with value type std::size_t Default: unused <button class=\"collapsible\"> nesting_levels </button> For each connected component identified using its id ccid , the container contains the number of connected components containing on its bounded side this component. The size of the container is exactly the number of connected components. Type: a reference_wrapper (either from boost or the standard library) containing a reference to a container that must be a model of the BackInsertionSequence concept, with value type std::size_t Default: unused <button class=\"collapsible\"> is_cc_outward_oriented </button> For each connected component identified using its id ccid , the output of is_outward_oriented() called on the triangle mesh corresponding to this connected component is the value at the position ccid in the container. The size of the container is exactly the number of connected components. Type: a reference_wrapper (either from boost or the standard library) containing a reference to a container that must be a model of the BackInsertionSequence concept, with value type bool Default: unused <button class=\"collapsible\"> intersecting_volume_pairs_output_iterator </button> Output iterator into which pairs of ids (id must be convertible to std::size_t ) can be put. Each pair of connected components intersecting will be reported using their ids. If do_self_intersection_tests named parameter is set to false , nothing will be reported. Type: a model of OutputIterator Default: unused the number of volume components defined by tm",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::volume_connected_components",
+          "argsstring": "(const TriangleMesh &tm, VolumeFaceIndexMap volume_id_map, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VolumeFaceIndexMap",
+              "name": "volume_id_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "820"
+        },
+        {
+          "kind": "function",
+          "name": "does_bound_a_volume",
+          "qualified_name": "CGAL::Polygon_mesh_processing::does_bound_a_volume",
+          "brief": "indicates if tm bounds a volume.",
+          "detailed": "See coref_def_subsec for details. TriangleMesh a model of HalfedgeListGraph , FaceListGraph , and MutableFaceGraph . NamedParameters a sequence of Named Parameters tm a closed triangulated surface mesh np an optional sequence of Named Parameters among the ones listed below CGAL::is_closed(tm) if tm is self-intersecting the behavior of this function is undefined. Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tm a unique index between 0 and num_faces(tm) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> is_cc_outward_oriented </button> For each connected component identified using its id ccid , the output of is_outward_oriented() called on the triangle mesh corresponding to this connected component is the value at the position ccid in the container. The size of the container is exactly the number of connected components. Type: a reference_wrapper (either from boost or the standard library) containing a reference to a container that must be a model of the BackInsertionSequence concept, with value type bool Default: unused CGAL::Polygon_mesh_processing::orient_to_bound_a_volume()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::does_bound_a_volume",
+          "argsstring": "(const TriangleMesh &tm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "1281"
+        },
+        {
+          "kind": "function",
+          "name": "orient_to_bound_a_volume",
+          "qualified_name": "CGAL::Polygon_mesh_processing::orient_to_bound_a_volume",
+          "brief": "orients the connected components of tm to make it bound a volume.",
+          "detailed": "See coref_def_subsec for a precise definition. TriangleMesh a model of HalfedgeListGraph , FaceListGraph , and MutableFaceGraph . NamedParameters a sequence of bgl_namedparameters tm a closed triangulated surface mesh np an optional sequence of Named Parameters among the ones listed below CGAL::is_closed(tm) Optional Named Parameters <button class=\"collapsible\"> outward_orientation </button> If true , each connected component will be outward oriented (and inward oriented if false ). Type: Boolean Default: true Extra: If the outer connected components are inward oriented, it means that the infinity will be considered as part of the volume bounded by tm . <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tm a unique index between 0 and num_faces(tm) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map CGAL::Polygon_mesh_processing::does_bound_a_volume()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::orient_to_bound_a_volume",
+          "argsstring": "(TriangleMesh &tm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "1347"
+        },
+        {
+          "kind": "function",
+          "name": "merge_reversible_connected_components",
+          "qualified_name": "CGAL::Polygon_mesh_processing::merge_reversible_connected_components",
+          "brief": "reverses the connected components of tm having compatible boundary cycles that could be merged if their orientation were made compatible, and stitches them.",
+          "detailed": "Connected components are examined by increasing number of faces. PolygonMesh a model of HalfedgeListGraph , FaceListGraph , and MutableFaceGraph . NamedParameters a sequence of bgl_namedparameters pm a surface mesh np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pm) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t should be available for the vertices of pm . <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of pm a unique index between 0 and num_faces(pm) - 1 ) Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> maximum_number_of_faces </button> If not 0 , a connected component is considered reversible only if it has no more faces than the value given. Otherwise, it is always considered reversible. Type: std::size_t Default: 0",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::merge_reversible_connected_components",
+          "argsstring": "(PolygonMesh &pm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "1456"
+        },
+        {
+          "kind": "function",
+          "name": "compatible_orientations",
+          "qualified_name": "CGAL::Polygon_mesh_processing::compatible_orientations",
+          "brief": "identifies faces whose orientation must be reversed in order to enable stitching of connected components.",
+          "detailed": "Each face is assigned a bit ( false or true ) such that two faces have compatible orientations iff they are assigned the same bits. If pm features several connected components (ignoring edge orientations), the property map passed to the named parameter face_partition_id_map will indicate for each face to which connected component it belongs. Note that two faces in different connected components are not impacting each others' orientations, so comparing their associated bits in face_bit_map is irrelevant. PolygonMesh a model of HalfedgeListGraph , FaceGraph . FaceBitMap a model of WritablePropertyMap with face_descriptor as key and bool as value_type NamedParameters a sequence of bgl_namedparameters pm a surface mesh fbm face bit map indicating if a face orientation should be reversed to be stitchable (see CGAL::Polygon_mesh_processing::stitch_borders() ) with another face. If false is returned, the map will not be filled. np an optional sequence of Named Parameters among the ones listed below true if pm can be reoriented and false otherwise. Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pm) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t should be available for the vertices of pm . <button class=\"collapsible\"> face_partition_id_map </button> a property map filled by this function and that will contain for each face the id of its surface component after reversal and stitching in the range [0, n - 1] , with n the number of such components. Type: a class model of WritablePropertyMap with boost::graph_traits<PolygonMesh>::face_descriptor as key type and std::size_t as value type reverse_face_orientations() stitch_borders()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::compatible_orientations",
+          "argsstring": "(const PolygonMesh &pm, FaceBitMap fbm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceBitMap",
+              "name": "fbm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/orientation.h",
+          "line": "1668"
+        }
+      ],
+      "xml_file": "group___p_m_p__orientation__grp.xml"
+    },
+    "PMP_combinatorial_repair_grp": {
+      "kind": "group",
+      "name": "PMP_combinatorial_repair_grp",
+      "brief": "Functions to repair polygon soups and polygon meshes.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Duplicate_polygon_erase_policy",
+          "qualified_name": "CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy",
+          "brief": "Policies controlling how duplicate polygons are handled in polygon soup repair functions.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_polygon_soup.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "is_non_manifold_vertex",
+          "qualified_name": "CGAL::Polygon_mesh_processing::is_non_manifold_vertex",
+          "brief": "returns whether a vertex of a polygon mesh is non-manifold.",
+          "detailed": "This function has linear runtime with respect to the size of the mesh. The function non_manifold_vertices() should be used when gathering all non manifold vertices. PolygonMesh a model of HalfedgeListGraph v a vertex of pm pm a triangle mesh containing v true if the vertex is non-manifold, false otherwise duplicate_non_manifold_vertices()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::is_non_manifold_vertex",
+          "argsstring": "(typename boost::graph_traits< PolygonMesh >::vertex_descriptor v, const PolygonMesh &pm)",
+          "params": [
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::vertex_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/manifoldness.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "non_manifold_vertices",
+          "qualified_name": "CGAL::Polygon_mesh_processing::non_manifold_vertices",
+          "brief": "collects the non-manifold vertices (if any) present in the mesh.",
+          "detailed": "A non-manifold vertex v is returned via one incident halfedge h such that target(h, pm) = v for all the umbrellas that v appears in (an umbrella being the set of faces incident to all the halfedges reachable by walking around v using hnext = prev(opposite(h, pm), pm) , starting from h ). PolygonMesh a model of HalfedgeListGraph OutputIterator a model of OutputIterator holding objects of type boost::graph_traits<PolygonMesh>::halfedge_descriptor pm a triangle mesh out the output iterator that collects halfedges incident to v the output iterator is_non_manifold_vertex() duplicate_non_manifold_vertices()",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Polygon_mesh_processing::non_manifold_vertices",
+          "argsstring": "(const PolygonMesh &pm, OutputIterator out)",
+          "params": [
+            {
+              "type": "const PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/manifoldness.h",
+          "line": "306"
+        },
+        {
+          "kind": "function",
+          "name": "duplicate_non_manifold_vertices",
+          "qualified_name": "CGAL::Polygon_mesh_processing::duplicate_non_manifold_vertices",
+          "brief": "duplicates all the non-manifold vertices of the input mesh.",
+          "detailed": "PolygonMesh a model of HalfedgeListGraph and MutableHalfedgeGraph NamedParameters a sequence of Named Parameters pm the surface mesh to be repaired np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pm) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> vertex_is_constrained_map </button> a property map containing the constrained-or-not status of each vertex of pm . Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and bool as value type. It must be default constructible. Default: a default property map where no vertex is constrained Extra: put(vcm, v, true) will be called for each duplicated vertices, as well as the original non-manifold vertex in the input mesh. <button class=\"collapsible\"> output_iterator </button> an output iterator to collect the duplicated vertices Type: a model of OutputIterator with value type std::vector<vertex_descriptor> Default: unused Extra: The first vertex of each vector is a non-manifold vertex of the input mesh, followed by the new vertices that were created to fix the given non-manifold configuration. the number of vertices created non_manifold_vertices()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::duplicate_non_manifold_vertices",
+          "argsstring": "(PolygonMesh &pm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/manifoldness.h",
+          "line": "428"
+        },
+        {
+          "kind": "function",
+          "name": "merge_duplicated_vertices_in_boundary_cycle",
+          "qualified_name": "CGAL::Polygon_mesh_processing::merge_duplicated_vertices_in_boundary_cycle",
+          "brief": "merges identical vertices around a cycle of boundary edges.",
+          "detailed": "PolygonMesh a model of FaceListGraph and MutableFaceGraph . NamedParameters a sequence of Named Parameters. h a halfedge that belongs to a boundary cycle. pm the polygon mesh which contains the boundary cycle. np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pm) merge_duplicated_vertices_in_boundary_cycles()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::merge_duplicated_vertices_in_boundary_cycle",
+          "argsstring": "(typename boost::graph_traits< PolygonMesh >::halfedge_descriptor h, PolygonMesh &pm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "h",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/merge_border_vertices.h",
+          "line": "286"
+        },
+        {
+          "kind": "function",
+          "name": "merge_duplicated_vertices_in_boundary_cycles",
+          "qualified_name": "CGAL::Polygon_mesh_processing::merge_duplicated_vertices_in_boundary_cycles",
+          "brief": "extracts boundary cycles and merges the duplicated vertices of each cycle.",
+          "detailed": "PolygonMesh a model of FaceListGraph and MutableFaceGraph . NamedParameters a sequence of Named Parameters. pm the polygon mesh which contains the cycles. np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pm) merge_duplicated_vertices_in_boundary_cycle()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::merge_duplicated_vertices_in_boundary_cycles",
+          "argsstring": "(PolygonMesh &pm, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/merge_border_vertices.h",
+          "line": "345"
+        },
+        {
+          "kind": "function",
+          "name": "polygon_mesh_to_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::polygon_mesh_to_polygon_soup",
+          "brief": "adds the vertices and faces of a mesh into a (possibly non-empty) polygon soup.",
+          "detailed": "PolygonMesh a model of FaceListGraph PointRange a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type can be constructed from the point type of the polygon mesh PolygonRange a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is itself a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is std::size_t NamedParameters a sequence of Named Parameters mesh the mesh whose faces are being put in the polygon soup points points making the polygons of the soup polygons each element in the vector describes a polygon using the indices of the points in points np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of mesh Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, mesh) Advanced PolygonRange can also be a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is an array, but it is the user's responsibility to ensure that all faces have the same number of vertices, and that this number is equal to the size of the array. CGAL::Polygon_mesh_processing::orient_polygon_soup() CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh() CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::polygon_mesh_to_polygon_soup",
+          "argsstring": "(const PolygonMesh &mesh, PointRange &points, PolygonRange &polygons, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PolygonMesh &",
+              "name": "mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h",
+          "line": "98"
+        },
+        {
+          "kind": "function",
+          "name": "is_polygon_soup_a_polygon_mesh",
+          "qualified_name": "CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh",
+          "brief": "returns true if the soup of polygons defines a valid polygon mesh that can be handled by CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh() .",
+          "detailed": "It checks that each edge has at most two incident faces and such an edge is visited in opposite direction along the two face boundaries, no polygon has twice the same vertex, and the polygon soup describes a manifold surface. This function does not require a range of points as an argument since the check is purely topological. To each vertex of the mesh is associated an index that is used in the description of the boundaries of the polygons provided in polygons . PolygonRange a model of the concept RandomAccessContainer whose value_type is a model of the concept RandomAccessContainer whose value_type is std::size_t . polygons each element in the range describes a polygon using the indices of the vertices. CGAL::Polygon_mesh_processing::orient_polygon_soup()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh",
+          "argsstring": "(const PolygonRange &polygons)",
+          "params": [
+            {
+              "type": "const PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h",
+          "line": "195"
+        },
+        {
+          "kind": "function",
+          "name": "polygon_soup_to_polygon_mesh",
+          "qualified_name": "CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh",
+          "brief": "builds a polygon mesh from a soup of polygons.",
+          "detailed": "the input polygon soup describes a consistently oriented polygon mesh. This can be checked using the function CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh(polygons) . PolygonMesh a model of MutableFaceGraph PointRange a model of the concept RandomAccessContainer whose value type is the point type PolygonRange a model of the concept RandomAccessContainer whose value type is a model of the concept RandomAccessContainer whose value type is std::size_t NamedParameters_PS a sequence of Named Parameters NamedParameters_PM a sequence of Named Parameters points points of the soup of polygons polygons each element in the range describes a polygon using the indices of the points in points out the polygon mesh to be built np_ps an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the range points Type: a model of ReadablePropertyMap whose value type is a point type convertible to the point type of the vertex point map associated to the polygon mesh Default: CGAL::Identity_property_map <button class=\"collapsible\"> point_to_vertex_output_iterator </button> an OutputIterator containing the pairs source-vertex-index from points , target-vertex. Type: a class model of OutputIterator accepting std::pair<int, boost::graph_traits<PolygonMesh>::vertex_descriptor> Default: Emptyset_iterator <button class=\"collapsible\"> polygon_to_face_output_iterator </button> an OutputIterator containing the pairs polygon-index from polygons , target-face. Type: a class model of OutputIterator accepting std::pair<int, boost::graph_traits<PolygonMesh>::face_descriptor> Default: Emptyset_iterator <button class=\"collapsible\"> point_to_vertex_map </button> a property map associating each soup point of points to a vertex of out . Type: a class model of ReadablePropertyMap with an integer type as key type and boost::graph_traits<PolygonMesh>::vertex_descriptor as value type. Default: unused <button class=\"collapsible\"> polygon_to_face_map </button> a property map associating each soup polygon of polygons to a face of out Type: a class model of ReadablePropertyMap with an integer type as key type and boost::graph_traits<PolygonMesh>::face_descriptor as value type. Default: unused np_pm an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of out Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, out) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . CGAL::Polygon_mesh_processing::orient_polygon_soup() CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh() CGAL::Polygon_mesh_processing::polygon_mesh_to_polygon_soup()",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh",
+          "argsstring": "(const PointRange &points, const PolygonRange &polygons, PolygonMesh &out, const NamedParameters_PS &np_ps=parameters::default_values(), const NamedParameters_PM &np_pm=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters_PS &",
+              "name": "np_ps",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters_PM &",
+              "name": "np_pm",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h",
+          "line": "330"
+        },
+        {
+          "kind": "function",
+          "name": "remove_isolated_points_in_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_isolated_points_in_polygon_soup",
+          "brief": "removes the isolated points from a polygon soup.",
+          "detailed": "A point is considered isolated if it does not appear in any polygon of the soup. PointRange a model of the concept SequenceContainer whose value type is the point type. PolygonRange a model of the concept RandomAccessContainer whose value_type is itself a model of the concept RandomAccessContainer whose value_type is std::size_t . points points of the soup of polygons polygons a vector of polygons. Each element in the vector describes a polygon using the indices of the points in points . the number of removed isolated points repair_polygon_soup()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::remove_isolated_points_in_polygon_soup",
+          "argsstring": "(PointRange &points, PolygonRange &polygons)",
+          "params": [
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_polygon_soup.h",
+          "line": "404"
+        },
+        {
+          "kind": "function",
+          "name": "merge_duplicate_points_in_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::merge_duplicate_points_in_polygon_soup",
+          "brief": "merges the duplicate points in a polygon soup.",
+          "detailed": "Note that the index of a point that is merged with another point will thus change in all the polygons that the point appears in. PointRange a model of the concepts SequenceContainer and Swappable whose value type is the point type. PolygonRange a model of the concept RandomAccessContainer whose value_type is itself a model of the concept RandomAccessContainer whose value_type is std::size_t . NamedParameters a sequence of Named Parameters points points of the soup of polygons polygons a vector of polygons. Each element in the vector describes a polygon using the indices of the points in points . np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: The traits class must provide the nested functor Less_xyz_3 to compare lexicographically two points a function Less_xyz_3 less_xyz_3_object() . Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. the number of removed points repair_polygon_soup()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::merge_duplicate_points_in_polygon_soup",
+          "argsstring": "(PointRange &points, PolygonRange &polygons, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_polygon_soup.h",
+          "line": "522"
+        },
+        {
+          "kind": "function",
+          "name": "merge_duplicate_polygons_in_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::merge_duplicate_polygons_in_polygon_soup",
+          "brief": "merges the duplicate polygons in a polygon soup.",
+          "detailed": "Two polygons are duplicate if they share the same vertices in the same order. Note that the first vertex of the polygon does not matter, that is the triangle 0,1,2 is a duplicate of the triangle 2,0,1 . PointRange a model of the concept RandomAccessContainer whose value type is the point type. PolygonRange a model of the concept SequenceContainer whose value_type is itself a model of the concepts RandomAccessContainer and ReversibleContainer whose value_type is std::size_t . NamedParameters a sequence of Named Parameters points points of the soup of polygons polygons a vector of polygons. Each element in the vector describes a polygon using the indices of the points in points . np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: The traits class must provide the nested functor Less_xyz_3 to compare lexicographically two points a function Less_xyz_3 less_xyz_3_object() . Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> erase_policy </button> specifies the policy applied when multiple polygons are duplicates: CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::ERASE_ALL removes all duplicates. CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::KEEP_ONE keeps one arbitrarily chosen polygon. CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::KEEP_ONE_IF_ODD keeps one polygon if the number of duplicate polygons is odd, and removes all of them otherwise. Type: CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy Default: CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::KEEP_ONE <button class=\"collapsible\"> require_same_orientation </button> Parameter to indicate if polygon orientation should be taken into account when determining whether two polygons are duplicates, that is, whether e.g. the triangles 0,1,2 and 0,2,1 are duplicates. Type: Boolean Default: false the number of removed polygons repair_polygon_soup()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::merge_duplicate_polygons_in_polygon_soup",
+          "argsstring": "(const PointRange &points, PolygonRange &polygons, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_polygon_soup.h",
+          "line": "934"
+        },
+        {
+          "kind": "function",
+          "name": "repair_polygon_soup",
+          "qualified_name": "CGAL::Polygon_mesh_processing::repair_polygon_soup",
+          "brief": "cleans a given polygon soup through various repairing operations.",
+          "detailed": "More precisely, this function carries out the following tasks, in the same order as they are listed: merging of duplicate points, using the function CGAL::Polygon_mesh_processing::merge_duplicate_points_in_polygon_soup() ; simplification of polygons to remove geometrically identical consecutive vertices; splitting of \"pinched\" polygons, that is polygons in which a geometric position appears more than once. The splitting process results in multiple non-pinched polygons; removal of invalid polygons, that is polygons with fewer than 2 vertices; removal of duplicate polygons, using the function CGAL::Polygon_mesh_processing::merge_duplicate_polygons_in_polygon_soup() ; removal of isolated points, using the function CGAL::Polygon_mesh_processing::remove_isolated_points_in_polygon_soup() . Note that the point and polygon containers will be modified by the repairing operations, and thus the indexing of the polygons will also be changed. PointRange a model of the concepts SequenceContainer and Swappable and whose value type is the point type. PolygonRange a model of the concept SequenceContainer whose value_type is itself a model of the concepts SequenceContainer , Swappable , and ReversibleContainer whose value_type is std::size_t . NamedParameters a sequence of Named Parameters points points of the soup of polygons polygons a vector of polygons. Each element in the vector describes a polygon using the indices of the points in points . np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: The traits class must provide the nested functors Less_xyz_3 and Equal_3 to respectivelycompare lexicographically two points and to check if two points are identical. For each functor Foo , a function Foo foo_object() must be provided. Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> erase_policy </button> specifies the policy applied when multiple polygons are duplicates: CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::ERASE_ALL removes all duplicates. CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::KEEP_ONE keeps one arbitrarily chosen polygon. CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::KEEP_ONE_IF_ODD keeps one polygon if the number of duplicate polygons is odd, and removes all of them otherwise. Type: CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy Default: CGAL::Polygon_mesh_processing::Duplicate_polygon_erase_policy::KEEP_ONE <button class=\"collapsible\"> require_same_orientation </button> Parameter to indicate if polygon orientation should be taken into account when determining whether two polygons are duplicates, that is, whether e.g. the triangles 0,1,2 and 0,2,1 are duplicates. Type: Boolean Default: false",
+          "return_type": "void",
+          "definition": "void CGAL::Polygon_mesh_processing::repair_polygon_soup",
+          "argsstring": "(PointRange &points, PolygonRange &polygons, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_polygon_soup.h",
+          "line": "1172"
+        },
+        {
+          "kind": "function",
+          "name": "stitch_boundary_cycle",
+          "qualified_name": "CGAL::Polygon_mesh_processing::stitch_boundary_cycle",
+          "brief": "stitches together, whenever possible, two halfedges belonging to the boundary cycle described by the halfedge h .",
+          "detailed": "Two border halfedges h1 and h2 can be stitched if the points associated to the source and target vertices of h1 are the same as those of the target and source vertices of h2 , respectively. PolygonMesh a model of MutableFaceGraph NamedParameters a sequence of Named Parameters h a border halfedge of the polygon mesh pmesh pmesh the polygon mesh to be stitched np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: The traits class must provide the nested type Point_3 , and the nested functors: Less_xyz_3 to compare lexicographically two points Equal_3 to check whether two points are identical. For each functor Foo , a function Foo foo_object() must be provided. Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. the number of pairs of halfedges that were stitched. stitch_boundary_cycles() stitch_borders()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::stitch_boundary_cycle",
+          "argsstring": "(const typename boost::graph_traits< PolygonMesh >::halfedge_descriptor h, PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "h",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/stitch_borders.h",
+          "line": "1165"
+        },
+        {
+          "kind": "function",
+          "name": "stitch_boundary_cycles",
+          "qualified_name": "CGAL::Polygon_mesh_processing::stitch_boundary_cycles",
+          "brief": "stitches together, whenever possible, two halfedges belonging to the same boundary cycle.",
+          "detailed": "Two border halfedges h1 and h2 can be stitched if the points associated to the source and target vertices of h1 are the same as those of the target and source vertices of h2 , respectively. BorderHalfedgeRange a model of Range with value type boost::graph_traits<PolygonMesh>::halfedge_descriptor PolygonMesh a model of MutableFaceGraph NamedParameters a sequence of Named Parameters boundary_cycle_representatives a range of border halfedges, each describing a boundary cycle of the mesh pmesh pmesh the polygon mesh to be modified by stitching np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: The traits class must provide the nested type Point_3 , and the nested functors: Less_xyz_3 to compare lexicographically two points Equal_3 to check whether two points are identical. For each functor Foo , a function Foo foo_object() must be provided. Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. the number of pairs of halfedges that were stitched. stitch_boundary_cycle() stitch_borders()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::stitch_boundary_cycles",
+          "argsstring": "(const BorderHalfedgeRange &boundary_cycle_representatives, PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const BorderHalfedgeRange &",
+              "name": "boundary_cycle_representatives",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/stitch_borders.h",
+          "line": "1237"
+        },
+        {
+          "kind": "function",
+          "name": "stitch_borders",
+          "qualified_name": "CGAL::Polygon_mesh_processing::stitch_borders",
+          "brief": "stitches together border halfedges in a polygon mesh.",
+          "detailed": "The halfedges to be stitched are provided in hedge_pairs_to_stitch . For each pair p in this vector, p.second and its opposite will be removed from pmesh . PolygonMesh a model of MutableFaceGraph HalfedgePairsRange a range of std::pair<boost::graph_traits<PolygonMesh>::halfedge_descriptor, boost::graph_traits<PolygonMesh>::halfedge_descriptor> , model of Range . Its iterator type is InputIterator . NamedParameters a sequence of Named Parameters pmesh the polygon mesh to be modified by stitching hedge_pairs_to_stitch a range of std::pair of halfedges to be stitched together np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pm Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . the number of pairs of halfedges that were stitched. stitch_boundary_cycle() stitch_boundary_cycles()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::stitch_borders",
+          "argsstring": "(PolygonMesh &pmesh, const HalfedgePairsRange &hedge_pairs_to_stitch, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const HalfedgePairsRange &",
+              "name": "hedge_pairs_to_stitch",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/stitch_borders.h",
+          "line": "1306"
+        },
+        {
+          "kind": "function",
+          "name": "stitch_borders",
+          "qualified_name": "CGAL::Polygon_mesh_processing::stitch_borders",
+          "brief": "Same as the other overload, but the pairs of halfedges to be stitched are automatically found amongst all border halfedges.",
+          "detailed": "Two border halfedges h1 and h2 are set to be stitched if the points associated to the source and target vertices of h1 are the same as those of the target and source vertices of h2 , respectively. PolygonMesh a model of FaceListGraph and MutableFaceGraph NamedParameters a sequence of Named Parameters pmesh the polygon mesh to be modified by the stitching procedure np optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> apply_per_connected_component </button> specifies if the borders should only be stitched only within their own connected component. Type: Boolean Default: false <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of pmesh a unique index between 0 and num_faces(pmesh) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map the number of pairs of halfedges that were stitched. stitch_boundary_cycle() stitch_boundary_cycles()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::stitch_borders",
+          "argsstring": "(PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/stitch_borders.h",
+          "line": "1438"
+        },
+        {
+          "kind": "function",
+          "name": "stitch_borders",
+          "qualified_name": "CGAL::Polygon_mesh_processing::stitch_borders",
+          "brief": "Same as the other overload, but the pairs of halfedges to be stitched are automatically found amongst halfedges in cycles described by boundary_cycle_representatives .",
+          "detailed": "Two border halfedges h1 and h2 are set to be stitched if the points associated to the source and target vertices of h1 are the same as those of the target and source vertices of h2 , respectively. BorderHalfedgeRange a model of Range with value type boost::graph_traits<PolygonMesh>::halfedge_descriptor PolygonMesh a model of FaceListGraph and MutableFaceGraph NamedParameters a sequence of Named Parameters boundary_cycle_representatives a range of border halfedges, each describing a boundary cycle whose halfedges will be considered for stitching pmesh the polygon mesh to be modified by the stitching procedure np optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> apply_per_connected_component </button> specifies if the borders should only be stitched only within their own connected component. Type: Boolean Default: false <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of pmesh a unique index between 0 and num_faces(pmesh) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: The traits class must provide the nested type Point_3 , and the nested functors: Less_xyz_3 to compare lexicographically two points Equal_3 to check whether two points are identical. For each functor Foo , a function Foo foo_object() must be provided. Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. the number of pairs of halfedges that were stitched. stitch_boundary_cycle() stitch_boundary_cycles()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::stitch_borders",
+          "argsstring": "(const BorderHalfedgeRange &boundary_cycle_representatives, PolygonMesh &pmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const BorderHalfedgeRange &",
+              "name": "boundary_cycle_representatives",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/stitch_borders.h",
+          "line": "1510"
+        }
+      ],
+      "xml_file": "group___p_m_p__combinatorial__repair__grp.xml"
+    },
+    "PMP_geometric_repair_grp": {
+      "kind": "group",
+      "name": "PMP_geometric_repair_grp",
+      "brief": "Functions to repair polygon soups and polygon meshes.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "remove_isolated_vertices",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_isolated_vertices",
+          "brief": "removes the isolated vertices from any polygon mesh.",
+          "detailed": "A vertex is considered isolated if it is not incident to a simplex of higher dimension. PolygonMesh a model of FaceListGraph and MutableFaceGraph pmesh the polygon mesh to be repaired the number of removed isolated vertices",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::remove_isolated_vertices",
+          "argsstring": "(PolygonMesh &pmesh)",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "remove_connected_components_of_negligible_size",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_connected_components_of_negligible_size",
+          "brief": "removes connected components whose area or volume is under a certain threshold value.",
+          "detailed": "Thresholds are provided via Named Parameters. (see below). If thresholds are not provided by the user, default values are computed as follows: the area threshold is taken as the square of one percent of the length of the diagonal of the bounding box of the mesh. the volume threshold is taken as the third power of one percent of the length of the diagonal of the bounding box of the mesh. The area and volume of a connected component will always be positive values (regardless of the orientation of the mesh). As a consequence of the last sentence, the area or volume criteria can be disabled by passing zero ( 0 ) as threshold value. TriangleMesh a model of FaceListGraph and MutableFaceGraph NamedParameters a sequence of Named Parameters tmesh the triangulated polygon mesh np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in TriangleMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. Extra: Exact constructions kernels are not supported by this function. <button class=\"collapsible\"> face_index_map </button> a property map associating to each face of tmesh a unique index between 0 and num_faces(tmesh) - 1 Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key type and std::size_t as value type Default: an automatically indexed internal map <button class=\"collapsible\"> area_threshold </button> a fixed value such that only connected components whose area is larger than this value are kept Type: geom_traits::FT Default: 1% of the length of the diagonal of the axis-aligned bounding box of the mesh, squared <button class=\"collapsible\"> volume_threshold </button> a fixed value such that only connected components whose volume is larger than this value are kept (only applies to closed connected components) Type: geom_traits::FT Default: 1% of the length of the diagonal of the axis-aligned bounding box of the mesh, cubed Extra: The mesh must be closed. <button class=\"collapsible\"> edge_is_constrained_map </button> a property map containing the constrained-or-not status of each edge of tmesh Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::edge_descriptor as key type and bool as value type. It must be default constructible. Default: a default property map where no edge is constrained Extra: A constrained edge can be split or collapsed, but not flipped, nor its endpoints moved by smoothing. <button class=\"collapsible\"> dry_run </button> If true , the mesh will not be altered, but the number of components that would be removed is returned. Type: Boolean Default: false <button class=\"collapsible\"> output_iterator </button> An output iterator to collect the faces that would be removed by the algorithm, when using the \"dry run\" mode (see parameter dry_run ) Type: a model of OutputIterator with value type face_descriptor Default: unused the number of connected components removed (ignoring isolated vertices). keep_connected_components() remove_connected_components()",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polygon_mesh_processing::remove_connected_components_of_negligible_size",
+          "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair.h",
+          "line": "154"
+        },
+        {
+          "kind": "function",
+          "name": "remove_almost_degenerate_faces",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces",
+          "brief": "removes almost degenerate faces in a range of faces from a triangulated surface mesh.",
+          "detailed": "Almost degenerated triangle faces are classified as caps or needles: a triangle is said to be a needle if its longest edge is much longer than its shortest edge. A triangle is said to be a cap if one of its angles is close to 180 degrees. Needles are removed by collapsing their shortest edges, while caps are removed by flipping the edge opposite to the largest angle (with the exception of caps on the boundary that are simply removed from the mesh). CGAL::is_triangle_mesh(tmesh) TriangleMesh a model of FaceListGraph and MutableFaceGraph FaceRange a model of ConstRange with boost::graph_traits<TriangleMesh>::face_descriptor as value type NamedParameters a sequence of Named Parameters face_range the initial range of faces to be considered to look for badly shaped triangles. Note that modifications of tmesh are not limited to faces in face_range and neighbor faces might also be impacted. tmesh the triangulated surface mesh to be modified np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> cap_threshold </button> the cosine of a minimum angle such that if a face has an angle greater than this bound, it is a cap. The threshold is in range [-1 0] and corresponds to an angle between 90 and 180 degrees. Type: double Default: the cosinus corresponding to an angle of 160 degrees <button class=\"collapsible\"> needle_threshold </button> a bound on the ratio of the lengths of the longest edge and the shortest edge, such that a face having a ratio larger than the threshold is a needle. Type: double Default: 4 <button class=\"collapsible\"> collapse_length_threshold </button> if different from 0, an edge collapsed will be prevented if the edge is longer than the threshold given. Type: double Default: 0 <button class=\"collapsible\"> flip_triangle_height_threshold </button> if different from 0, an edge flip will be prevented if the height of the triangle (whose base is the edge to be flipped) is longer than the threshold given. Type: double Default: 0 <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tmesh . Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tmesh) . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class. Type: A model of Kernel . Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits . Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> edge_is_constrained_map </button> a property map containing the constrained-or-not status of each edge of tmesh . Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::edge_descriptor as key type and bool as value type. Default: a default property map where no edge is constrained. Extra: A constrained edge can not be collapsed nor flipped. <button class=\"collapsible\"> vertex_is_constrained_map </button> a property map containing the constrained-or-not status of each vertex of tmesh . Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and bool as value type. Default: a default property map where no vertex is constrained. Extra: A constrained vertex is guaranteed to be present in tmesh after the function call. <button class=\"collapsible\"> filter </button> A function object providing bool operator()(geom_traits::Point_3,geom_traits::Point_3,geom_traits::Point_3) . Type: The function object is queried each time a new triangle is about to be created by a flip or a collapse operation. If false is returned, the operation is canceled. Default: a functor always returning true . true if no almost degenerate face could not be removed (due to topological constraints), and false otherwise. is_needle_triangle_face() is_cap_triangle_face() Todo check what to use as priority queue with removable elements, set might not be optimal",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces",
+          "argsstring": "(const FaceRange &face_range, TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const FaceRange &",
+              "name": "face_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "693"
+        },
+        {
+          "kind": "function",
+          "name": "remove_almost_degenerate_faces",
+          "qualified_name": "CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces",
+          "brief": "removes all almost degenerate faces from a triangulated surface mesh.",
+          "detailed": "Equivalent to remove_almost_degenerate_faces(faces(tmesh), tmesh, np)",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces",
+          "argsstring": "(TriangleMesh &tmesh, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "TriangleMesh &",
+              "name": "tmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/repair_degeneracies.h",
+          "line": "1131"
+        }
+      ],
+      "xml_file": "group___p_m_p__geometric__repair__grp.xml"
+    },
+    "PMP_hole_filling_grp": {
+      "kind": "group",
+      "name": "PMP_hole_filling_grp",
+      "brief": "Functions to fill holes given as a range of halfedges or as range of points.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "triangulate_hole",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_hole",
+          "brief": "triangulates a hole in a polygon mesh.",
+          "detailed": "Depending on the choice of the underlying algorithm different preconditions apply. When using the 2D constrained Delaunay triangulation, the border edges of the hole must not intersect the surface. Otherwise, additionally, the boundary of the hole must not contain any non-manifold vertex. The patch generated does not introduce non-manifold edges nor degenerate triangles. If a hole cannot be triangulated, pmesh is not modified and nothing is recorded in the face output iterator. PolygonMesh a model of MutableFaceGraph NamedParameters a sequence of Named Parameters pmesh polygon mesh containing the hole border_halfedge a border halfedge incident to the hole np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> face_output_iterator </button> iterator over patch faces Type: a model of OutputIterator holding boost::graph_traits<PolygonMesh>::face_descriptor for patch faces Default: Emptyset_iterator <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> use_delaunay_triangulation </button> If true , use the Delaunay triangulation facet search space. Type: Boolean Default: true Extra: If no valid triangulation can be found in this search space, the algorithm falls back to the non-Delaunay triangulations search space to find a solution. <button class=\"collapsible\"> use_2d_constrained_delaunay_triangulation </button> If true , the points of the boundary of the hole are used to estimate a fitting plane and a 2D constrained Delaunay triangulation is then used to fill the hole projected in the fitting plane. Type: Boolean Default: true Extra: If the boundary of the hole is not planar (according to the parameter threshold_distance ) or if no valid 2D triangulation can be found, the algorithm falls back to the method using the 3D Delaunay triangulation. This parameter is a good choice for near planar holes. <button class=\"collapsible\"> threshold_distance </button> The maximum distance between the vertices of the hole boundary and the least squares plane fitted to this boundary. Type: double Default: one quarter of the height of the bounding box of the hole Extra: This parameter is used only in conjunction with the parameter use_2d_constrained_delaunay_triangulation . <button class=\"collapsible\"> do_not_use_cubic_algorithm </button> Set this parameter to true if you only want to use the Delaunay based versions of the algorithm, skipping the cubic search space one in case of failure. Type: Boolean Default: false Extra: If true , use_2d_constrained_delaunay_triangulation or use_delaunay_triangulation must be set to true otherwise nothing will be done. <button class=\"collapsible\"> visitor </button> a visitor used to track when entering a given phase of the algorithm Type: A model of PMPHolefillingVisitor Type: Hole_filling::Default_visitor the face output iterator Todo handle islands Replace border_halfedge by a range of border halfedges. The first one would describe the hole, the other ones would describe the islands. Then, insert the holes vertices in the set of possibilities for connecting vertices together handle the case where an island is reduced to a point",
+          "return_type": "auto",
+          "definition": "auto CGAL::Polygon_mesh_processing::triangulate_hole",
+          "argsstring": "(PolygonMesh &pmesh, typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "border_halfedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "168"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_hole",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_hole",
+          "brief": "triangulates a hole in a polygon mesh.",
+          "detailed": "Deprecated This function is deprecated since CGAL 5.6 and the overload with the named parameter face_output_iterator should be used instead. PolygonMesh a model of MutableFaceGraph OutputIterator a model of OutputIterator holding boost::graph_traits<PolygonMesh>::face_descriptor for patch faces. NamedParameters a sequence of Named Parameters",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Polygon_mesh_processing::triangulate_hole",
+          "argsstring": "(PolygonMesh &pmesh, typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge, OutputIterator out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "border_halfedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "259"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_and_refine_hole",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_and_refine_hole",
+          "brief": "triangulates and refines a hole in a polygon mesh.",
+          "detailed": "PolygonMesh must be model of MutableFaceGraph NamedParameters a sequence of Named Parameters pmesh polygon mesh which has the hole border_halfedge a border halfedge incident to the hole np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> face_output_iterator </button> iterator over patch faces Type: a model of OutputIterator holding boost::graph_traits<PolygonMesh>::face_descriptor for patch faces Default: Emptyset_iterator <button class=\"collapsible\"> vertex_output_iterator </button> iterator over patch vertices Type: a model of OutputIterator holding boost::graph_traits<PolygonMesh>::vertex_descriptor for patch vertices Default: Emptyset_iterator <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> use_delaunay_triangulation </button> If true , use the Delaunay triangulation facet search space. Type: Boolean Default: true Extra: If no valid triangulation can be found in this search space, the algorithm falls back to the non-Delaunay triangulations search space to find a solution. <button class=\"collapsible\"> use_2d_constrained_delaunay_triangulation </button> If true , the points of the boundary of the hole are used to estimate a fitting plane and a 2D constrained Delaunay triangulation is then used to fill the hole projected in the fitting plane. Type: Boolean Default: true Extra: If the boundary of the hole is not planar (according to the parameter threshold_distance ) or if no valid 2D triangulation can be found, the algorithm falls back to the method using the 3D Delaunay triangulation. This parameter is a good choice for near planar holes. <button class=\"collapsible\"> threshold_distance </button> The maximum distance between the vertices of the hole boundary and the least squares plane fitted to this boundary. Type: double Default: one quarter of the height of the bounding box of the hole Extra: This parameter is used only in conjunction with the parameter use_2d_constrained_delaunay_triangulation . <button class=\"collapsible\"> do_not_use_cubic_algorithm </button> Set this parameter to true if you only want to use the Delaunay based versions of the algorithm, skipping the cubic search space one in case of failure. Type: Boolean Default: false Extra: If true , use_2d_constrained_delaunay_triangulation or use_delaunay_triangulation must be set to true otherwise nothing will be done. <button class=\"collapsible\"> density_control_factor </button> factor to control density of the output mesh, where larger values cause denser refinements, as in refine() Type: double Default: $ \\sqrt{2}$ <button class=\"collapsible\"> visitor </button> a visitor used to track when entering a given phase of the algorithm Type: A model of PMPHolefillingVisitor Type: Hole_filling::Default_visitor pair of face and vertex output iterator CGAL::Polygon_mesh_processing::triangulate_hole() CGAL::Polygon_mesh_processing::refine() Todo handle islands",
+          "return_type": "auto",
+          "definition": "auto CGAL::Polygon_mesh_processing::triangulate_and_refine_hole",
+          "argsstring": "(PolygonMesh &pmesh, typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "border_halfedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "373"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_and_refine_hole",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_and_refine_hole",
+          "brief": "triangulates and refines a hole in a polygon mesh.",
+          "detailed": "Deprecated This function is deprecated since CGAL 5.6 and the overload with the named parameters face_output_iterator and vertex_output_iterator should be used instead. PolygonMesh must be model of MutableFaceGraph FaceOutputIterator model of OutputIterator holding boost::graph_traits<PolygonMesh>::face_descriptor for patch faces. VertexOutputIterator model of OutputIterator holding boost::graph_traits<PolygonMesh>::vertex_descriptor for patch vertices. NamedParameters a sequence of Named Parameters",
+          "return_type": "std::pair< FaceOutputIterator, VertexOutputIterator >",
+          "definition": "std::pair< FaceOutputIterator, VertexOutputIterator > CGAL::Polygon_mesh_processing::triangulate_and_refine_hole",
+          "argsstring": "(PolygonMesh &pmesh, typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge, FaceOutputIterator face_out, VertexOutputIterator vertex_out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "border_halfedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceOutputIterator",
+              "name": "face_out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexOutputIterator",
+              "name": "vertex_out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "434"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_refine_and_fair_hole",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole",
+          "brief": "triangulates, refines and fairs a hole in a polygon mesh.",
+          "detailed": "PolygonMesh a model of MutableFaceGraph NamedParameters a sequence of Named Parameters pmesh polygon mesh which has the hole border_halfedge a border halfedge incident to the hole np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> face_output_iterator </button> iterator over patch faces Type: a model of OutputIterator holding boost::graph_traits<PolygonMesh>::face_descriptor for patch faces Default: Emptyset_iterator <button class=\"collapsible\"> vertex_output_iterator </button> iterator over patch vertices Type: a model of OutputIterator holding boost::graph_traits<PolygonMesh>::vertex_descriptor for patch vertices Default: Emptyset_iterator <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadWritePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> use_delaunay_triangulation </button> If true , use the Delaunay triangulation facet search space. Type: Boolean Default: true Extra: If no valid triangulation can be found in this search space, the algorithm falls back to the non-Delaunay triangulations search space to find a solution. <button class=\"collapsible\"> use_2d_constrained_delaunay_triangulation </button> If true , the points of the boundary of the hole are used to estimate a fitting plane and a 2D constrained Delaunay triangulation is then used to fill the hole projected in the fitting plane. Type: Boolean Default: true Extra: If the boundary of the hole is not planar (according to the parameter threshold_distance ) or if no valid 2D triangulation can be found, the algorithm falls back to the method using the 3D Delaunay triangulation. This parameter is a good choice for near planar holes. <button class=\"collapsible\"> threshold_distance </button> The maximum distance between the vertices of the hole boundary and the least squares plane fitted to this boundary. Type: double Default: one quarter of the height of the bounding box of the hole Extra: This parameter is used only in conjunction with the parameter use_2d_constrained_delaunay_triangulation . <button class=\"collapsible\"> density_control_factor </button> factor to control density of the output mesh, where larger values cause denser refinements, as in refine() Type: double Default: $ \\sqrt{2}$ <button class=\"collapsible\"> fairing_continuity </button> A value controlling the tangential continuity of the output surface patch. The possible values are 0, 1 and 2, referring to the C 0 , C 1 and C 2 continuity. Type: unsigned int Default: 1 Extra: The larger fairing_continuity gets, the more fixed vertices are required. <button class=\"collapsible\"> sparse_linear_solver </button> an instance of the sparse linear solver used for fairing Type: a class model of SparseLinearAlgebraWithFactorTraits_d Default: If Eigen 3.2 (or greater) is available and CGAL_EIGEN3_ENABLED is defined, then the following overload of Eigen_solver_traits is provided as default value: CGAL::Eigen_solver_traits<Eigen::SparseLU<CGAL::Eigen_sparse_matrix<double>::EigenType, Eigen::COLAMDOrdering<int> > > <button class=\"collapsible\"> visitor </button> a visitor used to track when entering a given phase of the algorithm Type: A model of PMPHolefillingVisitor Type: Hole_filling::Default_visitor tuple of bool with true if fairing is successful, and the face and vertex output iterator CGAL::Polygon_mesh_processing::triangulate_hole() CGAL::Polygon_mesh_processing::refine() CGAL::Polygon_mesh_processing::fair() Todo handle islands",
+          "return_type": "auto",
+          "definition": "auto CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole",
+          "argsstring": "(PolygonMesh &pmesh, typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "border_halfedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "562"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_refine_and_fair_hole",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole",
+          "brief": "triangulates, refines, and fairs a hole in a polygon mesh.",
+          "detailed": "Deprecated This function is deprecated since CGAL 5.6 and the overload with the named parameters face_output_iterator and vertex_output_iterator should be used instead. PolygonMesh a model of MutableFaceGraph FaceOutputIterator model of OutputIterator holding boost::graph_traits<PolygonMesh>::face_descriptor for patch faces. VertexOutputIterator model of OutputIterator holding boost::graph_traits<PolygonMesh>::vertex_descriptor for patch vertices. NamedParameters a sequence of Named Parameters",
+          "return_type": "std::tuple< bool, FaceOutputIterator, VertexOutputIterator >",
+          "definition": "std::tuple< bool, FaceOutputIterator, VertexOutputIterator > CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole",
+          "argsstring": "(PolygonMesh &pmesh, typename boost::graph_traits< PolygonMesh >::halfedge_descriptor border_halfedge, FaceOutputIterator face_out, VertexOutputIterator vertex_out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename boost::graph_traits< PolygonMesh >::halfedge_descriptor",
+              "name": "border_halfedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceOutputIterator",
+              "name": "face_out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexOutputIterator",
+              "name": "vertex_out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "629"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_hole_polyline",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_hole_polyline",
+          "brief": "creates triangles to fill the hole defined by points in the range points .",
+          "detailed": "Triangles are recorded into out using the indices of the input points in the range points . Note that no degenerate triangles will be produced. If no triangulation can be found, then nothing is recorded in out . If faces incident to the polyline outside the hole are known, it is recommended to use this function. The point range third_points indicates for each pair of consecutive points in the range points , the third point of the face this segment is incident to. It influences the choice of the best triangulation while avoiding overfolding. Note that the ranges points and third_points may or may not contain duplicated first point at the end of sequence. third_points.size() == points.size() PointRange1 range of points, model of Range . Its iterator type is InputIterator . PointRange2 range of points, model of Range . Its iterator type is InputIterator . OutputIterator model of OutputIterator , to collect patch faces. A specialization for CGAL::value_type_traits<OutputIterator> must be available, and the corresponding value type type must have a constructor type(int p0, int p1, int p2) available. The indices correspond to the ones of input points in points . NamedParameters a sequence of Named Parameters points the range of input points third_points the range of third points out iterator over output patch triangles, described by indices of points in points np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a class model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: The geometric traits class must be compatible with the vertex point type. <button class=\"collapsible\"> use_delaunay_triangulation </button> If true , use the Delaunay triangulation facet search space. Type: Boolean Default: true Extra: If no valid triangulation can be found in this search space, the algorithm falls back to the non-Delaunay triangulations search space to find a solution. <button class=\"collapsible\"> use_2d_constrained_delaunay_triangulation </button> If true , the points of the boundary of the hole are used to estimate a fitting plane and a 2D constrained Delaunay triangulation is then used to fill the hole projected in the fitting plane. Type: Boolean Default: true Extra: If the boundary of the hole is not planar (according to the parameter threshold_distance ) or if no valid 2D triangulation can be found, the algorithm falls back to the method using the 3D Delaunay triangulation. This parameter is a good choice for near planar holes. <button class=\"collapsible\"> threshold_distance </button> The maximum distance between the vertices of the hole boundary and the least squares plane fitted to this boundary. Type: double Default: one quarter of the height of the bounding box of the hole Extra: This parameter is used only in conjunction with the parameter use_2d_constrained_delaunay_triangulation . <button class=\"collapsible\"> visitor </button> a visitor used to track when entering a given phase of the algorithm Type: A model of PMPHolefillingVisitor Type: Hole_filling::Default_visitor Todo handle islands",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Polygon_mesh_processing::triangulate_hole_polyline",
+          "argsstring": "(const PointRange1 &points, const PointRange2 &third_points, OutputIterator out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PointRange1 &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointRange2 &",
+              "name": "third_points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "724"
+        },
+        {
+          "kind": "function",
+          "name": "triangulate_hole_polyline",
+          "qualified_name": "CGAL::Polygon_mesh_processing::triangulate_hole_polyline",
+          "brief": "Same as above but the range of third points is omitted.",
+          "detailed": "They are not taken into account in the cost computation that leads the hole filling.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Polygon_mesh_processing::triangulate_hole_polyline",
+          "argsstring": "(const PointRange &points, OutputIterator out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/triangulate_hole.h",
+          "line": "812"
+        }
+      ],
+      "xml_file": "group___p_m_p__hole__filling__grp.xml"
+    },
+    "PMP_IO_grp": {
+      "kind": "group",
+      "name": "PMP_IO_grp",
+      "brief": "Functions to read and repair polygon soups and polygon meshes.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "read_polygon_mesh",
+          "qualified_name": "CGAL::Polygon_mesh_processing::IO::read_polygon_mesh",
+          "brief": "reads the file as a polygon soup, repairs (using repair_polygon_soup() ), and orients it (using orient_polygon_soup() ) as to obtain a polygon mesh.",
+          "detailed": "Supported file formats are the following: IOStreamOFF ( .off ) IOStreamOBJ ( .obj ) IOStreamSTL ( .stl ) IOStreamPLY ( .ply ) IOStreamGocad ( .ts ) IOStreamVTK ( .vtp ) The format is detected from the filename extension (letter case is not important). If repairing and orientation are known to not be required, one can use CGAL::IO::read_polygon_mesh() directly. PolygonMesh a model of MutableFaceGraph NamedParameters a sequence of Named Parameters fname the name of the input file g the polygon mesh np sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of g Type: a class model of WritablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, g) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in PolygonMesh . <button class=\"collapsible\"> repair_polygon_soup </button> a parameter used indicate whether CGAL::Polygon_mesh_processing::repair_polygon_soup() should be called on the intermediate polygon soup. Type: Boolean Default: true <button class=\"collapsible\"> verbose </button> whether extra information is printed when an incident occurs during reading Type: Boolean Default: false true if the reading, repairing, and orientation operations were successful, false otherwise. CGAL::IO::read_polygon_mesh()",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_mesh_processing::IO::read_polygon_mesh",
+          "argsstring": "(const std::string &fname, PolygonMesh &g, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const std::string &",
+              "name": "fname",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonMesh &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h",
+          "line": "92"
+        }
+      ],
+      "xml_file": "group___p_m_p___i_o__grp.xml"
+    }
+  }
+}

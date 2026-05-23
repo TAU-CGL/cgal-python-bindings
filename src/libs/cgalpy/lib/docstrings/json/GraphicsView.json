@@ -1,0 +1,1547 @@
+{
+  "schema_version": 1,
+  "package": "GraphicsView",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 20,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Qt::CircularArcGraphicsItem": {
+      "kind": "class",
+      "name": "CGAL::Qt::CircularArcGraphicsItem",
+      "brief": "An object of type CircularArcGraphicsItem is a graphics item that encapsulates a circular arc.",
+      "detailed": "CK must be a CGAL CircularKernel .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "CircularArcGraphicsItem",
+          "qualified_name": "CGAL::Qt::CircularArcGraphicsItem::CircularArcGraphicsItem",
+          "brief": "Constructs a graphics item for a circular arc.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::CircularArcGraphicsItem< CK >::CircularArcGraphicsItem",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "edgesPen",
+          "qualified_name": "CGAL::Qt::CircularArcGraphicsItem::edgesPen",
+          "brief": "Returns the pen used to draw edges.",
+          "detailed": "",
+          "return_type": "QPen",
+          "definition": "QPen CGAL::Qt::CircularArcGraphicsItem< CK >::edgesPen",
+          "argsstring": "()() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "setEdgesPen",
+          "qualified_name": "CGAL::Qt::CircularArcGraphicsItem::setEdgesPen",
+          "brief": "Sets the pen used to draw edges.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::CircularArcGraphicsItem< CK >::setEdgesPen",
+          "argsstring": "()(const QPen &p)",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "setArc",
+          "qualified_name": "CGAL::Qt::CircularArcGraphicsItem::setArc",
+          "brief": "Sets the circular arc.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::CircularArcGraphicsItem< CK >::setArc",
+          "argsstring": "(const Circular_arc_2< CK > &ca2)",
+          "params": [
+            {
+              "type": "const Circular_arc_2< CK > &",
+              "name": "ca2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_circular_arc_graphics_item.xml",
+      "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+      "line": "12"
+    },
+    "CGAL::Qt::ConstrainedTriangulationGraphicsItem": {
+      "kind": "class",
+      "name": "CGAL::Qt::ConstrainedTriangulationGraphicsItem",
+      "brief": "An object of type ConstrainedTriangulationGraphicsItem is a graphics item that encapsulates a constrained triangulation.",
+      "detailed": "CT must be a CGAL 2D constrained triangulation class.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "ConstrainedTriangulationGraphicsItem",
+          "qualified_name": "CGAL::Qt::ConstrainedTriangulationGraphicsItem::ConstrainedTriangulationGraphicsItem",
+          "brief": "Constructs a graphics item for triangulation ct .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::ConstrainedTriangulationGraphicsItem< CT >::ConstrainedTriangulationGraphicsItem",
+          "argsstring": "(CT *ct)",
+          "params": [
+            {
+              "type": "CT *",
+              "name": "ct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/ConstrainedTriangulationGraphicsItem.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "constraintsPen",
+          "qualified_name": "CGAL::Qt::ConstrainedTriangulationGraphicsItem::constraintsPen",
+          "brief": "Returns the pen used to draw constraints.",
+          "detailed": "",
+          "return_type": "QPen",
+          "definition": "QPen CGAL::Qt::ConstrainedTriangulationGraphicsItem< CT >::constraintsPen",
+          "argsstring": "()() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/ConstrainedTriangulationGraphicsItem.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "setConstraintsPen",
+          "qualified_name": "CGAL::Qt::ConstrainedTriangulationGraphicsItem::setConstraintsPen",
+          "brief": "Sets the pen used to draw constraints.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::ConstrainedTriangulationGraphicsItem< CT >::setConstraintsPen",
+          "argsstring": "()(const QPen &p)",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/ConstrainedTriangulationGraphicsItem.h",
+          "line": "38"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_constrained_triangulation_graphics_item.xml",
+      "file": "CGAL/Qt/ConstrainedTriangulationGraphicsItem.h",
+      "line": "13"
+    },
+    "CGAL::Qt::Converter": {
+      "kind": "class",
+      "name": "CGAL::Qt::Converter",
+      "brief": "An object of type Converter converts 2D CGAL Kernel objects to their equivalent objects in Qt , and the other way round.",
+      "detailed": "Note that some objects have no equivalent. For example the CGAL::Circle_2<K> cannot be converted to something in Qt , and the unbounded objects CGAL::Ray_2<K> and CGAL::Line_2<K> are clipped. Note also that CGAL and Qt sometimes also use the same word for different things. For example line denotes an unbounded line in CGAL, whereas it denotes a bounded segment in Qt . K must be a model of Kernel .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Converter",
+          "qualified_name": "CGAL::Qt::Converter::Converter",
+          "brief": "The clipping rect is used for unbounded CGAL objects.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::Converter< K >::Converter",
+          "argsstring": "(QRectF clippingRect)",
+          "params": [
+            {
+              "type": "QRectF",
+              "name": "clippingRect",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a bounding box.",
+          "detailed": "",
+          "return_type": "QRectF",
+          "definition": "QRectF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(Bbox_2)",
+          "params": [
+            {
+              "type": "Bbox_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a point.",
+          "detailed": "",
+          "return_type": "QPointF",
+          "definition": "QPointF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Point_2)",
+          "params": [
+            {
+              "type": "K::Point_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a circular arc point.",
+          "detailed": "",
+          "return_type": "QPointF",
+          "definition": "QPointF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Circular_arc_point_2)",
+          "params": [
+            {
+              "type": "K::Circular_arc_point_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a segment.",
+          "detailed": "",
+          "return_type": "QLineF",
+          "definition": "QLineF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Segment_2)",
+          "params": [
+            {
+              "type": "K::Segment_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Clips the ray and converts the resulting segment.",
+          "detailed": "",
+          "return_type": "QLineF",
+          "definition": "QLineF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Ray_2)",
+          "params": [
+            {
+              "type": "K::Ray_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Clips the line and converts the resulting segment.",
+          "detailed": "",
+          "return_type": "QLineF",
+          "definition": "QLineF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Line_2)",
+          "params": [
+            {
+              "type": "K::Line_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a triangle.",
+          "detailed": "",
+          "return_type": "QPolygonF",
+          "definition": "QPolygonF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Triangle_2)",
+          "params": [
+            {
+              "type": "K::Triangle_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts an iso rectangle.",
+          "detailed": "",
+          "return_type": "QRectF",
+          "definition": "QRectF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(K::Iso_rectangle_2)",
+          "params": [
+            {
+              "type": "K::Iso_rectangle_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "72"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a list of points to a polygon.",
+          "detailed": "",
+          "return_type": "QPolygonF",
+          "definition": "QPolygonF CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(std::list< K::Point_2 >)",
+          "params": [
+            {
+              "type": "std::list< K::Point_2 >",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From CGAL to Qt",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a point.",
+          "detailed": "",
+          "return_type": "K::Point_2",
+          "definition": "K::Point_2 CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(QPointF)",
+          "params": [
+            {
+              "type": "QPointF",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From Qt to CGAL",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "87"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a segment.",
+          "detailed": "",
+          "return_type": "K::Segment_2",
+          "definition": "K::Segment_2 CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(QLineF)",
+          "params": [
+            {
+              "type": "QLineF",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From Qt to CGAL",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts an iso rectangle.",
+          "detailed": "",
+          "return_type": "K::Iso_rectangle_2",
+          "definition": "K::Iso_rectangle_2 CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(QRectF)",
+          "params": [
+            {
+              "type": "QRectF",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From Qt to CGAL",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "97"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Qt::Converter::operator()",
+          "brief": "Converts a polygon to a list of points.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Converter< K >::operator()",
+          "argsstring": "(std::list< K::Point_2 > &, QPolygonF)",
+          "params": [
+            {
+              "type": "std::list< K::Point_2 > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QPolygonF",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "From Qt to CGAL",
+          "file": "CGAL/Qt/Converter.h",
+          "line": "102"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_converter.xml",
+      "file": "CGAL/Qt/Converter.h",
+      "line": "18"
+    },
+    "CGAL::Qt::GraphicsItem": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsItem",
+      "brief": "The CGAL graphics items hold pointers to CGAL data structures.",
+      "detailed": "When a data structure changes, a signal is emitted. An object derived from type GraphicsItem must provide an implementation of the virtual slot modelChanged() . This typically triggers redrawing, as well as recomputation of the bounding box which in turn may trigger redrawing of overlapping graphics items.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "modelChanged",
+          "qualified_name": "CGAL::Qt::GraphicsItem::modelChanged",
+          "brief": "This slot must be provided by derived classes.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "virtual void CGAL::Qt::GraphicsItem::modelChanged",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Slots",
+          "file": "CGAL/Qt/GraphicsItem.h",
+          "line": "21"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_item.xml",
+      "file": "CGAL/Qt/GraphicsItem.h",
+      "line": "12"
+    },
+    "CGAL::Qt::GraphicsViewCircleInput": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsViewCircleInput",
+      "brief": "An object of type GraphicsViewCircleInput creates a circle, defined by either center and radius, or two or three points on the circle.",
+      "detailed": "A new vertex is inserted every time the left mouse button is released. The Del key removes the last entered point. The Esc key removes all entered points. K must be a model of Kernel .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "GraphicsViewCircleInput",
+          "qualified_name": "CGAL::Qt::GraphicsViewCircleInput::GraphicsViewCircleInput",
+          "brief": "",
+          "detailed": "p is a parent object. s is the scene where the circle is generated. pointsOnCircle is the number of points on the circle to be generated, that is the default value 1 corresponds to the case center/radius.",
+          "return_type": "",
+          "definition": "CGAL::Qt::GraphicsViewCircleInput< K >::GraphicsViewCircleInput",
+          "argsstring": "(QObject *p, QGraphicsScene *s, int pointsOnCircle=1)",
+          "params": [
+            {
+              "type": "QObject *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QGraphicsScene *",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "pointsOnCircle",
+              "default": "1",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/GraphicsViewCircleInput.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "generate",
+          "qualified_name": "CGAL::Qt::GraphicsViewCircleInput::generate",
+          "brief": "The object o contains a std::pair<K::Point_2, K::FT> for center and radius, or a std::pair<K::Point_2, K::Point_2> for two points defining the circle, or CGAL::array<K::Point_2, 3> for three points defining the circle.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::GraphicsViewCircleInput< K >::generate",
+          "argsstring": "(Object o)",
+          "params": [
+            {
+              "type": "Object",
+              "name": "o",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Signals",
+          "file": "CGAL/Qt/GraphicsViewCircleInput.h",
+          "line": "44"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_view_circle_input.xml",
+      "file": "CGAL/Qt/GraphicsViewCircleInput.h",
+      "line": "18"
+    },
+    "CGAL::Qt::GraphicsViewCircularArcInput": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsViewCircularArcInput",
+      "brief": "An object of type GraphicsViewCircularArcInput creates a circular arc, defined by three points on a circle.",
+      "detailed": "A new vertex is inserted every time the left mouse button is released. The Del key removes the last entered point. The Esc key removes all entered points. K must be a model of CircularKernel .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "GraphicsViewCircularArcInput",
+          "qualified_name": "CGAL::Qt::GraphicsViewCircularArcInput::GraphicsViewCircularArcInput",
+          "brief": "",
+          "detailed": "p is a parent object. s is the scene where the circular arc is generated.",
+          "return_type": "",
+          "definition": "CGAL::Qt::GraphicsViewCircularArcInput< K >::GraphicsViewCircularArcInput",
+          "argsstring": "(QObject *p, QGraphicsScene *s)",
+          "params": [
+            {
+              "type": "QObject *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QGraphicsScene *",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/GraphicsViewCircularArcInput.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "generate",
+          "qualified_name": "CGAL::Qt::GraphicsViewCircularArcInput::generate",
+          "brief": "The object o contains a Circular_arc_2<K> .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::GraphicsViewCircularArcInput< K >::generate",
+          "argsstring": "(Object o)",
+          "params": [
+            {
+              "type": "Object",
+              "name": "o",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Signals",
+          "file": "CGAL/Qt/GraphicsViewCircularArcInput.h",
+          "line": "35"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_view_circular_arc_input.xml",
+      "file": "CGAL/Qt/GraphicsViewCircularArcInput.h",
+      "line": "15"
+    },
+    "CGAL::Qt::GraphicsViewInput": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsViewInput",
+      "brief": "An object of type GraphicsViewInput can emit a signal with CGAL::Object as argument.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "generate",
+          "qualified_name": "CGAL::Qt::GraphicsViewInput::generate",
+          "brief": "A signal that emits a CGAL::Object .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::GraphicsViewInput::generate",
+          "argsstring": "(Object)",
+          "params": [
+            {
+              "type": "Object",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Signals",
+          "file": "CGAL/Qt/GraphicsViewInput.h",
+          "line": "19"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_view_input.xml",
+      "file": "CGAL/Qt/GraphicsViewInput.h",
+      "line": "10"
+    },
+    "CGAL::Qt::GraphicsViewIsoRectangleInput": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsViewIsoRectangleInput",
+      "brief": "An object of type GraphicsViewIsoRectangleInput creates an axis parallel rectangle.",
+      "detailed": "K must be a model of Kernel .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "GraphicsViewIsoRectangleInput",
+          "qualified_name": "CGAL::Qt::GraphicsViewIsoRectangleInput::GraphicsViewIsoRectangleInput",
+          "brief": "",
+          "detailed": "p is a parent object. s is the scene where the iso rectangle is generated.",
+          "return_type": "",
+          "definition": "CGAL::Qt::GraphicsViewIsoRectangleInput< K >::GraphicsViewIsoRectangleInput",
+          "argsstring": "(QObject *p, QGraphicsScene *s)",
+          "params": [
+            {
+              "type": "QObject *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QGraphicsScene *",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/GraphicsViewIsoRectangleInput.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "generate",
+          "qualified_name": "CGAL::Qt::GraphicsViewIsoRectangleInput::generate",
+          "brief": "The object o contains a K::Iso_rectangle_2 .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::GraphicsViewIsoRectangleInput< K >::generate",
+          "argsstring": "(Object o)",
+          "params": [
+            {
+              "type": "Object",
+              "name": "o",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Signals",
+          "file": "CGAL/Qt/GraphicsViewIsoRectangleInput.h",
+          "line": "32"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_view_iso_rectangle_input.xml",
+      "file": "CGAL/Qt/GraphicsViewIsoRectangleInput.h",
+      "line": "12"
+    },
+    "CGAL::Qt::GraphicsViewNavigation": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsViewNavigation",
+      "brief": "An object of type GraphicsViewNavigation can be added as event filter to a Qt::QGraphicsView and its viewport.",
+      "detailed": "Dragging the left mouse button while holding the 'Ctrl' key defines a zoom rectangle. Dragging the right mouse button while holding the 'Ctrl' key translates the scene. 'Ctrl-Shift' and a click of the right mouse button translates what is under the mouse to the center.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "eventFilter",
+          "qualified_name": "CGAL::Qt::GraphicsViewNavigation::eventFilter",
+          "brief": "The event filter.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::GraphicsViewNavigation::eventFilter",
+          "argsstring": "(QObject *obj, QEvent *event)",
+          "params": [
+            {
+              "type": "QObject *",
+              "name": "obj",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QEvent *",
+              "name": "event",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/GraphicsViewNavigation.h",
+          "line": "23"
+        },
+        {
+          "kind": "function",
+          "name": "mouseCoordinates",
+          "qualified_name": "CGAL::Qt::GraphicsViewNavigation::mouseCoordinates",
+          "brief": "Emits the real world mouse coordinates.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::GraphicsViewNavigation::mouseCoordinates",
+          "argsstring": "(QPointF p)",
+          "params": [
+            {
+              "type": "QPointF",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Signals",
+          "file": "CGAL/Qt/GraphicsViewNavigation.h",
+          "line": "33"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_view_navigation.xml",
+      "file": "CGAL/Qt/GraphicsViewNavigation.h",
+      "line": "14"
+    },
+    "CGAL::Qt::GraphicsViewPolylineInput": {
+      "kind": "class",
+      "name": "CGAL::Qt::GraphicsViewPolylineInput",
+      "brief": "An object of type GraphicsViewPolylineInput creates a list of points.",
+      "detailed": "A new vertex is inserted every time the left mouse button is pressed. The list of points is emitted on a right click or when the number of points specified in the constructor is reached. You can use the 'Del' or 'Backspace' key if you want to remove your last entered point in the polygon, and the 'Esc' key if you want to remove all points. The tool can serve at the same time for entering a single point, a polyline with a given number of points, and for open as well as closed polylines. For polylines the segment between the last entered point and the current mouse position is only drawn correctly when mouse tracking is enabled in the graphics view. The same holds for closed polygons. K must be a model of Kernel .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "GraphicsViewPolylineInput",
+          "qualified_name": "CGAL::Qt::GraphicsViewPolylineInput::GraphicsViewPolylineInput",
+          "brief": "",
+          "detailed": "p is a parent object. s is the scene where the polyline is generated. n is the number of points of the polyline to be generated. If n = 0 , that is the default value, the number of points of the polyline is not limited. closed determines if a closed polygon is drawn during the input.",
+          "return_type": "",
+          "definition": "CGAL::Qt::GraphicsViewPolylineInput< K >::GraphicsViewPolylineInput",
+          "argsstring": "(QObject *p, QGraphicsScene *s, int n=0, bool closed=true)",
+          "params": [
+            {
+              "type": "QObject *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QGraphicsScene *",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "n",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "closed",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/GraphicsViewPolylineInput.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "generate",
+          "qualified_name": "CGAL::Qt::GraphicsViewPolylineInput::generate",
+          "brief": "The object o contains a std::list<K::Point_2> .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::GraphicsViewPolylineInput< K >::generate",
+          "argsstring": "(CGAL::Object o)",
+          "params": [
+            {
+              "type": "CGAL::Object",
+              "name": "o",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Signals",
+          "file": "CGAL/Qt/GraphicsViewPolylineInput.h",
+          "line": "50"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_graphics_view_polyline_input.xml",
+      "file": "CGAL/Qt/GraphicsViewPolylineInput.h",
+      "line": "25"
+    },
+    "CGAL::Qt::PainterOstream": {
+      "kind": "class",
+      "name": "CGAL::Qt::PainterOstream",
+      "brief": "An object of type PainterOstream provides output operators for Kernel objects.",
+      "detailed": "As CGAL has unbounded objects the PainterOstream must be constructed with a clipping rectangle. This is typically the visible area of the widget where the unbounded object is displayed.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "PainterOstream",
+          "qualified_name": "CGAL::Qt::PainterOstream::PainterOstream",
+          "brief": "The clipping rect is used for unbounded Kernel objects.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::PainterOstream< K >::PainterOstream",
+          "argsstring": "(QPainter *qp, QRectF clippingRect)",
+          "params": [
+            {
+              "type": "QPainter *",
+              "name": "qp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "QRectF",
+              "name": "clippingRect",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a point.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Point_2)",
+          "params": [
+            {
+              "type": "K::Point_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a segment.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Segment_2)",
+          "params": [
+            {
+              "type": "K::Segment_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a clipped ray.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Ray_2)",
+          "params": [
+            {
+              "type": "K::Ray_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a clipped line.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Line_2)",
+          "params": [
+            {
+              "type": "K::Line_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a triangle.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Triangle_2)",
+          "params": [
+            {
+              "type": "K::Triangle_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws an iso rectangle.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Iso_rectangle_2)",
+          "params": [
+            {
+              "type": "K::Iso_rectangle_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a circle.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Circle_2)",
+          "params": [
+            {
+              "type": "K::Circle_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a circular arc.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(K::Circular_arc_2)",
+          "params": [
+            {
+              "type": "K::Circular_arc_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws a polyline.",
+          "detailed": "In order to close it the first and last point must be equal.",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(std::list< K::Point_2 >)",
+          "params": [
+            {
+              "type": "std::list< K::Point_2 >",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Draws an iso rectangle.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(Bbox_2)",
+          "params": [
+            {
+              "type": "Bbox_2",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Sets the pen used in the next paint operations.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(QPen)",
+          "params": [
+            {
+              "type": "QPen",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Qt::PainterOstream::operator<<",
+          "brief": "Sets the brush used in the next paint operations.",
+          "detailed": "",
+          "return_type": "PainterOstream < K >",
+          "definition": "PainterOstream< K > CGAL::Qt::PainterOstream< K >::operator<<",
+          "argsstring": "(QBrush)",
+          "params": [
+            {
+              "type": "QBrush",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/PainterOstream.h",
+          "line": "1"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_painter_ostream.xml",
+      "file": "CGAL/Qt/PainterOstream.h",
+      "line": "12"
+    },
+    "CGAL::Qt::TriangulationGraphicsItem": {
+      "kind": "class",
+      "name": "CGAL::Qt::TriangulationGraphicsItem",
+      "brief": "An object of type TriangulationGraphicsItem is a graphics item that encapsulates a 2D triangulation.",
+      "detailed": "T must be a 2D triangulation class.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "TriangulationGraphicsItem",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::TriangulationGraphicsItem",
+          "brief": "Constructs a graphics item for a triangulation pointed by t .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::TriangulationGraphicsItem< T >::TriangulationGraphicsItem",
+          "argsstring": "(T *t)",
+          "params": [
+            {
+              "type": "T *",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "verticesPen",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::verticesPen",
+          "brief": "Returns the pen used to draw vertices.",
+          "detailed": "",
+          "return_type": "QPen",
+          "definition": "QPen CGAL::Qt::TriangulationGraphicsItem< T >::verticesPen",
+          "argsstring": "()() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "setVerticesPen",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::setVerticesPen",
+          "brief": "Sets the pen used to draw vertices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::TriangulationGraphicsItem< T >::setVerticesPen",
+          "argsstring": "()(const QPen &p)",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "edgesPen",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::edgesPen",
+          "brief": "Returns the pen used to draw edges.",
+          "detailed": "",
+          "return_type": "QPen",
+          "definition": "QPen CGAL::Qt::TriangulationGraphicsItem< T >::edgesPen",
+          "argsstring": "()() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "setEdgesPen",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::setEdgesPen",
+          "brief": "Sets the pen used to draw edges.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::TriangulationGraphicsItem< T >::setEdgesPen",
+          "argsstring": "()(const QPen &p)",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "visibleVertices",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::visibleVertices",
+          "brief": "Returns true , iff vertices are drawn.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::TriangulationGraphicsItem< T >::visibleVertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "setVisibleVertices",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::setVisibleVertices",
+          "brief": "Sets the property.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::TriangulationGraphicsItem< T >::setVisibleVertices",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "visibleEdges",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::visibleEdges",
+          "brief": "Returns true , iff edges are drawn.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::TriangulationGraphicsItem< T >::visibleEdges",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "setVisibleEdges",
+          "qualified_name": "CGAL::Qt::TriangulationGraphicsItem::setVisibleEdges",
+          "brief": "Sets the property.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::TriangulationGraphicsItem< T >::setVisibleEdges",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+          "line": "67"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_triangulation_graphics_item.xml",
+      "file": "CGAL/Qt/TriangulationGraphicsItem.h",
+      "line": "12"
+    },
+    "CGAL::Qt::VoronoiGraphicsItem": {
+      "kind": "class",
+      "name": "CGAL::Qt::VoronoiGraphicsItem",
+      "brief": "An object of type VoronoiGraphicsItem is a graphics item that encapsulates a Delaunay triangulation in order to draw its dual, the Voronoi diagram.",
+      "detailed": "DT must be a 2D Delaunay triangulation class.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "VoronoiGraphicsItem",
+          "qualified_name": "CGAL::Qt::VoronoiGraphicsItem::VoronoiGraphicsItem",
+          "brief": "Constructs a graphics item for the dual of the Delaunay triangulation dt .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::VoronoiGraphicsItem< DT >::VoronoiGraphicsItem",
+          "argsstring": "(DT *dt)",
+          "params": [
+            {
+              "type": "DT *",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Qt/VoronoiGraphicsItem.h",
+          "line": "1"
+        },
+        {
+          "kind": "function",
+          "name": "edgesPen",
+          "qualified_name": "CGAL::Qt::VoronoiGraphicsItem::edgesPen",
+          "brief": "Returns the pen used to draw edges.",
+          "detailed": "",
+          "return_type": "QPen",
+          "definition": "QPen CGAL::Qt::VoronoiGraphicsItem< DT >::edgesPen",
+          "argsstring": "()() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/VoronoiGraphicsItem.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "setEdgesPen",
+          "qualified_name": "CGAL::Qt::VoronoiGraphicsItem::setEdgesPen",
+          "brief": "Set the pen used to draw edges.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::VoronoiGraphicsItem< DT >::setEdgesPen",
+          "argsstring": "()(const QPen &p)",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/VoronoiGraphicsItem.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "visibleEdges",
+          "qualified_name": "CGAL::Qt::VoronoiGraphicsItem::visibleEdges",
+          "brief": "Returns true , iff edges are drawn.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::VoronoiGraphicsItem< DT >::visibleEdges",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/VoronoiGraphicsItem.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "setVisibleEdges",
+          "qualified_name": "CGAL::Qt::VoronoiGraphicsItem::setVisibleEdges",
+          "brief": "Set the property.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::VoronoiGraphicsItem< DT >::setVisibleEdges",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Qt/VoronoiGraphicsItem.h",
+          "line": "49"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_voronoi_graphics_item.xml",
+      "file": "CGAL/Qt/VoronoiGraphicsItem.h",
+      "line": "14"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+      "line": "1"
+    },
+    "CGAL::Qt": {
+      "kind": "namespace",
+      "name": "CGAL::Qt",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_qt.xml",
+      "file": "CGAL/Qt/CircularArcGraphicsItem.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgGraphicsViewRef": {
+      "kind": "group",
+      "name": "PkgGraphicsViewRef",
+      "brief": "",
+      "detailed": "Andreas Fabri and Laurent Rineau This package provides classes for displaying CGAL objects and data structures in the Qt 6 Graphics View Framework . Introduced in: CGAL 3.4 Depends on: Qt 6 BibTeX: cgal:fr-cqgvf-26a License: GPL This package provides some classes which allow to use CGAL classes in Qt applications which make use of the Qt Graphics View Framework . Classified Reference Pages GraphicsItem Classes CGAL::Qt::GraphicsItem CGAL::Qt::TriangulationGraphicsItem <T> CGAL::Qt::ConstrainedTriangulationGraphicsItem <CT> CGAL::Qt::VoronoiGraphicsItem <DT> Input Classes CGAL::Qt::GraphicsViewInput CGAL::Qt::GraphicsViewCircleInput <K> CGAL::Qt::GraphicsViewCircularArcInput <K> CGAL::Qt::GraphicsViewIsoRectangleInput <K> CGAL::Qt::GraphicsViewPolylineInput <K> Miscellaneous Classes CGAL::Qt::Converter <K> CGAL::Qt::PainterOstream <K> CGAL::Qt::GraphicsViewNavigation",
+      "members": [],
+      "xml_file": "group___pkg_graphics_view_ref.xml"
+    },
+    "PkgGraphicsViewGraphicsItemClasses": {
+      "kind": "group",
+      "name": "PkgGraphicsViewGraphicsItemClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_graphics_view_graphics_item_classes.xml"
+    },
+    "PkgGraphicsViewInputClasses": {
+      "kind": "group",
+      "name": "PkgGraphicsViewInputClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_graphics_view_input_classes.xml"
+    },
+    "PkgGraphicsViewMiscClasses": {
+      "kind": "group",
+      "name": "PkgGraphicsViewMiscClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_graphics_view_misc_classes.xml"
+    }
+  }
+}

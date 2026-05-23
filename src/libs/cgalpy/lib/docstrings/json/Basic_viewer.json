@@ -1,0 +1,2153 @@
+{
+  "schema_version": 1,
+  "package": "Basic_viewer",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 11,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Graphics_scene": {
+      "kind": "class",
+      "name": "CGAL::Graphics_scene",
+      "brief": "The class Graphics_scene stores points, segments, triangles, rays, and lines.",
+      "detailed": "Elements can be added, possibly with associated colors. Non triangular faces can be directly added and are triangulated internally.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "add_point",
+          "qualified_name": "CGAL::Graphics_scene::add_point",
+          "brief": "adds the given point in the scene.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_point",
+          "argsstring": "(const KPoint &p)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "15"
+        },
+        {
+          "kind": "function",
+          "name": "add_point",
+          "qualified_name": "CGAL::Graphics_scene::add_point",
+          "brief": "adds the given colored point in the scene.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_point",
+          "argsstring": "(const KPoint &p, const CGAL::IO::Color &color)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "color",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "20"
+        },
+        {
+          "kind": "function",
+          "name": "add_segment",
+          "qualified_name": "CGAL::Graphics_scene::add_segment",
+          "brief": "adds the given segment in the scene.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_segment",
+          "argsstring": "(const KPoint &p1, const KPoint &p2)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KPoint &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "25"
+        },
+        {
+          "kind": "function",
+          "name": "add_segment",
+          "qualified_name": "CGAL::Graphics_scene::add_segment",
+          "brief": "adds the given colored segment in the scene.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_segment",
+          "argsstring": "(const KPoint &p1, const KPoint &p2, const CGAL::IO::Color &color)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KPoint &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "color",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "add_ray",
+          "qualified_name": "CGAL::Graphics_scene::add_ray",
+          "brief": "adds the given ray in the scene: a half line starting from p and having v as direction.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or Kernel::Vector_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_ray",
+          "argsstring": "(const KPoint &p, const KVector &v)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KVector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "add_ray",
+          "qualified_name": "CGAL::Graphics_scene::add_ray",
+          "brief": "adds the given colored ray in the scene: a half line starting from p and having v as direction.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or Kernel::Vector_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_ray",
+          "argsstring": "(const KPoint &p, const KVector &v, const CGAL::IO::Color &color)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KVector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "color",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "43"
+        },
+        {
+          "kind": "function",
+          "name": "add_line",
+          "qualified_name": "CGAL::Graphics_scene::add_line",
+          "brief": "adds the given line in the scene, defined by p and v as direction.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or Kernel::Vector_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_line",
+          "argsstring": "(const KPoint &p, const KVector &v)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KVector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "50"
+        },
+        {
+          "kind": "function",
+          "name": "add_line",
+          "qualified_name": "CGAL::Graphics_scene::add_line",
+          "brief": "adds the given colored line in the scene, defined by p and v as direction.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or Kernel::Vector_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_line",
+          "argsstring": "(const KPoint &p, const KVector &v, const CGAL::IO::Color &color)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KVector &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "color",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "face_begin",
+          "qualified_name": "CGAL::Graphics_scene::face_begin",
+          "brief": "starts a new face.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::face_begin",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "face_begin",
+          "qualified_name": "CGAL::Graphics_scene::face_begin",
+          "brief": "starts a new colored face.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::face_begin",
+          "argsstring": "(const CGAL::IO::Color &color)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "color",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "a_face_started",
+          "qualified_name": "CGAL::Graphics_scene::a_face_started",
+          "brief": "return true iff a face is started.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Graphics_scene::a_face_started",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "66"
+        },
+        {
+          "kind": "function",
+          "name": "add_point_in_face",
+          "qualified_name": "CGAL::Graphics_scene::add_point_in_face",
+          "brief": "adds the given point in the current face.",
+          "detailed": "a_face_started() KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Graphics_scene::add_point_in_face",
+          "argsstring": "(const KPoint &kp)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "kp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "add_point_in_face",
+          "qualified_name": "CGAL::Graphics_scene::add_point_in_face",
+          "brief": "adds the given point in the current face, having the vertex normal.",
+          "detailed": "a_face_started() KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 . KVector a model of Kernel::Vector_2 or Kernel::Vector_3 .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Graphics_scene::add_point_in_face",
+          "argsstring": "(const KPoint &kp, const KVector &p_normal)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "kp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const KVector &",
+              "name": "p_normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "face_end",
+          "qualified_name": "CGAL::Graphics_scene::face_end",
+          "brief": "ends the current face.",
+          "detailed": "a_face_started()",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::face_end",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "add_text",
+          "qualified_name": "CGAL::Graphics_scene::add_text",
+          "brief": "adds the given text at the given position in the scene.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_text",
+          "argsstring": "(const KPoint &kp, const char *txt)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "kp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const char *",
+              "name": "txt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "87"
+        },
+        {
+          "kind": "function",
+          "name": "add_text",
+          "qualified_name": "CGAL::Graphics_scene::add_text",
+          "brief": "adds the given text at the given position in the scene.",
+          "detailed": "KPoint a model of Kernel::Point_2 , Kernel::Point_3 , Kernel::WeightedPoint_2 or Kernel::WeightedPoint_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::add_text",
+          "argsstring": "(const KPoint &kp, const std::string &txt)",
+          "params": [
+            {
+              "type": "const KPoint &",
+              "name": "kp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::string &",
+              "name": "txt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "empty",
+          "qualified_name": "CGAL::Graphics_scene::empty",
+          "brief": "returns true iff the scene has no element.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Graphics_scene::empty",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Graphics_scene::clear",
+          "brief": "clears the scene, i.e., removes all points, segments, triangles, and text.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "98"
+        },
+        {
+          "kind": "function",
+          "name": "bounding_box",
+          "qualified_name": "CGAL::Graphics_scene::bounding_box",
+          "brief": "returns the bounding box of all the elements in the scene.",
+          "detailed": "",
+          "return_type": "const CGAL::Bbox_3 &",
+          "definition": "const CGAL::Bbox_3 & CGAL::Graphics_scene::bounding_box",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "101"
+        },
+        {
+          "kind": "function",
+          "name": "is_two_dimensional",
+          "qualified_name": "CGAL::Graphics_scene::is_two_dimensional",
+          "brief": "returns true if the scene is in 2D, i.e., lies on the XY or XZ or YZ plane.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Graphics_scene::is_two_dimensional",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "104"
+        },
+        {
+          "kind": "function",
+          "name": "set_default_color_face",
+          "qualified_name": "CGAL::Graphics_scene::set_default_color_face",
+          "brief": "set the default color of faces",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::set_default_color_face",
+          "argsstring": "(const CGAL::IO::Color &c)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "set_default_color_point",
+          "qualified_name": "CGAL::Graphics_scene::set_default_color_point",
+          "brief": "set the default color of points",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::set_default_color_point",
+          "argsstring": "(const CGAL::IO::Color &c)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "set_default_color_segment",
+          "qualified_name": "CGAL::Graphics_scene::set_default_color_segment",
+          "brief": "set the default color of segments",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::set_default_color_segment",
+          "argsstring": "(const CGAL::IO::Color &c)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "113"
+        },
+        {
+          "kind": "function",
+          "name": "set_default_color_ray",
+          "qualified_name": "CGAL::Graphics_scene::set_default_color_ray",
+          "brief": "set the default color of rays",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::set_default_color_ray",
+          "argsstring": "(const CGAL::IO::Color &c)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "116"
+        },
+        {
+          "kind": "function",
+          "name": "set_default_color_line",
+          "qualified_name": "CGAL::Graphics_scene::set_default_color_line",
+          "brief": "set the default color of lines",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Graphics_scene::set_default_color_line",
+          "argsstring": "(const CGAL::IO::Color &c)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "119"
+        },
+        {
+          "kind": "function",
+          "name": "get_default_color_face",
+          "qualified_name": "CGAL::Graphics_scene::get_default_color_face",
+          "brief": "returns the default color of faces",
+          "detailed": "",
+          "return_type": "const CGAL::IO::Color &",
+          "definition": "const CGAL::IO::Color & CGAL::Graphics_scene::get_default_color_face",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "122"
+        },
+        {
+          "kind": "function",
+          "name": "get_default_color_point",
+          "qualified_name": "CGAL::Graphics_scene::get_default_color_point",
+          "brief": "returns the default color of points",
+          "detailed": "",
+          "return_type": "const CGAL::IO::Color &",
+          "definition": "const CGAL::IO::Color & CGAL::Graphics_scene::get_default_color_point",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "125"
+        },
+        {
+          "kind": "function",
+          "name": "get_default_color_segment",
+          "qualified_name": "CGAL::Graphics_scene::get_default_color_segment",
+          "brief": "returns the default color of segments",
+          "detailed": "",
+          "return_type": "const CGAL::IO::Color &",
+          "definition": "const CGAL::IO::Color & CGAL::Graphics_scene::get_default_color_segment",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "128"
+        },
+        {
+          "kind": "function",
+          "name": "get_default_color_ray",
+          "qualified_name": "CGAL::Graphics_scene::get_default_color_ray",
+          "brief": "returns the default color of rays",
+          "detailed": "",
+          "return_type": "const CGAL::IO::Color &",
+          "definition": "const CGAL::IO::Color & CGAL::Graphics_scene::get_default_color_ray",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "get_default_color_line",
+          "qualified_name": "CGAL::Graphics_scene::get_default_color_line",
+          "brief": "returns the default color of lines",
+          "detailed": "",
+          "return_type": "const CGAL::IO::Color &",
+          "definition": "const CGAL::IO::Color & CGAL::Graphics_scene::get_default_color_line",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "134"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_graphics__scene.xml",
+      "file": "CGAL/Graphics_scene.h",
+      "line": "10"
+    },
+    "CGAL::Graphics_scene_options": {
+      "kind": "struct",
+      "name": "CGAL::Graphics_scene_options",
+      "brief": "The class Graphics_scene_options is used to tune the way that the cells of a given data structure of CGAL are considered.",
+      "detailed": "The different std::function can be modified to change for example the behavior of the drawing. VolumeDescriptor can be void for data structures that do not represent volumes. This class is a model of GraphicsSceneOptions when VolumeDescriptor is void , or a model of GraphicsSceneOptionsWithVolumes otherwise ( VolumeDescriptor non void ). DS a data structure of CGAL. VertexDescriptor a descriptor of vertices of DS . EdgeDescriptor a descriptor of edges of DS . FaceDescriptor a descriptor of faces of DS . VolumeDescriptor a descriptor of volumes of DS . void by default. Is model of GraphicsSceneOptions or GraphicsSceneOptionsWithVolumes",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Graphics_scene_options::vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "VertexDescriptor",
+          "definition": "typedef VertexDescriptor CGAL::Graphics_scene_options< DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor >::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Graphics_scene_options.h",
+          "line": "30"
+        },
+        {
+          "kind": "typedef",
+          "name": "edge_descriptor",
+          "qualified_name": "CGAL::Graphics_scene_options::edge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "EdgeDescriptor",
+          "definition": "typedef EdgeDescriptor CGAL::Graphics_scene_options< DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor >::edge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Graphics_scene_options.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "face_descriptor",
+          "qualified_name": "CGAL::Graphics_scene_options::face_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FaceDescriptor",
+          "definition": "typedef FaceDescriptor CGAL::Graphics_scene_options< DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor >::face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Graphics_scene_options.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "volume_descriptor",
+          "qualified_name": "CGAL::Graphics_scene_options::volume_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "VolumeDescriptor",
+          "definition": "typedef VolumeDescriptor CGAL::Graphics_scene_options< DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor >::volume_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Graphics_scene_options.h",
+          "line": "33"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_graphics__scene__options.xml",
+      "file": "CGAL/Graphics_scene_options.h",
+      "line": "27"
+    },
+    "CGAL::Qt::Basic_viewer": {
+      "kind": "class",
+      "name": "CGAL::Qt::Basic_viewer",
+      "brief": "The class Basic_viewer is a Qt widget based on QGLViewer that allows to visualize 3D elements: points, segments, triangles, rays and lines.",
+      "detailed": "This class stores a reference to a Graphics_scene . Elements are added through the scene. This class requires CGAL_Qt6 , and is only available if the macro CGAL_USE_BASIC_VIEWER is defined. Linking with the cmake target CGAL::CGAL_Basic_viewer will link with CGAL_Qt6 and add the definition CGAL_USE_BASIC_VIEWER . CGAL::QGLViewer is our internal fork of QGLViewer class which is A versatile 3D OpenGL viewer based on QOpenGLWidget .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Basic_viewer",
+          "qualified_name": "CGAL::Qt::Basic_viewer::Basic_viewer",
+          "brief": "Constructor given a pointer on a QWidget (can be a nullptr ) and a Graphics_scene .",
+          "detailed": "title will be the title of the window.",
+          "return_type": "",
+          "definition": "CGAL::Qt::Basic_viewer::Basic_viewer",
+          "argsstring": "(QWidget *parent, const Graphics_scene &scene, const char *title=\"\")",
+          "params": [
+            {
+              "type": "QWidget *",
+              "name": "parent",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Graphics_scene &",
+              "name": "scene",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const char *",
+              "name": "title",
+              "default": "\"\"",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructors",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "20"
+        },
+        {
+          "kind": "function",
+          "name": "size_vertices",
+          "qualified_name": "CGAL::Qt::Basic_viewer::size_vertices",
+          "brief": "Set size of vertices.",
+          "detailed": "s The size of vertices.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::size_vertices",
+          "argsstring": "(float s)",
+          "params": [
+            {
+              "type": "float",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "size_edges",
+          "qualified_name": "CGAL::Qt::Basic_viewer::size_edges",
+          "brief": "Set size of edges.",
+          "detailed": "s The size of edges.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::size_edges",
+          "argsstring": "(float s)",
+          "params": [
+            {
+              "type": "float",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "size_rays",
+          "qualified_name": "CGAL::Qt::Basic_viewer::size_rays",
+          "brief": "Set size of rays.",
+          "detailed": "s The size of rays.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::size_rays",
+          "argsstring": "(float s)",
+          "params": [
+            {
+              "type": "float",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "size_lines",
+          "qualified_name": "CGAL::Qt::Basic_viewer::size_lines",
+          "brief": "Set size of lines.",
+          "detailed": "s The size of lines.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::size_lines",
+          "argsstring": "(float s)",
+          "params": [
+            {
+              "type": "float",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "43"
+        },
+        {
+          "kind": "function",
+          "name": "draw_vertices",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_vertices",
+          "brief": "Enables or disables the drawing of vertices.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_vertices",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "draw_edges",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_edges",
+          "brief": "Enables or disables the drawing of edges.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_edges",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "draw_rays",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_rays",
+          "brief": "Enables or disables the drawing of rays.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_rays",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "draw_lines",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_lines",
+          "brief": "Enables or disables the drawing of lines.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_lines",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "draw_faces",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_faces",
+          "brief": "enables or disables the drawing of faces.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_faces",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "draw_text",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_text",
+          "brief": "enables or disables the drawing of texts.",
+          "detailed": "enables or disables the drawing of texts. b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_text",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "draw_mesh_triangles",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_mesh_triangles",
+          "brief": "Enables or disables the drawing of mesh triangles.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::draw_mesh_triangles",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "72"
+        },
+        {
+          "kind": "function",
+          "name": "use_default_color",
+          "qualified_name": "CGAL::Qt::Basic_viewer::use_default_color",
+          "brief": "Enables or disables the use of only one color or the use of multiple colors.",
+          "detailed": "b Set to true to use only one color, false to use multiple colors.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::use_default_color",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "use_default_color_normals",
+          "qualified_name": "CGAL::Qt::Basic_viewer::use_default_color_normals",
+          "brief": "Enables or disables the use of a single color for all normals.",
+          "detailed": "b Set to true to enable, false to disable.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::use_default_color_normals",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "80"
+        },
+        {
+          "kind": "function",
+          "name": "flat_shading",
+          "qualified_name": "CGAL::Qt::Basic_viewer::flat_shading",
+          "brief": "enables or disables the use of flat shading or the use of smooth shading.",
+          "detailed": "b Set to true for flat shading, false for smooth shading.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::flat_shading",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "reverse_normal",
+          "qualified_name": "CGAL::Qt::Basic_viewer::reverse_normal",
+          "brief": "Enables or disables the reversal of normals.",
+          "detailed": "b Set to true to reverse normals, false to keep normals as is.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::reverse_normal",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "default_color_normals",
+          "qualified_name": "CGAL::Qt::Basic_viewer::default_color_normals",
+          "brief": "Sets the default color of the normals.",
+          "detailed": "c The default color of the normals.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::default_color_normals",
+          "argsstring": "(const CGAL::IO::Color &c)",
+          "params": [
+            {
+              "type": "const CGAL::IO::Color &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "normal_height_factor",
+          "qualified_name": "CGAL::Qt::Basic_viewer::normal_height_factor",
+          "brief": "Sets the height factor value of the normals.",
+          "detailed": "h The height factor value of the normals.",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::normal_height_factor",
+          "argsstring": "(float h)",
+          "params": [
+            {
+              "type": "float",
+              "name": "h",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_draw_vertices",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_draw_vertices",
+          "brief": "Toggles the drawing of vertices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_draw_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_draw_edges",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_draw_edges",
+          "brief": "Toggles the drawing of edges.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_draw_edges",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_draw_rays",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_draw_rays",
+          "brief": "Toggles the drawing of rays.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_draw_rays",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_draw_lines",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_draw_lines",
+          "brief": "Toggles the drawing of lines.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_draw_lines",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_draw_faces",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_draw_faces",
+          "brief": "Toggles the drawing of faces.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_draw_faces",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_use_default_color",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_use_default_color",
+          "brief": "Toggles the use of mono color mode.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_use_default_color",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_use_default_color_normal",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_use_default_color_normal",
+          "brief": "Toggles the use of the default color mode for normals.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_use_default_color_normal",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "117"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_flat_shading",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_flat_shading",
+          "brief": "Toggles the use of flat shading.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_flat_shading",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "toggle_draw_text",
+          "qualified_name": "CGAL::Qt::Basic_viewer::toggle_draw_text",
+          "brief": "Toggles the drawing of text.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::toggle_draw_text",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "reverse_all_normals",
+          "qualified_name": "CGAL::Qt::Basic_viewer::reverse_all_normals",
+          "brief": "Reverses all normals of vertices and faces.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::Basic_viewer::reverse_all_normals",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "126"
+        },
+        {
+          "kind": "function",
+          "name": "draw_vertices",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_vertices",
+          "brief": "Checks if vertices are drawn.",
+          "detailed": "true if vertices are drawn, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::draw_vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "draw_edges",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_edges",
+          "brief": "Checks if edges are drawn.",
+          "detailed": "true if edges are drawn, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::draw_edges",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "139"
+        },
+        {
+          "kind": "function",
+          "name": "draw_rays",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_rays",
+          "brief": "Checks if rays are drawn.",
+          "detailed": "true if rays are drawn, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::draw_rays",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "143"
+        },
+        {
+          "kind": "function",
+          "name": "draw_lines",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_lines",
+          "brief": "Checks if lines are drawn.",
+          "detailed": "true if lines are drawn, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::draw_lines",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "147"
+        },
+        {
+          "kind": "function",
+          "name": "draw_faces",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_faces",
+          "brief": "Checks if faces are drawn.",
+          "detailed": "true if faces are drawn, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::draw_faces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "draw_text",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw_text",
+          "brief": "Checks if text is drawn.",
+          "detailed": "true if text is drawn, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::draw_text",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "use_default_color",
+          "qualified_name": "CGAL::Qt::Basic_viewer::use_default_color",
+          "brief": "Checks if the default color mode is used.",
+          "detailed": "true if mono color mode is used, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::use_default_color",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "159"
+        },
+        {
+          "kind": "function",
+          "name": "use_default_color_normal",
+          "qualified_name": "CGAL::Qt::Basic_viewer::use_default_color_normal",
+          "brief": "Checks if the default color mode for normals is used.",
+          "detailed": "true if default color mode for normals is used, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::use_default_color_normal",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "163"
+        },
+        {
+          "kind": "function",
+          "name": "reverse_normal",
+          "qualified_name": "CGAL::Qt::Basic_viewer::reverse_normal",
+          "brief": "Checks if normals are reversed.",
+          "detailed": "true if normals are reversed, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::reverse_normal",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "167"
+        },
+        {
+          "kind": "function",
+          "name": "clipping_plane_enabled",
+          "qualified_name": "CGAL::Qt::Basic_viewer::clipping_plane_enabled",
+          "brief": "Checks if the clipping plane is enabled.",
+          "detailed": "true if the clipping plane is enabled, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::clipping_plane_enabled",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "171"
+        },
+        {
+          "kind": "function",
+          "name": "is_two_dimensional",
+          "qualified_name": "CGAL::Qt::Basic_viewer::is_two_dimensional",
+          "brief": "Checks if m_no_2D_mode is false and the graphics scene is two-dimensional.",
+          "detailed": "true if m_no_2D_mode is false and the scene is 2D, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Qt::Basic_viewer::is_two_dimensional",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "175"
+        },
+        {
+          "kind": "function",
+          "name": "clipping_plane",
+          "qualified_name": "CGAL::Qt::Basic_viewer::clipping_plane",
+          "brief": "Gets the clipping plane when enabled.",
+          "detailed": "The clipping plane as a CGAL::Exact_predicates_inexact_constructions_kernel::Plane_3 object.",
+          "return_type": "CGAL::Exact_predicates_inexact_constructions_kernel::Plane_3",
+          "definition": "CGAL::Exact_predicates_inexact_constructions_kernel::Plane_3 CGAL::Qt::Basic_viewer::clipping_plane",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "179"
+        },
+        {
+          "kind": "function",
+          "name": "graphics_scene",
+          "qualified_name": "CGAL::Qt::Basic_viewer::graphics_scene",
+          "brief": "Gets the graphics scene of the viewer.",
+          "detailed": "A reference to the Graphics_scene object.",
+          "return_type": "const Graphics_scene &",
+          "definition": "const Graphics_scene & CGAL::Qt::Basic_viewer::graphics_scene",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Getters",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "183"
+        },
+        {
+          "kind": "function",
+          "name": "draw",
+          "qualified_name": "CGAL::Qt::Basic_viewer::draw",
+          "brief": "draws the viewer without recomputing all internal buffers.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "virtual void CGAL::Qt::Basic_viewer::draw",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Draw",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "191"
+        },
+        {
+          "kind": "function",
+          "name": "redraw",
+          "qualified_name": "CGAL::Qt::Basic_viewer::redraw",
+          "brief": "redraws the viewer, i.e., recompute all internal buffers and update the window.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "virtual void CGAL::Qt::Basic_viewer::redraw",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Draw",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "194"
+        },
+        {
+          "kind": "variable",
+          "name": "on_key_pressed",
+          "qualified_name": "CGAL::Qt::Basic_viewer::on_key_pressed",
+          "brief": "Function called when a key is pressed.",
+          "detailed": "Users can define their own function in order to add specific behavior.",
+          "return_type": "std::function< bool(QKeyEvent *, CGAL::Qt::Basic_viewer *)>",
+          "definition": "std::function<bool(QKeyEvent *, CGAL::Qt::Basic_viewer *)> CGAL::Qt::Basic_viewer::on_key_pressed",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "200"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_basic__viewer.xml",
+      "file": "CGAL/Qt/Basic_viewer.h",
+      "line": "12"
+    },
+    "CGAL::Qt::QApplication_and_basic_viewer": {
+      "kind": "class",
+      "name": "CGAL::Qt::QApplication_and_basic_viewer",
+      "brief": "The class QApplication_and_basic_viewer regroups a Basic_viewer and Qt QApplication .",
+      "detailed": "The QApplication is created in the constructor, but started by the run() method. This allows for example users to modify the on_key_pressed method of the Basic_viewer to define their own behavior. This class requires CGAL_Qt6 , and is only available if the macro CGAL_USE_BASIC_VIEWER is defined. Linking with the cmake target CGAL::CGAL_Basic_viewer will link with CGAL_Qt6 and add the definition CGAL_USE_BASIC_VIEWER .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "QApplication_and_basic_viewer",
+          "qualified_name": "CGAL::Qt::QApplication_and_basic_viewer::QApplication_and_basic_viewer",
+          "brief": "Constructor given a Graphics_scene and possibly a title.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Qt::QApplication_and_basic_viewer::QApplication_and_basic_viewer",
+          "argsstring": "(const CGAL::Graphics_scene &gs, const char *title=\"CGAL Basic Viewer\")",
+          "params": [
+            {
+              "type": "const CGAL::Graphics_scene &",
+              "name": "gs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const char *",
+              "name": "title",
+              "default": "\"CGAL Basic Viewer\"",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "217"
+        },
+        {
+          "kind": "function",
+          "name": "run",
+          "qualified_name": "CGAL::Qt::QApplication_and_basic_viewer::run",
+          "brief": "runs the QApplication , i.e., open the Qt window. A call to this method is blocking, that is the program continues as soon as the user closes the window.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Qt::QApplication_and_basic_viewer::run",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "221"
+        },
+        {
+          "kind": "function",
+          "name": "basic_viewer",
+          "qualified_name": "CGAL::Qt::QApplication_and_basic_viewer::basic_viewer",
+          "brief": "returns a reference to the Basic_viewer associated with this.",
+          "detailed": "",
+          "return_type": "Basic_viewer &",
+          "definition": "Basic_viewer & CGAL::Qt::QApplication_and_basic_viewer::basic_viewer",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "224"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_qt_1_1_q_application__and__basic__viewer.xml",
+      "file": "CGAL/Qt/Basic_viewer.h",
+      "line": "213"
+    },
+    "GraphicsSceneOptions": {
+      "kind": "class",
+      "name": "GraphicsSceneOptions",
+      "brief": "The concept GraphicsSceneOptions defines data and methods used to tune the way that the cells of a given data structure of CGAL are considered for drawing or to be added into a graphics scene.",
+      "detailed": "The different std::function can be modified to change for example the behavior of the drawing. Has models CGAL::Graphics_scene_options<DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "DS",
+          "qualified_name": "GraphicsSceneOptions::DS",
+          "brief": "A data structure of CGAL.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GraphicsSceneOptions::DS",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "18"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "GraphicsSceneOptions::vertex_descriptor",
+          "brief": "A descriptor of vertices of DS .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GraphicsSceneOptions::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "23"
+        },
+        {
+          "kind": "typedef",
+          "name": "edge_descriptor",
+          "qualified_name": "GraphicsSceneOptions::edge_descriptor",
+          "brief": "A descriptor of edges of DS .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GraphicsSceneOptions::edge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "28"
+        },
+        {
+          "kind": "typedef",
+          "name": "face_descriptor",
+          "qualified_name": "GraphicsSceneOptions::face_descriptor",
+          "brief": "A descriptor of faces of DS .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GraphicsSceneOptions::face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "33"
+        },
+        {
+          "kind": "variable",
+          "name": "ignore_vertex",
+          "qualified_name": "GraphicsSceneOptions::ignore_vertex",
+          "brief": "std::function that returns true if the given vertex must be ignored, false otherwise.",
+          "detailed": "Returns false by default.",
+          "return_type": "std::function< bool(const DS &, vertex_descriptor )>",
+          "definition": "std::function<bool(const DS &, vertex_descriptor)> GraphicsSceneOptions::ignore_vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "37"
+        },
+        {
+          "kind": "variable",
+          "name": "ignore_edge",
+          "qualified_name": "GraphicsSceneOptions::ignore_edge",
+          "brief": "std::function that returns true if the given edge must be ignored, false otherwise.",
+          "detailed": "Returns true by default.",
+          "return_type": "std::function< bool(const DS &, edge_descriptor )>",
+          "definition": "std::function<bool(const DS &, edge_descriptor)> GraphicsSceneOptions::ignore_edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "41"
+        },
+        {
+          "kind": "variable",
+          "name": "ignore_face",
+          "qualified_name": "GraphicsSceneOptions::ignore_face",
+          "brief": "std::function that returns true if the given face must be ignored, false otherwise.",
+          "detailed": "Returns true by default.",
+          "return_type": "std::function< bool(const DS &, face_descriptor )>",
+          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::ignore_face",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "45"
+        },
+        {
+          "kind": "variable",
+          "name": "is_vertex_colored",
+          "qualified_name": "GraphicsSceneOptions::is_vertex_colored",
+          "brief": "std::function that returns true if the given vertex is colored, false otherwise.",
+          "detailed": "Returns false by default. For non colored vertices, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , vertices_mono_color ).",
+          "return_type": "std::function< bool(const DS &, vertex_descriptor )>",
+          "definition": "std::function<bool(const DS &, vertex_descriptor)> GraphicsSceneOptions::is_vertex_colored",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "50"
+        },
+        {
+          "kind": "variable",
+          "name": "is_edge_colored",
+          "qualified_name": "GraphicsSceneOptions::is_edge_colored",
+          "brief": "std::function that returns true if the given edge is colored, false otherwise.",
+          "detailed": "For non colored edges, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , edges_mono_color ). Returns false by default.",
+          "return_type": "std::function< bool(const DS &, edge_descriptor )>",
+          "definition": "std::function<bool(const DS &, edge_descriptor)> GraphicsSceneOptions::is_edge_colored",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "55"
+        },
+        {
+          "kind": "variable",
+          "name": "is_face_colored",
+          "qualified_name": "GraphicsSceneOptions::is_face_colored",
+          "brief": "std::function that returns true if the given face is colored, false otherwise.",
+          "detailed": "For non colored faces, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , faces_mono_color ). Returns false by default.",
+          "return_type": "std::function< bool(const DS &, face_descriptor )>",
+          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::is_face_colored",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "60"
+        },
+        {
+          "kind": "variable",
+          "name": "is_face_wireframe",
+          "qualified_name": "GraphicsSceneOptions::is_face_wireframe",
+          "brief": "std::function that returns true if the given face is in wireframe, false otherwise.",
+          "detailed": "Returns false by default.",
+          "return_type": "std::function< bool(const DS &, face_descriptor )>",
+          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::is_face_wireframe",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "64"
+        },
+        {
+          "kind": "variable",
+          "name": "vertex_color",
+          "qualified_name": "GraphicsSceneOptions::vertex_color",
+          "brief": "std::function that returns the color of the given vertex.",
+          "detailed": "nullptr by default.",
+          "return_type": "std::function< CGAL::IO::Color(const DS &, vertex_descriptor )>",
+          "definition": "std::function<CGAL::IO::Color(const DS &, vertex_descriptor)> GraphicsSceneOptions::vertex_color",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "68"
+        },
+        {
+          "kind": "variable",
+          "name": "edge_color",
+          "qualified_name": "GraphicsSceneOptions::edge_color",
+          "brief": "std::function that returns the color of the given edge.",
+          "detailed": "nullptr by default.",
+          "return_type": "std::function< CGAL::IO::Color(const DS &, edge_descriptor )>",
+          "definition": "std::function<CGAL::IO::Color(const DS &, edge_descriptor)> GraphicsSceneOptions::edge_color",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "72"
+        },
+        {
+          "kind": "variable",
+          "name": "face_color",
+          "qualified_name": "GraphicsSceneOptions::face_color",
+          "brief": "std::function that returns the color of the given face.",
+          "detailed": "nullptr by default.",
+          "return_type": "std::function< CGAL::IO::Color(const DS &, face_descriptor )>",
+          "definition": "std::function<CGAL::IO::Color(const DS &, face_descriptor)> GraphicsSceneOptions::face_color",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "ignore_all_vertices",
+          "qualified_name": "GraphicsSceneOptions::ignore_all_vertices",
+          "brief": "ignores all vertices when b is true ; otherwise ignores only vertices for which ignore_vertex() returns true .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::ignore_all_vertices",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "79"
+        },
+        {
+          "kind": "function",
+          "name": "ignore_all_edges",
+          "qualified_name": "GraphicsSceneOptions::ignore_all_edges",
+          "brief": "ignores all edges when b is true ; otherwise ignores only edges for which ignore_edge() returns true .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::ignore_all_edges",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "ignore_all_faces",
+          "qualified_name": "GraphicsSceneOptions::ignore_all_faces",
+          "brief": "ignores all faces when b is true ; otherwise ignores only faces for which ignore_face() returns true .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::ignore_all_faces",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "85"
+        }
+      ],
+      "xml_file": "class_graphics_scene_options.xml",
+      "file": "Concepts/GraphicsSceneOptions.h",
+      "line": "12"
+    },
+    "GraphicsSceneOptionsWithVolumes": {
+      "kind": "class",
+      "name": "GraphicsSceneOptionsWithVolumes",
+      "brief": "The concept GraphicsSceneOptionsWithVolumes extends the concept GraphicsSceneOptions to deal with data structures that represent volumes.",
+      "detailed": "Refines GraphicsSceneOptions Has models CGAL::Graphics_scene_options<DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "volume_descriptor",
+          "qualified_name": "GraphicsSceneOptionsWithVolumes::volume_descriptor",
+          "brief": "A descriptor of volumes of DS .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GraphicsSceneOptionsWithVolumes::volume_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "107"
+        },
+        {
+          "kind": "variable",
+          "name": "ignore_volume",
+          "qualified_name": "GraphicsSceneOptionsWithVolumes::ignore_volume",
+          "brief": "std::function that returns true if the given volume must be ignored, false otherwise.",
+          "detailed": "Returns false by default.",
+          "return_type": "std::function< bool(const DS &, volume_descriptor )>",
+          "definition": "std::function<bool(const DS &, volume_descriptor)> GraphicsSceneOptionsWithVolumes::ignore_volume",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "111"
+        },
+        {
+          "kind": "variable",
+          "name": "is_volume_colored",
+          "qualified_name": "GraphicsSceneOptionsWithVolumes::is_volume_colored",
+          "brief": "std::function that returns true if the given volume is colored, false otherwise.",
+          "detailed": "For non colored volumes, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , faces_mono_color ). Returns false by default.",
+          "return_type": "std::function< bool(const DS &, volume_descriptor )>",
+          "definition": "std::function<bool(const DS &, volume_descriptor)> GraphicsSceneOptionsWithVolumes::is_volume_colored",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "116"
+        },
+        {
+          "kind": "variable",
+          "name": "is_volume_wireframe",
+          "qualified_name": "GraphicsSceneOptionsWithVolumes::is_volume_wireframe",
+          "brief": "std::function that returns true if the given volume is in wireframe, false otherwise.",
+          "detailed": "Returns false by default.",
+          "return_type": "std::function< bool(const DS &, volume_descriptor )>",
+          "definition": "std::function<bool(const DS &, volume_descriptor)> GraphicsSceneOptionsWithVolumes::is_volume_wireframe",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "120"
+        },
+        {
+          "kind": "variable",
+          "name": "volume_color",
+          "qualified_name": "GraphicsSceneOptionsWithVolumes::volume_color",
+          "brief": "std::function that returns the color of the given volume, i.e.",
+          "detailed": "the color of all the faces of this volume. nullptr by default.",
+          "return_type": "std::function< CGAL::IO::Color(const DS &, volume_descriptor )>",
+          "definition": "std::function<CGAL::IO::Color(const DS &, volume_descriptor)> GraphicsSceneOptionsWithVolumes::volume_color",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "ignore_all_volumes",
+          "qualified_name": "GraphicsSceneOptionsWithVolumes::ignore_all_volumes",
+          "brief": "ignores all volumes when b is true ; otherwise ignore only volumes for which ignore_volume() returns true .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptionsWithVolumes::ignore_all_volumes",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "127"
+        }
+      ],
+      "xml_file": "class_graphics_scene_options_with_volumes.xml",
+      "file": "Concepts/GraphicsSceneOptions.h",
+      "line": "101"
+    },
+    "CGAL::Qt": {
+      "kind": "namespace",
+      "name": "CGAL::Qt",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_qt.xml",
+      "file": "CGAL/Qt/Basic_viewer.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgBasicViewerRef": {
+      "kind": "group",
+      "name": "PkgBasicViewerRef",
+      "brief": "",
+      "detailed": "Guillaume Damiand and Mostafa Ashraf This package provides interactive visualization for most CGAL packages. First, the function draw() is provided for each data structure. Several data structures can be added to a same graphics scene and visualized simultaneously. Rendering can be controlled (color, point size, etc.). Finally a Qt widget is provided that can be integrated in the GUI of a user application. Introduced in: CGAL 6.0 BibTeX: cgal:d-bv-26a License: LGPL Classified Reference Pages Concepts GraphicsSceneOptions GraphicsSceneOptionsWithVolumes Classes CGAL::Qt::Basic_viewer CGAL::Graphics_scene CGAL::Graphics_scene_options <DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor> CGAL::Qt::QApplication_and_basic_viewer Draw a Graphics Scene CGAL::draw_graphics_scene() Draw for Different Packages CGAL::Arrangement_2 CGAL::draw<ARR>() CGAL::Constrained_triangulation_2 CGAL::draw<CT2>() CGAL::Linear_cell_complex_for_combinatorial_map CGAL::draw<LCC>() CGAL::Linear_cell_complex_for_generalized_map CGAL::draw<LCC>() CGAL::Nef_polyhedron_3 CGAL::draw<Nef3>() CGAL::Periodic_2_triangulation_2 CGAL::draw<P2T2>() CGAL::Point_set_3 CGAL::draw<PS>() CGAL::Polygon_2 CGAL::draw<P2>() CGAL::Polygon_set_2 CGAL::draw<PS>() CGAL::Polygon_with_holes_2 CGAL::draw<PH2>() CGAL::Polyhedron_3 CGAL::draw<POLY>() CGAL::Surface_mesh CGAL::draw<SM>() CGAL::Surface_mesh_topology CGAL::draw<SMT>() CGAL::Triangulation_2 CGAL::draw<T2>() CGAL::Triangulation_3 CGAL::draw<T3>() CGAL::Voronoi_diagram_2 CGAL::draw<V2>() Fill Graphics Scene for Different Packages CGAL::Arrangement_2 CGAL::add_to_graphics_scene<ARR>() CGAL::Constrained_triangulation_2 CGAL::add_to_graphics_scene<CT2>() CGAL::Linear_cell_complex_for_combinatorial_map CGAL::add_to_graphics_scene<LCC>() CGAL::Linear_cell_complex_for_generalized_map CGAL::add_to_graphics_scene<LCC>() CGAL::Nef_polyhedron_3 CGAL::add_to_graphics_scene<Nef3>() CGAL::Periodic_2_triangulation_2 CGAL::add_to_graphics_scene<P2T2>() CGAL::Point_set_3 CGAL::add_to_graphics_scene<PS>() CGAL::Polygon_2 CGAL::add_to_graphics_scene<P2>() CGAL::Polygon_set_2 CGAL::add_to_graphics_scene<PS>() CGAL::Polygon_with_holes_2 CGAL::add_to_graphics_scene<PH2>() CGAL::Polyhedron_3 CGAL::add_to_graphics_scene<POLY>() CGAL::Surface_mesh CGAL::add_to_graphics_scene<SM>() CGAL::Surface_mesh_topology CGAL::add_to_graphics_scene<SMT>() CGAL::Triangulation_2 CGAL::add_to_graphics_scene<T2>() CGAL::Triangulation_3 CGAL::add_to_graphics_scene<T3>() CGAL::Voronoi_diagram_2 CGAL::add_to_graphics_scene<V2>()",
+      "members": [],
+      "xml_file": "group___pkg_basic_viewer_ref.xml"
+    },
+    "PkgBasicViewerConcepts": {
+      "kind": "group",
+      "name": "PkgBasicViewerConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_basic_viewer_concepts.xml"
+    },
+    "PkgBasicViewerClasses": {
+      "kind": "group",
+      "name": "PkgBasicViewerClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "draw_graphics_scene",
+          "qualified_name": "CGAL::draw_graphics_scene",
+          "brief": "opens a new window and draws the given Graphics_scene (which must have been filled before).",
+          "detailed": "title will be the title of the window. A call to this method is blocking, that is the program continues as soon as the user closes the window. This function requires CGAL_Qt6 , and is only available if the macro CGAL_USE_BASIC_VIEWER is defined. Linking with the cmake target CGAL::CGAL_Basic_viewer will link with CGAL_Qt6 and add the definition CGAL_USE_BASIC_VIEWER.",
+          "return_type": "void",
+          "definition": "void CGAL::draw_graphics_scene",
+          "argsstring": "(const Graphics_scene &graphic_scene, const char *title=\"CGAL Basic Viewer\")",
+          "params": [
+            {
+              "type": "const Graphics_scene &",
+              "name": "graphic_scene",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const char *",
+              "name": "title",
+              "default": "\"CGAL Basic Viewer\"",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Qt/Basic_viewer.h",
+          "line": "235"
+        }
+      ],
+      "xml_file": "group___pkg_basic_viewer_classes.xml"
+    }
+  }
+}

@@ -1,0 +1,1913 @@
+{
+  "schema_version": 1,
+  "package": "Partition_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 18,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Is_convex_2": {
+      "kind": "class",
+      "name": "CGAL::Is_convex_2",
+      "brief": "Function object class for testing if a sequence of points represents a convex polygon or not.",
+      "detailed": "Is model of PolygonIsValid CGAL::convex_partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > Implementation This test requires $O(n)$ time for a polygon with $ n$ vertices.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Is_convex_2",
+          "qualified_name": "CGAL::Is_convex_2::Is_convex_2",
+          "brief": "Traits satisfies the requirements of the function is_convex_2()",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Is_convex_2< Traits >::Is_convex_2",
+          "argsstring": "(const Traits &t)",
+          "params": [
+            {
+              "type": "const Traits &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/polygon_function_objects.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Is_convex_2::operator()",
+          "brief": "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a convex polygon.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Is_convex_2< Traits >::operator()",
+          "argsstring": "(InputIterator first, InputIterator beyond)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/polygon_function_objects.h",
+          "line": "44"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_is__convex__2.xml",
+      "file": "CGAL/polygon_function_objects.h",
+      "line": "20"
+    },
+    "CGAL::Is_vacuously_valid": {
+      "kind": "class",
+      "name": "CGAL::Is_vacuously_valid",
+      "brief": "Function object class that indicates all sequences of points are valid.",
+      "detailed": "Is model of PolygonIsValid CGAL::partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > Implementation This test requires $O(1)$ time.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Is_vacuously_valid",
+          "qualified_name": "CGAL::Is_vacuously_valid::Is_vacuously_valid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Is_vacuously_valid< Traits >::Is_vacuously_valid",
+          "argsstring": "(const Traits &t)",
+          "params": [
+            {
+              "type": "const Traits &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/polygon_function_objects.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Is_vacuously_valid::operator()",
+          "brief": "returns true .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Is_vacuously_valid< Traits >::operator()",
+          "argsstring": "(InputIterator first, InputIterator beyond)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/polygon_function_objects.h",
+          "line": "91"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_is__vacuously__valid.xml",
+      "file": "CGAL/polygon_function_objects.h",
+      "line": "69"
+    },
+    "CGAL::Is_y_monotone_2": {
+      "kind": "class",
+      "name": "CGAL::Is_y_monotone_2",
+      "brief": "Function object class that tests whether a sequence of points represents a $ y$ -monotone polygon or not.",
+      "detailed": "Is model of PolygonIsValid CGAL::convex_partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > Implementation This test requires $O(n)$ time for a polygon with $ n$ vertices.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Is_y_monotone_2",
+          "qualified_name": "CGAL::Is_y_monotone_2::Is_y_monotone_2",
+          "brief": "Traits is a model of the concept IsYMonotoneTraits_2",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Is_y_monotone_2< Traits >::Is_y_monotone_2",
+          "argsstring": "(const Traits &t)",
+          "params": [
+            {
+              "type": "const Traits &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/polygon_function_objects.h",
+          "line": "127"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Is_y_monotone_2::operator()",
+          "brief": "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a $ y$ -monotone polygon.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Is_y_monotone_2< Traits >::operator()",
+          "argsstring": "(InputIterator first, InputIterator beyond)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/polygon_function_objects.h",
+          "line": "141"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_is__y__monotone__2.xml",
+      "file": "CGAL/polygon_function_objects.h",
+      "line": "117"
+    },
+    "CGAL::Partition_is_valid_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Partition_is_valid_traits_2",
+      "brief": "Class that derives a traits class for partition_is_valid_2() from a given traits class by defining the validity testing function object in terms of a supplied template parameter.",
+      "detailed": "Is model of PartitionIsValidTraits_2 CGAL::Is_convex_2 <Traits> CGAL::Is_vacuously_valid <Traits> CGAL::Is_y_monotone_2 <Traits> CGAL::Partition_traits_2 <R> Example See the example presented with the function optimal_convex_partition_2() for an illustration of the use of this traits class.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Is_valid",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::Is_valid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PolygonIsValid",
+          "definition": "typedef PolygonIsValid CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::Is_valid",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Point_2",
+          "definition": "typedef Traits::Point_2 CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::Polygon_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Polygon_2",
+          "definition": "typedef Traits::Polygon_2 CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::Less_xy_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Less_xy_2",
+          "definition": "typedef Traits::Less_xy_2 CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::Left_turn_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Left_turn_2",
+          "definition": "typedef Traits::Left_turn_2 CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::Orientation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Orientation_2",
+          "definition": "typedef Traits::Orientation_2 CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid_object",
+          "qualified_name": "CGAL::Partition_is_valid_traits_2::is_valid_object",
+          "brief": "function returning an instance of Is_valid",
+          "detailed": "",
+          "return_type": "Is_valid",
+          "definition": "Is_valid CGAL::Partition_is_valid_traits_2< Traits, PolygonIsValid >::is_valid_object",
+          "argsstring": "(const Traits &traits) const",
+          "params": [
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Partition_is_valid_traits_2.h",
+          "line": "72"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_partition__is__valid__traits__2.xml",
+      "file": "CGAL/Partition_is_valid_traits_2.h",
+      "line": "24"
+    },
+    "CGAL::Partition_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Partition_traits_2",
+      "brief": "Traits class that can be used with all the 2-dimensional polygon partitioning algorithms.",
+      "detailed": "R a representation class PointPropertyMap a property map that maps to points of type R::Point_2 Is model of ConvexPartitionIsValidTraits_2 IsYMonotoneTraits_2 OptimalConvexPartitionTraits_2 PartitionTraits_2 YMonotonePartitionIsValidTraits_2 CGAL::approx_convex_partition_2() CGAL::convex_partition_is_valid_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > CGAL::y_monotone_partition_2() CGAL::y_monotone_partition_is_valid_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Partition_traits_2::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Partition_traits_2 < R, PMap >",
+          "definition": "typedef Partition_traits_2<R,PMap> CGAL::Partition_traits_2< R, PointPropertyMap >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Partition_traits_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::FT",
+          "definition": "typedef R::FT CGAL::Partition_traits_2< R, PointPropertyMap >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Partition_traits_2::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_traits< PointPropertyMap >::key_type",
+          "definition": "typedef boost::property_traits<PointPropertyMap>::key_type CGAL::Partition_traits_2< R, PointPropertyMap >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "Container",
+          "qualified_name": "CGAL::Partition_traits_2::Container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::list< Point_2 >",
+          "definition": "typedef std::list<Point_2> CGAL::Partition_traits_2< R, PointPropertyMap >::Container",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "51"
+        },
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "CGAL::Partition_traits_2::Polygon_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Polygon_2< Self , Container >",
+          "definition": "typedef CGAL::Polygon_2<Self, Container> CGAL::Partition_traits_2< R, PointPropertyMap >::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "56"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_yx_2",
+          "qualified_name": "CGAL::Partition_traits_2::Less_yx_2",
+          "brief": "A functor with an operator which first obtains points of type R::Point_2 with the function get() applied on the point property map, and then applies the functor of R::Less_yx_2 to these points.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Less_yx_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "CGAL::Partition_traits_2::Less_xy_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "70"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "CGAL::Partition_traits_2::Left_turn_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "75"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "CGAL::Partition_traits_2::Orientation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "80"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_y_2",
+          "qualified_name": "CGAL::Partition_traits_2::Compare_y_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Compare_y_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "85"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_x_2",
+          "qualified_name": "CGAL::Partition_traits_2::Compare_x_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Compare_x_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "90"
+        },
+        {
+          "kind": "typedef",
+          "name": "Collinear_are_ordered_along_line_2",
+          "qualified_name": "CGAL::Partition_traits_2::Collinear_are_ordered_along_line_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Collinear_are_ordered_along_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "typedef",
+          "name": "Are_strictly_ordered_along_line_2",
+          "qualified_name": "CGAL::Partition_traits_2::Are_strictly_ordered_along_line_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Partition_traits_2< R, PointPropertyMap >::Are_strictly_ordered_along_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "101"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_convex_2",
+          "qualified_name": "CGAL::Partition_traits_2::Is_convex_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Is_convex_2 < Self >",
+          "definition": "typedef CGAL::Is_convex_2<Self> CGAL::Partition_traits_2< R, PointPropertyMap >::Is_convex_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "105"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_y_monotone_2",
+          "qualified_name": "CGAL::Partition_traits_2::Is_y_monotone_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Is_y_monotone_2 < Self >",
+          "definition": "typedef CGAL::Is_y_monotone_2<Self> CGAL::Partition_traits_2< R, PointPropertyMap >::Is_y_monotone_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "Partition_traits_2",
+          "qualified_name": "CGAL::Partition_traits_2::Partition_traits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Partition_traits_2< R, PointPropertyMap >::Partition_traits_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "Partition_traits_2",
+          "qualified_name": "CGAL::Partition_traits_2::Partition_traits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Partition_traits_2< R, PointPropertyMap >::Partition_traits_2",
+          "argsstring": "(Partition_traits_2 &tr)",
+          "params": [
+            {
+              "type": "Partition_traits_2 &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "126"
+        },
+        {
+          "kind": "function",
+          "name": "Partition_traits_2",
+          "qualified_name": "CGAL::Partition_traits_2::Partition_traits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Partition_traits_2< R, PointPropertyMap >::Partition_traits_2",
+          "argsstring": "(const R &rep)",
+          "params": [
+            {
+              "type": "const R &",
+              "name": "rep",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "Partition_traits_2",
+          "qualified_name": "CGAL::Partition_traits_2::Partition_traits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Partition_traits_2< R, PointPropertyMap >::Partition_traits_2",
+          "argsstring": "(const R &rep, PointPropertyMap pmap)",
+          "params": [
+            {
+              "type": "const R &",
+              "name": "rep",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointPropertyMap",
+              "name": "pmap",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "pred_object_type_object",
+          "qualified_name": "CGAL::Partition_traits_2::pred_object_type_object",
+          "brief": "Returns an instance of Pred_object_type .",
+          "detailed": "",
+          "return_type": "Pred_object_type",
+          "definition": "Pred_object_type CGAL::Partition_traits_2< R, PointPropertyMap >::pred_object_type_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Partition_traits_2.h",
+          "line": "155"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_partition__traits__2.xml",
+      "file": "CGAL/Partition_traits_2.h",
+      "line": "26"
+    },
+    "ConvexPartitionIsValidTraits_2": {
+      "kind": "class",
+      "name": "ConvexPartitionIsValidTraits_2",
+      "brief": "Requirements of a traits class used by convex_partition_is_valid_2 for testing the validity of a convex partition of a polygon.",
+      "detailed": "Has models CGAL::Partition_traits_2 <R> CGAL::approx_convex_partition_2() CGAL::greene_approx_convex_partition_2() CGAL::Is_convex_2 <Traits> CGAL::optimal_convex_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Is_convex_2",
+          "qualified_name": "ConvexPartitionIsValidTraits_2::Is_convex_2",
+          "brief": "Model of the concept PolygonIsValid that tests if a sequence of points is convex or not.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexPartitionIsValidTraits_2::Is_convex_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexPartitionIsValidTraits_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "ConvexPartitionIsValidTraits_2",
+          "qualified_name": "ConvexPartitionIsValidTraits_2::ConvexPartitionIsValidTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "ConvexPartitionIsValidTraits_2::ConvexPartitionIsValidTraits_2",
+          "argsstring": "(ConvexPartitionIsValidTraits_2 tr)",
+          "params": [
+            {
+              "type": "ConvexPartitionIsValidTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/ConvexPartitionIsValidTraits_2.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "is_convex_2_object",
+          "qualified_name": "ConvexPartitionIsValidTraits_2::is_convex_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Is_convex_2",
+          "definition": "Is_convex_2 ConvexPartitionIsValidTraits_2::is_convex_2_object",
+          "argsstring": "(ConvexPartitionIsValidTraits_2 tr)",
+          "params": [
+            {
+              "type": "ConvexPartitionIsValidTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexPartitionIsValidTraits_2.h",
+          "line": "55"
+        }
+      ],
+      "xml_file": "class_convex_partition_is_valid_traits__2.xml",
+      "file": "Concepts/ConvexPartitionIsValidTraits_2.h",
+      "line": "20"
+    },
+    "IsYMonotoneTraits_2": {
+      "kind": "class",
+      "name": "IsYMonotoneTraits_2",
+      "brief": "Requirements of a traits class to be used with the function is_y_monotone_2() that tests whether a sequence of 2D points defines a $ y$ -monotone polygon or not.",
+      "detailed": "Has models CGAL::Partition_traits_2 <R> CGAL::Kernel_traits_2 CGAL::Is_y_monotone_2 <Traits> CGAL::y_monotone_partition_2() CGAL::y_monotone_partition_is_valid_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "IsYMonotoneTraits_2::Point_2",
+          "brief": "The point type of the polygon vertices.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsYMonotoneTraits_2::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsYMonotoneTraits_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_yx_2",
+          "qualified_name": "IsYMonotoneTraits_2::Less_yx_2",
+          "brief": "Predicate object type that compares Point_2 s lexicographically.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p <_{xy} q$ . We have $ p<_{xy}q$ , iff $ p_x < q_x$ or $ p_x = q_x$ and $ p_y < q_y$ , where $ p_x$ and $ p_y$ denote $ x$ and $ y$ coordinate of point $ p$ resp.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsYMonotoneTraits_2::Less_yx_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsYMonotoneTraits_2.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "IsYMonotoneTraits_2",
+          "qualified_name": "IsYMonotoneTraits_2::IsYMonotoneTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "IsYMonotoneTraits_2::IsYMonotoneTraits_2",
+          "argsstring": "(IsYMonotoneTraits_2 tr)",
+          "params": [
+            {
+              "type": "IsYMonotoneTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/IsYMonotoneTraits_2.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "less_yx_2_object",
+          "qualified_name": "IsYMonotoneTraits_2::less_yx_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_yx_2",
+          "definition": "Less_yx_2 IsYMonotoneTraits_2::less_yx_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsYMonotoneTraits_2.h",
+          "line": "63"
+        }
+      ],
+      "xml_file": "class_is_y_monotone_traits__2.xml",
+      "file": "Concepts/IsYMonotoneTraits_2.h",
+      "line": "20"
+    },
+    "OptimalConvexPartitionTraits_2": {
+      "kind": "class",
+      "name": "OptimalConvexPartitionTraits_2",
+      "brief": "Requirements of a traits class to be used with the function optimal_convex_partition_2() that computes an optimal convex partition of a polygon.",
+      "detailed": "Refines PartitionTraits_2 Has models CGAL::Partition_traits_2 <R> CGAL::convex_partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid >",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Collinear_are_ordered_along_line_2",
+          "qualified_name": "OptimalConvexPartitionTraits_2::Collinear_are_ordered_along_line_2",
+          "brief": "Predicate object type that determines orderings of Point_2 's on a line.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q, Point_2 r) that returns true , iff q lies between p and r and p , q , and r satisfy the precondition that they are collinear.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalConvexPartitionTraits_2::Collinear_are_ordered_along_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalConvexPartitionTraits_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "Are_stritcly_ordered_along_line_2",
+          "qualified_name": "OptimalConvexPartitionTraits_2::Are_stritcly_ordered_along_line_2",
+          "brief": "Predicate object type that determines orderings of Point_2 's.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q, Point_2 r) that returns true , iff the three points are collinear and q lies strictly between p and r . Note that false should be returned if q==p or q==r .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalConvexPartitionTraits_2::Are_stritcly_ordered_along_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalConvexPartitionTraits_2.h",
+          "line": "48"
+        },
+        {
+          "kind": "function",
+          "name": "OptimalConvexPartitionTraits_2",
+          "qualified_name": "OptimalConvexPartitionTraits_2::OptimalConvexPartitionTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "OptimalConvexPartitionTraits_2::OptimalConvexPartitionTraits_2",
+          "argsstring": "(OptimalConvexPartitionTraits_2 tr)",
+          "params": [
+            {
+              "type": "OptimalConvexPartitionTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/OptimalConvexPartitionTraits_2.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "collinear_are_ordered_along_line_2_object",
+          "qualified_name": "OptimalConvexPartitionTraits_2::collinear_are_ordered_along_line_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Collinear_are_ordered_along_line_2",
+          "definition": "Collinear_are_ordered_along_line_2 OptimalConvexPartitionTraits_2::collinear_are_ordered_along_line_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/OptimalConvexPartitionTraits_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "are_strictly_ordered_along_line_2_object",
+          "qualified_name": "OptimalConvexPartitionTraits_2::are_strictly_ordered_along_line_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Are_strictly_ordered_along_line_2",
+          "definition": "Are_strictly_ordered_along_line_2 OptimalConvexPartitionTraits_2::are_strictly_ordered_along_line_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/OptimalConvexPartitionTraits_2.h",
+          "line": "80"
+        }
+      ],
+      "xml_file": "class_optimal_convex_partition_traits__2.xml",
+      "file": "Concepts/OptimalConvexPartitionTraits_2.h",
+      "line": "20"
+    },
+    "PartitionIsValidTraits_2": {
+      "kind": "class",
+      "name": "PartitionIsValidTraits_2",
+      "brief": "Requirements of a traits class that is used by CGAL::partition_is_valid_2() , CGAL::convex_partition_is_valid_2() , and CGAL::y_monotone_partition_is_valid_2() for testing if a given set of polygons are nonoverlapping and if their union is a polygon that is the same as a polygon represented by a given sequence of points. Note that the traits class for CGAL::partition_is_valid_2() may have to satisfy additional requirements if each partition polygon is to be tested for having a particular property; see, for example, the descriptions of the function CGAL::is_convex_2() and the concept YMonotonePartitionTraits_2 for the additional requirements for testing for convexity and $ y$ -monotonicity, respectively.",
+      "detailed": "Has models CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > CGAL::approx_convex_partition_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::y_monotone_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "PartitionIsValidTraits_2::Point_2",
+          "brief": "The point type on which the partitioning algorithm operates.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionIsValidTraits_2::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "PartitionIsValidTraits_2::Polygon_2",
+          "brief": "The polygon type created by the partitioning function.",
+          "detailed": "This type should provide a nested type Vertex_const_iterator that is the type of the non-mutable iterator over the polygon vertices.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionIsValidTraits_2::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "44"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_valid",
+          "qualified_name": "PartitionIsValidTraits_2::Is_valid",
+          "brief": "A model of the concept PolygonIsValid .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionIsValidTraits_2::Is_valid",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "PartitionIsValidTraits_2::Less_xy_2",
+          "brief": "Predicate object type that compares Point_2 s lexicographically.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p <_{xy} q$ . We have $ p<_{xy}q$ , iff $ p_x < q_x$ or $ p_x = q_x$ and $ p_y < q_y$ , where $ p_x$ and $ p_y$ denote the $ x$ and $ y$ coordinates of point $ p$ , respectively.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionIsValidTraits_2::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "61"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "PartitionIsValidTraits_2::Left_turn_2",
+          "brief": "Predicate object type that provides bool operator()(Point_2 p,Point_2 q,Point_2 r) , which returns true iff r lies to the left of the oriented line through p and q .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionIsValidTraits_2::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "70"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "PartitionIsValidTraits_2::Orientation_2",
+          "brief": "Predicate object type that provides CGAL::Orientation operator()(Point_2 p, Point_2 q, Point_2 r) that returns CGAL::LEFT_TURN , if $ r$ lies to the left of the oriented line $ l$ defined by $ p$ and $ q$ , returns CGAL::RIGHT_TURN if $ r$ lies to the right of $ l$ , and returns CGAL::COLLINEAR if $ r$ lies on $ l$ .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionIsValidTraits_2::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "80"
+        },
+        {
+          "kind": "function",
+          "name": "PartitionIsValidTraits_2",
+          "qualified_name": "PartitionIsValidTraits_2::PartitionIsValidTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "PartitionIsValidTraits_2::PartitionIsValidTraits_2",
+          "argsstring": "(PartitionIsValidTraits_2 tr)",
+          "params": [
+            {
+              "type": "PartitionIsValidTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "91"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid_object",
+          "qualified_name": "PartitionIsValidTraits_2::is_valid_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Orientation_2",
+          "definition": "Orientation_2 PartitionIsValidTraits_2::is_valid_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "less_xy_2_object",
+          "qualified_name": "PartitionIsValidTraits_2::less_xy_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_xy_2",
+          "definition": "Less_xy_2 PartitionIsValidTraits_2::less_xy_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "left_turn_2_object",
+          "qualified_name": "PartitionIsValidTraits_2::left_turn_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Left_turn_2",
+          "definition": "Left_turn_2 PartitionIsValidTraits_2::left_turn_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "112"
+        },
+        {
+          "kind": "function",
+          "name": "orientation_2_object",
+          "qualified_name": "PartitionIsValidTraits_2::orientation_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Orientation_2",
+          "definition": "Orientation_2 PartitionIsValidTraits_2::orientation_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionIsValidTraits_2.h",
+          "line": "117"
+        }
+      ],
+      "xml_file": "class_partition_is_valid_traits__2.xml",
+      "file": "Concepts/PartitionIsValidTraits_2.h",
+      "line": "28"
+    },
+    "PartitionTraits_2": {
+      "kind": "class",
+      "name": "PartitionTraits_2",
+      "brief": "The polygon partitioning functions are each parameterized by a traits class that defines the primitives used in the algorithms. Many requirements are common to all traits classes. The concept PartitionTraits_2 defines this common set of requirements.",
+      "detailed": "Has models CGAL::Partition_traits_2 <R> CGAL::approx_convex_partition_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::y_monotone_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "PartitionTraits_2::Point_2",
+          "brief": "The point type on which the partitioning algorithm operates.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "PartitionTraits_2::Polygon_2",
+          "brief": "The polygon type to be created by the partitioning algorithm.",
+          "detailed": "For testing the validity postcondition of the partition, this type should provide a nested type Vertex_const_iterator that is the type of the iterator over the polygon vertices and member functions Vertex_const_iterator vertices_begin() and Vertex_const_iterator vertices_end() .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "PartitionTraits_2::Less_xy_2",
+          "brief": "Predicate object type that compares Point_2 s lexicographically.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p <_{xy} q$ . We have $ p<_{xy}q$ , iff $ p_x < q_x$ or $ p_x = q_x$ and $ p_y < q_y$ , where $ p_x$ and $ p_y$ denote the $ x$ and $ y$ coordinates of point $ p$ , respectively.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_yx_2",
+          "qualified_name": "PartitionTraits_2::Less_yx_2",
+          "brief": "Same as Less_xy_2 with the roles of $ x$ and $ y$ interchanged.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Less_yx_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "PartitionTraits_2::Left_turn_2",
+          "brief": "Predicate object type that provides bool operator()(Point_2 p,Point_2 q,Point_2 r) , which returns true iff r lies to the left of the oriented line through p and q .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "68"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "PartitionTraits_2::Orientation_2",
+          "brief": "Predicate object type that provides CGAL::Orientation operator()(Point_2 p, Point_2 q, Point_2 r) that returns CGAL::LEFT_TURN , if $ r$ lies to the left of the oriented line $ l$ defined by $ p$ and $ q$ , returns CGAL::RIGHT_TURN if $ r$ lies to the right of $ l$ , and returns CGAL::COLLINEAR if $ r$ lies on $ l$ .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_y_2",
+          "qualified_name": "PartitionTraits_2::Compare_y_2",
+          "brief": "Predicate object type that provides CGAL::Comparison_result operator()(Point_2 p, Point_2 q) to compare the $ y$ values of two points.",
+          "detailed": "The operator must return CGAL::SMALLER if $ p_y < q_y$ , CGAL::LARGER if $ p_y > q_y$ and CGAL::EQUAL if $ p_y = q_y$ .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Compare_y_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "87"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_x_2",
+          "qualified_name": "PartitionTraits_2::Compare_x_2",
+          "brief": "The same as Compare_y_2 , except that $ x$ coordinates are compared instead of $ y$ .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PartitionTraits_2::Compare_x_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "93"
+        },
+        {
+          "kind": "function",
+          "name": "PartitionTraits_2",
+          "qualified_name": "PartitionTraits_2::PartitionTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "PartitionTraits_2::PartitionTraits_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "104"
+        },
+        {
+          "kind": "function",
+          "name": "PartitionTraits_2",
+          "qualified_name": "PartitionTraits_2::PartitionTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "PartitionTraits_2::PartitionTraits_2",
+          "argsstring": "(PartitionTraits_2 tr)",
+          "params": [
+            {
+              "type": "PartitionTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "less_yx_2_object",
+          "qualified_name": "PartitionTraits_2::less_yx_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_yx_2",
+          "definition": "Less_yx_2 PartitionTraits_2::less_yx_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "less_xy_2_object",
+          "qualified_name": "PartitionTraits_2::less_xy_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_xy_2",
+          "definition": "Less_xy_2 PartitionTraits_2::less_xy_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "125"
+        },
+        {
+          "kind": "function",
+          "name": "left_turn_2_object",
+          "qualified_name": "PartitionTraits_2::left_turn_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Left_turn_2",
+          "definition": "Left_turn_2 PartitionTraits_2::left_turn_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "130"
+        },
+        {
+          "kind": "function",
+          "name": "orientation_2_object",
+          "qualified_name": "PartitionTraits_2::orientation_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Orientation_2",
+          "definition": "Orientation_2 PartitionTraits_2::orientation_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "compare_y_2_object",
+          "qualified_name": "PartitionTraits_2::compare_y_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_y_2",
+          "definition": "Compare_y_2 PartitionTraits_2::compare_y_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "140"
+        },
+        {
+          "kind": "function",
+          "name": "compare_x_2_object",
+          "qualified_name": "PartitionTraits_2::compare_x_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_x_2",
+          "definition": "Compare_x_2 PartitionTraits_2::compare_x_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PartitionTraits_2.h",
+          "line": "145"
+        }
+      ],
+      "xml_file": "class_partition_traits__2.xml",
+      "file": "Concepts/PartitionTraits_2.h",
+      "line": "22"
+    },
+    "PolygonIsValid": {
+      "kind": "class",
+      "name": "PolygonIsValid",
+      "brief": "Function object that determines if a sequence of points represents a valid partition polygon or not, where \"valid\" can assume any of several meanings (e.g., convex or $ y$ -monotone).",
+      "detailed": "Has models CGAL::Is_convex_2 <Traits> CGAL::Is_y_monotone_2 <Traits> CGAL::approx_convex_partition_2() CGAL::convex_partition_is_valid_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::y_monotone_partition_2() CGAL::y_monotone_partition_is_valid_2()",
+      "members": [
+        {
+          "kind": "function",
+          "name": "PolygonIsValid",
+          "qualified_name": "PolygonIsValid::PolygonIsValid",
+          "brief": "Traits is a model of the concept required by the function that checks for validity of the polygon.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "PolygonIsValid::PolygonIsValid",
+          "argsstring": "(const Traits tr)",
+          "params": [
+            {
+              "type": "const Traits",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/PolygonIsValid.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "PolygonIsValid::operator()",
+          "brief": "returns true iff the points of type Traits::Point_2 in the range [ first , beyond ) define a valid polygon.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool PolygonIsValid::operator()",
+          "argsstring": "(InputIterator first, InputIterator beyond)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PolygonIsValid.h",
+          "line": "50"
+        }
+      ],
+      "xml_file": "class_polygon_is_valid.xml",
+      "file": "Concepts/PolygonIsValid.h",
+      "line": "24"
+    },
+    "YMonotonePartitionIsValidTraits_2": {
+      "kind": "class",
+      "name": "YMonotonePartitionIsValidTraits_2",
+      "brief": "Requirements of a traits class that is used by y_monotone_partition_is_valid_2 for testing the validity of a $ y$ -monotone partition of a polygon.",
+      "detailed": "Has models CGAL::Partition_traits_2 <R> CGAL::partition_is_valid_2() CGAL::y_monotone_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Is_y_monotone_2",
+          "qualified_name": "YMonotonePartitionIsValidTraits_2::Is_y_monotone_2",
+          "brief": "Model of the concept PolygonIsValid that tests if a sequence of points is $ y$ -monotone or not.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type YMonotonePartitionIsValidTraits_2::Is_y_monotone_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/YMonotonePartitionIsValidTraits_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "YMonotonePartitionIsValidTraits_2",
+          "qualified_name": "YMonotonePartitionIsValidTraits_2::YMonotonePartitionIsValidTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "YMonotonePartitionIsValidTraits_2::YMonotonePartitionIsValidTraits_2",
+          "argsstring": "(YMonotonePartitionIsValidTraits_2 tr)",
+          "params": [
+            {
+              "type": "YMonotonePartitionIsValidTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/YMonotonePartitionIsValidTraits_2.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "is_y_monotone_2_object",
+          "qualified_name": "YMonotonePartitionIsValidTraits_2::is_y_monotone_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Is_y_monotone_2",
+          "definition": "Is_y_monotone_2 YMonotonePartitionIsValidTraits_2::is_y_monotone_2_object",
+          "argsstring": "(YMonotonePartitionIsValidTraits_2 tr)",
+          "params": [
+            {
+              "type": "YMonotonePartitionIsValidTraits_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/YMonotonePartitionIsValidTraits_2.h",
+          "line": "55"
+        }
+      ],
+      "xml_file": "class_y_monotone_partition_is_valid_traits__2.xml",
+      "file": "Concepts/YMonotonePartitionIsValidTraits_2.h",
+      "line": "18"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/is_y_monotone_2.h",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPartition2Ref": {
+      "kind": "group",
+      "name": "PkgPartition2Ref",
+      "brief": "",
+      "detailed": "Susan Hert This package provides functions for partitioning polygons in monotone or convex polygons. The algorithms can produce results with the minimal number of polygons, as well as approximations which have no more than four times the optimal number of convex pieces but they differ in their runtime complexities. Introduced in: CGAL 2.3 BibTeX: cgal:h-pp2-26a License: GPL Definitions A partition of a polygon is a set of polygons such that the interiors of the polygons do not intersect and the union of the polygons is equal to the interior of the original polygon. Functions are available for partitioning planar polygons into two types of subpolygons ( y -monotone polygons and convex polygons). The function that produces a y -monotone partitioning is based on the algorithm presented in [1] which requires $O(n \\log n)$ time and $O(n)$ space for a polygon with $ n $ vertices and guarantees nothing about the number of polygons produced with respect to the optimal number Three functions are provided for producing convex partitions. Two of these functions produce approximately optimal partitions and one results in an optimal partition, where optimal is defined in terms of the number of partition polygons. The two functions that implement approximation algorithms are guaranteed to produce no more than four times the optimal number of convex pieces. The optimal partitioning function provides an implementation of Greene's dynamic programming algorithm [2] , which requires $O(n^4)$ time and $O(n^3)$ space to produce a convex partitioning. One of the approximation algorithms is also due to Greene [2] and requires $O(n \\log n)$ time and $O(n)$ space to produce a convex partitioning given a y -monotone partitioning. The other approximation algorithm is a result of Hertel and Mehlhorn [3] , which requires $O(n)$ time and space to produce a convex partitioning from a triangulation of a polygon. Each of the partitioning functions uses a traits class to supply the primitive types and predicates used by the algorithms. Assertions The precondition checks for the planar polygon partitioning functions are: counterclockwise ordering of the input vertices and simplicity of the polygon these vertices represent. The postcondition checks are: simplicity, counterclockwise orientation, and convexity (or $ y$ -monotonicity) of the partition polygons and validity of the partition ( i.e. , the partition polygons are nonoverlapping and the union of these polygons is the same as the original polygon). Classified Reference Pages Concepts ConvexPartitionIsValidTraits_2 IsYMonotoneTraits_2 OptimalConvexPartitionTraits_2 PartitionTraits_2 PartitionIsValidTraits_2 YMonotonePartitionIsValidTraits_2 Function Object Concepts PolygonIsValid Classes CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > CGAL::Partition_traits_2 <R,P> Function Object Classes CGAL::Is_convex_2 <Traits> CGAL::Is_vacuously_valid <Traits> CGAL::Is_y_monotone_2 <Traits> Functions CGAL::approx_convex_partition_2() CGAL::convex_partition_is_valid_2() CGAL::greene_approx_convex_partition_2() CGAL::is_y_monotone_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::y_monotone_partition_2() CGAL::y_monotone_partition_is_valid_2()",
+      "members": [
+        {
+          "kind": "function",
+          "name": "is_y_monotone_2",
+          "qualified_name": "CGAL::is_y_monotone_2",
+          "brief": "determines if the sequence of points in the range [ first , beyond ) defines a $ y$ -monotone polygon or not.",
+          "detailed": "If so, the function returns true , otherwise it returns false . Requires Traits is a model of the concept IsYMonotoneTraits_2 . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 . The default traits class Default_traits is the kernel in which the type std::iterator_traits<InputIterator>::value_type is defined. CGAL::Is_y_monotone_2 <Traits> CGAL::y_monotone_partition_2() CGAL::y_monotone_partition_is_valid_2() Implementation This function requires $O(n)$ time for a polygon with $ n$ vertices. Example The following program computes a $ y$ -monotone partitioning of a polygon using the default traits class and stores the partition polygons in the list partition_polys . It then asserts that each of the partition polygons is, in fact, a $ y$ -monotone polygon and that the partition is valid. (Note that the assertions are superfluous unless the postcondition checking done by y_monotone_partition_2() has been turned off during compilation.) Example: Partition_2/y_monotone_partition_2.cpp Show / Hide #include <CGAL/Exact_predicates_inexact_constructions_kernel.h> #include <CGAL/Partition_traits_2.h> #include <CGAL/partition_2.h> #include <cassert> #include <list> typedef CGAL::Exact_predicates_inexact_constructions_kernel K; typedef CGAL::Partition_traits_2<K> Traits; typedef Traits::Point_2 Point_2; typedef Traits::Polygon_2 Polygon_2; typedef std::list<Polygon_2> Polygon_list; void make_polygon(Polygon_2& polygon) { polygon.push_back(Point_2(391, 374)); polygon.push_back(Point_2(240, 431)); polygon.push_back(Point_2(252, 340)); polygon.push_back(Point_2(374, 320)); polygon.push_back(Point_2(289, 214)); polygon.push_back(Point_2(134, 390)); polygon.push_back(Point_2( 68, 186)); polygon.push_back(Point_2(154, 259)); polygon.push_back(Point_2(161, 107)); polygon.push_back(Point_2(435, 108)); polygon.push_back(Point_2(208, 148)); polygon.push_back(Point_2(295, 160)); polygon.push_back(Point_2(421, 212)); polygon.push_back(Point_2(441, 303)); } int main( ) { Polygon_2 polygon; Polygon_list partition_polys; make_polygon(polygon); CGAL::y_monotone_partition_2 (polygon.vertices_begin(), polygon.vertices_end(), std::back_inserter(partition_polys)); std::list<Polygon_2>::const_iterator poly_it; for (poly_it = partition_polys.begin(); poly_it != partition_polys.end(); poly_it++) { assert( CGAL::is_y_monotone_2 ((*poly_it).vertices_begin(), (*poly_it).vertices_end())); } assert( CGAL::partition_is_valid_2 (polygon.vertices_begin(), polygon.vertices_end(), partition_polys.begin(), partition_polys.end())); return 0; }",
+          "return_type": "bool",
+          "definition": "bool CGAL::is_y_monotone_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, const Traits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/is_y_monotone_2.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "approx_convex_partition_2",
+          "qualified_name": "CGAL::approx_convex_partition_2",
+          "brief": "computes a partition of the polygon defined by the points in the range [ first , beyond ) into convex polygons.",
+          "detailed": "The counterclockwise-oriented partition polygons are written to the sequence starting at position result . The past-the-end iterator for the resulting sequence of polygons is returned. The number of convex polygons produced is no more than four times the minimal number. The points in the range [ first , beyond ) define a simple counterclockwise-oriented polygon. Requirements Traits is a model of the concept PartitionTraits_2 and, for the purposes of checking the postcondition that the partition produced is valid, it should also be a model of the concept ConvexPartitionIsValidTraits_2 . std::iterator_traits<OutputIterator>::value_type should be Traits::Polygon_2 . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 , which should also be the type of the points stored in an object of type Traits::Polygon_2 . Points in the range [first, beyond) must define a simple polygon whose vertices are oriented counterclockwise. The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator1>::value_type . CGAL::convex_partition_is_valid_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > CGAL::y_monotone_partition_2() Implementation This function implements the algorithm of Hertel and Mehlhorn [3] and is based on the class Constrained_triangulation_2 . Given a triangulation of the polygon, the function requires $O(n)$ time and space for a polygon with $ n$ vertices. Example The following program computes an approximately optimal convex partitioning of a polygon using the default traits class and stores the partition polygons in the list partition_polys . Example: Partition_2/approx_convex_partition_2.cpp Show / Hide #include <CGAL/Exact_predicates_inexact_constructions_kernel.h> #include <CGAL/Partition_traits_2.h> #include <CGAL/partition_2.h> #include <cassert> #include <list> typedef CGAL::Exact_predicates_inexact_constructions_kernel K; typedef CGAL::Partition_traits_2<K> Traits; typedef Traits::Point_2 Point_2; typedef Traits::Polygon_2 Polygon_2; typedef std::list<Polygon_2> Polygon_list; void make_polygon(Polygon_2& polygon) { polygon.push_back(Point_2(391, 374)); polygon.push_back(Point_2(240, 431)); polygon.push_back(Point_2(252, 340)); polygon.push_back(Point_2(374, 320)); polygon.push_back(Point_2(289, 214)); polygon.push_back(Point_2(134, 390)); polygon.push_back(Point_2( 68, 186)); polygon.push_back(Point_2(154, 259)); polygon.push_back(Point_2(161, 107)); polygon.push_back(Point_2(435, 108)); polygon.push_back(Point_2(208, 148)); polygon.push_back(Point_2(295, 160)); polygon.push_back(Point_2(421, 212)); polygon.push_back(Point_2(441, 303)); } int main() { Polygon_2 polygon; Polygon_list partition_polys; make_polygon(polygon); CGAL::approx_convex_partition_2 (polygon.vertices_begin(), polygon.vertices_end(), std::back_inserter(partition_polys)); assert( CGAL::convex_partition_is_valid_2 (polygon.vertices_begin(), polygon.vertices_end(), partition_polys.begin(), partition_polys.end())); return 0; }",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::approx_convex_partition_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_2.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "greene_approx_convex_partition_2",
+          "qualified_name": "CGAL::greene_approx_convex_partition_2",
+          "brief": "computes a partition of the polygon defined by the points in the range [ first , beyond ) into convex polygons.",
+          "detailed": "The counterclockwise-oriented partition polygons are written to the sequence starting at position result . The number of convex polygons produced is no more than four times the minimal number. The past-the-end iterator for the resulting sequence of polygons is returned. The points in the range [ first , beyond ) define a simple, counterclockwise-oriented polygon. Requirements Traits is a model of the concepts PartitionTraits_2 . For the purpose of checking the validity of the $ y$ -monotone partition produced as a preprocessing step for the convex partitioning, it must also be a model of YMonotonePartitionIsValidTraits_2 . For the purpose of checking the postcondition that the convex partition is valid, Traits must also be a model of ConvexPartitionIsValidTraits_2 . std::iterator_traits<OutputIterator>::value_type is equivalent to Traits::Polygon_2 . std::iterator_traits<InputIterator>::value_type is equivalent to Traits::Point_2 , which should also be equivalent to the type of the points stored in an object of type Traits::Polygon_2 . The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator>::value_type . CGAL::approx_convex_partition_2() CGAL::convex_partition_is_valid_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::y_monotone_partition_2() Implementation This function implements the approximation algorithm of Greene [2] and requires $O(n \\log n)$ time and $O(n)$ space to produce a convex partitioning given a $ y$ -monotone partitioning of a polygon with $ n$ vertices. The function y_monotone_partition_2() is used to produce the monotone partition. Example The following program computes an approximately optimal convex partitioning of a polygon using the default traits class and stores the partition polygons in the list partition_polys . Example: Partition_2/greene_approx_convex_partition_2.cpp Show / Hide #include <CGAL/Exact_predicates_inexact_constructions_kernel.h> #include <CGAL/Partition_traits_2.h> #include <CGAL/partition_2.h> #include <cassert> #include <list> typedef CGAL::Exact_predicates_inexact_constructions_kernel K; typedef CGAL::Partition_traits_2<K> Traits; typedef Traits::Point_2 Point_2; typedef Traits::Polygon_2 Polygon_2; typedef std::list<Polygon_2> Polygon_list; void make_polygon(Polygon_2& polygon) { polygon.push_back(Point_2(391, 374)); polygon.push_back(Point_2(240, 431)); polygon.push_back(Point_2(252, 340)); polygon.push_back(Point_2(374, 320)); polygon.push_back(Point_2(289, 214)); polygon.push_back(Point_2(134, 390)); polygon.push_back(Point_2( 68, 186)); polygon.push_back(Point_2(154, 259)); polygon.push_back(Point_2(161, 107)); polygon.push_back(Point_2(435, 108)); polygon.push_back(Point_2(208, 148)); polygon.push_back(Point_2(295, 160)); polygon.push_back(Point_2(421, 212)); polygon.push_back(Point_2(441, 303)); } int main() { Polygon_2 polygon; Polygon_list partition_polys; make_polygon(polygon); CGAL::greene_approx_convex_partition_2 (polygon.vertices_begin(), polygon.vertices_end(), std::back_inserter(partition_polys)); assert( CGAL::convex_partition_is_valid_2 (polygon.vertices_begin(), polygon.vertices_end(), partition_polys.begin(), partition_polys.end())); return 0; }",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::greene_approx_convex_partition_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_2.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_convex_partition_2",
+          "qualified_name": "CGAL::optimal_convex_partition_2",
+          "brief": "computes a partition of the polygon defined by the points in the range [ first , beyond ) into convex polygons.",
+          "detailed": "The counterclockwise-oriented partition polygons are written to the sequence starting at position result . The number of convex polygons produced is minimal. The past-the-end iterator for the resulting sequence of polygons is returned. The points in the range [ first , beyond ) define a simple, counterclockwise-oriented polygon. Requirements Traits is a model of the concept OptimalConvexPartitionTraits_2 . For the purposes of checking the postcondition that the partition is valid, Traits should also be a model of ConvexPartitionIsValidTraits_2 . std::iterator_traits<OutputIterator>::value_type should be Traits::Polygon_2 . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 , which should also be the type of the points stored in an object of type Traits::Polygon_2 . The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator>::value_type . CGAL::approx_convex_partition_2() CGAL::convex_partition_is_valid_2() CGAL::greene_approx_convex_partition_2() CGAL::partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > Implementation This function implements the dynamic programming algorithm of Greene [2] , which requires $O(n^4)$ time and $O(n^3)$ space to produce a partitioning of a polygon with $ n$ vertices. Example The following program computes an optimal convex partitioning of a polygon using the default traits class and stores the partition polygons in the list partition_polys . It then asserts that the partition produced is valid. The traits class used for testing the validity is derived from the traits class used to produce the partition with the function object class Is_convex_2 used to define the required Is_valid type. (Note that this assertion is superfluous unless the postcondition checking for optimal_convex_partition_2() has been turned off.) Example: Partition_2/optimal_convex_partition_2.cpp Show / Hide #include <CGAL/Exact_predicates_inexact_constructions_kernel.h> #include <CGAL/Partition_traits_2.h> #include <CGAL/partition_2.h> #include <cassert> #include <list> typedef CGAL::Exact_predicates_inexact_constructions_kernel K; typedef CGAL::Partition_traits_2<K> Traits; typedef Traits::Polygon_2 Polygon_2; typedef Traits::Point_2 Point_2; typedef std::list<Polygon_2> Polygon_list; void make_polygon(Polygon_2& polygon) { polygon.push_back(Point_2(391, 374)); polygon.push_back(Point_2(240, 431)); polygon.push_back(Point_2(252, 340)); polygon.push_back(Point_2(374, 320)); polygon.push_back(Point_2(289, 214)); polygon.push_back(Point_2(134, 390)); polygon.push_back(Point_2( 68, 186)); polygon.push_back(Point_2(154, 259)); polygon.push_back(Point_2(161, 107)); polygon.push_back(Point_2(435, 108)); polygon.push_back(Point_2(208, 148)); polygon.push_back(Point_2(295, 160)); polygon.push_back(Point_2(421, 212)); polygon.push_back(Point_2(441, 303)); } int main() { Polygon_2 polygon; Polygon_list partition_polys; make_polygon(polygon); CGAL::optimal_convex_partition_2 (polygon.vertices_begin(), polygon.vertices_end(), std::back_inserter(partition_polys)); assert( CGAL::partition_is_valid_2 (polygon.vertices_begin(), polygon.vertices_end(), partition_polys.begin(), partition_polys.end())); return 0; }",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::optimal_convex_partition_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_2.h",
+          "line": "210"
+        },
+        {
+          "kind": "function",
+          "name": "y_monotone_partition_2",
+          "qualified_name": "CGAL::y_monotone_partition_2",
+          "brief": "computes a partition of the polygon defined by the points in the range [ first , beyond ) into $ y$ -monotone polygons.",
+          "detailed": "The counterclockwise-oriented partition polygons are written to the sequence starting at position result . The past-the-end iterator for the resulting sequence of polygons is returned. The points in the range [ first , beyond ) define a simple, counterclockwise-oriented polygon. Requirements Traits is a model of the concept PartitionTraits_2 and, for the purposes of checking the postcondition that the partition is valid, it should also be a model of YMonotonePartitionIsValidTraits_2 . std::iterator_traits<OutputIterator>::value_type should be Traits::Polygon_2 . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 , which should also be the type of the points stored in an object of type Traits::Polygon_2 . The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator>::value_type . CGAL::approx_convex_partition_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::y_monotone_partition_is_valid_2() Implementation This function implements the algorithm presented by de Berg et al. [1] which requires $O(n \\log n)$ time and $O(n)$ space for a polygon with $ n$ vertices. Example The following program computes a $ y$ -monotone partitioning of a polygon using the default traits class and stores the partition polygons in the list partition_polys . It then asserts that each partition polygon produced is, in fact, $ y$ -monotone and that the partition is valid. (Note that these assertions are superfluous unless the postcondition checking for y_monotone_partition_2() has been turned off.) Example: Partition_2/y_monotone_partition_2.cpp Show / Hide #include <CGAL/Exact_predicates_inexact_constructions_kernel.h> #include <CGAL/Partition_traits_2.h> #include <CGAL/partition_2.h> #include <cassert> #include <list> typedef CGAL::Exact_predicates_inexact_constructions_kernel K; typedef CGAL::Partition_traits_2<K> Traits; typedef Traits::Point_2 Point_2; typedef Traits::Polygon_2 Polygon_2; typedef std::list<Polygon_2> Polygon_list; void make_polygon(Polygon_2& polygon) { polygon.push_back(Point_2(391, 374)); polygon.push_back(Point_2(240, 431)); polygon.push_back(Point_2(252, 340)); polygon.push_back(Point_2(374, 320)); polygon.push_back(Point_2(289, 214)); polygon.push_back(Point_2(134, 390)); polygon.push_back(Point_2( 68, 186)); polygon.push_back(Point_2(154, 259)); polygon.push_back(Point_2(161, 107)); polygon.push_back(Point_2(435, 108)); polygon.push_back(Point_2(208, 148)); polygon.push_back(Point_2(295, 160)); polygon.push_back(Point_2(421, 212)); polygon.push_back(Point_2(441, 303)); } int main( ) { Polygon_2 polygon; Polygon_list partition_polys; make_polygon(polygon); CGAL::y_monotone_partition_2 (polygon.vertices_begin(), polygon.vertices_end(), std::back_inserter(partition_polys)); std::list<Polygon_2>::const_iterator poly_it; for (poly_it = partition_polys.begin(); poly_it != partition_polys.end(); poly_it++) { assert( CGAL::is_y_monotone_2 ((*poly_it).vertices_begin(), (*poly_it).vertices_end())); } assert( CGAL::partition_is_valid_2 (polygon.vertices_begin(), polygon.vertices_end(), partition_polys.begin(), partition_polys.end())); return 0; }",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::y_monotone_partition_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_2.h",
+          "line": "274"
+        },
+        {
+          "kind": "function",
+          "name": "convex_partition_is_valid_2",
+          "qualified_name": "CGAL::convex_partition_is_valid_2",
+          "brief": "determines if the polygons in the range [ poly_first , poly_beyond ) define a valid convex partition of the polygon defined by the points in the range [ point_first , point_beyond ).",
+          "detailed": "A convex partition is valid if the polygons do not overlap, the union of the polygons is the same as the original polygon given by the sequence of points, and if each partition polygon is convex. The function returns true iff the partition is valid and otherwise returns false . The points in the range [ point_first , point_beyond ) define a simple, counterclockwise-oriented polygon. Requires Traits is a model of the concept ConvexPartitionIsValidTraits_2 . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 , which should also be the type of the points stored in an object of type Traits::Polygon_2 . std::iterator_traits<ForwardIterator>::value_type should be Traits::Polygon_2 . The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator>::value_type . CGAL::approx_convex_partition_2() CGAL::greene_approx_convex_partition_2() CGAL::optimal_convex_partition_2() CGAL::partition_is_valid_2() CGAL::Is_convex_2 Implementation This function calls partition_is_valid_2() using the function object Is_convex_2 to determine the convexity of each partition polygon. Thus the time required by this function is $O(n \\log n + e \\log e)$ where $ n$ is the total number of vertices in the partition polygons and $ e$ the total number of edges. Example See the example presented with the function approx_convex_partition_2() for an illustration of the use of this function.",
+          "return_type": "bool",
+          "definition": "bool CGAL::convex_partition_is_valid_2",
+          "argsstring": "(InputIterator point_first, InputIterator point_beyond, ForwardIterator poly_first, ForwardIterator poly_beyond, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "point_first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "point_beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "poly_first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "poly_beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_is_valid_2.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "partition_is_valid_2",
+          "qualified_name": "CGAL::partition_is_valid_2",
+          "brief": "returns true iff the polygons in the range [ poly_first , poly_beyond ) define a valid partition of the polygon defined by the points in the range [ point_first , point_beyond ) and false otherwise.",
+          "detailed": "A valid partition is one in which the polygons are nonoverlapping and the union of the polygons is the same as the original polygon. Each polygon must also satisfy the property tested by Traits::Is_valid() . The points in the range [ point_first , point_beyond ) define a simple, counterclockwise-oriented polygon. Requires Traits is a model of the concept PartitionIsValidTraits_2 and the concept defining the requirements for the validity test implemented by Traits::Is_valid() . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 , which should also be the type of the points stored in an object of type Traits::Polygon_2 . std::iterator_traits<ForwardIterator>::value_type should be Traits::Polygon_2 . The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator>::value_type . CGAL::approx_convex_partition_2() CGAL::greene_approx_convex_partition_2() CGAL::is_y_monotone_2() CGAL::optimal_convex_partition_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > CGAL::y_monotone_partition_2() CGAL::Is_convex_2 Implementation This function requires $O(n \\log n + e \\log e + \\Sigma_{i=1}^p m_i)$ where $ n$ is the total number of vertices of the $ p$ partition polygons, $ e$ is the total number of edges of the partition polygons and $ m_i$ is the time required by Traits::Is_valid() to test if partition polygon $ p_i$ is valid. Example See the example presented with the function optimal_convex_partition_2() for an illustration of the use of this function.",
+          "return_type": "bool",
+          "definition": "bool CGAL::partition_is_valid_2",
+          "argsstring": "(InputIterator point_first, InputIterator point_beyond, ForwardIterator poly_first, ForwardIterator poly_beyond, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "point_first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "point_beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "poly_first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "poly_beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_is_valid_2.h",
+          "line": "119"
+        },
+        {
+          "kind": "function",
+          "name": "y_monotone_partition_is_valid_2",
+          "qualified_name": "CGAL::y_monotone_partition_is_valid_2",
+          "brief": "determines if the polygons in the range [ poly_first , poly_beyond ) define a valid $ y$ -monotone partition of the simple, counterclockwise-oriented polygon represented by the points in the range [ point_first , point_beyond ).",
+          "detailed": "A valid partition is one in which the polygons are nonoverlapping and the union of the polygons is the same as the original polygon and each polygon is $ y$ -monotone The function returns true iff the partition is valid and otherwise returns false . Requires Traits is a model of the concept YMonotonePartitionIsValidTraits_2 . std::iterator_traits<InputIterator>::value_type should be Traits::Point_2 , which should also be the type of the points stored in an object of type Traits::Polygon_2 . std::iterator_traits<ForwardIterator>::value_type should be Traits::Polygon_2 . The default traits class Default_traits is Partition_traits_2 , with the representation type determined by std::iterator_traits<InputIterator>::value_type . CGAL::y_monotone_partition_2() CGAL::is_y_monotone_2() CGAL::partition_is_valid_2() CGAL::Partition_is_valid_traits_2 <Traits, PolygonIsValid > Implementation This function uses the function partition_is_valid_2() together with the function object Is_y_monotone_2 to determine if each polygon is $ y$ -monotone or not. Thus the time required is $O(n \\log n + e \\log e)$ where $ n$ is the total number of vertices of the partition polygons and $ e$ is the total number of edges. Example See the example presented with the function y_monotone_partition_2() for an illustration of the use of this function.",
+          "return_type": "bool",
+          "definition": "bool CGAL::y_monotone_partition_is_valid_2",
+          "argsstring": "(InputIterator point_first, InputIterator point_beyond, ForwardIterator poly_first, ForwardIterator poly_beyond, const Traits &traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "point_first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "point_beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "poly_first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "poly_beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/partition_is_valid_2.h",
+          "line": "177"
+        }
+      ],
+      "xml_file": "group___pkg_partition2_ref.xml"
+    },
+    "PkgPartition2Concepts": {
+      "kind": "group",
+      "name": "PkgPartition2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_partition2_concepts.xml"
+    },
+    "PkgPartition2FunctionObjectConcepts": {
+      "kind": "group",
+      "name": "PkgPartition2FunctionObjectConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_partition2_function_object_concepts.xml"
+    },
+    "PkgPartition2FunctionObjectClasses": {
+      "kind": "group",
+      "name": "PkgPartition2FunctionObjectClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_partition2_function_object_classes.xml"
+    }
+  }
+}

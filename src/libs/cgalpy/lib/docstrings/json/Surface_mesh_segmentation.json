@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "package": "Surface_mesh_segmentation",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 6,
+  "skipped_count": 0,
+  "compounds": {
+    "SegmentationGeomTraits": {
+      "kind": "class",
+      "name": "SegmentationGeomTraits",
+      "brief": "The concept SegmentationGeomTraits describes the set of requirements of the geometric traits needed by the segmentation functions.",
+      "detailed": "Has models All models of the CGAL concept Kernel Refines AABBGeomTraits_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "SegmentationGeomTraits::FT",
+          "brief": "A number type model of FieldNumberType for which an overload of the function to_double() is defined.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Number Type",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "24"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "SegmentationGeomTraits::Point_3",
+          "brief": "The point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "SegmentationGeomTraits::Vector_3",
+          "brief": "The vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment_3",
+          "qualified_name": "SegmentationGeomTraits::Segment_3",
+          "brief": "The segment type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Segment_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Plane_3",
+          "qualified_name": "SegmentationGeomTraits::Plane_3",
+          "brief": "The plane type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Plane_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "Ray_3",
+          "qualified_name": "SegmentationGeomTraits::Ray_3",
+          "brief": "The ray type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Ray_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "Angle_3",
+          "qualified_name": "SegmentationGeomTraits::Angle_3",
+          "brief": "Function object model of Kernel::Angle_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Angle_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "63"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_scalar_product_3",
+          "qualified_name": "SegmentationGeomTraits::Compute_scalar_product_3",
+          "brief": "Function object model of Kernel::ComputeScalarProduct_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Compute_scalar_product_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "68"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_3",
+          "qualified_name": "SegmentationGeomTraits::Compute_squared_distance_3",
+          "brief": "Function object model of Kernel::ComputeSquaredDistance_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Compute_squared_distance_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "73"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_cross_product_vector_3",
+          "qualified_name": "SegmentationGeomTraits::Construct_cross_product_vector_3",
+          "brief": "Function object model of Kernel::ConstructCrossProductVector_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Construct_cross_product_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_normal_3",
+          "qualified_name": "SegmentationGeomTraits::Construct_normal_3",
+          "brief": "Function object model of Kernel::ConstructNormal_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Construct_normal_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "83"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_centroid_3",
+          "qualified_name": "SegmentationGeomTraits::Construct_centroid_3",
+          "brief": "Function object model of Kernel::ConstructCentroid_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Construct_centroid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "88"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_translated_point_3",
+          "qualified_name": "SegmentationGeomTraits::Construct_translated_point_3",
+          "brief": "Function object model of Kernel::ConstructTranslatedPoint_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Construct_translated_point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "93"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_3",
+          "qualified_name": "SegmentationGeomTraits::Construct_scaled_vector_3",
+          "brief": "Function object model of Kernel::ConstructScaledVector_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Construct_scaled_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_of_vectors_3",
+          "qualified_name": "SegmentationGeomTraits::Construct_sum_of_vectors_3",
+          "brief": "Function object model of Kernel::ConstructSumOfVectors_3 for the aforementioned geometric types.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SegmentationGeomTraits::Construct_sum_of_vectors_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Function Object Types",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "collinear_3_object",
+          "qualified_name": "SegmentationGeomTraits::collinear_3_object",
+          "brief": "For each of the above function and predicate object types, Func_obj_type , a function must exist with the name func_obj_type_object that creates an instance of the function or predicate object type.",
+          "detailed": "For example:",
+          "return_type": "Collinear_3",
+          "definition": "Collinear_3 SegmentationGeomTraits::collinear_3_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "128"
+        }
+      ],
+      "xml_file": "class_segmentation_geom_traits.xml",
+      "file": "Concepts/SegmentationGeomTraits.h",
+      "line": "16"
+    },
+    "SegmentationGeomTraits::Collinear_3": {
+      "kind": "class",
+      "name": "SegmentationGeomTraits::Collinear_3",
+      "brief": "Function object model of Kernel::Collinear_3 for the aforementioned geometric types.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "SegmentationGeomTraits::Collinear_3::operator()",
+          "brief": "determines if points p , q and r are collinear.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool SegmentationGeomTraits::Collinear_3::operator()",
+          "argsstring": "(const Point_3 &p, const Point_3 &q, const Point_3 &r)",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point_3 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/SegmentationGeomTraits.h",
+          "line": "112"
+        }
+      ],
+      "xml_file": "class_segmentation_geom_traits_1_1_collinear__3.xml",
+      "file": "Concepts/SegmentationGeomTraits.h",
+      "line": "108"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Surface_Mesh_Segmentation.txt",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgSurfaceMeshSegmentationRef": {
+      "kind": "group",
+      "name": "PkgSurfaceMeshSegmentationRef",
+      "brief": "",
+      "detailed": "Ilker O. Yaz and Sébastien Loriot This package provides a method to generate a segmentation of a triangulated surface mesh. The algorithm first computes the Shape Diameter Function (SDF) for all facets and applies a graph-cut based algorithm over these values. Low level functions are provided to replace any intermediate step by a custom one. Introduced in: CGAL 4.4 Depends on: PkgAABBTree BibTeX: cgal:y-smsimpl-26a License: GPL Windows Demo: CGAL Lab Classified Reference Pages Concepts # SegmentationGeomTraits Main Functions # CGAL::sdf_values() # CGAL::sdf_values_postprocessing() # CGAL::segmentation_from_sdf_values() # CGAL::segmentation_via_sdf_values()",
+      "members": [
+        {
+          "kind": "function",
+          "name": "sdf_values",
+          "qualified_name": "CGAL::sdf_values",
+          "brief": "Function computing the Shape Diameter Function over a surface mesh.",
+          "detailed": "This function implements the Shape Diameter Function (SDF) as described in [4] . It is possible to compute raw SDF values (without postprocessing). In such a case, -1 is used to indicate when no SDF value could be computed for a facet. CGAL::is_triangle_mesh(tmesh) TriangleMesh a model of FaceListGraph SDFPropertyMap a ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and double as value type GeomTraits a model of SegmentationGeomTraits PointPropertyMap a ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and GeomTraits::Point_3 as value type. triangle_mesh surface mesh on which SDF values are computed sdf_values_map the SDF value of each facet cone_angle opening angle in radians for the cone of each facet number_of_rays number of rays picked in the cone of each facet. In our experiments, we observe that increasing the number of rays beyond the default has little effect on the quality of the segmentation result postprocess if true , CGAL::sdf_values_postprocessing() is called on raw SDF value computed. traits traits class ppmap point property map. An overload is provided with get(boost::vertex_point,triangle_mesh) as default. minimum and maximum raw SDF values if postprocess is true , otherwise minimum and maximum SDF values (before linear normalization)",
+          "return_type": "std::pair< double, double >",
+          "definition": "std::pair< double, double > CGAL::sdf_values",
+          "argsstring": "(const TriangleMesh &triangle_mesh, SDFPropertyMap sdf_values_map, double cone_angle=2.0/3.0 *CGAL_PI, std::size_t number_of_rays=25, bool postprocess=true, PointPropertyMap ppmap=PointPropertyMap(), GeomTraits traits=GeomTraits())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "triangle_mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SDFPropertyMap",
+              "name": "sdf_values_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "cone_angle",
+              "default": "2.0/3.0 *CGAL_PI",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "number_of_rays",
+              "default": "25",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "postprocess",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointPropertyMap",
+              "name": "ppmap",
+              "default": "PointPropertyMap()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GeomTraits",
+              "name": "traits",
+              "default": "GeomTraits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/mesh_segmentation.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "sdf_values_postprocessing",
+          "qualified_name": "CGAL::sdf_values_postprocessing",
+          "brief": "Function postprocessing raw SDF values computed per facet.",
+          "detailed": "Postprocessing steps applied : Facets with -1 SDF values are assigned the average SDF value of their edge-adjacent neighbors. If there is still a facet having -1 SDF value, the minimum valid SDF value assigned to it. Note that this step is not inherited from the paper. The main reason for not assigning 0 to facets with no SDF values (i.e., -1) is that it can obstruct log-normalization process which takes place at the beginning of CGAL::segmentation_from_sdf_values() . SDF values are smoothed with bilateral filtering. SDF values are linearly normalized between [0,1]. See the section Postprocessing of Raw SDF Values for more details. CGAL::is_triangle_mesh(tmesh) Raw values should be greater or equal to 0. -1 indicates when no value could be computed TriangleMesh a model of FaceListGraph SDFPropertyMap a ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and double as value type triangle_mesh surface mesh on which SDF values are computed sdf_values_map the SDF value of each facet minimum and maximum SDF values before linear normalization",
+          "return_type": "std::pair< double, double >",
+          "definition": "std::pair< double, double > CGAL::sdf_values_postprocessing",
+          "argsstring": "(const TriangleMesh &triangle_mesh, SDFPropertyMap sdf_values_map)",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "triangle_mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SDFPropertyMap",
+              "name": "sdf_values_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/mesh_segmentation.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "segmentation_from_sdf_values",
+          "qualified_name": "CGAL::segmentation_from_sdf_values",
+          "brief": "Function computing the segmentation of a surface mesh given an SDF value per facet.",
+          "detailed": "This function fills a property map which associates a segment-id (in [0, number of segments -1]) or a cluster-id (in [0, number_of_clusters -1]) to each facet. A segment is a set of connected facets which are placed under the same cluster (see fig__Cluster_vs_segment ). Log-normalization is applied on sdf_values_map before segmentation. As described in the original paper [4] , this normalization is done to preserve thin parts of the mesh by increasing the distance between smaller SDF values and reducing it between larger ones. There is no direct relation between the parameter number_of_clusters and the final number of segments after segmentation. However, setting a large number of clusters will result in a detailed segmentation of the mesh with a large number of segments. CGAL::is_triangle_mesh(tmesh) number_of_clusters > 0 TriangleMesh a model of FaceListGraph SDFPropertyMap a ReadablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and double as value type SegmentPropertyMap a ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and std::size_t as value type GeomTraits a model of SegmentationGeomTraits PointPropertyMap a ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and GeomTraits::Point_3 as value type. triangle_mesh surface mesh corresponding to the SDF values sdf_values_map the SDF value of each facet between [0-1] segment_ids the segment or cluster id of each facet number_of_clusters number of clusters for the soft clustering smoothing_lambda factor which indicates the importance of the surface features for the energy minimization. It is recommended to choose a value in the interval [0,1]. See the section Hard clustering for more details. output_cluster_ids if false fill segment_ids with segment-ids, and with cluster-ids otherwise (see fig__Cluster_vs_segment ) traits traits class ppmap point property map. An overload is provided with get(boost::vertex_point,triangle_mesh) as default. number of segments if output_cluster_ids is set to false and number_of_clusters otherwise",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::segmentation_from_sdf_values",
+          "argsstring": "(const TriangleMesh &triangle_mesh, SDFPropertyMap sdf_values_map, SegmentPropertyMap segment_ids, std::size_t number_of_clusters=5, double smoothing_lambda=0.26, bool output_cluster_ids=false, PointPropertyMap ppmap=PointPropertyMap(), GeomTraits traits=GeomTraits())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "triangle_mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SDFPropertyMap",
+              "name": "sdf_values_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SegmentPropertyMap",
+              "name": "segment_ids",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "number_of_clusters",
+              "default": "5",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "smoothing_lambda",
+              "default": "0.26",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "output_cluster_ids",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointPropertyMap",
+              "name": "ppmap",
+              "default": "PointPropertyMap()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GeomTraits",
+              "name": "traits",
+              "default": "GeomTraits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/mesh_segmentation.h",
+          "line": "191"
+        },
+        {
+          "kind": "function",
+          "name": "segmentation_via_sdf_values",
+          "qualified_name": "CGAL::segmentation_via_sdf_values",
+          "brief": "Function computing the segmentation of a surface mesh.",
+          "detailed": "This function is equivalent to calling the functions CGAL::sdf_values() and CGAL::segmentation_from_sdf_values() with the same parameters. There is no direct relation between the parameter number_of_clusters and the final number of segments after segmentation. However, setting a large number of clusters will result in a detailed segmentation of the mesh with a large number of segments. For computing segmentations of the mesh with different parameters (i.e. number of levels, and smoothing lambda), it is more efficient to first compute the SDF values using CGAL::sdf_values() and use them in different calls to CGAL::segmentation_from_sdf_values() . CGAL::is_triangle_mesh(tmesh) number_of_clusters > 0 TriangleMesh a model of FaceListGraph SegmentPropertyMap a ReadWritePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and std::size_t as value type GeomTraits a model of SegmentationGeomTraits PointPropertyMap a ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and GeomTraits::Point_3 as value type. triangle_mesh surface mesh on which SDF values are computed segment_ids the segment or cluster id of each facet cone_angle opening angle in radians for the cone of each facet number_of_rays number of rays picked in the cone of each facet. In our experiments, we observe that increasing the number of rays beyond the default has a little effect on the quality of the segmentation result number_of_clusters number of clusters for the soft clustering smoothing_lambda factor which indicates the importance of the surface features for the energy minimization. It is recommended to choose a value in the interval [0,1]. See the section Hard clustering for more details. output_cluster_ids if false fill segment_ids with segment-ids, and with cluster-ids otherwise (see fig__Cluster_vs_segment ) traits traits class ppmap point property map. An overload is provided with get(boost::vertex_point,triangle_mesh) as default. number of segments if output_cluster_ids is set to false and number_of_clusters otherwise",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::segmentation_via_sdf_values",
+          "argsstring": "(const TriangleMesh &triangle_mesh, SegmentPropertyMap segment_ids, double cone_angle=2.0/3.0 *CGAL_PI, std::size_t number_of_rays=25, std::size_t number_of_clusters=5, double smoothing_lambda=0.26, bool output_cluster_ids=false, PointPropertyMap ppmap=PointPropertyMap(), GeomTraits traits=GeomTraits())",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "triangle_mesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SegmentPropertyMap",
+              "name": "segment_ids",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "cone_angle",
+              "default": "2.0/3.0 *CGAL_PI",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "number_of_rays",
+              "default": "25",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "number_of_clusters",
+              "default": "5",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "smoothing_lambda",
+              "default": "0.26",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "output_cluster_ids",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointPropertyMap",
+              "name": "ppmap",
+              "default": "PointPropertyMap()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GeomTraits",
+              "name": "traits",
+              "default": "GeomTraits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/mesh_segmentation.h",
+          "line": "286"
+        }
+      ],
+      "xml_file": "group___pkg_surface_mesh_segmentation_ref.xml"
+    },
+    "PkgSurfaceMeshSegmentationConcepts": {
+      "kind": "group",
+      "name": "PkgSurfaceMeshSegmentationConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_surface_mesh_segmentation_concepts.xml"
+    }
+  }
+}

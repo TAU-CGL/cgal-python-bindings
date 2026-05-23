@@ -1,0 +1,3232 @@
+{
+  "schema_version": 1,
+  "package": "Surface_mesh_approximation",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 14,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy": {
+      "kind": "class",
+      "name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy",
+      "brief": "Approximation L21 metric of vector proxy.",
+      "detailed": "Is model of ErrorMetricProxy TriangleMesh a triangle FaceGraph VertexPointMap a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type, GeomTraits::Point_3 as value type GeomTraits a model of Kernel",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Proxy",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Proxy",
+          "brief": "Proxy type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Vector_3",
+          "definition": "typedef GeomTraits::Vector_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Proxy",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "69"
+        },
+        {
+          "kind": "function",
+          "name": "L21_metric_plane_proxy",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::L21_metric_plane_proxy",
+          "brief": "Constructor.",
+          "detailed": "tm triangle mesh vpmap vertex point map",
+          "return_type": "",
+          "definition": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::L21_metric_plane_proxy",
+          "argsstring": "(const TriangleMesh &tm, const VertexPointMap &vpmap)",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const VertexPointMap &",
+              "name": "vpmap",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructor",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "79"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::FT",
+          "definition": "typedef GeomTraits::FT CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Vector_3",
+          "definition": "typedef GeomTraits::Vector_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Point_3",
+          "definition": "typedef GeomTraits::Point_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Construct_scaled_vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Construct_scaled_vector_3",
+          "definition": "typedef GeomTraits::Construct_scaled_vector_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Construct_scaled_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_of_vectors_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Construct_sum_of_vectors_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Construct_sum_of_vectors_3",
+          "definition": "typedef GeomTraits::Construct_sum_of_vectors_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Construct_sum_of_vectors_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "50"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_scalar_product_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Compute_scalar_product_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Compute_scalar_product_3",
+          "definition": "typedef GeomTraits::Compute_scalar_product_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Compute_scalar_product_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "51"
+        },
+        {
+          "kind": "typedef",
+          "name": "Collinear_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Collinear_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Collinear_3",
+          "definition": "typedef GeomTraits::Collinear_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Collinear_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "face_descriptor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::face_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::face_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::face_descriptor CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "halfedge_descriptor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::halfedge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::halfedge_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::halfedge_descriptor CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::halfedge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_normal_tag",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Face_normal_tag",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::dynamic_face_property_t< Vector_3 >",
+          "definition": "typedef CGAL::dynamic_face_property_t<Vector_3> CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Face_normal_tag",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_area_tag",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Face_area_tag",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::dynamic_face_property_t< FT >",
+          "definition": "typedef CGAL::dynamic_face_property_t<FT> CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Face_area_tag",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_normal_map",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Face_normal_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_map< TriangleMesh, Face_normal_tag >::type",
+          "definition": "typedef boost::property_map<TriangleMesh,Face_normal_tag>::type CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Face_normal_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_area_map",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Face_area_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_map< TriangleMesh, Face_area_tag >::type",
+          "definition": "typedef boost::property_map<TriangleMesh,Face_area_tag>::type CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Face_area_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "60"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangle_mesh",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::Triangle_mesh",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangleMesh",
+          "definition": "typedef TriangleMesh CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Triangle_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "62"
+        },
+        {
+          "kind": "variable",
+          "name": "m_fnmap",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::m_fnmap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Face_normal_map",
+          "definition": "Face_normal_map CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_fnmap",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "143"
+        },
+        {
+          "kind": "variable",
+          "name": "m_famap",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::m_famap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Face_area_map",
+          "definition": "Face_area_map CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_famap",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "144"
+        },
+        {
+          "kind": "variable",
+          "name": "m_scale_functor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::m_scale_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_3",
+          "definition": "Construct_scaled_vector_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_scale_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "145"
+        },
+        {
+          "kind": "variable",
+          "name": "m_scalar_product_functor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::m_scalar_product_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_scalar_product_3",
+          "definition": "Compute_scalar_product_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_scalar_product_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "146"
+        },
+        {
+          "kind": "variable",
+          "name": "m_sum_functor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::m_sum_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_sum_of_vectors_3",
+          "definition": "Construct_sum_of_vectors_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_sum_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "147"
+        },
+        {
+          "kind": "variable",
+          "name": "m_collinear_functor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::m_collinear_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Collinear_3",
+          "definition": "Collinear_3 CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_collinear_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "148"
+        },
+        {
+          "kind": "function",
+          "name": "compute_error",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::compute_error",
+          "brief": "computes the L2,1 error from a face to a proxy.",
+          "detailed": "tm input triangle mesh f face_descriptor of a face px proxy computed error",
+          "return_type": "FT",
+          "definition": "FT CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::compute_error",
+          "argsstring": "(const face_descriptor f, const TriangleMesh &tm, const Proxy &px) const",
+          "params": [
+            {
+              "type": "const face_descriptor",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Proxy &",
+              "name": "px",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "fit_proxy",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L21_metric_plane_proxy::fit_proxy",
+          "brief": "fits a proxy to a range of faces.",
+          "detailed": "FaceRange range of face descriptors, model of Range. faces the range of faces to be fitted tm input triangle mesh fitted proxy",
+          "return_type": "Proxy",
+          "definition": "Proxy CGAL::Surface_mesh_approximation::L21_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::fit_proxy",
+          "argsstring": "(const FaceRange &faces, const TriangleMesh &tm) const",
+          "params": [
+            {
+              "type": "const FaceRange &",
+              "name": "faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+          "line": "125"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_surface__mesh__approximation_1_1_l21__metric__plane__proxy.xml",
+      "file": "CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h",
+      "line": "45"
+    },
+    "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy": {
+      "kind": "class",
+      "name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy",
+      "brief": "Approximation L2 metric of plane proxy.",
+      "detailed": "Is model of ErrorMetricProxy TriangleMesh a triangle FaceGraph VertexPointMap a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type, GeomTraits::Point_3 as value type GeomTraits a model of Kernel",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Proxy",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::Proxy",
+          "brief": "Proxy type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Plane_3",
+          "definition": "typedef GeomTraits::Plane_3 CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Proxy",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "L2_metric_plane_proxy",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::L2_metric_plane_proxy",
+          "brief": "Constructor.",
+          "detailed": "tm triangle mesh vpmap vertex point map",
+          "return_type": "",
+          "definition": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::L2_metric_plane_proxy",
+          "argsstring": "(const TriangleMesh &tm, const VertexPointMap &vpmap)",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const VertexPointMap &",
+              "name": "vpmap",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructor",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "74"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::FT",
+          "definition": "typedef GeomTraits::FT CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Point_3",
+          "definition": "typedef GeomTraits::Point_3 CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangle_3",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::Triangle_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits::Triangle_3",
+          "definition": "typedef GeomTraits::Triangle_3 CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Triangle_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "face_descriptor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::face_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::face_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::face_descriptor CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "51"
+        },
+        {
+          "kind": "typedef",
+          "name": "halfedge_descriptor",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::halfedge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::halfedge_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::halfedge_descriptor CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::halfedge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_area_tag",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::Face_area_tag",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::dynamic_face_property_t< FT >",
+          "definition": "typedef CGAL::dynamic_face_property_t<FT> CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Face_area_tag",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_area_map",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::Face_area_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_map< TriangleMesh, Face_area_tag >::type",
+          "definition": "typedef boost::property_map<TriangleMesh,Face_area_tag>::type CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Face_area_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangle_mesh",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::Triangle_mesh",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangleMesh",
+          "definition": "typedef TriangleMesh CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::Triangle_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "57"
+        },
+        {
+          "kind": "variable",
+          "name": "m_tm",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::m_tm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const TriangleMesh *",
+          "definition": "const TriangleMesh* CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_tm",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "150"
+        },
+        {
+          "kind": "variable",
+          "name": "m_vpmap",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::m_vpmap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const VertexPointMap",
+          "definition": "const VertexPointMap CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_vpmap",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "151"
+        },
+        {
+          "kind": "variable",
+          "name": "m_famap",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::m_famap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Face_area_map",
+          "definition": "Face_area_map CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::m_famap",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "152"
+        },
+        {
+          "kind": "function",
+          "name": "compute_error",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::compute_error",
+          "brief": "computes the L21 error from a face to a proxy, using integral (closed-form) computation.",
+          "detailed": "tm input triangle mesh f face_descriptor of a face px proxy computed error",
+          "return_type": "FT",
+          "definition": "FT CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::compute_error",
+          "argsstring": "(const face_descriptor f, const TriangleMesh &tm, const Proxy &px) const",
+          "params": [
+            {
+              "type": "const face_descriptor",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Proxy &",
+              "name": "px",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "fit_proxy",
+          "qualified_name": "CGAL::Surface_mesh_approximation::L2_metric_plane_proxy::fit_proxy",
+          "brief": "fits a proxy from a range of faces, in the L2 sense, with an integral (closed-form) formulation.",
+          "detailed": "The best-fit plane passes through the center of mass and is defined by the two principal components of the integral covariance matrix. FaceRange range of face descriptors, model of Range. faces the range of faces to be fitted tm input triangle mesh fitted proxy",
+          "return_type": "Proxy",
+          "definition": "Proxy CGAL::Surface_mesh_approximation::L2_metric_plane_proxy< TriangleMesh, VertexPointMap, GeomTraits >::fit_proxy",
+          "argsstring": "(const FaceRange &faces, const TriangleMesh &tm) const",
+          "params": [
+            {
+              "type": "const FaceRange &",
+              "name": "faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+          "line": "123"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_surface__mesh__approximation_1_1_l2__metric__plane__proxy.xml",
+      "file": "CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h",
+      "line": "46"
+    },
+    "CGAL::Variational_shape_approximation": {
+      "kind": "class",
+      "name": "CGAL::Variational_shape_approximation",
+      "brief": "Main class for Variational Shape Approximation algorithm.",
+      "detailed": "It is based on [1] . For simple use cases, the function CGAL::Surface_mesh_approximation::approximate_mesh() might be sufficient. TriangleMesh a model of FaceListGraph VertexPointMap a ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and GeomTraits::Point_3 as value type ErrorMetricProxy a model of ErrorMetricProxy GeomTraits a model of Kernel Concurrency_tag concurrency tag.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Variational_shape_approximation::Geom_traits",
+          "brief": "Geometric traits type.",
+          "detailed": "",
+          "return_type": "GeomTraits",
+          "definition": "typedef GeomTraits CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "103"
+        },
+        {
+          "kind": "typedef",
+          "name": "Error_metric",
+          "qualified_name": "CGAL::Variational_shape_approximation::Error_metric",
+          "brief": "Error metric for proxy fitting type.",
+          "detailed": "",
+          "return_type": "ErrorMetricProxy",
+          "definition": "typedef ErrorMetricProxy CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Error_metric",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "111"
+        },
+        {
+          "kind": "typedef",
+          "name": "Proxy",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy",
+          "brief": "Proxy type.",
+          "detailed": "",
+          "return_type": "Error_metric::Proxy",
+          "definition": "typedef Error_metric::Proxy CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "114"
+        },
+        {
+          "kind": "typedef",
+          "name": "Indexed_triangle",
+          "qualified_name": "CGAL::Variational_shape_approximation::Indexed_triangle",
+          "brief": "Indexed triangle type.",
+          "detailed": "",
+          "return_type": "std::array< std::size_t, 3 >",
+          "definition": "typedef std::array<std::size_t, 3> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Indexed_triangle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "117"
+        },
+        {
+          "kind": "function",
+          "name": "Variational_shape_approximation",
+          "qualified_name": "CGAL::Variational_shape_approximation::Variational_shape_approximation",
+          "brief": "initializes internal data for the approximation.",
+          "detailed": "tm CGAL TriangleMesh on which approximation operates vpoint_map vertex point map of the mesh error_metric an ErrorMetricProxy object",
+          "return_type": "",
+          "definition": "CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Variational_shape_approximation",
+          "argsstring": "(const TriangleMesh &tm, const VertexPointMap &vpoint_map, const Error_metric &error_metric)",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const VertexPointMap &",
+              "name": "vpoint_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Error_metric &",
+              "name": "error_metric",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Construction",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "271"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_seeds",
+          "qualified_name": "CGAL::Variational_shape_approximation::initialize_seeds",
+          "brief": "initializes the seeds with both maximum number of proxies and minimum error drop stop criteria.",
+          "detailed": "The first criterion met stops the seeding. Parameters out of range are ignored. NamedParameters a sequence of bgl_namedparameters np an optional sequence of Named Parameters among the ones listed below number of proxies initialized Seeding Named Parameters <button class=\"collapsible\"> seeding_method </button> the selection of seeding method Type: CGAL::Surface_mesh_approximation::Seeding_method Default: CGAL::Surface_mesh_approximation::HIERARCHICAL <button class=\"collapsible\"> max_number_of_proxies </button> the maximum number of proxies used to approximate the input mesh Type: std::size_t Default: num_faces(tm) / 3 , used when min_error_drop is also not provided <button class=\"collapsible\"> min_error_drop </button> the minimum error drop of the approximation, expressed as the ratio between two iterations of proxy addition Type: geom_traits::FT Default: 0.1 , used when max_number_of_proxies is also not provided <button class=\"collapsible\"> number_of_relaxations </button> the number of relaxation iterations interleaved within seeding Type: std::size_t Default: 5",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::initialize_seeds",
+          "argsstring": "(const NamedParameters &np)",
+          "params": [
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Approximation",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "332"
+        },
+        {
+          "kind": "function",
+          "name": "run",
+          "qualified_name": "CGAL::Variational_shape_approximation::run",
+          "brief": "runs the partitioning and fitting processes on the whole surface.",
+          "detailed": "nb_iterations number of iterations. total fitting error",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::run",
+          "argsstring": "(std::size_t nb_iterations=1)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "nb_iterations",
+              "default": "1",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Approximation",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "377"
+        },
+        {
+          "kind": "function",
+          "name": "run_to_convergence",
+          "qualified_name": "CGAL::Variational_shape_approximation::run_to_convergence",
+          "brief": "calls run while error decrease is greater than cvg_threshold .",
+          "detailed": "cvg_threshold the percentage of error change between two successive runs, should be in range (0, 1) . max_iterations maximum number of iterations allowed avg_interval size of error average interval to have smoother convergence curve, if 0 is assigned, 1 is used instead. true if converged before hitting the maximum iterations.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::run_to_convergence",
+          "argsstring": "(const FT cvg_threshold, const std::size_t max_iterations=100, std::size_t avg_interval=3)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "cvg_threshold",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "max_iterations",
+              "default": "100",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "avg_interval",
+              "default": "3",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Approximation",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "399"
+        },
+        {
+          "kind": "function",
+          "name": "compute_total_error",
+          "qualified_name": "CGAL::Variational_shape_approximation::compute_total_error",
+          "brief": "computes fitting error of current partition to the proxies.",
+          "detailed": "total fitting error",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::compute_total_error",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Approximation",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "432"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_furthest_proxies",
+          "qualified_name": "CGAL::Variational_shape_approximation::add_to_furthest_proxies",
+          "brief": "adds proxies to the worst regions one by one.",
+          "detailed": "The re-fitting is performed after each proxy is inserted. nb_proxies number of proxies to be added nb_iterations number of re-fitting iterations number of proxies added",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::add_to_furthest_proxies",
+          "argsstring": "(const std::size_t nb_proxies, const std::size_t nb_iterations=5)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "nb_proxies",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "nb_iterations",
+              "default": "5",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Approximation",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "452"
+        },
+        {
+          "kind": "function",
+          "name": "add_proxies_error_diffusion",
+          "qualified_name": "CGAL::Variational_shape_approximation::add_proxies_error_diffusion",
+          "brief": "adds proxies by diffusing fitting error into current partition.",
+          "detailed": "Each partition is added with the number of proxies in proportion to its fitting error. nb_proxies number of proxies to be added number of proxies successfully added",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::add_proxies_error_diffusion",
+          "argsstring": "(const std::size_t nb_proxies)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "nb_proxies",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Approximation",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "470"
+        },
+        {
+          "kind": "function",
+          "name": "teleport_proxies",
+          "qualified_name": "CGAL::Variational_shape_approximation::teleport_proxies",
+          "brief": "teleports the local minimum to the worst region by combining the merging and adding processes.",
+          "detailed": "The re-fitting is performed after each teleportation. Here if we specify more than one proxy this means we teleport in a naive iterative fashion. nb_proxies number of proxies requested to teleport. nb_iterations number of re-fitting iterations. no_threshold_test if true , no check on the approximation error before merging a pair of proxies is done. In other words, find_best_merge (!no_threshold_test) is called. number of proxies teleported.",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::teleport_proxies",
+          "argsstring": "(const std::size_t nb_proxies, const std::size_t nb_iterations=5, const bool no_threshold_test=false)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "nb_proxies",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "nb_iterations",
+              "default": "5",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "no_threshold_test",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Refinement Operations",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "557"
+        },
+        {
+          "kind": "function",
+          "name": "merge",
+          "qualified_name": "CGAL::Variational_shape_approximation::merge",
+          "brief": "merges two specified adjacent regions.",
+          "detailed": "The overall re-fitting is not performed and the proxy index map is maintained. two proxies must be adjacent, and 0 <= px0 < px1 < proxies.size() px0 the kept proxy index px1 the merged and erased proxy index, proxies with greater indeies are decreased by 1 to fill the gap change of error",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::merge",
+          "argsstring": "(const std::size_t px0, const std::size_t px1)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "px0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "px1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Refinement Operations",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "627"
+        },
+        {
+          "kind": "function",
+          "name": "find_best_merge",
+          "qualified_name": "CGAL::Variational_shape_approximation::find_best_merge",
+          "brief": "simulates merging and local re-fitting of all pairs of adjacent proxies and finds the best pair to merge.",
+          "detailed": "The best is defined as the minimum merged sum error change (increase or decrease) among all pairs. use_threshold_test if true and a best pair of proxies is found, it is returned only if the error change after the merge is lower than the half of the maximum proxy error. if the best merge pair is found the optional returned contains the proxy indices, and is empty otherwise.",
+          "return_type": "std::optional< std::pair< std::size_t, std::size_t > >",
+          "definition": "std::optional< std::pair< std::size_t, std::size_t > > CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::find_best_merge",
+          "argsstring": "(const bool use_threshold_test)",
+          "params": [
+            {
+              "type": "const bool",
+              "name": "use_threshold_test",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Refinement Operations",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "667"
+        },
+        {
+          "kind": "function",
+          "name": "split",
+          "qualified_name": "CGAL::Variational_shape_approximation::split",
+          "brief": "splits within a specified proxy area via N-section (by default bisection), other regions are not affected.",
+          "detailed": "px_idx proxy index. n number of split sections. nb_relaxations number of relaxations within the proxy area px_idx after the split true if split succeeds, and false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::split",
+          "argsstring": "(const std::size_t px_idx, const std::size_t n=2, const std::size_t nb_relaxations=10)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "px_idx",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "n",
+              "default": "2",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "nb_relaxations",
+              "default": "10",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Refinement Operations",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "733"
+        },
+        {
+          "kind": "function",
+          "name": "extract_mesh",
+          "qualified_name": "CGAL::Variational_shape_approximation::extract_mesh",
+          "brief": "extracts the output mesh in the form of an indexed triangle set.",
+          "detailed": "NamedParameters a sequence of bgl_namedparameters np an optional sequence of Named Parameters among the ones listed below true if the extracted surface mesh is manifold, and false otherwise. Meshing Named Parameters <button class=\"collapsible\"> subdivision_ratio </button> the chord subdivision ratio threshold to the chord length or average edge length Type: geom_traits::FT Default: 5.0 <button class=\"collapsible\"> boundary_subdivision_ratio </button> the chord subdivision ratio threshold to the chord length or average edge length for boundary edges Type: geom_traits::FT Default: subdivision_ratio <button class=\"collapsible\"> relative_to_chord </button> If true , the subdivision_ratio is the ratio of the furthest vertex distance to the chord length, otherwise is the average edge length Type: Boolean Default: false <button class=\"collapsible\"> with_dihedral_angle </button> If true , the subdivision_ratio is weighted by dihedral angle Type: Boolean Default: false <button class=\"collapsible\"> optimize_anchor_location </button> If true , optimize the anchor locations Type: Boolean Default: true <button class=\"collapsible\"> optimize_boundary_anchor_location </button> If true , optimize the anchor locations of boundary vertices Type: Boolean Default: optimize_anchor_location <button class=\"collapsible\"> pca_plane </button> If true , use PCA plane fitting, otherwise use the default area averaged plane parameters Type: Boolean Default: false",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::extract_mesh",
+          "argsstring": "(const NamedParameters &np)",
+          "params": [
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Meshing",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "838"
+        },
+        {
+          "kind": "function",
+          "name": "output",
+          "qualified_name": "CGAL::Variational_shape_approximation::output",
+          "brief": "outputs approximation results.",
+          "detailed": "NamedParameters a sequence of bgl_namedparameters np an optional sequence of Named Parameters among the ones listed below Output Named Parameters <button class=\"collapsible\"> face_proxy_map </button> a property map to output the proxy index of each face of the input polygon mesh Type: a model of WritablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and std::size_t as value type Default: no output operation is performed Extra: A proxy is a set of connected faces which are placed under the same proxy patch (see fig__iterations ) Extra: The proxy-ids are contiguous in range [0, number_of_proxies - 1] <button class=\"collapsible\"> proxies </button> an OutputIterator to put proxies in Type: a class model of OutputIterator with CGAL::Surface_mesh_approximation::L21_metric_vector_proxy_no_area_weighting::Proxy value type Default: no output operation is performed <button class=\"collapsible\"> anchors </button> an OutputIterator to put anchor points in Type: a class model of OutputIterator with geom_traits::Point_3 value type Default: no output operation is performed <button class=\"collapsible\"> triangles </button> an OutputIterator to put indexed triangles in Type: a class model of OutputIterator with std::array<std::size_t, 3> value type Default: no output operation is performed",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::output",
+          "argsstring": "(const NamedParameters &np) const",
+          "params": [
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Output",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "919"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_proxies",
+          "qualified_name": "CGAL::Variational_shape_approximation::number_of_proxies",
+          "brief": "returns the number of proxies.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::number_of_proxies",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Output",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "938"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Variational_shape_approximation::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::FT",
+          "definition": "typedef Geom_traits::FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "123"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Point_3",
+          "definition": "typedef Geom_traits::Point_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "124"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Vector_3",
+          "definition": "typedef Geom_traits::Vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "125"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Segment_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Segment_3",
+          "definition": "typedef Geom_traits::Segment_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Segment_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "126"
+        },
+        {
+          "kind": "typedef",
+          "name": "Plane_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Plane_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Plane_3",
+          "definition": "typedef Geom_traits::Plane_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Plane_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "127"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Construct_vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Construct_vector_3",
+          "definition": "typedef Geom_traits::Construct_vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Construct_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "128"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_point_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Construct_point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Construct_point_3",
+          "definition": "typedef Geom_traits::Construct_point_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Construct_point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "129"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Construct_scaled_vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Construct_scaled_vector_3",
+          "definition": "typedef Geom_traits::Construct_scaled_vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Construct_scaled_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "130"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_of_vectors_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Construct_sum_of_vectors_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Construct_sum_of_vectors_3",
+          "definition": "typedef Geom_traits::Construct_sum_of_vectors_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Construct_sum_of_vectors_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "131"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_translated_point_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Construct_translated_point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Construct_translated_point_3",
+          "definition": "typedef Geom_traits::Construct_translated_point_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Construct_translated_point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "132"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_cross_product_vector_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Construct_cross_product_vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Construct_cross_product_vector_3",
+          "definition": "typedef Geom_traits::Construct_cross_product_vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Construct_cross_product_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "133"
+        },
+        {
+          "kind": "typedef",
+          "name": "Collinear_3",
+          "qualified_name": "CGAL::Variational_shape_approximation::Collinear_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Collinear_3",
+          "definition": "typedef Geom_traits::Collinear_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Collinear_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "134"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Variational_shape_approximation::vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::vertex_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::vertex_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "137"
+        },
+        {
+          "kind": "typedef",
+          "name": "halfedge_descriptor",
+          "qualified_name": "CGAL::Variational_shape_approximation::halfedge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::halfedge_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::halfedge_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::halfedge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "138"
+        },
+        {
+          "kind": "typedef",
+          "name": "edge_descriptor",
+          "qualified_name": "CGAL::Variational_shape_approximation::edge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::edge_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::edge_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::edge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "139"
+        },
+        {
+          "kind": "typedef",
+          "name": "face_descriptor",
+          "qualified_name": "CGAL::Variational_shape_approximation::face_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::graph_traits< TriangleMesh >::face_descriptor",
+          "definition": "typedef boost::graph_traits<TriangleMesh>::face_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "140"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_anchor_tag",
+          "qualified_name": "CGAL::Variational_shape_approximation::Vertex_anchor_tag",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::dynamic_vertex_property_t< std::size_t >",
+          "definition": "typedef CGAL::dynamic_vertex_property_t<std::size_t> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Vertex_anchor_tag",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "143"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_anchor_map",
+          "qualified_name": "CGAL::Variational_shape_approximation::Vertex_anchor_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_map< TriangleMesh, Vertex_anchor_tag >::type",
+          "definition": "typedef boost::property_map<TriangleMesh,Vertex_anchor_tag>::type CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Vertex_anchor_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "144"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_proxy_tag",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_proxy_tag",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::dynamic_face_property_t< std::size_t >",
+          "definition": "typedef CGAL::dynamic_face_property_t<std::size_t> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_proxy_tag",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "146"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_proxy_map",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_proxy_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_map< TriangleMesh, Face_proxy_tag >::type",
+          "definition": "typedef boost::property_map<TriangleMesh,Face_proxy_tag>::type CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_proxy_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "147"
+        },
+        {
+          "kind": "typedef",
+          "name": "Boundary_chord",
+          "qualified_name": "CGAL::Variational_shape_approximation::Boundary_chord",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< halfedge_descriptor >",
+          "definition": "typedef std::vector<halfedge_descriptor> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Boundary_chord",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "149"
+        },
+        {
+          "kind": "typedef",
+          "name": "Boundary_chord_iterator",
+          "qualified_name": "CGAL::Variational_shape_approximation::Boundary_chord_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Boundary_chord::iterator",
+          "definition": "typedef Boundary_chord::iterator CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Boundary_chord_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "150"
+        },
+        {
+          "kind": "variable",
+          "name": "m_ptm",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_ptm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const TriangleMesh *",
+          "definition": "const TriangleMesh* CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_ptm",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "226"
+        },
+        {
+          "kind": "variable",
+          "name": "m_nb_of_faces",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_nb_of_faces",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const std::size_t",
+          "definition": "const std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_nb_of_faces",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "228"
+        },
+        {
+          "kind": "variable",
+          "name": "m_vpoint_map",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_vpoint_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "VertexPointMap",
+          "definition": "VertexPointMap CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_vpoint_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "230"
+        },
+        {
+          "kind": "variable",
+          "name": "m_metric",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_metric",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Error_metric *",
+          "definition": "const Error_metric* CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_metric",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "232"
+        },
+        {
+          "kind": "variable",
+          "name": "vector_functor",
+          "qualified_name": "CGAL::Variational_shape_approximation::vector_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_3",
+          "definition": "Construct_vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::vector_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "234"
+        },
+        {
+          "kind": "variable",
+          "name": "scale_functor",
+          "qualified_name": "CGAL::Variational_shape_approximation::scale_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_3",
+          "definition": "Construct_scaled_vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::scale_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "235"
+        },
+        {
+          "kind": "variable",
+          "name": "sum_functor",
+          "qualified_name": "CGAL::Variational_shape_approximation::sum_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_sum_of_vectors_3",
+          "definition": "Construct_sum_of_vectors_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::sum_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "236"
+        },
+        {
+          "kind": "variable",
+          "name": "translate_point_functor",
+          "qualified_name": "CGAL::Variational_shape_approximation::translate_point_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_translated_point_3",
+          "definition": "Construct_translated_point_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::translate_point_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "237"
+        },
+        {
+          "kind": "variable",
+          "name": "cross_product_functor",
+          "qualified_name": "CGAL::Variational_shape_approximation::cross_product_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_cross_product_vector_3",
+          "definition": "Construct_cross_product_vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::cross_product_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "238"
+        },
+        {
+          "kind": "variable",
+          "name": "collinear_functor",
+          "qualified_name": "CGAL::Variational_shape_approximation::collinear_functor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Collinear_3",
+          "definition": "Collinear_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::collinear_functor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "239"
+        },
+        {
+          "kind": "variable",
+          "name": "m_proxies",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_proxies",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Proxy_wrapper >",
+          "definition": "std::vector<Proxy_wrapper> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_proxies",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "242"
+        },
+        {
+          "kind": "variable",
+          "name": "m_px_planes",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_px_planes",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Proxy_plane >",
+          "definition": "std::vector<Proxy_plane> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_px_planes",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "244"
+        },
+        {
+          "kind": "variable",
+          "name": "m_anchors",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_anchors",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Anchor >",
+          "definition": "std::vector<Anchor> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_anchors",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "247"
+        },
+        {
+          "kind": "variable",
+          "name": "m_bcycles",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_bcycles",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Boundary_cycle >",
+          "definition": "std::vector<Boundary_cycle> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_bcycles",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "249"
+        },
+        {
+          "kind": "variable",
+          "name": "m_tris",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_tris",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Indexed_triangle >",
+          "definition": "std::vector<Indexed_triangle> CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_tris",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "251"
+        },
+        {
+          "kind": "variable",
+          "name": "m_average_edge_length",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_average_edge_length",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_average_edge_length",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "254"
+        },
+        {
+          "kind": "variable",
+          "name": "m_fproxy_map",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_fproxy_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Face_proxy_map",
+          "definition": "Face_proxy_map CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_fproxy_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "257"
+        },
+        {
+          "kind": "variable",
+          "name": "m_vanchor_map",
+          "qualified_name": "CGAL::Variational_shape_approximation::m_vanchor_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_anchor_map",
+          "definition": "Vertex_anchor_map CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::m_vanchor_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "259"
+        },
+        {
+          "kind": "function",
+          "name": "init_random",
+          "qualified_name": "CGAL::Variational_shape_approximation::init_random",
+          "brief": "randomly initializes proxies with both maximum number of proxies and minimum error drop stop criteria, where the first criterion met stops the seeding.",
+          "detailed": "To ensure the randomness, call std::srand() beforehand. max_nb_proxies maximum number of proxies, should be in range (nb_connected_components, nb_faces / 3) min_error_drop minimum error drop, should be in range (0.0, 1.0) , negative value is ignored nb_relaxations number of re-fitting iterations number of proxies initialized",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::init_random",
+          "argsstring": "(const std::size_t max_nb_proxies, const FT min_error_drop, const std::size_t nb_relaxations)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "max_nb_proxies",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "min_error_drop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "nb_relaxations",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1079"
+        },
+        {
+          "kind": "function",
+          "name": "init_incremental",
+          "qualified_name": "CGAL::Variational_shape_approximation::init_incremental",
+          "brief": "incrementally initializes proxies with both maximum number of proxies and minimum error drop stop criteria, The first criterion met stops the seeding.",
+          "detailed": "max_nb_proxies maximum number of proxies, should be in range (nb_connected_components, nb_faces / 3) min_error_drop minimum error drop, should be in range (0.0, 1.0) , negative value is ignored nb_relaxations number of re-fitting iterations number of proxies initialized",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::init_incremental",
+          "argsstring": "(const std::size_t max_nb_proxies, const FT min_error_drop, const std::size_t nb_relaxations)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "max_nb_proxies",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "min_error_drop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "nb_relaxations",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1126"
+        },
+        {
+          "kind": "function",
+          "name": "init_hierarchical",
+          "qualified_name": "CGAL::Variational_shape_approximation::init_hierarchical",
+          "brief": "hierarchically initializes proxies with both maximum number of proxies and minimum error drop stop criteria, where the first criterion met stops the seeding.",
+          "detailed": "max_nb_proxies maximum number of proxies, should be in range (nb_connected_components, nb_faces / 3) min_error_drop minimum error drop, should be in range (0.0, 1.0) , negative value is ignored nb_relaxations number of re-fitting iterations number of proxies initialized",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::init_hierarchical",
+          "argsstring": "(const std::size_t max_nb_proxies, const FT min_error_drop, const std::size_t nb_relaxations)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "max_nb_proxies",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "min_error_drop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "nb_relaxations",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1157"
+        },
+        {
+          "kind": "function",
+          "name": "partition",
+          "qualified_name": "CGAL::Variational_shape_approximation::partition",
+          "brief": "partitions the area tagged with CGAL_VSA_INVALID_TAG with proxies, global face proxy map is updated.",
+          "detailed": "Propagates the proxy seed faces and floods the tagged area to minimize the fitting error. ProxyWrapperIterator forward iterator with Proxy_wrapper as value type beg iterator point to the first element end iterator point to the one past the last element",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::partition",
+          "argsstring": "(const ProxyWrapperIterator beg, const ProxyWrapperIterator end)",
+          "params": [
+            {
+              "type": "const ProxyWrapperIterator",
+              "name": "beg",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ProxyWrapperIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1188"
+        },
+        {
+          "kind": "function",
+          "name": "fit",
+          "qualified_name": "CGAL::Variational_shape_approximation::fit",
+          "brief": "refits and updates input range of proxies, sequential.",
+          "detailed": "ProxyWrapperIterator forward iterator with Proxy_wrapper as value type beg iterator point to the first element end iterator point to the one past the last element t concurrency tag",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::fit",
+          "argsstring": "(const ProxyWrapperIterator beg, const ProxyWrapperIterator end, const CGAL::Sequential_tag &t)",
+          "params": [
+            {
+              "type": "const ProxyWrapperIterator",
+              "name": "beg",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ProxyWrapperIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Sequential_tag &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1227"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_furthest_proxy",
+          "qualified_name": "CGAL::Variational_shape_approximation::add_to_furthest_proxy",
+          "brief": "adds a proxy seed at the face with the maximum fitting error.",
+          "detailed": "true if add is successfully, and false otherwise",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::add_to_furthest_proxy",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1270"
+        },
+        {
+          "kind": "function",
+          "name": "fit_proxy_from_patch",
+          "qualified_name": "CGAL::Variational_shape_approximation::fit_proxy_from_patch",
+          "brief": "fits a new (wrapped) proxy from a region patch.",
+          "detailed": "Compute proxy parameters from a list of faces. Find proxy seed face. Sum the proxy error. FacePatch container with face_descriptor as data type px_patch proxy patch container px_idx the assigned proxy index fitted wrapped proxy",
+          "return_type": "Proxy_wrapper",
+          "definition": "Proxy_wrapper CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::fit_proxy_from_patch",
+          "argsstring": "(const FacePatch &px_patch, const std::size_t px_idx)",
+          "params": [
+            {
+              "type": "const FacePatch &",
+              "name": "px_patch",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "px_idx",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1317"
+        },
+        {
+          "kind": "function",
+          "name": "add_one_proxy_at",
+          "qualified_name": "CGAL::Variational_shape_approximation::add_one_proxy_at",
+          "brief": "adds a proxy at face f.",
+          "detailed": "f where to the proxy is initialized from",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::add_one_proxy_at",
+          "argsstring": "(const face_descriptor f)",
+          "params": [
+            {
+              "type": "const face_descriptor",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1343"
+        },
+        {
+          "kind": "function",
+          "name": "fit_proxy_from_face",
+          "qualified_name": "CGAL::Variational_shape_approximation::fit_proxy_from_face",
+          "brief": "fits a new (wrapped) proxy from a face.",
+          "detailed": "Compute proxy parameters from the face. Set seed to this face. Update the proxy error. Update proxy map. current face proxy map is valid f face px_idx proxy index fitted wrapped proxy",
+          "return_type": "Proxy_wrapper",
+          "definition": "Proxy_wrapper CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::fit_proxy_from_face",
+          "argsstring": "(const face_descriptor f, const std::size_t px_idx)",
+          "params": [
+            {
+              "type": "const face_descriptor",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "px_idx",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1358"
+        },
+        {
+          "kind": "function",
+          "name": "random_pick_non_seed_faces",
+          "qualified_name": "CGAL::Variational_shape_approximation::random_pick_non_seed_faces",
+          "brief": "picks a number of non-seed faces into an empty vector randomly.",
+          "detailed": "nb_requested requested number of faces picked_faces shuffled faces vector true if the requested number of faces are selected, and false otherwise",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::random_pick_non_seed_faces",
+          "argsstring": "(const std::size_t nb_requested, std::vector< face_descriptor > &picked_faces)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "nb_requested",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::vector< face_descriptor > &",
+              "name": "picked_faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1380"
+        },
+        {
+          "kind": "function",
+          "name": "bootstrap_from_connected_components",
+          "qualified_name": "CGAL::Variational_shape_approximation::bootstrap_from_connected_components",
+          "brief": "initializes proxies from each connected component of the input mesh.",
+          "detailed": "This function clears proxy vector and sets face proxy map to initial state, intended only for bootstrapping initialization. Coarse approximation iteration is not performed, because it is inaccurate anyway and may yield degenerate cases (e.g. a standard cube model).",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::bootstrap_from_connected_components",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1420"
+        },
+        {
+          "kind": "function",
+          "name": "compute_proxy_planes",
+          "qualified_name": "CGAL::Variational_shape_approximation::compute_proxy_planes",
+          "brief": "computes proxy planes.",
+          "detailed": "The proxy may not contain the plane related properties, so we need these internal planes, used in the chord subdivision and anchor location. if_pca_plane set true to use the PCA plane fitting",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::compute_proxy_planes",
+          "argsstring": "(const bool if_pca_plane)",
+          "params": [
+            {
+              "type": "const bool",
+              "name": "if_pca_plane",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1477"
+        },
+        {
+          "kind": "function",
+          "name": "find_anchors",
+          "qualified_name": "CGAL::Variational_shape_approximation::find_anchors",
+          "brief": "finds the anchors.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::find_anchors",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1514"
+        },
+        {
+          "kind": "function",
+          "name": "find_edges",
+          "qualified_name": "CGAL::Variational_shape_approximation::find_edges",
+          "brief": "finds and approximates the chord connecting the anchors.",
+          "detailed": "boundary_subdivision_ratio the chord subdivision ratio threshold to the chord length or average edge length for boundary edges subdivision_ratio boundary chord approximation recursive split criterion relative_to_chord set true if the subdivision_ratio is relative to the chord length (relative sense), otherwise it's relative to the average edge length (absolute sense). with_dihedral_angle if set to true , add dihedral angle weight to the distance.",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::find_edges",
+          "argsstring": "(const FT subdivision_ratio, const FT boundary_subdivision_ratio, const bool relative_to_chord, const bool with_dihedral_angle)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "subdivision_ratio",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "boundary_subdivision_ratio",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "relative_to_chord",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "with_dihedral_angle",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1537"
+        },
+        {
+          "kind": "function",
+          "name": "add_anchors",
+          "qualified_name": "CGAL::Variational_shape_approximation::add_anchors",
+          "brief": "adds anchors to the boundary cycles with only 2 anchors.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::add_anchors",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1585"
+        },
+        {
+          "kind": "function",
+          "name": "pseudo_cdt",
+          "qualified_name": "CGAL::Variational_shape_approximation::pseudo_cdt",
+          "brief": "runs the pseudo Constrained Delaunay Triangulation at each proxy region, and stores the extracted indexed triangles in tris .",
+          "detailed": "all anchors are found, i.e. all boundary cycles have been visited and attached with at least 3 anchors.",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::pseudo_cdt",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1658"
+        },
+        {
+          "kind": "function",
+          "name": "walk_to_first_anchor",
+          "qualified_name": "CGAL::Variational_shape_approximation::walk_to_first_anchor",
+          "brief": "walks along the region boundary cycle to the first halfedge pointing to a vertex associated with an anchor.",
+          "detailed": "he_start region boundary halfedge",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::walk_to_first_anchor",
+          "argsstring": "(halfedge_descriptor &he_start)",
+          "params": [
+            {
+              "type": "halfedge_descriptor &",
+              "name": "he_start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1814"
+        },
+        {
+          "kind": "function",
+          "name": "walk_to_next_anchor",
+          "qualified_name": "CGAL::Variational_shape_approximation::walk_to_next_anchor",
+          "brief": "walks along the region boundary cycle to the next anchor and records the path as a Boundary_chord .",
+          "detailed": "he_start starting region boundary halfedge pointing to a vertex associated with an anchor chord recorded path chord",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::walk_to_next_anchor",
+          "argsstring": "(halfedge_descriptor &he_start, Boundary_chord &chord) const",
+          "params": [
+            {
+              "type": "halfedge_descriptor &",
+              "name": "he_start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Boundary_chord &",
+              "name": "chord",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1831"
+        },
+        {
+          "kind": "function",
+          "name": "walk_to_next_border_halfedge",
+          "qualified_name": "CGAL::Variational_shape_approximation::walk_to_next_border_halfedge",
+          "brief": "walks to the next boundary cycle halfedge.",
+          "detailed": "he_start region boundary halfedge",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::walk_to_next_border_halfedge",
+          "argsstring": "(halfedge_descriptor &he_start) const",
+          "params": [
+            {
+              "type": "halfedge_descriptor &",
+              "name": "he_start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1842"
+        },
+        {
+          "kind": "function",
+          "name": "subdivide_chord",
+          "qualified_name": "CGAL::Variational_shape_approximation::subdivide_chord",
+          "brief": "subdivides a chord recursively in range [chord_begin, chord_end) .",
+          "detailed": "chord_begin begin iterator of the chord chord_end end iterator of the chord subdivision_ratio the chord recursive split error threshold boundary_subdivision_ratio the chord subdivision ratio threshold to the chord length or average edge length for boundary edges relative_to_chord set true if the subdivision_ratio is relative to the chord length (relative sense), otherwise it is relative to the average edge length (absolute sense). with_dihedral_angle if set to true add dihedral angle weight to the distance. the number of anchors of the chord apart from the first one",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::subdivide_chord",
+          "argsstring": "(const Boundary_chord_iterator &chord_begin, const Boundary_chord_iterator &chord_end, const FT subdivision_ratio, const FT boundary_subdivision_ratio, const bool relative_to_chord, const bool with_dihedral_angle)",
+          "params": [
+            {
+              "type": "const Boundary_chord_iterator &",
+              "name": "chord_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Boundary_chord_iterator &",
+              "name": "chord_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "subdivision_ratio",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "boundary_subdivision_ratio",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "relative_to_chord",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "with_dihedral_angle",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1863"
+        },
+        {
+          "kind": "function",
+          "name": "is_anchor_attached",
+          "qualified_name": "CGAL::Variational_shape_approximation::is_anchor_attached",
+          "brief": "tests if the target vertex of a halfedge is attached with an anchor.",
+          "detailed": "he a halfedge descriptor true is attached with an anchor, and false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::is_anchor_attached",
+          "argsstring": "(const halfedge_descriptor he) const",
+          "params": [
+            {
+              "type": "const halfedge_descriptor",
+              "name": "he",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1984"
+        },
+        {
+          "kind": "function",
+          "name": "is_anchor_attached",
+          "qualified_name": "CGAL::Variational_shape_approximation::is_anchor_attached",
+          "brief": "checks if a vertex is attached with an anchor.",
+          "detailed": "VertexAnchorIndexMap ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key and std::size_t as value type vtx a vertex descriptor vanchor_map vertex anchor index map",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::is_anchor_attached",
+          "argsstring": "(const typename boost::property_traits< VertexAnchorIndexMap >::key_type vtx, const VertexAnchorIndexMap &vanchor_map) const",
+          "params": [
+            {
+              "type": "const typename boost::property_traits< VertexAnchorIndexMap >::key_type",
+              "name": "vtx",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const VertexAnchorIndexMap &",
+              "name": "vanchor_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "1996"
+        },
+        {
+          "kind": "function",
+          "name": "attach_anchor",
+          "qualified_name": "CGAL::Variational_shape_approximation::attach_anchor",
+          "brief": "attaches an anchor to the vertex.",
+          "detailed": "vtx vertex",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::attach_anchor",
+          "argsstring": "(const vertex_descriptor vtx)",
+          "params": [
+            {
+              "type": "const vertex_descriptor",
+              "name": "vtx",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "2006"
+        },
+        {
+          "kind": "function",
+          "name": "attach_anchor",
+          "qualified_name": "CGAL::Variational_shape_approximation::attach_anchor",
+          "brief": "attaches an anchor to the target vertex of the halfedge.",
+          "detailed": "he halfedge",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::attach_anchor",
+          "argsstring": "(const halfedge_descriptor he)",
+          "params": [
+            {
+              "type": "const halfedge_descriptor",
+              "name": "he",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "2016"
+        },
+        {
+          "kind": "function",
+          "name": "optimize_anchor_location",
+          "qualified_name": "CGAL::Variational_shape_approximation::optimize_anchor_location",
+          "brief": "optimizes the anchor location by averaging the projection points of the anchor vertex to the incident proxy plane.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::optimize_anchor_location",
+          "argsstring": "(bool optimize_boundary_anchor_location)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "optimize_boundary_anchor_location",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "2024"
+        },
+        {
+          "kind": "function",
+          "name": "compute_averaged_edge_length",
+          "qualified_name": "CGAL::Variational_shape_approximation::compute_averaged_edge_length",
+          "brief": "calculates the averaged edge length of a triangle mesh.",
+          "detailed": "tm the input triangle mesh vpoint_map vertex point map averaged edge length",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::compute_averaged_edge_length",
+          "argsstring": "(const TriangleMesh &tm, const VertexPointMap &vpoint_map) const",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const VertexPointMap &",
+              "name": "vpoint_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "2067"
+        },
+        {
+          "kind": "function",
+          "name": "fit_plane_area_averaged",
+          "qualified_name": "CGAL::Variational_shape_approximation::fit_plane_area_averaged",
+          "brief": "fits an area averaged plane from a range of faces.",
+          "detailed": "FaceIterator face_descriptor container iterator beg container begin end container end fitted plane",
+          "return_type": "Plane_3",
+          "definition": "Plane_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::fit_plane_area_averaged",
+          "argsstring": "(const FaceIterator &beg, const FaceIterator &end)",
+          "params": [
+            {
+              "type": "const FaceIterator &",
+              "name": "beg",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FaceIterator &",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "2087"
+        },
+        {
+          "kind": "function",
+          "name": "fit_plane_pca",
+          "qualified_name": "CGAL::Variational_shape_approximation::fit_plane_pca",
+          "brief": "fits a plane from a range of faces with PCA algorithm.",
+          "detailed": "FaceIterator face_descriptor container iterator beg container begin end container end fitted plane",
+          "return_type": "Plane_3",
+          "definition": "Plane_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::fit_plane_pca",
+          "argsstring": "(const FaceIterator &beg, const FaceIterator &end)",
+          "params": [
+            {
+              "type": "const FaceIterator &",
+              "name": "beg",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FaceIterator &",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "2126"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_variational__shape__approximation.xml",
+      "file": "CGAL/Variational_shape_approximation.h",
+      "line": "88"
+    },
+    "CGAL::Variational_shape_approximation::Anchor": {
+      "kind": "struct",
+      "name": "CGAL::Variational_shape_approximation::Anchor",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "vtx",
+          "qualified_name": "CGAL::Variational_shape_approximation::Anchor::vtx",
+          "brief": "",
+          "detailed": "",
+          "return_type": "vertex_descriptor",
+          "definition": "vertex_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Anchor::vtx",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "210"
+        },
+        {
+          "kind": "variable",
+          "name": "pos",
+          "qualified_name": "CGAL::Variational_shape_approximation::Anchor::pos",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Point_3",
+          "definition": "Point_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Anchor::pos",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "211"
+        },
+        {
+          "kind": "function",
+          "name": "Anchor",
+          "qualified_name": "CGAL::Variational_shape_approximation::Anchor::Anchor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Anchor::Anchor",
+          "argsstring": "(const vertex_descriptor vtx_, const Point_3 pos_)",
+          "params": [
+            {
+              "type": "const vertex_descriptor",
+              "name": "vtx_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point_3",
+              "name": "pos_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "207"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_variational__shape__approximation_1_1_anchor.xml",
+      "file": "CGAL/Variational_shape_approximation.h",
+      "line": "206"
+    },
+    "CGAL::Variational_shape_approximation::Boundary_cycle": {
+      "kind": "struct",
+      "name": "CGAL::Variational_shape_approximation::Boundary_cycle",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "he_head",
+          "qualified_name": "CGAL::Variational_shape_approximation::Boundary_cycle::he_head",
+          "brief": "",
+          "detailed": "",
+          "return_type": "halfedge_descriptor",
+          "definition": "halfedge_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Boundary_cycle::he_head",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "220"
+        },
+        {
+          "kind": "variable",
+          "name": "num_anchors",
+          "qualified_name": "CGAL::Variational_shape_approximation::Boundary_cycle::num_anchors",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Boundary_cycle::num_anchors",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "221"
+        },
+        {
+          "kind": "function",
+          "name": "Boundary_cycle",
+          "qualified_name": "CGAL::Variational_shape_approximation::Boundary_cycle::Boundary_cycle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Boundary_cycle::Boundary_cycle",
+          "argsstring": "(const halfedge_descriptor h)",
+          "params": [
+            {
+              "type": "const halfedge_descriptor",
+              "name": "h",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "217"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_variational__shape__approximation_1_1_boundary__cycle.xml",
+      "file": "CGAL/Variational_shape_approximation.h",
+      "line": "216"
+    },
+    "CGAL::Variational_shape_approximation::Face_to_integrate": {
+      "kind": "struct",
+      "name": "CGAL::Variational_shape_approximation::Face_to_integrate",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "f",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_to_integrate::f",
+          "brief": "",
+          "detailed": "",
+          "return_type": "face_descriptor",
+          "definition": "face_descriptor CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_to_integrate::f",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "186"
+        },
+        {
+          "kind": "variable",
+          "name": "px",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_to_integrate::px",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_to_integrate::px",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "187"
+        },
+        {
+          "kind": "variable",
+          "name": "err",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_to_integrate::err",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_to_integrate::err",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "188"
+        },
+        {
+          "kind": "function",
+          "name": "Face_to_integrate",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_to_integrate::Face_to_integrate",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_to_integrate::Face_to_integrate",
+          "argsstring": "(const face_descriptor f_, const std::size_t &px_, const FT &err_)",
+          "params": [
+            {
+              "type": "const face_descriptor",
+              "name": "f_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t &",
+              "name": "px_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "err_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "179"
+        },
+        {
+          "kind": "function",
+          "name": "operator<",
+          "qualified_name": "CGAL::Variational_shape_approximation::Face_to_integrate::operator<",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Face_to_integrate::operator<",
+          "argsstring": "(const Face_to_integrate &rhs) const",
+          "params": [
+            {
+              "type": "const Face_to_integrate &",
+              "name": "rhs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "182"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_variational__shape__approximation_1_1_face__to__integrate.xml",
+      "file": "CGAL/Variational_shape_approximation.h",
+      "line": "178"
+    },
+    "CGAL::Variational_shape_approximation::Proxy_error": {
+      "kind": "struct",
+      "name": "CGAL::Variational_shape_approximation::Proxy_error",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "px",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_error::px",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_error::px",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "201"
+        },
+        {
+          "kind": "variable",
+          "name": "err",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_error::err",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_error::err",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "202"
+        },
+        {
+          "kind": "function",
+          "name": "Proxy_error",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_error::Proxy_error",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_error::Proxy_error",
+          "argsstring": "(const std::size_t &px_, const FT &err_)",
+          "params": [
+            {
+              "type": "const std::size_t &",
+              "name": "px_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "err_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "193"
+        },
+        {
+          "kind": "function",
+          "name": "operator<",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_error::operator<",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_error::operator<",
+          "argsstring": "(const Proxy_error &rhs) const",
+          "params": [
+            {
+              "type": "const Proxy_error &",
+              "name": "rhs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "197"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_variational__shape__approximation_1_1_proxy__error.xml",
+      "file": "CGAL/Variational_shape_approximation.h",
+      "line": "192"
+    },
+    "CGAL::Variational_shape_approximation::Proxy_plane": {
+      "kind": "struct",
+      "name": "CGAL::Variational_shape_approximation::Proxy_plane",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "plane",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_plane::plane",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Plane_3",
+          "definition": "Plane_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_plane::plane",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "172"
+        },
+        {
+          "kind": "variable",
+          "name": "normal",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_plane::normal",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_plane::normal",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "173"
+        },
+        {
+          "kind": "variable",
+          "name": "area",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_plane::area",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_plane::area",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "174"
+        },
+        {
+          "kind": "function",
+          "name": "Proxy_plane",
+          "qualified_name": "CGAL::Variational_shape_approximation::Proxy_plane::Proxy_plane",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Variational_shape_approximation< TriangleMesh, VertexPointMap, ErrorMetricProxy, GeomTraits, Concurrency_tag >::Proxy_plane::Proxy_plane",
+          "argsstring": "(const Plane_3 &p, const Vector_3 &n, const FT &a)",
+          "params": [
+            {
+              "type": "const Plane_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector_3 &",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "169"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_variational__shape__approximation_1_1_proxy__plane.xml",
+      "file": "CGAL/Variational_shape_approximation.h",
+      "line": "168"
+    },
+    "ErrorMetricProxy": {
+      "kind": "class",
+      "name": "ErrorMetricProxy",
+      "brief": "The concept ErrorMetricProxy defines the notion of proxy, computes the fitting error from a face to a proxy, and fits a proxy from a range of faces.",
+      "detailed": "Has models CGAL::Surface_mesh_approximation::L21_metric_plane_proxy CGAL::Surface_mesh_approximation::L2_metric_plane_proxy",
+      "members": [
+        {
+          "kind": "function",
+          "name": "compute_error",
+          "qualified_name": "ErrorMetricProxy::compute_error",
+          "brief": "returns fitting error from face f to proxy.",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT ErrorMetricProxy::compute_error",
+          "argsstring": "(const face_descriptor f, const Triangle_mesh &tm, const Proxy &proxy) const",
+          "params": [
+            {
+              "type": "const face_descriptor",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Triangle_mesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Proxy &",
+              "name": "proxy",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ErrorMetricProxy.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "fit_proxy",
+          "qualified_name": "ErrorMetricProxy::fit_proxy",
+          "brief": "returns a fitted proxy to a range of faces.",
+          "detailed": "FaceRange a range of boost::graph_traits<TriangleMesh>::face_descriptor model of ConstRange with iterator type being model of InputIterator .",
+          "return_type": "Proxy",
+          "definition": "Proxy ErrorMetricProxy::fit_proxy",
+          "argsstring": "(const FaceRange &faces, const Triangle_mesh &tm) const",
+          "params": [
+            {
+              "type": "const FaceRange &",
+              "name": "faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Triangle_mesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ErrorMetricProxy.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "ErrorMetricProxy::FT",
+          "brief": "Number type model of Field and RealEmbeddable .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ErrorMetricProxy::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/ErrorMetricProxy.h",
+          "line": "18"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangle_mesh",
+          "qualified_name": "ErrorMetricProxy::Triangle_mesh",
+          "brief": "Triangle mesh.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ErrorMetricProxy::Triangle_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/ErrorMetricProxy.h",
+          "line": "20"
+        },
+        {
+          "kind": "typedef",
+          "name": "face_descriptor",
+          "qualified_name": "ErrorMetricProxy::face_descriptor",
+          "brief": "Triangle mesh face descriptor.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ErrorMetricProxy::face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/ErrorMetricProxy.h",
+          "line": "22"
+        },
+        {
+          "kind": "typedef",
+          "name": "Proxy",
+          "qualified_name": "ErrorMetricProxy::Proxy",
+          "brief": "Shape proxy type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ErrorMetricProxy::Proxy",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/ErrorMetricProxy.h",
+          "line": "24"
+        }
+      ],
+      "xml_file": "class_error_metric_proxy.xml",
+      "file": "Concepts/ErrorMetricProxy.h",
+      "line": "15"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Surface_mesh_approximation.txt",
+      "line": "1"
+    },
+    "CGAL::Surface_mesh_approximation": {
+      "kind": "namespace",
+      "name": "CGAL::Surface_mesh_approximation",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_surface__mesh__approximation.xml",
+      "file": "CGAL/Surface_mesh_approximation/approximate_triangle_mesh.h",
+      "line": "33"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgTSMARef": {
+      "kind": "group",
+      "name": "PkgTSMARef",
+      "brief": "",
+      "detailed": "Pierre Alliez, David Cohen-Steiner, and Lingjie Zhu This package implements the Variational Shape Approximation method to approximate an input surface triangle mesh by a simpler surface triangle mesh. The algorithm proceeds by iterative clustering of triangles, the clustering process being seeded randomly, incrementally or hierarchically. While the default function runs an automated version of the algorithm, interactive control is possible via a class interface. The API is flexible and can be extended to user-defined proxies and error metrics. Introduced in: CGAL 4.14 BibTeX: cgal:az-tsma-26a Depends on: thirdpartyEigen License: GPL Windows Demo: CGAL Lab Classified Reference Pages Parameters Optional parameters of the functions of this package are implemented as BGL named parameters. The page bgl_namedparameters describes their usage. Concepts ErrorMetricProxy Main Functions CGAL::Surface_mesh_approximation::approximate_triangle_mesh() Classes CGAL::Surface_mesh_approximation::L21_metric_plane_proxy CGAL::Surface_mesh_approximation::L2_metric_plane_proxy CGAL::Variational_shape_approximation Todo add option to enforce guarantee of 2-manifold and oriented output mesh add option to smooth frontiers of the partition add option to smooth and mutual tessellate frontiers of the partition add function in the class interface to optimize, after meshing, the anchor point locations to minimize a user-defined metric (two-sided L1, two-sided L2, Wasserstein distance, etc). add simulated annealing and combined operations to reach better minima.",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Verbose_level",
+          "qualified_name": "CGAL::Surface_mesh_approximation::Verbose_level",
+          "brief": "Verbose level enumeration.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/approximate_triangle_mesh.h",
+          "line": "37"
+        },
+        {
+          "kind": "enum",
+          "name": "Seeding_method",
+          "qualified_name": "CGAL::Surface_mesh_approximation::Seeding_method",
+          "brief": "Seeding method enumeration for Variational Shape Approximation algorithm.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Variational_shape_approximation.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "approximate_triangle_mesh",
+          "qualified_name": "CGAL::Surface_mesh_approximation::approximate_triangle_mesh",
+          "brief": "approximates the input mesh with plane proxies.",
+          "detailed": "This function uses the Variational Shape Approximation algorithm described in [1] to approximate a triangle surface mesh, with indexed triangles as output. TriangleMesh model of FaceListGraph NamedParameters a sequence of bgl_namedparameters tm triangle surface mesh to be approximated np an optional sequence of Named Parameters among the ones listed below true if the indexed triangles represent a 2-manifold, oriented surface mesh, and false otherwise. Approximation Named Parameters <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a model of Kernel Default: a CGAL Kernel deduced from the point type, using CGAL::Kernel_traits Extra: Exact constructions kernels are not supported by this function. <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of tm Type: a class model of ReadablePropertyMap with boost::graph_traits<TriangleMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, tm) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t must be available in TriangleMesh . <button class=\"collapsible\"> verbose_level </button> the verbose level Type: CGAL::Surface_mesh_approximation::Verbose_level Default: CGAL::Surface_mesh_approximation::SILENT <button class=\"collapsible\"> seeding_method </button> the selection of seeding method Type: CGAL::Surface_mesh_approximation::Seeding_method Default: CGAL::Surface_mesh_approximation::HIERARCHICAL <button class=\"collapsible\"> max_number_of_proxies </button> the maximum number of proxies used to approximate the input mesh Type: std::size_t Default: num_faces(tm) / 3 , used when min_error_drop is also not provided <button class=\"collapsible\"> min_error_drop </button> the minimum error drop of the approximation, expressed as the ratio between two iterations of proxy addition Type: geom_traits::FT Default: 0.1 , used when max_number_of_proxies is also not provided <button class=\"collapsible\"> number_of_relaxations </button> the number of relaxation iterations interleaved within seeding Type: std::size_t Default: 5 <button class=\"collapsible\"> number_of_iterations </button> the number of partitioning and fitting iterations after seeding Type: std::size_t Default: std::min(std::max(number_of_faces / max_number_of_proxies, 20), 60) Meshing Named Parameters <button class=\"collapsible\"> subdivision_ratio </button> the chord subdivision ratio threshold to the chord length or average edge length Type: geom_traits::FT Default: 5.0 <button class=\"collapsible\"> relative_to_chord </button> If true , the subdivision_ratio is the ratio of the furthest vertex distance to the chord length, otherwise is the average edge length Type: Boolean Default: false <button class=\"collapsible\"> with_dihedral_angle </button> If true , the subdivision_ratio is weighted by dihedral angle Type: Boolean Default: false <button class=\"collapsible\"> optimize_anchor_location </button> If true , optimize the anchor locations Type: Boolean Default: true <button class=\"collapsible\"> pca_plane </button> If true , use PCA plane fitting, otherwise use the default area averaged plane parameters Type: Boolean Default: false Output Named Parameters <button class=\"collapsible\"> face_proxy_map </button> a property map to output the proxy index of each face of the input polygon mesh Type: a model of WritablePropertyMap with boost::graph_traits<TriangleMesh>::face_descriptor as key and std::size_t as value type Default: no output operation is performed Extra: A proxy is a set of connected faces which are placed under the same proxy patch (see fig__iterations ) Extra: The proxy-ids are contiguous in range [0, number_of_proxies - 1] <button class=\"collapsible\"> proxies </button> an OutputIterator to put proxies in Type: a class model of OutputIterator with CGAL::Surface_mesh_approximation::L21_metric_vector_proxy_no_area_weighting::Proxy value type Default: no output operation is performed <button class=\"collapsible\"> anchors </button> an OutputIterator to put anchor points in Type: a class model of OutputIterator with geom_traits::Point_3 value type Default: no output operation is performed <button class=\"collapsible\"> triangles </button> an OutputIterator to put indexed triangles in Type: a class model of OutputIterator with std::array<std::size_t, 3> value type Default: no output operation is performed",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_mesh_approximation::approximate_triangle_mesh",
+          "argsstring": "(const TriangleMesh &tm, const NamedParameters &np)",
+          "params": [
+            {
+              "type": "const TriangleMesh &",
+              "name": "tm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_mesh_approximation/approximate_triangle_mesh.h",
+          "line": "180"
+        }
+      ],
+      "xml_file": "group___pkg_t_s_m_a_ref.xml"
+    },
+    "PkgTSMAConcepts": {
+      "kind": "group",
+      "name": "PkgTSMAConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_t_s_m_a_concepts.xml"
+    }
+  }
+}

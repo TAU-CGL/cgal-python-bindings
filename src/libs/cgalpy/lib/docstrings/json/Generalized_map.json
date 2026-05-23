@@ -1,0 +1,424 @@
+{
+  "schema_version": 1,
+  "package": "Generalized_map",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 7,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Generalized_map": {
+      "kind": "class",
+      "name": "CGAL::Generalized_map",
+      "brief": "The class Generalized_map represents a d D generalized map.",
+      "detailed": "Two versions exist: one where darts and non void attributes are stored in memory using Compact_container , using Alloc as allocator, and use handles as descriptors; a second one where darts and non void attributes are stored in an internal std::vector like data-structure, and use indices as descriptors. The choice between the two versions is done through the item class. Is model of GeneralizedMap d the dimension of the map. Items a model of the GenericMapItems concept. Equal to Generic_map_min_items by default. Alloc has to match the standard allocator requirements. The rebind mechanism Alloc will be used to create appropriate allocators internally with value type Dart . Equal to CGAL_ALLOCATOR(int) from <CGAL/memory.h> by default. Complexity The complexity of sew and unsew is in O ( $ | $ S $ | $ $ \\times $ $ | $ c $ | $ ), S being the set of darts of the orbit $ \\langle{}$ $ \\alpha_0$ , $ \\ldots$ , $ \\alpha_{i-2}$ , $ \\alpha_{i+2}$ , $ \\ldots$ , $ \\alpha_d$ $ \\rangle{}$ for the considered dart, and c the biggest j -cell merged or split during the sew such that j -attributes are non void. The complexity of is_sewable is in O ( $ | $ S $ | $ ). The complexity of set_attribute is in O ( $ | $ c $ | $ ), c being the i -cell containing the considered dart. The complexity of is_without_boundary(i) is in O ( $ | $ D $ | $ ), D being the set of darts of the generalized map, and the complexity of is_without_boundary() is in O ( $ | $ D $ | $ $ \\times $ d ). The complexity of unmark_all and free_mark is in O ( 1 ) if all the darts of the generalized map have the same mark, and in O ( $ | $ D $ | $ ) otherwise. The complexity of is_valid is in O ( $ | $ D $ | $ $ \\times $ d $ ^2$ ). The complexity of clear is in O ( $ | $ D $ | $ $ \\times $ d ). Other methods have all a constant time complexity. GenericMapItems",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Generalized_map::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Generalized_map < d, Items, Alloc >",
+          "definition": "typedef Generalized_map<d,Items,Alloc> CGAL::Generalized_map< d, Items, Alloc >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Generalized_map.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Dart_info",
+          "qualified_name": "CGAL::Generalized_map::Dart_info",
+          "brief": "Information associated with darts.",
+          "detailed": "Equal to void if Dart_info is not defined in the items class.",
+          "return_type": "Items::Dart_wrapper< Self >::Dart_info",
+          "definition": "typedef Items::Dart_wrapper<Self>::Dart_info CGAL::Generalized_map< d, Items, Alloc >::Dart_info",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Generalized_map.h",
+          "line": "64"
+        },
+        {
+          "kind": "typedef",
+          "name": "Attributes",
+          "qualified_name": "CGAL::Generalized_map::Attributes",
+          "brief": "The tuple of cell attributes.",
+          "detailed": "Equal to std::tuple<> if Attributes is not defined in the items class.",
+          "return_type": "Items::Dart_wrapper< Self >::Attributes",
+          "definition": "typedef Items::Dart_wrapper<Self>::Attributes CGAL::Generalized_map< d, Items, Alloc >::Attributes",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Generalized_map.h",
+          "line": "69"
+        },
+        {
+          "kind": "variable",
+          "name": "dimension",
+          "qualified_name": "CGAL::Generalized_map::dimension",
+          "brief": "The dimension of the generalized map.",
+          "detailed": "",
+          "return_type": "const unsigned int",
+          "definition": "const unsigned int CGAL::Generalized_map< d, Items, Alloc >::dimension",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constants",
+          "file": "CGAL/Generalized_map.h",
+          "line": "49"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_generalized__map.xml",
+      "file": "CGAL/Generalized_map.h",
+      "line": "40"
+    },
+    "GeneralizedMap": {
+      "kind": "class",
+      "name": "GeneralizedMap",
+      "brief": "The concept GeneralizedMap defines a d -dimensional generalized map.",
+      "detailed": "Refines GenericMap Has models CGAL::Generalized_map<d,Items,Alloc> For a generalized map, the function next is equal to $ \\alpha_1\\circ\\alpha_0$ , previous is equal to $ \\alpha_0\\circ\\alpha_1$ and the function opposite<i> is equal to $ \\alpha_i\\circ\\alpha_0$ .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "alpha",
+          "qualified_name": "GeneralizedMap::alpha",
+          "brief": "Returns $ \\alpha_j$ ( $ \\alpha_i$ ( d )).",
+          "detailed": "Overloads of this member function are defined that take from one to nine integer as arguments. For each function, alphas are applied in the same order as their indices are given as parameters. For example alpha(d,1) = $ \\alpha_1$ ( d ), and alpha(d,1,2,3,0) = $ \\alpha_0$ ( $ \\alpha_3$ ( $ \\alpha_2$ ( $ \\alpha_1$ ( d )))). 0 $ \\leq $ i $ \\leq $ dimension , 0 $ \\leq $ j $ \\leq $ dimension and d $ \\in$ darts() .",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor GeneralizedMap::alpha",
+          "argsstring": "(Dart_descriptor d, int i, int j)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "alpha",
+          "qualified_name": "GeneralizedMap::alpha",
+          "brief": "Returns $ \\alpha_j$ ( $ \\alpha_i$ ( d )).",
+          "detailed": "Overloads of this member function are defined that take from one to nine integer as arguments. 0 $ \\leq $ i $ \\leq $ dimension , 0 $ \\leq $ j $ \\leq $ dimension and d $ \\in$ darts() .",
+          "return_type": "Dart_const_descriptor",
+          "definition": "Dart_const_descriptor GeneralizedMap::alpha",
+          "argsstring": "(Dart_const_descriptor d, int i, int j) const",
+          "params": [
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "alpha",
+          "qualified_name": "GeneralizedMap::alpha",
+          "brief": "Returns $ \\alpha_j$ ( $ \\alpha_i$ ( d )).",
+          "detailed": "Overloads of this member function are defined that take from one to nine integer as template arguments. For each function, alphas are applied in the same order as their indices are given as template arguments. For example alpha <1>(d) = $ \\alpha_1$ ( d ), and alpha <1,2,3,0>(d) = $ \\alpha_0$ ( $ \\alpha_3$ ( $ \\alpha_2$ ( $ \\alpha_1$ ( d )))). 0 $ \\leq $ i $ \\leq $ dimension , 0 $ \\leq $ j $ \\leq $ dimension and d $ \\in$ darts() .",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor GeneralizedMap::alpha",
+          "argsstring": "(Dart_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "alpha",
+          "qualified_name": "GeneralizedMap::alpha",
+          "brief": "Returns $ \\alpha_j$ ( $ \\alpha_i$ ( d )).",
+          "detailed": "Overloads of this member function are defined that take from one to nine integer as template arguments. 0 $ \\leq $ i $ \\leq $ dimension , 0 $ \\leq $ j $ \\leq $ dimension and d $ \\in$ darts() .",
+          "return_type": "Dart_const_descriptor",
+          "definition": "Dart_const_descriptor GeneralizedMap::alpha",
+          "argsstring": "(Dart_const_descriptor d) const",
+          "params": [
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "is_orientable",
+          "qualified_name": "GeneralizedMap::is_orientable",
+          "brief": "Returns true iff the current generalized map is orientable.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool GeneralizedMap::is_orientable",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "GeneralizedMap::is_valid",
+          "brief": "Returns true iff the generalized map is valid.",
+          "detailed": "A generalized map is valid (see Sections Mathematical Definitions and Generalized Map Properties ) if for all its darts d $\\in$ darts() : $ \\forall $ i , 0 $ \\leq $ i $ \\leq $ dimension : $ \\alpha_i(\\alpha_i(d))=d$ ; $ \\forall $ i , $ \\forall $ j such that 0 $ \\leq $ i $ \\leq $ dimension -2 and i +2 $ \\leq $ j $ \\leq $ dimension : $ \\alpha_j(\\alpha_i(\\alpha_j(\\alpha_i(d))))=d$ ; $ \\forall $ i , 0 $ \\leq $ i $ \\leq $ dimension such that i -attributes are non void: $ \\forall $ d2 in the same i -cell than d : d and d2 have the same i -attribute; $ \\forall $ d2 in a different i -cell than d : d and d2 have different i -attributes.",
+          "return_type": "bool",
+          "definition": "bool GeneralizedMap::is_valid",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "link_alpha",
+          "qualified_name": "GeneralizedMap::link_alpha",
+          "brief": "Links d1 and d2 by $ \\alpha_i$ .",
+          "detailed": "The generalized map can be no longer valid after this operation. If are_attributes_automatically_managed() ==true , non void attributes of d1 and d2 are updated: if one dart has an attribute and the second dart not, the non null attribute is associated to the dart having a null attribute. If both darts have an attribute, the attribute of d1 is associated to d2 . 0 $ \\leq $ i $ \\leq $ dimension , d1 $ \\in$ darts() , d2 $ \\in$ darts() and ( i $ <$ 2 or d1 $ \\neq$ d2 ).",
+          "return_type": "void",
+          "definition": "void GeneralizedMap::link_alpha",
+          "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dart_descriptor",
+              "name": "d2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "86"
+        },
+        {
+          "kind": "function",
+          "name": "unlink_alpha",
+          "qualified_name": "GeneralizedMap::unlink_alpha",
+          "brief": "Unlinks d and $ \\alpha_i$ ( d ) by $ \\alpha_i$ .",
+          "detailed": "The generalized map can be no longer valid after this operation. Attributes of d and $ \\alpha_i$ ( d ) are not modified. 0 $ \\leq $ i $ \\leq $ dimension , d $ \\in$ darts() , and d is not i -free.",
+          "return_type": "void",
+          "definition": "void GeneralizedMap::unlink_alpha",
+          "argsstring": "(Dart_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "is_sewable",
+          "qualified_name": "GeneralizedMap::is_sewable",
+          "brief": "Returns true iff d1 can be i -sewn with d2 by keeping the generic map valid.",
+          "detailed": "This is true if there is a bijection f between all the darts of the orbit D1 = $ \\langle{}$ $ \\alpha_0$ , $ \\ldots$ , $ \\alpha_{i-2}$ , $ \\alpha_{i+2}$ , $ \\ldots$ , $ \\alpha_d$ $ \\rangle{}$ ( d1 ) and D2 = $ \\langle{}$ $ \\alpha_0$ , $ \\ldots$ , $ \\alpha_{i-2}$ , $ \\alpha_{i+2}$ , $ \\ldots$ , $ \\alpha_d$ $ \\rangle{}$ ( d2 ) satisfying: f ( d1 )= d2 , $ \\forall $ e $ \\in$ D1 , $ \\forall $ j $ \\in$ {1, $ \\ldots$ , i -2, i +2, $ \\ldots$ , d }, f ( $ \\alpha_j$ ( e ))= $ \\alpha_j$ ( f ( e )). 0 $ \\leq $ i $ \\leq $ dimension , d1 $ \\in $ darts() , and d2 $ \\in $ darts() .",
+          "return_type": "bool",
+          "definition": "bool GeneralizedMap::is_sewable",
+          "argsstring": "(Dart_const_descriptor d1, Dart_const_descriptor d2) const",
+          "params": [
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "sew",
+          "qualified_name": "GeneralizedMap::sew",
+          "brief": "i -sew darts d1 and d2 , by keeping the generic map valid.",
+          "detailed": "Links by $ \\alpha_i$ two by two all the darts of the orbit D1 = $ \\langle{}$ $ \\alpha_0$ , $ \\ldots$ , $ \\alpha_{i-2}$ , $ \\alpha_{i+2}$ , $ \\ldots$ , $ \\alpha_d$ $ \\rangle{}$ ( d1 ) and D2 = $ \\langle{}$ $ \\alpha_0$ , $ \\alpha_2$ , $ \\ldots$ , $ \\alpha_{i-2}$ , $ \\alpha_{i+2}$ , $ \\ldots$ , $ \\alpha_d$ $ \\rangle{}$ ( d2 ) such that d2 = f ( d1 ), where f is the bijection between D1 and D2 satisfying: f ( d1 )= d2 , and for all e $ \\in$ D1 , for all j $ \\in$ {1, $ \\ldots$ , i -2, i +2, $ \\ldots$ , d }, f ( $ \\alpha_j$ ( e ))= $ \\alpha_j$ ( f ( e )). If are_attributes_automatically_managed() ==true , when necessary, non void attributes are updated to ensure the validity of the generic map: for each j -cells c1 and c2 which are merged into one j -cell during the sew, the two associated attributes attr1 and attr2 are considered. If one attribute is null_descriptor and the other not, the non null_descriptor attribute is associated to all the darts of the resulting cell. When the two attributes are non null_descriptor , functor Attribute_type<i>::type::On_merge is called on the two attributes attr1 and attr2 . If set, the dynamic onmerge function of i -attributes is also called on attr1 and attr2 . Then, the attribute attr1 is associated to all darts of the resulting j -cell. Finally, attribute attr2 is removed from the generic map. is_sewable<i> ( d1 , d2 ). Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the generic map can be no more valid after this operation.",
+          "return_type": "void",
+          "definition": "void GeneralizedMap::sew",
+          "argsstring": "(Dart_descriptor d1, Dart_descriptor d2)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dart_descriptor",
+              "name": "d2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "unsew",
+          "qualified_name": "GeneralizedMap::unsew",
+          "brief": "i -unsew darts d and opposite<i>(d) , by keeping the generic map valid.",
+          "detailed": "Unlinks by $ \\alpha_i$ all the darts in the orbit $ \\langle{}$ $ \\alpha_0$ , $ \\ldots$ , $ \\alpha_{i-2}$ , $ \\alpha_{i+2}$ , $ \\ldots$ , $ \\alpha_d$ $ \\rangle{}$ ( d ). If are_attributes_automatically_managed() ==true , when necessary, non void attributes are updated to ensure the validity of the generic map: for each j -cell c split in two j -cells c1 and c2 by the operation, if c is associated to a j -attribute attr1 , then this attribute is duplicated into attr2 , and all the darts belonging to c2 are associated with this new attribute. Finally, the functor Attribute_type<i>::type::On_split is called on the two attributes attr1 and attr2 . If set, the dynamic onsplit function of i -attributes is also called on attr1 and attr2 . 0 $ \\leq $ i $ \\leq $ dimension , d $ \\in $ darts() and d is not i -free. Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated thus the generic map can be no more valid after this operation.",
+          "return_type": "void",
+          "definition": "void GeneralizedMap::unsew",
+          "argsstring": "(Dart_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GeneralizedMap.h",
+          "line": "137"
+        }
+      ],
+      "xml_file": "class_generalized_map.xml",
+      "file": "Concepts/GeneralizedMap.h",
+      "line": "17"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Generalized_map.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgGeneralizedMapsRef": {
+      "kind": "group",
+      "name": "PkgGeneralizedMapsRef",
+      "brief": "",
+      "detailed": "Guillaume Damiand This package implements Generalized Maps in d dimensions. A generalized map is a data structure enabling to represent an orientable or non orientable subdivided object by describing all the cells of the subdivision (for example in 3D vertices, edges, faces, volumes) and all the incidence and adjacency relationships between these cells. Information can be associated to cells thanks to attributes. The package provides basic creation, modification operations, and several iterators enabling to run through some specific part of the object. Introduced in: CGAL 4.9 BibTeX: cgal:d-gm-26a License: LGPL Classified Reference Pages Concepts GenericMap GenericMapItems CellAttribute GeneralizedMap Classes CGAL::Generalized_map <d,Items,Alloc> CGAL::Cell_attribute<GMap,Info_,Tag,OnMerge,OnSplit> CGAL::Generic_map_min_items<d>",
+      "members": [],
+      "xml_file": "group___pkg_generalized_maps_ref.xml"
+    },
+    "PkgGeneralizedMapsConcepts": {
+      "kind": "group",
+      "name": "PkgGeneralizedMapsConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_generalized_maps_concepts.xml"
+    },
+    "PkgGeneralizedMapsClasses": {
+      "kind": "group",
+      "name": "PkgGeneralizedMapsClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_generalized_maps_classes.xml"
+    }
+  }
+}

@@ -1,0 +1,2106 @@
+{
+  "schema_version": 1,
+  "package": "Linear_cell_complex",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 22,
+  "skipped_count": 0,
+  "compounds": {
+    "CellAttributeWithPoint": {
+      "kind": "class",
+      "name": "CellAttributeWithPoint",
+      "brief": "The concept CellAttributeWithPoint is a refinement of the CellAttribute concept, to represent a cell attribute containing a point.",
+      "detailed": "Refines CellAttribute Has models CGAL::Cell_attribute_with_point<LCC,Info_,Tag,OnMerge,OnSplit> LinearCellComplexItems",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CellAttributeWithPoint::Point",
+          "brief": "Type of the used point.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CellAttributeWithPoint::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "Info",
+          "qualified_name": "CellAttributeWithPoint::Info",
+          "brief": "Type of the information, defined in the CellAttribute concept.",
+          "detailed": "",
+          "return_type": "CellAttribute::Info",
+          "definition": "typedef CellAttribute::Info CellAttributeWithPoint::Info",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "CellAttributeWithPoint",
+          "qualified_name": "CellAttributeWithPoint::CellAttributeWithPoint",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CellAttributeWithPoint::CellAttributeWithPoint",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "CellAttributeWithPoint",
+          "qualified_name": "CellAttributeWithPoint::CellAttributeWithPoint",
+          "brief": "Constructor initializing the point of this attribute by the copy constructor Point (apoint) .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CellAttributeWithPoint::CellAttributeWithPoint",
+          "argsstring": "(const Point &apoint)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "apoint",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "48"
+        },
+        {
+          "kind": "function",
+          "name": "CellAttributeWithPoint",
+          "qualified_name": "CellAttributeWithPoint::CellAttributeWithPoint",
+          "brief": "Constructor initializing the point of this attribute by the copy constructor Point (apoint) and initializing the information of this attribute by the copy constructor Info (info) .",
+          "detailed": "Defined only if Info is different from void .",
+          "return_type": "",
+          "definition": "CellAttributeWithPoint::CellAttributeWithPoint",
+          "argsstring": "(const Point &apoint, const Info &info)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "apoint",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Info &",
+              "name": "info",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "CellAttributeWithPoint::point",
+          "brief": "Returns the point of this attribute.",
+          "detailed": "",
+          "return_type": "Point &",
+          "definition": "Point & CellAttributeWithPoint::point",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "CellAttributeWithPoint::point",
+          "brief": "Returns the point of this attribute, when this is const.",
+          "detailed": "",
+          "return_type": "const Point &",
+          "definition": "const Point & CellAttributeWithPoint::point",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/CellAttributeWithPoint.h",
+          "line": "72"
+        }
+      ],
+      "xml_file": "class_cell_attribute_with_point.xml",
+      "file": "Concepts/CellAttributeWithPoint.h",
+      "line": "18"
+    },
+    "CGAL::Cell_attribute_with_point": {
+      "kind": "class",
+      "name": "CGAL::Cell_attribute_with_point",
+      "brief": "The class Cell_attribute_with_point represents an attribute containing a point and containing an information when Info_ is different from void .",
+      "detailed": "This class can typically be used to associate a point to each 0-cell of a combinatorial or a generalized map. Is model of CellAttributeWithPoint LCC a model of the LinearCellComplex concept. Info_ the type of the information contained in the attribute, void for no information. Equal to void by default. Tag is ::Tag_true to enable the storage of a Dart_descriptor of the associated cell, ::Tag_false otherwise. Equal to ::Tag_true by default. OnMerge a functor called when two attributes are merged. Equal to Null_functor by default. OnSplit a functor called when one attribute is split in two. Equal to Null_functor by default. CGAL::Linear_cell_complex_min_items <d> CGAL::Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Cell_attribute_with_point::Point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC::Point",
+          "definition": "typedef LCC::Point CGAL::Cell_attribute_with_point< LCC, Info_, Tag, OnMerge, OnSplit >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Cell_attribute_with_point.h",
+          "line": "32"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_cell__attribute__with__point.xml",
+      "file": "CGAL/Cell_attribute_with_point.h",
+      "line": "23"
+    },
+    "CGAL::Cell_attribute_with_point_and_id": {
+      "kind": "class",
+      "name": "CGAL::Cell_attribute_with_point_and_id",
+      "brief": "The class Cell_attribute_with_point_and_id represents an attribute containing a point, containing an information when Info_ is different from void , and having an id.",
+      "detailed": "This class can typically be used to associate a point with id to each 0-cell of a combinatorial or a generalized map. Is model of CellAttributeWithPoint LCC a model of the LinearCellComplex concept. Info_ the type of the information contained in the attribute, void for no information. Equal to void by default. Tag is ::Tag_true to enable the storage of a Dart_descriptor of the associated cell, ::Tag_false otherwise. Equal to ::Tag_true by default. OnMerge a functor called when two attributes are merged. Equal to Null_functor by default. OnSplit a functor called when one attribute is split in two. Equal to Null_functor by default. CGAL::Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "id",
+          "qualified_name": "CGAL::Cell_attribute_with_point_and_id::id",
+          "brief": "Returns the index.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Cell_attribute_with_point_and_id< LCC, Info_, Tag, OnMerge, OnSplit >::id",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Cell_attribute_with_point_and_id.h",
+          "line": "26"
+        },
+        {
+          "kind": "function",
+          "name": "id",
+          "qualified_name": "CGAL::Cell_attribute_with_point_and_id::id",
+          "brief": "Returns the index by reference.",
+          "detailed": "",
+          "return_type": "int &",
+          "definition": "int & CGAL::Cell_attribute_with_point_and_id< LCC, Info_, Tag, OnMerge, OnSplit >::id",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Cell_attribute_with_point_and_id.h",
+          "line": "29"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_cell__attribute__with__point__and__id.xml",
+      "file": "CGAL/Cell_attribute_with_point_and_id.h",
+      "line": "22"
+    },
+    "CGAL::Linear_cell_complex_for_combinatorial_map": {
+      "kind": "class",
+      "name": "CGAL::Linear_cell_complex_for_combinatorial_map",
+      "brief": "The class Linear_cell_complex_for_combinatorial_map represents a linear cell complex in dimension d , in an ambient space of dimension d2 , using a combinatorial map as underlying combinatorial data-structure.",
+      "detailed": "Like for Combinatorial_map , two versions exist: one where Darts and non void attributes are stored in memory using Compact_container , using Alloc as allocator, and use handles as descriptors; a second one where Darts and non void attributes are stored in an internal std::vector like data-structure, and use indices as descriptors. The choice between the two versions is done through the item class. Is model of LinearCellComplex CombinatorialMap d the dimension of the combinatorial map. d2 the dimension of the ambient space. Equal to d by default. LCCTraits be a model of the LinearCellComplexTraits concept, satisfying LCCTraits::ambient_dimension ==d2 . Equal to CGAL::Linear_cell_complex_traits <d2> by default. Items a model of the LinearCellComplexItems concept. Equal to CGAL::Linear_cell_complex_min_items by default. Alloc has to match the standard allocator requirements. Equal to CGAL_ALLOCATOR(int) by default. Advanced Note that there is an additional, and undocumented, template parameter CMap for Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc,CMap> allowing to inherit from any model of the CombinatorialMap concept. CGAL::Combinatorial_map<d,Items,Alloc> CGAL::Linear_cell_complex_traits <d,K> CGAL::Linear_cell_complex_min_items <d>",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "ambient_dimension",
+          "qualified_name": "CGAL::Linear_cell_complex_for_combinatorial_map::ambient_dimension",
+          "brief": "Ambient dimension, must be > 1.",
+          "detailed": "",
+          "return_type": "const unsigned int",
+          "definition": "const unsigned int CGAL::Linear_cell_complex_for_combinatorial_map< d, d2, LCCTraits, Items, Alloc >::ambient_dimension",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constants",
+          "file": "CGAL/Linear_cell_complex_for_combinatorial_map.h",
+          "line": "38"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_linear__cell__complex__for__combinatorial__map.xml",
+      "file": "CGAL/Linear_cell_complex_for_combinatorial_map.h",
+      "line": "28"
+    },
+    "CGAL::Linear_cell_complex_for_generalized_map": {
+      "kind": "class",
+      "name": "CGAL::Linear_cell_complex_for_generalized_map",
+      "brief": "The class Linear_cell_complex_for_generalized_map represents a linear cell complex in dimension d , in an ambient space of dimension d2 , using a generalized map as underlying combinatorial data-structure.",
+      "detailed": "Like for GeneralizedMap , two versions exist: one where Darts and non void attributes are stored in memory using Compact_container , using Alloc as allocator, and use handles as descriptors; a second one where Darts and non void attributes are stored in an internal std::vector like data-structure, and use indices as descriptors. The choice between the two versions is done through the item class. Is model of LinearCellComplex GeneralizedMap d the dimension of the generalized map. d2 the dimension of the ambient space. Equal to d by default. LCCTraits a model of the LinearCellComplexTraits concept, satisfying LCCTraits::ambient_dimension ==d2 . Equal to CGAL::Linear_cell_complex_traits <d2> by default. Items a model of the LinearCellComplexItems concept. Equal to CGAL::Linear_cell_complex_min_items <d> by default. Alloc has to match the standard allocator requirements. Equal to CGAL_ALLOCATOR(int) by default. Advanced Note that there is an additional, and undocumented, template parameter GMap for Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc,GMap> allowing to inherit from any model of the GeneralizedMap concept. CGAL::Generalized_map<d,Items,Alloc> CGAL::Linear_cell_complex_traits <d,K> CGAL::Linear_cell_complex_min_items <d>",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "ambient_dimension",
+          "qualified_name": "CGAL::Linear_cell_complex_for_generalized_map::ambient_dimension",
+          "brief": "Ambient dimension, must be > 1.",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Linear_cell_complex_for_generalized_map< d, d2, LCCTraits, Items, Alloc >::ambient_dimension",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constants",
+          "file": "CGAL/Linear_cell_complex_for_generalized_map.h",
+          "line": "38"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_linear__cell__complex__for__generalized__map.xml",
+      "file": "CGAL/Linear_cell_complex_for_generalized_map.h",
+      "line": "28"
+    },
+    "CGAL::Linear_cell_complex_incremental_builder_3": {
+      "kind": "class",
+      "name": "CGAL::Linear_cell_complex_incremental_builder_3",
+      "brief": "The auxiliary class Linear_cell_complex_incremental_builder_3 supports the incremental construction of linear cell complexes.",
+      "detailed": "LCC must be a model of the concept LinearCellComplex",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Linear_cell_complex_incremental_builder_3",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::Linear_cell_complex_incremental_builder_3",
+          "brief": "Constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Linear_cell_complex_incremental_builder_3< LCC >::Linear_cell_complex_incremental_builder_3",
+          "argsstring": "(LCC &alcc)",
+          "params": [
+            {
+              "type": "LCC &",
+              "name": "alcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "begin_surface",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::begin_surface",
+          "brief": "starts a new surface.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Linear_cell_complex_incremental_builder_3< LCC >::begin_surface",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Surface Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "add_vertex",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::add_vertex",
+          "brief": "adds a new vertex for p and returns its handle.",
+          "detailed": "",
+          "return_type": "VAH",
+          "definition": "VAH CGAL::Linear_cell_complex_incremental_builder_3< LCC >::add_vertex",
+          "argsstring": "(const Point_3 &p)",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Surface Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "begin_facet",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::begin_facet",
+          "brief": "starts a new facet.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Linear_cell_complex_incremental_builder_3< LCC >::begin_facet",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Surface Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "add_vertex_to_facet",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::add_vertex_to_facet",
+          "brief": "adds vertex i at the end of the current facet.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Linear_cell_complex_incremental_builder_3< LCC >::add_vertex_to_facet",
+          "argsstring": "(size_type i)",
+          "params": [
+            {
+              "type": "size_type",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Surface Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "70"
+        },
+        {
+          "kind": "function",
+          "name": "end_facet",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::end_facet",
+          "brief": "ends the construction of the facet and returns the first dart of this facet.",
+          "detailed": "",
+          "return_type": "DH",
+          "definition": "DH CGAL::Linear_cell_complex_incremental_builder_3< LCC >::end_facet",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Surface Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "end_surface",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::end_surface",
+          "brief": "ends the construction of the surface and returns one dart of the created surface.",
+          "detailed": "",
+          "return_type": "DH",
+          "definition": "DH CGAL::Linear_cell_complex_incremental_builder_3< LCC >::end_surface",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Surface Creation",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "81"
+        },
+        {
+          "kind": "function",
+          "name": "add_facet",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::add_facet",
+          "brief": "is a synonym for begin_facet() , a call to add_vertex_to_facet() for each value in the range [first,beyond) , and a call to end_facet() .",
+          "detailed": "",
+          "return_type": "DH",
+          "definition": "DH CGAL::Linear_cell_complex_incremental_builder_3< LCC >::add_facet",
+          "argsstring": "(std::initializer_list< size_type > l)",
+          "params": [
+            {
+              "type": "std::initializer_list< size_type >",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Additional Operations",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "92"
+        },
+        {
+          "kind": "typedef",
+          "name": "LCC",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::LCC",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC_",
+          "definition": "typedef LCC_ CGAL::Linear_cell_complex_incremental_builder_3< LCC >::LCC",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "17"
+        },
+        {
+          "kind": "typedef",
+          "name": "DH",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::DH",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC::Dart_descriptor",
+          "definition": "typedef LCC::Dart_descriptor CGAL::Linear_cell_complex_incremental_builder_3< LCC >::DH",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "18"
+        },
+        {
+          "kind": "typedef",
+          "name": "VAH",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::VAH",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC::Vertex_attribute_descriptor",
+          "definition": "typedef LCC::Vertex_attribute_descriptor CGAL::Linear_cell_complex_incremental_builder_3< LCC >::VAH",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "19"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC::Point",
+          "definition": "typedef LCC::Point CGAL::Linear_cell_complex_incremental_builder_3< LCC >::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "20"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "CGAL::Linear_cell_complex_incremental_builder_3::size_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC::size_type",
+          "definition": "typedef LCC::size_type CGAL::Linear_cell_complex_incremental_builder_3< LCC >::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+          "line": "21"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_linear__cell__complex__incremental__builder__3.xml",
+      "file": "CGAL/Linear_cell_complex_incremental_builder_3.h",
+      "line": "14"
+    },
+    "CGAL::Linear_cell_complex_min_items": {
+      "kind": "struct",
+      "name": "CGAL::Linear_cell_complex_min_items",
+      "brief": "The class Linear_cell_complex_min_items defines void as the information associated with darts, and the attributes used.",
+      "detailed": "In this class, 0-attributes are enabled and associated with Cell_attribute_with_point . Is model of LinearCellComplexItems Example The following example shows one implementation of the Linear_cell_complex_min_items class. struct Linear_cell_complex_min_items { template < class LCC> struct Dart_wrapper { typedef CGAL::Cell_attribute_with_point<LCC> Vertex_attrib; typedef std::tuple<Vertex_attrib> Attributes; }; }; CGAL::Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc>",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_linear__cell__complex__min__items.xml",
+      "file": "CGAL/Linear_cell_complex_min_items.h",
+      "line": "33"
+    },
+    "CGAL::Linear_cell_complex_traits": {
+      "kind": "struct",
+      "name": "CGAL::Linear_cell_complex_traits",
+      "brief": "This geometric traits concept is used in the Linear_cell_complex_for_combinatorial_map and Linear_cell_complex_for_generalized_map classes.",
+      "detailed": "It can take as parameter any model of the concept Kernel (for example any CGAL kernel), and defines inner types and functors corresponding to the given dimension. Is model of LinearCellComplexTraits d the dimension of the kernel, K a model of the concept Kernel if d==2 or d==3 ; a model of the concept Kernel_d otherwise. Equal by default to CGAL::Exact_predicates_inexact_constructions_kernel if d is 2 or 3, and is CGAL::Cartesian_d<double> otherwise. Note that the default argument used for K when d > 3 does not use exact predicates because operations that use predicates are only defined in 2D and 3D. CGAL::Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc>",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "ambient_dimension",
+          "qualified_name": "CGAL::Linear_cell_complex_traits::ambient_dimension",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Linear_cell_complex_traits< d, K >::ambient_dimension",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constants",
+          "file": "CGAL/Linear_cell_complex_traits.h",
+          "line": "29"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_linear__cell__complex__traits.xml",
+      "file": "CGAL/Linear_cell_complex_traits.h",
+      "line": "21"
+    },
+    "LinearCellComplex": {
+      "kind": "class",
+      "name": "LinearCellComplex",
+      "brief": "The concept LinearCellComplex represents a linear cell complex in dimension d , in an ambient space of dimension d2 . This is a model of the concept of GenericMap adding a requirement to ensure that each vertex of the map is associated with a model of CellAttributeWithPoint .",
+      "detailed": "Refines GenericMap Has models CGAL::Linear_cell_complex_for_combinatorial_map<d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map<d,d2,LCCTraits,Items,Alloc> LinearCellComplexItems LinearCellComplexTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "LinearCellComplex::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::FT",
+          "definition": "typedef Traits::FT LinearCellComplex::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "51"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "LinearCellComplex::Point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Point",
+          "definition": "typedef Traits::Point LinearCellComplex::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "LinearCellComplex::Vector",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Vector",
+          "definition": "typedef Traits::Vector LinearCellComplex::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_attribute",
+          "qualified_name": "LinearCellComplex::Vertex_attribute",
+          "brief": "Type of 0-attributes, a model of CellAttributeWithPoint concept (a shortcut for Attribute_type<0>::type ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplex::Vertex_attribute",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_attribute_descriptor",
+          "qualified_name": "LinearCellComplex::Vertex_attribute_descriptor",
+          "brief": "Descriptor through 0-attributes (a shortcut for Attribute_descriptor<0>::type ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplex::Vertex_attribute_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "71"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_attribute_const_descriptor",
+          "qualified_name": "LinearCellComplex::Vertex_attribute_const_descriptor",
+          "brief": "Const descriptor through 0-attributes (a shortcut for Attribute_const_descriptor<0>::type ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplex::Vertex_attribute_const_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_attribute_range",
+          "qualified_name": "LinearCellComplex::Vertex_attribute_range",
+          "brief": "Range of all the 0-attributes, a model of the Range concept (a shortcut for Attribute_range<0>::type ).",
+          "detailed": "Iterator inner type is bidirectional iterator and value type is Vertex_attribute .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplex::Vertex_attribute_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "84"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_attribute_const_range",
+          "qualified_name": "LinearCellComplex::Vertex_attribute_const_range",
+          "brief": "Const range of all the 0-attributes, a model of the ConstRange concept a shortcut for Attribute_const_range<0>::type ).",
+          "detailed": "Iterator inner type is bidirectional iterator and value type is Vertex_attribute .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplex::Vertex_attribute_const_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "91"
+        },
+        {
+          "kind": "variable",
+          "name": "ambient_dimension",
+          "qualified_name": "LinearCellComplex::ambient_dimension",
+          "brief": "Ambient dimension, must be > 1.",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int LinearCellComplex::ambient_dimension",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constants",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "LinearCellComplex",
+          "qualified_name": "LinearCellComplex::LinearCellComplex",
+          "brief": "Default constructor creating an empty linear cell complex.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "LinearCellComplex::LinearCellComplex",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "vertex_attributes",
+          "qualified_name": "LinearCellComplex::vertex_attributes",
+          "brief": "Returns a range of all the 0-attributes in this linear cell complex (a shortcut for attributes<0>() ).",
+          "detailed": "",
+          "return_type": "Vertex_attribute_range &",
+          "definition": "Vertex_attribute_range & LinearCellComplex::vertex_attributes",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "%Range Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "vertex_attributes",
+          "qualified_name": "LinearCellComplex::vertex_attributes",
+          "brief": "Returns a const range of all the 0-attributes in this linear cell complex (a shortcut for attributes<0>() const ).",
+          "detailed": "",
+          "return_type": "Vertex_attribute_const_range &",
+          "definition": "Vertex_attribute_const_range & LinearCellComplex::vertex_attributes",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "%Range Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "LinearCellComplex::is_valid",
+          "brief": "Returns true iff this linear cell complex is valid.",
+          "detailed": "A linear cell complex lcc is valid if it is a valid generic map (cf. GenericMap::is_valid() ), and if for each dart descriptor d such that d $ \\in $ darts() : vertex_attribute(d) != null_descriptor .",
+          "return_type": "bool",
+          "definition": "bool LinearCellComplex::is_valid",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_vertex_attributes",
+          "qualified_name": "LinearCellComplex::number_of_vertex_attributes",
+          "brief": "Returns the number of 0-attributes in this linear cell complex (a shortcut for number_of_attributes<0>() ).",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type LinearCellComplex::number_of_vertex_attributes",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "126"
+        },
+        {
+          "kind": "function",
+          "name": "vertex_attribute",
+          "qualified_name": "LinearCellComplex::vertex_attribute",
+          "brief": "Returns the 0-attribute associated with d .",
+          "detailed": "",
+          "return_type": "Vertex_attribute_descriptor",
+          "definition": "Vertex_attribute_descriptor LinearCellComplex::vertex_attribute",
+          "argsstring": "(Dart_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "vertex_attribute",
+          "qualified_name": "LinearCellComplex::vertex_attribute",
+          "brief": "Returns the 0-attribute associated with d , when d is const.",
+          "detailed": "",
+          "return_type": "Vertex_attribute_const_descriptor",
+          "definition": "Vertex_attribute_const_descriptor LinearCellComplex::vertex_attribute",
+          "argsstring": "(Dart_const_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "point_of_vertex_attribute",
+          "qualified_name": "LinearCellComplex::point_of_vertex_attribute",
+          "brief": "Returns the point in the 0-attribute v .",
+          "detailed": "",
+          "return_type": "Point &",
+          "definition": "Point & LinearCellComplex::point_of_vertex_attribute",
+          "argsstring": "(Vertex_attribute_descriptor v)",
+          "params": [
+            {
+              "type": "Vertex_attribute_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "141"
+        },
+        {
+          "kind": "function",
+          "name": "point_of_vertex_attribute",
+          "qualified_name": "LinearCellComplex::point_of_vertex_attribute",
+          "brief": "Returns the point in the 0-attribute v , when v is const.",
+          "detailed": "",
+          "return_type": "const Point &",
+          "definition": "const Point & LinearCellComplex::point_of_vertex_attribute",
+          "argsstring": "(Vertex_attribute_const_descriptor v) const",
+          "params": [
+            {
+              "type": "Vertex_attribute_const_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "146"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "LinearCellComplex::point",
+          "brief": "Returns the point in the 0-attribute associated with d .",
+          "detailed": "",
+          "return_type": "Point &",
+          "definition": "Point & LinearCellComplex::point",
+          "argsstring": "(Dart_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "LinearCellComplex::point",
+          "brief": "Returns the point in the 0-attribute associated with d , when d is const.",
+          "detailed": "",
+          "return_type": "const Point &",
+          "definition": "const Point & LinearCellComplex::point",
+          "argsstring": "(Dart_const_descriptor d) const",
+          "params": [
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Member Functions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "156"
+        },
+        {
+          "kind": "function",
+          "name": "create_dart",
+          "qualified_name": "LinearCellComplex::create_dart",
+          "brief": "Creates a new dart in this linear cell complex, sets its associated 0-attribute to v and returns the corresponding descriptor.",
+          "detailed": "v $ \\in $ vertex_attributes() .",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::create_dart",
+          "argsstring": "(Vertex_attribute_descriptor v)",
+          "params": [
+            {
+              "type": "Vertex_attribute_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "167"
+        },
+        {
+          "kind": "function",
+          "name": "create_dart",
+          "qualified_name": "LinearCellComplex::create_dart",
+          "brief": "Creates a new dart in this linear cell complex, creates a new 0-attribute initialized with apoint , sets the associated 0-attribute of the new dart to this new 0-attribute, and returns the corresponding descriptor.",
+          "detailed": "",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::create_dart",
+          "argsstring": "(const Point &apoint)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "apoint",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "172"
+        },
+        {
+          "kind": "function",
+          "name": "create_vertex_attribute",
+          "qualified_name": "LinearCellComplex::create_vertex_attribute",
+          "brief": "Creates a new 0-attribute in this linear cell complex, and returns the corresponding descriptor (a shortcut for create_attribute<0>(t1) ).",
+          "detailed": "Calls the constructor of Vertex_attribute having T1 as parameter. Overloads of this member function are defined that take from zero to nine arguments. With zero argument, create_vertex_attribute() creates a new 0-attribute by using the default constructor.",
+          "return_type": "Vertex_attribute_descriptor",
+          "definition": "Vertex_attribute_descriptor LinearCellComplex::create_vertex_attribute",
+          "argsstring": "(T1 t1)",
+          "params": [
+            {
+              "type": "T1",
+              "name": "t1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "178"
+        },
+        {
+          "kind": "function",
+          "name": "erase_vertex_attribute",
+          "qualified_name": "LinearCellComplex::erase_vertex_attribute",
+          "brief": "Removes the 0-attribute pointed to by v from this linear cell complex (a shortcut for erase_attribute<0>(v) ).",
+          "detailed": "v $ \\in $ vertex_attributes() .",
+          "return_type": "void",
+          "definition": "void LinearCellComplex::erase_vertex_attribute",
+          "argsstring": "(Vertex_attribute_descriptor v)",
+          "params": [
+            {
+              "type": "Vertex_attribute_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "185"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertex_attribute",
+          "qualified_name": "LinearCellComplex::set_vertex_attribute",
+          "brief": "Associates the 0-attribute of all the darts of the 0-cell containing d to v (a shortcut for set_attribute<0>(d,v) ).",
+          "detailed": "d $ \\in $ darts() and v $ \\in $ vertex_attributes() .",
+          "return_type": "void",
+          "definition": "void LinearCellComplex::set_vertex_attribute",
+          "argsstring": "(Dart_descriptor d, Vertex_attribute_descriptor v)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_attribute_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "192"
+        },
+        {
+          "kind": "function",
+          "name": "correct_invalid_attributes",
+          "qualified_name": "LinearCellComplex::correct_invalid_attributes",
+          "brief": "Correct the invalid attributes of the linear cell complex.",
+          "detailed": "We can have invalid attribute either if we have called set_automatic_attributes_management(false) before to use some modification operations or if we have modified the combinatorial map by using low level operations. The validation process of a linear cell complex validates its generic map (cf. correct_invalid_attributes() ), and for each dart d having no vertex attribute, a new vertex attribute is created, with its Point initialized to CGAL::Origin , and all the darts of the 0-cell containing d are linked with the new attribute.",
+          "return_type": "void",
+          "definition": "void LinearCellComplex::correct_invalid_attributes",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Attributes management",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "203"
+        },
+        {
+          "kind": "function",
+          "name": "barycenter",
+          "qualified_name": "LinearCellComplex::barycenter",
+          "brief": "Returns the barycenter of the i -cell containing d .",
+          "detailed": "1 $ \\leq $ i $ \\leq $ dimension and d $ \\in $ darts() .",
+          "return_type": "Point",
+          "definition": "Point LinearCellComplex::barycenter",
+          "argsstring": "(Dart_const_descriptor d) const",
+          "params": [
+            {
+              "type": "Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "215"
+        },
+        {
+          "kind": "function",
+          "name": "insert_point_in_cell",
+          "qualified_name": "LinearCellComplex::insert_point_in_cell",
+          "brief": "Inserts a point, copy of p , in the i -cell containing d .",
+          "detailed": "Returns a descriptor on one dart of this cell. i $ \\leq $ dimension $ \\leq $ 2 and d $ \\in $ darts() . If are_attributes_automatically_managed() ==true , if i -attributes are non void, Attribute_type<i>::type::On_split ( a , a' ) is called, with a the original i -attribute associated with d and a' each new i -attribute created during the operation. Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the combinatorial map can be no more valid after this operation.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::insert_point_in_cell",
+          "argsstring": "(Dart_descriptor d, Point p)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "229"
+        },
+        {
+          "kind": "function",
+          "name": "insert_barycenter_in_cell",
+          "qualified_name": "LinearCellComplex::insert_barycenter_in_cell",
+          "brief": "Inserts a point in the barycenter of the i -cell containing d .",
+          "detailed": "Returns a descriptor on one dart of this cell. i $ \\leq $ dimension $ \\leq $ 2 and d $ \\in $ darts() . If are_attributes_automatically_managed() ==true , if i -attributes are non void, Attribute_type<i>::type::On_split ( a , a' ) is called, with a the original i -attribute associated with d and a' each new i -attribute created during the operation. Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the combinatorial map can be no more valid after this operation.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::insert_barycenter_in_cell",
+          "argsstring": "(Dart_descriptor d)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "243"
+        },
+        {
+          "kind": "function",
+          "name": "insert_dangling_cell_1_in_cell_2",
+          "qualified_name": "LinearCellComplex::insert_dangling_cell_1_in_cell_2",
+          "brief": "Inserts a 1-cell in the 2-cell containing d , the 1-cell being attached only by one of its vertex to the 0-cell containing d .",
+          "detailed": "The second vertex is associated with a new 0-attribute containing a copy of p as point. Returns a descriptor on one dart belonging to the new 0-cell. 2 $ \\leq $ dimension and d $ \\in $ darts() . Advanced If are_attributes_automatically_managed() ==false , non void attributes are not updated; thus the combinatorial map can be no more valid after this operation.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::insert_dangling_cell_1_in_cell_2",
+          "argsstring": "(Dart_descriptor d, Point p)",
+          "params": [
+            {
+              "type": "Dart_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "254"
+        },
+        {
+          "kind": "function",
+          "name": "make_segment",
+          "qualified_name": "LinearCellComplex::make_segment",
+          "brief": "Creates an isolated segment in this linear cell complex (two darts linked by $ \\beta_2$ ) having p0 , p1 as points.",
+          "detailed": "Returns a descriptor on the dart associated with p0 . dimension $ \\geq$ 2. Example of r=lcc.make_segment(p0,p1), left for combinatorial map as combinatorial data-structure, right for generalized maps. Example of r=lcc.make_segment(p0,p1), left for combinatorial map as combinatorial data-structure, right for generalized maps.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::make_segment",
+          "argsstring": "(const Point &p0, const Point &p1)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "269"
+        },
+        {
+          "kind": "function",
+          "name": "make_triangle",
+          "qualified_name": "LinearCellComplex::make_triangle",
+          "brief": "Creates an isolated triangle in this linear cell complex having p0 , p1 , p2 as points.",
+          "detailed": "Returns a descriptor on the dart associated with p0 and with edge [ p0 , p1 ]. dimension $ \\geq$ 1. Example of r=lcc.make_triangle(p0,p1,p2), left for combinatorial map as combinatorial data-structure, right for generalized maps. Example of r=lcc.make_triangle(p0,p1,p2), left for combinatorial map as combinatorial data-structure, right for generalized maps.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::make_triangle",
+          "argsstring": "(const Point &p0, const Point &p1, const Point &p2)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "279"
+        },
+        {
+          "kind": "function",
+          "name": "make_quadrangle",
+          "qualified_name": "LinearCellComplex::make_quadrangle",
+          "brief": "Creates an isolated quadrangle in this linear cell complex having p0 , p1 , p2 , p3 as points.",
+          "detailed": "Returns a descriptor on the dart associated with p0 and with edge [ p0 , p1 ]. dimension $ \\geq$ 1. Example of r=lcc.make_quadrangle(p0,p1,p2,p3), left for combinatorial map as combinatorial data-structure, right for generalized maps. Example of r=lcc.make_quadrangle(p0,p1,p2,p3), left for combinatorial map as combinatorial data-structure, right for generalized maps.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::make_quadrangle",
+          "argsstring": "(const Point &p0, const Point &p1, const Point &p2, const Point &p3)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "289"
+        },
+        {
+          "kind": "function",
+          "name": "make_tetrahedron",
+          "qualified_name": "LinearCellComplex::make_tetrahedron",
+          "brief": "Creates an isolated tetrahedron in this linear cell complex having p0 , p1 , p2 , p3 as points.",
+          "detailed": "Returns a descriptor on the dart associated with p0 , with edge [ p0 , p1 ] and belonging to the 2-cell having p0 , p1 , p2 as points. dimension $ \\geq$ 2. Example of r=lcc.make_tetrahedron(p0,p1,p2,p3), left for combinatorial map as combinatorial data-structure, right for generalized maps. Example of r=lcc.make_tetrahedron(p0,p1,p2,p3), left for combinatorial map as combinatorial data-structure, right for generalized maps.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::make_tetrahedron",
+          "argsstring": "(const Point &p0, const Point &p1, const Point &p2, const Point &p3)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "299"
+        },
+        {
+          "kind": "function",
+          "name": "make_hexahedron",
+          "qualified_name": "LinearCellComplex::make_hexahedron",
+          "brief": "Creates an isolated hexahedron in this linear cell complex having p0 , p1 , p2 , p3 , p4 , p5 , p6 , p7 as points.",
+          "detailed": "Returns a descriptor on the dart associated with p0 , with edge [ p0 , p5 ] and belonging to the 2-cell having p0 , p5 , p6 , p1 as points. dimension $ \\geq $ 2. Example of r=lcc.make_hexahedron(p0,p1,p2,p3,p4,p5,p6,p7), left for combinatorial map as combinatorial data-structure, right for generalized maps. Example of r=lcc.make_hexahedron(p0,p1,p2,p3,p4,p5,p6,p7), left for combinatorial map as combinatorial data-structure, right for generalized maps.",
+          "return_type": "Dart_descriptor",
+          "definition": "Dart_descriptor LinearCellComplex::make_hexahedron",
+          "argsstring": "(const Point &p0, const Point &p1, const Point &p2, const Point &p3, const Point &p4, const Point &p5, const Point &p6, const Point &p7)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p4",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p5",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p6",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p7",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplex.h",
+          "line": "309"
+        }
+      ],
+      "xml_file": "class_linear_cell_complex.xml",
+      "file": "Concepts/LinearCellComplex.h",
+      "line": "19"
+    },
+    "LinearCellComplexItems": {
+      "kind": "class",
+      "name": "LinearCellComplexItems",
+      "brief": "The concept LinearCellComplexItems refines the concept of GenericMapItems by adding the requirement that 0-attributes are enabled, and associated with attributes that are models of the CellAttributeWithPoint concept.",
+      "detailed": "Refines GenericMapItems The first type in Attributes tuple must be a model of the CellAttributeWithPoint concept. Has models CGAL::Linear_cell_complex_min_items LinearCellComplex CellAttributeWithPoint",
+      "members": [],
+      "xml_file": "class_linear_cell_complex_items.xml",
+      "file": "Concepts/LinearCellComplexItems.h",
+      "line": "21"
+    },
+    "LinearCellComplexTraits": {
+      "kind": "class",
+      "name": "LinearCellComplexTraits",
+      "brief": "Required types and functors for the LinearCellComplexTraits concept. This geometric traits concept is used in the Linear_cell_complex_for_combinatorial_map and Linear_cell_complex_for_generalized_map classes.",
+      "detailed": "Has models CGAL::Linear_cell_complex_traits<d,K> CGAL::Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "LinearCellComplexTraits::FT",
+          "brief": "a number type that is a model of FieldNumberType.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "LinearCellComplexTraits::Point",
+          "brief": "point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "LinearCellComplexTraits::Vector",
+          "brief": "vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_translated_point",
+          "qualified_name": "LinearCellComplexTraits::Construct_translated_point",
+          "brief": "Functor that provides Point operator() (const Point & p, const Vector & v) , which constructs the translation of point p by vector v , and Point operator() (const CGAL::Origin&, const Vector & v) , which constructs the translation of a point at the origin by vector v (used in barycenter() ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_translated_point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector",
+          "qualified_name": "LinearCellComplexTraits::Construct_vector",
+          "brief": "Functor that provides Vector operator() (const Point & p1, const Point & p2) which constructs a vector as the difference of points p2-p1 , and Vector operator() (const CGAL::Origin&, const Point & p) which constructs a vector as the difference of point p and a point at the origin (used in barycenter and CGAL::read_plane_graph_in_lcc ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "69"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_of_vectors",
+          "qualified_name": "LinearCellComplexTraits::Construct_sum_of_vectors",
+          "brief": "Functor that provides Vector operator() (const Vector & v1, const Vector & v2) which constructs a vector as the sum of vectors v1+v2 (used in barycenter , CGAL::compute_normal_of_cell_0 and CGAL::compute_normal_of_cell_2 ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_sum_of_vectors",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector",
+          "qualified_name": "LinearCellComplexTraits::Construct_scaled_vector",
+          "brief": "Functor that provides Vector operator() (const Vector & v, FT scale) which constructs a vector equal to vector v scaled by scale factor (used in barycenter , CGAL::compute_normal_of_cell_0 and CGAL::compute_normal_of_cell_2 ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_scaled_vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_midpoint",
+          "qualified_name": "LinearCellComplexTraits::Construct_midpoint",
+          "brief": "Functor that provides Point operator() (const Point & p1, const Point & p2) which constructs the midpoint of points p1 and p2 (used in barycenter ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_midpoint",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "93"
+        },
+        {
+          "kind": "typedef",
+          "name": "Direction_2",
+          "qualified_name": "LinearCellComplexTraits::Direction_2",
+          "brief": "a model of Direction_2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Direction_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "104"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_direction_2",
+          "qualified_name": "LinearCellComplexTraits::Construct_direction_2",
+          "brief": "a model of ConstructDirection_2 (used in CGAL::read_plane_graph_in_lcc ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_direction_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "109"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_normal_3",
+          "qualified_name": "LinearCellComplexTraits::Construct_normal_3",
+          "brief": "a model of ConstructNormal_3 (used in CGAL::compute_normal_of_cell_2 ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Construct_normal_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "120"
+        },
+        {
+          "kind": "typedef",
+          "name": "Collinear_3",
+          "qualified_name": "LinearCellComplexTraits::Collinear_3",
+          "brief": "a model of Collinear_3 (used in CGAL::compute_normal_of_cell_2 ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type LinearCellComplexTraits::Collinear_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "125"
+        },
+        {
+          "kind": "variable",
+          "name": "ambient_dimension",
+          "qualified_name": "LinearCellComplexTraits::ambient_dimension",
+          "brief": "The ambient dimension (must be > 1).",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int LinearCellComplexTraits::ambient_dimension",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constants",
+          "file": "Concepts/LinearCellComplexTraits.h",
+          "line": "25"
+        }
+      ],
+      "xml_file": "class_linear_cell_complex_traits.xml",
+      "file": "Concepts/LinearCellComplexTraits.h",
+      "line": "17"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "import_from_triangulation_3",
+          "qualified_name": "CGAL::import_from_triangulation_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "LCC::Dart_descriptor",
+          "definition": "LCC::Dart_descriptor CGAL::import_from_triangulation_3",
+          "argsstring": "(LCC &lcc, const Triangulation_ &atr)",
+          "params": [
+            {
+              "type": "LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Triangulation_ &",
+              "name": "atr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Triangulation_3_to_lcc.h",
+          "line": "20"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Cell_attribute_with_point.h",
+      "line": "2"
+    },
+    "CGAL::IO": {
+      "kind": "namespace",
+      "name": "CGAL::IO",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_i_o.xml",
+      "file": "CGAL/Linear_cell_complex/IO/VTK.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgLinearCellComplexRef": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexRef",
+      "brief": "",
+      "detailed": "Guillaume Damiand This package implements linear cell complexes, objects in d -dimension with linear geometry. The combinatorial part of objects is described either by a combinatorial or a generalized map, representing all the cells of the object plus the incidence and adjacency relations between cells. Geometry is added to the combinatorial data-structure simply by associating a point to each vertex of the map. Taking a 2D combinatorial map, and using 3D points, gives a linear cell complex equivalent to a Polyhedron_3 . Introduced in: CGAL 4.0 Depends on: PkgCombinatorialMaps Depends on: PkgGeneralizedMaps BibTeX: cgal:d-lcc-12-26a License: LGPL Windows Demo: 3D Linear Cell Complex Classified Reference Pages Concepts CellAttributeWithPoint LinearCellComplexItems LinearCellComplexTraits LinearCellComplex Classes CGAL::Linear_cell_complex_for_combinatorial_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_for_generalized_map <d,d2,LCCTraits,Items,Alloc> CGAL::Linear_cell_complex_min_items <d> CGAL::Linear_cell_complex_traits <d,K> CGAL::Cell_attribute_with_point <LCC,Info_,Tag,OnMerge,OnSplit> CGAL::Cell_attribute_with_point_and_id <LCC,Info_,Tag,OnMerge,OnSplit> CGAL::Linear_cell_complex_incremental_builder_3 <LCC> Global Functions Constructions for Linear Cell Complex CGAL::read_plane_graph_in_lcc <LCC> (formerly import_from_plane_graph ) CGAL::triangulation_3_to_lcc <LCC,Triangulation> (formerly import_from_triangulation_3 ) CGAL::polyhedron_3_to_lcc <LCC,Polyhedron> (formerly import_from_polyhedron_3 ) Operations for Linear Cell Complex CGAL::compute_normal_of_cell_0 <LCC> CGAL::compute_normal_of_cell_2 <LCC> Draw a Linear Cell Complex CGAL::draw<LCC>() CGAL::add_in_graphics_scene<LCC, BufferType, DrawingFunctor>() IO Functions for LCC std::ostream& operator<< (std::ostream& os, const GenericMap& amap) std::ifstream& operator>> (std::ifstream& is, GenericMap& amap) CGAL::IO::Read_VTK<LCC>() CGAL::IO::Write_VTK<LCC>()",
+      "members": [],
+      "xml_file": "group___pkg_linear_cell_complex_ref.xml"
+    },
+    "PkgLinearCellComplexConcepts": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_linear_cell_complex_concepts.xml"
+    },
+    "PkgLinearCellComplexClasses": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_linear_cell_complex_classes.xml"
+    },
+    "PkgLinearCellComplexConstructions": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexConstructions",
+      "brief": "Basic constructions.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "read_plane_graph_in_lcc",
+          "qualified_name": "CGAL::read_plane_graph_in_lcc",
+          "brief": "Imports an embedded plane graph read from ais into lcc , a model of the LinearCellComplex concept.",
+          "detailed": "Objects are added in lcc , existing darts are not modified. Returns a dart created during the import. LCC::dimension $ \\geq$ 2 and LCC::ambient_dimension ==2. File format The file format must be the following. First the number of vertices and the number of edges of the planar graph. Then, for each vertex of the planar graph, the coordinates of the $ i^{\\mbox{th}}$ vertex (two numbers for $ x$ and $ y$ coordinates). The first vertex index is 0. Then for each edge of the planar graph, the two indices of the two vertices (two numbers between 0 and the number of vertices minus 1). Here a small example: 5 6 1.0 3.0 0.0 2.0 2.0 2.0 0.0 0.0 2.0 0.0 0 1 0 2 1 2 1 3 2 4 3 4 Example of import_graph reading the above file as istream, middle for combinatorial map as combinatorial data-structure, right for generalized maps. Example of import_graph reading the above file as istream, middle for combinatorial map as combinatorial data-structure, right for generalized maps. Left : A planar graph embedded in the plane with P0 =(1.0,3.0), P1 =(0.0,2.0), P2 =(2.0,2.0), P3 =(0.0,0.0), P4 =(2.0,0.0). Middle : the 2D linear cell complex reconstructed if combinatorial maps are the combinatorial data-structure. Right : the 2D linear cell complex reconstructed if generalized maps are the combinatorial data-structure. CGAL::triangulation_3_to_lcc <LCC,Triangulation> CGAL::polyhedron_3_to_lcc <LCC,Polyhedron>",
+          "return_type": "LCC::Dart_descriptor",
+          "definition": "LCC::Dart_descriptor CGAL::read_plane_graph_in_lcc",
+          "argsstring": "(LCC &lcc, std::istream &ais)",
+          "params": [
+            {
+              "type": "LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::istream &",
+              "name": "ais",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_constructors.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "import_from_plane_graph",
+          "qualified_name": "CGAL::import_from_plane_graph",
+          "brief": "",
+          "detailed": "Deprecated Use read_plane_graph_in_lcc() instead.",
+          "return_type": "LCC::Dart_descriptor",
+          "definition": "LCC::Dart_descriptor CGAL::import_from_plane_graph",
+          "argsstring": "(LCC &lcc, std::istream &ais)",
+          "params": [
+            {
+              "type": "LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::istream &",
+              "name": "ais",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_constructors.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "polyhedron_3_to_lcc",
+          "qualified_name": "CGAL::polyhedron_3_to_lcc",
+          "brief": "Imports apoly (a Polyhedron_3 ) into lcc , a model of the LinearCellComplex concept.",
+          "detailed": "Objects are added in lcc , existing darts are not modified. Returns a dart created during the import. LCC::dimension $ \\geq$ 2 and LCC::ambient_dimension ==3. CGAL::read_plane_graph_in_lcc <LCC> CGAL::triangulation_3_to_lcc <LCC,Triangulation>",
+          "return_type": "LCC::Dart_descriptor",
+          "definition": "LCC::Dart_descriptor CGAL::polyhedron_3_to_lcc",
+          "argsstring": "(LCC &lcc, const Polyhedron &apoly)",
+          "params": [
+            {
+              "type": "LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Polyhedron &",
+              "name": "apoly",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polyhedron_3_to_lcc.h",
+          "line": "12"
+        },
+        {
+          "kind": "function",
+          "name": "triangulation_3_to_lcc",
+          "qualified_name": "CGAL::triangulation_3_to_lcc",
+          "brief": "Imports atr (a Triangulation_3 ) into lcc , a model of the LinearCellComplex concept.",
+          "detailed": "Objects are added in lcc , existing darts are not modified. Returns a dart created during the import. LCC::dimension $ \\geq$ 3 and LCC::ambient_dimension ==3. CGAL::read_plane_graph_in_lcc <LCC> CGAL::polyhedron_3_to_lcc <LCC,Polyhedron>",
+          "return_type": "LCC::Dart_descriptor",
+          "definition": "LCC::Dart_descriptor CGAL::triangulation_3_to_lcc",
+          "argsstring": "(LCC &lcc, const Triangulation_ &atr)",
+          "params": [
+            {
+              "type": "LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Triangulation_ &",
+              "name": "atr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Triangulation_3_to_lcc.h",
+          "line": "16"
+        }
+      ],
+      "xml_file": "group___pkg_linear_cell_complex_constructions.xml"
+    },
+    "PkgLinearCellComplexOperations": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexOperations",
+      "brief": "High-level operations.",
+      "detailed": "#include<CGAL/Linear_cell_complex_operations.h>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "compute_normal_of_cell_0",
+          "qualified_name": "CGAL::compute_normal_of_cell_0",
+          "brief": "Returns the normal vector of the 0-cell containing d , i.e. the average of all the normal vectors of the 2-cells incident to the 0-cell containing d .",
+          "detailed": "LCC::ambient_dimension ==3 and d $ \\in $ lcc.darts() . CGAL::compute_normal_of_cell_2 <LCC>",
+          "return_type": "LCC::Vector",
+          "definition": "LCC::Vector CGAL::compute_normal_of_cell_0",
+          "argsstring": "(const LCC &lcc, typename LCC::Dart_const_descriptor d)",
+          "params": [
+            {
+              "type": "const LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename LCC::Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_operations.h",
+          "line": "13"
+        },
+        {
+          "kind": "function",
+          "name": "compute_normal_of_cell_2",
+          "qualified_name": "CGAL::compute_normal_of_cell_2",
+          "brief": "Returns the normal vector of the 2-cell containing d .",
+          "detailed": "LCC::ambient_dimension ==3 and d $ \\in $ lcc.darts() . CGAL::compute_normal_of_cell_0 <LCC>",
+          "return_type": "LCC::Vector",
+          "definition": "LCC::Vector CGAL::compute_normal_of_cell_2",
+          "argsstring": "(const LCC &lcc, typename LCC::Dart_const_descriptor d)",
+          "params": [
+            {
+              "type": "const LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename LCC::Dart_const_descriptor",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex_operations.h",
+          "line": "25"
+        }
+      ],
+      "xml_file": "group___pkg_linear_cell_complex_operations.xml"
+    },
+    "PkgDrawLinearCellComplex": {
+      "kind": "group",
+      "name": "PkgDrawLinearCellComplex",
+      "brief": "#include<CGAL/draw_linear_cell_complex.h>",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "draw",
+          "qualified_name": "CGAL::draw",
+          "brief": "opens a new window and draws a linear cell complex.",
+          "detailed": "Parameters of the drawing are taken from the optional graphics scene options parameter. A call to this function blocks the execution of the program until the drawing window is closed. This function requires CGAL_Qt6 , and is only available if the macro CGAL_USE_BASIC_VIEWER is defined. Linking with the cmake target CGAL::CGAL_Basic_viewer will link with CGAL_Qt6 and add the definition CGAL_USE_BASIC_VIEWER . LCC which must be an instantiation of a CGAL::Linear_cell_complex_for_combinatorial_map <...> or CGAL::Linear_cell_complex_for_generalized_map <...> . GSOptions a model of GraphicsSceneOptions concept. lcc the linear cell complex to draw. gso the graphics scene options parameter. Advanced The real declaration of this function template is: template<unsigned int d, unsigned int ad, class T, class I, class M, class R, class S, class GSOptions> void CGAL::draw(const CGAL::Linear_cell_complex_base<d, ad, T, I, A, M, R, S>& lcc, const GSOptions& gso);",
+          "return_type": "void",
+          "definition": "void CGAL::draw",
+          "argsstring": "(const LCC &lcc, const GSOptions &gso)",
+          "params": [
+            {
+              "type": "const LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GSOptions &",
+              "name": "gso",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/draw_linear_cell_complex.h",
+          "line": "28"
+        },
+        {
+          "kind": "function",
+          "name": "draw",
+          "qualified_name": "CGAL::draw",
+          "brief": "A shortcut to CGAL::draw (lcc, Graphics_scene_options{}) .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::draw",
+          "argsstring": "(const LCC &lcc)",
+          "params": [
+            {
+              "type": "const LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/draw_linear_cell_complex.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_graphics_scene",
+          "qualified_name": "CGAL::add_to_graphics_scene",
+          "brief": "adds the vertices, edges and faces of lcc into the given graphic scene gs .",
+          "detailed": "Parameters of the cells are taken from the optional graphics scene options parameter gso . Note that gs is not cleared before being filled (to enable to draw several data structures in the same basic viewer). LCC which must be an instantiation of a CGAL::Linear_cell_complex_for_combinatorial_map <...> or CGAL::Linear_cell_complex_for_generalized_map <...> . GSOptions a model of GraphicsSceneOptions concept. lcc the linear cell complex to draw. gs the graphic scene to fill. gso the graphics scene options parameter. Advanced The real declaration of this function template is: template<unsigned int d, unsigned int ad, class T, class I, class M, class R, class S, class GSOptions> void CGAL::add_to_graphics_scene(const CGAL::Linear_cell_complex_base<d, ad, T, I, A, M, R, S>& lcc, CGAL::Graphics_scene& gs, const GSOptions& gso);",
+          "return_type": "void",
+          "definition": "void CGAL::add_to_graphics_scene",
+          "argsstring": "(const LCC &lcc, CGAL::Graphics_scene &gs, const GSOptions &gso)",
+          "params": [
+            {
+              "type": "const LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Graphics_scene &",
+              "name": "gs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GSOptions &",
+              "name": "gso",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/draw_linear_cell_complex.h",
+          "line": "61"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_graphics_scene",
+          "qualified_name": "CGAL::add_to_graphics_scene",
+          "brief": "A shortcut to CGAL::add_to_graphics_scene (lcc, gs, Graphics_scene_options{}) .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::add_to_graphics_scene",
+          "argsstring": "(const LCC &lcc, CGAL::Graphics_scene &gs)",
+          "params": [
+            {
+              "type": "const LCC &",
+              "name": "lcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Graphics_scene &",
+              "name": "gs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/draw_linear_cell_complex.h",
+          "line": "71"
+        }
+      ],
+      "xml_file": "group___pkg_draw_linear_cell_complex.xml"
+    },
+    "PkgLinearCellComplexRefIO": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexRefIO",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_linear_cell_complex_ref_i_o.xml"
+    },
+    "PkgLinearCellComplexRefIOVTK": {
+      "kind": "group",
+      "name": "PkgLinearCellComplexRefIOVTK",
+      "brief": "High-level operations.",
+      "detailed": "#include<CGAL/Linear_cell_complex/IO/VTK.h>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "read_VTK",
+          "qualified_name": "CGAL::IO::read_VTK",
+          "brief": "Reads a VTK legacy ASCII file and load it into a 3D linear cell complex.",
+          "detailed": "LCC must be a CGAL::Linear_cell_complex_for_combinatorial_map <3,3> VertexScalarType Type for vertex scalar data (default: float) VolumeScalarType Type for volume scalar data (default: float) filename Path to the VTK file alcc The linear cell complex to populate (will be cleared first) vertex_scalars Optional output vector to store per-vertex scalar values. If provided, will be resized to match number of vertices. volume_scalars Optional output vector to store per-volume scalar values. If provided, will be resized to match number of volumes. true if loading was successful, false otherwise",
+          "return_type": "bool",
+          "definition": "bool CGAL::IO::read_VTK",
+          "argsstring": "(const char *filename, LCC &alcc, std::vector< VertexScalarType > *vertex_scalars=nullptr, std::vector< VolumeScalarType > *volume_scalars=nullptr)",
+          "params": [
+            {
+              "type": "const char *",
+              "name": "filename",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "LCC &",
+              "name": "alcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::vector< VertexScalarType > *",
+              "name": "vertex_scalars",
+              "default": "nullptr",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::vector< VolumeScalarType > *",
+              "name": "volume_scalars",
+              "default": "nullptr",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex/IO/VTK.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "write_VTK",
+          "qualified_name": "CGAL::IO::write_VTK",
+          "brief": "Writes a 3D Linear_cell_complex to a VTK legacy ASCII file.",
+          "detailed": "LCC must be a CGAL::Linear_cell_complex_for_combinatorial_map <3,3> VertexScalarType Type for vertex scalar data (default: float) VolumeScalarType Type for volume scalar data (default: float) filename Path to the output VTK file alcc The linear cell complex to export vertex_scalars Optional per-vertex scalar data. If provided, must have same size as number of vertex attributes in the LCC. volume_scalars Optional per-volume scalar data. If provided, must have same size as number of 3-cells in the LCC. true if writing was successful, false otherwise",
+          "return_type": "bool",
+          "definition": "bool CGAL::IO::write_VTK",
+          "argsstring": "(const char *filename, const LCC &alcc, const std::vector< VertexScalarType > *vertex_scalars=nullptr, const std::vector< VolumeScalarType > *volume_scalars=nullptr)",
+          "params": [
+            {
+              "type": "const char *",
+              "name": "filename",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const LCC &",
+              "name": "alcc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::vector< VertexScalarType > *",
+              "name": "vertex_scalars",
+              "default": "nullptr",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::vector< VolumeScalarType > *",
+              "name": "volume_scalars",
+              "default": "nullptr",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Linear_cell_complex/IO/VTK.h",
+          "line": "62"
+        }
+      ],
+      "xml_file": "group___pkg_linear_cell_complex_ref_i_o_v_t_k.xml"
+    }
+  }
+}

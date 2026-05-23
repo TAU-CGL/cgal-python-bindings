@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "package": "Surface_sweep_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 3,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Surface_sweep_2": {
+      "kind": "namespace",
+      "name": "CGAL::Surface_sweep_2",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_surface__sweep__2.xml",
+      "file": "CGAL/Surface_sweep_2_algorithms.h",
+      "line": "104"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgSurfaceSweep2Ref": {
+      "kind": "group",
+      "name": "PkgSurfaceSweep2Ref",
+      "brief": "",
+      "detailed": "Baruch Zukerman, Ron Wein, and Efi Fogel This package provides three free functions implemented based on the sweep-line paradigm: given a collection of input curves, compute all intersection points, compute the set of subcurves that are pairwise interior-disjoint induced by them, and check whether there is at least one pair of curves among them that intersect in their interior. Introduced in: CGAL 2.4 Depends on: PkgArrangementOnSurface2 BibTeX: cgal:wfz-ic2-26a License: GPL This chapter describes three functions implemented using the sweep-line algorithm: given a collection $ {\\mathcal C}$ of planar curves, compute all intersection points among them, obtain the set of maximal pairwise interior-disjoint subcurves of the curves in $ {\\mathcal C}$ , or check whether there is at least one pair of curves in $ {\\mathcal C}$ that intersect. By default the curves are considered closed. The first two operations are performed in an output-sensitive manner. Classified Reference Pages Functions CGAL::compute_intersection_points CGAL::compute_subcurves CGAL::do_intersect",
+      "members": [
+        {
+          "kind": "function",
+          "name": "compute_intersection_points",
+          "qualified_name": "CGAL::compute_intersection_points",
+          "brief": "Given a range of curves, compute all intersection points between two (or more) input curves.",
+          "detailed": "When the flag report_endpoints is true , this function reports all the curve endpoints as well. If a curve endpoint is also an intersection point, it is reported once (regardless of the value of the report_endpoints flag). The value-type of InputIterator is a curve type and the value-type of OutputIterator is a point type. The output points are reported in an increasing $xy$ -lexicographical order.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::compute_intersection_points",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, OutputIterator points, bool report_endpoints=false)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "report_endpoints",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "14"
+        },
+        {
+          "kind": "function",
+          "name": "compute_intersection_points",
+          "qualified_name": "CGAL::compute_intersection_points",
+          "brief": "Given a range of curves, compute all intersection points between two (or more) input curves.",
+          "detailed": "When the flag report_endpoints is true , this function reports all the curve endpoints as well. If a curve endpoint is also an intersection point, it is reported once (regardless of the value of the report_endpoints flag). The Traits type must be a model of the AosTraits_2 concept, such that the value-type of InputIterator is Traits::Curve_2 , and the value-type of OutputIterator is Traits::Point_2 . The output points are reported in an increasing $xy$ -lexicographical order.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::compute_intersection_points",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, OutputIterator points, bool report_endpoints=false, Traits traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "report_endpoints",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Traits",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "compute_subcurves",
+          "qualified_name": "CGAL::compute_subcurves",
+          "brief": "Given a range of curves, compute all $ x$ -monotone subcurves that are pairwise disjoint in their interior, as induced by the input curves.",
+          "detailed": "If the flag multiple_overlaps is true , then a subcurve that represents an overlap of $ k$ input curves is reported $ k$ times; otherwise, each subcurve is reported only once. The value-type of InputIterator is a curve type, and the value-type of OutputIterator is an $x$ -monotone curve type.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::compute_subcurves",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, OutputIterator subcurves, bool multiple_overlaps=false)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "subcurves",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "multiple_overlaps",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "compute_subcurves",
+          "qualified_name": "CGAL::compute_subcurves",
+          "brief": "Given a range of curves, compute all $ x$ -monotone subcurves that are pairwise disjoint in their interior, as induced by the input curves.",
+          "detailed": "If the flag multiple_overlaps is true , then a subcurve that represents an overlap of $ k$ input curves is reported $ k$ times; otherwise, each subcurve is reported only once. The Traits type must be a model of the AosTraits_2 concept, such that the value-type of InputIterator is Traits::Curve_2 , and the value-type of OutputIterator is Traits::X_monotone_curve_2 .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::compute_subcurves",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, OutputIterator subcurves, bool multiple_overlaps=false, Traits traits=Default_traits())",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "subcurves",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "multiple_overlaps",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Traits",
+              "name": "traits",
+              "default": "Default_traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "66"
+        },
+        {
+          "kind": "function",
+          "name": "do_curves_intersect",
+          "qualified_name": "CGAL::do_curves_intersect",
+          "brief": "",
+          "detailed": "Deprecated Call Surface_sweep_2::do_intersect(curves_begin, curves_end, false) instead Given a range of curves, check whether there is at least one pair of curves that intersect in their interior. The function returns true if such a pair is found, and false if all curves are pairwise disjoint in their interior. The value-type of InputIterator is a curve type. The call CGAL::do_curves_intersect(begin, end, traits) should be replaced by the call CGAL::Surface_sweep_2::do_intersect(begin, end, false, traits)",
+          "return_type": "bool",
+          "definition": "bool CGAL::do_curves_intersect",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "do_curves_intersect",
+          "qualified_name": "CGAL::do_curves_intersect",
+          "brief": "",
+          "detailed": "Deprecated Call Surface_sweep_2::do_intersect(curves_begin, curves_end, false, traits) instead Given a range of curves, check whether there is at least one pair of curves that intersect in their interior. The function returns true if such a pair is found, and false if all curves are pairwise disjoint in their interior. The Traits type must be a model of the AosTraits_2 concept, such that the value-type of InputIterator is Traits::Curve_2 . The call CGAL::do_curves_intersect(begin, end) should be replaced by the call CGAL::Surface_sweep_2::do_intersect(begin, end, false)",
+          "return_type": "bool",
+          "definition": "bool CGAL::do_curves_intersect",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, Traits traits=Default_traits())",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Traits",
+              "name": "traits",
+              "default": "Default_traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "100"
+        },
+        {
+          "kind": "function",
+          "name": "do_intersect",
+          "qualified_name": "CGAL::Surface_sweep_2::do_intersect",
+          "brief": "Given a range of curves, check whether there is at least one pair of curves that intersect.",
+          "detailed": "The value-type of InputIterator is a curve type. If consider_common_endpoints is true , common endpoints are considered. Otherwise, common endpoints are not counted as intersections.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_sweep_2::do_intersect",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, bool consider_common_endpoints=true)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "consider_common_endpoints",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "do_intersect",
+          "qualified_name": "CGAL::Surface_sweep_2::do_intersect",
+          "brief": "Given a range of curves, check whether there is at least one pair of curves that intersect.",
+          "detailed": "The value-type of InputIterator is a curve type. If consider_common_endpoints is true , common endpoints are considered. Otherwise, common endpoints are not counted as intersections. The Traits type must be a model of the AosTraits_2 concept, such that the value-type of InputIterator is either Traits::Curve_2 or Traits::X_monotone_curve_2 .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Surface_sweep_2::do_intersect",
+          "argsstring": "(InputIterator curves_begin, InputIterator curves_end, bool consider_common_endpoints=true, Traits traits=Default_traits())",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "curves_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "curves_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "consider_common_endpoints",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Traits",
+              "name": "traits",
+              "default": "Default_traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Surface_sweep_2_algorithms.h",
+          "line": "129"
+        }
+      ],
+      "xml_file": "group___pkg_surface_sweep2_ref.xml"
+    }
+  }
+}

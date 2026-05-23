@@ -1,0 +1,1484 @@
+{
+  "schema_version": 1,
+  "package": "Circulator",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 33,
+  "skipped_count": 0,
+  "compounds": {
+    "BidirectionalCirculator": {
+      "kind": "class",
+      "name": "BidirectionalCirculator",
+      "brief": "See Subsection Bidirectional Circulators in the page on Circulators.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "class_bidirectional_circulator.xml",
+      "file": "Concepts/Circulator.h",
+      "line": "316"
+    },
+    "CGAL::Bidirectional_circulator_base": {
+      "kind": "struct",
+      "name": "CGAL::Bidirectional_circulator_base",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_bidirectional__circulator__base.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "100"
+    },
+    "CGAL::Bidirectional_circulator_ptrbase": {
+      "kind": "class",
+      "name": "CGAL::Bidirectional_circulator_ptrbase",
+      "brief": "bidirectional circulator.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_bidirectional__circulator__ptrbase.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "123"
+    },
+    "CGAL::Bidirectional_circulator_tag": {
+      "kind": "struct",
+      "name": "CGAL::Bidirectional_circulator_tag",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_bidirectional__circulator__tag.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "69"
+    },
+    "CGAL::Circulator_base": {
+      "kind": "struct",
+      "name": "CGAL::Circulator_base",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_circulator__base.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "88"
+    },
+    "CGAL::Circulator_from_container": {
+      "kind": "class",
+      "name": "CGAL::Circulator_from_container",
+      "brief": "The adaptor Circulator_from_container provides a circulator for an STL container C of equal category as the iterator provided by the container.",
+      "detailed": "The iterator must be at least of the forward iterator category. The corresponding non-mutable circulator is called Const_circulator_from_container<C> . The container type C is supposed to conform to the STL requirements for container (i.e. to have a begin() and an end() iterator as well as the local types reference , const_reference , value_type , size_type , and difference_type ). Types All types required for circulators are provided. Operations The adaptor conforms to the requirements of the corresponding circulator category. An additional member function current_iterator() returns the current iterator pointing to the same position as the circulator does. Container_from_circulator Circulator_from_iterator Circulator Example The following program composes two adaptors - from a container to a circulator and back to an iterator. It applies an STL sort algorithm on a STL vector with three elements. The resulting vector will be [2 5 9] as it is checked by the assertions. The program is part of the CGAL distribution. Example: Circulator/circulator_prog2.cpp Show / Hide #include <cassert> #include <vector> #include <algorithm> #include <CGAL/circulator.h> typedef CGAL::Circulator_from_container< std::vector<int> > Circulator ; typedef CGAL::Container_from_circulator<Circulator> Container; typedef Container::iterator Iterator; int main() { std::vector<int> v; v.push_back(5); v.push_back(2); v.push_back(9); Circulator c( &v); Container container( c); std::sort( container.begin(), container.end()); Iterator i = container.begin(); assert( *i == 2); i++; assert( *i == 5); i++; assert( *i == 9); i++; assert( i == container.end()); return 0; }",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Circulator_from_container",
+          "qualified_name": "CGAL::Circulator_from_container::Circulator_from_container",
+          "brief": "a circulator c on an empty sequence.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Circulator_from_container< C >::Circulator_from_container",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "160"
+        },
+        {
+          "kind": "function",
+          "name": "Circulator_from_container",
+          "qualified_name": "CGAL::Circulator_from_container::Circulator_from_container",
+          "brief": "a circulator c initialized to refer to the first element in container , i.e. container.begin() .",
+          "detailed": "The circulator c refers to an empty sequence if the container is empty.",
+          "return_type": "",
+          "definition": "CGAL::Circulator_from_container< C >::Circulator_from_container",
+          "argsstring": "(C *container)",
+          "params": [
+            {
+              "type": "C *",
+              "name": "container",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "169"
+        },
+        {
+          "kind": "function",
+          "name": "Circulator_from_container",
+          "qualified_name": "CGAL::Circulator_from_container::Circulator_from_container",
+          "brief": "a circulator c initialized to refer to the element *i in container .",
+          "detailed": "*i is dereferenceable and refers to container .",
+          "return_type": "",
+          "definition": "CGAL::Circulator_from_container< C >::Circulator_from_container",
+          "argsstring": "(C *container, C::iterator i)",
+          "params": [
+            {
+              "type": "C *",
+              "name": "container",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "C::iterator",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "176"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_circulator__from__container.xml",
+      "file": "CGAL/circulator.h",
+      "line": "151"
+    },
+    "CGAL::Circulator_from_iterator": {
+      "kind": "class",
+      "name": "CGAL::Circulator_from_iterator",
+      "brief": "The adaptor Circulator_from_iterator converts two iterators of type I , a begin and a past-the-end value, to a circulator of equal category.",
+      "detailed": "The iterator must be at least of the forward iterator category. The circulator will be mutable or non-mutable according to the iterator. Iterators provide no size_type . This adapter assumes std::size_t instead. Operations The adaptor conforms to the requirements of the respective circulator category. An additional member function current_iterator() returns the current iterator pointing to the same position as the circulator does. Container_from_circulator Circulator_from_container Circulator Example The following program composes two adaptors - from an iterator to a circulator and back to an iterator. It applies an STL sort algorithm on a STL vector containing three elements. The resulting vector will be [2 5 9] as it is checked by the assertions. The program is part of the CGAL distribution. Example: Circulator/circulator_prog1.cpp Show / Hide #include <cassert> #include <vector> #include <algorithm> #include <CGAL/circulator.h> typedef std::vector<int>::iterator I; typedef CGAL::Circulator_from_iterator<I> Circulator ; typedef CGAL::Container_from_circulator<Circulator> Container; typedef Container::iterator Iterator; int main() { std::vector<int> v; v.push_back(5); v.push_back(2); v.push_back(9); Circulator c( v.begin(), v.end()); Container container( c); std::sort( container.begin(), container.end()); Iterator i = container.begin(); assert( *i == 2); i++; assert( *i == 5); i++; assert( *i == 9); i++; assert( i == container.end()); return 0; } Another example usage for this adaptor is a random access circulator over the built-in C arrays. Given an array of type T* with a begin pointer b and a past-the-end pointer e the adaptor Circulator_from_iterator <T*> c(b,e) is a random access circulator c over this array.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "iterator",
+          "qualified_name": "CGAL::Circulator_from_iterator::iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "I",
+          "definition": "typedef I CGAL::Circulator_from_iterator< I >::iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "234"
+        },
+        {
+          "kind": "function",
+          "name": "Circulator_from_iterator",
+          "qualified_name": "CGAL::Circulator_from_iterator::Circulator_from_iterator",
+          "brief": "a circulator c on an empty sequence.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Circulator_from_iterator< I >::Circulator_from_iterator",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "244"
+        },
+        {
+          "kind": "function",
+          "name": "Circulator_from_iterator",
+          "qualified_name": "CGAL::Circulator_from_iterator::Circulator_from_iterator",
+          "brief": "a circulator c initialized to refer to the element *cur in a range [begin, end) .",
+          "detailed": "The circulator c refers to an empty sequence if begin==end .",
+          "return_type": "",
+          "definition": "CGAL::Circulator_from_iterator< I >::Circulator_from_iterator",
+          "argsstring": "(const I &begin, const I &end, const I &cur=begin)",
+          "params": [
+            {
+              "type": "const I &",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const I &",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const I &",
+              "name": "cur",
+              "default": "begin",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "253"
+        },
+        {
+          "kind": "function",
+          "name": "Circulator_from_iterator",
+          "qualified_name": "CGAL::Circulator_from_iterator::Circulator_from_iterator",
+          "brief": "a copy of circulator d referring to the element *cur .",
+          "detailed": "The circulator c refers to an empty sequence if d does so.",
+          "return_type": "",
+          "definition": "CGAL::Circulator_from_iterator< I >::Circulator_from_iterator",
+          "argsstring": "(const Circulator_from_iterator< I, T, Size, Dist > &d, const I &cur)",
+          "params": [
+            {
+              "type": "const Circulator_from_iterator< I, T, Size, Dist > &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const I &",
+              "name": "cur",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "262"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_circulator__from__iterator.xml",
+      "file": "CGAL/circulator.h",
+      "line": "224"
+    },
+    "CGAL::Circulator_tag": {
+      "kind": "struct",
+      "name": "CGAL::Circulator_tag",
+      "brief": "A tag for any circulator type.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_circulator__tag.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "53"
+    },
+    "CGAL::Circulator_traits": {
+      "kind": "struct",
+      "name": "CGAL::Circulator_traits",
+      "brief": "The circulator traits class distinguishes between circulators and iterators.",
+      "detailed": "It defines a local type category that is identical to the type Circulator_tag if the iterator category of the argument C is a circulator category. Otherwise it is identical to the type Iterator_tag . The local type iterator_category gives the corresponding iterator category for circulators, i.e. one of forward_iterator_tag , bidirectional_iterator_tag , or random_access_iterator_tag . The local type circulator_category gives the corresponding circulator category for iterators, i.e. one of Forward_circulator_tag , Bidirectional_circulator_tag , or Random_access_circulator_tag . Example A generic function bar() that distinguishes between a call with a circulator range and a call with an iterator range: template < class I> void bar( I i, I j, CGAL::Iterator_tag) { CGAL::Assert_iterator (i); // This function is called for iterator ranges [i,j). } template < class C> void bar( C c, C d, CGAL::Circulator_tag) { CGAL::Assert_circulator (c); // This function is called for circulator ranges [c,d). } template < class IC> void bar( IC i, IC j) { // calls the correct function return bar( i, j, typename CGAL::Circulator_traits<IC>::category ()); }",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Circulator_traits::category",
+          "brief": "either Iterator_tag or Circulator_tag .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Circulator_traits< C >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "352"
+        },
+        {
+          "kind": "typedef",
+          "name": "iterator_category",
+          "qualified_name": "CGAL::Circulator_traits::iterator_category",
+          "brief": "corresponding iterator category for circulators.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Circulator_traits< C >::iterator_category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "358"
+        },
+        {
+          "kind": "typedef",
+          "name": "circulator_category",
+          "qualified_name": "CGAL::Circulator_traits::circulator_category",
+          "brief": "corresponding circulator category for iterator.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Circulator_traits< C >::circulator_category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "364"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_circulator__traits.xml",
+      "file": "CGAL/circulator.h",
+      "line": "343"
+    },
+    "CGAL::Container_from_circulator": {
+      "kind": "class",
+      "name": "CGAL::Container_from_circulator",
+      "brief": "The adaptor Container_from_circulator is a class that converts any circulator type C to a kind of container class, i.e. a class that provides an iterator and a const_iterator type and two member functions ( begin() and end() ) that return the appropriate iterators.",
+      "detailed": "By analogy to STL container classes these member functions return a const iterator in the case that the container itself is constant and a mutable iterator otherwise. Circulator_from_iterator Circulator_from_container Circulator Example The generic reverse() algorithm from the STL can be used with an adaptor if at least a bidirectional circulator c is given. Circulator c; // c is assumed to be a bidirectional circulator. CGAL::Container_from_circulator<Circulator> container(c); reverse( container.begin(), container.end()); Implementation The iterator adaptor keeps track of the number of rounds a circulator has done around the ring-like data structure (a kind of winding number). It is used to distinguish between the start position and the end position which will be denoted by the same circulator internally. This winding number is zero for the begin() -iterator and one for the end() -iterator. It is incremented whenever the internal circulator passes the begin() position. Two iterators are equal if their internally used circulators and winding numbers are equal. This is more general than necessary since an iterator equal to end() -iterator is not supposed to be incremented any more, which is here still possible in a defined manner. The implementation is different for random access iterators. The random access iterator has to be able to compute the size of the data structure in constant time. This is for example needed if the difference of the past-the-end iterator and the begin iterator is taken, which is exactly the size of the data structure. Therefore, if the circulator is of the random-access category, the adapter chooses the minimal circulator for the internal anchor position. The minimal circulator is part of the random access circulator requirements, see Page sectionMinCircleRequ . For the random access iterator the adaptor implements a total ordering relation that is currently not required for random access circulators.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Circulator",
+          "qualified_name": "CGAL::Container_from_circulator::Circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "C",
+          "definition": "typedef C CGAL::Container_from_circulator< C >::Circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "439"
+        },
+        {
+          "kind": "typedef",
+          "name": "iterator",
+          "qualified_name": "CGAL::Container_from_circulator::iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "444"
+        },
+        {
+          "kind": "typedef",
+          "name": "const_iterator",
+          "qualified_name": "CGAL::Container_from_circulator::const_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::const_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "449"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Container_from_circulator::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "454"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Container_from_circulator::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "459"
+        },
+        {
+          "kind": "typedef",
+          "name": "const_reference",
+          "qualified_name": "CGAL::Container_from_circulator::const_reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::const_reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "464"
+        },
+        {
+          "kind": "typedef",
+          "name": "pointer",
+          "qualified_name": "CGAL::Container_from_circulator::pointer",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::pointer",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "469"
+        },
+        {
+          "kind": "typedef",
+          "name": "const_pointer",
+          "qualified_name": "CGAL::Container_from_circulator::const_pointer",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::const_pointer",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "474"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "CGAL::Container_from_circulator::size_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "479"
+        },
+        {
+          "kind": "typedef",
+          "name": "difference_type",
+          "qualified_name": "CGAL::Container_from_circulator::difference_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Container_from_circulator< C >::difference_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/circulator.h",
+          "line": "484"
+        },
+        {
+          "kind": "function",
+          "name": "Container_from_circulator",
+          "qualified_name": "CGAL::Container_from_circulator::Container_from_circulator",
+          "brief": "any iterator of container will have a singular value.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Container_from_circulator< C >::Container_from_circulator",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "494"
+        },
+        {
+          "kind": "function",
+          "name": "Container_from_circulator",
+          "qualified_name": "CGAL::Container_from_circulator::Container_from_circulator",
+          "brief": "any iterator of container will have a singular value if the circulator c corresponds to an empty sequence.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Container_from_circulator< C >::Container_from_circulator",
+          "argsstring": "(const C &c)",
+          "params": [
+            {
+              "type": "const C &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/circulator.h",
+          "line": "500"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "CGAL::Container_from_circulator::begin",
+          "brief": "the start iterator.",
+          "detailed": "",
+          "return_type": "iterator",
+          "definition": "iterator CGAL::Container_from_circulator< C >::begin",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/circulator.h",
+          "line": "515"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "CGAL::Container_from_circulator::begin",
+          "brief": "the start const iterator.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator CGAL::Container_from_circulator< C >::begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/circulator.h",
+          "line": "520"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "CGAL::Container_from_circulator::end",
+          "brief": "the past-the-end iterator.",
+          "detailed": "",
+          "return_type": "iterator",
+          "definition": "iterator CGAL::Container_from_circulator< C >::end",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/circulator.h",
+          "line": "525"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "CGAL::Container_from_circulator::end",
+          "brief": "the past-the-end const iterator.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator CGAL::Container_from_circulator< C >::end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/circulator.h",
+          "line": "530"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_container__from__circulator.xml",
+      "file": "CGAL/circulator.h",
+      "line": "430"
+    },
+    "CGAL::Forward_circulator_base": {
+      "kind": "struct",
+      "name": "CGAL::Forward_circulator_base",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_forward__circulator__base.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "94"
+    },
+    "CGAL::Forward_circulator_ptrbase": {
+      "kind": "class",
+      "name": "CGAL::Forward_circulator_ptrbase",
+      "brief": "forward circulator.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_forward__circulator__ptrbase.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "116"
+    },
+    "CGAL::Forward_circulator_tag": {
+      "kind": "struct",
+      "name": "CGAL::Forward_circulator_tag",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_forward__circulator__tag.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "64"
+    },
+    "CGAL::Iterator_tag": {
+      "kind": "struct",
+      "name": "CGAL::Iterator_tag",
+      "brief": "A tag for any iterator type.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_iterator__tag.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "59"
+    },
+    "CGAL::Random_access_circulator_base": {
+      "kind": "struct",
+      "name": "CGAL::Random_access_circulator_base",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_random__access__circulator__base.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "106"
+    },
+    "CGAL::Random_access_circulator_ptrbase": {
+      "kind": "class",
+      "name": "CGAL::Random_access_circulator_ptrbase",
+      "brief": "random access circulator.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_random__access__circulator__ptrbase.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "130"
+    },
+    "CGAL::Random_access_circulator_tag": {
+      "kind": "struct",
+      "name": "CGAL::Random_access_circulator_tag",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_random__access__circulator__tag.xml",
+      "file": "CGAL/circulator_bases.h",
+      "line": "74"
+    },
+    "Circulator": {
+      "kind": "class",
+      "name": "Circulator",
+      "brief": "A Circulator is similar to an Iterator, with the difference that it is designed for circular data structures.",
+      "detailed": "Circulators Iterators in the STL were tailored for linear sequences. The specialization for circular data structures leads to slightly different requirements which we will summarize in the circulators concept. The main difference is that a circular data structure has no natural past-the-end value. As a consequence, a container supporting circulators will not have an end() -member function. The semantic of a circulator range differs from the semantic of an iterator range. For a circulator c the range [c, c) denotes the sequence of all elements in the data structure. For iterators, this range defines the empty sequence. A separate test for an empty sequence has been added to the circulator requirements: A comparison c == nullptr for a circulator c is true for an empty sequence. As for C++, we recommend the use of 0 instead of nullptr . Circulators Similar to STL iterators, we distinguish between forward, bidirectional, and random access circulatorsInput circulators are a contradiction, since any circulator is supposed to return once to itself. Output circulators are not supported since they would be indistinguishable from output iterators.. Most requirements for circulators are equal to those for iterators. We present the changes, please refer to [ [2] , chapter 18 or [1] ] for the iterator requirements. Past-the-end value: There is no past-the-end value for circulators. Singular values: There are no singular values for circulatorsSince circulators must be implemented as classes anyway, there is no need to allow singular values for them. An un-initialized circulator does not have a singular value, but is supposed to refer to an empty sequence. Empty sequence: The comparison c == nullptr (or c == 0 ) for a circulator c is true if c denotes an empty sequence, and false otherwise. Dereferenceable values: A circulator that does not denote an empty sequence is dereferenceable. Reachability: Each dereferenceable circulator can reach itself with a finite and non-empty sequence of applications of operator++ . Ranges: For any circulator c the range [c, c) is a valid range. If the circulator refers to an empty sequence, the range [c, c) denotes the empty range. Otherwise the circulator is dereferenceable and the range [c, c) denotes the sequence of all elements in the data structure. Remark: When a circulator is used in a place of an iterator, as, for example, with an STL algorithm, it will work as expected with the only exception that, in STL algorithms, the range [c, c) denotes always the empty range. This is not a requirement, but a consequence of the requirements stated here and the fact that the STL requirements for iterator ranges are based on the operator++ and the operator== , which we use for circulators as well. In principle, we face here the difference between a while loop and a do-while loop. Types: For a circulator of type c the following local types are required: C::value_type value type the circulator refers to. C::reference reference type used for the return type of C::operator*() . C::pointer pointer type used for the return type of C::operator->() . C::size_type unsigned integral type that can hold the size of a sequence C::difference_type signed integral type that can hold the distance between two circulators. C::iterator_category circulator category. Forward Circulators In the following, we assume that a and b are circulators of type C , r is of type C& (is assignable), and T denotes the value type of C . Let D be the distance type of C . As for C++, we recommend the use of 0 instead of nullptr . C() a circulator equal to nullptr denoting an empty sequence. a == nullptr Returns true if a denotes an empty sequence, false otherwise. For simplicity, nullptr == a is not required. The behavior for comparisons with pointer-like values different than nullptr is undefined. A runtime assertion is recommended. a != nullptr Returns !(a == nullptr) . ++r Like for forward iterators, but a dereferenceable circulator r will always be dereferenceable after ++r (no past-the-end value). Precondition: r does not denote an empty sequence. r++ Same as for ++r . C::iterator_category circulator category Forward_circulator_tag . Bidirectional Circulators The same requirements as for the forward circulators hold for bidirectional iterators with the following change of the iterator category: C::iterator_category circulator category Bidirectional_circulator_tag . Random Access Circulators The same requirements as for the bidirectional circulators hold for random access iterators with the following changes and extensions. The idea of random access extends naturally to circulators using equivalence classes modulus the length of the sequence. With this in mind, the additional requirements for random access iterators hold also for random access circulators. The only exception is that the random access iterator is required to provide a total order on the sequence, which a circulator cannot provideOne might define an order by splitting the circle at a fixed point, e.g. the start circulator provided from the data structure. This is what the adaptor to iterators will do. Nonetheless, we do not require this for circulators.. The difference of two circulators is not unique as for iterators. A reasonable requirement demands that the result is in a certain range [1-size, size-1] , where size is the size of the sequence, and that whenever a circulator a is fixed that the differences with all other circulators of the sequence form a consistent ordering. For the adaptor to iterators a minimal circulator d_min is required for which the difference c - d_min to all other circulators c is non negative. b - a limited range and consistent ordering as explained above. a.min_circulator() returns the minimal circulator from the range [a,a) . C::iterator_category circulator category Random_access_circulator_tag . Const Circulators As with iterators, we distinguish between circulators and const circulators. The expression *a = t with t of type T is valid for mutable circulators. It is invalid for const circulators. Circulators in Container Classes For a container x of type X that supports circulators c the following naming convention is recommended: X::Circulator the type of the mutable circulator. X::Const_circulator the type of the const circulator. c = x.begin() the start circulator of the sequence. It is of type X::Circulator for a mutable container or X::Const_circulator for a const container. If a container will support iterators and circulators, the member function circulator_begin() is proposed. However, the support of iterators and circulators simultaneously is not recommended, since it would lead to fat interfaces. The natural choice should be supported, the other concept will be available through adaptors. Example A generic contains function accepts a range of circulators and a value. It returns true if the value is contained in the sequence of items denoted by the range of circulators. As usual for circular structures, a do - while loop is preferable, such that for the specific input, c == d , all elements in the sequence are reached. Note that the example simplifies if the sequence is known to be non-empty, which is for example the common case in polyhedral surfaces where vertices and facets have at least one incident edge. template < class Circulator, class T> bool contains( Circulator c, Circulator d, const T& value) { if (c != 0) { do { if (*c == value) return true ; } while (++c != d); } return false ; }",
+      "members": [],
+      "xml_file": "class_circulator.xml",
+      "file": "Concepts/Circulator.h",
+      "line": "297"
+    },
+    "ConstHandle": {
+      "kind": "class",
+      "name": "ConstHandle",
+      "brief": "A constant handle. Refer to the Handle concept for more details.",
+      "detailed": "Refines Descriptor Has models const T* (const pointers) Handle",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator*",
+          "qualified_name": "ConstHandle::operator*",
+          "brief": "returns the object pointed to.",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "const value_type & ConstHandle::operator*",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Dereference",
+          "file": "Concepts/ConstHandle.h",
+          "line": "26"
+        },
+        {
+          "kind": "function",
+          "name": "operator->",
+          "qualified_name": "ConstHandle::operator->",
+          "brief": "returns a pointer to the object pointed to.",
+          "detailed": "",
+          "return_type": "const value_type *",
+          "definition": "const value_type * ConstHandle::operator->",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Dereference",
+          "file": "Concepts/ConstHandle.h",
+          "line": "31"
+        }
+      ],
+      "xml_file": "class_const_handle.xml",
+      "file": "Concepts/ConstHandle.h",
+      "line": "17"
+    },
+    "ConstRange": {
+      "kind": "class",
+      "name": "ConstRange",
+      "brief": "A constant iterator range. Refer to the Range concept for more details.",
+      "detailed": "Refines Boost's Range concept Has models STL containers boost::iterator_range Range",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "const_iterator",
+          "qualified_name": "ConstRange::const_iterator",
+          "brief": "The constant iterator type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConstRange::const_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConstRange.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "ConstRange::size_type",
+          "brief": "An unsigned integral type that can represent the size of a range.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConstRange::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConstRange.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "ConstRange::begin",
+          "brief": "returns the const iterator pointing to the first element.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator ConstRange::begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/ConstRange.h",
+          "line": "43"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "ConstRange::end",
+          "brief": "returns the past-the-end const iterator.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator ConstRange::end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/ConstRange.h",
+          "line": "48"
+        },
+        {
+          "kind": "function",
+          "name": "size",
+          "qualified_name": "ConstRange::size",
+          "brief": "returns the size of the range.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type ConstRange::size",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/ConstRange.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "empty",
+          "qualified_name": "ConstRange::empty",
+          "brief": "returns whether the range is empty.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool ConstRange::empty",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/ConstRange.h",
+          "line": "58"
+        }
+      ],
+      "xml_file": "class_const_range.xml",
+      "file": "Concepts/ConstRange.h",
+      "line": "18"
+    },
+    "ForwardCirculator": {
+      "kind": "class",
+      "name": "ForwardCirculator",
+      "brief": "See Subsection Forward Circulators in the page on Circulators.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "class_forward_circulator.xml",
+      "file": "Concepts/Circulator.h",
+      "line": "307"
+    },
+    "Handle": {
+      "kind": "class",
+      "name": "Handle",
+      "brief": "Most data structures in CGAL use the concept of Handle in their user interface to refer to the elements they store. This concept describes what is sometimes called a trivial iterator. A Handle is akin to a pointer to an object providing the dereference operator operator*() and member access operator->() but no increment or decrement operators like iterators. A Handle is intended to be used whenever the referenced object is not part of a logical sequence.",
+      "detailed": "Like iterators, the handle can be passed as template argument to std::iterators_traits in order to extract its value_type , the type of the element pointed to. The iterator_category is void . Refines Descriptor The default constructed object must be unique as far as the equality operator is concerned (this serves the same purpose as NULL for pointers). (Note that this is not a generally supported feature of iterators of standard containers.) Has models T* (pointer) const T* (const pointers) Iterator Circulator",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator*",
+          "qualified_name": "Handle::operator*",
+          "brief": "returns the object pointed to.",
+          "detailed": "",
+          "return_type": "value_type &",
+          "definition": "value_type & Handle::operator*",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Dereference",
+          "file": "Concepts/Handle.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "operator->",
+          "qualified_name": "Handle::operator->",
+          "brief": "returns a pointer to the object pointed to.",
+          "detailed": "",
+          "return_type": "value_type *",
+          "definition": "value_type * Handle::operator->",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Dereference",
+          "file": "Concepts/Handle.h",
+          "line": "47"
+        }
+      ],
+      "xml_file": "class_handle.xml",
+      "file": "Concepts/Handle.h",
+      "line": "33"
+    },
+    "RandomAccessCirculator": {
+      "kind": "class",
+      "name": "RandomAccessCirculator",
+      "brief": "See Subsection sectionMinCircleRequ in the page on Circulators.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "class_random_access_circulator.xml",
+      "file": "Concepts/Circulator.h",
+      "line": "326"
+    },
+    "Range": {
+      "kind": "class",
+      "name": "Range",
+      "brief": "CGAL and the STL heavily use the concepts of iterators and iterator ranges to describe linear sequences of elements, and algorithms operating on these.",
+      "detailed": "The Range concept aims at encapsulating an iterator range, by providing access to the first and past-the-end iterators of a range. The advantage is that the syntax for passing ranges is much more concise than passing two arguments separately. Ranges come in different categories depending on the category of their iterator : mutable or constant (modifiability of the elements pointed to), and forward, bidirectional or random-access. The category can be queried using std::iterator_traits and the corresponding iterator type. Note that the concepts Range and ConstRange do not require anything on the category or the value type of the iterator. It must be precised in the documentation of any model of these concepts. For example, in the case of a vector of points, one would say: This type is a model of Range concept, its iterator type is random-access and its value type is Point . Boost also offers the Boost.Range library which provides good support for ranges. Finally, let us note that ranges, in general (especially in template context) need to be passed and returned by (const) reference for efficiency. This is a difference with iterators which are typically passed by value. Refines ConstRange Boost's Range concept Has models STL containers",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "const_iterator",
+          "qualified_name": "Range::const_iterator",
+          "brief": "The constant iterator type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Range::const_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Range.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "iterator",
+          "qualified_name": "Range::iterator",
+          "brief": "The iterator type.",
+          "detailed": "It must be convertible to const_iterator .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Range::iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Range.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "Range::size_type",
+          "brief": "An unsigned integral type that can represent the size of a range.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Range::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Range.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "Range::begin",
+          "brief": "returns the const iterator pointing to the first element.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator Range::begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/Range.h",
+          "line": "70"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "Range::end",
+          "brief": "returns the past-the-end const iterator.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator Range::end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/Range.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "Range::begin",
+          "brief": "returns the iterator pointing to the first element.",
+          "detailed": "",
+          "return_type": "iterator",
+          "definition": "iterator Range::begin",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/Range.h",
+          "line": "80"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "Range::end",
+          "brief": "returns the past-the-end iterator.",
+          "detailed": "",
+          "return_type": "iterator",
+          "definition": "iterator Range::end",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/Range.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
+          "name": "size",
+          "qualified_name": "Range::size",
+          "brief": "returns the size of the range.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type Range::size",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/Range.h",
+          "line": "90"
+        },
+        {
+          "kind": "function",
+          "name": "empty",
+          "qualified_name": "Range::empty",
+          "brief": "returns whether the range is empty.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool Range::empty",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Member functions",
+          "file": "Concepts/Range.h",
+          "line": "95"
+        }
+      ],
+      "xml_file": "class_range.xml",
+      "file": "Concepts/Range.h",
+      "line": "40"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/circulator.h",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgHandlesAndCirculatorsRef": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsRef",
+      "brief": "",
+      "detailed": "Olivier Devillers, Lutz Kettner, Sylvain Pion, Michael Seel, and Mariette Yvinec This package describes handles and circulators. They are related to iterators. Handles allow to dereference but neither to increment nor to decrement. Circulators have no notion of past-the-end, and they are used in CGAL whenever we have cyclic structures. Introduced in: CGAL 1.0 BibTeX: cgal:dksy-hc-26a License: LGPL The concept of iterators in the STL is tailored for linear sequences. CGAL extends this in several directions. First, it supports the notion of Handle (also sometimes referred to as the trivial iterator) which is used to document that no traversal operation is needed, only reference to an element. It also uses the Range and ConstRange concepts which encapsulates the access to both the first and the past-the-end iterators of an iterator range. Besides linear sequences, circular sequences also occur naturally in many combinatorial and geometric structures. Examples are polyhedral surfaces and planar maps, where the edges emanating from a vertex or the edges around a facet form a circular sequence. We provide several functions, classes and macros to assist in working with circulators: distance computation, adaptor classes converting between circulators and iterators, base classes to ease the implementation of circulators, and support for generic algorithms that work with circulators as well as with iterators. Classified Reference Pages Concepts Handle Range ConstRange Circulator ForwardCirculator BidirectionalCirculator RandomAccessCirculator Classes CGAL::Container_from_circulator <C> CGAL::Circulator_from_iterator <I> CGAL::Circulator_from_container <C> CGAL::Const_circulator_from_container<C> CGAL::Circulator_tag CGAL::Iterator_tag CGAL::Forward_circulator_tag CGAL::Bidirectional_circulator_tag CGAL::Random_access_circulator_tag CGAL::Circulator_base CGAL::Forward_circulator_base CGAL::Bidirectional_circulator_base CGAL::Random_access_circulator_base CGAL::Circulator_traits <C>",
+      "members": [],
+      "xml_file": "group___pkg_handles_and_circulators_ref.xml"
+    },
+    "PkgHandlesAndCirculatorsConcepts": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_handles_and_circulators_concepts.xml"
+    },
+    "PkgHandlesAndCirculatorsAdapter": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsAdapter",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_handles_and_circulators_adapter.xml"
+    },
+    "PkgHandlesAndCirculatorsFunctions": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsFunctions",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "circulator_distance",
+          "qualified_name": "CGAL::circulator_distance",
+          "brief": "The distance of a circulator c to a circulator d is the number of elements in the range [c, d) .",
+          "detailed": "It is defined to be zero for a circulator on an empty sequence and it returns the size of the data structure when applied to a range of the form [c, c) . circulator_size iterator_distance is_empty_range Circulator",
+          "return_type": "C::difference_type",
+          "definition": "C::difference_type CGAL::circulator_distance",
+          "argsstring": "(C c, C d)",
+          "params": [
+            {
+              "type": "C",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "C",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "circulator_size",
+          "qualified_name": "CGAL::circulator_size",
+          "brief": "The size of a circulator is the size of the data structure it refers to.",
+          "detailed": "It is zero for a circulator on an empty sequence. The size can be computed in linear time for forward and bidirectional circulators, and in constant time for random access circulators using the minimal circulator. The function circulator_size(c) returns the circulator size. It uses the c.min_circulator() function if c is a random access circulator. circulator_distance iterator_distance is_empty_range Circulator",
+          "return_type": "C::size_type",
+          "definition": "C::size_type CGAL::circulator_size",
+          "argsstring": "(C c)",
+          "params": [
+            {
+              "type": "C",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "290"
+        },
+        {
+          "kind": "function",
+          "name": "is_empty_range",
+          "qualified_name": "CGAL::is_empty_range",
+          "brief": "is true if the range [i, j) is empty, false otherwise.",
+          "detailed": "In order to write algorithms that work with iterator ranges as well as with circulator ranges we have to consider the difference of representing an empty range. For iterators this is the range [i,i) , while for circulators it would be c == nullptr , the empty sequence test. The function is_empty_range() provides the necessary generic test which accepts an iterator range or a circulator range and says whether the range is empty or not. IC is either a circulator or an iterator type. The range [i, j) is valid. Example The following function process_all() accepts a range [i, j) of an iterator or circulator IC and processes each element in this range: template < class IC> void process_all( IC i, IC j) { if (! CGAL::is_empty_range ( i, j)) { do { process(*i); } while (++i != j); } } iterator_distance CGAL_For_all Circulator_tag Circulator_traits Assert_circulator_or_iterator Circulator",
+          "return_type": "bool",
+          "definition": "bool CGAL::is_empty_range",
+          "argsstring": "(const IC &i, const IC &j)",
+          "params": [
+            {
+              "type": "const IC &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const IC &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "578"
+        },
+        {
+          "kind": "function",
+          "name": "iterator_distance",
+          "qualified_name": "CGAL::iterator_distance",
+          "brief": "The following function returns the distance between either two iterators or two circulators.",
+          "detailed": "circulator_size circulator_distance is_empty_range Circulator_tag Assert_circulator_or_iterator CGAL_For_all Circulator",
+          "return_type": "iterator_traits< IC >::difference_type",
+          "definition": "iterator_traits< IC >::difference_type CGAL::iterator_distance",
+          "argsstring": "(IC ic1, IC ic2)",
+          "params": [
+            {
+              "type": "IC",
+              "name": "ic1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IC",
+              "name": "ic2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "600"
+        },
+        {
+          "kind": "function",
+          "name": "query_circulator_or_iterator",
+          "qualified_name": "CGAL::query_circulator_or_iterator",
+          "brief": "This function matches for type I if the iterator category of I belongs to an iterator.",
+          "detailed": "Circulator_tag Circulator_traits Assert_circulator Circulator",
+          "return_type": "Iterator_tag",
+          "definition": "Iterator_tag CGAL::query_circulator_or_iterator",
+          "argsstring": "(const I &i)",
+          "params": [
+            {
+              "type": "const I &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "617"
+        },
+        {
+          "kind": "function",
+          "name": "query_circulator_or_iterator",
+          "qualified_name": "CGAL::query_circulator_or_iterator",
+          "brief": "This function matches for type C if the iterator category of C belongs to a circulator.",
+          "detailed": "Circulator_tag Circulator_traits Assert_circulator Circulator",
+          "return_type": "Circulator_tag",
+          "definition": "Circulator_tag CGAL::query_circulator_or_iterator",
+          "argsstring": "(const C &c)",
+          "params": [
+            {
+              "type": "const C &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "631"
+        },
+        {
+          "kind": "define",
+          "name": "CGAL_For_all",
+          "qualified_name": "",
+          "brief": "In order to write algorithms that work with iterator ranges as well as with circulator ranges we have to consider the difference of representing an empty range.",
+          "detailed": "For iterators this is the range [i,i) , while for circulators it would be c == nullptr , the empty sequence test. The function is_empty_range() provides the necessary generic test which accepts an iterator range or a circulator range and says whether the range is empty or not. A macro CGAL_For_all( i, j) simplifies the writing of such simple loops as the one in the example of the function is_empty_range() . i and j can be either iterators or circulators. The macro loops through the range [i, j) . It increments i until it reaches j . The implementation looks like: for ( bool _circ_loop_flag = ! ::CGAL::is_empty_range(i,j); _circ_loop_flag; _circ_loop_flag = ((++i) != (j)) ) Note that the macro behaves like a for -loop. It can be used with a single statement or with a statement block. For bidirectional iterators or circulators, a backwards loop macro CGAL_For_all_backwards(i, j) exists that decrements j until it reaches i . CGAL::iterator_distance() CGAL::is_empty_range() CGAL::Circulator_tag CGAL::Circulator_traits CGAL::Assert_circulator_or_iterator Circulator",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [
+            {
+              "type": "",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "define",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "676"
+        },
+        {
+          "kind": "define",
+          "name": "CGAL_For_all_backwards",
+          "qualified_name": "",
+          "brief": "See CGAL_For_all .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [
+            {
+              "type": "",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "define",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "680"
+        }
+      ],
+      "xml_file": "group___pkg_handles_and_circulators_functions.xml"
+    },
+    "PkgHandlesAndCirculatorsTags": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsTags",
+      "brief": "Iterators and circulators as well as different categories of circulators can be distinguished with the use of discriminating functions and the following circulator tags.",
+      "detailed": "A couple of base classes simplify the task of writing own circulators. They declare the appropriate tags and the local types needed for circulators. To use the tags or base classes only it is sufficient to include: query_circulator_or_iterator Circulator_traits Assert_circulator CGAL_For_all is_empty_range Circulator Example The above declarations can be used to distinguish between iterators and circulators and between different circulator categories. The assertions can be used to protect a templatized algorithm against instantiations that do not fulfill the requirements. The following example program illustrates both. Example: Circulator/circulator_prog3.cpp Show / Hide #include <cassert> #include <list> #include <CGAL/circulator.h> template < class C> inline int foo( C c, std::forward_iterator_tag) { CGAL::Assert_circulator ( c); CGAL::Assert_forward_category ( c); return 1; } template < class C> inline int foo( C c, std::random_access_iterator_tag) { CGAL::Assert_circulator ( c); CGAL::Assert_random_access_category ( c); return 2; } template < class I> inline int foo( I i, CGAL::Iterator_tag ) { CGAL::Assert_iterator ( i); return 3; } template < class C> inline int foo( C c, CGAL::Circulator_tag ) { CGAL::Assert_circulator ( c); typedef std::iterator_traits<C> Traits; typedef typename Traits::iterator_category iterator_category; return foo( c, iterator_category()); } template < class IC> inline int foo( IC ic) { typedef CGAL::Circulator_traits<IC> Traits; typedef typename Traits::category category; return foo( ic, category()); } int main() { typedef CGAL::Forward_circulator_base<int> F; typedef CGAL::Random_access_circulator_base<int> R; F f = F(); R r = R(); std::list<int> l; assert( foo( f) == 1); assert( foo( r) == 2); assert( foo( l.begin()) == 3); return 0; }",
+      "members": [],
+      "xml_file": "group___pkg_handles_and_circulators_tags.xml"
+    },
+    "PkgHandlesAndCirculatorsAssert": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsAssert",
+      "brief": "Each of the following assertions, applicable to an iterator or a circulator or both, checks at compile time if its argument is of the kind stated in the assertions name, i.e. a circulator, an iterator, or a particular category of either an iterator or a circulator.",
+      "detailed": "Note that neither input nor output circulators exists. Circulator_tag Circulator_traits query_circulator_or_iterator Circulator",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Assert_circulator",
+          "qualified_name": "CGAL::Assert_circulator",
+          "brief": "checks at compile time if its argument is a circulator.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_circulator",
+          "argsstring": "(const C &c)",
+          "params": [
+            {
+              "type": "const C &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_iterator",
+          "qualified_name": "CGAL::Assert_iterator",
+          "brief": "checks at compile time if its argument is an iterator.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_iterator",
+          "argsstring": "(const I &i)",
+          "params": [
+            {
+              "type": "const I &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_circulator_or_iterator",
+          "qualified_name": "CGAL::Assert_circulator_or_iterator",
+          "brief": "checks at compile time if its argument is a circulator or iterator.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_circulator_or_iterator",
+          "argsstring": "(const IC &i)",
+          "params": [
+            {
+              "type": "const IC &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_input_category",
+          "qualified_name": "CGAL::Assert_input_category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_input_category",
+          "argsstring": "(const I &i)",
+          "params": [
+            {
+              "type": "const I &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_output_category",
+          "qualified_name": "CGAL::Assert_output_category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_output_category",
+          "argsstring": "(const I &i)",
+          "params": [
+            {
+              "type": "const I &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "61"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_forward_category",
+          "qualified_name": "CGAL::Assert_forward_category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_forward_category",
+          "argsstring": "(const IC &ic)",
+          "params": [
+            {
+              "type": "const IC &",
+              "name": "ic",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_bidirectional_category",
+          "qualified_name": "CGAL::Assert_bidirectional_category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_bidirectional_category",
+          "argsstring": "(const IC &ic)",
+          "params": [
+            {
+              "type": "const IC &",
+              "name": "ic",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "Assert_random_access_category",
+          "qualified_name": "CGAL::Assert_random_access_category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Assert_random_access_category",
+          "argsstring": "(const IC &ic)",
+          "params": [
+            {
+              "type": "const IC &",
+              "name": "ic",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/circulator.h",
+          "line": "82"
+        }
+      ],
+      "xml_file": "group___pkg_handles_and_circulators_assert.xml"
+    },
+    "PkgHandlesAndCirculatorsBaseClasses": {
+      "kind": "group",
+      "name": "PkgHandlesAndCirculatorsBaseClasses",
+      "brief": "Implementation",
+      "detailed": "Since not all current compilers can eliminate the space needed for the compile time tags even when deriving from them, we implement a variant for each base class that contains a protected void* data member called _ptr . Here, the allocated space in the derived classes can be reused.",
+      "members": [],
+      "xml_file": "group___pkg_handles_and_circulators_base_classes.xml"
+    }
+  }
+}

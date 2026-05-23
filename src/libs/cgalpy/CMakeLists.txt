@@ -4,6 +4,110 @@
 # Generate config.hpp
 configure_file(config.hpp.in include/config.hpp)
 
+set(component cgalpy)
+string(TOUPPER ${component} component_upper)
+
+######## Custom Source File Generation #########################################
+################################################################################
+
+#############
+# Directories
+#############
+
+set(${component}_BINARY_SRC_DIR "${CMAKE_BINARY_DIR}/src")
+set(${component}_BINARY_LIB_DIR "${${component}_BINARY_SRC_DIR}/libs/${component}")
+
+set(${component}_GENERATED_BASE_DIR "${${component}_BINARY_LIB_DIR}")
+set(${component}_GENERATED_DIR "${${component}_GENERATED_BASE_DIR}/generated")
+set(${component}_GENERATED_LIB_DIR "${${component}_GENERATED_BASE_DIR}/lib/generated")
+set(${component}_GENERATED_INC_DIR "${${component}_GENERATED_BASE_DIR}/include/generated")
+
+file(MAKE_DIRECTORY ${${component}_GENERATED_DIR})
+file(MAKE_DIRECTORY ${${component}_GENERATED_LIB_DIR})
+file(MAKE_DIRECTORY ${${component}_GENERATED_INC_DIR}/${component})
+
+# Generated headers are included as "cgalpy/<module>_docstrings.hpp".
+include_directories(${${component}_GENERATED_INC_DIR})
+
+##########
+# Commands
+##########
+
+set(${component}_GEN_DOCSTRINGS "${CMAKE_SOURCE_DIR}/src/scripts/cpp_docstrings_from_json.py")
+set(${component}_DOCSTRINGS_JSON_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/docstrings/json")
+
+# Short binding module names mapped to CGAL documentation package names.
+set(LONG_NAME_Ker "Kernel_23")
+set(LONG_NAME_Kerd "Kernel_d")
+set(LONG_NAME_As2 "Alpha_shapes_2")
+set(LONG_NAME_As3 "Alpha_shapes_3")
+set(LONG_NAME_Aos2 "Arrangement_on_surface_2")
+set(LONG_NAME_Bso2 "Boolean_set_operations_2")
+set(LONG_NAME_Bvr "Basic_viewer")
+set(LONG_NAME_Bgl "BGL")
+set(LONG_NAME_Bv "Bounding_volumes")
+set(LONG_NAME_Ch2 "Convex_hull_2")
+set(LONG_NAME_Ch3 "Convex_hull_3")
+set(LONG_NAME_Env2 "Envelope_2")
+set(LONG_NAME_Env3 "Envelope_3")
+set(LONG_NAME_Ms2 "Minkowski_sum_2")
+set(LONG_NAME_Nef3 "Nef_3")
+set(LONG_NAME_Pol3 "Polyhedron")
+set(LONG_NAME_Pol2 "Polygon")
+set(LONG_NAME_Pmp "Polygon_mesh_processing")
+set(LONG_NAME_Sms "Surface_mesh_simplification")
+set(LONG_NAME_Smsk "Surface_mesh_skeletonization")
+set(LONG_NAME_Sd "Shape_detection")
+set(LONG_NAME_Pp2 "Partition_2")
+set(LONG_NAME_Ss "Spatial_searching")
+set(LONG_NAME_St "Spatial_sorting")
+set(LONG_NAME_Sn2 "Snap_rounding_2")
+set(LONG_NAME_Sm "Surface_mesh")
+set(LONG_NAME_Ss2 "Surface_sweep_2")
+set(LONG_NAME_Tri2 "Triangulation_2")
+set(LONG_NAME_Tri3 "Triangulation_3")
+set(LONG_NAME_Trid "Triangulation")
+set(LONG_NAME_Vis2 "Visibility_2")
+set(LONG_NAME_Gog "Generator")
+
+function(get_module_docstring_package module out_var)
+  set(long_name_var "LONG_NAME_${module}")
+  if (NOT DEFINED ${long_name_var})
+    message(FATAL_ERROR "No docstring package mapping for module '${module}'")
+  endif ()
+  set(${out_var} "${${long_name_var}}" PARENT_SCOPE)
+endfunction()
+
+function(add_module_docstring module)
+  get_module_docstring_package(${module} package)
+
+  set(docstring_header
+      ${${component}_GENERATED_INC_DIR}/${component}/${module}_docstrings.hpp)
+  set(docstring_source
+      ${${component}_GENERATED_LIB_DIR}/${module}_docstrings.cpp)
+
+  add_custom_command(
+    OUTPUT ${docstring_header} ${docstring_source}
+    COMMAND ${Python_EXECUTABLE} ${${component}_GEN_DOCSTRINGS}
+    ARGS
+      --library ${component}
+      --module ${module}
+      --package ${package}
+      --input-path ${${component}_DOCSTRINGS_JSON_DIR}
+      --output-inc-path ${${component}_GENERATED_INC_DIR}/${component}
+      --output-lib-path ${${component}_GENERATED_LIB_DIR}
+    DEPENDS
+      ${${component}_GEN_DOCSTRINGS}
+      ${${component}_DOCSTRINGS_JSON_DIR}/${package}.json
+    VERBATIM)
+
+  set_source_files_properties(${docstring_header} ${docstring_source}
+    PROPERTIES GENERATED TRUE)
+
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} ${docstring_source} PARENT_SCOPE)
+endfunction()
+
+
 # Add source files
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
 
@@ -662,6 +766,11 @@ function(add_module name)
   list(APPEND STUBS_DEPENDS CGALPY_${name}_STUBS)
   set(CGALPY_STUBS_DEPENDS "${STUBS_DEPENDS}" PARENT_SCOPE)
 endfunction()
+
+
+foreach(MODULE IN LISTS CGALPY_MODULES)
+  add_module_docstring(${MODULE})
+endforeach()
 
 add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 # Add the library target

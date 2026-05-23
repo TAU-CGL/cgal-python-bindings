@@ -1,0 +1,1877 @@
+{
+  "schema_version": 1,
+  "package": "Convex_hull_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 13,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Convex_hull_constructive_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Convex_hull_constructive_traits_2",
+      "brief": "The class Convex_hull_constructive_traits_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation function.",
+      "detailed": "Unlike the class CGAL::Convex_hull_traits_2 <R> , this class makes use of previously computed results to avoid redundancy. For example, in the sidedness tests, lines (of type R::Line_2 ) are constructed, which is equivalent to the precomputation of subdeterminants of the orientation-determinant for three points. Is model of ConvexHullTraits_2 CGAL::Projection_traits_xy_3<K> CGAL::Projection_traits_yz_3<K> CGAL::Projection_traits_xz_3<K> CGAL::Convex_hull_traits_2 <R>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Point_2",
+          "definition": "typedef R::Point_2 CGAL::Convex_hull_constructive_traits_2< R >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Less_xy_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Less_xy_2",
+          "definition": "typedef R::Less_xy_2 CGAL::Convex_hull_constructive_traits_2< R >::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_yx_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Less_yx_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Less_yx_2",
+          "definition": "typedef R::Less_yx_2 CGAL::Convex_hull_constructive_traits_2< R >::Less_yx_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_signed_distance_to_line_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Compare_signed_distance_to_line_2",
+          "brief": "This internal functor builds and cache the line on the first call to its operator() .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Convex_hull_constructive_traits_2< R >::Compare_signed_distance_to_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_rotate_ccw_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Less_rotate_ccw_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Less_rotate_ccw",
+          "definition": "typedef R::Less_rotate_ccw CGAL::Convex_hull_constructive_traits_2< R >::Less_rotate_ccw_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Left_turn_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Left_turn_2",
+          "definition": "typedef R::Left_turn_2 CGAL::Convex_hull_constructive_traits_2< R >::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Equal_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Equal_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Equal_2",
+          "definition": "typedef R::Equal_2 CGAL::Convex_hull_constructive_traits_2< R >::Equal_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "Convex_hull_constructive_traits_2",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::Convex_hull_constructive_traits_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Convex_hull_constructive_traits_2< R >::Convex_hull_constructive_traits_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "74"
+        },
+        {
+          "kind": "function",
+          "name": "less_xy_2_object",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::less_xy_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_xy_2",
+          "definition": "Less_xy_2 CGAL::Convex_hull_constructive_traits_2< R >::less_xy_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "less_yx_2_object",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::less_yx_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_yx_2",
+          "definition": "Less_yx_2 CGAL::Convex_hull_constructive_traits_2< R >::less_yx_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "compare_signed_distance_to_line_2_object",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::compare_signed_distance_to_line_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_signed_distance_to_line_2",
+          "definition": "Compare_signed_distance_to_line_2 CGAL::Convex_hull_constructive_traits_2< R >::compare_signed_distance_to_line_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "less_rotate_ccw_2_object",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::less_rotate_ccw_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_rotate_ccw_2",
+          "definition": "Less_rotate_ccw_2 CGAL::Convex_hull_constructive_traits_2< R >::less_rotate_ccw_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "101"
+        },
+        {
+          "kind": "function",
+          "name": "left_turn_2_object",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::left_turn_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Left_turn_2",
+          "definition": "Left_turn_2 CGAL::Convex_hull_constructive_traits_2< R >::left_turn_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "106"
+        },
+        {
+          "kind": "function",
+          "name": "equal_2_object",
+          "qualified_name": "CGAL::Convex_hull_constructive_traits_2::equal_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Equal_2",
+          "definition": "Equal_2 CGAL::Convex_hull_constructive_traits_2< R >::equal_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_constructive_traits_2.h",
+          "line": "111"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_convex__hull__constructive__traits__2.xml",
+      "file": "CGAL/convex_hull_constructive_traits_2.h",
+      "line": "24"
+    },
+    "CGAL::Convex_hull_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Convex_hull_traits_2",
+      "brief": "The class Convex_hull_traits_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation function.",
+      "detailed": "This class corresponds to the default traits class for these functions. Is model of ConvexHullTraits_2 CGAL::Convex_hull_constructive_traits_2 <R> CGAL::Convex_hull_traits_adapter_2 <R,P> CGAL::Projection_traits_xy_3<K> CGAL::Projection_traits_yz_3<K> CGAL::Projection_traits_xz_3<K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Point_2",
+          "definition": "typedef R::Point_2 CGAL::Convex_hull_traits_2< R >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Less_xy_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Less_xy",
+          "definition": "typedef R::Less_xy CGAL::Convex_hull_traits_2< R >::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_yx_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Less_yx_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Less_yx",
+          "definition": "typedef R::Less_yx CGAL::Convex_hull_traits_2< R >::Less_yx_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "39"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_signed_distance_to_line_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Compare_signed_distance_to_line_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Compare_signed_distance_to_line_2",
+          "definition": "typedef R::Compare_signed_distance_to_line_2 CGAL::Convex_hull_traits_2< R >::Compare_signed_distance_to_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_rotate_ccw_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Less_rotate_ccw_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Less_rotate_ccw_2",
+          "definition": "typedef R::Less_rotate_ccw_2 CGAL::Convex_hull_traits_2< R >::Less_rotate_ccw_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "50"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Left_turn_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Left_turn_2",
+          "definition": "typedef R::Left_turn_2 CGAL::Convex_hull_traits_2< R >::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Equal_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Equal_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Equal_2",
+          "definition": "typedef R::Equal_2 CGAL::Convex_hull_traits_2< R >::Equal_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "60"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Orientation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Orientation_2",
+          "definition": "typedef R::Orientation_2 CGAL::Convex_hull_traits_2< R >::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "Convex_hull_traits_2",
+          "qualified_name": "CGAL::Convex_hull_traits_2::Convex_hull_traits_2",
+          "brief": "copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Convex_hull_traits_2< R >::Convex_hull_traits_2",
+          "argsstring": "(Convex_hull_traits_2 &t)",
+          "params": [
+            {
+              "type": "Convex_hull_traits_2 &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "less_xy_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::less_xy_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_xy_2",
+          "definition": "Less_xy_2 CGAL::Convex_hull_traits_2< R >::less_xy_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
+          "name": "less_yx_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::less_yx_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_yx_2",
+          "definition": "Less_yx_2 CGAL::Convex_hull_traits_2< R >::less_yx_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "90"
+        },
+        {
+          "kind": "function",
+          "name": "compare_signed_distance_to_line_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::compare_signed_distance_to_line_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_signed_distance_to_line_2",
+          "definition": "Compare_signed_distance_to_line_2 CGAL::Convex_hull_traits_2< R >::compare_signed_distance_to_line_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "less_rotate_ccw_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::less_rotate_ccw_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_rotate_ccw_2",
+          "definition": "Less_rotate_ccw_2 CGAL::Convex_hull_traits_2< R >::less_rotate_ccw_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "101"
+        },
+        {
+          "kind": "function",
+          "name": "left_turn_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::left_turn_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Left_turn_2",
+          "definition": "Left_turn_2 CGAL::Convex_hull_traits_2< R >::left_turn_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "106"
+        },
+        {
+          "kind": "function",
+          "name": "equal_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::equal_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Equal_2",
+          "definition": "Equal_2 CGAL::Convex_hull_traits_2< R >::equal_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "orientation_2_object",
+          "qualified_name": "CGAL::Convex_hull_traits_2::orientation_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Orientation_2",
+          "definition": "Orientation_2 CGAL::Convex_hull_traits_2< R >::orientation_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/convex_hull_traits_2.h",
+          "line": "116"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_convex__hull__traits__2.xml",
+      "file": "CGAL/convex_hull_traits_2.h",
+      "line": "20"
+    },
+    "CGAL::Convex_hull_traits_adapter_2": {
+      "kind": "class",
+      "name": "CGAL::Convex_hull_traits_adapter_2",
+      "brief": "The class Convex_hull_traits_adapter_2 serves as a traits class for all the two-dimensional convex hull and extreme point calculation functions.",
+      "detailed": "Given a property map associating a key to a point, the class Convex_hull_traits_adapter_2 enables to compute the sequence of keys for which the associated points form a convex hull, performing the predicates of the base traits class on the points associated to the keys. Is model of ConvexHullTraits_2 CGAL::Convex_hull_constructive_traits_2 <R> CGAL::Projection_traits_xy_3<K> CGAL::Projection_traits_yz_3<K> CGAL::Projection_traits_xz_3<K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Convex_hull_traits_adapter_2::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_traits< PointPropertyMap >::key_type",
+          "definition": "typedef boost::property_traits<PointPropertyMap>::key_type CGAL::Convex_hull_traits_adapter_2< BaseTraits, PointPropertyMap >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Convex_hull_traits_adapter_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "Convex_hull_traits_2",
+          "qualified_name": "CGAL::Convex_hull_traits_adapter_2::Convex_hull_traits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Convex_hull_traits_adapter_2< BaseTraits, PointPropertyMap >::Convex_hull_traits_2",
+          "argsstring": "(BaseTraits base=BaseTraits())",
+          "params": [
+            {
+              "type": "BaseTraits",
+              "name": "base",
+              "default": "BaseTraits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Convex_hull_traits_adapter_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "Convex_hull_traits_2",
+          "qualified_name": "CGAL::Convex_hull_traits_adapter_2::Convex_hull_traits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Convex_hull_traits_adapter_2< BaseTraits, PointPropertyMap >::Convex_hull_traits_2",
+          "argsstring": "(const PointPropertyMap &ppmap, BaseTraits base=BaseTraits())",
+          "params": [
+            {
+              "type": "const PointPropertyMap &",
+              "name": "ppmap",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "BaseTraits",
+              "name": "base",
+              "default": "BaseTraits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Convex_hull_traits_adapter_2.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "point_property_map",
+          "qualified_name": "CGAL::Convex_hull_traits_adapter_2::point_property_map",
+          "brief": "Returns a const reference to the point property map.",
+          "detailed": "",
+          "return_type": "const PointPropertyMap &",
+          "definition": "const PointPropertyMap & CGAL::Convex_hull_traits_adapter_2< BaseTraits, PointPropertyMap >::point_property_map",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Convex_hull_traits_adapter_2.h",
+          "line": "53"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_convex__hull__traits__adapter__2.xml",
+      "file": "CGAL/Convex_hull_traits_adapter_2.h",
+      "line": "22"
+    },
+    "ConvexHullTraits_2": {
+      "kind": "class",
+      "name": "ConvexHullTraits_2",
+      "brief": "All convex hull and extreme point algorithms provided in CGAL are parameterized with a traits class Traits , which defines the primitives (objects and predicates) that the convex hull algorithms use. ConvexHullTraits_2 defines the complete set of primitives required in these functions. The specific subset of these primitives required by each function is specified with each function.",
+      "detailed": "Has models CGAL::Convex_hull_constructive_traits_2 <R> CGAL::Convex_hull_traits_2 <R> CGAL::Convex_hull_traits_adapter_2 <R> CGAL::Projection_traits_xy_3<K> CGAL::Projection_traits_yz_3<K> CGAL::Projection_traits_xz_3<K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "ConvexHullTraits_2::Point_2",
+          "brief": "The point type on which the convex hull functions operate.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Equal_2",
+          "qualified_name": "ConvexHullTraits_2::Equal_2",
+          "brief": "Binary predicate object type comparing Point_2 s.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p ==_{xy} q$ , false otherwise.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Equal_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "ConvexHullTraits_2::Less_xy_2",
+          "brief": "Binary predicate object type comparing Point_2 s lexicographically.",
+          "detailed": "Must provide bool operator()(Point_2 p, Point_2 q) where true is returned iff $ p <_{xy} q$ . We have $ p<_{xy}q$ , iff $ p_x < q_x$ or $ p_x = q_x$ and $ p_y < q_y$ , where $ p_x$ and $ p_y$ denote $ x$ and $ y$ coordinate of point $ p$ , respectively.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_yx_2",
+          "qualified_name": "ConvexHullTraits_2::Less_yx_2",
+          "brief": "Same as Less_xy_2 with the roles of $ x$ and $ y$ interchanged.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Less_yx_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Left_turn_2",
+          "qualified_name": "ConvexHullTraits_2::Left_turn_2",
+          "brief": "Predicate object type that must provide bool operator()(Point_2 p,Point_2 q,Point_2 r) , which returns true iff r lies to the left of the oriented line through p and q .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Left_turn_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_signed_distance_to_line_2",
+          "qualified_name": "ConvexHullTraits_2::Compare_signed_distance_to_line_2",
+          "brief": "Predicate object type that must provide bool operator()(Point_2 p, Point_2 q, Point_2 r,Point_2 s) , which compares the signed distance of $ r$ and $ s$ to the directed line $ l_{pq}$ through $ p$ and $ q$ .",
+          "detailed": "It is used to compute the point right of a line with maximum unsigned distance to the line.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Compare_signed_distance_to_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "74"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_rotate_ccw_2",
+          "qualified_name": "ConvexHullTraits_2::Less_rotate_ccw_2",
+          "brief": "Predicate object type that must provide bool operator()(Point_2 e, Point_2 p,Point_2 q) , where true is returned iff a tangent at $ e$ to the point set $ \\{e,p,q\\}$ hits $ p$ before $ q$ when rotated counterclockwise around $ e$ .",
+          "detailed": "Ties are broken such that the point with larger distance to $ e$ is smaller!",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Less_rotate_ccw_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "85"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "ConvexHullTraits_2::Orientation_2",
+          "brief": "Predicate object type that must provide Orientation operator()(Point_2 e, Point_2 p,Point_2 q) , that returns CGAL::LEFT_TURN , if r lies to the left of the oriented line l defined by p and q , returns CGAL::RIGHT_TURN if r lies to the right of l , and returns CGAL::COLLINEAR if r lies on l .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConvexHullTraits_2::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "ConvexHullTraits_2",
+          "qualified_name": "ConvexHullTraits_2::ConvexHullTraits_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "ConvexHullTraits_2::ConvexHullTraits_2",
+          "argsstring": "(ConvexHullTraits_2 &t)",
+          "params": [
+            {
+              "type": "ConvexHullTraits_2 &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "equal_2_object",
+          "qualified_name": "ConvexHullTraits_2::equal_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Equal_2",
+          "definition": "Equal_2 ConvexHullTraits_2::equal_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "117"
+        },
+        {
+          "kind": "function",
+          "name": "less_xy_2_object",
+          "qualified_name": "ConvexHullTraits_2::less_xy_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_xy_2",
+          "definition": "Less_xy_2 ConvexHullTraits_2::less_xy_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "122"
+        },
+        {
+          "kind": "function",
+          "name": "less_yx_2_object",
+          "qualified_name": "ConvexHullTraits_2::less_yx_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_yx_2",
+          "definition": "Less_yx_2 ConvexHullTraits_2::less_yx_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "127"
+        },
+        {
+          "kind": "function",
+          "name": "compare_signed_distance_to_line_2_object",
+          "qualified_name": "ConvexHullTraits_2::compare_signed_distance_to_line_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_signed_distance_to_line_2",
+          "definition": "Compare_signed_distance_to_line_2 ConvexHullTraits_2::compare_signed_distance_to_line_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "less_rotate_ccw_2_object",
+          "qualified_name": "ConvexHullTraits_2::less_rotate_ccw_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_rotate_ccw_2",
+          "definition": "Less_rotate_ccw_2 ConvexHullTraits_2::less_rotate_ccw_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "137"
+        },
+        {
+          "kind": "function",
+          "name": "left_turn_2_object",
+          "qualified_name": "ConvexHullTraits_2::left_turn_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Left_turn_2",
+          "definition": "Left_turn_2 ConvexHullTraits_2::left_turn_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "142"
+        },
+        {
+          "kind": "function",
+          "name": "orientation_2_object",
+          "qualified_name": "ConvexHullTraits_2::orientation_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Orientation_2",
+          "definition": "Orientation_2 ConvexHullTraits_2::orientation_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/ConvexHullTraits_2.h",
+          "line": "147"
+        }
+      ],
+      "xml_file": "class_convex_hull_traits__2.xml",
+      "file": "Concepts/ConvexHullTraits_2.h",
+      "line": "23"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/ch_akl_toussaint.h",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgConvexHull2Ref": {
+      "kind": "group",
+      "name": "PkgConvexHull2Ref",
+      "brief": "",
+      "detailed": "Susan Hert and Stefan Schirra This package provides functions for computing convex hulls in two dimensions as well as functions for checking if sets of points are strongly convex are not. There are also a number of functions described for computing particular extreme points and subsequences of hull points, such as the lower and upper hull of a set of points. Introduced in: CGAL 1.0 BibTeX: cgal:hs-chep2-26a License: GPL Windows Demo: See Bounding Volumes A subset $S \\subseteq \\mathbb{R}^2 $ is convex if for any two points p and q in the set the line segment with endpoints p and q is contained in $ S $ . The convex hull of a set $ S $ is the smallest convex set containing $ S $ . The convex hull of a set of points P is a convex polygon with vertices in P . A point in P is an extreme point (with respect to P ) if it is a vertex of the convex hull of P . CGAL provides functions for computing convex hulls in two dimensions as well as functions for testing if a given set of points is strongly convex or not. There are also a number of functions available for computing particular extreme points in 2D and subsequences of the hull points, such as the lower hull or upper hull of a set of points. Classified Reference Pages Assertions For the convex hull algorithms, the postcondition check tests only convexity (if not disabled), but not containment of the input points in the polygon or polyhedron defined by the output points. The latter is considered an expensive checking and can be enabled by defining CGAL_CHECK_EXPENSIVE . Concepts ConvexHullTraits_2 Traits Classes CGAL::Convex_hull_constructive_traits_2 <R> CGAL::Convex_hull_traits_2 <R> CGAL::Convex_hull_traits_adapter_2 <R,P> Convex Hull Functions CGAL::ch_akl_toussaint() CGAL::ch_bykat() CGAL::ch_eddy() CGAL::ch_graham_andrew() CGAL::ch_jarvis() CGAL::ch_melkman() CGAL::convex_hull_2() Convexity Checking Functions CGAL::is_ccw_strongly_convex_2() CGAL::is_cw_strongly_convex_2() Hull Subsequence Functions CGAL::ch_graham_andrew_scan() CGAL::ch_jarvis_march() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() Extreme Point Functions CGAL::ch_e_point() CGAL::ch_nswe_point() CGAL::ch_n_point() CGAL::ch_ns_point() CGAL::ch_s_point() CGAL::ch_w_point() CGAL::ch_we_point()",
+      "members": [],
+      "xml_file": "group___pkg_convex_hull2_ref.xml"
+    },
+    "PkgConvexHull2Concepts": {
+      "kind": "group",
+      "name": "PkgConvexHull2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_convex_hull2_concepts.xml"
+    },
+    "PkgConvexHull2Traits": {
+      "kind": "group",
+      "name": "PkgConvexHull2Traits",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_convex_hull2_traits.xml"
+    },
+    "PkgConvexHull2Functions": {
+      "kind": "group",
+      "name": "PkgConvexHull2Functions",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "ch_akl_toussaint",
+          "qualified_name": "CGAL::ch_akl_toussaint",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ).",
+          "detailed": "The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. It is not specified at which point the cyclic sequence of extreme points is cut into a linear sequence. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements The value type of ForwardIterator and OutputIterator are equivalent to Traits::Point_2 . Traits defines the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Less_xy_2 , Traits::Less_yx_2 , Traits::Left_turn_2 , Traits::Orientation_2 , Traits::Equal_2 . CGAL::ch_bykat() CGAL::ch_eddy() CGAL::ch_graham_andrew() CGAL::ch_jarvis() CGAL::ch_melkman() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() CGAL::convex_hull_2() Implementation This function uses the algorithm of Akl and Toussaint [1] that requires $O(n \\log n)$ time for $ n$ input points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_akl_toussaint",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits())",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_akl_toussaint.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "ch_bykat",
+          "qualified_name": "CGAL::ch_bykat",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ).",
+          "detailed": "The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. It is not specified at which point the cyclic sequence of extreme points is cut into a linear sequence. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits defines the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Compare_signed_distance_to_line_2 , Traits::Left_turn_2 , Traits::Less_xy_2 , Traits::Equal_2 . CGAL::ch_akl_toussaint() CGAL::ch_eddy() CGAL::ch_graham_andrew() CGAL::ch_jarvis() CGAL::ch_melkman() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() CGAL::convex_hull_2() Implementation This function implements the non-recursive variation of Eddy's algorithm [6] described in [5] . This algorithm requires $O(n h)$ time in the worst case for $ n$ input points with $ h$ extreme points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_bykat",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_bykat.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "ch_eddy",
+          "qualified_name": "CGAL::ch_eddy",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ).",
+          "detailed": "The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. It is not specified at which point the cyclic sequence of extreme points is cut into a linear sequence. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the type value type of ForwardIterator is defined. Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits defines the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Equal_2 , Traits::Compare_signed_distance_to_line_2 , Traits::Left_turn_2 , Traits::Less_xy_2 . CGAL::ch_akl_toussaint() CGAL::ch_bykat() CGAL::ch_graham_andrew() CGAL::ch_jarvis() CGAL::ch_melkman() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() CGAL::convex_hull_2() Implementation This function implements Eddy's algorithm [6] , which is the two-dimensional version of the quickhull algorithm [4] . This algorithm requires $O(n h)$ time in the worst case for $ n$ input points with $ h$ extreme points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_eddy",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_eddy.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "ch_graham_andrew",
+          "qualified_name": "CGAL::ch_graham_andrew",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ).",
+          "detailed": "The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. It is not specified at which point the cyclic sequence of extreme points is cut into a linear sequence. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of InputIteratore is defined. Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits defines the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Less_xy_2 , Traits::Left_turn_2 , Traits::Equal_2 . CGAL::ch_akl_toussaint() CGAL::ch_bykat() CGAL::ch_eddy() CGAL::ch_jarvis() CGAL::ch_melkman() CGAL::convex_hull_2() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() Implementation This function implements Andrew's variant of the Graham scan algorithm [3] and follows the presentation of Mehlhorn [9] . This algorithm requires $O(n \\log n)$ time in the worst case for $ n$ input points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_graham_andrew",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_graham_andrew.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "ch_jarvis",
+          "qualified_name": "CGAL::ch_jarvis",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ).",
+          "detailed": "The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. It is not specified at which point the cyclic sequence of extreme points is cut into a linear sequence. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements The value type of ForwardIterator and OutputIterator is equivalent to Traits::Point_2 . Traits defines the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Equal_2 , Traits::Less_rotate_ccw_2 , Traits::Less_xy_2 . CGAL::ch_akl_toussaint() CGAL::ch_bykat() CGAL::ch_eddy() CGAL::ch_graham_andrew() CGAL::ch_jarvis_march() CGAL::ch_melkman() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() CGAL::convex_hull_2() Implementation This function uses the Jarvis march (gift-wrapping) algorithm [8] . This algorithm requires $O(n h)$ time in the worst case for $ n$ input points with $ h$ extreme points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_jarvis",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_jarvis.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "ch_melkman",
+          "qualified_name": "CGAL::ch_melkman",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ).",
+          "detailed": "The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. The source range [ first , beyond ) corresponds to a simple polyline. [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of InputIterator is defined. Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Equal_2 , Traits::Less_xy_2 , Traits::Left_turn_2 . CGAL::ch_akl_toussaint() CGAL::ch_bykat() CGAL::ch_eddy() CGAL::ch_graham_andrew() CGAL::ch_jarvis() CGAL::ch_melkman() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() CGAL::convex_hull_2() Implementation It uses an implementation of Melkman's algorithm [10] . Running time of this is linear.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_melkman",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_melkman.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "convex_hull_2",
+          "qualified_name": "CGAL::convex_hull_2",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ) with a user provided traits class.",
+          "detailed": "It generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ). The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. It is not specified at which point the cyclic sequence of extreme points is cut into a linear sequence. The source range [ first , beyond ) does not contain result . Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Compare_signed_distance_to_line_2 , Traits::Equal_2 , Traits::Less_xy_2 , Traits::Less_yx_2 , Traits::Left_turn_2 , Traits::Orientation_2 . CGAL::ch_akl_toussaint() CGAL::ch_bykat() CGAL::ch_eddy() CGAL::ch_graham_andrew() CGAL::ch_jarvis() CGAL::ch_melkman() Implementation One of two algorithms is used, depending on the type of iterator used to specify the input points. For input iterators, the algorithm used is that of Bykat [5] , which has a worst-case running time of $O(n h)$ , where $ n$ is the number of input points and $ h$ is the number of extreme points. For all other types of iterators, the $O(n \\log n)$ algorithm of Akl and Toussaint [1] is used.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::convex_hull_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/convex_hull_2.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "convex_hull_2",
+          "qualified_name": "CGAL::convex_hull_2",
+          "brief": "generates the counterclockwise sequence of extreme points of the points in the range [ first , beyond ) using as traits class the kernel in which the point type is defined.",
+          "detailed": "The kernel is deduced using std::iterator_traits and CGAL::Kernel_traits .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::convex_hull_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/convex_hull_2.h",
+          "line": "74"
+        }
+      ],
+      "xml_file": "group___pkg_convex_hull2_functions.xml"
+    },
+    "PkgConvexHull2Convexity": {
+      "kind": "group",
+      "name": "PkgConvexHull2Convexity",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "is_ccw_strongly_convex_2",
+          "qualified_name": "CGAL::is_ccw_strongly_convex_2",
+          "brief": "The function is_ccw_strongly_convex_2() determines if a given sequence of points defines a counterclockwise-oriented, strongly convex polygon.",
+          "detailed": "It returns true , iff the point elements in [ first , beyond ) form a counterclockwise-oriented strongly convex polygon. A set of points is said to be strongly convex if it consists of only extreme points ( i.e. , vertices of the convex hull). The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Less_xy_2 , Traits::Equal_2 , Traits::Left_turn_2 . CGAL::is_cw_strongly_convex_2() CGAL::is_strongly_convex_3() Implementation The algorithm requires $O(n)$ time for a set of $ n$ input points.",
+          "return_type": "bool",
+          "definition": "bool CGAL::is_ccw_strongly_convex_2",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/convexity_check_2.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "is_cw_strongly_convex_2",
+          "qualified_name": "CGAL::is_cw_strongly_convex_2",
+          "brief": "The function is_cw_strongly_convex_2() determines if a given sequence of points defines a clockwise-oriented, strongly convex polygon.",
+          "detailed": "It returns true , iff the point elements in [ first , beyond ) form a clockwise-oriented strongly convex polygon. A set of points is said to be strongly convex if it consists of only extreme points ( i.e. , vertices of the convex hull). The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Equal_2 , Traits::Less_xy_2 , Traits::Left_turn_2 . CGAL::is_ccw_strongly_convex_2() CGAL::is_strongly_convex_3() Implementation The algorithm requires $O(n)$ time for a set of $ n$ input points.",
+          "return_type": "bool",
+          "definition": "bool CGAL::is_cw_strongly_convex_2",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/convexity_check_2.h",
+          "line": "90"
+        }
+      ],
+      "xml_file": "group___pkg_convex_hull2_convexity.xml"
+    },
+    "PkgConvexHull2Subsequence": {
+      "kind": "group",
+      "name": "PkgConvexHull2Subsequence",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "ch_graham_andrew_scan",
+          "qualified_name": "CGAL::ch_graham_andrew_scan",
+          "brief": "generates the counterclockwise sequence of extreme points from a given sequence of input points that are not left of the line defined by the first and last points in this sequence.",
+          "detailed": "More precisely, it generates the counterclockwise sequence of extreme points from a given sequence of input points that are not left of the line $ pq$ defined by the first ( $p$ ) and last ( $q$ ) points in this sequence ( $ p$ is the value of first and $ q$ is the value of beyond $ -1$ ). The resulting sequence is placed starting at result with $ p$ ; point $ q$ is omitted. The past-the-end iterator for the sequence is returned. The range [ first , beyond ) contains at least two different points. The points in [ first , beyond ) are sorted with respect to $ pq$ , i.e. , the sequence of points in [ first , beyond ) define a counterclockwise polygon, for which the Graham-Sklansky-procedure [11] works. The default traits class Default_traits is the kernel in which the type BidirectionalIterator::value_type is defined. Requirements BidirectionalIterator::value_type and OutputIterator::value_type are equivalent to Traits::Point_2 . Traits defines the following two types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Left_turn_2 . CGAL::ch_graham_andrew() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() Implementation This algorithm requires $O(n)$ time in the worst case for $ n$ input points. Example In the example Convex_hull_2/ch_graham_anderson.cpp , ch_graham_andrew_scan() is used to realize Anderson's variant [2] of the Graham Scan [7] . The points are sorted counterclockwise around the leftmost point using the Less_rotate_ccw_2 predicate, as defined in the concept ConvexHullTraits_2 . According to the definition of Less_rotate_ccw_2 , the leftmost point is the last point in the sorted sequence and its predecessor on the convex hull is the first point in the sorted sequence. It is not hard to see that the preconditions of ch_graham_andrew_scan() are satisfied. Anderson's variant of the Graham scan is usually inferior to Andrew's variant because of its higher arithmetic demand.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_graham_andrew_scan",
+          "argsstring": "(BidirectionalIterator first, BidirectionalIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "BidirectionalIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "BidirectionalIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_graham_andrew.h",
+          "line": "125"
+        },
+        {
+          "kind": "function",
+          "name": "ch_jarvis_march",
+          "qualified_name": "CGAL::ch_jarvis_march",
+          "brief": "generates the counterclockwise sequence of extreme points from a given set of input points that line between two input points.",
+          "detailed": "More precisely, it generates the counterclockwise subsequence of extreme points between start_p and stop_p of the points in the range [ first , beyond ), starting at position result with point start_p . The last point generated is the point preceding stop_p in the counterclockwise order of extreme points. The default traits class Default_traits is the kernel in which the type ForwardIterator::value_type is defined. Requirements ForwardIterator::value_type and OutputIterator::value_type are equivalent to Traits::Point_2 . Traits defines the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Equal_2 , Traits::Less_rotate_ccw_2 . CGAL::ch_jarvis() CGAL::lower_hull_points_2() CGAL::upper_hull_points_2() Implementation The function uses the Jarvis march (gift-wrapping) algorithm [8] . This algorithm requires $O(n h)$ time in the worst case for $ n$ input points with $ h$ extreme points start_p and stop_p are extreme points with respect to the points in the range [ first , beyond ) and stop_p is an element of range [ first , beyond ).",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::ch_jarvis_march",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, const Traits::Point_2 &start_p, const Traits::Point_2 &stop_p, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits::Point_2 &",
+              "name": "start_p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits::Point_2 &",
+              "name": "stop_p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_jarvis.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "lower_hull_points_2",
+          "qualified_name": "CGAL::lower_hull_points_2",
+          "brief": "generates the counterclockwise sequence of extreme points on the lower hull of a given set of input points.",
+          "detailed": "More precisely, it generates the counterclockwise sequence of extreme points on the lower hull of the points in the range [ first , beyond ). The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. The sequence starts with the leftmost point; the rightmost point is not included. If there is only one extreme point ( i.e. , leftmost and rightmost point are equal) the extreme point is reported. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of InputIterator is defined. The different treatment by upper_hull_points_2() of the case that all points are equal ensures that concatenation of lower and upper hull points gives the sequence of extreme points. Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Equal_2 , Traits::Less_xy_2 , Traits::Less_yx_2 , Traits::Left_turn_2 . CGAL::ch_graham_andrew() CGAL::ch_graham_andrew_scan() CGAL::upper_hull_points_2() Implementation This function uses Andrew's variant of Graham's scan algorithm [3] , [9] . The algorithm has worst-case running time of $O(n \\log n)$ for $ n$ input points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::lower_hull_points_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/convex_hull_2.h",
+          "line": "137"
+        },
+        {
+          "kind": "function",
+          "name": "upper_hull_points_2",
+          "qualified_name": "CGAL::upper_hull_points_2",
+          "brief": "generates the counterclockwise sequence of extreme points on the upper hull of a given set of input points.",
+          "detailed": "More precisely, it generates the counterclockwise sequence of extreme points on the upper hull of the points in the range [ first , beyond ). The resulting sequence is placed starting at position result , and the past-the-end iterator for the resulting sequence is returned. The sequence starts with the rightmost point, the leftmost point is not included. If there is only one extreme point ( i.e. , the leftmost and rightmost point are equal), the extreme point is not reported. The source range [ first , beyond ) does not contain result . The default traits class Default_traits is the kernel in which the value type of InputIterator is defined. The different treatment by lower_hull_points_2() of the case that all points are equal ensures that concatenation of lower and upper hull points gives the sequence of extreme points. Requirements The value type of InputIterator and OutputIterator is equivalent to Traits::Point_2 . Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Point_2 , Traits::Equal_2 , Traits::Less_xy_2 , Traits::Less_yx_2 , Traits::Left_turn_2 . CGAL::ch_graham_andrew() CGAL::ch_graham_andrew_scan() CGAL::lower_hull_points_2() Implementation This function uses Andrew's variant of Graham's scan algorithm [3] , [9] . The algorithm has worst-case running time of $O(n \\log n)$ for $ n$ input points.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::upper_hull_points_2",
+          "argsstring": "(InputIterator first, InputIterator beyond, OutputIterator result, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/convex_hull_2.h",
+          "line": "200"
+        }
+      ],
+      "xml_file": "group___pkg_convex_hull2_subsequence.xml"
+    },
+    "PkgConvexHull2Extreme": {
+      "kind": "group",
+      "name": "PkgConvexHull2Extreme",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "ch_e_point",
+          "qualified_name": "CGAL::ch_e_point",
+          "brief": "The function ch_e_point() finds a point of a given set of input points with maximal $ x$ coordinate.",
+          "detailed": "It traverses the range [ first , beyond ). After execution, the value of e is an iterator in the range such that *e $ \\ge_{xy}$ *it for all iterators it in the range. The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements Traits defines a type Traits::Less_xy_2 as described in the concept ConvexHullTraits_2 and the corresponding member function that returns an instance of this type. CGAL::ch_nswe_point() CGAL::ch_n_point() CGAL::ch_ns_point() CGAL::ch_s_point() CGAL::ch_w_point() CGAL::ch_we_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_e_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &e, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "ch_n_point",
+          "qualified_name": "CGAL::ch_n_point",
+          "brief": "The function ch_n_point() finds a point in a given set of input points with maximal $ y$ coordinate.",
+          "detailed": "It traverses the range [ first , beyond ). After execution, the value of n is an iterator in the range such that *n $ \\ge_{yx}$ *it for all iterators it in the range. The default traits class Default_traits is the kernel in which the type ForwardIterator::value_type is defined. Requirements Traits defines the type Traits::Less_yx_2 as specified in the concept ConvexHullTraits_2 and the corresponding member function that returns an instance of this type. CGAL::ch_e_point() CGAL::ch_nswe_point() CGAL::ch_ns_point() CGAL::ch_s_point() CGAL::ch_w_point() CGAL::ch_we_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_n_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &n, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "ch_ns_point",
+          "qualified_name": "CGAL::ch_ns_point",
+          "brief": "The function ch_ns_point() finds the points of a given set of input points with minimal and maximal $ x$ coordinates.",
+          "detailed": "It traverses the range [ first , beyond ). After execution, the value of n is an iterator in the range such that *n $ \\ge_{yx}$ *it for all iterators it in the range. Similarly, for s the inequality *s $ \\le_{yx}$ *it holds for all iterators in the range. The default traits class Default_traits is the kernel in which the value type of ForwardIterator is defined. Requirements Traits defines the type Traits::Less_yx_2 as specified in the concept ConvexHullTraits_2 and the corresponding member function that returns an instance of this type. CGAL::ch_e_point() CGAL::ch_nswe_point() CGAL::ch_n_point() CGAL::ch_s_point() CGAL::ch_w_point() CGAL::ch_we_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_ns_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &n, ForwardIterator &s, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "ch_nswe_point",
+          "qualified_name": "CGAL::ch_nswe_point",
+          "brief": "The function ch_nswe_point() finds the four extreme points of a given set of input points using a linear scan of the input points.",
+          "detailed": "That is, it determines the points with maximal $ y$ , minimal $ y$ , minimal $ x$ , and maximal $ x$ coordinates. It traverses the range [ first , beyond ). After execution, the value of n is an iterator in the range such that *n $ \\ge_{yx}$ *it for all iterators it in the range. Similarly, for s , w , and e the inequalities *s $ \\le_{yx}$ *it , *w $ \\le_{xy}$ *it , and *e $ \\ge_{xy}$ *it hold for all iterators it in the range. Requirements Traits contains the following subset of types from the concept ConvexHullTraits_2 and their corresponding member functions that return instances of these types: Traits::Less_xy_2 , Traits::Less_yx_2 . The default traits class Default_traits is the kernel in which the type ForwardIterator::value_type is defined. CGAL::ch_e_point() CGAL::ch_n_point() CGAL::ch_ns_point() CGAL::ch_s_point() CGAL::ch_w_point() CGAL::ch_we_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_nswe_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &n, ForwardIterator &s, ForwardIterator &w, ForwardIterator &e, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "164"
+        },
+        {
+          "kind": "function",
+          "name": "ch_s_point",
+          "qualified_name": "CGAL::ch_s_point",
+          "brief": "The function ch_s_point() finds a points in a given set of input points with minimal $ y$ coordinates.",
+          "detailed": "It traverses the range [ first , beyond ). After execution, the value of s is an iterator in the range such that *s $ \\le_{yx}$ *it for all iterators it in the range. The default traits class Default_traits is the kernel in which the type ForwardIterator::value_type is defined. Requirements Traits defines the type Traits::Less_yx_2 as specified in the concept ConvexHullTraits_2 and the corresponding member function that returns an instance of this type. CGAL::ch_e_point() CGAL::ch_nswe_point() CGAL::ch_n_point() CGAL::ch_ns_point() CGAL::ch_w_point() CGAL::ch_we_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_s_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &s, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "206"
+        },
+        {
+          "kind": "function",
+          "name": "ch_we_point",
+          "qualified_name": "CGAL::ch_we_point",
+          "brief": "The function ch_we_point() finds two points of a given set of input points with minimal and maximal $ x$ coordinates.",
+          "detailed": "It traverses the range [ first , beyond ). After execution, the value of w is an iterator in the range such that *w $ \\le_{xy}$ *it for all iterators it in the range. Similarly, for e the inequality *e $ \\ge_{xy}$ *it holds for all iterators in the range. The default traits class Default_traits is the kernel in which the type ForwardIterator::value_type is defined. Requirements Traits defines the type Traits::Less_xy_2 as specified in the concept ConvexHullTraits_2 and the corresponding member function that returns an instance of this type. CGAL::ch_e_point() CGAL::ch_nswe_point() CGAL::ch_n_point() CGAL::ch_ns_point() CGAL::ch_s_point() CGAL::ch_w_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_we_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &w, ForwardIterator &e, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "247"
+        },
+        {
+          "kind": "function",
+          "name": "ch_w_point",
+          "qualified_name": "CGAL::ch_w_point",
+          "brief": "The function ch_w_point() finds a point in a given set of input points with minimal $ x$ coordinate.",
+          "detailed": "It traverses the range [ first , beyond ). After execution, the value of w is an iterator in the range such that *w $ \\le_{xy}$ *it for all iterators it in the range. Requirements Traits defines the type Traits::Less_xy_2 as specified in the concept ConvexHullTraits_2 and the corresponding member function that returns an instance of this type. The default traits class Default_traits is the kernel in which the type ForwardIterator::value_type is defined. CGAL::ch_e_point() CGAL::ch_nswe_point() CGAL::ch_n_point() CGAL::ch_ns_point() CGAL::ch_s_point() CGAL::ch_we_point()",
+          "return_type": "void",
+          "definition": "void CGAL::ch_w_point",
+          "argsstring": "(ForwardIterator first, ForwardIterator beyond, ForwardIterator &w, const Traits &ch_traits=Default_traits)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator &",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "ch_traits",
+              "default": "Default_traits",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/ch_selected_extreme_points_2.h",
+          "line": "287"
+        }
+      ],
+      "xml_file": "group___pkg_convex_hull2_extreme.xml"
+    }
+  }
+}

@@ -1,0 +1,4306 @@
+{
+  "schema_version": 1,
+  "package": "Isosurfacing_3",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 35,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Isosurfacing::Cartesian_grid_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Cartesian_grid_3",
+      "brief": "The class Cartesian_grid_3 represents a 3D Cartesian grid, that is the partition of an iso-cuboid into identical iso-cuboidal cells.",
+      "detailed": "Is model of IsosurfacingPartition_3 The class Cartesian_grid_3 is one of the possible space partitioning data structures that can be used along with value and gradient fields to make up a domain. GeomTraits must be a model of IsosurfacingTraits_3 . MemoryPolicy whether the geometric locations of the grid vertices are stored or not. Possible values are CGAL::Isosurfacing::Cache_vertex_locations and CGAL::Isosurfacing::Do_not_cache_vertex_locations . CGAL::Isosurfacing::Marching_cubes_domain_3() CGAL::Isosurfacing::Dual_contouring_domain_3()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits",
+          "definition": "using CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Geom_traits = GeomTraits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "150"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::FT",
+          "definition": "using CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::FT = typename Geom_traits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "151"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "152"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Vector_3",
+          "definition": "using CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Vector_3 = typename Geom_traits::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "153"
+        },
+        {
+          "kind": "typedef",
+          "name": "Iso_cuboid_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Iso_cuboid_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Iso_cuboid_3",
+          "definition": "using CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Iso_cuboid_3 = typename Geom_traits::Iso_cuboid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "154"
+        },
+        {
+          "kind": "typedef",
+          "name": "Positioner",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Positioner",
+          "brief": "",
+          "detailed": "",
+          "return_type": "internal::Cartesian_grid_location< GeomTraits, MemoryPolicy >",
+          "definition": "using CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Positioner = internal::Cartesian_grid_location<GeomTraits, MemoryPolicy>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "156"
+        },
+        {
+          "kind": "variable",
+          "name": "m_span",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::m_span",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Iso_cuboid_3",
+          "definition": "Iso_cuboid_3 CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::m_span",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "159"
+        },
+        {
+          "kind": "variable",
+          "name": "m_dims",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::m_dims",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::array< std::size_t, 3 >",
+          "definition": "std::array<std::size_t, 3> CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::m_dims",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "160"
+        },
+        {
+          "kind": "variable",
+          "name": "m_spacing",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::m_spacing",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::m_spacing",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "161"
+        },
+        {
+          "kind": "variable",
+          "name": "m_positioner",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::m_positioner",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Positioner",
+          "definition": "Positioner CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::m_positioner",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "163"
+        },
+        {
+          "kind": "variable",
+          "name": "m_gt",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::m_gt",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits",
+          "definition": "Geom_traits CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::m_gt",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "164"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_spacing",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::initialize_spacing",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::initialize_spacing",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "167"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_dimensions",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::initialize_dimensions",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::initialize_dimensions",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "191"
+        },
+        {
+          "kind": "function",
+          "name": "Cartesian_grid_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Cartesian_grid_3",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Cartesian_grid_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "215"
+        },
+        {
+          "kind": "function",
+          "name": "Cartesian_grid_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Cartesian_grid_3",
+          "brief": "creates a Cartesian grid with dimensions[0]*dimensions[1]*dimensions[2] grid vertices.",
+          "detailed": "The grid covers the space described by the iso-cuboid span . span the geometric span of the grid dimensions the number of grid vertices in the x , y , and z directions gt the geometric traits all dimensions are strictly positive.",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Cartesian_grid_3",
+          "argsstring": "(const Iso_cuboid_3 &span, const std::array< std::size_t, 3 > &dimensions, const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "const Iso_cuboid_3 &",
+              "name": "span",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::array< std::size_t, 3 > &",
+              "name": "dimensions",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "233"
+        },
+        {
+          "kind": "function",
+          "name": "Cartesian_grid_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Cartesian_grid_3",
+          "brief": "creates a Cartesian grid with dimensions[0]*dimensions[1]*dimensions[2] grid vertices.",
+          "detailed": "The grid covers the space described by the iso-cuboid span, itself described through two diagonal corners p and q . p the lexicographically smallest corner of the iso-cuboid q the lexicographically largest corner of the iso-cuboid dimensions the number of grid vertices in the x , y , and z directions gt the geometric traits p is lexicographically strictly smaller than q all dimensions are strictly positive.",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Cartesian_grid_3",
+          "argsstring": "(const Point_3 &p, const Point_3 &q, const std::array< std::size_t, 3 > &dimensions, const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::array< std::size_t, 3 > &",
+              "name": "dimensions",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "257"
+        },
+        {
+          "kind": "function",
+          "name": "Cartesian_grid_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Cartesian_grid_3",
+          "brief": "creates a Cartesian grid using a prescribed grid step spacing .",
+          "detailed": "The grid covers the space described by the iso-cuboid span . span the geometric span of the grid spacing the dimension of the paving cell, in the x , y , and z directions gt the geometric traits the diagonal of span has length a multiple of spacing",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Cartesian_grid_3",
+          "argsstring": "(const Iso_cuboid_3 &span, const Vector_3 &spacing, const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "const Iso_cuboid_3 &",
+              "name": "span",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector_3 &",
+              "name": "spacing",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "274"
+        },
+        {
+          "kind": "function",
+          "name": "Cartesian_grid_3",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::Cartesian_grid_3",
+          "brief": "creates a Cartesian grid using a prescribed grid step.",
+          "detailed": "The grid covers the space described by an iso-cuboid, itself described through two diagonal corners. p the lexicographically smallest corner of the iso-cuboid q the lexicographically largest corner of the iso-cuboid spacing the dimension of the paving cell, in the x , y , and z directions, respectively. gt the geometric traits p is lexicographically strictly smaller than q the diagonal of the iso-cuboid has length a multiple of spacing",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::Cartesian_grid_3",
+          "argsstring": "(const Point_3 &p, const Point_3 &q, const Vector_3 &spacing, const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vector_3 &",
+              "name": "spacing",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "297"
+        },
+        {
+          "kind": "function",
+          "name": "geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::geom_traits",
+          "brief": "returns the geometric traits class.",
+          "detailed": "",
+          "return_type": "const Geom_traits &",
+          "definition": "const Geom_traits & CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::geom_traits",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "307"
+        },
+        {
+          "kind": "function",
+          "name": "span",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::span",
+          "brief": "returns an iso-cuboid representing the geometric span of the Cartesian grid.",
+          "detailed": "",
+          "return_type": "const Iso_cuboid_3 &",
+          "definition": "const Iso_cuboid_3 & CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::span",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "315"
+        },
+        {
+          "kind": "function",
+          "name": "xdim",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::xdim",
+          "brief": "returns the number of grid vertices in the x direction.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::xdim",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "320"
+        },
+        {
+          "kind": "function",
+          "name": "ydim",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::ydim",
+          "brief": "returns the number of grid vertices in the y direction.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::ydim",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "325"
+        },
+        {
+          "kind": "function",
+          "name": "zdim",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::zdim",
+          "brief": "returns the number of grid vertices in the z direction.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::zdim",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "330"
+        },
+        {
+          "kind": "function",
+          "name": "spacing",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::spacing",
+          "brief": "returns the spacing of the Cartesian grid, that is a vector whose coordinates are the grid steps in the x , y , and z directions, respectively.",
+          "detailed": "",
+          "return_type": "const Vector_3 &",
+          "definition": "const Vector_3 & CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::spacing",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "336"
+        },
+        {
+          "kind": "function",
+          "name": "linear_index",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::linear_index",
+          "brief": "returns the index of a grid cell given its indices (i.e., (k * y_dim + j) * x_dim + i ).",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::linear_index",
+          "argsstring": "(const std::size_t i, const std::size_t j, const std::size_t k) const",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "342"
+        },
+        {
+          "kind": "function",
+          "name": "index",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::index",
+          "brief": "returns the coordinates of the grid cell that contains a given point.",
+          "detailed": "For points on the boundary between two cells, the smaller index is returned. p the point to be located p is inside the grid.",
+          "return_type": "std::array< std::size_t, 3 >",
+          "definition": "std::array< std::size_t, 3 > CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::index",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "360"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "CGAL::Isosurfacing::Cartesian_grid_3::point",
+          "brief": "returns the geometric location of the grid vertex described by its three indices.",
+          "detailed": "Depending on the value of the template parameter MemoryPolicy , locations might not be stored but calculated on-the-fly. i the index in the x direction j the index in the y direction k the index in the z direction i < xdim() and j < ydim() and k < zdim() a const reference or a newly constructed point, depending on the caching policy.",
+          "return_type": "decltype(auto)",
+          "definition": "decltype(auto) CGAL::Isosurfacing::Cartesian_grid_3< GeomTraits, MemoryPolicy >::point",
+          "argsstring": "(const std::size_t i, const std::size_t j, const std::size_t k) const",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "398"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_cartesian__grid__3.xml",
+      "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+      "line": "147"
+    },
+    "CGAL::Isosurfacing::Dichotomy_edge_intersection": {
+      "kind": "struct",
+      "name": "CGAL::Isosurfacing::Dichotomy_edge_intersection",
+      "brief": "The class Dichotomy_edge_intersection uses a dichotomy to find the intersection point between an edge and the isosurface.",
+      "detailed": "Is model of IsosurfacingEdgeIntersectionOracle_3 This class is for example suitable to be used as the EdgeIntersectionOracle template parameter of isosurfacing domain classes when values are computed using an implicit function. It is not optimal to use this class when values are interpolated from discrete values since the intersection can be computed analytically in this case. CGAL::Isosurfacing::Linear_interpolation_edge_intersection CGAL::Isosurfacing::Marching_cubes_domain_3 CGAL::Isosurfacing::Dual_contouring_domain_3",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "m_max_iterations",
+          "qualified_name": "CGAL::Isosurfacing::Dichotomy_edge_intersection::m_max_iterations",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Isosurfacing::Dichotomy_edge_intersection::m_max_iterations",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "variable",
+          "name": "m_relative_eps",
+          "qualified_name": "CGAL::Isosurfacing::Dichotomy_edge_intersection::m_relative_eps",
+          "brief": "",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Isosurfacing::Dichotomy_edge_intersection::m_relative_eps",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "Dichotomy_edge_intersection",
+          "qualified_name": "CGAL::Isosurfacing::Dichotomy_edge_intersection::Dichotomy_edge_intersection",
+          "brief": "Constructor, enabling setting up the two criteria which can stop the dichotomy: either a threshold on the value (i.e., the difference between the isovalue and the value at the current point is smaller than relative_eps * isovalue ), or a maximum number of iterations.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Dichotomy_edge_intersection::Dichotomy_edge_intersection",
+          "argsstring": "(unsigned int max_iterations=10, double relative_eps=1e-7)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "max_iterations",
+              "default": "10",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "relative_eps",
+              "default": "1e-7",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Dichotomy_edge_intersection::operator()",
+          "brief": "computes the intersection point between an edge and the isosurface.",
+          "detailed": "The result (if it exists) is stored in p . Domain must be a model of IsosurfacingDomain_3 p_0 the location of the first vertex of the edge p_1 the location of the second vertex of the edge val_0 the value at the first vertex of the edge val_1 the value at the second vertex of the edge domain the isosurfacing domain isovalue the isovalue defining the isosurface with which we seek an intersection p the intersection point, if it exists true if the intersection point exists, false otherwise",
+          "return_type": "bool",
+          "definition": "bool CGAL::Isosurfacing::Dichotomy_edge_intersection::operator()",
+          "argsstring": "(const typename Domain::Geom_traits::Point_3 &p_0, const typename Domain::Geom_traits::Point_3 &p_1, const typename Domain::Geom_traits::FT val_0, const typename Domain::Geom_traits::FT val_1, const Domain &domain, const typename Domain::Geom_traits::FT isovalue, typename Domain::Geom_traits::Point_3 &p) const",
+          "params": [
+            {
+              "type": "const typename Domain::Geom_traits::Point_3 &",
+              "name": "p_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::Point_3 &",
+              "name": "p_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "val_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "val_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Domain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "isovalue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+          "line": "76"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_isosurfacing_1_1_dichotomy__edge__intersection.xml",
+      "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+      "line": "41"
+    },
+    "CGAL::Isosurfacing::Dual_contouring_domain_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Dual_contouring_domain_3",
+      "brief": "A domain that can be used as input in the Dual Contouring algorithm.",
+      "detailed": "Is model of IsosurfacingDomainWithGradient_3 This class is essentially a wrapper around the different bricks provided by its template parameters: Partition provides the spatial partitioning, ValueField and GradientField the values and gradients that define the isosurface. The optional template parameter EdgeIntersectionOracle gives control over the method used to compute edge-isosurface intersection points. Partition must be a model of IsosurfacingPartition_3 ValueField must be a model of IsosurfacingValueField_3 GradientField must be a model of IsosurfacingGradientField_3 EdgeIntersectionOracle must be a model of IsosurfacingEdgeIntersectionOracle_3 CGAL::Isosurfacing::dual_contouring() CGAL::Isosurfacing::Marching_cubes_domain_3()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Base",
+          "qualified_name": "CGAL::Isosurfacing::Dual_contouring_domain_3::Base",
+          "brief": "",
+          "detailed": "",
+          "return_type": "internal::Isosurfacing_domain_3< Partition, ValueField, GradientField, EdgeIntersectionOracle >",
+          "definition": "using CGAL::Isosurfacing::Dual_contouring_domain_3< Partition, ValueField, GradientField, EdgeIntersectionOracle >::Base = internal::Isosurfacing_domain_3<Partition, ValueField, GradientField, EdgeIntersectionOracle>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Dual_contouring_domain_3.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "Dual_contouring_domain_3",
+          "qualified_name": "CGAL::Isosurfacing::Dual_contouring_domain_3::Dual_contouring_domain_3",
+          "brief": "constructs a domain that can be used with the Dual Contouring algorithm.",
+          "detailed": "partition the space partitioning data structure values a continuous field of scalar values, defined over the geometric span of partition gradients a continuous field of normalized vectors, defined over the geometric span of partition intersection_oracle the oracle for edge-isosurface intersection computation the domain class keeps a reference to the partition , values and gradients objects. As such, users must ensure that the lifetimes of these objects exceed that of the domain object.",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Dual_contouring_domain_3< Partition, ValueField, GradientField, EdgeIntersectionOracle >::Dual_contouring_domain_3",
+          "argsstring": "(const Partition &partition, const ValueField &values, const GradientField &gradients, const EdgeIntersectionOracle &intersection_oracle=EdgeIntersectionOracle())",
+          "params": [
+            {
+              "type": "const Partition &",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ValueField &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GradientField &",
+              "name": "gradients",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const EdgeIntersectionOracle &",
+              "name": "intersection_oracle",
+              "default": "EdgeIntersectionOracle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Dual_contouring_domain_3.h",
+          "line": "68"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_dual__contouring__domain__3.xml",
+      "file": "CGAL/Isosurfacing_3/Dual_contouring_domain_3.h",
+      "line": "48"
+    },
+    "CGAL::Isosurfacing::Finite_difference_gradient_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Finite_difference_gradient_3",
+      "brief": "Class template for a gradient that is calculated using finite differences.",
+      "detailed": "Is model of IsosurfacingGradientField_3 This gradient function evaluates a value function at six points that are a given distance delta away from the queried point along the Cartesian axes. GeomTraits must be a model of IsosurfacingTraits_3 .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits",
+          "definition": "using CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::Geom_traits = GeomTraits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::FT",
+          "definition": "using CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::FT = typename Geom_traits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Vector_3",
+          "definition": "using CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::Vector_3 = typename Geom_traits::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "variable",
+          "name": "m_function",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::m_function",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const std::function< FT (const Point_3 &)>",
+          "definition": "const std::function<FT(const Point_3&)> CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::m_function",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "variable",
+          "name": "m_delta",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::m_delta",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::m_delta",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "48"
+        },
+        {
+          "kind": "variable",
+          "name": "m_half_step_inv",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::m_half_step_inv",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::m_half_step_inv",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "48"
+        },
+        {
+          "kind": "variable",
+          "name": "m_gt",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::m_gt",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits",
+          "definition": "GeomTraits CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::m_gt",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "function",
+          "name": "Finite_difference_gradient_3",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::Finite_difference_gradient_3",
+          "brief": "creates a new instance of this gradient class.",
+          "detailed": "ValueFunction must be a model of IsosurfacingValueField_3 . function the function giving the scalar value at each point delta the distance between samples for calculating the finite differences gt the geometric traits class",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::Finite_difference_gradient_3",
+          "argsstring": "(const ValueFunction &function, const FT delta, const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "const ValueFunction &",
+              "name": "function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "delta",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Finite_difference_gradient_3::operator()",
+          "brief": "returns the value the gradient at a point in 3D space.",
+          "detailed": "p the point at which the gradient is computed.",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 CGAL::Isosurfacing::Finite_difference_gradient_3< GeomTraits >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+          "line": "77"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_finite__difference__gradient__3.xml",
+      "file": "CGAL/Isosurfacing_3/Finite_difference_gradient_3.h",
+      "line": "38"
+    },
+    "CGAL::Isosurfacing::Gradient_function_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Gradient_function_3",
+      "brief": "The class Gradient_function_3 represents a field of vectors computed using a user-provided unary function.",
+      "detailed": "Is model of IsosurfacingGradientField_3 Partition must be a model of IsosurfacingPartition_3 CGAL::Isosurfacing::Dual_contouring_domain_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Partition::Geom_traits",
+          "definition": "using CGAL::Isosurfacing::Gradient_function_3< Partition >::Geom_traits = typename Partition::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Gradient_function_3< Partition >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Vector_3",
+          "definition": "using CGAL::Isosurfacing::Gradient_function_3< Partition >::Vector_3 = typename Geom_traits::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "PT",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::PT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "partition_traits < Partition >",
+          "definition": "using CGAL::Isosurfacing::Gradient_function_3< Partition >::PT = partition_traits<Partition>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename PT::vertex_descriptor",
+          "definition": "using CGAL::Isosurfacing::Gradient_function_3< Partition >::vertex_descriptor = typename PT::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "variable",
+          "name": "m_fn",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::m_fn",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::function< Vector_3 (const Point_3 &)>",
+          "definition": "std::function<Vector_3(const Point_3&)> CGAL::Isosurfacing::Gradient_function_3< Partition >::m_fn",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "49"
+        },
+        {
+          "kind": "variable",
+          "name": "m_partition",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::m_partition",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Partition &",
+          "definition": "const Partition& CGAL::Isosurfacing::Gradient_function_3< Partition >::m_partition",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "function",
+          "name": "Gradient_function_3",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::Gradient_function_3",
+          "brief": "constructs a field of gradients using a gradient function and a partition.",
+          "detailed": "Function must provide the following function signature: Vector_3 operator()(const Point_3&) const fn the function providing gradients partition the space partitioning data structure",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Gradient_function_3< Partition >::Gradient_function_3",
+          "argsstring": "(const Function &fn, const Partition &partition)",
+          "params": [
+            {
+              "type": "const Function &",
+              "name": "fn",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Partition &",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::operator()",
+          "brief": "returns the value of the function at the point p .",
+          "detailed": "",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 CGAL::Isosurfacing::Gradient_function_3< Partition >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Gradient_function_3::operator()",
+          "brief": "returns the value of the function at the vertex v .",
+          "detailed": "",
+          "return_type": "const Vector_3 &",
+          "definition": "const Vector_3 & CGAL::Isosurfacing::Gradient_function_3< Partition >::operator()",
+          "argsstring": "(const vertex_descriptor &v) const",
+          "params": [
+            {
+              "type": "const vertex_descriptor &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+          "line": "81"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_gradient__function__3.xml",
+      "file": "CGAL/Isosurfacing_3/Gradient_function_3.h",
+      "line": "38"
+    },
+    "CGAL::Isosurfacing::Grid_vertex_memory_policy": {
+      "kind": "struct",
+      "name": "CGAL::Isosurfacing::Grid_vertex_memory_policy",
+      "brief": "A policy to choose whether grid vertex locations should be cached, or recomputed at each access.",
+      "detailed": "Tag a tag that is either Tag_true (locations are cached) or Tag_false (locations are not cached).",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_isosurfacing_1_1_grid__vertex__memory__policy.xml",
+      "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+      "line": "39"
+    },
+    "CGAL::Isosurfacing::Interpolated_discrete_gradients_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3",
+      "brief": "Class template for a gradient field that is computed using discrete values and interpolation.",
+      "detailed": "Is model of IsosurfacingValueField_3 Grid must be CGAL::Isosurfacing::Cartesian_grid_3 <GeomTraits> , with GeomTraits a model of IsosurfacingTraits_3 InterpolationScheme must be a model of IsosurfacingInterpolationScheme_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Grid::Geom_traits",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::Geom_traits = typename Grid::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::FT",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::FT = typename Geom_traits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Vector_3",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::Vector_3 = typename Geom_traits::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename partition_traits < Grid >::vertex_descriptor",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::vertex_descriptor = typename partition_traits<Grid>::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "variable",
+          "name": "m_grid",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::m_grid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Grid &",
+          "definition": "const Grid& CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::m_grid",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "49"
+        },
+        {
+          "kind": "variable",
+          "name": "m_interpolation",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::m_interpolation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const InterpolationScheme",
+          "definition": "const InterpolationScheme CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::m_interpolation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "variable",
+          "name": "m_gradients",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::m_gradients",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Vector_3 >",
+          "definition": "std::vector<Vector_3> CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::m_gradients",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "Interpolated_discrete_gradients_3",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::Interpolated_discrete_gradients_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::Interpolated_discrete_gradients_3",
+          "argsstring": "(const Grid &grid, const InterpolationScheme &interpolation=InterpolationScheme())",
+          "params": [
+            {
+              "type": "const Grid &",
+              "name": "grid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const InterpolationScheme &",
+              "name": "interpolation",
+              "default": "InterpolationScheme()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "compute_discrete_gradients",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::compute_discrete_gradients",
+          "brief": "computes (using finite difference) and stores gradients at all vertices of the grid.",
+          "detailed": "ValueField must be a model of IsosurfacingValueField_3 values a field of values whose gradient are being computed",
+          "return_type": "void",
+          "definition": "void CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::compute_discrete_gradients",
+          "argsstring": "(const ValueField &values)",
+          "params": [
+            {
+              "type": "const ValueField &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "69"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::operator()",
+          "brief": "returns the gradient stored at the grid vertex described by its three indices.",
+          "detailed": "This function can be used to set the gradient at a grid vertex. i the index in the x direction j the index in the y direction k the index in the z direction i < xdim() and j < ydim() and k < zdim()",
+          "return_type": "Vector_3 &",
+          "definition": "Vector_3 & CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const std::size_t i, const std::size_t j, const std::size_t k)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::operator()",
+          "brief": "returns the gradient stored at the grid vertex described by a set of indices.",
+          "detailed": "i the index in the x direction j the index in the y direction k the index in the z direction i < xdim() and j < ydim() and k < zdim()",
+          "return_type": "const Vector_3 &",
+          "definition": "const Vector_3 & CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const std::size_t i, const std::size_t j, const std::size_t k) const",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_gradients_3::operator()",
+          "brief": "returns the gradient at a given point p .",
+          "detailed": "",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 CGAL::Isosurfacing::Interpolated_discrete_gradients_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+          "line": "118"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_interpolated__discrete__gradients__3.xml",
+      "file": "CGAL/Isosurfacing_3/Interpolated_discrete_gradients_3.h",
+      "line": "39"
+    },
+    "CGAL::Isosurfacing::Interpolated_discrete_values_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Interpolated_discrete_values_3",
+      "brief": "Class template for a field of values that are calculated using discrete values and interpolation.",
+      "detailed": "Is model of IsosurfacingValueField_3 Grid must be CGAL::Isosurfacing::Cartesian_grid_3 <GeomTraits> , with GeomTraits a model of IsosurfacingTraits_3 InterpolationScheme must be a model of IsosurfacingInterpolationScheme_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Grid::Geom_traits",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::Geom_traits = typename Grid::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::FT",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::FT = typename Geom_traits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename partition_traits < Grid >::vertex_descriptor",
+          "definition": "using CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::vertex_descriptor = typename partition_traits<Grid>::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "variable",
+          "name": "m_grid",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::m_grid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Grid &",
+          "definition": "const Grid& CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::m_grid",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "49"
+        },
+        {
+          "kind": "variable",
+          "name": "m_interpolation",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::m_interpolation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const InterpolationScheme",
+          "definition": "const InterpolationScheme CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::m_interpolation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "variable",
+          "name": "m_values",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::m_values",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::m_values",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "Interpolated_discrete_values_3",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::Interpolated_discrete_values_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::Interpolated_discrete_values_3",
+          "argsstring": "(const Grid &grid, const InterpolationScheme &interpolation=InterpolationScheme())",
+          "params": [
+            {
+              "type": "const Grid &",
+              "name": "grid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const InterpolationScheme &",
+              "name": "interpolation",
+              "default": "InterpolationScheme()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::operator()",
+          "brief": "returns the scalar value stored at the grid vertex described by its three indices.",
+          "detailed": "This function can be used to set the value at a grid vertex. i the index in the x direction j the index in the y direction k the index in the z direction i < xdim() and j < ydim() and k < zdim()",
+          "return_type": "FT &",
+          "definition": "FT & CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const std::size_t i, const std::size_t j, const std::size_t k)",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::operator()",
+          "brief": "returns the scalar value stored at the grid vertex described by its three indices.",
+          "detailed": "i the index in the x direction j the index in the y direction k the index in the z direction i < xdim() and j < ydim() and k < zdim()",
+          "return_type": "FT",
+          "definition": "FT CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const std::size_t i, const std::size_t j, const std::size_t k) const",
+          "params": [
+            {
+              "type": "const std::size_t",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::size_t",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::operator()",
+          "brief": "returns the interpolated value at vertex v .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const vertex_descriptor &v) const",
+          "params": [
+            {
+              "type": "const vertex_descriptor &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Interpolated_discrete_values_3::operator()",
+          "brief": "returns the interpolated value at point p .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Isosurfacing::Interpolated_discrete_values_3< Grid, InterpolationScheme >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+          "line": "115"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_interpolated__discrete__values__3.xml",
+      "file": "CGAL/Isosurfacing_3/Interpolated_discrete_values_3.h",
+      "line": "40"
+    },
+    "CGAL::Isosurfacing::Linear_interpolation_edge_intersection": {
+      "kind": "struct",
+      "name": "CGAL::Isosurfacing::Linear_interpolation_edge_intersection",
+      "brief": "The class Linear_interpolation_edge_intersection uses linear interpolation to find the intersection point between an edge and the isosurface.",
+      "detailed": "Is model of IsosurfacingEdgeIntersectionOracle_3 This class is for example suitable when interpolated discrete values are being used. CGAL::Isosurfacing::Dichotomy_edge_intersection CGAL::Isosurfacing::Marching_cubes_domain_3 CGAL::Isosurfacing::Dual_contouring_domain_3 CGAL::Isosurfacing::Interpolated_discrete_values_3",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Linear_interpolation_edge_intersection::operator()",
+          "brief": "computes the intersection point between an edge and the isosurface.",
+          "detailed": "Domain must be a model of IsosurfacingDomain_3 p_0 the location of the first vertex of the edge p_1 the location of the second vertex of the edge val_0 the value at the first vertex of the edge val_1 the value at the second vertex of the edge domain the isosurfacing domain isovalue the isovalue defining the isosurface with which we seek an intersection p the intersection point, if it exists true if the intersection point exists, false otherwise",
+          "return_type": "bool",
+          "definition": "bool CGAL::Isosurfacing::Linear_interpolation_edge_intersection::operator()",
+          "argsstring": "(const typename Domain::Geom_traits::Point_3 &p_0, const typename Domain::Geom_traits::Point_3 &p_1, const typename Domain::Geom_traits::FT val_0, const typename Domain::Geom_traits::FT val_1, const Domain &domain, const typename Domain::Geom_traits::FT isovalue, typename Domain::Geom_traits::Point_3 &p) const",
+          "params": [
+            {
+              "type": "const typename Domain::Geom_traits::Point_3 &",
+              "name": "p_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::Point_3 &",
+              "name": "p_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "val_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "val_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Domain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "isovalue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+          "line": "163"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_isosurfacing_1_1_linear__interpolation__edge__intersection.xml",
+      "file": "CGAL/Isosurfacing_3/edge_intersection_oracles_3.h",
+      "line": "145"
+    },
+    "CGAL::Isosurfacing::Marching_cubes_domain_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Marching_cubes_domain_3",
+      "brief": "A domain that can be used with the Marching Cubes algorithm.",
+      "detailed": "Is model of IsosurfacingDomain_3 This class is essentially wrapper around the different bricks provided by its template parameters: Partition provides the spatial partitioning, ValueField the values that define the isosurface. The optional template parameter EdgeIntersectionOracle gives control over the method used to compute edge-isosurface intersection points. Partition must be a model of IsosurfacingPartition_3 ValueField must be a model of IsosurfacingValueField_3 EdgeIntersectionOracle must be a model of IsosurfacingEdgeIntersectionOracle_3 CGAL::Isosurfacing::marching_cubes() CGAL::Isosurfacing::Dual_contouring_domain_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Base",
+          "qualified_name": "CGAL::Isosurfacing::Marching_cubes_domain_3::Base",
+          "brief": "",
+          "detailed": "",
+          "return_type": "internal::Isosurfacing_domain_3< Partition, ValueField, EdgeIntersectionOracle >",
+          "definition": "using CGAL::Isosurfacing::Marching_cubes_domain_3< Partition, ValueField, EdgeIntersectionOracle >::Base = internal::Isosurfacing_domain_3<Partition, ValueField, EdgeIntersectionOracle>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Marching_cubes_domain_3.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "Marching_cubes_domain_3",
+          "qualified_name": "CGAL::Isosurfacing::Marching_cubes_domain_3::Marching_cubes_domain_3",
+          "brief": "constructs a domain that can be used with the Marching Cubes algorithm.",
+          "detailed": "partition the space partitioning data structure values a continuous field of scalar values, defined over the geometric span of partition intersection_oracle the oracle for edge-isosurface intersection computation the domain class keeps a reference to the partition , values and gradients objects. As such, users must ensure that the lifetimes of these objects exceed that of the domain object.",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Marching_cubes_domain_3< Partition, ValueField, EdgeIntersectionOracle >::Marching_cubes_domain_3",
+          "argsstring": "(const Partition &partition, const ValueField &values, const EdgeIntersectionOracle &intersection_oracle=EdgeIntersectionOracle())",
+          "params": [
+            {
+              "type": "const Partition &",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ValueField &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const EdgeIntersectionOracle &",
+              "name": "intersection_oracle",
+              "default": "EdgeIntersectionOracle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Marching_cubes_domain_3.h",
+          "line": "65"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_marching__cubes__domain__3.xml",
+      "file": "CGAL/Isosurfacing_3/Marching_cubes_domain_3.h",
+      "line": "46"
+    },
+    "CGAL::Isosurfacing::partition_traits": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::partition_traits",
+      "brief": "The class partition_traits is the API compatibility layer between a model of IsosurfacingPartition_3 and the isosurfacing domain classes CGAL::Isosurfacing::Marching_cubes_domain_3 and CGAL::Isosurfacing::Dual_contouring_domain_3 .",
+      "detailed": "For each model of IsosurfacingPartition_3 , a partial specialization of partition_traits must be provided, providing the types and functions listed below. Such a partial specialization is provided for CGAL::Isosurfacing::Cartesian_grid_3 .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::vertex_descriptor",
+          "brief": "A vertex descriptor corresponds to a unique vertex in an abstract partition instance.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "24"
+        },
+        {
+          "kind": "typedef",
+          "name": "edge_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::edge_descriptor",
+          "brief": "An edge descriptor corresponds to a unique edge in an abstract partition instance.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::edge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "cell_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::cell_descriptor",
+          "brief": "A cell descriptor corresponds to a unique edge in an abstract partition instance.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::cell_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_vertices",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::Edge_vertices",
+          "brief": "A container for the two vertices of an edge.",
+          "detailed": "Must be a model of RandomAccessContainer whose value_type must be vertex_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::Edge_vertices",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cells_incident_to_edge",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::Cells_incident_to_edge",
+          "brief": "A container for the cells incident to an edge.",
+          "detailed": "Must be a model of ForwardRange whose value_type must be cell_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::Cells_incident_to_edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_vertices",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::Cell_vertices",
+          "brief": "A container for the vertices of a cell.",
+          "detailed": "Must be a model of ForwardRange whose value_type must be vertex_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::Cell_vertices",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_edges",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::Cell_edges",
+          "brief": "A container for the edges of a cell.",
+          "detailed": "Must be a model of ForwardRange whose value_type must be edge_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::Cell_edges",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::point",
+          "brief": "",
+          "detailed": "the 3D location of the vertex v .",
+          "return_type": "Point_3",
+          "definition": "static Point_3 CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::point",
+          "argsstring": "(vertex_descriptor v, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "incident_vertices",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::incident_vertices",
+          "brief": "",
+          "detailed": "the two vertices incident to the edge e .",
+          "return_type": "Edge_vertices",
+          "definition": "static Edge_vertices CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::incident_vertices",
+          "argsstring": "(edge_descriptor e, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "edge_descriptor",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::incident_cells",
+          "brief": "",
+          "detailed": "all the cells incident to the edge e , in a geometrically ordered manner around the edge.",
+          "return_type": "Cells_incident_to_edge",
+          "definition": "static Cells_incident_to_edge CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::incident_cells",
+          "argsstring": "(edge_descriptor e, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "edge_descriptor",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "cell_vertices",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::cell_vertices",
+          "brief": "",
+          "detailed": "all the vertices of the cell c .",
+          "return_type": "Cell_vertices",
+          "definition": "static Cell_vertices CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::cell_vertices",
+          "argsstring": "(cell_descriptor c, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "cell_descriptor",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "cell_edges",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::cell_edges",
+          "brief": "",
+          "detailed": "all the edges of the cell c .",
+          "return_type": "Cell_edges",
+          "definition": "static Cell_edges CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::cell_edges",
+          "argsstring": "(cell_descriptor c, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "cell_descriptor",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "83"
+        },
+        {
+          "kind": "function",
+          "name": "for_each_vertex",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::for_each_vertex",
+          "brief": "iterates over all vertices, and calls the functor f on each one.",
+          "detailed": "ConcurrencyTag decides if the vertices are iterated sequentially or in parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or CGAL::Parallel_tag . Functor must implement void operator()(vertex_descriptor vertex) f the functor called on every vertex partition the partition whose vertices are being iterated over",
+          "return_type": "void",
+          "definition": "static void CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::for_each_vertex",
+          "argsstring": "(Functor &f, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "Functor &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "for_each_edge",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::for_each_edge",
+          "brief": "iterates over all edges, and calls the functor f on each one.",
+          "detailed": "ConcurrencyTag decides if the edges are iterated sequentially or in parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or CGAL::Parallel_tag . Functor must implement void operator()(edge_descriptor edge) . f the functor called on every edge partition the partition whose edges are being iterated over",
+          "return_type": "void",
+          "definition": "static void CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::for_each_edge",
+          "argsstring": "(Functor &f, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "Functor &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "for_each_cell",
+          "qualified_name": "CGAL::Isosurfacing::partition_traits::for_each_cell",
+          "brief": "iterates over all cells, and calls the functor f on each one.",
+          "detailed": "ConcurrencyTag decides if the cells are iterated sequentially or in parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or CGAL::Parallel_tag . Functor must implement void operator()(cell_descriptor cell) . f the functor called on every cell partition the partition whose cells are being iterated over",
+          "return_type": "void",
+          "definition": "static void CGAL::Isosurfacing::partition_traits< IsosurfacingPartition_3 >::for_each_cell",
+          "argsstring": "(Functor &f, IsosurfacingPartition_3 partition)",
+          "params": [
+            {
+              "type": "Functor &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IsosurfacingPartition_3",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "Concepts/partition_traits.h",
+          "line": "122"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1partition__traits.xml",
+      "file": "Concepts/partition_traits.h",
+      "line": "18"
+    },
+    "CGAL::Isosurfacing::Trilinear_interpolation": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Trilinear_interpolation",
+      "brief": "",
+      "detailed": "Is model of IsosurfacingInterpolationScheme_3 The class Trilinear_interpolation is the standard interpolation scheme to define continuous fields of scalar values and gradients from data defined only at the vertices of a Cartesian grid. Grid must be CGAL::Isosurfacing::Cartesian_grid_3 <GeomTraits> , with GeomTraits a model of IsosurfacingTraits_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Grid::Geom_traits",
+          "definition": "using CGAL::Isosurfacing::Trilinear_interpolation< Grid >::Geom_traits = typename Grid::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::FT",
+          "definition": "using CGAL::Isosurfacing::Trilinear_interpolation< Grid >::FT = typename Geom_traits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Trilinear_interpolation< Grid >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::Vector_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Vector_3",
+          "definition": "using CGAL::Isosurfacing::Trilinear_interpolation< Grid >::Vector_3 = typename Geom_traits::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "Iso_cuboid_3",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::Iso_cuboid_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Iso_cuboid_3",
+          "definition": "using CGAL::Isosurfacing::Trilinear_interpolation< Grid >::Iso_cuboid_3 = typename Geom_traits::Iso_cuboid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "interpolated_value",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::interpolated_value",
+          "brief": "interpolates the values at a given point using trilinear interpolation.",
+          "detailed": "p the point at which values are interpolated g the grid values the continuous field of scalar values, defined over the geometric span of g",
+          "return_type": "FT",
+          "definition": "FT CGAL::Isosurfacing::Trilinear_interpolation< Grid >::interpolated_value",
+          "argsstring": "(const Point_3 &p, const Grid &g, const std::vector< FT > &values) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Grid &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::vector< FT > &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "interpolated_gradient",
+          "qualified_name": "CGAL::Isosurfacing::Trilinear_interpolation::interpolated_gradient",
+          "brief": "interpolates the gradients at a given point using trilinear interpolation.",
+          "detailed": "p the point at which to interpolate the gradients g the grid gradients the continuous field of vector values, defined over the geometric span of g",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 CGAL::Isosurfacing::Trilinear_interpolation< Grid >::interpolated_gradient",
+          "argsstring": "(const Point_3 &p, const Grid &g, const std::vector< Vector_3 > &gradients) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Grid &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::vector< Vector_3 > &",
+              "name": "gradients",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+          "line": "126"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_trilinear__interpolation.xml",
+      "file": "CGAL/Isosurfacing_3/interpolation_schemes_3.h",
+      "line": "39"
+    },
+    "CGAL::Isosurfacing::Value_function_3": {
+      "kind": "class",
+      "name": "CGAL::Isosurfacing::Value_function_3",
+      "brief": "The class Value_function_3 represents a field of scalars computed using a user-provided unary function.",
+      "detailed": "Is model of IsosurfacingValueField_3 Partition must be a model of IsosurfacingPartition_3 CGAL::Isosurfacing::Marching_cubes_domain_3 CGAL::Isosurfacing::Dual_contouring_domain_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Partition::Geom_traits",
+          "definition": "using CGAL::Isosurfacing::Value_function_3< Partition >::Geom_traits = typename Partition::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::FT",
+          "definition": "using CGAL::Isosurfacing::Value_function_3< Partition >::FT = typename Geom_traits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename Geom_traits::Point_3",
+          "definition": "using CGAL::Isosurfacing::Value_function_3< Partition >::Point_3 = typename Geom_traits::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "typedef",
+          "name": "PT",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::PT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "partition_traits < Partition >",
+          "definition": "using CGAL::Isosurfacing::Value_function_3< Partition >::PT = partition_traits<Partition>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "typename PT::vertex_descriptor",
+          "definition": "using CGAL::Isosurfacing::Value_function_3< Partition >::vertex_descriptor = typename PT::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "variable",
+          "name": "m_fn",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::m_fn",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::function< FT (const Point_3 &)>",
+          "definition": "std::function<FT(const Point_3&)> CGAL::Isosurfacing::Value_function_3< Partition >::m_fn",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "variable",
+          "name": "m_partition",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::m_partition",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Partition &",
+          "definition": "const Partition& CGAL::Isosurfacing::Value_function_3< Partition >::m_partition",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "Value_function_3",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::Value_function_3",
+          "brief": "constructs a field of values using a value function and a partition.",
+          "detailed": "Function must provide the following function signature: FT operator()(const Point_3&) const fn the function providing values partition the space partitioning data structure",
+          "return_type": "",
+          "definition": "CGAL::Isosurfacing::Value_function_3< Partition >::Value_function_3",
+          "argsstring": "(const Function &fn, const Partition &partition)",
+          "params": [
+            {
+              "type": "const Function &",
+              "name": "fn",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Partition &",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::operator()",
+          "brief": "returns the value of the function at the point p .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Isosurfacing::Value_function_3< Partition >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "74"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Isosurfacing::Value_function_3::operator()",
+          "brief": "returns the value of the function at the vertex v .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Isosurfacing::Value_function_3< Partition >::operator()",
+          "argsstring": "(const vertex_descriptor &v) const",
+          "params": [
+            {
+              "type": "const vertex_descriptor &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+          "line": "82"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_isosurfacing_1_1_value__function__3.xml",
+      "file": "CGAL/Isosurfacing_3/Value_function_3.h",
+      "line": "39"
+    },
+    "IsosurfacingDomain_3": {
+      "kind": "class",
+      "name": "IsosurfacingDomain_3",
+      "brief": "The concept IsosurfacingDomain_3 describes the set of requirements to be fulfilled by any class used as input data for isosurfacing algorithms.",
+      "detailed": "A model of the concept IsosurfacingDomain_3 provides a partition of the Euclidean space in cells, and a scalar field defined over the whole partition. The isosurfacing algorithms traverse these cells and query the domain class at the vertices of each cell, using the functions point() and value() . Has models CGAL::Isosurfacing::Marching_cubes_domain_3 CGAL::Isosurfacing::Dual_contouring_domain_3 IsosurfacingDomainWithGradient_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "IsosurfacingDomain_3::Geom_traits",
+          "brief": "The geometric traits type.",
+          "detailed": "Must be a model of IsosurfacingTraits_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "IsosurfacingDomain_3::FT",
+          "brief": "The scalar type.",
+          "detailed": "",
+          "return_type": "Geom_traits::FT",
+          "definition": "typedef Geom_traits::FT IsosurfacingDomain_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "36"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "IsosurfacingDomain_3::Point_3",
+          "brief": "The 3D point type.",
+          "detailed": "",
+          "return_type": "Geom_traits::Point_3",
+          "definition": "typedef Geom_traits::Point_3 IsosurfacingDomain_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "IsosurfacingDomain_3::vertex_descriptor",
+          "brief": "A descriptor that uniquely identifies a vertex.",
+          "detailed": "Must be a model of the concepts Descriptor and Hashable .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "edge_descriptor",
+          "qualified_name": "IsosurfacingDomain_3::edge_descriptor",
+          "brief": "A descriptor that uniquely identifies an edge.",
+          "detailed": "Must be a model of the concept Descriptor and Hashable .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::edge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "cell_descriptor",
+          "qualified_name": "IsosurfacingDomain_3::cell_descriptor",
+          "brief": "A descriptor that uniquely identifies a cell.",
+          "detailed": "Must be a model of the concepts Descriptor and Hashable .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::cell_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_vertices",
+          "qualified_name": "IsosurfacingDomain_3::Edge_vertices",
+          "brief": "A container for the two vertices of an edge.",
+          "detailed": "Must be a model of the concept RandomAccessContainer of size 2 whose value type is vertex_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::Edge_vertices",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cells_incident_to_edge",
+          "qualified_name": "IsosurfacingDomain_3::Cells_incident_to_edge",
+          "brief": "A container for the cells incident to an edge.",
+          "detailed": "Must be a model of the concept ForwardRange whose value type is cell_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::Cells_incident_to_edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "71"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_vertices",
+          "qualified_name": "IsosurfacingDomain_3::Cell_vertices",
+          "brief": "A container for the vertices of a cell.",
+          "detailed": "Must be a model of the concept ForwardRange whose value type is vertex_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::Cell_vertices",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_edges",
+          "qualified_name": "IsosurfacingDomain_3::Cell_edges",
+          "brief": "A container for the edges of a cell.",
+          "detailed": "Must be a model of the concept ForwardRange whose value type is edge_descriptor .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomain_3::Cell_edges",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "83"
+        },
+        {
+          "kind": "function",
+          "name": "geom_traits",
+          "qualified_name": "IsosurfacingDomain_3::geom_traits",
+          "brief": "returns the geometric traits.",
+          "detailed": "",
+          "return_type": "Geom_traits",
+          "definition": "Geom_traits IsosurfacingDomain_3::geom_traits",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "IsosurfacingDomain_3::point",
+          "brief": "returns the 3D location of the vertex v .",
+          "detailed": "",
+          "return_type": "Point_3",
+          "definition": "Point_3 IsosurfacingDomain_3::point",
+          "argsstring": "(vertex_descriptor v) const",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "value",
+          "qualified_name": "IsosurfacingDomain_3::value",
+          "brief": "returns the value of the value field at the point p .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT IsosurfacingDomain_3::value",
+          "argsstring": "(Point_3 p) const",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "104"
+        },
+        {
+          "kind": "function",
+          "name": "value",
+          "qualified_name": "IsosurfacingDomain_3::value",
+          "brief": "returns the value of the value field at the vertex v .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT IsosurfacingDomain_3::value",
+          "argsstring": "(vertex_descriptor v) const",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "incident_vertices",
+          "qualified_name": "IsosurfacingDomain_3::incident_vertices",
+          "brief": "returns the two vertices incident to the edge e .",
+          "detailed": "",
+          "return_type": "Edge_vertices",
+          "definition": "Edge_vertices IsosurfacingDomain_3::incident_vertices",
+          "argsstring": "(edge_descriptor e) const",
+          "params": [
+            {
+              "type": "edge_descriptor",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "IsosurfacingDomain_3::incident_cells",
+          "brief": "returns all the cells incident to the edge e , in a clockwise or counterclockwise order.",
+          "detailed": "",
+          "return_type": "Cells_incident_to_edge",
+          "definition": "Cells_incident_to_edge IsosurfacingDomain_3::incident_cells",
+          "argsstring": "(edge_descriptor e) const",
+          "params": [
+            {
+              "type": "edge_descriptor",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "119"
+        },
+        {
+          "kind": "function",
+          "name": "cell_vertices",
+          "qualified_name": "IsosurfacingDomain_3::cell_vertices",
+          "brief": "returns all the vertices of the cell c .",
+          "detailed": "",
+          "return_type": "Cell_vertices",
+          "definition": "Cell_vertices IsosurfacingDomain_3::cell_vertices",
+          "argsstring": "(cell_descriptor c) const",
+          "params": [
+            {
+              "type": "cell_descriptor",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "cell_edges",
+          "qualified_name": "IsosurfacingDomain_3::cell_edges",
+          "brief": "returns all the edges of the cell c .",
+          "detailed": "",
+          "return_type": "Cell_edges",
+          "definition": "Cell_edges IsosurfacingDomain_3::cell_edges",
+          "argsstring": "(cell_descriptor c) const",
+          "params": [
+            {
+              "type": "cell_descriptor",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "129"
+        },
+        {
+          "kind": "function",
+          "name": "for_each_vertex",
+          "qualified_name": "IsosurfacingDomain_3::for_each_vertex",
+          "brief": "iterates over all vertices, and calls the functor f on each one.",
+          "detailed": "ConcurrencyTag decides if the vertices are iterated sequentially or in parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or CGAL::Parallel_tag . Functor must implement void operator()(vertex_descriptor vertex) f the functor called on every vertex",
+          "return_type": "void",
+          "definition": "void IsosurfacingDomain_3::for_each_vertex",
+          "argsstring": "(Functor &f) const",
+          "params": [
+            {
+              "type": "Functor &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "141"
+        },
+        {
+          "kind": "function",
+          "name": "for_each_edge",
+          "qualified_name": "IsosurfacingDomain_3::for_each_edge",
+          "brief": "iterates over all edges, and calls the functor f on each one.",
+          "detailed": "ConcurrencyTag decides if the edges are iterated sequentially or in parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or CGAL::Parallel_tag . Functor must implement void operator()(edge_descriptor edge) . f the functor called on every edge",
+          "return_type": "void",
+          "definition": "void IsosurfacingDomain_3::for_each_edge",
+          "argsstring": "(Functor &f) const",
+          "params": [
+            {
+              "type": "Functor &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "153"
+        },
+        {
+          "kind": "function",
+          "name": "for_each_cell",
+          "qualified_name": "IsosurfacingDomain_3::for_each_cell",
+          "brief": "iterates over all cells, and calls the functor f on each one.",
+          "detailed": "ConcurrencyTag decides if the cells are iterated sequentially or in parallel. Can be either CGAL::Sequential_tag , CGAL::Parallel_if_available_tag , or CGAL::Parallel_tag . Functor must implement void operator()(cell_descriptor cell) . f the functor called on every cell",
+          "return_type": "void",
+          "definition": "void IsosurfacingDomain_3::for_each_cell",
+          "argsstring": "(Functor &f) const",
+          "params": [
+            {
+              "type": "Functor &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "165"
+        },
+        {
+          "kind": "function",
+          "name": "construct_intersection",
+          "qualified_name": "IsosurfacingDomain_3::construct_intersection",
+          "brief": "Constructs the intersection - if it exists - between an edge and an isosurface.",
+          "detailed": "p_0 the location of the first vertex of the edge p_1 the location of the second vertex of the edge val_0 the value at the first vertex of the edge val_1 the value at the second vertex of the edge isovalue the isovalue defining the isosurface with which we seek an intersection p the intersection point, if it exists true if the intersection point exists, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool IsosurfacingDomain_3::construct_intersection",
+          "argsstring": "(Point_3 p_0, Point_3 p_1, FT val_0, FT val_1, FT isovalue, Point_3 &p) const",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Point_3",
+              "name": "p_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FT",
+              "name": "val_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FT",
+              "name": "val_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FT",
+              "name": "isovalue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomain_3.h",
+          "line": "179"
+        }
+      ],
+      "xml_file": "class_isosurfacing_domain__3.xml",
+      "file": "Concepts/IsosurfacingDomain_3.h",
+      "line": "21"
+    },
+    "IsosurfacingDomainWithGradient_3": {
+      "kind": "class",
+      "name": "IsosurfacingDomainWithGradient_3",
+      "brief": "The concept IsosurfacingDomainWithGradient_3 describes the set of requirements to be fulfilled by any class used as input data for some isosurfacing algorithms.",
+      "detailed": "Refines IsosurfacingDomain_3 This concept refines IsosurfacingDomain_3 to add a gradient() function which is used by isosurfacing domains to query the domain for the gradient of the values field at a 3D query point (not necessarily a vertex) in space. Has models CGAL::Isosurfacing::Dual_contouring_domain_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "IsosurfacingDomainWithGradient_3::Geom_traits",
+          "brief": "The geometric traits type.",
+          "detailed": "Must be a model of IsosurfacingTraits_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingDomainWithGradient_3::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomainWithGradient_3.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "IsosurfacingDomainWithGradient_3::Point_3",
+          "brief": "The 3D point type.",
+          "detailed": "",
+          "return_type": "Geom_traits::Point_3",
+          "definition": "typedef Geom_traits::Point_3 IsosurfacingDomainWithGradient_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomainWithGradient_3.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "IsosurfacingDomainWithGradient_3::Vector_3",
+          "brief": "The 3D vector type.",
+          "detailed": "",
+          "return_type": "Geom_traits::Vector_3",
+          "definition": "typedef Geom_traits::Vector_3 IsosurfacingDomainWithGradient_3::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingDomainWithGradient_3.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "gradient",
+          "qualified_name": "IsosurfacingDomainWithGradient_3::gradient",
+          "brief": "returns the gradient at the point p .",
+          "detailed": "",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 IsosurfacingDomainWithGradient_3::gradient",
+          "argsstring": "(Point_3 p) const",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingDomainWithGradient_3.h",
+          "line": "49"
+        }
+      ],
+      "xml_file": "class_isosurfacing_domain_with_gradient__3.xml",
+      "file": "Concepts/IsosurfacingDomainWithGradient_3.h",
+      "line": "19"
+    },
+    "IsosurfacingEdgeIntersectionOracle_3": {
+      "kind": "class",
+      "name": "IsosurfacingEdgeIntersectionOracle_3",
+      "brief": "",
+      "detailed": "Refines DefaultConstructible Assignable The concept IsosurfacingEdgeIntersectionOracle_3 describes the requirements for the edge-isosurface intersection oracle template parameter of the domain classes CGAL::Isosurfacing::Marching_cubes_domain_3 and CGAL::Isosurfacing::Dual_contouring_domain_3 . Has models CGAL::Isosurfacing::Dichotomy_edge_intersection CGAL::Isosurfacing::Linear_interpolation_edge_intersection",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "IsosurfacingEdgeIntersectionOracle_3::operator()",
+          "brief": "computes the intersection point between an edge and the isosurface.",
+          "detailed": "Domain must be a model of IsosurfacingDomain_3 p_0 the location of the first vertex of the edge p_1 the location of the second vertex of the edge val_0 the value at the first vertex of the edge val_1 the value at the second vertex of the edge domain the isosurfacing domain isovalue the isovalue defining the isosurface with which we seek an intersection p the intersection point, if it exists true if the intersection point exists, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool IsosurfacingEdgeIntersectionOracle_3::operator()",
+          "argsstring": "(typename Domain::Geom_traits::Point_3 p_0, typename Domain::Geom_traits::Point_3 p_1, typename Domain::Geom_traits::FT val_0, typename Domain::Geom_traits::FT val_1, Domain domain, typename Domain::Geom_traits::FT isovalue, typename Domain::Geom_traits::Point_3 &p) const",
+          "params": [
+            {
+              "type": "typename Domain::Geom_traits::Point_3",
+              "name": "p_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::Point_3",
+              "name": "p_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::FT",
+              "name": "val_0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::FT",
+              "name": "val_1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Domain",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::FT",
+              "name": "isovalue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Domain::Geom_traits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingEdgeIntersectionOracle_3.h",
+          "line": "37"
+        }
+      ],
+      "xml_file": "class_isosurfacing_edge_intersection_oracle__3.xml",
+      "file": "Concepts/IsosurfacingEdgeIntersectionOracle_3.h",
+      "line": "18"
+    },
+    "IsosurfacingGradientField_3": {
+      "kind": "class",
+      "name": "IsosurfacingGradientField_3",
+      "brief": "The concept IsosurfacingGradientField_3 describes the set of requirements to be fulfilled by the gradient field template parameter of the domain class CGAL::Isosurfacing::Dual_contouring_domain_3 .",
+      "detailed": "Gradient fields must be continuous and defined over the geometric span of the space partitioning data structure (also known as \"partition\") being used. Has models CGAL::Isosurfacing::Gradient_function_3 CGAL::Isosurfacing::Finite_difference_gradient_3 CGAL::Isosurfacing::Interpolated_discrete_gradients_3 IsosurfacingTraits_3 IsosurfacingValueField_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "IsosurfacingGradientField_3::Point_3",
+          "brief": "The 3D point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingGradientField_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingGradientField_3.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "IsosurfacingGradientField_3::Vector_3",
+          "brief": "The 3D vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingGradientField_3::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingGradientField_3.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "IsosurfacingGradientField_3::operator()",
+          "brief": "returns the gradient at the point p .",
+          "detailed": "",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 IsosurfacingGradientField_3::operator()",
+          "argsstring": "(Point_3 p) const",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingGradientField_3.h",
+          "line": "37"
+        }
+      ],
+      "xml_file": "class_isosurfacing_gradient_field__3.xml",
+      "file": "Concepts/IsosurfacingGradientField_3.h",
+      "line": "21"
+    },
+    "IsosurfacingInterpolationScheme_3": {
+      "kind": "class",
+      "name": "IsosurfacingInterpolationScheme_3",
+      "brief": "",
+      "detailed": "Refines DefaultConstructible Assignable The concept IsosurfacingInterpolationScheme_3 describes the set of requirements to be fulfilled by the interpolation scheme template parameter of the domain classes CGAL::Isosurfacing::Interpolated_discrete_values_3 and CGAL::Isosurfacing::Interpolated_discrete_gradients_3 . Has models CGAL::Isosurfacing::Trilinear_interpolation",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "IsosurfacingInterpolationScheme_3::Geom_traits",
+          "brief": "The geometric traits type.",
+          "detailed": "Must be a model of IsosurfacingTraits_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingInterpolationScheme_3::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+          "line": "22"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "IsosurfacingInterpolationScheme_3::FT",
+          "brief": "The scalar type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingInterpolationScheme_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "IsosurfacingInterpolationScheme_3::Point_3",
+          "brief": "The 3D point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingInterpolationScheme_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "IsosurfacingInterpolationScheme_3::Vector_3",
+          "brief": "The 3D vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingInterpolationScheme_3::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "interpolated_value",
+          "qualified_name": "IsosurfacingInterpolationScheme_3::interpolated_value",
+          "brief": "interpolates the value of the value field at the point p using values defined by vr over the grid g .",
+          "detailed": "Grid must be CGAL::Isosurfacing::Cartesian_grid_3 ValueRange must be a model of RandomAccessRange with FT as value type",
+          "return_type": "FT",
+          "definition": "FT IsosurfacingInterpolationScheme_3::interpolated_value",
+          "argsstring": "(Point_3 p, Grid g, ValueRange vr) const",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Grid",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueRange",
+              "name": "vr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "interpolated_gradient",
+          "qualified_name": "IsosurfacingInterpolationScheme_3::interpolated_gradient",
+          "brief": "interpolates the gradient of the gradient field at the point p using gradients defined by gr over the grid g .",
+          "detailed": "Grid must be CGAL::Isosurfacing::Cartesian_grid_3 GradientRange must be a model of RandomAccessRange with Vector_3 as value type",
+          "return_type": "Vector_3",
+          "definition": "Vector_3 IsosurfacingInterpolationScheme_3::interpolated_gradient",
+          "argsstring": "(Point_3 p, Grid g, GradientRange gr) const",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Grid",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradientRange",
+              "name": "gr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+          "line": "57"
+        }
+      ],
+      "xml_file": "class_isosurfacing_interpolation_scheme__3.xml",
+      "file": "Concepts/IsosurfacingInterpolationScheme_3.h",
+      "line": "15"
+    },
+    "IsosurfacingPartition_3": {
+      "kind": "class",
+      "name": "IsosurfacingPartition_3",
+      "brief": "The concept IsosurfacingPartition_3 describes the set of requirements to be fulfilled by the partition template parameter of the domain classes CGAL::Isosurfacing::Marching_cubes_domain_3 and CGAL::Isosurfacing::Dual_contouring_domain_3 .",
+      "detailed": "A 3D partition is a space partitioning data structure that provides a discrete representation of a subset of 3D space. A partial specialization of CGAL::Isosurfacing::partition_traits must be provided for all models. This is similar to graph traits in PkgBGL. Has models CGAL::Isosurfacing::Cartesian_grid_3 CGAL::Octree",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "IsosurfacingPartition_3::Geom_traits",
+          "brief": "The geometric traits type.",
+          "detailed": "Must be a model of IsosurfacingTraits_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingPartition_3::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingPartition_3.h",
+          "line": "28"
+        },
+        {
+          "kind": "function",
+          "name": "geom_traits",
+          "qualified_name": "IsosurfacingPartition_3::geom_traits",
+          "brief": "",
+          "detailed": "the geometric traits.",
+          "return_type": "Geom_traits",
+          "definition": "Geom_traits IsosurfacingPartition_3::geom_traits",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingPartition_3.h",
+          "line": "33"
+        }
+      ],
+      "xml_file": "class_isosurfacing_partition__3.xml",
+      "file": "Concepts/IsosurfacingPartition_3.h",
+      "line": "21"
+    },
+    "IsosurfacingTraits_3": {
+      "kind": "class",
+      "name": "IsosurfacingTraits_3",
+      "brief": "",
+      "detailed": "Refines DefaultConstructible Assignable The concept IsosurfacingTraits_3 describes the set of requirements to be fulfilled by the traits class of a model of IsosurfacingDomain_3 . Has models All models of the concept Kernel",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "IsosurfacingTraits_3::FT",
+          "brief": "The scalar type.",
+          "detailed": "Must be a model of FieldNumberType .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "IsosurfacingTraits_3::Point_3",
+          "brief": "The 3D point type.",
+          "detailed": "Must be a model of Kernel::Point_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "IsosurfacingTraits_3::Vector_3",
+          "brief": "The 3D vector type.",
+          "detailed": "Must be a model of Kernel::Vector_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "IsoCuboid_3",
+          "qualified_name": "IsosurfacingTraits_3::IsoCuboid_3",
+          "brief": "The 3D cuboid type.",
+          "detailed": "Must be a model of Kernel::IsoCuboid_3",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::IsoCuboid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_x_3",
+          "qualified_name": "IsosurfacingTraits_3::Compute_x_3",
+          "brief": "A construction object that must provide the function operators:",
+          "detailed": "FT operator()(Point_3 p) and FT operator()(Vector_3 p) which return the $ x$ -coordinate of the point and the vector, respectively.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Compute_x_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "56"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_y_3",
+          "qualified_name": "IsosurfacingTraits_3::Compute_y_3",
+          "brief": "A construction object that must provide the function operators:",
+          "detailed": "FT operator()(Point_3 p) and FT operator()(Vector_3 p) which return the $ y$ -coordinate of the point and the vector, respectively.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Compute_y_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "69"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_z_3",
+          "qualified_name": "IsosurfacingTraits_3::Compute_z_3",
+          "brief": "A construction object that must provide the function operators:",
+          "detailed": "FT operator()(Point_3 p) and FT operator()(Vector_3 p) which return the $ z$ -coordinate of the point and the vector, respectively.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Compute_z_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "82"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_point_3",
+          "qualified_name": "IsosurfacingTraits_3::Construct_point_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_3 operator()(FT x, FT y, FT z) which constructs a 3D point from its three coordinates.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Construct_point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "91"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_3",
+          "qualified_name": "IsosurfacingTraits_3::Construct_vector_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Vector_3 operator()(FT x, FT y, FT z) which constructs a 3D vector from its three coordinates.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Construct_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "100"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_iso_cuboid_3",
+          "qualified_name": "IsosurfacingTraits_3::Construct_iso_cuboid_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "IsoCuboid_3 operator()(Point_3 p, Point_3 q) which constructs an iso-oriented cuboid with diagonal opposite vertices p and q such that p is the lexicographically smallest point in the cuboid.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Construct_iso_cuboid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "110"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vertex_3",
+          "qualified_name": "IsosurfacingTraits_3::Construct_vertex_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_3 operator()(IsoCuboid_3 c, int i) which returns the i-th vertex of an iso-cuboid c . See Kernel::ConstructVertex_3 for the order of vertices.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingTraits_3::Construct_vertex_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "compute_x_3_object",
+          "qualified_name": "IsosurfacingTraits_3::compute_x_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_x_3",
+          "definition": "Compute_x_3 IsosurfacingTraits_3::compute_x_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "compute_y_3_object",
+          "qualified_name": "IsosurfacingTraits_3::compute_y_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_y_3",
+          "definition": "Compute_y_3 IsosurfacingTraits_3::compute_y_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "compute_z_3_object",
+          "qualified_name": "IsosurfacingTraits_3::compute_z_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_z_3",
+          "definition": "Compute_z_3 IsosurfacingTraits_3::compute_z_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "141"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point_3_object",
+          "qualified_name": "IsosurfacingTraits_3::construct_point_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_point_3",
+          "definition": "Construct_point_3 IsosurfacingTraits_3::construct_point_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "146"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_3_object",
+          "qualified_name": "IsosurfacingTraits_3::construct_vector_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_3",
+          "definition": "Construct_vector_3 IsosurfacingTraits_3::construct_vector_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "construct_iso_cuboid_3_object",
+          "qualified_name": "IsosurfacingTraits_3::construct_iso_cuboid_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_iso_cuboid_3",
+          "definition": "Construct_iso_cuboid_3 IsosurfacingTraits_3::construct_iso_cuboid_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "156"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vertex_3_object",
+          "qualified_name": "IsosurfacingTraits_3::construct_vertex_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vertex_3",
+          "definition": "Construct_vertex_3 IsosurfacingTraits_3::construct_vertex_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IsosurfacingTraits_3.h",
+          "line": "161"
+        }
+      ],
+      "xml_file": "class_isosurfacing_traits__3.xml",
+      "file": "Concepts/IsosurfacingTraits_3.h",
+      "line": "15"
+    },
+    "IsosurfacingValueField_3": {
+      "kind": "class",
+      "name": "IsosurfacingValueField_3",
+      "brief": "The concept IsosurfacingValueField_3 describes the set of requirements to be fulfilled by the value field template parameter of the domain classes CGAL::Isosurfacing::Marching_cubes_domain_3 and CGAL::Isosurfacing::Dual_contouring_domain_3 .",
+      "detailed": "Value fields must be continuous and defined over the geometric span of the space partitioning data structure (also known as \"partition\") being used. Has models CGAL::Isosurfacing::Value_function_3 CGAL::Isosurfacing::Interpolated_discrete_values_3 IsosurfacingTraits_3 IsosurfacingGradientField_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "IsosurfacingValueField_3::FT",
+          "brief": "The scalar type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingValueField_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingValueField_3.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "IsosurfacingValueField_3::Point_3",
+          "brief": "The 3D point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingValueField_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingValueField_3.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "vertex_descriptor",
+          "qualified_name": "IsosurfacingValueField_3::vertex_descriptor",
+          "brief": "A descriptor that uniquely identifies a vertex (see IsosurfacingPartition_3 ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type IsosurfacingValueField_3::vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/IsosurfacingValueField_3.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "IsosurfacingValueField_3::operator()",
+          "brief": "returns the value of the field at the point p .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT IsosurfacingValueField_3::operator()",
+          "argsstring": "(Point_3 p)",
+          "params": [
+            {
+              "type": "Point_3",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingValueField_3.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "IsosurfacingValueField_3::operator()",
+          "brief": "returns the value of the field at the vertex v .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT IsosurfacingValueField_3::operator()",
+          "argsstring": "(vertex_descriptor v)",
+          "params": [
+            {
+              "type": "vertex_descriptor",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/IsosurfacingValueField_3.h",
+          "line": "46"
+        }
+      ],
+      "xml_file": "class_isosurfacing_value_field__3.xml",
+      "file": "Concepts/IsosurfacingValueField_3.h",
+      "line": "20"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Concepts/partition_traits.h",
+      "line": "1"
+    },
+    "CGAL::Isosurfacing": {
+      "kind": "namespace",
+      "name": "CGAL::Isosurfacing",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_isosurfacing.xml",
+      "file": "Concepts/partition_traits.h",
+      "line": "2"
+    },
+    "CGAL::Isosurfacing::IO": {
+      "kind": "namespace",
+      "name": "CGAL::Isosurfacing::IO",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "write_OBJ",
+          "qualified_name": "CGAL::Isosurfacing::IO::write_OBJ",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Isosurfacing::IO::write_OBJ",
+          "argsstring": "(std::ostream &out, const Cartesian_grid_3< GeomTraits, MemoryPolicy > &grid, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Cartesian_grid_3 < GeomTraits, MemoryPolicy > &",
+              "name": "grid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/IO/OBJ.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "write_OBJ",
+          "qualified_name": "CGAL::Isosurfacing::IO::write_OBJ",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Isosurfacing::IO::write_OBJ",
+          "argsstring": "(const std::string &fname, const Cartesian_grid_3< GeomTraits, MemoryPolicy > &grid, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const std::string &",
+              "name": "fname",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Cartesian_grid_3 < GeomTraits, MemoryPolicy > &",
+              "name": "grid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/IO/OBJ.h",
+          "line": "87"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l_1_1_isosurfacing_1_1_i_o.xml",
+      "file": "CGAL/Isosurfacing_3/IO/Image_3.h",
+      "line": "25"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgIsosurfacing3Ref": {
+      "kind": "group",
+      "name": "PkgIsosurfacing3Ref",
+      "brief": "",
+      "detailed": "Mael Rouxel-Labbé, Julian Stahl, Daniel Zint, and Pierre Alliez This package implements several grid-based isosurfacing algorithms (Marching Cubes, its topologically correct variant, and Dual Contouring) that enable generating surface meshes from 3D value and gradient fields. The methods are generic with respect to the definition of the grid and the fields, and all methods offer parallel implementations. The output is a polygon soup (i.e., a container of 3D point coordinates and indexed faces). Introduced in: CGAL 6.1 BibTeX: cgal:sz-mc-26a License: GPL Windows Demo: Polyhedron demo Classified Reference Pages Concepts IsosurfacingTraits_3 IsosurfacingPartition_3 IsosurfacingValueField_3 IsosurfacingGradientField_3 IsosurfacingInterpolationScheme_3 IsosurfacingEdgeIntersectionOracle_3 IsosurfacingDomain_3 IsosurfacingDomainWithGradient_3 Space Partitioning Data Structures CGAL::Isosurfacing::Cartesian_grid_3 Value and Gradient Fields CGAL::Isosurfacing::Value_function_3 CGAL::Isosurfacing::Gradient_function_3 CGAL::Isosurfacing::Finite_difference_gradient_3 CGAL::Isosurfacing::Interpolated_discrete_values_3 CGAL::Isosurfacing::Interpolated_discrete_gradients_3 CGAL::Isosurfacing::Trilinear_interpolation Isosurfacing Domains Helpers CGAL::Isosurfacing::Dichotomy_edge_intersection CGAL::Isosurfacing::Linear_interpolation_edge_intersection Isosurfacing Domains CGAL::Isosurfacing::Marching_cubes_domain_3 CGAL::Isosurfacing::Dual_contouring_domain_3 CGAL::Isosurfacing::create_marching_cubes_domain_3() CGAL::Isosurfacing::create_dual_contouring_domain_3() Isosurfacing Methods CGAL::Isosurfacing::marching_cubes() CGAL::Isosurfacing::dual_contouring() I/O CGAL::Isosurfacing::IO::convert_image_to_grid() CGAL::Isosurfacing::IO::convert_grid_to_image()",
+      "members": [],
+      "xml_file": "group___pkg_isosurfacing3_ref.xml"
+    },
+    "PkgIsosurfacing3Concepts": {
+      "kind": "group",
+      "name": "PkgIsosurfacing3Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_isosurfacing3_concepts.xml"
+    },
+    "IS_Partitions_grp": {
+      "kind": "group",
+      "name": "IS_Partitions_grp",
+      "brief": "This group encapsulates classes that represent a spatial discretization of space, which will be the scaffolding for the construction of the isosurface.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___i_s___partitions__grp.xml"
+    },
+    "IS_Partitions_helpers_grp": {
+      "kind": "group",
+      "name": "IS_Partitions_helpers_grp",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Cache_vertex_locations",
+          "qualified_name": "CGAL::Isosurfacing::Cache_vertex_locations",
+          "brief": "A convenience alias for the policy that caches grid vertex locations.",
+          "detailed": "",
+          "return_type": "Grid_vertex_memory_policy< Tag_true >",
+          "definition": "using CGAL::Isosurfacing::Cache_vertex_locations = Grid_vertex_memory_policy<Tag_true>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "typedef",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Do_not_cache_vertex_locations",
+          "qualified_name": "CGAL::Isosurfacing::Do_not_cache_vertex_locations",
+          "brief": "A convenience alias for the policy that does not cache grid vertex locations.",
+          "detailed": "",
+          "return_type": "Grid_vertex_memory_policy< Tag_false >",
+          "definition": "using CGAL::Isosurfacing::Do_not_cache_vertex_locations = Grid_vertex_memory_policy<Tag_false>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "typedef",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Cartesian_grid_3.h",
+          "line": "53"
+        }
+      ],
+      "xml_file": "group___i_s___partitions__helpers__grp.xml"
+    },
+    "IS_Fields_helpers_grp": {
+      "kind": "group",
+      "name": "IS_Fields_helpers_grp",
+      "brief": "The following classes and functions are parameters or template parameters of value and gradient fields.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___i_s___fields__helpers__grp.xml"
+    },
+    "IS_Fields_grp": {
+      "kind": "group",
+      "name": "IS_Fields_grp",
+      "brief": "The following classes represent the data that defines the isosurface.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___i_s___fields__grp.xml"
+    },
+    "IS_Domains_grp": {
+      "kind": "group",
+      "name": "IS_Domains_grp",
+      "brief": "This group encapsulates the classes that can be used to represent a complete domain (partition and fields), to be used by the isosurfacing methods of this package.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "create_dual_contouring_domain_3",
+          "qualified_name": "CGAL::Isosurfacing::create_dual_contouring_domain_3",
+          "brief": "creates a new instance of a domain that can be used with the Dual Contouring algorithm.",
+          "detailed": "Partition must be a model of IsosurfacingPartition_3 ValueField must be a model of IsosurfacingValueField_3 GradientField must be a model of IsosurfacingGradientField_3 EdgeIntersectionOracle must be a model of IsosurfacingEdgeIntersectionOracle_3 partition the space partitioning data structure values a continuous field of scalar values, defined over the geometric span of partition gradients a continuous field of normalized vectors, defined over the geometric span of partition intersection_oracle the oracle for edge-isosurface intersection computation the domain class keeps a reference to the partition , values and gradients objects. As such, users must ensure that the lifetimes of these objects exceed that of the domain object.",
+          "return_type": "Dual_contouring_domain_3< Partition, ValueField, GradientField, EdgeIntersectionOracle >",
+          "definition": "Dual_contouring_domain_3< Partition, ValueField, GradientField, EdgeIntersectionOracle > CGAL::Isosurfacing::create_dual_contouring_domain_3",
+          "argsstring": "(const Partition &partition, const ValueField &values, const GradientField &gradients, const EdgeIntersectionOracle &intersection_oracle=EdgeIntersectionOracle())",
+          "params": [
+            {
+              "type": "const Partition &",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ValueField &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GradientField &",
+              "name": "gradients",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const EdgeIntersectionOracle &",
+              "name": "intersection_oracle",
+              "default": "EdgeIntersectionOracle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Dual_contouring_domain_3.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "create_marching_cubes_domain_3",
+          "qualified_name": "CGAL::Isosurfacing::create_marching_cubes_domain_3",
+          "brief": "creates a new instance of a domain that can be used with the Marching Cubes algorithm.",
+          "detailed": "Partition must be a model of IsosurfacingPartition_3 ValueField must be a model of IsosurfacingValueField_3 EdgeIntersectionOracle must be a model of IsosurfacingEdgeIntersectionOracle_3 partition the space partitioning data structure values a continuous field of scalar values, defined over the geometric span of partition intersection_oracle the oracle for edge-isosurface intersection computation the domain class keeps a reference to the partition , values and gradients objects. As such, users must ensure that the lifetimes of these objects exceed that of the domain object.",
+          "return_type": "Marching_cubes_domain_3< Partition, ValueField, EdgeIntersectionOracle >",
+          "definition": "Marching_cubes_domain_3< Partition, ValueField, EdgeIntersectionOracle > CGAL::Isosurfacing::create_marching_cubes_domain_3",
+          "argsstring": "(const Partition &partition, const ValueField &values, const EdgeIntersectionOracle &intersection_oracle=EdgeIntersectionOracle())",
+          "params": [
+            {
+              "type": "const Partition &",
+              "name": "partition",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ValueField &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const EdgeIntersectionOracle &",
+              "name": "intersection_oracle",
+              "default": "EdgeIntersectionOracle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/Marching_cubes_domain_3.h",
+          "line": "92"
+        }
+      ],
+      "xml_file": "group___i_s___domains__grp.xml"
+    },
+    "IS_Domain_helpers_grp": {
+      "kind": "group",
+      "name": "IS_Domain_helpers_grp",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___i_s___domain__helpers__grp.xml"
+    },
+    "IS_Methods_grp": {
+      "kind": "group",
+      "name": "IS_Methods_grp",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "dual_contouring",
+          "qualified_name": "CGAL::Isosurfacing::dual_contouring",
+          "brief": "creates a polygon soup that discretizes an isosurface using the Dual Contouring algorithm.",
+          "detailed": "The point placement strategy within each cell of the space partition is based on Quadric Error Metrics (\"QEM\", or \"QEF\" in Dual Contouring-related works). ConcurrencyTag enables sequential versus parallel algorithm. Possible values are Sequential_tag , Parallel_if_available_tag , or Parallel_tag . Domain must be a model of IsosurfacingDomainWithGradient_3 . PointRange must be a model of the concept AssociativeContainer whose value type can be constructed from the point type of the domain. PolygonRange must be a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is itself a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is std::size_t . NamedParameters a sequence of Named Parameters domain the domain providing the spatial partition and the values and gradient data isovalue the value defining the isosurface points the points of the polygons in the output polygon soup polygons the faces of the output polygon soup. Each element in the vector describes a polygon (either quads or triangles, see the named parameter do_not_triangulate_faces ) using the indices of the points in points . np optional Named Parameters described below Optional Named Parameters <button class=\"collapsible\"> constrain_to_cell </button> whether to constrain the vertex location to the geometrical space of its cell Type: Boolean Default: false Extra: Constraining the vertex to its dual cell guarantees that the resulting surface is without self-intersections (non-manifoldness aside). Oppositely, an unconstrained positioning strategy might produce better looking surfaces near sharp features (ridges, corners), at the cost of possible self-intersections. <button class=\"collapsible\"> do_not_triangulate_faces </button> If true , the output will contain quadrilaterals. If false , the output will contain triangles. Type: Boolean Default: false (faces are triangulated) Extra: Triangulating faces is done by inserting the intersection between an edge and the isosurface, and linking it to the dual points of the cells incident to the edge. If constrain_to_cell is set to false , triangulation faces can result in additional self-intersections. An alternative that has worse approximation but is less likely to produce self-intersections is to use the function CGAL::Polygon_mesh_processing::triangulate_faces() . CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh()",
+          "return_type": "void",
+          "definition": "void CGAL::Isosurfacing::dual_contouring",
+          "argsstring": "(const Domain &domain, const typename Domain::Geom_traits::FT isovalue, PointRange &points, PolygonRange &polygons, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const Domain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "isovalue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PolygonRange &",
+              "name": "polygons",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/dual_contouring_3.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "marching_cubes",
+          "qualified_name": "CGAL::Isosurfacing::marching_cubes",
+          "brief": "creates a triangle soup that represents an isosurface generated by the Marching Cubes algorithm.",
+          "detailed": "ConcurrencyTag enables sequential versus parallel algorithm. Possible values are Sequential_tag , Parallel_if_available_tag , or Parallel_tag . Domain must be a model of IsosurfacingDomain_3 . PointRange must be a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type can be constructed from the point type of the domain. TriangleRange must be a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is itself a model of the concepts RandomAccessContainer and BackInsertionSequence whose value type is std::size_t . NamedParameters a sequence of Named Parameters domain the domain providing the spatial partition and the data isovalue the value defining the isosurface points the points of the triangles in the output triangle soup triangles the faces of the output triangle soup. Each element in the vector describes a triangle using the indices of the points in points . np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> use_topologically_correct_marching_cubes </button> whether the topologically correct variant of Marching Cubes [4] should be used, or the base version [1] . Type: Boolean Default: true CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh()",
+          "return_type": "void",
+          "definition": "void CGAL::Isosurfacing::marching_cubes",
+          "argsstring": "(const Domain &domain, const typename Domain::Geom_traits::FT isovalue, PointRange &points, TriangleRange &triangles, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const Domain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Domain::Geom_traits::FT",
+              "name": "isovalue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangleRange &",
+              "name": "triangles",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/marching_cubes_3.h",
+          "line": "80"
+        }
+      ],
+      "xml_file": "group___i_s___methods__grp.xml"
+    },
+    "IS_IO_functions_grp": {
+      "kind": "group",
+      "name": "IS_IO_functions_grp",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "convert_image_to_grid",
+          "qualified_name": "CGAL::Isosurfacing::IO::convert_image_to_grid",
+          "brief": "extracts geometry and values from a CGAL::Image_3 .",
+          "detailed": "The dimensions and geometric span are read from the image. The values stored in the image must be of type Geom_traits::FT or implicitly convertible to it. Grid must be CGAL::Isosurfacing::Cartesian_grid_3 <GeomTraits> whose GeomTraits is a model of IsosurfacingTraits_3 Values must be CGAL::Isosurfacing::Interpolated_discrete_values_3 <Grid> image the image providing the data grid the output grid values the output values",
+          "return_type": "bool",
+          "definition": "bool CGAL::Isosurfacing::IO::convert_image_to_grid",
+          "argsstring": "(const CGAL::Image_3 &image, Grid &grid, Values &values)",
+          "params": [
+            {
+              "type": "const CGAL::Image_3 &",
+              "name": "image",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Grid &",
+              "name": "grid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Values &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/IO/Image_3.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "convert_grid_to_image",
+          "qualified_name": "CGAL::Isosurfacing::IO::convert_grid_to_image",
+          "brief": "create a CGAL::Image_3 from a grid and a field of values.",
+          "detailed": "Grid must be CGAL::Isosurfacing::Cartesian_grid_3 <GeomTraits> with GeomTraits a model of IsosurfacingTraits_3 Values must be CGAL::Isosurfacing::Interpolated_discrete_values_3 <Grid> grid the space partitioning data structure values the field of values",
+          "return_type": "CGAL::Image_3",
+          "definition": "CGAL::Image_3 CGAL::Isosurfacing::IO::convert_grid_to_image",
+          "argsstring": "(const Grid &grid, const Values &values)",
+          "params": [
+            {
+              "type": "const Grid &",
+              "name": "grid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Values &",
+              "name": "values",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Isosurfacing_3/IO/Image_3.h",
+          "line": "90"
+        }
+      ],
+      "xml_file": "group___i_s___i_o__functions__grp.xml"
+    }
+  }
+}
