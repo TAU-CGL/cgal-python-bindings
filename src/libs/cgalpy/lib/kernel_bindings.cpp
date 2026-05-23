@@ -171,7 +171,7 @@ void export_kernel_module(py::module_& m) {
       .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); }, py::arg("numerator"), py::arg("denominator"), "Constructor from numerator and denominator.")
       .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); }, "Returns a double approximation.")
       .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri, "Returns the exact representation.")
-      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} , "Returns the approximate representation.")
+      .def("approx", [](const FT& ft)->Fta { return ft.approx();} , "Returns the approximate representation.")
       ;
   }
 

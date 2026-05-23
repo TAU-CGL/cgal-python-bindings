@@ -22,6 +22,8 @@
 #include "CGALPY/Hash_rational_point.hpp"
 #include "CGALPY/make_iterator.hpp"
 
+#include "cgalpy/Kernel_23_docstrings.hpp"
+
 namespace py = nanobind;
 
 //

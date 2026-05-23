@@ -26,7 +26,7 @@ void export_segment_d(py::class_<Segment_d>& segd_c) {
     .def("target", &Segd::target, doc::Segment_d_target)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D)
     .def("opposite", &Segd::opposite, doc::Segment_d_opposite)
-    .def("__getitem__", &Segd::operator[], doc::Segment_d_operator)
+    .def("__getitem__", &Segd::operator[], doc::Segment_d_operator_op)
 #endif
 #if ((CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPIC_D) &&     \
      (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D))
@@ -39,8 +39,8 @@ void export_segment_d(py::class_<Segment_d>& segd_c) {
     .def("direction", &Segd::direction, doc::Segment_d_direction)
     .def("has_on", &Segd::has_on, doc::Segment_d_has_on)
     .def("is_degenerate", &Segd::is_degenerate, doc::Segment_d_is_degenerate)
-    .def(py::self == py::self, doc::Segment_d_operator_1)
-    .def(py::self != py::self, doc::Segment_d_operator_2)
+    .def(py::self == py::self, doc::Segment_d_operator_op_1)
+    .def(py::self != py::self, doc::Segment_d_operator_op_2)
 #endif
     // .setattr("__hash__", &hash<Segd>)
     ;

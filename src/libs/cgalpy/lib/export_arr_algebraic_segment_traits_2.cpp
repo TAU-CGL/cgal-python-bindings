@@ -282,11 +282,11 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   using Ctr_xseg = Gt::Construct_x_monotone_segment_2;
   py::class_<Ctr_xseg>(traits_c, "Construct_x_monotone_segment_2")
     .def("__call__", &ctr_xseg_operator0,
-        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator)
+        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_op)
     .def("__call__", &ctr_xseg_operator1,
-        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_1)
+        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_op_1)
     .def("__call__", &ctr_xseg_operator2,
-        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_2)
+        doc::CGAL_Arr_algebraic_segment_traits_2_Construct_x_monotone_segment_2_operator_op_2)
     ;
 
   py::enum_<Gt::Site_of_point>(traits_c, "Site_of_point")

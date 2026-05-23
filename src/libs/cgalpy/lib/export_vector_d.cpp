@@ -41,10 +41,10 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Vecd>)
     .def("dimension", &Vecd::dimension, doc::Vector_d_dimension)
     .def("cartesian", &Vecd::cartesian, doc::Vector_d_cartesian)
-    .def("__getitem__", &Vecd::operator[], doc::Vector_d_operator)
+    .def("__getitem__", &Vecd::operator[], doc::Vector_d_operator_op)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) || (CGAL_VERSION_NR > 1060200000)
-    .def(py::self == py::self, doc::Vector_d_operator_1)
-    .def(py::self != py::self, doc::Vector_d_operator_2)
+    .def(py::self == py::self, doc::Vector_d_operator_op_1)
+    .def(py::self != py::self, doc::Vector_d_operator_op_2)
 #endif
     // .def(py::self > py::self)
     // .def(py::self < py::self)

@@ -277,7 +277,7 @@ void export_polygon_2(py::module_& m) {
            doc::Polygon_2_bbox)
       .def("__getitem__",
            static_cast<const Pnt&(Pgn::*)(std::size_t)const>(&Pgn::operator[]),
-           doc::Polygon_2_operator)
+           doc::Polygon_2_operator_op)
       .def("left_vertex", &pol2::left_vertex,
            doc::Polygon_2_left_vertex)
       .def("right_vertex", &pol2::right_vertex,
@@ -304,9 +304,9 @@ void export_polygon_2(py::module_& m) {
       .def("reverse_orientation", &Pgn::reverse_orientation,
            doc::Polygon_2_reverse_orientation)
       .def(py::self == py::self,
-           doc::Polygon_2_operator_2)
+           doc::Polygon_2_operator_op_2)
       .def(py::self != py::self,
-           doc::Polygon_2_operator_3)
+           doc::Polygon_2_operator_op_3)
       ;
 
     using Eci = Pgn::Edge_const_iterator;

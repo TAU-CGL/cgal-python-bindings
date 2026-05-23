@@ -26,8 +26,8 @@ void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c) {
     vecd_c.doc() = doc::Vector__class__;
     vecd_c.def(py::init<>(), doc::Vector_Vector)
       .def(py::init<int>(), doc::Vector_Vector_1)
-      .def("__getitem__", [](const Vecd& v, int i){ return v[i]; }, doc::Vector_operator)
-      .def("__setitem__", [](Vecd& v, int i, const FT_d& val){ v[i] = val; }, doc::Vector_operator_1)
+      .def("__getitem__", [](const Vecd& v, int i){ return v[i]; }, doc::Vector_operator_op)
+      .def("__setitem__", [](Vecd& v, int i, const FT_d& val){ v[i] = val; }, doc::Vector_operator_op_1)
       ;
   }
 
@@ -43,14 +43,14 @@ void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c) {
              int i = py::cast<int>(idx[0]);
              int j = py::cast<int>(idx[1]);
              return m(i, j);
-           }, doc::Matrix_operator)
+           }, doc::Matrix_operator_op)
       .def("__setitem__",
            [](Matd& m, py::tuple idx, const FT_d& val) {
              if (idx.size() != 2) throw std::runtime_error("Expected 2 indices");
              int i = py::cast<int>(idx[0]);
              int j = py::cast<int>(idx[1]);
              m(i, j) = val;
-           }, doc::Matrix_operator_1)
+           }, doc::Matrix_operator_op_1)
         ;
   }
 

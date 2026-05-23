@@ -446,7 +446,7 @@ void export_polygon_mesh_processing(py::module_& m) {
       .def(py::init<const Pm&, const Kernel&>(), py::arg("tm"), py::arg("traits"),
            doc::CGAL_Side_of_triangle_mesh_Side_of_triangle_mesh_1)
       .def("__call__", static_cast<Sotm_op>(&Sotm::operator()), py::arg("query"),
-           doc::CGAL_Side_of_triangle_mesh_operator)
+           doc::CGAL_Side_of_triangle_mesh_operator_op)
       ;
   }
 #endif
@@ -521,17 +521,17 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def("is_empty", &Pe::is_empty,
          doc::Polyhedral_envelope_is_empty)
     .def("inside", [](const Pe& i, const Point_3& query) { return i(query); }, py::arg("query"),
-         doc::Polyhedral_envelope_operator)
+         doc::Polyhedral_envelope_operator_op)
     .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); },
          py::arg("source"), py::arg("target"),
-         doc::Polyhedral_envelope_operator_1)
+         doc::Polyhedral_envelope_operator_op_1)
     .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); },
          py::arg("t0"), py::arg("t1"), py::arg("t2"),
-         doc::Polyhedral_envelope_operator_2)
+         doc::Polyhedral_envelope_operator_op_2)
     .def("inside",
          [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh, internal::parse_pmp_np<Pm>(np)); },
          py::arg("tmesh"), py::arg("np") = py::dict(),
-         doc::Polyhedral_envelope_operator_3)
+         doc::Polyhedral_envelope_operator_op_3)
     // TODO: inside triangle range
     ;
 

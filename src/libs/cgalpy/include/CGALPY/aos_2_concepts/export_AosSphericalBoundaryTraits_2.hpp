@@ -79,7 +79,7 @@ void export_Compare_y_near_boundary_2(C& c, Classes& classes, CGAL::Tag_true) {
                                    doc::AosSphericalBoundaryTraits_2_Compare_y_near_boundary_2);
   auto cmp_y_near_bnd_c = *(classes.m_compare_y_near_boundary_2);
   cmp_y_near_bnd_c.def("__call__", &Cmp_y_near_bnd::operator(),
-                         doc::AosTraits_CompareYNearBoundary_2_operator);
+                         doc::AosTraits_CompareYNearBoundary_2_operator_op);
   c.def("compare_y_near_boundary_2_object",
         &T::compare_y_near_boundary_2_object);
 }
@@ -97,7 +97,7 @@ void export_Parameter_space_in_x_2(C& c, Classes& classes, CGAL::Tag_true) {
     new py::class_<typename T::Parameter_space_in_x_2>(c, "Parameter_space_in_x_2",
                                                      doc::AosSphericalBoundaryTraits_2_Parameter_space_in_x_2);
   classes.m_parameter_space_in_x_2->def("__call__", static_cast<overload>(&T::Parameter_space_in_x_2::operator()),
-                                        doc::AosTraits_ParameterSpaceInX_2_operator);
+                                        doc::AosTraits_ParameterSpaceInX_2_operator_op);
   c.def("parameter_space_in_x_2_object", &T::parameter_space_in_x_2_object);
 }
 
@@ -116,7 +116,7 @@ void export_Parameter_space_in_y_2(C& c, Classes& classes, CGAL::Tag_true) {
     new py::class_<Prm_space_in_y_2>(c, "Parameter_space_in_y_2",
                                       doc::AosSphericalBoundaryTraits_2_Parameter_space_in_y_2);
   classes.m_parameter_space_in_y_2->def("__call__", static_cast<overload>(&Prm_space_in_y_2::operator()),
-                                        doc::AosTraits_ParameterSpaceInY_2_operator);
+                                        doc::AosTraits_ParameterSpaceInY_2_operator_op);
   c.def("parameter_space_in_y_2_object", &T::parameter_space_in_y_2_object);
 }
 

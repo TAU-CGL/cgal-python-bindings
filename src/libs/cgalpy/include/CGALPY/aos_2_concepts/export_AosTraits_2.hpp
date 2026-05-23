@@ -45,7 +45,7 @@ void export_AosTraits_2(C& c, Concepts& concepts) {
                                           doc::AosTraits_2_Make_x_monotone_2);
     classes.m_make_x_monotone_2->def("__call__",
                                      &make_x_monotone_2_call_operator<T>,
-                                     doc::AosTraits_MakeXMonotone_2_operator);
+                                     doc::AosTraits_MakeXMonotone_2_operator_op);
   }
 
   c.def("make_x_monotone_2_object", &T::make_x_monotone_2_object);

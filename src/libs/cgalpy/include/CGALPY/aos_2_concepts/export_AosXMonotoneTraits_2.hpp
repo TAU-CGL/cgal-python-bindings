@@ -45,7 +45,7 @@ void export_Are_mergeable_2(C& c, Classes& classes, CGAL::Tag_true) {
     new py::class_<Are_mergeable_2>(c, "Are_mergeable_2",
                                      doc::AosXMonotoneTraits_2_Are_mergeable_2);
   classes.m_are_mergeable_2->def("__call__", &Are_mergeable_2::operator(),
-                                 doc::AosTraits_AreMergeable_2_operator);
+                                 doc::AosTraits_AreMergeable_2_operator_op);
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object);
 }
 
@@ -70,7 +70,7 @@ void export_AosXMonotoneTraits_2(C& c, Concepts& concepts) {
   classes.m_intersect_2 = new py::class_<Intersect_2>(c, "Intersect_2",
                                                         doc::AosXMonotoneTraits_2_Intersect_2);
   classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>,
-                             doc::AosTraits_Intersect_2_operator);
+                             doc::AosTraits_Intersect_2_operator_op);
 
   classes.m_split_2 = new py::class_<Split_2>(c, "Split_2",
                                                 doc::AosXMonotoneTraits_2_Split_2);

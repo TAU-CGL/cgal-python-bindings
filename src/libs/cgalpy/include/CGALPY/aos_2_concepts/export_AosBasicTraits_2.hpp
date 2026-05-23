@@ -102,7 +102,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
                                              doc::AosBasicTraits_2_Construct_min_vertex_2);
     classes.m_construct_min_vertex_2->
       def("__call__", &Construct_min_vertex_2::operator(),
-          doc::AosTraits_ConstructMinVertex_2_operator);
+          doc::AosTraits_ConstructMinVertex_2_operator_op);
   }
 
   // Construct_max_vertex_2
@@ -112,7 +112,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
                                              doc::AosBasicTraits_2_Construct_max_vertex_2);
     classes.m_construct_max_vertex_2->
       def("__call__", &Construct_max_vertex_2::operator(),
-          doc::AosTraits_ConstructMaxVertex_2_operator);
+          doc::AosTraits_ConstructMaxVertex_2_operator_op);
   }
 
   // Is_vertical_2
@@ -120,7 +120,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
     classes.m_is_vertical_2 = new py::class_<Is_vertical_2>(c, "Is_vertical_2",
                                                      doc::AosBasicTraits_2_Is_vertical_2);
     classes.m_is_vertical_2->def("__call__", &Is_vertical_2::operator(),
-                               doc::AosTraits_IsVertical_2_operator);
+                               doc::AosTraits_IsVertical_2_operator_op);
   }
 
   // Compare_y_at_x_2
@@ -132,7 +132,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
                                     py::overload_cast<const Pnt&, const Xcv&>
                                     (&Compare_y_at_x_2::operator(), py::const_),
                                     py::arg("p"), py::arg("xcv"),
-                                    doc::AosTraits_CompareYAtX_2_operator);
+                                    doc::AosTraits_CompareYAtX_2_operator_op);
   }
 
   // Compare_y_at_x_right_2
@@ -142,7 +142,7 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
                                              doc::AosBasicTraits_2_Compare_y_at_x_right_2);
     classes.m_compare_y_at_x_right_2->
       def("__call__", &Compare_y_at_x_right_2::operator(),
-          doc::AosTraits_CompareYAtXRight_2_operator);
+          doc::AosTraits_CompareYAtXRight_2_operator_op);
   }
 
   // Equal_2
@@ -153,12 +153,12 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
                            py::overload_cast<const Pnt&, const Pnt&>
                            (&Equal_2::operator(), py::const_),
                            py::arg("p1"), py::arg("p2"),
-                           doc::AosTraits_Equal_2_operator);
+                           doc::AosTraits_Equal_2_operator_op);
     classes.m_equal_2->def("__call__",
                            py::overload_cast<const Xcv&, const Xcv&>
                            (&Equal_2::operator(), py::const_),
                            py::arg("xcv1"), py::arg("xcv2"),
-                           doc::AosTraits_Equal_2_operator_1);
+                           doc::AosTraits_Equal_2_operator_op_1);
   }
 
   c.def(py::init<>())
