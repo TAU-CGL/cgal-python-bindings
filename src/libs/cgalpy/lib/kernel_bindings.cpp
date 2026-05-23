@@ -471,34 +471,34 @@ void export_kernel_module(py::module_& m) {
            [](Construct_vector_2 ctr, const Pnt_2& a, const Pnt_2& b)
            { return ctr(a, b); },
            py::arg("a"), py::arg("b"),
-         doc::Kernel_ConstructVector_2_operator)
+         doc::Kernel_ConstructVector_2_operator_op)
       .def("__call__",
            [](Construct_vector_2 ctr,
               const CGAL::Origin& o, const Pnt_2& b)
            { return ctr(o, b); }, py::arg("o"), py::arg("b"),
-         doc::Kernel_ConstructVector_2_operator_1)
+         doc::Kernel_ConstructVector_2_operator_op_1)
       .def("__call__",
            [](Construct_vector_2 ctr, const Pnt_2& a,
               const CGAL::Origin& o)
            { return ctr(a, o); }, py::arg("a"), py::arg("o"),
-         doc::Kernel_ConstructVector_2_operator_2)
+         doc::Kernel_ConstructVector_2_operator_op_2)
       .def("__call__",
            [](Construct_vector_2 ctr, const Seg_2& s)
            { return ctr(s); }, py::arg("s"),
-         doc::Kernel_ConstructVector_2_operator_3)
+         doc::Kernel_ConstructVector_2_operator_op_3)
       .def("__call__",
            [](Construct_vector_2 ctr, const Ray_2& r)
            { return ctr(r); }, py::arg("r"),
-         doc::Kernel_ConstructVector_2_operator_4)
+         doc::Kernel_ConstructVector_2_operator_op_4)
       .def("__call__",
            [](Construct_vector_2 ctr, const Line_2& l)
            { return ctr(l); }, py::arg("l"),
-         doc::Kernel_ConstructVector_2_operator_5)
+         doc::Kernel_ConstructVector_2_operator_op_5)
       .def("__call__",
            [](Construct_vector_2 ctr,
               const CGAL::Null_vector& NULL_VECTOR)
            { return ctr(NULL_VECTOR); }, py::arg("NULL_VECTOR"),
-         doc::Kernel_ConstructVector_2_operator_6)
+         doc::Kernel_ConstructVector_2_operator_op_6)
       ;
 
   if (! add_attr<Construct_vector_3>(m, "Construct_vector_3"))
@@ -508,34 +508,34 @@ void export_kernel_module(py::module_& m) {
            [](Construct_vector_3 ctr, const Pnt_3& a, const Pnt_3& b)
            { return ctr(a, b); },
            py::arg("a"), py::arg("b"),
-         doc::Kernel_ConstructVector_3_operator)
+         doc::Kernel_ConstructVector_3_operator_op)
       .def("__call__",
            [](Construct_vector_3 ctr, const CGAL::Origin& o, const Pnt_3& b)
            { return ctr(o, b); },
            py::arg("o"), py::arg("b"),
-         doc::Kernel_ConstructVector_3_operator_1)
+         doc::Kernel_ConstructVector_3_operator_op_1)
       .def("__call__",
            [](Construct_vector_3 ctr, const Pnt_3& a, const CGAL::Origin& o)
            { return ctr(a, o); },
            py::arg("a"), py::arg("o"),
-         doc::Kernel_ConstructVector_3_operator_2)
+         doc::Kernel_ConstructVector_3_operator_op_2)
       .def("__call__",
            [](Construct_vector_3 ctr, const Seg_3& s) { return ctr(s); },
            py::arg("s"),
-         doc::Kernel_ConstructVector_3_operator_3)
+         doc::Kernel_ConstructVector_3_operator_op_3)
       .def("__call__",
            [](Construct_vector_3 ctr, const Ray_3& r) { return ctr(r); },
            py::arg("r"),
-         doc::Kernel_ConstructVector_3_operator_4)
+         doc::Kernel_ConstructVector_3_operator_op_4)
       .def("__call__",
            [](Construct_vector_3 ctr, const Line_3& l) { return ctr(l); },
            py::arg("l"),
-         doc::Kernel_ConstructVector_3_operator_5)
+         doc::Kernel_ConstructVector_3_operator_op_5)
       .def("__call__",
            [](Construct_vector_3 ctr, const CGAL::Null_vector& NULL_VECTOR)
            { return ctr(NULL_VECTOR); },
            py::arg("NULL_VECTOR"),
-         doc::Kernel_ConstructVector_3_operator_6)
+         doc::Kernel_ConstructVector_3_operator_op_6)
       ;
 
   if (! add_attr<Construct_sphere_3>(m, "Construct_sphere_3"))
@@ -547,30 +547,30 @@ void export_kernel_module(py::module_& m) {
            { return ctr(center, squared_radius, orientation); },
            py::arg("center"), py::arg("squared_radius"),
            py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructSphere_3_operator)
+         doc::Kernel_ConstructSphere_3_operator_op)
       .def("__call__",
            [](Construct_sphere_3 ctr, const Pnt_3& center,
               const Orientation& orientation)
            { return ctr(center, orientation); },
            py::arg("center"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructSphere_3_operator_1)
+         doc::Kernel_ConstructSphere_3_operator_op_1)
       .def("__call__",
            [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q,
               const Pnt_3& r, const Pnt_3& s) { return ctr(p, q, r, s); },
            py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
-         doc::Kernel_ConstructSphere_3_operator_2)
+         doc::Kernel_ConstructSphere_3_operator_op_2)
       .def("__call__",
            [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q,
               const Pnt_3& r, const Orientation& o) { return ctr(p, q, r, o); },
            py::arg("p"), py::arg("q"), py::arg("r"),
            py::arg("o") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructSphere_3_operator_3)
+         doc::Kernel_ConstructSphere_3_operator_op_3)
       .def("__call__",
            [](Construct_sphere_3 ctr, const Pnt_3& p, const Pnt_3& q,
               const Orientation& o)
            { return ctr(p, q, o); },
            py::arg("p"), py::arg("q"), py::arg("o") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructSphere_3_operator_4)
+         doc::Kernel_ConstructSphere_3_operator_op_4)
       ;
 
   if (! add_attr<Construct_line_3>(m, "Construct_line_3"))
@@ -580,26 +580,26 @@ void export_kernel_module(py::module_& m) {
            [](Construct_line_3 ctr, const Pnt_3& p, const Pnt_3& q)
            { return ctr(p, q); },
            py::arg("p"), py::arg("q"),
-         doc::Kernel_ConstructLine_3_operator)
+         doc::Kernel_ConstructLine_3_operator_op)
       .def("__call__",
            [](Construct_line_3 ctr, const Pnt_3& p, const Vec_3& v)
            { return ctr(p, v); },
            py::arg("p"), py::arg("v"),
-         doc::Kernel_ConstructLine_3_operator_1)
+         doc::Kernel_ConstructLine_3_operator_op_1)
       .def("__call__",
            [](Construct_line_3 ctr, const Pnt_3& p, const Dir_3& d)
            { return ctr(p, d); },
            py::arg("p"), py::arg("d"),
-         doc::Kernel_ConstructLine_3_operator_2)
+         doc::Kernel_ConstructLine_3_operator_op_2)
       .def("__call__",
            [](Construct_line_3 ctr, const Seg_3& s) { return ctr(s); },
            py::arg("s"),
-         doc::Kernel_ConstructLine_3_operator_3)
+         doc::Kernel_ConstructLine_3_operator_op_3)
       .def("__call__",
            [](Construct_line_3 ctr, const Ray_3& r)
                      { return ctr(r); },
            py::arg("r"),
-         doc::Kernel_ConstructLine_3_operator_4)
+         doc::Kernel_ConstructLine_3_operator_op_4)
       ;
 
   if (! add_attr<Construct_circle_2>(m, "Construct_circle_2"))
@@ -611,26 +611,26 @@ void export_kernel_module(py::module_& m) {
            { return ctr(center, squared_radius, orientation); },
            py::arg("center"), py::arg("squared_radius"),
            py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructCircle_2_operator)
+         doc::Kernel_ConstructCircle_2_operator_op)
       .def("__call__",
            [](Construct_circle_2 ctr, const Pnt_2& center,
               const Orientation& orientation)
            { return ctr(center, orientation); },
            py::arg("center"), py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructCircle_2_operator_1)
+         doc::Kernel_ConstructCircle_2_operator_op_1)
       .def("__call__",
            [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q,
               const Pnt_2& r)
            { return ctr(p, q, r); },
            py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_ConstructCircle_2_operator_2)
+         doc::Kernel_ConstructCircle_2_operator_op_2)
       .def("__call__",
            [](Construct_circle_2 ctr, const Pnt_2& p, const Pnt_2& q,
               const Orientation& orientation)
            { return ctr(p, q, orientation); },
            py::arg("p"), py::arg("q"),
            py::arg("orientation") = CGAL::COUNTERCLOCKWISE,
-         doc::Kernel_ConstructCircle_2_operator_3)
+         doc::Kernel_ConstructCircle_2_operator_op_3)
       ;
 
   if (! add_attr<Construct_point_on_3>(m, "Construct_point_on_3"))
@@ -640,25 +640,25 @@ void export_kernel_module(py::module_& m) {
            [](Construct_point_on_3 ctr, const Line_3& l, const FT& i)
            { return ctr(l, i); },
            py::arg("l"), py::arg("i"),
-         doc::Kernel_ConstructPointOn_3_operator)
+         doc::Kernel_ConstructPointOn_3_operator_op)
       .def("__call__",
            [](Construct_point_on_3 ctr, const Line_3& l) { return ctr(l); },
            py::arg("l"),
-         doc::Kernel_ConstructPointOn_3_operator_1)
+         doc::Kernel_ConstructPointOn_3_operator_op_1)
       .def("__call__",
            [](Construct_point_on_3 ctr, const Plane_3& h) { return ctr(h); },
            py::arg("h"),
-         doc::Kernel_ConstructPointOn_3_operator_2)
+         doc::Kernel_ConstructPointOn_3_operator_op_2)
       .def("__call__",
            [](Construct_point_on_3 ctr, const Ray_3& r, const FT& i)
            { return ctr(r, i); },
            py::arg("r"), py::arg("i"),
-         doc::Kernel_ConstructPointOn_3_operator_3)
+         doc::Kernel_ConstructPointOn_3_operator_op_3)
       .def("__call__",
            [](Construct_point_on_3 ctr, const Segment_3& s, int i)
            { return ctr(s, i); },
            py::arg("s"), py::arg("i"),
-         doc::Kernel_ConstructPointOn_3_operator_4)
+         doc::Kernel_ConstructPointOn_3_operator_op_4)
       ;
 
   if (! add_attr<Compute_x_2>(m, "Compute_x_2"))
@@ -667,11 +667,11 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Compute_x_2 ctr, const Point_2& p) { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeX_2_operator)
+         doc::Kernel_ComputeX_2_operator_op)
       .def("__call__",
            [](Compute_x_2 ctr, const Vector_2& v) { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeX_2_operator_1)
+         doc::Kernel_ComputeX_2_operator_op_1)
       ;
 
   if (! add_attr<Compute_y_2>(m, "Compute_y_2"))
@@ -680,11 +680,11 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Compute_y_2 ctr, const Point_2& p) { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeY_2_operator)
+         doc::Kernel_ComputeY_2_operator_op)
       .def("__call__",
            [](Compute_y_2 ctr, const Vector_2& v) { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeY_2_operator_1)
+         doc::Kernel_ComputeY_2_operator_op_1)
       ;
 
   if (! add_attr<Compute_x_3>(m, "Compute_x_3"))
@@ -693,11 +693,11 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Compute_x_3 ctr, const Point_3& p) { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeX_3_operator)
+         doc::Kernel_ComputeX_3_operator_op)
       .def("__call__",
            [](Compute_x_3 ctr, const Vector_3& v) { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeX_3_operator_1)
+         doc::Kernel_ComputeX_3_operator_op_1)
       ;
 
   if (! add_attr<Compute_y_3>(m, "Compute_y_3"))
@@ -706,11 +706,11 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Compute_y_3 ctr, const Point_3& p) { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeY_3_operator)
+         doc::Kernel_ComputeY_3_operator_op)
       .def("__call__",
            [](Compute_y_3 ctr, const Vector_3& v) { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeY_3_operator_1)
+         doc::Kernel_ComputeY_3_operator_op_1)
       ;
 
   if (! add_attr<Compute_z_3>(m, "Compute_z_3"))
@@ -719,11 +719,11 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Compute_z_3 ctr, const Point_3& p) { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeZ_3_operator)
+         doc::Kernel_ComputeZ_3_operator_op)
       .def("__call__",
            [](Compute_z_3 ctr, const Vector_3& v) { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeZ_3_operator_1)
+         doc::Kernel_ComputeZ_3_operator_op_1)
       ;
 
   if (! add_attr<Compute_squared_length_2>(m, "Compute_squared_length_2"))
@@ -733,11 +733,11 @@ void export_kernel_module(py::module_& m) {
            [](Compute_squared_length_2 ctr, const Vector_2& v)
            { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeSquaredLength_2_operator)
+         doc::Kernel_ComputeSquaredLength_2_operator_op)
       .def("__call__",
            [](Compute_squared_length_2 ctr, const Seg_2& s) { return ctr(s); },
          py::arg("p"),
-         doc::Kernel_ComputeSquaredLength_2_operator_1)
+         doc::Kernel_ComputeSquaredLength_2_operator_op_1)
       ;
 
   if (! add_attr<Compute_squared_length_3>(m, "Compute_squared_length_3"))
@@ -747,11 +747,11 @@ void export_kernel_module(py::module_& m) {
            [](Compute_squared_length_3 ctr, const Vector_3& v)
            { return ctr(v); },
            py::arg("v"),
-         doc::Kernel_ComputeSquaredLength_3_operator)
+         doc::Kernel_ComputeSquaredLength_3_operator_op)
       .def("__call__",
            [](Compute_squared_length_3 ctr, const Seg_3& s) { return ctr(s); },
            py::arg("p"),
-         doc::Kernel_ComputeSquaredLength_3_operator_1)
+         doc::Kernel_ComputeSquaredLength_3_operator_op_1)
       ;
 
   if (! add_attr<Construct_scaled_vector_2>(m, "Construct_scaled_vector_2"))
@@ -761,12 +761,12 @@ void export_kernel_module(py::module_& m) {
            [](Construct_scaled_vector_2 ctr, const Vector_2& v, const RT& scale)
            { return ctr(v, scale); },
            py::arg("v"), py::arg("scale"),
-         doc::Kernel_ConstructScaledVector_2_operator)
+         doc::Kernel_ConstructScaledVector_2_operator_op)
       .def("__call__",
            [](Construct_scaled_vector_2 ctr, const Vector_2& v, const FT& scale)
            { return ctr(v, scale); },
            py::arg("v"), py::arg("scale"),
-         doc::Kernel_ConstructScaledVector_2_operator_1)
+         doc::Kernel_ConstructScaledVector_2_operator_op_1)
       ;
 
   if (! add_attr<Construct_scaled_vector_3>(m, "Construct_scaled_vector_3"))
@@ -776,12 +776,12 @@ void export_kernel_module(py::module_& m) {
            [](Construct_scaled_vector_3 ctr, const Vector_3& v, const RT& scale)
            { return ctr(v, scale); },
            py::arg("v"), py::arg("scale"),
-         doc::Kernel_ConstructScaledVector_3_operator)
+         doc::Kernel_ConstructScaledVector_3_operator_op)
       .def("__call__",
            [](Construct_scaled_vector_3 ctr, const Vector_3& v, const FT& scale)
            { return ctr(v, scale); },
            py::arg("v"), py::arg("scale"),
-         doc::Kernel_ConstructScaledVector_3_operator_1)
+         doc::Kernel_ConstructScaledVector_3_operator_op_1)
       ;
 
   if (! add_attr<Construct_sum_of_vectors_2>(m, "Construct_sum_of_vectors_2"))
@@ -792,7 +792,7 @@ void export_kernel_module(py::module_& m) {
               const Vector_2& v2)
            { return ctr(v1, v2); },
            py::arg("v1"), py::arg("v2"),
-         doc::Kernel_ConstructSumOfVectors_2_operator)
+         doc::Kernel_ConstructSumOfVectors_2_operator_op)
       ;
 
   if (! add_attr<Construct_sum_of_vectors_3>(m, "Construct_sum_of_vectors_3"))
@@ -803,7 +803,7 @@ void export_kernel_module(py::module_& m) {
               const Vector_3& v2)
            { return ctr(v1, v2); },
            py::arg("v1"), py::arg("v2"),
-         doc::Kernel_ConstructSumOfVectors_3_operator)
+         doc::Kernel_ConstructSumOfVectors_3_operator_op)
       ;
 
   if (! add_attr<Compute_scalar_product_2>(m, "Compute_scalar_product_2"))
@@ -813,7 +813,7 @@ void export_kernel_module(py::module_& m) {
            [](Compute_scalar_product_2 ctr, const Vector_2& v, const Vector_2& w)
            { return ctr(v, w); },
            py::arg("v"), py::arg("w"),
-         doc::Kernel_ComputeScalarProduct_2_operator)
+         doc::Kernel_ComputeScalarProduct_2_operator_op)
       ;
 
   if (! add_attr<Compute_scalar_product_3>(m, "Compute_scalar_product_3"))
@@ -823,7 +823,7 @@ void export_kernel_module(py::module_& m) {
            [](Compute_scalar_product_3 ctr, const Vector_3& v, const Vector_3& w)
            { return ctr(v, w); },
            py::arg("v"), py::arg("w"),
-         doc::Kernel_ComputeScalarProduct_3_operator)
+         doc::Kernel_ComputeScalarProduct_3_operator_op)
       ;
 
   if (! add_attr<Construct_cross_product_vector_3>(m, "Construct_cross_product_vector_3"))
@@ -834,7 +834,7 @@ void export_kernel_module(py::module_& m) {
               const Vector_3& w)
            { return ctr(v, w); },
            py::arg("v"), py::arg("w"),
-         doc::Kernel_ConstructCrossProductVector_3_operator)
+         doc::Kernel_ConstructCrossProductVector_3_operator_op)
       ;
 
   if (! add_attr<Construct_center_2>(m, "Construct_center_2"))
@@ -843,7 +843,7 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Construct_center_2 ctr, const Circle_2& c) { return ctr(c); },
            py::arg("c"),
-         doc::Kernel_ConstructCenter_2_operator)
+         doc::Kernel_ConstructCenter_2_operator_op)
       ;
 
   if (! add_attr<Construct_center_3>(m, "Construct_center_3"))
@@ -852,13 +852,13 @@ void export_kernel_module(py::module_& m) {
       .def("__call__",
            [](Construct_center_3 ctr, const Sphere_3& s) { return ctr(s); }, ri,
            py::arg("s"),
-         doc::Kernel_ConstructCenter_3_operator)
+         doc::Kernel_ConstructCenter_3_operator_op)
 
 #if CGAL_VERSION_NR > 1060100900
       .def("__call__",
            [](Construct_center_3 ctr, const Circle_3& c) { return ctr(c); }, ri,
            py::arg("c"),
-         doc::Kernel_ConstructCenter_3_operator_1)
+         doc::Kernel_ConstructCenter_3_operator_op_1)
 #endif
       ;
 
@@ -869,23 +869,23 @@ void export_kernel_module(py::module_& m) {
            [](Compute_squared_radius_2 ctr, const Circle_2& c)
            { return ctr(c); },
            py::arg("c"),
-         doc::Kernel_ComputeSquaredRadius_2_operator)
+         doc::Kernel_ComputeSquaredRadius_2_operator_op)
       .def("__call__",
            [](Compute_squared_radius_2 ctr, const Point_2& p,
               const Point_2& q, const Point_2& r)
            { return ctr(p, q, r); },
            py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_ComputeSquaredRadius_2_operator_1)
+         doc::Kernel_ComputeSquaredRadius_2_operator_op_1)
       .def("__call__",
            [](Compute_squared_radius_2 ctr, const Point_2& p, const Point_2& q)
            { return ctr(p, q); },
            py::arg("p"), py::arg("q"),
-         doc::Kernel_ComputeSquaredRadius_2_operator_2)
+         doc::Kernel_ComputeSquaredRadius_2_operator_op_2)
       .def("__call__",
            [](Compute_squared_radius_2 ctr, const Point_2& p)
            { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeSquaredRadius_2_operator_3)
+         doc::Kernel_ComputeSquaredRadius_2_operator_op_3)
       ;
 
   if (! add_attr<Compute_squared_radius_3>(m, "Compute_squared_radius_3"))
@@ -895,34 +895,34 @@ void export_kernel_module(py::module_& m) {
            [](Compute_squared_radius_3 ctr, const Sphere_3& s)
            { return ctr(s); },
            py::arg("s"),
-         doc::Kernel_ComputeSquaredRadius_3_operator)
+         doc::Kernel_ComputeSquaredRadius_3_operator_op)
       .def("__call__",
            [](Compute_squared_radius_3 ctr, const Circle_3& c)
            { return ctr(c); },
            py::arg("c"),
-         doc::Kernel_ComputeSquaredRadius_3_operator_1)
+         doc::Kernel_ComputeSquaredRadius_3_operator_op_1)
       .def("__call__",
            [](Compute_squared_radius_3 ctr, const Point_3& p,
               const Point_3& q, const Point_3& r, const Point_3& s)
            { return ctr(p, q, r, s); },
            py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
-         doc::Kernel_ComputeSquaredRadius_3_operator_2)
+         doc::Kernel_ComputeSquaredRadius_3_operator_op_2)
       .def("__call__",
            [](Compute_squared_radius_3 ctr, const Point_3& p,
               const Point_3& q, const Point_3& r)
            { return ctr(p, q, r); },
            py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_ComputeSquaredRadius_3_operator_3)
+         doc::Kernel_ComputeSquaredRadius_3_operator_op_3)
       .def("__call__",
            [](Compute_squared_radius_3 ctr, const Point_3& p, const Point_3& q)
            { return ctr(p, q); },
            py::arg("p"), py::arg("q"),
-         doc::Kernel_ComputeSquaredRadius_3_operator_4)
+         doc::Kernel_ComputeSquaredRadius_3_operator_op_4)
       .def("__call__",
            [](Compute_squared_radius_3 ctr, const Point_3& p)
            { return ctr(p); },
            py::arg("p"),
-         doc::Kernel_ComputeSquaredRadius_3_operator_5)
+         doc::Kernel_ComputeSquaredRadius_3_operator_op_5)
       ;
 
   if (! add_attr<Collinear_2>(m, "Collinear_2"))
@@ -932,7 +932,7 @@ void export_kernel_module(py::module_& m) {
            [](Collinear_2 ctr, const Pnt_2& p, const Pnt_2& q, const Pnt_2& r)
            { return ctr(p, q, r); },
            py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_Collinear_2_operator)
+         doc::Kernel_Collinear_2_operator_op)
       ;
 
   if (! add_attr<Collinear_3>(m, "Collinear_3"))
@@ -942,7 +942,7 @@ void export_kernel_module(py::module_& m) {
            [](Collinear_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
            { return ctr(p, q, r); },
            py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_Collinear_3_operator)
+         doc::Kernel_Collinear_3_operator_op)
       ;
 
 
@@ -959,15 +959,15 @@ void export_kernel_module(py::module_& m) {
                                     const Pnt_3&);
   m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>),
         py::arg("v1"), py::arg("v2"),
-         doc::Kernel_Angle_2_operator);
+         doc::Kernel_Angle_2_operator_op);
   m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_Angle_2_operator_1);
+         doc::Kernel_Angle_2_operator_op_1);
   m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), "angle() free function.");
   m.def("angle", static_cast<Angle_fnc4>(&CGAL::angle<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_Angle_3_operator);
+         doc::Kernel_Angle_3_operator_op);
   m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), "angle() free function.");
 
@@ -979,13 +979,13 @@ void export_kernel_module(py::module_& m) {
   m.def("are_ordered_along_line",
         static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_AreOrderedAlongLine_2_operator);
+         doc::Kernel_AreOrderedAlongLine_2_operator_op);
 
   using Asoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_strictly_ordered_along_line",
         static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_AreStrictlyOrderedAlongLine_2_operator);
+         doc::Kernel_AreStrictlyOrderedAlongLine_2_operator_op);
 
   using Bc_fnc1 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&);
   using Bc_fnc2 =
@@ -1040,19 +1040,19 @@ void export_kernel_module(py::module_& m) {
   m.def("collinear_are_ordered_along_line",
         static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_CollinearAreOrderedAlongLine_2_operator);
+         doc::Kernel_CollinearAreOrderedAlongLine_2_operator_op);
 
   using Casoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear_are_strictly_ordered_along_line",
 
         static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_CollinearAreStrictlyOrderedAlongLine_2_operator);
+         doc::Kernel_CollinearAreStrictlyOrderedAlongLine_2_operator_op);
 
   using Clr_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>),
         py::arg("p"), py::arg("q"), py::arg("r"),
-         doc::Kernel_Collinear_2_operator);
+         doc::Kernel_Collinear_2_operator_op);
 
   using Cdtp_fnc =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -1085,7 +1085,7 @@ void export_kernel_module(py::module_& m) {
     CGAL::Comparison_result(*)(const Segment_2&, const Segment_2&);
   m.def("compare_slope", static_cast<Cs_fnc1>(&CGAL::compare_slope<Kernel>),
         py::arg("line1"), py::arg("line2"),
-         doc::Kernel_CompareSlope_2_operator);
+         doc::Kernel_CompareSlope_2_operator_op);
   m.def("compare_slope", static_cast<Cs_fnc2>(&CGAL::compare_slope<Kernel>),
         py::arg("segment1"), py::arg("segment2"), "compare_slope() free function.");
 
@@ -1105,7 +1105,7 @@ void export_kernel_module(py::module_& m) {
                                const Line_2&);
   m.def("compare_x", static_cast<Cx_fnc1>(&CGAL::compare_x<Kernel>),
         py::arg("p"), py::arg("q"),
-         doc::Kernel_CompareX_2_operator);
+         doc::Kernel_CompareX_2_operator_op);
   m.def("compare_x", static_cast<Cx_fnc2>(&CGAL::compare_x<Kernel>),
         py::arg("point"), py::arg("line1"), py::arg("line2"), "compare_x() free function.");
   m.def("compare_x", static_cast<Cx_fnc3>(&CGAL::compare_x<Kernel>),
@@ -1116,7 +1116,7 @@ void export_kernel_module(py::module_& m) {
   using Cxy_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_xy", static_cast<Cxy_fnc>(&CGAL::compare_xy<Kernel>),
         py::arg("p"), py::arg("q"),
-         doc::Kernel_CompareXY_2_operator);
+         doc::Kernel_CompareXY_2_operator_op);
 
   using Cxaty_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&);
   using Cxaty_fnc2 =
@@ -1128,7 +1128,7 @@ void export_kernel_module(py::module_& m) {
                                const Line_2&);
   m.def("compare_x_at_y",
         static_cast<Cxaty_fnc1>(&CGAL::compare_x_at_y<Kernel>),
-         doc::Kernel_CompareXAtY_2_operator);
+         doc::Kernel_CompareXAtY_2_operator_op);
   m.def("compare_x_at_y",
         static_cast<Cxaty_fnc2>(&CGAL::compare_x_at_y<Kernel>), "compare_x_at_y() free function.");
   m.def("compare_x_at_y",
@@ -1149,7 +1149,7 @@ void export_kernel_module(py::module_& m) {
     CGAL::Comparison_result(*)(const Pnt_2&, const Segment_2&, const Segment_2&);
   m.def("compare_y_at_x",
         static_cast<Cyatx_fnc1>(&CGAL::compare_y_at_x<Kernel>),
-         doc::Kernel_CompareYAtX_2_operator);
+         doc::Kernel_CompareYAtX_2_operator_op);
   m.def("compare_y_at_x",
         static_cast<Cyatx_fnc2>(&CGAL::compare_y_at_x<Kernel>), "compare_y_at_x() free function.");
   m.def("compare_y_at_x",
@@ -1158,7 +1158,7 @@ void export_kernel_module(py::module_& m) {
         static_cast<Cyatx_fnc4>(&CGAL::compare_y_at_x<Kernel>), "compare_y_at_x() free function.");
   m.def("compare_y_at_x",
         static_cast<Cyatx_fnc5>(&CGAL::compare_y_at_x<Kernel>),
-         doc::Kernel_CompareYAtX_2_operator_1);
+         doc::Kernel_CompareYAtX_2_operator_op_1);
   m.def("compare_y_at_x",
         static_cast<Cyatx_fnc6>(&CGAL::compare_y_at_x<Kernel>), "compare_y_at_x() free function.");
 
@@ -1172,7 +1172,7 @@ void export_kernel_module(py::module_& m) {
                                const Line_2&);
   m.def("compare_y", static_cast<Cy_fnc1>(&CGAL::compare_y<Kernel>), "compare_y() free function.");
   m.def("compare_y", static_cast<Cy_fnc3>(&CGAL::compare_y<Kernel>),
-         doc::Kernel_CompareY_2_operator);
+         doc::Kernel_CompareY_2_operator_op);
 
   using Cyx_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>), "compare_yx() free function.");
@@ -1323,7 +1323,7 @@ void export_kernel_module(py::module_& m) {
   using Cmp3_fnc = CGAL::Comparison_result(*)(const Pnt_3&, const Pnt_3&);
   m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>),
         py::arg("p"), py::arg("q"),
-         doc::Kernel_CompareZ_3_operator);
+         doc::Kernel_CompareZ_3_operator_op);
 
   //! From number_utils.h. \todo move to algebraic foundations
   using Cmp_fnc = CGAL::Comparison_result(*)(const FT&, const FT&);

@@ -34,9 +34,30 @@ def escape_cpp(s):
 
 
 def make_identifier(name):
+    operator_map = {
+        "operator==": "operator_eq",
+        "operator!=": "operator_ne",
+        "operator<=": "operator_le",
+        "operator>=": "operator_ge",
+        "operator<": "operator_lt",
+        "operator>": "operator_gt",
+        "operator()": "operator_op",
+        "operator[]": "operator",
+        "operator+": "operator_plus",
+        "operator-": "operator_minus",
+        "operator*": "operator_mul",
+        "operator/": "operator_div",
+        "operator%": "operator_mod",
+        "operator<<": "operator_op",
+        "operator>>": "operator_op",
+        "operator=": "operator_op",
+    }
+    for old, new in sorted(operator_map.items(), key=lambda kv: len(kv[0]), reverse=True):
+        name = name.replace(old, new)
     s = re.sub(r'[^A-Za-z0-9_]', '_', name)
     s = re.sub(r'_+', '_', s)
-    return s.strip('_')
+    s = s.strip('_')
+    return "operator_op" if s == "operator" else s
 
 
 def strip_cgal_namespace(name):

@@ -51,7 +51,7 @@ void export_arr_segment_traits_2(py::module_& m) {
   if (add_attr<Gt>(m, "Arr_segment_traits_2")) return;
 
   py::class_<Gt, Kernel> traits_c(m, "Arr_segment_traits_2",
-                                      doc::CGAL_Arr_segment_traits_2__class__);
+                                      doc::Arr_segment_traits_2__class__);
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
@@ -82,13 +82,13 @@ void export_arr_segment_traits_2(py::module_& m) {
     .def("source", [](const Xcv& xcv)->const Pnt& { return xcv.source(); }, ri)
     .def("target", [](const Xcv& xcv)->const Pnt& { return xcv.target(); }, ri)
     .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri,
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_line)
+         doc::Arr_segment_traits_2_X_monotone_curve_2_line)
     .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); },
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_is_vertical)
+         doc::Arr_segment_traits_2_X_monotone_curve_2_is_vertical)
     .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri,
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_left)
+         doc::Arr_segment_traits_2_X_monotone_curve_2_left)
     .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri,
-         doc::CGAL_Arr_segment_traits_2_X_monotone_curve_2_right)
+         doc::Arr_segment_traits_2_X_monotone_curve_2_right)
     .def("set_left",
          [](Xcv& xcv, const Pnt& p)->void { return xcv.set_left(p); })
     .def("set_right",
