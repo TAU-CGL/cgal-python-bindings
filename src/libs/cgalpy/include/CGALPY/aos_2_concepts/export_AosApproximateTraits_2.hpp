@@ -17,7 +17,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
 
+#include "cgalpy/Aos2_docstrings.hpp"
+
 namespace py = nanobind;
+namespace aos2_approximate_doc = cgalpy::docstrings::Arrangement_on_surface_2;
 
 // Not all traits classes support the type T::Approximate_point_2 (and the
 // operator:
@@ -64,14 +67,17 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
 
   if (! add_attr<Approximate_2>(c, "Approximate_2")) {
-    classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2");
+    classes.m_approximate_2 = new py::class_<Approximate_2>(
+      c, "Approximate_2",
+      aos2_approximate_doc::AosApproximateTraits_2_Approximate_2);
     using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
     classes.m_approximate_2->def("__call__",
                                  static_cast<ovld1>(&Approximate_2::operator()));
     export_approximate_point<T>(c, concepts, true);
   }
 
-  c.def("approximate_2_object", &T::approximate_2_object);
+  c.def("approximate_2_object", &T::approximate_2_object,
+        aos2_approximate_doc::AosApproximateTraits_2_approximate_2_object);
 
   exported = true;
 }

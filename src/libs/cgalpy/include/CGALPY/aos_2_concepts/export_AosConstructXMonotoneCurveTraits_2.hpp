@@ -15,7 +15,10 @@
 #include "CGALPY/aos_2_concepts/export_AosBasicTraits_2.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 
+#include "cgalpy/Aos2_docstrings.hpp"
+
 namespace py = nanobind;
+namespace aos2_construct_x_monotone_doc = cgalpy::docstrings::Arrangement_on_surface_2;
 
 template <typename T, typename C, typename Concepts>
 void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
@@ -32,11 +35,14 @@ void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
 
   using Ctr_xcv_fnc = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&) const;
   classes.m_construct_x_monotone_curve_2 =
-    new py::class_<Ctr_xcv>(c, "Construct_x_monotone_curve_2");
+    new py::class_<Ctr_xcv>(
+      c, "Construct_x_monotone_curve_2",
+      aos2_construct_x_monotone_doc::AosConstructXMonotoneCurveTraits_2_Construct_x_monotone_curve_2);
   classes.m_construct_x_monotone_curve_2->
     def("__call__", static_cast<Ctr_xcv_fnc>(&Ctr_xcv::operator()));
 
-  c.def("construct_x_monotone_curve_2_object", &T::construct_x_monotone_curve_2_object);
+  c.def("construct_x_monotone_curve_2_object", &T::construct_x_monotone_curve_2_object,
+        aos2_construct_x_monotone_doc::AosConstructXMonotoneCurveTraits_2_construct_x_monotone_curve_2_object);
 
   exported = true;
 }
