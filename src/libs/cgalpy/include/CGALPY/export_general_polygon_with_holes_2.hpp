@@ -50,9 +50,10 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
   using Gpwh = Type;
   using Gpgn = typename Gpwh::General_polygon_2;
 
-  pwh_c.def(py::init<Gpwh&>())
-    .def(py::init<Gpgn&>())
-    .def("__init__", &init_polygon_with_holes_2<Gpwh>)
+  pwh_c.def(py::init<Gpwh&>(), py::arg("other"))
+    .def(py::init<Gpgn&>(), py::arg("outer_boundary"))
+    .def("__init__", &init_polygon_with_holes_2<Gpwh>,
+         py::arg("outer_boundary"), py::arg("holes"))
     .def("is_unbounded", &Gpwh::is_unbounded)
 
     // Use `py::overload_cast` to cast overloaded functions.
@@ -64,7 +65,8 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
          py::rv_policy::reference_internal)
     .def("outer_boundary",
          py::overload_cast<>(&Gpwh::outer_boundary, py::const_))
-    .def("add_hole", py::overload_cast<const Gpgn&>(&Gpwh::add_hole))
+    .def("add_hole", py::overload_cast<const Gpgn&>(&Gpwh::add_hole),
+         py::arg("hole"))
     .def("erase_hole", &Gpwh::erase_hole)
     .def("has_holes", &Gpwh::has_holes)
     .def("number_of_holes", &Gpwh::number_of_holes)

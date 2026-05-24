@@ -118,14 +118,17 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
   // will be made to wrap `Polygon_2` and `Polygon_with_holes_2` as
   // "General_polygon_2" and `General_polygon_with_holes_2`, respectively.
   if (! add_attr<Pgn>(c, "Polygon_2")) {
-    classes.m_polygon_2 = new py::class_<Pgn>(c, "Polygon_2");
+    classes.m_polygon_2 = new py::class_<Pgn>(
+      c, "Polygon_2", bso2_doc::GeneralPolygon_2_class);
     export_general_polygon_2(*(classes.m_polygon_2));
   }
 
   // Polygon_with_holes_2
   if (! add_attr<Pwh>(c, "Polygon_with_holes_2")) {
     classes.m_polygon_with_holes_2 =
-      new py::class_<Pwh>(c, "Polygon_with_holes_2");
+      new py::class_<Pwh>(
+        c, "Polygon_with_holes_2",
+        bso2_doc::GpsTraitsGeneralPolygonWithHoles_2_class);
     export_general_polygon_with_holes_2(*(classes.m_polygon_with_holes_2));
   }
 

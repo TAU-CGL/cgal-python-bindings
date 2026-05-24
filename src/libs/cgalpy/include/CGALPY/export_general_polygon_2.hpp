@@ -17,6 +17,8 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/make_iterator.hpp"
 
+#include "cgalpy/Bso2_docstrings.hpp"
+
 #include <CGAL/Gps_circle_segment_traits_2.h>
 
 // The following might be needed in the future when extraction support is added
@@ -28,6 +30,7 @@
 // #include <CGAL/Arr_Bezier_curve_traits_2.h>
 
 namespace py = nanobind;
+namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
 
 namespace bso2 {
 
@@ -48,9 +51,12 @@ template <typename GeneralPolygon_2>
 inline void
 export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c) {
   using Gpgn = GeneralPolygon_2;
-  pgn_c.def(py::init<>())
-    .def(py::init<const Gpgn&>())
-    .def("__init__", &bso2::init_polygon_2<Gpgn>)
+  pgn_c.def(py::init<>(),
+         bso2_doc::GeneralPolygon_2_GeneralPolygon_2)
+    .def(py::init<const Gpgn&>(), py::arg("other"),
+         bso2_doc::GeneralPolygon_2_GeneralPolygon_2_1)
+    .def("__init__", &bso2::init_polygon_2<Gpgn>, py::arg("curves"),
+         bso2_doc::GeneralPolygon_2_init)
     .def("push_back", &Gpgn::push_back)
     .def("orientation", &Gpgn::orientation)
     .def("is_empty", &Gpgn::is_empty)
@@ -69,7 +75,8 @@ export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c) {
   pgn_c.def("curves",
             [] (const Gpgn& pgn)
             { return make_iterator(pgn.curves_begin(), pgn.curves_end()); },
-            py::keep_alive<0, 1>());
+            py::keep_alive<0, 1>(),
+            bso2_doc::GeneralPolygon_2_curves_begin_1);
 
   add_insertion(pgn_c, "__str__");
   add_insertion(pgn_c, "__repr__");

@@ -274,12 +274,15 @@ void export_boolean_set_operations_2(py::module_& m) {
 #else
 
   if (! add_attr<Pgn>(m, "General_polygon_2")) {
-    auto cs_pgn_c = py::class_<Pgn>(m, "General_polygon_2");
+    auto cs_pgn_c = py::class_<Pgn>(
+      m, "General_polygon_2", bso2_doc::GeneralPolygon_2_class);
     export_general_polygon_2<Pgn>(cs_pgn_c);
   }
 
   if (! add_attr<Pwh>(m, "General_polygon_with_holes_2")) {
-    auto cs_pwh_c = py::class_<Pwh>(m, "General_polygon_with_holes_2");
+    auto cs_pwh_c = py::class_<Pwh>(
+      m, "General_polygon_with_holes_2",
+      bso2_doc::GpsTraitsGeneralPolygonWithHoles_2_class);
     export_general_polygon_with_holes_2<Pwh>(cs_pwh_c);
   }
 
