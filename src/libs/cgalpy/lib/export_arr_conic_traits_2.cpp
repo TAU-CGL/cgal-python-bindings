@@ -16,6 +16,8 @@
 
 #include <nanobind/nanobind.h>
 
+#include <boost/math/special_functions/ellint_2.hpp>
+
 #include <CGAL/Arr_conic_traits_2.h>
 #include <CGAL/Cartesian.h>
 #include <CGAL/CORE_algebraic_number_traits.h>

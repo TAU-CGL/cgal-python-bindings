@@ -12,7 +12,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 
+#include "cgalpy/Env3_docstrings.hpp"
+
 namespace py = nanobind;
+namespace env3_doc = cgalpy::docstrings::Envelope_3;
 
 namespace env3 {
 
@@ -81,20 +84,28 @@ void export_envelope_3(py::module_& m) {
     py::class_<Edos, Aos> edos_c(m, "Envelope_diagram_on_surface_2");
     edos_c.def(py::init<>())
       .def(py::init<const Edos&>())
-      .def(py::init<const Traits*>())
+      .def(py::init<const Traits*>(), py::arg("traits"))
       ;
   }
 
   if (! add_attr<Ed>(m, "Envelope_diagram_2")) {
-    py::class_<Ed, Edos> ed_c(m, "Envelope_diagram_2");
-    ed_c.def(py::init<>())
-      .def(py::init<const Ed&>())
-      .def(py::init<const Traits*>())
+    py::class_<Ed, Edos> ed_c(m, "Envelope_diagram_2",
+                            env3_doc::Envelope_diagram_2_class);
+    ed_c.def(py::init<>(),
+             env3_doc::Envelope_diagram_2_Envelope_diagram_2)
+      .def(py::init<const Ed&>(), py::arg("other"),
+           env3_doc::Envelope_diagram_2_Envelope_diagram_2_1)
+      .def(py::init<const Traits*>(), py::arg("traits"),
+           env3_doc::Envelope_diagram_2_Envelope_diagram_2_2)
       ;
   }
 
-  m.def("lower_envelope_3", &env3::lower_envelope_3);
-  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3);
-  m.def("upper_envelope_3", &env3::upper_envelope_3);
-  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3);
+  m.def("lower_envelope_3", &env3::lower_envelope_3,
+        py::arg("surfaces"), env3_doc::lower_envelope_3);
+  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3,
+        py::arg("surfaces"), env3_doc::lower_envelope_xy_monotone_3);
+  m.def("upper_envelope_3", &env3::upper_envelope_3,
+        py::arg("surfaces"), env3_doc::upper_envelope_3);
+  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3,
+        py::arg("surfaces"), env3_doc::upper_envelope_xy_monotone_3);
 }
