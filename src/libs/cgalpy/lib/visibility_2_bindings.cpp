@@ -13,7 +13,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+#include "cgalpy/Vis2_docstrings.hpp"
+
 namespace py = nanobind;
+namespace vis2_doc = cgalpy::docstrings::Visibility_2;
 
 namespace vis2 {
 
@@ -38,29 +41,49 @@ void export_visibility_2(py::module_& m) {
   using Face = vis2::Face;
 
   if (! add_attr<Spv>(m, "Simple_polygon_visibility_2")) {
-    py::class_<Spv> spv_c(m, "Simple_polygon_visibility_2");
-    spv_c.def(py::init<>())
-      .def(py::init<const Arr&>())
-      .def("is_attached", &Spv::is_attached)
-      .def("attach", &Spv::attach)
-      .def("detach", &Spv::detach)
-      .def("arrangement_2", &Spv::arrangement_2)
-      .def("compute_visibility", vis2::compute_visibility1<Spv>)
-      .def("compute_visibility", vis2::compute_visibility2<Spv>)
+    py::class_<Spv> spv_c(m, "Simple_polygon_visibility_2",
+                          vis2_doc::Simple_polygon_visibility_2_class);
+    spv_c.def(py::init<>(), vis2_doc::Visibility_2_Visibility_2)
+      .def(py::init<const Arr&>(), py::arg("arr"),
+           vis2_doc::Visibility_2_Visibility_2_1)
+      .def("is_attached", &Spv::is_attached,
+           vis2_doc::Visibility_2_is_attached)
+      .def("attach", &Spv::attach, py::arg("arr"),
+           vis2_doc::Simple_polygon_visibility_2_attach)
+      .def("detach", &Spv::detach,
+           vis2_doc::Visibility_2_detach)
+      .def("arrangement_2", &Spv::arrangement_2,
+           vis2_doc::Visibility_2_arrangement_2)
+      .def("compute_visibility", vis2::compute_visibility1<Spv>,
+           py::arg("q"), py::arg("face"), py::arg("out_arr"),
+           vis2_doc::Visibility_2_compute_visibility)
+      .def("compute_visibility", vis2::compute_visibility2<Spv>,
+           py::arg("q"), py::arg("halfedge"), py::arg("out_arr"),
+           vis2_doc::Visibility_2_compute_visibility_1)
       ;
   }
 
   using Tev = vis2::Triangular_expansion_visibility_2;
   if (! add_attr<Tev>(m, "Triangular_expansion_visibility_2")) {
-    py::class_<Tev> tev_c(m, "Triangular_expansion_visibility_2");
-    tev_c.def(py::init<>())
-      .def(py::init<const Arr&>())
-      .def("is_attached", &Tev::is_attached)
-      .def("attach", &Tev::attach)
-      .def("detach", &Tev::detach)
-      .def("arrangement_2", &Tev::arrangement_2)
-      .def("compute_visibility", vis2::compute_visibility1<Tev>)
-      .def("compute_visibility", vis2::compute_visibility2<Tev>)
+    py::class_<Tev> tev_c(m, "Triangular_expansion_visibility_2",
+                          vis2_doc::Triangular_expansion_visibility_2_class);
+    tev_c.def(py::init<>(), vis2_doc::Visibility_2_Visibility_2)
+      .def(py::init<const Arr&>(), py::arg("arr"),
+           vis2_doc::Visibility_2_Visibility_2_1)
+      .def("is_attached", &Tev::is_attached,
+           vis2_doc::Visibility_2_is_attached)
+      .def("attach", &Tev::attach, py::arg("arr"),
+           vis2_doc::Triangular_expansion_visibility_2_attach)
+      .def("detach", &Tev::detach,
+           vis2_doc::Visibility_2_detach)
+      .def("arrangement_2", &Tev::arrangement_2,
+           vis2_doc::Visibility_2_arrangement_2)
+      .def("compute_visibility", vis2::compute_visibility1<Tev>,
+           py::arg("q"), py::arg("face"), py::arg("out_arr"),
+           vis2_doc::Visibility_2_compute_visibility)
+      .def("compute_visibility", vis2::compute_visibility2<Tev>,
+           py::arg("q"), py::arg("halfedge"), py::arg("out_arr"),
+           vis2_doc::Visibility_2_compute_visibility_1)
       ;
   }
 }
