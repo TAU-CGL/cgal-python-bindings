@@ -15,12 +15,15 @@
 #include "CGALPY/types.hpp"
 #include "CGALPY/polygon_set_2_types.hpp"
 #include "CGALPY/add_extraction.hpp"
+
+#include "cgalpy/Bso2_docstrings.hpp"
 #ifdef CGALPY_HAS_VISUAL
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_polygon_set_2.h>
 #endif
 
 namespace py = nanobind;
+namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
 
 void export_polygon_set_2(py::module_& m) {
   using Gps2 = bso2::General_polygon_set_2;
@@ -29,12 +32,13 @@ void export_polygon_set_2(py::module_& m) {
   using Pgn = bso2::General_polygon_2;
   using Pwh = bso2::General_polygon_with_holes_2;
 
-  py::class_<Ps2, Gps2> ps2_c(m, "Polygon_set_2");
+  py::class_<Ps2, Gps2> ps2_c(
+    m, "Polygon_set_2", bso2_doc::Polygon_set_2_class);
   ps2_c.def(py::init<>())
-    .def(py::init<const Pgn&>())
-    .def(py::init<const Pwh&>())
-    .def(py::init<const Ps2&>())
-    .def(py::init<const Gt&>())
+    .def(py::init<const Pgn&>(), py::arg("polygon"))
+    .def(py::init<const Pwh&>(), py::arg("polygon_with_holes"))
+    .def(py::init<const Ps2&>(), py::arg("other"))
+    .def(py::init<const Gt&>(), py::arg("traits"))
     ;
 
 #ifdef CGALPY_HAS_VISUAL

@@ -19,6 +19,8 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 
+#include "cgalpy/Bso2_docstrings.hpp"
+
 // The following might be needed in the future when extraction support is added
 // to specific curves types. At that point we can add support for extraction
 // of general polygons with holes bounded by curves of the specific types.
@@ -29,6 +31,7 @@
 // #include <CGAL/Arr_Bezier_curve_traits_2.h>
 
 namespace py = nanobind;
+namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
 
 namespace bso2 {
 
@@ -285,10 +288,14 @@ void export_general_polygon_set_2(py::module_& m) {
     .def("symmetric_difference", &bso2::symmetric_difference2)
 
     .def("number_of_polygons_with_holes",
-         &Gpsb2::number_of_polygons_with_holes)
-    .def("is_empty", &Gpsb2::is_empty)
-    .def("is_plane", &Gpsb2::is_plane)
-    .def("clear", &Gpsb2::clear)
+         &Gpsb2::number_of_polygons_with_holes,
+         bso2_doc::General_polygon_set_2_number_of_polygons_with_holes)
+    .def("is_empty", &Gpsb2::is_empty,
+         bso2_doc::General_polygon_set_2_is_empty)
+    .def("is_plane", &Gpsb2::is_plane,
+         bso2_doc::General_polygon_set_2_is_plane)
+    .def("clear", &Gpsb2::clear,
+         bso2_doc::General_polygon_set_2_clear)
 
     // oriented_side
     .def("oriented_side",
@@ -308,10 +315,13 @@ void export_general_polygon_set_2(py::module_& m) {
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
     .def("arrangement_mutable", py::overload_cast<>(&Gpsb2::arrangement), ri)
-    .def("arrangement", py::overload_cast<>(&Gpsb2::arrangement, py::const_), ri)
+    .def("arrangement", py::overload_cast<>(&Gpsb2::arrangement, py::const_), ri,
+         bso2_doc::General_polygon_set_2_arrangement)
 
-    .def("is_valid", &Gpsb2::is_valid)
-    .def("polygons_with_holes", &bso2::polygons_with_holes)
+    .def("is_valid", &Gpsb2::is_valid,
+         bso2_doc::General_polygon_set_2_is_valid)
+    .def("polygons_with_holes", &bso2::polygons_with_holes,
+         bso2_doc::General_polygon_set_2_polygons_with_holes)
     ;
 
   py::class_<Gpsos2, Gpsb2> gpsos2_c(m, "General_polygon_set_on_surface_2");
@@ -320,14 +330,24 @@ void export_general_polygon_set_2(py::module_& m) {
     .def(py::init<const GT&>())
     ;
 
-  py::class_<Gps2, Gpsos2> gps2_c(m, "General_polygon_set_2");
-  gps2_c.def(py::init<>())
-    .def(py::init<const Gps2&>())
-    .def(py::init<const GT&>())
-    .def(py::init<const Pgn&>())
-    .def(py::init<const Pwh&>())
-    .def(py::init<const Pgn&, const GT&>())
-    .def(py::init<const Pwh&, const GT&>())
+  py::class_<Gps2, Gpsos2> gps2_c(
+    m, "General_polygon_set_2", bso2_doc::General_polygon_set_2_class);
+  gps2_c.def(py::init<>(),
+      bso2_doc::General_polygon_set_2_General_polygon_set_2)
+    .def(py::init<const Gps2&>(), py::arg("other"),
+         bso2_doc::General_polygon_set_2_General_polygon_set_2_1)
+    .def(py::init<const GT&>(), py::arg("traits"),
+         bso2_doc::General_polygon_set_2_General_polygon_set_2_2)
+    .def(py::init<const Pgn&>(), py::arg("polygon"),
+         bso2_doc::General_polygon_set_2_General_polygon_set_2_3)
+    .def(py::init<const Pwh&>(), py::arg("polygon_with_holes"),
+         bso2_doc::General_polygon_set_2_General_polygon_set_2_4)
+    .def(py::init<const Pgn&, const GT&>(),
+         py::arg("polygon"), py::arg("traits"),
+         bso2_doc::General_polygon_set_2_General_polygon_set_2_5)
+    .def(py::init<const Pwh&, const GT&>(),
+         py::arg("polygon_with_holes"), py::arg("traits"),
+         bso2_doc::General_polygon_set_2_General_polygon_set_2_6)
 
     // Use `py::overload_cast` to cast overloaded functions.
     // 1. As a convention, add the suffix `_mutable` to the mutable version.
@@ -335,7 +355,8 @@ void export_general_polygon_set_2(py::module_& m) {
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
     .def("arrangement_mutable", py::overload_cast<>(&Gps2::arrangement), ri)
-    .def("arrangement", py::overload_cast<>(&Gps2::arrangement, py::const_))
+    .def("arrangement", py::overload_cast<>(&Gps2::arrangement, py::const_),
+         bso2_doc::General_polygon_set_2_arrangement)
     ;
 
   // Types that have been registered already:
