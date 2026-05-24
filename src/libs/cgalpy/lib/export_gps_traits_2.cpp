@@ -17,10 +17,8 @@
 #include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 
-#include "cgalpy/Bso2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
 
 //
 void export_gps_traits_2(py::module_& m) {

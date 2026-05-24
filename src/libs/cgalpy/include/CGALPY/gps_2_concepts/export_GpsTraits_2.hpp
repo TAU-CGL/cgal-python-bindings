@@ -17,7 +17,10 @@
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 
+#include "cgalpy/Bso2_docstrings.hpp"
+
 namespace py = nanobind;
+namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
 
 namespace bso2 {
 
