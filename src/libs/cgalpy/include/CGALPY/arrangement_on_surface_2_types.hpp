@@ -12,6 +12,8 @@
 
 #include <boost/static_assert.hpp>
 
+#include "CGALPY/nanobind_object_equality.hpp"
+
 #include <CGAL/Arr_dcel.h>
 #include <CGAL/Arrangement_2.h>
 #include <CGAL/Arrangement_with_history_2.h>

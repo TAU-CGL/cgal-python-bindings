@@ -9,6 +9,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
+#include "CGALPY/nanobind_object_equality.hpp"
+
 #include <CGAL/Arr_curve_data_traits_2.h>
 #include <CGAL/Arr_consolidated_curve_data_traits_2.h>
 
@@ -17,13 +19,6 @@
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
-
-namespace CGAL {
-
-inline bool operator==(const py::object a, const py::object b)
-{ return a.equal(b); }
-
-}
 
 namespace aos2 {
 

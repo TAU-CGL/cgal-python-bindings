@@ -24,13 +24,6 @@
 
 namespace py = nanobind;
 
-namespace CGAL {
-
-inline bool operator==(const py::object a, const py::object b)
-{ return a.equal(b); }
-
-}
-
 namespace aos2 {
 
 using Face_const_handle = typename aos2::Face_const_handle;
