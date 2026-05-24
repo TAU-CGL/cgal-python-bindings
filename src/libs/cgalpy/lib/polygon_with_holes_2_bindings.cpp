@@ -16,12 +16,15 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/export_general_polygon_with_holes_2.hpp"
 #include "CGALPY/add_extraction.hpp"
+
+#include "cgalpy/Pol2_docstrings.hpp"
 #ifdef CGALPY_HAS_VISUAL
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_polygon_with_holes_2.h>
 #endif
 
 namespace py = nanobind;
+namespace pol2_doc = cgalpy::docstrings::Polygon;
 
 namespace pol2 {
 
@@ -44,17 +47,22 @@ void export_polygon_with_holes_2(py::module_& m) {
   using Gpwh = pol2::General_polygon_with_holes_2;
 
   if (! add_attr<Gpwh>(m, "General_polygon_with_holes_2")) {
-    py::class_<Gpwh> gpwh_c(m, "General_polygon_with_holes_2");
+    py::class_<Gpwh> gpwh_c(
+      m, "General_polygon_with_holes_2",
+      pol2_doc::General_polygon_with_holes_2_class);
     export_general_polygon_with_holes_2(gpwh_c);
   }
 
   if (! add_attr<Pwh>(m, "Polygon_with_holes_2")) {
-    py::class_<Pwh, Gpwh> pwh_c(m, "Polygon_with_holes_2");
+    py::class_<Pwh, Gpwh> pwh_c(
+      m, "Polygon_with_holes_2",
+      pol2_doc::Polygon_with_holes_2_class);
     pwh_c.def(py::init<>())
-      .def(py::init<Pgn&>())
-      .def("__init__", &pol2::init_polygon_with_holes_2)
+      .def(py::init<Pgn&>(), py::arg("outer_boundary"))
+      .def("__init__", &pol2::init_polygon_with_holes_2,
+           py::arg("outer_boundary"), py::arg("holes"))
 
-      .def("bbox", &Pwh::bbox)
+      .def("bbox", &Pwh::bbox, pol2_doc::Polygon_with_holes_2_bbox)
       .def(py::self == py::self)
       .def(py::self != py::self)
       ;
