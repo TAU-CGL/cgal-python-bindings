@@ -16,7 +16,7 @@
 namespace as3 {
 
 using Ec = Exact_comparison<exact_comparison()>::type;
-using Alpha_shape_3 = Alpha_shape<CGALPY_AS3, tri3::Triangulation_3, Ec>::type;
+using Alpha_shape_3 = Alpha_shape<CGALPY_AS3, tri3::Tri, Ec>::type;
 
 using Classification_type = Alpha_shape_3::Classification_type;
 using Gt = Alpha_shape_3::Gt;

@@ -253,7 +253,7 @@ double FT_to_double(FT& ft) { return CGAL::to_double(ft); }
 //
 void export_alpha_shape_3(py::module_& m) {
   using As3 = as3::Alpha_shape_3;
-  using Tri3 = tri3::Triangulation_3;
+  using Tri3 = tri3::Tri;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   as3::size_type (As3::*number_of_solid_components1)() const                     = &As3::number_of_solid_components;
@@ -300,9 +300,9 @@ void export_alpha_shape_3(py::module_& m) {
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     .def(py::init<double, as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
     .def(py::init<as3::FT&, as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<tri3::Triangulation_3&, double, as3::Mode>(),
+    .def(py::init<Tri3&, double, as3::Mode>(),
          py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<tri3::Triangulation_3&, as3::FT&, as3::Mode>(),
+    .def(py::init<Tri3&, as3::FT&, as3::Mode>(),
          py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
 #endif
     .def("__init__", &as3::as_init1)
