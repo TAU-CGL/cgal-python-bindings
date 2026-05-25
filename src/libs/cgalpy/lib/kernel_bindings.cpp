@@ -125,7 +125,9 @@ template <typename T1, typename T2,
 void bind_squared_distance(py::module_& m, bool) {
   using Sd_fnc = FT(*)(const T1&, const T2&);
   m.def("squared_distance",
-        static_cast<Sd_fnc>(&CGAL::squared_distance<Kernel>));
+        static_cast<Sd_fnc>(&CGAL::squared_distance<Kernel>),
+        py::arg("obj1"), py::arg("obj2"),
+        ker_doc::squared_distance);
 }
 
 //! Squared distance wrapper
@@ -1057,16 +1059,28 @@ void export_kernel_module(py::module_& m) {
   using Cr_fnc2 =
     Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Cr_fnc3 = Pnt_2(*)(const Tri_2&);
-  m.def("centroid", static_cast<Cr_fnc1>(&CGAL::centroid<Kernel>));
-  m.def("centroid", static_cast<Cr_fnc2>(&CGAL::centroid<Kernel>));
-  m.def("centroid", static_cast<Cr_fnc3>(&CGAL::centroid<Kernel>));
+  m.def("centroid", static_cast<Cr_fnc1>(&CGAL::centroid<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::centroid);
+  m.def("centroid", static_cast<Cr_fnc2>(&CGAL::centroid<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::centroid_1);
+  m.def("centroid", static_cast<Cr_fnc3>(&CGAL::centroid<Kernel>),
+        py::arg("t"),
+        ker_doc::centroid_2);
 
   using Cc_fnc1 = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
   using Cc_fnc2 = Pnt_2(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Cc_fnc3 = Pnt_2(*)(const Tri_2&);
-  m.def("circumcenter", static_cast<Cc_fnc1>(&CGAL::circumcenter<Kernel>));
-  m.def("circumcenter", static_cast<Cc_fnc2>(&CGAL::circumcenter<Kernel>));
-  m.def("circumcenter", static_cast<Cc_fnc3>(&CGAL::circumcenter<Kernel>));
+  m.def("circumcenter", static_cast<Cc_fnc1>(&CGAL::circumcenter<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::circumcenter);
+  m.def("circumcenter", static_cast<Cc_fnc2>(&CGAL::circumcenter<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::circumcenter_1);
+  m.def("circumcenter", static_cast<Cc_fnc3>(&CGAL::circumcenter<Kernel>),
+        py::arg("t"),
+        ker_doc::circumcenter_2);
 
   using Caoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear_are_ordered_along_line",
@@ -1085,35 +1099,49 @@ void export_kernel_module(py::module_& m) {
   using Cdtp_fnc =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("compare_distance_to_point",
-        static_cast<Cdtp_fnc>(&CGAL::compare_distance_to_point<Kernel>));
+        static_cast<Cdtp_fnc>(&CGAL::compare_distance_to_point<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::compare_distance_to_point);
 
   using Cl_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   m.def("compare_lexicographically",
-        static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>));
+        static_cast<Cl_fnc>(&CGAL::compare_lexicographically<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::compare_lexicographically);
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
   using Csdtl_fnc1 =
     CGAL::Comparison_result(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
   m.def("compare_signed_distance_to_line",
-        static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>));
+        static_cast<Csdtl_fnc1>(&CGAL::compare_signed_distance_to_line<Kernel>),
+        py::arg("l"), py::arg("p"), py::arg("q"),
+        ker_doc::compare_signed_distance_to_line);
 #endif
   using Csdtl_fnc2 =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
                                const Pnt_2&);
   m.def("compare_signed_distance_to_line",
-        static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>));
+        static_cast<Csdtl_fnc2>(&CGAL::compare_signed_distance_to_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::compare_signed_distance_to_line_1);
 
   using Cs_fnc1 = CGAL::Comparison_result(*)(const Line_2&, const Line_2&);
   using Cs_fnc2 =
     CGAL::Comparison_result(*)(const Segment_2&, const Segment_2&);
-  m.def("compare_slope", static_cast<Cs_fnc1>(&CGAL::compare_slope<Kernel>));
-  m.def("compare_slope", static_cast<Cs_fnc2>(&CGAL::compare_slope<Kernel>));
+  m.def("compare_slope", static_cast<Cs_fnc1>(&CGAL::compare_slope<Kernel>),
+        py::arg("l1"), py::arg("l2"),
+        ker_doc::compare_slope);
+  m.def("compare_slope", static_cast<Cs_fnc2>(&CGAL::compare_slope<Kernel>),
+        py::arg("l1"), py::arg("l2"),
+        ker_doc::compare_slope);
 
   using Csd_fnc =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const FT&);
   m.def("compare_squared_distance",
-        static_cast<Csd_fnc>(&CGAL::compare_squared_distance<Kernel>));
+        static_cast<Csd_fnc>(&CGAL::compare_squared_distance<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("d2"),
+        ker_doc::compare_squared_distance);
 
   using Cx_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   using Cx_fnc2 =
@@ -1123,13 +1151,23 @@ void export_kernel_module(py::module_& m) {
   using Cx_fnc4 =
     CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
                                const Line_2&);
-  m.def("compare_x", static_cast<Cx_fnc1>(&CGAL::compare_x<Kernel>));
-  m.def("compare_x", static_cast<Cx_fnc2>(&CGAL::compare_x<Kernel>));
-  m.def("compare_x", static_cast<Cx_fnc3>(&CGAL::compare_x<Kernel>));
-  m.def("compare_x", static_cast<Cx_fnc4>(&CGAL::compare_x<Kernel>));
+  m.def("compare_x", static_cast<Cx_fnc1>(&CGAL::compare_x<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::compare_x);
+  m.def("compare_x", static_cast<Cx_fnc2>(&CGAL::compare_x<Kernel>),
+        py::arg("p"), py::arg("l1"), py::arg("l2"),
+        ker_doc::compare_x_2);
+  m.def("compare_x", static_cast<Cx_fnc3>(&CGAL::compare_x<Kernel>),
+        py::arg("l"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_x_3);
+  m.def("compare_x", static_cast<Cx_fnc4>(&CGAL::compare_x<Kernel>),
+        py::arg("l1"), py::arg("l2"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_x_4);
 
   using Cxy_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
-  m.def("compare_xy", static_cast<Cxy_fnc>(&CGAL::compare_xy<Kernel>));
+  m.def("compare_xy", static_cast<Cxy_fnc>(&CGAL::compare_xy<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::compare_xy);
 
   using Cxaty_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&);
   using Cxaty_fnc2 =
@@ -1140,13 +1178,21 @@ void export_kernel_module(py::module_& m) {
     CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
                                const Line_2&);
   m.def("compare_x_at_y",
-        static_cast<Cxaty_fnc1>(&CGAL::compare_x_at_y<Kernel>));
+        static_cast<Cxaty_fnc1>(&CGAL::compare_x_at_y<Kernel>),
+        py::arg("p"), py::arg("h"),
+        ker_doc::compare_x_at_y);
   m.def("compare_x_at_y",
-        static_cast<Cxaty_fnc2>(&CGAL::compare_x_at_y<Kernel>));
+        static_cast<Cxaty_fnc2>(&CGAL::compare_x_at_y<Kernel>),
+        py::arg("p"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_x_at_y_1);
   m.def("compare_x_at_y",
-        static_cast<Cxaty_fnc3>(&CGAL::compare_x_at_y<Kernel>));
+        static_cast<Cxaty_fnc3>(&CGAL::compare_x_at_y<Kernel>),
+        py::arg("l1"), py::arg("l2"), py::arg("h"),
+        ker_doc::compare_x_at_y_2);
   m.def("compare_x_at_y",
-        static_cast<Cxaty_fnc4>(&CGAL::compare_x_at_y<Kernel>));
+        static_cast<Cxaty_fnc4>(&CGAL::compare_x_at_y<Kernel>),
+        py::arg("l1"), py::arg("l2"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_x_at_y_3);
 
   using Cyatx_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Line_2&);
   using Cyatx_fnc2 =
@@ -1160,17 +1206,29 @@ void export_kernel_module(py::module_& m) {
   using Cyatx_fnc6 =
     CGAL::Comparison_result(*)(const Pnt_2&, const Segment_2&, const Segment_2&);
   m.def("compare_y_at_x",
-        static_cast<Cyatx_fnc1>(&CGAL::compare_y_at_x<Kernel>));
+        static_cast<Cyatx_fnc1>(&CGAL::compare_y_at_x<Kernel>),
+        py::arg("p"), py::arg("h"),
+        ker_doc::compare_y_at_x_2);
   m.def("compare_y_at_x",
-        static_cast<Cyatx_fnc2>(&CGAL::compare_y_at_x<Kernel>));
+        static_cast<Cyatx_fnc2>(&CGAL::compare_y_at_x<Kernel>),
+        py::arg("p"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_y_at_x_3);
   m.def("compare_y_at_x",
-        static_cast<Cyatx_fnc3>(&CGAL::compare_y_at_x<Kernel>));
+        static_cast<Cyatx_fnc3>(&CGAL::compare_y_at_x<Kernel>),
+        py::arg("l1"), py::arg("l2"), py::arg("h"),
+        ker_doc::compare_y_at_x_4);
   m.def("compare_y_at_x",
-        static_cast<Cyatx_fnc4>(&CGAL::compare_y_at_x<Kernel>));
+        static_cast<Cyatx_fnc4>(&CGAL::compare_y_at_x<Kernel>),
+        py::arg("l1"), py::arg("l2"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_y_at_x_5);
   m.def("compare_y_at_x",
-        static_cast<Cyatx_fnc5>(&CGAL::compare_y_at_x<Kernel>));
+        static_cast<Cyatx_fnc5>(&CGAL::compare_y_at_x<Kernel>),
+        py::arg("p"), py::arg("s"),
+        ker_doc::compare_y_at_x_6);
   m.def("compare_y_at_x",
-        static_cast<Cyatx_fnc6>(&CGAL::compare_y_at_x<Kernel>));
+        static_cast<Cyatx_fnc6>(&CGAL::compare_y_at_x<Kernel>),
+        py::arg("p"), py::arg("s1"), py::arg("s2"),
+        ker_doc::compare_y_at_x_7);
 
   using Cy_fnc1 = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
   using Cy_fnc2 =
@@ -1180,13 +1238,23 @@ void export_kernel_module(py::module_& m) {
   using Cy_fnc4 =
     CGAL::Comparison_result(*)(const Line_2&, const Line_2&, const Line_2&,
                                const Line_2&);
-  m.def("compare_y", static_cast<Cy_fnc1>(&CGAL::compare_y<Kernel>));
-  m.def("compare_y", static_cast<Cy_fnc2>(&CGAL::compare_y<Kernel>));
-  m.def("compare_y", static_cast<Cy_fnc3>(&CGAL::compare_y<Kernel>));
-  m.def("compare_y", static_cast<Cy_fnc4>(&CGAL::compare_y<Kernel>));
+  m.def("compare_y", static_cast<Cy_fnc1>(&CGAL::compare_y<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::compare_y);
+  m.def("compare_y", static_cast<Cy_fnc2>(&CGAL::compare_y<Kernel>),
+        py::arg("p"), py::arg("l1"), py::arg("l2"),
+        ker_doc::compare_y_2);
+  m.def("compare_y", static_cast<Cy_fnc3>(&CGAL::compare_y<Kernel>),
+        py::arg("l"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_y_3);
+  m.def("compare_y", static_cast<Cy_fnc4>(&CGAL::compare_y<Kernel>),
+        py::arg("l1"), py::arg("l2"), py::arg("h1"), py::arg("h2"),
+        ker_doc::compare_y_4);
 
   using Cyx_fnc = CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&);
-  m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>));
+  m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::compare_yx);
 
   using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
   m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>),
@@ -1200,7 +1268,9 @@ void export_kernel_module(py::module_& m) {
 
   using Hldtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_distace_to_point",
-        static_cast<Hldtp_fnc>(&CGAL::has_larger_distance_to_point<Kernel>));
+        static_cast<Hldtp_fnc>(&CGAL::has_larger_distance_to_point<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::has_larger_distance_to_point);
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
@@ -1215,7 +1285,9 @@ void export_kernel_module(py::module_& m) {
 
   using Hsdtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_distace_to_point",
-        static_cast<Hsdtp_fnc>(&CGAL::has_smaller_distance_to_point<Kernel>));
+        static_cast<Hsdtp_fnc>(&CGAL::has_smaller_distance_to_point<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::has_smaller_distance_to_point);
 
 #if !defined(_MSC_VER)
   // MSVC does handle the following for some reason....
