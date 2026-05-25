@@ -43,6 +43,8 @@
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/to_string.hpp"
 
+#include "cgalpy/Ker_docstrings.hpp"
+
 // 2D functors
 #include "CGALPY/Kernel/export_circle_2.hpp"
 #include "CGALPY/Kernel/export_dir_2.hpp"
@@ -71,6 +73,7 @@
 #include "CGALPY/Kernel/export_mesh_constant_domain_field_3.hpp"
 
 namespace py = nanobind;
+namespace ker_doc = cgalpy::docstrings::Kernel_23;
 
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>&);
 extern void export_bbox_3(py::class_<CGAL::Bbox_3>&);
@@ -997,7 +1000,9 @@ void export_kernel_module(py::module_& m) {
   m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>));
 
   using Area_fnc = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>));
+  m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::area);
 
   using Aoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_ordered_along_line",
@@ -1160,7 +1165,9 @@ void export_kernel_module(py::module_& m) {
   m.def("compare_yx", static_cast<Cyx_fnc>(&CGAL::compare_yx<Kernel>));
 
   using Cp_fnc3 = Vec_3(*)(const Vec_3&, const Vec_3&);
-  m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>));
+  m.def("cross_product", static_cast<Cp_fnc3>(&CGAL::cross_product<Kernel>),
+        py::arg("v"), py::arg("w"),
+        ker_doc::cross_product);
 
   using Dt_fnc = FT(*)(const Vec_2&, const Vec_2&);
   m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>));
@@ -1200,7 +1207,9 @@ void export_kernel_module(py::module_& m) {
         static_cast<Lid_fnc>(&CGAL::l_infinity_distance<Kernel>));
 
   using Lt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("left_turn", static_cast<Lt_fnc>(&CGAL::left_turn<Kernel>));
+  m.def("left_turn", static_cast<Lt_fnc>(&CGAL::left_turn<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::left_turn);
 
   using Lxyl_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
   m.def("lexicographically_xy_larger",
@@ -1253,7 +1262,9 @@ void export_kernel_module(py::module_& m) {
         static_cast<Rra_fnc>(&CGAL::rational_rotation_approximation<FT>));
 
   using Rt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("right_turn", static_cast<Rt_fnc>(&CGAL::right_turn<Kernel>));
+  m.def("right_turn", static_cast<Rt_fnc>(&CGAL::right_turn<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::right_turn);
 
   using Sp_fnc2 = FT(*)(const Vec_2&, const Vec_2&);
   using Sp_fnc3 = FT(*)(const Vec_3&, const Vec_3&);
