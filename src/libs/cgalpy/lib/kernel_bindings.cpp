@@ -1033,9 +1033,17 @@ void export_kernel_module(py::module_& m) {
   using Bc_fnc3 =
     Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&, const Pnt_2&,
              const FT&, const Pnt_2&, const FT&);
-  m.def("barycenter", static_cast<Bc_fnc1>(&CGAL::barycenter<Kernel>));
-  m.def("barycenter", static_cast<Bc_fnc2>(&CGAL::barycenter<Kernel>));
-  m.def("barycenter", static_cast<Bc_fnc3>(&CGAL::barycenter<Kernel>));
+  m.def("barycenter", static_cast<Bc_fnc1>(&CGAL::barycenter<Kernel>),
+        py::arg("p1"), py::arg("w1"), py::arg("p2"), py::arg("w2"),
+        ker_doc::barycenter_1);
+  m.def("barycenter", static_cast<Bc_fnc2>(&CGAL::barycenter<Kernel>),
+        py::arg("p1"), py::arg("w1"), py::arg("p2"), py::arg("w2"),
+        py::arg("p3"), py::arg("w3"),
+        ker_doc::barycenter_3);
+  m.def("barycenter", static_cast<Bc_fnc3>(&CGAL::barycenter<Kernel>),
+        py::arg("p1"), py::arg("w1"), py::arg("p2"), py::arg("w2"),
+        py::arg("p3"), py::arg("w3"), py::arg("p4"), py::arg("w4"),
+        ker_doc::barycenter_5);
 
   m.def("bbox_2", &ker::bbox_2);
 
