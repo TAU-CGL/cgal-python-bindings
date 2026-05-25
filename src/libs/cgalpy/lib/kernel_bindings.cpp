@@ -1056,7 +1056,9 @@ void export_kernel_module(py::module_& m) {
         static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>));
 
   using Clr_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
-  m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>));
+  m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::collinear);
 
   using Cdtp_fnc =
     CGAL::Comparison_result(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -1170,7 +1172,9 @@ void export_kernel_module(py::module_& m) {
         ker_doc::cross_product);
 
   using Dt_fnc = FT(*)(const Vec_2&, const Vec_2&);
-  m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>));
+  m.def("determinant", static_cast<Dt_fnc>(&CGAL::determinant<Kernel>),
+        py::arg("v"), py::arg("w"),
+        ker_doc::determinant);
 
   using Hldtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_distace_to_point",
@@ -1268,8 +1272,12 @@ void export_kernel_module(py::module_& m) {
 
   using Sp_fnc2 = FT(*)(const Vec_2&, const Vec_2&);
   using Sp_fnc3 = FT(*)(const Vec_3&, const Vec_3&);
-  m.def("scalar_product", static_cast<Sp_fnc2>(&CGAL::scalar_product<Kernel>));
-  m.def("scalar_product", static_cast<Sp_fnc3>(&CGAL::scalar_product<Kernel>));
+  m.def("scalar_product", static_cast<Sp_fnc2>(&CGAL::scalar_product<Kernel>),
+        py::arg("u"), py::arg("v"),
+        ker_doc::scalar_product);
+  m.def("scalar_product", static_cast<Sp_fnc3>(&CGAL::scalar_product<Kernel>),
+        py::arg("u"), py::arg("v"),
+        ker_doc::scalar_product_1);
 
   using Sobc_fnc1 =
     CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
