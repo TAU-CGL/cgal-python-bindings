@@ -1299,15 +1299,21 @@ void export_kernel_module(py::module_& m) {
   using Sobc_fnc2 =
     CGAL::Bounded_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("side_of_bounded_circle",
-        static_cast<Sobc_fnc1>(&CGAL::side_of_bounded_circle<Kernel>));
+        static_cast<Sobc_fnc1>(&CGAL::side_of_bounded_circle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("t"),
+        ker_doc::side_of_bounded_circle);
   m.def("side_of_bounded_circle",
-        static_cast<Sobc_fnc2>(&CGAL::side_of_bounded_circle<Kernel>));
+        static_cast<Sobc_fnc2>(&CGAL::side_of_bounded_circle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("t"),
+        ker_doc::side_of_bounded_circle_1);
 
   using Sooc_fnc =
     CGAL::Oriented_side(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&,
                            const Pnt_2&);
   m.def("side_of_oriented_circle",
-        static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>));
+        static_cast<Sooc_fnc>(&CGAL::side_of_oriented_circle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("test"),
+        ker_doc::side_of_oriented_circle);
 
   // squared_distance() bindings
   CGALPY::Type_list<Pnt_2, Line_2, Ray_2, Seg_2, Tri_2, Wd_pnt_2> type_list_2;
@@ -1320,9 +1326,15 @@ void export_kernel_module(py::module_& m) {
   using Sd_fnc1 = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Sd_fnc2 = FT(*)(const Pnt_2&, const Pnt_2&);
   using Sd_fnc3 = FT(*)(const Pnt_2&);
-  m.def("squared_radius", static_cast<Sd_fnc1>(&CGAL::squared_radius<Kernel>));
-  m.def("squared_radius", static_cast<Sd_fnc2>(&CGAL::squared_radius<Kernel>));
-  m.def("squared_radius", static_cast<Sd_fnc3>(&CGAL::squared_radius<Kernel>));
+  m.def("squared_radius", static_cast<Sd_fnc1>(&CGAL::squared_radius<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::squared_radius);
+  m.def("squared_radius", static_cast<Sd_fnc2>(&CGAL::squared_radius<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::squared_radius_1);
+  m.def("squared_radius", static_cast<Sd_fnc3>(&CGAL::squared_radius<Kernel>),
+        py::arg("p"),
+        ker_doc::squared_radius_2);
 
   using Xe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
   m.def("x_equal", static_cast<Xe_fnc>(&CGAL::x_equal<Kernel>));
