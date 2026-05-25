@@ -308,16 +308,13 @@ void add_generic_map(C& c, const std::string& map_name, const Value& default_val
 
   c.def(("add_" + map_name).c_str(), sm::add_map<Sm, Key, Value>,
         py::arg("name") = std::string(), py::arg("default_value") = default_value,
-        "Add a property map named `name` with value type `T` and default `t`\n"
-        "for index type `I`. Returns the property map together with a Boolean\n"
-        "that is `true` if a new map was created. In case it already exists\n"
-        "the existing map together with `false` is returned.")
+        sm_doc::Surface_mesh_add_property_map)
     .def(map_name.c_str(), &Sm::template property_map<Key, Value>,
          py::arg("name") = std::string(),
-         "Obtain an optional property map named `name` with key type `I` and value type `T`.")
+         sm_doc::Surface_mesh_property_map)
     .def("remove_property_map", &Sm::template remove_property_map<Key, Value>,
          py::arg("p"),
-         "Remove the property map `name`. The memory allocated for that property map is freed.")
+         sm_doc::Surface_mesh_remove_property_map)
     ;
 }
 
