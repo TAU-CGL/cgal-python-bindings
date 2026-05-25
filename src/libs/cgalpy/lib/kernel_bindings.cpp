@@ -1050,7 +1050,9 @@ void export_kernel_module(py::module_& m) {
   m.def("bbox_2", &ker::bbox_2);
 
   using Bisector_fnc = Line_2(*)(const Pnt_2&, const Pnt_2&);
-  m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>));
+  m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::bisector);
 
   // Requires sqrt operation
   //def<Line_2(const Line_2&, const Line_2&)>("bisector", &CGAL::bisector);
@@ -1084,12 +1086,15 @@ void export_kernel_module(py::module_& m) {
 
   using Caoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear_are_ordered_along_line",
-        static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>));
+        static_cast<Caoral_fnc>(&CGAL::collinear_are_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::collinear_are_ordered_along_line);
 
   using Casoral_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear_are_strictly_ordered_along_line",
-
-        static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>));
+        static_cast<Casoral_fnc>(&CGAL::collinear_are_strictly_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::collinear_are_strictly_ordered_along_line);
 
   using Clr_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("collinear", static_cast<Clr_fnc>(&CGAL::collinear<Kernel>),
@@ -1276,12 +1281,16 @@ void export_kernel_module(py::module_& m) {
   // MSVC does handle the following for some reason....
   using Hldtl_fnc1 = bool(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_signed_distance_to_line",
-        static_cast<Hldtl_fnc1>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
+        static_cast<Hldtl_fnc1>(&CGAL::has_larger_signed_distance_to_line<Kernel>),
+        py::arg("l"), py::arg("p"), py::arg("q"),
+        ker_doc::has_larger_signed_distance_to_line);
 #endif
   using Hldtl_fnc2 =
     bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_larger_signed_distance_to_line",
-        static_cast<Hldtl_fnc2>(&CGAL::has_larger_signed_distance_to_line<Kernel>));
+        static_cast<Hldtl_fnc2>(&CGAL::has_larger_signed_distance_to_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::has_larger_signed_distance_to_line_1);
 
   using Hsdtp_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_distace_to_point",
@@ -1293,12 +1302,16 @@ void export_kernel_module(py::module_& m) {
   // MSVC does handle the following for some reason....
   using Hssdtl_fnc1 = bool(*)(const Line_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_signed_distance_to_line",
-        static_cast<Hssdtl_fnc1>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
+        static_cast<Hssdtl_fnc1>(&CGAL::has_smaller_signed_distance_to_line<Kernel>),
+        py::arg("l"), py::arg("p"), py::arg("q"),
+        ker_doc::has_smaller_signed_distance_to_line);
 #endif
 
   using Hssdtl_fnc2 = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("has_smaller_signed_distance_to_line",
-        static_cast<Hssdtl_fnc2>(&CGAL::has_smaller_signed_distance_to_line<Kernel>));
+        static_cast<Hssdtl_fnc2>(&CGAL::has_smaller_signed_distance_to_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::has_smaller_signed_distance_to_line_1);
 
   using Lid_fnc = FT(*)(const Pnt_2&, const Pnt_2&);
   m.def("l_infinity_distance",
@@ -1313,19 +1326,27 @@ void export_kernel_module(py::module_& m) {
 
   using Lxyl_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
   m.def("lexicographically_xy_larger",
-        static_cast<Lxyl_fnc>(&CGAL::lexicographically_xy_larger<Kernel>));
+        static_cast<Lxyl_fnc>(&CGAL::lexicographically_xy_larger<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::lexicographically_xy_larger);
 
   using Lxyloe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
   m.def("lexicographically_xy_larger_or_equal",
-        static_cast<Lxyloe_fnc>(&CGAL::lexicographically_xy_larger_or_equal<Kernel>));
+        static_cast<Lxyloe_fnc>(&CGAL::lexicographically_xy_larger_or_equal<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::lexicographically_xy_larger_or_equal);
 
   using Lxys_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
   m.def("lexicographically_xy_smaller",
-        static_cast<Lxys_fnc>(&CGAL::lexicographically_xy_smaller<Kernel>));
+        static_cast<Lxys_fnc>(&CGAL::lexicographically_xy_smaller<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::lexicographically_xy_smaller);
 
   using Lxysoe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
   m.def("lexicographically_xy_smaller_or_equal",
-        static_cast<Lxysoe_fnc>(&CGAL::lexicographically_xy_smaller_or_equal<Kernel>));
+        static_cast<Lxysoe_fnc>(&CGAL::lexicographically_xy_smaller_or_equal<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::lexicographically_xy_smaller_or_equal);
 
   using Maxv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
   m.def("max_vertex", static_cast<Maxv_fnc>(&CGAL::max_vertex<Kernel>),
@@ -1567,14 +1588,7 @@ void export_kernel_module(py::module_& m) {
           return res;
         },
         py::arg("dirx"), py::arg("diry"), py::arg("eps_num"), py::arg("eps_den"),
-        "computes an approximates a given direction, such that its sine and cosine are rational numbers, and the difference between the sine and the rational approximation is bounded by a given epsilon.\n"
-        "Parameters\n"
-        "dirx\tthe x-coordinate of the direction.\n"
-        "diry\tthe y-coordinate of the direction.\n"
-        "eps_num\tthe numerator of approximation bound.\n"
-        "eps_den\tthe denominator of approximation bound.\n"
-        "Returns\n"
-        "a list of three ring-type numbers, the numerators of the sine and cosine of the computed angle approximation and their denominator.\n");
+        ker_doc::rational_rotation_approximation);
 
 #endif
 }
