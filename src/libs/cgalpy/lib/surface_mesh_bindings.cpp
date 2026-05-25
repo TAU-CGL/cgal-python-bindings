@@ -821,10 +821,18 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_iterator<Eci, Eci>("Edge_iterator", sm_c);
     add_iterator<Fci, Fci>("Face_iterator", sm_c);
 
-    sm_c.def("vertices", &sm::vertices<Sm>, py::keep_alive<0, 1>())
-      .def("halfedges", &sm::halfedges<Sm>, py::keep_alive<0, 1>())
-      .def("edges", &sm::edges<Sm>, py::keep_alive<0, 1>())
-      .def("faces", &sm::faces<Sm>, py::keep_alive<0, 1>())
+    sm_c.def("vertices", &sm::vertices<Sm>,
+             py::keep_alive<0, 1>(),
+             sm_doc::Surface_mesh_vertices)
+      .def("halfedges", &sm::halfedges<Sm>,
+           py::keep_alive<0, 1>(),
+           sm_doc::Surface_mesh_halfedges)
+      .def("edges", &sm::edges<Sm>,
+           py::keep_alive<0, 1>(),
+           sm_doc::Surface_mesh_edges)
+      .def("faces", &sm::faces<Sm>,
+           py::keep_alive<0, 1>(),
+           sm_doc::Surface_mesh_faces)
       ;
 
     add_insertion(sm_c, "__str__");
