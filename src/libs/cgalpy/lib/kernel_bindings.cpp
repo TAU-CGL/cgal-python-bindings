@@ -1235,10 +1235,14 @@ void export_kernel_module(py::module_& m) {
   m.def("max_vertex", static_cast<Maxv_fnc>(&CGAL::max_vertex<Kernel>));
 
   using Mp_fnc = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
-  m.def("midpoint", static_cast<Mp_fnc>(&CGAL::midpoint<Kernel>));
+  m.def("midpoint", static_cast<Mp_fnc>(&CGAL::midpoint<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::midpoint);
 
   using Mp3_fnc = Pnt_3(*)(const Pnt_3&, const Pnt_3&);
-  m.def("midpoint", static_cast<Mp3_fnc>(&CGAL::midpoint<Kernel>));
+  m.def("midpoint", static_cast<Mp3_fnc>(&CGAL::midpoint<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::midpoint_2);
 
   using Minv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
   m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>));
@@ -1246,15 +1250,25 @@ void export_kernel_module(py::module_& m) {
   using Or_fnc1 =
     CGAL::Orientation(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   using Or_fnc2 = CGAL::Orientation(*)(const Vec_2&, const Vec_2&);
-  m.def("orientation", static_cast<Or_fnc1>(&CGAL::orientation));
-  m.def("orientation", static_cast<Or_fnc2>(&CGAL::orientation));
+  m.def("orientation", static_cast<Or_fnc1>(&CGAL::orientation),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::orientation);
+  m.def("orientation", static_cast<Or_fnc2>(&CGAL::orientation),
+        py::arg("u"), py::arg("v"),
+        ker_doc::orientation_1);
 
   using Pl_fnc1 = bool(*)(const Line_2&, const Line_2&);
   using Pl_fnc2 = bool(*)(const Ray_2&, const Ray_2&);
   using Pl_fnc3 = bool(*)(const Segment_2&, const Segment_2&);
-  m.def("parallel", static_cast<Pl_fnc1>(&CGAL::parallel<Line_2>));
-  m.def("parallel", static_cast<Pl_fnc2>(&CGAL::parallel<Ray_2>));
-  m.def("parallel", static_cast<Pl_fnc3>(&CGAL::parallel<Segment_2>));
+  m.def("parallel", static_cast<Pl_fnc1>(&CGAL::parallel<Line_2>),
+        py::arg("l1"), py::arg("l2"),
+        ker_doc::parallel);
+  m.def("parallel", static_cast<Pl_fnc2>(&CGAL::parallel<Ray_2>),
+        py::arg("r1"), py::arg("r2"),
+        ker_doc::parallel_1);
+  m.def("parallel", static_cast<Pl_fnc3>(&CGAL::parallel<Segment_2>),
+        py::arg("s1"), py::arg("s2"),
+        ker_doc::parallel_2);
 
   using Rl_fnc = Line_2 (*)(const Circle_2&, const Circle_2&);
   m.def("radical_line", static_cast<Rl_fnc>(&CGAL::radical_line<Kernel>));
