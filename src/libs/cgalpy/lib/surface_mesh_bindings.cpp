@@ -463,9 +463,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
   if (! add_attr<Vi>(m, "Vertex_index")) {
-    py::class_<Vi, Sm_vi>(m, "Vertex_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
+    py::class_<Vi, Sm_vi>(m, "Vertex_index",
+                           sm_doc::Surface_mesh_Vertex_index_class)
+      .def(py::init<>(),
+           sm_doc::Surface_mesh_Vertex_index_Vertex_index)
+      .def(py::init<size_type>(),
+           py::arg("idx"))
       .def("__str__", [](const Vi& vi) { return std::to_string(vi.idx()); })
       .def("__repr__", [](const Vi& vi) { return std::to_string(vi.idx()); })
       .def("__eq__", [](const Vi& vi, const Vi& other) { return vi == other; })
@@ -477,9 +480,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
   // Edge_index
   if (! add_attr<Ei>(m, "Edge_index")) {
-    py::class_<Ei>(m, "Edge_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
+    py::class_<Ei>(m, "Edge_index",
+                   sm_doc::Surface_mesh_Edge_index_class)
+      .def(py::init<>(),
+           sm_doc::Surface_mesh_Edge_index_Edge_index)
+      .def(py::init<size_type>(),
+           py::arg("idx"))
       .def("halfedge", &Ei::halfedge)
       .def("idx", &Ei::idx)
       .def("reset", &Ei::reset)
@@ -501,9 +507,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
   if (! add_attr<Hi>(m, "Halfedge_index")) {
-    py::class_<Hi, Sm_hi>(m, "Halfedge_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
+    py::class_<Hi, Sm_hi>(m, "Halfedge_index",
+                           sm_doc::Surface_mesh_Halfedge_index_class)
+      .def(py::init<>(),
+           sm_doc::Surface_mesh_Halfedge_index_Halfedge_index)
+      .def(py::init<size_type>(),
+           py::arg("idx"))
       .def("__str__", [](const Hi& hi) { return std::to_string(hi.idx()); })
       .def("__repr__", [](const Hi& hi) { return std::to_string(hi.idx()); })
       .def("__eq__", [](const Hi& hi, const Hi& other) { return hi == other; })
@@ -521,9 +530,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
   if (! add_attr<Fi>(m, "Face_index")) {
-    py::class_<Fi, Sm_fi>(m, "Face_index")
-      .def(py::init<>())
-      .def(py::init<size_type>())
+    py::class_<Fi, Sm_fi>(m, "Face_index",
+                           sm_doc::Surface_mesh_Face_index_class)
+      .def(py::init<>(),
+           sm_doc::Surface_mesh_Face_index_Face_index)
+      .def(py::init<size_type>(),
+           py::arg("idx"))
       .def("__str__", [](const Fi& fi) { return std::to_string(fi.idx()); })
       .def("__repr__", [](const Fi& fi) { return std::to_string(fi.idx()); })
       .def("__eq__", [](const Fi& fi, const Fi& other) { return fi == other; })
