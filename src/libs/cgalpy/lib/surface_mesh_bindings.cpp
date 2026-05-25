@@ -346,13 +346,13 @@ void add_maps(C& c) {
   using Pnt = typename Sm::Point;
 
   c.def("properties_vertex", [](const Sm& sm) { return sm.template properties<Vi>(); },
-        "Obtain a vector with all strings that describe properties with the key type `Vertex_index`.")
+        sm_doc::Surface_mesh_properties)
     .def("properties_edge", [](const Sm& sm) { return sm.template properties<Ei>(); },
-        "Obtain a vector with all strings that describe properties with the key type `Edge_index`.")
+        sm_doc::Surface_mesh_properties)
     .def("properties_halfedge", [](const Sm& sm) { return sm.template properties<Hi>(); },
-        "Obtain a vector with all strings that describe properties with the key type `Halfedge_index`.")
+        sm_doc::Surface_mesh_properties)
     .def("properties_face", [](const Sm& sm) { return sm.template properties<Fi>(); },
-        "Obtain a vector with all strings that describe properties with the key type `Face_index`.")
+        sm_doc::Surface_mesh_properties)
 
     // TODO: add a class for this:
     .def("property_map_vertex_set_int",
@@ -403,20 +403,15 @@ void add_maps(C& c) {
 #endif
 
   c.def("remove_all_property_maps", &Sm::remove_all_property_maps,
-        "Remove all property maps for all index types added by a call to `add_property_map()`.\n"
-        "The memory allocated for those property maps is freed.");
+        sm_doc::Surface_mesh_remove_all_property_maps);
   c.def("remove_property_maps_vertex", &Sm::template remove_property_maps<Vi>,
-        "Remove all property maps for the index type `Vertex_index` added by a call to `add_property_map()`.\n"
-        "The memory allocated for those property maps is freed.");
+        sm_doc::Surface_mesh_remove_property_maps);
   c.def("remove_property_maps_edge", &Sm::template remove_property_maps<Ei>,
-        "Remove all property maps for the index type `Edge_index` added by a call to `add_property_map()`.\n"
-        "The memory allocated for those property maps is freed.");
+        sm_doc::Surface_mesh_remove_property_maps);
   c.def("remove_property_maps_halfedge", &Sm::template remove_property_maps<Hi>,
-        "Remove all property maps for the index type `Halfedge_index` added by a call to `add_property_map()`.\n"
-        "The memory allocated for those property maps is freed.");
+        sm_doc::Surface_mesh_remove_property_maps);
   c.def("remove_property_maps_face", &Sm::template remove_property_maps<Fi>,
-        "Remove all property maps for the index type `Face_index` added by a call to `add_property_map()`.\n"
-        "The memory allocated for those property maps is freed.");
+        sm_doc::Surface_mesh_remove_property_maps);
 }
 
 } // namespace sm
