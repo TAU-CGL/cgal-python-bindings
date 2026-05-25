@@ -21,6 +21,8 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/pair.h>
 
+#include "cgalpy/Sm_docstrings.hpp"
+
 #include <CGAL/boost/graph/generators.h>
 #include <CGAL/property_map.h>
 #include <CGAL/Dynamic_property_map.h>
@@ -56,6 +58,7 @@
 #include "CGALPY/surface_mesh_types.hpp"
 
 namespace py = nanobind;
+namespace sm_doc = cgalpy::docstrings::Surface_mesh;
 
 namespace sm {
 
@@ -590,91 +593,190 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       sm::export_dynamic_property_maps<Sm, FT, py::rv_policy::reference_internal>(m, "FT");
 
 
-    sm_c.def(py::init<>())
-      .def(py::init<const Sm&>())
+    sm_c.def(py::init<>(), sm_doc::Surface_mesh_Surface_mesh)
+      .def(py::init<const Sm&>(),
+           py::arg("rhs"),
+           sm_doc::Surface_mesh_Surface_mesh_1)
       // .def("assign", &Sm::assign, ri)
-      .def("add_vertex", py::overload_cast<>(&Sm::add_vertex))
-      .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex))
-      .def("add_edge", py::overload_cast<>(&Sm::add_edge))
-      .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge))
-      .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face))
-      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face))
-      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face))
-      .def("add_face", &sm::add_face<Sm>)
+      .def("add_vertex", py::overload_cast<>(&Sm::add_vertex),
+           sm_doc::Surface_mesh_add_vertex)
+      .def("add_vertex", py::overload_cast<const Pnt&>(&Sm::add_vertex),
+           py::arg("p"),
+           sm_doc::Surface_mesh_add_vertex_1)
+      .def("add_edge", py::overload_cast<>(&Sm::add_edge),
+           sm_doc::Surface_mesh_add_edge)
+      .def("add_edge", py::overload_cast<Vi, Vi>(&Sm::add_edge),
+           py::arg("v0"), py::arg("v1"),
+           sm_doc::Surface_mesh_add_edge_1)
+      .def("add_face", static_cast<Fi(Sm::*)()>(&Sm::add_face),
+           sm_doc::Surface_mesh_add_face)
+      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi)>(&Sm::add_face),
+           py::arg("v0"), py::arg("v1"), py::arg("v2"),
+           sm_doc::Surface_mesh_add_face_2)
+      .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face),
+           py::arg("v0"), py::arg("v1"), py::arg("v2"), py::arg("v3"),
+           sm_doc::Surface_mesh_add_face_3)
+      .def("add_face", &sm::add_face<Sm>,
+           py::arg("vertices"),
+           sm_doc::Surface_mesh_add_face_1)
 
-      .def("has_valid_index", &sm::has_valid_index_v<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_e<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_h<Sm>)
-      .def("has_valid_index", &sm::has_valid_index_f<Sm>)
+      .def("has_valid_index", &sm::has_valid_index_v<Sm>, py::arg("v"))
+      .def("has_valid_index", &sm::has_valid_index_e<Sm>, py::arg("e"))
+      .def("has_valid_index", &sm::has_valid_index_h<Sm>, py::arg("h"))
+      .def("has_valid_index", &sm::has_valid_index_f<Sm>, py::arg("f"))
 
-      .def("remove_vertex", &Sm::remove_vertex)
-      .def("remove_edge", &Sm::remove_edge)
-      .def("remove_face", &Sm::remove_face)
-      .def("num_vertices", &Sm::num_vertices)
-      .def("number_of_vertices", &Sm::number_of_vertices)
-      .def("num_halfedges", &Sm::num_halfedges)
-      .def("number_of_halfedges", &Sm::number_of_halfedges)
-      .def("num_edges", &Sm::num_edges)
-      .def("number_of_edges", &Sm::number_of_edges)
-      .def("num_faces", &Sm::num_faces)
-      .def("number_of_faces", &Sm::number_of_faces)
-      .def("is_empty", &Sm::is_empty)
-      .def("clear_without_removing_property_maps", &Sm::clear_without_removing_property_maps)
-      .def("clear", &Sm::clear)
-      .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); }, py::arg("v"))
-      .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); }, py::arg("f"))
-      .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); }, py::arg("e"))
+      .def("remove_vertex", &Sm::remove_vertex,
+           py::arg("v"),
+           sm_doc::Surface_mesh_remove_vertex)
+      .def("remove_edge", &Sm::remove_edge,
+           py::arg("e"),
+           sm_doc::Surface_mesh_remove_edge)
+      .def("remove_face", &Sm::remove_face,
+           py::arg("f"),
+           sm_doc::Surface_mesh_remove_face)
+      .def("num_vertices", &Sm::num_vertices,
+           sm_doc::Surface_mesh_number_of_vertices)
+      .def("number_of_vertices", &Sm::number_of_vertices,
+           sm_doc::Surface_mesh_number_of_vertices)
+      .def("num_halfedges", &Sm::num_halfedges,
+           sm_doc::Surface_mesh_number_of_halfedges)
+      .def("number_of_halfedges", &Sm::number_of_halfedges,
+           sm_doc::Surface_mesh_number_of_halfedges)
+      .def("num_edges", &Sm::num_edges,
+           sm_doc::Surface_mesh_number_of_edges)
+      .def("number_of_edges", &Sm::number_of_edges,
+           sm_doc::Surface_mesh_number_of_edges)
+      .def("num_faces", &Sm::num_faces,
+           sm_doc::Surface_mesh_number_of_faces)
+      .def("number_of_faces", &Sm::number_of_faces,
+           sm_doc::Surface_mesh_number_of_faces)
+      .def("is_empty", &Sm::is_empty,
+           sm_doc::Surface_mesh_is_empty)
+      .def("clear_without_removing_property_maps",
+           &Sm::clear_without_removing_property_maps,
+           sm_doc::Surface_mesh_clear_without_removing_property_maps)
+      .def("clear", &Sm::clear,
+           sm_doc::Surface_mesh_clear)
+      .def("halfedge", [](const Sm& sm, Vi v) { return sm.halfedge(v); },
+           py::arg("v"),
+           sm_doc::Surface_mesh_halfedge)
+      .def("halfedge", [](const Sm& sm, Fi f) { return sm.halfedge(f); },
+           py::arg("f"),
+           sm_doc::Surface_mesh_halfedge_1)
+      .def("halfedge", [](const Sm& sm, Ei e) { return sm.halfedge(e); },
+           py::arg("e"),
+           sm_doc::Surface_mesh_halfedge_3)
       .def("halfedge", [](const Sm& sm, Ei e, unsigned int i) { return sm.halfedge(e, i); },
-           py::arg("e"), py::arg("i"))
+           py::arg("e"), py::arg("i"),
+           sm_doc::Surface_mesh_halfedge_4)
       .def("halfedge", [](const Sm& sm, Vi source, Vi target) { return sm.halfedge(source, target); },
-           py::arg("source"), py::arg("target"))
-      .def("degree", [](const Sm& sm, Vi v) { return sm.degree(v); }, py::arg("v"))
-      .def("degree", [](const Sm& sm, Fi f) { return sm.degree(f); }, py::arg("f"))
-      .def("is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); }, py::arg("h"))
-      .def("is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); }, py::arg("e"))
+           py::arg("source"), py::arg("target"),
+           sm_doc::Surface_mesh_halfedge_2)
+      .def("degree", [](const Sm& sm, Vi v) { return sm.degree(v); },
+           py::arg("v"),
+           sm_doc::Surface_mesh_degree)
+      .def("degree", [](const Sm& sm, Fi f) { return sm.degree(f); },
+           py::arg("f"),
+           sm_doc::Surface_mesh_degree_1)
+      .def("is_border", [](const Sm& sm, Hi h) { return sm.is_border(h); },
+           py::arg("h"),
+           sm_doc::Surface_mesh_is_border_1)
+      .def("is_border", [](const Sm& sm, Ei e) { return sm.is_border(e); },
+           py::arg("e"),
+           sm_doc::Surface_mesh_is_border_2)
       .def("is_border",
            [](const Sm& sm, Vi v, bool check_all_incident_halfedges = true)
            { return sm.is_border(v, check_all_incident_halfedges); },
-           py::arg("v"), py::arg("check_all_incident_halfedges") = true)
-      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); }, py::arg("v"))
-      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); }, py::arg("e"))
-      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); }, py::arg("f"))
-      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); }, py::arg("h"))
-      .def("source", &Sm::source)
-      .def("target", &Sm::target)
+           py::arg("v"), py::arg("check_all_incident_halfedges") = true,
+           sm_doc::Surface_mesh_is_border)
+      .def("is_removed", [](const Sm& sm, Vi v) { return sm.is_removed(v); },
+           py::arg("v"),
+           sm_doc::Surface_mesh_is_removed)
+      .def("is_removed", [](const Sm& sm, Ei e) { return sm.is_removed(e); },
+           py::arg("e"),
+           sm_doc::Surface_mesh_is_removed_2)
+      .def("is_removed", [](const Sm& sm, Fi f) { return sm.is_removed(f); },
+           py::arg("f"),
+           sm_doc::Surface_mesh_is_removed_3)
+      .def("is_removed", [](const Sm& sm, Hi h) { return sm.is_removed(h); },
+           py::arg("h"),
+           sm_doc::Surface_mesh_is_removed_1)
+      .def("source", &Sm::source,
+           py::arg("h"),
+           sm_doc::Surface_mesh_source)
+      .def("target", &Sm::target,
+           py::arg("h"),
+           sm_doc::Surface_mesh_target)
       // void reserve(size_type nvertices, size_type nedges, size_type nfaces )
       // void resize(size_type nvertices, size_type nedges, size_type nfaces )
       // join(const Surface_mesh& other)
-      .def("edge", &Sm::edge)
-      .def("face", &Sm::face)
-      .def("join", &Sm::join)
-      .def("next", &Sm::next)
-      .def("prev", &Sm::prev)
-      .def("resize", &Sm::resize)
-      .def("set_target", &Sm::set_target)
-      .def("has_garbage", &Sm::has_garbage)
-      .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); })
-      .def("is_isolated", &Sm::is_isolated)
-      .def("set_next_only", &Sm::set_next_only)
-      .def("set_prev_only", &Sm::set_prev_only)
+      .def("edge", &Sm::edge,
+           py::arg("h"),
+           sm_doc::Surface_mesh_edge)
+      .def("face", &Sm::face,
+           py::arg("h"),
+           sm_doc::Surface_mesh_face)
+      .def("join", &Sm::join,
+           py::arg("other"),
+           sm_doc::Surface_mesh_join)
+      .def("next", &Sm::next,
+           py::arg("h"),
+           sm_doc::Surface_mesh_next)
+      .def("prev", &Sm::prev,
+           py::arg("h"),
+           sm_doc::Surface_mesh_prev)
+      .def("resize", &Sm::resize,
+           py::arg("nvertices"), py::arg("nedges"), py::arg("nfaces"))
+      .def("set_target", &Sm::set_target,
+           py::arg("h"), py::arg("v"),
+           sm_doc::Surface_mesh_set_target)
+      .def("has_garbage", &Sm::has_garbage,
+           sm_doc::Surface_mesh_has_garbage)
+      .def("collect_garbage", [](Sm& sm) { sm.collect_garbage(); },
+           sm_doc::Surface_mesh_collect_garbage)
+      .def("is_isolated", &Sm::is_isolated,
+           py::arg("v"),
+           sm_doc::Surface_mesh_is_isolated)
+      .def("set_next_only", &Sm::set_next_only,
+           py::arg("h"), py::arg("nh"))
+      .def("set_prev_only", &Sm::set_prev_only,
+           py::arg("h"), py::arg("ph"))
       .def("shrink_to_fit", &Sm::shrink_to_fit)
-      .def("set_recycle_garbage", &Sm::set_recycle_garbage)
-      .def("does_recycle_garbage", &Sm::does_recycle_garbage)
+      .def("set_recycle_garbage", &Sm::set_recycle_garbage,
+           py::arg("do_recycle"),
+           sm_doc::Surface_mesh_set_recycle_garbage)
+      .def("does_recycle_garbage", &Sm::does_recycle_garbage,
+           sm_doc::Surface_mesh_does_recycle_garbage)
 
-      .def("number_of_removed_edges", &Sm::number_of_removed_edges)
-      .def("number_of_removed_faces", &Sm::number_of_removed_faces)
-      .def("number_of_removed_vertices", &Sm::number_of_removed_vertices)
-      .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges)
+      .def("number_of_removed_edges", &Sm::number_of_removed_edges,
+           sm_doc::Surface_mesh_number_of_removed_edges)
+      .def("number_of_removed_faces", &Sm::number_of_removed_faces,
+           sm_doc::Surface_mesh_number_of_removed_faces)
+      .def("number_of_removed_vertices", &Sm::number_of_removed_vertices,
+           sm_doc::Surface_mesh_number_of_removed_vertices)
+      .def("number_of_removed_halfedges", &Sm::number_of_removed_halfedges,
+           sm_doc::Surface_mesh_number_of_removed_halfedges)
 
-      .def("next_around_source", &Sm::next_around_source)
-      .def("prev_around_source", &Sm::prev_around_source)
-      .def("next_around_target", &Sm::next_around_target)
-      .def("prev_around_target", &Sm::prev_around_target)
+      .def("next_around_source", &Sm::next_around_source,
+           py::arg("h"),
+           sm_doc::Surface_mesh_next_around_source)
+      .def("prev_around_source", &Sm::prev_around_source,
+           py::arg("h"),
+           sm_doc::Surface_mesh_prev_around_source)
+      .def("next_around_target", &Sm::next_around_target,
+           py::arg("h"),
+           sm_doc::Surface_mesh_next_around_target)
+      .def("prev_around_target", &Sm::prev_around_target,
+           py::arg("h"),
+           sm_doc::Surface_mesh_prev_around_target)
 
       // .def("property_stats", &Sm::property_stats)
 
-      .def("point", &sm::my_point<Sm>, ri)
-      .def("points", &sm::points<Sm, Vi, Pnt>)
+      .def("point", &sm::my_point<Sm>, ri,
+           py::arg("v"),
+           sm_doc::Surface_mesh_point)
+      .def("points", &sm::points<Sm, Vi, Pnt>,
+           sm_doc::Surface_mesh_points)
 
       // .def("__iadd__",
       //      py::self += py::self,
@@ -684,12 +786,22 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            "Inserts other into sm.",
            py::is_operator())
 
-      .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<bool>(&Sm::is_valid, py::const_),
+           py::arg("verbose") = false,
+           sm_doc::Surface_mesh_is_valid)
 #if CGAL_VERSION_NR >= 1050600000
-      .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_))
-      .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_))
+      .def("is_valid", py::overload_cast<Vi, bool>(&Sm::is_valid, py::const_),
+           py::arg("v"), py::arg("verbose") = false,
+           sm_doc::Surface_mesh_is_valid_1)
+      .def("is_valid", py::overload_cast<Ei, bool>(&Sm::is_valid, py::const_),
+           py::arg("e"), py::arg("verbose") = false,
+           sm_doc::Surface_mesh_is_valid_3)
+      .def("is_valid", py::overload_cast<Hi, bool>(&Sm::is_valid, py::const_),
+           py::arg("h"), py::arg("verbose") = false,
+           sm_doc::Surface_mesh_is_valid_2)
+      .def("is_valid", py::overload_cast<Fi, bool>(&Sm::is_valid, py::const_),
+           py::arg("f"), py::arg("verbose") = false,
+           sm_doc::Surface_mesh_is_valid_4)
 #endif
       ;
 
