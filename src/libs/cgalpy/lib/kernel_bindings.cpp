@@ -1337,10 +1337,14 @@ void export_kernel_module(py::module_& m) {
         ker_doc::squared_radius_2);
 
   using Xe_fnc = bool(*)(const Pnt_2&, const Pnt_2&);
-  m.def("x_equal", static_cast<Xe_fnc>(&CGAL::x_equal<Kernel>));
+  m.def("x_equal", static_cast<Xe_fnc>(&CGAL::x_equal<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::x_equal);
 
   using Ye_fnc =bool(*)(const Pnt_2&, const Pnt_2&) ;
-  m.def("y_equal", static_cast<Ye_fnc>(&CGAL::y_equal<Kernel>));
+  m.def("y_equal", static_cast<Ye_fnc>(&CGAL::y_equal<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::y_equal);
 
   using Do_fnc = bool(*)(const Bbox_2&, const Bbox_2&);
   m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap));
@@ -1349,7 +1353,9 @@ void export_kernel_module(py::module_& m) {
   m.def("do_overlap", static_cast<Do_fnc3>(&CGAL::do_overlap));
 
   using Cmp3_fnc = CGAL::Comparison_result(*)(const Pnt_3&, const Pnt_3&);
-  m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>));
+  m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::compare_z);
 
   //! From number_utils.h. \todo move to algebraic foundations
   using Cmp_fnc = CGAL::Comparison_result(*)(const FT&, const FT&);
@@ -1365,7 +1371,8 @@ void export_kernel_module(py::module_& m) {
   m.def("to_double", &CGAL::to_double<FT>);
 
   m.def("approximate_dihedral_angle", &CGAL::approximate_dihedral_angle<Kernel>,
-        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"));
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::approximate_dihedral_angle);
   /// @}
 
   using Pnt_range = typename std::vector<Point_3>;
