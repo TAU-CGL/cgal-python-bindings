@@ -21,6 +21,7 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/pair.h>
 
+#include "cgalpy/Bgl_docstrings.hpp"
 #include "cgalpy/Sm_docstrings.hpp"
 
 #include <CGAL/boost/graph/generators.h>
@@ -58,6 +59,7 @@
 #include "CGALPY/surface_mesh_types.hpp"
 
 namespace py = nanobind;
+namespace bgl_doc = cgalpy::docstrings::BGL;
 namespace sm_doc = cgalpy::docstrings::Surface_mesh;
 
 namespace sm {
@@ -365,7 +367,8 @@ void add_maps(C& c) {
            }
            return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
          },
-         py::arg("name") = std::string(), py::arg("default_value") = py::set())
+         py::arg("name") = std::string(), py::arg("default_value") = py::set(),
+         sm_doc::Surface_mesh_add_property_map)
     ;
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
@@ -373,13 +376,10 @@ void add_maps(C& c) {
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   c.def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
         py::arg("name"), py::arg("default_value"),
-        "Add a property map named `name` with value type `Principal_curvatures_and_directions` and default `default_value`\n"
-        "for index type `Vertex_index`. Returns the property map together with a Boolean\n"
-        "that is `true` if a new map was created. In case it already exists\n"
-        "the existing map together with `false` is returned.")
+        sm_doc::Surface_mesh_add_property_map)
     .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
          py::arg("name") = std::string(),
-         "Obtain an optional property map named `name` with key type `Vertex_index` and value type `Principal_curvatures_and_directions`.")
+         sm_doc::Surface_mesh_property_map)
     ;
 #endif
 
@@ -541,7 +541,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   if (! add_attr<Fd>(m, "Face_descriptor")) {
     py::class_<Fd>(m, "Face_descriptor")
       .def(py::init<>())
-      .def(py::init<Fi>())
+      .def(py::init<Fi>(),
+           py::arg("face_index"))
       .def("idx", &Fd::idx)
       .def("is_valid", &Fd::is_valid)
       .def("__str__", [](const Fd& fd){ return std::to_string(fd.idx()); })
@@ -553,7 +554,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   if (! add_attr<Hd>(m, "Halfedge_descriptor")) {
     py::class_<Hd>(m, "Halfedge_descriptor")
       .def(py::init<>())
-      .def(py::init<Hi>())
+      .def(py::init<Hi>(),
+           py::arg("halfedge_index"))
       .def("idx", &Hd::idx)
       .def("is_valid", &Hd::is_valid)
       .def("__str__", [](const Hd& hd){ return std::to_string(hd.idx()); })
@@ -565,7 +567,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   if (! add_attr<Vd>(m, "Vertex_descriptor")) {
     py::class_<Vd>(m, "Vertex_descriptor")
       .def(py::init<>())
-      .def(py::init<Vi>())
+      .def(py::init<Vi>(),
+           py::arg("vertex_index"))
       .def("idx", &Vd::idx)
       .def("is_valid", &Vd::is_valid)
       .def("__str__", [](const Vd& vd){ return std::to_string(vd.idx()); })
@@ -844,7 +847,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
 #ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &sm::draw<Sm>);
+  m.def("draw", &sm::draw<Sm>,
+        py::arg("surface_mesh"), py::arg("title"));
 #endif
 }
 
@@ -928,18 +932,22 @@ void export_surface_mesh(py::module_& m) {
   using Ffg3 = CGAL::Face_filtered_graph<Sm_3>;
 
   py::class_<Ffg3>(m, "Face_filtered_graph")
-    .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>())
+    .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>(),
+         py::arg("graph"), py::arg("selected_face_patch_id"), py::arg("face_patch_id_map"))
     .def("graph", [](const Ffg3& ffg) { return ffg.graph(); })
     .def("reset_indices", [](Ffg3& ffg) { return ffg.reset_indices(); })
-    .def("number_of_faces", [](const Ffg3& ffg) { return ffg.number_of_faces(); })
+    .def("number_of_faces", [](const Ffg3& ffg) { return ffg.number_of_faces(); },
+         bgl_doc::Face_filtered_graph_number_of_faces)
     .def("invert_selection", [](Ffg3& ffg) { return ffg.invert_selection(); })
     // commented for stubs
     // .def("get_face_index_map",
     //    [](const Ffg3& ffg) { return ffg.get_face_index_map(); })
     .def("number_of_vertices",
-         [](const Ffg3& ffg) { return ffg.number_of_vertices(); })
+         [](const Ffg3& ffg) { return ffg.number_of_vertices(); },
+         bgl_doc::Face_filtered_graph_number_of_vertices)
     .def("number_of_halfedges",
-         [](const Ffg3& ffg) { return ffg.number_of_halfedges(); })
+         [](const Ffg3& ffg) { return ffg.number_of_halfedges(); },
+         bgl_doc::Face_filtered_graph_number_of_halfedges)
     // .def("get_vertex_index_map",
     //   [](const Ffg3& ffg) { return ffg.get_vertex_index_map(); })
     // .def("get_halfedge_index_map",
@@ -950,11 +958,14 @@ void export_surface_mesh(py::module_& m) {
     .def("set_selected_faces",
          [](Ffg3& ffg, const std::vector<std::size_t>& vec, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
            return ffg.set_selected_faces(vec, fccmap);
-         })
+         },
+         py::arg("selected_face_patch_ids"), py::arg("face_patch_id_map"),
+         bgl_doc::Face_filtered_graph_set_selected_faces)
     ;
 
   // Face filtered Graph
-  m.def("faces", &boost_utils::my_faces<Ffg3>);
+  m.def("faces", &boost_utils::my_faces<Ffg3>,
+        bgl_doc::FaceListGraph_faces);
 
   // Still Need Sorting
   m.def("clear", &CGAL::clear<Sm_3>);
@@ -972,15 +983,22 @@ void export_surface_mesh(py::module_& m) {
   // CGAL and the Boost Graph Library
 
   // Global functions
-  m.def("add_edge", &bgl::my_add_edge<Sm_3>);
-  m.def("add_face", &bgl::my_add_face<Sm_3>);
-  m.def("add_vertex", &bgl::my_add_vertex<Sm_3>);
+  m.def("add_edge", &bgl::my_add_edge<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_add_edge);
+  m.def("add_face", &bgl::my_add_face<Sm_3>,
+        bgl_doc::MutableFaceGraph_add_face);
+  m.def("add_vertex", &bgl::my_add_vertex<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_add_vertex);
   // Not documented
   // m.def("collect_garbage", &bgl::my_collect_garbage<Sm_3>);
-  m.def("num_edges", &bgl::my_num_edges<Sm_3>);
-  m.def("num_faces", &bgl::my_num_faces<Sm_3>);
-  m.def("num_halfedges", &bgl::my_num_halfedges<Sm_3>);
-  m.def("num_vertices", &bgl::my_num_vertices<Sm_3>);
+  m.def("num_edges", &bgl::my_num_edges<Sm_3>,
+        bgl_doc::EdgeListGraph_num_edges);
+  m.def("num_faces", &bgl::my_num_faces<Sm_3>,
+        bgl_doc::FaceListGraph_num_faces);
+  m.def("num_halfedges", &bgl::my_num_halfedges<Sm_3>,
+        bgl_doc::HalfedgeListGraph_num_halfedges);
+  m.def("num_vertices", &bgl::my_num_vertices<Sm_3>,
+        bgl_doc::VertexListGraph_num_vertices);
   m.def("remove_all_elements", &bgl::my_remove_all_elements<Sm_3>);
   m.def("reserve", &bgl::my_reserve<Sm_3>);
 
@@ -999,18 +1017,30 @@ void export_surface_mesh(py::module_& m) {
 #endif
 
   // Other
-  m.def("adjacent_vertices", &bgl::adjacent_vertices<Sm_3>);
-  m.def("add_vertex", &bgl::add_vertex_p<Sm_3>);
-  m.def("degree", &bgl::degree_v<Sm_3>);
-  m.def("degree", &bgl::degree_f<Sm_3>);
-  m.def("edge", &bgl::edge<Sm_3>);
-  m.def("edge", &bgl::edge_vv<Sm_3>);
-  m.def("face", &bgl::face<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_e<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_f<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_v<Sm_3>);
-  m.def("halfedge", &bgl::halfedge_vv<Sm_3>);
-  m.def("in_degree", &bgl::in_degree<Sm_3>);
+  m.def("adjacent_vertices", &bgl::adjacent_vertices<Sm_3>,
+        bgl_doc::adjacent_vertices);
+  m.def("add_vertex", &bgl::add_vertex_p<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_add_vertex);
+  m.def("degree", &bgl::degree_v<Sm_3>,
+        bgl_doc::degree);
+  m.def("degree", &bgl::degree_f<Sm_3>,
+        bgl_doc::FaceGraph_degree);
+  m.def("edge", &bgl::edge<Sm_3>,
+        bgl_doc::HalfedgeGraph_edge);
+  m.def("edge", &bgl::edge_vv<Sm_3>,
+        bgl_doc::EdgeListGraph_edges);
+  m.def("face", &bgl::face<Sm_3>,
+        bgl_doc::FaceGraph_face);
+  m.def("halfedge", &bgl::halfedge_e<Sm_3>,
+        bgl_doc::HalfedgeGraph_halfedge);
+  m.def("halfedge", &bgl::halfedge_f<Sm_3>,
+        bgl_doc::FaceGraph_halfedge);
+  m.def("halfedge", &bgl::halfedge_v<Sm_3>,
+        bgl_doc::HalfedgeGraph_halfedge_1);
+  m.def("halfedge", &bgl::halfedge_vv<Sm_3>,
+        bgl_doc::HalfedgeGraph_halfedge_2);
+  m.def("in_degree", &bgl::in_degree<Sm_3>,
+        bgl_doc::in_degree);
   m.def("is_border", &bgl::my_is_border_h<Sm_3>);
   m.def("is_border", &bgl::my_is_border_e<Sm_3>);
   m.def("is_border", &bgl::my_is_border_v<Sm_3>);
@@ -1018,39 +1048,64 @@ void export_surface_mesh(py::module_& m) {
   m.def("is_valid_vertex_descriptor", &bgl::my_is_valid_vertex_descriptor<Sm_3>,
         py::arg("v"), py::arg("g"), py::arg("verbose") = false);
   m.def("is_valid_halfedge_descriptor", &bgl::my_is_valid_halfedge_descriptor<Sm_3>,
-        py::arg("h"), py::arg("g"), py::arg("verbose") = false);
+        py::arg("h"), py::arg("g"), py::arg("verbose") = false,
+        bgl_doc::is_valid_halfedge_descriptor);
   m.def("is_valid_edge_descriptor", &bgl::my_is_valid_edge_descriptor<Sm_3>,
-        py::arg("e"), py::arg("g"), py::arg("verbose") = false);
+        py::arg("e"), py::arg("g"), py::arg("verbose") = false,
+        bgl_doc::is_valid_edge_descriptor);
   m.def("is_valid_face_descriptor", &bgl::my_is_valid_face_descriptor<Sm_3>,
-        py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  m.def("next", &bgl::next<Sm_3>);
-  m.def("null_face", &bgl::null_face<Sm_3>);
-  m.def("null_halfedge", &bgl::null_halfedge<Sm_3>);
+        py::arg("f"), py::arg("g"), py::arg("verbose") = false,
+        bgl_doc::is_valid_face_descriptor);
+  m.def("next", &bgl::next<Sm_3>,
+        bgl_doc::HalfedgeGraph_next);
+  m.def("null_face", &bgl::null_face<Sm_3>,
+        bgl_doc::FaceGraph_null_face);
+  m.def("null_halfedge", &bgl::null_halfedge<Sm_3>,
+        bgl_doc::HalfedgeGraph_null_halfedge);
   m.def("null_vertex", &bgl::null_vertex<Sm_3>);
-  m.def("opposite", &bgl::opposite<Sm_3>);
-  m.def("out_degree", &bgl::out_degree<Sm_3>);
-  m.def("prev", &bgl::prev<Sm_3>);
-  m.def("source", &bgl::source_e<Sm_3>);
-  m.def("source", &bgl::source_h<Sm_3>);
-  m.def("target", &bgl::target_e<Sm_3>);
-  m.def("target", &bgl::target_h<Sm_3>);
-  m.def("remove_edge", &bgl::remove_edge_e<Sm_3>);
+  m.def("opposite", &bgl::opposite<Sm_3>,
+        bgl_doc::HalfedgeGraph_opposite);
+  m.def("out_degree", &bgl::out_degree<Sm_3>,
+        bgl_doc::out_degree);
+  m.def("prev", &bgl::prev<Sm_3>,
+        bgl_doc::HalfedgeGraph_prev);
+  m.def("source", &bgl::source_e<Sm_3>,
+        bgl_doc::EdgeListGraph_source);
+  m.def("source", &bgl::source_h<Sm_3>,
+        bgl_doc::HalfedgeGraph_source);
+  m.def("target", &bgl::target_e<Sm_3>,
+        bgl_doc::EdgeListGraph_target);
+  m.def("target", &bgl::target_h<Sm_3>,
+        bgl_doc::HalfedgeGraph_target);
+  m.def("remove_edge", &bgl::remove_edge_e<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_remove_edge);
   // Fails to compile, but also not documented
   // m.def("remove_edge", &bgl::remove_edge_vv<Sm_3>);
-  m.def("remove_face", &bgl::remove_face<Sm_3>);
-  m.def("remove_vertex", &bgl::remove_vertex<Sm_3>);
-  m.def("set_face", &bgl::set_face<Sm_3>);
-  m.def("set_halfedge", &bgl::set_halfedge_vh<Sm_3>);
-  m.def("set_halfedge", &bgl::set_halfedge_fh<Sm_3>);
-  m.def("set_next", &bgl::set_next<Sm_3>);
-  m.def("set_target", &bgl::set_target<Sm_3>);
+  m.def("remove_face", &bgl::remove_face<Sm_3>,
+        bgl_doc::MutableFaceGraph_remove_face);
+  m.def("remove_vertex", &bgl::remove_vertex<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_remove_vertex);
+  m.def("set_face", &bgl::set_face<Sm_3>,
+        bgl_doc::MutableFaceGraph_set_face);
+  m.def("set_halfedge", &bgl::set_halfedge_vh<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_set_halfedge);
+  m.def("set_halfedge", &bgl::set_halfedge_fh<Sm_3>,
+        bgl_doc::MutableFaceGraph_set_halfedge);
+  m.def("set_next", &bgl::set_next<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_set_next);
+  m.def("set_target", &bgl::set_target<Sm_3>,
+        bgl_doc::MutableHalfedgeGraph_set_target);
 
-  m.def("vertices", &boost_utils::my_vertices<Sm_3>);
-  m.def("edges", &boost_utils::my_edges<Sm_3>);
+  m.def("vertices", &boost_utils::my_vertices<Sm_3>,
+        bgl_doc::VertexListGraph_vertices);
+  m.def("edges", &boost_utils::my_edges<Sm_3>,
+        bgl_doc::EdgeListGraph_edges);
   m.def("in_edges", &boost_utils::my_in_edges<Sm_3>);
   m.def("out_edges", &boost_utils::my_out_edges<Sm_3>);
-  m.def("halfedges", &boost_utils::my_halfedges<Sm_3>);
-  m.def("faces", &boost_utils::my_faces<Sm_3>);
+  m.def("halfedges", &boost_utils::my_halfedges<Sm_3>,
+        bgl_doc::HalfedgeListGraph_halfedges);
+  m.def("faces", &boost_utils::my_faces<Sm_3>,
+        bgl_doc::FaceListGraph_faces);
 
   // Generator Functions
   m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Sm_3>);
