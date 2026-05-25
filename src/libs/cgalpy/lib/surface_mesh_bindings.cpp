@@ -93,17 +93,38 @@ auto has_valid_index_f(const SurfaceMesh& sm, typename SurfaceMesh::Face_index& 
 void export_dynamic_property_map(py::module_& m, const std::string& name) {
   using Mt = MapType;
   using Key = const typename Mt::key_type;
-  using Value = const typename Mt::value_type;
-  if (! add_attr<Mt>(m, name.c_str())) {
-    py::class_<Mt>(m, name.c_str())
-      .def(py::init<>())
-      .def_ro("map_", &Mt::map_)
-      ;
+  using Value = typename Mt::value_type;
+
+  if constexpr (std::is_same_v<Value, bool>) {
+    // std::vector<bool>-backed maps return proxy references, which nanobind
+    // cannot expose directly. Return/store plain bool values instead, and do
+    // not expose the underlying map_ member for this specialization.
+    if (! add_attr<Mt>(m, name.c_str())) {
+      py::class_<Mt>(m, name.c_str())
+        .def(py::init<>())
+        ;
+    }
+    m.def("get", [](const Mt& pm, const Key& key) -> bool {
+        return static_cast<bool>(get(pm, key));
+      },
+      py::arg("property_map"), py::arg("key"));
+    m.def("put", [](const Mt& pm, const Key& key, bool value) {
+        return put(pm, key, value);
+      },
+      py::arg("property_map"), py::arg("key"), py::arg("value"));
   }
-  m.def("get", [](const Mt& pm, const Key& key) { return get(pm, key); },
-        py::arg("property_map"), py::arg("key"));
-  m.def("put", [](const Mt& pm, const Key& key, const Value& value) { return put(pm, key, value); },
-        py::arg("property_map"), py::arg("key"), py::arg("value"));
+  else {
+    if (! add_attr<Mt>(m, name.c_str())) {
+      py::class_<Mt>(m, name.c_str())
+        .def(py::init<>())
+        .def_ro("map_", &Mt::map_)
+        ;
+    }
+    m.def("get", [](const Mt& pm, const Key& key) { return get(pm, key); },
+          py::arg("property_map"), py::arg("key"));
+    m.def("put", [](const Mt& pm, const Key& key, const Value& value) { return put(pm, key, value); },
+          py::arg("property_map"), py::arg("key"), py::arg("value"));
+  }
 }
 
 //!
@@ -552,7 +573,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
     sm::add_maps<Sm, py::class_<Sm>>(sm_c);
 
-    sm::export_dynamic_property_maps<Sm, bool>(m, "bool");
+    // Dynamic bool property maps are backed by std::vector<bool>, whose proxy
+    // reference/iterator types cannot be exposed safely through nanobind.
+    // Static bool property maps are exported below via export_property_map_bool().
+    // sm::export_dynamic_property_maps<Sm, bool>(m, "bool");
     sm::export_dynamic_property_maps<Sm, int>(m, "int");
     sm::export_dynamic_property_maps<Sm, double>(m, "float");
     sm::export_dynamic_property_maps<Sm, std::size_t>(m, "size_t");

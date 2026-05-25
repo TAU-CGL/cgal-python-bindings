@@ -53,10 +53,9 @@ auto export_property_map_bool(py::module_& m, const std::string& name) {
     .def(py::init<>())
     .def("__getitem__", [](Mesh_property_map& self, Key key) -> bool { return self[key]; })
     .def("__setitem__", [](Mesh_property_map& self, Key key, bool value) { self[key] = value; })
-    .def("__iter__", [](Mesh_property_map& self) { // nanobind should be able to handle std::_Bit_reference
-      return py::make_iterator(py::type<typename Mesh_property_map::iterator>(),
-                               "Iterator", self.begin(), self.end(), py::keep_alive<0, 1>());
-    })
+    // Do not expose __iter__ for bool maps: CGAL Surface_mesh<bool>
+    // property maps are backed by std::vector<bool>, whose iterator yields
+    // proxy references that nanobind cannot cast safely.
     .def("transfer", [](Mesh_property_map& self, const Mesh_property_map& other) { return self.transfer(other); })
     .def("transfer", [](Mesh_property_map& self, const Mesh_property_map& other, std::size_t from, std::size_t to)
     { return self.transfer(other, from, to); })
