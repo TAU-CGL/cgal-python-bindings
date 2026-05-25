@@ -993,11 +993,21 @@ void export_kernel_module(py::module_& m) {
   using Angle_fnc4 = CGAL::Angle(*)(const Pnt_3&, const Pnt_3&, const Pnt_3&);
   using Angle_fnc5 = CGAL::Angle(*)(const Pnt_3&, const Pnt_3&, const Pnt_3&,
                                     const Pnt_3&);
-  m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc4>(&CGAL::angle<Kernel>));
-  m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>));
+  m.def("angle", static_cast<Angle_fnc1>(&CGAL::angle<Kernel>),
+        py::arg("u"), py::arg("v"),
+        ker_doc::angle);
+  m.def("angle", static_cast<Angle_fnc2>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::angle_1);
+  m.def("angle", static_cast<Angle_fnc3>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::angle_2);
+  m.def("angle", static_cast<Angle_fnc4>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::angle_4);
+  m.def("angle", static_cast<Angle_fnc5>(&CGAL::angle<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+        ker_doc::angle_5);
 
   using Area_fnc = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("area", static_cast<Area_fnc>(&CGAL::area<Kernel>),
