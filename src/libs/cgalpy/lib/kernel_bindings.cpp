@@ -1006,11 +1006,15 @@ void export_kernel_module(py::module_& m) {
 
   using Aoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_ordered_along_line",
-        static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>));
+        static_cast<Aoal_fnc>(&CGAL::are_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::are_ordered_along_line);
 
   using Asoal_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("are_strictly_ordered_along_line",
-        static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>));
+        static_cast<Asoal_fnc>(&CGAL::are_strictly_ordered_along_line<Kernel>),
+        py::arg("p"), py::arg("q"), py::arg("r"),
+        ker_doc::are_strictly_ordered_along_line);
 
   using Bc_fnc1 = Pnt_2(*)(const Pnt_2&, const FT&, const Pnt_2&, const FT&);
   using Bc_fnc2 =
@@ -1208,7 +1212,9 @@ void export_kernel_module(py::module_& m) {
 
   using Lid_fnc = FT(*)(const Pnt_2&, const Pnt_2&);
   m.def("l_infinity_distance",
-        static_cast<Lid_fnc>(&CGAL::l_infinity_distance<Kernel>));
+        static_cast<Lid_fnc>(&CGAL::l_infinity_distance<Kernel>),
+        py::arg("p"), py::arg("q"),
+        ker_doc::l_infinity_distance);
 
   using Lt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("left_turn", static_cast<Lt_fnc>(&CGAL::left_turn<Kernel>),
@@ -1232,7 +1238,9 @@ void export_kernel_module(py::module_& m) {
         static_cast<Lxysoe_fnc>(&CGAL::lexicographically_xy_smaller_or_equal<Kernel>));
 
   using Maxv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
-  m.def("max_vertex", static_cast<Maxv_fnc>(&CGAL::max_vertex<Kernel>));
+  m.def("max_vertex", static_cast<Maxv_fnc>(&CGAL::max_vertex<Kernel>),
+        py::arg("ir"),
+        ker_doc::max_vertex);
 
   using Mp_fnc = Pnt_2(*)(const Pnt_2&, const Pnt_2&);
   m.def("midpoint", static_cast<Mp_fnc>(&CGAL::midpoint<Kernel>),
@@ -1245,7 +1253,9 @@ void export_kernel_module(py::module_& m) {
         ker_doc::midpoint_2);
 
   using Minv_fnc = Pnt_2(*)(const Iso_rectangle_2&);
-  m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>));
+  m.def("min_vertex", static_cast<Minv_fnc>(&CGAL::min_vertex<Kernel>),
+        py::arg("ir"),
+        ker_doc::min_vertex);
 
   using Or_fnc1 =
     CGAL::Orientation(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -1271,7 +1281,9 @@ void export_kernel_module(py::module_& m) {
         ker_doc::parallel_2);
 
   using Rl_fnc = Line_2 (*)(const Circle_2&, const Circle_2&);
-  m.def("radical_line", static_cast<Rl_fnc>(&CGAL::radical_line<Kernel>));
+  m.def("radical_line", static_cast<Rl_fnc>(&CGAL::radical_line<Kernel>),
+        py::arg("c1"), py::arg("c2"),
+        ker_doc::radical_line);
 
   // Parameterized by FT (not Kernel)
   using Rra_fnc =
