@@ -21,9 +21,11 @@
 # include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
 
 namespace pmp {
 
@@ -157,18 +159,21 @@ void export_pmp_feature_detection(py::module_& m) {
 
   // Feature Detection Functions
   m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, Edge_bool_map>,
-        py::arg("pm"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_detect_sharp_edges);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("sharp_edges_segmentation",
         &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
         py::arg("pmesh"), py::arg("angle_in_deg"),
         py::arg("edge_is_feature_map"),
-        py::arg("patch_id_map"), py::arg("np") = py::dict());
+        py::arg("patch_id_map"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_sharp_edges_segmentation);
   m.def("detect_vertex_incident_patches",
         &pmp::detect_vertex_incident_patches<Pm, Pm::Property_map<Fd, int>, Pm::Property_map<Vd, py::set>, Pm::Property_map<Ed, bool>>,
         py::arg("pmesh"), py::arg("patch_id_map"),
-        py::arg("vertex_incident_patches_map"), py::arg("np") = py::dict());
+        py::arg("edge_is_feature_map"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_detect_vertex_incident_patches);
 #endif
 }

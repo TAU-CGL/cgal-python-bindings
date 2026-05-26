@@ -19,9 +19,11 @@
 #include "CGALPY/pmp_helpers.hpp"
 
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Pmp_docstrings.hpp"
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace py = nanobind;
+namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
 
 namespace pmp {
 
@@ -398,7 +400,8 @@ void export_pmp_connected_components(py::module_& m) {
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   m.def("connected_components",
         &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::size_t>>::type>,
-        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("fcm"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_connected_components);
   // m.def("connected_components",
   //       &pmp::connected_components_map<Pm, boost::property_map<Pm, CGAL::dynamic_face_property_t<std::uint32_t>>::type>,
   //       py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
@@ -407,35 +410,44 @@ void export_pmp_connected_components(py::module_& m) {
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("connected_components",
         &pmp::connected_components_map<Pm, Pm::Property_map<Fd, std::size_t>>,
-        py::arg("pm"), py::arg("fcm"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("fcm"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_connected_components);
   m.def("keep_connected_components",
         &pmp::keep_connected_components_map<Pm, Face_component_map>,
-        py::arg("pm"), py::arg("components_to_keep"), py::arg("fcm"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("components_to_keep"), py::arg("fcm"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_keep_connected_components);
 #endif
   m.def("keep_connected_components", &pmp::keep_connected_components<Pm>,
-        py::arg("pm"), py::arg("components_to_keep"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("components_to_keep"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_keep_connected_components_1);
   m.def("keep_large_connected_components",
         &pmp::keep_large_connected_components<Pm, std::size_t>,
-        py::arg("pm"), py::arg("min_size"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("threshold_value"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_keep_large_connected_components);
   m.def("keep_large_connected_components",
         &pmp::keep_large_connected_components<Pm, double>,
-        py::arg("pm"), py::arg("min_size"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("threshold_value"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_keep_large_connected_components);
   m.def("keep_largest_connected_components",
         &pmp::keep_largest_connected_components<Pm>,
-        py::arg("pm"), py::arg("nb_components_to_keep"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("nb_components_to_keep"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_keep_largest_connected_components);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("remove_connected_components",
         &pmp::remove_connected_components_map<Pm, Face_component_map>,
-        py::arg("pm"), py::arg("components_to_remove"), py::arg("fccmap"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("components_to_remove"), py::arg("fcm"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_remove_connected_components);
 #endif
   m.def("remove_connected_components", &pmp::remove_connected_components<Pm>,
-        py::arg("pm"), py::arg("components_to_remove"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("components_to_remove"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_remove_connected_components_1);
   m.def("split_connected_components", &pmp::split_connected_components<Pm>,
-        py::arg("pmesh"), py::arg("cc_meshes"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("cc_meshes"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_split_connected_components);
 }

@@ -22,9 +22,11 @@
 
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
 
 namespace pmp {
 
@@ -154,10 +156,12 @@ void export_pmp_corrected_curvature_computation(py::module_& m) {
   // Corrected Curvature Computation
   m.def("interpolated_corrected_curvatures",
         &pmp::interpolated_corrected_curvatures<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_interpolated_corrected_curvatures);
 
   m.def("interpolated_corrected_curvatures",
         &pmp::interpolated_corrected_curvatures_v<Pm>,
-        py::arg("v"), py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("v"), py::arg("pmesh"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_interpolated_corrected_curvatures_1);
 #endif
 }
