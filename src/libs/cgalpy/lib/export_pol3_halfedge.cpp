@@ -11,8 +11,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;
+namespace pol3_doc = cgalpy::docstrings::Polyhedron;
 
 namespace pol3 {
 
@@ -35,30 +37,30 @@ void export_pol3_halfedge(py::class_<pol3::Polyhedron_3>& prn_c) {
 
   if (add_attr<Halfedge>(prn_c, "Halfedge")) return;
 
-  py::class_<Halfedge> halfedge_c(prn_c, "Halfedge");
-  halfedge_c.def(py::init<>())
-    .def("facet", &pol3::facet, ri)
-    .def("face", &pol3::face, ri)
-    .def("facet_degree", [](const Halfedge& h) { return h.facet_degree(); })
-    .def("is_border", [](const Halfedge& h) { return h.is_border(); })
-    .def("is_border_edge", [](const Halfedge& h) { return h.is_border_edge(); })
-    .def("is_quad", [](const Halfedge& h) { return h.is_quad(); })
-    .def("is_bivalent", [](const Halfedge& h) { return h.is_bivalent(); })
-    .def("is_triangle", [](const Halfedge& h) { return h.is_triangle(); })
-    .def("is_trivalent", [](const Halfedge& h){  return h.is_trivalent(); })
-    .def("next", &pol3::next, ri)
-    .def("next_on_vertex", &pol3::next_on_vertex, ri)
-    .def("prev", &pol3::prev, ri)
-    .def("prev_on_vertex", &pol3::prev_on_vertex, ri)
-    .def("opposite", &pol3::opposite, ri)
-    .def("vertex", &pol3::vertex, ri)
-    .def("vertex_degree", [](const Halfedge& h) { return h.vertex_degree(); })
+  py::class_<Halfedge> halfedge_c(prn_c, "Halfedge", pol3_doc::Polyhedron_3_Halfedge_class);
+  halfedge_c.def(py::init<>(), pol3_doc::Polyhedron_3_Halfedge_Halfedge)
+    .def("facet", &pol3::facet, ri, pol3_doc::Polyhedron_3_Halfedge_facet)
+    .def("face", &pol3::face, ri, pol3_doc::Polyhedron_3_Halfedge_facet)
+    .def("facet_degree", [](const Halfedge& h) { return h.facet_degree(); }, pol3_doc::Polyhedron_3_Halfedge_facet_degree)
+    .def("is_border", [](const Halfedge& h) { return h.is_border(); }, pol3_doc::Polyhedron_3_Halfedge_is_border)
+    .def("is_border_edge", [](const Halfedge& h) { return h.is_border_edge(); }, pol3_doc::Polyhedron_3_Halfedge_is_border_edge)
+    .def("is_quad", [](const Halfedge& h) { return h.is_quad(); }, pol3_doc::Polyhedron_3_Halfedge_is_quad)
+    .def("is_bivalent", [](const Halfedge& h) { return h.is_bivalent(); }, pol3_doc::Polyhedron_3_Halfedge_is_bivalent)
+    .def("is_triangle", [](const Halfedge& h) { return h.is_triangle(); }, pol3_doc::Polyhedron_3_Halfedge_is_triangle)
+    .def("is_trivalent", [](const Halfedge& h){  return h.is_trivalent(); }, pol3_doc::Polyhedron_3_Halfedge_is_trivalent)
+    .def("next", &pol3::next, ri, pol3_doc::Polyhedron_3_Halfedge_next)
+    .def("next_on_vertex", &pol3::next_on_vertex, ri, pol3_doc::Polyhedron_3_Halfedge_next_on_vertex)
+    .def("prev", &pol3::prev, ri, pol3_doc::Polyhedron_3_Halfedge_prev)
+    .def("prev_on_vertex", &pol3::prev_on_vertex, ri, pol3_doc::Polyhedron_3_Halfedge_prev_on_vertex)
+    .def("opposite", &pol3::opposite, ri, pol3_doc::Polyhedron_3_Halfedge_opposite)
+    .def("vertex", &pol3::vertex, ri, pol3_doc::Polyhedron_3_Halfedge_vertex)
+    .def("vertex_degree", [](const Halfedge& h) { return h.vertex_degree(); }, pol3_doc::Polyhedron_3_Halfedge_vertex_degree)
 #ifdef CGALPY_POL3_HALFEDGE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Halfedge. Therefore, we cannot directly refere to any of them, e.g.,
     // `Halfedge::set_data`. Instead, we introduce lambda functions that call
     // the appropriate member functions.
-    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); })
+    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); }, py::arg("data"))
     .def("data", [](const Halfedge& h)->py::object { return h.data(); })
 #endif
     ;

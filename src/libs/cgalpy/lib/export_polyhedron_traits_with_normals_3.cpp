@@ -13,17 +13,19 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;
+namespace pol3_doc = cgalpy::docstrings::Polyhedron;
 
 /*!
  */
 void export_polyhedron_traits_with_normals_3(py::module_& m) {
   using Traits = CGAL::Polyhedron_traits_with_normals_3<Kernel>;
   if (! add_attr<Traits>(m, "Polyhedron_traits_with_normals_3")) {
-    py::class_<Traits>(m, "Polyhedron_traits_with_normals_3")
-      .def(py::init<>())
-      .def(py::init<const Kernel&>(), py::keep_alive<1, 2>())
+    py::class_<Traits>(m, "Polyhedron_traits_with_normals_3", pol3_doc::Polyhedron_traits_with_normals_3_class)
+      .def(py::init<>(), pol3_doc::Polyhedron_traits_with_normals_3_Polyhedron_traits_with_normals_3)
+      .def(py::init<const Kernel&>(), py::arg("kernel"), py::keep_alive<1, 2>(), pol3_doc::Polyhedron_traits_with_normals_3_Polyhedron_traits_with_normals_3_1)
       ;
   }
 }
