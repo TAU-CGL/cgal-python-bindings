@@ -20,7 +20,6 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/kernel_type.hpp"
-#include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
@@ -36,13 +35,11 @@ auto define_property_map(C& c, Point_set_nb& ptst, const std::string& name) {
     .def("transfer", [](Pm& pm, const Pm& other) { pm.transfer(other); },
          py::arg("other"))
     .def("transfer_from_to",
-         [](Pm& pm, const Pm& other, std::size_t from, std::size_t to)
-         { pm.transfer(other, from, to); },
+         [](Pm& pm, const Pm& other, std::size_t from, std::size_t to) { pm.transfer(other, from, to); },
          py::arg("other"), py::arg("from"), py::arg("to"))
     .def("__iter__",
          [](Pm& pm) {
-           return py::make_iterator(py::type<typename Pm::iterator>(),
-                                    "Iterator", pm.begin(), pm.end());
+           return py::make_iterator(py::type<typename Pm::iterator>(), "Iterator", pm.begin(), pm.end());
          },
          py::keep_alive<0, 1>())
     .def("__getitem__", [](Pm& pm, std::size_t i) { return pm[i]; },
@@ -54,23 +51,17 @@ auto define_property_map(C& c, Point_set_nb& ptst, const std::string& name) {
          [](Pm& pm, const typename Point_set::iterator& it) { return pm[*it]; },
          py::arg("index"))
     .def("__setitem__",
-         [](Pm& pm, const typename Point_set::iterator& it, const Property& p)
-         { pm[*it] = p; },
+         [](Pm& pm, const typename Point_set::iterator& it, const Property& p) { pm[*it] = p; },
          py::arg("index"), py::arg("value"))
     ;
 
-  ptst.def(("add_property_map_" + name).c_str(),
-           &Point_set::template add_property_map<Property>,
-           py::arg("name") = std::string(),
-           py::arg("default_value") = Property())
-    .def(("property_map_" + name).c_str(),
-         &Point_set::template property_map<Property>,
+  ptst.def(("add_property_map_" + name).c_str(), &Point_set::template add_property_map<Property>,
+           py::arg("name") = std::string(), py::arg("default_value") = Property())
+    .def(("property_map_" + name).c_str(), &Point_set::template property_map<Property>,
          py::arg("name") = std::string())
-    .def(("has_property_map_" + name).c_str(),
-         &Point_set::template has_property_map<Property>,
+    .def(("has_property_map_" + name).c_str(), &Point_set::template has_property_map<Property>,
          py::arg("name") = std::string())
-    .def("remove_property_map",
-         &Point_set::template remove_property_map<Property>,
+    .def("remove_property_map", &Point_set::template remove_property_map<Property>,
          py::arg("prop"))
     ;
 
@@ -493,9 +484,10 @@ void export_3d_point_set(py::module_& m) {
   // this idx has to be here because the compiler ignored it otherwise
   auto ptst_idx = export_point_set_index<CGAL::internal::Point_set_3_index<Pnt_3, Vec_3>>(m, "3");
 
-  m.def("write_point_set", [](const std::string& fname, Pt_set_3& ps, const py::kwargs& np = py::kwargs()) {
-    return CGAL::IO::write_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
-  },
+  m.def("write_point_set",
+        [](const std::string& fname, Pt_set_3& ps, const py::kwargs& np = py::kwargs()) {
+          return CGAL::IO::write_point_set<Pnt_3, Vec_3>(fname, ps);
+        },
         py::arg("fname"), py::arg("ps"), py::arg("np") = py::kwargs(),
         "writes the point set in an output file.\n"
         "Supported file formats are the following:\n"
@@ -518,9 +510,10 @@ void export_3d_point_set(py::module_& m) {
         "Returns True if the writing was successful, False otherwise."
         );
 
-  m.def("read_point_set", [](const std::string& fname, Pt_set_3& ps, const py::kwargs& np = py::kwargs()) {
-    return CGAL::IO::read_point_set<Pnt_3, Vec_3>(fname, ps, internal::parse_named_parameters(np));
-  },
+  m.def("read_point_set",
+        [](const std::string& fname, Pt_set_3& ps, const py::kwargs& np = py::kwargs()) {
+          return CGAL::IO::read_point_set<Pnt_3, Vec_3>(fname, ps);
+        },
         py::arg("fname"), py::arg("ps"), py::arg("np") = py::kwargs(),
         "reads the point set from an input file.\n"
         "Supported file formats are the following:\n"
@@ -541,10 +534,7 @@ void export_3d_point_set(py::module_& m) {
         "use_binary_mode (bool) = True\n"
         "\n"
         "Returns\n"
-        "True if the reading was successful, False otherwise."
-        );
-
-
+        "True if the reading was successful, False otherwise.");
 
   export_property_maps<Pnt_3, Vec_3, FT>(ptst, ptst);
   using Point_map_3 = typename Pt_set_3::template Property_map<Point_3>;

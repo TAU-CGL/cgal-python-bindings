@@ -15,9 +15,6 @@
 
 #include <CGAL/Polygon_mesh_processing/compute_normal.h>
 
-//! \todo remove
-#include "CGALPY/pmp_np_parser.hpp"
-
 #include "CGALPY/Internal_face_plane_3_map.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Named_parameter_wrapper.hpp"
@@ -37,7 +34,7 @@ template <typename PolygonMesh>
 Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
                              const PolygonMesh& mesh, const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_face_normal(f, mesh, internal::parse_pmp_np<Pm>(params));
+  return PMP::compute_face_normal(f, mesh);
 }
 
 /*! A class template that wraps the function template
@@ -66,7 +63,7 @@ template<typename PolygonMesh, typename VertexNormalMap, typename FaceNormalMap>
 auto compute_normals(const PolygonMesh& pm, VertexNormalMap vnormals, FaceNormalMap fnormals,
                      const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_normals(pm, vnormals, fnormals, internal::parse_pmp_np<Pm>(np));
+  return PMP::compute_normals(pm, vnormals, fnormals);
 }
 
 //!
@@ -74,14 +71,14 @@ template <typename PolygonMesh>
 Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
                                const PolygonMesh& mesh, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_vertex_normal(v, mesh, internal::parse_pmp_np<Pm>(np));
+  return PMP::compute_vertex_normal(v, mesh);
 }
 
 //!
 template <typename PolygonMesh, typename VertexNormalMap>
 auto compute_vertex_normals(const PolygonMesh& mesh, VertexNormalMap vertex_normals, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_vertex_normals(mesh, vertex_normals, internal::parse_pmp_np<Pm>(np));
+  return PMP::compute_vertex_normals(mesh, vertex_normals);
 }
 
 }
@@ -115,31 +112,25 @@ void export_pmp_normal_computation(py::module_& m) {
 #endif
 
   m.def("compute_face_normal", &pmp::compute_face_normal<Pm>,
-        py::arg("f"), py::arg("pmesh"),
-        py::arg("np") = py::dict(),
+        py::arg("f"), py::arg("pmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_compute_face_normal);
 
   m.def("compute_face_normals", &pmp::compute_face_normals<Pm, Face_normal_map>,
-        py::arg("pmesh"), py::arg("face_normals"),
-        py::arg("np") = py::dict(),
+        py::arg("pmesh"), py::arg("face_normals"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_compute_face_normals);
 
   m.def("compute_normals",
         &pmp::compute_normals<Pm, Vertex_vector_map, Face_vector_map>,
-        py::arg("pmesh"), py::arg("vertex_normals"), py::arg("face_normals"),
-        py::arg("np") = py::dict(),
+        py::arg("pmesh"), py::arg("vertex_normals"), py::arg("face_normals"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_compute_normals);
 
   m.def("compute_vertex_normal", &pmp::compute_vertex_normal<Pm>,
-        py::arg("v"), py::arg("pmesh"),
-        py::arg("np") = py::dict(),
+        py::arg("v"), py::arg("pmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_compute_vertex_normal);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  m.def("compute_vertex_normals",
-        &pmp::compute_vertex_normals<Pm, Vertex_vector_map>,
-        py::arg("pmesh"), py::arg("vertex_normals"),
-        py::arg("np") = py::dict(),
+  m.def("compute_vertex_normals", &pmp::compute_vertex_normals<Pm, Vertex_vector_map>,
+        py::arg("pmesh"), py::arg("vertex_normals"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_compute_vertex_normals);
 #endif
 }

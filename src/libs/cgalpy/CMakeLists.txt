@@ -559,7 +559,6 @@ endif ()
 include_directories(include)
 
 # Internal dependencies
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4251)

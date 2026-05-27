@@ -12,30 +12,29 @@
 #include <list>
 #include <unordered_map>
 
-#include <CGAL/Named_function_parameters.h>
+#include <boost/graph/graph_traits.hpp>
+
 #include <CGAL/boost/graph/named_params_helper.h>
+#include <CGAL/Named_function_parameters.h>
+#include <CGAL/Union_find.h>
 
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/boost/graph/properties.h>
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/Origin.h>
 
-#include <boost/graph/graph_traits.hpp>
-
 // #include <boost/graph/graph_traits.hpp>
 
 // #include <CGAL/boost/graph/helpers.h>
 // #include <CGAL/boost/graph/properties.h>
 // #include <CGAL/Named_function_parameters.h>
-#include <CGAL/Union_find.h>
 
 namespace CGAL {
 namespace Polygon_mesh_processing {
 
 template <typename FaceDescriptor, typename HandleMap>
 typename CGAL::Union_find<FaceDescriptor>::handle
-uf_get_handle(FaceDescriptor f, CGAL::Union_find<FaceDescriptor>& uf_faces,
-              HandleMap& handles) {
+uf_get_handle(FaceDescriptor f, CGAL::Union_find<FaceDescriptor>& uf_faces, HandleMap& handles) {
   using Face_descriptor =  FaceDescriptor;
   using Uf_faces = CGAL::Union_find<Face_descriptor>;
   using Uf_handle = typename Uf_faces::handle;
@@ -46,8 +45,7 @@ uf_get_handle(FaceDescriptor f, CGAL::Union_find<FaceDescriptor>& uf_faces,
 }
 
 template <typename FaceDescriptor, typename HandleMap>
-bool uf_join_faces(FaceDescriptor f1, FaceDescriptor f2,
-                   CGAL::Union_find<FaceDescriptor>& uf_faces,
+bool uf_join_faces(FaceDescriptor f1, FaceDescriptor f2, CGAL::Union_find<FaceDescriptor>& uf_faces,
                    HandleMap& handles) {
   using Face_descriptor = FaceDescriptor;
   using Uf_faces = CGAL::Union_find<Face_descriptor>;
@@ -64,10 +62,8 @@ bool uf_join_faces(FaceDescriptor f1, FaceDescriptor f2,
  */
 template <typename PolygonMesh, typename FaceNormalMap,
           typename NamedParameters = parameters::Default_named_parameters>
-void merge_coplanar_facets(PolygonMesh& mesh,
-                           FaceNormalMap normals,
-                           const NamedParameters& np =
-                             parameters::default_values()) {
+void merge_coplanar_facets(PolygonMesh& mesh, FaceNormalMap normals,
+                           const NamedParameters& np = parameters::default_values()) {
   namespace parms = CGAL::parameters;
 
   using Pm = PolygonMesh;

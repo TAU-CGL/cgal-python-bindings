@@ -22,9 +22,7 @@
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 #include <CGAL/Polygon_mesh_processing/orientation.h>
 
-#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/Default_orientation_visitor.hpp"
-#include "CGALPY/pmp_np_parser.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 
@@ -35,35 +33,28 @@ namespace pmp {
 
 //!
 template <typename Point_3, typename Visitor>
-auto orient_polygon_soup(std::vector<Point_3>& points,
-                         std::vector<std::vector<std::size_t>>& polygons,
+auto orient_polygon_soup(std::vector<Point_3>& points, std::vector<std::vector<std::size_t>>& polygons,
                          const py::dict& np = py::dict()) {
-  auto visitor =
-    np.contains("visitor") ? py::cast<Visitor>(np["visitor"]) : Visitor();
-  if (PMP::orient_polygon_soup(points, polygons,
-                               internal::parse_named_parameters(np).
-                               visitor(visitor)))
-    return std::make_pair(points, polygons);
-  else
-    throw std::runtime_error("Could not orient the polygon soup");
+  auto visitor = np.contains("visitor") ? py::cast<Visitor>(np["visitor"]) : Visitor();
+  if (PMP::orient_polygon_soup(points, polygons)) return std::make_pair(points, polygons);
+  else throw std::runtime_error("Could not orient the polygon soup");
 }
 
 //!
 template <typename TriangleMesh>
-auto orient(TriangleMesh& tm,
-            const py::dict& np = py::dict()) {
+auto orient(TriangleMesh& tm, const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
   if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP0",
-      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    PMP::orient(tm, internal::parse_pmp_np<TriangleMesh>(np)
-                .face_index_map(fim));
+                                                            np.contains("face_index_map") ?
+                                                            np["face_internal_map"] : py::none());
+    PMP::orient(tm);
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("face_index_map")) tm.remove_property_map(fim);
 #endif
   }
   else {
-    PMP::orient(tm, internal::parse_pmp_np<TriangleMesh>(np));
+    PMP::orient(tm);
   }
 }
 
@@ -73,15 +64,12 @@ auto does_bound_a_volume(TriangleMesh& tm,
                          const py::dict& np = py::dict()) {
   bool retv;
   if (np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<TriangleMesh, bool>
-      (tm, "INTERNAL_MAP0", np.contains("face_index_map") ? np["face_index_map"] : py::none());
-    retv = PMP::does_bound_a_volume(tm,
-                                    internal::parse_pmp_np<TriangleMesh>(np)
-                                    .face_index_map(fim));
+    auto fim = get_face_prop_map<TriangleMesh, bool>(tm, "INTERNAL_MAP0",
+                                                     np.contains("face_index_map") ? np["face_index_map"] : py::none());
+    retv = PMP::does_bound_a_volume(tm);
   }
   else {
-    retv = PMP::does_bound_a_volume(tm,
-                                    internal::parse_pmp_np<TriangleMesh>(np));
+    retv = PMP::does_bound_a_volume(tm);
   }
   return retv;
 }
@@ -92,21 +80,18 @@ void orient_to_bound_a_volume(PolygonMesh& tm,
                               const py::dict& np = py::dict()) {
   if(np.contains("face_index_map")) {
     auto fim = get_face_prop_map<PolygonMesh, std::size_t>(tm, "INTERNAL_MAP0",
-      np.contains("face_index_map") ? np["face_index_map"] : py::none());
-    PMP::orient_to_bound_a_volume(tm,
-                                  internal::parse_pmp_np<PolygonMesh>(np)
-                                  .face_index_map(fim));
+                                                           np.contains("face_index_map") ?
+                                                           np["face_index_map"] : py::none());
+    PMP::orient_to_bound_a_volume(tm);
   }
   else {
-    PMP::orient_to_bound_a_volume(tm, internal::parse_pmp_np<PolygonMesh>(np));
+    PMP::orient_to_bound_a_volume(tm);
   }
 }
 
 //!
 template <typename TriangleMesh, typename VolumeFaceIndexMap>
-auto volume_connected_components(TriangleMesh& tm,
-                                 VolumeFaceIndexMap volume_id_map,
-                                 const py::dict& np = py::dict()) {
+auto volume_connected_components(TriangleMesh& tm, VolumeFaceIndexMap volume_id_map, const py::dict& np = py::dict()) {
   std::vector<std::size_t> ccitvi, nl;
   std::vector<bool> icoo;
   std::vector<std::vector<std::size_t>> vi;
@@ -114,51 +99,27 @@ auto volume_connected_components(TriangleMesh& tm,
   std::size_t retv;
   if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP0",
-      np.contains("face_index_map") ? np["face_index_map"] : py::none());
+                                                            np.contains("face_index_map") ?
+                                                            np["face_index_map"] : py::none());
     if (np.contains("face_connected_component_map")) {
       auto fccm = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP1",
-        np.contains("face_connected_component_map") ? np["face_connected_component_map"] : py::none());
-        retv = PMP::volume_connected_components(tm, volume_id_map,
-                                                internal::parse_pmp_np<TriangleMesh>(np)
-                                                .face_index_map(fim)
-                                                .face_connected_component_map(fccm)
-                                                .volume_inclusions(std::ref(vi))
-                                                .connected_component_id_to_volume_id(std::ref(ccitvi))
-                                                .nesting_levels(std::ref(nl))
-                                                .is_cc_outward_oriented(std::ref(icoo))
-                                                .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot)));
+                                                               np.contains("face_connected_component_map") ?
+                                                               np["face_connected_component_map"] : py::none());
+        retv = PMP::volume_connected_components(tm, volume_id_map);
     }
     else {
-      retv = PMP::volume_connected_components(tm, volume_id_map,
-                                              internal::parse_pmp_np<TriangleMesh>(np)
-                                              .face_index_map(fim)
-                                              .volume_inclusions(std::ref(vi))
-                                              .connected_component_id_to_volume_id(std::ref(ccitvi))
-                                              .nesting_levels(std::ref(nl))
-                                              .is_cc_outward_oriented(std::ref(icoo))
-                                              .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot)));
+      retv = PMP::volume_connected_components(tm, volume_id_map);
     }
   }
   else {
     if (np.contains("face_connected_component_map")) {
       auto fccm = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP1",
-        np.contains("face_connected_component_map") ? np["face_connected_component_map"] : py::none());
-      retv = PMP::volume_connected_components(tm, volume_id_map, internal::parse_pmp_np<TriangleMesh>(np)
-                                              .face_connected_component_map(fccm)
-                                              .volume_inclusions(std::ref(vi))
-                                              .connected_component_id_to_volume_id(std::ref(ccitvi))
-                                              .nesting_levels(std::ref(nl))
-                                              .is_cc_outward_oriented(std::ref(icoo))
-                                              .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot)));
+                                                               np.contains("face_connected_component_map") ?
+                                                               np["face_connected_component_map"] : py::none());
+      retv = PMP::volume_connected_components(tm, volume_id_map);
     }
     else {
-      retv = PMP::volume_connected_components(tm, volume_id_map,
-                                              internal::parse_pmp_np<TriangleMesh>(np)
-                                              .volume_inclusions(std::ref(vi))
-                                              .connected_component_id_to_volume_id(std::ref(ccitvi))
-                                              .nesting_levels(std::ref(nl))
-                                              .is_cc_outward_oriented(std::ref(icoo))
-                                              .intersecting_volume_pairs_output_iterator(std::back_inserter(ivpot)));
+      retv = PMP::volume_connected_components(tm, volume_id_map);
     }
   }
   return std::make_tuple(retv, ccitvi, nl, icoo, vi, ivpot);
@@ -166,9 +127,8 @@ auto volume_connected_components(TriangleMesh& tm,
 
 //!
 template <typename TriangleMesh>
-auto is_outward_oriented(TriangleMesh& tm,
-                         const py::dict& np = py::dict()) {
-  return PMP::is_outward_oriented(tm, internal::parse_pmp_np<TriangleMesh>(np));
+auto is_outward_oriented(TriangleMesh& tm, const py::dict& np = py::dict()) {
+  return PMP::is_outward_oriented(tm);
 }
 
 //!
@@ -192,18 +152,13 @@ auto duplicate_non_manifold_edges_in_polygon_soup(std::vector<Point_3>& points,
 
 //!
 template <typename PolygonMesh>
-auto orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm_ref,
-                                                       std::vector<Point_3>& points,
+auto orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm_ref, std::vector<Point_3>& points,
                                                        std::vector<std::vector<std::size_t>>& triangles,
                                                        const py::dict& np1 = py::dict(),
                                                        const py::dict& np2 = py::dict()) {
   using TAG = CGAL::Sequential_tag;
   // auto vpm = get_vertex_point_map(tm_ref, np1);
-  PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>(tm_ref, points, triangles,
-                                                       internal::parse_pmp_np<PolygonMesh>(np1)
-                                                       // .vertex_point_map(vpm)
-                                                       ,
-                                                       internal::parse_pmp_np<PolygonMesh>(np2));
+  PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>(tm_ref, points, triangles);
   return std::make_tuple(points, triangles);
 }
 
@@ -219,36 +174,30 @@ auto orient_triangle_soup_with_reference_triangle_soup(const std::vector<Point_3
 
 //!
 template <typename PolygonMesh>
-void merge_reversible_connected_components(PolygonMesh& pm,
-                              const py::dict& np = py::dict()) {
+void merge_reversible_connected_components(PolygonMesh& pm, const py::dict& np = py::dict()) {
   if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<PolygonMesh, std::size_t>(pm, "INTERNAL_MAP0",
-      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    PMP::merge_reversible_connected_components(pm,
-                                               internal::parse_pmp_np<PolygonMesh>(np)
-                                              .face_index_map(fim));
+                                                           np.contains("face_index_map") ?
+                                                           np["face_internal_map"] : py::none());
+    PMP::merge_reversible_connected_components(pm);
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("face_index_map")) pm.remove_property_map(fim);
 #endif
   }
   else {
-    PMP::merge_reversible_connected_components(pm,
-                                               internal::parse_pmp_np<PolygonMesh>(np));
+    PMP::merge_reversible_connected_components(pm);
   }
 }
 
 //!
 template <typename PolygonMesh, typename FaceBitMap>
-auto compatible_orientations(PolygonMesh& pm,
-                             FaceBitMap fbm,
-                             const py::dict& np = py::dict()) {
+auto compatible_orientations(PolygonMesh& pm, FaceBitMap fbm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   auto fpim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP0",
-    np.contains("face_patch_index_map") ? np["face_patch_index_map"] : py::none());
+                                                 np.contains("face_patch_index_map") ?
+                                                 np["face_patch_index_map"] : py::none());
 
-  auto retv = PMP::compatible_orientations(pm, fbm,
-                                          internal::parse_pmp_np<PolygonMesh>(np)
-                                          .face_partition_id_map(fpim));
+  auto retv = PMP::compatible_orientations(pm, fbm);
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (!np.contains("face_patch_index_map")) {
     pm.remove_property_map(fpim);
@@ -325,10 +274,8 @@ void export_pmp_orientation(py::module_& m) {
   m.def("orient_to_bound_a_volume", &pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-  m.def("volume_connected_components",
-        &pmp::volume_connected_components<Pm, Face_size_type_map>,
-        py::arg("tm"), py::arg("volume_id_map"),
-        py::arg("np") = py::dict());
+  m.def("volume_connected_components", &pmp::volume_connected_components<Pm, Face_size_type_map>,
+        py::arg("tm"), py::arg("volume_id_map"), py::arg("np") = py::dict());
 #endif
   m.def("is_outward_oriented", &pmp::is_outward_oriented<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
@@ -336,8 +283,7 @@ void export_pmp_orientation(py::module_& m) {
         py::arg("face_range"), py::arg("pmesh"));
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
         py::arg("pmesh"));
-  m.def("duplicate_non_manifold_edges_in_polygon_soup",
-        &pmp::duplicate_non_manifold_edges_in_polygon_soup,
+  m.def("duplicate_non_manifold_edges_in_polygon_soup", &pmp::duplicate_non_manifold_edges_in_polygon_soup,
         py::arg("points"), py::arg("polygons"));
   m.def("orient_triangle_soup_with_reference_triangle_mesh",
         &pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>, // TODO: point_map
@@ -345,23 +291,18 @@ void export_pmp_orientation(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
   // m.def("orient_triangle_soup_with_reference_triangle_soup", &pmp::orient_triangle_soup_with_reference_triangle_soup, // TODO: point_map
   //       py::arg("ref_points"), py::arg("ref_faces"), py::arg("points"), py::arg("faces"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("merge_reversible_connected_components",
-        &pmp::merge_reversible_connected_components<Pm>,
+  m.def("merge_reversible_connected_components", &pmp::merge_reversible_connected_components<Pm>,
          py::arg("pm"), py::arg("np") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-  m.def("compatible_orientations",
-        &pmp::compatible_orientations<Pm, Face_bit_map>,
-        py::arg("pm"), py::arg("face_bit_map"),
-        py::arg("np") = py::dict());
+  m.def("compatible_orientations", &pmp::compatible_orientations<Pm, Face_bit_map>,
+        py::arg("pm"), py::arg("face_bit_map"), py::arg("np") = py::dict());
 #endif
 
   m.def("set_non_manifold_edge", &pmp::set_non_manifold_edge);
   m.def("set_non_manifold_vertex", &pmp::set_non_manifold_vertex);
   m.def("set_duplicated_vertex", &pmp::set_duplicated_vertex);
-  m.def("set_vertex_id_in_polygon_replaced",
-        &pmp::set_vertex_id_in_polygon_replaced);
-  m.def("set_polygon_orientation_reversed",
-        &pmp::set_polygon_orientation_reversed);
+  m.def("set_vertex_id_in_polygon_replaced", &pmp::set_vertex_id_in_polygon_replaced);
+  m.def("set_polygon_orientation_reversed", &pmp::set_polygon_orientation_reversed);
   m.def("set_link_connected_polygons", &pmp::set_link_connected_polygons);
 
   py::class_<Dov>(m, "Default_orientation_visitor")

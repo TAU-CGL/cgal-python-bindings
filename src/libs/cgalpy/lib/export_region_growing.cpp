@@ -12,7 +12,6 @@
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Shape_detection/Region_growing.h>
 
-#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/kernel_type.hpp"
 
 namespace py = nanobind;
@@ -39,11 +38,10 @@ void export_region_growing(py::module_& m) {
          "Precondition\n"
          "• input_range.size() > 0\n")
 
-    .def_static("init_with_params", [](const Point_set& ps,
-                                       const py::dict& params) {
-        return PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>(ps, internal::parse_named_parameters(params));
+    .def_static("init_with_params", [](const Point_set& ps, const py::dict& np) {
+      return PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>(ps);
     },
-      py::arg("ps"), py::arg("params"),
+      py::arg("ps"), py::arg("np"),
          "initializes a Kd-tree with input points.\n\n"
          "Parameters\n"
          "• input_range: range of points to be indexed\n\n"
@@ -59,13 +57,13 @@ void export_region_growing(py::module_& m) {
          "• neighbors: Items of points, which are neighbors of the query point")
     ;
 
-  using Lsqcf_ps3 = PS::Least_squares_circle_fit_region<Kernel_,
-                                                        Point_set::Index, Point_set::Point_map, Point_set::Vector_map>;
+  using Lsqcf_ps3 =
+    PS::Least_squares_circle_fit_region<Kernel_, Point_set::Index, Point_set::Point_map, Point_set::Vector_map>;
   py::class_<Lsqcf_ps3>(m, "Least_squares_circle_fit_region_3",
     "Region type based on the quality of the least squares circle fit applied to 2D points.\n"
     "This class fits a circle to chunks of points in a 2D point set and controls the quality of this fit. If all quality conditions are satisfied, the chunk is accepted as a valid region, otherwise rejected.")
-    .def_static("init_with_params", [](const py::dict& params) {
-      return Lsqcf_ps3(internal::parse_named_parameters(params));
+    .def_static("init_with_params", [](const py::dict& np) {
+      return Lsqcf_ps3();
     })
     // .def("is_part_of_region", &Lsqcf_ps3::is_part_of_region, // only for 2D
     //      "implements RegionType::is_part_of_region().\n"

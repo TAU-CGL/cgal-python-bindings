@@ -18,9 +18,6 @@
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
 
-//! \todo remove
-#include "CGALPY/pmp_np_parser.hpp"
-
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -34,112 +31,97 @@ namespace pmp {
 template <typename TriangleMesh>
 auto area(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::area(tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::area(tm);
 }
 
 //!
 template <typename TriangleMesh>
 auto area_f(const std::vector<typename boost::graph_traits<TriangleMesh>::face_descriptor>& face_range,
-            const TriangleMesh& tm,
-            const py::dict& np = py::dict()) {
+            const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<TriangleMesh>;
   using Fd = typename Gt::face_descriptor;
-  return PMP::area(face_range, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::area(face_range, tm);
 }
 
 //!
 template <typename TriangleMesh>
-auto centroid(const TriangleMesh& tm,
-              const py::dict& np = py::dict()) {
+auto centroid(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::centroid(tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::centroid(tm);
 }
 
 //!
 template <typename TriangleMesh>
-auto edge_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& e,
-                 const TriangleMesh& tm,
+auto edge_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& e, const TriangleMesh& tm,
                  const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::edge_length(e, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::edge_length(e, tm);
 }
 
 //!
 template <typename TriangleMesh>
-auto face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
-               const TriangleMesh& tm,
+auto face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f, const TriangleMesh& tm,
                const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::face_area(f, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::face_area(f, tm);
 }
 
 template <typename TriangleMesh>
-auto face_aspect_ratio(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
-                       const TriangleMesh& tm,
+auto face_aspect_ratio(typename boost::graph_traits<TriangleMesh>::face_descriptor& f, const TriangleMesh& tm,
                        const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::face_aspect_ratio(f, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::face_aspect_ratio(f, tm);
 }
 
 //!
 template <typename TriangleMesh>
-auto face_border_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& h,
-                        const TriangleMesh& tm,
+auto face_border_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& h, const TriangleMesh& tm,
                         const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::face_border_length(h, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::face_border_length(h, tm);
 }
 
 //!
 template <typename TriangleMesh>
-auto longest_border(const TriangleMesh& tm,
-                    const py::dict& np = py::dict()) {
+auto longest_border(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::longest_border(tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::longest_border(tm);
 }
 
 //!
 template <typename TriangleMesh>
-auto match_faces(const TriangleMesh& tm1,
-                 const TriangleMesh& tm2,
-                 const py::dict& np1 = py::dict(),
-                 const py::dict& np2 = py::dict()) {
+auto match_faces(const TriangleMesh& tm1, const TriangleMesh& tm2,
+                 const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<Tm>;
   using Fd = typename Gt::face_descriptor;
   std::vector<std::pair<Fd, Fd>> common;
   std::vector<Fd> m1_only, m2_only;
-  PMP::match_faces(tm1, tm2, std::back_inserter(common),
-                   std::back_inserter(m1_only), std::back_inserter(m2_only),
-                   internal::parse_pmp_np<Tm>(np1),
-                   internal::parse_pmp_np<Tm>(np2));
+  PMP::match_faces(tm1, tm2, std::back_inserter(common), std::back_inserter(m1_only), std::back_inserter(m2_only));
   return std::make_tuple(common, m1_only, m2_only);
 }
 
 //!
 template <typename TriangleMesh>
 auto squared_edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
-                         const TriangleMesh& tm,
-                         const py::dict& np = py::dict()) {
+                         const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::squared_edge_length(e, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::squared_edge_length(e, tm);
 }
 
 //!
 template <typename TriangleMesh>
 auto squared_face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
-                       const TriangleMesh& tm,
-                       const py::dict& np = py::dict()) {
+                       const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::squared_face_area(f, tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::squared_face_area(f, tm);
 }
 
 template <typename TriangleMesh>
-auto volume(const TriangleMesh& tm,
-            const py::dict& np = py::dict()) {
+auto volume(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::volume(tm, internal::parse_pmp_np<Tm>(np));
+  return PMP::volume(tm);
 }
 
 }

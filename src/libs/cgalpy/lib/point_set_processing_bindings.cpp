@@ -45,7 +45,6 @@
 #include "CGALPY/Named_parameter_geom_traits.hpp"
 #include "CGALPY/Named_parameter_wrapper.hpp"
 #include "CGALPY/point_set_processing_type.hpp"
-// #include "CGALPY/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
@@ -112,12 +111,8 @@ void export_functions_without_normals(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
 
   c.def("bilateral_smooth_point_set",
-        [](PointRange& points, unsigned int k,
-           const py::kwargs& np = py::kwargs())
-        {
-          double r = CGAL::bilateral_smooth_point_set<Tag>(points, k,
-                                                           internal::parse_named_parameters(np)
-                                                           .geom_traits(K()));
+        [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
+          double r = CGAL::bilateral_smooth_point_set<Tag>(points, k);
           return std::make_pair(r, points);
         },
         py::arg("points"), py::arg("k"), py::arg("np"),
@@ -140,10 +135,7 @@ void export_functions_without_normals(C& c) {
   c.def("edge_aware_upsample_point_set",
         [](const PointRange& points, const py::kwargs& np = py::kwargs()) {
           std::vector<std::pair<Point, Vector>> output;
-          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
-                  internal::parse_named_parameters(np)
-                         .geom_traits(K())
-                                      );
+          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output));
           return output;
         },
         py::arg("points"), py::arg("np"),
@@ -162,7 +154,7 @@ void export_functions_without_normals(C& c) {
   c.def("scanline_orient_normals",
         [](PointRange& points, const py::kwargs& np = py::kwargs()) {
         // TODO: handle scan_angle_map and scanline_id_map
-          CGAL::scanline_orient_normals(points, internal::parse_named_parameters(np));
+          CGAL::scanline_orient_normals(points);
           return points;
         },
         py::arg("points"), py::arg("np"),
@@ -192,8 +184,7 @@ void export_functions_without_normals(C& c) {
   c.def("vcm_estimate_normals",
         [](PointRange& points, double offset_radius, double convolution_radius,
            const py::kwargs& np = py::kwargs()) {
-          CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius,
-                                     internal::parse_named_parameters(np));
+          CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius);
           return points;
         },
         py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
@@ -211,8 +202,7 @@ void export_functions_without_normals(C& c) {
   c.def("vcm_estimate_normals_neighbors",
         [](PointRange& points, double offset_radius, unsigned int k,
            const py::kwargs& np = py::kwargs()) {
-          CGAL::vcm_estimate_normals(points, offset_radius, k,
-                                     internal::parse_named_parameters(np));
+          CGAL::vcm_estimate_normals(points, offset_radius, k);
           return points;
         },
         py::arg("points"), py::arg("offset_radius"), py::arg("k"), py::arg("np"),
@@ -288,13 +278,8 @@ void export_functions_with_normals(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   c.def("bilateral_smooth_point_set",
-        [](PointRange& points, unsigned int k,
-           const py::kwargs& np = py::kwargs()) {
-          double r = CGAL::bilateral_smooth_point_set<Tag>(points, k,
-                                                           internal::parse_named_parameters(np)
-                                                           .point_map(PointMap())
-                                                           .normal_map(NormalMap())
-                                                           .geom_traits(K()));
+        [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
+          double r = CGAL::bilateral_smooth_point_set<Tag>(points, k);
           return std::make_pair(r, points);
         },
         py::arg("points"), py::arg("k"), py::arg("np"),
@@ -316,13 +301,8 @@ void export_functions_with_normals(C& c) {
 #endif
 
   c.def("jet_estimate_normals",
-        [](PointRange& points, unsigned int k,
-           const py::kwargs& np = py::kwargs()) {
-          CGAL::jet_estimate_normals<Tag>(points, k,
-                                          internal::parse_named_parameters(np)
-                                          .point_map(PointMap())
-                                          .normal_map(NormalMap())
-                                          );
+        [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
+          CGAL::jet_estimate_normals<Tag>(points, k);
           return points;
         },
         py::arg("points"), py::arg("k"), py::arg("np"),
@@ -348,11 +328,7 @@ void export_functions_with_normals(C& c) {
            const std::function<bool(double)>& callback = std::function<bool(double)>(),
            const py::kwargs& np = py::kwargs()) {
           auto cb_class = dummy_callback(callback);
-          return CGAL::compute_average_spacing<Tag>(points, k,
-                                                    CGAL::parameters::point_map(PointMap())
-                                                    .normal_map(NormalMap())
-                                                    // .callback(cb_class)
-                                                    );
+          return CGAL::compute_average_spacing<Tag>(points, k);
         },
         py::arg("points"), py::arg("k"),
         py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -374,12 +350,7 @@ void export_functions_with_normals(C& c) {
   c.def("edge_aware_upsample_point_set",
         [](const PointRange& points, const py::kwargs& np = py::kwargs()) {
           std::vector<std::pair<Point, Vector>> output;
-          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output),
-                                                   internal::parse_named_parameters(np)
-                                                   .geom_traits(K())
-                                                   .point_map(PointMap())
-                                                   .normal_map(NormalMap())
-                                                   );
+          CGAL::edge_aware_upsample_point_set<Tag>(points, std::back_inserter(output));
           return output;
         },
         py::arg("points"), py::arg("np"),
@@ -398,12 +369,9 @@ void export_functions_with_normals(C& c) {
   c.def("scanline_orient_normals",
         [](PointRange& points, const py::kwargs& np = py::kwargs()) {
           // TODO: handle scan_angle_map and scanline_id_map
-          CGAL::scanline_orient_normals(points, internal::parse_named_parameters(np)
-                                        .point_map(PointMap())
-                                        .normal_map(NormalMap())
-                                        );
+          CGAL::scanline_orient_normals(points);
           return points;
-  },
+        },
         py::arg("points"), py::arg("np"),
         "orients the normals of the range of points by estimating a line of sight and checking its consistency with the current normal orientation.\n\n"
         "Warning\n"
@@ -434,10 +402,7 @@ void export_functions_with_normals(C& c) {
            const py::kwargs& np = py::kwargs()) {
           auto cb_class = dummy_callback(callback);
           double nr = np.contains("neighbor_radius") ? py::cast<double>(np["neighbor_radius"]) : 0;
-          CGAL::pca_estimate_normals<Tag>(points, k, CGAL::parameters::neighbor_radius(nr)
-                                          // .callback(cb_class) // doesnt work
-                                          .point_map(PointMap())
-                                          .normal_map(NormalMap()));
+          CGAL::pca_estimate_normals<Tag>(points, k);
           return points;
         },
         py::arg("points"), py::arg("k"), py::arg("callback") = std::function<bool(double)>(), py::arg("np"),
@@ -460,22 +425,14 @@ void export_functions_with_normals(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   c.def("mst_orient_normals",
-        [](PointRange& points, unsigned int k,
-           const py::kwargs& np = py::kwargs()) {
+        [](PointRange& points, unsigned int k, const py::kwargs& np = py::kwargs()) {
           if (np.contains("point_is_constrained_map")) {
             // TODO: handle constrained points
-            auto it = CGAL::mst_orient_normals(points, k,
-                                               internal::parse_named_parameters(np)
-                                               .point_map(PointMap())
-                                               .normal_map(NormalMap())
-                                               );
+            auto it = CGAL::mst_orient_normals(points, k);
             return std::make_pair(points, std::distance(points.begin(), it));
           }
           else {
-            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np)
-                                               .point_map(PointMap())
-                                               .normal_map(NormalMap())
-                                               );
+            auto it = CGAL::mst_orient_normals(points, k);
             return std::make_pair(points, std::distance(points.begin(), it));
           }
         },
@@ -498,12 +455,8 @@ void export_functions_with_normals(C& c) {
         );
 
   c.def("vcm_estimate_normals",
-        [](PointRange& points, double offset_radius, double convolution_radius,
-           const py::kwargs& np = py::kwargs()) {
-          CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius,
-                                     internal::parse_named_parameters(np)
-                                     .point_map(PointMap())
-                                     .normal_map(NormalMap()));
+        [](PointRange& points, double offset_radius, double convolution_radius, const py::kwargs& np = py::kwargs()) {
+          CGAL::vcm_estimate_normals(points, offset_radius, convolution_radius);
           return points;
         },
         py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
@@ -519,13 +472,8 @@ void export_functions_with_normals(C& c) {
         );
 
   c.def("vcm_estimate_normals_neighbors",
-        [](PointRange& points, double offset_radius, unsigned int k,
-           const py::kwargs& np = py::kwargs()) {
-          CGAL::vcm_estimate_normals(points, offset_radius, k,
-                                     internal::parse_named_parameters(np)
-                                     .point_map(PointMap())
-                                     .normal_map(NormalMap())
-                                     );
+        [](PointRange& points, double offset_radius, unsigned int k, const py::kwargs& np = py::kwargs()) {
+          CGAL::vcm_estimate_normals(points, offset_radius, k);
           return points;
         },
         py::arg("points"), py::arg("offset_radius"), py::arg("k"), py::arg("np"),
@@ -602,9 +550,7 @@ void export_multiple_dimension_functions(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   c.def("estimate_global_k_neighbor_scale",
         [](const PointRange& points, const py::kwargs& np = py::kwargs()) {
-          return CGAL::estimate_global_k_neighbor_scale(points,
-                                                        internal::parse_named_parameters(np)
-                                                        .geom_traits(K()));
+          return CGAL::estimate_global_k_neighbor_scale(points);
         },
         py::arg("points"), py::arg("np"),
         "Estimates the global scale in a K nearest neighbors sense.\n"
@@ -622,10 +568,7 @@ void export_multiple_dimension_functions(C& c) {
 
   c.def("estimate_global_range_scale",
         [](const PointRange& points, const py::kwargs& np = py::kwargs()) {
-          return CGAL::estimate_global_range_scale(points,
-                                                   internal::parse_named_parameters(np)
-                                                   .geom_traits(K())
-                                                   );
+          return CGAL::estimate_global_range_scale(points);
         },
         py::arg("points"), py::arg("np"),
         "Estimates the global scale in a range sense.\n"
@@ -655,15 +598,10 @@ void export_functions_with_point_range_normals(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   c.def("compute_vcm_with_normals",
-        [](const PointRange& points,
-           double offset_radius,
-           double convolution_radius,
+        [](const PointRange& points, double offset_radius, double convolution_radius,
            const py::kwargs& np = py::kwargs()) {
           std::vector<std::array<double, 6>> ccov;
-          CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius,
-                            internal::parse_named_parameters(np)
-                            .point_map(PointMap())
-                            .geom_traits(K()));
+          CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius);
           return ccov;
         },
         py::arg("points"), py::arg("offset_radius"),
@@ -829,14 +767,10 @@ void export_functions_with_point_range(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   c.def("compute_vcm",
-        [](const PointRange& points,
-           double offset_radius,
-           double convolution_radius,
+        [](const PointRange& points, double offset_radius, double convolution_radius,
            const py::kwargs& np = py::kwargs()) {
           std::vector<std::array<double, 6>> ccov;
-          CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius,
-                            internal::parse_named_parameters(np)
-                            .geom_traits(K()));
+          CGAL::compute_vcm(points, ccov, offset_radius, convolution_radius);
           return ccov;
         },
         py::arg("points"), py::arg("offset_radius"), py::arg("convolution_radius"), py::arg("np"),
@@ -959,11 +893,11 @@ void export_functions_with_point_range(C& c) {
            const py::kwargs& np = py::kwargs()) {
           if (np.contains("point_is_constrained_map")) {
             // TODO: handle constrained points
-            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
+            auto it = CGAL::mst_orient_normals(points, k);
             return std::make_pair(points, std::distance(points.begin(), it));
           }
           else {
-            auto it = CGAL::mst_orient_normals(points, k, internal::parse_named_parameters(np));
+            auto it = CGAL::mst_orient_normals(points, k);
             return std::make_pair(points, std::distance(points.begin(), it));
           }
         },
@@ -1051,14 +985,9 @@ void export_functions_with_point_vec(C& c) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   c.def("estimate_local_k_neighbor_scales",
-        [](const Points& points,
-           const Points& queries,
-           const py::kwargs& np = py::kwargs()) {
+        [](const Points& points, const Points& queries, const py::kwargs& np = py::kwargs()) {
           std::vector<std::size_t> output;
-          return CGAL::estimate_local_k_neighbor_scales(points, queries,
-                                                        std::back_inserter(output),
-                                                        internal::parse_named_parameters(np)
-                                                        .geom_traits(K()));
+          return CGAL::estimate_local_k_neighbor_scales(points, queries, std::back_inserter(output));
         },
         py::arg("points"), py::arg("queries"), py::arg("np"),
         "Estimates the local scale in a K nearest neighbors sense on a set of user-defined query points.\n"
@@ -1076,13 +1005,9 @@ void export_functions_with_point_vec(C& c) {
         );
 
   c.def("estimate_local_range_scales",
-        [](const Points& points,
-           const Points& queries,
-           const py::kwargs& np = py::kwargs()) {
+        [](const Points& points, const Points& queries, const py::kwargs& np = py::kwargs()) {
           std::vector<std::size_t> output;
-          return CGAL::estimate_local_range_scales(points, queries, std::back_inserter(output),
-                                                   internal::parse_named_parameters(np)
-                                                   .geom_traits(K()));
+          return CGAL::estimate_local_range_scales(points, queries, std::back_inserter(output));
         },
         py::arg("points"), py::arg("queries"), py::arg("np"),
         "Estimates the local scale in a range sense on a set of user-defined query points.\n"
@@ -1246,10 +1171,7 @@ void export_point_set_processing(py::module_& m) {
           using Normal_map = CGAL::Second_of_pair_property_map<PointVectorPair>;
 
           std::vector<PointVectorPair> output;
-          bool success = CGAL::IO::read_points(fname, std::back_inserter(output), internal::parse_named_parameters(np)
-                                               .point_map(Point_map())
-                                               .normal_map(Normal_map())
-                                               );
+          bool success = CGAL::IO::read_points(fname, std::back_inserter(output));
           return std::make_pair(success, output);
         },
         py::arg("fname"), py::arg("np"),
@@ -1272,11 +1194,8 @@ void export_point_set_processing(py::module_& m) {
         );
 
   m.def("write_points",
-        [](const std::string& fname, const PointVector_3& points,
-           const py::kwargs& np = py::kwargs()) {
-          bool success = CGAL::IO::write_points(fname,
-                                                points, internal::parse_named_parameters(np));
-          return success;
+        [](const std::string& fname, const PointVector_3& points, const py::kwargs& np = py::kwargs()) {
+          return CGAL::IO::write_points(fname, points);
         },
         py::arg("fname"), py::arg("points"), py::arg("np"),
         "writes the range of points with properties to a file.\n"
@@ -1300,12 +1219,9 @@ void export_point_set_processing(py::module_& m) {
         );
 
   m.def("write_points_with_normals",
-        [](const std::string& fname, const std::vector<std::pair<Point_3,
-           Vector_3>>& points, const py::kwargs& np = py::kwargs()) {
-          bool success = CGAL::IO::write_points(fname, points, internal::parse_named_parameters(np)
-                                                .point_map(CGAL::First_of_pair_property_map<std::pair<Point_3, Vector_3>>())
-                                                .normal_map(CGAL::Second_of_pair_property_map<std::pair<Point_3, Vector_3>>()));
-          return success;
+        [](const std::string& fname, const std::vector<std::pair<Point_3, Vector_3>>& points,
+           const py::kwargs& np = py::kwargs()) {
+          return CGAL::IO::write_points(fname, points);
         },
         py::arg("fname"), py::arg("points"), py::arg("np"),
         "writes the range of points with properties to a file.\n"

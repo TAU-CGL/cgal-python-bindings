@@ -18,7 +18,6 @@
 #include <CGAL/Kinetic_surface_reconstruction_3.h>
 #include <CGAL/KSR_3/Graphcut.h>
 
-#include "CGALPY/parse_named_parameters.hpp"
 #include "CGALPY/kernel_types.hpp"
 
 namespace py = nanobind;
@@ -43,26 +42,13 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
   ksr.def("__init__",
           [](KSR& ksr, Point_range& points, const py::dict& np = py::dict()) {
             // return a new instance of KSR
-            if (np.contains("minimum_region_size")) {
-              std::size_t minimum_region_size;
-              try {
-                minimum_region_size = py::cast<std::size_t>(np["minimum_region_size"]);
-              }
-              catch (const py::cast_error& e) {
-                throw std::runtime_error("Error converting 'minimum_region_size' parameter.");
-              }
-              new (&ksr) KSR(points, internal::parse_named_parameters(np)
-                             .minimum_region_size(minimum_region_size));
-            }
-            else {
-              new (&ksr) KSR(points, internal::parse_named_parameters(np));
-            }
+            new (&ksr) KSR(points);
           },
           py::arg("points"), py::arg("np") = py::dict(),
           "creates a Kinetic_shape_reconstruction_3 object.\n")
     .def("detect_planar_shapes",
          [](KSR& ksr, const py::dict& np = py::dict()) {
-           return ksr.detect_planar_shapes(internal::parse_named_parameters(np));
+           return ksr.detect_planar_shapes();
          },
          py::arg("np") = py::dict(),
          "detects shapes in the provided point cloud and regularizes them.\n")
@@ -74,14 +60,14 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
       "returns the indices of detected and regularized shapes.\n")
     .def("detection_and_partition",
          [](KSR& ksr, std::size_t k, const py::dict& np = py::dict()) {
-           return ksr.detection_and_partition(k, internal::parse_named_parameters(np));
+           return ksr.detection_and_partition(k);
          },
          py::arg("k"), py::arg("np") = py::dict(),
          "detects and regularizes shapes in the provided point cloud and creates the kinetic space partition.\n"
          "Combines calls of detect_planar_shapes(), initialize_partition() and partition().\n")
     .def("initialize_partition",
          [](KSR& ksr, const py::dict& np = py::dict()) {
-           return ksr.initialize_partition(internal::parse_named_parameters(np));
+           return ksr.initialize_partition();
          },
       py::arg("np") = py::dict(),
       "initializes the kinetic partition.\n")

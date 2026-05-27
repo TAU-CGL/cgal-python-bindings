@@ -19,9 +19,6 @@
 #include <CGAL/Polygon_mesh_processing/intersection.h>
 #include <CGAL/Polygon_mesh_processing/self_intersections.h>
 
-//! \todo remove
-#include "CGALPY/pmp_np_parser.hpp"
-
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -35,37 +32,31 @@ using Point_3_vec = std::vector<Point_3>;
 
 //!
 template <typename PolygonMesh>
-bool does_self_intersect(const PolygonMesh& pm,
-                         const py::dict& np = py::dict()) {
+bool does_self_intersect(const PolygonMesh& pm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::does_self_intersect(pm, internal::parse_pmp_np<Pm>(np));
+  return PMP::does_self_intersect(pm);
 }
 
 //!
 template <typename PolygonMesh>
-bool does_self_intersect_faces(const std::vector<
-                               typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
-                               const PolygonMesh& pm,
-                               const py::dict& np = py::dict()) {
+bool does_self_intersect_faces(const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
+                               const PolygonMesh& pm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
-  return PMP::does_self_intersect(face_range, pm,
-                                  internal::parse_pmp_np<PolygonMesh>(np));
+  return PMP::does_self_intersect(face_range, pm);
 }
 
 //!
 template <typename PolygonMesh>
-auto self_intersections(const PolygonMesh& pm,
-                            const py::dict& np = py::dict()) {
+auto self_intersections(const PolygonMesh& pm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
   std::vector<std::pair<Fd, Fd>> result;
-  PMP::self_intersections(pm, std::back_inserter(result),
-                          internal::parse_pmp_np<Pm>(np));
+  PMP::self_intersections(pm, std::back_inserter(result));
   return result;
 }
 
@@ -73,15 +64,13 @@ auto self_intersections(const PolygonMesh& pm,
 template <typename PolygonMesh>
 auto self_intersections_faces(const std::vector<
                               typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
-                              const PolygonMesh& pm,
-                              const py::dict& np = py::dict()) {
+                              const PolygonMesh& pm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
   std::vector<std::pair<Fd, Fd>> result;
-  PMP::self_intersections(face_range, pm, std::back_inserter(result),
-                          internal::parse_pmp_np<Pm>(np));
+  PMP::self_intersections(face_range, pm, std::back_inserter(result));
   return result;
 }
 
@@ -112,49 +101,40 @@ bool do_intersect_polylines(const Point_3_vec& polyline1,
 
 /*! Determine whether two ranges of polylines intersect.
  */
-bool do_intersect_polyline_ranges(const std::vector<Point_3_vec>& range1,
-                                  const std::vector<Point_3_vec>& range2) {
+bool do_intersect_polyline_ranges(const std::vector<Point_3_vec>& range1, const std::vector<Point_3_vec>& range2) {
   return PMP::do_intersect(range1, range2);
 }
 
 //!
 template <typename PolygonMesh>
 bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
-                         const py::dict& np1 = py::dict(),
-                         const py::dict& np2 = py::dict()) {
+                         const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::do_intersect(pm1, pm2,
-                           internal::parse_pmp_np<Pm>(np1),
-                           internal::parse_pmp_np<Pm>(np2));
+  return PMP::do_intersect(pm1, pm2);
 }
 
 //!
 template <typename PolygonMesh>
-bool do_intersect_mesh_polyline(const PolygonMesh& pm,
-                                const Point_3_vec& polyline,
-                                const py::dict& np = py::dict()) {
+bool do_intersect_mesh_polyline(const PolygonMesh& pm, const Point_3_vec& polyline, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::do_intersect(pm, polyline, internal::parse_pmp_np<Pm>(np));
+  return PMP::do_intersect(pm, polyline);
 }
 
 //!
 template <typename PolygonMesh>
-bool do_intersect_mesh_polyline_range(const PolygonMesh& pm,
-                                      const std::vector<Point_3_vec>& range,
+bool do_intersect_mesh_polyline_range(const PolygonMesh& pm, const std::vector<Point_3_vec>& range,
                                       const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::do_intersect(pm, range, internal::parse_pmp_np<Pm>(np));
+  return PMP::do_intersect(pm, range);
 }
 
 //!
 template <typename PolygonMesh>
-auto intersecting_meshes(const std::vector<PolygonMesh>& range,
-                         const py::dict& np = py::dict(),
+auto intersecting_meshes(const std::vector<PolygonMesh>& range, const py::dict& np = py::dict(),
                          const std::vector<py::dict>& nps = std::vector<py::dict>()) {
   using Pm = PolygonMesh;
   std::vector<std::pair<std::size_t, std::size_t>> result;
-  PMP::intersecting_meshes(range, std::back_inserter(result),
-                           internal::parse_pmp_np<Pm>(np));
+  PMP::intersecting_meshes(range, std::back_inserter(result));
   return result;
 }
 
@@ -172,21 +152,17 @@ void export_pmp_intersection(py::module_& m) {
         py::arg("polylines1"), py::arg("polylines2"),
         pmp_doc::Polygon_mesh_processing_do_intersect);
   m.def("do_intersect", &pmp::do_intersect_meshes<Pm>,
-        py::arg("tm1"), py::arg("tm2"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_2);
   m.def("do_intersect", &pmp::do_intersect_mesh_polyline<Pm>,
-        py::arg("tm"), py::arg("polyline"),
-        py::arg("np") = py::dict(),
+        py::arg("tm"), py::arg("polyline"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_4);
   m.def("do_intersect_polyline_range",
         &pmp::do_intersect_mesh_polyline_range<Pm>,
-        py::arg("tm"), py::arg("polylines"),
-        py::arg("np") = py::dict(),
+        py::arg("tm"), py::arg("polylines"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_3);
   m.def("does_self_intersect", &pmp::does_self_intersect_faces<Pm>,
-        py::arg("face_range"), py::arg("tmesh"),
-        py::arg("np") = py::dict(),
+        py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_self_intersect);
   m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
@@ -201,11 +177,9 @@ void export_pmp_intersection(py::module_& m) {
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_self_intersections_1);
   m.def("self_intersections", &pmp::self_intersections_faces<Pm>,
-        py::arg("face_range"), py::arg("tmesh"),
-        py::arg("np") = py::dict(),
+        py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_self_intersections);
-  m.def("triangle_soup_self_intersections",
-        &pmp::triangle_soup_self_intersections, // TODO: point_map
+  m.def("triangle_soup_self_intersections", &pmp::triangle_soup_self_intersections, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_triangle_soup_self_intersections);
 }

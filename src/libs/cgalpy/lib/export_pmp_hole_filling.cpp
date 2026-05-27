@@ -20,9 +20,6 @@
 
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 
-//! \todo remove
-#include "CGALPY/pmp_np_parser.hpp"
-
 #include "CGALPY/HFDefault_visitor.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 
@@ -34,63 +31,51 @@ namespace pmp {
 using Point_3_vec = std::vector<Point_3>;
 
 // HFDefault_visitor
-void set_start_planar_phase(HFDefault_visitor& v,
-                            const std::function<void()>& f)
+void set_start_planar_phase(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_start_planar_phase(f); }
 
 //!
-void set_end_planar_phase(HFDefault_visitor& v,
-                          const std::function<void(bool)>& f)
+void set_end_planar_phase(HFDefault_visitor& v, const std::function<void(bool)>& f)
 { v.set_end_planar_phase(f); }
 
 //!
-void set_start_quadratic_phase(HFDefault_visitor& v,
-                               const std::function<void(std::size_t)>& f)
+void set_start_quadratic_phase(HFDefault_visitor& v, const std::function<void(std::size_t)>& f)
 { v.set_start_quadratic_phase(f); }
 
 //!
-void set_quadratic_step(HFDefault_visitor& v,
-                        const std::function<void()>& f)
+void set_quadratic_step(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_quadratic_step(f); }
 
 //!
-void set_end_quadratic_phase(HFDefault_visitor& v,
-                             const std::function<void(bool)>& f)
+void set_end_quadratic_phase(HFDefault_visitor& v, const std::function<void(bool)>& f)
 { v.set_end_quadratic_phase(f); }
 
 //!
-void set_start_cubic_phase(HFDefault_visitor& v,
-                           const std::function<void(std::size_t)>& f)
+void set_start_cubic_phase(HFDefault_visitor& v, const std::function<void(std::size_t)>& f)
 { v.set_start_cubic_phase(f); }
 
 //!
-void set_cubic_step(HFDefault_visitor& v,
-                    const std::function<void()>& f)
+void set_cubic_step(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_cubic_step(f); }
 
 //!
-void set_end_cubic_phase(HFDefault_visitor& v,
-                         const std::function<void()>& f)
+void set_end_cubic_phase(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_end_cubic_phase(f); }
 
 //!
-void set_start_refine_phase(HFDefault_visitor& v,
-                            const std::function<void()>& f)
+void set_start_refine_phase(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_start_refine_phase(f); }
 
 //!
-void set_end_refine_phase(HFDefault_visitor& v,
-                          const std::function<void()>& f)
+void set_end_refine_phase(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_end_refine_phase(f); }
 
 //!
-void set_start_fair_phase(HFDefault_visitor& v,
-                          const std::function<void()>& f)
+void set_start_fair_phase(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_start_fair_phase(f); }
 
 //!
-void set_end_fair_phase(HFDefault_visitor& v,
-                        const std::function<void()>& f)
+void set_end_fair_phase(HFDefault_visitor& v, const std::function<void()>& f)
 { v.set_end_fair_phase(f); }
 
 //!
@@ -106,18 +91,13 @@ auto triangulate_and_refine_hole(PolygonMesh& pmesh,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_and_refine_hole(pmesh, border_halfedge,
-                                       internal::parse_pmp_np<Pm>(np)
-                                       .visitor(visitor)
-                                       .output_iterator(std::back_inserter(faces)));
+      PMP::triangulate_and_refine_hole(pmesh, border_halfedge);
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_and_refine_hole(pmesh, border_halfedge,
-                                     internal::parse_pmp_np<PolygonMesh>(np)
-                                     .output_iterator(std::back_inserter(faces)));
+    PMP::triangulate_and_refine_hole(pmesh, border_halfedge);
   }
   return faces;
 }
@@ -132,22 +112,19 @@ auto triangulate_hole(PolygonMesh& pmesh,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_hole(pmesh, border_halfedge,
-                            internal::parse_pmp_np<Pm>(np).visitor(visitor));
+      PMP::triangulate_hole(pmesh, border_halfedge);
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_hole(pmesh, border_halfedge, // this returned an emptyset iterator
-                          internal::parse_pmp_np<PolygonMesh>(np));
+    PMP::triangulate_hole(pmesh, border_halfedge);
   }
 }
 
 //!
 template <typename PolygonMesh>
-auto triangulate_hole_polyline_2(const Point_3_vec& polyline1,
-                                 const Point_3_vec& polyline2,
+auto triangulate_hole_polyline_2(const Point_3_vec& polyline1, const Point_3_vec& polyline2,
                                  const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Triangle_int = CGAL::Triple<int, int, int>;
@@ -156,15 +133,13 @@ auto triangulate_hole_polyline_2(const Point_3_vec& polyline1,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_hole_polyline(polyline1, std::back_inserter(out),
-                                     internal::parse_pmp_np<Pm>(np).visitor(visitor));
+      PMP::triangulate_hole_polyline(polyline1, std::back_inserter(out));
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out),
-                                   internal::parse_pmp_np<PolygonMesh>(np));
+    PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out));
   }
   std::array<int, 3> out2 = {out[0].first, out[0].second, out[0].third};
   return out2;
@@ -172,8 +147,7 @@ auto triangulate_hole_polyline_2(const Point_3_vec& polyline1,
 
 //!
 template <typename PolygonMesh>
-auto triangulate_hole_polyline(const Point_3_vec& polyline,
-                               const py::dict& np = py::dict()) {
+auto triangulate_hole_polyline(const Point_3_vec& polyline, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Triangle_int = CGAL::Triple<int, int, int>;
   std::vector<Triangle_int> out;
@@ -181,15 +155,13 @@ auto triangulate_hole_polyline(const Point_3_vec& polyline,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_hole_polyline(polyline, std::back_inserter(out),
-                                     internal::parse_pmp_np<Pm>(np).visitor(visitor));
+      PMP::triangulate_hole_polyline(polyline, std::back_inserter(out));
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_hole_polyline(polyline, std::back_inserter(out),
-                                   internal::parse_pmp_np<PolygonMesh>(np));
+    PMP::triangulate_hole_polyline(polyline, std::back_inserter(out));
   }
   std::array<int, 3> out2 = {out[0].first, out[0].second, out[0].third};
   return out2;
@@ -218,15 +190,11 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   auto it2 = std::back_inserter(vids);
   if (np.contains("visitor")) {
     My_visitor visitor = py::cast<My_visitor>(np["visitor"]);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge,
-                                                     internal::parse_pmp_np<Pm>(np)
-                                                     .face_output_iterator(it1).vertex_output_iterator(it2)
-                                                     .visitor(visitor));
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge);
     return py::make_tuple(std::get<0>(res), fids, vids);
-  } else {
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge,
-                                                     internal::parse_pmp_np<Pm>(np)
-                                                     .face_output_iterator(it1).vertex_output_iterator(it2));
+  }
+  else {
+    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge);
     return py::make_tuple(std::get<0>(res), fids, vids);
   }
 }
@@ -258,18 +226,13 @@ void export_pmp_hole_filling(py::module_& m) {
 
   // hole filling
   m.def("triangulate_and_refine_hole", &pmp::triangulate_and_refine_hole<Pm>,
-        py::arg("pm"), py::arg("hole_boundary"),
-        py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict());
   m.def("triangulate_hole", &pmp::triangulate_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"),
-        py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict());
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline<Pm>,
         py::arg("points"), py::arg("np") = py::dict());
   m.def("triangulate_hole_polyline", &pmp::triangulate_hole_polyline_2<Pm>,
-        py::arg("points"), py::arg("third_points"),
-        py::arg("np") = py::dict());
-  m.def("triangulate_refine_and_fair_hole",
-        &pmp::triangulate_refine_and_fair_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"),
-        py::arg("np") = py::dict());
+        py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict());
+  m.def("triangulate_refine_and_fair_hole", &pmp::triangulate_refine_and_fair_hole<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict());
 }
