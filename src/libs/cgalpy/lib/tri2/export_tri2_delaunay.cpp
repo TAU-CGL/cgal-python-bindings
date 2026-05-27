@@ -11,8 +11,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
 
 namespace tri2 {
 
@@ -49,32 +51,15 @@ void export_tri2_delaunay(py::module_& m) {
     // get_conflicts
     // get_conflicts_and_boundary
     .def("insert", &tri2::insert_point1<Dtri>, ri, py::arg("p"),
-         "Parameters:\n"
-         "  p (Point_2): The point\n"
-         "Return:\n"
-         "  The corresponding vertex\n")
-    .def("insert", &tri2::insert_point2<Dtri>, ri, py::arg("p"), py::arg("start"),
-         "Parameters:\n"
-         "  p (Point_2): The point\n"
-         "  start (Face): Start the search at this face\n"
-         "Return:\n"
-         "  The corresponding vertex\n")
+         tri2_doc::Delaunay_triangulation_2_insert)
+    .def("insert", &tri2::insert_point2<Dtri>, ri, py::arg("p"), py::arg("f"),
+         tri2_doc::Delaunay_triangulation_2_insert)
     .def("insert", &tri2::insert_point3<Dtri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
-         "Insert a point into the triangulation using the values returned from a previous location query\n"
-         "Parameters:\n"
-         "  p (Point_3): The point\n"
-         "  lt (Locate_type): together with loc and li the return values of a previous location query\n"
-         "  loc (Face)\n"
-         "  li (int)\n"
-         "Return:\n"
-         "  The corresponding vertex\n")
+         tri2_doc::Delaunay_triangulation_2_insert_1)
     .def("insert", &tri2::insert_points<Dtri>, ri, py::arg("points"),
-         "Insert a list of points\n"
-         "Parameters:\n"
-         "  points (list) the list of points\n"
-         "Return:\n"
-         "  The number of inserted points\n")
-    .def("is_valid", &Dtri::is_valid, py::arg("verbose") = false, py::arg("level") = 0)
+         tri2_doc::Delaunay_triangulation_2_insert_2)
+    .def("is_valid", &Dtri::is_valid, py::arg("verbose") = false, py::arg("level") = 0,
+         tri2_doc::Delaunay_triangulation_2_is_valid)
     // move
     // move_if_no_collision
     // nearest_vertex

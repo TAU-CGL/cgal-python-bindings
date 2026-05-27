@@ -11,8 +11,10 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
 
 namespace tri2 {
 
@@ -76,6 +78,8 @@ void export_tri2_constrained(py::module_& m) {
   tri_c.def(py::init<>())
     .def(py::init<const tri2::Traits&>())
     .def("__init__", &tri2::ct2_init)
-    .def("insert_constraint", &tri2::insert_constraint)
+    .def("insert_constraint", &tri2::insert_constraint,
+         py::arg("va"), py::arg("vb"),
+         tri2_doc::Constrained_triangulation_2_insert_constraint_1)
     ;
 }

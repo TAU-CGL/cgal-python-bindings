@@ -10,8 +10,10 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
 
 namespace tri2 {
 
@@ -28,7 +30,8 @@ void export_tri2_vertex(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw
 
   py::class_<Vertex>(tri_c, "Vertex")
     .def(py::init<>())
-    .def("point", [](const Vertex& v)->const Pnt& { return v.point(); }, ri)
+    .def("point", [](const Vertex& v)->const Pnt& { return v.point(); }, ri,
+         tri2_doc::Triangulation_2_point_1)
 
 #ifdef CGALPY_TRI2_VERTEX_WITH_INFO
     .def("info", [](const Vertex& v)->py::object { return v.info(); })

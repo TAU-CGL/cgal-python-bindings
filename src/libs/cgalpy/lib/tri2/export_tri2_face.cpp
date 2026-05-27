@@ -10,8 +10,10 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
 
 namespace tri2 {
 
@@ -27,7 +29,8 @@ void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_c
   constexpr auto ri(py::rv_policy::reference_internal);
 
   py::class_<Face>(tri_c, "Face")
-    .def("is_valid", &Face::is_valid)
+    .def("is_valid", &Face::is_valid,
+         py::arg("verbose") = false, py::arg("level") = 0)
     .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
     .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
 
@@ -38,7 +41,9 @@ void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_c
 
 #if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \
      (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY))
-    .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); })
+    .def("is_constrained", [](const Face& f, int i)->bool { return f.is_constrained(i); },
+         py::arg("i"),
+         tri2_doc::ConstrainedTriangulationFaceBase_2_is_constrained)
 #endif
     ;
 }

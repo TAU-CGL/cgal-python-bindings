@@ -29,12 +29,14 @@
 #include "CGALPY/stl_dereference_forward_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Tri2_docstrings.hpp"
 #include "CGALPY/types.hpp"
 
 void export_tri2_vertex(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
 void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
 
 namespace py = nanobind;
+namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
 
 namespace tri2 {
 
@@ -431,275 +433,94 @@ void export_tri2_plain(py::module_& m) {
     .def(py::init<const tri2::Traits&>())
     .def("__init__", &tri2::tri2_init)
     .def("circumcenter", &tri2::circumcenter, py::arg("f"),
-         "Compute the circumcenter of a face\n"
-         "Parameters:\n"
-         "  f: The input facet\n"
-         "Return:\n"
-         "  Point_2\n")
-    .def("clear", &Tri::clear, "Delete all faces and finite vertices resulting in an empty triangulation.")
+         tri2_doc::Triangulation_2_circumcenter)
+    .def("clear", &Tri::clear,
+         tri2_doc::Triangulation_2_clear)
     .def("degree", &tri2::degree, py::arg("v"),
-         "Obtain the degree of a vertex\n"
-         "The infinite vertex is counted"
-         "Parameters:\n"
-         " v: the vertex\n"
-         "Return:\n"
-         "  int\n")
+         tri2_doc::Triangulation_2_degree)
     .def("dimension", &Tri::dimension,
-         "Obtain the dimension of the convex hull\n"
-         "Return:\n"
-         "  int\n")
-    .def("finite_vertex", &tri2::finite_vertex, ri)
+         tri2_doc::Triangulation_2_dimension)
+    .def("finite_vertex", &tri2::finite_vertex, ri,
+         tri2_doc::Triangulation_2_finite_vertex)
     .def("flip", &tri2::flip, py::arg("f"), py::arg("i"),
-         "Exchanges the edge incident to f and f->neighbor(i) with the other diagonal of the quadrilateral formed by f and f->neighbor(i).\n"
-         "Parameters:\n"
-         "  f (Face)\n"
-         "  i (int)\n")
-    .def("geom_traits", &Tri::geom_traits, ri, "Obtain the geometric traits object")
+         tri2_doc::Triangulation_2_flip)
+    .def("geom_traits", &Tri::geom_traits, ri,
+         tri2_doc::Triangulation_2_geom_traits)
     .def("includes_edge", &tri2::includes_edge, py::arg("va"), py::arg("vb"),
-         "Determines whether the line segment defined by two vertices va and vb includes an edge incident to va\n"
-         "Parameters:\n"
-         "  va (Vertex)\n"
-         "  vb (Vertex)\n"
-         "Return:\n"
-         "  tuple[Flase] if the edge defined by the vertices va and vb does not include an edge incident to va\n"
-         "  tuple[True, Vertex, Face, int] the line segment inncludes the edge e = edge(f,i);\n"
-         "  the first vertex is the other vertex of e; f is a face incident to e and on the right side of e oriented from va to vb\n")
+         tri2_doc::Triangulation_2_includes_edge)
     .def("inexact_locate", &tri2::inexact_locate1, py::arg("query"),
-         "Same as locate() but uses inexact predicates\n"
-         "Parameters:\n"
-         "  query (Point): the query point\n"
-         "Return:\n"
-         "  Face or None:\n"
-         "     If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
-         "     If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
-         "      * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
-         "      * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
-         "     Otherwise, the point query lies outside the affine hull---obtain None\n")
+         tri2_doc::Triangulation_2_inexact_locate)
     .def("inexact_locate", &tri2::inexact_locate2, py::arg("query"), py::arg("start"),
-         "Same as locate() but uses inexact predicates\n"
-         "Parameters:\n"
-         "  query (Point): the query point\n"
-         "  start (Face) the startinf face of the search\n"
-         "Return:\n"
-         "  Face or None\n")
-    .def("infinite_face", &tri2::infinite_face, ri, "Obtain a face incident to the infinite vertex\n")
-    .def("infinite_vertex", &tri2::infinite_vertex, ri, "obtain the infinite vertex\n")
+         tri2_doc::Triangulation_2_inexact_locate)
+    .def("infinite_face", &tri2::infinite_face, ri,
+         tri2_doc::Triangulation_2_infinite_face)
+    .def("infinite_vertex", &tri2::infinite_vertex, ri,
+         tri2_doc::Triangulation_2_infinite_vertex)
     .def("insert", &tri2::insert_point1<Tri>, ri, py::arg("p"),
-         "Insert a point into the triangulation\n"
-         "Parameters:\n"
-         "  p (Point_2): the point\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert)
     .def("insert", &tri2::insert_point2<Tri>, ri, py::arg("p"), py::arg("start"),
-         "Insert a point into the triangulation\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "  start (Face): Start the search at this face\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert)
     .def("insert", &tri2::insert_point3<Tri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
-         "Insert a point into the triangulation using the values returned from a previous location query\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "  lt (Locate_type): together with loc and li the return values of a previous location query\n"
-         "  loc (Face)\n"
-         "  li (int)\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert_1)
     .def("insert", &tri2::insert_points<Tri>, ri, py::arg("points"),
-         "Insert a list of points\n"
-         "Parameters:\n"
-         "  points (list): the list of points\n"
-         "Return:\n"
-         "  int: The number of inserted points\n")
+         tri2_doc::Triangulation_2_insert_2)
     .def("insert_first", &tri2::insert_first, ri, py::arg("p"),
-         "Insert a point that maps to the first finite vertex\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert_first)
     .def("insert_in_edge", &tri2::insert_in_edge, ri, py::arg("p"), py::arg("f"), py::arg("i"),
-         "Insert a point that lies on the edge opposite to vertex i of face f\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "  f (Face)\n"
-         "  i (int)\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert_in_edge)
     .def("insert_in_face", &tri2::insert_in_face, ri, py::arg("p"), py::arg("f"),
-         "Insert a point that is contained in a given face\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "  f (Face): the face containing the point\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert_in_face)
     .def("insert_outside_affine_hull", &tri2::insert_outside_affine_hull, ri, py::arg("p"),
-         "Inserts a point that is outside convex hull but inside the affine hull\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert_outside_affine_hull)
     .def("insert_outside_convex_hull", &tri2::insert_outside_convex_hull, ri, py::arg("p"), py::arg("f"),
-         "Inserts a point that is outside the affine hull\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "  f (Face): the face that contains p"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
+         tri2_doc::Triangulation_2_insert_outside_convex_hull)
     .def("insert_second", &tri2::insert_second, ri, py::arg("p"),
-         "Insert a point that maps to the second finite vertex\n"
-         "Parameters:\n"
-         "  p (Point_2): the point to insert\n"
-         "Return:\n"
-         "  Vertex: the corresponding vertex\n")
-    .def("is_edge", &tri2::is_edge, py::arg("v1"), py::arg("v2"),
-         "Determine whether two given vertices define an edge\n"
-         "Parameters:\n"
-         "  v1 (Vertex): the first vertex\n"
-         "  v2 (Vertex): the second vertex\n"
-         "Return:\n"
-         "  Boolean\n")
-    .def("is_edge_get_edge", &tri2::is_edge_get_edge, py::arg("v1"), py::arg("v2"),
-         "Determine whether two given vertices define an edge, and if so, obtain the containing face and index\n"
-         "Parameters:\n"
-         "  v1 (Vertex): the first vertex\n"
-         "  v2 (Vertex): the second vertex\n"
-         "Return:\n"
-         "  tuple[False] if v1 and v2 do not define an edge;\n"
-         "  otherwise tuple[True, f, i], where the edge is opposite to vertex of the face f\n")
+         tri2_doc::Triangulation_2_insert_second)
+    .def("is_edge", &tri2::is_edge, py::arg("va"), py::arg("vb"),
+         tri2_doc::Triangulation_2_is_edge)
+    .def("is_edge_get_edge", &tri2::is_edge_get_edge, py::arg("va"), py::arg("vb"),
+         tri2_doc::Triangulation_2_is_edge_1)
     .def("is_face", &tri2::is_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
-         "Determine whether three given vertices define a face\n"
-         "Parameters:\n"
-         "  v1 (Vertex): the first vertex\n"
-         "  v2 (Vertex): the second vertex\n"
-         "  v3 (Vertex): the third vertex\n"
-         "Return:\n"
-         "  Boolean\n")
+         tri2_doc::Triangulation_2_is_face)
     .def("is_face_get_face", &tri2::is_face_get_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
-         "Determine whether three given vertices define a face, and if so, obtain the face\n"
-         "Parameters:\n"
-         "  v1 (Vertex): the first vertex\n"
-         "  v2 (Vertex): the second vertex\n"
-         "  v3 (Vertex): the third vertex\n"
-         "Return:\n"
-         "  tuple[False] if v1, v2, and v3 do not define an face;\n"
-         "  otherwise tuple[True, f]\n")
+         tri2_doc::Triangulation_2_is_face_1)
     .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite), py::arg("e"),
-         "Determine whether a given edge is infinite\n"
-         "Parameters:\n"
-         "  e (Edge)\n"
-         "Return:\n"
-         "  Bolean\n")
+         tri2_doc::Triangulation_2_is_infinite_3)
     .def("is_infinite", &tri2::is_infinite1, py::arg("f"),
-         "Determine whether a given face is infinite\n"
-         "Parameters:\n"
-         "  f (Face)\n"
-         "Return:\n"
-         "  Bolean\n")
+         tri2_doc::Triangulation_2_is_infinite_1)
     .def("is_infinite", &tri2::is_infinite2, py::arg("v"),
-         "Determine whether a given vertex is the infinite vertex\n"
-         "Parameters:\n"
-         "  v (Vertex)\n"
-         "Return:\n"
-         "  Bolean\n")
+         tri2_doc::Triangulation_2_is_infinite)
     .def("is_infinite", &tri2::is_infinite3, py::arg("f"), py::arg("i"),
-         "Determine whether a the edge opposite to vertex i of face f is infinite\n"
-         "Parameters:\n"
-         "  f (Edge)\n"
-         "  i (int)\n"
-         "Return:\n"
-         "  Bolean\n")
-    .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0)
+         tri2_doc::Triangulation_2_is_infinite_2)
+    .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0,
+         tri2_doc::Triangulation_2_is_valid)
     .def("locate", &tri2::locate1, py::arg("query"),
-         "Locate a query point\n"
-         "Parameters:\n"
-         "  query (Point): the query point\n"
-         "Return:\n"
-         "  Face or None:\n"
-         "     If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
-         "     If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
-         "      * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
-         "      * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
-         "     Otherwise, the point query lies outside the affine hull---obtain None\n")
+         tri2_doc::Triangulation_2_locate)
     .def("locate", &tri2::locate2, py::arg("query"), py::arg("start"),
-         "Locate a query point; start the search with start\n"
-         "Parameters:\n"
-         "  query (Point): the query point\n"
-         "  start (Face) the starting face of the search\n"
-         "Return:\n"
-         "  Face or None\n")
+         tri2_doc::Triangulation_2_locate)
     .def("locate_get_incident", &tri2::locate_get_incident1, py::arg("query"),
-         "Locate a query point and obtain incidence information\n"
-         "Parameters:\n"
-         "  query (Point): the query point\n"
-         "Return:\n"
-         "  Face or None:\n"
-         "     If the query point lies inside the convex hull of the points, obtain the face that contains the query in its interior or on its boundary\n."
-         "     If the query point lies outside the convex hull of the triangulation but in the affine hull, obtain the infinite face which is a proof of the point location:\n"
-         "      * for a two dimensional triangulation, it is a face (∞,p,q) such that query lies to the left of the oriented line pq (the rest of the triangulation lying to the right of this line)\n"
-         "      * for a degenerate one dimensional triangulation it is the (degenerate one dimensional) face (∞,p,nullptr) such that query and the triangulation lie on either side of p\n"
-         "     Otherwise, the point query lies outside the affine hull---obtain None\n")
+         tri2_doc::Triangulation_2_locate_1)
     .def("locate_get_incident", &tri2::locate_get_incident2, py::arg("query"), py::arg("start"),
-         "Locate a query point and obtain incidence information; start the search with start\n"
-         "Parameters:\n"
-         "  query (Point): the query point\n"
-         "  start (Face) the startinf face of the search\n"
-         "Return:\n"
-         "  Face or None\n")
+         tri2_doc::Triangulation_2_locate_1)
     .def("mirror_edge", &Tri::mirror_edge, py::arg("e"),
-         "Obtain an edge seen from the other adjacent edge\n",
-         "Parameters:\n"
-         "  e (Edge)\n"
-         "Return:\n"
-         "  Edge\n")
+         tri2_doc::Triangulation_2_mirror_edge)
     .def("mirror_index", &tri2::mirror_index, py::arg("f"), py::arg("i"),
-         "Obtain the index of f in its ith neighbor\n"
-         "Parameters:\n"
-         "  f (Face)\n"
-         "  i (int)\n"
-         "Return:\n"
-         "  int\n")
+         tri2_doc::Triangulation_2_mirror_index)
     .def("mirror_vertex", &tri2::mirror_vertex, ri, py::arg("f"), py::arg("i"),
-         "Obtain the vertex of the ith neighbor of f that is opposite to f\n"
-         "Parameters:\n"
-         "  f (Face)\n"
-         "  i (int)\n"
-         "Return:\n"
-         "  Vertex\n")
+         tri2_doc::Triangulation_2_mirror_vertex)
     .def("move", &tri2::move, ri, py::arg("v"), py::arg("p"),
-         "If there is no collision during the move, apply the same operation as move_if_no_collision;\n"
-         "otherwise, remove v and obtain the vertex at point p\n"
-         "Parameters:\n"
-         "  v (vertex)\n"
-         "  p (Point_2)\n"
-         "Return:\n"
-         "  Vertex\n")
+         tri2_doc::Triangulation_2_move)
     .def("move_if_no_collision", &tri2::move_if_no_collision, ri, py::arg("v"), py::arg("p"),
-         "If there is already another vertex at p, obtain the vertex;\n"
-         "otherwise, modify the triangulation, such that the new position of vertex v is p, and obtain v\n"
-         "Parameters:\n"
-         "  v (vertex)\n"
-         "  p (Point_2)\n"
-         "Return:\n"
-         "  Vertex\n")
+         tri2_doc::Triangulation_2_move_if_no_collision)
     .def("number_of_vertices", &Tri::number_of_vertices,
-         "Obtain the number of finite vertices\n"
-         "Return:\n"
-         "  int\n")
+         tri2_doc::Triangulation_2_number_of_vertices)
     .def("number_of_faces", &Tri::number_of_faces,
-         "Obtain the number of finite faces\n"
-         "Return:\n"
-         "  int\n")
+         tri2_doc::Triangulation_2_number_of_faces)
     .def("oriented_side",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&>(&Tri::oriented_side, py::const_),
          py::arg("p0"), py::arg("p1"), py::arg("p2"), py::arg("p"))
     .def("oriented_side", &tri2::oriented_side, py::arg("f"), py::arg("p"),
-         "Determine on which side of the oriented boundary of face lies a given point\n"
-         "Parameters:\n"
-         "  f (Face) the input face\n"
-         "  p (Point_2) the input point\n"
-         "Return:\n"
-         "  Oriented_side\n")
+         tri2_doc::Triangulation_2_oriented_side)
     .def("point", &tri2::point1, py::arg("v"),
          "Obtain the point of a vertex\n"
          "Parameters:\n"
@@ -714,15 +535,9 @@ void export_tri2_plain(py::module_& m) {
          "Return:\n"
          "  Point_2\n")
     .def("push_back", &tri2::push_back, ri, py::arg("p"),
-         "Equivalent to insert(p)\n"
-         "Parameters:\n"
-         "  p (Point_2)\n"
-         "Return:\n"
-         "  Vertex\n")
+         tri2_doc::Triangulation_2_push_back)
     .def("remove", &tri2::remove, py::arg("v"),
-         "Remove a given vertex\n"
-         "Parameters:\n"
-         "  v (Vertex): the vertex to remove\n")
+         tri2_doc::Triangulation_2_remove)
     .def("remove_degree_3", &tri2::remove_degree_31, py::arg("v"),
          "Remove a vertex of degree three\n"
          "Parameters:\n"
@@ -733,26 +548,15 @@ void export_tri2_plain(py::module_& m) {
          "  v (Vertex): the vertex to remove\n"
          "  f (Face)\n")
     .def("remove_first", &tri2::remove_first, py::arg("v"),
-         "Remove the last finite vertex\n")
+         tri2_doc::Triangulation_2_remove_first)
     .def("remove_second", &tri2::remove_second, py::arg("v"),
-         "Remove the vertex before the last finite one\n")
+         tri2_doc::Triangulation_2_remove_second)
     .def("segment", py::overload_cast<const Edge&>(&Tri::segment, py::const_), py::arg("e"),
-         "Obtain the line segment corresponding to an edge\n"
-         "Parameters:\n"
-         "  e (Edge) the input edge\n"
-         "Return:\n"
-         " Segment\n")
-    .def("segment", &tri2::segment, py::arg("e"), py::arg("i"),
-         "Obtain the line segment corresponding to an edge opposite to vertex i of face f\n"
-         "Parameters:\n"
-         "  f (Face)\n"
-         "  i (int)\n"
-         "Return:\n"
-         " Segment\n")
+         tri2_doc::Triangulation_2_segment_1)
+    .def("segment", &tri2::segment, py::arg("f"), py::arg("i"),
+         tri2_doc::Triangulation_2_segment)
     .def("set_infinite_vertex", &tri2::set_infinite_vertex, py::arg("v"),
-         "Set the infinite vertex (low level function)\n"
-         "Parameters:\n"
-         "  v (Vertex)\n")
+         tri2_doc::Triangulation_2_set_infinite_vertex)
     .def("side_of_oriented_circle",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&, bool>
          (&Tri::side_of_oriented_circle, py::const_),
@@ -768,38 +572,17 @@ void export_tri2_plain(py::module_& m) {
          "  Oriented_side\n")
     .def("side_of_oriented_circle", &tri2::side_of_oriented_circle,
          py::arg("f"), py::arg("p"), py::arg("perturb") = false,
-         "Determine on which side of the circumcircle of a face lies a given point\n"
-         "Parameters:\n"
-         "  f (Face)\n"
-         "  p (Point_2) the input point\n"
-         "  perturb (Boolean)\n"
-         "Return:\n"
-         "  Oriented_side\n")
+         tri2_doc::Triangulation_2_side_of_oriented_circle)
     .def("star_hole", &tri2::star_hole1, ri, py::arg("p"), py::arg("edges"),
-         "Create a new vertex at a given point, and use it to star the hole whose boundary is described by a sequence of edges\n"
-         "Parameters:\n"
-         "  p (Point_2): the input point\n"
-         "  edges (list): the input list of edges\n"
-         "Return:\n"
-         "  Vertex\n")
+         tri2_doc::Triangulation_2_star_hole)
     .def("star_hole", &tri2::star_hole2, ri, py::arg("p"), py::arg("edges"), py::arg("faces"),
-         "Create a new vertex at a given point, and use it to star the hole whose boundary is described by a sequence of edges\n"
-         "Use in conjunction with one of the find_conflicts() functions of Delaunay triangulations to perform an insertion\n"
-         "  p (Point_2): the input point\n"
-         "  edges (list): the input list of edges\n"
-         "  faces (list): the input list of faces\n"
-         "Return:\n"
-         "  Vertex\n")
-    .def("swap", &Tri::swap, "Swap a given triangle and this one\n"
-         "Parameters:\n"
-         "  tri (Triangulation_2): the triangulation to swap\n")
-    .def("tds", py::overload_cast<>(&Tri::tds), ri)
+         tri2_doc::Triangulation_2_star_hole_1)
+    .def("swap", &Tri::swap, py::arg("tr"),
+         tri2_doc::Triangulation_2_swap)
+    .def("tds", py::overload_cast<>(&Tri::tds), ri,
+         tri2_doc::Triangulation_2_tds_1)
     .def("triangle", &tri2::triangle, py::arg("f"),
-         "Obtain the triangle formed by the three vertices of a face\n"
-         "Parameters:\n"
-         "  f (Face))\n"
-         "Return:\n"
-         "  Triangle\n")
+         tri2_doc::Triangulation_2_triangle)
 
     // operator=
     // operator<<
@@ -826,12 +609,15 @@ void export_tri2_plain(py::module_& m) {
   add_iterator<Pi, Pi, const Pnt&>("Point_iterator", tri_c);
 
   tri_c.def("all_vertices", &tri2::all_vertices, py::keep_alive<0, 1>())
-    .def("all_edges", &tri2::all_edges, py::keep_alive<0, 1>())
+    .def("all_edges", &tri2::all_edges, py::keep_alive<0, 1>(),
+         tri2_doc::Triangulation_2_all_edges)
     .def("all_faces", &tri2::all_faces, py::keep_alive<0, 1>())
     .def("finite_vertices", &tri2::finite_vertices, py::keep_alive<0, 1>())
-    .def("finite_edges", &tri2::finite_edges, py::keep_alive<0, 1>())
+    .def("finite_edges", &tri2::finite_edges, py::keep_alive<0, 1>(),
+         tri2_doc::Triangulation_2_finite_edges)
     .def("finite_faces", &tri2::finite_faces, py::keep_alive<0, 1>())
-    .def("points", &tri2::points, py::keep_alive<0, 1>())
+    .def("points", &tri2::points, py::keep_alive<0, 1>(),
+         tri2_doc::Triangulation_2_points)
     ;
 
   // Iterators & Circulators
@@ -844,12 +630,24 @@ void export_tri2_plain(py::module_& m) {
   add_iterator_from_circulator<Ec, Edge>("Edge_iterator", tri_c);
   add_iterator_from_circulator<Fc>("Face_iterator", tri_c);
 
-  tri_c.def("incident_faces", &tri2::incident_faces_iterator_0)
-    .def("incident_faces", &tri2::incident_faces_iterator_1)
-    .def("incident_edges", &tri2::incident_edges_iterator_0)
-    .def("incident_edges", &tri2::incident_edges_iterator_1)
-    .def("incident_vertices", &tri2::incident_vertices_iterator_0)
-    .def("incident_vertices", &tri2::incident_vertices_iterator_1)
+  tri_c.def("incident_faces", &tri2::incident_faces_iterator_0,
+          py::arg("v"),
+          tri2_doc::Triangulation_2_incident_faces)
+    .def("incident_faces", &tri2::incident_faces_iterator_1,
+         py::arg("v"), py::arg("f"),
+         tri2_doc::Triangulation_2_incident_faces_1)
+    .def("incident_edges", &tri2::incident_edges_iterator_0,
+         py::arg("v"),
+         tri2_doc::Triangulation_2_incident_edges)
+    .def("incident_edges", &tri2::incident_edges_iterator_1,
+         py::arg("v"), py::arg("f"),
+         tri2_doc::Triangulation_2_incident_edges_1)
+    .def("incident_vertices", &tri2::incident_vertices_iterator_0,
+         py::arg("v"),
+         tri2_doc::Triangulation_2_incident_vertices)
+    .def("incident_vertices", &tri2::incident_vertices_iterator_1,
+         py::arg("v"), py::arg("f"),
+         tri2_doc::Triangulation_2_incident_vertices_1)
     ;
 
   // Circulators
