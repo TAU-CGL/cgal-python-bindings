@@ -15,8 +15,10 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/Kernel/export_point_2.hpp"
 #include "CGALPY/Kernel/export_segment_2.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 //
 void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
@@ -24,7 +26,9 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
 
   if (add_attr<Bgt>(m, "Arr_non_caching_segment_basic_traits_2")) return;
 
-  py::class_<Bgt, Kernel> bt_c(m, "Arr_non_caching_segment_basic_traits_2");
+  py::class_<Bgt, Kernel> bt_c(
+    m, "Arr_non_caching_segment_basic_traits_2",
+    "Basic traits for arrangements of non-caching segments.");
 
   /// \name AosBaiscTraits
   /// @{
@@ -55,27 +59,44 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
 
   add_attr<Ctr_xcv>(bt_c, "Construct_x_monotone_curve_2");
 
-  py::class_<Compare_y_at_x_right_2>(bt_c, "Compare_y_at_x_right_2")
-    .def("__call__", &Compare_y_at_x_right_2::operator())
+  py::class_<Compare_y_at_x_right_2>(
+    bt_c, "Compare_y_at_x_right_2",
+    aos2_doc::AosTraits_CompareYAtXRight_2_class)
+    .def("__call__", &Compare_y_at_x_right_2::operator(),
+         py::arg("xcv1"), py::arg("xcv2"), py::arg("point"),
+         aos2_doc::AosTraits_CompareYAtXRight_2_operator_call)
     ;
 
-  py::class_<Compare_y_at_x_left_2>(bt_c, "Compare_y_at_x_left_2")
-    .def("__call__", &Compare_y_at_x_left_2::operator())
+  py::class_<Compare_y_at_x_left_2>(
+    bt_c, "Compare_y_at_x_left_2",
+    aos2_doc::AosTraits_CompareYAtXLeft_2_class)
+    .def("__call__", &Compare_y_at_x_left_2::operator(),
+         py::arg("xcv1"), py::arg("xcv2"), py::arg("point"),
+         aos2_doc::AosTraits_CompareYAtXLeft_2_operator_call)
     ;
 
   using Ant = Bgt::Approximate_number_type;
   using Approx = Bgt::Approximate_2;
   using ovld1 = Ant(Approx::*)(const Pnt&, int i) const;
-  py::class_<Approx>(bt_c, "Approximate_2")
-    .def("__call__", static_cast<ovld1>(&Approx::operator()))
+  py::class_<Approx>(bt_c, "Approximate_2",
+                       aos2_doc::AosTraits_Approximate_2_class)
+    .def("__call__", static_cast<ovld1>(&Approx::operator()),
+         py::arg("point"), py::arg("i"),
+         aos2_doc::AosTraits_Approximate_2_operator_call)
     ;
 
-  bt_c.def(py::init<>())
-    .def(py::init<const Bgt&>())
-    .def("compare_y_at_x_right_2_object", &Bgt::compare_y_at_x_right_2_object)
-    .def("compare_y_at_x_left_2_object", &Bgt::compare_y_at_x_left_2_object)
+  bt_c.def(py::init<>(),
+             "Construct a default non-caching segment basic traits object.")
+    .def(py::init<const Bgt&>(), py::arg("traits"),
+         "Copy-construct a non-caching segment basic traits object.")
+    .def("compare_y_at_x_right_2_object", &Bgt::compare_y_at_x_right_2_object,
+         aos2_doc::AosBasicTraits_2_compare_y_at_x_right_2_object)
+    .def("compare_y_at_x_left_2_object", &Bgt::compare_y_at_x_left_2_object,
+         aos2_doc::AosBasicTraits_2_compare_y_at_x_left_2_object)
     .def("construct_x_monotone_curve_2_object",
-         &Bgt::construct_x_monotone_curve_2_object)
-    .def("approximate_2_object", &Bgt::approximate_2_object)
+         &Bgt::construct_x_monotone_curve_2_object,
+         aos2_doc::AosConstructXMonotoneCurveTraits_2_construct_x_monotone_curve_2_object)
+    .def("approximate_2_object", &Bgt::approximate_2_object,
+         aos2_doc::AosApproximateTraits_2_approximate_2_object)
     ;
 }

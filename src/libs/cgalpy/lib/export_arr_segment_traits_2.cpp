@@ -26,8 +26,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 namespace cgalpy {
 namespace aos2 {
@@ -50,7 +52,8 @@ void export_arr_segment_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_segment_traits_2")) return;
 
-  py::class_<Gt, Kernel> traits_c(m, "Arr_segment_traits_2");
+  py::class_<Gt, Kernel> traits_c(m, "Arr_segment_traits_2",
+                                    aos2_doc::Arr_segment_traits_2_class);
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
@@ -65,48 +68,77 @@ void export_arr_segment_traits_2(py::module_& m) {
   export_AosLandmarkTraits_2<Gt>(traits_c, concepts);
   export_AosDirectionalXMonotoneTraits_2<Gt>(traits_c, concepts);
   traits_c
-    .def("is_in_x_range_2_object", &Gt::is_in_x_range_2_object)
-    .def("is_in_y_range_2_object", &Gt::is_in_y_range_2_object)
-    .def("construct_curve_2_object", &Gt::construct_curve_2_object)
+    .def("is_in_x_range_2_object", &Gt::is_in_x_range_2_object,
+         "Return the functor that tests whether a point is in the x-range of a segment.")
+    .def("is_in_y_range_2_object", &Gt::is_in_y_range_2_object,
+         "Return the functor that tests whether a point is in the y-range of a segment.")
+    .def("construct_curve_2_object", &Gt::construct_curve_2_object,
+         aos2_doc::AosConstructCurveTraits_2_construct_curve_2_object)
     ;
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
-  xcv_c.def(py::init_implicit<Segment_2&>())
-    .def(py::init<Pnt&, Pnt&>())
-    .def(py::init<Line_2&, Pnt&, Pnt&>())
-    .def("flip", &Xcv::flip)
-    .def("bbox", &Xcv::bbox)
+  xcv_c.def(py::init_implicit<Segment_2&>(), py::arg("segment"),
+            "Construct from a kernel segment.")
+    .def(py::init<Pnt&, Pnt&>(), py::arg("source"), py::arg("target"),
+         "Construct from two endpoints.")
+    .def(py::init<Line_2&, Pnt&, Pnt&>(),
+         py::arg("line"), py::arg("source"), py::arg("target"),
+         "Construct from a supporting line and two endpoints.")
+    .def("flip", &Xcv::flip,
+         "Reverse the direction of the segment.")
+    .def("bbox", &Xcv::bbox,
+         "Return the bounding box of the segment.")
 
     // Members defined in the base class:
-    .def("source", [](const Xcv& xcv)->const Pnt& { return xcv.source(); }, ri)
-    .def("target", [](const Xcv& xcv)->const Pnt& { return xcv.target(); }, ri)
-    .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri)
-    .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); })
-    .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri)
-    .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri)
+    .def("source", [](const Xcv& xcv)->const Pnt& { return xcv.source(); }, ri,
+         "Return the source endpoint.")
+    .def("target", [](const Xcv& xcv)->const Pnt& { return xcv.target(); }, ri,
+         "Return the target endpoint.")
+    .def("line", [](const Xcv& xcv)->const Lin& { return xcv.line(); }, ri,
+         aos2_doc::Arr_segment_traits_2_X_monotone_curve_2_line)
+    .def("is_vertical", [](const Xcv& xcv)->bool { return xcv.is_vertical(); },
+         aos2_doc::Arr_segment_traits_2_X_monotone_curve_2_is_vertical)
+    .def("left", [](const Xcv& xcv)->const Pnt& { return xcv.left(); }, ri,
+         aos2_doc::Arr_segment_traits_2_X_monotone_curve_2_left)
+    .def("right", [](const Xcv& xcv)->const Pnt& { return xcv.right(); }, ri,
+         aos2_doc::Arr_segment_traits_2_X_monotone_curve_2_right)
     .def("set_left",
-         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_left(p); })
+         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_left(p); },
+         py::arg("point"),
+         "Set the left endpoint.")
     .def("set_right",
-         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_right(p); })
+         [](Xcv& xcv, const Pnt& p)->void { return xcv.set_right(p); },
+         py::arg("point"),
+         "Set the right endpoint.")
     .def("is_directed_right",
-         [](const Xcv& xcv)->bool { return xcv.is_directed_right(); })
+         [](const Xcv& xcv)->bool { return xcv.is_directed_right(); },
+         aos2_doc::Arr_segment_traits_2_X_monotone_curve_2_is_directed_right)
 
     // Deprecated
     // .def("is_in_x_range", &Xcv::is_in_x_range)
     // .def("is_in_y_range", &Xcv::is_in_y_range)
 
-    .def("segment", &cgalpy::aos2::to_segment)
+    .def("segment", &cgalpy::aos2::to_segment,
+         "Convert to a kernel segment.")
   ;
 
   add_insertion(xcv_c, "__str__");
   add_insertion(xcv_c, "__repr__");
   add_extraction(xcv_c);
 
-  py::class_<Gt::Is_in_x_range_2>(traits_c, "Is_in_x_range_2")
-    .def("__call__", &Gt::Is_in_x_range_2::operator());
+  py::class_<Gt::Is_in_x_range_2>(
+    traits_c, "Is_in_x_range_2",
+    "Functor that tests whether a point lies in the x-range of a segment.")
+    .def("__call__", &Gt::Is_in_x_range_2::operator(),
+         py::arg("xcv"), py::arg("point"),
+         "Return whether the point lies in the x-range of the segment.")
   ;
 
-  py::class_<Gt::Is_in_y_range_2>(traits_c, "Is_in_y_range_2")
-    .def("__call__", &Gt::Is_in_y_range_2::operator());
+  py::class_<Gt::Is_in_y_range_2>(
+    traits_c, "Is_in_y_range_2",
+    "Functor that tests whether a point lies in the y-range of a segment.")
+    .def("__call__", &Gt::Is_in_y_range_2::operator(),
+         py::arg("xcv"), py::arg("point"),
+         "Return whether the point lies in the y-range of the segment.")
   ;
 }

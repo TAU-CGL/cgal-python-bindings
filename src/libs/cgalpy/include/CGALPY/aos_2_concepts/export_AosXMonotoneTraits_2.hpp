@@ -28,7 +28,9 @@ void export_Merge_2(C& c, Classes& classes, CGAL::Tag_true) {
 
   classes.m_merge_2 = new py::class_<Merge_2>(
     c, "Merge_2", aos2_x_monotone_doc::AosXMonotoneTraits_2_Merge_2);
-  classes.m_merge_2->def("__call__", &Merge_2::operator());
+  classes.m_merge_2->def("__call__", &Merge_2::operator(),
+                           py::arg("xcv1"), py::arg("xcv2"), py::arg("merged"),
+                           aos2_x_monotone_doc::AosTraits_Merge_2_merge);
   c.def("merge_2_object", &T::merge_2_object,
         aos2_x_monotone_doc::AosXMonotoneTraits_2_merge_2_object);
 }
@@ -46,7 +48,9 @@ void export_Are_mergeable_2(C& c, Classes& classes, CGAL::Tag_true) {
     new py::class_<Are_mergeable_2>(
       c, "Are_mergeable_2",
       aos2_x_monotone_doc::AosXMonotoneTraits_2_Are_mergeable_2);
-  classes.m_are_mergeable_2->def("__call__", &Are_mergeable_2::operator());
+  classes.m_are_mergeable_2->def("__call__", &Are_mergeable_2::operator(),
+                                   py::arg("xcv1"), py::arg("xcv2"),
+                                   aos2_x_monotone_doc::AosTraits_AreMergeable_2_operator_call);
   c.def("are_mergeable_2_object", &T::are_mergeable_2_object,
         aos2_x_monotone_doc::AosXMonotoneTraits_2_are_mergeable_2_object);
 }
@@ -71,11 +75,16 @@ void export_AosXMonotoneTraits_2(C& c, Concepts& concepts) {
 
   classes.m_intersect_2 = new py::class_<Intersect_2>(
     c, "Intersect_2", aos2_x_monotone_doc::AosXMonotoneTraits_2_Intersect_2);
-  classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>);
+  classes.m_intersect_2->def("__call__", &intersect_2_call_operator<T>,
+                               py::arg("xcv1"), py::arg("xcv2"),
+                               aos2_x_monotone_doc::AosTraits_Intersect_2_operator_call);
 
   classes.m_split_2 = new py::class_<Split_2>(
     c, "Split_2", aos2_x_monotone_doc::AosXMonotoneTraits_2_Split_2);
-  classes.m_split_2->def("__call__", &Split_2::operator());
+  classes.m_split_2->def("__call__", &Split_2::operator(),
+                           py::arg("xcv"), py::arg("point"),
+                           py::arg("xcv1"), py::arg("xcv2"),
+                           aos2_x_monotone_doc::AosTraits_Split_2_operator_call);
 
   c.def("intersect_2_object", &T::intersect_2_object,
         aos2_x_monotone_doc::AosXMonotoneTraits_2_intersect_2_object);

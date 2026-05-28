@@ -39,7 +39,9 @@ void export_AosConstructXMonotoneCurveTraits_2(C c, Concepts& concepts) {
       c, "Construct_x_monotone_curve_2",
       aos2_construct_x_monotone_doc::AosConstructXMonotoneCurveTraits_2_Construct_x_monotone_curve_2);
   classes.m_construct_x_monotone_curve_2->
-    def("__call__", static_cast<Ctr_xcv_fnc>(&Ctr_xcv::operator()));
+    def("__call__", static_cast<Ctr_xcv_fnc>(&Ctr_xcv::operator()),
+        py::arg("p1"), py::arg("p2"),
+        aos2_construct_x_monotone_doc::AosTraits_ConstructXMonotoneCurve_2_operator_call);
 
   c.def("construct_x_monotone_curve_2_object", &T::construct_x_monotone_curve_2_object,
         aos2_construct_x_monotone_doc::AosConstructXMonotoneCurveTraits_2_construct_x_monotone_curve_2_object);

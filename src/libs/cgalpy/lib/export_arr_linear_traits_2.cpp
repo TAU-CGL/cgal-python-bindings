@@ -29,8 +29,10 @@
 #include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
 #include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
 #include "CGALPY/add_insertion.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 using Curve_2 = typename cgalpy::aos2::Geometry_traits_2::Curve_2;
 
@@ -51,7 +53,8 @@ void export_arr_linear_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_linear_traits_2")) return;
 
-  py::class_<Gt, Kernel> traits_c(m, "Arr_linear_traits_2");
+  py::class_<Gt, Kernel> traits_c(m, "Arr_linear_traits_2",
+                                    aos2_doc::Arr_linear_traits_2_class);
   struct Concepts {
     Aos_basic_traits_classes<Gt> m_aos_basic_traits_2_classes;
     Aos_x_monotone_traits_classes<Gt> m_aos_x_monotone_traits_2_classes;
@@ -68,31 +71,57 @@ void export_arr_linear_traits_2(py::module_& m) {
   export_AosOpenBoundaryTraits_2<Gt>(traits_c, concepts);
 
   auto& cv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
-  cv_c.def(py::init_implicit<const Segment&>())
-    .def(py::init_implicit<const Ray&>())
-    .def(py::init_implicit<const Line&>())
-    .def(py::init<const Pnt&, const Pnt&>())
-    .def("source", &Cv::source, ri)
-    .def("target", &Cv::target, ri)
-    .def("is_segment", &Cv::is_segment)
-    .def("segment", &Cv::segment)
-    .def("is_ray", &Cv::ray)
-    .def("ray", &Cv::ray)
-    .def("is_line", &Cv::is_line)
-    .def("line", &Cv::line)
-    .def("supporting_line", &Cv::supporting_line, ri)
-    .def("is_vertical", &Cv::is_vertical)
-    .def("left", &Cv::left, ri)
-    .def("right", &Cv::right, ri)
-    .def("set_left", static_cast<overload>(&Cv::set_left))
-    .def("set_left", set_left)
-    .def("set_right", static_cast<overload>(&Cv::set_right))
-    .def("set_right", set_right)
-    .def("is_directed_right", &Cv::is_directed_right)
-    .def("is_in_x_range", &Cv::is_in_x_range)
-    .def("is_in_y_range", &Cv::is_in_y_range)
-    .def("is_degenerate", &Cv::is_degenerate)
-    .def("bbox", &Cv::bbox)
+  cv_c.def(py::init_implicit<const Segment&>(), py::arg("segment"),
+           aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2)
+    .def(py::init_implicit<const Ray&>(), py::arg("ray"),
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2_1)
+    .def(py::init_implicit<const Line&>(), py::arg("line"),
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_X_monotone_curve_2_2)
+    .def(py::init<const Pnt&, const Pnt&>(),
+         py::arg("source"), py::arg("target"),
+         "Construct a linear x-monotone curve from two endpoints.")
+    .def("source", &Cv::source, ri,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_source)
+    .def("target", &Cv::target, ri,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_target)
+    .def("is_segment", &Cv::is_segment,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_is_segment)
+    .def("segment", &Cv::segment,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_segment)
+    .def("is_ray", &Cv::ray,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_is_ray)
+    .def("ray", &Cv::ray,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_ray)
+    .def("is_line", &Cv::is_line,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_is_line)
+    .def("line", &Cv::line,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_line)
+    .def("supporting_line", &Cv::supporting_line, ri,
+         aos2_doc::Arr_linear_traits_2_X_monotone_curve_2_supporting_line)
+    .def("is_vertical", &Cv::is_vertical,
+         "Return whether the curve is vertical.")
+    .def("left", &Cv::left, ri,
+         "Return the left endpoint.")
+    .def("right", &Cv::right, ri,
+         "Return the right endpoint.")
+    .def("set_left", static_cast<overload>(&Cv::set_left),
+         "Set the left endpoint to the current source/target endpoint.")
+    .def("set_left", set_left, py::arg("point"),
+         "Set the left endpoint.")
+    .def("set_right", static_cast<overload>(&Cv::set_right),
+         "Set the right endpoint to the current source/target endpoint.")
+    .def("set_right", set_right, py::arg("point"),
+         "Set the right endpoint.")
+    .def("is_directed_right", &Cv::is_directed_right,
+         "Return whether the curve is directed from left to right.")
+    .def("is_in_x_range", &Cv::is_in_x_range, py::arg("point"),
+         "Return whether the point is in the x-range of the curve.")
+    .def("is_in_y_range", &Cv::is_in_y_range, py::arg("point"),
+         "Return whether the point is in the y-range of the curve.")
+    .def("is_degenerate", &Cv::is_degenerate,
+         "Return whether the curve is degenerate.")
+    .def("bbox", &Cv::bbox,
+         "Return the bounding box of the curve.")
     ;
 
   add_attr<Segment>(traits_c, "Segment_2");

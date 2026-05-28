@@ -17,8 +17,10 @@
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/Curve_data_merge.hpp"
 #include "CGALPY/has_istream_operator.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 //!
 template <typename T>
@@ -53,37 +55,58 @@ void export_arr_curve_data_traits_2(py::module_& m) {
    * the same binding library.
    */
   if (! add_attr<Cdm>(m, "Curve_data_merge")) {
-    py::class_<Cdm>(m, "Curve_data_merge")
-      .def_static("reset_func", &Cdm::reset_func)
-      .def_static("set_func", &Cdm::set_func)
+    py::class_<Cdm>(m, "Curve_data_merge",
+                     "Helper used to configure the Python callback that merges curve data.")
+      .def_static("reset_func", &Cdm::reset_func,
+                  "Reset the curve-data merge callback.")
+      .def_static("set_func", &Cdm::set_func, py::arg("func"),
+                  "Set the curve-data merge callback.")
       .def_prop_rw_static("func",
                           [](py::handle /*unused*/) { return Cdm::func() ; },
-                          [](py::handle /*unused*/, py::object func) { Cdm::set_func(func); })
+                          [](py::handle /*unused*/, py::object func) { Cdm::set_func(func); },
+                          "The curve-data merge callback.")
       ;
   }
 
   if (add_attr<Gt>(m, "Arr_curve_data_traits_2")) return;
 
-  py::class_<Gt, Base_gt> traits_c(m, "Arr_curve_data_traits_2");
-  traits_c.def(py::init<>());
+  py::class_<Gt, Base_gt> traits_c(m, "Arr_curve_data_traits_2",
+                                      aos2_doc::Arr_curve_data_traits_2_class);
+  traits_c.def(py::init<>(),
+               "Construct a default curve-data traits object.");
 
   if (! add_attr<Cv>(traits_c, "Curve_2")) {
-    py::class_<Cv, Base_cv>(traits_c, "Curve_2")
-      .def(py::init<>())
-      .def(py::init_implicit<const Base_cv&>())
-      .def(py::init<const Base_cv&, Cv_data>())
-      .def("data", py::overload_cast<>(&Cv::data, py::const_), ri)
-      .def("set_data", &Cv::set_data)
+    py::class_<Cv, Base_cv>(traits_c, "Curve_2",
+                              aos2_doc::Arr_curve_data_traits_2_Curve_2_class)
+      .def(py::init<>(),
+           aos2_doc::Arr_curve_data_traits_2_Curve_2_Curve_2)
+      .def(py::init_implicit<const Base_cv&>(), py::arg("curve"),
+           aos2_doc::Arr_curve_data_traits_2_Curve_2_Curve_2_1)
+      .def(py::init<const Base_cv&, Cv_data>(),
+           py::arg("curve"), py::arg("data"),
+           aos2_doc::Arr_curve_data_traits_2_Curve_2_Curve_2_2)
+      .def("data", py::overload_cast<>(&Cv::data, py::const_), ri,
+           aos2_doc::Arr_curve_data_traits_2_Curve_2_data)
+      .def("set_data", &Cv::set_data, py::arg("data"),
+           aos2_doc::Arr_curve_data_traits_2_Curve_2_set_data)
       ;
   }
 
   if (! add_attr<Xcv>(traits_c, "X_monotone_curve_2")) {
-    py::class_<Xcv, Base_xcv> xcv_c(traits_c, "X_monotone_curve_2");
-    xcv_c.def(py::init<>())
-      .def(py::init_implicit<const Base_xcv&>())
-      .def(py::init<const Base_xcv&, Xcv_data>())
-      .def("data", py::overload_cast<>(&Xcv::data, py::const_), ri)
-      .def("set_data", &Xcv::set_data)
+    py::class_<Xcv, Base_xcv> xcv_c(
+      traits_c, "X_monotone_curve_2",
+      aos2_doc::Arr_curve_data_traits_2_X_monotone_curve_2_class);
+    xcv_c.def(py::init<>(),
+              aos2_doc::Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2)
+      .def(py::init_implicit<const Base_xcv&>(), py::arg("xcv"),
+           aos2_doc::Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2_1)
+      .def(py::init<const Base_xcv&, Xcv_data>(),
+           py::arg("xcv"), py::arg("data"),
+           aos2_doc::Arr_curve_data_traits_2_X_monotone_curve_2_X_monotone_curve_2_2)
+      .def("data", py::overload_cast<>(&Xcv::data, py::const_), ri,
+           aos2_doc::Arr_curve_data_traits_2_X_monotone_curve_2_data)
+      .def("set_data", &Xcv::set_data, py::arg("data"),
+           aos2_doc::Arr_curve_data_traits_2_X_monotone_curve_2_set_data)
       ;
 
     add_insertion(xcv_c, "__str__");

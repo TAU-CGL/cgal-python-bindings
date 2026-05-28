@@ -17,8 +17,10 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 namespace cgalpy {
 namespace aos2 {
@@ -35,8 +37,11 @@ void export_arr_consolidated_curve_data_traits_2(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Gt>(m, "Arr_consolidated_curve_data_traits_2")) {
-    py::class_<Gt, Base_gt> ccdt_c(m, "Arr_consolidated_curve_data_traits_2");
-    ccdt_c.def(py::init<>());
+    py::class_<Gt, Base_gt> ccdt_c(
+      m, "Arr_consolidated_curve_data_traits_2",
+      aos2_doc::Arr_consolidated_curve_data_traits_2_class);
+    ccdt_c.def(py::init<>(),
+               "Construct a default consolidated curve-data traits object.");
   }
 
   using Data = Gt::Data;
@@ -44,13 +49,21 @@ void export_arr_consolidated_curve_data_traits_2(py::module_& m) {
   using Cul = CGAL::_Consolidate_unique_lists<Data>;
 
   if (! add_attr<Ul>(m, "Unique_list")) {
-    py::class_<Ul> ul_c(m, "Unique_list");
-    ul_c.def(py::init<>())
-      .def(py::init<const Data&>())
-      .def("size", &Ul::size)
-      .def("front", &Ul::front, ri)
-      .def("back", &Ul::back, ri)
-      .def("items", &cgalpy::aos2::items<Ul>, py::keep_alive<0, 1>())
+    py::class_<Ul> ul_c(
+      m, "Unique_list",
+      aos2_doc::Arr_consolidated_curve_data_traits_2_Data_container_class);
+    ul_c.def(py::init<>(),
+             aos2_doc::Arr_consolidated_curve_data_traits_2_Data_container_Data_container)
+      .def(py::init<const Data&>(), py::arg("data"),
+           aos2_doc::Arr_consolidated_curve_data_traits_2_Data_container_Data_container_1)
+      .def("size", &Ul::size,
+           aos2_doc::Arr_consolidated_curve_data_traits_2_Data_container_size)
+      .def("front", &Ul::front, ri,
+           aos2_doc::Arr_consolidated_curve_data_traits_2_Data_container_front)
+      .def("back", &Ul::back, ri,
+           aos2_doc::Arr_consolidated_curve_data_traits_2_Data_container_back)
+      .def("items", &cgalpy::aos2::items<Ul>, py::keep_alive<0, 1>(),
+           "Return an iterator over the unique data items.")
       ;
 
     using It = Ul::const_iterator;

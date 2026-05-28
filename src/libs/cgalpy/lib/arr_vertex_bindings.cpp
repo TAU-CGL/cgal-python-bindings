@@ -16,10 +16,12 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 namespace cgalpy {
 namespace aos2 {
@@ -109,9 +111,13 @@ void export_vertex(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
   if (! add_attr<cgalpy::aos2::V>(c, "Arr_extended_vertex")) {
-    py::class_<cgalpy::aos2::V> (c, "Arr_extended_vertex" /*, py::type_slots(cgalpy::aos2::aos_vertex_slots)*/)
-      .def("set_data", &cgalpy::aos2::V::set_data, py::keep_alive<1, 2>())
-      .def("data", py::overload_cast<>(&cgalpy::aos2::V::data, py::const_))
+    py::class_<cgalpy::aos2::V> (c, "Arr_extended_vertex",
+                                aos2_doc::Arr_extended_vertex_class /*, py::type_slots(cgalpy::aos2::aos_vertex_slots)*/)
+      .def("set_data", &cgalpy::aos2::V::set_data,
+           py::arg("data"), py::keep_alive<1, 2>(),
+           aos2_doc::Arr_extended_vertex_set_data)
+      .def("data", py::overload_cast<>(&cgalpy::aos2::V::data, py::const_),
+           aos2_doc::Arr_extended_vertex_data)
       ;
   }
 #endif
@@ -119,35 +125,50 @@ void export_vertex(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
   if (add_attr<Vertex>(c, "Vertex")) return;
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
-  py::class_<Vertex, cgalpy::aos2::V> vertex_c(c, "Vertex");
+  py::class_<Vertex, cgalpy::aos2::V> vertex_c(c, "Vertex",
+                                                aos2_doc::Arrangement_on_surface_2_Vertex_class);
 #else
-  py::class_<Vertex> vertex_c(c, "Vertex");
+  py::class_<Vertex> vertex_c(c, "Vertex",
+                                aos2_doc::Arrangement_on_surface_2_Vertex_class);
 #endif
 
-  vertex_c.def(py::init<>())
+  vertex_c.def(py::init<>(),
+               aos2_doc::Arrangement_on_surface_2_Vertex_Vertex)
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
     // An unsafe point that is referenced counted will most likely die when the
     // Aos data structure that holds it dies, as the reference counter will
     // vanish. Not all points are referenced counted (perhaps they should...).
-    .def("point_unsafe_mutable", [](Vertex& v)->Point& { return v.point(); }, ri)
-    .def("point_unsafe", [](const Vertex& v)->const Point& { return v.point(); }, ri)
+    .def("point_unsafe_mutable", [](Vertex& v)->Point& { return v.point(); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Vertex_point)
+    .def("point_unsafe", [](const Vertex& v)->const Point& { return v.point(); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Vertex_point)
     .def("point",
          [](const Vertex& v)->std::unique_ptr<Point>
-         { return std::make_unique<Point>(v.point()); }, ri)
-    .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); })
+         { return std::make_unique<Point>(v.point()); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Vertex_point)
+    .def("is_isolated", [](const Vertex& v)->bool { return v.is_isolated(); },
+         aos2_doc::Arrangement_on_surface_2_Vertex_is_isolated)
 
     // Immediate members
-    .def("is_at_open_boundary", &Vertex::is_at_open_boundary)
-    .def("parameter_space_in_x", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_x(); })
-    .def("parameter_space_in_y", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_y(); })
-    .def("degree", &Vertex::degree)
-    .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
-    .def("incident_halfedges", &cgalpy::aos2::incident_halfedges_iterator, py::keep_alive<0, 1>())
+    .def("is_at_open_boundary", &Vertex::is_at_open_boundary,
+         aos2_doc::Arrangement_on_surface_2_Vertex_is_at_open_boundary)
+    .def("parameter_space_in_x", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_x(); },
+         aos2_doc::Arrangement_on_surface_2_Vertex_parameter_space_in_x)
+    .def("parameter_space_in_y", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_y(); },
+         aos2_doc::Arrangement_on_surface_2_Vertex_parameter_space_in_y)
+    .def("degree", &Vertex::degree,
+         aos2_doc::Arrangement_on_surface_2_Vertex_degree)
+    .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Vertex_face)
+    .def("incident_halfedges", &cgalpy::aos2::incident_halfedges_iterator,
+         py::keep_alive<0, 1>(),
+         aos2_doc::Arrangement_on_surface_2_Vertex_incident_halfedges)
 
     // Wrap also the function that obtains the circulator
-    .def("incident_halfedges_circulator", &cgalpy::aos2::incident_halfedges_circulator)
+    .def("incident_halfedges_circulator", &cgalpy::aos2::incident_halfedges_circulator,
+         aos2_doc::Arrangement_on_surface_2_Vertex_incident_halfedges)
 
 // #ifdef CGALPY_AOS2_VERTEX_EXTENDED
 //     // The member functions set_data() and data() are defined in a base class of
@@ -159,8 +180,10 @@ void export_vertex(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
 // #endif
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
-    .def("number_of_surfaces", [](Vertex& v) { return v.number_of_surfaces(); })
-    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>())
+    .def("number_of_surfaces", [](Vertex& v) { return v.number_of_surfaces(); },
+         "Return the number of envelope surfaces incident to the vertex.")
+    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>(),
+         "Iterate over envelope surfaces incident to the vertex.")
 #endif
     ;
 

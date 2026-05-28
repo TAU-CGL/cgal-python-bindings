@@ -17,8 +17,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 extern void export_kernel_algebraic(py::module_&);
 
@@ -66,9 +68,12 @@ Xcv ctr_xcv_from_rats(const Ctr_xcv& ctr,
  * Rational, and Bound separately.
 */
 void export_integer(py::module_& m) {
-  py::class_<Integer> integer_c(m, "Integer");
-  integer_c.def(py::init<>())
-    .def(py::init_implicit<int>())
+  py::class_<Integer> integer_c(m, "Integer",
+                               "Arbitrary-precision integer used by the rational-function traits.");
+  integer_c.def(py::init<>(),
+                "Construct a default integer.")
+    .def(py::init_implicit<int>(), py::arg("value"),
+         "Construct from a Python integer.")
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
@@ -82,12 +87,19 @@ void export_integer(py::module_& m) {
 
 //
 void export_rational(py::module_& m) {
-  py::class_<Rational> rational_c(m, "Rational");
-  rational_c.def(py::init<>())
-    .def(py::init<const Integer&, const Integer&>())
-    .def(py::init_implicit<double>())
-    .def(py::init_implicit<int>())
-    .def(py::init_implicit<const Integer&>())
+  py::class_<Rational> rational_c(m, "Rational",
+                                  "Rational number used by the rational-function traits.");
+  rational_c.def(py::init<>(),
+                 "Construct a default rational.")
+    .def(py::init<const Integer&, const Integer&>(),
+         py::arg("numerator"), py::arg("denominator"),
+         "Construct from numerator and denominator.")
+    .def(py::init_implicit<double>(), py::arg("value"),
+         "Construct from a floating-point value.")
+    .def(py::init_implicit<int>(), py::arg("value"),
+         "Construct from an integer value.")
+    .def(py::init_implicit<const Integer&>(), py::arg("value"),
+         "Construct from an arbitrary-precision integer.")
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
@@ -101,11 +113,16 @@ void export_rational(py::module_& m) {
 
 //
 void export_bound(py::module_& m) {
-  py::class_<Bound> bound_c(m, "Bound");
-  bound_c.def(py::init<>())
-    .def(py::init<double>())
-    .def(py::init_implicit<int>())
-    .def(py::init_implicit<const Integer&>())
+  py::class_<Bound> bound_c(m, "Bound",
+                             "Bound number type used by the rational-function traits.");
+  bound_c.def(py::init<>(),
+              "Construct a default bound.")
+    .def(py::init<double>(), py::arg("value"),
+         "Construct from a floating-point value.")
+    .def(py::init_implicit<int>(), py::arg("value"),
+         "Construct from an integer value.")
+    .def(py::init_implicit<const Integer&>(), py::arg("value"),
+         "Construct from an arbitrary-precision integer.")
     .def(py::self + py::self)
     .def(py::self += py::self)
     .def(py::self - py::self)
@@ -140,13 +157,19 @@ void export_arr_rational_function_traits_2(py::module_& m) {
   // Export the rational-function traits itself.
   if (add_attr<Gt>(m, "Arr_rational_function_traits_2")) return;
 
-  py::class_<Gt> traits_c(m, "Arr_rational_function_traits_2");
-  traits_c.def(py::init<>())
-    .def(py::init<const Gt&>())
-    .def(py::init<Alg_kernel*>())
-    .def("construct_curve_2_object", &Gt::construct_curve_2_object)
+  py::class_<Gt> traits_c(m, "Arr_rational_function_traits_2",
+                            aos2_doc::Arr_rational_function_traits_2_class);
+  traits_c.def(py::init<>(),
+               "Construct a default rational-function traits object.")
+    .def(py::init<const Gt&>(), py::arg("traits"),
+         "Copy-construct a rational-function traits object.")
+    .def(py::init<Alg_kernel*>(), py::arg("kernel"),
+         aos2_doc::Arr_rational_function_traits_2_Arr_rational_function_traits_2)
+    .def("construct_curve_2_object", &Gt::construct_curve_2_object,
+         aos2_doc::Arr_rational_function_traits_2_construct_curve_2_object)
     .def("construct_x_monotone_curve_2_object",
-         &Gt::construct_x_monotone_curve_2_object)
+         &Gt::construct_x_monotone_curve_2_object,
+         aos2_doc::Arr_rational_function_traits_2_construct_x_monotone_curve_2_object)
     ;
 
   struct Concepts {
@@ -159,8 +182,10 @@ void export_arr_rational_function_traits_2(py::module_& m) {
 
   // Export additional point attributes:
   auto& pnt_c = *(concepts.m_aos_basic_traits_2_classes.m_point_2);
-  pnt_c.def("x", py::overload_cast<>(&Pnt::x, py::const_))
-    .def("y", py::overload_cast<>(&Pnt::y, py::const_))
+  pnt_c.def("x", py::overload_cast<>(&Pnt::x, py::const_),
+              aos2_doc::Arr_rational_function_traits_2_Point_2_x)
+    .def("y", py::overload_cast<>(&Pnt::y, py::const_),
+         aos2_doc::Arr_rational_function_traits_2_Point_2_y)
     ;
   using Class_p = std::remove_reference<decltype(pnt_c)>::type;
   add_insertion<Class_p, true>(pnt_c, "__str__");
@@ -177,12 +202,24 @@ void export_arr_rational_function_traits_2(py::module_& m) {
   using ctr_cv_op3 = Cv(Ctr_cv::*)(const Polynomial&, const Polynomial&,
                                    const Ar&, bool)const;
 
-  py::class_<Ctr_cv>(traits_c, "Construct_curve_2")
-    .def("__call__", static_cast<ctr_cv_op0>(&Ctr_cv::operator()))
-    .def("__call__", static_cast<ctr_cv_op1>(&Ctr_cv::operator()))
-    .def("__call__", static_cast<ctr_cv_op2>(&Ctr_cv::operator()))
-    .def("__call__", static_cast<ctr_cv_op3>(&Ctr_cv::operator()))
-    .def("__call__", &ctr_cv_from_rats)
+  py::class_<Ctr_cv>(traits_c, "Construct_curve_2",
+                       aos2_doc::Arr_rational_function_traits_2_Construct_curve_2_class)
+    .def("__call__", static_cast<ctr_cv_op0>(&Ctr_cv::operator()),
+         py::arg("polynomial"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_curve_2_operator_call)
+    .def("__call__", static_cast<ctr_cv_op1>(&Ctr_cv::operator()),
+         py::arg("polynomial"), py::arg("lower"), py::arg("upper"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_curve_2_operator_call_2)
+    .def("__call__", static_cast<ctr_cv_op2>(&Ctr_cv::operator()),
+         py::arg("numerator"), py::arg("denominator"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_curve_2_operator_call_3)
+    .def("__call__", static_cast<ctr_cv_op3>(&Ctr_cv::operator()),
+         py::arg("numerator"), py::arg("denominator"),
+         py::arg("x"), py::arg("right"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_curve_2_operator_call_4)
+    .def("__call__", &ctr_cv_from_rats,
+         py::arg("coefficients"), py::arg("x"), py::arg("right"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_curve_2_operator_call_7)
     ;
 
   // Export additional x-monotone curve attributes:
@@ -194,11 +231,23 @@ void export_arr_rational_function_traits_2(py::module_& m) {
   using ctr_xcv_op2 = Xcv(Ctr_xcv::*)(const Polynomial&, const Polynomial&,
                                       const Ar&, const Ar&)const;
 
-  py::class_<Ctr_xcv>(traits_c, "Construct_x_monotone_curve_2")
-    .def("__call__", static_cast<ctr_xcv_op0>(&Ctr_xcv::operator()))
-    .def("__call__", static_cast<ctr_xcv_op1>(&Ctr_xcv::operator()))
-    .def("__call__", static_cast<ctr_xcv_op2>(&Ctr_xcv::operator()))
-    .def("__call__", &ctr_xcv_from_rats)
+  py::class_<Ctr_xcv>(
+    traits_c, "Construct_x_monotone_curve_2",
+    aos2_doc::Arr_rational_function_traits_2_Construct_x_monotone_curve_2_class)
+    .def("__call__", static_cast<ctr_xcv_op0>(&Ctr_xcv::operator()),
+         py::arg("polynomial"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_call)
+    .def("__call__", static_cast<ctr_xcv_op1>(&Ctr_xcv::operator()),
+         py::arg("polynomial"), py::arg("lower"), py::arg("upper"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_call_2)
+    .def("__call__", static_cast<ctr_xcv_op2>(&Ctr_xcv::operator()),
+         py::arg("numerator"), py::arg("denominator"),
+         py::arg("lower"), py::arg("upper"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_call_5)
+    .def("__call__", &ctr_xcv_from_rats,
+         py::arg("numerators"), py::arg("denominators"),
+         py::arg("lower"), py::arg("upper"),
+         aos2_doc::Arr_rational_function_traits_2_Construct_x_monotone_curve_2_operator_call_11)
     ;
 
   auto& xcv_c = *(concepts.m_aos_basic_traits_2_classes.m_x_monotone_curve_2);
@@ -213,8 +262,12 @@ void export_arr_rational_function_traits_2(py::module_& m) {
 
   if (! add_attr<Polynomial>(m, "Polynomial_1"))
     bind_polynomial<Pt>(m, "Polynomial_1");
-  m.def("shift", &shift<Polynomial>);
-  m.def("ipower", &ipower<Polynomial>);
+  m.def("shift", &shift<Polynomial>,
+        py::arg("polynomial"), py::arg("i"),
+        "Return the shifted polynomial.");
+  m.def("ipower", &ipower<Polynomial>,
+        py::arg("polynomial"), py::arg("i"),
+        "Return the polynomial raised to an integer power.");
 
   // Add convenient attributes to the module:
   add_attr<Integer>(traits_c, "Integer");

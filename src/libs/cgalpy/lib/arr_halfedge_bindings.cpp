@@ -14,10 +14,12 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 namespace cgalpy {
 namespace aos2 {
@@ -66,44 +68,64 @@ void export_halfedge(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
 #endif
 
   if (add_attr<He>(c, "Halfedge")) return;
-  py::class_<He> halfedge_c(c, "Halfedge");
-  halfedge_c.def(py::init<>())
-    .def("direction", [](const He& h)->Ahd { return h.direction(); })
-    .def("is_fictitious", &He::is_fictitious)
-    .def("source", &cgalpy::aos2::source, ri)
-    .def("target", &cgalpy::aos2::target, ri)
-    .def("twin", &cgalpy::aos2::twin, ri)
-    .def("face", &cgalpy::aos2::face, ri)
-    .def("next", &cgalpy::aos2::next, ri)
-    .def("prev", &cgalpy::aos2::prev, ri)
+  py::class_<He> halfedge_c(c, "Halfedge",
+                            aos2_doc::Arrangement_on_surface_2_Halfedge_class);
+  halfedge_c.def(py::init<>(),
+                 aos2_doc::Arrangement_on_surface_2_Halfedge_Halfedge)
+    .def("direction", [](const He& h)->Ahd { return h.direction(); },
+         aos2_doc::Arrangement_on_surface_2_Halfedge_direction)
+    .def("is_fictitious", &He::is_fictitious,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_is_fictitious)
+    .def("source", &cgalpy::aos2::source, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_source)
+    .def("target", &cgalpy::aos2::target, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_target)
+    .def("twin", &cgalpy::aos2::twin, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_twin)
+    .def("face", &cgalpy::aos2::face, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_face)
+    .def("next", &cgalpy::aos2::next, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_next)
+    .def("prev", &cgalpy::aos2::prev, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_prev)
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
     // An unsafe curve that is referenced counted will most likely die when the
     // Aos data structure that holds dies, as the reference counter will vanish.
     // Not all x-monotone curves are referenced counted (perhaps they should...).
-    .def("curve_unsafe_mutable", [](He& h)->Xcv& { return h.curve(); }, ri)
-    .def("curve_unsafe", [](He& h)->Xcv& { return h.curve(); }, ri)
+    .def("curve_unsafe_mutable", [](He& h)->Xcv& { return h.curve(); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_curve)
+    .def("curve_unsafe", [](He& h)->Xcv& { return h.curve(); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_curve)
     .def("curve",
          [](const He& h)->std::unique_ptr<Xcv>
-         { return std::make_unique<Xcv>(h.curve()); }, ri)
-    .def("ccb", &cgalpy::aos2::ccb_iterator, py::keep_alive<0, 1>())
+         { return std::make_unique<Xcv>(h.curve()); }, ri,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_curve)
+    .def("ccb", &cgalpy::aos2::ccb_iterator, py::keep_alive<0, 1>(),
+         aos2_doc::Arrangement_on_surface_2_Halfedge_ccb)
 
     // Wrap also the function that obtains the real circulator
-    .def("ccb_circulator", &cgalpy::aos2::ccb_circulator)
+    .def("ccb_circulator", &cgalpy::aos2::ccb_circulator,
+         aos2_doc::Arrangement_on_surface_2_Halfedge_ccb)
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
     // `Face::set_data`. Instead, we introduce lambda functions that calls the
     // appropriate member functions.
-    .def("set_data", [](He& h, py::object obj) { h.set_data(obj); }, py::keep_alive<1, 2>())
-    .def("data", [](const He& h)->py::object { return h.data(); })
+    .def("set_data", [](He& h, py::object obj) { h.set_data(obj); },
+         py::arg("data"), py::keep_alive<1, 2>(),
+         aos2_doc::Arr_extended_halfedge_set_data)
+    .def("data", [](const He& h)->py::object { return h.data(); },
+         aos2_doc::Arr_extended_halfedge_data)
 #endif
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
-    .def("number_of_surfaces", [](He& h) { return h.number_of_surfaces(); })
-    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>())
+    .def("number_of_surfaces", [](He& h) { return h.number_of_surfaces(); },
+         "Return the number of envelope surfaces incident to the halfedge.")
+    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>(),
+         "Iterate over envelope surfaces incident to the halfedge.")
 #endif
     ;
 

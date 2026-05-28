@@ -20,7 +20,9 @@ template <typename Gt, typename Functor>
 static void impl(py::class_<Functor>& functor_c, Op_pnt_pnt_result) {
   using Pnt = typename Gt::Point_2;
   functor_c.def("__call__", py::overload_cast<const Pnt&, const Pnt&>
-                (&Functor::operator(), py::const_));
+                (&Functor::operator(), py::const_),
+                py::arg("p1"), py::arg("p2"),
+                "Call the functor on two points.");
 }
 
 template <typename Gt, typename Functor>

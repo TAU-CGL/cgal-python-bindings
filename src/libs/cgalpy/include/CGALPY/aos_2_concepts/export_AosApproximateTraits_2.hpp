@@ -49,7 +49,9 @@ void export_approximate_point(C& c, Concepts& concepts, bool) {
   // Bind the operator
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
   classes.m_approximate_2->def("__call__",
-                               static_cast<ovld2>(&Approximate_2::operator()));
+                               static_cast<ovld2>(&Approximate_2::operator()),
+                               py::arg("point"),
+                               aos2_approximate_doc::AosTraits_ApproximatePoint_2_operator_call);
 }
 
 // Bind the Approximate_2 traits functor
@@ -72,7 +74,9 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
       aos2_approximate_doc::AosApproximateTraits_2_Approximate_2);
     using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
     classes.m_approximate_2->def("__call__",
-                                 static_cast<ovld1>(&Approximate_2::operator()));
+                                 static_cast<ovld1>(&Approximate_2::operator()),
+                                 py::arg("point"), py::arg("i"),
+                                 aos2_approximate_doc::AosTraits_Approximate_2_operator_call);
     export_approximate_point<T>(c, concepts, true);
   }
 

@@ -51,7 +51,10 @@ void export_Compare_x_near_boundary_2(C& c, Classes& classes, CGAL::Tag_true) {
       c, "Compare_x_near_boundary_2",
       aos2_open_boundary_doc::AosOpenBoundaryTraits_2_Compare_x_near_boundary_2);
   classes.m_compare_x_near_boundary_2->def("__call__",
-                                           &Cmp_x_near_bnd::operator());
+                                           &Cmp_x_near_bnd::operator(),
+                                           py::arg("xcv1"), py::arg("xcv2"),
+                                           py::arg("curve_end"),
+                                           aos2_open_boundary_doc::AosTraits_CompareXNearBoundary_2_operator_call);
   c.def("compare_x_near_boundary_2_object",
         &T::compare_x_near_boundary_2_object,
         aos2_open_boundary_doc::AosOpenBoundaryTraits_2_compare_x_near_boundary_2_object);
@@ -78,9 +81,14 @@ void export_Compare_x_on_boundary_2(C& c, Classes& classes, CGAL::Tag_true) {
 
   auto cmp_x_on_bnd_c = *(classes.m_compare_x_on_boundary_2);
   cmp_x_on_bnd_c.def("__call__",
-                     static_cast<overload1>(&Cmp_x_on_bnd::operator()));
+                     static_cast<overload1>(&Cmp_x_on_bnd::operator()),
+                     py::arg("xcv1"), py::arg("curve_end1"),
+                     py::arg("xcv2"), py::arg("curve_end2"),
+                     aos2_open_boundary_doc::AosTraits_CompareXOnBoundaryOfCurveEnd_2_operator_call_1);
   cmp_x_on_bnd_c.def("__call__",
-                     static_cast<overload2>(&Cmp_x_on_bnd::operator()));
+                     static_cast<overload2>(&Cmp_x_on_bnd::operator()),
+                     py::arg("point"), py::arg("xcv"), py::arg("curve_end"),
+                     aos2_open_boundary_doc::AosTraits_CompareXOnBoundaryOfCurveEnd_2_operator_call);
   c.def("compare_x_on_boundary_2_object", &T::compare_x_on_boundary_2_object,
         aos2_open_boundary_doc::AosOpenBoundaryTraits_2_compare_x_on_boundary_2_object);
 }
@@ -99,7 +107,10 @@ void export_Compare_y_near_boundary_2(C& c, Classes& classes, CGAL::Tag_true) {
       c, "Compare_y_near_boundary_2",
       aos2_open_boundary_doc::AosOpenBoundaryTraits_2_Compare_y_near_boundary_2);
   auto cmp_y_near_bnd_c = *(classes.m_compare_y_near_boundary_2);
-  cmp_y_near_bnd_c.def("__call__", &Cmp_y_near_bnd::operator());
+  cmp_y_near_bnd_c.def("__call__", &Cmp_y_near_bnd::operator(),
+                         py::arg("xcv1"), py::arg("xcv2"),
+                         py::arg("curve_end"),
+                         aos2_open_boundary_doc::AosTraits_CompareYNearBoundary_2_operator_call);
   c.def("compare_y_near_boundary_2_object",
         &T::compare_y_near_boundary_2_object,
         aos2_open_boundary_doc::AosOpenBoundaryTraits_2_compare_y_near_boundary_2_object);
@@ -118,7 +129,10 @@ void export_Parameter_space_in_x_2(C& c, Classes& classes, CGAL::Tag_true) {
     new py::class_<typename T::Parameter_space_in_x_2>(
       c, "Parameter_space_in_x_2",
       aos2_open_boundary_doc::AosOpenBoundaryTraits_2_Parameter_space_in_x_2);
-  classes.m_parameter_space_in_x_2->def("__call__", static_cast<overload>(&T::Parameter_space_in_x_2::operator()));
+  classes.m_parameter_space_in_x_2->def("__call__",
+                                         static_cast<overload>(&T::Parameter_space_in_x_2::operator()),
+                                         py::arg("xcv"), py::arg("curve_end"),
+                                         aos2_open_boundary_doc::AosTraits_ParameterSpaceInX_2_operator_call);
   c.def("parameter_space_in_x_2_object", &T::parameter_space_in_x_2_object,
         aos2_open_boundary_doc::AosOpenBoundaryTraits_2_parameter_space_in_x_2_object);
 }
@@ -138,7 +152,10 @@ void export_Parameter_space_in_y_2(C& c, Classes& classes, CGAL::Tag_true) {
     new py::class_<Prm_space_in_y_2>(
       c, "Parameter_space_in_y_2",
       aos2_open_boundary_doc::AosOpenBoundaryTraits_2_Parameter_space_in_y_2);
-  classes.m_parameter_space_in_y_2->def("__call__", static_cast<overload>(&Prm_space_in_y_2::operator()));
+  classes.m_parameter_space_in_y_2->def("__call__",
+                                         static_cast<overload>(&Prm_space_in_y_2::operator()),
+                                         py::arg("xcv"), py::arg("curve_end"),
+                                         aos2_open_boundary_doc::AosTraits_ParameterSpaceInY_2_operator_call);
   c.def("parameter_space_in_y_2_object", &T::parameter_space_in_y_2_object,
         aos2_open_boundary_doc::AosOpenBoundaryTraits_2_parameter_space_in_y_2_object);
 }

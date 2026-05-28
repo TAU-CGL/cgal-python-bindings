@@ -12,8 +12,10 @@
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 //
 void export_arr_counting_traits_2(py::module_& m) {
@@ -22,6 +24,8 @@ void export_arr_counting_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_counting_traits_2")) return;
 
-  py::class_<Gt, Base_gt> traits_c(m, "Arr_counting_traits_2");
-  traits_c.def(py::init<>());
+  py::class_<Gt, Base_gt> traits_c(m, "Arr_counting_traits_2",
+                                      aos2_doc::Arr_counting_traits_2_class);
+  traits_c.def(py::init<>(),
+               aos2_doc::Arr_counting_traits_2_Arr_counting_traits_2);
 }

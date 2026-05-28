@@ -28,8 +28,10 @@
 #include "CGALPY/add_insertion.hpp"
 #include "CGALPY/add_extraction.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
 
 template <typename Traits_>
 typename Traits_::Curve_2
@@ -80,20 +82,25 @@ void export_arr_polyline_traits_2(py::module_& m) {
   } concepts;
 
   if (! add_attr<Pcbgt>(m, "Arr_polycurve_basic_traits_2")) {
-    py::class_<Pcbgt> pcbgt_c(m, "Arr_polycurve_basic_traits_2");
+    py::class_<Pcbgt> pcbgt_c(
+      m, "Arr_polycurve_basic_traits_2",
+      "Basic traits for polycurves backed by segment traits.");
     export_AosBasicTraits_2<Pcbgt>(pcbgt_c, concepts);
     export_AosApproximateTraits_2<Pcbgt>(pcbgt_c, concepts);
   }
 
   if (! add_attr<Pcgt>(m, "Arr_polycurve_traits_2")) {
-    py::class_<Pcgt, Pcbgt> pcgt_c(m, "Arr_polycurve_traits_2");
+    py::class_<Pcgt, Pcbgt> pcgt_c(
+      m, "Arr_polycurve_traits_2",
+      "Traits for polycurves backed by segment traits.");
     export_AosTraits_2<Pcgt>(pcgt_c, concepts);
     export_AosDirectionalXMonotoneTraits_2<Pcgt>(pcgt_c, concepts);
     //! \todo add Push_back_2, Push_fron_2, Construct_curve_2
   }
 
   if (add_attr<Plgt>(m, "Arr_polyline_traits_2")) return;
-  py::class_<Plgt, Pcgt> plgt_c(m, "Arr_polyline_traits_2");
+  py::class_<Plgt, Pcgt> plgt_c(m, "Arr_polyline_traits_2",
+                                  aos2_doc::Arr_polyline_traits_2_class);
   export_AosConstructXMonotoneCurveTraits_2<Plgt>(plgt_c, concepts);
 
   // The sub curve type
@@ -107,12 +114,17 @@ void export_arr_polyline_traits_2(py::module_& m) {
 
   // Export additional curve attributes:
   using Ctr_cv = Plgt::Construct_curve_2;
-  py::class_<Ctr_cv>(plgt_c, "Construct_curve_2")
-    .def(py::init<const Plgt&>())
-    .def("__call__", &ctr_cv<Plgt>)
+  py::class_<Ctr_cv>(plgt_c, "Construct_curve_2",
+                       aos2_doc::Arr_polyline_traits_2_Construct_curve_2_class)
+    .def(py::init<const Plgt&>(), py::arg("traits"),
+         "Construct a polyline curve-construction functor.")
+    .def("__call__", &ctr_cv<Plgt>, py::arg("objects"),
+         aos2_doc::Arr_polyline_traits_2_Construct_curve_2_operator_call_2)
     ;
 
-  plgt_c.def(py::init<>())
-    .def("construct_curve_2_object", &Plgt::construct_curve_2_object)
+  plgt_c.def(py::init<>(),
+               "Construct a default polyline traits object.")
+    .def("construct_curve_2_object", &Plgt::construct_curve_2_object,
+         aos2_doc::Arr_polyline_traits_2_construct_curve_2_object)
     ;
 }

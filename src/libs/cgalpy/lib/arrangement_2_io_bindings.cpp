@@ -59,19 +59,20 @@ void export_arrangement_2_io(py::class_<cgalpy::aos2::Arrangement_2,
                          Formatter formatter;
                          CGAL::IO::write(arr, os, formatter);
                          return os.str();
-                       });
+                       }, "Return a textual representation of the arrangement.");
   arr_c.def("__repr__", [](const Arr& arr) {
                           std::ostringstream os;
                           Formatter formatter;
                           CGAL::IO::write(arr, os, formatter);
                           return os.str();
-                        });
+                        }, "Return a textual representation of the arrangement.");
   arr_c.def("__init__", [](Arr* arr, const std::string& str) {
                           std::istringstream is(str);
                           new (arr) Arr();      // placement new
                           Formatter formatter;
                           CGAL::IO::read(*arr, is, formatter);
-                        });
+                        }, py::arg("str"),
+                        "Construct an arrangement from its textual representation.");
 
 #else
   add_insertion(arr_c, "__str__");

@@ -34,7 +34,9 @@ void export_Compare_y_at_x_left_2(C& c, Classes& classes, CGAL::Tag_true) {
         c, "Compare_y_at_x_left_2",
         aos2_doc::AosBasicTraits_2_Compare_y_at_x_left_2);
     classes.m_compare_y_at_x_left_2->
-      def("__call__", &Compare_y_at_x_left_2::operator());
+      def("__call__", &Compare_y_at_x_left_2::operator(),
+          py::arg("xcv1"), py::arg("xcv2"), py::arg("point"),
+          aos2_doc::AosTraits_CompareYAtXLeft_2_operator_call);
   }
 
   c.def("compare_y_at_x_left_2_object", &T::compare_y_at_x_left_2_object,
@@ -89,7 +91,9 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
         c, "Compare_x_2", aos2_doc::AosBasicTraits_2_Compare_x_2);
     classes.m_compare_x_2->def("__call__",
                                py::overload_cast<const Pnt&, const Pnt&>
-                               (&Compare_x_2::operator(), py::const_));
+                               (&Compare_x_2::operator(), py::const_),
+                               py::arg("p1"), py::arg("p2"),
+                               aos2_doc::AosTraits_CompareX_2_operator_call);
   }
 
   // Compare_xy_2
@@ -106,7 +110,9 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
         c, "Construct_min_vertex_2",
         aos2_doc::AosBasicTraits_2_Construct_min_vertex_2);
     classes.m_construct_min_vertex_2->
-      def("__call__", &Construct_min_vertex_2::operator());
+      def("__call__", &Construct_min_vertex_2::operator(),
+          py::arg("xcv"),
+          aos2_doc::AosTraits_ConstructMinVertex_2_operator_call);
   }
 
   // Construct_max_vertex_2
@@ -116,14 +122,18 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
         c, "Construct_max_vertex_2",
         aos2_doc::AosBasicTraits_2_Construct_max_vertex_2);
     classes.m_construct_max_vertex_2->
-      def("__call__", &Construct_max_vertex_2::operator());
+      def("__call__", &Construct_max_vertex_2::operator(),
+          py::arg("xcv"),
+          aos2_doc::AosTraits_ConstructMaxVertex_2_operator_call);
   }
 
   // Is_vertical_2
   if (! add_attr<Is_vertical_2>(c, "Is_vertical_2")) {
     classes.m_is_vertical_2 = new py::class_<Is_vertical_2>(
         c, "Is_vertical_2", aos2_doc::AosBasicTraits_2_Is_vertical_2);
-    classes.m_is_vertical_2->def("__call__", &Is_vertical_2::operator());
+    classes.m_is_vertical_2->def("__call__", &Is_vertical_2::operator(),
+                                 py::arg("xcv"),
+                                 aos2_doc::AosTraits_IsVertical_2_operator_call);
   }
 
   // Compare_y_at_x_2
@@ -134,7 +144,9 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
         aos2_doc::AosBasicTraits_2_Compare_y_at_x_2);
     classes.m_compare_y_at_x_2->def("__call__",
                                     py::overload_cast<const Pnt&, const Xcv&>
-                                    (&Compare_y_at_x_2::operator(), py::const_));
+                                    (&Compare_y_at_x_2::operator(), py::const_),
+                                    py::arg("point"), py::arg("xcv"),
+                                    aos2_doc::AosTraits_CompareYAtX_2_operator_call);
   }
 
   // Compare_y_at_x_right_2
@@ -144,7 +156,9 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
         c, "Compare_y_at_x_right_2",
         aos2_doc::AosBasicTraits_2_Compare_y_at_x_right_2);
     classes.m_compare_y_at_x_right_2->
-      def("__call__", &Compare_y_at_x_right_2::operator());
+      def("__call__", &Compare_y_at_x_right_2::operator(),
+          py::arg("xcv1"), py::arg("xcv2"), py::arg("point"),
+          aos2_doc::AosTraits_CompareYAtXRight_2_operator_call);
   }
 
   // Equal_2
@@ -153,10 +167,14 @@ void export_AosBasicTraits_2(C& c, Concepts& concepts) {
         c, "Equal_2", aos2_doc::AosBasicTraits_2_Equal_2);
     classes.m_equal_2->def("__call__",
                            py::overload_cast<const Pnt&, const Pnt&>
-                           (&Equal_2::operator(), py::const_));
+                           (&Equal_2::operator(), py::const_),
+                           py::arg("p1"), py::arg("p2"),
+                           aos2_doc::AosTraits_Equal_2_operator_call);
     classes.m_equal_2->def("__call__",
                            py::overload_cast<const Xcv&, const Xcv&>
-                           (&Equal_2::operator(), py::const_));
+                           (&Equal_2::operator(), py::const_),
+                           py::arg("xcv1"), py::arg("xcv2"),
+                           aos2_doc::AosTraits_Equal_2_operator_call_1);
   }
 
   c.def(py::init<>())
