@@ -49,8 +49,10 @@ void export_triangulation_3(py::module_& m) {
   using Tds = cgalpy::tri3::Triangulation_data_structure_3;
   if (add_attr<Tds>(m, "Triangulation_data_structure_3")) return;
 
-  py::class_<Tds> tds_c(m, "Triangulation_data_structure_3");
+  py::class_<Tds> tds_c(m, "Triangulation_data_structure_3",
+                          "Triangulation data structure used by Triangulation_3.");
 
-  tds_c.def(py::init<>())
+  tds_c.def(py::init<>(),
+            "Construct an empty triangulation data structure.")
     ;
 }

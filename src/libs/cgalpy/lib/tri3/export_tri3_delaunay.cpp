@@ -18,7 +18,10 @@
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 
+#include "cgalpy/Tri3_docstrings.hpp"
+
 namespace py = nanobind;
+namespace tri3_doc = cgalpy::tri3::docstrings;
 
 namespace cgalpy {
 namespace tri3 {
@@ -160,28 +163,49 @@ void export_tri3_delaunay(py::module_& m) {
 
   if (add_attr<Tri>(m, "Delaunay_triangulation_3")) return;
 
-  py::class_<Tri, Btri> tri_c(m, "Delaunay_triangulation_3");
+  py::class_<Tri, Btri> tri_c(m, "Delaunay_triangulation_3",
+                                tri3_doc::Delaunay_triangulation_3_class);
 
-  tri_c.def(py::init<>())
-    .def(py::init<const cgalpy::tri3::Traits&>())
-    .def("__init__", &cgalpy::tri3::dt3_init)
+  tri_c.def(py::init<>(),
+            tri3_doc::Delaunay_triangulation_3_Delaunay_triangulation_3)
+    .def(py::init<const cgalpy::tri3::Traits&>(),
+         py::arg("traits"),
+         tri3_doc::Delaunay_triangulation_3_Delaunay_triangulation_3)
+    .def("__init__", &cgalpy::tri3::dt3_init,
+         py::arg("points"),
+         tri3_doc::Delaunay_triangulation_3_Delaunay_triangulation_3_2)
     .def("insert", &cgalpy::tri3::insert_del1,
-         py::arg("point"), py::arg("lock_zone") = false, ri)
+         py::arg("point"), py::arg("lock_zone") = false, ri,
+         tri3_doc::Delaunay_triangulation_3_insert)
     .def("insert", &cgalpy::tri3::insert_del2,
-         py::arg("point"), py::arg("start"), py::arg("lock_zone") = false, ri)
+         py::arg("point"), py::arg("start"), py::arg("lock_zone") = false, ri,
+         tri3_doc::Delaunay_triangulation_3_insert)
     .def("insert", &cgalpy::tri3::insert_del3,
-         py::arg("point"), py::arg("hint"), py::arg("lock_zone") = false, ri)
+         py::arg("point"), py::arg("hint"), py::arg("lock_zone") = false, ri,
+         tri3_doc::Delaunay_triangulation_3_insert_1)
     .def("insert", &cgalpy::tri3::insert_del4,
          py::arg("point"), py::arg("lt"), py::arg("c"), py::arg("li"),
-         py::arg("lj"), py::arg("lock_zone") = false, ri)
+         py::arg("lj"), py::arg("lock_zone") = false, ri,
+         tri3_doc::Delaunay_triangulation_3_insert_2)
 
-    .def("side_of_circle", side_of_circle1)
+    .def("side_of_circle", side_of_circle1,
+         py::arg("facet"), py::arg("point"), py::arg("perturb") = false,
+         tri3_doc::Delaunay_triangulation_3_side_of_circle)
     .def("side_of_circle", cgalpy::tri3::side_of_circle2,
-         py::arg("c"), py::arg("i"), py::arg("p"), py::arg("perturb") = false)
-    .def("side_of_sphere", &cgalpy::tri3::side_of_sphere)
-    .def("nearest_vertex", &cgalpy::tri3::nearest_vertex1)
-    .def("nearest_vertex", &cgalpy::tri3::nearest_vertex2)
-    .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
+         py::arg("c"), py::arg("i"), py::arg("p"), py::arg("perturb") = false,
+         tri3_doc::Delaunay_triangulation_3_side_of_circle_1)
+    .def("side_of_sphere", &cgalpy::tri3::side_of_sphere,
+         py::arg("c"), py::arg("p"),
+         tri3_doc::Delaunay_triangulation_3_side_of_sphere)
+    .def("nearest_vertex", &cgalpy::tri3::nearest_vertex1,
+         py::arg("point"), ri,
+         tri3_doc::Delaunay_triangulation_3_nearest_vertex)
+    .def("nearest_vertex", &cgalpy::tri3::nearest_vertex2,
+         py::arg("point"), py::arg("cell"), ri,
+         tri3_doc::Delaunay_triangulation_3_nearest_vertex)
+    .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell,
+         py::arg("cell"), py::arg("point"), ri,
+         tri3_doc::Delaunay_triangulation_3_nearest_vertex_in_cell)
 
     // Displacement
     // .def("move_if_no_collision", &cgalpy::tri3::move_if_no_collision)
@@ -191,7 +215,11 @@ void export_tri3_delaunay(py::module_& m) {
     // .def("remove", &cgalpy::tri3::remove1)
     // .def("remove", &cgalpy::tri3::remove2)
 
-    .def("find_conflicts", &cgalpy::tri3::find_conflicts, ri)
-    .def("find_conflicts_if", &cgalpy::tri3::find_conflicts_ifs, ri)
+    .def("find_conflicts", &cgalpy::tri3::find_conflicts,
+         py::arg("point"), py::arg("start"), ri,
+         tri3_doc::Delaunay_triangulation_3_find_conflicts)
+    .def("find_conflicts_if", &cgalpy::tri3::find_conflicts_ifs,
+         py::arg("point"), py::arg("start"), ri,
+         tri3_doc::Delaunay_triangulation_3_find_conflicts_1)
     ;
 }

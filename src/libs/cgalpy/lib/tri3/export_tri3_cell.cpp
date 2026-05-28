@@ -12,7 +12,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 
+#include "cgalpy/Tri3_docstrings.hpp"
+
 namespace py = nanobind;
+namespace tri3_doc = cgalpy::tri3::docstrings;
 
 namespace cgalpy {
 namespace tri3 {
@@ -66,26 +69,32 @@ void export_tri3_cell(py::class_<cgalpy::tri3::Triangulation_3>& tri_c) {
   void(cgalpy::tri3::Cell::*set_neighbors)(Ch, Ch, Ch, Ch) =
     &cgalpy::tri3::Cell::set_neighbors;
 
-  py::class_<Cell>(tri_c, "Cell")
+  py::class_<Cell>(tri_c, "Cell", tri3_doc::TriangulationCellBase_3_class)
     .def(py::init<>())
-    .def("vertex", &cgalpy::tri3::vertex, ri)
+    .def("vertex", &cgalpy::tri3::vertex, py::arg("index"), ri)
     // .def("index", py::overload_cast<Vh>(&Cell::index, py::const_))
     // .def("index", py::overload_cast<Ch>(&Cell::index, py::const_))
-    .def("has_vertex", &cgalpy::tri3::has_vertex)
-    .def("neighbor", &cgalpy::tri3::neighbor)
+    .def("has_vertex", &cgalpy::tri3::has_vertex, py::arg("vertex"))
+    .def("neighbor", &cgalpy::tri3::neighbor, py::arg("index"), ri)
     // .def("has_neighbor", py::overload_cast<Ch>(&Cell::has_neighbor, py::const_))
     // .def("has_neighbor", py::overload_cast<Ch, int&>(&Cell::has_neighbor, py::const_))
-    .def("set_vertex", &Cell::set_vertex)
-    .def("set_vertices", set_vertices)
-    .def("set_neighbor", &Cell::set_neighbor)
-    .def("set_neighbors", set_neighbors)
-    .def("is_valid", &cgalpy::tri3::cell_is_valid1)
-    .def("is_valid", &cgalpy::tri3::cell_is_valid2)
-    .def("is_valid", &cgalpy::tri3::cell_is_valid3)
+    .def("set_vertex", &Cell::set_vertex, py::arg("index"), py::arg("vertex"))
+    .def("set_vertices", set_vertices,
+         py::arg("v0"), py::arg("v1"), py::arg("v2"), py::arg("v3"))
+    .def("set_neighbor", &Cell::set_neighbor, py::arg("index"), py::arg("neighbor"))
+    .def("set_neighbors", set_neighbors,
+         py::arg("n0"), py::arg("n1"), py::arg("n2"), py::arg("n3"))
+    .def("is_valid", &cgalpy::tri3::cell_is_valid1,
+         py::arg("verbose"), py::arg("level"))
+    .def("is_valid", &cgalpy::tri3::cell_is_valid2, py::arg("verbose"))
+    .def("is_valid", &cgalpy::tri3::cell_is_valid3,
+         "Return whether this cell is valid.")
 
 #ifdef CGALPY_TRI3_CELL_WITH_INFO
-    .def("set_info", [](Cell& c, py::object obj) { c.info() = obj; })
-    .def("info", [](const Cell& c)->py::object { return c.info(); })
+    .def("set_info", [](Cell& c, py::object obj) { c.info() = obj; },
+         py::arg("info"))
+    .def("info", [](const Cell& c)->py::object { return c.info(); },
+         "Return the user information stored in this cell.")
 #endif
 
     ;
