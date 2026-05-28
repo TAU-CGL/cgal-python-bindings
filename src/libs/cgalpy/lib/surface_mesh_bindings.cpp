@@ -106,30 +106,39 @@ void export_dynamic_property_map(py::module_& m, const std::string& name) {
     // cannot expose directly. Return/store plain bool values instead, and do
     // not expose the underlying map_ member for this specialization.
     if (! add_attr<Mt>(m, name.c_str())) {
-      py::class_<Mt>(m, name.c_str())
-        .def(py::init<>())
+      py::class_<Mt>(m, name.c_str(),
+                     "Dynamic Surface_mesh property map.")
+        .def(py::init<>(),
+             "Constructs an empty dynamic Surface_mesh property map.")
         ;
     }
     m.def("get", [](const Mt& pm, const Key& key) -> bool {
         return static_cast<bool>(get(pm, key));
       },
-      py::arg("property_map"), py::arg("key"));
+      py::arg("property_map"), py::arg("key"),
+      "Returns a boolean value from a dynamic Surface_mesh property map.");
     m.def("put", [](const Mt& pm, const Key& key, bool value) {
         return put(pm, key, value);
       },
-      py::arg("property_map"), py::arg("key"), py::arg("value"));
+      py::arg("property_map"), py::arg("key"), py::arg("value"),
+      "Sets a boolean value in a dynamic Surface_mesh property map.");
   }
   else {
     if (! add_attr<Mt>(m, name.c_str())) {
-      py::class_<Mt>(m, name.c_str())
-        .def(py::init<>())
-        .def_ro("map_", &Mt::map_)
+      py::class_<Mt>(m, name.c_str(),
+                     "Dynamic Surface_mesh property map.")
+        .def(py::init<>(),
+             "Constructs an empty dynamic Surface_mesh property map.")
+        .def_ro("map_", &Mt::map_,
+                "Underlying dynamic property map storage.")
         ;
     }
     m.def("get", [](const Mt& pm, const Key& key) { return get(pm, key); },
-          py::arg("property_map"), py::arg("key"));
+          py::arg("property_map"), py::arg("key"),
+          "Returns a value from a dynamic Surface_mesh property map.");
     m.def("put", [](const Mt& pm, const Key& key, const Value& value) { return put(pm, key, value); },
-          py::arg("property_map"), py::arg("key"), py::arg("value"));
+          py::arg("property_map"), py::arg("key"), py::arg("value"),
+          "Sets a value in a dynamic Surface_mesh property map.");
   }
 }
 
@@ -142,14 +151,18 @@ void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Sm, Dvpt>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dvpt tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
+  m.def("get", [](Dvpt tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"),
+        "Returns a dynamic vertex property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dvpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dvpt(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic vertex property map from a Surface_mesh.");
 }
 
 //!
@@ -161,14 +174,18 @@ void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Sm, Dhpt>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dhpt tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("property_map"), py::arg("graph"));
+  m.def("get", [](Dhpt tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("property_map"), py::arg("graph"),
+        "Returns a dynamic halfedge property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dhpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dhpt(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic halfedge property map from a Surface_mesh.");
 }
 
 //!
@@ -180,14 +197,18 @@ void export_dynamic_face_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Sm, Dfpt>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dfpt tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("property_map"), py::arg("graph"));
+  m.def("get", [](Dfpt tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("property_map"), py::arg("graph"),
+        "Returns a dynamic face property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dfpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dfpt(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic face property map from a Surface_mesh.");
 }
 
 //!
@@ -199,14 +220,18 @@ void export_dynamic_edge_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Sm, Dept>::type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dept tag, Sm& g) { return CGAL::get(tag, g); }, ri, py::arg("property_map"), py::arg("graph"));
+  m.def("get", [](Dept tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("property_map"), py::arg("graph"),
+        "Returns a dynamic edge property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dept(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dept(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic edge property map from a Surface_mesh.");
 }
 
 /*! Export dynamic property maps.
@@ -422,12 +447,19 @@ void add_sm_index(C& c) {
   using size_type = typename Sm::size_type;
   using Sm_i = typename C::Type;
 
-  c.def(py::init<>())
-    .def(py::init<size_type>())
-    .def("id", &Sm_i::id)
-    .def("idx", &Sm_i::idx)
-    .def("is_valid", &Sm_i::is_valid)
-    .def("reset", &Sm_i::reset)
+  c.def(py::init<>(),
+        "Constructs an invalid Surface_mesh index.")
+    .def(py::init<size_type>(),
+         py::arg("idx"),
+         "Constructs a Surface_mesh index from an integer index.")
+    .def("id", &Sm_i::id,
+         "Returns the internal index identifier.")
+    .def("idx", &Sm_i::idx,
+         "Returns the internal index value.")
+    .def("is_valid", &Sm_i::is_valid,
+         "Returns whether the index is valid.")
+    .def("reset", &Sm_i::reset,
+         "Resets the index to the invalid state.")
     ;
 }
 
@@ -462,7 +494,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def(py::init<>(),
            sm_doc::Surface_mesh_Vertex_index_Vertex_index)
       .def(py::init<size_type>(),
-           py::arg("idx"))
+           py::arg("idx"),
+           "Constructs a vertex index from an integer index.")
       .def("__str__", [](const Vi& vi) { return std::to_string(vi.idx()); })
       .def("__repr__", [](const Vi& vi) { return std::to_string(vi.idx()); })
       .def("__eq__", [](const Vi& vi, const Vi& other) { return vi == other; })
@@ -479,11 +512,16 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def(py::init<>(),
            sm_doc::Surface_mesh_Edge_index_Edge_index)
       .def(py::init<size_type>(),
-           py::arg("idx"))
-      .def("halfedge", &Ei::halfedge)
-      .def("idx", &Ei::idx)
-      .def("reset", &Ei::reset)
-      .def("is_valid", &Ei::is_valid)
+           py::arg("idx"),
+           "Constructs an edge index from an integer index.")
+      .def("halfedge", &Ei::halfedge,
+           "Returns the associated halfedge index.")
+      .def("idx", &Ei::idx,
+           "Returns the internal index value.")
+      .def("reset", &Ei::reset,
+           "Resets the index to the invalid state.")
+      .def("is_valid", &Ei::is_valid,
+           "Returns whether the index is valid.")
       .def("__str__", [](const Ei& ei) { return std::to_string(ei.idx()); })
       .def("__repr__", [](const Ei& ei) { return std::to_string(ei.idx()); })
       .def("__eq__", [](const Ei& ei, const Ei& other) { return ei == other; })
@@ -506,7 +544,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def(py::init<>(),
            sm_doc::Surface_mesh_Halfedge_index_Halfedge_index)
       .def(py::init<size_type>(),
-           py::arg("idx"))
+           py::arg("idx"),
+           "Constructs a halfedge index from an integer index.")
       .def("__str__", [](const Hi& hi) { return std::to_string(hi.idx()); })
       .def("__repr__", [](const Hi& hi) { return std::to_string(hi.idx()); })
       .def("__eq__", [](const Hi& hi, const Hi& other) { return hi == other; })
@@ -529,7 +568,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def(py::init<>(),
            sm_doc::Surface_mesh_Face_index_Face_index)
       .def(py::init<size_type>(),
-           py::arg("idx"))
+           py::arg("idx"),
+           "Constructs a face index from an integer index.")
       .def("__str__", [](const Fi& fi) { return std::to_string(fi.idx()); })
       .def("__repr__", [](const Fi& fi) { return std::to_string(fi.idx()); })
       .def("__eq__", [](const Fi& fi, const Fi& other) { return fi == other; })
@@ -541,12 +581,17 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
   // Face descriptor
   if (! add_attr<Fd>(m, "Face_descriptor")) {
-    py::class_<Fd>(m, "Face_descriptor")
-      .def(py::init<>())
+    py::class_<Fd>(m, "Face_descriptor",
+                   "Descriptor of a Surface_mesh face.")
+      .def(py::init<>(),
+           "Constructs an invalid face descriptor.")
       .def(py::init<Fi>(),
-           py::arg("face_index"))
-      .def("idx", &Fd::idx)
-      .def("is_valid", &Fd::is_valid)
+           py::arg("face_index"),
+           "Constructs a face descriptor from a face index.")
+      .def("idx", &Fd::idx,
+           "Returns the internal descriptor index.")
+      .def("is_valid", &Fd::is_valid,
+           "Returns whether the descriptor is valid.")
       .def("__str__", [](const Fd& fd){ return std::to_string(fd.idx()); })
       .def("__repr__", [](const Fd& fd){ return std::to_string(fd.idx()); })
       ;
@@ -554,12 +599,17 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
   // Halfedge descriptor
   if (! add_attr<Hd>(m, "Halfedge_descriptor")) {
-    py::class_<Hd>(m, "Halfedge_descriptor")
-      .def(py::init<>())
+    py::class_<Hd>(m, "Halfedge_descriptor",
+                   "Descriptor of a Surface_mesh halfedge.")
+      .def(py::init<>(),
+           "Constructs an invalid halfedge descriptor.")
       .def(py::init<Hi>(),
-           py::arg("halfedge_index"))
-      .def("idx", &Hd::idx)
-      .def("is_valid", &Hd::is_valid)
+           py::arg("halfedge_index"),
+           "Constructs a halfedge descriptor from a halfedge index.")
+      .def("idx", &Hd::idx,
+           "Returns the internal descriptor index.")
+      .def("is_valid", &Hd::is_valid,
+           "Returns whether the descriptor is valid.")
       .def("__str__", [](const Hd& hd){ return std::to_string(hd.idx()); })
       .def("__repr__", [](const Hd& hd){ return std::to_string(hd.idx()); })
       ;
@@ -567,12 +617,17 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
   // Vertex_descriptor
   if (! add_attr<Vd>(m, "Vertex_descriptor")) {
-    py::class_<Vd>(m, "Vertex_descriptor")
-      .def(py::init<>())
+    py::class_<Vd>(m, "Vertex_descriptor",
+                   "Descriptor of a Surface_mesh vertex.")
+      .def(py::init<>(),
+           "Constructs an invalid vertex descriptor.")
       .def(py::init<Vi>(),
-           py::arg("vertex_index"))
-      .def("idx", &Vd::idx)
-      .def("is_valid", &Vd::is_valid)
+           py::arg("vertex_index"),
+           "Constructs a vertex descriptor from a vertex index.")
+      .def("idx", &Vd::idx,
+           "Returns the internal descriptor index.")
+      .def("is_valid", &Vd::is_valid,
+           "Returns whether the descriptor is valid.")
       .def("__str__", [](const Vd& vd){ return std::to_string(vd.idx()); })
       .def("__repr__", [](const Vd& vd){ return std::to_string(vd.idx()); })
       ;
@@ -581,7 +636,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   // Surface mesh
   if (! add_attr<Sm>(m, name)) {
 
-    py::class_<Sm> sm_c(m, name);
+    py::class_<Sm> sm_c(m, name, sm_doc::Surface_mesh_class);
 
     cgalpy::sm::add_maps<Sm, py::class_<Sm>>(sm_c);
 
@@ -629,10 +684,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("vertices"),
            sm_doc::Surface_mesh_add_face_1)
 
-      .def("has_valid_index", &cgalpy::sm::has_valid_index_v<Sm>, py::arg("v"))
-      .def("has_valid_index", &cgalpy::sm::has_valid_index_e<Sm>, py::arg("e"))
-      .def("has_valid_index", &cgalpy::sm::has_valid_index_h<Sm>, py::arg("h"))
-      .def("has_valid_index", &cgalpy::sm::has_valid_index_f<Sm>, py::arg("f"))
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_v<Sm>, py::arg("v"),
+           "Returns whether a vertex index is valid for this mesh.")
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_e<Sm>, py::arg("e"),
+           "Returns whether an edge index is valid for this mesh.")
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_h<Sm>, py::arg("h"),
+           "Returns whether a halfedge index is valid for this mesh.")
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_f<Sm>, py::arg("f"),
+           "Returns whether a face index is valid for this mesh.")
 
       .def("remove_vertex", &Sm::remove_vertex,
            py::arg("v"),
@@ -735,7 +794,8 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("h"),
            sm_doc::Surface_mesh_prev)
       .def("resize", &Sm::resize,
-           py::arg("nvertices"), py::arg("nedges"), py::arg("nfaces"))
+           py::arg("nvertices"), py::arg("nedges"), py::arg("nfaces"),
+           "Resizes the mesh storage.")
       .def("set_target", &Sm::set_target,
            py::arg("h"), py::arg("v"),
            sm_doc::Surface_mesh_set_target)
@@ -747,10 +807,13 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("v"),
            sm_doc::Surface_mesh_is_isolated)
       .def("set_next_only", &Sm::set_next_only,
-           py::arg("h"), py::arg("nh"))
+           py::arg("h"), py::arg("nh"),
+           "Sets the next halfedge without updating the opposite previous link.")
       .def("set_prev_only", &Sm::set_prev_only,
-           py::arg("h"), py::arg("ph"))
-      .def("shrink_to_fit", &Sm::shrink_to_fit)
+           py::arg("h"), py::arg("ph"),
+           "Sets the previous halfedge without updating the opposite next link.")
+      .def("shrink_to_fit", &Sm::shrink_to_fit,
+           "Requests reduction of unused mesh storage.")
       .def("set_recycle_garbage", &Sm::set_recycle_garbage,
            py::arg("do_recycle"),
            sm_doc::Surface_mesh_set_recycle_garbage)
@@ -849,8 +912,9 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
 #ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &cgalpy::sm::draw<Sm>,
-        py::arg("surface_mesh"), py::arg("title"));
+  m.def("faces", &boost_utils::my_faces<Sm>,
+        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::FaceListGraph_faces);
+
 #endif
 }
 
@@ -924,8 +988,10 @@ void export_surface_mesh(py::module_& m) {
   // GeomTraits::Vector_3 as value type, GeomTraits being the type of the parameter geom_traits
   // Default: None
 
-  py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map")
-    .def(py::init<>())
+  py::class_<boost::vector_property_map<Vector_3>>(m, "Vector_vector_3_map",
+                                                   "Writable property map from indices to 3D vectors.")
+    .def(py::init<>(),
+         "Constructs an empty vector property map.")
     ;
 
   // void set_selected_faces(const FacePatchIDRange& selected_face_patch_ids,
@@ -933,14 +999,19 @@ void export_surface_mesh(py::module_& m) {
 
   using Ffg3 = CGAL::Face_filtered_graph<Sm_3>;
 
-  py::class_<Ffg3>(m, "Face_filtered_graph")
+  py::class_<Ffg3>(m, "Face_filtered_graph",
+                    "Face-filtered view of a Surface_mesh.")
     .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>(),
-         py::arg("graph"), py::arg("selected_face_patch_id"), py::arg("face_patch_id_map"))
-    .def("graph", [](const Ffg3& ffg) { return ffg.graph(); })
-    .def("reset_indices", [](Ffg3& ffg) { return ffg.reset_indices(); })
+         py::arg("graph"), py::arg("selected_face_patch_id"), py::arg("face_patch_id_map"),
+         "Constructs a face-filtered graph view.")
+    .def("graph", [](const Ffg3& ffg) { return ffg.graph(); },
+         "Returns the underlying graph.")
+    .def("reset_indices", [](Ffg3& ffg) { return ffg.reset_indices(); },
+         "Resets cached indices of the filtered graph.")
     .def("number_of_faces", [](const Ffg3& ffg) { return ffg.number_of_faces(); },
          bgl_doc::Face_filtered_graph_number_of_faces)
-    .def("invert_selection", [](Ffg3& ffg) { return ffg.invert_selection(); })
+    .def("invert_selection", [](Ffg3& ffg) { return ffg.invert_selection(); },
+         "Inverts the face selection.")
     // commented for stubs
     // .def("get_face_index_map",
     //    [](const Ffg3& ffg) { return ffg.get_face_index_map(); })
@@ -954,9 +1025,12 @@ void export_surface_mesh(py::module_& m) {
     //   [](const Ffg3& ffg) { return ffg.get_vertex_index_map(); })
     // .def("get_halfedge_index_map",
     //   [](const Ffg3& ffg) { return ffg.get_halfedge_index_map(); })
-    .def("initialize_face_indices", [](Ffg3& ffg) { return ffg.initialize_face_indices(); })
-    .def("initialize_vertex_indices", [](Ffg3& ffg) { return ffg.initialize_vertex_indices(); })
-    .def("initialize_halfedge_indices", [](Ffg3& ffg) { return ffg.initialize_halfedge_indices(); })
+    .def("initialize_face_indices", [](Ffg3& ffg) { return ffg.initialize_face_indices(); },
+         "Initializes face indices for the filtered graph.")
+    .def("initialize_vertex_indices", [](Ffg3& ffg) { return ffg.initialize_vertex_indices(); },
+         "Initializes vertex indices for the filtered graph.")
+    .def("initialize_halfedge_indices", [](Ffg3& ffg) { return ffg.initialize_halfedge_indices(); },
+         "Initializes halfedge indices for the filtered graph.")
     .def("set_selected_faces",
          [](Ffg3& ffg, const std::vector<std::size_t>& vec, const Sm_3::Property_map<Fi, std::size_t>& fccmap) {
            return ffg.set_selected_faces(vec, fccmap);
@@ -966,151 +1040,235 @@ void export_surface_mesh(py::module_& m) {
     ;
 
   // Face filtered Graph
-  m.def("faces", &boost_utils::my_faces<Ffg3>,
-        bgl_doc::FaceListGraph_faces);
+  m.def("clear", &CGAL::clear<Sm_3>, py::arg("graph"), bgl_doc::clear);
+
 
   // Still Need Sorting
-  m.def("clear", &CGAL::clear<Sm_3>);
-  m.def("is_closed", &CGAL::is_closed<Sm_3>);
+  m.def("is_closed", &CGAL::is_closed<Sm_3>,
+        py::arg("graph"), bgl_doc::is_closed);
+
+  m.def("get_vertex_point",
+        [](const Sm_3& pm, const Vi& vd) { return get(CGAL::vertex_point, pm, vd); },
+        py::arg("graph"), py::arg("vertex"),
+        "Returns the point associated with a vertex descriptor.");
+
 
   //! \todo export CGAL::vertex_point and CGAL::get() instead.
-  m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd) { return get(CGAL::vertex_point, pm, vd); });
 
   // m.def("expand_face_selection",
   //       &cgalpy::sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
-  m.def("read_polygon_soup", &cgalpy::sm::read_polygon_soup<Sm_3>, py::arg("fname"), py::arg("np") = py::dict());
-  m.def("is_triangle", &cgalpy::sm::is_triangle<Sm_3>);
-  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
+  m.def("is_triangle", &cgalpy::sm::is_triangle<Sm_3>,
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::is_triangle);
+
+  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>,
+        py::arg("graph"), bgl_doc::is_triangle_mesh);
+
+  m.def("add_edge", &cgalpy::bgl::my_add_edge<Sm_3>,
+        py::arg("graph"), bgl_doc::MutableHalfedgeGraph_add_edge);
+
 
   // CGAL and the Boost Graph Library
 
   // Global functions
-  m.def("add_edge", &cgalpy::bgl::my_add_edge<Sm_3>,
-        bgl_doc::MutableHalfedgeGraph_add_edge);
   m.def("add_face", &cgalpy::bgl::my_add_face<Sm_3>,
-        bgl_doc::MutableFaceGraph_add_face);
+        py::arg("graph"), bgl_doc::MutableFaceGraph_add_face);
+
   m.def("add_vertex", &cgalpy::bgl::my_add_vertex<Sm_3>,
-        bgl_doc::MutableHalfedgeGraph_add_vertex);
+        py::arg("graph"), bgl_doc::MutableHalfedgeGraph_add_vertex);
+
+  m.def("num_edges", &cgalpy::bgl::my_num_edges<Sm_3>,
+        py::arg("graph"), bgl_doc::EdgeListGraph_num_edges);
+
   // Not documented
   // m.def("collect_garbage", &cgalpy::bgl::my_collect_garbage<Sm_3>);
-  m.def("num_edges", &cgalpy::bgl::my_num_edges<Sm_3>,
-        bgl_doc::EdgeListGraph_num_edges);
   m.def("num_faces", &cgalpy::bgl::my_num_faces<Sm_3>,
-        bgl_doc::FaceListGraph_num_faces);
+        py::arg("graph"), bgl_doc::FaceListGraph_num_faces);
+
   m.def("num_halfedges", &cgalpy::bgl::my_num_halfedges<Sm_3>,
-        bgl_doc::HalfedgeListGraph_num_halfedges);
+        py::arg("graph"), bgl_doc::HalfedgeListGraph_num_halfedges);
+
   m.def("num_vertices", &cgalpy::bgl::my_num_vertices<Sm_3>,
-        bgl_doc::VertexListGraph_num_vertices);
-  m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Sm_3>);
-  m.def("reserve", &cgalpy::bgl::my_reserve<Sm_3>);
+        py::arg("graph"), bgl_doc::VertexListGraph_num_vertices);
+
+  m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Sm_3>,
+        py::arg("graph"),
+        "Removes all vertices, edges, halfedges, and faces from the graph.");
+
+  m.def("reserve", &cgalpy::bgl::my_reserve<Sm_3>,
+        py::arg("graph"), py::arg("num_vertices"), py::arg("num_edges"),
+        py::arg("num_faces"), bgl_doc::MutableFaceGraph_reserve);
 
   //! Obtain the propery maps
 #ifdef CGALPY_BGL_BINDINGS
   m.def("get", [](CGAL::vertex_point_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
-        py::arg("tag"), py::arg("graph"));
+        py::arg("tag"), py::arg("graph"),
+        "Returns the vertex point property map.");
   m.def("get", [](CGAL::vertex_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
-        py::arg("tag"), py::arg("graph"));
+        py::arg("tag"), py::arg("graph"),
+        "Returns the vertex index property map.");
   m.def("get", [](CGAL::halfedge_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
-        py::arg("tag"), py::arg("graph"));
+        py::arg("tag"), py::arg("graph"),
+        "Returns the halfedge index property map.");
   m.def("get", [](CGAL::face_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
-        py::arg("tag"), py::arg("graph"));
-  m.def("get", [](CGAL::edge_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
-        py::arg("tag"), py::arg("graph"));
+        py::arg("tag"), py::arg("graph"),
+        "Returns the face index property map.");
+  m.def("adjacent_vertices", &cgalpy::bgl::adjacent_vertices<Sm_3>,
+        py::arg("vertex"), py::arg("graph"), bgl_doc::adjacent_vertices);
+
 #endif
 
   // Other
-  m.def("adjacent_vertices", &cgalpy::bgl::adjacent_vertices<Sm_3>,
-        bgl_doc::adjacent_vertices);
   m.def("add_vertex", &cgalpy::bgl::add_vertex_p<Sm_3>,
-        bgl_doc::MutableHalfedgeGraph_add_vertex);
+        py::arg("point"), py::arg("graph"), bgl_doc::MutableHalfedgeGraph_add_vertex);
+
   m.def("degree", &cgalpy::bgl::degree_v<Sm_3>,
-        bgl_doc::degree);
+        py::arg("vertex"), py::arg("graph"), bgl_doc::degree);
+
   m.def("degree", &cgalpy::bgl::degree_f<Sm_3>,
-        bgl_doc::FaceGraph_degree);
+        py::arg("face"), py::arg("graph"), bgl_doc::FaceGraph_degree);
+
   m.def("edge", &cgalpy::bgl::edge<Sm_3>,
-        bgl_doc::HalfedgeGraph_edge);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::HalfedgeGraph_edge);
+
   m.def("edge", &cgalpy::bgl::edge_vv<Sm_3>,
-        bgl_doc::EdgeListGraph_edges);
+        py::arg("source"), py::arg("target"), py::arg("graph"),
+        "Returns the edge between two vertices, if it exists.");
+
   m.def("face", &cgalpy::bgl::face<Sm_3>,
-        bgl_doc::FaceGraph_face);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::FaceGraph_face);
+
   m.def("halfedge", &cgalpy::bgl::halfedge_e<Sm_3>,
-        bgl_doc::HalfedgeGraph_halfedge);
+        py::arg("edge"), py::arg("graph"), bgl_doc::HalfedgeGraph_halfedge);
+
   m.def("halfedge", &cgalpy::bgl::halfedge_f<Sm_3>,
-        bgl_doc::FaceGraph_halfedge);
+        py::arg("face"), py::arg("graph"), bgl_doc::FaceGraph_halfedge);
+
   m.def("halfedge", &cgalpy::bgl::halfedge_v<Sm_3>,
-        bgl_doc::HalfedgeGraph_halfedge_1);
+        py::arg("vertex"), py::arg("graph"), bgl_doc::HalfedgeGraph_halfedge_1);
+
   m.def("halfedge", &cgalpy::bgl::halfedge_vv<Sm_3>,
+        py::arg("source"), py::arg("target"), py::arg("graph"),
         bgl_doc::HalfedgeGraph_halfedge_2);
+
   m.def("in_degree", &cgalpy::bgl::in_degree<Sm_3>,
-        bgl_doc::in_degree);
-  m.def("is_border", &cgalpy::bgl::my_is_border_h<Sm_3>);
-  m.def("is_border", &cgalpy::bgl::my_is_border_e<Sm_3>);
-  m.def("is_border", &cgalpy::bgl::my_is_border_v<Sm_3>);
-  m.def("is_border", &cgalpy::bgl::my_is_border_edge<Sm_3>);
+        py::arg("vertex"), py::arg("graph"), bgl_doc::in_degree);
+
+  m.def("is_border", &cgalpy::bgl::my_is_border_h<Sm_3>,
+        py::arg("halfedge"), py::arg("graph"),
+        "Tests whether a halfedge is on the border.");
+
+  m.def("is_border", &cgalpy::bgl::my_is_border_e<Sm_3>,
+        py::arg("edge"), py::arg("graph"),
+        "Tests whether an edge is on the border.");
+
+  m.def("is_border", &cgalpy::bgl::my_is_border_v<Sm_3>,
+        py::arg("vertex"), py::arg("graph"),
+        "Tests whether a vertex is incident to the border.");
+
+  m.def("is_border", &cgalpy::bgl::my_is_border_edge<Sm_3>,
+        py::arg("halfedge"), py::arg("graph"),
+        "Tests whether the edge corresponding to a halfedge is on the border.");
+
   m.def("is_valid_vertex_descriptor", &cgalpy::bgl::my_is_valid_vertex_descriptor<Sm_3>,
-        py::arg("v"), py::arg("g"), py::arg("verbose") = false);
+        py::arg("v"), py::arg("g"), py::arg("verbose") = false,
+        "Returns whether a vertex descriptor is valid for the graph.");
   m.def("is_valid_halfedge_descriptor", &cgalpy::bgl::my_is_valid_halfedge_descriptor<Sm_3>,
         py::arg("h"), py::arg("g"), py::arg("verbose") = false,
         bgl_doc::is_valid_halfedge_descriptor);
   m.def("is_valid_edge_descriptor", &cgalpy::bgl::my_is_valid_edge_descriptor<Sm_3>,
         py::arg("e"), py::arg("g"), py::arg("verbose") = false,
         bgl_doc::is_valid_edge_descriptor);
-  m.def("is_valid_face_descriptor", &cgalpy::bgl::my_is_valid_face_descriptor<Sm_3>,
-        py::arg("f"), py::arg("g"), py::arg("verbose") = false,
-        bgl_doc::is_valid_face_descriptor);
   m.def("next", &cgalpy::bgl::next<Sm_3>,
-        bgl_doc::HalfedgeGraph_next);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::HalfedgeGraph_next);
+
   m.def("null_face", &cgalpy::bgl::null_face<Sm_3>,
         bgl_doc::FaceGraph_null_face);
+
   m.def("null_halfedge", &cgalpy::bgl::null_halfedge<Sm_3>,
         bgl_doc::HalfedgeGraph_null_halfedge);
-  m.def("null_vertex", &cgalpy::bgl::null_vertex<Sm_3>);
+
+  m.def("null_vertex", &cgalpy::bgl::null_vertex<Sm_3>,
+        "Returns a null vertex descriptor.");
+
   m.def("opposite", &cgalpy::bgl::opposite<Sm_3>,
-        bgl_doc::HalfedgeGraph_opposite);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::HalfedgeGraph_opposite);
+
   m.def("out_degree", &cgalpy::bgl::out_degree<Sm_3>,
-        bgl_doc::out_degree);
+        py::arg("vertex"), py::arg("graph"), bgl_doc::out_degree);
+
   m.def("prev", &cgalpy::bgl::prev<Sm_3>,
-        bgl_doc::HalfedgeGraph_prev);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::HalfedgeGraph_prev);
+
   m.def("source", &cgalpy::bgl::source_e<Sm_3>,
-        bgl_doc::EdgeListGraph_source);
+        py::arg("edge"), py::arg("graph"), bgl_doc::EdgeListGraph_source);
+
   m.def("source", &cgalpy::bgl::source_h<Sm_3>,
-        bgl_doc::HalfedgeGraph_source);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::HalfedgeGraph_source);
+
   m.def("target", &cgalpy::bgl::target_e<Sm_3>,
-        bgl_doc::EdgeListGraph_target);
+        py::arg("edge"), py::arg("graph"), bgl_doc::EdgeListGraph_target);
+
   m.def("target", &cgalpy::bgl::target_h<Sm_3>,
-        bgl_doc::HalfedgeGraph_target);
+        py::arg("halfedge"), py::arg("graph"), bgl_doc::HalfedgeGraph_target);
+
   m.def("remove_edge", &cgalpy::bgl::remove_edge_e<Sm_3>,
-        bgl_doc::MutableHalfedgeGraph_remove_edge);
+        py::arg("edge"), py::arg("graph"), bgl_doc::MutableHalfedgeGraph_remove_edge);
+
+  m.def("remove_face", &cgalpy::bgl::remove_face<Sm_3>,
+        py::arg("face"), py::arg("graph"), bgl_doc::MutableFaceGraph_remove_face);
+
   // Fails to compile, but also not documented
   // m.def("remove_edge", &cgalpy::bgl::remove_edge_vv<Sm_3>);
-  m.def("remove_face", &cgalpy::bgl::remove_face<Sm_3>,
-        bgl_doc::MutableFaceGraph_remove_face);
   m.def("remove_vertex", &cgalpy::bgl::remove_vertex<Sm_3>,
+        py::arg("vertex"), py::arg("graph"),
         bgl_doc::MutableHalfedgeGraph_remove_vertex);
+
   m.def("set_face", &cgalpy::bgl::set_face<Sm_3>,
+        py::arg("halfedge"), py::arg("face"), py::arg("graph"),
         bgl_doc::MutableFaceGraph_set_face);
+
   m.def("set_halfedge", &cgalpy::bgl::set_halfedge_vh<Sm_3>,
+        py::arg("vertex"), py::arg("halfedge"), py::arg("graph"),
         bgl_doc::MutableHalfedgeGraph_set_halfedge);
+
   m.def("set_halfedge", &cgalpy::bgl::set_halfedge_fh<Sm_3>,
+        py::arg("face"), py::arg("halfedge"), py::arg("graph"),
         bgl_doc::MutableFaceGraph_set_halfedge);
+
   m.def("set_next", &cgalpy::bgl::set_next<Sm_3>,
+        py::arg("halfedge1"), py::arg("halfedge2"), py::arg("graph"),
         bgl_doc::MutableHalfedgeGraph_set_next);
+
   m.def("set_target", &cgalpy::bgl::set_target<Sm_3>,
+        py::arg("halfedge"), py::arg("vertex"), py::arg("graph"),
         bgl_doc::MutableHalfedgeGraph_set_target);
 
   m.def("vertices", &boost_utils::my_vertices<Sm_3>,
-        bgl_doc::VertexListGraph_vertices);
+        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::VertexListGraph_vertices);
+
+
   m.def("edges", &boost_utils::my_edges<Sm_3>,
-        bgl_doc::EdgeListGraph_edges);
-  m.def("in_edges", &boost_utils::my_in_edges<Sm_3>);
-  m.def("out_edges", &boost_utils::my_out_edges<Sm_3>);
+        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::EdgeListGraph_edges);
+
+  m.def("in_edges", &boost_utils::my_in_edges<Sm_3>,
+        py::arg("vertex"), py::arg("graph"), bgl_doc::in_edges);
+
+  m.def("out_edges", &boost_utils::my_out_edges<Sm_3>,
+        py::arg("vertex"), py::arg("graph"), bgl_doc::out_edges);
+
   m.def("halfedges", &boost_utils::my_halfedges<Sm_3>,
+        py::arg("graph"), py::keep_alive<0, 1>(),
         bgl_doc::HalfedgeListGraph_halfedges);
+
   m.def("faces", &boost_utils::my_faces<Sm_3>,
-        bgl_doc::FaceListGraph_faces);
+        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::FaceListGraph_faces);
+
+  m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Sm_3>,
+        py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"),
+        bgl_doc::make_tetrahedron);
+
 
   // Generator Functions
-  m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Sm_3>);
 
   // Euler operations
   boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);
