@@ -12,6 +12,8 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/cartesian_product.hpp"
 
+#include "cgalpy/Ker_docstrings.hpp"
+
 namespace py = nanobind;
 
 /// Handle Intersections
@@ -26,7 +28,9 @@ template<typename T1, typename T2>
 void bind_do_intersect(py::module_& m,
                        decltype(CGAL::do_intersect<Kernel>(T1(), T2()))) {
   using Do_intersect = bool(*)(const T1&, const T2&);
-  m.def("do_intersect", static_cast<Do_intersect>(&CGAL::do_intersect<Kernel>));
+  m.def("do_intersect", static_cast<Do_intersect>(&CGAL::do_intersect<Kernel>),
+        py::arg("object1"), py::arg("object2"),
+        cgalpy::ker::docstrings::do_intersect);
 }
 
 // Intersections
@@ -63,7 +67,9 @@ template<typename, typename> void bind_intersection(py::module_&, ...) {}
 template <typename T1, typename T2,
           typename = decltype(CGAL::intersection<Kernel>(T1(), T2()))>
 void bind_intersection(py::module_& m, bool) {
-  m.def("intersection", &cgalpy_intersection<T1, T2>);
+  m.def("intersection", &cgalpy_intersection<T1, T2>,
+        py::arg("object1"), py::arg("object2"),
+        cgalpy::ker::docstrings::intersection);
 }
 
 template <typename Arg, typename ... Types> struct Wrapper {

@@ -168,12 +168,20 @@ void export_kernel_module(py::module_& m) {
     py::class_<FT> ft_c(m, "FT");
     export_ft(ft_c);
 
-    ft_c.def(py::init<Fte>())
-      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); })
-      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); })
-      .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); })
-      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri)
-      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();} )
+    ft_c.def(py::init<Fte>(), py::arg("exact"),
+             "Constructs an FT value from an exact number.")
+      .def("__init__", [](FT* self, const std::string& str) { new (self) FT(Fte(str)); },
+           py::arg("value"),
+           "Constructs an FT value from a string representation of an exact number.")
+      .def("__init__", [](FT* self, int nom, int den) { new (self) FT(Fte(nom, den)); },
+           py::arg("numerator"), py::arg("denominator"),
+           "Constructs an FT value from a rational numerator and denominator.")
+      .def("to_double", [](const FT& ft)->double { return CGAL::to_double(ft); },
+           "Returns a double approximation of this FT value.")
+      .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri,
+           "Returns the exact representation of this FT value.")
+      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();},
+           "Returns the approximate representation of this FT value.")
       ;
   }
 
@@ -213,7 +221,8 @@ void export_kernel_module(py::module_& m) {
   // Fall back
   if (! add_attr<Fte>(m, "Exact")) {
     py::class_<Fte> fte_c(m, "Exact");
-    fte_c.def(py::init<const Fte&>())
+    fte_c.def(py::init<const Fte&>(), py::arg("other"),
+              "Copy-constructs an exact number.")
       ;
 
     add_insertion(fte_c, "__str__");
@@ -986,7 +995,8 @@ void export_kernel_module(py::module_& m) {
 
   /// \name Global kernel functions
   /// @{
-  m.def("abs", &CGAL::abs<FT>);
+  m.def("abs", &CGAL::abs<FT>, py::arg("value"),
+        "Returns the absolute value.");
 
   using Angle_fnc1 = CGAL::Angle(*)(const Vec_2&, const Vec_2&);
   using Angle_fnc2 = CGAL::Angle(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
@@ -1042,7 +1052,8 @@ void export_kernel_module(py::module_& m) {
         py::arg("p3"), py::arg("w3"), py::arg("p4"), py::arg("w4"),
         ker_doc::barycenter_5);
 
-  m.def("bbox_2", &cgalpy::ker::bbox_2);
+  m.def("bbox_2", &cgalpy::ker::bbox_2, py::arg("objects"),
+        ker_doc::Kernel_Construct_bbox_2);
 
   using Bisector_fnc = Line_2(*)(const Pnt_2&, const Pnt_2&);
   m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>),
@@ -1371,7 +1382,11 @@ void export_kernel_module(py::module_& m) {
   using Rra_fnc =
     void(*)(const RT&, const RT&, RT&, RT&, RT&, const RT&, const RT&);
   m.def("rational_rotation_approximation",
-        static_cast<Rra_fnc>(&CGAL::rational_rotation_approximation<FT>));
+        static_cast<Rra_fnc>(&CGAL::rational_rotation_approximation<FT>),
+        py::arg("dirx"), py::arg("diry"),
+        py::arg("sin_num"), py::arg("cos_num"), py::arg("denom"),
+        py::arg("eps_num"), py::arg("eps_den"),
+        ker_doc::rational_rotation_approximation);
 
   using Rt_fnc = bool(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);
   m.def("right_turn", static_cast<Rt_fnc>(&CGAL::right_turn<Kernel>),
@@ -1439,10 +1454,14 @@ void export_kernel_module(py::module_& m) {
         ker_doc::y_equal);
 
   using Do_fnc = bool(*)(const Bbox_2&, const Bbox_2&);
-  m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap));
+  m.def("do_overlap", static_cast<Do_fnc>(&CGAL::do_overlap),
+        py::arg("bbox1"), py::arg("bbox2"),
+        ker_doc::Bbox_2_do_overlap);
 
   using Do_fnc3 = bool(*)(const Bbox_3&, const Bbox_3&);
-  m.def("do_overlap", static_cast<Do_fnc3>(&CGAL::do_overlap));
+  m.def("do_overlap", static_cast<Do_fnc3>(&CGAL::do_overlap),
+        py::arg("bbox1"), py::arg("bbox2"),
+        ker_doc::Bbox_3_do_overlap);
 
   using Cmp3_fnc = CGAL::Comparison_result(*)(const Pnt_3&, const Pnt_3&);
   m.def("compare_z", static_cast<Cmp3_fnc>(&CGAL::compare_z<Kernel>),
@@ -1451,16 +1470,23 @@ void export_kernel_module(py::module_& m) {
 
   //! From number_utils.h. \todo move to algebraic foundations
   using Cmp_fnc = CGAL::Comparison_result(*)(const FT&, const FT&);
-  m.def("compare", static_cast<Cmp_fnc>(&CGAL::compare<FT>));
+  m.def("compare", static_cast<Cmp_fnc>(&CGAL::compare<FT>),
+        py::arg("x"), py::arg("y"),
+        "Compares two number values.");
 
   using Sign_fnc = CGAL::Comparison_result(*)(const FT&);
-  m.def("sign", static_cast<Sign_fnc>(&CGAL::sign<FT>));
+  m.def("sign", static_cast<Sign_fnc>(&CGAL::sign<FT>),
+        py::arg("x"),
+        "Returns the sign of a number value.");
 
   using Square_res = CGAL::Algebraic_structure_traits<FT>::Square::result_type;
   using Square_fnc = Square_res(*)(const FT&);
-  m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>));
+  m.def("square", static_cast<Square_fnc>(&CGAL::square<FT>),
+        py::arg("x"),
+        "Returns the square of a number value.");
 
-  m.def("to_double", &CGAL::to_double<FT>);
+  m.def("to_double", &CGAL::to_double<FT>, py::arg("x"),
+        "Returns a double approximation of a number value.");
 
   m.def("approximate_dihedral_angle", &CGAL::approximate_dihedral_angle<Kernel>,
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),

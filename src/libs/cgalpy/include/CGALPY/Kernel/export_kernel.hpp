@@ -42,6 +42,8 @@
 
 #include "CGALPY/add_attr.hpp"
 
+#include "cgalpy/Ker_docstrings.hpp"
+
 namespace py = nanobind;
 
 //
@@ -224,55 +226,77 @@ void export_kernel(C_& ker_c) {
 
   using Cmp_xy_2_op =
     CGAL::Comparison_result(Cmp_xy_2::*)(const Pnt_2&, const Pnt_2&)const;
-  py::class_<Cmp_xy_2>(ker_c, "Compare_xy_2")
-    .def("__call__", static_cast<Cmp_xy_2_op>(&Cmp_xy_2::operator()))
+  py::class_<Cmp_xy_2>(ker_c, "Compare_xy_2",
+                      cgalpy::ker::docstrings::Kernel_CompareXY_2_class)
+    .def("__call__", static_cast<Cmp_xy_2_op>(&Cmp_xy_2::operator()),
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_CompareXY_2_operator_call)
     ;
 
   // Construct_point_2
-  py::class_<Ctr_pnt_2>(ker_c, "Construct_point_2")
+  py::class_<Ctr_pnt_2>(ker_c, "Construct_point_2",
+                       cgalpy::ker::docstrings::Kernel_ConstructPoint_2_class)
     .def("__call__", [](Ctr_pnt_2 ctr, const Pnt_2& other)->Pnt_2 const
-                     { return ctr(other); })
+                     { return ctr(other); },
+         py::arg("other"),
+         cgalpy::ker::docstrings::Kernel_ConstructPoint_2_operator_call)
     .def("__call__", [](Ctr_pnt_2 ctr, CGAL::Origin org)->Pnt_2 const
-                     { return ctr(org); })
+                     { return ctr(org); },
+         py::arg("origin"),
+         cgalpy::ker::docstrings::Kernel_ConstructPoint_2_operator_call_1)
     .def("__call__", [](Ctr_pnt_2 ctr, const Ft& x, const Ft& y)->Pnt_2 const
-                     { return ctr(x, y); })
+                     { return ctr(x, y); },
+         py::arg("x"), py::arg("y"),
+         cgalpy::ker::docstrings::Kernel_ConstructPoint_2_operator_call_2)
     ;
 
   // Construct_midpoint_2
   // using Ctr_midpnt_2_op =
   //   Pnt_2(Ctr_midpnt_2::*)(const Pnt_2&, const Pnt_2&)const;
-  py::class_<Ctr_midpnt_2>(ker_c, "Construct_midpoint_2")
+  py::class_<Ctr_midpnt_2>(ker_c, "Construct_midpoint_2",
+                         cgalpy::ker::docstrings::Kernel_ConstructMidpoint_2_class)
     .def("__call__",
          // static_cast<Ctr_midpnt_2_op>(&Ctr_midpnt_2::operator()))
          [](Ctr_midpnt_2 ctr, const Pnt_2& p, const Pnt_2& q)->Pnt_2 const
-         { return ctr(p, q); })
+         { return ctr(p, q); },
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_ConstructMidpoint_2_operator_call)
     ;
 
   // Construct_projected_xy_point_2
   // using Ctr_proj_xy_pnt_2_op =
   //   Pnt_2(Ctr_proj_xy_pnt_2::*)(const Pln_3&, const Pnt_3&)const;
-  py::class_<Ctr_proj_xy_pnt_2>(ker_c, "Construct_projected_xy_point_2")
+  py::class_<Ctr_proj_xy_pnt_2>(ker_c, "Construct_projected_xy_point_2",
+                              cgalpy::ker::docstrings::Kernel_ConstructProjectedXYPoint_2_class)
     .def("__call__",
          // static_cast<Ctr_proj_xy_pnt_2_op>(&Ctr_proj_xy_pnt_2::operator()))
          [](Ctr_proj_xy_pnt_2 ctr, const Pln_3& pln, const Pnt_3& p)->Pnt_2 const
-         { return ctr(pln, p); })
+         { return ctr(pln, p); },
+         py::arg("plane"), py::arg("point"),
+         cgalpy::ker::docstrings::Kernel_ConstructProjectedXYPoint_2_operator_call)
     ;
 
   // Construct_segment_2
   // using Ctr_seg_2_op = Seg_2(Ctr_seg_2::*)(const Pnt_2&, const Pnt_2&)const;
-  py::class_<Ctr_seg_2>(ker_c, "Construct_segment_2")
+  py::class_<Ctr_seg_2>(ker_c, "Construct_segment_2",
+                       cgalpy::ker::docstrings::Kernel_ConstructSegment_2_class)
     .def("__call__",
          // static_cast<Ctr_seg_2_op>(&Ctr_seg_2::operator()))
          [](Ctr_seg_2 ctr, const Pnt_2& p, const Pnt_2& q)->Seg_2 const
-         { return ctr(p, q); })
+         { return ctr(p, q); },
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_ConstructSegment_2_operator_call)
     ;
 
   // Counterclockwise_in_between_2
   using Cc_in_between_2_op =
     bool(Cc_in_between_2::*)(const Dir_2&, const Dir_2&, const Dir_2&)const;
-  py::class_<Cc_in_between_2>(ker_c, "Counterclockwise_in_between_2")
+  py::class_<Cc_in_between_2>(ker_c, "Counterclockwise_in_between_2",
+                             cgalpy::ker::docstrings::Kernel_CounterclockwiseInBetween_2_class)
     .def("__call__",
-         static_cast<Cc_in_between_2_op>(&Cc_in_between_2::operator()))
+         static_cast<Cc_in_between_2_op>(&Cc_in_between_2::operator()),
+         py::arg("d"), py::arg("d1"), py::arg("d2"),
+         cgalpy::ker::docstrings::Kernel_CounterclockwiseInBetween_2_operator_call)
     ;
 
   // Equal_2
@@ -283,14 +307,29 @@ void export_kernel(C_& ker_c) {
   using Equal_2_seg = bool(Equal_2::*)(const Seg_2&, const Seg_2&)const;
   using Equal_2_ray = bool(Equal_2::*)(const Ray_2&, const Ray_2&)const;
   using Equal_2_vec = bool(Equal_2::*)(const Vec_2&, const Vec_2&)const;
-  py::class_<Equal_2>(ker_c, "Equal_2")
-    .def("__call__", static_cast<Equal_2_circle>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_dir>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_line>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_pnt>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_seg>(&Equal_2::operator()))
-    .def("__call__", static_cast<Equal_2_vec>(&Equal_2::operator()))
+  py::class_<Equal_2>(ker_c, "Equal_2",
+                     cgalpy::ker::docstrings::Kernel_Equal_2_class)
+    .def("__call__", static_cast<Equal_2_circle>(&Equal_2::operator()),
+         py::arg("circle1"), py::arg("circle2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call)
+    .def("__call__", static_cast<Equal_2_dir>(&Equal_2::operator()),
+         py::arg("direction1"), py::arg("direction2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call_1)
+    .def("__call__", static_cast<Equal_2_line>(&Equal_2::operator()),
+         py::arg("line1"), py::arg("line2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call_2)
+    .def("__call__", static_cast<Equal_2_pnt>(&Equal_2::operator()),
+         py::arg("point1"), py::arg("point2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call_3)
+    .def("__call__", static_cast<Equal_2_ray>(&Equal_2::operator()),
+         py::arg("ray1"), py::arg("ray2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call_4)
+    .def("__call__", static_cast<Equal_2_seg>(&Equal_2::operator()),
+         py::arg("segment1"), py::arg("segment2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call_5)
+    .def("__call__", static_cast<Equal_2_vec>(&Equal_2::operator()),
+         py::arg("vector1"), py::arg("vector2"),
+         cgalpy::ker::docstrings::Kernel_Equal_2_operator_call_6)
     ;
 
   ////////// 3D
@@ -386,96 +425,136 @@ void export_kernel(C_& ker_c) {
   // Compare_xyz_3
   using Cmp_xyz_3_op =
     CGAL::Comparison_result(Cmp_xyz_3::*)(const Pnt_3&, const Pnt_3&)const;
-  py::class_<Cmp_xyz_3>(ker_c, "Compare_xyz_3")
-    .def("__call__", static_cast<Cmp_xyz_3_op>(&Cmp_xyz_3::operator()))
+  py::class_<Cmp_xyz_3>(ker_c, "Compare_xyz_3",
+                       cgalpy::ker::docstrings::Kernel_CompareXYZ_3_class)
+    .def("__call__", static_cast<Cmp_xyz_3_op>(&Cmp_xyz_3::operator()),
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_CompareXYZ_3_operator_call)
     ;
 
   // Compare_z_3
   using Cmp_z_3_op = CGAL::Comparison_result(Cmp_z_3::*)(const Pnt_3&, const Pnt_3&)const;
-  py::class_<Cmp_z_3>(ker_c, "Compare_z_3")
-    .def("__call__", static_cast<Cmp_z_3_op>(&Cmp_z_3::operator()))
+  py::class_<Cmp_z_3>(ker_c, "Compare_z_3",
+                     cgalpy::ker::docstrings::Kernel_CompareZ_3_class)
+    .def("__call__", static_cast<Cmp_z_3_op>(&Cmp_z_3::operator()),
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_CompareZ_3_operator_call)
     ;
 
   // Construct_cross_product_vector_3
-  py::class_<Ctr_cross_prod_vec_3>(ker_c, "Construct_cross_product_vector_3")
+  py::class_<Ctr_cross_prod_vec_3>(ker_c, "Construct_cross_product_vector_3",
+                                  cgalpy::ker::docstrings::Kernel_ConstructCrossProductVector_3_class)
     .def("__call__",
          [](Ctr_cross_prod_vec_3 ctr, const Vec_3& v1, const Vec_3& v2)->Vec_3 const
-         { return ctr(v1, v2); })
+         { return ctr(v1, v2); },
+         py::arg("v1"), py::arg("v2"),
+         cgalpy::ker::docstrings::Kernel_ConstructCrossProductVector_3_operator_call)
     ;
 
   //! Construct_line_3
-  py::class_<Ctr_lin_3>(ker_c, "Construct_line_3")
+  py::class_<Ctr_lin_3>(ker_c, "Construct_line_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructLine_3_class)
     .def("__call__",
          [](Ctr_lin_3 ctr, const Pnt_3& p, const Pnt_3& q)->Line_3 const
-         { return ctr(p, q); })
+         { return ctr(p, q); },
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_ConstructLine_3_operator_call)
     ;
 
   // Construct_plane_3
   // using Ctr_pln_3_op = Pln_3(Ctr_pln_3::*)(const Pnt_3&, const Dir_3&)const;
-  py::class_<Ctr_pln_3>(ker_c, "Construct_plane_3")
+  py::class_<Ctr_pln_3>(ker_c, "Construct_plane_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructPlane_3_class)
     .def("__call__",
          [](Ctr_pln_3 ctr, const Pnt_3& pnt, const Dir_3& dir)->Pln_3 const
-         { return ctr(pnt, dir); })
+         { return ctr(pnt, dir); },
+         py::arg("point"), py::arg("direction"),
+         cgalpy::ker::docstrings::Kernel_ConstructPlane_3_operator_call)
     .def("__call__",
          [](Ctr_pln_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)->Pln_3 const
-         { return ctr(p, q, r); })
+         { return ctr(p, q, r); },
+         py::arg("p"), py::arg("q"), py::arg("r"),
+         cgalpy::ker::docstrings::Kernel_ConstructPlane_3_operator_call_1)
     ;
 
   // Construct_point_3
-  py::class_<Ctr_pnt_3>(ker_c, "Construct_point_3")
+  py::class_<Ctr_pnt_3>(ker_c, "Construct_point_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructPoint_3_class)
     .def("__call__",
          [](Ctr_pnt_3 ctr, const Pnt_3& other)->Pnt_3 const
-         { return ctr(other); })
+         { return ctr(other); },
+         py::arg("other"),
+         cgalpy::ker::docstrings::Kernel_ConstructPoint_3_operator_call)
     .def("__call__",
-         [](Ctr_pnt_3 ctr, CGAL::Origin org)->Pnt_3 const { return ctr(org); })
+         [](Ctr_pnt_3 ctr, CGAL::Origin org)->Pnt_3 const { return ctr(org); },
+         py::arg("origin"),
+         cgalpy::ker::docstrings::Kernel_ConstructPoint_3_operator_call_1)
     .def("__call__",
          [](Ctr_pnt_3 ctr, const Ft& x, const Ft& y, const Ft& z)->Pnt_3 const
-         { return ctr(x, y, z); })
+         { return ctr(x, y, z); },
+         py::arg("x"), py::arg("y"), py::arg("z"),
+         cgalpy::ker::docstrings::Kernel_ConstructPoint_3_operator_call_2)
     ;
 
   //! Construct_segment_3
-  py::class_<Ctr_seg_3>(ker_c, "Construct_segment_3")
+  py::class_<Ctr_seg_3>(ker_c, "Construct_segment_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructSegment_3_class)
     .def("__call__",
          [](Ctr_seg_3 ctr, const Pnt_3& p, const Pnt_3& q)->Seg_3 const
-         { return ctr(p, q); })
+         { return ctr(p, q); },
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_ConstructSegment_3_operator_call)
     ;
 
   //! Construct_tetrahedron_3
-  py::class_<Ctr_tet_3>(ker_c, "Construct_tetrahedron_3")
+  py::class_<Ctr_tet_3>(ker_c, "Construct_tetrahedron_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructTetrahedron_3_class)
     .def("__call__",
          [](Ctr_tet_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r,
             const Pnt_3& s)
          ->Tet_3 const
-         { return ctr(p, q, r, s); })
+         { return ctr(p, q, r, s); },
+         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+         cgalpy::ker::docstrings::Kernel_ConstructTetrahedron_3_operator_call)
     ;
 
   // Construct_translated_point_3
   // using Ctr_tran_pnt_3_op =
   //   Pnt_3(Ctr_tran_pnt_3::*)(const Pnt_3&, const Vec_3&)const;
-  py::class_<Ctr_tran_pnt_3>(ker_c, "Construct_translated_point_3")
+  py::class_<Ctr_tran_pnt_3>(ker_c, "Construct_translated_point_3",
+                            cgalpy::ker::docstrings::Kernel_ConstructTranslatedPoint_3_class)
     .def("__call__",
          // static_cast<Ctr_tran_pnt_3_op>(&Ctr_tran_pnt_3::operator()))
          [](Ctr_tran_pnt_3& ctr, const Pnt_3& pnt, const Vec_3& vec)->Pnt_3 const
-         { return (ctr(pnt, vec)); })
+         { return (ctr(pnt, vec)); },
+         py::arg("point"), py::arg("vector"),
+         cgalpy::ker::docstrings::Kernel_ConstructTranslatedPoint_3_operator_call)
     ;
 
   //! Construct_triangle_3
-  py::class_<Ctr_tri_3>(ker_c, "Construct_triangle_3")
+  py::class_<Ctr_tri_3>(ker_c, "Construct_triangle_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructTriangle_3_class)
     .def("__call__",
          [](Ctr_tri_3 ctr, const Pnt_3& p, const Pnt_3& q, const Pnt_3& r)
          ->Tri_3 const
-         { return ctr(p, q, r); })
+         { return ctr(p, q, r); },
+         py::arg("p"), py::arg("q"), py::arg("r"),
+         cgalpy::ker::docstrings::Kernel_ConstructTriangle_3_operator_call)
     ;
 
   //! Construct_vector_3
-  py::class_<Ctr_vec_3>(ker_c, "Construct_vector_3")
+  py::class_<Ctr_vec_3>(ker_c, "Construct_vector_3",
+                       cgalpy::ker::docstrings::Kernel_ConstructVector_3_class)
     .def("__call__",
          [](Ctr_vec_3 ctr, const Pnt_3& p, const Pnt_3& q)->Vec_3 const
-         { return ctr(p, q); })
+         { return ctr(p, q); },
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_ConstructVector_3_operator_call)
     ;
 
   //! Intersect_3
-  py::class_<Intersect_3>(ker_c, "Intersect_3")
+  py::class_<Intersect_3>(ker_c, "Intersect_3",
+                         cgalpy::ker::docstrings::Kernel_Intersect_3_class)
     .def("__call__",
          [](Intersect_3 ctr, const Pln_3& p, const Pln_3& q)->py::object const {
            auto result = ctr(p, q);
@@ -483,19 +562,27 @@ void export_kernel(C_& ker_c) {
            const auto* lp = std::get_if<Line_3>(&*result);
            if (! lp) return py::none();
            return py::cast(*lp);
-         })
+         },
+         py::arg("p"), py::arg("q"),
+         cgalpy::ker::docstrings::Kernel_Intersect_3_operator_call)
     ;
 
   // Coplanar_orientation_3
   using Coplanar_orient_3_op = CGAL::Orientation(Coplanar_orient_3::*)(const Pnt_3&, const Pnt_3&, const Pnt_3&)const;
-  py::class_<Coplanar_orient_3>(ker_c, "Coplanar_orientation_3")
-    .def("__call__", static_cast<Coplanar_orient_3_op>(&Coplanar_orient_3::operator()))
+  py::class_<Coplanar_orient_3>(ker_c, "Coplanar_orientation_3",
+                              cgalpy::ker::docstrings::Kernel_CoplanarOrientation_3_class)
+    .def("__call__", static_cast<Coplanar_orient_3_op>(&Coplanar_orient_3::operator()),
+         py::arg("p"), py::arg("q"), py::arg("r"),
+         cgalpy::ker::docstrings::Kernel_CoplanarOrientation_3_operator_call)
     ;
 
   // Orientation_3
   using Orient_3_op = CGAL::Orientation(Orient_3::*)(const Pnt_3&, const Pnt_3&, const Pnt_3&, const Pnt_3&)const;
-  py::class_<Orient_3>(ker_c, "Orientation_3")
-    .def("__call__", static_cast<Orient_3_op>(&Orient_3::operator()))
+  py::class_<Orient_3>(ker_c, "Orientation_3",
+                     cgalpy::ker::docstrings::Kernel_Orientation_3_class)
+    .def("__call__", static_cast<Orient_3_op>(&Orient_3::operator()),
+         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"),
+         cgalpy::ker::docstrings::Kernel_Orientation_3_operator_call)
     ;
 }
 
