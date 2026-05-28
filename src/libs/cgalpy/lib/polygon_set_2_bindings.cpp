@@ -34,16 +34,23 @@ void export_polygon_set_2(py::module_& m) {
 
   py::class_<Ps2, Gps2> ps2_c(
     m, "Polygon_set_2", bso2_doc::Polygon_set_2_class);
-  ps2_c.def(py::init<>())
-    .def(py::init<const Pgn&>(), py::arg("polygon"))
-    .def(py::init<const Pwh&>(), py::arg("polygon_with_holes"))
-    .def(py::init<const Ps2&>(), py::arg("other"))
-    .def(py::init<const Gt&>(), py::arg("traits"))
+  ps2_c.def(py::init<>(),
+            "Construct a default polygon set.")
+    .def(py::init<const Pgn&>(), py::arg("polygon"),
+         "Construct a polygon set from a polygon.")
+    .def(py::init<const Pwh&>(), py::arg("polygon_with_holes"),
+         "Construct a polygon set from a polygon with holes.")
+    .def(py::init<const Ps2&>(), py::arg("other"),
+         "Copy-construct a polygon set.")
+    .def(py::init<const Gt&>(), py::arg("traits"),
+         "Construct a polygon set from geometry traits.")
     ;
 
 #ifdef CGALPY_HAS_VISUAL
   using Draw = void(*)(const Ps2&, const char*);
-  m.def("draw", static_cast<Draw>(CGAL::draw));
+  m.def("draw", static_cast<Draw>(CGAL::draw),
+        py::arg("polygon_set"), py::arg("title"),
+        "Draw a polygon set in a CGAL basic viewer.");
 #endif
 
   add_extraction(ps2_c);

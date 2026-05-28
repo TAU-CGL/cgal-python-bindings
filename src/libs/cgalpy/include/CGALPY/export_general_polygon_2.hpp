@@ -59,18 +59,25 @@ export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c,
     .def(py::init<const Gpgn&>(), py::arg("other"), copy_init_doc)
     .def("__init__", &cgalpy::bso2::init_polygon_2<Gpgn>, py::arg("curves"),
          list_init_doc)
-    .def("push_back", &Gpgn::push_back)
-    .def("orientation", &Gpgn::orientation)
-    .def("is_empty", &Gpgn::is_empty)
-    .def("size", &Gpgn::size)
-    .def("clear", &Gpgn::clear)
-    .def("reverse_orientation", &Gpgn::reverse_orientation)
+    .def("push_back", &Gpgn::push_back, py::arg("curve"),
+         "Append an x-monotone curve to the polygon boundary.")
+    .def("orientation", &Gpgn::orientation,
+         "Return the orientation of the polygon.")
+    .def("is_empty", &Gpgn::is_empty,
+         "Return whether the polygon is empty.")
+    .def("size", &Gpgn::size,
+         "Return the number of boundary curves.")
+    .def("clear", &Gpgn::clear,
+         "Clear the polygon.")
+    .def("reverse_orientation", &Gpgn::reverse_orientation,
+         "Reverse the polygon orientation.")
     ;
 
   // Support limited traits
   using Cs_pgn = CGAL::Gps_circle_segment_traits_2<Kernel>::Polygon_2;
   if constexpr (std::is_same<Gpgn, Cs_pgn>::value)
-    pgn_c.def("bbox", &Gpgn::bbox);
+    pgn_c.def("bbox", &Gpgn::bbox,
+              "Return the bounding box of the general polygon.");
 
   using Cci = typename Gpgn::Curve_const_iterator;
   add_iterator<Cci, Cci>("Curve_iterator", pgn_c);

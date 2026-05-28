@@ -50,11 +50,15 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
   using Gpwh = Type;
   using Gpgn = typename Gpwh::General_polygon_2;
 
-  pwh_c.def(py::init<Gpwh&>(), py::arg("other"))
-    .def(py::init<Gpgn&>(), py::arg("outer_boundary"))
+  pwh_c.def(py::init<Gpwh&>(), py::arg("other"),
+            "Copy-construct a general polygon with holes.")
+    .def(py::init<Gpgn&>(), py::arg("outer_boundary"),
+         "Construct from an outer boundary.")
     .def("__init__", &init_polygon_with_holes_2<Gpwh>,
-         py::arg("outer_boundary"), py::arg("holes"))
-    .def("is_unbounded", &Gpwh::is_unbounded)
+         py::arg("outer_boundary"), py::arg("holes"),
+         "Construct from an outer boundary and a list of holes.")
+    .def("is_unbounded", &Gpwh::is_unbounded,
+         "Return whether the polygon-with-holes is unbounded.")
 
     // Use `py::overload_cast` to cast overloaded functions.
     // 1. As a convention, add the suffix `_mutable` to the mutable version.
@@ -62,16 +66,24 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
     // 3. Add the `const_` tag to the overloaded const function, as the
     //    overloading is based on constness.
     .def("outer_boundary_mutable", py::overload_cast<>(&Gpwh::outer_boundary),
-         py::rv_policy::reference_internal)
+         py::rv_policy::reference_internal,
+         "Return a mutable reference to the outer boundary.")
     .def("outer_boundary",
-         py::overload_cast<>(&Gpwh::outer_boundary, py::const_))
+         py::overload_cast<>(&Gpwh::outer_boundary, py::const_),
+         "Return the outer boundary.")
     .def("add_hole", py::overload_cast<const Gpgn&>(&Gpwh::add_hole),
-         py::arg("hole"))
-    .def("erase_hole", &Gpwh::erase_hole)
-    .def("has_holes", &Gpwh::has_holes)
-    .def("number_of_holes", &Gpwh::number_of_holes)
-    .def("clear", &Gpwh::clear)
-    .def("is_plane", &Gpwh::is_plane)
+         py::arg("hole"),
+         "Add a hole.")
+    .def("erase_hole", &Gpwh::erase_hole, py::arg("hole_iterator"),
+         "Erase the hole pointed to by the given iterator.")
+    .def("has_holes", &Gpwh::has_holes,
+         "Return whether there are holes.")
+    .def("number_of_holes", &Gpwh::number_of_holes,
+         "Return the number of holes.")
+    .def("clear", &Gpwh::clear,
+         "Clear the polygon with holes.")
+    .def("is_plane", &Gpwh::is_plane,
+         "Return whether this object represents the whole plane.")
     ;
 
   using Hci = typename Gpwh::Hole_const_iterator;
@@ -79,7 +91,8 @@ void export_general_polygon_with_holes_2(py::class_<Type>& pwh_c) {
   pwh_c.def("holes",
             [] (const Gpwh& pwh)
             { return make_iterator(pwh.holes_begin(), pwh.holes_end()); },
-            py::keep_alive<0, 1>());
+            py::keep_alive<0, 1>(),
+            "Return an iterator over the holes.");
 
   add_insertion(pwh_c, "__str__");
   add_insertion(pwh_c, "__repr__");
