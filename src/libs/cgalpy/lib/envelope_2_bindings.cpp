@@ -18,8 +18,9 @@
 #include "cgalpy/Env2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace env2_doc = cgalpy::docstrings::Envelope_2;
+namespace env2_doc = cgalpy::env2::docstrings;
 
+namespace cgalpy {
 namespace env2 {
 
 //
@@ -71,9 +72,10 @@ Envelope_diagram_1 upper_envelope_x_monotone_2(const py::list& curves) {
 }
 
 }
+} // namespace cgalpy
 
 void export_envelope_2 (py::module_& m) {
-  using Ed = env2::Envelope_diagram_1;
+  using Ed = cgalpy::env2::Envelope_diagram_1;
   using Vertex = Ed::Vertex;
   using Edge = Ed::Edge;
   using Pnt = Ed::Point_2;
@@ -95,7 +97,7 @@ void export_envelope_2 (py::module_& m) {
            ri, env2_doc::EnvelopeDiagramVertex_left)
       .def("right", [](const Vertex& v)->const Edge& { return *(v.right()); },
            ri, env2_doc::EnvelopeDiagramVertex_right)
-      .def("curves", &env2::curves<Vertex>, py::keep_alive<0, 1>(),
+      .def("curves", &cgalpy::env2::curves<Vertex>, py::keep_alive<0, 1>(),
            env2_doc::EnvelopeDiagramVertex_curves_begin)
       ;
 
@@ -118,7 +120,7 @@ void export_envelope_2 (py::module_& m) {
            ri, env2_doc::EnvelopeDiagramEdge_left)
       .def("right", [](const Edge& e)->const Vertex& { return *(e.right()); },
            ri, env2_doc::EnvelopeDiagramEdge_right)
-      .def("curves", &env2::curves<Edge>, py::keep_alive<0, 1>(),
+      .def("curves", &cgalpy::env2::curves<Edge>, py::keep_alive<0, 1>(),
            env2_doc::EnvelopeDiagramEdge_curves_begin)
       ;
 
@@ -139,12 +141,12 @@ void export_envelope_2 (py::module_& m) {
       ;
   }
 
-  m.def("lower_envelope_2", &env2::lower_envelope_2,
+  m.def("lower_envelope_2", &cgalpy::env2::lower_envelope_2,
         py::arg("curves"), env2_doc::lower_envelope_2);
-  m.def("lower_envelope_x_monotone_2", &env2::lower_envelope_x_monotone_2,
+  m.def("lower_envelope_x_monotone_2", &cgalpy::env2::lower_envelope_x_monotone_2,
         py::arg("curves"), env2_doc::lower_envelope_x_monotone_2);
-  m.def("upper_envelope_2", &env2::upper_envelope_2,
+  m.def("upper_envelope_2", &cgalpy::env2::upper_envelope_2,
         py::arg("curves"), env2_doc::upper_envelope_2);
-  m.def("upper_envelope_x_monotone_2", &env2::upper_envelope_x_monotone_2,
+  m.def("upper_envelope_x_monotone_2", &cgalpy::env2::upper_envelope_x_monotone_2,
         py::arg("curves"), env2_doc::upper_envelope_x_monotone_2);
 }

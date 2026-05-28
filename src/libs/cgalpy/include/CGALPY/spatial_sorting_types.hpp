@@ -11,11 +11,13 @@
 
 #include "CGALPY/spatial_sorting_config.hpp"
 
+namespace cgalpy {
 namespace st {
 
 using Concurrency = Concurrency<CGALPY_ST_CONCURRENCY>::type;
 using Policy = Policy<CGALPY_ST_POLICY>::type;
 
 }
+} // namespace cgalpy
 
 #endif

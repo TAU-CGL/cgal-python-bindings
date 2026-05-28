@@ -17,10 +17,12 @@
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 #include "CGALPY/general_polygon_set_2_types.hpp"
 
+namespace cgalpy {
 namespace bso2 {
 
 using Polygon_set_2 = CGAL::Polygon_set_2<Kernel, Point_2_container, Dcel>;
 
 }
+} // namespace cgalpy
 
 #endif

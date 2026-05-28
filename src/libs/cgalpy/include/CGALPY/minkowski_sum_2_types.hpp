@@ -20,6 +20,7 @@
 
 #include "CGALPY/kernel_types.hpp"
 
+namespace cgalpy {
 namespace ms2 {
 
 using Polygon_2 = CGAL::Polygon_2<Kernel, Point_2_container>;
@@ -49,5 +50,6 @@ using Conic_polygon_2 = CGAL::Gps_traits_2<Conic_traits>::Polygon_2;
 using Conic_polygon_with_holes_2 =
   CGAL::Gps_traits_2<Conic_traits>::Polygon_with_holes_2;
 }
+} // namespace cgalpy
 
 #endif

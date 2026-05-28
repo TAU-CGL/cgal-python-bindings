@@ -27,6 +27,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 // Initialize a Bezier curve from a list of rational control points.
@@ -40,6 +41,7 @@ void init_from_points(Curve_2* cv, py::list& lst) {
 }
 
 }
+} // namespace cgalpy
 
 //
 void export_arr_bezier_traits_2(py::module_& m) {
@@ -93,7 +95,7 @@ void export_arr_bezier_traits_2(py::module_& m) {
   // Curve_2
   auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
   //TODO add constructors
-  cv_c.def("__init__", &aos2::init_from_points)
+  cv_c.def("__init__", &cgalpy::aos2::init_from_points)
     .def("id", &Cv::id)
     .def("x_polynomial", &Cv::x_polynomial)
     .def("x_norm", &Cv::x_norm)

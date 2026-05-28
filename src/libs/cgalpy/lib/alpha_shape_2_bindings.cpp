@@ -19,6 +19,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace as2 {
 
 py::object alphas(const Alpha_shape_2& as)
@@ -54,37 +55,38 @@ py::list alpha_shape_vertices(const as2::Alpha_shape_2& as) {
   return lst;
 }
 
-} // end of as2 namespace
+}
+} // namespace cgalpy // end of as2 namespace
 
 void export_alpha_shape_2(py::module_& m) {
-  using As2 = as2::Alpha_shape_2;
-  using Tri2 = tri2::Triangulation_2;
+  using As2 = cgalpy::as2::Alpha_shape_2;
+  using Tri2 = cgalpy::tri2::Triangulation_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  as2::size_type (As2::*number_of_solid_components1)() const                     = &As2::number_of_solid_components;
-  as2::size_type (As2::*number_of_solid_components2)(const as2::FT& alpha) const = &As2::number_of_solid_components;
+  cgalpy::as2::size_type (As2::*number_of_solid_components1)() const                     = &As2::number_of_solid_components;
+  cgalpy::as2::size_type (As2::*number_of_solid_components2)(const cgalpy::as2::FT& alpha) const = &As2::number_of_solid_components;
 
-  as2::Classification_type (As2::*classify1)(const as2::Point& p, const as2::FT& alpha) const              = &As2::classify;
-  as2::Classification_type (As2::*classify2)(const as2::Edge& s, const as2::FT& alpha) const               = &As2::classify;
-  as2::Classification_type (As2::*classify3)(const as2::Vertex_handle& s, const as2::FT& alpha) const      = &As2::classify;
-  as2::Classification_type (As2::*classify4)(const as2::Face_handle& s, const as2::FT& alpha) const        = &As2::classify;
-  as2::Classification_type (As2::*classify5)(const as2::Face_handle& s, int i, const as2::FT& alpha) const = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify1)(const cgalpy::as2::Point& p, const cgalpy::as2::FT& alpha) const              = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify2)(const cgalpy::as2::Edge& s, const cgalpy::as2::FT& alpha) const               = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify3)(const cgalpy::as2::Vertex_handle& s, const cgalpy::as2::FT& alpha) const      = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify4)(const cgalpy::as2::Face_handle& s, const cgalpy::as2::FT& alpha) const        = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify5)(const cgalpy::as2::Face_handle& s, int i, const cgalpy::as2::FT& alpha) const = &As2::classify;
 
-  as2::Classification_type (As2::*classify6)(const as2::Point& p) const               = &As2::classify;
-  as2::Classification_type (As2::*classify7)(const as2::Edge& s) const                = &As2::classify;
-  as2::Classification_type (As2::*classify8)(const as2::Vertex_handle& s) const       = &As2::classify;
-  as2::Classification_type (As2::*classify9)(const as2::Face_handle& s) const         = &As2::classify;
-  as2::Classification_type (As2::*classify10)(const as2::Face_handle& s, int i) const = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify6)(const cgalpy::as2::Point& p) const               = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify7)(const cgalpy::as2::Edge& s) const                = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify8)(const cgalpy::as2::Vertex_handle& s) const       = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify9)(const cgalpy::as2::Face_handle& s) const         = &As2::classify;
+  cgalpy::as2::Classification_type (As2::*classify10)(const cgalpy::as2::Face_handle& s, int i) const = &As2::classify;
 
   py::class_<As2> as2_c(m, "Alpha_shape_2");
 
-  py::enum_<as2::Mode>(as2_c, "Mode")
+  py::enum_<cgalpy::as2::Mode>(as2_c, "Mode")
     .value("GENERAL", As2::GENERAL)
     .value("REGULARIZED", As2::REGULARIZED)
     .export_values()
     ;
 
-  py::enum_<as2::Classification_type>(as2_c, "Classification_type")
+  py::enum_<cgalpy::as2::Classification_type>(as2_c, "Classification_type")
     .value("EXTERIOR", As2::EXTERIOR)
     .value("SINGULAR", As2::SINGULAR)
     .value("REGULAR", As2::REGULAR)
@@ -93,13 +95,13 @@ void export_alpha_shape_2(py::module_& m) {
     ;
 
   as2_c.def(py::init<>())
-    .def(py::init<double, as2::Mode>(), py::arg("alpha"), py::arg("mode") = As2::GENERAL)
-    .def(py::init<as2::FT&, as2::Mode>(), py::arg("alpha"), py::arg("mode") = As2::GENERAL)
-    .def(py::init<Tri2&, double, as2::Mode>(), py::arg("triangulation"),
+    .def(py::init<double, cgalpy::as2::Mode>(), py::arg("alpha"), py::arg("mode") = As2::GENERAL)
+    .def(py::init<cgalpy::as2::FT&, cgalpy::as2::Mode>(), py::arg("alpha"), py::arg("mode") = As2::GENERAL)
+    .def(py::init<Tri2&, double, cgalpy::as2::Mode>(), py::arg("triangulation"),
          py::arg("alpha"), py::arg("mode") = As2::GENERAL)
-    .def(py::init<Tri2&, as2::FT&, as2::Mode>(), py::arg("triangulation"),
+    .def(py::init<Tri2&, cgalpy::as2::FT&, cgalpy::as2::Mode>(), py::arg("triangulation"),
          py::arg("alpha"), py::arg("mode") = As2::GENERAL)
-    .def("__init__", &as2::as_init, py::arg("points"))
+    .def("__init__", &cgalpy::as2::as_init, py::arg("points"))
     .def("clear", &As2::clear)
     .def("set_mode", &As2::set_mode)
     .def("set_alpha", &As2::set_alpha)
@@ -120,41 +122,41 @@ void export_alpha_shape_2(py::module_& m) {
     .def("classify", classify8)
     .def("classify", classify9)
     .def("classify", classify10)
-    .def("alphas", &as2::alphas, py::keep_alive<0, 1>())
+    .def("alphas", &cgalpy::as2::alphas, py::keep_alive<0, 1>())
     .def("alpha_find", &As2::alpha_find)
     .def("alpha_lower_bound", &As2::alpha_lower_bound)
     .def("alpha_upper_bound", &As2::alpha_upper_bound)
-    .def("alpha_shape_edges", &as2::alpha_shape_edges)
-    .def("alpha_shape_vertices", &as2::alpha_shape_vertices)
+    .def("alpha_shape_edges", &cgalpy::as2::alpha_shape_edges)
+    .def("alpha_shape_vertices", &cgalpy::as2::alpha_shape_vertices)
     ;
 
-  using Ai = as2::Alpha_iterator;
+  using Ai = cgalpy::as2::Alpha_iterator;
   add_iterator<Ai, Ai>("Alpha_iterator", as2_c);
 
   // Alpha_shape_vertices_iterator;
   // Alpha_shape_edges_iterator;
 
   // Types that have been registered already:
-  if (tri2::is_periodic())
+  if (cgalpy::tri2::is_periodic())
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<as2::Gt>(as2_c, "Gt"))
-      std::cerr << "'as2::Gt' not registered!\n";
+    if (! add_attr<cgalpy::as2::Gt>(as2_c, "Gt"))
+      std::cerr << "'cgalpy::as2::Gt' not registered!\n";
   }
-  add_attr<as2::Point>(as2_c, "Point");
+  add_attr<cgalpy::as2::Point>(as2_c, "Point");
   if (is_exact_ft()) {
-    if (! add_attr<as2::FT>(as2_c, "FT"))
-      std::cerr << "'as2::FT' not registered!\n";
+    if (! add_attr<cgalpy::as2::FT>(as2_c, "FT"))
+      std::cerr << "'cgalpy::as2::FT' not registered!\n";
   }
-  if (! add_attr<as2::Tds>(as2_c, "Tds"))
-    std::cerr << "'as2::Tds' not registered!\n";
-  if (! add_attr<as2::Vertex>(as2_c, "Vertex"))
-    std::cerr << "'as2::Vertex' not registered!\n";
-  if (! add_attr<as2::Edge>(as2_c, "Edge"))
-    std::cerr << "'as2::Edge' not registered!\n";
-  if (! add_attr<as2::Vertex_handle>(as2_c, "Vertex_handle"))
-    std::cerr << "'as2::Vertex_handle' not registered!\n";
-  if (! add_attr<as2::Face_handle>(as2_c, "Face_handle"))
-    std::cerr << "'as2::Face_handle' not registered!\n";
+  if (! add_attr<cgalpy::as2::Tds>(as2_c, "Tds"))
+    std::cerr << "'cgalpy::as2::Tds' not registered!\n";
+  if (! add_attr<cgalpy::as2::Vertex>(as2_c, "Vertex"))
+    std::cerr << "'cgalpy::as2::Vertex' not registered!\n";
+  if (! add_attr<cgalpy::as2::Edge>(as2_c, "Edge"))
+    std::cerr << "'cgalpy::as2::Edge' not registered!\n";
+  if (! add_attr<cgalpy::as2::Vertex_handle>(as2_c, "Vertex_handle"))
+    std::cerr << "'cgalpy::as2::Vertex_handle' not registered!\n";
+  if (! add_attr<cgalpy::as2::Face_handle>(as2_c, "Face_handle"))
+    std::cerr << "'cgalpy::as2::Face_handle' not registered!\n";
 }

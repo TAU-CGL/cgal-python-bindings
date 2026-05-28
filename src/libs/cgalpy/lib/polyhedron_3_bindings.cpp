@@ -47,13 +47,14 @@ extern void export_polyhedron_traits_with_normals_3(py::module_& m);
 extern void export_polyhedron_halfedge_ds(py::module_& m);
 extern void export_polyhedron_incremental_builder_3(py::module_& m);
 extern void export_polyhedron_builder(py::module_& m);
-extern void export_pol3_vertex(py::class_<pol3::Polyhedron_3>& prn_c);
-extern void export_pol3_halfedge(py::class_<pol3::Polyhedron_3>& prn_c);
-extern void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c);
+extern void export_pol3_vertex(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c);
+extern void export_pol3_halfedge(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c);
+extern void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c);
 
 namespace py = nanobind;
-namespace pol3_doc = cgalpy::docstrings::Polyhedron;
+namespace pol3_doc = cgalpy::pol3::docstrings;
 
+namespace cgalpy {
 namespace pol3 {
 
 //!
@@ -380,13 +381,14 @@ auto polyhedron_planes(const Polyhedron_3& prn) {
 
 /// @}
 
-} // namespace pol3
+}
+} // namespace cgalpy // namespace pol3
 
 /*! export Internal_face_plane_3_map
  */
 void export_internal_face_plane_3_map(py::module_& m) {
-  using Prn = pol3::Polyhedron_3;
-  using Ifpm = pol3::Internal_face_plane_3_map<Prn>;
+  using Prn = cgalpy::pol3::Polyhedron_3;
+  using Ifpm = cgalpy::pol3::Internal_face_plane_3_map<Prn>;
   using Face = Prn::Face;
   using Fd = typename boost::graph_traits<Prn>::face_descriptor;
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -394,7 +396,7 @@ void export_internal_face_plane_3_map(py::module_& m) {
   if (! add_attr<Ifpm>(m, "Internal_face_plane_3_map")) {
     py::class_<Ifpm> ifpm_c(m, "Internal_face_plane_3_map");
     ifpm_c.def(py::init<>());
-    pol3::export_property_map_attributes<Ifpm, Face, py::rv_policy::reference_internal>(ifpm_c);
+    cgalpy::pol3::export_property_map_attributes<Ifpm, Face, py::rv_policy::reference_internal>(ifpm_c);
   }
 
   m.def("get", [](const Ifpm& pm, Face& f) { return get(pm, Fd(&f)); }, ri, py::arg("property_map"), py::arg("key"));
@@ -402,7 +404,7 @@ void export_internal_face_plane_3_map(py::module_& m) {
 
 // Export Polyhedron_3.
 void export_polyhedron_3(py::module_& m) {
-  using Prn = pol3::Polyhedron_3;
+  using Prn = cgalpy::pol3::Polyhedron_3;
   using Pnt = Prn::Point_3;
   using Vec = Kernel::Vector_3;
   using Vertex = Prn::Vertex;
@@ -433,7 +435,7 @@ void export_polyhedron_3(py::module_& m) {
     py::class_<Prn> prn_c(m, "Polyhedron_3", pol3_doc::Polyhedron_3_class);
     prn_c.def(py::init<>(), pol3_doc::Polyhedron_3_Polyhedron_3)
       .def(py::init<const Prn&>())
-      .def(py::init<const pol3::Traits&>())
+      .def(py::init<const cgalpy::pol3::Traits&>())
       .def("add_facet_to_border", &Prn::add_facet_to_border, pol3_doc::Polyhedron_3_add_facet_to_border)
       .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border, pol3_doc::Polyhedron_3_add_vertex_and_facet_to_border)
       .def("bytes", &Prn::bytes, pol3_doc::Polyhedron_3_bytes)
@@ -452,7 +454,7 @@ void export_polyhedron_3(py::module_& m) {
       .def("inside_out", &Prn::inside_out, pol3_doc::Polyhedron_3_inside_out)
       .def("is_closed", &Prn::is_closed, pol3_doc::Polyhedron_3_is_closed)
       .def("is_empty", &Prn::is_empty, pol3_doc::Polyhedron_3_empty)
-      .def("is_tetrahedron", &pol3::is_tetrahedron, py::arg("halfedge"), pol3_doc::Polyhedron_3_is_tetrahedron)
+      .def("is_tetrahedron", &cgalpy::pol3::is_tetrahedron, py::arg("halfedge"), pol3_doc::Polyhedron_3_is_tetrahedron)
       .def("is_triangle", &Prn::is_triangle, pol3_doc::Polyhedron_3_is_triangle)
       .def("is_valid", &Prn::is_valid, py::arg("verbose") = false, py::arg("level") = 0, pol3_doc::Polyhedron_3_is_valid)
       .def("join_facet", &Prn::join_facet, pol3_doc::Polyhedron_3_join_facet)
@@ -460,8 +462,8 @@ void export_polyhedron_3(py::module_& m) {
       .def("join_vertex", &Prn::join_vertex, pol3_doc::Polyhedron_3_join_vertex)
       .def("keep_largest_connected_components", &Prn::keep_largest_connected_components, pol3_doc::Polyhedron_3_keep_largest_connected_components)
       .def("make_hole", &Prn::make_hole, pol3_doc::Polyhedron_3_make_hole)
-      .def("make_tetrahedron", &pol3::make_tetrahedron1, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), pol3_doc::Polyhedron_3_make_tetrahedron_1)
-      .def("make_tetrahedron", &pol3::make_tetrahedron2, ri, pol3_doc::Polyhedron_3_make_tetrahedron)
+      .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron1, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), pol3_doc::Polyhedron_3_make_tetrahedron_1)
+      .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron2, ri, pol3_doc::Polyhedron_3_make_tetrahedron)
       .def("normalize_border", &Prn::normalize_border, pol3_doc::Polyhedron_3_normalize_border)
       .def("normalized_border_is_valid", &Prn::normalized_border_is_valid, pol3_doc::Polyhedron_3_normalized_border_is_valid)
       .def("size_of_border_edges", &Prn::size_of_border_edges, pol3_doc::Polyhedron_3_size_of_border_edges)
@@ -472,8 +474,8 @@ void export_polyhedron_3(py::module_& m) {
       .def("split_facet", &Prn::split_facet, pol3_doc::Polyhedron_3_split_facet)
       .def("split_loop", &Prn::split_loop, pol3_doc::Polyhedron_3_split_loop)
       .def("split_vertex", &Prn::split_vertex, pol3_doc::Polyhedron_3_split_vertex)
-      .def("make_triangle", &pol3::make_triangle_empty, ri, pol3_doc::Polyhedron_3_make_triangle)
-      .def("make_triangle", &pol3::make_triangle, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), pol3_doc::Polyhedron_3_make_triangle_1)
+      .def("make_triangle", &cgalpy::pol3::make_triangle_empty, ri, pol3_doc::Polyhedron_3_make_triangle)
+      .def("make_triangle", &cgalpy::pol3::make_triangle, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), pol3_doc::Polyhedron_3_make_triangle_1)
       .def("delegate", &Prn::delegate, pol3_doc::Polyhedron_3_delegate)
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_), pol3_doc::Polyhedron_3_is_pure_quad)
       .def("is_pure_bivalent", py::overload_cast<>(&Prn::is_pure_bivalent, py::const_), pol3_doc::Polyhedron_3_is_pure_bivalent)
@@ -495,12 +497,12 @@ void export_polyhedron_3(py::module_& m) {
     add_iterator<Pnt_ci, Pnt_ci>("Point_iterator", prn_c);
     add_iterator<Pln_ci, Pln_ci>("Plane_iterator", prn_c);
 
-    prn_c.def("vertices", &pol3::polyhedron_vertices, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_vertices_begin)
-      .def("halfedges", &pol3::polyhedron_halfedges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_halfedges_begin)
-      .def("edges", &pol3::polyhedron_edges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_edges)
-      .def("faces", &pol3::polyhedron_faces, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_facets_begin)
-      .def("points", &pol3::polyhedron_points, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_points)
-      .def("planes", &pol3::polyhedron_planes, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_planes)
+    prn_c.def("vertices", &cgalpy::pol3::polyhedron_vertices, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_vertices_begin)
+      .def("halfedges", &cgalpy::pol3::polyhedron_halfedges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_halfedges_begin)
+      .def("edges", &cgalpy::pol3::polyhedron_edges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_edges)
+      .def("faces", &cgalpy::pol3::polyhedron_faces, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_facets_begin)
+      .def("points", &cgalpy::pol3::polyhedron_points, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_points)
+      .def("planes", &cgalpy::pol3::polyhedron_planes, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_planes)
       ;
 
     export_pol3_vertex(prn_c);
@@ -521,27 +523,27 @@ void export_polyhedron_3(py::module_& m) {
 #endif
 
   // CGAL and the Boost Graph Library
-  pol3::export_dynamic_property_maps<Prn, bool>(m, "bool");
-  pol3::export_dynamic_property_maps<Prn, int>(m, "int");
-  pol3::export_dynamic_property_maps<Prn, double>(m, "float");
-  pol3::export_dynamic_property_maps<Prn, std::size_t>(m, "size_t");
-  pol3::export_dynamic_property_maps<Prn, Pnt, py::rv_policy::reference_internal>(m, "point");
-  pol3::export_dynamic_property_maps<Prn, Vec, py::rv_policy::reference_internal>(m, "vector_3");
-  pol3::export_dynamic_property_maps<Prn, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
-  pol3::export_dynamic_property_maps<Prn, py::tuple>(m, "tuple");
-  pol3::export_dynamic_property_maps<Prn, py::set>(m, "set");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, bool>(m, "bool");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, int>(m, "int");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, double>(m, "float");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, std::size_t>(m, "size_t");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, Pnt, py::rv_policy::reference_internal>(m, "point");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, Vec, py::rv_policy::reference_internal>(m, "vector_3");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, py::tuple>(m, "tuple");
+  cgalpy::pol3::export_dynamic_property_maps<Prn, py::set>(m, "set");
 
   if constexpr (! std::is_same<double, FT>::value)
-    pol3::export_dynamic_property_maps<Prn, FT, py::rv_policy::reference_internal>(m, "FT");
+    cgalpy::pol3::export_dynamic_property_maps<Prn, FT, py::rv_policy::reference_internal>(m, "FT");
 
   // \todo export CGAL::vertex_incident_patches_t<int> in bgl_bindings, then the following
-  // pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map");
+  // cgalpy::pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map");
 
   //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   // namespace PMP = CGAL::Polygon_mesh_processing;
   // using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
-  // pol3::vertex_map<Prn, pcad>
+  // cgalpy::pol3::vertex_map<Prn, pcad>
   //   (m, "vertex_principal_curvatures_and_directions_map",
   //    "dynamic_property_vertex_PC");
 #endif
@@ -560,7 +562,7 @@ void export_polyhedron_3(py::module_& m) {
   using Vpt = CGAL::vertex_point_t;
   using Vpm = boost::property_map<Prn, Vpt>::type;
 
-  pol3::export_property_map<Vpm, Vertex, py::rv_policy::reference_internal>(m, "vertex_point_map");
+  cgalpy::pol3::export_property_map<Vpm, Vertex, py::rv_policy::reference_internal>(m, "vertex_point_map");
 
 #ifdef CGALPY_BGL_BINDINGS
   // Obtain the propery map
@@ -579,67 +581,67 @@ void export_polyhedron_3(py::module_& m) {
   m.def("is_closed", &CGAL::is_closed<Prn>);
 
   // Iterators
-  m.def("edges", &pol3::my_edges<Prn>, py::keep_alive<0, 1>());
-  m.def("faces", &pol3::my_faces<Prn>, py::keep_alive<0, 1>());
-  m.def("halfedges", &pol3::my_halfedges<Prn>, py::keep_alive<0, 1>());
-  m.def("vertices", &pol3::my_vertices<Prn>, py::keep_alive<0, 1>());
+  m.def("edges", &cgalpy::pol3::my_edges<Prn>, py::keep_alive<0, 1>());
+  m.def("faces", &cgalpy::pol3::my_faces<Prn>, py::keep_alive<0, 1>());
+  m.def("halfedges", &cgalpy::pol3::my_halfedges<Prn>, py::keep_alive<0, 1>());
+  m.def("vertices", &cgalpy::pol3::my_vertices<Prn>, py::keep_alive<0, 1>());
 
   // Functions that do not involve handlers
-  m.def("add_edge", &bgl::my_add_edge<Prn>);
-  m.def("add_face", &bgl::my_add_face<Prn>);
-  m.def("add_vertex", &bgl::my_add_vertex<Prn>);
-  m.def("num_edges", &bgl::my_num_edges<Prn>);
-  m.def("num_faces", &bgl::my_num_faces<Prn>);
-  m.def("num_halfedges", &bgl::my_num_halfedges<Prn>);
-  m.def("num_vertices", &bgl::my_num_vertices<Prn>);
-  m.def("remove_all_elements", &bgl::my_remove_all_elements<Prn>);
-  m.def("reserve", &bgl::my_reserve<Prn>);
+  m.def("add_edge", &cgalpy::bgl::my_add_edge<Prn>);
+  m.def("add_face", &cgalpy::bgl::my_add_face<Prn>);
+  m.def("add_vertex", &cgalpy::bgl::my_add_vertex<Prn>);
+  m.def("num_edges", &cgalpy::bgl::my_num_edges<Prn>);
+  m.def("num_faces", &cgalpy::bgl::my_num_faces<Prn>);
+  m.def("num_halfedges", &cgalpy::bgl::my_num_halfedges<Prn>);
+  m.def("num_vertices", &cgalpy::bgl::my_num_vertices<Prn>);
+  m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Prn>);
+  m.def("reserve", &cgalpy::bgl::my_reserve<Prn>);
 
   // Other
-  // m.def("add_vertex", &pol3::add_vertex_p);
-  // m.def("adjacent_vertices", &pol3::adjacent_vertices);
-  m.def("degree", &pol3::degree_f);
-  m.def("degree", &pol3::degree_v);
-  // m.def("edge", &pol3::edge);
-  m.def("face", &pol3::face_h, ref);
-  m.def("halfedge", &pol3::halfedge_v, ref);
-  m.def("halfedge", &pol3::halfedge_f, ref);
-  // m.def("halfedge", &pol3::halfedge_vv);
-  // m.def("in_degree", &pol3::in_degree);
+  // m.def("add_vertex", &cgalpy::pol3::add_vertex_p);
+  // m.def("adjacent_vertices", &cgalpy::pol3::adjacent_vertices);
+  m.def("degree", &cgalpy::pol3::degree_f);
+  m.def("degree", &cgalpy::pol3::degree_v);
+  // m.def("edge", &cgalpy::pol3::edge);
+  m.def("face", &cgalpy::pol3::face_h, ref);
+  m.def("halfedge", &cgalpy::pol3::halfedge_v, ref);
+  m.def("halfedge", &cgalpy::pol3::halfedge_f, ref);
+  // m.def("halfedge", &cgalpy::pol3::halfedge_vv);
+  // m.def("in_degree", &cgalpy::pol3::in_degree);
   // m.def("is_valid_vertex_descriptor",
-  //       &bgl::my_is_valid_vertex_descriptor<Prn>,
+  //       &cgalpy::bgl::my_is_valid_vertex_descriptor<Prn>,
   //       py::arg("v"), py::arg("g"), py::arg("verbose") = false);
   // m.def("is_valid_halfedge_descriptor",
-  //       &bgl::my_is_valid_halfedge_descriptor<Prn>,
+  //       &cgalpy::bgl::my_is_valid_halfedge_descriptor<Prn>,
   //       py::arg("h"), py::arg("g"), py::arg("verbose") = false);
   // m.def("is_valid_edge_descriptor",
-  //       &bgl::my_is_valid_edge_descriptor<Prn>,
+  //       &cgalpy::bgl::my_is_valid_edge_descriptor<Prn>,
   //       py::arg("e"), py::arg("g"), py::arg("verbose") = false);
   // m.def("is_valid_face_descriptor",
-  //       &bgl::my_is_valid_face_descriptor<Prn>,
+  //       &cgalpy::bgl::my_is_valid_face_descriptor<Prn>,
   //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  m.def("next", &pol3::next_h, ref);
-  m.def("opposite", &pol3::opposite_h, ref);
-  // m.def("out_degree", &bgl::out_degree<Prn>);
-  m.def("prev", &pol3::prev_h, ref);
-  // m.def("remove_edge", &bgl::remove_edge_vv<Prn>);
-  // m.def("remove_edge", &bgl::remove_edge_e<Prn>);
-  // m.def("remove_face", &bgl::remove_face<Prn>);
-  // m.def("remove_vertex", &bgl::remove_vertex<Prn>);
-  m.def("source", &pol3::source_h, ref);
-  m.def("target", &pol3::target_h, ref);
-  // m.def("set_face", &bgl::set_face<Prn>);
-  // m.def("set_halfedge", &bgl::set_halfedge_vh<Prn>);
-  // m.def("set_halfedge", &bgl::set_halfedge_fh<Prn>);
-  // m.def("set_next", &bgl::set_next<Prn>);
-  // m.def("set_target", &bgl::set_target<Prn>);
+  m.def("next", &cgalpy::pol3::next_h, ref);
+  m.def("opposite", &cgalpy::pol3::opposite_h, ref);
+  // m.def("out_degree", &cgalpy::bgl::out_degree<Prn>);
+  m.def("prev", &cgalpy::pol3::prev_h, ref);
+  // m.def("remove_edge", &cgalpy::bgl::remove_edge_vv<Prn>);
+  // m.def("remove_edge", &cgalpy::bgl::remove_edge_e<Prn>);
+  // m.def("remove_face", &cgalpy::bgl::remove_face<Prn>);
+  // m.def("remove_vertex", &cgalpy::bgl::remove_vertex<Prn>);
+  m.def("source", &cgalpy::pol3::source_h, ref);
+  m.def("target", &cgalpy::pol3::target_h, ref);
+  // m.def("set_face", &cgalpy::bgl::set_face<Prn>);
+  // m.def("set_halfedge", &cgalpy::bgl::set_halfedge_vh<Prn>);
+  // m.def("set_halfedge", &cgalpy::bgl::set_halfedge_fh<Prn>);
+  // m.def("set_next", &cgalpy::bgl::set_next<Prn>);
+  // m.def("set_target", &cgalpy::bgl::set_target<Prn>);
 
-  // m.def("in_edges", &bgl::my_in_edges<Prn>);
-  // m.def("out_edges", &bgl::my_out_edges<Prn>);
+  // m.def("in_edges", &cgalpy::bgl::my_in_edges<Prn>);
+  // m.def("out_edges", &cgalpy::bgl::my_out_edges<Prn>);
 
   // Generators
-  m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Prn>);
-  m.def("make_hexahedron", &bgl::my_make_hexahedron<Prn>);
+  m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Prn>);
+  m.def("make_hexahedron", &cgalpy::bgl::my_make_hexahedron<Prn>);
 
   // using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
   // using ebmap_type = boost::property_map<Prn, Edge_bool_tag>::type;
@@ -651,16 +653,16 @@ void export_polyhedron_3(py::module_& m) {
   // using vbmap_type = boost::property_map<Prn, Vertex_bool_tag>::type;
 
   // Euler operations
-  // bgl::define_euler_operations<py::module_, Prn, ebmap_type>(m);
+  // cgalpy::bgl::define_euler_operations<py::module_, Prn, ebmap_type>(m);
 
   // // Selection Functions
-  // bgl::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
+  // cgalpy::bgl::define_boost_selection_functions<py::module_, Prn, ebmap_type, fbmap_type, vbmap_type>(m);
 
   // Helper Functions
-  // bgl::define_boost_helpers<py::module_, Prn, Prn>(m);
+  // cgalpy::bgl::define_boost_helpers<py::module_, Prn, Prn>(m);
 
   // Generator Functions
-  // bgl::define_generate_functions<py::module_, Prn, Kernel>(m);
+  // cgalpy::bgl::define_generate_functions<py::module_, Prn, Kernel>(m);
 
   // Partitioning Operations
   // using EdgeDoubleMap =
@@ -669,6 +671,6 @@ void export_polyhedron_3(py::module_& m) {
   //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::vector<double>>>::type;
   // using VertexSizeTMap =
   //   boost::property_map<Prn, CGAL::dynamic_vertex_property_t<std::size_t>>::type;
-  // bgl::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
+  // cgalpy::bgl::define_boost_partitioning_operations<py::module_, Prn, EdgeDoubleMap, VertexVectorDoubleMap, VertexSizeTMap>(m);
 
 }

@@ -20,8 +20,9 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
+namespace cgalpy {
 namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
@@ -96,36 +97,37 @@ auto sample_triangle_soup(const Point_3_vec& points,
 }
 
 }
+} // namespace cgalpy
 
 /*!
  */
 void export_pmp_distance(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
-  m.def("approximate_Hausdorff_distance", &pmp::approximate_Hausdorff_distance<Pm>,
+  m.def("approximate_Hausdorff_distance", &cgalpy::pmp::approximate_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_approximate_Hausdorff_distance);
-  m.def("approximate_max_distance_to_point_set", &pmp::approximate_max_distance_to_point_set<Pm>,
+  m.def("approximate_max_distance_to_point_set", &cgalpy::pmp::approximate_max_distance_to_point_set<Pm>,
         py::arg("tm"), py::arg("points"), py::arg("precision"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_approximate_max_distance_to_point_set);
-  m.def("approximate_symmetric_Hausdorff_distance", &pmp::approximate_symmetric_Hausdorff_distance<Pm>,
+  m.def("approximate_symmetric_Hausdorff_distance", &cgalpy::pmp::approximate_symmetric_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_approximate_symmetric_Hausdorff_distance);
-  m.def("bounded_error_Hausdorff_distance", &pmp::bounded_error_Hausdorff_distance<Pm>,
+  m.def("bounded_error_Hausdorff_distance", &cgalpy::pmp::bounded_error_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("error_bound") = 0.0001,
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_bounded_error_Hausdorff_distance);
-  m.def("is_Hausdorff_distance_larger", &pmp::is_Hausdorff_distance_larger<Pm>,
+  m.def("is_Hausdorff_distance_larger", &cgalpy::pmp::is_Hausdorff_distance_larger<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("distance_bound"), py::arg("error_bound"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_is_Hausdorff_distance_larger);
-  m.def("max_distance_to_triangle_mesh", &pmp::max_distance_to_triangle_mesh<Pm>,
+  m.def("max_distance_to_triangle_mesh", &cgalpy::pmp::max_distance_to_triangle_mesh<Pm>,
         py::arg("points"), py::arg("tm"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_max_distance_to_triangle_mesh);
-  m.def("sample_triangle_mesh", &pmp::sample_triangle_mesh<Pm>,
+  m.def("sample_triangle_mesh", &cgalpy::pmp::sample_triangle_mesh<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_sample_triangle_mesh);
-  m.def("sample_triangle_soup", &pmp::sample_triangle_soup,
+  m.def("sample_triangle_soup", &cgalpy::pmp::sample_triangle_soup,
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_sample_triangle_soup);
 }

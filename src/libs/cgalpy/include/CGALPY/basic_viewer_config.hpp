@@ -18,6 +18,7 @@
 #define CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE    1
 #define CGALPY_BVR_POLYHEDRON_3_DATA_STRUCTURE          2
 
+namespace cgalpy {
 namespace bvr {
 
 template <int id> struct Ds_params {};
@@ -39,5 +40,6 @@ template <> struct Ds_params<CGALPY_BVR_POLYHEDRON_3_DATA_STRUCTURE> {
 };
 
 }
+} // namespace cgalpy
 
 #endif

@@ -17,6 +17,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pol3 {
 
 class Polyhedron_builder : public CGAL::Modifier_base<Halfedge_ds> {
@@ -36,5 +37,6 @@ public:
 };
 
 }
+} // namespace cgalpy
 
 #endif

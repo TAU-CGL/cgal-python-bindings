@@ -17,6 +17,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pmp {
 
 template <typename TriangleMesh, typename GeomTraits>
@@ -44,7 +45,8 @@ struct Polyhedral_envelope : CGAL::Polyhedral_envelope<GeomTraits> {
   }
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 
 #endif

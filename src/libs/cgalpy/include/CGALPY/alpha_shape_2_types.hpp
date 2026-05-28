@@ -16,6 +16,7 @@
 #include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
 
+namespace cgalpy {
 namespace as2 {
 
 using Ec = Exact_comparison<exact_comparison()>::type;
@@ -41,5 +42,6 @@ using Alpha_shape_vertices_iterator =
 using Alpha_shape_edges_iterator = Alpha_shape_2::Alpha_shape_edges_iterator;
 
 }
+} // namespace cgalpy
 
 #endif

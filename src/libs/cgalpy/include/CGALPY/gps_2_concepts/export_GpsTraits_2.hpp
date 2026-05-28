@@ -20,8 +20,9 @@
 #include "cgalpy/Bso2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
+namespace bso2_doc = cgalpy::bso2::docstrings;
 
+namespace cgalpy {
 namespace bso2 {
 
 /* Export the operator() of the Construct_polygon_2 function object.
@@ -92,6 +93,7 @@ void make_curve_iterator_using_curves(C& ctr_curves_c, int) {
 }
 
 }
+} // namespace cgalpy
 
 //
 template <typename T, typename C, typename Concepts>
@@ -140,7 +142,7 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
     classes.m_construct_polygon_2 =
       new py::class_<Ctr_pgn>(c, "Construct_polygon_2");
     auto& ctr_pgn_c = *(classes.m_construct_polygon_2);
-    ctr_pgn_c.def("__call__", &bso2::ctr_pgn_op<T>);
+    ctr_pgn_c.def("__call__", &cgalpy::bso2::ctr_pgn_op<T>);
   }
 
   // Construct_curves_2
@@ -160,8 +162,8 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
     using Pgn = typename T::Polygon_2;
     using Cci = typename T::Curve_const_iterator;
     add_iterator<Cci, Cci>("Curve_iterator", ctr_curves_c);
-    bso2::make_curve_iterator_using_edges<Pgn>(ctr_curves_c, 0);
-    bso2::make_curve_iterator_using_curves<Pgn>(ctr_curves_c, 0);
+    cgalpy::bso2::make_curve_iterator_using_edges<Pgn>(ctr_curves_c, 0);
+    cgalpy::bso2::make_curve_iterator_using_curves<Pgn>(ctr_curves_c, 0);
   }
 
   // Construct_polygon_with_holes_2
@@ -171,7 +173,7 @@ void export_GpsTraits_2(C& c, Concepts& concepts) {
     auto& ctr_pwh_c = *(classes.m_construct_polygon_with_holes_2);
     using Ctr_pwh_op1 = Pwh(Ctr_pwh::*)(const Pgn&) const;
     ctr_pwh_c.def("__call__", static_cast<Ctr_pwh_op1>(&Ctr_pwh::operator()));
-    ctr_pwh_c.def("__call__", &bso2::ctr_pwh_op<T>);
+    ctr_pwh_c.def("__call__", &cgalpy::bso2::ctr_pwh_op<T>);
   }
 
   // Construct_outer_boundary

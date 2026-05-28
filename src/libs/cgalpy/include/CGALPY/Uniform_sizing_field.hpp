@@ -7,6 +7,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pmp {
 
 template <typename PolygonMesh>
@@ -33,6 +34,7 @@ struct Uniform_sizing_field : public CGAL::Polygon_mesh_processing::Uniform_sizi
   // }
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif // CGALPY_UNIFORM_SIZING_FIELD_HPP

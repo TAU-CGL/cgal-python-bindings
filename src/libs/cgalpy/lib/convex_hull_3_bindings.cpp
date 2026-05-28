@@ -14,6 +14,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace ch3 {
 
 //! convex_hull_3
@@ -70,18 +71,19 @@ convex_hull_3_with_traits_with_kernel(py::list& lst,
 #endif
 
 }
+} // namespace cgalpy
 
 //!
 void export_convex_hull_3(py::module_& m) {
-  using Pm = ch3::Polygonal_mesh;
+  using Pm = cgalpy::ch3::Polygonal_mesh;
 
-  m.def("convex_hull_3", &ch3::convex_hull_3);
-  m.def("convex_hull_3", &ch3::convex_hull_3_with_kernel);
+  m.def("convex_hull_3", &cgalpy::ch3::convex_hull_3);
+  m.def("convex_hull_3", &cgalpy::ch3::convex_hull_3_with_kernel);
 
 #if CGALPY_CH3_POLYGONAL_MESH == CGALPY_CH3_POLYHEDRON_3_POLYGONAL_MESH
-  m.def("convex_hull_3", &ch3::convex_hull_3_with_traits,
+  m.def("convex_hull_3", &cgalpy::ch3::convex_hull_3_with_traits,
         py::keep_alive<0, 2>());
-  m.def("convex_hull_3", &ch3::convex_hull_3_with_traits_with_kernel,
+  m.def("convex_hull_3", &cgalpy::ch3::convex_hull_3_with_traits_with_kernel,
         py::keep_alive<0, 2>());
 #endif
 

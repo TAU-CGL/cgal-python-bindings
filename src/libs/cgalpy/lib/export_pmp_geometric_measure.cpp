@@ -23,8 +23,9 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -125,53 +126,54 @@ auto volume(const TriangleMesh& tm, const py::dict& np = py::dict()) {
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_pmp_geometric_measure(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
-  m.def("area", &pmp::area<Pm>,
+  m.def("area", &cgalpy::pmp::area<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_area_1);
-  m.def("area", &pmp::area_f<Pm>,
+  m.def("area", &cgalpy::pmp::area_f<Pm>,
         py::arg("face_range"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_area);
-  m.def("centroid", &pmp::centroid<Pm>,
+  m.def("centroid", &cgalpy::pmp::centroid<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_centroid);
-  m.def("edge_length", &pmp::edge_length<Pm>,
+  m.def("edge_length", &cgalpy::pmp::edge_length<Pm>,
         py::arg("h"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_edge_length);
-  m.def("face_area", &pmp::face_area<Pm>,
+  m.def("face_area", &cgalpy::pmp::face_area<Pm>,
         py::arg("f"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_face_area);
-  m.def("face_aspect_ratio", &pmp::face_aspect_ratio<Pm>,
+  m.def("face_aspect_ratio", &cgalpy::pmp::face_aspect_ratio<Pm>,
         py::arg("f"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_face_aspect_ratio);
-  m.def("face_border_length", &pmp::face_border_length<Pm>,
+  m.def("face_border_length", &cgalpy::pmp::face_border_length<Pm>,
         py::arg("h"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_face_border_length);
-  m.def("longest_border", &pmp::longest_border<Pm>,
+  m.def("longest_border", &cgalpy::pmp::longest_border<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_longest_border);
-  m.def("match_faces", &pmp::match_faces<Pm>,
+  m.def("match_faces", &cgalpy::pmp::match_faces<Pm>,
         py::arg("m1"), py::arg("m2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_match_faces);
-  m.def("squared_edge_length", &pmp::squared_edge_length<Pm>,
+  m.def("squared_edge_length", &cgalpy::pmp::squared_edge_length<Pm>,
         py::arg("e"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_squared_edge_length);
-  m.def("squared_face_area", &pmp::squared_face_area<Pm>,
+  m.def("squared_face_area", &cgalpy::pmp::squared_face_area<Pm>,
         py::arg("f"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_squared_face_area);
-  m.def("volume", &pmp::volume<Pm>,
+  m.def("volume", &cgalpy::pmp::volume<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_volume);
 }

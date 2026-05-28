@@ -21,7 +21,7 @@
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace aos2_traits_doc = cgalpy::docstrings::Arrangement_on_surface_2;
+namespace aos2_traits_doc = cgalpy::aos2::docstrings;
 
 template <typename T, typename C, typename Concepts>
 void export_AosTraits_2(C& c, Concepts& concepts) {

@@ -12,6 +12,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+namespace cgalpy {
 namespace ss2 {
 
 using Geometry_traits_2 = aos2::Geometry_traits_2;
@@ -20,5 +21,6 @@ using Curve_2 = aos2::Curve_2;
 using X_monotone_curve_2 = aos2::X_monotone_curve_2;
 
 }
+} // namespace cgalpy
 
 #endif

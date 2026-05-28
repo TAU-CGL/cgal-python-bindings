@@ -30,6 +30,7 @@ extern void export_segment_d(py::class_<Segment_d>& segd_c);
 extern void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c);
 extern void export_vector_d(py::class_<Vector_d>& vecd_c);
 
+namespace cgalpy {
 namespace kerd {
 
 /*! The following is only used as a wrokaround to an issue in CGAL that arrises here.
@@ -62,6 +63,7 @@ private:
 };
 
 }
+} // namespace cgalpy
 
 // Two versions exist since some pairs of types (i.e Circle_2 and Triangle_2)
 // are not a valid overload for do_intersect in which case the second version

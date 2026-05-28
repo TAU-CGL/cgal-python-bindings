@@ -21,7 +21,7 @@ namespace py = nanobind;
 
 // Export the instance Gps_circle_segment_traits_2 traits <Kernel>.
 void export_gps_circle_segment_traits_2(py::module_& m) {
-  using Agt = aos2::Arr_geometry_traits_2;
+  using Agt = cgalpy::aos2::Arr_geometry_traits_2;
   using Xcv = Agt::X_monotone_curve_2;
   using Bgt = CGAL::Gps_traits_2<Agt>;
   using Pgn = Bgt::Polygon_2;

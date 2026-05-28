@@ -22,7 +22,7 @@
 
 namespace py = nanobind;
 
-py::list to_double(aos2::Point_2& p) {
+py::list to_double(cgalpy::aos2::Point_2& p) {
   py::list lst = py::list();
   auto pair = p.to_double();
   lst.append(pair.first);
@@ -31,23 +31,23 @@ py::list to_double(aos2::Point_2& p) {
 }
 
 template<typename T, typename S>
-void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& co) {
-  using Ctr_pnt = aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&);
-  co.def("__call__", static_cast<Ctr_pnt>(&aos2::Construct_point_2::operator()));
+void export_ctr_pnt_operator(py::class_<cgalpy::aos2::Construct_point_2>& co) {
+  using Ctr_pnt = cgalpy::aos2::Point_2(cgalpy::aos2::Construct_point_2::*)(const T&, const S&);
+  co.def("__call__", static_cast<Ctr_pnt>(&cgalpy::aos2::Construct_point_2::operator()));
 }
 
 template<typename T, typename S, typename R>
-void export_ctr_pnt_operator(py::class_<aos2::Construct_point_2>& co) {
+void export_ctr_pnt_operator(py::class_<cgalpy::aos2::Construct_point_2>& co) {
   using Ctr_pnt =
-    aos2::Point_2(aos2::Construct_point_2::*)(const T&, const S&, R);
-  co.def("__call__", static_cast<Ctr_pnt>(&aos2::Construct_point_2::operator()));
+    cgalpy::aos2::Point_2(cgalpy::aos2::Construct_point_2::*)(const T&, const S&, R);
+  co.def("__call__", static_cast<Ctr_pnt>(&cgalpy::aos2::Construct_point_2::operator()));
 }
 
 //! Construct `x`-monotone segments from a curve and two points.
-py::list ctr_xseg_operator0(aos2::Construct_x_monotone_segment_2& construct,
-                            aos2::Curve_2& cv,
-                            aos2::Point_2& end_min, aos2::Point_2& end_max) {
-  auto v = std::vector<aos2::X_monotone_curve_2>();
+py::list ctr_xseg_operator0(cgalpy::aos2::Construct_x_monotone_segment_2& construct,
+                            cgalpy::aos2::Curve_2& cv,
+                            cgalpy::aos2::Point_2& end_min, cgalpy::aos2::Point_2& end_max) {
+  auto v = std::vector<cgalpy::aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(cv, end_min, end_max, it);
   py::list lst;
@@ -56,9 +56,9 @@ py::list ctr_xseg_operator0(aos2::Construct_x_monotone_segment_2& construct,
 }
 
 // Construct `x`-monotone segments from two points.
-py::list ctr_xseg_operator1(aos2::Construct_x_monotone_segment_2& construct,
-                            aos2::Point_2& p, aos2::Point_2& q) {
-  auto v = std::vector<aos2::X_monotone_curve_2>();
+py::list ctr_xseg_operator1(cgalpy::aos2::Construct_x_monotone_segment_2& construct,
+                            cgalpy::aos2::Point_2& p, cgalpy::aos2::Point_2& q) {
+  auto v = std::vector<cgalpy::aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(p, q, it);
   py::list lst;
@@ -67,11 +67,11 @@ py::list ctr_xseg_operator1(aos2::Construct_x_monotone_segment_2& construct,
 }
 
 //
-py::list ctr_xseg_operator2(aos2::Construct_x_monotone_segment_2& construct,
-                            aos2::Curve_2& cv, aos2::Point_2& p,
-                            aos2::Geometry_traits_2::Site_of_point& site_of_p)
+py::list ctr_xseg_operator2(cgalpy::aos2::Construct_x_monotone_segment_2& construct,
+                            cgalpy::aos2::Curve_2& cv, cgalpy::aos2::Point_2& p,
+                            cgalpy::aos2::Geometry_traits_2::Site_of_point& site_of_p)
 {
-  auto v = std::vector<aos2::X_monotone_curve_2>();
+  auto v = std::vector<cgalpy::aos2::X_monotone_curve_2>();
   auto it = std::back_inserter(v);
   construct(cv, p, site_of_p, it);
   py::list lst;
@@ -147,7 +147,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
       .def(py::init<Ar&>())
       .def(py::init_implicit<int>())
       .def(py::init<Ar::Rational&>())
-      .def(py::init<const aos2::Polynomial_1&, Ar::Rational, Ar::Rational>())
+      .def(py::init<const cgalpy::aos2::Polynomial_1&, Ar::Rational, Ar::Rational>())
       .def("bisect", &Ar::bisect)
       .def("compare", static_cast<Cmp>(&Ar::compare<Ar>))
       .def("degree", &Ar::degree)
@@ -177,10 +177,10 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
     add_insertion(ar1_c, "__repr__");
   }
 
-  if (! add_attr<aos2::Bound>(m, "Bound")) {
-    py::class_<aos2::Bound> bound_c(m, "Bound");
+  if (! add_attr<cgalpy::aos2::Bound>(m, "Bound")) {
+    py::class_<cgalpy::aos2::Bound> bound_c(m, "Bound");
     bound_c.def(py::init<>())
-      // .def("value", &aos2::Bound::longValue)
+      // .def("value", &cgalpy::aos2::Bound::longValue)
       .def(py::self + py::self)
       .def(py::self += py::self)
       .def(py::self - py::self)
@@ -204,8 +204,8 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   bind_swap<Pt1>(m, "Pt1_Swap");
   bind_swap<Pt2>(m, "Pt2_Swap");
 
-  m.def("ipower", &ipower<aos2::Polynomial_1>);
-  m.def("ipower", &ipower<aos2::Polynomial_2>);
+  m.def("ipower", &ipower<cgalpy::aos2::Polynomial_1>);
+  m.def("ipower", &ipower<cgalpy::aos2::Polynomial_2>);
 
   py::class_<Gt> traits_c(m, "Arr_algebraic_segment_traits");
   struct Concepts {
@@ -270,7 +270,7 @@ void export_arr_algebraic_segment_traits_2(py::module_& m) {
   export_ctr_pnt_operator<Ar, Cv, int>(ctr_pnt_c);
   export_ctr_pnt_operator<Ar, Xcv>(ctr_pnt_c);
   export_ctr_pnt_operator<Ar, Ar>(ctr_pnt_c);
-  export_ctr_pnt_operator<aos2::Bound, aos2::Bound>(ctr_pnt_c);
+  export_ctr_pnt_operator<cgalpy::aos2::Bound, cgalpy::aos2::Bound>(ctr_pnt_c);
   export_ctr_pnt_operator<Integer, Integer>(ctr_pnt_c);
   export_ctr_pnt_operator<int, int>(ctr_pnt_c);
 

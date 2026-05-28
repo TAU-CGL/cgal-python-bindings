@@ -20,16 +20,18 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 template <typename C>
 py::object items(const C& c) { return make_iterator(c.begin(), c.end()); }
 
 }
+} // namespace cgalpy
 
 void export_arr_consolidated_curve_data_traits_2(py::module_& m) {
-  using Gt = aos2::Ccd_geometry_traits_2;
-  using Base_gt = aos2::Cd_geometry_traits_2;
+  using Gt = cgalpy::aos2::Ccd_geometry_traits_2;
+  using Base_gt = cgalpy::aos2::Cd_geometry_traits_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Gt>(m, "Arr_consolidated_curve_data_traits_2")) {
@@ -48,7 +50,7 @@ void export_arr_consolidated_curve_data_traits_2(py::module_& m) {
       .def("size", &Ul::size)
       .def("front", &Ul::front, ri)
       .def("back", &Ul::back, ri)
-      .def("items", &aos2::items<Ul>, py::keep_alive<0, 1>())
+      .def("items", &cgalpy::aos2::items<Ul>, py::keep_alive<0, 1>())
       ;
 
     using It = Ul::const_iterator;

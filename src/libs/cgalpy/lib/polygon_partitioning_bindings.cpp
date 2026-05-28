@@ -20,6 +20,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pp2 {
 
 //
@@ -145,46 +146,47 @@ py::list small_side_angle_bisector_decomposition_2
 }
 
 }
+} // namespace cgalpy
 
 void export_polygon_partition_2(py::module_& m) {
-  using Pgn_2 = pp2::Polygon_2;
-  using Pwh_2 = pp2::Polygon_with_holes_2;
-  using PVD_2 = pp2::Polygon_vertical_decomposition_2;
-  using PTD_2 = pp2::Polygon_triangulation_decomposition_2;
-  using SSABD_2 = pp2::Small_side_angle_bisector_decomposition_2;
+  using Pgn_2 = cgalpy::pp2::Polygon_2;
+  using Pwh_2 = cgalpy::pp2::Polygon_with_holes_2;
+  using PVD_2 = cgalpy::pp2::Polygon_vertical_decomposition_2;
+  using PTD_2 = cgalpy::pp2::Polygon_triangulation_decomposition_2;
+  using SSABD_2 = cgalpy::pp2::Small_side_angle_bisector_decomposition_2;
 
-  // m.def("approx_convex_partition_2", &pp2::approx_convex_partition_2);
+  // m.def("approx_convex_partition_2", &cgalpy::pp2::approx_convex_partition_2);
   // m.def("greene_approx_convex_partition_2",
-  //       &pp2::greene_approx_convex_partition_2);
-  // m.def("optimal_convex_partition_2", &pp2::optimal_convex_partition_2);
-  // m.def("y_monotone_partition_2", &pp2::y_monotone_partition_2);
-  // m.def("partition_is_valid_2", &pp2::partition_is_valid_2);
-  // m.def("convex_partition_is_valid_2", &pp2::convex_partition_is_valid_2);
+  //       &cgalpy::pp2::greene_approx_convex_partition_2);
+  // m.def("optimal_convex_partition_2", &cgalpy::pp2::optimal_convex_partition_2);
+  // m.def("y_monotone_partition_2", &cgalpy::pp2::y_monotone_partition_2);
+  // m.def("partition_is_valid_2", &cgalpy::pp2::partition_is_valid_2);
+  // m.def("convex_partition_is_valid_2", &cgalpy::pp2::convex_partition_is_valid_2);
   // m.def("y_monotone_partition_is_valid_2",
-  //       &pp2::y_monotone_partition_is_valid_2);
-  m.def("is_y_monotone_2", &pp2::is_y_monotone_2);
-  m.def("is_convex_2", &pp2::is_convex_2);
+  //       &cgalpy::pp2::y_monotone_partition_is_valid_2);
+  m.def("is_y_monotone_2", &cgalpy::pp2::is_y_monotone_2);
+  m.def("is_convex_2", &cgalpy::pp2::is_convex_2);
 
   if (! add_attr<PVD_2>(m, "Polygon_vertical_decomposition")) {
     py::class_<PVD_2>(m, "Polygon_vertical_decomposition")
       .def(py::init<>())
-      .def("__call__", &pp2::polygon_vertical_decomposition_2<Pgn_2>)
-      .def("__call__", &pp2::polygon_vertical_decomposition_2<Pwh_2>)
+      .def("__call__", &cgalpy::pp2::polygon_vertical_decomposition_2<Pgn_2>)
+      .def("__call__", &cgalpy::pp2::polygon_vertical_decomposition_2<Pwh_2>)
     ;
   }
 
   if (! add_attr<PTD_2>(m, "Polygon_triangulation_decomposition")) {
     py::class_<PTD_2>(m, "Polygon_triangulation_decomposition")
       .def(py::init<>())
-      .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pgn_2>)
-      .def("__call__", &pp2::polygon_triangulation_decomposition_2<Pwh_2>)
+      .def("__call__", &cgalpy::pp2::polygon_triangulation_decomposition_2<Pgn_2>)
+      .def("__call__", &cgalpy::pp2::polygon_triangulation_decomposition_2<Pwh_2>)
       ;
   }
 
   if (! add_attr<SSABD_2>(m, "Small_side_angle_bisector_decomposition")) {
     py::class_<SSABD_2>(m, "Small_side_angle_bisector_decomposition")
       .def(py::init<>())
-      .def("__call__", &pp2::small_side_angle_bisector_decomposition_2)
+      .def("__call__", &cgalpy::pp2::small_side_angle_bisector_decomposition_2)
       ;
   }
 }

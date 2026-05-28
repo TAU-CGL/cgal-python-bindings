@@ -42,6 +42,7 @@
 #include "CGALPY/alpha_shape_2_config.hpp"
 #include "CGALPY/triangulation_2_values.hpp"
 
+namespace cgalpy {
 namespace tri2 {
 
 // Indicates whether a triangulation hierarchy is selected
@@ -217,5 +218,6 @@ template <typename Tr> struct Th<true, true, Tr>
 { using type = CGAL::Periodic_2_triangulation_hierarchy_2<Tr>; };
 
 }
+} // namespace cgalpy
 
 #endif

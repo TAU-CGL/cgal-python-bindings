@@ -17,6 +17,7 @@
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 
+namespace cgalpy {
 namespace kerd {
 
 // #if CGALPY_KERNEL_D_DIMENSION_TAG == CGALPY_KERNEL_D_DIMENSION_TAG_STATIC
@@ -59,6 +60,7 @@ void init_point_d(Point_d* pd, int d, py::list& lst) {
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_point_d(py::class_<Point_d>& pntd_c) {
@@ -66,7 +68,7 @@ void export_point_d(py::class_<Point_d>& pntd_c) {
   using Pntd = Point_d;
 
   pntd_c.def(py::init<>())
-    .def("__init__", &kerd::init_point_d)
+    .def("__init__", &cgalpy::kerd::init_point_d)
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Pntd>)
     .def("dimension", &Pntd::dimension)
     .def("cartesian", &Pntd::cartesian)

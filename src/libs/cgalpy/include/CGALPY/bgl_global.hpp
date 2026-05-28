@@ -21,6 +21,7 @@
 
 #include <CGAL/boost/graph/generators.h>
 
+namespace cgalpy {
 namespace bgl {
 
 //!
@@ -98,5 +99,6 @@ auto my_reserve(PolygonMesh& p,
 { reserve(p, nv, ne, nf); }
 
 }
+} // namespace cgalpy
 
 #endif

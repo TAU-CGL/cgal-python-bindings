@@ -34,11 +34,12 @@
 #include "CGALPY/triangulation_3_types.hpp"
 #include "CGALPY/types.hpp"
 
-void export_tri3_vertex(py::class_<tri3::Triangulation_3>&);
-void export_tri3_cell(py::class_<tri3::Triangulation_3>&);
+void export_tri3_vertex(py::class_<cgalpy::tri3::Triangulation_3>&);
+void export_tri3_cell(py::class_<cgalpy::tri3::Triangulation_3>&);
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri3 {
 
 //! Determines whether two facets have the same vertices
@@ -677,17 +678,18 @@ auto vertices3(const Triangulation_3& tri, Cell& c) {
 
 //! @}
 
-} // End of namespace tri3
+}
+} // namespace cgalpy // End of namespace tri3
 
 //!
 void export_tri3_plain(py::module_& m) {
-  using Tri = tri3::Triangulation_3;
-  using Edge = tri3::Edge;
-  using Cell = tri3::Cell;
-  using Face = tri3::Facet;
-  using Facet = tri3::Facet;
-  using Pnt = tri3::Point;
-  using Vertex = tri3::Vertex;
+  using Tri = cgalpy::tri3::Triangulation_3;
+  using Edge = cgalpy::tri3::Edge;
+  using Cell = cgalpy::tri3::Cell;
+  using Face = cgalpy::tri3::Facet;
+  using Facet = cgalpy::tri3::Facet;
+  using Pnt = cgalpy::tri3::Point;
+  using Vertex = cgalpy::tri3::Vertex;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -696,7 +698,7 @@ void export_tri3_plain(py::module_& m) {
   py::class_<Tri> tri_c(m, "Triangulation_3");
 
   // Locate type
-  py::enum_<tri3::Locate_type>(tri_c, "Locate_type")
+  py::enum_<cgalpy::tri3::Locate_type>(tri_c, "Locate_type")
     .value("VERTEX", Tri::VERTEX)
     .value("EDGE", Tri::EDGE)
     .value("FACET", Tri::FACET)
@@ -707,37 +709,37 @@ void export_tri3_plain(py::module_& m) {
     ;
 
   // Types that have been registered already:
-  if constexpr(tri3::is_periodic())
+  if constexpr(cgalpy::tri3::is_periodic())
     // \todo: generate bindings for periodic traits
   ;
   else {
     // In the case of non-priodic triangulation the kernel serves as the traits.
-    add_attr<tri3::Geom_traits>(tri_c, "Geom_traits");
+    add_attr<cgalpy::tri3::Geom_traits>(tri_c, "Geom_traits");
   }
 
   if (! add_attr<Pnt>(tri_c, "Point")) std::cerr << "'Point' not registered!\n";
-  add_attr<tri3::Segment>(tri_c, "Segment");
-  add_attr<tri3::Triangle>(tri_c, "Triangle");
-  add_attr<tri3::Tetrahedron>(tri_c, "Tetrahedron");
+  add_attr<cgalpy::tri3::Segment>(tri_c, "Segment");
+  add_attr<cgalpy::tri3::Triangle>(tri_c, "Triangle");
+  add_attr<cgalpy::tri3::Tetrahedron>(tri_c, "Tetrahedron");
 
   export_tri3_vertex(tri_c);
   export_tri3_cell(tri_c);
 
   py::class_<Facet>(tri_c, "Facet")
-    .def("cell", [](Facet& f)->tri3::Cell& { return *(f.first); } , ri)
+    .def("cell", [](Facet& f)->cgalpy::tri3::Cell& { return *(f.first); } , ri)
     .def_rw("index", &Facet::second)
     ;
 
   py::class_<Edge>(tri_c, "Edge")
-    .def("cell", [](Edge& e)->tri3::Cell& { return *(e.first); } , ri)
+    .def("cell", [](Edge& e)->cgalpy::tri3::Cell& { return *(e.first); } , ri)
     .def_rw("start_index", &Edge::second)
     .def_rw("end_index", &Edge::third)
     ;
 
   tri_c.def(py::init<>())
     .def(py::init<Tri&>())
-    .def(py::init<const tri3::Traits&>())
-    .def("__init__", &tri3::tri3_init)
+    .def(py::init<const cgalpy::tri3::Traits&>())
+    .def("__init__", &cgalpy::tri3::tri3_init)
     .def("are_equal",
          py::overload_cast<const Facet&, const Facet&>(&Tri::are_equal, py::const_),
          py::arg("f1"), py::arg("f2"),
@@ -745,7 +747,7 @@ void export_tri3_plain(py::module_& m) {
          "Parameters:\n"
          "  f1: The first facet\n"
          "  f2: The second facet\n")
-    .def("are_equal", tri3::are_equal1,
+    .def("are_equal", cgalpy::tri3::are_equal1,
          py::arg("c1"), py::arg("i1"), py::arg("c2"), py::arg("i2"),
          "Determine whether two facets have the same vertices\n"
          "Parameters:\n"
@@ -753,7 +755,7 @@ void export_tri3_plain(py::module_& m) {
          "  i1 (int)\n"
          "  c2: Together with i2 Represent the second facet\n"
          "  i2 (int)\n")
-    .def("are_equal", tri3::are_equal2,
+    .def("are_equal", cgalpy::tri3::are_equal2,
          py::arg("f"), py::arg("c"), py::arg("i"),
          "Determine whether two facets have the same vertices\n"
          "Parameters:\n"
@@ -761,7 +763,7 @@ void export_tri3_plain(py::module_& m) {
          "  c: Together with i represent the second facet\n"
          "  i (int)\n")
     .def("clear", &Tri::clear, "deletes all finite vertices and all cells")
-    .def("degree", &tri3::degree, py::arg("v"),
+    .def("degree", &cgalpy::tri3::degree, py::arg("v"),
          "Obtain the degree of a vertex; the infinite vertex is counted\n"
          "Parameters:\n"
          " v: the vertex\n"
@@ -780,13 +782,13 @@ void export_tri3_plain(py::module_& m) {
          "Check whether a given facet is flipapble; if so flip it\n"
          "Parameters:\n"
          "f: the facet\n")
-    .def("flip", &tri3::flip1,
+    .def("flip", &cgalpy::tri3::flip1,
          py::arg("c"), py::arg("i"),
          "Cehck whether a represented facet is flipapble; if so flip it\n"
          "Parameters:\n"
          "  c: Together with i represent the facet\n"
          "  i (int)\n")
-    .def("flip", &tri3::flip2,
+    .def("flip", &cgalpy::tri3::flip2,
          py::arg("c"), py::arg("i"), py::arg("j"),
          "Cehck whether a represented edge is flipapble; if so flip it\n"
          "Parameters:\n"
@@ -803,13 +805,13 @@ void export_tri3_plain(py::module_& m) {
          "Flip a flippable facet\n"
          "Parameters:\n"
          "f: the facet\n")
-    .def("flip_flippable", &tri3::flip_flippable1,
+    .def("flip_flippable", &cgalpy::tri3::flip_flippable1,
          py::arg("c"), py::arg("i"),
          "Flip a flippable facet\n"
          "Parameters:\n"
          "  c: Together with i represent the facet\n"
          "  i (int)\n")
-    .def("flip_flippable", &tri3::flip_flippable2,
+    .def("flip_flippable", &cgalpy::tri3::flip_flippable2,
          py::arg("c"), py::arg("i"), py::arg("j"),
          "Flip a flippable edge\n"
          "Parameters:\n"
@@ -821,20 +823,20 @@ void export_tri3_plain(py::module_& m) {
     .def("geom_traits", &Tri::geom_traits, ri, "Obtain the geometric traits object")
 
     // Has vertex
-    .def("has_vertex", &tri3::has_vertex1,
+    .def("has_vertex", &cgalpy::tri3::has_vertex1,
          py::arg("f"), py::arg("v"),
          "Determine whether a facet has a vertex\n"
          "Parameters:\n"
          "  f: the facet\n"
          "  v: the vertex\n")
-    .def("has_vertex", &tri3::has_vertex2,
+    .def("has_vertex", &cgalpy::tri3::has_vertex2,
          py::arg("c"), py::arg("i"), py::arg("v"),
          "Determine whether a represented facet has a vertex\n"
          "Parameters:\n"
          "  c: Together with i represent the facet\n"
          "  i (int)\n"
          "  v: the vertex\n")
-    .def("has_vertex_get_index", &tri3::has_vertex3,
+    .def("has_vertex_get_index", &cgalpy::tri3::has_vertex3,
          py::arg("f"), py::arg("v"),
          "Determine whether a facet has a vertex\n"
          "Parameters:\n"
@@ -843,7 +845,7 @@ void export_tri3_plain(py::module_& m) {
          "Return:\n"
          "  False, if the facet does not have the vertex;\n"
          "  otherwise, tuple [True, i], where i is the vertex index\n")
-    .def("has_vertex_get_index", &tri3::has_vertex4,
+    .def("has_vertex_get_index", &cgalpy::tri3::has_vertex4,
          "Determine whether a represented facet has a vertex\n"
          "Parameters:\n"
          "  c: Together with i represent the facet\n"
@@ -854,14 +856,14 @@ void export_tri3_plain(py::module_& m) {
          "  otherwise, tuple [True, i], where i is the vertex index\n")
 
     // Insertion
-    .def("insert", &tri3::insert1, ri,
+    .def("insert", &cgalpy::tri3::insert1, ri,
          py::arg("p"),
          "Insert a point\n"
          "Parameters:\n"
          "  p (Point_3): the point\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert", &tri3::insert2, ri,
+    .def("insert", &cgalpy::tri3::insert2, ri,
          py::arg("p"), py::arg("start"),
          "Insert a point\n"
          "Parameters:\n"
@@ -869,7 +871,7 @@ void export_tri3_plain(py::module_& m) {
          "  start (Cell): Start the search at this cell\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert", &tri3::insert3, ri,
+    .def("insert", &cgalpy::tri3::insert3, ri,
          py::arg("p"), py::arg("start"),
          "Insert a point\n"
          "Parameters:\n"
@@ -877,7 +879,7 @@ void export_tri3_plain(py::module_& m) {
          "  start (Vertex): Start the search at this vertex\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert", &tri3::insert4, ri,
+    .def("insert", &cgalpy::tri3::insert4, ri,
          py::arg("p"), py::arg("lt"), py::arg("lc"), py::arg("li"), py::arg("lj"),
          "Insert a point using the values returned from a previous location query\n"
          "Parameters:\n"
@@ -888,14 +890,14 @@ void export_tri3_plain(py::module_& m) {
          "  lj (int)\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert", &tri3::insert_points,
+    .def("insert", &cgalpy::tri3::insert_points,
          py::arg("points"),
          "Insert a list of points\n"
          "Parameters:\n"
          "  points (list) the list of points\n"
          "Return:\n"
          "  int: The number of inserted points\n")
-    .def("insert_in_cell", &tri3::insert_in_cell, ri,
+    .def("insert_in_cell", &cgalpy::tri3::insert_in_cell, ri,
          py::arg("p"), py::arg("c"),
          "Insert a point in a given cell\n"
          "Parameters:\n"
@@ -903,7 +905,7 @@ void export_tri3_plain(py::module_& m) {
          "  c: The cell\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_in_edge", &tri3::insert_in_edge1, ri,
+    .def("insert_in_edge", &cgalpy::tri3::insert_in_edge1, ri,
          py::arg("p"), py::arg("e"),
          "Insert a point in a given edge\n"
          "Parameters:\n"
@@ -911,7 +913,7 @@ void export_tri3_plain(py::module_& m) {
          "  e: The edge\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_in_edge", &tri3::insert_in_edge2, ri,
+    .def("insert_in_edge", &cgalpy::tri3::insert_in_edge2, ri,
          py::arg("p"), py::arg("c"), py::arg("i"), py::arg("j"),
          "Insert a point in a represented edge\n"
          "Parameters:\n"
@@ -921,7 +923,7 @@ void export_tri3_plain(py::module_& m) {
          "  j (int)\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_in_facet", &tri3::insert_in_facet, ri,
+    .def("insert_in_facet", &cgalpy::tri3::insert_in_facet, ri,
          py::arg("p"), py::arg("f"),
          "Insert a point in a given facet\n"
          "Parameters:\n"
@@ -929,7 +931,7 @@ void export_tri3_plain(py::module_& m) {
          "  f: The facet\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_in_hole", &tri3::insert_in_hole1, ri,
+    .def("insert_in_hole", &cgalpy::tri3::insert_in_hole1, ri,
          py::arg("p"), py::arg("cells"), py::arg("start"), py::arg("i"),
          "Insert a point in a hole defined by a list of cells\n"
          "Parameters:\n"
@@ -939,7 +941,7 @@ void export_tri3_plain(py::module_& m) {
          "  i (int)\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_in_hole", &tri3::insert_in_hole2, ri,
+    .def("insert_in_hole", &cgalpy::tri3::insert_in_hole2, ri,
          py::arg("p"), py::arg("cells"), py::arg("start"), py::arg("i"), py::arg("newv"),
          "Insert a vertex in a hole defined by a list of cells\n"
          "Parameters:\n"
@@ -950,13 +952,13 @@ void export_tri3_plain(py::module_& m) {
          "  newv (Vertex): \n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_outside_affine_hull", &tri3::insert_outside_affine_hull, ri,
+    .def("insert_outside_affine_hull", &cgalpy::tri3::insert_outside_affine_hull, ri,
          "Insert a point (can be used to insert the first point in an empty triangulation)\n"
          "Parameters:\n"
          "  p (Point_3): the point\n"
          "Return:\n"
          "  Vertex: the corresponding vertex\n")
-    .def("insert_outside_convex_hull", &tri3::insert_outside_convex_hull, ri,
+    .def("insert_outside_convex_hull", &cgalpy::tri3::insert_outside_convex_hull, ri,
          "Insert a point in an infinite cell\n"
          "Parameters:\n"
          "  p (Point_3): the point\n"
@@ -965,14 +967,14 @@ void export_tri3_plain(py::module_& m) {
          "  Vertex: the corresponding vertex\n")
 
     // Queries
-    .def("is_cell", &tri3::is_cell1,
+    .def("is_cell", &cgalpy::tri3::is_cell1,
          py::arg("c"),
          "Determine whether a given cell belongs to the triangulation\n"
          "Parameters:\n"
          "  c (Cell): the cell\n"
          "Return:\n"
          "  bool")
-    .def("is_cell", &tri3::is_cell2,
+    .def("is_cell", &cgalpy::tri3::is_cell2,
          py::arg("u"), py::arg("v"), py::arg("w"), py::arg("x"),
          "Determine whether a represented cell belongs to the triangulation\n"
          "Parameters:\n"
@@ -982,7 +984,7 @@ void export_tri3_plain(py::module_& m) {
          "  x (Vertex)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_cell_get_cell", &tri3::is_cell3,
+    .def("is_cell_get_cell", &cgalpy::tri3::is_cell3,
          py::arg("u"), py::arg("v"), py::arg("w"), py::arg("x"),
          "Determine whether a represented cell belongs to the triangulation\n"
          "Parameters:\n"
@@ -993,7 +995,7 @@ void export_tri3_plain(py::module_& m) {
          "Return:\n"
          "  False, if the cell does not belong to the triangulation,;\n"
          "  otherwise, tuple [True, c, i, j, k, l], where c is the cell and i, j, k, and l are the indices of the vertices u, v, w, and x, respectively, in c\n")
-    .def("is_edge", &tri3::is_edge,
+    .def("is_edge", &cgalpy::tri3::is_edge,
          py::arg("u"), py::arg("v"),
          "Determine whether a represented edge belongs to the triangulation\n"
          "Parameters:\n"
@@ -1001,7 +1003,7 @@ void export_tri3_plain(py::module_& m) {
          "Return:\n"
          "  False, if the edgedoes not belong to the triangulation;\n"
          "  otherwise, tuple [True, c, i, j], where c is the containing cell and i and, j are the indices of the vertices u and v, respectively, in c\n")
-    .def("is_facet", &tri3::is_facet,
+    .def("is_facet", &cgalpy::tri3::is_facet,
          py::arg("u"), py::arg("v"), py::arg("w"),
          "Determine whether a represented facet belongs to the triangulation\n"
          "Parameters:\n"
@@ -1011,14 +1013,14 @@ void export_tri3_plain(py::module_& m) {
          "Return:\n"
          "  False, if the facet does not belong to the triangulation\n"
          "  otherwise, return tuple [True, c, i, j, k], where c is the containing cell and i, j, and k are the indices of the vertices u, v, and w, respectively, in c\n")
-    .def("is_infinite", &tri3::is_infinite1,
+    .def("is_infinite", &cgalpy::tri3::is_infinite1,
          py::arg("c"),
          "True, iff c is incident to the infinite vertex\n"
          "Parameters:\n"
          "  c (Cell): the cell\n"
          "Return:\n"
          "  bool\n")
-    .def("is_infinite", &tri3::is_infinite2,
+    .def("is_infinite", &cgalpy::tri3::is_infinite2,
          py::arg("c"), py::arg("i"),
          "True, iff the facet i of cell c is incident to the infinite vertex\n"
          "Parameters:\n"
@@ -1026,7 +1028,7 @@ void export_tri3_plain(py::module_& m) {
          "  i (int)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_infinite", &tri3::is_infinite3,
+    .def("is_infinite", &cgalpy::tri3::is_infinite3,
          py::arg("c"), py::arg("i"), py::arg("j"),
          "True, iff the edge (i, j) of cell c is incident to the infinite vertex\n"
          "Parameters:\n"
@@ -1047,7 +1049,7 @@ void export_tri3_plain(py::module_& m) {
          "  f (Facet)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_infinite", &tri3::is_infinite6,
+    .def("is_infinite", &cgalpy::tri3::is_infinite6,
          py::arg("v"),
          "True, iff vertex v is the infinite vertex\n"
          "Parameters:\n"
@@ -1063,14 +1065,14 @@ void export_tri3_plain(py::module_& m) {
          "  level (int): the verbose level (0)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_valid", &tri3::is_valid2, py::arg("c"), py::arg("verbose") = false,
+    .def("is_valid", &cgalpy::tri3::is_valid2, py::arg("c"), py::arg("verbose") = false,
          "Determines wether a cell is valid\n"
          "Parameters:\n"
          "  c (Cell): the cell\n"
          "  verbose (Boolean): Indicates whether to be verbose (False)\n"
          "Return:\n"
          "  bool\n")
-    .def("is_vertex", &tri3::is_vertex1,
+    .def("is_vertex", &cgalpy::tri3::is_vertex1,
          py::arg("p"),
          "Determine whether p is a geometric embedding of a vertex of the triangulation by locating p\n"
          "Parameters:\n"
@@ -1078,13 +1080,13 @@ void export_tri3_plain(py::module_& m) {
          "Return:\n"
          "  False, if p is not in the triangulation;\n"
          "  otherwise, tuple [True, v], where v is vertex associated with p\n")
-    .def("is_vertex", &tri3::is_vertex2,
+    .def("is_vertex", &cgalpy::tri3::is_vertex2,
          py::arg("v"),
          "Return:\n"
          "  bool\n")
 
     // Locators
-    .def("locate", &tri3::locate1, ri, py::arg("query"),
+    .def("locate", &cgalpy::tri3::locate1, ri, py::arg("query"),
          "Locate a query point in the triangulation\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
@@ -1092,14 +1094,14 @@ void export_tri3_plain(py::module_& m) {
          "  Cell: If the query point lies strictly inside the convex hull of the points, obtain the cell that contains the point in its interior.\n"
          "        If the query point lies inside a facet, on an edge, or coincides with a vertex, return one of the cells having the point on its boundary.\n"
          "        If the query point lies outside the convex hull of the points, return an infinite cell with vertices {p,q,r,∞},  such that the tetrahedron (p,q,r,query) is positively oriented (the rest of the triangulation lies on the other side of facet (p,q,r)).\n")
-    .def("locate", &tri3::locate2, ri, py::arg("query"), py::arg("start"),
+    .def("locate", &cgalpy::tri3::locate2, ri, py::arg("query"), py::arg("start"),
          "Locate a query point in the triangulation; start the search with start\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
          "  start (Cell)\n"
          "Return:\n"
          "  Cell\n")
-    .def("locate", &tri3::locate3, ri,
+    .def("locate", &cgalpy::tri3::locate3, ri,
          py::arg("query"), py::arg("start"),
          "Locate a query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
@@ -1107,7 +1109,7 @@ void export_tri3_plain(py::module_& m) {
          "  hint (Vertex)\n"
          "Return:\n"
          "  Cell\n")
-    .def("locate_get_incident", &tri3::locate_get_incident1, py::arg("query"),
+    .def("locate_get_incident", &cgalpy::tri3::locate_get_incident1, py::arg("query"),
          "Locate a query point in the triangulation\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
@@ -1116,7 +1118,7 @@ void export_tri3_plain(py::module_& m) {
          "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
          "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
          "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
-    .def("locate_get_incident", &tri3::locate_get_incident2, py::arg("query"), py::arg("start"),
+    .def("locate_get_incident", &cgalpy::tri3::locate_get_incident2, py::arg("query"), py::arg("start"),
          "locate a query point in the triangulation; start the search with start\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
@@ -1126,7 +1128,7 @@ void export_tri3_plain(py::module_& m) {
          "  tuple[Locate_type.FACET, c, i], if the query point lies inside the interior of the facet (c, i)\n"
          "  tuple[Locate_type.EDGE, c, i, j], if the query point lies inside the interior of the edge (c, i, j)\n"
          "  tuple[Locate_type.VERTEX, c, i], if the query point coincides with the vertex (c, i)\n")
-    .def("locate_get_incident", &tri3::locate_get_incident3, py::arg("query"), py::arg("hint"),
+    .def("locate_get_incident", &cgalpy::tri3::locate_get_incident3, py::arg("query"), py::arg("hint"),
          "Locate a query point in the triangulation; start the search with hint\n"
          "Parameters:\n"
          "  query (Point_3): the query point\n"
@@ -1142,14 +1144,14 @@ void export_tri3_plain(py::module_& m) {
          "Obtain the facet seen from the other adjacent cell\n"
          "Parameters:\n"
          "  f (Facet)\n")
-    .def("mirror_index", &tri3::mirror_index, py::arg("c"), py::arg("i"),
+    .def("mirror_index", &cgalpy::tri3::mirror_index, py::arg("c"), py::arg("i"),
          "Obtain the index of a cell in its ith neighbor\n"
          "Parameters:\n"
          "  c (Cell)\n"
          "  i (int)\n"
          "Return:\n"
          "  int\n")
-    .def("mirror_vertex", &tri3::mirror_vertex, ri, py::arg("c"), py::arg("i"),
+    .def("mirror_vertex", &cgalpy::tri3::mirror_vertex, ri, py::arg("c"), py::arg("i"),
          "Obtain the vertex of the ith neighbor of c that is opposite to c\n"
          "Parameters:\n"
          "  c (Cell)\n"
@@ -1171,26 +1173,26 @@ void export_tri3_plain(py::module_& m) {
     .def("__ne__", [](const Tri& t1, const Tri& t2)->bool { return t1 != t2; })
 
     // Point, segment, triangle, & tetrahedron
-    .def("point", &tri3::point1, ri, py::arg("v"),
+    .def("point", &cgalpy::tri3::point1, ri, py::arg("v"),
          "Obtain the geometric embedding of a vertex\n"
          "Parameters:\n"
          "  v (Vertex): the vertex\n"
          "Return:\n"
          "  Point_3\n")
-    .def("point", &tri3::point2, ri, py::arg("c"), py::arg("i"),
+    .def("point", &cgalpy::tri3::point2, ri, py::arg("c"), py::arg("i"),
          "Obtain the point represented by (c, i)\n"
          "Parameters:\n"
          "  c (Cell): Together with i represents a vertex\n"
          "  i (int)\n"
          "Return:\n"
          "  Point_3\n")
-    .def("segment", &tri3::segment1, py::arg("e"),
+    .def("segment", &cgalpy::tri3::segment1, py::arg("e"),
          "Obtain the geometric embedding of an edge\n"
          "Parameters:\n"
          "  e (Edge): the edge\n"
          "Return:\n"
          "  Segment_3\n")
-    .def("segment", &tri3::segment2, py::arg("c"), py::arg("i"), py::arg("j"),
+    .def("segment", &cgalpy::tri3::segment2, py::arg("c"), py::arg("i"), py::arg("j"),
          "Obtain the segment represented by (c, i, j)\n"
          "Parameters:\n"
          "  c (Cell): Together with i and j represents an edge\n"
@@ -1198,13 +1200,13 @@ void export_tri3_plain(py::module_& m) {
          "  j (int)\n"
          "Return:\n"
          "  Segment_3\n")
-    .def("triangle", &tri3::triangle1, py::arg("f"),
+    .def("triangle", &cgalpy::tri3::triangle1, py::arg("f"),
          "Obtain the geometric embedding of a facet\n"
          "Parameters:\n"
          "  f (Facet): the facet\n"
          "Return:\n"
          "  Triangle_3\n")
-    .def("triangle", &tri3::triangle2, py::arg("c"), py::arg("i"),
+    .def("triangle", &cgalpy::tri3::triangle2, py::arg("c"), py::arg("i"),
          "Obtain the triangle represented by (c, i)\n"
          "Parameters:\n"
          "  c (Cell): Together with i represents a facet\n"
@@ -1212,7 +1214,7 @@ void export_tri3_plain(py::module_& m) {
          "  j (int)\n"
          "Return:\n"
          "  Triangle_3\n")
-    .def("tetrahedron", &tri3::tetrahedron, py::arg("c"),
+    .def("tetrahedron", &cgalpy::tri3::tetrahedron, py::arg("c"),
          "Obtain the geometric embedding of a cell\n"
          "Parameters:\n"
          "  c (Cell): the cell\n"
@@ -1220,7 +1222,7 @@ void export_tri3_plain(py::module_& m) {
          "  Tetrahedron_3\n")
 
     // Side of
-    .def("side_of_cell", &tri3::side_of_cell,
+    .def("side_of_cell", &cgalpy::tri3::side_of_cell,
          py::arg("p"), py::arg("c"),
          "Given point p, obtain an enumeration indicating on which side of the oriented boundary of a cell p lies.\n"
          "Parameters:\n"
@@ -1232,7 +1234,7 @@ void export_tri3_plain(py::module_& m) {
          "  tuple[ON_BOUNDARY, Locate_type.EDGE, i, j], if p lies in the interior of an edge (c, i, j)  on the boundary of c\n"
          "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with the vertex (c, i) on the boundary of c\n"
          "  ON_UNBOUNDED_SIDE\n, if p is outside of c")
-    .def("side_of_edge", &tri3::side_of_edge,
+    .def("side_of_edge", &cgalpy::tri3::side_of_edge,
          py::arg("p"), py::arg("e"),
          "Given point p, obtain an enumeration indicating on which side of the oriented boundary of an edge p lies.\n"
          "Parameters:\n"
@@ -1243,7 +1245,7 @@ void export_tri3_plain(py::module_& m) {
          "  tuple[ON_BOUNDARY, Locate_type.VERTEX, i], if p coincides with one of the endpoints of e, where i is the index of the vertex in the containg cell\n"
          "  ON_UNBOUNDED_SIDE\n, if p is outside of e")
     // .def("side_of_edge", )
-    .def("side_of_facet", &tri3::side_of_facet,
+    .def("side_of_facet", &cgalpy::tri3::side_of_facet,
          py::arg("p"), py::arg("f"),
          "Given point p, obtain an enumeration indicating on which side of the oriented boundary of a facet p lies.\n"
          "Parameters:\n"
@@ -1296,34 +1298,34 @@ void export_tri3_plain(py::module_& m) {
 
   add_iterator<Sci, Sci, const Cell&>("Segment_cell_iterator", tri_c);
 
-  tri_c.def("all_cells", &tri3::all_cells, py::keep_alive<0, 1>(),
+  tri_c.def("all_cells", &cgalpy::tri3::all_cells, py::keep_alive<0, 1>(),
             "Obtain an iterator that traverses all cells")
-    .def("all_edges", &tri3::all_edges, py::keep_alive<0, 1>(),
+    .def("all_edges", &cgalpy::tri3::all_edges, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all edges")
-    .def("all_facets", &tri3::all_facets, py::keep_alive<0, 1>(),
+    .def("all_facets", &cgalpy::tri3::all_facets, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all facets")
-    .def("all_vertices", &tri3::all_vertices, py::keep_alive<0, 1>(),
+    .def("all_vertices", &cgalpy::tri3::all_vertices, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all vertices")
 
-    .def("finite_cells", &tri3::finite_cells, py::keep_alive<0, 1>(),
+    .def("finite_cells", &cgalpy::tri3::finite_cells, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all finite cells")
-    .def("finite_edges", &tri3::finite_edges, py::keep_alive<0, 1>(),
+    .def("finite_edges", &cgalpy::tri3::finite_edges, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all finite edges")
-    .def("finite_facets", &tri3::finite_facets, py::keep_alive<0, 1>(),
+    .def("finite_facets", &cgalpy::tri3::finite_facets, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all finite facets")
-    .def("finite_vertices", &tri3::finite_vertices, py::keep_alive<0, 1>(),
+    .def("finite_vertices", &cgalpy::tri3::finite_vertices, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all finite vertices")
 
-    .def("points", &tri3::points, py::keep_alive<0, 1>(),
+    .def("points", &cgalpy::tri3::points, py::keep_alive<0, 1>(),
          "Obtain an iterator that traverses all points\n")
 
-    .def("segment_traverser_cells", &tri3::segment_traverser_cells1, py::keep_alive<0, 1>(),
+    .def("segment_traverser_cells", &cgalpy::tri3::segment_traverser_cells1, py::keep_alive<0, 1>(),
          py::arg("ps"), py::arg("pt"),
          "Obtain an iterator that traverses all cells intersected by a represented line segment\n"
          "Parameters:\n"
          "  ps (Point_3): Together with pt represents a line segment\n"
          "  pt (Point_3)\n")
-    .def("segment_traverser_cells", &tri3::segment_traverser_cells2, py::keep_alive<0, 1>(),
+    .def("segment_traverser_cells", &cgalpy::tri3::segment_traverser_cells2, py::keep_alive<0, 1>(),
          py::arg("ps"), py::arg("pt"), py::arg("hint"),
          "Obtain an iterator that traverses all cells intersected by a represented line segment\n"
          "Parameters:\n"
@@ -1336,74 +1338,74 @@ void export_tri3_plain(py::module_& m) {
   using Fc = Tri::Facet_circulator;
 
   add_iterator_from_circulator<Cc>("Cell_iterator", tri_c);
-  tri_c.def("incident_cells", &tri3::incident_cells1, py::keep_alive<0, 1>(),
+  tri_c.def("incident_cells", &cgalpy::tri3::incident_cells1, py::keep_alive<0, 1>(),
             "Traverse all cells or all facets incident to a given edge")
-    .def("incident_cells", &tri3::incident_cells2, py::keep_alive<0, 1>(),
+    .def("incident_cells", &cgalpy::tri3::incident_cells2, py::keep_alive<0, 1>(),
          "Traverse all cells or all facets incident to a given edge")
-    .def("incident_cells", &tri3::incident_cells3, py::keep_alive<0, 1>(),
+    .def("incident_cells", &cgalpy::tri3::incident_cells3, py::keep_alive<0, 1>(),
          "Traverse all cells or all facets incident to a given edge starting at a given cell")
-    .def("incident_cells", &tri3::incident_cells4, py::keep_alive<0, 1>(),
+    .def("incident_cells", &cgalpy::tri3::incident_cells4, py::keep_alive<0, 1>(),
          "Traverse all cells or all facets incident to a given edge starting at a given cell")
     ;
 
   add_iterator_from_circulator<Fc>("Facet_iterator", tri_c);
-  tri_c.def("incident_facets", &tri3::incident_facets1, py::keep_alive<0, 1>(),
+  tri_c.def("incident_facets", &cgalpy::tri3::incident_facets1, py::keep_alive<0, 1>(),
             "Traverse all facets incident to a given edge")
-    .def("incident_facets", &tri3::incident_facets2, py::keep_alive<0, 1>(),
+    .def("incident_facets", &cgalpy::tri3::incident_facets2, py::keep_alive<0, 1>(),
          "Traverse all facets incident to a given edge")
-    .def("incident_facets", &tri3::incident_facets3, py::keep_alive<0, 1>(),
+    .def("incident_facets", &cgalpy::tri3::incident_facets3, py::keep_alive<0, 1>(),
          "Traverse all facets incident to a given edge starting at a given facet")
-    .def("incident_facets", &tri3::incident_facets4, py::keep_alive<0, 1>(),
+    .def("incident_facets", &cgalpy::tri3::incident_facets4, py::keep_alive<0, 1>(),
          "Traverse all facets incident to a given edge starting at a given facet")
-    .def("incident_facets", &tri3::incident_facets5, py::keep_alive<0, 1>(),
+    .def("incident_facets", &cgalpy::tri3::incident_facets5, py::keep_alive<0, 1>(),
          "Traverse all facets incident to a given edge starting at a given facet")
-    .def("incident_facets", &tri3::incident_facets6, py::keep_alive<0, 1>(),
+    .def("incident_facets", &cgalpy::tri3::incident_facets6, py::keep_alive<0, 1>(),
          "Traverse all facets incident to a given edge starting at a given facet")
     ;
 
   // Circulators
   export_circulator<Fc>(tri_c, "Facet_circulator");
-  tri_c.def("incident_cells_circulator", &tri3::incident_cells_circulator1, py::keep_alive<0, 1>(),
+  tri_c.def("incident_cells_circulator", &cgalpy::tri3::incident_cells_circulator1, py::keep_alive<0, 1>(),
             "Circulate through all cells or all facets incident to a given edge")
-    .def("incident_cells_circulator", &tri3::incident_cells_circulator2, py::keep_alive<0, 1>(),
+    .def("incident_cells_circulator", &cgalpy::tri3::incident_cells_circulator2, py::keep_alive<0, 1>(),
          "Circulate through all cells or all facets incident to a given edge")
-    .def("incident_cells_circulator", &tri3::incident_cells_circulator3, py::keep_alive<0, 1>(),
+    .def("incident_cells_circulator", &cgalpy::tri3::incident_cells_circulator3, py::keep_alive<0, 1>(),
          "Circulate through all cells or all facets incident to a given edge starting at a given cell")
-    .def("incident_cells_circulator", &tri3::incident_cells_circulator4, py::keep_alive<0, 1>(),
+    .def("incident_cells_circulator", &cgalpy::tri3::incident_cells_circulator4, py::keep_alive<0, 1>(),
          "Circulate through all cells or all facets incident to a given edge starting at a given cell")
     ;
 
   export_circulator<Cc>(tri_c, "Cell_circulator");
-  tri_c.def("incident_facets_circulator", &tri3::incident_facets_circulator1, py::keep_alive<0, 1>(),
+  tri_c.def("incident_facets_circulator", &cgalpy::tri3::incident_facets_circulator1, py::keep_alive<0, 1>(),
             "Circulate through all facets incident to a given edge")
-    .def("incident_facets_circulator", &tri3::incident_facets_circulator2, py::keep_alive<0, 1>(),
+    .def("incident_facets_circulator", &cgalpy::tri3::incident_facets_circulator2, py::keep_alive<0, 1>(),
          "Circulate through all facets incident to a given edge")
-    .def("incident_facets_circulator", &tri3::incident_facets_circulator3, py::keep_alive<0, 1>(),
+    .def("incident_facets_circulator", &cgalpy::tri3::incident_facets_circulator3, py::keep_alive<0, 1>(),
          "Circulate through all facets incident to a given edge starting at a given facet")
-    .def("incident_facets_circulator", &tri3::incident_facets_circulator4, py::keep_alive<0, 1>(),
+    .def("incident_facets_circulator", &cgalpy::tri3::incident_facets_circulator4, py::keep_alive<0, 1>(),
          "Circulate through all facets incident to a given edge starting at a given facet")
-    .def("incident_facets_circulator", &tri3::incident_facets_circulator5, py::keep_alive<0, 1>(),
+    .def("incident_facets_circulator", &cgalpy::tri3::incident_facets_circulator5, py::keep_alive<0, 1>(),
          "Circulate through all facets incident to a given edge starting at a given facet")
-    .def("incident_facets_circulator", &tri3::incident_facets_circulator6, py::keep_alive<0, 1>(),
+    .def("incident_facets_circulator", &cgalpy::tri3::incident_facets_circulator6, py::keep_alive<0, 1>(),
          "Circulate through all facets incident to a given edge starting at a given facet")
     ;
 
   // Container returning functions
-  tri_c.def("adjacent_vertices", &tri3::adjacent_vertices,
+  tri_c.def("adjacent_vertices", &cgalpy::tri3::adjacent_vertices,
             "Obtain the vertices adjacent to given vertex")
-    .def("finite_incident_cells", &tri3::finite_incident_cells,
+    .def("finite_incident_cells", &cgalpy::tri3::finite_incident_cells,
          "Obtain the finite cells incident to given vertex")
-    .def("finite_incident_edges", &tri3::finite_incident_edges,
+    .def("finite_incident_edges", &cgalpy::tri3::finite_incident_edges,
          "Obtain the finite edges incident to given vertex")
-    .def("finite_incident_facets", &tri3::finite_incident_facets,
+    .def("finite_incident_facets", &cgalpy::tri3::finite_incident_facets,
          "Obtain the finite facets incident to given vertex")
-    .def("finite_adjacent_vertices", &tri3::finite_adjacent_vertices,
+    .def("finite_adjacent_vertices", &cgalpy::tri3::finite_adjacent_vertices,
          "Obtain the finite vertices adjacent to given vertex")
-    .def("incident_edges", &tri3::incident_edges,
+    .def("incident_edges", &cgalpy::tri3::incident_edges,
          "Obtain the edges incident to given vertex")
-    .def("vertices", &tri3::vertices1)
-    .def("vertices", &tri3::vertices2)
-    .def("vertices", &tri3::vertices3)
+    .def("vertices", &cgalpy::tri3::vertices1)
+    .def("vertices", &cgalpy::tri3::vertices2)
+    .def("vertices", &cgalpy::tri3::vertices3)
     ;
 
 #ifdef CGALPY_HAS_VISUAL
@@ -1413,7 +1415,7 @@ void export_tri3_plain(py::module_& m) {
 
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
   m.def("draw",
-        [](const Tri& tri, const bvr::Graphics_scene_options& gso, const char* title)
+        [](const Tri& tri, const cgalpy::bvr::Graphics_scene_options& gso, const char* title)
         { CGAL::draw(tri, gso, title); });
 #endif
 #endif

@@ -11,6 +11,7 @@
 
 #include <CGAL/basic.h>
 
+namespace cgalpy {
 namespace as3 {
 
 #if CGALPY_AS3_EXACT_COMPARISON == 0
@@ -22,5 +23,6 @@ BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AS3_EXACT_COMPARISON");
 #endif
 
 }
+} // namespace cgalpy
 
 #endif

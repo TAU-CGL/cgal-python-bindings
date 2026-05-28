@@ -44,6 +44,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 // Indicates whether arrangement with history is prescribed
@@ -301,6 +302,7 @@ struct With_history<true, GeomTraits, TopolTraits> {
 //     CGAL::Arrangement_on_surface_with_history_2<Gaost, Topol_traits>;
 // };
 
-} // end of aos2 namespace
+}
+} // namespace cgalpy // end of aos2 namespace
 
 #endif

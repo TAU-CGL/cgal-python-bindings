@@ -26,6 +26,7 @@
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
+namespace cgalpy {
 namespace pmp {
 
 /*! A class template that wraps the function template
@@ -78,19 +79,20 @@ bool write_polygon_mesh(const std::string& filename, const PolygonalMesh& pm, co
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_pmp_io(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
-  m.def("read_polygon_mesh", &pmp::read_polygon_mesh<Pm>,
+  using Pm = cgalpy::pmp::Polygonal_mesh;
+  m.def("read_polygon_mesh", &cgalpy::pmp::read_polygon_mesh<Pm>,
         py::arg("filename"), py::arg("params") = py::dict());
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
-  m.def("read_polygon_mesh", &pmp::read_polygon_mesh_with_traits<Pm, pol3::Traits>,
+  m.def("read_polygon_mesh", &cgalpy::pmp::read_polygon_mesh_with_traits<Pm, cgalpy::pol3::Traits>,
         py::arg("filename"), py::arg("traits"), py::arg("params") = py::dict(),
         py::keep_alive<0, 2>());
 #endif
 
-  m.def("write_polygon_mesh", &pmp::write_polygon_mesh<Pm>,
+  m.def("write_polygon_mesh", &cgalpy::pmp::write_polygon_mesh<Pm>,
         py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict());
   ;
 }

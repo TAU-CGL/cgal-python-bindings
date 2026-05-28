@@ -14,6 +14,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri2 {
 
 template <typename TriangulationType, typename C>
@@ -455,6 +456,7 @@ auto export_triangulation_2(C& c) {
   return c;
 }
 
-} // namespace tri2
+}
+} // namespace cgalpy // namespace tri2
 
 #endif // CGALPY_TRIANGULATION_2_HPP

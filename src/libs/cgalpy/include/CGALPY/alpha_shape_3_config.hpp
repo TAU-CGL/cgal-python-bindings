@@ -21,6 +21,7 @@
 
 #include <CGAL/tags.h>
 
+namespace cgalpy {
 namespace as3 {
 
 constexpr bool exact_comparison()
@@ -39,5 +40,6 @@ template <typename Tr, typename Ec> struct Alpha_shape<CGALPY_AS3_FIXED, Tr, Ec>
 { using type = CGAL::Fixed_alpha_shape_3<Tr>; };
 
 }
+} // namespace cgalpy
 
 #endif

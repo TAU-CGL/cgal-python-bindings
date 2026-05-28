@@ -21,7 +21,7 @@ namespace py = nanobind;
 
 //
 void export_gps_segment_traits_2(py::module_& m) {
-  using Agt = aos2::Arr_geometry_traits_2;
+  using Agt = cgalpy::aos2::Arr_geometry_traits_2;
   using Ggt = CGAL::Gps_segment_traits_2<Kernel, Point_2_container>;
 
   if (add_attr<Ggt>(m, "Gps_segment_traits_2")) return;

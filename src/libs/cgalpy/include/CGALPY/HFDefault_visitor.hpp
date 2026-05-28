@@ -9,6 +9,7 @@ namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace HF = PMP::Hole_filling;
 
+namespace cgalpy {
 namespace pmp {
 
 struct HFDefault_visitor : HF::Default_visitor {
@@ -70,7 +71,8 @@ private:
   std::function<void()> efp;
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif // CGALPY_HFDEFAULT_VISITOR_HPP
 

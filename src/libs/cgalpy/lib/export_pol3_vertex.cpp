@@ -14,8 +14,9 @@
 #include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;
-namespace pol3_doc = cgalpy::docstrings::Polyhedron;
+namespace pol3_doc = cgalpy::pol3::docstrings;
 
+namespace cgalpy {
 namespace pol3 {
 
 const Halfedge& vertex_halfedge(const Vertex& v) { return (*(v.halfedge())); }
@@ -23,10 +24,11 @@ const void vertex_set_halfedge(Vertex& v, Halfedge& h)
 { v.set_halfedge(Polyhedron_3::Halfedge_handle(&h)); }
 
 }
+} // namespace cgalpy
 
 //! Export Polhedron Vertex
-void export_pol3_vertex(py::class_<pol3::Polyhedron_3>& prn_c) {
-  using Prn = pol3::Polyhedron_3;
+void export_pol3_vertex(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
+  using Prn = cgalpy::pol3::Polyhedron_3;
   using Vertex = Prn::Vertex;
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -35,11 +37,11 @@ void export_pol3_vertex(py::class_<pol3::Polyhedron_3>& prn_c) {
   py::class_<Vertex> vertex_c(prn_c, "Vertex", pol3_doc::Polyhedron_3_Vertex_class);
   vertex_c.def(py::init<>(), pol3_doc::Polyhedron_3_Vertex_Vertex)
     .def("degree", [](const Vertex& v) { return v.degree(); })
-    .def("halfedge", pol3::vertex_halfedge, ri, pol3_doc::Polyhedron_3_Vertex_halfedge)
+    .def("halfedge", cgalpy::pol3::vertex_halfedge, ri, pol3_doc::Polyhedron_3_Vertex_halfedge)
     .def("is_bivalent", [](const Vertex& v) { return v.is_bivalent(); }, pol3_doc::Polyhedron_3_Vertex_is_bivalent)
     .def("is_trivalent", [](const Vertex& v) { return v.is_trivalent(); }, pol3_doc::Polyhedron_3_Vertex_is_trivalent)
     .def("point", [](const Vertex& v){ return v.point(); }, ri, pol3_doc::Polyhedron_3_Vertex_point)
-    .def("set_halfedge", pol3::vertex_set_halfedge, py::arg("halfedge"), pol3_doc::Polyhedron_3_Vertex_set_halfedge)
+    .def("set_halfedge", cgalpy::pol3::vertex_set_halfedge, py::arg("halfedge"), pol3_doc::Polyhedron_3_Vertex_set_halfedge)
     .def("vertex_degree", [](const Vertex& v) { return v.vertex_degree(); }, pol3_doc::Polyhedron_3_Vertex_vertex_degree)
 #ifdef CGALPY_POL3_VERTEX_EXTENDED
     // The member functions set_data() and data() are defined in a base class of

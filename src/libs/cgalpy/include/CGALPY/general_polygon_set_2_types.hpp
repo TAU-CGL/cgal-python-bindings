@@ -15,6 +15,7 @@
 #include "CGALPY/general_polygon_set_2_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+namespace cgalpy {
 namespace bso2 {
 
 using Dcel = aos2::Dcel;
@@ -36,5 +37,6 @@ using General_polygon_with_holes_2 = General_polygon_set_2::Polygon_with_holes_2
 using Arrangement_2 = General_polygon_set_2::Arrangement_2;
 
 }
+} // namespace cgalpy
 
 #endif

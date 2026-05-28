@@ -24,6 +24,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 using Face_const_handle = typename aos2::Face_const_handle;
@@ -89,9 +90,10 @@ py::object ray_shoot_down(PL& pl, const Point_2& p) {
 // #endif
 
 }
+} // namespace cgalpy
 
 void export_point_location(py::module_& m) {
-  using Aos = aos2::Arrangement_on_surface_2;
+  using Aos = cgalpy::aos2::Arrangement_on_surface_2;
   using Aob = CGAL::Arr_observer<Aos>;
 
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -107,9 +109,9 @@ void export_point_location(py::module_& m) {
       .def(py::init<Aos&>())
       .def("attach", &Landmarks_pl::attach)
       .def("detach", &Landmarks_pl::detach)
-      .def("locate", &aos2::locate<Landmarks_pl>, ri)
-      // .def("ray_shoot_up", &aos2::ray_shoot_up<Landmarks_pl>, ri)
-      // .def("ray_shoot_down", &aos2::ray_shoot_down<Landmarks_pl>, ri)
+      .def("locate", &cgalpy::aos2::locate<Landmarks_pl>, ri)
+      // .def("ray_shoot_up", &cgalpy::aos2::ray_shoot_up<Landmarks_pl>, ri)
+      // .def("ray_shoot_down", &cgalpy::aos2::ray_shoot_down<Landmarks_pl>, ri)
       ;
   }
 #endif
@@ -126,9 +128,9 @@ void export_point_location(py::module_& m) {
       .def("depth", &Trapezoid_pl::depth)
       .def("longest_query_path_length", &Trapezoid_pl::longest_query_path_length)
       .def("with_guarantees", &Trapezoid_pl::with_guarantees)
-      .def("locate", &aos2::locate<Trapezoid_pl>, ri)
-      .def("ray_shoot_up", &aos2::ray_shoot_up<Trapezoid_pl>, ri)
-      .def("ray_shoot_down", &aos2::ray_shoot_down<Trapezoid_pl>, ri)
+      .def("locate", &cgalpy::aos2::locate<Trapezoid_pl>, ri)
+      .def("ray_shoot_up", &cgalpy::aos2::ray_shoot_up<Trapezoid_pl>, ri)
+      .def("ray_shoot_down", &cgalpy::aos2::ray_shoot_down<Trapezoid_pl>, ri)
       ;
   }
 #endif
@@ -141,9 +143,9 @@ void export_point_location(py::module_& m) {
       .def(py::init<Aos&>())
       .def("attach", &Walk_pl::attach)
       .def("detach", &Walk_pl::detach)
-      .def("locate", &aos2::locate<Walk_pl>, ri)
-      .def("ray_shoot_up", &aos2::ray_shoot_up<Walk_pl>, ri)
-      .def("ray_shoot_down", &aos2::ray_shoot_down<Walk_pl>, ri)
+      .def("locate", &cgalpy::aos2::locate<Walk_pl>, ri)
+      .def("ray_shoot_up", &cgalpy::aos2::ray_shoot_up<Walk_pl>, ri)
+      .def("ray_shoot_down", &cgalpy::aos2::ray_shoot_down<Walk_pl>, ri)
       ;
   }
 #endif
@@ -155,11 +157,11 @@ void export_point_location(py::module_& m) {
       .def(py::init<Aos&>())
       .def("attach", &Naive_pl::attach)
       .def("detach", &Naive_pl::detach)
-      .def("locate", &aos2::locate<Naive_pl>, ri)
-      // .def("ray_shoot_up", &aos2::ray_shoot_up<Naive_pl>, ri)
-      // .def("ray_shoot_down", &aos2::ray_shoot_down<Naive_pl>, ri)
+      .def("locate", &cgalpy::aos2::locate<Naive_pl>, ri)
+      // .def("ray_shoot_up", &cgalpy::aos2::ray_shoot_up<Naive_pl>, ri)
+      // .def("ray_shoot_down", &cgalpy::aos2::ray_shoot_down<Naive_pl>, ri)
       ;
   }
 
-  m.def("locate", &aos2::locate_batch, ri, py::keep_alive<1, 0>());
+  m.def("locate", &cgalpy::aos2::locate_batch, ri, py::keep_alive<1, 0>());
 }

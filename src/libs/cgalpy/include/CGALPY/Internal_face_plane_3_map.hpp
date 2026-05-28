@@ -9,6 +9,7 @@
 #ifndef CGALPY_FACE_PLANE_3_MAP_HPP
 #define CGALPY_FACE_PLANE_3_MAP_HPP
 
+namespace cgalpy {
 namespace pol3 {
 
 /*! An internal propery map from faces of a polyhedron of type `Polyhedron` to
@@ -37,6 +38,7 @@ public:
   friend void put(const Internal_face_plane_3_map&, key_type f, const value_type& val) { f->plane() = val; }
 };
 
-} // namespace pol3
+}
+} // namespace cgalpy // namespace pol3
 
 #endif

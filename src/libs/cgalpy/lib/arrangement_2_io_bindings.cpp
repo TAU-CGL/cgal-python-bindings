@@ -38,11 +38,11 @@ std::istream& operator>>(std::istream& is, py::object& obj) {
 #include "CGALPY/add_extraction.hpp"
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-void export_arrangement_2_io(py::class_<aos2::Arrangement_2,
-                                        aos2::Arrangement_on_surface_2>& arr_c)
+void export_arrangement_2_io(py::class_<cgalpy::aos2::Arrangement_2,
+                                        cgalpy::aos2::Arrangement_on_surface_2>& arr_c)
 {
-  using Aos = aos2::Arrangement_on_surface_2;
-  using Arr = aos2::Arrangement_2;
+  using Aos = cgalpy::aos2::Arrangement_on_surface_2;
+  using Arr = cgalpy::aos2::Arrangement_2;
   using Formatter = CGAL::Arr_extended_dcel_text_formatter<Arr>;
 
 #if (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS) || \

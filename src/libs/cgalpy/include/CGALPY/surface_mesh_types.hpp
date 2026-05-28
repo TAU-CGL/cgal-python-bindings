@@ -13,11 +13,13 @@
 
 #include "CGALPY/kernel_types.hpp"
 
+namespace cgalpy {
 namespace sm {
 
   using Surface_mesh_3 = CGAL::Surface_mesh<Kernel::Point_3>;
   using Surface_mesh_2 = CGAL::Surface_mesh<Kernel::Point_2>;
 
 }
+} // namespace cgalpy
 
 #endif

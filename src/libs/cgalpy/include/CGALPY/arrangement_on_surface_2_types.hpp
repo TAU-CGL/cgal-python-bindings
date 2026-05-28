@@ -55,6 +55,7 @@
 BOOST_STATIC_ASSERT_MSG(false, "CGALPY_AOS2_GEOMETRY_TRAITS");
 #endif
 
+namespace cgalpy {
 namespace aos2 {
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
@@ -263,5 +264,6 @@ using Ccb_halfedge_circulator =
 using Halfedge_around_vertex_const_circulator =
   Arrangement_on_surface_2::Halfedge_around_vertex_const_circulator;
 }
+} // namespace cgalpy
 
 #endif

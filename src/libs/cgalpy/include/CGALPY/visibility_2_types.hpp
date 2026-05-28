@@ -16,6 +16,7 @@
 #include "CGALPY/visibility_2_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+namespace cgalpy {
 namespace vis2 {
   using Rc = Regularization_category<regularization_category()>::type;
   using Arrangement_2 = aos2::Arrangement_2;
@@ -31,5 +32,6 @@ namespace vis2 {
   using Triangular_expansion_visibility_2 =
     CGAL::Triangular_expansion_visibility_2<Arrangement_2, Rc>;
 }
+} // namespace cgalpy
 
 #endif

@@ -15,6 +15,7 @@
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 
+namespace cgalpy {
 namespace kerd {
 
 //!
@@ -25,6 +26,7 @@ void init_vector_d(Vector_d* pd, int d, py::list& lst) {
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_vector_d(py::class_<Vector_d>& vecd_c) {
@@ -32,7 +34,7 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
   using Vecd = Vector_d;
 
   vecd_c.def(py::init<>())
-    .def("__init__", &kerd::init_vector_d)
+    .def("__init__", &cgalpy::kerd::init_vector_d)
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Vecd>)
     .def("dimension", &Vecd::dimension)
     .def("cartesian", &Vecd::cartesian)

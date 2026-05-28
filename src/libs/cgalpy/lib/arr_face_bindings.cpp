@@ -18,6 +18,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 // Bind iterators & circulators
@@ -57,10 +58,11 @@ py::object surfaces(const Face& f)
 #endif
 
 }
+} // namespace cgalpy
 
 //!
-void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
-  using Aos = aos2::Arrangement_on_surface_2;
+void export_face(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
+  using Aos = cgalpy::aos2::Arrangement_on_surface_2;
   using Face = Aos::Face;
   using V = Aos::Vertex;
 
@@ -92,16 +94,16 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   if (add_attr<Face>(c, "Face")) return;
   py::class_<Face, CGAL::Arr_face_base> face_c(c, "Face");
   face_c.def(py::init<>())
-    .def("number_of_inner_ccbs", &aos2::number_of_inner_ccbs)
-    .def("number_of_outer_ccbs", &aos2::number_of_outer_ccbs)
+    .def("number_of_inner_ccbs", &cgalpy::aos2::number_of_inner_ccbs)
+    .def("number_of_outer_ccbs", &cgalpy::aos2::number_of_outer_ccbs)
     .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices)
     .def("has_outer_ccb", &Face::has_outer_ccb)
     .def("number_of_holes", &Face::number_of_holes)
 
-    .def("outer_ccb", &aos2::outer_ccb_iterator, py::keep_alive<0, 1>())
+    .def("outer_ccb", &cgalpy::aos2::outer_ccb_iterator, py::keep_alive<0, 1>())
 
     // Wrap also the function that obtains the real circulator
-    .def("outer_ccb_circulator", &aos2::outer_ccb_circulator)
+    .def("outer_ccb_circulator", &cgalpy::aos2::outer_ccb_circulator)
 
 #ifdef CGALPY_AOS2_FACE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -122,7 +124,7 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("set_decision", [](Face& f, CGAL::Comparison_result cr) { f.set_decision(cr); })
     .def("set_decision", [](Face& f, Dd dd) { f.set_decision(dd); })
     .def("number_of_surfaces", [](Face& f) { return f.number_of_surfaces(); })
-    .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
+    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>())
     .def("surface", [](Face& f)->const Env_data& { return f.surface(); })
     .def("number_of_surfaces", [](Face& f)->int { return f.number_of_surfaces(); })
     .def("has_no_env_data", [](Face& f)->bool { return f.has_no_env_data(); })
@@ -146,9 +148,9 @@ void export_face(py::class_<aos2::Arrangement_on_surface_2>& c) {
   add_iterator_of_circulator<Icci, Icci, Chcc>("Inner_ccb_iterator", face_c);
   add_iterator_of_circulator<Occi, Occi, Chcc>("Outer_ccb_iterator", face_c);
 
-  face_c.def("outer_ccbs", &aos2::outer_ccbs, py::keep_alive<0, 1>())
-    .def("inner_ccbs", &aos2::inner_ccbs, py::keep_alive<0, 1>())
-    .def("holes", &aos2::inner_ccbs, py::keep_alive<0, 1>())
+  face_c.def("outer_ccbs", &cgalpy::aos2::outer_ccbs, py::keep_alive<0, 1>())
+    .def("inner_ccbs", &cgalpy::aos2::inner_ccbs, py::keep_alive<0, 1>())
+    .def("holes", &cgalpy::aos2::inner_ccbs, py::keep_alive<0, 1>())
     ;
 
   //! Weap also the real circulator

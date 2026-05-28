@@ -8,6 +8,7 @@
 namespace py = nanobind;
 namespace SMS = CGAL::Surface_mesh_simplification;
 
+namespace cgalpy {
 namespace sms {
 
 template <typename TriangleMesh>
@@ -62,7 +63,8 @@ private:
   std::function<void(const Profile&)> non_collapsable;
 };
 
-} // namespace sms
+}
+} // namespace cgalpy // namespace sms
 
 
 #endif // CGALPY_EDGE_COLLAPSE_VISITOR_BASE_HPP

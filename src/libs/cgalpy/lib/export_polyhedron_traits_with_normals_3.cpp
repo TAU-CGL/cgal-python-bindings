@@ -16,7 +16,7 @@
 #include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;
-namespace pol3_doc = cgalpy::docstrings::Polyhedron;
+namespace pol3_doc = cgalpy::pol3::docstrings;
 
 /*!
  */

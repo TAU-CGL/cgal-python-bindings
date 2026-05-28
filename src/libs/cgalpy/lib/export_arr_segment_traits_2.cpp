@@ -29,6 +29,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 //
@@ -36,6 +37,7 @@ Segment_2 to_segment(CGAL::Arr_segment_traits_2<Kernel>::X_monotone_curve_2& c)
 { return Segment_2(c); }
 
 }
+} // namespace cgalpy
 
 //
 void export_arr_segment_traits_2(py::module_& m) {
@@ -93,7 +95,7 @@ void export_arr_segment_traits_2(py::module_& m) {
     // .def("is_in_x_range", &Xcv::is_in_x_range)
     // .def("is_in_y_range", &Xcv::is_in_y_range)
 
-    .def("segment", &aos2::to_segment)
+    .def("segment", &cgalpy::aos2::to_segment)
   ;
 
   add_insertion(xcv_c, "__str__");

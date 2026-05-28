@@ -21,6 +21,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace bvr {
 
 //!
@@ -31,6 +32,7 @@ static ::PyType_Slot gsoe_slots[] = {
 };
 
 }
+} // namespace cgalpy
 
 /*! The implementation of the bindings of the CGAL::Graphics_scene_options class
  * template presents a specific challenge. The interface of this class template
@@ -58,7 +60,7 @@ static ::PyType_Slot gsoe_slots[] = {
  * for a Python user.
  */
 void export_basic_viewer(py::module_& m) {
-  using Gso = bvr::Graphics_scene_options;
+  using Gso = cgalpy::bvr::Graphics_scene_options;
   if (! add_attr<Gso>(m, "Graphics_scene_options_base")) {
     py::class_<Gso>(m, "Graphics_scene_options_base")
       .def(py::init<>())
@@ -66,9 +68,9 @@ void export_basic_viewer(py::module_& m) {
       ;
   }
 
-  using Gsoe = bvr::Graphics_scene_options_extended;
+  using Gsoe = cgalpy::bvr::Graphics_scene_options_extended;
   if (! add_attr<Gsoe>(m, "Graphics_scene_options")) {
-    py::class_<Gsoe, Gso>(m, "Graphics_scene_options", py::type_slots(bvr::gsoe_slots))
+    py::class_<Gsoe, Gso>(m, "Graphics_scene_options", py::type_slots(cgalpy::bvr::gsoe_slots))
       .def(py::init<>())
       .def("colored_face", &Gsoe::apply_colored_face)
       .def("face_color", &Gsoe::apply_face_color)
@@ -82,8 +84,8 @@ void export_basic_viewer(py::module_& m) {
       ;
   }
 
-  m.def("add_to_graphics_scene", [](const bvr::Ds& ds, Gs& gs) { CGAL::add_to_graphics_scene(ds, gs); })
+  m.def("add_to_graphics_scene", [](const cgalpy::bvr::Ds& ds, Gs& gs) { CGAL::add_to_graphics_scene(ds, gs); })
     .def("add_to_graphics_scene",
-         [](const bvr::Ds& ds, Gs& gs, const Gso& gso) { CGAL::add_to_graphics_scene(ds, gs, gso); })
+         [](const cgalpy::bvr::Ds& ds, Gs& gs, const Gso& gso) { CGAL::add_to_graphics_scene(ds, gs, gso); })
     .def("draw_graphics_scene", &CGAL::draw_graphics_scene);
 }

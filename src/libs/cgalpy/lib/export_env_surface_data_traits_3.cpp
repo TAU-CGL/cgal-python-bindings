@@ -32,7 +32,7 @@ py::list mk_xy_monotone_3_call_operator(const typename T::Make_xy_monotone_3& m,
 
 //
 void export_env_surface_data_traits_3(py::module_& m) {
-  using Egt = env3::Egt;
+  using Egt = cgalpy::env3::Egt;
   if (add_attr<Egt>(m, "Env_surface_data_traits_3")) return;
 
   using Mk_xy_monotone_3 = Egt::Make_xy_monotone_3;
@@ -41,10 +41,10 @@ void export_env_surface_data_traits_3(py::module_& m) {
     .def("__call__", &mk_xy_monotone_3_call_operator<Egt>)
     ;
 
-  using Base_egt = env3::Base_egt;
+  using Base_egt = cgalpy::env3::Base_egt;
   py::class_<Egt, Base_egt> traits_c(m, "Env_surface_data_traits_3");
   traits_c.def(py::init<>())
-    .def(py::init<env3::Base_egt>())
+    .def(py::init<cgalpy::env3::Base_egt>())
     .def("make_xy_monotone_3_object", &Egt::make_xy_monotone_3_object)
     ;
 

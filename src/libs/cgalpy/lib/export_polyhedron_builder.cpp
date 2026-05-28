@@ -10,13 +10,13 @@
 namespace py = nanobind;
 
 void export_polyhedron_builder(py::module_& m) {
-  using Mb = CGAL::Modifier_base<pol3::Halfedge_ds>;
+  using Mb = CGAL::Modifier_base<cgalpy::pol3::Halfedge_ds>;
   if (! add_attr<Mb>(m, "Modifier_base")) {
     py::class_<Mb>(m, "Modifier_base")
       ;
   }
 
-  using Pb = pol3::Polyhedron_builder;
+  using Pb = cgalpy::pol3::Polyhedron_builder;
   if (! add_attr<Pb>(m, "Polyhedron_builder")) {
     py::class_<Pb, Mb>(m, "Polyhedron_builder")
       .def(py::init<py::object>())

@@ -26,6 +26,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace nef3 {
 
 //!
@@ -43,10 +44,11 @@ convert_inner_shell_to_polyhedron(Nef_polyhedron_3& np,
 }
 
 }
+} // namespace cgalpy
 
 void export_nef_3(py::module_& m) {
-  using Pm = nef3::Polygonal_mesh;
-  using Np3 = nef3::Nef_polyhedron_3;
+  using Pm = cgalpy::nef3::Polygonal_mesh;
+  using Np3 = cgalpy::nef3::Nef_polyhedron_3;
   using Boundary = Np3::Boundary;
   using Content = Np3::Content;
   using Im = Np3::Intersection_mode;
@@ -102,9 +104,9 @@ void export_nef_3(py::module_& m) {
     np3_c.def(py::init<>())
       .def(py::init<Content>(), py::arg("content") = Content::EMPTY)
       .def(py::init<const Pm&>(), py::arg("pm"))
-      .def("volumes", &nef3::my_volumes, py::keep_alive<0, 1>())
+      .def("volumes", &cgalpy::nef3::my_volumes, py::keep_alive<0, 1>())
       .def("convert_inner_shell_to_polyhedron",
-           &nef3::convert_inner_shell_to_polyhedron)
+           &cgalpy::nef3::convert_inner_shell_to_polyhedron)
     ;
 
   }

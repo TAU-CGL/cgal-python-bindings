@@ -15,6 +15,7 @@
 #include "CGALPY/basic_viewer_config.hpp"
 #include "CGALPY/Graphics_scene_options_extended.hpp"
 
+namespace cgalpy {
 namespace bvr {
 
 using My_ds_params = Ds_params<CGALPY_BVR_DATA_STRUCTURE>;
@@ -30,5 +31,6 @@ using Graphics_scene_options_extended =
   Graphics_scene_options_extended<Ds, Vertex_descriptor, Edge_descriptor, Face_descriptor, Volume_descriptor>;
 
 }
+} // namespace cgalpy
 
 #endif

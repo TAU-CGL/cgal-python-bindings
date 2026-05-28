@@ -53,6 +53,7 @@
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
+namespace cgalpy {
 namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
@@ -355,14 +356,15 @@ auto is_needle_triangle_face(typename boost::graph_traits<TriangleMesh>::face_de
 
 // using Boolean_operation_type = COREFINEMENT::Boolean_operation_type;
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 // Export Polygon_mesh_processing
 void export_polygon_mesh_processing(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
-  // using Vid = pmp::Vertex_identifier;
-  // using Hid = pmp::Halfedge_identifier;
-  // using Fid = pmp::Face_identifier;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
+  // using Vid = cgalpy::pmp::Vertex_identifier;
+  // using Hid = cgalpy::pmp::Halfedge_identifier;
+  // using Fid = cgalpy::pmp::Face_identifier;
   using Polyline = std::vector<Kernel::Point_3>;
   using Np = CGAL::parameters::Default_named_parameters;
   namespace PMP = CGAL::Polygon_mesh_processing;
@@ -438,67 +440,67 @@ void export_polygon_mesh_processing(py::module_& m) {
   }
 #endif
 
-  m.def("degenerate_edges", &pmp::degenerate_edges_r<Pm>, py::arg("edges"), py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_edges", &pmp::degenerate_edges<Pm>, py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_faces", &pmp::degenerate_faces_r<Pm>, py::arg("faces"), py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_faces", &pmp::degenerate_faces<Pm>, py::arg("tm"), py::arg("np") = py::dict());
-  m.def("is_cap_triangle_face", &pmp::is_cap_triangle_face<Pm>,
+  m.def("degenerate_edges", &cgalpy::pmp::degenerate_edges_r<Pm>, py::arg("edges"), py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_edges", &cgalpy::pmp::degenerate_edges<Pm>, py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &cgalpy::pmp::degenerate_faces_r<Pm>, py::arg("faces"), py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &cgalpy::pmp::degenerate_faces<Pm>, py::arg("tm"), py::arg("np") = py::dict());
+  m.def("is_cap_triangle_face", &cgalpy::pmp::is_cap_triangle_face<Pm>,
         py::arg("f"), py::arg("tm"), py::arg("threshold"), py::arg("np") = py::dict());
-  m.def("is_degenerate_edge", &pmp::is_degenerate_edge<Pm>, py::arg("e"), py::arg("pm"), py::arg("np") = py::dict());
-  m.def("is_degenerate_triangle_face", &pmp::is_degenerate_triangle_face<Pm>,
+  m.def("is_degenerate_edge", &cgalpy::pmp::is_degenerate_edge<Pm>, py::arg("e"), py::arg("pm"), py::arg("np") = py::dict());
+  m.def("is_degenerate_triangle_face", &cgalpy::pmp::is_degenerate_triangle_face<Pm>,
         py::arg("f"), py::arg("tm"), py::arg("np") = py::dict());
-  m.def("is_needle_triangle_face", &pmp::is_needle_triangle_face<Pm>,
+  m.def("is_needle_triangle_face", &cgalpy::pmp::is_needle_triangle_face<Pm>,
         py::arg("f"), py::arg("tm"), py::arg("threshold"), py::arg("np") = py::dict());
 
   // other
-  m.def("add_bbox", &pmp::add_bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
-  m.def("bbox", &pmp::bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
-  m.def("border_halfedges", &pmp::border_halfedges<Pm>,
+  m.def("add_bbox", &cgalpy::pmp::add_bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("bbox", &cgalpy::pmp::bbox<Pm>, py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("border_halfedges", &cgalpy::pmp::border_halfedges<Pm>,
         py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("detect_corners_of_regions",
-        &pmp::detect_corners_of_regions<Pm, Face_size_map, Vertex_size_map>,
+        &cgalpy::pmp::detect_corners_of_regions<Pm, Face_size_map, Vertex_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("nb_regions"), py::arg("corner_id_map"),
         py::arg("np") = py::dict());
 #endif
 
-  m.def("edge_bbox", &pmp::edge_bbox<Pm>,
+  m.def("edge_bbox", &cgalpy::pmp::edge_bbox<Pm>,
         py::arg("ed"), py::arg("pmesh"), py::arg("np") = py::dict());
-  m.def("extract_boundary_cycles", &pmp::extract_boundary_cycles<Pm>,
+  m.def("extract_boundary_cycles", &cgalpy::pmp::extract_boundary_cycles<Pm>,
         py::arg("pmesh"));
-  m.def("face_bbox", &pmp::face_bbox<Pm>,
+  m.def("face_bbox", &cgalpy::pmp::face_bbox<Pm>,
         py::arg("f"), py::arg("pmesh"), py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("refine_mesh_at_isolevel",
-        &pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
+        &cgalpy::pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
         py::arg("pm"), py::arg("value_map"), py::arg("isovalue"), py::arg("np") = py::dict());
   m.def("region_growing_of_planes_on_faces",
-        &pmp::region_growing_of_planes_on_faces<Pm, Face_size_map>,
+        &cgalpy::pmp::region_growing_of_planes_on_faces<Pm, Face_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
 #endif
 
   // region growing only for sm
 
-  m.def("transform", &pmp::transform<Pm>, py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict());
-  m.def("triangle", &pmp::triangle<Pm>, py::arg("f"), py::arg("tmesh"), py::arg("np") = py::dict());
-  m.def("vertex_bbox", &pmp::vertex_bbox<Pm>, py::arg("vd"), py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("transform", &cgalpy::pmp::transform<Pm>, py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("triangle", &cgalpy::pmp::triangle<Pm>, py::arg("f"), py::arg("tmesh"), py::arg("np") = py::dict());
+  m.def("vertex_bbox", &cgalpy::pmp::vertex_bbox<Pm>, py::arg("vd"), py::arg("pmesh"), py::arg("np") = py::dict());
 
   // Custom sizing field
-  // m.def("set_at", &pmp::set_at);
-  // m.def("set_is_too_long", &pmp::set_is_too_long);
-  // m.def("set_is_too_short", &pmp::set_is_too_short);
-  // m.def("set_split_placement", &pmp::set_split_placement);
-  // m.def("set_register_split_vertex", &pmp::set_register_split_vertex);
+  // m.def("set_at", &cgalpy::pmp::set_at);
+  // m.def("set_is_too_long", &cgalpy::pmp::set_is_too_long);
+  // m.def("set_is_too_short", &cgalpy::pmp::set_is_too_short);
+  // m.def("set_split_placement", &cgalpy::pmp::set_split_placement);
+  // m.def("set_register_split_vertex", &cgalpy::pmp::set_register_split_vertex);
 
-  using Pe = pmp::Polyhedral_envelope<Pm, Kernel>;
+  using Pe = cgalpy::pmp::Polyhedral_envelope<Pm, Kernel>;
   py::class_<Pe>(m, "Polyhedral_envelope")
     .def(py::init<Pm&, double, const py::dict&>(),
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
     .def(py::init<const std::vector<Fd>&, Pm&, double, const py::dict&>(),
          py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
-    .def(py::init<const pmp::Point_3_vec&, const std::vector<pmp::Size_t_vec>&, double, const py::dict&>(),
+    .def(py::init<const cgalpy::pmp::Point_3_vec&, const std::vector<cgalpy::pmp::Size_t_vec>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
          py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
     .def("is_empty", &Pe::is_empty)
@@ -513,18 +515,18 @@ void export_polygon_mesh_processing(py::module_& m) {
     // TODO: inside triangle range
     ;
 
-  // using Csf = pmp::Custom_sizing_field<Pm>;
+  // using Csf = cgalpy::pmp::Custom_sizing_field<Pm>;
   // py::class_<Csf>(m, "Custom_sizing_field")
   //   .def(py::init<>())
   //   ;
 
 #if ((CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH) && \
      (CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS))
-  using Face_normal_map = pol3::Internal_face_plane_3_map<Pm>;
+  using Face_normal_map = cgalpy::pol3::Internal_face_plane_3_map<Pm>;
 #else
   using Face_normal_map = Face_vector_map;
 #endif
 
-  m.def("merge_coplanar_facets", &pmp::merge_coplanar_facets<Pm, Face_normal_map>,
+  m.def("merge_coplanar_facets", &cgalpy::pmp::merge_coplanar_facets<Pm, Face_normal_map>,
         py::arg("pmesh"), py::arg("face_normals"), py::arg("np") = py::dict());
 }

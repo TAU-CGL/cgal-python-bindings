@@ -15,6 +15,7 @@ namespace py = nanobind;
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/triangulation_d_types.hpp"
 
+namespace cgalpy {
 namespace trid {
 
 //!
@@ -74,11 +75,12 @@ py::object vertices(const Full_cell& fc)
 { return make_iterator(fc.vertices_begin(), fc.vertices_end()); }
 
 }
+} // namespace cgalpy
 
 //!
-void export_trid_full_cell(py::class_<trid::Triangulation_d>& tri_c) {
-  using Fc = trid::Full_cell;
-  using Vertex = trid::Vertex;
+void export_trid_full_cell(py::class_<cgalpy::trid::Triangulation_d>& tri_c) {
+  using Fc = cgalpy::trid::Full_cell;
+  using Vertex = cgalpy::trid::Vertex;
 
   if (add_attr<Fc>(tri_c, "Full_cell")) return;
 
@@ -89,23 +91,23 @@ void export_trid_full_cell(py::class_<trid::Triangulation_d>& tri_c) {
   fc_c.def(py::init<int>())
     .def(py::init<const Fc&>())
 
-    .def("has_neighbor", &trid::has_neighbor)
-    .def("has_neighbor_get_index", &trid::has_neighbor_get_index)
-    .def("has_vertex", &trid::has_vertex)
-    .def("has_vertex_get_index", &trid::has_vertex_get_index)
-    .def("index", &trid::index1)
-    .def("index", &trid::index2)
+    .def("has_neighbor", &cgalpy::trid::has_neighbor)
+    .def("has_neighbor_get_index", &cgalpy::trid::has_neighbor_get_index)
+    .def("has_vertex", &cgalpy::trid::has_vertex)
+    .def("has_vertex_get_index", &cgalpy::trid::has_vertex_get_index)
+    .def("index", &cgalpy::trid::index1)
+    .def("index", &cgalpy::trid::index2)
     .def("maximal_dimension", &Fc::maximal_dimension)
     .def("mirror_index", py::overload_cast<int>(&Fc::mirror_index, py::const_))
-    .def("mirror_vertex", &trid::mirror_vertex, ri)
-    .def("neighbor", &trid::neighbor, ri)
+    .def("mirror_vertex", &cgalpy::trid::mirror_vertex, ri)
+    .def("neighbor", &cgalpy::trid::neighbor, ri)
     .def("set_mirror_index", &Fc::set_mirror_index)
-    .def("set_neighbor", &trid::set_neighbor)
-    .def("set_vertex", &trid::set_vertex)
+    .def("set_neighbor", &cgalpy::trid::set_neighbor)
+    .def("set_vertex", &cgalpy::trid::set_vertex)
     .def("swap_vertices", &Fc::swap_vertices)
-    .def("vertex", &trid::vertex, ri)
+    .def("vertex", &cgalpy::trid::vertex, ri)
     .def("is_valid", &Fc::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
-    .def("vertices", &trid::vertices, py::keep_alive<0, 1>())
+    .def("vertices", &cgalpy::trid::vertices, py::keep_alive<0, 1>())
 
 #ifdef CGALPY_TRID_FULL_CELL_WITH_DATA
     .def("data", py::overload_cast<>(&Fc::data, py::const_), ri)

@@ -19,6 +19,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace st {
 
 //!
@@ -89,17 +90,18 @@ void spatial_sort_d_2(py::list& points) {
 #endif
 
 }
+} // namespace cgalpy
 
 void export_spatial_sorting(py::module_& m) {
-  m.def("spatial_sort", &st::spatial_sort_2_1, py::arg("points"), py::arg("kernel"),
+  m.def("spatial_sort", &cgalpy::st::spatial_sort_2_1, py::arg("points"), py::arg("kernel"),
         py::arg("threshold_hilbert") = 0, py::arg("threshold_multiscale") = 0, py::arg("ratio") = 0.0);
-  m.def("spatial_sort", &st::spatial_sort_2_2, py::arg("points"));
-  m.def("spatial_sort", &st::spatial_sort_3_1, py::arg("points"), py::arg("kernel"),
+  m.def("spatial_sort", &cgalpy::st::spatial_sort_2_2, py::arg("points"));
+  m.def("spatial_sort", &cgalpy::st::spatial_sort_3_1, py::arg("points"), py::arg("kernel"),
         py::arg("threshold_hilbert") = 0, py::arg("threshold_multiscale") = 0, py::arg("ratio") = 0.0);
-  m.def("spatial_sort", &st::spatial_sort_3_2, py::arg("points"));
+  m.def("spatial_sort", &cgalpy::st::spatial_sort_3_2, py::arg("points"));
 #if defined(CGALPY_KERNEL_BINDINGS)
-  m.def("spatial_sort", &st::spatial_sort_d_1, py::arg("points"), py::arg("kernel"),
+  m.def("spatial_sort", &cgalpy::st::spatial_sort_d_1, py::arg("points"), py::arg("kernel"),
         py::arg("threshold_hilbert") = 0, py::arg("threshold_multiscale") = 0, py::arg("ratio") = 0.0);
-  m.def("spatial_sort", &st::spatial_sort_d_2, py::arg("points"));
+  m.def("spatial_sort", &cgalpy::st::spatial_sort_d_2, py::arg("points"));
 #endif
 }

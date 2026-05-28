@@ -20,7 +20,7 @@
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace aos2_approximate_doc = cgalpy::docstrings::Arrangement_on_surface_2;
+namespace aos2_approximate_doc = cgalpy::aos2::docstrings;
 
 // Not all traits classes support the type T::Approximate_point_2 (and the
 // operator:

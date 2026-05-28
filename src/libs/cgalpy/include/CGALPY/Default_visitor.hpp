@@ -9,12 +9,14 @@ namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace COREFINEMENT = PMP::Corefinement;
 
+namespace cgalpy {
 namespace pmp {
 
 template <typename PolygonalMesh>
 struct Default_visitor : public COREFINEMENT::Default_visitor<PolygonalMesh> {
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif // CGALPY_DEFAULT_VISITOR_HPP

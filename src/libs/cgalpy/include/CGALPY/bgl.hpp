@@ -15,6 +15,7 @@
 
 #include <boost/graph/graph_traits.hpp>
 
+namespace cgalpy {
 namespace bgl {
 
 //!
@@ -233,5 +234,6 @@ auto set_target(typename boost::graph_traits<PolygonMesh>::halfedge_descriptor h
 { set_target(h, v, p); }
 
 }
+} // namespace cgalpy
 
 #endif

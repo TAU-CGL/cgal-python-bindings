@@ -15,6 +15,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace bgl {
 
 template <typename DynamicPropertyMapTag>
@@ -40,6 +41,7 @@ void register_dynamic_property_map_tags(py::module_& m, const std::string& prop_
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_bgl(py::module_& m) {
@@ -93,15 +95,15 @@ void export_bgl(py::module_& m) {
   else py::enum_<face_external_index_t>(m, "face_external_index_t").
          value("face_external_index", CGAL::face_external_index).export_values();
 
-  bgl::register_dynamic_property_map_tags<bool>(m, "bool");
-  bgl::register_dynamic_property_map_tags<std::size_t>(m, "size_t");
-  bgl::register_dynamic_property_map_tags<int>(m, "int");
-  bgl::register_dynamic_property_map_tags<double>(m, "double");
-  bgl::register_dynamic_property_map_tags<Point_3>(m, "point_3");
-  bgl::register_dynamic_property_map_tags<Vector_3>(m, "vector_3");
-  bgl::register_dynamic_property_map_tags<CGAL::IO::Color>(m, "color");
-  bgl::register_dynamic_property_map_tags<py::tuple>(m, "tuple");
-  bgl::register_dynamic_property_map_tags<py::set>(m, "set");
+  cgalpy::bgl::register_dynamic_property_map_tags<bool>(m, "bool");
+  cgalpy::bgl::register_dynamic_property_map_tags<std::size_t>(m, "size_t");
+  cgalpy::bgl::register_dynamic_property_map_tags<int>(m, "int");
+  cgalpy::bgl::register_dynamic_property_map_tags<double>(m, "double");
+  cgalpy::bgl::register_dynamic_property_map_tags<Point_3>(m, "point_3");
+  cgalpy::bgl::register_dynamic_property_map_tags<Vector_3>(m, "vector_3");
+  cgalpy::bgl::register_dynamic_property_map_tags<CGAL::IO::Color>(m, "color");
+  cgalpy::bgl::register_dynamic_property_map_tags<py::tuple>(m, "tuple");
+  cgalpy::bgl::register_dynamic_property_map_tags<py::set>(m, "set");
 
-  if constexpr (! std::is_same<double, FT>::value) bgl::register_dynamic_property_map_tags<FT>(m, "FT");
+  if constexpr (! std::is_same<double, FT>::value) cgalpy::bgl::register_dynamic_property_map_tags<FT>(m, "FT");
 }

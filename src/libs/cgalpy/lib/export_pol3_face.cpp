@@ -16,8 +16,9 @@
 #include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;
-namespace pol3_doc = cgalpy::docstrings::Polyhedron;
+namespace pol3_doc = cgalpy::pol3::docstrings;
 
+namespace cgalpy {
 namespace pol3 {
 
 const Halfedge& face_halfedge(const Face& f) { return (*(f.halfedge())); }
@@ -35,10 +36,11 @@ auto halfedges_around_facet_iterator(const Face& f)
 { return make_iterator_from_circulator(f.facet_begin()); }
 
 }
+} // namespace cgalpy
 
 // Export Polyhedron Face
-void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c) {
-  using Prn = pol3::Polyhedron_3;
+void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
+  using Prn = cgalpy::pol3::Polyhedron_3;
   using Face = Prn::Face;
   using Plane_3 = Prn::Plane_3;
   constexpr auto ri(py::rv_policy::reference_internal);
@@ -48,14 +50,14 @@ void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c) {
   py::class_<Face> face_c(prn_c, "Face", pol3_doc::Polyhedron_3_Facet_class);
   face_c.def(py::init<>(), pol3_doc::Polyhedron_3_Facet_Facet)
     .def("facet_degree", [](const Face& f) { return f.facet_degree(); }, pol3_doc::Polyhedron_3_Facet_facet_degree)
-    .def("halfedge", &pol3::face_halfedge, ri, pol3_doc::Polyhedron_3_Facet_halfedge)
+    .def("halfedge", &cgalpy::pol3::face_halfedge, ri, pol3_doc::Polyhedron_3_Facet_halfedge)
     .def("is_triangle", [](const Face& f) { return f.is_triangle(); }, pol3_doc::Polyhedron_3_Facet_is_triangle)
     .def("is_quad", [](const Face& f) { return f.is_quad(); }, pol3_doc::Polyhedron_3_Facet_is_quad)
-    .def("set_halfedge", pol3::face_set_halfedge, py::arg("halfedge"), pol3_doc::Polyhedron_3_Facet_set_halfedge)
-    .def("halfedges", &pol3::halfedges_around_facet_iterator, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_Facet_facet_begin)
+    .def("set_halfedge", cgalpy::pol3::face_set_halfedge, py::arg("halfedge"), pol3_doc::Polyhedron_3_Facet_set_halfedge)
+    .def("halfedges", &cgalpy::pol3::halfedges_around_facet_iterator, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_Facet_facet_begin)
 
     //! Wrap the function that returns the real circulator
-    .def("halfedges_circulator", &pol3::halfedges_around_facet_circulator, pol3_doc::Polyhedron_3_Facet_facet_begin)
+    .def("halfedges_circulator", &cgalpy::pol3::halfedges_around_facet_circulator, pol3_doc::Polyhedron_3_Facet_facet_begin)
 
     // if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
     // plane is actually the normal and is of type Kernel::Vector_3
@@ -78,16 +80,16 @@ void export_pol3_face(py::class_<pol3::Polyhedron_3>& prn_c) {
 #endif
     ;
 
-  using Hafcc = pol3::Halfedge_around_facet_const_circulator;
+  using Hafcc = cgalpy::pol3::Halfedge_around_facet_const_circulator;
   add_iterator_from_circulator<Hafcc>("Halfedge_around_facet_iterator", face_c);
 
   //! Wrap a circulator
   export_circulator<Hafcc>(face_c, "Halfedge_around_facet_circulator");
 
   // Until 'consteval' is supported (C++20), we cannot assume that
-  // pol3::face_with_id() is evaluated at compiletime
+  // cgalpy::pol3::face_with_id() is evaluated at compiletime
 #if defined(CGALPY_POL3_FACE_WITH_ID)
-  if constexpr(pol3::face_with_id())
+  if constexpr(cgalpy::pol3::face_with_id())
     face_c.def("id", [](const Face& f){ return f.id(); });
 #endif
 }

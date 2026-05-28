@@ -23,6 +23,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri2 {
 
 //!
@@ -67,7 +68,8 @@ py::list vertices(py::handle self) {
   return res;
 }
 
-} // End of namespace tri2
+}
+} // namespace cgalpy // End of namespace tri2
 
 //!
 void export_triangulation_2(py::module_& m) {
@@ -82,7 +84,7 @@ void export_triangulation_2(py::module_& m) {
       ;
   }
 
-  using Tds = tri2::Triangulation_data_structure_2;
+  using Tds = cgalpy::tri2::Triangulation_data_structure_2;
   if (add_attr<Tds>(m, "Triangulation_data_structure_2")) return;
 
   py::class_<Tds, Tricc> tds_c(m, "Triangulation_data_structure_2");
@@ -92,14 +94,14 @@ void export_triangulation_2(py::module_& m) {
     .def("clear", &Tds::clear, "Delete all faces and all finite vertices\n")
     // .def("copy_tds", &copy_tds),
     // .def("copy_tds", &copy_tds),
-    .def("create_face", &tri2::create_face1, ri)
-    .def("create_face", &tri2::create_face2, ri)
-    .def("create_face", &tri2::create_face3, ri)
-    .def("create_face", &tri2::create_face4, ri)
-    .def("create_face", &tri2::create_face5, ri)
-    .def("create_face", &tri2::create_face6, ri)
-    .def("create_vertex", &tri2::create_vertex, ri)
-    .def("degree", &tri2::degree, py::arg("v"),
+    .def("create_face", &cgalpy::tri2::create_face1, ri)
+    .def("create_face", &cgalpy::tri2::create_face2, ri)
+    .def("create_face", &cgalpy::tri2::create_face3, ri)
+    .def("create_face", &cgalpy::tri2::create_face4, ri)
+    .def("create_face", &cgalpy::tri2::create_face5, ri)
+    .def("create_face", &cgalpy::tri2::create_face6, ri)
+    .def("create_vertex", &cgalpy::tri2::create_vertex, ri)
+    .def("degree", &cgalpy::tri2::degree, py::arg("v"),
          "Obtain the degree of a vertex\n"
          "The infinite vertex is counted"
          "Parameters:\n"
@@ -163,8 +165,8 @@ void export_triangulation_2(py::module_& m) {
     // .def("swap", &swap),
 
     // Non concept
-    .def("faces", &tri2::faces)
-    .def("vertices", &tri2::vertices)
+    .def("faces", &cgalpy::tri2::faces)
+    .def("vertices", &cgalpy::tri2::vertices)
     ;
 
     // operator<<

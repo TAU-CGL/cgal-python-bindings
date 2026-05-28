@@ -9,6 +9,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pmp {
 
 template <typename PolygonMesh>
@@ -24,6 +25,7 @@ struct Adaptive_sizing_field : public CGAL::Polygon_mesh_processing::Adaptive_si
     (tol, { std::get<0>(edge_len_min_max), std::get<1>(edge_len_min_max) }, face_range, pmesh) {};
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif

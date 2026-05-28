@@ -22,6 +22,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace trid {
 
 using Traits = Kernel_d;
@@ -96,6 +97,7 @@ using Periodic_tag = Triangulation_d::Periodic_tag;
 
 using Rotor = Triangulation_d::Rotor;
 
-} // End of namespace trid
+}
+} // namespace cgalpy // End of namespace trid
 
 #endif

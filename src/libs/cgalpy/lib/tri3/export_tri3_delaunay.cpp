@@ -20,6 +20,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri3 {
 
 //!
@@ -144,13 +145,14 @@ Vertex& nearest_vertex2(const Delaunay_triangulation_3& tri, const Point& p,
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_tri3_delaunay(py::module_& m) {
-  using Tri = tri3::Delaunay_triangulation_3;
-  using Btri = tri3::Triangulation_3;
-  using Pnt = tri3::Point;
-  using Facet = tri3::Facet;
+  using Tri = cgalpy::tri3::Delaunay_triangulation_3;
+  using Btri = cgalpy::tri3::Triangulation_3;
+  using Pnt = cgalpy::tri3::Point;
+  using Facet = cgalpy::tri3::Facet;
   CGAL::Bounded_side(Tri::*side_of_circle1)(const Facet&, const Pnt&, bool) const =
     &Tri::side_of_circle;
 
@@ -161,35 +163,35 @@ void export_tri3_delaunay(py::module_& m) {
   py::class_<Tri, Btri> tri_c(m, "Delaunay_triangulation_3");
 
   tri_c.def(py::init<>())
-    .def(py::init<const tri3::Traits&>())
-    .def("__init__", &tri3::dt3_init)
-    .def("insert", &tri3::insert_del1,
+    .def(py::init<const cgalpy::tri3::Traits&>())
+    .def("__init__", &cgalpy::tri3::dt3_init)
+    .def("insert", &cgalpy::tri3::insert_del1,
          py::arg("point"), py::arg("lock_zone") = false, ri)
-    .def("insert", &tri3::insert_del2,
+    .def("insert", &cgalpy::tri3::insert_del2,
          py::arg("point"), py::arg("start"), py::arg("lock_zone") = false, ri)
-    .def("insert", &tri3::insert_del3,
+    .def("insert", &cgalpy::tri3::insert_del3,
          py::arg("point"), py::arg("hint"), py::arg("lock_zone") = false, ri)
-    .def("insert", &tri3::insert_del4,
+    .def("insert", &cgalpy::tri3::insert_del4,
          py::arg("point"), py::arg("lt"), py::arg("c"), py::arg("li"),
          py::arg("lj"), py::arg("lock_zone") = false, ri)
 
     .def("side_of_circle", side_of_circle1)
-    .def("side_of_circle", tri3::side_of_circle2,
+    .def("side_of_circle", cgalpy::tri3::side_of_circle2,
          py::arg("c"), py::arg("i"), py::arg("p"), py::arg("perturb") = false)
-    .def("side_of_sphere", &tri3::side_of_sphere)
-    .def("nearest_vertex", &tri3::nearest_vertex1)
-    .def("nearest_vertex", &tri3::nearest_vertex2)
+    .def("side_of_sphere", &cgalpy::tri3::side_of_sphere)
+    .def("nearest_vertex", &cgalpy::tri3::nearest_vertex1)
+    .def("nearest_vertex", &cgalpy::tri3::nearest_vertex2)
     .def("nearest_vertex_in_cell", &Tri::nearest_vertex_in_cell)
 
     // Displacement
-    // .def("move_if_no_collision", &tri3::move_if_no_collision)
-    // .def("move", &tri3::move)
+    // .def("move_if_no_collision", &cgalpy::tri3::move_if_no_collision)
+    // .def("move", &cgalpy::tri3::move)
 
     // Removal
-    // .def("remove", &tri3::remove1)
-    // .def("remove", &tri3::remove2)
+    // .def("remove", &cgalpy::tri3::remove1)
+    // .def("remove", &cgalpy::tri3::remove2)
 
-    .def("find_conflicts", &tri3::find_conflicts, ri)
-    .def("find_conflicts_if", &tri3::find_conflicts_ifs, ri)
+    .def("find_conflicts", &cgalpy::tri3::find_conflicts, ri)
+    .def("find_conflicts_if", &cgalpy::tri3::find_conflicts_ifs, ri)
     ;
 }

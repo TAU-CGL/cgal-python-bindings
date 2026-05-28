@@ -23,8 +23,9 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -108,10 +109,11 @@ auto interpolated_corrected_curvatures_v(typename boost::graph_traits<PolygonMes
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_pmp_corrected_curvature_computation(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
   py::class_<Pcad>(m, "Principal_curvatures_and_directions")
@@ -129,11 +131,11 @@ void export_pmp_corrected_curvature_computation(py::module_& m) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   // Corrected Curvature Computation
-  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures<Pm>,
+  m.def("interpolated_corrected_curvatures", &cgalpy::pmp::interpolated_corrected_curvatures<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_interpolated_corrected_curvatures);
 
-  m.def("interpolated_corrected_curvatures", &pmp::interpolated_corrected_curvatures_v<Pm>,
+  m.def("interpolated_corrected_curvatures", &cgalpy::pmp::interpolated_corrected_curvatures_v<Pm>,
         py::arg("v"), py::arg("pmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_interpolated_corrected_curvatures_1);
 #endif

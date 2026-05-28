@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <memory>
+#include <vector>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/shared_ptr.h>
@@ -41,9 +42,20 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace sn2 {
 
 using Sss2 = std::shared_ptr<Straight_skeleton_2>;
+
+template <typename T>
+std::vector<T> py_list_to_vector(const py::list& values) {
+  std::vector<T> result;
+  result.reserve(py::len(values));
+  for (std::size_t i = 0; i < py::len(values); ++i) {
+    result.emplace_back(py::cast<T>(values[i]));
+  }
+  return result;
+}
 
 #if defined(CGALPY_POLYGON_2_BINDINGS)
 using Pgn = pol2::Polygon_2;
@@ -85,9 +97,8 @@ Sss2 create_interior_straight_skeleton_2_22(const py::list& points, const py::li
 /*! creates a straight skeleton in the limited exterior of a polygon defined by its outer boundary.
  */
 Sss2 create_exterior_straight_skeleton_2_11(const FT& max_offset, const py::list& points, const Kernel& kernel) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
-  auto ss = CGAL::create_exterior_straight_skeleton_2(max_offset, points_begin, points_end, kernel);
+  auto points_vec = py_list_to_vector<Point_2>(points);
+  auto ss = CGAL::create_exterior_straight_skeleton_2(max_offset, points_vec.begin(), points_vec.end(), kernel);
   if (! ss) throw std::runtime_error("Failed to create straight skeleton");
   return ss;
 }
@@ -147,12 +158,10 @@ Sss2 create_interior_weighted_straight_skeleton_2_22(const py::list& points, con
  */
 Sss2 create_exterior_weighted_straight_skeleton_2_11(const FT& max_offset, const py::list& points,
                                                      const py::list& weights, const Kernel& kernel) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
-  auto weights_begin = stl_forward_iterator<FT>(weights, true);
-  auto weights_end = stl_forward_iterator<FT>(weights, false);
-  auto ss = CGAL::create_exterior_weighted_straight_skeleton_2(max_offset, points_begin, points_end,
-                                                               weights_begin, weights_end, kernel);
+  auto points_vec = py_list_to_vector<Point_2>(points);
+  auto weights_vec = py_list_to_vector<FT>(weights);
+  auto ss = CGAL::create_exterior_weighted_straight_skeleton_2(max_offset, points_vec.begin(), points_vec.end(),
+                                                               weights_vec.begin(), weights_vec.end(), kernel);
   if (! ss) throw std::runtime_error("Failed to create weighted straight skeleton");
   return ss;
 }
@@ -215,24 +224,24 @@ create_interior_weighted_skeleton_and_offset_polygons_2_12(const FT& offset, con
 /*!
  */
 FT compute_outer_frame_margin(const py::list& points, const FT& offset) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
-  auto res = CGAL::compute_outer_frame_margin(points_begin, points_end, offset);
+  auto points_vec = py_list_to_vector<Point_2>(points);
+  auto res = CGAL::compute_outer_frame_margin(points_vec.begin(), points_vec.end(), offset);
   if (! res) std::overflow_error("Cannot approximate");
   return *res;
 }
 
 }
+} // namespace cgalpy
 
 void export_straight_skeleton_2(py::module_& m) {
-  using Sn = sn2::Straight_skeleton_2;
-  using V = sn2::Vertex;
-  using H = sn2::Halfedge;
-  using F = sn2::Face;
+  using Sn = cgalpy::sn2::Straight_skeleton_2;
+  using V = cgalpy::sn2::Vertex;
+  using H = cgalpy::sn2::Halfedge;
+  using F = cgalpy::sn2::Face;
 
 #if defined(CGALPY_POLYGON_2_BINDINGS)
-  using Pgn = pol2::Polygon_2;
-  using Pwh = pol2::Polygon_with_holes_2;
+  using Pgn = cgalpy::pol2::Polygon_2;
+  using Pwh = cgalpy::pol2::Polygon_with_holes_2;
 #endif
 
   if (! add_attr<Sn>(m, "Straight_skeleton_2")) {
@@ -241,13 +250,13 @@ void export_straight_skeleton_2(py::module_& m) {
   }
 
   // Interior
-  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_11,
+  m.def("create_interior_straight_skeleton_2", &cgalpy::sn2::create_interior_straight_skeleton_2_11,
         py::arg("points"), py::arg("kernel"));
-  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_12,
+  m.def("create_interior_straight_skeleton_2", &cgalpy::sn2::create_interior_straight_skeleton_2_12,
         py::arg("points"));
-  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_21,
+  m.def("create_interior_straight_skeleton_2", &cgalpy::sn2::create_interior_straight_skeleton_2_21,
         py::arg("points"), py::arg("holes"), py::arg("kernel"));
-  m.def("create_interior_straight_skeleton_2", &sn2::create_interior_straight_skeleton_2_22,
+  m.def("create_interior_straight_skeleton_2", &cgalpy::sn2::create_interior_straight_skeleton_2_22,
         py::arg("points"), py::arg("holes"));
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_interior_straight_skeleton_2",
@@ -257,18 +266,18 @@ void export_straight_skeleton_2(py::module_& m) {
         [](const Pgn& png) { return CGAL::create_interior_straight_skeleton_2(png); },
         py::arg("polygon"));
   m.def("create_interior_straight_skeleton_2",
-        [](const pol2::Polygon_with_holes_2& pwh, const Kernel& kernel)
+        [](const cgalpy::pol2::Polygon_with_holes_2& pwh, const Kernel& kernel)
         { return CGAL::create_interior_straight_skeleton_2(pwh, kernel); },
         py::arg("polygon_with_holes"), py::arg("kernel"));
   m.def("create_interior_straight_skeleton_2",
-        [](const pol2::Polygon_with_holes_2& pwh) { return CGAL::create_interior_straight_skeleton_2(pwh); },
+        [](const cgalpy::pol2::Polygon_with_holes_2& pwh) { return CGAL::create_interior_straight_skeleton_2(pwh); },
         py::arg("polygon_with_holes"));
 #endif
 
   // Exterior
-  m.def("create_exterior_straight_skeleton_2", &sn2::create_exterior_straight_skeleton_2_11,
+  m.def("create_exterior_straight_skeleton_2", &cgalpy::sn2::create_exterior_straight_skeleton_2_11,
         py::arg("max_offset"), py::arg("points"), py::arg("kernel"));
-  m.def("create_exterior_straight_skeleton_2", &sn2::create_exterior_straight_skeleton_2_12,
+  m.def("create_exterior_straight_skeleton_2", &cgalpy::sn2::create_exterior_straight_skeleton_2_12,
         py::arg("max_offset"), py::arg("points"));
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_exterior_straight_skeleton_2",
@@ -291,13 +300,13 @@ void export_straight_skeleton_2(py::module_& m) {
   // Weighted
 
   // Interior weigheed
-  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_11,
+  m.def("create_interior_weighted_straight_skeleton_2", &cgalpy::sn2::create_interior_weighted_straight_skeleton_2_11,
         py::arg("points"), py::arg("weights"), py::arg("kernel"));
-  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_12,
+  m.def("create_interior_weighted_straight_skeleton_2", &cgalpy::sn2::create_interior_weighted_straight_skeleton_2_12,
         py::arg("points"), py::arg("weights"));
-  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_21,
+  m.def("create_interior_weighted_straight_skeleton_2", &cgalpy::sn2::create_interior_weighted_straight_skeleton_2_21,
         py::arg("points"), py::arg("holes"), py::arg("outer_weights"), py::arg("hole_weights"), py::arg("kernel"));
-  m.def("create_interior_weighted_straight_skeleton_2", &sn2::create_interior_weighted_straight_skeleton_2_22,
+  m.def("create_interior_weighted_straight_skeleton_2", &cgalpy::sn2::create_interior_weighted_straight_skeleton_2_22,
         py::arg("points"), py::arg("holes"), py::arg("outer_weights"), py::arg("hole_weights"));
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_interior_weighted_straight_skeleton_2",
@@ -314,19 +323,19 @@ void export_straight_skeleton_2(py::module_& m) {
         { return CGAL::create_interior_weighted_straight_skeleton_2(png, weights); },
         py::arg("polygon"), py::arg("weights"));
   m.def("create_interior_weighted_straight_skeleton_2",
-        [](const pol2::Polygon_with_holes_2& pwh, const std::vector<std::vector<FT>>& weights, const Kernel& kernel)
+        [](const cgalpy::pol2::Polygon_with_holes_2& pwh, const std::vector<std::vector<FT>>& weights, const Kernel& kernel)
         { return CGAL::create_interior_weighted_straight_skeleton_2(pwh, weights, kernel); },
         py::arg("polygon_with_holes"), py::arg("weights"), py::arg("kernel"));
   m.def("create_interior_weighted_straight_skeleton_2",
-        [](const pol2::Polygon_with_holes_2& pwh, const std::vector<std::vector<FT>>& weights)
+        [](const cgalpy::pol2::Polygon_with_holes_2& pwh, const std::vector<std::vector<FT>>& weights)
         { return CGAL::create_interior_weighted_straight_skeleton_2(pwh, weights); },
         py::arg("polygon_with_holes"), py::arg("weights"));
 #endif
 
   // Exterior weigheed
-  m.def("create_exterior_weighted_straight_skeleton_2", &sn2::create_exterior_weighted_straight_skeleton_2_11,
+  m.def("create_exterior_weighted_straight_skeleton_2", &cgalpy::sn2::create_exterior_weighted_straight_skeleton_2_11,
         py::arg("max_offset"), py::arg("points"), py::arg("weights"), py::arg("kernel"));
-  m.def("create_exterior_weighted_straight_skeleton_2", &sn2::create_exterior_weighted_straight_skeleton_2_12,
+  m.def("create_exterior_weighted_straight_skeleton_2", &cgalpy::sn2::create_exterior_weighted_straight_skeleton_2_12,
         py::arg("max_offset"), py::arg("points"), py::arg("weights"));
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_exterior_weighted_straight_skeleton_2",
@@ -355,11 +364,11 @@ void export_straight_skeleton_2(py::module_& m) {
   // Offset
 #if defined(CGALPY_POLYGON_2_BINDINGS)
   m.def("create_offset_polygons_2",
-        [](const FT& offset, const sn2::Straight_skeleton_2& skeleton, const Kernel& kernel)
+        [](const FT& offset, const cgalpy::sn2::Straight_skeleton_2& skeleton, const Kernel& kernel)
         { return CGAL::create_offset_polygons_2<Pgn, FT, Sn, Kernel>(offset, skeleton, kernel); },
         py::arg("offset"), py::arg("skeleton"), py::arg("kernel"));
   m.def("create_offset_polygons_2",
-        [](const FT& offset, const sn2::Straight_skeleton_2& skeleton)
+        [](const FT& offset, const cgalpy::sn2::Straight_skeleton_2& skeleton)
         { return CGAL::create_offset_polygons_2<Pgn, FT, Sn, Kernel>(offset, skeleton); },
         py::arg("offset"), py::arg("skeleton"));
 #endif
@@ -382,9 +391,9 @@ void export_straight_skeleton_2(py::module_& m) {
         [](const FT& offset, const Pwh& pwh)
         { return CGAL::create_interior_skeleton_and_offset_polygons_2(offset, pwh); },
         py::arg("offset"), py::arg("polygon_with_holes"));
-  m.def("create_interior_skeleton_and_offset_polygons_2_11", &sn2::create_interior_skeleton_and_offset_polygons_2_11,
+  m.def("create_interior_skeleton_and_offset_polygons_2_11", &cgalpy::sn2::create_interior_skeleton_and_offset_polygons_2_11,
         py::arg("offset"), py::arg("polygon"), py::arg("holes"), py::arg("kernel"));
-  m.def("create_interior_skeleton_and_offset_polygons_2_12", &sn2::create_interior_skeleton_and_offset_polygons_2_12,
+  m.def("create_interior_skeleton_and_offset_polygons_2_12", &cgalpy::sn2::create_interior_skeleton_and_offset_polygons_2_12,
         py::arg("offset"), py::arg("polygon"), py::arg("holes"));
   m.def("create_interior_skeleton_and_offset_polygons_with_holes_2",
         [](const FT& offset, const Pgn& pgn, const Kernel& kernel)
@@ -466,11 +475,11 @@ void export_straight_skeleton_2(py::module_& m) {
         { return CGAL::create_interior_weighted_skeleton_and_offset_polygons_2(offset, pwh, weights); },
         py::arg("offset"), py::arg("polygon_with_holes"), py::arg("weights"));
   m.def("create_interior_weighted_skeleton_and_offset_polygons_2_11",
-        &sn2::create_interior_weighted_skeleton_and_offset_polygons_2_11,
+        &cgalpy::sn2::create_interior_weighted_skeleton_and_offset_polygons_2_11,
         py::arg("offset"), py::arg("polygon"), py::arg("holes"), py::arg("outer_weights"), py::arg("hole_weights"),
         py::arg("kernel"));
   m.def("create_interior_weighted_skeleton_and_offset_polygons_2_12",
-        &sn2::create_interior_weighted_skeleton_and_offset_polygons_2_12,
+        &cgalpy::sn2::create_interior_weighted_skeleton_and_offset_polygons_2_12,
         py::arg("offset"), py::arg("polygon"), py::arg("holes"), py::arg("outer_weights"), py::arg("hole_weights"));
   m.def("create_interior_weighted_skeleton_and_offset_polygons_with_holes_2",
         [](const FT& offset, const Pgn& pgn,
@@ -542,7 +551,7 @@ void export_straight_skeleton_2(py::module_& m) {
   // Auxiliary
   // arrange_offset_polygons_2
 
-  m.def("compute_outer_frame_margin", sn2::compute_outer_frame_margin,
+  m.def("compute_outer_frame_margin", cgalpy::sn2::compute_outer_frame_margin,
         py::arg("points"), py::arg("ft"));
 
   // convert_straight_skeleton_2
@@ -566,7 +575,7 @@ void export_straight_skeleton_2(py::module_& m) {
 
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
   m.def("draw",
-        [](const Sn& sn, const bvr::Graphics_scene_options& gso, const char* title) { CGAL::draw(sn, gso, title); },
+        [](const Sn& sn, const cgalpy::bvr::Graphics_scene_options& gso, const char* title) { CGAL::draw(sn, gso, title); },
         py::arg("skeleton"), py::arg("options"), py::arg("title"));
 #endif
 #endif

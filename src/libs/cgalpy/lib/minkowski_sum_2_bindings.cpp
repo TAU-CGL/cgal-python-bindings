@@ -23,8 +23,9 @@
 #include "cgalpy/Ms2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace ms2_doc = cgalpy::docstrings::Minkowski_sum_2;
+namespace ms2_doc = cgalpy::ms2::docstrings;
 
+namespace cgalpy {
 namespace ms2 {
 
 #if CGAL_VERSION_NR > 1050500000
@@ -142,81 +143,82 @@ template <typename Arg, typename ... Types> struct Wrapper_two_strategies {
 };
 
 }
+} // namespace cgalpy
 
 void export_minkowski_sum_2(py::module_& m) {
-  using Pgn = ms2::Polygon_2;
-  using Pwh = ms2::Polygon_with_holes_2;
-  using CS_pgn = ms2::Circle_segment_polygon_2;
-  using CS_pwh = ms2::Circle_segment_polygon_with_holes_2;
-  using Conic_pgn = ms2::Conic_polygon_2;
-  using Conic_pwh = ms2::Conic_polygon_with_holes_2;
+  using Pgn = cgalpy::ms2::Polygon_2;
+  using Pwh = cgalpy::ms2::Polygon_with_holes_2;
+  using CS_pgn = cgalpy::ms2::Circle_segment_polygon_2;
+  using CS_pwh = cgalpy::ms2::Circle_segment_polygon_with_holes_2;
+  using Conic_pgn = cgalpy::ms2::Conic_polygon_2;
+  using Conic_pwh = cgalpy::ms2::Conic_polygon_with_holes_2;
 
 #if CGAL_VERSION_NR > 1050500000
   // By decomposition
   // ================
 
-  using Pnp = ms2::Polygon_nop_decomposition_2;
-  using Pvd = pp2::Polygon_vertical_decomposition_2;
-  using Ptd = pp2::Polygon_triangulation_decomposition_2;
-  using Ssabd = pp2::Small_side_angle_bisector_decomposition_2;
+  using Pnp = cgalpy::ms2::Polygon_nop_decomposition_2;
+  using Pvd = cgalpy::pp2::Polygon_vertical_decomposition_2;
+  using Ptd = cgalpy::pp2::Polygon_triangulation_decomposition_2;
+  using Ssabd = cgalpy::pp2::Small_side_angle_bisector_decomposition_2;
 
   CGALPY::Type_list<Pgn, Pwh> polygon_types;
   CGALPY::Type_list<Pnp, Pvd, Ptd, Ssabd> strategy_types;
 
-  CGALPY::cartesian_product<ms2::Wrapper_one_strategy>(m, polygon_types,
+  CGALPY::cartesian_product<cgalpy::ms2::Wrapper_one_strategy>(m, polygon_types,
                                                        polygon_types,
                                                        strategy_types);
-  CGALPY::cartesian_product<ms2::Wrapper_two_strategies>(m, polygon_types,
+  CGALPY::cartesian_product<cgalpy::ms2::Wrapper_two_strategies>(m, polygon_types,
                                                          polygon_types,
                                                          strategy_types,
                                                          strategy_types);
 #endif
 
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pgn>,
+  m.def("minkowski_sum_2", &cgalpy::ms2::minkowski_sum_2<Pgn, Pgn>,
         py::arg("pgn1"), py::arg("pgn2"), ms2_doc::minkowski_sum_2);
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pgn, Pwh>,
+  m.def("minkowski_sum_2", &cgalpy::ms2::minkowski_sum_2<Pgn, Pwh>,
         py::arg("pgn1"), py::arg("pgn2"), ms2_doc::minkowski_sum_2);
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pgn>,
+  m.def("minkowski_sum_2", &cgalpy::ms2::minkowski_sum_2<Pwh, Pgn>,
         py::arg("pgn1"), py::arg("pgn2"), ms2_doc::minkowski_sum_2);
-  m.def("minkowski_sum_2", &ms2::minkowski_sum_2<Pwh, Pwh>,
+  m.def("minkowski_sum_2", &cgalpy::ms2::minkowski_sum_2<Pwh, Pwh>,
         py::arg("pgn1"), py::arg("pgn2"), ms2_doc::minkowski_sum_2);
 
   m.def("minkowski_sum_by_full_convolution_2",
-        &ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>,
+        &cgalpy::ms2::minkowski_sum_by_full_convolution_2<Pgn, Pgn>,
         py::arg("pgn1"), py::arg("pgn2"),
         ms2_doc::minkowski_sum_by_full_convolution_2);
 
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>,
+        &cgalpy::ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pgn>,
         py::arg("pgn1"), py::arg("pgn2"),
         ms2_doc::minkowski_sum_by_reduced_convolution_2);
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>,
+        &cgalpy::ms2::minkowski_sum_by_reduced_convolution_2<Pgn, Pwh>,
         py::arg("pgn1"), py::arg("pgn2"),
         ms2_doc::minkowski_sum_by_reduced_convolution_2);
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>,
+        &cgalpy::ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pgn>,
         py::arg("pgn1"), py::arg("pgn2"),
         ms2_doc::minkowski_sum_by_reduced_convolution_2);
   m.def("minkowski_sum_by_reduced_convolution_2",
-        &ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>,
+        &cgalpy::ms2::minkowski_sum_by_reduced_convolution_2<Pwh, Pwh>,
         py::arg("pgn1"), py::arg("pgn2"),
         ms2_doc::minkowski_sum_by_reduced_convolution_2);
 
-  m.def("approximated_offset_2", &ms2::approximated_offset_2,
+  m.def("approximated_offset_2", &cgalpy::ms2::approximated_offset_2,
         py::arg("polygon"), py::arg("radius"), py::arg("eps"),
         ms2_doc::approximated_offset_2);
-  m.def("approximated_offset_2", &ms2::approximated_offset_2_pwh,
+  m.def("approximated_offset_2", &cgalpy::ms2::approximated_offset_2_pwh,
         py::arg("polygon_with_holes"), py::arg("radius"), py::arg("eps"),
         ms2_doc::approximated_offset_2_1);
-  m.def("approximated_inset_2", &ms2::approximated_inset_2,
+  m.def("approximated_inset_2", &cgalpy::ms2::approximated_inset_2,
         py::arg("polygon"), py::arg("radius"), py::arg("eps"),
         ms2_doc::approximated_inset_2);
 
-  m.def("offset_polygon_2", &ms2::offset_polygon_2,
+  m.def("offset_polygon_2", &cgalpy::ms2::offset_polygon_2,
         py::arg("polygon"), py::arg("radius"), py::arg("traits"),
         ms2_doc::offset_polygon_2);
-  m.def("inset_polygon_2", &ms2::inset_polygon_2,
+  m.def("inset_polygon_2", &cgalpy::ms2::inset_polygon_2,
         py::arg("polygon"), py::arg("radius"), py::arg("traits"),
         ms2_doc::inset_polygon_2);
 

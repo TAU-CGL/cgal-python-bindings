@@ -16,6 +16,7 @@
 #include "CGALPY/envelope_3_config.hpp"
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+namespace cgalpy {
 namespace env3 {
 
 using Egt = aos2::Egt;
@@ -35,5 +36,6 @@ using Surface_3 = Geometry_traits_3::Surface_3;
 using Xy_monotone_surface_3 = Geometry_traits_3::Xy_monotone_surface_3;
 
 }
+} // namespace cgalpy
 
 #endif

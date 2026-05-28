@@ -12,6 +12,7 @@ namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace COREFINEMENT = PMP::Corefinement;
 
+namespace cgalpy {
 namespace pmp {
 
 template <typename PolygonalMesh>
@@ -37,6 +38,7 @@ struct Non_manifold_output_visitor: public COREFINEMENT::Non_manifold_output_vis
   }
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif // CGALPY_NON_MANIFOLD_OUTPUT_VISITOR_HPP

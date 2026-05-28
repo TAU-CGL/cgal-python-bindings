@@ -21,6 +21,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 //! Wrap the function that obtains the real circulator
@@ -91,10 +92,11 @@ static PyType_Slot aos_vertex_slots[] = {
 };
 
 }
+} // namespace cgalpy
 
 //!
-void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
-  using Aos = aos2::Arrangement_on_surface_2;
+void export_vertex(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
+  using Aos = cgalpy::aos2::Arrangement_on_surface_2;
   using Vertex = Aos::Vertex;
   using Face = Aos::Face;
   using Point = Aos::Point_2;
@@ -106,10 +108,10 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 #endif
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
-  if (! add_attr<aos2::V>(c, "Arr_extended_vertex")) {
-    py::class_<aos2::V> (c, "Arr_extended_vertex" /*, py::type_slots(aos2::aos_vertex_slots)*/)
-      .def("set_data", &aos2::V::set_data, py::keep_alive<1, 2>())
-      .def("data", py::overload_cast<>(&aos2::V::data, py::const_))
+  if (! add_attr<cgalpy::aos2::V>(c, "Arr_extended_vertex")) {
+    py::class_<cgalpy::aos2::V> (c, "Arr_extended_vertex" /*, py::type_slots(cgalpy::aos2::aos_vertex_slots)*/)
+      .def("set_data", &cgalpy::aos2::V::set_data, py::keep_alive<1, 2>())
+      .def("data", py::overload_cast<>(&cgalpy::aos2::V::data, py::const_))
       ;
   }
 #endif
@@ -117,7 +119,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   if (add_attr<Vertex>(c, "Vertex")) return;
 
 #ifdef CGALPY_AOS2_VERTEX_EXTENDED
-  py::class_<Vertex, aos2::V> vertex_c(c, "Vertex");
+  py::class_<Vertex, cgalpy::aos2::V> vertex_c(c, "Vertex");
 #else
   py::class_<Vertex> vertex_c(c, "Vertex");
 #endif
@@ -142,10 +144,10 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("parameter_space_in_y", [](const Vertex& v)->CGAL::Arr_parameter_space { return v.parameter_space_in_y(); })
     .def("degree", &Vertex::degree)
     .def("face", [](const Vertex& v)->const Face& { return *(v.face()); }, ri)
-    .def("incident_halfedges", &aos2::incident_halfedges_iterator, py::keep_alive<0, 1>())
+    .def("incident_halfedges", &cgalpy::aos2::incident_halfedges_iterator, py::keep_alive<0, 1>())
 
     // Wrap also the function that obtains the circulator
-    .def("incident_halfedges_circulator", &aos2::incident_halfedges_circulator)
+    .def("incident_halfedges_circulator", &cgalpy::aos2::incident_halfedges_circulator)
 
 // #ifdef CGALPY_AOS2_VERTEX_EXTENDED
 //     // The member functions set_data() and data() are defined in a base class of
@@ -158,7 +160,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
     .def("number_of_surfaces", [](Vertex& v) { return v.number_of_surfaces(); })
-    .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
+    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>())
 #endif
     ;
 
@@ -167,7 +169,7 @@ void export_vertex(py::class_<aos2::Arrangement_on_surface_2>& c) {
   add_iterator<Si, Si>("Surface_iterator", vertex_c);
 #endif
 
-  using Havcc = aos2::Halfedge_around_vertex_const_circulator;
+  using Havcc = cgalpy::aos2::Halfedge_around_vertex_const_circulator;
   add_iterator_from_circulator<Havcc>("Halfedge_around_vertex_iterator", vertex_c);
 
   // Wrap also the real circulator

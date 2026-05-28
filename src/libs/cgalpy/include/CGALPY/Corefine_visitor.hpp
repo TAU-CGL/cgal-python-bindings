@@ -18,6 +18,7 @@ namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 namespace COREFINEMENT = PMP::Corefinement;
 
+namespace cgalpy {
 namespace pmp {
 
 //
@@ -322,5 +323,6 @@ private:
 };
 
 }
+} // namespace cgalpy
 
 #endif

@@ -14,6 +14,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 /*! \class Curve_data_merge
@@ -65,5 +66,6 @@ private:
 };
 
 }
+} // namespace cgalpy
 
 #endif

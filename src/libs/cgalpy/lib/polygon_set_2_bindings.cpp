@@ -23,14 +23,14 @@
 #endif
 
 namespace py = nanobind;
-namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
+namespace bso2_doc = cgalpy::bso2::docstrings;
 
 void export_polygon_set_2(py::module_& m) {
-  using Gps2 = bso2::General_polygon_set_2;
-  using Ps2 = bso2::Polygon_set_2;
-  using Gt = bso2::Geometry_traits_2;
-  using Pgn = bso2::General_polygon_2;
-  using Pwh = bso2::General_polygon_with_holes_2;
+  using Gps2 = cgalpy::bso2::General_polygon_set_2;
+  using Ps2 = cgalpy::bso2::Polygon_set_2;
+  using Gt = cgalpy::bso2::Geometry_traits_2;
+  using Pgn = cgalpy::bso2::General_polygon_2;
+  using Pwh = cgalpy::bso2::General_polygon_with_holes_2;
 
   py::class_<Ps2, Gps2> ps2_c(
     m, "Polygon_set_2", bso2_doc::Polygon_set_2_class);

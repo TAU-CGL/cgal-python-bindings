@@ -11,6 +11,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pmp {
 
 template <typename PolygonMesh>
@@ -54,7 +55,8 @@ private:
   std::function<void(const vertex_descriptor, const PolygonMesh&)> register_split_vertex_;
 };
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif // CGALPY_CUSTOM_SIZING_FIELD_HPP
 

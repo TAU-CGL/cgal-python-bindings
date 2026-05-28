@@ -24,8 +24,9 @@
 #endif
 
 namespace py = nanobind;
-namespace pol2_doc = cgalpy::docstrings::Polygon;
+namespace pol2_doc = cgalpy::pol2::docstrings;
 
+namespace cgalpy {
 namespace pol2 {
 
 // Initialize a polygon with holes from an outer boundary and a list of holes.
@@ -37,14 +38,15 @@ void init_polygon_with_holes_2(Polygon_with_holes_2* pwh, Polygon_2& p,
 }
 
 }
+} // namespace cgalpy
 
 /*! Export `CGAL::Polygon_with_holes_2<>`, which derives from
  * `CGAL::General_polygon_with_holes_2<>`
  */
 void export_polygon_with_holes_2(py::module_& m) {
-  using Pgn = pol2::Polygon_2;
-  using Pwh = pol2::Polygon_with_holes_2;
-  using Gpwh = pol2::General_polygon_with_holes_2;
+  using Pgn = cgalpy::pol2::Polygon_2;
+  using Pwh = cgalpy::pol2::Polygon_with_holes_2;
+  using Gpwh = cgalpy::pol2::General_polygon_with_holes_2;
 
   if (! add_attr<Gpwh>(m, "General_polygon_with_holes_2")) {
     py::class_<Gpwh> gpwh_c(
@@ -59,7 +61,7 @@ void export_polygon_with_holes_2(py::module_& m) {
       pol2_doc::Polygon_with_holes_2_class);
     pwh_c.def(py::init<>())
       .def(py::init<Pgn&>(), py::arg("outer_boundary"))
-      .def("__init__", &pol2::init_polygon_with_holes_2,
+      .def("__init__", &cgalpy::pol2::init_polygon_with_holes_2,
            py::arg("outer_boundary"), py::arg("holes"))
 
       .def("bbox", &Pwh::bbox, pol2_doc::Polygon_with_holes_2_bbox)

@@ -17,7 +17,7 @@ namespace py = nanobind;
 
 //
 void export_arr_tracing_traits_2(py::module_& m) {
-  using Gt = aos2::Trc_geometry_traits_2;
+  using Gt = cgalpy::aos2::Trc_geometry_traits_2;
   using Base_gt = Gt::Base;
 
   if (add_attr<Gt>(m, "Arr_tracing_traits_2")) return;

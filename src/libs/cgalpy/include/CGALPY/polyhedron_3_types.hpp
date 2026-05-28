@@ -20,6 +20,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pol3 {
 
 struct Polyhedron_items : public CGAL::Polyhedron_items_3 {
@@ -77,5 +78,6 @@ using Halfedge_around_facet_const_circulator = Polyhedron_3::Halfedge_around_fac
 using Halfedge_ds = Polyhedron_3::HalfedgeDS;
 
 }
+} // namespace cgalpy
 
 #endif

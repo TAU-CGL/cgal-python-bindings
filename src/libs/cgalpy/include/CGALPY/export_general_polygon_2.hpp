@@ -30,6 +30,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace bso2 {
 
 // Initialize a general polygon from a list of x-monotone curves.
@@ -43,6 +44,7 @@ void init_polygon_2(GeneralPolygon_2* pgn, py::list& lst) {
 }
 
 }
+} // namespace cgalpy
 
 // Export the attributes of General_polygon_2.
 template <typename GeneralPolygon_2>
@@ -55,7 +57,7 @@ export_general_polygon_2(py::class_<GeneralPolygon_2>& pgn_c,
   using Gpgn = GeneralPolygon_2;
   pgn_c.def(py::init<>(), init_doc)
     .def(py::init<const Gpgn&>(), py::arg("other"), copy_init_doc)
-    .def("__init__", &bso2::init_polygon_2<Gpgn>, py::arg("curves"),
+    .def("__init__", &cgalpy::bso2::init_polygon_2<Gpgn>, py::arg("curves"),
          list_init_doc)
     .def("push_back", &Gpgn::push_back)
     .def("orientation", &Gpgn::orientation)

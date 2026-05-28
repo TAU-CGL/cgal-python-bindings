@@ -14,8 +14,9 @@
 #include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
+namespace tri2_doc = cgalpy::tri2::docstrings;
 
+namespace cgalpy {
 namespace tri2 {
 
 //!
@@ -62,12 +63,13 @@ void insert_constraint(Constrained_triangulation_2& tri, const Vertex& va, const
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_tri2_constrained(py::module_& m) {
-  using Ctri = tri2::Constrained_triangulation_2;
-  using Tri = tri2::Triangulation_2;
-  using Pnt = tri2::Point;
+  using Ctri = cgalpy::tri2::Constrained_triangulation_2;
+  using Tri = cgalpy::tri2::Triangulation_2;
+  using Pnt = cgalpy::tri2::Point;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -76,9 +78,9 @@ void export_tri2_constrained(py::module_& m) {
   py::class_<Ctri, Tri> tri_c(m, "Constrained_triangulation_2");
 
   tri_c.def(py::init<>())
-    .def(py::init<const tri2::Traits&>())
-    .def("__init__", &tri2::ct2_init)
-    .def("insert_constraint", &tri2::insert_constraint,
+    .def(py::init<const cgalpy::tri2::Traits&>())
+    .def("__init__", &cgalpy::tri2::ct2_init)
+    .def("insert_constraint", &cgalpy::tri2::insert_constraint,
          py::arg("va"), py::arg("vb"),
          tri2_doc::Constrained_triangulation_2_insert_constraint_1)
     ;

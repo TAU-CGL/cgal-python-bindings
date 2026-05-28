@@ -18,6 +18,7 @@
 #define CGALPY_POL3_KERNEL_GEOMETRY_TRAITS              0
 #define CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS        1
 
+namespace cgalpy {
 namespace pol3 {
 
 // Indicates whether the vertex type is extended
@@ -58,5 +59,6 @@ struct Face_extended<true, Fb, Data>
 { using type = Hds_face_with_data<Fb, Data>; };
 
 }
+} // namespace cgalpy
 
 #endif

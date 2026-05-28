@@ -19,6 +19,7 @@
 #include "CGALPY/polygon_partitioning_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 
+namespace cgalpy {
 namespace pp2 {
 
 using Polygon_2 = CGAL::Polygon_2<Kernel, Point_2_container>;
@@ -32,5 +33,6 @@ using Polygon_triangulation_decomposition_2 =
 using Small_side_angle_bisector_decomposition_2 =
   CGAL::Small_side_angle_bisector_decomposition_2<Kernel, Point_2_container>;
 }
+} // namespace cgalpy
 
 #endif

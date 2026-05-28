@@ -23,8 +23,9 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -112,29 +113,30 @@ auto is_on_vertex(const std::pair<
 { return PMP::is_on_vertex(loc, vd, tm); }
 
 }
+} // namespace cgalpy
 
 //!
 void export_pmp_location(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
-  m.def("barycentic_coordinates", &pmp::barycentic_coordinates,
+  m.def("barycentic_coordinates", &cgalpy::pmp::barycentic_coordinates,
         py::arg("p"), py::arg("q"), py::arg("r"), py::arg("query"));
-  m.def("get_descriptor_from_location", &pmp::get_descriptor_from_location<Pm>,
+  m.def("get_descriptor_from_location", &cgalpy::pmp::get_descriptor_from_location<Pm>,
         py::arg("loc"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_get_descriptor_from_location);
-  m.def("is_in_face", &pmp::is_in_face_bar<Pm>,
+  m.def("is_in_face", &cgalpy::pmp::is_in_face_bar<Pm>,
         py::arg("bar"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_in_face);
-  m.def("is_on_face_border", &pmp::is_on_face_border<Pm>,
+  m.def("is_on_face_border", &cgalpy::pmp::is_on_face_border<Pm>,
         py::arg("loc"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_on_face_border);
-  m.def("is_on_halfedge", &pmp::is_on_halfedge<Pm>,
+  m.def("is_on_halfedge", &cgalpy::pmp::is_on_halfedge<Pm>,
         py::arg("loc"), py::arg("hd"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_on_halfedge);
-  m.def("is_on_mesh_border", &pmp::is_on_mesh_border<Pm>,
+  m.def("is_on_mesh_border", &cgalpy::pmp::is_on_mesh_border<Pm>,
         py::arg("loc"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_on_mesh_border);
-  m.def("is_on_vertex", &pmp::is_on_vertex<Pm>,
+  m.def("is_on_vertex", &cgalpy::pmp::is_on_vertex<Pm>,
         py::arg("loc"), py::arg("vd"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_on_vertex);
 }

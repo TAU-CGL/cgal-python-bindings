@@ -15,6 +15,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pmp {
 
 //! helper
@@ -45,6 +46,7 @@ std::vector<T> list2vec(const py::list& list) {
   return retv;
 }
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif

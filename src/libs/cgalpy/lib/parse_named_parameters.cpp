@@ -299,7 +299,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params np) {
       //   np = np.mesh_facet_distance(py::cast<Ft>(item.second));
       //   break;
        case Hash("polyline_constraints"):
-        np = np.polyline_constraints(pmp::list2vec<Kernel::Point_3>(py::cast<py::list>(item.second)));
+        np = np.polyline_constraints(cgalpy::pmp::list2vec<Kernel::Point_3>(py::cast<py::list>(item.second)));
         break;
        case Hash("mesh_facet_topology"):
         np = np.mesh_facet_topology(py::cast<CGAL::Mesh_facet_topology>(item.second));

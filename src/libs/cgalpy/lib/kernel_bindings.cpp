@@ -72,7 +72,7 @@
 #include "CGALPY/Kernel/export_mesh_constant_domain_field_3.hpp"
 
 namespace py = nanobind;
-namespace ker_doc = cgalpy::docstrings::Kernel_23;
+namespace ker_doc = cgalpy::ker::docstrings;
 
 extern void export_bbox_2(py::class_<CGAL::Bbox_2>&);
 extern void export_bbox_3(py::class_<CGAL::Bbox_3>&);
@@ -90,6 +90,7 @@ extern void export_mpz_class(py::module_&);
 extern void export_mpz_int(py::module_&);
 extern void export_mpq_rational(py::module_&);
 
+namespace cgalpy {
 namespace ker {
 
 CGAL::Bbox_2 bbox_2(const py::list& points) {
@@ -99,6 +100,7 @@ CGAL::Bbox_2 bbox_2(const py::list& points) {
 }
 
 }
+} // namespace cgalpy
 
 //template<typename T>
 //size_t hash(T& immutable) {
@@ -1040,7 +1042,7 @@ void export_kernel_module(py::module_& m) {
         py::arg("p3"), py::arg("w3"), py::arg("p4"), py::arg("w4"),
         ker_doc::barycenter_5);
 
-  m.def("bbox_2", &ker::bbox_2);
+  m.def("bbox_2", &cgalpy::ker::bbox_2);
 
   using Bisector_fnc = Line_2(*)(const Pnt_2&, const Pnt_2&);
   m.def("bisector", static_cast<Bisector_fnc>(&CGAL::bisector<Kernel>),

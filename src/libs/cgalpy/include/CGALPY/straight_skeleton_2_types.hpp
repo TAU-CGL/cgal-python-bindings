@@ -14,6 +14,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/straight_skeleton_2_config.hpp"
 
+namespace cgalpy {
 namespace sn2 {
 
 using Straight_skeleton_2 = CGAL::Straight_skeleton_2<Kernel>;
@@ -22,5 +23,6 @@ using Halfedge = Straight_skeleton_2::Halfedge;
 using Face = Straight_skeleton_2::Face;
 
 }
+} // namespace cgalpy
 
 #endif

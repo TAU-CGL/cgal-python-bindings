@@ -43,6 +43,7 @@
 #include "CGALPY/alpha_shape_3_config.hpp"
 #include "CGALPY/triangulation_3_values.hpp"
 
+namespace cgalpy {
 namespace tri3 {
 
 // Indicates whether a triangulation hierarchy is selected
@@ -222,5 +223,6 @@ template <typename Tr> struct Th<true, Tr>
 { using type = CGAL::Triangulation_hierarchy_3<Tr>; };
 
 }
+} // namespace cgalpy
 
 #endif

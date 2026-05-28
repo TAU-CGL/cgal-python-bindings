@@ -16,8 +16,9 @@
 #include "cgalpy/Ss2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace ss2_doc = cgalpy::docstrings::Surface_sweep_2;
+namespace ss2_doc = cgalpy::ss2::docstrings;
 
+namespace cgalpy {
 namespace ss2 {
 
 // Binding for computing all intersection points induced by a range of input curves.
@@ -163,29 +164,30 @@ bool do_intersect1(py::list& curves, bool consider_common_endpoints, const Geome
 }
 
 }
+} // namespace cgalpy
 
 //
 void export_surface_sweep_2(py::module_& m) {
-  m.def("compute_intersection_points", &ss2::compute_intersection_points0,
+  m.def("compute_intersection_points", &cgalpy::ss2::compute_intersection_points0,
         py::arg("curves"), py::arg("report_endpoints") = false,
         ss2_doc::compute_intersection_points)
-    .def("compute_intersection_points", &ss2::compute_intersection_points1,
+    .def("compute_intersection_points", &cgalpy::ss2::compute_intersection_points1,
          py::arg("curves"), py::arg("report_endpoints"), py::arg("traits"),
          ss2_doc::compute_intersection_points_1)
     ;
 
-  m.def("compute_subcurves", &ss2::compute_subcurves0,
+  m.def("compute_subcurves", &cgalpy::ss2::compute_subcurves0,
         py::arg("curves"), py::arg("mult_overlaps") = false,
         ss2_doc::compute_subcurves)
-    .def("compute_subcurves", &ss2::compute_subcurves1,
+    .def("compute_subcurves", &cgalpy::ss2::compute_subcurves1,
          py::arg("curves"), py::arg("mult_overlaps"), py::arg("traits"),
          ss2_doc::compute_subcurves_1)
     ;
 
-  m.def("do_intersect", &ss2::do_intersect0,
+  m.def("do_intersect", &cgalpy::ss2::do_intersect0,
         py::arg("curves"), py::arg("consider_common_endpoints") = true,
         ss2_doc::Surface_sweep_2_do_intersect)
-    .def("do_intersect", &ss2::do_intersect1,
+    .def("do_intersect", &cgalpy::ss2::do_intersect1,
          py::arg("curves"), py::arg("consider_common_endpoints"),
          py::arg("traits"), ss2_doc::Surface_sweep_2_do_intersect_1)
     ;

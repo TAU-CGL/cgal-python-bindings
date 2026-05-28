@@ -28,23 +28,25 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri3 {
 
-} // End of namespace tri3
+}
+} // namespace cgalpy // End of namespace tri3
 
 //!
 void export_triangulation_3(py::module_& m) {
-  using Tri = tri3::Triangulation_3;
-  using Edge = tri3::Edge;
-  using Cell = tri3::Cell;
-  using Face = tri3::Facet;
-  using Facet = tri3::Facet;
-  using Pnt = tri3::Point;
-  using Vertex = tri3::Vertex;
+  using Tri = cgalpy::tri3::Triangulation_3;
+  using Edge = cgalpy::tri3::Edge;
+  using Cell = cgalpy::tri3::Cell;
+  using Face = cgalpy::tri3::Facet;
+  using Facet = cgalpy::tri3::Facet;
+  using Pnt = cgalpy::tri3::Point;
+  using Vertex = cgalpy::tri3::Vertex;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  using Tds = tri3::Triangulation_data_structure_3;
+  using Tds = cgalpy::tri3::Triangulation_data_structure_3;
   if (add_attr<Tds>(m, "Triangulation_data_structure_3")) return;
 
   py::class_<Tds> tds_c(m, "Triangulation_data_structure_3");

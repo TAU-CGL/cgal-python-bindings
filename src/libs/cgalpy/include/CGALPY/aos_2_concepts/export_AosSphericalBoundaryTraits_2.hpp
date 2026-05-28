@@ -15,7 +15,7 @@
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace aos2_spherical_boundary_doc = cgalpy::docstrings::Arrangement_on_surface_2;
+namespace aos2_spherical_boundary_doc = cgalpy::aos2::docstrings;
 
 //
 template <typename T1, typename T2>

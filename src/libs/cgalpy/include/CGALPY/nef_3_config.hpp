@@ -15,6 +15,7 @@
 #define CGALPY_NEF3_POLYHEDRON_3_POLYGONAL_MESH         0
 #define CGALPY_NEF3_SURFACE_MESH_POLYGONAL_MESH         1
 
+namespace cgalpy {
 namespace nef3 {
 
 template <int i> struct Poly_mesh {};
@@ -25,5 +26,6 @@ template <> struct Poly_mesh<CGALPY_NEF3_SURFACE_MESH_POLYGONAL_MESH>
 { using type = sm::Surface_mesh_3; };
 
 }
+} // namespace cgalpy
 
 #endif

@@ -26,8 +26,9 @@
 #endif
 
 namespace py = nanobind;
-namespace pol2_doc = cgalpy::docstrings::Polygon;
+namespace pol2_doc = cgalpy::pol2::docstrings;
 
+namespace cgalpy {
 namespace pol2 {
 
 Point_2& left_vertex(Polygon_2& pgn) { return *(pgn.left_vertex()); }
@@ -227,18 +228,19 @@ py::object top_vertex_2_1(const py::list& points, const Kernel& kernel) {
 py::object top_vertex_2_2(const py::list& points) { return top_vertex_2_1(points, Kernel()); }
 
 }
+} // namespace cgalpy
 
 // Export Polygon_2.
 void export_polygon_2(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
-  using Pgn = pol2::Polygon_2;
+  using Pgn = cgalpy::pol2::Polygon_2;
   using Pnt = Pgn::Point_2;
 
   if (! add_attr<Pgn>(m, "Polygon_2")) {
     py::class_<Pgn> pgn_c(m, "Polygon_2", pol2_doc::Polygon_2_class);
     pgn_c.def(py::init<>())
       .def(py::init<const Pgn&>())
-      .def("__init__", &pol2::init_polygon_2, py::arg("vertices"))
+      .def("__init__", &cgalpy::pol2::init_polygon_2, py::arg("vertices"))
       .def("push_back", &Pgn::push_back, py::arg("point"),
            pol2_doc::Polygon_2_push_back)
       .def("is_simple", &Pgn::is_simple, pol2_doc::Polygon_2_is_simple)
@@ -271,10 +273,10 @@ void export_polygon_2(py::module_& m) {
       .def("__getitem__",
            static_cast<const Pnt&(Pgn::*)(std::size_t)const>(&Pgn::operator[]),
            py::arg("i"), pol2_doc::Polygon_2_operator_subscript)
-      .def("left_vertex", &pol2::left_vertex, pol2_doc::Polygon_2_left_vertex)
-      .def("right_vertex", &pol2::right_vertex, pol2_doc::Polygon_2_right_vertex)
-      .def("top_vertex", &pol2::top_vertex, pol2_doc::Polygon_2_top_vertex)
-      .def("bottom_vertex", &pol2::bottom_vertex, pol2_doc::Polygon_2_bottom_vertex)
+      .def("left_vertex", &cgalpy::pol2::left_vertex, pol2_doc::Polygon_2_left_vertex)
+      .def("right_vertex", &cgalpy::pol2::right_vertex, pol2_doc::Polygon_2_right_vertex)
+      .def("top_vertex", &cgalpy::pol2::top_vertex, pol2_doc::Polygon_2_top_vertex)
+      .def("bottom_vertex", &cgalpy::pol2::bottom_vertex, pol2_doc::Polygon_2_bottom_vertex)
 
       // Use `py::overload_cast` to cast overloaded functions.
       // 1. As a convention, add the suffix `_mutable` to the mutable version.
@@ -309,61 +311,61 @@ void export_polygon_2(py::module_& m) {
   }
 
   // Free functions
-  m.def("area_2", &pol2::area_2_1, py::arg("points"), py::arg("kernel"),
+  m.def("area_2", &cgalpy::pol2::area_2_1, py::arg("points"), py::arg("kernel"),
         pol2_doc::area_2);
-  m.def("area_2", &pol2::area_2_2, py::arg("points"),
+  m.def("area_2", &cgalpy::pol2::area_2_2, py::arg("points"),
         pol2_doc::area_2);
-  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_1,
+  m.def("bottom_vertex_2", &cgalpy::pol2::bottom_vertex_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::bottom_vertex_2_1);
-  m.def("bottom_vertex_2", &pol2::bottom_vertex_2_2, py::arg("points"),
+  m.def("bottom_vertex_2", &cgalpy::pol2::bottom_vertex_2_2, py::arg("points"),
         pol2_doc::bottom_vertex_2_1);
-  m.def("bounded_side_2", &pol2::bounded_side_2_1,
+  m.def("bounded_side_2", &cgalpy::pol2::bounded_side_2_1,
         py::arg("points"), py::arg("point"), py::arg("kernel"),
         pol2_doc::bounded_side_2_1);
-  m.def("bounded_side_2", &pol2::bounded_side_2_2,
+  m.def("bounded_side_2", &cgalpy::pol2::bounded_side_2_2,
         py::arg("points"), py::arg("point"),
         pol2_doc::bounded_side_2_1);
-  m.def("is_convex_2", &pol2::is_convex_2_1,
+  m.def("is_convex_2", &cgalpy::pol2::is_convex_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::is_convex_2_1);
-  m.def("is_convex_2", &pol2::is_convex_2_2, py::arg("points"),
+  m.def("is_convex_2", &cgalpy::pol2::is_convex_2_2, py::arg("points"),
         pol2_doc::is_convex_2_1);
-  m.def("is_simple_2", &pol2::is_simple_2_1,
+  m.def("is_simple_2", &cgalpy::pol2::is_simple_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::is_simple_2_1);
-  m.def("is_simple_2", &pol2::is_simple_2_2, py::arg("points"),
+  m.def("is_simple_2", &cgalpy::pol2::is_simple_2_2, py::arg("points"),
         pol2_doc::is_simple_2_1);
-  m.def("left_vertex_2", &pol2::left_vertex_2_1,
+  m.def("left_vertex_2", &cgalpy::pol2::left_vertex_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::left_vertex_2_1);
-  m.def("left_vertex_2", &pol2::left_vertex_2_2, py::arg("points"),
+  m.def("left_vertex_2", &cgalpy::pol2::left_vertex_2_2, py::arg("points"),
         pol2_doc::left_vertex_2_1);
-  m.def("orientation_2", &pol2::orientation_2_1,
+  m.def("orientation_2", &cgalpy::pol2::orientation_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::orientation_2_1);
-  m.def("orientation_2", &pol2::orientation_2_2, py::arg("points"),
+  m.def("orientation_2", &cgalpy::pol2::orientation_2_2, py::arg("points"),
         pol2_doc::orientation_2_1);
-  m.def("oriented_side_2", &pol2::oriented_side_2_1,
+  m.def("oriented_side_2", &cgalpy::pol2::oriented_side_2_1,
         py::arg("points"), py::arg("point"), py::arg("kernel"),
         pol2_doc::oriented_side_2_1);
-  m.def("oriented_side_2", &pol2::oriented_side_2_2,
+  m.def("oriented_side_2", &cgalpy::pol2::oriented_side_2_2,
         py::arg("points"), py::arg("point"),
         pol2_doc::oriented_side_2_1);
-  m.def("polygon_area_2", &pol2::polygon_area_2_1,
+  m.def("polygon_area_2", &cgalpy::pol2::polygon_area_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::polygon_area_2);
-  m.def("polygon_area_2", &pol2::polygon_area_2_2, py::arg("points"),
+  m.def("polygon_area_2", &cgalpy::pol2::polygon_area_2_2, py::arg("points"),
         pol2_doc::polygon_area_2);
-  m.def("right_vertex_2", &pol2::right_vertex_2_1,
+  m.def("right_vertex_2", &cgalpy::pol2::right_vertex_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::right_vertex_2_1);
-  m.def("right_vertex_2", &pol2::right_vertex_2_2, py::arg("points"),
+  m.def("right_vertex_2", &cgalpy::pol2::right_vertex_2_2, py::arg("points"),
         pol2_doc::right_vertex_2_1);
-  m.def("top_vertex_2", &pol2::top_vertex_2_1,
+  m.def("top_vertex_2", &cgalpy::pol2::top_vertex_2_1,
         py::arg("points"), py::arg("kernel"),
         pol2_doc::top_vertex_2_1);
-  m.def("top_vertex_2", &pol2::top_vertex_2_2, py::arg("points"),
+  m.def("top_vertex_2", &cgalpy::pol2::top_vertex_2_2, py::arg("points"),
         pol2_doc::top_vertex_2_1);
 
 #ifdef CGALPY_HAS_VISUAL

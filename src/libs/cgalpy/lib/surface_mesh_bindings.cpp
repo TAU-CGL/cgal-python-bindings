@@ -59,9 +59,10 @@
 #include "CGALPY/surface_mesh_types.hpp"
 
 namespace py = nanobind;
-namespace bgl_doc = cgalpy::docstrings::BGL;
-namespace sm_doc = cgalpy::docstrings::Surface_mesh;
+namespace bgl_doc = cgalpy::bgl::docstrings;
+namespace sm_doc = cgalpy::sm::docstrings;
 
+namespace cgalpy {
 namespace sm {
 
 //! Add a face from a list of vertices.
@@ -411,7 +412,8 @@ void add_maps(C& c) {
         sm_doc::Surface_mesh_remove_property_maps);
 }
 
-} // namespace sm
+}
+} // namespace cgalpy // namespace sm
 
 //
 template <typename SurfaceMesh, typename C>
@@ -581,23 +583,23 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
     py::class_<Sm> sm_c(m, name);
 
-    sm::add_maps<Sm, py::class_<Sm>>(sm_c);
+    cgalpy::sm::add_maps<Sm, py::class_<Sm>>(sm_c);
 
     // Dynamic bool property maps are backed by std::vector<bool>, whose proxy
     // reference/iterator types cannot be exposed safely through nanobind.
     // Static bool property maps are exported below via export_property_map_bool().
-    // sm::export_dynamic_property_maps<Sm, bool>(m, "bool");
-    sm::export_dynamic_property_maps<Sm, int>(m, "int");
-    sm::export_dynamic_property_maps<Sm, double>(m, "float");
-    sm::export_dynamic_property_maps<Sm, std::size_t>(m, "size_t");
-    sm::export_dynamic_property_maps<Sm, Pnt, py::rv_policy::reference_internal>(m, "point");
-    sm::export_dynamic_property_maps<Sm, Vec, py::rv_policy::reference_internal>(m, "vector_3");
-    sm::export_dynamic_property_maps<Sm, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
-    sm::export_dynamic_property_maps<Sm, py::tuple>(m, "tuple");
-    sm::export_dynamic_property_maps<Sm, py::set>(m, "set");
+    // cgalpy::sm::export_dynamic_property_maps<Sm, bool>(m, "bool");
+    cgalpy::sm::export_dynamic_property_maps<Sm, int>(m, "int");
+    cgalpy::sm::export_dynamic_property_maps<Sm, double>(m, "float");
+    cgalpy::sm::export_dynamic_property_maps<Sm, std::size_t>(m, "size_t");
+    cgalpy::sm::export_dynamic_property_maps<Sm, Pnt, py::rv_policy::reference_internal>(m, "point");
+    cgalpy::sm::export_dynamic_property_maps<Sm, Vec, py::rv_policy::reference_internal>(m, "vector_3");
+    cgalpy::sm::export_dynamic_property_maps<Sm, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
+    cgalpy::sm::export_dynamic_property_maps<Sm, py::tuple>(m, "tuple");
+    cgalpy::sm::export_dynamic_property_maps<Sm, py::set>(m, "set");
 
     if constexpr (! std::is_same<double, FT>::value)
-      sm::export_dynamic_property_maps<Sm, FT, py::rv_policy::reference_internal>(m, "FT");
+      cgalpy::sm::export_dynamic_property_maps<Sm, FT, py::rv_policy::reference_internal>(m, "FT");
 
 
     sm_c.def(py::init<>(), sm_doc::Surface_mesh_Surface_mesh)
@@ -623,14 +625,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
       .def("add_face", static_cast<Fi(Sm::*)(Vi, Vi, Vi, Vi)>(&Sm::add_face),
            py::arg("v0"), py::arg("v1"), py::arg("v2"), py::arg("v3"),
            sm_doc::Surface_mesh_add_face_3)
-      .def("add_face", &sm::add_face<Sm>,
+      .def("add_face", &cgalpy::sm::add_face<Sm>,
            py::arg("vertices"),
            sm_doc::Surface_mesh_add_face_1)
 
-      .def("has_valid_index", &sm::has_valid_index_v<Sm>, py::arg("v"))
-      .def("has_valid_index", &sm::has_valid_index_e<Sm>, py::arg("e"))
-      .def("has_valid_index", &sm::has_valid_index_h<Sm>, py::arg("h"))
-      .def("has_valid_index", &sm::has_valid_index_f<Sm>, py::arg("f"))
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_v<Sm>, py::arg("v"))
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_e<Sm>, py::arg("e"))
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_h<Sm>, py::arg("h"))
+      .def("has_valid_index", &cgalpy::sm::has_valid_index_f<Sm>, py::arg("f"))
 
       .def("remove_vertex", &Sm::remove_vertex,
            py::arg("v"),
@@ -779,10 +781,10 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
       // .def("property_stats", &Sm::property_stats)
 
-      .def("point", &sm::my_point<Sm>, ri,
+      .def("point", &cgalpy::sm::my_point<Sm>, ri,
            py::arg("v"),
            sm_doc::Surface_mesh_point)
-      .def("points", &sm::points<Sm, Vi, Pnt>,
+      .def("points", &cgalpy::sm::points<Sm, Vi, Pnt>,
            sm_doc::Surface_mesh_points)
 
       // .def("__iadd__",
@@ -828,16 +830,16 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     add_iterator<Eci, Eci>("Edge_iterator", sm_c);
     add_iterator<Fci, Fci>("Face_iterator", sm_c);
 
-    sm_c.def("vertices", &sm::vertices<Sm>,
+    sm_c.def("vertices", &cgalpy::sm::vertices<Sm>,
              py::keep_alive<0, 1>(),
              sm_doc::Surface_mesh_vertices)
-      .def("halfedges", &sm::halfedges<Sm>,
+      .def("halfedges", &cgalpy::sm::halfedges<Sm>,
            py::keep_alive<0, 1>(),
            sm_doc::Surface_mesh_halfedges)
-      .def("edges", &sm::edges<Sm>,
+      .def("edges", &cgalpy::sm::edges<Sm>,
            py::keep_alive<0, 1>(),
            sm_doc::Surface_mesh_edges)
-      .def("faces", &sm::faces<Sm>,
+      .def("faces", &cgalpy::sm::faces<Sm>,
            py::keep_alive<0, 1>(),
            sm_doc::Surface_mesh_faces)
       ;
@@ -847,7 +849,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
 #ifdef CGALPY_HAS_VISUAL
-  m.def("draw", &sm::draw<Sm>,
+  m.def("draw", &cgalpy::sm::draw<Sm>,
         py::arg("surface_mesh"), py::arg("title"));
 #endif
 }
@@ -855,12 +857,12 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 // Export Surface_mesh<Pnt>
 void export_surface_mesh(py::module_& m) {
   // 2D Surface mesh
-  // using Sm_2 = sm::Surface_mesh_2;
+  // using Sm_2 = cgalpy::sm::Surface_mesh_2;
   // export_surface_mesh_impl<Sm_2>(m, "Surface_mesh_2");
 
   // 3D Surface mesh
   using Kernel_ = Kernel;
-  using Sm_3 = sm::Surface_mesh_3;
+  using Sm_3 = cgalpy::sm::Surface_mesh_3;
   using Vi = typename Sm_3::Vertex_index;
   using Fi = typename Sm_3::Face_index;
   using Hi = typename Sm_3::Halfedge_index;
@@ -871,7 +873,7 @@ void export_surface_mesh(py::module_& m) {
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
 
-  // sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
+  // cgalpy::sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
 
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
   internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
@@ -889,19 +891,19 @@ void export_surface_mesh(py::module_& m) {
 #endif
 
   // Export all property maps andled by Surface_mesh
-  sm::export_property_maps<py::module_, Sm_3, int>(m, "int");
-  sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
-  sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
-  sm::export_property_maps<py::module_, Sm_3, std::size_t>(m, "size_t");
-  sm::export_property_maps<py::module_, Sm_3, CGAL::IO::Color>(m, "Color");
-  sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
-  sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
-  sm::export_property_maps<py::module_, Sm_3, py::set>(m, "set");
-  sm::export_property_maps<py::module_, Sm_3, Vector_3>(m, "vector_3");
-  sm::export_property_maps<py::module_, Sm_3, Plane_3>(m, "Plane_3");
-  sm::export_property_maps<py::module_, Sm_3, Point_3>(m, "Point_3");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, int>(m, "int");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, FT>(m, "FT");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, std::string>(m, "string");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, std::size_t>(m, "size_t");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, CGAL::IO::Color>(m, "Color");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, py::tuple>(m, "tuple");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, py::list>(m, "list");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, py::set>(m, "set");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, Vector_3>(m, "vector_3");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, Plane_3>(m, "Plane_3");
+  cgalpy::sm::export_property_maps<py::module_, Sm_3, Point_3>(m, "Point_3");
 
-  if constexpr (! std::is_same<double, FT>::value) sm::export_property_maps<py::module_, Sm_3, double>(m, "float");
+  if constexpr (! std::is_same<double, FT>::value) cgalpy::sm::export_property_maps<py::module_, Sm_3, double>(m, "float");
 
   // implemented:
   // vertex_point_map
@@ -975,32 +977,32 @@ void export_surface_mesh(py::module_& m) {
   m.def("get_vertex_point", [](const Sm_3& pm, const Vi& vd) { return get(CGAL::vertex_point, pm, vd); });
 
   // m.def("expand_face_selection",
-  //       &sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
-  m.def("read_polygon_soup", &sm::read_polygon_soup<Sm_3>, py::arg("fname"), py::arg("np") = py::dict());
-  m.def("is_triangle", &sm::is_triangle<Sm_3>);
+  //       &cgalpy::sm::expand_face_selection<Fi, Sm_3, Sm_3::Property_map<Fi, int>>);
+  m.def("read_polygon_soup", &cgalpy::sm::read_polygon_soup<Sm_3>, py::arg("fname"), py::arg("np") = py::dict());
+  m.def("is_triangle", &cgalpy::sm::is_triangle<Sm_3>);
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Sm_3>);
 
   // CGAL and the Boost Graph Library
 
   // Global functions
-  m.def("add_edge", &bgl::my_add_edge<Sm_3>,
+  m.def("add_edge", &cgalpy::bgl::my_add_edge<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_add_edge);
-  m.def("add_face", &bgl::my_add_face<Sm_3>,
+  m.def("add_face", &cgalpy::bgl::my_add_face<Sm_3>,
         bgl_doc::MutableFaceGraph_add_face);
-  m.def("add_vertex", &bgl::my_add_vertex<Sm_3>,
+  m.def("add_vertex", &cgalpy::bgl::my_add_vertex<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_add_vertex);
   // Not documented
-  // m.def("collect_garbage", &bgl::my_collect_garbage<Sm_3>);
-  m.def("num_edges", &bgl::my_num_edges<Sm_3>,
+  // m.def("collect_garbage", &cgalpy::bgl::my_collect_garbage<Sm_3>);
+  m.def("num_edges", &cgalpy::bgl::my_num_edges<Sm_3>,
         bgl_doc::EdgeListGraph_num_edges);
-  m.def("num_faces", &bgl::my_num_faces<Sm_3>,
+  m.def("num_faces", &cgalpy::bgl::my_num_faces<Sm_3>,
         bgl_doc::FaceListGraph_num_faces);
-  m.def("num_halfedges", &bgl::my_num_halfedges<Sm_3>,
+  m.def("num_halfedges", &cgalpy::bgl::my_num_halfedges<Sm_3>,
         bgl_doc::HalfedgeListGraph_num_halfedges);
-  m.def("num_vertices", &bgl::my_num_vertices<Sm_3>,
+  m.def("num_vertices", &cgalpy::bgl::my_num_vertices<Sm_3>,
         bgl_doc::VertexListGraph_num_vertices);
-  m.def("remove_all_elements", &bgl::my_remove_all_elements<Sm_3>);
-  m.def("reserve", &bgl::my_reserve<Sm_3>);
+  m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Sm_3>);
+  m.def("reserve", &cgalpy::bgl::my_reserve<Sm_3>);
 
   //! Obtain the propery maps
 #ifdef CGALPY_BGL_BINDINGS
@@ -1017,83 +1019,83 @@ void export_surface_mesh(py::module_& m) {
 #endif
 
   // Other
-  m.def("adjacent_vertices", &bgl::adjacent_vertices<Sm_3>,
+  m.def("adjacent_vertices", &cgalpy::bgl::adjacent_vertices<Sm_3>,
         bgl_doc::adjacent_vertices);
-  m.def("add_vertex", &bgl::add_vertex_p<Sm_3>,
+  m.def("add_vertex", &cgalpy::bgl::add_vertex_p<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_add_vertex);
-  m.def("degree", &bgl::degree_v<Sm_3>,
+  m.def("degree", &cgalpy::bgl::degree_v<Sm_3>,
         bgl_doc::degree);
-  m.def("degree", &bgl::degree_f<Sm_3>,
+  m.def("degree", &cgalpy::bgl::degree_f<Sm_3>,
         bgl_doc::FaceGraph_degree);
-  m.def("edge", &bgl::edge<Sm_3>,
+  m.def("edge", &cgalpy::bgl::edge<Sm_3>,
         bgl_doc::HalfedgeGraph_edge);
-  m.def("edge", &bgl::edge_vv<Sm_3>,
+  m.def("edge", &cgalpy::bgl::edge_vv<Sm_3>,
         bgl_doc::EdgeListGraph_edges);
-  m.def("face", &bgl::face<Sm_3>,
+  m.def("face", &cgalpy::bgl::face<Sm_3>,
         bgl_doc::FaceGraph_face);
-  m.def("halfedge", &bgl::halfedge_e<Sm_3>,
+  m.def("halfedge", &cgalpy::bgl::halfedge_e<Sm_3>,
         bgl_doc::HalfedgeGraph_halfedge);
-  m.def("halfedge", &bgl::halfedge_f<Sm_3>,
+  m.def("halfedge", &cgalpy::bgl::halfedge_f<Sm_3>,
         bgl_doc::FaceGraph_halfedge);
-  m.def("halfedge", &bgl::halfedge_v<Sm_3>,
+  m.def("halfedge", &cgalpy::bgl::halfedge_v<Sm_3>,
         bgl_doc::HalfedgeGraph_halfedge_1);
-  m.def("halfedge", &bgl::halfedge_vv<Sm_3>,
+  m.def("halfedge", &cgalpy::bgl::halfedge_vv<Sm_3>,
         bgl_doc::HalfedgeGraph_halfedge_2);
-  m.def("in_degree", &bgl::in_degree<Sm_3>,
+  m.def("in_degree", &cgalpy::bgl::in_degree<Sm_3>,
         bgl_doc::in_degree);
-  m.def("is_border", &bgl::my_is_border_h<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_e<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_v<Sm_3>);
-  m.def("is_border", &bgl::my_is_border_edge<Sm_3>);
-  m.def("is_valid_vertex_descriptor", &bgl::my_is_valid_vertex_descriptor<Sm_3>,
+  m.def("is_border", &cgalpy::bgl::my_is_border_h<Sm_3>);
+  m.def("is_border", &cgalpy::bgl::my_is_border_e<Sm_3>);
+  m.def("is_border", &cgalpy::bgl::my_is_border_v<Sm_3>);
+  m.def("is_border", &cgalpy::bgl::my_is_border_edge<Sm_3>);
+  m.def("is_valid_vertex_descriptor", &cgalpy::bgl::my_is_valid_vertex_descriptor<Sm_3>,
         py::arg("v"), py::arg("g"), py::arg("verbose") = false);
-  m.def("is_valid_halfedge_descriptor", &bgl::my_is_valid_halfedge_descriptor<Sm_3>,
+  m.def("is_valid_halfedge_descriptor", &cgalpy::bgl::my_is_valid_halfedge_descriptor<Sm_3>,
         py::arg("h"), py::arg("g"), py::arg("verbose") = false,
         bgl_doc::is_valid_halfedge_descriptor);
-  m.def("is_valid_edge_descriptor", &bgl::my_is_valid_edge_descriptor<Sm_3>,
+  m.def("is_valid_edge_descriptor", &cgalpy::bgl::my_is_valid_edge_descriptor<Sm_3>,
         py::arg("e"), py::arg("g"), py::arg("verbose") = false,
         bgl_doc::is_valid_edge_descriptor);
-  m.def("is_valid_face_descriptor", &bgl::my_is_valid_face_descriptor<Sm_3>,
+  m.def("is_valid_face_descriptor", &cgalpy::bgl::my_is_valid_face_descriptor<Sm_3>,
         py::arg("f"), py::arg("g"), py::arg("verbose") = false,
         bgl_doc::is_valid_face_descriptor);
-  m.def("next", &bgl::next<Sm_3>,
+  m.def("next", &cgalpy::bgl::next<Sm_3>,
         bgl_doc::HalfedgeGraph_next);
-  m.def("null_face", &bgl::null_face<Sm_3>,
+  m.def("null_face", &cgalpy::bgl::null_face<Sm_3>,
         bgl_doc::FaceGraph_null_face);
-  m.def("null_halfedge", &bgl::null_halfedge<Sm_3>,
+  m.def("null_halfedge", &cgalpy::bgl::null_halfedge<Sm_3>,
         bgl_doc::HalfedgeGraph_null_halfedge);
-  m.def("null_vertex", &bgl::null_vertex<Sm_3>);
-  m.def("opposite", &bgl::opposite<Sm_3>,
+  m.def("null_vertex", &cgalpy::bgl::null_vertex<Sm_3>);
+  m.def("opposite", &cgalpy::bgl::opposite<Sm_3>,
         bgl_doc::HalfedgeGraph_opposite);
-  m.def("out_degree", &bgl::out_degree<Sm_3>,
+  m.def("out_degree", &cgalpy::bgl::out_degree<Sm_3>,
         bgl_doc::out_degree);
-  m.def("prev", &bgl::prev<Sm_3>,
+  m.def("prev", &cgalpy::bgl::prev<Sm_3>,
         bgl_doc::HalfedgeGraph_prev);
-  m.def("source", &bgl::source_e<Sm_3>,
+  m.def("source", &cgalpy::bgl::source_e<Sm_3>,
         bgl_doc::EdgeListGraph_source);
-  m.def("source", &bgl::source_h<Sm_3>,
+  m.def("source", &cgalpy::bgl::source_h<Sm_3>,
         bgl_doc::HalfedgeGraph_source);
-  m.def("target", &bgl::target_e<Sm_3>,
+  m.def("target", &cgalpy::bgl::target_e<Sm_3>,
         bgl_doc::EdgeListGraph_target);
-  m.def("target", &bgl::target_h<Sm_3>,
+  m.def("target", &cgalpy::bgl::target_h<Sm_3>,
         bgl_doc::HalfedgeGraph_target);
-  m.def("remove_edge", &bgl::remove_edge_e<Sm_3>,
+  m.def("remove_edge", &cgalpy::bgl::remove_edge_e<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_remove_edge);
   // Fails to compile, but also not documented
-  // m.def("remove_edge", &bgl::remove_edge_vv<Sm_3>);
-  m.def("remove_face", &bgl::remove_face<Sm_3>,
+  // m.def("remove_edge", &cgalpy::bgl::remove_edge_vv<Sm_3>);
+  m.def("remove_face", &cgalpy::bgl::remove_face<Sm_3>,
         bgl_doc::MutableFaceGraph_remove_face);
-  m.def("remove_vertex", &bgl::remove_vertex<Sm_3>,
+  m.def("remove_vertex", &cgalpy::bgl::remove_vertex<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_remove_vertex);
-  m.def("set_face", &bgl::set_face<Sm_3>,
+  m.def("set_face", &cgalpy::bgl::set_face<Sm_3>,
         bgl_doc::MutableFaceGraph_set_face);
-  m.def("set_halfedge", &bgl::set_halfedge_vh<Sm_3>,
+  m.def("set_halfedge", &cgalpy::bgl::set_halfedge_vh<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_set_halfedge);
-  m.def("set_halfedge", &bgl::set_halfedge_fh<Sm_3>,
+  m.def("set_halfedge", &cgalpy::bgl::set_halfedge_fh<Sm_3>,
         bgl_doc::MutableFaceGraph_set_halfedge);
-  m.def("set_next", &bgl::set_next<Sm_3>,
+  m.def("set_next", &cgalpy::bgl::set_next<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_set_next);
-  m.def("set_target", &bgl::set_target<Sm_3>,
+  m.def("set_target", &cgalpy::bgl::set_target<Sm_3>,
         bgl_doc::MutableHalfedgeGraph_set_target);
 
   m.def("vertices", &boost_utils::my_vertices<Sm_3>,
@@ -1108,7 +1110,7 @@ void export_surface_mesh(py::module_& m) {
         bgl_doc::FaceListGraph_faces);
 
   // Generator Functions
-  m.def("make_tetrahedron", &bgl::my_make_tetrahedron<Sm_3>);
+  m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Sm_3>);
 
   // Euler operations
   boost_utils::define_euler_operations<py::module_, Sm_3, ebmap_type>(m);

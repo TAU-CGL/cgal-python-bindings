@@ -38,6 +38,7 @@ namespace py = nanobind;
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -327,11 +328,12 @@ auto random_perturbation_v(const std::vector<typename boost::graph_traits<Polygo
   PMP::random_perturbation(vertices, pmesh, perturbation_max_size);
 }
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 //!
 void export_pmp_meshing(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
   using Vd = typename Gt::vertex_descriptor;
@@ -352,31 +354,31 @@ void export_pmp_meshing(py::module_& m) {
   using Eicm = boost::property_map<Pm, Dept>::type;
 #endif
 
-  m.def("remesh_planar_patches", &pmp::remesh_planar_patches<Pm>,
+  m.def("remesh_planar_patches", &cgalpy::pmp::remesh_planar_patches<Pm>,
         py::arg("pm"), py::arg("np_in") = py::dict(),
         py::arg("np_out") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("remesh_almost_planar_patches",
-        &pmp::remesh_almost_planar_patches<Pm, Fpm, Vcm, Eicm>,
+        &cgalpy::pmp::remesh_almost_planar_patches<Pm, Fpm, Vcm, Eicm>,
         py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
 #endif
 
-  m.def("refine", &pmp::refine<Pm>,
+  m.def("refine", &cgalpy::pmp::refine<Pm>,
         py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
 
 #if 0 // broken for now because of CGAL
-  m.def("fair", &pmp::fair<Pm>,
+  m.def("fair", &cgalpy::pmp::fair<Pm>,
         py::arg("tmesh"), py::arg("vertices"), py::arg("np") = py::dict());
 #endif
 
-  m.def("triangulate_faces", &pmp::triangulate_faces<Pm>,
+  m.def("triangulate_faces", &cgalpy::pmp::triangulate_faces<Pm>,
         py::arg("pm"), py::arg("np") = py::dict());
-  m.def("triangulate_faces", &pmp::triangulate_faces_r<Pm>,
+  m.def("triangulate_faces", &cgalpy::pmp::triangulate_faces_r<Pm>,
         py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict());
-  m.def("triangulate_polygons", &pmp::triangulate_polygons,
+  m.def("triangulate_polygons", &cgalpy::pmp::triangulate_polygons,
       py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
@@ -386,37 +388,37 @@ void export_pmp_meshing(py::module_& m) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("isotropic_remeshing",
-        &pmp::isotropic_remeshing_sf<Pm, pmp::Adaptive_sizing_field<Pm>>,
+        &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Adaptive_sizing_field<Pm>>,
         py::arg("faces"), py::arg("sizing"), py::arg("pmesh"), py::arg("np") = py::dict());
 
   m.def("isotropic_remeshing",
-        &pmp::isotropic_remeshing_sf<Pm, pmp::Uniform_sizing_field<Pm>>,
+        &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Uniform_sizing_field<Pm>>,
         py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"), py::arg("np") = py::dict());
   // m.def("isotropic_remeshing",
-  //       &pmp::isotropic_remeshing_sf<Pm, pmp::Custom_sizing_field<Pm>>,
+  //       &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Custom_sizing_field<Pm>>,
   //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
   //       py::arg("np") = py::dict());
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   // The CGAL code is faulty and cannot coop with Polyhedron_3
-  m.def("surface_Delaunay_remeshing", &pmp::surface_Delaunay_remeshing<Pm>,
+  m.def("surface_Delaunay_remeshing", &cgalpy::pmp::surface_Delaunay_remeshing<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict());
 #endif
 
   //! \todo Fix interpolated_corrected_curvatures to use epeck
-  m.def("split_long_edges", &pmp::split_long_edges<Pm>,
+  m.def("split_long_edges", &cgalpy::pmp::split_long_edges<Pm>,
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
         py::arg("np") = py::dict());
 #endif
 
-m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
+m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,
         py::arg("imesh"), py::arg("omesh"), py::arg("v"),
         py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
-  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing<Pm>,
+  m.def("angle_and_area_smoothing", &cgalpy::pmp::angle_and_area_smoothing<Pm>,
         py::arg("faces"), py::arg("tmesh"), py::arg("np") = py::dict());
-  m.def("angle_and_area_smoothing", &pmp::angle_and_area_smoothing_m<Pm>,
+  m.def("angle_and_area_smoothing", &cgalpy::pmp::angle_and_area_smoothing_m<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict());
-  // m.def("tangential_relaxation", &pmp::tangential_relaxation<Pm>, // changed in master
+  // m.def("tangential_relaxation", &cgalpy::pmp::tangential_relaxation<Pm>, // changed in master
   //       py::arg("pm"), py::arg("np") = py::dict());
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
@@ -425,16 +427,16 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
      (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
-  m.def("smooth_shape", &pmp::smooth_shape<Pm>,
+  m.def("smooth_shape", &cgalpy::pmp::smooth_shape<Pm>,
         py::arg("pm"), py::arg("time"), py::arg("np") = py::dict());
 #endif
 
-  m.def("random_perturbation", &pmp::random_perturbation<Pm>,
+  m.def("random_perturbation", &cgalpy::pmp::random_perturbation<Pm>,
         py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict());
-  m.def("random_perturbation", &pmp::random_perturbation_v<Pm>,
+  m.def("random_perturbation", &cgalpy::pmp::random_perturbation_v<Pm>,
         py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict());
 
-  using Asf = pmp::Adaptive_sizing_field<Pm>;
+  using Asf = cgalpy::pmp::Adaptive_sizing_field<Pm>;
   using Gt = boost::graph_traits<Pm>;
   using face_descriptor = Gt::face_descriptor;
 
@@ -469,7 +471,7 @@ m.def("extrude_mesh", &pmp::extrude_mesh_v<Pm, Pm>,
     ;
 #endif
 
-  using Usf = pmp::Uniform_sizing_field<Pm>; // Work in progress
+  using Usf = cgalpy::pmp::Uniform_sizing_field<Pm>; // Work in progress
   py::class_<Usf>(m, "Uniform_sizing_field")
     .def(py::init<const FT, const Pm&>())
     .def("at", &Usf::at)

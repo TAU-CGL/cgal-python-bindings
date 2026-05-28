@@ -16,8 +16,9 @@
 #include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;
-namespace pol3_doc = cgalpy::docstrings::Polyhedron;
+namespace pol3_doc = cgalpy::pol3::docstrings;
 
+namespace cgalpy {
 namespace pol3 {
 
 using Hds = pol3::Halfedge_ds;
@@ -28,11 +29,12 @@ Face& begin_facet(Pib& ib) { return *(ib.begin_facet()); }
 Halfedge& end_facet(Pib& ib) { return *(ib.end_facet()); }
 
 }
+} // namespace cgalpy
 
 /*!
  */
 void export_polyhedron_incremental_builder_3(py::module_& m) {
-  using Hds = pol3::Halfedge_ds;
+  using Hds = cgalpy::pol3::Halfedge_ds;
   using Pib = CGAL::Polyhedron_incremental_builder_3<Hds>;
   constexpr auto ri(py::rv_policy::reference_internal);
   if (! add_attr<Pib>(m, "Polyhedron_incremental_builder_3")) {
@@ -43,9 +45,9 @@ void export_polyhedron_incremental_builder_3(py::module_& m) {
            py::arg("mode") = 0,
            pol3_doc::Polyhedron_incremental_builder_3_begin_surface)
       .def("end_surface", &Pib::end_surface, pol3_doc::Polyhedron_incremental_builder_3_end_surface)
-      .def("begin_facet", &pol3::begin_facet, ri, pol3_doc::Polyhedron_incremental_builder_3_begin_facet)
-      .def("end_facet", &pol3::end_facet, ri, pol3_doc::Polyhedron_incremental_builder_3_end_facet)
-      .def("add_vertex", &pol3::add_vertex, ri, py::arg("p"), pol3_doc::Polyhedron_incremental_builder_3_add_vertex)
+      .def("begin_facet", &cgalpy::pol3::begin_facet, ri, pol3_doc::Polyhedron_incremental_builder_3_begin_facet)
+      .def("end_facet", &cgalpy::pol3::end_facet, ri, pol3_doc::Polyhedron_incremental_builder_3_end_facet)
+      .def("add_vertex", &cgalpy::pol3::add_vertex, ri, py::arg("p"), pol3_doc::Polyhedron_incremental_builder_3_add_vertex)
       .def("add_vertex_to_facet", &Pib::add_vertex_to_facet, py::arg("i"), pol3_doc::Polyhedron_incremental_builder_3_add_vertex_to_facet)
       .def_prop_ro_static("RELATIVE_INDEXING",
                           [](py::handle) { return Pib::RELATIVE_INDEXING; })

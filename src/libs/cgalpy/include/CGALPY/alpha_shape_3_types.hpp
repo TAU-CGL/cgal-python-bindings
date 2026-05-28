@@ -13,6 +13,7 @@
 #include "CGALPY/alpha_shape_3_config.hpp"
 #include "CGALPY/triangulation_3_types.hpp"
 
+namespace cgalpy {
 namespace as3 {
 
 using Ec = Exact_comparison<exact_comparison()>::type;
@@ -53,5 +54,6 @@ using Alpha_status = CGAL::Alpha_status<FT>;
 #endif
 
 }
+} // namespace cgalpy
 
 #endif

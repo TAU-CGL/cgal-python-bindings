@@ -25,6 +25,7 @@
 
 // #include "CGALPY/geometric_object_generators_types.hpp"
 
+namespace cgalpy {
 namespace gog {
 
 //!
@@ -52,12 +53,13 @@ using Random_points_in_cube_d = CGAL::Random_points_in_cube_d<Point_d>;
 // }
 
 }
+} // namespace cgalpy
 
 namespace py = nanobind;
 
 //!
 void export_geometric_object_generators(py::module_& m) {
-  using Rpid = gog::Random_points_in_disc_2;
+  using Rpid = cgalpy::gog::Random_points_in_disc_2;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Rpid>(m, "Random_points_in_disc_2")) {
@@ -68,7 +70,7 @@ void export_geometric_object_generators(py::module_& m) {
       ;
   }
 
-  using Rpis = gog::Random_points_in_sphere_3;
+  using Rpis = cgalpy::gog::Random_points_in_sphere_3;
   if (! add_attr<Rpis>(m, "Random_points_in_sphere_3")) {
     py::class_<Rpis>(m, "Random_points_in_sphere_3")
       .def(py::init<double, CGAL::Random&>(),
@@ -79,7 +81,7 @@ void export_geometric_object_generators(py::module_& m) {
   }
 
 #if defined(CGALPY_KERNEL_BINDINGS)
-  using Rpicd = gog::Random_points_in_cube_d;
+  using Rpicd = cgalpy::gog::Random_points_in_cube_d;
   if (! add_attr<Rpicd>(m, "Random_points_in_cube_d")) {
     py::class_<Rpicd>(m, "Random_points_in_cube_d")
       .def(py::init<int, double, CGAL::Random&>(),

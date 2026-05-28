@@ -11,10 +11,12 @@
 
 #include "CGALPY/convex_hull_3_config.hpp"
 
+namespace cgalpy {
 namespace ch3 {
 
 using Polygonal_mesh = Poly_mesh<CGALPY_CH3_POLYGONAL_MESH>::type;
 
 }
+} // namespace cgalpy
 
 #endif

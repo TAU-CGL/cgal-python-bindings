@@ -35,6 +35,7 @@
 #define CGALPY_TRID_DIMENSION                   2
 #endif
 
+namespace cgalpy {
 namespace trid {
 
 // Indicates whether a vertex with infois selected
@@ -123,5 +124,6 @@ template <typename Tr, typename Tds>
 struct Tri<CGALPY_TRID_DELAUNAY, Tr, Tds> { using type = CGAL::Triangulation<Tr, Tds>; };
 
 }
+} // namespace cgalpy
 
 #endif

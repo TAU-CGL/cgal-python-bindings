@@ -10,9 +10,11 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri2 {
 
 }
+} // namespace cgalpy
 
 //!
 void export_tri2_regular(py::module_& m) {

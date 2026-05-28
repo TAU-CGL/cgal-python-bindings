@@ -8,6 +8,7 @@ namespace py = nanobind;
 
 namespace PMP = CGAL::Polygon_mesh_processing;
 
+namespace cgalpy {
 namespace pmp {
 
 //
@@ -48,6 +49,7 @@ private:
 };
 
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 #endif // CGALPY_DEFAULT_ORIENTATION_VISITOR_HPP

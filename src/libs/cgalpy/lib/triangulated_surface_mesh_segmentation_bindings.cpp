@@ -59,7 +59,7 @@ auto segmentation_via_sdf_values(const Tm& pm, SegmentPropertyMap segment_ids,
 } // namespace segment
 
 void export_triangulated_surface_mesh_segmentation(py::module_& m) {
-  using Tm = pmp::Polygonal_mesh;
+  using Tm = cgalpy::pmp::Polygonal_mesh;
   using Pm = Tm;
   using Kernel_ = Kernel;
   using Point_3 = typename Kernel_::Point_3;

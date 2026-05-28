@@ -12,6 +12,7 @@
 
 #include <CGAL/tags.h>
 
+namespace cgalpy {
 namespace as2 {
 
 constexpr bool exact_comparison()
@@ -23,5 +24,6 @@ template <> struct Exact_comparison<false> { using type = CGAL::Tag_false; };
 template <> struct Exact_comparison<true> { using type = CGAL::Tag_true; };
 
 }
+} // namespace cgalpy
 
 #endif

@@ -24,12 +24,14 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 double coordNT_to_double(Geometry_traits_2::CoordNT& c)
 { return CGAL::to_double(c); }
 
 }
+} // namespace cgalpy
 
 void export_arr_circle_segment_traits_2(py::module_& m) {
   using Gt = CGAL::Arr_circle_segment_traits_2<Kernel>;
@@ -61,8 +63,8 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
     .def(py::init<FT&, Coord_nt&>())
     .def(py::init<Coord_nt&, FT&>())
     .def(py::init<int, int>())
-    .def("x", &aos2::Point_2::x)
-    .def("y", &aos2::Point_2::y)
+    .def("x", &cgalpy::aos2::Point_2::x)
+    .def("y", &cgalpy::aos2::Point_2::y)
     .def(py::self == py::self)
     .def(py::self != py::self)
     // .setattr("__hash__", py::object()) NB
@@ -76,19 +78,19 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   xcv_c
     // .def(py::init_implicit<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
-    .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&, CGAL::Orientation>())
-    .def("source", &aos2::X_monotone_curve_2::source, ri)
-    .def("target", &aos2::X_monotone_curve_2::target, ri)
-    .def("is_directed_right", &aos2::X_monotone_curve_2::is_directed_right)
-    .def("left", &aos2::X_monotone_curve_2::left, ri)
-    .def("right", &aos2::X_monotone_curve_2::right, ri)
-    .def("orientation", &aos2::X_monotone_curve_2::orientation)
-    .def("is_linear", &aos2::X_monotone_curve_2::is_linear)
-    .def("is_circular", &aos2::X_monotone_curve_2::is_circular)
-    .def("supporting_line", &aos2::X_monotone_curve_2::supporting_line, ri)
-    .def("supporting_circle", &aos2::X_monotone_curve_2::supporting_circle, ri)
-    .def("bbox", &aos2::X_monotone_curve_2::bbox)
+    .def(py::init<Line_2&, cgalpy::aos2::Point_2&, cgalpy::aos2::Point_2&>())
+    .def(py::init<Circle_2&, cgalpy::aos2::Point_2&, cgalpy::aos2::Point_2&, CGAL::Orientation>())
+    .def("source", &cgalpy::aos2::X_monotone_curve_2::source, ri)
+    .def("target", &cgalpy::aos2::X_monotone_curve_2::target, ri)
+    .def("is_directed_right", &cgalpy::aos2::X_monotone_curve_2::is_directed_right)
+    .def("left", &cgalpy::aos2::X_monotone_curve_2::left, ri)
+    .def("right", &cgalpy::aos2::X_monotone_curve_2::right, ri)
+    .def("orientation", &cgalpy::aos2::X_monotone_curve_2::orientation)
+    .def("is_linear", &cgalpy::aos2::X_monotone_curve_2::is_linear)
+    .def("is_circular", &cgalpy::aos2::X_monotone_curve_2::is_circular)
+    .def("supporting_line", &cgalpy::aos2::X_monotone_curve_2::supporting_line, ri)
+    .def("supporting_circle", &cgalpy::aos2::X_monotone_curve_2::supporting_circle, ri)
+    .def("bbox", &cgalpy::aos2::X_monotone_curve_2::bbox)
     ;
 
   add_insertion(xcv_c, "__str__");
@@ -98,23 +100,23 @@ void export_arr_circle_segment_traits_2(py::module_& m) {
   auto& cv_c = *(concepts.m_aos_traits_2_classes.m_curve_2);
   cv_c.def(py::init_implicit<Segment_2&>())
     .def(py::init<Point_2&, Point_2&>())
-    .def(py::init<Line_2&, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Line_2&, cgalpy::aos2::Point_2&, cgalpy::aos2::Point_2&>())
     .def(py::init_implicit<Circle_2&>())
     .def(py::init<Point_2&, FT&>())
     .def(py::init<Point_2&, FT&, CGAL::Orientation>())
-    .def(py::init<Circle_2&, aos2::Point_2&, aos2::Point_2&>())
-    .def(py::init<Point_2&, FT&, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
+    .def(py::init<Circle_2&, cgalpy::aos2::Point_2&, cgalpy::aos2::Point_2&>())
+    .def(py::init<Point_2&, FT&, CGAL::Orientation, cgalpy::aos2::Point_2&, cgalpy::aos2::Point_2&>())
     // TODO: error below: non-constant-expression cannot be narrowed from type 'int' to 'NT' (aka 'double')
-    // .def(py::init<Point_2&, int, CGAL::Orientation, aos2::Point_2&, aos2::Point_2&>())
+    // .def(py::init<Point_2&, int, CGAL::Orientation, cgalpy::aos2::Point_2&, cgalpy::aos2::Point_2&>())
     .def(py::init<Point_2&, Point_2&, Point_2&>())
-    .def("is_circular", &aos2::Curve_2::is_circular)
-    .def("is_full", &aos2::Curve_2::is_full)
-    .def("is_linear", &aos2::Curve_2::is_linear)
-    .def("orientation", &aos2::Curve_2::orientation)
-    .def("source", &aos2::Curve_2::source, ri)
-    .def("supporting_line", &aos2::Curve_2::supporting_line, ri)
-    .def("supporting_circle", &aos2::Curve_2::supporting_circle, ri)
-    .def("target", &aos2::Curve_2::target, ri)
+    .def("is_circular", &cgalpy::aos2::Curve_2::is_circular)
+    .def("is_full", &cgalpy::aos2::Curve_2::is_full)
+    .def("is_linear", &cgalpy::aos2::Curve_2::is_linear)
+    .def("orientation", &cgalpy::aos2::Curve_2::orientation)
+    .def("source", &cgalpy::aos2::Curve_2::source, ri)
+    .def("supporting_line", &cgalpy::aos2::Curve_2::supporting_line, ri)
+    .def("supporting_circle", &cgalpy::aos2::Curve_2::supporting_circle, ri)
+    .def("target", &cgalpy::aos2::Curve_2::target, ri)
     ;
 
   add_insertion(cv_c, "__str__");

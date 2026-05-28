@@ -32,6 +32,7 @@ namespace py = nanobind;
 
 namespace SMS = CGAL::Surface_mesh_simplification;
 
+namespace cgalpy {
 namespace sms {
 
 template <typename TriangleMesh, typename StopPolicy, typename PlacementType, typename CostType> // this assumes cost
@@ -461,11 +462,12 @@ void define_edge_collapses(py::module_& m) {
            "Simplifies tmesh in-place by collapsing edges, and returns the number of edges effectively removed."), ...);
 }
 
-} // namespace sms
+}
+} // namespace cgalpy // namespace sms
 
 // Export Polygon_mesh_processing
 void export_triangulated_surface_mesh_simplification(py::module_& m) {
-  using Tm = pmp::Polygonal_mesh;
+  using Tm = cgalpy::pmp::Polygonal_mesh;
   using Fd = boost::graph_traits<Tm>::face_descriptor;
   using Hd = boost::graph_traits<Tm>::halfedge_descriptor;
   using Vd = boost::graph_traits<Tm>::vertex_descriptor;
@@ -544,7 +546,7 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     //      "Returns the geometric traits class.")
     ;
 
-  using Ecvb = sms::My_ec_visitor<Tm>;
+  using Ecvb = cgalpy::sms::My_ec_visitor<Tm>;
   py::class_<Ecvb>(m, "Edge_collapse_visitor_base")
     .def(py::init<>())
     ;
@@ -710,5 +712,5 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
     .def(py::init<FT>(), py::arg("dist"))
     ;
 
-  /*sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m); deprecated?*/
+  /*cgalpy::sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m); deprecated?*/
 }

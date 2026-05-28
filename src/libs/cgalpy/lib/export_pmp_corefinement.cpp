@@ -33,6 +33,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -1087,91 +1088,92 @@ void set_in_place_operation_fn(Cv& v, const std::function<void(Boolean_operation
 void set_in_place_operations_fn(Cv& v, const std::function<void(Boolean_operation_type, Boolean_operation_type)>& f)
 { v.set_in_place_operations(f); }
 
-} // namespace pmp
+}
+} // namespace cgalpy // namespace pmp
 
 //!
 void export_pmp_corefinement(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
   // Corefinement and Boolean Operations
-  m.def("autorefine", &pmp::autorefine<Pm>,
+  m.def("autorefine", &cgalpy::pmp::autorefine<Pm>,
         py::arg("tm"), py::arg("np") = py::dict());
-  m.def("autorefine_triangle_soup", &pmp::autorefine_triangle_soup,
+  m.def("autorefine_triangle_soup", &cgalpy::pmp::autorefine_triangle_soup,
         py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict());
-  m.def("clip", &pmp::clip_c<Pm>,
+  m.def("clip", &cgalpy::pmp::clip_c<Pm>,
         py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict());
 #if CGAL_VERSION_NR > 1060100900
-  m.def("clip", &pmp::clip_p<Pm>,
+  m.def("clip", &cgalpy::pmp::clip_p<Pm>,
         py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict());
 #endif
-  m.def("clip", &pmp::clip<Pm>,
+  m.def("clip", &cgalpy::pmp::clip<Pm>,
         py::arg("tm"), py::arg("clipper"), py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict());
-  m.def("corefine", &pmp::corefine<Pm>,
+  m.def("corefine", &cgalpy::pmp::corefine<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
-  m.def("corefine_and_compute_boolean_operations", &pmp::corefine_and_compute_boolean_operations<Pm>,
+  m.def("corefine_and_compute_boolean_operations", &cgalpy::pmp::corefine_and_compute_boolean_operations<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::tuple());
-  m.def("corefine_and_compute_difference", &pmp::corefine_and_compute_difference<Pm>,
+  m.def("corefine_and_compute_difference", &cgalpy::pmp::corefine_and_compute_difference<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
-  m.def("corefine_and_compute_intersection", &pmp::corefine_and_compute_intersection<Pm>,
+  m.def("corefine_and_compute_intersection", &cgalpy::pmp::corefine_and_compute_intersection<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
-  m.def("corefine_and_compute_union", &pmp::corefine_and_compute_union<Pm>,
+  m.def("corefine_and_compute_union", &cgalpy::pmp::corefine_and_compute_union<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict());
-  m.def("split", &pmp::split_c<Pm>,
+  m.def("split", &cgalpy::pmp::split_c<Pm>,
         py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict());
-  m.def("split", &pmp::split_p<Pm>,
+  m.def("split", &cgalpy::pmp::split_p<Pm>,
         py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict());
-  m.def("split", &pmp::split<Pm>,
+  m.def("split", &cgalpy::pmp::split<Pm>,
         py::arg("tm"), py::arg("splitter"), py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict());
-  m.def("intersection_polylines", &pmp::intersection_polylines<Pm>,
+  m.def("intersection_polylines", &cgalpy::pmp::intersection_polylines<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
 
   // Corefine_visitor
-  m.def("set_before_subface_creations", &pmp::set_before_subface_creations_fn);
-  m.def("set_after_subface_creations", &pmp::set_after_subface_creations_fn);
-  m.def("set_before_subface_created", &pmp::set_before_subface_created_fn);
-  m.def("set_after_subface_created", &pmp::set_after_subface_created_fn);
-  m.def("set_before_face_copy", &pmp::set_before_face_copy_fn);
-  m.def("set_after_face_copy", &pmp::set_after_face_copy_fn);
-  m.def("set_before_edge_split", &pmp::set_before_edge_split_fn);
-  m.def("set_edge_split", &pmp::set_edge_split_fn);
-  m.def("set_after_edge_split", &pmp::set_after_edge_split_fn);
-  m.def("set_add_retriangulation_edge", &pmp::set_add_retriangulation_edge_fn);
-  m.def("set_before_edge_copy", &pmp::set_before_edge_copy_fn);
-  m.def("set_after_edge_copy", &pmp::set_after_edge_copy_fn);
-  m.def("set_before_edge_duplicated", &pmp::set_before_edge_duplicated_fn);
-  m.def("set_after_edge_duplicated", &pmp::set_after_edge_duplicated_fn);
-  m.def("set_intersection_edge_copy", &pmp::set_intersection_edge_copy_fn);
-  m.def("set_new_vertex_added", &pmp::set_new_vertex_added_fn);
-  m.def("set_intersection_point_detected", &pmp::set_intersection_point_detected_fn);
-  m.def("set_before_vertex_copy", &pmp::set_before_vertex_copy_fn);
-  m.def("set_after_vertex_copy", &pmp::set_after_vertex_copy_fn);
-  m.def("set_start_filtering_intersections", &pmp::set_start_filtering_intersections_fn);
-  m.def("set_progress_filtering_intersections", &pmp::set_progress_filtering_intersections_fn);
-  m.def("set_end_filtering_intersections", &pmp::set_end_filtering_intersections_fn);
-  m.def("set_start_triangulating_faces", &pmp::set_start_triangulating_faces_fn);
-  m.def("set_triangulating_faces_step", &pmp::set_triangulating_faces_step_fn);
-  m.def("set_end_triangulating_faces", &pmp::set_end_triangulating_faces_fn);
-  m.def("set_start_handling_intersection_of_coplanar_faces", &pmp::set_start_handling_intersection_of_coplanar_faces_fn);
-  m.def("set_intersection_of_coplanar_faces_step", &pmp::set_intersection_of_coplanar_faces_step_fn);
-  m.def("set_end_handling_intersection_of_coplanar_faces", &pmp::set_end_handling_intersection_of_coplanar_faces_fn);
-  m.def("set_start_handling_edge_face_intersections", &pmp::set_start_handling_edge_face_intersections_fn);
-  m.def("set_edge_face_intersections_step", &pmp::set_edge_face_intersections_step_fn);
-  m.def("set_end_handling_edge_face_intersections", &pmp::set_end_handling_edge_face_intersections_fn);
-  m.def("set_start_building_output", &pmp::set_start_building_output_fn);
-  m.def("set_end_building_output", &pmp::set_end_building_output_fn);
-  m.def("set_filter_coplanar_edges", &pmp::set_filter_coplanar_edges_fn);
-  m.def("set_detect_patches", &pmp::set_detect_patches_fn);
-  m.def("set_classify_patches", &pmp::set_classify_patches_fn);
-  m.def("set_classify_intersection_free_patches", &pmp::set_classify_intersection_free_patches_fn);
-  m.def("set_out_of_place_operation", &pmp::set_out_of_place_operation_fn);
-  m.def("set_in_place_operation", &pmp::set_in_place_operation_fn);
-  m.def("set_in_place_operations", &pmp::set_in_place_operations_fn);
+  m.def("set_before_subface_creations", &cgalpy::pmp::set_before_subface_creations_fn);
+  m.def("set_after_subface_creations", &cgalpy::pmp::set_after_subface_creations_fn);
+  m.def("set_before_subface_created", &cgalpy::pmp::set_before_subface_created_fn);
+  m.def("set_after_subface_created", &cgalpy::pmp::set_after_subface_created_fn);
+  m.def("set_before_face_copy", &cgalpy::pmp::set_before_face_copy_fn);
+  m.def("set_after_face_copy", &cgalpy::pmp::set_after_face_copy_fn);
+  m.def("set_before_edge_split", &cgalpy::pmp::set_before_edge_split_fn);
+  m.def("set_edge_split", &cgalpy::pmp::set_edge_split_fn);
+  m.def("set_after_edge_split", &cgalpy::pmp::set_after_edge_split_fn);
+  m.def("set_add_retriangulation_edge", &cgalpy::pmp::set_add_retriangulation_edge_fn);
+  m.def("set_before_edge_copy", &cgalpy::pmp::set_before_edge_copy_fn);
+  m.def("set_after_edge_copy", &cgalpy::pmp::set_after_edge_copy_fn);
+  m.def("set_before_edge_duplicated", &cgalpy::pmp::set_before_edge_duplicated_fn);
+  m.def("set_after_edge_duplicated", &cgalpy::pmp::set_after_edge_duplicated_fn);
+  m.def("set_intersection_edge_copy", &cgalpy::pmp::set_intersection_edge_copy_fn);
+  m.def("set_new_vertex_added", &cgalpy::pmp::set_new_vertex_added_fn);
+  m.def("set_intersection_point_detected", &cgalpy::pmp::set_intersection_point_detected_fn);
+  m.def("set_before_vertex_copy", &cgalpy::pmp::set_before_vertex_copy_fn);
+  m.def("set_after_vertex_copy", &cgalpy::pmp::set_after_vertex_copy_fn);
+  m.def("set_start_filtering_intersections", &cgalpy::pmp::set_start_filtering_intersections_fn);
+  m.def("set_progress_filtering_intersections", &cgalpy::pmp::set_progress_filtering_intersections_fn);
+  m.def("set_end_filtering_intersections", &cgalpy::pmp::set_end_filtering_intersections_fn);
+  m.def("set_start_triangulating_faces", &cgalpy::pmp::set_start_triangulating_faces_fn);
+  m.def("set_triangulating_faces_step", &cgalpy::pmp::set_triangulating_faces_step_fn);
+  m.def("set_end_triangulating_faces", &cgalpy::pmp::set_end_triangulating_faces_fn);
+  m.def("set_start_handling_intersection_of_coplanar_faces", &cgalpy::pmp::set_start_handling_intersection_of_coplanar_faces_fn);
+  m.def("set_intersection_of_coplanar_faces_step", &cgalpy::pmp::set_intersection_of_coplanar_faces_step_fn);
+  m.def("set_end_handling_intersection_of_coplanar_faces", &cgalpy::pmp::set_end_handling_intersection_of_coplanar_faces_fn);
+  m.def("set_start_handling_edge_face_intersections", &cgalpy::pmp::set_start_handling_edge_face_intersections_fn);
+  m.def("set_edge_face_intersections_step", &cgalpy::pmp::set_edge_face_intersections_step_fn);
+  m.def("set_end_handling_edge_face_intersections", &cgalpy::pmp::set_end_handling_edge_face_intersections_fn);
+  m.def("set_start_building_output", &cgalpy::pmp::set_start_building_output_fn);
+  m.def("set_end_building_output", &cgalpy::pmp::set_end_building_output_fn);
+  m.def("set_filter_coplanar_edges", &cgalpy::pmp::set_filter_coplanar_edges_fn);
+  m.def("set_detect_patches", &cgalpy::pmp::set_detect_patches_fn);
+  m.def("set_classify_patches", &cgalpy::pmp::set_classify_patches_fn);
+  m.def("set_classify_intersection_free_patches", &cgalpy::pmp::set_classify_intersection_free_patches_fn);
+  m.def("set_out_of_place_operation", &cgalpy::pmp::set_out_of_place_operation_fn);
+  m.def("set_in_place_operation", &cgalpy::pmp::set_in_place_operation_fn);
+  m.def("set_in_place_operations", &cgalpy::pmp::set_in_place_operations_fn);
 
-  using Av = pmp::Autorefinement_visitor;
+  using Av = cgalpy::pmp::Autorefinement_visitor;
   py::class_<Av>(m, "Autorefinement_visitor")
     .def(py::init<>())
     .def("set_number_of_output_triangles", &Av::set_number_of_output_triangles)
@@ -1180,19 +1182,19 @@ void export_pmp_corefinement(py::module_& m) {
     ;
 
   // default visitor
-  using Dv = pmp::Default_visitor<Pm>;
+  using Dv = cgalpy::pmp::Default_visitor<Pm>;
   py::class_<Dv>(m, "Default_visitor")
     .def(py::init<>())
     ;
 
   // corefine
-  using Cv = pmp::Corefine_visitor<Pm>;
+  using Cv = cgalpy::pmp::Corefine_visitor<Pm>;
   py::class_<Cv>(m, "Corefine_visitor")
     .def(py::init<>())
     ;
 
   // non-manifold
-  using Nmv = pmp::Non_manifold_output_visitor<Pm>;
+  using Nmv = cgalpy::pmp::Non_manifold_output_visitor<Pm>;
   py::class_<Nmv>(m, "Non_manifold_output_visitor")
     // constructor with 2 PolygonMesh arguments
     .def(py::init<Pm&, Pm&>())

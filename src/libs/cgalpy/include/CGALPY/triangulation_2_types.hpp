@@ -20,6 +20,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri2 {
 
 using Ec = as2::Exact_comparison<as2::exact_comparison()>::type;
@@ -117,6 +118,7 @@ int insert_points(Triangulation_& t, py::list& lst) {
   return t.insert(begin, end);
 }
 
-} // End of namespace tri2
+}
+} // namespace cgalpy // End of namespace tri2
 
 #endif

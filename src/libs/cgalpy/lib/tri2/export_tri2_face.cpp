@@ -13,16 +13,18 @@
 #include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
+namespace tri2_doc = cgalpy::tri2::docstrings;
 
+namespace cgalpy {
 namespace tri2 {
 
 }
+} // namespace cgalpy
 
 //!
-void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>& tri_c) {
-  using Face = tri2::Face;
-  using Vertex = tri2::Vertex;
+void export_tri2_face(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>& tri_c) {
+  using Face = cgalpy::tri2::Face;
+  using Vertex = cgalpy::tri2::Vertex;
 
   if (add_attr<Face>(tri_c, "Face")) return;
 

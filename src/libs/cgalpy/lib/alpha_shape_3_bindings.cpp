@@ -19,6 +19,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace as3 {
 
 //
@@ -248,39 +249,40 @@ double FT_to_double(FT& ft) { return CGAL::to_double(ft); }
 
 #endif
 
-} // end of as3 namespace
+}
+} // namespace cgalpy // end of as3 namespace
 
 //
 void export_alpha_shape_3(py::module_& m) {
-  using As3 = as3::Alpha_shape_3;
-  using Tri3 = tri3::Tri;
+  using As3 = cgalpy::as3::Alpha_shape_3;
+  using Tri3 = cgalpy::tri3::Tri;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  as3::size_type (As3::*number_of_solid_components1)() const                     = &As3::number_of_solid_components;
-  as3::size_type (As3::*number_of_solid_components2)(const as3::FT& alpha) const = &As3::number_of_solid_components;
+  cgalpy::as3::size_type (As3::*number_of_solid_components1)() const                     = &As3::number_of_solid_components;
+  cgalpy::as3::size_type (As3::*number_of_solid_components2)(const cgalpy::as3::FT& alpha) const = &As3::number_of_solid_components;
 
-  as3::Classification_type (As3::*classify1)(const as3::Point& p, const as3::FT& alpha) const              = &As3::classify;
-  as3::Classification_type (As3::*classify2)(const as3::Edge& s, const as3::FT& alpha) const               = &As3::classify;
-  as3::Classification_type (As3::*classify3)(const as3::Facet& s, const as3::FT& alpha) const              = &As3::classify;
-  as3::Classification_type (As3::*classify4)(const as3::Vertex_handle& s, const as3::FT& alpha) const      = &As3::classify;
-  as3::Classification_type (As3::*classify5)(const as3::Cell_handle& s, const as3::FT& alpha) const        = &As3::classify;
-  as3::Classification_type (As3::*classify6)(const as3::Cell_handle& s, int i, const as3::FT& alpha) const = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify1)(const cgalpy::as3::Point& p, const cgalpy::as3::FT& alpha) const              = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify2)(const cgalpy::as3::Edge& s, const cgalpy::as3::FT& alpha) const               = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify3)(const cgalpy::as3::Facet& s, const cgalpy::as3::FT& alpha) const              = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify4)(const cgalpy::as3::Vertex_handle& s, const cgalpy::as3::FT& alpha) const      = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify5)(const cgalpy::as3::Cell_handle& s, const cgalpy::as3::FT& alpha) const        = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify6)(const cgalpy::as3::Cell_handle& s, int i, const cgalpy::as3::FT& alpha) const = &As3::classify;
 
-  as3::Classification_type (As3:: *classify7)(const as3::Point& p) const              = &As3::classify;
-  as3::Classification_type (As3:: *classify8)(const as3::Edge& s) const               = &As3::classify;
-  as3::Classification_type (As3:: *classify9)(const as3::Facet& s) const              = &As3::classify;
-  as3::Classification_type (As3::*classify10)(const as3::Vertex_handle& s) const      = &As3::classify;
-  as3::Classification_type (As3::*classify11)(const as3::Cell_handle& s) const        = &As3::classify;
-  as3::Classification_type (As3::*classify12)(const as3::Cell_handle& s, int i) const = &As3::classify;
+  cgalpy::as3::Classification_type (As3:: *classify7)(const cgalpy::as3::Point& p) const              = &As3::classify;
+  cgalpy::as3::Classification_type (As3:: *classify8)(const cgalpy::as3::Edge& s) const               = &As3::classify;
+  cgalpy::as3::Classification_type (As3:: *classify9)(const cgalpy::as3::Facet& s) const              = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify10)(const cgalpy::as3::Vertex_handle& s) const      = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify11)(const cgalpy::as3::Cell_handle& s) const        = &As3::classify;
+  cgalpy::as3::Classification_type (As3::*classify12)(const cgalpy::as3::Cell_handle& s, int i) const = &As3::classify;
 
-  as3::Alpha_status (As3::*get_alpha_status1)(const as3::Edge& e) const  = &As3::get_alpha_status;
-  as3::Alpha_status (As3::*get_alpha_status2)(const as3::Facet& f) const = &As3::get_alpha_status;
+  cgalpy::as3::Alpha_status (As3::*get_alpha_status1)(const cgalpy::as3::Edge& e) const  = &As3::get_alpha_status;
+  cgalpy::as3::Alpha_status (As3::*get_alpha_status2)(const cgalpy::as3::Facet& f) const = &As3::get_alpha_status;
 
 #endif
 
   py::class_<As3> as3_c(m, "Alpha_shape_3");
 
-  py::enum_<as3::Classification_type>(as3_c, "Classification_type")
+  py::enum_<cgalpy::as3::Classification_type>(as3_c, "Classification_type")
     .value("EXTERIOR", As3::EXTERIOR)
     .value("SINGULAR", As3::SINGULAR)
     .value("REGULAR", As3::REGULAR)
@@ -289,7 +291,7 @@ void export_alpha_shape_3(py::module_& m) {
     ;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  py::enum_<as3::Mode>(as3_c, "Mode")
+  py::enum_<cgalpy::as3::Mode>(as3_c, "Mode")
     .value("GENERAL", As3::GENERAL)
     .value("REGULARIZED", As3::REGULARIZED)
     .export_values()
@@ -298,23 +300,23 @@ void export_alpha_shape_3(py::module_& m) {
 
   as3_c.def(py::init<>())
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(py::init<double, as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<as3::FT&, as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<Tri3&, double, as3::Mode>(),
+    .def(py::init<double, cgalpy::as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<cgalpy::as3::FT&, cgalpy::as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<Tri3&, double, cgalpy::as3::Mode>(),
          py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<Tri3&, as3::FT&, as3::Mode>(),
+    .def(py::init<Tri3&, cgalpy::as3::FT&, cgalpy::as3::Mode>(),
          py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
 #endif
-    .def("__init__", &as3::as_init1)
-    .def("__init__", &as3::as_init2)
-    .def("__init__", &as3::as_init3)
+    .def("__init__", &cgalpy::as3::as_init1)
+    .def("__init__", &cgalpy::as3::as_init2)
+    .def("__init__", &cgalpy::as3::as_init3)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("__init__", &as3::as_init4)
-    .def("__init__", &as3::as_init5)
+    .def("__init__", &cgalpy::as3::as_init4)
+    .def("__init__", &cgalpy::as3::as_init5)
 #endif
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("make_alpha_shape", &as3::make_alpha_shape)
+    .def("make_alpha_shape", &cgalpy::as3::make_alpha_shape)
     .def("set_mode", &As3::set_mode)
     .def("set_alpha", &As3::set_alpha)
 #endif
@@ -340,15 +342,15 @@ void export_alpha_shape_3(py::module_& m) {
     .def("get_alpha_status", get_alpha_status1)
     .def("get_alpha_status", get_alpha_status2)
 #endif
-    .def("alpha_shape_cells", &as3::alpha_shape_cells)
-    .def("alpha_shape_facets", &as3::alpha_shape_facets)
-    .def("alpha_shape_edges", &as3::alpha_shape_edges)
-    .def("alpha_shape_vertices", &as3::alpha_shape_vertices)
+    .def("alpha_shape_cells", &cgalpy::as3::alpha_shape_cells)
+    .def("alpha_shape_facets", &cgalpy::as3::alpha_shape_facets)
+    .def("alpha_shape_edges", &cgalpy::as3::alpha_shape_edges)
+    .def("alpha_shape_vertices", &cgalpy::as3::alpha_shape_vertices)
     // .def("filtration", &As3::filtration)
     // .def("filtration_with_alpha_values", &As3::filtration_with_alpha_values)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     // Traversal of the alpha-Values
-    .def("alphas", &as3::alphas, py::keep_alive<0, 1>())
+    .def("alphas", &cgalpy::as3::alphas, py::keep_alive<0, 1>())
     .def("alpha_find", &As3::alpha_find)
     .def("alpha_lower_bound", &As3::alpha_lower_bound)
     .def("alpha_upper_bound", &As3::alpha_upper_bound)
@@ -361,25 +363,25 @@ void export_alpha_shape_3(py::module_& m) {
     ;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  py::class_<as3::Alpha_status>(as3_c, "Alpha_status")
+  py::class_<cgalpy::as3::Alpha_status>(as3_c, "Alpha_status")
     .def(py::init<>())
     // Modifiers
-    .def("set_is_Gabriel", &as3::Alpha_status::set_is_Gabriel)
-    .def("set_is_on_chull", &as3::Alpha_status::set_is_on_chull)
-    .def("set_alpha_min", &as3::Alpha_status::set_alpha_min)
-    .def("set_alpha_mid", &as3::Alpha_status::set_alpha_mid)
-    .def("set_alpha_max", &as3::Alpha_status::set_alpha_max)
+    .def("set_is_Gabriel", &cgalpy::as3::Alpha_status::set_is_Gabriel)
+    .def("set_is_on_chull", &cgalpy::as3::Alpha_status::set_is_on_chull)
+    .def("set_alpha_min", &cgalpy::as3::Alpha_status::set_alpha_min)
+    .def("set_alpha_mid", &cgalpy::as3::Alpha_status::set_alpha_mid)
+    .def("set_alpha_max", &cgalpy::as3::Alpha_status::set_alpha_max)
     // Access Functions
-    .def("is_Gabriel", &as3::Alpha_status::is_Gabriel)
-    .def("is_on_chull", &as3::Alpha_status::is_on_chull)
-    .def("alpha_min", &as3::Alpha_status::alpha_min)
-    .def("alpha_mid", &as3::Alpha_status::alpha_mid)
-    .def("alpha_max", &as3::Alpha_status::alpha_max)
+    .def("is_Gabriel", &cgalpy::as3::Alpha_status::is_Gabriel)
+    .def("is_on_chull", &cgalpy::as3::Alpha_status::is_on_chull)
+    .def("alpha_min", &cgalpy::as3::Alpha_status::alpha_min)
+    .def("alpha_mid", &cgalpy::as3::Alpha_status::alpha_mid)
+    .def("alpha_max", &cgalpy::as3::Alpha_status::alpha_max)
     ;
 #endif
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  using Ai = as3::Alpha_iterator;
+  using Ai = cgalpy::as3::Alpha_iterator;
   add_iterator<Ai, Ai>("Alpha_iterator", as3_c);
 #endif
 
@@ -387,29 +389,29 @@ void export_alpha_shape_3(py::module_& m) {
 #ifdef CGALPY_AS3_EXACT_COMPARISON
 
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  if (tri3::is_periodic())
+  if (cgalpy::tri3::is_periodic())
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<tri3::Geom_traits>(as3_scope, "Gt"))
-      std::cerr << "'tri3::Geom_traits' not registered!\n";
+    if (! add_attr<cgalpy::tri3::Geom_traits>(as3_scope, "Gt"))
+      std::cerr << "'cgalpy::tri3::Geom_traits' not registered!\n";
   }
-  if (! add_attr<as3::Point>(as3_c, "Point"))
-    std::cerr << "'as3::Point' not registered!\n";
+  if (! add_attr<cgalpy::as3::Point>(as3_c, "Point"))
+    std::cerr << "'cgalpy::as3::Point' not registered!\n";
   if (is_exact_ft()) {
-    if (! add_attr<as3::FT>(as3_c, "FT"))
-      std::cerr << "'as3::FT' not registered!\n";
+    if (! add_attr<cgalpy::as3::FT>(as3_c, "FT"))
+      std::cerr << "'cgalpy::as3::FT' not registered!\n";
   }
-  if (! add_attr<as3::Vertex>(as3_c, "Vertex"))
-    std::cerr << "'as3::Vertex' not registered!\n";
-  if (! add_attr<as3::Edge>(as3_c, "Edge"))
-    std::cerr << "'as3::Edge' not registered!\n";
-  if (! add_attr<as3::Facet>(as3_c, "Facet"))
-    std::cerr << "'as3::Facet' not registered!\n";
-  if (! add_attr<as3::Vertex_handle>(as3_c, "Vertex_handle"))
-    std::cerr << "'as3::Vertex_handle' not registered!\n";
-  if (! add_attr<as3::Cell_handle>(as3_c, "Cell_handle"))
-    std::cerr << "'as3::Cell_handle' not registered!\n";
+  if (! add_attr<cgalpy::as3::Vertex>(as3_c, "Vertex"))
+    std::cerr << "'cgalpy::as3::Vertex' not registered!\n";
+  if (! add_attr<cgalpy::as3::Edge>(as3_c, "Edge"))
+    std::cerr << "'cgalpy::as3::Edge' not registered!\n";
+  if (! add_attr<cgalpy::as3::Facet>(as3_c, "Facet"))
+    std::cerr << "'cgalpy::as3::Facet' not registered!\n";
+  if (! add_attr<cgalpy::as3::Vertex_handle>(as3_c, "Vertex_handle"))
+    std::cerr << "'cgalpy::as3::Vertex_handle' not registered!\n";
+  if (! add_attr<cgalpy::as3::Cell_handle>(as3_c, "Cell_handle"))
+    std::cerr << "'cgalpy::as3::Cell_handle' not registered!\n";
 
 #endif
 }

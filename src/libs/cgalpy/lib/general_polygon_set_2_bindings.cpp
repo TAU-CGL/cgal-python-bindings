@@ -31,8 +31,9 @@
 // #include <CGAL/Arr_Bezier_curve_traits_2.h>
 
 namespace py = nanobind;
-namespace bso2_doc = cgalpy::docstrings::Boolean_set_operations_2;
+namespace bso2_doc = cgalpy::bso2::docstrings;
 
+namespace cgalpy {
 namespace bso2 {
 
 py::list polygons_with_holes(Gps_on_surface_base_2& ps) {
@@ -207,19 +208,20 @@ bool do_intersect2(Gps_on_surface_base_2& ps, py::list& lst) {
 }
 
 }
+} // namespace cgalpy
 
 /*! Wrap General_polygon_set and its base classes.
  * Observe that overload_cast() cannot be used when at least one overload is a
  * template member function.
  */
 void export_general_polygon_set_2(py::module_& m) {
-  using Gpsb2 = bso2::Gps_on_surface_base_2;
-  using Gpsos2 = bso2::General_polygon_set_on_surface_2;
-  using Gps2 = bso2::General_polygon_set_2;
-  using GT = bso2::Geometry_traits_2;
-  using Pgn = bso2::General_polygon_2;
-  using Pwh = bso2::General_polygon_with_holes_2;
-  using Arrangement_2 = bso2::Arrangement_2;
+  using Gpsb2 = cgalpy::bso2::Gps_on_surface_base_2;
+  using Gpsos2 = cgalpy::bso2::General_polygon_set_on_surface_2;
+  using Gps2 = cgalpy::bso2::General_polygon_set_2;
+  using GT = cgalpy::bso2::Geometry_traits_2;
+  using Pgn = cgalpy::bso2::General_polygon_2;
+  using Pwh = cgalpy::bso2::General_polygon_with_holes_2;
+  using Arrangement_2 = cgalpy::bso2::Arrangement_2;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -236,8 +238,8 @@ void export_general_polygon_set_2(py::module_& m) {
     // insert
     .def("insert", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::insert))
     .def("insert", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::insert))
-    .def("insert", &bso2::insert1)
-    .def("insert", &bso2::insert2)
+    .def("insert", &cgalpy::bso2::insert1)
+    .def("insert", &cgalpy::bso2::insert2)
 
     // do_intersect
     .def("do_intersect",
@@ -246,8 +248,8 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<bool(Gpsb2::*)(const Pwh&)const>(&Gpsb2::do_intersect))
     .def("do_intersect",
          static_cast<bool(Gpsb2::*)(const Gpsb2&)const>(&Gpsb2::do_intersect))
-    .def("do_intersect", &bso2::do_intersect1)
-    .def("do_intersect", &bso2::do_intersect2)
+    .def("do_intersect", &cgalpy::bso2::do_intersect1)
+    .def("do_intersect", &cgalpy::bso2::do_intersect2)
 
     // intersection
     .def("intersection",
@@ -258,16 +260,16 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::intersection))
     .def("intersection",
          static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::intersection))
-    .def("intersection", &bso2::intersection1)
-    .def("intersection", &bso2::intersection2)
+    .def("intersection", &cgalpy::bso2::intersection1)
+    .def("intersection", &cgalpy::bso2::intersection2)
 
     // join
     .def("join", static_cast<void(Gpsb2::*)(const Pgn&)>(&Gpsb2::join))
     .def("join", static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::join))
     .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&)>(&Gpsb2::join))
     .def("join", static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::join))
-    .def("join", &bso2::join1)
-    .def("join", &bso2::join2)
+    .def("join", &cgalpy::bso2::join1)
+    .def("join", &cgalpy::bso2::join2)
 
     // difference
     .def("difference", py::overload_cast<const Pgn&>(&Gpsb2::difference))
@@ -284,8 +286,8 @@ void export_general_polygon_set_2(py::module_& m) {
          static_cast<void(Gpsb2::*)(const Pwh&)>(&Gpsb2::symmetric_difference))
     .def("symmetric_difference",
          static_cast<void(Gpsb2::*)(const Gpsb2&, const Gpsb2&)>(&Gpsb2::symmetric_difference))
-    .def("symmetric_difference", &bso2::symmetric_difference1)
-    .def("symmetric_difference", &bso2::symmetric_difference2)
+    .def("symmetric_difference", &cgalpy::bso2::symmetric_difference1)
+    .def("symmetric_difference", &cgalpy::bso2::symmetric_difference2)
 
     .def("number_of_polygons_with_holes",
          &Gpsb2::number_of_polygons_with_holes,
@@ -320,7 +322,7 @@ void export_general_polygon_set_2(py::module_& m) {
 
     .def("is_valid", &Gpsb2::is_valid,
          bso2_doc::General_polygon_set_2_is_valid)
-    .def("polygons_with_holes", &bso2::polygons_with_holes,
+    .def("polygons_with_holes", &cgalpy::bso2::polygons_with_holes,
          bso2_doc::General_polygon_set_2_polygons_with_holes)
     ;
 
@@ -361,15 +363,15 @@ void export_general_polygon_set_2(py::module_& m) {
 
   // Types that have been registered already:
   if (! add_attr<GT>(gps2_c, "Geometry_traits_2"))
-    std::cerr << "bso2::Geometry_traits_2 not registered!\n";
+    std::cerr << "cgalpy::bso2::Geometry_traits_2 not registered!\n";
   if (! add_attr<GT>(gps2_c, "Traits_2"))
-    std::cerr << "bso2::Traits_2 not registered!\n";
+    std::cerr << "cgalpy::bso2::Traits_2 not registered!\n";
   if (! add_attr<Pgn>(gps2_c, "Polygon_2"))
-    std::cerr << "bso2::General_polygon_2 not registered!\n";
+    std::cerr << "cgalpy::bso2::General_polygon_2 not registered!\n";
   if (! add_attr<Pwh>(gps2_c, "Polygon_with_holes_2"))
-    std::cerr << "bso2::General_polygon_with_holes_2 not registered!\n";
-  if (! add_attr<bso2::Arrangement_2>(gps2_c, "Arrangement_2"))
-    std::cerr << "bso2::Arrangement_2 not registered!\n";
+    std::cerr << "cgalpy::bso2::General_polygon_with_holes_2 not registered!\n";
+  if (! add_attr<cgalpy::bso2::Arrangement_2>(gps2_c, "Arrangement_2"))
+    std::cerr << "cgalpy::bso2::Arrangement_2 not registered!\n";
 
   add_insertion(gps2_c, "__str__");
   add_insertion(gps2_c, "__repr__");

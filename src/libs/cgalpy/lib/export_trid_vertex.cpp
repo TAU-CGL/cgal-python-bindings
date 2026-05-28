@@ -13,14 +13,16 @@ namespace py = nanobind;
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/triangulation_d_types.hpp"
 
+namespace cgalpy {
 namespace trid {
 }
+} // namespace cgalpy
 
 //!
-void export_trid_vertex(py::class_<trid::Triangulation_d>& tri_c) {
-  using Fc = trid::Full_cell;
-  using Point = trid::Point;
-  using Vertex = trid::Vertex;
+void export_trid_vertex(py::class_<cgalpy::trid::Triangulation_d>& tri_c) {
+  using Fc = cgalpy::trid::Full_cell;
+  using Point = cgalpy::trid::Point;
+  using Vertex = cgalpy::trid::Vertex;
 
   if (add_attr<Vertex>(tri_c, "Vertex")) return;
 
@@ -33,7 +35,7 @@ void export_trid_vertex(py::class_<trid::Triangulation_d>& tri_c) {
     .def("full_cell", [](const Vertex& v)->Fc& { return *(v.full_cell()); }, ri)
     .def("set_full_cell",
          [](Vertex& v, Fc& c)->void
-         {v.set_full_cell(trid::Full_cell_handle(&c)); })
+         {v.set_full_cell(cgalpy::trid::Full_cell_handle(&c)); })
     .def("is_valid",
          [](const Vertex& v, bool verbose, int level)->bool
          { return v.is_valid(verbose, level); },

@@ -22,8 +22,9 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -111,10 +112,11 @@ auto detect_vertex_incident_patches(PolygonMesh& pmesh, const PatchIdMap patch_i
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_pmp_feature_detection(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   using Gt = boost::graph_traits<Pm>;
@@ -131,18 +133,18 @@ void export_pmp_feature_detection(py::module_& m) {
 #endif
 
   // Feature Detection Functions
-  m.def("detect_sharp_edges", &pmp::detect_sharp_edges<Pm, Edge_bool_map>,
+  m.def("detect_sharp_edges", &cgalpy::pmp::detect_sharp_edges<Pm, Edge_bool_map>,
         py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_detect_sharp_edges);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("sharp_edges_segmentation",
-        &pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
+        &cgalpy::pmp::sharp_edges_segmentation<Pm, Pm::Property_map<Ed, bool>, Pm::Property_map<Fd, int>>,
         py::arg("pmesh"), py::arg("angle_in_deg"), py::arg("edge_is_feature_map"),
         py::arg("patch_id_map"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_sharp_edges_segmentation);
   m.def("detect_vertex_incident_patches",
-        &pmp::detect_vertex_incident_patches<Pm, Pm::Property_map<Fd, int>, Pm::Property_map<Vd, py::set>,
+        &cgalpy::pmp::detect_vertex_incident_patches<Pm, Pm::Property_map<Fd, int>, Pm::Property_map<Vd, py::set>,
                                              Pm::Property_map<Ed, bool>>,
         py::arg("pmesh"), py::arg("patch_id_map"), py::arg("edge_is_feature_map"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_detect_vertex_incident_patches);

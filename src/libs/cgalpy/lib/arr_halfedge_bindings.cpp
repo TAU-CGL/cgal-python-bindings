@@ -19,6 +19,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace aos2 {
 
 template <typename T>
@@ -49,10 +50,11 @@ py::object surfaces(const Halfedge& h)
 #endif
 
 }
+} // namespace cgalpy
 
 //
-void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
-  using Aos = aos2::Arrangement_on_surface_2;
+void export_halfedge(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
+  using Aos = cgalpy::aos2::Arrangement_on_surface_2;
   using Xcv = Aos::X_monotone_curve_2;
   using He = Aos::Halfedge;
   using Ahd = CGAL::Arr_halfedge_direction;
@@ -68,12 +70,12 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
   halfedge_c.def(py::init<>())
     .def("direction", [](const He& h)->Ahd { return h.direction(); })
     .def("is_fictitious", &He::is_fictitious)
-    .def("source", &aos2::source, ri)
-    .def("target", &aos2::target, ri)
-    .def("twin", &aos2::twin, ri)
-    .def("face", &aos2::face, ri)
-    .def("next", &aos2::next, ri)
-    .def("prev", &aos2::prev, ri)
+    .def("source", &cgalpy::aos2::source, ri)
+    .def("target", &cgalpy::aos2::target, ri)
+    .def("twin", &cgalpy::aos2::twin, ri)
+    .def("face", &cgalpy::aos2::face, ri)
+    .def("next", &cgalpy::aos2::next, ri)
+    .def("prev", &cgalpy::aos2::prev, ri)
 
     // As a convention, add the suffix `_mutable` to the mutable version.
     // Wrap the mutable method with the `reference_internal` call policy.
@@ -85,10 +87,10 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
     .def("curve",
          [](const He& h)->std::unique_ptr<Xcv>
          { return std::make_unique<Xcv>(h.curve()); }, ri)
-    .def("ccb", &aos2::ccb_iterator, py::keep_alive<0, 1>())
+    .def("ccb", &cgalpy::aos2::ccb_iterator, py::keep_alive<0, 1>())
 
     // Wrap also the function that obtains the real circulator
-    .def("ccb_circulator", &aos2::ccb_circulator)
+    .def("ccb_circulator", &cgalpy::aos2::ccb_circulator)
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED
     // The member functions set_data() and data() are defined in a base class of
@@ -101,7 +103,7 @@ void export_halfedge(py::class_<aos2::Arrangement_on_surface_2>& c) {
 
 #ifdef CGALPY_ENVELOPE_3_BINDINGS
     .def("number_of_surfaces", [](He& h) { return h.number_of_surfaces(); })
-    .def("surfaces", &aos2::surfaces, py::keep_alive<0, 1>())
+    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>())
 #endif
     ;
 

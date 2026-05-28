@@ -14,6 +14,7 @@
 
 #include "CGALPY/config.hpp"
 
+namespace cgalpy {
 namespace vis2 {
 
 constexpr bool regularization_category()
@@ -28,5 +29,6 @@ template <> struct Regularization_category<true>
 { using type = CGAL::Tag_true; };
 
 }
+} // namespace cgalpy
 
 #endif

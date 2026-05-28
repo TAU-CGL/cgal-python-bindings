@@ -24,8 +24,9 @@
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
-namespace pmp_doc = cgalpy::docstrings::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
+namespace cgalpy {
 namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
@@ -139,47 +140,48 @@ auto intersecting_meshes(const std::vector<PolygonMesh>& range, const py::dict& 
 }
 
 }
+} // namespace cgalpy
 
 /*!
  */
 void export_pmp_intersection(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
-  m.def("do_intersect", &pmp::do_intersect_polylines,
+  m.def("do_intersect", &cgalpy::pmp::do_intersect_polylines,
         py::arg("polyline1"), py::arg("polyline2"),
         pmp_doc::Polygon_mesh_processing_do_intersect_1);
-  m.def("do_intersect_polyline_ranges", &pmp::do_intersect_polyline_ranges,
+  m.def("do_intersect_polyline_ranges", &cgalpy::pmp::do_intersect_polyline_ranges,
         py::arg("polylines1"), py::arg("polylines2"),
         pmp_doc::Polygon_mesh_processing_do_intersect);
-  m.def("do_intersect", &pmp::do_intersect_meshes<Pm>,
+  m.def("do_intersect", &cgalpy::pmp::do_intersect_meshes<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_2);
-  m.def("do_intersect", &pmp::do_intersect_mesh_polyline<Pm>,
+  m.def("do_intersect", &cgalpy::pmp::do_intersect_mesh_polyline<Pm>,
         py::arg("tm"), py::arg("polyline"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_4);
   m.def("do_intersect_polyline_range",
-        &pmp::do_intersect_mesh_polyline_range<Pm>,
+        &cgalpy::pmp::do_intersect_mesh_polyline_range<Pm>,
         py::arg("tm"), py::arg("polylines"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_3);
-  m.def("does_self_intersect", &pmp::does_self_intersect_faces<Pm>,
+  m.def("does_self_intersect", &cgalpy::pmp::does_self_intersect_faces<Pm>,
         py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_self_intersect);
-  m.def("does_self_intersect", &pmp::does_self_intersect<Pm>,
+  m.def("does_self_intersect", &cgalpy::pmp::does_self_intersect<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_self_intersect_1);
-  m.def("does_triangle_soup_self_intersect", &pmp::does_triangle_soup_self_intersect, // TODO: point_map
+  m.def("does_triangle_soup_self_intersect", &cgalpy::pmp::does_triangle_soup_self_intersect, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_triangle_soup_self_intersect);
-  m.def("intersecting_meshes", &pmp::intersecting_meshes<Pm>, py::arg("range"),
+  m.def("intersecting_meshes", &cgalpy::pmp::intersecting_meshes<Pm>, py::arg("range"),
         py::arg("np") = py::dict(), py::arg("nps") = std::vector<py::dict>(),
         pmp_doc::Polygon_mesh_processing_intersecting_meshes_2);
-  m.def("self_intersections", &pmp::self_intersections<Pm>,
+  m.def("self_intersections", &cgalpy::pmp::self_intersections<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_self_intersections_1);
-  m.def("self_intersections", &pmp::self_intersections_faces<Pm>,
+  m.def("self_intersections", &cgalpy::pmp::self_intersections_faces<Pm>,
         py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_self_intersections);
-  m.def("triangle_soup_self_intersections", &pmp::triangle_soup_self_intersections, // TODO: point_map
+  m.def("triangle_soup_self_intersections", &cgalpy::pmp::triangle_soup_self_intersections, // TODO: point_map
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_triangle_soup_self_intersections);
 }

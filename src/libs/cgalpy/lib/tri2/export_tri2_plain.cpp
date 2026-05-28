@@ -32,12 +32,13 @@
 #include "cgalpy/Tri2_docstrings.hpp"
 #include "CGALPY/types.hpp"
 
-void export_tri2_vertex(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
-void export_tri2_face(py::class_<tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
+void export_tri2_vertex(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
+void export_tri2_face(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
 
 namespace py = nanobind;
-namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
+namespace tri2_doc = cgalpy::tri2::docstrings;
 
+namespace cgalpy {
 namespace tri2 {
 
 //!
@@ -410,19 +411,20 @@ py::object incident_vertices_iterator_1(const Triangulation_2& tri,
   return make_iterator(tri.incident_vertices(vh, fh), tri.incident_vertices(vh, fh));
 }
 
-} // End of namespace tri2
+}
+} // namespace cgalpy // End of namespace tri2
 
 //! Bindings for Triangulation_2
 void export_tri2_plain(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  using Tri = tri2::Triangulation_2;
+  using Tri = cgalpy::tri2::Triangulation_2;
   if (add_attr<Tri>(m, "Triangulation_2")) return;
 
   using Tricc = CGAL::Triangulation_cw_ccw_2;
   py::class_<Tri, Tricc> tri_c(m, "Triangulation_2");
 
-  using Traits = tri2::Traits;
+  using Traits = cgalpy::tri2::Traits;
   using Vertex = Tri::Vertex;
   using Face = Tri::Face;
   using Edge = Tri::Edge;
@@ -430,87 +432,87 @@ void export_tri2_plain(py::module_& m) {
 
   tri_c.def(py::init<>())
     .def(py::init<Tri&>())
-    .def(py::init<const tri2::Traits&>())
-    .def("__init__", &tri2::tri2_init)
-    .def("circumcenter", &tri2::circumcenter, py::arg("f"),
+    .def(py::init<const cgalpy::tri2::Traits&>())
+    .def("__init__", &cgalpy::tri2::tri2_init)
+    .def("circumcenter", &cgalpy::tri2::circumcenter, py::arg("f"),
          tri2_doc::Triangulation_2_circumcenter)
     .def("clear", &Tri::clear,
          tri2_doc::Triangulation_2_clear)
-    .def("degree", &tri2::degree, py::arg("v"),
+    .def("degree", &cgalpy::tri2::degree, py::arg("v"),
          tri2_doc::Triangulation_2_degree)
     .def("dimension", &Tri::dimension,
          tri2_doc::Triangulation_2_dimension)
-    .def("finite_vertex", &tri2::finite_vertex, ri,
+    .def("finite_vertex", &cgalpy::tri2::finite_vertex, ri,
          tri2_doc::Triangulation_2_finite_vertex)
-    .def("flip", &tri2::flip, py::arg("f"), py::arg("i"),
+    .def("flip", &cgalpy::tri2::flip, py::arg("f"), py::arg("i"),
          tri2_doc::Triangulation_2_flip)
     .def("geom_traits", &Tri::geom_traits, ri,
          tri2_doc::Triangulation_2_geom_traits)
-    .def("includes_edge", &tri2::includes_edge, py::arg("va"), py::arg("vb"),
+    .def("includes_edge", &cgalpy::tri2::includes_edge, py::arg("va"), py::arg("vb"),
          tri2_doc::Triangulation_2_includes_edge)
-    .def("inexact_locate", &tri2::inexact_locate1, py::arg("query"),
+    .def("inexact_locate", &cgalpy::tri2::inexact_locate1, py::arg("query"),
          tri2_doc::Triangulation_2_inexact_locate)
-    .def("inexact_locate", &tri2::inexact_locate2, py::arg("query"), py::arg("start"),
+    .def("inexact_locate", &cgalpy::tri2::inexact_locate2, py::arg("query"), py::arg("start"),
          tri2_doc::Triangulation_2_inexact_locate)
-    .def("infinite_face", &tri2::infinite_face, ri,
+    .def("infinite_face", &cgalpy::tri2::infinite_face, ri,
          tri2_doc::Triangulation_2_infinite_face)
-    .def("infinite_vertex", &tri2::infinite_vertex, ri,
+    .def("infinite_vertex", &cgalpy::tri2::infinite_vertex, ri,
          tri2_doc::Triangulation_2_infinite_vertex)
-    .def("insert", &tri2::insert_point1<Tri>, ri, py::arg("p"),
+    .def("insert", &cgalpy::tri2::insert_point1<Tri>, ri, py::arg("p"),
          tri2_doc::Triangulation_2_insert)
-    .def("insert", &tri2::insert_point2<Tri>, ri, py::arg("p"), py::arg("start"),
+    .def("insert", &cgalpy::tri2::insert_point2<Tri>, ri, py::arg("p"), py::arg("start"),
          tri2_doc::Triangulation_2_insert)
-    .def("insert", &tri2::insert_point3<Tri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
+    .def("insert", &cgalpy::tri2::insert_point3<Tri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
          tri2_doc::Triangulation_2_insert_1)
-    .def("insert", &tri2::insert_points<Tri>, ri, py::arg("points"),
+    .def("insert", &cgalpy::tri2::insert_points<Tri>, ri, py::arg("points"),
          tri2_doc::Triangulation_2_insert_2)
-    .def("insert_first", &tri2::insert_first, ri, py::arg("p"),
+    .def("insert_first", &cgalpy::tri2::insert_first, ri, py::arg("p"),
          tri2_doc::Triangulation_2_insert_first)
-    .def("insert_in_edge", &tri2::insert_in_edge, ri, py::arg("p"), py::arg("f"), py::arg("i"),
+    .def("insert_in_edge", &cgalpy::tri2::insert_in_edge, ri, py::arg("p"), py::arg("f"), py::arg("i"),
          tri2_doc::Triangulation_2_insert_in_edge)
-    .def("insert_in_face", &tri2::insert_in_face, ri, py::arg("p"), py::arg("f"),
+    .def("insert_in_face", &cgalpy::tri2::insert_in_face, ri, py::arg("p"), py::arg("f"),
          tri2_doc::Triangulation_2_insert_in_face)
-    .def("insert_outside_affine_hull", &tri2::insert_outside_affine_hull, ri, py::arg("p"),
+    .def("insert_outside_affine_hull", &cgalpy::tri2::insert_outside_affine_hull, ri, py::arg("p"),
          tri2_doc::Triangulation_2_insert_outside_affine_hull)
-    .def("insert_outside_convex_hull", &tri2::insert_outside_convex_hull, ri, py::arg("p"), py::arg("f"),
+    .def("insert_outside_convex_hull", &cgalpy::tri2::insert_outside_convex_hull, ri, py::arg("p"), py::arg("f"),
          tri2_doc::Triangulation_2_insert_outside_convex_hull)
-    .def("insert_second", &tri2::insert_second, ri, py::arg("p"),
+    .def("insert_second", &cgalpy::tri2::insert_second, ri, py::arg("p"),
          tri2_doc::Triangulation_2_insert_second)
-    .def("is_edge", &tri2::is_edge, py::arg("va"), py::arg("vb"),
+    .def("is_edge", &cgalpy::tri2::is_edge, py::arg("va"), py::arg("vb"),
          tri2_doc::Triangulation_2_is_edge)
-    .def("is_edge_get_edge", &tri2::is_edge_get_edge, py::arg("va"), py::arg("vb"),
+    .def("is_edge_get_edge", &cgalpy::tri2::is_edge_get_edge, py::arg("va"), py::arg("vb"),
          tri2_doc::Triangulation_2_is_edge_1)
-    .def("is_face", &tri2::is_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
+    .def("is_face", &cgalpy::tri2::is_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
          tri2_doc::Triangulation_2_is_face)
-    .def("is_face_get_face", &tri2::is_face_get_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
+    .def("is_face_get_face", &cgalpy::tri2::is_face_get_face, py::arg("v1"), py::arg("v2"), py::arg("v3"),
          tri2_doc::Triangulation_2_is_face_1)
-    .def("is_infinite", static_cast<bool (Tri::*)(const tri2::Edge&) const>(&Tri::is_infinite), py::arg("e"),
+    .def("is_infinite", static_cast<bool (Tri::*)(const cgalpy::tri2::Edge&) const>(&Tri::is_infinite), py::arg("e"),
          tri2_doc::Triangulation_2_is_infinite_3)
-    .def("is_infinite", &tri2::is_infinite1, py::arg("f"),
+    .def("is_infinite", &cgalpy::tri2::is_infinite1, py::arg("f"),
          tri2_doc::Triangulation_2_is_infinite_1)
-    .def("is_infinite", &tri2::is_infinite2, py::arg("v"),
+    .def("is_infinite", &cgalpy::tri2::is_infinite2, py::arg("v"),
          tri2_doc::Triangulation_2_is_infinite)
-    .def("is_infinite", &tri2::is_infinite3, py::arg("f"), py::arg("i"),
+    .def("is_infinite", &cgalpy::tri2::is_infinite3, py::arg("f"), py::arg("i"),
          tri2_doc::Triangulation_2_is_infinite_2)
     .def("is_valid", &Tri::is_valid, py::arg("verbose") = false, py::arg("level") = 0,
          tri2_doc::Triangulation_2_is_valid)
-    .def("locate", &tri2::locate1, py::arg("query"),
+    .def("locate", &cgalpy::tri2::locate1, py::arg("query"),
          tri2_doc::Triangulation_2_locate)
-    .def("locate", &tri2::locate2, py::arg("query"), py::arg("start"),
+    .def("locate", &cgalpy::tri2::locate2, py::arg("query"), py::arg("start"),
          tri2_doc::Triangulation_2_locate)
-    .def("locate_get_incident", &tri2::locate_get_incident1, py::arg("query"),
+    .def("locate_get_incident", &cgalpy::tri2::locate_get_incident1, py::arg("query"),
          tri2_doc::Triangulation_2_locate_1)
-    .def("locate_get_incident", &tri2::locate_get_incident2, py::arg("query"), py::arg("start"),
+    .def("locate_get_incident", &cgalpy::tri2::locate_get_incident2, py::arg("query"), py::arg("start"),
          tri2_doc::Triangulation_2_locate_1)
     .def("mirror_edge", &Tri::mirror_edge, py::arg("e"),
          tri2_doc::Triangulation_2_mirror_edge)
-    .def("mirror_index", &tri2::mirror_index, py::arg("f"), py::arg("i"),
+    .def("mirror_index", &cgalpy::tri2::mirror_index, py::arg("f"), py::arg("i"),
          tri2_doc::Triangulation_2_mirror_index)
-    .def("mirror_vertex", &tri2::mirror_vertex, ri, py::arg("f"), py::arg("i"),
+    .def("mirror_vertex", &cgalpy::tri2::mirror_vertex, ri, py::arg("f"), py::arg("i"),
          tri2_doc::Triangulation_2_mirror_vertex)
-    .def("move", &tri2::move, ri, py::arg("v"), py::arg("p"),
+    .def("move", &cgalpy::tri2::move, ri, py::arg("v"), py::arg("p"),
          tri2_doc::Triangulation_2_move)
-    .def("move_if_no_collision", &tri2::move_if_no_collision, ri, py::arg("v"), py::arg("p"),
+    .def("move_if_no_collision", &cgalpy::tri2::move_if_no_collision, ri, py::arg("v"), py::arg("p"),
          tri2_doc::Triangulation_2_move_if_no_collision)
     .def("number_of_vertices", &Tri::number_of_vertices,
          tri2_doc::Triangulation_2_number_of_vertices)
@@ -519,43 +521,43 @@ void export_tri2_plain(py::module_& m) {
     .def("oriented_side",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&>(&Tri::oriented_side, py::const_),
          py::arg("p0"), py::arg("p1"), py::arg("p2"), py::arg("p"))
-    .def("oriented_side", &tri2::oriented_side, py::arg("f"), py::arg("p"),
+    .def("oriented_side", &cgalpy::tri2::oriented_side, py::arg("f"), py::arg("p"),
          tri2_doc::Triangulation_2_oriented_side)
-    .def("point", &tri2::point1, py::arg("v"),
+    .def("point", &cgalpy::tri2::point1, py::arg("v"),
          "Obtain the point of a vertex\n"
          "Parameters:\n"
          "  v (Vertex) the input vertex\n"
          "Return:\n"
          "  Point_2\n")
-    .def("point", &tri2::point2, py::arg("f"), py::arg("i"),
+    .def("point", &cgalpy::tri2::point2, py::arg("f"), py::arg("i"),
          "Obtain the point of vertex i of face f\n"
          "Parameters:\n"
          "  f (Face) the input face\n"
          "  i (int)\n"
          "Return:\n"
          "  Point_2\n")
-    .def("push_back", &tri2::push_back, ri, py::arg("p"),
+    .def("push_back", &cgalpy::tri2::push_back, ri, py::arg("p"),
          tri2_doc::Triangulation_2_push_back)
-    .def("remove", &tri2::remove, py::arg("v"),
+    .def("remove", &cgalpy::tri2::remove, py::arg("v"),
          tri2_doc::Triangulation_2_remove)
-    .def("remove_degree_3", &tri2::remove_degree_31, py::arg("v"),
+    .def("remove_degree_3", &cgalpy::tri2::remove_degree_31, py::arg("v"),
          "Remove a vertex of degree three\n"
          "Parameters:\n"
          "  v (Vertex): the vertex to remove\n")
-    .def("remove_degree_3", &tri2::remove_degree_32, py::arg("v"), py::arg("f"),
+    .def("remove_degree_3", &cgalpy::tri2::remove_degree_32, py::arg("v"), py::arg("f"),
          "Remove a vertex of degree three\n"
          "Parameters:\n"
          "  v (Vertex): the vertex to remove\n"
          "  f (Face)\n")
-    .def("remove_first", &tri2::remove_first, py::arg("v"),
+    .def("remove_first", &cgalpy::tri2::remove_first, py::arg("v"),
          tri2_doc::Triangulation_2_remove_first)
-    .def("remove_second", &tri2::remove_second, py::arg("v"),
+    .def("remove_second", &cgalpy::tri2::remove_second, py::arg("v"),
          tri2_doc::Triangulation_2_remove_second)
     .def("segment", py::overload_cast<const Edge&>(&Tri::segment, py::const_), py::arg("e"),
          tri2_doc::Triangulation_2_segment_1)
-    .def("segment", &tri2::segment, py::arg("f"), py::arg("i"),
+    .def("segment", &cgalpy::tri2::segment, py::arg("f"), py::arg("i"),
          tri2_doc::Triangulation_2_segment)
-    .def("set_infinite_vertex", &tri2::set_infinite_vertex, py::arg("v"),
+    .def("set_infinite_vertex", &cgalpy::tri2::set_infinite_vertex, py::arg("v"),
          tri2_doc::Triangulation_2_set_infinite_vertex)
     .def("side_of_oriented_circle",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&, bool>
@@ -570,18 +572,18 @@ void export_tri2_plain(py::module_& m) {
          "  perturb (Boolean)\n"
          "Return:\n"
          "  Oriented_side\n")
-    .def("side_of_oriented_circle", &tri2::side_of_oriented_circle,
+    .def("side_of_oriented_circle", &cgalpy::tri2::side_of_oriented_circle,
          py::arg("f"), py::arg("p"), py::arg("perturb") = false,
          tri2_doc::Triangulation_2_side_of_oriented_circle)
-    .def("star_hole", &tri2::star_hole1, ri, py::arg("p"), py::arg("edges"),
+    .def("star_hole", &cgalpy::tri2::star_hole1, ri, py::arg("p"), py::arg("edges"),
          tri2_doc::Triangulation_2_star_hole)
-    .def("star_hole", &tri2::star_hole2, ri, py::arg("p"), py::arg("edges"), py::arg("faces"),
+    .def("star_hole", &cgalpy::tri2::star_hole2, ri, py::arg("p"), py::arg("edges"), py::arg("faces"),
          tri2_doc::Triangulation_2_star_hole_1)
     .def("swap", &Tri::swap, py::arg("tr"),
          tri2_doc::Triangulation_2_swap)
     .def("tds", py::overload_cast<>(&Tri::tds), ri,
          tri2_doc::Triangulation_2_tds_1)
-    .def("triangle", &tri2::triangle, py::arg("f"),
+    .def("triangle", &cgalpy::tri2::triangle, py::arg("f"),
          tri2_doc::Triangulation_2_triangle)
 
     // operator=
@@ -608,15 +610,15 @@ void export_tri2_plain(py::module_& m) {
   add_iterator<Fei, Fei, const Edge&>("Finite_edges_iterator", tri_c);
   add_iterator<Pi, Pi, const Pnt&>("Point_iterator", tri_c);
 
-  tri_c.def("all_vertices", &tri2::all_vertices, py::keep_alive<0, 1>())
-    .def("all_edges", &tri2::all_edges, py::keep_alive<0, 1>(),
+  tri_c.def("all_vertices", &cgalpy::tri2::all_vertices, py::keep_alive<0, 1>())
+    .def("all_edges", &cgalpy::tri2::all_edges, py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_all_edges)
-    .def("all_faces", &tri2::all_faces, py::keep_alive<0, 1>())
-    .def("finite_vertices", &tri2::finite_vertices, py::keep_alive<0, 1>())
-    .def("finite_edges", &tri2::finite_edges, py::keep_alive<0, 1>(),
+    .def("all_faces", &cgalpy::tri2::all_faces, py::keep_alive<0, 1>())
+    .def("finite_vertices", &cgalpy::tri2::finite_vertices, py::keep_alive<0, 1>())
+    .def("finite_edges", &cgalpy::tri2::finite_edges, py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_finite_edges)
-    .def("finite_faces", &tri2::finite_faces, py::keep_alive<0, 1>())
-    .def("points", &tri2::points, py::keep_alive<0, 1>(),
+    .def("finite_faces", &cgalpy::tri2::finite_faces, py::keep_alive<0, 1>())
+    .def("points", &cgalpy::tri2::points, py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_points)
     ;
 
@@ -630,22 +632,22 @@ void export_tri2_plain(py::module_& m) {
   add_iterator_from_circulator<Ec, Edge>("Edge_iterator", tri_c);
   add_iterator_from_circulator<Fc>("Face_iterator", tri_c);
 
-  tri_c.def("incident_faces", &tri2::incident_faces_iterator_0,
+  tri_c.def("incident_faces", &cgalpy::tri2::incident_faces_iterator_0,
           py::arg("v"),
           tri2_doc::Triangulation_2_incident_faces)
-    .def("incident_faces", &tri2::incident_faces_iterator_1,
+    .def("incident_faces", &cgalpy::tri2::incident_faces_iterator_1,
          py::arg("v"), py::arg("f"),
          tri2_doc::Triangulation_2_incident_faces_1)
-    .def("incident_edges", &tri2::incident_edges_iterator_0,
+    .def("incident_edges", &cgalpy::tri2::incident_edges_iterator_0,
          py::arg("v"),
          tri2_doc::Triangulation_2_incident_edges)
-    .def("incident_edges", &tri2::incident_edges_iterator_1,
+    .def("incident_edges", &cgalpy::tri2::incident_edges_iterator_1,
          py::arg("v"), py::arg("f"),
          tri2_doc::Triangulation_2_incident_edges_1)
-    .def("incident_vertices", &tri2::incident_vertices_iterator_0,
+    .def("incident_vertices", &cgalpy::tri2::incident_vertices_iterator_0,
          py::arg("v"),
          tri2_doc::Triangulation_2_incident_vertices)
-    .def("incident_vertices", &tri2::incident_vertices_iterator_1,
+    .def("incident_vertices", &cgalpy::tri2::incident_vertices_iterator_1,
          py::arg("v"), py::arg("f"),
          tri2_doc::Triangulation_2_incident_vertices_1)
     ;
@@ -655,16 +657,16 @@ void export_tri2_plain(py::module_& m) {
   export_circulator<Ec, Edge>(tri_c, "Edge_circulator");
   export_circulator<Fc>(tri_c, "Face_circulator");
 
-  tri_c.def("incident_faces_circulator", &tri2::incident_faces_circulator_0)
-    .def("incident_faces_circulator", &tri2::incident_faces_circulator_1)
-    .def("incident_edges_circulator", &tri2::incident_edges_circulator_0)
-    .def("incident_edges_circulator", &tri2::incident_edges_circulator_1)
-    .def("incident_vertices_circulator", &tri2::incident_vertices_circulator_0)
-    .def("incident_vertices_circulator", &tri2::incident_vertices_circulator_1)
+  tri_c.def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_0)
+    .def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_1)
+    .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_0)
+    .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_1)
+    .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_0)
+    .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_1)
     ;
 
   // Enumerations
-  py::enum_<tri2::Locate_type>(tri_c, "Locate_type")
+  py::enum_<cgalpy::tri2::Locate_type>(tri_c, "Locate_type")
     .value("VERTEX", Tri::VERTEX)
     .value("EDGE", Tri::EDGE)
     .value("FACE", Tri::FACE)
@@ -680,22 +682,22 @@ void export_tri2_plain(py::module_& m) {
   ;
 #else
   // In the case of non-priodic triangulation the kernel serves as the traits.
-  if (! add_attr<tri2::Geom_traits>(tri_c, "Geom_traits"))
-    std::cerr << "'tri2::Geom_traits' not registered!\n";
+  if (! add_attr<cgalpy::tri2::Geom_traits>(tri_c, "Geom_traits"))
+    std::cerr << "'cgalpy::tri2::Geom_traits' not registered!\n";
 #endif
 
-  if (! add_attr<tri2::Point>(tri_c, "Point"))
-    std::cerr << "'tri2::Point' not registered!\n";
-  if (! add_attr<tri2::Segment>(tri_c, "Segment"))
-    std::cerr << "'tri2::Segment' not registered!\n";
-  if (! add_attr<tri2::Triangle>(tri_c, "Triangle"))
-    std::cerr << "'tri2::Triangle' not registered!\n";
+  if (! add_attr<cgalpy::tri2::Point>(tri_c, "Point"))
+    std::cerr << "'cgalpy::tri2::Point' not registered!\n";
+  if (! add_attr<cgalpy::tri2::Segment>(tri_c, "Segment"))
+    std::cerr << "'cgalpy::tri2::Segment' not registered!\n";
+  if (! add_attr<cgalpy::tri2::Triangle>(tri_c, "Triangle"))
+    std::cerr << "'cgalpy::tri2::Triangle' not registered!\n";
 
   export_tri2_vertex(tri_c);
   export_tri2_face(tri_c);
 
   py::class_<Edge>(tri_c, "Edge")
-    .def("face", [](Edge& e)->tri2::Face& { return *(e.first); } , ri)
+    .def("face", [](Edge& e)->cgalpy::tri2::Face& { return *(e.first); } , ri)
     .def_rw("index", &Edge::second)
     ;
 
@@ -706,7 +708,7 @@ void export_tri2_plain(py::module_& m) {
 
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
   m.def("draw",
-        [](const Tri& tri, const bvr::Graphics_scene_options& gso, const char* title)
+        [](const Tri& tri, const cgalpy::bvr::Graphics_scene_options& gso, const char* title)
         { CGAL::draw(tri, gso, title); });
 #endif
 #endif

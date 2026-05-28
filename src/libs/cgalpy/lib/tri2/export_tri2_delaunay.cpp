@@ -14,8 +14,9 @@
 #include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;
-namespace tri2_doc = cgalpy::docstrings::Triangulation_2;
+namespace tri2_doc = cgalpy::tri2::docstrings;
 
+namespace cgalpy {
 namespace tri2 {
 
 //!
@@ -26,12 +27,13 @@ void dt2_init(tri2::Delaunay_triangulation_2* tri, py::list& lst) {
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_tri2_delaunay(py::module_& m) {
-  using Dtri = tri2::Delaunay_triangulation_2;
-  using Tri = tri2::Triangulation_2;
-  using Pnt = tri2::Point;
+  using Dtri = cgalpy::tri2::Delaunay_triangulation_2;
+  using Tri = cgalpy::tri2::Triangulation_2;
+  using Pnt = cgalpy::tri2::Point;
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
@@ -40,8 +42,8 @@ void export_tri2_delaunay(py::module_& m) {
   py::class_<Dtri, Tri> tri_c(m, "Delaunay_triangulation_2");
 
   tri_c.def(py::init<>())
-    .def(py::init<const tri2::Traits&>())
-    .def("__init__", &tri2::dt2_init)
+    .def(py::init<const cgalpy::tri2::Traits&>())
+    .def("__init__", &cgalpy::tri2::dt2_init)
     // draw_dual
     // dual
     // dual
@@ -50,13 +52,13 @@ void export_tri2_delaunay(py::module_& m) {
     // get_boundary_of_conflicts
     // get_conflicts
     // get_conflicts_and_boundary
-    .def("insert", &tri2::insert_point1<Dtri>, ri, py::arg("p"),
+    .def("insert", &cgalpy::tri2::insert_point1<Dtri>, ri, py::arg("p"),
          tri2_doc::Delaunay_triangulation_2_insert)
-    .def("insert", &tri2::insert_point2<Dtri>, ri, py::arg("p"), py::arg("f"),
+    .def("insert", &cgalpy::tri2::insert_point2<Dtri>, ri, py::arg("p"), py::arg("f"),
          tri2_doc::Delaunay_triangulation_2_insert)
-    .def("insert", &tri2::insert_point3<Dtri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
+    .def("insert", &cgalpy::tri2::insert_point3<Dtri>, ri, py::arg("p"), py::arg("lt"), py::arg("loc"), py::arg("li"),
          tri2_doc::Delaunay_triangulation_2_insert_1)
-    .def("insert", &tri2::insert_points<Dtri>, ri, py::arg("points"),
+    .def("insert", &cgalpy::tri2::insert_points<Dtri>, ri, py::arg("points"),
          tri2_doc::Delaunay_triangulation_2_insert_2)
     .def("is_valid", &Dtri::is_valid, py::arg("verbose") = false, py::arg("level") = 0,
          tri2_doc::Delaunay_triangulation_2_is_valid)

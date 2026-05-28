@@ -17,6 +17,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri3 {
 
 using Ec = as3::Exact_comparison<as3::exact_comparison()>::type;
@@ -119,6 +120,7 @@ using Weighted_point = Tri::Weighted_point;
 using Bare_point = Tri::Bare_point;
 #endif
 
-} // End of namespace tri3
+}
+} // namespace cgalpy // End of namespace tri3
 
 #endif

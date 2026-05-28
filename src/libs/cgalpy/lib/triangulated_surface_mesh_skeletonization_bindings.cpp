@@ -22,7 +22,7 @@
 namespace py = nanobind;
 
 void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
-  using Tm = pmp::Polygonal_mesh;
+  using Tm = cgalpy::pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Tm>;
   using Fd = boost::graph_traits<Tm>::face_descriptor;
   using Hd = boost::graph_traits<Tm>::halfedge_descriptor;

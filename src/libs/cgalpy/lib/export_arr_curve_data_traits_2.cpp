@@ -30,7 +30,7 @@ void export_extraction(T& xcv_c, std::true_type) { add_extraction(xcv_c); }
 
 //
 void export_arr_curve_data_traits_2(py::module_& m) {
-  using Gt = aos2::Cd_geometry_traits_2;
+  using Gt = cgalpy::aos2::Cd_geometry_traits_2;
   using Base_gt = Gt::Base_traits_2;
   using Cv = Gt::Curve_2;
   using Cv_data = Gt::Curve_data;
@@ -38,7 +38,7 @@ void export_arr_curve_data_traits_2(py::module_& m) {
   using Xcv_data = Gt::X_monotone_curve_data;
   using Xcv = Gt::X_monotone_curve_2;
   using Base_xcv = Base_gt::X_monotone_curve_2;
-  using Cdm = aos2::Curve_data_merge;
+  using Cdm = cgalpy::aos2::Curve_data_merge;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   /* Wrap the Curve_data_merge class. The interface is vased on static member

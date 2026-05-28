@@ -16,6 +16,7 @@
 
 #include "CGALPY/nef_3_config.hpp"
 
+namespace cgalpy {
 namespace nef3 {
 
 using Nef_polyhedron_3 =
@@ -23,5 +24,6 @@ using Nef_polyhedron_3 =
 using Polygonal_mesh = Poly_mesh<CGALPY_NEF3_POLYGONAL_MESH>::type;
 
 }
+} // namespace cgalpy
 
 #endif

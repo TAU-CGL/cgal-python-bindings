@@ -15,8 +15,9 @@
 #include "cgalpy/Env3_docstrings.hpp"
 
 namespace py = nanobind;
-namespace env3_doc = cgalpy::docstrings::Envelope_3;
+namespace env3_doc = cgalpy::env3::docstrings;
 
+namespace cgalpy {
 namespace env3 {
 
 //
@@ -56,6 +57,7 @@ Envelope_diagram_2 upper_envelope_xy_monotone_3(const py::list& surfaces) {
 }
 
 }
+} // namespace cgalpy
 
 void export_envelope_3(py::module_& m) {
   using Dd = CGAL::Dac_decision;
@@ -68,11 +70,11 @@ void export_envelope_3(py::module_& m) {
       ;
   }
 
-  using Ed = env3::Envelope_diagram_2;
-  using Edos = env3::Envelope_diagram_on_surface_2;
+  using Ed = cgalpy::env3::Envelope_diagram_2;
+  using Edos = cgalpy::env3::Envelope_diagram_on_surface_2;
   using Aos = Edos::Base;
-  using Traits = env3::Geometry_traits_3;
-  using Srf = env3::Surface_3;
+  using Traits = cgalpy::env3::Geometry_traits_3;
+  using Srf = cgalpy::env3::Surface_3;
 
   if (! add_attr<Aos>(m, "Arrangement_on_surface_2")) {
     PyErr_SetString(PyExc_StopIteration,
@@ -100,12 +102,12 @@ void export_envelope_3(py::module_& m) {
       ;
   }
 
-  m.def("lower_envelope_3", &env3::lower_envelope_3,
+  m.def("lower_envelope_3", &cgalpy::env3::lower_envelope_3,
         py::arg("surfaces"), env3_doc::lower_envelope_3);
-  m.def("lower_envelope_xy_monotone_3", &env3::lower_envelope_xy_monotone_3,
+  m.def("lower_envelope_xy_monotone_3", &cgalpy::env3::lower_envelope_xy_monotone_3,
         py::arg("surfaces"), env3_doc::lower_envelope_xy_monotone_3);
-  m.def("upper_envelope_3", &env3::upper_envelope_3,
+  m.def("upper_envelope_3", &cgalpy::env3::upper_envelope_3,
         py::arg("surfaces"), env3_doc::upper_envelope_3);
-  m.def("upper_envelope_xy_monotone_3", &env3::upper_envelope_xy_monotone_3,
+  m.def("upper_envelope_xy_monotone_3", &cgalpy::env3::upper_envelope_xy_monotone_3,
         py::arg("surfaces"), env3_doc::upper_envelope_xy_monotone_3);
 }

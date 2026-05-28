@@ -13,6 +13,7 @@
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri3 {
 
 //!
@@ -31,10 +32,11 @@ bool vertex_is_valid2(const Vertex& vertex, bool verbose) { return vertex.is_val
 bool vertex_is_valid3(const Vertex& vertex) { return vertex.is_valid(); }
 
 }
+} // namespace cgalpy
 
 //!
-void export_tri3_vertex(py::class_<tri3::Triangulation_3>& tri_c) {
-  using Vertex = tri3::Vertex;
+void export_tri3_vertex(py::class_<cgalpy::tri3::Triangulation_3>& tri_c) {
+  using Vertex = cgalpy::tri3::Vertex;
 
   if (add_attr<Vertex>(tri_c, "Vertex")) return;
 
@@ -42,13 +44,13 @@ void export_tri3_vertex(py::class_<tri3::Triangulation_3>& tri_c) {
 
   py::class_<Vertex>(tri_c, "Vertex")
     .def(py::init<>())
-    .def("cell", &tri3::cell, ri)
+    .def("cell", &cgalpy::tri3::cell, ri)
     .def("point", py::overload_cast<>(&Vertex::point, py::const_), ri)
-    .def("set_cell", &tri3::set_cell)
+    .def("set_cell", &cgalpy::tri3::set_cell)
     .def("set_point", &Vertex::set_point)
-    .def("is_valid", &tri3::vertex_is_valid1)
-    .def("is_valid", &tri3::vertex_is_valid2)
-    .def("is_valid", &tri3::vertex_is_valid3)
+    .def("is_valid", &cgalpy::tri3::vertex_is_valid1)
+    .def("is_valid", &cgalpy::tri3::vertex_is_valid2)
+    .def("is_valid", &cgalpy::tri3::vertex_is_valid3)
 
 #ifdef CGALPY_TRI3_VERTEX_WITH_INFO
     .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })

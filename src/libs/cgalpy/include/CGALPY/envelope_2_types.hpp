@@ -15,6 +15,7 @@
 
 #include "CGALPY/arrangement_on_surface_2_types.hpp"
 
+namespace cgalpy {
 namespace env2 {
 
 using Gt = aos2::Geometry_traits_2;
@@ -26,5 +27,6 @@ using Vertex = Envelope_diagram_1::Vertex;
 using Edge = Envelope_diagram_1::Edge;
 
 }
+} // namespace cgalpy
 
 #endif

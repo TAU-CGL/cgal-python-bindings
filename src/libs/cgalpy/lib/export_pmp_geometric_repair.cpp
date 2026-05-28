@@ -24,6 +24,7 @@
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
+namespace cgalpy {
 namespace pmp {
 
 //!
@@ -135,17 +136,18 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
 }
 
 }
+} // namespace cgalpy
 
 //!
 void export_pmp_geometric_repair(py::module_& m) {
-  using Pm = pmp::Polygonal_mesh;
+  using Pm = cgalpy::pmp::Polygonal_mesh;
 
-  m.def("remove_almost_degenerate_faces", &pmp::remove_almost_degenerate_faces_r<Pm>,
+  m.def("remove_almost_degenerate_faces", &cgalpy::pmp::remove_almost_degenerate_faces_r<Pm>,
         py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict());
-  m.def("remove_almost_degenerate_faces", &pmp::remove_almost_degenerate_faces<Pm>,
+  m.def("remove_almost_degenerate_faces", &cgalpy::pmp::remove_almost_degenerate_faces<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict());
   m.def("remove_connected_components_of_negligible_size",
-        &pmp::remove_connected_components_of_negligible_size<Pm>, // TODO: output_iterator
+        &cgalpy::pmp::remove_connected_components_of_negligible_size<Pm>, // TODO: output_iterator
         py::arg("tmesh"), py::arg("np") = py::dict());
   m.def("remove_isolated_vertices", &PMP::remove_isolated_vertices<Pm>,
         py::arg("pmesh"));
