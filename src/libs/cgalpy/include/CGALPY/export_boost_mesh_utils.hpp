@@ -24,7 +24,10 @@
 
 #include <CGAL/boost/graph/Euler_operations.h>
 
+#include "cgalpy/Bgl_docstrings.hpp"
+
 namespace py = nanobind;
+namespace bgl_doc = cgalpy::bgl::docstrings;
 
 namespace boost_utils {
 
@@ -84,70 +87,59 @@ C define_euler_operations(C& c) {
   using Gt = boost::graph_traits<Graph>;
   using VertexRange = std::vector<typename Gt::vertex_descriptor>;
   c.def("join_vertex", &CGAL::Euler::join_vertex<Graph>,
-        py::arg("h"), py::arg("g"),
-        "joins the two vertices incident to h, (that is source(h, g) and target(h, g)) and removes source(h,g).");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_join_vertex);
   c.def("split_vertex", &CGAL::Euler::split_vertex<Graph>,
         py::arg("h1"), py::arg("h2"), py::arg("g"),
-        "splits the target vertex v of h1 and h2, and connects the new vertex and v with a new edge.");
+        bgl_doc::Euler_split_vertex);
   c.def("split_edge", &CGAL::Euler::split_edge<Graph>,
-        py::arg("h"), py::arg("g"),
-        "splits the halfedge h into two halfedges inserting a new vertex that is a copy of vertex(opposite(h,g),g).");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_split_edge);
   c.def("join_face", &CGAL::Euler::join_face<Graph>,
-        py::arg("h"), py::arg("g"),
-        "joins the two faces incident to h and opposite(h,g).");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_join_face);
   c.def("split_face", &CGAL::Euler::split_face<Graph>,
         py::arg("h1"), py::arg("h2"), py::arg("g"),
-        "splits the face incident to h1 and h2.");
+        bgl_doc::Euler_split_face);
   c.def("join_loop", &CGAL::Euler::join_loop<Graph>,
         py::arg("h1"), py::arg("h2"), py::arg("g"),
-        "glues the cycle of halfedges of h1 and h2 together.");
+        bgl_doc::Euler_join_loop);
   c.def("split_loop", &CGAL::Euler::split_loop<Graph>,
         py::arg("h1"), py::arg("h2"), py::arg("h3"), py::arg("g"),
-        "cuts the graph along the cycle (h1,h2,h3) changing the genus (halfedge h3 runs on the backside of the three dimensional figure below).");
+        bgl_doc::Euler_split_loop);
   c.def("remove_face", &CGAL::Euler::remove_face<Graph>,
-        py::arg("h"), py::arg("g"),
-        "removes the incident face of h and changes all halfedges incident to the face into border halfedges or removes them from the graph if they were already border halfedges.");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_remove_face);
   c.def("add_edge", &CGAL::Euler::add_edge<Graph>,
         py::arg("s"), py::arg("t"), py::arg("g"),
-        "adds and returns the edge e connecting s and t halfedge(e, g) has s as source and t as target");
+        bgl_doc::Euler_add_edge);
   c.def("can_add_face", &CGAL::Euler::can_add_face<VertexRange, Graph>,
         py::arg("vrange"), py::arg("sm"),
 #if (CGAL_VERSION_NR > 1060200000)
         py::arg("verbose") = false,
 #endif
-        "checks whether a new face defined by a range of vertices (identified by their descriptors, boost::graph_traits<Graph>::vertex_descriptor) can be added.");
+        bgl_doc::Euler_can_add_face);
   c.def("add_face", &CGAL::Euler::add_face<Graph, VertexRange>,
-        py::arg("vr"), py::arg("g"),
-        "adds a new face defined by a range of vertices (identified by their descriptors, boost::graph_traits<Graph>::vertex_descriptor).");
+        py::arg("vr"), py::arg("g"), bgl_doc::Euler_add_face);
   c.def("make_hole", &CGAL::Euler::make_hole<Graph>,
-        py::arg("h"), py::arg("g"),
-        "removes the incident face of h and changes all halfedges incident to the face into border halfedges.");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_make_hole);
   c.def("fill_hole", &CGAL::Euler::fill_hole<Graph>,
-        py::arg("h"), py::arg("g"),
-        "fills the hole incident to h.");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_fill_hole);
   c.def("add_center_vertex", &CGAL::Euler::add_center_vertex<Graph>,
-        py::arg("h"), py::arg("g"),
-        "creates a barycentric triangulation of the face incident to h.");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_add_center_vertex);
   c.def("remove_center_vertex", &CGAL::Euler::remove_center_vertex<Graph>,
-        py::arg("h"), py::arg("g"),
-        "removes the vertex target(h, g) and all incident halfedges thereby merging all incident faces.");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_remove_center_vertex);
   c.def("add_vertex_and_face_to_border", &CGAL::Euler::add_vertex_and_face_to_border<Graph>,
         py::arg("h1"), py::arg("h2"), py::arg("g"),
-        "appends a new face to the border halfedge h2 by connecting the tip of h2 with the tip of h1 with two new halfedges and a new vertex and creating a new face that is incident to h2.");
+        bgl_doc::Euler_add_vertex_and_face_to_border);
   c.def("add_face_to_border", &CGAL::Euler::add_face_to_border<Graph>,
         py::arg("h1"), py::arg("h2"), py::arg("g"),
-        "appends a new face incident to the border halfedge h1 and h2 by connecting the vertex target(h2,g) and the vertex target(h1,g) with a new halfedge, and filling this separated part of the hole with a new face, such that the new face is incident to h2.");
+        bgl_doc::Euler_add_face_to_border);
   c.def("does_satisfy_link_condition", &CGAL::Euler::does_satisfy_link_condition<Graph>,
-        py::arg("e"), py::arg("g"));
+        py::arg("e"), py::arg("g"), bgl_doc::Euler_does_satisfy_link_condition);
   c.def("collapse_edge", &CGAL::Euler::collapse_edge<Graph>,
-        py::arg("e"), py::arg("g"),
-        "collapses an edge in a graph.");
+        py::arg("e"), py::arg("g"), bgl_doc::Euler_collapse_edge);
   c.def("collapse_edge", &CGAL::Euler::collapse_edge<Graph, EdgeIsConstrainedMap>,
-        py::arg("v0v1"), py::arg("g"), py::arg("Edge_is_constrained_map"),
-        "collapses an edge in a graph having non-collapsable edges.");
+        py::arg("e"), py::arg("g"), py::arg("edge_is_constrained_map"),
+        bgl_doc::Euler_collapse_edge_1);
   c.def("flip_edge", &CGAL::Euler::flip_edge<Graph>,
-        py::arg("h"), py::arg("g"),
-        "performs an edge flip, rotating the edge pointed by h by one vertex in the direction of the face orientation.");
+        py::arg("h"), py::arg("g"), bgl_doc::Euler_flip_edge);
   return c;
 }
 

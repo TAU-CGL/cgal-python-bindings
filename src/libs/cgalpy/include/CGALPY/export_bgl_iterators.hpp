@@ -18,8 +18,10 @@
 #include <CGAL/boost/graph/iterator.h>
 
 #include "CGALPY/export_circulator.hpp"
+#include "cgalpy/Bgl_docstrings.hpp"
 
 namespace py = nanobind;
+namespace bgl_doc = cgalpy::bgl::docstrings;
 
 namespace cgalpy {
 namespace bgl {
@@ -163,24 +165,24 @@ auto vertices_around_face(typename boost::graph_traits<Graph>::halfedge_descript
 template <typename Graph>
 void export_bgl_iterators(py::module_& m) {
   // Iterators
-  m.def("halfedges_around_target", &cgalpy::bgl::halfedges_around_target_h<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex target(h,g) as target.");
-  m.def("halfedges_around_target", &cgalpy::bgl::halfedges_around_target_v<Graph>, py::arg("v"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex v as target.");
-  m.def("halfedges_around_source", &cgalpy::bgl::halfedges_around_source_v<Graph>, py::arg("v"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex v as source.");
-  m.def("halfedges_around_source", &cgalpy::bgl::halfedges_around_source_h<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex source(h,g) as source.");
-  m.def("halfedges_around_face", &cgalpy::bgl::halfedges_around_face<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all halfedges incident to the same face or border as h.");
-  m.def("faces_around_target", &cgalpy::bgl::faces_around_target<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all faces around vertex target(h,g).");
-  m.def("faces_around_face", &cgalpy::bgl::faces_around_face<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all edge-adjacent faces to the same face face(h,g).");
-  m.def("vertices_around_target", &cgalpy::bgl::vertices_around_target<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all vertices adjacent to the vertex target(h,g).");
-  m.def("vertices_around_face", &cgalpy::bgl::vertices_around_face<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all vertices adjacent to the face face(h,g).");
+  m.def("halfedges_around_target", &cgalpy::bgl::halfedges_around_target_h<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_target);
+  m.def("halfedges_around_target", &cgalpy::bgl::halfedges_around_target_v<Graph>,
+        py::arg("v"), py::arg("g"), bgl_doc::halfedges_around_target_1);
+  m.def("halfedges_around_source", &cgalpy::bgl::halfedges_around_source_v<Graph>,
+        py::arg("v"), py::arg("g"), bgl_doc::halfedges_around_source_1);
+  m.def("halfedges_around_source", &cgalpy::bgl::halfedges_around_source_h<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_source);
+  m.def("halfedges_around_face", &cgalpy::bgl::halfedges_around_face<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_face);
+  m.def("faces_around_target", &cgalpy::bgl::faces_around_target<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::faces_around_target);
+  m.def("faces_around_face", &cgalpy::bgl::faces_around_face<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::faces_around_face);
+  m.def("vertices_around_target", &cgalpy::bgl::vertices_around_target<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::vertices_around_target_1);
+  m.def("vertices_around_face", &cgalpy::bgl::vertices_around_face<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::vertices_around_face);
 
   // Circulators
   using Vd = typename boost::graph_traits<Graph>::vertex_descriptor;
@@ -190,30 +192,26 @@ void export_bgl_iterators(py::module_& m) {
   using Hatc = CGAL::Halfedge_around_target_circulator<Graph>;
   export_circulator<Hatc, Hd>(m, "Halfedge_around_target_circulator");
   m.def("halfedges_around_target_circulator", &cgalpy::bgl::halfedges_around_target_h_circulator<Graph>,
-        py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex target(h,g) as target.");
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class);
   m.def("halfedges_around_target_circulator", &cgalpy::bgl::halfedges_around_target_v_circulator<Graph>,
-        py::arg("v"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex v as target.");
+        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class);
 
   using Hasc = CGAL::Halfedge_around_source_circulator<Graph>;
   export_circulator<Hasc, Hd>(m, "Halfedge_around_source_circulator");
   m.def("halfedges_around_source_circulator", &cgalpy::bgl::halfedges_around_source_v_circulator<Graph>,
-        py::arg("v"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex v as source.");
+        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class);
   m.def("halfedges_around_source_circulator", &cgalpy::bgl::halfedges_around_source_h_circulator<Graph>,
-        py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex source(h,g) as source.");
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class);
 
   using Hafc = CGAL::Halfedge_around_face_circulator<Graph>;
   export_circulator<Hafc, Hd>(m, "Halfedge_around_face_circulator");
-  m.def("halfedges_around_face_circulator", &cgalpy::bgl::halfedges_around_face_circulator<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all halfedges incident to the same face or border as h.");
+  m.def("halfedges_around_face_circulator", &cgalpy::bgl::halfedges_around_face_circulator<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_face_circulator_class);
 
   using Fatc = CGAL::Face_around_target_circulator<Graph>;
   export_circulator<Fatc, Fd>(m, "Face_around_target_circulator");
-  m.def("faces_around_target_circulator", &cgalpy::bgl::faces_around_target_circulator<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all faces around vertex target(h,g).");
+  m.def("faces_around_target_circulator", &cgalpy::bgl::faces_around_target_circulator<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::Face_around_target_circulator_class);
 
 // Do not export Face_around_face_circulator here.  CGAL currently exposes it
 // as an empty placeholder type.  The iterator API faces_around_face remains
@@ -221,13 +219,13 @@ void export_bgl_iterators(py::module_& m) {
 
   using Vatc = CGAL::Vertex_around_target_circulator<Graph>;
   export_circulator<Vatc, Vd>(m, "Vertex_around_target_circulator");
-  m.def("vertices_around_target_circulator", &cgalpy::bgl::vertices_around_target_circulator<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all vertices adjacent to the vertex target(h,g).");
+  m.def("vertices_around_target_circulator", &cgalpy::bgl::vertices_around_target_circulator<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_target_circulator_class);
 
   using Vafc = CGAL::Vertex_around_face_circulator<Graph>;
   export_circulator<Vafc, Vd>(m, "Vertex_around_face_circulator");
-  m.def("vertices_around_face_circulator", &cgalpy::bgl::vertices_around_face_circulator<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all vertices adjacent to the face face(h,g).");
+  m.def("vertices_around_face_circulator", &cgalpy::bgl::vertices_around_face_circulator<Graph>,
+        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_face_circulator_class);
 }
 
 #endif

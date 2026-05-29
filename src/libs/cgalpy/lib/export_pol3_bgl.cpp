@@ -11,6 +11,9 @@
 #include "CGALPY/export_circulator.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/Bgl_docstrings.hpp"
+
+namespace bgl_doc = cgalpy::bgl::docstrings;
 
 namespace cgalpy {
 namespace pol3 {
@@ -178,70 +181,70 @@ void export_pol3_bgl(py::module_& m) {
   // We use the dereference circulator, because we need to dereference twice
   using Hati = CGAL::Halfedge_around_target_iterator<Prn>;
   add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_iterator", m);
-  m.def("halfedges_around_target", &cgalpy::pol3::halfedges_around_target_v_iterator, py::arg("v"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex v as target",
+  m.def("halfedges_around_target", &cgalpy::pol3::halfedges_around_target_v_iterator,
+        py::arg("v"), py::arg("g"), bgl_doc::halfedges_around_target_1,
         py::keep_alive<0, 1>());
-  m.def("halfedges_around_target", &cgalpy::pol3::halfedges_around_target_h_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex target(h,g) as target",
+  m.def("halfedges_around_target", &cgalpy::pol3::halfedges_around_target_h_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_target,
         py::keep_alive<0, 1>());
 
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   export_dereference_circulator<Hatc, Halfedge&>(m, "Halfedge_around_target_circulator");
-  m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_v_circulator, py::arg("v"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex v as target");
-  m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_h_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex target(h,g) as target");
+  m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_v_circulator,
+        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class);
+  m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_h_circulator,
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class);
 
   // Halfedges around source
   // We use the dereference circulator, because we need to dereference twice
   using Hasi = CGAL::Halfedge_around_source_iterator<Prn>;
   add_dereference_iterator<Hasi, Hasi, Halfedge&>("Halfedge_around_source_iterator", m);
-  m.def("halfedges_around_source", &cgalpy::pol3::halfedges_around_source_v_iterator, py::arg("v"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex v as source",
+  m.def("halfedges_around_source", &cgalpy::pol3::halfedges_around_source_v_iterator,
+        py::arg("v"), py::arg("g"), bgl_doc::halfedges_around_source_1,
         py::keep_alive<0, 1>());
-  m.def("halfedges_around_source", &cgalpy::pol3::halfedges_around_source_h_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all halfedges with vertex source(h,g) as source",
+  m.def("halfedges_around_source", &cgalpy::pol3::halfedges_around_source_h_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_source,
         py::keep_alive<0, 1>());
 
   using Hasc = CGAL::Halfedge_around_source_circulator<Prn>;
   export_dereference_circulator<Hasc, Halfedge&>(m, "Halfedge_around_source_circulator");
-  m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_v_circulator, py::arg("v"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex v as source");
-  m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_h_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all halfedges with vertex source(h,g) as source");
+  m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_v_circulator,
+        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class);
+  m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_h_circulator,
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class);
 
   // Halfedges around face
   // We use the dereference circulator, because we need to dereference twice
   using Hafi = CGAL::Halfedge_around_face_iterator<Prn>;
   add_dereference_iterator<Hafi, Hafi, Halfedge&>("Halfedge_around_face_iterator", m);
-  m.def("halfedges_around_face", &cgalpy::pol3::halfedges_around_face_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all halfedges incident to the same face or border as h",
+  m.def("halfedges_around_face", &cgalpy::pol3::halfedges_around_face_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_face,
         py::keep_alive<0, 1>());
 
   using Hafc = CGAL::Halfedge_around_face_circulator<Prn>;
   export_dereference_circulator<Hafc, Halfedge&>(m, "Halfedge_around_face_circulator");
-  m.def("halfedges_around_face_circulator", &cgalpy::pol3::halfedges_around_face_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all halfedges incident to the same face or border as h");
+  m.def("halfedges_around_face_circulator", &cgalpy::pol3::halfedges_around_face_circulator,
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_face_circulator_class);
 
   // Faces around target
   // We use the dereference circulator, because we need to dereference twice
   using Fati = CGAL::Face_around_target_iterator<Prn>;
   add_dereference_iterator<Fati, Fati, Face&>("Face_around_target_iterator", m);
-  m.def("Face_around_target", &cgalpy::pol3::faces_around_target_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all faces around vertex target(h,g)",
+  m.def("Face_around_target", &cgalpy::pol3::faces_around_target_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::faces_around_target,
         py::keep_alive<0, 1>());
 
   using Fatc = CGAL::Face_around_target_circulator<Prn>;
   export_dereference_circulator<Fatc, Face&>(m, "Face_around_target_circulator");
-  m.def("faces_around_target_circulator", &cgalpy::pol3::faces_around_target_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all faces around vertex target(h,g)");
+  m.def("faces_around_target_circulator", &cgalpy::pol3::faces_around_target_circulator,
+        py::arg("h"), py::arg("g"), bgl_doc::Face_around_target_circulator_class);
 
   // Faces around face
   // We use the dereference circulator, because we need to dereference twice
   using Fafi = CGAL::Face_around_face_iterator<Prn>;
   add_dereference_iterator<Fafi, Fafi, Face&>("Face_around_face_iterator", m);
-  m.def("Face_around_face", &cgalpy::pol3::faces_around_face_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all faces adjacent to the same face face(h,g)",
+  m.def("Face_around_face", &cgalpy::pol3::faces_around_face_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::faces_around_face,
         py::keep_alive<0, 1>());
 
   // Do not export Face_around_face_circulator here.  CGAL currently exposes it
@@ -252,25 +255,25 @@ void export_pol3_bgl(py::module_& m) {
   // We use the dereference circulator, because we need to dereference twice
   using Vati = CGAL::Vertex_around_target_iterator<Prn>;
   add_dereference_iterator<Vati, Vati, Vertex&>("Vertex_around_target_iterator", m);
-  m.def("Vertex_around_target", &cgalpy::pol3::vertices_around_target_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all vertices adjacent to the vertex target(h,g)",
+  m.def("Vertex_around_target", &cgalpy::pol3::vertices_around_target_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::vertices_around_target_1,
         py::keep_alive<0, 1>());
 
   using Vatc = CGAL::Vertex_around_target_circulator<Prn>;
   export_dereference_circulator<Vatc, Vertex&>(m, "Vertex_around_target_circulator");
-  m.def("vertices_around_target_circulator", &cgalpy::pol3::vertices_around_target_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all vertices adjacent to the vertex target(h,g)");
+  m.def("vertices_around_target_circulator", &cgalpy::pol3::vertices_around_target_circulator,
+        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_target_circulator_class);
 
   // Vertices around face
   // We use the dereference circulator, because we need to dereference twice
   using Vafi = CGAL::Vertex_around_face_iterator<Prn>;
   add_dereference_iterator<Vafi, Vafi, Vertex&>("Vertex_around_face_iterator", m);
-  m.def("Vertex_around_face", &cgalpy::pol3::vertices_around_face_iterator, py::arg("h"), py::arg("g"),
-        "Obtain an iterator over all vertices adjacent to the face face(h,g)",
+  m.def("Vertex_around_face", &cgalpy::pol3::vertices_around_face_iterator,
+        py::arg("h"), py::arg("g"), bgl_doc::vertices_around_face,
         py::keep_alive<0, 1>());
 
   using Vafc = CGAL::Vertex_around_face_circulator<Prn>;
   export_dereference_circulator<Vafc, Vertex&>(m, "Vertex_around_face_circulator");
-  m.def("vertices_around_face_circulator", &cgalpy::pol3::vertices_around_face_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all vertices adjacent to the face face(h,g)");
+  m.def("vertices_around_face_circulator", &cgalpy::pol3::vertices_around_face_circulator,
+        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_face_circulator_class);
 }

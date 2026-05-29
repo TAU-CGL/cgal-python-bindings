@@ -12,6 +12,7 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "cgalpy/Bgl_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -19,25 +20,37 @@ namespace cgalpy {
 namespace bgl {
 
 template <typename DynamicPropertyMapTag>
-void register_dynamic_property_map_tag(py::module_& m, const std::string& name) {
+void register_dynamic_property_map_tag(py::module_& m, const std::string& name,
+                                       const char* doc) {
   using Dpmt = DynamicPropertyMapTag;
-  if (! add_attr<Dpmt>(m, name.c_str())) py::class_<Dpmt>(m, name.c_str()).def(py::init<>());
+  if (! add_attr<Dpmt>(m, name.c_str())) {
+    py::class_<Dpmt>(m, name.c_str(), doc)
+      .def(py::init<>());
+  }
 }
 
 //!
 template<typename T>
 void register_dynamic_property_map_tags(py::module_& m, const std::string& prop_name) {
   using Dvpt = CGAL::dynamic_vertex_property_t<T>;
-  register_dynamic_property_map_tag<Dvpt>(m, "dynamic_vertex_" + prop_name + "_property_t");
+  register_dynamic_property_map_tag<Dvpt>(
+      m, "dynamic_vertex_" + prop_name + "_property_t",
+      docstrings::dynamic_vertex_property_t_class);
 
   using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
-  register_dynamic_property_map_tag<Dhpt>(m, "dynamic_halfedge_" + prop_name + "_property_t");
+  register_dynamic_property_map_tag<Dhpt>(
+      m, "dynamic_halfedge_" + prop_name + "_property_t",
+      docstrings::dynamic_halfedge_property_t_class);
 
   using Dfpt = CGAL::dynamic_face_property_t<T>;
-  register_dynamic_property_map_tag<Dfpt>(m, "dynamic_face_" + prop_name + "_property_t");
+  register_dynamic_property_map_tag<Dfpt>(
+      m, "dynamic_face_" + prop_name + "_property_t",
+      docstrings::dynamic_face_property_t_class);
 
   using Dept = CGAL::dynamic_edge_property_t<T>;
-  register_dynamic_property_map_tag<Dept>(m, "dynamic_edge_" + prop_name + "_property_t");
+  register_dynamic_property_map_tag<Dept>(
+      m, "dynamic_edge_" + prop_name + "_property_t",
+      docstrings::dynamic_edge_property_t_class);
 }
 
 }
@@ -57,43 +70,57 @@ void export_bgl(py::module_& m) {
 
   const py::handle info_vertex_point = py::type<vertex_point_t>();
   if (info_vertex_point.is_valid()) m.attr("vertex_point_t") = info_vertex_point;
-  else py::enum_<vertex_point_t>(m, "vertex_point_t").value("vertex_point", CGAL::vertex_point).export_values();
+  else py::enum_<vertex_point_t>(m, "vertex_point_t", cgalpy::bgl::docstrings::vertex_point_t)
+         .value("vertex_point", CGAL::vertex_point)
+         .export_values();
 
   const py::handle info_vertex_index = py::type<vertex_index_t>();
   if (info_vertex_index.is_valid()) m.attr("vertex_index_t") = info_vertex_index;
-  else py::enum_<vertex_index_t>(m, "vertex_index_t").value("vertex_index", CGAL::vertex_index).export_values();
+  else py::enum_<vertex_index_t>(m, "vertex_index_t", cgalpy::bgl::docstrings::vertex_index_t)
+         .value("vertex_index", CGAL::vertex_index)
+         .export_values();
 
   const py::handle info_vertex_external_index = py::type<vertex_external_index_t>();
   if (info_vertex_external_index.is_valid()) m.attr("vertex_external_index_t") = info_vertex_external_index;
-  else py::enum_<vertex_external_index_t>(m, "vertex_external_index_t").
-         value("vertex_external_index", CGAL::vertex_external_index).export_values();
+  else py::enum_<vertex_external_index_t>(m, "vertex_external_index_t")
+         .value("vertex_external_index", CGAL::vertex_external_index)
+         .export_values();
 
   const py::handle info_halfedge_index = py::type<halfedge_index_t>();
   if (info_halfedge_index.is_valid()) m.attr("halfedge_index_t") = info_halfedge_index;
-  else py::enum_<halfedge_index_t>(m, "halfedge_index_t").value("halfedge_index", CGAL::halfedge_index).export_values();
+  else py::enum_<halfedge_index_t>(m, "halfedge_index_t", cgalpy::bgl::docstrings::halfedge_index_t)
+         .value("halfedge_index", CGAL::halfedge_index)
+         .export_values();
 
   const py::handle info_halfedge_external_index = py::type<halfedge_external_index_t>();
   if (info_halfedge_external_index.is_valid()) m.attr("halfedge_external_index_t") = info_halfedge_external_index;
-  else py::enum_<halfedge_external_index_t>(m, "halfedge_external_index_t").
-         value("halfedge_external_index", CGAL::halfedge_external_index).export_values();
+  else py::enum_<halfedge_external_index_t>(m, "halfedge_external_index_t")
+         .value("halfedge_external_index", CGAL::halfedge_external_index)
+         .export_values();
 
   const py::handle info_edge_index = py::type<edge_index_t>();
   if (info_edge_index.is_valid()) m.attr("edge_index_t") = info_edge_index;
-  else py::enum_<edge_index_t>(m, "edge_index_t").value("edge_index", CGAL::edge_index).export_values();
+  else py::enum_<edge_index_t>(m, "edge_index_t", cgalpy::bgl::docstrings::edge_index_t)
+         .value("edge_index", CGAL::edge_index)
+         .export_values();
 
   const py::handle info_edge_external_index = py::type<edge_external_index_t>();
   if (info_edge_external_index.is_valid()) m.attr("edge_external_index_t") = info_edge_external_index;
-  else py::enum_<edge_external_index_t>(m, "edge_external_index_t").
-         value("edge_external_index", CGAL::edge_external_index).export_values();
+  else py::enum_<edge_external_index_t>(m, "edge_external_index_t")
+         .value("edge_external_index", CGAL::edge_external_index)
+         .export_values();
 
   const py::handle info_face_index = py::type<face_index_t>();
   if (info_face_index.is_valid()) m.attr("face_index_t") = info_face_index;
-  else py::enum_<face_index_t>(m, "face_index_t").value("face_index", CGAL::face_index).export_values();
+  else py::enum_<face_index_t>(m, "face_index_t", cgalpy::bgl::docstrings::face_index_t)
+         .value("face_index", CGAL::face_index)
+         .export_values();
 
   const py::handle info_face_external_index = py::type<face_external_index_t>();
   if (info_face_external_index.is_valid()) m.attr("face_external_index_t") = info_face_external_index;
-  else py::enum_<face_external_index_t>(m, "face_external_index_t").
-         value("face_external_index", CGAL::face_external_index).export_values();
+  else py::enum_<face_external_index_t>(m, "face_external_index_t")
+         .value("face_external_index", CGAL::face_external_index)
+         .export_values();
 
   cgalpy::bgl::register_dynamic_property_map_tags<bool>(m, "bool");
   cgalpy::bgl::register_dynamic_property_map_tags<std::size_t>(m, "size_t");
