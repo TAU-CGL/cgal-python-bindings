@@ -14,6 +14,9 @@ namespace py = nanobind;
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/triangulation_d_types.hpp"
+#include "cgalpy/Trid_docstrings.hpp"
+
+namespace trid_doc = cgalpy::trid::docstrings;
 
 namespace cgalpy {
 namespace trid {
@@ -86,32 +89,59 @@ void export_trid_full_cell(py::class_<cgalpy::trid::Triangulation_d>& tri_c) {
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Fc> fc_c(tri_c, "Full_cell");
+  py::class_<Fc> fc_c(tri_c, "Full_cell",
+                          trid_doc::Triangulation_full_cell_class);
 
-  fc_c.def(py::init<int>())
-    .def(py::init<const Fc&>())
+  fc_c.def(py::init<int>(), py::arg("dim"),
+           trid_doc::Triangulation_full_cell_Triangulation_full_cell)
+    .def(py::init<const Fc&>(), py::arg("other"), "Copy constructor.")
 
-    .def("has_neighbor", &cgalpy::trid::has_neighbor)
-    .def("has_neighbor_get_index", &cgalpy::trid::has_neighbor_get_index)
-    .def("has_vertex", &cgalpy::trid::has_vertex)
-    .def("has_vertex_get_index", &cgalpy::trid::has_vertex_get_index)
-    .def("index", &cgalpy::trid::index1)
-    .def("index", &cgalpy::trid::index2)
-    .def("maximal_dimension", &Fc::maximal_dimension)
-    .def("mirror_index", py::overload_cast<int>(&Fc::mirror_index, py::const_))
-    .def("mirror_vertex", &cgalpy::trid::mirror_vertex, ri)
-    .def("neighbor", &cgalpy::trid::neighbor, ri)
-    .def("set_mirror_index", &Fc::set_mirror_index)
-    .def("set_neighbor", &cgalpy::trid::set_neighbor)
-    .def("set_vertex", &cgalpy::trid::set_vertex)
-    .def("swap_vertices", &Fc::swap_vertices)
-    .def("vertex", &cgalpy::trid::vertex, ri)
-    .def("is_valid", &Fc::is_valid, py::arg("verbose") = true, py::arg("level") = 0)
-    .def("vertices", &cgalpy::trid::vertices, py::keep_alive<0, 1>())
+    .def("has_neighbor", &cgalpy::trid::has_neighbor, py::arg("s"),
+         trid_doc::TriangulationDataStructure_FullCell_has_neighbor)
+    .def("has_neighbor_get_index", &cgalpy::trid::has_neighbor_get_index,
+         py::arg("s"),
+         trid_doc::TriangulationDataStructure_FullCell_has_neighbor_1)
+    .def("has_vertex", &cgalpy::trid::has_vertex, py::arg("v"),
+         trid_doc::TriangulationDataStructure_FullCell_has_vertex)
+    .def("has_vertex_get_index", &cgalpy::trid::has_vertex_get_index,
+         py::arg("v"),
+         trid_doc::TriangulationDataStructure_FullCell_has_vertex_1)
+    .def("index", &cgalpy::trid::index1, py::arg("s"),
+         trid_doc::TriangulationDataStructure_FullCell_index)
+    .def("index", &cgalpy::trid::index2, py::arg("v"),
+         trid_doc::TriangulationDataStructure_FullCell_index_1)
+    .def("maximal_dimension", &Fc::maximal_dimension,
+         trid_doc::TriangulationDataStructure_FullCell_maximal_dimension)
+    .def("mirror_index", py::overload_cast<int>(&Fc::mirror_index, py::const_),
+         py::arg("i"), trid_doc::TriangulationDataStructure_FullCell_mirror_index)
+    .def("mirror_vertex", &cgalpy::trid::mirror_vertex, ri,
+         py::arg("i"), py::arg("cur_dim"),
+         trid_doc::TriangulationDataStructure_FullCell_mirror_vertex)
+    .def("neighbor", &cgalpy::trid::neighbor, ri, py::arg("i"),
+         trid_doc::TriangulationDataStructure_FullCell_neighbor)
+    .def("set_mirror_index", &Fc::set_mirror_index, py::arg("i"), py::arg("j"),
+         trid_doc::TriangulationDataStructure_FullCell_set_mirror_index)
+    .def("set_neighbor", &cgalpy::trid::set_neighbor,
+         py::arg("i"), py::arg("s"),
+         trid_doc::TriangulationDataStructure_FullCell_set_neighbor)
+    .def("set_vertex", &cgalpy::trid::set_vertex,
+         py::arg("i"), py::arg("v"),
+         trid_doc::TriangulationDataStructure_FullCell_set_vertex)
+    .def("swap_vertices", &Fc::swap_vertices, py::arg("i"), py::arg("j"),
+         trid_doc::TriangulationDataStructure_FullCell_swap_vertices)
+    .def("vertex", &cgalpy::trid::vertex, ri, py::arg("i"),
+         trid_doc::TriangulationDataStructure_FullCell_vertex)
+    .def("is_valid", &Fc::is_valid,
+         py::arg("verbose") = true, py::arg("level") = 0,
+         trid_doc::TriangulationDataStructure_FullCell_is_valid)
+    .def("vertices", &cgalpy::trid::vertices, py::keep_alive<0, 1>(),
+         "Iterate over the vertices of the full cell.")
 
 #ifdef CGALPY_TRID_FULL_CELL_WITH_DATA
-    .def("data", py::overload_cast<>(&Fc::data, py::const_), ri)
-    .def("set_data", [](Fc& c, py::object data)->void{ c.data() = data; })
+    .def("data", py::overload_cast<>(&Fc::data, py::const_), ri,
+         trid_doc::Triangulation_full_cell_data)
+    .def("set_data", [](Fc& c, py::object data)->void{ c.data() = data; },
+         py::arg("data"), "Set the user data stored in the full cell.")
 #endif
     ;
 
