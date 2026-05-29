@@ -85,14 +85,17 @@ bool write_polygon_mesh(const std::string& filename, const PolygonalMesh& pm, co
 void export_pmp_io(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
   m.def("read_polygon_mesh", &cgalpy::pmp::read_polygon_mesh<Pm>,
-        py::arg("filename"), py::arg("params") = py::dict());
+        py::arg("filename"), py::arg("params") = py::dict(),
+        "Reads a polygon mesh from a file.");
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   m.def("read_polygon_mesh", &cgalpy::pmp::read_polygon_mesh_with_traits<Pm, cgalpy::pol3::Traits>,
         py::arg("filename"), py::arg("traits"), py::arg("params") = py::dict(),
-        py::keep_alive<0, 2>());
+        py::keep_alive<0, 2>(),
+        "Reads a polygon mesh from a file using the given traits object.");
 #endif
 
   m.def("write_polygon_mesh", &cgalpy::pmp::write_polygon_mesh<Pm>,
-        py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict());
+        py::arg("filename"), py::arg("pm"), py::arg("params") = py::dict(),
+        "Writes a polygon mesh to a file.");
   ;
 }

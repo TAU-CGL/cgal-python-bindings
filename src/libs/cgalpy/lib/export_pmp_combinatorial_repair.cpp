@@ -205,37 +205,54 @@ void export_pmp_combinatorial_repair(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
 
   m.def("duplicate_non_manifold_vertices", &cgalpy::pmp::duplicate_non_manifold_vertices<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Duplicates non-manifold vertices of a polygon mesh.");
   m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
-        py::arg("v"), py::arg("pm"));
+        py::arg("v"), py::arg("pm"),
+        "Returns whether a vertex is non-manifold.");
   m.def("is_polygon_soup_a_polygon_mesh", &cgalpy::pmp::is_polygon_soup_a_polygon_mesh,
-        py::arg("polygons"));
+        py::arg("polygons"),
+        "Returns whether a polygon soup defines a polygon mesh.");
   m.def("merge_duplicate_points_in_polygon_soup", &cgalpy::pmp::merge_duplicate_points_in_polygon_soup,
-        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Merges duplicate points in a polygon soup.");
   m.def("merge_duplicate_polygons_in_polygon_soup", &cgalpy::pmp::merge_duplicate_polygons_in_polygon_soup,
-        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Merges duplicate polygons in a polygon soup.");
   m.def("merge_duplicated_vertices_in_boundary_cycle", &cgalpy::pmp::merge_duplicated_vertices_in_boundary_cycle<Pm>,
-        py::arg("h"), py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("h"), py::arg("pm"), py::arg("np") = py::dict(),
+        "Merges duplicated vertices in a boundary cycle.");
   m.def("merge_duplicated_vertices_in_boundary_cycles", &cgalpy::pmp::merge_duplicated_vertices_in_boundary_cycles<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict(),
+        "Merges duplicated vertices in all boundary cycles.");
   m.def("non_manifold_vertices", &cgalpy::pmp::non_manifold_vertices<Pm>,
-        py::arg("pm"));
+        py::arg("pm"),
+        "Returns non-manifold vertices of a polygon mesh.");
   m.def("polygon_mesh_to_polygon_soup", &cgalpy::pmp::polygon_mesh_to_polygon_soup<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict(),
+        "Converts a polygon mesh to a polygon soup.");
   m.def("polygon_soup_to_polygon_mesh", &cgalpy::pmp::polygon_soup_to_polygon_mesh<Pm>, // TODO: point_map, ptvm, ptfm
-        py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict());
+        py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict(),
+        "Converts a polygon soup to a polygon mesh.");
   m.def("remove_isolated_points_in_polygon_soup", &cgalpy::pmp::remove_isolated_points_in_polygon_soup,
-        py::arg("points"), py::arg("polygons"));
+        py::arg("points"), py::arg("polygons"),
+        "Removes isolated points from a polygon soup.");
   m.def("repair_polygon_soup", &cgalpy::pmp::repair_polygon_soup,
-        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Repairs a polygon soup.");
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders_bc<Pm>,
-        py::arg("boundary_cycle_representatives"), py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("boundary_cycle_representatives"), py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Stitches borders using boundary cycle representatives.");
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders_he<Pm>,
-        py::arg("pmesh"), py::arg("hedge_pairs_to_stitch"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("hedge_pairs_to_stitch"), py::arg("np") = py::dict(),
+        "Stitches borders using halfedge pairs.");
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Stitches borders of a polygon mesh.");
   m.def("stitch_boundary_cycle", &cgalpy::pmp::stitch_boundary_cycle<Pm>,
-        py::arg("h"), py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("h"), py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Stitches one boundary cycle of a polygon mesh.");
   m.def("stitch_boundary_cycles", &cgalpy::pmp::stitch_boundary_cycles<Pm>,
-        py::arg("boundary_cycle_representatives"), py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("boundary_cycle_representatives"), py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Stitches boundary cycles of a polygon mesh.");
 }

@@ -25,9 +25,11 @@
 #include "CGALPY/Default_orientation_visitor.hpp"
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
@@ -268,46 +270,72 @@ void export_pmp_orientation(py::module_& m) {
 #endif
 
   m.def("orient_polygon_soup", &cgalpy::pmp::orient_polygon_soup<Point_3, Dov>,
-      py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Orients the polygons of a polygon soup.");
   m.def("orient", &cgalpy::pmp::orient<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("np") = py::dict(),
+        "Orients a triangle mesh.");
   m.def("does_bound_a_volume", &cgalpy::pmp::does_bound_a_volume<Pm>, // TODO: is_cc_outward_oriented
-        py::arg("tm"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("np") = py::dict(),
+        "Returns whether the triangle mesh bounds a volume.");
   m.def("orient_to_bound_a_volume", &cgalpy::pmp::orient_to_bound_a_volume<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("np") = py::dict(),
+        "Orients a polygon mesh to bound a volume.");
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("volume_connected_components", &cgalpy::pmp::volume_connected_components<Pm, Face_size_type_map>,
-        py::arg("tm"), py::arg("volume_id_map"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("volume_id_map"), py::arg("np") = py::dict(),
+        "Labels connected components by volume.");
 #endif
   m.def("is_outward_oriented", &cgalpy::pmp::is_outward_oriented<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("np") = py::dict(),
+        "Returns whether the polygon mesh is outward oriented.");
   m.def("reverse_face_orientations", &cgalpy::pmp::reverse_face_orientations<Pm>,
-        py::arg("face_range"), py::arg("pmesh"));
+        py::arg("face_range"), py::arg("pmesh"),
+        "Reverses the orientations of the selected faces.");
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
-        py::arg("pmesh"));
+        py::arg("pmesh"),
+        "Reverses the orientations of all faces of a polygon mesh.");
   m.def("duplicate_non_manifold_edges_in_polygon_soup", &cgalpy::pmp::duplicate_non_manifold_edges_in_polygon_soup,
-        py::arg("points"), py::arg("polygons"));
+        py::arg("points"), py::arg("polygons"),
+        "Duplicates non-manifold edges in a polygon soup.");
   m.def("orient_triangle_soup_with_reference_triangle_mesh",
         &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>, // TODO: point_map
         py::arg("tm_ref"), py::arg("points"), py::arg("triangles"),
-        py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Orients a triangle soup using a reference triangle mesh.");
   // m.def("orient_triangle_soup_with_reference_triangle_soup", &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup, // TODO: point_map
   //       py::arg("ref_points"), py::arg("ref_faces"), py::arg("points"), py::arg("faces"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
   m.def("merge_reversible_connected_components", &cgalpy::pmp::merge_reversible_connected_components<Pm>,
-         py::arg("pm"), py::arg("np") = py::dict());
+         py::arg("pm"), py::arg("np") = py::dict(),
+         "Merges connected components whose orientations can be made compatible.");
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("compatible_orientations", &cgalpy::pmp::compatible_orientations<Pm, Face_bit_map>,
-        py::arg("pm"), py::arg("face_bit_map"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("face_bit_map"), py::arg("np") = py::dict(),
+        "Computes compatible orientations for connected components.");
 #endif
 
-  m.def("set_non_manifold_edge", &cgalpy::pmp::set_non_manifold_edge);
-  m.def("set_non_manifold_vertex", &cgalpy::pmp::set_non_manifold_vertex);
-  m.def("set_duplicated_vertex", &cgalpy::pmp::set_duplicated_vertex);
-  m.def("set_vertex_id_in_polygon_replaced", &cgalpy::pmp::set_vertex_id_in_polygon_replaced);
-  m.def("set_polygon_orientation_reversed", &cgalpy::pmp::set_polygon_orientation_reversed);
-  m.def("set_link_connected_polygons", &cgalpy::pmp::set_link_connected_polygons);
+  m.def("set_non_manifold_edge", &cgalpy::pmp::set_non_manifold_edge,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPPolygonSoupOrientationVisitor_non_manifold_edge);
+  m.def("set_non_manifold_vertex", &cgalpy::pmp::set_non_manifold_vertex,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPPolygonSoupOrientationVisitor_non_manifold_vertex);
+  m.def("set_duplicated_vertex", &cgalpy::pmp::set_duplicated_vertex,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPPolygonSoupOrientationVisitor_duplicated_vertex);
+  m.def("set_vertex_id_in_polygon_replaced", &cgalpy::pmp::set_vertex_id_in_polygon_replaced,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPPolygonSoupOrientationVisitor_vertex_id_in_polygon_replaced);
+  m.def("set_polygon_orientation_reversed", &cgalpy::pmp::set_polygon_orientation_reversed,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPPolygonSoupOrientationVisitor_polygon_orientation_reversed);
+  m.def("set_link_connected_polygons", &cgalpy::pmp::set_link_connected_polygons,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPPolygonSoupOrientationVisitor_link_connected_polygons);
 
-  py::class_<Dov>(m, "Default_orientation_visitor")
-    .def(py::init<>())
+  py::class_<Dov>(m, "Default_orientation_visitor",
+                  pmp_doc::PMPPolygonSoupOrientationVisitor_class)
+    .def(py::init<>(),
+         "Constructs a default orientation visitor.")
     ;
 }

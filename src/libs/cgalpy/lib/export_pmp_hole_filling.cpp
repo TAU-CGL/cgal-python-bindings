@@ -22,9 +22,11 @@
 
 #include "CGALPY/HFDefault_visitor.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
@@ -208,33 +210,64 @@ void export_pmp_hole_filling(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
 
   using Hfv = cgalpy::pmp::HFDefault_visitor;
-  py::class_<Hfv>(m, "Hole_filling_default_visitor")
-    .def(py::init<>())
+  py::class_<Hfv>(m, "Hole_filling_default_visitor",
+                  pmp_doc::PMPHolefillingVisitor_class)
+    .def(py::init<>(),
+         "Constructs a default hole-filling visitor.")
     ;
 
   // HFDefault_visitor
-  m.def("set_start_planar_phase", &cgalpy::pmp::set_start_planar_phase);
-  m.def("set_end_planar_phase", &cgalpy::pmp::set_end_planar_phase);
-  m.def("set_start_quadratic_phase", &cgalpy::pmp::set_start_quadratic_phase);
-  m.def("set_quadratic_step", &cgalpy::pmp::set_quadratic_step);
-  m.def("set_end_quadratic_phase", &cgalpy::pmp::set_end_quadratic_phase);
-  m.def("set_start_cubic_phase", &cgalpy::pmp::set_start_cubic_phase);
-  m.def("set_cubic_step", &cgalpy::pmp::set_cubic_step);
-  m.def("set_end_cubic_phase", &cgalpy::pmp::set_end_cubic_phase);
-  m.def("set_start_refine_phase", &cgalpy::pmp::set_start_refine_phase);
-  m.def("set_end_refine_phase", &cgalpy::pmp::set_end_refine_phase);
-  m.def("set_start_fair_phase", &cgalpy::pmp::set_start_fair_phase);
-  m.def("set_end_fair_phase", &cgalpy::pmp::set_end_fair_phase);
+  m.def("set_start_planar_phase", &cgalpy::pmp::set_start_planar_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_start_planar_phase);
+  m.def("set_end_planar_phase", &cgalpy::pmp::set_end_planar_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_end_planar_phase);
+  m.def("set_start_quadratic_phase", &cgalpy::pmp::set_start_quadratic_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_start_quadratic_phase);
+  m.def("set_quadratic_step", &cgalpy::pmp::set_quadratic_step,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_quadratic_step);
+  m.def("set_end_quadratic_phase", &cgalpy::pmp::set_end_quadratic_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_end_quadratic_phase);
+  m.def("set_start_cubic_phase", &cgalpy::pmp::set_start_cubic_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_start_cubic_phase);
+  m.def("set_cubic_step", &cgalpy::pmp::set_cubic_step,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_cubic_step);
+  m.def("set_end_cubic_phase", &cgalpy::pmp::set_end_cubic_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_end_cubic_phase);
+  m.def("set_start_refine_phase", &cgalpy::pmp::set_start_refine_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_start_refine_phase);
+  m.def("set_end_refine_phase", &cgalpy::pmp::set_end_refine_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_end_refine_phase);
+  m.def("set_start_fair_phase", &cgalpy::pmp::set_start_fair_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_start_fair_phase);
+  m.def("set_end_fair_phase", &cgalpy::pmp::set_end_fair_phase,
+        py::arg("visitor"), py::arg("callback"),
+        pmp_doc::PMPHolefillingVisitor_end_fair_phase);
 
   // hole filling
   m.def("triangulate_and_refine_hole", &cgalpy::pmp::triangulate_and_refine_hole<Pm>,
-        py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict(),
+        "Triangulates and refines a hole of a polygon mesh.");
   m.def("triangulate_hole", &cgalpy::pmp::triangulate_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
+        "Triangulates a hole of a polygon mesh.");
   m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline<Pm>,
-        py::arg("points"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("np") = py::dict(),
+        "Triangulates a hole bounded by a polyline.");
   m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_2<Pm>,
-        py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict(),
+        "Triangulates a hole bounded by two polylines.");
   m.def("triangulate_refine_and_fair_hole", &cgalpy::pmp::triangulate_refine_and_fair_hole<Pm>,
-        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
+        "Triangulates, refines, and fairs a hole of a polygon mesh.");
 }

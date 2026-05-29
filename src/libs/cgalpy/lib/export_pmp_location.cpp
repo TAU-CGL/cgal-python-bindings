@@ -120,7 +120,8 @@ void export_pmp_location(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
 
   m.def("barycentic_coordinates", &cgalpy::pmp::barycentic_coordinates,
-        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("query"));
+        py::arg("p"), py::arg("q"), py::arg("r"), py::arg("query"),
+        pmp_doc::Polygon_mesh_processing_barycentric_coordinates);
   m.def("get_descriptor_from_location", &cgalpy::pmp::get_descriptor_from_location<Pm>,
         py::arg("loc"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_get_descriptor_from_location);

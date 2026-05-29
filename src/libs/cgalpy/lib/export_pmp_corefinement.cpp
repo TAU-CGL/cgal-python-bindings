@@ -1097,108 +1097,218 @@ void export_pmp_corefinement(py::module_& m) {
 
   // Corefinement and Boolean Operations
   m.def("autorefine", &cgalpy::pmp::autorefine<Pm>,
-        py::arg("tm"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("np") = py::dict(),
+        "Autorefines a triangle mesh.");
   m.def("autorefine_triangle_soup", &cgalpy::pmp::autorefine_triangle_soup,
-        py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict());
+        py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict(),
+        "Autorefines a triangle soup.");
   m.def("clip", &cgalpy::pmp::clip_c<Pm>,
-        py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict(),
+        "Clips a triangle mesh by an iso-cuboid.");
 #if CGAL_VERSION_NR > 1060100900
   m.def("clip", &cgalpy::pmp::clip_p<Pm>,
-        py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict(),
+        "Clips a triangle mesh by a plane.");
 #endif
   m.def("clip", &cgalpy::pmp::clip<Pm>,
-        py::arg("tm"), py::arg("clipper"), py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict());
+        py::arg("tm"), py::arg("clipper"), py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict(),
+        "Clips a triangle mesh by another triangle mesh.");
   m.def("corefine", &cgalpy::pmp::corefine<Pm>,
-        py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+        py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Corefines two polygon meshes.");
   m.def("corefine_and_compute_boolean_operations", &cgalpy::pmp::corefine_and_compute_boolean_operations<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
-        py::arg("np_out") = py::tuple());
+        py::arg("np_out") = py::tuple(),
+        "Corefines two polygon meshes and computes Boolean operation outputs.");
   m.def("corefine_and_compute_difference", &cgalpy::pmp::corefine_and_compute_difference<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
-        py::arg("np_out") = py::dict());
+        py::arg("np_out") = py::dict(),
+        "Corefines two polygon meshes and computes their difference.");
   m.def("corefine_and_compute_intersection", &cgalpy::pmp::corefine_and_compute_intersection<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
-        py::arg("np_out") = py::dict());
+        py::arg("np_out") = py::dict(),
+        "Corefines two polygon meshes and computes their intersection.");
   m.def("corefine_and_compute_union", &cgalpy::pmp::corefine_and_compute_union<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
-        py::arg("np_out") = py::dict());
+        py::arg("np_out") = py::dict(),
+        "Corefines two polygon meshes and computes their union.");
   m.def("split", &cgalpy::pmp::split_c<Pm>,
-        py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict(),
+        "Splits a triangle mesh by an iso-cuboid.");
   m.def("split", &cgalpy::pmp::split_p<Pm>,
-        py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict());
+        py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict(),
+        "Splits a triangle mesh by a plane.");
   m.def("split", &cgalpy::pmp::split<Pm>,
-        py::arg("tm"), py::arg("splitter"), py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict());
+        py::arg("tm"), py::arg("splitter"), py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict(),
+        "Splits a triangle mesh by another triangle mesh.");
   m.def("intersection_polylines", &cgalpy::pmp::intersection_polylines<Pm>,
-        py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+        py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Computes intersection polylines of two triangle meshes.");
 
   // Corefine_visitor
-  m.def("set_before_subface_creations", &cgalpy::pmp::set_before_subface_creations_fn);
-  m.def("set_after_subface_creations", &cgalpy::pmp::set_after_subface_creations_fn);
-  m.def("set_before_subface_created", &cgalpy::pmp::set_before_subface_created_fn);
-  m.def("set_after_subface_created", &cgalpy::pmp::set_after_subface_created_fn);
-  m.def("set_before_face_copy", &cgalpy::pmp::set_before_face_copy_fn);
-  m.def("set_after_face_copy", &cgalpy::pmp::set_after_face_copy_fn);
-  m.def("set_before_edge_split", &cgalpy::pmp::set_before_edge_split_fn);
-  m.def("set_edge_split", &cgalpy::pmp::set_edge_split_fn);
-  m.def("set_after_edge_split", &cgalpy::pmp::set_after_edge_split_fn);
-  m.def("set_add_retriangulation_edge", &cgalpy::pmp::set_add_retriangulation_edge_fn);
-  m.def("set_before_edge_copy", &cgalpy::pmp::set_before_edge_copy_fn);
-  m.def("set_after_edge_copy", &cgalpy::pmp::set_after_edge_copy_fn);
-  m.def("set_before_edge_duplicated", &cgalpy::pmp::set_before_edge_duplicated_fn);
-  m.def("set_after_edge_duplicated", &cgalpy::pmp::set_after_edge_duplicated_fn);
-  m.def("set_intersection_edge_copy", &cgalpy::pmp::set_intersection_edge_copy_fn);
-  m.def("set_new_vertex_added", &cgalpy::pmp::set_new_vertex_added_fn);
-  m.def("set_intersection_point_detected", &cgalpy::pmp::set_intersection_point_detected_fn);
-  m.def("set_before_vertex_copy", &cgalpy::pmp::set_before_vertex_copy_fn);
-  m.def("set_after_vertex_copy", &cgalpy::pmp::set_after_vertex_copy_fn);
-  m.def("set_start_filtering_intersections", &cgalpy::pmp::set_start_filtering_intersections_fn);
-  m.def("set_progress_filtering_intersections", &cgalpy::pmp::set_progress_filtering_intersections_fn);
-  m.def("set_end_filtering_intersections", &cgalpy::pmp::set_end_filtering_intersections_fn);
-  m.def("set_start_triangulating_faces", &cgalpy::pmp::set_start_triangulating_faces_fn);
-  m.def("set_triangulating_faces_step", &cgalpy::pmp::set_triangulating_faces_step_fn);
-  m.def("set_end_triangulating_faces", &cgalpy::pmp::set_end_triangulating_faces_fn);
-  m.def("set_start_handling_intersection_of_coplanar_faces", &cgalpy::pmp::set_start_handling_intersection_of_coplanar_faces_fn);
-  m.def("set_intersection_of_coplanar_faces_step", &cgalpy::pmp::set_intersection_of_coplanar_faces_step_fn);
-  m.def("set_end_handling_intersection_of_coplanar_faces", &cgalpy::pmp::set_end_handling_intersection_of_coplanar_faces_fn);
-  m.def("set_start_handling_edge_face_intersections", &cgalpy::pmp::set_start_handling_edge_face_intersections_fn);
-  m.def("set_edge_face_intersections_step", &cgalpy::pmp::set_edge_face_intersections_step_fn);
-  m.def("set_end_handling_edge_face_intersections", &cgalpy::pmp::set_end_handling_edge_face_intersections_fn);
-  m.def("set_start_building_output", &cgalpy::pmp::set_start_building_output_fn);
-  m.def("set_end_building_output", &cgalpy::pmp::set_end_building_output_fn);
-  m.def("set_filter_coplanar_edges", &cgalpy::pmp::set_filter_coplanar_edges_fn);
-  m.def("set_detect_patches", &cgalpy::pmp::set_detect_patches_fn);
-  m.def("set_classify_patches", &cgalpy::pmp::set_classify_patches_fn);
-  m.def("set_classify_intersection_free_patches", &cgalpy::pmp::set_classify_intersection_free_patches_fn);
-  m.def("set_out_of_place_operation", &cgalpy::pmp::set_out_of_place_operation_fn);
-  m.def("set_in_place_operation", &cgalpy::pmp::set_in_place_operation_fn);
-  m.def("set_in_place_operations", &cgalpy::pmp::set_in_place_operations_fn);
+  m.def("set_before_subface_creations", &cgalpy::pmp::set_before_subface_creations_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before subface creations.");
+  m.def("set_after_subface_creations", &cgalpy::pmp::set_after_subface_creations_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after subface creations.");
+  m.def("set_before_subface_created", &cgalpy::pmp::set_before_subface_created_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before each subface is created.");
+  m.def("set_after_subface_created", &cgalpy::pmp::set_after_subface_created_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after each subface is created.");
+  m.def("set_before_face_copy", &cgalpy::pmp::set_before_face_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before a face is copied.");
+  m.def("set_after_face_copy", &cgalpy::pmp::set_after_face_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after a face is copied.");
+  m.def("set_before_edge_split", &cgalpy::pmp::set_before_edge_split_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before an edge is split.");
+  m.def("set_edge_split", &cgalpy::pmp::set_edge_split_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when an edge is split.");
+  m.def("set_after_edge_split", &cgalpy::pmp::set_after_edge_split_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after an edge is split.");
+  m.def("set_add_retriangulation_edge", &cgalpy::pmp::set_add_retriangulation_edge_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when a retriangulation edge is added.");
+  m.def("set_before_edge_copy", &cgalpy::pmp::set_before_edge_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before an edge is copied.");
+  m.def("set_after_edge_copy", &cgalpy::pmp::set_after_edge_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after an edge is copied.");
+  m.def("set_before_edge_duplicated", &cgalpy::pmp::set_before_edge_duplicated_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before an edge is duplicated.");
+  m.def("set_after_edge_duplicated", &cgalpy::pmp::set_after_edge_duplicated_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after an edge is duplicated.");
+  m.def("set_intersection_edge_copy", &cgalpy::pmp::set_intersection_edge_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when an intersection edge is copied.");
+  m.def("set_new_vertex_added", &cgalpy::pmp::set_new_vertex_added_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when a new vertex is added.");
+  m.def("set_intersection_point_detected", &cgalpy::pmp::set_intersection_point_detected_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when an intersection point is detected.");
+  m.def("set_before_vertex_copy", &cgalpy::pmp::set_before_vertex_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked before a vertex is copied.");
+  m.def("set_after_vertex_copy", &cgalpy::pmp::set_after_vertex_copy_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked after a vertex is copied.");
+  m.def("set_start_filtering_intersections", &cgalpy::pmp::set_start_filtering_intersections_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when intersection filtering starts.");
+  m.def("set_progress_filtering_intersections", &cgalpy::pmp::set_progress_filtering_intersections_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked during intersection filtering progress.");
+  m.def("set_end_filtering_intersections", &cgalpy::pmp::set_end_filtering_intersections_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when intersection filtering ends.");
+  m.def("set_start_triangulating_faces", &cgalpy::pmp::set_start_triangulating_faces_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when face triangulation starts.");
+  m.def("set_triangulating_faces_step", &cgalpy::pmp::set_triangulating_faces_step_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked during a face triangulation step.");
+  m.def("set_end_triangulating_faces", &cgalpy::pmp::set_end_triangulating_faces_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when face triangulation ends.");
+  m.def("set_start_handling_intersection_of_coplanar_faces", &cgalpy::pmp::set_start_handling_intersection_of_coplanar_faces_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when coplanar face handling starts.");
+  m.def("set_intersection_of_coplanar_faces_step", &cgalpy::pmp::set_intersection_of_coplanar_faces_step_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked during coplanar face handling.");
+  m.def("set_end_handling_intersection_of_coplanar_faces", &cgalpy::pmp::set_end_handling_intersection_of_coplanar_faces_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when coplanar face handling ends.");
+  m.def("set_start_handling_edge_face_intersections", &cgalpy::pmp::set_start_handling_edge_face_intersections_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when edge-face intersection handling starts.");
+  m.def("set_edge_face_intersections_step", &cgalpy::pmp::set_edge_face_intersections_step_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked during edge-face intersection handling.");
+  m.def("set_end_handling_edge_face_intersections", &cgalpy::pmp::set_end_handling_edge_face_intersections_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when edge-face intersection handling ends.");
+  m.def("set_start_building_output", &cgalpy::pmp::set_start_building_output_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when output construction starts.");
+  m.def("set_end_building_output", &cgalpy::pmp::set_end_building_output_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when output construction ends.");
+  m.def("set_filter_coplanar_edges", &cgalpy::pmp::set_filter_coplanar_edges_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when coplanar edges are filtered.");
+  m.def("set_detect_patches", &cgalpy::pmp::set_detect_patches_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when patches are detected.");
+  m.def("set_classify_patches", &cgalpy::pmp::set_classify_patches_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when patches are classified.");
+  m.def("set_classify_intersection_free_patches", &cgalpy::pmp::set_classify_intersection_free_patches_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked when intersection-free patches are classified.");
+  m.def("set_out_of_place_operation", &cgalpy::pmp::set_out_of_place_operation_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked for an out-of-place Boolean operation.");
+  m.def("set_in_place_operation", &cgalpy::pmp::set_in_place_operation_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked for an in-place Boolean operation.");
+  m.def("set_in_place_operations", &cgalpy::pmp::set_in_place_operations_fn,
+        py::arg("visitor"), py::arg("callback"),
+        "Sets the callback invoked for paired in-place Boolean operations.");
 
   using Av = cgalpy::pmp::Autorefinement_visitor;
-  py::class_<Av>(m, "Autorefinement_visitor")
-    .def(py::init<>())
-    .def("set_number_of_output_triangles", &Av::set_number_of_output_triangles)
-    .def("set_verbatim_triangle_copy", &Av::set_verbatim_triangle_copy)
-    .def("set_new_subtriangle", &Av::set_new_subtriangle)
+  py::class_<Av>(m, "Autorefinement_visitor",
+                 "Visitor for autorefinement callbacks.")
+    .def(py::init<>(),
+         "Constructs an autorefinement visitor.")
+    .def("set_number_of_output_triangles", &Av::set_number_of_output_triangles,
+         py::arg("callback"),
+         "Sets the callback invoked with the number of output triangles.")
+    .def("set_verbatim_triangle_copy", &Av::set_verbatim_triangle_copy,
+         py::arg("callback"),
+         "Sets the callback invoked when a triangle is copied verbatim.")
+    .def("set_new_subtriangle", &Av::set_new_subtriangle,
+         py::arg("callback"),
+         "Sets the callback invoked when a new subtriangle is created.")
     ;
 
   // default visitor
   using Dv = cgalpy::pmp::Default_visitor<Pm>;
-  py::class_<Dv>(m, "Default_visitor")
-    .def(py::init<>())
+  py::class_<Dv>(m, "Default_visitor",
+                 "Default visitor for corefinement operations.")
+    .def(py::init<>(),
+         "Constructs a default corefinement visitor.")
     ;
 
   // corefine
   using Cv = cgalpy::pmp::Corefine_visitor<Pm>;
-  py::class_<Cv>(m, "Corefine_visitor")
-    .def(py::init<>())
+  py::class_<Cv>(m, "Corefine_visitor",
+                 "Visitor for corefinement callbacks.")
+    .def(py::init<>(),
+         "Constructs a corefinement visitor.")
     ;
 
   // non-manifold
   using Nmv = cgalpy::pmp::Non_manifold_output_visitor<Pm>;
-  py::class_<Nmv>(m, "Non_manifold_output_visitor")
+  py::class_<Nmv>(m, "Non_manifold_output_visitor",
+                  "Visitor that can extract non-manifold corefinement output.")
     // constructor with 2 PolygonMesh arguments
-    .def(py::init<Pm&, Pm&>())
+    .def(py::init<Pm&, Pm&>(),
+         py::arg("mesh1"), py::arg("mesh2"),
+         "Constructs a non-manifold output visitor for two meshes.")
     // visitor.extract_intersection(points, polygons);
-    .def("extract_intersection", &Nmv::my_extract_intersection)
+    .def("extract_intersection", &Nmv::my_extract_intersection,
+         "Extracts the intersection as points and polygons.")
     ;
 }

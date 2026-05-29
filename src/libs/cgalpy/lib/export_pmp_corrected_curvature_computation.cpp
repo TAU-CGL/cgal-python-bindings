@@ -116,12 +116,20 @@ void export_pmp_corrected_curvature_computation(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
 
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
-  py::class_<Pcad>(m, "Principal_curvatures_and_directions")
-    .def(py::init<FT, FT, Vector_3, Vector_3>())
-    .def_ro("min_curvature", &Pcad::min_curvature)
-    .def_ro("max_curvature", &Pcad::max_curvature)
-    .def_ro("min_direction", &Pcad::min_direction)
-    .def_ro("max_direction", &Pcad::max_direction)
+  py::class_<Pcad>(m, "Principal_curvatures_and_directions",
+                  pmp_doc::Polygon_mesh_processing_Principal_curvatures_and_directions_class)
+    .def(py::init<FT, FT, Vector_3, Vector_3>(),
+         py::arg("min_curvature"), py::arg("max_curvature"),
+         py::arg("min_direction"), py::arg("max_direction"),
+         "Constructs principal curvatures and directions.")
+    .def_ro("min_curvature", &Pcad::min_curvature,
+            pmp_doc::Polygon_mesh_processing_Principal_curvatures_and_directions_min_curvature)
+    .def_ro("max_curvature", &Pcad::max_curvature,
+            pmp_doc::Polygon_mesh_processing_Principal_curvatures_and_directions_max_curvature)
+    .def_ro("min_direction", &Pcad::min_direction,
+            pmp_doc::Polygon_mesh_processing_Principal_curvatures_and_directions_min_direction)
+    .def_ro("max_direction", &Pcad::max_direction,
+            pmp_doc::Polygon_mesh_processing_Principal_curvatures_and_directions_max_direction)
     ;
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \

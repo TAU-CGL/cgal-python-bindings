@@ -143,12 +143,16 @@ void export_pmp_geometric_repair(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
 
   m.def("remove_almost_degenerate_faces", &cgalpy::pmp::remove_almost_degenerate_faces_r<Pm>,
-        py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict());
+        py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
+        "Removes almost degenerate faces from the given face range of a triangle mesh.");
   m.def("remove_almost_degenerate_faces", &cgalpy::pmp::remove_almost_degenerate_faces<Pm>,
-        py::arg("tmesh"), py::arg("np") = py::dict());
+        py::arg("tmesh"), py::arg("np") = py::dict(),
+        "Removes almost degenerate faces from a triangle mesh.");
   m.def("remove_connected_components_of_negligible_size",
         &cgalpy::pmp::remove_connected_components_of_negligible_size<Pm>, // TODO: output_iterator
-        py::arg("tmesh"), py::arg("np") = py::dict());
+        py::arg("tmesh"), py::arg("np") = py::dict(),
+        "Removes connected components of negligible size from a triangle mesh.");
   m.def("remove_isolated_vertices", &PMP::remove_isolated_vertices<Pm>,
-        py::arg("pmesh"));
+        py::arg("pmesh"),
+        "Removes isolated vertices from a polygon mesh.");
 }

@@ -33,10 +33,12 @@
 #include "CGALPY/pmp_helpers.hpp"
 #include "CGALPY/polygon_mesh_processing_types.hpp"
 #include "CGALPY/Uniform_sizing_field.hpp"
+#include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
 
 namespace PMP = CGAL::Polygon_mesh_processing;
+namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
@@ -356,30 +358,37 @@ void export_pmp_meshing(py::module_& m) {
 
   m.def("remesh_planar_patches", &cgalpy::pmp::remesh_planar_patches<Pm>,
         py::arg("pm"), py::arg("np_in") = py::dict(),
-        py::arg("np_out") = py::dict());
+        py::arg("np_out") = py::dict(),
+        "Remeshes planar patches of a polygon mesh.");
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("remesh_almost_planar_patches",
         &cgalpy::pmp::remesh_almost_planar_patches<Pm, Fpm, Vcm, Eicm>,
         py::arg("tm_in"), py::arg("nb_patches"), py::arg("nb_corners"),
         py::arg("face_patch_map"), py::arg("vertex_corner_map"), py::arg("ecm"),
-        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict(),
+        "Remeshes almost planar patches of a triangle mesh.");
 #endif
 
   m.def("refine", &cgalpy::pmp::refine<Pm>,
-        py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict());
+        py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict(),
+        "Refines selected faces of a triangle mesh.");
 
 #if 0 // broken for now because of CGAL
   m.def("fair", &cgalpy::pmp::fair<Pm>,
-        py::arg("tmesh"), py::arg("vertices"), py::arg("np") = py::dict());
+        py::arg("tmesh"), py::arg("vertices"), py::arg("np") = py::dict(),
+        "Fairs selected vertices of a triangle mesh.");
 #endif
 
   m.def("triangulate_faces", &cgalpy::pmp::triangulate_faces<Pm>,
-        py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("np") = py::dict(),
+        "Triangulates all faces of a polygon mesh.");
   m.def("triangulate_faces", &cgalpy::pmp::triangulate_faces_r<Pm>,
-        py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict());
+        py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict(),
+        "Triangulates selected faces of a polygon mesh.");
   m.def("triangulate_polygons", &cgalpy::pmp::triangulate_polygons,
-      py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict());
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Triangulates polygon soup faces.");
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
@@ -389,11 +398,13 @@ void export_pmp_meshing(py::module_& m) {
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("isotropic_remeshing",
         &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Adaptive_sizing_field<Pm>>,
-        py::arg("faces"), py::arg("sizing"), py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("faces"), py::arg("sizing"), py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Performs isotropic remeshing using an adaptive sizing field.");
 
   m.def("isotropic_remeshing",
         &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Uniform_sizing_field<Pm>>,
-        py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Performs isotropic remeshing using a uniform target edge length.");
   // m.def("isotropic_remeshing",
   //       &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Custom_sizing_field<Pm>>,
   //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
@@ -402,22 +413,27 @@ void export_pmp_meshing(py::module_& m) {
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   // The CGAL code is faulty and cannot coop with Polyhedron_3
   m.def("surface_Delaunay_remeshing", &cgalpy::pmp::surface_Delaunay_remeshing<Pm>,
-        py::arg("tmesh"), py::arg("np") = py::dict());
+        py::arg("tmesh"), py::arg("np") = py::dict(),
+        "Performs surface Delaunay remeshing.");
 #endif
 
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("split_long_edges", &cgalpy::pmp::split_long_edges<Pm>,
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
-        py::arg("np") = py::dict());
+        py::arg("np") = py::dict(),
+        "Splits edges longer than the given maximum length.");
 #endif
 
-m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,
+  m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,
         py::arg("imesh"), py::arg("omesh"), py::arg("v"),
-        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict());
+        py::arg("np_in") = py::dict(), py::arg("np_out") = py::dict(),
+        "Extrudes an input mesh into an output mesh.");
   m.def("angle_and_area_smoothing", &cgalpy::pmp::angle_and_area_smoothing<Pm>,
-        py::arg("faces"), py::arg("tmesh"), py::arg("np") = py::dict());
+        py::arg("faces"), py::arg("tmesh"), py::arg("np") = py::dict(),
+        "Smooths selected faces by angle and area optimization.");
   m.def("angle_and_area_smoothing", &cgalpy::pmp::angle_and_area_smoothing_m<Pm>,
-        py::arg("pmesh"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("np") = py::dict(),
+        "Smooths a polygon mesh by angle and area optimization.");
   // m.def("tangential_relaxation", &cgalpy::pmp::tangential_relaxation<Pm>, // changed in master
   //       py::arg("pm"), py::arg("np") = py::dict());
 
@@ -428,20 +444,24 @@ m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("smooth_shape", &cgalpy::pmp::smooth_shape<Pm>,
-        py::arg("pm"), py::arg("time"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("time"), py::arg("np") = py::dict(),
+        "Smooths the shape of a polygon mesh.");
 #endif
 
   m.def("random_perturbation", &cgalpy::pmp::random_perturbation<Pm>,
-        py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict());
+        py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict(),
+        "Randomly perturbs vertices of a triangle mesh.");
   m.def("random_perturbation", &cgalpy::pmp::random_perturbation_v<Pm>,
-        py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict());
+        py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict(),
+        "Randomly perturbs selected vertices of a triangle mesh.");
 
   using Asf = cgalpy::pmp::Adaptive_sizing_field<Pm>;
   using Gt = boost::graph_traits<Pm>;
   using face_descriptor = Gt::face_descriptor;
 
 #if CGAL_VERSION_NR > 1060200900
-  py::class_<Asf>(m, "Adaptive_sizing_field")
+  py::class_<Asf>(m, "Adaptive_sizing_field",
+                  pmp_doc::PMPSizingField_class)
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
@@ -452,13 +472,18 @@ m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,
     .def(py::init<FT, const std::tuple<FT, FT>&,
          const std::vector<face_descriptor>&, Pm&, const py::dict&>(),
          py::arg("tol"), py::arg("edge_len_min_max"),
-         py::arg("face_range"), py::arg("pmesh"), py::arg("np") = py::dict())
+         py::arg("face_range"), py::arg("pmesh"), py::arg("np") = py::dict(),
+         "Constructs an adaptive sizing field.")
 #endif
 
-    .def("at", &Asf::at)
+    .def("at", &Asf::at,
+         py::arg("vertex"), py::arg("pmesh"),
+         pmp_doc::PMPSizingField_at)
     // .def("is_too_long", &Asf::is_too_long)
     // .def("is_too_short", &Asf::is_too_short)
-    .def("split_placement", &Asf::split_placement)
+    .def("split_placement", &Asf::split_placement,
+         py::arg("halfedge"), py::arg("pmesh"),
+         pmp_doc::PMPSizingField_split_placement)
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
@@ -466,18 +491,29 @@ m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,
      (CGALPY_KERNEL != CGALPY_KERNEL_CARTESIAN_CORE_RATIONAL) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
     //! \todo Fix interpolated_corrected_curvatures to use epeck
-    .def("register_split_vertex", &Asf::register_split_vertex)
+    .def("register_split_vertex", &Asf::register_split_vertex,
+         py::arg("vertex"), py::arg("pmesh"),
+         pmp_doc::PMPSizingField_register_split_vertex)
 #endif
     ;
 #endif
 
   using Usf = cgalpy::pmp::Uniform_sizing_field<Pm>; // Work in progress
-  py::class_<Usf>(m, "Uniform_sizing_field")
-    .def(py::init<const FT, const Pm&>())
-    .def("at", &Usf::at)
+  py::class_<Usf>(m, "Uniform_sizing_field",
+                  pmp_doc::PMPSizingField_class)
+    .def(py::init<const FT, const Pm&>(),
+         py::arg("size"), py::arg("pmesh"),
+         "Constructs a uniform sizing field.")
+    .def("at", &Usf::at,
+         py::arg("vertex"), py::arg("pmesh"),
+         pmp_doc::PMPSizingField_at)
     // .def("is_too_long", &Usf::is_too_long)
     // .def("is_too_short", &Usf::is_too_short)
-    .def("split_placement", &Usf::split_placement)
-    .def("register_split_vertex", &Usf::register_split_vertex)
+    .def("split_placement", &Usf::split_placement,
+         py::arg("halfedge"), py::arg("pmesh"),
+         pmp_doc::PMPSizingField_split_placement)
+    .def("register_split_vertex", &Usf::register_split_vertex,
+         py::arg("vertex"), py::arg("pmesh"),
+         pmp_doc::PMPSizingField_register_split_vertex)
     ;
 }
