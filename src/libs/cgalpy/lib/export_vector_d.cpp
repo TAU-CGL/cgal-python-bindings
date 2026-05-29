@@ -14,6 +14,9 @@
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Kerd_docstrings.hpp"
+
+namespace kerd_doc = cgalpy::kerd::docstrings;
 
 namespace cgalpy {
 namespace kerd {
@@ -33,12 +36,17 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
   using Kerd = Kernel_d;
   using Vecd = Vector_d;
 
-  vecd_c.def(py::init<>())
-    .def("__init__", &cgalpy::kerd::init_vector_d)
+  vecd_c.def(py::init<>(), kerd_doc::Vector_d_Vector_d)
+    .def("__init__", &cgalpy::kerd::init_vector_d,
+         py::arg("d"), py::arg("coordinates"),
+         kerd_doc::Vector_d_Vector_d_2)
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Vecd>)
-    .def("dimension", &Vecd::dimension)
-    .def("cartesian", &Vecd::cartesian)
-    .def("__getitem__", &Vecd::operator[])
+    .def("dimension", &Vecd::dimension,
+         kerd_doc::Vector_d_dimension)
+    .def("cartesian", &Vecd::cartesian, py::arg("i"),
+         kerd_doc::Vector_d_cartesian)
+    .def("__getitem__", &Vecd::operator[], py::arg("i"),
+         kerd_doc::Vector_d_operator_subscript)
 #if (CGALPY_KERNEL_D != CGALPY_KERNEL_D_EPEC_D) || (CGAL_VERSION_NR > 1060200000)
     .def(py::self == py::self)
     .def(py::self != py::self)
@@ -61,7 +69,8 @@ void export_vector_d(py::class_<Vector_d>& vecd_c) {
   vecd_c.def("cartesians",
              [](const Vecd& v)
              { return make_iterator(v.cartesian_begin(), v.cartesian_end()); },
-             py::keep_alive<0, 1>());
+             py::keep_alive<0, 1>(),
+             "Iterate over the Cartesian coordinates of the vector.");
 
   add_insertion(vecd_c, "__str__");
   add_insertion(vecd_c, "__repr__");

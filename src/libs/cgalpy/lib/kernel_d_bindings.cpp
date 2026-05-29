@@ -20,8 +20,10 @@
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "cgalpy/Kerd_docstrings.hpp"
 
 namespace py = nanobind;
+namespace kerd_doc = cgalpy::kerd::docstrings;
 
 extern void export_gmpz(py::module_& m);
 extern void export_gmpq(py::module_& m);
@@ -70,7 +72,9 @@ private:
 // (which does nothing) will be used instead (SFINAE)
 template<typename T1, typename T2>
 void bind_do_intersect_d_2T(py::module_& m, decltype(CGAL::do_intersect<Kernel_d>(T1(), T2())))
-{ m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>)); }
+{ m.def("do_intersect", static_cast<bool(*)(const T1&, const T2&)>(&CGAL::do_intersect<Kernel_d>),
+        py::arg("object1"), py::arg("object2"),
+        kerd_doc::Kernel_d_Intersect_d_operator_call); }
 
 template<typename, typename>
 void bind_do_intersect_d_2T(py::module_& m, ...) {}
@@ -105,19 +109,19 @@ void export_kernel_d(py::module_& m) {
 
   // Point
   if (! add_attr<Pntd>(m, "Point_d")) {
-    py::class_<Pntd> pntd_c(m, "Point_d");
+    py::class_<Pntd> pntd_c(m, "Point_d", kerd_doc::Point_d_class);
     export_point_d(pntd_c);
   }
 
   // Segment
   if (! add_attr<Segd>(m, "Segment_d")) {
-    py::class_<Segd> segd_c(m, "Segment_d");
+    py::class_<Segd> segd_c(m, "Segment_d", kerd_doc::Segment_d_class);
     export_segment_d(segd_c);
   }
 
   // Vector
-  if (! add_attr<Vecd>(m, "Vecotr_d")) {
-    py::class_<Vecd> vecd_c(m, "Vector_d");
+  if (! add_attr<Vecd>(m, "Vector_d")) {
+    py::class_<Vecd> vecd_c(m, "Vector_d", kerd_doc::Vector_d_class);
     export_vector_d(vecd_c);
   }
 
@@ -125,15 +129,18 @@ void export_kernel_d(py::module_& m) {
   if (! add_attr<Kerd>(m, "Kernel_d")) {
     using Ctr_vec_d = Kerd::Construct_vector_d;
 
-    py::class_<Kerd> kerd_c(m, "Kernel_d");
+    py::class_<Kerd> kerd_c(m, "Kernel_d", kerd_doc::Kernel_d_class);
     kerd_c.def(py::init<>())
-      .def("construct_vector_d_object", [](const Kerd& k)->Ctr_vec_d{ return k.construct_vector_d_object(); })
+      .def("construct_vector_d_object",
+           [](const Kerd& k)->Ctr_vec_d{ return k.construct_vector_d_object(); },
+           "Return a Construct_vector_d functor.")
       ;
 
     // Construct_vector_d
     if (! add_attr<Ctr_vec_d>(kerd_c, "Construct_vector_d")) {
       using Ctr1 = Vecd(Ctr_vec_d::*)(const Pntd&, const Pntd&) const;
-      py::class_<Ctr_vec_d>(kerd_c, "Construct_vector_d")
+      py::class_<Ctr_vec_d>(kerd_c, "Construct_vector_d",
+                            kerd_doc::Kernel_d_Construct_vector_d)
         //! \todo the following fails for clang. Using Diff_iterator doesn't work either
         // .def("__call__", static_cast<Ctr1>(&Ctr_vec_d::operator()))
         .def("__call__",
@@ -142,7 +149,9 @@ void export_kernel_d(py::module_& m) {
                for (std::size_t i = 0; i < p1.dimension(); ++i) vec[i] = p2[i] - p1[i];
                Vecd v(p1.dimension(), vec.begin(), vec.end());
                return v;
-             })
+             },
+             py::arg("p1"), py::arg("p2"),
+             "Construct a vector from p1 to p2.")
         ;
     }
   }
@@ -159,7 +168,8 @@ void export_kernel_d(py::module_& m) {
 
   // Linear_algebraCd
   if (! add_attr<Lacd>(m, "Linear_algebraCd")) {
-    py::class_<Lacd> lacd_c(m, "Linear_algebraCd");
+    py::class_<Lacd> lacd_c(m, "Linear_algebraCd",
+                            kerd_doc::Linear_algebraCd_class);
     export_linear_algebra_cd(lacd_c);
   }
 

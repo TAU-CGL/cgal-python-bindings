@@ -16,6 +16,9 @@
 #include "CGALPY/kernel_d_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Kerd_docstrings.hpp"
+
+namespace kerd_doc = cgalpy::kerd::docstrings;
 
 namespace cgalpy {
 namespace kerd {
@@ -67,12 +70,17 @@ void export_point_d(py::class_<Point_d>& pntd_c) {
   using Kerd = Kernel_d;
   using Pntd = Point_d;
 
-  pntd_c.def(py::init<>())
-    .def("__init__", &cgalpy::kerd::init_point_d)
+  pntd_c.def(py::init<>(), kerd_doc::Point_d_Point_d)
+    .def("__init__", &cgalpy::kerd::init_point_d,
+         py::arg("d"), py::arg("coordinates"),
+         kerd_doc::Point_d_Point_d_2)
     .def("__hash__", &hash_rational_point<is_epec_d_type(), Pntd>)
-    .def("dimension", &Pntd::dimension)
-    .def("cartesian", &Pntd::cartesian)
-    .def("__getitem__", &Pntd::operator[])
+    .def("dimension", &Pntd::dimension,
+         kerd_doc::Point_d_dimension)
+    .def("cartesian", &Pntd::cartesian, py::arg("i"),
+         kerd_doc::Point_d_cartesian)
+    .def("__getitem__", &Pntd::operator[], py::arg("i"),
+         kerd_doc::Point_d_operator_subscript)
     .def(py::self == py::self)
     .def(py::self != py::self)
     //.def(py::self > py::self)
@@ -92,7 +100,8 @@ void export_point_d(py::class_<Point_d>& pntd_c) {
   pntd_c.def("cartesians",
              [](const Pntd& p)
              { return make_iterator(p.cartesian_begin(), p.cartesian_end()); },
-             py::keep_alive<0, 1>());
+             py::keep_alive<0, 1>(),
+             "Iterate over the Cartesian coordinates of the point.");
 
   add_insertion(pntd_c, "__str__");
   add_insertion(pntd_c, "__repr__");
