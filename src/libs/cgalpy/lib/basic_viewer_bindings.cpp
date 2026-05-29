@@ -18,8 +18,10 @@
 
 #include "CGALPY/basic_viewer_types.hpp"
 #include "CGALPY/add_attr.hpp"
+#include "cgalpy/Bvr_docstrings.hpp"
 
 namespace py = nanobind;
+namespace bvr_doc = cgalpy::bvr::docstrings;
 
 namespace cgalpy {
 namespace bvr {
@@ -62,30 +64,54 @@ static ::PyType_Slot gsoe_slots[] = {
 void export_basic_viewer(py::module_& m) {
   using Gso = cgalpy::bvr::Graphics_scene_options;
   if (! add_attr<Gso>(m, "Graphics_scene_options_base")) {
-    py::class_<Gso>(m, "Graphics_scene_options_base")
-      .def(py::init<>())
-      .def("ignore_all_faces", &Gso::ignore_all_faces)
+    py::class_<Gso>(
+        m, "Graphics_scene_options_base",
+        bvr_doc::Graphics_scene_options_class)
+      .def(py::init<>(),
+           "Construct default graphics scene options.")
+      .def("ignore_all_faces", &Gso::ignore_all_faces, py::arg("b"),
+           bvr_doc::GraphicsSceneOptions_ignore_all_faces)
       ;
   }
 
   using Gsoe = cgalpy::bvr::Graphics_scene_options_extended;
   if (! add_attr<Gsoe>(m, "Graphics_scene_options")) {
-    py::class_<Gsoe, Gso>(m, "Graphics_scene_options", py::type_slots(cgalpy::bvr::gsoe_slots))
-      .def(py::init<>())
-      .def("colored_face", &Gsoe::apply_colored_face)
-      .def("face_color", &Gsoe::apply_face_color)
+    py::class_<Gsoe, Gso>(
+        m, "Graphics_scene_options",
+        bvr_doc::GraphicsSceneOptions_class,
+        py::type_slots(cgalpy::bvr::gsoe_slots))
+      .def(py::init<>(),
+           "Construct default Python-extended graphics scene options.")
+      .def("colored_face", &Gsoe::apply_colored_face,
+           py::arg("colored_face"),
+           bvr_doc::GraphicsSceneOptions_is_face_colored)
+      .def("face_color", &Gsoe::apply_face_color,
+           py::arg("face_color"),
+           bvr_doc::GraphicsSceneOptions_face_color)
       ;
   }
 
   using Gs = CGAL::Graphics_scene;
   if (! add_attr<Gs>(m, "Graphics_scene")) {
-    py::class_<Gs>(m, "Graphics_scene")
-      .def(py::init<>())
+    py::class_<Gs>(m, "Graphics_scene",
+                   bvr_doc::Graphics_scene_class)
+      .def(py::init<>(),
+           "Construct an empty graphics scene.")
       ;
   }
 
-  m.def("add_to_graphics_scene", [](const cgalpy::bvr::Ds& ds, Gs& gs) { CGAL::add_to_graphics_scene(ds, gs); })
+  m.def("add_to_graphics_scene",
+        [](const cgalpy::bvr::Ds& ds, Gs& gs)
+        { CGAL::add_to_graphics_scene(ds, gs); },
+        py::arg("ds"), py::arg("gs"),
+        "Add a data structure to a graphics scene using default graphics scene options.")
     .def("add_to_graphics_scene",
-         [](const cgalpy::bvr::Ds& ds, Gs& gs, const Gso& gso) { CGAL::add_to_graphics_scene(ds, gs, gso); })
-    .def("draw_graphics_scene", &CGAL::draw_graphics_scene);
+         [](const cgalpy::bvr::Ds& ds, Gs& gs, const Gso& gso)
+         { CGAL::add_to_graphics_scene(ds, gs, gso); },
+         py::arg("ds"), py::arg("gs"), py::arg("gso"),
+         "Add a data structure to a graphics scene using the given graphics scene options.")
+    .def("draw_graphics_scene", &CGAL::draw_graphics_scene,
+         py::arg("graphics_scene"),
+         py::arg("title") = "CGAL Basic Viewer (Qt)",
+         bvr_doc::draw_graphics_scene);
 }
