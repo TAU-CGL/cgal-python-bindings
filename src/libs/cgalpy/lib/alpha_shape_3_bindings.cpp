@@ -16,8 +16,10 @@
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/make_iterator.hpp"
+#include "cgalpy/As3_docstrings.hpp"
 
 namespace py = nanobind;
+namespace as3_doc = cgalpy::as3::docstrings;
 
 namespace cgalpy {
 namespace as3 {
@@ -27,12 +29,10 @@ py::object alphas(const Alpha_shape_3& as)
 { return make_iterator(as.alpha_begin(), as.alpha_end()); }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-void make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
-  if (! lst) return;
-  if (! py::isinstance<Point>(lst[0])) return;
+std::ptrdiff_t make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
   auto begin = stl_forward_iterator<Point>(lst);
   auto end = stl_forward_iterator<Point>(lst, false);
-  as.make_alpha_shape(begin, end);
+  return as.make_alpha_shape(begin, end);
 }
 #endif
 
@@ -256,6 +256,7 @@ double FT_to_double(FT& ft) { return CGAL::to_double(ft); }
 void export_alpha_shape_3(py::module_& m) {
   using As3 = cgalpy::as3::Alpha_shape_3;
   using Tri3 = cgalpy::tri3::Tri;
+  constexpr auto ri(py::rv_policy::reference_internal);
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   cgalpy::as3::size_type (As3::*number_of_solid_components1)() const                     = &As3::number_of_solid_components;
@@ -280,9 +281,12 @@ void export_alpha_shape_3(py::module_& m) {
 
 #endif
 
-  py::class_<As3> as3_c(m, "Alpha_shape_3");
+  py::class_<As3> as3_c(m, "Alpha_shape_3",
+                           as3_doc::Alpha_shape_3_class);
 
-  py::enum_<cgalpy::as3::Classification_type>(as3_c, "Classification_type")
+  py::enum_<cgalpy::as3::Classification_type>(
+    as3_c, "Classification_type",
+    as3_doc::Alpha_shape_3_Classification_type)
     .value("EXTERIOR", As3::EXTERIOR)
     .value("SINGULAR", As3::SINGULAR)
     .value("REGULAR", As3::REGULAR)
@@ -291,92 +295,196 @@ void export_alpha_shape_3(py::module_& m) {
     ;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  py::enum_<cgalpy::as3::Mode>(as3_c, "Mode")
+  py::enum_<cgalpy::as3::Mode>(as3_c, "Mode",
+                                  as3_doc::Alpha_shape_3_Mode)
     .value("GENERAL", As3::GENERAL)
     .value("REGULARIZED", As3::REGULARIZED)
     .export_values()
     ;
 #endif
 
-  as3_c.def(py::init<>())
+  as3_c.def(py::init<>(), as3_doc::Alpha_shape_3_Alpha_shape_3)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def(py::init<double, cgalpy::as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
-    .def(py::init<cgalpy::as3::FT&, cgalpy::as3::Mode>(), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+    .def(py::init<double, cgalpy::as3::Mode>(),
+         py::arg("alpha"), py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_Alpha_shape_3)
+    .def(py::init<cgalpy::as3::FT&, cgalpy::as3::Mode>(),
+         py::arg("alpha"), py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_Alpha_shape_3)
     .def(py::init<Tri3&, double, cgalpy::as3::Mode>(),
-         py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+         py::arg("dt"), py::arg("alpha"),
+         py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_Alpha_shape_3_1)
     .def(py::init<Tri3&, cgalpy::as3::FT&, cgalpy::as3::Mode>(),
-         py::arg("dt"), py::arg("alpha"), py::arg("mode") = As3::REGULARIZED)
+         py::arg("dt"), py::arg("alpha"),
+         py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_Alpha_shape_3_1)
 #endif
-    .def("__init__", &cgalpy::as3::as_init1)
-    .def("__init__", &cgalpy::as3::as_init2)
-    .def("__init__", &cgalpy::as3::as_init3)
+    .def("__init__", &cgalpy::as3::as_init1, py::arg("points"),
+         as3_doc::Alpha_shape_3_Alpha_shape_3_2)
+    .def("__init__", &cgalpy::as3::as_init2,
+         py::arg("points"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_Alpha_shape_3_2)
+    .def("__init__", &cgalpy::as3::as_init3,
+         py::arg("points"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_Alpha_shape_3_2)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("__init__", &cgalpy::as3::as_init4)
-    .def("__init__", &cgalpy::as3::as_init5)
+    .def("__init__", &cgalpy::as3::as_init4,
+         py::arg("points"), py::arg("alpha"),
+         py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_Alpha_shape_3_2)
+    .def("__init__", &cgalpy::as3::as_init5,
+         py::arg("points"), py::arg("alpha"),
+         py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_Alpha_shape_3_2)
 #endif
     // Modifiers
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("make_alpha_shape", &cgalpy::as3::make_alpha_shape)
-    .def("set_mode", &As3::set_mode)
-    .def("set_alpha", &As3::set_alpha)
+    .def("make_alpha_shape", &cgalpy::as3::make_alpha_shape,
+         py::arg("points"),
+         as3_doc::Alpha_shape_3_make_alpha_shape)
+    .def("set_mode", &As3::set_mode,
+         py::arg("mode") = As3::REGULARIZED,
+         as3_doc::Alpha_shape_3_set_mode)
+    .def("set_alpha", &As3::set_alpha, py::arg("alpha"),
+         as3_doc::Alpha_shape_3_set_alpha)
 #endif
-    .def("clear", &As3::clear)
+    .def("clear", &As3::clear,
+         as3_doc::Alpha_shape_3_clear)
     // Query Functions
-    .def("get_alpha", &As3::get_alpha)
+    .def("get_alpha", &As3::get_alpha, ri,
+         as3_doc::Alpha_shape_3_get_alpha)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-    .def("get_mode", &As3::get_mode)
-    .def("get_nth_alpha", &As3::get_nth_alpha)
-    .def("number_of_alphas", &As3::number_of_alphas)
-    .def("classify", classify1)
-    .def("classify", classify2)
-    .def("classify", classify3)
-    .def("classify", classify4)
-    .def("classify", classify5)
-    .def("classify", classify6)
-    .def("classify", classify7)
-    .def("classify", classify8)
-    .def("classify", classify9)
-    .def("classify", classify10)
-    .def("classify", classify11)
-    .def("classify", classify12)
-    .def("get_alpha_status", get_alpha_status1)
-    .def("get_alpha_status", get_alpha_status2)
+    .def("get_mode", &As3::get_mode,
+         as3_doc::Alpha_shape_3_get_mode)
+    .def("get_nth_alpha", &As3::get_nth_alpha, ri, py::arg("n"),
+         as3_doc::Alpha_shape_3_get_nth_alpha)
+    .def("number_of_alphas", &As3::number_of_alphas,
+         as3_doc::Alpha_shape_3_number_of_alphas)
+    .def("classify", classify1, py::arg("p"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_classify)
+    .def("classify", classify2, py::arg("edge"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_classify_4)
+    .def("classify", classify3, py::arg("facet"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_classify_2)
+    .def("classify", classify4, py::arg("vertex"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_classify_5)
+    .def("classify", classify5, py::arg("cell"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_classify_1)
+    .def("classify", classify6, py::arg("cell"), py::arg("i"),
+         py::arg("alpha"),
+         as3_doc::Alpha_shape_3_classify_3)
+    .def("classify", classify7, py::arg("p"),
+         as3_doc::Alpha_shape_3_classify)
+    .def("classify", classify8, py::arg("edge"),
+         as3_doc::Alpha_shape_3_classify_4)
+    .def("classify", classify9, py::arg("facet"),
+         as3_doc::Alpha_shape_3_classify_2)
+    .def("classify", classify10, py::arg("vertex"),
+         as3_doc::Alpha_shape_3_classify_5)
+    .def("classify", classify11, py::arg("cell"),
+         as3_doc::Alpha_shape_3_classify_1)
+    .def("classify", classify12, py::arg("cell"), py::arg("i"),
+         as3_doc::Alpha_shape_3_classify_3)
+    .def("get_alpha_status", get_alpha_status1, py::arg("edge"),
+         as3_doc::Alpha_shape_3_get_alpha_status)
+    .def("get_alpha_status", get_alpha_status2, py::arg("facet"),
+         as3_doc::Alpha_shape_3_get_alpha_status_1)
 #endif
-    .def("alpha_shape_cells", &cgalpy::as3::alpha_shape_cells)
-    .def("alpha_shape_facets", &cgalpy::as3::alpha_shape_facets)
-    .def("alpha_shape_edges", &cgalpy::as3::alpha_shape_edges)
-    .def("alpha_shape_vertices", &cgalpy::as3::alpha_shape_vertices)
+#if CGALPY_AS3 == CGALPY_AS3_PLAIN
+    .def("alpha_shape_cells",
+         [](const As3& as, cgalpy::as3::Classification_type type)
+         { return cgalpy::as3::alpha_shape_cells(as, type, as.get_alpha()); },
+         py::arg("type"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_cells)
+    .def("alpha_shape_cells", &cgalpy::as3::alpha_shape_cells,
+         py::arg("type"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_cells)
+    .def("alpha_shape_facets",
+         [](const As3& as, cgalpy::as3::Classification_type type)
+         { return cgalpy::as3::alpha_shape_facets(as, type, as.get_alpha()); },
+         py::arg("type"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_facets)
+    .def("alpha_shape_facets", &cgalpy::as3::alpha_shape_facets,
+         py::arg("type"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_facets)
+    .def("alpha_shape_edges",
+         [](const As3& as, cgalpy::as3::Classification_type type)
+         { return cgalpy::as3::alpha_shape_edges(as, type, as.get_alpha()); },
+         py::arg("type"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_edges)
+    .def("alpha_shape_edges", &cgalpy::as3::alpha_shape_edges,
+         py::arg("type"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_edges)
+    .def("alpha_shape_vertices", &cgalpy::as3::alpha_shape_vertices,
+         py::arg("type"), py::arg("alpha"),
+         as3_doc::Alpha_shape_3_get_alpha_shape_vertices)
+#else
+    .def("alpha_shape_cells", &cgalpy::as3::alpha_shape_cells,
+         py::arg("type"),
+         as3_doc::Fixed_alpha_shape_3_get_alpha_shape_cells)
+    .def("alpha_shape_facets", &cgalpy::as3::alpha_shape_facets,
+         py::arg("type"),
+         as3_doc::Fixed_alpha_shape_3_get_alpha_shape_facets)
+    .def("alpha_shape_edges", &cgalpy::as3::alpha_shape_edges,
+         py::arg("type"),
+         as3_doc::Fixed_alpha_shape_3_get_alpha_shape_edges)
+    .def("alpha_shape_vertices", &cgalpy::as3::alpha_shape_vertices,
+         py::arg("type"),
+         as3_doc::Fixed_alpha_shape_3_get_alpha_shape_vertices)
+#endif
     // .def("filtration", &As3::filtration)
     // .def("filtration_with_alpha_values", &As3::filtration_with_alpha_values)
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
     // Traversal of the alpha-Values
-    .def("alphas", &cgalpy::as3::alphas, py::keep_alive<0, 1>())
-    .def("alpha_find", &As3::alpha_find)
-    .def("alpha_lower_bound", &As3::alpha_lower_bound)
-    .def("alpha_upper_bound", &As3::alpha_upper_bound)
+    .def("alphas", &cgalpy::as3::alphas, py::keep_alive<0, 1>(),
+         "Iterate over the sorted alpha-values of the family of alpha shapes.")
+    .def("alpha_find", &As3::alpha_find, py::arg("alpha"),
+         as3_doc::Alpha_shape_3_alpha_find)
+    .def("alpha_lower_bound", &As3::alpha_lower_bound, py::arg("alpha"),
+         as3_doc::Alpha_shape_3_alpha_lower_bound)
+    .def("alpha_upper_bound", &As3::alpha_upper_bound, py::arg("alpha"),
+         as3_doc::Alpha_shape_3_alpha_upper_bound)
     // Operations
-    .def("number_of_solid_components", number_of_solid_components1)
-    .def("number_of_solid_components", number_of_solid_components2)
-    .def("find_optimal_alpha", &As3::find_optimal_alpha)
-    .def("find_alpha_solid", &As3::find_alpha_solid)
+    .def("number_of_solid_components", number_of_solid_components1,
+         as3_doc::Alpha_shape_3_number_of_solid_components)
+    .def("number_of_solid_components", number_of_solid_components2,
+         py::arg("alpha"),
+         as3_doc::Alpha_shape_3_number_of_solid_components)
+    .def("find_optimal_alpha", &As3::find_optimal_alpha,
+         py::arg("nb_components"),
+         as3_doc::Alpha_shape_3_find_optimal_alpha)
+    .def("find_alpha_solid", &As3::find_alpha_solid,
+         "Return an alpha value for which the alpha shape is solid.")
 #endif
     ;
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
-  py::class_<cgalpy::as3::Alpha_status>(as3_c, "Alpha_status")
-    .def(py::init<>())
+  py::class_<cgalpy::as3::Alpha_status>(
+      as3_c, "Alpha_status", as3_doc::Alpha_status_class)
+    .def(py::init<>(), as3_doc::Alpha_status_Alpha_status)
     // Modifiers
-    .def("set_is_Gabriel", &cgalpy::as3::Alpha_status::set_is_Gabriel)
-    .def("set_is_on_chull", &cgalpy::as3::Alpha_status::set_is_on_chull)
-    .def("set_alpha_min", &cgalpy::as3::Alpha_status::set_alpha_min)
-    .def("set_alpha_mid", &cgalpy::as3::Alpha_status::set_alpha_mid)
-    .def("set_alpha_max", &cgalpy::as3::Alpha_status::set_alpha_max)
+    .def("set_is_Gabriel", &cgalpy::as3::Alpha_status::set_is_Gabriel,
+         py::arg("yesorno"), as3_doc::Alpha_status_set_is_Gabriel)
+    .def("set_is_on_chull", &cgalpy::as3::Alpha_status::set_is_on_chull,
+         py::arg("yesorno"), as3_doc::Alpha_status_set_is_on_chull)
+    .def("set_alpha_min", &cgalpy::as3::Alpha_status::set_alpha_min,
+         py::arg("alpha"), as3_doc::Alpha_status_set_alpha_min)
+    .def("set_alpha_mid", &cgalpy::as3::Alpha_status::set_alpha_mid,
+         py::arg("alpha"), as3_doc::Alpha_status_set_alpha_mid)
+    .def("set_alpha_max", &cgalpy::as3::Alpha_status::set_alpha_max,
+         py::arg("alpha"), as3_doc::Alpha_status_set_alpha_max)
     // Access Functions
-    .def("is_Gabriel", &cgalpy::as3::Alpha_status::is_Gabriel)
-    .def("is_on_chull", &cgalpy::as3::Alpha_status::is_on_chull)
-    .def("alpha_min", &cgalpy::as3::Alpha_status::alpha_min)
-    .def("alpha_mid", &cgalpy::as3::Alpha_status::alpha_mid)
-    .def("alpha_max", &cgalpy::as3::Alpha_status::alpha_max)
+    .def("is_Gabriel", &cgalpy::as3::Alpha_status::is_Gabriel,
+         as3_doc::Alpha_status_is_Gabriel)
+    .def("is_on_chull", &cgalpy::as3::Alpha_status::is_on_chull,
+         as3_doc::Alpha_status_is_on_chull)
+    .def("alpha_min", &cgalpy::as3::Alpha_status::alpha_min,
+         as3_doc::Alpha_status_alpha_min)
+    .def("alpha_mid", &cgalpy::as3::Alpha_status::alpha_mid,
+         as3_doc::Alpha_status_alpha_mid)
+    .def("alpha_max", &cgalpy::as3::Alpha_status::alpha_max,
+         as3_doc::Alpha_status_alpha_max)
     ;
 #endif
 
