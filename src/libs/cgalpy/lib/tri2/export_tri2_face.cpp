@@ -30,15 +30,24 @@ void export_tri2_face(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangulat
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Face>(tri_c, "Face")
+  py::class_<Face>(tri_c, "Face",
+                   tri2_doc::Triangulation_2_Face)
     .def("is_valid", &Face::is_valid,
-         py::arg("verbose") = false, py::arg("level") = 0)
-    .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); }, ri)
-    .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); }, ri)
+         py::arg("verbose") = false, py::arg("level") = 0,
+         "Tests whether the face is valid.")
+    .def("neighbor", [](const Face& f, int i)->const Face& { return *(f.neighbor(i)); },
+         ri, py::arg("i"),
+         "Returns the neighbor face at index i.")
+    .def("vertex", [](const Face& f, int i)->const Vertex& { return *(f.vertex(i)); },
+         ri, py::arg("i"),
+         "Returns the vertex at index i.")
 
 #ifdef CGALPY_TRI2_FACE_WITH_INFO
-    .def("info", [](const Face& f)->py::object { return f.info(); })
-    .def("set_info", [](Face& f, py::object obj) { f.info() = obj; })
+    .def("info", [](const Face& f)->py::object { return f.info(); },
+         tri2_doc::Triangulation_face_base_with_info_2_info)
+    .def("set_info", [](Face& f, py::object obj) { f.info() = obj; },
+         py::arg("info"),
+         tri2_doc::Triangulation_face_base_with_info_2_info_1)
 #endif
 
 #if ((CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED) ||        \

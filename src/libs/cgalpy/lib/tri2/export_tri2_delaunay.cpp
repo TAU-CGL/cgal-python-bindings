@@ -39,11 +39,17 @@ void export_tri2_delaunay(py::module_& m) {
 
   if (add_attr<Dtri>(m, "Delaunay_triangulation_2")) return;
 
-  py::class_<Dtri, Tri> tri_c(m, "Delaunay_triangulation_2");
+  py::class_<Dtri, Tri> tri_c(m, "Delaunay_triangulation_2",
+                                 tri2_doc::Delaunay_triangulation_2_class);
 
-  tri_c.def(py::init<>())
-    .def(py::init<const cgalpy::tri2::Traits&>())
-    .def("__init__", &cgalpy::tri2::dt2_init)
+  tri_c.def(py::init<>(),
+            "Constructs an empty Delaunay 2D triangulation.")
+    .def(py::init<const cgalpy::tri2::Traits&>(),
+         py::arg("traits"),
+         "Constructs a Delaunay 2D triangulation with geometric traits.")
+    .def("__init__", &cgalpy::tri2::dt2_init,
+         py::arg("points"),
+         "Constructs a Delaunay 2D triangulation from input points.")
     // draw_dual
     // dual
     // dual

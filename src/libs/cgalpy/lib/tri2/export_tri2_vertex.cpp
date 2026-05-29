@@ -30,14 +30,19 @@ void export_tri2_vertex(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangul
 
   constexpr auto ri(py::rv_policy::reference_internal);
 
-  py::class_<Vertex>(tri_c, "Vertex")
-    .def(py::init<>())
+  py::class_<Vertex>(tri_c, "Vertex",
+                     tri2_doc::Triangulation_2_Vertex)
+    .def(py::init<>(),
+         "Constructs a triangulation vertex.")
     .def("point", [](const Vertex& v)->const Pnt& { return v.point(); }, ri,
          tri2_doc::Triangulation_2_point_1)
 
 #ifdef CGALPY_TRI2_VERTEX_WITH_INFO
-    .def("info", [](const Vertex& v)->py::object { return v.info(); })
-    .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; })
+    .def("info", [](const Vertex& v)->py::object { return v.info(); },
+         tri2_doc::Triangulation_vertex_base_with_info_2_info)
+    .def("set_info", [](Vertex& v, py::object obj) { v.info() = obj; },
+         py::arg("info"),
+         tri2_doc::Triangulation_vertex_base_with_info_2_info_1)
 #endif
     ;
 

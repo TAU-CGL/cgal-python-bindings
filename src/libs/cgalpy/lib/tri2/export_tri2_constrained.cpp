@@ -75,11 +75,17 @@ void export_tri2_constrained(py::module_& m) {
 
   if (add_attr<Ctri>(m, "Constrained_triangulation_2")) return;
 
-  py::class_<Ctri, Tri> tri_c(m, "Constrained_triangulation_2");
+  py::class_<Ctri, Tri> tri_c(m, "Constrained_triangulation_2",
+                                 tri2_doc::Constrained_triangulation_2_class);
 
-  tri_c.def(py::init<>())
-    .def(py::init<const cgalpy::tri2::Traits&>())
-    .def("__init__", &cgalpy::tri2::ct2_init)
+  tri_c.def(py::init<>(),
+            "Constructs an empty constrained 2D triangulation.")
+    .def(py::init<const cgalpy::tri2::Traits&>(),
+         py::arg("traits"),
+         "Constructs a constrained 2D triangulation with geometric traits.")
+    .def("__init__", &cgalpy::tri2::ct2_init,
+         py::arg("constraints"),
+         "Constructs a constrained 2D triangulation from vertex-pair constraints.")
     .def("insert_constraint", &cgalpy::tri2::insert_constraint,
          py::arg("va"), py::arg("vb"),
          tri2_doc::Constrained_triangulation_2_insert_constraint_1)

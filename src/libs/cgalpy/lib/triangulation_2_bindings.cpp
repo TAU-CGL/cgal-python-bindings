@@ -19,9 +19,11 @@
 #include "CGALPY/stl_dereference_forward_iterator.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
 #include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/Tri2_docstrings.hpp"
 #include "CGALPY/types.hpp"
 
 namespace py = nanobind;
+namespace tri2_doc = cgalpy::tri2::docstrings;
 
 namespace cgalpy {
 namespace tri2 {
@@ -77,8 +79,11 @@ void export_triangulation_2(py::module_& m) {
 
   using Tricc = CGAL::Triangulation_cw_ccw_2;
   if (! add_attr<Tricc>(m, "Triangulation_cw_ccw_2")) {
-    py::class_<Tricc>(m, "Triangulation_cw_ccw_2")
-      .def(py::init<Tricc&>())
+    py::class_<Tricc>(m, "Triangulation_cw_ccw_2",
+                       tri2_doc::Triangulation_cw_ccw_2_class)
+      .def(py::init<Tricc&>(),
+           py::arg("other"),
+           tri2_doc::Triangulation_cw_ccw_2_Triangulation_cw_ccw_2)
       .def_prop_ro_static("ccw", [](py::handle /*unused*/, int i) { return Tricc::ccw(i); })
       .def_prop_ro_static("cw", [](py::handle /*unused*/, int i) { return Tricc::cw(i); })
       ;
@@ -87,20 +92,31 @@ void export_triangulation_2(py::module_& m) {
   using Tds = cgalpy::tri2::Triangulation_data_structure_2;
   if (add_attr<Tds>(m, "Triangulation_data_structure_2")) return;
 
-  py::class_<Tds, Tricc> tds_c(m, "Triangulation_data_structure_2");
+  py::class_<Tds, Tricc> tds_c(m, "Triangulation_data_structure_2",
+                                "Triangulation data structure for 2D triangulations.");
 
-  tds_c.def(py::init<>())
-    .def(py::init<Tds&>())
+  tds_c.def(py::init<>(),
+            "Constructs an empty triangulation data structure.")
+    .def(py::init<Tds&>(),
+         py::arg("other"),
+         "Copy-constructs a triangulation data structure.")
     .def("clear", &Tds::clear, "Delete all faces and all finite vertices\n")
     // .def("copy_tds", &copy_tds),
     // .def("copy_tds", &copy_tds),
-    .def("create_face", &cgalpy::tri2::create_face1, ri)
-    .def("create_face", &cgalpy::tri2::create_face2, ri)
-    .def("create_face", &cgalpy::tri2::create_face3, ri)
-    .def("create_face", &cgalpy::tri2::create_face4, ri)
-    .def("create_face", &cgalpy::tri2::create_face5, ri)
-    .def("create_face", &cgalpy::tri2::create_face6, ri)
-    .def("create_vertex", &cgalpy::tri2::create_vertex, ri)
+    .def("create_face", &cgalpy::tri2::create_face1, ri,
+         "Creates a new face.")
+    .def("create_face", &cgalpy::tri2::create_face2, ri,
+         "Creates a new face.")
+    .def("create_face", &cgalpy::tri2::create_face3, ri,
+         "Creates a new face.")
+    .def("create_face", &cgalpy::tri2::create_face4, ri,
+         "Creates a new face.")
+    .def("create_face", &cgalpy::tri2::create_face5, ri,
+         "Creates a new face.")
+    .def("create_face", &cgalpy::tri2::create_face6, ri,
+         "Creates a new face.")
+    .def("create_vertex", &cgalpy::tri2::create_vertex, ri,
+         "Creates a new vertex.")
     .def("degree", &cgalpy::tri2::degree, py::arg("v"),
          "Obtain the degree of a vertex\n"
          "The infinite vertex is counted"
@@ -165,8 +181,10 @@ void export_triangulation_2(py::module_& m) {
     // .def("swap", &swap),
 
     // Non concept
-    .def("faces", &cgalpy::tri2::faces)
-    .def("vertices", &cgalpy::tri2::vertices)
+    .def("faces", &cgalpy::tri2::faces,
+         "Returns the faces of the triangulation data structure.")
+    .def("vertices", &cgalpy::tri2::vertices,
+         "Returns the vertices of the triangulation data structure.")
     ;
 
     // operator<<

@@ -422,7 +422,8 @@ void export_tri2_plain(py::module_& m) {
   if (add_attr<Tri>(m, "Triangulation_2")) return;
 
   using Tricc = CGAL::Triangulation_cw_ccw_2;
-  py::class_<Tri, Tricc> tri_c(m, "Triangulation_2");
+  py::class_<Tri, Tricc> tri_c(m, "Triangulation_2",
+                                  tri2_doc::Triangulation_2_class);
 
   using Traits = cgalpy::tri2::Traits;
   using Vertex = Tri::Vertex;
@@ -430,10 +431,17 @@ void export_tri2_plain(py::module_& m) {
   using Edge = Tri::Edge;
   using Pnt = Tri::Point;
 
-  tri_c.def(py::init<>())
-    .def(py::init<Tri&>())
-    .def(py::init<const cgalpy::tri2::Traits&>())
-    .def("__init__", &cgalpy::tri2::tri2_init)
+  tri_c.def(py::init<>(),
+            "Constructs an empty 2D triangulation.")
+    .def(py::init<Tri&>(),
+         py::arg("other"),
+         "Copy-constructs a 2D triangulation.")
+    .def(py::init<const cgalpy::tri2::Traits&>(),
+         py::arg("traits"),
+         "Constructs a 2D triangulation with geometric traits.")
+    .def("__init__", &cgalpy::tri2::tri2_init,
+         py::arg("points"),
+         "Constructs a 2D triangulation from input points.")
     .def("circumcenter", &cgalpy::tri2::circumcenter, py::arg("f"),
          tri2_doc::Triangulation_2_circumcenter)
     .def("clear", &Tri::clear,
@@ -520,7 +528,8 @@ void export_tri2_plain(py::module_& m) {
          tri2_doc::Triangulation_2_number_of_faces)
     .def("oriented_side",
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&>(&Tri::oriented_side, py::const_),
-         py::arg("p0"), py::arg("p1"), py::arg("p2"), py::arg("p"))
+         py::arg("p0"), py::arg("p1"), py::arg("p2"), py::arg("p"),
+         "Returns the oriented side of a point with respect to an oriented triangle.")
     .def("oriented_side", &cgalpy::tri2::oriented_side, py::arg("f"), py::arg("p"),
          tri2_doc::Triangulation_2_oriented_side)
     .def("point", &cgalpy::tri2::point1, py::arg("v"),
@@ -610,14 +619,18 @@ void export_tri2_plain(py::module_& m) {
   add_iterator<Fei, Fei, const Edge&>("Finite_edges_iterator", tri_c);
   add_iterator<Pi, Pi, const Pnt&>("Point_iterator", tri_c);
 
-  tri_c.def("all_vertices", &cgalpy::tri2::all_vertices, py::keep_alive<0, 1>())
+  tri_c.def("all_vertices", &cgalpy::tri2::all_vertices, py::keep_alive<0, 1>(),
+            "Returns all vertices of the triangulation.")
     .def("all_edges", &cgalpy::tri2::all_edges, py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_all_edges)
-    .def("all_faces", &cgalpy::tri2::all_faces, py::keep_alive<0, 1>())
-    .def("finite_vertices", &cgalpy::tri2::finite_vertices, py::keep_alive<0, 1>())
+    .def("all_faces", &cgalpy::tri2::all_faces, py::keep_alive<0, 1>(),
+         "Returns all faces of the triangulation.")
+    .def("finite_vertices", &cgalpy::tri2::finite_vertices, py::keep_alive<0, 1>(),
+         "Returns finite vertices of the triangulation.")
     .def("finite_edges", &cgalpy::tri2::finite_edges, py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_finite_edges)
-    .def("finite_faces", &cgalpy::tri2::finite_faces, py::keep_alive<0, 1>())
+    .def("finite_faces", &cgalpy::tri2::finite_faces, py::keep_alive<0, 1>(),
+         "Returns finite faces of the triangulation.")
     .def("points", &cgalpy::tri2::points, py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_points)
     ;
@@ -657,12 +670,24 @@ void export_tri2_plain(py::module_& m) {
   export_circulator<Ec, Edge>(tri_c, "Edge_circulator");
   export_circulator<Fc>(tri_c, "Face_circulator");
 
-  tri_c.def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_0)
-    .def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_1)
-    .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_0)
-    .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_1)
-    .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_0)
-    .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_1)
+  tri_c.def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_0,
+            py::arg("v"),
+            "Returns a circulator over faces incident to a vertex.")
+    .def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_1,
+         py::arg("v"), py::arg("f"),
+         "Returns a circulator over faces incident to a vertex, starting at a face.")
+    .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_0,
+         py::arg("v"),
+         "Returns a circulator over edges incident to a vertex.")
+    .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_1,
+         py::arg("v"), py::arg("f"),
+         "Returns a circulator over edges incident to a vertex, starting at a face.")
+    .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_0,
+         py::arg("v"),
+         "Returns a circulator over vertices incident to a vertex.")
+    .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_1,
+         py::arg("v"), py::arg("f"),
+         "Returns a circulator over vertices incident to a vertex, starting at a face.")
     ;
 
   // Enumerations
@@ -696,20 +721,27 @@ void export_tri2_plain(py::module_& m) {
   export_tri2_vertex(tri_c);
   export_tri2_face(tri_c);
 
-  py::class_<Edge>(tri_c, "Edge")
-    .def("face", [](Edge& e)->cgalpy::tri2::Face& { return *(e.first); } , ri)
-    .def_rw("index", &Edge::second)
+  py::class_<Edge>(tri_c, "Edge",
+                   "Edge represented by a face and an edge index.")
+    .def("face", [](Edge& e)->cgalpy::tri2::Face& { return *(e.first); } , ri,
+         "Returns the face of the edge representation.")
+    .def_rw("index", &Edge::second,
+            "Index of the edge in its face.")
     ;
 
 #ifdef CGALPY_HAS_VISUAL
   m.def("draw",
         [](const Tri& tri, const char* title)
-        { CGAL::draw(tri, title); });
+        { CGAL::draw(tri, title); },
+        py::arg("tri"), py::arg("title"),
+        "Draws the triangulation.");
 
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
   m.def("draw",
         [](const Tri& tri, const cgalpy::bvr::Graphics_scene_options& gso, const char* title)
-        { CGAL::draw(tri, gso, title); });
+        { CGAL::draw(tri, gso, title); },
+        py::arg("tri"), py::arg("graphics_scene_options"), py::arg("title"),
+        "Draws the triangulation with graphics-scene options.");
 #endif
 #endif
 }
