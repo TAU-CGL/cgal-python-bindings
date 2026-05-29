@@ -114,14 +114,9 @@ auto faces_around_target_iterator(Halfedge& h, const Polyhedron_3& prn) {
   return make_iterator(begin, end);
 }
 
-//! Wrap the function that obtains the real circulator
-#if CGAL_VERSION_NR > 1060100900
-auto faces_around_face_circulator(Halfedge& h, const Polyhedron_3& prn) {
-  using Prn = Polyhedron_3;
-  using Fafc = CGAL::Face_around_face_circulator<Prn>;
-  return Fafc(Halfedge_handle(&h), prn);
-}
-#endif
+// CGAL::Face_around_face_circulator<Graph> is only a placeholder in
+// current CGAL headers; it has no constructor/increment/dereference API.
+// Keep the Face_around_face_iterator binding below instead.
 
 //! Wrap the iterator
 auto faces_around_face_iterator(Halfedge& h, const Polyhedron_3& prn) {
@@ -249,12 +244,9 @@ void export_pol3_bgl(py::module_& m) {
         "Obtain an iterator over all faces adjacent to the same face face(h,g)",
         py::keep_alive<0, 1>());
 
-#if CGAL_VERSION_NR > 1060100900
-  using Fafc = CGAL::Face_around_face_circulator<Prn>;
-  export_dereference_circulator<Fafc, Face&>(m, "Face_around_face_circulator");
-  m.def("faces_around_face_circulator", &cgalpy::pol3::faces_around_face_circulator, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all faces adjacent to the same face face(h,g)");
-#endif
+  // Do not export Face_around_face_circulator here.  CGAL currently exposes it
+  // as an empty placeholder type.  The iterator API Face_around_face remains
+  // exported above and is the usable binding.
 
   // Vertices around target
   // We use the dereference circulator, because we need to dereference twice

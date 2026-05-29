@@ -22,7 +22,21 @@
 #include <CGAL/Polygon_mesh_processing/autorefinement.h>
 #include <CGAL/Polygon_mesh_processing/clip.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
+
+// The local CGAL intersection_polylines.h header also declares the deprecated
+// surface_intersection() overload with default arguments. Homebrew CGAL's
+// intersection.h already declares the same defaults, so including both causes
+// a redefinition-of-default-argument error. We only need intersection_polylines(),
+// which is outside the deprecated-code guard.
+#ifndef CGAL_NO_DEPRECATED_CODE
+#define CGALPY_RESTORE_CGAL_NO_DEPRECATED_CODE
+#define CGAL_NO_DEPRECATED_CODE
+#endif
 #include <CGAL/Polygon_mesh_processing/intersection_polylines.h>
+#ifdef CGALPY_RESTORE_CGAL_NO_DEPRECATED_CODE
+#undef CGAL_NO_DEPRECATED_CODE
+#undef CGALPY_RESTORE_CGAL_NO_DEPRECATED_CODE
+#endif
 
 #include "CGALPY/Autorefinement_visitor.hpp"
 #include "CGALPY/Corefine_visitor.hpp"

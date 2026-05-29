@@ -114,12 +114,9 @@ auto faces_around_target(typename boost::graph_traits<Graph>::halfedge_descripto
                            CGAL::faces_around_target(h, g).first, CGAL::faces_around_target(h, g).second);
 }
 
-//! Wrap the function that obtains the real circulator
-template<typename Graph>
-auto faces_around_face_circulator(typename boost::graph_traits<Graph>::halfedge_descriptor h, const Graph& g) {
-  using Fafc = CGAL::Face_around_face_circulator<Graph>;
-  return Fafc(h, g);
-}
+// CGAL::Face_around_face_circulator<Graph> is only a placeholder in
+// current CGAL headers; it has no constructor/increment/dereference API.
+// Keep the Face_around_face_iterator binding below instead.
 
 //! Wrap the iterator
 template<typename Graph>
@@ -218,12 +215,9 @@ void export_bgl_iterators(py::module_& m) {
   m.def("faces_around_target_circulator", &cgalpy::bgl::faces_around_target_circulator<Graph>, py::arg("h"), py::arg("g"),
         "Obtain a circulator over all faces around vertex target(h,g).");
 
-#if CGAL_VERSION_NR > 1060100900
-  using Fafc = CGAL::Face_around_face_circulator<Graph>;
-  export_circulator<Fafc, Fd>(m, "Face_around_face_circulator");
-  m.def("faces_around_face_circulator", &cgalpy::bgl::faces_around_face_circulator<Graph>, py::arg("h"), py::arg("g"),
-        "Obtain a circulator over all edge-adjacent faces to the same face face(h,g).");
-#endif
+// Do not export Face_around_face_circulator here.  CGAL currently exposes it
+// as an empty placeholder type.  The iterator API faces_around_face remains
+// exported above and is the usable binding.
 
   using Vatc = CGAL::Vertex_around_target_circulator<Graph>;
   export_circulator<Vatc, Vd>(m, "Vertex_around_target_circulator");

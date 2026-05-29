@@ -125,16 +125,22 @@ py::list compute_subcurves1(py::list& curves, bool mult_overlaps, const Geometry
 
 // Binding for determining whether an intersection occurs between any pair
 // of curves in a given range.
-  bool do_intersect0(py::list& curves, bool consider_common_endpoints = true) {
+bool do_intersect0(py::list& curves, bool consider_common_endpoints = true) {
+  // CGAL 6.1 exposes this algorithm as CGAL::do_curves_intersect().
+  // Newer CGAL headers expose CGAL::Surface_sweep_2::do_intersect(), but the
+  // current build include order uses the 6.1 Homebrew header. Keep the Python
+  // argument for API compatibility; the older CGAL function has no endpoint flag.
+  (void)consider_common_endpoints;
+
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
     auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
-    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints);
+    return CGAL::do_curves_intersect(begin, end);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<Curve_2>(curves);
     auto end = stl_forward_iterator<Curve_2>(curves, false);
-    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints);
+    return CGAL::do_curves_intersect(begin, end);
   }
   else {
     PyErr_SetString(PyExc_StopIteration, "Invalid curve iterator");
@@ -146,15 +152,18 @@ py::list compute_subcurves1(py::list& curves, bool mult_overlaps, const Geometry
 // Binding for determining whether an intersection occurs between any pair
 // of curves in a given range.
 bool do_intersect1(py::list& curves, bool consider_common_endpoints, const Geometry_traits_2& traits) {
+  // See do_intersect0() above. The older CGAL function has no endpoint flag.
+  (void)consider_common_endpoints;
+
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
     auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
-    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints, traits);
+    return CGAL::do_curves_intersect(begin, end, traits);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
     auto begin = stl_forward_iterator<Curve_2>(curves);
     auto end = stl_forward_iterator<Curve_2>(curves, false);
-    return CGAL::Surface_sweep_2::do_intersect(begin, end, consider_common_endpoints, traits);
+    return CGAL::do_curves_intersect(begin, end, traits);
   }
   else {
     PyErr_SetString(PyExc_StopIteration, "Invalid curve iterator");
