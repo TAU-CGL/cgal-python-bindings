@@ -41,6 +41,7 @@
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/make_iterator.hpp"
 #include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/Bgl_docstrings.hpp"
 #include "cgalpy/Pol3_docstrings.hpp"
 
 extern void export_polyhedron_traits_with_normals_3(py::module_& m);
@@ -52,6 +53,7 @@ extern void export_pol3_halfedge(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c);
 extern void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c);
 
 namespace py = nanobind;
+namespace bgl_doc = cgalpy::bgl::docstrings;
 namespace pol3_doc = cgalpy::pol3::docstrings;
 
 namespace cgalpy {
@@ -64,10 +66,18 @@ void export_property_map_attributes(C& c) {
   using Ct = CellType;
   using Kt = const typename Mt::key_type;
   using Vt = const typename Mt::value_type;
-  c.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); }, py::arg("key"), py::arg("value"))
-    .def("__setitem__", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); }, py::arg("key"), py::arg("value"))
-    .def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }, Policy, py::arg("key"))
-    .def("__getitem__", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }, Policy, py::arg("key"))
+  c.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
+        py::arg("key"), py::arg("value"),
+        "Sets a value in the property map.")
+    .def("__setitem__", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
+         py::arg("key"), py::arg("value"),
+         "Sets a value in the property map.")
+    .def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); },
+         Policy, py::arg("key"),
+         "Returns a value from the property map.")
+    .def("__getitem__", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); },
+         Policy, py::arg("key"),
+         "Returns a value from the property map.")
     ;
 }
 
@@ -80,18 +90,22 @@ void export_dynamic_property_map(py::module_& m, const std::string& name) {
   using Vt = const typename Mt::value_type;
 
   if (! add_attr<Mt>(m, name.c_str())) {
-    py::class_<Mt> pm_c(m, name.c_str());
-    pm_c.def(py::init<>())
+    py::class_<Mt> pm_c(m, name.c_str(), "Dynamic Polyhedron_3 property map.");
+    pm_c.def(py::init<>(), "Constructs an empty dynamic property map.")
       .def_ro("map_", &Mt::map_)
       .def_ro("default_value_", &Mt::default_value_)
-      .def("clear", &Mt::clear)
-      .def("default_value", &Mt::default_value)
+      .def("clear", &Mt::clear, "Clears the property map.")
+      .def("default_value", &Mt::default_value,
+           "Returns the default value of the property map.")
       ;
     export_property_map_attributes<Mt, Ct, Policy>(pm_c);
   }
   m.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
-        py::arg("property_map"), py::arg("key"), py::arg("value"));
-  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }, Policy, py::arg("property_map"), py::arg("key"));
+        py::arg("property_map"), py::arg("key"), py::arg("value"),
+        "Sets a value in a dynamic Polyhedron_3 property map.");
+  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); },
+        Policy, py::arg("property_map"), py::arg("key"),
+        "Returns a value from a dynamic Polyhedron_3 property map.");
 }
 
 //!
@@ -103,13 +117,16 @@ void export_property_map(py::module_& m, const std::string& name) {
   using Vt = const typename Mt::value_type;
 
   if (! add_attr<Mt>(m, name.c_str())) {
-    py::class_<Mt> pm_c(m, name.c_str());
-    pm_c.def(py::init<>());
+    py::class_<Mt> pm_c(m, name.c_str(), "Polyhedron_3 property map.");
+    pm_c.def(py::init<>(), "Constructs an empty property map.");
     export_property_map_attributes<Mt, Ct, Policy>(pm_c);
   }
   m.def("put", [](Mt& p, Ct& k, Vt& v) { put(p, Kt(&k), v); },
-        py::arg("property_map"), py::arg("key"), py::arg("value"));
-  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); }), py::arg("property_map"), py::arg("key");
+        py::arg("property_map"), py::arg("key"), py::arg("value"),
+        "Sets a value in a Polyhedron_3 property map.");
+  m.def("get", [](const Mt& p, Ct& k) { return get(p, Kt(&k)); },
+        Policy, py::arg("property_map"), py::arg("key"),
+        "Returns a value from a Polyhedron_3 property map.");
 }
 
 //!
@@ -121,13 +138,17 @@ void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Pm, Dvpt>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt, Vertex, Policy>(m, "Dynamic_" + name);
-  m.def("get", [](Dvpt tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
+  m.def("get", [](Dvpt tag, Pm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"),
+        "Returns a dynamic vertex property map from a Polyhedron_3 graph.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dvpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dvpt(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic vertex property map from a Polyhedron_3 graph.");
 }
 
 //!
@@ -139,13 +160,17 @@ void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Pm, Dhpt>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt, Halfedge, Policy>(m, "Dynamic_" + name);
-  m.def("get", [](Dhpt tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
+  m.def("get", [](Dhpt tag, Pm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"),
+        "Returns a dynamic halfedge property map from a Polyhedron_3 graph.");
 
   // Observe that Dhpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dhpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dhpt(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic halfedge property map from a Polyhedron_3 graph.");
 }
 
 //!
@@ -157,13 +182,17 @@ void export_dynamic_face_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Pm, Dfpt>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt, Face, Policy>(m, "Dynamic_" + name);
-  m.def("get", [](Dfpt tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
+  m.def("get", [](Dfpt tag, Pm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"),
+        "Returns a dynamic face property map from a Polyhedron_3 graph.");
 
   // Observe that Dfpt is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dfpt(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dfpt(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic face property map from a Polyhedron_3 graph.");
 }
 
 //!
@@ -175,13 +204,17 @@ void export_dynamic_edge_map(py::module_& m, const std::string& name) {
   using Mt = typename boost::property_map<Pm, Dept>::const_type;
   constexpr auto ri(py::rv_policy::reference_internal);
   export_dynamic_property_map<Mt, Halfedge, Policy>(m, "Dynamic_" + name);
-  m.def("get", [](Dept tag, Pm& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
+  m.def("get", [](Dept tag, Pm& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"),
+        "Returns a dynamic edge property map from a Polyhedron_3 graph.");
 
   // Observe that Dept is (an instance) exported by the Bgl module.
   // The get(t, g) function above accepts a tag as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dept(), g); }, ri, py::arg("graph"));
+  m.def(("get_dynamic_" + name).c_str(), [](Pm& g) { return CGAL::get(Dept(), g); }, ri,
+        py::arg("graph"),
+        "Returns a dynamic edge property map from a Polyhedron_3 graph.");
 }
 
 /*! Export dynamic property maps.
@@ -394,12 +427,16 @@ void export_internal_face_plane_3_map(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Ifpm>(m, "Internal_face_plane_3_map")) {
-    py::class_<Ifpm> ifpm_c(m, "Internal_face_plane_3_map");
-    ifpm_c.def(py::init<>());
+    py::class_<Ifpm> ifpm_c(m, "Internal_face_plane_3_map",
+                             "Internal face-plane property map for Polyhedron_3.");
+    ifpm_c.def(py::init<>(),
+               "Constructs an internal face-plane property map.");
     cgalpy::pol3::export_property_map_attributes<Ifpm, Face, py::rv_policy::reference_internal>(ifpm_c);
   }
 
-  m.def("get", [](const Ifpm& pm, Face& f) { return get(pm, Fd(&f)); }, ri, py::arg("property_map"), py::arg("key"));
+  m.def("get", [](const Ifpm& pm, Face& f) { return get(pm, Fd(&f)); }, ri,
+        py::arg("property_map"), py::arg("key"),
+        "Returns the plane associated with a polyhedron face.");
 }
 
 // Export Polyhedron_3.
@@ -434,34 +471,65 @@ void export_polyhedron_3(py::module_& m) {
   if (! add_attr<Prn>(m, "Polyhedron_3")) {
     py::class_<Prn> prn_c(m, "Polyhedron_3", pol3_doc::Polyhedron_3_class);
     prn_c.def(py::init<>(), pol3_doc::Polyhedron_3_Polyhedron_3)
-      .def(py::init<const Prn&>())
-      .def(py::init<const cgalpy::pol3::Traits&>())
-      .def("add_facet_to_border", &Prn::add_facet_to_border, pol3_doc::Polyhedron_3_add_facet_to_border)
-      .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border, pol3_doc::Polyhedron_3_add_vertex_and_facet_to_border)
+      .def(py::init<const Prn&>(), py::arg("other"),
+           pol3_doc::Polyhedron_3_Polyhedron_3_1)
+      .def(py::init<const cgalpy::pol3::Traits&>(), py::arg("traits"),
+           "Constructs a polyhedron with the given traits object.")
+      .def("add_facet_to_border", &Prn::add_facet_to_border,
+           py::arg("h"), py::arg("g"),
+           pol3_doc::Polyhedron_3_add_facet_to_border)
+      .def("add_vertex_and_facet_to_border", &Prn::add_vertex_and_facet_to_border,
+           py::arg("h"), py::arg("g"),
+           pol3_doc::Polyhedron_3_add_vertex_and_facet_to_border)
       .def("bytes", &Prn::bytes, pol3_doc::Polyhedron_3_bytes)
       .def("bytes_reserved", &Prn::bytes_reserved, pol3_doc::Polyhedron_3_bytes_reserved)
       .def("capacity_of_facets", &Prn::capacity_of_facets, pol3_doc::Polyhedron_3_capacity_of_facets)
       .def("capacity_of_halfedges", &Prn::capacity_of_halfedges, pol3_doc::Polyhedron_3_capacity_of_halfedges)
       .def("capacity_of_vertices", &Prn::capacity_of_vertices, pol3_doc::Polyhedron_3_capacity_of_vertices)
       .def("clear", &Prn::clear, pol3_doc::Polyhedron_3_clear)
-      .def("create_center_vertex", &Prn::create_center_vertex, pol3_doc::Polyhedron_3_create_center_vertex)
-      .def("erase_all", &Prn::erase_all)
-      .def("erase_center_vertex", &Prn::erase_center_vertex, pol3_doc::Polyhedron_3_erase_center_vertex)
-      .def("erase_connected_component", &Prn::erase_connected_component, pol3_doc::Polyhedron_3_erase_connected_component)
-      .def("erase_facet", &Prn::erase_facet, pol3_doc::Polyhedron_3_erase_facet)
-      .def("fill_hole", &Prn::fill_hole, pol3_doc::Polyhedron_3_fill_hole)
-      .def("flip_edge", &Prn::flip_edge, pol3_doc::Polyhedron_3_flip_edge)
+      .def("create_center_vertex", &Prn::create_center_vertex,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_create_center_vertex)
+      .def("erase_all", &Prn::erase_all,
+           "Erases all vertices, halfedges, and facets.")
+      .def("erase_center_vertex", &Prn::erase_center_vertex,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_erase_center_vertex)
+      .def("erase_connected_component", &Prn::erase_connected_component,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_erase_connected_component)
+      .def("erase_facet", &Prn::erase_facet,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_erase_facet)
+      .def("fill_hole", &Prn::fill_hole,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_fill_hole)
+      .def("flip_edge", &Prn::flip_edge,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_flip_edge)
       .def("inside_out", &Prn::inside_out, pol3_doc::Polyhedron_3_inside_out)
       .def("is_closed", &Prn::is_closed, pol3_doc::Polyhedron_3_is_closed)
       .def("is_empty", &Prn::is_empty, pol3_doc::Polyhedron_3_empty)
       .def("is_tetrahedron", &cgalpy::pol3::is_tetrahedron, py::arg("halfedge"), pol3_doc::Polyhedron_3_is_tetrahedron)
-      .def("is_triangle", &Prn::is_triangle, pol3_doc::Polyhedron_3_is_triangle)
+      .def("is_triangle", &Prn::is_triangle,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_is_triangle)
       .def("is_valid", &Prn::is_valid, py::arg("verbose") = false, py::arg("level") = 0, pol3_doc::Polyhedron_3_is_valid)
-      .def("join_facet", &Prn::join_facet, pol3_doc::Polyhedron_3_join_facet)
-      .def("join_loop", &Prn::join_loop, pol3_doc::Polyhedron_3_join_loop)
-      .def("join_vertex", &Prn::join_vertex, pol3_doc::Polyhedron_3_join_vertex)
-      .def("keep_largest_connected_components", &Prn::keep_largest_connected_components, pol3_doc::Polyhedron_3_keep_largest_connected_components)
-      .def("make_hole", &Prn::make_hole, pol3_doc::Polyhedron_3_make_hole)
+      .def("join_facet", &Prn::join_facet,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_join_facet)
+      .def("join_loop", &Prn::join_loop,
+           py::arg("h"), py::arg("g"),
+           pol3_doc::Polyhedron_3_join_loop)
+      .def("join_vertex", &Prn::join_vertex,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_join_vertex)
+      .def("keep_largest_connected_components", &Prn::keep_largest_connected_components,
+           py::arg("nb_components_to_keep"),
+           pol3_doc::Polyhedron_3_keep_largest_connected_components)
+      .def("make_hole", &Prn::make_hole,
+           py::arg("h"),
+           pol3_doc::Polyhedron_3_make_hole)
       .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron1, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), pol3_doc::Polyhedron_3_make_tetrahedron_1)
       .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron2, ri, pol3_doc::Polyhedron_3_make_tetrahedron)
       .def("normalize_border", &Prn::normalize_border, pol3_doc::Polyhedron_3_normalize_border)
@@ -471,12 +539,20 @@ void export_polyhedron_3(py::module_& m) {
       .def("size_of_facets", &Prn::size_of_facets, pol3_doc::Polyhedron_3_size_of_facets)
       .def("size_of_halfedges", &Prn::size_of_halfedges, pol3_doc::Polyhedron_3_size_of_halfedges)
       .def("size_of_vertices", &Prn::size_of_vertices, pol3_doc::Polyhedron_3_size_of_vertices)
-      .def("split_facet", &Prn::split_facet, pol3_doc::Polyhedron_3_split_facet)
-      .def("split_loop", &Prn::split_loop, pol3_doc::Polyhedron_3_split_loop)
-      .def("split_vertex", &Prn::split_vertex, pol3_doc::Polyhedron_3_split_vertex)
+      .def("split_facet", &Prn::split_facet,
+           py::arg("h"), py::arg("g"),
+           pol3_doc::Polyhedron_3_split_facet)
+      .def("split_loop", &Prn::split_loop,
+           py::arg("h"), py::arg("i"), py::arg("j"),
+           pol3_doc::Polyhedron_3_split_loop)
+      .def("split_vertex", &Prn::split_vertex,
+           py::arg("h"), py::arg("g"),
+           pol3_doc::Polyhedron_3_split_vertex)
       .def("make_triangle", &cgalpy::pol3::make_triangle_empty, ri, pol3_doc::Polyhedron_3_make_triangle)
       .def("make_triangle", &cgalpy::pol3::make_triangle, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), pol3_doc::Polyhedron_3_make_triangle_1)
-      .def("delegate", &Prn::delegate, pol3_doc::Polyhedron_3_delegate)
+      .def("delegate", &Prn::delegate,
+           py::arg("modifier"),
+           pol3_doc::Polyhedron_3_delegate)
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_), pol3_doc::Polyhedron_3_is_pure_quad)
       .def("is_pure_bivalent", py::overload_cast<>(&Prn::is_pure_bivalent, py::const_), pol3_doc::Polyhedron_3_is_pure_bivalent)
       .def("is_pure_trivalent", py::overload_cast<>(&Prn::is_pure_trivalent, py::const_), pol3_doc::Polyhedron_3_is_pure_trivalent)
@@ -519,7 +595,9 @@ void export_polyhedron_3(py::module_& m) {
 #ifdef CGALPY_HAS_VISUAL
   using Draw_arr = void(*)(const Prn&, const char*);
   m.def("draw", [](const Prn& prn, const char* title)
-  { CGAL::draw(prn, title); });
+  { CGAL::draw(prn, title); },
+        py::arg("polyhedron"), py::arg("title"),
+        "Draws a Polyhedron_3.");
 #endif
 
   // CGAL and the Boost Graph Library
@@ -566,46 +644,84 @@ void export_polyhedron_3(py::module_& m) {
 
 #ifdef CGALPY_BGL_BINDINGS
   // Obtain the propery map
-  m.def("get", [](Vpt tag, Prn& g) { return CGAL::get(tag, g); }, ri, py::arg("tag"), py::arg("graph"));
+  m.def("get", [](Vpt tag, Prn& g) { return CGAL::get(tag, g); }, ri,
+        py::arg("tag"), py::arg("graph"),
+        "Returns the vertex point property map.");
 #endif
 
   // Observe that Vpt is (an enum) exported by the Bgl module.
   // The get(t, g) function above accepts an enumeration as the first parameter.
   // A Python user must create bindings for the Bgl in order to obtain the wrapped enumeration.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
-  m.def("get_vertex_point_map", [](Prn& g) { return CGAL::get(CGAL::vertex_point, g); }, ri, py::arg("graph"));
+  m.def("get_vertex_point_map", [](Prn& g) { return CGAL::get(CGAL::vertex_point, g); }, ri,
+        py::arg("graph"),
+        "Returns the vertex point property map.");
 
   // Free functions
-  m.def("clear", &CGAL::clear<Prn>);
-  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>);
-  m.def("is_closed", &CGAL::is_closed<Prn>);
+  m.def("clear", &CGAL::clear<Prn>,
+        py::arg("graph"),
+        "Removes all elements from the graph.");
+  m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>,
+        py::arg("graph"), bgl_doc::is_triangle_mesh);
+  m.def("is_closed", &CGAL::is_closed<Prn>,
+        py::arg("graph"),
+        "Returns whether the graph is closed.");
 
   // Iterators
-  m.def("edges", &cgalpy::pol3::my_edges<Prn>, py::keep_alive<0, 1>());
-  m.def("faces", &cgalpy::pol3::my_faces<Prn>, py::keep_alive<0, 1>());
-  m.def("halfedges", &cgalpy::pol3::my_halfedges<Prn>, py::keep_alive<0, 1>());
-  m.def("vertices", &cgalpy::pol3::my_vertices<Prn>, py::keep_alive<0, 1>());
+  m.def("edges", &cgalpy::pol3::my_edges<Prn>,
+        py::arg("graph"), py::keep_alive<0, 1>(),
+        "Returns an iterator range over graph edges.");
+  m.def("faces", &cgalpy::pol3::my_faces<Prn>,
+        py::arg("graph"), py::keep_alive<0, 1>(),
+        "Returns an iterator range over graph faces.");
+  m.def("halfedges", &cgalpy::pol3::my_halfedges<Prn>,
+        py::arg("graph"), py::keep_alive<0, 1>(),
+        "Returns an iterator range over graph halfedges.");
+  m.def("vertices", &cgalpy::pol3::my_vertices<Prn>,
+        py::arg("graph"), py::keep_alive<0, 1>(),
+        "Returns an iterator range over graph vertices.");
 
   // Functions that do not involve handlers
-  m.def("add_edge", &cgalpy::bgl::my_add_edge<Prn>);
-  m.def("add_face", &cgalpy::bgl::my_add_face<Prn>);
-  m.def("add_vertex", &cgalpy::bgl::my_add_vertex<Prn>);
-  m.def("num_edges", &cgalpy::bgl::my_num_edges<Prn>);
-  m.def("num_faces", &cgalpy::bgl::my_num_faces<Prn>);
-  m.def("num_halfedges", &cgalpy::bgl::my_num_halfedges<Prn>);
-  m.def("num_vertices", &cgalpy::bgl::my_num_vertices<Prn>);
-  m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Prn>);
-  m.def("reserve", &cgalpy::bgl::my_reserve<Prn>);
+  m.def("add_edge", &cgalpy::bgl::my_add_edge<Prn>,
+        py::arg("graph"), bgl_doc::MutableHalfedgeGraph_add_edge);
+  m.def("add_face", &cgalpy::bgl::my_add_face<Prn>,
+        py::arg("graph"), bgl_doc::MutableFaceGraph_add_face);
+  m.def("add_vertex", &cgalpy::bgl::my_add_vertex<Prn>,
+        py::arg("graph"), bgl_doc::MutableHalfedgeGraph_add_vertex);
+  m.def("num_edges", &cgalpy::bgl::my_num_edges<Prn>,
+        py::arg("graph"), bgl_doc::EdgeListGraph_num_edges);
+  m.def("num_faces", &cgalpy::bgl::my_num_faces<Prn>,
+        py::arg("graph"), bgl_doc::FaceListGraph_num_faces);
+  m.def("num_halfedges", &cgalpy::bgl::my_num_halfedges<Prn>,
+        py::arg("graph"), bgl_doc::HalfedgeListGraph_num_halfedges);
+  m.def("num_vertices", &cgalpy::bgl::my_num_vertices<Prn>,
+        py::arg("graph"), bgl_doc::VertexListGraph_num_vertices);
+  m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Prn>,
+        py::arg("graph"),
+        "Removes all vertices, edges, halfedges, and faces from the graph.");
+  m.def("reserve", &cgalpy::bgl::my_reserve<Prn>,
+        py::arg("graph"), py::arg("num_vertices"), py::arg("num_edges"),
+        py::arg("num_faces"), bgl_doc::MutableFaceGraph_reserve);
 
   // Other
   // m.def("add_vertex", &cgalpy::pol3::add_vertex_p);
   // m.def("adjacent_vertices", &cgalpy::pol3::adjacent_vertices);
-  m.def("degree", &cgalpy::pol3::degree_f);
-  m.def("degree", &cgalpy::pol3::degree_v);
+  m.def("degree", &cgalpy::pol3::degree_f,
+        py::arg("face"), py::arg("graph"),
+        "Returns the degree of a face descriptor.");
+  m.def("degree", &cgalpy::pol3::degree_v,
+        py::arg("vertex"), py::arg("graph"),
+        "Returns the degree of a vertex descriptor.");
   // m.def("edge", &cgalpy::pol3::edge);
-  m.def("face", &cgalpy::pol3::face_h, ref);
-  m.def("halfedge", &cgalpy::pol3::halfedge_v, ref);
-  m.def("halfedge", &cgalpy::pol3::halfedge_f, ref);
+  m.def("face", &cgalpy::pol3::face_h, ref,
+        py::arg("halfedge"), py::arg("graph"),
+        "Returns the face incident to a halfedge.");
+  m.def("halfedge", &cgalpy::pol3::halfedge_v, ref,
+        py::arg("vertex"), py::arg("graph"),
+        "Returns a halfedge incident to a vertex.");
+  m.def("halfedge", &cgalpy::pol3::halfedge_f, ref,
+        py::arg("face"), py::arg("graph"),
+        "Returns a halfedge incident to a face.");
   // m.def("halfedge", &cgalpy::pol3::halfedge_vv);
   // m.def("in_degree", &cgalpy::pol3::in_degree);
   // m.def("is_valid_vertex_descriptor",
@@ -620,16 +736,26 @@ void export_polyhedron_3(py::module_& m) {
   // m.def("is_valid_face_descriptor",
   //       &cgalpy::bgl::my_is_valid_face_descriptor<Prn>,
   //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
-  m.def("next", &cgalpy::pol3::next_h, ref);
-  m.def("opposite", &cgalpy::pol3::opposite_h, ref);
+  m.def("next", &cgalpy::pol3::next_h, ref,
+        py::arg("halfedge"), py::arg("graph"),
+        "Returns the next halfedge.");
+  m.def("opposite", &cgalpy::pol3::opposite_h, ref,
+        py::arg("halfedge"), py::arg("graph"),
+        "Returns the opposite halfedge.");
   // m.def("out_degree", &cgalpy::bgl::out_degree<Prn>);
-  m.def("prev", &cgalpy::pol3::prev_h, ref);
+  m.def("prev", &cgalpy::pol3::prev_h, ref,
+        py::arg("halfedge"), py::arg("graph"),
+        "Returns the previous halfedge.");
   // m.def("remove_edge", &cgalpy::bgl::remove_edge_vv<Prn>);
   // m.def("remove_edge", &cgalpy::bgl::remove_edge_e<Prn>);
   // m.def("remove_face", &cgalpy::bgl::remove_face<Prn>);
   // m.def("remove_vertex", &cgalpy::bgl::remove_vertex<Prn>);
-  m.def("source", &cgalpy::pol3::source_h, ref);
-  m.def("target", &cgalpy::pol3::target_h, ref);
+  m.def("source", &cgalpy::pol3::source_h, ref,
+        py::arg("halfedge"), py::arg("graph"),
+        "Returns the source vertex of a halfedge.");
+  m.def("target", &cgalpy::pol3::target_h, ref,
+        py::arg("halfedge"), py::arg("graph"),
+        "Returns the target vertex of a halfedge.");
   // m.def("set_face", &cgalpy::bgl::set_face<Prn>);
   // m.def("set_halfedge", &cgalpy::bgl::set_halfedge_vh<Prn>);
   // m.def("set_halfedge", &cgalpy::bgl::set_halfedge_fh<Prn>);
@@ -640,8 +766,13 @@ void export_polyhedron_3(py::module_& m) {
   // m.def("out_edges", &cgalpy::bgl::my_out_edges<Prn>);
 
   // Generators
-  m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Prn>);
-  m.def("make_hexahedron", &cgalpy::bgl::my_make_hexahedron<Prn>);
+  m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Prn>,
+        py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"),
+        bgl_doc::make_tetrahedron);
+  m.def("make_hexahedron", &cgalpy::bgl::my_make_hexahedron<Prn>,
+        py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"),
+        py::arg("p5"), py::arg("p6"), py::arg("p7"), py::arg("p8"),
+        "Constructs a hexahedron graph from eight points.");
 
   // using Edge_bool_tag = CGAL::dynamic_edge_property_t<bool>;
   // using ebmap_type = boost::property_map<Prn, Edge_bool_tag>::type;

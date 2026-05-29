@@ -36,7 +36,8 @@ void export_pol3_vertex(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
 
   py::class_<Vertex> vertex_c(prn_c, "Vertex", pol3_doc::Polyhedron_3_Vertex_class);
   vertex_c.def(py::init<>(), pol3_doc::Polyhedron_3_Vertex_Vertex)
-    .def("degree", [](const Vertex& v) { return v.degree(); })
+    .def("degree", [](const Vertex& v) { return v.degree(); },
+         pol3_doc::Polyhedron_3_Vertex_vertex_degree)
     .def("halfedge", cgalpy::pol3::vertex_halfedge, ri, pol3_doc::Polyhedron_3_Vertex_halfedge)
     .def("is_bivalent", [](const Vertex& v) { return v.is_bivalent(); }, pol3_doc::Polyhedron_3_Vertex_is_bivalent)
     .def("is_trivalent", [](const Vertex& v) { return v.is_trivalent(); }, pol3_doc::Polyhedron_3_Vertex_is_trivalent)
@@ -48,8 +49,11 @@ void export_pol3_vertex(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
     // Vertex. Therefore, we cannot directly refere to any of them, e.g.,
     // `Vertex::set_data`. Instead, we introduce lambda functions that call
     // the appropriate member functions.
-    .def("set_data", [](Vertex& v, py::object obj) { v.set_data(obj); }, py::arg("data"))
-    .def("data", [](const Vertex& v)->py::object { return v.data(); })
+    .def("set_data", [](Vertex& v, py::object obj) { v.set_data(obj); },
+         py::arg("data"),
+         "Sets the user data stored on the vertex.")
+    .def("data", [](const Vertex& v)->py::object { return v.data(); },
+         "Returns the user data stored on the vertex.")
 #endif
     ;
 

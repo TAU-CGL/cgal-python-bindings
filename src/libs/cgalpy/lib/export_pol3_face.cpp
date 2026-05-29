@@ -75,8 +75,11 @@ void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
     // Face. Therefore, we cannot directly refere to any of them, e.g.,
     // `Face::set_data`. Instead, we introduce lambda functions that call
     // the appropriate member functions.
-    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); }, py::arg("data"))
-    .def("data", [](const Face& f)->py::object { return f.data(); })
+    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); },
+         py::arg("data"),
+         "Sets the user data stored on the face.")
+    .def("data", [](const Face& f)->py::object { return f.data(); },
+         "Returns the user data stored on the face.")
 #endif
     ;
 
@@ -90,6 +93,7 @@ void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
   // cgalpy::pol3::face_with_id() is evaluated at compiletime
 #if defined(CGALPY_POL3_FACE_WITH_ID)
   if constexpr(cgalpy::pol3::face_with_id())
-    face_c.def("id", [](const Face& f){ return f.id(); });
+    face_c.def("id", [](const Face& f){ return f.id(); },
+               "Returns the face id.");
 #endif
 }

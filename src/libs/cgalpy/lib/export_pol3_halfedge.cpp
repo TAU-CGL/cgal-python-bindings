@@ -62,8 +62,11 @@ void export_pol3_halfedge(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
     // Halfedge. Therefore, we cannot directly refere to any of them, e.g.,
     // `Halfedge::set_data`. Instead, we introduce lambda functions that call
     // the appropriate member functions.
-    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); }, py::arg("data"))
-    .def("data", [](const Halfedge& h)->py::object { return h.data(); })
+    .def("set_data", [](Halfedge& h, py::object obj) { h.set_data(obj); },
+         py::arg("data"),
+         "Sets the user data stored on the halfedge.")
+    .def("data", [](const Halfedge& h)->py::object { return h.data(); },
+         "Returns the user data stored on the halfedge.")
 #endif
     ;
 
