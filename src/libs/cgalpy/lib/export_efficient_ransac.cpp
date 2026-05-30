@@ -8,9 +8,11 @@
 #include <CGAL/Shape_detection/Efficient_RANSAC.h>
 
 #include "CGALPY/kernel_type.hpp"
+#include "cgalpy/Sd_docstrings.hpp"
 
 namespace py = nanobind;
 namespace SD = CGAL::Shape_detection;
+namespace sd_doc = cgalpy::sd::docstrings;
 
 template <typename Shape, typename Traits>
 struct Py_base_shape : Shape {
@@ -41,17 +43,18 @@ struct Py_base_shape : Shape {
 };
 
 template<typename Traits, typename Shape, typename C>
-auto export_base_shape(C& c, const std::string& name, const std::string& doc = "") {
+auto export_base_shape(C& c, const std::string& name, const char* doc = "") {
   using Base_shape = Py_base_shape<Shape, Traits>;
-  return py::class_<Shape, Base_shape>(c, name.c_str(), doc.c_str())
+  return py::class_<Shape, Base_shape>(c, name.c_str(), doc)
     .def("indices_of_assigned_points", &Base_shape::indices_of_assigned_points,
-         "Returns the indices of the points in the input range assigned to this shape.")
+         sd_doc::Shape_detection_Shape_base_indices_of_assigned_points)
     .def("info", &Shape::info,
-         "Returns a string containing the shape type and the numerical parameters.")
+         sd_doc::Shape_detection_Shape_base_info)
     .def("squared_distance", [](const Shape& self, const typename Shape::Point_3& p) {
       return self.squared_distance(p);
     },
-         "Computes the squared Euclidean distance from the query point p to the shape.")
+         py::arg("p"),
+         sd_doc::Shape_detection_Shape_base_squared_distance)
     ;
 }
 
@@ -59,7 +62,7 @@ template<typename RANSAC, typename Shape, typename C>
 auto add_shape_factory(C& c, const std::string& name) {
   return c.def(("add_" + name + "_factory").c_str(), [](RANSAC& self)
     { return self.template add_shape_factory<Shape>(); },
-    ("Registers the " + name + " shape type in the detection engine.").c_str()
+    sd_doc::Shape_detection_Efficient_RANSAC_add_shape_factory
   );
 }
 
@@ -121,134 +124,134 @@ void export_efficient_ransac(py::module_& m) {
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
   auto cone = export_base_shape<RANSAC_traits, Cone>(m, "Cone",
-    "Cone implements Shape_base.\n"
-    "The cone is represented by its apex, the axis, and the opening angle. This representation models an open infinite single-cone.\n"
-    "Examples\n"
-    "Shape_detection/efficient_RANSAC_with_parameters.py.")
+    sd_doc::Shape_detection_Cone_class)
     .def("angle", &Cone::angle,
-         "Opening angle between the axis and the surface of the cone.")
+         sd_doc::Shape_detection_Cone_angle)
     .def("apex", &Cone::apex,
-         "Apex of the cone.")
+         sd_doc::Shape_detection_Cone_apex)
     .def("axis", &Cone::axis,
-         "Axis points from the apex into the cone.")
+         sd_doc::Shape_detection_Cone_axis)
     ;
   auto cylinder = export_base_shape<RANSAC_traits, Cylinder>(m, "Cylinder",
-    "Cylinder implements Shape_base.\n"
-    "The cylinder is represented by the axis, that is a point and direction, and the radius. The cylinder is unbounded, thus caps are not modeled.\n"
-    "Examples\n"
-    "Shape_detection/efficient_RANSAC_with_parameters.py.")
+    sd_doc::Shape_detection_Cylinder_class)
     .def("axis", &Cylinder::axis,
-         "Axis of the cylinder.")
+         sd_doc::Shape_detection_Cylinder_axis)
     .def("radius", &Cylinder::radius,
-         "Radius of the cylinder.")
+         sd_doc::Shape_detection_Cylinder_radius)
     ;
   auto plane = export_base_shape<RANSAC_traits, Plane>(m, "Plane",
-    "Plane implements Shape_base.\n"
-    "The plane is represented by the normal vector and the distance to the origin.\n"
-    "Examples\n"
-    "Shape_detection/efficient_RANSAC_basic.py, Shape_detection/efficient_RANSAC_with_callback.py, Shape_detection/efficient_RANSAC_with_parameters.py, and Shape_detection/efficient_RANSAC_with_point_access.py.")
+    sd_doc::Shape_detection_Plane_class)
     .def("get_plane", &Plane::operator Kernel::Plane_3,
-         "Conversion operator to Plane_3 type.")
+         sd_doc::Shape_detection_Plane_operator_Plane_3)
     .def("get_normal", &Plane::plane_normal,
-         "Normal vector of the plane.")
+         sd_doc::Shape_detection_Plane_plane_normal)
     .def("get_d", &Plane::d,
-         "Signed distance from the origin.")
+         sd_doc::Shape_detection_Plane_d)
     ;
   auto shape_base = export_base_shape<RANSAC_traits, Shape_base>(m, "Shape_base",
-    "Base class for shape types that defines an interface to construct a shape from a set of points and to compute the point distance and normal deviation from the surface normal.\n"
-    "It is used during detection to identify the inliers from the input data and to extract the largest connected component in the inlier points.\n"
-    "Examples\n"
-    "Shape_detection/include/efficient_RANSAC_with_custom_shape.h.");
+    sd_doc::Shape_detection_Shape_base_class);
   auto sphere = export_base_shape<RANSAC_traits, Sphere>(m, "Sphere",
-    "Sphere implements Shape_base.\n"
-    "The sphere is represented by its center and the radius.\n"
-    "Examples\n"
-    "Shape_detection/efficient_RANSAC_with_parameters.py.")
+    sd_doc::Shape_detection_Sphere_class)
     .def("get_sphere", &Sphere::operator Kernel::Sphere_3,
-         "Conversion operator to Sphere_3 type.")
+         sd_doc::Shape_detection_Sphere_operator_Sphere_3)
     .def("center", &Sphere::center,
-         "Access to the center.")
+         sd_doc::Shape_detection_Sphere_center)
     .def("radius", &Sphere::radius,
-         "Access to the radius of the sphere.")
+         sd_doc::Shape_detection_Sphere_radius)
     ;
   auto torus = export_base_shape<RANSAC_traits, Torus>(m, "Torus",
-    "The torus is represented by the symmetry axis, its center on the axis, and the major and minor radii.\n"
-    "Examples\n"
-    "Shape_detection/efficient_RANSAC_with_parameters.py.")
+    sd_doc::Shape_detection_Torus_class)
     .def("axis", &Torus::axis,
-         "Direction of symmetry axis.")
+         sd_doc::Shape_detection_Torus_axis)
     .def("center", &Torus::center,
-         "Center point on symmetry axis.")
+         sd_doc::Shape_detection_Torus_center)
     .def("major_radius", &Torus::major_radius,
-         "Major radius of the torus.")
+         sd_doc::Shape_detection_Torus_major_radius)
     .def("minor_radius", &Torus::minor_radius,
-         "Minor radius of the torus.")
+         sd_doc::Shape_detection_Torus_minor_radius)
     ;
 #endif
 
   // Property Maps
   py::class_<RANSAC_traits>(m, "Efficient_RANSAC_traits",
-    "Default traits class for the CGAL::Shape_detection::Efficient_RANSAC.")
+    sd_doc::Shape_detection_Efficient_RANSAC_traits_class)
     .def(py::init<const Gt &>(),
-         py::arg("gt") = Gt())
-    .def("construct_point_3_object", &RANSAC_traits::construct_point_3_object)
-    .def("construct_vector_3_object", &RANSAC_traits::construct_vector_3_object)
-    .def("construct_point_2_object", &RANSAC_traits::construct_point_2_object)
-    .def("construct_vector_2_object", &RANSAC_traits::construct_vector_2_object)
-    .def("construct_sphere_3_object", &RANSAC_traits::construct_sphere_3_object)
-    .def("construct_line_3_object", &RANSAC_traits::construct_line_3_object)
-    .def("construct_circle_2_object", &RANSAC_traits::construct_circle_2_object)
-    .def("construct_point_on_3_object", &RANSAC_traits::construct_point_on_3_object)
-    .def("compute_x_2_object", &RANSAC_traits::compute_x_2_object)
-    .def("compute_y_2_object", &RANSAC_traits::compute_y_2_object)
-    .def("compute_x_3_object", &RANSAC_traits::compute_x_3_object)
-    .def("compute_y_3_object", &RANSAC_traits::compute_y_3_object)
-    .def("compute_z_3_object", &RANSAC_traits::compute_z_3_object)
-    .def("compute_squared_length_3_object", &RANSAC_traits::compute_squared_length_3_object)
-    .def("compute_squared_length_2_object", &RANSAC_traits::compute_squared_length_2_object)
-    .def("construct_scaled_vector_3_object", &RANSAC_traits::construct_scaled_vector_3_object)
-    .def("construct_sum_of_vectors_3_object", &RANSAC_traits::construct_sum_of_vectors_3_object)
-    .def("construct_translated_point_3_object", &RANSAC_traits::construct_translated_point_3_object)
-    .def("compute_scalar_product_3_object", &RANSAC_traits::compute_scalar_product_3_object)
-    .def("construct_cross_product_vector_3_object", &RANSAC_traits::construct_cross_product_vector_3_object)
-    .def("construct_center_3_object", &RANSAC_traits::construct_center_3_object)
-    .def("construct_center_2_object", &RANSAC_traits::construct_center_2_object)
-    .def("compute_squared_radius_3_object", &RANSAC_traits::compute_squared_radius_3_object)
-    .def("compute_squared_radius_2_object", &RANSAC_traits::compute_squared_radius_2_object)
-    .def("collinear_2_object", &RANSAC_traits::collinear_2_object)
+         py::arg("gt") = Gt(),
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_Efficient_RANSAC_traits)
+    .def("construct_point_3_object", &RANSAC_traits::construct_point_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_point_3_object)
+    .def("construct_vector_3_object", &RANSAC_traits::construct_vector_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_vector_3_object)
+    .def("construct_point_2_object", &RANSAC_traits::construct_point_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_point_2_object)
+    .def("construct_vector_2_object", &RANSAC_traits::construct_vector_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_vector_2_object)
+    .def("construct_sphere_3_object", &RANSAC_traits::construct_sphere_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_sphere_3_object)
+    .def("construct_line_3_object", &RANSAC_traits::construct_line_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_line_3_object)
+    .def("construct_circle_2_object", &RANSAC_traits::construct_circle_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_circle_2_object)
+    .def("construct_point_on_3_object", &RANSAC_traits::construct_point_on_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_point_on_3_object)
+    .def("compute_x_2_object", &RANSAC_traits::compute_x_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_x_2_object)
+    .def("compute_y_2_object", &RANSAC_traits::compute_y_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_y_2_object)
+    .def("compute_x_3_object", &RANSAC_traits::compute_x_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_x_3_object)
+    .def("compute_y_3_object", &RANSAC_traits::compute_y_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_y_3_object)
+    .def("compute_z_3_object", &RANSAC_traits::compute_z_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_z_3_object)
+    .def("compute_squared_length_3_object", &RANSAC_traits::compute_squared_length_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_squared_length_3_object)
+    .def("compute_squared_length_2_object", &RANSAC_traits::compute_squared_length_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_squared_length_2_object)
+    .def("construct_scaled_vector_3_object", &RANSAC_traits::construct_scaled_vector_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_scaled_vector_3_object)
+    .def("construct_sum_of_vectors_3_object", &RANSAC_traits::construct_sum_of_vectors_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_sum_of_vectors_3_object)
+    .def("construct_translated_point_3_object", &RANSAC_traits::construct_translated_point_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_translated_point_3_object)
+    .def("compute_scalar_product_3_object", &RANSAC_traits::compute_scalar_product_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_scalar_product_3_object)
+    .def("construct_cross_product_vector_3_object", &RANSAC_traits::construct_cross_product_vector_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_cross_product_vector_3_object)
+    .def("construct_center_3_object", &RANSAC_traits::construct_center_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_center_3_object)
+    .def("construct_center_2_object", &RANSAC_traits::construct_center_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_construct_center_2_object)
+    .def("compute_squared_radius_3_object", &RANSAC_traits::compute_squared_radius_3_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_squared_radius_3_object)
+    .def("compute_squared_radius_2_object", &RANSAC_traits::compute_squared_radius_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_compute_squared_radius_2_object)
+    .def("collinear_2_object", &RANSAC_traits::collinear_2_object,
+         sd_doc::Shape_detection_Efficient_RANSAC_traits_collinear_2_object)
     // .def("intersection_3_object", &RANSAC_traits::intersection_3_object) // this one doesn't compile?
     ;
 
-  py::class_<RANSAC> eff_ransac(m, "Efficient_RANSAC",
-    "Shape detection algorithm based on the RANSAC method.\n"
-    "Given a point set in 3D space with unoriented normals, sampled on surfaces, this class enables to detect subsets of connected points lying on the surface of primitive shapes. Each input point is assigned to either none or at most one detected primitive shape. The implementation follows [2].\n\n"
-    "Examples\n"
-    "Shape_detection/efficient_RANSAC_basic.py, Shape_detection/efficient_RANSAC_with_callback.py, Shape_detection/efficient_RANSAC_with_custom_shape.py, Shape_detection/efficient_RANSAC_with_parameters.py, and Shape_detection/efficient_RANSAC_with_point_access.py.");
+  py::class_<RANSAC> eff_ransac(
+    m, "Efficient_RANSAC",
+    sd_doc::Shape_detection_Efficient_RANSAC_class);
   eff_ransac
     // Initialization
     .def(py::init<RANSAC_traits>(),
          py::arg("traits") = RANSAC_traits(),
-         "Constructs an empty shape detection object.")
+         sd_doc::Shape_detection_Efficient_RANSAC_Efficient_RANSAC)
     .def("traits", &RANSAC::traits,
-         "Retrieves the traits class.")
+         sd_doc::Shape_detection_Efficient_RANSAC_traits)
     .def("point_map", &RANSAC::point_map,
-         "Retrieves the point property map.")
+         sd_doc::Shape_detection_Efficient_RANSAC_point_map)
     .def("normal", &RANSAC::normal,
-         "Retrieves the normal property map.")
+         sd_doc::Shape_detection_Efficient_RANSAC_normal)
     // .def("input_iterator_first", &RANSAC::input_iterator_first)
     // .def("input_iterator_beyond", &RANSAC::input_iterator_beyond)
     .def("set_input", &RANSAC::set_input,
          py::arg("input_range"),
          py::arg("point_map") = InputPointMap(),
          py::arg("normal_map") = InputNormalMap(),
-         "Sets the input data.\n\n"
-         "The range must stay valid until the detection has been performed and the access to the results is no longer required. The data in the input is reordered by the methods detect() and preprocess(). This function first calls clear().\n\n"
-         "Parameters\n"
-         "• input_range:	Range of input data.\n"
-         "• point_map:	Property map to access the position of an input point.\n"
-         "• normal_map:	Property map to access the normal of an input point.\n"
-         "Examples\n"
-         "    Shape_detection/efficient_RANSAC_with_custom_shape.py.")
+         sd_doc::Shape_detection_Efficient_RANSAC_set_input)
     ;
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
