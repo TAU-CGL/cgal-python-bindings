@@ -19,6 +19,7 @@
 
 #include "CGALPY/add_attr.hpp"
 #include "CGALPY/kernel_types.hpp"
+#include "cgalpy/Gog_docstrings.hpp"
 #if defined(CGALPY_KERNEL_BINDINGS)
 #include "CGALPY/kernel_d_types.hpp"
 #endif
@@ -56,6 +57,7 @@ using Random_points_in_cube_d = CGAL::Random_points_in_cube_d<Point_d>;
 } // namespace cgalpy
 
 namespace py = nanobind;
+namespace gog_doc = cgalpy::gog::docstrings;
 
 //!
 void export_geometric_object_generators(py::module_& m) {
@@ -63,8 +65,11 @@ void export_geometric_object_generators(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   if (! add_attr<Rpid>(m, "Random_points_in_disc_2")) {
-    py::class_<Rpid>(m, "Random_points_in_disc_2")
-      .def(py::init<double>())
+    py::class_<Rpid>(m, "Random_points_in_disc_2",
+                     gog_doc::Random_points_in_disc_2_class)
+      .def(py::init<double>(),
+           py::arg("radius") = 1.0,
+           gog_doc::Random_points_in_disc_2_Random_points_in_disc_2)
       .def("__iter__", [](Rpid& g) -> Rpid& { return g; }, ri)
       .def("__next__", [](Rpid& g) -> Point_2 { return *g++; })
       ;
@@ -72,9 +77,11 @@ void export_geometric_object_generators(py::module_& m) {
 
   using Rpis = cgalpy::gog::Random_points_in_sphere_3;
   if (! add_attr<Rpis>(m, "Random_points_in_sphere_3")) {
-    py::class_<Rpis>(m, "Random_points_in_sphere_3")
+    py::class_<Rpis>(m, "Random_points_in_sphere_3",
+                      gog_doc::Random_points_in_sphere_3_class)
       .def(py::init<double, CGAL::Random&>(),
-           py::arg("radius") = 1.0, py::arg("rnd") = CGAL::get_default_random())
+           py::arg("radius") = 1.0, py::arg("rnd") = CGAL::get_default_random(),
+           gog_doc::Random_points_in_sphere_3_Random_points_in_sphere_3)
       .def("__iter__", [](Rpis& g) -> Rpis& { return g; }, ri)
       .def("__next__", [](Rpis& g) -> Point_3 { return *g++; })
       ;
@@ -83,9 +90,11 @@ void export_geometric_object_generators(py::module_& m) {
 #if defined(CGALPY_KERNEL_BINDINGS)
   using Rpicd = cgalpy::gog::Random_points_in_cube_d;
   if (! add_attr<Rpicd>(m, "Random_points_in_cube_d")) {
-    py::class_<Rpicd>(m, "Random_points_in_cube_d")
+    py::class_<Rpicd>(m, "Random_points_in_cube_d",
+                       gog_doc::Random_points_in_cube_d_class)
       .def(py::init<int, double, CGAL::Random&>(),
-           py::arg("dim"), py::arg("radius") = 1.0, py::arg("rnd") = CGAL::get_default_random())
+           py::arg("dim"), py::arg("radius") = 1.0, py::arg("rnd") = CGAL::get_default_random(),
+           gog_doc::Random_points_in_cube_d_Random_points_in_cube_d)
       .def("__iter__", [](Rpicd& g) -> Rpicd& { return g; }, ri)
       .def("__next__", [](Rpicd& g) -> Point_d { return *g++; })
       ;
