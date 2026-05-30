@@ -22,8 +22,10 @@
 #include "CGALPY/convex_hull_2_config.hpp"
 #include "CGALPY/kernel_types.hpp"
 #include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Ch2_docstrings.hpp"
 
 namespace py = nanobind;
+namespace ch2_doc = cgalpy::ch2::docstrings;
 
 //! ch_akl_toussaint
 py::list ch_akl_toussaint(py::list& lst) {
@@ -139,15 +141,26 @@ py::list upper_hull_points_2(py::list& lst) {
 }
 
 void export_convex_hull_2(py::module_& m) {
-  m.def("ch_akl_toussaint", &ch_akl_toussaint);
-  m.def("ch_bykat", &ch_bykat);
-  m.def("ch_eddy", &ch_eddy);
-  m.def("ch_graham_andrew", &ch_graham_andrew);
-  m.def("ch_jarvis", &ch_jarvis);
-  m.def("ch_melkman", &ch_melkman);
-  m.def("convex_hull_2", &convex_hull_2);
-  m.def("is_ccw_strongly_convex_2", &is_ccw_strongly_convex_2);
-  m.def("is_cw_strongly_convex_2", &is_cw_strongly_convex_2);
-  m.def("lower_hull_points_2", lower_hull_points_2);
-  m.def("upper_hull_points_2", upper_hull_points_2);
+  m.def("ch_akl_toussaint", &ch_akl_toussaint,
+        py::arg("points"), ch2_doc::ch_akl_toussaint);
+  m.def("ch_bykat", &ch_bykat,
+        py::arg("points"), ch2_doc::ch_bykat);
+  m.def("ch_eddy", &ch_eddy,
+        py::arg("points"), ch2_doc::ch_eddy);
+  m.def("ch_graham_andrew", &ch_graham_andrew,
+        py::arg("points"), ch2_doc::ch_graham_andrew);
+  m.def("ch_jarvis", &ch_jarvis,
+        py::arg("points"), ch2_doc::ch_jarvis);
+  m.def("ch_melkman", &ch_melkman,
+        py::arg("points"), ch2_doc::ch_melkman);
+  m.def("convex_hull_2", &convex_hull_2,
+        py::arg("points"), ch2_doc::convex_hull_2_1);
+  m.def("is_ccw_strongly_convex_2", &is_ccw_strongly_convex_2,
+        py::arg("points"), ch2_doc::is_ccw_strongly_convex_2);
+  m.def("is_cw_strongly_convex_2", &is_cw_strongly_convex_2,
+        py::arg("points"), ch2_doc::is_cw_strongly_convex_2);
+  m.def("lower_hull_points_2", &lower_hull_points_2,
+        py::arg("points"), ch2_doc::lower_hull_points_2);
+  m.def("upper_hull_points_2", &upper_hull_points_2,
+        py::arg("points"), ch2_doc::upper_hull_points_2);
 }
