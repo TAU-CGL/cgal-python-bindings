@@ -9,7 +9,7 @@
 #ifndef CGALPY_CARTESIAN_PRODUCT_HPP
 #define CGALPY_CARTESIAN_PRODUCT_HPP
 
-namespace CGALPY {
+namespace cgalpy {
 
 template <typename... Types> class Type_list { };
 

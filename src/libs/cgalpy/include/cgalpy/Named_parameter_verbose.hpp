@@ -15,7 +15,7 @@
 
 namespace py = nanobind;
 
-namespace CGALPY {
+namespace cgalpy {
 
 struct Named_parameter_verbose {
   const std::string m_name = "verbose";

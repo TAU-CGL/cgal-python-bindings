@@ -1423,11 +1423,11 @@ void export_kernel_module(py::module_& m) {
         ker_doc::side_of_oriented_circle);
 
   // squared_distance() bindings
-  CGALPY::Type_list<Pnt_2, Line_2, Ray_2, Seg_2, Tri_2, Wd_pnt_2> type_list_2;
-  CGALPY::Type_list<Pnt_3, Line_3, Ray_3, Seg_3, Tri_3, Pln_3, Wd_pnt_3>
+  cgalpy::Type_list<Pnt_2, Line_2, Ray_2, Seg_2, Tri_2, Wd_pnt_2> type_list_2;
+  cgalpy::Type_list<Pnt_3, Line_3, Ray_3, Seg_3, Tri_3, Pln_3, Wd_pnt_3>
     type_list_3;
-  CGALPY::cartesian_product<Sd_wrapper>(m, type_list_2, type_list_2);
-  CGALPY::cartesian_product<Sd_wrapper>(m, type_list_3, type_list_3);
+  cgalpy::cartesian_product<Sd_wrapper>(m, type_list_2, type_list_2);
+  cgalpy::cartesian_product<Sd_wrapper>(m, type_list_3, type_list_3);
 
   //
   using Sd_fnc1 = FT(*)(const Pnt_2&, const Pnt_2&, const Pnt_2&);

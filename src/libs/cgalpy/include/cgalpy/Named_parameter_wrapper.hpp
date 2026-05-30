@@ -12,7 +12,7 @@
 #include <tuple>
 #include <utility>  // for std::apply
 
-namespace CGALPY {
+namespace cgalpy {
 
 // Define Named_parameter_wrapper, which takes a class template as a template
 // template parameter

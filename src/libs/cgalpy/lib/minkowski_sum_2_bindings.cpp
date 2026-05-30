@@ -162,13 +162,13 @@ void export_minkowski_sum_2(py::module_& m) {
   using Ptd = cgalpy::pp2::Polygon_triangulation_decomposition_2;
   using Ssabd = cgalpy::pp2::Small_side_angle_bisector_decomposition_2;
 
-  CGALPY::Type_list<Pgn, Pwh> polygon_types;
-  CGALPY::Type_list<Pnp, Pvd, Ptd, Ssabd> strategy_types;
+  cgalpy::Type_list<Pgn, Pwh> polygon_types;
+  cgalpy::Type_list<Pnp, Pvd, Ptd, Ssabd> strategy_types;
 
-  CGALPY::cartesian_product<cgalpy::ms2::Wrapper_one_strategy>(m, polygon_types,
+  cgalpy::cartesian_product<cgalpy::ms2::Wrapper_one_strategy>(m, polygon_types,
                                                        polygon_types,
                                                        strategy_types);
-  CGALPY::cartesian_product<cgalpy::ms2::Wrapper_two_strategies>(m, polygon_types,
+  cgalpy::cartesian_product<cgalpy::ms2::Wrapper_two_strategies>(m, polygon_types,
                                                          polygon_types,
                                                          strategy_types,
                                                          strategy_types);

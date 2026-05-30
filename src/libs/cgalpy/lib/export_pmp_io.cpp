@@ -46,10 +46,10 @@ void read_polygon_mesh_impl(const std::string& filename,
                             const py::dict& params = py::dict()) {
   using Pm = PolygonalMesh;
   auto np = CGAL::parameters::default_values();
-  CGALPY::Named_parameter_verbose op1;
-  CGALPY::Named_parameter_repair_polygon_soup op2;
-  CGALPY::Named_parameter_wrapper<Read_polygon_mesh_wrapper, const std::string&, Pm&> wrapper(filename, prn);
-  bool res = CGALPY::named_parameter_applicator(wrapper, np, params, op1, op2);
+  cgalpy::Named_parameter_verbose op1;
+  cgalpy::Named_parameter_repair_polygon_soup op2;
+  cgalpy::Named_parameter_wrapper<Read_polygon_mesh_wrapper, const std::string&, Pm&> wrapper(filename, prn);
+  bool res = cgalpy::named_parameter_applicator(wrapper, np, params, op1, op2);
   if (! res) throw std::runtime_error("Cannot read file!");
 }
 

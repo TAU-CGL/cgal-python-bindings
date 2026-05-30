@@ -17,7 +17,7 @@
 
 namespace py = nanobind;
 
-namespace CGALPY {
+namespace cgalpy {
 
 struct Named_parameter_geom_traits {
   const std::string m_name = "geom_traits";

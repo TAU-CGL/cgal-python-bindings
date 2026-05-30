@@ -9,6 +9,6 @@
 #ifndef CGALPY_NAMED_PARAMETER_HPP
 #define CGALPY_NAMED_PARAMETER_HPP
 
-namespace CGALPY {
+namespace cgalpy {
 
 }

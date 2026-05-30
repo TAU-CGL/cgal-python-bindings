@@ -15,7 +15,7 @@
 
 namespace py = nanobind;
 
-namespace CGALPY {
+namespace cgalpy {
 
 struct Named_parameter_repair_polygon_soup {
   const std::string m_name = "repair_polygon_soup";

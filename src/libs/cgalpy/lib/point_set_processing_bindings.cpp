@@ -65,11 +65,11 @@ template <typename OutputIterator>
 bool read_points_impl(const std::string& fname, OutputIterator oi,
                       const py::dict& params) {
   auto np = CGAL::parameters::default_values();
-  CGALPY::Named_parameter_geom_traits op;
-  CGALPY::Named_parameter_wrapper<Read_points_wrapper,
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Read_points_wrapper,
                                   const std::string&, OutputIterator>
     wrapper(fname, std::move(oi));
-  return CGALPY::named_parameter_applicator(wrapper, np, params, op);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
 
 //! \todo replace return value with numpy array

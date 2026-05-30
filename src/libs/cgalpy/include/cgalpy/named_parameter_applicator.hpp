@@ -13,7 +13,7 @@
 
 namespace py = nanobind;
 
-namespace CGALPY {
+namespace cgalpy {
 
 //!
 template <typename Wrapper, typename NamedParameter>

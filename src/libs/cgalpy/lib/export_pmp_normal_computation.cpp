@@ -54,9 +54,9 @@ void compute_face_normals(const PolygonMesh& mesh, FaceNormalMap face_normals, c
   using Fn_map = FaceNormalMap;
 
   auto np = CGAL::parameters::default_values();
-  CGALPY::Named_parameter_geom_traits op;
-  CGALPY::Named_parameter_wrapper<Compute_face_normals_wrapper, const Pm&, const Fn_map&> wrapper(mesh, face_normals);
-  CGALPY::named_parameter_applicator(wrapper, np, params, op);
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Compute_face_normals_wrapper, const Pm&, const Fn_map&> wrapper(mesh, face_normals);
+  cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
 
 //!
